@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Test name="Composite with Errors" lifecycle="Regression">
+  <Composite>
+    <AddAndMultiply starting="5" operand="aaa" multiplier="10" expected="80" />
+    <AddAndMultiplyTable>
+      <Rows>
+        <Rows starting="bbb" operand="4" multiplier="10" expected="25" />
+        <Rows starting="5" operand="3" multiplier="10" expected="80" />
+        <Rows starting="5" operand="3" multiplier="10" expected="77" />
+      </Rows>
+    </AddAndMultiplyTable>
+    <AddAndMultiplyThrow starting="3" operand="2" multiplier="4" expected="20" />
+  </Composite>
+</Test>

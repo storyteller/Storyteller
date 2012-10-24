@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Test name="Unordered Set" lifecycle="Acceptance">
+  <Sets>
+    <InvoiceDetailsAre>
+      <Rows>
+        <Rows Amount="100.1" Date="TODAY" Name="Cord" />
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" />
+      </Rows>
+    </InvoiceDetailsAre>
+    <UnorderedDetailsAre>
+      <rows>
+        <Rows Amount="invalid" Date="TODAY+3" Name="Drill" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" />
+      </rows>
+    </UnorderedDetailsAre>
+  </Sets>
+</Test>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Test name="Unsuccessful Ordering" lifecycle="Acceptance">
+  <Sets>
+    <TheDataIs>
+      <name>
+        <name name="Jeremy" />
+        <name name="Josh" />
+        <name name="Gary" />
+        <name name="Kevin" />
+        <name name="Chad" />
+        <name name="Rand" />
+        <name name="Perrin" />
+        <name name="Mat" />
+      </name>
+    </TheDataIs>
+    <Comment><![CDATA[All data is correct, but in the wrong order]]></Comment>
+    <OrderedStringSet>
+      <Rows>
+        <Rows expected="Jeremy" Index="1" />
+        <Rows expected="Josh" Index="2" />
+        <Rows expected="Gary" Index="3" />
+        <Rows expected="Chad" Index="5" />
+        <Rows expected="Kevin" Index="4" />
+        <Rows expected="Egwene" />
+        <Rows expected="Perrin" />
+      </Rows>
+    </OrderedStringSet>
+  </Sets>
+</Test>

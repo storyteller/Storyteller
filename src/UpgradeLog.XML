@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="StoryTeller">
+</Property><Property Name="Solution File" Value="C:\git\storyteller\source\StoryTeller.sln">
+</Property><Property Name="Date" Value="Tuesday, May 18, 2010">
+</Property><Property Name="Time" Value="10:17 AM">
+</Property></Properties><Event ErrorLevel="0" Project="StoryTeller" Source="StoryTeller\StoryTeller.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTeller" Source="StoryTeller\StoryTeller.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTeller.Testing" Source="StoryTeller.Testing\StoryTeller.Testing.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTeller.Testing" Source="StoryTeller.Testing\StoryTeller.Testing.csproj" Description="Converted">
+</Event><Event ErrorLevel="1" Project="StoryTeller.UserInterface" Source="StoryTeller.UserInterface\StoryTeller.UserInterface.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="StoryTeller.UserInterface" Source="StoryTeller.UserInterface\StoryTeller.UserInterface.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTeller.UserInterface" Source="StoryTeller.UserInterface\StoryTeller.UserInterface.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTeller.Samples" Source="StoryTeller.Samples\StoryTeller.Samples.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTeller.Samples" Source="StoryTeller.Samples\StoryTeller.Samples.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTellerUI" Source="StoryTellerUI\StoryTellerUI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTellerUI" Source="StoryTellerUI\StoryTellerUI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTellerRunner" Source="StoryTellerRunner\StoryTellerRunner.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTellerRunner" Source="StoryTellerRunner\StoryTellerRunner.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTeller.AcceptanceTesting" Source="StoryTeller.AcceptanceTesting\StoryTeller.AcceptanceTesting.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTeller.AcceptanceTesting" Source="StoryTeller.AcceptanceTesting\StoryTeller.AcceptanceTesting.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTeller.Gallery" Source="StoryTeller.Gallery\StoryTeller.Gallery.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="StoryTeller.Gallery" Source="StoryTeller.Gallery\StoryTeller.Gallery.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Examples" Source="Examples\Examples.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Examples" Source="Examples\Examples.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="StoryTeller.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="StoryTeller.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="StoryTeller" Source="StoryTeller\StoryTeller.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTeller.Testing" Source="StoryTeller.Testing\StoryTeller.Testing.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTeller.UserInterface" Source="StoryTeller.UserInterface\StoryTeller.UserInterface.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTeller.Samples" Source="StoryTeller.Samples\StoryTeller.Samples.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTellerUI" Source="StoryTellerUI\StoryTellerUI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTellerRunner" Source="StoryTellerRunner\StoryTellerRunner.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTeller.AcceptanceTesting" Source="StoryTeller.AcceptanceTesting\StoryTeller.AcceptanceTesting.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="StoryTeller.Gallery" Source="StoryTeller.Gallery\StoryTeller.Gallery.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Examples" Source="Examples\Examples.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

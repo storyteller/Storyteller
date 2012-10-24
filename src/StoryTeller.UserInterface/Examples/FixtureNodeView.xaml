@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="StoryTeller.UserInterface.Examples.FixtureNodeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel>
+        <Label Name="description" Background="AntiqueWhite" DockPanel.Dock="Top">The Description</Label>
+
+        
+        <TextBox Name="xml" Background="NavajoWhite" TextAlignment="Left" TextWrapping="Wrap" IsReadOnly="True" DockPanel.Dock="Left"></TextBox>
+        <WebBrowser Name="browser" DockPanel.Dock="Right">     
+            
+        </WebBrowser>
+    </DockPanel>
+</UserControl>

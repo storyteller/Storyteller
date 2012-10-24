@@ -1,0 +1,15 @@
+h2. Contributing to FubuMVC
+
+StoryTeller is an open source project.  Anyone can use the code, but more importantly, anyone can contribute.  This is a group effort and we value your input.  Please consider making a contribution to help improve the FubuMVC project.  This guide covers:
+
+* How to file a ticket when you discover a bug
+* How to contribute fixes and improvements to the core
+* Information on how to improve the documentation
+
+endprologue.
+
+h3. Who Can Contribute?
+
+StoryTeller is an open source project and as such contributions are always welcome.  Our community is one which encourages involvement from all developers regardless of their ability level.  We ask that you be patient with the other members of the community and maintain a respectful attitude towards other people's work.  Open source is a great way to learn a new technology so don't be afraid to jump right in, even if you are new to StoryTeller.
+
+(this guide needs to be finished)

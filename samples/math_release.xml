@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FileName>C:\code\StoryTeller\samples\math.xml</FileName>
+  <BinaryFolder>..\src\StoryTeller.Samples\bin\release</BinaryFolder>
+  <TestFolder>math</TestFolder>
+  <TimeoutInSeconds>30</TimeoutInSeconds>
+  <TestRunnerTypeName>StoryTeller.Samples.MathTestRunner, StoryTeller.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</TestRunnerTypeName>
+  <Name>Math</Name>
+  <FixtureAssembly>Storyteller.Samples</FixtureAssembly>
+</Project>

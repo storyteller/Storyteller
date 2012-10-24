@@ -1,0 +1,9 @@
+<Test name="Good Multiply 2">
+  <Math>
+    <StartWith starting="12" />
+    <MultiplyBy multiplier="3" />
+    <TheValueShouldBe expected="36" />
+    <MultiplyBy multiplier="2" />
+    <TheValueShouldBe expected="72" />
+  </Math>
+</Test>

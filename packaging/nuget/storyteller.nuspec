@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Storyteller 2</id>
+    <version>2.0.0</version>
+    <authors>Jeremy D. Miller, et al</authors>
+    <owners>Jeremy D. Miller</owners>
+    <licenseUrl>https://github.com/DarthFubuMVC/storyteller/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>http://github.com/DarthFubuMVC/storyteller</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>StoryTeller is an external DSL tool for creating acceptance tests in .Net</description>
+    <tags>
+    </tags>
+    <dependencies>
+      <dependency id="Bottles" />
+      <dependency id="FubuCore" version="0.9.9.159" />
+      <dependency id="HtmlTags" version="1.1.0.80" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="ripple.xml" target="tools" />
+    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="lib\net40" />
+    <file src="..\..\src\StoryTellerUI\bin\release\StoryTeller.UserInterface.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\FubuCore.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\HtmlTags.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\StructureMap.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\ShadeTree.Binding.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\Newtonsoft.Json.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\ShadeTree.*" target="tools" />
+    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="tools" />
+    <file src="..\..\src\StoryTellerUI\bin\release\StoryTellerUI.*" target="tools" />
+    <file src="..\..\src\StoryTellerRunner\bin\release\StoryTellerRunner.*" target="tools" />
+    <file src="..\..\src\ST\bin\release\ST.*" target="tools" />
+  </files>
+</package>

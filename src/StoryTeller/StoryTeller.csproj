@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StoryTeller</RootNamespace>
+    <AssemblyName>StoryTeller</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FubuCore">
+      <HintPath>..\packages\FubuCore.0.9.9.164\lib\FubuCore.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlTags">
+      <HintPath>..\packages\HtmlTags.1.1.0.84\lib\4.0\HtmlTags.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Assertions\StorytellerAssertionException.cs" />
+    <Compile Include="DecoratedLineGrammar.cs" />
+    <Compile Include="Domain\Comment.cs" />
+    <Compile Include="Domain\Tags.cs" />
+    <Compile Include="Domain\DefaultTestPartcollection.cs" />
+    <Compile Include="Domain\IStepResults.cs" />
+    <Compile Include="Domain\ITestPartCollection.cs" />
+    <Compile Include="Domain\Lifecycle.cs" />
+    <Compile Include="Domain\PropertyError.cs" />
+    <Compile Include="Domain\PropertyErrorCode.cs" />
+    <Compile Include="Domain\TestExtensions.cs" />
+    <Compile Include="Engine\AssemblyResult.cs" />
+    <Compile Include="Engine\BasicSystem.cs" />
+    <Compile Include="Engine\CurriedLineGrammar.cs" />
+    <Compile Include="Engine\FixtureGraph.cs" />
+    <Compile Include="Engine\Frame.cs" />
+    <Compile Include="Engine\Importing\CurryAction.cs" />
+    <Compile Include="Engine\Importing\GrammarImport.cs" />
+    <Compile Include="Engine\Importing\ImportedGrammar.cs" />
+    <Compile Include="Engine\Importing\ProxyGrammar.cs" />
+    <Compile Include="Engine\ISystem.cs" />
+    <Compile Include="Engine\LibraryLifecycle.cs" />
+    <Compile Include="Engine\NonExistentFixtureException.cs" />
+    <Compile Include="Engine\NulloSystem.cs" />
+    <Compile Include="Execution\FixtureAssembly.cs" />
+    <Compile Include="Execution\OpenHtmlOption.cs" />
+    <Compile Include="Execution\ProjectTestRunner.cs" />
+    <Compile Include="Html\TableContainerTag.cs" />
+    <Compile Include="Html\TagExtensions.cs" />
+    <Compile Include="Workspace\IResultPersistor.cs" />
+    <Compile Include="Workspace\ResultHistory.cs" />
+    <Compile Include="Engine\Sets\RowValueMatcher.cs" />
+    <Compile Include="Engine\StepResults.cs" />
+    <Compile Include="Domain\IPartHolder.cs" />
+    <Compile Include="Domain\ITestPart.cs" />
+    <Compile Include="Domain\ITestVisitor.cs" />
+    <Compile Include="Engine\SetMatch.cs" />
+    <Compile Include="Domain\StepLeaf.cs" />
+    <Compile Include="Domain\SuiteNavigator.cs" />
+    <Compile Include="Domain\TestFilter.cs" />
+    <Compile Include="Domain\Tokens.cs" />
+    <Compile Include="EmbedStyle.cs" />
+    <Compile Include="Engine\ActionGrammar.cs" />
+    <Compile Include="Engine\ConfigureObjectGrammar.cs" />
+    <Compile Include="DSL\VerifyDataTableExpression.cs" />
+    <Compile Include="DSL\VerifySetExpression.cs" />
+    <Compile Include="DSL\VerifyStringListExpression.cs" />
+    <Compile Include="Engine\ConsoleListener.cs" />
+    <Compile Include="Engine\Constraints\Policies.cs" />
+    <Compile Include="Engine\CreateObjectGrammar.cs" />
+    <Compile Include="Engine\DecisionTableGrammar.cs" />
+    <Compile Include="Engine\EquivalenceChecker.cs" />
+    <Compile Include="Engine\ITestRunner.cs" />
+    <Compile Include="Engine\SelectionValuesAttribute.cs" />
+    <Compile Include="Engine\Sets\DataRowComparer.cs" />
+    <Compile Include="Engine\Sets\ISetColumn.cs" />
+    <Compile Include="Engine\Sets\ISetComparer.cs" />
+    <Compile Include="Engine\Sets\ObjectComparer.cs" />
+    <Compile Include="Engine\Sets\PropertyMatch.cs" />
+    <Compile Include="Engine\Sets\SetRow.cs" />
+    <Compile Include="Engine\Sets\SetRowMatcher.cs" />
+    <Compile Include="Engine\Sets\SetVerificationGrammar.cs" />
+    <Compile Include="Engine\Sets\SimpleDictionary.cs" />
+    <Compile Include="Engine\Sets\StringSetComparer.cs" />
+    <Compile Include="Engine\TestResult.cs" />
+    <Compile Include="Engine\TestRun.cs" />
+    <Compile Include="Engine\TestRunnerExtensions.cs" />
+    <Compile Include="Execution\DirectoryRunner.cs" />
+    <Compile Include="Execution\FixtureLibraryWatcher.cs" />
+    <Compile Include="Execution\InProcessTestEngine.cs" />
+    <Compile Include="Execution\ITestRunnerDomain.cs" />
+    <Compile Include="Execution\NulloEventAggregator.cs" />
+    <Compile Include="Codegen\ProjectRunnerCodegenService.cs" />
+    <Compile Include="Execution\TestExecutionRequest.cs" />
+    <Compile Include="Execution\TestRunnerDomain.cs" />
+    <Compile Include="Execution\TestRunnerProxy.cs" />
+    <Compile Include="Execution\TestStatusMessage.cs" />
+    <Compile Include="Execution\TestStopConditions.cs" />
+    <Compile Include="Html\CellTag.cs" />
+    <Compile Include="Html\CommentTag.cs" />
+    <Compile Include="Html\EmbeddedSectionTag.cs" />
+    <Compile Include="Html\ExceptionTag.cs" />
+    <Compile Include="Html\FixtureLibraryErrorWriter.cs" />
+    <Compile Include="Html\HtmlClasses.cs" />
+    <Compile Include="Html\ParagraphTag.cs" />
+    <Compile Include="Html\PreviewWriter.cs" />
+    <Compile Include="Html\ResultsWriter.cs" />
+    <Compile Include="Html\SentenceTag.cs" />
+    <Compile Include="Html\StoryTellerTableTag.cs" />
+    <Compile Include="Html\TestHolderTag.cs" />
+    <Compile Include="Model\DoGrammarStructure.cs" />
+    <Compile Include="Engine\FactGrammar.cs" />
+    <Compile Include="Engine\GrammarBuilder.cs" />
+    <Compile Include="Engine\ITestObserver.cs" />
+    <Compile Include="Engine\CheckGrammar.cs" />
+    <Compile Include="Engine\TeamCityTestListener.cs" />
+    <Compile Include="Execution\BinaryRecycleFinished.cs" />
+    <Compile Include="Execution\ITestEngine.cs" />
+    <Compile Include="GrammarExtensions.cs" />
+    <Compile Include="IEventAggregator.cs" />
+    <Compile Include="IFixture.cs" />
+    <Compile Include="LineGrammar.cs" />
+    <Compile Include="ListExtensions.cs" />
+    <Compile Include="DSL\ObjectConstructionExpression.cs" />
+    <Compile Include="DSL\ObjectVerificationExpression.cs" />
+    <Compile Include="Engine\BatchRunner.cs" />
+    <Compile Include="Engine\CheckPropertyGrammar.cs" />
+    <Compile Include="Engine\ParagraphGrammar.cs" />
+    <Compile Include="Engine\Counts.cs" />
+    <Compile Include="Engine\DoGrammar.cs" />
+    <Compile Include="Engine\EmbeddedSectionGrammar.cs" />
+    <Compile Include="Engine\FactAssertion.cs" />
+    <Compile Include="Engine\ValueCheckMethod.cs" />
+    <Compile Include="Engine\Cell.cs" />
+    <Compile Include="Engine\ActionMethodGrammar.cs" />
+    <Compile Include="Engine\Fixture.cs" />
+    <Compile Include="Engine\ReflectionGrammar.cs" />
+    <Compile Include="Engine\AliasAsAttribute.cs" />
+    <Compile Include="Engine\DescriptionAttribute.cs" />
+    <Compile Include="ExposeAsTableAttribute.cs" />
+    <Compile Include="Engine\Reflection\ExpressionsExtensions.cs" />
+    <Compile Include="Domain\Section.cs" />
+    <Compile Include="Engine\ServiceActionGrammar.cs" />
+    <Compile Include="Engine\ServiceAssertionGrammar.cs" />
+    <Compile Include="Engine\SetPropertyGrammar.cs" />
+    <Compile Include="Engine\TableGrammar.cs" />
+    <Compile Include="Engine\TestContext.cs" />
+    <Compile Include="Engine\TestRunner.cs" />
+    <Compile Include="Engine\TypeExtensions.cs" />
+    <Compile Include="Exceptions.cs" />
+    <Compile Include="Execution\ProjectRunner.cs" />
+    <Compile Include="Execution\DirectoryRunnerSetup.cs" />
+    <Compile Include="Execution\IResultsSummary.cs" />
+    <Compile Include="Execution\ResultsSummary.cs" />
+    <Compile Include="Execution\TestEngine.cs" />
+    <Compile Include="Domain\Hierarchy.cs" />
+    <Compile Include="IGrammar.cs" />
+    <Compile Include="Domain\INamedItem.cs" />
+    <Compile Include="Model\EmbeddedSection.cs" />
+    <Compile Include="Model\FixtureStructure.cs" />
+    <Compile Include="Model\FixtureLibrary.cs" />
+    <Compile Include="Model\GrammarStructure.cs" />
+    <Compile Include="Model\IStepEditor.cs" />
+    <Compile Include="Model\IFixtureNode.cs" />
+    <Compile Include="Model\Label.cs" />
+    <Compile Include="Model\Paragraph.cs" />
+    <Compile Include="Model\PropertyErrorExtensions.cs" />
+    <Compile Include="Model\Sentence.cs" />
+    <Compile Include="Model\SentencePart.cs" />
+    <Compile Include="Model\SetVerification.cs" />
+    <Compile Include="Model\Table.cs" />
+    <Compile Include="Model\TestParser.cs" />
+    <Compile Include="Model\TextInput.cs" />
+    <Compile Include="Persistence\INode.cs" />
+    <Compile Include="Persistence\ITestFileReader.cs" />
+    <Compile Include="Persistence\JsonNode.cs" />
+    <Compile Include="Persistence\TestXmlNode.cs" />
+    <Compile Include="Persistence\WriterVisitor.cs" />
+    <Compile Include="Html\HtmlWriter.cs" />
+    <Compile Include="Html\IHtmlWriter.cs" />
+    <Compile Include="Rendering\DisplayParser.cs" />
+    <Compile Include="Engine\Reflection\MethodExtensions.cs" />
+    <Compile Include="Domain\IStep.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Engine\FormatAsAttribute.cs" />
+    <Compile Include="Persistence\XmlExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rendering\IWriter.cs" />
+    <Compile Include="Rendering\ParseDisplayException.cs" />
+    <Compile Include="Rendering\ParseErrors.cs" />
+    <Compile Include="SharedExtensions.cs" />
+    <Compile Include="Engine\SingleLineGrammar.cs" />
+    <Compile Include="Domain\Step.cs" />
+    <Compile Include="Domain\Suite.cs" />
+    <Compile Include="Domain\Test.cs" />
+    <Compile Include="Domain\TPath.cs" />
+    <Compile Include="TestConverter.cs" />
+    <Compile Include="Execution\UserInterfaceTestObserver.cs" />
+    <Compile Include="Workspace\FileSystem.cs" />
+    <Compile Include="Workspace\FilterType.cs" />
+    <Compile Include="Workspace\HierarchyLoader.cs" />
+    <Compile Include="Workspace\IProject.cs" />
+    <Compile Include="Workspace\Project.cs" />
+    <Compile Include="Workspace\ProjectLoaded.cs" />
+    <Compile Include="Persistence\FileSystem.cs" />
+    <Compile Include="Persistence\TestReader.cs" />
+    <Compile Include="Persistence\TestWriter.cs" />
+    <Compile Include="Workspace\ForceBinaryRecycle.cs" />
+    <Compile Include="Workspace\ResultPersistor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Html\jquery.js" />
+    <EmbeddedResource Include="Html\style.css" />
+    <EmbeddedResource Include="Html\summaryFilter.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Codegen\ClassTemplate.txt" />
+    <EmbeddedResource Include="Codegen\MethodTemplate.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if not exist $(SolutionDir)\CommonAssemblyInfo.cs copy NUL $(SolutionDir)\CommonAssemblyInfo.cs</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

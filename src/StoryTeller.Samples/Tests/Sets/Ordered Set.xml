@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Test name="Ordered Set" lifecycle="Acceptance">
+  <Sets>
+    <InvoiceDetailsAre>
+      <Rows>
+        <Rows Amount="100.1" Date="TODAY" Name="Cord" />
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" />
+      </Rows>
+    </InvoiceDetailsAre>
+    <Comment><![CDATA[Completely successful ordering]]></Comment>
+    <OrderedDetailsAre>
+      <rows>
+        <Rows Amount="100.1" Date="TODAY" Name="Cord" Order="1" />
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" Order="2" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" Order="3" />
+      </rows>
+    </OrderedDetailsAre>
+    <Comment><![CDATA[Out of order]]></Comment>
+    <OrderedDetailsAre>
+      <rows>
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" Order="1" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" Order="2" />
+        <Rows Amount="100.1" Date="TODAY" Name="Cord" Order="3" />
+      </rows>
+    </OrderedDetailsAre>
+    <Comment><![CDATA[Should have one exra]]></Comment>
+    <OrderedDetailsAre>
+      <rows>
+        <Rows Amount="100.1" Date="TODAY" Name="Cord" Order="1" />
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" Order="2" />
+      </rows>
+    </OrderedDetailsAre>
+    <Comment><![CDATA[Should mark one expected result as missing]]></Comment>
+    <OrderedDetailsAre>
+      <rows>
+        <Rows Amount="100.1" Date="TODAY" Name="Cord" Order="1" />
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" Order="2" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" Order="3" />
+        <Rows Amount="400.3" Date="TODAY+3" Name="Hammer" Order="4" />
+      </rows>
+    </OrderedDetailsAre>
+    <Comment><![CDATA[One syntax error]]></Comment>
+    <OrderedDetailsAre>
+      <rows>
+        <Rows Amount="100.1" Date="Syntax Error" Name="Cord" Order="1" />
+        <Rows Amount="200.2" Date="TODAY+1" Name="Drill" Order="2" />
+        <Rows Amount="300.3" Date="TODAY+2" Name="Hammer" Order="3" />
+      </rows>
+    </OrderedDetailsAre>
+  </Sets>
+</Test>

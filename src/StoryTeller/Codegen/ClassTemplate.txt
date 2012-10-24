@@ -1,0 +1,25 @@
+﻿using NUnit.Framework;
+using StoryTeller.Execution;
+
+namespace StoryTellerTestHarness
+{
+    [TestFixture, Explicit]
+    public class Template
+    {
+        private ProjectTestRunner runner;
+
+        [TestFixtureSetUp]
+        public void SetupRunner()
+        {
+            runner = new ProjectTestRunner(@"$PROJECT_FILE$");
+        }
+
+$METHODS$
+
+        [TestFixtureTearDown]
+        public void TeardownRunner()
+        {
+            runner.Dispose();
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<% content_for :header_section do %>
+h2. Credits
+
+p. We'd like to thank the following people for their documentation contributions to this project.
+
+h4. "Jeremy Miller":http://codebetter.com/blogs/jeremy.miller/
+
+h4. "Brandon Behrens":http://twitter.com/bbehrens
+
+h4. "Chad Myers":http://chadmyers.lostechies.com
+
+h4. "Joshua Flanagan":http://joshuaflanagan.lostechies.com/
+
+<% end %>

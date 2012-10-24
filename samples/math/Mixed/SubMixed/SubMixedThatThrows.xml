@@ -1,0 +1,11 @@
+<Test name="SubMixedThatThrows">
+  <Math>
+    <StartWith starting="6" />
+    <MultiplyBy multiplier="2" />
+    <Subtract operand="3" />
+    <Add operand="4" />
+    <TheValueShouldBe expected="13" />
+    <Throw />
+
+  </Math>
+</Test>

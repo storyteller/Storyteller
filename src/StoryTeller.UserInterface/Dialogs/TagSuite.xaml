@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="StoryTeller.UserInterface.Dialogs.TagSuite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Padding="5">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+        <StackPanel  Orientation="Horizontal" Margin="3">
+            <Label Margin="0 0 10 0">Tags</Label>
+            <TextBox Name="name" Width="300"></TextBox>
+        </StackPanel>
+        <Button Margin="3" Padding="10 3 10 0"  HorizontalAlignment="Left" Name="create" IsDefault="True" Height="25" VerticalContentAlignment="Stretch">
+            <StackPanel Orientation="Horizontal">
+                <Image Name="icon"></Image>
+                <Label Height="25" VerticalAlignment="Stretch">Tag</Label>
+            </StackPanel>
+            
+            
+        </Button>
+    </StackPanel>
+</UserControl>

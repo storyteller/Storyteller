@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Test name="Bad Add 1" lifecycle="Acceptance">
+  <Math>
+    <StartWith starting="5" />
+    <Add operand="3" />
+    <TheValueShouldBe expected="8" />
+    <AddTable>
+      <operation>
+        <operation x="1" y="2" sum="4" />
+        <operation x="2" y="2" sum="5" />
+        <operation x="3" y="2" sum="6" />
+        <operation x="3" y="3" sum="6" />
+      </operation>
+    </AddTable>
+  </Math>
+</Test>

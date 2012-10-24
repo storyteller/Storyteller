@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="StoryTeller.UserInterface.Screens.TabCloser"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" VerticalAlignment="Center">
+    <Hyperlink Background="Transparent" Name="link" TextDecorations="None">
+        <Image Name="image" Width="16" Height="16" VerticalAlignment="Bottom"></Image>
+    </Hyperlink>
+</UserControl>

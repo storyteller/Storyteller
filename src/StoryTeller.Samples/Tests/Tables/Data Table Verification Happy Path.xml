@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Test name="Data Table Verification Happy Path" lifecycle="Acceptance">
+  <DataTable>
+    <TheDataIs isStep="True">
+      <Rows>
+        <row isStep="True" firstName="Jeremy" lastName="Miller" />
+        <row isStep="True" firstName="Chad" lastName="Myers" />
+        <row isStep="True" firstName="Jill" lastName="Ott" />
+      </Rows>
+    </TheDataIs>
+    <CheckDataLiteral isStep="True">
+      <Rows>
+        <row isStep="True" First="Jeremy" Last="Miller" />
+        <row isStep="True" First="Chad" Last="Myers" />
+        <row isStep="True" First="Jill" Last="Ott" />
+      </Rows>
+    </CheckDataLiteral>
+  </DataTable>
+</Test>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Test name="Good Add at Top" lifecycle="Acceptance">
+  <Math>
+    <Comment><![CDATA[This test checks that 6 + 3 == 9]]></Comment>
+    <StartWith starting="6" />
+    <Add operand="3" />
+    <TheValueShouldBe expected="9" />
+  </Math>
+</Test>

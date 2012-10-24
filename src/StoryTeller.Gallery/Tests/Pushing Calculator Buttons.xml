@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Test name="Pushing Calculator Buttons" lifecycle="Acceptance">
+  <Calculator>
+    <StartWith value="5" />
+    <Add value="3" />
+    <MultiplyBy value="2" />
+    <TheValueShouldBe value="16" />
+  </Calculator>
+</Test>

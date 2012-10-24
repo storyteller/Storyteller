@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE6A3137-87EC-4BE2-A39A-518CBC9F2690}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>StoryTeller.Testing</RootNamespace>
+    <AssemblyName>StoryTeller.Testing</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FubuCore">
+      <HintPath>..\packages\FubuCore.0.9.9.164\lib\FubuCore.dll</HintPath>
+    </Reference>
+    <Reference Include="FubuTestingSupport">
+      <HintPath>..\packages\FubuTestingSupport.0.9.9.164\lib\FubuTestingSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlTags">
+      <HintPath>..\packages\HtmlTags.1.1.0.84\lib\4.0\HtmlTags.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.6.0.0, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RhinoMocks.3.6\lib\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.AutoMocking, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.automocking.2.6.3\lib\StructureMap.AutoMocking.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="AbortTestSmokeTester.cs" />
+    <Compile Include="Bugs\MethodFactDoesNotUpdateTheCounts.cs" />
+    <Compile Include="Codegen\ProjectRunnerCodegenServiceTester.cs" />
+    <Compile Include="CommentTester.cs" />
+    <Compile Include="DataMother.cs" />
+    <Compile Include="DisplayParserTester.cs" />
+    <Compile Include="Domain\StepLeafTester.cs" />
+    <Compile Include="Domain\SuiteNavigatorTester.cs" />
+    <Compile Include="Domain\TagsTest.cs" />
+    <Compile Include="Domain\TestFilterTester.cs" />
+    <Compile Include="Domain\TestProgressionTester.cs" />
+    <Compile Include="Domain\TPathTester.cs" />
+    <Compile Include="DSL\ObjectConstructionExpressionTester.cs" />
+    <Compile Include="DSL\ObjectVerificationExpressionTester.cs" />
+    <Compile Include="Engine\ActionGrammarTester.cs" />
+    <Compile Include="Engine\AssemblyResultTester.cs" />
+    <Compile Include="Engine\AutoPerformingTestContext.cs" />
+    <Compile Include="Engine\BooleanReturnTester.cs" />
+    <Compile Include="Engine\CheckGrammarTester.cs" />
+    <Compile Include="Engine\ConfigureObjectGrammarTester.cs" />
+    <Compile Include="Engine\Constraints\PoliciesTester.cs" />
+    <Compile Include="Engine\CreateObjectGrammarTester.cs" />
+    <Compile Include="Engine\CurriedLineGrammarTester.cs" />
+    <Compile Include="Engine\DecoratedLineGrammarTester.cs" />
+    <Compile Include="Engine\DoGrammarTester.cs" />
+    <Compile Include="Engine\EmbeddedSectionGrammarTester.cs" />
+    <Compile Include="Engine\EmbeddedSectionsTester.cs" />
+    <Compile Include="Engine\EquivalenceCheckerTester.cs" />
+    <Compile Include="Engine\FactGrammarTester.cs" />
+    <Compile Include="Engine\FixtureGraphTester.cs" />
+    <Compile Include="Engine\FixtureRegistryTester.cs" />
+    <Compile Include="Engine\FixtureTester.cs" />
+    <Compile Include="Engine\FrameTester.cs" />
+    <Compile Include="Engine\Importing\GrammarImportTester.cs" />
+    <Compile Include="Engine\Importing\ImportGrammarIntegrationTester.cs" />
+    <Compile Include="Engine\Importing\ProxyGrammarTester.cs" />
+    <Compile Include="Engine\Library_building_in_FixtureGraph_Tester.cs" />
+    <Compile Include="Engine\SelectionListTester.cs" />
+    <Compile Include="Engine\SelectionValueAttributeTester.cs" />
+    <Compile Include="Engine\Sets\SetRowMatcherTester.cs" />
+    <Compile Include="Engine\Sets\SetRowTester.cs" />
+    <Compile Include="Engine\StepResultsTester.cs" />
+    <Compile Include="Engine\TableLineGrammarTester.cs" />
+    <Compile Include="EventPublisherTester.cs" />
+    <Compile Include="Execution\FixtureAssemblyTester.cs" />
+    <Compile Include="Execution\ProjectTestRunnerIntegratedTester.cs" />
+    <Compile Include="Execution\TestEngineTester.cs" />
+    <Compile Include="Html\CellTagTester.cs" />
+    <Compile Include="Html\HtmlClassesSmokeTester.cs" />
+    <Compile Include="Html\SentenceTester.cs" />
+    <Compile Include="Html\StoryTellerTableTagTester.cs" />
+    <Compile Include="Integration\GrammarIntegrationTests.cs" />
+    <Compile Include="Engine\ReflectionAssertionTester.cs" />
+    <Compile Include="Engine\ServiceAssertionGrammarTester.cs" />
+    <Compile Include="Engine\SetPropertyGrammarTester.cs" />
+    <Compile Include="Engine\Sets\DataColumnMatchTester.cs" />
+    <Compile Include="Engine\Sets\DataRowSetTesting.cs" />
+    <Compile Include="Engine\Sets\ObjectComparerTester.cs" />
+    <Compile Include="Engine\Sets\PropertyMatchTester.cs" />
+    <Compile Include="Engine\Sets\SetVerificationGrammarTester.cs" />
+    <Compile Include="Engine\Sets\SetVerificationTesting.cs" />
+    <Compile Include="Engine\Sets\StringComparerTester.cs" />
+    <Compile Include="Engine\SingleLineGrammarTester.cs" />
+    <Compile Include="Engine\TableGrammarTester.cs" />
+    <Compile Include="Engine\TableGrammarTestRunningTester.cs" />
+    <Compile Include="Engine\TimeoutFixture.cs" />
+    <Compile Include="ErrorsTester.cs" />
+    <Compile Include="Execution\DirectoryRunnerTester.cs" />
+    <Compile Include="HierarchyTester.cs" />
+    <Compile Include="Integration\ProjectIntegratedTester.cs" />
+    <Compile Include="Model\DoGrammarStructureTester.cs" />
+    <Compile Include="Model\EmbeddedSectionTester.cs" />
+    <Compile Include="Model\FixtureStructureTester.cs" />
+    <Compile Include="Model\FixtureLibraryFindTester.cs" />
+    <Compile Include="Model\FixtureLibraryTester.cs" />
+    <Compile Include="Model\ParagraphTester.cs" />
+    <Compile Include="Model\Sentence_Writing_Contexts.cs" />
+    <Compile Include="Model\SetVerificationTester.cs" />
+    <Compile Include="Model\TableTester.cs" />
+    <Compile Include="Model\TestParserTester.cs" />
+    <Compile Include="Persistence\JsonNodeTester.cs" />
+    <Compile Include="Persistence\XmlTestWriterTester.cs" />
+    <Compile Include="StepExtensions.cs" />
+    <Compile Include="Engine\CheckPropertyGrammarTester.cs" />
+    <Compile Include="Engine\CompositeGrammerTester.cs" />
+    <Compile Include="Engine\CountsTester.cs" />
+    <Compile Include="Engine\ReflectionValueCheckTester.cs" />
+    <Compile Include="Engine\CellTester.cs" />
+    <Compile Include="Engine\GrammarBuilderTester.cs" />
+    <Compile Include="Engine\Reflection\MethodExtensionsTester.cs" />
+    <Compile Include="Engine\SectionTester.cs" />
+    <Compile Include="Engine\SimpleTestRunningTester.cs" />
+    <Compile Include="Engine\StubFixture.cs" />
+    <Compile Include="Engine\TestContextTester.cs" />
+    <Compile Include="Engine\TestRunnerTester.cs" />
+    <Compile Include="Engine\TypeExtensionsTester.cs" />
+    <Compile Include="EntitiesForTesting.cs" />
+    <Compile Include="InteractionContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Engine\ReflectionActionTester.cs" />
+    <Compile Include="SimpleTest.cs" />
+    <Compile Include="SpecificationExtensions.cs" />
+    <Compile Include="StepTester.cs" />
+    <Compile Include="StoryTellerDebug.cs" />
+    <Compile Include="SuiteTester.cs" />
+    <Compile Include="Template.cs" />
+    <Compile Include="TestConverterTester.cs" />
+    <Compile Include="TestingExtensions.cs" />
+    <Compile Include="TestTester.cs" />
+    <Compile Include="TestUtility.cs" />
+    <Compile Include="Model\FixtureLibraryWriterTester.cs" />
+    <Compile Include="Model\SentenceTester.cs" />
+    <Compile Include="Workspace\LazyTestXmlReaderTester.cs" />
+    <Compile Include="Workspace\ProjectTester.cs" />
+    <Compile Include="Workspace\FileSystemTester.cs" />
+    <Compile Include="Workspace\ProjectValidationTester.cs" />
+    <Compile Include="Workspace\ResultPersistorIntegratedTester.cs" />
+    <Compile Include="Xml\XmlReadingTester.cs" />
+    <Compile Include="Xml\XmlTestWritingTester.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Examples\Examples.csproj">
+      <Project>{B52EADC1-DDD4-452C-83ED-4A148302D424}</Project>
+      <Name>Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
+      <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
+      <Name>StoryTeller.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
+      <Project>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</Project>
+      <Name>StoryTeller</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="history.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleData\Address\h.xml" />
+    <Content Include="SampleData\Address\Data\a.xml" />
+    <Content Include="SampleData\Address\Data\b.xml" />
+    <Content Include="SampleData\Address\Screen\c.xml" />
+    <Content Include="SampleData\Address\Screen\d.xml" />
+    <Content Include="SampleData\Console\f.xml" />
+    <Content Include="SampleData\Console\g.xml" />
+    <Content Include="SampleData\Console\e.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="StoryTeller.Testing.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Test name="Services" lifecycle="Acceptance">
+  <Service>
+    <Set isStep="True" value="5" />
+    <Check isStep="True" value="5" />
+    <Set isStep="True" value="6" />
+    <Check isStep="True" value="7" />
+    <Set isStep="True" value="abc" />
+  </Service>
+</Test>

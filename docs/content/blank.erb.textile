@@ -1,0 +1,24 @@
+<% content_for :header_section do %>
+h2. TITLE
+
+INTRODUCTION 
+    
+<% end %>
+
+<% content_for :index_section do %>
+<div id="subCol">
+  <dl>
+    <dd class="warning">This documentation is based on the 1.0 version of StoryTeller.</dd>
+  </dl>
+</div>
+
+h3. Start Here
+
+<dl>
+  <% guide('Getting Started with StoryTeller', 'getting_started.html') do %>
+    Everything you need to know to install StoryTeller and create your first application.
+  <% end %>
+
+  
+</dl>    
+<% end %>

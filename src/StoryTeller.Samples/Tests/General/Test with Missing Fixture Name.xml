@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<Test name="Test with Missing Fixture Name" lifecycle="Acceptance">
+  <FixtureThatDoesNotExist />
+</Test>

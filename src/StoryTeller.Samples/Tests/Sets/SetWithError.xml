@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Test name="Set with Error" lifecycle="Acceptance">
+  <Sets>
+    <ThrowsErrorOnDataFetch>
+      <rows>
+        <rows Name="a" />
+        <rows Name="b" />
+        <rows Name="c" />
+      </rows>
+    </ThrowsErrorOnDataFetch>
+  </Sets>
+</Test>

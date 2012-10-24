@@ -1,0 +1,17 @@
+<% content_for :header_section do %>
+h2. Creating a new StoryTeller Project
+
+Assuming that you've downloaded StoryTeller, your next step is to create a new StoryTeller project to begin writing specifications for your system.
+    
+<% end %>
+
+<% content_for :index_section do %>
+<div id="subCol">
+  <dl>
+    <dd class="warning">This documentation is based on the 1.0 version of StoryTeller.</dd>
+  </dl>
+</div>
+
+h3. Start Here
+  
+<% end %>

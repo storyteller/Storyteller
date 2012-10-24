@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Test name="Table with Optional Columns" lifecycle="Acceptance">
+  <Table>
+    <TableWithLotsOfOptions isStep="True">
+      <table>
+        <row isStep="True" a="1" />
+        <row isStep="True" a="2" />
+        <row isStep="True" a="3" />
+        <row isStep="True" a="4" />
+      </table>
+    </TableWithLotsOfOptions>
+  </Table>
+</Test>

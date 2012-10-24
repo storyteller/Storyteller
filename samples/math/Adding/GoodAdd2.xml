@@ -1,0 +1,7 @@
+<Test name="Good Add 2">
+  <Math>
+    <StartWith starting="5" />
+    <Add operand="12" />
+    <TheValueShouldBe expected="17" />
+  </Math>
+</Test>

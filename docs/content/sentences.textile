@@ -1,0 +1,123 @@
+h2. Sentence Grammars
+
+The most common type of Grammar is the simple Sentence -- a one line grammar that can either be an action done to the system under test or an assertion against the system under test.  In 
+this guide you will learn all the ways you can create Sentence grammars inside your StoryTeller project.
+
+endprologue.
+
+h3. What is a Sentence?
+
+A Sentence is a grammar that _projects_ to a single line in the Html output.  Let's say you're writing specifications against the running sum feature of a new calculator program.  You might 
+write one line sentence grammars to:
+
+# Enter the starting number (known inputs)
+# Multiply the current value by a new number
+# Add a number to the running sum
+# Specify the expected value of the running sum (expected outcome)
+
+Those sentence grammars in usage would look something like this specification from the _Grammars_ project in the StoryTeller codebase:
+
+!images/sentences/preview.png!
+
+When this specification is executed, the projected output in Html looks like this:
+
+!images/sentences/results.png!
+
+NOTE. The sample specification above was *supposed* to fail with both assertion failures and badly formatted input data.  A lot of care has been put into StoryTeller's Html rendering for effectively presenting the results to users.  That being said, the output from failed specifications tends to get very ugly.  Let's just call that some incentive to get those specifications over to passing with all soothing green lights as soon as possible.
+
+h3. Deconstructing the Sentence
+
+Early on in our education we learn about the various parts of a sentence in order to more effectively use our native language.  While the Sentence in StoryTeller is much simpler than the bizarre 
+mishmash of rules in English, it's still valuable to understand the parts of the StoryTeller sentence:
+
+# Cells: A _Cell_ in StoryTeller is a named variable in a Grammar that must be specified by the specification author.  Cell's can be either purely input or result cells that can be compared to some value in the system under test (The term "Cell" is a little bit of StoryTeller's heritage from FitNesse leaking in)
+# Format: How the Sentence will be projected into Html and the specification editor.  In the specification shown in the images above, the sentence formats are "Start with the number {number}", "Multiply by {multiplier} then add {delta}", and "The number should now be {number}."  As you've probably surmised, the values inside the {} brackets refer to Cells.  
+# The execution.  In the example specification above one sentence is effectively typing a number into the calculator and another sentence compares the current value of the calculator against an expected value.
+ 
+NOTE. This incarnation of StoryTeller has been developed for a large web application over 18 months and over time we've accumulated *several* ways to build Sentence grammars for different scenarios. 
+
+h3. Fixture Methods
+
+The easiest and most common way to create one off Sentence grammars is to just place a public method on a Fixture class that either has no return value or returns any type besides IGrammar.  A StoryTeller "Fixture":fixtures.html will 
+automatically create a new Grammar that calls that method with the name of that method as the grammar key.
+
+h4. Action Method
+
+The following method on a Fixture class is a simple Sentence from the sample test shown in the images above:
+
+CODE[ActionMethod].
+
+Just a couple things to note:
+* The method must be public
+* The [FormatAs] attribute is used to control the rendered Html in the preview, results, and the specification editor.  The location of the Cell values is done by putting the cell key into {} brackets. 
+* Each input parameter of the method is an input cell and has to be part of the [FormatAs] template
+
+NOTE. If you use a [FormatAs] attribute on a sentence method, *every* Cell key must appear in the template or StoryTeller will not correctly render the sentence.  You'll see these errors in the syntax error report in the user interface.
+
+NOTE. You do not have to specify a [FormatAs] attribute.  If this attribute is omitted, StoryTeller derives a simple format based on the method name and arguments
+
+h4. Value Check Method
+
+Sentence methods can also be used to assert a value in the system under test by returning a value from the method.  This is the grammar from the specification pictured above that asserts against the running sum of the calculator:
+
+CODE[ValueCheckMethod].
+
+Once again you see the same [FormatAs] attribute with the same rules, but with one caveat.  If there is exactly one {cell} in the display format from the [FormatAs] attribute value, that cell is assumed to mean the result value.  In the sample 
+above, _sum_ is the result cell.
+
+h4. Fact Assertions
+
+_Fact_ grammars are a slight variation on the Sentence that simply evaluate to true or false to assert that some expected fact about the system under test.  In the results view, 
+Fact steps are highlighted all green, all red, or all yellow to denote success, failure, or exception:
+
+!images/sentences/FactResults.png!
+
+The implementation of a Fact Assertion is relatively simple, just create a method that returns a boolean value *and omit the return value from the display value:*
+
+CODE[FactAssertions].
+
+NOTE. Facts are handy for assertions in specifications like "No validation errors are shown" or "The case has been closed"
+
+h4. Passing Services into Methods
+
+Later... 
+
+h3. Inline Sentences
+
+Later...
+
+h4. Fact()
+
+CODE[GrammarsInConstructor].
+
+Later...
+
+h4. Inline Actions
+
+Later...
+
+CODE[InlineActions].
+
+h4. Check Grammar
+
+Later...
+
+h4. Check Property Grammar
+
+Later... -- Maybe move this to the section on verifying object state
+
+h4. Set Property Grammar
+
+Later...
+
+h4. Decorated Line Grammar
+
+Later...
+
+h4. Service Action Grammar
+
+Later...
+
+h4. Service Assertion Grammar
+
+Later...

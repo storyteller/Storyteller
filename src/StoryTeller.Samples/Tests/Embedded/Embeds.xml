@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Test name="Embeds" lifecycle="Regression">
+  <Embedded>
+    <ThrowAnExceptionOnTheNextEmbed />
+    <EmbeddedMath>
+      <Math>
+        <Adding x="5" y="5" returnValue="10" />
+      </Math>
+    </EmbeddedMath>
+    <DoNotThrowAnExceptionOnTheNextEmbed />
+    <EmbeddedMath>
+      <Math>
+        <Adding x="5" y="4" returnValue="9" />
+        <Adding x="5" y="5" returnValue="11" />
+        <Adding x="5" y="6" returnValue="abc" />
+        <Throw />
+      </Math>
+    </EmbeddedMath>
+  </Embedded>
+</Test>

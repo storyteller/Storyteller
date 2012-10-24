@@ -1,0 +1,108 @@
+h2. Writing Fixtures
+
+The basic unit of authoring StoryTeller specification DSL's is the Fixture class.  In this guide you will learn how to write custom Fixture classes, control their projected appearance and behavior, how to add Grammars to a Fixture, and finally how to let 
+your StoryTeller project know which Fixtures to use.
+
+endprologue.
+
+h3. What is a Fixture?
+
+The Fixture classes are the most important unit of your specification DSL. 
+To be technical, a Fixture is just any concrete class that implements the IFixture interface shown below:
+
+CODE[IFixture].
+
+Let's break down the IFixture interface and look at its contents:
+
+# *Name*:  StoryTeller has to have a way to internally identify a Fixture.  Most of the time, you'll simply let StoryTeller handle the name for you by deriving it from the class name ('SomethingFixture' would be 'Something').
+# *Description*:  You can add a description to a Fixture class.  This is strictly for usage in the StoryTeller UI.
+# *Grammars*:  The main purpose of an IFixture class is to expose a related collection of Grammars.  Grammars are indexed by name.
+# *Policies and Title*:  In advanced usage, you can use the Title property and the Policies member of IFixture to fine tune the appearance and behavior of a Fixture in the Html rendering and the editor.
+# *SetUp()*:  The Setup() method is executed by the StoryTeller engine immediately before starting any of the steps in a section pointing to a Fixture.
+# *TearDown()*:  The TearDown() method is executed by the StoryTeller engine immediately after calling the last step in a section pointing to a Fixture.
+
+ 
+h3. Build a Fixture
+
+The first step is just to declare a new class in your StoryTeller testing project assembly (see "Getting Started":getting_started.html for more information about setting up a StoryTeller project)
+ and inherit from the StoryTeller Fixture class.  
+
+CODE[MyFirstFixture].
+
+Fixture's only have to implement the IFixture interface, but it's easiest by far to just inherit from the Fixture class.  The default naming convention embedded into StoryTeller is to use _Fixture_ as a suffix
+in the class name.  Using that naming convention, StoryTeller will use the internal name _Something_ to identify the _SomethingFixture_ class at runtime. 
+
+NOTE. Internally, StoryTeller uses the "StructureMap":http://structuremap.github.com IoC tool to build Fixture objects with all their dependencies.  If you're familiar with StructureMap, the Fixture name is used to retrieve an IFixture object by name like:  var fixture = container.GetInstance&lt;IFixture&gt;(fixtureName)
+
+If for some reason you don't or can't use the default naming convention, you can use the [AliasAs] fixture to explicitly control the fixture name:
+
+CODE[AliasedFixture].
+
+h3. Adding Grammars
+
+The most important role of the Fixture class is to expose the grammars that express and execute your specification DSL.  At runtime, Grammars are objects implementing the IGrammar interface stored by name in a Fixture object.  Assuming 
+that you're just inheriting from the basic Fixture class, you can add grammars programmatically to the internal collection, let StoryTeller derive grammars from public methods on your Fixture class, expose methods on your Fixture class 
+that return IGrammar object, or any combination of the above.  In advanced usage you might even have methods on a base Fixture class that add multiple grammars based on specified traits of the Fixture class much the way that 
+dynamic programmers use metaprogramming.
+
+NOTE. Grammars are a first class interface in the StoryTeller architecture.  Many of the introductory StoryTeller examples show simple grammars implemented as methods on Fixture classes, but that isn't the full story.
+
+h4. Add a Grammar that executes a Method
+
+The most common way to build Grammars is just to stick a public method on a Fixture class like this:
+
+CODE[MethodsAsGrammars].
+
+When the AddingGrammarsFixture class is instantiated, it will create two new Grammars named _OpenTheScreen_ and _TheRowsDisplayed_ that will execute those methods when those grammars are used within a 
+test/specification.  See "Sentences":sentences.html for more information.
+
+h4. Add a Grammar built by a Method
+
+Some of the more advanced grammars can be built up programmatically.  While you can just build up these grammars in the constructor function of the Fixture class, my team found that it was easier to build an individual IGrammar 
+in a single method so that you could use tools like ReSharper to more quickly find the definition of an IGrammar in the Fixture code.  
+
+Here's a simple example of building a "Paragraph":paragraphs.html grammar inside a method on a Fixture class:
+
+CODE[ReturnGrammarFromMethod].
+
+When the Fixture containing this method is *instantiated*, the Fixture class will execute any method on itself that returns an IGrammar object and adds the IGrammar object returned from the 
+method into its collection of grammars using the method name for the name of the grammar.
+
+NODE. At this point, you cannot pass any arguments to the methods that return IGrammar objects.  This will change in a forthcoming version of StoryTeller. 
+
+h4. Add a Grammar in the Fixture constructor
+
+As I alluded to earlier, it is also possible to add grammars to a fixture in the constructor function of a Fixture class like this sample below:
+
+CODE[GrammarsInConstructor].
+
+In the code sample above, I'm building a couple simple _Fact_ grammars (see "Sentences":sentences.html) directly in code and adding the new grammars directly to the Fixture.  I don't recommend this technique for 
+anything complicated, but it is still a handy convenience.
+
+h3. Controlling Fixture Appearance
+
+Later...
+
+h3. Exposing Fixtures to your Project
+
+More content later, but for now, see the "Getting Started":getting_started.html guide for the basics.
+
+h3. Private Fixtures
+
+Many times you might only want to use a Fixture from within an "Embedded Section":embedded_sections.html.  In this case you probably want to keep the StoryTeller UI cleaner and easier to use by 
+hiding Fixture selections that aren't valid by marking the Fixture _private_ by using the [Hidden] attribute like this sample:
+
+CODE[HiddenFixture].
+
+h3. Fixture Description 
+
+When your StoryTeller project begins to get larger you may have trouble remembering which Fixtures do what.  Descriptive names certainly help, but you can also embed a Description of a Fixture strictly for usage 
+in the StoryTeller UI by overriding the Description property of a Fixture class:
+
+CODE[FixtureWithDescription].
+
+h3. SetUp() and TearDown()
+
+If you need to perform some sort of action either before or after a Fixture is used within a Test/Specification section, you can override the SetUp() and/or TearDown() methods in the Fixture class.
+
+CODE[FixtureWithSetUpTearDownAndDescription].

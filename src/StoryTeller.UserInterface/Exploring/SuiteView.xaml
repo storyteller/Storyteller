@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="StoryTeller.UserInterface.Exploring.SuiteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Exploring="clr-namespace:StoryTeller.UserInterface.Exploring">
+    <ScrollViewer>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Button DockPanel.Dock="Right" Name="runAll" ClickMode="Release">
+                <Image Source="../Icons/runAll.png" Height="16" Width="16"></Image>
+            </Button>
+            <Label Name="suite">Suite Name</Label>
+        </StackPanel>
+        
+        <Grid Name="grid" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Column="0" Grid.Row="0" FontWeight="Bold" Background="LightSkyBlue">Test Name</Label>
+            <Label Grid.Column="1" Grid.Row="0" FontWeight="Bold" Background="LightSkyBlue">Status</Label>
+        </Grid>
+        
+    </DockPanel>
+    </ScrollViewer>
+</UserControl>

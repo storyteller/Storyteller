@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<Project xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Options>
+    <FileTemplate>using NUnit.Framework;
+using StoryTeller.Execution;
+
+namespace StoryTellerTestHarness
+{
+    [TestFixture, Explicit]
+    public class Template
+    {
+        private ProjectTestRunner runner;
+
+        [TestFixtureSetUp]
+        public void SetupRunner()
+        {
+            runner = new ProjectTestRunner(@"$PROJECT_FILE$");
+        }
+
+$METHODS$
+
+        [TestFixtureTearDown]
+        public void TeardownRunner()
+        {
+            runner.Dispose();
+        }
+    }
+}</FileTemplate>
+    <MethodTemplate>        [Test]
+        public void $CLEAN_TEST_NAME$()
+        {
+            runner.RunAndAssertTest("$TEST_PATH$");
+        }</MethodTemplate>
+    <TargetFile>..\source\StoryTeller.Samples\StoryTellerDebug.cs</TargetFile>
+  </Options>
+  <Workspaces>
+    <WorkspaceFilter Name="Embedded">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="Fixture" Name="Embedded" />
+        <FixtureFilter Type="Fixture" Name="Another" />
+        <FixtureFilter Type="Fixture" Name="Math" />
+      </Filters>
+    </WorkspaceFilter>
+    <WorkspaceFilter Name="General">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="All" Name="ALL" />
+      </Filters>
+    </WorkspaceFilter>
+    <WorkspaceFilter Name="Paragraphs">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="Fixture" Name="Another" />
+      </Filters>
+    </WorkspaceFilter>
+    <WorkspaceFilter Name="Sentences">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="Fixture" Name="Sentence" />
+        <FixtureFilter Type="Fixture" Name="Math" />
+        <FixtureFilter Type="Fixture" Name="CurriedMath" />
+      </Filters>
+    </WorkspaceFilter>
+    <WorkspaceFilter Name="Sets">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="All" Name="ALL" />
+      </Filters>
+    </WorkspaceFilter>
+    <WorkspaceFilter Name="Tables">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="All" Name="ALL" />
+      </Filters>
+    </WorkspaceFilter>
+    <WorkspaceFilter Name="Parking">
+      <Actions />
+      <Filters>
+        <FixtureFilter Type="All" Name="ALL" />
+      </Filters>
+    </WorkspaceFilter>
+  </Workspaces>
+  <FixtureAssembly>Storyteller.Samples</FixtureAssembly>
+  <BinaryFolder>..\src\StoryTeller.Samples\bin\release</BinaryFolder>
+  <TestFolder>..\src\StoryTeller.Samples\Tests</TestFolder>
+  <FileName>..\..\..\..\samples\grammars.xml</FileName>
+  <TimeoutInSeconds>30</TimeoutInSeconds>
+  <Name>Grammars</Name>
+</Project>

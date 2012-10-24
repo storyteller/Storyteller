@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Test name="Sentences" lifecycle="Acceptance">
+  <Sentence>
+    <Comment><![CDATA[Show a syntax failure]]></Comment>
+    <StartWithTheNumber number="a" />
+    <Comment><![CDATA[Work correctly]]></Comment>
+    <StartWithTheNumber number="5" />
+    <MultiplyThenAdd multiplier="3" delta="4" />
+    <Subtract operand="2" />
+    <Comment><![CDATA[Correct assertion]]></Comment>
+    <TheValueShouldBe number="17" />
+    <Comment><![CDATA[Incorrect assertion]]></Comment>
+    <TheSumOf number1="2" number2="2" sum="5" />
+    <Comment><![CDATA[Line assertions]]></Comment>
+    <ThisLineIsAlwaysTrue />
+    <ThisLineIsAlwaysFalse />
+    <ThisLineAlwaysThrowsExceptions />
+  </Sentence>
+</Test>

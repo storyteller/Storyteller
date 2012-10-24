@@ -1,0 +1,50 @@
+<% content_for :header_section do %>
+h2. Glossary
+
+Understanding these key terms are important for StoryTeller usage, both as a StoryTeller user and a developer or test engineer tasked with writing test code. 
+    
+<% end %>
+
+<% content_for :index_section do %>
+<div id="subCol">
+  <dl>
+    <dd class="warning">This documentation is based on the 1.0 version of StoryTeller.</dd>
+  </dl>
+</div>
+
+- Project := Very similar to projects in Visual Studio.Net or other IDE's, a _Project_ in StoryTeller describes a working set of specifications, 
+information about how to exercise the system under test, and folder information for tests and binaries.  
+You cannot use StoryTeller without first creating a project.  See "Creating a StoryTeller Project":create_project.html for more information
+
+- Test or Specification := Each specification of the system is described in a Test.  A single Test/Specification consists of Sections and Steps.
+
+- Workspace and Suites := StoryTeller projects can be (and should be) organized into _Suite's_ of closely related tests.  
+The top level suites directly underneath the project root are called _Workspaces_.  
+Within the project, Workspace's can be configured to use a subset of the available Fixture's for the system and also to specify startup and teardown 
+actions before the execution of each test. See "Workspaces":workspaces.html for more information
+
+- Grammar := Before you write tests, you need a vocabulary with which to express the tests, 
+and something behind that vocabulary that actually exercises the system under test and records the actual results.  
+Each action or assertion in a StoryTeller test/specification is performed by a _Grammar._  [See the "How To":how_to.html] for more information
+
+- Fixture := A closely related collection of grammars.  In common usage, you will create a separate Fixture for each individual screen or service in your system.  See "Writing Fixtures":fixtures.html for more information
+
+- Sentence := A grammar that is expressed in a single line.  A sentence can have zero to many inputs. See "Sentences":sentences.html for more information.
+
+- Fact := A special Sentence with no inputs that simply declares that a _fact_ should be true.  See ["Sentences":sentences.html#facts].
+
+- Table := A grammar expressed as in tabular form.  _Table's_ can be used to set up test input state or test decision trees.  Table's are valuable for example driven tests and are analagous to the old "FitNesse ColumnFixture or RowFixture":http://fitnesse.org/FitNesse.UserGuide.ColumnFixture.  See "Working with Tables":tables.html.
+
+- Set Verification := Set Verification grammars are a special type of Table that can be used to specify the expected contents of some sort of tabular data.  Set Verification's are a superset of the "FitNesse SetFixture's and ArrayFixture's":http://fitnesse.org/FitNesse.UserGuide.FixtureGallery.FitLibraryFixtures.ArrayFixture.  See "Verifying Sets":sets.html.
+
+- Embedded Section := An _Embedded Section_ is a grammar that _nests_ a different Fixture within the parent Section.  The canonical example is testing a screen that opens a dialog box during its operation.  Within the Fixture for the parent screen, you may want an Embedded Section grammar to open and then manipulate the modal dialog box.  See ["Embedded Sections":embedded_sections.html].
+
+- Paragraph := A grammar that expresses a _macro_ of other grammars.  Use a Paragraph anytime you find yourself repeating the same basic sequence of steps or if you want to force a consistent structure in your specifications.  See "Paragraphs":paragraphs.html.
+
+- Section := A _Section_ is just a region that invokes a specified Fixture.
+
+- Step := A _Step_ is the invocation of a single Grammar within a Test/Specification.
+
+NOTE.  At this point StoryTeller uses 'Test' as its terminology.  In the next release the terminology in the user interface and the code itself will change to 'Specification' or 'Spec' to be more consistent with current best practices.
+  
+<% end %>

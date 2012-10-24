@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Test name="Add Numbers" lifecycle="Acceptance">
+  <Calculator3>
+    <Comment><![CDATA[2 + 2 is always 4]]></Comment>
+    <EnterNumber isStep="True" number="2" />
+    <Add isStep="True" operand="2" />
+    <NumberShouldBe isStep="True" currentValue="5" />
+  </Calculator3>
+</Test>

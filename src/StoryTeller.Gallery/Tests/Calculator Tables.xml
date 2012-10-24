@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Test name="Calculator Tables" lifecycle="Acceptance">
+  <Calculator>
+    <AddingNumbersTogetherAsTable>
+      <table>
+        <table x="2" y="3" sum="5" />
+        <table x="3" y="4" sum="7" />
+        <table x="4" y="5" sum="9" />
+      </table>
+    </AddingNumbersTogetherAsTable>
+    <CheckTableData>
+      <table>
+        <table X="3" Y="2" Sum="5" Product="6" />
+        <table X="4" Y="3" Sum="7" Product="12" />
+      </table>
+    </CheckTableData>
+  </Calculator>
+</Test>

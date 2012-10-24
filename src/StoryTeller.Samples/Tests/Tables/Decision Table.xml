@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Test name="Decision Table" lifecycle="Acceptance">
+  <Table>
+    <decisions>
+      <decisions>
+        <decisions FirstName="Jeremy" LastName="Miller" FullName="Jeremy Miller" LastNameFirst="Miller, Jeremy" />
+        <decisions FirstName="Matt" LastName="Cassel" FullName="Big Chief" LastNameFirst="Chief, Big" />
+      </decisions>
+      <table>
+        <row FirstName="Jeremy" LastName="Miller" FullName="Jeremy Miller" LastNameFirst="Miller, Jeremy" />
+        <row FirstName="Hank" LastName="Hill" FullName="Hank Miller" LastNameFirst="Miller Hank" />
+      </table>
+    </decisions>
+  </Table>
+</Test>

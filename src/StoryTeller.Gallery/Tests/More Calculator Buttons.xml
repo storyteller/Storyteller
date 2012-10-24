@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Test name="More Calculator Buttons" lifecycle="Acceptance">
+  <Calculator>
+    <AddingNumbersTogether x="2" y="2" returnValue="5" />
+  </Calculator>
+</Test>

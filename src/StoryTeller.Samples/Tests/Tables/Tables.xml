@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Test name="Tables" lifecycle="Acceptance">
+  <Table>
+    <Comment><![CDATA[Table by the ExposeAsTable attribute]]></Comment>
+    <Sum>
+      <sum>
+        <sum x="a" y="b" sum="c" />
+        <sum x="2" y="2" sum="4" />
+        <sum x="2" y="2" sum="5" />
+      </sum>
+    </Sum>
+    <Comment><![CDATA[Table fixture from script]]></Comment>
+    <Divide>
+      <Rows>
+        <Rows x="4" y="2" product="2" />
+        <Rows x="3" y="0" product="0" />
+        <Rows x="a" y="3" product="****" />
+        <Rows x="3" y="3" product="****" />
+      </Rows>
+    </Divide>
+  </Table>
+</Test>

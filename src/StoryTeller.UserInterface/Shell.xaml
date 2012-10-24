@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="StoryTeller.UserInterface.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:StoryTeller.UserInterface.Controls"
+    xmlns:Projects="clr-namespace:StoryTeller.UserInterface.Projects" xmlns:Workspace="clr-namespace:StoryTeller.UserInterface.Workspace" MinHeight="600" MinWidth="800" Foreground="Black" Background="White">
+    <DockPanel>
+        <DockPanel SnapsToDevicePixels="False" VerticalAlignment="Stretch">
+
+            <DockPanel Name="topBar" DockPanel.Dock="Top" Background="{DynamicResource SelectedBackgroundBrush}">
+                <DockPanel Name="runAllBar" DockPanel.Dock="Left" Background="{DynamicResource SelectedBackgroundBrush}">
+                    <Button Name="runAll" ClickMode="Release" ToolTip="Click to run all tests" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                            MaxWidth="30" MaxHeight="30">
+                        <Image Source="Icons/runAll.png"></Image>
+                    </Button>
+                </DockPanel>
+                <Controls:OptionsMenu x:Name="options" DockPanel.Dock="Right" Margin="30 0 0 0"></Controls:OptionsMenu>
+                <DockPanel Name="commandPanel" DockPanel.Dock="Top" Background="{DynamicResource SelectedBackgroundBrush}">
+                    <Controls:CommandBar x:Name="commandBar" DockPanel.Dock="Right"></Controls:CommandBar>
+                </DockPanel>
+            </DockPanel>
+
+            <Controls:StoryTellerStatusBar DockPanel.Dock="Bottom" x:Name="statusBar" ></Controls:StoryTellerStatusBar>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="300" Width="300" MaxWidth="900"></ColumnDefinition>
+                    <ColumnDefinition Width="2"></ColumnDefinition>
+                    <ColumnDefinition MinWidth="500" ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <DockPanel Name="navigationPanel" DockPanel.Dock="Top" Background="{DynamicResource SelectedBackgroundBrush}">
+                    <Controls:TestFilterBar x:Name="filterBar" DockPanel.Dock="Top" 
+                                            ></Controls:TestFilterBar>
+                    <!-- Add scroll viewer -->
+                <TabControl  Grid.Row="0" Grid.Column="0" Name="explorerTabs" DockPanel.Dock="Left" TabStripPlacement="Top"  
+                             HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <TabItem Header="Tests" Height="30">
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <TreeView Name="testTree" ></TreeView>
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem Header="Fixtures">
+                        <TreeView Name="fixtureTree"></TreeView>
+                    </TabItem>
+                    <TabItem Header="Projects">
+                        <Projects:Settings x:Name="settings"></Projects:Settings>
+                    </TabItem>
+                </TabControl>
+
+        </DockPanel>
+        <GridSplitter Grid.Column="1" Grid.Row="0" IsTabStop="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    
+                </GridSplitter>
+                <DockPanel Name="testArea" Grid.Column="2" Grid.Row="0"  DockPanel.Dock="Top" 
+                           Background="{DynamicResource SelectedBackgroundBrush}">
+                    <TabControl Name="mainTabs" TabStripPlacement="Top" 
+                            HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  />
+                </DockPanel>
+            </Grid>
+        </DockPanel>
+    </DockPanel>
+    
+    
+</UserControl>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Test name="Simple Composite" lifecycle="Acceptance">
+  <Composite>
+    <AddAndMultiply starting="5" operand="3" multiplier="10" expected="80" />
+    <AddAndMultiply starting="5" operand="3" multiplier="10" expected="77" />
+    <AddAndMultiplyTable>
+      <Rows>
+        <Rows starting="3" operand="4" multiplier="10" expected="25" />
+        <Rows starting="5" operand="3" multiplier="10" expected="80" />
+        <Rows starting="5" operand="3" multiplier="10" expected="77" />
+      </Rows>
+    </AddAndMultiplyTable>
+  </Composite>
+</Test>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Test name="Selection List Values" lifecycle="Acceptance">
+  <SelectionList>
+    <TheNameIs first="Jeremy" last="Smith" fullname="Jeremy Smith" />
+    <FirstAndLastName>
+      <table>
+        <table first="Hank" last="Miller" fullname="Hank Miller" />
+        <table first="Harold" last="Miller" fullname="Harold Mueller" />
+      </table>
+    </FirstAndLastName>
+    <names>
+      <table>
+        <table First="Tobin" Last="Smith" Fullname="Tobin Smith" />
+      </table>
+    </names>
+  </SelectionList>
+</Test>

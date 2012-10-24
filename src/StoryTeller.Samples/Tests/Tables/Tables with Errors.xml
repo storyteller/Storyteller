@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Test name="Tables with Errors" lifecycle="Acceptance">
+  <Table>
+    <BeforeThrowsError>
+      <Rows>
+        <Rows x="11" />
+      </Rows>
+    </BeforeThrowsError>
+    <AfterThrowsError>
+      <Rows>
+        <Rows x="22" />
+      </Rows>
+    </AfterThrowsError>
+  </Table>
+</Test>

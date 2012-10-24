@@ -1,0 +1,18 @@
+<Test name="Sub Mixed 1">
+  <Math>
+    <StartWith starting="6" />
+    <MultiplyBy multiplier="2" />
+    <Subtract operand="3" />
+    <Add operand="4" />
+    <TheValueShouldBe expected="13" />
+    <Adding x="5" y="3" returnValue="8" />
+    <AddTable>
+      <operation>
+        <operation x="2" y="2" sum="4" />
+        <operation x="3" y="3" sum="6" />
+        <operation x="4" y="4" sum="8" />
+      </operation>
+    </AddTable>
+
+  </Math>
+</Test>
