@@ -54,6 +54,8 @@ namespace StoryTeller.Engine
         public static bool IsFixture(Type type)
         {
             if (!type.IsConcreteTypeOf<IFixture>()) return false;
+            if (type.IsGenericType) return false;
+            if (!type.GetConstructors(BindingFlags.Public | BindingFlags.Instance).Any()) return false;
 
             try
             {
