@@ -58,6 +58,12 @@ namespace StoryTeller.Testing.Engine
         {
             new NotHiddenFixture().Policies.IsPrivate.ShouldBeFalse();
         }
+
+        [Test]
+        public void has_the_TODO_grammar()
+        {
+            new Fixture()["TODO"].ShouldNotBeNull();
+        }
     }
 
     // SAMPLE:  HiddenFixture
@@ -154,7 +160,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_only_have_the_single_explicitly_defined_Grammar()
         {
-            fixture.GrammarCount.ShouldEqual(1);
+            fixture.GrammarCount.ShouldEqual(2); // The TODO grammar too
         }
     }
 

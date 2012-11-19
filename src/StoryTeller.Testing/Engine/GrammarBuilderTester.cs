@@ -127,7 +127,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void has_the_correct_number_of_grammars()
         {
-            new TargetedReflectionFixture().GrammarCount.ShouldEqual(6);
+            new TargetedReflectionFixture().GrammarCount.ShouldEqual(7); // The new TODO grammar
         }
 
         [Test]

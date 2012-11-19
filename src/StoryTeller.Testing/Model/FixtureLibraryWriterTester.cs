@@ -38,7 +38,7 @@ namespace StoryTeller.Testing.Model
         [Test]
         public void should_find_two_grammars_in_the_fixture()
         {
-            fixtureStructure.GrammarCount.ShouldEqual(2);
+            fixtureStructure.GrammarCount.ShouldEqual(3); // plus the TODO grammar
         }
     }
 

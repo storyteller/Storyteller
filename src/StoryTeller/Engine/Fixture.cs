@@ -141,6 +141,8 @@ namespace StoryTeller.Engine
 
         private static bool methodFromThis(MethodInfo method)
         {
+            if (method.Name == "TODO") return true;
+
             if (_types.Contains(method.DeclaringType))
             {
                 return false;
@@ -491,6 +493,12 @@ namespace StoryTeller.Engine
         
 
         #endregion
+
+        [FormatAs("TODO:  {message}")]
+        public void TODO(string message)
+        {
+            StoryTellerAssert.Fail(message);
+        }
     }
 
     public interface ICurryGrammarDefaultsExpression
