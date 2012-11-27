@@ -30,6 +30,7 @@ namespace StoryTeller.Workspace
         string ProjectFolder { get; set; }
 
         string GetTargetFile();
+        string GetTestFolder();
     }
 
     public class CodegenOptions

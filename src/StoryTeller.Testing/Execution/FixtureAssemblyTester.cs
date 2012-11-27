@@ -8,23 +8,6 @@ using StoryTeller.Workspace;
 
 namespace StoryTeller.Testing.Execution
 {
-    [TestFixture]
-    public class FixtureAssemblyTester
-    {
-        [Test]
-        public void can_serialize_the_fixture_assembly_class()
-        {
-            var fa = new FixtureAssembly((string) null);
-            var stream = new MemoryStream();
-            var formatter = new BinaryFormatter();
-            formatter.Serialize(stream, fa);
-
-            stream.Position = 0;
-
-            var fa2 = (FixtureAssembly)formatter.Deserialize(stream);
-        }
-
-    }
 
     [TestFixture]
     public class when_the_system_type_name_is_null_or_empty
@@ -34,7 +17,7 @@ namespace StoryTeller.Testing.Execution
         [SetUp]
         public void SetUp()
         {
-            fa = new FixtureAssembly((string) null);
+            fa = new FixtureAssembly();
         }
 
         [Test]
@@ -52,7 +35,17 @@ namespace StoryTeller.Testing.Execution
         [SetUp]
         public void SetUp()
         {
-            fa = new FixtureAssembly(typeof (GrammarSystem).AssemblyQualifiedName);
+            fa = new FixtureAssembly(new Project()
+            {
+                ProjectFolder = "root",
+                SystemTypeName = typeof(GrammarSystem).AssemblyQualifiedName
+            });
+        }
+
+        [Test]
+        public void fixture_assembly_does_capture_the_root_folder()
+        {
+            fa.RootFolder.ShouldNotBeEmpty();
         }
 
         [Test]

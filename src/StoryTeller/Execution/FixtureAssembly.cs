@@ -17,15 +17,13 @@ namespace StoryTeller.Execution
         // For serialization
         public FixtureAssembly(){}
 
-        public FixtureAssembly(string systemTypeName)
-        {
-            _systemTypeName = systemTypeName;
-        }
-
         public FixtureAssembly(IProject project)
         {
             _systemTypeName = project.SystemTypeName;
+            RootFolder = project.GetTestFolder();
         }
+
+        public string RootFolder { get; set; }
 
         private void find()
         {

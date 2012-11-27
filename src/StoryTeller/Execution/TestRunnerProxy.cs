@@ -74,6 +74,7 @@ namespace StoryTeller.Execution
 
             // TODO -- if fails, do a Thread.Sleep and try again
             _system = fixtureAssembly.System;
+            ProjectFileSystem.RootFolder = fixtureAssembly.RootFolder;
 
             try
             {
