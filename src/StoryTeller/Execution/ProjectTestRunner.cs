@@ -49,7 +49,9 @@ namespace StoryTeller.Execution
             _engine = new TestEngine();
             _engine.StopConditions.TimeoutInSeconds = _project.TimeoutInSeconds;
             _engine.Handle(new ProjectLoaded(_project));
-            _engine.UseTeamCityListener();
+
+            // TODO -- Bring this back when it gets smarter: https://github.com/DarthFubuMVC/StoryTeller2/issues/2
+            //_engine.UseTeamCityListener();
             
 
             _hierarchy = _project.LoadTests();
