@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -175,6 +176,17 @@ namespace StoryTeller.Workspace
         }
 
         private string getCorrectPath(string folder)
+        {
+            var path = getRootPath(folder);
+            if(path.EndsWith("debug", StringComparison.OrdinalIgnoreCase) && !Directory.Exists(path))
+            {
+                path = Path.Combine(path.Substring(0, path.Length - 5), "release");
+            }
+
+            return path;
+        }
+
+        private string getRootPath(string folder)
         {
 
             if (folder.IsEmpty()) return string.Empty;
