@@ -29,7 +29,6 @@
     <file src="..\..\src\StoryTellerUI\bin\release\ShadeTree.*" target="tools" />
     <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="tools" />
     <file src="..\..\src\StoryTellerUI\bin\release\StoryTellerUI.*" target="tools" />
-    <file src="..\..\src\StoryTellerRunner\bin\release\StoryTellerRunner.*" target="tools" />
     <file src="..\..\src\ST\bin\release\ST.*" target="tools" />
   </files>
 </package>
