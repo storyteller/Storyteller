@@ -105,6 +105,7 @@
     <Compile Include="Execution\ProjectTestRunner.cs" />
     <Compile Include="Html\TableContainerTag.cs" />
     <Compile Include="Html\TagExtensions.cs" />
+    <Compile Include="StoryTellerEnvironment.cs" />
     <Compile Include="Workspace\IResultPersistor.cs" />
     <Compile Include="Workspace\ResultHistory.cs" />
     <Compile Include="Engine\Sets\RowValueMatcher.cs" />

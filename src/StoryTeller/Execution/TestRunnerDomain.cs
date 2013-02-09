@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
@@ -33,8 +35,13 @@ namespace StoryTeller.Execution
                     _publisher.Publish<BinaryRecycleStarted>();
                     _proxy = BuildProxy(project);
 
+					// Smuggle information into the AppDomain
+					//_proxy.ImportEnvironment(StoryTellerEnvironment.Variables());
+
                     _library = _proxy.StartSystem(new FixtureAssembly(project), (MarshalByRefObject)_publisher);
                     _publisher.Publish(new BinaryRecycleFinished(_library));
+
+	                _proxy.ImportEnvironment(StoryTellerEnvironment.Variables());
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -62,6 +69,7 @@ namespace StoryTeller.Execution
                 }
                 catch (Exception ex)
                 {
+					Console.WriteLine(ex);
                     Teardown();
                     _publisher.Publish(new BinaryRecycleFailure
                     {
@@ -176,7 +184,7 @@ namespace StoryTeller.Execution
                 ApplicationName = "StoryTeller-Testing-" + Guid.NewGuid(),
                 ConfigurationFile = project.ConfigurationFileName,
                 ShadowCopyFiles = "true",
-                ApplicationBase = project.GetBinaryFolder()
+                ApplicationBase = project.GetBinaryFolder(),
             };
 
             _domain = AppDomain.CreateDomain("StoryTeller-Testing", null, setup);

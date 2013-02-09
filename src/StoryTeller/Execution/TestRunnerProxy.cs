@@ -101,5 +101,10 @@ namespace StoryTeller.Execution
         {
             _listener = new TeamCityTestListener();
         }
+
+		public void ImportEnvironment(StoryTellerEnvironmentVariable[] variables)
+		{
+			StoryTellerEnvironment.Import(variables);
+		}
     }
 }
