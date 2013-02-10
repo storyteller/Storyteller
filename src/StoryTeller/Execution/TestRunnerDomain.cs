@@ -35,9 +35,6 @@ namespace StoryTeller.Execution
                     _publisher.Publish<BinaryRecycleStarted>();
                     _proxy = BuildProxy(project);
 
-					// Smuggle information into the AppDomain
-					//_proxy.ImportEnvironment(StoryTellerEnvironment.Variables());
-
                     _library = _proxy.StartSystem(new FixtureAssembly(project), (MarshalByRefObject)_publisher);
                     _publisher.Publish(new BinaryRecycleFinished(_library));
 

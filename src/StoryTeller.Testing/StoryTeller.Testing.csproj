@@ -209,6 +209,7 @@
     <Compile Include="SpecificationExtensions.cs" />
     <Compile Include="StepTester.cs" />
     <Compile Include="StoryTellerDebug.cs" />
+    <Compile Include="StoryTellerEnvironmentTester.cs" />
     <Compile Include="SuiteTester.cs" />
     <Compile Include="Template.cs" />
     <Compile Include="TestConverterTester.cs" />

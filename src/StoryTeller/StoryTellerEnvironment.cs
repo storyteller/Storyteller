@@ -6,28 +6,33 @@ namespace StoryTeller
 {
 	public static class StoryTellerEnvironment
 	{
-		private static readonly Cache<string, object> _variables = new Cache<string, object>();
+		private static readonly Cache<Type, object> _variables = new Cache<Type, object>(x => Activator.CreateInstance(x));
 
-		public static void Set(string key, object value)
+		public static void Reset()
 		{
-			_variables.Fill(key, value);
+			_variables.ClearAll();
+		}
+
+		public static void Set(Type type, object value)
+		{
+			_variables.Fill(type, value);
 		}
 
 		public static void Set<T>(T variable)
 			where T : MarshalByRefObject
 		{
-			_variables.Fill(typeof(T).Name, variable);
+			Set(typeof(T), variable);
 		}
 
 		public static T Get<T>()
 			where T : MarshalByRefObject
 		{
-			return _variables[typeof(T).Name] as T;
+			return _variables[typeof(T)] as T;
 		}
 
 		public static void Import(StoryTellerEnvironmentVariable[] variables)
 		{
-			variables.Each(x => Set(x.Key, x.Value));
+			variables.Each(x => Set(x.Type, x.Value));
 		}
 
 		public static StoryTellerEnvironmentVariable[] Variables()
@@ -44,13 +49,13 @@ namespace StoryTeller
 		{
 		}
 
-		public StoryTellerEnvironmentVariable(string key, object value)
+		public StoryTellerEnvironmentVariable(Type type, object value)
 		{
-			Key = key;
+			Type = type;
 			Value = value;
 		}
 
-		public string Key { get; set; }
+		public Type Type { get; set; }
 		public object Value { get; set; }
 	}
 }
