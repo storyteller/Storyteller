@@ -30,9 +30,7 @@ namespace ST
                 runner.Workspace = input.WorkspaceFlag;
             }
 
-            runner.Execute();
-
-            return true;
+            return runner.Execute() == 0;
         }
     }
 }
