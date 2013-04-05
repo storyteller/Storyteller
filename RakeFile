@@ -1,4 +1,4 @@
-COMPILE_TARGET = ENV['config'].nil? ? "release" : ENV['config']
+COMPILE_TARGET = ENV['config'] || 'release'
 
 include FileTest
 require 'albacore'
