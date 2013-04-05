@@ -46,8 +46,8 @@ assemblyinfo :version do |asm|
   rescue
     commit = "git unavailable"
   end
-  puts "##teamcity[buildNumber '#{build_number}']" unless tc_build_number.nil?
-  puts "Version: #{build_number}" if tc_build_number.nil?
+  puts "##teamcity[buildNumber '#{build_number}']" if tc_build_number
+  puts "Version: #{build_number}" unless tc_build_number
   asm.trademark = commit
   asm.product_name = PRODUCT
   asm.description = build_number
