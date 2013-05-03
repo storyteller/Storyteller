@@ -101,8 +101,8 @@ namespace StoryTeller.UserInterface
                 image = new Image();
                 button.Content = image;
 
-                image.Width = 25;
-                image.Height = 25;
+                image.Width = 15;
+                image.Height = 15;
             }
 
             image.SetIcon(icon);
