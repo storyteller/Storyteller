@@ -1432,7 +1432,7 @@
                         </Storyboard>
                     </ControlTemplate.Resources>
                     <Grid>
-                        <Border x:Name="PART_Track" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1" CornerRadius="0,0,0,0" Background="{DynamicResource LightBrush}">
+                        <Border x:Name="PART_Track" BorderThickness="0" CornerRadius="0,0,0,0" Background="{DynamicResource LightBrush}">
                             <Border.BitmapEffect>
                                 <OuterGlowBitmapEffect Opacity="0" GlowColor="{DynamicResource WhiteColor}" GlowSize="3" />
                             </Border.BitmapEffect>
