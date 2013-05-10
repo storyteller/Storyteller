@@ -207,6 +207,10 @@
         <Setter Property="Template" Value="{DynamicResource CheckBoxTemplate}" />
     </Style>
 
+    <Style TargetType="{x:Type Hyperlink}">
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+  
     <ControlTemplate x:Key="CheckBoxTemplate" TargetType="{x:Type CheckBox}">
         <ControlTemplate.Resources>
             <Storyboard x:Key="HoverOn">
@@ -1492,7 +1496,7 @@
         <Setter Property="Template" Value="{DynamicResource TextBoxTemplate}" />
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="#FF000000"/>
+        <Setter Property="BorderThickness" Value="0"/>
     </Style>
 
     <ControlTemplate x:Key="TextBoxTemplate" TargetType="{x:Type TextBox}">
@@ -1519,7 +1523,7 @@
             </Storyboard>
         </ControlTemplate.Resources>
         <Grid>
-            <Border x:Name="Border" Opacity="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2,2,2,2" Background="{TemplateBinding Background}">
+            <Border x:Name="Border" Opacity="1" BorderThickness="{TemplateBinding BorderThickness}"  Background="{TemplateBinding Background}">
                 <Grid>
                     <Border BorderThickness="1">
                         <ScrollViewer Margin="0" x:Name="PART_ContentHost" Style="{DynamicResource NuclearScrollViewer}" />

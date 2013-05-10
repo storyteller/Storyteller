@@ -2,16 +2,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Controls="clr-namespace:StoryTeller.UserInterface.Controls">
-    <StatusBar Background="{DynamicResource SelectedBackgroundBrush}">
-        <StatusBarItem DockPanel.Dock="Right" Name="failureItem" Visibility="Collapsed">
+    <StatusBar Foreground="White" Background="{DynamicResource SelectedTabBackgroundBrush}">
+        <StatusBarItem DockPanel.Dock="Right" Name="failureItem" Visibility="Collapsed" Margin="0">
             <Controls:Link x:Name="failureLink" FontWeight="Bold" LinkColor="Black"></Controls:Link>
         </StatusBarItem>
 
         <StatusBarItem DockPanel.Dock="Right" Name="cycleItem">
             <TextBlock Name="cycleTime" Width="200">Loading</TextBlock>
         </StatusBarItem>
-        
-
 
         <StatusBarItem Width="100" DockPanel.Dock="Right" >
             <Hyperlink Name="syntaxErrorsLink">

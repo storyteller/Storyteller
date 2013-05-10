@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Controls="clr-namespace:StoryTeller.UserInterface.Controls"
     xmlns:Projects="clr-namespace:StoryTeller.UserInterface.Projects" xmlns:Workspace="clr-namespace:StoryTeller.UserInterface.Workspace"
-    MinHeight="600" MinWidth="800" Foreground="Black" Background="White">
+    MinHeight="600" MinWidth="800" >
 
     <DockPanel SnapsToDevicePixels="False" VerticalAlignment="Stretch">
-      <Controls:StoryTellerStatusBar DockPanel.Dock="Bottom" x:Name="statusBar" ></Controls:StoryTellerStatusBar>
+      <Controls:StoryTellerStatusBar DockPanel.Dock="Bottom" Height="25" x:Name="statusBar" ></Controls:StoryTellerStatusBar>
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition></RowDefinition>

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoryTeller.Engine;
+using StoryTeller.UserInterface.Controls;
 using StoryTeller.UserInterface.Projects;
 using StoryTeller.Workspace;
 
@@ -23,6 +24,14 @@ namespace StoryTeller.UserInterface
                 Filename = project.FileName,
                 Name = project.Name
             };
+        }
+
+        public static void AutoType(this TextBox textBox ,string placeHolderText, ITestFilterObserver filterObserver)
+        {
+            textBox.Text = placeHolderText;
+            textBox.GotFocus += (s, a) => textBox.Text = textBox.Text == placeHolderText ? string.Empty : textBox.Text;
+            textBox.LostFocus += (s, a) => textBox.Text = string.IsNullOrEmpty(textBox.Text) ? placeHolderText : textBox.Text;
+            textBox.TextChanged += (s, a) => filterObserver.TagFilterApplied(textBox.Text == placeHolderText ? string.Empty : textBox.Text.Trim());
         }
 
         public static UserMessageResponse ToUserMessageResponse(this MessageBoxResult response)

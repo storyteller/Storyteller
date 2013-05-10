@@ -38,26 +38,22 @@ namespace StoryTeller.UserInterface.Controls
                 x.Text("Acceptance", Lifecycle.Acceptance);
                 x.Text("Regression", Lifecycle.Regression);
             });
+
         }
 
 
-        public ITestFilterObserver Observer { set { _observer = value; } }
+        public ITestFilterObserver Observer
+        {
+            set
+            {
+                _observer = value;
+                tagsFilter.AutoType("Tags", _observer);
+            }
+        }
 
         public void RunAll()
         {
             _observer.RunAll();
-        }
-
-
-        private void btnApply_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            _observer.TagFilterApplied(tagsFilter.Text.Trim());
-        }
-
-        private void btnClear_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            tagsFilter.Text = "";
-            _observer.TagFilterApplied(tagsFilter.Text.Trim());
         }
     }
 }
