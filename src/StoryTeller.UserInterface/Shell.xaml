@@ -46,7 +46,7 @@
               <Button Name="runAll" Cursor="Hand" ClickMode="Release" ToolTip="Click to run all tests" HorizontalAlignment="Left"
                       VerticalAlignment="Center" BorderThickness="0" Margin="2 3" Height="25">
                 <StackPanel Orientation="Horizontal">
-                  <TextBlock FontFamily="Fonts/#FontAwesome" Margin="5 5 0 5" Foreground="#FF8DA368" >&#xf04e;</TextBlock>
+                  <TextBlock FontFamily="/Fonts/#FontAwesome" Margin="5 5 0 5" Foreground="{DynamicResource PositiveColor}" >&#xf04e;</TextBlock>
                   <Label Name="label" Margin="5 0 5 1" VerticalAlignment="Center">Run All</Label>
                 </StackPanel>
               </Button>

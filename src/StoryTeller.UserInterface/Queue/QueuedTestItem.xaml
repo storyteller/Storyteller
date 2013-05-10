@@ -2,8 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel Orientation="Horizontal" Margin="0 2 0 2">
-        <Button Name="stop" ClickMode="Release" Width="25" Height="25" ToolTip="Click to cancel this test">
-            <Image Source="../Icons/stop.png"></Image>
+        <Button Name="stop" ClickMode="Release"  ToolTip="Click to cancel this test">
+          <TextBlock FontFamily="/Fonts/#FontAwesome" FontSize="25" Margin="5" Foreground="{DynamicResource NegativeColor}" >&#xf05c;</TextBlock>
         </Button>
         
         <TextBlock Height="25" Margin="5 0 0 0">

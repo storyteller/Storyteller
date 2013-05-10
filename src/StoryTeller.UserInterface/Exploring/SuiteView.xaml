@@ -6,7 +6,7 @@
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <Button DockPanel.Dock="Right" Name="runAll" ClickMode="Release">
-                <Image Source="../Icons/runAll.png" Height="16" Width="16"></Image>
+              <TextBlock FontFamily="/Fonts/#FontAwesome" Foreground="{DynamicResource PositiveColor}" >&#xf04e;</TextBlock>
             </Button>
             <Label Name="suite">Suite Name</Label>
         </StackPanel>

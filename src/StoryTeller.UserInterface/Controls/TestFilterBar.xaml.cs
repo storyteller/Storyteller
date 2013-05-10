@@ -23,7 +23,6 @@ namespace StoryTeller.UserInterface.Controls
         {
             InitializeComponent();
 
-
             _statusToggle = new ToggleBar<ResultStatus>(resultPanel, x => _observer.ResultStatusChanged(x), x =>
             {
                 x.Icon(Icon.AnyStatus, ResultStatus.All, "View all tests");
@@ -38,9 +37,7 @@ namespace StoryTeller.UserInterface.Controls
                 x.Text("Acceptance", Lifecycle.Acceptance);
                 x.Text("Regression", Lifecycle.Regression);
             });
-
         }
-
 
         public ITestFilterObserver Observer
         {
