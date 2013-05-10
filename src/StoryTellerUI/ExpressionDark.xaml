@@ -41,6 +41,8 @@
 
     <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#FF333333" />
     <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="SelectedBackgroundBrush2" Color="#FF252526" />
+    <SolidColorBrush x:Key="SelectedTabBackgroundBrush" Color="#FF007ACC" />
 
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
     <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#FF414145" />
@@ -1883,7 +1885,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                    <Grid ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local" Margin="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="ColumnDefinition0" />
                             <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
@@ -1892,7 +1894,7 @@
                             <RowDefinition Height="Auto" x:Name="RowDefinition0" />
                             <RowDefinition Height="*" x:Name="RowDefinition1" />
                         </Grid.RowDefinitions>
-                        <Border CornerRadius="2,2,0,0" Background="{DynamicResource LightBrush}" x:Name="border">
+                        <Border CornerRadius="2,2,0,0" x:Name="border">
                             <TabPanel x:Name="HeaderPanel" IsItemsHost="true" Panel.ZIndex="1" KeyboardNavigation.TabIndex="1" RenderTransformOrigin="0.5,0.5" Width="Auto" Height="Auto">
                                 <TabPanel.LayoutTransform>
                                     <TransformGroup>
@@ -1913,10 +1915,10 @@
 
                             </TabPanel>
                         </Border>
-                        <Border x:Name="ContentPanel" Grid.Column="0" Grid.Row="1" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local" Background="{DynamicResource ShadeBrush}" CornerRadius="0,0,2,2">
+                        <Border x:Name="ContentPanel" Background="{DynamicResource SelectedBackgroundBrush2}" Grid.Column="0" Grid.Row="1" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
                             <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" />
                         </Border>
-                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" BorderThickness="0,0,0,1" CornerRadius="10,0,0,0" Opacity="0.5" Margin="2,0,2,0" x:Name="border1">
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" BorderThickness="0,0,0,2" x:Name="border1">
                             <Border.LayoutTransform>
                                 <TransformGroup>
                                     <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -1926,7 +1928,7 @@
                                 </TransformGroup>
                             </Border.LayoutTransform>
                             <Border.BorderBrush>
-                                <SolidColorBrush Color="{DynamicResource BlackColor}"/>
+                                <SolidColorBrush Color="#FF007ACC"/>
                             </Border.BorderBrush>
                         </Border>
                     </Grid>
@@ -1998,7 +2000,7 @@
         </Setter>
     </Style>
     <Style d:IsControlPart="True" TargetType="{x:Type TabItem}">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -2024,7 +2026,7 @@
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
-                    <Grid x:Name="grid" Margin="2,1,2,3">
+                    <Grid x:Name="grid">
                         <Grid.LayoutTransform>
                             <TransformGroup>
                                 <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -2033,7 +2035,7 @@
                                 <TranslateTransform X="0" Y="0"/>
                             </TransformGroup>
                         </Grid.LayoutTransform>
-                        <Border x:Name="border" BorderBrush="{x:Null}" CornerRadius="2,2,2,2" Opacity="0.5">
+                        <Border x:Name="border" BorderBrush="{x:Null}" Opacity="0.5">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="0.5,0.976" StartPoint="0.5,0.039">
                                     <GradientStop Color="#7F595959" Offset="0" />
@@ -2041,8 +2043,8 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                         </Border>
-                        <Border x:Name="SelectedBorder" BorderBrush="{x:Null}" CornerRadius="2,2,2,2" Opacity="0" Background="{DynamicResource SelectedBackgroundBrush}"/>
-                        <Border x:Name="HoverBorder" BorderBrush="{x:Null}" CornerRadius="2,2,2,2" Opacity="0">
+                        <Border x:Name="SelectedBorder" BorderBrush="{x:Null}" Opacity="0" Background="{DynamicResource SelectedTabBackgroundBrush}"/>
+                        <Border x:Name="HoverBorder" BorderBrush="{x:Null}" Opacity="0">
                             <Border.Background>
                                 <LinearGradientBrush EndPoint="0.5,0.976" StartPoint="0.5,0.039">
                                     <GradientStop Color="#7F595959" Offset="0" />
@@ -2143,7 +2145,7 @@
             <Trigger Property="Selector.IsSelected" Value="True">
                 <Setter Property="Foreground" >
                     <Setter.Value>
-                        <SolidColorBrush Color="{DynamicResource BlackColor}"/>
+                        <SolidColorBrush Color="White"/>
                     </Setter.Value>
                 </Setter>
             </Trigger>
@@ -2289,7 +2291,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">
                     <Grid>
-                        <Border x:Name="Border" Background="{DynamicResource ControlBackgroundBrush}" BorderBrush="{x:Null}" BorderThickness="1" CornerRadius="3,3,3,3">
+                        <Border x:Name="Border" BorderThickness="0">
                             <ScrollViewer Style="{DynamicResource NuclearScrollViewer}" Focusable="False" Padding="4" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="False" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
                                 <ItemsPresenter />
                             </ScrollViewer>
@@ -3324,10 +3326,7 @@
                             </DoubleAnimationUsingKeyFrames>
                         </Storyboard>
                     </ControlTemplate.Resources>
-
-                    
-
-                    <Grid>
+                    <Grid Margin="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition MinWidth="19" Width="Auto" />
                             <ColumnDefinition Width="Auto" />
@@ -3348,8 +3347,6 @@
                         </Border>
                         <ItemsPresenter Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" x:Name="ItemsHost" />
                     </Grid>
-
-                     
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="ItemsHost" />

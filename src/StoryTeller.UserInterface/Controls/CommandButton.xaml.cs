@@ -24,9 +24,9 @@ namespace StoryTeller.UserInterface.Controls
             InitializeComponent();
         }
 
-        public CommandButton(Icon icon, string text, ICommand command) : this()
+        public CommandButton(Icon desiredIcon, string text, ICommand command) : this()
         {
-            image.SetIcon(icon);
+            icon.SetIcon(desiredIcon);
             label.Content = text;
             button.Command = command;
         }

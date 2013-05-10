@@ -17,7 +17,7 @@ namespace StoryTeller.UserInterface.Testing.UI.Exploring
             queuedTest = null;
             controls = new TestLineControls
             {
-                Icon = new Image(),
+                Icon = new TextBlock(),
                 Path = new Label(),
                 Run = new Button(),
                 Status = new Label()

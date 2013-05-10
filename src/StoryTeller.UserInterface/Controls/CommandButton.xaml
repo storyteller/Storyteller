@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" >
-    <Button Name="button" Cursor="Hand" HorizontalAlignment="Right" Height="30" VerticalAlignment="Stretch" ClickMode="Release">
+    <Button Name="button" Cursor="Hand" HorizontalAlignment="Right" BorderThickness="0"
+            Margin="2 3" Height="25" VerticalAlignment="Stretch" ClickMode="Release">
         <StackPanel Orientation="Horizontal">
-            <Image Name="image" Width="25" Height="25"></Image>
-            <Label Name="label" Margin="5 0 5 0" VerticalAlignment="Center">some text</Label>
+            <TextBlock Name="icon" FontFamily="Fonts/#FontAwesome" Margin="5 5 0 5"></TextBlock>
+            <Label Name="label" Margin="5 0 5 1" VerticalAlignment="Center">some text</Label>
         </StackPanel>
     </Button>
 </UserControl>

@@ -17,7 +17,7 @@ namespace StoryTeller.UserInterface.Exploring
         {
             var controls = new TestLineControls
             {
-                Icon = icon,
+                //Icon = icon,
                 Path = path,
                 Run = run,
                 Status = status

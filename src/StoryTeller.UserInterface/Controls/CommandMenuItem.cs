@@ -18,7 +18,7 @@ namespace StoryTeller.UserInterface.Controls
             };
 
 
-            item.Icon = new Image().Configure(x => x.SetIcon(screenAction.Icon));
+            item.Icon = new TextBlock().Configure(x => x.SetIcon(screenAction.Icon));
 
             return item;
         }

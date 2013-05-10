@@ -6,8 +6,6 @@
     MinHeight="600" MinWidth="800" Foreground="Black" Background="White">
 
     <DockPanel SnapsToDevicePixels="False" VerticalAlignment="Stretch">
-
-
       <Controls:StoryTellerStatusBar DockPanel.Dock="Bottom" x:Name="statusBar" ></Controls:StoryTellerStatusBar>
       <Grid>
         <Grid.RowDefinitions>
@@ -19,14 +17,15 @@
           <ColumnDefinition MinWidth="500" ></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <DockPanel Name="navigationPanel" DockPanel.Dock="Top" Background="{DynamicResource SelectedBackgroundBrush}">
-          <Controls:TestFilterBar x:Name="filterBar" DockPanel.Dock="Top" 
-                                            ></Controls:TestFilterBar>
           <!-- Add scroll viewer -->
           <TabControl  Grid.Row="0" Grid.Column="0" Name="explorerTabs" DockPanel.Dock="Left" TabStripPlacement="Top"  
                              HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
             <TabItem Header="Tests" Height="30">
               <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <TreeView Name="testTree" ></TreeView>
+                <StackPanel>
+                  <Controls:TestFilterBar x:Name="filterBar" DockPanel.Dock="Top" Height="Auto"></Controls:TestFilterBar>
+                  <TreeView Name="testTree" ></TreeView>
+                </StackPanel>
               </ScrollViewer>
             </TabItem>
             <TabItem Header="Fixtures">
@@ -36,21 +35,19 @@
               <Projects:Settings x:Name="settings"></Projects:Settings>
             </TabItem>
           </TabControl>
-
         </DockPanel>
-        <GridSplitter Grid.Column="1" Grid.Row="0" IsTabStop="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-
-        </GridSplitter>
+        <GridSplitter Grid.Column="1" Background="{DynamicResource SelectedBackgroundBrush2}" Grid.Row="0" IsTabStop="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></GridSplitter>
         <DockPanel Name="testArea" Grid.Column="2" Grid.Row="0"  DockPanel.Dock="Top" 
                            Background="{DynamicResource SelectedBackgroundBrush}">
           
           <DockPanel Name="topBar" DockPanel.Dock="Top" Background="{DynamicResource SelectedBackgroundBrush}">
             <Controls:OptionsMenu x:Name="options" DockPanel.Dock="Right" Margin="30 0 0 0"></Controls:OptionsMenu>
             <DockPanel Name="commandPanel" DockPanel.Dock="Top" Background="{DynamicResource SelectedBackgroundBrush}">
-              <Button Name="runAll" Cursor="Hand" ClickMode="Release" ToolTip="Click to run all tests" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30">
+              <Button Name="runAll" Cursor="Hand" ClickMode="Release" ToolTip="Click to run all tests" HorizontalAlignment="Left"
+                      VerticalAlignment="Center" BorderThickness="0" Margin="2 3" Height="25">
                 <StackPanel Orientation="Horizontal">
-                  <Image Name="image" Source="Icons/runAll.png" Width="25" Height="25"></Image>
-                  <Label Name="label" Margin="5 0 5 0" VerticalAlignment="Center">Run All</Label>
+                  <TextBlock FontFamily="Fonts/#FontAwesome" Margin="5 5 0 5" Foreground="#FF8DA368" >&#xf04e;</TextBlock>
+                  <Label Name="label" Margin="5 0 5 1" VerticalAlignment="Center">Run All</Label>
                 </StackPanel>
               </Button>
               <Controls:CommandBar x:Name="commandBar" DockPanel.Dock="Right"></Controls:CommandBar>
@@ -61,8 +58,6 @@
                             HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"  />
         </DockPanel>
       </Grid>
-
-
     </DockPanel>
 
 

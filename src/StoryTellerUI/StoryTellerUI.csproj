@@ -120,6 +120,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <Resource Include="Fonts\FontAwesome.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -68,21 +69,18 @@ namespace StoryTeller.UserInterface
 
         public static void SetIcon(this MenuItem item, Icon icon)
         {
-            var image = new Image();
-            image.SetIcon(icon);
-            item.Icon = image;
+            var textBlock = new TextBlock();
+            textBlock.SetIcon(icon);
+            item.Icon = textBlock;
         }
 
-        public static void SetIcon(this Image image, Icon icon)
+        public static void SetIcon(this TextBlock textBlock, Icon icon)
         {
-            image.Tag = icon;
+            textBlock.Tag = icon;
 
-            var source = new BitmapImage();
-            source.BeginInit();
-            source.StreamSource = icon.ImageStream();
-            source.EndInit();
-
-            image.Source = source;
+            textBlock.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
+            textBlock.Text = icon.Name;
+            textBlock.Foreground = icon.Foreground;
         }
 
         public static void BackgroundIs(this Control element, Color color)
@@ -94,18 +92,16 @@ namespace StoryTeller.UserInterface
         {
             button.ClickMode = ClickMode.Release;
 
-
-            var image = button.Content as Image;
-            if (image == null)
+            var textBlock = button.Content as TextBlock;
+            if (textBlock == null)
             {
-                image = new Image();
-                button.Content = image;
-
-                image.Width = 15;
-                image.Height = 15;
+                textBlock = new TextBlock
+                {
+                    Width = 15, Height = 15
+                };
             }
 
-            image.SetIcon(icon);
+            textBlock.SetIcon(icon);
 
             return new ButtonExpression(button);
         }
@@ -214,9 +210,9 @@ namespace StoryTeller.UserInterface
             return panel;
         }
 
-        public static Icon GetIcon(this Image image)
+        public static Icon GetIcon(this TextBlock textBlock)
         {
-            return image.Tag as Icon;
+            return textBlock.Tag as Icon;
         }
 
         public static void Add(this Grid grid, UIElement element, int rowIndex, int column)
@@ -421,6 +417,12 @@ namespace StoryTeller.UserInterface
         }
 
         #endregion
+
+
+        public static Brush FromHex(this SolidColorBrush solidColorBrush, string hex)
+        {
+            return (Brush)(new BrushConverter().ConvertFrom(hex));
+        }
     }
 
     public interface IReadOnlyDictionary<KEY, T> : IEnumerable<T>

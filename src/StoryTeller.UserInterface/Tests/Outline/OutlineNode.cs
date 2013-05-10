@@ -13,7 +13,7 @@ namespace StoryTeller.UserInterface.Tests.Outline
     public class OutlineNode : TreeViewItem
     {
         private Icon _icon;
-        private Image _image;
+        private TextBlock _textBlock;
 
         public OutlineNode(ITestPart part, Icon icon)
         {
@@ -25,7 +25,7 @@ namespace StoryTeller.UserInterface.Tests.Outline
 
             Header = new StackPanel().Horizontal().Configure(x =>
             {
-                _image = x.Add<Image>();
+                _textBlock = x.Add<TextBlock>();
             });
 
             Icon = icon;
@@ -83,7 +83,7 @@ namespace StoryTeller.UserInterface.Tests.Outline
             get { return _icon; }
             set
             {
-                _image.SetIcon(value);
+                _textBlock.SetIcon(value);
                 _icon = value;
             }
         }

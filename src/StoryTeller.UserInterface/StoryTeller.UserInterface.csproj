@@ -608,6 +608,7 @@
     <Content Include="Editing\Scripts\StyleTest.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Fonts\FontAwesome.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

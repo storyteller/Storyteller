@@ -5,5 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              >
-    <Button Name="button" Margin="5 0 5 0" Padding="5 0 5 0" HorizontalAlignment="Center" Height="30" VerticalAlignment="Stretch" ClickMode="Release">Commands</Button>
+  <Button Name="button" Cursor="Hand" ClickMode="Release" HorizontalAlignment="Center"
+                      VerticalAlignment="Center" BorderThickness="0" Margin="2 3" Height="25">
+    <StackPanel Orientation="Horizontal">
+      <TextBlock FontFamily="../Fonts/#FontAwesome" Margin="5 5 0 5">&#xf013;</TextBlock>
+      <Label Name="label" Margin="5 0 5 1" VerticalAlignment="Center">Commands</Label>
+    </StackPanel>
+  </Button>
 </UserControl>
