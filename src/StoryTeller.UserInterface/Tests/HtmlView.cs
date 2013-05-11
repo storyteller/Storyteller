@@ -17,6 +17,7 @@ namespace StoryTeller.UserInterface.Tests
     {
         private readonly WebBrowser _browser = new WebBrowser();
         private string _html = "<html></html>";
+        private string _previousCommand = string.Empty;
 
         public HtmlView()
         {
@@ -59,9 +60,12 @@ namespace StoryTeller.UserInterface.Tests
             _browser.Focus();
         }
 
+
         public void RunCommand(string command)
         {
-            _browser.InvokeScript(command);
+            if(!string.IsNullOrEmpty(command) && command != _previousCommand)
+                _browser.InvokeScript(command);
+            _previousCommand = command;
         }
 
         #endregion
