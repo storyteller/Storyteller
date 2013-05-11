@@ -17,6 +17,8 @@ namespace StoryTeller.UserInterface
 {
     public static class SharedExtensions
     {
+        private static FontFamily _iconFont = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
+
         public static ProjectToken ToProjectToken(this IProject project)
         {
             return new ProjectToken
@@ -85,10 +87,18 @@ namespace StoryTeller.UserInterface
 
         public static void SetIcon(this TextBlock textBlock, Icon icon)
         {
+            if (textBlock == null || icon == null) return;
             textBlock.Tag = icon;
-
-            textBlock.FontFamily = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
             textBlock.Text = icon.Name;
+            textBlock.FontFamily = _iconFont;
+            textBlock.Foreground = icon.Foreground;
+        }
+
+        public static void SetIcon(this ToggleButton textBlock, Icon icon)
+        {
+            textBlock.Tag = icon;
+            textBlock.Content = icon.Name;
+            textBlock.FontFamily = _iconFont;
             textBlock.Foreground = icon.Foreground;
         }
 
@@ -100,16 +110,10 @@ namespace StoryTeller.UserInterface
         public static ButtonExpression ToIconButton(this ButtonBase button, Icon icon)
         {
             button.ClickMode = ClickMode.Release;
-
-            var textBlock = button.Content as TextBlock;
-            if (textBlock == null)
+            var textBlock = button.Content as TextBlock ?? new TextBlock
             {
-                textBlock = new TextBlock
-                {
-                    Width = 15, Height = 15
-                };
-            }
-
+                Width = 15, Height = 15
+            };
             textBlock.SetIcon(icon);
 
             return new ButtonExpression(button);
@@ -119,6 +123,13 @@ namespace StoryTeller.UserInterface
         {
             button.Click += (s, e) => action();
             return button.ToIconButton(icon);
+        }
+
+        public static ButtonExpression ToIconButton(this ToggleButton button, Icon icon, Action action)
+        {
+            button.Click += (s, e) => action();
+            button.SetIcon(icon);
+            return new ButtonExpression(button);
         }
 
         public static ButtonExpression ToIconButton(this ButtonBase button, Icon icon, ICommand command)

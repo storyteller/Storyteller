@@ -12,7 +12,7 @@ namespace StoryTeller.UserInterface
         private static readonly Brush NegativeColor = new SolidColorBrush().FromHex("#FFA14545");
         private static readonly Brush MutualColor = new SolidColorBrush().FromHex("#FFCED171");
 
-        public static readonly Icon AnyStatus = new Icon("statusAll.png", 7);
+        public static readonly Icon AnyStatus = new Icon("\uf10c ", 7, MutualColor);
         public static readonly Icon Invalid = new Icon("statusFailed.png", 4);
 
         public static readonly Icon Close = new Icon("\uf00d", 6, NoColor);        public static readonly Icon Code = new Icon("\uf121", 6);

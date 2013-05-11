@@ -7,14 +7,14 @@
       <RowDefinition/>
       <RowDefinition/>
     </Grid.RowDefinitions>
-    <StackPanel Grid.Row="0" Orientation="Vertical" HorizontalAlignment="Stretch" Background="{DynamicResource SelectedBackgroundBrush2}">
-        <StackPanel Margin="5 2 2 5" Name="resultPanel" Orientation="Horizontal">
+    <TextBox Grid.Row="0" Height="23" Name="tagsFilter" HorizontalAlignment="Stretch" Padding="2" Margin="5"/>
+    <StackPanel Margin="5 2 2 5" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{DynamicResource SelectedBackgroundBrush2}">
+        <StackPanel Name="resultPanel" Orientation="Horizontal" Margin="0 0 2 0">
             <TextBlock Width="136">Some text here</TextBlock>
         </StackPanel>
-        <StackPanel Margin="5 2 2 5" Name="lifecyclePanel" Orientation="Horizontal">
+        <StackPanel Name="lifecyclePanel" Orientation="Horizontal">
             <TextBlock>Some text here</TextBlock>
         </StackPanel>
     </StackPanel>
-    <TextBox Grid.Row="1" Height="23" Name="tagsFilter" HorizontalAlignment="Stretch" Padding="2" Margin="5"/>
   </Grid>
 </UserControl>

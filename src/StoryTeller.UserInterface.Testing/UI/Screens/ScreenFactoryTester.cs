@@ -51,7 +51,7 @@ namespace StoryTeller.UserInterface.Testing.UI.Screens
         public void SetUp()
         {
             var container = new Container(x => { x.For<IScreen<Test>>().Use<StubTestScreen>(); });
-            factory = new ScreenFactory(container);
+            factory = new ScreenFactory(container, null);
         }
 
         #endregion
