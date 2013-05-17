@@ -117,6 +117,7 @@
     <Compile Include="Actions\IBindingExpression.cs" />
     <Compile Include="Actions\ShellService.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Brushes.cs" />
     <Compile Include="Commands\ActionMenuItem.cs" />
     <Compile Include="Commands\AddSuiteCommand.cs" />
     <Compile Include="Commands\AddTestCommand.cs" />

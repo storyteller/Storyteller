@@ -10,7 +10,7 @@ namespace StoryTeller.UserInterface
 {
     public interface IStatusView : INeedBuildUp
     {
-        string SyntaxErrorText { set; }
+        void SyntaxErrorCount(int count);
         StatusPresenter Presenter { set; }
         string QueueMessage { set; }
         void MarkCycleTime(DateTime time, bool success);
@@ -51,10 +51,7 @@ namespace StoryTeller.UserInterface
         public void Handle(BinaryRecycleFinished message)
         {
             int count = message.Library.AllErrors().Count();
-            _view.SyntaxErrorText = count == 0
-                                        ? "No syntax errors"
-                                        : "{0} syntax error(s)".ToFormat(count);
-
+            _view.SyntaxErrorCount(count);
             _view.MarkCycleTime(message.Time, true);
         }
 

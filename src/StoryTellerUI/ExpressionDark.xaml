@@ -28,6 +28,9 @@
 
     <SolidColorBrush x:Key="NegativeColor" Color="#FFA14545" />
     <SolidColorBrush x:Key="PositiveColor" Color="#FF8DA368" />
+  
+  
+  
     <SolidColorBrush x:Key="TextBrush" Color="#FFFFFFFF" />
     <SolidColorBrush x:Key="NormalBrush" Color="{StaticResource MainColor}" />
     <SolidColorBrush x:Key="NormalBorderBrush" Color="#FF333333" />
