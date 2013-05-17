@@ -17,7 +17,6 @@ namespace StoryTeller.UserInterface
 {
     public static class SharedExtensions
     {
-        private static FontFamily _iconFont = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
 
         public static ProjectToken ToProjectToken(this IProject project)
         {
@@ -87,18 +86,20 @@ namespace StoryTeller.UserInterface
 
         public static void SetIcon(this TextBlock textBlock, Icon icon)
         {
+            var iconFont = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
             if (textBlock == null || icon == null) return;
             textBlock.Tag = icon;
             textBlock.Text = icon.Name;
-            textBlock.FontFamily = _iconFont;
+            textBlock.FontFamily = iconFont;
             textBlock.Foreground = icon.Foreground;
         }
 
         public static void SetIcon(this ToggleButton textBlock, Icon icon)
         {
+            var iconFont = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
             textBlock.Tag = icon;
             textBlock.Content = icon.Name;
-            textBlock.FontFamily = _iconFont;
+            textBlock.FontFamily = iconFont;
             textBlock.Foreground = icon.Foreground;
         }
 
