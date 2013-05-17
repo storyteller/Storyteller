@@ -2,7 +2,6 @@
 	font-family:Arial, Helvetica, sans-serif;
 	color:#111;
 	line-height:1.4em;
-	/*background-color: #ccc;*/ 
 }
 
 a
@@ -143,4 +142,3 @@ table.grid > tbody > tr > td {
 table.grid > tbody > tr:hover{
 	background-color: #c8c8c8;
 }
-
