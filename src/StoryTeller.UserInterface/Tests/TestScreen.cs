@@ -73,24 +73,24 @@ namespace StoryTeller.UserInterface.Tests
                 .To(_controller.SaveCommand).Icon = Icon.Save;
 
             screenObjects.Action("Preview").Bind(ModifierKeys.Control | ModifierKeys.Shift, Key.P).To(
-                _presenter.Modes[Mode.Preview]).Icon = Icon.Unknown;
+                _presenter.Modes[Mode.Preview]).Icon = Icon.Preview;
 
             screenObjects.Action("Results").Bind(ModifierKeys.Control | ModifierKeys.Shift, Key.R).To(
-                _presenter.Modes[Mode.Results]).Icon = Icon.Unknown;
+                _presenter.Modes[Mode.Results]).Icon = Icon.Reorder;
 
             screenObjects.Action("Xml").Bind(ModifierKeys.Control | ModifierKeys.Shift, Key.X).To(
                 _presenter.Modes[Mode.Xml]).
-                Icon = Icon.Unknown;
+                Icon = Icon.Code;
 
             screenObjects.Action("Edit").Bind(ModifierKeys.Control | ModifierKeys.Shift, Key.E).To(
                 _presenter.Modes[Mode.Edit])
-                .Icon = Icon.Unknown;
+                .Icon = Icon.Edit;
 
             screenObjects.Action("xUnit Harness").Bind(ModifierKeys.Control, Key.H).PublishEvent(
                 () => new TestHarnessFileRequested(_test)).Icon = Icon.Unknown;
 
-            screenObjects.Action("Undo").Bind(ModifierKeys.Control, Key.Z).To(_stateManager.Undo).Icon = Icon.Unknown;
-            screenObjects.Action("Redo").Bind(ModifierKeys.Control, Key.Y).To(_stateManager.Redo).Icon = Icon.Unknown;
+            screenObjects.Action("Undo").Bind(ModifierKeys.Control, Key.Z).To(_stateManager.Undo).Icon = Icon.Undo;
+            screenObjects.Action("Redo").Bind(ModifierKeys.Control, Key.Y).To(_stateManager.Redo).Icon = Icon.Repeat;
 
             screenObjects.Action("Go to Top Node").Bind(ModifierKeys.Control, Key.T).To(() =>
             {

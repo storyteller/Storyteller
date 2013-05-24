@@ -22,7 +22,7 @@ namespace StoryTeller.UserInterface.Screens
         public TabCloser()
         {
             InitializeComponent();
-            image.SetIcon(Icon.Close);
+            icon.SetIcon(Icon.Close);
         }
 
         public TabCloser(Action action) : this()

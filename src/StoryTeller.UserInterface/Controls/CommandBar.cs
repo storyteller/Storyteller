@@ -21,7 +21,7 @@ namespace StoryTeller.UserInterface.Controls
         {
             this.Horizontal();
             VerticalAlignment = VerticalAlignment.Stretch;
-            HorizontalAlignment = HorizontalAlignment.Right;
+            HorizontalAlignment = HorizontalAlignment.Left;
             Height = 30;
         }
 
@@ -59,7 +59,6 @@ namespace StoryTeller.UserInterface.Controls
             return this.Add<Button>(x =>
             {
                 x.MinWidth = 20;
-                x.VerticalAlignment = VerticalAlignment.Stretch;
                 x.Content = text;
                 x.Click += action.ToRoutedHandler();
                 x.Height = Height - 10;

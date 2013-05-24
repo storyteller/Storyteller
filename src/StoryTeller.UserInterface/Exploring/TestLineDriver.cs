@@ -7,7 +7,7 @@ namespace StoryTeller.UserInterface.Exploring
     public class TestLineControls
     {
         public Button Run { get; set; }
-        public Image Icon { get; set; }
+        public TextBlock Icon { get; set; }
         public Label Path { get; set; }
         public Label Status { get; set; }
     }

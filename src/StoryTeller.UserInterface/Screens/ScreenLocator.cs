@@ -14,7 +14,7 @@ namespace StoryTeller.UserInterface.Screens
         public bool Matches(IScreen screen)
         {
             var specific = screen as IScreen<T>;
-            if (specific == null) return false;
+            if (specific == null || specific.Subject == null) return false;
 
             return specific.Subject.Equals(_subject);
         }

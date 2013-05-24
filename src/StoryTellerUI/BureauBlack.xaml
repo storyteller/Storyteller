@@ -357,7 +357,7 @@
                         <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" />
                         <TextBlock Panel.ZIndex="1" x:Name="DisabledOverlay" Text="{TemplateBinding Content}" Foreground="#FF8E96A2" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" Visibility="Collapsed" />
                         <Border x:Name="FocusVisualElement" Margin="-1" BorderBrush="{DynamicResource FocusBrush}" BorderThickness="1" CornerRadius="2.75" IsHitTestVisible="false" Opacity="0" />
-                        <Border x:Name="DefaultBorder" Margin="-1" BorderBrush="{DynamicResource FocusBrush}" BorderThickness="1" CornerRadius="2.75" IsHitTestVisible="false" Opacity="0" />
+                        <Border x:Name="DefaultBorder" Margin="-1" BorderBrush="{DynamicResource FocusBrush}" BorderThickness="1"  IsHitTestVisible="false" Opacity="0" />
                     </Grid>
 
                     <ControlTemplate.Triggers>

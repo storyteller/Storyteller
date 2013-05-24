@@ -37,7 +37,7 @@ namespace StoryTeller.UserInterface.Testing.UI
 
             ClassUnderTest.HandleMessage(new BinaryRecycleFinished(library));
 
-            MockFor<IStatusView>().AssertWasCalled(x => x.SyntaxErrorText = "No syntax errors");
+            MockFor<IStatusView>().AssertWasCalled(x => x.SyntaxErrorCount(0));
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace StoryTeller.UserInterface.Testing.UI
 
             ClassUnderTest.HandleMessage(new BinaryRecycleFinished(library));
 
-            MockFor<IStatusView>().AssertWasCalled(x => x.SyntaxErrorText = "3 syntax error(s)");
+            MockFor<IStatusView>().AssertWasCalled(x => x.SyntaxErrorCount(3));
         }
 
         [Test]

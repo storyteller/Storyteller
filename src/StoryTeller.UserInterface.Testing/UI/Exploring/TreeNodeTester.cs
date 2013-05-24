@@ -25,17 +25,6 @@ namespace StoryTeller.UserInterface.Testing.UI.Exploring
         private TreeNode node;
 
         [Test]
-        public void can_get_the_image_stream_from_an_icon()
-        {
-            Icon.Failed.ImageStream().ShouldNotBeNull();
-            Icon.Pending.ImageStream().ShouldNotBeNull();
-            Icon.RunningFailure.ImageStream().ShouldNotBeNull();
-            Icon.RunningSuccess.ImageStream().ShouldNotBeNull();
-            Icon.Success.ImageStream().ShouldNotBeNull();
-            Icon.Unknown.ImageStream().ShouldNotBeNull();
-        }
-
-        [Test]
         public void find_immediate_treenode_parent_as_top()
         {
             var parent = new TreeNode(new Test("name"));

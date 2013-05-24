@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using FubuCore.Conversion;
+using FubuCore.Logging;
 using ShadeTree.Validation;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
@@ -70,6 +71,7 @@ namespace StoryTeller.UserInterface
 
             setupTestView();
 
+            For<ILogger>().Use<Logger>();
             For<Suite>().Use(c => c.GetInstance<Hierarchy>());
             For<Table>().Use(c => new Table());
             For<Sentence>().Use(c => new Sentence());

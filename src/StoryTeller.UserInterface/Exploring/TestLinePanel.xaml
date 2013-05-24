@@ -4,9 +4,9 @@
     <StackPanel Name="mainPanel" Orientation="Horizontal">
         <StackPanel Name="namePanel" Orientation="Horizontal">
             <Button Name="run">
-                <Image Source="..\Icons\run.png" Width="16" Height="16"></Image>
+                <!--TODO: <Image Source="..\Icons\run.png" Width="16" Height="16"></Image>-->
             </Button>
-            <Image Name="icon" Source="..\Icons\stop.png" Width="16" Height="16"></Image>
+            <!--TODO: <Image Name="icon" Source="..\Icons\stop.png" Width="16" Height="16"></Image>-->
             <Label Name="path">The path here</Label>
         </StackPanel>
         <Label Name="status">The status is here</Label>
