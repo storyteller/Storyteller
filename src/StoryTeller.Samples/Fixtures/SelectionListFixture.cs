@@ -1,3 +1,4 @@
+using System;
 using StoryTeller.Engine;
 
 namespace StoryTeller.Samples.Grammars
@@ -26,6 +27,19 @@ namespace StoryTeller.Samples.Grammars
         {
             return first + " " + last;
         }
+
+        [FormatAs("The Enum value of {option} should be {selectedOption}")]
+        [return: AliasAs("selectedOption")]
+        public string TheEnumOptionIs([SelectionValues(typeof(SampleEnum))] string option)
+        {
+            return EnumValueFor<SampleEnum>(option).ToString();
+        }
+        
+        private static int EnumValueFor<T>(string value) where T : struct
+        {
+            var parsed = Enum.Parse(typeof(T), value);
+            return (int)parsed;
+        }
     }
 
     public class NameTable : DecisionTableGrammar
@@ -44,5 +58,11 @@ namespace StoryTeller.Samples.Grammars
         public string Last { set { _last = value; } }
 
         public string Fullname { get { return _first + " " + _last; } }
+    }
+
+    public enum SampleEnum
+    {
+        FirstOption,
+        SecondOption
     }
 }
