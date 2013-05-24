@@ -71,7 +71,7 @@ namespace StoryTeller.Execution
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                throw;
+	            return 100;
             }
         }
 
@@ -82,7 +82,6 @@ namespace StoryTeller.Execution
 
             var projectHistoryFolder = Path.Combine(_historyFolder, project.Name);
             Directory.CreateDirectory(projectHistoryFolder);
-
 
             try
             {
