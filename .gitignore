@@ -26,7 +26,8 @@ source/StoryTeller/CommonAssemblyInfo.cs
 src/packages
 src/CommonAssemblyInfo.cs
 artifacts
-
 src/StoryTeller.sln.DotSettings.user
 src/StoryTeller/StoryTeller.csproj.DotSettings.user
 *.DotSettings.user
+logs
+Gemfile.lock
