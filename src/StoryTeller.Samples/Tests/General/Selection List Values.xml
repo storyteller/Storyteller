@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <Test name="Selection List Values" lifecycle="Acceptance">
   <SelectionList>
-    <TheNameIs first="Jeremy" last="Smith" fullname="Jeremy Smith" />
-    <FirstAndLastName>
+    <TheNameIs first="Jeremy" last="Smith" fullname="Jeremy Smith" isStep="True" />
+    <FirstAndLastName isStep="True">
       <table>
-        <table first="Hank" last="Miller" fullname="Hank Miller" />
-        <table first="Harold" last="Miller" fullname="Harold Mueller" />
+        <table first="Hank" last="Miller" fullname="Hank Miller" isStep="True" />
+        <table first="Harold" last="Miller" fullname="Harold Mueller" isStep="True" />
       </table>
     </FirstAndLastName>
-    <names>
+    <names isStep="True">
       <table>
-        <table First="Tobin" Last="Smith" Fullname="Tobin Smith" />
+        <table First="Tobin" Last="Smith" Fullname="Tobin Smith" isStep="True" />
       </table>
     </names>
+    <TheEnumOptionIs isStep="True" option="FirstOption" selectedOption="0" />
   </SelectionList>
 </Test>

@@ -39,5 +39,21 @@ namespace StoryTeller.Testing.Engine
 
             cell.SelectionValues.ShouldHaveTheSameElementsAs("Jeremy", "Max", "Monte");
         }
+
+        [Test]
+        public void set_the_list_value_when_the_attribute_has_an_enum_type()
+        {
+            var att = new SelectionValuesAttribute(typeof(TestEnum));
+            att.SetList(fixture, cell);
+
+            cell.SelectionValues.ShouldHaveTheSameElementsAs("One", "Two", "Three");
+        }
+
+        private enum TestEnum
+        {
+            One,
+            Two,
+            Three
+        }
     }
 }

@@ -8,6 +8,11 @@ namespace StoryTeller.Engine
     {
         private readonly string[] _values;
 
+        public SelectionValuesAttribute(Type enumType)
+            : this(Enum.GetNames(enumType))
+        {
+        }
+
         public SelectionValuesAttribute(params string[] values)
         {
             if (values.Length == 0)
