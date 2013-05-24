@@ -1,5 +1,7 @@
 using System;
 using System.Windows.Controls;
+using System.Windows.Media;
+using FubuCore;
 using StoryTeller.Execution;
 using StoryTeller.UserInterface.Projects;
 using StoryTeller.UserInterface.Screens;
@@ -35,7 +37,19 @@ namespace StoryTeller.UserInterface.Controls
 
         #region IStatusView Members
 
-        public string SyntaxErrorText { set { syntaxErrors.Text = value; } }
+        public void SyntaxErrorCount(int count)
+        {
+            if (count == 0)
+            {
+                statusBar.Background = Brushes.DefaultColor;
+                syntaxErrors.Text = "No syntax errors";
+            }
+            else
+            {
+                statusBar.Background = Brushes.NegativeColor;
+                syntaxErrors.Text = "{0} syntax error(s)".ToFormat(count);
+            }
+        }
 
         public StatusPresenter Presenter { set { _presenter = value; } }
 

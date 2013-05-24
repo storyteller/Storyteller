@@ -117,6 +117,7 @@
     <Compile Include="Actions\IBindingExpression.cs" />
     <Compile Include="Actions\ShellService.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Brushes.cs" />
     <Compile Include="Commands\ActionMenuItem.cs" />
     <Compile Include="Commands\AddSuiteCommand.cs" />
     <Compile Include="Commands\AddTestCommand.cs" />
@@ -280,7 +281,6 @@
     <Compile Include="Examples\IFixtureNodeView.cs" />
     <Compile Include="Icon.cs" />
     <Compile Include="IApplicationShell.cs" />
-    <Compile Include="Icons\IconMarker.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Queue\QueuedItemFactory.cs" />
     <Compile Include="Queue\QueuedTestItem.xaml.cs">
@@ -511,54 +511,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\category.png" />
-    <EmbeddedResource Include="Icons\delete.png" />
-    <EmbeddedResource Include="Icons\filter.png" />
-    <EmbeddedResource Include="Icons\pending.gif" />
-    <EmbeddedResource Include="Icons\refresh.png" />
-    <Resource Include="Icons\run.png" />
-    <Resource Include="Icons\runAll.png" />
-    <EmbeddedResource Include="Icons\running.gif" />
-    <EmbeddedResource Include="Icons\runningError.gif" />
-    <EmbeddedResource Include="Icons\statusAborted.png" />
-    <EmbeddedResource Include="Icons\statusAll.png" />
-    <EmbeddedResource Include="Icons\statusFailed.png" />
-    <EmbeddedResource Include="Icons\statusIgnored.png" />
-    <EmbeddedResource Include="Icons\statusSuccess.png" />
-    <EmbeddedResource Include="Icons\statusUnknown.png" />
-    <Resource Include="Icons\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\runEmbedded.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\comment.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\minus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Icons\stopIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Editing\Scripts\Controls\cellInput.js" />
     <EmbeddedResource Include="Editing\Scripts\Controls\commentEditor.js" />
     <EmbeddedResource Include="Editing\Scripts\Controls\Paragraph.js" />
@@ -602,12 +554,12 @@
     <EmbeddedResource Include="Editing\Scripts\External\jquery.hotkeys-0.7.9.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Icons\tags.png" />
     <EmbeddedResource Include="Editing\Scripts\Controls\tagsEditor.js" />
     <Content Include="Editing\Scripts\editor.css" />
     <Content Include="Editing\Scripts\StyleTest.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Fonts\FontAwesome.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

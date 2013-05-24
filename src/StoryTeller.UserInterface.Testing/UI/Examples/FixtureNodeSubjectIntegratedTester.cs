@@ -44,7 +44,7 @@ namespace StoryTeller.UserInterface.Testing.UI.Examples
                 x.For<IScreen<IFixtureNode>>().Use<FixtureNodePresenter>();
             });
 
-            factory = new ScreenFactory(container);
+            factory = new ScreenFactory(container, null);
 
             fixture = new FixtureStructure("fixture1");
 

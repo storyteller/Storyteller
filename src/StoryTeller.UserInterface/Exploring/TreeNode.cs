@@ -22,7 +22,7 @@ namespace StoryTeller.UserInterface.Exploring
         private Func<TreeNode, IList<ActionMenuItem>> _buildItems = x => new ActionMenuItem[0];
         private bool _contextMenuInitialized;
         private Icon _icon;
-        private Image _image;
+        private TextBlock _textBlock;
         private Label _label;
 
         public TreeNode()
@@ -57,8 +57,8 @@ namespace StoryTeller.UserInterface.Exploring
             set
             {
                 _icon = value;
-                _image.SetIcon(_icon);
-
+                _textBlock.SetIcon(_icon);
+                _textBlock.Padding = new Thickness(0,2,4,0);
                 updateParentIcon();
             }
         }
@@ -89,10 +89,10 @@ namespace StoryTeller.UserInterface.Exploring
                 Orientation = Orientation.Horizontal,
                 Background = new SolidColorBrush(Colors.Transparent)
             };
-            _image = new Image();
+            _textBlock = new TextBlock();
             
 
-            stack.Children.Add(_image);
+            stack.Children.Add(_textBlock);
             _label = new Label
             {
                 Content = item.Name.GetLabelTextWithoutHotkey(),

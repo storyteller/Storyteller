@@ -53,6 +53,15 @@ namespace StoryTeller.UserInterface.Testing.UI.Screens
         }
     }
 
+    public class StubScreen1 : IScreen
+    {
+        public void Dispose() { }
+        public object View { get; private set; }
+        public string Title { get; private set; }
+        public void Activate(IScreenObjectRegistry screenObjects) { }
+        public bool CanClose() { return false; }
+    }
+
     public class StubScreen : IScreen
     {
         private readonly View _view = new View();

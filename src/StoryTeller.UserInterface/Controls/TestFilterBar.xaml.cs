@@ -23,7 +23,6 @@ namespace StoryTeller.UserInterface.Controls
         {
             InitializeComponent();
 
-
             _statusToggle = new ToggleBar<ResultStatus>(resultPanel, x => _observer.ResultStatusChanged(x), x =>
             {
                 x.Icon(Icon.AnyStatus, ResultStatus.All, "View all tests");
@@ -40,24 +39,18 @@ namespace StoryTeller.UserInterface.Controls
             });
         }
 
-
-        public ITestFilterObserver Observer { set { _observer = value; } }
+        public ITestFilterObserver Observer
+        {
+            set
+            {
+                _observer = value;
+                tagsFilter.AutoType("Tags", _observer);
+            }
+        }
 
         public void RunAll()
         {
             _observer.RunAll();
-        }
-
-
-        private void btnApply_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            _observer.TagFilterApplied(tagsFilter.Text.Trim());
-        }
-
-        private void btnClear_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            tagsFilter.Text = "";
-            _observer.TagFilterApplied(tagsFilter.Text.Trim());
         }
     }
 }

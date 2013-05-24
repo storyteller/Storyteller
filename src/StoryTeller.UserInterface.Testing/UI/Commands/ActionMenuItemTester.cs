@@ -25,7 +25,7 @@ namespace StoryTeller.UserInterface.Testing.UI.Commands
         [Test]
         public void the_icon_is_from_the_action()
         {
-            item.Icon.ShouldBeOfType<Image>().GetIcon().ShouldEqual(action.Icon);
+            item.Icon.ShouldBeOfType<TextBlock>().GetIcon().ShouldEqual(action.Icon);
         }
 
         [Test]

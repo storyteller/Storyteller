@@ -6,9 +6,9 @@
             <Label Margin="0 0 10 0">Test Name</Label>
             <TextBox Name="name" Width="300"></TextBox>
         </StackPanel>
-        <Button Margin="3" Padding="10 3 10 0"  HorizontalAlignment="Left" Name="create" IsDefault="True" Height="25" VerticalContentAlignment="Stretch">
+        <Button Margin="3" Padding="5 3 10 0"  HorizontalAlignment="Left" Name="create" IsDefault="True" Height="25" VerticalContentAlignment="Stretch">
             <StackPanel Orientation="Horizontal">
-                <Image Name="icon"></Image>
+                <TextBlock Name="icon" FontFamily="/Fonts/#FontAwesome" Margin="0 4 5 0">&#xf067;</TextBlock>
                 <Label Height="25" VerticalAlignment="Stretch">Create</Label>
             </StackPanel>
             

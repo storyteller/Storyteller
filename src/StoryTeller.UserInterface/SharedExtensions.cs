@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoryTeller.Engine;
+using StoryTeller.UserInterface.Controls;
 using StoryTeller.UserInterface.Projects;
 using StoryTeller.Workspace;
 
@@ -15,6 +17,7 @@ namespace StoryTeller.UserInterface
 {
     public static class SharedExtensions
     {
+
         public static ProjectToken ToProjectToken(this IProject project)
         {
             return new ProjectToken
@@ -22,6 +25,14 @@ namespace StoryTeller.UserInterface
                 Filename = project.FileName,
                 Name = project.Name
             };
+        }
+
+        public static void AutoType(this TextBox textBox ,string placeHolderText, ITestFilterObserver filterObserver)
+        {
+            textBox.Text = placeHolderText;
+            textBox.GotFocus += (s, a) => textBox.Text = textBox.Text == placeHolderText ? string.Empty : textBox.Text;
+            textBox.LostFocus += (s, a) => textBox.Text = string.IsNullOrEmpty(textBox.Text) ? placeHolderText : textBox.Text;
+            textBox.TextChanged += (s, a) => filterObserver.TagFilterApplied(textBox.Text == placeHolderText ? string.Empty : textBox.Text.Trim());
         }
 
         public static UserMessageResponse ToUserMessageResponse(this MessageBoxResult response)
@@ -68,21 +79,28 @@ namespace StoryTeller.UserInterface
 
         public static void SetIcon(this MenuItem item, Icon icon)
         {
-            var image = new Image();
-            image.SetIcon(icon);
-            item.Icon = image;
+            var textBlock = new TextBlock();
+            textBlock.SetIcon(icon);
+            item.Icon = textBlock;
         }
 
-        public static void SetIcon(this Image image, Icon icon)
+        public static void SetIcon(this TextBlock textBlock, Icon icon)
         {
-            image.Tag = icon;
+            var iconFont = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
+            if (textBlock == null || icon == null) return;
+            textBlock.Tag = icon;
+            textBlock.Text = icon.Name;
+            textBlock.FontFamily = iconFont;
+            textBlock.Foreground = icon.Foreground;
+        }
 
-            var source = new BitmapImage();
-            source.BeginInit();
-            source.StreamSource = icon.ImageStream();
-            source.EndInit();
-
-            image.Source = source;
+        public static void SetIcon(this ToggleButton textBlock, Icon icon)
+        {
+            var iconFont = new FontFamily(new Uri("pack://application:,,,/"), @"/Fonts/#FontAwesome");
+            textBlock.Tag = icon;
+            textBlock.Content = icon.Name;
+            textBlock.FontFamily = iconFont;
+            textBlock.Foreground = icon.Foreground;
         }
 
         public static void BackgroundIs(this Control element, Color color)
@@ -93,19 +111,11 @@ namespace StoryTeller.UserInterface
         public static ButtonExpression ToIconButton(this ButtonBase button, Icon icon)
         {
             button.ClickMode = ClickMode.Release;
-
-
-            var image = button.Content as Image;
-            if (image == null)
+            var textBlock = button.Content as TextBlock ?? new TextBlock
             {
-                image = new Image();
-                button.Content = image;
-
-                image.Width = 25;
-                image.Height = 25;
-            }
-
-            image.SetIcon(icon);
+                Width = 15, Height = 15
+            };
+            textBlock.SetIcon(icon);
 
             return new ButtonExpression(button);
         }
@@ -114,6 +124,13 @@ namespace StoryTeller.UserInterface
         {
             button.Click += (s, e) => action();
             return button.ToIconButton(icon);
+        }
+
+        public static ButtonExpression ToIconButton(this ToggleButton button, Icon icon, Action action)
+        {
+            button.Click += (s, e) => action();
+            button.SetIcon(icon);
+            return new ButtonExpression(button);
         }
 
         public static ButtonExpression ToIconButton(this ButtonBase button, Icon icon, ICommand command)
@@ -214,9 +231,9 @@ namespace StoryTeller.UserInterface
             return panel;
         }
 
-        public static Icon GetIcon(this Image image)
+        public static Icon GetIcon(this TextBlock textBlock)
         {
-            return image.Tag as Icon;
+            return textBlock.Tag as Icon;
         }
 
         public static void Add(this Grid grid, UIElement element, int rowIndex, int column)
@@ -421,6 +438,12 @@ namespace StoryTeller.UserInterface
         }
 
         #endregion
+
+
+        public static Brush FromHex(this SolidColorBrush solidColorBrush, string hex)
+        {
+            return (Brush)(new BrushConverter().ConvertFrom(hex));
+        }
     }
 
     public interface IReadOnlyDictionary<KEY, T> : IEnumerable<T>

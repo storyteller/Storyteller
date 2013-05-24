@@ -64,17 +64,19 @@ namespace StoryTeller.UserInterface
         #endregion
     }
 
-    
+
     public class ScreenRequested
     {
-        public IScreenLocator ScreenLocator {
+        public IScreenLocator ScreenLocator
+        {
             get;
-            set;}
+            set;
+        }
     }
 
     public class RefreshScreenHeaders
     {
-        
+
     }
 
     public class ScreenConductor : IScreenConductor
@@ -83,7 +85,6 @@ namespace StoryTeller.UserInterface
                                    , IListener<UserScreenActivation>
                                    , IListener<ScreenRequested>
                                    , IListener<RefreshScreenHeaders>
-
     {
         public static readonly string CAN_CLOSE_TITLE = "Is it okay to close StoryTeller?";
 
@@ -156,7 +157,8 @@ namespace StoryTeller.UserInterface
                 activate(screen);
             }
 
-            _screens.Show(screen);
+            if (screen != null)
+                _screens.Show(screen);
         }
 
         public void OpenScreen(INamedItem subject)
@@ -252,8 +254,11 @@ namespace StoryTeller.UserInterface
         private IScreen createNewActiveScreen(IScreenLocator _locator)
         {
             IScreen screen = _locator.CreateScreen(_factory);
-            activate(screen);
-            _screens.Add(screen);
+            if (screen != null)
+            {
+                activate(screen);
+                _screens.Add(screen);
+            }
             return screen;
         }
 
