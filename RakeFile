@@ -24,7 +24,7 @@ end
 	sln.fubudocs_enabled = true
 	
 	sln.defaults = [:ilrepack]
-	sln.ci_steps = [:ilrepack, :archive_gem]
+	sln.ci_steps = [:ilrepack]
 end
 
 require_relative 'ILRepack'
