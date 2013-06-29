@@ -37,5 +37,5 @@ end
 def merge_newtonsoft(dir, assembly)
 	output = File.join(dir, assembly)
 	packer = ILRepack.new :out => output, :lib => dir
-	packer.merge :lib => dir, :refs => [assembly, 'Newtonsoft.Json.dll']
+	packer.merge :lib => dir, :refs => [assembly, 'Newtonsoft.Json.dll'], :clrversion => @solution.options[:clrversion]
 end

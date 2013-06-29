@@ -33,6 +33,6 @@ class ILRepack
 
     src = params.fetch(:lib, '')
     refs = params.fetch(:refs, []).map {|f| File.join(src, f)}
-    sh Platform.runtime("#{@cmd} #{refs.join(' ')}")
+    sh Platform.runtime("#{@cmd} #{refs.join(' ')}", params[:clrversion])
   end
 end
