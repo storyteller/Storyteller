@@ -169,6 +169,10 @@
     <Compile Include="Editing\HTML\TagsTag.cs" />
     <Compile Include="Editing\HTML\TestEditorTag.cs" />
     <Compile Include="Editing\HTML\TextboxBuilder.cs" />
+    <Compile Include="Editing\EmbeddedFile.cs" />
+    <Compile Include="Editing\IEmbedFileType.cs" />
+    <Compile Include="Editing\Images\ImagePngFile.cs" />
+    <Compile Include="Editing\Scripts\JavascriptFile.cs" />
     <Compile Include="Exploring\IIconService.cs" />
     <Compile Include="Screens\TabCloser.xaml.cs">
       <DependentUpon>TabCloser.xaml</DependentUpon>
@@ -199,7 +203,7 @@
     <Compile Include="UIElementShortcutExtensions.cs" />
     <Compile Include="Workspace\TestResultHandler.cs" />
     <EmbeddedResource Include="Editing\Scripts\Controls\tableEditor.js" />
-    <Compile Include="Editing\Scripts\Embeds.cs" />
+    <Compile Include="Editing\Embeds.cs" />
     <Compile Include="Editing\TestEditorBuilder.cs" />
     <Compile Include="Editing\VersionHistory.cs" />
     <Compile Include="Exploring\ExplorerView.cs" />
@@ -536,9 +540,9 @@
     <EmbeddedResource Include="Editing\Scripts\External\jquery.hotkeys-0.7.9.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Editing\Scripts\upArrow.png" />
+    <EmbeddedResource Include="Editing\Images\upArrow.png" />
     <EmbeddedResource Include="Editing\Scripts\Controls\tagsEditor.js" />
-    <EmbeddedResource Include="Editing\Scripts\downArrow.png" />
+    <EmbeddedResource Include="Editing\Images\downArrow.png" />
     <Content Include="Editing\Scripts\editor.css" />
     <Content Include="Editing\Scripts\StyleTest.htm" />
   </ItemGroup>

@@ -25,12 +25,12 @@ a:hover {
 
 img {
   border: none;
-  height: 12px;
-  padding-top: 2px;
+  height: 10px;
+  padding-top: 4px;
 }
 
-.moveDownStep {
-  padding-left: 14px;
+.moveUpStep {
+  padding-right: 12px;
 }
 
 .tags-text {
@@ -96,6 +96,7 @@ div.section-title > a.deleteStep {
   border-width: 1px;
   margin: 0;
   padding: 5px;
+  padding-left: 0;
   font-size: 100%;
   font-weight: bold;
   font-size: 90%;

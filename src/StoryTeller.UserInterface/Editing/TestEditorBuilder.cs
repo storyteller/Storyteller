@@ -7,8 +7,8 @@ using StoryTeller.Execution;
 using StoryTeller.Model;
 using StoryTeller.Persistence;
 using StoryTeller.UserInterface.Editing.HTML;
-using StoryTeller.UserInterface.Editing.Scripts;
 using System.Linq;
+using StoryTeller.UserInterface.Editing.Scripts;
 
 namespace StoryTeller.UserInterface.Editing
 {
@@ -77,7 +77,7 @@ namespace StoryTeller.UserInterface.Editing
             var scripts = new string[] {JQUERY, STORYTELLER};
 
             Embeds.WriteFiles();
-            var files = Embeds.GetFiles();
+            var files = Embeds.GetFiles<JavascriptFile>();
 
             scripts.Each(s =>
             {

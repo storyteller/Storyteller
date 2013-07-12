@@ -16,9 +16,10 @@ namespace StoryTeller.UserInterface.Editing.HTML
 
         public AreaTag(string title) : this()
         {
-            var sectionTitle = _container.Add("div").AddClass("section-title").Text(title);
+            var sectionTitle = _container.Add("div").AddClass("section-title");
             sectionTitle.Add<MoveDownLinkTag>();
             sectionTitle.Add<MoveUpLinkTag>();
+            sectionTitle.Add("span").Text(title);
             sectionTitle.Add("a").AddClass("deleteStep").Text("delete").Attr("href", "#");
         }
 
