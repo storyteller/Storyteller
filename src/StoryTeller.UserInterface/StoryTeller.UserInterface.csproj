@@ -13,7 +13,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
@@ -144,6 +145,8 @@
     <Compile Include="Editing\HTML\AreaTag.cs" />
     <Compile Include="Editing\HTML\CellBuilderLibrary.cs" />
     <Compile Include="Editing\HTML\CellTag.cs" />
+    <Compile Include="Editing\HTML\MoveDownLinkTag.cs" />
+    <Compile Include="Editing\HTML\MoveUpLinkTag.cs" />
     <Compile Include="Editing\HTML\DeleteIconTag.cs" />
     <Compile Include="Editing\HTML\DropdownCellBuilder.cs" />
     <Compile Include="Editing\HTML\GrammarSelector.cs" />
