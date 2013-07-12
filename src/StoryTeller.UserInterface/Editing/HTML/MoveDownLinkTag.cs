@@ -1,5 +1,6 @@
 using HtmlTags;
 using StoryTeller.Model;
+using StoryTeller.UserInterface.Editing.Scripts;
 
 namespace StoryTeller.UserInterface.Editing.HTML
 {
@@ -10,8 +11,9 @@ namespace StoryTeller.UserInterface.Editing.HTML
         }
 
         public MoveDownLinkTag(FixtureStructure fixture) :
-            base("Move Down", "#", GrammarConstants.MOVEDOWN_STEP)
+            base("", "#", GrammarConstants.MOVEDOWN_STEP)
         {
+            Add("img").Attr("src", "data:image/png;base64," + Embeds.ResourceFileToBase64("downArrow.png"));
         }
     }
 }

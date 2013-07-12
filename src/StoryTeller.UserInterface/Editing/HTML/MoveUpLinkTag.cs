@@ -1,5 +1,6 @@
-using HtmlTags;
+﻿using HtmlTags;
 using StoryTeller.Model;
+using StoryTeller.UserInterface.Editing.Scripts;
 
 namespace StoryTeller.UserInterface.Editing.HTML
 {
@@ -11,8 +12,9 @@ namespace StoryTeller.UserInterface.Editing.HTML
         }
 
         public MoveUpLinkTag(FixtureStructure fixture)
-            : base("Move Up", "#", GrammarConstants.MOVEUP_STEP)
+            : base("", "#", GrammarConstants.MOVEUP_STEP)
         {
+            Add("img").Attr("src", "data:image/png;base64," + Embeds.ResourceFileToBase64("upArrow.png"));
         }
     }
 }

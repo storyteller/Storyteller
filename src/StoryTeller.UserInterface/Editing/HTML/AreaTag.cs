@@ -1,5 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
 using HtmlTags;
+using StoryTeller.Domain;
 using StoryTeller.Model;
 
 namespace StoryTeller.UserInterface.Editing.HTML

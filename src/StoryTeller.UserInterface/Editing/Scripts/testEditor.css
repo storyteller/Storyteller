@@ -23,6 +23,16 @@ a:hover {
   text-decoration: underline;
 }
 
+img {
+  border: none;
+  height: 12px;
+  padding-top: 2px;
+}
+
+.moveDownStep {
+  padding-left: 14px;
+}
+
 .tags-text {
   font-family: Courier New;
   font-size: 75%;

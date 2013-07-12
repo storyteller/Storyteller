@@ -68,8 +68,6 @@ namespace StoryTeller.UserInterface.Editing.Scripts
             var names = Assembly.GetExecutingAssembly().GetManifestResourceNames();
             foreach (var name in names)
             {
- 
-                
                 if (Path.GetExtension(name) == ".js")
                 {
                     yield return new JavascriptFile(name);
@@ -113,6 +111,16 @@ namespace StoryTeller.UserInterface.Editing.Scripts
                     }
                 }
             });
+        }
+
+        public static string ResourceFileToBase64(string fileName)
+        {
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(Embeds), fileName);
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                return Convert.ToBase64String(memoryStream.ToArray());
+            }
         }
     }
 

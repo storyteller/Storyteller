@@ -536,7 +536,9 @@
     <EmbeddedResource Include="Editing\Scripts\External\jquery.hotkeys-0.7.9.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Editing\Scripts\upArrow.png" />
     <EmbeddedResource Include="Editing\Scripts\Controls\tagsEditor.js" />
+    <EmbeddedResource Include="Editing\Scripts\downArrow.png" />
     <Content Include="Editing\Scripts\editor.css" />
     <Content Include="Editing\Scripts\StyleTest.htm" />
   </ItemGroup>

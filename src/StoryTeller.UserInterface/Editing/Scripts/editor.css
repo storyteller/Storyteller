@@ -6,7 +6,7 @@
 
 a
 {
-    color:#AAA;
+  color:#AAA;
 	font-size:smaller;
 	margin-left: 5px;
 	font-weight: normal;
@@ -24,7 +24,6 @@ a:hover {
 	font-family: Courier New;
 	font-size:75%;
 }
-
 
 .comment-editor-holder > textarea
 {
