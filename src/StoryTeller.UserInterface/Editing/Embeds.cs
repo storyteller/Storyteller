@@ -47,7 +47,7 @@ namespace StoryTeller.UserInterface.Editing
             GetFiles<ImagePngFile>().Each(WriteFile);
         }
 
-        public static void WriteFile(EmbeddedFile file)
+        private static void WriteFile(EmbeddedFile file)
         {
             if (!Directory.Exists(file.Folder))
             {
