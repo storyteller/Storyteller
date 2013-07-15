@@ -23,7 +23,8 @@ a:hover {
   text-decoration: underline;
 }
 
-img {
+.moveUpStep img,
+.moveDownStep img {
   border: none;
   height: 10px;
   padding-top: 4px;
