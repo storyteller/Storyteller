@@ -1,7 +1,8 @@
 using NUnit.Framework;
 using StoryTeller.Testing;
-using StoryTeller.UserInterface.Editing.Scripts;
+using StoryTeller.UserInterface.Editing;
 using System.Linq;
+using StoryTeller.UserInterface.Editing.Scripts;
 
 namespace StoryTeller.UserInterface.Testing.UI.Editing
 {
@@ -22,16 +23,29 @@ namespace StoryTeller.UserInterface.Testing.UI.Editing
         [Test]
         public void get_javascript_files()
         {
-            Embeds.GetFiles().Any().ShouldBeTrue();
+            Embeds.GetFiles<JavascriptFile>().Any().ShouldBeTrue();
+        }
+
+        [Test]
+        public void get_png_files()
+        {
+            Embeds.GetFiles<ImagePngFile>().Any().ShouldBeTrue();
         }
 
         [Test]
         public void smoke_test_javascript_file()
         {
-            var file = Embeds.GetFiles().First(x => x.FileName == "testEditor.js");
+            var file = Embeds.GetFiles<JavascriptFile>().First(x => x.FileName == "testEditor.js");
             file.Contents().ShouldNotBeEmpty();
             file.Folder.ShouldEqual("Controls");
-            
+        }
+
+        [Test]
+        public void smoke_test_png_file()
+        {
+            var file = Embeds.GetFiles<ImagePngFile>().First(x => x.FileName == "upArrow.png");
+            file.Data().Length.ShouldBeGreaterThan(0);
+            file.Folder.ShouldEqual("Images");
         }
 
         [Test]

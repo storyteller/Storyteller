@@ -10,6 +10,8 @@ ST.tableEditor = function (div, metadata, step) {
 
 
     $('.deleteStep').removable();
+    $('.moveUpStep').moveable(true);
+    $('.moveDownStep').moveable(false);
 
     div.addColumn = function (column) {
         div.update();

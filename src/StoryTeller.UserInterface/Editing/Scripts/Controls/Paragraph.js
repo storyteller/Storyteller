@@ -3,6 +3,8 @@ ST.paragraph = function (div, metadata, step) {
     div.container = $('.section-container', div).get(0);
 
     $('.deleteStep', div).removable();
+    $('.moveUpStep', div).moveable(true);
+    $('.moveDownStep', div).moveable(false);
 
     ST.activateGrammars(div.container, step);
 

@@ -8,9 +8,6 @@ namespace StoryTeller.Samples.Grammars
         public FailureFixture()
         {
             throw new NotImplementedException();
-
-
-            
         }
     }
 
