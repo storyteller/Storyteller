@@ -1,5 +1,4 @@
 using StoryTeller.Domain;
-using StoryTeller.Model;
 
 namespace StoryTeller.UserInterface.Tests
 {
