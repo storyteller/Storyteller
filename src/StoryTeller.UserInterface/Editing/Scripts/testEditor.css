@@ -23,6 +23,17 @@ a:hover {
   text-decoration: underline;
 }
 
+.moveUpStep img,
+.moveDownStep img {
+  border: none;
+  height: 10px;
+  padding-top: 4px;
+}
+
+.moveUpStep {
+  padding-right: 12px;
+}
+
 .tags-text {
   font-family: Courier New;
   font-size: 75%;
@@ -86,6 +97,7 @@ div.section-title > a.deleteStep {
   border-width: 1px;
   margin: 0;
   padding: 5px;
+  padding-left: 0;
   font-size: 100%;
   font-weight: bold;
   font-size: 90%;

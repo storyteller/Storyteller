@@ -6,6 +6,8 @@ ST.sectionEditor = function (section, metadata, step) {
     section.fixture = metadata.fixture;
 
     $('.deleteStep', section).removable();
+    $('.moveUpStep', section).moveable(true);
+    $('.moveDownStep', section).moveable(false);
 
     if (step.key() == "Test" || $(section).hasClass('top-node')) {
         section.leaf = step;

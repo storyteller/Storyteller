@@ -1,4 +1,6 @@
+using System.Security.Cryptography.X509Certificates;
 using HtmlTags;
+using StoryTeller.Domain;
 using StoryTeller.Model;
 
 namespace StoryTeller.UserInterface.Editing.HTML
@@ -14,8 +16,11 @@ namespace StoryTeller.UserInterface.Editing.HTML
 
         public AreaTag(string title) : this()
         {
-            _container.Add("div").AddClass("section-title").Text(title)
-                .Add("a").AddClass("deleteStep").Text("delete").Attr("href", "#");
+            var sectionTitle = _container.Add("div").AddClass("section-title");
+            sectionTitle.Add<MoveDownLinkTag>();
+            sectionTitle.Add<MoveUpLinkTag>();
+            sectionTitle.Add("span").Text(title);
+            sectionTitle.Add("a").AddClass("deleteStep").Text("delete").Attr("href", "#");
         }
 
         public HtmlTag Container

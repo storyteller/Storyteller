@@ -23,6 +23,25 @@ $.fn.removable = function() {
     });
 }
 
+$.fn.moveable = function(moveUp) {
+  return this.each(function(i, link) {
+    $(link).click(function() {
+      var $step = $(link).closest('.step');
+
+      if (!moveUp) {
+        $step = $step.next();
+      }
+
+      var section = $(link).closest('.section').get(0),
+          $prevStep = $step.prev();
+
+      $step.after($prevStep);
+
+      section.stepsChanged();
+    });
+  });
+}
+
 $.fn.applyBehavior = function(extender, target) {
     return this.each(function(index, element) {
         extender(element, $(element).metadata(), target);

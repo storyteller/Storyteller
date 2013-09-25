@@ -26,6 +26,8 @@ namespace StoryTeller.UserInterface.Editing.HTML
         public static readonly string LEAF_NAME = "leafName";
         public static readonly string MAX = "max";
         public static readonly string MAX_LENGTH = "maxlength";
+        public static readonly string MOVEUP_STEP = "moveUpStep";
+        public static readonly string MOVEDOWN_STEP = "moveDownStep";
         public static readonly string NUMBER = "number";
         public static readonly string PARAGRAPH = "paragraph";
         public static readonly string REQUIRED = "required";
