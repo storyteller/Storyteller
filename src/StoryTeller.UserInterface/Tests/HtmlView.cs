@@ -1,6 +1,8 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Navigation;
+using HtmlTags;
 
 namespace StoryTeller.UserInterface.Tests
 {
@@ -16,8 +18,11 @@ namespace StoryTeller.UserInterface.Tests
     public class HtmlView : ContentControl, IHtmlView
     {
         private readonly WebBrowser _browser = new WebBrowser();
+        private readonly string _emptyPage = new HtmlDocument().ToString();
         private string _html = "<html></html>";
         private string _previousCommand = string.Empty;
+        private string _path;
+        private bool _doOpenFile;
 
         public HtmlView()
         {
@@ -28,6 +33,8 @@ namespace StoryTeller.UserInterface.Tests
             _browser.Visibility = Visibility.Visible;
 
             Loaded += (x, y) => _browser.NavigateToString(_html);
+
+            _browser.Navigated += BrowserNavigated;
         }
 
         #region IHtmlView Members
@@ -52,14 +59,24 @@ namespace StoryTeller.UserInterface.Tests
 
         public void OpenFile(string path)
         {
-            _browser.Navigate(new Uri(path));
+            _doOpenFile = true;
+            _path = path;
+            _browser.NavigateToString(_emptyPage);
+        }
+
+        public void BrowserNavigated(object sender, NavigationEventArgs e)
+        {
+            if (_doOpenFile)
+            {
+                _doOpenFile = false;
+                _browser.Navigate(new Uri(_path));
+            }
         }
 
         public void CaptureFocus()
         {
             _browser.Focus();
         }
-
 
         public void RunCommand(string command)
         {
