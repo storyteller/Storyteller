@@ -29,6 +29,8 @@ namespace StoryTeller.Workspace
         [XmlIgnore]
         string ProjectFolder { get; set; }
 
+        string Profile { get; set; }
+
         string GetTargetFile();
         string GetTestFolder();
     }

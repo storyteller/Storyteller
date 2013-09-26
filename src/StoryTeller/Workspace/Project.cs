@@ -48,6 +48,7 @@ namespace StoryTeller.Workspace
             set { _binaryFolder = value; }
         }
 
+        public string Profile { get; set; }
         public int NumberOfTestRetries { get; set; }
 
         public string TestFolder
@@ -57,6 +58,9 @@ namespace StoryTeller.Workspace
         }
 
         public string CompileTarget { get; set; }
+
+        public static IProject Current { get; set; }
+
 
         [XmlIgnore]
         public string ProjectFolder
@@ -185,9 +189,9 @@ namespace StoryTeller.Workspace
 
         public string GetBaseProjectFolder()
         {
-            if (string.IsNullOrEmpty(_fileName))
+            if (String.IsNullOrEmpty(_fileName))
             {
-                return string.Empty;
+                return String.Empty;
             }
 
             return Path.GetDirectoryName(_fileName);
@@ -206,7 +210,7 @@ namespace StoryTeller.Workspace
 
         private string getRootPath(string folder)
         {
-            if (folder.IsEmpty()) return string.Empty;
+            if (folder.IsEmpty()) return String.Empty;
 
             if (Path.IsPathRooted(folder))
             {

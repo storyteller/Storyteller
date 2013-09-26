@@ -53,6 +53,11 @@ namespace StoryTeller.UserInterface.Testing.Integration
         private TestEngine engine;
         private StubLibraryListener listener;
 
+        [Test]
+        public void should_set_the_current_project()
+        {
+            Project.Current.ShouldBeTheSameAs(project);
+        }
 
         [Test, Explicit]
         public void broadcasts_a_FixtureLibraryLoaded_message_in_recycle()

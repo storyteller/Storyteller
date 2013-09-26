@@ -113,6 +113,7 @@ namespace StoryTeller.UserInterface.Testing.UI.Running
         private Test test2;
         private Test test3;
         private Test test4;
+        private Project theProject;
 
         protected override void beforeEach()
         {
@@ -126,8 +127,10 @@ namespace StoryTeller.UserInterface.Testing.UI.Running
             ClassUnderTest.QueueTest(test3);
             ClassUnderTest.QueueTest(test4);
 
-            ClassUnderTest.Handle(new ProjectLoaded(null));
+            theProject = new Project();
+            ClassUnderTest.Handle(new ProjectLoaded(theProject));
         }
+
 
         [Test]
         public void all_of_the_tests_should_be_removed_from_the_queue()

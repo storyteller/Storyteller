@@ -55,13 +55,19 @@ namespace StoryTeller.Execution
 
         public void Handle(ProjectLoaded message)
         {
+            Workspace.Project.Current = message.Project;
             _project = message.Project;
             _watcher.WatchBinariesAt(_project.GetBinaryFolder());
 
             reload();
         }
 
-        public IProject Project { get { return _project; } set { _project = value; } }
+
+        public IProject Project
+        {
+            get { return _project; } 
+            set { _project = value; }
+        }
 
         public void LoadSynchronously(IProject project)
         {
