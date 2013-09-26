@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using FubuCore.Util;
 using FubuCore;
+using StoryTeller.Execution;
 using StoryTeller.Model;
 
 namespace StoryTeller.Engine
@@ -82,31 +83,7 @@ namespace StoryTeller.Engine
         }
 
 
-        // TODO -- this is so common here and in FubuMVC, just get something into FubuCore
-        public static IEnumerable<Assembly> AssembliesFromPath(string path)
-        {
 
-
-            var assemblyPaths = Directory.GetFiles(path)
-                .Where(file =>
-                       Path.GetExtension(file).Equals(
-                           ".dll",
-                           StringComparison.OrdinalIgnoreCase));
-
-            foreach (string assemblyPath in assemblyPaths)
-            {
-                Assembly assembly = null;
-                try
-                {
-                    assembly = Assembly.LoadFrom(assemblyPath);
-                }
-                catch
-                {
-                }
-
-                if (assembly != null) yield return assembly;
-            }
-        }
 
         public static FixtureGraph ForAssemblies(params string[] names)
         {
@@ -116,15 +93,7 @@ namespace StoryTeller.Engine
 
         private static FixtureGraph forAppDomain()
         {
-            var list = new List<string>() {AppDomain.CurrentDomain.SetupInformation.ApplicationBase};
-
-            var binPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
-            if (binPath.IsNotEmpty())
-            {
-                list.Add(binPath);
-            }
-
-            var assemblies = list.SelectMany(AssembliesFromPath);
+            var assemblies = FixtureAssembly.FindApplicationAssemblies();
 
             return new FixtureGraph(assemblies);
         }

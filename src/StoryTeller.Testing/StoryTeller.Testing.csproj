@@ -12,7 +12,8 @@
     <AssemblyName>StoryTeller.Testing</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
@@ -220,6 +221,10 @@
     <ProjectReference Include="..\Examples\Examples.csproj">
       <Project>{B52EADC1-DDD4-452C-83ED-4A148302D424}</Project>
       <Name>Examples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
+      <Project>{CAE54634-A689-4CF2-979E-CCBCCA8A3644}</Project>
+      <Name>StoryTeller.Gallery</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
       <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>

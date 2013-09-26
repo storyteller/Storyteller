@@ -73,7 +73,7 @@ namespace StoryTeller.Execution
             _publisher = (IEventPublisher)remotePublisher;
 
             // TODO -- if fails, do a Thread.Sleep and try again
-            _system = fixtureAssembly.System;
+            _system = fixtureAssembly.FindSystem();
             ProjectFileSystem.RootFolder = fixtureAssembly.RootFolder;
 
             try
