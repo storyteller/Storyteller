@@ -24,7 +24,7 @@ namespace StoryTeller.Execution
         public ProjectRunner(IEnumerable<Project> projects, string resultsFile)
         {
             _projects.AddRange(projects);
-            _resultsFile = resultsFile;
+            _resultsFile = resultsFile ?? "st-results.htm";
 
             var containingFolder = new FileInfo(_resultsFile).Directory.FullName;
             _resultsFolder = Path.Combine(containingFolder, "results");

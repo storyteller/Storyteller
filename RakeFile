@@ -23,7 +23,7 @@ end
 	sln.ripple_enabled = true
 	sln.fubudocs_enabled = true
 	
-	sln.defaults = [:ilrepack]
+	sln.defaults = [:ilrepack, :smoke_test_st_run]
 	sln.ci_steps = [:ilrepack]
 end
 
@@ -38,4 +38,9 @@ def merge_newtonsoft(dir, assembly)
 	output = File.join(dir, assembly)
 	packer = ILRepack.new :out => output, :lib => dir
 	packer.merge :lib => dir, :refs => [assembly, 'Newtonsoft.Json.dll'], :clrversion => @solution.options[:clrversion]
+end
+
+desc "Runs the ST command against the gallery project.  Should succeed"
+task :smoke_test_st_run => [:compile] do
+  sh "src/ST/bin/#{@solution.compilemode}/ST run src/Storyteller.Gallery -c #{@solution.compilemode}"
 end

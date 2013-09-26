@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Test name="Pushing Calculator Buttons" lifecycle="Acceptance">
+<Test name="Pushing Calculator Buttons" lifecycle="Regression">
   <Calculator>
     <StartWith value="5" />
     <Add value="3" />

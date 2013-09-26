@@ -32,3 +32,8 @@ src/StoryTeller/StoryTeller.csproj.DotSettings.user
 logs
 Gemfile.lock
 history.xml
+st-results
+st-results.htm
+src/StoryTeller.Samples.Storyteller.Samples-results
+src/StoryTeller.Samples/Storyteller.Samples-results
+*.stresult
