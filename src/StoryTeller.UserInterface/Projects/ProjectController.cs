@@ -212,7 +212,7 @@ namespace StoryTeller.UserInterface.Projects
 
             ProjectToken token = _history.LastAccessed;
             bool projectLoaded = false;
-            while (token != null)
+            while (token != null && token.Filename.IsNotEmpty()) // got a little clumsier w/ new anonymous projects
             {
                 if (LoadProject(token))
                 {

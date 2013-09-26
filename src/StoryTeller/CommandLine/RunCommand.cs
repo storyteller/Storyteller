@@ -56,6 +56,12 @@ namespace StoryTeller.CommandLine
     [CommandDescription("Run a suite of StoryTeller tests")]
     public class RunCommand : FubuCommand<RunInput>
     {
+        public RunCommand()
+        {
+            Usage("Execute").Arguments(x => x.Path);
+            Usage("Execute and save results").Arguments(x => x.Path, x => x.ResultsFile);
+        }
+
         public override bool Execute(RunInput input)
         {
             var project = input.LoadProject();

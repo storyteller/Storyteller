@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+using FubuCore;
 
 namespace StoryTeller.UserInterface.Projects
 {
@@ -23,6 +24,8 @@ namespace StoryTeller.UserInterface.Projects
 
         public void Store(ProjectToken token)
         {
+            if (token.Filename.IsEmpty()) return;
+
             if (_projects.Contains(token))
             {
                 _projects.Remove(token);

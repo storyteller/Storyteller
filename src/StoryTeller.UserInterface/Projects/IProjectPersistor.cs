@@ -1,5 +1,7 @@
 using System;
+using FubuCore;
 using StoryTeller.Workspace;
+using FileSystem = StoryTeller.Workspace.FileSystem;
 
 namespace StoryTeller.UserInterface.Projects
 {
@@ -44,6 +46,9 @@ namespace StoryTeller.UserInterface.Projects
 
         public void SaveProject(IProject project)
         {
+            // We have inferred projects now
+            if (project.FileName.IsEmpty()) return;
+
             _system.PersistToFile(project, project.FileName);
         }
 

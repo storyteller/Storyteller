@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Threading;
+using FubuCore.CommandLine;
 using StoryTeller;
+using StoryTeller.CommandLine;
 using StoryTeller.UserInterface;
 using StoryTeller.UserInterface.Projects;
 using StoryTeller.Workspace;
@@ -14,8 +18,6 @@ namespace StoryTellerUI
     /// </summary>
     public partial class App : Application
     {
-
-
         protected override void OnStartup(StartupEventArgs e)
         {
             var application = Application.Current;
@@ -28,11 +30,14 @@ namespace StoryTellerUI
 
             if (e.Args.Length > 0)
             {
-                var projectFile = e.Args[0];
-                ObjectFactory.GetInstance<IProjectController>().LoadProject(new ProjectToken()
-                {
-                    Filename = projectFile
-                });
+                var controller = ObjectFactory.GetInstance<IProjectController>();
+
+                var args = ArgPreprocessor.Process(e.Args);
+                var queue = new Queue<string>(args);
+                var input = new RunCommand().Usages.BuildInput(queue).As<RunInput>();
+                var project = input.LoadProject();
+
+                controller.StartNewProject(project);
             }
 
             //application.Run(window);

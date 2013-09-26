@@ -21,6 +21,8 @@ namespace StoryTeller.Engine
 
             var stringifier = new Stringifier();
             Services.Add(stringifier);
+
+            Services.Add(new EquivalenceChecker());
         }
 
         void IDisposable.Dispose()

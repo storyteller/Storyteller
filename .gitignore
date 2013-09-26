@@ -31,3 +31,4 @@ src/StoryTeller/StoryTeller.csproj.DotSettings.user
 *.DotSettings.user
 logs
 Gemfile.lock
+history.xml

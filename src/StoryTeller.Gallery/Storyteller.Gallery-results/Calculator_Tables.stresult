@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<TestResult xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ExecutionTime="0.4076494" ExceptionText="" WasCancelled="false" Locator="Calculator Tables">
+  <Html>&lt;!DOCTYPE html&gt;
+&lt;html&gt;&lt;head&gt;&lt;title&gt;&lt;/title&gt;&lt;style&gt;body {
+  font-family: Calibri, Verdana;
+  font-size: .95em;
+  color: #111;
+  line-height: 1.5em;
+  background-color: #EBEBEB;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  color: #AAA;
+  margin-left: 5px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #000080;
+  text-decoration: underline;
+}
+
+h5 {
+  margin: 0;
+  padding-left: 10px;
+}
+
+div, h2, h3, h4 {
+  width: auto;
+}
+
+.input {
+  font-style: italic;
+}
+
+.exception {
+  background-color: #FFFFAA;
+}
+
+.sentence {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.paragraph {
+  color: #222222;
+  background-color: #FCFDFD;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-top: 0;
+}
+
+.caption {
+  padding: 0;
+  margin-left: 20px;
+}
+
+.results {
+  color: #3B3B3B;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-top: solid 1px #6B6B6B;
+  border-bottom: solid 1px #6B6B6B;
+}
+
+div.pass &gt; span.input, div.pass &gt; span.fact, tr.pass &gt; td, SPAN.pass, td.pass, .results-pass {
+  background-color: #AAFFAA;
+}
+
+div.fail &gt; span.input, div.fail &gt; span.fact, span.fail, tr.fail &gt; td, td.fail, .results-fail {
+  background-color: #FFAAAA;
+}
+
+div.fail &gt; span.input, div.pass &gt; span.input {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+span.fail, span.pass, span.fact {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+span.fact {
+  padding-top: 1px;
+  padding-bottom: 0;
+}
+
+.comment-text {
+  padding: 3px;
+}
+
+.Comment {
+  color: #525252;
+  border: 1px dotted #CCC;
+  white-space: pre;
+  word-wrap: break-word;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  overflow: visible;
+}
+
+.TestTags {
+  margin-top: 3px;
+  margin-bottom: 3px;
+  overflow: visible;
+}
+
+.tags-text {
+  background: none repeat scroll 0 0;
+  padding: 3px;
+  font-size: 75%;
+  color: #A8A8A8;
+}
+
+.section {
+  color: #222222;
+  background-color: #FCFDFD;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.section-body {
+  border-bottom: 2px solid #4F4F4F;
+  border-left: 2px solid #4F4F4F;
+  border-right: 2px solid #4F4F4F;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+h3.section-title {
+  border: 2px solid #4F4F4F;
+  background-color: #EBEAEA;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.section-title {
+  background-color: #EBEAEA;
+  border-color: #FAFAFA #DDDDDD #D2D2D2;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0;
+  padding: 5px;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.TitledAndIndented {
+  padding-bottom: 20px;
+}
+
+.main {
+  background-color: #fff;
+  padding-bottom: 20px;
+  overflow: visible;
+}
+
+.main &gt; h2 {
+  border-top: solid 2px #007ACC;
+  margin: 0;
+  padding: 10px 10px 0px 10px;
+}
+
+.main &gt; h5 {
+  color: #707070;
+}
+
+.main .homelink {
+  background-color: #EBEAEA;
+  border-color: #FAFAFA #DDDDDD #D2D2D2;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0;
+  padding: 2px;
+  padding-left: 10px;
+}
+
+.main-content {
+  padding: 4px 10px;
+}
+
+.behavior {
+  border: solid thin black;
+  margin: 20px;
+  padding: 10px;
+}
+
+.content {
+  background-color: #dddddd;
+  overflow: scroll;
+}
+
+.chainId {
+  font-size: smaller;
+}
+
+.summary {
+  margin: 5px 10px;
+}
+
+#version-display {
+  float: right;
+  font-size: small;
+  font-weight: normal;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #BFBFBF;
+  border-collapse: collapse;
+}
+
+table.table th {
+  background-color: #EBEAEA;
+  border-right: 1px dotted #BFBFBF;
+  border-bottom: 1px solid #BFBFBF;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 6px 6px 6px 12px;
+}
+
+table.table td {
+  color: #4f6b72;
+  border-right: 1px dotted #BFBFBF;
+  border-bottom: 1px solid #BFBFBF;
+  padding: 3px 3px 3px 6px;
+}
+
+td.fail, td.pass, td.exception {
+  color: #000 !important;
+}
+
+td.left-cell, th.left-cell  {
+  border-left: 1px solid #C1DAD7;
+}
+
+.table-title {
+  font-size: 90%;
+  color: #E17009;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.table-container {
+  margin-left: 20px;
+}
+
+td.exception-cell {
+  padding: 0 !important;
+  margin: 0;
+}
+
+table.setverification &gt; tbody &gt; tr &gt; td {
+  font-style: italic;
+  padding-right: 10px;
+}
+
+.paragraph div {
+  margin-left: 20px;
+}
+
+.paragraph-title, h3.embedded-title {
+  color: #E17009;
+  font-weight: bold;
+  margin-left: 0 !important;
+}
+
+h3.embedded-title {
+  margin-bottom: 2px;
+  padding-bottom: 0;
+}
+
+div.paragraph &gt; div.step {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+div.embedded &gt; div {
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.section-title {
+  background: #CAE8EA url('images/bg_header.jpg') no-repeat;
+  border-color: #FAFAFA #DDDDDD #D2D2D2;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0;
+  padding: 5px;
+  font-size: 100%;
+  font-weight: bold;
+}
+
+.exception-zone {
+  padding-top: 0;
+  border-bottom: solid 1px #000;
+  border-top: solid 1px #000;
+}
+
+.exception-zone &gt; pre {
+  padding-top: 0;
+  padding-bottom: 2px;
+  overflow: visible;
+  padding-left: 10px;
+  padding-right: 10px;
+}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;div id="testEditor" class="main test-editor"&gt;&lt;h2 class="testName"&gt;Calculator Tables&lt;/h2&gt;&lt;h5&gt;Suite: Storyteller.Gallery&lt;/h5&gt;&lt;div class="results results-pass"&gt;Succeeded with Rights: 7, Wrongs: 0, Exceptions: 0, SyntaxErrors: 0&lt;/div&gt;&lt;div class="container section test-editor"&gt;&lt;div&gt;&lt;div class="step-holder"&gt;&lt;div class="section"&gt;&lt;h3 title="StoryTeller.Gallery.Fixtures.CalculatorFixture" class="section-title"&gt;Calculator&lt;/h3&gt;&lt;div class="section-body"&gt;&lt;div&gt;&lt;div class="table-title"&gt;The sum of two columns should be&lt;/div&gt;&lt;div class="table-container table-cell"&gt;&lt;table cellpadding="0" cellspacing="0" class="table"&gt;&lt;thead&gt;&lt;tr&gt;&lt;th class="left-cell"&gt;x&lt;/th&gt;&lt;th&gt;y&lt;/th&gt;&lt;th&gt;sum&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="input left-cell"&gt;2&lt;/td&gt;&lt;td class="input"&gt;3&lt;/td&gt;&lt;td class="input pass"&gt;5&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="input left-cell"&gt;3&lt;/td&gt;&lt;td class="input"&gt;4&lt;/td&gt;&lt;td class="input pass"&gt;7&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="input left-cell"&gt;4&lt;/td&gt;&lt;td class="input"&gt;5&lt;/td&gt;&lt;td class="input pass"&gt;9&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;div class="table-title"&gt;table&lt;/div&gt;&lt;div class="table-container table-cell"&gt;&lt;table cellpadding="0" cellspacing="0" class="table"&gt;&lt;thead&gt;&lt;tr&gt;&lt;th class="left-cell"&gt;X&lt;/th&gt;&lt;th&gt;Y&lt;/th&gt;&lt;th&gt;Sum&lt;/th&gt;&lt;th&gt;Product&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="input left-cell"&gt;3&lt;/td&gt;&lt;td class="input"&gt;2&lt;/td&gt;&lt;td class="input pass"&gt;5&lt;/td&gt;&lt;td class="input pass"&gt;6&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="input left-cell"&gt;4&lt;/td&gt;&lt;td class="input"&gt;3&lt;/td&gt;&lt;td class="input pass"&gt;7&lt;/td&gt;&lt;td class="input pass"&gt;12&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</Html>
+  <Counts Rights="7" Wrongs="0" Exceptions="0" SyntaxErrors="0" />
+  <FullExceptionText />
+</TestResult>
