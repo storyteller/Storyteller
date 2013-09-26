@@ -9,7 +9,7 @@ namespace StoryTeller.Execution
     [Serializable]
     public class FixtureAssembly
     {
-        private string _systemTypeName;
+        private readonly string _systemTypeName;
         private bool _hasFound = false;
 
         [NonSerialized] private ISystem _system;

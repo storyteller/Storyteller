@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using FubuCore;
-using FubuCore.Util;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Persistence;
@@ -17,14 +15,15 @@ namespace StoryTeller.Workspace
         private string _fileName;
         private string _projectFolder;
         private int _timeoutInSeconds;
+        private string _binaryFolder;
+        private string _testFolder = "Tests";
 
         public Project()
         {
             TimeoutInSeconds = 60;
             Options = new CodegenOptions();
 
-            TestFolder = "Tests";
-            BinaryFolder = Path.Combine("bin","debug");
+            CompileTarget = "debug";
         }
 
         public Project(string filename)
@@ -34,6 +33,7 @@ namespace StoryTeller.Workspace
         }
 
         public CodegenOptions Options { get; set; }
+
         public string GetTargetFile()
         {
             return getCorrectPath(Options.TargetFile);
@@ -41,9 +41,22 @@ namespace StoryTeller.Workspace
 
 
         public string FixtureAssembly { get; set; }
-        public string BinaryFolder { get; set; }
+
+        public string BinaryFolder
+        {
+            get { return _binaryFolder; }
+            set { _binaryFolder = value; }
+        }
+
         public int NumberOfTestRetries { get; set; }
-        public string TestFolder { get; set; }
+
+        public string TestFolder
+        {
+            get { return _testFolder ?? "Tests"; }
+            set { _testFolder = value; }
+        }
+
+        public string CompileTarget { get; set; }
 
         [XmlIgnore]
         public string ProjectFolder
@@ -66,7 +79,6 @@ namespace StoryTeller.Workspace
                 {
                     _projectFolder = Path.GetFullPath(".");
                 }
-
             }
         }
 
@@ -82,7 +94,11 @@ namespace StoryTeller.Workspace
             }
         }
 
-        public int TimeoutInSeconds { get { return _timeoutInSeconds > 0 ? _timeoutInSeconds : 5; } set { _timeoutInSeconds = value; } }
+        public int TimeoutInSeconds
+        {
+            get { return _timeoutInSeconds > 0 ? _timeoutInSeconds : 5; }
+            set { _timeoutInSeconds = value; }
+        }
 
         public string SystemTypeName { get; set; }
         public string Name { get; set; }
@@ -92,7 +108,9 @@ namespace StoryTeller.Workspace
 
         public string GetBinaryFolder()
         {
-            return getCorrectPath(BinaryFolder);
+            var folder = _binaryFolder.IsNotEmpty() ? _binaryFolder : Path.Combine("bin", CompileTarget ?? "debug");
+
+            return getCorrectPath(folder);
         }
 
         public Hierarchy LoadTests()
@@ -106,13 +124,13 @@ namespace StoryTeller.Workspace
 
         public void Save(Test test)
         {
-            string path = GetTestPath(test);
+            var path = GetTestPath(test);
             new TestWriter().WriteToFile(test, path);
         }
 
         public void DeleteFile(Test test)
         {
-            string path = GetTestPath(test);
+            var path = GetTestPath(test);
             if (File.Exists(path))
             {
                 File.Delete(path);
@@ -128,7 +146,7 @@ namespace StoryTeller.Workspace
 
         public ITestRunner LocalRunner()
         {
-            Type type = Type.GetType(SystemTypeName);
+            var type = Type.GetType(SystemTypeName);
             var runner = Activator.CreateInstance(type).As<ITestRunner>();
 
             return runner;
@@ -136,7 +154,7 @@ namespace StoryTeller.Workspace
 
         public void CreateDirectory(Suite suite)
         {
-            string path = Path.Combine(GetTestFolder(), suite.GetFolder());
+            var path = Path.Combine(GetTestFolder(), suite.GetFolder());
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -178,7 +196,7 @@ namespace StoryTeller.Workspace
         private string getCorrectPath(string folder)
         {
             var path = getRootPath(folder);
-            if(path.EndsWith("debug", StringComparison.OrdinalIgnoreCase) && !Directory.Exists(path))
+            if (path.EndsWith("debug", StringComparison.OrdinalIgnoreCase) && !Directory.Exists(path))
             {
                 path = Path.Combine(path.Substring(0, path.Length - 5), "release");
             }
@@ -188,7 +206,6 @@ namespace StoryTeller.Workspace
 
         private string getRootPath(string folder)
         {
-
             if (folder.IsEmpty()) return string.Empty;
 
             if (Path.IsPathRooted(folder))
@@ -197,12 +214,12 @@ namespace StoryTeller.Workspace
             }
 
 
-            string projectFolder = Path.IsPathRooted(ProjectFolder)
-                                       ? ProjectFolder
-                                       : Path.GetFullPath(ProjectFolder);
+            var projectFolder = Path.IsPathRooted(ProjectFolder)
+                ? ProjectFolder
+                : Path.GetFullPath(ProjectFolder);
 
 
-            string path = Path.Combine(projectFolder, folder);
+            var path = Path.Combine(projectFolder, folder);
             return Path.GetFullPath(path);
         }
 
@@ -214,7 +231,7 @@ namespace StoryTeller.Workspace
 
         public string GetTestPath(Test test)
         {
-            string fileName = test.FileName;
+            var fileName = test.FileName;
             return Path.Combine(GetTestFolder(), fileName);
         }
 
@@ -267,12 +284,10 @@ namespace StoryTeller.Workspace
         }
 
         public IList<string> Messages { get; private set; }
+
         public bool IsValid
         {
-            get
-            {
-                return !Messages.Any();
-            }
+            get { return !Messages.Any(); }
         }
     }
 }

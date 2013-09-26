@@ -1,22 +1,13 @@
-using System;
 using System.IO;
-using DirectionFixtures;
-using FubuCore.Conversion;
+using FubuCore;
 using NUnit.Framework;
-using StateFixtures;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Persistence;
-using StoryTeller.Samples;
 using StoryTeller.Workspace;
-using System.Linq;
-using StructureMap;
-using TestContext = StoryTeller.Engine.TestContext;
 
 namespace StoryTeller.Testing.Workspace
 {
-
-
     [TestFixture]
     public class ProjectTester
     {
@@ -28,6 +19,41 @@ namespace StoryTeller.Testing.Workspace
         }
 
         #endregion
+
+        [Test]
+        public void default_test_folder()
+        {
+            var project = new Project();
+            project.TestFolder.ShouldEqual("Tests");
+        }
+
+        [Test]
+        public void default_compile_target()
+        {
+            new Project().CompileTarget.ShouldEqual("debug");
+        }
+
+        [Test]
+        public void default_binary_folder()
+        {
+            new Project {ProjectFolder = "foo", CompileTarget = "retail"}.GetBinaryFolder()
+                .ShouldEqual(Path.Combine("foo", "bin", "retail").ToFullPath());
+        }
+
+        [Test]
+        public void use_the_overridden_binary_folder_if_desired()
+        {
+            new Project {ProjectFolder = "foo", BinaryFolder = "bin"}
+                .GetBinaryFolder()
+                .ShouldEqual(Path.Combine("foo", "bin").ToFullPath());
+        }
+
+        [Test]
+        public void use_the_compile_target_to_determine_the_binary_folder()
+        {
+            new Project { ProjectFolder = "foo", CompileTarget = "release"}.GetBinaryFolder()
+                .ShouldEqual(Path.Combine("foo", "bin", "release").ToFullPath());
+        }
 
         [Test]
         public void create_a_directory()
@@ -83,14 +109,14 @@ namespace StoryTeller.Testing.Workspace
             {
                 TestFolder = "tests"
             };
-            Hierarchy hierarchy = DataMother.BuildHierarchy(@"
+            var hierarchy = DataMother.BuildHierarchy(@"
 t1,Success
 s1/t2,Success
 s1/s2/t3,Success
 ");
 
 
-            Test test = hierarchy.FindTest("t1");
+            var test = hierarchy.FindTest("t1");
 
             project.GetTestPath(test).ShouldEqual(@"c:\a\b\c\d\tests\t1.xml");
             project.GetTestPath(hierarchy.FindTest("s1/t2")).ShouldEqual(@"c:\a\b\c\d\tests\s1\t2.xml");
@@ -104,13 +130,13 @@ s1/s2/t3,Success
             {
                 TestFolder = "tests"
             };
-            Hierarchy hierarchy = DataMother.BuildHierarchy(@"
+            var hierarchy = DataMother.BuildHierarchy(@"
 t1,Success
 s1/t2,Success
 s1/s2/t3,Success
 ");
 
-            Test test = hierarchy.FindTest("t1");
+            var test = hierarchy.FindTest("t1");
             test.FileName = "TheBigTest.xml";
 
             project.GetTestPath(test).ShouldEqual(@"c:\a\b\c\d\tests\TheBigTest.xml");
@@ -158,7 +184,7 @@ s1/s2/t3,Success
 
             project.Save(test);
 
-            Test test2 = new TestReader().ReadFromFile(test.FileName);
+            var test2 = new TestReader().ReadFromFile(test.FileName);
             test2.Name.ShouldEqual(test.Name);
             test2.Parts.Count.ShouldEqual(1);
 
@@ -215,25 +241,34 @@ s1/s2/t3,Success
         {
             File.Exists("New_Name.xml");
 
-            Test test2 = new TestReader().ReadFromFile("New_Name.xml");
+            var test2 = new TestReader().ReadFromFile("New_Name.xml");
             test2.Parts[0].ShouldBeOfType<Comment>().Text.ShouldEqual("some comment");
         }
-
-        
     }
-
-
 }
 
 namespace StateFixtures
 {
-    public class OhioFixture : Fixture{}
-    public class WisconsinFixture : Fixture{}
-    public class IllinoisFixture : Fixture{}
+    public class OhioFixture : Fixture
+    {
+    }
+
+    public class WisconsinFixture : Fixture
+    {
+    }
+
+    public class IllinoisFixture : Fixture
+    {
+    }
 }
 
 namespace DirectionFixtures
 {
-    public class NorthFixture : Fixture{}
-    public class SouthFixture : Fixture{}
+    public class NorthFixture : Fixture
+    {
+    }
+
+    public class SouthFixture : Fixture
+    {
+    }
 }
