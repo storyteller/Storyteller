@@ -23,7 +23,7 @@ end
 	sln.ripple_enabled = true
 	sln.fubudocs_enabled = true
 	
-	sln.defaults = [:ilrepack, :smoke_test_st_run]
+	sln.defaults = [:ilrepack, :smoke_test_st_run, :smoke_test_st_specs]
 	sln.ci_steps = [:ilrepack]
 end
 
@@ -44,3 +44,8 @@ desc "Runs the ST command against the gallery project.  Should succeed"
 task :smoke_test_st_run => [:compile] do
   sh "src/ST/bin/#{@solution.compilemode}/ST run src/Storyteller.Gallery -c #{@solution.compilemode}"
 end
+
+desc "Runs the st specs command against the gallery project.  Should succeed"
+task :smoke_test_st_specs => [:compile] do
+  sh "src/ST/bin/#{@solution.compilemode}/ST specs src/Storyteller.Gallery specs -c #{@solution.compilemode}"
+end 

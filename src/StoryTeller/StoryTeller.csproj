@@ -78,6 +78,9 @@
     </Compile>
     <Compile Include="Assertions\StorytellerAssertionException.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
+    <Compile Include="CommandLine\RunInput.cs" />
+    <Compile Include="CommandLine\SpecsCommand.cs" />
+    <Compile Include="CommandLine\SpecsInput.cs" />
     <Compile Include="DecoratedLineGrammar.cs" />
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Tags.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="Engine\NulloSystem.cs" />
     <Compile Include="Execution\FixtureAssembly.cs" />
     <Compile Include="Execution\OpenHtmlOption.cs" />
+    <Compile Include="Execution\PreviewSummary.cs" />
     <Compile Include="Execution\ProjectFileSystem.cs" />
     <Compile Include="Execution\ProjectTestRunner.cs" />
     <Compile Include="Html\TableContainerTag.cs" />

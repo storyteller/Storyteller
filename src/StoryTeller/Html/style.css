@@ -314,3 +314,12 @@ div.embedded > div {
   padding-left: 10px;
   padding-right: 10px;
 }
+
+
+.summary-table a {
+    color: black;
+}
+
+.summary-table th {
+    text-align: left;
+}
