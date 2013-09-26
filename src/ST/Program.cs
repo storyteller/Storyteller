@@ -1,5 +1,6 @@
 ﻿using System;
 using FubuCore.CommandLine;
+using StoryTeller.CommandLine;
 
 namespace ST
 {
@@ -12,7 +13,7 @@ namespace ST
             try
             {
                 var factory = new CommandFactory();
-                factory.RegisterCommands(typeof (Program).Assembly);
+                factory.RegisterCommands(typeof (RunCommand).Assembly);
 
                 var executor = new CommandExecutor(factory);
                 success = executor.Execute(args);

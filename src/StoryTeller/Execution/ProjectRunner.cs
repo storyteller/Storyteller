@@ -15,18 +15,16 @@ namespace StoryTeller.Execution
     {
         private readonly IDictionary<Lifecycle, TestCount> _counts = new Dictionary<Lifecycle, TestCount>();
         private readonly string _historyFolder;
-        private readonly IEnumerable<string> _projectFiles;
         private readonly string _resultsFile;
         private readonly string _resultsFolder;
         private readonly IResultsSummary _summary = new ResultsSummary();
         private readonly IFileSystem _system = new FileSystem();
-        private IList<IProject> _projects;
+        private IList<IProject> _projects = new List<IProject>();
 
-        public ProjectRunner(IEnumerable<string> projectFiles, string resultsFile)
+        public ProjectRunner(IEnumerable<Project> projects, string resultsFile)
         {
-            _projectFiles = projectFiles;
+            _projects.AddRange(projects);
             _resultsFile = resultsFile;
-
 
             var containingFolder = new FileInfo(_resultsFile).Directory.FullName;
             _resultsFolder = Path.Combine(containingFolder, "results");
@@ -47,11 +45,6 @@ namespace StoryTeller.Execution
             {
                 prepareResultsFolder();
 
-                _projects = _projectFiles.Select(file =>
-                {
-                    Console.WriteLine("Loading Project at " + file);
-                    return Project.LoadFromFile(file) as IProject;
-                }).ToList();
 
                 var names = _projects.Select(x => x.Name).ToArray().Join(", ");
                 _summary.Start("Project(s):  " + names, DateTime.Now);

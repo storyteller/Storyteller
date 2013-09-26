@@ -278,6 +278,15 @@ namespace StoryTeller.Workspace
 
             return messages;
         }
+
+        public static Project ForDirectory(string directory)
+        {
+            return new Project
+            {
+                ProjectFolder = directory,
+                Name = Path.GetFileName(directory)
+            };
+        }
     }
 
     public class ProjectValidationMessages

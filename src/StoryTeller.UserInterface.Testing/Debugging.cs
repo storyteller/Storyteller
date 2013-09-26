@@ -75,15 +75,6 @@ namespace StoryTeller.UserInterface.Testing
         }
 
         [Test]
-        public void project_runner_smoke_tester()
-        {
-            var runner =
-                new ProjectRunner(new[] { @"c:\svn\blue\RuleTests.xml", @"c:\svn\blue\SDKTests.xml", @"c:\svn\blue\Storyteller.xml" }, @"c:\svn\blue\results");
-
-            runner.Execute();
-        }
-
-        [Test]
         public void open_the_application()
         {
             var project = Project.LoadFromFile(@"c:\svn\blue\storyteller.xml");

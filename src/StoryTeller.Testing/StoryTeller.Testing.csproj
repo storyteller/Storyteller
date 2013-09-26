@@ -99,6 +99,7 @@
     <Compile Include="AbortTestSmokeTester.cs" />
     <Compile Include="Bugs\MethodFactDoesNotUpdateTheCounts.cs" />
     <Compile Include="Codegen\ProjectRunnerCodegenServiceTester.cs" />
+    <Compile Include="CommandLine\RunInputTester.cs" />
     <Compile Include="CommentTester.cs" />
     <Compile Include="DataMother.cs" />
     <Compile Include="DisplayParserTester.cs" />
