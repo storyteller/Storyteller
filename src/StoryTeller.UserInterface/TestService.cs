@@ -31,6 +31,7 @@ namespace StoryTeller.UserInterface
         public void Handle(ProjectLoaded message)
         {
             Project = message.Project;
+            StoryTeller.Workspace.Project.Current = message.Project; // Has to be here!!!!
         }
 
         public void Start()
