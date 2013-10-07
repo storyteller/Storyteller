@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using FubuCore;
 using StoryTeller.Engine;
-using StoryTeller.Model;
 using StoryTeller.Workspace;
-using StructureMap.Graph;
 
 namespace StoryTeller.Execution
 {
@@ -28,7 +25,13 @@ namespace StoryTeller.Execution
             _systemTypeName = project.SystemTypeName;
             RootFolder = project.GetTestFolder();
             AssemblyName = Path.GetFileNameWithoutExtension(project.ProjectFolder);
+            Profile = project.Profile;
         }
+
+
+        public string AssemblyName { get; set; }
+        public string RootFolder { get; set; }
+        public string Profile { get; set; }
 
         public virtual IEnumerable<Type> FindSystemTypes()
         {
@@ -36,13 +39,11 @@ namespace StoryTeller.Execution
                 FindApplicationAssemblies()
                     .Where(x => x.GetName().Name != Assembly.GetExecutingAssembly().GetName().Name)
                     .SelectMany(
-                        x => x.GetExportedTypes().Where(type => type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor())).ToArray();
+                        x =>
+                            x.GetExportedTypes()
+                                .Where(type => type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor()))
+                    .ToArray();
         }
-
-
-
-        public string AssemblyName { get; set; }
-        public string RootFolder { get; set; }
 
         public Type DetermineSystemType()
         {
@@ -51,10 +52,10 @@ namespace StoryTeller.Execution
                 return Type.GetType(_systemTypeName);
             }
 
-            var candidates = FindSystemTypes();
+            IEnumerable<Type> candidates = FindSystemTypes();
             if (candidates.Count() == 1) return candidates.Single();
 
-            var specificAssemblyTypes = candidates.Where(x => x.Assembly.GetName().Name == AssemblyName).ToArray();
+            Type[] specificAssemblyTypes = candidates.Where(x => x.Assembly.GetName().Name == AssemblyName).ToArray();
             if (specificAssemblyTypes.Count() == 1) return specificAssemblyTypes.Single();
 
             // TODO -- might just wanna have this blow up later
@@ -64,16 +65,16 @@ namespace StoryTeller.Execution
 
         public ISystem FindSystem()
         {
-            var systemType = DetermineSystemType() ?? typeof(NulloSystem);
+            Type systemType = DetermineSystemType() ?? typeof (NulloSystem);
             return Activator.CreateInstance(systemType).As<ISystem>();
         }
 
         // TODO -- I like this pattern better than other things we've used
         public static IEnumerable<Assembly> FindApplicationAssemblies()
         {
-            var list = new List<string>() { AppDomain.CurrentDomain.SetupInformation.ApplicationBase };
+            var list = new List<string> {AppDomain.CurrentDomain.SetupInformation.ApplicationBase};
 
-            var binPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
+            string binPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
             if (binPath.IsNotEmpty())
             {
                 list.Add(binPath);
@@ -85,7 +86,7 @@ namespace StoryTeller.Execution
         // TODO -- this is so common here and in FubuMVC, just get something into FubuCore
         public static IEnumerable<Assembly> AssembliesFromPath(string path)
         {
-            var assemblyPaths = Directory.GetFiles(path)
+            IEnumerable<string> assemblyPaths = Directory.GetFiles(path)
                 .Where(file =>
                     Path.GetExtension(file).Equals(
                         ".dll",

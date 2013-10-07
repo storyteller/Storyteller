@@ -5,6 +5,7 @@ using StoryTeller.Engine;
 using StoryTeller.Model;
 using System.Collections.Generic;
 using FubuCore;
+using StoryTeller.Workspace;
 
 namespace StoryTeller.Execution
 {
@@ -75,6 +76,11 @@ namespace StoryTeller.Execution
             // TODO -- if fails, do a Thread.Sleep and try again
             _system = fixtureAssembly.FindSystem();
             ProjectFileSystem.RootFolder = fixtureAssembly.RootFolder;
+
+            Project.Current = new Project
+            {
+                Profile = fixtureAssembly.Profile
+            };
 
             try
             {
