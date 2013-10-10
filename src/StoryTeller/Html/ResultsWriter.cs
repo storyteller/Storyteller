@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using FubuCore;
 using HtmlTags;
@@ -10,8 +9,8 @@ namespace StoryTeller.Html
 {
     public class ResultsWriter : ITestStream
     {
-        private readonly HtmlDocument _document;
         private readonly ITestContext _context;
+        private readonly HtmlDocument _document;
         private StepResults _paragraphResults;
 
         public ResultsWriter(ITestContext context)
@@ -27,13 +26,16 @@ namespace StoryTeller.Html
             _document.AddStyle(HtmlClasses.CSS());
         }
 
-        public HtmlDocument Document { get { return _document; } }
+        public HtmlDocument Document
+        {
+            get { return _document; }
+        }
 
         void ITestStream.Tags(Tags tags)
         {
             _document.Add(new TagsTag(tags));
         }
-        
+
         void ITestStream.Comment(Comment comment)
         {
             _document.Add(new CommentTag(comment));
@@ -123,17 +125,14 @@ namespace StoryTeller.Html
         void ITestStream.StartTest(Test test)
         {
             var testHolder = new TestHolderTag();
-            
+
             _document.Add(testHolder);
             testHolder.TestName.Text(test.Name);
             testHolder.WriteSuiteName("Suite: " + test.SuiteName);
             testHolder.WriteResults(_context.Counts);
-            
 
-            _context.ResultsFor(test).ForExceptionText(text =>
-            {
-                _document.Add(new ExceptionTag(text));
-            });
+
+            _context.ResultsFor(test).ForExceptionText(text => _document.Add(new ExceptionTag(text)));
 
             _document.PushWithoutAttaching(testHolder.CreateStepHolder());
         }
@@ -143,6 +142,8 @@ namespace StoryTeller.Html
             if (_context.TraceText.IsEmpty()) return;
 
             _document.Add("hr");
+
+            _context.TraceTags().Each(tag => _document.Add(tag));
 
             _document.Add("pre").Text(_context.TraceText);
         }
@@ -154,10 +155,7 @@ namespace StoryTeller.Html
 
         void ITestStream.Do(DoGrammarStructure structure, IStep step)
         {
-            _paragraphResults.ForExceptionText(text =>
-            {
-                _document.Add(new ExceptionTag(text));
-            });
+            _paragraphResults.ForExceptionText(text => _document.Add(new ExceptionTag(text)));
         }
     }
 }

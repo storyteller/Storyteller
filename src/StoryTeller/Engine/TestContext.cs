@@ -9,6 +9,7 @@ using FubuCore;
 using FubuCore.Conversion;
 using FubuCore.Formatting;
 using FubuCore.Util;
+using HtmlTags;
 using StoryTeller.Domain;
 
 namespace StoryTeller.Engine
@@ -46,11 +47,6 @@ namespace StoryTeller.Engine
         string TraceText { get; }
         void Trace(string text);
 
-
-
-
-
-
         // TODO -- ISP anyone?
         IGrammar FindGrammar(string grammarKey);
         void LoadFixture(string fixtureKey, ITestPart part);
@@ -61,7 +57,7 @@ namespace StoryTeller.Engine
         IFixture RetrieveFixture<T>() where T : IFixture, new();
         IFixture RetrieveFixture(string fixtureName);
 
-
+        IEnumerable<HtmlTag> TraceTags();
     }
 
     public static class TestContextExtensions
@@ -176,6 +172,12 @@ namespace StoryTeller.Engine
             fixture.Context = this;
 
             return fixture;
+        }
+
+        public IEnumerable<HtmlTag> TraceTags()
+        {
+            var extension = _execution as IResultsExtension;
+            return extension == null ? new HtmlTag[0] : extension.Tags();
         }
 
         public IGrammar FindGrammar(string grammarKey)

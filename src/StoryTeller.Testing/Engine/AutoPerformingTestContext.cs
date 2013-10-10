@@ -4,6 +4,7 @@ using FubuCore;
 using FubuCore.Conversion;
 using FubuCore.Formatting;
 using FubuCore.Util;
+using HtmlTags;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 
@@ -140,6 +141,11 @@ namespace StoryTeller.Testing.Engine
         public IFixture RetrieveFixture(string fixtureName)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<HtmlTag> TraceTags()
+        {
+            return new HtmlTag[0];
         }
 
         public IObjectConverter Finder { get; set; }
