@@ -41,7 +41,7 @@ namespace StoryTeller.Execution
                     .SelectMany(
                         x =>
                             x.GetExportedTypes()
-                                .Where(type => type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor()))
+                                .Where(type => type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor() && !type.IsOpenGeneric()))
                     .ToArray();
         }
 
