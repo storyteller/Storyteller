@@ -39,10 +39,26 @@ namespace StoryTeller.Execution
                 FindApplicationAssemblies()
                     .Where(x => x.GetName().Name != Assembly.GetExecutingAssembly().GetName().Name)
                     .SelectMany(
-                        x =>
-                            x.GetExportedTypes()
-                                .Where(type => type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor() && !type.IsOpenGeneric()))
+                        x => {
+                            try
+                            {
+                                return x.GetExportedTypes().Where(IsSystemTypeCandidate);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Unable to scan types in assembly " + x.GetName().FullName);
+                                Console.WriteLine(e);
+
+                                return new Type[0];
+                            }
+                        })
                     .ToArray();
+        }
+
+        public static bool IsSystemTypeCandidate(Type type)
+        {
+            return type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor() &&
+                   !type.IsOpenGeneric();
         }
 
         public Type DetermineSystemType()
