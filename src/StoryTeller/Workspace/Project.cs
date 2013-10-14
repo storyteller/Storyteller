@@ -281,12 +281,36 @@ namespace StoryTeller.Workspace
 
         public static Project ForDirectory(string directory)
         {
-            return new Project
+            var project = new Project
             {
                 ProjectFolder = directory,
                 Name = Path.GetFileName(directory)
             };
+
+            var fileSystem = new FubuCore.FileSystem();
+            var files = fileSystem.FindFiles(directory, FileSet.Shallow("*.config"));
+            var candidates = files.Where(x => Path.GetFileName(x).EqualsIgnoreCase("App.config") || Path.GetFileName(x).EqualsIgnoreCase("Web.config"));
+            if (candidates.Any())
+            {
+                project.ConfigurationFileName = candidates.First().ToFullPath();
+            }
+            else
+            {
+                var possibleFile = Path.GetFileName(directory) + ".dll.config";
+                candidates = fileSystem.FindFiles(directory, FileSet.Deep(possibleFile));
+                if (candidates.Any())
+                {
+                    project.ConfigurationFileName = candidates.First().ToFullPath();
+                }
+            }
+
+
+            // Auto-find the config file here.
+
+
+            return project;
         }
+
     }
 
     public class ProjectValidationMessages

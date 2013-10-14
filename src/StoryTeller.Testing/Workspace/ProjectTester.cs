@@ -5,6 +5,8 @@ using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Persistence;
 using StoryTeller.Workspace;
+using FileSystem = FubuCore.FileSystem;
+using IFileSystem = FubuCore.IFileSystem;
 
 namespace StoryTeller.Testing.Workspace
 {
@@ -243,6 +245,63 @@ s1/s2/t3,Success
 
             var test2 = new TestReader().ReadFromFile("New_Name.xml");
             test2.Parts[0].ShouldBeOfType<Comment>().Text.ShouldEqual("some comment");
+        }
+    }
+
+    [TestFixture]
+    public class when_determining_the_config_file_if_none_specified
+    {
+        private IFileSystem fileSystem = new FileSystem();
+
+        [SetUp]
+        public void SetUp()
+        {
+            fileSystem.DeleteDirectory("Foo");
+        }
+
+        [Test]
+        public void use_app_config_if_it_exists()
+        {
+            fileSystem.WriteStringToFile("Foo".AppendPath("App.config"), "anything");
+
+            Project.ForDirectory("Foo")
+                .ConfigurationFileName.ShouldEqual("Foo".AppendPath("App.config").ToFullPath());
+        }
+
+        [Test]
+        public void use_app_config_if_it_exists_2()
+        {
+            fileSystem.WriteStringToFile("Foo".AppendPath("app.config"), "anything");
+
+            Project.ForDirectory("Foo")
+                .ConfigurationFileName.ShouldEqual("Foo".AppendPath("app.config").ToFullPath());
+        }
+
+        [Test]
+        public void use_web_config_if_it_exists()
+        {
+            fileSystem.WriteStringToFile("Foo".AppendPath("Web.config"), "anything");
+
+            Project.ForDirectory("Foo")
+                .ConfigurationFileName.ShouldEqual("Foo".AppendPath("Web.config").ToFullPath());
+        }
+
+        [Test]
+        public void use_web_config_if_it_exists_2()
+        {
+            fileSystem.WriteStringToFile("Foo".AppendPath("web.config"), "anything");
+
+            Project.ForDirectory("Foo")
+                .ConfigurationFileName.ShouldEqual("Foo".AppendPath("web.config").ToFullPath());
+        }
+
+        [Test]
+        public void use_assembly_name_dll_config_file_if_it_exists()
+        {
+            fileSystem.WriteStringToFile("Foo".AppendPath("Foo.dll.config"), "anything");
+
+            Project.ForDirectory("Foo").ConfigurationFileName
+                .ShouldEqual("Foo".AppendPath("Foo.dll.config").ToFullPath());
         }
     }
 }
