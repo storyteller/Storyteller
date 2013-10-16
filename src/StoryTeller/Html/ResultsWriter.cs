@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FubuCore;
 using HtmlTags;
 using StoryTeller.Domain;
@@ -139,11 +140,13 @@ namespace StoryTeller.Html
 
         void ITestStream.EndTest(Test test)
         {
-            if (_context.TraceText.IsEmpty()) return;
+            IEnumerable<HtmlTag> traceTags = _context.TraceTags().ToArray();
+
+            if (_context.TraceText.IsEmpty() || !traceTags.Any()) return;
 
             _document.Add("hr");
-
-            _context.TraceTags().Each(tag => _document.Add(tag));
+            
+            traceTags.Each(tag => _document.Add(tag));
 
             _document.Add("pre").Text(_context.TraceText);
         }
