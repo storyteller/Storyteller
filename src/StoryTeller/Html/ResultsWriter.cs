@@ -142,8 +142,6 @@ namespace StoryTeller.Html
         {
             IEnumerable<HtmlTag> traceTags = _context.TraceTags().ToArray();
 
-            if (_context.TraceText.IsEmpty() || !traceTags.Any()) return;
-
             _document.Add("hr");
             
             traceTags.Each(tag => _document.Add(tag));
