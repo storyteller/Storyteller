@@ -57,6 +57,7 @@ namespace StoryTeller.Execution
         {
             Workspace.Project.Current = message.Project;
             _project = message.Project;
+            _stopConditions.TimeoutInSeconds = _project.TimeoutInSeconds;
             _watcher.WatchBinariesAt(_project.GetBinaryFolder());
 
             reload();
