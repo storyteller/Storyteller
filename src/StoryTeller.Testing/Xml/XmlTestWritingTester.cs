@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Xml;
 using NUnit.Framework;
 using StoryTeller.Domain;
@@ -21,7 +24,7 @@ namespace StoryTeller.Testing.Xml
                 .WithStep("grammar3", "f:6")
                 .WithComment("a bunch of text");
 
-            test.Section("Contact")
+            var section = test.Section("Contact")
                 .WithStep("grammar4", "g:7,h:8")
                 .WithStep("grammar5", step =>
                 {
@@ -31,9 +34,12 @@ namespace StoryTeller.Testing.Xml
                 });
 
 
+
             XmlDocument document = new TestWriter().Write(test);
 
             element = document.DocumentElement;
+
+            Debug.WriteLine(element.OuterXml);
         }
 
         #endregion
@@ -91,12 +97,17 @@ namespace StoryTeller.Testing.Xml
         [Test]
         public void should_have_written_children_nodes_of_step_with_children_steps()
         {
-            element.SelectSingleNode("Contact/grammar5").Should(x =>
+            var node = element.SelectSingleNode("Contact/grammar5");
+            Debug.WriteLine(node.OuterXml);
+
+            node.Should(x =>
             {
                 x.ShouldNotBeNull();
                 x.CountOfChildNodesShouldBe(2);
-                x.ChildNodes[0].ShouldHaveName("child1").FirstChild.ShouldHaveAttributes("t:1,v:2");
-                x.ChildNodes[1].ShouldHaveName("child2");
+
+                // Watch the ordering here.  Not order dependent in real life
+                x.ChildNodes[1].ShouldHaveName("child1").FirstChild.ShouldHaveAttributes("t:1,v:2");
+                x.ChildNodes[0].ShouldHaveName("child2");
             });
         }
 

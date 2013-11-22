@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 using StoryTeller.Domain;
 
@@ -40,7 +41,7 @@ namespace StoryTeller.Testing.Domain
 
             leaf.ClearAttribute("a");
 
-            leaf.GetAllUniqueAttributes().ShouldHaveTheSameElementsAs("b", "c", "d", "e");
+            leaf.GetAllUniqueAttributes().OrderBy(x => x).ShouldHaveTheSameElementsAs("b", "c", "d", "e");
         }
 
         [Test]
@@ -71,7 +72,7 @@ namespace StoryTeller.Testing.Domain
             leaf.Add(new Step().With("e:1"));
             leaf.Add(new Step().With("a:1,b:2,c:3"));
 
-            leaf.GetAllUniqueAttributes().ShouldHaveTheSameElementsAs("a", "b", "c", "d", "e");
+            leaf.GetAllUniqueAttributes().OrderBy(x => x).ShouldHaveTheSameElementsAs("a", "b", "c", "d", "e");
         }
 
         [Test]
