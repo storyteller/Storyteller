@@ -28,7 +28,6 @@ namespace StoryTeller.Execution
             Profile = project.Profile;
         }
 
-
         public string AssemblyName { get; set; }
         public string RootFolder { get; set; }
         public string Profile { get; set; }
