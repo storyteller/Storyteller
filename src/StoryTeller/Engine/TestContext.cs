@@ -46,6 +46,8 @@ namespace StoryTeller.Engine
         Counts Counts { get; }
         string TraceText { get; }
         void Trace(string text);
+        void Trace(HtmlTag tag);
+
 
         // TODO -- ISP anyone?
         IGrammar FindGrammar(string grammarKey);
@@ -58,6 +60,8 @@ namespace StoryTeller.Engine
         IFixture RetrieveFixture(string fixtureName);
 
         IEnumerable<HtmlTag> TraceTags();
+
+        
     }
 
     public static class TestContextExtensions
@@ -176,8 +180,25 @@ namespace StoryTeller.Engine
 
         public IEnumerable<HtmlTag> TraceTags()
         {
+            foreach (var tracedTag in _tracedTags)
+            {
+                yield return tracedTag;
+            }
+
             var extension = _execution as IResultsExtension;
-            return extension == null ? new HtmlTag[0] : extension.Tags();
+            if (extension != null)
+            {
+                foreach (var htmlTag in extension.Tags())
+                {
+                    yield return htmlTag;
+                }
+            }
+        }
+
+        private readonly IList<HtmlTag> _tracedTags = new List<HtmlTag>(); 
+        public void Trace(HtmlTag tag)
+        {
+            _tracedTags.Add(tag);
         }
 
         public IGrammar FindGrammar(string grammarKey)

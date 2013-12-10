@@ -108,6 +108,11 @@ namespace StoryTeller.Testing.Engine
             throw new NotImplementedException();
         }
 
+        public void Trace(HtmlTag tag)
+        {
+            throw new NotImplementedException();
+        }
+
         public IGrammar FindGrammar(string grammarKey)
         {
             throw new NotImplementedException();
