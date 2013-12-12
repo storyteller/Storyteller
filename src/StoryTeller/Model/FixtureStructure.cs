@@ -38,7 +38,7 @@ namespace StoryTeller.Model
     {
         private readonly List<GrammarError> _errors = new List<GrammarError>();
         private readonly string _name;
-        private readonly Cache<string, GrammarStructure> _structures = new Cache<string, GrammarStructure>();
+        private readonly IDictionary<string, GrammarStructure> _structures = new Dictionary<string, GrammarStructure>();
         private IPolicies _policies = new Policies();
 
         
@@ -109,7 +109,7 @@ namespace StoryTeller.Model
                 yield return error;
             }
 
-            foreach (GrammarStructure structure in _structures)
+            foreach (GrammarStructure structure in _structures.Values)
             {
                 foreach (GrammarError error in structure.AllErrors())
                 {
@@ -147,7 +147,7 @@ namespace StoryTeller.Model
         public Section CreateExample()
         {
             var section = new Section(_name);
-            _structures.Each(x => section.Add(x.CreateExample()));
+            _structures.Values.Each(x => section.Add(x.CreateExample()));
 
             return section;
         }
@@ -161,31 +161,39 @@ namespace StoryTeller.Model
         {
             structure.Name = grammarKey;
             structure.Parent = this;
-            _structures[grammarKey] = structure;
+
+            if (_structures.ContainsKey(grammarKey))
+            {
+                _structures[grammarKey] = structure;
+            }
+            else
+            {
+                _structures.Add(grammarKey, structure);
+            }
         }
 
         public IEnumerable<GrammarStructure> TopLevelGrammars()
         {
-            return _structures.Where(x => Policies.CanChooseGrammar(x.Name, new IStep[0])).OrderBy(x => x.Label);
+            return _structures.Values.Where(x => Policies.CanChooseGrammar(x.Name, new IStep[0])).OrderBy(x => x.Label);
         }
 
         public IEnumerable<GrammarStructure> PossibleGrammarsFor(IPartHolder holder)
         {
             IList<IStep> preceeding = holder.AllSteps();
-            return _structures.Where(x => Policies.CanChooseGrammar(x.Name, preceeding)).OrderBy(x => x.Label);
+            return _structures.Values.Where(x => Policies.CanChooseGrammar(x.Name, preceeding)).OrderBy(x => x.Label);
         }
 
 
         public bool HasGrammar(string key)
         {
-            return _structures.Has(key);
+            return _structures.ContainsKey(key);
         }
 
         public IEnumerable<GrammarStructure> Grammars
         {
             get
             {
-                return _structures.GetAll();
+                return _structures.Values;
             }
         }
 
@@ -245,7 +253,7 @@ namespace StoryTeller.Model
 
         public bool HasGrammarErrors()
         {
-            return _structures.GetAll().Any(x => x.AllErrors().Any());
+            return _structures.Values.Any(x => x.AllErrors().Any());
         }
     }
 }
