@@ -178,7 +178,7 @@ namespace StoryTeller.Execution
             {
                 ApplicationName = "StoryTeller-Testing-" + Guid.NewGuid(),
                 ConfigurationFile = project.ConfigurationFileName,
-                ShadowCopyFiles = "false",
+                ShadowCopyFiles = "true",
                 ApplicationBase = project.GetBinaryFolder(),
             };
 
