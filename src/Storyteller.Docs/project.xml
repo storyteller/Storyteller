@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ProjectRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TagLine>A member of the Fubu family of projects</TagLine>
+  <Description>DSL Tooling for Acceptance Testing in .Net</Description>
+  <Name>Storyteller</Name>
+  <TwitterHandle />
+  <GitHubPage>http://github.com/DarthFubuMVC/Storyteller</GitHubPage>
+  <UserGroupUrl>https://groups.google.com/forum/?fromgroups#!forum/fubumvc-devel</UserGroupUrl>
+  <BuildServerUrl>http://build.fubu-project.org/project.html?projectId=bt76&amp;tab=projectOverview</BuildServerUrl>
+  <TeamCityBuildType />
+  <BottleName>Storyteller.Docs</BottleName>
+  <PluginTo />
+  <Nugets>
+    <PublishedNuget>
+      <Name>Storyteller2</Name>
+      <Description>StoryTeller is an external DSL tool for creating acceptance tests in .Net</Description>
+    </PublishedNuget>
+  </Nugets>
+  <Url>storyteller</Url>
+</ProjectRoot>
