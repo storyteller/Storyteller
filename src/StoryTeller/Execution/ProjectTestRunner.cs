@@ -145,7 +145,11 @@ namespace StoryTeller.Execution
                 int numberOfRetries = 0;
                 while (numberOfRetries <= t.NumberOfRetries && !t.WasSuccessful())
                 {
-                    if (numberOfRetries != 0)
+                    if (numberOfRetries == 0)
+                    {
+                        Console.WriteLine("$$$$$$$$$$$$$$$$Starting test: {0} [{1}]".ToFormat(t.Name, t.SuiteName));
+                    }
+                    else
                     {
                         Console.WriteLine("$$$$$$$$$$$$$$$$Previous pass failed -- retrying: {0}".ToFormat(t.GetStatus()));
                     }
