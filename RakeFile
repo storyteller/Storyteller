@@ -17,13 +17,13 @@ end
 				 
 	sln.assembly_info = {
 		:product_name => "Storyteller",
-		:copyright => 'Copyright 2008-2013 Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al. All rights reserved.'
+		:copyright => "Copyright 2008-#{Time.now.year} Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al. All rights reserved."
 	}
 	
 	sln.ripple_enabled = true
 	sln.fubudocs_enabled = true
 	
-	sln.defaults = [:ilrepack, :smoke_test_st_run, :smoke_test_st_specs]
+	sln.defaults = [:ilrepack, :smoke_test_st_run, :smoke_test_st_specs, :smoke_test_st_run_regression]
 	sln.ci_steps = [:ilrepack]
 end
 
@@ -45,7 +45,17 @@ task :smoke_test_st_run => [:compile] do
   sh "src/ST/bin/#{@solution.compilemode}/ST run src/Storyteller.Gallery -c #{@solution.compilemode}"
 end
 
+desc "Runs the ST command against the gallery project regression tests.  Should succeed"
+task :smoke_test_st_run_regression => [:compile] do
+  output = `src/ST/bin/#{@solution.compilemode}/ST run src/Storyteller.Gallery -c #{@solution.compilemode} -l Regression`
+  outputLines = output.split "\n"
+
+  exit 1 unless $?.exitstatus == 0
+  exit 1 unless outputLines[outputLines.length-2] =~ /Acceptance.*0 of 0 passed.*0 failed/
+  exit 1 unless outputLines[outputLines.length-1] =~ /Regression.*[1-9][0-9]* of [1-9][0-9]* passed.*0 failed/
+end
+
 desc "Runs the st specs command against the gallery project.  Should succeed"
 task :smoke_test_st_specs => [:compile] do
   sh "src/ST/bin/#{@solution.compilemode}/ST specs src/Storyteller.Gallery specs -c #{@solution.compilemode}"
-end 
+end
