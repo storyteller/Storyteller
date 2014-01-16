@@ -143,7 +143,7 @@ namespace StoryTeller.Execution
             selectionFilter(_hierarchy).Each(t =>
             {
                 int numberOfRetries = 0;
-                while (numberOfRetries <= t.NumberOfRetriesAtRuntime && !t.WasSuccessful())
+                while (numberOfRetries < t.NumberOfRetriesAtRuntime && !t.WasSuccessful())
                 {
                     if (numberOfRetries == 0)
                     {

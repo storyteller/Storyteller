@@ -1,5 +1,7 @@
 using System.ComponentModel;
 using FubuCore;
+using FubuCore.CommandLine;
+using StoryTeller.Domain;
 using StoryTeller.Workspace;
 using FileSystem = FubuCore.FileSystem;
 
@@ -21,6 +23,9 @@ namespace StoryTeller.CommandLine
 
         [Description("Storyteller test mode profile for systems like Serenity that use this")]
         public string ProfileFlag { get; set; }
+
+        [Description("Optional. Only runs tests with desired lifecyle")]
+        public string LifecycleFlag { get; set; }
 
         public Project LoadProject()
         {
