@@ -38,7 +38,7 @@ namespace StoryTeller.Execution
         }
 
         public string Workspace { get; set; }
-        public Lifecycle? DesiredLifecycle { get; set; }
+        public Lifecycle DesiredLifecycle { get; set; }
 
         public int Execute()
         {
@@ -85,10 +85,10 @@ namespace StoryTeller.Execution
                     selector = h => h.FindSuite(Workspace).GetAllTests();
                 }
 
-                if (DesiredLifecycle.HasValue && DesiredLifecycle.Value != Lifecycle.Any)
+                if (DesiredLifecycle != Lifecycle.Any)
                 {
                     var nestedSelector = selector;
-                    selector = h => nestedSelector(h).Where(t => t.Lifecycle == DesiredLifecycle.Value);
+                    selector = h => nestedSelector(h).Where(t => t.Lifecycle == DesiredLifecycle);
                 }
 
                 runner.RunAll(selector, test =>
