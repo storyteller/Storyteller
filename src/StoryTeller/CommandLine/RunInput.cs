@@ -25,7 +25,7 @@ namespace StoryTeller.CommandLine
         public string ProfileFlag { get; set; }
 
         [Description("Optional. Only runs tests with desired lifecyle")]
-        public string LifecycleFlag { get; set; }
+        public Lifecycle? LifecycleFlag { get; set; }
 
         public Project LoadProject()
         {
