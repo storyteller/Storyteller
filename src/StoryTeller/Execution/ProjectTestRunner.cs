@@ -143,11 +143,11 @@ namespace StoryTeller.Execution
             selectionFilter(_hierarchy).Each(t =>
             {
                 int numberOfRetries = 0;
-                while (numberOfRetries <= t.NumberOfRetries && !t.WasSuccessful())
+                while (numberOfRetries <= t.NumberOfRetriesAtRuntime && !t.WasSuccessful())
                 {
                     if (numberOfRetries == 0)
                     {
-                        Console.WriteLine("$$$$$$$$$$$$$$$$Starting test: {0} [{1}]".ToFormat(t.Name, t.SuiteName));
+                        Console.WriteLine("$$$$$$$$$$$$$$$$Starting test: {0} [{1}] [Lifecycle: {2}]".ToFormat(t.Name, t.SuiteName, t.Lifecycle));
                     }
                     else
                     {
