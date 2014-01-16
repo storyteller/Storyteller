@@ -266,5 +266,28 @@ namespace StoryTeller.Testing
             tags.ForEach(tag => test.GetTags().AllTags.Contains(tag));
         }
 
+        [Test]
+        public void Retry_count_at_runtime_for_regression_tests_is_unaltered_count()
+        {
+            var test = new Test("test")
+            {
+                Lifecycle = Lifecycle.Regression,
+                NumberOfRetries = 5
+            };
+
+            test.NumberOfRetriesAtRuntime.ShouldEqual(5);
+        }
+
+        [Test]
+        public void Retry_count_at_runtime_for_acceptance_tests_is_only_once()
+        {
+            var test = new Test("test")
+            {
+                Lifecycle = Lifecycle.Acceptance,
+                NumberOfRetries = 5
+            };
+
+            test.NumberOfRetriesAtRuntime.ShouldEqual(1);
+        }
     }
 }
