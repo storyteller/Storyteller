@@ -212,6 +212,7 @@ h3.section-title {
 }
 
 table {
+  text-align: left;
   width: 100%;
   border: 1px solid #BFBFBF;
   border-collapse: collapse;
@@ -225,7 +226,6 @@ table.table th {
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
-  text-align: left;
   padding: 6px 6px 6px 12px;
 }
 
@@ -234,6 +234,10 @@ table.table td {
   border-right: 1px dotted #BFBFBF;
   border-bottom: 1px solid #BFBFBF;
   padding: 3px 3px 3px 6px;
+}
+
+tbody td:first-of-type {
+  padding-left: 5px;
 }
 
 td.fail, td.pass, td.exception {
