@@ -27,6 +27,9 @@ namespace StoryTeller.CommandLine
         [Description("Optional. Only runs tests with desired lifecyle")]
         public Lifecycle LifecycleFlag { get; set; }
 
+        [Description("Optional. Will not retry tests more than max retry limit.")]
+        public int? MaxRetryFlag { get; set; }
+
         public RunInput()
         {
             LifecycleFlag = Lifecycle.Any;
