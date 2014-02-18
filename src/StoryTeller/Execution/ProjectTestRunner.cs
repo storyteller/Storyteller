@@ -6,7 +6,6 @@ using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Workspace;
-using System.Linq;
 
 namespace StoryTeller.Execution
 {
@@ -78,6 +77,8 @@ namespace StoryTeller.Execution
             get { return _engine.StopConditions; }
         }
 
+        public int? MaxRetries { get; set; }
+
         public Test RunTest(string testPath)
         {
             Test test = FindTest(testPath);
@@ -143,7 +144,12 @@ namespace StoryTeller.Execution
             selectionFilter(_hierarchy).Each(t =>
             {
                 int numberOfRetries = 0;
-                while (numberOfRetries < t.NumberOfRetriesAtRuntime && !t.WasSuccessful())
+                int maxRetries = t.NumberOfRetriesAtRuntime;
+                if (MaxRetries != null && MaxRetries < maxRetries)
+                {
+                    maxRetries = MaxRetries.Value;
+                }
+                while (numberOfRetries < maxRetries && !t.WasSuccessful())
                 {
                     if (numberOfRetries == 0)
                     {

@@ -39,6 +39,7 @@ namespace StoryTeller.Execution
 
         public string Workspace { get; set; }
         public Lifecycle DesiredLifecycle { get; set; }
+        public int? MaxRetries { get; set; }
 
         public int Execute()
         {
@@ -90,6 +91,8 @@ namespace StoryTeller.Execution
                     var nestedSelector = selector;
                     selector = h => nestedSelector(h).Where(t => t.Lifecycle == DesiredLifecycle);
                 }
+
+                runner.MaxRetries = MaxRetries;
 
                 runner.RunAll(selector, test =>
                 {
