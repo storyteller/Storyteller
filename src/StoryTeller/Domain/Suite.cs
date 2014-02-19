@@ -166,6 +166,17 @@ namespace StoryTeller.Domain
             return this;
         }
 
+        public IEnumerable<Suite> GetRootSuites { get { return _suites; }}
+
+        public IEnumerable<Suite> GetAllSuites()
+        {
+            var visitor = new SuiteGatherer();
+
+            new SuiteNavigator().Visit(this, visitor);
+
+            return visitor.Suites;
+        }
+
         public IEnumerable<Test> GetAllTests()
         {
             var visitor = new TestGatherer();
@@ -253,5 +264,24 @@ namespace StoryTeller.Domain
 
         #endregion
 
+    }
+
+    public class SuiteGatherer : IHierarchyVisitor
+    {
+        private List<Suite> _suites = new List<Suite>();
+        public List<Suite> Suites { get { return _suites; } }
+
+        public void StartSuite(Suite suite)
+        {
+        }
+
+        public void EndSuite(Suite suite)
+        {
+            _suites.Add(suite);
+        }
+
+        public void Test(Test test)
+        {
+        }
     }
 }
