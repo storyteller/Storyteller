@@ -11,20 +11,27 @@ end
 
 
 @solution = FubuRake::Solution.new do |sln|
-	sln.compile = {
-		:solutionfile => 'src/Storyteller.sln'
-	}
-				 
-	sln.assembly_info = {
-		:product_name => "Storyteller",
-		:copyright => "Copyright 2008-#{Time.now.year} Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al. All rights reserved."
-	}
-	
-	sln.ripple_enabled = true
-	sln.fubudocs_enabled = true
-	
-	sln.defaults = [:ilrepack, :smoke_test_st_run, :smoke_test_st_specs, :smoke_test_st_run_regression]
-	sln.ci_steps = [:ilrepack]
+  sln.compile = {
+    :solutionfile => 'src/Storyteller.sln'
+  }
+
+  sln.assembly_info = {
+    :product_name => "Storyteller",
+    :copyright => "Copyright 2008-#{Time.now.year} Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al. All rights reserved."
+  }
+
+  sln.ripple_enabled = true
+  sln.fubudocs_enabled = true
+
+  sln.defaults = [
+          :ilrepack,
+          :smoke_test_st_run,
+          :smoke_test_st_specs,
+          :smoke_test_st_run_regression,
+          :smoke_test_validate_command_success,
+          :smoke_test_validate_command_failure
+        ]
+  sln.ci_steps = [:ilrepack]
 end
 
 require_relative 'ILRepack'
@@ -35,9 +42,9 @@ task :ilrepack do
 end
 
 def merge_newtonsoft(dir, assembly)
-	output = File.join(dir, assembly)
-	packer = ILRepack.new :out => output, :lib => dir
-	packer.merge :lib => dir, :refs => [assembly, 'Newtonsoft.Json.dll'], :clrversion => @solution.options[:clrversion]
+  output = File.join(dir, assembly)
+  packer = ILRepack.new :out => output, :lib => dir
+  packer.merge :lib => dir, :refs => [assembly, 'Newtonsoft.Json.dll'], :clrversion => @solution.options[:clrversion]
 end
 
 desc "Runs the ST command against the gallery project.  Should succeed"
@@ -53,6 +60,25 @@ task :smoke_test_st_run_regression => [:compile] do
   exit 1 unless $?.exitstatus == 0
   exit 1 unless outputLines[outputLines.length-2] =~ /Acceptance.*0 of 0 passed.*0 failed/
   exit 1 unless outputLines[outputLines.length-1] =~ /Regression.*[1-9][0-9]* of [1-9][0-9]* passed.*0 failed/
+end
+
+desc "Verifies that the validate command fails for test projects with invalid fixtures and grammars"
+task :smoke_test_validate_command_failure => [:compile] do
+  output = `src/ST/bin/#{@solution.compilemode}/ST validate src/InvalidExamples/InvalidExamples.xml`
+
+  outputLines = output.split "\n"
+
+  exit 1 unless $?.exitstatus == 1
+  exit 1 unless outputLines[outputLines.length-2] =~ /Invalid Fixture 'Invalid'/
+  exit 1 unless outputLines[outputLines.length-1] =~ /Invalid Grammar 'InvalidGrammarMethod'/
+end
+
+desc "Verifies that the validate command succeeds for test projects with valid fixtures and grammars"
+task :smoke_test_validate_command_success => [:compile] do
+  output = `src/ST/bin/#{@solution.compilemode}/ST validate src/Examples/Examples.xml`
+  puts output
+
+  exit 1 unless $?.exitstatus == 0
 end
 
 desc "Runs the st specs command against the gallery project.  Should succeed"
