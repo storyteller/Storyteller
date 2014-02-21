@@ -4,6 +4,7 @@ using NUnit.Framework;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Persistence;
+using StoryTeller.ProjectUtils.Loaders;
 using StoryTeller.Workspace;
 using FileSystem = FubuCore.FileSystem;
 using IFileSystem = FubuCore.IFileSystem;
@@ -263,8 +264,8 @@ s1/s2/t3,Success
         public void use_app_config_if_it_exists()
         {
             fileSystem.WriteStringToFile("Foo".AppendPath("App.config"), "anything");
-
-            Project.ForDirectory("Foo")
+            var project = new ProjectDirectoryLoader(new FileSystem());
+            project.Load("Foo")
                 .ConfigurationFileName.ShouldEqual("Foo".AppendPath("App.config").ToFullPath());
         }
 
@@ -273,7 +274,8 @@ s1/s2/t3,Success
         {
             fileSystem.WriteStringToFile("Foo".AppendPath("app.config"), "anything");
 
-            Project.ForDirectory("Foo")
+            var project = new ProjectDirectoryLoader(new FileSystem());
+            project.Load("Foo")
                 .ConfigurationFileName.ShouldEqual("Foo".AppendPath("app.config").ToFullPath());
         }
 
@@ -282,7 +284,8 @@ s1/s2/t3,Success
         {
             fileSystem.WriteStringToFile("Foo".AppendPath("Web.config"), "anything");
 
-            Project.ForDirectory("Foo")
+            var project = new ProjectDirectoryLoader(new FileSystem());
+            project.Load("Foo")
                 .ConfigurationFileName.ShouldEqual("Foo".AppendPath("Web.config").ToFullPath());
         }
 
@@ -291,7 +294,8 @@ s1/s2/t3,Success
         {
             fileSystem.WriteStringToFile("Foo".AppendPath("web.config"), "anything");
 
-            Project.ForDirectory("Foo")
+            var project = new ProjectDirectoryLoader(new FileSystem());
+            project.Load("Foo")
                 .ConfigurationFileName.ShouldEqual("Foo".AppendPath("web.config").ToFullPath());
         }
 
@@ -300,8 +304,9 @@ s1/s2/t3,Success
         {
             fileSystem.WriteStringToFile("Foo".AppendPath("Foo.dll.config"), "anything");
 
-            Project.ForDirectory("Foo").ConfigurationFileName
-                .ShouldEqual("Foo".AppendPath("Foo.dll.config").ToFullPath());
+            var project = new ProjectDirectoryLoader(new FileSystem());
+            project.Load("Foo")
+                .ConfigurationFileName.ShouldEqual("Foo".AppendPath("Foo.dll.config").ToFullPath());
         }
     }
 }

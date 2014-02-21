@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using FubuCore.CommandLine;
 using StoryTeller;
 using StoryTeller.CommandLine;
+using StoryTeller.ProjectUtils;
 using StoryTeller.UserInterface;
 using StoryTeller.UserInterface.Projects;
 using StoryTeller.Workspace;
@@ -35,7 +36,7 @@ namespace StoryTellerUI
                 var args = ArgPreprocessor.Process(e.Args);
                 var queue = new Queue<string>(args);
                 var input = new RunCommand().Usages.BuildInput(queue).As<RunInput>();
-                var project = input.LoadProject();
+                var project = ProjectLoader.Load(input.Path, input.CompileFlag, input.ProfileFlag);
 
                 controller.StartNewProject(project);
             }

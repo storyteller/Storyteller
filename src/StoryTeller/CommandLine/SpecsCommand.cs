@@ -4,6 +4,7 @@ using System.Diagnostics;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Execution;
+using StoryTeller.ProjectUtils;
 
 namespace StoryTeller.CommandLine
 {
@@ -14,15 +15,12 @@ namespace StoryTeller.CommandLine
         {
             var fileSystem = new FileSystem();
 
-            var project = input.LoadProject();
+            var project = ProjectLoader.Load(input.Path, input.CompileFlag, input.ProfileFlag);
             Console.WriteLine("Writing specifications for project {0} to {1}", project.Name, input.ResultsPath);
 
             fileSystem.DeleteDirectory(input.ResultsPath);
             fileSystem.CreateDirectory(input.ResultsPath);
 
-            
-
-            
             var runner = new ProjectTestRunner(project);
 
             var summary = new PreviewSummary(input.TitleFlag ?? project.Name);

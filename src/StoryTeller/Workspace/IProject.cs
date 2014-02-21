@@ -20,6 +20,7 @@ namespace StoryTeller.Workspace
         void Save(Test test);
         void DeleteFile(Test test);
         void RenameTest(Test test, string name);
+        string CompileTarget { get; set; }
 
         ITestRunner LocalRunner();
         void CreateDirectory(Suite suite);

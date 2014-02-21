@@ -1,20 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Domain;
 using StoryTeller.Execution;
+using StoryTeller.ProjectUtils;
 
 namespace StoryTeller.CommandLine
 {
-    [CommandDescription("Writes names of the folders in the Tests directory to a file")]
-    public class TestFoldersCommand : FubuCommand<TestFoldersInput>
+    [CommandDescription("Writes names of suites to the console")]
+    public class ListSuitesCommand : FubuCommand<ListSuitesInput>
     {
-        public override bool Execute(TestFoldersInput input)
+        public override bool Execute(ListSuitesInput input)
         {
-            var project = input.LoadProject();
+            var project = ProjectLoader.Load(input.Path, input.CompileFlag, null);
 
             var runner = new ProjectTestRunner(project);
             var suites = runner.Hierarchy.GetRootSuites
@@ -34,7 +33,20 @@ namespace StoryTeller.CommandLine
         }
     }
 
-    public class TestFoldersInput : RunInput
+    public class ListSuitesInput 
     {
+        public ListSuitesInput()
+        {
+            LifecycleFlag = Lifecycle.Any;
+        }
+
+        [Description("Path to the StoryTeller project file or the project directory")]
+        public string Path { get; set; }
+
+        [Description("Specify a compile target")]
+        public string CompileFlag { get; set; }
+
+        [Description("Optional. Only runs tests with desired lifecyle")]
+        public Lifecycle LifecycleFlag { get; set; }
     }
 }
