@@ -26,6 +26,11 @@ namespace StoryTeller.Testing.Engine
             return new EquivalenceChecker().IsEqual(expected, actual);
         }
 
+        public int RetryAttemptNumber
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         public void Store<T>(T data)
         {
         }

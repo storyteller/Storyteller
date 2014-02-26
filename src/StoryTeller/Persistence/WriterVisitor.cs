@@ -77,11 +77,11 @@ namespace StoryTeller.Persistence
 
         #endregion
 
-
         public void Write()
         {
             _root["name"] = _test.Name;
             _root["lifecycle"] = _test.Lifecycle.ToString();
+            _root["retryAttemptNumber"] = _test.RetryAttemptNumber.ToString();
 
             _nodes.Push(_root);
 
