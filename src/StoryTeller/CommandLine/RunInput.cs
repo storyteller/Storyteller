@@ -24,6 +24,9 @@ namespace StoryTeller.CommandLine
         [Description("Storyteller test mode profile for systems like Serenity that use this")]
         public string ProfileFlag { get; set; }
 
+        [Description("Optional. Default project timeout in seconds.")]
+        public int? TimeoutFlag { get; set; }
+
         [Description("Optional. Only runs tests with desired lifecyle")]
         public Lifecycle LifecycleFlag { get; set; }
 
@@ -57,6 +60,11 @@ namespace StoryTeller.CommandLine
             if (CompileFlag.IsNotEmpty())
             {
                 project.CompileTarget = CompileFlag;
+            }
+
+            if (TimeoutFlag.HasValue)
+            {
+                project.TimeoutInSeconds = TimeoutFlag.Value;
             }
 
             return project;

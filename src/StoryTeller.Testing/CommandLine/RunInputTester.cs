@@ -81,5 +81,16 @@ namespace StoryTeller.Testing.CommandLine
             input.LoadProject().CompileTarget.ShouldEqual("release");
         }
 
+        [Test]
+        public void respects_the_timeout_flag()
+        {
+            var project = new Project { Name = "MyProject", TimeoutInSeconds = 60 };
+            project.Save("myproject.xml");
+
+            var input = new RunInput { Path = "myproject.xml", TimeoutFlag = 120 };
+
+            input.LoadProject().TimeoutInSeconds.ShouldEqual(120);
+        }
+
     }
 }
