@@ -90,6 +90,11 @@ namespace StoryTeller.Engine
             }
             _context = new TestContext(_execution, _request.Test, _listener);
 
+            if (_context.RetryAttemptNumber > 0)
+            {
+                _system.Recycle();
+            }
+
             _reset = new ManualResetEvent(false);
 
             try
