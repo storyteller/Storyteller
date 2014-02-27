@@ -24,7 +24,7 @@ namespace StoryTeller.UserInterface.Editing
      
         public static void WriteTestEditorCSS()
         {
-            using (var writer = new StreamWriter("testEditor.css"))
+            using (var writer = new StreamWriter(FilePaths.TestEditorCss))
             {
                 writer.WriteLine(TestEditorCSS());
             }
