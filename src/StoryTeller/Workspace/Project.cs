@@ -7,6 +7,7 @@ using FubuCore;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Persistence;
+using StoryTeller.ProjectUtils.Loaders;
 
 namespace StoryTeller.Workspace
 {
@@ -167,6 +168,7 @@ namespace StoryTeller.Workspace
 
         #endregion
 
+        [Obsolete("Use ProjectFileLoader instead")]
         public static Project LoadFromFile(string filename)
         {
             if (!File.Exists(filename))
@@ -174,11 +176,8 @@ namespace StoryTeller.Workspace
                 throw new FileNotFoundException("Could not locate designated Project File", filename);
             }
 
-            var fileSystem = new FileSystem();
-            var project = fileSystem.LoadFromFile<Project>(filename);
-            project.ProjectFolder = Path.GetDirectoryName(filename);
-            project.FileName = filename;
-
+            var fileSystem = new FubuCore.FileSystem();
+            var project = (Project) new ProjectFileLoader(fileSystem).Load(filename);
             return project;
         }
 
@@ -277,38 +276,6 @@ namespace StoryTeller.Workspace
             }
 
             return messages;
-        }
-
-        public static Project ForDirectory(string directory)
-        {
-            var project = new Project
-            {
-                ProjectFolder = directory,
-                Name = Path.GetFileName(directory)
-            };
-
-            var fileSystem = new FubuCore.FileSystem();
-            var files = fileSystem.FindFiles(directory, FileSet.Shallow("*.config"));
-            var candidates = files.Where(x => Path.GetFileName(x).EqualsIgnoreCase("App.config") || Path.GetFileName(x).EqualsIgnoreCase("Web.config"));
-            if (candidates.Any())
-            {
-                project.ConfigurationFileName = candidates.First().ToFullPath();
-            }
-            else
-            {
-                var possibleFile = Path.GetFileName(directory) + ".dll.config";
-                candidates = fileSystem.FindFiles(directory, FileSet.Deep(possibleFile));
-                if (candidates.Any())
-                {
-                    project.ConfigurationFileName = candidates.First().ToFullPath();
-                }
-            }
-
-
-            // Auto-find the config file here.
-
-
-            return project;
         }
 
     }

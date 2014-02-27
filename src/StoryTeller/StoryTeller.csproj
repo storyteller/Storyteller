@@ -77,10 +77,15 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Assertions\StorytellerAssertionException.cs" />
+    <Compile Include="ProjectUtils\Loaders\IProjectLoader.cs" />
+    <Compile Include="ProjectUtils\ProjectLoader.cs" />
+    <Compile Include="ProjectUtils\Loaders\ProjectDirectoryLoader.cs" />
+    <Compile Include="ProjectUtils\Loaders\ProjectFileLoader.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
     <Compile Include="CommandLine\SpecsCommand.cs" />
     <Compile Include="CommandLine\SpecsInput.cs" />
+    <Compile Include="CommandLine\ListSuitesCommand.cs" />
     <Compile Include="DecoratedLineGrammar.cs" />
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Tags.cs" />
@@ -305,6 +310,7 @@
   <ItemGroup>
     <None Include="ripple.dependencies.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if not exist $(SolutionDir)\CommonAssemblyInfo.cs copy NUL $(SolutionDir)\CommonAssemblyInfo.cs</PreBuildEvent>

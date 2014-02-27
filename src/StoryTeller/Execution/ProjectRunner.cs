@@ -21,7 +21,7 @@ namespace StoryTeller.Execution
         private readonly IFileSystem _system = new FileSystem();
         private IList<IProject> _projects = new List<IProject>();
 
-        public ProjectRunner(IEnumerable<Project> projects, string resultsFile)
+        public ProjectRunner(IEnumerable<IProject> projects, string resultsFile)
         {
             _projects.AddRange(projects);
             _resultsFile = resultsFile ?? "st-results/index.htm";

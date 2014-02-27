@@ -7,7 +7,7 @@ using FileSystem = FubuCore.FileSystem;
 
 namespace StoryTeller.CommandLine
 {
-    public class RunInput
+    public class RunInput 
     {
         [Description("Path to the StoryTeller project file or the project directory")]
         public string Path { get; set; }
@@ -35,31 +35,5 @@ namespace StoryTeller.CommandLine
             LifecycleFlag = Lifecycle.Any;
         }
 
-        public Project LoadProject()
-        {
-            Project project = null;
-
-            // The IsFile check blows up if it doesn't exist at all
-            if (new FileSystem().IsFile(Path))
-            {
-                project = Project.LoadFromFile(Path);
-            }
-            else
-            {
-                project = Project.ForDirectory(Path);
-            }
-
-            if (ProfileFlag.IsNotEmpty())
-            {
-                project.Profile = ProfileFlag;
-            }
-
-            if (CompileFlag.IsNotEmpty())
-            {
-                project.CompileTarget = CompileFlag;
-            }
-
-            return project;
-        }
     }
 }

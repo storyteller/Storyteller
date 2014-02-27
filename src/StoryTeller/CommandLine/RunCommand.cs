@@ -2,7 +2,7 @@ using System;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Execution;
-using StoryTeller.Workspace;
+using StoryTeller.ProjectUtils;
 
 namespace StoryTeller.CommandLine
 {
@@ -17,9 +17,9 @@ namespace StoryTeller.CommandLine
 
         public override bool Execute(RunInput input)
         {
-            var project = input.LoadProject();
+            var project = ProjectLoader.Load(input.Path, input.CompileFlag, input.ProfileFlag);
 
-            var runner = new ProjectRunner(new Project[]{project}, input.ResultsPath);
+            var runner = new ProjectRunner(new []{project}, input.ResultsPath);
             if (input.WorkspaceFlag.IsNotEmpty())
             {
                 Console.WriteLine("Using workspace " + input.WorkspaceFlag);

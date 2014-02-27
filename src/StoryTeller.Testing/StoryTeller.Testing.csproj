@@ -99,7 +99,6 @@
     <Compile Include="AbortTestSmokeTester.cs" />
     <Compile Include="Bugs\MethodFactDoesNotUpdateTheCounts.cs" />
     <Compile Include="Codegen\ProjectRunnerCodegenServiceTester.cs" />
-    <Compile Include="CommandLine\RunInputTester.cs" />
     <Compile Include="CommentTester.cs" />
     <Compile Include="DataMother.cs" />
     <Compile Include="DisplayParserTester.cs" />
@@ -179,6 +178,9 @@
     <Compile Include="Model\TestParserTester.cs" />
     <Compile Include="Persistence\JsonNodeTester.cs" />
     <Compile Include="Persistence\XmlTestWriterTester.cs" />
+    <Compile Include="ProjectUtils\Loaders\ProjectDirectoryLoaderTester.cs" />
+    <Compile Include="ProjectUtils\Loaders\ProjectFileLoaderTester.cs" />
+    <Compile Include="ProjectUtils\ProjectLoaderTester.cs" />
     <Compile Include="StepExtensions.cs" />
     <Compile Include="Engine\CheckPropertyGrammarTester.cs" />
     <Compile Include="Engine\CompositeGrammerTester.cs" />
@@ -273,6 +275,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CommandLine\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
