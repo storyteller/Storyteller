@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Test name="Invalid Test" lifecycle="Acceptance">
+  <Invalid>
+    <NoGrammar isStep="True" />
+  </Invalid>
+  <Example>
+    <ValidGrammarMethod isStep="True" />
+    <InvalidGrammarMethod isStep="True" />
+  </Example>
+</Test>

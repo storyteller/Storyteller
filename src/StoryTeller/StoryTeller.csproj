@@ -86,6 +86,8 @@
     <Compile Include="CommandLine\SpecsCommand.cs" />
     <Compile Include="CommandLine\SpecsInput.cs" />
     <Compile Include="CommandLine\ListSuitesCommand.cs" />
+    <Compile Include="CommandLine\Validation\ValidateCommand.cs" />
+    <Compile Include="CommandLine\Validation\ValidateInput.cs" />
     <Compile Include="DecoratedLineGrammar.cs" />
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Tags.cs" />

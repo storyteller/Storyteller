@@ -30,15 +30,12 @@ namespace StoryTeller.CommandLine
                 : runner.Hierarchy.FindSuite(input.WorkspaceFlag).GetAllTests();
 
             tests.Each(test => {
-                
-
                 var html = runner.WritePreview(test);
                 var relativePath = test.LocatorPath() + ".htm";
 
                 var specPath = input.ResultsPath.AppendPath(relativePath);
                 Console.WriteLine("Writing " + specPath);
 
-                
                 fileSystem.WriteStringToFile(specPath, html);
                 summary.AddTest(test, relativePath);
             });
