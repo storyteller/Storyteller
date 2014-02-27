@@ -25,8 +25,8 @@ namespace StoryTeller.UserInterface.Tests
         public override void Refresh()
         {
             var document = _editorBuilder.BuildEditor(_test);
-            document.WriteToFile("editor.htm");
-            var path = Path.GetFullPath("editor.htm");
+            document.WriteToFile(FilePaths.EditorHtml);
+            var path = Path.GetFullPath(FilePaths.EditorHtml);
 
             _view.OpenFile("file:///" + path);
             //_view.Html = _editorBuilder.BuildHtml(_test);

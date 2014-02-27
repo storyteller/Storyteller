@@ -128,10 +128,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="history.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="history.xml">
       <SubType>Designer</SubType>
-    </Resource>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="BureauBlack.xaml">
