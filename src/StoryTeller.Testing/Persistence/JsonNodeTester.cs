@@ -111,6 +111,7 @@ namespace StoryTeller.Testing.Persistence
         {
             var section = new Section("AutoDispatchConfiguration");
             Test test = new Test("AutoDispatchRules").With(section);
+            test.RetryAttemptNumber = 3;
 
             Step step1 = section.AddStep("IfPriorityEquals").With("priority", "High");
             StepLeaf leaf1 = step1.LeafFor("AndOr");
@@ -124,6 +125,8 @@ namespace StoryTeller.Testing.Persistence
 
             var visitor = new WriterVisitor(test, node);
             visitor.Write();
+
+            node["retryAttemptNumber"].ShouldEqual(3);
 
             Debug.WriteLine(node.ToJson());
         }

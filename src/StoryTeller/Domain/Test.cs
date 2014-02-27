@@ -48,6 +48,7 @@ namespace StoryTeller.Domain
         public Suite Parent { get; private set; }
 
         public int NumberOfRetries { get; set; }
+        public int RetryAttemptNumber { get; set; }
 
         public int NumberOfRetriesAtRuntime
         {

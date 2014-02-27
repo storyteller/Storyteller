@@ -159,6 +159,7 @@ namespace StoryTeller.Execution
                     {
                         Console.WriteLine("$$$$$$$$$$$$$$$$Previous pass failed -- retrying: {0}".ToFormat(t.GetStatus()));
                     }
+                    t.RetryAttemptNumber = numberOfRetries;
                     _engine.RunTest(t);
                     numberOfRetries++;
                 }

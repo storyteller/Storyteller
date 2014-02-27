@@ -19,12 +19,13 @@ namespace StoryTeller.Engine
         void CaptureException(string exceptionText);
     }
 
-
     public interface ITestContext
     {
         object CurrentObject { get; set; }
         IObjectConverter Finder { get; }
         bool Matches(object expected, object actual);
+
+        int RetryAttemptNumber { get; }
         
         void Store<T>(T data);
         T Retrieve<T>();
@@ -48,7 +49,6 @@ namespace StoryTeller.Engine
         void Trace(string text);
         void Trace(HtmlTag tag);
 
-
         // TODO -- ISP anyone?
         IGrammar FindGrammar(string grammarKey);
         void LoadFixture(string fixtureKey, ITestPart part);
@@ -60,8 +60,6 @@ namespace StoryTeller.Engine
         IFixture RetrieveFixture(string fixtureName);
 
         IEnumerable<HtmlTag> TraceTags();
-
-        
     }
 
     public static class TestContextExtensions
@@ -94,10 +92,6 @@ namespace StoryTeller.Engine
         private readonly IExecutionContext _execution;
         private readonly Test _test;
         private readonly Lazy<IObjectConverter> _converter;
-
-
-
-
 
         [Obsolete]
         private bool _fixtureIsInvalid;
@@ -254,6 +248,8 @@ namespace StoryTeller.Engine
         #endregion
 
         #region ITestContext Members
+
+        public int RetryAttemptNumber { get { return Test.RetryAttemptNumber; } }
 
         public bool Matches(object expected, object actual)
         {
