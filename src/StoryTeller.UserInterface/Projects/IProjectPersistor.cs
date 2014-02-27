@@ -15,7 +15,7 @@ namespace StoryTeller.UserInterface.Projects
 
     public class ProjectPersistor : IProjectPersistor
     {
-        public static readonly string HISTORY_FILE = "history.xml";
+        public static readonly string HISTORY_FILE = FilePaths.HistoryFile;
         private readonly FileSystem _system = new FileSystem();
 
         #region IProjectPersistor Members

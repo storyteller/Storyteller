@@ -60,7 +60,9 @@
     <ApplicationIcon>Syncronize.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FubuCore, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="FubuCore">
+      <HintPath>..\packages\FubuCore\lib\FubuCore.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Aero" />
@@ -128,10 +130,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="history.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="history.xml">
       <SubType>Designer</SubType>
-    </Resource>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="BureauBlack.xaml">

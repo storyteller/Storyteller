@@ -20,7 +20,7 @@ namespace StoryTeller.UserInterface.Editing
                 .TrimStart('.')
                 .Split('.');
 
-            _folder = parts[0];
+            _folder = Path.Combine(FilePaths.ArtifactsFolder, parts[0]);
             _fileName = parts.Skip(1).ToArray().Join(".");
         }
 
