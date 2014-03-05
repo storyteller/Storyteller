@@ -102,7 +102,7 @@ namespace StoryTeller.Execution
             catch(Exception ex)
             {
                 Console.WriteLine(ex);
-                test.LastResult = new TestResult { ExceptionText = ex.Message, Counts = new Counts(0, 0, 1, 0), FullExceptionText  = ex.ToString()};
+                test.LastResult = new TestResult { ExceptionText = ex.Message, Counts = new Counts(0, 0, 1, 0), FullExceptionText  = ex.ToString(), RetryAttemptNumber = test.RetryAttemptNumber};
             }
         }
 

@@ -2,6 +2,7 @@ using System.ComponentModel;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Domain;
+using StoryTeller.ProjectUtils;
 using StoryTeller.Workspace;
 using FileSystem = FubuCore.FileSystem;
 
@@ -36,6 +37,14 @@ namespace StoryTeller.CommandLine
         public RunInput()
         {
             LifecycleFlag = Lifecycle.Any;
+        }
+
+        public IProject LoadProject()
+        {
+            var project = ProjectLoader.Load(Path, CompileFlag, ProfileFlag);
+            if (TimeoutFlag != null) project.TimeoutInSeconds = TimeoutFlag.Value;
+
+            return project;
         }
     }
 }

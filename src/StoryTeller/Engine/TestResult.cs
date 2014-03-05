@@ -22,5 +22,6 @@ namespace StoryTeller.Engine
         public string Locator { get; set; }
 
         public string FullExceptionText { get; set; }
+        public int RetryAttemptNumber { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace StoryTellerUI
                 var args = ArgPreprocessor.Process(e.Args);
                 var queue = new Queue<string>(args);
                 var input = new RunCommand().Usages.BuildInput(queue).As<RunInput>();
-                var project = ProjectLoader.Load(input.Path, input.CompileFlag, input.ProfileFlag);
+                var project = input.LoadProject();
 
                 controller.StartNewProject(project);
             }

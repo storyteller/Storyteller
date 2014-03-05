@@ -33,6 +33,7 @@ namespace StoryTeller.Execution
                 x.Add("th").Text("Test");
                 x.Add("th").Text("Lifecycle");
                 x.Add("th").Text("Result");
+                x.Add("th").Text("Retries");
             });
 
             _tbody = _table.Add("tbody");
@@ -50,6 +51,8 @@ namespace StoryTeller.Execution
                     .Add("a")
                     .Text(test.GetStatus())
                     .Attr("href", resultsFile);
+
+                x.Add("td").Text(test.RetryAttemptNumber.ToString()).Style("align", "right");
             });
         }
 

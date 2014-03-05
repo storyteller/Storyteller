@@ -17,8 +17,7 @@ namespace StoryTeller.CommandLine
 
         public override bool Execute(RunInput input)
         {
-            var project = ProjectLoader.Load(input.Path, input.CompileFlag, input.ProfileFlag);
-            if (input.TimeoutFlag != null) project.TimeoutInSeconds = input.TimeoutFlag.Value;
+            var project = input.LoadProject();
 
             var runner = new ProjectRunner(new []{project}, input.ResultsPath);
             if (input.WorkspaceFlag.IsNotEmpty())
@@ -26,6 +25,7 @@ namespace StoryTeller.CommandLine
                 Console.WriteLine("Using workspace " + input.WorkspaceFlag);
                 runner.Workspace = input.WorkspaceFlag;
             }
+
             runner.MaxRetries = input.MaxRetryFlag;
 
             Console.WriteLine("Running tests with lifecycle: {0}", input.LifecycleFlag);

@@ -5,6 +5,7 @@ using System.Web;
 using FubuCore;
 using FubuCore.Conversion;
 using HtmlTags;
+using StoryTeller.Domain;
 using StoryTeller.Execution;
 using StoryTeller.Html;
 using StoryTeller.Model;
@@ -30,7 +31,10 @@ namespace StoryTeller.Engine
             _library = library;
             _system = system;
 
-            _result = new TestResult();
+            _result = new TestResult
+            {
+                RetryAttemptNumber = request.Test.RetryAttemptNumber
+            };
         }
 
         #region ITestRun Members
@@ -81,13 +85,15 @@ namespace StoryTeller.Engine
                     Locator = _request.Test.LocatorPath(),
                     ExecutionTime = 0,
                     FullExceptionText = e.ToString(),
-                    WasCancelled = false
+                    WasCancelled = false,
+                    RetryAttemptNumber = _request.Test.RetryAttemptNumber
                 };
 
                 _request.Test.LastResult = result;
 
                 return result;
             }
+
             _context = new TestContext(_execution, _request.Test, _listener);
 
             if (_context.RetryAttemptNumber > 0)
