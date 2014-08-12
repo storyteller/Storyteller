@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Xml;
 using HtmlTags;
 using NUnit.Framework;
 using StoryTeller.Domain;
@@ -85,6 +82,26 @@ namespace StoryTeller.Testing.Engine.Sets
 ");
 
             test.LastResult.Counts.ShouldEqual(5, 0, 0, 0);
+        }
+
+        [Test]
+        public void run_a_matching_test_with_rows_that_have_same_values()
+        {
+            Test test = 
+                TestUtility.RunTest(
+                    @"
+<Test name='something'>
+    <AddressCheck>
+        <CheckAddressesSame>
+            <Address>
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+            </Address>
+        </CheckAddressesSame>
+    </AddressCheck>
+</Test>
+");
+            test.LastResult.Counts.ShouldEqual(2, 0, 0, 0);
         }
 
         [Test]
@@ -274,12 +291,10 @@ namespace StoryTeller.Testing.Engine.Sets
 
             var setVerification = grammar.ToStructure(null).ShouldBeOfType<SetVerification>();
             var expected = new SetVerification("the title", "group1", Cell.For<string>("Field"),
-                                               Cell.For<string>("Message"));
+                Cell.For<string>("Message"));
 
             setVerification.ShouldEqual(expected);
-
         }
-
     }
 
 
@@ -292,6 +307,10 @@ namespace StoryTeller.Testing.Engine.Sets
                 .LeafNameIs("Address")
                 .MatchOn(x => x.Address1, x => x.City, x => x.StateOrProvince);
             this["CheckAddressesOrdered"] = VerifySetOf<Address>(LoadList1).Ordered()
+                .Titled("Check the Address List")
+                .LeafNameIs("Address")
+                .MatchOn(x => x.Address1, x => x.City, x => x.StateOrProvince);
+            this["CheckAddressesSame"] = VerifySetOf<Address>(LoadList3)
                 .Titled("Check the Address List")
                 .LeafNameIs("Address")
                 .MatchOn(x => x.Address1, x => x.City, x => x.StateOrProvince);
@@ -366,6 +385,25 @@ namespace StoryTeller.Testing.Engine.Sets
                 {
                     Address1 = "22 Cherry Lane",
                     City = "Georgetown",
+                    StateOrProvince = "TX"
+                }
+            };
+        }
+
+        public Address[] LoadList3()
+        {
+            return new[]
+            {
+                new Address
+                {
+                    Address1 = "1700 W 10th St",
+                    City = "Austin",
+                    StateOrProvince = "TX"
+                },
+                new Address
+                {
+                    Address1 = "1700 W 10th St",
+                    City = "Austin",
                     StateOrProvince = "TX"
                 }
             };
