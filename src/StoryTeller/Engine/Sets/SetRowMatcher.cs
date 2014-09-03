@@ -30,8 +30,10 @@ namespace StoryTeller.Engine.Sets
         {
             foreach (var actual in _actuals)
             {
-                var expected = _expecteds.Where(x => x.Result != SetMatch.Match)
+                var expected = _expecteds
+                    .Where(x => x.Result != SetMatch.Match)
                     .FirstOrDefault(x => x.Matches(_matcher, actual));
+
                 if (expected != null)
                 {
                     actual.Result = expected.Result = SetMatch.Match;

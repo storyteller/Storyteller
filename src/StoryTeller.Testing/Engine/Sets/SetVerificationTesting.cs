@@ -105,6 +105,48 @@ namespace StoryTeller.Testing.Engine.Sets
         }
 
         [Test]
+        public void run_a_matching_test_with_more_duplicate_rows_than_expected()
+        {
+            Test test = 
+                TestUtility.RunTest(
+                    @"
+<Test name='something'>
+    <AddressCheck>
+        <CheckAddressesSame>
+            <Address>
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+            </Address>
+        </CheckAddressesSame>
+    </AddressCheck>
+</Test>
+");
+            test.LastResult.Counts.ShouldEqual(2, 1, 0, 0);
+        }
+
+        [Test]
+        public void run_a_matching_test_with_other_rows_as_well()
+        {
+            Test test = 
+                TestUtility.RunTest(
+                    @"
+<Test name='something'>
+    <AddressCheck>
+        <CheckAddressesWithDuplicates>
+            <Address>
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+                <Row Address1 = '22 Cherry Lane' City = 'Georgetown' StateOrProvince = 'TX' />
+                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
+            </Address>
+        </CheckAddressesWithDuplicates>
+    </AddressCheck>
+</Test>
+");
+            test.LastResult.Counts.ShouldEqual(3, 0, 0, 0);
+        }
+
+        [Test]
         public void run_a_test_with_a_fixture_defined_with_a_grammar_that_has_before_steps()
         {
             Test test =
@@ -314,6 +356,10 @@ namespace StoryTeller.Testing.Engine.Sets
                 .Titled("Check the Address List")
                 .LeafNameIs("Address")
                 .MatchOn(x => x.Address1, x => x.City, x => x.StateOrProvince);
+            this["CheckAddressesWithDuplicates"] = VerifySetOf<Address>(LoadList4)
+                .Titled("Check the Address List")
+                .LeafNameIs("Address")
+                .MatchOn(x => x.Address1, x => x.City, x => x.StateOrProvince);
         }
 
         public Address[] LoadList1()
@@ -398,6 +444,31 @@ namespace StoryTeller.Testing.Engine.Sets
                 {
                     Address1 = "1700 W 10th St",
                     City = "Austin",
+                    StateOrProvince = "TX"
+                },
+                new Address
+                {
+                    Address1 = "1700 W 10th St",
+                    City = "Austin",
+                    StateOrProvince = "TX"
+                }
+            };
+        }
+
+        public Address[] LoadList4()
+        {
+            return new[]
+            {
+                new Address
+                {
+                    Address1 = "1700 W 10th St",
+                    City = "Austin",
+                    StateOrProvince = "TX"
+                },
+                new Address
+                {
+                    Address1 = "22 Cherry Lane",
+                    City = "Georgetown",
                     StateOrProvince = "TX"
                 },
                 new Address
