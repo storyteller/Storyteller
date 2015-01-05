@@ -83,7 +83,6 @@
     <Compile Include="ProjectUtils\Loaders\ProjectFileLoader.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
-    <Compile Include="CommandLine\SpecsInput.cs" />
     <Compile Include="CommandLine\ListSuitesCommand.cs" />
     <Compile Include="CommandLine\Validation\ValidateCommand.cs" />
     <Compile Include="CommandLine\Validation\ValidateInput.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="Execution\ProjectFileSystem.cs" />
     <Compile Include="Execution\ProjectTestRunner.cs" />
     <Compile Include="StoryTellerEnvironment.cs" />
-    <Compile Include="Workspace\IResultPersistor.cs" />
     <Compile Include="Workspace\ResultHistory.cs" />
     <Compile Include="Engine\Sets\RowValueMatcher.cs" />
     <Compile Include="Engine\StepResults.cs" />
@@ -261,7 +259,6 @@
     <Compile Include="Persistence\TestReader.cs" />
     <Compile Include="Persistence\TestWriter.cs" />
     <Compile Include="Workspace\ForceBinaryRecycle.cs" />
-    <Compile Include="Workspace\ResultPersistor.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

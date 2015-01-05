@@ -117,12 +117,9 @@ namespace StoryTeller.Execution
 
                         var filename = Path.GetFileNameWithoutExtension(test.FileName) +
                                        DateTime.Now.ToString("hhmmss") + "-results.htm";
-                        var resultFile = Path.Combine(_resultsFolder,
-                                                      filename);
 
                         _summary.AddTest(test, "results/" + filename);
 
-                        ResultPersistor.SaveResult(test.LastResult, test, projectHistoryFolder);
                     }
                     catch (Exception ex)
                     {

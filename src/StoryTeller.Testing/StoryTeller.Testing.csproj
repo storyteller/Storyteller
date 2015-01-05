@@ -212,7 +212,6 @@
     <Compile Include="Workspace\ProjectTester.cs" />
     <Compile Include="Workspace\FileSystemTester.cs" />
     <Compile Include="Workspace\ProjectValidationTester.cs" />
-    <Compile Include="Workspace\ResultPersistorIntegratedTester.cs" />
     <Compile Include="Xml\XmlReadingTester.cs" />
     <Compile Include="Xml\XmlTestWritingTester.cs" />
   </ItemGroup>
@@ -271,7 +270,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CommandLine\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
