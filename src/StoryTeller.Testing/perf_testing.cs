@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using StoryTeller.Samples;
 using TestContext = StoryTeller.Engine.TestContext;
 
 namespace StoryTeller.Testing
@@ -20,6 +21,22 @@ namespace StoryTeller.Testing
             {
                 numbers[i] = (random.NextDouble()*1000).ToString();
             }
+        }
+
+        [Test]
+        public void how_bad_is_fixture_creation()
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            for (int i = 0; i < 1000; i++)
+            {
+                var fixture = new MathFixture();
+            }
+
+            stopwatch.Stop();
+
+            Debug.WriteLine("Took " + stopwatch.ElapsedMilliseconds);
         }
 
         [Test]
