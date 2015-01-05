@@ -26,11 +26,6 @@ namespace StoryTeller.Execution
             initialize(() => project);
         }
 
-        public ResultHistory GetResults()
-        {
-            return _hierarchy.GetFullResults();
-        }
-
         public void LoadProject(string projectFile)
         {
             Func<IProject> getProject = () => StoryTeller.Workspace.Project.LoadFromFile(projectFile);

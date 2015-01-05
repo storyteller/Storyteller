@@ -17,17 +17,6 @@ namespace StoryTeller.Domain
         {
         }
 
-        public virtual ResultHistory GetFullResults()
-        {
-            var history = new ResultHistory();
-            GetAllTests().Each(t =>
-            {
-                history[t] = t.LastResult;
-            });
-
-            return history;
-        }
-
         public Test AddTest(string testPath)
         {
             var path = new TPath(testPath);

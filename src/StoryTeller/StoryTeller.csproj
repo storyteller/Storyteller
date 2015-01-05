@@ -117,7 +117,6 @@
     <Compile Include="Execution\ProjectFileSystem.cs" />
     <Compile Include="Execution\ProjectTestRunner.cs" />
     <Compile Include="StoryTellerEnvironment.cs" />
-    <Compile Include="Workspace\ResultHistory.cs" />
     <Compile Include="Engine\Sets\RowValueMatcher.cs" />
     <Compile Include="Engine\StepResults.cs" />
     <Compile Include="Domain\IPartHolder.cs" />
