@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
-using StoryTeller.Codegen;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 
@@ -25,30 +24,14 @@ namespace StoryTeller.Workspace
         ITestRunner LocalRunner();
         void CreateDirectory(Suite suite);
 
-        CodegenOptions Options { get; }
-
         [XmlIgnore]
         string ProjectFolder { get; set; }
 
         string Profile { get; set; }
 
-        string GetTargetFile();
         string GetTestFolder();
     }
 
-    public class CodegenOptions
-    {
-        public CodegenOptions()
-        {
-            FileTemplate = ProjectRunnerCodegenService.DefaultFileTemplate();
-            MethodTemplate = ProjectRunnerCodegenService.DefaultMethodTemplate();
-            TargetFile = "StoryTellerDebug.cs";
-        }
-
-        public string FileTemplate { get; set; }
-        public string MethodTemplate { get; set; }
-        public string TargetFile { get; set; }
-    }
 
 
 }

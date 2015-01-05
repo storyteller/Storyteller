@@ -22,7 +22,6 @@ namespace StoryTeller.Workspace
         public Project()
         {
             TimeoutInSeconds = 60;
-            Options = new CodegenOptions();
 
             CompileTarget = "debug";
         }
@@ -31,13 +30,6 @@ namespace StoryTeller.Workspace
             : this()
         {
             FileName = filename;
-        }
-
-        public CodegenOptions Options { get; set; }
-
-        public string GetTargetFile()
-        {
-            return getCorrectPath(Options.TargetFile);
         }
 
 
