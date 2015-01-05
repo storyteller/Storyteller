@@ -208,7 +208,6 @@
     <Compile Include="Execution\TestEngine.cs" />
     <Compile Include="Domain\Hierarchy.cs" />
     <Compile Include="IGrammar.cs" />
-    <Compile Include="Domain\INamedItem.cs" />
     <Compile Include="Model\EmbeddedSection.cs" />
     <Compile Include="Model\FixtureStructure.cs" />
     <Compile Include="Model\FixtureLibrary.cs" />

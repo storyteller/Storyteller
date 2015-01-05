@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace StoryTeller.Domain
 {
-    public class Suite : INamedItem, IComparable<Suite>
+    public class Suite : IComparable<Suite>
     {
         private readonly List<Suite> _suites = new List<Suite>();
         private readonly List<Test> _tests = new List<Test>();
@@ -63,11 +63,6 @@ namespace StoryTeller.Domain
                 parent = parent.Parent;
             }
             return name;
-        }
-
-        IEnumerable<Test> INamedItem.AllTests
-        {
-            get { return GetAllTests(); }
         }
 
         #endregion

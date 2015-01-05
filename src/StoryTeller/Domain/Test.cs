@@ -10,7 +10,7 @@ using StoryTeller.Workspace;
 
 namespace StoryTeller.Domain
 {
-    public class Test : INamedItem, ITestPart, IPartHolder
+    public class Test : ITestPart, IPartHolder
     {
         protected readonly ITestPartCollection _parts;
         private string _fileName;
@@ -142,12 +142,6 @@ namespace StoryTeller.Domain
 
             return new TPath(Name);
         }
-
-        public IEnumerable<Test> AllTests
-        {
-            get { yield return this; }
-        }
-
 
         public void AcceptVisitor(ITestVisitor visitor)
         {

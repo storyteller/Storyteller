@@ -16,14 +16,15 @@ namespace StoryTeller.Model
 
         public override string ToString()
         {
-            return "{0}:  {1}".ToFormat(Node.GetPath().Locator, Message);
+            return "{0}:  {1}".ToFormat(Node.Name, Message);
         }
 
         #endregion
     }
 
-    public interface IFixtureNode : INamedItem
+    public interface IFixtureNode
     {
+        string Name { get; }
         string Label { get; }
         string Description { get; }
 

@@ -63,11 +63,6 @@ namespace StoryTeller.Model
             return TPath.Empty;
         }
 
-        public IEnumerable<Test> AllTests
-        {
-            get { throw new NotImplementedException(); }
-        }
-
         public void ModifyExampleTest(Test example)
         {
             example.Name = Label;
