@@ -32,7 +32,7 @@ namespace StoryTeller.Testing.Engine
             context.Counts.ShouldEqual(1, 0, 0, 0);
 
             step.Get("returnValue").Parse<bool>().ShouldBeTrue();
-            context.ResultsFor(step).ActualDisplay<bool>("returnValue").ShouldBeTrue();
+            context.ResultsFor(step).GetActual("returnValue").ShouldEqual(true);
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace StoryTeller.Testing.Engine
             context.Counts.ShouldEqual(0, 0, 1, 0);
 
             step.Get("returnValue").Parse<bool>().ShouldBeTrue();
-            context.ResultsFor(step).ActualDisplay<bool>("returnValue").ShouldBeFalse();
+            context.ResultsFor(step).GetActual("returnValue").ShouldEqual(false);
             context.ResultsFor(step).ExceptionText.ShouldContain("NotImplementedException");
         }
 
@@ -62,7 +62,7 @@ namespace StoryTeller.Testing.Engine
             context.Counts.ShouldEqual(0, 1, 0, 0);
 
             step.Get("returnValue").Parse<bool>().ShouldBeTrue();
-            context.ResultsFor(step).ActualDisplay<bool>("returnValue").ShouldBeFalse();
+            context.ResultsFor(step).GetActual("returnValue").ShouldEqual(false);
         }
 
         [Test]

@@ -308,7 +308,7 @@ namespace StoryTeller.Testing.Engine
 
             cell.RecordActual(32.0, step, data);
 
-            data.ResultsFor(step).ActualDisplay<double>("returnValue").ShouldEqual(32);
+            data.ResultsFor(step).GetActual("returnValue").ShouldEqual(32);
         }
 
 

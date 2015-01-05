@@ -19,13 +19,7 @@ namespace StoryTeller.Domain
 
         void SetActual(string key, object actual);
 
-        [Obsolete("Switch to using Stringifier in Fubu")]
-        T ActualDisplay<T>(string key);
-
-        [Obsolete("Switch to using Stringifier in Fubu")]
-        object ActualDisplay(string key);
         object GetActual(string key);
-        bool HasActual(string key);
         void SetResult<T>(T target, string key);
         T GetResult<T>(string key);
     }

@@ -163,21 +163,6 @@ namespace StoryTeller.Engine
             return (T)_results[key];
         }
 
-        public T ActualDisplay<T>(string key)
-        {
-            return (T)ActualDisplay(key);
-        }
-
-        public object ActualDisplay(string key)
-        {
-            return _actuals[key];
-        }
-
-        public bool HasActual(string key)
-        {
-            return _actuals.Has(key);
-        }
-
         public void Collapse()
         {
             _root.Collapse();

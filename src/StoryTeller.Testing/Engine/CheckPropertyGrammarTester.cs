@@ -100,7 +100,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_record_the_actual_value()
         {
-            results.ActualDisplay("Age").ShouldEqual(33);
+            results.GetActual("Age").ShouldEqual(33);
         }
 
         [Test]
@@ -130,7 +130,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_record_the_actual_value()
         {
-            results.ActualDisplay("Age").ShouldEqual(32);
+            results.GetActual("Age").ShouldEqual(32);
         }
 
         [Test]

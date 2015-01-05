@@ -63,7 +63,7 @@ namespace StoryTeller.Testing.Engine
 
             Step step = new Step("a").With("name", "Jeremy").With("age", 34);
 
-            grammar.Execute(step).Results.ActualDisplay<string>(method.GetReturnValueAlias()).ShouldEqual("Jeremy is 34");
+            grammar.Execute(step).Results.GetActual(method.GetReturnValueAlias()).ShouldEqual("Jeremy is 34");
         }
 
 
