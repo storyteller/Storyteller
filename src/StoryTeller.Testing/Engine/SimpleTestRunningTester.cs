@@ -9,56 +9,6 @@ using StoryTeller.Workspace;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
-    public class HtmlWriterTester
-    {
-        [Test]
-        public void give_it_a_whirl()
-        {
-            var test = new Test("The First Test");
-
-
-            test.Section<ArithmeticFixture>(x =>
-            {
-                x.WithStep("StartWith", "starting:100")
-                    .WithStep("MultiplyBy", "multiplier:2")
-                    .WithStep("TheValueShouldBe", "expected:200")
-                    .WithStep("TheValueShouldBe", "expected:300")
-                    .WithStep("Subtract", "operand:5")
-                    .WithStep("TheValueShouldBe", "expected:195")
-                    .WithStep("Adding", "x:10, y:23.5, returnValue:33.5")
-                    .WithStep("Throw");
-            });
-
-
-            var runner = new TestRunner();
-            HtmlDocument html = runner.WritePreview(test);
-        }
-
-        [Test]
-        public void try_to_write_table()
-        {
-            Project project = DataMother.MathProject();
-            string xml =
-                @"
-<Test name='Bad Add 1'>
-  <Math>
-    <AddTable>
-      <operation>
-        <operation x='1' y='2' sum='4' />
-        <operation x='2' y='2' sum='5' />
-        <operation x='3' y='2' sum='6' />
-      </operation>
-    </AddTable>
-
-  </Math>
-</Test>";
-
-            Test test = TestUtility.ReadTest(xml);
-            ITestRunner runner = new TestRunner();
-            runner.RunTest(test);
-        }
-    }
 
     [TestFixture]
     public class SimpleTestRunningTester

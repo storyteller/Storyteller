@@ -5,7 +5,6 @@ using System.Xml;
 using HtmlTags;
 using StoryTeller.Domain;
 using StoryTeller.Execution;
-using StoryTeller.Html;
 
 namespace StoryTeller.Engine
 {
@@ -16,27 +15,6 @@ namespace StoryTeller.Engine
             return runner.RunTest(new TestExecutionRequest(test, new TestStopConditions()));
         }
 
-        public static HtmlDocument WritePreview(this ITestRunner runner, Test test)
-        {
-            return runner.Writer().WritePreview(test);
-        }
-
-        internal static HtmlWriter Writer(this ITestRunner runner)
-        {
-            return new HtmlWriter(runner.Library);
-        }
-
-        public static void WriteResultsToFile(this Test test, string fileName)
-        {
-            File.WriteAllText(fileName, test.LastResult.Html);
-        }
-
-        public static void OpenResultsInBrowser(this Test test)
-        {
-            string contents = test.LastResult.Html;
-
-            OpenInBrowser(contents);
-        }
 
         public static void OpenInBrowser(this string contents)
         {

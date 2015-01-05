@@ -3,7 +3,6 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using StoryTeller.Domain;
-using StoryTeller.Html;
 using StoryTeller.Model;
 using StoryTeller.Persistence;
 
@@ -16,7 +15,6 @@ namespace StoryTeller
         string ToXml(Test test);
         void ApplyXmlChanges(Test test, XmlDocument xml);
 
-        string ToPreview(FixtureLibrary library, Test test);
         string ToJson(Test test);
         void ApplyJsonChanges(Test test, string json);
         void ApplyXmlChanges(Test test, string xml);
@@ -94,11 +92,6 @@ namespace StoryTeller
         {
             Test newTest = _reader.ReadTest(xml.DocumentElement);
             test.ApplyChanges(newTest);
-        }
-
-        public string ToPreview(FixtureLibrary library, Test test)
-        {
-            return new HtmlWriter(library).WritePreview(test).ToString();
         }
 
         public string ToJson(Test test)

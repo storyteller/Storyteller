@@ -1,12 +1,9 @@
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Sets;
-using System.Linq;
-using StoryTeller.Html;
-using StoryTeller.Model;
-using StoryTeller.Persistence;
 using TestContext = StoryTeller.Engine.TestContext;
 
 namespace StoryTeller.Testing.Engine.Sets
@@ -14,6 +11,8 @@ namespace StoryTeller.Testing.Engine.Sets
     [TestFixture]
     public class StringComparerTester
     {
+        private StringSetComparer comparer;
+
         #region Setup/Teardown
 
         [SetUp]
@@ -23,8 +22,6 @@ namespace StoryTeller.Testing.Engine.Sets
         }
 
         #endregion
-
-        private StringSetComparer comparer;
 
         [Test]
         public void returns_itself_as_the_only_property()
@@ -65,7 +62,7 @@ namespace StoryTeller.Testing.Engine.Sets
         [Test]
         public void run_integrated_fail_with_extra_data()
         {
-            Test test =
+            var test =
                 TestUtility.RunTest(
                     @"
 <Test name='a test'>
@@ -89,7 +86,7 @@ namespace StoryTeller.Testing.Engine.Sets
         [Test]
         public void run_integrated_fail_with_missing_data()
         {
-            Test test =
+            var test =
                 TestUtility.RunTest(
                     @"
 <Test name='a test'>
@@ -114,7 +111,7 @@ namespace StoryTeller.Testing.Engine.Sets
         [Test]
         public void run_integrated_success()
         {
-            Test test =
+            var test =
                 TestUtility.RunTest(
                     @"
 <Test name='a test'>
@@ -134,8 +131,6 @@ namespace StoryTeller.Testing.Engine.Sets
 ");
             test.LastResult.Counts.ShouldEqual(3, 0, 0, 0);
         }
-
-
     }
 
     public class StringCompareFixture : Fixture
@@ -147,7 +142,7 @@ namespace StoryTeller.Testing.Engine.Sets
 
         public string[] LoadList1(ITestContext context)
         {
-            return new[] { "a", "b", "c" };
+            return new[] {"a", "b", "c"};
         }
     }
 
@@ -155,7 +150,7 @@ namespace StoryTeller.Testing.Engine.Sets
     {
         public static IEnumerable<IStep> ToEnumerable(this IStep step)
         {
-            return new[] { step };
+            return new[] {step};
         }
     }
 }

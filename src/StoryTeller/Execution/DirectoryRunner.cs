@@ -55,7 +55,6 @@ namespace StoryTeller.Execution
 
 
 
-            test.WriteResultsToFile(resultFile);
             _summary.AddTest(test, resultFile);
         }
 

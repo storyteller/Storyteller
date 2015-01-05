@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
-using StoryTeller.Html;
 using StoryTeller.Persistence;
 using StoryTeller.Samples;
 using StoryTeller.Samples.Grammars;
@@ -28,8 +27,6 @@ namespace StoryTeller.Testing.Integration
             test.ShouldNotBeNull();
             test.LastResult = runner.RunTest(test);
 
-            var library = runner.Library;
-            var writer = new HtmlWriter(library);
             //writer.WritePreview(test).OpenInBrowser();
             //test.OpenResultsInBrowser();
 

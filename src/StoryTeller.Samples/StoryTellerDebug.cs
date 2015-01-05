@@ -19,8 +19,7 @@ namespace StoryTellerTestHarness
         public void Tables()
         {
             var test = runner.RunTest("Tables/Tables");
-        
-            runner.WritePreview(test).OpenInBrowser();
+
         }
 
         [TestFixtureTearDown]

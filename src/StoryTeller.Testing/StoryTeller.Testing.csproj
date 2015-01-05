@@ -143,10 +143,6 @@
     <Compile Include="Execution\FixtureAssemblyTester.cs" />
     <Compile Include="Execution\ProjectTestRunnerIntegratedTester.cs" />
     <Compile Include="Execution\TestEngineTester.cs" />
-    <Compile Include="Html\CellTagTester.cs" />
-    <Compile Include="Html\HtmlClassesSmokeTester.cs" />
-    <Compile Include="Html\SentenceTester.cs" />
-    <Compile Include="Html\StoryTellerTableTagTester.cs" />
     <Compile Include="Integration\GrammarIntegrationTests.cs" />
     <Compile Include="Engine\ReflectionAssertionTester.cs" />
     <Compile Include="Engine\ServiceAssertionGrammarTester.cs" />

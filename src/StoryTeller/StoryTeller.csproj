@@ -83,7 +83,6 @@
     <Compile Include="ProjectUtils\Loaders\ProjectFileLoader.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
-    <Compile Include="CommandLine\SpecsCommand.cs" />
     <Compile Include="CommandLine\SpecsInput.cs" />
     <Compile Include="CommandLine\ListSuitesCommand.cs" />
     <Compile Include="CommandLine\Validation\ValidateCommand.cs" />
@@ -116,11 +115,8 @@
     <Compile Include="Engine\SimpleExecutionContext.cs" />
     <Compile Include="Execution\FixtureAssembly.cs" />
     <Compile Include="Execution\OpenHtmlOption.cs" />
-    <Compile Include="Execution\PreviewSummary.cs" />
     <Compile Include="Execution\ProjectFileSystem.cs" />
     <Compile Include="Execution\ProjectTestRunner.cs" />
-    <Compile Include="Html\TableContainerTag.cs" />
-    <Compile Include="Html\TagExtensions.cs" />
     <Compile Include="StoryTellerEnvironment.cs" />
     <Compile Include="Workspace\IResultPersistor.cs" />
     <Compile Include="Workspace\ResultHistory.cs" />
@@ -170,18 +166,6 @@
     <Compile Include="Execution\TestRunnerProxy.cs" />
     <Compile Include="Execution\TestStatusMessage.cs" />
     <Compile Include="Execution\TestStopConditions.cs" />
-    <Compile Include="Html\CellTag.cs" />
-    <Compile Include="Html\CommentTag.cs" />
-    <Compile Include="Html\EmbeddedSectionTag.cs" />
-    <Compile Include="Html\ExceptionTag.cs" />
-    <Compile Include="Html\FixtureLibraryErrorWriter.cs" />
-    <Compile Include="Html\HtmlClasses.cs" />
-    <Compile Include="Html\ParagraphTag.cs" />
-    <Compile Include="Html\PreviewWriter.cs" />
-    <Compile Include="Html\ResultsWriter.cs" />
-    <Compile Include="Html\SentenceTag.cs" />
-    <Compile Include="Html\StoryTellerTableTag.cs" />
-    <Compile Include="Html\TestHolderTag.cs" />
     <Compile Include="Model\DoGrammarStructure.cs" />
     <Compile Include="Engine\FactGrammar.cs" />
     <Compile Include="Engine\GrammarBuilder.cs" />
@@ -225,7 +209,6 @@
     <Compile Include="Execution\ProjectRunner.cs" />
     <Compile Include="Execution\DirectoryRunnerSetup.cs" />
     <Compile Include="Execution\IResultsSummary.cs" />
-    <Compile Include="Execution\ResultsSummary.cs" />
     <Compile Include="Execution\TestEngine.cs" />
     <Compile Include="Domain\Hierarchy.cs" />
     <Compile Include="IGrammar.cs" />
@@ -250,8 +233,6 @@
     <Compile Include="Persistence\JsonNode.cs" />
     <Compile Include="Persistence\TestXmlNode.cs" />
     <Compile Include="Persistence\WriterVisitor.cs" />
-    <Compile Include="Html\HtmlWriter.cs" />
-    <Compile Include="Html\IHtmlWriter.cs" />
     <Compile Include="Rendering\DisplayParser.cs" />
     <Compile Include="Engine\Reflection\MethodExtensions.cs" />
     <Compile Include="Domain\IStep.cs" />
@@ -282,11 +263,6 @@
     <Compile Include="Persistence\TestWriter.cs" />
     <Compile Include="Workspace\ForceBinaryRecycle.cs" />
     <Compile Include="Workspace\ResultPersistor.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Html\jquery.js" />
-    <EmbeddedResource Include="Html\style.css" />
-    <EmbeddedResource Include="Html\summaryFilter.js" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

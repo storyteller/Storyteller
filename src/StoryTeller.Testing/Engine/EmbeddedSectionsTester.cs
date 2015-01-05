@@ -72,24 +72,6 @@ namespace StoryTeller.Testing.Engine
             test.LastResult.Counts.ShouldEqual(2, 1, 1, 0);
         }
 
-        [Test]
-        public void smoke_test_writing_preview()
-        {
-            string html = runner.WritePreview(test).ToString();
-            html.ShouldContain("Do some Arithmetic");
-        }
-
-        [Test]
-        public void smoke_test_writing_the_results()
-        {
-            runner.RunTest(test);
-            test.LastResult.Html.ShouldContain(new Counts
-            {
-                Rights = 2,
-                Exceptions = 1,
-                Wrongs = 1
-            }.ToString());
-        }
     }
 
     public class EmbeddedSectionFixture : Fixture

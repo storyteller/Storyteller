@@ -99,11 +99,7 @@ namespace StoryTeller.Execution
         {
             var test = RunTest(testPath);
 
-            bool shouldOpen = shouldOpenTest(test.LastResult);
-            if (shouldOpen)
-            {
-                test.OpenResultsInBrowser();
-            }
+            // TODO -- replace the mechanism to open the results in a browser?
 
             if (!test.WasSuccessful())
             {
@@ -168,10 +164,5 @@ namespace StoryTeller.Execution
             });
         }
 
-        public string WritePreview(Test test)
-        {
-            var converter = new TestConverter();
-            return converter.ToPreview(this.GetLibary(), test);
-        }
     }
 }

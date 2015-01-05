@@ -11,7 +11,6 @@ namespace StoryTeller.Engine
             Counts = new Counts();
         }
 
-        public string Html { get; set; }
         public Counts Counts { get; set; }
         [XmlAttribute] public double ExecutionTime { get; set; }
         [XmlAttribute]

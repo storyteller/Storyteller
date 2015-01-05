@@ -19,23 +19,7 @@ namespace StoryTeller.Testing.Engine.Sets
     [TestFixture]
     public class SetVerificationTesting
     {
-        private HtmlDocument writePreview(string xml)
-        {
-            Test test = TestUtility.ReadTest(xml);
-            var runner = new TestRunner();
 
-            return runner.WritePreview(test);
-        }
-
-        private string writeResults(string xml)
-        {
-            Test test = TestUtility.ReadTest(xml);
-            var runner = new TestRunner();
-
-            runner.RunTest(test);
-
-            return test.LastResult.Html;
-        }
 
         [Test]
         public void run_a_completely_matching_test_1()
@@ -266,61 +250,6 @@ namespace StoryTeller.Testing.Engine.Sets
         }
 
 
-        [Test]
-        public void smoke_test_writing_preview()
-        {
-            HtmlDocument html =
-                writePreview(
-                    @"
-<Test name='something'>
-    <AddressCheck>
-        <CheckAddresses>
-            <Address>
-                <Row Address1 = '4 Brookhaven' City = 'Bentonville' StateOrProvince = 'AR' />
-                <Row Address1 = '5 Brookhaven' City = 'Bentonville' StateOrProvince = 'AR' />
-                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
-                <Row Address1 = 'Missing Address' City = 'Joplin' StateOrProvince = 'MO' />
-            </Address>
-        </CheckAddresses>
-    </AddressCheck>
-</Test>
-");
-
-            string htmlString = html.ToString();
-            htmlString.ShouldContain("Address1");
-            htmlString.ShouldContain("City");
-            htmlString.ShouldContain("StateOrProvince");
-
-            //html.OpenResultsInBrowser();
-        }
-
-
-        [Test]
-        public void smoke_test_writing_results()
-        {
-            string htmlString =
-                writeResults(
-                    @"
-<Test name='something'>
-    <AddressCheck>
-        <CheckAddresses>
-            <Address>
-                <Row Address1 = '4 Brookhaven' City = 'Bentonville' StateOrProvince = 'AR' />
-                <Row Address1 = '5 Brookhaven' City = 'Bentonville' StateOrProvince = 'AR' />
-                <Row Address1 = '1700 W 10th St' City = 'Austin' StateOrProvince = 'TX' />
-                <Row Address1 = 'Missing Address' City = 'Joplin' StateOrProvince = 'MO' />
-            </Address>
-        </CheckAddresses>
-    </AddressCheck>
-</Test>
-");
-
-            htmlString.ShouldContain("Address1");
-            htmlString.ShouldContain("City");
-            htmlString.ShouldContain("StateOrProvince");
-
-            //html.OpenResultsInBrowser();
-        }
 
         [Test]
         public void when_writing_the_grammar_structure()

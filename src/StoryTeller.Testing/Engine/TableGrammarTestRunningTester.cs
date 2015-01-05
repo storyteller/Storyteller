@@ -84,24 +84,6 @@ namespace StoryTeller.Testing.Engine
             test2.LastResult.Counts.ShouldEqual(7, 2, 0, 0);
         }
 
-        [Test]
-        public void smoke_test_the_preview()
-        {
-            HtmlDocument preview = runner.WritePreview(test);
-            string html = preview.ToString();
-            html.ShouldContain("Add numbers");
-        }
-
-        [Test]
-        public void smoke_test_the_results()
-        {
-            runner.RunTest(test);
-            test.LastResult.Html.ToString().ShouldContain(new Counts
-            {
-                Rights = 7,
-                Wrongs = 2
-            }.ToString());
-        }
     }
 
     public class AddingFixture : Fixture

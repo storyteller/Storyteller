@@ -11,6 +11,21 @@ using StringExtensions = FubuCore.StringExtensions;
 
 namespace StoryTeller.Execution
 {
+    public class ResultsSummary : IResultsSummary
+    {
+        public void Start(string description, DateTime runningTime)
+        {
+        }
+
+        public void AddTest(Test test, string resultsFile)
+        {
+        }
+
+        public void WriteFile(string fileName)
+        {
+        }
+    }
+
     public class ProjectRunner : ConsoleListener
     {
         private readonly IDictionary<Lifecycle, TestCount> _counts = new Dictionary<Lifecycle, TestCount>();
@@ -105,7 +120,6 @@ namespace StoryTeller.Execution
                         var resultFile = Path.Combine(_resultsFolder,
                                                       filename);
 
-                        test.WriteResultsToFile(resultFile);
                         _summary.AddTest(test, "results/" + filename);
 
                         ResultPersistor.SaveResult(test.LastResult, test, projectHistoryFolder);

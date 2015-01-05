@@ -26,7 +26,6 @@ end
   sln.defaults = [
           :ilrepack,
           :smoke_test_st_run,
-          :smoke_test_st_specs,
           :smoke_test_st_run_regression,
           :smoke_test_validate_command_success,
           :smoke_test_validate_command_failure
@@ -81,7 +80,4 @@ task :smoke_test_validate_command_success => [:compile] do
   exit 1 unless $?.exitstatus == 0
 end
 
-desc "Runs the st specs command against the gallery project.  Should succeed"
-task :smoke_test_st_specs => [:compile] do
-  sh "src/ST/bin/#{@solution.compilemode}/ST specs src/Storyteller.Gallery specs -c #{@solution.compilemode}"
-end
+

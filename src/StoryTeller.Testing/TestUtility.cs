@@ -32,12 +32,6 @@ namespace StoryTeller.Testing
             return test;
         }
 
-        public static HtmlDocument WritePreview(string xml)
-        {
-            Test test = ReadTest(xml);
-            return new TestRunner().WritePreview(test);
-        }
-
 
         public static Test ReadTest(string xml)
         {
