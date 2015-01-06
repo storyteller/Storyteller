@@ -15,7 +15,6 @@ namespace StoryTeller.Model
         IEnumerable<GrammarStructure> Grammars { get; }
         GrammarStructure GrammarFor(string grammarKey);
         void AddStructure(string grammarKey, GrammarStructure structure);
-        bool HasGrammar(string key);
         bool Equals(FixtureStructure obj);
         void LogError(Exception exception);
         void LogError(GrammarError error);
@@ -115,11 +114,6 @@ namespace StoryTeller.Model
             structure.Name = grammarKey;
             structure.Parent = this;
             _structures[grammarKey] = structure;
-        }
-
-        public bool HasGrammar(string key)
-        {
-            return _structures.Has(key);
         }
 
         public IEnumerable<GrammarStructure> Grammars
