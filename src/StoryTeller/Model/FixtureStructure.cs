@@ -10,12 +10,9 @@ namespace StoryTeller.Model
 {
     public interface IFixtureStructure
     {
-        string FixtureClassName { get; set; }
-        string FixtureNamespace { get; set; }
         int GrammarCount { get; }
         IEnumerable<GrammarError> Errors { get; }
         IEnumerable<GrammarStructure> Grammars { get; }
-        bool IsAFixture();
         GrammarStructure GrammarFor(string grammarKey);
         void AddStructure(string grammarKey, GrammarStructure structure);
         bool HasGrammar(string key);
@@ -47,8 +44,6 @@ namespace StoryTeller.Model
 
         public void ReadFrom(IFixture fixture, FixtureLibrary library)
         {
-            FixtureClassName = fixture.GetType().FullName;
-            FixtureNamespace = fixture.GetType().Namespace;
             Description = fixture.Description;
             Label = fixture.Title.IsEmpty() ? Name : fixture.Title;
 
@@ -69,14 +64,7 @@ namespace StoryTeller.Model
             AddStructure(key, structure);
         }
 
-        public string FixtureClassName { get; set; }
-        public string FixtureNamespace { get; set; }
         public int GrammarCount { get { return _structures.Count; } }
-
-        public bool IsAFixture()
-        {
-            return !string.IsNullOrEmpty(FixtureClassName);
-        }
 
         #region IFixtureNode Members
 
