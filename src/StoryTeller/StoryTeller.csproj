@@ -94,8 +94,6 @@
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
     <Compile Include="CommandLine\ListSuitesCommand.cs" />
-    <Compile Include="CommandLine\Validation\ValidateCommand.cs" />
-    <Compile Include="CommandLine\Validation\ValidateInput.cs" />
     <Compile Include="DecoratedLineGrammar.cs" />
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Tags.cs" />
@@ -230,7 +228,6 @@
     <Compile Include="Model\SentencePart.cs" />
     <Compile Include="Model\SetVerification.cs" />
     <Compile Include="Model\Table.cs" />
-    <Compile Include="Model\TestParser.cs" />
     <Compile Include="Model\TextInput.cs" />
     <Compile Include="Persistence\INode.cs" />
     <Compile Include="Persistence\ITestFileReader.cs" />

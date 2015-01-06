@@ -19,7 +19,6 @@ namespace StoryTeller.Model
         bool Equals(FixtureStructure obj);
         void LogError(Exception exception);
         void LogError(GrammarError error);
-        bool HasGrammarErrors();
     }
 
     [Serializable]
@@ -168,9 +167,5 @@ namespace StoryTeller.Model
             _errors.Add(error);
         }
 
-        public bool HasGrammarErrors()
-        {
-            return _structures.GetAll().Any(x => x.AllErrors().Any());
-        }
     }
 }
