@@ -45,14 +45,14 @@ namespace StoryTeller.Testing.Domain
         [Test]
         public void by_default_the_status_is_all()
         {
-            filter.ResultStatus.ShouldEqual(ResultStatus.All);
+            filter.TestResultStatus.ShouldEqual(TestResultStatus.All);
         }
 
         [Test]
         public void do_not_show_empty_suites_when_a_result_status_is_selected()
         {
             filter.Lifecycle = Lifecycle.Any;
-            filter.ResultStatus = ResultStatus.Success;
+            filter.TestResultStatus = TestResultStatus.Success;
 
             filter.ShowEmptySuites().ShouldBeFalse();
         }
@@ -61,7 +61,7 @@ namespace StoryTeller.Testing.Domain
         public void do_not_show_empty_suites_when_lifecyle_is_set()
         {
             filter.Lifecycle = Lifecycle.Acceptance;
-            filter.ResultStatus = ResultStatus.All;
+            filter.TestResultStatus = TestResultStatus.All;
 
             filter.ShowEmptySuites().ShouldBeFalse();
         }
@@ -70,7 +70,7 @@ namespace StoryTeller.Testing.Domain
         public void do_not_show_empty_suites_when_tags_are_applied()
         {
             filter.Lifecycle = Lifecycle.Any;
-            filter.ResultStatus = ResultStatus.All;
+            filter.TestResultStatus = TestResultStatus.All;
             filter.Tags = "tagged";
             filter.ShowEmptySuites().ShouldBeFalse();
         }
@@ -79,7 +79,7 @@ namespace StoryTeller.Testing.Domain
         public void look_for_failed_regression_tests()
         {
             filter.Lifecycle = Lifecycle.Regression;
-            filter.ResultStatus = ResultStatus.Failed;
+            filter.TestResultStatus = TestResultStatus.Failed;
 
             filter.Matches(unknownAcceptanceTest).ShouldBeFalse();
             filter.Matches(unknownRegressionTest).ShouldBeFalse();
@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.Domain
         public void look_for_successful_acceptance_tests()
         {
             filter.Lifecycle = Lifecycle.Acceptance;
-            filter.ResultStatus = ResultStatus.Success;
+            filter.TestResultStatus = TestResultStatus.Success;
 
             filter.Matches(unknownAcceptanceTest).ShouldBeFalse();
             filter.Matches(unknownRegressionTest).ShouldBeFalse();
@@ -119,7 +119,7 @@ namespace StoryTeller.Testing.Domain
         [Test]
         public void only_look_for_failed_tests()
         {
-            filter.ResultStatus = ResultStatus.Failed;
+            filter.TestResultStatus = TestResultStatus.Failed;
 
             filter.Matches(unknownAcceptanceTest).ShouldBeFalse();
             filter.Matches(unknownRegressionTest).ShouldBeFalse();
@@ -145,7 +145,7 @@ namespace StoryTeller.Testing.Domain
         [Test]
         public void only_look_for_successful_tests()
         {
-            filter.ResultStatus = ResultStatus.Success;
+            filter.TestResultStatus = TestResultStatus.Success;
 
             filter.Matches(unknownAcceptanceTest).ShouldBeFalse();
             filter.Matches(unknownRegressionTest).ShouldBeFalse();
@@ -158,7 +158,7 @@ namespace StoryTeller.Testing.Domain
         [Test]
         public void only_look_for_unknown_tests()
         {
-            filter.ResultStatus = ResultStatus.Unknown;
+            filter.TestResultStatus = TestResultStatus.Unknown;
 
             filter.Matches(unknownAcceptanceTest).ShouldBeTrue();
             filter.Matches(unknownRegressionTest).ShouldBeTrue();
@@ -172,7 +172,7 @@ namespace StoryTeller.Testing.Domain
         public void show_empty_suites_when_any_lifecycle_and_status_is_all()
         {
             filter.Lifecycle = Lifecycle.Any;
-            filter.ResultStatus = ResultStatus.All;
+            filter.TestResultStatus = TestResultStatus.All;
 
             filter.ShowEmptySuites().ShouldBeTrue();
         }

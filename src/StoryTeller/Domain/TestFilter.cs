@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace StoryTeller.Domain
 {
-    public enum ResultStatus
+    public enum TestResultStatus
     {
         Unknown,
         Success,
@@ -16,7 +16,7 @@ namespace StoryTeller.Domain
 
     public interface ITestFilter
     {
-        ResultStatus ResultStatus { get; set; }
+        TestResultStatus TestResultStatus { get; set; }
         Lifecycle Lifecycle { get; set; }
         bool Matches(Test test);
         bool Matches(Suite suite);
@@ -28,8 +28,8 @@ namespace StoryTeller.Domain
     {
         private readonly Cache<Lifecycle, Predicate<Test>> _lifecycleFilters = new Cache<Lifecycle, Predicate<Test>>();
 
-        private readonly Cache<ResultStatus, Predicate<Test>> _resultFilters =
-            new Cache<ResultStatus, Predicate<Test>>();
+        private readonly Cache<TestResultStatus, Predicate<Test>> _resultFilters =
+            new Cache<TestResultStatus, Predicate<Test>>();
 
         private Lifecycle _lifecycle;
 
@@ -37,7 +37,7 @@ namespace StoryTeller.Domain
         private Predicate<Test> _resultMatch;
         private Predicate<Test> _tagsMatch = t => true;
 
-        private ResultStatus _resultStatus;
+        private TestResultStatus _testResultStatus;
 
         private string _Tags;
         public string Tags
@@ -60,26 +60,26 @@ namespace StoryTeller.Domain
 
         public TestFilter()
         {
-            _resultFilters[ResultStatus.All] = t => true;
-            _resultFilters[ResultStatus.Success] = t => t.HasResult() && t.WasSuccessful();
-            _resultFilters[ResultStatus.Failed] = t => t.HasResult() && !t.WasSuccessful();
-            _resultFilters[ResultStatus.Unknown] = t => !t.HasResult();
+            _resultFilters[TestResultStatus.All] = t => true;
+            _resultFilters[TestResultStatus.Success] = t => t.HasResult() && t.WasSuccessful();
+            _resultFilters[TestResultStatus.Failed] = t => t.HasResult() && !t.WasSuccessful();
+            _resultFilters[TestResultStatus.Unknown] = t => !t.HasResult();
 
             _lifecycleFilters[Lifecycle.Any] = t => true;
             _lifecycleFilters[Lifecycle.Acceptance] = t => t.Lifecycle == Lifecycle.Acceptance;
             _lifecycleFilters[Lifecycle.Regression] = t => t.Lifecycle == Lifecycle.Regression;
 
-            ResultStatus = ResultStatus.All;
+            TestResultStatus = TestResultStatus.All;
             Lifecycle = Lifecycle.Any;
         }
 
 
-        public ResultStatus ResultStatus
+        public TestResultStatus TestResultStatus
         {
-            get { return _resultStatus; }
+            get { return _testResultStatus; }
             set
             {
-                _resultStatus = value;
+                _testResultStatus = value;
                 _resultMatch = _resultFilters[value];
             }
         }
@@ -114,7 +114,7 @@ namespace StoryTeller.Domain
 
         public bool ShowEmptySuites()
         {
-            return _lifecycle == Lifecycle.Any && _resultStatus == ResultStatus.All && string.IsNullOrEmpty(_Tags);
+            return _lifecycle == Lifecycle.Any && _testResultStatus == TestResultStatus.All && string.IsNullOrEmpty(_Tags);
         }
     }
 }

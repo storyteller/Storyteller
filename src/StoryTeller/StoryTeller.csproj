@@ -77,6 +77,8 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Assertions\StorytellerAssertionException.cs" />
+    <Compile Include="New\Results\CellResult.cs" />
+    <Compile Include="New\Results\ResultsSpike.cs" />
     <Compile Include="ProjectUtils\Loaders\IProjectLoader.cs" />
     <Compile Include="ProjectUtils\ProjectLoader.cs" />
     <Compile Include="ProjectUtils\Loaders\ProjectDirectoryLoader.cs" />

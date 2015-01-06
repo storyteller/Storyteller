@@ -1,8 +1,12 @@
 using System;
 using System.Xml.Serialization;
+using StoryTeller.Domain;
+using StoryTeller.New.Results;
 
 namespace StoryTeller.Engine
 {
+    // TODO -- get rid of the stupid serialization cruft
+
     [Serializable]
     public class Counts
     {
@@ -33,6 +37,28 @@ namespace StoryTeller.Engine
             Wrongs += peer.Wrongs;
             Exceptions += peer.Exceptions;
             SyntaxErrors += peer.SyntaxErrors;
+        }
+
+        public void Increment(ResultStatus status)
+        {
+            switch (status)
+            {
+                case ResultStatus.success:
+                    IncrementRights();
+                    break;
+
+                case ResultStatus.error:
+                    IncrementExceptions();
+                    break;
+
+                case ResultStatus.failed:
+                    IncrementWrongs();
+                    break;
+
+                case ResultStatus.missing:
+                    IncrementSyntaxErrors();
+                    break;
+            }
         }
 
         public void IncrementRights()

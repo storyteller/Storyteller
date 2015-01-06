@@ -171,6 +171,7 @@
     <Compile Include="Model\SetVerificationTester.cs" />
     <Compile Include="Model\TableTester.cs" />
     <Compile Include="Model\TestParserTester.cs" />
+    <Compile Include="New\Results\CellResultTester.cs" />
     <Compile Include="perf_testing.cs" />
     <Compile Include="Persistence\JsonNodeTester.cs" />
     <Compile Include="Persistence\XmlTestWriterTester.cs" />
