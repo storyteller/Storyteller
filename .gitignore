@@ -2,7 +2,6 @@ build
 obj
 bin
 deploy
-results
 deploy/*
 *.cache
 *.zip
