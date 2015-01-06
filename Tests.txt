@@ -1,1 +1,2 @@
 Storyteller.Testing
+Storyteller.Core.Testing

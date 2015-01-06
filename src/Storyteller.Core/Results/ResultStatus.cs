@@ -1,4 +1,4 @@
-namespace StoryTeller.New.Results
+namespace Storyteller.Core.Results
 {
     public enum ResultStatus
     {

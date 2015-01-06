@@ -78,15 +78,6 @@
     </Compile>
     <Compile Include="Assertions\StorytellerAssertionException.cs" />
     <Compile Include="Engine\HiddenAttribute.cs" />
-    <Compile Include="New\Model\ModelSpike.cs" />
-    <Compile Include="New\Results\CellResult.cs" />
-    <Compile Include="New\Results\Envelope.cs" />
-    <Compile Include="New\Results\IResultMessage.cs" />
-    <Compile Include="New\Results\Finished.cs" />
-    <Compile Include="New\Results\ResultStatus.cs" />
-    <Compile Include="New\Results\StepResult.cs" />
-    <Compile Include="New\Results\Subject.cs" />
-    <Compile Include="New\Results\TimedOut.cs" />
     <Compile Include="ProjectUtils\Loaders\IProjectLoader.cs" />
     <Compile Include="ProjectUtils\ProjectLoader.cs" />
     <Compile Include="ProjectUtils\Loaders\ProjectDirectoryLoader.cs" />

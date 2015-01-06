@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using StoryTeller.Engine;
-using StoryTeller.New.Results;
+using Storyteller.Core.Engine;
+using Storyteller.Core.Results;
 
-namespace StoryTeller.Testing.New.Results
+namespace Storyteller.Core.Testing.Results
 {
     [TestFixture]
     public class StepResultTester

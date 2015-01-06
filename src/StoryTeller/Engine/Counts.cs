@@ -1,7 +1,5 @@
 using System;
 using System.Xml.Serialization;
-using StoryTeller.Domain;
-using StoryTeller.New.Results;
 
 namespace StoryTeller.Engine
 {
@@ -10,15 +8,6 @@ namespace StoryTeller.Engine
     [Serializable]
     public class Counts
     {
-        [XmlAttribute]
-        public int Rights { get; set; }
-        [XmlAttribute]
-        public int Wrongs { get; set; }
-        [XmlAttribute]
-        public int Exceptions { get; set; }
-        [XmlAttribute]
-        public int SyntaxErrors { get; set; }
-
         public Counts()
         {
         }
@@ -31,34 +20,24 @@ namespace StoryTeller.Engine
             SyntaxErrors = syntaxErrors;
         }
 
+        [XmlAttribute]
+        public int Rights { get; set; }
+
+        [XmlAttribute]
+        public int Wrongs { get; set; }
+
+        [XmlAttribute]
+        public int Exceptions { get; set; }
+
+        [XmlAttribute]
+        public int SyntaxErrors { get; set; }
+
         public void Add(Counts peer)
         {
             Rights += peer.Rights;
             Wrongs += peer.Wrongs;
             Exceptions += peer.Exceptions;
             SyntaxErrors += peer.SyntaxErrors;
-        }
-
-        public void Increment(ResultStatus status)
-        {
-            switch (status)
-            {
-                case ResultStatus.success:
-                    IncrementRights();
-                    break;
-
-                case ResultStatus.error:
-                    IncrementExceptions();
-                    break;
-
-                case ResultStatus.failed:
-                    IncrementWrongs();
-                    break;
-
-                case ResultStatus.missing:
-                    IncrementSyntaxErrors();
-                    break;
-            }
         }
 
         public void IncrementRights()
@@ -84,7 +63,7 @@ namespace StoryTeller.Engine
         public override string ToString()
         {
             return string.Format("Rights: {0}, Wrongs: {1}, Exceptions: {2}, SyntaxErrors: {3}", Rights, Wrongs,
-                                 Exceptions, SyntaxErrors);
+                Exceptions, SyntaxErrors);
         }
 
         public bool Equals(Counts obj)
@@ -99,25 +78,25 @@ namespace StoryTeller.Engine
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(Counts)) return false;
-            return Equals((Counts)obj);
+            if (obj.GetType() != typeof (Counts)) return false;
+            return Equals((Counts) obj);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                int result = Rights;
-                result = (result * 397) ^ Wrongs;
-                result = (result * 397) ^ Exceptions;
-                result = (result * 397) ^ SyntaxErrors;
+                var result = Rights;
+                result = (result*397) ^ Wrongs;
+                result = (result*397) ^ Exceptions;
+                result = (result*397) ^ SyntaxErrors;
                 return result;
             }
         }
 
         public bool WasSuccessful()
         {
-            int count = Wrongs + Exceptions + SyntaxErrors;
+            var count = Wrongs + Exceptions + SyntaxErrors;
             return count == 0;
         }
 
@@ -133,7 +112,7 @@ namespace StoryTeller.Engine
 
         public Counts Clone()
         {
-            return (Counts)MemberwiseClone();
+            return (Counts) MemberwiseClone();
         }
     }
 }

@@ -167,9 +167,6 @@
     <Compile Include="Model\Sentence_Writing_Contexts.cs" />
     <Compile Include="Model\SetVerificationTester.cs" />
     <Compile Include="Model\TableTester.cs" />
-    <Compile Include="New\Results\CellResultTester.cs" />
-    <Compile Include="New\Results\EnvelopeTester.cs" />
-    <Compile Include="New\Results\StepResultTester.cs" />
     <Compile Include="perf_testing.cs" />
     <Compile Include="Persistence\JsonNodeTester.cs" />
     <Compile Include="Persistence\XmlTestWriterTester.cs" />

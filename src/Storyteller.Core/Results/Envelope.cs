@@ -1,7 +1,7 @@
 using System;
 using FubuCore;
 
-namespace StoryTeller.New.Results
+namespace Storyteller.Core.Results
 {
     public class Envelope
     {

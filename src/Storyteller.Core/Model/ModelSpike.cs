@@ -1,4 +1,4 @@
-﻿namespace StoryTeller.New.Model
+﻿namespace Storyteller.Core.Model
 {
     /*
 	this.key = key;

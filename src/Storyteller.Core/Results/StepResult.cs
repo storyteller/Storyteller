@@ -1,7 +1,7 @@
 ﻿using System;
-using StoryTeller.Engine;
+using Storyteller.Core.Engine;
 
-namespace StoryTeller.New.Results
+namespace Storyteller.Core.Results
 {
     public class StepResult : IResultMessage
     {

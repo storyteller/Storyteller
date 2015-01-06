@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
-using StoryTeller.New.Results;
+﻿using FubuTestingSupport;
+using NUnit.Framework;
+using Storyteller.Core.Results;
 
-namespace StoryTeller.Testing.New.Results
+namespace Storyteller.Core.Testing.Results
 {
     [TestFixture]
     public class EnvelopeTester
