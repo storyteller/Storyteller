@@ -68,33 +68,6 @@ namespace StoryTeller.Testing.Model
         }
     }
 
-    [TestFixture]
-    public class when_creating_an_example_for_a_fact
-    {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
-        {
-            cell = Cell.For<bool>("returnValue");
-            cell.IsResult = true;
-            cell.IsBooleanResult().ShouldBeTrue();
-
-
-            sentence = new Sentence("The answer should be true", new[] { cell });
-        }
-
-        #endregion
-
-        private Sentence sentence;
-        private Cell cell;
-
-        [Test]
-        public void the_example_step_should_not_have_any_attributes()
-        {
-            sentence.CreateExample().Values.Count.ShouldEqual(0);
-        }
-    }
 
 
 

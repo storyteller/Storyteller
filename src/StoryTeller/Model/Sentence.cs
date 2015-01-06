@@ -80,12 +80,6 @@ namespace StoryTeller.Model
             return new Sentence(template, cells);
         }
 
-        protected internal override void fillExample(IStep step)
-        {
-            IEnumerable<Cell> cells = IsFact ? _cells.Where(x => !x.IsBooleanResult()) : _cells;
-            cells.Each(cell => step.Set(cell.Key, cell.SampleValue()));
-        }
-
         public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
         {
             visitor.Sentence(this, step);

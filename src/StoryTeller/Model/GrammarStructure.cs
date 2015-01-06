@@ -51,18 +51,6 @@ namespace StoryTeller.Model
             return path;
         }
 
-        public void ModifyExampleTest(Test example)
-        {
-            Parent.ModifyExampleTest(example);
-            var section = example.Parts[0] as Section;
-            section.RemoveParts(x =>
-            {
-                var step = x as IStep;
-                return step == null ? true : step.GrammarKey != Name;
-            });
-
-            example.Name = Label;
-        }
 
         public IEnumerable<GrammarError> AllErrors()
         {
@@ -73,18 +61,6 @@ namespace StoryTeller.Model
 
         #endregion
 
-        public IStep CreateExample()
-        {
-            var step = new Step(Name);
-            step.Description = Description;
-
-            fillExample(step);
-
-            return step;
-        }
-
-        protected internal abstract void fillExample(IStep step);
-
         protected void logError(GrammarError error)
         {
             _errors.Add(error);
@@ -92,9 +68,5 @@ namespace StoryTeller.Model
 
         public abstract void AcceptVisitor(IGrammarVisitor visitor, IStep step);
 
-        public virtual IStep CreateNewStep()
-        {
-            return CreateExample();
-        }
     }
 }

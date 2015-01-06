@@ -16,7 +16,6 @@ namespace StoryTeller.Model
         IEnumerable<GrammarError> Errors { get; }
         IEnumerable<GrammarStructure> Grammars { get; }
         bool IsAFixture();
-        Section CreateExample();
         GrammarStructure GrammarFor(string grammarKey);
         void AddStructure(string grammarKey, GrammarStructure structure);
         bool HasGrammar(string key);
@@ -81,16 +80,6 @@ namespace StoryTeller.Model
 
         #region IFixtureNode Members
 
-        public void ModifyExampleTest(Test example)
-        {
-            example.Name = Label;
-            example.RemoveParts(x =>
-            {
-                var section = x as Section;
-                return section == null ? true : section.FixtureName != _name;
-            });
-        }
-
         [Obsolete("Wanna kill this")]
         public IEnumerable<GrammarError> AllErrors()
         {
@@ -128,14 +117,6 @@ namespace StoryTeller.Model
         }
 
         #endregion
-
-        public Section CreateExample()
-        {
-            var section = new Section(_name);
-            _structures.Each(x => section.Add(x.CreateExample()));
-
-            return section;
-        }
 
         public GrammarStructure GrammarFor(string grammarKey)
         {

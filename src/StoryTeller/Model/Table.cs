@@ -73,25 +73,6 @@ namespace StoryTeller.Model
             return step.LeafFor(_leafName);
         }
 
-        protected internal override void fillExample(IStep step)
-        {
-            StepLeaf leaf = leafFor(step);
-            for (int i = 0; i < 3; i++)
-            {
-                IStep example = BuildExampleStep();
-
-                leaf.Add(example);
-            }
-        }
-
-        public virtual IStep BuildExampleStep()
-        {
-            var example = new Step(LeafName);
-            _cells.Where(cell => !cell.HasDefault()).Each(cell => example.Set(cell.Key, cell.SampleValue()));
-            return example;
-        }
-
-
         public TableWriter GetWriter(IStep step)
         {
             StepLeaf leaf = leafFor(step);

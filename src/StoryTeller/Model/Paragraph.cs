@@ -43,10 +43,6 @@ namespace StoryTeller.Model
 
         #endregion
 
-        protected internal override void fillExample(IStep step)
-        {
-            _children.ForEach(x => x.fillExample(step));
-        }
 
         public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
         {

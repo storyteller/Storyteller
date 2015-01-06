@@ -9,34 +9,6 @@ using StoryTeller.Samples.Grammars;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
-    public class when_creating_an_example_section_from_a_fixturegraph
-    {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
-        {
-            FixtureStructure fixtureStructure = FixtureGraph.Library.FixtureFor("Math");
-            section = fixtureStructure.CreateExample();
-        }
-
-        #endregion
-
-        private Section section;
-
-        [Test]
-        public void the_section_has_examples_for_all_the_grammars_in_the_fixture()
-        {
-            section.Parts.Where(x => x is Step).Count().ShouldEqual(new MathFixture().GrammarCount);
-        }
-
-        [Test]
-        public void the_section_name_should_be_the_fixture_name()
-        {
-            section.FixtureName.ShouldEqual(typeof (MathFixture).GetFixtureAlias());
-        }
-    }
 
     [TestFixture]
     public class FixtureStructure_implementation_of_FixtureNode
@@ -51,19 +23,6 @@ namespace StoryTeller.Testing.Model
             graph.AllErrors().Count().ShouldEqual(3);
         }
 
-        [Test]
-        public void creates_example_test()
-        {
-            var template = new Test("some test");
-            Section section = template.Section("Math");
-            section.AddStep("step1");
-            section.AddStep("step2");
-            section.AddStep("step3");
-
-            new FixtureStructure("Math").ModifyExampleTest(template);
-            template.Parts.Count.ShouldEqual(1);
-            template.Parts[0].ShouldBeOfType<Section>();
-        }
 
         [Test]
         public void Title()
@@ -109,30 +68,6 @@ namespace StoryTeller.Testing.Model
     [TestFixture]
     public class GrammarStructure_FixtureNode_Implementation_tester
     {
-        [Test]
-        public void create_example_test()
-        {
-            var test = new Test("some test");
-            test.Section("a");
-            test.Section("b");
-            test.Section("c");
-            Section section = new Section("Math").WithStep("MultiplyBy").WithStep("step1").WithStep("step2");
-            test.Add(section);
-
-
-            var structure = new StubGrammarStructure
-            {
-                Name = "MultiplyBy",
-                Parent = new FixtureStructure("Math")
-            };
-            structure.ModifyExampleTest(test);
-
-            test.Parts.Count.ShouldEqual(1);
-            var theSection = test.Parts[0].ShouldBeOfType<Section>();
-
-            theSection.Parts.Count.ShouldEqual(1);
-            theSection.Parts[0].ShouldBeOfType<IStep>().GrammarKey.ShouldEqual("MultiplyBy");
-        }
 
         [Test]
         public void get_path_with_parent()
@@ -170,11 +105,6 @@ namespace StoryTeller.Testing.Model
 
     public class StubGrammarStructure : GrammarStructure
     {
-        protected override void fillExample(IStep step)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
         {
             throw new NotImplementedException();

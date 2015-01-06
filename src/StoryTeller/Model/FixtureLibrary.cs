@@ -63,11 +63,6 @@ namespace StoryTeller.Model
             return TPath.Empty;
         }
 
-        public void ModifyExampleTest(Test example)
-        {
-            example.Name = Label;
-        }
-
         public IEnumerable<GrammarError> AllErrors()
         {
             var list = new List<GrammarError>();

@@ -40,22 +40,6 @@ namespace StoryTeller.Model
             return step.LeafFor(_leafName);
         }
 
-        protected internal override void fillExample(IStep step)
-        {
-            //Section section = _fixture.CreateExample();
-            //LeafFor(step).AddParts(section.Parts);
-        }
-
-        public override IStep CreateNewStep()
-        {
-            var step = new Step(Name);
-            step.Description = Description;
-            LeafFor(step);
-
-
-            return step;
-        }
-
         public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
         {
             visitor.EmbeddedSection(this, step);

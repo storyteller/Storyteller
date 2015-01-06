@@ -28,49 +28,6 @@ namespace StoryTeller.Testing.Model
     }
 
 
-
-
-
-
-    [TestFixture]
-    public class when_creating_an_example
-    {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
-        {
-            table = new Table("The Label", "rows", new List<Cell>
-            {
-                Cell.For<string>("name"),
-                Cell.For<int>("age")
-            });
-
-            step = table.CreateExample();
-        }
-
-        #endregion
-
-        private IStep step;
-        private Table table;
-
-        [Test]
-        public void should_have_an_attribute_for_each_column()
-        {
-            IStep child = step.LeafFor(table.LeafName).AllSteps()[0];
-            child.Values.Count.ShouldEqual(2);
-            child.Has("name").ShouldBeTrue();
-            child.Has("age").ShouldBeTrue();
-        }
-
-        [Test]
-        public void should_have_the_child_step()
-        {
-            step.LeafFor(table.LeafName).AllSteps().Count.ShouldBeGreaterThan(0);
-        }
-    }
-
-
     [TestFixture]
     public class when_determining_the_inputs_for_display
     {

@@ -28,8 +28,6 @@ namespace StoryTeller.Model
         string Label { get; }
         string Description { get; }
 
-        void ModifyExampleTest(Test example);
-
         IEnumerable<GrammarError> AllErrors();
     }
 }

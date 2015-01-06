@@ -112,7 +112,6 @@
     <Compile Include="Engine\ActionGrammarTester.cs" />
     <Compile Include="Engine\AssemblyResultTester.cs" />
     <Compile Include="Engine\AutoPerformingTestContext.cs" />
-    <Compile Include="Engine\BooleanReturnTester.cs" />
     <Compile Include="Engine\CheckGrammarTester.cs" />
     <Compile Include="Engine\ConfigureObjectGrammarTester.cs" />
     <Compile Include="Engine\CreateObjectGrammarTester.cs" />
@@ -161,7 +160,6 @@
     <Compile Include="HierarchyTester.cs" />
     <Compile Include="Integration\ProjectIntegratedTester.cs" />
     <Compile Include="Model\DoGrammarStructureTester.cs" />
-    <Compile Include="Model\EmbeddedSectionTester.cs" />
     <Compile Include="Model\FixtureStructureTester.cs" />
     <Compile Include="Model\FixtureLibraryFindTester.cs" />
     <Compile Include="Model\FixtureLibraryTester.cs" />

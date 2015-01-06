@@ -13,18 +13,6 @@ namespace StoryTeller.Testing.Model
     [TestFixture]
     public class FixtureLibraryTester
     {
-        [Test]
-        public void create_example_test()
-        {
-            var test = new Test("test1");
-            test.Section("a");
-            test.Section("b");
-            test.Section("c");
-
-            new FixtureLibrary().ModifyExampleTest(test);
-            test.Name.ShouldEqual("All Fixtures");
-            test.Parts.ShouldHaveTheSameElementsAs<ITestPart>(test.Parts);
-        }
 
         [Test]
         public void description()
