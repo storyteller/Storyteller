@@ -6,21 +6,6 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
-    public class when_accepting_the_visitor
-    {
-        [Test]
-        public void call_teh_sentence_method()
-        {
-            var sentence = new Sentence();
-            var visitor = MockRepository.GenerateMock<IGrammarVisitor>();
-            var step = new Step();
-
-            sentence.AcceptVisitor(visitor, step);
-
-            visitor.AssertWasCalled(x => x.Sentence(sentence, step));
-        }
-    }
 
 
     [TestFixture]

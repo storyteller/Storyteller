@@ -40,11 +40,6 @@ namespace StoryTeller.Model
             return step.LeafFor(_leafName);
         }
 
-        public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
-        {
-            visitor.EmbeddedSection(this, step);
-        }
-
         public bool Equals(EmbeddedSection obj)
         {
             if (ReferenceEquals(null, obj)) return false;

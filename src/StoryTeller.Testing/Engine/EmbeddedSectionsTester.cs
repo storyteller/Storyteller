@@ -7,21 +7,6 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
-    public class when_embedded_section_accepts_visitor
-    {
-        [Test]
-        public void should_call_the_embedded_section_method()
-        {
-            var visitor = MockRepository.GenerateMock<IGrammarVisitor>();
-            var step = new Step();
-            var section = new EmbeddedSection();
-
-            section.AcceptVisitor(visitor, step);
-
-            visitor.AssertWasCalled(x => x.EmbeddedSection(section, step));
-        }
-    }
 
     [TestFixture]
     public class EmbeddedSectionsTester

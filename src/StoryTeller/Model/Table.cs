@@ -86,12 +86,6 @@ namespace StoryTeller.Model
         }
 
 
-        public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
-        {
-            visitor.Table(this, step);
-        }
-
-
         public bool Equals(Table obj)
         {
             if (ReferenceEquals(null, obj)) return false;

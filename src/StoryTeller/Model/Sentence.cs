@@ -80,11 +80,6 @@ namespace StoryTeller.Model
             return new Sentence(template, cells);
         }
 
-        public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
-        {
-            visitor.Sentence(this, step);
-        }
-
         public Sentence With(params SentencePart[] parts)
         {
             _parts.AddRange(parts);

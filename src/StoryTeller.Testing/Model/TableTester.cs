@@ -10,23 +10,6 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
-    public class when_accepting_grammar_visitor
-    {
-        [Test]
-        public void call_the_correct_method()
-        {
-            var visitor = MockRepository.GenerateMock<IGrammarVisitor>();
-            var step = new Step("grammar");
-
-            var table = new Table();
-
-            table.AcceptVisitor(visitor, step);
-
-            visitor.AssertWasCalled(x => x.Table(table, step));
-        }
-    }
-
 
     [TestFixture]
     public class when_determining_the_inputs_for_display

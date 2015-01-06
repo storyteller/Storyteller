@@ -43,12 +43,6 @@ namespace StoryTeller.Model
 
         #endregion
 
-
-        public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
-        {
-            visitor.Paragraph(this, step);
-        }
-
         public void AddStructure(GrammarStructure structure)
         {
             _children.Add(structure);

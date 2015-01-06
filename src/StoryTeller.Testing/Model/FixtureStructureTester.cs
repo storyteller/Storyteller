@@ -105,11 +105,6 @@ namespace StoryTeller.Testing.Model
 
     public class StubGrammarStructure : GrammarStructure
     {
-        public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
-        {
-            throw new NotImplementedException();
-        }
-
         public StubGrammarStructure AddError(string message)
         {
             logError(new GrammarError

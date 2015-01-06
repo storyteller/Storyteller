@@ -27,11 +27,6 @@ namespace StoryTeller.Model
 
         public bool Ordered { get; set; }
 
-        public override void AcceptVisitor(IGrammarVisitor visitor, IStep step)
-        {
-            visitor.SetVerification(this, step);
-        }
-
         public bool Equals(SetVerification obj)
         {
             if (ReferenceEquals(null, obj)) return false;

@@ -11,15 +11,6 @@ namespace StoryTeller.Model
         Error
     }
 
-    public interface IGrammarVisitor
-    {
-        void Sentence(Sentence sentence, IStep step);
-        void Table(Table table, IStep step);
-        void SetVerification(SetVerification setVerification, IStep step);
-        void Paragraph(Paragraph paragraph, IStep step);
-        void EmbeddedSection(EmbeddedSection section, IStep step);
-        void DoGrammar(DoGrammarStructure grammar, IStep step);
-    }
 
     [Serializable]
     public abstract class GrammarStructure : IFixtureNode
@@ -65,8 +56,6 @@ namespace StoryTeller.Model
         {
             _errors.Add(error);
         }
-
-        public abstract void AcceptVisitor(IGrammarVisitor visitor, IStep step);
 
     }
 }
