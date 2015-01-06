@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Model;
 
 // SAMPLE:  IFixture
@@ -17,7 +16,6 @@ namespace StoryTeller
         IGrammar this[string key] { get; set; }
 
         IEnumerable<GrammarError> Errors { get; }
-        IPolicies Policies { get; }
         string Title { get; set; }
         ITestContext Context { get; set; }
 

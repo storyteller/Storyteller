@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Engine
@@ -39,24 +38,6 @@ namespace StoryTeller.Testing.Engine
 
             fixture["theGrammar"]
                 .ShouldBeOfType<ParagraphGrammar>().Title().ShouldEqual("The Grammar");
-        }
-
-        [Test]
-        public void has_a_constraint_model()
-        {
-            new Fixture().Policies.ShouldBeOfType<Policies>();
-        }
-
-        [Test]
-        public void loading_a_fixture_that_is_marked_as_Hidden_sets_the_constraint_to_private()
-        {
-            new HiddenFixture().Policies.IsPrivate.ShouldBeTrue();
-        }
-
-        [Test]
-        public void loading_a_fixture_that_is_not_marked_as_hidden_should_not_be_private()
-        {
-            new NotHiddenFixture().Policies.IsPrivate.ShouldBeFalse();
         }
 
         [Test]
@@ -215,35 +196,6 @@ namespace StoryTeller.Testing.Engine
         }
     }
 
-    [TestFixture]
-    public class when_reading_grammars_for_the_Hidden_attribute
-    {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
-        {
-            fixture = new HiddenGrammarsFixture();
-        }
-
-        #endregion
-
-        private HiddenGrammarsFixture fixture;
-
-        [Test]
-        public void grammars_decorated_with_hidden_should_be_hidden()
-        {
-            fixture.Policies.IsHidden("Hidden1").ShouldBeTrue();
-            fixture.Policies.IsHidden("Hidden2").ShouldBeTrue();
-        }
-
-        [Test]
-        public void grammars_not_decorated_with_hidden_should_not_be_hidden()
-        {
-            fixture.Policies.IsHidden("NotHidden1").ShouldBeFalse();
-            fixture.Policies.IsHidden("NotHidden2").ShouldBeFalse();
-        }
-    }
 
     public class HiddenGrammarsFixture : Fixture
     {

@@ -115,7 +115,6 @@
     <Compile Include="Engine\BooleanReturnTester.cs" />
     <Compile Include="Engine\CheckGrammarTester.cs" />
     <Compile Include="Engine\ConfigureObjectGrammarTester.cs" />
-    <Compile Include="Engine\Constraints\PoliciesTester.cs" />
     <Compile Include="Engine\CreateObjectGrammarTester.cs" />
     <Compile Include="Engine\CurriedLineGrammarTester.cs" />
     <Compile Include="Engine\DecoratedLineGrammarTester.cs" />

@@ -4,7 +4,6 @@ using System.Linq;
 using FubuCore;
 using FubuCore.Util;
 using StoryTeller.Domain;
-using StoryTeller.Engine.Constraints;
 
 
 namespace StoryTeller.Model
@@ -14,22 +13,16 @@ namespace StoryTeller.Model
         string FixtureClassName { get; set; }
         string FixtureNamespace { get; set; }
         int GrammarCount { get; }
-        IPolicies Policies { get; set; }
         IEnumerable<GrammarError> Errors { get; }
         IEnumerable<GrammarStructure> Grammars { get; }
         bool IsAFixture();
         Section CreateExample();
         GrammarStructure GrammarFor(string grammarKey);
         void AddStructure(string grammarKey, GrammarStructure structure);
-        IEnumerable<GrammarStructure> TopLevelGrammars();
-        IEnumerable<GrammarStructure> PossibleGrammarsFor(IPartHolder holder);
         bool HasGrammar(string key);
         bool Equals(FixtureStructure obj);
         void LogError(Exception exception);
         void LogError(GrammarError error);
-        bool CanChoose(Test test);
-        bool IsSingleSelection();
-        bool IsMandatoryAutoSelectGrammar(GrammarStructure structure);
         bool HasGrammarErrors();
     }
 
@@ -39,7 +32,6 @@ namespace StoryTeller.Model
         private readonly List<GrammarError> _errors = new List<GrammarError>();
         private readonly string _name;
         private readonly Cache<string, GrammarStructure> _structures = new Cache<string, GrammarStructure>();
-        private IPolicies _policies = new Policies();
 
 
         public FixtureStructure()
@@ -58,7 +50,6 @@ namespace StoryTeller.Model
         {
             FixtureClassName = fixture.GetType().FullName;
             FixtureNamespace = fixture.GetType().Namespace;
-            Policies = fixture.Policies;
             Description = fixture.Description;
             Label = fixture.Title.IsEmpty() ? Name : fixture.Title;
 
@@ -82,7 +73,6 @@ namespace StoryTeller.Model
         public string FixtureClassName { get; set; }
         public string FixtureNamespace { get; set; }
         public int GrammarCount { get { return _structures.Count; } }
-        public IPolicies Policies { get { return _policies; } set { _policies = value; } }
 
         public bool IsAFixture()
         {
@@ -159,18 +149,6 @@ namespace StoryTeller.Model
             _structures[grammarKey] = structure;
         }
 
-        public IEnumerable<GrammarStructure> TopLevelGrammars()
-        {
-            return _structures.Where(x => Policies.CanChooseGrammar(x.Name, new IStep[0])).OrderBy(x => x.Label);
-        }
-
-        public IEnumerable<GrammarStructure> PossibleGrammarsFor(IPartHolder holder)
-        {
-            IList<IStep> preceeding = holder.AllSteps();
-            return _structures.Where(x => Policies.CanChooseGrammar(x.Name, preceeding)).OrderBy(x => x.Label);
-        }
-
-
         public bool HasGrammar(string key)
         {
             return _structures.Has(key);
@@ -219,23 +197,6 @@ namespace StoryTeller.Model
         public void LogError(GrammarError error)
         {
             _errors.Add(error);
-        }
-
-        public bool CanChoose(Test test)
-        {
-            return _policies.CanChooseFixture(test);
-        }
-
-        public bool IsSingleSelection()
-        {
-            return _policies.SelectionMode == SelectionMode.Single;
-        }
-
-        public bool IsMandatoryAutoSelectGrammar(GrammarStructure structure)
-        {
-            if (_policies.SelectionMode != SelectionMode.MandatoryAutoSelect) return false;
-
-            return structure.Name == _policies.AutoSelectGrammarKey;
         }
 
         public bool HasGrammarErrors()

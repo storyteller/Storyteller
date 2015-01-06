@@ -8,7 +8,6 @@ using StoryTeller;
 using StoryTeller.Assertions;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Execution;
 using StoryTeller.Model;
 using System.Linq;

@@ -6,10 +6,6 @@ namespace StoryTeller.Samples.Grammars
 {
     public class SimpleFixture : Fixture
     {
-        public SimpleFixture()
-        {
-            Policies.SelectionMode = SelectionMode.Any;
-        }
 
         public void A()
         {
@@ -43,7 +39,7 @@ namespace StoryTeller.Samples.Grammars
     {
         public SingleSelectionFixture()
         {
-            Policies.SelectionMode = SelectionMode.Single;
+
         }
     }
 
@@ -51,7 +47,6 @@ namespace StoryTeller.Samples.Grammars
     {
         public OneOrMoreSelectionFixture()
         {
-            Policies.SelectionMode = SelectionMode.OneOrMore;
         }
     }
 
@@ -59,7 +54,6 @@ namespace StoryTeller.Samples.Grammars
     {
         public MandatorySelectionFixture()
         {
-            MandatoryAutoSelectOfGrammar("StartWithTheNumber");
         }
     }
 

@@ -10,7 +10,6 @@ using FubuCore.Reflection;
 using FubuCore.Util;
 using StoryTeller.Assertions;
 using StoryTeller.DSL;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Engine.Importing;
 using StoryTeller.Engine.Reflection;
 using StoryTeller.Model;
@@ -28,7 +27,6 @@ namespace StoryTeller.Engine
 
         private readonly List<GrammarError> _errors = new List<GrammarError>();
         private readonly Cache<string, IGrammar> _grammars = new Cache<string, IGrammar>();
-        private readonly Policies _policies = new Policies();
 
         private readonly Cache<string, List<string>> _selectionLists =
             new Cache<string, List<string>>(x => new List<string>());
@@ -51,9 +49,6 @@ namespace StoryTeller.Engine
         {
             _grammars.OnAddition = readGrammar;
 
-            MethodExtensions.ForAttribute<HiddenAttribute>(GetType(), x => Policies.IsPrivate = true);
-            MethodExtensions.ForAttribute<TagAttribute>(GetType(), x => x.Tags.Each(t => Policies.Tag(t)));
-
             GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Each(method =>
             {
                 string grammarKey = method.GetKey();
@@ -61,10 +56,6 @@ namespace StoryTeller.Engine
                 {
                     IGrammar grammar = GrammarBuilder.BuildGrammar(method, this);
                     this[grammarKey] = grammar;
-
-                    MethodExtensions.ForAttribute<HiddenAttribute>(method, x => _policies.HideGrammar(grammarKey));
-                    MethodExtensions.ForAttribute<TagAttribute>(method,
-                                                                x => x.Tags.Each(t => _policies.Tag(grammarKey, t)));
                 }
                 catch (Exception e)
                 {
@@ -106,7 +97,6 @@ namespace StoryTeller.Engine
         {
         }
 
-        public IPolicies Policies { get { return _policies; } }
 
         public IEnumerable<GrammarError> Errors { get { return _errors; } }
 
@@ -127,12 +117,6 @@ namespace StoryTeller.Engine
         public virtual string Description { get { return GetType().FullName; } }
 
         #endregion
-
-        protected void MandatoryAutoSelectOfGrammar(string grammarKey)
-        {
-            Policies.AutoSelectGrammarKey = grammarKey;
-            Policies.SelectionMode = SelectionMode.MandatoryAutoSelect;
-        }
 
         private void readGrammar(IGrammar grammar)
         {

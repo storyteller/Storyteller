@@ -64,69 +64,6 @@ namespace StoryTeller.Testing.Engine
     }
 
 
-    [TestFixture]
-    public class creating_policies_for_fixtures
-    {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
-        {
-            library = FixtureGraph.Library;
-        }
-
-        #endregion
-
-        private FixtureLibrary library;
-
-        [Test]
-        public void fixture_graph_should_have_the_policies_from_the_original_fixture()
-        {
-            FixtureStructure fixture = library.FixtureFor(typeof (FixtureWithHiddenGrammarsFixture).GetFixtureAlias());
-
-            fixture.Policies.IsHidden("Hidden1").ShouldBeTrue();
-            fixture.Policies.IsHidden("Hidden2").ShouldBeTrue();
-            fixture.Policies.IsHidden("NotHidden1").ShouldBeFalse();
-            fixture.Policies.IsHidden("NotHidden2").ShouldBeFalse();
-        }
-
-        [Test]
-        public void load_a_fixture_with_fixture_level_tags()
-        {
-            var fixture = new TagsFixture();
-            fixture.Policies.Tags().ShouldHaveTheSameElementsAs("d", "e");
-        }
-
-        [Test]
-        public void load_a_fixture_with_grammar_level_tags()
-        {
-            var fixture = new TagsFixture();
-            fixture.Policies.Tags("Go1").Count().ShouldEqual(0);
-            fixture.Policies.Tags("Go2").ShouldHaveTheSameElementsAs("a", "b");
-            fixture.Policies.Tags("Go3").ShouldHaveTheSameElementsAs("c");
-        }
-    }
-
-
-
-    [Tag("d", "e")]
-    public class TagsFixture : Fixture
-    {
-        public void Go1()
-        {
-        }
-
-        [Tag("a", "b")]
-        public void Go2()
-        {
-        }
-
-        [Tag("c")]
-        public void Go3()
-        {
-        }
-    }
-
     public class FixtureWithHiddenGrammarsFixture : Fixture
     {
         [Hidden]

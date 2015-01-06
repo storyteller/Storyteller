@@ -98,11 +98,6 @@ namespace StoryTeller.Model
             return path.IsEnd ? fixture : (IFixtureNode) fixture.GrammarFor(path.Pop().Next);
         }
 
-        public IEnumerable<FixtureStructure> PossibleFixturesFor(Test test)
-        {
-            return _fixtures.Where(x => x.CanChoose(test)).OrderBy(x => x.Name);
-        }
-
         public bool HasErrors()
         {
             foreach (FixtureStructure graph in _fixtures)
@@ -121,20 +116,5 @@ namespace StoryTeller.Model
             return _fixtures.Has(fixtureName);
         }
 
-        public FixtureStructure BuildTopLevelGraph()
-        {
-            var fixture = new FixtureStructure("Test");
-            fixture.Policies.SelectionMode = SelectionMode.OneOrMore;
-            fixture.Policies.AddGrammarText = "Add Section";
-
-            _fixtures.Where(x => !x.Policies.IsPrivate).Each(x =>
-            {
-                var grammar = new EmbeddedSection(x, x.Label ?? x.Name, x.Name);
-                grammar.Style = EmbedStyle.TitledAndIndented;
-                fixture.AddStructure(x.Name, grammar);
-            });
-
-            return fixture;
-        }
     }
 }

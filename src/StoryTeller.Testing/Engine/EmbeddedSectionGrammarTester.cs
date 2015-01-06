@@ -4,7 +4,6 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Model;
 using TestContext = StoryTeller.Engine.TestContext;
 
@@ -99,7 +98,6 @@ namespace StoryTeller.Testing.Engine
             {
             }
 
-            public IPolicies Policies { get { return new Policies(); } }
 
             public IEnumerable<GrammarError> Errors { get { throw new NotImplementedException(); } }
 
@@ -139,7 +137,6 @@ namespace StoryTeller.Testing.Engine
 
             public IEnumerable<GrammarError> Errors { get { throw new NotImplementedException(); } }
 
-            public IPolicies Policies { get { return new Policies(); } }
 
             public string Title { get; set; }
 

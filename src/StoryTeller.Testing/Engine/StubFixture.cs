@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Engine
@@ -33,7 +32,6 @@ namespace StoryTeller.Testing.Engine
 
         public string Title { get; set; }
 
-        public IPolicies Policies { get { return new Policies(); } }
 
         public IEnumerable<GrammarError> Errors { get { return new GrammarError[0]; } }
 

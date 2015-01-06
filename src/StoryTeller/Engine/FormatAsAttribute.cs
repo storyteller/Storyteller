@@ -14,22 +14,4 @@ namespace StoryTeller.Engine
 
         public string Format { get { return _format; } }
     }
-
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class HiddenAttribute : Attribute
-    {
-    }
-
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class TagAttribute : Attribute
-    {
-        private readonly string[] _tags;
-
-        public TagAttribute(params string[] tags)
-        {
-            _tags = tags;
-        }
-
-        public string[] Tags { get { return _tags; } }
-    }
 }

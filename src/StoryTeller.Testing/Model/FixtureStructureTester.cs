@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using StoryTeller.Domain;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Constraints;
 using StoryTeller.Model;
 using StoryTeller.Samples;
 using StoryTeller.Samples.Grammars;
@@ -73,51 +72,6 @@ namespace StoryTeller.Testing.Model
         }
     }
 
-
-    [TestFixture]
-    public class when_using_the_constraints_model_to_determine_the_possible_grammars
-    {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
-        {
-            fixture = new FixtureStructure();
-            fixture.AddStructure("Hidden1", new Sentence());
-            fixture.AddStructure("Hidden2", new Sentence());
-            fixture.AddStructure("NotHidden3", new Sentence());
-            fixture.AddStructure("NotHidden4", new Sentence());
-
-            var constraints = new Policies();
-            constraints.HideGrammar("Hidden1");
-            constraints.HideGrammar("Hidden2");
-
-            fixture.Policies = constraints;
-        }
-
-        #endregion
-
-        private FixtureStructure fixture;
-
-        [Test]
-        public void the_possible_grammars_should_not_include_the_hidden_grammars()
-        {
-            var grammarsFor = fixture.PossibleGrammarsFor(new StepLeaf());
-            grammarsFor.Count().ShouldEqual(2);
-            grammarsFor.ShouldContain(fixture.GrammarFor("NotHidden4"));
-            grammarsFor.ShouldContain(fixture.GrammarFor("NotHidden3"));
-        }
-
-
-        [Test]
-        public void the_possible_grammars_should_not_include_the_hidden_grammars_using_the_top_level_method()
-        {
-            var topLevelGrammars = fixture.TopLevelGrammars();
-            topLevelGrammars.ShouldHaveCount(2);
-            topLevelGrammars.ShouldContain(fixture.GrammarFor("NotHidden4"));
-            topLevelGrammars.ShouldContain(fixture.GrammarFor("NotHidden3"));
-        }
-    }
 
 
     [TestFixture]
