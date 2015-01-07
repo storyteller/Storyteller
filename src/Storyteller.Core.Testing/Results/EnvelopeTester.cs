@@ -17,7 +17,7 @@ namespace Storyteller.Core.Testing.Results
         [Test]
         public void create_envelope_from_message()
         {
-            var envelope = new Envelope(new Subject(), new TheFooMessage());
+            var envelope = new Envelope(new TheFooMessage());
             envelope.topic.ShouldEqual("the-foo-message");
         }
     }

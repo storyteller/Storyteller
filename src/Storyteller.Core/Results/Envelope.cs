@@ -9,20 +9,18 @@ namespace Storyteller.Core.Results
         {
         }
 
-        public Envelope(Subject subject, object message)
+        public Envelope(object message)
         {
             this.topic = ToTopic(message.GetType());
-            this.subject = subject;
             this.message = message;
         }
 
         public string topic;
-        public Subject subject;
         public object message;
 
         protected bool Equals(Envelope other)
         {
-            return string.Equals(topic, other.topic) && Equals(subject, other.subject) && Equals(message, other.message);
+            return string.Equals(topic, other.topic) && Equals(message, other.message);
         }
 
         public override bool Equals(object obj)
@@ -37,16 +35,13 @@ namespace Storyteller.Core.Results
         {
             unchecked
             {
-                var hashCode = (topic != null ? topic.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (subject != null ? subject.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (message != null ? message.GetHashCode() : 0);
-                return hashCode;
+                return ((topic != null ? topic.GetHashCode() : 0)*397) ^ (message != null ? message.GetHashCode() : 0);
             }
         }
 
         public override string ToString()
         {
-            return string.Format("Topic: {0}, Subject: {1}, Message: {2}", topic, subject, message);
+            return string.Format("Topic: {0}, Message: {1}", topic, message);
         }
 
         public static string ToTopic(Type messageType)

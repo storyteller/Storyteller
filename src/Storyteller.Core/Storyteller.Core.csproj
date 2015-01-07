@@ -34,6 +34,9 @@
       <HintPath>..\packages\FubuCore\lib\FubuCore.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -45,8 +48,10 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BasicClassesAndInterfaces.cs" />
     <Compile Include="Conversion\ConversionClasses.cs" />
     <Compile Include="Engine\Counts.cs" />
+    <Compile Include="Grammars\GrammarTypes.cs" />
     <Compile Include="ISpecContext.cs" />
     <Compile Include="Model\ModelSpike.cs" />
     <Compile Include="Model\Step.cs" />
@@ -57,7 +62,6 @@
     <Compile Include="Results\IResultMessage.cs" />
     <Compile Include="Results\ResultStatus.cs" />
     <Compile Include="Results\StepResult.cs" />
-    <Compile Include="Results\Subject.cs" />
     <Compile Include="Results\TimedOut.cs" />
   </ItemGroup>
   <ItemGroup />

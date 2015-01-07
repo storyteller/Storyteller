@@ -37,6 +37,9 @@
       <HintPath>..\packages\FubuTestingSupport\lib\FubuTestingSupport.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -66,8 +69,10 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Conversion\StepValuesTester.cs" />
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordingSpecContext.cs" />
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />

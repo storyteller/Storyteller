@@ -36,11 +36,28 @@ namespace Storyteller.Core.Conversion
     public class StepValues
     {
         private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
-        private readonly IList<Delayed> _delayeds = new List<Delayed>(); 
+        private readonly IList<Delayed> _delayeds = new List<Delayed>();
+
 
         public void DoDelayedConversions(ISpecContext context)
         {
             throw new NotImplementedException();
+        }
+
+        public void Check<T>(ISpecContext context, string key, T actual)
+        {
+            // TODO: Could be Predicate<T> -- figure out how to use this
+            // TODO: Could be a T
+
+            T expected = (T) Get(key);
+            if (expected.Equals(actual))
+            {
+                context.LogResult(CellResult.Success(key));
+            }
+            else
+            {
+                context.LogResult(CellResult.Failure(key, actual.ToString()));
+            }
         }
 
         public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)

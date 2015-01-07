@@ -5,35 +5,55 @@ namespace Storyteller.Core.Results
 {
     public class CellResult : IResultMessage
     {
-        public static readonly CellResult Ok = new CellResult{status = ResultStatus.ok};
-        public static readonly CellResult Success = new CellResult{status = ResultStatus.success};
-        public static readonly CellResult Missing = new CellResult{status = ResultStatus.missing};
 
+        public string id { get; set; }
         public ResultStatus status;
         public string actual;
         public string error;
+        public string cell;
 
-        public static CellResult Failure(string actual)
+        public CellResult(string cell, ResultStatus status)
         {
-            return new CellResult{actual = actual, status = ResultStatus.failed};
+            this.cell = cell;
+            this.status = status;
         }
 
-        public static CellResult Error(string message)
+        public static CellResult Ok(string cell)
         {
-            return new CellResult {status = ResultStatus.error, error = message};
+            return new CellResult(cell, ResultStatus.ok);
         }
 
-        public static CellResult Error(Exception ex)
+        public static CellResult Success(string cell)
+        {
+            return new CellResult(cell, ResultStatus.success);
+        }
+
+        public static CellResult Failure(string cell, string actual)
+        {
+            return new CellResult(cell, ResultStatus.failed) {actual = actual};
+        }
+
+        public static CellResult Missing(string cell)
+        {
+            return new CellResult(cell, ResultStatus.missing);
+        }
+
+        public static CellResult Error(string cell, string message)
+        {
+            return new CellResult(cell, ResultStatus.error){error = message};
+        }
+
+        public static CellResult Error(string cell, Exception ex)
         {
             // TODO -- be smart enough to remove exception wrapping
             // for special exceptions
-            return Error(ex.ToString());
+            return Error(cell, ex.ToString());
         }
 
 
         protected bool Equals(CellResult other)
         {
-            return status == other.status && string.Equals(actual, other.actual) && string.Equals(error, other.error);
+            return string.Equals(actual, other.actual) && string.Equals(error, other.error) && string.Equals(cell, other.cell);
         }
 
         public override bool Equals(object obj)
@@ -48,11 +68,25 @@ namespace Storyteller.Core.Results
         {
             unchecked
             {
-                var hashCode = (int) status;
-                hashCode = (hashCode*397) ^ (actual != null ? actual.GetHashCode() : 0);
+                var hashCode = (actual != null ? actual.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (error != null ? error.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (cell != null ? cell.GetHashCode() : 0);
                 return hashCode;
             }
+        }
+
+        public override string ToString()
+        {
+            var value = string.Format("CellResult '{0}' = {1}", cell, status);
+
+            if (status == ResultStatus.failed)
+            {
+                value += ", actual = " + actual;
+            }
+
+            
+
+            return value;
         }
 
         public void Modify(Counts counts)
@@ -60,9 +94,5 @@ namespace Storyteller.Core.Results
             counts.Increment(status);
         }
 
-        public override string ToString()
-        {
-            return string.Format("Status: {0}, Actual: {1}, Error: {2}", status, actual, error);
-        }
     }
 }

@@ -1,25 +1,86 @@
-﻿namespace Storyteller.Core.Model
+﻿using Newtonsoft.Json;
+
+namespace Storyteller.Core.Model
 {
-    /*
-	this.key = key;
-	this.default = null;
-	this.description = description || key;
-	this.editor = 'text';
-	this.options = [];
-	this.size = null;
-     */
+    public abstract class GrammarModel
+    {
+        protected GrammarModel(string key, string type)
+        {
+            this.key = key;
+            this.type = type;
+        }
+
+        public readonly string key;
+        public readonly string type;
+    }
+
+    public class FixtureModel : GrammarModel
+    {
+        public FixtureModel(string key) : base(key, "fixture")
+        {
+        }
+
+        public string title;
+
+        public object[] grammars;
+    }
+
+
+    public class EmbeddedSection : GrammarModel
+    {
+        public EmbeddedSection(string key) : base(key, "embedded-section")
+        {
+        }
+
+        public string title;
+        public FixtureModel fixture;
+
+    }
+
+    public class Sentence : GrammarModel
+    {
+        public Sentence(string key) : base(key, "sentence")
+        {
+        }
+
+        public string format;
+
+        public Cell[] cells;
+    }
+
+
+    public class Table : GrammarModel
+    {
+        public Table(string key) : base(key, "table")
+        {
+        }
+
+        public string title;
+        public string collection;
+
+        public Cell[] cells;
+    }
+
+
 
     public class Cell
     {
-        public string Key { get; set; }
-        public string Default { get; set; }
-        public string Description { get; set; }
-        public string Editor { get; set; }
+        public string key { get; set; }
+        
+        [JsonProperty("default")]
+        public string default_value { get; set; }
+        public string description { get; set; }
+        public string editor { get; set; }
+
+        public Option[] options;
         
     }
 
-    public class SelectionOption
+    public class Option
     {
-        
+        public string display;
+        public string value;
     }
+
+
 }

@@ -9,6 +9,8 @@ namespace Storyteller.Core.Results
         public static readonly StepResult Success = new StepResult{status = ResultStatus.success};
         public static readonly StepResult Failed = new StepResult{status = ResultStatus.failed};
 
+        public string id { get; set; }
+
         public static StepResult Error(string message)
         {
             return new StepResult{status = ResultStatus.error, error = message};

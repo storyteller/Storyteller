@@ -11,7 +11,7 @@ namespace Storyteller.Core.Testing.Results
         public void modify_counts_when_ok()
         {
             var counts = new Counts();
-            CellResult.Ok.Modify(counts);
+            CellResult.Ok("a").Modify(counts);
 
             counts.ShouldEqual(0, 0, 0, 0);
         }
@@ -20,7 +20,7 @@ namespace Storyteller.Core.Testing.Results
         public void modify_counts_when_in_success_state()
         {
             var counts = new Counts();
-            CellResult.Success.Modify(counts);
+            CellResult.Success("a").Modify(counts);
 
             counts.ShouldEqual(1, 0, 0, 0);
         }
@@ -30,7 +30,7 @@ namespace Storyteller.Core.Testing.Results
         {
             var counts = new Counts();
 
-            CellResult.Failure("foo").Modify(counts);
+            CellResult.Failure("a","foo").Modify(counts);
 
             counts.ShouldEqual(0, 1, 0, 0);
         }
@@ -40,7 +40,7 @@ namespace Storyteller.Core.Testing.Results
         {
             var counts = new Counts();
 
-            CellResult.Error("bad message").Modify(counts);
+            CellResult.Error("a","bad message").Modify(counts);
 
             counts.ShouldEqual(0, 0, 1, 0);
         }
@@ -50,7 +50,7 @@ namespace Storyteller.Core.Testing.Results
         {
             var counts = new Counts();
 
-            CellResult.Missing.Modify(counts);
+            CellResult.Missing("a").Modify(counts);
 
             counts.ShouldEqual(0, 0, 0, 1);
         }
