@@ -28,19 +28,6 @@ namespace Storyteller.Core.Conversion
 
     }
 
-    public class EnumerableConversion : IConversionProvider
-    {
-        public IConvertor ConverterFor(Type type)
-        {
-            if (type.IsEnum)
-            {
-                return x => Enum.Parse(type, x);
-            }
-
-            return null;
-        }
-    }
-
     public interface IConversionProvider
     {
         IConvertor ConverterFor(Type type);

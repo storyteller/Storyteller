@@ -51,6 +51,7 @@
     <Compile Include="BasicClassesAndInterfaces.cs" />
     <Compile Include="Conversion\ConversionClasses.cs" />
     <Compile Include="Conversion\Conversions.cs" />
+    <Compile Include="Conversion\EnumerationConversion.cs" />
     <Compile Include="Conversion\StepValues.cs" />
     <Compile Include="Engine\Counts.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />

@@ -12,7 +12,7 @@ namespace Storyteller.Core.Conversion
         public Conversions(IEnumerable<IConversionProvider> providers)
         {
             _providers.AddRange(providers);
-            _providers.Add(new EnumerableConversion());
+            _providers.Add(new EnumerationConversion());
 
             _convertors = new Cache<Type, Func<string, object>>(type =>
             {
