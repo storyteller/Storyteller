@@ -4,15 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using FubuCore;
-using FubuCore.Util;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Conversion
 {
-    public interface IConvertor
-    {
-        object Convert(string raw);
-    }
+    using IConvertor = Func<string, object>;
 
 
     public interface IRuntimeConvertor
@@ -32,23 +28,16 @@ namespace Storyteller.Core.Conversion
 
     }
 
-    public class ConverterFactory 
+    public class EnumerableConversion : IConversionProvider
     {
-        private readonly IEnumerable<IConversionProvider> _providers;
-        private readonly Cache<Type, IConvertor> _convertors;
-
-        public ConverterFactory(IEnumerable<IConversionProvider> providers)
+        public IConvertor ConverterFor(Type type)
         {
-            _providers = providers;
-            _convertors = new Cache<Type, IConvertor>(type =>
+            if (type.IsEnum)
             {
-                return _providers.FirstValue(x => x.ConverterFor(type));
-            });
-        }
+                return x => Enum.Parse(type, x);
+            }
 
-        public IConvertor FindConvertor(Type type)
-        {
-            return _convertors[type];
+            return null;
         }
     }
 
@@ -69,6 +58,10 @@ namespace Storyteller.Core.Conversion
             var types = typeof (int).Assembly.GetExportedTypes().Where(x => x.CanBeCastTo<IConvertible>()).Where(x => x.Namespace == "System")
                 .Where(hasParse);
             types.Each(x => Debug.WriteLine(x.FullName));
+
+            
         }
     }
+
+
 }

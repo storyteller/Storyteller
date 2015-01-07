@@ -69,6 +69,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

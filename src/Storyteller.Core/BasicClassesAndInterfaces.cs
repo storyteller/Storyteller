@@ -5,7 +5,7 @@ namespace Storyteller.Core
 {
     public interface IGrammar
     {
-        void WarmUp(ConverterFactory converters);
+        void WarmUp(Conversions converters);
         IExecutionPlan CreatePlan(Step step);
         string Key { get; }
 
