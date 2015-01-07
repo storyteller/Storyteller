@@ -33,11 +33,11 @@ namespace Storyteller.Core.Conversion
             });
         }
 
-        public void Check<T>(ISpecContext context, string key, T actual)
+        public void Check(ISpecContext context, string key, object actual)
         {
             // TODO: Could be Predicate<T> -- figure out how to use this
 
-            T expected = (T) Get(key);
+            var expected = Get(key);
             if (expected.Equals(actual))
             {
                 context.LogResult(CellResult.Success(key));

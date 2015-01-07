@@ -27,7 +27,7 @@ namespace Storyteller.Core.Testing.Conversion
 
             values.Store("a", 1);
 
-            values.Check<int>(context, "a", 1);
+            values.Check(context, "a", 1);
 
             context.AssertTheOnlyResultIs(CellResult.Success("a"));
 
@@ -41,7 +41,7 @@ namespace Storyteller.Core.Testing.Conversion
 
             values.Store("a", 1);
 
-            values.Check<int>(context, "a", 2);
+            values.Check(context, "a", 2);
 
             context.AssertTheOnlyResultIs(CellResult.Failure("a", "2"));
         }

@@ -34,20 +34,5 @@ namespace Storyteller.Core.Grammars
      * 
      */
 
-    public class LineAssertionPlan<T> : LinePlan
-    {
-        public static Action<ISpecContext, StepValues> ToAction(string expectedKey, Func<ISpecContext, StepValues, T> func)
-        {
-            return (c, v) =>
-            {
-                var actual = func(c, v);
-                v.Check(c, expectedKey, actual);
-            };
-        }
 
-        public LineAssertionPlan(string expectedKey, StepValues values, Func<ISpecContext, StepValues, T> func)
-            : base(values, ToAction(expectedKey, func))
-        {
-        }
-    }
 }
