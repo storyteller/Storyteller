@@ -40,7 +40,7 @@ namespace Storyteller.Core.Conversion
             _convertors[typeof (T)] = x => convertor(x);
         }
 
-        public Func<string, object> FindConvertor(Type type)
+        public Func<string, object> FindConverter(Type type)
         {
             return _convertors[type];
         }

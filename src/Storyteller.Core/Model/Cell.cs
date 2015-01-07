@@ -22,8 +22,34 @@ namespace Storyteller.Core.Model
             Type = type;
             Key = key;
 
-            
+            var converter = conversions.FindConverter(type);
+            if (converter == null)
+            {
+                var message = "No converter found for type " + type.FullName;
+                _conversion = (step, values) => values.LogError(Key, message);
+            }
+            else
+            {
+                _conversion = (step, values) =>
+                {
+                    try
+                    {
+                        var converted = converter(step.Values[Key]);
+                        values.Store(Key, converted);
+                    }
+                    catch (FormatException)
+                    {
+                        values.LogError(Key, "Invalid Format");
+                    }
+                    catch (Exception ex)
+                    {
+                        values.LogError(Key, ex);
+                    }
+                };
+            }
         }
+
+        private readonly Action<Step, StepValues> _conversion;
 
         [JsonIgnore]
         public Type Type;
@@ -36,6 +62,11 @@ namespace Storyteller.Core.Model
 
         public Option[] options;
 
-        public Action<Step, StepValues> ConvertValues { get; private set; } 
+        public void ConvertValues(Step step, StepValues values)
+        {
+            _conversion(step, values);
+        }
+
+        
     }
 }

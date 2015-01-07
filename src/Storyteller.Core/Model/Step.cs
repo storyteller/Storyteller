@@ -14,6 +14,12 @@ namespace Storyteller.Core.Model
         public readonly IDictionary<string, IList<Step>> Collections = new Dictionary<string, IList<Step>>();
 
         public readonly string Key;
+
+        public Step With(string key, string value)
+        {
+            Values.Add(key, value);
+            return this;
+        }
     }
 
     public class Comment

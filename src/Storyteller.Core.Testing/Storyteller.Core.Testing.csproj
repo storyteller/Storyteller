@@ -72,7 +72,7 @@
     <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
     <Compile Include="Engine\CountsTester.cs" />
-    <Compile Include="Model\serialization_specs.cs" />
+    <Compile Include="Model\CellTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordingSpecContext.cs" />
     <Compile Include="Results\CellResultTester.cs" />
