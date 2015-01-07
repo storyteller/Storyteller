@@ -5,15 +5,18 @@ namespace Storyteller.Core.Results
 {
     public class StepResult : IResultMessage
     {
-        public static readonly StepResult Ok = new StepResult{status = ResultStatus.ok};
-        public static readonly StepResult Success = new StepResult{status = ResultStatus.success};
-        public static readonly StepResult Failed = new StepResult{status = ResultStatus.failed};
+        public StepResult(ResultStatus status)
+        {
+            this.status = status;
+        }
 
         public string id { get; set; }
 
+
+
         public static StepResult Error(string message)
         {
-            return new StepResult{status = ResultStatus.error, error = message};
+            return new StepResult(ResultStatus.error){error = message};
         }
 
         public static StepResult Error(Exception ex)

@@ -56,6 +56,7 @@
     <Compile Include="Conversion\StepValues.cs" />
     <Compile Include="Engine\Counts.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />
+    <Compile Include="Grammars\LinePlan.cs" />
     <Compile Include="ISpecContext.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\ModelSpike.cs" />

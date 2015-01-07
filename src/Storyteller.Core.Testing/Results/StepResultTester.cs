@@ -12,13 +12,13 @@ namespace Storyteller.Core.Testing.Results
         {
             var counts = new Counts();
 
-            StepResult.Ok.Modify(counts);
+            new StepResult(ResultStatus.ok).Modify(counts);
             counts.ShouldEqual(0, 0, 0, 0);
 
-            StepResult.Success.Modify(counts);
+            new StepResult(ResultStatus.success).Modify(counts);
             counts.ShouldEqual(1, 0, 0, 0);
 
-            StepResult.Failed.Modify(counts);
+            new StepResult(ResultStatus.failed).Modify(counts);
             counts.ShouldEqual(1, 1, 0, 0);
 
             StepResult.Error("bad").Modify(counts);

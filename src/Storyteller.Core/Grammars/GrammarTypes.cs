@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Storyteller.Core.Conversion;
 
@@ -34,47 +33,6 @@ namespace Storyteller.Core.Grammars
 
      * 
      */
-
-    public class LinePlan : IExecutionPlan
-    {
-        private readonly StepValues _values;
-        private readonly Action<ISpecContext, StepValues> _action;
-
-        public LinePlan(StepValues values, Action<ISpecContext, StepValues> action)
-        {
-            _values = values;
-            _action = action;
-        }
-
-        public void Execute(ISpecContext context)
-        {
-            try
-            {
-                _values.DoDelayedConversions(context);
-            }
-            catch (Exception ex)
-            {
-                // log the exception here
-                return;
-            }
-
-            if (_values.Errors.Any())
-            {
-                context.LogResults(_values.Errors);
-                return;
-            }
-
-            try
-            {
-                _action(context, _values);
-            }
-            catch (Exception ex)
-            {
-                // send the message that the thing failed
-                throw;
-            }
-        }
-    }
 
     public class LineAssertionPlan<T> : LinePlan
     {

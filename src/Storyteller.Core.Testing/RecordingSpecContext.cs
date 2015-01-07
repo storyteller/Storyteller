@@ -10,6 +10,8 @@ namespace Storyteller.Core.Testing
 {
     public class RecordingSpecContext : ISpecContext
     {
+        public readonly string Id = Guid.NewGuid().ToString();
+
         public CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
 
         public CancellationToken Cancellation
@@ -26,6 +28,8 @@ namespace Storyteller.Core.Testing
 
         public void AssertTheOnlyResultIs(IResultMessage expectation)
         {
+            expectation.id = Id;
+
             if (Results.Count == 0)
             {
                 Assert.Fail("No results were captured");
@@ -41,11 +45,13 @@ namespace Storyteller.Core.Testing
 
         public void LogResults(IEnumerable<IResultMessage> results)
         {
+            results.Each(x => x.id = Id);
             Results.AddRange(results);
         }
 
         public void LogResult(IResultMessage result)
         {
+            result.id = Id;
             Results.Add(result);
         }
     }
