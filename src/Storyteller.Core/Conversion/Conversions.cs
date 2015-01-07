@@ -49,5 +49,10 @@ namespace Storyteller.Core.Conversion
         {
             return _convertors[type](raw);
         }
+
+        public static Conversions Basic()
+        {
+            return new Conversions(new IConversionProvider[0]);
+        }
     }
 }

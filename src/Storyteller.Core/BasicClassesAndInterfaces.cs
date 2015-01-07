@@ -5,11 +5,17 @@ namespace Storyteller.Core
 {
     public interface IGrammar
     {
-        void WarmUp(Conversions converters);
         IExecutionPlan CreatePlan(Step step);
         string Key { get; }
 
-        GrammarModel Metadata();
+        GrammarModel Compile(Conversions conversions);
+    }
+
+    public interface IFixture
+    {
+        bool IsHidden();
+
+        FixtureModel Compile(Conversions conversions);
     }
 
     public interface IExecutionPlan

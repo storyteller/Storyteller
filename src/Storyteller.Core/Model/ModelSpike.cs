@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.CodeDom;
+using System.Security.Cryptography.X509Certificates;
+using Newtonsoft.Json.Serialization;
 
 namespace Storyteller.Core.Model
 {
@@ -61,20 +63,6 @@ namespace Storyteller.Core.Model
         public Cell[] cells;
     }
 
-
-
-    public class Cell
-    {
-        public string key { get; set; }
-        
-        [JsonProperty("default")]
-        public string default_value { get; set; }
-        public string description { get; set; }
-        public string editor { get; set; }
-
-        public Option[] options;
-        
-    }
 
     public class Option
     {
