@@ -6,7 +6,6 @@ using System.Reflection;
 using FubuCore;
 using FubuCore.Util;
 using Storyteller.Core.Model;
-using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Conversion
 {
@@ -31,71 +30,6 @@ namespace Storyteller.Core.Conversion
             throw new NotImplementedException();
         }
 
-    }
-
-    public class StepValues
-    {
-        private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
-        private readonly IList<Delayed> _delayeds = new List<Delayed>();
-
-
-        public void DoDelayedConversions(ISpecContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Check<T>(ISpecContext context, string key, T actual)
-        {
-            // TODO: Could be Predicate<T> -- figure out how to use this
-            // TODO: Could be a T
-
-            T expected = (T) Get(key);
-            if (expected.Equals(actual))
-            {
-                context.LogResult(CellResult.Success(key));
-            }
-            else
-            {
-                context.LogResult(CellResult.Failure(key, actual.ToString()));
-            }
-        }
-
-        public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)
-        {
-            _delayeds.Add(new Delayed
-            {
-                Key = key, Raw = raw, Converter = convertor
-            });
-        }
-
-        public void Store(string key, object value)
-        {
-            _values.Add(key, value);
-        }
-
-        public object Get(string key)
-        {
-            return _values[key];
-        }
-
-        public IList<CellResult> Errors = new List<CellResult>();
-
-        public void LogError(string key, Exception ex)
-        {
-            
-        }
-
-        public void LogError(string key, string message)
-        {
-            
-        }
-
-        public class Delayed
-        {
-            public string Key;
-            public string Raw;
-            public IRuntimeConvertor Converter;
-        }
     }
 
     public class ConverterFactory 
