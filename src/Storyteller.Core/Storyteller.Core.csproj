@@ -63,6 +63,7 @@
     <Compile Include="HiddenAttribute.cs" />
     <Compile Include="ISpecContext.cs" />
     <Compile Include="Model\Cell.cs" />
+    <Compile Include="Model\ErrorGrammar.cs" />
     <Compile Include="Model\ModelSpike.cs" />
     <Compile Include="Model\Step.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

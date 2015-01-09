@@ -6,12 +6,15 @@ using System.Runtime.CompilerServices;
 using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
+using Storyteller.Core;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core
 {
+    
+
     public class Fixture : IFixture
     {
         private static readonly List<Type> _ignoredTypes = new List<Type>
@@ -20,9 +23,9 @@ namespace Storyteller.Core
             typeof (Fixture)
         };
 
-        // TODO -- need to set this
-        public string Title;
         private readonly Cache<string, IGrammar> _grammars;
+
+        public string Title;
 
         public Fixture()
         {
@@ -30,11 +33,9 @@ namespace Storyteller.Core
             Key = GetType().Name.Replace("Fixture", "");
         }
 
-        [IndexerName("Grammars")]
-        public IGrammar this[string key]
+        private IGrammar findGrammar(string key)
         {
-            get { return _grammars[key]; }
-            set { _grammars[key] = value; }
+            throw new NotImplementedException();
         }
 
         public bool IsHidden()
@@ -48,7 +49,7 @@ namespace Storyteller.Core
             {
                 string grammarKey = method.GetKey();
                 if (_grammars.Has(grammarKey)) return;
-                
+
                 try
                 {
                     IGrammar grammar = GrammarBuilder.BuildGrammar(method, this);
@@ -65,25 +66,35 @@ namespace Storyteller.Core
                             "Could not create Grammar '{0}' of Fixture '{1}'".ToFormat(grammarKey,
                                                                                        GetType().GetFixtureAlias())
                     });
-                     * */
+                     */
                 }
             });
 
             var grammars = _grammars.GetAllKeys().Select(key =>
             {
-                var grammar = _grammars[key];
-                var model =  grammar.Compile(conversions);
+                var model = _grammars[key].Compile(conversions);
                 model.key = key;
 
                 return model;
-            }).ToArray();
+            });
 
             return new FixtureModel(Key)
             {
-                grammars = grammars,
-                title = Title ?? Key.SplitPascalCase()
+                title = Title ?? Key.SplitCamelCase(),
+                grammars = grammars.ToArray()
             };
         }
+
+        [IndexerName("Grammars")]
+        public IGrammar this[string key]
+        {
+            get
+            {
+                return _grammars[key];
+            }
+            set { _grammars[key] = value; }
+        }
+
 
         private static bool methodFromThis(MethodInfo method)
         {
@@ -108,24 +119,18 @@ namespace Storyteller.Core
 
         public IGrammar GrammarFor(string key)
         {
-            return _grammars[key];
+            throw new NotImplementedException();
         }
 
         public string Key { get; protected set; }
-
-        // TODO -- can handle missing grammars
-        private IGrammar findGrammar(string key)
-        {
-            throw new NotImplementedException();
-        }
     }
+}
 
-    public static class MethodExtensions
+public static class MethodExtensions
+{
+    public static string GetKey(this MethodInfo method)
     {
-        public static string GetKey(this MethodInfo method)
-        {
-            var att = method.GetAttribute<AliasAsAttribute>();
-            return att == null ? method.Name : att.Alias;
-        }
+        var att = method.GetAttribute<AliasAsAttribute>();
+        return att == null ? method.Name : att.Alias;
     }
 }

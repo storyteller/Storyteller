@@ -75,6 +75,7 @@
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\LinePlanTester.cs" />
     <Compile Include="Model\CellTester.cs" />
+    <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordingSpecContext.cs" />
     <Compile Include="Results\CellResultTester.cs" />
