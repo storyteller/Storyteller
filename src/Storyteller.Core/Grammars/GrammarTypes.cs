@@ -1,8 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using Storyteller.Core.Conversion;
-
-namespace Storyteller.Core.Grammars
+﻿namespace Storyteller.Core.Grammars
 {
     /*
      * DoGrammar -- exactly what it sounds like. Do it as a placeholder if nothing else.

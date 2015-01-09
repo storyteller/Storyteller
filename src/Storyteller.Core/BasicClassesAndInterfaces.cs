@@ -16,6 +16,10 @@ namespace Storyteller.Core
         bool IsHidden();
 
         FixtureModel Compile(Conversions conversions);
+
+        IGrammar GrammarFor(string key);
+
+        string Key { get; }
     }
 
     public interface IExecutionPlan

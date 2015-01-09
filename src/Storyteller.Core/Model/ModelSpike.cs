@@ -1,5 +1,13 @@
-﻿namespace Storyteller.Core.Model
+﻿using System.Collections.Generic;
+
+namespace Storyteller.Core.Model
 {
+    public class GrammarError
+    {
+        public string message;
+        public string error;
+    }
+
     public abstract class GrammarModel
     {
         public readonly string key;
@@ -10,12 +18,16 @@
             this.key = key;
             this.type = type;
         }
+
+        public readonly IList<GrammarError> errors = new List<GrammarError>(); 
     }
 
     public class FixtureModel : GrammarModel
     {
         public object[] grammars;
         public string title;
+
+        public readonly IList<GrammarError> errors = new List<GrammarError>(); 
 
         public FixtureModel(string key) : base(key, "fixture")
         {
@@ -43,6 +55,15 @@
         }
     }
 
+    public class Fact : GrammarModel
+    {
+        public Cell[] cells;
+        public string format;
+
+        public Fact(string key) : base(key, "fact")
+        {
+        }
+    }
 
     public class Table : GrammarModel
     {

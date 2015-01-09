@@ -48,6 +48,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="BasicClassesAndInterfaces.cs" />
     <Compile Include="Conversion\IRuntimeConvertor.cs" />
     <Compile Include="Conversion\Conversions.cs" />
@@ -55,8 +56,10 @@
     <Compile Include="Conversion\IConversionProvider.cs" />
     <Compile Include="Conversion\StepValues.cs" />
     <Compile Include="Engine\Counts.cs" />
+    <Compile Include="Fixture.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />
     <Compile Include="Grammars\LinePlan.cs" />
+    <Compile Include="HiddenAttribute.cs" />
     <Compile Include="ISpecContext.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\ModelSpike.cs" />
