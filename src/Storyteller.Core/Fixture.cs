@@ -80,7 +80,8 @@ namespace Storyteller.Core
 
             return new FixtureModel(Key)
             {
-                grammars = grammars
+                grammars = grammars,
+                title = Title ?? Key.SplitPascalCase()
             };
         }
 

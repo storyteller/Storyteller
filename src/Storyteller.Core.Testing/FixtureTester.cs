@@ -131,6 +131,37 @@ namespace Storyteller.Core.Testing
                 new StubGrammarModel { key = "GoAlias"}
                 );
         }
+
+        public class DefaultTitleFixture : Fixture
+        {
+            
+        }
+
+        [Test]
+        public void builds_default_title_in_model()
+        {
+            new DefaultTitleFixture()
+                .Compile(Conversions.Basic())
+                .title.ShouldEqual("Default Title");
+        }
+
+        public class ExplicitTitleFixture : Fixture
+        {
+            public ExplicitTitleFixture()
+            {
+                Title = "The special title";
+            }
+        }
+
+        [Test]
+        public void builds_model_with_explicit_title()
+        {
+            new ExplicitTitleFixture()
+                .Compile(Conversions.Basic())
+                .title.ShouldEqual("The special title");
+        }
+
+
     }
 
     public class StubGrammar : IGrammar
