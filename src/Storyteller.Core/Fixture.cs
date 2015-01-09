@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
 using Storyteller.Core.Conversion;
+using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core
@@ -40,7 +44,65 @@ namespace Storyteller.Core
 
         public FixtureModel Compile(Conversions conversions)
         {
-            throw new NotImplementedException();
+            GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Each(method =>
+            {
+                string grammarKey = method.GetKey();
+                if (_grammars.Has(grammarKey)) return;
+                
+                try
+                {
+                    IGrammar grammar = GrammarBuilder.BuildGrammar(method, this);
+                    this[grammarKey] = grammar;
+                }
+                catch (Exception e)
+                {
+                    throw;
+                    /*
+                    _errors.Add(new GrammarError
+                    {
+                        ErrorText = e.ToString(),
+                        Message =
+                            "Could not create Grammar '{0}' of Fixture '{1}'".ToFormat(grammarKey,
+                                                                                       GetType().GetFixtureAlias())
+                    });
+                     * */
+                }
+            });
+
+            var grammars = _grammars.GetAllKeys().Select(key =>
+            {
+                var grammar = _grammars[key];
+                var model =  grammar.Compile(conversions);
+                model.key = key;
+
+                return model;
+            }).ToArray();
+
+            return new FixtureModel(Key)
+            {
+                grammars = grammars
+            };
+        }
+
+        private static bool methodFromThis(MethodInfo method)
+        {
+            if (method.Name == "TODO") return true;
+
+            if (_ignoredTypes.Contains(method.DeclaringType))
+            {
+                return false;
+            }
+
+            if (method.GetBaseDefinition() != null)
+            {
+                Type declaringType = method.GetBaseDefinition().DeclaringType;
+                if (_ignoredTypes.Contains(declaringType))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public IGrammar GrammarFor(string key)
@@ -54,6 +116,15 @@ namespace Storyteller.Core
         private IGrammar findGrammar(string key)
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public static class MethodExtensions
+    {
+        public static string GetKey(this MethodInfo method)
+        {
+            var att = method.GetAttribute<AliasAsAttribute>();
+            return att == null ? method.Name : att.Alias;
         }
     }
 }

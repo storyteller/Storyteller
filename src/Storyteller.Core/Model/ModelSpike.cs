@@ -10,12 +10,11 @@ namespace Storyteller.Core.Model
 
     public abstract class GrammarModel
     {
-        public readonly string key;
+        public string key;
         public readonly string type;
 
-        protected GrammarModel(string key, string type)
+        protected GrammarModel(string type)
         {
-            this.key = key;
             this.type = type;
         }
 
@@ -24,13 +23,14 @@ namespace Storyteller.Core.Model
 
     public class FixtureModel : GrammarModel
     {
-        public object[] grammars;
         public string title;
+        public readonly string key;
 
-        public readonly IList<GrammarError> errors = new List<GrammarError>(); 
+        public GrammarModel[] grammars; 
 
-        public FixtureModel(string key) : base(key, "fixture")
+        public FixtureModel(string key) : base("fixture")
         {
+            this.key = key;
         }
     }
 
@@ -40,7 +40,7 @@ namespace Storyteller.Core.Model
         public FixtureModel fixture;
         public string title;
 
-        public EmbeddedSection(string key) : base(key, "embedded-section")
+        public EmbeddedSection(string key) : base("embedded-section")
         {
         }
     }
@@ -50,7 +50,7 @@ namespace Storyteller.Core.Model
         public Cell[] cells;
         public string format;
 
-        public Sentence(string key) : base(key, "sentence")
+        public Sentence() : base("sentence")
         {
         }
     }
@@ -60,7 +60,7 @@ namespace Storyteller.Core.Model
         public Cell[] cells;
         public string format;
 
-        public Fact(string key) : base(key, "fact")
+        public Fact() : base("fact")
         {
         }
     }
@@ -71,7 +71,7 @@ namespace Storyteller.Core.Model
         public string collection;
         public string title;
 
-        public Table(string key) : base(key, "table")
+        public Table() : base("table")
         {
         }
     }

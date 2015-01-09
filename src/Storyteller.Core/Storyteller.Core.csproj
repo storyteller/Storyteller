@@ -57,6 +57,7 @@
     <Compile Include="Conversion\StepValues.cs" />
     <Compile Include="Engine\Counts.cs" />
     <Compile Include="Fixture.cs" />
+    <Compile Include="Grammars\GrammarBuilder.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />
     <Compile Include="Grammars\LinePlan.cs" />
     <Compile Include="HiddenAttribute.cs" />

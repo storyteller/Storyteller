@@ -6,7 +6,6 @@ namespace Storyteller.Core
     public interface IGrammar
     {
         IExecutionPlan CreatePlan(Step step);
-        string Key { get; }
 
         GrammarModel Compile(Conversions conversions);
     }
