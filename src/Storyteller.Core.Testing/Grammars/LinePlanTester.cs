@@ -23,7 +23,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             innerActionRan = false;
             values = new StepValues();
-            context = new SpecContext();
+            context = SpecContext.ForTesting();
             action = (c, v) => innerActionRan = true;
         }
 

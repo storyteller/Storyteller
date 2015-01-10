@@ -6,15 +6,43 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core
 {
+    public interface IExecutionObserver
+    {
+        void Handle<T>(T message);
+    }
+
+    public class NulloExecutionObserver : IExecutionObserver
+    {
+        public void Handle<T>(T message)
+        {
+            // Nothing
+        }
+    }
+
     public class SpecContext : ISpecContext
     {
-        public readonly string Id = Guid.NewGuid().ToString();
+        private readonly IExecutionObserver _observer;
+
+        public static SpecContext Basic()
+        {
+            return new SpecContext(new NulloExecutionObserver());
+        }
+
+        public static SpecContext ForTesting()
+        {
+            var context = Basic();
+            context.Nodes.Push(new Specification { Id = Guid.NewGuid().ToString() });
+
+            return context;
+        }
+
         public readonly Stack<Node> Nodes = new Stack<Node>();
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
 
-        public SpecContext()
+        public SpecContext(IExecutionObserver observer)
         {
-            Nodes.Push(new Specification {Id = Id});
+            _observer = observer;
+            
         }
 
         public bool IsCancelled { get; set; }
@@ -24,13 +52,12 @@ namespace Storyteller.Core
             throw new NotImplementedException();
         }
 
-        public void LogResults(IEnumerable<IResultMessage> results)
+        public void LogResults(IEnumerable<CellResult> results)
         {
-            results.Each(x => x.id = Id);
-            Results.AddRange(results);
+            results.Each(x => LogResult(x));
         }
 
-        public void LogResult(IResultMessage result)
+        public void LogResult<T>(T result) where T : IResultMessage
         {
             result.id = Nodes.Peek().Id;
             Results.Add(result);

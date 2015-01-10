@@ -82,6 +82,7 @@
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />
     <Compile Include="SpecContextExtensions.cs" />
+    <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

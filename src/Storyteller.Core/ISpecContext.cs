@@ -11,8 +11,8 @@ namespace Storyteller.Core
         // TODO -- if the stop conditions have been met (Later)
         bool IsCancelled { get; }
         bool Wait(Func<bool> condition, TimeSpan timeout);
-        void LogResults(IEnumerable<IResultMessage> results);
-        void LogResult(IResultMessage result);
+        void LogResults(IEnumerable<CellResult> results);
+        void LogResult<T>(T result) where T : IResultMessage;
         void LogException(Exception ex, Stage stage = Stage.body);
         void Push(Node node);
         void Pop();

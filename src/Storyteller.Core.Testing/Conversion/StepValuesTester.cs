@@ -22,7 +22,7 @@ namespace Storyteller.Core.Testing.Conversion
         [Test]
         public void happy_check_for_a_simple_equals_match()
         {
-            var context = new SpecContext();
+            var context = SpecContext.ForTesting();
             var values = new StepValues();
 
             values.Store("a", 1);
@@ -36,7 +36,7 @@ namespace Storyteller.Core.Testing.Conversion
         [Test]
         public void sad_path_check_for_a_simple_equals_match()
         {
-            var context = new SpecContext();
+            var context = SpecContext.ForTesting();
             var values = new StepValues();
 
             values.Store("a", 1);
@@ -49,7 +49,7 @@ namespace Storyteller.Core.Testing.Conversion
         [Test]
         public void process_delayed_runtime_converters_successfully()
         {
-            var context = new SpecContext();
+            var context = SpecContext.ForTesting();
             var values = new StepValues();
 
             values.RegisterDelayedConversion("a", "1", new StubRuntimeConverter("1", 1));
@@ -68,7 +68,7 @@ namespace Storyteller.Core.Testing.Conversion
         [Test]
         public void process_delayed_runtime_convertor_that_fails_with_exception()
         {
-            var context = new SpecContext();
+            var context = SpecContext.ForTesting();
             var values = new StepValues();
 
             values.RegisterDelayedConversion("a", "1", new StubRuntimeConverter("1", new NotImplementedException()));
@@ -84,7 +84,7 @@ namespace Storyteller.Core.Testing.Conversion
         [Test]
         public void process_delayed_runtime_convertor_that_fails_with_a_null()
         {
-            var context = new SpecContext();
+            var context = SpecContext.ForTesting();
             var values = new StepValues();
 
             values.RegisterDelayedConversion("a", "1", new StubRuntimeConverter("1", null));

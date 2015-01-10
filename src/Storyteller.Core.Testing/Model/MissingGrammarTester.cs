@@ -37,7 +37,7 @@ namespace Storyteller.Core.Testing.Model
         [Test]
         public void execute()
         {
-            var context = new SpecContext();
+            var context = SpecContext.ForTesting();
 
             var grammar = new MissingGrammar("Bad!");
             grammar.key = "foo";
