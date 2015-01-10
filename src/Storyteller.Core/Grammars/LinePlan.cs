@@ -33,8 +33,7 @@ namespace Storyteller.Core.Grammars
             }
             catch (Exception ex)
             {
-                // TODO -- watch the exception message
-                context.LogResult(new StepResult(ResultStatus.error){error = ex.ToString()});
+                context.LogException(ex);
             }
         }
     }

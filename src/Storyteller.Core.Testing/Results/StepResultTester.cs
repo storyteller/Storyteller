@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FubuTestingSupport;
+using NUnit.Framework;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Results;
 
@@ -23,6 +24,13 @@ namespace Storyteller.Core.Testing.Results
 
             StepResult.Error("bad").Modify(counts);
             counts.ShouldEqual(1, 1, 1, 0);
+        }
+
+        [Test]
+        public void default_stage_is_body()
+        {
+            new StepResult(ResultStatus.error).stage
+                .ShouldEqual(Stage.body);
         }
     }
 }

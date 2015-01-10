@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Storyteller.Core.Model
 {
-    public interface IStep
+    public abstract class Node
     {
-        
+        public string Id { get; set; }
     }
 
     public enum Lifecycle
@@ -14,31 +13,28 @@ namespace Storyteller.Core.Model
         Regression
     }
 
-    public class Specification : IStep
+    public class Specification : Node
     {
-        public Lifecycle Lifecycle = Lifecycle.Acceptance;
-        public string Name;
         public string FileName;
-        public string Suite;
-        public readonly IList<string> Tags = new List<string>(); 
-
+        public Lifecycle Lifecycle = Lifecycle.Acceptance;
         // Only run once if its acceptance
         public int MaxRetries;
-
-        public readonly IList<IStep> Steps = new List<IStep>(); 
+        public string Name;
+        public string Suite;
+        public readonly IList<Node> Steps = new List<Node>();
+        public readonly IList<string> Tags = new List<string>();
     }
 
-    public class Step : IStep
+    public class Step : Node
     {
+        public readonly IDictionary<string, IList<Node>> Collections = new Dictionary<string, IList<Node>>();
+        public readonly string Key;
+        public readonly IDictionary<string, string> Values = new Dictionary<string, string>();
+
         public Step(string key)
         {
             Key = key;
         }
-
-        public readonly IDictionary<string, string> Values = new Dictionary<string, string>();
-        public readonly IDictionary<string, IList<IStep>> Collections = new Dictionary<string, IList<IStep>>();
-
-        public readonly string Key;
 
         public Step With(string key, string value)
         {
@@ -47,19 +43,19 @@ namespace Storyteller.Core.Model
         }
     }
 
-    public class Section : IStep
+    public class Section : Node
     {
+        public readonly string Key;
+        public readonly IList<Step> Steps = new List<Step>();
+
         public Section(string key)
         {
             Key = key;
         }
-
-        public readonly IList<Step> Steps = new List<Step>();
-        public readonly string Key;
     }
 
 
-    public class Comment : IStep
+    public class Comment : Node
     {
         public string Text;
     }

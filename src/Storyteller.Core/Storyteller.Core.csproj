@@ -83,6 +83,7 @@
     <Compile Include="Results\ResultStatus.cs" />
     <Compile Include="Results\StepResult.cs" />
     <Compile Include="Results\TimedOut.cs" />
+    <Compile Include="SectionExecutionPlan.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

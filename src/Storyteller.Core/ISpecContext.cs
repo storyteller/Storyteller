@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Threading;
+using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core
 {
-
-
     public interface ISpecContext
     {
-        CancellationToken Cancellation { get; }
-
+        // TODO -- if the token is cancelled, if it's hit a critical exception, if the timeout is done
+        // TODO -- if the stop conditions have been met (Later)
+        bool IsCancelled { get; }
         bool Wait(Func<bool> condition, TimeSpan timeout);
-
         void LogResults(IEnumerable<IResultMessage> results);
         void LogResult(IResultMessage result);
-
+        void LogException(Exception ex, Stage stage = Stage.body);
+        void Push(Node node);
+        void Pop();
     }
 }

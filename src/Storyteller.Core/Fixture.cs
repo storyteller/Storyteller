@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
-using Storyteller.Core;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
@@ -36,6 +35,17 @@ namespace Storyteller.Core
             get { return _grammars[key]; }
             set { _grammars[key] = value; }
         }
+
+        public ISpecContext Context { get; set; }
+
+        public virtual void SetUp()
+        {
+        }
+
+        public virtual void TearDown()
+        {
+        }
+
 
         public bool IsHidden()
         {
@@ -110,4 +120,3 @@ namespace Storyteller.Core
         }
     }
 }
-

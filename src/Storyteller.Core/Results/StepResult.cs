@@ -3,6 +3,13 @@ using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
 {
+    public enum Stage
+    {
+        body,
+        setup,
+        teardown
+    }
+
     public class StepResult : IResultMessage
     {
         public StepResult(ResultStatus status)
@@ -11,8 +18,7 @@ namespace Storyteller.Core.Results
         }
 
         public string id { get; set; }
-
-
+        public Stage stage = Stage.body;
 
         public static StepResult Error(string message)
         {
@@ -34,7 +40,7 @@ namespace Storyteller.Core.Results
 
         protected bool Equals(StepResult other)
         {
-            return status == other.status && string.Equals(error, other.error);
+            return stage == other.stage && status == other.status && string.Equals(error, other.error);
         }
 
         public override bool Equals(object obj)
@@ -49,13 +55,16 @@ namespace Storyteller.Core.Results
         {
             unchecked
             {
-                return ((int) status*397) ^ (error != null ? error.GetHashCode() : 0);
+                var hashCode = (int) stage;
+                hashCode = (hashCode*397) ^ (int) status;
+                hashCode = (hashCode*397) ^ (error != null ? error.GetHashCode() : 0);
+                return hashCode;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("Status: {0}, Error: {1}", status, error);
+            return string.Format("Stage: {0}, Status: {1}, Error: {2}", stage, status, error);
         }
     }
 }

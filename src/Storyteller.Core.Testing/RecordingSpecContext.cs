@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using FubuTestingSupport;
 using NUnit.Framework;
+using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Testing
@@ -11,12 +11,12 @@ namespace Storyteller.Core.Testing
     public class RecordingSpecContext : ISpecContext
     {
         public readonly string Id = Guid.NewGuid().ToString();
+        public readonly IList<IResultMessage> Results = new List<IResultMessage>();
+        public bool IsCancelled { get; set; }
 
-        public CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
-
-        public CancellationToken Cancellation
+        public RecordingSpecContext()
         {
-            get { return CancellationTokenSource.Token; }
+            Nodes.Push(new Specification{Id = Id});
         }
 
         public bool Wait(Func<bool> condition, TimeSpan timeout)
@@ -24,7 +24,34 @@ namespace Storyteller.Core.Testing
             throw new NotImplementedException();
         }
 
-        public readonly IList<IResultMessage> Results = new List<IResultMessage>();
+        public void LogResults(IEnumerable<IResultMessage> results)
+        {
+            results.Each(x => x.id = Id);
+            Results.AddRange(results);
+        }
+
+        public void LogResult(IResultMessage result)
+        {
+            result.id = Nodes.Peek().Id;
+            Results.Add(result);
+        }
+
+        public void LogException(Exception ex, Stage stage = Stage.body)
+        {
+            LogResult(new StepResult(ResultStatus.error) {error = ex.ToString(), stage = stage});
+        }
+
+        public readonly Stack<Node> Nodes = new Stack<Node>(); 
+
+        public void Push(Node node)
+        {
+            Nodes.Push(node);
+        }
+
+        public void Pop()
+        {
+            Nodes.Pop();
+        }
 
         public void AssertTheOnlyResultIs(IResultMessage expectation)
         {
@@ -41,18 +68,6 @@ namespace Storyteller.Core.Testing
             }
 
             Results.Single().ShouldEqual(expectation);
-        }
-
-        public void LogResults(IEnumerable<IResultMessage> results)
-        {
-            results.Each(x => x.id = Id);
-            Results.AddRange(results);
-        }
-
-        public void LogResult(IResultMessage result)
-        {
-            result.id = Id;
-            Results.Add(result);
         }
     }
 }
