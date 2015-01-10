@@ -62,6 +62,7 @@
     <Compile Include="Grammars\LinePlan.cs" />
     <Compile Include="HiddenAttribute.cs" />
     <Compile Include="ISpecContext.cs" />
+    <Compile Include="FixtureMethodExtensions.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\ErrorGrammar.cs" />
     <Compile Include="Model\MissingGrammar.cs" />

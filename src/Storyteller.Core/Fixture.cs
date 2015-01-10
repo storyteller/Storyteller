@@ -13,8 +13,6 @@ using Storyteller.Core.Model;
 
 namespace Storyteller.Core
 {
-    
-
     public class Fixture : IFixture
     {
         private static readonly List<Type> _ignoredTypes = new List<Type>
@@ -23,9 +21,8 @@ namespace Storyteller.Core
             typeof (Fixture)
         };
 
-        private readonly Cache<string, IGrammar> _grammars;
-
         public string Title;
+        private readonly Cache<string, IGrammar> _grammars;
 
         public Fixture()
         {
@@ -33,17 +30,11 @@ namespace Storyteller.Core
             Key = GetType().Name.Replace("Fixture", "");
         }
 
-        private IGrammar findGrammar(string key)
+        [IndexerName("Grammars")]
+        public IGrammar this[string key]
         {
-            var method = GetType().GetMethod(key);
-
-
-            if (method == null)
-            {
-                throw new NotImplementedException("Missing isn't implemented yet");
-            }
-
-            return GrammarBuilder.BuildGrammar(method, this);
+            get { return _grammars[key]; }
+            set { _grammars[key] = value; }
         }
 
         public bool IsHidden()
@@ -55,27 +46,11 @@ namespace Storyteller.Core
         {
             GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Each(method =>
             {
-                string grammarKey = method.GetKey();
+                var grammarKey = method.GetKey();
                 if (_grammars.Has(grammarKey)) return;
 
-                try
-                {
-                    IGrammar grammar = GrammarBuilder.BuildGrammar(method, this);
-                    this[grammarKey] = grammar;
-                }
-                catch (Exception e)
-                {
-                    throw;
-                    /*
-                    _errors.Add(new GrammarError
-                    {
-                        ErrorText = e.ToString(),
-                        Message =
-                            "Could not create Grammar '{0}' of Fixture '{1}'".ToFormat(grammarKey,
-                                                                                       GetType().GetFixtureAlias())
-                    });
-                     */
-                }
+                var grammar = GrammarBuilder.BuildGrammar(method, this);
+                this[grammarKey] = grammar;
             });
 
             var grammars = _grammars.GetAllKeys().Select(key =>
@@ -93,16 +68,25 @@ namespace Storyteller.Core
             };
         }
 
-        [IndexerName("Grammars")]
-        public IGrammar this[string key]
+        public IGrammar GrammarFor(string key)
         {
-            get
-            {
-                return _grammars[key];
-            }
-            set { _grammars[key] = value; }
+            return _grammars[key];
         }
 
+        public string Key { get; protected set; }
+
+        private IGrammar findGrammar(string key)
+        {
+            var method = GetType().GetMethod(key);
+
+
+            if (method == null)
+            {
+                return new MissingGrammar(key);
+            }
+
+            return GrammarBuilder.BuildGrammar(method, this);
+        }
 
         private static bool methodFromThis(MethodInfo method)
         {
@@ -115,7 +99,7 @@ namespace Storyteller.Core
 
             if (method.GetBaseDefinition() != null)
             {
-                Type declaringType = method.GetBaseDefinition().DeclaringType;
+                var declaringType = method.GetBaseDefinition().DeclaringType;
                 if (_ignoredTypes.Contains(declaringType))
                 {
                     return false;
@@ -124,21 +108,6 @@ namespace Storyteller.Core
 
             return true;
         }
-
-        public IGrammar GrammarFor(string key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Key { get; protected set; }
     }
 }
 
-public static class MethodExtensions
-{
-    public static string GetKey(this MethodInfo method)
-    {
-        var att = method.GetAttribute<AliasAsAttribute>();
-        return att == null ? method.Name : att.Alias;
-    }
-}

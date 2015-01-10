@@ -178,6 +178,13 @@ namespace Storyteller.Core.Testing
             var grammar = fixture["Bad"].ShouldBeOfType<ErrorGrammar>();
             grammar.errors.Single().error.ShouldContain("No!");
         }
+
+        [Test]
+        public void fixture_returns_a_missing_grammar_for_something_that_is_unknown()
+        {
+            var fixture = new Fixture();
+            fixture.GrammarFor("DoesNotExist").ShouldBeOfType<MissingGrammar>();
+        }
     }
 
     public class StubGrammar : IGrammar
