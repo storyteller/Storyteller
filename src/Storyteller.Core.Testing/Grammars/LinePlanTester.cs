@@ -13,7 +13,7 @@ namespace Storyteller.Core.Testing.Grammars
     public class LinePlanTester
     {
         private StepValues values;
-        private RecordingSpecContext context;
+        private SpecContext context;
         private Action<ISpecContext, StepValues> action;
         private bool innerActionRan;
 
@@ -23,7 +23,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             innerActionRan = false;
             values = new StepValues();
-            context = new RecordingSpecContext();
+            context = new SpecContext();
             action = (c, v) => innerActionRan = true;
         }
 

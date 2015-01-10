@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FubuCore;
-using FubuTestingSupport;
-using NUnit.Framework;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
-namespace Storyteller.Core.Testing
+namespace Storyteller.Core
 {
-    public class RecordingSpecContext : ISpecContext
+    public class SpecContext : ISpecContext
     {
         public readonly string Id = Guid.NewGuid().ToString();
+        public readonly Stack<Node> Nodes = new Stack<Node>();
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
-        public bool IsCancelled { get; set; }
 
-        public RecordingSpecContext()
+        public SpecContext()
         {
-            Nodes.Push(new Specification{Id = Id});
+            Nodes.Push(new Specification {Id = Id});
         }
+
+        public bool IsCancelled { get; set; }
 
         public bool Wait(Func<bool> condition, TimeSpan timeout)
         {
@@ -42,8 +41,6 @@ namespace Storyteller.Core.Testing
             LogResult(new StepResult(ResultStatus.error) {error = ex.ToString(), stage = stage});
         }
 
-        public readonly Stack<Node> Nodes = new Stack<Node>(); 
-
         public void Push(Node node)
         {
             if (node.Id.IsEmpty()) throw new ArgumentOutOfRangeException("node must have a non-empty id");
@@ -53,23 +50,6 @@ namespace Storyteller.Core.Testing
         public void Pop()
         {
             Nodes.Pop();
-        }
-
-        public void AssertTheOnlyResultIs(IResultMessage expectation)
-        {
-            expectation.id = Id;
-
-            if (Results.Count == 0)
-            {
-                Assert.Fail("No results were captured");
-            }
-
-            if (Results.Count > 1)
-            {
-                Assert.Fail("Multiple results were captured: " + Results.Select(x => x.ToString()).Join(", "));
-            }
-
-            Results.Single().ShouldEqual(expectation);
         }
     }
 }

@@ -78,10 +78,10 @@
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecordingSpecContext.cs" />
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />
+    <Compile Include="SpecContextExtensions.cs" />
     <Compile Include="SpecificationExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
