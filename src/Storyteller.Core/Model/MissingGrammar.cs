@@ -4,17 +4,18 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Model
 {
-    public class ErrorGrammar : GrammarModel, IGrammar, IExecutionPlan
+    public class MissingGrammar : GrammarModel, IGrammar, IExecutionPlan
     {
+        private readonly string _key;
         private readonly string _message;
 
-        public ErrorGrammar(string error) : base("error")
+        public MissingGrammar(string key) : base("missing")
         {
-            _message = error;
-            errors.Add(new GrammarError{error = error});
+            _message = "Grammar '{0}' is not implemented".ToFormat(key);
+            errors.Add(new GrammarError{error = _message});
         }
 
-        public IExecutionPlan CreatePlan(Step step)
+        IExecutionPlan IGrammar.CreatePlan(Step step)
         {
             return this;
         }
@@ -28,7 +29,7 @@ namespace Storyteller.Core.Model
         {
             var result = new StepResult(ResultStatus.error)
             {
-                error = "Grammar '{0}' had an error:".ToFormat(key) + "\n" + _message
+                error = _message
             };
 
             context.LogResult(result);
