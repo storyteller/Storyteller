@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Grammars
 {
-    public static class GrammarBuilder
+    internal static class GrammarBuilder
     {
          private static readonly IList<IGrammarBuilder> _builders = new List<IGrammarBuilder>
          {
@@ -21,17 +22,24 @@ namespace Storyteller.Core.Grammars
                 throw new NotImplementedException("Haven't built the I cannot build a grammar for this method functionality");
             }
 
-            return builder.Build(method, fixture);
+            try
+            {
+                return builder.Build(method, fixture);
+            }
+            catch (Exception e)
+            {
+                return new ErrorGrammar(e.ToString());
+            }
         }
     }
 
-    public interface IGrammarBuilder
+    internal interface IGrammarBuilder
     {
         bool Matches(MethodInfo method);
         IGrammar Build(MethodInfo method, Fixture fixture);
     }
 
-    public class ProgrammaticGrammarBuilder : IGrammarBuilder
+    internal class ProgrammaticGrammarBuilder : IGrammarBuilder
     {
         public bool Matches(MethodInfo method)
         {

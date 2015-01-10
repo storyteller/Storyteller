@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FubuTestingSupport;
 using NUnit.Framework;
@@ -161,7 +162,22 @@ namespace Storyteller.Core.Testing
                 .title.ShouldEqual("The special title");
         }
 
+        public class FixtureWithBadGrammar : Fixture
+        {
+            public IGrammar Bad()
+            {
+                throw new Exception("No!");
+            }
+        }
 
+        [Test]
+        public void Fixture_can_handle_a_grammar_that_fails_to_construct_itself()
+        {
+            var fixture = new FixtureWithBadGrammar();
+
+            var grammar = fixture["Bad"].ShouldBeOfType<ErrorGrammar>();
+            grammar.errors.Single().error.ShouldContain("No!");
+        }
     }
 
     public class StubGrammar : IGrammar

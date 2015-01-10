@@ -35,7 +35,15 @@ namespace Storyteller.Core
 
         private IGrammar findGrammar(string key)
         {
-            throw new NotImplementedException();
+            var method = GetType().GetMethod(key);
+
+
+            if (method == null)
+            {
+                throw new NotImplementedException("Missing isn't implemented yet");
+            }
+
+            return GrammarBuilder.BuildGrammar(method, this);
         }
 
         public bool IsHidden()
