@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Conversion
 {
-    public class StepValues
+    public class StepValues : Node
     {
         private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
         private readonly IList<Delayed> _delayeds = new List<Delayed>();

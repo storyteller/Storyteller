@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Model;
@@ -45,6 +46,7 @@ namespace Storyteller.Core.Testing
 
         public void Push(Node node)
         {
+            if (node.Id.IsEmpty()) throw new ArgumentOutOfRangeException("node must have a non-empty id");
             Nodes.Push(node);
         }
 
