@@ -68,6 +68,19 @@ namespace Storyteller.Core
             LogResult(new StepResult(ResultStatus.error) {error = ex.ToString(), stage = stage});
         }
 
+        public void Process(Node subject, Action action)
+        {
+            try
+            {
+                Nodes.Push(subject);
+                action();
+            }
+            finally
+            {
+                Nodes.Pop();
+            }
+        }
+
         public void Push(Node node)
         {
             if (node.Id.IsEmpty()) throw new ArgumentOutOfRangeException("node must have a non-empty id");
