@@ -22,6 +22,7 @@ namespace Storyteller.Core
 
         public void Execute(ISpecContext context)
         {
+            /*
             if (context.IsCancelled) return;
 
             context.Push(_section);
@@ -46,8 +47,9 @@ namespace Storyteller.Core
             {
                 context.Pop();
             }
+             */
         }
-
+/*
         private void continueIntoBody(ISpecContext context)
         {
             if (context.IsCancelled) return;
@@ -79,5 +81,6 @@ namespace Storyteller.Core
                 throw;
             }
         }
+ */
     }
 }

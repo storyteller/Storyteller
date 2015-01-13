@@ -9,7 +9,7 @@ namespace Storyteller.Core
     {
         // TODO -- if the token is cancelled, if it's hit a critical exception, if the timeout is done
         // TODO -- if the stop conditions have been met (Later)
-        bool IsCancelled { get; }
+        bool CanContinue();
         bool Wait(Func<bool> condition, TimeSpan timeout);
         void LogResults(IEnumerable<CellResult> results);
         void LogResult<T>(T result) where T : IResultMessage;
