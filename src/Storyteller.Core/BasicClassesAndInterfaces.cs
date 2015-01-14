@@ -47,6 +47,8 @@ namespace Storyteller.Core
         void Action(ISilentAction action);
     }
 
+   
+
     public interface ICompositeExecution : IExecutionStep
     {
         string Id { get; }
@@ -55,8 +57,6 @@ namespace Storyteller.Core
 
     public interface ISilentAction : IExecutionStep
     {
-        string Id { get; }
-        object Position { get; }
         void Execute(ISpecContext context);
     }
 
