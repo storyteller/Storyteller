@@ -75,6 +75,7 @@
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\FixtureActionTester.cs" />
+    <Compile Include="Grammars\FixtureLibraryTester.cs" />
     <Compile Include="Grammars\InvalidGrammarStepTester.cs" />
     <Compile Include="Grammars\LinePlanTester.cs" />
     <Compile Include="Grammars\SectionPlanTester.cs" />

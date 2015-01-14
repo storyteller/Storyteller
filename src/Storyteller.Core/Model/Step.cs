@@ -21,13 +21,7 @@ namespace Storyteller.Core.Model
         IList<Node> Children { get; }
     }
 
-    public class FixtureLibrary
-    {
-        public static FixtureLibrary CreateForAppDomain()
-        {
-            throw new NotImplementedException();
-        }
-    }
+
 
     public class Specification : Node, INodeHolder
     {
