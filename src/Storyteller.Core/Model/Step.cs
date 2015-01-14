@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FubuCore.Util;
+using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Model
 {
@@ -34,7 +36,8 @@ namespace Storyteller.Core.Model
 
         public IExecutionStep CreatePlan(FixtureLibrary library)
         {
-            throw new NotImplementedException();
+            var sectionPlans = Children.OfType<Section>().Select(x => x.CreatePlan(library));
+            return new SpecificationPlan(sectionPlans);
         }
 
         private readonly IList<Node> _children = new List<Node>();
@@ -78,6 +81,19 @@ namespace Storyteller.Core.Model
         public Section(string key)
         {
             Key = key;
+        }
+
+        public SectionPlan CreatePlan(FixtureLibrary library)
+        {
+            var fixture = library.Fixtures[Key];
+
+            var nested = Children.OfType<Step>().Select(step =>
+            {
+                var grammar = fixture.GrammarFor(step.Key);
+                return grammar.CreatePlan(step, library);
+            });
+
+            return new SectionPlan(fixture, this, nested);
         }
     }
 

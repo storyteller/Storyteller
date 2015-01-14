@@ -31,7 +31,7 @@ namespace Storyteller.Core.Testing.Model
         {
             var grammar = new ErrorGrammar("bad", "Bad!");
 
-            grammar.As<IGrammar>().CreatePlan(new Step("foo") {Id = "1"})
+            grammar.As<IGrammar>().CreatePlan(new Step("foo") {Id = "1"}, FixtureLibrary.CreateForAppDomain())
                 .ShouldEqual(new InvalidGrammarStep("1", "Grammar 'bad' is in an invalid state. See the grammar errors"));
         }
     }

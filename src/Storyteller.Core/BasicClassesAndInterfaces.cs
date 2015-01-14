@@ -8,7 +8,7 @@ namespace Storyteller.Core
 {
     public interface IGrammar
     {
-        IExecutionStep CreatePlan(Step step);
+        IExecutionStep CreatePlan(Step step, FixtureLibrary library);
 
         GrammarModel Compile(Conversions conversions);
     }

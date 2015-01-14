@@ -16,7 +16,7 @@ namespace Storyteller.Core.Model
             errors.Add(new GrammarError {error = _message});
         }
 
-        IExecutionStep IGrammar.CreatePlan(Step step)
+        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)
         {
             return new InvalidGrammarStep(step.Id, _message);
         }

@@ -23,7 +23,7 @@ namespace Storyteller.Core.Testing.Model
         public void create_plan_creates_an_invalid_grammar_step()
         {
             var grammar = new MissingGrammar("missing");
-            grammar.As<IGrammar>().CreatePlan(new Step("missing"){Id = "3"})
+            grammar.As<IGrammar>().CreatePlan(new Step("missing"){Id = "3"}, FixtureLibrary.CreateForAppDomain())
                 .ShouldEqual(new InvalidGrammarStep("3", "Grammar 'missing' is not implemented"));
         }
 
