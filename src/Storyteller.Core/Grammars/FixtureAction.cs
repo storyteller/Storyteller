@@ -6,15 +6,20 @@ namespace Storyteller.Core.Grammars
 {
     public class FixtureAction : ISilentAction
     {
-        private readonly Action _action;
+        private readonly Action<ISpecContext> _action;
         private readonly Section _section;
         private readonly Stage _stage;
 
-        public FixtureAction(Stage stage, Action action, Section section)
+        public FixtureAction(Stage stage, Action<ISpecContext> action, Section section)
         {
             _stage = stage;
             _action = action;
             _section = section;
+        }
+
+        public Stage Stage
+        {
+            get { return _stage; }
         }
 
         public int Count()
@@ -31,7 +36,7 @@ namespace Storyteller.Core.Grammars
         {
             try
             {
-                _action();
+                _action(context);
             }
             catch (Exception ex)
             {

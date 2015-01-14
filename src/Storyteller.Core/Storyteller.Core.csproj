@@ -59,9 +59,9 @@
     <Compile Include="Fixture.cs" />
     <Compile Include="Grammars\FixtureAction.cs" />
     <Compile Include="Grammars\GrammarBuilder.cs" />
-    <Compile Include="Grammars\GrammarSpike.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />
     <Compile Include="Grammars\LinePlan.cs" />
+    <Compile Include="Grammars\SectionPlan.cs" />
     <Compile Include="HiddenAttribute.cs" />
     <Compile Include="ISpecContext.cs" />
     <Compile Include="FixtureMethodExtensions.cs" />

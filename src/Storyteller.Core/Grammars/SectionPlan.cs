@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
@@ -7,34 +7,33 @@ namespace Storyteller.Core.Grammars
 {
     public class SectionPlan : ICompositeExecution
     {
-        private readonly Section _section;
-
         public SectionPlan(IFixture fixture, Section section, IEnumerable<IExecutionStep> nestedSteps)
         {
-            _section = section;
-
             var steps = new List<IExecutionStep>();
 
-            steps.Add(new FixtureAction(Stage.setup, fixture.SetUp, _section));
+            steps.Add(new FixtureAction(Stage.setup, x =>
+            {
+                fixture.Context = x;
+                fixture.SetUp();
+            }, section));
 
             steps.AddRange(nestedSteps);
 
-            steps.Add(new FixtureAction(Stage.teardown, fixture.TearDown, _section));
+            steps.Add(new FixtureAction(Stage.teardown, x => fixture.TearDown(), section));
 
             Steps = steps.ToArray();
         }
 
         public int Count()
         {
-            throw new NotImplementedException();
+            return Steps.Sum(x => x.Count());
         }
 
         public void AcceptVisitor(ISpecExecutor executor)
         {
-            throw new NotImplementedException();
+            executor.Composite(this);
         }
 
-        public string Id { get; private set; }
         public IExecutionStep[] Steps { get; private set; }
     }
 }

@@ -51,7 +51,6 @@ namespace Storyteller.Core
 
     public interface ICompositeExecution : IExecutionStep
     {
-        string Id { get; }
         IExecutionStep[] Steps { get; }
     }
 
