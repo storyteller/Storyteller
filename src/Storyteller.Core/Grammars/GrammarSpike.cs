@@ -5,36 +5,6 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class FixtureAction : ISilentAction
-    {
-        private readonly IFixture _fixture;
-        private readonly Stage _stage;
-        private readonly Action _action;
-        private readonly Section _section;
-
-        public FixtureAction(Stage stage, Action action, Section section)
-        {
-            _stage = stage;
-            _action = action;
-            _section = section;
-        }
-
-        public int Count()
-        {
-            return 1;
-        }
-
-        public void AcceptVisitor(ISpecExecutor executor)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Execute(ISpecContext context)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
     public class SectionPlan : ICompositeExecution
     {
         private readonly Section _section;
