@@ -13,7 +13,7 @@ namespace Storyteller.Core.Testing.Conversion
         [Test]
         public void store_and_retrieve()
         {
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             values.Store("a", 1);
             values.Get("a").ShouldEqual(1);
@@ -23,13 +23,13 @@ namespace Storyteller.Core.Testing.Conversion
         public void happy_check_for_a_simple_equals_match()
         {
             var context = SpecContext.ForTesting();
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             values.Store("a", 1);
 
-            values.Check(context, "a", 1);
+            values.Check(context, "a", 1)
+                .ShouldEqual(CellResult.Success("a"));
 
-            context.AssertTheOnlyResultIs(CellResult.Success("a"));
 
         }
 
@@ -37,20 +37,20 @@ namespace Storyteller.Core.Testing.Conversion
         public void sad_path_check_for_a_simple_equals_match()
         {
             var context = SpecContext.ForTesting();
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             values.Store("a", 1);
 
-            values.Check(context, "a", 2);
+            values.Check(context, "a", 2)
+                .ShouldEqual(CellResult.Failure("a", "2"));
 
-            context.AssertTheOnlyResultIs(CellResult.Failure("a", "2"));
         }
 
         [Test]
         public void process_delayed_runtime_converters_successfully()
         {
             var context = SpecContext.ForTesting();
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             values.RegisterDelayedConversion("a", "1", new StubRuntimeConverter("1", 1));
             values.RegisterDelayedConversion("b", "2", new StubRuntimeConverter("2", 2));
@@ -69,7 +69,7 @@ namespace Storyteller.Core.Testing.Conversion
         public void process_delayed_runtime_convertor_that_fails_with_exception()
         {
             var context = SpecContext.ForTesting();
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             values.RegisterDelayedConversion("a", "1", new StubRuntimeConverter("1", new NotImplementedException()));
 
@@ -85,7 +85,7 @@ namespace Storyteller.Core.Testing.Conversion
         public void process_delayed_runtime_convertor_that_fails_with_a_null()
         {
             var context = SpecContext.ForTesting();
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             values.RegisterDelayedConversion("a", "1", new StubRuntimeConverter("1", null));
 

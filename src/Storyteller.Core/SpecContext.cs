@@ -63,14 +63,12 @@ namespace Storyteller.Core
         public static SpecContext ForTesting()
         {
             var context = Basic();
-            context.Nodes.Push(new Specification { Id = Guid.NewGuid().ToString() });
 
             return context;
         }
 
         // TODO -- make this settable later
         public readonly StopConditions StopConditions = new StopConditions();
-        public readonly Stack<Node> Nodes = new Stack<Node>();
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
 
         public readonly Counts Counts = new Counts();
@@ -93,50 +91,22 @@ namespace Storyteller.Core
             throw new NotImplementedException();
         }
 
-        // TODO -- do this w/ one message per step id
-        public void LogResults(IEnumerable<CellResult> results)
-        {
-            results.Each(x => LogResult(x));
-        }
-
         public void LogResult<T>(T result) where T : IResultMessage
         {
-            result.id = Nodes.Peek().Id;
+            if (result.id.IsEmpty()) throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
+
             _observer.Handle(result);
-            result.Modify(Counts);
+            result.Tabulate(Counts);
             Results.Add(result);
         }
 
-        public void LogException(Exception ex, Stage stage = Stage.body)
+        public void LogException(string id, Exception ex, object position = null)
         {
             if (ex is StorytellerCriticalException) _hasCriticalException = true;
             if (ex is StorytellerCatastrophicException) _hasCatastrophicException = true;
 
-            LogResult(new StepResult(ResultStatus.error) {error = ex.ToString(), stage = stage});
+            LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});
         }
 
-        public void Process(Node subject, Action action)
-        {
-            try
-            {
-                Nodes.Push(subject);
-                action();
-            }
-            finally
-            {
-                Nodes.Pop();
-            }
-        }
-
-        public void Push(Node node)
-        {
-            if (node.Id.IsEmpty()) throw new ArgumentOutOfRangeException("node must have a non-empty id");
-            Nodes.Push(node);
-        }
-
-        public void Pop()
-        {
-            Nodes.Pop();
-        }
     }
 }

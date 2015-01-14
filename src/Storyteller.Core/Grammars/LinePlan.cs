@@ -5,15 +5,15 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class LinePlan : IExecutionPlan
+    public class LineStep : ILineExecution
     {
         private readonly StepValues _values;
-        private readonly Action<ISpecContext, StepValues> _action;
+        private readonly ILineGrammar _grammar;
 
-        public LinePlan(StepValues values, Action<ISpecContext, StepValues> action)
+        public LineStep(StepValues values, ILineGrammar grammar)
         {
             _values = values;
-            _action = action;
+            _grammar = grammar;
         }
 
         public void Execute(ISpecContext context)
@@ -22,19 +22,41 @@ namespace Storyteller.Core.Grammars
 
             if (_values.Errors.Any())
             {
-                context.LogResults(_values.Errors);
+                // TODO -- will need to care about position when we do Paragraph's
+                var result = new StepResult(_values.Id, ResultStatus.ok)
+                {
+                    cells = _values.Errors.ToArray()
+                };
+                context.LogResult(result);
+
                 return;
             }
 
             try
             {
-                _action(context, _values);
-                context.LogResult(new StepResult(ResultStatus.ok));
+                var cellResults = _grammar.Execute(_values, context);
+
+                var result = new StepResult(_values.Id, ResultStatus.ok)
+                {
+                    cells = cellResults.ToArray()
+                };
+
+                context.LogResult(result);
             }
             catch (Exception ex)
             {
-                context.LogException(ex);
+                context.LogException(_values.Id, ex);
             }
+        }
+
+        public int Count()
+        {
+            return 1;
+        }
+
+        public void AcceptVisitor(ISpecExecutor executor)
+        {
+            executor.Line(this);
         }
     }
 }

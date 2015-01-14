@@ -189,7 +189,7 @@ namespace Storyteller.Core.Testing
 
     public class StubGrammar : IGrammar
     {
-        public IExecutionPlan CreatePlan(Step step)
+        public IExecutionStep CreatePlan(Step step)
         {
             throw new System.NotImplementedException();
         }

@@ -20,13 +20,12 @@ namespace Storyteller.Core.Testing
             theObserver = new RecordingExecutionObserver();
             theContext = new SpecContext(theObserver, new CancellationToken());
 
-            theContext.Push(new Specification{Id = Guid.NewGuid().ToString()});
         }
 
         [Test]
         public void log_exception_does_the_counts()
         {
-            theContext.LogException(new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException());
 
             theContext.Counts.ShouldEqual(0, 0, 1, 0);
         }
@@ -35,12 +34,12 @@ namespace Storyteller.Core.Testing
         public void log_exception_logs_a_result()
         {
             var exception = new NotImplementedException();
-            theContext.LogException(exception, Stage.setup);
+            theContext.LogException("1", exception, position: Stage.setup);
 
             var result = theObserver.Messages.Single().ShouldBeOfType<StepResult>();
             result.status.ShouldEqual(ResultStatus.error);
             result.error.ShouldEqual(exception.ToString());
-            result.stage.ShouldEqual(Stage.setup);
+            result.position.ShouldEqual(Stage.setup);
         }
     }
 
@@ -55,7 +54,6 @@ namespace Storyteller.Core.Testing
         {
             theCancellation = new CancellationTokenSource();
             theContext = new SpecContext(new NulloExecutionObserver(), theCancellation.Token);
-            theContext.Push(new Specification{Id = Guid.NewGuid().ToString()});
         }
 
         [Test]
@@ -69,7 +67,7 @@ namespace Storyteller.Core.Testing
         {
             theContext.StopConditions.BreakOnExceptions = false;
 
-            theContext.LogException(new StorytellerCriticalException());
+            theContext.LogException("1", new StorytellerCriticalException());
 
             theContext.CanContinue().ShouldBeFalse();
         }
@@ -79,7 +77,7 @@ namespace Storyteller.Core.Testing
         {
             theContext.StopConditions.BreakOnExceptions = false;
 
-            theContext.LogException(new StorytellerCatastrophicException());
+            theContext.LogException("1", new StorytellerCatastrophicException());
 
             theContext.CanContinue().ShouldBeFalse();
         }
@@ -95,7 +93,7 @@ namespace Storyteller.Core.Testing
         [Test]
         public void do_not_stop_on_normal_exceptions_if_the_type_is_not_critical()
         {
-            theContext.LogException(new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException());
 
             theContext.CanContinue().ShouldBeTrue();
         }
@@ -105,7 +103,7 @@ namespace Storyteller.Core.Testing
         {
             theContext.StopConditions.BreakOnExceptions = true;
 
-            theContext.LogException(new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException());
 
             theContext.CanContinue().ShouldBeFalse();
         }
@@ -115,10 +113,10 @@ namespace Storyteller.Core.Testing
         {
             theContext.StopConditions.BreakOnWrongs = true;
 
-            theContext.LogResult(new StepResult(ResultStatus.success));
+            theContext.LogResult(new StepResult("1", ResultStatus.success));
             theContext.CanContinue().ShouldBeTrue();
 
-            theContext.LogResult(new StepResult(ResultStatus.failed));
+            theContext.LogResult(new StepResult("1", ResultStatus.failed));
             theContext.CanContinue().ShouldBeFalse();
         }
 
@@ -126,7 +124,7 @@ namespace Storyteller.Core.Testing
         public void will_not_stop_on_wrong_if_stop_conditions_are_the_defaults()
         {
 
-            theContext.LogResult(new StepResult(ResultStatus.failed));
+            theContext.LogResult(new StepResult("1", ResultStatus.failed));
             theContext.CanContinue().ShouldBeTrue();
         }
     }

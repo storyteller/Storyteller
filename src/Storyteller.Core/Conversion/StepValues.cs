@@ -10,6 +10,10 @@ namespace Storyteller.Core.Conversion
         private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
         private readonly IList<Delayed> _delayeds = new List<Delayed>();
 
+        public StepValues(string id)
+        {
+            Id = id;
+        }
 
         public void DoDelayedConversions(ISpecContext context)
         {
@@ -34,18 +38,18 @@ namespace Storyteller.Core.Conversion
             });
         }
 
-        public void Check(ISpecContext context, string key, object actual)
+        public CellResult Check(ISpecContext context, string key, object actual)
         {
             // TODO: Could be Predicate<T> -- figure out how to use this
 
             var expected = Get(key);
             if (expected.Equals(actual))
             {
-                context.LogResult(CellResult.Success(key));
+                return CellResult.Success(key);
             }
             else
             {
-                context.LogResult(CellResult.Failure(key, actual.ToString()));
+                return CellResult.Failure(key, actual.ToString());
             }
         }
 

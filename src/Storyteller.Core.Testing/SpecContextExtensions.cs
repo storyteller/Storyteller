@@ -10,8 +10,6 @@ namespace Storyteller.Core.Testing
     {
         public static void AssertTheOnlyResultIs(this SpecContext context, IResultMessage expectation)
         {
-            expectation.id = context.Nodes.Peek().Id;
-
             if (context.Results.Count == 0)
             {
                 Assert.Fail("No results were captured");

@@ -13,24 +13,46 @@ namespace Storyteller.Core.Testing.Results
         {
             var counts = new Counts();
 
-            new StepResult(ResultStatus.ok).Modify(counts);
+            new StepResult("1", ResultStatus.ok).Tabulate(counts);
             counts.ShouldEqual(0, 0, 0, 0);
 
-            new StepResult(ResultStatus.success).Modify(counts);
+            new StepResult("1", ResultStatus.success).Tabulate(counts);
             counts.ShouldEqual(1, 0, 0, 0);
 
-            new StepResult(ResultStatus.failed).Modify(counts);
+            new StepResult("1", ResultStatus.failed).Tabulate(counts);
             counts.ShouldEqual(1, 1, 0, 0);
 
-            StepResult.Error("bad").Modify(counts);
+            StepResult.Error("1", "bad").Tabulate(counts);
             counts.ShouldEqual(1, 1, 1, 0);
         }
 
         [Test]
-        public void default_stage_is_body()
+        public void default_position_is_null()
         {
-            new StepResult(ResultStatus.error).stage
-                .ShouldEqual(Stage.body);
+            new StepResult("1", ResultStatus.error).position
+                .ShouldBeNull();
+        }
+
+        [Test]
+        public void modify_increments_with_cell_results()
+        {
+            var result = new StepResult("foo", ResultStatus.ok)
+            {
+                cells = new[]
+                {
+                    CellResult.Error("a", "bad!"),
+                    CellResult.Error("b", "worse!"),
+                    CellResult.Success("c"),
+                    CellResult.Failure("d", "different"),
+                    CellResult.Failure("e", "different"),
+                    CellResult.Failure("f", "different"),
+                }
+            };
+
+            var counts = new Counts();
+            result.Tabulate(counts);
+
+            counts.ShouldEqual(1, 3, 2, 0);
         }
     }
 }

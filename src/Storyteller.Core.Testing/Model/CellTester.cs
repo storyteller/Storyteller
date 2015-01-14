@@ -34,7 +34,7 @@ namespace Storyteller.Core.Testing.Model
                 step.With(cell.Key, rawValue);
             }
 
-            var values = new StepValues();
+            var values = new StepValues("1");
 
             cell.ConvertValues(step, values);
 

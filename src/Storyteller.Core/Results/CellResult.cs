@@ -89,7 +89,7 @@ namespace Storyteller.Core.Results
             return value;
         }
 
-        public void Modify(Counts counts)
+        public void Tabulate(Counts counts)
         {
             counts.Increment(status);
         }

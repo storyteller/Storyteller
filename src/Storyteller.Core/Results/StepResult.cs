@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
@@ -12,35 +13,43 @@ namespace Storyteller.Core.Results
 
     public class StepResult : IResultMessage
     {
-        public StepResult(ResultStatus status)
+        public StepResult(string id, ResultStatus status)
         {
             this.status = status;
+            this.id = id;
         }
 
         public string id { get; set; }
-        public Stage stage = Stage.body;
 
-        public static StepResult Error(string message)
+        public static StepResult Error(string id, string message)
         {
-            return new StepResult(ResultStatus.error){error = message};
+            return new StepResult(id, ResultStatus.error){error = message};
         }
 
-        public static StepResult Error(Exception ex)
+        public static StepResult Error(string id, Exception ex)
         {
             // TODO - needs to check for special exceptions
-            return Error(ex.ToString());
+            return Error(id, ex.ToString());
         }
 
+        public object position;
         public ResultStatus status;
         public string error;
-        public void Modify(Counts counts)
+
+        public CellResult[] cells = new CellResult[0];
+
+        public void Tabulate(Counts counts)
         {
             counts.Increment(status);
+            if (cells != null)
+            {
+                cells.Each(x => counts.Increment(x.status));
+            }
         }
 
         protected bool Equals(StepResult other)
         {
-            return stage == other.stage && status == other.status && string.Equals(error, other.error);
+            return string.Equals(position, other.position) && status == other.status && string.Equals(error, other.error) && string.Equals(id, other.id);
         }
 
         public override bool Equals(object obj)
@@ -55,16 +64,17 @@ namespace Storyteller.Core.Results
         {
             unchecked
             {
-                var hashCode = (int) stage;
+                int hashCode = (position != null ? position.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (int) status;
                 hashCode = (hashCode*397) ^ (error != null ? error.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (id != null ? id.GetHashCode() : 0);
                 return hashCode;
             }
         }
 
         public override string ToString()
         {
-            return string.Format("Stage: {0}, Status: {1}, Error: {2}", stage, status, error);
+            return string.Format("Position: {0}, Status: {1}, Error: {2}, id: {3}", position, status, error, id);
         }
     }
 }

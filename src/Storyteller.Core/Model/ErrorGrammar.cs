@@ -1,37 +1,30 @@
-﻿using FubuCore;
+﻿using System;
+using FubuCore;
 using Storyteller.Core.Conversion;
-using Storyteller.Core.Results;
+using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Model
 {
-    public class ErrorGrammar : GrammarModel, IGrammar, IExecutionPlan
+    public class ErrorGrammar : GrammarModel, IGrammar
     {
+        private readonly string _key;
         private readonly string _message;
 
-        public ErrorGrammar(string error) : base("error")
+        public ErrorGrammar(string key, string error) : base("error")
         {
-            _message = error;
+            _key = key;
+            _message = "Grammar '{0}' is in an invalid state. See the grammar errors".ToFormat(_key);
             errors.Add(new GrammarError{error = error});
         }
 
-        public IExecutionPlan CreatePlan(Step step)
+        public IExecutionStep CreatePlan(Step step)
         {
-            return this;
+            return new InvalidGrammarStep(step.Id, _message);
         }
 
         GrammarModel IGrammar.Compile(Conversions conversions)
         {
             return this;
-        }
-
-        void IExecutionPlan.Execute(ISpecContext context)
-        {
-            var result = new StepResult(ResultStatus.error)
-            {
-                error = "Grammar '{0}' had an error:".ToFormat(key) + "\n" + _message
-            };
-
-            context.LogResult(result);
         }
     }
 }

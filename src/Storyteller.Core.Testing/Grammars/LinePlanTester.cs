@@ -14,43 +14,50 @@ namespace Storyteller.Core.Testing.Grammars
     {
         private StepValues values;
         private SpecContext context;
-        private Action<ISpecContext, StepValues> action;
-        private bool innerActionRan;
+        private ILineGrammar theLineGrammar;
 
 
         [SetUp]
         public void SetUp()
         {
-            innerActionRan = false;
-            values = new StepValues();
+            values = new StepValues(Guid.NewGuid().ToString());
             context = SpecContext.ForTesting();
-            action = (c, v) => innerActionRan = true;
+            theLineGrammar = MockRepository.GenerateMock<ILineGrammar>();
         }
 
         private void afterExecuting()
         {
-            new LinePlan(values, action).Execute(context);
+            new LineStep(values, theLineGrammar).Execute(context);
         }
 
         [Test]
         public void run_happy_path_with_no_conversions_and_no_errors()
         {
+            var cells = new[]
+            {
+                new CellResult("a", ResultStatus.error), new CellResult("b", ResultStatus.error)
+            };
+
+            theLineGrammar.Stub(x => x.Execute(values, context)).Return(cells);
+
             afterExecuting();
 
-            innerActionRan.ShouldBeTrue();
+            var result = context.Results.Single().ShouldBeOfType<StepResult>();
+            result.id.ShouldEqual(values.Id);
+            result.status.ShouldEqual(ResultStatus.ok);
+            result.cells.ShouldHaveTheSameElementsAs(cells);
 
-            context.AssertTheOnlyResultIs(new StepResult(ResultStatus.ok));
         }
 
         [Test]
         public void no_conversion_errors_but_the_action_blows_up()
         {
             var ex = new NotImplementedException();
-            action = (c, v) => { throw ex; };
+            theLineGrammar.Expect(x => x.Execute(values, context)).Throw(ex);
 
             afterExecuting();
 
-            context.AssertTheOnlyResultIs(new StepResult(ResultStatus.error){error = ex.ToString()});
+            context.AssertTheOnlyResultIs(new StepResult(values.Id, ResultStatus.error){error = ex.ToString()});
         }
 
         [Test]
@@ -62,16 +69,15 @@ namespace Storyteller.Core.Testing.Grammars
             values.RegisterDelayedConversion("a", "1", c1);
             values.RegisterDelayedConversion("b", "2", c2);
 
-            action = (c, v) =>
-            {
-                innerActionRan = true;
-                c1.ConversionHappened.ShouldBeTrue();
-                c2.ConversionHappened.ShouldBeTrue();
-            };
+            theLineGrammar.Expect(x => x.Execute(values, context)).Return(new CellResult[0]);
 
             afterExecuting();
 
-            innerActionRan.ShouldBeTrue();
+            theLineGrammar.VerifyAllExpectations();
+
+            c1.ConversionHappened.ShouldBeTrue();
+            c2.ConversionHappened.ShouldBeTrue();
+
         }
 
         [Test]
@@ -81,9 +87,16 @@ namespace Storyteller.Core.Testing.Grammars
 
             afterExecuting();
 
-            innerActionRan.ShouldBeFalse();
+            theLineGrammar.AssertWasNotCalled(x => x.Execute(values, context));
 
-            context.AssertTheOnlyResultIs(new CellResult("a", ResultStatus.error){error = "don't like you"});
+            var result = context.Results.Single().ShouldBeOfType<StepResult>();
+            result.id.ShouldEqual(values.Id);
+            result.status.ShouldEqual(ResultStatus.ok);
+            result.cells.ShouldHaveTheSameElementsAs(new[]
+            {
+                new CellResult("a", ResultStatus.error){error = "don't like you"}
+            });
+
         }
 
         [Test]
@@ -93,13 +106,26 @@ namespace Storyteller.Core.Testing.Grammars
 
             afterExecuting();
 
-            innerActionRan.ShouldBeFalse();
+            theLineGrammar.AssertWasNotCalled(x => x.Execute(values, context));
 
-            var result = context.Results.Single().ShouldBeOfType<CellResult>();
+            var result = context.Results.Single().ShouldBeOfType<StepResult>()
+                .cells.Single();
 
             result.status.ShouldEqual(ResultStatus.error);
             result.cell.ShouldEqual("a");
             
+        }
+
+        [Test]
+        public void accept_visitor_calls_through_to_line()
+        {
+            var executor = MockRepository.GenerateMock<ISpecExecutor>();
+
+            var step = new LineStep(values, theLineGrammar);
+
+            step.AcceptVisitor(executor);
+
+            executor.AssertWasCalled(x => x.Line(step));
         }
     }
 

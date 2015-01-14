@@ -28,7 +28,7 @@ namespace Storyteller.Core.Grammars
             }
             catch (Exception e)
             {
-                return new ErrorGrammar(e.ToString());
+                return new ErrorGrammar(method.Name, e.ToString());
             }
         }
     }

@@ -2,9 +2,8 @@
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
-using Rhino.Mocks;
+using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
-using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Testing.Model
 {
@@ -12,42 +11,28 @@ namespace Storyteller.Core.Testing.Model
     public class ErrorGrammarTester
     {
         [Test]
-        public void create_an_error_grammar_adds_error_to_itself()
-        {
-            var grammar = new ErrorGrammar("Bad!");
-
-            grammar.errors.Single().error.ShouldEqual("Bad!");
-        }
-
-        [Test]
-        public void create_plan_just_returns_itself()
-        {
-            var grammar = new ErrorGrammar("Bad!");
-            grammar.As<IGrammar>().CreatePlan(null)
-                .ShouldBeTheSameAs(grammar);
-        }
-
-        [Test]
         public void compile_just_returns_itself()
         {
-            var grammar = new ErrorGrammar("Bad!");
+            var grammar = new ErrorGrammar("bad", "Bad!");
             grammar.As<IGrammar>().Compile(null)
                 .ShouldBeTheSameAs(grammar);
         }
 
         [Test]
-        public void execute()
+        public void create_an_error_grammar_adds_error_to_itself()
         {
-            var context = SpecContext.ForTesting();
+            var grammar = new ErrorGrammar("bad", "Bad!");
 
-            var grammar = new ErrorGrammar("Bad!");
-            grammar.key = "foo";
-            grammar.As<IExecutionPlan>().Execute(context);
+            grammar.errors.Single().error.ShouldEqual("Bad!");
+        }
 
-            var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.status.ShouldEqual(ResultStatus.error);
-            result.error.ShouldContain("Grammar 'foo' had an error:");
-            result.error.ShouldContain("Bad!");
+        [Test]
+        public void create_plan_returns_an_invalid_grammar_step()
+        {
+            var grammar = new ErrorGrammar("bad", "Bad!");
+
+            grammar.As<IGrammar>().CreatePlan(new Step("foo") {Id = "1"})
+                .ShouldEqual(new InvalidGrammarStep("1", "Grammar 'bad' is in an invalid state. See the grammar errors"));
         }
     }
 }

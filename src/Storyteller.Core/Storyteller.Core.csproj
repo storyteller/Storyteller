@@ -69,6 +69,7 @@
     <Compile Include="Model\Fact.cs" />
     <Compile Include="Model\FixtureModel.cs" />
     <Compile Include="Model\GrammarModel.cs" />
+    <Compile Include="Grammars\InvalidGrammarStep.cs" />
     <Compile Include="Model\MissingGrammar.cs" />
     <Compile Include="Model\GrammarError.cs" />
     <Compile Include="Model\Option.cs" />
@@ -83,8 +84,11 @@
     <Compile Include="Results\ResultStatus.cs" />
     <Compile Include="Results\StepResult.cs" />
     <Compile Include="Results\TimedOut.cs" />
-    <Compile Include="SectionExecutionPlan.cs" />
     <Compile Include="SpecContext.cs" />
+    <Compile Include="StoryTellerAssert.cs" />
+    <Compile Include="StorytellerAssertionException.cs" />
+    <Compile Include="StorytellerCatastrophicException.cs" />
+    <Compile Include="StorytellerCriticalException.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

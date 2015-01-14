@@ -2,6 +2,7 @@ using System.Linq;
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
+using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
@@ -19,11 +20,11 @@ namespace Storyteller.Core.Testing.Model
         }
 
         [Test]
-        public void create_plan_just_returns_itself()
+        public void create_plan_creates_an_invalid_grammar_step()
         {
-            var grammar = new MissingGrammar("Bad!");
-            grammar.As<IGrammar>().CreatePlan(null)
-                .ShouldBeTheSameAs(grammar);
+            var grammar = new MissingGrammar("missing");
+            grammar.As<IGrammar>().CreatePlan(new Step("missing"){Id = "3"})
+                .ShouldEqual(new InvalidGrammarStep("3", "Grammar 'missing' is not implemented"));
         }
 
         [Test]
@@ -34,18 +35,6 @@ namespace Storyteller.Core.Testing.Model
                 .ShouldBeTheSameAs(grammar);
         }
 
-        [Test]
-        public void execute()
-        {
-            var context = SpecContext.ForTesting();
 
-            var grammar = new MissingGrammar("Bad!");
-            grammar.key = "foo";
-            grammar.As<IExecutionPlan>().Execute(context);
-
-            var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.status.ShouldEqual(ResultStatus.error);
-
-        }
     }
 }
