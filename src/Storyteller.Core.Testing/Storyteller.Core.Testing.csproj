@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
+    <Compile Include="EndToEnd\simplest_possible_execution.cs" />
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\FixtureActionTester.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="SpecContextExtensions.cs" />
     <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
+    <Compile Include="SpecRunningContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">

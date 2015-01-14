@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FubuCore.Util;
 
 namespace Storyteller.Core.Model
@@ -20,6 +21,14 @@ namespace Storyteller.Core.Model
         IList<Node> Children { get; }
     }
 
+    public class FixtureLibrary
+    {
+        public static FixtureLibrary CreateForAppDomain()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class Specification : Node, INodeHolder
     {
         public string FileName;
@@ -29,7 +38,10 @@ namespace Storyteller.Core.Model
         public string Name;
         public string Suite;
 
-
+        public IExecutionStep CreatePlan(FixtureLibrary library)
+        {
+            throw new NotImplementedException();
+        }
 
         private readonly IList<Node> _children = new List<Node>();
 
