@@ -13,7 +13,7 @@ namespace Storyteller.Core
         GrammarModel Compile(Conversions conversions);
     }
 
-    public interface ILineGrammar
+    public interface ILineGrammar : IGrammar
     {
         IEnumerable<CellResult> Execute(StepValues values, ISpecContext context);
     }
