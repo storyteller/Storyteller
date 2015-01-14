@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FubuCore.Util;
 
 namespace Storyteller.Core.Model
 {
@@ -13,7 +14,13 @@ namespace Storyteller.Core.Model
         Regression
     }
 
-    public class Specification : Node
+
+    public interface INodeHolder
+    {
+        IList<Node> Children { get; }
+    }
+
+    public class Specification : Node, INodeHolder
     {
         public string FileName;
         public Lifecycle Lifecycle = Lifecycle.Acceptance;
@@ -21,13 +28,22 @@ namespace Storyteller.Core.Model
         public int MaxRetries;
         public string Name;
         public string Suite;
-        public readonly IList<Node> Steps = new List<Node>();
+
+
+
+        private readonly IList<Node> _children = new List<Node>();
+
+        public IList<Node> Children
+        {
+            get { return _children; }
+        }
+
         public readonly IList<string> Tags = new List<string>();
     }
 
     public class Step : Node
     {
-        public readonly IDictionary<string, IList<Node>> Collections = new Dictionary<string, IList<Node>>();
+        public readonly Cache<string, Section> Collections = new Cache<string, Section>(key => new Section(key)); 
         public readonly string Key;
         public readonly IDictionary<string, string> Values = new Dictionary<string, string>();
 
@@ -43,10 +59,15 @@ namespace Storyteller.Core.Model
         }
     }
 
-    public class Section : Node
+    public class Section : Node, INodeHolder
     {
         public readonly string Key;
-        public readonly IList<Step> Steps = new List<Step>();
+        private readonly IList<Node> _children = new List<Node>();
+
+        public IList<Node> Children
+        {
+            get { return _children; }
+        }
 
         public Section(string key)
         {

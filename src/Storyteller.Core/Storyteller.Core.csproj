@@ -76,6 +76,7 @@
     <Compile Include="Model\Sentence.cs" />
     <Compile Include="Model\Step.cs" />
     <Compile Include="Model\Table.cs" />
+    <Compile Include="Persistence\TextParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\CellResult.cs" />
     <Compile Include="Results\Envelope.cs" />
