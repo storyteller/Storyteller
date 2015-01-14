@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Rhino.Mocks;
 
 namespace Storyteller.Core.Testing.EndToEnd
 {
@@ -6,13 +7,15 @@ namespace Storyteller.Core.Testing.EndToEnd
     {
         public SimpleActionFixture()
         {
-            
+            this["Do1"] = Do("Do1", c => { });
+            this["Do2"] = Do("Do2", c => { });
+            this["Do3"] = Do("Do3", c => { });
         }
     }
 
     public class simplest_possible_execution : SpecRunningContext
     {
-        [Test, Ignore("NOT READY YET")]
+        [Test]
         public void run_actions()
         {
             execute(@"

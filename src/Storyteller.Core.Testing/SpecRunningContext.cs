@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using FubuCore;
 using NUnit.Framework;
+using Storyteller.Core.Engine;
+using Storyteller.Core.Model;
 using Storyteller.Core.Persistence;
 
 namespace Storyteller.Core.Testing
@@ -27,8 +29,12 @@ namespace Storyteller.Core.Testing
         {
             var spec = TextParser.Parse(text);
             _context = new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token);
-        
-            
+
+            var plan = spec.CreatePlan(FixtureLibrary.CreateForAppDomain());
+
+            new SynchronousExecutor(_context, plan).Execute();
+
+
             // TODO -- you know, actually run something.
         }
 

@@ -8,6 +8,7 @@ using FubuCore.Reflection;
 using FubuCore.Util;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
+using Storyteller.Core.Grammars.Lines;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core
@@ -117,6 +118,17 @@ namespace Storyteller.Core
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Creates a simple Sentence grammar with no inputs that executes an Action lambda
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static ActionGrammar Do(string text, Action<ISpecContext> action)
+        {
+            return new ActionGrammar(text, action);
         }
     }
 }
