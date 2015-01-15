@@ -66,7 +66,7 @@ namespace Storyteller.Core.Testing.Grammars
 
             action.AcceptVisitor(executor);
 
-            executor.AssertWasCalled(x => x.Action(action));
+            executor.AssertWasCalled(x => x.Line(action));
         }
     }
 }

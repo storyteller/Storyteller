@@ -19,7 +19,7 @@ namespace Storyteller.Core.Testing.Grammars
 
             step.AcceptVisitor(executor);
 
-            executor.AssertWasCalled(x => x.Action(step));
+            executor.AssertWasCalled(x => x.Line(step));
         }
 
         [Test]

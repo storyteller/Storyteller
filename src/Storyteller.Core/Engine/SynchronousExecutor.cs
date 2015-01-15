@@ -14,6 +14,7 @@
 
         public void Line(ILineExecution execution)
         {
+            // TODO -- shouldn't throw exceptions, but you know I'll slip up so try/catch here.
             execution.Execute(_context);
         }
 
@@ -29,13 +30,6 @@
                 // TODO -- will broadcast progress updates maybe
                 executionStep.AcceptVisitor(this);
             }
-        }
-
-        public void Action(ISilentAction action)
-        {
-            // Not allowed to throw exceptions. There's only
-            // two of them so far
-            action.Execute(_context);
         }
 
         public void Execute()

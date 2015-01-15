@@ -49,7 +49,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AliasAsAttribute.cs" />
-    <Compile Include="BasicClassesAndInterfaces.cs" />
+    <Compile Include="IGrammar.cs" />
     <Compile Include="Conversion\IRuntimeConvertor.cs" />
     <Compile Include="Conversion\Conversions.cs" />
     <Compile Include="Conversion\EnumerationConversion.cs" />
@@ -62,6 +62,12 @@
     <Compile Include="Grammars\Lines\ActionGrammar.cs" />
     <Compile Include="Grammars\Lines\LineGrammar.cs" />
     <Compile Include="Grammars\SpecificationPlan.cs" />
+    <Compile Include="ICompositeExecution.cs" />
+    <Compile Include="IExecutionStep.cs" />
+    <Compile Include="IFixture.cs" />
+    <Compile Include="ILineExecution.cs" />
+    <Compile Include="ILineGrammar.cs" />
+    <Compile Include="ISpecExecutor.cs" />
     <Compile Include="Model\FixtureLibrary.cs" />
     <Compile Include="Grammars\GrammarBuilder.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />

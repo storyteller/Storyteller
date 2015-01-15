@@ -4,7 +4,7 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class FixtureAction : ISilentAction
+    public class FixtureAction : ILineExecution
     {
         private readonly Action<ISpecContext> _action;
         private readonly Section _section;
@@ -29,7 +29,7 @@ namespace Storyteller.Core.Grammars
 
         public void AcceptVisitor(ISpecExecutor executor)
         {
-            executor.Action(this);
+            executor.Line(this);
         }
 
         public void Execute(ISpecContext context)

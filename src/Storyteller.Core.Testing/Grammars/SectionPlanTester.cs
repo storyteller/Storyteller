@@ -54,7 +54,7 @@ namespace Storyteller.Core.Testing.Grammars
         public void executing_the_setup_also_sets_the_context()
         {
             var context = SpecContext.ForTesting();
-            thePlan.Steps.First().As<ISilentAction>().Execute(context);
+            thePlan.Steps.First().As<ILineExecution>().Execute(context);
 
             theFixture.AssertWasCalled(x => x.Context = context);
             theFixture.AssertWasCalled(x => x.SetUp());
@@ -64,7 +64,7 @@ namespace Storyteller.Core.Testing.Grammars
         public void executes_the_teardown()
         {
             var context = SpecContext.ForTesting();
-            thePlan.Steps.Last().As<ISilentAction>().Execute(context);
+            thePlan.Steps.Last().As<ILineExecution>().Execute(context);
         
             theFixture.AssertWasCalled(x => x.TearDown());
         }

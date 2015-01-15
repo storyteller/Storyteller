@@ -3,7 +3,7 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class InvalidGrammarStep : ISilentAction
+    public class InvalidGrammarStep : ILineExecution
     {
 
         public InvalidGrammarStep(string id, string message)
@@ -37,7 +37,7 @@ namespace Storyteller.Core.Grammars
 
         public void AcceptVisitor(ISpecExecutor executor)
         {
-            executor.Action(this);
+            executor.Line(this);
         }
 
         protected bool Equals(InvalidGrammarStep other)
