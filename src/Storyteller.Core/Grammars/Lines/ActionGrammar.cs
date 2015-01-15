@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Results;
 
@@ -20,7 +21,7 @@ namespace Storyteller.Core.Grammars.Lines
         {
             _action(context);
 
-            return null;
+            yield break;
         }
     }
 }

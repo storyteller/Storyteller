@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using Rhino.Mocks;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars.Lines;
@@ -16,7 +17,7 @@ namespace Storyteller.Core.Testing.Grammars.Lines
 
             var context = SpecContext.ForTesting();
 
-            grammar.Execute(new StepValues("foo"), context);
+            grammar.Execute(new StepValues("foo"), context).ToArray();
 
             action.AssertWasCalled(x => x.Invoke(context));
         }

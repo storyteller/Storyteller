@@ -66,7 +66,13 @@ namespace Storyteller.Core.Persistence
 
             private void parseSection(string text)
             {
-                var section = new Section(text.Substring(2).Trim());
+                var parts = text.Substring(2).Trim().Split('#');
+                var section = new Section(parts.First());
+                if (parts.Count() == 2)
+                {
+                    section.Id = parts.Last();
+                }
+
                 _specification.Children.Add(section);
                 _holders.Push(section);
             }

@@ -34,6 +34,18 @@ Name: My spec
         }
 
         [Test]
+        public void read_an_id_in_a_section()
+        {
+            var spec = TextParser.Parse(@"
+Name: My spec
+=> Math#1
+");
+
+            spec.Children.Single().ShouldBeOfType<Section>()
+                .Id.ShouldEqual("1");
+        }
+
+        [Test]
         public void read_steps_in_a_section_without_an_id()
         {
             var spec = TextParser.Parse(@"
