@@ -17,6 +17,9 @@ namespace Storyteller.Core.Model
             return new Cell(Conversions.Basic(), key, typeof(T));
         }
 
+        // TODO -- add the equivalency stuff to conversions
+        // TODO -- need this to return a grammar error somehow if a converter
+        //         does not exist!
         public Cell(Conversions conversions, string key, Type type)
         {
             Type = type;
@@ -30,6 +33,7 @@ namespace Storyteller.Core.Model
             }
             else
             {
+                // TODO -- will also need to deal with NULL and EMPTY
                 _conversion = (step, values) =>
                 {
                     try

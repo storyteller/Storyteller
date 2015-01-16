@@ -5,7 +5,7 @@
      * EmbeddedSectionGrammar<T>
      * ImportedGrammar -- Not entirely sure I wanna have to support this feature this time around.
      * SetVerificationGrammar
-     * ActionGrammar -- just runs an Action w/ no inputs
+DONE     * ActionGrammar -- just runs an Action w/ no inputs
      * ActionGrammar<T> -- Gets a single input, runs an action
      * ActionMethodGrammar -- calls a method on a fixture w/ no output
      * CheckGrammar<T> -- checks the result of a value found from a Func<T>
@@ -18,7 +18,7 @@
      * FactAssertion <-- fact assertion done via a method that returns a boolean
      * FactGrammar <-- done via a Func<ITestContext, bool>
      * ParagraphGrammar
-     * LineGrammar -- base class, think we'd do it differently
+DONE     * LineGrammar -- base class, think we'd do it differently
      * ReflectionGrammar -- base class that calls a method. Think we'd do it differently
      * ServiceActionGrammar<TService, TCellType> -- calls a service with an action 
      * ServiceAssertionGrammar<TService, TCellType> -- calls a service with a Func and checks the value
