@@ -79,6 +79,7 @@
     <Compile Include="Grammars\InvalidGrammarStepTester.cs" />
     <Compile Include="Grammars\LinePlanTester.cs" />
     <Compile Include="Grammars\Lines\ActionGrammarTester.cs" />
+    <Compile Include="Grammars\Reflection\MethodInvocationTester.cs" />
     <Compile Include="Grammars\SectionPlanTester.cs" />
     <Compile Include="Model\CellTester.cs" />
     <Compile Include="Model\ErrorGrammarTester.cs" />
