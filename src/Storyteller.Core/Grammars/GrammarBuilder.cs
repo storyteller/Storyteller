@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Storyteller.Core.Grammars.Reflection;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Grammars
@@ -10,7 +11,9 @@ namespace Storyteller.Core.Grammars
     {
          private static readonly IList<IGrammarBuilder> _builders = new List<IGrammarBuilder>
          {
-             new ProgrammaticGrammarBuilder()
+             new ProgrammaticGrammarBuilder(),
+             new VoidMethodActionBuilder(),
+             new ValueCheckMethodBuilder()
          };
 
         public static IGrammar BuildGrammar(MethodInfo method, Fixture fixture)
@@ -49,6 +52,32 @@ namespace Storyteller.Core.Grammars
         public IGrammar Build(MethodInfo method, Fixture fixture)
         {
             return (IGrammar) method.Invoke(fixture, new object[0]);
+        }
+    }
+
+    internal class VoidMethodActionBuilder : IGrammarBuilder
+    {
+        public bool Matches(MethodInfo method)
+        {
+            return !method.HasReturn();
+        }
+
+        public IGrammar Build(MethodInfo method, Fixture fixture)
+        {
+            return new ActionMethodGrammar(method, fixture);
+        }
+    }
+
+    internal class ValueCheckMethodBuilder : IGrammarBuilder
+    {
+        public bool Matches(MethodInfo method)
+        {
+            return method.HasReturn();
+        }
+
+        public IGrammar Build(MethodInfo method, Fixture fixture)
+        {
+            return new ValueCheckMethod(method, fixture);
         }
     }
 }

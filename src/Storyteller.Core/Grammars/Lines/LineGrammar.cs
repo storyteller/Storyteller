@@ -9,16 +9,21 @@ namespace Storyteller.Core.Grammars.Lines
 {
     public abstract class LineGrammar : ILineGrammar
     {
+        private Cell[] _cells;
+
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            return new LineStep(new StepValues(step.Id), this);
+            var stepValues = new StepValues(step.Id);
+            _cells.Each(x => x.ConvertValues(step, stepValues));
+
+            return new LineStep(stepValues, this);
         }
 
         public abstract IEnumerable<CellResult> Execute(StepValues values, ISpecContext context);
 
         protected abstract string format();
 
-        protected virtual IEnumerable<Cell> cells(Conversions conversions)
+        protected virtual IEnumerable<Cell> buildCells(Conversions conversions)
         {
             return Enumerable.Empty<Cell>();
         }
@@ -26,9 +31,10 @@ namespace Storyteller.Core.Grammars.Lines
         public GrammarModel Compile(Conversions conversions)
         {
             // Let the UI handle the format errors
+            _cells = buildCells(conversions).ToArray();
             return new Sentence
             {
-                cells = cells(conversions).ToArray(),
+                cells = _cells,
                 format = format()
             };
         }

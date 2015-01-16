@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using FubuCore;
 using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
@@ -74,7 +76,24 @@ namespace Storyteller.Core.Results
 
         public override string ToString()
         {
-            return string.Format("Position: {0}, Status: {1}, Error: {2}, id: {3}", position, status, error, id);
+            var description = "StepResult " + id;
+            if (position != null)
+            {
+                description += "." + position;
+            }
+
+            description += " status: {0}".ToFormat(status);
+            if (error.IsNotEmpty())
+            {
+                description += "Error!\n" + error;
+            }
+
+            if (cells.Any())
+            {
+                description += "Cells\n" + cells.Select(x => x.ToString()).Join("\n");
+            }
+
+            return description;
         }
     }
 }

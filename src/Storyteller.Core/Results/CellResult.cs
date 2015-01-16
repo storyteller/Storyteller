@@ -1,4 +1,5 @@
 using System;
+using FubuCore;
 using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
@@ -84,7 +85,10 @@ namespace Storyteller.Core.Results
                 value += ", actual = " + actual;
             }
 
-            
+            if (error.IsNotEmpty())
+            {
+                value += "\nError!\n" + error;
+            }
 
             return value;
         }

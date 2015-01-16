@@ -147,7 +147,7 @@ namespace Storyteller.Core.Testing
             {
                 _parent.expect = c =>
                 {
-                    var result = c.Results.OfType<StepResult>().FirstOrDefault(x => x.id == _id);
+                    var result = findStepResult(c);
                     if (result == null)
                     {
                         return "Unable to find any result for Step " + _id;
@@ -167,6 +167,106 @@ namespace Storyteller.Core.Testing
                     return null;
                 };
                 return this;
+            }
+
+            private StepResult findStepResult(SpecContext context)
+            {
+                return context.Results.OfType<StepResult>().FirstOrDefault(x => x.id == _id);
+            }
+
+            public void StatusWas(ResultStatus resultStatus)
+            {
+                ShouldHaveExecuted();
+
+                _parent.expect = c =>
+                {
+                    var result = findStepResult(c);
+                    if (result != null)
+                    {
+                        if (result.status != resultStatus)
+                        {
+                            return "Expected status {0} for #{1}, but got {1}".ToFormat(resultStatus, _id, result.status);
+                        }
+                    }
+
+
+
+                    return null;
+                };
+            }
+
+            public CellExpression Cell(string key)
+            {
+                return new CellExpression(this, key);
+            }
+
+            public class CellExpression
+            {
+                private readonly ResultExpression _parent;
+                private readonly string _cell;
+
+                public CellExpression(ResultExpression parent, string cell)
+                {
+                    _parent = parent;
+                    _cell = cell;
+                }
+
+                private CellResult findResult(SpecContext context)
+                {
+                    var stepResult = _parent.findStepResult(context);
+                    return stepResult != null ? stepResult.cells.FirstOrDefault(x => x.cell == _cell) : null;
+                }
+
+                public void Succeeded()
+                {
+                    _parent.ShouldHaveExecuted();
+
+                    _parent._parent.expect = c =>
+                    {
+                        var result = findResult(c);
+                        if (result == null)
+                        {
+                            return "Step {0}, cell {1} cannot be found in the results".ToFormat(_parent._id, _cell);
+                        }
+                        
+                        if (result.status != ResultStatus.success)
+                        {
+                            return "Step {0}, cell {1} should have been successful, but was {2}".ToFormat(_parent._id, _cell, result.status);
+                        }
+
+                        return null;
+                    };
+                }
+
+                public void FailedWithActual(string actual)
+                {
+                    _parent.ShouldHaveExecuted();
+
+                    _parent._parent.expect = c =>{
+                    {
+                        var result = findResult(c);
+                        if (result == null)
+                        {
+                            return "Step {0}, cell {1} cannot be found in the results".ToFormat(_parent._id, _cell);
+                        }
+
+                        if (result.status != ResultStatus.failed)
+                        {
+                            return
+                                "Step {0}, cell {1} was supposed to fail, but finished w/ status {2}".ToFormat(
+                                    _parent._id, _cell);
+                        }
+                        
+                        if (result.actual != actual)
+                        {
+                            return "Step {0}, cell {1} recorded an actual of '{2}'".ToFormat(_parent._id, _cell,
+                                result.actual);
+                        }
+                    }
+
+                        return null;
+                    };
+                }
             }
         }
     }

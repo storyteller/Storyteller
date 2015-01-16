@@ -19,7 +19,7 @@ DONE     * ActionMethodGrammar -- calls a method on a fixture w/ no output
      * FactGrammar <-- done via a Func<ITestContext, bool>
      * ParagraphGrammar
 DONE     * LineGrammar -- base class, think we'd do it differently
-     * ReflectionGrammar -- base class that calls a method. Think we'd do it differently
+DOES NOT APPLY     * ReflectionGrammar -- base class that calls a method. Think we'd do it differently
      * ServiceActionGrammar<TService, TCellType> -- calls a service with an action 
      * ServiceAssertionGrammar<TService, TCellType> -- calls a service with a Func and checks the value
      * SetPropertyGrammar -- sets a property on the current object
