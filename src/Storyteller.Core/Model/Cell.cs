@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Newtonsoft.Json;
 using Storyteller.Core.Conversion;
 
@@ -15,6 +16,12 @@ namespace Storyteller.Core.Model
         public static Cell For<T>(string key)
         {
             return new Cell(Conversions.Basic(), key, typeof(T));
+        }
+
+        public static Cell For(Conversions conversions, ParameterInfo parameter)
+        {
+            // TODO -- use the attributes
+            return new Cell(conversions, parameter.Name, parameter.ParameterType);
         }
 
         // TODO -- add the equivalency stuff to conversions

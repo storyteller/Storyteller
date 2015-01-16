@@ -11,9 +11,9 @@ namespace Storyteller.Core.Grammars.Reflection
         private readonly MethodInfo _method;
         private readonly object _target;
 
-        public MethodInvocation(string[] arguments, MethodInfo method, object target)
+        public MethodInvocation(MethodInfo method, object target)
         {
-            _arguments = arguments;
+            _arguments = method.GetParameters().Select(x => x.Name).ToArray();
             _method = method;
             _target = target;
         }

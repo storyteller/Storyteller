@@ -15,7 +15,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
         {
             var target = new Target();
             var method = ReflectionHelper.GetMethod<Target>(x => x.Go(null, 0, 0));
-            var invocation = new MethodInvocation(new[] {"name", "age", "percentAwake"}, method, target);
+            var invocation = new MethodInvocation(method, target);
 
             var values = new StepValues(method.Name);
 
@@ -41,7 +41,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
             values.Store("middle", "Daniel");
             values.Store("last", "Miller");
 
-            var invocation = new MethodInvocation(new[] { "first", "middle", "last" }, method, target);
+            var invocation = new MethodInvocation(method, target);
             invocation.Invoke(values).ShouldEqual("Jeremy Daniel Miller");
 
         }
