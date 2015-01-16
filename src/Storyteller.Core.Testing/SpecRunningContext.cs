@@ -31,12 +31,11 @@ namespace Storyteller.Core.Testing
             var spec = TextParser.Parse(text);
             _context = new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token);
 
-            var plan = spec.CreatePlan(FixtureLibrary.CreateForAppDomain());
+            var plan = spec.CreatePlan(TestingContext.Library);
 
             new SynchronousExecutor(_context, plan).Execute();
 
 
-            // TODO -- you know, actually run something.
         }
 
         [TearDown]

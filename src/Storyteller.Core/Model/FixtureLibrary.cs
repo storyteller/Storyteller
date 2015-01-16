@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
+using Storyteller.Core.Conversion;
 
 namespace Storyteller.Core.Model
 {
@@ -13,6 +15,7 @@ namespace Storyteller.Core.Model
     {
         // TODO -- handle missing fixtures
         public readonly Cache<string, IFixture> Fixtures = new Cache<string, IFixture>();
+        public readonly Cache<string, FixtureModel> Models = new Cache<string, FixtureModel>();
 
         public static bool IsFixtureType(Type type)
         {
@@ -39,17 +42,48 @@ namespace Storyteller.Core.Model
 
 
         // TODO -- do something about Fixture's that blow up
-        public static FixtureLibrary CreateForAppDomain()
+        public static Task<FixtureLibrary> CreateForAppDomain(Conversions conversions)
         {
             var fixtures = AppDomain.CurrentDomain.GetAssemblies().SelectMany(FixtureTypesFor)
-                .Select(type => Activator.CreateInstance(type).As<IFixture>());
+                .Select(type =>
+                {
+                    return Task.Factory.StartNew(() =>
+                    {
+                        return CreateCompiledFixture(conversions, type);
+                    });
+                });
 
-            var library = new FixtureLibrary();
-            fixtures.Each(x => library.Fixtures[x.Key] = x);
+            return Task.WhenAll(fixtures).ContinueWith(results =>
+            {
+                var library = new FixtureLibrary();
+                
+                // TODO -- try to use a zip to get this done
+                results.Result.Each(x => 
+                {
+                    library.Fixtures[x.Fixture.Key] = x.Fixture;
+                    library.Models[x.Fixture.Key] = x.Model;
+                });
 
-            return library;
+                return library;
+            });
+
+
         }
 
+        public static CompiledFixture CreateCompiledFixture(Conversions conversions, Type type)
+        {
+            var fixture = Activator.CreateInstance(type).As<IFixture>();
+            return new CompiledFixture
+            {
+                Fixture = fixture,
+                Model = fixture.Compile(conversions)
+            };
+        }
 
+        public struct CompiledFixture
+        {
+            public IFixture Fixture;
+            public FixtureModel Model;
+        }
     }
 }

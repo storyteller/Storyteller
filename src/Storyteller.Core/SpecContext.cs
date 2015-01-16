@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using FubuCore;
 using Storyteller.Core.Engine;
-using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core

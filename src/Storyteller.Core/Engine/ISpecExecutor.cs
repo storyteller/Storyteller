@@ -1,4 +1,4 @@
-namespace Storyteller.Core
+namespace Storyteller.Core.Engine
 {
     public interface ISpecExecutor
     {

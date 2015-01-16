@@ -1,5 +1,6 @@
 ﻿using FubuTestingSupport;
 using NUnit.Framework;
+using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Testing.Grammars
@@ -10,7 +11,11 @@ namespace Storyteller.Core.Testing.Grammars
         [Test]
         public void builds_for_all_the_non_hidden_fixtures()
         {
-            var library = FixtureLibrary.CreateForAppDomain();
+            var task = FixtureLibrary.CreateForAppDomain(Conversions.Basic());
+            
+            task.Wait();
+
+            var library = task.Result;
 
             library.Fixtures["Open"].ShouldBeOfType<OpenFixture>();
 

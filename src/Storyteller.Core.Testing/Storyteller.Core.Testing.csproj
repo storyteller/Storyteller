@@ -92,6 +92,7 @@
     <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
     <Compile Include="SpecRunningContext.cs" />
+    <Compile Include="TestingContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">

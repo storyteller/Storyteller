@@ -1,3 +1,5 @@
+using Storyteller.Core.Engine;
+
 namespace Storyteller.Core
 {
     public interface IExecutionStep

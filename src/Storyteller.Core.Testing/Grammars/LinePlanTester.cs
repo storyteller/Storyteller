@@ -4,6 +4,7 @@ using FubuTestingSupport;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Storyteller.Core.Conversion;
+using Storyteller.Core.Engine;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Results;
 
