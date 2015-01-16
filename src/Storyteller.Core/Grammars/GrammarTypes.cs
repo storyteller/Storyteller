@@ -7,7 +7,7 @@
      * SetVerificationGrammar
 DONE     * ActionGrammar -- just runs an Action w/ no inputs
      * ActionGrammar<T> -- Gets a single input, runs an action
-     * ActionMethodGrammar -- calls a method on a fixture w/ no output
+DONE     * ActionMethodGrammar -- calls a method on a fixture w/ no output
      * CheckGrammar<T> -- checks the result of a value found from a Func<T>
      * CheckPropertyGrammar -- checks the value of a property of the current object
      * ConfigureObjectGrammar<TObject, TInput> -- do anything using a TInput to the object
@@ -25,7 +25,7 @@ DONE     * LineGrammar -- base class, think we'd do it differently
      * SetPropertyGrammar -- sets a property on the current object
      * TableGrammar - 
      * TableLineGrammar - used w/ DecisionTableGrammar
-     * ValueCheckMethod - calls a method and checks the return value
+DONE     * ValueCheckMethod - calls a method and checks the return value
 
      * 
      */

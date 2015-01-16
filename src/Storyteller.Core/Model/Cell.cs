@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using FubuCore.Reflection;
 using Newtonsoft.Json;
 using Storyteller.Core.Conversion;
 
@@ -20,8 +21,10 @@ namespace Storyteller.Core.Model
 
         public static Cell For(Conversions conversions, ParameterInfo parameter)
         {
-            // TODO -- use the attributes
-            return new Cell(conversions, parameter.Name, parameter.ParameterType);
+            var cell = new Cell(conversions, parameter.Name, parameter.ParameterType);
+            parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+
+            return cell;
         }
 
         // TODO -- add the equivalency stuff to conversions
