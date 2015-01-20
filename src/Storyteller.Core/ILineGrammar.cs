@@ -4,7 +4,7 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core
 {
-    public interface ILineGrammar : IGrammarWithCells
+    public interface ILineGrammar : IGrammar
     {
         IEnumerable<CellResult> Execute(StepValues values, ISpecContext context);
     }

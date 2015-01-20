@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using FubuCore;
+using FubuCore.Reflection;
 using Storyteller.Core.Grammars.Reflection;
+using Storyteller.Core.Grammars.Tables;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Grammars
@@ -27,7 +30,14 @@ namespace Storyteller.Core.Grammars
 
             try
             {
-                return builder.Build(method, fixture);
+                var grammar = builder.Build(method, fixture);
+
+                method.ForAttribute<ExposeAsTableAttribute>(att =>
+                {
+                    grammar = grammar.AsTable(att.Label).LeafName(att.LeafName);
+                });
+
+                return grammar;
             }
             catch (Exception e)
             {

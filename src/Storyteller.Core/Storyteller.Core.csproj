@@ -77,7 +77,6 @@
     <Compile Include="ICompositeExecution.cs" />
     <Compile Include="IExecutionStep.cs" />
     <Compile Include="IFixture.cs" />
-    <Compile Include="IGrammarWithCells.cs" />
     <Compile Include="ILineExecution.cs" />
     <Compile Include="ILineGrammar.cs" />
     <Compile Include="Engine\ISpecExecutor.cs" />
@@ -95,6 +94,7 @@
     <Compile Include="Model\FixtureModel.cs" />
     <Compile Include="Model\GrammarModel.cs" />
     <Compile Include="Grammars\InvalidGrammarStep.cs" />
+    <Compile Include="Model\IModelWithCells.cs" />
     <Compile Include="Model\MissingGrammar.cs" />
     <Compile Include="Model\GrammarError.cs" />
     <Compile Include="Model\Option.cs" />

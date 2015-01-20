@@ -22,7 +22,7 @@ namespace Storyteller.Core.Grammars.Lines
 
         protected abstract string format();
 
-        public virtual IEnumerable<Cell> BuildCells(Conversions conversions)
+        protected virtual IEnumerable<Cell> buildCells(Conversions conversions)
         {
             return Enumerable.Empty<Cell>();
         }
@@ -30,7 +30,7 @@ namespace Storyteller.Core.Grammars.Lines
         public GrammarModel Compile(Conversions conversions)
         {
             // Let the UI handle the format errors
-            _cells = BuildCells(conversions).ToArray();
+            _cells = buildCells(conversions).ToArray();
             return new Sentence
             {
                 cells = _cells,

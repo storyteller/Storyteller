@@ -87,6 +87,7 @@
     <Compile Include="Grammars\Reflection\ActionMethodGrammarTester.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocationTester.cs" />
     <Compile Include="Grammars\Reflection\ValueCheckMethodTester.cs" />
+    <Compile Include="Grammars\Tables\TableGrammar_specs.cs" />
     <Compile Include="Model\CellTester.cs" />
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />
