@@ -4,10 +4,9 @@ using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Grammars
 {
-    // Tested through integration tests only
-    public class SpecificationPlan : ICompositeExecution
+    public class CompositeExecution : ICompositeExecution
     {
-        public SpecificationPlan(IEnumerable<CompositeExecution> steps)
+        public CompositeExecution(IEnumerable<IExecutionStep> steps)
         {
             Steps = steps.ToArray();
         }

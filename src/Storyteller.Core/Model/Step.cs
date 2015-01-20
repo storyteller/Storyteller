@@ -68,40 +68,6 @@ namespace Storyteller.Core.Model
         }
     }
 
-    public class Section : Node, INodeHolder
-    {
-        public readonly string Key;
-        private readonly IList<Node> _children = new List<Node>();
-
-        public IList<Node> Children
-        {
-            get { return _children; }
-        }
-
-        public Section(string key)
-        {
-            Key = key;
-        }
-
-        public SectionPlan CreatePlan(FixtureLibrary library)
-        {
-            var fixture = library.Fixtures[Key];
-
-            return CreatePlan(library, fixture);
-        }
-
-        public SectionPlan CreatePlan(FixtureLibrary library, IFixture fixture)
-        {
-            var nested = Children.OfType<Step>().Select(step =>
-            {
-                var grammar = fixture.GrammarFor(step.Key);
-                return grammar.CreatePlan(step, library);
-            });
-
-            return new SectionPlan(fixture, this, nested);
-        }
-    }
-
 
     public class Comment : Node
     {

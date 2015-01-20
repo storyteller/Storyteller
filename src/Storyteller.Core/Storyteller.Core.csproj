@@ -60,6 +60,7 @@
     <Compile Include="Grammars\Reflection\MethodInvocation.cs" />
     <Compile Include="Grammars\Reflection\ParsingExtensions.cs" />
     <Compile Include="Grammars\Reflection\ValueCheckMethod.cs" />
+    <Compile Include="Grammars\Tables\TableGrammar.cs" />
     <Compile Include="IGrammar.cs" />
     <Compile Include="Conversion\IRuntimeConvertor.cs" />
     <Compile Include="Conversion\Conversions.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="Grammars\GrammarBuilder.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />
     <Compile Include="Grammars\LinePlan.cs" />
-    <Compile Include="Grammars\SectionPlan.cs" />
+    <Compile Include="Grammars\CompositeExecution.cs" />
     <Compile Include="HiddenAttribute.cs" />
     <Compile Include="ISpecContext.cs" />
     <Compile Include="FixtureMethodExtensions.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Model\MissingGrammar.cs" />
     <Compile Include="Model\GrammarError.cs" />
     <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\Section.cs" />
     <Compile Include="Model\Sentence.cs" />
     <Compile Include="Model\Step.cs" />
     <Compile Include="Model\Table.cs" />
