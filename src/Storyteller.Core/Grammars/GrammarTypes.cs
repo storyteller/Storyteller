@@ -15,7 +15,7 @@ DONE     * CheckGrammar<T> -- checks the result of a value found from a Func<T>
      * CurriedLineGrammar -- runs a sentence, but fills in some defaults first.
      * DecisionTableGrammar -- Still proud of this one.
      * DecoratedLineGrammar -- dunno if this is still useful
-     * FactAssertion <-- fact assertion done via a method that returns a boolean
+NOT GOING TO DO     * FactAssertion <-- fact assertion done via a method that returns a boolean
      * FactGrammar <-- done via a Func<ITestContext, bool>
      * ParagraphGrammar
 DONE     * LineGrammar -- base class, think we'd do it differently

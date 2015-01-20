@@ -217,5 +217,65 @@ namespace Storyteller.Core
         {
             return new CheckGrammar<T>(key, result);
         }
+
+        /// <summary>
+        /// Use to create a simple "Fact" grammar that asserts
+        /// that a condition is true
+        /// </summary>
+        /// <example>
+        /// this["ThisFactIsTrue"] = Fact("This fact is always true").VerifiedBy(() => true);
+        /// </example>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        protected FactExpression Fact(string title)
+        {
+            return new FactExpression(title);
+        }
+
+        public class FactExpression
+        {
+            private readonly string _title;
+
+            public FactExpression(string title)
+            {
+                _title = title;
+            }
+
+            /// <summary>
+            /// Register the Func that can be evaluated as a boolean
+            /// to determine the success or failure of this Fact
+            /// </summary>
+            /// <param name="test"></param>
+            /// <returns></returns>
+            public IGrammar VerifiedBy(Func<bool> test)
+            {
+                return new FactGrammar(_title, c => test());
+            }
+
+            /// <summary>
+            /// Register the Func that can be evaluated as a boolean
+            /// to determine the success or failure of this Fact
+            /// </summary>
+            /// <param name="test"></param>
+            /// <returns></returns>
+            public IGrammar VerifiedBy(Func<ISpecContext, bool> test)
+            {
+                return new FactGrammar(_title, test);
+            }
+
+            /// <summary>
+            /// Register the Func that works against
+            /// a service in the TestContext that can be evaluated as a boolean
+            /// to determine the success or failure of this Fact
+            /// </summary>
+            /// <param name="test"></param>
+            /// <returns></returns>
+            public IGrammar VerifiedBy<TService>(Func<TService, bool> test)
+            {
+                return new FactGrammar(_title,c => test(c.Service<TService>()));
+            }
+        }
+
+        
     }
 }

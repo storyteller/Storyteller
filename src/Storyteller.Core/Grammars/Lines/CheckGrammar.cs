@@ -17,7 +17,7 @@ namespace Storyteller.Core.Grammars.Lines
         {
             _key = key;
             _source = source;
-        }
+        } 
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {

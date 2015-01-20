@@ -72,6 +72,7 @@
     <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
     <Compile Include="EndToEndExecution\fixture_check_method_specs.cs" />
+    <Compile Include="EndToEndExecution\fixture_fact_methods_specs.cs" />
     <Compile Include="EndToEndExecution\simple_method_grammars.cs" />
     <Compile Include="EndToEnd\simplest_possible_execution.cs" />
     <Compile Include="Engine\CountsTester.cs" />

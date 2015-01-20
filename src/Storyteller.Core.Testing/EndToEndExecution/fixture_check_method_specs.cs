@@ -49,13 +49,19 @@ Name: Test Run
         }
     }
 
+
+
     public class CheckGrammarFixture : Fixture
     {
+        
+
         public CheckGrammarFixture()
         {
             this["CheckSimple"] = Check("text", () => "right");
             this["SetText"] = Do<string>("Set text to {text}", (text, c) => c.State.Store("text", text));
             this["CheckContext"] = Check("text", c => c.State.Retrieve<string>("text"));
+
+
         }
     }
 }
