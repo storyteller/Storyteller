@@ -51,12 +51,13 @@ namespace Storyteller.Core
     {
         private readonly IExecutionObserver _observer;
         private readonly CancellationToken _cancellation;
+        private readonly IServiceLocator _services;
         private bool _hasCriticalException = false;
         private bool _hasCatastrophicException = false;
 
         public static SpecContext Basic()
         {
-            return new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token);
+            return new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token, new InMemoryServiceLocator());
         }
 
         public static SpecContext ForTesting()
@@ -72,10 +73,11 @@ namespace Storyteller.Core
 
         public readonly Counts Counts = new Counts();
 
-        public SpecContext(IExecutionObserver observer, CancellationToken cancellation)
+        public SpecContext(IExecutionObserver observer, CancellationToken cancellation, IServiceLocator services)
         {
             _observer = observer;
             _cancellation = cancellation;
+            _services = services;
         }
 
         public bool CanContinue()
@@ -88,6 +90,11 @@ namespace Storyteller.Core
         public bool Wait(Func<bool> condition, TimeSpan timeout)
         {
             throw new NotImplementedException();
+        }
+
+        public T Service<T>()
+        {
+            return _services.GetInstance<T>();
         }
 
         public void LogResult<T>(T result) where T : IResultMessage

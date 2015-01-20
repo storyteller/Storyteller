@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Model;
@@ -18,7 +19,7 @@ namespace Storyteller.Core.Testing
         public void SetUp()
         {
             theObserver = new RecordingExecutionObserver();
-            theContext = new SpecContext(theObserver, new CancellationToken());
+            theContext = new SpecContext(theObserver, new CancellationToken(), new InMemoryServiceLocator());
 
         }
 
@@ -53,7 +54,7 @@ namespace Storyteller.Core.Testing
         public void SetUp()
         {
             theCancellation = new CancellationTokenSource();
-            theContext = new SpecContext(new NulloExecutionObserver(), theCancellation.Token);
+            theContext = new SpecContext(new NulloExecutionObserver(), theCancellation.Token, new InMemoryServiceLocator());
         }
 
         [Test]

@@ -11,5 +11,6 @@ namespace Storyteller.Core
         bool Wait(Func<bool> condition, TimeSpan timeout);
         void LogResult<T>(T result) where T : IResultMessage;
         void LogException(string id, Exception ex, object position = null);
+        T Service<T>();
     }
 }

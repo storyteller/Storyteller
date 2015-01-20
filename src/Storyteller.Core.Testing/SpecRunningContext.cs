@@ -29,7 +29,7 @@ namespace Storyteller.Core.Testing
         protected void execute(string text)
         {
             var spec = TextParser.Parse(text);
-            _context = new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token);
+            _context = new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token, Services);
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
@@ -37,6 +37,8 @@ namespace Storyteller.Core.Testing
 
 
         }
+
+        public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
 
         [TearDown]
         public void TearDown()
