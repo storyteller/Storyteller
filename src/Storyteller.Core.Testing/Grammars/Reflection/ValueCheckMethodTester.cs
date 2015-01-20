@@ -23,6 +23,17 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
 
             returnCell.Key.ShouldEqual("fullname");
             returnCell.Type.ShouldEqual(typeof (string));
+
+            
+        }
+
+        [Test]
+        public void the_return_cell_is_marked_as_output()
+        {
+            ValueCheckMethod
+                .For(new Target(), x => x.Fullname2(null, null))
+                .ReturnCell
+                .output.ShouldBeTrue();
         }
 
         [Test]

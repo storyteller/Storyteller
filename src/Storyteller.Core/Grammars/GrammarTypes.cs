@@ -20,8 +20,8 @@ DONE     * CheckGrammar<T> -- checks the result of a value found from a Func<T>
      * ParagraphGrammar
 DONE     * LineGrammar -- base class, think we'd do it differently
 DOES NOT APPLY     * ReflectionGrammar -- base class that calls a method. Think we'd do it differently
-     * ServiceActionGrammar<TService, TCellType> -- calls a service with an action 
-     * ServiceAssertionGrammar<TService, TCellType> -- calls a service with a Func and checks the value
+NOT GOING TO DO     * ServiceActionGrammar<TService, TCellType> -- calls a service with an action 
+NOT GOING TO DO     * ServiceAssertionGrammar<TService, TCellType> -- calls a service with a Func and checks the value
      * SetPropertyGrammar -- sets a property on the current object
      * TableGrammar - 
      * TableLineGrammar - used w/ DecisionTableGrammar

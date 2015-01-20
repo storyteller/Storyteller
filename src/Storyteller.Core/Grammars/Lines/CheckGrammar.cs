@@ -32,7 +32,10 @@ namespace Storyteller.Core.Grammars.Lines
 
         protected override IEnumerable<Cell> buildCells(Conversions conversions)
         {
-            _cell = new Cell(conversions, _key, typeof (T));
+            _cell = new Cell(conversions, _key, typeof (T))
+            {
+                output = true
+            };
             return new [] {_cell};
         }
     }

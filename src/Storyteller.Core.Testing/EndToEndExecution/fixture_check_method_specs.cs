@@ -45,6 +45,7 @@ Name: Test Run
             var cell = model.cells.Single();
             cell.Key.ShouldEqual("text");
             cell.Type.ShouldEqual(typeof (string));
+            cell.output.ShouldBeTrue();
         }
     }
 

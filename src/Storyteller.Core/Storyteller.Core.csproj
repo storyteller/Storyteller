@@ -87,7 +87,6 @@
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\EmbeddedSection.cs" />
     <Compile Include="Model\ErrorGrammar.cs" />
-    <Compile Include="Model\Fact.cs" />
     <Compile Include="Model\FixtureModel.cs" />
     <Compile Include="Model\GrammarModel.cs" />
     <Compile Include="Grammars\InvalidGrammarStep.cs" />

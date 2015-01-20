@@ -54,6 +54,7 @@ namespace Storyteller.Core.Grammars.Reflection
             }
 
             ReturnCell = Cell.For(conversions, _method.ReturnParameter);
+            ReturnCell.output = true;
             if (ReturnCell.Key.IsEmpty())
             {
                 ReturnCell.Key = format().ParseTemplateKeys().LastOrDefault() ?? "returnValue";
