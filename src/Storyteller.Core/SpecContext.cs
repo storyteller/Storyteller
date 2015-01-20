@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using FubuCore;
+using FubuCore.Util;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Results;
 
@@ -47,8 +48,42 @@ namespace Storyteller.Core
         }
     }
 
-    public class SpecContext : ISpecContext
+    public class State : IDisposable
     {
+        // TODO -- replace w/ the lightweight cache from StructureMap
+        private readonly Cache<Type, object> _byType = new Cache<Type, object>();
+        private readonly Cache<Type, Cache<string, object>> _byName = new Cache<Type, Cache<string, object>>(t => new Cache<string, object>()); 
+
+        public void Store<T>(T value)
+        {
+            _byType[typeof (T)] = value;
+        }
+
+        public void Store<T>(string key, T value)
+        {
+            _byName[typeof (T)][key] = value;
+        }
+
+        public T Retrieve<T>()
+        {
+            return (T) _byType[typeof (T)];
+        }
+
+        public T Retrieve<T>(string key)
+        {
+            return (T) _byName[typeof (T)][key];
+        }
+
+        public void Dispose()
+        {
+            _byName.ClearAll();
+            _byType.ClearAll();
+        }
+    }
+
+    public class SpecContext : ISpecContext, IDisposable
+    {
+        private readonly State _state = new State();
         private readonly IExecutionObserver _observer;
         private readonly CancellationToken _cancellation;
         private readonly IServiceLocator _services;
@@ -97,6 +132,11 @@ namespace Storyteller.Core
             return _services.GetInstance<T>();
         }
 
+        public State State
+        {
+            get { return _state; }
+        }
+
         public void LogResult<T>(T result) where T : IResultMessage
         {
             if (result.id.IsEmpty()) throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
@@ -114,5 +154,11 @@ namespace Storyteller.Core
             LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});
         }
 
+        // TODO -- this has to be called at some point in the 
+        // execution pipeline
+        public void Dispose()
+        {
+            _state.Dispose();
+        }
     }
 }

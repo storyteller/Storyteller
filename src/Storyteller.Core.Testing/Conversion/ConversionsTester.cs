@@ -9,6 +9,7 @@ namespace Storyteller.Core.Testing.Conversion
     [TestFixture]
     public class ConversionsTester
     {
+
         private readonly Conversions conversions = new Conversions(new IConversionProvider[0]);
 
         private void assertRoundTrip<T>(T value)
@@ -44,6 +45,20 @@ namespace Storyteller.Core.Testing.Conversion
         {
             assertRoundTrip(ResultStatus.error);
         }
+
+        [Test]
+        public void convert_string_is_passthrough_on_value()
+        {
+            conversions.Convert(typeof (string), "foo").ShouldEqual("foo");
+        }
+
+        [Test]
+        public void convert_string_as_EMPTY()
+        {
+            conversions.Convert(typeof (string), "EMPTY").ShouldEqual(string.Empty);
+        }
+
+
     }
 
     

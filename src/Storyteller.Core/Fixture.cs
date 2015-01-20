@@ -130,5 +130,47 @@ namespace Storyteller.Core
         {
             return new ActionGrammar(text, action);
         }
+
+        /// <summary>
+        /// Creates a simple Sentence grammar with one input that executes an Action<T> lambda"/>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="template"></param>
+        /// <param name="action"></param>
+        /// <example>
+        /// this["simple"] = Do<int>("Add {x} to our number", x => count += x);
+        /// </example>
+        /// <returns></returns>
+        public static ActionGrammar<T> Do<T>(string template, Action<T> action)
+        {
+            return new ActionGrammar<T>(template, (x, context) => action(x));
+        }
+
+        /// <summary>
+        /// Creates a simple Sentence grammar with one input that executes an Action<T, ITestContext> lambda
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="template"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static ActionGrammar<T> Do<T>(string template, Action<T, ISpecContext> action)
+        {
+            return new ActionGrammar<T>(template, action);
+        }
+
+        /// <summary>
+        /// Creates a simple Sentence grammar with one input that invokes a Lambda against a service object registered
+        /// in the current ITestContext.
+        /// </summary>
+        /// <typeparam name="TInput"></typeparam>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="template"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static ActionGrammar<TInput> Do<TInput, TService>(string template, Action<TInput, TService> action)
+        {
+            return new ActionGrammar<TInput>(template, (input, c) => action(input, c.Service<TService>()));
+        }
+
     }
 }

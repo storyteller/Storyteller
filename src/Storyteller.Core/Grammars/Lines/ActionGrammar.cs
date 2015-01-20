@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Storyteller.Core.Conversion;
+using Storyteller.Core.Grammars.Reflection;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
@@ -28,6 +29,41 @@ namespace Storyteller.Core.Grammars.Lines
         protected override string format()
         {
             return _label;
+        }
+    }
+
+    public class ActionGrammar<T> : LineGrammar
+    {
+        private readonly string _label;
+        private readonly Action<T, ISpecContext> _action;
+        private Cell _cell;
+
+        public ActionGrammar(string label, Action<T, ISpecContext> action)
+        {
+            _label = label;
+            _action = action;
+        }
+
+        public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
+        {
+            T value = (T) values.Get(_cell.Key);
+            _action(value, context);
+
+            return Enumerable.Empty<CellResult>();
+        }
+
+        protected override string format()
+        {
+            return _label;
+        }
+
+        protected override IEnumerable<Cell> buildCells(Conversions conversions)
+        {
+            // TODO -- make the exception message on garbage input nicer
+            var key = _label.ParseTemplateKeys().Single();
+            _cell = new Cell(conversions, key, typeof (T));
+
+            return new[] {_cell};
         }
     }
 }

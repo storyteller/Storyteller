@@ -33,6 +33,12 @@ namespace Storyteller.Core.Conversion
             Add(UInt32.Parse);
             Add(UInt64.Parse);
 
+            Add(x =>
+            {
+                if (x == "EMPTY") return string.Empty;
+
+                return x;
+            });
         }
 
         public void Add<T>(Func<string, T> convertor)

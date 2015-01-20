@@ -102,6 +102,11 @@ namespace Storyteller.Core.Testing
             };
         }
 
+        protected State SpecContextState
+        {
+            get { return _context.State; }
+        }
+
         protected ResultExpression Step(string id)
         {
             return new ResultExpression(id, this);
