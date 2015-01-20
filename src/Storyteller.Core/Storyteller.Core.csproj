@@ -51,6 +51,7 @@
     <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
     <Compile Include="Grammars\Attributes.cs" />
+    <Compile Include="Grammars\Lines\CheckGrammar.cs" />
     <Compile Include="Grammars\Reflection\ActionMethodGrammar.cs" />
     <Compile Include="Grammars\Reflection\MethodExtensions.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocation.cs" />

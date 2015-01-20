@@ -6,9 +6,9 @@
      * ImportedGrammar -- Not entirely sure I wanna have to support this feature this time around.
      * SetVerificationGrammar
 DONE     * ActionGrammar -- just runs an Action w/ no inputs
-     * ActionGrammar<T> -- Gets a single input, runs an action
+DONE     * ActionGrammar<T> -- Gets a single input, runs an action
 DONE     * ActionMethodGrammar -- calls a method on a fixture w/ no output
-     * CheckGrammar<T> -- checks the result of a value found from a Func<T>
+DONE     * CheckGrammar<T> -- checks the result of a value found from a Func<T>
      * CheckPropertyGrammar -- checks the value of a property of the current object
      * ConfigureObjectGrammar<TObject, TInput> -- do anything using a TInput to the object
      * CreateObjectGrammar<TObject, TInput> -- creates a new object using and input and puts it on the current

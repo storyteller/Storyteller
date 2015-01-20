@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using StoryTeller.Domain;
-using StoryTeller.Engine;
 
 namespace StoryTeller.Engine
 {
@@ -17,7 +16,10 @@ namespace StoryTeller.Engine
             _check = check;
         }
 
-        public override string Description { get { return Template; } }
+        public override string Description
+        {
+            get { return Template; }
+        }
 
         private Cell cell()
         {
@@ -41,5 +43,4 @@ namespace StoryTeller.Engine
             };
         }
     }
-
 }

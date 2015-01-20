@@ -172,5 +172,50 @@ namespace Storyteller.Core
             return new ActionGrammar<TInput>(template, (input, c) => action(input, c.Service<TService>()));
         }
 
+        /// <summary>
+        /// Creates a grammar that checks the single value returned by
+        /// the Func[T].  Mostly useful for building up scripted
+        /// grammars
+        /// </summary>
+        /// <example>
+        /// return Script("Divide numbers", x =>
+        /// {
+        ///     x += Do(() => _first = _second = 0);
+        ///     x += Read<double>("x", o => _first = o);
+        ///     x += Read<double>("y", o => _second = o);
+        ///     x += Check("product", () => _first/_second);
+        /// }).AsTable("Subtract numbers");
+        /// </example>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static CheckGrammar<T> Check<T>(string key, Func<T> result)
+        {
+            return Check(key, c => result());
+        }
+
+        /// <summary>
+        /// Creates a grammar that checks the single value returned by
+        /// the Func[T].  Mostly useful for building up scripted
+        /// grammars
+        /// </summary>
+        /// <example>
+        /// return Script("Divide numbers", x =>
+        /// {
+        ///     x += Do(() => _first = _second = 0);
+        ///     x += Read<double>("x", o => _first = o);
+        ///     x += Read<double>("y", o => _second = o);
+        ///     x += Check("product", () => _first/_second);
+        /// }).AsTable("Subtract numbers");
+        /// </example>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static CheckGrammar<T> Check<T>(string key, Func<ISpecContext, T> result)
+        {
+            return new CheckGrammar<T>(key, result);
+        }
     }
 }

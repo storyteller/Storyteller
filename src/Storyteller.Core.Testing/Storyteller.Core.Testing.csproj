@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
+    <Compile Include="EndToEndExecution\fixture_check_method_specs.cs" />
     <Compile Include="EndToEndExecution\simple_method_grammars.cs" />
     <Compile Include="EndToEnd\simplest_possible_execution.cs" />
     <Compile Include="Engine\CountsTester.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Grammars\InvalidGrammarStepTester.cs" />
     <Compile Include="Grammars\LinePlanTester.cs" />
     <Compile Include="Grammars\Lines\ActionGrammarTester.cs" />
-    <Compile Include="Grammars\Lines\fixture_do_method_specs.cs" />
+    <Compile Include="EndToEndExecution\fixture_do_method_specs.cs" />
     <Compile Include="Grammars\Reflection\ActionMethodGrammarTester.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocationTester.cs" />
     <Compile Include="Grammars\Reflection\ValueCheckMethodTester.cs" />

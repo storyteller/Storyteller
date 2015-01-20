@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
-namespace Storyteller.Core.Testing.Grammars.Lines
+namespace Storyteller.Core.Testing.EndToEndExecution
 {
     [TestFixture]
     public class fixture_do_method_specs : SpecRunningContext
