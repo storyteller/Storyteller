@@ -76,6 +76,7 @@
     <Compile Include="ICompositeExecution.cs" />
     <Compile Include="IExecutionStep.cs" />
     <Compile Include="IFixture.cs" />
+    <Compile Include="IGrammarWithCells.cs" />
     <Compile Include="ILineExecution.cs" />
     <Compile Include="ILineGrammar.cs" />
     <Compile Include="Engine\ISpecExecutor.cs" />

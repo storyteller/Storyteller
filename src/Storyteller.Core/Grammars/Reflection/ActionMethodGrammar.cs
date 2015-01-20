@@ -39,7 +39,7 @@ namespace Storyteller.Core.Grammars.Reflection
             return Enumerable.Empty<CellResult>();
         }
 
-        protected override IEnumerable<Cell> buildCells(Conversions conversions)
+        public override IEnumerable<Cell> BuildCells(Conversions conversions)
         {
             return _method.GetParameters().Select(x => Cell.For(conversions, x));
         }

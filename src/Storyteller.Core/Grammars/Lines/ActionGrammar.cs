@@ -57,7 +57,7 @@ namespace Storyteller.Core.Grammars.Lines
             return _label;
         }
 
-        protected override IEnumerable<Cell> buildCells(Conversions conversions)
+        public override IEnumerable<Cell> BuildCells(Conversions conversions)
         {
             // TODO -- make the exception message on garbage input nicer
             var key = _label.ParseTemplateKeys().Single();

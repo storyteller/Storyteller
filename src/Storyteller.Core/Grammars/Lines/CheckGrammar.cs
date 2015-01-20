@@ -30,7 +30,7 @@ namespace Storyteller.Core.Grammars.Lines
             return "{0} should be {{{0}}}".ToFormat(_key);
         }
 
-        protected override IEnumerable<Cell> buildCells(Conversions conversions)
+        public override IEnumerable<Cell> BuildCells(Conversions conversions)
         {
             _cell = new Cell(conversions, _key, typeof (T))
             {

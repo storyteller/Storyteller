@@ -14,4 +14,5 @@ namespace Storyteller.Core.Model
 
         public readonly IList<GrammarError> errors = new List<GrammarError>(); 
     }
+
 }
