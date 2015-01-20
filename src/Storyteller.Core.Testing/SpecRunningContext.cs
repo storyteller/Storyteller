@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using FubuCore;
+using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
@@ -62,6 +63,11 @@ namespace Storyteller.Core.Testing
             {
                 _expectations.Clear();
             }
+        }
+
+        protected T ModelFor<T>(string fixtureName, string grammarName) where T : GrammarModel
+        {
+            return TestingContext.Library.Models[fixtureName].FindGrammar(grammarName).ShouldBeOfType<T>();
         }
 
         protected void CountsShouldBe(int rights, int wrongs, int exceptions, int syntaxErrors)
