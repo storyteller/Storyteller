@@ -1,21 +1,23 @@
 ﻿using System;
+using FubuCore;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class FixtureAction : ILineExecution
+    public class SilentAction : ILineExecution
     {
         private readonly Action<ISpecContext> _action;
-        private readonly Section _section;
+        private readonly Node _node;
         private readonly Stage _stage;
 
-        public FixtureAction(Stage stage, Action<ISpecContext> action, Section section)
+        // TODO -- may change 'Stage stage' to object position when we hit paragraphs
+        public SilentAction(Stage stage, Action<ISpecContext> action, Node node)
         {
             _stage = stage;
             _action = action;
-            _section = section;
+            _node = node;
         }
 
         public Stage Stage
@@ -33,6 +35,8 @@ namespace Storyteller.Core.Grammars
             executor.Line(this);
         }
 
+        // TODO -- lift this out so that there's one wrapper for critical?
+        // Maybe put the critical into Fixture.SetUp instead?
         public void Execute(ISpecContext context)
         {
             try
@@ -41,7 +45,7 @@ namespace Storyteller.Core.Grammars
             }
             catch (Exception ex)
             {
-                context.LogException(_section.Id, new StorytellerCriticalException("Failed in fixture " + _stage, ex),
+                context.LogException(_node.Id, new StorytellerCriticalException("Failed in stage '{0}'".ToFormat(_stage), ex),
                     _stage);
             }
         }

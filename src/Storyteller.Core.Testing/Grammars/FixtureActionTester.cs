@@ -17,7 +17,7 @@ namespace Storyteller.Core.Testing.Grammars
         public void execute_happy_path()
         {
             var wasCalled = false;
-            var action = new FixtureAction(Stage.setup, x => wasCalled = true, new Section("Math"));
+            var action = new SilentAction(Stage.setup, x => wasCalled = true, new Section("Math"));
             action.Execute(SpecContext.ForTesting());
 
             wasCalled.ShouldBeTrue();
@@ -30,7 +30,7 @@ namespace Storyteller.Core.Testing.Grammars
             var ex = new DivideByZeroException();
 
             var section = new Section("Math") {Id = "5"};
-            var action = new FixtureAction(Stage.teardown, x => { throw ex; }, section);
+            var action = new SilentAction(Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 
@@ -51,7 +51,7 @@ namespace Storyteller.Core.Testing.Grammars
             var ex = new DivideByZeroException();
 
             var section = new Section("Math") { Id = "5" };
-            var action = new FixtureAction(Stage.teardown, x => { throw ex; }, section);
+            var action = new SilentAction(Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 
@@ -63,7 +63,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             var executor = MockRepository.GenerateMock<ISpecExecutor>();
 
-            var action = new FixtureAction(Stage.setup, x => { }, new Section("Math"));
+            var action = new SilentAction(Stage.setup, x => { }, new Section("Math"));
 
             action.AcceptVisitor(executor);
 

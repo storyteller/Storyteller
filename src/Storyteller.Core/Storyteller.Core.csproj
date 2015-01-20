@@ -69,7 +69,7 @@
     <Compile Include="Engine\Counts.cs" />
     <Compile Include="Engine\SynchronousExecutor.cs" />
     <Compile Include="Fixture.cs" />
-    <Compile Include="Grammars\FixtureAction.cs" />
+    <Compile Include="Grammars\SilentAction.cs" />
     <Compile Include="Grammars\Lines\ActionGrammar.cs" />
     <Compile Include="Grammars\Lines\LineGrammar.cs" />
     <Compile Include="Grammars\SpecificationPlan.cs" />

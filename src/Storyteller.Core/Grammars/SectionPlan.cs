@@ -12,7 +12,7 @@ namespace Storyteller.Core.Grammars
         {
             var steps = new List<IExecutionStep>();
 
-            steps.Add(new FixtureAction(Stage.setup, x =>
+            steps.Add(new SilentAction(Stage.setup, x =>
             {
                 fixture.Context = x;
                 fixture.SetUp();
@@ -20,7 +20,7 @@ namespace Storyteller.Core.Grammars
 
             steps.AddRange(nestedSteps);
 
-            steps.Add(new FixtureAction(Stage.teardown, x => fixture.TearDown(), section));
+            steps.Add(new SilentAction(Stage.teardown, x => fixture.TearDown(), section));
 
             Steps = steps.ToArray();
         }

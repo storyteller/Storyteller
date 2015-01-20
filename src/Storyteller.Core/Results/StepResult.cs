@@ -10,7 +10,9 @@ namespace Storyteller.Core.Results
     {
         body,
         setup,
-        teardown
+        teardown,
+        before,
+        after
     }
 
     public class StepResult : IResultMessage

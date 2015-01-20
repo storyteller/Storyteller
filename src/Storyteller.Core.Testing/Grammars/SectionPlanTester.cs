@@ -39,14 +39,14 @@ namespace Storyteller.Core.Testing.Grammars
         {
             thePlan.Steps.Length.ShouldEqual(5);
 
-            thePlan.Steps.First().ShouldBeOfType<FixtureAction>()
+            thePlan.Steps.First().ShouldBeOfType<SilentAction>()
                 .Stage.ShouldEqual(Stage.setup);
 
             thePlan.Steps[1].ShouldBeTheSameAs(theNestedSteps[0]);
             thePlan.Steps[2].ShouldBeTheSameAs(theNestedSteps[1]);
             thePlan.Steps[3].ShouldBeTheSameAs(theNestedSteps[2]);
             
-            thePlan.Steps.Last().ShouldBeOfType<FixtureAction>()
+            thePlan.Steps.Last().ShouldBeOfType<SilentAction>()
                 .Stage.ShouldEqual(Stage.teardown);
 
         }
