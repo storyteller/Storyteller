@@ -276,6 +276,19 @@ namespace Storyteller.Core
             }
         }
 
-        
+        /// <summary>
+        /// Creates a new embedded section grammar for the given title and fixture
+        /// type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public static EmbeddedSectionGrammar<T> Embed<T>(string title) where T : Fixture, new()
+        {
+            return new EmbeddedSectionGrammar<T>
+            {
+                Title = title
+            };
+        }
     }
 }

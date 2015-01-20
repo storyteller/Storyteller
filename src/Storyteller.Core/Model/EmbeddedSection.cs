@@ -4,8 +4,9 @@ namespace Storyteller.Core.Model
     {
         public FixtureModel fixture;
         public string title;
+        public string collection;
 
-        public EmbeddedSection(string key) : base("embedded-section")
+        public EmbeddedSection() : base("embedded-section")
         {
         }
     }

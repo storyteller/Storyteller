@@ -87,6 +87,11 @@ namespace Storyteller.Core.Model
         {
             var fixture = library.Fixtures[Key];
 
+            return CreatePlan(library, fixture);
+        }
+
+        public SectionPlan CreatePlan(FixtureLibrary library, IFixture fixture)
+        {
             var nested = Children.OfType<Step>().Select(step =>
             {
                 var grammar = fixture.GrammarFor(step.Key);

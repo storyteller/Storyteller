@@ -51,6 +51,7 @@
     <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
     <Compile Include="Grammars\Attributes.cs" />
+    <Compile Include="Grammars\EmbeddedSectionGrammar.cs" />
     <Compile Include="Grammars\FactPlan.cs" />
     <Compile Include="Grammars\LineStepBase.cs" />
     <Compile Include="Grammars\Lines\CheckGrammar.cs" />
