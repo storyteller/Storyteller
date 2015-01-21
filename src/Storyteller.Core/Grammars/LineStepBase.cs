@@ -23,12 +23,8 @@ namespace Storyteller.Core.Grammars
 
             if (values.Errors.Any())
             {
-                // TODO -- will need to care about position when we do Paragraph's
-                var result = new StepResult(values.Id, ResultStatus.ok)
-                {
-                    cells = values.Errors.ToArray(),
-                    position = Position
-                };
+                var result = values.ToConversionErrorResult();
+                result.position = Position;
 
                 context.LogResult(result);
 

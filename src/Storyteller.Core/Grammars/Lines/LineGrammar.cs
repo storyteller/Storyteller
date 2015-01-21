@@ -12,8 +12,7 @@ namespace Storyteller.Core.Grammars.Lines
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            var stepValues = new StepValues(step.Id);
-            _cells.Each(x => x.ConvertValues(step, stepValues));
+            var stepValues = _cells.ToStepValues(step);
 
             return new LineStep(stepValues, this);
         }

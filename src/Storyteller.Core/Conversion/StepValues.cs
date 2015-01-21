@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
@@ -38,7 +39,10 @@ namespace Storyteller.Core.Conversion
             });
         }
 
-
+        public IDictionary<string, object> RawData
+        {
+            get { return _values; }
+        }
 
         public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)
         {
@@ -60,6 +64,14 @@ namespace Storyteller.Core.Conversion
 
         public IList<CellResult> Errors = new List<CellResult>();
 
+        public StepResult ToConversionErrorResult()
+        {
+            return new StepResult(Id, ResultStatus.ok)
+            {
+                cells = Errors.ToArray()
+            };
+        }
+
         public void LogError(string key, Exception ex)
         {
             Errors.Add(CellResult.Error(key, ex));
@@ -80,6 +92,11 @@ namespace Storyteller.Core.Conversion
         public bool Has(string key)
         {
             return _values.ContainsKey(key);
+        }
+
+        public bool HasErrors()
+        {
+            return Errors.Any();
         }
     }
 }

@@ -119,5 +119,13 @@ namespace Storyteller.Core.Model
         {
             return cells.All(x => x.Matches(one, two));
         }
+
+        public static StepValues ToStepValues(this IEnumerable<Cell> cells, Step step)
+        {
+            var values = new StepValues(step.Id);
+            cells.Each(x => x.ConvertValues(step, values));
+
+            return values;
+        }
     }
 }
