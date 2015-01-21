@@ -2,6 +2,7 @@ using System.Linq;
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
+using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
@@ -24,7 +25,7 @@ namespace Storyteller.Core.Testing.Model
         {
             var grammar = new MissingGrammar("missing");
             grammar.As<IGrammar>().CreatePlan(new Step("missing"){Id = "3"}, TestingContext.Library)
-                .ShouldEqual(new InvalidGrammarStep("3", "Grammar 'missing' is not implemented"));
+                .ShouldEqual(new InvalidGrammarStep(new StepValues("3"), "Grammar 'missing' is not implemented"));
         }
 
         [Test]

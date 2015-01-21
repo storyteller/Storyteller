@@ -21,6 +21,7 @@ namespace Storyteller.Core.Grammars
             {
                 cells = cellResults.ToArray()
             };
+
             return result;
         }
 

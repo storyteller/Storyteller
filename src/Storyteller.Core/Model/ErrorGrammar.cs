@@ -19,7 +19,7 @@ namespace Storyteller.Core.Model
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            return new InvalidGrammarStep(step.Id, _message);
+            return new InvalidGrammarStep(new StepValues(step.Id), _message);
         }
 
         GrammarModel IGrammar.Compile(Conversions conversions)

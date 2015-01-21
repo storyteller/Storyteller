@@ -2,6 +2,7 @@
 using FubuTestingSupport;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Results;
@@ -16,7 +17,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             var executor = MockRepository.GenerateMock<ISpecExecutor>();
 
-            var step = new InvalidGrammarStep("foo", "grammar is wonky");
+            var step = new InvalidGrammarStep(new StepValues("foo"), "grammar is wonky");
 
             step.AcceptVisitor(executor);
 
@@ -28,7 +29,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             var context = SpecContext.ForTesting();
 
-            var step = new InvalidGrammarStep("the id", "grammar is wonky");
+            var step = new InvalidGrammarStep(new StepValues("the id"), "grammar is wonky");
 
             step.Execute(context);
 

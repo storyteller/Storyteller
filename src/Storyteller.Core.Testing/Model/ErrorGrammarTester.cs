@@ -2,6 +2,7 @@
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
+using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 
@@ -32,7 +33,7 @@ namespace Storyteller.Core.Testing.Model
             var grammar = new ErrorGrammar("bad", "Bad!");
 
             grammar.As<IGrammar>().CreatePlan(new Step("foo") {Id = "1"}, TestingContext.Library)
-                .ShouldEqual(new InvalidGrammarStep("1", "Grammar 'bad' is in an invalid state. See the grammar errors"));
+                .ShouldEqual(new InvalidGrammarStep(new StepValues("1"), "Grammar 'bad' is in an invalid state. See the grammar errors"));
         }
     }
 }

@@ -1,19 +1,18 @@
-﻿using System;
-using Storyteller.Core.Engine;
+﻿using Storyteller.Core.Conversion;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class InvalidGrammarStep : ILineExecution
+    public class InvalidGrammarStep : LineStepBase
     {
+        private readonly StepValues _values;
 
-        public InvalidGrammarStep(string id, string message)
+        public InvalidGrammarStep(StepValues values, string message) : base(values)
         {
-            Id = id;
+            _values = values;
             Message = message;
         }
 
-        public string Id { get; private set; }
         public string Message { get; private set; }
 
         public object Position
@@ -21,36 +20,26 @@ namespace Storyteller.Core.Grammars
             get { return null; }
         }
 
-        public void Execute(ISpecContext context)
+        protected override StepResult execute(ISpecContext context)
         {
-            var result = new StepResult(Id, ResultStatus.error)
+            var result = new StepResult(_values.Id, ResultStatus.error)
             {
                 error = Message
             };
 
-            context.LogResult(result);
-        }
-
-        public int Count()
-        {
-            return 1;
-        }
-
-        public void AcceptVisitor(ISpecExecutor executor)
-        {
-            executor.Line(this);
+            return result;
         }
 
         protected bool Equals(InvalidGrammarStep other)
         {
-            return string.Equals(Id, other.Id) && string.Equals(Message, other.Message);
+            return string.Equals(_values.Id, other._values.Id) && string.Equals(Message, other.Message);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((InvalidGrammarStep) obj);
         }
 
@@ -58,13 +47,14 @@ namespace Storyteller.Core.Grammars
         {
             unchecked
             {
-                return ((Id != null ? Id.GetHashCode() : 0)*397) ^ (Message != null ? Message.GetHashCode() : 0);
+                return ((_values.Id != null ? _values.Id.GetHashCode() : 0)*397) ^
+                       (Message != null ? Message.GetHashCode() : 0);
             }
         }
 
         public override string ToString()
         {
-            return string.Format("Invalid Grammar on Step: {0}, Message: {1}", Id, Message);
+            return string.Format("Invalid Grammar on Step: {0}, Message: {1}", _values.Id, Message);
         }
     }
 }
