@@ -27,6 +27,32 @@ namespace Storyteller.Core.Testing.Model
         }
 
         [Test]
+        public void happy_check_for_a_simple_equals_match()
+        {
+            var values = new StepValues("1");
+
+            values.Store("a", 1);
+
+            Cell.For<int>("a").Check(values, 1)
+                .ShouldEqual(CellResult.Success("a"));
+
+
+        }
+
+        [Test]
+        public void sad_path_check_for_a_simple_equals_match()
+        {
+            var values = new StepValues("1");
+            
+
+            values.Store("a", 1);
+
+            Cell.For<int>("a").Check(values, 2)
+                .ShouldEqual(CellResult.Failure("a", "2"));
+
+        }
+
+        [Test]
         public void matches_simply()
         {
             var cell = new Cell(CellHandling.Basic(), "a", typeof(int));

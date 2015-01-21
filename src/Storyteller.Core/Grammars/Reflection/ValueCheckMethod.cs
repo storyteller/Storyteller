@@ -38,7 +38,7 @@ namespace Storyteller.Core.Grammars.Reflection
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
             var actual = _invocation.Invoke(values);
-            yield return values.Check(context, ReturnCell.Key, actual);
+            yield return ReturnCell.Check(values, actual);
         }
 
         protected override string format()

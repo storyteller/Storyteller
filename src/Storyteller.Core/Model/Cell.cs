@@ -64,6 +64,16 @@ namespace Storyteller.Core.Model
             }
         }
 
+        public CellResult Check(StepValues values, object actual)
+        {
+            // TODO: Could be Predicate<T> -- figure out how to use this
+
+            var expected = values.Get(Key);
+            return _equivalence(expected, actual) ? 
+                CellResult.Success(Key) : 
+                CellResult.Failure(Key, actual.ToString());
+        }
+
         public bool Matches(StepValues one, StepValues two)
         {
             if (!one.Has(Key) || !two.Has(Key)) return false;
@@ -72,11 +82,6 @@ namespace Storyteller.Core.Model
             var v2 = two.Get(Key);
 
             return _equivalence(v1, v2);
-        }
-
-        public CellResult Check(object actual, StepValues values)
-        {
-            throw new NotImplementedException();
         }
 
         private readonly Action<Step, StepValues> _conversion;

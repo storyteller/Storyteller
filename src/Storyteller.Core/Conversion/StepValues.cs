@@ -38,20 +38,7 @@ namespace Storyteller.Core.Conversion
             });
         }
 
-        public CellResult Check(ISpecContext context, string key, object actual)
-        {
-            // TODO: Could be Predicate<T> -- figure out how to use this
 
-            var expected = Get(key);
-            if (expected.Equals(actual))
-            {
-                return CellResult.Success(key);
-            }
-            else
-            {
-                return CellResult.Failure(key, actual.ToString());
-            }
-        }
 
         public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)
         {

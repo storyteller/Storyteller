@@ -19,32 +19,7 @@ namespace Storyteller.Core.Testing.Conversion
             values.Get("a").ShouldEqual(1);
         }
 
-        [Test]
-        public void happy_check_for_a_simple_equals_match()
-        {
-            var context = SpecContext.ForTesting();
-            var values = new StepValues("1");
 
-            values.Store("a", 1);
-
-            values.Check(context, "a", 1)
-                .ShouldEqual(CellResult.Success("a"));
-
-
-        }
-
-        [Test]
-        public void sad_path_check_for_a_simple_equals_match()
-        {
-            var context = SpecContext.ForTesting();
-            var values = new StepValues("1");
-
-            values.Store("a", 1);
-
-            values.Check(context, "a", 2)
-                .ShouldEqual(CellResult.Failure("a", "2"));
-
-        }
 
         [Test]
         public void process_delayed_runtime_converters_successfully()

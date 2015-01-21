@@ -22,7 +22,8 @@ namespace Storyteller.Core.Grammars.Lines
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
             var actual = _source(context);
-            yield return values.Check(context, _key, actual);
+
+            yield return _cell.Check(values, actual);
         }
 
         protected override string format()
