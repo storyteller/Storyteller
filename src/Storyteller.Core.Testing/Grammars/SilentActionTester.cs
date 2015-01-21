@@ -11,7 +11,7 @@ using Storyteller.Core.Results;
 namespace Storyteller.Core.Testing.Grammars
 {
     [TestFixture]
-    public class FixtureActionTester
+    public class SilentActionTester
     {
         [Test]
         public void execute_happy_path()
