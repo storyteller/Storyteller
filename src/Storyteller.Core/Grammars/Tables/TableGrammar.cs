@@ -8,41 +8,6 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars.Tables
 {
-    public static class GrammarExtensions
-    {
-        public static TableGrammar AsTable(this IGrammar inner, string title)
-        {
-            return new TableGrammar(inner).Titled(title).LeafName("Rows");
-        }
-    }
-
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class ExposeAsTableAttribute : Attribute
-    {
-        private readonly string _label;
-        private readonly string _leafName;
-
-        public ExposeAsTableAttribute(string label, string leafName)
-        {
-            _label = label;
-            _leafName = leafName;
-        }
-
-        public ExposeAsTableAttribute(string label)
-            : this(label, "table")
-        {
-        }
-
-        public IGrammar Create(IGrammar inner)
-        {
-            return inner.AsTable(_label).LeafName(_leafName);
-        }
-
-        public string Label { get { return _label; } }
-
-        public string LeafName { get { return _leafName; } }
-    }
-
     public class TableGrammar : IGrammar
     {
         private readonly IGrammar _inner;
@@ -93,14 +58,17 @@ namespace Storyteller.Core.Grammars.Tables
 
         private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, Step parentStep)
         {
-            if (_before != null) yield return new SilentAction(Stage.before, _before, parentStep);
+            var section = parentStep.Collections[_leafName];
 
-            foreach (var row in parentStep.Collections[_leafName].Children.OfType<Step>())
+            if (_before != null) yield return new SilentAction(Stage.before, _before, section);
+
+            
+            foreach (var row in section.Children.OfType<Step>())
             {
                 yield return _inner.CreatePlan(row, library);
             }
 
-            if (_after != null) yield return new SilentAction(Stage.after, _after, parentStep);
+            if (_after != null) yield return new SilentAction(Stage.after, _after, section);
         }
 
         public GrammarModel Compile(Conversions conversions)

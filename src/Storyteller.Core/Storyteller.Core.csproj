@@ -61,6 +61,8 @@
     <Compile Include="Grammars\Reflection\ParsingExtensions.cs" />
     <Compile Include="Grammars\Reflection\ValueCheckMethod.cs" />
     <Compile Include="Grammars\SilentGrammar.cs" />
+    <Compile Include="Grammars\Tables\ExposeAsTableAttribute.cs" />
+    <Compile Include="Grammars\Tables\GrammarExtensions.cs" />
     <Compile Include="Grammars\Tables\TableGrammar.cs" />
     <Compile Include="IGrammar.cs" />
     <Compile Include="Conversion\IRuntimeConvertor.cs" />
