@@ -12,7 +12,7 @@ end
 
 @solution = FubuRake::Solution.new do |sln|
   sln.compile = {
-    :solutionfile => 'src/Storyteller.sln'
+    :solutionfile => 'src/StoryTeller.sln'
   }
 
   sln.assembly_info = {
