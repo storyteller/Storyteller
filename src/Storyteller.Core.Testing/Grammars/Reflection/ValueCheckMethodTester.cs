@@ -64,7 +64,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
         {
             ValueCheckMethod
                 .For(new Target(), x => x.Fullname(null, null))
-                .Compile(Conversions.Basic())
+                .Compile(CellHandling.Basic())
                 .ShouldBeOfType<Sentence>()
                 .format.ShouldEqual("The fullname for {first} & {second} should be {expected}");
         }
@@ -74,7 +74,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
         {
             ValueCheckMethod
                 .For(new Target(), x => x.Fullname3(null, null))
-                .Compile(Conversions.Basic())
+                .Compile(CellHandling.Basic())
                 .ShouldBeOfType<Sentence>()
                 .format.ShouldEqual("Fullname3({first}, {last}) should be {returnValue}");
         }

@@ -22,15 +22,15 @@ namespace Storyteller.Core.Grammars.Lines
 
         protected abstract string format();
 
-        protected virtual IEnumerable<Cell> buildCells(Conversions conversions)
+        protected virtual IEnumerable<Cell> buildCells(CellHandling cellHandling)
         {
             return Enumerable.Empty<Cell>();
         }
 
-        public GrammarModel Compile(Conversions conversions)
+        public GrammarModel Compile(CellHandling cells)
         {
             // Let the UI handle the format errors
-            _cells = buildCells(conversions).ToArray();
+            _cells = buildCells(cells).ToArray();
             return new Sentence
             {
                 cells = _cells,

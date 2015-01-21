@@ -16,7 +16,7 @@ namespace Storyteller.Core.Testing.Model
         {
             var serializer = new Newtonsoft.Json.JsonSerializer();
 
-            var cell = new Cell(Conversions.Basic(), "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
 
             var writer = new StringWriter();
             serializer.Serialize(writer, cell);

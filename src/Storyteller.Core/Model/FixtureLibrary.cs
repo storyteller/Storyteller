@@ -42,14 +42,14 @@ namespace Storyteller.Core.Model
 
 
         // TODO -- do something about Fixture's that blow up
-        public static Task<FixtureLibrary> CreateForAppDomain(Conversions conversions)
+        public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
         {
             var fixtures = AppDomain.CurrentDomain.GetAssemblies().SelectMany(FixtureTypesFor)
                 .Select(type =>
                 {
                     return Task.Factory.StartNew(() =>
                     {
-                        return CreateCompiledFixture(conversions, type);
+                        return CreateCompiledFixture(cellHandling, type);
                     });
                 });
 
@@ -70,13 +70,13 @@ namespace Storyteller.Core.Model
 
         }
 
-        public static CompiledFixture CreateCompiledFixture(Conversions conversions, Type type)
+        public static CompiledFixture CreateCompiledFixture(CellHandling cellHandling, Type type)
         {
             var fixture = Activator.CreateInstance(type).As<IFixture>();
             return new CompiledFixture
             {
                 Fixture = fixture,
-                Model = fixture.Compile(conversions)
+                Model = fixture.Compile(cellHandling)
             };
         }
 

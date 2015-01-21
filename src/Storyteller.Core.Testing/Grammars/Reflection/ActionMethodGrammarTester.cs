@@ -18,7 +18,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
         public void select_default_format()
         {
            var grammar = ActionMethodGrammar.Create(x => x.Go(null, 0, 0), theTarget);
-           var model = grammar.Compile(Conversions.Basic()).ShouldBeOfType<Sentence>();
+           var model = grammar.Compile(CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
             model.format.ShouldEqual("Go({name}, {age}, {percentAwake})");
 
@@ -29,7 +29,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
         public void select_format_by_names()
         {
             var grammar = ActionMethodGrammar.Create(x => x.FancyGo(null, 0, 0), theTarget);
-            var model = grammar.Compile(Conversions.Basic()).ShouldBeOfType<Sentence>();
+            var model = grammar.Compile(CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
             model.format.ShouldEqual("fancy go {name}, {age}, {percentAwake}");
         }
@@ -38,7 +38,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
         public void execute()
         {
             var grammar = ActionMethodGrammar.Create(x => x.Go(null, 0, 0), theTarget);
-            grammar.Compile(Conversions.Basic()).ShouldBeOfType<Sentence>();
+            grammar.Compile(CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
             var values = new StepValues("id");
             values.Store("name", "Jeremy");

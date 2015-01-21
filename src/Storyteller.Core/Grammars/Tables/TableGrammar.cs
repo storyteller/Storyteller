@@ -71,9 +71,9 @@ namespace Storyteller.Core.Grammars.Tables
             if (_after != null) yield return new SilentAction(Stage.after, _after, section);
         }
 
-        public GrammarModel Compile(Conversions conversions)
+        public GrammarModel Compile(CellHandling cells)
         {
-            var innerModel = _inner.Compile(conversions).As<IModelWithCells>();
+            var innerModel = _inner.Compile(cells).As<IModelWithCells>();
 
             return new Table
             {

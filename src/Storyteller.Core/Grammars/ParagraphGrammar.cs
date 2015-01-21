@@ -29,9 +29,9 @@ namespace Storyteller.Core.Grammars
             return new CompositeExecution(children);
         }
 
-        public GrammarModel Compile(Conversions conversions)
+        public GrammarModel Compile(CellHandling cells)
         {
-            var childrenModels = Children.Select(_ => _.Compile(conversions)).ToArray();
+            var childrenModels = Children.Select(_ => _.Compile(cells)).ToArray();
             return new Paragraph{children = childrenModels, title = _title};
         }
     }

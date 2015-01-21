@@ -13,7 +13,7 @@ namespace Storyteller.Core.Testing.Grammars
         [Test]
         public void compile_just_returns_the_silent_flyweight()
         {
-            new SilentGrammar(1, c => { }).Compile(Conversions.Basic())
+            new SilentGrammar(1, c => { }).Compile(CellHandling.Basic())
                 .ShouldBeTheSameAs(Silent.Flyweight);
         }
 

@@ -19,7 +19,7 @@ namespace Storyteller.Core.Grammars.Reflection
             var method = ReflectionHelper.GetMethod(expression);
             var grammar = new ValueCheckMethod(method, target);
 
-            grammar.Compile(Conversions.Basic());
+            grammar.Compile(CellHandling.Basic());
 
             return grammar;
         }
@@ -46,14 +46,14 @@ namespace Storyteller.Core.Grammars.Reflection
             return _method.DeriveFormat();
         }
 
-        protected override IEnumerable<Cell> buildCells(Conversions conversions)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
         {
-            foreach (var cell in _method.GetParameters().Select(x => Cell.For(conversions, x)))
+            foreach (var cell in _method.GetParameters().Select(x => Cell.For(cellHandling, x)))
             {
                 yield return cell;
             }
 
-            ReturnCell = Cell.For(conversions, _method.ReturnParameter);
+            ReturnCell = Cell.For(cellHandling, _method.ReturnParameter);
             ReturnCell.output = true;
             if (ReturnCell.Key.IsEmpty())
             {

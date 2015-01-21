@@ -23,7 +23,7 @@ namespace Storyteller.Core.Engine
         public SpecRunner(ISystem system)
         {
             _system = system;
-            _library = Task.Factory.StartNew(() => FixtureLibrary.CreateForAppDomain(Conversions.Basic()))
+            _library = Task.Factory.StartNew(() => FixtureLibrary.CreateForAppDomain(CellHandling.Basic()))
                 .ContinueWith(t =>
                 {
                     // TODO -- message out the fixture library

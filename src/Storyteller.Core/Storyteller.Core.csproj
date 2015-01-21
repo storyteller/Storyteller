@@ -49,6 +49,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AliasAsAttribute.cs" />
+    <Compile Include="CellHandling.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
     <Compile Include="Equivalence\ArrayEquivalencyPolicy.cs" />
     <Compile Include="Equivalence\Equalizer.cs" />

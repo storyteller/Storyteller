@@ -7,7 +7,7 @@ namespace Storyteller.Core
     {
         bool IsHidden();
 
-        FixtureModel Compile(Conversions conversions);
+        FixtureModel Compile(CellHandling conversions);
 
         IGrammar GrammarFor(string key);
 

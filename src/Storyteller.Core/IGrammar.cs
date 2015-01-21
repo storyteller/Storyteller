@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Storyteller.Core.Conversion;
-using Storyteller.Core.Model;
+﻿using Storyteller.Core.Model;
 
 namespace Storyteller.Core
 {
@@ -8,6 +6,6 @@ namespace Storyteller.Core
     {
         IExecutionStep CreatePlan(Step step, FixtureLibrary library);
 
-        GrammarModel Compile(Conversions conversions);
+        GrammarModel Compile(CellHandling cells);
     }
 }

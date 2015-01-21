@@ -27,11 +27,11 @@ namespace Storyteller.Core.Grammars
             return section.CreatePlan(library, _fixture);
         }
 
-        public GrammarModel Compile(Conversions conversions)
+        public GrammarModel Compile(CellHandling cells)
         {
             return new EmbeddedSection
             {
-                fixture = _fixture.Compile(conversions),
+                fixture = _fixture.Compile(cells),
                 collection = _leafName,
                 title = Title,
             };

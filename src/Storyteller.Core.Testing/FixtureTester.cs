@@ -76,7 +76,7 @@ namespace Storyteller.Core.Testing
         {
             var fixture = new FixtureWithExplicits();
 
-            fixture.Compile(Conversions.Basic()).grammars.ShouldHaveTheSameElementsAs(
+            fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
                 new StubGrammarModel{key = "a",},
                 new StubGrammarModel{key = "b",},
                 new StubGrammarModel{key = "c",}
@@ -107,7 +107,7 @@ namespace Storyteller.Core.Testing
         {
             var fixture = new FixtureWithProgrammaticGrammars();
 
-            fixture.Compile(Conversions.Basic()).grammars.ShouldHaveTheSameElementsAs(
+            fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
                 new StubGrammarModel { key = "foo", },
                 new StubGrammarModel { key = "bar", },
                 new StubGrammarModel { key = "baz", }
@@ -128,7 +128,7 @@ namespace Storyteller.Core.Testing
         {
             var fixture = new FixtureWithGrammarAlias();
 
-            fixture.Compile(Conversions.Basic()).grammars.ShouldHaveTheSameElementsAs(
+            fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
                 new StubGrammarModel { key = "GoAlias"}
                 );
         }
@@ -142,7 +142,7 @@ namespace Storyteller.Core.Testing
         public void builds_default_title_in_model()
         {
             new DefaultTitleFixture()
-                .Compile(Conversions.Basic())
+                .Compile(CellHandling.Basic())
                 .title.ShouldEqual("Default Title");
         }
 
@@ -158,7 +158,7 @@ namespace Storyteller.Core.Testing
         public void builds_model_with_explicit_title()
         {
             new ExplicitTitleFixture()
-                .Compile(Conversions.Basic())
+                .Compile(CellHandling.Basic())
                 .title.ShouldEqual("The special title");
         }
 
@@ -194,7 +194,7 @@ namespace Storyteller.Core.Testing
             throw new System.NotImplementedException();
         }
 
-        public GrammarModel Compile(Conversions conversions)
+        public GrammarModel Compile(CellHandling cells)
         {
             return new StubGrammarModel();
         }

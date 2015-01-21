@@ -11,7 +11,7 @@ namespace Storyteller.Core.Testing.Grammars
         [Test]
         public void builds_for_all_the_non_hidden_fixtures()
         {
-            var task = FixtureLibrary.CreateForAppDomain(Conversions.Basic());
+            var task = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
             
             task.Wait();
 

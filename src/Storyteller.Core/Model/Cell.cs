@@ -16,26 +16,24 @@ namespace Storyteller.Core.Model
         /// <returns></returns>
         public static Cell For<T>(string key)
         {
-            return new Cell(Conversions.Basic(), key, typeof(T));
+            return new Cell(CellHandling.Basic(), key, typeof(T));
         }
 
-        public static Cell For(Conversions conversions, ParameterInfo parameter)
+        public static Cell For(CellHandling cells, ParameterInfo parameter)
         {
-            var cell = new Cell(conversions, parameter.Name, parameter.ParameterType);
+            var cell = new Cell(cells, parameter.Name, parameter.ParameterType);
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             return cell;
         }
 
-        // TODO -- add the equivalency stuff to conversions
         // TODO -- need this to return a grammar error somehow if a converter
-        //         does not exist!
-        public Cell(Conversions conversions, string key, Type type)
+        public Cell(CellHandling cells, string key, Type type)
         {
             Type = type;
             Key = key;
 
-            var converter = conversions.FindConverter(type);
+            var converter = cells.Conversions.FindConverter(type);
             if (converter == null)
             {
                 var message = "No converter found for type " + type.FullName;

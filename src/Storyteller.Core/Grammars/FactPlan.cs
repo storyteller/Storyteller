@@ -21,7 +21,7 @@ namespace Storyteller.Core.Grammars
             return new FactPlan(new StepValues(step.Id), this);
         }
 
-        public GrammarModel Compile(Conversions conversions)
+        public GrammarModel Compile(CellHandling cells)
         {
             return new Sentence
             {
