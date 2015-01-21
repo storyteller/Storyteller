@@ -5,5 +5,7 @@ namespace Storyteller.Core.Model
         public Silent() : base("silent")
         {
         }
+
+        public static readonly Silent Flyweight = new Silent();
     }
 }

@@ -43,6 +43,16 @@ namespace Storyteller.Core.Grammars
             _node = node;
         }
 
+        public Action<ISpecContext> Action
+        {
+            get { return _action; }
+        }
+
+        public Node Node
+        {
+            get { return _node; }
+        }
+
         public object Position
         {
             get { return _position; }
