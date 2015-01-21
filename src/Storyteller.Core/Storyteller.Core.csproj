@@ -50,6 +50,13 @@
     </Compile>
     <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
+    <Compile Include="Equivalence\ArrayEquivalencyPolicy.cs" />
+    <Compile Include="Equivalence\Equalizer.cs" />
+    <Compile Include="Equivalence\EquatablePolicy.cs" />
+    <Compile Include="Equivalence\EquivalenceChecker.cs" />
+    <Compile Include="Equivalence\IEqualizer.cs" />
+    <Compile Include="Equivalence\IEquivalenceCheckerPolicy.cs" />
+    <Compile Include="Equivalence\StandardEqualsPolicy.cs" />
     <Compile Include="Grammars\Attributes.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar.cs" />
     <Compile Include="Grammars\FactPlan.cs" />
