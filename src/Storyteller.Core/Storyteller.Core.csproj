@@ -55,6 +55,7 @@
     <Compile Include="Grammars\FactPlan.cs" />
     <Compile Include="Grammars\LineStepBase.cs" />
     <Compile Include="Grammars\Lines\CheckGrammar.cs" />
+    <Compile Include="Grammars\ParagraphGrammar.cs" />
     <Compile Include="Grammars\Reflection\ActionMethodGrammar.cs" />
     <Compile Include="Grammars\Reflection\MethodExtensions.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocation.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Model\MissingGrammar.cs" />
     <Compile Include="Model\GrammarError.cs" />
     <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\Paragraph.cs" />
     <Compile Include="Model\Section.cs" />
     <Compile Include="Model\Sentence.cs" />
     <Compile Include="Model\Silent.cs" />
