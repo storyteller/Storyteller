@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FubuCore.Reflection;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
@@ -173,77 +172,6 @@ namespace Storyteller.Core.Sets
         public Cell[] BuildCells(CellHandling handling)
         {
             throw new NotImplementedException();
-        }
-    }
-
-    public class ObjectComparison<T> : ISetComparison
-    {
-        private readonly IList<Accessor> _accessors = new List<Accessor>();
-        private readonly IList<Cell> _cells = new List<Cell>();
-
-        public Task<StepValues[]> Fetch(ISpecContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Cell[] BuildCells(CellHandling handling)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Compare(Accessor accessor)
-        {
-        }
-    }
-
-    public class SetVerification : GrammarModel
-    {
-        public Cell[] cells;
-        public string collection;
-        public bool ordered;
-        public string title;
-
-        public SetVerification()
-            : base("set-verification")
-        {
-        }
-    }
-
-    public class WrongOrder
-    {
-        public int actual;
-        public string id;
-
-        public WrongOrder(string id, int actual)
-        {
-            this.id = id;
-            this.actual = actual;
-        }
-
-        protected bool Equals(WrongOrder other)
-        {
-            return actual == other.actual && string.Equals(id, other.id);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != GetType()) return false;
-            return Equals((WrongOrder) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (actual*397) ^ (id != null ? id.GetHashCode() : 0);
-            }
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Order: {0}, Id: {1}", actual, id);
         }
     }
 }
