@@ -26,6 +26,40 @@ namespace Storyteller.Core.Testing.Model
             json.ShouldContain("\"key\":\"a\"");
         }
 
+        [Test]
+        public void matches_simply()
+        {
+            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
+            var values1 = new StepValues("foo");
+            values1.Store(cell.Key, 5);
+
+            var values2 = new StepValues("foo");
+            values2.Store(cell.Key, 5);
+
+            var values3 = new StepValues("foo");
+            values3.Store(cell.Key, 6);
+
+            cell.Matches(values1, values2).ShouldBeTrue();
+            cell.Matches(values1, values3).ShouldBeFalse();
+        }
+
+        [Test]
+        public void matches_array_()
+        {
+            var cell = new Cell(CellHandling.Basic(), "a", typeof(int[]));
+            var values1 = new StepValues("foo");
+            values1.Store(cell.Key, new[]{1, 2, 3});
+
+            var values2 = new StepValues("foo");
+            values2.Store(cell.Key, new[] { 1, 2, 3 });
+
+            var values3 = new StepValues("foo");
+            values3.Store(cell.Key, new[] { 1, 2, 4 });
+
+            cell.Matches(values1, values2).ShouldBeTrue();
+            cell.Matches(values1, values3).ShouldBeFalse();
+        }
+
         private StepValues convert(Cell cell, string rawValue)
         {
             var step = new Step("foo");

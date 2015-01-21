@@ -89,5 +89,10 @@ namespace Storyteller.Core.Conversion
             public string Raw;
             public IRuntimeConvertor Converter;
         }
+
+        public bool Has(string key)
+        {
+            return _values.ContainsKey(key);
+        }
     }
 }

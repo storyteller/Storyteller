@@ -3,6 +3,7 @@ using System.Reflection;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
 using Storyteller.Core.Conversion;
+using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Model
 {
@@ -33,6 +34,8 @@ namespace Storyteller.Core.Model
             Type = type;
             Key = key;
 
+            _equivalence = cells.Equivalence.CheckerFor(type);
+
             var converter = cells.Conversions.FindConverter(type);
             if (converter == null)
             {
@@ -61,6 +64,21 @@ namespace Storyteller.Core.Model
             }
         }
 
+        public bool Matches(StepValues one, StepValues two)
+        {
+            if (!one.Has(Key) || !two.Has(Key)) return false;
+
+            var v1 = one.Get(Key);
+            var v2 = two.Get(Key);
+
+            return _equivalence(v1, v2);
+        }
+
+        public CellResult Check(object actual, StepValues values)
+        {
+            throw new NotImplementedException();
+        }
+
         private readonly Action<Step, StepValues> _conversion;
 
         [JsonIgnore]
@@ -75,6 +93,8 @@ namespace Storyteller.Core.Model
         public string editor;
 
         public Option[] options;
+
+        private readonly Func<object, object, bool> _equivalence;
 
         public void ConvertValues(Step step, StepValues values)
         {
