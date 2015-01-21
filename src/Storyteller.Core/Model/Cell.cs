@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
@@ -107,5 +110,14 @@ namespace Storyteller.Core.Model
         }
 
         
+    }
+
+    // Tested through integration tests in the SetVerificationGrammar
+    public static class CellExtensions
+    {
+        public static bool Matches(this IEnumerable<Cell> cells, StepValues one, StepValues two)
+        {
+            return cells.All(x => x.Matches(one, two));
+        }
     }
 }
