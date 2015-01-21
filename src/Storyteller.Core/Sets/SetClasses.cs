@@ -125,11 +125,6 @@ namespace Storyteller.Core.Sets
         }
     }
 
-    public interface ISetMatcher
-    {
-        SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected, IEnumerable<StepValues> actual);
-    }
-
     public class UnorderedSetMatcher : ISetMatcher
     {
         public static readonly ISetMatcher Flyweight = new UnorderedSetMatcher();
@@ -150,11 +145,5 @@ namespace Storyteller.Core.Sets
         {
             throw new NotImplementedException();
         }
-    }
-
-    public interface ISetComparison
-    {
-        Task<StepValues[]> Fetch(ISpecContext context);
-        Cell[] BuildCells(CellHandling handling);
     }
 }

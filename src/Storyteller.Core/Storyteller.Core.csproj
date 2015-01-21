@@ -125,6 +125,8 @@
     <Compile Include="Results\ResultStatus.cs" />
     <Compile Include="Results\StepResult.cs" />
     <Compile Include="Results\TimedOut.cs" />
+    <Compile Include="Sets\ISetComparison.cs" />
+    <Compile Include="Sets\ISetMatcher.cs" />
     <Compile Include="Sets\ObjectComparison.cs" />
     <Compile Include="Sets\SetClasses.cs" />
     <Compile Include="Sets\SetVerification.cs" />
