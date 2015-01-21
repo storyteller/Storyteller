@@ -13,8 +13,8 @@ namespace StoryTeller.Testing
 {
     public static class DataMother
     {
-		public static readonly string THE_GRAMMAR_FILE = Path.Combine ("..", "..", "..", "..", "samples", "grammers.xml");
-		public static readonly string THE_MATH_FILE = Path.Combine ("..", "..", "..", "..", "samples", "math{0}.xml");
+		public static readonly string THE_GRAMMAR_FILE = Path.Combine ("..", "..", "..", "..", "samples", "grammars.xml");
+		public static readonly string THE_MATH_FILE = Path.Combine ("..", "..", "..", "..", "samples", "math.xml");
 
         public static Project MathProject()
         {
@@ -54,7 +54,7 @@ namespace StoryTeller.Testing
 
         public static string MathProjectFile()
         {
-			return string.Format(THE_MATH_FILE, Platform.IsUnix() ? "-nix" : "");
+			return THE_MATH_FILE;
         }
 
         public static FixtureLibrary MathLibrary()
