@@ -51,7 +51,7 @@ namespace Storyteller.Core.Testing.Grammars
             var ex = new DivideByZeroException();
 
             var section = new Section("Math") { Id = "5" };
-            var action = new SilentAction(Stage.teardown, x => { throw ex; }, section);
+            var action = SilentAction.AsCritical(Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 

@@ -34,7 +34,7 @@ namespace Storyteller.Core.Model
 
         private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, IFixture fixture)
         {
-            yield return new SilentAction(Stage.setup, x =>
+            yield return SilentAction.AsCritical(Stage.setup, x =>
             {
                 fixture.Context = x;
                 fixture.SetUp();
@@ -47,7 +47,7 @@ namespace Storyteller.Core.Model
                 yield return grammar.CreatePlan(step, library);
             }
 
-            yield return new SilentAction(Stage.teardown, x => fixture.TearDown(), this);
+            yield return SilentAction.AsCritical(Stage.teardown, x => fixture.TearDown(), this);
         } 
     }
 }

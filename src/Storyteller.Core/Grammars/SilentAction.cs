@@ -2,7 +2,6 @@
 using FubuCore;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
-using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
@@ -10,19 +9,43 @@ namespace Storyteller.Core.Grammars
     {
         private readonly Action<ISpecContext> _action;
         private readonly Node _node;
-        private readonly Stage _stage;
+        private readonly object _position;
 
-        // TODO -- may change 'Stage stage' to object position when we hit paragraphs
-        public SilentAction(Stage stage, Action<ISpecContext> action, Node node)
+        public static SilentAction AsCritical(object position, Action<ISpecContext> action, Node node)
         {
-            _stage = stage;
+            Action<ISpecContext> wrapped = c =>
+            {
+                try
+                {
+                    action(c);
+                }
+                catch (StorytellerCriticalException)
+                {
+                    throw;
+                }
+                catch (StorytellerCatastrophicException)
+                {
+                    throw;
+                }
+                catch (Exception e)
+                {
+                    throw new StorytellerCriticalException("Failed at position '{0}'".ToFormat(position), e);
+                }
+            };
+
+            return new SilentAction(position, wrapped, node);
+        }
+
+        public SilentAction(object position, Action<ISpecContext> action, Node node)
+        {
+            _position = position;
             _action = action;
             _node = node;
         }
 
-        public Stage Stage
+        public object Position
         {
-            get { return _stage; }
+            get { return _position; }
         }
 
         public int Count()
@@ -45,8 +68,9 @@ namespace Storyteller.Core.Grammars
             }
             catch (Exception ex)
             {
-                context.LogException(_node.Id, new StorytellerCriticalException("Failed in stage '{0}'".ToFormat(_stage), ex),
-                    _stage);
+                context.LogException(_node.Id,
+                    ex,
+                    _position);
             }
         }
     }

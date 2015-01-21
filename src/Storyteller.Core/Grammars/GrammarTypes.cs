@@ -23,7 +23,7 @@ DOES NOT APPLY     * ReflectionGrammar -- base class that calls a method. Think 
 NOT GOING TO DO     * ServiceActionGrammar<TService, TCellType> -- calls a service with an action 
 NOT GOING TO DO     * ServiceAssertionGrammar<TService, TCellType> -- calls a service with a Func and checks the value
      * SetPropertyGrammar -- sets a property on the current object
-     * TableGrammar - 
+DONE     * TableGrammar - 
      * TableLineGrammar - used w/ DecisionTableGrammar
 DONE     * ValueCheckMethod - calls a method and checks the return value
 

@@ -10,6 +10,4 @@ namespace Storyteller.Core.Model
         }
 
     }
-
-
 }
