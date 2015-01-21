@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using FubuCore.Reflection;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
-using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Sets
 {
     public class SetVerificationGrammar : IGrammar
     {
-        private readonly string _title;
-        private readonly string _leafName;
         private readonly ISetComparison _comparison;
+        private readonly string _leafName;
+        private readonly string _title;
         private Cell[] _cells;
         private bool _ordered;
 
@@ -28,18 +25,12 @@ namespace Storyteller.Core.Sets
             _ordered = false;
         }
 
-        public SetVerificationGrammar Ordered()
-        {
-            _ordered = true;
-            return this;
-        }
-
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            var section = step
+            Section section = step
                 .Collections[_leafName];
 
-            var expected = section
+            IEnumerable<StepValues> expected = section
                 .Children.OfType<Step>()
                 .Select(row => _cells.ToStepValues(row));
 
@@ -60,17 +51,24 @@ namespace Storyteller.Core.Sets
                 ordered = _ordered
             };
         }
+
+        public SetVerificationGrammar Ordered()
+        {
+            _ordered = true;
+            return this;
+        }
     }
 
     public class VerificationSetPlan : ILineExecution
     {
-        private readonly Section _section;
-        private readonly ISetMatcher _matcher;
+        private readonly Cell[] _cells;
         private readonly ISetComparison _comparison;
         private readonly IEnumerable<StepValues> _expected;
-        private readonly Cell[] _cells;
+        private readonly ISetMatcher _matcher;
+        private readonly Section _section;
 
-        public VerificationSetPlan(Section section, ISetMatcher matcher, ISetComparison comparison, IEnumerable<StepValues> expected, Cell[] cells)
+        public VerificationSetPlan(Section section, ISetMatcher matcher, ISetComparison comparison,
+            IEnumerable<StepValues> expected, Cell[] cells)
         {
             _section = section;
             _matcher = matcher;
@@ -105,30 +103,27 @@ namespace Storyteller.Core.Sets
                 {
                     x.DoDelayedConversions(context);
                     if (!x.Errors.Any()) return;
-                    
-                    var result = x.ToConversionErrorResult();
-                    context.LogResult(result);
+
+                    context.LogResult(x.ToConversionErrorResult());
                 });
             });
 
             Task.WaitAll(fetch, convert);
 
-            if (!fetch.IsFaulted && _expected.All(x => !x.HasErrors()))
-            {
-                SetVerificationResult result = CreateResults(_expected, fetch.Result);
-                context.LogResult(result);
-            }
+            if (fetch.IsFaulted || _expected.Any(x => x.HasErrors())) return;
+
+            context.LogResult(CreateResults(_expected, fetch.Result));
         }
+
+        public object Position { get; set; }
 
         public SetVerificationResult CreateResults(IEnumerable<StepValues> expected, IEnumerable<StepValues> actual)
         {
-            var result = _matcher.Match(_cells, expected, actual);
+            SetVerificationResult result = _matcher.Match(_cells, expected, actual);
             result.id = _section.Id;
 
             return result;
         }
-
-        public object Position { get; set; }
     }
 
     public interface ISetMatcher
@@ -138,22 +133,24 @@ namespace Storyteller.Core.Sets
 
     public class UnorderedSetMatcher : ISetMatcher
     {
-        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected, IEnumerable<StepValues> actual)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public static readonly ISetMatcher Flyweight = new UnorderedSetMatcher();
+
+        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected,
+            IEnumerable<StepValues> actual)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class OrderedSetMatcher : ISetMatcher
     {
-        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected, IEnumerable<StepValues> actual)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public static readonly ISetMatcher Flyweight = new OrderedSetMatcher();
+
+        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected,
+            IEnumerable<StepValues> actual)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public interface ISetComparison
@@ -184,11 +181,6 @@ namespace Storyteller.Core.Sets
         private readonly IList<Accessor> _accessors = new List<Accessor>();
         private readonly IList<Cell> _cells = new List<Cell>();
 
-        public void Compare(Accessor accessor)
-        {
-            
-        }
-
         public Task<StepValues[]> Fetch(ISpecContext context)
         {
             throw new NotImplementedException();
@@ -198,74 +190,23 @@ namespace Storyteller.Core.Sets
         {
             throw new NotImplementedException();
         }
+
+        public void Compare(Accessor accessor)
+        {
+        }
     }
 
     public class SetVerification : GrammarModel
     {
         public Cell[] cells;
         public string collection;
-        public string title;
         public bool ordered;
+        public string title;
 
         public SetVerification()
             : base("set-verification")
         {
         }
-    }
-
-    public class SetVerificationResult : IResultMessage
-    {
-        private readonly IList<string> _matches = new List<string>();
-        private readonly IList<string> _missing = new List<string>();
-        private readonly IList<IDictionary<string, object>> _extras = new List<IDictionary<string, object>>();
-        private readonly IList<WrongOrder> _wrongOrders = new List<WrongOrder>(); 
-
-        public string[] matches
-        {
-            get { return _matches.ToArray(); }
-        }
-
-        public string[] missing
-        {
-            get { return _missing.ToArray(); }
-        }
-
-        public IDictionary<string, object>[] extras
-        {
-            get { return _extras.ToArray(); }
-        } 
-
-        public void MarkMatched(string id)
-        {
-            _matches.Add(id);
-        }
-
-        public void MarkExtra(StepValues values)
-        {
-            _extras.Add(values.RawData);
-        }
-
-        public void MarkMissing(string id)
-        {
-            _missing.Add(id);
-        }
-
-        public void MarkWrongOrder(string id, int actual)
-        {
-            _wrongOrders.Add(new WrongOrder(id, actual));
-        }
-
-        public WrongOrder[] wrongOrdered
-        {
-            get { return _wrongOrders.ToArray(); }
-        }
-
-        public void Tabulate(Counts counts)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string id { get; set; }
     }
 
     public class WrongOrder
@@ -288,7 +229,7 @@ namespace Storyteller.Core.Sets
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((WrongOrder) obj);
         }
 
