@@ -129,6 +129,7 @@
     <Compile Include="Sets\SetClasses.cs" />
     <Compile Include="Sets\SetVerification.cs" />
     <Compile Include="Sets\SetVerificationResult.cs" />
+    <Compile Include="Sets\StringListComparison.cs" />
     <Compile Include="Sets\WrongOrder.cs" />
     <Compile Include="SpecContext.cs" />
     <Compile Include="StoryTellerAssert.cs" />

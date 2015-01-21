@@ -157,21 +157,4 @@ namespace Storyteller.Core.Sets
         Task<StepValues[]> Fetch(ISpecContext context);
         Cell[] BuildCells(CellHandling handling);
     }
-
-    public class StringListComparison : ISetComparison
-    {
-        public StringListComparison(string key, Func<ISpecContext, IEnumerable<string>> source)
-        {
-        }
-
-        public Task<StepValues[]> Fetch(ISpecContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Cell[] BuildCells(CellHandling handling)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

@@ -100,6 +100,7 @@
     <Compile Include="Results\StepResultTester.cs" />
     <Compile Include="Sets\ObjectComparisonTester.cs" />
     <Compile Include="Sets\SetVerificationResultTester.cs" />
+    <Compile Include="Sets\StringListComparisonTester.cs" />
     <Compile Include="SpecContextExtensions.cs" />
     <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
