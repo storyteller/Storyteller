@@ -26,7 +26,8 @@ namespace Storyteller.Core.Grammars
                 // TODO -- will need to care about position when we do Paragraph's
                 var result = new StepResult(values.Id, ResultStatus.ok)
                 {
-                    cells = values.Errors.ToArray()
+                    cells = values.Errors.ToArray(),
+                    position = Position
                 };
 
                 context.LogResult(result);
@@ -38,13 +39,17 @@ namespace Storyteller.Core.Grammars
             {
                 var result = execute(context);
 
+                result.position = Position;
+
                 context.LogResult(result);
             }
             catch (Exception ex)
             {
-                context.LogException(values.Id, ex);
+                context.LogException(values.Id, ex, Position);
             }
         }
+
+        public object Position { get; set; }
 
         public int Count()
         {

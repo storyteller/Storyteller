@@ -17,10 +17,13 @@ namespace Storyteller.Core.Testing.Grammars
         public void execute_happy_path()
         {
             var wasCalled = false;
-            var action = new SilentAction(Stage.setup, x => wasCalled = true, new Section("Math"));
-            action.Execute(SpecContext.ForTesting());
+            var section = new Section("Math"){Id = "4"};
+            var action = new SilentAction(Stage.setup, x => wasCalled = true, section);
+            var context = SpecContext.ForTesting();
+            action.Execute(context);
 
             wasCalled.ShouldBeTrue();
+
         }
 
         [Test]

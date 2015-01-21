@@ -16,6 +16,7 @@ namespace Storyteller.Core.Testing.Grammars
         private StepValues values;
         private SpecContext context;
         private ILineGrammar theLineGrammar;
+        private int thePosition = 5;
 
 
         [SetUp]
@@ -28,7 +29,7 @@ namespace Storyteller.Core.Testing.Grammars
 
         private void afterExecuting()
         {
-            new LineStep(values, theLineGrammar).Execute(context);
+            new LineStep(values, theLineGrammar){Position = thePosition}.Execute(context);
         }
 
         [Test]
@@ -51,6 +52,22 @@ namespace Storyteller.Core.Testing.Grammars
         }
 
         [Test]
+        public void run_puts_the_position_on_the_result_happy_path()
+        {
+            var cells = new[]
+            {
+                new CellResult("a", ResultStatus.error), new CellResult("b", ResultStatus.error)
+            };
+
+            theLineGrammar.Stub(x => x.Execute(values, context)).Return(cells);
+
+            afterExecuting();
+
+            var result = context.Results.Single().ShouldBeOfType<StepResult>();
+            result.position.ShouldEqual(thePosition);
+        }
+
+        [Test]
         public void no_conversion_errors_but_the_action_blows_up()
         {
             var ex = new NotImplementedException();
@@ -58,7 +75,20 @@ namespace Storyteller.Core.Testing.Grammars
 
             afterExecuting();
 
-            context.AssertTheOnlyResultIs(new StepResult(values.Id, ResultStatus.error){error = ex.ToString()});
+            context.AssertTheOnlyResultIs(new StepResult(values.Id, ResultStatus.error){error = ex.ToString(), position = thePosition});
+        }
+
+
+        [Test]
+        public void no_conversion_errors_but_the_action_blows_up_sets_the_position()
+        {
+            var ex = new NotImplementedException();
+            theLineGrammar.Expect(x => x.Execute(values, context)).Throw(ex);
+
+            afterExecuting();
+
+            var result = context.Results.Single().ShouldBeOfType<StepResult>();
+            result.position.ShouldEqual(thePosition);
         }
 
         [Test]

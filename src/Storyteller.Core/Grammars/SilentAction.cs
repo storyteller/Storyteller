@@ -9,7 +9,6 @@ namespace Storyteller.Core.Grammars
     {
         private readonly Action<ISpecContext> _action;
         private readonly Node _node;
-        private readonly object _position;
 
         public static SilentAction AsCritical(object position, Action<ISpecContext> action, Node node)
         {
@@ -38,7 +37,7 @@ namespace Storyteller.Core.Grammars
 
         public SilentAction(object position, Action<ISpecContext> action, Node node)
         {
-            _position = position;
+            Position = position;
             _action = action;
             _node = node;
         }
@@ -53,10 +52,7 @@ namespace Storyteller.Core.Grammars
             get { return _node; }
         }
 
-        public object Position
-        {
-            get { return _position; }
-        }
+        public object Position { get; set; }
 
         public int Count()
         {
@@ -68,8 +64,7 @@ namespace Storyteller.Core.Grammars
             executor.Line(this);
         }
 
-        // TODO -- lift this out so that there's one wrapper for critical?
-        // Maybe put the critical into Fixture.SetUp instead?
+
         public void Execute(ISpecContext context)
         {
             try
@@ -80,7 +75,7 @@ namespace Storyteller.Core.Grammars
             {
                 context.LogException(_node.Id,
                     ex,
-                    _position);
+                    Position);
             }
         }
     }
