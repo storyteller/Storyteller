@@ -44,7 +44,6 @@ namespace StoryTeller.Execution
             _engine.StopConditions.TimeoutInSeconds = _project.TimeoutInSeconds;
             _engine.Handle(new ProjectLoaded(_project));
 
-            // TODO -- Bring this back when it gets smarter: https://github.com/DarthFubuMVC/StoryTeller2/issues/2
             //_engine.UseTeamCityListener();
             
 
@@ -94,7 +93,6 @@ namespace StoryTeller.Execution
         {
             var test = RunTest(testPath);
 
-            // TODO -- replace the mechanism to open the results in a browser?
 
             if (!test.WasSuccessful())
             {

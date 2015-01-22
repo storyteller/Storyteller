@@ -57,7 +57,6 @@ namespace Storyteller.Core.Model
             {
                 var library = new FixtureLibrary();
                 
-                // TODO -- try to use a zip to get this done
                 results.Result.Each(x => 
                 {
                     library.Fixtures[x.Fixture.Key] = x.Fixture;

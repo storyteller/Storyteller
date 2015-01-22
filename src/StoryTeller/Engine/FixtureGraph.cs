@@ -62,7 +62,6 @@ namespace StoryTeller.Engine
 
             var results = tasks.Select(x => x.Result);
 
-            // TODO -- blow up if duplicate fixture names
 
             results.SelectMany(x => x.FixtureTypes).Each(type => {
                 _fixtureTypes[type.GetFixtureAlias()] = type;

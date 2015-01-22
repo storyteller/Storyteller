@@ -30,7 +30,6 @@ namespace StoryTeller.DSL
             }
         }
 
-        // TODO -- test this!
         public Action<T> Do
         {
             set

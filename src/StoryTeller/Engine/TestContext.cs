@@ -49,7 +49,6 @@ namespace StoryTeller.Engine
         void Trace(string text);
         void Trace(HtmlTag tag);
 
-        // TODO -- ISP anyone?
         IGrammar FindGrammar(string grammarKey);
         void LoadFixture(string fixtureKey, ITestPart part);
         void LoadFixture(IFixture fixture, ITestPart part);

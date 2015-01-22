@@ -43,7 +43,6 @@ namespace StoryTeller.Engine
         {
             string output = test.LastResult.Counts.ToString();
             
-            //TODO:  replace by looking at TestResult
             if (test.LastResult.ExceptionText.IsNotEmpty()) output += " Exception: " + test.LastResult.ExceptionText;
             return output;
         }

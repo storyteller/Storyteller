@@ -18,7 +18,6 @@ namespace StoryTeller.DSL
             _grammar = grammar;
         }
 
-        // TODO -- want an overload that sets this directly
         public Func<T> Object
         {
             set

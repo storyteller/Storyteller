@@ -7,7 +7,6 @@ namespace StoryTeller.Execution
     [Serializable]
     public class TestExecutionRequest
     {
-        // TODO -- leave this here!
         private bool _breakOnExceptions;
         private bool _breakOnWrongs;
         [NonSerialized] private Test _test;

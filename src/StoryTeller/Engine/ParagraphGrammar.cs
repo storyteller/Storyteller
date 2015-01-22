@@ -121,7 +121,6 @@ namespace StoryTeller.Engine
             _grammars.Add(childGrammar);
         }
 
-        // TODO: tests!
         public void InsertBefore(IGrammar grammar)
         {
             _grammars.Insert(0, grammar);
@@ -195,7 +194,6 @@ namespace StoryTeller.Engine
             _grammar = grammar;
         }
 
-        // TODO:  HAS TO GET A TEST!!!!!!!!!!!
         public static CompositeGrammarBefore operator +(CompositeGrammarBefore expression, IGrammar grammar)
         {
             expression._grammar.InsertBefore(grammar);

@@ -60,7 +60,6 @@ namespace StoryTeller.DSL
             return grammar;
         }
 
-        // TODO -- overload that takes in the comparison
 
         public VerifySetExpression<T> Ordered()
         {

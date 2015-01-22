@@ -17,7 +17,6 @@ namespace StoryTeller.Execution
         {
             try
             {
-                // TODO -- need to figure about exceptions here
                 if (_runner != null) _runner.Dispose();
             }
             catch (Exception)
@@ -69,7 +68,6 @@ namespace StoryTeller.Execution
         {
             _publisher = (IEventPublisher)remotePublisher;
 
-            // TODO -- if fails, do a Thread.Sleep and try again
             _system = fixtureAssembly.FindSystem();
             ProjectFileSystem.RootFolder = fixtureAssembly.RootFolder;
 

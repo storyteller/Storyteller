@@ -273,7 +273,7 @@ namespace StoryTeller.Engine
             {
                 object value = context.Finder.FromString(rawValue, _type);
                 continuation(value);
-            } // TODO -- eliminate duplication
+            } 
             catch (FormatException)
             {
                 context.IncrementSyntaxErrors();

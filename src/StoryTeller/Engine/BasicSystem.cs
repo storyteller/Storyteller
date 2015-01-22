@@ -6,7 +6,6 @@ using FubuCore;
 
 namespace StoryTeller.Engine
 {
-    // TODO -- get tests around this thing.  Used heavy everyday already, but still
     public abstract class BasicSystem : ISystem
     {
         public IExecutionContext CreateContext()

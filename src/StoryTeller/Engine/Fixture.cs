@@ -177,7 +177,6 @@ namespace StoryTeller.Engine
             return grammar;
         }
 
-        // TODO: tests!
         public static VerifyDataTableExpression VerifyDataTable(Func<ITestContext, DataTable> dataSource)
         {
             return new VerifyDataTableExpression(dataSource);
@@ -188,13 +187,11 @@ namespace StoryTeller.Engine
             return new VerifyDataTableExpression(c => dataSource());
         }
 
-        // TODO: tests!
         public static VerifyDataTableExpression VerifyDataTable()
         {
             return new VerifyDataTableExpression();
         }
 
-        // TODO: tests!
         public static VerifyStringListExpression VerifyStringList(Func<ITestContext, IEnumerable<string>> dataSource)
         {
             return new VerifyStringListExpression(dataSource);
@@ -272,7 +269,6 @@ namespace StoryTeller.Engine
         }
 
 
-        // TODO: tests!
         public static EmbeddedSectionGrammar<T> Embed<T>(string label) where T : IFixture, new()
         {
             return new EmbeddedSectionGrammar<T>
@@ -282,7 +278,6 @@ namespace StoryTeller.Engine
         }
 
 
-        // TODO: tests!
         public static EmbeddedSectionGrammar<T> Inline<T>(string label) where T : IFixture, new()
         {
             return new EmbeddedSectionGrammar<T>
@@ -300,7 +295,6 @@ namespace StoryTeller.Engine
             }.LeafName(leafName);
         }
 
-        // TODO: tests!
         public static ParagraphGrammar CreateObject<T>(string title, Action<ObjectConstructionExpression<T>> action)
         {
             var grammar = new ParagraphGrammar(title);
@@ -310,7 +304,6 @@ namespace StoryTeller.Engine
             return grammar;
         }
 
-        // TODO: tests!
         public static DoGrammar CreateNewObject<T>() where T : new()
         {
             GrammarAction createObject = (step, context) => context.CurrentObject = new T();

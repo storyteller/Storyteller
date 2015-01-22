@@ -73,7 +73,6 @@ namespace StoryTeller.Execution
             Type[] specificAssemblyTypes = candidates.Where(x => x.Assembly.GetName().Name == AssemblyName).ToArray();
             if (specificAssemblyTypes.Count() == 1) return specificAssemblyTypes.Single();
 
-            // TODO -- might just wanna have this blow up later
 
             return null;
         }
@@ -84,7 +83,6 @@ namespace StoryTeller.Execution
             return Activator.CreateInstance(systemType).As<ISystem>();
         }
 
-        // TODO -- I like this pattern better than other things we've used
         public static IEnumerable<Assembly> FindApplicationAssemblies()
         {
             var list = new List<string> {AppDomain.CurrentDomain.SetupInformation.ApplicationBase};
@@ -98,7 +96,6 @@ namespace StoryTeller.Execution
             return list.SelectMany(AssembliesFromPath);
         }
 
-        // TODO -- this is so common here and in FubuMVC, just get something into FubuCore
         public static IEnumerable<Assembly> AssembliesFromPath(string path)
         {
             IEnumerable<string> assemblyPaths = Directory.GetFiles(path)

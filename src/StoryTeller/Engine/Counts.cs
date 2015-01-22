@@ -3,7 +3,6 @@ using System.Xml.Serialization;
 
 namespace StoryTeller.Engine
 {
-    // TODO -- get rid of the stupid serialization cruft
 
     [Serializable]
     public class Counts
