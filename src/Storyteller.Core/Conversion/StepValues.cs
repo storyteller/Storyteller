@@ -49,6 +49,11 @@ namespace Storyteller.Core.Conversion
         /// </summary>
         public bool IsMatched { get; set; }
 
+        /// <summary>
+        /// For set verification purposes
+        /// </summary>
+        public int Order { get; set; }
+
         public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)
         {
             _delayeds.Add(new Delayed
@@ -102,6 +107,17 @@ namespace Storyteller.Core.Conversion
         public bool HasErrors()
         {
             return Errors.Any();
+        }
+
+        
+    }
+
+    public static class StepValuesExtensions
+    {
+        public static void ApplyOrdering(this IEnumerable<StepValues> list)
+        {
+            var i = 0;
+            list.Each(x => x.Order = ++i);
         }
     }
 }

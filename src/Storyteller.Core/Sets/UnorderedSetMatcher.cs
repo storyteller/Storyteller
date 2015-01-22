@@ -9,7 +9,7 @@ namespace Storyteller.Core.Sets
     {
         public static readonly ISetMatcher Flyweight = new UnorderedSetMatcher();
 
-        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expectedValues,
+        public virtual SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expectedValues,
             IEnumerable<StepValues> actualValues)
         {
             var result = new SetVerificationResult();
@@ -23,14 +23,19 @@ namespace Storyteller.Core.Sets
                 }
                 else
                 {
-                    actual.IsMatched = true;
-                    result.MarkMatched(expected.Id);
+                    processMatch(actual, result, expected);
                 }
             }
 
             actualValues.Where(x => !x.IsMatched).Each(result.MarkExtra);
 
             return result;
+        }
+
+        protected virtual void processMatch(StepValues actual, SetVerificationResult result, StepValues expected)
+        {
+            actual.IsMatched = true;
+            result.MarkMatched(expected.Id);
         }
     }
 }

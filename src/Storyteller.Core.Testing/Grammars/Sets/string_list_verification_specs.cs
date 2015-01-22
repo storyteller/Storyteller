@@ -35,6 +35,79 @@ Name: whatever
         }
 
         [Test]
+        public void exact_match_by_simple_ordered()
+        {
+            StringListFixture.Strings.Clear();
+            StringListFixture.Strings.AddRange(new[] { "a", "b", "c" });
+
+            execute(@"
+Name: whatever
+=> StringList
+* SimpleFuncOrdered
+  -> Rows
+  * Row#1:expected=a
+  * Row#2:expected=b
+  * Row#3:expected=c
+
+");
+
+            CountsShouldBe(3, 0, 0, 0);
+        }
+
+        [Test]
+        public void exact_match_by_simple_ordered_out_of_order()
+        {
+            StringListFixture.Strings.Clear();
+            StringListFixture.Strings.AddRange(new[] { "b", "a", "c" });
+
+            execute(@"
+Name: whatever
+=> StringList
+* SimpleFuncOrdered
+  -> Rows
+  * Row#1:expected=a
+  * Row#2:expected=b
+  * Row#3:expected=c
+
+");
+
+            CountsShouldBe(1, 2, 0, 0);
+
+            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            result.wrongOrdered.OrderBy(x => x.id).ShouldHaveTheSameElementsAs(new WrongOrder("1", 2), new WrongOrder("2", 1));
+        }
+
+
+
+        [Test]
+        public void exact_match_by_simple_ordered_missing_and_extra()
+        {
+            StringListFixture.Strings.Clear();
+            StringListFixture.Strings.AddRange(new[] { "a", "b", "c", "extra" });
+
+
+
+            execute(@"
+Name: whatever
+=> StringList
+* SimpleFuncOrdered
+  -> Rows
+  * Row#1:expected=a
+  * Row#2:expected=b
+  * Row#3:expected=c
+  * Row#missing:expected=missing
+
+");
+
+            CountsShouldBe(3, 2, 0, 0);
+
+            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            result.missing.Single().ShouldEqual("missing");
+            result.extras.Single()["expected"].ShouldEqual("extra");
+        }
+
+
+        [Test]
         public void an_extra_a_missing_and_some_rights()
         {
             StringListFixture.Strings.Clear();
@@ -104,6 +177,12 @@ Name: whatever
         public IGrammar SimpleFunc()
         {
             return VerifyStringList(() => Strings).Titled("Simple String List");
+        }
+
+
+        public IGrammar SimpleFuncOrdered()
+        {
+            return VerifyStringList(() => Strings).Titled("Simple String List").Ordered();
         }
 
         public IGrammar ByContext()

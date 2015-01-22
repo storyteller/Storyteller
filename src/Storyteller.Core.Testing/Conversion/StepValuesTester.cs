@@ -19,7 +19,27 @@ namespace Storyteller.Core.Testing.Conversion
             values.Get("a").ShouldEqual(1);
         }
 
+        [Test]
+        public void apply_ordering()
+        {
+            var values = new StepValues[]
+            {
+                new StepValues(Guid.NewGuid().ToString()),
+                new StepValues(Guid.NewGuid().ToString()),
+                new StepValues(Guid.NewGuid().ToString()),
+                new StepValues(Guid.NewGuid().ToString()),
+                new StepValues(Guid.NewGuid().ToString()),
+                new StepValues(Guid.NewGuid().ToString())
+            };
 
+            values.ApplyOrdering();
+
+            for (var i = 0; i < values.Length; i++)
+            {
+                values[i].Order.ShouldEqual(i + 1);
+            }
+
+        }
 
         [Test]
         public void process_delayed_runtime_converters_successfully()

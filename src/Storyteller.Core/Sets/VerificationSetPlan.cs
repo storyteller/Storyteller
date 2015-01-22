@@ -1,76 +1,11 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Sets
 {
-    public class SetVerificationGrammar : IGrammar
-    {
-        private readonly ISetComparison _comparison;
-        private string _leafName;
-        private readonly string _title;
-        private Cell[] _cells;
-        private bool _ordered;
-
-        public SetVerificationGrammar(string title, string leafName, ISetComparison comparison)
-        {
-            _title = title;
-            _leafName = leafName;
-            _comparison = comparison;
-            _ordered = false;
-        }
-
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
-        {
-            var section = step
-                .Collections[_leafName];
-
-            var expected = section
-                .Children.OfType<Step>()
-                .Select(row => _cells.ToStepValues(row))
-                .ToArray();
-
-            var matcher = _ordered ? OrderedSetMatcher.Flyweight : UnorderedSetMatcher.Flyweight;
-
-            return new VerificationSetPlan(section, matcher, _comparison, expected, _cells);
-        }
-
-        public GrammarModel Compile(CellHandling cells)
-        {
-            _cells = _comparison.BuildCells(cells);
-
-            return new SetVerification
-            {
-                title = _title,
-                cells = _cells,
-                collection = _leafName,
-                ordered = _ordered
-            };
-        }
-
-        public SetVerificationGrammar Ordered()
-        {
-            _ordered = true;
-            return this;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="leafName"></param>
-        /// <returns></returns>
-        public SetVerificationGrammar LeafNameIs(string leafName)
-        {
-            _leafName = leafName;
-            return this;
-        }
-
-    }
-
     public class VerificationSetPlan : ILineExecution
     {
         private readonly Cell[] _cells;
@@ -137,17 +72,6 @@ namespace Storyteller.Core.Sets
             result.id = _section.Id;
 
             return result;
-        }
-    }
-
-    public class OrderedSetMatcher : ISetMatcher
-    {
-        public static readonly ISetMatcher Flyweight = new OrderedSetMatcher();
-
-        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expectedValues,
-            IEnumerable<StepValues> actualValues)
-        {
-            throw new NotImplementedException();
         }
     }
 }
