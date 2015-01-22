@@ -4,7 +4,7 @@ using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Sets;
 
-namespace Storyteller.Core.Testing.Sets
+namespace Storyteller.Core.Testing.Grammars.Sets
 {
     [TestFixture]
     public class StringListComparisonTester

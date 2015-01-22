@@ -30,7 +30,8 @@ namespace Storyteller.Core.Testing
         protected void execute(string text)
         {
             var spec = TextParser.Parse(text);
-            _context = new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token, Services);
+            var cancellationTokenSource = new CancellationTokenSource(5.Minutes());
+            _context = new SpecContext(new NulloExecutionObserver(), cancellationTokenSource.Token, Services);
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
@@ -63,6 +64,11 @@ namespace Storyteller.Core.Testing
             {
                 _expectations.Clear();
             }
+        }
+
+        protected SpecContext theContext
+        {
+            get { return _context; }
         }
 
         protected T ModelFor<T>(string fixtureName, string grammarName) where T : GrammarModel

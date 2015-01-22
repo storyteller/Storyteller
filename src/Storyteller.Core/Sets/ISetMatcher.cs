@@ -6,6 +6,6 @@ namespace Storyteller.Core.Sets
 {
     public interface ISetMatcher
     {
-        SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected, IEnumerable<StepValues> actual);
+        SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expectedValues, IEnumerable<StepValues> actualValues);
     }
 }

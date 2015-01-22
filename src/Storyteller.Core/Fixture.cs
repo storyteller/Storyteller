@@ -7,6 +7,7 @@ using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
 using Storyteller.Core.Conversion;
+using Storyteller.Core.DSL;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Grammars.Lines;
 using Storyteller.Core.Model;
@@ -290,5 +291,37 @@ namespace Storyteller.Core
                 Title = title
             };
         }
+
+        /// <summary>
+        /// Verify a list of string values
+        /// </summary>
+        /// <typeparam name="T">An application service that will be invoked to get the data</typeparam>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
+        public static VerifyStringListExpression VerifyStringList<T>(Func<T, IEnumerable<string>> dataSource)
+        {
+            return VerifyStringList(c => dataSource(c.Service<T>()));
+        }
+
+        /// <summary>
+        /// Verify a list of string values 
+        /// </summary>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
+        public static VerifyStringListExpression VerifyStringList(Func<ISpecContext, IEnumerable<string>> dataSource)
+        {
+            return new VerifyStringListExpression(dataSource);
+        }
+
+        /// <summary>
+        /// Verify a list of string values
+        /// </summary>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
+        public static VerifyStringListExpression VerifyStringList(Func<IEnumerable<string>> dataSource)
+        {
+            return VerifyStringList(c => dataSource());
+        }
+
     }
 }

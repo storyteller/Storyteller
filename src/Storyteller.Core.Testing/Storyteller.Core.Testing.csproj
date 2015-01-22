@@ -79,6 +79,8 @@
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
+    <Compile Include="Grammars\Sets\string_list_verification_specs.cs" />
+    <Compile Include="Grammars\Sets\UnorderedSetMatcherTester.cs" />
     <Compile Include="Grammars\SilentActionTester.cs" />
     <Compile Include="Grammars\FixtureLibraryTester.cs" />
     <Compile Include="Grammars\InvalidGrammarStepTester.cs" />
@@ -98,9 +100,9 @@
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />
-    <Compile Include="Sets\ObjectComparisonTester.cs" />
-    <Compile Include="Sets\SetVerificationResultTester.cs" />
-    <Compile Include="Sets\StringListComparisonTester.cs" />
+    <Compile Include="Grammars\Sets\ObjectComparisonTester.cs" />
+    <Compile Include="Grammars\Sets\SetVerificationResultTester.cs" />
+    <Compile Include="Grammars\Sets\StringListComparisonTester.cs" />
     <Compile Include="SpecContextExtensions.cs" />
     <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />

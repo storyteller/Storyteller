@@ -44,6 +44,11 @@ namespace Storyteller.Core.Conversion
             get { return _values; }
         }
 
+        /// <summary>
+        /// For set verification purposes
+        /// </summary>
+        public bool IsMatched { get; set; }
+
         public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)
         {
             _delayeds.Add(new Delayed

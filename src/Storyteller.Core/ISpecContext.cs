@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core
@@ -12,5 +13,6 @@ namespace Storyteller.Core
         T Service<T>();
 
         State State { get; }
+        CancellationToken Cancellation { get; }
     }
 }

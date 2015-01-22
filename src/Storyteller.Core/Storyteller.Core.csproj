@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="CellHandling.cs" />
+    <Compile Include="DSL\VerifyStringListExpression.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
     <Compile Include="Equivalence\ArrayEquivalencyPolicy.cs" />
     <Compile Include="Equivalence\Equalizer.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Sets\SetVerification.cs" />
     <Compile Include="Sets\SetVerificationResult.cs" />
     <Compile Include="Sets\StringListComparison.cs" />
+    <Compile Include="Sets\UnorderedSetMatcher.cs" />
     <Compile Include="Sets\WrongOrder.cs" />
     <Compile Include="SpecContext.cs" />
     <Compile Include="StoryTellerAssert.cs" />

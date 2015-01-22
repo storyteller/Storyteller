@@ -4,7 +4,7 @@ using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Sets;
 
-namespace Storyteller.Core.Testing.Sets
+namespace Storyteller.Core.Testing.Grammars.Sets
 {
     [TestFixture]
     public class SetVerificationResultTester

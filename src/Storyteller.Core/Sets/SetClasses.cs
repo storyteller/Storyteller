@@ -11,7 +11,7 @@ namespace Storyteller.Core.Sets
     public class SetVerificationGrammar : IGrammar
     {
         private readonly ISetComparison _comparison;
-        private readonly string _leafName;
+        private string _leafName;
         private readonly string _title;
         private Cell[] _cells;
         private bool _ordered;
@@ -26,14 +26,15 @@ namespace Storyteller.Core.Sets
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            Section section = step
+            var section = step
                 .Collections[_leafName];
 
-            IEnumerable<StepValues> expected = section
+            var expected = section
                 .Children.OfType<Step>()
-                .Select(row => _cells.ToStepValues(row));
+                .Select(row => _cells.ToStepValues(row))
+                .ToArray();
 
-            ISetMatcher matcher = _ordered ? OrderedSetMatcher.Flyweight : UnorderedSetMatcher.Flyweight;
+            var matcher = _ordered ? OrderedSetMatcher.Flyweight : UnorderedSetMatcher.Flyweight;
 
             return new VerificationSetPlan(section, matcher, _comparison, expected, _cells);
         }
@@ -56,6 +57,18 @@ namespace Storyteller.Core.Sets
             _ordered = true;
             return this;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="leafName"></param>
+        /// <returns></returns>
+        public SetVerificationGrammar LeafNameIs(string leafName)
+        {
+            _leafName = leafName;
+            return this;
+        }
+
     }
 
     public class VerificationSetPlan : ILineExecution
@@ -88,51 +101,42 @@ namespace Storyteller.Core.Sets
 
         public void Execute(ISpecContext context)
         {
-            var fetch = _comparison.Fetch(context).ContinueWith(t =>
+            var fetch = _comparison.Fetch(context);
+
+            _expected.Each(x =>
             {
-                // TODO -- do the Flatten() trick here on the aggregated exception
-                context.LogException(_section.Id, t.Exception);
+                x.DoDelayedConversions(context);
+                if (!x.Errors.Any()) return;
 
-                return t.Result;
-            }, TaskContinuationOptions.OnlyOnFaulted);
-
-            var convert = Task.Factory.StartNew(() =>
-            {
-                _expected.Each(x =>
-                {
-                    x.DoDelayedConversions(context);
-                    if (!x.Errors.Any()) return;
-
-                    context.LogResult(x.ToConversionErrorResult());
-                });
+                context.LogResult(x.ToConversionErrorResult());
             });
 
-            Task.WaitAll(fetch, convert);
+            if (_expected.Any(x => x.HasErrors())) return;
 
-            if (fetch.IsFaulted || _expected.Any(x => x.HasErrors())) return;
+            fetch.ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                {
+                    // TODO -- do the Flatten() trick here on the aggregated exception
+                    context.LogException(_section.Id, t.Exception);
+                }
 
-            context.LogResult(CreateResults(_expected, fetch.Result));
+                if (t.IsCompleted)
+                {
+                    var result = CreateResults(_expected, t.Result);
+                    context.LogResult(result);
+                }
+            }).Wait(context.Cancellation);
         }
 
         public object Position { get; set; }
 
         public SetVerificationResult CreateResults(IEnumerable<StepValues> expected, IEnumerable<StepValues> actual)
         {
-            SetVerificationResult result = _matcher.Match(_cells, expected, actual);
+            var result = _matcher.Match(_cells, expected, actual);
             result.id = _section.Id;
 
             return result;
-        }
-    }
-
-    public class UnorderedSetMatcher : ISetMatcher
-    {
-        public static readonly ISetMatcher Flyweight = new UnorderedSetMatcher();
-
-        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected,
-            IEnumerable<StepValues> actual)
-        {
-            throw new NotImplementedException();
         }
     }
 
@@ -140,8 +144,8 @@ namespace Storyteller.Core.Sets
     {
         public static readonly ISetMatcher Flyweight = new OrderedSetMatcher();
 
-        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expected,
-            IEnumerable<StepValues> actual)
+        public SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expectedValues,
+            IEnumerable<StepValues> actualValues)
         {
             throw new NotImplementedException();
         }

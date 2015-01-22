@@ -115,6 +115,11 @@ namespace Storyteller.Core
             _services = services;
         }
 
+        public CancellationToken Cancellation
+        {
+            get { return _cancellation; }
+        }
+
         public bool CanContinue()
         {
             if (_hasCriticalException || _hasCatastrophicException || _cancellation.IsCancellationRequested) return false;
