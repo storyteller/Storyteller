@@ -158,6 +158,9 @@
     <Content Include="Samples\Specs\Tables\Tables with Errors.xml" />
     <Content Include="Samples\Specs\Tables\Tables.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Grammars\Decisions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

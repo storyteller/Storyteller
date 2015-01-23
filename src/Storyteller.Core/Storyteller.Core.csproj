@@ -51,6 +51,12 @@
     <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="CellHandling.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
+    <Compile Include="Grammars\Decisions\DecisionTableGrammar.cs" />
+    <Compile Include="Grammars\Decisions\GetterProperty.cs" />
+    <Compile Include="Grammars\Decisions\IBeforeAndAfter.cs" />
+    <Compile Include="Grammars\Decisions\IProperty.cs" />
+    <Compile Include="Grammars\Decisions\SetterProperty.cs" />
+    <Compile Include="Grammars\Decisions\TableLineGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ObjectConstructionExpression.cs" />
