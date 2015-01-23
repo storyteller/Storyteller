@@ -29,6 +29,9 @@ end
           :smoke_test_st_run_regression
         ]
   sln.ci_steps = [:ilrepack]
+  
+	sln.options[:nuget_publish_folder] = 'nupkgs'
+	sln.options[:nuget_publish_url] = 'https://www.myget.org/F/fubumvc-edge/'
 end
 
 require_relative 'ILRepack'
