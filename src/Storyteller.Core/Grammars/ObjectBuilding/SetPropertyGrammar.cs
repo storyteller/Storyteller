@@ -27,7 +27,8 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
-            _accessor.SetValue(context.State.CurrentObject, values);
+            var value = values.Get(_cell.Key);
+            _accessor.SetValue(context.State.CurrentObject, value);
 
             return Enumerable.Empty<CellResult>();
         }
