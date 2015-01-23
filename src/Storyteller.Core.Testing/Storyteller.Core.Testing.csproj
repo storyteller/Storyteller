@@ -78,6 +78,7 @@
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />
     <Compile Include="FixtureTester.cs" />
+    <Compile Include="Grammars\CheckPropertyGrammar_specs.cs" />
     <Compile Include="Grammars\create_object_specs.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar_specs.cs" />

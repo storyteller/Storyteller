@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="AliasAsAttribute.cs" />
     <Compile Include="CellHandling.cs" />
+    <Compile Include="Grammars\CheckPropertyGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ObjectConstructionExpression.cs" />
