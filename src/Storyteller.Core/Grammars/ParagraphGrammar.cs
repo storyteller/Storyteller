@@ -30,6 +30,11 @@ namespace Storyteller.Core.Grammars
             return new CompositeExecution(children);
         }
 
+        public IList<IGrammar> Children
+        {
+            get { return _children; }
+        }
+
         /// <summary>
         /// Adds a new child grammar to this ParagraphGrammar
         /// </summary>

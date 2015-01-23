@@ -24,5 +24,10 @@ namespace Storyteller.Core.Grammars
         {
             return Silent.Flyweight;
         }
+
+        public object Position
+        {
+            get { return _position; }
+        }
     }
 }
