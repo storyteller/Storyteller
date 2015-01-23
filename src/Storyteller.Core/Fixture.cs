@@ -366,5 +366,11 @@ namespace Storyteller.Core
 
             return grammar;
         }
+
+        public static VerifySetExpression<T> VerifySetOf<T>(Func<ISpecContext, IEnumerable<T>> dataSource)
+        {
+            return new VerifySetExpression<T>(dataSource);
+        }
+
     }
 }

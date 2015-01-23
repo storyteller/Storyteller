@@ -62,6 +62,7 @@
     <Compile Include="Grammars\ObjectBuilding\ObjectConstructionExpression.cs" />
     <Compile Include="Grammars\ObjectBuilding\SetPropertyGrammar.cs" />
     <Compile Include="Grammars\Paragraphs\ObjectVerificationExpression.cs" />
+    <Compile Include="Grammars\Sets\VerifySetExpression.cs" />
     <Compile Include="Grammars\Sets\VerifyStringListExpression.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
     <Compile Include="Equivalence\ArrayEquivalencyPolicy.cs" />
