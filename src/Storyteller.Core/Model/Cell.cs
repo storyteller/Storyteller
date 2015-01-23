@@ -95,7 +95,7 @@ namespace Storyteller.Core.Model
 
         [JsonProperty("key")] public string Key;
 
-        [JsonProperty("default")] public string default_value;
+        [JsonProperty("default")] public string DefaultValue;
 
         public bool output;
 

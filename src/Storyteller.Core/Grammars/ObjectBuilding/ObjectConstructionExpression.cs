@@ -8,38 +8,48 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
 {
     public class ObjectConstructionExpression<T>
     {
-        protected readonly ParagraphGrammar _grammar;
+        private readonly ParagraphGrammar _grammar;
 
         public ObjectConstructionExpression(ParagraphGrammar grammar)
         {
             _grammar = grammar;
         }
 
+        /// <summary>
+        /// Use another grammar to set the new T onto the 
+        /// State.CurrentObject
+        /// </summary>
         public IGrammar LoadObjectBy
         {
             set { _grammar.AddGrammar(value); }
         }
 
+        /// <summary>
+        /// Create the initial object with a user supplied
+        /// Func
+        /// </summary>
         public Func<ISpecContext, T> ObjectIs
         {
             set { _grammar.Do(c => c.State.CurrentObject = value(c)); }
         }
 
+        /// <summary>
+        /// Perform some type of silent action on the current
+        /// object being created
+        /// </summary>
         public Action<T> Do
         {
             set { _grammar.Do(c => value((T) c.State.CurrentObject)); }
         }
 
-        public ObjectConstructionExpression<T> SetProperty(Expression<Func<T, object>> expression)
+        /// <summary>
+        /// Creates a line to set a single property
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public ObjectConstructionExpression<T> SetProperty(Expression<Func<T, object>> expression, string defaultValue = null)
         {
-            _grammar.AddGrammar(new SetPropertyGrammar(expression.ToAccessor()));
-            return this;
-        }
-
-        public ObjectConstructionExpression<T> SetProperty(Expression<Func<T, object>> expression, string defaultValue)
-        {
-            Accessor accessor = ReflectionHelper.GetAccessor(expression);
-            var grammar = new SetPropertyGrammar(accessor)
+            var grammar = new SetPropertyGrammar(expression.ToAccessor())
             {
                 DefaultValue = defaultValue
             };
@@ -48,12 +58,22 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
 
             return this;
         }
-
+        
+        /// <summary>
+        /// Equivalent to calling SetProperty on each primitive property of type T
+        /// </summary>
+        /// <returns></returns>
         public ObjectConstructionExpression<T> SetAllPrimitiveProperties()
         {
             return SetAllPrimitiveProperties(prop => true);
         }
 
+        /// <summary>
+        /// Adds a property setter for all primitive properties on T that
+        /// meet the filter
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public ObjectConstructionExpression<T> SetAllPrimitiveProperties(Predicate<PropertyInfo> filter)
         {
             foreach (PropertyInfo property in typeof (T).GetProperties())
@@ -73,12 +93,23 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
             return this;
         }
 
+        /// <summary>
+        /// Adds a property setter for all primitive properties declared
+        /// by type T
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public ObjectConstructionExpression<T> SetAllPrimitivePropertiesSpecificToThisType()
         {
             SetAllPrimitiveProperties(prop => prop.DeclaringType == typeof (T));
             return this;
         }
 
+        /// <summary>
+        /// Create setters for multiple properties
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         public ObjectConstructionExpression<T> SetProperties(params Expression<Func<T, object>>[] properties)
         {
             foreach (var property in properties)
@@ -89,48 +120,19 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
             return this;
         }
 
+        
+        /// <summary>
+        /// Apply changes to the object being built
+        /// </summary>
+        /// <typeparam name="TCell"></typeparam>
+        /// <param name="cellName"></param>
+        /// <returns></returns>
         public InputExpression<TCell> WithInput<TCell>(string cellName)
         {
             return new InputExpression<TCell>(this, cellName);
         }
 
-        public CreateExpression<TCell> CreateWithInput<TCell>(string cellName)
-        {
-            return new CreateExpression<TCell>(this, cellName);
-        }
 
-        public void CreateNew<U>() where U : new()
-        {
-            _grammar.Do(c => c.State.CurrentObject = new U());
-        }
-
-        #region Nested type: CreateExpression
-
-        public class CreateExpression<TCell>
-        {
-            private readonly string _name;
-            private readonly ObjectConstructionExpression<T> _parent;
-
-            public CreateExpression(ObjectConstructionExpression<T> expression, string name)
-            {
-                _parent = expression;
-                _name = name;
-            }
-
-            /* TODO -- bring this
-            public CreateObjectGrammar<T, TCell> Build(Func<TCell, T> creator)
-            {
-                var grammar = new CreateObjectGrammar<T, TCell>(_name, creator);
-                _parent._grammar.AddGrammar(grammar);
-
-                return grammar;
-            }
-             */
-        }
-
-        #endregion
-
-        #region Nested type: InputExpression
 
         public class InputExpression<TCell>
         {
@@ -143,7 +145,8 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
                 _name = name;
             }
 
-            /* TODO -- bring this back
+            // TODO -- do something more usable than this?
+            // _.Cell['foo'] = (loc, cell) => ?
             public ConfigureObjectGrammar<T, TCell> Configure(Action<T, TCell> configure)
             {
                 var grammar = new ConfigureObjectGrammar<T, TCell>(_name, configure);
@@ -151,9 +154,7 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
 
                 return grammar;
             }
-             */
         }
 
-        #endregion
     }
 }

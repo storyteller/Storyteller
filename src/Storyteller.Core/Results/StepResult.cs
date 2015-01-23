@@ -87,12 +87,12 @@ namespace Storyteller.Core.Results
             description += " status: {0}".ToFormat(status);
             if (error.IsNotEmpty())
             {
-                description += "Error!\n" + error;
+                description += "\n  Error!\n" + error;
             }
 
             if (cells.Any())
             {
-                description += "Cells\n" + cells.Select(x => x.ToString()).Join("\n");
+                description += "\n  Cells:\n    *" + cells.Select(x => x.ToString()).Join("\n    * ");
             }
 
             return description;

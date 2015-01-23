@@ -18,7 +18,7 @@ namespace Storyteller.Core.Grammars
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            IExecutionStep[] children = _children.Select(x => x.CreatePlan(step, library)).ToArray();
+            var children = _children.Select(x => x.CreatePlan(step, library)).ToArray();
             for (int i = 0; i < children.Length; i++)
             {
                 if (children[i] is ILineExecution)
@@ -46,11 +46,10 @@ namespace Storyteller.Core.Grammars
 
         public GrammarModel Compile(CellHandling cells)
         {
-            GrammarModel[] childrenModels = _children.Select(_ => _.Compile(cells)).ToArray();
+            var childrenModels = _children.Select(_ => _.Compile(cells)).ToArray();
             return new Paragraph {children = childrenModels, title = _title};
         }
 
-        // TODO -- test this!
         public void Do(Action<ISpecContext> action)
         {
             var silent = new SilentGrammar(_children.Count, action);

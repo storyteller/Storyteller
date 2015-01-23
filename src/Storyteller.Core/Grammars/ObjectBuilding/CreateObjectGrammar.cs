@@ -31,7 +31,7 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
         {
             _cell = new Cell(cellHandling, _key, typeof(TInput));
-            _cell.default_value = DefaultValue;
+            _cell.DefaultValue = DefaultValue;
 
             return new[] {_cell};
         }

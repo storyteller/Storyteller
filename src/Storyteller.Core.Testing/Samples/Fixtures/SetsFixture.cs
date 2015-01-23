@@ -78,9 +78,8 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
                 .LeafName("name")
                 .Before(c => _names.Clear());
 
-            this["InvoiceDetailsAre"] = CreateNewObject<InvoiceDetail>(x =>
+            this["InvoiceDetailsAre"] = CreateNewObject<InvoiceDetail>("The invoice details are",x =>
             {
-                x.CreateNew<InvoiceDetail>();
                 x.SetProperty(o => o.Amount);
                 x.SetProperty(o => o.Date);
                 x.SetProperty(o => o.Name);

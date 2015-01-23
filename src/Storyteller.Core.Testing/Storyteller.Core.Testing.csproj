@@ -80,7 +80,9 @@
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\create_object_specs.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
+    <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar_specs.cs" />
+    <Compile Include="Grammars\ObjectBuilding\Creating_object_data_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\SetPropertyGrammar_specs.cs" />
     <Compile Include="Grammars\ParagraphGrammarTester.cs" />
     <Compile Include="Grammars\Sets\string_list_verification_specs.cs" />

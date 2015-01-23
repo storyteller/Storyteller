@@ -333,43 +333,17 @@ namespace Storyteller.Core
             return grammar;
         }
 
-        /* TODO -- add this
-        public static SilentGrammar CreateNewObject<T>() where T : new()
-        {
-            GrammarAction createObject = (step, context) => context.CurrentObject = new T();
-            return new DoGrammar(createObject);
-        }
-         */
 
-        public static ParagraphGrammar CreateNewObject<T>(Action<ObjectConstructionExpression<T>> action)
+        public static ParagraphGrammar CreateNewObject<T>(string title, Action<ObjectConstructionExpression<T>> action)
             where T : new()
         {
-            return CreateObject<T>("", action);
+            return CreateObject<T>(title, _ =>
+            {
+                _.ObjectIs = c => new T();
+                action(_);
+            });
         }
 
-        /// <summary>
-        /// Creates a "silent" grammar that executes an Action lambda.  This is only useful inside of "Paragraph"
-        /// grammars
-        /// </summary>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        // TODO -- make sure this is exercised in tests somewhere
-        public static SilentGrammar Do(Action<ISpecContext> action)
-        {
-            return Do(action);
-        }
-
-        /// <summary>
-        /// Creates a "silent" grammar that executes an Action lambda.  This is only useful inside of "Paragraph"
-        /// grammars
-        /// </summary>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        // TODO -- make sure this is exercised in tests somewhere
-        public static SilentGrammar Do(Action action)
-        {
-            return Do(c => action());
-        }
 
     }
 }

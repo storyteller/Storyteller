@@ -34,7 +34,7 @@ Name: whatever
 
             cell.Key.ShouldEqual("number");
             cell.Type.ShouldEqual(typeof (int));
-            cell.default_value.ShouldEqual("24");
+            cell.DefaultValue.ShouldEqual("24");
         }
     }
 

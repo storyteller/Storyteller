@@ -40,7 +40,10 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
         {
-            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType);
+            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType)
+            {
+                DefaultValue = DefaultValue
+            };
             return new[] {_cell};
         }
 
