@@ -7,17 +7,14 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
             Title = "Check Properties";
         }
 
-        /* TODO -- bring back with CreateNewObject
         public IGrammar IfTheAddressIs()
         {
-            return CreateNewObject<Address>(x =>
+            return CreateNewObject<Address>("If the new address is", x =>
             {
                 x.SetAllPrimitivePropertiesSpecificToThisType();
-            }).Title("If the new address is");
+            });
         }
-         */
 
-        /* TODO -- bring back with VerifyPropertiesOf
         public IGrammar TheAddressShouldBe()
         {
             return VerifyPropertiesOf<Address>("then the new address properties should be", x =>
@@ -27,7 +24,6 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
                 x.Check(o => o.City);
             });
         }
-         */
     }
 
     public class Address

@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
+using Storyteller.Core.Grammars.ObjectBuilding;
 using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Grammars
+namespace Storyteller.Core.Grammars.Paragraphs
 {
     public class ParagraphGrammar : IGrammar
     {
@@ -56,4 +57,51 @@ namespace Storyteller.Core.Grammars
             _children.Add(silent);
         }
     }
+
+
+    public class ParagraphBuilder
+    {
+        private readonly ParagraphGrammar _grammar;
+
+        public ParagraphBuilder(ParagraphGrammar grammar)
+        {
+            _grammar = grammar;
+        }
+
+        public static ParagraphBuilder operator +(ParagraphBuilder expression, IGrammar grammar)
+        {
+            expression._grammar.AddGrammar(grammar);
+            return expression;
+        }
+
+        public static ParagraphBuilder operator +(ParagraphBuilder expression, Action action)
+        {
+            expression._grammar.Do(c => action());
+
+            return expression;
+        }
+
+        public static ParagraphBuilder operator +(ParagraphBuilder expression, Action<ISpecContext> action
+            )
+        {
+            expression._grammar.Do(action);
+
+            return expression;
+        }
+
+        public void VerifyPropertiesOf<T>(Action<ObjectVerificationExpression<T>> action)
+            where T : class
+        {
+            var expression = new ObjectVerificationExpression<T>(_grammar);
+            action(expression);
+        }
+
+        public void SetPropertiesOnCurrentObject<T>(Action<ObjectConstructionExpression<T>> action)
+        {
+            var expression = new ObjectConstructionExpression<T>(_grammar);
+            action(expression);
+        }
+    }
+
+
 }

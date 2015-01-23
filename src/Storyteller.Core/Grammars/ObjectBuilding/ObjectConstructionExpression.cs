@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using FubuCore;
 using FubuCore.Reflection;
+using Storyteller.Core.Grammars.Paragraphs;
 
 namespace Storyteller.Core.Grammars.ObjectBuilding
 {

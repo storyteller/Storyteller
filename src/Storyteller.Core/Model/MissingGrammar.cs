@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Linq;
 using FubuCore;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Model
 {
-    public class MissingGrammar : GrammarModel, IGrammar
+    public class MissingGrammar : GrammarModel, IGrammar, IModelWithCells
     {
         private readonly string _key;
         private readonly string _message;
@@ -24,6 +25,14 @@ namespace Storyteller.Core.Model
         GrammarModel IGrammar.Compile(CellHandling cells)
         {
             return this;
+        }
+
+        public Cell[] cells
+        {
+            get
+            {
+                return new Cell[0];
+            }
         }
     }
 }

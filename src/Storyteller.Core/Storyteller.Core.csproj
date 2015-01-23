@@ -55,6 +55,7 @@
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ObjectConstructionExpression.cs" />
     <Compile Include="Grammars\ObjectBuilding\SetPropertyGrammar.cs" />
+    <Compile Include="Grammars\Paragraphs\ObjectVerificationExpression.cs" />
     <Compile Include="Grammars\Sets\VerifyStringListExpression.cs" />
     <Compile Include="Engine\EngineClasses.cs" />
     <Compile Include="Equivalence\ArrayEquivalencyPolicy.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Grammars\FactPlan.cs" />
     <Compile Include="Grammars\LineStepBase.cs" />
     <Compile Include="Grammars\Lines\CheckGrammar.cs" />
-    <Compile Include="Grammars\ParagraphGrammar.cs" />
+    <Compile Include="Grammars\Paragraphs\ParagraphGrammar.cs" />
     <Compile Include="Grammars\Reflection\ActionMethodGrammar.cs" />
     <Compile Include="Grammars\Reflection\MethodExtensions.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocation.cs" />

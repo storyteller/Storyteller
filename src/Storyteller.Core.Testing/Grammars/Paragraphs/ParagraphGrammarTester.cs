@@ -2,8 +2,9 @@
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Grammars;
+using Storyteller.Core.Grammars.Paragraphs;
 
-namespace Storyteller.Core.Testing.Grammars
+namespace Storyteller.Core.Testing.Grammars.Paragraphs
 {
     [TestFixture]
     public class ParagraphGrammarTester

@@ -109,9 +109,7 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
             return x + y;
         }
 
-        // TODO -- bring this back
         // SAMPLE:  ReturnGrammarFromMethod
-        /*
         public IGrammar AddAndCheck()
         {
             return Paragraph("Add and check", x =>
@@ -121,7 +119,6 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
                 x += this["TheValueShouldBe"];
             });
         }
-        */
         // END:  ReturnGrammarFromMethod
 
         public void Throw()

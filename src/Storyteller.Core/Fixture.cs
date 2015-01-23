@@ -10,6 +10,7 @@ using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Grammars.Lines;
 using Storyteller.Core.Grammars.ObjectBuilding;
+using Storyteller.Core.Grammars.Paragraphs;
 using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
 
@@ -344,6 +345,26 @@ namespace Storyteller.Core
             });
         }
 
+        public static ParagraphGrammar VerifyPropertiesOf<T>(string title,
+                                                             Action<ObjectVerificationExpression<T>> action)
+            where T : class
+        {
+            var grammar = new ParagraphGrammar(title);
 
+            var builder = new ParagraphBuilder(grammar);
+
+            builder.VerifyPropertiesOf(action);
+
+            return grammar;
+        }
+
+        public static ParagraphGrammar Paragraph(string title, Action<ParagraphBuilder> configure)
+        {
+            var grammar = new ParagraphGrammar(title);
+            var expression = new ParagraphBuilder(grammar);
+            configure(expression);
+
+            return grammar;
+        }
     }
 }
