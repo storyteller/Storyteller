@@ -52,9 +52,11 @@ namespace Storyteller.Core.Engine
 
     public class NulloSystem : ISystem
     {
+        public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
+
         public IExecutionContext CreateContext()
         {
-            return new SimpleExecutionContext();
+            return new SimpleExecutionContext(Services);
         }
 
         public Task Recycle()
@@ -74,9 +76,9 @@ namespace Storyteller.Core.Engine
 
     public class SimpleExecutionContext : IExecutionContext
     {
-        public SimpleExecutionContext()
+        public SimpleExecutionContext(IServiceLocator services)
         {
-            Services = new InMemoryServiceLocator();
+            Services = services;
 
 
         }
@@ -88,7 +90,7 @@ namespace Storyteller.Core.Engine
 
         IServiceLocator IExecutionContext.Services { get { return Services; } }
 
-        public InMemoryServiceLocator Services { get; private set; }
+        public IServiceLocator Services { get; private set; }
     }
 
 

@@ -73,6 +73,11 @@ namespace Storyteller.Core.Grammars.Tables
 
         public GrammarModel Compile(CellHandling cells)
         {
+            if (_inner is MissingGrammar)
+            {
+                return _inner.Compile(cells);
+            }
+
             var innerModel = _inner.Compile(cells).As<IModelWithCells>();
 
             return new Table
