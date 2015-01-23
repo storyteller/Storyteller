@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
-using Storyteller.Core.Sets;
+using Storyteller.Core.Grammars.Sets;
 
 namespace Storyteller.Core.Testing.Grammars.Sets
 {

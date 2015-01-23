@@ -4,7 +4,7 @@ using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Sets
+namespace Storyteller.Core.Grammars.Sets
 {
     public class VerificationSetPlan : ILineExecution
     {

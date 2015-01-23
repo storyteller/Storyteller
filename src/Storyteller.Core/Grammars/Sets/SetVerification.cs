@@ -1,6 +1,6 @@
 using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Sets
+namespace Storyteller.Core.Grammars.Sets
 {
     public class SetVerification : GrammarModel
     {

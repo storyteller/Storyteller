@@ -74,6 +74,8 @@ namespace Storyteller.Core
             return (T) _byName[typeof (T)][key];
         }
 
+        public object CurrentObject;
+
         public void Dispose()
         {
             _byName.ClearAll();

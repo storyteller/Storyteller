@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Storyteller.Core.Sets;
 
-namespace Storyteller.Core.DSL
+namespace Storyteller.Core.Grammars.Sets
 {
     public class VerifyStringListExpression
     {

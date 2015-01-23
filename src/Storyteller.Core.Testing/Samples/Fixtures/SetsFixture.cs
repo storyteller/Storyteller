@@ -78,8 +78,6 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
                 .LeafName("name")
                 .Before(c => _names.Clear());
 
-            // TODO -- bring this back
-            /*
             this["InvoiceDetailsAre"] = CreateNewObject<InvoiceDetail>(x =>
             {
                 x.CreateNew<InvoiceDetail>();
@@ -88,8 +86,9 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
                 x.SetProperty(o => o.Name);
                 x.Do = d => _details.Add(d);
             }).AsTable("The InvoiceDetails are").Before(() => _details.Clear());
-
+            
              
+            /* TODO -- bring back with VerifySetOf
             this["UnorderedDetailsAre"] = VerifySetOf(() => _details)
                 .Titled("The unordered details should be")
                 .MatchOn(o => o.Amount, o => o.Date, o => o.Name);
@@ -98,8 +97,8 @@ namespace Storyteller.Core.Testing.Samples.Fixtures
                 .Titled("The Ordered details should be")
                 .Ordered()
                 .MatchOn(o => o.Amount, o => o.Date, o => o.Name);
-        
-             */
+            */
+             
              }
 
         /* TODO - Bring back when VerifySetOf<T> is back

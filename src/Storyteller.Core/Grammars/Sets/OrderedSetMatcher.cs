@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Sets
+namespace Storyteller.Core.Grammars.Sets
 {
     public class OrderedSetMatcher : UnorderedSetMatcher
     {

@@ -1,14 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FubuCore;
-using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Grammars
 {
     public class ParagraphGrammar : IGrammar
     {
+        private readonly IList<IGrammar> _children = new List<IGrammar>();
         private readonly string _title;
-        public IGrammar[] Children = new IGrammar[0];
 
         public ParagraphGrammar(string title)
         {
@@ -17,8 +18,8 @@ namespace Storyteller.Core.Grammars
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            var children = Children.Select(x => x.CreatePlan(step, library)).ToArray();
-            for (var i = 0; i < children.Length; i++)
+            IExecutionStep[] children = _children.Select(x => x.CreatePlan(step, library)).ToArray();
+            for (int i = 0; i < children.Length; i++)
             {
                 if (children[i] is ILineExecution)
                 {
@@ -29,10 +30,26 @@ namespace Storyteller.Core.Grammars
             return new CompositeExecution(children);
         }
 
+        /// <summary>
+        /// Adds a new child grammar to this ParagraphGrammar
+        /// </summary>
+        /// <param name="grammar"></param>
+        public void AddGrammar(IGrammar grammar)
+        {
+            _children.Add(grammar);
+        }
+
         public GrammarModel Compile(CellHandling cells)
         {
-            var childrenModels = Children.Select(_ => _.Compile(cells)).ToArray();
-            return new Paragraph{children = childrenModels, title = _title};
+            GrammarModel[] childrenModels = _children.Select(_ => _.Compile(cells)).ToArray();
+            return new Paragraph {children = childrenModels, title = _title};
+        }
+
+        // TODO -- test this!
+        public void Do(Action<ISpecContext> action)
+        {
+            var silent = new SilentGrammar(_children.Count, action);
+            _children.Add(silent);
         }
     }
 }

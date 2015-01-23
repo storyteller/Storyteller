@@ -7,7 +7,7 @@ using FubuCore.Reflection;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Sets
+namespace Storyteller.Core.Grammars.Sets
 {
     public class ObjectComparison<T> : ISetComparison
     {

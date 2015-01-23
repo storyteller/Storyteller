@@ -7,9 +7,10 @@ using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
 using Storyteller.Core.Conversion;
-using Storyteller.Core.DSL;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Grammars.Lines;
+using Storyteller.Core.Grammars.ObjectBuilding;
+using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core
@@ -321,6 +322,53 @@ namespace Storyteller.Core
         public static VerifyStringListExpression VerifyStringList(Func<IEnumerable<string>> dataSource)
         {
             return VerifyStringList(c => dataSource());
+        }
+
+        public static ParagraphGrammar CreateObject<T>(string title, Action<ObjectConstructionExpression<T>> action)
+        {
+            var grammar = new ParagraphGrammar(title);
+            var expression = new ObjectConstructionExpression<T>(grammar);
+            action(expression);
+
+            return grammar;
+        }
+
+        /* TODO -- add this
+        public static SilentGrammar CreateNewObject<T>() where T : new()
+        {
+            GrammarAction createObject = (step, context) => context.CurrentObject = new T();
+            return new DoGrammar(createObject);
+        }
+         */
+
+        public static ParagraphGrammar CreateNewObject<T>(Action<ObjectConstructionExpression<T>> action)
+            where T : new()
+        {
+            return CreateObject<T>("", action);
+        }
+
+        /// <summary>
+        /// Creates a "silent" grammar that executes an Action lambda.  This is only useful inside of "Paragraph"
+        /// grammars
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        // TODO -- make sure this is exercised in tests somewhere
+        public static SilentGrammar Do(Action<ISpecContext> action)
+        {
+            return Do(action);
+        }
+
+        /// <summary>
+        /// Creates a "silent" grammar that executes an Action lambda.  This is only useful inside of "Paragraph"
+        /// grammars
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        // TODO -- make sure this is exercised in tests somewhere
+        public static SilentGrammar Do(Action action)
+        {
+            return Do(c => action());
         }
 
     }

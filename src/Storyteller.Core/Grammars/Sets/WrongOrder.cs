@@ -1,4 +1,4 @@
-namespace Storyteller.Core.Sets
+namespace Storyteller.Core.Grammars.Sets
 {
     public class WrongOrder
     {

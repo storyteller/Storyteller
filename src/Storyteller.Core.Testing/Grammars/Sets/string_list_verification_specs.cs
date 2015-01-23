@@ -4,9 +4,8 @@ using System.Linq;
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
-using Storyteller.Core.DSL;
 using Storyteller.Core.Grammars;
-using Storyteller.Core.Sets;
+using Storyteller.Core.Grammars.Sets;
 using StructureMap;
 
 namespace Storyteller.Core.Testing.Grammars.Sets

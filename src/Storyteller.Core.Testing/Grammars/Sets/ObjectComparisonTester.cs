@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using FubuTestingSupport;
 using NUnit.Framework;
-using Storyteller.Core.Sets;
+using Storyteller.Core.Grammars.Sets;
 
 namespace Storyteller.Core.Testing.Grammars.Sets
 {

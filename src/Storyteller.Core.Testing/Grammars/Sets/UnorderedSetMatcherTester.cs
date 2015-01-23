@@ -3,8 +3,8 @@ using System.Linq;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Conversion;
+using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
-using Storyteller.Core.Sets;
 
 namespace Storyteller.Core.Testing.Grammars.Sets
 {
