@@ -232,7 +232,11 @@ namespace Storyteller.Core.Testing
 
                 private CellResult findResult(SpecContext context)
                 {
-                    var stepResult = _parent.findStepResult(context);
+                    var stepResult =
+                        context.Results.OfType<StepResult>()
+                            .Where(x => x.id == _parent._id)
+                            .FirstOrDefault(x => x.cells.Any(c => c.cell == _cell));
+
                     return stepResult != null ? stepResult.cells.FirstOrDefault(x => x.cell == _cell) : null;
                 }
 
