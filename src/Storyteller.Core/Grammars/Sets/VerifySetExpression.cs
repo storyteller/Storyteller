@@ -48,7 +48,7 @@ namespace Storyteller.Core.Grammars.Sets
                 comparer.MatchOn(property);
             }
 
-            var grammar = new SetVerificationGrammar(_leafName, _title, comparer);
+            var grammar = new SetVerificationGrammar(_title, _leafName, comparer);
             if (_ordered)
             {
                 grammar.Ordered();

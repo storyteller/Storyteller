@@ -63,5 +63,32 @@ namespace Storyteller.Core.Grammars.Sets
         {
             _wrongOrders.Add(new WrongOrder(id, actual));
         }
+
+        public override string ToString()
+        {
+            var text = "SetVerificationResult for " + id;
+            if (_matches.Any())
+            {
+                text += "\n Matched on " + _matches.Join(", ");
+            }
+
+            if (_missing.Any())
+            {
+                text += "\n Missing: " + _missing.Join(", ");
+            }
+
+            if (_extras.Any())
+            {
+                text += "\n Extras: " + _extras.Count;
+            }
+
+            if (_wrongOrders.Any())
+            {
+                text += "\n Wrong ordered: " + _wrongOrders.Select(x => x.ToString()).Join(", ");
+            }
+
+
+            return text;
+        }
     }
 }

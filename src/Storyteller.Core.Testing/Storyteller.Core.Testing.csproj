@@ -90,6 +90,7 @@
     <Compile Include="Grammars\Paragraphs\VerifyPropertiesOf_specs.cs" />
     <Compile Include="Grammars\Sets\string_list_verification_specs.cs" />
     <Compile Include="Grammars\Sets\UnorderedSetMatcherTester.cs" />
+    <Compile Include="Grammars\Sets\VerifySetOf_specs.cs" />
     <Compile Include="Grammars\SilentActionTester.cs" />
     <Compile Include="Grammars\FixtureLibraryTester.cs" />
     <Compile Include="Grammars\InvalidGrammarStepTester.cs" />

@@ -372,5 +372,9 @@ namespace Storyteller.Core
             return new VerifySetExpression<T>(dataSource);
         }
 
+        public static VerifySetExpression<T> VerifySetOf<T>(Func<IEnumerable<T>> dataSource)
+        {
+            return new VerifySetExpression<T>(c => dataSource());
+        }
     }
 }
