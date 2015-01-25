@@ -16,21 +16,23 @@ namespace Storyteller.Core.Grammars.Decisions
         public TableLineGrammar(IBeforeAndAfter target)
         {
             _target = target;
-            foreach (PropertyInfo property in target.GetType().GetProperties())
+            foreach (var property in target.GetType().GetProperties())
             {
                 if (property.DeclaringType == typeof (object) || property.DeclaringType.Assembly == GetType().Assembly)
                 {
                     continue;
                 }
 
-                if (property.CanRead)
-                {
-                    _properties.Add(new GetterProperty(property));
-                }
-                else if (property.CanWrite)
+                if (property.CanWrite)
                 {
                     _properties.Add(new SetterProperty(property));
                 }
+                // Read only properties are assumed to be calculated
+                else if (property.CanRead)
+                {
+                    _properties.Add(new GetterProperty(property));
+                }
+
             }
         }
 

@@ -38,7 +38,8 @@ namespace Storyteller.Core.Grammars.Tables
             return new Table
             {
                 cells = innerModel.cells.ToArray(),
-                collection = _leafName
+                collection = _leafName,
+                title = Title
             };
         }
 

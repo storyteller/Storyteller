@@ -80,6 +80,7 @@
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar_specs.cs" />
     <Compile Include="Grammars\create_object_specs.cs" />
+    <Compile Include="Grammars\Decisions\DecisionTableGrammar_specs.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar_specs.cs" />
@@ -158,9 +159,7 @@
     <Content Include="Samples\Specs\Tables\Tables with Errors.xml" />
     <Content Include="Samples\Specs\Tables\Tables.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Grammars\Decisions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -23,7 +23,7 @@ namespace Storyteller.Core.Grammars.Decisions
 
         public Cell CompileCell(CellHandling cellHandling)
         {
-            _cell = new Cell(cellHandling, _property.Name, _property.PropertyType);
+            _cell = new Cell(cellHandling, _property.Name, _property.PropertyType) {output = true};
             return _cell;
         }
     }
