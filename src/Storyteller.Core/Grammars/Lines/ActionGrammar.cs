@@ -61,7 +61,7 @@ namespace Storyteller.Core.Grammars.Lines
         {
             // TODO -- make the exception message on garbage input nicer
             var key = _label.ParseTemplateKeys().Single();
-            _cell = new Cell(cellHandling, fixture, key, typeof (T));
+            _cell = new Cell(cellHandling, key, typeof (T));
 
             return new[] {_cell};
         }

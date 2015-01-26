@@ -48,12 +48,12 @@ namespace Storyteller.Core.Grammars.Reflection
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            foreach (var cell in _method.GetParameters().Select(x => Cell.For(cellHandling, x)))
+            foreach (var cell in _method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture)))
             {
                 yield return cell;
             }
 
-            ReturnCell = Cell.For(cellHandling, _method.ReturnParameter);
+            ReturnCell = Cell.For(cellHandling, _method.ReturnParameter, fixture);
             ReturnCell.output = true;
             if (ReturnCell.Key.IsEmpty())
             {

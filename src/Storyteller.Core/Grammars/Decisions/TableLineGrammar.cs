@@ -54,7 +54,7 @@ namespace Storyteller.Core.Grammars.Decisions
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            return _properties.Select(x => x.CompileCell(cellHandling));
+            return _properties.Select(x => x.CompileCell(cellHandling, fixture));
         }
     }
 }

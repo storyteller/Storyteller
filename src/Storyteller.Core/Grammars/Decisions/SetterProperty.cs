@@ -22,9 +22,9 @@ namespace Storyteller.Core.Grammars.Decisions
             return CellResult.Ok(_property.Name);
         }
 
-        public Cell CompileCell(CellHandling cellHandling)
+        public Cell CompileCell(CellHandling cellHandling, Fixture fixture)
         {
-            return Cell.For(cellHandling, _property);
+            return Cell.For(cellHandling, _property, fixture);
         }
     }
 }

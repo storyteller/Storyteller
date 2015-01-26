@@ -402,7 +402,7 @@ namespace Storyteller.Core
 
         public void AddSelectionValues(string key, params string[] values)
         {
-            Lists[key].Add(values);
+            Lists[key].AddValues(values);
         }
 
         public readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));

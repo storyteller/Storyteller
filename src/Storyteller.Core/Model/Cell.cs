@@ -22,40 +22,61 @@ namespace Storyteller.Core.Model
         /// <returns></returns>
         public static Cell For<T>(string key)
         {
-            return new Cell(CellHandling.Basic(), new Fixture(), key, typeof(T));
+            return new Cell(CellHandling.Basic(), key, typeof(T));
         }
 
         public static Cell For<T>(Expression<Func<T, object>> expression)
         {
-            return For(CellHandling.Basic(), expression.ToAccessor());
+            return For(CellHandling.Basic(), expression.ToAccessor(), new Fixture());
         }
 
-        public static Cell For(CellHandling cells, ParameterInfo parameter)
+        public static Cell For(CellHandling cells, ParameterInfo parameter, Fixture fixture)
         {
-            var cell = new Cell(cells, new Fixture(), parameter.Name, parameter.ParameterType);
+            var cell = new Cell(cells, parameter.Name, parameter.ParameterType);
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
+            cell.ReadLists(cells, fixture);
+
             return cell;
         }
 
-        public static Cell For(CellHandling cells, PropertyInfo property)
+        public static Cell For(CellHandling cells, PropertyInfo property, Fixture fixture)
         {
-            var cell = new Cell(cells, new Fixture(), property.Name, property.PropertyType);
+            var cell = new Cell(cells, property.Name, property.PropertyType);
             property.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
+            cell.ReadLists(cells, fixture);
+
             return cell;
         }
 
-        public static Cell For(CellHandling cells, Accessor accessor)
+        private void ReadLists(CellHandling cellHandling, Fixture fixture)
         {
-            var cell = new Cell(cells, new Fixture(), accessor.Name, accessor.PropertyType);
+            if (OptionListName.IsEmpty()) return;
+
+            if (fixture.Lists.Has(OptionListName))
+            {
+                options = fixture.Lists[OptionListName].Options;
+            }
+            else
+            {
+                options = cellHandling.Lists[OptionListName].Options;
+            }
+        }
+
+        public static Cell For(CellHandling cells, Accessor accessor, Fixture fixture)
+        {
+            var cell = new Cell(cells, accessor.Name, accessor.PropertyType);
             accessor.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
+            cell.ReadLists(cells, fixture);
+
             return cell;
         }
 
+
         // TODO -- need this to return a grammar error somehow if a converter
-        public Cell(CellHandling cells, Fixture fixture, string key, Type type)
+        public Cell(CellHandling cells, string key, Type type)
         {
             Type = type;
             Key = key;

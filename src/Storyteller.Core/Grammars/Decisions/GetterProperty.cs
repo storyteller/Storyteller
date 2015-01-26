@@ -21,9 +21,9 @@ namespace Storyteller.Core.Grammars.Decisions
             return _cell.Check(step, actual);
         }
 
-        public Cell CompileCell(CellHandling cellHandling)
+        public Cell CompileCell(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = Cell.For(cellHandling, _property);
+            _cell = Cell.For(cellHandling, _property, fixture);
             _cell.output = true;
 
             return _cell;

@@ -33,7 +33,7 @@ namespace Storyteller.Core.Grammars.Lines
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, fixture, _key, typeof (T))
+            _cell = new Cell(cellHandling, _key, typeof (T))
             {
                 output = true
             };

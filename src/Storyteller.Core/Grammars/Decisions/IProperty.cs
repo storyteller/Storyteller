@@ -7,6 +7,6 @@ namespace Storyteller.Core.Grammars.Decisions
     public interface IProperty
     {
         CellResult ProcessStep(StepValues step, ISpecContext context, object target);
-        Cell CompileCell(CellHandling cellHandling);
+        Cell CompileCell(CellHandling cellHandling, Fixture fixture);
     }
 }

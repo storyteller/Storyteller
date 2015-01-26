@@ -14,7 +14,7 @@ namespace Storyteller.Core.Model.Lists
             Name = name;
         }
 
-        public void Add(params string[] values)
+        public void AddValues(params string[] values)
         {
             _options.AddRange(Option.For(values));
         }

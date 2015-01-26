@@ -33,7 +33,7 @@ namespace Storyteller.Core.Grammars.Sets
 
         public Cell[] BuildCells(CellHandling handling, Fixture fixture)
         {
-            return _accessors.Select(x => new Cell(handling, fixture, x.Name, x.PropertyType)).ToArray();
+            return _accessors.Select(x => new Cell(handling, x.Name, x.PropertyType)).ToArray();
         }
 
         public ObjectComparison<T> Compare(Accessor accessor)

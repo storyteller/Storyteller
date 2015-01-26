@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using FubuCore.Reflection;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Conversion;
@@ -20,7 +21,7 @@ namespace Storyteller.Core.Testing.Model
         {
             var serializer = new Newtonsoft.Json.JsonSerializer();
 
-            var cell = new Cell(CellHandling.Basic(), fixture, "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
 
             var writer = new StringWriter();
             serializer.Serialize(writer, cell);
@@ -59,7 +60,7 @@ namespace Storyteller.Core.Testing.Model
         [Test]
         public void matches_simply()
         {
-            var cell = new Cell(CellHandling.Basic(), fixture, "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
             var values1 = new StepValues("foo");
             values1.Store(cell.Key, 5);
 
@@ -76,7 +77,7 @@ namespace Storyteller.Core.Testing.Model
         [Test]
         public void matches_array_()
         {
-            var cell = new Cell(CellHandling.Basic(), fixture, "a", typeof(int[]));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof(int[]));
             var values1 = new StepValues("foo");
             values1.Store(cell.Key, new[]{1, 2, 3});
 
@@ -208,6 +209,35 @@ namespace Storyteller.Core.Testing.Model
             cell.OptionListName.ShouldEqual("States");
         }
 
+        [Test]
+        public void if_list_is_not_on_fixture_picks_up_from_cellHandling()
+        {
+            var handling = CellHandling.Basic();
+            handling.Lists["States"].AddValues("TX", "MO", "AR");
+
+            var fixture = new Fixture();
+            fixture.Lists.Has("States").ShouldBeFalse();
+
+            var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
+            var cell = Cell.For(handling, property, fixture);
+            cell.options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("TX", "MO", "AR");
+        }
+
+        [Test]
+        public void list_on_fixture_has_precedence()
+        {
+            var handling = CellHandling.Basic();
+            handling.Lists["States"].AddValues("TX", "MO", "AR");
+
+            var fixture = new Fixture();
+            fixture.Lists["States"].AddValues("NY", "CT");
+
+            var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
+            var cell = Cell.For(handling, property, fixture);
+            cell.options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("NY", "CT");
+        }
     }
 
     public enum Directions
