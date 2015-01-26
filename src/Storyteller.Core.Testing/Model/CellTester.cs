@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using FubuTestingSupport;
@@ -144,6 +145,13 @@ namespace Storyteller.Core.Testing.Model
             cell.header.ShouldEqual("The City");
         }
 
+        [Test]
+        public void Cell_picks_up_the_default_value_attribute()
+        {
+            var cell = Cell.For<CellTarget>(x => x.City);
+            cell.DefaultValue.ShouldEqual("Cedar Park");
+        }
+
         public class NoConverterForMe
         {
             
@@ -154,7 +162,7 @@ namespace Storyteller.Core.Testing.Model
 
     public class CellTarget
     {
-        [Header("The City")]
+        [Header("The City")][Default("Cedar Park")]
         public string City { get; set; }
     }
 }

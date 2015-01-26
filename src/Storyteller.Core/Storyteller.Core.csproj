@@ -48,7 +48,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AliasAsAttribute.cs" />
+    <Compile Include="Attributes.cs" />
     <Compile Include="CellHandling.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar.cs" />

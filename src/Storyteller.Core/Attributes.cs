@@ -42,4 +42,35 @@ namespace Storyteller.Core
             cell.header = _header;
         }
     }
+
+    [AttributeUsage(AttributeTargets.ReturnValue | AttributeTargets.Parameter | AttributeTargets.Property,
+        AllowMultiple = false, Inherited = false)
+    ]
+    public class DefaultAttribute : ModifyCellAttribute
+    {
+        private readonly string _value;
+
+        public DefaultAttribute(string value)
+        {
+            _value = value;
+        }
+
+        public string Value
+        {
+            get
+            {
+                if (_value == "GUID") return Guid.NewGuid().ToString();
+
+
+                return _value;
+            }
+        }
+
+        public override void Modify(Cell cell)
+        {
+            cell.DefaultValue = _value;
+        }
+
+
+    }
 }
