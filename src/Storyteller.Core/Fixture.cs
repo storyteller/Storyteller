@@ -6,8 +6,8 @@ using System.Runtime.CompilerServices;
 using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
-using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
+using Storyteller.Core.Grammars.Importing;
 using Storyteller.Core.Grammars.Lines;
 using Storyteller.Core.Grammars.ObjectBuilding;
 using Storyteller.Core.Grammars.Paragraphs;
@@ -381,6 +381,12 @@ namespace Storyteller.Core
         public static ActionGrammar<T> Read<T>(string key, Action<T> action)
         {
             return new ActionGrammar<T>("Read {" + key + "}", (x, context) => action(x));
+        }
+
+        public ImportedGrammar Import<T>(string grammarKey) where T : Fixture
+        {
+            var fixture = (T)FixtureLibrary.FixtureCache[typeof (T)];
+            return new ImportedGrammar(fixture, fixture[grammarKey]);
         }
     }
 }

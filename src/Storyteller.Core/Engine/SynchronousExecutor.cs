@@ -32,6 +32,11 @@
             }
         }
 
+        public ISpecContext CurrentContext
+        {
+            get { return _context; }
+        }
+
         public void Execute()
         {
             _step.AcceptVisitor(this);

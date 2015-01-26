@@ -4,5 +4,7 @@ namespace Storyteller.Core.Engine
     {
         void Line(ILineExecution execution);
         void Composite(ICompositeExecution execution);
+
+        ISpecContext CurrentContext { get; }
     }
 }

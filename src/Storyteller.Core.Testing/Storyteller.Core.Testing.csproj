@@ -81,6 +81,7 @@
     <Compile Include="Grammars\CheckPropertyGrammar_specs.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar_specs.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
+    <Compile Include="Grammars\Importing\importing_and_currying_grammars_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\Creating_object_data_specs.cs" />
