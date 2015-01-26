@@ -25,4 +25,21 @@ namespace Storyteller.Core
 
         public string Alias { get { return _alias; } }
     }
+
+    [AttributeUsage(AttributeTargets.ReturnValue | AttributeTargets.Parameter | AttributeTargets.Property,
+        AllowMultiple = false, Inherited = false)]
+    public class HeaderAttribute : ModifyCellAttribute
+    {
+        private readonly string _header;
+
+        public HeaderAttribute(string header)
+        {
+            _header = header;
+        }
+
+        public override void Modify(Cell cell)
+        {
+            cell.header = _header;
+        }
+    }
 }

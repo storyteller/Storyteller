@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Conversion;
@@ -136,11 +137,24 @@ namespace Storyteller.Core.Testing.Model
             result.error.ShouldEqual("No converter found for type " + typeof(NoConverterForMe).FullName);
         }
 
-
+        [Test]
+        public void Cell_picks_up_the_header_attributes()
+        {
+            var cell = Cell.For<CellTarget>(x => x.City);
+            cell.header.ShouldEqual("The City");
+        }
 
         public class NoConverterForMe
         {
             
         }
+
+
+    }
+
+    public class CellTarget
+    {
+        [Header("The City")]
+        public string City { get; set; }
     }
 }

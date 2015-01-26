@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
@@ -21,6 +22,11 @@ namespace Storyteller.Core.Model
         public static Cell For<T>(string key)
         {
             return new Cell(CellHandling.Basic(), key, typeof(T));
+        }
+
+        public static Cell For<T>(Expression<Func<T, object>> expression)
+        {
+            return For(CellHandling.Basic(), expression.ToAccessor());
         }
 
         public static Cell For(CellHandling cells, ParameterInfo parameter)
@@ -113,6 +119,8 @@ namespace Storyteller.Core.Model
 
         [JsonProperty("default")] public string DefaultValue;
 
+        public string header;
+
         public bool output;
 
         public string editor;
@@ -128,6 +136,15 @@ namespace Storyteller.Core.Model
         }
 
         
+    }
+
+    public interface ICellExpression
+    {
+        ICellExpression Header(string header);
+        ICellExpression Editor(string editor);
+        ICellExpression DefaultValue(string @default);
+        ICellExpression SelectionValues(params string[] values);
+        ICellExpression SelectionValues(params Option[] options);
     }
 
     // Tested through integration tests in the SetVerificationGrammar
