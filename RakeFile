@@ -21,12 +21,13 @@ end
   }
 
   sln.ripple_enabled = true
-  sln.fubudocs_enabled = true
+  sln.fubudocs_enabled = false
 
+		# add these back when 3.0 is getting closer
+          #:smoke_test_st_run,:smoke_test_st_run_regression
+  
   sln.defaults = [
-          :ilrepack,
-          :smoke_test_st_run,
-          :smoke_test_st_run_regression
+          :ilrepack
         ]
   sln.ci_steps = [:ilrepack]
   
