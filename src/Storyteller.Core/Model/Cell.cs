@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using FubuCore;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
 using Storyteller.Core.Conversion;
@@ -61,6 +62,25 @@ namespace Storyteller.Core.Model
 
             _equivalence = cells.Equivalence.CheckerFor(type);
 
+            selectConverter(cells, type);
+
+            if (editor.IsEmpty())
+            {
+                selectEditor(type);
+            }
+            
+        }
+
+        private void selectEditor(Type type)
+        {
+            if (type == typeof (bool))
+            {
+                editor = "boolean";
+            }
+        }
+
+        private void selectConverter(CellHandling cells, Type type)
+        {
             var converter = cells.Conversions.FindConverter(type);
             if (converter == null)
             {
@@ -110,7 +130,7 @@ namespace Storyteller.Core.Model
             return _equivalence(v1, v2);
         }
 
-        private readonly Action<Step, StepValues> _conversion;
+        private Action<Step, StepValues> _conversion;
 
         [JsonIgnore]
         public Type Type;

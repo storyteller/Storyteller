@@ -157,12 +157,19 @@ namespace Storyteller.Core.Testing.Model
             
         }
 
-
+        [Test]
+        public void use_a_boolean_editor_for_boolean_type()
+        {
+            var cell = Cell.For<CellTarget>(x => x.IsActive);
+            cell.editor.ShouldEqual("boolean");
+        }
     }
 
     public class CellTarget
     {
         [Header("The City")][Default("Cedar Park")]
         public string City { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

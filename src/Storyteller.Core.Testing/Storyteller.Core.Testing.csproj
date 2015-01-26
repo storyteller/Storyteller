@@ -116,7 +116,6 @@
     <Compile Include="Samples\Fixtures\CheckObjectFixture.cs" />
     <Compile Include="Samples\Fixtures\CompositeFixture.cs" />
     <Compile Include="Samples\Fixtures\DecoratedGrammarFixture.cs" />
-    <Compile Include="Samples\Fixtures\EmbeddedFixture.cs" />
     <Compile Include="Samples\Fixtures\FailureFixture.cs" />
     <Compile Include="Samples\Fixtures\MathFixture.cs" />
     <Compile Include="Samples\Fixtures\ParkingExpiryFixture.cs" />
