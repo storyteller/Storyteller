@@ -205,6 +205,7 @@ namespace Storyteller.Core.Testing.Model
 
             cell.OptionListName.ShouldEqual("States");
         }
+
     }
 
     public enum Directions

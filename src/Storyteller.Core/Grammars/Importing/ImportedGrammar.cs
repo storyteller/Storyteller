@@ -7,24 +7,27 @@ namespace Storyteller.Core.Grammars.Importing
 {
     public class ImportedGrammar : IGrammar
     {
-        private readonly Fixture _fixture;
+        private readonly Fixture _innerFixture;
         private readonly IGrammar _inner;
 
-        public ImportedGrammar(Fixture fixture, IGrammar inner)
+        public ImportedGrammar(Fixture innerFixture, IGrammar inner)
         {
-            _fixture = fixture;
+            _innerFixture = innerFixture;
             _inner = inner;
         }
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
             var innerPlan = _inner.CreatePlan(step, library);
-            return new ImportedExecutionStep(_fixture, innerPlan);
+            return new ImportedExecutionStep(_innerFixture, innerPlan);
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            return _inner.Compile(fixture, cells);
+            // TODO -- write a UT to pin this behavior down
+            // This is important to get the right lists, *use* the lists
+            // from the inner fixture here.
+            return _inner.Compile(_innerFixture, cells);
         }
     }
 }
