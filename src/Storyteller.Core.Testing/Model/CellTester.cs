@@ -187,6 +187,24 @@ namespace Storyteller.Core.Testing.Model
             var cell = Cell.For<CellTarget>(x => x.City);
             cell.editor.ShouldEqual("bigtext");
         }
+
+        [Test]
+        public void cell_picks_up_selection_values()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Country);
+            cell.editor.ShouldEqual("select");
+            cell.options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("United States", "Canada", "Mexico");
+        }
+
+        [Test]
+        public void cell_picks_up_selection_list_name()
+        {
+            var cell = Cell.For<CellTarget>(x => x.State);
+            cell.editor.ShouldEqual("select");
+
+            cell.OptionListName.ShouldEqual("States");
+        }
     }
 
     public enum Directions
@@ -205,5 +223,11 @@ namespace Storyteller.Core.Testing.Model
         public bool IsActive { get; set; }
 
         public Directions Direction { get; set; }
+
+        [SelectionList("States")]
+        public string State { get; set; }
+
+        [SelectionValues("United States", "Canada", "Mexico")]
+        public string Country { get; set; }
     }
 }

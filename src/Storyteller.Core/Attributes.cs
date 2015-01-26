@@ -8,6 +8,19 @@ namespace Storyteller.Core
         public abstract void Modify(Cell cell);
     }
 
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public class FormatAsAttribute : Attribute
+    {
+        private readonly string _format;
+
+        public FormatAsAttribute(string format)
+        {
+            _format = format;
+        }
+
+        public string Format { get { return _format; } }
+    }
+
     [AttributeUsage(AttributeTargets.ReturnValue | AttributeTargets.Method, Inherited = false)]
     public class AliasAsAttribute : ModifyCellAttribute
     {
@@ -100,5 +113,48 @@ namespace Storyteller.Core
         }
 
 
+    }
+
+    [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue)]
+    public class SelectionValuesAttribute : ModifyCellAttribute
+    {
+        private readonly string[] _values;
+
+        public SelectionValuesAttribute(Type enumType)
+            : this(Enum.GetNames(enumType))
+        {
+        }
+
+        public SelectionValuesAttribute(params string[] values)
+        {
+            if (values.Length == 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "At least one value needs to be supplied in the constructor function");
+            }
+            _values = values;
+        }
+
+        public override void Modify(Cell cell)
+        {
+            cell.editor = "select";
+            cell.options = Option.For(_values);
+        }
+    }
+
+    public class SelectionListAttribute : ModifyCellAttribute
+    {
+        private readonly string _listName;
+
+        public SelectionListAttribute(string listName)
+        {
+            _listName = listName;
+        }
+
+        public override void Modify(Cell cell)
+        {
+            cell.editor = "select";
+            cell.OptionListName = _listName;
+        }
     }
 }

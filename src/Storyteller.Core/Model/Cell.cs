@@ -166,6 +166,9 @@ namespace Storyteller.Core.Model
         {
             return DefaultValue.IsNotEmpty();
         }
+
+        [JsonIgnore]
+        public string OptionListName { get; set; }
     }
 
     public interface ICellExpression

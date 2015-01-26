@@ -76,7 +76,6 @@
     <Compile Include="Equivalence\IEqualizer.cs" />
     <Compile Include="Equivalence\IEquivalenceCheckerPolicy.cs" />
     <Compile Include="Equivalence\StandardEqualsPolicy.cs" />
-    <Compile Include="Grammars\Attributes.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar.cs" />
     <Compile Include="Grammars\FactPlan.cs" />
     <Compile Include="Grammars\LineStepBase.cs" />
