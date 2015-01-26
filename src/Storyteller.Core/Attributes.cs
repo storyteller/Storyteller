@@ -73,4 +73,32 @@ namespace Storyteller.Core
 
 
     }
+
+    [AttributeUsage(AttributeTargets.ReturnValue | AttributeTargets.Parameter | AttributeTargets.Property,
+        AllowMultiple = false, Inherited = false)
+    ]
+    public class EditorAttribute : ModifyCellAttribute
+    {
+        private readonly string _editor;
+
+        public EditorAttribute(string editor)
+        {
+            _editor = editor;
+        }
+
+        public string Editor
+        {
+            get
+            {
+                return _editor;
+            }
+        }
+
+        public override void Modify(Cell cell)
+        {
+            cell.editor = _editor;
+        }
+
+
+    }
 }

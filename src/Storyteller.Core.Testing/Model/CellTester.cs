@@ -172,6 +172,13 @@ namespace Storyteller.Core.Testing.Model
             cell.options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("North", "South", "East", "West");
         }
+
+        [Test]
+        public void picks_up_the_editor_attribute()
+        {
+            var cell = Cell.For<CellTarget>(x => x.City);
+            cell.editor.ShouldEqual("bigtext");
+        }
     }
 
     public enum Directions
@@ -184,7 +191,7 @@ namespace Storyteller.Core.Testing.Model
 
     public class CellTarget
     {
-        [Header("The City")][Default("Cedar Park")]
+        [Header("The City")][Default("Cedar Park")][Editor("bigtext")]
         public string City { get; set; }
 
         public bool IsActive { get; set; }
