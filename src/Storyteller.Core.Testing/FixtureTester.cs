@@ -12,6 +12,21 @@ namespace Storyteller.Core.Testing
     public class FixtureTester
     {
         [Test]
+        public void add_selection_values()
+        {
+            var fixture = new Fixture();
+
+            fixture.AddSelectionValues("States", "TX", "AR", "MO");
+            fixture.AddSelectionValues("Animals", "Lions", "Tigers", "Pumas");
+
+            fixture.Lists["States"].Options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("TX", "AR", "MO");
+
+            fixture.Lists["Animals"].Options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("Lions", "Tigers", "Pumas");
+        }
+
+        [Test]
         public void hidden_when_marked_with_Hidden()
         {
             new HiddenFixture().IsHidden()

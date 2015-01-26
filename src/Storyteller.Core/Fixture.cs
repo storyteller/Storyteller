@@ -13,6 +13,7 @@ using Storyteller.Core.Grammars.ObjectBuilding;
 using Storyteller.Core.Grammars.Paragraphs;
 using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
+using Storyteller.Core.Model.Lists;
 
 namespace Storyteller.Core
 {
@@ -398,6 +399,13 @@ namespace Storyteller.Core
         {
             return new CurryGrammarExpression(inner);
         }
+
+        public void AddSelectionValues(string key, params string[] values)
+        {
+            Lists[key].Add(values);
+        }
+
+        public readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
 
     }
 }

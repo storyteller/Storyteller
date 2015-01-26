@@ -126,6 +126,7 @@
     <Compile Include="Model\GrammarModel.cs" />
     <Compile Include="Grammars\InvalidGrammarStep.cs" />
     <Compile Include="Model\IModelWithCells.cs" />
+    <Compile Include="Model\Lists\OptionList.cs" />
     <Compile Include="Model\MissingGrammar.cs" />
     <Compile Include="Model\GrammarError.cs" />
     <Compile Include="Model\Option.cs" />

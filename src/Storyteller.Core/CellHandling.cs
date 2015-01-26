@@ -1,5 +1,7 @@
-﻿using Storyteller.Core.Conversion;
+﻿using FubuCore.Util;
+using Storyteller.Core.Conversion;
 using Storyteller.Core.Equivalence;
+using Storyteller.Core.Model.Lists;
 
 namespace Storyteller.Core
 {
@@ -13,6 +15,8 @@ namespace Storyteller.Core
 
         public EquivalenceChecker Equivalence { get; private set; }
         public Conversions Conversions { get; private set; }
+
+        public readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key)); 
 
         public static CellHandling Basic()
         {
