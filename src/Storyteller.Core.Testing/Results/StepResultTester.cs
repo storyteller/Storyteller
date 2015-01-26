@@ -1,4 +1,5 @@
-﻿using FubuTestingSupport;
+﻿using System;
+using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Results;
@@ -22,7 +23,7 @@ namespace Storyteller.Core.Testing.Results
             new StepResult("1", ResultStatus.failed).Tabulate(counts);
             counts.ShouldEqual(1, 1, 0, 0);
 
-            StepResult.Error("1", "bad").Tabulate(counts);
+            new StepResult("1", new NotImplementedException()).Tabulate(counts);
             counts.ShouldEqual(1, 1, 1, 0);
         }
 

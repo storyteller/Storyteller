@@ -32,6 +32,14 @@ namespace Storyteller.Core.Testing
         }
 
         [Test]
+        public void log_exception_will_unwrap_the_exception_message()
+        {
+            theContext.LogException("1", new StorytellerAssertionException("It is wrong"));
+            theContext.Results.OfType<StepResult>().Single().error
+                .ShouldEqual("It is wrong");
+        }
+
+        [Test]
         public void log_exception_logs_a_result()
         {
             var exception = new NotImplementedException();

@@ -5,6 +5,13 @@ namespace Storyteller.Core
 {
     public static class StoryTellerAssert
     {
+        public static string ToDisplayMessage(this Exception ex)
+        {
+            if (ex is StorytellerAssertionException) return ex.Message;
+
+            return ex.ToString();
+        }
+
         public static void Fail(string message)
         {
             throw new StorytellerAssertionException(message);

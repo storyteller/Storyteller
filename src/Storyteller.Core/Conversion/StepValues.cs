@@ -76,6 +76,7 @@ namespace Storyteller.Core.Conversion
 
         public StepResult ToConversionErrorResult()
         {
+            // TODO -- do the pretty string of the error on this
             return new StepResult(Id, ResultStatus.ok)
             {
                 cells = Errors.ToArray()

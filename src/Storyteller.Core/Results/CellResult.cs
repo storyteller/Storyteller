@@ -46,9 +46,7 @@ namespace Storyteller.Core.Results
 
         public static CellResult Error(string cell, Exception ex)
         {
-            // TODO -- be smart enough to remove exception wrapping
-            // for special exceptions
-            return Error(cell, ex.ToString());
+            return Error(cell, ex.ToDisplayMessage());
         }
 
 

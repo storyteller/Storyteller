@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FubuTestingSupport;
+using NUnit.Framework;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Results;
 
@@ -7,6 +8,13 @@ namespace Storyteller.Core.Testing.Results
     [TestFixture]
     public class CellResultTester
     {
+        [Test]
+        public void unwrap_storyteller_assertion_exceptions()
+        {
+            var ex = new StorytellerAssertionException("Something is wrong");
+            CellResult.Error("foo", ex).error.ShouldEqual("Something is wrong");
+        }
+
         [Test]
         public void modify_counts_when_ok()
         {

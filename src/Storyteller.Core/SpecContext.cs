@@ -129,6 +129,7 @@ namespace Storyteller.Core
             return StopConditions.CanContinue(Counts);
         }
 
+        // TODO -- need to implement this
         public bool Wait(Func<bool> condition, TimeSpan timeout)
         {
             throw new NotImplementedException();

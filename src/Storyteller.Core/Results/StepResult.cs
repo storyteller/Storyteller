@@ -23,18 +23,11 @@ namespace Storyteller.Core.Results
             this.id = id;
         }
 
+        public StepResult(string id, Exception ex) : this(id, ResultStatus.error)
+        {
+        }
+
         public string id { get; set; }
-
-        public static StepResult Error(string id, string message)
-        {
-            return new StepResult(id, ResultStatus.error){error = message};
-        }
-
-        public static StepResult Error(string id, Exception ex)
-        {
-            // TODO - needs to check for special exceptions
-            return Error(id, ex.ToString());
-        }
 
         public object position;
         public ResultStatus status;
