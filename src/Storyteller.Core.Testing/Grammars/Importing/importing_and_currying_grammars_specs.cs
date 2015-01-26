@@ -1,6 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using FubuTestingSupport;
+using NUnit.Framework;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Grammars.Importing;
+using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Testing.Grammars.Importing
 {
@@ -20,6 +23,38 @@ namespace Storyteller.Core.Testing.Grammars.Importing
 
             Step("2").Cell("value").Succeeded();
         }
+
+        [Test]
+        public void running_a_curried_imported_step()
+        {
+            execute(@"
+=> Imports
+* SetTo12
+* SetValueIs#2: value=12
+");
+
+            CountsShouldBe(1, 0, 0, 0);
+
+            Step("2").Cell("value").Succeeded();
+        }
+
+        [Test]
+        public void curry_builds_the_model()
+        {
+            var sentence = ModelFor<Sentence>("Imports", "SetTo12");
+            sentence.format.ShouldEqual("Set to 12");
+            sentence.cells.Any().ShouldBeFalse();
+        }
+
+        [Test]
+        public void currying_selects_the_right_cells()
+        {
+            ModelFor<Sentence>("Curried", "Curried1")
+                .cells.Select(x => x.Key).ShouldHaveTheSameElementsAs("a", "c");
+
+            ModelFor<Sentence>("Curried", "Curried2")
+                .cells.Select(x => x.Key).ShouldHaveTheSameElementsAs("b", "c");
+        }
     }
 
     public class ImportsFixture : Fixture
@@ -37,11 +72,10 @@ namespace Storyteller.Core.Testing.Grammars.Importing
             this["SetTo"] = Import<StateFixture>("SetTo");
             this["SetValueIs"] = Import<StateFixture>("SetValueIs");
 
-            this["SetTo12"] = Import<StateFixture>("SetTo").Curry(new CurryAction()
-            {
-                Template = "Set to 12",
-                DefaultValues = "value:12"
-            });
+            this["SetTo12"] = Import<StateFixture>("SetTo")
+                .Curry().Template("Set to 12")
+                .Defaults("value:12");
+
         }
     }
 
@@ -76,5 +110,38 @@ namespace Storyteller.Core.Testing.Grammars.Importing
             RunningTotal += x;
             RunningTotal += y;
         }
+    }
+
+
+    public class CurriedFixture : Fixture
+    {
+        public string A;
+        public string B;
+        public string C;
+        public string D;
+
+        public CurriedFixture()
+        {
+            this["Curried1"] = Curry("Go1").Template("{a} to the {c}").Defaults("b:5");
+            this["Curried2"] = Curry(this["Go1"]).Template("{b} and {c}").Defaults("a:3");
+        }
+
+        public void Go1(string a, string b, string c, [Default("4")]string d)
+        {
+            A = a;
+            B = b;
+            C = c;
+            D = d;
+        }
+
+        public void Go2(string a, string b, [Default("4")]string c, [Default("4")]string d)
+        {
+            A = a;
+            B = b;
+            C = c;
+            D = d;
+        }
+
+
     }
 }

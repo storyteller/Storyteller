@@ -388,5 +388,16 @@ namespace Storyteller.Core
             var fixture = (T)FixtureLibrary.FixtureCache[typeof (T)];
             return new ImportedGrammar(fixture, fixture[grammarKey]);
         }
+
+        public CurryGrammarExpression Curry(string key)
+        {
+            return Curry(this[key]);
+        }
+
+        public CurryGrammarExpression Curry(IGrammar inner)
+        {
+            return new CurryGrammarExpression(inner);
+        }
+
     }
 }
