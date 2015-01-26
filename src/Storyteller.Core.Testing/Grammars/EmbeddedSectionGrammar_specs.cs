@@ -11,6 +11,12 @@ namespace Storyteller.Core.Testing.Grammars
     [TestFixture]
     public class EmbeddedSectionGrammar_specs : SpecRunningContext
     {
+        [SetUp]
+        public void SetUp()
+        {
+            RecordingFixture.Traced.Clear();
+        }
+
         [Test]
         public void runs_all_nested_steps_setup_and_teardown()
         {
@@ -32,6 +38,26 @@ Name: Embedded
         }
 
         [Test]
+        public void runs_all_nested_steps_setup_and_teardown_with_a_before_action()
+        {
+            execute(@"
+Name: Embedded
+=> EmbeddedGrammar
+* BeforeColors
+  -> Recording
+  * Blue#1
+  * Green#2
+  * Red#3
+
+");
+
+            RecordingFixture.Traced.ShouldHaveTheSameElementsAs("Before", "SetUp", "Blue", "Green", "Red", "TearDown");
+            Step("1").StatusWas(ResultStatus.ok);
+            Step("2").StatusWas(ResultStatus.ok);
+            Step("3").StatusWas(ResultStatus.ok);
+        }
+
+        [Test]
         public void builds_the_model()
         {
             var section = ModelFor<EmbeddedSection>("EmbeddedGrammar", "Colors");
@@ -46,6 +72,11 @@ Name: Embedded
         public EmbeddedGrammarFixture()
         {
             this["Colors"] = Embed<RecordingFixture>("In the recording fixture");
+            this["BeforeColors"] = Embed<RecordingFixture>("In the recording fixture")
+                .Before(c =>
+                {
+                    RecordingFixture.Traced.Add("Before");
+                });
         }
     }
 
@@ -55,7 +86,6 @@ Name: Embedded
 
         public override void SetUp()
         {
-            Traced.Clear();
             Traced.Add("SetUp");
         }
 
