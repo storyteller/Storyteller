@@ -110,6 +110,7 @@
     <Compile Include="ILineExecution.cs" />
     <Compile Include="ILineGrammar.cs" />
     <Compile Include="Engine\ISpecExecutor.cs" />
+    <Compile Include="IWithValues.cs" />
     <Compile Include="Model\FixtureLibrary.cs" />
     <Compile Include="Grammars\GrammarBuilder.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />

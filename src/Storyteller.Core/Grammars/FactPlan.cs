@@ -40,7 +40,7 @@ namespace Storyteller.Core.Grammars
         bool PerformTest(StepValues values, ISpecContext context);
     }
 
-    public class FactPlan : LineStepBase
+    public class FactPlan : LineStepBase, IWithValues
     {
         private readonly IFactGrammar _grammar;
 
@@ -51,8 +51,8 @@ namespace Storyteller.Core.Grammars
 
         protected override StepResult execute(ISpecContext context)
         {
-            var test = _grammar.PerformTest(values, context);
-            return new StepResult(values.Id, test ? ResultStatus.success : ResultStatus.failed);
+            var test = _grammar.PerformTest(Values, context);
+            return new StepResult(Values.Id, test ? ResultStatus.success : ResultStatus.failed);
         }
     }
 }

@@ -8,22 +8,22 @@ namespace Storyteller.Core.Grammars
 {
     public abstract class LineStepBase : ILineExecution
     {
-        protected StepValues values { get; private set; }
+        public StepValues Values { get; private set; }
 
         protected LineStepBase(StepValues values)
         {
-            this.values = values;
+            Values = values;
         }
 
         protected abstract StepResult execute(ISpecContext context);
 
         public void Execute(ISpecContext context)
         {
-            values.DoDelayedConversions(context);
+            Values.DoDelayedConversions(context);
 
-            if (values.Errors.Any())
+            if (Values.Errors.Any())
             {
-                var result = values.ToConversionErrorResult();
+                var result = Values.ToConversionErrorResult();
                 result.position = Position;
 
                 context.LogResult(result);
@@ -41,9 +41,11 @@ namespace Storyteller.Core.Grammars
             }
             catch (Exception ex)
             {
-                context.LogException(values.Id, ex, Position);
+                context.LogException(Values.Id, ex, Position);
             }
         }
+
+
 
         public object Position { get; set; }
 

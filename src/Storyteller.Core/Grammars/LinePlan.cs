@@ -4,7 +4,7 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars
 {
-    public class LineStep : LineStepBase
+    public class LineStep : LineStepBase, IWithValues
     {
         private readonly ILineGrammar _grammar;
 
@@ -15,9 +15,9 @@ namespace Storyteller.Core.Grammars
 
         protected override StepResult execute(ISpecContext context)
         {
-            var cellResults = _grammar.Execute(values, context);
+            var cellResults = _grammar.Execute(Values, context);
 
-            var result = new StepResult(values.Id, ResultStatus.ok)
+            var result = new StepResult(Values.Id, ResultStatus.ok)
             {
                 cells = cellResults.ToArray()
             };
