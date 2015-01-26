@@ -30,9 +30,9 @@ namespace Storyteller.Core.Grammars.Sets
             }).ToArray());
         }
 
-        public Cell[] BuildCells(CellHandling handling)
+        public Cell[] BuildCells(CellHandling handling, Fixture fixture)
         {
-            return new[]{new Cell(handling, _key, typeof(string)) };
+            return new[]{new Cell(handling, fixture, _key, typeof(string)) };
         }
     }
 }

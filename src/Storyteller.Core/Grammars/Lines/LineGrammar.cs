@@ -21,7 +21,7 @@ namespace Storyteller.Core.Grammars.Lines
 
         protected abstract string format();
 
-        protected virtual IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected virtual IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             return Enumerable.Empty<Cell>();
         }
@@ -29,7 +29,7 @@ namespace Storyteller.Core.Grammars.Lines
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
             // Let the UI handle the format errors
-            _cells = buildCells(cells).ToArray();
+            _cells = buildCells(cells, fixture).ToArray();
             return new Sentence
             {
                 cells = _cells,

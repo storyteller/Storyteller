@@ -46,9 +46,9 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
             return "Configure {0} with {{{0}}}".ToFormat(_cell);
         }
 
-        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, _key, typeof (TInput)) {DefaultValue = DefaultValue};
+            _cell = new Cell(cellHandling, fixture, _key, typeof (TInput)) {DefaultValue = DefaultValue};
 
             return new[] {_cell};
         }

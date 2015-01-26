@@ -46,7 +46,7 @@ namespace Storyteller.Core.Grammars.Reflection
             return _method.DeriveFormat();
         }
 
-        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             foreach (var cell in _method.GetParameters().Select(x => Cell.For(cellHandling, x)))
             {

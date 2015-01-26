@@ -52,7 +52,7 @@ namespace Storyteller.Core.Grammars.Decisions
             return "";
         }
 
-        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             return _properties.Select(x => x.CompileCell(cellHandling));
         }

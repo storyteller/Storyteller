@@ -57,11 +57,11 @@ namespace Storyteller.Core.Grammars.Lines
             return _label;
         }
 
-        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             // TODO -- make the exception message on garbage input nicer
             var key = _label.ParseTemplateKeys().Single();
-            _cell = new Cell(cellHandling, key, typeof (T));
+            _cell = new Cell(cellHandling, fixture, key, typeof (T));
 
             return new[] {_cell};
         }

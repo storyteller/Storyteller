@@ -38,9 +38,9 @@ namespace Storyteller.Core.Grammars.ObjectBuilding
             return _template;
         }
 
-        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType)
+            _cell = new Cell(cellHandling, fixture, _accessor.Name, _accessor.PropertyType)
             {
                 DefaultValue = DefaultValue
             };

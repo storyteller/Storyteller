@@ -14,7 +14,7 @@ namespace Storyteller.Core.Testing.Grammars.Sets
         {
             var comparison = new StringListComparison("expected", c => new String[0]);
 
-            var cell = comparison.BuildCells(CellHandling.Basic()).Single();
+            var cell = comparison.BuildCells(CellHandling.Basic(), new Fixture()).Single();
             cell.Key.ShouldEqual("expected");
             cell.Type.ShouldEqual(typeof (string));
         }

@@ -36,7 +36,7 @@ namespace Storyteller.Core.Grammars.Sets
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            _cells = _comparison.BuildCells(cells);
+            _cells = _comparison.BuildCells(cells, fixture);
 
             return new SetVerification
             {

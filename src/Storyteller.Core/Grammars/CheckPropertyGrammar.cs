@@ -41,7 +41,7 @@ namespace Storyteller.Core.Grammars
             return "{0} should be {{{0}}}".ToFormat(_accessor.Name);
         }
 
-        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
+        protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             _cell = Cell.For(cellHandling, _accessor);
             return new[] {_cell};

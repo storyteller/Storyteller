@@ -13,12 +13,14 @@ namespace Storyteller.Core.Testing.Model
     [TestFixture]
     public class CellTester
     {
+        private readonly Fixture fixture = new Fixture();
+
         [Test]
         public void can_serialize_cell()
         {
             var serializer = new Newtonsoft.Json.JsonSerializer();
 
-            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), fixture, "a", typeof(int));
 
             var writer = new StringWriter();
             serializer.Serialize(writer, cell);
@@ -57,7 +59,7 @@ namespace Storyteller.Core.Testing.Model
         [Test]
         public void matches_simply()
         {
-            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), fixture, "a", typeof(int));
             var values1 = new StepValues("foo");
             values1.Store(cell.Key, 5);
 
@@ -74,7 +76,7 @@ namespace Storyteller.Core.Testing.Model
         [Test]
         public void matches_array_()
         {
-            var cell = new Cell(CellHandling.Basic(), "a", typeof(int[]));
+            var cell = new Cell(CellHandling.Basic(), fixture, "a", typeof(int[]));
             var values1 = new StepValues("foo");
             values1.Store(cell.Key, new[]{1, 2, 3});
 

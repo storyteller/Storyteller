@@ -7,6 +7,6 @@ namespace Storyteller.Core.Grammars.Sets
     public interface ISetComparison
     {
         Task<StepValues[]> Fetch(ISpecContext context);
-        Cell[] BuildCells(CellHandling handling);
+        Cell[] BuildCells(CellHandling handling, Fixture fixture);
     }
 }

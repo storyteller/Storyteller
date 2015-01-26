@@ -22,7 +22,7 @@ namespace Storyteller.Core.Model
         /// <returns></returns>
         public static Cell For<T>(string key)
         {
-            return new Cell(CellHandling.Basic(), key, typeof(T));
+            return new Cell(CellHandling.Basic(), new Fixture(), key, typeof(T));
         }
 
         public static Cell For<T>(Expression<Func<T, object>> expression)
@@ -32,7 +32,7 @@ namespace Storyteller.Core.Model
 
         public static Cell For(CellHandling cells, ParameterInfo parameter)
         {
-            var cell = new Cell(cells, parameter.Name, parameter.ParameterType);
+            var cell = new Cell(cells, new Fixture(), parameter.Name, parameter.ParameterType);
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             return cell;
@@ -40,7 +40,7 @@ namespace Storyteller.Core.Model
 
         public static Cell For(CellHandling cells, PropertyInfo property)
         {
-            var cell = new Cell(cells, property.Name, property.PropertyType);
+            var cell = new Cell(cells, new Fixture(), property.Name, property.PropertyType);
             property.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             return cell;
@@ -48,14 +48,14 @@ namespace Storyteller.Core.Model
 
         public static Cell For(CellHandling cells, Accessor accessor)
         {
-            var cell = new Cell(cells, accessor.Name, accessor.PropertyType);
+            var cell = new Cell(cells, new Fixture(), accessor.Name, accessor.PropertyType);
             accessor.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             return cell;
         }
 
         // TODO -- need this to return a grammar error somehow if a converter
-        public Cell(CellHandling cells, string key, Type type)
+        public Cell(CellHandling cells, Fixture fixture, string key, Type type)
         {
             Type = type;
             Key = key;

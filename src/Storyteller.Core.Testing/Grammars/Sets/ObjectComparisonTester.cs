@@ -26,7 +26,7 @@ namespace Storyteller.Core.Testing.Grammars.Sets
         [Test]
         public void build_cells()
         {
-            var cells = comparer.BuildCells(CellHandling.Basic());
+            var cells = comparer.BuildCells(CellHandling.Basic(), new Fixture());
 
             cells.Select(x => x.Key).ShouldHaveTheSameElementsAs("City", "Address1", "DistanceFromOffice");
             cells.Select(x => x.Type).ShouldHaveTheSameElementsAs(typeof(string), typeof(string), typeof(double));
