@@ -58,7 +58,19 @@ namespace Storyteller.Core.Testing.Conversion
             conversions.Convert(typeof (string), "EMPTY").ShouldEqual(string.Empty);
         }
 
+        public enum Directions
+        {
+            North,
+            South,
+            East,
+            West
+        }
 
+        [Test]
+        public void can_round_trip_enumerable_values()
+        {
+            assertRoundTrip(Directions.North);
+        }
     }
 
     
