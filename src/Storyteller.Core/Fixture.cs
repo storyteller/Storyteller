@@ -376,5 +376,11 @@ namespace Storyteller.Core
         {
             return new VerifySetExpression<T>(c => dataSource());
         }
+
+        // TODO -- add a UT for this. Copied from old code
+        public static ActionGrammar<T> Read<T>(string key, Action<T> action)
+        {
+            return new ActionGrammar<T>("Read {" + key + "}", (x, context) => action(x));
+        }
     }
 }

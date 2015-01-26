@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Grammars.ObjectBuilding;
 using Storyteller.Core.Model;
-using Storyteller.Core.Testing.Samples.Fixtures;
+using Storyteller.Core.Testing.Grammars.Sets;
 
 namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
 {

@@ -79,7 +79,6 @@
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar_specs.cs" />
-    <Compile Include="Grammars\create_object_specs.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar_specs.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar_specs.cs" />
@@ -113,17 +112,6 @@
     <Compile Include="Grammars\Sets\ObjectComparisonTester.cs" />
     <Compile Include="Grammars\Sets\SetVerificationResultTester.cs" />
     <Compile Include="Grammars\Sets\StringListComparisonTester.cs" />
-    <Compile Include="Samples\Fixtures\CheckObjectFixture.cs" />
-    <Compile Include="Samples\Fixtures\CompositeFixture.cs" />
-    <Compile Include="Samples\Fixtures\DecoratedGrammarFixture.cs" />
-    <Compile Include="Samples\Fixtures\FailureFixture.cs" />
-    <Compile Include="Samples\Fixtures\MathFixture.cs" />
-    <Compile Include="Samples\Fixtures\ParkingExpiryFixture.cs" />
-    <Compile Include="Samples\Fixtures\SelectionListFixture.cs" />
-    <Compile Include="Samples\Fixtures\SentenceFixture.cs" />
-    <Compile Include="Samples\Fixtures\ServiceFixture.cs" />
-    <Compile Include="Samples\Fixtures\SetsFixture.cs" />
-    <Compile Include="Samples\Fixtures\TableFixture.cs" />
     <Compile Include="SpecContextExtensions.cs" />
     <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
@@ -136,29 +124,6 @@
       <Project>{90113dc7-c74e-4c5d-a0de-045f36378033}</Project>
       <Name>Storyteller.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Samples\Specs\Embedded\Embeds.xml" />
-    <Content Include="Samples\Specs\General\Check properties.xml" />
-    <Content Include="Samples\Specs\General\Selection List Values.xml" />
-    <Content Include="Samples\Specs\General\Services.xml" />
-    <Content Include="Samples\Specs\General\Test with Bad Grammar Name.xml" />
-    <Content Include="Samples\Specs\General\Test with Missing Fixture Name.xml" />
-    <Content Include="Samples\Specs\Paragraphs\Composite with Errors.xml" />
-    <Content Include="Samples\Specs\Paragraphs\Simple Composite.xml" />
-    <Content Include="Samples\Specs\Sentences\Facts.xml" />
-    <Content Include="Samples\Specs\Sentences\Sentences.xml" />
-    <Content Include="Samples\Specs\Sets\Ordered Set.xml" />
-    <Content Include="Samples\Specs\Sets\OrderedStringsSuccess.xml" />
-    <Content Include="Samples\Specs\Sets\SetWithError.xml" />
-    <Content Include="Samples\Specs\Sets\Unordered Set.xml" />
-    <Content Include="Samples\Specs\Sets\Unsuccessful Ordering.xml" />
-    <Content Include="Samples\Specs\Tables\Data Table Verification Happy Path.xml" />
-    <Content Include="Samples\Specs\Tables\Data Table Verification Sad Path.xml" />
-    <Content Include="Samples\Specs\Tables\Data Table Verification with Overridden Matchers.xml" />
-    <Content Include="Samples\Specs\Tables\Decision Table.xml" />
-    <Content Include="Samples\Specs\Tables\Tables with Errors.xml" />
-    <Content Include="Samples\Specs\Tables\Tables.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
