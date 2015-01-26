@@ -43,7 +43,7 @@ namespace Storyteller.Core.Grammars
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling)
         {
-            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType);
+            _cell = Cell.For(cellHandling, _accessor);
             return new[] {_cell};
         }
 

@@ -31,6 +31,22 @@ namespace Storyteller.Core.Model
             return cell;
         }
 
+        public static Cell For(CellHandling cells, PropertyInfo property)
+        {
+            var cell = new Cell(cells, property.Name, property.PropertyType);
+            property.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+
+            return cell;
+        }
+
+        public static Cell For(CellHandling cells, Accessor accessor)
+        {
+            var cell = new Cell(cells, accessor.Name, accessor.PropertyType);
+            accessor.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+
+            return cell;
+        }
+
         // TODO -- need this to return a grammar error somehow if a converter
         public Cell(CellHandling cells, string key, Type type)
         {

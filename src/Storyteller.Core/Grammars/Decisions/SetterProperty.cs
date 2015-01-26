@@ -24,7 +24,7 @@ namespace Storyteller.Core.Grammars.Decisions
 
         public Cell CompileCell(CellHandling cellHandling)
         {
-            return new Cell(cellHandling, _property.Name, _property.PropertyType);
+            return Cell.For(cellHandling, _property);
         }
     }
 }
