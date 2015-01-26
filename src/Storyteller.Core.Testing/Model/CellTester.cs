@@ -163,6 +163,23 @@ namespace Storyteller.Core.Testing.Model
             var cell = Cell.For<CellTarget>(x => x.IsActive);
             cell.editor.ShouldEqual("boolean");
         }
+
+        [Test]
+        public void use_a_select_editor_for_an_enum()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Direction);
+            cell.editor.ShouldEqual("select");
+            cell.options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("North", "South", "East", "West");
+        }
+    }
+
+    public enum Directions
+    {
+        North,
+        South,
+        East,
+        West
     }
 
     public class CellTarget
@@ -171,5 +188,7 @@ namespace Storyteller.Core.Testing.Model
         public string City { get; set; }
 
         public bool IsActive { get; set; }
+
+        public Directions Direction { get; set; }
     }
 }

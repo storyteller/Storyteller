@@ -77,6 +77,11 @@ namespace Storyteller.Core.Model
             {
                 editor = "boolean";
             }
+            else if (type.IsEnum)
+            {
+                editor = "select";
+                options = Option.For(Enum.GetNames(type));
+            }
         }
 
         private void selectConverter(CellHandling cells, Type type)
