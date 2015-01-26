@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using FubuCore;
+﻿using FubuCore;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Grammars;
 
@@ -29,10 +27,7 @@ namespace Storyteller.Core.Model
 
         public Cell[] cells
         {
-            get
-            {
-                return new Cell[0];
-            }
+            get { return new Cell[0]; }
         }
     }
 }

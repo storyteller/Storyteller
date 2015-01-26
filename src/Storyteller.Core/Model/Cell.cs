@@ -161,7 +161,11 @@ namespace Storyteller.Core.Model
             _conversion(step, values);
         }
 
-        
+
+        public bool HasDefault()
+        {
+            return DefaultValue.IsNotEmpty();
+        }
     }
 
     public interface ICellExpression

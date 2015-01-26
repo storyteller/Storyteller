@@ -57,6 +57,10 @@
     <Compile Include="Grammars\Decisions\IProperty.cs" />
     <Compile Include="Grammars\Decisions\SetterProperty.cs" />
     <Compile Include="Grammars\Decisions\TableLineGrammar.cs" />
+    <Compile Include="Grammars\Importing\CurriedLineGrammar.cs" />
+    <Compile Include="Grammars\Importing\CurryAction.cs" />
+    <Compile Include="Grammars\Importing\GrammarImport.cs" />
+    <Compile Include="Grammars\Importing\ImportedGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar.cs" />
     <Compile Include="Grammars\ObjectBuilding\ObjectConstructionExpression.cs" />

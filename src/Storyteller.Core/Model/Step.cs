@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using FubuCore.Util;
 using Storyteller.Core.Grammars;
 
@@ -70,6 +71,21 @@ namespace Storyteller.Core.Model
         {
             Values.Add(key, value);
             return this;
+        }
+
+        public static IDictionary<string, string> ParseValues(string text)
+        {
+            var dict = new Dictionary<string, string>();
+            if (text.IsEmpty()) return dict;
+
+            string[] data = text.Split(',');
+            foreach (string property in data)
+            {
+                string[] parts = property.Split(':');
+                dict.Add(parts[0].Trim(), parts[1].Trim());
+            }
+
+            return dict;
         }
     }
 
