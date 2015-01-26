@@ -20,7 +20,7 @@ namespace Storyteller.Core.Model
             return new InvalidGrammarStep(new StepValues(step.Id), _message);
         }
 
-        GrammarModel IGrammar.Compile(CellHandling cells)
+        GrammarModel IGrammar.Compile(Fixture fixture, CellHandling cells)
         {
             return this;
         }

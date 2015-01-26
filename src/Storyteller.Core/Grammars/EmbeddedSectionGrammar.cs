@@ -44,7 +44,7 @@ namespace Storyteller.Core.Grammars
             return new CompositeExecution(new IExecutionStep[]{silentAction, sectionPlan});
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
             return new EmbeddedSection
             {

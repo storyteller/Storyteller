@@ -36,9 +36,9 @@ namespace Storyteller.Core.Grammars.Decisions
             return _inner.CreatePlan(step, library);
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            return _inner.Compile(cells);
+            return _inner.Compile(fixture, cells);
         }
     }
 }

@@ -45,9 +45,9 @@ namespace Storyteller.Core.Grammars.Paragraphs
             _children.Add(grammar);
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            var childrenModels = _children.Select(_ => _.Compile(cells)).ToArray();
+            var childrenModels = _children.Select(_ => _.Compile(fixture, cells)).ToArray();
             return new Paragraph (childrenModels){ title = _title};
         }
 

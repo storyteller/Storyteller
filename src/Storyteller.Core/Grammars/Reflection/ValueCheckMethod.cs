@@ -19,7 +19,7 @@ namespace Storyteller.Core.Grammars.Reflection
             var method = ReflectionHelper.GetMethod(expression);
             var grammar = new ValueCheckMethod(method, target);
 
-            grammar.Compile(CellHandling.Basic());
+            grammar.Compile(new Fixture(), CellHandling.Basic());
 
             return grammar;
         }

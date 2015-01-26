@@ -22,9 +22,9 @@ namespace Storyteller.Core.Grammars.Importing
             return new ImportedExecutionStep(_fixture, innerPlan);
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            return _inner.Compile(cells);
+            return _inner.Compile(fixture, cells);
         }
     }
 }

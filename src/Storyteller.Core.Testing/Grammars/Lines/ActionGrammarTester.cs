@@ -29,7 +29,7 @@ namespace Storyteller.Core.Testing.Grammars.Lines
         {
             var grammar = new ActionGrammar("do something", c => { });
 
-            var model = grammar.Compile(CellHandling.Basic()).ShouldBeOfType<Sentence>();
+            var model = grammar.Compile(new Fixture(), CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
             model.errors.Any().ShouldBeFalse();
             model.format.ShouldEqual("do something");

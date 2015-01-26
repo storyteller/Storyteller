@@ -209,7 +209,7 @@ namespace Storyteller.Core.Testing
             throw new System.NotImplementedException();
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
             return new StubGrammarModel();
         }

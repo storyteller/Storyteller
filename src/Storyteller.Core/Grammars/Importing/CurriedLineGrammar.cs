@@ -31,9 +31,9 @@ namespace Storyteller.Core.Grammars.Importing
             return _inner.CreatePlan(step, library);
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            var inner = _inner.Compile(cells);
+            var inner = _inner.Compile(fixture, cells);
             var innerCells = inner.As<IModelWithCells>().cells;
 
             return new Sentence

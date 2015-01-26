@@ -32,7 +32,7 @@ namespace Storyteller.Core.Testing.Model
         public void compile_just_returns_itself()
         {
             var grammar = new MissingGrammar("Bad!");
-            grammar.As<IGrammar>().Compile(null)
+            grammar.As<IGrammar>().Compile(new Fixture(), null)
                 .ShouldBeTheSameAs(grammar);
         }
 

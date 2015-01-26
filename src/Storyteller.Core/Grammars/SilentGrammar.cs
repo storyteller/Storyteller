@@ -20,7 +20,7 @@ namespace Storyteller.Core.Grammars
             return new SilentAction(_position, _action, step);
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
             return Silent.Flyweight;
         }

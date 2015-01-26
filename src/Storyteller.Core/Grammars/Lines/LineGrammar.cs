@@ -26,7 +26,7 @@ namespace Storyteller.Core.Grammars.Lines
             return Enumerable.Empty<Cell>();
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
             // Let the UI handle the format errors
             _cells = buildCells(cells).ToArray();

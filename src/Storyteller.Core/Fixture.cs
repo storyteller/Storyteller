@@ -70,7 +70,7 @@ namespace Storyteller.Core
 
             var grammars = _grammars.GetAllKeys().Select(key =>
             {
-                var model = _grammars[key].Compile(conversions);
+                var model = _grammars[key].Compile(this, conversions);
                 model.key = key;
 
                 return model;

@@ -26,14 +26,14 @@ namespace Storyteller.Core.Grammars.Tables
             return new CompositeExecution(toExecutionSteps(library, step));
         }
 
-        public GrammarModel Compile(CellHandling cells)
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
             if (_inner is MissingGrammar)
             {
-                return _inner.Compile(cells);
+                return _inner.Compile(fixture, cells);
             }
 
-            var innerModel = _inner.Compile(cells).As<IModelWithCells>();
+            var innerModel = _inner.Compile(fixture, cells).As<IModelWithCells>();
 
             return new Table
             {
