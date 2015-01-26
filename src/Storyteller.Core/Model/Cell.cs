@@ -100,7 +100,8 @@ namespace Storyteller.Core.Model
                 {
                     try
                     {
-                        var converted = converter(step.Values[Key]);
+                        var rawValue = step.Values[Key];
+                        var converted = rawValue == "NULL" ? null : converter(rawValue);
                         values.Store(Key, converted);
                     }
                     catch (FormatException)

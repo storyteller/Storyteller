@@ -113,6 +113,14 @@ namespace Storyteller.Core.Testing.Model
         }
 
         [Test]
+        public void NULL_is_converted_as_wait_for_it_null()
+        {
+            var cell = Cell.For<string>("foo");
+            var values = convert(cell, "NULL");
+            values.Get("foo").ShouldBeNull();
+        }
+
+        [Test]
         public void create_with_basic_converter_and_convert_with_errors()
         {
             var cell = Cell.For<int>("a");
