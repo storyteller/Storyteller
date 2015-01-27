@@ -49,12 +49,13 @@ end
 
 desc "Runs the ST command against the gallery project.  Should succeed"
 task :smoke_test_st_run => [:compile] do
-  sh "src/ST/bin/#{@solution.compilemode}/ST run src/Storyteller.Gallery -c #{@solution.compilemode}"
+  sh Platform.runtime("src/ST/bin/#{@solution.compilemode}/ST.exe run src/StoryTeller.Gallery -c #{@solution.compilemode}")
 end
 
 desc "Runs the ST command against the gallery project regression tests.  Should succeed"
 task :smoke_test_st_run_regression => [:compile] do
-  output = `src/ST/bin/#{@solution.compilemode}/ST run src/Storyteller.Gallery -c #{@solution.compilemode} -l Regression`
+  cmd = Platform.runtime("src/ST/bin/#{@solution.compilemode}/ST.exe run src/StoryTeller.Gallery -c #{@solution.compilemode} -l Regression")
+  output = `#{cmd}`
   outputLines = output.split "\n"
 
   exit 1 unless $?.exitstatus == 0
