@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using StoryTeller.Execution;
 using StoryTeller.Engine;
+using System.IO;
 
 namespace StoryTellerTestHarness
 {
@@ -12,7 +13,7 @@ namespace StoryTellerTestHarness
         [TestFixtureSetUp]
         public void SetupRunner()
         {
-            runner = new ProjectTestRunner(@"..\..\..\..\samples\grammars.xml");
+            runner = new ProjectTestRunner(Path.Combine("..", "..", "..", "..", "samples", "grammars.xml"));
         }
 
         [Test]

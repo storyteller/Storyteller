@@ -85,7 +85,15 @@ namespace StoryTeller.Workspace
             using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
                 var reader = XmlReader.Create(stream);
-                reader.ReadToNextSibling("Test");
+				/* TODO: on mono you need to Read otherwise the XmlReader
+				 * is in an Initial state, which msdn says means you shouldn't call
+				 * ReadToNextSibling. But calling Read progresses the reader forward so
+				 * that ReadToNextSibling skips the test without a <?xml> first line...
+				 */
+				reader.Read ();
+                if (!(reader.IsStartElement() || reader.Name == "Test")) {
+                    reader.ReadToNextSibling ("Test");
+                }
 
                 var node = new XmlReaderNode(reader);
                 test = TestReader.CreateTest(node, new LazyTestPartCollection(filename));

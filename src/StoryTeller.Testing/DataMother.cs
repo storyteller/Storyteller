@@ -13,19 +13,19 @@ namespace StoryTeller.Testing
 {
     public static class DataMother
     {
-        public const string THE_GRAMMAR_FILE = @"..\..\..\..\samples\grammars.xml";
-        public const string THE_MATH_FILE = @"..\..\..\..\samples\math.xml";
+		public static readonly string THE_GRAMMAR_FILE = Path.Combine ("..", "..", "..", "..", "samples", "grammars.xml");
+		public static readonly string THE_MATH_FILE = Path.Combine ("..", "..", "..", "..", "samples", "math.xml");
 
         public static Project MathProject()
         {
-            var directory = Path.GetDirectoryName(THE_MATH_FILE);
+			var directory = Path.GetDirectoryName(MathProjectFile());
             var empty = Path.Combine(directory, "EmptySuite");
             if (!Directory.Exists(empty))
             {
                 Directory.CreateDirectory(empty);
             }
 
-            return readProjectFile(THE_MATH_FILE);
+			return readProjectFile(MathProjectFile());
         }
 
         private static Project readProjectFile(string projectFile)
@@ -54,7 +54,7 @@ namespace StoryTeller.Testing
 
         public static string MathProjectFile()
         {
-            return THE_MATH_FILE;
+			return THE_MATH_FILE;
         }
 
         public static FixtureLibrary MathLibrary()
@@ -173,7 +173,7 @@ namespace StoryTeller.Testing
 
         public static ProjectTestRunner MathProjectRunner()
         {
-            return new ProjectTestRunner(readProjectFile(THE_MATH_FILE));
+			return new ProjectTestRunner(readProjectFile(MathProjectFile()));
         }
 
         public static ProjectTestRunner GrammarsProjectRunner()
