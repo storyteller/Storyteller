@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using StoryTeller.Workspace;
 using System.Linq;
+using FubuCore;
 
 namespace StoryTeller.Testing.Workspace
 {
@@ -19,9 +20,13 @@ namespace StoryTeller.Testing.Workspace
         [Test]
         public void fail_validation_if_the_binary_folder_does_not_exist()
         {
-            project.BinaryFolder = "c:\\SomethingWrong";
+            var path = "c:\\SomethingWrong";
+            if (Platform.IsUnix ()) {
+                path = "/tmp/SomethingWrong";
+            }
+            project.BinaryFolder = path;
 
-            project.Validate().Messages.ShouldHaveTheSameElementsAs("Binary Folder 'c:\\SomethingWrong' does not exist");
+            project.Validate().Messages.ShouldHaveTheSameElementsAs("Binary Folder '{0}' does not exist".ToFormat(path));
         }
 
         [Test]
@@ -43,9 +48,13 @@ namespace StoryTeller.Testing.Workspace
         [Test]
         public void fail_validation_if_the_test_folder_cannot_be_found()
         {
-            project.TestFolder = "c:\\SomethingWrong";
+            var path = "c:\\SomethingWrong";
+            if (Platform.IsUnix ()) {
+                path = "/tmp/SomethingWrong";
+            }
+            project.TestFolder = path;
 
-            project.Validate().Messages.ShouldHaveTheSameElementsAs("Test Folder 'c:\\SomethingWrong' does not exist");
+            project.Validate().Messages.ShouldHaveTheSameElementsAs("Test Folder '{0}' does not exist".ToFormat(path));
         }
 
         [Test]

@@ -81,7 +81,7 @@ namespace StoryTeller.Testing.Workspace
 
             project.CreateDirectory(childSuite);
 
-            Directory.Exists("NewSuite\\Child").ShouldBeTrue();
+            Directory.Exists(Path.Combine("NewSuite", "Child")).ShouldBeTrue();
         }
 
         [Test]
@@ -108,7 +108,8 @@ namespace StoryTeller.Testing.Workspace
         [Test]
         public void get_test_path()
         {
-            var project = new Project(@"c:\a\b\c\d\project.proj")
+            var path = Path.GetTempPath ();
+            var project = new Project(Path.Combine(path, "project.proj"))
             {
                 TestFolder = "tests"
             };
@@ -121,15 +122,16 @@ s1/s2/t3,Success
 
             var test = hierarchy.FindTest("t1");
 
-            project.GetTestPath(test).ShouldEqual(@"c:\a\b\c\d\tests\t1.xml");
-            project.GetTestPath(hierarchy.FindTest("s1/t2")).ShouldEqual(@"c:\a\b\c\d\tests\s1\t2.xml");
-            project.GetTestPath(hierarchy.FindTest("s1/s2/t3")).ShouldEqual(@"c:\a\b\c\d\tests\s1\s2\t3.xml");
+            project.GetTestPath(test).ShouldEqual(Path.Combine(path, "tests", "t1.xml"));
+            project.GetTestPath(hierarchy.FindTest("s1/t2")).ShouldEqual(Path.Combine(path, "tests", "s1", "t2.xml"));
+            project.GetTestPath(hierarchy.FindTest("s1/s2/t3")).ShouldEqual(Path.Combine(path, "tests", "s1", "s2", "t3.xml"));
         }
 
         [Test]
         public void get_test_path_when_the_test_overrides_the_file_name()
         {
-            var project = new Project(@"c:\a\b\c\d\project.proj")
+            var path = Path.GetTempPath ();
+            var project = new Project(Path.Combine (path, "project.proj"))
             {
                 TestFolder = "tests"
             };
@@ -142,27 +144,29 @@ s1/s2/t3,Success
             var test = hierarchy.FindTest("t1");
             test.FileName = "TheBigTest.xml";
 
-            project.GetTestPath(test).ShouldEqual(@"c:\a\b\c\d\tests\TheBigTest.xml");
+            project.GetTestPath(test).ShouldEqual(Path.Combine (path, "tests", "TheBigTest.xml"));
         }
 
         [Test]
         public void get_the_test_path_of_a_test_at_the_hierarchy_scope()
         {
-            var project = new Project(@"c:\a\b\c\d\project.proj")
+            var path = Path.GetTempPath ();
+            var project = new Project(Path.Combine (path, "project.proj"))
             {
                 TestFolder = "tests"
             };
             var hierarchy = new Hierarchy("something");
             var test = new Test("t0");
             hierarchy.AddTest(test);
-            project.GetTestPath(test).ShouldEqual(@"c:\a\b\c\d\tests\t0.xml");
+            project.GetTestPath(test).ShouldEqual(Path.Combine (path, "tests", "t0.xml"));
         }
 
         [Test]
         public void GetBaseFolder()
         {
-            var project = new Project(@"c:\a\b\c\d\project.proj");
-            Assert.AreEqual(@"c:\a\b\c\d", project.GetBaseProjectFolder());
+            var path = Path.GetTempPath ().TrimEnd (Path.DirectorySeparatorChar);
+            var project = new Project (Path.Combine (path, "project.proj"));
+            Assert.AreEqual(path, project.GetBaseProjectFolder());
         }
 
         [Test]

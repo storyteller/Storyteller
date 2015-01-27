@@ -38,7 +38,7 @@ namespace StoryTeller.Workspace
         public string BinaryFolder
         {
             get { return _binaryFolder; }
-            set { _binaryFolder = value; }
+            set { _binaryFolder = NormalisePath (value); }
         }
 
         public string Profile { get; set; }
@@ -47,7 +47,7 @@ namespace StoryTeller.Workspace
         public string TestFolder
         {
             get { return _testFolder ?? "Tests"; }
-            set { _testFolder = value; }
+            set { _testFolder = NormalisePath (value); }
         }
 
         public string CompileTarget { get; set; }
@@ -66,7 +66,8 @@ namespace StoryTeller.Workspace
             }
             set
             {
-                _projectFolder = value;
+                _projectFolder = NormalisePath(value);
+
                 if (!Path.IsPathRooted(_projectFolder) && _projectFolder.IsNotEmpty())
                 {
                     _projectFolder = Path.GetFullPath(_projectFolder);
@@ -86,7 +87,7 @@ namespace StoryTeller.Workspace
             get { return _fileName; }
             set
             {
-                _fileName = value;
+                _fileName = NormalisePath(value);
                 _projectFolder = Path.GetDirectoryName(_fileName);
             }
         }
@@ -268,6 +269,14 @@ namespace StoryTeller.Workspace
             }
 
             return messages;
+        }
+
+        private string NormalisePath(string path) 
+        {
+            if (!string.IsNullOrEmpty(path) && Platform.IsUnix ()) {
+                path = path.Replace ('\\', Path.DirectorySeparatorChar);
+            }
+            return path;
         }
 
     }

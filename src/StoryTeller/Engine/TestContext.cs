@@ -471,7 +471,7 @@ namespace StoryTeller.Engine
             var traceListener = new TextWriterTraceListener(_traceWriter);
             Debug.Listeners.Add(traceListener);
             
-            //Console.SetOut(_traceWriter);
+            Console.SetOut(_traceWriter);
 
 
             try
