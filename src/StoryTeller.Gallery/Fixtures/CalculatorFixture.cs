@@ -1,5 +1,6 @@
-using System.Threading;
-using StoryTeller.Engine;
+using Storyteller.Core;
+using Storyteller.Core.Grammars.Decisions;
+using Storyteller.Core.Grammars.Tables;
 using StoryTeller.Gallery.Application;
 
 namespace StoryTeller.Gallery.Fixtures
@@ -72,15 +73,31 @@ namespace StoryTeller.Gallery.Fixtures
 
     public class TabularDataChecker : DecisionTableGrammar
     {
+        public TabularDataChecker() : base("Check some tabular data")
+        {
+        }
+
         private double _x;
         private double _y;
 
-        public double X { set { _x = value; } }
+        public double X
+        {
+            set { _x = value; }
+        }
 
-        public double Y { set { _y = value; } }
+        public double Y
+        {
+            set { _y = value; }
+        }
 
-        public double Sum { get { return _x + _y; } }
+        public double Sum
+        {
+            get { return _x + _y; }
+        }
 
-        public double Product { get { return _x*_y; } }
+        public double Product
+        {
+            get { return _x*_y; }
+        }
     }
 }

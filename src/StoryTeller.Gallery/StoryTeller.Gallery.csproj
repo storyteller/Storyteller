@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StoryTeller.Gallery</RootNamespace>
     <AssemblyName>StoryTeller.Gallery</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FubuCore">
@@ -71,13 +73,6 @@
   <ItemGroup>
     <Compile Include="Application\Calculator.cs" />
     <Compile Include="Fixtures\CalculatorFixture.cs" />
-    <Compile Include="Fixtures\RetryAttemptFixture.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
-      <Project>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</Project>
-      <Name>StoryTeller</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="gallery.xml">
@@ -107,6 +102,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">
+      <Project>{90113dc7-c74e-4c5d-a0de-045f36378033}</Project>
+      <Name>Storyteller.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
