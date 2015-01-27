@@ -69,6 +69,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="cells_reading_lists_integration_specs.cs" />
     <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
     <Compile Include="EndToEndExecution\fixture_check_method_specs.cs" />

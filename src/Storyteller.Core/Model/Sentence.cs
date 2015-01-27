@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Storyteller.Core.Model
 {
     public class Sentence : GrammarModel, IModelWithCells
@@ -9,5 +11,9 @@ namespace Storyteller.Core.Model
         {
         }
 
+        public Cell FindCell(string cell)
+        {
+            return cells.FirstOrDefault(x => x.Key == cell);
+        }
     }
 }
