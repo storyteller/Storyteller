@@ -2,6 +2,7 @@ using NUnit.Framework;
 using StoryTeller.Domain;
 using StoryTeller.Workspace;
 using System.Linq;
+using System.IO;
 
 namespace StoryTeller.Testing.Workspace
 {
@@ -13,7 +14,8 @@ namespace StoryTeller.Testing.Workspace
         [SetUp]
         public void SetUp()
         {
-            test = LazyTestXmlReader.ReadFromFile(@"..\..\..\StoryTeller.Samples\Tests\Sentences\Facts.xml");
+            var path = Path.Combine ("..", "..", "..", "StoryTeller.Samples", "Tests", "Sentences", "Facts.xml");
+            test = LazyTestXmlReader.ReadFromFile(path);
         }
 
         [Test]

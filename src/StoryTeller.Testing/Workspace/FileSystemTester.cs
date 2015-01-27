@@ -38,26 +38,26 @@ namespace StoryTeller.Testing.Workspace
         public void GetSubfoldersForADirectory()
         {
             var system = new FileSystem();
-            Directory.CreateDirectory(ROOT_FOLDER + "\\test");
-            Directory.CreateDirectory(ROOT_FOLDER + "\\test1");
+            Directory.CreateDirectory(Path.Combine(ROOT_FOLDER, "test"));
+            Directory.CreateDirectory(Path.Combine(ROOT_FOLDER, "test1"));
 
             string[] subFolders = system.GetSubFolders(ROOT_FOLDER);
             subFolders.Length.ShouldEqual(2);
-            subFolders[0].ShouldEqual(ROOT_FOLDER + "\\test");
-            subFolders[1].ShouldEqual(ROOT_FOLDER + "\\test1");
+            subFolders[0].ShouldEqual(Path.Combine(ROOT_FOLDER, "test"));
+            subFolders[1].ShouldEqual(Path.Combine(ROOT_FOLDER, "test1"));
         }
 
-        [Test]
+        [Test, Platform(Exclude="Unix,Linux")]
         public void GetSubFoldersShouldNotReturnHiddenDirectoriesEvenIfTheyHaveOtherAttributes()
         {
             var system = new FileSystem();
-            Directory.CreateDirectory(ROOT_FOLDER + "\\test");
-            Directory.CreateDirectory(ROOT_FOLDER + "\\test1");
-            File.SetAttributes(ROOT_FOLDER + "\\test1",
+            Directory.CreateDirectory(Path.Combine(ROOT_FOLDER, "test"));
+            Directory.CreateDirectory(Path.Combine(ROOT_FOLDER, "test1"));
+            File.SetAttributes(Path.Combine(ROOT_FOLDER, "test1"),
                                FileAttributes.Directory | FileAttributes.Hidden | FileAttributes.NotContentIndexed);
             string[] subFolders = system.GetSubFolders(ROOT_FOLDER);
             subFolders.Length.ShouldEqual(1);
-            subFolders[0].ShouldEqual(ROOT_FOLDER + "\\test");
+            subFolders[0].ShouldEqual(Path.Combine(ROOT_FOLDER, "test"));
         }
 
         [Test]

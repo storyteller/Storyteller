@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.Execution
             var runner = new DirectoryRunner(null, new TestReader(), null, new FileSystem(),
                                              new DirectoryRunnerSetup
                                              {
-                                                 TestFolder = @"..\..\SampleData"
+												TestFolder = Path.Combine("..", "..", "SampleData")
                                              });
             List<Test> tests = runner.LoadAllTests();
 
@@ -105,19 +105,19 @@ namespace StoryTeller.Testing.Execution
                 },
                 new Test("a")
                 {
-                    SuiteName = "Address\\Data"
+					SuiteName = Path.Combine("Address", "Data")
                 },
                 new Test("b")
                 {
-                    SuiteName = "Address\\Data"
+					SuiteName = Path.Combine("Address", "Data")
                 },
                 new Test("c")
                 {
-                    SuiteName = "Address\\Screen"
+					SuiteName = Path.Combine("Address", "Screen")
                 },
                 new Test("d")
                 {
-                    SuiteName = "Address\\Screen"
+					SuiteName = Path.Combine("Address", "Screen")
                 },
                 new Test("e")
                 {

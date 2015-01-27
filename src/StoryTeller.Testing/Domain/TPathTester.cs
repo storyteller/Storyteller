@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using StoryTeller.Domain;
+using System.IO;
 
 namespace StoryTeller.Testing.Domain
 {
@@ -39,8 +40,8 @@ namespace StoryTeller.Testing.Domain
         {
             containingFolderFor("t1").ShouldEqual(string.Empty);
             containingFolderFor("s1/t1").ShouldEqual("s1");
-            containingFolderFor("s1/s2/t1").ShouldEqual("s1\\s2");
-            containingFolderFor("s1/s2/s3/t1").ShouldEqual("s1\\s2\\s3");
+			containingFolderFor("s1/s2/t1").ShouldEqual(Path.Combine(new [] {"s1", "s2"}));
+			containingFolderFor("s1/s2/s3/t1").ShouldEqual(Path.Combine(new [] {"s1", "s2", "s3"}));
         }
 
         [Test]
