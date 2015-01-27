@@ -1,6 +1,7 @@
 using System;
+using Storyteller.Core.Grammars.Tables;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class CompositeFixture : MathFixture
     {
@@ -21,7 +22,7 @@ namespace StoryTeller.Samples.Grammars
                 x += this["StartWith"];
                 x += this["Add"];
                 x += this["MultiplyBy"];
-                x += Do(() => { throw new NotImplementedException(); });
+                x += c => { throw new NotImplementedException(); };
                 x += this["TheValueShouldBe"];
             });
         }

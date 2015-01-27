@@ -1,7 +1,7 @@
 using System;
-using StoryTeller.Engine;
+using Storyteller.Core;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class FailureFixture : Fixture
     {

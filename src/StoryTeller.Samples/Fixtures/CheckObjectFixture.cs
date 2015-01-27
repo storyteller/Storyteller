@@ -1,6 +1,6 @@
-using StoryTeller.Engine;
+using Storyteller.Core;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class CheckObjectFixture : Fixture
     {
@@ -11,10 +11,10 @@ namespace StoryTeller.Samples.Grammars
 
         public IGrammar IfTheAddressIs()
         {
-            return CreateNewObject<Address>(x =>
+            return CreateNewObject<Address>("If the new address is", x =>
             {
                 x.SetAllPrimitivePropertiesSpecificToThisType();
-            }).Title("If the new address is");
+            });
         }
 
         public IGrammar TheAddressShouldBe()

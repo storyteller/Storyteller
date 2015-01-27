@@ -1,7 +1,5 @@
 using System;
-using FubuCore.Conversion;
-using StoryTeller.Engine;
-using StructureMap;
+using Storyteller.Core.Engine;
 
 namespace StoryTeller.Samples
 {

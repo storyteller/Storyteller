@@ -1,12 +1,10 @@
 using System;
-using StoryTeller.Assertions;
-using StoryTeller.Engine;
+using Storyteller.Core;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class SimpleFixture : Fixture
     {
-
         public void A()
         {
         }
@@ -30,31 +28,21 @@ namespace StoryTeller.Samples.Grammars
         {
             this["Simple"] = Embed<SimpleFixture>("simple");
             this["Single"] = Embed<SingleSelectionFixture>("single");
-            this["Inline"] = Inline<SimpleFixture>("simple");
+            this["Inline"] = Embed<SimpleFixture>("simple");
             this["MandatorySelection"] = Embed<MandatorySelectionFixture>("mandatory");
         }
     }
 
     public class SingleSelectionFixture : SentenceFixture
     {
-        public SingleSelectionFixture()
-        {
-
-        }
     }
 
     public class OneOrMoreSelectionFixture : SentenceFixture
     {
-        public OneOrMoreSelectionFixture()
-        {
-        }
     }
 
     public class MandatorySelectionFixture : SentenceFixture
     {
-        public MandatorySelectionFixture()
-        {
-        }
     }
 
 
@@ -70,6 +58,7 @@ namespace StoryTeller.Samples.Grammars
             this["ThisFactThrowsException"] =
                 Fact("This fact throws an exception").VerifiedBy(() => { throw new NotImplementedException(); });
         }
+
         // END:  GrammarsInConstructor
 
         // SAMPLE:  ActionMethod
@@ -78,6 +67,7 @@ namespace StoryTeller.Samples.Grammars
         {
             _number = number;
         }
+
         // END:  ActionMethod
 
         [FormatAs("Multiply by {multiplier} then add {delta}")]
@@ -110,6 +100,7 @@ namespace StoryTeller.Samples.Grammars
         {
             return number1 + number2;
         }
+
         // END:  ValueCheckMethod
 
         public void ThisLineAlwaysThrowsExceptions()
@@ -135,6 +126,7 @@ namespace StoryTeller.Samples.Grammars
         {
             return (x + y) == sum;
         }
+
         // END:  FactAssertions
     }
 }

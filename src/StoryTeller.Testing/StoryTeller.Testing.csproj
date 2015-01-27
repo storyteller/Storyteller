@@ -126,8 +126,6 @@
     <Compile Include="Engine\FixtureRegistryTester.cs" />
     <Compile Include="Engine\FixtureTester.cs" />
     <Compile Include="Engine\FrameTester.cs" />
-    <Compile Include="Engine\Importing\GrammarImportTester.cs" />
-    <Compile Include="Engine\Importing\ImportGrammarIntegrationTester.cs" />
     <Compile Include="Engine\Library_building_in_FixtureGraph_Tester.cs" />
     <Compile Include="Engine\SelectionListTester.cs" />
     <Compile Include="Engine\SelectionValueAttributeTester.cs" />
@@ -217,10 +215,6 @@
     <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
       <Project>{CAE54634-A689-4CF2-979E-CCBCCA8A3644}</Project>
       <Name>StoryTeller.Gallery</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
-      <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
-      <Name>StoryTeller.Samples</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
       <Project>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</Project>

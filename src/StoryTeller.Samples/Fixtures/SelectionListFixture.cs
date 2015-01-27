@@ -1,15 +1,15 @@
 using System;
-using StoryTeller.Engine;
+using Storyteller.Core;
+using Storyteller.Core.Grammars.Decisions;
+using Storyteller.Core.Grammars.Tables;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class SelectionListFixture : Fixture
     {
         public SelectionListFixture()
         {
-            SelectionValuesFor("surname").Add("Miller");
-            SelectionValuesFor("surname").Add("Smith");
-            SelectionValuesFor("surname").Add("Brown");
+            Lists["surname"].AddValues("Miller", "Smith", "Brown");
 
             this["names"] = new NameTable();
         }

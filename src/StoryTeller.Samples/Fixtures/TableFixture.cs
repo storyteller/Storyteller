@@ -1,7 +1,10 @@
 using System;
-using StoryTeller.Engine;
+using Storyteller.Core;
+using Storyteller.Core.Grammars.Decisions;
+using Storyteller.Core.Grammars.Tables;
+using Storyteller.Core.Model;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class TableFixture : Fixture
     {
@@ -25,7 +28,7 @@ namespace StoryTeller.Samples.Grammars
         {
             return Paragraph("Divide numbers", x =>
             {
-                x += Do(() => _first = _second = 0);
+                x += c => _first = _second = 0;
                 x += Read<double>("x", o => _first = o);
                 x += Read<double>("y", o => _second = o);
                 x += Check("product", () => _first/_second);

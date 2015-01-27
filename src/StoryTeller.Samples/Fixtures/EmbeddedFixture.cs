@@ -1,7 +1,7 @@
 using System;
-using StoryTeller.Engine;
+using Storyteller.Core;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class EmbeddedFixture : Fixture
     {
@@ -10,7 +10,7 @@ namespace StoryTeller.Samples.Grammars
         public EmbeddedFixture()
         {
             this["EmbeddedMath"] =
-                Embed<MathFixture>("Do some Math").Before(() => { if (_throw) throw new NotImplementedException(); });
+                Embed<MathFixture>("Do some Math").Before(c => { if (_throw) throw new NotImplementedException(); });
         }
 
         public void ThrowAnExceptionOnTheNextEmbed()

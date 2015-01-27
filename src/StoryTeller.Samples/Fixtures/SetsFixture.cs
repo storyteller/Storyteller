@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using StoryTeller.Engine;
+using Storyteller.Core;
+using Storyteller.Core.Grammars.Tables;
 
-namespace StoryTeller.Samples.Grammars
+namespace StoryTeller.Samples.Fixtures
 {
     public class InvoiceDetail
     {
@@ -37,23 +38,6 @@ namespace StoryTeller.Samples.Grammars
             });
         }
 
-        public IGrammar CheckDataLiteral()
-        {
-            return VerifyDataTable(() => _table).Titled("The data should match").Columns(x =>
-            {
-                x.MatchOn<string>("First").Header("First Name");
-                x.MatchOn<string>("Last").Header("Last Name");
-            });
-        }
-
-        public IGrammar CheckDataSubstring()
-        {
-            return VerifyDataTable(() => _table).Titled("The first name should contain").Columns(x =>
-            {
-                x.MatchOn<string>("First", (s1, s2) => s2.Contains(s1));
-            });
-        }
-
 
     }
 
@@ -65,21 +49,19 @@ namespace StoryTeller.Samples.Grammars
         public SetsFixture()
         {
             this["OrderedStringSet"] = VerifyStringList(() => _names)
-                .Ordered()
                 .Titled("The names in order should be")
-                .Grammar();
+                .Ordered();
 
             this["UnorderedStringSet"] = VerifyStringList(() => _names)
-                .Titled("The names in no order should be")
-                .Grammar();
+                .Titled("The names in no order should be");
 
             this["TheDataIs"] = this["AddName"]
-                .AsTable("The data is", "name")
+                .AsTable("The data is")
+                .LeafName("name")
                 .Before(() => _names.Clear());
 
-            this["InvoiceDetailsAre"] = CreateNewObject<InvoiceDetail>(x =>
+            this["InvoiceDetailsAre"] = CreateNewObject<InvoiceDetail>("",x =>
             {
-                x.CreateNew<InvoiceDetail>();
                 x.SetProperty(o => o.Amount);
                 x.SetProperty(o => o.Date);
                 x.SetProperty(o => o.Name);
