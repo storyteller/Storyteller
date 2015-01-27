@@ -85,27 +85,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Tests\General\Check properties.xml" />
-    <Content Include="Tests\Tables\Data Table Verification Happy Path.xml" />
-    <Content Include="Tests\Tables\Data Table Verification Sad Path.xml" />
-    <Content Include="Tests\Tables\Data Table Verification with Overridden Matchers.xml" />
-    <Content Include="Tests\Paragraphs\Composite with Errors.xml" />
-    <Content Include="Tests\General\Services.xml" />
-    <Content Include="Tests\Tables\Decision Table.xml" />
-    <Content Include="Tests\Embedded\Embeds.xml" />
-    <Content Include="Tests\Sentences\Facts.xml" />
-    <Content Include="Tests\Sets\Ordered Set.xml" />
-    <Content Include="Tests\Sets\OrderedStringsSuccess.xml" />
-    <Content Include="Tests\General\Selection List Values.xml" />
-    <Content Include="Tests\Sentences\Sentences.xml" />
-    <Content Include="Tests\Sets\SetWithError.xml" />
-    <Content Include="Tests\Paragraphs\Simple Composite.xml" />
-    <Content Include="Tests\Tables\Tables with Errors.xml" />
-    <Content Include="Tests\Tables\Tables.xml" />
-    <Content Include="Tests\General\Test with Bad Grammar Name.xml" />
-    <Content Include="Tests\General\Test with Missing Fixture Name.xml" />
-    <Content Include="Tests\Sets\Unordered Set.xml" />
-    <Content Include="Tests\Sets\Unsuccessful Ordering.xml" />
+    <Content Include="Specs\General\Check properties.xml" />
+    <Content Include="Specs\Tables\Data Table Verification Happy Path.xml" />
+    <Content Include="Specs\Tables\Data Table Verification Sad Path.xml" />
+    <Content Include="Specs\Tables\Data Table Verification with Overridden Matchers.xml" />
+    <Content Include="Specs\Paragraphs\Composite with Errors.xml" />
+    <Content Include="Specs\General\Services.xml" />
+    <Content Include="Specs\Tables\Decision Table.xml" />
+    <Content Include="Specs\Embedded\Embeds.xml" />
+    <Content Include="Specs\Sentences\Facts.xml" />
+    <Content Include="Specs\Sets\Ordered Set.xml" />
+    <Content Include="Specs\Sets\OrderedStringsSuccess.xml" />
+    <Content Include="Specs\General\Selection List Values.xml" />
+    <Content Include="Specs\Sentences\Sentences.xml" />
+    <Content Include="Specs\Sets\SetWithError.xml" />
+    <Content Include="Specs\Paragraphs\Simple Composite.xml" />
+    <Content Include="Specs\Tables\Tables with Errors.xml" />
+    <Content Include="Specs\Tables\Tables.xml" />
+    <Content Include="Specs\General\Test with Bad Grammar Name.xml" />
+    <Content Include="Specs\General\Test with Missing Fixture Name.xml" />
+    <Content Include="Specs\Sets\Unordered Set.xml" />
+    <Content Include="Specs\Sets\Unsuccessful Ordering.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
