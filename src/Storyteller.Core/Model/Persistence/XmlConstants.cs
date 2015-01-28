@@ -1,4 +1,4 @@
-namespace Storyteller.Core.Persistence
+namespace Storyteller.Core.Model.Persistence
 {
     public class XmlConstants
     {

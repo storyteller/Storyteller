@@ -3,18 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using FubuCore.Util;
+using Newtonsoft.Json;
 
 namespace Storyteller.Core.Model
 {
     public class Step : Node
     {
-        public readonly Cache<string, Section> Collections = new Cache<string, Section>(key => new Section(key)); 
-        public readonly string Key;
-        public readonly IDictionary<string, string> Values = new Dictionary<string, string>();
+        [JsonIgnore] public readonly Cache<string, Section> Collections =
+            new Cache<string, Section>(key => new Section(key));
+
+
+        [JsonProperty("key")] public readonly string Key;
+
+        [JsonProperty("cells")] public readonly IDictionary<string, string> Values = new Dictionary<string, string>();
 
         public Step(string key)
         {
             Key = key;
+        }
+
+        public Section[] collections
+        {
+            get { return Collections.GetAll(); }
+            set
+            {
+                value.Each(pair => Collections[pair.Key] = pair);
+            }
         }
 
         public Step With(string key, string value)
@@ -42,24 +56,22 @@ namespace Storyteller.Core.Model
         {
             if (other.Values.Count != Values.Count) throwValuesDoNotMatch(other);
 
-            var otherKeys = other.Values.Keys.OrderBy(x => x).ToArray();
-            var keys = Values.Keys.OrderBy(x => x).ToArray();
+            string[] otherKeys = other.Values.Keys.OrderBy(x => x).ToArray();
+            string[] keys = Values.Keys.OrderBy(x => x).ToArray();
             if (!otherKeys.SequenceEqual(keys)) throwValuesDoNotMatch(other);
 
-            other.Values.Keys.Each(key =>
-            {
-                if (other.Values[key] != Values[key]) throwValuesDoNotMatch(other);
-            });
+            other.Values.Keys.Each(key => { if (other.Values[key] != Values[key]) throwValuesDoNotMatch(other); });
         }
 
         private void throwValuesDoNotMatch(Step other)
         {
-            throw new Exception("Step values do not match. \n  1st --> {0}\n  2nd --> {1}".ToFormat(ToValueString(), other.ToValueString()));
+            throw new Exception("Step values do not match. \n  1st --> {0}\n  2nd --> {1}".ToFormat(ToValueString(),
+                other.ToValueString()));
         }
 
         public string ToValueString()
         {
-            var values = Values
+            string values = Values
                 .Select(pair => "{0}={1}".ToFormat(pair.Key, pair.Value))
                 .Join(", ");
 

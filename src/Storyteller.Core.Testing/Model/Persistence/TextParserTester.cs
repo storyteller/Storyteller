@@ -3,9 +3,9 @@ using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Model;
-using Storyteller.Core.Persistence;
+using Storyteller.Core.Model.Persistence;
 
-namespace Storyteller.Core.Testing.Persistence
+namespace Storyteller.Core.Testing.Model.Persistence
 {
     [TestFixture]
     public class TextParserTester

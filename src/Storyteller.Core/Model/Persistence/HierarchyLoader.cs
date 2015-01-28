@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using FubuCore;
 using Newtonsoft.Json;
-using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Persistence
+namespace Storyteller.Core.Model.Persistence
 {
     public class HierarchyLoader
     {

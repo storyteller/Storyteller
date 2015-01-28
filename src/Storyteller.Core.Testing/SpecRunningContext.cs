@@ -7,7 +7,7 @@ using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
-using Storyteller.Core.Persistence;
+using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Testing

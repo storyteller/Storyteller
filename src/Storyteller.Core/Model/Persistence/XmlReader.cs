@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Xml;
 using FubuCore;
 using FubuCore.Configuration;
-using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Persistence
+namespace Storyteller.Core.Model.Persistence
 {
     public class XmlReader : XmlConstants
     {

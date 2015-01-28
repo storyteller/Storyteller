@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Xml;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Model;
-using XmlReader = Storyteller.Core.Persistence.XmlReader;
-using XmlWriter = Storyteller.Core.Persistence.XmlWriter;
+using XmlReader = Storyteller.Core.Model.Persistence.XmlReader;
+using XmlWriter = Storyteller.Core.Model.Persistence.XmlWriter;
 
-namespace Storyteller.Core.Testing.Persistence
+namespace Storyteller.Core.Testing.Model.Persistence
 {
     [TestFixture]
     public class persisting_and_loading_specifications_with_xml

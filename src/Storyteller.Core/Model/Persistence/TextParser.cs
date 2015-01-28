@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
-using Storyteller.Core.Model;
 
-namespace Storyteller.Core.Persistence
+namespace Storyteller.Core.Model.Persistence
 {
     public static class TextParser
     {

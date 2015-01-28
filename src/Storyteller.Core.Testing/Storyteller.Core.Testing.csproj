@@ -107,9 +107,11 @@
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />
     <Compile Include="Model\StepTester.cs" />
-    <Compile Include="Persistence\HierarchyLoaderTester.cs" />
-    <Compile Include="Persistence\persisting_and_loading_specifications_with_xml.cs" />
-    <Compile Include="Persistence\TextParserTester.cs" />
+    <Compile Include="Model\Persistence\HierarchyLoaderTester.cs" />
+    <Compile Include="Model\Persistence\Json_serialization_formatting_specs.cs" />
+    <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_json.cs" />
+    <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_xml.cs" />
+    <Compile Include="Model\Persistence\TextParserTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
@@ -131,7 +133,9 @@
       <Name>Storyteller.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Model\Persistence\spec.json" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
