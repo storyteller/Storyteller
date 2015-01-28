@@ -40,7 +40,7 @@ namespace Storyteller.Core.Persistence
 
     public class XmlWriter : XmlConstants
     {
-        public static XmlDocument Write(Specification specification)
+        public static XmlDocument WriteToXml(Specification specification)
         {
             var document = new XmlDocument();
             var root = writeSpecRoot(specification, document);
@@ -75,6 +75,12 @@ namespace Storyteller.Core.Persistence
 
     public static class XmlExtensions
     {
+        public static string ReadId(this XmlElement element)
+        {
+            var id = element.GetAttribute(XmlConstants.Id);
+            return id.IsEmpty() ? Guid.NewGuid().ToString() : id;
+        }
+
         public static void WriteComment(this XmlElement parent, Comment comment)
         {
             parent.AddElement(XmlConstants.Comment)
@@ -112,13 +118,21 @@ namespace Storyteller.Core.Persistence
         public static Specification ReadFromFile(string path)
         {
             var document = new XmlDocument().FromFile(path);
+            return ReadFromXml(document);
+        }
+
+        public static Specification ReadFromXml(XmlDocument document)
+        {
             var spec = new Specification();
             var top = document.DocumentElement;
             spec.Name = top.GetAttribute("name");
 
             var lifecycle = top.GetAttribute(LifecycleAtt);
-            spec.Lifecycle = lifecycle.IsEmpty() ? Lifecycle.Acceptance : Enum.Parse(typeof (Lifecycle), lifecycle).As<Lifecycle>();
-            spec.Id = top.GetAttribute(Id); // TODO -- replace with a helper here
+            spec.Lifecycle = lifecycle.IsEmpty()
+                ? Lifecycle.Acceptance
+                : Enum.Parse(typeof (Lifecycle), lifecycle).As<Lifecycle>();
+
+            spec.Id = top.ReadId();
             var maxRetries = top.GetAttribute(MaxRetries);
             spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
@@ -127,7 +141,6 @@ namespace Storyteller.Core.Persistence
             {
                 spec.Tags.AddRange(tags.ToDelimitedArray());
             }
-
 
 
             top.ForEachElement(element =>
@@ -167,7 +180,7 @@ namespace Storyteller.Core.Persistence
 
         public static Step ReadStep(XmlElement child)
         {
-            var step = new Step(child.Name) {Id = child.GetAttribute(Id)};
+            var step = new Step(child.Name) {Id = child.ReadId()};
 
             foreach (XmlAttribute att in child.Attributes)
             {
@@ -187,7 +200,7 @@ namespace Storyteller.Core.Persistence
 
         private static Comment ReadComment(XmlElement element)
         {
-            return new Comment{Id = element.GetAttribute(Id), Text = element.InnerText};
+            return new Comment{Id = element.ReadId(), Text = element.InnerText};
         }
     }
 }
