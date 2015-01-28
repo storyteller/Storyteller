@@ -3,58 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using FubuCore.Util;
-using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Model
 {
-    public abstract class Node
-    {
-        protected Node()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
-        public string Id { get; set; }
-    }
-
-    public enum Lifecycle
-    {
-        Acceptance,
-        Regression
-    }
-
-
-    public interface INodeHolder
-    {
-        IList<Node> Children { get; }
-    }
-
-
-
-    public class Specification : Node, INodeHolder
-    {
-        public string FileName;
-        public Lifecycle Lifecycle = Lifecycle.Acceptance;
-        // Only run once if its acceptance
-        public int MaxRetries;
-        public string Name;
-
-        public IExecutionStep CreatePlan(FixtureLibrary library)
-        {
-            var sectionPlans = Children.OfType<Section>().Select(x => x.CreatePlan(library));
-            return new SpecificationPlan(sectionPlans);
-        }
-
-        private readonly IList<Node> _children = new List<Node>();
-
-        public IList<Node> Children
-        {
-            get { return _children; }
-        }
-
-        public readonly IList<string> Tags = new List<string>();
-    }
-
     public class Step : Node
     {
         public readonly Cache<string, Section> Collections = new Cache<string, Section>(key => new Section(key)); 
@@ -86,11 +37,41 @@ namespace Storyteller.Core.Model
 
             return dict;
         }
-    }
 
+        public void AssertValuesMatch(Step other)
+        {
+            if (other.Values.Count != Values.Count) throwValuesDoNotMatch(other);
 
-    public class Comment : Node
-    {
-        public string Text;
+            var otherKeys = other.Values.Keys.OrderBy(x => x).ToArray();
+            var keys = Values.Keys.OrderBy(x => x).ToArray();
+            if (!otherKeys.SequenceEqual(keys)) throwValuesDoNotMatch(other);
+
+            other.Values.Keys.Each(key =>
+            {
+                if (other.Values[key] != Values[key]) throwValuesDoNotMatch(other);
+            });
+        }
+
+        private void throwValuesDoNotMatch(Step other)
+        {
+            throw new Exception("Step values do not match. \n  1st --> {0}\n  2nd --> {1}".ToFormat(ToValueString(), other.ToValueString()));
+        }
+
+        public string ToValueString()
+        {
+            var values = Values
+                .Select(pair => "{0}={1}".ToFormat(pair.Key, pair.Value))
+                .Join(", ");
+
+            return "Step '{0}' with values {1}".ToFormat(Key, values);
+        }
+
+        public Section AddCollection(string key)
+        {
+            var section = new Section(key);
+            Collections[key] = section;
+
+            return section;
+        }
     }
 }

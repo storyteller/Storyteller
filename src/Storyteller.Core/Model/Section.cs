@@ -49,6 +49,14 @@ namespace Storyteller.Core.Model
             }
 
             yield return SilentAction.AsCritical(Stage.teardown, x => fixture.TearDown(), this);
-        } 
+        }
+
+        public Comment AddComment(string text)
+        {
+            var comment = new Comment {Text = text};
+            Children.Add(comment);
+
+            return comment;
+        }
     }
 }
