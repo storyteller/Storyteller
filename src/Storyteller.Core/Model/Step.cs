@@ -38,7 +38,6 @@ namespace Storyteller.Core.Model
         // Only run once if its acceptance
         public int MaxRetries;
         public string Name;
-        public string Suite;
 
         public IExecutionStep CreatePlan(FixtureLibrary library)
         {
