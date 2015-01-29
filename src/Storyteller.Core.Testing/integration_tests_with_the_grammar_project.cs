@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
+using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Testing
 {
@@ -96,14 +98,19 @@ namespace Storyteller.Core.Testing
             running("Successful OrderedStrings").ShouldEqual(10, 0, 0, 0);
         }
         */
+
         [Test]
         public void Sentences()
         {
-            running("Sentences");
-                
-                //.ShouldEqual(2, 2, 1, 1);
+            running("Sentences").ShouldEqual(2, 2, 1, 1);
 
             Step("1").Cell("number").WasInvalid();
+            Step("2").Cell("number").Succeeded();
+
+            Step("3").StatusWas(ResultStatus.success);
+            Step("4").StatusWas(ResultStatus.failed);
+            Step("5").StatusWas(ResultStatus.error);
+
         }
         /*
         [Test]

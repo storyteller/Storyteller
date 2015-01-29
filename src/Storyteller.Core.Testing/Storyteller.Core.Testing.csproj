@@ -89,6 +89,7 @@
     <Compile Include="Grammars\ObjectBuilding\SetPropertyGrammar_specs.cs" />
     <Compile Include="Grammars\Paragraphs\ParagraphGrammarTester.cs" />
     <Compile Include="Grammars\Paragraphs\VerifyPropertiesOf_specs.cs" />
+    <Compile Include="Grammars\Reflection\FactMethod_specs.cs" />
     <Compile Include="Grammars\Sets\string_list_verification_specs.cs" />
     <Compile Include="Grammars\Sets\UnorderedSetMatcherTester.cs" />
     <Compile Include="Grammars\Sets\VerifySetOf_specs.cs" />

@@ -15,6 +15,7 @@ namespace Storyteller.Core.Grammars
          private static readonly IList<IGrammarBuilder> _builders = new List<IGrammarBuilder>
          {
              new ProgrammaticGrammarBuilder(),
+             new FactMethodBuilder(),
              new VoidMethodActionBuilder(),
              new ValueCheckMethodBuilder()
          };
@@ -65,6 +66,8 @@ namespace Storyteller.Core.Grammars
         }
     }
 
+
+
     internal class VoidMethodActionBuilder : IGrammarBuilder
     {
         public bool Matches(MethodInfo method)
@@ -75,6 +78,19 @@ namespace Storyteller.Core.Grammars
         public IGrammar Build(MethodInfo method, Fixture fixture)
         {
             return new ActionMethodGrammar(method, fixture);
+        }
+    }
+
+    internal class FactMethodBuilder : IGrammarBuilder
+    {
+        public bool Matches(MethodInfo method)
+        {
+            return method.HasReturn() && method.ReturnType == typeof(bool) && !method.GetParameters().Any();
+        }
+
+        public IGrammar Build(MethodInfo method, Fixture fixture)
+        {
+            return new FactMethod(method, fixture);
         }
     }
 
