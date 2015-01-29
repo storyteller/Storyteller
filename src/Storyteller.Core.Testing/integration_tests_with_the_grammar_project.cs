@@ -139,7 +139,7 @@ namespace Storyteller.Core.Testing
             Step("5").StatusWas(ResultStatus.error);
 
         }
-        /*
+        
         [Test]
         public void Currying()
         {
@@ -151,7 +151,7 @@ namespace Storyteller.Core.Testing
         {
             running("Importing and Currying").ShouldEqual(1, 1, 0, 0);
         }
-        */
+        
         [Test]
         public void Set_with_Error()
         {
@@ -197,14 +197,8 @@ namespace Storyteller.Core.Testing
         {
             running("Check properties").ShouldEqual(3, 3, 0, 0);
         }
-        /*
-        [Test]
-        public void service_grammars()
-        {
-            running("Services").ShouldEqual(1, 1, 0, 1);
-        }
+        
 
-
-         */
+         
     }
 }
