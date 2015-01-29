@@ -184,11 +184,12 @@ namespace Storyteller.Core.Testing
             Step("4").Cell("product").Succeeded();
             Step("5").Cell("product").FailedWithActual("Infinity");
         }
-        /*
+        
         [Test]
         public void Unordered_Set()
         {
-            running("Unordered Set").ShouldEqual(1, 3, 0, 1);
+            // Won't run the comparison if there is any syntax error
+            running("Unordered Set").ShouldEqual(0, 0, 0, 1);
         }
         
         [Test]
@@ -196,7 +197,7 @@ namespace Storyteller.Core.Testing
         {
             running("Check properties").ShouldEqual(3, 3, 0, 0);
         }
-        
+        /*
         [Test]
         public void service_grammars()
         {

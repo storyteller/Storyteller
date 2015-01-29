@@ -77,7 +77,7 @@ namespace Storyteller.Core.Model.Persistence
 
             foreach (XmlAttribute att in child.Attributes)
             {
-                if (att.Name == "isStep") break; // Old detritus
+                if (att.Name == "isStep") continue; // Old detritus
 
                 step.Values[att.Name] = att.Value;
             }
