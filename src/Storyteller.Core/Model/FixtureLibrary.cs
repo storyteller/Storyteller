@@ -12,12 +12,10 @@ namespace Storyteller.Core.Model
 {
     public class FixtureLibrary
     {
-        // TODO -- got to handle fixtures that blow up in construction!
         public static readonly Cache<Type, Fixture> FixtureCache =
             new Cache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
 
-        // TODO -- handle missing fixtures
-        public readonly Cache<string, IFixture> Fixtures = new Cache<string, IFixture>();
+        public readonly Cache<string, IFixture> Fixtures = new Cache<string, IFixture>(key => new MissingFixture(key));
         public readonly Cache<string, FixtureModel> Models = new Cache<string, FixtureModel>();
 
         public static bool IsFixtureType(Type type)
@@ -43,7 +41,6 @@ namespace Storyteller.Core.Model
         }
 
 
-        // TODO -- do something about Fixture's that blow up
         public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
         {
             var fixtures = AppDomain.CurrentDomain.GetAssemblies()

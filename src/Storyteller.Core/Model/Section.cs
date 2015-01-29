@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using Newtonsoft.Json;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model.Persistence;
@@ -34,6 +35,8 @@ namespace Storyteller.Core.Model
         public CompositeExecution CreatePlan(FixtureLibrary library)
         {
             var fixture = library.Fixtures[Key];
+
+            if (Id.IsEmpty()) Id = Guid.NewGuid().ToString();
 
             return CreatePlan(library, fixture);
         }

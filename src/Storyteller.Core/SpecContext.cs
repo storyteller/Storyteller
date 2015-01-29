@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using FubuCore;
+using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core
@@ -80,7 +81,17 @@ namespace Storyteller.Core
 
         public void LogException(string id, Exception ex, object position = null)
         {
-            if (ex is StorytellerCriticalException) _hasCriticalException = true;
+            if (ex is StorytellerCriticalException)
+            {
+                _hasCriticalException = true;
+                
+                // TODO  -- hokey. Watch if this becomes a pattern
+                if (ex.InnerException is MissingFixtureException)
+                {
+                    LogResult(new StepResult(id, ResultStatus.invalid) { error = ex.InnerException.Message, position = position });
+                    return;
+                }
+            }
             if (ex is StorytellerCatastrophicException) _hasCatastrophicException = true;
 
             LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});

@@ -37,13 +37,15 @@ namespace Storyteller.Core.Testing
             return theContext.Counts;
         }
 
-        /*
+        
         [Test]
         public void Cannot_find_fixture()
         {
             running("Test with Missing Fixture Name").ShouldEqual(0, 0, 0, 1);
-        }
 
+            Step("1").StatusWas(ResultStatus.invalid);
+        }
+        /*
         [Test]
         public void boolean_results_in_set_verification()
         {
