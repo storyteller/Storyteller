@@ -19,7 +19,7 @@ namespace Storyteller.Core.Testing
         public void SetUp()
         {
             theObserver = new RecordingExecutionObserver();
-            theContext = new SpecContext(theObserver, new CancellationToken(), new InMemoryServiceLocator());
+            theContext = new SpecContext(theObserver, new StopConditions(), new InMemoryServiceLocator());
 
         }
 
@@ -61,8 +61,7 @@ namespace Storyteller.Core.Testing
         [SetUp]
         public void SetUp()
         {
-            theCancellation = new CancellationTokenSource();
-            theContext = new SpecContext(new NulloExecutionObserver(), theCancellation.Token, new InMemoryServiceLocator());
+            theContext = new SpecContext(new NulloExecutionObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         [Test]
@@ -94,7 +93,7 @@ namespace Storyteller.Core.Testing
         [Test]
         public void stops_when_the_cancellation_token_has_been_cancelled()
         {
-            theCancellation.Cancel();
+            theContext.RequestCancellation();
 
             theContext.CanContinue().ShouldBeFalse();
         }

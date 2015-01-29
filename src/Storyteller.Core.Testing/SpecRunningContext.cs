@@ -30,8 +30,7 @@ namespace Storyteller.Core.Testing
         protected void execute(string text)
         {
             var spec = TextParser.Parse(text);
-            var cancellationTokenSource = new CancellationTokenSource(5.Minutes());
-            _context = new SpecContext(new NulloExecutionObserver(), cancellationTokenSource.Token, Services);
+            _context = new SpecContext(new NulloExecutionObserver(), new StopConditions(), Services);
 
             var plan = spec.CreatePlan(TestingContext.Library);
 

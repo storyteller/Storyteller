@@ -42,6 +42,7 @@ namespace Storyteller.Core.Engine
 
         IEnumerable<IConversionProvider> ConversionProviders();
 
+        Task Warmup();
         Task Recycle();
     }
 
@@ -62,6 +63,11 @@ namespace Storyteller.Core.Engine
         public Task Recycle()
         {
             return Task.FromResult("recycled");
+        }
+
+        public Task Warmup()
+        {
+            return Task.FromResult("warmed up");
         }
 
         public void Dispose()

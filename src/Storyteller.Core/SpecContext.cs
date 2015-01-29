@@ -46,6 +46,17 @@ namespace Storyteller.Core
 
             return true;
         }
+
+        // TODO -- test this somehow.
+        public CancellationTokenSource CreateCancellationSource()
+        {
+            if (TimeoutInSeconds > 0)
+            {
+                return new CancellationTokenSource(TimeoutInSeconds.Seconds());
+            }
+
+            return new CancellationTokenSource();
+        }
     }
 
     public class State : IDisposable
@@ -94,7 +105,7 @@ namespace Storyteller.Core
 
         public static SpecContext Basic()
         {
-            return new SpecContext(new NulloExecutionObserver(), new CancellationTokenSource().Token, new InMemoryServiceLocator());
+            return new SpecContext(new NulloExecutionObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         public static SpecContext ForTesting()
@@ -104,17 +115,26 @@ namespace Storyteller.Core
             return context;
         }
 
-        // TODO -- make this settable later
-        public readonly StopConditions StopConditions = new StopConditions();
+
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
 
         public readonly Counts Counts = new Counts();
+        private readonly CancellationTokenSource _cancellationSource;
 
-        public SpecContext(IExecutionObserver observer, CancellationToken cancellation, IServiceLocator services)
+        public SpecContext(IExecutionObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
             _observer = observer;
-            _cancellation = cancellation;
+            StopConditions = stopConditions;
+            _cancellationSource = stopConditions.CreateCancellationSource();
+            _cancellation = _cancellationSource.Token;
             _services = services;
+        }
+
+        public StopConditions StopConditions { get; private set; }
+
+        public void RequestCancellation()
+        {
+            _cancellationSource.Cancel();
         }
 
         public CancellationToken Cancellation
