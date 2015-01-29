@@ -146,7 +146,7 @@ namespace Storyteller.Core.Testing
         {
             running("Simple Composite").ShouldEqual(2, 3, 0, 0);
         }
-        /*
+        
         [Test]
         public void Table_with_Errors()
         {
@@ -156,9 +156,16 @@ namespace Storyteller.Core.Testing
         [Test]
         public void Tables()
         {
-            running("Tables").ShouldEqual(2, 2, 0, 5);
-        }
+            running("Tables").ShouldEqual(2, 2, 0, 6);
 
+            Step("1").Cell("x").WasInvalid();
+            Step("1").Cell("y").WasInvalid();
+            Step("1").Cell("sum").WasInvalid();
+
+            Step("4").Cell("product").Succeeded();
+            Step("5").Cell("product").FailedWithActual("Infinity");
+        }
+        /*
         [Test]
         public void Unordered_Set()
         {
@@ -177,23 +184,7 @@ namespace Storyteller.Core.Testing
             running("Services").ShouldEqual(1, 1, 0, 1);
         }
 
-        [Test]
-        public void successful_data_table_comparison()
-        {
-            running("Data Table Verification Happy Path").ShouldEqual(3, 0, 0, 0);
-        }
-        
-        [Test]
-        public void sad_path_data_table_comparison()
-        {
-            running("Data Table Verification Sad Path").ShouldEqual(2, 2, 0, 0);
-        }
 
-        [Test]
-        public void data_table_comparison_with_overriden_matcher()
-        {
-            running("Data Table Verification with Overridden Matchers").ShouldEqual(2, 2, 0, 0);
-        }
          */
     }
 }

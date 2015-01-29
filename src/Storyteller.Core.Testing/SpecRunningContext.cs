@@ -281,7 +281,7 @@ namespace Storyteller.Core.Testing
                         {
                             return
                                 "Step {0}, cell {1} was supposed to fail, but finished w/ status {2}".ToFormat(
-                                    _parent._id, _cell);
+                                    _parent._id, _cell, result.status);
                         }
                         
                         if (result.actual != actual)
