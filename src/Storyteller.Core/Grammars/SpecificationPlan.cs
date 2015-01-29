@@ -23,5 +23,6 @@ namespace Storyteller.Core.Grammars
         }
 
         public IExecutionStep[] Steps { get; private set; }
+        public int Attempts { get; set; }
     }
 }

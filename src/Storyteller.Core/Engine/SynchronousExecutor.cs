@@ -3,12 +3,10 @@
     public class SynchronousExecutor : IStepExecutor
     {
         private readonly ISpecContext _context;
-        private readonly IExecutionStep _step;
 
-        public SynchronousExecutor(ISpecContext context, IExecutionStep step)
+        public SynchronousExecutor(ISpecContext context)
         {
             _context = context;
-            _step = step;
         }
 
         public void Line(ILineExecution execution)
@@ -36,11 +34,6 @@
         public ISpecContext CurrentContext
         {
             get { return _context; }
-        }
-
-        public void Execute()
-        {
-            _step.AcceptVisitor(this);
         }
     }
 }

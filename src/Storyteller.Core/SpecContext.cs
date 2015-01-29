@@ -2,126 +2,23 @@
 using System.Collections.Generic;
 using System.Threading;
 using FubuCore;
-using FubuCore.Util;
-using Storyteller.Core.Engine;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core
 {
-    public interface IExecutionObserver
-    {
-        void Handle<T>(T message) where T : IResultMessage;
-    }
-
-    public class NulloExecutionObserver : IExecutionObserver
-    {
-        public void Handle<T>(T message) where T : IResultMessage
-        {
-            // Nothing
-        }
-    }
-
-    public class RecordingExecutionObserver : IExecutionObserver
-    {
-        public readonly IList<IResultMessage> Messages = new List<IResultMessage>();
-
-        public void Handle<T>(T message) where T : IResultMessage
-        {
-            Messages.Add(message);
-        }
-    }
-
-    public class StopConditions
-    {
-        public bool BreakOnExceptions;
-        public bool BreakOnWrongs;
-        public int TimeoutInSeconds = 60;
-
-        // TODO -- break on a specific step
-        
-        public bool CanContinue(Counts counts)
-        {
-            if (BreakOnExceptions && counts.Exceptions > 0) return false;
-            if (BreakOnWrongs && counts.Wrongs > 0) return false;
-
-            return true;
-        }
-
-        // TODO -- test this somehow.
-        public CancellationTokenSource CreateCancellationSource()
-        {
-            if (TimeoutInSeconds > 0)
-            {
-                return new CancellationTokenSource(TimeoutInSeconds.Seconds());
-            }
-
-            return new CancellationTokenSource();
-        }
-    }
-
-    public class State : IDisposable
-    {
-        // TODO -- replace w/ the lightweight cache from StructureMap
-        private readonly Cache<Type, object> _byType = new Cache<Type, object>();
-        private readonly Cache<Type, Cache<string, object>> _byName = new Cache<Type, Cache<string, object>>(t => new Cache<string, object>()); 
-
-        public void Store<T>(T value)
-        {
-            _byType[typeof (T)] = value;
-        }
-
-        public void Store<T>(string key, T value)
-        {
-            _byName[typeof (T)][key] = value;
-        }
-
-        public T Retrieve<T>()
-        {
-            return (T) _byType[typeof (T)];
-        }
-
-        public T Retrieve<T>(string key)
-        {
-            return (T) _byName[typeof (T)][key];
-        }
-
-        public object CurrentObject;
-
-        public void Dispose()
-        {
-            _byName.ClearAll();
-            _byType.ClearAll();
-        }
-    }
-
     public class SpecContext : ISpecContext, IDisposable
     {
-        private readonly State _state = new State();
-        private readonly IExecutionObserver _observer;
-        private readonly CancellationToken _cancellation;
-        private readonly IServiceLocator _services;
-        private bool _hasCriticalException = false;
-        private bool _hasCatastrophicException = false;
-
-        public static SpecContext Basic()
-        {
-            return new SpecContext(new NulloExecutionObserver(), new StopConditions(), new InMemoryServiceLocator());
-        }
-
-        public static SpecContext ForTesting()
-        {
-            var context = Basic();
-
-            return context;
-        }
-
-
-        public readonly IList<IResultMessage> Results = new List<IResultMessage>();
-
         public readonly Counts Counts = new Counts();
+        public readonly IList<IResultMessage> Results = new List<IResultMessage>();
+        private readonly CancellationToken _cancellation;
         private readonly CancellationTokenSource _cancellationSource;
+        private readonly IObserver _observer;
+        private readonly IServiceLocator _services;
+        private readonly State _state = new State();
+        private bool _hasCatastrophicException;
+        private bool _hasCriticalException;
 
-        public SpecContext(IExecutionObserver observer, StopConditions stopConditions, IServiceLocator services)
+        public SpecContext(IObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
             _observer = observer;
             StopConditions = stopConditions;
@@ -131,6 +28,11 @@ namespace Storyteller.Core
         }
 
         public StopConditions StopConditions { get; private set; }
+
+        public void Dispose()
+        {
+            _state.Dispose();
+        }
 
         public void RequestCancellation()
         {
@@ -144,7 +46,8 @@ namespace Storyteller.Core
 
         public bool CanContinue()
         {
-            if (_hasCriticalException || _hasCatastrophicException || _cancellation.IsCancellationRequested) return false;
+            if (_hasCriticalException || _hasCatastrophicException || _cancellation.IsCancellationRequested)
+                return false;
 
             return StopConditions.CanContinue(Counts);
         }
@@ -167,7 +70,8 @@ namespace Storyteller.Core
 
         public void LogResult<T>(T result) where T : IResultMessage
         {
-            if (result.id.IsEmpty()) throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
+            if (result.id.IsEmpty())
+                throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
 
             _observer.Handle(result);
             result.Tabulate(Counts);
@@ -182,11 +86,19 @@ namespace Storyteller.Core
             LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});
         }
 
+        public static SpecContext Basic()
+        {
+            return new SpecContext(new NulloObserver(), new StopConditions(), new InMemoryServiceLocator());
+        }
+
+        public static SpecContext ForTesting()
+        {
+            SpecContext context = Basic();
+
+            return context;
+        }
+
         // TODO -- this has to be called at some point in the 
         // execution pipeline
-        public void Dispose()
-        {
-            _state.Dispose();
-        }
     }
 }

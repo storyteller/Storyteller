@@ -30,11 +30,12 @@ namespace Storyteller.Core.Testing
         protected void execute(string text)
         {
             var spec = TextParser.Parse(text);
-            _context = new SpecContext(new NulloExecutionObserver(), new StopConditions(), Services);
+            _context = new SpecContext(new NulloObserver(), new StopConditions(), Services);
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
-            new SynchronousExecutor(_context, plan).Execute();
+            var executor = new SynchronousExecutor(_context);
+            plan.AcceptVisitor(executor);
 
 
         }

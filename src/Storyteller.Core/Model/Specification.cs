@@ -5,7 +5,6 @@ using System.Runtime.Remoting.Messaging;
 using FubuCore;
 using Newtonsoft.Json;
 using Storyteller.Core.Grammars;
-using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core.Model
@@ -24,7 +23,7 @@ namespace Storyteller.Core.Model
         [JsonProperty("title")]
         public string Name;
 
-        public IExecutionStep CreatePlan(FixtureLibrary library)
+        public SpecificationPlan CreatePlan(FixtureLibrary library)
         {
             var sectionPlans = Children.OfType<Section>().Select(x => x.CreatePlan(library));
             return new SpecificationPlan(sectionPlans);

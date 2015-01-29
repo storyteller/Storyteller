@@ -12,14 +12,12 @@ namespace Storyteller.Core.Testing
     [TestFixture]
     public class SpecContextTester
     {
-        private RecordingExecutionObserver theObserver;
         private SpecContext theContext;
 
         [SetUp]
         public void SetUp()
         {
-            theObserver = new RecordingExecutionObserver();
-            theContext = new SpecContext(theObserver, new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new NulloObserver(), new StopConditions(), new InMemoryServiceLocator());
 
         }
 
@@ -45,7 +43,7 @@ namespace Storyteller.Core.Testing
             var exception = new NotImplementedException();
             theContext.LogException("1", exception, position: Stage.setup);
 
-            var result = theObserver.Messages.Single().ShouldBeOfType<StepResult>();
+            var result = theContext.Results.Single().ShouldBeOfType<StepResult>();
             result.status.ShouldEqual(ResultStatus.error);
             result.error.ShouldEqual(exception.ToString());
             result.position.ShouldEqual(Stage.setup);
@@ -61,7 +59,7 @@ namespace Storyteller.Core.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new NulloExecutionObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new NulloObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         [Test]
