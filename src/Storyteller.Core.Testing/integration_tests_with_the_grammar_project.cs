@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Storyteller.Core.Model.Persistence;
@@ -28,9 +30,12 @@ namespace Storyteller.Core.Testing
             var spec = XmlReader.ReadFromFile(node.filename);
             executeSpec(spec);
 
+            theContext.Results.Each(x => Debug.WriteLine(x));
+
             return theContext.Counts;
         }
 
+        /*
         [Test]
         public void Cannot_find_fixture()
         {
@@ -90,13 +95,17 @@ namespace Storyteller.Core.Testing
         {
             running("Successful OrderedStrings").ShouldEqual(10, 0, 0, 0);
         }
-
+        */
         [Test]
         public void Sentences()
         {
-            running("Sentences").ShouldEqual(2, 2, 1, 1);
-        }
+            running("Sentences");
+                
+                //.ShouldEqual(2, 2, 1, 1);
 
+            Step("1").Cell("number").WasInvalid();
+        }
+        /*
         [Test]
         public void Currying()
         {
@@ -168,5 +177,6 @@ namespace Storyteller.Core.Testing
         {
             running("Data Table Verification with Overridden Matchers").ShouldEqual(2, 2, 0, 0);
         }
+         * */
     }
 }

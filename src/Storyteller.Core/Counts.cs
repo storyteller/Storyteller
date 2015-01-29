@@ -49,6 +49,10 @@ namespace Storyteller.Core
                 case ResultStatus.missing:
                     SyntaxErrors++;
                     break;
+
+                case ResultStatus.invalid:
+                    SyntaxErrors++;
+                    break;
             }
         }
 

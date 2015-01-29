@@ -14,7 +14,7 @@ namespace Storyteller.Core.Testing.Grammars.Importing
         public void execute_an_import_without_currying()
         {
             execute(@"
-=> Imports
+=> TestImports
 * SetTo#1: value=15
 * SetValueIs#2: value=15
 
@@ -28,7 +28,7 @@ namespace Storyteller.Core.Testing.Grammars.Importing
         public void running_a_curried_imported_step()
         {
             execute(@"
-=> Imports
+=> TestImports
 * SetTo12
 * SetValueIs#2: value=12
 ");
@@ -41,7 +41,7 @@ namespace Storyteller.Core.Testing.Grammars.Importing
         [Test]
         public void curry_builds_the_model()
         {
-            var sentence = ModelFor<Sentence>("Imports", "SetTo12");
+            var sentence = ModelFor<Sentence>("TestImports", "SetTo12");
             sentence.format.ShouldEqual("Set to 12");
             sentence.cells.Any().ShouldBeFalse();
         }
@@ -57,7 +57,7 @@ namespace Storyteller.Core.Testing.Grammars.Importing
         }
     }
 
-    public class ImportsFixture : Fixture
+    public class TestImportsFixture : Fixture
     {
         public static MyFoo MyFoo;
 
@@ -67,7 +67,7 @@ namespace Storyteller.Core.Testing.Grammars.Importing
             Context.State.Store(MyFoo);
         }
 
-        public ImportsFixture()
+        public TestImportsFixture()
         {
             this["SetTo"] = Import<StateFixture>("SetTo");
             this["SetValueIs"] = Import<StateFixture>("SetValueIs");

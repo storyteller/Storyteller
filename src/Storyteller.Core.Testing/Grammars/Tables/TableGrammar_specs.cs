@@ -14,7 +14,7 @@ namespace Storyteller.Core.Testing.Grammars.Tables
         {
             execute(@"
 Name: whatever
-=> Table
+=> TestTable
 * Table1
   -> Steps
   * Row#1: message=Hello
@@ -23,7 +23,7 @@ Name: whatever
 
 ");
 
-            TableFixture.Traced["Table1"].ShouldHaveTheSameElementsAs("Hello", "Goodbye", "Laters");
+            TestTableFixture.Traced["Table1"].ShouldHaveTheSameElementsAs("Hello", "Goodbye", "Laters");
         }
 
         [Test]
@@ -31,7 +31,7 @@ Name: whatever
         {
             execute(@"
 Name: whatever
-=> Table
+=> TestTable
 * Table2
   -> Rows
   * Row#1: message=Hello
@@ -40,7 +40,7 @@ Name: whatever
 
 ");
 
-            TableFixture.Traced["Table2"].ShouldHaveTheSameElementsAs("Before", "Hello", "Goodbye", "Laters", "After");
+            TestTableFixture.Traced["Table2"].ShouldHaveTheSameElementsAs("Before", "Hello", "Goodbye", "Laters", "After");
         }
 
         [Test]
@@ -48,7 +48,7 @@ Name: whatever
         {
             execute(@"
 Name: whatever
-=> Table
+=> TestTable
 * Table3
   -> table
   * Row#1: message=Hello
@@ -57,7 +57,7 @@ Name: whatever
 
 ");
 
-            TableFixture.Traced["Table3"].ShouldHaveTheSameElementsAs("Hello", "Goodbye", "Laters");
+            TestTableFixture.Traced["Table3"].ShouldHaveTheSameElementsAs("Hello", "Goodbye", "Laters");
         }
 
         [Test]
@@ -65,7 +65,7 @@ Name: whatever
         {
             execute(@"
 Name: whatever
-=> Table
+=> TestTable
 * Addition
   -> table
   * row#1: x=1, y=2, sum=3
@@ -82,11 +82,11 @@ Name: whatever
         }
     }
 
-    public class TableFixture : Fixture
+    public class TestTableFixture : Fixture
     {
         public static readonly Cache<string, List<string>> Traced = new Cache<string, List<string>>(_ => new List<string>()); 
 
-        public TableFixture()
+        public TestTableFixture()
         {
             this["Table1"] = Do<string>("Trace {message}", m => Traced["Table1"].Add(m))
                 .AsTable("The table1 messages are").LeafName("Steps");

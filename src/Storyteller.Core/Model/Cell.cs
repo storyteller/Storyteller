@@ -115,10 +115,22 @@ namespace Storyteller.Core.Model
             }
             else
             {
-                // TODO -- will also need to deal with NULL and EMPTY
-                // TODO -- deal with defaults
                 _conversion = (step, values) =>
                 {
+                    if (!step.Values.ContainsKey(Key))
+                    {
+                        if (HasDefault())
+                        {
+                            step.Values.Add(Key, DefaultValue);
+                        }
+                        else
+                        {
+                            var result = new CellResult(Key, ResultStatus.missing);
+                            values.Errors.Add(result);
+                            return;
+                        }
+                    }
+
                     try
                     {
                         var rawValue = step.Values[Key];
@@ -127,7 +139,12 @@ namespace Storyteller.Core.Model
                     }
                     catch (FormatException)
                     {
-                        values.LogError(Key, "Invalid Format");
+                        var result = new CellResult(Key, ResultStatus.invalid)
+                        {
+                            error = "Invalid Format"
+                        };
+
+                        values.Errors.Add(result);
                     }
                     catch (Exception ex)
                     {
@@ -136,6 +153,7 @@ namespace Storyteller.Core.Model
                 };
             }
         }
+
 
         public CellResult Check(StepValues values, object actual)
         {

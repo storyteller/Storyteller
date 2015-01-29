@@ -294,6 +294,32 @@ namespace Storyteller.Core.Testing
                         return null;
                     };
                 }
+
+                public void WasInvalid()
+                {
+                    _parent.ShouldHaveExecuted();
+
+                    _parent._parent.expect = c =>
+                    {
+                        {
+                            var result = findResult(c);
+                            if (result == null)
+                            {
+                                return "Step {0}, cell {1} cannot be found in the results".ToFormat(_parent._id, _cell);
+                            }
+
+                            if (result.status != ResultStatus.invalid)
+                            {
+                                return
+                                    "Step {0}, cell {1} was supposed to be invalid, but finished w/ status {2}".ToFormat(
+                                        _parent._id, _cell);
+                            }
+
+                        }
+
+                        return null;
+                    };
+                }
             }
         }
     }

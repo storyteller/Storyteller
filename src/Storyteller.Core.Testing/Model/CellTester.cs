@@ -238,6 +238,53 @@ namespace Storyteller.Core.Testing.Model
             cell.options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("NY", "CT");
         }
+
+        [Test]
+        public void cell_logs_an_invalid_status_when_the_conversion_fails_with_format_exception()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+
+            var values = new StepValues("foo");
+            var step = new Step("key").With("Number", "a");
+
+            cell.ConvertValues(step, values);
+
+            var result = values.Errors.Single();
+            result.cell.ShouldEqual("Number");
+            result.status.ShouldEqual(ResultStatus.invalid);
+        }
+
+        [Test]
+        public void cell_logs_a_missing_status_when_the_raw_value_is_not_found_and_no_default()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+
+            var values = new StepValues("foo");
+            var step = new Step("key");
+                //.With("Number", "a");
+
+            cell.ConvertValues(step, values);
+
+            var result = values.Errors.Single();
+            result.cell.ShouldEqual("Number");
+            result.status.ShouldEqual(ResultStatus.missing);
+        }
+
+        [Test]
+        public void cell_uses_the_default_for_conversion_when_no_value_exists()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+            cell.DefaultValue = "111";
+
+            var values = new StepValues("foo");
+            var step = new Step("key");
+            //.With("Number", "a");
+
+            cell.ConvertValues(step, values);
+
+            values.Errors.Any().ShouldBeFalse();
+            values.Get("Number").ShouldEqual(111);
+        }
     }
 
     public enum Directions
@@ -262,5 +309,7 @@ namespace Storyteller.Core.Testing.Model
 
         [SelectionValues("United States", "Canada", "Mexico")]
         public string Country { get; set; }
+
+        public int Number { get; set; }
     }
 }

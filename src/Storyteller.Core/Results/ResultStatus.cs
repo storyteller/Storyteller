@@ -6,6 +6,7 @@ namespace Storyteller.Core.Results
         success,
         failed,
         error,
-        missing
+        missing,
+        invalid
     }
 }
