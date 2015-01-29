@@ -1,8 +1,6 @@
-using System;
-using System.Xml.Serialization;
 using Storyteller.Core.Results;
 
-namespace Storyteller.Core.Engine
+namespace Storyteller.Core
 {
 
     public class Counts

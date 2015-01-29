@@ -50,6 +50,8 @@
     </Compile>
     <Compile Include="Attributes.cs" />
     <Compile Include="CellHandling.cs" />
+    <Compile Include="Engine\IExecutionContext.cs" />
+    <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar.cs" />
     <Compile Include="Grammars\Decisions\GetterProperty.cs" />
@@ -68,7 +70,7 @@
     <Compile Include="Grammars\Paragraphs\ObjectVerificationExpression.cs" />
     <Compile Include="Grammars\Sets\VerifySetExpression.cs" />
     <Compile Include="Grammars\Sets\VerifyStringListExpression.cs" />
-    <Compile Include="Engine\EngineClasses.cs" />
+    <Compile Include="Engine\NulloSystem.cs" />
     <Compile Include="Equivalence\ArrayEquivalencyPolicy.cs" />
     <Compile Include="Equivalence\Equalizer.cs" />
     <Compile Include="Equivalence\EquatablePolicy.cs" />
@@ -96,7 +98,7 @@
     <Compile Include="Conversion\EnumerationConversion.cs" />
     <Compile Include="Conversion\IConversionProvider.cs" />
     <Compile Include="Conversion\StepValues.cs" />
-    <Compile Include="Engine\Counts.cs" />
+    <Compile Include="Counts.cs" />
     <Compile Include="Engine\SynchronousExecutor.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="Grammars\SilentAction.cs" />
@@ -108,7 +110,7 @@
     <Compile Include="IFixture.cs" />
     <Compile Include="ILineExecution.cs" />
     <Compile Include="ILineGrammar.cs" />
-    <Compile Include="Engine\ISpecExecutor.cs" />
+    <Compile Include="Engine\IStepExecutor.cs" />
     <Compile Include="IWithValues.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\FixtureLibrary.cs" />

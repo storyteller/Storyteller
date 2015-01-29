@@ -1,7 +1,6 @@
 ﻿namespace Storyteller.Core.Engine
 {
-    // TODO -- add in progress reporting somehow
-    public class SynchronousExecutor : ISpecExecutor
+    public class SynchronousExecutor : IStepExecutor
     {
         private readonly ISpecContext _context;
         private readonly IExecutionStep _step;
@@ -14,6 +13,8 @@
 
         public void Line(ILineExecution execution)
         {
+            if (!_context.CanContinue()) return;
+
             // TODO -- shouldn't throw exceptions, but you know I'll slip up so try/catch here.
             execution.Execute(_context);
         }

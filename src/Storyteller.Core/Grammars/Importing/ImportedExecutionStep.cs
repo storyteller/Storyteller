@@ -18,7 +18,7 @@ namespace Storyteller.Core.Grammars.Importing
             return _inner.Count();
         }
 
-        public void AcceptVisitor(ISpecExecutor executor)
+        public void AcceptVisitor(IStepExecutor executor)
         {
             _innerFixture.Context = executor.CurrentContext;
             _inner.AcceptVisitor(executor);

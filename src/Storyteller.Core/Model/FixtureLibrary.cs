@@ -44,12 +44,12 @@ namespace Storyteller.Core.Model
         // TODO -- do something about Fixture's that blow up
         public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
         {
-            IEnumerable<Task<CompiledFixture>> fixtures = AppDomain.CurrentDomain.GetAssemblies()
+            var fixtures = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(FixtureTypesFor)
                 .Select(
                     type =>
                     {
-                        return Task.Factory.StartNew(() => { return CreateCompiledFixture(cellHandling, type); });
+                        return Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type));
                     });
 
             return Task.WhenAll(fixtures).ContinueWith(results =>
@@ -68,7 +68,7 @@ namespace Storyteller.Core.Model
 
         public static CompiledFixture CreateCompiledFixture(CellHandling cellHandling, Type type)
         {
-            Fixture fixture = FixtureCache[type];
+            var fixture = FixtureCache[type];
             return new CompiledFixture
             {
                 Fixture = fixture,

@@ -150,7 +150,7 @@ namespace Storyteller.Core.Testing.Grammars
         [Test]
         public void accept_visitor_calls_through_to_line()
         {
-            var executor = MockRepository.GenerateMock<ISpecExecutor>();
+            var executor = MockRepository.GenerateMock<IStepExecutor>();
 
             var step = new LineStep(values, theLineGrammar);
 

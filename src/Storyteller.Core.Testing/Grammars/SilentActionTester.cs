@@ -64,7 +64,7 @@ namespace Storyteller.Core.Testing.Grammars
         [Test]
         public void accept_visitor()
         {
-            var executor = MockRepository.GenerateMock<ISpecExecutor>();
+            var executor = MockRepository.GenerateMock<IStepExecutor>();
 
             var action = new SilentAction(Stage.setup, x => { }, new Section("Math"));
 

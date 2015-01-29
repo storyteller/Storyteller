@@ -1,6 +1,6 @@
 namespace Storyteller.Core.Engine
 {
-    public interface ISpecExecutor
+    public interface IStepExecutor
     {
         void Line(ILineExecution execution);
         void Composite(ICompositeExecution execution);

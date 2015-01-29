@@ -15,7 +15,7 @@ namespace Storyteller.Core.Testing.Grammars
         [Test]
         public void accept_visitor()
         {
-            var executor = MockRepository.GenerateMock<ISpecExecutor>();
+            var executor = MockRepository.GenerateMock<IStepExecutor>();
 
             var step = new InvalidGrammarStep(new StepValues("foo"), "grammar is wonky");
 

@@ -59,7 +59,7 @@ namespace Storyteller.Core.Grammars
             return 1;
         }
 
-        public void AcceptVisitor(ISpecExecutor executor)
+        public void AcceptVisitor(IStepExecutor executor)
         {
             executor.Line(this);
         }
