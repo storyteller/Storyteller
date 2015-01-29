@@ -116,6 +116,7 @@
     <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_json.cs" />
     <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_xml.cs" />
     <Compile Include="Model\Persistence\TextParserTester.cs" />
+    <Compile Include="performance_tuning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
