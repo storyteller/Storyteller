@@ -73,19 +73,19 @@ namespace Storyteller.Core.Testing
         {
             running("Decision Table").ShouldEqual(2, 2, 0, 0);
         }
-        /*
+        
         [Test]
         public void embeds()
         {
             running("Embeds").ShouldEqual(2, 1, 2, 1);
         }
-
+        /*
         [Test]
         public void Facts()
         {
             running("Facts").ShouldEqual(2, 2, 1, 0);
         }
-
+        
         [Test]
         public void Ordered_set()
         {
@@ -124,31 +124,31 @@ namespace Storyteller.Core.Testing
         {
             running("Currying").ShouldEqual(1, 1, 0, 0);
         }
-
+        
         [Test]
         public void importing_and_currying()
         {
             running("Importing and Currying").ShouldEqual(1, 1, 0, 0);
         }
-
+        
         [Test]
         public void Set_with_Error()
         {
             running("Set with Error").ShouldEqual(0, 3, 1, 0);
         }
-
+        */
         [Test]
         public void Simple_Composite()
         {
             running("Simple Composite").ShouldEqual(2, 3, 0, 0);
         }
-
+        /*
         [Test]
         public void Table_with_Errors()
         {
             running("Tables with Errors").ShouldEqual(0, 0, 2, 0);
         }
-
+        
         [Test]
         public void Tables()
         {
@@ -160,13 +160,13 @@ namespace Storyteller.Core.Testing
         {
             running("Unordered Set").ShouldEqual(1, 3, 0, 1);
         }
-
+        
         [Test]
         public void check_properties()
         {
             running("Check properties").ShouldEqual(3, 3, 0, 0);
         }
-
+        
         [Test]
         public void service_grammars()
         {
@@ -178,7 +178,7 @@ namespace Storyteller.Core.Testing
         {
             running("Data Table Verification Happy Path").ShouldEqual(3, 0, 0, 0);
         }
-
+        
         [Test]
         public void sad_path_data_table_comparison()
         {
@@ -190,6 +190,6 @@ namespace Storyteller.Core.Testing
         {
             running("Data Table Verification with Overridden Matchers").ShouldEqual(2, 2, 0, 0);
         }
-         * */
+         */
     }
 }
