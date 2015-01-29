@@ -103,6 +103,8 @@
     <Compile Include="Grammars\Reflection\ValueCheckMethodTester.cs" />
     <Compile Include="Grammars\SilentGrammarTester.cs" />
     <Compile Include="Grammars\Tables\TableGrammar_specs.cs" />
+    <Compile Include="integration_tests_with_the_grammar_project.cs" />
+    <Compile Include="InvalidFixtureTester.cs" />
     <Compile Include="Model\CellTester.cs" />
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />
@@ -131,6 +133,14 @@
     <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">
       <Project>{90113dc7-c74e-4c5d-a0de-045f36378033}</Project>
       <Name>Storyteller.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
+      <Project>{cae54634-a689-4cf2-979e-ccbcca8a3644}</Project>
+      <Name>StoryTeller.Gallery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
+      <Project>{104dffdd-2229-4f23-ae66-d8bc4af622ab}</Project>
+      <Name>StoryTeller.Samples</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

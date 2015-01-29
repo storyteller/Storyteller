@@ -7,7 +7,13 @@ namespace Storyteller.Core.Testing
 {
     public class TestingContext
     {
-        private static readonly Task<FixtureLibrary> _library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
+        static TestingContext()
+        {
+            var fixture = new StoryTeller.Samples.Fixtures.SentenceFixture();
+            _library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
+        }
+
+        private static readonly Task<FixtureLibrary> _library;
 
         public static FixtureLibrary Library
         {

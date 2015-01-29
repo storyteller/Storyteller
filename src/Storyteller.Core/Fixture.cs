@@ -57,7 +57,7 @@ namespace Storyteller.Core
             return GetType().HasAttribute<HiddenAttribute>();
         }
 
-        public FixtureModel Compile(CellHandling conversions)
+        public virtual FixtureModel Compile(CellHandling conversions)
         {
             GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Each(method =>
             {

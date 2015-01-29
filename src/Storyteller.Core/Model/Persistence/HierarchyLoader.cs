@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FubuCore;
-using Newtonsoft.Json;
 
 namespace Storyteller.Core.Model.Persistence
 {
@@ -54,44 +52,6 @@ namespace Storyteller.Core.Model.Persistence
                     filename = filename
                 };
             }
-        }
-    }
-
-
-    public class Suite
-    {
-        public static string JoinPath(string parent, string name)
-        {
-            return (parent + '/' + name).Trim('/');
-        }
-
-        public Suite[] suites;
-        public SpecNode[] specs;
-        public string name;
-        public string path;
-
-        public void WritePath(string parentFolder)
-        {
-            path = JoinPath(parentFolder, name);
-
-            if (suites != null) suites.Each(x => x.WritePath(path));
-            if (specs != null) specs.Each(x => x.WritePath(path));
-        }
-    }
-
-    public class SpecNode
-    {
-        public string name;
-        public string path;
-        public string lifecycle;
-        public string id;
-
-        [JsonIgnore]
-        public string filename;
-
-        public void WritePath(string parentPath)
-        {
-            path = Suite.JoinPath(parentPath, name);
         }
     }
 }

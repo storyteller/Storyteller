@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.Reflection;
@@ -11,6 +12,7 @@ namespace Storyteller.Core.Model
 {
     public class FixtureLibrary
     {
+        // TODO -- got to handle fixtures that blow up in construction!
         public static readonly Cache<Type, Fixture> FixtureCache =
             new Cache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
 
@@ -68,12 +70,28 @@ namespace Storyteller.Core.Model
 
         public static CompiledFixture CreateCompiledFixture(CellHandling cellHandling, Type type)
         {
-            var fixture = FixtureCache[type];
-            return new CompiledFixture
+            try
             {
-                Fixture = fixture,
-                Model = fixture.Compile(cellHandling)
-            };
+                var fixture = Activator.CreateInstance(type) as Fixture;
+                FixtureCache[type] = fixture;
+                return new CompiledFixture
+                {
+                    Fixture = fixture,
+                    Model = fixture.Compile(cellHandling)
+                };
+            }
+            catch (Exception e)
+            {
+                var fixture = new InvalidFixture(type, e);
+                var model = fixture.Compile(cellHandling);
+
+                return new CompiledFixture
+                {
+                    Fixture = fixture,
+                    Model = model
+                };
+            }
+
         }
 
         public struct CompiledFixture

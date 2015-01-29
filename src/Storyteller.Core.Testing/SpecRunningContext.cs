@@ -30,15 +30,19 @@ namespace Storyteller.Core.Testing
         protected void execute(string text)
         {
             var spec = TextParser.Parse(text);
+            executeSpec(spec);
+        }
+
+        protected void executeSpec(Specification spec)
+        {
             _context = new SpecContext(new NulloObserver(), new StopConditions(), Services);
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
             var executor = new SynchronousExecutor(_context);
             plan.AcceptVisitor(executor);
-
-
         }
+
 
         public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
 

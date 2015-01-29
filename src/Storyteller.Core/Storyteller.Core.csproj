@@ -132,6 +132,7 @@
     <Compile Include="Grammars\InvalidGrammarStep.cs" />
     <Compile Include="Model\IModelWithCells.cs" />
     <Compile Include="Model\INodeHolder.cs" />
+    <Compile Include="Model\InvalidFixture.cs" />
     <Compile Include="Model\Persistence\JsonCreationConverter.cs" />
     <Compile Include="Model\Lifecycle.cs" />
     <Compile Include="Model\Lists\OptionList.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="Model\Persistence\NodeConverter.cs" />
     <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Paragraph.cs" />
+    <Compile Include="Model\Persistence\SpecNode.cs" />
+    <Compile Include="Model\Persistence\Suite.cs" />
     <Compile Include="Model\Section.cs" />
     <Compile Include="Model\Sentence.cs" />
     <Compile Include="Model\Silent.cs" />
