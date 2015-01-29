@@ -79,13 +79,17 @@ namespace Storyteller.Core.Testing
         {
             running("Embeds").ShouldEqual(2, 1, 2, 1);
         }
-        /*
+        
         [Test]
         public void Facts()
         {
-            running("Facts").ShouldEqual(2, 2, 1, 0);
+            running("Facts").ShouldEqual(1, 1, 1, 0);
+
+            Step("1").StatusWas(ResultStatus.success);
+            Step("2").StatusWas(ResultStatus.failed);
+            Step("3").StatusWas(ResultStatus.error);
         }
-        
+        /*
         [Test]
         public void Ordered_set()
         {
