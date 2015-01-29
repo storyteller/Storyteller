@@ -6,8 +6,11 @@ namespace Storyteller.Core
 {
     public interface IObserver
     {
-        void SpecFinished(ISpecContext context, SpecificationPlan plan);
+        void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan);
         void Handle<T>(T message) where T : IResultMessage;
         void FixturesRead(FixtureLibrary library);
+        void SpecRequeued(SpecificationPlan plan, ISpecContext context);
+
+        void SpecHandled(string id);
     }
 }

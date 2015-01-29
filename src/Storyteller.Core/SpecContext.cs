@@ -9,7 +9,6 @@ namespace Storyteller.Core
 {
     public class SpecContext : ISpecContext, IDisposable
     {
-        public readonly Counts Counts = new Counts();
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         private readonly CancellationToken _cancellation;
         private readonly CancellationTokenSource _cancellationSource;
@@ -21,6 +20,7 @@ namespace Storyteller.Core
 
         public SpecContext(IObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
+            Counts = new Counts();
             _observer = observer;
             StopConditions = stopConditions;
             _cancellationSource = stopConditions.CreateCancellationSource();
@@ -30,10 +30,13 @@ namespace Storyteller.Core
 
         public StopConditions StopConditions { get; private set; }
 
+
         public void Dispose()
         {
             _state.Dispose();
         }
+
+        public Counts Counts { get; private set; }
 
         public void RequestCancellation()
         {
@@ -84,11 +87,15 @@ namespace Storyteller.Core
             if (ex is StorytellerCriticalException)
             {
                 _hasCriticalException = true;
-                
+
                 // TODO  -- hokey. Watch if this becomes a pattern
                 if (ex.InnerException is MissingFixtureException)
                 {
-                    LogResult(new StepResult(id, ResultStatus.invalid) { error = ex.InnerException.Message, position = position });
+                    LogResult(new StepResult(id, ResultStatus.invalid)
+                    {
+                        error = ex.InnerException.Message,
+                        position = position
+                    });
                     return;
                 }
             }

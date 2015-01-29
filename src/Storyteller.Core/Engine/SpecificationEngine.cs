@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Equivalence;
 using Storyteller.Core.Model;
+using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core.Engine
 {
@@ -35,6 +38,11 @@ namespace Storyteller.Core.Engine
             _execution = new ExecutionQueue(system, runner, observer);
             _planning = new PlanningQueue(_execution);
             _reader = new ReaderQueue(_planning);
+        }
+
+        public void Enqueue(IEnumerable<SpecNode> nodes)
+        {
+            _reader.Enqueue(nodes);
         }
 
         public void Dispose()

@@ -55,5 +55,19 @@ namespace Storyteller.Core.Testing
                 }
             });
         }
+
+        [Test]
+        public void run_everything_with_the_new_batch_runner()
+        {
+            var system = new GrammarSystem();
+            var observer = new BatchObserver();
+            var task = observer.Watch(_allSpecs);
+
+            var engine = new SpecificationEngine(system, observer, new BatchRunner(observer));
+            engine.Enqueue(_allSpecs);
+            engine.Start(new StopConditions());
+
+            task.Wait();
+        }
     }
 }

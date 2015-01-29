@@ -45,8 +45,6 @@ namespace StoryTeller.Samples.Fixtures
         [FormatAs("The number should start with {starting}")]
         public void StartWith([Default("11")]double starting)
         {
-            Thread.Sleep(1000);
-
             _number = starting;
             say();
         }

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using FubuCore;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
+using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Engine
 {
@@ -20,6 +24,43 @@ namespace Storyteller.Core.Engine
     {
         Task<ISpecContext> Execute(SpecificationPlan plan, IExecutionContext execution, IExecutionQueue queue);
         void UseStopConditions(StopConditions conditions);
+    }
+
+    public class BatchObserver : IObserver
+    {
+        private readonly IDictionary<string, bool> _finished = new Dictionary<string, bool>();
+        private TaskCompletionSource<bool> _task;
+
+        public Task Watch(IEnumerable<SpecNode> nodes)
+        {
+            nodes.Each(x => _finished.Add(x.id, false));
+            _task = new TaskCompletionSource<bool>();
+
+            return _task.Task;
+        }
+
+        public void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan)
+        {
+        }
+
+        public void Handle<T>(T message) where T : IResultMessage
+        {
+        }
+
+        public void FixturesRead(FixtureLibrary library)
+        {
+        }
+
+        public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
+        {
+        }
+
+        public void SpecHandled(string id)
+        {
+            _finished[id] = true;
+
+            if (_finished.Values.All(x => x)) _task.SetResult(true);
+        }
     }
 
     public class BatchRunner : ISpecRunner
@@ -42,11 +83,14 @@ namespace Storyteller.Core.Engine
                 plan.Attempts++;
                 if (ShouldRetry(plan, context))
                 {
-                    // TODO -- instrumentation here
+                    _observer.SpecRequeued(plan, context);
                     queue.Enqueue(plan);
                 }
+                else
+                {
+                    _observer.SpecHandled(plan.Specification.Id);
+                }
 
-                // TODO -- deal with retry logic in here
 
             }
             catch (Exception ex)
@@ -57,10 +101,9 @@ namespace Storyteller.Core.Engine
 
         public bool ShouldRetry(SpecificationPlan plan, ISpecContext context)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
-        // TODO -- have it take in the IExecutionQueue for retries?
         public Task<ISpecContext> Execute(SpecificationPlan plan, IExecutionContext execution, IExecutionQueue queue)
         {
             var context = new SpecContext(_observer, _stopConditions, execution.Services);
@@ -121,7 +164,7 @@ namespace Storyteller.Core.Engine
                         // TODO -- tag the context or plan if timed out?
                         // TODO -- tag the plan as having an attempt?
 
-                        _observer.SpecFinished(t.Result, plan);
+                        _observer.SpecExecutionFinished(t.Result, plan);
                     });
                 }
             }
@@ -176,15 +219,15 @@ namespace Storyteller.Core.Engine
 
     public interface IReaderQueue : IDisposable
     {
-        void Enqueue(string file);
-        void Enqueue(IEnumerable<string> files);
+        void Enqueue(SpecNode node);
+        void Enqueue(IEnumerable<SpecNode> nodes);
         void Start();
     }
 
     public class ReaderQueue : IReaderQueue
     {
         private readonly IPlanningQueue _planning;
-        private readonly BlockingCollection<string> _collection = new BlockingCollection<string>(new ConcurrentBag<string>());
+        private readonly BlockingCollection<SpecNode> _collection = new BlockingCollection<SpecNode>(new ConcurrentBag<SpecNode>());
         private Task _readingTask;
 
         public ReaderQueue(IPlanningQueue planning)
@@ -192,24 +235,26 @@ namespace Storyteller.Core.Engine
             _planning = planning;
         }
 
-        public void Enqueue(string file)
+        public void Enqueue(SpecNode node)
         {
-            _collection.Add(file);
+            _collection.Add(node);
         }
 
-        public void Enqueue(IEnumerable<string> files)
+        public void Enqueue(IEnumerable<SpecNode> nodes)
         {
-            files.Each(Enqueue);
+            nodes.Each(file => Enqueue((SpecNode) file));
         }
 
         public void Start()
         {
             _readingTask = Task.Factory.StartNew(() =>
             {
-                foreach (var file in _collection.GetConsumingEnumerable())
+                foreach (var node in _collection.GetConsumingEnumerable())
                 {
                     // TODO -- error handling here
-                    var spec = XmlReader.ReadFromFile(file);
+                    var spec = XmlReader.ReadFromFile(node.filename);
+                    spec.Id = node.id;
+
                     _planning.Enqueue(spec);
                 }
             });

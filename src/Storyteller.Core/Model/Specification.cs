@@ -26,7 +26,7 @@ namespace Storyteller.Core.Model
         public SpecificationPlan CreatePlan(FixtureLibrary library)
         {
             var sectionPlans = Children.OfType<Section>().Select(x => x.CreatePlan(library));
-            return new SpecificationPlan(sectionPlans);
+            return new SpecificationPlan(sectionPlans){Specification = this};
         }
 
         private readonly IList<Node> _children = new List<Node>();

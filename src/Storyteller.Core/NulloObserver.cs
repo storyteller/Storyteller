@@ -6,7 +6,7 @@ namespace Storyteller.Core
 {
     public class NulloObserver : IObserver
     {
-        public void SpecFinished(ISpecContext context, SpecificationPlan plan)
+        public void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan)
         {
             // Nothing
         }
@@ -17,6 +17,16 @@ namespace Storyteller.Core
         }
 
         public void FixturesRead(FixtureLibrary library)
+        {
+            // Nothing
+        }
+
+        public void SpecHandled(string id)
+        {
+            // Nothing
+        }
+
+        public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
         {
             // Nothing
         }

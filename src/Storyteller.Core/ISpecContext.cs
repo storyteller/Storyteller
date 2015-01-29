@@ -15,5 +15,7 @@ namespace Storyteller.Core
         State State { get; }
         CancellationToken Cancellation { get; }
         void RequestCancellation();
+
+        Counts Counts { get; }
     }
 }
