@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using FubuCore;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Grammars.Sets
@@ -30,6 +32,11 @@ namespace Storyteller.Core.Grammars.Sets
                 .ToArray();
 
             var matcher = _ordered ? OrderedSetMatcher.Flyweight : UnorderedSetMatcher.Flyweight;
+
+            if (section.Id.IsEmpty())
+            {
+                section.Id = Guid.NewGuid().ToString();
+            }
 
             return new VerificationSetPlan(section, matcher, _comparison, expected, _cells);
         }

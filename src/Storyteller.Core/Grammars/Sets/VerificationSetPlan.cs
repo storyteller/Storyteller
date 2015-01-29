@@ -59,6 +59,7 @@ namespace Storyteller.Core.Grammars.Sets
                 if (t.IsCompleted)
                 {
                     var result = CreateResults(_expected, t.Result);
+                    result.id = _section.Id;
                     context.LogResult(result);
                 }
             }).Wait(context.Cancellation);

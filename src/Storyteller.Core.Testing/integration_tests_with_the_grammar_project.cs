@@ -95,7 +95,7 @@ namespace Storyteller.Core.Testing
         {
             running("Ordered Set").ShouldEqual(10, 7, 0, 1);
         }
-
+        
         [Test]
         public void Ordered_string_set_failure()
         {

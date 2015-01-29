@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="cells_reading_lists_integration_specs.cs" />
     <Compile Include="Conversion\ConversionsTester.cs" />
+    <Compile Include="Conversion\DateTime_conversion_specs.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
     <Compile Include="EndToEndExecution\fixture_check_method_specs.cs" />
     <Compile Include="EndToEndExecution\fixture_fact_methods_specs.cs" />
