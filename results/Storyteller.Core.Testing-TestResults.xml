@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!--This file represents the results of running a test suite-->
-<test-results name="C:\code\storyteller\src\Storyteller.Core.Testing\bin\Debug\Storyteller.Core.Testing.dll" total="254" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-01-29" time="11:45:32">
+<test-results name="C:\code\storyteller\src\Storyteller.Core.Testing\bin\Debug\Storyteller.Core.Testing.dll" total="258" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-01-29" time="12:03:01">
   <environment nunit-version="2.5.10.11092" clr-version="2.0.50727.5477" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="C:\code\storyteller" machine-name="SLV-JEREMILL01" user="jeremill" user-domain="EXTENDHEALTH" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="Assembly" name="C:\code\storyteller\src\Storyteller.Core.Testing\bin\Debug\Storyteller.Core.Testing.dll" executed="True" result="Success" success="True" time="11.512" asserts="0">
+  <test-suite type="Assembly" name="C:\code\storyteller\src\Storyteller.Core.Testing\bin\Debug\Storyteller.Core.Testing.dll" executed="True" result="Success" success="True" time="11.372" asserts="0">
     <results>
-      <test-suite type="Namespace" name="Storyteller" executed="True" result="Success" success="True" time="11.497" asserts="0">
+      <test-suite type="Namespace" name="Storyteller" executed="True" result="Success" success="True" time="11.356" asserts="0">
         <results>
-          <test-suite type="Namespace" name="Core" executed="True" result="Success" success="True" time="11.497" asserts="0">
+          <test-suite type="Namespace" name="Core" executed="True" result="Success" success="True" time="11.356" asserts="0">
             <results>
-              <test-suite type="Namespace" name="Testing" executed="True" result="Success" success="True" time="11.497" asserts="0">
+              <test-suite type="Namespace" name="Testing" executed="True" result="Success" success="True" time="11.356" asserts="0">
                 <results>
-                  <test-suite type="TestFixture" name="cells_reading_lists_integration_specs" executed="True" result="Success" success="True" time="0.296" asserts="0">
+                  <test-suite type="TestFixture" name="cells_reading_lists_integration_specs" executed="True" result="Success" success="True" time="0.265" asserts="0">
                     <results>
-                      <test-case name="Storyteller.Core.Testing.cells_reading_lists_integration_specs.get_list_values_from_fixture" executed="True" result="Success" success="True" time="0.265" asserts="8" />
-                      <test-case name="Storyteller.Core.Testing.cells_reading_lists_integration_specs.get_list_values_from_the_global_handling" executed="True" result="Success" success="True" time="0.016" asserts="8" />
+                      <test-case name="Storyteller.Core.Testing.cells_reading_lists_integration_specs.get_list_values_from_fixture" executed="True" result="Success" success="True" time="0.250" asserts="8" />
+                      <test-case name="Storyteller.Core.Testing.cells_reading_lists_integration_specs.get_list_values_from_the_global_handling" executed="True" result="Success" success="True" time="0.000" asserts="8" />
                     </results>
                   </test-suite>
-                  <test-suite type="Namespace" name="Conversion" executed="True" result="Success" success="True" time="0.109" asserts="0">
+                  <test-suite type="Namespace" name="Conversion" executed="True" result="Success" success="True" time="0.094" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="ConversionsTester" executed="True" result="Success" success="True" time="0.031" asserts="0">
+                      <test-suite type="TestFixture" name="ConversionsTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.Conversion.ConversionsTester.can_round_trip_enumerable_values" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Conversion.ConversionsTester.can_round_trip_enumerable_values" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Conversion.ConversionsTester.convert_string_as_EMPTY" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Conversion.ConversionsTester.convert_string_is_passthrough_on_value" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Conversion.ConversionsTester.enumerations" executed="True" result="Success" success="True" time="0.000" asserts="1" />
@@ -30,11 +30,11 @@
                       </test-suite>
                       <test-suite type="TestFixture" name="DateTime_conversion_specs" executed="True" result="Success" success="True" time="0.047" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_for_day_and_time" executed="True" result="Success" success="True" time="0.016" asserts="3" />
+                          <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_for_day_and_time" executed="True" result="Success" success="True" time="0.031" asserts="3" />
                           <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_for_day_and_time_2" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                           <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_for_day_and_time_3" executed="True" result="Success" success="True" time="0.000" asserts="3" />
-                          <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_from_24_hour_time" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                          <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_from_full_iso_8601_should_be_a_utc_datetime" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_from_24_hour_time" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_from_full_iso_8601_should_be_a_utc_datetime" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.get_date_time_from_partial_iso_8601_uses_default_parser_and_is_local" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.parse_today" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Conversion.DateTime_conversion_specs.parse_today_minus_date" executed="True" result="Success" success="True" time="0.000" asserts="1" />
@@ -43,7 +43,7 @@
                       </test-suite>
                       <test-suite type="TestFixture" name="StepValuesTester" executed="True" result="Success" success="True" time="0.031" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.Conversion.StepValuesTester.apply_ordering" executed="True" result="Success" success="True" time="0.000" asserts="6" />
+                          <test-case name="Storyteller.Core.Testing.Conversion.StepValuesTester.apply_ordering" executed="True" result="Success" success="True" time="0.016" asserts="6" />
                           <test-case name="Storyteller.Core.Testing.Conversion.StepValuesTester.process_delayed_runtime_converters_successfully" executed="True" result="Success" success="True" time="0.000" asserts="7" />
                           <test-case name="Storyteller.Core.Testing.Conversion.StepValuesTester.process_delayed_runtime_convertor_that_fails_with_a_null" executed="True" result="Success" success="True" time="0.016" asserts="6" />
                           <test-case name="Storyteller.Core.Testing.Conversion.StepValuesTester.process_delayed_runtime_convertor_that_fails_with_exception" executed="True" result="Success" success="True" time="0.000" asserts="6" />
@@ -52,17 +52,17 @@
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite type="Namespace" name="EndToEnd" executed="True" result="Success" success="True" time="0.296" asserts="0">
+                  <test-suite type="Namespace" name="EndToEnd" executed="True" result="Success" success="True" time="0.234" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="simplest_possible_execution" executed="True" result="Success" success="True" time="0.296" asserts="0">
+                      <test-suite type="TestFixture" name="simplest_possible_execution" executed="True" result="Success" success="True" time="0.234" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.continues_on_normal_exception" executed="True" result="Success" success="True" time="0.250" asserts="0" />
+                          <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.continues_on_normal_exception" executed="True" result="Success" success="True" time="0.218" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.run_actions" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.setup_and_teardown_are_called_before_and_after_nested_steps" executed="True" result="Success" success="True" time="0.000" asserts="8" />
                           <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.stop_if_setup_blows_up" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.stop_if_teardown_blows_up" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.would_stop_on_a_catastrophic_exception" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                          <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.would_stop_on_a_critical_exception" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                          <test-case name="Storyteller.Core.Testing.EndToEnd.simplest_possible_execution.would_stop_on_a_critical_exception" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
                     </results>
@@ -71,8 +71,8 @@
                     <results>
                       <test-suite type="TestFixture" name="fixture_check_method_specs" executed="True" result="Success" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_check_method_specs.build_grammar" executed="True" result="Success" success="True" time="0.000" asserts="6" />
-                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_check_method_specs.check_against_context" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_check_method_specs.build_grammar" executed="True" result="Success" success="True" time="0.016" asserts="6" />
+                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_check_method_specs.check_against_context" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_check_method_specs.check_simple" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
@@ -81,20 +81,20 @@
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_do_method_specs.action_grammar_of_T_can_build_grammar_model" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_do_method_specs.run_do_with_argument" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_do_method_specs.run_do_with_argument_against_context" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_do_method_specs.run_do_with_argument_and_service" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_do_method_specs.run_do_with_argument_and_service" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="fixture_fact_methods_specs" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                      <test-suite type="TestFixture" name="fixture_fact_methods_specs" executed="True" result="Success" success="True" time="0.016" asserts="0">
                         <results>
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_fact_methods_specs.build_the_cell_model" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_fact_methods_specs.execute_fact_by_context" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_fact_methods_specs.execute_fact_by_service" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_fact_methods_specs.execute_fact_by_service" executed="True" result="Success" success="True" time="0.016" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.EndToEndExecution.fixture_fact_methods_specs.execute_simple_fact_positive" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="simple_method_grammars" executed="True" result="Success" success="True" time="0.031" asserts="0">
+                      <test-suite type="TestFixture" name="simple_method_grammars" executed="True" result="Success" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.simple_method_grammars.run_with_actions_and_assertions_success_and_failure_and_exception" executed="True" result="Success" success="True" time="0.031" asserts="0" />
+                          <test-case name="Storyteller.Core.Testing.EndToEndExecution.simple_method_grammars.run_with_actions_and_assertions_success_and_failure_and_exception" executed="True" result="Success" success="True" time="0.016" asserts="0" />
                         </results>
                       </test-suite>
                     </results>
@@ -111,9 +111,9 @@
                       </test-suite>
                     </results>
                   </test-suite>
-                  <test-suite type="Namespace" name="Equivalence" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                  <test-suite type="Namespace" name="Equivalence" executed="True" result="Success" success="True" time="0.000" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="EquivalenceCheckerTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                      <test-suite type="TestFixture" name="EquivalenceCheckerTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="Storyteller.Core.Testing.Equivalence.EquivalenceCheckerTester.arrays_are_checked_independently_of_order" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                           <test-case name="Storyteller.Core.Testing.Equivalence.EquivalenceCheckerTester.check_a_string" executed="True" result="Success" success="True" time="0.000" asserts="2" />
@@ -126,7 +126,7 @@
                   <test-suite type="TestFixture" name="FixtureTester" executed="True" result="Success" success="True" time="0.031" asserts="0">
                     <results>
                       <test-case name="Storyteller.Core.Testing.FixtureTester.add_selection_values" executed="True" result="Success" success="True" time="0.000" asserts="12" />
-                      <test-case name="Storyteller.Core.Testing.FixtureTester.builds_default_title_in_model" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.FixtureTester.builds_default_title_in_model" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.FixtureTester.builds_model_with_explicit_title" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.FixtureTester.can_resolve_grammars_added_explicitly" executed="True" result="Success" success="True" time="0.000" asserts="6" />
                       <test-case name="Storyteller.Core.Testing.FixtureTester.can_resolve_grammars_created_by_a_public_method" executed="True" result="Success" success="True" time="0.000" asserts="6" />
@@ -139,7 +139,7 @@
                       <test-case name="Storyteller.Core.Testing.FixtureTester.use_alias_for_on_grammar_method" executed="True" result="Success" success="True" time="0.000" asserts="4" />
                     </results>
                   </test-suite>
-                  <test-suite type="Namespace" name="Grammars" executed="True" result="Success" success="True" time="0.718" asserts="0">
+                  <test-suite type="Namespace" name="Grammars" executed="True" result="Success" success="True" time="0.671" asserts="0">
                     <results>
                       <test-suite type="TestFixture" name="CheckPropertyGrammar_specs" executed="True" result="Success" success="True" time="0.000" asserts="0">
                         <results>
@@ -174,13 +174,13 @@
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Importing.importing_and_currying_grammars_specs.curry_builds_the_model" executed="True" result="Success" success="True" time="0.000" asserts="4" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Importing.importing_and_currying_grammars_specs.currying_selects_the_right_cells" executed="True" result="Success" success="True" time="0.000" asserts="14" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Importing.importing_and_currying_grammars_specs.execute_an_import_without_currying" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Importing.importing_and_currying_grammars_specs.execute_an_import_without_currying" executed="True" result="Success" success="True" time="0.016" asserts="0" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Importing.importing_and_currying_grammars_specs.running_a_curried_imported_step" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                             </results>
                           </test-suite>
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="InvalidGrammarStepTester" executed="True" result="Success" success="True" time="0.234" asserts="0">
+                      <test-suite type="TestFixture" name="InvalidGrammarStepTester" executed="True" result="Success" success="True" time="0.218" asserts="0">
                         <results>
                           <test-case name="Storyteller.Core.Testing.Grammars.InvalidGrammarStepTester.accept_visitor" executed="True" result="Success" success="True" time="0.218" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.Grammars.InvalidGrammarStepTester.execute_logs_a_step_result_error" executed="True" result="Success" success="True" time="0.000" asserts="5" />
@@ -188,13 +188,13 @@
                       </test-suite>
                       <test-suite type="TestFixture" name="LinePlanTester" executed="True" result="Success" success="True" time="0.078" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.accept_visitor_calls_through_to_line" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                          <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.accept_visitor_calls_through_to_line" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.no_conversion_errors_but_the_action_blows_up" executed="True" result="Success" success="True" time="0.031" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.no_conversion_errors_but_the_action_blows_up_sets_the_position" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                           <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.run_happy_path_with_no_conversions_and_no_errors" executed="True" result="Success" success="True" time="0.000" asserts="9" />
                           <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.run_puts_the_position_on_the_result_happy_path" executed="True" result="Success" success="True" time="0.000" asserts="3" />
-                          <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.runs_all_the_delayed_conversions_before_performing_the_action" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                          <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.when_there_are_conversion_errors_a_head_of_time" executed="True" result="Success" success="True" time="0.016" asserts="8" />
+                          <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.runs_all_the_delayed_conversions_before_performing_the_action" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+                          <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.when_there_are_conversion_errors_a_head_of_time" executed="True" result="Success" success="True" time="0.000" asserts="8" />
                           <test-case name="Storyteller.Core.Testing.Grammars.LinePlanTester.when_there_are_errors_in_the_runtime_conversion" executed="True" result="Success" success="True" time="0.000" asserts="4" />
                         </results>
                       </test-suite>
@@ -203,7 +203,7 @@
                           <test-suite type="TestFixture" name="ActionGrammarTester" executed="True" result="Success" success="True" time="0.031" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Lines.ActionGrammarTester.build_out_the_grammar_model" executed="True" result="Success" success="True" time="0.000" asserts="5" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Lines.ActionGrammarTester.execute_delegates" executed="True" result="Success" success="True" time="0.031" asserts="0" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Lines.ActionGrammarTester.execute_delegates" executed="True" result="Success" success="True" time="0.016" asserts="0" />
                             </results>
                           </test-suite>
                         </results>
@@ -216,10 +216,10 @@
                               <test-case name="Storyteller.Core.Testing.Grammars.ObjectBuilding.ConfigureObjectGrammar_specs.execution" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="CreateObjectGrammar_specs" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                          <test-suite type="TestFixture" name="CreateObjectGrammar_specs" executed="True" result="Success" success="True" time="0.016" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.ObjectBuilding.CreateObjectGrammar_specs.builds_up_the_cell" executed="True" result="Success" success="True" time="0.000" asserts="5" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.ObjectBuilding.CreateObjectGrammar_specs.execute" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.ObjectBuilding.CreateObjectGrammar_specs.execute" executed="True" result="Success" success="True" time="0.016" asserts="0" />
                             </results>
                           </test-suite>
                           <test-suite type="TestFixture" name="Creating_object_data_specs" executed="True" result="Success" success="True" time="0.016" asserts="0">
@@ -264,15 +264,15 @@
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ActionMethodGrammarTester.select_format_by_names" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="FactMethod_specs" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                          <test-suite type="TestFixture" name="FactMethod_specs" executed="True" result="Success" success="True" time="0.000" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.FactMethod_specs.run_positive_and_negative" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Reflection.FactMethod_specs.spot_check_the_model" executed="True" result="Success" success="True" time="0.016" asserts="3" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Reflection.FactMethod_specs.spot_check_the_model" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="MethodInvocationTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                          <test-suite type="TestFixture" name="MethodInvocationTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                             <results>
-                              <test-case name="Storyteller.Core.Testing.Grammars.Reflection.MethodInvocationTester.execute" executed="True" result="Success" success="True" time="0.000" asserts="3" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Reflection.MethodInvocationTester.execute" executed="True" result="Success" success="True" time="0.016" asserts="3" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.MethodInvocationTester.invoke_with_return_value" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                             </results>
                           </test-suite>
@@ -283,25 +283,25 @@
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.execute_sad" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.format_from_attribute_if_it_exists" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.select_return_att_name_by_default" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.select_return_att_name_by_explicit_attribute" executed="True" result="Success" success="True" time="0.000" asserts="2" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.select_return_att_name_by_explicit_attribute" executed="True" result="Success" success="True" time="0.016" asserts="2" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.select_return_att_name_by_last_key" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Reflection.ValueCheckMethodTester.the_return_cell_is_marked_as_output" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                             </results>
                           </test-suite>
                         </results>
                       </test-suite>
-                      <test-suite type="Namespace" name="Sets" executed="True" result="Success" success="True" time="0.109" asserts="0">
+                      <test-suite type="Namespace" name="Sets" executed="True" result="Success" success="True" time="0.078" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="ObjectComparisonTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                          <test-suite type="TestFixture" name="ObjectComparisonTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.ObjectComparisonTester.build_cells" executed="True" result="Success" success="True" time="0.000" asserts="12" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.ObjectComparisonTester.fetch" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.ObjectComparisonTester.fetch" executed="True" result="Success" success="True" time="0.016" asserts="4" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="SetVerificationResultTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                          <test-suite type="TestFixture" name="SetVerificationResultTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.SetVerificationResultTester.tabulate_extras" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.SetVerificationResultTester.tabulate_matches" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.SetVerificationResultTester.tabulate_matches" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.SetVerificationResultTester.tabulate_missing" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.SetVerificationResultTester.tabulate_out_of_orders" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                             </results>
@@ -317,7 +317,7 @@
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.string_list_verification_specs.exact_match_by_simple_ordered_out_of_order" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                             </results>
                           </test-suite>
-                          <test-suite type="TestFixture" name="StringListComparisonTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                          <test-suite type="TestFixture" name="StringListComparisonTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.StringListComparisonTester.build_cells" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.StringListComparisonTester.fetch" executed="True" result="Success" success="True" time="0.000" asserts="6" />
@@ -325,10 +325,10 @@
                           </test-suite>
                           <test-suite type="TestFixture" name="UnorderedSetMatcherTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                             <results>
-                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.exact_match" executed="True" result="Success" success="True" time="0.000" asserts="8" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.exact_match" executed="True" result="Success" success="True" time="0.016" asserts="8" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.one_extra" executed="True" result="Success" success="True" time="0.000" asserts="9" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.one_extra_unordered" executed="True" result="Success" success="True" time="0.000" asserts="9" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.one_missing" executed="True" result="Success" success="True" time="0.016" asserts="7" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.one_missing" executed="True" result="Success" success="True" time="0.000" asserts="7" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.one_missing_un_ordered" executed="True" result="Success" success="True" time="0.000" asserts="7" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.UnorderedSetMatcherTester.unordered_but_still_matching" executed="True" result="Success" success="True" time="0.000" asserts="8" />
                             </results>
@@ -338,33 +338,33 @@
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.execute_ordered_happy_path" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.execute_out_of_order" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.execute_unordered_happy_path" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.on_ordered_wrong_because_of_a_bad_value" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.on_ordered_wrong_because_of_a_bad_value" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.spot_check_the_model_for_ordered" executed="True" result="Success" success="True" time="0.000" asserts="11" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Sets.VerifySetOf_specs.spot_check_the_model_for_unordered" executed="True" result="Success" success="True" time="0.000" asserts="11" />
                             </results>
                           </test-suite>
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="SilentActionTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                      <test-suite type="TestFixture" name="SilentActionTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="Storyteller.Core.Testing.Grammars.SilentActionTester.accept_visitor" executed="True" result="Success" success="True" time="0.000" asserts="0" />
                           <test-case name="Storyteller.Core.Testing.Grammars.SilentActionTester.exceptions_are_critical" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                          <test-case name="Storyteller.Core.Testing.Grammars.SilentActionTester.execute_happy_path" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Grammars.SilentActionTester.execute_happy_path" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Grammars.SilentActionTester.execute_sad_path" executed="True" result="Success" success="True" time="0.000" asserts="6" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="SilentGrammarTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                      <test-suite type="TestFixture" name="SilentGrammarTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.Grammars.SilentGrammarTester.compile_just_returns_the_silent_flyweight" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Grammars.SilentGrammarTester.compile_just_returns_the_silent_flyweight" executed="True" result="Success" success="True" time="0.016" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Grammars.SilentGrammarTester.create_plan" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                         </results>
                       </test-suite>
-                      <test-suite type="Namespace" name="Tables" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                      <test-suite type="Namespace" name="Tables" executed="True" result="Success" success="True" time="0.000" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="TableGrammar_specs" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                          <test-suite type="TestFixture" name="TableGrammar_specs" executed="True" result="Success" success="True" time="0.000" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Grammars.Tables.TableGrammar_specs.run_from_attribute_marked_method_with_value_check" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                              <test-case name="Storyteller.Core.Testing.Grammars.Tables.TableGrammar_specs.running_from_attribute_marked_action_method" executed="True" result="Success" success="True" time="0.016" asserts="6" />
+                              <test-case name="Storyteller.Core.Testing.Grammars.Tables.TableGrammar_specs.running_from_attribute_marked_action_method" executed="True" result="Success" success="True" time="0.000" asserts="6" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Tables.TableGrammar_specs.running_from_ext_method_with_before_and_after" executed="True" result="Success" success="True" time="0.000" asserts="8" />
                               <test-case name="Storyteller.Core.Testing.Grammars.Tables.TableGrammar_specs.running_from_ext_method_with_no_before_or_after" executed="True" result="Success" success="True" time="0.000" asserts="6" />
                             </results>
@@ -375,17 +375,21 @@
                   </test-suite>
                   <test-suite type="TestFixture" name="integration_tests_with_the_grammar_project" executed="True" result="Success" success="True" time="9.297" asserts="0">
                     <results>
-                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.boolean_results_in_set_verification" executed="True" result="Success" success="True" time="0.094" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.boolean_results_in_set_verification" executed="True" result="Success" success="True" time="0.078" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Cannot_find_fixture" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.cannot_find_grammar" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Composite_with_errors" executed="True" result="Success" success="True" time="4.071" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Composite_with_errors" executed="True" result="Success" success="True" time="4.056" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.decision_tables" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.embeds" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Facts" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Facts" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Ordered_set" executed="True" result="Success" success="True" time="0.016" asserts="14" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Ordered_string_set_failure" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Ordered_string_set_success" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Sentences" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Set_with_Error" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Simple_Composite" executed="True" result="Success" success="True" time="5.070" asserts="1" />
                       <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Table_with_Errors" executed="True" result="Success" success="True" time="0.000" asserts="1" />
-                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Tables" executed="True" result="Success" success="True" time="0.016" asserts="1" />
+                      <test-case name="Storyteller.Core.Testing.integration_tests_with_the_grammar_project.Tables" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                     </results>
                   </test-suite>
                   <test-suite type="TestFixture" name="InvalidFixtureTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
@@ -394,24 +398,24 @@
                       <test-case name="Storyteller.Core.Testing.InvalidFixtureTester.invalid_fixtures_are_trapped_inside_the_creation_of_fixture_library" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                     </results>
                   </test-suite>
-                  <test-suite type="Namespace" name="Model" executed="True" result="Success" success="True" time="0.593" asserts="0">
+                  <test-suite type="Namespace" name="Model" executed="True" result="Success" success="True" time="0.562" asserts="0">
                     <results>
-                      <test-suite type="TestFixture" name="CellTester" executed="True" result="Success" success="True" time="0.265" asserts="0">
+                      <test-suite type="TestFixture" name="CellTester" executed="True" result="Success" success="True" time="0.234" asserts="0">
                         <results>
-                          <test-case name="Storyteller.Core.Testing.Model.CellTester.can_serialize_cell" executed="True" result="Success" success="True" time="0.218" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Model.CellTester.can_serialize_cell" executed="True" result="Success" success="True" time="0.203" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.cell_logs_a_missing_status_when_the_raw_value_is_not_found_and_no_default" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                          <test-case name="Storyteller.Core.Testing.Model.CellTester.cell_logs_an_invalid_status_when_the_conversion_fails_with_format_exception" executed="True" result="Success" success="True" time="0.016" asserts="2" />
+                          <test-case name="Storyteller.Core.Testing.Model.CellTester.cell_logs_an_invalid_status_when_the_conversion_fails_with_format_exception" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.cell_picks_up_selection_list_name" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.cell_picks_up_selection_values" executed="True" result="Success" success="True" time="0.000" asserts="7" />
-                          <test-case name="Storyteller.Core.Testing.Model.CellTester.Cell_picks_up_the_default_value_attribute" executed="True" result="Success" success="True" time="0.000" asserts="1" />
+                          <test-case name="Storyteller.Core.Testing.Model.CellTester.Cell_picks_up_the_default_value_attribute" executed="True" result="Success" success="True" time="0.016" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.Cell_picks_up_the_header_attributes" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.cell_uses_the_default_for_conversion_when_no_value_exists" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.create_with_basic_converter_and_convert_happy_path" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.create_with_basic_converter_and_convert_with_errors" executed="True" result="Success" success="True" time="0.000" asserts="4" />
-                          <test-case name="Storyteller.Core.Testing.Model.CellTester.create_with_no_converter" executed="True" result="Success" success="True" time="0.016" asserts="5" />
+                          <test-case name="Storyteller.Core.Testing.Model.CellTester.create_with_no_converter" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.happy_check_for_a_simple_equals_match" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.if_list_is_not_on_fixture_picks_up_from_cellHandling" executed="True" result="Success" success="True" time="0.000" asserts="7" />
-                          <test-case name="Storyteller.Core.Testing.Model.CellTester.list_on_fixture_has_precedence" executed="True" result="Success" success="True" time="0.000" asserts="5" />
+                          <test-case name="Storyteller.Core.Testing.Model.CellTester.list_on_fixture_has_precedence" executed="True" result="Success" success="True" time="0.016" asserts="5" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.matches_array_" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.matches_simply" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                           <test-case name="Storyteller.Core.Testing.Model.CellTester.NULL_is_converted_as_wait_for_it_null" executed="True" result="Success" success="True" time="0.000" asserts="1" />
@@ -428,7 +432,7 @@
                           <test-case name="Storyteller.Core.Testing.Model.ErrorGrammarTester.create_plan_returns_an_invalid_grammar_step" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                         </results>
                       </test-suite>
-                      <test-suite type="TestFixture" name="MissingGrammarTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
+                      <test-suite type="TestFixture" name="MissingGrammarTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
                         <results>
                           <test-case name="Storyteller.Core.Testing.Model.MissingGrammarTester.compile_just_returns_itself" executed="True" result="Success" success="True" time="0.000" asserts="1" />
                           <test-case name="Storyteller.Core.Testing.Model.MissingGrammarTester.create_an_Missing_grammar_adds_Missing_to_itself" executed="True" result="Success" success="True" time="0.000" asserts="1" />
@@ -437,10 +441,10 @@
                       </test-suite>
                       <test-suite type="Namespace" name="Persistence" executed="True" result="Success" success="True" time="0.312" asserts="0">
                         <results>
-                          <test-suite type="TestFixture" name="HierarchyLoaderTester" executed="True" result="Success" success="True" time="0.000" asserts="0">
+                          <test-suite type="TestFixture" name="HierarchyLoaderTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                             <results>
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.HierarchyLoaderTester.read_a_spec_node" executed="True" result="Success" success="True" time="0.000" asserts="4" />
-                              <test-case name="Storyteller.Core.Testing.Model.Persistence.HierarchyLoaderTester.read_an_entire_suite" executed="True" result="Success" success="True" time="0.000" asserts="9" />
+                              <test-case name="Storyteller.Core.Testing.Model.Persistence.HierarchyLoaderTester.read_an_entire_suite" executed="True" result="Success" success="True" time="0.016" asserts="9" />
                             </results>
                           </test-suite>
                           <test-suite type="TestFixture" name="Json_serialization_formatting_specs" executed="True" result="Success" success="True" time="0.047" asserts="0">
@@ -456,7 +460,7 @@
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.full_cycle_lifecycle" executed="True" result="Success" success="True" time="0.109" asserts="2" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.full_cycle_max_retries" executed="True" result="Success" success="True" time="0.000" asserts="2" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.full_cycle_spec_id" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                              <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.full_cycle_tags" executed="True" result="Success" success="True" time="0.016" asserts="7" />
+                              <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.full_cycle_tags" executed="True" result="Success" success="True" time="0.000" asserts="7" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.no_tags_no_worries" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.persist_collection_sections_within_a_step" executed="True" result="Success" success="True" time="0.078" asserts="11" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_json.read_and_write_a_comment_within_a_section" executed="True" result="Success" success="True" time="0.000" asserts="8" />
@@ -473,7 +477,7 @@
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.full_cycle_tags" executed="True" result="Success" success="True" time="0.000" asserts="7" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.no_tags_no_worries" executed="True" result="Success" success="True" time="0.000" asserts="3" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.persist_collection_sections_within_a_step" executed="True" result="Success" success="True" time="0.000" asserts="11" />
-                              <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.read_and_write_a_comment_within_a_section" executed="True" result="Success" success="True" time="0.016" asserts="8" />
+                              <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.read_and_write_a_comment_within_a_section" executed="True" result="Success" success="True" time="0.000" asserts="8" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.read_and_write_a_section_under_a_spec" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.read_and_write_a_step_with_plain_values_under_a_section" executed="True" result="Success" success="True" time="0.000" asserts="5" />
                               <test-case name="Storyteller.Core.Testing.Model.Persistence.persisting_and_loading_specifications_with_xml.read_and_write_comment_directly_under_spec" executed="True" result="Success" success="True" time="0.000" asserts="6" />
@@ -537,7 +541,7 @@
                   <test-suite type="TestFixture" name="StateTester" executed="True" result="Success" success="True" time="0.016" asserts="0">
                     <results>
                       <test-case name="Storyteller.Core.Testing.StateTester.store_and_retrieve_by_type" executed="True" result="Success" success="True" time="0.000" asserts="2" />
-                      <test-case name="Storyteller.Core.Testing.StateTester.store_and_retrieve_by_type_and_key" executed="True" result="Success" success="True" time="0.000" asserts="4" />
+                      <test-case name="Storyteller.Core.Testing.StateTester.store_and_retrieve_by_type_and_key" executed="True" result="Success" success="True" time="0.016" asserts="4" />
                     </results>
                   </test-suite>
                   <test-suite type="TestFixture" name="StoryTellerAssertTester" executed="True" result="Success" success="True" time="0.000" asserts="0">

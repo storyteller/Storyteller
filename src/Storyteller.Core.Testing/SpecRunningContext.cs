@@ -6,6 +6,7 @@ using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Results;
@@ -120,6 +121,11 @@ namespace Storyteller.Core.Testing
         protected ResultExpression Step(string id)
         {
             return new ResultExpression(id, this);
+        }
+
+        protected SetVerificationResult VerificationResultFor(string id)
+        {
+            return _context.Results.OfType<SetVerificationResult>().FirstOrDefault(x => x.id == id);
         }
 
 

@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
+using FubuTestingSupport;
 using NUnit.Framework;
+using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Results;
@@ -89,13 +91,28 @@ namespace Storyteller.Core.Testing
             Step("2").StatusWas(ResultStatus.failed);
             Step("3").StatusWas(ResultStatus.error);
         }
-        /*
+        
         [Test]
         public void Ordered_set()
         {
-            running("Ordered Set").ShouldEqual(10, 7, 0, 1);
+            running("Ordered Set");
+
+            var result1 = VerificationResultFor("1");
+            result1.matches.ShouldHaveTheSameElementsAs("2", "3", "4");
+
+            var result2 = VerificationResultFor("5");
+            result2.wrongOrdered.ShouldHaveTheSameElementsAs(new WrongOrder("6", 2), new WrongOrder("7", 3), new WrongOrder("8", 1));
+
+            var result3 = VerificationResultFor("9");
+            result3.extras.Count().ShouldEqual(1);
+
+            var result4 = VerificationResultFor("10");
+            result4.missing.Single().ShouldEqual("11");
+
+            Step("12").Cell("Date").WasInvalid();
+
         }
-        
+
         [Test]
         public void Ordered_string_set_failure()
         {
@@ -107,7 +124,7 @@ namespace Storyteller.Core.Testing
         {
             running("Successful OrderedStrings").ShouldEqual(10, 0, 0, 0);
         }
-        */
+        
 
         [Test]
         public void Sentences()
@@ -134,13 +151,15 @@ namespace Storyteller.Core.Testing
         {
             running("Importing and Currying").ShouldEqual(1, 1, 0, 0);
         }
-        
+        */
         [Test]
         public void Set_with_Error()
         {
-            running("Set with Error").ShouldEqual(0, 3, 1, 0);
+            running("Set with Error").ShouldEqual(0, 0, 1, 0);
+
+            Step("1").StatusWas(ResultStatus.error);
         }
-        */
+        
         [Test]
         public void Simple_Composite()
         {

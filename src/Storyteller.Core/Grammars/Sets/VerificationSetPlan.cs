@@ -54,6 +54,7 @@ namespace Storyteller.Core.Grammars.Sets
                 {
                     // TODO -- do the Flatten() trick here on the aggregated exception
                     context.LogException(_section.Id, t.Exception);
+                    return;
                 }
 
                 if (t.IsCompleted)
@@ -61,6 +62,7 @@ namespace Storyteller.Core.Grammars.Sets
                     var result = CreateResults(_expected, t.Result);
                     result.id = _section.Id;
                     context.LogResult(result);
+                    return;
                 }
             }).Wait(context.Cancellation);
         }
