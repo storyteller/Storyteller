@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Specs\General\Check properties.xml" />
+    <Content Include="Specs\Tables\Boolean Results in a Table.xml" />
     <Content Include="Specs\Tables\Data Table Verification Happy Path.xml" />
     <Content Include="Specs\Tables\Data Table Verification Sad Path.xml" />
     <Content Include="Specs\Tables\Data Table Verification with Overridden Matchers.xml" />
@@ -100,6 +101,7 @@
     <Content Include="Specs\Sentences\Sentences.xml" />
     <Content Include="Specs\Sets\SetWithError.xml" />
     <Content Include="Specs\Paragraphs\Simple Composite.xml" />
+    <Content Include="Specs\Tables\Table with Optional Columns.xml" />
     <Content Include="Specs\Tables\Tables with Errors.xml" />
     <Content Include="Specs\Tables\Tables.xml" />
     <Content Include="Specs\General\Test with Bad Grammar Name.xml" />

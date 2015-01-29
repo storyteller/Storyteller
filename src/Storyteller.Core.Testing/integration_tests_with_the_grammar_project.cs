@@ -29,6 +29,7 @@ namespace Storyteller.Core.Testing
         private Counts running(string name)
         {
             var node = _allSpecs.FirstOrDefault(x => x.name == name);
+            Debug.WriteLine(node.filename);
             var spec = XmlReader.ReadFromFile(node.filename);
             executeSpec(spec);
 
@@ -45,12 +46,6 @@ namespace Storyteller.Core.Testing
 
             Step("1").StatusWas(ResultStatus.invalid);
         }
-        /*
-        [Test]
-        public void boolean_results_in_set_verification()
-        {
-            running("Boolean Results in a Table").ShouldEqual(2, 0, 0, 0);
-        }
 
         [Test]
         public void cannot_find_grammar()
@@ -58,18 +53,27 @@ namespace Storyteller.Core.Testing
             running("Test with Bad Grammar Name").ShouldEqual(0, 0, 3, 0);
         }
 
+        
+        [Test]
+        public void boolean_results_in_set_verification()
+        {
+            running("Boolean Results in a Table").ShouldEqual(2, 0, 0, 0);
+        }
+
+        
+
         [Test]
         public void Composite_with_errors()
         {
             running("Composite with Errors").ShouldEqual(2, 3, 1, 2);
         }
-
+        
         [Test]
         public void decision_tables()
         {
             running("Decision Table").ShouldEqual(2, 2, 0, 0);
         }
-
+        /*
         [Test]
         public void embeds()
         {

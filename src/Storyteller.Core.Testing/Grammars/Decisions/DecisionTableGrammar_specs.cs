@@ -17,7 +17,7 @@ namespace Storyteller.Core.Testing.Grammars.Decisions
             execute(@"
 => MathDecisions
 * Math
-  -> rows
+  -> table
   * row#1:X=1, Y=2, Sum=3, Product=2
   * row#2:X=2, Y=2, Sum=4, Product=4
   * row#3:X=2, Y=2, Sum=5, Product=4
@@ -42,7 +42,7 @@ namespace Storyteller.Core.Testing.Grammars.Decisions
             var table = ModelFor<Table>("MathDecisions", "Math");
 
             table.title.ShouldEqual("Adding and Multiplying");
-            table.collection.ShouldEqual("rows");
+            table.collection.ShouldEqual("table");
             table.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("X", "Y", "Sum", "Product");
 

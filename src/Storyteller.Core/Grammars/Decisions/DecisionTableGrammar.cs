@@ -10,7 +10,7 @@ namespace Storyteller.Core.Grammars.Decisions
         public DecisionTableGrammar(string label)
         {
             _inner = new TableGrammar(new TableLineGrammar(this))
-                .Titled(label);
+                .Titled(label).LeafName("table");
         }
 
         void IBeforeAndAfter.BeforeLine()
