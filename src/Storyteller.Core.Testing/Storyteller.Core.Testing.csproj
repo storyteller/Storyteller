@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -131,18 +131,19 @@
     <Compile Include="StateTester.cs" />
     <Compile Include="StoryTellerAssertTester.cs" />
     <Compile Include="TestingContext.cs" />
+    <Compile Include="Conversion\StringConverterProviderTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">
-      <Project>{90113dc7-c74e-4c5d-a0de-045f36378033}</Project>
+      <Project>{90113DC7-C74E-4C5D-A0DE-045F36378033}</Project>
       <Name>Storyteller.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
-      <Project>{cae54634-a689-4cf2-979e-ccbcca8a3644}</Project>
+      <Project>{CAE54634-A689-4CF2-979E-CCBCCA8A3644}</Project>
       <Name>StoryTeller.Gallery</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
-      <Project>{104dffdd-2229-4f23-ae66-d8bc4af622ab}</Project>
+      <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
       <Name>StoryTeller.Samples</Name>
     </ProjectReference>
   </ItemGroup>
