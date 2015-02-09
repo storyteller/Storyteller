@@ -107,6 +107,7 @@
     <Compile Include="Grammars\Tables\TableGrammar_specs.cs" />
     <Compile Include="integration_tests_with_the_grammar_project.cs" />
     <Compile Include="InvalidFixtureTester.cs" />
+    <Compile Include="JsonUtil.cs" />
     <Compile Include="Model\CellTester.cs" />
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />

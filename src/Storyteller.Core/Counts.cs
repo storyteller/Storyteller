@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core
@@ -5,9 +6,16 @@ namespace Storyteller.Core
 
     public class Counts
     {
+        [JsonProperty("rights")]
         public int Rights;
+
+        [JsonProperty("wrongs")]
         public int Wrongs;
+
+        [JsonProperty("errors")]
         public int Exceptions;
+
+        [JsonProperty("invalids")]
         public int SyntaxErrors;
 
         public Counts()

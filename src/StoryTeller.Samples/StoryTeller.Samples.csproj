@@ -86,10 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Specs\General\Check properties.xml" />
+    <Content Include="Specs\Sentences\Currying.xml" />
+    <Content Include="Specs\Sentences\Importing and Currying.xml" />
     <Content Include="Specs\Tables\Boolean Results in a Table.xml" />
-    <Content Include="Specs\Tables\Data Table Verification Happy Path.xml" />
-    <Content Include="Specs\Tables\Data Table Verification Sad Path.xml" />
-    <Content Include="Specs\Tables\Data Table Verification with Overridden Matchers.xml" />
     <Content Include="Specs\Paragraphs\Composite with Errors.xml" />
     <Content Include="Specs\General\Services.xml" />
     <Content Include="Specs\Tables\Decision Table.xml" />
@@ -103,7 +102,9 @@
     <Content Include="Specs\Paragraphs\Simple Composite.xml" />
     <Content Include="Specs\Tables\Table with Optional Columns.xml" />
     <Content Include="Specs\Tables\Tables with Errors.xml" />
-    <Content Include="Specs\Tables\Tables.xml" />
+    <Content Include="Specs\Tables\Tables.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Specs\General\Test with Bad Grammar Name.xml" />
     <Content Include="Specs\General\Test with Missing Fixture Name.xml" />
     <Content Include="Specs\Sets\Unordered Set.xml" />

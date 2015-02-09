@@ -116,6 +116,7 @@
     <Compile Include="Engine\IStepExecutor.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="IWithValues.cs" />
+    <Compile Include="Messages\MessageClasses.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\FixtureLibrary.cs" />
     <Compile Include="Grammars\GrammarBuilder.cs" />

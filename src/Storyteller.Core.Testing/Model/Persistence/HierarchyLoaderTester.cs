@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
@@ -19,7 +20,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
 
             spec.name.ShouldEqual("Check properties");
             spec.lifecycle.ShouldEqual("Acceptance");
-            spec.id.ShouldEqual("123456");
+            spec.id.ShouldEqual("general1"); 
             spec.filename.ShouldEqual(path);
         }
 
@@ -44,6 +45,19 @@ namespace Storyteller.Core.Testing.Model.Persistence
 
             Debug.WriteLine(json);
              * */
+        }
+
+        [Test, Explicit]
+        public void pretty_print_for_sample_data()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs");
+
+
+            var hierarchy = HierarchyLoader.ReadHierarchy(path);
+
+            var json = JsonUtil.ToJson(hierarchy).FormatJson();
+            Debug.WriteLine(json);
         }
     }
 }
