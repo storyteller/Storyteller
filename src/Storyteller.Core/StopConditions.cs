@@ -1,8 +1,10 @@
+using System;
 using System.Threading;
 using FubuCore;
 
 namespace Storyteller.Core
 {
+    [Serializable]
     public class StopConditions
     {
         public bool BreakOnExceptions;

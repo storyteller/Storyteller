@@ -14,7 +14,7 @@ namespace Storyteller.Core.Model
         {
             _key = key;
             _message = "Grammar '{0}' is in an invalid state. See the grammar errors".ToFormat(_key);
-            errors.Add(new GrammarError{error = error});
+            AddError(new GrammarError{error = error});
         }
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)

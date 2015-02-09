@@ -74,6 +74,10 @@ namespace Storyteller.Core.Model
             return cell;
         }
 
+        // For serialization purposes
+        public Cell()
+        {
+        }
 
         // TODO -- need this to return a grammar error somehow if a converter
         public Cell(CellHandling cells, string key, Type type)

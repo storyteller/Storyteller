@@ -19,7 +19,7 @@ namespace Storyteller.Core.Model
         public override FixtureModel Compile(CellHandling conversions)
         {
             var model = new FixtureModel(Key);
-            model.errors.Add(_error);
+            model.AddError(_error);
 
             return model;
         }

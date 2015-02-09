@@ -36,15 +36,15 @@ namespace Storyteller.Core.Testing.Grammars.Paragraphs
         public void surfaces_all_the_child_errors()
         {
             var child1 = new Sentence();
-            child1.errors.Add(new GrammarError());
-            child1.errors.Add(new GrammarError());
+            child1.AddError(new GrammarError());
+            child1.AddError(new GrammarError());
 
             var child2 = new Sentence();
-            child2.errors.Add(new GrammarError());
-            child2.errors.Add(new GrammarError());
+            child2.AddError(new GrammarError());
+            child2.AddError(new GrammarError());
 
             var paragraph = new Paragraph(new GrammarModel[] {child1, child2});
-            paragraph.errors.Count.ShouldEqual(4);
+            paragraph.errors.Length.ShouldEqual(4);
         }
     }
 }

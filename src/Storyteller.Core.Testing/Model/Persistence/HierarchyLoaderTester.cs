@@ -4,6 +4,7 @@ using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Model.Persistence;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Testing.Model.Persistence
 {
@@ -56,7 +57,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);
 
-            var json = JsonUtil.ToJson(hierarchy).FormatJson();
+            var json = JsonSerialization.ToJson(hierarchy).FormatJson();
             Debug.WriteLine(json);
         }
     }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using FubuCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Storyteller.Core.Remotes.Messaging
 {
@@ -22,6 +23,17 @@ namespace Storyteller.Core.Remotes.Messaging
             serializer.Serialize(writer, o);
 
             return writer.ToString();
+        }
+
+        public static string FormatJson(this string json)
+        {
+            return JToken.Parse(json).ToString(Formatting.Indented);
+        }
+
+        public static T Deserialize<T>(string json)
+        {
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
     }
 

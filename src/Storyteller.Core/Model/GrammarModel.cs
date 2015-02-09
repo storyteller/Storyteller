@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Storyteller.Core.Model
 {
@@ -12,6 +13,27 @@ namespace Storyteller.Core.Model
             this.type = type;
         }
 
-        public readonly IList<GrammarError> errors = new List<GrammarError>(); 
+        private readonly IList<GrammarError> _errors = new List<GrammarError>();
+
+        public GrammarError[] errors
+        {
+            get { return _errors.ToArray(); }
+            set
+            {
+                _errors.Clear();
+                _errors.AddRange(value);
+
+            }
+        }
+
+        public void AddError(GrammarError error)
+        {
+            _errors.Add(error);
+        }
+
+        public void AddErrorRange(IEnumerable<GrammarError> grammarErrors)
+        {
+            _errors.AddRange(grammarErrors);
+        }
     }
 }

@@ -73,6 +73,7 @@
     <Compile Include="Conversion\ConversionsTester.cs" />
     <Compile Include="Conversion\DateTime_conversion_specs.cs" />
     <Compile Include="Conversion\StepValuesTester.cs" />
+    <Compile Include="debugging.cs" />
     <Compile Include="EndToEndExecution\fixture_check_method_specs.cs" />
     <Compile Include="EndToEndExecution\fixture_fact_methods_specs.cs" />
     <Compile Include="EndToEndExecution\simple_method_grammars.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Grammars\Tables\TableGrammar_specs.cs" />
     <Compile Include="integration_tests_with_the_grammar_project.cs" />
     <Compile Include="InvalidFixtureTester.cs" />
-    <Compile Include="JsonUtil.cs" />
     <Compile Include="Model\CellTester.cs" />
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />
@@ -128,6 +128,7 @@
     <Compile Include="Remotes\Messaging\RecordingListener.cs" />
     <Compile Include="Remotes\Messaging\RemoteListenerTester.cs" />
     <Compile Include="Remotes\Messaging\WaitTester.cs" />
+    <Compile Include="Remotes\remote_activation_integration_specs.cs" />
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />

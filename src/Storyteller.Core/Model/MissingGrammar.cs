@@ -12,7 +12,7 @@ namespace Storyteller.Core.Model
         public MissingGrammar(string key) : base("missing")
         {
             _message = "Grammar '{0}' is not implemented".ToFormat(key);
-            errors.Add(new GrammarError {error = _message});
+            AddError(new GrammarError {error = _message});
         }
 
         IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)

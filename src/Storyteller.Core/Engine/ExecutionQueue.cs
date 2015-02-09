@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using FubuCore;
 using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Engine
@@ -30,7 +31,6 @@ namespace Storyteller.Core.Engine
         public void Dispose()
         {
             _collection.CompleteAdding();
-            _readingTask.Dispose();
             _collection.Dispose();
         }
 

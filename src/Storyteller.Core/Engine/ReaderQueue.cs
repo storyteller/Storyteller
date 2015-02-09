@@ -45,7 +45,6 @@ namespace Storyteller.Core.Engine
         {
             _collection.CompleteAdding();
             _collection.Dispose();
-            _readingTask.Dispose();
         }
     }
 }

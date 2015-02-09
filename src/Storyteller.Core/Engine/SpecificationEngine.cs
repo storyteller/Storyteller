@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Equivalence;
@@ -80,7 +81,7 @@ namespace Storyteller.Core.Engine
                 var message = new SystemRecycled
                 {
                     success = true,
-                    library = fixtures.Result,
+                    fixtures = fixtures.Result.Models.GetAll().ToArray(),
                     system_name = _system.ToString(),
                     time = DateTime.Now
                 };

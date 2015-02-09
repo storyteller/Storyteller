@@ -38,9 +38,7 @@ namespace Storyteller.Core
         {
             if (SystemTypeName.IsNotEmpty() && SystemTypeName.Contains(',')) return Type.GetType(SystemTypeName);
 
-            var assemblyName = Path.GetFileName(".".ToFullPath());
-            var assembly = Assembly.Load(assemblyName);
-            var types = FindSystemTypes(assembly).ToArray();
+            var types = FindSystemTypesInCurrentAssembly();
 
             if (types.Count() == 1)
             {
@@ -59,6 +57,20 @@ namespace Storyteller.Core
 
             
             throw new InDeterminateSystemTypeException(types);
+        }
+
+        private static Type[] FindSystemTypesInCurrentAssembly()
+        {
+            try
+            {
+                var assemblyName = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory);
+                var assembly = Assembly.Load(assemblyName);
+                return FindSystemTypes(assembly).ToArray();
+            }
+            catch (Exception)
+            {
+                return new Type[0];
+            }
         }
 
         public static bool IsSystemTypeCandidate(Type type)

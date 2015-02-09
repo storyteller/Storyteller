@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
+using Newtonsoft.Json;
 
 namespace Storyteller.Core.Model
 {

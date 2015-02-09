@@ -64,8 +64,8 @@ namespace Storyteller.Core.Remotes
 
         public void Dispose()
         {
-            _controller.Dispose();
-            _engine.Dispose();
+            if (_controller != null) _controller.Dispose();
+            if (_engine != null) _engine.Dispose();
         }
 
         public void SendJson(string json)

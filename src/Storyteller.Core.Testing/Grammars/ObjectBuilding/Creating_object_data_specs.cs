@@ -92,6 +92,7 @@ namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
     {
         private Location _location;
 
+        
         public IGrammar UsingWithInput()
         {
             return CreateNewObject<Location>("The location is", _ =>
@@ -107,6 +108,7 @@ namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
                 _.Do = x => _location = x;
             });
         }
+         
 
         public void LoadLocation()
         {
@@ -114,6 +116,7 @@ namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
             Context.State.CurrentObject = _location;
         }
 
+        
         public IGrammar AllProps()
         {
             return CreateNewObject<Location>("The location is", _ =>
@@ -123,6 +126,7 @@ namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
             });
         }
 
+        
         public IGrammar UsingLoadObjectBy()
         {
             return CreateObject<Location>("The location is",_ =>
@@ -132,14 +136,15 @@ namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
                 _.SetProperty(x => x.Y);
             });
         }
-
+        
 
 
         public void PreSetTheX(int x)
         {
             Context.State.Store(x);
         }
-
+        
+        
         public IGrammar UsingObjectIs()
         {
             return CreateObject<Location>("The location is", _ =>
@@ -149,7 +154,8 @@ namespace Storyteller.Core.Testing.Grammars.ObjectBuilding
                 _.Do = location => _location = location;
             });
         }
-
+         
+        
         [FormatAs("X should be {X}")]
         public int X()
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 
@@ -9,20 +10,29 @@ namespace Storyteller.Core.Remotes
     {
         public SystemRecycled() : base("system-recycled")
         {
-            Properties.Add("ConfigFile", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            Properties.Add("BaseDirectory", AppDomain.CurrentDomain.BaseDirectory);
-            Properties.Add("BinPath", AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
+            properties.Add("ConfigFile", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            properties.Add("BaseDirectory", AppDomain.CurrentDomain.BaseDirectory);
+            properties.Add("BinPath", AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
         }
 
-        public FixtureLibrary library;
+        public FixtureModel[] fixtures
+        {
+            get { return _fixtures.ToArray(); }
+            set
+            {
+                _fixtures.Clear();
+                _fixtures.AddRange(value);
+            }
+        }
         public DateTime time = DateTime.Now;
 
         public string system_name;
         public bool success;
         public string error;
 
+        private readonly IList<FixtureModel> _fixtures = new List<FixtureModel>(); 
 
         public string Name { get; set; }
-        public IDictionary<string, object> Properties = new Dictionary<string, object>();
+        public IDictionary<string, object> properties = new Dictionary<string, object>();
     }
 }

@@ -9,10 +9,14 @@ namespace Storyteller.Core.Model
         public GrammarModel[] children;
         public string title;
 
-        public Paragraph(IEnumerable<GrammarModel> children) : base("paragraph")
+        public Paragraph() : base("paragraph")
+        {
+        }
+
+        public Paragraph(IEnumerable<GrammarModel> children) : this()
         {
             this.children = children.ToArray();
-            errors.AddRange(this.children.SelectMany(x => x.errors));
+            AddErrorRange(this.children.SelectMany(x => x.errors));
         }
 
         public Cell[] cells
