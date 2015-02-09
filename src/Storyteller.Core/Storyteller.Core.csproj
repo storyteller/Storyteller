@@ -50,8 +50,16 @@
     </Compile>
     <Compile Include="Attributes.cs" />
     <Compile Include="CellHandling.cs" />
+    <Compile Include="Engine\BatchRunner.cs" />
+    <Compile Include="Engine\ExecutionQueue.cs" />
+    <Compile Include="Engine\IExecutionQueue.cs" />
+    <Compile Include="Engine\IPlanningQueue.cs" />
+    <Compile Include="Engine\IReaderQueue.cs" />
+    <Compile Include="Engine\ISpecRunner.cs" />
+    <Compile Include="Engine\PlanningQueue.cs" />
+    <Compile Include="Engine\ReaderQueue.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
-    <Compile Include="Engine\EngineSpike.cs" />
+    <Compile Include="Engine\BatchObserver.cs" />
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
