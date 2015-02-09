@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Test name="Importing and Currying" lifecycle="Acceptance">
+  <CurriedMath>
+    <AddingTo5 isStep="True" y="10" returnValue="15" />
+    <AddingTo5 isStep="True" y="12" returnValue="15" />
+  </CurriedMath>
+</Test>

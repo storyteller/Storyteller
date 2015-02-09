@@ -99,17 +99,18 @@ namespace Storyteller.Core.Testing
 
             var result1 = VerificationResultFor("1");
             result1.matches.ShouldHaveTheSameElementsAs("2", "3", "4");
-
+            
             var result2 = VerificationResultFor("5");
             result2.wrongOrdered.ShouldHaveTheSameElementsAs(new WrongOrder("6", 2), new WrongOrder("7", 3), new WrongOrder("8", 1));
-
+            
             var result3 = VerificationResultFor("9");
             result3.extras.Count().ShouldEqual(1);
-
+            
             var result4 = VerificationResultFor("10");
             result4.missing.Single().ShouldEqual("11");
-
+            
             Step("12").Cell("Date").WasInvalid();
+             
 
         }
 

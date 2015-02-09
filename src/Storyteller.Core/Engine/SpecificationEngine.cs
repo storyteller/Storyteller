@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Equivalence;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
+using Storyteller.Core.Remotes;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
@@ -57,13 +60,13 @@ namespace Storyteller.Core.Engine
         {
             _runner.UseStopConditions(stopConditions);
 
-            var cellHandling = BuildCellHandling();
+            var cellHandling = CellHandling.ForSystem(_system);
             
-            _system
+           var warmup = _system
                 .Warmup()
                 .ContinueWith(t => _execution.Start());
 
-            FixtureLibrary.CreateForAppDomain(cellHandling)
+            var fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
                 .ContinueWith(t =>
                 {
                     _observer.FixturesRead(t.Result);
@@ -71,16 +74,23 @@ namespace Storyteller.Core.Engine
 
                     return t.Result;
                 });
+
+            Task.WhenAll(warmup, fixtures).ContinueWith(t =>
+            {
+                var message = new SystemRecycled
+                {
+                    success = true,
+                    library = fixtures.Result,
+                    system_name = _system.ToString(),
+                    time = DateTime.Now
+                };
+
+                EventAggregator.SendMessage(message);
+            });
             
             _reader.Start();
         }
 
-        public CellHandling BuildCellHandling()
-        {
-            var conversions = new Conversions(_system.ConversionProviders());
 
-            // TODO -- add the system level lists here too
-            return new CellHandling(new EquivalenceChecker(), conversions);
-        }
     }
 }

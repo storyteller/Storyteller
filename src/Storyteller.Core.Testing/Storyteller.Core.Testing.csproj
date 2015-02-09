@@ -119,6 +119,7 @@
     <Compile Include="Model\Persistence\TextParserTester.cs" />
     <Compile Include="performance_tuning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remotes\determining_the_system_type.cs" />
     <Compile Include="Remotes\Messaging\EventAggregatorTester.cs" />
     <Compile Include="Remotes\Messaging\Message1.cs" />
     <Compile Include="Remotes\Messaging\Message2.cs" />

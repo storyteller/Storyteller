@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Test name="Boolean Results in a Table" lifecycle="Acceptance">
+  <Table>
+    <IsPositive isStep="True">
+      <table>
+        <row isStep="True" number="5" Number="true" IsEven="true" />
+        <row isStep="True" number="-5" IsEven="false" />
+      </table>
+    </IsPositive>
+  </Table>
+</Test>

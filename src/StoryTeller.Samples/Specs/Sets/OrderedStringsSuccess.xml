@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Test name="Successful OrderedStrings" lifecycle="Acceptance">
+  <Sets>
+    <TheDataIs>
+      <name>
+        <name name="Jeremy" />
+        <name name="Josh" />
+        <name name="Gary" />
+        <name name="Kevin" />
+        <name name="Chad" />
+      </name>
+    </TheDataIs>
+    <OrderedStringSet>
+      <Rows>
+        <Rows expected="Jeremy" Index="" />
+        <Rows expected="Josh" Index="" />
+        <Rows expected="Gary" Index="" />
+        <Rows expected="Kevin" Index="" />
+        <Rows expected="Chad" Index="" />
+      </Rows>
+    </OrderedStringSet>
+    <UnorderedStringSet>
+      <Rows>
+        <Rows expected="Kevin" Index="" />
+        <Rows expected="Chad" Index="" />
+        <Rows expected="Jeremy" Index="" />
+        <Rows expected="Josh" Index="" />
+        <Rows expected="Gary" Index="" />
+      </Rows>
+    </UnorderedStringSet>
+  </Sets>
+</Test>

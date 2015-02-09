@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using FubuCore;
+using Storyteller.Core.Engine;
+
+namespace Storyteller.Core
+{
+
+    [Serializable]
+    public class Project
+    {
+        public static readonly string FILE = "storyteller.config";
+
+        public string SystemTypeName { get; set; }
+        public int TimeoutInSeconds { get; set; }
+
+        public StopConditions StopConditions = new StopConditions();
+
+        public static Project LoadForFolder(string folder)
+        {
+            var system = new FileSystem();
+            var file = folder.AppendPath(FILE);
+
+            if (system.FileExists(file))
+            {
+                return system.LoadFromFile<Project>(file);
+            }
+
+            return new Project();
+        }
+
+        public Type DetermineSystemType()
+        {
+            if (SystemTypeName.IsNotEmpty() && SystemTypeName.Contains(',')) return Type.GetType(SystemTypeName);
+
+            var assemblyName = Path.GetFileName(".".ToFullPath());
+            var assembly = Assembly.Load(assemblyName);
+            var types = FindSystemTypes(assembly).ToArray();
+
+            if (types.Count() == 1)
+            {
+                return types.Single();
+            }
+
+            if (SystemTypeName.IsNotEmpty())
+            {
+                return types.FirstOrDefault(x => x.Name == SystemTypeName);
+            }
+
+            if (!types.Any())
+            {
+                return typeof (NulloSystem);
+            }
+
+            
+            throw new InDeterminateSystemTypeException(types);
+        }
+
+        public static bool IsSystemTypeCandidate(Type type)
+        {
+            return type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor() &&
+                   !type.IsOpenGeneric();
+        }
+
+
+        public static IEnumerable<Type> FindSystemTypes(Assembly assembly)
+        {
+            try
+            {
+                return assembly.GetExportedTypes().Where(IsSystemTypeCandidate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to scan types in assembly " + assembly.GetName().FullName);
+                Console.WriteLine(e);
+
+                return new Type[0];
+            }
+        }
+    }
+
+    [Serializable]
+    public class InDeterminateSystemTypeException : Exception
+    {
+        public static string ToMessage(IEnumerable<Type> candidates)
+        {
+            return "Cannot determine the Storyteller ISystem to use. Either use a command line flag or the storyteller.config file to explicitly specify the system. Found:\n"
+                   + candidates.Select(x => x.AssemblyQualifiedName).Join("\n");
+        }
+
+        protected InDeterminateSystemTypeException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+        public InDeterminateSystemTypeException(IEnumerable<Type> candidates) : base(ToMessage(candidates))
+        {
+            
+        }
+    }
+}

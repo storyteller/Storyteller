@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using StoryTeller.Model;
 
 namespace StoryTeller.Execution
@@ -16,6 +18,9 @@ namespace StoryTeller.Execution
 
         public FixtureLibrary Library { get { return _library; } }
         public DateTime Time { get { return _time; } }
+
+        public string Name { get; set; }
+        public IDictionary<string, object> Properties = new Dictionary<string, object>();
     }
 
     [Serializable]

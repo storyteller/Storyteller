@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Test name="Currying" lifecycle="Acceptance">
+  <Math>
+    <AddTo5 isStep="True" x="3" returnValue="8" />
+    <AddTo5 isStep="True" x="5" returnValue="9" />
+  </Math>
+</Test>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Test name="Data Table Verification with Overridden Matchers" lifecycle="Acceptance">
+  <DataTable>
+    <TheDataIs isStep="True">
+      <Rows>
+        <row isStep="True" firstName="Jeremy D" lastName="Miller" />
+        <row isStep="True" firstName="Maxwell" lastName="Miller" />
+        <row isStep="True" firstName="Monte" lastName="Miller" />
+      </Rows>
+    </TheDataIs>
+    <CheckDataSubstring isStep="True">
+      <Rows>
+        <row isStep="True" First="Jeremy" />
+        <row isStep="True" First="Max" />
+        <row isStep="True" First="Monteric" />
+      </Rows>
+    </CheckDataSubstring>
+  </DataTable>
+</Test>

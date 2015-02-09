@@ -75,9 +75,6 @@
     <Compile Include="Fixtures\CalculatorFixture.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gallery.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Tests\Retry attempt is passed through to TestContext.xml" />
     <Content Include="Tests\Calculator Tables.xml" />
     <Content Include="Tests\More Calculator Buttons.xml" />
