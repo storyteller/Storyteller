@@ -65,7 +65,17 @@ namespace Storyteller.Core.Engine
             
            var warmup = _system
                 .Warmup()
-                .ContinueWith(t => _execution.Start());
+                .ContinueWith(t =>
+                {
+                    if (!t.IsFaulted)
+                    {
+                        _execution.Start();
+                    }
+                    else
+                    {
+                        throw t.Exception;
+                    }
+                });
 
             var fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
                 .ContinueWith(t =>
@@ -78,6 +88,8 @@ namespace Storyteller.Core.Engine
 
             Task.WhenAll(warmup, fixtures).ContinueWith(t =>
             {
+               
+
                 var message = new SystemRecycled
                 {
                     success = true,
@@ -85,6 +97,12 @@ namespace Storyteller.Core.Engine
                     system_name = _system.ToString(),
                     time = DateTime.Now
                 };
+
+                if (warmup.IsFaulted)
+                {
+                    message.success = false;
+                    message.error = warmup.Exception.Flatten().InnerExceptions.Select(x => x.ToString()).Join("\n\n");
+                }
 
                 EventAggregator.SendMessage(message);
             });

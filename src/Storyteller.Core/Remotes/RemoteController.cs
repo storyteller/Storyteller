@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
+using FubuCore;
 using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Remotes
@@ -45,6 +47,8 @@ namespace Storyteller.Core.Remotes
 
         public Task<SystemRecycled> Start(EngineMode mode)
         {
+            copyStorytellerAssemblyIfNecessary();
+
             _domain = AppDomain.CreateDomain("Storyteller-SpecRunning-Domain", null, _remoteSetup.Setup);
             var proxyType = typeof (RemoteProxy);
             _proxy = (RemoteProxy)_domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
@@ -60,6 +64,18 @@ namespace Storyteller.Core.Remotes
 
 
             return listener.Task;
+        }
+
+        private void copyStorytellerAssemblyIfNecessary()
+        {
+            var directory = _remoteSetup.Setup.ApplicationBase.AppendPath(BinPath);
+            var fileName = GetType().Assembly.GetName().Name + ".dll";
+            var file = directory.AppendPath(fileName);
+            if (!File.Exists(file))
+            {
+                File.Copy(GetType().Assembly.Location, file);
+            }
+
         }
 
         public MessagingHub Messaging
