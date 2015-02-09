@@ -170,6 +170,15 @@
     <Compile Include="Model\Persistence\XmlWriter.cs" />
     <Compile Include="NulloObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remotes\Messaging\EventAggregator.cs" />
+    <Compile Include="Remotes\Messaging\IListener.cs" />
+    <Compile Include="Remotes\Messaging\IMessagingHub.cs" />
+    <Compile Include="Remotes\Messaging\IRemoteListener.cs" />
+    <Compile Include="Remotes\Messaging\MessageWaitCondition.cs" />
+    <Compile Include="Remotes\Messaging\MessagingHub.cs" />
+    <Compile Include="Remotes\Messaging\MessagingHubExtensions.cs" />
+    <Compile Include="Remotes\Messaging\RemoteListener.cs" />
+    <Compile Include="Remotes\Messaging\ServiceMessage.cs" />
     <Compile Include="Results\CellResult.cs" />
     <Compile Include="Results\Envelope.cs" />
     <Compile Include="Results\Finished.cs" />

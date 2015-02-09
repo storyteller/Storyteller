@@ -119,6 +119,14 @@
     <Compile Include="Model\Persistence\TextParserTester.cs" />
     <Compile Include="performance_tuning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Remotes\Messaging\EventAggregatorTester.cs" />
+    <Compile Include="Remotes\Messaging\Message1.cs" />
+    <Compile Include="Remotes\Messaging\Message2.cs" />
+    <Compile Include="Remotes\Messaging\MessageWaitConditionTester.cs" />
+    <Compile Include="Remotes\Messaging\MessagingHubTester.cs" />
+    <Compile Include="Remotes\Messaging\RecordingListener.cs" />
+    <Compile Include="Remotes\Messaging\RemoteListenerTester.cs" />
+    <Compile Include="Remotes\Messaging\WaitTester.cs" />
     <Compile Include="Results\CellResultTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />
