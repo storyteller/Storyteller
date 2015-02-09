@@ -149,6 +149,10 @@
       <Project>{912a12c9-5c6c-4661-806f-28633ae0666d}</Project>
       <Name>BadSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj">
+      <Project>{5b273c7c-0a4e-48e8-9e6e-3e84d8c2243e}</Project>
+      <Name>MultipleSystems</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">
       <Project>{90113DC7-C74E-4C5D-A0DE-045F36378033}</Project>
       <Name>Storyteller.Core</Name>

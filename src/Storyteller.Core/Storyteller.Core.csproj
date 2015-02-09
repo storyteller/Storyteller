@@ -122,6 +122,7 @@
     <Compile Include="ILineExecution.cs" />
     <Compile Include="ILineGrammar.cs" />
     <Compile Include="Engine\IStepExecutor.cs" />
+    <Compile Include="InDeterminateSystemTypeException.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="IWithValues.cs" />
     <Compile Include="Messages\MessageClasses.cs" />

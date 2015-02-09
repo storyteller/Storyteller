@@ -50,6 +50,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.Core.Testing", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadSystem", "BadSystem\BadSystem.csproj", "{912A12C9-5C6C-4661-806F-28633AE0666D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleSystems", "MultipleSystems\MultipleSystems.csproj", "{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,6 +185,18 @@ Global
 		{912A12C9-5C6C-4661-806F-28633AE0666D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{912A12C9-5C6C-4661-806F-28633AE0666D}.Release|x64.ActiveCfg = Release|Any CPU
 		{912A12C9-5C6C-4661-806F-28633AE0666D}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Release|x64.ActiveCfg = Release|Any CPU
+		{5B273C7C-0A4E-48E8-9E6E-3E84D8C2243E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

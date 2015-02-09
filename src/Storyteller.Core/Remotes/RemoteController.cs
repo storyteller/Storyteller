@@ -13,16 +13,23 @@ namespace Storyteller.Core.Remotes
         private RemoteProxy _proxy;
         private MessagingHub _messaging;
         private readonly Project _project;
+        private string _path;
 
         public RemoteController(string path)
         {
             _remoteSetup.ServiceDirectory = path;
             _project = Project.LoadForFolder(path);
+            _path = path;
         }
 
         public Project Project
         {
             get { return _project; }
+        }
+
+        public string Path
+        {
+            get { return _path; }
         }
 
         public string ConfigFile
