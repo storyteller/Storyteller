@@ -88,8 +88,6 @@ namespace Storyteller.Core.Engine
 
             Task.WhenAll(warmup, fixtures).ContinueWith(t =>
             {
-               
-
                 var message = new SystemRecycled
                 {
                     success = true,

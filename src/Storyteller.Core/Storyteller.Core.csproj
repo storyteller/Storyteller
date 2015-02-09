@@ -50,6 +50,8 @@
     </Compile>
     <Compile Include="Attributes.cs" />
     <Compile Include="CellHandling.cs" />
+    <Compile Include="CommandLine\RunCommand.cs" />
+    <Compile Include="CommandLine\RunInput.cs" />
     <Compile Include="Engine\BatchRunner.cs" />
     <Compile Include="Engine\ExecutionQueue.cs" />
     <Compile Include="Engine\IExecutionQueue.cs" />
@@ -185,7 +187,6 @@
     <Compile Include="Remotes\RemoteController.cs" />
     <Compile Include="Remotes\RemoteDomainExpression.cs" />
     <Compile Include="Remotes\RemoteProxy.cs" />
-    <Compile Include="Remotes\StorytellerController.cs" />
     <Compile Include="Remotes\SystemRecycled.cs" />
     <Compile Include="Remotes\SystemRecycledListener.cs" />
     <Compile Include="Remotes\SystemRecycleStarted.cs" />

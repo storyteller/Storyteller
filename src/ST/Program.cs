@@ -1,6 +1,6 @@
 ﻿using System;
 using FubuCore.CommandLine;
-using StoryTeller.CommandLine;
+using Storyteller.Core.CommandLine;
 
 namespace ST
 {

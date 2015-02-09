@@ -7,7 +7,6 @@ namespace Storyteller.Core.Remotes
 {
     public class RemoteProxy : MarshalByRefObject, IDisposable
     {
-        private StorytellerController _controller;
         private Project _project;
         private ISystem _system;
         private SpecificationEngine _engine;
@@ -19,8 +18,8 @@ namespace Storyteller.Core.Remotes
 
         public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
         {
-            _controller = new StorytellerController();
-            EventAggregator.Messaging.AddListener(_controller);
+            //_controller = new StorytellerController();
+            //EventAggregator.Messaging.AddListener(_controller);
             EventAggregator.Start((IRemoteListener) remoteListener);
 
             _project = project;
@@ -64,7 +63,6 @@ namespace Storyteller.Core.Remotes
 
         public void Dispose()
         {
-            if (_controller != null) _controller.Dispose();
             if (_engine != null) _engine.Dispose();
         }
 
