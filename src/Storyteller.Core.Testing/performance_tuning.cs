@@ -61,7 +61,7 @@ namespace Storyteller.Core.Testing
         {
             var system = new GrammarSystem();
             var observer = new BatchObserver();
-            var task = observer.Watch(_allSpecs);
+            var task = observer.MonitorBatch(_allSpecs);
 
             var engine = new SpecificationEngine(system, observer, new BatchRunner(observer));
             engine.Enqueue(_allSpecs);

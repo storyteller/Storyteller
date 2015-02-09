@@ -53,6 +53,8 @@
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
     <Compile Include="Engine\BatchRunner.cs" />
+    <Compile Include="Engine\BatchWatcher.cs" />
+    <Compile Include="Engine\EngineController.cs" />
     <Compile Include="Engine\ExecutionQueue.cs" />
     <Compile Include="Engine\IExecutionQueue.cs" />
     <Compile Include="Engine\IPlanningQueue.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Engine\BatchObserver.cs" />
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
+    <Compile Include="Engine\SpecResult.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar.cs" />
     <Compile Include="Grammars\Decisions\GetterProperty.cs" />

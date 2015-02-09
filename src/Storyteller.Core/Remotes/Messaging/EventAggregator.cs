@@ -70,5 +70,52 @@ namespace Storyteller.Core.Remotes.Messaging
             }
         }
 
+        public class ResponseExpression
+        {
+            private readonly Action _sendAction;
+
+            public ResponseExpression(Action sendAction)
+            {
+                _sendAction = sendAction;
+            }
+
+            public Task<T> AndWaitFor<T>()
+            {
+                var watcher = new ResponseWatcher<T>(_messaging);
+                _messaging.AddListener(watcher);
+
+                _sendAction();
+
+                return watcher.Task;
+            }
+        }
+
+        public static ResponseExpression Send<T>(T message)
+        {
+            return new ResponseExpression(() => SendMessage(message));
+        }
+    }
+
+    public class ResponseWatcher<T> : IListener<T>
+    {
+        private readonly IMessagingHub _messaging;
+        private readonly TaskCompletionSource<T> _task;
+
+        public ResponseWatcher(IMessagingHub messaging)
+        {
+            _messaging = messaging;
+            _task = new TaskCompletionSource<T>();
+        }
+
+        public Task<T> Task
+        {
+            get { return _task.Task; }
+        }
+
+        public void Receive(T message)
+        {
+            _task.SetResult(message);
+            _messaging.RemoveListener(this);
+        }
     }
 }

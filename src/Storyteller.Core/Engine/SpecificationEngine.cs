@@ -32,7 +32,6 @@ namespace Storyteller.Core.Engine
         private readonly PlanningQueue _planning;
         private readonly ReaderQueue _reader;
 
-        // TODO -- what builds this thing? TeamCity observer, or something else?
         public SpecificationEngine(ISystem system, IObserver observer, ISpecRunner runner)
         {
             _system = system;
@@ -47,6 +46,15 @@ namespace Storyteller.Core.Engine
         public void Enqueue(IEnumerable<SpecNode> nodes)
         {
             _reader.Enqueue(nodes);
+        }
+
+        public Task<IEnumerable<SpecResult>> RunBatch(IEnumerable<SpecNode> nodes)
+        {
+            var task = _observer.MonitorBatch(nodes);
+
+            _reader.Enqueue(nodes);
+
+            return task;
         }
 
         public void Dispose()
@@ -80,7 +88,6 @@ namespace Storyteller.Core.Engine
             var fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
                 .ContinueWith(t =>
                 {
-                    _observer.FixturesRead(t.Result);
                     _planning.Start(t.Result);
 
                     return t.Result;

@@ -1,11 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using FubuCore;
 using Storyteller.Core.Grammars;
-using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Results;
 
@@ -13,16 +8,8 @@ namespace Storyteller.Core.Engine
 {
     public class BatchObserver : IObserver
     {
-        private readonly IDictionary<string, bool> _finished = new Dictionary<string, bool>();
-        private TaskCompletionSource<bool> _task;
+        private readonly IList<BatchWatcher> _watchers = new List<BatchWatcher>(); 
 
-        public Task Watch(IEnumerable<SpecNode> nodes)
-        {
-            nodes.Each(x => _finished.Add(x.id, false));
-            _task = new TaskCompletionSource<bool>();
-
-            return _task.Task;
-        }
 
         public void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan)
         {
@@ -32,19 +19,23 @@ namespace Storyteller.Core.Engine
         {
         }
 
-        public void FixturesRead(FixtureLibrary library)
-        {
-        }
-
         public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
         {
         }
 
-        public void SpecHandled(string id)
+        public void SpecHandled(SpecificationPlan plan, ISpecContext context)
         {
-            _finished[id] = true;
-
-            if (_finished.Values.All(x => x)) _task.SetResult(true);
+            _watchers.Each(x => x.SpecHandled(plan, context));
+            _watchers.RemoveAll(x => x.IsCompleted());
         }
+
+        public Task<IEnumerable<SpecResult>> MonitorBatch(IEnumerable<SpecNode> nodes)
+        {
+            var watcher = new BatchWatcher(nodes);
+            _watchers.Add(watcher);
+
+            return watcher.Task;
+        }
+
     }
 }

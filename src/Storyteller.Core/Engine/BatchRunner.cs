@@ -29,7 +29,7 @@ namespace Storyteller.Core.Engine
                 }
                 else
                 {
-                    _observer.SpecHandled(plan.Specification.Id);
+                    _observer.SpecHandled(plan, context);
                 }
 
 

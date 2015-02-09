@@ -10,6 +10,7 @@ namespace Storyteller.Core.Remotes
         private Project _project;
         private ISystem _system;
         private SpecificationEngine _engine;
+        private EngineController _controller;
 
         public override object InitializeLifetimeService()
         {
@@ -18,8 +19,7 @@ namespace Storyteller.Core.Remotes
 
         public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
         {
-            //_controller = new StorytellerController();
-            //EventAggregator.Messaging.AddListener(_controller);
+
             EventAggregator.Start((IRemoteListener) remoteListener);
 
             _project = project;
@@ -41,6 +41,8 @@ namespace Storyteller.Core.Remotes
                     throw new NotImplementedException("Don't have the UserInterface engine yet");
                 }
 
+                _controller = new EngineController(_engine);
+                EventAggregator.Messaging.AddListener(_controller);
                 _engine.Start(project.StopConditions);
             }
             catch (Exception e)

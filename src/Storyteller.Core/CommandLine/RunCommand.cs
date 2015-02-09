@@ -30,6 +30,8 @@ namespace Storyteller.Core.CommandLine
                 {
                     writeSystemUsage(systemRecycled);
 
+
+
                     return true;
                 }
             });

@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Remotes.Messaging;
@@ -42,6 +45,49 @@ namespace Storyteller.Core.Testing.Remotes.Messaging
             theListener.Received.OfType<ServiceMessage>().Single()
                        .ShouldEqual(expected);
 
+        }
+
+        [Test]
+        public void request_response()
+        {
+            EventAggregator.Messaging.AddListener(new Responder());
+            var task = EventAggregator.Send(new Request("Foo")).AndWaitFor<Response>();
+
+            task.Wait(5.Seconds());
+
+            task.Result.Name.ShouldEqual("Foo");
+        }
+    }
+
+    public class Responder : IListener<Request>
+    {
+        public void Receive(Request message)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(50);
+                EventAggregator.SendMessage(new Response(message.Name));
+            });
+        }
+    }
+
+    public class Request
+    {
+        public string Name { get; set; }
+
+        public Request(string name)
+        {
+            Name = name;
+        }
+    }
+
+    public class Response
+    {
+        public string Name { get; set; }
+
+        public Response(string name)
+        {
+            Name = name;
         }
     }
 }
