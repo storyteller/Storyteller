@@ -33,6 +33,7 @@ namespace ST.Client
             document.Head.Add("script").Encoded(false).Text(script.ToString()).Attr("type", "text/javascript");
 
             document.Add("h1").Text(_context.Startup.Result.system_name);
+            document.Add("h2").Text(_context.Startup.Result.name);
 
             return document;
         }

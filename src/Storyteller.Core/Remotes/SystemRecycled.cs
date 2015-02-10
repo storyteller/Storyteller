@@ -32,7 +32,7 @@ namespace Storyteller.Core.Remotes
 
         private readonly IList<FixtureModel> _fixtures = new List<FixtureModel>(); 
 
-        public string Name { get; set; }
+        public string name { get; set; }
         public IDictionary<string, object> properties = new Dictionary<string, object>();
 
         public void WriteSystemUsage()

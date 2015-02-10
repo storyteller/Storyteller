@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Storyteller.Core.Model;
@@ -93,7 +94,8 @@ namespace Storyteller.Core.Engine
                     success = true,
                     fixtures = fixtures.Result.Models.GetAll().ToArray(),
                     system_name = _system.ToString(),
-                    time = DateTime.Now
+                    time = DateTime.Now,
+                    name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
                 };
 
                 if (warmup.IsFaulted)
