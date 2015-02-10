@@ -26,7 +26,6 @@ namespace StoryTeller.CommandLine
                 runner.Workspace = input.WorkspaceFlag;
             }
 
-            runner.MaxRetries = input.MaxRetryFlag;
 
             Console.WriteLine("Running tests with lifecycle: {0}", input.LifecycleFlag);
             runner.DesiredLifecycle = input.LifecycleFlag;

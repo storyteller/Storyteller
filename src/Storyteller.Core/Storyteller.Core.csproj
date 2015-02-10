@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="Attributes.cs" />
     <Compile Include="CellHandling.cs" />
+    <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
     <Compile Include="Engine\Batching\BatchRunner.cs" />

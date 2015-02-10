@@ -14,6 +14,7 @@ namespace ST
             {
                 var factory = new CommandFactory();
                 factory.RegisterCommands(typeof (RunCommand).Assembly);
+                factory.RegisterCommands(typeof(Program).Assembly);
 
                 var executor = new CommandExecutor(factory);
                 success = executor.Execute(args);
