@@ -130,7 +130,13 @@
     <Compile Include="InDeterminateSystemTypeException.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="IWithValues.cs" />
-    <Compile Include="Messages\MessageClasses.cs" />
+    <Compile Include="Messages\HiearchyLoaded.cs" />
+    <Compile Include="Messages\ClientMessage.cs" />
+    <Compile Include="Messages\SpecCanceled.cs" />
+    <Compile Include="Messages\SpecExecutionCompleted.cs" />
+    <Compile Include="Messages\SpecProgress.cs" />
+    <Compile Include="Messages\SpecQueued.cs" />
+    <Compile Include="Messages\SpecRunning.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\FixtureLibrary.cs" />
     <Compile Include="Grammars\GrammarBuilder.cs" />
