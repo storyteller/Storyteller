@@ -1,7 +1,11 @@
+using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using FubuCore;
+using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.CommandLine
 {
@@ -49,6 +53,18 @@ namespace Storyteller.Core.CommandLine
             }
 
             return controller;
+        }
+
+        // TODO -- test this!
+        public Task<BatchRunResponse> StartBatch(RemoteController controller)
+        {
+            var request = new BatchRunRequest
+            {
+                Lifecycle = LifecycleFlag,
+                Suite = WorkspaceFlag
+            };
+
+            return controller.Send(request).AndWaitFor<BatchRunResponse>();
         }
     }
 }

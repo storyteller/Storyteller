@@ -15,6 +15,8 @@ namespace Storyteller.Core
 
 
         void SpecHandled(SpecificationPlan plan, ISpecContext context);
+
+
         Task<IEnumerable<SpecResult>> MonitorBatch(IEnumerable<SpecNode> nodes);
     }
 }

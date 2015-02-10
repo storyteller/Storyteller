@@ -13,7 +13,7 @@ namespace Storyteller.Core.Remotes
         private RemoteProxy _proxy;
         private MessagingHub _messaging;
         private readonly Project _project;
-        private string _path;
+        private readonly string _path;
 
         public RemoteController(string path)
         {
@@ -85,6 +85,8 @@ namespace Storyteller.Core.Remotes
 
         }
 
+        
+
         public MessagingHub Messaging
         {
             get { return _messaging; }
@@ -101,6 +103,39 @@ namespace Storyteller.Core.Remotes
             {
                 AppDomain.Unload(_domain);   
             }
+        }
+
+        public void SendMessage<T>(T message)
+        {
+            var json = JsonSerialization.ToJson(message);
+            _proxy.SendMessage(json);
+        }
+
+        public class ResponseExpression
+        {
+            private readonly Action _sendAction;
+            private readonly MessagingHub _messaging;
+
+            public ResponseExpression(Action sendAction, MessagingHub messaging)
+            {
+                _sendAction = sendAction;
+                _messaging = messaging;
+            }
+
+            public Task<T> AndWaitFor<T>()
+            {
+                var watcher = new ResponseWatcher<T>(_messaging);
+                _messaging.AddListener(watcher);
+
+                _sendAction();
+
+                return watcher.Task;
+            }
+        }
+
+        public ResponseExpression Send<T>(T message)
+        {
+            return new ResponseExpression(() => SendMessage(message), _messaging);
         }
     }
 }

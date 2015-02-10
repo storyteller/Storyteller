@@ -26,7 +26,6 @@
                     break;
                 }
 
-                // TODO -- will broadcast progress updates maybe
                 executionStep.AcceptVisitor(this);
             }
         }

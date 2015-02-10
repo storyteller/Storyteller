@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using FubuCore;
 using FubuCore.CommandLine;
+using Storyteller.Core.Engine;
+using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.CommandLine
 {
@@ -29,10 +32,27 @@ namespace Storyteller.Core.CommandLine
                 else
                 {
                     writeSystemUsage(systemRecycled);
+                    var execution = input.StartBatch(controller);
 
+                    // TODO -- put a command level timeout on this thing
+                    execution.Wait();
 
+                    var results = execution.Result;
 
-                    return true;
+                    var regression = results.Summarize(Lifecycle.Regression);
+                    var acceptance = results.Summarize(Lifecycle.Acceptance);
+
+                    if (input.LifecycleFlag != Lifecycle.Regression)
+                    {
+                        Console.WriteLine(acceptance);
+                    }
+
+                    if (input.LifecycleFlag != Lifecycle.Acceptance)
+                    {
+                        Console.WriteLine(regression);
+                    }
+
+                    return regression.Failed == 0;
                 }
             });
 

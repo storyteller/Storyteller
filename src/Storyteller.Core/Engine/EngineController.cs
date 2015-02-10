@@ -74,5 +74,28 @@ namespace Storyteller.Core.Engine
         }
 
         public SpecResult[] results;
+
+
+        public LifecycleSummary Summarize(Lifecycle lifecycle)
+        {
+            return new LifecycleSummary
+            {
+                Lifecycle = lifecycle,
+                Successful = results.Where(x => x.node.lifecycle == lifecycle.ToString() && x.WasSuccessful()).Count(),
+                Failed = results.Where(x => x.node.lifecycle == lifecycle.ToString() && !x.WasSuccessful()).Count()
+            };
+        }
+    }
+
+    public class LifecycleSummary
+    {
+        public Lifecycle Lifecycle;
+        public int Successful;
+        public int Failed;
+
+        public override string ToString()
+        {
+            return string.Format("Lifecycle: {0}, {1} successful, {2} failed", Lifecycle, Successful, Failed);
+        }
     }
 }

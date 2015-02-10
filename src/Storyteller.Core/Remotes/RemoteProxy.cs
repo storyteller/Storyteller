@@ -62,6 +62,10 @@ namespace Storyteller.Core.Remotes
             }
         }
 
+        public void SendMessage(string json)
+        {
+            EventAggregator.Messaging.SendJson(json);
+        }
 
         public void Dispose()
         {

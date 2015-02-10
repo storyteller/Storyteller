@@ -14,9 +14,6 @@ namespace Storyteller.Core.Engine
 {
     /*
      * TODO
-     * 1.) Some method for queueing files
-     * 2.) Some method for queueing a specification
-     * 3.) Some method for queueing a retry plan?
      * 4.) Some way to query for the depth of the queue?
      * 
      */
