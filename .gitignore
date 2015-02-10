@@ -38,3 +38,4 @@ src/StoryTeller.Samples/Storyteller.Samples-results
 *.stresult
 *.userprefs
 results/*
+src/ST/fubu-content

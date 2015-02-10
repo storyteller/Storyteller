@@ -34,5 +34,15 @@ namespace Storyteller.Core.Remotes
 
         public string Name { get; set; }
         public IDictionary<string, object> properties = new Dictionary<string, object>();
+
+        public void WriteSystemUsage()
+        {
+            Console.WriteLine("Using System: " + system_name);
+            properties.Each(pair =>
+            {
+                Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+            });
+            Console.WriteLine();
+        }
     }
 }

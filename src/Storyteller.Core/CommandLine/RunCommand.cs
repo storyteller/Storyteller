@@ -26,7 +26,7 @@ namespace Storyteller.Core.CommandLine
                 var systemRecycled = t.Result;
                 if (!systemRecycled.success)
                 {
-                    writeSystemFailure(systemRecycled);
+                    systemRecycled.WriteSystemUsage();
                     return false;
                 }
                 else
@@ -73,12 +73,6 @@ namespace Storyteller.Core.CommandLine
             Console.WriteLine();
         }
 
-        private static void writeSystemFailure(SystemRecycled systemRecycled)
-        {
-            Console.WriteLine("Failed to initialize the Storyteller System");
-            Console.WriteLine();
-            ConsoleWriter.Write(ConsoleColor.Yellow, systemRecycled.error);
-            Console.WriteLine();
-        }
+
     }
 }
