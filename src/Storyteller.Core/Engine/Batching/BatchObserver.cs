@@ -4,14 +4,14 @@ using Storyteller.Core.Grammars;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Results;
 
-namespace Storyteller.Core.Engine
+namespace Storyteller.Core.Engine.Batching
 {
-    public class BatchObserver : IObserver
+    public class BatchObserver : IBatchObserver
     {
         private readonly IList<BatchWatcher> _watchers = new List<BatchWatcher>(); 
 
 
-        public void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan)
+        public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
         {
         }
 
@@ -21,7 +21,9 @@ namespace Storyteller.Core.Engine
 
         public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
         {
+            // TODO -- more instrumentation here
         }
+
 
         public void SpecHandled(SpecificationPlan plan, ISpecContext context)
         {

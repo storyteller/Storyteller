@@ -115,8 +115,5 @@ namespace Storyteller.Core
 
             return context;
         }
-
-        // TODO -- this has to be called at some point in the 
-        // execution pipeline
     }
 }

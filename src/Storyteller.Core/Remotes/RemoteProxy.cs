@@ -1,16 +1,23 @@
 ﻿using System;
 using FubuCore;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Engine.Batching;
+using Storyteller.Core.Engine.UserInterface;
 using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Remotes
 {
     public class RemoteProxy : MarshalByRefObject, IDisposable
     {
+        private EngineController _controller;
+        private SpecificationEngine _engine;
         private Project _project;
         private ISystem _system;
-        private SpecificationEngine _engine;
-        private EngineController _controller;
+
+        public void Dispose()
+        {
+            if (_engine != null) _engine.Dispose();
+        }
 
         public override object InitializeLifetimeService()
         {
@@ -19,7 +26,6 @@ namespace Storyteller.Core.Remotes
 
         public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
         {
-
             EventAggregator.Start((IRemoteListener) remoteListener);
 
             _project = project;
@@ -31,15 +37,9 @@ namespace Storyteller.Core.Remotes
                 systemType = _project.DetermineSystemType();
                 _system = Activator.CreateInstance(systemType).As<ISystem>();
 
-                if (mode == EngineMode.Batch)
-                {
-                    var batchObserver = new BatchObserver();
-                    _engine = new SpecificationEngine(_system, batchObserver, new BatchRunner(batchObserver));
-                }
-                else
-                {
-                    throw new NotImplementedException("Don't have the UserInterface engine yet");
-                }
+                _engine = mode == EngineMode.Batch
+                    ? buildBatchedEngine()
+                    : buildUserInterfaceEngine();
 
                 _controller = new EngineController(_engine);
                 EventAggregator.Messaging.AddListener(_controller);
@@ -62,14 +62,21 @@ namespace Storyteller.Core.Remotes
             }
         }
 
+        private SpecificationEngine buildUserInterfaceEngine()
+        {
+            var observer = new UserInterfaceObserver();
+            return new SpecificationEngine(_system, observer, new InstrumentedRunner(observer));
+        }
+
+        private SpecificationEngine buildBatchedEngine()
+        {
+            var batchObserver = new BatchObserver();
+            return new SpecificationEngine(_system, batchObserver, new BatchRunner(batchObserver));
+        }
+
         public void SendMessage(string json)
         {
             EventAggregator.Messaging.SendJson(json);
-        }
-
-        public void Dispose()
-        {
-            if (_engine != null) _engine.Dispose();
         }
 
         public void SendJson(string json)

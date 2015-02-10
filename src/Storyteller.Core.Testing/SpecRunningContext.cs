@@ -6,6 +6,7 @@ using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Engine.Batching;
 using Storyteller.Core.Grammars.Sets;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;

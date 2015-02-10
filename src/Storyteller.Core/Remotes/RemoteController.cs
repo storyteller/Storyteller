@@ -67,7 +67,7 @@ namespace Storyteller.Core.Remotes
             _messaging.AddListener(listener);
             _messaging.AddListener(this);
 
-            _proxy.Start(mode, _project, new RemoteListener(_messaging));
+            _proxy.Start(EngineMode.Batch, _project, new RemoteListener(_messaging));
 
 
             return listener.Task;

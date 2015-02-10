@@ -52,7 +52,7 @@
     <Compile Include="CellHandling.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
-    <Compile Include="Engine\BatchRunner.cs" />
+    <Compile Include="Engine\Batching\BatchRunner.cs" />
     <Compile Include="Engine\BatchWatcher.cs" />
     <Compile Include="Engine\EngineController.cs" />
     <Compile Include="Engine\ExecutionQueue.cs" />
@@ -63,10 +63,11 @@
     <Compile Include="Engine\PlanningQueue.cs" />
     <Compile Include="Engine\ReaderQueue.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
-    <Compile Include="Engine\BatchObserver.cs" />
+    <Compile Include="Engine\Batching\BatchObserver.cs" />
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Engine\SpecResult.cs" />
+    <Compile Include="Engine\UserInterface\UISupportClasses.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar.cs" />
     <Compile Include="Grammars\Decisions\GetterProperty.cs" />
@@ -115,7 +116,7 @@
     <Compile Include="Conversion\IConversionProvider.cs" />
     <Compile Include="Conversion\StepValues.cs" />
     <Compile Include="Counts.cs" />
-    <Compile Include="Engine\SynchronousExecutor.cs" />
+    <Compile Include="Engine\Batching\SynchronousExecutor.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="Grammars\SilentAction.cs" />
     <Compile Include="Grammars\Lines\ActionGrammar.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Remotes\Messaging\IListener.cs" />
     <Compile Include="Remotes\Messaging\IMessagingHub.cs" />
     <Compile Include="Remotes\Messaging\IRemoteListener.cs" />
+    <Compile Include="Remotes\Messaging\JsonSerialization.cs" />
     <Compile Include="Remotes\Messaging\MessageWaitCondition.cs" />
     <Compile Include="Remotes\Messaging\MessagingHub.cs" />
     <Compile Include="Remotes\Messaging\MessagingHubExtensions.cs" />

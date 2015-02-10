@@ -11,7 +11,7 @@ namespace Storyteller.Core
 {
     public class NulloObserver : IObserver
     {
-        public void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan)
+        public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
         {
             // Nothing
         }
@@ -34,6 +34,10 @@ namespace Storyteller.Core
         public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
         {
             // Nothing
+        }
+
+        public void SpecStarted(SpecificationPlan plan, ISpecContext context)
+        {
         }
 
         public void SpecHandled(SpecificationPlan plan, ISpecContext context)

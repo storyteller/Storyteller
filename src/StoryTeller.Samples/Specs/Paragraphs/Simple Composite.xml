@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Test name="Simple Composite" lifecycle="Acceptance">
+<Test name="Simple Composite" lifecycle="Acceptance" id="paragraph2">
   <Composite>
     <AddAndMultiply starting="5" operand="3" multiplier="10" expected="80" />
     <AddAndMultiply starting="5" operand="3" multiplier="10" expected="77" />

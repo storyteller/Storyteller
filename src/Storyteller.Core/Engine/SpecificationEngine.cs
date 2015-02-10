@@ -12,14 +12,6 @@ using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    /*
-     * TODO
-     * 4.) Some way to query for the depth of the queue?
-     * 
-     */
-
-
-    // THIS IS SPIKE CODE, NOT REAL CODE
     public class SpecificationEngine : IDisposable
     {
         private readonly ISystem _system;

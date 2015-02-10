@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Test name="Sentences" lifecycle="Acceptance">
+<Test name="Sentences" lifecycle="Acceptance" id="sentence4">
   <Sentence>
     <Comment><![CDATA[Show a syntax failure]]></Comment>
     <StartWithTheNumber id="1" number="a" />

@@ -45,7 +45,7 @@ namespace Storyteller.Core.Engine
                         // TODO -- tag the context or plan if timed out?
                         // TODO -- tag the plan as having an attempt?
 
-                        _observer.SpecExecutionFinished(t.Result, plan);
+                        _observer.SpecExecutionFinished(plan, t.Result);
                     });
                 }
             }

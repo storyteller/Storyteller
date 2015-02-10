@@ -75,10 +75,10 @@
     <Compile Include="Fixtures\CalculatorFixture.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Tests\Retry attempt is passed through to TestContext.xml" />
-    <Content Include="Tests\Calculator Tables.xml" />
-    <Content Include="Tests\More Calculator Buttons.xml" />
-    <Content Include="Tests\Pushing Calculator Buttons.xml" />
+    <Content Include="Specs\Retry attempt is passed through to TestContext.xml" />
+    <Content Include="Specs\Calculator Tables.xml" />
+    <Content Include="Specs\More Calculator Buttons.xml" />
+    <Content Include="Specs\Pushing Calculator Buttons.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

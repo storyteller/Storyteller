@@ -1,4 +1,4 @@
-﻿namespace Storyteller.Core.Engine
+﻿namespace Storyteller.Core.Engine.Batching
 {
     public class SynchronousExecutor : IStepExecutor
     {
@@ -9,7 +9,7 @@
             _context = context;
         }
 
-        public void Line(ILineExecution execution)
+        public virtual void Line(ILineExecution execution)
         {
             if (!_context.CanContinue()) return;
 

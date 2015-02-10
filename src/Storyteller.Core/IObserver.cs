@@ -9,14 +9,15 @@ namespace Storyteller.Core
 {
     public interface IObserver
     {
-        void SpecExecutionFinished(ISpecContext context, SpecificationPlan plan);
+        void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context);
         void Handle<T>(T message) where T : IResultMessage;
-        void SpecRequeued(SpecificationPlan plan, ISpecContext context);
-
-
-        void SpecHandled(SpecificationPlan plan, ISpecContext context);
-
 
         Task<IEnumerable<SpecResult>> MonitorBatch(IEnumerable<SpecNode> nodes);
+    }
+
+    public interface IBatchObserver : IObserver
+    {
+        void SpecRequeued(SpecificationPlan plan, ISpecContext context);
+        void SpecHandled(SpecificationPlan plan, ISpecContext context);
     }
 }

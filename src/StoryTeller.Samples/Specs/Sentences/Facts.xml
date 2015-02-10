@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Test name="Facts" lifecycle="Regression">
+<Test name="Facts" lifecycle="Regression" id="sentence2">
   <Sentence>
     <ThisFactIsTrue id="1" />
     <ThisFactIsFalse id="2"/>

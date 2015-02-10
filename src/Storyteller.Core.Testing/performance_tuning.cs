@@ -5,6 +5,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Engine.Batching;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using StoryTeller.Samples;

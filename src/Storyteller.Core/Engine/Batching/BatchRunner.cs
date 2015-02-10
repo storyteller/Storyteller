@@ -2,14 +2,14 @@ using System;
 using System.Threading.Tasks;
 using Storyteller.Core.Grammars;
 
-namespace Storyteller.Core.Engine
+namespace Storyteller.Core.Engine.Batching
 {
     public class BatchRunner : ISpecRunner
     {
-        private readonly IObserver _observer;
+        private readonly IBatchObserver _observer;
         private StopConditions _stopConditions = new StopConditions();
 
-        public BatchRunner(IObserver observer)
+        public BatchRunner(IBatchObserver observer)
         {
             _observer = observer;
         }
