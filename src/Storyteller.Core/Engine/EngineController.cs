@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using Storyteller.Core.Messages;
-using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    public class EngineController : IListener<BatchRunRequest>
+
+    public class EngineController : IListener<BatchRunRequest>, IListener<RunSpec>
     {
         private readonly SpecificationEngine _engine;
         private readonly string _specDirectory;
+
 
         public EngineController(SpecificationEngine engine)
         {
@@ -31,71 +31,18 @@ namespace Storyteller.Core.Engine
                 EventAggregator.SendMessage(new BatchRunResponse{results = t.Result.ToArray()});
             });
         }
-    }
 
-    public class BatchRunRequest
-    {
-        public Lifecycle Lifecycle;
-        public string Suite;
-
-        public IEnumerable<SpecNode> Filter(Suite top)
+        public void Receive(RunSpec message)
         {
-            if (Lifecycle == Lifecycle.Any && Suite.IsEmpty()) return top.GetAllSpecs();
-
-            IEnumerable<SpecNode> nodes = null;
-
-            if (Suite.IsNotEmpty())
-            {
-                var suite = top.suites.FirstOrDefault(x => x.name == Suite);
-                if (suite == null) return new SpecNode[0];
-
-                nodes = suite.GetAllSpecs();
-            }
-            else
-            {
-                nodes = top.GetAllSpecs();
-            }
-
-            if (Lifecycle != Lifecycle.Any)
-            {
-                nodes = nodes.Where(x => x.lifecycle == Lifecycle.ToString());
-            }
-
-            
-
-            return nodes.ToArray();
-        }
-    }
-
-    public class BatchRunResponse : ClientMessage
-    {
-        public BatchRunResponse() : base("batch-run-response")
-        {
+            var spec = findSpec(message.id);
+            _engine.Enqueue(spec);
         }
 
-        public SpecResult[] results;
-
-
-        public LifecycleSummary Summarize(Lifecycle lifecycle)
+        // TODO -- obviously make this be much more efficient!!!!!
+        private SpecNode findSpec(string id)
         {
-            return new LifecycleSummary
-            {
-                Lifecycle = lifecycle,
-                Successful = results.Where(x => x.node.lifecycle == lifecycle.ToString() && x.WasSuccessful()).Count(),
-                Failed = results.Where(x => x.node.lifecycle == lifecycle.ToString() && !x.WasSuccessful()).Count()
-            };
-        }
-    }
-
-    public class LifecycleSummary
-    {
-        public Lifecycle Lifecycle;
-        public int Successful;
-        public int Failed;
-
-        public override string ToString()
-        {
-            return string.Format("Lifecycle: {0}, {1} successful, {2} failed", Lifecycle, Successful, Failed);
+            var hierarchy = HierarchyLoader.ReadHierarchy(_specDirectory);
+            return hierarchy.GetAllSpecs().FirstOrDefault(x => x.id == id);
         }
     }
 }

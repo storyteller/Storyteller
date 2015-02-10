@@ -90,5 +90,10 @@ namespace Storyteller.Core.Grammars.Sets
 
             return text;
         }
+
+        public string type
+        {
+            get { return "set-verification-result"; }
+        }
     }
 }

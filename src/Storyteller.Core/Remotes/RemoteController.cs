@@ -1,7 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
+using Storyteller.Core.Messages;
+using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Remotes
@@ -67,7 +70,7 @@ namespace Storyteller.Core.Remotes
             _messaging.AddListener(listener);
             _messaging.AddListener(this);
 
-            _proxy.Start(EngineMode.Batch, _project, new RemoteListener(_messaging));
+            _proxy.Start(mode, _project, new RemoteListener(_messaging));
 
 
             return listener.Task;
@@ -137,5 +140,11 @@ namespace Storyteller.Core.Remotes
         {
             return new ResponseExpression(() => SendMessage(message), _messaging);
         }
+
+        public Suite LoadHierarchy()
+        {
+            return HierarchyLoader.ReadHierarchy(_path);
+        }
     }
+
 }

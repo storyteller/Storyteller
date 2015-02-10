@@ -53,6 +53,8 @@
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
     <Compile Include="Engine\Batching\BatchRunner.cs" />
+    <Compile Include="Engine\BatchRunRequest.cs" />
+    <Compile Include="Engine\BatchRunResponse.cs" />
     <Compile Include="Engine\BatchWatcher.cs" />
     <Compile Include="Engine\EngineController.cs" />
     <Compile Include="Engine\ExecutionQueue.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Engine\IPlanningQueue.cs" />
     <Compile Include="Engine\IReaderQueue.cs" />
     <Compile Include="Engine\ISpecRunner.cs" />
+    <Compile Include="Engine\LifecycleSummary.cs" />
     <Compile Include="Engine\PlanningQueue.cs" />
     <Compile Include="Engine\ReaderQueue.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
@@ -67,7 +70,11 @@
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Engine\SpecResult.cs" />
-    <Compile Include="Engine\UserInterface\UISupportClasses.cs" />
+    <Compile Include="Engine\UserInterface\InstrumentedExecutor.cs" />
+    <Compile Include="Engine\UserInterface\InstrumentedRunner.cs" />
+    <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />
+    <Compile Include="Messages\PassthroughMessage.cs" />
+    <Compile Include="Engine\UserInterface\UserInterfaceObserver.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar.cs" />
     <Compile Include="Grammars\Decisions\GetterProperty.cs" />
@@ -133,6 +140,7 @@
     <Compile Include="IWithValues.cs" />
     <Compile Include="Messages\HiearchyLoaded.cs" />
     <Compile Include="Messages\ClientMessage.cs" />
+    <Compile Include="Messages\RunSpec.cs" />
     <Compile Include="Messages\SpecCanceled.cs" />
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
     <Compile Include="Messages\SpecProgress.cs" />

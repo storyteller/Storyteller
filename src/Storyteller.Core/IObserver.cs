@@ -13,6 +13,8 @@ namespace Storyteller.Core
         void Handle<T>(T message) where T : IResultMessage;
 
         Task<IEnumerable<SpecResult>> MonitorBatch(IEnumerable<SpecNode> nodes);
+        void SpecQueued(IEnumerable<SpecNode> nodes);
+        void SpecQueued(SpecNode nodes);
     }
 
     public interface IBatchObserver : IObserver

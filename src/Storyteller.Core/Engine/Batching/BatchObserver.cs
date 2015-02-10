@@ -13,10 +13,12 @@ namespace Storyteller.Core.Engine.Batching
 
         public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
         {
+            // Nothing, only output in SpecHandled
         }
 
         public void Handle<T>(T message) where T : IResultMessage
         {
+            // Nothing
         }
 
         public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
@@ -39,5 +41,14 @@ namespace Storyteller.Core.Engine.Batching
             return watcher.Task;
         }
 
+        public void SpecQueued(IEnumerable<SpecNode> nodes)
+        {
+            // Nothing
+        }
+
+        public void SpecQueued(SpecNode nodes)
+        {
+            // Nothing
+        }
     }
 }

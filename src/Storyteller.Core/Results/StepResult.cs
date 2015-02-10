@@ -90,5 +90,10 @@ namespace Storyteller.Core.Results
 
             return description;
         }
+
+        public string type
+        {
+            get { return "step-result"; }
+        }
     }
 }

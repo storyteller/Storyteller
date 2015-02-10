@@ -4,7 +4,7 @@ using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
 {
-    public class CellResult : IResultMessage
+    public class CellResult
     {
 
         public string id { get; set; }

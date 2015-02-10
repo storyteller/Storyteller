@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Storyteller.Core.Conversion;
-using Storyteller.Core.Equivalence;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes;
@@ -14,12 +11,12 @@ namespace Storyteller.Core.Engine
 {
     public class SpecificationEngine : IDisposable
     {
-        private readonly ISystem _system;
-        private readonly IObserver _observer;
-        private readonly ISpecRunner _runner;
         private readonly ExecutionQueue _execution;
+        private readonly IObserver _observer;
         private readonly PlanningQueue _planning;
         private readonly ReaderQueue _reader;
+        private readonly ISpecRunner _runner;
+        private readonly ISystem _system;
 
         public SpecificationEngine(ISystem system, IObserver observer, ISpecRunner runner)
         {
@@ -32,20 +29,6 @@ namespace Storyteller.Core.Engine
             _reader = new ReaderQueue(_planning);
         }
 
-        public void Enqueue(IEnumerable<SpecNode> nodes)
-        {
-            _reader.Enqueue(nodes);
-        }
-
-        public Task<IEnumerable<SpecResult>> RunBatch(IEnumerable<SpecNode> nodes)
-        {
-            var task = _observer.MonitorBatch(nodes);
-
-            _reader.Enqueue(nodes);
-
-            return task;
-        }
-
         public void Dispose()
         {
             _system.Dispose();
@@ -54,13 +37,34 @@ namespace Storyteller.Core.Engine
             _reader.Dispose();
         }
 
+        public void Enqueue(IEnumerable<SpecNode> nodes)
+        {
+            _observer.SpecQueued(nodes);
+            _reader.Enqueue(nodes);
+        }
+
+        public void Enqueue(SpecNode node)
+        {
+            _observer.SpecQueued(node);
+            _reader.Enqueue(node);
+        }
+
+        public Task<IEnumerable<SpecResult>> RunBatch(IEnumerable<SpecNode> nodes)
+        {
+            Task<IEnumerable<SpecResult>> task = _observer.MonitorBatch(nodes);
+
+            Enqueue(nodes);
+
+            return task;
+        }
+
         public void Start(StopConditions stopConditions)
         {
             _runner.UseStopConditions(stopConditions);
 
-            var cellHandling = CellHandling.ForSystem(_system);
-            
-           var warmup = _system
+            CellHandling cellHandling = CellHandling.ForSystem(_system);
+
+            Task warmup = _system
                 .Warmup()
                 .ContinueWith(t =>
                 {
@@ -74,7 +78,7 @@ namespace Storyteller.Core.Engine
                     }
                 });
 
-            var fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
+            Task<FixtureLibrary> fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
                 .ContinueWith(t =>
                 {
                     _planning.Start(t.Result);
@@ -100,10 +104,8 @@ namespace Storyteller.Core.Engine
 
                 EventAggregator.SendMessage(message);
             });
-            
+
             _reader.Start();
         }
-
-
     }
 }

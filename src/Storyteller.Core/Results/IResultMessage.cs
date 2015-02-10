@@ -8,5 +8,7 @@ namespace Storyteller.Core.Results
 
         // ReSharper disable once InconsistentNaming
         string id { get; set; }
+
+        string type { get; }
     }
 }
