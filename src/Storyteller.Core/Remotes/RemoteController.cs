@@ -86,6 +86,8 @@ namespace Storyteller.Core.Remotes
 
         public void Recycle()
         {
+            Console.WriteLine("Starting to recycle");
+
             _messaging.Send(new SystemRecycleStarted());
 
             Teardown();

@@ -30,7 +30,7 @@ namespace ST.Client
             _port = PortFinder.FindPort(8181);
 
             // TODO -- will only work locally. What do we do otherwise?
-            _webSocketsAddress = "ws://0.0.0.0:" + _port;
+            _webSocketsAddress = "ws://127.0.0.1:" + _port;
         }
 
         public int Port
@@ -72,6 +72,9 @@ namespace ST.Client
         private void sendMessage(object message)
         {
             var json = JsonSerialization.ToCleanJson(message);
+
+            Console.WriteLine("Wanting to send {0} to {1} open sockets", json, _sockets.Count);
+
             _sockets.Each(x => x.Send(json));
         }
 
@@ -83,7 +86,7 @@ namespace ST.Client
 
         public void Receive(SystemRecycleStarted message)
         {
-            Console.WriteLine("Starting to recycle the system");
+            Console.WriteLine("ClientConnector got SystemRecycleStarted");
             sendMessage(message);
         }
 
