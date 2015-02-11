@@ -89,6 +89,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Client\ClientConnectorActivator.cs" />
     <Compile Include="Client\OpenInput.cs" />
     <Compile Include="Client\ClientConnector.cs" />
     <Compile Include="Client\HomeEndpoint.cs" />

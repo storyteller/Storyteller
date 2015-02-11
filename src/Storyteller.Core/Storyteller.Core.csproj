@@ -53,7 +53,7 @@
     <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
-    <Compile Include="Commands\IHandler.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Engine\Batching\BatchRunner.cs" />
     <Compile Include="Engine\BatchRunRequest.cs" />
     <Compile Include="Engine\BatchRunResponse.cs" />

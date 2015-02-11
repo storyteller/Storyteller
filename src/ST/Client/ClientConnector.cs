@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Fleck;
 using FubuMVC.Core;
+using Storyteller.Core.Commands;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Remotes;
 using Storyteller.Core.Remotes.Messaging;
@@ -15,14 +17,16 @@ namespace ST.Client
         IClientConnector
     {
         private readonly IRemoteController _controller;
+        private readonly IEnumerable<ICommand> _commands;
         private readonly int _port;
         private readonly IList<IWebSocketConnection> _sockets = new List<IWebSocketConnection>();
         private readonly string _webSocketsAddress;
         private WebSocketServer _server;
 
-        public ClientConnector(IRemoteController controller)
+        public ClientConnector(IRemoteController controller, IEnumerable<Storyteller.Core.Commands.ICommand> commands)
         {
             _controller = controller;
+            _commands = commands;
             _port = PortFinder.FindPort(8181);
 
             // TODO -- will only work locally. What do we do otherwise?
@@ -50,10 +54,7 @@ namespace ST.Client
 
                 socket.OnClose = () => _sockets.Remove(socket);
 
-                socket.OnMessage = json =>
-                {
-                    // TODO -- do something here.
-                };
+                socket.OnMessage = HandleJson;
             });
         }
 
@@ -85,5 +86,30 @@ namespace ST.Client
             Console.WriteLine("Starting to recycle the system");
             sendMessage(message);
         }
+
+        public void HandleJson(string json)
+        {
+            try
+            {
+                var command = _commands.FirstOrDefault(x => x.Matches(json));
+                if (command == null)
+                {
+                    _controller.SendJsonMessage(json);
+                }
+                else
+                {
+                    command.HandleJson(json);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+
     }
+
+
+
 }

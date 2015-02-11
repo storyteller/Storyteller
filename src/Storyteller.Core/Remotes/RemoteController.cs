@@ -10,6 +10,7 @@ namespace Storyteller.Core.Remotes
     public interface IRemoteController
     {
         void SendJsonMessage(string json);
+        void AddListener(object listener);
     }
 
     public class RemoteController : IDisposable, IRemoteController
@@ -186,6 +187,11 @@ namespace Storyteller.Core.Remotes
         public void SendJsonMessage(string json)
         {
             _proxy.SendMessage(json);
+        }
+
+        public void AddListener(object listener)
+        {
+            _messaging.AddListener(listener);
         }
     }
 }

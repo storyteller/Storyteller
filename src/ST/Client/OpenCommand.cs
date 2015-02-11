@@ -1,9 +1,12 @@
 using System;
 using System.Diagnostics;
+using Bottles;
 using FubuCore.CommandLine;
 using FubuMVC.Core;
 using FubuMVC.Katana;
 using FubuMVC.StructureMap;
+using Storyteller.Core.Commands;
+using Storyteller.Core.Remotes;
 using StructureMap;
 
 namespace ST.Client
@@ -14,18 +17,23 @@ namespace ST.Client
         {
             var controller = input.BuildRemoteController();
 
-            var connector = new ClientConnector(controller);
-            connector.Start();
-            controller.Messaging.AddListener(connector);
-            
 
             var context = new StorytellerContext(controller, input);
             context.Start();
 
             var container = new Container(_ =>
             {
+                _.For<IRemoteController>().Use(controller);
                 _.For<StorytellerContext>().Use(context);
-                _.For<IClientConnector>().Use(connector);
+                _.ForSingletonOf<IClientConnector>().Use<ClientConnector>();
+
+                _.For<IActivator>().Add<ClientConnectorActivator>();
+
+                _.Scan(x =>
+                {
+                    x.AssemblyContainingType<ICommand>();
+                    x.AddAllTypesOf<ICommand>();
+                });
             });
 
 

@@ -26,6 +26,19 @@ namespace Storyteller.Core.Remotes.Messaging
             });
         }
 
+        public static Type TypeForJson(string json)
+        {
+            var token = JToken.Parse(json);
+            var type = token.Value<string>("type");
+
+            if (type.IsEmpty()) return null;
+
+
+            return _messageTypes.Has(type) 
+                ? _messageTypes[type] 
+                : null;
+        }
+
         public static string ToJson(object o, bool indentedFormatting = false)
         {
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
@@ -67,17 +80,11 @@ namespace Storyteller.Core.Remotes.Messaging
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
             var jsonTextReader = new JsonTextReader(new StringReader(json));
 
-            var token = JToken.Parse(json);
-            var type = token.Value<string>("type");
+            var messageType = TypeForJson(json);
 
-            if (type.IsNotEmpty())
-            {
-                var messageType = _messageTypes[type];
-                return serializer.Deserialize(jsonTextReader, messageType);
-            }
-
-            
-            return serializer.Deserialize(jsonTextReader);
+            return messageType != null 
+                ? serializer.Deserialize(jsonTextReader, messageType) 
+                : serializer.Deserialize(jsonTextReader);
         }
     }
 }

@@ -43,12 +43,6 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.mocks">
-      <HintPath>..\packages\NUnit\lib\nunit.mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="pnunit.framework">
-      <HintPath>..\packages\NUnit\lib\pnunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Rhino.Mocks">
       <HintPath>..\packages\RhinoMocks\lib\Rhino.Mocks.dll</HintPath>
     </Reference>
@@ -147,6 +141,7 @@
     <Compile Include="SpecRunningContext.cs" />
     <Compile Include="StateTester.cs" />
     <Compile Include="StoryTellerAssertTester.cs" />
+    <Compile Include="ST\ClientConnectorTester.cs" />
     <Compile Include="TestingContext.cs" />
     <Compile Include="Conversion\StringConverterProviderTester.cs" />
   </ItemGroup>
@@ -170,6 +165,10 @@
     <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
       <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
       <Name>StoryTeller.Samples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ST\ST.csproj">
+      <Project>{7d034f5b-1786-4d0f-a4c6-d6e689f522a4}</Project>
+      <Name>ST</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
