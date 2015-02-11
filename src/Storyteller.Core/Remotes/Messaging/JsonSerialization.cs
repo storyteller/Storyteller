@@ -41,5 +41,13 @@ namespace Storyteller.Core.Remotes.Messaging
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
             return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
+
+        public static object Deserialize(string json)
+        {
+            // TODO -- needs to be able to work out the type from JToken
+
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            return serializer.Deserialize(new JsonTextReader(new StringReader(json)));
+        }
     }
 }

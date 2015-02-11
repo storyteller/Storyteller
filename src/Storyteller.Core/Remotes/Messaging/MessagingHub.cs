@@ -9,18 +9,8 @@ namespace Storyteller.Core.Remotes.Messaging
 {
     public class MessagingHub : IMessagingHub
     {
-        [Obsolete("Use JsonSerialization.ToJson method instead")]
-        public static string ToJson(object o)
-        {
-            return JsonSerialization.ToJson(o);
-        }
-
         // TODO -- need to do some locking on this bad boy
         private readonly IList<object> _listeners = new List<object>();
-        private readonly JsonSerializer _jsonSerializer = new JsonSerializer()
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
 
         public IEnumerable<object> Listeners
         {
@@ -45,7 +35,9 @@ namespace Storyteller.Core.Remotes.Messaging
 
         public void SendJson(string json)
         {
-            var o = _jsonSerializer.Deserialize(new JsonTextReader(new StringReader(json)));
+
+            var o = JsonSerialization.Deserialize(json);
+            
             typeof(Sender<>).CloseAndBuildAs<ISender>(o.GetType())
                             .Send(o, this);
         }

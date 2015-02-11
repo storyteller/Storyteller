@@ -7,13 +7,18 @@ using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Remotes
 {
-    public class RemoteController : IDisposable
+    public interface IRemoteController
+    {
+        void SendJsonMessage(string json);
+    }
+
+    public class RemoteController : IDisposable, IRemoteController
     {
         private readonly string _path;
         private readonly Project _project;
         private readonly RemoteDomainExpression _remoteSetup = new RemoteDomainExpression();
         private AppDomain _domain;
-        private MessagingHub _messaging;
+        private readonly MessagingHub _messaging;
         private RemoteProxy _proxy;
         private FixtureLibraryWatcher _watcher;
         private EngineMode _mode = EngineMode.Interactive;
@@ -176,6 +181,11 @@ namespace Storyteller.Core.Remotes
 
                 return watcher.Task;
             }
+        }
+
+        public void SendJsonMessage(string json)
+        {
+            _proxy.SendMessage(json);
         }
     }
 }

@@ -95,7 +95,7 @@ namespace Storyteller.Core.Testing.Remotes.Messaging
             var message = new Message2 { Name = "that one" };
 
 
-            var json = MessagingHub.ToJson(message);
+            var json = JsonSerialization.ToJson(message);
             theHub.SendJson(json);
 
             listener1.AssertWasCalled(x => x.Receive(message));

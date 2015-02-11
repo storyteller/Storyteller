@@ -22,7 +22,7 @@ namespace Storyteller.Core.Remotes.Messaging
         /// <param name="message"></param>
         public void SendObject(object message)
         {
-            Send(MessagingHub.ToJson(message));
+            Send(JsonSerialization.ToJson(message));
         }
 
         public override object InitializeLifetimeService()

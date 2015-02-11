@@ -14,13 +14,13 @@ namespace ST.Client
         IListener<SystemRecycleStarted>, 
         IClientConnector
     {
-        private readonly RemoteController _controller;
+        private readonly IRemoteController _controller;
         private readonly int _port;
         private readonly IList<IWebSocketConnection> _sockets = new List<IWebSocketConnection>();
         private readonly string _webSocketsAddress;
         private WebSocketServer _server;
 
-        public ClientConnector(RemoteController controller)
+        public ClientConnector(IRemoteController controller)
         {
             _controller = controller;
             _port = PortFinder.FindPort(8181);
