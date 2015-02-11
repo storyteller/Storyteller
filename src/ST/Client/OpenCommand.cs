@@ -14,11 +14,10 @@ namespace ST.Client
         {
             var controller = input.BuildRemoteController();
 
-
-
-
             var connector = new ClientConnector(controller);
             connector.Start();
+            controller.Messaging.AddListener(connector);
+            
 
             var context = new StorytellerContext(controller, input);
             context.Start();
@@ -45,6 +44,7 @@ namespace ST.Client
                 }
 
                 Console.WriteLine("Shutting down.");
+                controller.Teardown();
             }
 
             return true;

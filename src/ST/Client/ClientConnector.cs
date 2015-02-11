@@ -8,7 +8,11 @@ using Storyteller.Core.Remotes.Messaging;
 
 namespace ST.Client
 {
-    public class ClientConnector : IDisposable, IListener<PassthroughMessage>, IClientConnector
+    public class ClientConnector : IDisposable, 
+        IListener<PassthroughMessage>, 
+        IListener<SystemRecycled>, 
+        IListener<SystemRecycleStarted>, 
+        IClientConnector
     {
         private readonly RemoteController _controller;
         private readonly int _port;
@@ -62,6 +66,24 @@ namespace ST.Client
         public void Receive(PassthroughMessage message)
         {
             _sockets.Each(x => x.Send(message.json));
+        }
+
+        private void sendMessage(object message)
+        {
+            var json = JsonSerialization.ToCleanJson(message);
+            _sockets.Each(x => x.Send(json));
+        }
+
+        public void Receive(SystemRecycled message)
+        {
+            message.WriteSystemUsage();
+            sendMessage(message);
+        }
+
+        public void Receive(SystemRecycleStarted message)
+        {
+            Console.WriteLine("Starting to recycle the system");
+            sendMessage(message);
         }
     }
 }

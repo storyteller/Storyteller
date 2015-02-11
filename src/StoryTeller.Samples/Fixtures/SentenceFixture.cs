@@ -20,6 +20,11 @@ namespace StoryTeller.Samples.Fixtures
         public void D()
         {
         }
+
+        public void E()
+        {
+            
+        }
     }
 
     public class EmbeddedChoicesFixture : Fixture

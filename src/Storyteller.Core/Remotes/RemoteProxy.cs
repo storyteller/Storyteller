@@ -17,6 +17,7 @@ namespace Storyteller.Core.Remotes
         public void Dispose()
         {
             if (_engine != null) _engine.Dispose();
+            if (_system != null) _system.Dispose();
         }
 
         public override object InitializeLifetimeService()
