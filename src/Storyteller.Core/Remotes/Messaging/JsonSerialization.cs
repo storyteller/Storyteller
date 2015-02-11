@@ -1,11 +1,31 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using FubuCore;
+using FubuCore.Util;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Storyteller.Core.Messages;
 
 namespace Storyteller.Core.Remotes.Messaging
 {
     public static class JsonSerialization
     {
+        private static readonly Cache<string, Type> _messageTypes = new Cache<string, Type>(); 
+
+        static JsonSerialization()
+        {
+            var types = typeof (JsonSerialization).Assembly.GetExportedTypes()
+                .Where(x => x.IsConcreteWithDefaultCtor() && x.IsConcreteTypeOf<ClientMessage>());
+
+            types.Each(x =>
+            {
+                var message = Activator.CreateInstance(x).As<ClientMessage>();
+                _messageTypes[message.Type] = x;
+            });
+        }
+
         public static string ToJson(object o, bool indentedFormatting = false)
         {
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
@@ -42,12 +62,22 @@ namespace Storyteller.Core.Remotes.Messaging
             return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
 
-        public static object Deserialize(string json)
+        public static object DeserializeMessage(string json)
         {
-            // TODO -- needs to be able to work out the type from JToken
-
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
-            return serializer.Deserialize(new JsonTextReader(new StringReader(json)));
+            var jsonTextReader = new JsonTextReader(new StringReader(json));
+
+            var token = JToken.Parse(json);
+            var type = token.Value<string>("type");
+
+            if (type.IsNotEmpty())
+            {
+                var messageType = _messageTypes[type];
+                return serializer.Deserialize(jsonTextReader, messageType);
+            }
+
+            
+            return serializer.Deserialize(jsonTextReader);
         }
     }
 }

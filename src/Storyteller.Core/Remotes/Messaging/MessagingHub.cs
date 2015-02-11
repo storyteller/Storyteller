@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
-using Newtonsoft.Json;
 
 namespace Storyteller.Core.Remotes.Messaging
 {
@@ -35,11 +32,10 @@ namespace Storyteller.Core.Remotes.Messaging
 
         public void SendJson(string json)
         {
+            object o = JsonSerialization.DeserializeMessage(json);
 
-            var o = JsonSerialization.Deserialize(json);
-            
-            typeof(Sender<>).CloseAndBuildAs<ISender>(o.GetType())
-                            .Send(o, this);
+            typeof (Sender<>).CloseAndBuildAs<ISender>(o.GetType())
+                .Send(o, this);
         }
 
         public interface ISender
