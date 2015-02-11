@@ -1,4 +1,6 @@
 using System.IO;
+using FubuMVC.Core.Assets;
+using FubuMVC.Core.UI;
 using HtmlTags;
 using Storyteller.Core.Remotes.Messaging;
 
@@ -8,17 +10,39 @@ namespace ST.Client
     {
         private readonly IClientConnector _connector;
         private readonly StorytellerContext _context;
+        private readonly FubuHtmlDocument _document;
 
-        public HomeEndpoint(IClientConnector connector, StorytellerContext context)
+        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document)
         {
             _connector = connector;
             _context = context;
+            _document = document;
         }
 
         public HtmlDocument Index()
         {
-            var document = new HtmlDocument {Title = "Storyteller"};
+            _document.Title = "Storyteller 3";
 
+            writeInitialDataIntoPage(_document);
+
+
+
+            _document.Add("div").Id("header-container");
+            _document.Add("div").Id("body-pane").AddClass("container");
+
+            _document.Head.Append(_document.Css("assets/client/public/stylesheets/bootstrap.min.css", "assets/client/css/storyteller.css"));
+            _document.Head.Add("link").Attr("rel", "stylesheet").Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+
+            // <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+            _document.Body.Append(_document.Script("bundle.js"));
+
+            return _document;
+        }
+
+        private void writeInitialDataIntoPage(HtmlDocument document)
+        {
             var script = new StringWriter();
             script.WriteLine();
             script.WriteLine("var Storyteller = {};");
@@ -31,11 +55,6 @@ namespace ST.Client
             script.WriteLine();
 
             document.Head.Add("script").Encoded(false).Text(script.ToString()).Attr("type", "text/javascript");
-
-            document.Add("h1").Text(_context.Startup.Result.system_name);
-            document.Add("h2").Text(_context.Startup.Result.name);
-
-            return document;
         }
     }
 }
