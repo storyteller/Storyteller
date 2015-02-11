@@ -72,9 +72,6 @@ namespace ST.Client
         private void sendMessage(object message)
         {
             var json = JsonSerialization.ToCleanJson(message);
-
-            Console.WriteLine("Wanting to send {0} to {1} open sockets", json, _sockets.Count);
-
             _sockets.Each(x => x.Send(json));
         }
 
@@ -86,7 +83,6 @@ namespace ST.Client
 
         public void Receive(SystemRecycleStarted message)
         {
-            Console.WriteLine("ClientConnector got SystemRecycleStarted");
             sendMessage(message);
         }
 

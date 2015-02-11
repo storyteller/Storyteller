@@ -86,12 +86,14 @@ namespace Storyteller.Core.Remotes
 
         public void Recycle()
         {
-            Console.WriteLine("Starting to recycle");
-
             _messaging.Send(new SystemRecycleStarted());
 
             Teardown();
-            bootstrap(_mode);
+            bootstrap(_mode).Task.ContinueWith(x =>
+            {
+                _messaging.Send(x.Result);
+                return x.Result;
+            });
         }
 
         public void Teardown()
@@ -121,7 +123,7 @@ namespace Storyteller.Core.Remotes
 
         private SystemRecycledListener bootstrap(EngineMode mode)
         {
-            var listener = new SystemRecycledListener();
+            var listener = new SystemRecycledListener(_messaging);
 
             copyStorytellerAssemblyIfNecessary();
 

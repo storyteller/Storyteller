@@ -45,6 +45,8 @@ namespace Storyteller.Core.Remotes
                 _controller = new EngineController(_engine);
                 EventAggregator.Messaging.AddListener(_controller);
                 _engine.Start(project.StopConditions);
+
+                
             }
             catch (Exception e)
             {

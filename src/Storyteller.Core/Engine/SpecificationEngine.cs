@@ -94,7 +94,6 @@ namespace Storyteller.Core.Engine
                     success = true,
                     fixtures = fixtures.Result.Models.GetAll().ToArray(),
                     system_name = _system.ToString(),
-                    time = DateTime.Now,
                     name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
                 };
 

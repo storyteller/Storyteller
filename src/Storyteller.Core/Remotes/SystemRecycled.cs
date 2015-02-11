@@ -24,7 +24,7 @@ namespace Storyteller.Core.Remotes
                 _fixtures.AddRange(value);
             }
         }
-        public DateTime time = DateTime.Now;
+        public string time = DateTime.Now.ToString("t");
 
         public string system_name;
         public bool success;
