@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.Reflection;
 using FubuCore.Util;
-using Newtonsoft.Json;
 
 namespace Storyteller.Core.Model
 {
@@ -44,13 +42,10 @@ namespace Storyteller.Core.Model
 
         public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
         {
-            var fixtures = AppDomain.CurrentDomain.GetAssemblies()
+            IEnumerable<Task<CompiledFixture>> fixtures = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(FixtureTypesFor)
                 .Select(
-                    type =>
-                    {
-                        return Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type));
-                    });
+                    type => { return Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)); });
 
             return Task.WhenAll(fixtures).ContinueWith(results =>
             {
@@ -81,7 +76,7 @@ namespace Storyteller.Core.Model
             catch (Exception e)
             {
                 var fixture = new InvalidFixture(type, e);
-                var model = fixture.Compile(cellHandling);
+                FixtureModel model = fixture.Compile(cellHandling);
 
                 return new CompiledFixture
                 {
@@ -89,7 +84,6 @@ namespace Storyteller.Core.Model
                     Model = model
                 };
             }
-
         }
 
         public struct CompiledFixture

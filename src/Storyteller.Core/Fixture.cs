@@ -79,7 +79,8 @@ namespace Storyteller.Core
             return new FixtureModel(Key)
             {
                 title = Title ?? Key.SplitCamelCase(),
-                grammars = grammars.ToArray()
+                grammars = grammars.ToArray(),
+                implementation = GetType().FullName
             };
         }
 

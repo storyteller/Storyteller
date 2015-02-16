@@ -161,6 +161,14 @@ namespace Storyteller.Core.Testing
                 .title.ShouldEqual("Default Title");
         }
 
+        [Test]
+        public void adds_the_implementation_to_the_model()
+        {
+            new DefaultTitleFixture()
+                .Compile(CellHandling.Basic())
+                .implementation.ShouldEqual(typeof (DefaultTitleFixture).FullName);
+        }
+
         public class ExplicitTitleFixture : Fixture
         {
             public ExplicitTitleFixture()

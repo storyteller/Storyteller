@@ -6,6 +6,7 @@ namespace Storyteller.Core.Model
     {
         public string title;
         public readonly string key;
+        public string implementation;
 
         public GrammarModel[] grammars;
 
