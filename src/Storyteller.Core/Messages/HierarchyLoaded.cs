@@ -6,9 +6,8 @@ namespace Storyteller.Core.Messages
     {
         public Suite root;
 
-        public HierarchyLoaded(Suite root) : base("hierarchy-loaded")
+        public HierarchyLoaded() : base("hierarchy-loaded")
         {
-            this.root = root;
         }
     }
 }

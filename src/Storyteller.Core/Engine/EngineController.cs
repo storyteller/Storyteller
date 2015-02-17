@@ -13,7 +13,10 @@ namespace Storyteller.Core.Engine
     // TODO -- retrofit UT's here
     public class EngineController : IResultObserver,
         IListener<RunSpec>,
-        IListener<HierarchyLoaded>
+        IListener<RunSpecs>,
+        IListener<HierarchyLoaded>,
+        IListener<CancelSpec>,
+        IListener<CancelAllSpecs>
     {
         private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
@@ -36,13 +39,19 @@ namespace Storyteller.Core.Engine
 
         public void Receive(RunSpec message)
         {
-            var spec = findSpec(message.id);
+            runSpec(message.id);
+        }
 
+        private void runSpec(string id)
+        {
+            var spec = findSpec(id);
+            var request = new SpecExecutionRequest(spec, this);
+            _outstanding.Add(request);
 
             _observer.SpecQueued(spec);
 
 
-            var request = new SpecExecutionRequest(spec,this);
+            
 
             _engine.Enqueue(request);
         }
@@ -65,9 +74,24 @@ namespace Storyteller.Core.Engine
             _observer.SendToClient(new SpecExecutionCompleted(node.id, counts, 0));
         }
 
-        void IListener<HierarchyLoaded>.Receive(HierarchyLoaded message)
+        public void Receive(HierarchyLoaded message)
         {
             _hierarchy = Task.FromResult(message.root);
+        }
+
+        public void Receive(CancelSpec message)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Receive(CancelAllSpecs message)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Receive(RunSpecs message)
+        {
+            message.list.Each(runSpec);
         }
     }
 }

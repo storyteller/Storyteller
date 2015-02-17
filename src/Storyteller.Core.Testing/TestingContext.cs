@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using FubuCore;
 using NUnit.Framework;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
+using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core.Testing
 {
@@ -15,6 +18,15 @@ namespace Storyteller.Core.Testing
 
         private static readonly Task<FixtureLibrary> _library;
 
+        private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() =>
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs");
+
+            return HierarchyLoader.ReadHierarchy(path);
+
+        }); 
+
         public static FixtureLibrary Library
         {
             get
@@ -27,6 +39,11 @@ namespace Storyteller.Core.Testing
 
                 return _library.Result;
             }
+        }
+
+        public static Suite Hierarchy
+        {
+            get { return _hierarchy.Value; }
         }
 
     }

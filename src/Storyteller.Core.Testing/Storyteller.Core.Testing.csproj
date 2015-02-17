@@ -77,6 +77,7 @@
     <Compile Include="EndToEndExecution\simple_method_grammars.cs" />
     <Compile Include="EndToEnd\simplest_possible_execution.cs" />
     <Compile Include="Engine\CountsTester.cs" />
+    <Compile Include="Engine\EngineControllerTester.cs" />
     <Compile Include="Engine\SpecExecutionRequestTester.cs" />
     <Compile Include="Engine\user_interface_tracing_spec.cs" />
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />

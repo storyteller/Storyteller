@@ -80,5 +80,28 @@ namespace Storyteller.Core.Engine
 
         public ISpecContext Context { get; private set; }
         public bool IsCancelled { get; private set; }
+
+        protected bool Equals(SpecExecutionRequest other)
+        {
+            return Equals(Node.id, other.Node.id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SpecExecutionRequest) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Node != null ? Node.GetHashCode() : 0);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("SpecExecutionRequest for {0} ({1})", Node.id, Node.name);
+        }
     }
 }
