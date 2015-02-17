@@ -1,11 +1,12 @@
 ﻿using System;
 using Storyteller.Core.Grammars;
+using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    // TODO -- retrofit some UT's here
     public class SpecExecutionRequest
     {
         private readonly Action<SpecNode, Counts> _onExecutionFinished;
@@ -24,22 +25,39 @@ namespace Storyteller.Core.Engine
             Node = node;
         }
 
-        // TODO -- UT this!
         public void SpecExecutionFinished(ISpecContext context)
         {
             _onExecutionFinished(Node, context.Counts);
         }
 
+        private void performAction(Action action )
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception e)
+            {
+                IsCancelled = true;
+                EventAggregator.SendMessage(new RuntimeError(e));
+            }
+        }
+
         public void ReadXml()
         {
-            // TODO -- error handling here
-            Specification = XmlReader.ReadFromFile(Node.filename);
-            Specification.Id = Node.id;
+            performAction(() =>
+            {
+                Specification = XmlReader.ReadFromFile(Node.filename);
+                Specification.Id = Node.id;
+            });
         }
 
         public void CreatePlan(FixtureLibrary library)
         {
-            Plan = Specification.CreatePlan(library);
+            performAction(() =>
+            {
+                Plan = Specification.CreatePlan(library);
+            });
         }
 
         public void Cancel()

@@ -9,5 +9,6 @@ namespace Storyteller.Core.Remotes.Messaging
         void RemoveListener(object listener);
         void Send<T>(T message);
         void SendJson(string json);
+        void ClearAll();
     }
 }

@@ -38,6 +38,11 @@ namespace Storyteller.Core.Remotes.Messaging
                 .Send(o, this);
         }
 
+        public void ClearAll()
+        {
+            _listeners.Clear();
+        }
+
         public interface ISender
         {
             void Send(object o, MessagingHub listeners);

@@ -38,14 +38,14 @@ namespace StoryTeller.Samples.Fixtures
         public IGrammar BeforeThrowsError()
         {
             return
-                Paragraph("Throws an Error before we even start", x => { x += Read<double>("x", o => { }); }).AsTable(
+                Paragraph("Throws an error before we even start", x => { x += Read<double>("x", o => { }); }).AsTable(
                     "Throw error on the Before").Before(() => { throw new NotImplementedException(); });
         }
 
         public IGrammar AfterThrowsError()
         {
             return
-                Paragraph("Throws an Error before we even start", x => { x += Read<double>("x", o => { }); }).AsTable(
+                Paragraph("Throws an error before we even start", x => { x += Read<double>("x", o => { }); }).AsTable(
                     "Throw error on the After").After(() => { throw new NotImplementedException(); });
         }
 

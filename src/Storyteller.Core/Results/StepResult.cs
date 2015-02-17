@@ -80,7 +80,7 @@ namespace Storyteller.Core.Results
             description += " status: {0}".ToFormat(status);
             if (error.IsNotEmpty())
             {
-                description += "\n  Error!\n" + error;
+                description += "\n  error!\n" + error;
             }
 
             if (cells.Any())

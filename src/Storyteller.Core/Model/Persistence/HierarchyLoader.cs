@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FubuCore;
@@ -51,13 +52,15 @@ namespace Storyteller.Core.Model.Persistence
                     reader.ReadToNextSibling("*");
                 }
 
-                return new SpecNode
+                var node = new SpecNode
                 {
                     id = reader.GetAttribute("id") ?? Guid.NewGuid().ToString(),
                     name = reader.GetAttribute("name"),
                     lifecycle = reader.GetAttribute("lifecycle") ?? Lifecycle.Acceptance.ToString(),
                     filename = filename
                 };
+
+                return node;
             }
         }
     }

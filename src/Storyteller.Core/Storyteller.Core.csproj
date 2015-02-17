@@ -148,6 +148,7 @@
     <Compile Include="Messages\HiearchyLoaded.cs" />
     <Compile Include="Messages\ClientMessage.cs" />
     <Compile Include="Messages\RunSpec.cs" />
+    <Compile Include="Messages\RuntimeError.cs" />
     <Compile Include="Messages\SpecCanceled.cs" />
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
     <Compile Include="Messages\SpecProgress.cs" />

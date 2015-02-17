@@ -47,14 +47,6 @@ namespace Storyteller.Core.Remotes.Messaging
             if (_cancellationSource != null) _cancellationSource.Cancel();
         }
 
-        public static void SendMessage(string category, string message)
-        {
-            SendMessage(new ServiceMessage
-            {
-                Category = category,
-                Message = message
-            });
-        }
 
         public static void SendMessage<T>(T message)
         {

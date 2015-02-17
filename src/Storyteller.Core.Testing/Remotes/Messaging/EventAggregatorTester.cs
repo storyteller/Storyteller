@@ -30,22 +30,6 @@ namespace Storyteller.Core.Testing.Remotes.Messaging
             EventAggregator.Start(remoteListener);
         }
 
-        [Test]
-        public void send_message_by_category()
-        {
-            EventAggregator.SendMessage("category1", "some message");
-
-            var expected = new ServiceMessage
-            {
-                Category = "category1", Message = "some message"
-            };
-
-            Wait.Until(() => theListener.Received.Contains(expected));
-
-            theListener.Received.OfType<ServiceMessage>().Single()
-                       .ShouldEqual(expected);
-
-        }
 
         [Test]
         public void request_response()

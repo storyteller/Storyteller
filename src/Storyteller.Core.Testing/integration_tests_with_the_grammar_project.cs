@@ -31,7 +31,6 @@ namespace Storyteller.Core.Testing
         private Counts running(string name)
         {
             var node = _allSpecs.FirstOrDefault(x => x.name == name);
-            Debug.WriteLine(node.filename);
             var spec = XmlReader.ReadFromFile(node.filename);
             executeSpec(spec);
 
