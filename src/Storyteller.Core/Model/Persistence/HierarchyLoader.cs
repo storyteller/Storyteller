@@ -7,7 +7,14 @@ namespace Storyteller.Core.Model.Persistence
 {
     public class HierarchyLoader
     {
+        public static string SpecDirectory = AppDomain.CurrentDomain.BaseDirectory.AppendPath("Specs");
+
         public static readonly IFileSystem FileSystem = new FileSystem();
+
+        public static Suite ReadHierarchy()
+        {
+            return ReadHierarchy(SpecDirectory);
+        }
 
         public static Suite ReadHierarchy(string folder)
         {

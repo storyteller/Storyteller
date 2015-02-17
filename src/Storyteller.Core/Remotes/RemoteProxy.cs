@@ -9,7 +9,7 @@ namespace Storyteller.Core.Remotes
 {
     public class RemoteProxy : MarshalByRefObject, IDisposable
     {
-        private EngineController _controller;
+        private object _controller;
         private SpecificationEngine _engine;
         private Project _project;
         private ISystem _system;
@@ -42,8 +42,7 @@ namespace Storyteller.Core.Remotes
                     ? buildBatchedEngine()
                     : buildUserInterfaceEngine();
 
-                _controller = new EngineController(_engine);
-                EventAggregator.Messaging.AddListener(_controller);
+
                 _engine.Start(project.StopConditions);
 
                 
@@ -68,13 +67,23 @@ namespace Storyteller.Core.Remotes
         private SpecificationEngine buildUserInterfaceEngine()
         {
             var observer = new UserInterfaceObserver();
-            return new SpecificationEngine(_system, observer, new InstrumentedRunner(observer));
+            var engine  = new SpecificationEngine(_system, observer, new InstrumentedRunner(observer));
+            _controller = new EngineController(engine);
+            EventAggregator.Messaging.AddListener(_controller);
+
+            return engine;
         }
 
         private SpecificationEngine buildBatchedEngine()
         {
             var batchObserver = new BatchObserver();
-            return new SpecificationEngine(_system, batchObserver, new BatchRunner(batchObserver));
+            var engine = new SpecificationEngine(_system, batchObserver, new BatchRunner(batchObserver));
+
+            _controller = new BatchController(engine);
+
+            EventAggregator.Messaging.AddListener(_controller);
+
+            return engine;
         }
 
         public void SendMessage(string json)
