@@ -13,6 +13,10 @@ namespace Storyteller.Core.Engine
         public Specification Specification { get; private set; }
         public SpecificationPlan Plan { get; private set; }
 
+        public static SpecExecutionRequest For(SpecNode node)
+        {
+            return new SpecExecutionRequest(node, (specNode, counts) => { });
+        }
 
         public SpecExecutionRequest(SpecNode node, Action<SpecNode, Counts> onExecutionFinished)
         {

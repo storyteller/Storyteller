@@ -8,10 +8,10 @@ namespace Storyteller.Core.Engine.Batching
     // TODO -- retrofit some UT's
     public class BatchController : IListener<BatchRunRequest>
     {
-        private readonly SpecificationEngine _engine;
+        private readonly ISpecificationEngine _engine;
         private readonly IBatchObserver _observer;
 
-        public BatchController(SpecificationEngine engine, IBatchObserver observer)
+        public BatchController(ISpecificationEngine engine, IBatchObserver observer)
         {
             _engine = engine;
             _observer = observer;
@@ -24,7 +24,9 @@ namespace Storyteller.Core.Engine.Batching
 
             var task = _observer.MonitorBatch(nodes);
 
-            nodes.Each(x => _engine.Enqueue(x));
+            nodes
+                .Select(SpecExecutionRequest.For)
+                .Each(x => _engine.Enqueue(x));
 
             task.ContinueWith(t =>
             {

@@ -9,11 +9,11 @@ namespace Storyteller.Core.Engine
     // TODO -- retrofit UT's here
     public class EngineController : IListener<RunSpec>
     {
-        private readonly SpecificationEngine _engine;
+        private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
 
 
-        public EngineController(SpecificationEngine engine, IUserInterfaceObserver observer)
+        public EngineController(ISpecificationEngine engine, IUserInterfaceObserver observer)
         {
             _engine = engine;
             _observer = observer;
@@ -27,7 +27,14 @@ namespace Storyteller.Core.Engine
 
             _observer.SpecQueued(spec);
 
-            _engine.Enqueue(spec);
+
+            var request = new SpecExecutionRequest(spec, (node, counts) =>
+            {
+                // TODO -- track that it's finished. 
+                // TODO -- publish to the client
+            });
+
+            _engine.Enqueue(request);
         }
 
         // TODO -- obviously make this be much more efficient!!!!!

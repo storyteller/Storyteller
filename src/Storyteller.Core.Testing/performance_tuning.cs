@@ -65,7 +65,7 @@ namespace Storyteller.Core.Testing
             var task = observer.MonitorBatch(_allSpecs);
 
             var engine = new SpecificationEngine(system, observer, new BatchRunner(observer));
-            _allSpecs.Each(x => engine.Enqueue(x));
+            _allSpecs.Each(x => engine.Enqueue(SpecExecutionRequest.For(x)));
 
             engine.Start(new StopConditions());
 

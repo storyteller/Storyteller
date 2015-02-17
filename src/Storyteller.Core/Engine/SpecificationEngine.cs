@@ -4,16 +4,19 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Storyteller.Core.Model;
-using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes;
 using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    public class SpecificationEngine : IDisposable
+    public interface ISpecificationEngine
+    {
+        void Enqueue(SpecExecutionRequest request);
+    }
+
+    public class SpecificationEngine : IDisposable, ISpecificationEngine
     {
         private readonly ExecutionQueue _execution;
-        private readonly IObserver _observer;
         private readonly PlanningQueue _planning;
         private readonly ReaderQueue _reader;
         private readonly ISpecRunner _runner;
@@ -22,7 +25,6 @@ namespace Storyteller.Core.Engine
         public SpecificationEngine(ISystem system, IObserver observer, ISpecRunner runner)
         {
             _system = system;
-            _observer = observer;
             _runner = runner;
 
             _execution = new ExecutionQueue(system, runner, observer);
@@ -38,10 +40,9 @@ namespace Storyteller.Core.Engine
             _reader.Dispose();
         }
 
-        // TODO -- gets replaced by accepting SpecExecutionRequest
-        public void Enqueue(SpecNode node)
+        public void Enqueue(SpecExecutionRequest request)
         {
-            _reader.Enqueue(new SpecExecutionRequest(node, (specNode, counts) => { }));
+            _reader.Enqueue(request);
         }
 
 
