@@ -68,7 +68,7 @@ namespace Storyteller.Core.Remotes
         {
             var observer = new UserInterfaceObserver();
             var engine  = new SpecificationEngine(_system, observer, new InstrumentedRunner(observer));
-            _controller = new EngineController(engine);
+            _controller = new EngineController(engine, observer);
             EventAggregator.Messaging.AddListener(_controller);
 
             return engine;
@@ -79,7 +79,7 @@ namespace Storyteller.Core.Remotes
             var batchObserver = new BatchObserver();
             var engine = new SpecificationEngine(_system, batchObserver, new BatchRunner(batchObserver));
 
-            _controller = new BatchController(engine);
+            _controller = new BatchController(engine, batchObserver);
 
             EventAggregator.Messaging.AddListener(_controller);
 

@@ -27,16 +27,6 @@ namespace Storyteller.Core.Engine.UserInterface
             sendToClient(message);
         }
 
-        public Task<IEnumerable<SpecResult>> MonitorBatch(IEnumerable<SpecNode> nodes)
-        {
-            throw new System.NotSupportedException();
-        }
-
-        public void SpecQueued(IEnumerable<SpecNode> nodes)
-        {
-            nodes.Each(SpecQueued);
-        }
-
         public void SpecQueued(SpecNode node)
         {
             sendToClient(new SpecQueued(node.id));

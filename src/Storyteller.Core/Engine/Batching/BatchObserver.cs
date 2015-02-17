@@ -41,14 +41,5 @@ namespace Storyteller.Core.Engine.Batching
             return watcher.Task;
         }
 
-        public void SpecQueued(IEnumerable<SpecNode> nodes)
-        {
-            // Nothing
-        }
-
-        public void SpecQueued(SpecNode nodes)
-        {
-            // Nothing
-        }
     }
 }

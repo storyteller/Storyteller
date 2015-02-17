@@ -31,14 +31,6 @@ namespace Storyteller.Core
             throw new NotSupportedException();
         }
 
-        public void SpecQueued(IEnumerable<SpecNode> nodes)
-        {
-            
-        }
-
-        public void SpecQueued(SpecNode nodes)
-        {
-        }
 
         public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
         {
@@ -53,9 +45,5 @@ namespace Storyteller.Core
         {
         }
 
-        Task<IEnumerable<SpecResult>> IObserver.MonitorBatch(IEnumerable<SpecNode> nodes)
-        {
-            throw new NotSupportedException();
-        }
     }
 }

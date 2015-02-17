@@ -78,6 +78,7 @@
     <Compile Include="Engine\UserInterface\InstrumentedExecutor.cs" />
     <Compile Include="Engine\UserInterface\InstrumentedRunner.cs" />
     <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />
+    <Compile Include="IBatchObserver.cs" />
     <Compile Include="Messages\ForceRecycle.cs" />
     <Compile Include="Messages\PassthroughMessage.cs" />
     <Compile Include="Engine\UserInterface\UserInterfaceObserver.cs" />
