@@ -39,6 +39,25 @@ namespace Storyteller.Core.Testing.Engine
 
     }
 
+    [TestFixture]
+    public class when_receiving_a_run_specs_message : EngineControllerContext
+    {
+        protected override void theContextIs()
+        {
+            Services.PartialMockTheClassUnderTest();
+
+            ClassUnderTest.Receive(new RunSpecs{list = new []{"a", "b", "c"}});
+        }
+
+        [Test]
+        public void enqueues_each_spec()
+        {
+            ClassUnderTest.AssertWasCalled(x => x.RunSpec("a"));
+            ClassUnderTest.AssertWasCalled(x => x.RunSpec("b"));
+            ClassUnderTest.AssertWasCalled(x => x.RunSpec("c"));
+        }
+    }
+
     public abstract class EngineControllerContext : InteractionContext<EngineController>
     {
         protected sealed override void beforeEach()

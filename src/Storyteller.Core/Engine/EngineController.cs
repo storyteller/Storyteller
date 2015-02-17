@@ -39,19 +39,16 @@ namespace Storyteller.Core.Engine
 
         public void Receive(RunSpec message)
         {
-            runSpec(message.id);
+            RunSpec(message.id);
         }
 
-        private void runSpec(string id)
+        public virtual void RunSpec(string id)
         {
             var spec = findSpec(id);
             var request = new SpecExecutionRequest(spec, this);
             _outstanding.Add(request);
 
             _observer.SpecQueued(spec);
-
-
-            
 
             _engine.Enqueue(request);
         }
@@ -91,7 +88,7 @@ namespace Storyteller.Core.Engine
 
         public void Receive(RunSpecs message)
         {
-            message.list.Each(runSpec);
+            message.list.Each(RunSpec);
         }
     }
 }
