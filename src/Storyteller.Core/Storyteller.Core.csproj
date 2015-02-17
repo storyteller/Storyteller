@@ -60,15 +60,11 @@
     <Compile Include="Engine\BatchRunRequest.cs" />
     <Compile Include="Engine\BatchRunResponse.cs" />
     <Compile Include="Engine\BatchWatcher.cs" />
+    <Compile Include="Engine\ConsumingQueue.cs" />
     <Compile Include="Engine\EngineController.cs" />
-    <Compile Include="Engine\ExecutionQueue.cs" />
-    <Compile Include="Engine\IExecutionQueue.cs" />
-    <Compile Include="Engine\IPlanningQueue.cs" />
-    <Compile Include="Engine\IReaderQueue.cs" />
+    <Compile Include="Engine\IConsumingQueue.cs" />
     <Compile Include="Engine\ISpecRunner.cs" />
     <Compile Include="Engine\LifecycleSummary.cs" />
-    <Compile Include="Engine\PlanningQueue.cs" />
-    <Compile Include="Engine\ReaderQueue.cs" />
     <Compile Include="Engine\SpecExecutionRequest.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
     <Compile Include="Engine\Batching\BatchObserver.cs" />

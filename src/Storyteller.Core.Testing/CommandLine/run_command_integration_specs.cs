@@ -41,7 +41,7 @@ namespace Storyteller.Core.Testing.CommandLine
             theInput.LifecycleFlag = Lifecycle.Regression;
 
             var task = theInput.StartBatch(theController);
-            task.Wait();
+            task.Wait(1.Seconds());
 
             var result = task.Result;
 
@@ -55,7 +55,7 @@ namespace Storyteller.Core.Testing.CommandLine
             theInput.LifecycleFlag = Lifecycle.Acceptance;
 
             var task = theInput.StartBatch(theController);
-            task.Wait();
+            task.Wait(1.Seconds());
 
             var result = task.Result;
 

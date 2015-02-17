@@ -12,7 +12,7 @@ namespace Storyteller.Core.Engine.UserInterface
             _observer = observer;
         }
 
-        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue)
         {
             var context = request.CreateContext(_stopConditions, execution);
 

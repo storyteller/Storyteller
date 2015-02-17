@@ -14,7 +14,7 @@ namespace Storyteller.Core.Engine.Batching
             _resultObserver = observer;
         }
 
-        private void execute(SpecExecutionRequest request, ISpecContext context, IExecutionQueue queue)
+        private void execute(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Storyteller.Core.Engine.Batching
             return false;
         }
 
-        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue)
         {
             var context = request.CreateContext(_stopConditions, execution);
 

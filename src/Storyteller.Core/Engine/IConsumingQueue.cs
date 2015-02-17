@@ -2,7 +2,7 @@ using System;
 
 namespace Storyteller.Core.Engine
 {
-    public interface IExecutionQueue : IDisposable
+    public interface IConsumingQueue : IDisposable
     {
         void Enqueue(SpecExecutionRequest plan);
         void Start();

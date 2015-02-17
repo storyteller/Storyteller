@@ -4,7 +4,7 @@ namespace Storyteller.Core.Engine
 {
     public interface ISpecRunner
     {
-        Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue);
+        Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue);
         void UseStopConditions(StopConditions conditions);
     }
 }

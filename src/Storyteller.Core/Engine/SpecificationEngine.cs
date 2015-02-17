@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Cache;
 using System.Threading.Tasks;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
@@ -16,9 +17,9 @@ namespace Storyteller.Core.Engine
 
     public class SpecificationEngine : IDisposable, ISpecificationEngine
     {
-        private readonly ExecutionQueue _execution;
-        private readonly PlanningQueue _planning;
-        private readonly ReaderQueue _reader;
+        private readonly ConsumingQueue _executionQueue;
+        private ConsumingQueue _planning;
+        private ConsumingQueue _reader;
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
 
@@ -27,15 +28,30 @@ namespace Storyteller.Core.Engine
             _system = system;
             _runner = runner;
 
-            _execution = new ExecutionQueue(system, runner);
-            _planning = new PlanningQueue(_execution);
-            _reader = new ReaderQueue(_planning);
+            _executionQueue = new ConsumingQueue(request =>
+            {
+                using (var execution = _system.CreateContext())
+                {
+                    var task = _runner.Execute(request, execution, _executionQueue).ContinueWith(t =>
+                    {
+                        // TODO -- tag the context or plan if timed out?
+                        // TODO -- tag the plan as having an attempt?
+
+                        request.SpecExecutionFinished(t.Result);
+                    });
+
+                    // TODO -- should have a timeout on it anyway, but things still fail
+                    // connect the timeout to the stop conditions
+                    task.Wait();
+                }
+            });
+
         }
 
         public void Dispose()
         {
             _system.Dispose();
-            _execution.Dispose();
+            _executionQueue.Dispose();
             _planning.Dispose();
             _reader.Dispose();
         }
@@ -50,15 +66,15 @@ namespace Storyteller.Core.Engine
         {
             _runner.UseStopConditions(stopConditions);
 
-            CellHandling cellHandling = CellHandling.ForSystem(_system);
+            var cellHandling = CellHandling.ForSystem(_system);
 
-            Task warmup = _system
+            var warmup = _system
                 .Warmup()
                 .ContinueWith(t =>
                 {
                     if (!t.IsFaulted)
                     {
-                        _execution.Start();
+                        _executionQueue.Start();
                     }
                     else
                     {
@@ -66,10 +82,24 @@ namespace Storyteller.Core.Engine
                     }
                 });
 
-            Task<FixtureLibrary> fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
+            var fixtures = FixtureLibrary.CreateForAppDomain(cellHandling)
                 .ContinueWith(t =>
                 {
-                    _planning.Start(t.Result);
+                    var library = t.Result;
+                    _planning = new ConsumingQueue(request =>
+                    {
+                        request.CreatePlan(library);
+                        _executionQueue.Enqueue(request);
+                    });
+
+                    _reader = new ConsumingQueue(request =>
+                    {
+                        request.ReadXml();
+                        _planning.Enqueue(request);
+                    });
+
+                    _reader.Start();
+                    _planning.Start();
 
                     return t.Result;
                 });
@@ -93,7 +123,7 @@ namespace Storyteller.Core.Engine
                 EventAggregator.SendMessage(message);
             });
 
-            _reader.Start();
+
         }
     }
 }
