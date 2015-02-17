@@ -1,14 +1,12 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core.Engine
 {
     public class ReaderQueue : IReaderQueue
     {
         private readonly IPlanningQueue _planning;
-        private readonly BlockingCollection<SpecNode> _collection = new BlockingCollection<SpecNode>(new ConcurrentBag<SpecNode>());
+        private readonly BlockingCollection<SpecExecutionRequest> _collection = new BlockingCollection<SpecExecutionRequest>(new ConcurrentBag<SpecExecutionRequest>());
         private Task _readingTask;
 
         public ReaderQueue(IPlanningQueue planning)
@@ -16,27 +14,23 @@ namespace Storyteller.Core.Engine
             _planning = planning;
         }
 
-        public void Enqueue(SpecNode node)
+        public void Enqueue(SpecExecutionRequest request)
         {
-            _collection.Add(node);
+            _collection.Add(request);
         }
 
-        public void Enqueue(IEnumerable<SpecNode> nodes)
-        {
-            nodes.Each(file => Enqueue((SpecNode) file));
-        }
 
         public void Start()
         {
             _readingTask = Task.Factory.StartNew(() =>
             {
-                foreach (var node in _collection.GetConsumingEnumerable())
+                foreach (var request in _collection.GetConsumingEnumerable())
                 {
-                    // TODO -- error handling here
-                    var spec = XmlReader.ReadFromFile(node.filename);
-                    spec.Id = node.id;
+                    if (request.IsCancelled) continue;
 
-                    _planning.Enqueue(spec);
+                    request.ReadXml();
+
+                    _planning.Enqueue(request);
                 }
             });
         }

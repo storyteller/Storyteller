@@ -68,6 +68,7 @@
     <Compile Include="Engine\LifecycleSummary.cs" />
     <Compile Include="Engine\PlanningQueue.cs" />
     <Compile Include="Engine\ReaderQueue.cs" />
+    <Compile Include="Engine\SpecExecutionRequest.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
     <Compile Include="Engine\Batching\BatchObserver.cs" />
     <Compile Include="Engine\IExecutionContext.cs" />

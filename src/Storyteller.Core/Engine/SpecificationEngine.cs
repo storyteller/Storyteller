@@ -38,16 +38,17 @@ namespace Storyteller.Core.Engine
             _reader.Dispose();
         }
 
+        // TODO -- eliminate
         public void Enqueue(IEnumerable<SpecNode> nodes)
         {
-            _observer.SpecQueued(nodes);
-            _reader.Enqueue(nodes);
+            nodes.Each(Enqueue);
         }
 
+        // TODO -- gets replaced by accepting SpecExecutionRequest
         public void Enqueue(SpecNode node)
         {
             _observer.SpecQueued(node);
-            _reader.Enqueue(node);
+            _reader.Enqueue(new SpecExecutionRequest(node, (specNode, counts) => { }));
         }
 
         public Task<IEnumerable<SpecResult>> RunBatch(IEnumerable<SpecNode> nodes)

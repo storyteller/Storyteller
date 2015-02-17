@@ -14,10 +14,11 @@ namespace Storyteller.Core.Engine.Batching
             _observer = observer;
         }
 
-        private void execute(SpecificationPlan plan, ISpecContext context, IExecutionQueue queue)
+        private void execute(SpecExecutionRequest request, ISpecContext context, IExecutionQueue queue)
         {
             try
             {
+                var plan = request.Plan;
                 var stepExecutor = new SynchronousExecutor(context);
                 plan.AcceptVisitor(stepExecutor);
 
@@ -25,7 +26,7 @@ namespace Storyteller.Core.Engine.Batching
                 if (ShouldRetry(plan, context))
                 {
                     _observer.SpecRequeued(plan, context);
-                    queue.Enqueue(plan);
+                    queue.Enqueue(request);
                 }
                 else
                 {
@@ -45,14 +46,14 @@ namespace Storyteller.Core.Engine.Batching
             return false;
         }
 
-        public Task<ISpecContext> Execute(SpecificationPlan plan, IExecutionContext execution, IExecutionQueue queue)
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
         {
             var context = new SpecContext(_observer, _stopConditions, execution.Services);
 
             
             return Task.Factory.StartNew(() =>
             {
-                execute(plan, context, queue);
+                execute(request, context, queue);
 
                 return context as ISpecContext;
             }, context.Cancellation);

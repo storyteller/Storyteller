@@ -7,7 +7,7 @@ namespace Storyteller.Core.Engine
     public class PlanningQueue : IPlanningQueue
     {
         private readonly IExecutionQueue _execution;
-        private readonly BlockingCollection<Specification> _collection = new BlockingCollection<Specification>(new ConcurrentBag<Specification>());
+        private readonly BlockingCollection<SpecExecutionRequest> _collection = new BlockingCollection<SpecExecutionRequest>(new ConcurrentBag<SpecExecutionRequest>());
         private Task _readingTask;
 
         public PlanningQueue(IExecutionQueue execution)
@@ -15,19 +15,21 @@ namespace Storyteller.Core.Engine
             _execution = execution;
         }
 
-        public void Enqueue(Specification spec)
+        public void Enqueue(SpecExecutionRequest request)
         {
-            _collection.Add(spec);
+            _collection.Add(request);
         }
 
         public void Start(FixtureLibrary library)
         {
             _readingTask = Task.Factory.StartNew(() =>
             {
-                foreach (var spec in _collection.GetConsumingEnumerable())
+                foreach (var request in _collection.GetConsumingEnumerable())
                 {
-                    var plan = spec.CreatePlan(library);
-                    _execution.Enqueue(plan);
+                    if (request.IsCancelled) continue;
+
+                    request.CreatePlan(library);
+                    _execution.Enqueue(request);
                 }
             });
         }

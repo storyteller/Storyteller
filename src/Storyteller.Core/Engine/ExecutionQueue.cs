@@ -1,7 +1,5 @@
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using FubuCore;
-using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Engine
 {
@@ -11,8 +9,8 @@ namespace Storyteller.Core.Engine
         private readonly ISpecRunner _runner;
         private readonly IObserver _observer;
 
-        private readonly BlockingCollection<SpecificationPlan> _collection =
-            new BlockingCollection<SpecificationPlan>(new ConcurrentBag<SpecificationPlan>());
+        private readonly BlockingCollection<SpecExecutionRequest> _collection =
+            new BlockingCollection<SpecExecutionRequest>(new ConcurrentBag<SpecExecutionRequest>());
 
         private Task _readingTask;
 
@@ -23,7 +21,7 @@ namespace Storyteller.Core.Engine
             _observer = observer;
         }
 
-        public void Enqueue(SpecificationPlan plan)
+        public void Enqueue(SpecExecutionRequest plan)
         {
             _collection.Add(plan);
         }
@@ -36,16 +34,19 @@ namespace Storyteller.Core.Engine
 
         private async void runSpecs()
         {
-            foreach (var plan in _collection.GetConsumingEnumerable())
+            foreach (var request in _collection.GetConsumingEnumerable())
             {
+                if (request.IsCancelled) continue;
+
                 using (var execution = _system.CreateContext())
                 {
-                    await _runner.Execute(plan, execution, this).ContinueWith(t =>
+                    await _runner.Execute(request, execution, this).ContinueWith(t =>
                     {
                         // TODO -- tag the context or plan if timed out?
                         // TODO -- tag the plan as having an attempt?
 
-                        _observer.SpecExecutionFinished(plan, t.Result);
+                        // TODO -- change to just calling on the request
+                        _observer.SpecExecutionFinished(request.Plan, t.Result);
                     });
                 }
             }

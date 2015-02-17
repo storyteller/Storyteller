@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Engine.UserInterface
 {
@@ -13,13 +12,14 @@ namespace Storyteller.Core.Engine.UserInterface
             _observer = observer;
         }
 
-        public Task<ISpecContext> Execute(SpecificationPlan plan, IExecutionContext execution, IExecutionQueue queue)
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
         {
             var context = new SpecContext(_observer, _stopConditions, execution.Services);
 
 
             return Task.Factory.StartNew(() =>
             {
+                var plan = request.Plan;
                 _observer.SpecStarted(plan);
                 var executor = new InstrumentedExecutor(context, plan, _observer);
                 plan.AcceptVisitor(executor);
