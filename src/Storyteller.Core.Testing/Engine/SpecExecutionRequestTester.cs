@@ -95,6 +95,18 @@ namespace Storyteller.Core.Testing.Engine
         }
 
         [Test]
+        public void cancel_cancels_the_cancellation_token_if_the_context_exista()
+        {
+            var request = SpecExecutionRequest.For(theSpec);
+            var context = request.CreateContext(new StopConditions(),
+                new NulloSystem.SimpleExecutionContext(new InMemoryServiceLocator()));
+
+            request.Cancel();
+
+            context.Cancellation.IsCancellationRequested.ShouldBeTrue();
+        }
+
+        [Test]
         public void create_plan_happy_path_smoke_test()
         {
             var request = SpecExecutionRequest.For(theSpec);

@@ -72,7 +72,10 @@ namespace Storyteller.Core.Engine
         {
             IsCancelled = true;
 
-            // TODO -- if the cancellation token exists, cancel that too
+            if (Context != null)
+            {
+                Context.RequestCancellation();
+            }
         }
 
         public ISpecContext Context { get; private set; }
