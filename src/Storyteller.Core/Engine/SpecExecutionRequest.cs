@@ -24,9 +24,10 @@ namespace Storyteller.Core.Engine
             Node = node;
         }
 
-        public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
+        // TODO -- UT this!
+        public void SpecExecutionFinished(ISpecContext context)
         {
-
+            _onExecutionFinished(Node, context.Counts);
         }
 
         public void ReadXml()

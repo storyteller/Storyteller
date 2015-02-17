@@ -11,10 +11,6 @@ namespace Storyteller.Core
 {
     public class NulloObserver : IObserver
     {
-        public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
-        {
-            // Nothing
-        }
 
         public void Handle<T>(T message) where T : IResultMessage
         {

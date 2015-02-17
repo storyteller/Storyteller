@@ -11,11 +11,6 @@ namespace Storyteller.Core.Engine.Batching
         private readonly IList<BatchWatcher> _watchers = new List<BatchWatcher>(); 
 
 
-        public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
-        {
-            // Nothing, only output in SpecHandled
-        }
-
         public void Handle<T>(T message) where T : IResultMessage
         {
             // Nothing

@@ -32,6 +32,8 @@ namespace Storyteller.Core.Engine
             {
                 // TODO -- track that it's finished. 
                 // TODO -- publish to the client
+
+                _observer.SpecExecutionFinished(node, counts);
             });
 
             _engine.Enqueue(request);

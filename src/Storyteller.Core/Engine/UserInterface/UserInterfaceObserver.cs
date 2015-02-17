@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model.Persistence;
@@ -11,15 +9,15 @@ namespace Storyteller.Core.Engine.UserInterface
     // TODO -- do *something* to take the publishing off of the main thread
     public class UserInterfaceObserver : IUserInterfaceObserver
     {
-        private void sendToClient(object o)
+        private static void sendToClient(object o)
         {
             var passthrough = new PassthroughMessage(o);
             EventAggregator.SendMessage(passthrough);
         }
 
-        public void SpecExecutionFinished(SpecificationPlan plan, ISpecContext context)
+        public void SpecExecutionFinished(SpecNode node, Counts counts)
         {
-            sendToClient(new SpecExecutionCompleted(plan.Specification.Id, context.Counts, 0));
+            sendToClient(new SpecExecutionCompleted(node.id, counts, 0));
         }
 
         public void Handle<T>(T message) where T : IResultMessage
