@@ -12,7 +12,6 @@ using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    // TODO -- retrofit UT's here
     public class EngineController : IResultObserver,
         IListener<RunSpec>,
         IListener<RunSpecs>,

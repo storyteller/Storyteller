@@ -54,6 +54,32 @@ namespace Storyteller.Core.Testing.Engine
     }
 
     [TestFixture]
+    public class when_receiving_the_spec_execution_finished : EngineControllerContext
+    {
+        protected override void theContextIs()
+        {
+            ClassUnderTest.Receive(new RunSpec { id = "embeds" });
+            var node = findSpec("embeds");
+            ClassUnderTest.SpecExecutionFinished(node, new Counts(1, 0, 0 , 0));
+
+
+        }
+
+        [Test]
+        public void removes_the_outstanding_request()
+        {
+            ClassUnderTest.OutstandingRequests().Any()
+                .ShouldBeFalse();
+        }
+
+        [Test]
+        public void sends_a_conpletion_message_to_the_client()
+        {
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", new Counts(1, 0, 0, 0), 0)));
+        }
+    }
+
+    [TestFixture]
     public class when_receiving_a_run_specs_message : EngineControllerContext
     {
         protected override void theContextIs()

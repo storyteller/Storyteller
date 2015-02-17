@@ -24,5 +24,26 @@ namespace Storyteller.Core.Messages
 
         [JsonProperty("time")]
         public DateTime Time { get; set; }
+
+        protected bool Equals(SpecExecutionCompleted other)
+        {
+            return string.Equals(Id, other.Id) && Equals(Counts, other.Counts);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((SpecExecutionCompleted) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Id != null ? Id.GetHashCode() : 0)*397) ^ (Counts != null ? Counts.GetHashCode() : 0);
+            }
+        }
     }
 }
