@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -55,6 +56,65 @@ namespace Storyteller.Core.Testing.Engine
             ClassUnderTest.AssertWasCalled(x => x.RunSpec("a"));
             ClassUnderTest.AssertWasCalled(x => x.RunSpec("b"));
             ClassUnderTest.AssertWasCalled(x => x.RunSpec("c"));
+        }
+    }
+
+    [TestFixture]
+    public class when_receiving_a_request_to_cancel_a_spec : EngineControllerContext
+    {
+        private SpecExecutionRequest theOutstandingRequest;
+
+        protected override void theContextIs()
+        {
+            ClassUnderTest.Receive(new RunSpec { id = "embeds" });
+            theOutstandingRequest = ClassUnderTest.OutstandingRequests().Single();
+
+            ClassUnderTest.Receive(new CancelSpec{id = "embeds"});
+        }
+
+        [Test]
+        public void the_outstanding_request_should_be_cancelled()
+        {
+            theOutstandingRequest.IsCancelled.ShouldBeTrue();
+        }
+
+        [Test]
+        public void should_be_removed_from_the_outstanding_request_list()
+        {
+            ClassUnderTest.OutstandingRequests()
+                .Any().ShouldBeFalse();
+        }
+    }
+
+    [TestFixture]
+    public class When_receiving_the_request_to_cancel_all_specs : EngineControllerContext
+    {
+        private IEnumerable<SpecExecutionRequest> theOutstandingRequests;
+
+        protected override void theContextIs()
+        {
+            ClassUnderTest.Receive(new RunSpec { id = "embeds" });
+            ClassUnderTest.Receive(new RunSpec { id = "set1" });
+            ClassUnderTest.Receive(new RunSpec { id = "set2" });
+            ClassUnderTest.Receive(new RunSpec { id = "sentence1" });
+
+            theOutstandingRequests = ClassUnderTest.OutstandingRequests();
+            theOutstandingRequests.Count().ShouldEqual(4);
+
+            ClassUnderTest.Receive(new CancelAllSpecs());
+        }
+
+        [Test]
+        public void all_the_outstanding_requests_should_be_canceled()
+        {
+            theOutstandingRequests.Each(x => x.IsCancelled.ShouldBeTrue());
+        }
+
+        [Test]
+        public void should_be_no_outstanding_requests()
+        {
+            ClassUnderTest.OutstandingRequests().Any()
+                .ShouldBeFalse();
         }
     }
 

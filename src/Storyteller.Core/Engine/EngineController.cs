@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
 using Storyteller.Core.Engine.UserInterface;
@@ -78,12 +80,21 @@ namespace Storyteller.Core.Engine
 
         public void Receive(CancelSpec message)
         {
-            throw new System.NotImplementedException();
+            CancelSpec(message.id);
+        }
+
+        public virtual void CancelSpec(string id)
+        {
+            _outstanding.Where(x => x.Node.id == id).Each(x => x.Cancel());
+            _outstanding.RemoveAll(x => x.Node.id == id);
         }
 
         public void Receive(CancelAllSpecs message)
         {
-            throw new System.NotImplementedException();
+            var outstanding = OutstandingRequests();
+            outstanding.Each(x => x.Cancel());
+
+            _outstanding.Clear();
         }
 
         public void Receive(RunSpecs message)
