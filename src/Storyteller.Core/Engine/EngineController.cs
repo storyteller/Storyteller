@@ -46,6 +46,8 @@ namespace Storyteller.Core.Engine
 
         public virtual void RunSpec(string id)
         {
+            if (OutstandingRequests().Any(x => x.Node.id == id)) return;
+
             var spec = findSpec(id);
             var request = new SpecExecutionRequest(spec, this);
             _outstanding.Add(request);

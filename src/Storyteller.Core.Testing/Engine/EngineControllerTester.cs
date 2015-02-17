@@ -27,6 +27,19 @@ namespace Storyteller.Core.Testing.Engine
         }
 
         [Test]
+        public void latches_on_runspec_such_that_it_will_not_double_queue()
+        {
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+
+            ClassUnderTest.OutstandingRequests().Single()
+                .Node.id.ShouldEqual("embeds");
+        }
+
+        [Test]
         public void should_broadcast_a_spec_queued_message()
         {
             MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SpecQueued(findSpec("embeds")));
@@ -47,15 +60,17 @@ namespace Storyteller.Core.Testing.Engine
         {
             Services.PartialMockTheClassUnderTest();
 
+            ClassUnderTest.Expect(x => x.RunSpec("a"));
+            ClassUnderTest.Expect(x => x.RunSpec("b"));
+            ClassUnderTest.Expect(x => x.RunSpec("c"));
+
             ClassUnderTest.Receive(new RunSpecs{list = new []{"a", "b", "c"}});
         }
 
         [Test]
         public void enqueues_each_spec()
         {
-            ClassUnderTest.AssertWasCalled(x => x.RunSpec("a"));
-            ClassUnderTest.AssertWasCalled(x => x.RunSpec("b"));
-            ClassUnderTest.AssertWasCalled(x => x.RunSpec("c"));
+            ClassUnderTest.VerifyAllExpectations();
         }
     }
 
@@ -94,9 +109,9 @@ namespace Storyteller.Core.Testing.Engine
         protected override void theContextIs()
         {
             ClassUnderTest.Receive(new RunSpec { id = "embeds" });
-            ClassUnderTest.Receive(new RunSpec { id = "set1" });
-            ClassUnderTest.Receive(new RunSpec { id = "set2" });
             ClassUnderTest.Receive(new RunSpec { id = "sentence1" });
+            ClassUnderTest.Receive(new RunSpec { id = "sentence2" });
+            ClassUnderTest.Receive(new RunSpec { id = "sentence3" });
 
             theOutstandingRequests = ClassUnderTest.OutstandingRequests();
             theOutstandingRequests.Count().ShouldEqual(4);
