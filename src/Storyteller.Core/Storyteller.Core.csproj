@@ -141,7 +141,7 @@
     <Compile Include="InDeterminateSystemTypeException.cs" />
     <Compile Include="IResultObserver.cs" />
     <Compile Include="IWithValues.cs" />
-    <Compile Include="Messages\HiearchyLoaded.cs" />
+    <Compile Include="Messages\HierarchyLoaded.cs" />
     <Compile Include="Messages\ClientMessage.cs" />
     <Compile Include="Messages\RunSpec.cs" />
     <Compile Include="Messages\RuntimeError.cs" />
