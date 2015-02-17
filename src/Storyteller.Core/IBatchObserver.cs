@@ -6,7 +6,7 @@ using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core
 {
-    public interface IBatchObserver : IResultObserver
+    public interface IBatchObserver 
     {
         void SpecRequeued(SpecificationPlan plan, ISpecContext context);
         void SpecHandled(SpecificationPlan plan, ISpecContext context);

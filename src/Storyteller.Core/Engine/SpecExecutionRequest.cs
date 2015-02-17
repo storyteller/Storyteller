@@ -9,25 +9,25 @@ namespace Storyteller.Core.Engine
 {
     public class SpecExecutionRequest
     {
-        private readonly Action<SpecNode, Counts> _onExecutionFinished;
+        private readonly IResultObserver _observer;
         public SpecNode Node { get; private set; }
         public Specification Specification { get; private set; }
         public SpecificationPlan Plan { get; private set; }
 
         public static SpecExecutionRequest For(SpecNode node)
         {
-            return new SpecExecutionRequest(node, (specNode, counts) => { });
+            return new SpecExecutionRequest(node, new NulloResultObserver());
         }
 
-        public SpecExecutionRequest(SpecNode node, Action<SpecNode, Counts> onExecutionFinished)
+        public SpecExecutionRequest(SpecNode node, IResultObserver observer)
         {
-            _onExecutionFinished = onExecutionFinished;
+            _observer = observer;
             Node = node;
         }
 
         public void SpecExecutionFinished(ISpecContext context)
         {
-            _onExecutionFinished(Node, context.Counts);
+            _observer.SpecExecutionFinished(Node, context.Counts);
         }
 
         private void performAction(Action action )
@@ -60,6 +60,14 @@ namespace Storyteller.Core.Engine
             });
         }
 
+        public ISpecContext CreateContext(StopConditions stopConditions, IExecutionContext execution)
+        {
+            var context = new SpecContext(_observer, stopConditions, execution.Services);
+            Context = context;
+
+            return context;
+        }
+
         public void Cancel()
         {
             IsCancelled = true;
@@ -67,6 +75,7 @@ namespace Storyteller.Core.Engine
             // TODO -- if the cancellation token exists, cancel that too
         }
 
+        public ISpecContext Context { get; private set; }
         public bool IsCancelled { get; private set; }
     }
 }

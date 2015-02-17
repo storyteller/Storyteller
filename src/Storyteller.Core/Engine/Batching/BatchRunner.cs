@@ -48,14 +48,14 @@ namespace Storyteller.Core.Engine.Batching
 
         public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
         {
-            var context = new SpecContext(_resultObserver, _stopConditions, execution.Services);
+            var context = request.CreateContext(_stopConditions, execution);
 
             
             return Task.Factory.StartNew(() =>
             {
                 execute(request, context, queue);
 
-                return context as ISpecContext;
+                return context;
             }, context.Cancellation);
         }
 

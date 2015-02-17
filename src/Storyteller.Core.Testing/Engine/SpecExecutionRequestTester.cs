@@ -43,14 +43,14 @@ namespace Storyteller.Core.Testing.Engine
         [Test]
         public void finishing_a_spec()
         {
-            var action = MockRepository.GenerateMock<Action<SpecNode, Counts>>();
+            var action = MockRepository.GenerateMock<IResultObserver>();
 
             var request = new SpecExecutionRequest(theSpec, action);
             var context = SpecContext.Basic();
 
             request.SpecExecutionFinished(context);
 
-            action.AssertWasCalled(x => x.Invoke(theSpec, context.Counts));
+            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, context.Counts));
         }
 
         [Test]

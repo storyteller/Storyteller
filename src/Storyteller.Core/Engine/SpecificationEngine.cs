@@ -22,12 +22,12 @@ namespace Storyteller.Core.Engine
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
 
-        public SpecificationEngine(ISystem system, IResultObserver observer, ISpecRunner runner)
+        public SpecificationEngine(ISystem system, ISpecRunner runner)
         {
             _system = system;
             _runner = runner;
 
-            _execution = new ExecutionQueue(system, runner, observer);
+            _execution = new ExecutionQueue(system, runner);
             _planning = new PlanningQueue(_execution);
             _reader = new ReaderQueue(_planning);
         }

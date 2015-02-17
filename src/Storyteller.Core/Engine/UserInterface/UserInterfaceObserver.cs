@@ -9,35 +9,30 @@ namespace Storyteller.Core.Engine.UserInterface
     // TODO -- do *something* to take the publishing off of the main thread
     public class UserInterfaceObserver : IUserInterfaceObserver
     {
-        private static void sendToClient(object o)
+        public void SendToClient(object o)
         {
             var passthrough = new PassthroughMessage(o);
             EventAggregator.SendMessage(passthrough);
         }
 
-        public void SpecExecutionFinished(SpecNode node, Counts counts)
-        {
-            sendToClient(new SpecExecutionCompleted(node.id, counts, 0));
-        }
-
         public void Handle<T>(T message) where T : IResultMessage
         {
-            sendToClient(message);
+            SendToClient(message);
         }
 
         public void SpecQueued(SpecNode node)
         {
-            sendToClient(new SpecQueued(node.id));
+            SendToClient(new SpecQueued(node.id));
         }
 
         public void SendProgress(SpecProgress progress)
         {
-            sendToClient(progress);
+            SendToClient(progress);
         }
 
         public void SpecStarted(SpecificationPlan plan)
         {
-            sendToClient(new SpecRunning(plan.Specification.Id));
+            SendToClient(new SpecRunning(plan.Specification.Id));
         }
     }
 }

@@ -3,11 +3,12 @@ using Storyteller.Core.Engine.UserInterface;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes.Messaging;
+using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Engine
 {
     // TODO -- retrofit UT's here
-    public class EngineController : IListener<RunSpec>
+    public class EngineController : IListener<RunSpec>, IResultObserver
     {
         private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
@@ -28,13 +29,7 @@ namespace Storyteller.Core.Engine
             _observer.SpecQueued(spec);
 
 
-            var request = new SpecExecutionRequest(spec, (node, counts) =>
-            {
-                // TODO -- track that it's finished. 
-                // TODO -- publish to the client
-
-                _observer.SpecExecutionFinished(node, counts);
-            });
+            var request = new SpecExecutionRequest(spec,this);
 
             _engine.Enqueue(request);
         }
@@ -44,6 +39,16 @@ namespace Storyteller.Core.Engine
         {
             var hierarchy = HierarchyLoader.ReadHierarchy();
             return hierarchy.GetAllSpecs().FirstOrDefault(x => x.id == id);
+        }
+
+        void IResultObserver.Handle<T>(T message)
+        {
+            _observer.SendToClient(message);
+        }
+
+        public void SpecExecutionFinished(SpecNode node, Counts counts)
+        {
+            _observer.SendToClient(new SpecExecutionCompleted(node.id, counts, 0));
         }
     }
 }

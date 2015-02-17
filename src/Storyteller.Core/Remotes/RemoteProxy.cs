@@ -67,7 +67,7 @@ namespace Storyteller.Core.Remotes
         private SpecificationEngine buildUserInterfaceEngine()
         {
             var observer = new UserInterfaceObserver();
-            var engine  = new SpecificationEngine(_system, observer, new InstrumentedRunner(observer));
+            var engine  = new SpecificationEngine(_system, new InstrumentedRunner(observer));
             _controller = new EngineController(engine, observer);
             EventAggregator.Messaging.AddListener(_controller);
 
@@ -77,7 +77,7 @@ namespace Storyteller.Core.Remotes
         private SpecificationEngine buildBatchedEngine()
         {
             var batchObserver = new BatchObserver();
-            var engine = new SpecificationEngine(_system, batchObserver, new BatchRunner(batchObserver));
+            var engine = new SpecificationEngine(_system, new BatchRunner(batchObserver));
 
             _controller = new BatchController(engine, batchObserver);
 

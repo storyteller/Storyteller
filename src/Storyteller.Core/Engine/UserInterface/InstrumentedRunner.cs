@@ -14,8 +14,7 @@ namespace Storyteller.Core.Engine.UserInterface
 
         public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
         {
-            var context = new SpecContext(_observer, _stopConditions, execution.Services);
-
+            var context = request.CreateContext(_stopConditions, execution);
 
             return Task.Factory.StartNew(() =>
             {
@@ -24,7 +23,7 @@ namespace Storyteller.Core.Engine.UserInterface
                 var executor = new InstrumentedExecutor(context, plan, _observer);
                 plan.AcceptVisitor(executor);
 
-                return context as ISpecContext;
+                return context;
             }, context.Cancellation);
         }
 
