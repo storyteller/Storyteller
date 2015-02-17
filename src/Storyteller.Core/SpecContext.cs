@@ -12,16 +12,16 @@ namespace Storyteller.Core
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         private readonly CancellationToken _cancellation;
         private readonly CancellationTokenSource _cancellationSource;
-        private readonly IObserver _observer;
+        private readonly IResultObserver _resultObserver;
         private readonly IServiceLocator _services;
         private readonly State _state = new State();
         private bool _hasCatastrophicException;
         private bool _hasCriticalException;
 
-        public SpecContext(IObserver observer, StopConditions stopConditions, IServiceLocator services)
+        public SpecContext(IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
             Counts = new Counts();
-            _observer = observer;
+            _resultObserver = observer;
             StopConditions = stopConditions;
             _cancellationSource = stopConditions.CreateCancellationSource();
             _cancellation = _cancellationSource.Token;
@@ -77,7 +77,7 @@ namespace Storyteller.Core
             if (result.id.IsEmpty())
                 throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
 
-            _observer.Handle(result);
+            _resultObserver.Handle(result);
             result.Tabulate(Counts);
             Results.Add(result);
         }
@@ -106,7 +106,7 @@ namespace Storyteller.Core
 
         public static SpecContext Basic()
         {
-            return new SpecContext(new NulloObserver(), new StopConditions(), new InMemoryServiceLocator());
+            return new SpecContext(new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         public static SpecContext ForTesting()

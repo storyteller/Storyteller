@@ -17,7 +17,7 @@ namespace Storyteller.Core.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new NulloObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
 
         }
 
@@ -59,7 +59,7 @@ namespace Storyteller.Core.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new NulloObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         [Test]

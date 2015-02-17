@@ -4,7 +4,7 @@ using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core.Engine.UserInterface
 {
-    public interface IUserInterfaceObserver : IObserver
+    public interface IUserInterfaceObserver : IResultObserver
     {
         void SendProgress(SpecProgress progress);
         void SpecStarted(SpecificationPlan plan);

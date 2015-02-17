@@ -9,12 +9,12 @@ namespace Storyteller.Core.Engine.Batching
     public class BatchController : IListener<BatchRunRequest>
     {
         private readonly ISpecificationEngine _engine;
-        private readonly IBatchObserver _observer;
+        private readonly IBatchObserver _resultObserver;
 
         public BatchController(ISpecificationEngine engine, IBatchObserver observer)
         {
             _engine = engine;
-            _observer = observer;
+            _resultObserver = observer;
         }
 
         public void Receive(BatchRunRequest message)
@@ -22,7 +22,7 @@ namespace Storyteller.Core.Engine.Batching
             var top = HierarchyLoader.ReadHierarchy();
             var nodes = message.Filter(top).ToArray();
 
-            var task = _observer.MonitorBatch(nodes);
+            var task = _resultObserver.MonitorBatch(nodes);
 
             nodes
                 .Select(SpecExecutionRequest.For)

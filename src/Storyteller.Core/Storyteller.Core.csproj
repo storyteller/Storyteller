@@ -143,7 +143,7 @@
     <Compile Include="ILineGrammar.cs" />
     <Compile Include="Engine\IStepExecutor.cs" />
     <Compile Include="InDeterminateSystemTypeException.cs" />
-    <Compile Include="IObserver.cs" />
+    <Compile Include="IResultObserver.cs" />
     <Compile Include="IWithValues.cs" />
     <Compile Include="Messages\HiearchyLoaded.cs" />
     <Compile Include="Messages\ClientMessage.cs" />
@@ -196,7 +196,7 @@
     <Compile Include="Model\Persistence\XmlExtensions.cs" />
     <Compile Include="Model\Persistence\XmlReader.cs" />
     <Compile Include="Model\Persistence\XmlWriter.cs" />
-    <Compile Include="NulloObserver.cs" />
+    <Compile Include="NulloResultObserver.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Remotes\EngineMode.cs" />

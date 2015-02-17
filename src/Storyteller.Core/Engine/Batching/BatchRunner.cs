@@ -6,12 +6,12 @@ namespace Storyteller.Core.Engine.Batching
 {
     public class BatchRunner : ISpecRunner
     {
-        private readonly IBatchObserver _observer;
+        private readonly IBatchObserver _resultObserver;
         private StopConditions _stopConditions = new StopConditions();
 
         public BatchRunner(IBatchObserver observer)
         {
-            _observer = observer;
+            _resultObserver = observer;
         }
 
         private void execute(SpecExecutionRequest request, ISpecContext context, IExecutionQueue queue)
@@ -25,12 +25,12 @@ namespace Storyteller.Core.Engine.Batching
                 plan.Attempts++;
                 if (ShouldRetry(plan, context))
                 {
-                    _observer.SpecRequeued(plan, context);
+                    _resultObserver.SpecRequeued(plan, context);
                     queue.Enqueue(request);
                 }
                 else
                 {
-                    _observer.SpecHandled(plan, context);
+                    _resultObserver.SpecHandled(plan, context);
                 }
 
 
@@ -48,7 +48,7 @@ namespace Storyteller.Core.Engine.Batching
 
         public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IExecutionQueue queue)
         {
-            var context = new SpecContext(_observer, _stopConditions, execution.Services);
+            var context = new SpecContext(_resultObserver, _stopConditions, execution.Services);
 
             
             return Task.Factory.StartNew(() =>

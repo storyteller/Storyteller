@@ -7,18 +7,18 @@ namespace Storyteller.Core.Engine
     {
         private readonly ISystem _system;
         private readonly ISpecRunner _runner;
-        private readonly IObserver _observer;
+        private readonly IResultObserver _resultObserver;
 
         private readonly BlockingCollection<SpecExecutionRequest> _collection =
             new BlockingCollection<SpecExecutionRequest>(new ConcurrentBag<SpecExecutionRequest>());
 
         private Task _readingTask;
 
-        public ExecutionQueue(ISystem system, ISpecRunner runner, IObserver observer)
+        public ExecutionQueue(ISystem system, ISpecRunner runner, IResultObserver observer)
         {
             _system = system;
             _runner = runner;
-            _observer = observer;
+            _resultObserver = observer;
         }
 
         public void Enqueue(SpecExecutionRequest plan)

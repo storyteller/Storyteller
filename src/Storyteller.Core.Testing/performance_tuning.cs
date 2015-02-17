@@ -38,7 +38,7 @@ namespace Storyteller.Core.Testing
 
             var library = task.Result;
 
-            var observer = new NulloObserver();
+            var observer = new NulloResultObserver();
             var stopConditions = new StopConditions();
 
             _allSpecs.Each(node =>
