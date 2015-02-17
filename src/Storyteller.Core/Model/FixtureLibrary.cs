@@ -76,7 +76,8 @@ namespace Storyteller.Core.Model
             catch (Exception e)
             {
                 var fixture = new InvalidFixture(type, e);
-                FixtureModel model = fixture.Compile(cellHandling);
+                var model = fixture.Compile(cellHandling);
+                model.implementation = type.FullName;
 
                 return new CompiledFixture
                 {

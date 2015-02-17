@@ -1,5 +1,6 @@
 ﻿using FubuTestingSupport;
 using NUnit.Framework;
+using Rhino.Mocks.Constraints;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
 
@@ -24,6 +25,13 @@ namespace Storyteller.Core.Testing.Grammars
             library.Fixtures["HanSolo"].ShouldBeOfType<AliasedFixture>();
 
             library.Fixtures.Has(new SecretFixture().Key).ShouldBeFalse();
+        }
+
+        [Test]
+        public void build_for_fixture_that_blows_up()
+        {
+            var compiled = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof (FixtureThatBlowsUp));
+            compiled.Model.implementation.ShouldEqual(typeof (FixtureThatBlowsUp).FullName);
         }
     }
 
