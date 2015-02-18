@@ -8,7 +8,7 @@ namespace Storyteller.Core.Model
         public readonly string key;
         public string implementation;
 
-        public GrammarModel[] grammars;
+        public GrammarModel[] grammars = new GrammarModel[0];
 
         public GrammarModel FindGrammar(string key)
         {
