@@ -36,6 +36,8 @@ namespace ST.Client
                 _.Scan(x =>
                 {
                     x.AssemblyContainingType<ICommand>();
+                    x.AssemblyContainingType<OpenInput>();
+
                     x.AddAllTypesOf<ICommand>();
                 });
             });

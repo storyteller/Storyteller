@@ -70,9 +70,7 @@ namespace Storyteller.Core.Testing.ST
             var specification = XmlReader.ReadFromFile(node.Filename);
             specification.Children.Add(new Comment{Text = "a new comment"});
 
-            var json = JsonSerialization.ToCleanJson(specification);
-
-            ClassUnderTest.SaveSpecificationBody(node.id, json);
+            ClassUnderTest.SaveSpecificationBody(node.id, specification);
 
             var written = XmlReader.ReadFromFile(node.Filename);
             written.Children.Last().ShouldBeOfType<Comment>()

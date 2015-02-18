@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Xml;
-using Bottles.Services;
 using FubuCore;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes;
-using JsonSerialization = Storyteller.Core.Remotes.Messaging.JsonSerialization;
+using Storyteller.Core.Remotes.Messaging;
 using XmlReader = Storyteller.Core.Model.Persistence.XmlReader;
 using XmlWriter = Storyteller.Core.Model.Persistence.XmlWriter;
 
 namespace ST.Client
 {
-    // TODO -- add commands to delegate?
-    // TODO -- the commands will have to do Lazy<IPersistenceController>
-
     public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable
     {
         private readonly IRemoteController _engine;
@@ -41,12 +33,9 @@ namespace ST.Client
         {
             _specPath = path.ToFullPath();
 
-            _lock.Write(() =>
-            {
-                _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
-            });
+            _lock.Write(() => { _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy(); });
 
-            
+
             _watcher.StartWatching(path, this);
         }
 
@@ -56,8 +45,7 @@ namespace ST.Client
         }
 
 
-        // TODO -- need an ICommand that can handle "save-spec-body"
-        public void SaveSpecificationBody(string id, string json)
+        public void SaveSpecificationBody(string id, Specification specification)
         {
             _lock.Read(() =>
             {
@@ -67,7 +55,6 @@ namespace ST.Client
 
                 using (_watcher.LatchFile(spec.Filename))
                 {
-                    var specification = JsonSerialization.Deserialize<Specification>(json);
                     specification.ReadNode(spec);
 
                     var document = new XmlDocument();
@@ -80,12 +67,8 @@ namespace ST.Client
 
                 return true;
             });
-
-
-
         }
 
-        // TODO -- need an ICommand for "clone-spec"
         public SpecNodeAdded CloneSpecification(string id, string name)
         {
             return _lock.Read(() =>
@@ -122,8 +105,6 @@ namespace ST.Client
                     };
                 }
             });
-
-
         }
 
         public SpecNodeAdded AddSpec(string path, string name)
@@ -157,8 +138,6 @@ namespace ST.Client
                     };
                 }
             });
-
-
         }
 
         public SpecNodeChanged SaveSpecHeader(string id, Action<Specification> alteration)
@@ -188,8 +167,6 @@ namespace ST.Client
                     };
                 }
             });
-
-
         }
 
         public string LoadSpecificationJson(string id)
@@ -202,8 +179,6 @@ namespace ST.Client
                 var specification = XmlReader.ReadFromFile(spec.Filename);
                 return JsonSerialization.ToCleanJson(specification);
             });
-
-
         }
 
         public void Changed(string file)
