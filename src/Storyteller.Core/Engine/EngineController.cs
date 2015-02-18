@@ -48,6 +48,8 @@ namespace Storyteller.Core.Engine
             if (OutstandingRequests().Any(x => x.Node.id == id)) return;
 
             var spec = findSpec(id);
+            if (spec == null) return;
+
             var request = new SpecExecutionRequest(spec, this);
             _outstanding.Add(request);
 
@@ -87,6 +89,7 @@ namespace Storyteller.Core.Engine
         public void Receive(CancelSpec message)
         {
             CancelSpec(message.id);
+            
         }
 
         public virtual void CancelSpec(string id)
@@ -97,12 +100,18 @@ namespace Storyteller.Core.Engine
                 x.Dispose();
             });
             _outstanding.RemoveAll(x => x.Node.id == id);
+
+            _observer.SendToClient(new SpecCanceled(id));
         }
 
         public void Receive(CancelAllSpecs message)
         {
             var outstanding = OutstandingRequests();
-            outstanding.Each(x => x.Cancel());
+            outstanding.Each(x =>
+            {
+                x.Cancel();
+                _observer.SendToClient(new SpecCanceled(x.Node.id));
+            });
 
             _outstanding.Clear();
         }

@@ -76,6 +76,7 @@
     <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />
     <Compile Include="IBatchObserver.cs" />
     <Compile Include="Messages\AddSpec.cs" />
+    <Compile Include="Messages\CancelAllSpecs.cs" />
     <Compile Include="Messages\CancelSpec.cs" />
     <Compile Include="Messages\ForceRecycle.cs" />
     <Compile Include="Messages\MarkAsAccepted.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Messages\ClientMessage.cs" />
     <Compile Include="Messages\CloneSpec.cs" />
     <Compile Include="Messages\RunSpec.cs" />
+    <Compile Include="Messages\RunSpecs.cs" />
     <Compile Include="Messages\RuntimeError.cs" />
     <Compile Include="Messages\SaveSpecBody.cs" />
     <Compile Include="Messages\SpecCanceled.cs" />

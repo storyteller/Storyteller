@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using FubuCore;
 using Storyteller.Core;
 
 namespace StoryTeller.Samples.Fixtures
@@ -67,6 +69,7 @@ namespace StoryTeller.Samples.Fixtures
         public void StartWithTheNumber(int number)
         {
             _number = number;
+            //Thread.Sleep(15.Seconds());
         }
 
         // END:  ActionMethod
@@ -76,11 +79,15 @@ namespace StoryTeller.Samples.Fixtures
         {
             _number *= multiplier;
             _number += delta;
+
+            //Thread.Sleep(15.Seconds());
         }
 
         public void Subtract(int operand)
         {
             _number -= operand;
+
+            //Thread.Sleep(15.Seconds());
         }
 
         public void DivideBy(int operand)

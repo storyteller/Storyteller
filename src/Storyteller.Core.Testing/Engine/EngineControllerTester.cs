@@ -125,6 +125,12 @@ namespace Storyteller.Core.Testing.Engine
             ClassUnderTest.OutstandingRequests()
                 .Any().ShouldBeFalse();
         }
+
+        [Test]
+        public void should_send_a_spec_canceled_message()
+        {
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("embeds")));
+        }
     }
 
     [TestFixture]
@@ -143,6 +149,15 @@ namespace Storyteller.Core.Testing.Engine
             theOutstandingRequests.Count().ShouldEqual(4);
 
             ClassUnderTest.Receive(new CancelAllSpecs());
+        }
+
+        [Test]
+        public void should_broadcast_the_spec_canceled_message()
+        {
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("embeds")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("sentence1")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("sentence2")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("sentence3")));
         }
 
         [Test]

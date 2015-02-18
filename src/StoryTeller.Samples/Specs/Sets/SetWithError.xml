@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Test name="Set with Error" lifecycle="Acceptance">
+<Test name="Set with Error" lifecycle="Acceptance" id="set3">
   <Sets>
     <ThrowsErrorOnDataFetch>
       <rows id="1">

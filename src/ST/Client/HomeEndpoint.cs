@@ -33,7 +33,7 @@ namespace ST.Client
             _document.Head.Append(_document.Css("assets/client/public/stylesheets/bootstrap.min.css", "assets/client/css/storyteller.css"));
             _document.Head.Add("link").Attr("rel", "stylesheet").Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
 
-            _document.Body.Append(_document.Script("bundle.js"));
+            _document.Body.Append(_document.Script("assets/client/public/javascript/bundle.js"));
 
             return _document;
         }

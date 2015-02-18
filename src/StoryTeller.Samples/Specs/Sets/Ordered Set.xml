@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Test name="Ordered Set" lifecycle="Acceptance">
+<Test name="Ordered Set" lifecycle="Acceptance" id="set1">
   <Sets>
     <InvoiceDetailsAre>
       <Rows>

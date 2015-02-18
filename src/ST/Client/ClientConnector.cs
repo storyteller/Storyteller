@@ -62,6 +62,7 @@ namespace ST.Client
         {
             _sockets.Clear();
             if (_server != null) _server.Dispose();
+
         }
 
         public void Receive(PassthroughMessage message)
@@ -72,6 +73,9 @@ namespace ST.Client
         public void SendMessageToClient(object message)
         {
             var json = JsonSerialization.ToCleanJson(message);
+
+            Console.WriteLine("Sending: " + message);
+
             _sockets.Each(x => x.Send(json));
         }
 
