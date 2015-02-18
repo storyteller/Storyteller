@@ -47,7 +47,7 @@ namespace Storyteller.Core.Engine
         {
             performAction(() =>
             {
-                Specification = XmlReader.ReadFromFile(Node.filename);
+                Specification = XmlReader.ReadFromFile(Node.Filename);
                 Specification.Id = Node.id;
             });
         }

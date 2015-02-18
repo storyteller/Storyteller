@@ -67,14 +67,14 @@ namespace Storyteller.Core.Testing.ST
         public void save_specification_body()
         {
             var node = ClassUnderTest.Hierarchy.Nodes["embeds"];
-            var specification = XmlReader.ReadFromFile(node.filename);
+            var specification = XmlReader.ReadFromFile(node.Filename);
             specification.Children.Add(new Comment{Text = "a new comment"});
 
             var json = JsonSerialization.ToCleanJson(specification);
 
             ClassUnderTest.SaveSpecificationBody(node.id, json);
 
-            var written = XmlReader.ReadFromFile(node.filename);
+            var written = XmlReader.ReadFromFile(node.Filename);
             written.Children.Last().ShouldBeOfType<Comment>()
                 .Text.ShouldEqual("a new comment");
         }
@@ -99,7 +99,7 @@ namespace Storyteller.Core.Testing.ST
             added.node.id.ShouldNotEqual("sentence2");
             added.node.name.ShouldEqual("New Sentence");
             
-            added.node.filename.ShouldEqual(expectedPath);
+            added.node.Filename.ShouldEqual(expectedPath);
 
             ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
 
@@ -120,10 +120,10 @@ namespace Storyteller.Core.Testing.ST
             var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.xml");
 
             added.node.name.ShouldEqual("The Third Sentence");
-            added.node.filename.ShouldEqual(expectedPath);
+            added.node.Filename.ShouldEqual(expectedPath);
             added.node.lifecycle.ShouldEqual("Acceptance");
 
-            added.node.filename.ShouldEqual(expectedPath);
+            added.node.Filename.ShouldEqual(expectedPath);
 
             ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
 
@@ -150,10 +150,10 @@ namespace Storyteller.Core.Testing.ST
                 .ShouldBeTrue();
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].ShouldEqual(changed.node);
-            changed.node.filename.ShouldEqual(node.filename);
+            changed.node.Filename.ShouldEqual(node.Filename);
 
             // wrote the file
-            XmlReader.ReadFromFile(node.filename).Lifecycle.ShouldEqual(Lifecycle.Regression);
+            XmlReader.ReadFromFile(node.Filename).Lifecycle.ShouldEqual(Lifecycle.Regression);
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace Storyteller.Core.Testing.ST
         [Test]
         public void change_a_file()
         {
-            var file = ClassUnderTest.Hierarchy.Nodes["general1"].filename;
+            var file = ClassUnderTest.Hierarchy.Nodes["general1"].Filename;
             var old = XmlReader.ReadFromFile(file);
             old.Lifecycle = Lifecycle.Regression;
             XmlWriter.WriteToXml(old).Save(file);
@@ -206,7 +206,7 @@ namespace Storyteller.Core.Testing.ST
         [Test]
         public void file_deleted()
         {
-            var file = ClassUnderTest.Hierarchy.Nodes["paragraph1"].filename;
+            var file = ClassUnderTest.Hierarchy.Nodes["paragraph1"].Filename;
 
             File.Delete(file);
 

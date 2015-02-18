@@ -69,7 +69,7 @@ namespace Storyteller.Core.Testing.Engine
         [Test]
         public void read_xml_sad_path()
         {
-            var request = SpecExecutionRequest.For(new SpecNode {filename = "nonexistent.xml"});
+            var request = SpecExecutionRequest.For(new SpecNode {Filename = "nonexistent.xml"});
 
             EventAggregator.Messaging.AddListener(listener);
 

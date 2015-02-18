@@ -43,7 +43,7 @@ namespace Storyteller.Core.Testing
 
             _allSpecs.Each(node =>
             {
-                var spec = XmlReader.ReadFromFile(node.filename);
+                var spec = XmlReader.ReadFromFile(node.Filename);
                 var plan = spec.CreatePlan(library);
 
                 using (var execution = system.CreateContext())

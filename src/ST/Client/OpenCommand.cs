@@ -23,6 +23,7 @@ namespace ST.Client
 
             var container = new Container(_ =>
             {
+                _.For<ISpecFileWatcher>().Use<SpecFileWatcher>();
                 _.For<IRemoteController>().Use(controller);
                 _.For<StorytellerContext>().Use(context);
                 _.ForSingletonOf<IClientConnector>().Use<ClientConnector>();

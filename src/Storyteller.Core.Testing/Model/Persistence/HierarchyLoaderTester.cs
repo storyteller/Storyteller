@@ -23,7 +23,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
             spec.name.ShouldEqual("Check properties");
             spec.lifecycle.ShouldEqual("Acceptance");
             spec.id.ShouldEqual("general1"); 
-            spec.filename.ShouldEqual(path);
+            spec.Filename.ShouldEqual(path);
         }
 
         [Test]

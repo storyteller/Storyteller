@@ -1,3 +1,4 @@
+using FubuCore;
 using Newtonsoft.Json;
 
 namespace Storyteller.Core.Model.Persistence
@@ -9,8 +10,14 @@ namespace Storyteller.Core.Model.Persistence
         public string lifecycle;
         public string id;
 
+        private string _fileName;
+
         [JsonIgnore]
-        public string filename;
+        public string Filename
+        {
+            get { return _fileName; }
+            set { _fileName = value.ToFullPath(); }
+        }
 
         public void WritePath(string parentPath)
         {

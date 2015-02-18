@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,11 +19,6 @@ namespace ST.Client
 {
     // TODO -- add commands to delegate?
     // TODO -- the commands will have to do Lazy<IPersistenceController>
-    public interface IPersistenceController
-    {
-        Hierarchy Hierarchy { get; }
-        void StartWatching(string path);
-    }
 
     public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable
     {
@@ -68,17 +65,17 @@ namespace ST.Client
 
                 var spec = _hierarchy.Nodes[id];
 
-                using (_watcher.LatchFile(spec.filename))
+                using (_watcher.LatchFile(spec.Filename))
                 {
                     var specification = JsonSerialization.Deserialize<Specification>(json);
                     specification.ReadNode(spec);
 
                     var document = new XmlDocument();
-                    document.Load(spec.filename);
+                    document.Load(spec.Filename);
 
                     XmlWriter.WriteBody(specification, document.DocumentElement);
 
-                    document.Save(spec.filename);
+                    document.Save(spec.Filename);
                 }
 
                 return true;
@@ -96,7 +93,7 @@ namespace ST.Client
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var spec = _hierarchy.Nodes[id];
-                var template = XmlReader.ReadFromFile(spec.filename);
+                var template = XmlReader.ReadFromFile(spec.Filename);
                 template.Id = Guid.NewGuid().ToString();
                 template.Name = name;
                 template.Lifecycle = Lifecycle.Acceptance;
@@ -113,7 +110,7 @@ namespace ST.Client
                     document.Save(file);
 
                     var node = template.ToNode();
-                    node.filename = file;
+                    node.Filename = file;
                     _hierarchy.Nodes[template.Id] = node;
 
                     suite.AddSpec(node);
@@ -149,7 +146,7 @@ namespace ST.Client
                     XmlWriter.WriteToXml(specification).Save(file);
 
                     var node = specification.ToNode();
-                    node.filename = file;
+                    node.Filename = file;
                     _hierarchy.Nodes[node.id] = node;
                     suite.AddSpec(node);
 
@@ -171,16 +168,16 @@ namespace ST.Client
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var old = _hierarchy.Nodes[id];
-                using (_watcher.LatchFile(old.filename))
+                using (_watcher.LatchFile(old.Filename))
                 {
-                    var specification = XmlReader.ReadFromFile(old.filename);
+                    var specification = XmlReader.ReadFromFile(old.Filename);
 
                     alteration(specification);
 
-                    XmlWriter.WriteToXml(specification).Save(old.filename);
+                    XmlWriter.WriteToXml(specification).Save(old.Filename);
 
                     var node = specification.ToNode();
-                    node.filename = old.filename;
+                    node.Filename = old.Filename;
 
                     _hierarchy.Nodes[node.id] = node;
                     _hierarchy.Suites[old.SuitePath()].ReplaceNode(node);
@@ -202,7 +199,7 @@ namespace ST.Client
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var spec = _hierarchy.Nodes[id];
-                var specification = XmlReader.ReadFromFile(spec.filename);
+                var specification = XmlReader.ReadFromFile(spec.Filename);
                 return JsonSerialization.ToCleanJson(specification);
             });
 
@@ -263,18 +260,5 @@ namespace ST.Client
         {
             _watcher.Dispose();
         }
-    }
-
-    public interface ISpecFileObserver
-    {
-        void Changed(string file);
-        void Added(string file);
-        void Deleted(string file);
-    }
-
-    public interface ISpecFileWatcher : IDisposable
-    {
-        IDisposable LatchFile(string file);
-        void StartWatching(string path, ISpecFileObserver observer);
     }
 }

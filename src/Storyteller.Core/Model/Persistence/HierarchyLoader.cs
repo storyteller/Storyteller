@@ -58,7 +58,7 @@ namespace Storyteller.Core.Model.Persistence
                     id = reader.GetAttribute("id") ?? Guid.NewGuid().ToString(),
                     name = reader.GetAttribute("name"),
                     lifecycle = reader.GetAttribute("lifecycle") ?? Lifecycle.Acceptance.ToString(),
-                    filename = filename
+                    Filename = filename
                 };
 
                 return node;

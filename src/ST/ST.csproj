@@ -90,12 +90,16 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Client\ClientConnectorActivator.cs" />
+    <Compile Include="Client\IPersistenceController.cs" />
+    <Compile Include="Client\ISpecFileObserver.cs" />
+    <Compile Include="Client\ISpecFileWatcher.cs" />
     <Compile Include="Client\OpenInput.cs" />
     <Compile Include="Client\ClientConnector.cs" />
     <Compile Include="Client\HomeEndpoint.cs" />
     <Compile Include="Client\IClientConnector.cs" />
     <Compile Include="Client\OpenCommand.cs" />
     <Compile Include="Client\PersistenceController.cs" />
+    <Compile Include="Client\SpecFileWatcher.cs" />
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
     <Compile Include="Program.cs" />
