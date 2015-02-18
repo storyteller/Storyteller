@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using FubuCore;
 using FubuTestingSupport;
@@ -46,6 +47,16 @@ namespace Storyteller.Core.Testing.Model.Persistence
 
             Debug.WriteLine(json);
              * */
+        }
+
+        [Test]
+        public void SuitePathOf_spec_path()
+        {
+            var hierarchy = TestingContext.Hierarchy.ToHierarchy();
+            hierarchy.Suites["General"].specs.Each(x =>
+            {
+                x.SuitePath().ShouldEqual("General");
+            });
         }
 
         [Test]

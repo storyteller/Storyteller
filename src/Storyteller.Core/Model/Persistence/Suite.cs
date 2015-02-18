@@ -51,5 +51,10 @@ namespace Storyteller.Core.Model.Persistence
         {
             return specs.Union(suites.SelectMany(x => x.GetAllSpecs()));
         }
+
+        public static string SuitePathOf(string path)
+        {
+            return path.Split('/').Reverse().Skip(1).Reverse().Join("/");
+        }
     }
 }

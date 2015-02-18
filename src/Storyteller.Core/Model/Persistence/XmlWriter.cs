@@ -33,6 +33,7 @@ namespace Storyteller.Core.Model.Persistence
             });
         }
 
+
         public static XmlElement WriteSpecRoot(Specification specification, XmlDocument document)
         {
             var root = document.WithRoot(Spec);

@@ -16,5 +16,10 @@ namespace Storyteller.Core.Model.Persistence
         {
             path = Suite.JoinPath(parentPath, name);
         }
+
+        public string SuitePath()
+        {
+            return Suite.SuitePathOf(path);
+        }
     }
 }
