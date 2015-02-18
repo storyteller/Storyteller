@@ -13,7 +13,7 @@ namespace Storyteller.Core
         private readonly CancellationToken _cancellation;
         private readonly CancellationTokenSource _cancellationSource;
         private readonly IResultObserver _resultObserver;
-        private readonly IServiceLocator _services;
+        private IServiceLocator _services;
         private readonly State _state = new State();
         private bool _hasCatastrophicException;
         private bool _hasCriticalException;
@@ -34,6 +34,7 @@ namespace Storyteller.Core
         public void Dispose()
         {
             _state.Dispose();
+            _services = null;
         }
 
         public Counts Counts { get; private set; }

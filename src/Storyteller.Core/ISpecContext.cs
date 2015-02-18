@@ -4,7 +4,7 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core
 {
-    public interface ISpecContext
+    public interface ISpecContext : IDisposable
     {
         bool CanContinue();
         bool Wait(Func<bool> condition, TimeSpan timeout);

@@ -70,7 +70,12 @@ namespace Storyteller.Core.Engine
 
         public void SpecExecutionFinished(SpecNode node, Counts counts)
         {
-            _outstanding.RemoveAll(x => x.Node == node);
+            var outstanding = _outstanding.FirstOrDefault(x => x.Node == node);
+            if (outstanding == null) return;
+
+            outstanding.Dispose();
+            _outstanding.Remove(outstanding);
+
             _observer.SendToClient(new SpecExecutionCompleted(node.id, counts, 0));
         }
 
@@ -86,7 +91,11 @@ namespace Storyteller.Core.Engine
 
         public virtual void CancelSpec(string id)
         {
-            _outstanding.Where(x => x.Node.id == id).Each(x => x.Cancel());
+            _outstanding.Where(x => x.Node.id == id).Each(x =>
+            {
+                x.Cancel();
+                x.Dispose();
+            });
             _outstanding.RemoveAll(x => x.Node.id == id);
         }
 

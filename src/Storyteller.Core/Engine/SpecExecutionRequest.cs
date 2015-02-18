@@ -7,7 +7,7 @@ using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    public class SpecExecutionRequest
+    public class SpecExecutionRequest : IDisposable
     {
         private readonly IResultObserver _observer;
         public SpecNode Node { get; private set; }
@@ -97,6 +97,11 @@ namespace Storyteller.Core.Engine
         public override int GetHashCode()
         {
             return (Node != null ? Node.GetHashCode() : 0);
+        }
+
+        public void Dispose()
+        {
+            if (Context != null) Context.Dispose();
         }
 
         public override string ToString()
