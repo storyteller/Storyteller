@@ -32,7 +32,8 @@ namespace Storyteller.Core.Model.Persistence
             {
                 name = Path.GetFileName(folder),
                 specs = FileSystem.FindFiles(folder, FileSet.Shallow("*.xml")).Select(ReadSpecNode).ToArray(),
-                suites = FileSystem.ChildDirectoriesFor(folder).Select(ReadSuite).ToArray()
+                suites = FileSystem.ChildDirectoriesFor(folder).Select(ReadSuite).ToArray(),
+                Folder = folder
             };
         }
 

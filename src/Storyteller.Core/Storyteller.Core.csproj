@@ -177,6 +177,7 @@
     <Compile Include="Model\InvalidFixture.cs" />
     <Compile Include="Model\MissingFixture.cs" />
     <Compile Include="Model\MissingFixtureException.cs" />
+    <Compile Include="Model\Persistence\Hierarchy.cs" />
     <Compile Include="Model\Persistence\JsonCreationConverter.cs" />
     <Compile Include="Model\Lifecycle.cs" />
     <Compile Include="Model\Lists\OptionList.cs" />

@@ -48,6 +48,37 @@ namespace Storyteller.Core.Testing.Model.Persistence
              * */
         }
 
+        [Test]
+        public void convert_the_top_suite_to_a_hierarchy_gets_the_suites()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs");
+
+
+            var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
+
+            hierarchy.Suites[string.Empty].ShouldNotBeNull();
+            hierarchy.Suites[string.Empty].suites.Count().ShouldEqual(6);
+
+            hierarchy.Suites.Select(x => x.path)
+                .ShouldHaveTheSameElementsAs("", "Embedded", "General", "Paragraphs", "Sentences", "Sets", "Tables");
+        }
+
+
+        [Test]
+        public void convert_the_top_suite_to_a_hierarchy_gets_the_specs()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs");
+
+
+            var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
+
+            hierarchy.Nodes["embeds"].ShouldNotBeNull();
+            hierarchy.Nodes["sentence1"].ShouldNotBeNull();
+            hierarchy.Nodes["sentence2"].ShouldNotBeNull();
+        }
+
         [Test, Explicit]
         public void pretty_print_for_sample_data()
         {
