@@ -27,7 +27,10 @@ namespace ST.Client
                 _.For<StorytellerContext>().Use(context);
                 _.ForSingletonOf<IClientConnector>().Use<ClientConnector>();
 
+                _.ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
+
                 _.For<IActivator>().Add<ClientConnectorActivator>();
+                _.For<IActivator>().Add<StartWatchingFilesActivator>();
 
                 _.Scan(x =>
                 {

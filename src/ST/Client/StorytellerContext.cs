@@ -25,22 +25,22 @@ namespace ST.Client
 
                 return t.Result;
             });
-            _hierarchy = _input.ReadHierarchy();
         }
 
         public void WaitForResults()
         {
-            Task.WhenAll(_startup, _hierarchy).Wait();
+            _startup.Wait();
         }
+
+        public string SpecPath
+        {
+            get { return _input.SpecPath; }
+        }
+
 
         public Task<SystemRecycled> Startup
         {
             get { return _startup; }
-        }
-
-        public Task<Suite> Hierarchy
-        {
-            get { return _hierarchy; }
         }
     }
 }

@@ -29,7 +29,10 @@ namespace Storyteller.Core.Model.Persistence
 
         public Hierarchy ToHierarchy()
         {
-            var hierarchy = new Hierarchy();
+            var hierarchy = new Hierarchy
+            {
+                Top = this
+            };
 
             organizeIntoHierarchy(hierarchy);
 
