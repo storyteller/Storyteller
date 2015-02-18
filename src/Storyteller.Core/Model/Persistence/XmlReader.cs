@@ -16,6 +16,27 @@ namespace Storyteller.Core.Model.Persistence
 
         public static Specification ReadFromXml(XmlDocument document)
         {
+            XmlElement top;
+            var spec = ReadHeaderInformation(document);
+
+
+            document.DocumentElement.ForEachElement(element =>
+            {
+                if (element.Name == Comment)
+                {
+                    spec.Children.Add(ReadComment(element));
+                }
+                else
+                {
+                    spec.Children.Add(ReadSection(element));
+                }
+            });
+
+            return spec;
+        }
+
+        public static Specification ReadHeaderInformation(XmlDocument document)
+        {
             var spec = new Specification();
             var top = document.DocumentElement;
             spec.Name = top.GetAttribute("name");
@@ -34,20 +55,6 @@ namespace Storyteller.Core.Model.Persistence
             {
                 spec.Tags.AddRange(tags.ToDelimitedArray());
             }
-
-
-            top.ForEachElement(element =>
-            {
-                if (element.Name == Comment)
-                {
-                    spec.Children.Add(ReadComment(element));
-                }
-                else
-                {
-                    spec.Children.Add(ReadSection(element));
-                }
-            });
-
             return spec;
         }
 

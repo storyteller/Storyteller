@@ -10,8 +10,15 @@ namespace Storyteller.Core.Model.Persistence
         public static XmlDocument WriteToXml(Specification specification)
         {
             var document = new XmlDocument();
-            var root = writeSpecRoot(specification, document);
+            var root = WriteSpecRoot(specification, document);
 
+            WriteBody(specification, root);
+
+            return document;
+        }
+
+        public static void WriteBody(Specification specification, XmlElement root)
+        {
             specification.Children.Each(child =>
             {
                 if (child is Comment)
@@ -24,11 +31,9 @@ namespace Storyteller.Core.Model.Persistence
                     root.WriteSection(TypeExtensions.As<Section>(child));
                 }
             });
-
-            return document;
         }
 
-        private static XmlElement writeSpecRoot(Specification specification, XmlDocument document)
+        public static XmlElement WriteSpecRoot(Specification specification, XmlDocument document)
         {
             var root = document.WithRoot(Spec);
             root.SetAttribute(Id, specification.Id);
@@ -38,5 +43,7 @@ namespace Storyteller.Core.Model.Persistence
 
             return root;
         }
+
+        
     }
 }
