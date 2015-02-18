@@ -9,6 +9,6 @@ namespace Storyteller.Core.Engine.UserInterface
         void SendProgress(SpecProgress progress);
         void SpecStarted(SpecificationPlan plan);
         void SpecQueued(SpecNode nodes);
-        void SendToClient(object o);
+        void SendToClient(object message);
     }
 }

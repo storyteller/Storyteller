@@ -76,7 +76,6 @@ namespace Storyteller.Core.Conversion
 
         public StepResult ToConversionErrorResult()
         {
-            // TODO -- do the pretty string of the error on this
             return new StepResult(Id, ResultStatus.ok)
             {
                 cells = Errors.ToArray()
@@ -85,7 +84,7 @@ namespace Storyteller.Core.Conversion
 
         public void LogError(string key, Exception ex)
         {
-            Errors.Add(CellResult.Error(key, ex));
+            Errors.Add(CellResult.Error(key, ex.ToDisplayMessage()));
         }
 
         public void LogError(string key, string message)

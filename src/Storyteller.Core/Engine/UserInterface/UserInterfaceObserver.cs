@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model.Persistence;
@@ -7,12 +10,26 @@ using Storyteller.Core.Results;
 namespace Storyteller.Core.Engine.UserInterface
 {
     // TODO -- do *something* to take the publishing off of the main thread
-    public class UserInterfaceObserver : IUserInterfaceObserver
+    public class UserInterfaceObserver : IUserInterfaceObserver, IDisposable
     {
-        public void SendToClient(object o)
+        private readonly BlockingCollection<object> _messages = new BlockingCollection<object>(new ConcurrentQueue<object>());
+        private Task _readingTask;
+
+        public UserInterfaceObserver()
         {
-            var passthrough = new PassthroughMessage(o);
-            EventAggregator.SendMessage(passthrough);
+            _readingTask = Task.Factory.StartNew(() =>
+            {
+                foreach (var message in _messages.GetConsumingEnumerable())
+                {
+                    var passthrough = new PassthroughMessage(message);
+                    EventAggregator.SendMessage(passthrough);
+                }
+            });
+        }
+
+        public void SendToClient(object message)
+        {
+            _messages.Add(message);
         }
 
         public void Handle<T>(T message) where T : IResultMessage
@@ -33,6 +50,12 @@ namespace Storyteller.Core.Engine.UserInterface
         public void SpecStarted(SpecificationPlan plan)
         {
             SendToClient(new SpecRunning(plan.Specification.Id));
+        }
+
+        public void Dispose()
+        {
+            _messages.CompleteAdding();
+            _messages.Dispose();
         }
     }
 }

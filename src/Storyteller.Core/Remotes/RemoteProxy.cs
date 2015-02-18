@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using FubuCore;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Engine.Batching;
@@ -13,11 +15,12 @@ namespace Storyteller.Core.Remotes
         private SpecificationEngine _engine;
         private Project _project;
         private ISystem _system;
+        private readonly IList<IDisposable> _services = new List<IDisposable>();
 
         public void Dispose()
         {
-            if (_engine != null) _engine.Dispose();
-            if (_system != null) _system.Dispose();
+            _services.Each(x => x.Dispose());
+            _services.Clear();
         }
 
         public override object InitializeLifetimeService()
@@ -37,6 +40,7 @@ namespace Storyteller.Core.Remotes
             {
                 systemType = _project.DetermineSystemType();
                 _system = Activator.CreateInstance(systemType).As<ISystem>();
+                _services.Add(_system);
 
                 _engine = mode == EngineMode.Batch
                     ? buildBatchedEngine()
@@ -67,8 +71,14 @@ namespace Storyteller.Core.Remotes
         private SpecificationEngine buildUserInterfaceEngine()
         {
             var observer = new UserInterfaceObserver();
+
             var engine  = new SpecificationEngine(_system, new InstrumentedRunner(observer));
             _controller = new EngineController(engine, observer);
+
+
+            _services.Add(observer);
+            _services.Add(engine);
+
             EventAggregator.Messaging.AddListener(_controller);
 
             return engine;
@@ -80,6 +90,8 @@ namespace Storyteller.Core.Remotes
             var engine = new SpecificationEngine(_system, new BatchRunner(batchObserver));
 
             _controller = new BatchController(engine, batchObserver);
+
+            _services.Add(engine);
 
             EventAggregator.Messaging.AddListener(_controller);
 
