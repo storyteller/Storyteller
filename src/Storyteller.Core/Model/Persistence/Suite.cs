@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
@@ -55,6 +56,20 @@ namespace Storyteller.Core.Model.Persistence
         public static string SuitePathOf(string path)
         {
             return path.Split('/').Reverse().Skip(1).Reverse().Join("/");
+        }
+
+        public void ReplaceNode(SpecNode node)
+        {
+            var index = Array.IndexOf(specs, node);
+            if (index > -1)
+            {
+                specs[index] = node;
+            }
+        }
+
+        public void AddSpec(SpecNode node)
+        {
+            specs = specs.Union(new[] {node}).ToArray();
         }
     }
 }

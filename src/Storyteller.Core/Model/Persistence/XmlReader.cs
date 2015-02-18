@@ -50,6 +50,8 @@ namespace Storyteller.Core.Model.Persistence
             var maxRetries = top.GetAttribute(MaxRetries);
             spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
+            spec.Name = top.GetAttribute(Name);
+
             var tags = top.GetAttribute(TagsAtt);
             if (tags.IsNotEmpty())
             {

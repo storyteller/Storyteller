@@ -8,5 +8,6 @@ namespace Storyteller.Core.Model.Persistence
         public const string TagsAtt = "tags";
         public const string Comment = "Comment";
         public const string Spec = "Spec";
+        public const string Name = "name";
     }
 }

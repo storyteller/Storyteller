@@ -4,5 +4,7 @@ namespace ST.Client
     {
         string WebSocketsAddress { get; }
         void Start();
+
+        void SendMessageToClient(object message);
     }
 }

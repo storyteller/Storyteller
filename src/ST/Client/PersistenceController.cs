@@ -25,24 +25,18 @@ namespace ST.Client
 
     public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable
     {
-        private readonly IRemoteController _controller;
-        private readonly IClientConnector _connector;
+        private readonly IRemoteController _engine;
+        private readonly IClientConnector _client;
         private readonly ISpecFileWatcher _watcher;
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
-        // TODO -- harden this puppy for errors
 
-        // TODO -- add a FileSystemWatcher on the specs.
-        // TODO -- publish 'hierarchy-loaded' to both client and remote
-        // TODO -- publish SpecChanged messages when detected by file system watcher
-
-
-        public PersistenceController(IRemoteController controller, IClientConnector connector, ISpecFileWatcher watcher)
+        public PersistenceController(IRemoteController engine, IClientConnector client, ISpecFileWatcher watcher)
         {
-            _controller = controller;
-            _connector = connector;
+            _engine = engine;
+            _client = client;
             _watcher = watcher;
         }
 
@@ -83,6 +77,8 @@ namespace ST.Client
                     document.Load(spec.filename);
 
                     XmlWriter.WriteBody(specification, document.DocumentElement);
+
+                    document.Save(spec.filename);
                 }
 
                 return true;
@@ -107,13 +103,20 @@ namespace ST.Client
 
                 var suitePath = spec.SuitePath();
 
-                var file = Specification.DetermineFilename(name);
+                var filename = Specification.DetermineFilename(name);
+                var suite = _hierarchy.Suites[suitePath];
+                var file = suite.Folder.AppendPath(filename);
+
                 using (_watcher.LatchFile(file))
                 {
-                    XmlWriter.WriteToXml(template);
+                    var document = XmlWriter.WriteToXml(template);
+                    document.Save(file);
 
                     var node = template.ToNode();
+                    node.filename = file;
                     _hierarchy.Nodes[template.Id] = node;
+
+                    suite.AddSpec(node);
 
                     return new SpecNodeAdded
                     {
@@ -132,7 +135,8 @@ namespace ST.Client
             {
                 if (!_hierarchy.Suites.Has(path)) return null;
 
-                var folder = _hierarchy.Suites[path].Folder;
+                var suite = _hierarchy.Suites[path];
+                var folder = suite.Folder;
                 var specification = new Specification
                 {
                     Name = name
@@ -144,10 +148,15 @@ namespace ST.Client
                 {
                     XmlWriter.WriteToXml(specification).Save(file);
 
+                    var node = specification.ToNode();
+                    node.filename = file;
+                    _hierarchy.Nodes[node.id] = node;
+                    suite.AddSpec(node);
+
                     return new SpecNodeAdded
                     {
                         suite = path,
-                        node = specification.ToNode()
+                        node = node
                     };
                 }
             });
@@ -161,18 +170,24 @@ namespace ST.Client
             {
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
-                var spec = _hierarchy.Nodes[id];
-                using (_watcher.LatchFile(spec.filename))
+                var old = _hierarchy.Nodes[id];
+                using (_watcher.LatchFile(old.filename))
                 {
-                    var specification = XmlReader.ReadFromFile(spec.filename);
+                    var specification = XmlReader.ReadFromFile(old.filename);
 
                     alteration(specification);
 
-                    XmlWriter.WriteToXml(specification).Save(spec.filename);
+                    XmlWriter.WriteToXml(specification).Save(old.filename);
+
+                    var node = specification.ToNode();
+                    node.filename = old.filename;
+
+                    _hierarchy.Nodes[node.id] = node;
+                    _hierarchy.Suites[old.SuitePath()].ReplaceNode(node);
 
                     return new SpecNodeChanged
                     {
-                        node = specification.ToNode()
+                        node = node
                     };
                 }
             });
@@ -182,26 +197,56 @@ namespace ST.Client
 
         public string LoadSpecificationJson(string id)
         {
-            var spec = _hierarchy.Nodes[id];
-            var specification = XmlReader.ReadFromFile(spec.filename);
-            return JsonSerialization.ToCleanJson(specification);
+            return _lock.Read(() =>
+            {
+                if (!_hierarchy.Nodes.Has(id)) return null;
+
+                var spec = _hierarchy.Nodes[id];
+                var specification = XmlReader.ReadFromFile(spec.filename);
+                return JsonSerialization.ToCleanJson(specification);
+            });
+
+
         }
 
         public void Changed(string file)
         {
-            // TODO -- reload the file
-            // TODO -- replace in hierarchy
-            // publish spec-changed message
+            _lock.Read(() =>
+            {
+                var node = HierarchyLoader.ReadSpecNode(file);
+                if (_hierarchy.Nodes.Has(node.id))
+                {
+                    var old = _hierarchy.Nodes[node.id];
+                    var suite = _hierarchy.Suites[old.SuitePath()];
 
-            throw new NotImplementedException();
+                    suite.ReplaceNode(node);
+                    _hierarchy.Nodes[node.id] = node;
+
+                    node.WritePath(suite.path);
+                }
+
+                _client.SendMessageToClient(new SpecChanged
+                {
+                    node = node
+                });
+
+                return true;
+            });
         }
 
         private void reloadHierarchy()
         {
-            // Need to lock
-            // Need to broadcast to engine
-            // Need to broadcast to client
-            throw new NotImplementedException();
+            _lock.Write(() =>
+            {
+                _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
+                var message = new HierarchyLoaded
+                {
+                    root = _hierarchy.Top
+                };
+
+                _client.SendMessageToClient(message);
+                _engine.SendMessage(message);
+            });
         }
 
         public void Added(string file)
