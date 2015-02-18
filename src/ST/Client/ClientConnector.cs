@@ -69,7 +69,7 @@ namespace ST.Client
             _sockets.Each(x => x.Send(message.json));
         }
 
-        private void sendMessage(object message)
+        public void SendMessageToClient(object message)
         {
             var json = JsonSerialization.ToCleanJson(message);
             _sockets.Each(x => x.Send(json));
@@ -78,12 +78,12 @@ namespace ST.Client
         public void Receive(SystemRecycled message)
         {
             message.WriteSystemUsage();
-            sendMessage(message);
+            SendMessageToClient(message);
         }
 
         public void Receive(SystemRecycleStarted message)
         {
-            sendMessage(message);
+            SendMessageToClient(message);
         }
 
         public void HandleJson(string json)
@@ -97,6 +97,8 @@ namespace ST.Client
                 }
                 else
                 {
+                    // TODO -- do an FT kind of thing and have cascading messages
+                    // If it's string, just kick it out as json
                     command.HandleJson(json);
                 }
             }

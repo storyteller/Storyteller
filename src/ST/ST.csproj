@@ -95,6 +95,7 @@
     <Compile Include="Client\HomeEndpoint.cs" />
     <Compile Include="Client\IClientConnector.cs" />
     <Compile Include="Client\OpenCommand.cs" />
+    <Compile Include="Client\PersistenceController.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

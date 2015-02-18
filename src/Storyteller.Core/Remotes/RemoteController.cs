@@ -12,6 +12,8 @@ namespace Storyteller.Core.Remotes
         void SendJsonMessage(string json);
         void AddListener(object listener);
         void Recycle();
+        void SendMessage<T>(T message);
+        RemoteController.ResponseExpression Send<T>(T message);
     }
 
     public class RemoteController : IDisposable, IRemoteController
