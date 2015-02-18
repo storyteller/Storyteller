@@ -48,6 +48,25 @@ namespace Storyteller.Core.Testing
             result.error.ShouldEqual(exception.ToString());
             result.position.ShouldEqual(Stage.setup);
         }
+
+        [Test]
+        public void wait_is_true_if_the_condition_is_already_true()
+        {
+            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 0, 500)).ShouldBeTrue();
+        }
+
+        [Test]
+        public void wait_is_false_if_the_condition_is_never_met()
+        {
+            theContext.Wait(() => false, new TimeSpan(0, 0, 0, 0, 100), 25).ShouldBeFalse();
+        }
+
+        [Test]
+        public void automatically_false_if_the_context_is_cancelled()
+        {
+            theContext.RequestCancellation();
+            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 500)).ShouldBeFalse();
+        }
     }
 
     [TestFixture]

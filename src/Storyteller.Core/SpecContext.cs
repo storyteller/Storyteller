@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using FubuCore;
 using Storyteller.Core.Model;
@@ -7,7 +8,7 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core
 {
-    public class SpecContext : ISpecContext, IDisposable
+    public class SpecContext : ISpecContext
     {
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         private readonly CancellationToken _cancellation;
@@ -57,10 +58,30 @@ namespace Storyteller.Core
             return StopConditions.CanContinue(Counts);
         }
 
-        // TODO -- need to implement this
-        public bool Wait(Func<bool> condition, TimeSpan timeout)
+        public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
-            throw new NotImplementedException();
+            if (Cancellation.IsCancellationRequested) return false;
+            if (condition()) return true;
+
+            var clock = new Stopwatch();
+            clock.Start();
+
+            try
+            {
+                while (clock.Elapsed < timeout && !Cancellation.IsCancellationRequested)
+                {
+                    Thread.Yield();
+                    Thread.Sleep(millisecondPolling);
+
+                    if (condition()) return true;
+                }
+
+                return false;
+            }
+            finally
+            {
+                clock.Stop();
+            }
         }
 
         public T Service<T>()
