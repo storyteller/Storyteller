@@ -169,16 +169,21 @@ namespace ST.Client
             });
         }
 
-        public string LoadSpecificationJson(string id)
+        public Specification LoadSpecification(string id)
         {
             return _lock.Read(() =>
             {
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var spec = _hierarchy.Nodes[id];
-                var specification = XmlReader.ReadFromFile(spec.Filename);
-                return JsonSerialization.ToCleanJson(specification);
+                return XmlReader.ReadFromFile(spec.Filename);
             });
+        }
+
+        public string LoadSpecificationJson(string id)
+        {
+            var specification = LoadSpecification(id);
+            return JsonSerialization.ToCleanJson(specification);
         }
 
         public void Changed(string file)

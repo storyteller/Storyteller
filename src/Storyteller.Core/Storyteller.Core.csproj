@@ -155,6 +155,8 @@
     <Compile Include="Messages\SaveSpecBody.cs" />
     <Compile Include="Messages\SpecCanceled.cs" />
     <Compile Include="Messages\SpecChanged.cs" />
+    <Compile Include="Messages\SpecData.cs" />
+    <Compile Include="Messages\SpecDataRequested.cs" />
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
     <Compile Include="Messages\SpecNodeAdded.cs" />
     <Compile Include="Messages\SpecNodeChanged.cs" />

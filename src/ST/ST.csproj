@@ -101,6 +101,7 @@
     <Compile Include="Client\PersistenceController.cs" />
     <Compile Include="Client\Persistence\CloneSpecCommand.cs" />
     <Compile Include="Client\Persistence\AddSpecCommand.cs" />
+    <Compile Include="Client\Persistence\RequestSpecDataCommand.cs" />
     <Compile Include="Client\Persistence\SaveSpecBodyCommand.cs" />
     <Compile Include="Client\SpecFileWatcher.cs" />
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
