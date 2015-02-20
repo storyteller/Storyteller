@@ -9,7 +9,6 @@ using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Engine.UserInterface
 {
-    // TODO -- do *something* to take the publishing off of the main thread
     public class UserInterfaceObserver : IUserInterfaceObserver, IDisposable
     {
         private readonly BlockingCollection<object> _messages = new BlockingCollection<object>(new ConcurrentQueue<object>());

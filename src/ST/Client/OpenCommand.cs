@@ -27,6 +27,8 @@ namespace ST.Client
                 _.For<IRemoteController>().Use(controller);
                 _.For<StorytellerContext>().Use(context);
                 _.ForSingletonOf<IClientConnector>().Use<ClientConnector>();
+                _.ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
+                _.For<IActivator>().Add<StartWatchingAssets>();
 
                 _.ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
 
