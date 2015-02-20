@@ -64,6 +64,17 @@ namespace Storyteller.Core.Remotes.Messaging
             return writer.ToString();
         }
 
+        public static string ToIndentedJson(object o)
+        {
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.None, Formatting = Formatting.Indented};
+
+            var writer = new StringWriter();
+            serializer.Serialize(writer, o);
+
+            return writer.ToString();
+        }
+
+
         public static string FormatJson(this string json)
         {
             return JToken.Parse(json).ToString(Formatting.Indented);
