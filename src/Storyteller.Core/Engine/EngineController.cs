@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
 using Storyteller.Core.Engine.UserInterface;
 using Storyteller.Core.Messages;
+using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes.Messaging;
 
@@ -40,17 +42,17 @@ namespace Storyteller.Core.Engine
 
         public void Receive(RunSpec message)
         {
-            RunSpec(message.id);
+            RunSpec(message.id, message.spec);
         }
 
-        public virtual void RunSpec(string id)
+        public virtual void RunSpec(string id, Specification specification = null)
         {
             if (OutstandingRequests().Any(x => x.Node.id == id)) return;
 
             var spec = findSpec(id);
             if (spec == null) return;
 
-            var request = new SpecExecutionRequest(spec, this);
+            var request = new SpecExecutionRequest(spec, this, specification);
             _outstanding.Add(request);
 
             _observer.SpecQueued(spec);
@@ -118,7 +120,7 @@ namespace Storyteller.Core.Engine
 
         public void Receive(RunSpecs message)
         {
-            message.list.Each(RunSpec);
+            message.list.Each(x => RunSpec(x));
         }
     }
 }

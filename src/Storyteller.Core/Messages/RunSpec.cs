@@ -1,4 +1,4 @@
-﻿using Storyteller.Core.Model.Persistence;
+﻿using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Messages
 {
@@ -9,5 +9,6 @@ namespace Storyteller.Core.Messages
         }
 
         public string id;
+        public Specification spec;
     }
 }

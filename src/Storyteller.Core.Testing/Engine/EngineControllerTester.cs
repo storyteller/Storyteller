@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Engine.UserInterface;
 using Storyteller.Core.Messages;
+using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 
 namespace Storyteller.Core.Testing.Engine
 {
 
     [TestFixture]
-    public class when_receiving_a_run_spec_message : EngineControllerContext
+    public class when_receiving_a_run_spec_message_with_only_the_id : EngineControllerContext
     {
         protected override void theContextIs()
         {
@@ -51,6 +53,56 @@ namespace Storyteller.Core.Testing.Engine
             MockFor<ISpecificationEngine>().AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
         }
 
+    }
+
+
+    [TestFixture]
+    public class when_receiving_a_run_spec_message_with_the_actual_spec : EngineControllerContext
+    {
+        private Specification theSpecification;
+
+        protected override void theContextIs()
+        {
+            theSpecification = new Specification();
+            ClassUnderTest.Receive(new RunSpec { id = "embeds", spec = theSpecification });
+        }
+
+        [Test]
+        public void should_keep_track_of_outstanding_request()
+        {
+            ClassUnderTest.OutstandingRequests().Single()
+                .Node.id.ShouldEqual("embeds");
+        }
+
+        [Test]
+        public void latches_on_runspec_such_that_it_will_not_double_queue()
+        {
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+            ClassUnderTest.RunSpec("embeds");
+
+            ClassUnderTest.OutstandingRequests().Single()
+                .Node.id.ShouldEqual("embeds");
+        }
+
+        [Test]
+        public void should_broadcast_a_spec_queued_message()
+        {
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SpecQueued(findSpec("embeds")));
+        }
+
+        [Test]
+        public void should_enqueue_the_specification()
+        {
+            var specificationEngine = MockFor<ISpecificationEngine>();
+            specificationEngine.AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
+
+            var request = specificationEngine.GetArgumentsForCallsMadeOn(x => x.Enqueue(null))[0][0].As<SpecExecutionRequest>();
+
+            request.Specification.ShouldBeTheSameAs(theSpecification);
+        }
     }
 
     [TestFixture]

@@ -19,10 +19,11 @@ namespace Storyteller.Core.Engine
             return new SpecExecutionRequest(node, new NulloResultObserver());
         }
 
-        public SpecExecutionRequest(SpecNode node, IResultObserver observer)
+        public SpecExecutionRequest(SpecNode node, IResultObserver observer, Specification specification = null)
         {
             _observer = observer;
             Node = node;
+            Specification = specification;
         }
 
         public void SpecExecutionFinished(ISpecContext context)

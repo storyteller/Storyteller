@@ -58,7 +58,16 @@ namespace Storyteller.Core.Engine
 
         public void Enqueue(SpecExecutionRequest request)
         {
-            _reader.Enqueue(request);
+            if (request.Specification == null)
+            {
+                _reader.Enqueue(request);
+            }
+            else
+            {
+                _planning.Enqueue(request);
+            }
+
+           
         }
 
 
