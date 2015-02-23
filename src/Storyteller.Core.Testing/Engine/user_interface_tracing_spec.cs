@@ -30,7 +30,7 @@ namespace Storyteller.Core.Testing.Engine
         [TestFixtureSetUp]
         public void SetUp()
         {
-            var controller = controllerForProject("Storyteller.Samples");
+            var controller = controllerForProject("StoryTeller.Samples");
             theListener = new PassthroughListener();
             
 

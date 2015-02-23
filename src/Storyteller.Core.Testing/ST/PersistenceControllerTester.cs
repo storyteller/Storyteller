@@ -26,7 +26,7 @@ namespace Storyteller.Core.Testing.ST
         public void CopyFiles()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+                .AppendPath("StoryTeller.Samples", "Specs");
 
             thePath = ".".ToFullPath().AppendPath(Guid.NewGuid().ToString());
             var fileSystem = new FileSystem();

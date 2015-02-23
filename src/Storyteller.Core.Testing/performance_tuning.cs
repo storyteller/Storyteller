@@ -9,6 +9,8 @@ using Storyteller.Core.Engine.Batching;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using StoryTeller.Samples;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Storyteller.Core.Testing
 {
@@ -17,7 +19,7 @@ namespace Storyteller.Core.Testing
     {
         private readonly string _folder = ".".ToFullPath()
             .ParentDirectory().ParentDirectory().ParentDirectory()
-            .AppendPath("Storyteller.Samples", "Specs");
+            .AppendPath("StoryTeller.Samples", "Specs");
 
         private Suite _hierarchy;
         private SpecNode[] _allSpecs;

@@ -21,7 +21,7 @@ namespace Storyteller.Core.Testing
         private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() =>
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+                .AppendPath("StoryTeller.Samples", "Specs");
 
             return HierarchyLoader.ReadHierarchy(path);
 
