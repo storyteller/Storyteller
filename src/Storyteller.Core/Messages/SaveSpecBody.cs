@@ -11,6 +11,7 @@ namespace Storyteller.Core.Messages
         public string id;
         public string revision;
         public Specification spec;
+        public string time = DateTime.Now.ToString("t");
     }
 
     public class SpecBodySaved : ClientMessage
@@ -21,6 +22,7 @@ namespace Storyteller.Core.Messages
 
         public string id;
         public string revision;
+
 
         protected bool Equals(SpecBodySaved other)
         {
