@@ -57,7 +57,7 @@ namespace Storyteller.Core.Testing.ST
     {
         public readonly IList<T> Received = new List<T>();
 
-        protected override void HandleMessage(T message)
+        public override void HandleMessage(T message)
         {
             Received.Add(message);
         }

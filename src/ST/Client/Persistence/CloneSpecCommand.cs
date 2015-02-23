@@ -15,7 +15,7 @@ namespace ST.Client.Persistence
             _client = client;
         }
 
-        protected override void HandleMessage(CloneSpec message)
+        public override void HandleMessage(CloneSpec message)
         {
             var added = _controller.Value.CloneSpecification(message.id, message.name);
 

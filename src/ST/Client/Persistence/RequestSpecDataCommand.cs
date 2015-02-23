@@ -15,7 +15,7 @@ namespace ST.Client.Persistence
             _client = client;
         }
 
-        protected override void HandleMessage(SpecDataRequested message)
+        public override void HandleMessage(SpecDataRequested message)
         {
             var specification = _persistence.Value.LoadSpecification(message.id);
 

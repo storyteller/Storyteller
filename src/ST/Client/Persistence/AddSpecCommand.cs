@@ -13,7 +13,7 @@ namespace ST.Client.Persistence
             _controller = controller;
         }
 
-        protected override void HandleMessage(AddSpec message)
+        public override void HandleMessage(AddSpec message)
         {
             _controller.Value.AddSpec(message.suite, message.name);
         }

@@ -12,7 +12,7 @@ namespace Storyteller.Core.Commands
             _controller = controller;
         }
 
-        protected override void HandleMessage(ForceRecycle message)
+        public override void HandleMessage(ForceRecycle message)
         {
             _controller.Recycle();
         }

@@ -147,6 +147,7 @@
     <Compile Include="StoryTellerAssertTester.cs" />
     <Compile Include="ST\ClientConnectorTester.cs" />
     <Compile Include="ST\PersistenceControllerTester.cs" />
+    <Compile Include="ST\SaveSpecBodyCommandTester.cs" />
     <Compile Include="TestingContext.cs" />
     <Compile Include="Conversion\StringConverterProviderTester.cs" />
   </ItemGroup>

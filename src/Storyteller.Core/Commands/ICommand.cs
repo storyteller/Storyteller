@@ -17,7 +17,7 @@ namespace Storyteller.Core.Commands
             HandleMessage(message);
         }
 
-        protected abstract void HandleMessage(T message);
+        public abstract void HandleMessage(T message);
 
         public bool Matches(string json)
         {
