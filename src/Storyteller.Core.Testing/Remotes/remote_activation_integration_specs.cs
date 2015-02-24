@@ -24,7 +24,7 @@ namespace Storyteller.Core.Testing.Remotes
         [Test]
         public void load_directory_where_matching_assembly_only_has_one_system()
         {
-            using (var controller = controllerForProject("Storyteller.Samples"))
+            using (var controller = controllerForProject("StoryTeller.Samples"))
             {
                 var task = controller.Start(EngineMode.Batch);
                 task.Wait(5.Seconds());
@@ -40,7 +40,7 @@ namespace Storyteller.Core.Testing.Remotes
         [Test]
         public void load_directory_with_no_system_should_just_use_the_nullo_system()
         {
-            using (var controller = controllerForProject("Storyteller.Gallery"))
+            using (var controller = controllerForProject("StoryTeller.Gallery"))
             {
                 var task = controller.Start(EngineMode.Batch);
                 task.Wait(5.Seconds());

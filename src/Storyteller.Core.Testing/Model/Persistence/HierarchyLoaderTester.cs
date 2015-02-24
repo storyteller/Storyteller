@@ -16,7 +16,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
         public void read_a_spec_node()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+                .AppendPath("StoryTeller.Samples", "Specs", "General", "Check properties.xml");
 
             var spec = HierarchyLoader.ReadSpecNode(path);
 
@@ -30,7 +30,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
         public void read_an_entire_suite()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+                .AppendPath("StoryTeller.Samples", "Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);
@@ -63,7 +63,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
         public void convert_the_top_suite_to_a_hierarchy_gets_the_suites()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+                .AppendPath("StoryTeller.Samples", "Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
@@ -80,7 +80,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
         public void convert_the_top_suite_to_a_hierarchy_gets_the_specs()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+                .AppendPath("StoryTeller.Samples", "Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
@@ -94,7 +94,7 @@ namespace Storyteller.Core.Testing.Model.Persistence
         public void pretty_print_for_sample_data()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+                .AppendPath("StoryTeller.Samples", "Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);

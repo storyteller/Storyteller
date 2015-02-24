@@ -20,7 +20,7 @@ namespace Storyteller.Core.Testing.CommandLine
         public void SetUp()
         {
             var directory = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples");
+                .AppendPath("StoryTeller.Samples");
 
             theController = new RemoteController(directory);
 

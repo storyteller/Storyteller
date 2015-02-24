@@ -33,6 +33,7 @@ end
   
 	sln.options[:nuget_publish_folder] = 'nupkgs'
 	sln.options[:nuget_publish_url] = 'https://www.myget.org/F/fubumvc-edge/'
+  sln.options[:unit_test_projects] = [ "Storyteller.Core.Testing" ]
 end
 
 require_relative 'ILRepack'

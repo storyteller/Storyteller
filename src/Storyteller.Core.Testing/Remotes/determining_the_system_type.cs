@@ -13,7 +13,7 @@ namespace Storyteller.Core.Testing.Remotes
             // GrammarSystem is the only type in the Samples project
 
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples");
+                .AppendPath("StoryTeller.Samples");
 
             var controller = new RemoteController(path);
         }

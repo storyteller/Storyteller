@@ -16,7 +16,7 @@ namespace Storyteller.Core.Testing
     {
         private readonly string _folder = ".".ToFullPath()
             .ParentDirectory().ParentDirectory().ParentDirectory()
-            .AppendPath("Storyteller.Samples", "Specs");
+            .AppendPath("StoryTeller.Samples", "Specs");
 
         private Suite _hierarchy;
         private SpecNode[] _allSpecs;
