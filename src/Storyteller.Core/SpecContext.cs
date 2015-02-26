@@ -19,6 +19,7 @@ namespace Storyteller.Core
         private bool _hasCatastrophicException;
         private bool _hasCriticalException;
 
+        // TODO -- take in the specification id, or maybe just the Specification
         public SpecContext(IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
             Counts = new Counts();
