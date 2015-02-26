@@ -64,6 +64,7 @@ namespace Storyteller.Core.Engine
         public ISpecContext CreateContext(StopConditions stopConditions, IExecutionContext execution)
         {
             var context = new SpecContext(_observer, stopConditions, execution.Services);
+            context.Id = Node.id;
             Context = context;
 
             return context;

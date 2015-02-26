@@ -94,10 +94,14 @@ namespace Storyteller.Core
             get { return _state; }
         }
 
+        public string Id { get; set; }
+
         public void LogResult<T>(T result) where T : IResultMessage
         {
             if (result.id.IsEmpty())
                 throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
+
+            result.spec = Id;
 
             _resultObserver.Handle(result);
             result.Tabulate(Counts);

@@ -6,6 +6,7 @@ using FubuTestingSupport;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Storyteller.Core.Model;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Testing.Model.Persistence
 {
@@ -147,6 +148,8 @@ namespace Storyteller.Core.Testing.Model.Persistence
             
 
             original.AddSection("Math").Children.Add(step);
+
+            Debug.WriteLine(JsonSerialization.ToIndentedJson(original));
 
             var persistedStep = persisted
                 .Children.Single().ShouldBeOfType<Section>()

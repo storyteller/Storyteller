@@ -2,16 +2,23 @@ using System.Collections.Generic;
 using System.Linq;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Messages;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Grammars.Sets
 {
-    public class SetVerificationResult : IResultMessage
+    public class SetVerificationResult : ClientMessage, IResultMessage
     {
         private readonly IList<IDictionary<string, object>> _extras = new List<IDictionary<string, object>>();
         private readonly IList<string> _matches = new List<string>();
         private readonly IList<string> _missing = new List<string>();
         private readonly IList<WrongOrder> _wrongOrders = new List<WrongOrder>();
+
+        public SetVerificationResult() : base("set-verification-result")
+        {
+        }
+
+        public string spec { get; set; }
 
         public string[] matches
         {

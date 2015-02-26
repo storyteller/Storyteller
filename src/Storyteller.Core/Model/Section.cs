@@ -30,6 +30,8 @@ namespace Storyteller.Core.Model
         public Section(string key)
         {
             Key = key;
+
+            if (Id.IsEmpty()) throw new InvalidOperationException("Id cannot be empty or null");
         }
 
         public CompositeExecution CreatePlan(FixtureLibrary library)
@@ -43,7 +45,7 @@ namespace Storyteller.Core.Model
 
         public CompositeExecution CreatePlan(FixtureLibrary library, IFixture fixture)
         {
-            return new CompositeExecution(toExecutionSteps(library, fixture));
+            return new CompositeExecution(toExecutionSteps(library, fixture).ToArray());
         }
 
         private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, IFixture fixture)

@@ -17,7 +17,6 @@ namespace Storyteller.Core
         void RequestCancellation();
 
         Counts Counts { get; }
-
-
+        string Id { get; set; }
     }
 }

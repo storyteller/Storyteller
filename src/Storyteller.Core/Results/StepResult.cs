@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Messages;
 
 namespace Storyteller.Core.Results
 {
     public enum Stage
     {
-        body,
         setup,
         teardown,
         before,
         after
     }
 
-    public class StepResult : IResultMessage
+    public class StepResult : ClientMessage, IResultMessage
     {
-        public StepResult(string id, ResultStatus status)
+        public StepResult(string id, ResultStatus status) : base("step-result")
         {
             this.status = status;
             this.id = id;
@@ -25,10 +25,11 @@ namespace Storyteller.Core.Results
 
         public StepResult(string id, Exception ex) : this(id, ResultStatus.error)
         {
+            error = ex.ToDisplayMessage();
         }
 
         public string id { get; set; }
-
+        public string spec { get; set; }
         public object position;
         public ResultStatus status;
         public string error;

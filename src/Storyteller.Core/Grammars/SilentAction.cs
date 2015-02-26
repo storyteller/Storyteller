@@ -37,6 +37,11 @@ namespace Storyteller.Core.Grammars
 
         public SilentAction(object position, Action<ISpecContext> action, Node node)
         {
+            if (node.Id.IsEmpty())
+            {
+                throw new ArgumentOutOfRangeException("node", "The node must have an id");
+            }
+
             Position = position;
             _action = action;
             _node = node;

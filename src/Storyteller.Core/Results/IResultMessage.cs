@@ -10,5 +10,7 @@ namespace Storyteller.Core.Results
         string id { get; set; }
 
         string type { get; }
+
+        string spec { get; set; }
     }
 }

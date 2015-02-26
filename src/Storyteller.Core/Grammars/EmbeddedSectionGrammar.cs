@@ -40,7 +40,7 @@ namespace Storyteller.Core.Grammars
                 return sectionPlan;
             }
 
-            var silentAction = new SilentAction(Stage.before, _before, step);
+            var silentAction = new SilentAction(Stage.before, _before, section);
             return new CompositeExecution(new IExecutionStep[]{silentAction, sectionPlan});
         }
 

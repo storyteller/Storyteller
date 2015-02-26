@@ -67,6 +67,15 @@ namespace Storyteller.Core.Testing
             theContext.RequestCancellation();
             theContext.Wait(() => true, new TimeSpan(0, 0, 0, 500)).ShouldBeFalse();
         }
+
+        [Test]
+        public void puts_the_spec_id_on_result_messages()
+        {
+            theContext.Id = Guid.NewGuid().ToString();
+            theContext.LogException("1", new NotImplementedException());
+
+            theContext.Results.Last().spec.ShouldEqual(theContext.Id);
+        }
     }
 
     [TestFixture]

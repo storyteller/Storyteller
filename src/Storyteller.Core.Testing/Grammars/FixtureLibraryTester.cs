@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using FubuTestingSupport;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Rhino.Mocks.Constraints;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Testing.Grammars
 {
@@ -29,6 +31,28 @@ namespace Storyteller.Core.Testing.Grammars
             library.Fixtures["HanSolo"].ShouldBeOfType<AliasedFixture>();
 
             library.Fixtures.Has(new SecretFixture().Key).ShouldBeFalse();
+        }
+
+        [Test]
+        public void serialize_for_TableFixture()
+        {
+            var library = TestingContext.Library;
+            Debug.WriteLine(JsonSerialization.ToIndentedJson(library.Models["Table"]));
+        }
+
+
+        [Test]
+        public void serialize_for_CompositeFixture()
+        {
+            var library = TestingContext.Library;
+            Debug.WriteLine(JsonSerialization.ToIndentedJson(library.Models["Composite"].FindGrammar("AddAndMultiply")));
+        }
+
+        [Test]
+        public void serialize_for_SentenceFixture()
+        {
+            var library = TestingContext.Library;
+            Debug.WriteLine(JsonSerialization.ToIndentedJson(library.Models["Sentence"]));
         }
 
         [Test]
