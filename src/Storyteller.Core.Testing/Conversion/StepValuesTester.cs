@@ -71,7 +71,7 @@ namespace Storyteller.Core.Testing.Conversion
             values.DoDelayedConversions(context);
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
-            result.status.ShouldEqual(ResultStatus.error);
+            result.Status.ShouldEqual(ResultStatus.error);
             result.cell.ShouldEqual("a");
             result.error.ShouldContain("NotImplementedException");
         }
@@ -87,7 +87,7 @@ namespace Storyteller.Core.Testing.Conversion
             values.DoDelayedConversions(context);
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
-            result.status.ShouldEqual(ResultStatus.error);
+            result.Status.ShouldEqual(ResultStatus.error);
             result.cell.ShouldEqual("a");
             result.error.ShouldContain("The converter was not able to create a value. Check the formatting.");
         }

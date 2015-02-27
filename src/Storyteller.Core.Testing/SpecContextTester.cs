@@ -44,9 +44,9 @@ namespace Storyteller.Core.Testing
             theContext.LogException("1", exception, position: Stage.setup);
 
             var result = theContext.Results.Single().ShouldBeOfType<StepResult>();
-            result.status.ShouldEqual(ResultStatus.error);
+            result.Status.ShouldEqual(ResultStatus.error);
             result.error.ShouldEqual(exception.ToString());
-            result.position.ShouldEqual(Stage.setup);
+            result.position.ShouldEqual(Stage.setup.ToString());
         }
 
         [Test]

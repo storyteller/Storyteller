@@ -40,8 +40,8 @@ namespace Storyteller.Core.Testing.Grammars
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
 
             result.id.ShouldEqual(section.Id);
-            result.position.ShouldEqual(Stage.teardown);
-            result.status.ShouldEqual(ResultStatus.error);
+            result.position.ShouldEqual(Stage.teardown.ToString());
+            result.Status.ShouldEqual(ResultStatus.error);
             result.error.ShouldContain("DivideByZeroException");
 
 

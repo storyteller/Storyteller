@@ -92,7 +92,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
             var result = grammar.Execute(values, context).Single();
 
             result.cell.ShouldEqual("expected");
-            result.status.ShouldEqual(ResultStatus.success);
+            result.Status.ShouldEqual(ResultStatus.success);
         }
 
         [Test]
@@ -111,7 +111,7 @@ namespace Storyteller.Core.Testing.Grammars.Reflection
             // test data should result in a failure
             result.cell.ShouldEqual("expected");
             result.actual.ShouldEqual("Mat Cauthon");
-            result.status.ShouldEqual(ResultStatus.failed);
+            result.Status.ShouldEqual(ResultStatus.failed);
         }
 
         public class Target

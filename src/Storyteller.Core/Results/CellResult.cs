@@ -1,5 +1,6 @@
 using System;
 using FubuCore;
+using Newtonsoft.Json;
 using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
@@ -8,7 +9,16 @@ namespace Storyteller.Core.Results
     {
 
         public string id { get; set; }
-        public ResultStatus status;
+
+        [JsonIgnore]
+        public ResultStatus Status = ResultStatus.ok;
+
+        public string status
+        {
+            get { return Status.ToString(); }
+        }
+
+
         public string actual;
         public string error;
         public string cell;
@@ -16,7 +26,7 @@ namespace Storyteller.Core.Results
         public CellResult(string cell, ResultStatus status)
         {
             this.cell = cell;
-            this.status = status;
+            this.Status = status;
         }
 
         public static CellResult Ok(string cell)
@@ -76,9 +86,9 @@ namespace Storyteller.Core.Results
 
         public override string ToString()
         {
-            var value = string.Format("CellResult '{0}' = {1}", cell, status);
+            var value = string.Format("CellResult '{0}' = {1}", cell, Status);
 
-            if (status == ResultStatus.failed)
+            if (Status == ResultStatus.failed)
             {
                 value += ", actual = " + actual;
             }
@@ -93,7 +103,7 @@ namespace Storyteller.Core.Results
 
         public void Tabulate(Counts counts)
         {
-            counts.Increment(status);
+            counts.Increment(Status);
         }
 
     }

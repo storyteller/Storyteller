@@ -251,7 +251,7 @@ namespace Storyteller.Core.Testing.Model
 
             var result = values.Errors.Single();
             result.cell.ShouldEqual("Number");
-            result.status.ShouldEqual(ResultStatus.invalid);
+            result.Status.ShouldEqual(ResultStatus.invalid);
         }
 
         [Test]
@@ -267,7 +267,7 @@ namespace Storyteller.Core.Testing.Model
 
             var result = values.Errors.Single();
             result.cell.ShouldEqual("Number");
-            result.status.ShouldEqual(ResultStatus.missing);
+            result.Status.ShouldEqual(ResultStatus.missing);
         }
 
         [Test]

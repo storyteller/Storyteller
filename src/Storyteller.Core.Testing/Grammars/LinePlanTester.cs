@@ -46,7 +46,7 @@ namespace Storyteller.Core.Testing.Grammars
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
             result.id.ShouldEqual(values.Id);
-            result.status.ShouldEqual(ResultStatus.ok);
+            result.Status.ShouldEqual(ResultStatus.ok);
             result.cells.ShouldHaveTheSameElementsAs(cells);
 
         }
@@ -64,7 +64,7 @@ namespace Storyteller.Core.Testing.Grammars
             afterExecuting();
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.position.ShouldEqual(thePosition);
+            result.position.ShouldEqual(thePosition.ToString());
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace Storyteller.Core.Testing.Grammars
             afterExecuting();
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.position.ShouldEqual(thePosition);
+            result.position.ShouldEqual(thePosition.ToString());
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace Storyteller.Core.Testing.Grammars
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
             result.id.ShouldEqual(values.Id);
-            result.status.ShouldEqual(ResultStatus.ok);
+            result.Status.ShouldEqual(ResultStatus.ok);
             result.cells.ShouldHaveTheSameElementsAs(new[]
             {
                 new CellResult("a", ResultStatus.error){error = "don't like you"}
@@ -142,7 +142,7 @@ namespace Storyteller.Core.Testing.Grammars
             var result = context.Results.Single().ShouldBeOfType<StepResult>()
                 .cells.Single();
 
-            result.status.ShouldEqual(ResultStatus.error);
+            result.Status.ShouldEqual(ResultStatus.error);
             result.cell.ShouldEqual("a");
             
         }

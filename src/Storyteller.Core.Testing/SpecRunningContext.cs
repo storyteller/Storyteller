@@ -183,9 +183,9 @@ namespace Storyteller.Core.Testing
                         return "Unable to find any result for Step " + _id;
                     }
 
-                    if (result.status != ResultStatus.error)
+                    if (result.Status != ResultStatus.error)
                     {
-                        return "The status for {0} was not error.".ToFormat(_id);
+                        return "The Status for {0} was not error.".ToFormat(_id);
                     }
 
                     if (!result.error.Contains(text))
@@ -213,9 +213,9 @@ namespace Storyteller.Core.Testing
                     var result = findStepResult(c);
                     if (result != null)
                     {
-                        if (result.status != resultStatus)
+                        if (result.Status != resultStatus)
                         {
-                            return "Expected status {0} for #{1}, but got {1}".ToFormat(resultStatus, _id, result.status);
+                            return "Expected Status {0} for #{1}, but got {1}".ToFormat(resultStatus, _id, result.Status);
                         }
                     }
 
@@ -263,9 +263,9 @@ namespace Storyteller.Core.Testing
                             return "Step {0}, cell {1} cannot be found in the results".ToFormat(_parent._id, _cell);
                         }
                         
-                        if (result.status != ResultStatus.success)
+                        if (result.Status != ResultStatus.success)
                         {
-                            return "Step {0}, cell {1} should have been successful, but was {2}".ToFormat(_parent._id, _cell, result.status);
+                            return "Step {0}, cell {1} should have been successful, but was {2}".ToFormat(_parent._id, _cell, result.Status);
                         }
 
                         return null;
@@ -284,11 +284,11 @@ namespace Storyteller.Core.Testing
                             return "Step {0}, cell {1} cannot be found in the results".ToFormat(_parent._id, _cell);
                         }
 
-                        if (result.status != ResultStatus.failed)
+                        if (result.Status != ResultStatus.failed)
                         {
                             return
-                                "Step {0}, cell {1} was supposed to fail, but finished w/ status {2}".ToFormat(
-                                    _parent._id, _cell, result.status);
+                                "Step {0}, cell {1} was supposed to fail, but finished w/ Status {2}".ToFormat(
+                                    _parent._id, _cell, result.Status);
                         }
                         
                         if (result.actual != actual)
@@ -315,10 +315,10 @@ namespace Storyteller.Core.Testing
                                 return "Step {0}, cell {1} cannot be found in the results".ToFormat(_parent._id, _cell);
                             }
 
-                            if (result.status != ResultStatus.invalid)
+                            if (result.Status != ResultStatus.invalid)
                             {
                                 return
-                                    "Step {0}, cell {1} was supposed to be invalid, but finished w/ status {2}".ToFormat(
+                                    "Step {0}, cell {1} was supposed to be invalid, but finished w/ Status {2}".ToFormat(
                                         _parent._id, _cell);
                             }
 

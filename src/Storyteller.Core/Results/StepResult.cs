@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
+using Newtonsoft.Json;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Messages;
 
@@ -19,7 +20,7 @@ namespace Storyteller.Core.Results
     {
         public StepResult(string id, ResultStatus status) : base("step-result")
         {
-            this.status = status;
+            this.Status = status;
             this.id = id;
         }
 
@@ -30,24 +31,41 @@ namespace Storyteller.Core.Results
 
         public string id { get; set; }
         public string spec { get; set; }
-        public object position;
-        public ResultStatus status;
+
+        public object position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value == null ? null : value.ToString();
+            }
+        }
+
+        [JsonIgnore]
+        public ResultStatus Status;
+
+        public string status
+        {
+            get { return Status.ToString(); }
+        }
+
         public string error;
 
         public CellResult[] cells = new CellResult[0];
+        private object _position;
 
         public void Tabulate(Counts counts)
         {
-            counts.Increment(status);
+            counts.Increment(Status);
             if (cells != null)
             {
-                cells.Each(x => counts.Increment(x.status));
+                cells.Each(x => counts.Increment(x.Status));
             }
         }
 
         protected bool Equals(StepResult other)
         {
-            return string.Equals(position, other.position) && status == other.status && string.Equals(error, other.error) && string.Equals(id, other.id);
+            return string.Equals(position, other.position) && Status == other.Status && string.Equals(error, other.error) && string.Equals(id, other.id);
         }
 
         public override bool Equals(object obj)
@@ -63,7 +81,7 @@ namespace Storyteller.Core.Results
             unchecked
             {
                 int hashCode = (position != null ? position.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) status;
+                hashCode = (hashCode*397) ^ (int) Status;
                 hashCode = (hashCode*397) ^ (error != null ? error.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (id != null ? id.GetHashCode() : 0);
                 return hashCode;
@@ -78,7 +96,7 @@ namespace Storyteller.Core.Results
                 description += "." + position;
             }
 
-            description += " status: {0}".ToFormat(status);
+            description += " Status: {0}".ToFormat(Status);
             if (error.IsNotEmpty())
             {
                 description += "\n  error!\n" + error;

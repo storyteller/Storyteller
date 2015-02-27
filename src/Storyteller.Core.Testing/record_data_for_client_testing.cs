@@ -14,6 +14,7 @@ using Storyteller.Core.Remotes.Messaging;
 using Storyteller.Core.Results;
 using Storyteller.Core.Testing.Engine;
 using StoryTeller.Samples;
+using StoryTeller.Samples.Fixtures;
 
 namespace Storyteller.Core.Testing
 {
@@ -44,8 +45,6 @@ namespace Storyteller.Core.Testing
 
             
             var hierarchy = TestingContext.Hierarchy;
-            
-
 
             hierarchy.GetAllSpecs().Each(header =>
             {
