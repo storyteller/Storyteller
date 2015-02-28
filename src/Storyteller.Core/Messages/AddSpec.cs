@@ -6,7 +6,7 @@
         {
         }
 
-        public string suite;
+        public string parent;
         public string name;
     }
 }

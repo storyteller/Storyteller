@@ -17,9 +17,12 @@ namespace ST.Client.Persistence
 
         public override void HandleMessage(CloneSpec message)
         {
-            var added = _controller.Value.CloneSpecification(message.id, message.name);
+            _controller.Value.CloneSpecification(message.id, message.name);
 
-            _client.Value.SendMessageToClient(added);
+            _client.Value.SendMessageToClient(new HierarchyLoaded
+            {
+                hierarchy = _controller.Value.Hierarchy.Top
+            });
         }
     }
 }
