@@ -76,6 +76,7 @@
     <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />
     <Compile Include="IBatchObserver.cs" />
     <Compile Include="Messages\AddSpec.cs" />
+    <Compile Include="Messages\AddSuite.cs" />
     <Compile Include="Messages\CancelAllSpecs.cs" />
     <Compile Include="Messages\CancelSpec.cs" />
     <Compile Include="Messages\ForceRecycle.cs" />

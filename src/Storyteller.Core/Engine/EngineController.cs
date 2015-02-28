@@ -85,7 +85,7 @@ namespace Storyteller.Core.Engine
 
         public void Receive(HierarchyLoaded message)
         {
-            _hierarchy = Task.FromResult(message.root);
+            _hierarchy = Task.FromResult(message.hierarchy);
         }
 
         public void Receive(CancelSpec message)

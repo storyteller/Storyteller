@@ -155,6 +155,36 @@ namespace Storyteller.Core.Testing.ST
         }
 
         [Test]
+        public void add_a_suite_to_the_parent()
+        {
+            Services.PartialMockTheClassUnderTest();
+            ClassUnderTest.StartWatching(thePath);
+
+            ClassUnderTest.Expect(x => x.ReloadHierarchy());
+
+            ClassUnderTest.AddSuite("", "Foo Specs");
+
+            Directory.Exists(thePath.AppendPath("Foo Specs"));
+
+            ClassUnderTest.AssertWasCalled(x => x.ReloadHierarchy());
+        }
+
+        [Test]
+        public void add_suite_to_a_child_suite()
+        {
+            Services.PartialMockTheClassUnderTest();
+            ClassUnderTest.StartWatching(thePath);
+
+            ClassUnderTest.Expect(x => x.ReloadHierarchy());
+
+            ClassUnderTest.AddSuite("Tables", "Special Tables");
+
+            Directory.Exists(thePath.AppendPath("Tables", "Special Tables"));
+
+            ClassUnderTest.AssertWasCalled(x => x.ReloadHierarchy());
+        }
+
+        [Test]
         public void load_spec_json()
         {
             var json = ClassUnderTest.LoadSpecificationJson("sentence3");

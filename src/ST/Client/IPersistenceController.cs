@@ -12,5 +12,6 @@ namespace ST.Client
         void SaveSpecificationBody(string id, Specification specification);
         SpecNodeAdded CloneSpecification(string id, string name);
         Specification LoadSpecification(string id);
+        void AddSuite(string parent, string name);
     }
 }

@@ -4,7 +4,7 @@ namespace Storyteller.Core.Messages
 {
     public class HierarchyLoaded : ClientMessage
     {
-        public Suite root;
+        public Suite hierarchy;
 
         public HierarchyLoaded() : base("hierarchy-loaded")
         {

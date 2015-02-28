@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Xml;
 using FubuCore;
@@ -42,6 +43,18 @@ namespace ST.Client
         public Hierarchy Hierarchy
         {
             get { return _hierarchy; }
+        }
+
+        public void AddSuite(string parent, string name)
+        {
+            var parentSuite = _hierarchy.Suites[parent];
+            if (parentSuite != null)
+            {
+                var path = parentSuite.Folder.AppendPath(name);
+                Directory.CreateDirectory(path);
+
+                ReloadHierarchy();
+            }
         }
 
 
@@ -211,15 +224,17 @@ namespace ST.Client
             });
         }
 
-        private void reloadHierarchy()
+        public virtual void ReloadHierarchy()
         {
             _lock.Write(() =>
             {
                 _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
                 var message = new HierarchyLoaded
                 {
-                    root = _hierarchy.Top
+                    hierarchy = _hierarchy.Top
                 };
+
+                // TODO -- have it read in the cached result counts
 
                 _client.SendMessageToClient(message);
                 _engine.SendMessage(message);
@@ -228,12 +243,12 @@ namespace ST.Client
 
         public void Added(string file)
         {
-            reloadHierarchy();
+            ReloadHierarchy();
         }
 
         public void Deleted(string file)
         {
-            reloadHierarchy();
+            ReloadHierarchy();
         }
 
         public void Dispose()

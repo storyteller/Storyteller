@@ -230,7 +230,7 @@ namespace Storyteller.Core.Testing.Engine
     {
         protected sealed override void beforeEach()
         {
-            ClassUnderTest.Receive(new HierarchyLoaded{root = TestingContext.Hierarchy});
+            ClassUnderTest.Receive(new HierarchyLoaded{hierarchy = TestingContext.Hierarchy});
             theContextIs();
         }
 
