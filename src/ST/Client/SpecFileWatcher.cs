@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using FubuCore;
 
 namespace ST.Client
 {
@@ -36,7 +37,9 @@ namespace ST.Client
 
         public void StartWatching(string path, ISpecFileObserver observer)
         {
-            _watcher = new FileSystemWatcher(path, "*.xml");
+            var fullPath = path.ToFullPath();
+            _watcher = new FileSystemWatcher(fullPath, "*.xml");
+            _watcher.IncludeSubdirectories = true;
             _watcher.Changed += (sender, args) =>
             {
                 observer.Changed(args.FullPath);
@@ -51,6 +54,8 @@ namespace ST.Client
             {
                 observer.Added(args.FullPath);
             };
+
+            _watcher.EnableRaisingEvents = true;
         }
     }
 }

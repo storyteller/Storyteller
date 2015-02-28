@@ -56,6 +56,8 @@ namespace StoryTeller.Samples.Fixtures
         // SAMPLE:  GrammarsInConstructor
         public SentenceFixture()
         {
+            Title = "Sentence Grammars";
+
             this["ThisFactIsTrue"] = Fact("This fact is always true").VerifiedBy(() => true);
             this["ThisFactIsFalse"] = Fact("This fact is always false").VerifiedBy(() => false);
             this["ThisFactThrowsException"] =
