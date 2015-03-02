@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using FubuCore;
+using Newtonsoft.Json;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
@@ -156,5 +157,20 @@ namespace Storyteller.Core
 
             return context;
         }
+    }
+
+    public class SpecResults
+    {
+        [JsonProperty("counts")]
+        public Counts Counts { get; set; }
+
+        [JsonProperty("results")]
+        public IResultMessage[] Results { get; set; }
+
+        [JsonProperty("performance")]
+        public PerfRecord[] Performance { get; set; }
+
+        // TODO -- debug capture
+        // TODO -- contextual logging capture
     }
 }

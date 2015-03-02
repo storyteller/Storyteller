@@ -79,6 +79,7 @@
     <Compile Include="Engine\BatchRunnerTester.cs" />
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="Engine\EngineControllerTester.cs" />
+    <Compile Include="Engine\integrated_performance_data_collection_testing.cs" />
     <Compile Include="Engine\SpecExecutionRequestTester.cs" />
     <Compile Include="Engine\TimingsSmokeTester.cs" />
     <Compile Include="Engine\user_interface_tracing_spec.cs" />
