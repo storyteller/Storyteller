@@ -13,7 +13,7 @@ using XmlWriter = Storyteller.Core.Model.Persistence.XmlWriter;
 
 namespace ST.Client
 {
-    public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable
+    public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable, IListener<SpecExecutionCompleted>
     {
         private readonly IRemoteController _engine;
         private readonly IClientConnector _client;
@@ -258,5 +258,11 @@ namespace ST.Client
         {
             _watcher.Dispose();
         }
+
+        public void Receive(SpecExecutionCompleted message)
+        {
+            Hierarchy.Nodes[message.Id].last = message;
+        }
     }
+
 }

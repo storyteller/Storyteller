@@ -50,6 +50,16 @@ namespace Storyteller.Core.Testing.ST
         }
 
         [Test]
+        public void caches_the_last_execution_for_a_suite()
+        {
+            var completed = new SpecExecutionCompleted("sentence4", new SpecResults());
+            ClassUnderTest.Receive(completed);
+
+            ClassUnderTest.Hierarchy.Nodes["sentence4"].last
+                .ShouldBeTheSameAs(completed);
+        }
+
+        [Test]
         public void should_tell_the_file_watcher_to_start_upon_start()
         {
             theFileWatcher.Path.ShouldEqual(thePath);

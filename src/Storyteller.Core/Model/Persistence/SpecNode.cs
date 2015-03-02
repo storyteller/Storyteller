@@ -1,5 +1,7 @@
+using System;
 using FubuCore;
 using Newtonsoft.Json;
+using Storyteller.Core.Messages;
 
 namespace Storyteller.Core.Model.Persistence
 {
@@ -28,6 +30,8 @@ namespace Storyteller.Core.Model.Persistence
         {
             return Suite.SuitePathOf(path);
         }
+
+        public SpecExecutionCompleted last;
 
         protected bool Equals(SpecNode other)
         {

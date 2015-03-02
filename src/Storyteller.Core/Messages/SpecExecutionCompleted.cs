@@ -11,8 +11,12 @@ namespace Storyteller.Core.Messages
         public string Id { get; set; }
 
 
+        public SpecExecutionCompleted()
+            : base("spec-execution-completed")
+        {
+        }
 
-        public SpecExecutionCompleted(string id, SpecResults results) : base("spec-execution-completed")
+        public SpecExecutionCompleted(string id, SpecResults results) : this()
         {
             _results = results;
             Id = id;

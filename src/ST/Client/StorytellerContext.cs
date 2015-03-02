@@ -27,6 +27,11 @@ namespace ST.Client
             });
         }
 
+        public void AddRemoteListener(object listener)
+        {
+            _controller.Messaging.AddListener(listener);
+        }
+
         public void WaitForResults()
         {
             _startup.Wait();

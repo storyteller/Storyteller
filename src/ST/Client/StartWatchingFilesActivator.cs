@@ -18,6 +18,8 @@ namespace ST.Client
         public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
         {
             _controller.StartWatching(_context.SpecPath);
+            _context.AddRemoteListener(_controller);
+            
         }
     }
 }

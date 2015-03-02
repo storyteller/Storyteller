@@ -28,12 +28,13 @@ namespace ST.Client
                 _.For<StorytellerContext>().Use(context);
                 _.ForSingletonOf<IClientConnector>().Use<ClientConnector>();
                 _.ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
-                _.For<IActivator>().Add<StartWatchingAssets>();
+                
 
                 _.ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
 
                 _.For<IActivator>().Add<ClientConnectorActivator>();
                 _.For<IActivator>().Add<StartWatchingFilesActivator>();
+                _.For<IActivator>().Add<StartWatchingAssets>();
 
                 _.Scan(x =>
                 {
@@ -48,6 +49,8 @@ namespace ST.Client
 
             using (var server = FubuApplication.DefaultPolicies().StructureMap(container).RunEmbeddedWithAutoPort())
             {
+                
+
                 Console.WriteLine("Launching the browser to " + server.BaseAddress);
 
                 Process.Start(server.BaseAddress);
