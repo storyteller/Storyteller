@@ -18,7 +18,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             var wasCalled = false;
             var section = new Section("Math"){Id = "4"};
-            var action = new SilentAction(Stage.setup, x => wasCalled = true, section);
+            var action = new SilentAction("Fixture", Stage.setup, x => wasCalled = true, section);
             var context = SpecContext.ForTesting();
             action.Execute(context);
 
@@ -33,7 +33,7 @@ namespace Storyteller.Core.Testing.Grammars
             var ex = new DivideByZeroException();
 
             var section = new Section("Math") {Id = "5"};
-            var action = new SilentAction(Stage.teardown, x => { throw ex; }, section);
+            var action = new SilentAction("Fixture", Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 
@@ -54,7 +54,7 @@ namespace Storyteller.Core.Testing.Grammars
             var ex = new DivideByZeroException();
 
             var section = new Section("Math") { Id = "5" };
-            var action = SilentAction.AsCritical(Stage.teardown, x => { throw ex; }, section);
+            var action = SilentAction.AsCritical("Fixture", Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 
@@ -66,7 +66,7 @@ namespace Storyteller.Core.Testing.Grammars
         {
             var executor = MockRepository.GenerateMock<IStepExecutor>();
 
-            var action = new SilentAction(Stage.setup, x => { }, new Section("Math"));
+            var action = new SilentAction("Fixture", Stage.setup, x => { }, new Section("Math"));
 
             action.AcceptVisitor(executor);
 

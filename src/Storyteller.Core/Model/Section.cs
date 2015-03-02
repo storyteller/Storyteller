@@ -50,11 +50,14 @@ namespace Storyteller.Core.Model
 
         private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, IFixture fixture)
         {
-            yield return SilentAction.AsCritical(Stage.setup, x =>
+            var setup = SilentAction.AsCritical("Fixture", Stage.setup, x =>
             {
                 fixture.Context = x;
                 fixture.SetUp();
             }, this);
+            setup.Subject = Key + ":SetUp";
+
+            yield return setup;
 
             // Ignore comments!
             foreach (var step in Children.OfType<Step>())
@@ -63,7 +66,9 @@ namespace Storyteller.Core.Model
                 yield return grammar.CreatePlan(step, library);
             }
 
-            yield return SilentAction.AsCritical(Stage.teardown, x => fixture.TearDown(), this);
+            var teardown = SilentAction.AsCritical("Fixture", Stage.teardown, x => fixture.TearDown(), this);
+            teardown.Subject = Key + ":TearDown";
+            yield return teardown;
         }
 
         public Comment AddComment(string text)

@@ -7,10 +7,11 @@ namespace Storyteller.Core.Grammars
 {
     public class SilentAction : ILineExecution
     {
+        private readonly string _type;
         private readonly Action<ISpecContext> _action;
         private readonly Node _node;
 
-        public static SilentAction AsCritical(object position, Action<ISpecContext> action, Node node)
+        public static SilentAction AsCritical(string type, object position, Action<ISpecContext> action, Node node)
         {
             Action<ISpecContext> wrapped = c =>
             {
@@ -32,10 +33,10 @@ namespace Storyteller.Core.Grammars
                 }
             };
 
-            return new SilentAction(position, wrapped, node);
+            return new SilentAction(type, position, wrapped, node);
         }
 
-        public SilentAction(object position, Action<ISpecContext> action, Node node)
+        public SilentAction(string type, object position, Action<ISpecContext> action, Node node)
         {
             if (node.Id.IsEmpty())
             {
@@ -43,8 +44,17 @@ namespace Storyteller.Core.Grammars
             }
 
             Position = position;
+            _type = type;
             _action = action;
             _node = node;
+            Subject = position.ToString();
+        }
+
+        public string Subject { get; set; }
+
+        public string type
+        {
+            get { return _type; }
         }
 
         public Action<ISpecContext> Action
@@ -72,6 +82,8 @@ namespace Storyteller.Core.Grammars
 
         public void Execute(ISpecContext context)
         {
+            using (context.Timings.Subject(_type, Subject))
+
             try
             {
                 _action(context);

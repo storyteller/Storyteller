@@ -60,5 +60,13 @@ namespace Storyteller.Core.Testing.Engine
             records.Select(x => x.Subject)
                 .ShouldHaveTheSameElementsAs("StartWithTheNumber", "StartWithTheNumber", "MultiplyThenAdd", "Subtract", "TheValueShouldBe", "TheSumOf", "ThisLineIsAlwaysTrue", "ThisLineIsAlwaysFalse", "ThisLineAlwaysThrowsExceptions");
         }
+
+        [Test]
+        public void records_the_fixture_setup_and_teardown()
+        {
+            var records = theResults.Performance.Where(x => x.Type == "Fixture");
+            records.Select(x => x.Subject)
+                .ShouldHaveTheSameElementsAs("Sentence:SetUp", "Sentence:TearDown");
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Storyteller.Core.Grammars.Tables
         private Action<ISpecContext> _after;
         private Action<ISpecContext> _before;
         private string _leafName = "rows";
+        private string _key;
 
         public TableGrammar(IGrammar inner)
         {
@@ -21,7 +22,15 @@ namespace Storyteller.Core.Grammars.Tables
 
         public string Title { get; private set; }
 
-        public string Key { get; set; }
+        public string Key
+        {
+            get { return _key; }
+            set
+            {
+                _key = value;
+                _inner.Key = value + ":Row";
+            }
+        }
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
@@ -89,7 +98,10 @@ namespace Storyteller.Core.Grammars.Tables
             Section section = parentStep.Collections[_leafName];
             if (section.Id.IsEmpty()) section.Id = Guid.NewGuid().ToString();
 
-            if (_before != null) yield return new SilentAction(Stage.before, _before, section);
+            if (_before != null) yield return new SilentAction("Grammar", Stage.before, _before, section)
+            {
+                Subject = Key + "Before"
+            };
 
 
             foreach (Step row in section.Children.OfType<Step>())
@@ -97,7 +109,10 @@ namespace Storyteller.Core.Grammars.Tables
                 yield return _inner.CreatePlan(row, library);
             }
 
-            if (_after != null) yield return new SilentAction(Stage.after, _after, section);
+            if (_after != null) yield return new SilentAction("Grammar", Stage.after, _after, section)
+            {
+                Subject = Key + ":After"
+            };
         }
     }
 }

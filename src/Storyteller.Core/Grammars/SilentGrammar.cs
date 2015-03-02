@@ -17,7 +17,10 @@ namespace Storyteller.Core.Grammars
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            return new SilentAction(_position, _action, step);
+            return new SilentAction("Grammar", _position, _action, step)
+            {
+                Subject = Key
+            };
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
