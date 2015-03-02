@@ -19,7 +19,8 @@ namespace Storyteller.Core.Testing.Engine
                 Name = "Some Name"
             };
 
-            var timings = new Timings(spec);
+            var timings = new Timings();
+            timings.Start(spec);
             using (timings.Subject("Fixture.Setup", "Math"))
             {
                 using (timings.Subject("Grammar", "Adding"))

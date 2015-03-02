@@ -11,17 +11,12 @@ namespace Storyteller.Core.Engine
     {
         private readonly Stopwatch _stopwatch = new Stopwatch();
         private readonly IList<PerfRecord> _records = new List<PerfRecord>();
-        private readonly PerfRecord _main;
+        private PerfRecord _main;
 
-        public Timings(Specification spec)
+        public void Start(Specification spec)
         {
             _main = new PerfRecord("Specification", spec.Name, 0);
             _records.Add(_main);
-            _stopwatch.Start();
-        }
-
-        public void Start()
-        {
             _stopwatch.Start();
         }
 
@@ -35,8 +30,8 @@ namespace Storyteller.Core.Engine
 
         public IEnumerable<PerfRecord> Finish()
         {
-            _stopwatch.Stop();
             _main.MarkEnd(_stopwatch.ElapsedMilliseconds);
+            _stopwatch.Stop();
 
             return _records.OrderBy(x => x.Start).ToArray();
         }
