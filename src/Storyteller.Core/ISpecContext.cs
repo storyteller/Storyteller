@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
@@ -19,5 +21,7 @@ namespace Storyteller.Core
 
         Counts Counts { get; }
         Specification Specification { get; }
+
+        Timings Timings { get; }
     }
 }

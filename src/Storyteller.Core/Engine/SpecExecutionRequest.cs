@@ -61,9 +61,9 @@ namespace Storyteller.Core.Engine
             });
         }
 
-        public ISpecContext CreateContext(StopConditions stopConditions, IExecutionContext execution)
+        public ISpecContext CreateContext(StopConditions stopConditions, IExecutionContext execution, Timings timings)
         {
-            var context = new SpecContext(Specification, _observer, stopConditions, execution.Services);
+            var context = new SpecContext(Specification, timings, _observer, stopConditions, execution.Services);
             Context = context;
 
             return context;
@@ -108,6 +108,14 @@ namespace Storyteller.Core.Engine
         public override string ToString()
         {
             return string.Format("SpecExecutionRequest for {0} ({1})", Node.id, Node.name);
+        }
+
+        public Timings StartNewTimings()
+        {
+            var timings = new Timings();
+            timings.Start(Specification);
+
+            return timings;
         }
     }
 }

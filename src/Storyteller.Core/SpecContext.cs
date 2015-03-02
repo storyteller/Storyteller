@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using FubuCore;
+using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
@@ -19,8 +20,9 @@ namespace Storyteller.Core
         private readonly State _state = new State();
         private bool _hasCatastrophicException;
         private bool _hasCriticalException;
+        private readonly Timings _timings;
 
-        public SpecContext(Specification specification, IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
+        public SpecContext(Specification specification, Timings timings, IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
             Counts = new Counts();
             _specification = specification;
@@ -29,6 +31,8 @@ namespace Storyteller.Core
             _cancellationSource = stopConditions.CreateCancellationSource();
             _cancellation = _cancellationSource.Token;
             _services = services;
+
+            _timings = timings ?? new Timings();
         }
 
         public StopConditions StopConditions { get; private set; }
@@ -38,6 +42,11 @@ namespace Storyteller.Core
         {
             _state.Dispose();
             _services = null;
+        }
+
+        public Timings Timings
+        {
+            get { return _timings; }
         }
 
         public Specification Specification
@@ -138,7 +147,7 @@ namespace Storyteller.Core
 
         public static SpecContext Basic()
         {
-            return new SpecContext(new Specification(), new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            return new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         public static SpecContext ForTesting()

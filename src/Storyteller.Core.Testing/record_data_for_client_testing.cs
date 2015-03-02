@@ -56,7 +56,7 @@ namespace Storyteller.Core.Testing
                 using (var execution = theSystem.CreateContext())
                 {
                     var observer = new RecordingObserver();
-                    var context = new SpecContext(spec, observer, new StopConditions(), execution.Services);
+                    var context = new SpecContext(spec, null, observer, new StopConditions(), execution.Services);
                     var plan = spec.CreatePlan(library);
                     var executor = new SynchronousExecutor(context);
 

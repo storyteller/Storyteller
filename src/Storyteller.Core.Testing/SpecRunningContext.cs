@@ -37,7 +37,7 @@ namespace Storyteller.Core.Testing
 
         protected void executeSpec(Specification spec)
         {
-            _context = new SpecContext(spec, new NulloResultObserver(), new StopConditions(), Services);
+            _context = new SpecContext(spec, null, new NulloResultObserver(), new StopConditions(), Services);
 
             var plan = spec.CreatePlan(TestingContext.Library);
 

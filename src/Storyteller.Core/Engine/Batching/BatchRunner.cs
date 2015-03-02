@@ -49,9 +49,9 @@ namespace Storyteller.Core.Engine.Batching
             return specification.MaxRetries > (plan.Attempts - 1);
         }
 
-        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue)
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue, Timings timings)
         {
-            var context = request.CreateContext(_stopConditions, execution);
+            var context = request.CreateContext(_stopConditions, execution, timings);
 
             
             return Task.Factory.StartNew(() =>

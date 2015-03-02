@@ -99,7 +99,7 @@ namespace Storyteller.Core.Testing.Engine
         {
             var request = SpecExecutionRequest.For(theSpec);
             var context = request.CreateContext(new StopConditions(),
-                new NulloSystem.SimpleExecutionContext(new InMemoryServiceLocator()));
+                new NulloSystem.SimpleExecutionContext(new InMemoryServiceLocator()), new Timings());
 
             request.Cancel();
 

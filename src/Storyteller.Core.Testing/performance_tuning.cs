@@ -48,7 +48,7 @@ namespace Storyteller.Core.Testing
 
                 using (var execution = system.CreateContext())
                 {
-                    var context = new SpecContext(spec, observer, stopConditions, execution.Services);
+                    var context = new SpecContext(spec, null, observer, stopConditions, execution.Services);
                     var executor = new SynchronousExecutor(context);
                     plan.AcceptVisitor(executor);
 

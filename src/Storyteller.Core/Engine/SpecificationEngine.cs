@@ -30,9 +30,19 @@ namespace Storyteller.Core.Engine
 
             _executionQueue = new ConsumingQueue(request =>
             {
-                using (var execution = _system.CreateContext())
+                var timings = request.StartNewTimings();
+                IExecutionContext execution = null;
+                try
                 {
-                    var task = _runner.Execute(request, execution, _executionQueue).ContinueWith(t =>
+                    using (timings.Subject("Context", "Creation"))
+                    {
+                        execution = _system.CreateContext();
+
+                        // TODO -- log a catastrophic error here.
+                        // TODO -- makes a good argument for doing the SpecContext creation here!!!!.
+                    }
+
+                    var task = _runner.Execute(request, execution, _executionQueue, timings).ContinueWith(t =>
                     {
                         // TODO -- tag the context or plan if timed out?
                         // TODO -- tag the plan as having an attempt?
@@ -43,6 +53,10 @@ namespace Storyteller.Core.Engine
                     // TODO -- should have a timeout on it anyway, but things still fail
                     // connect the timeout to the stop conditions
                     task.Wait();
+                }
+                finally
+                {
+                    execution.Dispose();
                 }
             });
 
