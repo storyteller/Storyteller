@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
-using FubuCore.Binding.InMemory;
 using Newtonsoft.Json;
 using Storyteller.Core.Model;
 
@@ -23,7 +20,12 @@ namespace Storyteller.Core.Engine
             _stopwatch.Start();
         }
 
-        public IDisposable Start(string type, string subject)
+        public void Start()
+        {
+            _stopwatch.Start();
+        }
+
+        public IDisposable Subject(string type, string subject)
         {
             var record = new PerfRecord(type, subject, _stopwatch.ElapsedMilliseconds);
             _records.Add(record);
@@ -88,6 +90,5 @@ namespace Storyteller.Core.Engine
         {
             get { return End - Start; }
         }
-
     }
 }
