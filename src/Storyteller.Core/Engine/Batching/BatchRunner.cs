@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Storyteller.Core.Grammars;
+using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Engine.Batching
 {
@@ -23,7 +24,7 @@ namespace Storyteller.Core.Engine.Batching
                 plan.AcceptVisitor(stepExecutor);
 
                 plan.Attempts++;
-                if (ShouldRetry(plan, context))
+                if (ShouldRetry(plan, context.Specification))
                 {
                     _resultObserver.SpecRequeued(plan, context);
                     queue.Enqueue(request);
@@ -41,9 +42,11 @@ namespace Storyteller.Core.Engine.Batching
             }
         }
 
-        public bool ShouldRetry(SpecificationPlan plan, ISpecContext context)
+        public bool ShouldRetry(SpecificationPlan plan, Specification specification)
         {
-            return false;
+            if (specification.Lifecycle == Lifecycle.Acceptance) return false;
+
+            return specification.MaxRetries > (plan.Attempts - 1);
         }
 
         public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue)

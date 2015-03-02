@@ -17,7 +17,7 @@ namespace Storyteller.Core.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new Specification(), new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
 
         }
 
@@ -71,10 +71,9 @@ namespace Storyteller.Core.Testing
         [Test]
         public void puts_the_spec_id_on_result_messages()
         {
-            theContext.Id = Guid.NewGuid().ToString();
             theContext.LogException("1", new NotImplementedException());
 
-            theContext.Results.Last().spec.ShouldEqual(theContext.Id);
+            theContext.Results.Last().spec.ShouldEqual(theContext.Specification.Id);
         }
     }
 
@@ -87,7 +86,7 @@ namespace Storyteller.Core.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new Specification(), new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         [Test]

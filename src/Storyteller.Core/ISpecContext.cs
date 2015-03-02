@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Storyteller.Core.Model;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core
@@ -17,6 +18,6 @@ namespace Storyteller.Core
         void RequestCancellation();
 
         Counts Counts { get; }
-        string Id { get; set; }
+        Specification Specification { get; }
     }
 }

@@ -13,16 +13,17 @@ namespace Storyteller.Core
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         private readonly CancellationToken _cancellation;
         private readonly CancellationTokenSource _cancellationSource;
+        private readonly Specification _specification;
         private readonly IResultObserver _resultObserver;
         private IServiceLocator _services;
         private readonly State _state = new State();
         private bool _hasCatastrophicException;
         private bool _hasCriticalException;
 
-        // TODO -- take in the specification id, or maybe just the Specification
-        public SpecContext(IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
+        public SpecContext(Specification specification, IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
         {
             Counts = new Counts();
+            _specification = specification;
             _resultObserver = observer;
             StopConditions = stopConditions;
             _cancellationSource = stopConditions.CreateCancellationSource();
@@ -37,6 +38,11 @@ namespace Storyteller.Core
         {
             _state.Dispose();
             _services = null;
+        }
+
+        public Specification Specification
+        {
+            get { return _specification; }
         }
 
         public Counts Counts { get; private set; }
@@ -95,14 +101,13 @@ namespace Storyteller.Core
             get { return _state; }
         }
 
-        public string Id { get; set; }
 
         public void LogResult<T>(T result) where T : IResultMessage
         {
             if (result.id.IsEmpty())
                 throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
 
-            result.spec = Id;
+            result.spec = Specification.Id;
 
             _resultObserver.Handle(result);
             result.Tabulate(Counts);
@@ -133,7 +138,7 @@ namespace Storyteller.Core
 
         public static SpecContext Basic()
         {
-            return new SpecContext(new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            return new SpecContext(new Specification(), new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
         }
 
         public static SpecContext ForTesting()
