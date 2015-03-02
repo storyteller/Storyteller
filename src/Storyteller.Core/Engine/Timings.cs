@@ -20,6 +20,11 @@ namespace Storyteller.Core.Engine
             _stopwatch.Start();
         }
 
+        public long Duration
+        {
+            get { return _stopwatch.ElapsedMilliseconds; }
+        }
+
         public IDisposable Subject(string type, string subject)
         {
             var record = new PerfRecord(type, subject, _stopwatch.ElapsedMilliseconds);
@@ -30,7 +35,7 @@ namespace Storyteller.Core.Engine
 
         public IEnumerable<PerfRecord> Finish()
         {
-            _main.MarkEnd(_stopwatch.ElapsedMilliseconds);
+            if (_main != null) _main.MarkEnd(_stopwatch.ElapsedMilliseconds);
             _stopwatch.Stop();
 
             return _records.OrderBy(x => x.Start).ToArray();

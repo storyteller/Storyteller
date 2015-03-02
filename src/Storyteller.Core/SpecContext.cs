@@ -48,7 +48,8 @@ namespace Storyteller.Core
             {
                 Counts = Counts,
                 Results = Results.ToArray(),
-                Performance = performance
+                Performance = performance,
+                Duration = _timings.Duration
             };
         }
 
@@ -182,6 +183,9 @@ namespace Storyteller.Core
 
         [JsonProperty("performance")]
         public PerfRecord[] Performance { get; set; }
+
+        [JsonProperty("duration")]
+        public long Duration { get; set; }
 
         // TODO -- debug capture
         // TODO -- contextual logging capture

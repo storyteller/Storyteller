@@ -5,21 +5,24 @@ namespace Storyteller.Core.Messages
 {
     public class SpecExecutionCompleted : ClientMessage
     {
+        private readonly SpecResults _results;
+
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("counts")]
-        public Counts Counts { get; set; }
 
-        [JsonProperty("duration")]
-        public double Duration { get; set; }
 
-        public SpecExecutionCompleted(string id, Counts counts, double duration) : base("spec-execution-completed")
+        public SpecExecutionCompleted(string id, SpecResults results) : base("spec-execution-completed")
         {
+            _results = results;
             Id = id;
-            Counts = counts;
-            Duration = duration;
             Time = DateTime.Now;
+        }
+
+        [JsonProperty("results")]
+        public SpecResults Results
+        {
+            get { return _results; }
         }
 
         [JsonProperty("time")]
@@ -27,7 +30,7 @@ namespace Storyteller.Core.Messages
 
         protected bool Equals(SpecExecutionCompleted other)
         {
-            return string.Equals(Id, other.Id) && Equals(Counts, other.Counts);
+            return string.Equals(Id, other.Id) && Equals(Results.Counts, other.Results.Counts);
         }
 
         public override bool Equals(object obj)
@@ -42,7 +45,7 @@ namespace Storyteller.Core.Messages
         {
             unchecked
             {
-                return ((Id != null ? Id.GetHashCode() : 0)*397) ^ (Counts != null ? Counts.GetHashCode() : 0);
+                return ((Id != null ? Id.GetHashCode() : 0)*397) ^ (Results.Counts != null ? Results.Counts.GetHashCode() : 0);
             }
         }
     }

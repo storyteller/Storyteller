@@ -72,7 +72,7 @@ namespace Storyteller.Core.Engine
             _observer.SendToClient(message);
         }
 
-        public void SpecExecutionFinished(SpecNode node, Counts counts)
+        public void SpecExecutionFinished(SpecNode node, SpecResults results)
         {
             var outstanding = _outstanding.FirstOrDefault(x => x.Node == node);
             if (outstanding == null) return;
@@ -80,7 +80,7 @@ namespace Storyteller.Core.Engine
             outstanding.Dispose();
             _outstanding.Remove(outstanding);
 
-            _observer.SendToClient(new SpecExecutionCompleted(node.id, counts, 0));
+            _observer.SendToClient(new SpecExecutionCompleted(node.id, results));
         }
 
         public void Receive(HierarchyLoaded message)

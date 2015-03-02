@@ -11,6 +11,7 @@ using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using Storyteller.Core.Remotes.Messaging;
+using Is = Rhino.Mocks.Constraints.Is;
 
 namespace Storyteller.Core.Testing.Engine
 {
@@ -50,7 +51,7 @@ namespace Storyteller.Core.Testing.Engine
 
             request.SpecExecutionFinished(context);
 
-            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, context.Counts));
+            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, null), x => x.Constraints(Is.Same(theSpec), Is.Anything()));
         }
 
         [Test]

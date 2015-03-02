@@ -108,11 +108,14 @@ namespace Storyteller.Core.Testing.Engine
     [TestFixture]
     public class when_receiving_the_spec_execution_finished : EngineControllerContext
     {
+        private SpecResults theResults;
+
         protected override void theContextIs()
         {
             ClassUnderTest.Receive(new RunSpec { id = "embeds" });
             var node = findSpec("embeds");
-            ClassUnderTest.SpecExecutionFinished(node, new Counts(1, 0, 0 , 0));
+            theResults = new SpecResults { Counts = new Counts(1, 0, 0, 0) };
+            ClassUnderTest.SpecExecutionFinished(node, theResults);
 
 
         }
@@ -127,7 +130,7 @@ namespace Storyteller.Core.Testing.Engine
         [Test]
         public void sends_a_conpletion_message_to_the_client()
         {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", new Counts(1, 0, 0, 0), 0)));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults)));
         }
     }
 

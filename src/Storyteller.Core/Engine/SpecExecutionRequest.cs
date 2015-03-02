@@ -28,7 +28,7 @@ namespace Storyteller.Core.Engine
 
         public void SpecExecutionFinished(ISpecContext context)
         {
-            _observer.SpecExecutionFinished(Node, context.Counts);
+            _observer.SpecExecutionFinished(Node, context.FinalizeResults());
         }
 
         private void performAction(Action action )
