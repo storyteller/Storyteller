@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using FubuCore;
 using Newtonsoft.Json;
@@ -38,6 +39,18 @@ namespace Storyteller.Core
 
         public StopConditions StopConditions { get; private set; }
 
+
+        public SpecResults FinalizeResults()
+        {
+            var performance = _timings.Finish().ToArray();
+
+            return new SpecResults
+            {
+                Counts = Counts,
+                Results = Results.ToArray(),
+                Performance = performance
+            };
+        }
 
         public void Dispose()
         {

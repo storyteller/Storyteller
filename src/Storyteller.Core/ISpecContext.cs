@@ -23,5 +23,6 @@ namespace Storyteller.Core
         Specification Specification { get; }
 
         Timings Timings { get; }
+        SpecResults FinalizeResults();
     }
 }

@@ -54,13 +54,9 @@ namespace Storyteller.Core.Engine
 
 
             execution.Dispose();
-        
-            return new SpecResults
-            {
-                Counts = context.Counts,
-                Performance = context.Timings.Finish().ToArray(),
-                Results = context.Results.ToArray()
-            };
+            context.Dispose();
+
+            return context.FinalizeResults();
         }
     }
 }
