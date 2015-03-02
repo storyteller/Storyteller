@@ -71,6 +71,7 @@
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Engine\SpecResult.cs" />
+    <Compile Include="Engine\Timings.cs" />
     <Compile Include="Engine\UserInterface\InstrumentedExecutor.cs" />
     <Compile Include="Engine\UserInterface\InstrumentedRunner.cs" />
     <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />
