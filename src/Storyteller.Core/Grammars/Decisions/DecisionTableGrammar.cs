@@ -13,6 +13,8 @@ namespace Storyteller.Core.Grammars.Decisions
                 .Titled(label).LeafName("table");
         }
 
+        public string Key { get; set; }
+
         void IBeforeAndAfter.BeforeLine()
         {
             beforeLine();

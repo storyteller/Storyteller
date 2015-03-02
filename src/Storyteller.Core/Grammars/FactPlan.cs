@@ -16,6 +16,8 @@ namespace Storyteller.Core.Grammars
             _test = test;
         }
 
+        public string Key { get; set; }
+
         IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)
         {
             return new FactPlan(new StepValues(step.Id), this);
@@ -47,6 +49,11 @@ namespace Storyteller.Core.Grammars
         public FactPlan(StepValues values, IFactGrammar grammar) : base(values)
         {
             _grammar = grammar;
+        }
+
+        public override string Subject
+        {
+            get { return _grammar.Key; }
         }
 
         protected override StepResult execute(ISpecContext context)

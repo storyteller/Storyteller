@@ -29,5 +29,7 @@ namespace Storyteller.Core.Grammars.Importing
             // from the inner fixture here.
             return _inner.Compile(_innerFixture, cells);
         }
+
+        public string Key { get; set; }
     }
 }

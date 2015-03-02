@@ -22,6 +22,8 @@ namespace Storyteller.Core.Grammars
             Title = _fixture.Title;
         }
 
+        public string Key { get; set; }
+
         public string Title { get; set; }
 
         public EmbeddedSectionGrammar<T> Before(Action<ISpecContext> action)

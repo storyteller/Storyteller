@@ -21,6 +21,8 @@ namespace Storyteller.Core.Grammars.Tables
 
         public string Title { get; private set; }
 
+        public string Key { get; set; }
+
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
             return new CompositeExecution(toExecutionSteps(library, step));

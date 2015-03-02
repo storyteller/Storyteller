@@ -25,6 +25,9 @@ namespace Storyteller.Core.Grammars
             return result;
         }
 
-
+        public override string Subject
+        {
+            get { return _grammar.Key; }
+        }
     }
 }

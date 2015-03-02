@@ -31,6 +31,7 @@ namespace Storyteller.Core
         public Fixture()
         {
             _grammars = new Cache<string, IGrammar>(findGrammar);
+            
             Key = GetType().Name.Replace("Fixture", "");
         }
 
@@ -38,7 +39,11 @@ namespace Storyteller.Core
         public IGrammar this[string key]
         {
             get { return _grammars[key]; }
-            set { _grammars[key] = value; }
+            set
+            {
+                _grammars[key] = value;
+                value.Key = key;
+            }
         }
 
         public ISpecContext Context { get; set; }
@@ -51,6 +56,10 @@ namespace Storyteller.Core
         {
         }
 
+        public IEnumerable<IGrammar> AllGrammars()
+        {
+            return _grammars;
+        } 
 
         public bool IsHidden()
         {
@@ -101,7 +110,10 @@ namespace Storyteller.Core
                 return new MissingGrammar(key);
             }
 
-            return GrammarBuilder.BuildGrammar(method, this);
+            var grammar =  GrammarBuilder.BuildGrammar(method, this);
+            grammar.Key = key;
+
+            return grammar;
         }
 
         private static bool methodFromThis(MethodInfo method)

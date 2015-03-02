@@ -26,5 +26,7 @@ namespace Storyteller.Core.Model
         {
             return this;
         }
+
+        public string Key { get; set; }
     }
 }

@@ -33,6 +33,21 @@ namespace Storyteller.Core.Testing.Grammars.Paragraphs
         }
 
         [Test]
+        public void sets_the_key_for_all_children()
+        {
+            var paragraph = new ParagraphGrammar("Something");
+            paragraph.Do(c => { });
+            paragraph.Do(c => { });
+            paragraph.Do(c => { });
+
+            paragraph.Key = "Foo";
+
+            paragraph.Children[0].Key.ShouldEqual("Foo:0");
+            paragraph.Children[1].Key.ShouldEqual("Foo:1");
+            paragraph.Children[2].Key.ShouldEqual("Foo:2");
+        }
+
+        [Test]
         public void surfaces_all_the_child_errors()
         {
             var child1 = new Sentence();

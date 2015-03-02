@@ -11,6 +11,7 @@ namespace Storyteller.Core.Grammars.Paragraphs
     {
         private readonly IList<IGrammar> _children = new List<IGrammar>();
         private readonly string _title;
+        private string _key;
 
         public ParagraphGrammar(string title)
         {
@@ -55,6 +56,20 @@ namespace Storyteller.Core.Grammars.Paragraphs
         {
             var silent = new SilentGrammar(_children.Count, action);
             _children.Add(silent);
+        }
+
+
+        public string Key
+        {
+            get { return _key; }
+            set
+            {
+                _key = value;
+                for (var i = 0; i < Children.Count; i++)
+                {
+                    Children[i].Key = value + ":" + i;
+                }
+            }
         }
     }
 

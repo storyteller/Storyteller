@@ -43,6 +43,8 @@ namespace Storyteller.Core.Grammars.Importing
             };
         }
 
+        public string Key { get; set; }
+
 
         protected Cell[] filterCells(IEnumerable<Cell> innerCells)
         {

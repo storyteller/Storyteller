@@ -36,5 +36,7 @@ namespace Storyteller.Core.Grammars.Lines
                 format = format()
             };
         }
+
+        public string Key { get; set; }
     }
 }

@@ -29,5 +29,7 @@ namespace Storyteller.Core.Model
         {
             get { return new Cell[0]; }
         }
+
+        public string Key { get; set; }
     }
 }

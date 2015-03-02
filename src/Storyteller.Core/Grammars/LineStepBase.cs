@@ -19,31 +19,43 @@ namespace Storyteller.Core.Grammars
 
         public void Execute(ISpecContext context)
         {
-            Values.DoDelayedConversions(context);
-
-            if (Values.Errors.Any())
+            using (context.Timings.Subject(Type, Subject))
             {
-                var result = Values.ToConversionErrorResult();
-                result.position = Position;
+                Values.DoDelayedConversions(context);
 
-                context.LogResult(result);
+                if (Values.Errors.Any())
+                {
+                    var result = Values.ToConversionErrorResult();
+                    result.position = Position;
 
-                return;
-            }
+                    context.LogResult(result);
 
-            try
-            {
-                var result = execute(context);
+                    return;
+                }
 
-                result.position = Position;
+                try
+                {
+                    var result = execute(context);
 
-                context.LogResult(result);
-            }
-            catch (Exception ex)
-            {
-                context.LogException(Values.Id, ex, Position);
+                    result.position = Position;
+
+                    context.LogResult(result);
+                }
+                catch (Exception ex)
+                {
+                    context.LogException(Values.Id, ex, Position);
+                }
             }
         }
+
+
+
+        public virtual string Type
+        {
+            get { return "Grammar"; }
+        }
+
+        public abstract string Subject { get; }
 
 
 

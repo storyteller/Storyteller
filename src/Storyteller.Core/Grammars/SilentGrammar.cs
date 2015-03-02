@@ -29,5 +29,7 @@ namespace Storyteller.Core.Grammars
         {
             get { return _position; }
         }
+
+        public string Key { get; set; }
     }
 }

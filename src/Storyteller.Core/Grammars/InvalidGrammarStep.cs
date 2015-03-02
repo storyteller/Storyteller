@@ -20,6 +20,11 @@ namespace Storyteller.Core.Grammars
             get { return null; }
         }
 
+        public override string Subject
+        {
+            get { return "Missing"; }
+        }
+
         protected override StepResult execute(ISpecContext context)
         {
             var result = new StepResult(_values.Id, ResultStatus.error)

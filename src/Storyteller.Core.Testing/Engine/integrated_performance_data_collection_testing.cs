@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
@@ -12,12 +14,15 @@ namespace Storyteller.Core.Testing.Engine
     {
         private SpecRunner<GrammarSystem> _runner;
         private Suite _hierarchy;
+        private SpecResults theResults;
 
         [TestFixtureSetUp]
         public void SetUp()
         {
             _runner = new SpecRunner<GrammarSystem>();
             _hierarchy = TestingContext.Hierarchy;
+
+            theResults = runSpec("sentence4");
         }
 
         [TestFixtureTearDown]
@@ -37,10 +42,23 @@ namespace Storyteller.Core.Testing.Engine
         [Test]
         public void measures_the_context_creation()
         {
-            var results = runSpec("sentence1");
-
-            var creation = results.Performance.Single(x => x.Type == "Context");
+            var creation = theResults.Performance.Single(x => x.Type == "Context");
             creation.Subject.ShouldEqual("Creation");
+        }
+
+        [Test]
+        public void measures_the_specification_time_itself()
+        {
+            var record = theResults.Performance.Single(x => x.Type == "Specification");
+            record.ShouldNotBeNull();
+        }
+
+        [Test]
+        public void records_each_grammar()
+        {
+            var records = theResults.Performance.Where(x => x.Type == "Grammar");
+            records.Select(x => x.Subject)
+                .ShouldHaveTheSameElementsAs("StartWithTheNumber", "StartWithTheNumber", "MultiplyThenAdd", "Subtract", "TheValueShouldBe", "TheSumOf", "ThisLineIsAlwaysTrue", "ThisLineIsAlwaysFalse", "ThisLineAlwaysThrowsExceptions");
         }
     }
 }

@@ -45,5 +45,7 @@ namespace Storyteller.Core.Grammars.Reflection
 
             return grammar;
         }
+
+        public string Key { get; set; }
     }
 }

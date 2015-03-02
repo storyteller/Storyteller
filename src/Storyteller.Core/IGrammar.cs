@@ -7,5 +7,7 @@ namespace Storyteller.Core
         IExecutionStep CreatePlan(Step step, FixtureLibrary library);
 
         GrammarModel Compile(Fixture fixture, CellHandling cells);
+
+        string Key { get; set; }
     }
 }

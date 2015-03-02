@@ -5,6 +5,7 @@ using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Conversion;
 using Storyteller.Core.Model;
+using StoryTeller.Samples.Fixtures;
 
 namespace Storyteller.Core.Testing
 {
@@ -208,6 +209,15 @@ namespace Storyteller.Core.Testing
             var fixture = new Fixture();
             fixture.GrammarFor("DoesNotExist").ShouldBeOfType<MissingGrammar>();
         }
+
+        [Test]
+        public void fixture_puts_a_fixture_key_on_all_grammars()
+        {
+            var fixture = new MathFixture();
+            fixture.Compile(CellHandling.Basic());
+            var allGrammars = fixture.AllGrammars().ToArray();
+            allGrammars.Each(x => x.Key.ShouldNotBeNull());
+        }
     }
 
     public class StubGrammar : IGrammar
@@ -221,6 +231,8 @@ namespace Storyteller.Core.Testing
         {
             return new StubGrammarModel();
         }
+
+        public string Key { get; set; }
     }
 
     public class StubGrammarModel : GrammarModel

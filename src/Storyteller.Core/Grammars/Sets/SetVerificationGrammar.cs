@@ -71,5 +71,7 @@ namespace Storyteller.Core.Grammars.Sets
             return this;
         }
 
+        public string Key { get; set; }
+
     }
 }
