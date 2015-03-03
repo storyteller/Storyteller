@@ -13,6 +13,7 @@ using XmlWriter = Storyteller.Core.Model.Persistence.XmlWriter;
 
 namespace ST.Client
 {
+    // TODO -- need to flush results when the file changes maybe?
     public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable, IListener<SpecExecutionCompleted>
     {
         private readonly IRemoteController _engine;

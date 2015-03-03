@@ -187,7 +187,9 @@ namespace Storyteller.Core
         [JsonProperty("duration")]
         public long Duration { get; set; }
 
+        [JsonProperty("logging")]
+        public HtmlReport[] ContextualLogging { get; set; }
+
         // TODO -- debug capture
-        // TODO -- contextual logging capture
     }
 }
