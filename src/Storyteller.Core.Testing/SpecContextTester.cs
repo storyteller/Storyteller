@@ -6,6 +6,7 @@ using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
+using Storyteller.Core.Testing.Results;
 
 namespace Storyteller.Core.Testing
 {
@@ -74,6 +75,17 @@ namespace Storyteller.Core.Testing
             theContext.LogException("1", new NotImplementedException());
 
             theContext.Results.Last().spec.ShouldEqual(theContext.Specification.Id);
+        }
+
+        [Test]
+        public void writes_contextual_logging_into_results()
+        {
+            theContext.ContextualLogging.ReporterFor<DivReport>().Add("1");
+            theContext.ContextualLogging.ReporterFor<ListReport>().Add("2");
+
+            var results = theContext.FinalizeResults();
+
+            results.ContextualLogging.Count().ShouldEqual(2);
         }
     }
 

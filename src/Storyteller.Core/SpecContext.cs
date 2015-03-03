@@ -35,10 +35,12 @@ namespace Storyteller.Core
             _services = services;
 
             _timings = timings ?? new Timings();
+
+            ContextualLogging = new ContextualLogging();
         }
 
         public StopConditions StopConditions { get; private set; }
-
+        public ContextualLogging ContextualLogging { get; private set; }
 
         public SpecResults FinalizeResults()
         {
@@ -49,7 +51,8 @@ namespace Storyteller.Core
                 Counts = Counts,
                 Results = Results.ToArray(),
                 Performance = performance,
-                Duration = _timings.Duration
+                Duration = _timings.Duration,
+                ContextualLogging = ContextualLogging.GenerateReports()
             };
         }
 
