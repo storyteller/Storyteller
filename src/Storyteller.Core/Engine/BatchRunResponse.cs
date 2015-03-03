@@ -10,16 +10,16 @@ namespace Storyteller.Core.Engine
         {
         }
 
-        public SpecResult[] results;
-
+        public BatchRecord[] records;
+        public FixtureModel[] fixtures;
 
         public LifecycleSummary Summarize(Lifecycle lifecycle)
         {
             return new LifecycleSummary
             {
                 Lifecycle = lifecycle,
-                Successful = results.Where(x => x.node.lifecycle == lifecycle.ToString() && x.WasSuccessful()).Count(),
-                Failed = results.Where(x => x.node.lifecycle == lifecycle.ToString() && !x.WasSuccessful()).Count()
+                Successful = records.Where(x => x.header.lifecycle == lifecycle.ToString() && x.WasSuccessful()).Count(),
+                Failed = records.Where(x => x.header.lifecycle == lifecycle.ToString() && !x.WasSuccessful()).Count()
             };
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
@@ -7,6 +8,7 @@ using NUnit.Framework;
 using Storyteller.Core.CommandLine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Testing.CommandLine
 {
@@ -15,6 +17,7 @@ namespace Storyteller.Core.Testing.CommandLine
     {
         private RunInput theInput;
         private RemoteController theController;
+        private FixtureModel[] theFixtures;
 
         [SetUp]
         public void SetUp()
@@ -26,7 +29,10 @@ namespace Storyteller.Core.Testing.CommandLine
 
             theInput = new RunInput {Path = directory};
             theController = theInput.BuildRemoteController();
-            theController.Start(EngineMode.Batch);
+            var task = theController.Start(EngineMode.Batch);
+            task.Wait(3.Seconds());
+
+            theFixtures = task.Result.fixtures;
         }
 
         [TearDown]
@@ -45,7 +51,7 @@ namespace Storyteller.Core.Testing.CommandLine
 
             var result = task.Result;
 
-            result.results.OrderBy(x => x.node.id).Select(x => x.node.id)
+            result.records.OrderBy(x => x.header.id).Select(x => x.header.id)
                 .ShouldHaveTheSameElementsAs("embeds", "paragraph1", "sentence2");
         }
 
@@ -59,9 +65,9 @@ namespace Storyteller.Core.Testing.CommandLine
 
             var result = task.Result;
 
-            result.results.Any(x => x.node.id == "embeds").ShouldBeFalse();
-            result.results.Any(x => x.node.id == "paragraph1").ShouldBeFalse();
-            result.results.Any(x => x.node.id == "sentence2").ShouldBeFalse();
+            result.records.Any(x => x.header.id == "embeds").ShouldBeFalse();
+            result.records.Any(x => x.header.id == "paragraph1").ShouldBeFalse();
+            result.records.Any(x => x.header.id == "sentence2").ShouldBeFalse();
         }
 
         [Test]
@@ -74,7 +80,7 @@ namespace Storyteller.Core.Testing.CommandLine
 
             var result = task.Result;
 
-            result.results.OrderBy(x => x.node.id).Select(x => x.node.id)
+            result.records.OrderBy(x => x.header.id).Select(x => x.header.id)
                 .ShouldHaveTheSameElementsAs("sentence1", "sentence2", "sentence3", "sentence4");
         }
 
@@ -89,8 +95,25 @@ namespace Storyteller.Core.Testing.CommandLine
 
             var result = task.Result;
 
-            result.results.OrderBy(x => x.node.id).Select(x => x.node.id)
+            result.records.OrderBy(x => x.header.id).Select(x => x.header.id)
                 .ShouldHaveTheSameElementsAs("sentence2");
+        }
+
+        [Test]
+        public void record_data_for_client()
+        {
+            var task = theInput.StartBatch(theController);
+            task.Wait(3.Seconds());
+
+            var result = task.Result;
+
+            result.fixtures = theFixtures;
+
+            if (theFixtures == null) throw new Exception("Cannot be null dammit");
+
+            var json = JsonSerialization.ToIndentedJson(result);
+
+            new FileSystem().WriteStringToFile("batch-result-data.js", "module.exports = " + json);
         }
     }
 }

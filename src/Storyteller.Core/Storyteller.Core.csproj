@@ -74,7 +74,7 @@
     <Compile Include="Engine\Batching\BatchObserver.cs" />
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
-    <Compile Include="Engine\SpecResult.cs" />
+    <Compile Include="Engine\BatchRecord.cs" />
     <Compile Include="Engine\SpecRunner.cs" />
     <Compile Include="Engine\Timings.cs" />
     <Compile Include="Engine\UserInterface\InstrumentedExecutor.cs" />
