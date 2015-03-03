@@ -56,15 +56,22 @@ namespace Storyteller.Core.Testing
                 using (var execution = theSystem.CreateContext())
                 {
                     var observer = new RecordingObserver();
-                    var context = new SpecContext(spec, null, observer, new StopConditions(), execution.Services);
-                    var plan = spec.CreatePlan(library);
-                    var executor = new SynchronousExecutor(context);
+                    using (var context = new SpecContext(spec, null, observer, new StopConditions(), execution.Services)
+                        )
+                    {
+                        context.Reporting.StartDebugListening();
+                        var plan = spec.CreatePlan(library);
+                        var executor = new SynchronousExecutor(context);
 
-                    plan.AcceptVisitor(executor);
+                        plan.AcceptVisitor(executor);
 
-                    observer.SpecExecutionFinished(header, context.FinalizeResults());
+                        observer.SpecExecutionFinished(header, context.FinalizeResults());
 
-                    data.results.Add(spec.Id, observer.Messages.ToArray());
+                        data.results.Add(spec.Id, observer.Messages.ToArray());
+                    }
+                    
+                    
+
                 }
             });
 

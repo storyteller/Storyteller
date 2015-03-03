@@ -1,10 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using HtmlTags;
 using NUnit.Framework;
 using Storyteller.Core;
 using Storyteller.Core.Grammars.Importing;
 using Storyteller.Core.Grammars.Tables;
+using Storyteller.Core.Results;
 
 namespace StoryTeller.Samples.Fixtures
 {
@@ -52,6 +54,8 @@ namespace StoryTeller.Samples.Fixtures
         private void say()
         {
             Debug.WriteLine("the number is " + _number);
+
+            Context.Reporting.ReporterFor<ListReport>().Add(_number.ToString());
         }
 
         [FormatAs("*= {multiplier}")]
@@ -113,6 +117,27 @@ namespace StoryTeller.Samples.Fixtures
         public void Throw()
         {
             throw new NotImplementedException();
+        }
+    }
+
+    public class ListReport : IReporter
+    {
+        private readonly HtmlTag _ul = new HtmlTag("ul").AddClass("list-group");
+
+        public HtmlTag ToHtml()
+        {
+            return _ul;
+        }
+
+        public ListReport Add(string text)
+        {
+            _ul.Add("li").AddClass("list-group-item").Text(text);
+            return this;
+        }
+
+        public string Title
+        {
+            get { return "Some Numbers"; }
         }
     }
 
