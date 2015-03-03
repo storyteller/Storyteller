@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Cache;
 using System.Threading.Tasks;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
@@ -47,6 +46,8 @@ namespace Storyteller.Core.Engine
                         // TODO -- tag the context or plan if timed out?
                         // TODO -- tag the plan as having an attempt?
 
+                        // Shut down several things here
+                        t.Result.Dispose();
                         request.SpecExecutionFinished(t.Result);
                     });
 

@@ -66,6 +66,8 @@ namespace Storyteller.Core.Engine
             var context = new SpecContext(Specification, timings, _observer, stopConditions, execution.Services);
             Context = context;
 
+            context.Reporting.StartDebugListening();
+
             return context;
         }
 

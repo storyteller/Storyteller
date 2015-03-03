@@ -236,10 +236,13 @@
     <Compile Include="Remotes\SystemRecycledListener.cs" />
     <Compile Include="Remotes\SystemRecycleStarted.cs" />
     <Compile Include="Results\CellResult.cs" />
+    <Compile Include="Results\DebugReporter.cs" />
     <Compile Include="Results\Envelope.cs" />
     <Compile Include="Results\Finished.cs" />
+    <Compile Include="Results\HtmlReport.cs" />
     <Compile Include="Results\IReporter.cs" />
     <Compile Include="Results\IResultMessage.cs" />
+    <Compile Include="Results\Reporter.cs" />
     <Compile Include="Results\ResultStatus.cs" />
     <Compile Include="Results\StepResult.cs" />
     <Compile Include="Results\TimedOut.cs" />
@@ -255,6 +258,7 @@
     <Compile Include="Grammars\Sets\VerificationSetPlan.cs" />
     <Compile Include="Grammars\Sets\WrongOrder.cs" />
     <Compile Include="SpecContext.cs" />
+    <Compile Include="SpecResults.cs" />
     <Compile Include="State.cs" />
     <Compile Include="StopConditions.cs" />
     <Compile Include="StoryTellerAssert.cs" />

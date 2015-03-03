@@ -48,6 +48,8 @@ namespace Storyteller.Core.Engine
             var context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
                 execution.Services);
 
+            context.Reporting.StartDebugListening();
+
             var executor = new SynchronousExecutor(context);
             plan.AcceptVisitor(executor);
 

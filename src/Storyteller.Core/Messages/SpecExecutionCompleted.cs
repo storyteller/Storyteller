@@ -5,7 +5,6 @@ namespace Storyteller.Core.Messages
 {
     public class SpecExecutionCompleted : ClientMessage
     {
-        private readonly SpecResults _results;
 
         [JsonProperty("id")]
         public string Id { get; set; }
@@ -18,16 +17,15 @@ namespace Storyteller.Core.Messages
 
         public SpecExecutionCompleted(string id, SpecResults results) : this()
         {
-            _results = results;
+            if (results == null) throw new ArgumentNullException("results");
+
+            Results = results;
             Id = id;
             Time = DateTime.Now;
         }
 
         [JsonProperty("results")]
-        public SpecResults Results
-        {
-            get { return _results; }
-        }
+        public SpecResults Results { get; set; }
 
         [JsonProperty("time")]
         public DateTime Time { get; set; }

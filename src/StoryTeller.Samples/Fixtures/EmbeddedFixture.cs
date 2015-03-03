@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Storyteller.Core;
 
 namespace StoryTeller.Samples.Fixtures
@@ -11,6 +12,11 @@ namespace StoryTeller.Samples.Fixtures
         {
             this["EmbeddedMath"] =
                 Embed<MathFixture>("Do some Math").Before(c => { if (_throw) throw new NotImplementedException(); });
+        }
+
+        public override void SetUp()
+        {
+            Debug.WriteLine("EmbeddedFixture.Setup sent this debug message");
         }
 
         public void ThrowAnExceptionOnTheNextEmbed()

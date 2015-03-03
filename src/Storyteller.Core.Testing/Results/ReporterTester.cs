@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using FubuTestingSupport;
 using HtmlTags;
 using NUnit.Framework;
@@ -8,12 +9,12 @@ using Storyteller.Core.Results;
 namespace Storyteller.Core.Testing.Results
 {
     [TestFixture]
-    public class ContextualLoggingTester
+    public class ReporterTester
     {
         [Test]
         public void creation_of_reports()
         {
-            var logging = new ContextualLogging();
+            var logging = new Reporter();
 
             logging.ReporterFor<DivReport>()
                 .ShouldBeTheSameAs(logging.ReporterFor<DivReport>());
@@ -25,7 +26,7 @@ namespace Storyteller.Core.Testing.Results
         [Test]
         public void generate_reports()
         {
-            var logging = new ContextualLogging();
+            var logging = new Reporter();
             logging.ReporterFor<DivReport>().Add("1").Add("2");
             logging.ReporterFor<ListReport>().Add("3").Add("4");
 
@@ -40,6 +41,31 @@ namespace Storyteller.Core.Testing.Results
 
             reports[1].html.ShouldContain("<li>3</li>");
             reports[1].html.ShouldContain("<li>4</li>");
+        }
+
+        [Test]
+        public void debug_tracing()
+        {
+            var logging = new Reporter();
+            logging.StartDebugListening();
+
+            Debug.WriteLine("Whoa!");
+            Debug.WriteLine("You don't say");
+            Debug.WriteLine("Bazinga!");
+
+            logging.Dispose();
+
+            Debug.WriteLine("NOT HERE");
+
+            var html = logging.ReporterFor<DebugReporter>().ToHtml().ToString();
+
+            html.ShouldContain("Whoa!");
+            html.ShouldContain("You don&#39;t say");
+            html.ShouldContain("Bazinga!");
+
+            // The following text was written after the DebugReporter was disposed and should not be present
+            html.ShouldNotContain("NOT HERE");
+
         }
     }
 

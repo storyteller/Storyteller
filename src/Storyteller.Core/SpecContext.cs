@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using FubuCore;
-using Newtonsoft.Json;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Results;
@@ -36,11 +35,11 @@ namespace Storyteller.Core
 
             _timings = timings ?? new Timings();
 
-            ContextualLogging = new ContextualLogging();
+            Reporting = new Reporter();
         }
 
         public StopConditions StopConditions { get; private set; }
-        public ContextualLogging ContextualLogging { get; private set; }
+        public Reporter Reporting { get; private set; }
 
         public SpecResults FinalizeResults()
         {
@@ -52,12 +51,13 @@ namespace Storyteller.Core
                 Results = Results.ToArray(),
                 Performance = performance,
                 Duration = _timings.Duration,
-                ContextualLogging = ContextualLogging.GenerateReports()
+                Reporting = Reporting.GenerateReports()
             };
         }
 
         public void Dispose()
         {
+            Reporting.Dispose();
             _state.Dispose();
             _services = null;
         }
@@ -174,25 +174,5 @@ namespace Storyteller.Core
 
             return context;
         }
-    }
-
-    public class SpecResults
-    {
-        [JsonProperty("counts")]
-        public Counts Counts { get; set; }
-
-        [JsonProperty("results")]
-        public IResultMessage[] Results { get; set; }
-
-        [JsonProperty("performance")]
-        public PerfRecord[] Performance { get; set; }
-
-        [JsonProperty("duration")]
-        public long Duration { get; set; }
-
-        [JsonProperty("logging")]
-        public HtmlReport[] ContextualLogging { get; set; }
-
-        // TODO -- debug capture
     }
 }

@@ -18,6 +18,7 @@ namespace Storyteller.Core.Testing.Engine
     public class user_interface_tracing_spec
     {
         private PassthroughListener theListener;
+        private SpecExecutionCompleted theResults;
 
         private RemoteController controllerForProject(string projectFolder)
         {
@@ -43,9 +44,20 @@ namespace Storyteller.Core.Testing.Engine
             task.Wait();
             task.Result.Wait(1.Seconds());
 
+            theResults = task.Result.Result;
+
             controller.Messaging.RemoveListener(theListener);
 
 
+        }
+
+        [Test]
+        public void should_have_captured_debugging_information()
+        {
+            var expectedText = "EmbeddedFixture.Setup sent this debug message";
+
+            theResults.Results.Reporting.Any(x => x.html.Contains(expectedText))
+                .ShouldBeTrue();
         }
 
         [Test]

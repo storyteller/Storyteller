@@ -142,7 +142,7 @@
     <Compile Include="Remotes\Messaging\WaitTester.cs" />
     <Compile Include="Remotes\remote_activation_integration_specs.cs" />
     <Compile Include="Results\CellResultTester.cs" />
-    <Compile Include="Results\ContextualLoggingTester.cs" />
+    <Compile Include="Results\ReporterTester.cs" />
     <Compile Include="Results\EnvelopeTester.cs" />
     <Compile Include="Results\StepResultTester.cs" />
     <Compile Include="Grammars\Sets\ObjectComparisonTester.cs" />

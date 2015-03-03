@@ -18,7 +18,11 @@ namespace Storyteller.Core.Results
 
     public class StepResult : ClientMessage, IResultMessage
     {
-        public StepResult(string id, ResultStatus status) : base("step-result")
+        public StepResult() : base("step-result")
+        {
+        }
+
+        public StepResult(string id, ResultStatus status) : this()
         {
             this.Status = status;
             this.id = id;

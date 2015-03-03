@@ -80,12 +80,12 @@ namespace Storyteller.Core.Testing
         [Test]
         public void writes_contextual_logging_into_results()
         {
-            theContext.ContextualLogging.ReporterFor<DivReport>().Add("1");
-            theContext.ContextualLogging.ReporterFor<ListReport>().Add("2");
+            theContext.Reporting.ReporterFor<DivReport>().Add("1");
+            theContext.Reporting.ReporterFor<ListReport>().Add("2");
 
             var results = theContext.FinalizeResults();
 
-            results.ContextualLogging.Count().ShouldEqual(2);
+            results.Reporting.Count().ShouldEqual(2);
         }
     }
 

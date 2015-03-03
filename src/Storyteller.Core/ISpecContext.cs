@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
@@ -23,7 +22,7 @@ namespace Storyteller.Core
         Specification Specification { get; }
 
         Timings Timings { get; }
-        ContextualLogging ContextualLogging { get; }
+        Reporter Reporting { get; }
         SpecResults FinalizeResults();
     }
 }
