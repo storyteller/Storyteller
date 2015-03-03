@@ -185,14 +185,23 @@ namespace ST.Client
             });
         }
 
-        public Specification LoadSpecification(string id)
+        public SpecData LoadSpecification(string id)
         {
             return _lock.Read(() =>
             {
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var spec = _hierarchy.Nodes[id];
-                return XmlReader.ReadFromFile(spec.Filename);
+                var data = new SpecData
+                {
+                    
+                    data = XmlReader.ReadFromFile(spec.Filename),
+                    id = id
+                };
+
+                if (spec.last != null) data.results = spec.last.Results;
+
+                return data;
             });
         }
 

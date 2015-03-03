@@ -17,13 +17,9 @@ namespace ST.Client.Persistence
 
         public override void HandleMessage(SpecDataRequested message)
         {
-            var specification = _persistence.Value.LoadSpecification(message.id);
+            var data = _persistence.Value.LoadSpecification(message.id);
 
-            _client.Value.SendMessageToClient(new SpecData
-            {
-                id = message.id,
-                data = specification
-            });
+            _client.Value.SendMessageToClient(data);
         }
     }
 }

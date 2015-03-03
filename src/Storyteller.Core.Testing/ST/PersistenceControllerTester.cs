@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
@@ -57,6 +58,19 @@ namespace Storyteller.Core.Testing.ST
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].last
                 .ShouldBeTheSameAs(completed);
+        }
+
+        [Test]
+        public void load_specification_returns_the_specifiction_and_result_if_it_exists()
+        {
+            var theResults = new SpecResults();
+            var completed = new SpecExecutionCompleted("sentence4", theResults);
+            ClassUnderTest.Receive(completed);
+
+            var message = ClassUnderTest.LoadSpecification("sentence4");
+            message.id.ShouldEqual("sentence4");
+            message.data.ShouldBeOfType<Specification>().Id.ShouldEqual("sentence4");
+            message.results.ShouldEqual(theResults);
         }
 
         [Test]
