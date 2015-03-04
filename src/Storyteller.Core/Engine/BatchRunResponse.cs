@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
@@ -12,6 +13,12 @@ namespace Storyteller.Core.Engine
 
         public BatchRecord[] records;
         public FixtureModel[] fixtures;
+
+        public string time;
+        public string system;
+        public string suite;
+
+        public bool success;
 
         public LifecycleSummary Summarize(Lifecycle lifecycle)
         {

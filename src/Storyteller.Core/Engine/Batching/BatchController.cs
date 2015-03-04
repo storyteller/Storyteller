@@ -30,7 +30,10 @@ namespace Storyteller.Core.Engine.Batching
 
             task.ContinueWith(t =>
             {
-                EventAggregator.SendMessage(new BatchRunResponse { records = t.Result.ToArray() });
+                EventAggregator.SendMessage(new BatchRunResponse
+                {
+                    records = t.Result.ToArray()
+                });
             });
         }
     }

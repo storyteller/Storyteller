@@ -5,7 +5,7 @@ using System.Linq;
 using FubuCore;
 using FubuTestingSupport;
 using NUnit.Framework;
-using Storyteller.Core.CommandLine;
+using ST.CommandLine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
 using Storyteller.Core.Remotes.Messaging;

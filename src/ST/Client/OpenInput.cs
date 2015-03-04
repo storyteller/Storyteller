@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FubuCore;
-using Storyteller.Core.CommandLine;
 using Storyteller.Core.Model.Persistence;
+using ProjectInput = ST.CommandLine.ProjectInput;
 
 namespace ST.Client
 {

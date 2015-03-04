@@ -145,9 +145,12 @@ namespace Storyteller.Core.Engine
                 }
 
                 EventAggregator.SendMessage(message);
+
+                return message;
             });
 
 
         }
+
     }
 }

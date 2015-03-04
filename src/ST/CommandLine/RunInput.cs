@@ -1,11 +1,9 @@
-using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Remotes;
-using Storyteller.Core.Remotes.Messaging;
 
-namespace Storyteller.Core.CommandLine
+namespace ST.CommandLine
 {
     public class RunInput : ProjectInput
     {
@@ -14,6 +12,9 @@ namespace Storyteller.Core.CommandLine
 
         [Description("Optional.  Runs only one workspace")]
         public string WorkspaceFlag { get; set; }
+
+        [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
+        public bool OpenFlag { get; set; }
 
         public Task<BatchRunResponse> StartBatch(RemoteController controller)
         {

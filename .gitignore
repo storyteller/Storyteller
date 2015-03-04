@@ -39,3 +39,4 @@ src/StoryTeller.Samples/Storyteller.Samples-results
 *.userprefs
 results/*
 src/ST/fubu-content
+src/stresults.htm

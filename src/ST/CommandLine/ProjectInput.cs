@@ -3,7 +3,7 @@ using FubuCore;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
 
-namespace Storyteller.Core.CommandLine
+namespace ST.CommandLine
 {
     public class ProjectInput
     {

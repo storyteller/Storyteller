@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using FubuCore;
 using FubuCore.CommandLine;
-using Storyteller.Core.Engine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
-using Storyteller.Core.Remotes.Messaging;
 
-namespace Storyteller.Core.CommandLine
+namespace ST.CommandLine
 {
     [CommandDescription("Run a suite of StoryTeller tests")]
     public class RunCommand : FubuCommand<RunInput>
@@ -52,7 +51,36 @@ namespace Storyteller.Core.CommandLine
                         Console.WriteLine(regression);
                     }
 
-                    return regression.Failed == 0;
+                    var success = regression.Failed == 0;
+
+                    results.success = success;
+                    results.suite = input.WorkspaceFlag;
+                    results.system = systemRecycled.system_name;
+                    results.time = DateTime.Now.ToString();
+                    results.fixtures = systemRecycled.fixtures;
+
+
+                    var document = BatchResultsWriter.BuildResults(results);
+                    Console.WriteLine("Writing results to " + input.ResultsPath);
+                    document.WriteToFile(input.ResultsPath);
+
+
+
+                    if (input.OpenFlag)
+                    {
+                        Process.Start(input.ResultsPath);
+                    }
+
+                    if (success)
+                    {
+                        ConsoleWriter.Write(ConsoleColor.Green, "Success!");
+                    }
+                    else
+                    {
+                        ConsoleWriter.Write(ConsoleColor.Red, "Failed with Regression Failures!");
+                    }
+
+                    return success;
                 }
             });
 
