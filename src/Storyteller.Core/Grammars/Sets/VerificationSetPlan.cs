@@ -36,35 +36,40 @@ namespace Storyteller.Core.Grammars.Sets
 
         public void Execute(ISpecContext context)
         {
-            var fetch = _comparison.Fetch(context);
-
-            _expected.Each(x =>
+            using (context.Timings.Subject("Grammar", _section.Key))
             {
-                x.DoDelayedConversions(context);
-                if (!x.Errors.Any()) return;
+                var fetch = _comparison.Fetch(context);
 
-                context.LogResult(x.ToConversionErrorResult());
-            });
-
-            if (_expected.Any(x => x.HasErrors())) return;
-
-            fetch.ContinueWith(t =>
-            {
-                if (t.IsFaulted)
+                _expected.Each(x =>
                 {
-                    // TODO -- do the Flatten() trick here on the aggregated exception
-                    context.LogException(_section.Id, t.Exception);
-                    return;
-                }
+                    x.DoDelayedConversions(context);
+                    if (!x.Errors.Any()) return;
 
-                if (t.IsCompleted)
+                    context.LogResult(x.ToConversionErrorResult());
+                });
+
+                if (_expected.Any(x => x.HasErrors())) return;
+
+                fetch.ContinueWith(t =>
                 {
-                    var result = CreateResults(_expected, t.Result);
-                    result.id = _section.Id;
-                    context.LogResult(result);
-                    return;
-                }
-            }).Wait(context.Cancellation);
+                    if (t.IsFaulted)
+                    {
+                        // TODO -- do the Flatten() trick here on the aggregated exception
+                        context.LogException(_section.Id, t.Exception);
+                        return;
+                    }
+
+                    if (t.IsCompleted)
+                    {
+                        var result = CreateResults(_expected, t.Result);
+                        result.id = _section.Id;
+                        context.LogResult(result);
+                        return;
+                    }
+                }).Wait(context.Cancellation);
+            }
+
+
         }
 
         public object Position { get; set; }
