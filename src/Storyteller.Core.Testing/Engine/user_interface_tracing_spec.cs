@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
+using FubuCore.Logging;
 using FubuTestingSupport;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -45,6 +46,8 @@ namespace Storyteller.Core.Testing.Engine
             task.Result.Wait(1.Seconds());
 
             theResults = task.Result.Result;
+
+            
 
             controller.Messaging.RemoveListener(theListener);
 

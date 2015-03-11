@@ -17,11 +17,13 @@ namespace ST.Client.Persistence
 
         public override void HandleMessage(AddSpec message)
         {
-            _controller.Value.AddSpec(message.parent, message.name);
+            var added = _controller.Value.AddSpec(message.parent, message.name);
             _connector.Value.SendMessageToClient(new HierarchyLoaded
             {
                 hierarchy = _controller.Value.Hierarchy.Top
             });
+
+            _connector.Value.SendMessageToClient(added);
         }
     }
 }

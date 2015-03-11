@@ -4,6 +4,7 @@ using FubuTestingSupport;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using Storyteller.Core.Model;
+using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Testing.Model.Persistence
 {
@@ -45,6 +46,18 @@ namespace Storyteller.Core.Testing.Model.Persistence
             section.AddComment("bar!");
 
             Debug.WriteLine(step.ToJson());
+        }
+
+        [Test]
+        public void bug_with_deserializing_a_step_from_client_json()
+        {
+            var json =
+                "{\"key\": \"EmbeddedMath\",  \"cells\": {},  \"id\": \"ce733f06-710d-4491-9f4e-049fdc4fe48f\"}";
+
+            var step = JsonSerialization.Deserialize<Step>(json);
+
+            Debug.WriteLine(step);
+
         }
     }
 

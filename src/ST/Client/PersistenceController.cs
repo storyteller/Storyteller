@@ -115,6 +115,8 @@ namespace ST.Client
 
                     suite.AddSpec(node);
 
+                    writeHierarchyToRemote();
+
                     return new SpecNodeAdded
                     {
                         suite = suitePath,
@@ -122,6 +124,11 @@ namespace ST.Client
                     };
                 }
             });
+        }
+
+        private void writeHierarchyToRemote()
+        {
+            _engine.SendMessage(new HierarchyLoaded {hierarchy = _hierarchy.Top});
         }
 
         public SpecNodeAdded AddSpec(string path, string name)
@@ -147,6 +154,8 @@ namespace ST.Client
                     node.Filename = file;
                     _hierarchy.Nodes[node.id] = node;
                     suite.AddSpec(node);
+
+                    writeHierarchyToRemote();
 
                     return new SpecNodeAdded
                     {

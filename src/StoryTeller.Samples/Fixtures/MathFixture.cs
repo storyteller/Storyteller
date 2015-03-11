@@ -10,6 +10,9 @@ using Storyteller.Core.Results;
 
 namespace StoryTeller.Samples.Fixtures
 {
+
+
+
     [Hidden]
     public class AnotherFixture : Fixture
     {
