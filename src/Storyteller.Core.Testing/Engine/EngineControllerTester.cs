@@ -115,15 +115,9 @@ namespace Storyteller.Core.Testing.Engine
             ClassUnderTest.Receive(new RunSpec { id = "embeds" });
             var node = findSpec("embeds");
             theResults = new SpecResults { Counts = new Counts(1, 0, 0, 0) };
-            ClassUnderTest.SpecExecutionFinished(node, theResults, 1);
+            ClassUnderTest.SpecExecutionFinished(node, theResults);
 
 
-        }
-
-        [Test]
-        public void sets_the_attempts_on_the_results()
-        {
-            theResults.Attempts.ShouldEqual(1);
         }
 
         [Test]

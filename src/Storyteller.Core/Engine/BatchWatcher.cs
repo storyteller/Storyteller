@@ -25,7 +25,7 @@ namespace Storyteller.Core.Engine
         public void SpecHandled(SpecificationPlan plan, ISpecContext context)
         {
             var record = _results[plan.Specification.Id];
-            record.results = context.FinalizeResults();
+            record.results = context.FinalizeResults(plan.Attempts);
             record.specification = plan.Specification;
 
             if (IsCompleted()) _task.SetResult(_results.Values.ToArray());

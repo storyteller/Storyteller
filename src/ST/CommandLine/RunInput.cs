@@ -7,8 +7,13 @@ namespace ST.CommandLine
 {
     public class RunInput : ProjectInput
     {
-        [Description("Path to write out the results")]
-        public string ResultsPath { get; set; }
+        public RunInput()
+        {
+            ResultsPathFlag = "stresults.htm";
+        }
+
+        [Description("Path to write out the results. Default is stresults.htm")]
+        public string ResultsPathFlag { get; set; }
 
         [Description("Optional.  Runs only one workspace")]
         public string WorkspaceFlag { get; set; }

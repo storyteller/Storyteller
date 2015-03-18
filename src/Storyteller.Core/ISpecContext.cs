@@ -23,6 +23,6 @@ namespace Storyteller.Core
 
         Timings Timings { get; }
         Reporter Reporting { get; }
-        SpecResults FinalizeResults();
+        SpecResults FinalizeResults(int attempts);
     }
 }

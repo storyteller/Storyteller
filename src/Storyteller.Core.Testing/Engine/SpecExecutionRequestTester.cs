@@ -54,7 +54,7 @@ namespace Storyteller.Core.Testing.Engine
 
             request.SpecExecutionFinished(context);
 
-            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, null, 3), x => x.Constraints(Is.Same(theSpec), Is.Anything(), Is.Equal(3)));
+            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, null), x => x.Constraints(Is.Same(theSpec), Is.Anything()));
         }
 
         [Test]

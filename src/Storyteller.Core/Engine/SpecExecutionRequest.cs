@@ -30,7 +30,9 @@ namespace Storyteller.Core.Engine
         {
             var attempts = Plan == null ? 0 : Plan.Attempts;
 
-            _observer.SpecExecutionFinished(Node, context.FinalizeResults(), attempts);
+            var results = context.FinalizeResults(attempts);
+            results.Attempts = attempts;
+            _observer.SpecExecutionFinished(Node, results);
         }
 
         private void performAction(Action action )

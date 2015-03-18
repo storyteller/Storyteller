@@ -83,9 +83,18 @@ namespace Storyteller.Core.Testing
             theContext.Reporting.ReporterFor<DivReport>().Add("1");
             theContext.Reporting.ReporterFor<ListReport>().Add("2");
 
-            var results = theContext.FinalizeResults();
+            var results = theContext.FinalizeResults(3);
 
             results.Reporting.Count().ShouldEqual(2);
+
+            
+        }
+
+        [Test]
+        public void stores_the_attempt_number_on_the_finalized_results()
+        {
+            var results = theContext.FinalizeResults(3);
+            results.Attempts.ShouldEqual(3);
         }
     }
 

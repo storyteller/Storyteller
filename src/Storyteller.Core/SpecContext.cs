@@ -41,7 +41,7 @@ namespace Storyteller.Core
         public StopConditions StopConditions { get; private set; }
         public Reporter Reporting { get; private set; }
 
-        public SpecResults FinalizeResults()
+        public SpecResults FinalizeResults(int attempts)
         {
             var performance = _timings.Finish().ToArray();
 
@@ -51,8 +51,11 @@ namespace Storyteller.Core
                 Results = Results.ToArray(),
                 Performance = performance,
                 Duration = _timings.Duration,
-                Reporting = Reporting.GenerateReports()
+                Reporting = Reporting.GenerateReports(),
+                Attempts = attempts
             };
+
+            
         }
 
         public void Dispose()

@@ -6,6 +6,6 @@ namespace Storyteller.Core
     public interface IResultObserver
     {
         void Handle<T>(T message) where T : IResultMessage;
-        void SpecExecutionFinished(SpecNode node, SpecResults results, int attempts);
+        void SpecExecutionFinished(SpecNode node, SpecResults results);
     }
 }

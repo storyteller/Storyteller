@@ -14,7 +14,7 @@ namespace ST.CommandLine
         public RunCommand()
         {
             Usage("Execute").Arguments(x => x.Path);
-            Usage("Execute and save results").Arguments(x => x.Path, x => x.ResultsPath);
+            Usage("Execute and save results").Arguments(x => x.Path, x => x.ResultsPathFlag);
         }
 
         public override bool Execute(RunInput input)
@@ -61,14 +61,14 @@ namespace ST.CommandLine
 
 
                     var document = BatchResultsWriter.BuildResults(results);
-                    Console.WriteLine("Writing results to " + input.ResultsPath);
-                    document.WriteToFile(input.ResultsPath);
+                    Console.WriteLine("Writing results to " + input.ResultsPathFlag);
+                    document.WriteToFile(input.ResultsPathFlag);
 
 
 
                     if (input.OpenFlag)
                     {
-                        Process.Start(input.ResultsPath);
+                        Process.Start(input.ResultsPathFlag);
                     }
 
                     if (success)

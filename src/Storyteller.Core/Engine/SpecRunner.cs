@@ -58,7 +58,7 @@ namespace Storyteller.Core.Engine
             execution.Dispose();
             context.Dispose();
 
-            return context.FinalizeResults();
+            return context.FinalizeResults(1);
         }
     }
 }
