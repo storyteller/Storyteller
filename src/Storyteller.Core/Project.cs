@@ -13,12 +13,19 @@ namespace Storyteller.Core
     [Serializable]
     public class Project
     {
+        public static string CurrentProfile
+        {
+            get { return CurrentProject == null ? null : CurrentProject.Profile; }
+        }
+
         public static readonly string FILE = "storyteller.config";
 
         public string SystemTypeName { get; set; }
         public int TimeoutInSeconds { get; set; }
         public string TracingStyle { get; set; }
         public string ConfigFile { get; set; }
+        public string Profile { get; set; }
+        public static Project CurrentProject { get; set; }
 
         public StopConditions StopConditions = new StopConditions();
 

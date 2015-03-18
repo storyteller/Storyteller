@@ -30,6 +30,8 @@ namespace Storyteller.Core.Remotes
 
         public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
         {
+            Project.CurrentProject = project;
+
             EventAggregator.Start((IRemoteListener) remoteListener);
 
             _project = project;

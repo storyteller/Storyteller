@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 
@@ -13,6 +14,7 @@ namespace Storyteller.Core.Remotes
             properties.Add("ConfigFile", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
             properties.Add("BaseDirectory", AppDomain.CurrentDomain.BaseDirectory);
             properties.Add("BinPath", AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
+            properties.Add("Profile", Project.CurrentProfile);
         }
 
         public FixtureModel[] fixtures

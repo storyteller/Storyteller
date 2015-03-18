@@ -56,6 +56,8 @@ namespace ST.CommandLine
                 controller.Project.TracingStyle = "TeamCity";
             }
 
+            controller.Project.Profile = ProfileFlag;
+
             if (ConfigFlag.IsNotEmpty())
             {
                 controller.ConfigFile = ConfigFlag;
