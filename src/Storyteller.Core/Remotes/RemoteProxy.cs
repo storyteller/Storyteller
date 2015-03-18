@@ -43,7 +43,7 @@ namespace Storyteller.Core.Remotes
                 _services.Add(_system);
 
                 _engine = mode == EngineMode.Batch
-                    ? buildBatchedEngine()
+                    ? buildBatchedEngine(project.TracingStyle)
                     : buildUserInterfaceEngine();
 
 
@@ -72,7 +72,7 @@ namespace Storyteller.Core.Remotes
         {
             var observer = new UserInterfaceObserver();
 
-            var engine  = new SpecificationEngine(_system, new InstrumentedRunner(observer));
+            var engine  = new SpecificationEngine(_system, new InstrumentedRunner(observer), new NulloObserver());
             _controller = new EngineController(engine, observer);
 
 
@@ -84,10 +84,19 @@ namespace Storyteller.Core.Remotes
             return engine;
         }
 
-        private SpecificationEngine buildBatchedEngine()
+        private SpecificationEngine buildBatchedEngine(string tracingStyle)
         {
-            var batchObserver = new BatchObserver();
-            var engine = new SpecificationEngine(_system, new BatchRunner(batchObserver));
+            IBatchObserver batchObserver = new BatchObserver();
+            IExecutionObserver executionObserver = new NulloObserver();
+
+            if ("TeamCity" == tracingStyle)
+            {
+                batchObserver = new TeamCityBatchObserver(batchObserver);
+                executionObserver = new TeamCityExecutionObserver();
+            }
+
+            var engine = new SpecificationEngine(
+                _system, new BatchRunner(batchObserver), executionObserver);
 
             _controller = new BatchController(engine, batchObserver);
 

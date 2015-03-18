@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using FubuCore;
+using FubuCore.CommandLine;
 using Storyteller.Core.Model;
 using Storyteller.Core.Remotes;
 
@@ -28,6 +29,10 @@ namespace ST.CommandLine
         [Description("Optional. Only runs tests with desired lifecyle")]
         public Lifecycle LifecycleFlag { get; set; }
 
+        [Description("Optional. Applies extra logging to see progress within TeamCity during CI runs")]
+        [FlagAlias("teamcity", 'z')]
+        public bool TeamCityTracingFlag { get; set; }
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
@@ -41,6 +46,11 @@ namespace ST.CommandLine
             if (TimeoutFlag.HasValue)
             {
                 controller.Project.StopConditions.TimeoutInSeconds = TimeoutFlag.Value;
+            }
+
+            if (TeamCityTracingFlag)
+            {
+                controller.Project.TracingStyle = "TeamCity";
             }
 
             return controller;

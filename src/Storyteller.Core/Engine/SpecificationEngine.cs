@@ -22,7 +22,7 @@ namespace Storyteller.Core.Engine
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
 
-        public SpecificationEngine(ISystem system, ISpecRunner runner)
+        public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
         {
             _system = system;
             _runner = runner;
@@ -33,6 +33,8 @@ namespace Storyteller.Core.Engine
                 IExecutionContext execution = null;
                 try
                 {
+                    observer.SpecStarted(request);
+
                     using (timings.Subject("Context", "Creation"))
                     {
                         execution = _system.CreateContext();
@@ -58,6 +60,7 @@ namespace Storyteller.Core.Engine
                 finally
                 {
                     execution.Dispose();
+                    observer.SpecFinished(request);
                 }
             });
 

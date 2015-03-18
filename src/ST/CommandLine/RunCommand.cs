@@ -28,60 +28,59 @@ namespace ST.CommandLine
                     systemRecycled.WriteSystemUsage();
                     return false;
                 }
+
+
+                writeSystemUsage(systemRecycled);
+                var execution = input.StartBatch(controller);
+
+                // TODO -- put a command level timeout on this thing
+                execution.Wait();
+
+                var results = execution.Result;
+
+                var regression = results.Summarize(Lifecycle.Regression);
+                var acceptance = results.Summarize(Lifecycle.Acceptance);
+
+                if (input.LifecycleFlag != Lifecycle.Regression)
+                {
+                    Console.WriteLine(acceptance);
+                }
+
+                if (input.LifecycleFlag != Lifecycle.Acceptance)
+                {
+                    Console.WriteLine(regression);
+                }
+
+                var success = regression.Failed == 0;
+
+                results.success = success;
+                results.suite = input.WorkspaceFlag;
+                results.system = systemRecycled.system_name;
+                results.time = DateTime.Now.ToString();
+                results.fixtures = systemRecycled.fixtures;
+
+
+                var document = BatchResultsWriter.BuildResults(results);
+                Console.WriteLine("Writing results to " + input.ResultsPathFlag);
+                document.WriteToFile(input.ResultsPathFlag);
+
+
+
+                if (input.OpenFlag)
+                {
+                    Process.Start(input.ResultsPathFlag);
+                }
+
+                if (success)
+                {
+                    ConsoleWriter.Write(ConsoleColor.Green, "Success!");
+                }
                 else
                 {
-                    writeSystemUsage(systemRecycled);
-                    var execution = input.StartBatch(controller);
-
-                    // TODO -- put a command level timeout on this thing
-                    execution.Wait();
-
-                    var results = execution.Result;
-
-                    var regression = results.Summarize(Lifecycle.Regression);
-                    var acceptance = results.Summarize(Lifecycle.Acceptance);
-
-                    if (input.LifecycleFlag != Lifecycle.Regression)
-                    {
-                        Console.WriteLine(acceptance);
-                    }
-
-                    if (input.LifecycleFlag != Lifecycle.Acceptance)
-                    {
-                        Console.WriteLine(regression);
-                    }
-
-                    var success = regression.Failed == 0;
-
-                    results.success = success;
-                    results.suite = input.WorkspaceFlag;
-                    results.system = systemRecycled.system_name;
-                    results.time = DateTime.Now.ToString();
-                    results.fixtures = systemRecycled.fixtures;
-
-
-                    var document = BatchResultsWriter.BuildResults(results);
-                    Console.WriteLine("Writing results to " + input.ResultsPathFlag);
-                    document.WriteToFile(input.ResultsPathFlag);
-
-
-
-                    if (input.OpenFlag)
-                    {
-                        Process.Start(input.ResultsPathFlag);
-                    }
-
-                    if (success)
-                    {
-                        ConsoleWriter.Write(ConsoleColor.Green, "Success!");
-                    }
-                    else
-                    {
-                        ConsoleWriter.Write(ConsoleColor.Red, "Failed with Regression Failures!");
-                    }
-
-                    return success;
+                    ConsoleWriter.Write(ConsoleColor.Red, "Failed with Regression Failures!");
                 }
+
+                return success;
             });
 
             task.Wait();

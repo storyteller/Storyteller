@@ -58,12 +58,15 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Engine\Batching\BatchController.cs" />
     <Compile Include="Engine\Batching\BatchRunner.cs" />
+    <Compile Include="Engine\Batching\TeamCityBatchObserver.cs" />
+    <Compile Include="Engine\Batching\TeamCityExtensions.cs" />
     <Compile Include="Engine\BatchRunRequest.cs" />
     <Compile Include="Engine\BatchRunResponse.cs" />
     <Compile Include="Engine\BatchWatcher.cs" />
     <Compile Include="Engine\ConsumingQueue.cs" />
     <Compile Include="Engine\EngineController.cs" />
     <Compile Include="Engine\IConsumingQueue.cs" />
+    <Compile Include="Engine\IExecutionObserver.cs" />
     <Compile Include="Engine\ISpecRunner.cs" />
     <Compile Include="Engine\LifecycleSummary.cs" />
     <Compile Include="Engine\SpecExecutionRequest.cs" />

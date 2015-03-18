@@ -17,6 +17,7 @@ namespace Storyteller.Core
 
         public string SystemTypeName { get; set; }
         public int TimeoutInSeconds { get; set; }
+        public string TracingStyle { get; set; }
 
         public StopConditions StopConditions = new StopConditions();
 
