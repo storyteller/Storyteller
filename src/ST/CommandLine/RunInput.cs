@@ -21,6 +21,12 @@ namespace ST.CommandLine
         [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
         public bool OpenFlag { get; set; }
 
+        [Description("Write the performance data in CSV format to the specified path")]
+        public string CsvFlag { get; set; }
+
+        [Description("Write the raw result information to JSON format at the specified path")]
+        public string JsonFlag { get; set; }
+
         public Task<BatchRunResponse> StartBatch(RemoteController controller)
         {
             var request = new BatchRunRequest

@@ -156,6 +156,7 @@
     <Compile Include="StoryTellerAssertTester.cs" />
     <Compile Include="ST\ClientConnectorTester.cs" />
     <Compile Include="ST\PersistenceControllerTester.cs" />
+    <Compile Include="ST\RunCommand_write_csv_and_json_data_spec.cs" />
     <Compile Include="ST\SaveSpecBodyCommandTester.cs" />
     <Compile Include="TestingContext.cs" />
     <Compile Include="Conversion\StringConverterProviderTester.cs" />

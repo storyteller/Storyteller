@@ -109,6 +109,7 @@
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
     <Compile Include="CommandLine\BatchResultsWriter.cs" />
+    <Compile Include="CommandLine\PerformanceDataWriter.cs" />
     <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />

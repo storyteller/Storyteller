@@ -64,7 +64,18 @@ namespace ST.CommandLine
                 Console.WriteLine("Writing results to " + input.ResultsPathFlag);
                 document.WriteToFile(input.ResultsPathFlag);
 
+                if (input.CsvFlag.IsNotEmpty())
+                {
+                    Console.WriteLine("Writing performance data as CSV data to " + input.CsvFlag);
+                
+                    PerformanceDataWriter.WriteCSV(results, input.CsvFlag);
+                }
 
+                if (input.JsonFlag.IsNotEmpty())
+                {
+                    Console.WriteLine("Writing the raw result information to " + input.JsonFlag);
+                    PerformanceDataWriter.WriteJSON(results, input.JsonFlag);
+                }
 
                 if (input.OpenFlag)
                 {
