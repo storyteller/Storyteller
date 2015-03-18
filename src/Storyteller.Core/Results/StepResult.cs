@@ -48,7 +48,8 @@ namespace Storyteller.Core.Results
         [JsonIgnore]
         public ResultStatus Status;
 
-        public string status
+        [JsonProperty("status")]
+        public string StatusDescription
         {
             get { return Status.ToString(); }
         }

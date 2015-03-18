@@ -1,6 +1,7 @@
 ﻿using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Remotes.Messaging;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Testing.Results
@@ -61,6 +62,15 @@ namespace Storyteller.Core.Testing.Results
             CellResult.Missing("a").Tabulate(counts);
 
             counts.ShouldEqual(0, 0, 0, 1);
+        }
+
+        [Test]
+        public void serialize_status()
+        {
+            var result = new CellResult("A", ResultStatus.error);
+
+            var json = JsonSerialization.ToJson(result);
+            json.ShouldContain("\"status\":\"error\"");
         }
     }
 }

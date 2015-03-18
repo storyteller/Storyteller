@@ -1,19 +1,18 @@
 using System;
 using FubuCore;
 using Newtonsoft.Json;
-using Storyteller.Core.Engine;
 
 namespace Storyteller.Core.Results
 {
     public class CellResult
     {
-
         public string id { get; set; }
 
         [JsonIgnore]
         public ResultStatus Status = ResultStatus.ok;
 
-        public string status
+        [JsonProperty("status")]
+        public string StatusDescription
         {
             get { return Status.ToString(); }
         }

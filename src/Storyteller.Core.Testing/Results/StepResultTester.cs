@@ -2,6 +2,7 @@
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
+using Storyteller.Core.Remotes.Messaging;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Testing.Results
@@ -54,6 +55,26 @@ namespace Storyteller.Core.Testing.Results
             result.Tabulate(counts);
 
             counts.ShouldEqual(1, 3, 2, 0);
+        }
+
+        [Test]
+        public void serialize_status()
+        {
+            var result = new StepResult("foo", ResultStatus.ok)
+            {
+                cells = new[]
+                {
+                    CellResult.Error("a", "bad!"),
+                    CellResult.Error("b", "worse!"),
+                    CellResult.Success("c"),
+                    CellResult.Failure("d", "different"),
+                    CellResult.Failure("e", "different"),
+                    CellResult.Failure("f", "different"),
+                }
+            };
+
+            var json = JsonSerialization.ToCleanJson(result);
+            json.ShouldContain("\"status\":\"ok\"");
         }
     }
 }
