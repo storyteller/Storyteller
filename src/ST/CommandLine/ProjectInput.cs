@@ -17,8 +17,8 @@ namespace ST.CommandLine
         [Description("Path to the StoryTeller project file or the project directory")]
         public string Path { get; set; }
 
-        [Description("Specify a compile target")]
-        public string CompileFlag { get; set; }
+        [Description("Specify a build target to force Storyteller to choose that profile")]
+        public string BuildFlag { get; set; }
 
         [Description("Storyteller test mode profile for systems like Serenity that use this")]
         public string ProfileFlag { get; set; }
@@ -33,14 +33,17 @@ namespace ST.CommandLine
         [FlagAlias("teamcity", 'z')]
         public bool TeamCityTracingFlag { get; set; }
 
+        [Description("Optional. Override the config file selection of the Storyteller test running AppDomain")]
+        public string ConfigFlag { get; set; }
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
 
             var controller = new RemoteController(path);
-            if (CompileFlag.IsNotEmpty())
+            if (BuildFlag.IsNotEmpty())
             {
-                controller.UseBuildProfile(CompileFlag);
+                controller.UseBuildProfile(BuildFlag);
             }
 
             if (TimeoutFlag.HasValue)
@@ -51,6 +54,11 @@ namespace ST.CommandLine
             if (TeamCityTracingFlag)
             {
                 controller.Project.TracingStyle = "TeamCity";
+            }
+
+            if (ConfigFlag.IsNotEmpty())
+            {
+                controller.ConfigFile = ConfigFlag;
             }
 
             return controller;
