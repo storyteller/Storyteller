@@ -56,6 +56,7 @@
     <Compile Include="CellHandling.cs" />
     <Compile Include="Commands\ForceRecycleCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Conversion\NullableConvertor.cs" />
     <Compile Include="Engine\Batching\BatchController.cs" />
     <Compile Include="Engine\Batching\BatchRunner.cs" />
     <Compile Include="Engine\Batching\TeamCityBatchObserver.cs" />

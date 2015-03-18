@@ -16,6 +16,7 @@ namespace Storyteller.Core.Conversion
         {
             _providers.AddRange(providers);
             _providers.Add(new EnumerationConversion());
+            _providers.Add(new NullableConvertor(this));
 
             _convertors = new Cache<Type, Func<string, object>>(type =>
             {
@@ -43,6 +44,8 @@ namespace Storyteller.Core.Conversion
 
                 return x;
             });
+
+            ;
         }
 
         public void Add<T>(Func<string, T> convertor)

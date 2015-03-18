@@ -71,6 +71,16 @@ namespace Storyteller.Core.Testing.Conversion
         {
             assertRoundTrip(Directions.North);
         }
+
+        [Test]
+        public void nullable_conversion()
+        {
+            conversions.Convert(typeof(int?), "NULL")
+                .ShouldBeNull();
+
+            conversions.Convert(typeof (int?), "123")
+                .ShouldEqual(123);
+        }
     }
 
     
