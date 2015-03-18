@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore.Logging;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -25,7 +26,7 @@ namespace Storyteller.Core.Testing.ST
             theCommand = new RecordingCommand<RunSpec>();
             theRemoteController = MockRepository.GenerateMock<IRemoteController>();
 
-            theConnector = new ClientConnector(theRemoteController, new ICommand[] {theCommand});
+            theConnector = new ClientConnector(new RecordingLogger(), theRemoteController, new ICommand[] {theCommand});
         }
 
         [Test]

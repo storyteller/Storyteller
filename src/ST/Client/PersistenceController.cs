@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Xml;
 using FubuCore;
+using FubuCore.Logging;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
@@ -16,6 +17,7 @@ namespace ST.Client
     // TODO -- need to flush results when the file changes maybe?
     public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable, IListener<SpecExecutionCompleted>
     {
+        private readonly ILogger _logger;
         private readonly IRemoteController _engine;
         private readonly IClientConnector _client;
         private readonly ISpecFileWatcher _watcher;
@@ -24,8 +26,9 @@ namespace ST.Client
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
 
-        public PersistenceController(IRemoteController engine, IClientConnector client, ISpecFileWatcher watcher)
+        public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client, ISpecFileWatcher watcher)
         {
+            _logger = logger;
             _engine = engine;
             _client = client;
             _watcher = watcher;
@@ -33,15 +36,22 @@ namespace ST.Client
 
         public void StartWatching(string path)
         {
-            _specPath = path.ToFullPath();
-
-            _lock.Write(() =>
+            try
             {
-                _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
-            });
+                _specPath = path.ToFullPath();
+
+                _lock.Write(() =>
+                {
+                    _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
+                });
 
 
-            _watcher.StartWatching(path, this);
+                _watcher.StartWatching(path, this);
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Failed to start watching spec files", e);
+            }
         }
 
         public Hierarchy Hierarchy
@@ -51,39 +61,53 @@ namespace ST.Client
 
         public void AddSuite(string parent, string name)
         {
-            var parentSuite = _hierarchy.Suites[parent];
-            if (parentSuite != null)
+            try
             {
-                var path = parentSuite.Folder.AppendPath(name);
-                Directory.CreateDirectory(path);
+                var parentSuite = _hierarchy.Suites[parent];
+                if (parentSuite != null)
+                {
+                    var path = parentSuite.Folder.AppendPath(name);
+                    Directory.CreateDirectory(path);
 
-                ReloadHierarchy();
+                    ReloadHierarchy();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error while trying to add Suite {0} to parent {1}".ToFormat(name, parent), e);
             }
         }
 
 
         public void SaveSpecificationBody(string id, Specification specification)
         {
-            _lock.Read(() =>
+            try
             {
-                if (!_hierarchy.Nodes.Has(id)) return true;
-
-                var spec = _hierarchy.Nodes[id];
-
-                using (_watcher.LatchFile(spec.Filename))
+                _lock.Read(() =>
                 {
-                    specification.ReadNode(spec);
+                    if (!_hierarchy.Nodes.Has(id)) return true;
 
-                    var document = new XmlDocument();
-                    document.Load(spec.Filename);
+                    var spec = _hierarchy.Nodes[id];
 
-                    XmlWriter.WriteBody(specification, document.DocumentElement);
+                    using (_watcher.LatchFile(spec.Filename))
+                    {
+                        specification.ReadNode(spec);
 
-                    document.Save(spec.Filename);
-                }
+                        var document = new XmlDocument();
+                        document.Load(spec.Filename);
 
-                return true;
-            });
+                        XmlWriter.WriteBody(specification, document.DocumentElement);
+
+                        document.Save(spec.Filename);
+                    }
+
+                    return true;
+                });
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Error trying to save specification " + id, e);
+            }
         }
 
         public SpecNodeAdded CloneSpecification(string id, string name)
@@ -223,44 +247,58 @@ namespace ST.Client
 
         public void Changed(string file)
         {
-            _lock.Read(() =>
+            try
             {
-                var node = HierarchyLoader.ReadSpecNode(file);
-                if (_hierarchy.Nodes.Has(node.id))
+                _lock.Read(() =>
                 {
-                    var old = _hierarchy.Nodes[node.id];
-                    var suite = _hierarchy.Suites[old.SuitePath()];
+                    var node = HierarchyLoader.ReadSpecNode(file);
+                    if (_hierarchy.Nodes.Has(node.id))
+                    {
+                        var old = _hierarchy.Nodes[node.id];
+                        var suite = _hierarchy.Suites[old.SuitePath()];
 
-                    suite.ReplaceNode(node);
-                    _hierarchy.Nodes[node.id] = node;
+                        suite.ReplaceNode(node);
+                        _hierarchy.Nodes[node.id] = node;
 
-                    node.WritePath(suite.path);
-                }
+                        node.WritePath(suite.path);
+                    }
 
-                _client.SendMessageToClient(new SpecChanged
-                {
-                    node = node
+                    _client.SendMessageToClient(new SpecChanged
+                    {
+                        node = node
+                    });
+
+                    return true;
                 });
-
-                return true;
-            });
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Failed to handle a changed file: " + file, e);
+            }
         }
 
         public virtual void ReloadHierarchy()
         {
-            _lock.Write(() =>
+            try
             {
-                _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
-                var message = new HierarchyLoaded
+                _lock.Write(() =>
                 {
-                    hierarchy = _hierarchy.Top
-                };
+                    _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
+                    var message = new HierarchyLoaded
+                    {
+                        hierarchy = _hierarchy.Top
+                    };
 
-                // TODO -- have it read in the cached result counts
+                    // TODO -- have it read in the cached result counts
 
-                _client.SendMessageToClient(message);
-                _engine.SendMessage(message);
-            });
+                    _client.SendMessageToClient(message);
+                    _engine.SendMessage(message);
+                });
+            }
+            catch (Exception e)
+            {
+                _logger.Error("Failed to reload the spec hierarchy", e);
+            }
         }
 
         public void Added(string file)

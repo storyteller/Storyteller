@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fleck;
+using FubuCore.Logging;
 using FubuMVC.Core;
 using Storyteller.Core.Commands;
 using Storyteller.Core.Messages;
@@ -16,6 +17,7 @@ namespace ST.Client
         IListener<SystemRecycleStarted>, 
         IClientConnector
     {
+        private readonly ILogger _logger;
         private readonly IRemoteController _controller;
         private readonly IEnumerable<ICommand> _commands;
         private readonly int _port;
@@ -23,8 +25,9 @@ namespace ST.Client
         private readonly string _webSocketsAddress;
         private WebSocketServer _server;
 
-        public ClientConnector(IRemoteController controller, IEnumerable<Storyteller.Core.Commands.ICommand> commands)
+        public ClientConnector(ILogger logger, IRemoteController controller, IEnumerable<Storyteller.Core.Commands.ICommand> commands)
         {
+            _logger = logger;
             _controller = controller;
             _commands = commands;
             _port = PortFinder.FindPort(8181);
@@ -108,7 +111,7 @@ namespace ST.Client
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                _logger.Error("Json message: " + json, ex);
             }
         }
 

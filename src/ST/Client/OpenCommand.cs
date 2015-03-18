@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using Bottles;
 using FubuCore.CommandLine;
+using FubuCore.Logging;
 using FubuMVC.Core;
 using FubuMVC.Katana;
 using FubuMVC.StructureMap;
@@ -31,6 +32,9 @@ namespace ST.Client
                 
 
                 _.ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
+
+                _.For<ILogger>().Use<Logger>();
+                _.For<ILogListener>().Use<ExceptionListener>();
 
                 _.For<IActivator>().Add<ClientConnectorActivator>();
                 _.For<IActivator>().Add<StartWatchingFilesActivator>();
