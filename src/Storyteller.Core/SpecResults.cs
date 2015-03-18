@@ -21,5 +21,7 @@ namespace Storyteller.Core
         [JsonProperty("logging")]
         public HtmlReport[] Reporting { get; set; }
 
+        [JsonProperty("attempts")]
+        public int Attempts { get; set; }
     }
 }

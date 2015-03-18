@@ -11,12 +11,12 @@ namespace ST.CommandLine
 {
     public static class BatchResultsWriter
     {
-        private static readonly FileSystem fileSystem = new FileSystem();
-
         public static HtmlDocument BuildResults(BatchRunResponse results)
         {
-            var document = new HtmlDocument();
-            document.Title = "Storyteller Batch Results for {0}: {1}".ToFormat(results.system, results.suite);
+            var document = new HtmlDocument
+            {
+                Title = "Storyteller Batch Results for {0}: {1}".ToFormat(results.system, results.suite)
+            };
 
             writeCSS(document);
             writeJavascript(results, document);

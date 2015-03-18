@@ -65,7 +65,7 @@ namespace Storyteller.Core.Testing
 
                         plan.AcceptVisitor(executor);
 
-                        observer.SpecExecutionFinished(header, context.FinalizeResults());
+                        observer.SpecExecutionFinished(header, context.FinalizeResults(), 1);
 
                         data.results.Add(spec.Id, observer.Messages.ToArray());
                     }
@@ -96,7 +96,7 @@ namespace Storyteller.Core.Testing
             Messages.Add(message.As<ClientMessage>());
         }
 
-        public void SpecExecutionFinished(SpecNode node, SpecResults results)
+        public void SpecExecutionFinished(SpecNode node, SpecResults results, int attempts)
         {
             Messages.Add(new SpecExecutionCompleted(node.id, results));
         }

@@ -47,11 +47,14 @@ namespace Storyteller.Core.Testing.Engine
             var action = MockRepository.GenerateMock<IResultObserver>();
 
             var request = new SpecExecutionRequest(theSpec, action);
+            request.ReadXml();
+            request.CreatePlan(TestingContext.Library);
+            request.Plan.Attempts = 3;
             var context = SpecContext.Basic();
 
             request.SpecExecutionFinished(context);
 
-            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, null), x => x.Constraints(Is.Same(theSpec), Is.Anything()));
+            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, null, 3), x => x.Constraints(Is.Same(theSpec), Is.Anything(), Is.Equal(3)));
         }
 
         [Test]

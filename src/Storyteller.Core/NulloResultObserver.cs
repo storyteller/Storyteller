@@ -10,7 +10,7 @@ namespace Storyteller.Core
             // Nothing
         }
 
-        public void SpecExecutionFinished(SpecNode node, SpecResults results)
+        public void SpecExecutionFinished(SpecNode node, SpecResults results, int attempts)
         {
             // Nothing
         }

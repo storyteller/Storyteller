@@ -72,13 +72,15 @@ namespace Storyteller.Core.Engine
             _observer.SendToClient(message);
         }
 
-        public void SpecExecutionFinished(SpecNode node, SpecResults results)
+        public void SpecExecutionFinished(SpecNode node, SpecResults results, int attempts)
         {
             var outstanding = _outstanding.FirstOrDefault(x => x.Node == node);
             if (outstanding == null) return;
 
             outstanding.Dispose();
             _outstanding.Remove(outstanding);
+
+            results.Attempts = attempts;
 
             _observer.SendToClient(new SpecExecutionCompleted(node.id, results));
         }
