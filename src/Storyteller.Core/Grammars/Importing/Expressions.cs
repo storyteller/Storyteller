@@ -29,12 +29,23 @@
             _inner = inner;
         }
 
+        /// <summary>
+        /// Replace the template text of the inner grammar
+        /// </summary>
+        /// <param name="template"></param>
+        /// <returns></returns>
         public ICurryGrammarDefaultsExpression Template(string template)
         {
             _template = template;
             return this;
         }
 
+        /// <summary>
+        /// Replace the default values of the inner grammar. Use the form
+        /// prop1:value1,prop2:value2
+        /// </summary>
+        /// <param name="defaultValues"></param>
+        /// <returns></returns>
         IGrammar ICurryGrammarDefaultsExpression.Defaults(string defaultValues)
         {
             return new CurriedLineGrammar(_template, _inner, defaultValues);

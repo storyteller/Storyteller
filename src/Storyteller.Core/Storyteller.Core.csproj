@@ -146,7 +146,6 @@
     <Compile Include="Grammars\SpecificationPlan.cs" />
     <Compile Include="ICompositeExecution.cs" />
     <Compile Include="IExecutionStep.cs" />
-    <Compile Include="IFixture.cs" />
     <Compile Include="ILineExecution.cs" />
     <Compile Include="ILineGrammar.cs" />
     <Compile Include="Engine\IStepExecutor.cs" />

@@ -14,12 +14,12 @@ namespace Storyteller.Core.Model
         public static readonly Cache<Type, Fixture> FixtureCache =
             new Cache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
 
-        public readonly Cache<string, IFixture> Fixtures = new Cache<string, IFixture>(key => new MissingFixture(key));
+        public readonly Cache<string, Fixture> Fixtures = new Cache<string, Fixture>(key => new MissingFixture(key));
         public readonly Cache<string, FixtureModel> Models = new Cache<string, FixtureModel>();
 
         public static bool IsFixtureType(Type type)
         {
-            if (!type.CanBeCastTo<IFixture>()) return false;
+            if (!type.CanBeCastTo<Fixture>()) return false;
             if (type.HasAttribute<HiddenAttribute>()) return false;
             if (!type.IsConcreteWithDefaultCtor()) return false;
             if (type.IsOpenGeneric()) return false;
@@ -89,7 +89,7 @@ namespace Storyteller.Core.Model
 
         public struct CompiledFixture
         {
-            public IFixture Fixture;
+            public Fixture Fixture;
             public FixtureModel Model;
         }
     }

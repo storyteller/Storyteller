@@ -17,7 +17,7 @@ using Storyteller.Core.Model.Lists;
 
 namespace Storyteller.Core
 {
-    public class Fixture : IFixture
+    public class Fixture
     {
         private static readonly List<Type> _ignoredTypes = new List<Type>
         {
@@ -46,16 +46,32 @@ namespace Storyteller.Core
             }
         }
 
-        public ISpecContext Context { get; set; }
+        /// <summary>
+        /// The currently executing specification context. This property will only
+        /// be set at runtime during specification runs
+        /// </summary>
+        public ISpecContext Context { get; internal set; }
 
+        /// <summary>
+        /// Executes before any steps within a section using this Fixture object
+        /// Context will be available in this method
+        /// </summary>
         public virtual void SetUp()
         {
         }
 
+        /// <summary>
+        /// Executes after any steps within a section using this Fixture object
+        /// Context will be available in this method
+        /// </summary>
         public virtual void TearDown()
         {
         }
 
+        /// <summary>
+        /// All the grammars, including "hidden" grammars, in this Fixture
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IGrammar> AllGrammars()
         {
             return _grammars;
@@ -66,6 +82,12 @@ namespace Storyteller.Core
             return GetType().HasAttribute<HiddenAttribute>();
         }
 
+        /// <summary>
+        /// Used internally to build the fixture model that the Storyteller client
+        /// uses to render the screens
+        /// </summary>
+        /// <param name="conversions"></param>
+        /// <returns></returns>
         public virtual FixtureModel Compile(CellHandling conversions)
         {
             GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Each(method =>
@@ -339,6 +361,15 @@ namespace Storyteller.Core
             return VerifyStringList(c => dataSource());
         }
 
+        /// <summary>
+        /// Use to create a new paragraph grammar to configure an object stored on
+        /// the Context.State.CurrentObject with property
+        /// setter children grammars
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="title"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static ParagraphGrammar CreateObject<T>(string title, Action<ObjectConstructionExpression<T>> action)
         {
             var grammar = new ParagraphGrammar(title);
@@ -348,7 +379,15 @@ namespace Storyteller.Core
             return grammar;
         }
 
-
+        /// <summary>
+        /// Creates a grammar that will instantiate a new object of type T on the
+        /// Context.State.CurrentObject property and establish child grammar steps
+        /// to set properties on the new object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="title"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static ParagraphGrammar CreateNewObject<T>(string title, Action<ObjectConstructionExpression<T>> action)
             where T : new()
         {
@@ -359,6 +398,13 @@ namespace Storyteller.Core
             });
         }
 
+        /// <summary>
+        /// Create a paragraph grammar to verify values on an existing object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="title"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static ParagraphGrammar VerifyPropertiesOf<T>(string title,
                                                              Action<ObjectVerificationExpression<T>> action)
             where T : class
@@ -372,6 +418,12 @@ namespace Storyteller.Core
             return grammar;
         }
 
+        /// <summary>
+        /// Create a generic Paragraph grammar
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
         public static ParagraphGrammar Paragraph(string title, Action<ParagraphBuilder> configure)
         {
             var grammar = new ParagraphGrammar(title);
@@ -381,38 +433,80 @@ namespace Storyteller.Core
             return grammar;
         }
 
+        /// <summary>
+        /// Create a set verification grammar against a set of T objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
         public static VerifySetExpression<T> VerifySetOf<T>(Func<ISpecContext, IEnumerable<T>> dataSource)
         {
             return new VerifySetExpression<T>(dataSource);
         }
 
+        /// <summary>
+        /// Create a set verification grammar against a set of T objects
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
         public static VerifySetExpression<T> VerifySetOf<T>(Func<IEnumerable<T>> dataSource)
         {
             return new VerifySetExpression<T>(c => dataSource());
         }
 
-        // TODO -- add a UT for this. Copied from old code
+        /// <summary>
+        /// A shorthand way of performing simple actions with a single input cell
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
         public static ActionGrammar<T> Read<T>(string key, Action<T> action)
         {
             return new ActionGrammar<T>("Read {" + key + "}", (x, context) => action(x));
         }
 
+        /// <summary>
+        /// Imports an existing grammar from another Fixture with options to change
+        /// titles or set different default values. 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="grammarKey"></param>
+        /// <returns></returns>
         public ImportedGrammar Import<T>(string grammarKey) where T : Fixture
         {
             var fixture = (T)FixtureLibrary.FixtureCache[typeof (T)];
             return new ImportedGrammar(fixture, fixture[grammarKey]);
         }
 
+        /// <summary>
+        /// Create a different "curried" version of an existing grammar on
+        /// this Fixture with different labels and/or defaults
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public CurryGrammarExpression Curry(string key)
         {
             return Curry(this[key]);
         }
 
+        /// <summary>
+        /// Create a different "curried" version of an existing grammar
+        /// with different labels and/or defaults
+        /// </summary>
+        /// <param name="inner"></param>
+        /// <returns></returns>
         public CurryGrammarExpression Curry(IGrammar inner)
         {
             return new CurryGrammarExpression(inner);
         }
 
+        /// <summary>
+        /// Create selection lists used within grammars from this Fixture only
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="values"></param>
         public void AddSelectionValues(string key, params string[] values)
         {
             Lists[key].AddValues(values);

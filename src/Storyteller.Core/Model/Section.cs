@@ -43,12 +43,12 @@ namespace Storyteller.Core.Model
             return CreatePlan(library, fixture);
         }
 
-        public CompositeExecution CreatePlan(FixtureLibrary library, IFixture fixture)
+        public CompositeExecution CreatePlan(FixtureLibrary library, Fixture fixture)
         {
             return new CompositeExecution(toExecutionSteps(library, fixture).ToArray());
         }
 
-        private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, IFixture fixture)
+        private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, Fixture fixture)
         {
             var setup = SilentAction.AsCritical("Fixture", Stage.setup, x =>
             {
