@@ -90,7 +90,7 @@ namespace Storyteller.Core
         /// <returns></returns>
         public virtual FixtureModel Compile(CellHandling conversions)
         {
-            GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Each(method =>
+            GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(methodFromThis).Where(x => !x.HasAttribute<HiddenAttribute>()).Each(method =>
             {
                 var grammarKey = method.GetKey();
                 if (_grammars.Has(grammarKey)) return;

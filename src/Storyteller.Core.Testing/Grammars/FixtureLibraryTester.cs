@@ -34,6 +34,15 @@ namespace Storyteller.Core.Testing.Grammars
         }
 
         [Test]
+        public void hidden_grammars_are_not_in_the_fixture_model()
+        {
+            var library = TestingContext.Library;
+
+            library.Models["Open"].grammars.Select(x => x.key)
+                .ShouldHaveTheSameElementsAs("NotHidden");
+        }
+
+        [Test]
         public void serialize_for_TableFixture()
         {
             var library = TestingContext.Library;
@@ -108,7 +117,16 @@ namespace Storyteller.Core.Testing.Grammars
 
     public class OpenFixture : Fixture
     {
-        
+        [Hidden]
+        public void ShouldBeHidden()
+        {
+            
+        }
+
+        public void NotHidden()
+        {
+            
+        }
     }
 
     public class AliasedFixture : Fixture
