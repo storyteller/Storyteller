@@ -266,6 +266,7 @@
     <Compile Include="StorytellerCatastrophicException.cs" />
     <Compile Include="StorytellerCriticalException.cs" />
     <Compile Include="Conversion\StringConverterProvider.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

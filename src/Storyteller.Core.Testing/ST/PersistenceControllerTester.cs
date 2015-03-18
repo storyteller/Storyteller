@@ -157,6 +157,30 @@ namespace Storyteller.Core.Testing.ST
             suite.specs.ShouldContain(added.node);
         }
 
+
+        [Test]
+        public void add_spec_with_illegal_chars()
+        {
+            var added = ClassUnderTest.AddSpec("Sentences", "The Third Sentence??");
+
+            var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.xml");
+
+            added.node.name.ShouldEqual("The Third Sentence??");
+            added.node.Filename.ShouldEqual(expectedPath);
+            added.node.lifecycle.ShouldEqual("Acceptance");
+
+            added.node.Filename.ShouldEqual(expectedPath);
+
+            ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
+
+            var specification = XmlReader.ReadFromFile(expectedPath);
+            specification.Name.ShouldEqual("The Third Sentence??");
+
+            // Adds the spec to the node
+            var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
+            suite.specs.ShouldContain(added.node);
+        }
+
         [Test]
         public void save_spec_header()
         {

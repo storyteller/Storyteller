@@ -4,6 +4,7 @@ using System.Threading;
 using System.Xml;
 using FubuCore;
 using FubuCore.Logging;
+using Storyteller.Core;
 using Storyteller.Core.Messages;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
@@ -63,6 +64,7 @@ namespace ST.Client
         {
             try
             {
+                name = name.EscapeIllegalChars();
                 var parentSuite = _hierarchy.Suites[parent];
                 if (parentSuite != null)
                 {
@@ -168,7 +170,8 @@ namespace ST.Client
                     Name = name
                 };
 
-                var file = folder.AppendPath(Specification.DetermineFilename(name));
+                var specFileName = Specification.DetermineFilename(name);
+                var file = folder.AppendPath(specFileName);
 
                 using (_watcher.LatchFile(file))
                 {

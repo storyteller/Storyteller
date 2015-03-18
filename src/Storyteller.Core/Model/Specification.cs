@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using Newtonsoft.Json;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model.Persistence;
@@ -40,7 +41,7 @@ namespace Storyteller.Core.Model
                 filename = filename.Replace(' ', '_');
             }
 
-            return filename;
+            return filename.EscapeIllegalChars();
         }
 
         public Section AddSection(string key)

@@ -82,6 +82,8 @@ namespace StoryTeller.Domain
 
         private string determineFilename()
         {
+            
+
             if (_fileName.IsNotEmpty())
             {
                 return _fileName;
