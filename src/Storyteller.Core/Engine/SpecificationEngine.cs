@@ -30,19 +30,12 @@ namespace Storyteller.Core.Engine
             _executionQueue = new ConsumingQueue(request =>
             {
                 observer.SpecStarted(request);
-                var task = _runner.Execute(request, _executionQueue);
-                task.ContinueWith(x =>
-                {
-                    // TODO -- watch for some kind of catastropic exception here?
-                    // TODO -- combine the two things here?
-                    request.SpecExecutionFinished(x.Result);
-                    observer.SpecFinished(request);
-                });
+                var results = _runner.Execute(request, _executionQueue);
 
-                // TODO -- use some kind of wait here? But what?
-                // Or do we just continue to ContinueWith here?
-                task.Wait();
-
+                // TODO -- watch for some kind of catastropic exception here?
+                // TODO -- combine the two things here?
+                request.SpecExecutionFinished(results);
+                observer.SpecFinished(request);
             });
 
         }

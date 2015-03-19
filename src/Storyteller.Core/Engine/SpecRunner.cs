@@ -14,7 +14,7 @@ namespace Storyteller.Core.Engine
             _system = system;
         }
 
-        public Task<SpecResults> Execute(SpecExecutionRequest request, IConsumingQueue queue)
+        public SpecResults Execute(SpecExecutionRequest request, IConsumingQueue queue)
         {
             var timings = request.StartNewTimings();
             IExecutionContext execution = null;
@@ -33,11 +33,7 @@ namespace Storyteller.Core.Engine
 
             context.Reporting.StartDebugListening();
 
-            return Task.Factory.StartNew(() =>
-            {
-                return execute(request, queue, context, execution);
-            }, context.Cancellation);
-
+            return execute(request, queue, context, execution);
         }
 
         private SpecResults execute(SpecExecutionRequest request, IConsumingQueue queue, ISpecContext context, IExecutionContext execution)
