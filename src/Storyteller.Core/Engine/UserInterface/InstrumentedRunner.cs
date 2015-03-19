@@ -1,36 +1,67 @@
 using System.Threading.Tasks;
+using Storyteller.Core.Grammars;
 
 namespace Storyteller.Core.Engine.UserInterface
 {
-    public class InstrumentedRunner : ISpecRunner
+    public abstract class SpecRunnerBase : ISpecRunner
+    {
+        private StopConditions _stopConditions;
+
+        public abstract IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context);
+
+
+
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue, Timings timings)
+        {
+            var context = request.CreateContext(_stopConditions, execution, timings);
+            return Task.Factory.StartNew(() =>
+            {
+                var plan = request.Plan;
+                
+                BeforeRunning(request, context);
+
+                var executor = BuildExecutor(plan, context);
+                plan.AcceptVisitor(executor);
+
+                AfterRunning(request, context, queue);
+
+                return context;
+            }, context.Cancellation);
+
+        }
+
+        public abstract void BeforeRunning(SpecExecutionRequest request, ISpecContext context);
+        public abstract void AfterRunning(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue);
+
+        public void UseStopConditions(StopConditions conditions)
+        {
+            _stopConditions = conditions;
+        }
+    }
+
+    public class InstrumentedRunner : SpecRunnerBase
     {
         private readonly IUserInterfaceObserver _observer;
-        private StopConditions _stopConditions;
 
         public InstrumentedRunner(IUserInterfaceObserver observer)
         {
             _observer = observer;
         }
 
-        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue, Timings timings)
+        public override void BeforeRunning(SpecExecutionRequest request, ISpecContext context)
         {
-            var context = request.CreateContext(_stopConditions, execution, timings);
-
-            return Task.Factory.StartNew(() =>
-            {
-                var plan = request.Plan;
-                _observer.SpecStarted(plan);
-                var executor = new InstrumentedExecutor(context, plan, _observer);
-                plan.AcceptVisitor(executor);
-
-                return context;
-            }, context.Cancellation);
+            _observer.SpecStarted(request.Plan);
         }
 
-
-        public void UseStopConditions(StopConditions conditions)
+        public override void AfterRunning(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue)
         {
-            _stopConditions = conditions;
+            
         }
+
+        public override IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context)
+        {
+            return new InstrumentedExecutor(context, plan, _observer);
+        }
+
     }
 }

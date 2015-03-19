@@ -26,6 +26,7 @@ namespace Storyteller.Core.Engine
             Specification = specification;
         }
 
+        [Obsolete("Might want this to be in the SpecRunner itself instead to avoid the double dip")]
         public void SpecExecutionFinished(ISpecContext context)
         {
             var attempts = Plan == null ? 0 : Plan.Attempts;
@@ -65,6 +66,7 @@ namespace Storyteller.Core.Engine
             });
         }
 
+        [Obsolete("Move this into the new SpecRunner")]
         public ISpecContext CreateContext(StopConditions stopConditions, IExecutionContext execution, Timings timings)
         {
             var context = new SpecContext(Specification, timings, _observer, stopConditions, execution.Services);

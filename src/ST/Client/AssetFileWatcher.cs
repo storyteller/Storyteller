@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Bottles;
 using Bottles.Diagnostics;
 using FubuCore;
-using FubuMVC.Core;
 using FubuMVC.Core.Assets;
 using Storyteller.Core.Messages;
 
@@ -55,7 +53,6 @@ namespace ST.Client
                     _lastUpdate = DateTime.UtcNow;
                     _connector.SendMessageToClient(new RefreshPage());
                 }
-                
             };
 
             _watchers.Add(watcher);
@@ -72,7 +69,7 @@ namespace ST.Client
 
         public void Start()
         {
-            watch("assets/client/css/storyteller.css");
+            watch("assets/client/public/stylesheets/storyteller.css");
             watch("assets/client/public/javascript/bundle.js");
         }
     }
