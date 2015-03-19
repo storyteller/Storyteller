@@ -15,8 +15,11 @@ namespace Storyteller.Core.Engine
 
         public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue, Timings timings)
         {
-            var context = request.CreateContext(_stopConditions, execution, timings);
-            return Task.Factory.StartNew(() =>
+            var context = new SpecContext(request.Specification, timings, request.Observer, _stopConditions, execution.Services);
+
+            context.Reporting.StartDebugListening();
+
+            return Task.Factory.StartNew<ISpecContext>(() =>
             {
                 var plan = request.Plan;
                 
@@ -26,6 +29,8 @@ namespace Storyteller.Core.Engine
                 plan.AcceptVisitor(executor);
 
                 _mode.AfterRunning(request, context, queue);
+
+                context.Dispose();
 
                 return context;
             }, context.Cancellation);

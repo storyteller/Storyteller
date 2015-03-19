@@ -7,7 +7,7 @@ using Storyteller.Core.Remotes.Messaging;
 
 namespace Storyteller.Core.Engine
 {
-    public class SpecExecutionRequest : IDisposable
+    public class SpecExecutionRequest
     {
         private readonly IResultObserver _observer;
         public SpecNode Node { get; private set; }
@@ -66,29 +66,18 @@ namespace Storyteller.Core.Engine
             });
         }
 
-        [Obsolete("Move this into the new SpecRunner")]
-        public ISpecContext CreateContext(StopConditions stopConditions, IExecutionContext execution, Timings timings)
-        {
-            var context = new SpecContext(Specification, timings, _observer, stopConditions, execution.Services);
-            Context = context;
-
-            context.Reporting.StartDebugListening();
-
-            return context;
-        }
 
         public void Cancel()
         {
             IsCancelled = true;
-
-            if (Context != null)
-            {
-                Context.RequestCancellation();
-            }
         }
 
-        public ISpecContext Context { get; private set; }
         public bool IsCancelled { get; private set; }
+
+        public IResultObserver Observer
+        {
+            get { return _observer; }
+        }
 
         protected bool Equals(SpecExecutionRequest other)
         {
@@ -106,11 +95,6 @@ namespace Storyteller.Core.Engine
         public override int GetHashCode()
         {
             return (Node != null ? Node.GetHashCode() : 0);
-        }
-
-        public void Dispose()
-        {
-            if (Context != null) Context.Dispose();
         }
 
         public override string ToString()

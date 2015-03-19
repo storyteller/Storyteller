@@ -77,7 +77,6 @@ namespace Storyteller.Core.Engine
             var outstanding = _outstanding.FirstOrDefault(x => x.Node == node);
             if (outstanding == null) return;
 
-            outstanding.Dispose();
             _outstanding.Remove(outstanding);
 
             _observer.SendToClient(new SpecExecutionCompleted(node.id, results));
@@ -99,7 +98,6 @@ namespace Storyteller.Core.Engine
             _outstanding.Where(x => x.Node.id == id).Each(x =>
             {
                 x.Cancel();
-                x.Dispose();
             });
             _outstanding.RemoveAll(x => x.Node.id == id);
 
