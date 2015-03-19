@@ -74,7 +74,7 @@ namespace Storyteller.Core.Remotes
         {
             var observer = new UserInterfaceObserver();
 
-            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer));
+            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system);
 
             var engine  = new SpecificationEngine(_system, runner, new NulloObserver());
             _controller = new EngineController(engine, observer);
@@ -100,7 +100,7 @@ namespace Storyteller.Core.Remotes
             }
 
             var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode);
+            var runner = new SpecRunner(executionMode, _system);
 
             var engine = new SpecificationEngine(
                 _system, runner, executionObserver);

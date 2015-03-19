@@ -29,39 +29,20 @@ namespace Storyteller.Core.Engine
 
             _executionQueue = new ConsumingQueue(request =>
             {
-                var timings = request.StartNewTimings();
-                IExecutionContext execution = null;
-                try
+                observer.SpecStarted(request);
+                var task = _runner.Execute(request, _executionQueue);
+                task.ContinueWith(x =>
                 {
-                    observer.SpecStarted(request);
-
-                    using (timings.Subject("Context", "Creation"))
-                    {
-                        execution = _system.CreateContext();
-
-                        // TODO -- log a catastrophic error here.
-                        // TODO -- makes a good argument for doing the SpecContext creation here!!!!.
-                    }
-
-                    var task = _runner.Execute(request, execution, _executionQueue, timings).ContinueWith(t =>
-                    {
-                        // TODO -- tag the context or plan if timed out?
-                        // TODO -- tag the plan as having an attempt?
-
-                        // Shut down several things here
-                        t.Result.Dispose();
-                        request.SpecExecutionFinished(t.Result);
-                    });
-
-                    // TODO -- should have a timeout on it anyway, but things still fail
-                    // connect the timeout to the stop conditions
-                    task.Wait();
-                }
-                finally
-                {
-                    execution.Dispose();
+                    // TODO -- watch for some kind of catastropic exception here?
+                    // TODO -- combine the two things here?
+                    request.SpecExecutionFinished(x.Result);
                     observer.SpecFinished(request);
-                }
+                });
+
+                // TODO -- use some kind of wait here? But what?
+                // Or do we just continue to ContinueWith here?
+                task.Wait();
+
             });
 
         }
