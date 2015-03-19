@@ -80,7 +80,7 @@
     <Compile Include="EndToEndExecution\fixture_fact_methods_specs.cs" />
     <Compile Include="EndToEndExecution\simple_method_grammars.cs" />
     <Compile Include="EndToEnd\simplest_possible_execution.cs" />
-    <Compile Include="Engine\BatchRunnerTester.cs" />
+    <Compile Include="Engine\BatchExecutionModeTester.cs" />
     <Compile Include="Engine\batch_running_failure_cases_integration_specs.cs" />
     <Compile Include="Engine\CountsTester.cs" />
     <Compile Include="Engine\EngineControllerTester.cs" />

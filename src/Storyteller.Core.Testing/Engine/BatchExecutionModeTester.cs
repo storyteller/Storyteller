@@ -7,7 +7,7 @@ using Storyteller.Core.Model;
 namespace Storyteller.Core.Testing.Engine
 {
     [TestFixture]
-    public class BatchRunnerTester : InteractionContext<BatchRunner>
+    public class BatchExecutionModeTester : InteractionContext<BatchExecutionMode>
     {
         private Specification theSpecification;
         private SpecificationPlan thePlan;

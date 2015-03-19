@@ -1,64 +1,40 @@
-﻿using System;
-using System.Linq;
-using System.Runtime.InteropServices;
-using FubuCore;
-using Storyteller.Core.Conversion;
-using Storyteller.Core.Engine.Batching;
-using Storyteller.Core.Equivalence;
-using Storyteller.Core.Model;
+using System.Threading.Tasks;
 
 namespace Storyteller.Core.Engine
 {
-    public class SpecRunner<T> : IDisposable where T : ISystem, new()
+    public class SpecRunner : ISpecRunner
     {
-        private readonly T _system;
-        private readonly FixtureLibrary _library;
+        private readonly IExecutionMode _mode;
+        private StopConditions _stopConditions;
 
-        public SpecRunner()
+        public SpecRunner(IExecutionMode mode)
         {
-            _system = new T();
-            var handling = new CellHandling(new EquivalenceChecker(), new Conversions(_system.ConversionProviders()));
-            var task = FixtureLibrary.CreateForAppDomain(handling);
-            task.Wait(15.Seconds());
-
-            _library = task.Result;
+            _mode = mode;
         }
 
-        public void Dispose()
+
+        public Task<ISpecContext> Execute(SpecExecutionRequest request, IExecutionContext execution, IConsumingQueue queue, Timings timings)
         {
-            _system.Dispose();
-        }
-
-        public readonly StopConditions StopConditions = new StopConditions();
-
-
-        public SpecResults Execute(Specification specification)
-        {
-            var plan = specification.CreatePlan(_library);
-            var timings = new Timings();
-            timings.Start(specification);
-
-            IExecutionContext execution = null;
-
-            using (timings.Subject("Context", "Creation"))
+            var context = request.CreateContext(_stopConditions, execution, timings);
+            return Task.Factory.StartNew(() =>
             {
-                execution = _system.CreateContext();
-            }
+                var plan = request.Plan;
+                
+                _mode.BeforeRunning(request, context);
 
-            var context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
-                execution.Services);
+                var executor = _mode.BuildExecutor(plan, context);
+                plan.AcceptVisitor(executor);
 
-            context.Reporting.StartDebugListening();
+                _mode.AfterRunning(request, context, queue);
 
-            var executor = new SynchronousExecutor(context);
-            plan.AcceptVisitor(executor);
+                return context;
+            }, context.Cancellation);
 
+        }
 
-
-            execution.Dispose();
-            context.Dispose();
-
-            return context.FinalizeResults(1);
+        public void UseStopConditions(StopConditions conditions)
+        {
+            _stopConditions = conditions;
         }
     }
 }

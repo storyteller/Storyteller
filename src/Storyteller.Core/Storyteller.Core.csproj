@@ -58,7 +58,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Conversion\NullableConvertor.cs" />
     <Compile Include="Engine\Batching\BatchController.cs" />
-    <Compile Include="Engine\Batching\BatchRunner.cs" />
+    <Compile Include="Engine\Batching\BatchExecutionMode.cs" />
     <Compile Include="Engine\Batching\TeamCityBatchObserver.cs" />
     <Compile Include="Engine\Batching\TeamCityExtensions.cs" />
     <Compile Include="Engine\BatchRunRequest.cs" />
@@ -76,10 +76,11 @@
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Engine\BatchRecord.cs" />
-    <Compile Include="Engine\SpecRunner.cs" />
     <Compile Include="Engine\Timings.cs" />
+    <Compile Include="Engine\IExecutionMode.cs" />
     <Compile Include="Engine\UserInterface\InstrumentedExecutor.cs" />
-    <Compile Include="Engine\UserInterface\InstrumentedRunner.cs" />
+    <Compile Include="Engine\SpecRunner.cs" />
+    <Compile Include="Engine\UserInterface\UserInterfaceExecutionMode.cs" />
     <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />
     <Compile Include="IBatchObserver.cs" />
     <Compile Include="Messages\AddSpec.cs" />

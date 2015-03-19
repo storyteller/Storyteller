@@ -1,27 +1,23 @@
-using System;
-using System.Threading.Tasks;
 using Storyteller.Core.Engine.UserInterface;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Model;
 
 namespace Storyteller.Core.Engine.Batching
 {
-    public class BatchRunner : SpecRunnerBase
+    public class BatchExecutionMode : IExecutionMode
     {
         private readonly IBatchObserver _resultObserver;
-        private StopConditions _stopConditions = new StopConditions();
 
-        public BatchRunner(IBatchObserver observer)
+        public BatchExecutionMode(IBatchObserver observer)
         {
             _resultObserver = observer;
         }
 
-        public override void BeforeRunning(SpecExecutionRequest request, ISpecContext context)
+        public void BeforeRunning(SpecExecutionRequest request, ISpecContext context)
         {
-
         }
 
-        public override void AfterRunning(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue)
+        public void AfterRunning(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue)
         {
             var plan = request.Plan;
 
@@ -38,7 +34,7 @@ namespace Storyteller.Core.Engine.Batching
         }
 
 
-        public override IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context)
+        public IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context)
         {
             return new SynchronousExecutor(context);
         }

@@ -6,6 +6,7 @@ using FubuCore;
 using NUnit.Framework;
 using Storyteller.Core.Engine;
 using Storyteller.Core.Engine.Batching;
+using Storyteller.Core.Engine.UserInterface;
 using Storyteller.Core.Model;
 using Storyteller.Core.Model.Persistence;
 using StoryTeller.Samples;
@@ -64,7 +65,8 @@ namespace Storyteller.Core.Testing
             var observer = new BatchObserver();
             var task = observer.MonitorBatch(_allSpecs);
 
-            var engine = new SpecificationEngine(system, new BatchRunner(observer), new NulloObserver());
+            var executionMode = new BatchExecutionMode(observer);
+            var engine = new SpecificationEngine(system, new SpecRunner(executionMode), new NulloObserver());
             _allSpecs.Each(x => engine.Enqueue(SpecExecutionRequest.For(x)));
 
             engine.Start(new StopConditions());
