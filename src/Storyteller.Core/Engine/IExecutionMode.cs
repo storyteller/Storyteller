@@ -6,6 +6,6 @@ namespace Storyteller.Core.Engine
     {
         IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context);
         void BeforeRunning(SpecExecutionRequest request, ISpecContext context);
-        void AfterRunning(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue);
+        void AfterRunning(SpecExecutionRequest request, SpecResults results, IConsumingQueue queue);
     }
 }

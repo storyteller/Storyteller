@@ -50,11 +50,11 @@ namespace Storyteller.Core.Testing.Engine
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
             request.Plan.Attempts = 3;
-            var context = SpecContext.Basic();
 
-            request.SpecExecutionFinished(context);
+            var results = new SpecResults();
+            request.SpecExecutionFinished(results);
 
-            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, null), x => x.Constraints(Is.Same(theSpec), Is.Anything()));
+            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, results));
         }
 
         [Test]

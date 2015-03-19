@@ -8,12 +8,12 @@ namespace Storyteller.Core.Engine
 {
     public class BatchWatcher
     {
-        private readonly IDictionary<string, BatchRecord> _results = new Dictionary<string, BatchRecord>();
+        private readonly IDictionary<string, BatchRecord> _records = new Dictionary<string, BatchRecord>();
         private readonly TaskCompletionSource<IEnumerable<BatchRecord>> _task;
 
         public BatchWatcher(IEnumerable<SpecNode> nodes)
         {
-            nodes.Each(x => _results.Add(x.id, new BatchRecord{header = x}));
+            nodes.Each(x => _records.Add(x.id, new BatchRecord{header = x}));
             _task = new TaskCompletionSource<IEnumerable<BatchRecord>>();
         }
 
@@ -22,19 +22,19 @@ namespace Storyteller.Core.Engine
             get { return _task.Task; }
         }
         
-        public void SpecHandled(SpecificationPlan plan, ISpecContext context)
+        public void SpecHandled(SpecificationPlan plan, SpecResults specResults)
         {
-            var record = _results[plan.Specification.Id];
-            record.results = context.FinalizeResults(plan.Attempts);
+            var record = _records[plan.Specification.Id];
+            record.results = specResults;
             record.specification = plan.Specification;
 
-            if (IsCompleted()) _task.SetResult(_results.Values.ToArray());
+            if (IsCompleted()) _task.SetResult(_records.Values.ToArray());
         }
          
 
         public bool IsCompleted()
         {
-            return _results.Values.All(x => x.HasResults());
+            return _records.Values.All(x => x.HasResults());
         }
     }
 }

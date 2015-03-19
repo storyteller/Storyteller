@@ -17,19 +17,19 @@ namespace Storyteller.Core.Engine.Batching
         {
         }
 
-        public void AfterRunning(SpecExecutionRequest request, ISpecContext context, IConsumingQueue queue)
+        public void AfterRunning(SpecExecutionRequest request, SpecResults results, IConsumingQueue queue)
         {
             var plan = request.Plan;
 
             plan.Attempts++;
-            if (ShouldRetry(plan, context.Specification))
+            if (ShouldRetry(plan, request.Specification))
             {
-                _resultObserver.SpecRequeued(plan, context);
+                _resultObserver.SpecRequeued(request);
                 queue.Enqueue(request);
             }
             else
             {
-                _resultObserver.SpecHandled(plan, context);
+                _resultObserver.SpecHandled(request, results);
             }
         }
 

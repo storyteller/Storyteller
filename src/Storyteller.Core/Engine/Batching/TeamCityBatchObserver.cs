@@ -16,32 +16,32 @@ namespace Storyteller.Core.Engine.Batching
             _inner = inner;
         }
 
-        public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
+        public void SpecRequeued(SpecExecutionRequest request)
         {
-            Console.WriteLine("Requeuing {0}, attempt # {1}", context.Specification.Name, plan.Attempts + 1);
+            Console.WriteLine("Requeuing {0}, attempt # {1}", request.Specification.Name, request.Plan.Attempts + 1);
         }
 
-        public void SpecHandled(SpecificationPlan plan, ISpecContext context)
+        public void SpecHandled(SpecExecutionRequest request, SpecResults results)
         {
-            _inner.SpecHandled(plan, context);
+            _inner.SpecHandled(request, results);
 
-            var name = context.Specification.Name.Escape();
-            var results = context.Counts.ToString().Escape();
+            var name = request.Specification.Name.Escape();
+            var resultText = results.Counts.ToString().Escape();
 
-            if (context.Counts.WasSuccessful())
+            if (results.Counts.WasSuccessful())
             {
-                Console.WriteLine("##teamcity[testFinished name='{0}' message='{1}']", name, results);
+                Console.WriteLine("##teamcity[testFinished name='{0}' message='{1}']", name, resultText);
             }
-            else if (context.Specification.Lifecycle == Lifecycle.Acceptance)
+            else if (request.Specification.Lifecycle == Lifecycle.Acceptance)
             {
                 
                 Console.WriteLine("##teamcity[testIgnored name='{0}' message='{1}']", name,
-                    "Acceptance test failed: " + results);
+                    "Acceptance test failed: " + resultText);
             }
             else
             {
                 Console.WriteLine("##teamcity[testFailed name='{0}' details='{1}']", name,
-                    results);
+                    resultText);
             }
         }
 

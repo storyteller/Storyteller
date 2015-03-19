@@ -26,13 +26,8 @@ namespace Storyteller.Core.Engine
             Specification = specification;
         }
 
-        [Obsolete("Might want this to be in the SpecRunner itself instead to avoid the double dip")]
-        public void SpecExecutionFinished(ISpecContext context)
+        public void SpecExecutionFinished(SpecResults results)
         {
-            var attempts = Plan == null ? 0 : Plan.Attempts;
-
-            var results = context.FinalizeResults(attempts);
-            results.Attempts = attempts;
             _observer.SpecExecutionFinished(Node, results);
         }
 

@@ -16,15 +16,15 @@ namespace Storyteller.Core.Engine.Batching
             // Nothing
         }
 
-        public void SpecRequeued(SpecificationPlan plan, ISpecContext context)
+        public void SpecRequeued(SpecExecutionRequest request)
         {
             // TODO -- more instrumentation here
         }
 
 
-        public void SpecHandled(SpecificationPlan plan, ISpecContext context)
+        public void SpecHandled(SpecExecutionRequest request, SpecResults results)
         {
-            _watchers.Each(x => x.SpecHandled(plan, context));
+            _watchers.Each(x => x.SpecHandled(request.Plan, results));
             _watchers.RemoveAll(x => x.IsCompleted());
         }
 

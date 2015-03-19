@@ -14,8 +14,7 @@ namespace Storyteller.Core.Engine
             _system = system;
         }
 
-        // TODO -- change this to return the results instead?
-        public Task<ISpecContext> Execute(SpecExecutionRequest request, IConsumingQueue queue)
+        public Task<SpecResults> Execute(SpecExecutionRequest request, IConsumingQueue queue)
         {
             var timings = request.StartNewTimings();
             IExecutionContext execution = null;
@@ -41,7 +40,7 @@ namespace Storyteller.Core.Engine
 
         }
 
-        private ISpecContext execute(SpecExecutionRequest request, IConsumingQueue queue, ISpecContext context, IExecutionContext execution)
+        private SpecResults execute(SpecExecutionRequest request, IConsumingQueue queue, ISpecContext context, IExecutionContext execution)
         {
             try
             {
@@ -52,9 +51,12 @@ namespace Storyteller.Core.Engine
                 var executor = _mode.BuildExecutor(plan, context);
                 plan.AcceptVisitor(executor);
 
-                _mode.AfterRunning(request, context, queue);
+                
 
-                return context;
+                var results = context.FinalizeResults(request.Plan.Attempts);
+                _mode.AfterRunning(request, results, queue);
+
+                return results;
             }
             finally
             {

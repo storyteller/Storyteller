@@ -8,8 +8,8 @@ namespace Storyteller.Core
 {
     public interface IBatchObserver 
     {
-        void SpecRequeued(SpecificationPlan plan, ISpecContext context);
-        void SpecHandled(SpecificationPlan plan, ISpecContext context);
+        void SpecRequeued(SpecExecutionRequest request);
+        void SpecHandled(SpecExecutionRequest request, SpecResults results);
 
         Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<SpecNode> nodes);
     }
