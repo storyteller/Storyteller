@@ -50,12 +50,7 @@ namespace Storyteller.Core.Engine
 
                 _mode.BeforeRunning(request, context);
 
-                var executor = _mode.BuildExecutor(plan, context);
-
-
-                runWithTimeout(plan, context, executor, timeout);
-
-                var results = context.FinalizeResults(request.Plan.Attempts);
+                var results = CreateResults(request, context, timeout);
                 _mode.AfterRunning(request, results, queue);
 
                 return results;
@@ -65,6 +60,18 @@ namespace Storyteller.Core.Engine
                 execution.Dispose();
                 context.Dispose();
             }
+        }
+
+        public SpecResults CreateResults(SpecExecutionRequest request, ISpecContext context, TimeSpan timeout)
+        {
+            var plan = request.Plan;
+            var executor = _mode.BuildExecutor(plan, context);
+
+            runWithTimeout(plan, context, executor, timeout);
+
+            var results = context.FinalizeResults(request.Plan.Attempts);
+
+            return results;
         }
 
         private static void runWithTimeout(SpecificationPlan plan, ISpecContext context, IStepExecutor executor, TimeSpan timeout)

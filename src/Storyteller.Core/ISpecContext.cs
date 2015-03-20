@@ -24,5 +24,6 @@ namespace Storyteller.Core
         Timings Timings { get; }
         Reporter Reporting { get; }
         SpecResults FinalizeResults(int attempts);
+        void LogContextFailure(Exception ex);
     }
 }

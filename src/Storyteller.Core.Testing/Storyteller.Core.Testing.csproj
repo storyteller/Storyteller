@@ -152,6 +152,7 @@
     <Compile Include="SpecContextExtensions.cs" />
     <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
+    <Compile Include="SpecResultsTester.cs" />
     <Compile Include="SpecRunningContext.cs" />
     <Compile Include="StateTester.cs" />
     <Compile Include="StoryTellerAssertTester.cs" />

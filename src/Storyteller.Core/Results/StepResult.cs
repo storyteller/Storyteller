@@ -14,7 +14,8 @@ namespace Storyteller.Core.Results
         teardown,
         before,
         after,
-        timedout
+        timedout,
+        context
     }
 
     public class StepResult : ClientMessage, IResultMessage

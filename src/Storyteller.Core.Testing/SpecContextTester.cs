@@ -99,6 +99,38 @@ namespace Storyteller.Core.Testing
     }
 
     [TestFixture]
+    public class when_registering_an_exception_for_the_execution_context_failure
+    {
+        private SpecContext theContext;
+        private NotFiniteNumberException theException;
+
+        [SetUp]
+        public void SetUp()
+        {
+            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theException = new NotFiniteNumberException("Bad!");
+
+            theContext.LogContextFailure(theException);
+        }
+
+        [Test]
+        public void marked_as_having_encountered_a_catastrophic_exception()
+        {
+            theContext.EncounteredCatastrophicException.ShouldBeTrue();
+        }
+
+        [Test]
+        public void logs_a_single_step_result()
+        {
+            var result = theContext.Results.OfType<StepResult>().Single();
+
+            result.id.ShouldEqual(theContext.Specification.Id);
+            result.Status.ShouldEqual(ResultStatus.error);
+            result.error.ShouldEqual(theException.ToString());
+        }
+    }
+
+    [TestFixture]
     public class when_testing_for_should_continue
     {
         private SpecContext theContext;
