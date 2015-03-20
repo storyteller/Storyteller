@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;

@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using FubuTestingSupport;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using StoryTeller.Model;

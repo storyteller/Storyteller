@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 using ST.CommandLine;
 

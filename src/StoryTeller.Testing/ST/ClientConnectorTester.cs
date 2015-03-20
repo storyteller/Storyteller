@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FubuCore.Logging;
-using FubuTestingSupport;
 using NUnit.Framework;
 using Rhino.Mocks;
 using ST.Client;

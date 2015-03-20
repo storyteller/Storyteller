@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 using ST.CommandLine;
 using StoryTeller.Engine;

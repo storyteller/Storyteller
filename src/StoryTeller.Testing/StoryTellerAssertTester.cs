@@ -1,5 +1,4 @@
 ﻿using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 
 namespace StoryTeller.Testing

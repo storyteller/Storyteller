@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 using StoryTeller.Remotes.Messaging;
 

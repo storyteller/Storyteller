@@ -1,6 +1,0 @@
-<!--Title: Validate-->
-
-<markdown>
-  <Command app="st" command="validate">
-  </Command>
-</markdown>

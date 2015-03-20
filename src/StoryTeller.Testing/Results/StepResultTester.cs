@@ -1,5 +1,4 @@
 ﻿using System;
-using FubuTestingSupport;
 using NUnit.Framework;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;

@@ -1,5 +1,4 @@
-﻿using FubuTestingSupport;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Results

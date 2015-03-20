@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading;
 using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 using StoryTeller.Model;
 using StoryTeller.Results;

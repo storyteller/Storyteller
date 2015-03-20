@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using FubuTestingSupport;
 using NUnit.Framework;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;

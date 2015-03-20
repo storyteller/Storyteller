@@ -1,4 +1,3 @@
-using FubuTestingSupport;
 using NUnit.Framework;
 
 namespace StoryTeller.Testing.Engine

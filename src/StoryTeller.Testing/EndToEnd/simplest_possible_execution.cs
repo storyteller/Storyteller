@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using FubuTestingSupport;
 using NUnit.Framework;
 
 namespace StoryTeller.Testing.EndToEnd

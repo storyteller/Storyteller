@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
-using FubuTestingSupport;
 using NUnit.Framework;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
