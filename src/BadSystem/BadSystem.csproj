@@ -46,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">
-      <Project>{90113dc7-c74e-4c5d-a0de-045f36378033}</Project>
-      <Name>Storyteller.Core</Name>
+    <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
+      <Project>{96c1f8d5-fb46-4f3e-8cb7-a53a919bb424}</Project>
+      <Name>StoryTeller</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

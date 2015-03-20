@@ -5,7 +5,7 @@ using Bottles;
 using Bottles.Diagnostics;
 using FubuCore;
 using FubuMVC.Core.Assets;
-using Storyteller.Core.Messages;
+using StoryTeller.Messages;
 
 namespace ST.Client
 {

@@ -1,6 +1,5 @@
 using System;
-using Storyteller.Core;
-using Storyteller.Core.Grammars.Tables;
+using StoryTeller.Grammars.Tables;
 
 namespace StoryTeller.Samples.Fixtures
 {

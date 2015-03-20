@@ -1,4 +1,5 @@
-﻿using StoryTeller.Engine;
+﻿using StoryTeller;
+using StoryTeller.Engine;
 
 namespace InvalidExamples.Fixtures
 {

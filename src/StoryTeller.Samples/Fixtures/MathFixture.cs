@@ -3,10 +3,9 @@ using System.Diagnostics;
 using System.Threading;
 using HtmlTags;
 using NUnit.Framework;
-using Storyteller.Core;
-using Storyteller.Core.Grammars.Importing;
-using Storyteller.Core.Grammars.Tables;
-using Storyteller.Core.Results;
+using StoryTeller.Grammars.Importing;
+using StoryTeller.Grammars.Tables;
+using StoryTeller.Results;
 
 namespace StoryTeller.Samples.Fixtures
 {

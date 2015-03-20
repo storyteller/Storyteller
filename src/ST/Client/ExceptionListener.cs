@@ -2,7 +2,7 @@ using System;
 using Bottles.Services.Messaging;
 using FubuCore.CommandLine;
 using FubuCore.Logging;
-using Storyteller.Core.Messages;
+using StoryTeller.Messages;
 
 namespace ST.Client
 {

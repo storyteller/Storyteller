@@ -1,6 +1,6 @@
 using System;
-using Storyteller.Core.Commands;
-using Storyteller.Core.Messages;
+using StoryTeller.Commands;
+using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {

@@ -4,14 +4,14 @@ using System.Threading;
 using System.Xml;
 using FubuCore;
 using FubuCore.Logging;
-using Storyteller.Core;
-using Storyteller.Core.Messages;
-using Storyteller.Core.Model;
-using Storyteller.Core.Model.Persistence;
-using Storyteller.Core.Remotes;
-using Storyteller.Core.Remotes.Messaging;
-using XmlReader = Storyteller.Core.Model.Persistence.XmlReader;
-using XmlWriter = Storyteller.Core.Model.Persistence.XmlWriter;
+using StoryTeller;
+using StoryTeller.Messages;
+using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
+using StoryTeller.Remotes.Messaging;
+using XmlReader = StoryTeller.Model.Persistence.XmlReader;
+using XmlWriter = StoryTeller.Model.Persistence.XmlWriter;
 
 namespace ST.Client
 {

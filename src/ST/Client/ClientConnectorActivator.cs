@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Bottles;
 using Bottles.Diagnostics;
-using Storyteller.Core.Remotes;
+using StoryTeller.Remotes;
 
 namespace ST.Client
 {

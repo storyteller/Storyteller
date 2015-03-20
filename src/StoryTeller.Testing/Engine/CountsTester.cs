@@ -1,5 +1,5 @@
+using FubuTestingSupport;
 using NUnit.Framework;
-using StoryTeller.Engine;
 
 namespace StoryTeller.Testing.Engine
 {
@@ -46,34 +46,6 @@ namespace StoryTeller.Testing.Engine
             counts.Rights.ShouldEqual(0);
             counts.Exceptions.ShouldEqual(0);
             counts.SyntaxErrors.ShouldEqual(0);
-        }
-
-        [Test]
-        public void increment_rights()
-        {
-            var counts = new Counts();
-            counts.IncrementRights();
-            counts.Rights.ShouldEqual(1);
-
-            counts.IncrementRights();
-            counts.Rights.ShouldEqual(2);
-
-            counts.IncrementRights();
-            counts.Rights.ShouldEqual(3);
-        }
-
-        [Test]
-        public void increment_wrongs()
-        {
-            var counts = new Counts();
-            counts.IncrementWrongs();
-            counts.Wrongs.ShouldEqual(1);
-
-            counts.IncrementWrongs();
-            counts.Wrongs.ShouldEqual(2);
-
-            counts.IncrementWrongs();
-            counts.Wrongs.ShouldEqual(3);
         }
 
         [Test]

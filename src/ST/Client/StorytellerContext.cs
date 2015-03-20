@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using Storyteller.Core.Model.Persistence;
-using Storyteller.Core.Remotes;
+using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
 
 namespace ST.Client
 {

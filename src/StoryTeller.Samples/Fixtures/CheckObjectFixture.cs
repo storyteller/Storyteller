@@ -1,5 +1,3 @@
-using Storyteller.Core;
-
 namespace StoryTeller.Samples.Fixtures
 {
     public class CheckObjectFixture : Fixture

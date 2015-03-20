@@ -2,8 +2,8 @@
 using System.IO;
 using FubuCore;
 using FubuMVC.Core.Resources.Conneg;
-using Storyteller.Core.Engine;
-using Storyteller.Core.Remotes.Messaging;
+using StoryTeller.Engine;
+using StoryTeller.Remotes.Messaging;
 
 namespace ST.CommandLine
 {

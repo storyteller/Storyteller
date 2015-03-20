@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FubuCore;
-using Storyteller.Core.Model.Persistence;
+using StoryTeller.Model.Persistence;
 using ProjectInput = ST.CommandLine.ProjectInput;
 
 namespace ST.Client

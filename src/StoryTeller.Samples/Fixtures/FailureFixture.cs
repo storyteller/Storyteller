@@ -1,5 +1,4 @@
 using System;
-using Storyteller.Core;
 
 namespace StoryTeller.Samples.Fixtures
 {

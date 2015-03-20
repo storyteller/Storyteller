@@ -1,15 +1,13 @@
-using System.Security.Cryptography.X509Certificates;
-using StoryTeller.Domain;
-using StoryTeller.Engine;
-using StoryTeller.Model;
+﻿using StoryTeller.Model;
 
 namespace StoryTeller
 {
     public interface IGrammar
     {
-        string Description { get; }
-        void Execute(IStep containerStep, ITestContext context);
+        IExecutionStep CreatePlan(Step step, FixtureLibrary library);
 
-        GrammarStructure ToStructure(FixtureLibrary library);
+        GrammarModel Compile(Fixture fixture, CellHandling cells);
+
+        string Key { get; set; }
     }
 }

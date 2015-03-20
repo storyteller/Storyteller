@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using Storyteller.Core;
 
 namespace StoryTeller.Samples.Fixtures
 {

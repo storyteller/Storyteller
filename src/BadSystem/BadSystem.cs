@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Storyteller.Core.Conversion;
-using Storyteller.Core.Engine;
+using StoryTeller.Conversion;
+using StoryTeller.Engine;
 
 namespace BadSystem
 {

@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Storyteller.Core.Engine;
-using Storyteller.Core.Remotes;
+using StoryTeller.Engine;
+using StoryTeller.Remotes;
 
 namespace ST.CommandLine
 {

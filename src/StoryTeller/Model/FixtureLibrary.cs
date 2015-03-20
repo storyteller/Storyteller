@@ -1,115 +1,96 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore.Conversion;
+using System.Reflection;
+using System.Threading.Tasks;
+using FubuCore;
+using FubuCore.Reflection;
 using FubuCore.Util;
-using StoryTeller.Domain;
-using StoryTeller.Engine;
 
 namespace StoryTeller.Model
 {
-    [Serializable]
-    public class FixtureDto
+    public class FixtureLibrary
     {
-        public string Name;
-        public string Namespace;
-        public string Fullname;
+        public static readonly Cache<Type, Fixture> FixtureCache =
+            new Cache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
 
-        public bool Equals(FixtureDto other)
+        public readonly Cache<string, Fixture> Fixtures = new Cache<string, Fixture>(key => new MissingFixture(key));
+        public readonly Cache<string, FixtureModel> Models = new Cache<string, FixtureModel>();
+
+        public static bool IsFixtureType(Type type)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return Equals(other.Name, Name) && Equals(other.Namespace, Namespace) && Equals(other.Fullname, Fullname);
+            if (!type.CanBeCastTo<Fixture>()) return false;
+            if (type.HasAttribute<HiddenAttribute>()) return false;
+            if (!type.IsConcreteWithDefaultCtor()) return false;
+            if (type.IsOpenGeneric()) return false;
+
+            return true;
         }
 
-        public override bool Equals(object obj)
+        public static IEnumerable<Type> FixtureTypesFor(Assembly assembly)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (FixtureDto)) return false;
-            return Equals((FixtureDto) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
+            try
             {
-                int result = (Name != null ? Name.GetHashCode() : 0);
-                result = (result*397) ^ (Namespace != null ? Namespace.GetHashCode() : 0);
-                result = (result*397) ^ (Fullname != null ? Fullname.GetHashCode() : 0);
-                return result;
+                return assembly.GetExportedTypes().Where(IsFixtureType);
+            }
+            catch (Exception)
+            {
+                return new Type[0];
             }
         }
-    }
 
-    [Serializable]
-    public class FixtureLibrary : IFixtureNode
-    {
-        private readonly Cache<string, FixtureStructure> _fixtures =
-            new Cache<string, FixtureStructure>(key => new FixtureStructure(key)
+
+        public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
+        {
+            IEnumerable<Task<CompiledFixture>> fixtures = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(FixtureTypesFor)
+                .Select(
+                    type => { return Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)); });
+
+            return Task.WhenAll(fixtures).ContinueWith(results =>
             {
-                Description = key
-            });
+                var library = new FixtureLibrary();
 
-        public FixtureDto[] AllFixtures { get; set; }
-        public IEnumerable<FixtureStructure> ActiveFixtures { get { return _fixtures.OrderBy(x => x.Name); } }
-
-        #region IFixtureNode Members
-
-        public string Name { get { return "Fixtures"; } }
-
-        public TPath GetPath()
-        {
-            return TPath.Empty;
-        }
-
-        public IEnumerable<GrammarError> AllErrors()
-        {
-            var list = new List<GrammarError>();
-            _fixtures.Each(x => list.AddRange(x.AllErrors()));
-            return list;
-        }
-
-        public string Label { get { return "All Fixtures"; } }
-
-        public string Description { get { return string.Empty; } }
-
-        #endregion
-
-        public FixtureStructure FixtureFor(string name)
-        {
-            return _fixtures[name];
-        }
-
-        public IFixtureNode Find(TPath path)
-        {
-            if (path.IsRoot)
-            {
-                return this;
-            }
-
-            FixtureStructure fixture = FixtureFor(path.Next);
-
-            return path.IsEnd ? fixture : (IFixtureNode) fixture.GrammarFor(path.Pop().Next);
-        }
-
-        public bool HasErrors()
-        {
-            foreach (FixtureStructure graph in _fixtures)
-            {
-                if (graph.AllErrors().Count() > 0)
+                results.Result.Each(x =>
                 {
-                    return true;
-                }
-            }
+                    library.Fixtures[x.Fixture.Key] = x.Fixture;
+                    library.Models[x.Fixture.Key] = x.Model;
+                });
 
-            return false;
+                return library;
+            });
         }
 
-        public bool HasFixture(string fixtureName)
+        public static CompiledFixture CreateCompiledFixture(CellHandling cellHandling, Type type)
         {
-            return _fixtures.Has(fixtureName);
+            try
+            {
+                var fixture = Activator.CreateInstance(type) as Fixture;
+                FixtureCache[type] = fixture;
+                return new CompiledFixture
+                {
+                    Fixture = fixture,
+                    Model = fixture.Compile(cellHandling)
+                };
+            }
+            catch (Exception e)
+            {
+                var fixture = new InvalidFixture(type, e);
+                var model = fixture.Compile(cellHandling);
+                model.implementation = type.FullName;
+
+                return new CompiledFixture
+                {
+                    Fixture = fixture,
+                    Model = model
+                };
+            }
         }
 
+        public struct CompiledFixture
+        {
+            public Fixture Fixture;
+            public FixtureModel Model;
+        }
     }
 }

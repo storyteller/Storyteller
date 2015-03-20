@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using StoryTeller.Conversion;
 using StoryTeller.Engine;
 
 namespace InvalidExamples
@@ -15,7 +18,17 @@ namespace InvalidExamples
             throw new NotImplementedException();
         }
 
-        public void Recycle()
+        public IEnumerable<IConversionProvider> ConversionProviders()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Warmup()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Recycle()
         {
             throw new NotImplementedException();
         }

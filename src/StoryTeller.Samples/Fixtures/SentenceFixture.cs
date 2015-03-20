@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using FubuCore;
-using Storyteller.Core;
 
 namespace StoryTeller.Samples.Fixtures
 {

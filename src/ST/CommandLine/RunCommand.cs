@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using FubuCore;
 using FubuCore.CommandLine;
-using Storyteller.Core.Model;
-using Storyteller.Core.Remotes;
+using StoryTeller.Model;
+using StoryTeller.Remotes;
 
 namespace ST.CommandLine
 {

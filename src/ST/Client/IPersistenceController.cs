@@ -1,6 +1,6 @@
-﻿using Storyteller.Core.Messages;
-using Storyteller.Core.Model;
-using Storyteller.Core.Model.Persistence;
+﻿using StoryTeller.Messages;
+using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 
 namespace ST.Client
 {

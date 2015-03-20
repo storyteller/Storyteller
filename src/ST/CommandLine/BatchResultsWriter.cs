@@ -4,8 +4,8 @@ using System.IO;
 using System.Reflection;
 using FubuCore;
 using HtmlTags;
-using Storyteller.Core.Engine;
-using Storyteller.Core.Remotes.Messaging;
+using StoryTeller.Engine;
+using StoryTeller.Remotes.Messaging;
 
 namespace ST.CommandLine
 {

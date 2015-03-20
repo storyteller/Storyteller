@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FubuCore;
-using Storyteller.Core;
-using Storyteller.Core.Conversion;
-using Storyteller.Core.Engine;
+using StoryTeller.Conversion;
+using StoryTeller.Engine;
 
 namespace StoryTeller.Samples
 {

@@ -1,58 +1,30 @@
-using System;
-using System.Collections.Generic;
-using StoryTeller.Domain;
+﻿using System.Collections.Generic;
+using System.Linq;
+using FubuCore;
 
 namespace StoryTeller.Model
 {
-    public interface IEmbeddedGrammar
+    public class Paragraph : GrammarModel, IModelWithCells
     {
-        EmbedStyle Style { get; set; }
-        string Label { get; }
-    }
+        public GrammarModel[] children;
+        public string title;
 
-    public static class EmbeddedGrammarExtensions
-    {
-        public static bool ShouldBeIndented(this IEmbeddedGrammar grammar)
-        {
-            return grammar.Style == EmbedStyle.TitledAndIndented || grammar.Style == EmbedStyle.Indented;
-        }
-    }
-
-    [Serializable]
-    public class Paragraph : GrammarStructure, IEmbeddedGrammar
-    {
-        private readonly List<GrammarStructure> _children = new List<GrammarStructure>();
-        private readonly string _label;
-
-        public Paragraph()
+        public Paragraph() : base("paragraph")
         {
         }
 
-        public Paragraph(string label, List<GrammarStructure> children)
+        public Paragraph(IEnumerable<GrammarModel> children) : this()
         {
-            _label = label;
-            _children = children;
+            this.children = children.ToArray();
+            AddErrorRange(this.children.SelectMany(x => x.errors));
         }
 
-        public List<GrammarStructure> Children { get { return _children; } }
-
-        #region IEmbeddedGrammar Members
-
-        public override string Label { get { return _label ?? Name; } }
-        public EmbedStyle Style { get; set; }
-
-        #endregion
-
-        public void AddStructure(GrammarStructure structure)
+        public Cell[] cells
         {
-            _children.Add(structure);
-        }
-
-        public void ForEachGrammar(Action<GrammarStructure> action)
-        {
-            foreach (GrammarStructure structure in _children)
+            get
             {
-                action(structure);
+                // TODO -- throw good message if not all the children are IModelWithCells
+                return children.SelectMany(x => x.As<IModelWithCells>().cells).ToArray();
             }
         }
     }

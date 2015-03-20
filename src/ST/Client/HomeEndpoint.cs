@@ -2,7 +2,7 @@ using System.IO;
 using FubuMVC.Core.Assets;
 using FubuMVC.Core.UI;
 using HtmlTags;
-using Storyteller.Core.Remotes.Messaging;
+using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
 {

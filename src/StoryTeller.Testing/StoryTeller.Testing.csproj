@@ -10,9 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StoryTeller.Testing</RootNamespace>
     <AssemblyName>StoryTeller.Testing</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
@@ -41,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,6 +52,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FubuCore">
@@ -98,149 +101,129 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AbortTestSmokeTester.cs" />
-    <Compile Include="Bugs\MethodFactDoesNotUpdateTheCounts.cs" />
-    <Compile Include="CommentTester.cs" />
-    <Compile Include="DataMother.cs" />
-    <Compile Include="DisplayParserTester.cs" />
-    <Compile Include="Domain\StepLeafTester.cs" />
-    <Compile Include="Domain\SuiteNavigatorTester.cs" />
-    <Compile Include="Domain\TagsTest.cs" />
-    <Compile Include="Domain\TestFilterTester.cs" />
-    <Compile Include="Domain\TestProgressionTester.cs" />
-    <Compile Include="Domain\TPathTester.cs" />
-    <Compile Include="DSL\ObjectConstructionExpressionTester.cs" />
-    <Compile Include="DSL\ObjectVerificationExpressionTester.cs" />
-    <Compile Include="Engine\ActionGrammarTester.cs" />
-    <Compile Include="Engine\AssemblyResultTester.cs" />
-    <Compile Include="Engine\AutoPerformingTestContext.cs" />
-    <Compile Include="Engine\CheckGrammarTester.cs" />
-    <Compile Include="Engine\ConfigureObjectGrammarTester.cs" />
-    <Compile Include="Engine\CreateObjectGrammarTester.cs" />
-    <Compile Include="Engine\CurriedLineGrammarTester.cs" />
-    <Compile Include="Engine\DecoratedLineGrammarTester.cs" />
-    <Compile Include="Engine\DoGrammarTester.cs" />
-    <Compile Include="Engine\EmbeddedSectionGrammarTester.cs" />
-    <Compile Include="Engine\EmbeddedSectionsTester.cs" />
-    <Compile Include="Engine\EquivalenceCheckerTester.cs" />
-    <Compile Include="Engine\FactGrammarTester.cs" />
-    <Compile Include="Engine\FixtureGraphTester.cs" />
-    <Compile Include="Engine\FixtureRegistryTester.cs" />
-    <Compile Include="Engine\FixtureTester.cs" />
-    <Compile Include="Engine\FrameTester.cs" />
-    <Compile Include="Engine\Library_building_in_FixtureGraph_Tester.cs" />
-    <Compile Include="Engine\SelectionListTester.cs" />
-    <Compile Include="Engine\SelectionValueAttributeTester.cs" />
-    <Compile Include="Engine\Sets\SetRowMatcherTester.cs" />
-    <Compile Include="Engine\Sets\SetRowTester.cs" />
-    <Compile Include="Engine\StepResultsTester.cs" />
-    <Compile Include="Engine\TableLineGrammarTester.cs" />
-    <Compile Include="EventPublisherTester.cs" />
-    <Compile Include="Execution\FixtureAssemblyTester.cs" />
-    <Compile Include="Execution\ProjectTestRunnerIntegratedTester.cs" />
-    <Compile Include="Execution\TestEngineTester.cs" />
-    <Compile Include="Integration\GrammarIntegrationTests.cs" />
-    <Compile Include="Engine\ReflectionAssertionTester.cs" />
-    <Compile Include="Engine\ServiceAssertionGrammarTester.cs" />
-    <Compile Include="Engine\SetPropertyGrammarTester.cs" />
-    <Compile Include="Engine\Sets\DataColumnMatchTester.cs" />
-    <Compile Include="Engine\Sets\DataRowSetTesting.cs" />
-    <Compile Include="Engine\Sets\ObjectComparerTester.cs" />
-    <Compile Include="Engine\Sets\PropertyMatchTester.cs" />
-    <Compile Include="Engine\Sets\SetVerificationGrammarTester.cs" />
-    <Compile Include="Engine\Sets\SetVerificationTesting.cs" />
-    <Compile Include="Engine\Sets\StringComparerTester.cs" />
-    <Compile Include="Engine\SingleLineGrammarTester.cs" />
-    <Compile Include="Engine\TableGrammarTester.cs" />
-    <Compile Include="Engine\TableGrammarTestRunningTester.cs" />
-    <Compile Include="Engine\TimeoutFixture.cs" />
-    <Compile Include="ErrorsTester.cs" />
-    <Compile Include="Execution\DirectoryRunnerTester.cs" />
-    <Compile Include="HierarchyTester.cs" />
-    <Compile Include="Integration\ProjectIntegratedTester.cs" />
-    <Compile Include="Model\DoGrammarStructureTester.cs" />
-    <Compile Include="Model\FixtureStructureTester.cs" />
-    <Compile Include="Model\FixtureLibraryFindTester.cs" />
-    <Compile Include="Model\FixtureLibraryTester.cs" />
-    <Compile Include="Model\Sentence_Writing_Contexts.cs" />
-    <Compile Include="Model\SetVerificationTester.cs" />
-    <Compile Include="Model\TableTester.cs" />
-    <Compile Include="perf_testing.cs" />
-    <Compile Include="Persistence\JsonNodeTester.cs" />
-    <Compile Include="Persistence\XmlTestWriterTester.cs" />
-    <Compile Include="ProjectUtils\Loaders\ProjectDirectoryLoaderTester.cs" />
-    <Compile Include="ProjectUtils\Loaders\ProjectFileLoaderTester.cs" />
-    <Compile Include="ProjectUtils\ProjectLoaderTester.cs" />
-    <Compile Include="StepExtensions.cs" />
-    <Compile Include="Engine\CheckPropertyGrammarTester.cs" />
-    <Compile Include="Engine\CompositeGrammerTester.cs" />
+    <Compile Include="cells_reading_lists_integration_specs.cs" />
+    <Compile Include="CommandLine\run_command_integration_specs.cs" />
+    <Compile Include="Conversion\ConversionsTester.cs" />
+    <Compile Include="Conversion\DateTime_conversion_specs.cs" />
+    <Compile Include="Conversion\StepValuesTester.cs" />
+    <Compile Include="Conversion\StringConverterProviderTester.cs" />
+    <Compile Include="debugging.cs" />
+    <Compile Include="EndToEndExecution\fixture_check_method_specs.cs" />
+    <Compile Include="EndToEndExecution\fixture_do_method_specs.cs" />
+    <Compile Include="EndToEndExecution\fixture_fact_methods_specs.cs" />
+    <Compile Include="EndToEndExecution\simple_method_grammars.cs" />
+    <Compile Include="EndToEnd\simplest_possible_execution.cs" />
+    <Compile Include="Engine\BatchExecutionModeTester.cs" />
+    <Compile Include="Engine\batch_running_failure_cases_integration_specs.cs" />
     <Compile Include="Engine\CountsTester.cs" />
-    <Compile Include="Engine\ReflectionValueCheckTester.cs" />
-    <Compile Include="Engine\CellTester.cs" />
-    <Compile Include="Engine\GrammarBuilderTester.cs" />
-    <Compile Include="Engine\Reflection\MethodExtensionsTester.cs" />
-    <Compile Include="Engine\SectionTester.cs" />
-    <Compile Include="Engine\SimpleTestRunningTester.cs" />
-    <Compile Include="Engine\StubFixture.cs" />
-    <Compile Include="Engine\TestContextTester.cs" />
-    <Compile Include="Engine\TestRunnerTester.cs" />
-    <Compile Include="Engine\TypeExtensionsTester.cs" />
-    <Compile Include="EntitiesForTesting.cs" />
-    <Compile Include="InteractionContext.cs" />
+    <Compile Include="Engine\EngineControllerTester.cs" />
+    <Compile Include="Engine\integrated_performance_data_collection_testing.cs" />
+    <Compile Include="Engine\SpecExecutionRequestTester.cs" />
+    <Compile Include="Engine\SpecRunnerTester.cs" />
+    <Compile Include="Engine\TimingsSmokeTester.cs" />
+    <Compile Include="Engine\user_interface_tracing_spec.cs" />
+    <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />
+    <Compile Include="FixtureTester.cs" />
+    <Compile Include="Grammars\CheckPropertyGrammar_specs.cs" />
+    <Compile Include="Grammars\Decisions\DecisionTableGrammar_specs.cs" />
+    <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
+    <Compile Include="Grammars\FixtureLibraryTester.cs" />
+    <Compile Include="Grammars\Importing\importing_and_currying_grammars_specs.cs" />
+    <Compile Include="Grammars\InvalidGrammarStepTester.cs" />
+    <Compile Include="Grammars\LinePlanTester.cs" />
+    <Compile Include="Grammars\Lines\ActionGrammarTester.cs" />
+    <Compile Include="Grammars\ObjectBuilding\ConfigureObjectGrammar_specs.cs" />
+    <Compile Include="Grammars\ObjectBuilding\CreateObjectGrammar_specs.cs" />
+    <Compile Include="Grammars\ObjectBuilding\Creating_object_data_specs.cs" />
+    <Compile Include="Grammars\ObjectBuilding\SetPropertyGrammar_specs.cs" />
+    <Compile Include="Grammars\Paragraphs\ParagraphGrammarTester.cs" />
+    <Compile Include="Grammars\Paragraphs\VerifyPropertiesOf_specs.cs" />
+    <Compile Include="Grammars\Reflection\ActionMethodGrammarTester.cs" />
+    <Compile Include="Grammars\Reflection\FactMethod_specs.cs" />
+    <Compile Include="Grammars\Reflection\MethodInvocationTester.cs" />
+    <Compile Include="Grammars\Reflection\ValueCheckMethodTester.cs" />
+    <Compile Include="Grammars\Sets\ObjectComparisonTester.cs" />
+    <Compile Include="Grammars\Sets\SetVerificationResultTester.cs" />
+    <Compile Include="Grammars\Sets\StringListComparisonTester.cs" />
+    <Compile Include="Grammars\Sets\string_list_verification_specs.cs" />
+    <Compile Include="Grammars\Sets\UnorderedSetMatcherTester.cs" />
+    <Compile Include="Grammars\Sets\VerifySetOf_specs.cs" />
+    <Compile Include="Grammars\SilentActionTester.cs" />
+    <Compile Include="Grammars\SilentGrammarTester.cs" />
+    <Compile Include="Grammars\Tables\TableGrammar_specs.cs" />
+    <Compile Include="integration_tests_with_the_grammar_project.cs" />
+    <Compile Include="InvalidFixtureTester.cs" />
+    <Compile Include="json_serialization_of_fixture_model.cs" />
+    <Compile Include="Model\CellTester.cs" />
+    <Compile Include="Model\ErrorGrammarTester.cs" />
+    <Compile Include="Model\MissingGrammarTester.cs" />
+    <Compile Include="Model\Persistence\HierarchyLoaderTester.cs" />
+    <Compile Include="Model\Persistence\Json_serialization_formatting_specs.cs" />
+    <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_json.cs" />
+    <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_xml.cs" />
+    <Compile Include="Model\Persistence\TextParserTester.cs" />
+    <Compile Include="Model\StepTester.cs" />
+    <Compile Include="performance_tuning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Engine\ReflectionActionTester.cs" />
-    <Compile Include="SimpleTest.cs" />
+    <Compile Include="recording_json_for_client_development.cs" />
+    <Compile Include="record_data_for_client_testing.cs" />
+    <Compile Include="Remotes\determining_the_system_type.cs" />
+    <Compile Include="Remotes\Messaging\EventAggregatorTester.cs" />
+    <Compile Include="Remotes\Messaging\JsonSerializationTester.cs" />
+    <Compile Include="Remotes\Messaging\Message1.cs" />
+    <Compile Include="Remotes\Messaging\Message2.cs" />
+    <Compile Include="Remotes\Messaging\MessageWaitConditionTester.cs" />
+    <Compile Include="Remotes\Messaging\MessagingHubTester.cs" />
+    <Compile Include="Remotes\Messaging\RecordingListener.cs" />
+    <Compile Include="Remotes\Messaging\RemoteListenerTester.cs" />
+    <Compile Include="Remotes\Messaging\WaitTester.cs" />
+    <Compile Include="Remotes\remote_activation_integration_specs.cs" />
+    <Compile Include="Results\CellResultTester.cs" />
+    <Compile Include="Results\EnvelopeTester.cs" />
+    <Compile Include="Results\ReporterTester.cs" />
+    <Compile Include="Results\StepResultTester.cs" />
+    <Compile Include="SpecContextExtensions.cs" />
+    <Compile Include="SpecContextTester.cs" />
     <Compile Include="SpecificationExtensions.cs" />
-    <Compile Include="StepTester.cs" />
-    <Compile Include="StoryTellerDebug.cs" />
-    <Compile Include="StoryTellerEnvironmentTester.cs" />
-    <Compile Include="SuiteTester.cs" />
-    <Compile Include="Template.cs" />
-    <Compile Include="TestConverterTester.cs" />
-    <Compile Include="TestingExtensions.cs" />
-    <Compile Include="TestTester.cs" />
-    <Compile Include="TestUtility.cs" />
-    <Compile Include="Model\FixtureLibraryWriterTester.cs" />
-    <Compile Include="Model\SentenceTester.cs" />
-    <Compile Include="Workspace\LazyTestXmlReaderTester.cs" />
-    <Compile Include="Workspace\ProjectTester.cs" />
-    <Compile Include="Workspace\FileSystemTester.cs" />
-    <Compile Include="Workspace\ProjectValidationTester.cs" />
-    <Compile Include="Xml\XmlReadingTester.cs" />
-    <Compile Include="Xml\XmlTestWritingTester.cs" />
+    <Compile Include="SpecResultsTester.cs" />
+    <Compile Include="SpecRunningContext.cs" />
+    <Compile Include="StateTester.cs" />
+    <Compile Include="StoryTellerAssertTester.cs" />
+    <Compile Include="ST\ClientConnectorTester.cs" />
+    <Compile Include="ST\PersistenceControllerTester.cs" />
+    <Compile Include="ST\RunCommand_write_csv_and_json_data_spec.cs" />
+    <Compile Include="ST\SaveSpecBodyCommandTester.cs" />
+    <Compile Include="TestingContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Examples\Examples.csproj">
-      <Project>{B52EADC1-DDD4-452C-83ED-4A148302D424}</Project>
-      <Name>Examples</Name>
+    <ProjectReference Include="..\BadSystem\BadSystem.csproj">
+      <Project>{912a12c9-5c6c-4661-806f-28633ae0666d}</Project>
+      <Name>BadSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InvalidExamples\InvalidExamples.csproj">
+      <Project>{73443ed3-feb9-4a4d-9724-141be99602a7}</Project>
+      <Name>InvalidExamples</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj">
+      <Project>{5b273c7c-0a4e-48e8-9e6e-3e84d8c2243e}</Project>
+      <Name>MultipleSystems</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
       <Project>{CAE54634-A689-4CF2-979E-CCBCCA8A3644}</Project>
       <Name>StoryTeller.Gallery</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
+      <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
+      <Name>StoryTeller.Samples</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
       <Project>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</Project>
       <Name>StoryTeller</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="history.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SampleData\Address\h.xml" />
-    <Content Include="SampleData\Address\Data\a.xml" />
-    <Content Include="SampleData\Address\Data\b.xml" />
-    <Content Include="SampleData\Address\Screen\c.xml" />
-    <Content Include="SampleData\Address\Screen\d.xml" />
-    <Content Include="SampleData\Console\f.xml" />
-    <Content Include="SampleData\Console\g.xml" />
-    <Content Include="SampleData\Console\e.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ripple.dependencies.config" />
-    <None Include="StoryTeller.Testing.dll.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\ST\ST.csproj">
+      <Project>{7d034f5b-1786-4d0f-a4c6-d6e689f522a4}</Project>
+      <Name>ST</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -260,7 +243,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
+    <None Include="Model\Persistence\spec.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

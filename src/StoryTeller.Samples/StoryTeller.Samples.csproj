@@ -64,12 +64,6 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.mocks">
-      <HintPath>..\packages\NUnit\lib\nunit.mocks.dll</HintPath>
-    </Reference>
-    <Reference Include="pnunit.framework">
-      <HintPath>..\packages\NUnit\lib\pnunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\packages\structuremap\lib\net40\StructureMap.dll</HintPath>
     </Reference>
@@ -148,9 +142,9 @@
     <None Include="ripple.dependencies.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Storyteller.Core\Storyteller.Core.csproj">
-      <Project>{90113dc7-c74e-4c5d-a0de-045f36378033}</Project>
-      <Name>Storyteller.Core</Name>
+    <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
+      <Project>{96c1f8d5-fb46-4f3e-8cb7-a53a919bb424}</Project>
+      <Name>StoryTeller</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

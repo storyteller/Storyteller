@@ -6,8 +6,8 @@ using FubuCore.Logging;
 using FubuMVC.Core;
 using FubuMVC.Katana;
 using FubuMVC.StructureMap;
-using Storyteller.Core.Commands;
-using Storyteller.Core.Remotes;
+using StoryTeller.Commands;
+using StoryTeller.Remotes;
 using StructureMap;
 
 namespace ST.Client

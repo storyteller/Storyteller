@@ -1,28 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using FubuCore;
-using FubuCore.Binding;
+using StoryTeller.Conversion;
 
 namespace StoryTeller.Engine
 {
     public class NulloSystem : ISystem
     {
-        #region ISystem Members
+        public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
 
         public IExecutionContext CreateContext()
         {
-            return new SimpleExecutionContext();
+            return new SimpleExecutionContext(Services);
         }
 
-        public void Recycle()
+        public Task Recycle()
         {
+            return Task.FromResult("recycled");
+        }
+
+        public Task Warmup()
+        {
+            return Task.FromResult("warmed up");
         }
 
         public void Dispose()
         {
         }
 
-        #endregion
+        public IEnumerable<IConversionProvider> ConversionProviders()
+        {
+            return new IConversionProvider[0];
+        }
+
+        public class SimpleExecutionContext : IExecutionContext
+        {
+            public SimpleExecutionContext(IServiceLocator services)
+            {
+                Services = services;
+            }
+
+            void IDisposable.Dispose()
+            {
+
+            }
+
+            IServiceLocator IExecutionContext.Services { get { return Services; } }
+
+            public IServiceLocator Services { get; private set; }
+        }
     }
+
+
 
 
 }

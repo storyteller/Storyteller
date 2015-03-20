@@ -4,10 +4,10 @@ using System.Linq;
 using Fleck;
 using FubuCore.Logging;
 using FubuMVC.Core;
-using Storyteller.Core.Commands;
-using Storyteller.Core.Messages;
-using Storyteller.Core.Remotes;
-using Storyteller.Core.Remotes.Messaging;
+using StoryTeller.Commands;
+using StoryTeller.Messages;
+using StoryTeller.Remotes;
+using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
 {
@@ -25,7 +25,7 @@ namespace ST.Client
         private readonly string _webSocketsAddress;
         private WebSocketServer _server;
 
-        public ClientConnector(ILogger logger, IRemoteController controller, IEnumerable<Storyteller.Core.Commands.ICommand> commands)
+        public ClientConnector(ILogger logger, IRemoteController controller, IEnumerable<ICommand> commands)
         {
             _logger = logger;
             _controller = controller;
