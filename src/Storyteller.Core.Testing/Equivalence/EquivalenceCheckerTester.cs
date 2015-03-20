@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FubuTestingSupport;
 using NUnit.Framework;
 using Storyteller.Core.Equivalence;
@@ -49,6 +50,19 @@ namespace Storyteller.Core.Testing.Equivalence
             var strings3 = new string[] {"b", "c", "d"};
             var strings4 = new string[] {"c", "b", "d"};
         
+            checker.IsEqual(strings1, strings2).ShouldBeTrue();
+            checker.IsEqual(strings3, strings4).ShouldBeTrue();
+            checker.IsEqual(strings1, strings3).ShouldBeFalse();
+        }
+
+        [Test]
+        public void lists_are_checked_independently_of_order()
+        {
+            var strings1 = new List<string> { "a", "b", "c" };
+            var strings2 = new List<string> { "b", "c", "a" };
+            var strings3 = new List<string> { "b", "c", "d" };
+            var strings4 = new List<string> { "c", "b", "d" };
+
             checker.IsEqual(strings1, strings2).ShouldBeTrue();
             checker.IsEqual(strings3, strings4).ShouldBeTrue();
             checker.IsEqual(strings1, strings3).ShouldBeFalse();

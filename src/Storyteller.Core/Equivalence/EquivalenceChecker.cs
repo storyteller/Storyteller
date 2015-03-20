@@ -13,6 +13,7 @@ namespace Storyteller.Core.Equivalence
         private readonly IList<IEquivalenceCheckerPolicy> _policies = new List<IEquivalenceCheckerPolicy>()
         {
             new ArrayEquivalencyPolicy(),
+            new CollectionEquivalencyPolicy(),
             new EquatablePolicy(),
             new StandardEqualsPolicy()
         };
