@@ -11,6 +11,49 @@ using Storyteller.Core.Results;
 namespace Storyteller.Core.Testing.Engine
 {
     [TestFixture]
+    public class executing_when_the_runner_is_invalid : InteractionContext<SpecRunner>
+    {
+        private SpecExecutionRequest theRequest;
+        private SpecResults theResults;
+
+        protected override void beforeEach()
+        {
+            ClassUnderTest.Status = SpecRunnerStatus.Invalid;
+
+            var specNode = new SpecNode { id = Guid.NewGuid().ToString() };
+            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
+                new Specification { Id = specNode.id });
+
+            theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
+        }
+
+        [Test]
+        public void the_results_should_show_that_the_spec_was_aborted()
+        {
+            theResults.WasAborted.ShouldBeTrue();
+        }
+
+
+        [Test]
+        public void the_attempts_should_be_zero()
+        {
+            theResults.Attempts.ShouldEqual(0);
+        }
+
+        [Test]
+        public void should_call_through_to_the_before_running_method_on_mode()
+        {
+            MockFor<IExecutionMode>().AssertWasCalled(x => x.BeforeRunning(theRequest));
+        }
+
+        [Test]
+        public void should_call_through_to_the_after_running_method_on_the_active_mode()
+        {
+            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>()));
+        }
+    }
+
+    [TestFixture]
     public class executing_a_spec_when_context_creation_blows_up : InteractionContext<SpecRunner>
     {
         private SpecExecutionRequest theRequest;

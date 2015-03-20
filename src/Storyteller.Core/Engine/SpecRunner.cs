@@ -4,7 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.ModelBinding;
 using FubuCore;
+using FubuCore.CommandLine;
 using Storyteller.Core.Grammars;
+using Storyteller.Core.Messages;
+using Storyteller.Core.Remotes.Messaging;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Engine
@@ -29,58 +32,37 @@ namespace Storyteller.Core.Engine
             Status = SpecRunnerStatus.Valid;
         }
 
-        public SpecRunnerStatus Status { get; private set; }
+        public SpecRunnerStatus Status { get; set; }
 
         public SpecResults Execute(SpecExecutionRequest request, IConsumingQueue queue)
         {
             _mode.BeforeRunning(request);
+            if (Status == SpecRunnerStatus.Invalid)
+            {
+                var abortedResults = SpecResults.ForAbortedRun();
+                _mode.AfterRunning(request, abortedResults, queue);
+                return abortedResults;
+            }
+
 
             request.Plan.Attempts++;
 
             var timings = request.StartNewTimings();
-            IExecutionContext execution = null;
             SpecResults results = null;
 
             try
             {
+                IExecutionContext execution = null;
                 using (timings.Subject("Context", "Creation"))
                 {
                     execution = _system.CreateContext();
                 }
 
-                var context = new SpecContext(request.Specification, timings, request.Observer, _stopConditions, execution.Services);
-                context.Reporting.StartDebugListening();
-
-                try
-                {
-                    results = CreateResults(request, context, _stopConditions.TimeoutInSeconds.Seconds());
-                }
-                finally
-                {
-                    execution.Dispose();
-                    ((ISpecContext)context).Dispose();
-                }
-
+                results = executeSpecification(request, timings, execution);
             }
             catch (Exception ex)
             {
-                var result = new StepResult(request.Specification.Id, ex) {position = Stage.context};
-                var perf = timings.Finish();
-
-                results = new SpecResults
-                {
-                    Attempts = request.Plan.Attempts,
-                    Duration = timings.Duration,
-                    Performance = perf.ToArray(),
-                    Counts = new Counts(0, 0, 1, 0),
-                    Results = new IResultMessage[]
-                    {
-                        result
-                    }
-                };
-
-                Status = SpecRunnerStatus.Invalid;
-                
+                results = processContextCreationFailure(request, results, ex, timings);
             }
             finally
             {
@@ -90,16 +72,59 @@ namespace Storyteller.Core.Engine
             return results;
         }
 
-        public SpecResults CreateResults(SpecExecutionRequest request, ISpecContext context, TimeSpan timeout)
+        private SpecResults executeSpecification(SpecExecutionRequest request, Timings timings, IExecutionContext execution)
         {
-            var plan = request.Plan;
-            var executor = _mode.BuildExecutor(plan, context);
+            SpecContext context = null;
 
-            runWithTimeout(plan, context, executor, timeout);
+            try
+            {
+                context = new SpecContext(request.Specification, timings, request.Observer, _stopConditions, execution.Services);
+                context.Reporting.StartDebugListening();
+                var plan = request.Plan;
+                var executor = _mode.BuildExecutor(plan, context);
 
-            var results = context.FinalizeResults(request.Plan.Attempts);
+                runWithTimeout(plan, context, executor, _stopConditions.TimeoutInSeconds.Seconds());
 
+                return context.FinalizeResults(request.Plan.Attempts);
+            }
+            finally
+            {
+                execution.SafeDispose();
+                context.SafeDispose();
+            }
+        }
+
+        private SpecResults processContextCreationFailure(SpecExecutionRequest request, SpecResults results, Exception ex,
+            Timings timings)
+        {
+            results = buildResultsForContextCreationFailure(request, ex, timings);
+
+            Status = SpecRunnerStatus.Invalid;
+
+            ConsoleWriter.Write(ConsoleColor.Yellow,
+                "Failed to create an execution context. No specifications can be processed until this is addressed");
+            ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
+            EventAggregator.SendMessage(new RuntimeError(ex));
             return results;
+        }
+
+        private static SpecResults buildResultsForContextCreationFailure(SpecExecutionRequest request, Exception ex,
+            Timings timings)
+        {
+            var result = new StepResult(request.Specification.Id, ex) {position = Stage.context};
+            var perf = timings.Finish();
+
+            return new SpecResults
+            {
+                Attempts = request.Plan.Attempts,
+                Duration = timings.Duration,
+                Performance = perf.ToArray(),
+                Counts = new Counts(0, 0, 1, 0),
+                Results = new IResultMessage[]
+                {
+                    result
+                }
+            };
         }
 
         private static void runWithTimeout(SpecificationPlan plan, ISpecContext context, IStepExecutor executor, TimeSpan timeout)
