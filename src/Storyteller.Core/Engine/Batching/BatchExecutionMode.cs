@@ -21,7 +21,6 @@ namespace Storyteller.Core.Engine.Batching
         {
             var plan = request.Plan;
 
-            plan.Attempts++;
             if (ShouldRetry(plan, request.Specification))
             {
                 _resultObserver.SpecRequeued(request);

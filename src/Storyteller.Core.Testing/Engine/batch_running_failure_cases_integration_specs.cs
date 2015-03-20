@@ -50,7 +50,7 @@ namespace Storyteller.Core.Testing.Engine
             return task.Result.Result;
         }
 
-        [Test, Explicit]
+        [Test]
         public void spec_fails_with_timeout()
         {
             var response = execute(x =>
@@ -63,7 +63,7 @@ namespace Storyteller.Core.Testing.Engine
 
             record.results.Counts.ShouldEqual(0, 0, 1, 0);
             var result = record.results.Results.Single().ShouldBeOfType<StepResult>();
-            result.position.ShouldEqual(Stage.timedout);
+            result.position.ShouldEqual(Stage.timedout.ToString());
 
             // At the specification level
             result.id.ShouldEqual("SometimesSlow");

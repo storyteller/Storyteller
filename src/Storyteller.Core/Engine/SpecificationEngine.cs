@@ -30,9 +30,8 @@ namespace Storyteller.Core.Engine
             _executionQueue = new ConsumingQueue(request =>
             {
                 observer.SpecStarted(request);
-                var results = _runner.Execute(request, _executionQueue);
+                var results = _runner.Execute(request, _executionQueue );
 
-                // TODO -- watch for some kind of catastropic exception here?
                 // TODO -- combine the two things here?
                 request.SpecExecutionFinished(results);
                 observer.SpecFinished(request);
