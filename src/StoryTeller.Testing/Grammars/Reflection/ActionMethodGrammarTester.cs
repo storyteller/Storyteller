@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
 using StoryTeller.Model;
@@ -44,7 +45,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("percentAwake", 50.1);
 
             grammar.Execute(values, SpecContext.Basic()).Any()
-                .ShouldBeFalse();
+                .ShouldBe(false);
 
             theTarget.Name.ShouldEqual("Jeremy");
             theTarget.Age.ShouldEqual(41);

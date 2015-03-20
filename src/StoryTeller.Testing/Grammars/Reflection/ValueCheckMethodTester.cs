@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
 using StoryTeller.Model;
@@ -30,7 +31,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             ValueCheckMethod
                 .For(new Target(), x => x.Fullname2(null, null))
                 .ReturnCell
-                .output.ShouldBeTrue();
+                .output.ShouldBe(true);
         }
 
         [Test]

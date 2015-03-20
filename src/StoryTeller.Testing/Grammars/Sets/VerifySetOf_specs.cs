@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
@@ -18,7 +19,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             verification.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("City", "StateOrProvince", "PostalCode");
 
-            verification.ordered.ShouldBeFalse();
+            verification.ordered.ShouldBe(false);
         }
 
         [Test]
@@ -30,7 +31,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             verification.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("City", "StateOrProvince", "PostalCode");
 
-            verification.ordered.ShouldBeTrue();
+            verification.ordered.ShouldBe(true);
         }
 
         [Test]

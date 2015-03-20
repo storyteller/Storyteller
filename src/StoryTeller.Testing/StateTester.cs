@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 
 namespace StoryTeller.Testing
 {
@@ -29,8 +30,8 @@ namespace StoryTeller.Testing
             state.Retrieve<int>("red").ShouldEqual(11);
             state.Retrieve<int>("green").ShouldEqual(12);
 
-            state.Retrieve<bool>("red").ShouldBeTrue();
-            state.Retrieve<bool>("green").ShouldBeFalse();
+            state.Retrieve<bool>("red").ShouldBe(true);
+            state.Retrieve<bool>("green").ShouldBe(false);
         }
     }
 }

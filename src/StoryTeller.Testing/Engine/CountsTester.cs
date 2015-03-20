@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Shouldly;
 
 namespace StoryTeller.Testing.Engine
 {
@@ -56,42 +57,42 @@ namespace StoryTeller.Testing.Engine
                 Exceptions = 0,
                 SyntaxErrors = 0,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBeTrue();
+            }.WasSuccessful().ShouldBe(true);
             new Counts
             {
                 Rights = 4,
                 Exceptions = 1,
                 SyntaxErrors = 0,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBeFalse();
+            }.WasSuccessful().ShouldBe(false);
             new Counts
             {
                 Rights = 4,
                 Exceptions = 0,
                 SyntaxErrors = 1,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBeFalse();
+            }.WasSuccessful().ShouldBe(false);
             new Counts
             {
                 Rights = 4,
                 Exceptions = 0,
                 SyntaxErrors = 0,
                 Wrongs = 1
-            }.WasSuccessful().ShouldBeFalse();
+            }.WasSuccessful().ShouldBe(false);
             new Counts
             {
                 Rights = 4,
                 Exceptions = 1,
                 SyntaxErrors = 0,
                 Wrongs = 1
-            }.WasSuccessful().ShouldBeFalse();
+            }.WasSuccessful().ShouldBe(false);
             new Counts
             {
                 Rights = 0,
                 Exceptions = 1,
                 SyntaxErrors = 0,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBeFalse();
+            }.WasSuccessful().ShouldBe(false);
         }
 
         [Test]

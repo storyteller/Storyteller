@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Paragraphs;
 using StoryTeller.Model;
@@ -13,7 +14,7 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
         public void do_adds_a_silent_grammar_at_the_right_position()
         {
             var paragraph = new ParagraphGrammar("Something");
-            paragraph.Children.Any().ShouldBeFalse();
+            paragraph.Children.Any().ShouldBe(false);
 
             paragraph.Do(c => {});
 

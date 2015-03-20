@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 
 namespace StoryTeller.Testing.Conversion
@@ -14,7 +15,7 @@ namespace StoryTeller.Testing.Conversion
 
             date.DayOfWeek.ShouldEqual(DayOfWeek.Saturday);
             date.Date.AddHours(14).AddMinutes(30).ShouldEqual(date);
-            (date >= DateTime.Today).ShouldBeTrue();
+            (date >= DateTime.Today).ShouldBe(true);
         }
 
         [Test]
@@ -24,7 +25,7 @@ namespace StoryTeller.Testing.Conversion
 
             date.DayOfWeek.ShouldEqual(DayOfWeek.Monday);
             date.Date.AddHours(14).AddMinutes(30).ShouldEqual(date);
-            (date >= DateTime.Today).ShouldBeTrue();
+            (date >= DateTime.Today).ShouldBe(true);
         }
 
         [Test]
@@ -34,7 +35,7 @@ namespace StoryTeller.Testing.Conversion
 
             date.DayOfWeek.ShouldEqual(DayOfWeek.Wednesday);
             date.Date.AddHours(14).AddMinutes(30).ShouldEqual(date);
-            (date >= DateTime.Today).ShouldBeTrue();
+            (date >= DateTime.Today).ShouldBe(true);
         }
 
         [Test]

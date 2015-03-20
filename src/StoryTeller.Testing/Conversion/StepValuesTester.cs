@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
 
@@ -56,7 +57,7 @@ namespace StoryTeller.Testing.Conversion
             values.Get("b").ShouldEqual(2);
             values.Get("c").ShouldEqual(3);
 
-            values.Errors.Any().ShouldBeFalse();
+            values.Errors.Any().ShouldBe(false);
         }
 
         [Test]

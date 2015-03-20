@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Samples.Fixtures;
 
@@ -29,14 +30,14 @@ namespace StoryTeller.Testing
         public void hidden_when_marked_with_Hidden()
         {
             new HiddenFixture().IsHidden()
-                .ShouldBeTrue();
+                .ShouldBe(true);
         }
 
         [Test]
         public void not_hidden_without_the_attribute()
         {
             new NotHiddenFixture().IsHidden()
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
 
 

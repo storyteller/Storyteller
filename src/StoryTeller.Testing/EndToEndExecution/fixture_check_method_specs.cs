@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.EndToEndExecution
@@ -44,7 +45,7 @@ Name: Test Run
             var cell = model.cells.Single();
             cell.Key.ShouldEqual("text");
             cell.Type.ShouldEqual(typeof (string));
-            cell.output.ShouldBeTrue();
+            cell.output.ShouldBe(true);
         }
     }
 

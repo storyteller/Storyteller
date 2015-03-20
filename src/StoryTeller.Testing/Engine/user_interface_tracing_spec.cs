@@ -3,6 +3,7 @@ using System.Linq;
 using FubuCore;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
@@ -54,7 +55,7 @@ namespace StoryTeller.Testing.Engine
             var expectedText = "EmbeddedFixture.Setup sent this debug message";
 
             theResults.Results.Reporting.Any(x => x.html.Contains(expectedText))
-                .ShouldBeTrue();
+                .ShouldBe(true);
         }
 
         [Test]
@@ -85,7 +86,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_have_broadcast_intermediate_results()
         {
-            theListener.MessageTypesReceived.Any(x => x == "step-result").ShouldBeTrue();
+            theListener.MessageTypesReceived.Any(x => x == "step-result").ShouldBe(true);
         }
     }
 

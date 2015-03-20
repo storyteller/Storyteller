@@ -2,6 +2,7 @@
 using System.IO;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using ST.CommandLine;
 
 namespace StoryTeller.Testing.ST
@@ -26,7 +27,7 @@ namespace StoryTeller.Testing.ST
 
             new RunCommand().Execute(input);
 
-            File.Exists(file).ShouldBeTrue();
+            File.Exists(file).ShouldBe(true);
         }
 
         [Test]
@@ -42,7 +43,7 @@ namespace StoryTeller.Testing.ST
 
             new RunCommand().Execute(input);
 
-            File.Exists(file).ShouldBeTrue();
+            File.Exists(file).ShouldBe(true);
         }
     }
 }

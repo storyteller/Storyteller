@@ -5,6 +5,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using ST.Client;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -79,8 +80,8 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void should_have_a_hierarchy_upon_starting()
         {
-            ClassUnderTest.Hierarchy.Suites.Any().ShouldBeTrue();
-            ClassUnderTest.Hierarchy.Nodes.Any().ShouldBeTrue();
+            ClassUnderTest.Hierarchy.Suites.Any().ShouldBe(true);
+            ClassUnderTest.Hierarchy.Nodes.Any().ShouldBe(true);
         }
 
         [Test]
@@ -123,7 +124,7 @@ namespace StoryTeller.Testing.ST
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.Name.ShouldEqual("New Sentence");
-            specification.Children.Any().ShouldBeTrue();
+            specification.Children.Any().ShouldBe(true);
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
@@ -189,7 +190,7 @@ namespace StoryTeller.Testing.ST
             var changed = ClassUnderTest.SaveSpecHeader("sentence4", x => x.Lifecycle = Lifecycle.Regression);
 
             ClassUnderTest.Hierarchy.Suites["Sentences"].specs.Any(x => ReferenceEquals(x, changed.node))
-                .ShouldBeTrue();
+                .ShouldBe(true);
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].ShouldEqual(changed.node);
             changed.node.Filename.ShouldEqual(node.Filename);
@@ -285,7 +286,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Deleted(file);
 
             ClassUnderTest.Hierarchy.Nodes.Has("paragraph")
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
     }
 

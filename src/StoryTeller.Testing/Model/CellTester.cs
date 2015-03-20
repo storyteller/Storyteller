@@ -2,6 +2,7 @@
 using System.Linq;
 using FubuCore.Reflection;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -67,8 +68,8 @@ namespace StoryTeller.Testing.Model
             var values3 = new StepValues("foo");
             values3.Store(cell.Key, 6);
 
-            cell.Matches(values1, values2).ShouldBeTrue();
-            cell.Matches(values1, values3).ShouldBeFalse();
+            cell.Matches(values1, values2).ShouldBe(true);
+            cell.Matches(values1, values3).ShouldBe(false);
         }
 
         [Test]
@@ -84,8 +85,8 @@ namespace StoryTeller.Testing.Model
             var values3 = new StepValues("foo");
             values3.Store(cell.Key, new[] { 1, 2, 4 });
 
-            cell.Matches(values1, values2).ShouldBeTrue();
-            cell.Matches(values1, values3).ShouldBeFalse();
+            cell.Matches(values1, values2).ShouldBe(true);
+            cell.Matches(values1, values3).ShouldBe(false);
         }
 
         private StepValues convert(Cell cell, string rawValue)
@@ -213,7 +214,7 @@ namespace StoryTeller.Testing.Model
             handling.Lists["States"].AddValues("TX", "MO", "AR");
 
             var fixture = new Fixture();
-            fixture.Lists.Has("States").ShouldBeFalse();
+            fixture.Lists.Has("States").ShouldBe(false);
 
             var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
             var cell = Cell.For(handling, property, fixture);
@@ -279,7 +280,7 @@ namespace StoryTeller.Testing.Model
 
             cell.ConvertValues(step, values);
 
-            values.Errors.Any().ShouldBeFalse();
+            values.Errors.Any().ShouldBe(false);
             values.Get("Number").ShouldEqual(111);
         }
     }

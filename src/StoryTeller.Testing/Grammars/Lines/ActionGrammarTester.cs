@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
@@ -30,9 +31,9 @@ namespace StoryTeller.Testing.Grammars.Lines
 
             var model = grammar.Compile(new Fixture(), CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
-            model.errors.Any().ShouldBeFalse();
+            model.errors.Any().ShouldBe(false);
             model.format.ShouldEqual("do something");
-            model.cells.Any().ShouldBeFalse();
+            model.cells.Any().ShouldBe(false);
         }
     }
 }

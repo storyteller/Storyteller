@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
@@ -35,7 +36,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
             });
 
             result.ShouldEqual(m4);
-            hub.Listeners.Any().ShouldBeFalse(); // want it to remove the condition as it goes
+            hub.Listeners.Any().ShouldBe(false); // want it to remove the condition as it goes
         }
 
         public class Message

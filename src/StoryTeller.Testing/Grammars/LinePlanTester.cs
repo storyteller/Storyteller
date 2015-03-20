@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Grammars;
@@ -105,8 +106,8 @@ namespace StoryTeller.Testing.Grammars
 
             theLineGrammar.VerifyAllExpectations();
 
-            c1.ConversionHappened.ShouldBeTrue();
-            c2.ConversionHappened.ShouldBeTrue();
+            c1.ConversionHappened.ShouldBe(true);
+            c2.ConversionHappened.ShouldBe(true);
 
         }
 

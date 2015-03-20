@@ -3,6 +3,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
 using StoryTeller.Model.Persistence;
@@ -62,7 +63,7 @@ namespace StoryTeller.Testing.Engine
             request.Specification.ShouldNotBeNull();
             request.Specification.Children.Count.ShouldBeGreaterThan(0);
 
-            request.IsCancelled.ShouldBeFalse();
+            request.IsCancelled.ShouldBe(false);
         }
 
         [Test]
@@ -74,7 +75,7 @@ namespace StoryTeller.Testing.Engine
 
             request.ReadXml();
 
-            request.IsCancelled.ShouldBeTrue();
+            request.IsCancelled.ShouldBe(true);
 
             var error = listener.Errors.Single();
 
@@ -86,11 +87,11 @@ namespace StoryTeller.Testing.Engine
         public void cancel_cancels_the_request()
         {
             var request = SpecExecutionRequest.For(theSpec);
-            request.IsCancelled.ShouldBeFalse();
+            request.IsCancelled.ShouldBe(false);
 
             request.Cancel();
 
-            request.IsCancelled.ShouldBeTrue();
+            request.IsCancelled.ShouldBe(true);
         }
 
 
@@ -101,7 +102,7 @@ namespace StoryTeller.Testing.Engine
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
-            request.IsCancelled.ShouldBeFalse();
+            request.IsCancelled.ShouldBe(false);
 
             request.Plan.ShouldNotBeNull();
         }
@@ -115,7 +116,7 @@ namespace StoryTeller.Testing.Engine
             //request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
-            request.IsCancelled.ShouldBeTrue();
+            request.IsCancelled.ShouldBe(true);
         }
 
         public class RuntimeErrorListener : IListener<RuntimeError>

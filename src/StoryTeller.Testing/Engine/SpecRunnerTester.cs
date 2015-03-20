@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
@@ -29,7 +30,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void the_results_should_show_that_the_spec_was_aborted()
         {
-            theResults.WasAborted.ShouldBeTrue();
+            theResults.WasAborted.ShouldBe(true);
         }
 
 
@@ -95,7 +96,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void was_not_aborted()
         {
-            theResults.WasAborted.ShouldBeFalse();
+            theResults.WasAborted.ShouldBe(false);
         }
 
         [Test]

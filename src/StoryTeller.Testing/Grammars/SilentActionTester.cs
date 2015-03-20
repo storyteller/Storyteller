@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
@@ -21,7 +22,7 @@ namespace StoryTeller.Testing.Grammars
             var context = SpecContext.ForTesting();
             action.Execute(context);
 
-            wasCalled.ShouldBeTrue();
+            wasCalled.ShouldBe(true);
 
         }
 
@@ -57,7 +58,7 @@ namespace StoryTeller.Testing.Grammars
 
             action.Execute(context);
 
-            context.CanContinue().ShouldBeFalse();
+            context.CanContinue().ShouldBe(false);
         }
 
         [Test]

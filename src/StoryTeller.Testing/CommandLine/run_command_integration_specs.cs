@@ -2,6 +2,7 @@
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using ST.CommandLine;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
@@ -62,9 +63,9 @@ namespace StoryTeller.Testing.CommandLine
 
             var result = task.Result;
 
-            result.records.Any(x => x.header.id == "embeds").ShouldBeFalse();
-            result.records.Any(x => x.header.id == "paragraph1").ShouldBeFalse();
-            result.records.Any(x => x.header.id == "sentence2").ShouldBeFalse();
+            result.records.Any(x => x.header.id == "embeds").ShouldBe(false);
+            result.records.Any(x => x.header.id == "paragraph1").ShouldBe(false);
+            result.records.Any(x => x.header.id == "sentence2").ShouldBe(false);
         }
 
         [Test]

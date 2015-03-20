@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
@@ -25,7 +26,7 @@ namespace StoryTeller.Testing.Grammars
 
             library.Fixtures["HanSolo"].ShouldBeOfType<AliasedFixture>();
 
-            library.Fixtures.Has(new SecretFixture().Key).ShouldBeFalse();
+            library.Fixtures.Has(new SecretFixture().Key).ShouldBe(false);
         }
 
         [Test]

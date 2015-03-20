@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Importing;
 using StoryTeller.Model;
 
@@ -41,7 +42,7 @@ namespace StoryTeller.Testing.Grammars.Importing
         {
             var sentence = ModelFor<Sentence>("TestImports", "SetTo12");
             sentence.format.ShouldEqual("Set to 12");
-            sentence.cells.Any().ShouldBeFalse();
+            sentence.cells.Any().ShouldBe(false);
         }
 
         [Test]

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 
 namespace StoryTeller.Testing
 {
@@ -14,7 +15,7 @@ namespace StoryTeller.Testing
             results.Counts.ShouldEqual(0, 0, 0, 0);
             results.Performance.Length.ShouldEqual(0);
             results.Results.Length.ShouldEqual(0);
-            results.WasAborted.ShouldBeTrue();
+            results.WasAborted.ShouldBe(true);
         }
     }
 }

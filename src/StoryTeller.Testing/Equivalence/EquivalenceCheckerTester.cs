@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Equivalence;
 
 namespace StoryTeller.Testing.Equivalence
@@ -19,15 +20,15 @@ namespace StoryTeller.Testing.Equivalence
         [Test]
         public void expected_is_null()
         {
-            checker.IsEqual(null, "a").ShouldBeFalse();
-            checker.IsEqual(null, null).ShouldBeTrue();
+            checker.IsEqual(null, "a").ShouldBe(false);
+            checker.IsEqual(null, null).ShouldBe(true);
         }
 
         [Test]
         public void check_a_string()
         {
-            checker.IsEqual("a", "a").ShouldBeTrue();
-            checker.IsEqual("a", "b").ShouldBeFalse();
+            checker.IsEqual("a", "a").ShouldBe(true);
+            checker.IsEqual("a", "b").ShouldBe(false);
         }
 
         [Test]
@@ -37,8 +38,8 @@ namespace StoryTeller.Testing.Equivalence
             var address2 = new EQAddress(){City = "Austin"};
             var address3 = new EQAddress(){City = "Dallas"};
                 
-            checker.IsEqual(address1, address2).ShouldBeTrue();
-            checker.IsEqual(address1, address3).ShouldBeFalse();
+            checker.IsEqual(address1, address2).ShouldBe(true);
+            checker.IsEqual(address1, address3).ShouldBe(false);
         }
 
         [Test]
@@ -49,9 +50,9 @@ namespace StoryTeller.Testing.Equivalence
             var strings3 = new string[] {"b", "c", "d"};
             var strings4 = new string[] {"c", "b", "d"};
         
-            checker.IsEqual(strings1, strings2).ShouldBeTrue();
-            checker.IsEqual(strings3, strings4).ShouldBeTrue();
-            checker.IsEqual(strings1, strings3).ShouldBeFalse();
+            checker.IsEqual(strings1, strings2).ShouldBe(true);
+            checker.IsEqual(strings3, strings4).ShouldBe(true);
+            checker.IsEqual(strings1, strings3).ShouldBe(false);
         }
 
         [Test]
@@ -62,9 +63,9 @@ namespace StoryTeller.Testing.Equivalence
             var strings3 = new List<string> { "b", "c", "d" };
             var strings4 = new List<string> { "c", "b", "d" };
 
-            checker.IsEqual(strings1, strings2).ShouldBeTrue();
-            checker.IsEqual(strings3, strings4).ShouldBeTrue();
-            checker.IsEqual(strings1, strings3).ShouldBeFalse();
+            checker.IsEqual(strings1, strings2).ShouldBe(true);
+            checker.IsEqual(strings3, strings4).ShouldBe(true);
+            checker.IsEqual(strings1, strings3).ShouldBe(false);
         }
     }
 

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
@@ -28,7 +29,7 @@ namespace StoryTeller.Testing.Engine
         {
             theSpecification.Lifecycle = Lifecycle.Acceptance;
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus)
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
 
 
@@ -38,7 +39,7 @@ namespace StoryTeller.Testing.Engine
             theSpecification.Lifecycle = Lifecycle.Regression;
             theResults.HadCriticalException = true;
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus)
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
 
         [Test]
@@ -47,7 +48,7 @@ namespace StoryTeller.Testing.Engine
             theSpecification.Lifecycle = Lifecycle.Regression;
             theStatus = SpecRunnerStatus.Invalid;
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus)
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
 
         [Test]
@@ -57,14 +58,14 @@ namespace StoryTeller.Testing.Engine
             theResults.Attempts = 1;
 
             theSpecification.MaxRetries = 0;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBeFalse();
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
 
             theSpecification.MaxRetries = 1;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBeTrue();
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(true);
 
             theResults.Attempts = 2;
             theSpecification.MaxRetries = 1;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBeFalse();
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
     }

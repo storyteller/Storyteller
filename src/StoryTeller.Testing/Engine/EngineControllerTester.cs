@@ -3,6 +3,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
@@ -123,7 +124,7 @@ namespace StoryTeller.Testing.Engine
         public void removes_the_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Any()
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
 
         [Test]
@@ -170,14 +171,14 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void the_outstanding_request_should_be_cancelled()
         {
-            theOutstandingRequest.IsCancelled.ShouldBeTrue();
+            theOutstandingRequest.IsCancelled.ShouldBe(true);
         }
 
         [Test]
         public void should_be_removed_from_the_outstanding_request_list()
         {
             ClassUnderTest.OutstandingRequests()
-                .Any().ShouldBeFalse();
+                .Any().ShouldBe(false);
         }
 
         [Test]
@@ -217,14 +218,14 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void all_the_outstanding_requests_should_be_canceled()
         {
-            theOutstandingRequests.Each(x => x.IsCancelled.ShouldBeTrue());
+            theOutstandingRequests.Each(x => x.IsCancelled.ShouldBe(true));
         }
 
         [Test]
         public void should_be_no_outstanding_requests()
         {
             ClassUnderTest.OutstandingRequests().Any()
-                .ShouldBeFalse();
+                .ShouldBe(false);
         }
     }
 

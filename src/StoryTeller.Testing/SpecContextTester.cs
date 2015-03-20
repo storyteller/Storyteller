@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 using StoryTeller.Testing.Results;
@@ -52,20 +53,20 @@ namespace StoryTeller.Testing
         [Test]
         public void wait_is_true_if_the_condition_is_already_true()
         {
-            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 0, 500)).ShouldBeTrue();
+            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 0, 500)).ShouldBe(true);
         }
 
         [Test]
         public void wait_is_false_if_the_condition_is_never_met()
         {
-            theContext.Wait(() => false, new TimeSpan(0, 0, 0, 0, 100), 25).ShouldBeFalse();
+            theContext.Wait(() => false, new TimeSpan(0, 0, 0, 0, 100), 25).ShouldBe(false);
         }
 
         [Test]
         public void automatically_false_if_the_context_is_cancelled()
         {
             theContext.RequestCancellation();
-            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 500)).ShouldBeFalse();
+            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 500)).ShouldBe(false);
         }
 
         [Test]
@@ -99,15 +100,15 @@ namespace StoryTeller.Testing
         [Test]
         public void stores_whether_there_was_a_critical_exception()
         {
-            theContext.HadCriticalException.ShouldBeFalse();
+            theContext.HadCriticalException.ShouldBe(false);
             theContext.FinalizeResults(3)
-                .HadCriticalException.ShouldBeFalse();
+                .HadCriticalException.ShouldBe(false);
 
             theContext.LogException("1", new StorytellerCriticalException("Boo!"));
-            theContext.HadCriticalException.ShouldBeTrue();
+            theContext.HadCriticalException.ShouldBe(true);
 
             theContext.FinalizeResults(3)
-                .HadCriticalException.ShouldBeTrue();
+                .HadCriticalException.ShouldBe(true);
         }
     }
 
@@ -126,7 +127,7 @@ namespace StoryTeller.Testing
         [Test]
         public void just_starting_with_default_options()
         {
-            theContext.CanContinue().ShouldBeTrue();
+            theContext.CanContinue().ShouldBe(true);
         }
 
         [Test]
@@ -136,7 +137,7 @@ namespace StoryTeller.Testing
 
             theContext.LogException("1", new StorytellerCriticalException());
 
-            theContext.CanContinue().ShouldBeFalse();
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -146,7 +147,7 @@ namespace StoryTeller.Testing
 
             theContext.LogException("1", new StorytellerCatastrophicException());
 
-            theContext.CanContinue().ShouldBeFalse();
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -154,7 +155,7 @@ namespace StoryTeller.Testing
         {
             theContext.RequestCancellation();
 
-            theContext.CanContinue().ShouldBeFalse();
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -162,7 +163,7 @@ namespace StoryTeller.Testing
         {
             theContext.LogException("1", new NotImplementedException());
 
-            theContext.CanContinue().ShouldBeTrue();
+            theContext.CanContinue().ShouldBe(true);
         }
 
         [Test]
@@ -172,7 +173,7 @@ namespace StoryTeller.Testing
 
             theContext.LogException("1", new NotImplementedException());
 
-            theContext.CanContinue().ShouldBeFalse();
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -181,10 +182,10 @@ namespace StoryTeller.Testing
             theContext.StopConditions.BreakOnWrongs = true;
 
             theContext.LogResult(new StepResult("1", ResultStatus.success));
-            theContext.CanContinue().ShouldBeTrue();
+            theContext.CanContinue().ShouldBe(true);
 
             theContext.LogResult(new StepResult("1", ResultStatus.failed));
-            theContext.CanContinue().ShouldBeFalse();
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -192,7 +193,7 @@ namespace StoryTeller.Testing
         {
 
             theContext.LogResult(new StepResult("1", ResultStatus.failed));
-            theContext.CanContinue().ShouldBeTrue();
+            theContext.CanContinue().ShouldBe(true);
         }
     }
 }

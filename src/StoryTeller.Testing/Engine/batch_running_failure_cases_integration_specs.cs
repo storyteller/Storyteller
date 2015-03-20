@@ -2,6 +2,7 @@
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using ST.CommandLine;
 using StoryTeller.Engine;
 using StoryTeller.Remotes;
@@ -87,7 +88,7 @@ namespace StoryTeller.Testing.Engine
             
 
             // first one does run, just fails
-            first.results.WasAborted.ShouldBeFalse();
+            first.results.WasAborted.ShouldBe(false);
 
             var contextCreationError = first.results.Results.OfType<StepResult>().Single();
 

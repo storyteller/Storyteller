@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 
@@ -70,9 +71,9 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void no_tags_no_worries()
         {
-            original.Tags.Any().ShouldBeFalse();
+            original.Tags.Any().ShouldBe(false);
 
-            persisted.Tags.Any().ShouldBeFalse();
+            persisted.Tags.Any().ShouldBe(false);
         }
 
         [Test]

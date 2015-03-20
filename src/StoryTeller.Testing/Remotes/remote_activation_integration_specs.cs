@@ -2,6 +2,7 @@
 using FubuCore;
 using MultipleSystems;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Remotes;
 using StoryTeller.Samples;
@@ -30,7 +31,7 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldBeNull();
-                message.success.ShouldBeTrue();
+                message.success.ShouldBe(true);
                 message.system_name.ShouldEqual(typeof (GrammarSystem).FullName);
             }
         }
@@ -46,7 +47,7 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldBeNull();
-                message.success.ShouldBeTrue();
+                message.success.ShouldBe(true);
                 message.system_name.ShouldEqual(typeof(NulloSystem).FullName);
             }
         }
@@ -62,7 +63,7 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldContain("DivideByZero");
-                message.success.ShouldBeFalse();
+                message.success.ShouldBe(false);
                 message.system_name.ShouldEqual(typeof(BadSystem.BadSystem).FullName);
             }
         }
@@ -84,7 +85,7 @@ namespace StoryTeller.Testing.Remotes
                 message.error.ShouldContain(typeof(System1).AssemblyQualifiedName);
                 message.error.ShouldContain(typeof(System2).AssemblyQualifiedName);
                 message.error.ShouldContain(typeof(System3).AssemblyQualifiedName);
-                message.success.ShouldBeFalse();
+                message.success.ShouldBe(false);
             }
         }
 
@@ -106,7 +107,7 @@ namespace StoryTeller.Testing.Remotes
 
                 var message = task.Result;
 
-                message.success.ShouldBeTrue();
+                message.success.ShouldBe(true);
                 message.system_name.ShouldEqual(typeof (System2).FullName);
                 
             }
@@ -130,7 +131,7 @@ namespace StoryTeller.Testing.Remotes
 
                 var message = task.Result;
 
-                message.success.ShouldBeTrue();
+                message.success.ShouldBe(true);
                 message.system_name.ShouldEqual(typeof(System2).FullName);
 
             }
