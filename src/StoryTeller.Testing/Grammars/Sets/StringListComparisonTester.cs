@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
@@ -14,8 +15,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             var comparison = new StringListComparison("expected", c => new String[0]);
 
             var cell = comparison.BuildCells(CellHandling.Basic(), new Fixture()).Single();
-            cell.Key.ShouldEqual("expected");
-            cell.Type.ShouldEqual(typeof (string));
+            cell.Key.ShouldBe("expected");
+            cell.Type.ShouldBe(typeof (string));
         }
 
         [Test]

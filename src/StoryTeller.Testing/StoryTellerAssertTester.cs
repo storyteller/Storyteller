@@ -1,5 +1,6 @@
 ﻿using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 
 namespace StoryTeller.Testing
 {
@@ -12,7 +13,7 @@ namespace StoryTeller.Testing
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
             {
                 StoryTellerAssert.Fail("You stink!");
-            }).Message.ShouldEqual("You stink!");
+            }).Message.ShouldBe("You stink!");
         }
 
         [Test]
@@ -27,7 +28,7 @@ namespace StoryTeller.Testing
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
             {
                 StoryTellerAssert.Fail(() => true, "Bad!");
-            }).Message.ShouldEqual("Bad!");
+            }).Message.ShouldBe("Bad!");
         }
 
         [Test]
@@ -38,7 +39,7 @@ namespace StoryTeller.Testing
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
             {
                 StoryTellerAssert.Fail(true, "Not good");
-            }).Message.ShouldEqual("Not good");
+            }).Message.ShouldBe("Not good");
         }
 
         [Test]
@@ -49,7 +50,7 @@ namespace StoryTeller.Testing
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
             {
                 StoryTellerAssert.Fail(true, () => "*{0}*".ToFormat("Bad"));
-            }).Message.ShouldEqual("*Bad*");
+            }).Message.ShouldBe("*Bad*");
         }
     }
 }

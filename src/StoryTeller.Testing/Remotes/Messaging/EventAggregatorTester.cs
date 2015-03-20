@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
@@ -37,7 +38,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
             task.Wait(5.Seconds());
 
-            task.Result.Name.ShouldEqual("Foo");
+            task.Result.Name.ShouldBe("Foo");
         }
     }
 

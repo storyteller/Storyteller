@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.Engine
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldEqual("embeds");
+                .Node.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.RunSpec("embeds");
 
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldEqual("embeds");
+                .Node.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace StoryTeller.Testing.Engine
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldEqual("embeds");
+                .Node.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.RunSpec("embeds");
 
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldEqual("embeds");
+                .Node.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -123,8 +123,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void removes_the_outstanding_request()
         {
-            ClassUnderTest.OutstandingRequests().Any()
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.OutstandingRequests().Any(), false);
         }
 
         [Test]
@@ -171,14 +170,14 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void the_outstanding_request_should_be_cancelled()
         {
-            theOutstandingRequest.IsCancelled.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(theOutstandingRequest.IsCancelled, true);
         }
 
         [Test]
         public void should_be_removed_from_the_outstanding_request_list()
         {
-            ClassUnderTest.OutstandingRequests()
-                .Any().ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.OutstandingRequests()
+                    .Any(), false);
         }
 
         [Test]
@@ -201,7 +200,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Receive(new RunSpec { id = "sentence3" });
 
             theOutstandingRequests = ClassUnderTest.OutstandingRequests();
-            theOutstandingRequests.Count().ShouldEqual(4);
+            theOutstandingRequests.Count().ShouldBe(4);
 
             ClassUnderTest.Receive(new CancelAllSpecs());
         }
@@ -218,14 +217,13 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void all_the_outstanding_requests_should_be_canceled()
         {
-            theOutstandingRequests.Each(x => x.IsCancelled.ShouldBe(true));
+            theOutstandingRequests.Each(x => ShouldBeTestExtensions.ShouldBe(x.IsCancelled, true));
         }
 
         [Test]
         public void should_be_no_outstanding_requests()
         {
-            ClassUnderTest.OutstandingRequests().Any()
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.OutstandingRequests().Any(), false);
         }
     }
 

@@ -38,7 +38,7 @@ namespace StoryTeller.Grammars
 
         public SilentAction(string type, object position, Action<ISpecContext> action, Node node)
         {
-            if (node.Id.IsEmpty())
+            if (node.id.IsEmpty())
             {
                 throw new ArgumentOutOfRangeException("node", "The node must have an id");
             }
@@ -90,7 +90,7 @@ namespace StoryTeller.Grammars
             }
             catch (Exception ex)
             {
-                context.LogException(_node.Id,
+                context.LogException(_node.id,
                     ex,
                     Position);
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing
@@ -17,8 +18,8 @@ namespace StoryTeller.Testing
             var model = fixture.Compile(null);
             var error = model.errors.Single();
 
-            error.error.ShouldEqual(ex.ToString());
-            error.message.ShouldEqual("Fixture StoryTeller.Testing.FixtureThatBlowsUp could not be loaded");
+            error.error.ShouldBe(ex.ToString());
+            error.message.ShouldBe("Fixture StoryTeller.Testing.FixtureThatBlowsUp could not be loaded");
         }
 
         [Test]

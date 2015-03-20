@@ -28,7 +28,7 @@ namespace StoryTeller.Grammars.Reflection
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            return new FactPlan(new StepValues(step.Id), this);
+            return new FactPlan(new StepValues(step.id), this);
         }
 
         public bool PerformTest(StepValues values, ISpecContext context)

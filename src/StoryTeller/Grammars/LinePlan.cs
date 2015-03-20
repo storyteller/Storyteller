@@ -17,7 +17,7 @@ namespace StoryTeller.Grammars
         {
             var cellResults = _grammar.Execute(Values, context);
 
-            var result = new StepResult(Values.Id, ResultStatus.ok)
+            var result = new StepResult(Values.id, ResultStatus.ok)
             {
                 cells = cellResults.ToArray()
             };

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Testing.Grammars.Sets;
 
@@ -38,11 +39,11 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
         {
             var paragraph = ModelFor<Paragraph>("AddressVerification", "VerifyAddress");
 
-            paragraph.title.ShouldEqual("The current address");
+            paragraph.title.ShouldBe("The current address");
             paragraph.children.ShouldHaveCount(3);
-            paragraph.children[0].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldEqual("City");
-            paragraph.children[1].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldEqual("PostalCode");
-            paragraph.children[2].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldEqual("StateOrProvince");
+            paragraph.children[0].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldBe("City");
+            paragraph.children[1].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldBe("PostalCode");
+            paragraph.children[2].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldBe("StateOrProvince");
         }
     }
 

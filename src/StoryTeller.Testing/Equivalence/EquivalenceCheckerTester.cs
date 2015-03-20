@@ -20,15 +20,15 @@ namespace StoryTeller.Testing.Equivalence
         [Test]
         public void expected_is_null()
         {
-            checker.IsEqual(null, "a").ShouldBe(false);
-            checker.IsEqual(null, null).ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(null, "a"), false);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(null, null), true);
         }
 
         [Test]
         public void check_a_string()
         {
-            checker.IsEqual("a", "a").ShouldBe(true);
-            checker.IsEqual("a", "b").ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual("a", "a"), true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual("a", "b"), false);
         }
 
         [Test]
@@ -38,8 +38,8 @@ namespace StoryTeller.Testing.Equivalence
             var address2 = new EQAddress(){City = "Austin"};
             var address3 = new EQAddress(){City = "Dallas"};
                 
-            checker.IsEqual(address1, address2).ShouldBe(true);
-            checker.IsEqual(address1, address3).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(address1, address2), true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(address1, address3), false);
         }
 
         [Test]
@@ -50,9 +50,9 @@ namespace StoryTeller.Testing.Equivalence
             var strings3 = new string[] {"b", "c", "d"};
             var strings4 = new string[] {"c", "b", "d"};
         
-            checker.IsEqual(strings1, strings2).ShouldBe(true);
-            checker.IsEqual(strings3, strings4).ShouldBe(true);
-            checker.IsEqual(strings1, strings3).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(strings1, strings2), true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(strings3, strings4), true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(strings1, strings3), false);
         }
 
         [Test]
@@ -63,9 +63,9 @@ namespace StoryTeller.Testing.Equivalence
             var strings3 = new List<string> { "b", "c", "d" };
             var strings4 = new List<string> { "c", "b", "d" };
 
-            checker.IsEqual(strings1, strings2).ShouldBe(true);
-            checker.IsEqual(strings3, strings4).ShouldBe(true);
-            checker.IsEqual(strings1, strings3).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(strings1, strings2), true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(strings3, strings4), true);
+            ShouldBeTestExtensions.ShouldBe(checker.IsEqual(strings1, strings3), false);
         }
     }
 

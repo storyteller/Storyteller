@@ -31,9 +31,9 @@ namespace StoryTeller.Testing.Grammars.Lines
 
             var model = grammar.Compile(new Fixture(), CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
-            model.errors.Any().ShouldBe(false);
-            model.format.ShouldEqual("do something");
-            model.cells.Any().ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(model.errors.Any(), false);
+            model.format.ShouldBe("do something");
+            ShouldBeTestExtensions.ShouldBe(model.cells.Any(), false);
         }
     }
 }

@@ -41,8 +41,8 @@ namespace StoryTeller.Testing.Grammars.Importing
         public void curry_builds_the_model()
         {
             var sentence = ModelFor<Sentence>("TestImports", "SetTo12");
-            sentence.format.ShouldEqual("Set to 12");
-            sentence.cells.Any().ShouldBe(false);
+            sentence.format.ShouldBe("Set to 12");
+            ShouldBeTestExtensions.ShouldBe(sentence.cells.Any(), false);
         }
 
         [Test]

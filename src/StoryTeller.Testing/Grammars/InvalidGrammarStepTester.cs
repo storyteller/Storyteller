@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Grammars;
@@ -34,9 +35,9 @@ namespace StoryTeller.Testing.Grammars
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
 
-            result.id.ShouldEqual("the id");
-            result.Status.ShouldEqual(ResultStatus.error);
-            result.error.ShouldEqual("grammar is wonky");
+            result.id.ShouldBe("the id");
+            result.Status.ShouldBe(ResultStatus.error);
+            result.error.ShouldBe("grammar is wonky");
         }
     }
 }

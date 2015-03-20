@@ -54,39 +54,38 @@ namespace StoryTeller.Testing.Engine
         {
             var expectedText = "EmbeddedFixture.Setup sent this debug message";
 
-            theResults.Results.Reporting.Any(x => x.html.Contains(expectedText))
-                .ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(theResults.Results.Reporting.Any(x => x.html.Contains(expectedText)), true);
         }
 
         [Test]
         public void should_have_broadcast_a_spec_queued_message()
         {
-            theListener.MessageTypesReceived[0].ShouldEqual("spec-queued");
+            theListener.MessageTypesReceived[0].ShouldBe("spec-queued");
         }
 
         [Test]
         public void spec_has_15_steps_so_15_progress_messages()
         {
             theListener.MessageTypesReceived.Where(x => x == "spec-progress")
-                .Count().ShouldEqual(15);
+                .Count().ShouldBe(15);
         }
 
         [Test]
         public void should_have_broadcast_a_spec_running_message()
         {
-            theListener.MessageTypesReceived[1].ShouldEqual("spec-running");
+            theListener.MessageTypesReceived[1].ShouldBe("spec-running");
         }
 
         [Test]
         public void should_have_broadcast_the_spec_completion_message()
         {
-            theListener.MessageTypesReceived.Last().ShouldEqual("spec-execution-completed");
+            theListener.MessageTypesReceived.Last().ShouldBe("spec-execution-completed");
         }
 
         [Test]
         public void should_have_broadcast_intermediate_results()
         {
-            theListener.MessageTypesReceived.Any(x => x == "step-result").ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(theListener.MessageTypesReceived.Any(x => x == "step-result"), true);
         }
     }
 

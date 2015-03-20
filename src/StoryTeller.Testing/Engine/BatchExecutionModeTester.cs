@@ -28,8 +28,7 @@ namespace StoryTeller.Testing.Engine
         public void never_retry_a_spec_marked_acceptance()
         {
             theSpecification.Lifecycle = Lifecycle.Acceptance;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus)
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
         }
 
 
@@ -38,8 +37,7 @@ namespace StoryTeller.Testing.Engine
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
             theResults.HadCriticalException = true;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus)
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
         }
 
         [Test]
@@ -47,8 +45,7 @@ namespace StoryTeller.Testing.Engine
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
             theStatus = SpecRunnerStatus.Invalid;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus)
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
         }
 
         [Test]
@@ -58,14 +55,14 @@ namespace StoryTeller.Testing.Engine
             theResults.Attempts = 1;
 
             theSpecification.MaxRetries = 0;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
 
             theSpecification.MaxRetries = 1;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), true);
 
             theResults.Attempts = 2;
             theSpecification.MaxRetries = 1;
-            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
         }
 
     }

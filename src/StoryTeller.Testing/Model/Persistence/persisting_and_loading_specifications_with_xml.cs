@@ -42,21 +42,21 @@ namespace StoryTeller.Testing.Model.Persistence
         public void full_cycle_lifecycle()
         {
             original.Lifecycle = Lifecycle.Regression;
-            persisted.Lifecycle.ShouldEqual(Lifecycle.Regression);
+            persisted.Lifecycle.ShouldBe(Lifecycle.Regression);
         }
 
         [Test]
         public void full_cycle_max_retries()
         {
             original.MaxRetries = 3;
-            persisted.MaxRetries.ShouldEqual(3);
+            persisted.MaxRetries.ShouldBe(3);
         }
 
         [Test]
         public void full_cycle_spec_id()
         {
-            original.Id = Guid.NewGuid().ToString();
-            persisted.Id.ShouldEqual(original.Id);
+            original.id = Guid.NewGuid().ToString();
+            persisted.id.ShouldBe(original.id);
         }
 
         [Test]
@@ -71,39 +71,39 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void no_tags_no_worries()
         {
-            original.Tags.Any().ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(original.Tags.Any(), false);
 
-            persisted.Tags.Any().ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(persisted.Tags.Any(), false);
         }
 
         [Test]
         public void read_and_write_comment_directly_under_spec()
         {
-            var comment = new Comment {Id = Guid.NewGuid().ToString(), Text = "something here"};
+            var comment = new Comment {id = Guid.NewGuid().ToString(), Text = "something here"};
             original.Children.Add(comment);
 
             var persistedComment = persisted.Children.Single().ShouldBeOfType<Comment>();
             persistedComment.ShouldNotBeTheSameAs(comment);
-            persistedComment.Id.ShouldEqual(comment.Id);
-            persistedComment.Text.ShouldEqual(comment.Text);
+            persistedComment.id.ShouldBe(comment.id);
+            persistedComment.Text.ShouldBe(comment.Text);
         }
 
         [Test]
         public void read_and_write_a_section_under_a_spec()
         {
-            var section = new Section("Math") {Id = Guid.NewGuid().ToString()};
+            var section = new Section("Math") {id = Guid.NewGuid().ToString()};
             original.Children.Add(section);
 
             var persistedSection = persisted.Children.Single().ShouldBeOfType<Section>();
-            persistedSection.Id.ShouldEqual(section.Id);
-            persistedSection.Key.ShouldEqual(section.Key);
+            persistedSection.id.ShouldBe(section.id);
+            persistedSection.Key.ShouldBe(section.Key);
         }
 
         [Test]
         public void read_and_write_a_step_with_plain_values_under_a_section()
         {
             var step = new Step("Add").With("x", "1").With("y", "2").With("sum", "3");
-            step.Id = Guid.NewGuid().ToString();
+            step.id = Guid.NewGuid().ToString();
 
             var section = new Section("Math");
             section.Children.Add(step);
@@ -120,10 +120,10 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void read_and_write_a_comment_within_a_section()
         {
-            var section = new Section("Math") { Id = Guid.NewGuid().ToString() };
+            var section = new Section("Math") { id = Guid.NewGuid().ToString() };
             original.Children.Add(section);
 
-            var comment = new Comment { Id = Guid.NewGuid().ToString(), Text = "something here" };
+            var comment = new Comment { id = Guid.NewGuid().ToString(), Text = "something here" };
             section.Children.Add(comment);
 
             var persistedComment = persisted.Children.Single()
@@ -131,8 +131,8 @@ namespace StoryTeller.Testing.Model.Persistence
                 .ShouldBeOfType<Comment>();
 
             persistedComment.ShouldNotBeTheSameAs(comment);
-            persistedComment.Id.ShouldEqual(comment.Id);
-            persistedComment.Text.ShouldEqual(comment.Text);
+            persistedComment.id.ShouldBe(comment.id);
+            persistedComment.Text.ShouldBe(comment.Text);
         }
 
         [Test]
@@ -151,11 +151,11 @@ namespace StoryTeller.Testing.Model.Persistence
 
             persistedStep.Collections["Numbers"].Children
                 .Single().ShouldBeOfType<Comment>()
-                .Text.ShouldEqual("I'm in numbers");
+                .Text.ShouldBe("I'm in numbers");
 
             persistedStep.Collections["Letters"].Children
                 .Single().ShouldBeOfType<Comment>()
-                .Text.ShouldEqual("I'm in letters");
+                .Text.ShouldBe("I'm in letters");
 
 
 

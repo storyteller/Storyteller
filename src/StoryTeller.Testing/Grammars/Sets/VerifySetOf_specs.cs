@@ -14,24 +14,24 @@ namespace StoryTeller.Testing.Grammars.Sets
         public void spot_check_the_model_for_unordered()
         {
             var verification = ModelFor<SetVerification>("VerifyAddressSet", "TheAddressesShouldBe");
-            verification.collection.ShouldEqual("rows");
-            verification.title.ShouldEqual("The cities should be");
+            verification.collection.ShouldBe("rows");
+            verification.title.ShouldBe("The cities should be");
             verification.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("City", "StateOrProvince", "PostalCode");
 
-            verification.ordered.ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(verification.ordered, false);
         }
 
         [Test]
         public void spot_check_the_model_for_ordered()
         {
             var verification = ModelFor<SetVerification>("VerifyAddressSet", "TheOrderedAddressesShouldBe");
-            verification.collection.ShouldEqual("rows");
-            verification.title.ShouldEqual("The cities in order should be");
+            verification.collection.ShouldBe("rows");
+            verification.title.ShouldBe("The cities in order should be");
             verification.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("City", "StateOrProvince", "PostalCode");
 
-            verification.ordered.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(verification.ordered, true);
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             var result = theContext.Results.OfType<SetVerificationResult>().Single();
 
             result.missing.ShouldContain("1");
-            result.extras.Single()["City"].ShouldEqual("Jasper");
+            result.extras.Single()["City"].ShouldBe("Jasper");
         }
 
 

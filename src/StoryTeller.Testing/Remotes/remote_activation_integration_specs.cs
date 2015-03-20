@@ -31,8 +31,8 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldBeNull();
-                message.success.ShouldBe(true);
-                message.system_name.ShouldEqual(typeof (GrammarSystem).FullName);
+                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.system_name.ShouldBe(typeof (GrammarSystem).FullName);
             }
         }
 
@@ -47,8 +47,8 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldBeNull();
-                message.success.ShouldBe(true);
-                message.system_name.ShouldEqual(typeof(NulloSystem).FullName);
+                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.system_name.ShouldBe(typeof(NulloSystem).FullName);
             }
         }
 
@@ -63,8 +63,8 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldContain("DivideByZero");
-                message.success.ShouldBe(false);
-                message.system_name.ShouldEqual(typeof(BadSystem.BadSystem).FullName);
+                ShouldBeTestExtensions.ShouldBe(message.success, false);
+                message.system_name.ShouldBe(typeof(BadSystem.BadSystem).FullName);
             }
         }
 
@@ -85,7 +85,7 @@ namespace StoryTeller.Testing.Remotes
                 message.error.ShouldContain(typeof(System1).AssemblyQualifiedName);
                 message.error.ShouldContain(typeof(System2).AssemblyQualifiedName);
                 message.error.ShouldContain(typeof(System3).AssemblyQualifiedName);
-                message.success.ShouldBe(false);
+                ShouldBeTestExtensions.ShouldBe(message.success, false);
             }
         }
 
@@ -107,8 +107,8 @@ namespace StoryTeller.Testing.Remotes
 
                 var message = task.Result;
 
-                message.success.ShouldBe(true);
-                message.system_name.ShouldEqual(typeof (System2).FullName);
+                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.system_name.ShouldBe(typeof (System2).FullName);
                 
             }
         }
@@ -131,8 +131,8 @@ namespace StoryTeller.Testing.Remotes
 
                 var message = task.Result;
 
-                message.success.ShouldBe(true);
-                message.system_name.ShouldEqual(typeof(System2).FullName);
+                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.system_name.ShouldBe(typeof(System2).FullName);
 
             }
         }

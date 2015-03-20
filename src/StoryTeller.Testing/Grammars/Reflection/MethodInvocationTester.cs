@@ -1,6 +1,7 @@
 ﻿using FubuCore;
 using FubuCore.Reflection;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
 
@@ -24,9 +25,9 @@ namespace StoryTeller.Testing.Grammars.Reflection
 
             invocation.Invoke(values);
 
-            target.Name.ShouldEqual("Jeremy");
-            target.Age.ShouldEqual(41);
-            target.PercentAwake.ShouldEqual(50.1);
+            target.Name.ShouldBe("Jeremy");
+            target.Age.ShouldBe(41);
+            target.PercentAwake.ShouldBe(50.1);
         }
 
         [Test]
@@ -41,7 +42,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("last", "Miller");
 
             var invocation = new MethodInvocation(method, target);
-            invocation.Invoke(values).ShouldEqual("Jeremy Daniel Miller");
+            invocation.Invoke(values).ShouldBe("Jeremy Daniel Miller");
 
         }
 

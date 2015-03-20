@@ -27,7 +27,7 @@ namespace StoryTeller.Grammars
 
         protected override StepResult execute(ISpecContext context)
         {
-            var result = new StepResult(_values.Id, ResultStatus.error)
+            var result = new StepResult(_values.id, ResultStatus.error)
             {
                 error = Message
             };
@@ -37,7 +37,7 @@ namespace StoryTeller.Grammars
 
         protected bool Equals(InvalidGrammarStep other)
         {
-            return string.Equals(_values.Id, other._values.Id) && string.Equals(Message, other.Message);
+            return string.Equals(_values.id, other._values.id) && string.Equals(Message, other.Message);
         }
 
         public override bool Equals(object obj)
@@ -52,14 +52,14 @@ namespace StoryTeller.Grammars
         {
             unchecked
             {
-                return ((_values.Id != null ? _values.Id.GetHashCode() : 0)*397) ^
+                return ((_values.id != null ? _values.id.GetHashCode() : 0)*397) ^
                        (Message != null ? Message.GetHashCode() : 0);
             }
         }
 
         public override string ToString()
         {
-            return string.Format("Invalid Grammar on Step: {0}, Message: {1}", _values.Id, Message);
+            return string.Format("Invalid Grammar on Step: {0}, Message: {1}", _values.id, Message);
         }
     }
 }

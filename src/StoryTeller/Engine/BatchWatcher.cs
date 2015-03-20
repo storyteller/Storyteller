@@ -24,7 +24,7 @@ namespace StoryTeller.Engine
         
         public void SpecHandled(SpecificationPlan plan, SpecResults specResults)
         {
-            var record = _records[plan.Specification.Id];
+            var record = _records[plan.Specification.id];
             record.results = specResults;
             record.specification = plan.Specification;
 

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
 using StoryTeller.Testing.Grammars.Sets;
@@ -30,11 +31,11 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
         {
             var model = ModelFor<Sentence>("SetPropertyGrammar", "SetCity");
 
-            model.format.ShouldEqual("City = {City}");
+            model.format.ShouldBe("City = {City}");
             var cell = model.cells.Single();
 
-            cell.Type.ShouldEqual(typeof (string));
-            cell.Key.ShouldEqual("City");
+            cell.Type.ShouldBe(typeof (string));
+            cell.Key.ShouldBe("City");
 
         }
     }

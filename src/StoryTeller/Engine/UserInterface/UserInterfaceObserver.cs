@@ -54,7 +54,7 @@ namespace StoryTeller.Engine.UserInterface
 
         public void SpecStarted(SpecificationPlan plan)
         {
-            SendToClient(new SpecRunning(plan.Specification.Id));
+            SendToClient(new SpecRunning(plan.Specification.id));
         }
 
         public void Dispose()

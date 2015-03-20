@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Decisions;
 using StoryTeller.Model;
 
@@ -38,8 +39,8 @@ namespace StoryTeller.Testing.Grammars.Decisions
         {
             var table = ModelFor<Table>("MathDecisions", "Math");
 
-            table.title.ShouldEqual("Adding and Multiplying");
-            table.collection.ShouldEqual("table");
+            table.title.ShouldBe("Adding and Multiplying");
+            table.collection.ShouldBe("table");
             table.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("X", "Y", "Sum", "Product");
 

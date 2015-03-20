@@ -41,11 +41,11 @@ Name: Test Run
         public void build_grammar()
         {
             var model = ModelFor<Sentence>("CheckGrammar", "CheckSimple");
-            model.format.ShouldEqual("text should be {text}");
+            model.format.ShouldBe("text should be {text}");
             var cell = model.cells.Single();
-            cell.Key.ShouldEqual("text");
-            cell.Type.ShouldEqual(typeof (string));
-            cell.output.ShouldBe(true);
+            cell.Key.ShouldBe("text");
+            cell.Type.ShouldBe(typeof (string));
+            ShouldBeTestExtensions.ShouldBe(cell.output, true);
         }
     }
 

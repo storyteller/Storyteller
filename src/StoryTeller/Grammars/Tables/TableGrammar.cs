@@ -96,7 +96,7 @@ namespace StoryTeller.Grammars.Tables
         private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, Step parentStep)
         {
             Section section = parentStep.Collections[_leafName];
-            if (section.Id.IsEmpty()) section.Id = Guid.NewGuid().ToString();
+            if (section.id.IsEmpty()) section.id = Guid.NewGuid().ToString();
 
             if (_before != null) yield return new SilentAction("Grammar", Stage.before, _before, section)
             {

@@ -27,7 +27,7 @@ namespace StoryTeller.Grammars.Sets
             }
             else
             {
-                result.MarkWrongOrder(expected.Id, actual.Order);
+                result.MarkWrongOrder(expected.id, actual.Order);
             }
             
         }

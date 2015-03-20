@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.Model
             serializer.Serialize(writer, cell);
 
             var json = writer.ToString();
-
+            
             json.ShouldContain("\"key\":\"a\"");
         }
 
@@ -37,7 +37,7 @@ namespace StoryTeller.Testing.Model
             values.Store("a", 1);
 
             Cell.For<int>("a").Check(values, 1)
-                .ShouldEqual(CellResult.Success("a"));
+                .ShouldBe(CellResult.Success("a"));
 
 
         }
@@ -51,7 +51,7 @@ namespace StoryTeller.Testing.Model
             values.Store("a", 1);
 
             Cell.For<int>("a").Check(values, 2)
-                .ShouldEqual(CellResult.Failure("a", "2"));
+                .ShouldBe(CellResult.Failure("a", "2"));
 
         }
 
@@ -68,8 +68,8 @@ namespace StoryTeller.Testing.Model
             var values3 = new StepValues("foo");
             values3.Store(cell.Key, 6);
 
-            cell.Matches(values1, values2).ShouldBe(true);
-            cell.Matches(values1, values3).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values2), true);
+            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values3), false);
         }
 
         [Test]
@@ -85,8 +85,8 @@ namespace StoryTeller.Testing.Model
             var values3 = new StepValues("foo");
             values3.Store(cell.Key, new[] { 1, 2, 4 });
 
-            cell.Matches(values1, values2).ShouldBe(true);
-            cell.Matches(values1, values3).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values2), true);
+            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values3), false);
         }
 
         private StepValues convert(Cell cell, string rawValue)
@@ -110,7 +110,7 @@ namespace StoryTeller.Testing.Model
             var cell = Cell.For<int>("a");
             var values = convert(cell, "1");
 
-            values.Get("a").ShouldEqual(1);
+            values.Get("a").ShouldBe(1);
         }
 
         [Test]
@@ -128,8 +128,8 @@ namespace StoryTeller.Testing.Model
             var values = convert(cell, "not a number");
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
-            result.cell.ShouldEqual("a");
-            result.error.ShouldEqual("Invalid Format");
+            result.cell.ShouldBe("a");
+            result.error.ShouldBe("Invalid Format");
         }
 
         [Test]
@@ -143,22 +143,22 @@ namespace StoryTeller.Testing.Model
             var values = convert(cell, "anything");
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
-            result.cell.ShouldEqual("a");
-            result.error.ShouldEqual("No converter found for type " + typeof(NoConverterForMe).FullName);
+            result.cell.ShouldBe("a");
+            result.error.ShouldBe("No converter found for type " + typeof(NoConverterForMe).FullName);
         }
 
         [Test]
         public void Cell_picks_up_the_header_attributes()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
-            cell.header.ShouldEqual("The City");
+            cell.header.ShouldBe("The City");
         }
 
         [Test]
         public void Cell_picks_up_the_default_value_attribute()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
-            cell.DefaultValue.ShouldEqual("Cedar Park");
+            cell.DefaultValue.ShouldBe("Cedar Park");
         }
 
         public class NoConverterForMe
@@ -170,14 +170,14 @@ namespace StoryTeller.Testing.Model
         public void use_a_boolean_editor_for_boolean_type()
         {
             var cell = Cell.For<CellTarget>(x => x.IsActive);
-            cell.editor.ShouldEqual("boolean");
+            cell.editor.ShouldBe("boolean");
         }
 
         [Test]
         public void use_a_select_editor_for_an_enum()
         {
             var cell = Cell.For<CellTarget>(x => x.Direction);
-            cell.editor.ShouldEqual("select");
+            cell.editor.ShouldBe("select");
             cell.options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("North", "South", "East", "West");
         }
@@ -186,14 +186,14 @@ namespace StoryTeller.Testing.Model
         public void picks_up_the_editor_attribute()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
-            cell.editor.ShouldEqual("bigtext");
+            cell.editor.ShouldBe("bigtext");
         }
 
         [Test]
         public void cell_picks_up_selection_values()
         {
             var cell = Cell.For<CellTarget>(x => x.Country);
-            cell.editor.ShouldEqual("select");
+            cell.editor.ShouldBe("select");
             cell.options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("United States", "Canada", "Mexico");
         }
@@ -202,9 +202,9 @@ namespace StoryTeller.Testing.Model
         public void cell_picks_up_selection_list_name()
         {
             var cell = Cell.For<CellTarget>(x => x.State);
-            cell.editor.ShouldEqual("select");
+            cell.editor.ShouldBe("select");
 
-            cell.OptionListName.ShouldEqual("States");
+            cell.OptionListName.ShouldBe("States");
         }
 
         [Test]
@@ -214,7 +214,7 @@ namespace StoryTeller.Testing.Model
             handling.Lists["States"].AddValues("TX", "MO", "AR");
 
             var fixture = new Fixture();
-            fixture.Lists.Has("States").ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(fixture.Lists.Has("States"), false);
 
             var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
             var cell = Cell.For(handling, property, fixture);
@@ -248,8 +248,8 @@ namespace StoryTeller.Testing.Model
             cell.ConvertValues(step, values);
 
             var result = values.Errors.Single();
-            result.cell.ShouldEqual("Number");
-            result.Status.ShouldEqual(ResultStatus.invalid);
+            result.cell.ShouldBe("Number");
+            result.Status.ShouldBe(ResultStatus.invalid);
         }
 
         [Test]
@@ -264,8 +264,8 @@ namespace StoryTeller.Testing.Model
             cell.ConvertValues(step, values);
 
             var result = values.Errors.Single();
-            result.cell.ShouldEqual("Number");
-            result.Status.ShouldEqual(ResultStatus.missing);
+            result.cell.ShouldBe("Number");
+            result.Status.ShouldBe(ResultStatus.missing);
         }
 
         [Test]
@@ -280,8 +280,8 @@ namespace StoryTeller.Testing.Model
 
             cell.ConvertValues(step, values);
 
-            values.Errors.Any().ShouldBe(false);
-            values.Get("Number").ShouldEqual(111);
+            ShouldBeTestExtensions.ShouldBe(values.Errors.Any(), false);
+            values.Get("Number").ShouldBe(111);
         }
     }
 

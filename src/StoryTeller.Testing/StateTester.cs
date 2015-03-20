@@ -13,8 +13,8 @@ namespace StoryTeller.Testing
             state.Store<int>(11);
             state.Store<double>(11.1);
 
-            state.Retrieve<int>().ShouldEqual(11);
-            state.Retrieve<double>().ShouldEqual(11.1);
+            state.Retrieve<int>().ShouldBe(11);
+            state.Retrieve<double>().ShouldBe(11.1);
         }
 
         [Test]
@@ -27,11 +27,11 @@ namespace StoryTeller.Testing
             state.Store("red", true);
             state.Store("green", false);
 
-            state.Retrieve<int>("red").ShouldEqual(11);
-            state.Retrieve<int>("green").ShouldEqual(12);
+            state.Retrieve<int>("red").ShouldBe(11);
+            state.Retrieve<int>("green").ShouldBe(12);
 
-            state.Retrieve<bool>("red").ShouldBe(true);
-            state.Retrieve<bool>("green").ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(state.Retrieve<bool>("red"), true);
+            ShouldBeTestExtensions.ShouldBe(state.Retrieve<bool>("green"), false);
         }
     }
 }

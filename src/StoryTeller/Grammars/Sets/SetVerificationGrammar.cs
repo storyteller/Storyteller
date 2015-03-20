@@ -33,9 +33,9 @@ namespace StoryTeller.Grammars.Sets
 
             var matcher = _ordered ? OrderedSetMatcher.Flyweight : UnorderedSetMatcher.Flyweight;
 
-            if (section.Id.IsEmpty())
+            if (section.id.IsEmpty())
             {
-                section.Id = Guid.NewGuid().ToString();
+                section.id = Guid.NewGuid().ToString();
             }
 
             return new VerificationSetPlan(section, matcher, _comparison, expected, _cells);

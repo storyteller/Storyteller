@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 
@@ -17,7 +18,7 @@ Name: My spec
 ");
 
 
-            spec.Name.ShouldEqual("My spec");
+            spec.Name.ShouldBe("My spec");
         }
 
         [Test]
@@ -29,7 +30,7 @@ Name: My spec
 ");
 
             spec.Children.Single().ShouldBeOfType<Section>()
-                .Key.ShouldEqual("Math");
+                .Key.ShouldBe("Math");
         }
 
         [Test]
@@ -41,7 +42,7 @@ Name: My spec
 ");
 
             spec.Children.Single().ShouldBeOfType<Section>()
-                .Id.ShouldEqual("1");
+                .id.ShouldBe("1");
         }
 
         [Test]
@@ -56,14 +57,14 @@ Name: My spec
 
             var section = spec.Children[0].As<Section>();
             var step1 = section.Children[0].As<Step>();
-            step1.Key.ShouldEqual("Adding");
-            step1.Values["x"].ShouldEqual("1");
-            step1.Values["y"].ShouldEqual("2");
-            step1.Values["sum"].ShouldEqual("3");
+            step1.Key.ShouldBe("Adding");
+            step1.Values["x"].ShouldBe("1");
+            step1.Values["y"].ShouldBe("2");
+            step1.Values["sum"].ShouldBe("3");
 
             var step2 = section.Children[1].As<Step>();
-            step2.Key.ShouldEqual("StartWith");
-            step2.Values["x"].ShouldEqual("5");
+            step2.Key.ShouldBe("StartWith");
+            step2.Values["x"].ShouldBe("5");
         }
 
         [Test]
@@ -78,15 +79,15 @@ Name: My spec
 
             var section = spec.Children[0].As<Section>();
             var step1 = section.Children[0].As<Step>();
-            step1.Key.ShouldEqual("Adding");
-            step1.Id.ShouldEqual("23");
-            step1.Values["x"].ShouldEqual("1");
-            step1.Values["y"].ShouldEqual("2");
-            step1.Values["sum"].ShouldEqual("3");
+            step1.Key.ShouldBe("Adding");
+            step1.id.ShouldBe("23");
+            step1.Values["x"].ShouldBe("1");
+            step1.Values["y"].ShouldBe("2");
+            step1.Values["sum"].ShouldBe("3");
 
             var step2 = section.Children[1].As<Step>();
-            step2.Key.ShouldEqual("StartWith");
-            step2.Values["x"].ShouldEqual("5");
+            step2.Key.ShouldBe("StartWith");
+            step2.Values["x"].ShouldBe("5");
         }
 
 
@@ -104,15 +105,15 @@ Name: My spec
 ");
 
             var step1 = spec.Children[0].As<Section>().Children[0].As<Step>();
-            step1.Key.ShouldEqual("Adding");
-            step1.Values["x"].ShouldEqual("1");
-            step1.Values["y"].ShouldEqual("2");
-            step1.Values["sum"].ShouldEqual("3");
+            step1.Key.ShouldBe("Adding");
+            step1.Values["x"].ShouldBe("1");
+            step1.Values["y"].ShouldBe("2");
+            step1.Values["sum"].ShouldBe("3");
 
             var step2 = spec.Children[1].As<Section>()
                 .Children[0].As<Step>();
-            step2.Key.ShouldEqual("StartWith");
-            step2.Values["x"].ShouldEqual("5");
+            step2.Key.ShouldBe("StartWith");
+            step2.Values["x"].ShouldBe("5");
 
         }
 
@@ -132,15 +133,15 @@ Name: My spec
             var subsection = spec.Children[0].As<Section>()
                 .Children[0].As<Step>().Collections["Rows"];
 
-            subsection.Children.Count.ShouldEqual(2);
+            subsection.Children.Count.ShouldBe(2);
 
-            subsection.Children[0].As<Step>().Values["x"].ShouldEqual("1");
-            subsection.Children[0].As<Step>().Values["sum"].ShouldEqual("3");
-            subsection.Children[1].As<Step>().Values["sum"].ShouldEqual("5");
+            subsection.Children[0].As<Step>().Values["x"].ShouldBe("1");
+            subsection.Children[0].As<Step>().Values["sum"].ShouldBe("3");
+            subsection.Children[1].As<Step>().Values["sum"].ShouldBe("5");
 
             spec.Children[0].As<Section>().Children[1]
                 .ShouldBeOfType<Step>()
-                .Key.ShouldEqual("Adding");
+                .Key.ShouldBe("Adding");
         }
 
 

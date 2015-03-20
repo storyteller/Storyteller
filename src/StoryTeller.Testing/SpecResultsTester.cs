@@ -11,11 +11,11 @@ namespace StoryTeller.Testing
         {
             var results = SpecResults.ForAbortedRun();
 
-            results.Attempts.ShouldEqual(0);
+            results.Attempts.ShouldBe(0);
             results.Counts.ShouldEqual(0, 0, 0, 0);
-            results.Performance.Length.ShouldEqual(0);
-            results.Results.Length.ShouldEqual(0);
-            results.WasAborted.ShouldBe(true);
+            results.Performance.Length.ShouldBe(0);
+            results.Results.Length.ShouldBe(0);
+            ShouldBeTestExtensions.ShouldBe(results.WasAborted, true);
         }
     }
 }

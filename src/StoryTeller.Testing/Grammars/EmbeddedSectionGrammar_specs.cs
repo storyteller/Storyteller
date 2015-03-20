@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -58,8 +59,8 @@ Name: Embedded
         public void builds_the_model()
         {
             var section = ModelFor<EmbeddedSection>("EmbeddedGrammar", "Colors");
-            section.title.ShouldEqual("In the recording fixture");
-            section.fixture.key.ShouldEqual("Recording");
+            section.title.ShouldBe("In the recording fixture");
+            section.fixture.key.ShouldBe("Recording");
             section.fixture.FindGrammar("Red").ShouldNotBeNull();
         }
     }

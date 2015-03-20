@@ -35,8 +35,8 @@ namespace StoryTeller.Testing.Remotes.Messaging
                 });
             });
 
-            result.ShouldEqual(m4);
-            hub.Listeners.Any().ShouldBe(false); // want it to remove the condition as it goes
+            result.ShouldBe(m4);
+            ShouldBeTestExtensions.ShouldBe(hub.Listeners.Any(), false); // want it to remove the condition as it goes
         }
 
         public class Message

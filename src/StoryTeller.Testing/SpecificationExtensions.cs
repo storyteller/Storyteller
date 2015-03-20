@@ -14,6 +14,7 @@ using NUnit.Framework.Constraints;
 using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
 using Rhino.Mocks.Interfaces;
+using Shouldly;
 using Is = NUnit.Framework.Is;
 
 namespace StoryTeller.Testing
@@ -44,23 +45,6 @@ namespace StoryTeller.Testing
 
     public static class SpecificationExtensions
     {
-        public static object ShouldEqual(this object actual, object expected)
-        {
-            Assert.AreEqual(expected, actual);
-            return expected;
-        }
-
-        public static object ShouldEqual(this string actual, object expected)
-        {
-            Assert.AreEqual((expected != null) ? expected.ToString() : null, actual);
-            return expected;
-        }
-
-        public static object ShouldNotEqual(this object actual, object expected)
-        {
-            Assert.AreNotEqual(expected, actual);
-            return expected;
-        }
 
         public static void ShouldBeNull(this object anObject)
         {
@@ -107,11 +91,11 @@ namespace StoryTeller.Testing
                 actual.ShouldNotBeNull();
                 expected.ShouldNotBeNull();
 
-                actual.Count.ShouldEqual(expected.Count);
+                actual.Count.ShouldBe(expected.Count);
 
                 for (int i = 0; i < actual.Count; i++)
                 {
-                    actual[i].ShouldEqual(expected[i]);
+                    actual[i].ShouldBe(expected[i]);
                 }
             }
             catch (Exception)
@@ -149,30 +133,9 @@ namespace StoryTeller.Testing
         }
 
 
-        public static void ShouldContain(this string actual, string expected)
-        {
-            StringAssert.Contains(expected, actual);
-        }
-
-
-        public static void ShouldContain<T>(this IEnumerable<T> actual, T expected)
-        {
-            if (actual.Count(t => t.Equals(expected)) == 0)
-            {
-                Assert.Fail("The item '{0}' was not found in the sequence.", expected);
-            }
-        }
-
-
-        public static void ShouldNotContain(this string actual, string expected)
-        {
-            Assert.That(actual, new NotConstraint(new SubstringConstraint(expected)));
-        }
-
-
         public static IEnumerable<T> ShouldHaveCount<T>(this IEnumerable<T> actual, int expected)
         {
-            actual.Count().ShouldEqual(expected);
+            actual.Count().ShouldBe(expected);
             return actual;
         }
 

@@ -37,7 +37,7 @@ namespace StoryTeller.Model.Persistence
         public static XmlElement WriteSpecRoot(Specification specification, XmlDocument document)
         {
             var root = document.WithRoot(Spec);
-            root.SetAttribute(Id, specification.Id);
+            root.SetAttribute(Id, specification.id);
             root.SetAttribute(MaxRetries, specification.MaxRetries.ToString());
             root.SetAttribute(TagsAtt, specification.Tags.Join(", "));
             root.SetAttribute(LifecycleAtt, specification.Lifecycle.ToString());

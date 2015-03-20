@@ -148,7 +148,7 @@ namespace StoryTeller
             if (result.id.IsEmpty())
                 throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
 
-            result.spec = Specification.Id;
+            result.spec = Specification.id;
 
             _resultObserver.Handle(result);
             result.Tabulate(Counts);

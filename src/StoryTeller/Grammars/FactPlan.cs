@@ -20,7 +20,7 @@ namespace StoryTeller.Grammars
 
         IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)
         {
-            return new FactPlan(new StepValues(step.Id), this);
+            return new FactPlan(new StepValues(step.id), this);
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
@@ -59,7 +59,7 @@ namespace StoryTeller.Grammars
         protected override StepResult execute(ISpecContext context)
         {
             var test = _grammar.PerformTest(Values, context);
-            return new StepResult(Values.Id, test ? ResultStatus.success : ResultStatus.failed);
+            return new StepResult(Values.id, test ? ResultStatus.success : ResultStatus.failed);
         }
     }
 }

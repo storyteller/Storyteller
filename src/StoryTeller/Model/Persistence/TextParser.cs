@@ -68,7 +68,7 @@ namespace StoryTeller.Model.Persistence
                 var section = new Section(parts.First());
                 if (parts.Count() == 2)
                 {
-                    section.Id = parts.Last();
+                    section.id = parts.Last();
                 }
 
                 _specification.Children.Add(section);
@@ -87,7 +87,7 @@ namespace StoryTeller.Model.Persistence
 
                 var key = keys.First();
                 var id = keys.Count() == 2 ? keys.Last() : Guid.NewGuid().ToString();
-                var step = new Step(key) {Id = id};
+                var step = new Step(key) {id = id};
 
                 applyValues(parts.Last(), step);
 

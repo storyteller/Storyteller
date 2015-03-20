@@ -2,6 +2,7 @@
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
@@ -46,7 +47,7 @@ namespace StoryTeller.Testing.Engine
         public void measures_the_context_creation()
         {
             var creation = theResults.Performance.Single(x => x.Type == "Context");
-            creation.Subject.ShouldEqual("Creation");
+            creation.Subject.ShouldBe("Creation");
         }
 
         [Test]

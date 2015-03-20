@@ -62,10 +62,10 @@ namespace StoryTeller.Testing.Engine
 
             record.results.Counts.ShouldEqual(0, 0, 1, 0);
             var result = record.results.Results.Single().ShouldBeOfType<StepResult>();
-            result.position.ShouldEqual(Stage.timedout.ToString());
+            result.position.ShouldBe(Stage.timedout.ToString());
 
             // At the specification level
-            result.id.ShouldEqual("SometimesSlow");
+            result.id.ShouldBe("SometimesSlow");
             result.error.ShouldContain("Timed out in");
 
         }
@@ -82,18 +82,18 @@ namespace StoryTeller.Testing.Engine
             });
 
             // There are 23 specs in the sample project
-            response.records.Length.ShouldEqual(23);
+            response.records.Length.ShouldBe(23);
 
             var first = response.records.Single(x => !x.results.WasAborted);
             
 
             // first one does run, just fails
-            first.results.WasAborted.ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(first.results.WasAborted, false);
 
             var contextCreationError = first.results.Results.OfType<StepResult>().Single();
 
             first.results.Counts.ShouldEqual(0, 0, 1, 0);
-            contextCreationError.position.ShouldEqual("context");
+            contextCreationError.position.ShouldBe("context");
             contextCreationError.error.ShouldContain("I blew up trying to create an execution context");
 
         }

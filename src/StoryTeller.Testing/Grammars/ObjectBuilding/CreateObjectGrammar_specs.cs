@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
 
@@ -30,9 +31,9 @@ Name: whatever
             var cell = ModelFor<Sentence>("NumberedThing", "Create")
                 .cells.Single();
 
-            cell.Key.ShouldEqual("number");
-            cell.Type.ShouldEqual(typeof (int));
-            cell.DefaultValue.ShouldEqual("24");
+            cell.Key.ShouldBe("number");
+            cell.Type.ShouldBe(typeof (int));
+            cell.DefaultValue.ShouldBe("24");
         }
     }
 

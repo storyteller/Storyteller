@@ -23,7 +23,7 @@ namespace StoryTeller.Engine.UserInterface
         {
             base.Line(execution);
 
-            var progress = new SpecProgress(_plan.Specification.Id, CurrentContext.Counts.Clone(), ++_step, _total);
+            var progress = new SpecProgress(_plan.Specification.id, CurrentContext.Counts.Clone(), ++_step, _total);
             _observer.SendProgress(progress);
         }
     }

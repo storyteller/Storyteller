@@ -115,7 +115,7 @@ namespace StoryTeller.Engine
         private static SpecResults buildResultsForContextCreationFailure(SpecExecutionRequest request, Exception ex,
             Timings timings)
         {
-            var result = new StepResult(request.Specification.Id, ex) {position = Stage.context};
+            var result = new StepResult(request.Specification.id, ex) {position = Stage.context};
             var perf = timings.Finish();
 
             return new SpecResults
@@ -160,7 +160,7 @@ namespace StoryTeller.Engine
             {
                 context.LogResult(new StepResult
                 {
-                    id = plan.Specification.Id,
+                    id = plan.Specification.id,
                     Status = ResultStatus.error,
                     error = "Timed out in " + context.Timings.Duration,
                     position = Stage.timedout

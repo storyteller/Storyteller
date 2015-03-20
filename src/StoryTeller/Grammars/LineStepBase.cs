@@ -43,7 +43,7 @@ namespace StoryTeller.Grammars
                 }
                 catch (Exception ex)
                 {
-                    context.LogException(Values.Id, ex, Position);
+                    context.LogException(Values.id, ex, Position);
                 }
             }
         }

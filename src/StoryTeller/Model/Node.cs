@@ -10,11 +10,10 @@ namespace StoryTeller.Model
 
         protected Node()
         {
-            Id = Guid.NewGuid().ToString();
+            id = Guid.NewGuid().ToString();
         }
 
-        [JsonProperty("id")]
-        public string Id
+        public string id
         {
             get { return _id; }
             set

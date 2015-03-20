@@ -45,8 +45,8 @@ namespace StoryTeller.Testing.Grammars
             afterExecuting();
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.id.ShouldEqual(values.Id);
-            result.Status.ShouldEqual(ResultStatus.ok);
+            result.id.ShouldBe(values.id);
+            result.Status.ShouldBe(ResultStatus.ok);
             result.cells.ShouldHaveTheSameElementsAs(cells);
 
         }
@@ -64,7 +64,7 @@ namespace StoryTeller.Testing.Grammars
             afterExecuting();
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.position.ShouldEqual(thePosition.ToString());
+            result.position.ShouldBe(thePosition.ToString());
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace StoryTeller.Testing.Grammars
 
             afterExecuting();
 
-            context.AssertTheOnlyResultIs(new StepResult(values.Id, ResultStatus.error){error = ex.ToString(), position = thePosition});
+            context.AssertTheOnlyResultIs(new StepResult(values.id, ResultStatus.error){error = ex.ToString(), position = thePosition});
         }
 
 
@@ -88,7 +88,7 @@ namespace StoryTeller.Testing.Grammars
             afterExecuting();
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.position.ShouldEqual(thePosition.ToString());
+            result.position.ShouldBe(thePosition.ToString());
         }
 
         [Test]
@@ -106,8 +106,8 @@ namespace StoryTeller.Testing.Grammars
 
             theLineGrammar.VerifyAllExpectations();
 
-            c1.ConversionHappened.ShouldBe(true);
-            c2.ConversionHappened.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(c1.ConversionHappened, true);
+            ShouldBeTestExtensions.ShouldBe(c2.ConversionHappened, true);
 
         }
 
@@ -121,8 +121,8 @@ namespace StoryTeller.Testing.Grammars
             theLineGrammar.AssertWasNotCalled(x => x.Execute(values, context));
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
-            result.id.ShouldEqual(values.Id);
-            result.Status.ShouldEqual(ResultStatus.ok);
+            result.id.ShouldBe(values.id);
+            result.Status.ShouldBe(ResultStatus.ok);
             result.cells.ShouldHaveTheSameElementsAs(new[]
             {
                 new CellResult("a", ResultStatus.error){error = "don't like you"}
@@ -142,8 +142,8 @@ namespace StoryTeller.Testing.Grammars
             var result = context.Results.Single().ShouldBeOfType<StepResult>()
                 .cells.Single();
 
-            result.Status.ShouldEqual(ResultStatus.error);
-            result.cell.ShouldEqual("a");
+            result.Status.ShouldBe(ResultStatus.error);
+            result.cell.ShouldBe("a");
             
         }
 

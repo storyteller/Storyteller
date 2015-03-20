@@ -63,9 +63,9 @@ namespace StoryTeller.Testing.CommandLine
 
             var result = task.Result;
 
-            result.records.Any(x => x.header.id == "embeds").ShouldBe(false);
-            result.records.Any(x => x.header.id == "paragraph1").ShouldBe(false);
-            result.records.Any(x => x.header.id == "sentence2").ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(result.records.Any(x => x.header.id == "embeds"), false);
+            ShouldBeTestExtensions.ShouldBe(result.records.Any(x => x.header.id == "paragraph1"), false);
+            ShouldBeTestExtensions.ShouldBe(result.records.Any(x => x.header.id == "sentence2"), false);
         }
 
         [Test]

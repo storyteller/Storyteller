@@ -2,6 +2,7 @@
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
@@ -97,8 +98,8 @@ Name: whatever
             CountsShouldBe(3, 2, 0, 0);
 
             var result = theContext.Results.OfType<SetVerificationResult>().Single();
-            result.missing.Single().ShouldEqual("missing");
-            result.extras.Single()["expected"].ShouldEqual("extra");
+            result.missing.Single().ShouldBe("missing");
+            result.extras.Single()["expected"].ShouldBe("extra");
         }
 
 
@@ -123,8 +124,8 @@ Name: whatever
             var result = theContext.Results.OfType<SetVerificationResult>().Single();
 
             result.matches.OrderBy(x => x).ShouldHaveTheSameElementsAs("1", "2", "3");
-            result.missing.Single().ShouldEqual("missing");
-            result.extras.Single()["expected"].ShouldEqual("extra");
+            result.missing.Single().ShouldBe("missing");
+            result.extras.Single()["expected"].ShouldBe("extra");
         }
 
         [Test]

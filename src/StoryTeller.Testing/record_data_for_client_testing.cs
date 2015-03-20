@@ -46,7 +46,7 @@ namespace StoryTeller.Testing
                 Debug.WriteLine("Running " + header.name);
 
                 var spec = XmlReader.ReadFromFile(header.Filename);
-                data.specs.Add(spec.Id, spec);
+                data.specs.Add(spec.id, spec);
 
                 using (var execution = theSystem.CreateContext())
                 {
@@ -62,7 +62,7 @@ namespace StoryTeller.Testing
 
                         observer.SpecExecutionFinished(header, context.FinalizeResults(1));
 
-                        data.results.Add(spec.Id, observer.Messages.ToArray());
+                        data.results.Add(spec.id, observer.Messages.ToArray());
                     }
                     
                     

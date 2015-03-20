@@ -45,7 +45,7 @@ namespace StoryTeller.Model
 
         public Section AddSection(string key)
         {
-            var section = new Section(key) {Id = Guid.NewGuid().ToString()};
+            var section = new Section(key) {id = Guid.NewGuid().ToString()};
             Children.Add(section);
 
             return section;
@@ -56,7 +56,7 @@ namespace StoryTeller.Model
             return new SpecNode
             {
                 name = Name,
-                id = Id,
+                id = id,
                 lifecycle = Lifecycle.ToString()
             };
         }
@@ -64,7 +64,7 @@ namespace StoryTeller.Model
         public void ReadNode(SpecNode node)
         {
             Name = node.name;
-            Id = node.id;
+            id = node.id;
             Lifecycle = (Lifecycle) Enum.Parse(typeof(Lifecycle), node.lifecycle);
         }
     }

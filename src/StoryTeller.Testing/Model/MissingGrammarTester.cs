@@ -1,6 +1,7 @@
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
@@ -15,15 +16,15 @@ namespace StoryTeller.Testing.Model
         {
             var grammar = new MissingGrammar("NotHere");
 
-            grammar.errors.Single().error.ShouldEqual("Grammar 'NotHere' is not implemented");
+            grammar.errors.Single().error.ShouldBe("Grammar 'NotHere' is not implemented");
         }
 
         [Test]
         public void create_plan_creates_an_invalid_grammar_step()
         {
             var grammar = new MissingGrammar("missing");
-            grammar.As<IGrammar>().CreatePlan(new Step("missing"){Id = "3"}, TestingContext.Library)
-                .ShouldEqual(new InvalidGrammarStep(new StepValues("3"), "Grammar 'missing' is not implemented"));
+            grammar.As<IGrammar>().CreatePlan(new Step("missing"){id = "3"}, TestingContext.Library)
+                .ShouldBe(new InvalidGrammarStep(new StepValues("3"), "Grammar 'missing' is not implemented"));
         }
 
         [Test]

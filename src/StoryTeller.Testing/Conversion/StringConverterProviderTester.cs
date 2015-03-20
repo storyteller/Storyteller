@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 
 namespace StoryTeller.Testing.Conversion
@@ -15,7 +16,7 @@ namespace StoryTeller.Testing.Conversion
             var result = @object ("Sample");
 
             result.ShouldNotBeNull ().ShouldBeOfType<TestKlass> ()
-                .S.ShouldEqual ("Sample");
+                .S.ShouldBe ("Sample");
         }
 
         [Test]

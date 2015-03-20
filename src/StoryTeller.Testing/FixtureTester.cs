@@ -29,22 +29,20 @@ namespace StoryTeller.Testing
         [Test]
         public void hidden_when_marked_with_Hidden()
         {
-            new HiddenFixture().IsHidden()
-                .ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(new HiddenFixture().IsHidden(), true);
         }
 
         [Test]
         public void not_hidden_without_the_attribute()
         {
-            new NotHiddenFixture().IsHidden()
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(new NotHiddenFixture().IsHidden(), false);
         }
 
 
         [Test]
         public void get_the_name_using_convention_if_the_alias_as_attribute_does_not_exist()
         {
-            new TargetedReflectionFixture().Key.ShouldEqual("TargetedReflection");
+            new TargetedReflectionFixture().Key.ShouldBe("TargetedReflection");
         }
 
         public class TargetedReflectionFixture : Fixture
@@ -55,7 +53,7 @@ namespace StoryTeller.Testing
         [Test]
         public void get_the_name_using_the_alias_attribute_if_it_exists()
         {
-            new SecondFixture().Key.ShouldEqual("TheSecondFixture");
+            new SecondFixture().Key.ShouldBe("TheSecondFixture");
         }
 
         public class SecondFixture : Fixture
@@ -158,7 +156,7 @@ namespace StoryTeller.Testing
         {
             new DefaultTitleFixture()
                 .Compile(CellHandling.Basic())
-                .title.ShouldEqual("Default Title");
+                .title.ShouldBe("Default Title");
         }
 
         [Test]
@@ -166,7 +164,7 @@ namespace StoryTeller.Testing
         {
             new DefaultTitleFixture()
                 .Compile(CellHandling.Basic())
-                .implementation.ShouldEqual(typeof (DefaultTitleFixture).FullName);
+                .implementation.ShouldBe(typeof (DefaultTitleFixture).FullName);
         }
 
         public class ExplicitTitleFixture : Fixture
@@ -182,7 +180,7 @@ namespace StoryTeller.Testing
         {
             new ExplicitTitleFixture()
                 .Compile(CellHandling.Basic())
-                .title.ShouldEqual("The special title");
+                .title.ShouldBe("The special title");
         }
 
         public class FixtureWithBadGrammar : Fixture

@@ -2,6 +2,7 @@
 using System.Linq;
 using HtmlTags;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Results

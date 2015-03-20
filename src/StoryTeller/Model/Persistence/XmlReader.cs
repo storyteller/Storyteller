@@ -46,7 +46,7 @@ namespace StoryTeller.Model.Persistence
                 ? Lifecycle.Acceptance
                 : Enum.Parse(typeof (Lifecycle), lifecycle).As<Lifecycle>();
 
-            spec.Id = top.ReadId();
+            spec.id = top.ReadId();
             var maxRetries = top.GetAttribute(MaxRetries);
             spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
@@ -62,7 +62,7 @@ namespace StoryTeller.Model.Persistence
 
         public static Section ReadSection(XmlElement element)
         {
-            var section = new Section(element.Name) {Id = element.GetAttribute(Id)};
+            var section = new Section(element.Name) {id = element.GetAttribute(Id)};
 
             element.ForEachElement(child =>
             {
@@ -82,7 +82,7 @@ namespace StoryTeller.Model.Persistence
 
         public static Step ReadStep(XmlElement child)
         {
-            var step = new Step(child.Name) {Id = child.ReadId()};
+            var step = new Step(child.Name) {id = child.ReadId()};
 
             foreach (XmlAttribute att in child.Attributes)
             {
@@ -102,7 +102,7 @@ namespace StoryTeller.Model.Persistence
 
         private static Comment ReadComment(XmlElement element)
         {
-            return new Comment{Id = element.ReadId(), Text = element.InnerText};
+            return new Comment{id = element.ReadId(), Text = element.InnerText};
         }
     }
 }

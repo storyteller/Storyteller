@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
 
@@ -15,7 +16,7 @@ namespace StoryTeller.Testing.Conversion
         {
             var s = value.ToString();
             conversions.Convert(typeof (T), s)
-                .ShouldEqual(value);
+                .ShouldBe(value);
 
         }
 
@@ -48,13 +49,13 @@ namespace StoryTeller.Testing.Conversion
         [Test]
         public void convert_string_is_passthrough_on_value()
         {
-            conversions.Convert(typeof (string), "foo").ShouldEqual("foo");
+            conversions.Convert(typeof (string), "foo").ShouldBe("foo");
         }
 
         [Test]
         public void convert_string_as_EMPTY()
         {
-            conversions.Convert(typeof (string), "EMPTY").ShouldEqual(string.Empty);
+            conversions.Convert(typeof (string), "EMPTY").ShouldBe(string.Empty);
         }
 
         public enum Directions
@@ -78,7 +79,7 @@ namespace StoryTeller.Testing.Conversion
                 .ShouldBeNull();
 
             conversions.Convert(typeof (int?), "123")
-                .ShouldEqual(123);
+                .ShouldBe(123);
         }
     }
 

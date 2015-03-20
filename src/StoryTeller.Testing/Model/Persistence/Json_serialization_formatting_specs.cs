@@ -2,6 +2,7 @@
 using System.IO;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
@@ -13,9 +14,11 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void write_a_comment()
         {
-            var comment = new Comment {Id = "foo", Text = "some text"};
+            var comment = new Comment {id = "foo", Text = "some text"};
 
-            comment.ToJson().ShouldEqual("{\"text\":\"some text\",\"type\":\"comment\",\"id\":\"foo\"}");
+            var json = comment.ToJson();
+            Debug.WriteLine(json);
+            json.ShouldBe("{\"text\":\"some text\",\"type\":\"comment\",\"id\":\"foo\"}");
         }
 
         [Test]

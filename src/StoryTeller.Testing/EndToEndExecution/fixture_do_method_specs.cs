@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -21,7 +22,7 @@ Name: Do
 
             Step("1").StatusWas(ResultStatus.ok);
 
-            DoActionsFixture.RecordedText.ShouldEqual("Hello!");
+            DoActionsFixture.RecordedText.ShouldBe("Hello!");
         }
 
         [Test]
@@ -35,7 +36,7 @@ Name: Do
 
             Step("1").StatusWas(ResultStatus.ok);
             SpecContextState.Retrieve<int>("number")
-                .ShouldEqual(13);
+                .ShouldBe(13);
         }
 
         [Test]
@@ -52,18 +53,18 @@ Name: Do
 
             Step("1").StatusWas(ResultStatus.ok);
 
-            service.Number.ShouldEqual(13.2);
+            service.Number.ShouldBe(13.2);
         }
 
         [Test]
         public void action_grammar_of_T_can_build_grammar_model()
         {
             var model = ModelFor<Sentence>("DoActions", "CallService");
-            model.format.ShouldEqual("Set the number in the service to {number}");
+            model.format.ShouldBe("Set the number in the service to {number}");
             var cell = model.cells.Single();
 
-            cell.Key.ShouldEqual("number");
-            cell.Type.ShouldEqual(typeof (double));
+            cell.Key.ShouldBe("number");
+            cell.Type.ShouldBe(typeof (double));
         }
     }
 

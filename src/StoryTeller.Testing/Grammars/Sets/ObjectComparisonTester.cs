@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
@@ -38,10 +39,10 @@ namespace StoryTeller.Testing.Grammars.Sets
             task.Wait();
 
             var values = task.Result;
-            values.Count().ShouldEqual(3);
-            values[0].Get("City").ShouldEqual("Austin");
-            values[1].Get("Address1").ShouldEqual("2 Road");
-            values[2].Get("DistanceFromOffice").ShouldEqual(15.0);
+            values.Count().ShouldBe(3);
+            values[0].Get("City").ShouldBe("Austin");
+            values[1].Get("Address1").ShouldBe("2 Road");
+            values[2].Get("DistanceFromOffice").ShouldBe(15.0);
         }
     }
 

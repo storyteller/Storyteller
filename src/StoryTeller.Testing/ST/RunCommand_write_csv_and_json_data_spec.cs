@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.ST
 
             new RunCommand().Execute(input);
 
-            File.Exists(file).ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(File.Exists(file), true);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace StoryTeller.Testing.ST
 
             new RunCommand().Execute(input);
 
-            File.Exists(file).ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(File.Exists(file), true);
         }
     }
 }

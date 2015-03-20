@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
 
@@ -24,7 +25,7 @@ namespace StoryTeller.Testing.Grammars
 
             var plan = grammar.CreatePlan(step, new FixtureLibrary()).ShouldBeOfType<SilentAction>();
 
-            plan.Position.ShouldEqual(2);
+            plan.Position.ShouldBe(2);
             plan.Action.ShouldBeTheSameAs(action);
             plan.Node.ShouldBeTheSameAs(step);
         }

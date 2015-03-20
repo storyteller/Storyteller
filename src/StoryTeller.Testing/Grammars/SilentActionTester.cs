@@ -17,12 +17,12 @@ namespace StoryTeller.Testing.Grammars
         public void execute_happy_path()
         {
             var wasCalled = false;
-            var section = new Section("Math"){Id = "4"};
+            var section = new Section("Math"){id = "4"};
             var action = new SilentAction("Fixture", Stage.setup, x => wasCalled = true, section);
             var context = SpecContext.ForTesting();
             action.Execute(context);
 
-            wasCalled.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(wasCalled, true);
 
         }
 
@@ -32,16 +32,16 @@ namespace StoryTeller.Testing.Grammars
             var context = SpecContext.ForTesting();
             var ex = new DivideByZeroException();
 
-            var section = new Section("Math") {Id = "5"};
+            var section = new Section("Math") {id = "5"};
             var action = new SilentAction("Fixture", Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
 
-            result.id.ShouldEqual(section.Id);
-            result.position.ShouldEqual(Stage.teardown.ToString());
-            result.Status.ShouldEqual(ResultStatus.error);
+            result.id.ShouldBe(section.id);
+            result.position.ShouldBe(Stage.teardown.ToString());
+            result.Status.ShouldBe(ResultStatus.error);
             result.error.ShouldContain("DivideByZeroException");
 
 
@@ -53,12 +53,12 @@ namespace StoryTeller.Testing.Grammars
             var context = SpecContext.ForTesting();
             var ex = new DivideByZeroException();
 
-            var section = new Section("Math") { Id = "5" };
+            var section = new Section("Math") { id = "5" };
             var action = SilentAction.AsCritical("Fixture", Stage.teardown, x => { throw ex; }, section);
 
             action.Execute(context);
 
-            context.CanContinue().ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(context.CanContinue(), false);
         }
 
         [Test]

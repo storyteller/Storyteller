@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 
@@ -16,7 +17,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
             var deserialized = JsonSerialization.DeserializeMessage(json)
                 .ShouldBeOfType<RunSpec>();
 
-            deserialized.id.ShouldEqual("embeds");
+            deserialized.id.ShouldBe("embeds");
             deserialized.ShouldNotBeTheSameAs(message);
         }
     }

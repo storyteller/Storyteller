@@ -17,7 +17,7 @@ namespace StoryTeller.Model
 
         IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)
         {
-            return new InvalidGrammarStep(new StepValues(step.Id), _message);
+            return new InvalidGrammarStep(new StepValues(step.id), _message);
         }
 
         GrammarModel IGrammar.Compile(Fixture fixture, CellHandling cells)

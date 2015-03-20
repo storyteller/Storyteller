@@ -49,7 +49,7 @@ namespace StoryTeller.Engine
             performAction(() =>
             {
                 Specification = XmlReader.ReadFromFile(Node.Filename);
-                Specification.Id = Node.id;
+                Specification.id = Node.id;
             });
         }
 

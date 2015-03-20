@@ -63,7 +63,7 @@ namespace StoryTeller.Testing.Engine
             request.Specification.ShouldNotBeNull();
             request.Specification.Children.Count.ShouldBeGreaterThan(0);
 
-            request.IsCancelled.ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, false);
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace StoryTeller.Testing.Engine
 
             request.ReadXml();
 
-            request.IsCancelled.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, true);
 
             var error = listener.Errors.Single();
 
@@ -87,11 +87,11 @@ namespace StoryTeller.Testing.Engine
         public void cancel_cancels_the_request()
         {
             var request = SpecExecutionRequest.For(theSpec);
-            request.IsCancelled.ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, false);
 
             request.Cancel();
 
-            request.IsCancelled.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, true);
         }
 
 
@@ -102,7 +102,7 @@ namespace StoryTeller.Testing.Engine
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
-            request.IsCancelled.ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, false);
 
             request.Plan.ShouldNotBeNull();
         }
@@ -116,7 +116,7 @@ namespace StoryTeller.Testing.Engine
             //request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
-            request.IsCancelled.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, true);
         }
 
         public class RuntimeErrorListener : IListener<RuntimeError>

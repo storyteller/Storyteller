@@ -19,7 +19,7 @@ namespace StoryTeller.Grammars.Sets
                 var actual = actualValues.FirstOrDefault(x => cells.Matches(expected, x));
                 if (actual == null)
                 {
-                    result.MarkMissing(expected.Id);
+                    result.MarkMissing(expected.id);
                 }
                 else
                 {
@@ -35,7 +35,7 @@ namespace StoryTeller.Grammars.Sets
         protected virtual void processMatch(StepValues actual, SetVerificationResult result, StepValues expected)
         {
             actual.IsMatched = true;
-            result.MarkMatched(expected.Id);
+            result.MarkMatched(expected.id);
         }
     }
 }

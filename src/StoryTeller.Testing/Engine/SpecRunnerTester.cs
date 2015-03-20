@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Engine
 
             var specNode = new SpecNode { id = Guid.NewGuid().ToString() };
             theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
-                new Specification { Id = specNode.id });
+                new Specification { id = specNode.id });
 
             theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
         }
@@ -30,14 +30,14 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void the_results_should_show_that_the_spec_was_aborted()
         {
-            theResults.WasAborted.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(theResults.WasAborted, true);
         }
 
 
         [Test]
         public void the_attempts_should_be_zero()
         {
-            theResults.Attempts.ShouldEqual(0);
+            theResults.Attempts.ShouldBe(0);
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace StoryTeller.Testing.Engine
         {
             var specNode = new SpecNode{id = Guid.NewGuid().ToString()};
             theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
-                new Specification {Id = specNode.id});
+                new Specification {id = specNode.id});
 
             theRequest.CreatePlan(TestingContext.Library);
 
@@ -75,7 +75,7 @@ namespace StoryTeller.Testing.Engine
 
             MockFor<ISystem>().Stub(x => x.CreateContext()).Throw(theException);
 
-            ClassUnderTest.Status.ShouldEqual(SpecRunnerStatus.Valid);
+            ClassUnderTest.Status.ShouldBe(SpecRunnerStatus.Valid);
 
             theResults = ClassUnderTest.Execute(theRequest, theQueue);
         }
@@ -84,7 +84,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void the_attempts_should_be_one()
         {
-            theResults.Attempts.ShouldEqual(1);
+            theResults.Attempts.ShouldBe(1);
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void was_not_aborted()
         {
-            theResults.WasAborted.ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(theResults.WasAborted, false);
         }
 
         [Test]
@@ -108,17 +108,17 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_mark_itself_as_invalid()
         {
-            ClassUnderTest.Status.ShouldEqual(SpecRunnerStatus.Invalid);
+            ClassUnderTest.Status.ShouldBe(SpecRunnerStatus.Invalid);
         }
 
         [Test]
         public void should_be_a_single_result_for_the_context_exception()
         {
             var result = theResults.Results.Single().ShouldBeOfType<StepResult>();
-            result.id.ShouldEqual(theRequest.Specification.Id);
-            result.Status.ShouldEqual(ResultStatus.error);
-            result.error.ShouldEqual(theException.ToString());
-            result.position.ShouldEqual("context");
+            result.id.ShouldBe(theRequest.Specification.id);
+            result.Status.ShouldBe(ResultStatus.error);
+            result.error.ShouldBe(theException.ToString());
+            result.position.ShouldBe("context");
             
         }
 

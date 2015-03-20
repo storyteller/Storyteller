@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Model
@@ -11,10 +12,10 @@ namespace StoryTeller.Testing.Model
         public void find_step_values()
         {
             IDictionary<string, string> values = Step.ParseValues("a:1, b:2, c:3");
-            values.Count.ShouldEqual(3);
-            values["a"].ShouldEqual("1");
-            values["b"].ShouldEqual("2");
-            values["c"].ShouldEqual("3");
+            values.Count.ShouldBe(3);
+            values["a"].ShouldBe("1");
+            values["b"].ShouldBe("2");
+            values["c"].ShouldBe("3");
         }
 
         [Test]

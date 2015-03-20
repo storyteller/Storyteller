@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
@@ -11,7 +12,7 @@ namespace StoryTeller.Testing.Results
         public void unwrap_storyteller_assertion_exceptions()
         {
             var ex = new StorytellerAssertionException("Something is wrong");
-            CellResult.Error("foo", ex).error.ShouldEqual("Something is wrong");
+            CellResult.Error("foo", ex).error.ShouldBe("Something is wrong");
         }
 
         [Test]

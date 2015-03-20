@@ -120,7 +120,7 @@ namespace ST.Client
 
                 var spec = _hierarchy.Nodes[id];
                 var template = XmlReader.ReadFromFile(spec.Filename);
-                template.Id = Guid.NewGuid().ToString();
+                template.id = Guid.NewGuid().ToString();
                 template.Name = name;
                 template.Lifecycle = Lifecycle.Acceptance;
 
@@ -137,7 +137,7 @@ namespace ST.Client
 
                     var node = template.ToNode();
                     node.Filename = file;
-                    _hierarchy.Nodes[template.Id] = node;
+                    _hierarchy.Nodes[template.id] = node;
 
                     suite.AddSpec(node);
 

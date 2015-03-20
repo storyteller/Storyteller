@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -19,10 +20,10 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var spec = HierarchyLoader.ReadSpecNode(path);
 
-            spec.name.ShouldEqual("Check properties");
-            spec.lifecycle.ShouldEqual("Acceptance");
-            spec.id.ShouldEqual("general1"); 
-            spec.Filename.ShouldEqual(path);
+            spec.name.ShouldBe("Check properties");
+            spec.lifecycle.ShouldBe("Acceptance");
+            spec.id.ShouldBe("general1"); 
+            spec.Filename.ShouldBe(path);
         }
 
         [Test]
@@ -54,7 +55,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var hierarchy = TestingContext.Hierarchy.ToHierarchy();
             hierarchy.Suites["General"].specs.Each(x =>
             {
-                x.SuitePath().ShouldEqual("General");
+                x.SuitePath().ShouldBe("General");
             });
         }
 
@@ -68,7 +69,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
 
             hierarchy.Suites[string.Empty].ShouldNotBeNull();
-            hierarchy.Suites[string.Empty].suites.Count().ShouldEqual(6);
+            hierarchy.Suites[string.Empty].suites.Count().ShouldBe(6);
 
             hierarchy.Suites.Select(x => x.path)
                 .ShouldHaveTheSameElementsAs("", "Embedded", "General", "Paragraphs", "Sentences", "Sets", "Tables");

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -26,7 +27,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
         public void spot_check_the_model()
         {
             var sentence = ModelFor<Sentence>("JustTheFacts", "AlwaysTrue");
-            sentence.format.ShouldEqual("This is always true");
+            sentence.format.ShouldBe("This is always true");
         }
     }
 

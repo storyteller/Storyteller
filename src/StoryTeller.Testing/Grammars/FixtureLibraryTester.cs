@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Grammars
 
             library.Fixtures["HanSolo"].ShouldBeOfType<AliasedFixture>();
 
-            library.Fixtures.Has(new SecretFixture().Key).ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(library.Fixtures.Has(new SecretFixture().Key), false);
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace StoryTeller.Testing.Grammars
         public void build_for_fixture_that_blows_up()
         {
             var compiled = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof (FixtureThatBlowsUp));
-            compiled.Model.implementation.ShouldEqual(typeof (FixtureThatBlowsUp).FullName);
+            compiled.Model.implementation.ShouldBe(typeof (FixtureThatBlowsUp).FullName);
         }
 
         [Test]
@@ -73,7 +73,7 @@ namespace StoryTeller.Testing.Grammars
             var compiled = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof(FixtureWithGrammarThatBlowsUp));
             var grammar = compiled.Model.FindGrammar("Bad");
 
-            grammar.key.ShouldEqual("Bad");
+            grammar.key.ShouldBe("Bad");
             grammar.errors.Single()
                 .error.ShouldContain("No!");
         }
@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.Grammars
         {
             var library = TestingContext.Library;
             var model = library.Models.FirstOrDefault(x => x.key == "Failure");
-            model.errors.Count().ShouldEqual(1);
+            model.errors.Count().ShouldBe(1);
         }
     }
 

@@ -55,14 +55,14 @@ namespace StoryTeller.Grammars.Sets
                     if (t.IsFaulted)
                     {
                         // TODO -- do the Flatten() trick here on the aggregated exception
-                        context.LogException(_section.Id, t.Exception);
+                        context.LogException(_section.id, t.Exception);
                         return;
                     }
 
                     if (t.IsCompleted)
                     {
                         var result = CreateResults(_expected, t.Result);
-                        result.id = _section.Id;
+                        result.id = _section.id;
                         context.LogResult(result);
                         return;
                     }
@@ -77,7 +77,7 @@ namespace StoryTeller.Grammars.Sets
         public SetVerificationResult CreateResults(IEnumerable<StepValues> expected, IEnumerable<StepValues> actual)
         {
             var result = _matcher.Match(_cells, expected, actual);
-            result.id = _section.Id;
+            result.id = _section.id;
 
             return result;
         }

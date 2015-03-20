@@ -19,8 +19,8 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .For(new Target(), x => x.Fullname2(null, null))
                 .ReturnCell;
 
-            returnCell.Key.ShouldEqual("fullname");
-            returnCell.Type.ShouldEqual(typeof (string));
+            returnCell.Key.ShouldBe("fullname");
+            returnCell.Type.ShouldBe(typeof (string));
 
             
         }
@@ -28,10 +28,10 @@ namespace StoryTeller.Testing.Grammars.Reflection
         [Test]
         public void the_return_cell_is_marked_as_output()
         {
-            ValueCheckMethod
-                .For(new Target(), x => x.Fullname2(null, null))
-                .ReturnCell
-                .output.ShouldBe(true);
+            ShouldBeTestExtensions.ShouldBe(ValueCheckMethod
+                    .For(new Target(), x => x.Fullname2(null, null))
+                    .ReturnCell
+                    .output, true);
         }
 
         [Test]
@@ -41,8 +41,8 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .For(new Target(), x => x.Fullname(null, null))
                 .ReturnCell;
 
-            returnCell.Key.ShouldEqual("expected");
-            returnCell.Type.ShouldEqual(typeof(string));
+            returnCell.Key.ShouldBe("expected");
+            returnCell.Type.ShouldBe(typeof(string));
         }
 
         [Test]
@@ -53,8 +53,8 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .ReturnCell;
 
             // Hate this, but it's backward compatible
-            returnCell.Key.ShouldEqual("returnValue");
-            returnCell.Type.ShouldEqual(typeof(string));
+            returnCell.Key.ShouldBe("returnValue");
+            returnCell.Type.ShouldBe(typeof(string));
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .For(new Target(), x => x.Fullname(null, null))
                 .Compile(new Fixture(), CellHandling.Basic())
                 .ShouldBeOfType<Sentence>()
-                .format.ShouldEqual("The fullname for {first} & {second} should be {expected}");
+                .format.ShouldBe("The fullname for {first} & {second} should be {expected}");
         }
 
         [Test]
@@ -74,7 +74,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .For(new Target(), x => x.Fullname3(null, null))
                 .Compile(new Fixture(), CellHandling.Basic())
                 .ShouldBeOfType<Sentence>()
-                .format.ShouldEqual("Fullname3({first}, {last}) should be {returnValue}");
+                .format.ShouldBe("Fullname3({first}, {last}) should be {returnValue}");
         }
 
         [Test]
@@ -89,8 +89,8 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var context = SpecContext.ForTesting();
             var result = grammar.Execute(values, context).Single();
 
-            result.cell.ShouldEqual("expected");
-            result.Status.ShouldEqual(ResultStatus.success);
+            result.cell.ShouldBe("expected");
+            result.Status.ShouldBe(ResultStatus.success);
         }
 
         [Test]
@@ -107,9 +107,9 @@ namespace StoryTeller.Testing.Grammars.Reflection
 
             // The method is working correctly, but the 
             // test data should result in a failure
-            result.cell.ShouldEqual("expected");
-            result.actual.ShouldEqual("Mat Cauthon");
-            result.Status.ShouldEqual(ResultStatus.failed);
+            result.cell.ShouldBe("expected");
+            result.actual.ShouldBe("Mat Cauthon");
+            result.Status.ShouldBe(ResultStatus.failed);
         }
 
         public class Target

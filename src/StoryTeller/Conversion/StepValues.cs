@@ -13,7 +13,7 @@ namespace StoryTeller.Conversion
 
         public StepValues(string id)
         {
-            Id = id;
+            base.id = id;
         }
 
         public void DoDelayedConversions(ISpecContext context)
@@ -76,7 +76,7 @@ namespace StoryTeller.Conversion
 
         public StepResult ToConversionErrorResult()
         {
-            return new StepResult(Id, ResultStatus.ok)
+            return new StepResult(id, ResultStatus.ok)
             {
                 cells = Errors.ToArray()
             };

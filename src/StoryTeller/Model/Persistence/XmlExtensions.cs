@@ -16,14 +16,14 @@ namespace StoryTeller.Model.Persistence
 
         public static void WriteComment(this XmlElement parent, Comment comment)
         {
-            parent.AddElement(XmlConstants.Comment).WithAtt(XmlConstants.Id, comment.Id)
+            parent.AddElement(XmlConstants.Comment).WithAtt(XmlConstants.Id, comment.id)
                 .InnerText = comment.Text;
         }
 
         public static void WriteSection(this XmlElement parent, Section section)
         {
             var sectionElement = parent.AddElement(section.Key);
-            sectionElement.SetAttribute(XmlConstants.Id, section.Id);
+            sectionElement.SetAttribute(XmlConstants.Id, section.id);
 
             section.Children.Each(child =>
             {

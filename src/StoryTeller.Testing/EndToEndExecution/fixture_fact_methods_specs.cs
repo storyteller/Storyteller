@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -59,7 +60,7 @@ Name: whatever
         public void build_the_cell_model()
         {
             var sentence = ModelFor<Sentence>("Fact", "CheckIsSo");
-            sentence.format.ShouldEqual("Check is so");
+            sentence.format.ShouldBe("Check is so");
 
         }
     }

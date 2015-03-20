@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
            var grammar = ActionMethodGrammar.Create(x => x.Go(null, 0, 0), theTarget);
            var model = grammar.Compile(new Fixture(), CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
-            model.format.ShouldEqual("Go({name}, {age}, {percentAwake})");
+            model.format.ShouldBe("Go({name}, {age}, {percentAwake})");
 
 
         }
@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var grammar = ActionMethodGrammar.Create(x => x.FancyGo(null, 0, 0), theTarget);
             var model = grammar.Compile(new Fixture(), CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
-            model.format.ShouldEqual("fancy go {name}, {age}, {percentAwake}");
+            model.format.ShouldBe("fancy go {name}, {age}, {percentAwake}");
         }
 
         [Test]
@@ -44,12 +44,11 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("age", 41);
             values.Store("percentAwake", 50.1);
 
-            grammar.Execute(values, SpecContext.Basic()).Any()
-                .ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(grammar.Execute(values, SpecContext.Basic()).Any(), false);
 
-            theTarget.Name.ShouldEqual("Jeremy");
-            theTarget.Age.ShouldEqual(41);
-            theTarget.PercentAwake.ShouldEqual(50.1);
+            theTarget.Name.ShouldBe("Jeremy");
+            theTarget.Age.ShouldBe(41);
+            theTarget.PercentAwake.ShouldBe(50.1);
         }
 
         public class Target

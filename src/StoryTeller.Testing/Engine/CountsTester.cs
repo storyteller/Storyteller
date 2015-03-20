@@ -26,15 +26,15 @@ namespace StoryTeller.Testing.Engine
 
             count1.Add(count2);
 
-            count1.Rights.ShouldEqual(9);
-            count1.Wrongs.ShouldEqual(7);
-            count1.Exceptions.ShouldEqual(14);
-            count1.SyntaxErrors.ShouldEqual(21);
+            count1.Rights.ShouldBe(9);
+            count1.Wrongs.ShouldBe(7);
+            count1.Exceptions.ShouldBe(14);
+            count1.SyntaxErrors.ShouldBe(21);
 
-            count2.Rights.ShouldEqual(7);
-            count2.Wrongs.ShouldEqual(4);
-            count2.Exceptions.ShouldEqual(10);
-            count2.SyntaxErrors.ShouldEqual(14);
+            count2.Rights.ShouldBe(7);
+            count2.Wrongs.ShouldBe(4);
+            count2.Exceptions.ShouldBe(10);
+            count2.SyntaxErrors.ShouldBe(14);
         }
 
         [Test]
@@ -42,57 +42,57 @@ namespace StoryTeller.Testing.Engine
         {
             var counts = new Counts();
 
-            counts.Wrongs.ShouldEqual(0);
-            counts.Rights.ShouldEqual(0);
-            counts.Exceptions.ShouldEqual(0);
-            counts.SyntaxErrors.ShouldEqual(0);
+            counts.Wrongs.ShouldBe(0);
+            counts.Rights.ShouldBe(0);
+            counts.Exceptions.ShouldBe(0);
+            counts.SyntaxErrors.ShouldBe(0);
         }
 
         [Test]
         public void is_success()
         {
-            new Counts
+            ShouldBeTestExtensions.ShouldBe(new Counts
             {
                 Rights = 4,
                 Exceptions = 0,
                 SyntaxErrors = 0,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBe(true);
-            new Counts
+            }.WasSuccessful(), true);
+            ShouldBeTestExtensions.ShouldBe(new Counts
             {
                 Rights = 4,
                 Exceptions = 1,
                 SyntaxErrors = 0,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBe(false);
-            new Counts
+            }.WasSuccessful(), false);
+            ShouldBeTestExtensions.ShouldBe(new Counts
             {
                 Rights = 4,
                 Exceptions = 0,
                 SyntaxErrors = 1,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBe(false);
-            new Counts
+            }.WasSuccessful(), false);
+            ShouldBeTestExtensions.ShouldBe(new Counts
             {
                 Rights = 4,
                 Exceptions = 0,
                 SyntaxErrors = 0,
                 Wrongs = 1
-            }.WasSuccessful().ShouldBe(false);
-            new Counts
+            }.WasSuccessful(), false);
+            ShouldBeTestExtensions.ShouldBe(new Counts
             {
                 Rights = 4,
                 Exceptions = 1,
                 SyntaxErrors = 0,
                 Wrongs = 1
-            }.WasSuccessful().ShouldBe(false);
-            new Counts
+            }.WasSuccessful(), false);
+            ShouldBeTestExtensions.ShouldBe(new Counts
             {
                 Rights = 0,
                 Exceptions = 1,
                 SyntaxErrors = 0,
                 Wrongs = 0
-            }.WasSuccessful().ShouldBe(false);
+            }.WasSuccessful(), false);
         }
 
         [Test]

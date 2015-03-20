@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
@@ -23,7 +24,7 @@ namespace StoryTeller.Testing.Model
         {
             var grammar = new ErrorGrammar("bad", "Bad!");
 
-            grammar.errors.Single().error.ShouldEqual("Bad!");
+            grammar.errors.Single().error.ShouldBe("Bad!");
         }
 
         [Test]
@@ -31,8 +32,8 @@ namespace StoryTeller.Testing.Model
         {
             var grammar = new ErrorGrammar("bad", "Bad!");
 
-            grammar.As<IGrammar>().CreatePlan(new Step("foo") {Id = "1"}, TestingContext.Library)
-                .ShouldEqual(new InvalidGrammarStep(new StepValues("1"), "Grammar 'bad' is in an invalid state. See the grammar errors"));
+            grammar.As<IGrammar>().CreatePlan(new Step("foo") {id = "1"}, TestingContext.Library)
+                .ShouldBe(new InvalidGrammarStep(new StepValues("1"), "Grammar 'bad' is in an invalid state. See the grammar errors"));
         }
     }
 }

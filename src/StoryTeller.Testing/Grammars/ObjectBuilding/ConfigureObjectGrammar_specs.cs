@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
 using StoryTeller.Testing.Grammars.Sets;
@@ -32,9 +33,9 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             var cell = ModelFor<Sentence>("ConfigureObject", "SetProps")
                 .cells.Single();
 
-            cell.Key.ShouldEqual("data");
-            cell.Type.ShouldEqual(typeof (string));
-            cell.DefaultValue.ShouldEqual("Austin-Texas");
+            cell.Key.ShouldBe("data");
+            cell.Type.ShouldBe(typeof (string));
+            cell.DefaultValue.ShouldBe("Austin-Texas");
         }
     }
 

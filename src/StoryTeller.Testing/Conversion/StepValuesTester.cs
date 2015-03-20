@@ -16,7 +16,7 @@ namespace StoryTeller.Testing.Conversion
             var values = new StepValues("1");
 
             values.Store("a", 1);
-            values.Get("a").ShouldEqual(1);
+            values.Get("a").ShouldBe(1);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace StoryTeller.Testing.Conversion
 
             for (var i = 0; i < values.Length; i++)
             {
-                values[i].Order.ShouldEqual(i + 1);
+                values[i].Order.ShouldBe(i + 1);
             }
 
         }
@@ -53,11 +53,11 @@ namespace StoryTeller.Testing.Conversion
 
             values.DoDelayedConversions(context);
 
-            values.Get("a").ShouldEqual(1);
-            values.Get("b").ShouldEqual(2);
-            values.Get("c").ShouldEqual(3);
+            values.Get("a").ShouldBe(1);
+            values.Get("b").ShouldBe(2);
+            values.Get("c").ShouldBe(3);
 
-            values.Errors.Any().ShouldBe(false);
+            ShouldBeTestExtensions.ShouldBe(values.Errors.Any(), false);
         }
 
         [Test]
@@ -71,8 +71,8 @@ namespace StoryTeller.Testing.Conversion
             values.DoDelayedConversions(context);
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
-            result.Status.ShouldEqual(ResultStatus.error);
-            result.cell.ShouldEqual("a");
+            result.Status.ShouldBe(ResultStatus.error);
+            result.cell.ShouldBe("a");
             result.error.ShouldContain("NotImplementedException");
         }
 
@@ -87,8 +87,8 @@ namespace StoryTeller.Testing.Conversion
             values.DoDelayedConversions(context);
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
-            result.Status.ShouldEqual(ResultStatus.error);
-            result.cell.ShouldEqual("a");
+            result.Status.ShouldBe(ResultStatus.error);
+            result.cell.ShouldBe("a");
             result.error.ShouldContain("The converter was not able to create a value. Check the formatting.");
         }
     }
@@ -106,7 +106,7 @@ namespace StoryTeller.Testing.Conversion
 
         public object Convert(string raw, ISpecContext context)
         {
-            raw.ShouldEqual(_raw);
+            raw.ShouldBe(_raw);
 
             var ex = _returnedValue as Exception;
             if (ex != null) throw ex;

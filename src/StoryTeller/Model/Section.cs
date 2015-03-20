@@ -31,14 +31,14 @@ namespace StoryTeller.Model
         {
             Key = key;
 
-            if (Id.IsEmpty()) throw new InvalidOperationException("Id cannot be empty or null");
+            if (id.IsEmpty()) throw new InvalidOperationException("Id cannot be empty or null");
         }
 
         public CompositeExecution CreatePlan(FixtureLibrary library)
         {
             var fixture = library.Fixtures[Key];
 
-            if (Id.IsEmpty()) Id = Guid.NewGuid().ToString();
+            if (id.IsEmpty()) id = Guid.NewGuid().ToString();
 
             return CreatePlan(library, fixture);
         }

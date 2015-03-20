@@ -3,6 +3,7 @@ using System.Linq;
 using FubuCore.Logging;
 using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using ST.Client;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
@@ -36,7 +37,7 @@ namespace StoryTeller.Testing.ST
             theConnector.HandleJson(json);
 
             theCommand.Received.Single()
-                .id.ShouldEqual("foo");
+                .id.ShouldBe("foo");
 
             theRemoteController.AssertWasNotCalled(x => x.SendJsonMessage(json));
         }

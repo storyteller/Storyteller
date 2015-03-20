@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 

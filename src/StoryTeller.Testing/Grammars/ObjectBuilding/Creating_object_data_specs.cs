@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.ObjectBuilding
@@ -54,7 +55,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             var cell = ModelFor<Paragraph>("CreateLocation", "UsingLoadObjectBy")
                 .cells.FirstOrDefault(x => x.Key == "X");
 
-            cell.DefaultValue.ShouldEqual("23");
+            cell.DefaultValue.ShouldBe("23");
         }
 
         [Test]

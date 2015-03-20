@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model;
@@ -100,7 +101,7 @@ namespace StoryTeller.Testing.Grammars.Sets
 
             theResult.matches.ShouldHaveTheSameElementsAs("a", "c");
             theResult.extras.ShouldBeEmpty();
-            theResult.missing.Single().ShouldEqual("b");
+            theResult.missing.Single().ShouldBe("b");
         }
 
         [Test]
@@ -119,7 +120,7 @@ namespace StoryTeller.Testing.Grammars.Sets
 
             theResult.matches.ShouldHaveTheSameElementsAs("a", "c");
             theResult.extras.ShouldBeEmpty();
-            theResult.missing.Single().ShouldEqual("b");
+            theResult.missing.Single().ShouldBe("b");
         }
 
 
@@ -140,8 +141,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.matches.ShouldHaveTheSameElementsAs("a", "b", "c");
             var extra = theResult.extras.Single();
 
-            extra["x"].ShouldEqual(5);
-            extra["y"].ShouldEqual(6);
+            extra["x"].ShouldBe(5);
+            extra["y"].ShouldBe(6);
 
             theResult.missing.ShouldBeEmpty();
         }
@@ -165,8 +166,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.matches.OrderBy(x => x).ShouldHaveTheSameElementsAs("a", "b", "c");
             var extra = theResult.extras.Single();
 
-            extra["x"].ShouldEqual(5);
-            extra["y"].ShouldEqual(6);
+            extra["x"].ShouldBe(5);
+            extra["y"].ShouldBe(6);
 
             theResult.missing.ShouldBeEmpty();
         }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using FubuCore;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
@@ -101,10 +102,10 @@ namespace StoryTeller.Testing
             result2.wrongOrdered.ShouldHaveTheSameElementsAs(new WrongOrder("6", 2), new WrongOrder("7", 3), new WrongOrder("8", 1));
             
             var result3 = VerificationResultFor("9");
-            result3.extras.Count().ShouldEqual(1);
+            result3.extras.Count().ShouldBe(1);
             
             var result4 = VerificationResultFor("10");
-            result4.missing.Single().ShouldEqual("11");
+            result4.missing.Single().ShouldBe("11");
             
             Step("12").Cell("Date").WasInvalid();
              
