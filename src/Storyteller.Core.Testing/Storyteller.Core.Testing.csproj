@@ -86,6 +86,7 @@
     <Compile Include="Engine\EngineControllerTester.cs" />
     <Compile Include="Engine\integrated_performance_data_collection_testing.cs" />
     <Compile Include="Engine\SpecExecutionRequestTester.cs" />
+    <Compile Include="Engine\SpecRunnerTester.cs" />
     <Compile Include="Engine\TimingsSmokeTester.cs" />
     <Compile Include="Engine\user_interface_tracing_spec.cs" />
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />

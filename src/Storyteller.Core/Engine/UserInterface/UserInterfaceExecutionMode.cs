@@ -11,7 +11,7 @@ namespace Storyteller.Core.Engine.UserInterface
             _observer = observer;
         }
 
-        public void BeforeRunning(SpecExecutionRequest request, ISpecContext context)
+        public void BeforeRunning(SpecExecutionRequest request)
         {
             _observer.SpecStarted(request.Plan);
         }

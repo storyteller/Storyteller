@@ -11,33 +11,25 @@ namespace Storyteller.Core
         public Counts Counts { get; set; }
 
         [JsonProperty("results")]
-        public IResultMessage[] Results { get; set; }
+        public IResultMessage[] Results = new IResultMessage[0];
 
         [JsonProperty("performance")]
-        public PerfRecord[] Performance { get; set; }
+        public PerfRecord[] Performance = new PerfRecord[0];
 
-        [JsonProperty("duration")]
-        public long Duration { get; set; }
+        [JsonProperty("duration")] public long Duration = 0;
 
         [JsonProperty("logging")]
-        public HtmlReport[] Reporting { get; set; }
+        public HtmlReport[] Reporting = new HtmlReport[0];
 
-        [JsonProperty("attempts")]
-        public int Attempts { get; set; }
+        [JsonProperty("attempts")] public int Attempts = 0;
 
-        [JsonProperty("aborted")]
-        public bool WasAborted { get; set; }
+        [JsonProperty("aborted")] public bool WasAborted = false;
 
         public static SpecResults ForAbortedRun()
         {
             return new SpecResults
             {
-                Attempts = 0,
                 Counts = new Counts(0, 0, 0, 0),
-                Duration = 0,
-                Performance = new PerfRecord[0],
-                Reporting = new HtmlReport[0],
-                Results = new IResultMessage[0],
                 WasAborted = true
             };
         }

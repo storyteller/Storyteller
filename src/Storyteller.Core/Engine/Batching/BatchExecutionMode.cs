@@ -13,7 +13,7 @@ namespace Storyteller.Core.Engine.Batching
             _resultObserver = observer;
         }
 
-        public void BeforeRunning(SpecExecutionRequest request, ISpecContext context)
+        public void BeforeRunning(SpecExecutionRequest request)
         {
         }
 

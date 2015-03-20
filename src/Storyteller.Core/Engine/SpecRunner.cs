@@ -1,12 +1,20 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.ModelBinding;
 using FubuCore;
 using Storyteller.Core.Grammars;
 using Storyteller.Core.Results;
 
 namespace Storyteller.Core.Engine
 {
+    public enum SpecRunnerStatus
+    {
+        Valid,
+        Invalid
+    }
+
     public class SpecRunner : ISpecRunner
     {
         private readonly IExecutionMode _mode;
@@ -17,49 +25,69 @@ namespace Storyteller.Core.Engine
         {
             _mode = mode;
             _system = system;
+
+            Status = SpecRunnerStatus.Valid;
         }
+
+        public SpecRunnerStatus Status { get; private set; }
 
         public SpecResults Execute(SpecExecutionRequest request, IConsumingQueue queue)
         {
+            _mode.BeforeRunning(request);
+
+            request.Plan.Attempts++;
+
             var timings = request.StartNewTimings();
             IExecutionContext execution = null;
+            SpecResults results = null;
 
-
-            // TODO -- tag the context or plan if timed out?
-            // TODO -- throw a CatastrophicException if the system creation fails
-            using (timings.Subject("Context", "Creation"))
-            {
-                execution = _system.CreateContext();
-
-                // TODO -- log a catastrophic error here and get out.
-            }
-
-            var context = new SpecContext(request.Specification, timings, request.Observer, _stopConditions, execution.Services);
-
-            context.Reporting.StartDebugListening();
-
-            return execute(request, queue, context, execution, _stopConditions.TimeoutInSeconds.Seconds());
-        }
-
-        private SpecResults execute(SpecExecutionRequest request, IConsumingQueue queue, ISpecContext context, IExecutionContext execution, TimeSpan timeout)
-        {
             try
             {
-                var plan = request.Plan;
-                plan.Attempts++;
+                using (timings.Subject("Context", "Creation"))
+                {
+                    execution = _system.CreateContext();
+                }
 
-                _mode.BeforeRunning(request, context);
+                var context = new SpecContext(request.Specification, timings, request.Observer, _stopConditions, execution.Services);
+                context.Reporting.StartDebugListening();
 
-                var results = CreateResults(request, context, timeout);
-                _mode.AfterRunning(request, results, queue);
+                try
+                {
+                    results = CreateResults(request, context, _stopConditions.TimeoutInSeconds.Seconds());
+                }
+                finally
+                {
+                    execution.Dispose();
+                    ((ISpecContext)context).Dispose();
+                }
 
-                return results;
+            }
+            catch (Exception ex)
+            {
+                var result = new StepResult(request.Specification.Id, ex) {position = Stage.context};
+                var perf = timings.Finish();
+
+                results = new SpecResults
+                {
+                    Attempts = request.Plan.Attempts,
+                    Duration = timings.Duration,
+                    Performance = perf.ToArray(),
+                    Counts = new Counts(0, 0, 1, 0),
+                    Results = new IResultMessage[]
+                    {
+                        result
+                    }
+                };
+
+                Status = SpecRunnerStatus.Invalid;
+                
             }
             finally
             {
-                execution.Dispose();
-                context.Dispose();
+                _mode.AfterRunning(request, results, queue);
             }
+
+            return results;
         }
 
         public SpecResults CreateResults(SpecExecutionRequest request, ISpecContext context, TimeSpan timeout)
