@@ -70,5 +70,37 @@ namespace Storyteller.Core.Testing.Engine
             result.error.ShouldContain("Timed out in");
 
         }
+
+        [Test]
+        public void spec_will_fail_if_the_system_blows_up_while_trying_to_create_an_execution_context()
+        {
+            // See GrammarSystem.CreateContext() to understand why this 
+            // input will cause the system to become invalid
+            var response = execute(x =>
+            {
+                x.ProfileFlag = "blowup";
+                x.TimeoutFlag = 5;
+            });
+
+            // There are 23 specs in the sample project
+            response.records.Length.ShouldEqual(23);
+
+            var first = response.records[0];
+            
+
+            // first one does run, just fails
+            first.results.WasAborted.ShouldBeFalse();
+
+            var contextCreationError = first.results.Results.OfType<StepResult>().Single();
+
+            first.results.Counts.ShouldEqual(0, 0, 1, 0);
+            contextCreationError.position.ShouldEqual("context");
+            contextCreationError.error.ShouldContain("I blew up trying to create an execution context");
+
+            for (var i = 1; i < response.records.Length; i++)
+            {
+                response.records[i].results.WasAborted.ShouldBeTrue();
+            }
+        }
     }
 }

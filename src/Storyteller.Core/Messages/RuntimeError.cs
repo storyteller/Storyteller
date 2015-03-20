@@ -6,7 +6,12 @@ namespace Storyteller.Core.Messages
     {
         public string error { get; set; }
 
-        public RuntimeError(string error) : base("runtime-error")
+        public RuntimeError()
+            : base("runtime-error")
+        {
+        }
+
+        public RuntimeError(string error) : this()
         {
             this.error = error;
         }
