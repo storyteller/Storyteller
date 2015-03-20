@@ -96,37 +96,19 @@ namespace Storyteller.Core.Testing
             var results = theContext.FinalizeResults(3);
             results.Attempts.ShouldEqual(3);
         }
-    }
-
-    [TestFixture]
-    public class when_registering_an_exception_for_the_execution_context_failure
-    {
-        private SpecContext theContext;
-        private NotFiniteNumberException theException;
-
-        [SetUp]
-        public void SetUp()
-        {
-            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
-            theException = new NotFiniteNumberException("Bad!");
-
-            theContext.LogContextFailure(theException);
-        }
 
         [Test]
-        public void marked_as_having_encountered_a_catastrophic_exception()
+        public void stores_whether_there_was_a_critical_exception()
         {
-            theContext.EncounteredCatastrophicException.ShouldBeTrue();
-        }
+            theContext.HadCriticalException.ShouldBeFalse();
+            theContext.FinalizeResults(3)
+                .HadCriticalException.ShouldBeFalse();
 
-        [Test]
-        public void logs_a_single_step_result()
-        {
-            var result = theContext.Results.OfType<StepResult>().Single();
+            theContext.LogException("1", new StorytellerCriticalException("Boo!"));
+            theContext.HadCriticalException.ShouldBeTrue();
 
-            result.id.ShouldEqual(theContext.Specification.Id);
-            result.Status.ShouldEqual(ResultStatus.error);
-            result.error.ShouldEqual(theException.ToString());
+            theContext.FinalizeResults(3)
+                .HadCriticalException.ShouldBeTrue();
         }
     }
 

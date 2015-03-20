@@ -40,7 +40,7 @@ namespace Storyteller.Core.Engine
             if (Status == SpecRunnerStatus.Invalid)
             {
                 var abortedResults = SpecResults.ForAbortedRun();
-                _mode.AfterRunning(request, abortedResults, queue);
+                _mode.AfterRunning(request, abortedResults, queue, Status);
                 return abortedResults;
             }
 
@@ -66,7 +66,7 @@ namespace Storyteller.Core.Engine
             }
             finally
             {
-                _mode.AfterRunning(request, results, queue);
+                _mode.AfterRunning(request, results, queue, Status);
             }
 
             return results;
@@ -84,6 +84,12 @@ namespace Storyteller.Core.Engine
                 var executor = _mode.BuildExecutor(plan, context);
 
                 runWithTimeout(plan, context, executor, _stopConditions.TimeoutInSeconds.Seconds());
+
+                // Only tested through integration testing
+                if (context.HadCatastrophicException)
+                {
+                    Status = SpecRunnerStatus.Invalid;
+                }
 
                 return context.FinalizeResults(request.Plan.Attempts);
             }

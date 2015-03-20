@@ -49,7 +49,7 @@ namespace Storyteller.Core.Testing.Engine
         [Test]
         public void should_call_through_to_the_after_running_method_on_the_active_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>()));
+            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>(), SpecRunnerStatus.Invalid));
         }
     }
 
@@ -131,7 +131,7 @@ namespace Storyteller.Core.Testing.Engine
         [Test]
         public void should_call_through_to_the_after_running_method_on_the_active_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, theQueue));
+            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, theQueue, SpecRunnerStatus.Invalid));
         }
     }
 }

@@ -10,6 +10,9 @@ namespace Storyteller.Core
         [JsonProperty("counts")]
         public Counts Counts { get; set; }
 
+        [JsonIgnore]
+        public bool HadCriticalException;
+
         [JsonProperty("results")]
         public IResultMessage[] Results = new IResultMessage[0];
 

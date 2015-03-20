@@ -52,7 +52,8 @@ namespace Storyteller.Core
                 Performance = performance,
                 Duration = _timings.Duration,
                 Reporting = Reporting.GenerateReports(),
-                Attempts = attempts
+                Attempts = attempts,
+                HadCriticalException = HadCriticalException
             };
 
             
@@ -95,9 +96,14 @@ namespace Storyteller.Core
             return StopConditions.CanContinue(Counts);
         }
 
-        public bool EncounteredCatastrophicException
+        public bool HadCatastrophicException
         {
             get { return _hasCatastrophicException; }
+        }
+
+        public bool HadCriticalException
+        {
+            get { return _hasCriticalException; }
         }
 
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
@@ -172,12 +178,6 @@ namespace Storyteller.Core
             LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});
         }
 
-        public void LogContextFailure(Exception ex)
-        {
-            _hasCatastrophicException = true;
-
-            LogException(Specification.Id, ex, Stage.context);
-        }
 
         public static SpecContext Basic()
         {

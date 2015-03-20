@@ -17,11 +17,9 @@ namespace Storyteller.Core.Engine.Batching
         {
         }
 
-        public void AfterRunning(SpecExecutionRequest request, SpecResults results, IConsumingQueue queue)
+        public void AfterRunning(SpecExecutionRequest request, SpecResults results, IConsumingQueue queue, SpecRunnerStatus status)
         {
-            var plan = request.Plan;
-
-            if (ShouldRetry(plan, request.Specification))
+            if (ShouldRetry(results, request.Specification, status))
             {
                 _resultObserver.SpecRequeued(request);
                 queue.Enqueue(request);
@@ -33,16 +31,21 @@ namespace Storyteller.Core.Engine.Batching
         }
 
 
+
         public IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context)
         {
             return new SynchronousExecutor(context);
         }
 
-        public bool ShouldRetry(SpecificationPlan plan, Specification specification)
+        public bool ShouldRetry(SpecResults results, Specification specification, SpecRunnerStatus status)
         {
+            if (status == SpecRunnerStatus.Invalid) return false;
+
+            if (results.HadCriticalException) return false;
+
             if (specification.Lifecycle == Lifecycle.Acceptance) return false;
 
-            return specification.MaxRetries > (plan.Attempts - 1);
+            return specification.MaxRetries > (results.Attempts - 1);
         }
     }
 }
