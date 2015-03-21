@@ -48,12 +48,12 @@ namespace StoryTeller.Testing
 
         public static void ShouldBeNull(this object anObject)
         {
-            Assert.IsNull(anObject);
+            anObject.ShouldBe(null);
         }
 
-        public static T ShouldNotBeNull<T>(this T anObject)
+        public static T ShouldNotBeNull<T>(this T anObject) where T : class
         {
-            Assert.IsNotNull(anObject);
+            anObject.ShouldNotBe(null);
             return anObject;
         }
 
@@ -68,20 +68,6 @@ namespace StoryTeller.Testing
         {
             Assert.AreNotSame(expected, actual);
             return expected;
-        }
-
-        public static T ShouldBeOfType<T>(this object actual)
-        {
-            actual.ShouldNotBeNull();
-            actual.ShouldBeOfType(typeof(T));
-            return (T)actual;
-        }
-
-
-        public static object ShouldBeOfType(this object actual, Type expected)
-        {
-            Assert.IsInstanceOf(expected, actual);
-            return actual;
         }
 
         public static void ShouldHaveTheSameElementsAs(this IList actual, IList expected)
@@ -117,26 +103,6 @@ namespace StoryTeller.Testing
             IList expectedList = (expected is IList) ? (IList)expected : expected.ToList();
 
             ShouldHaveTheSameElementsAs(actualList, expectedList);
-        }
-
-
-        public static IComparable ShouldBeGreaterThan(this IComparable arg1, IComparable arg2)
-        {
-            Assert.Greater(arg1, arg2);
-            return arg2;
-        }
-
-
-        public static void ShouldBeEmpty(this ICollection collection)
-        {
-            Assert.IsEmpty(collection);
-        }
-
-
-        public static IEnumerable<T> ShouldHaveCount<T>(this IEnumerable<T> actual, int expected)
-        {
-            actual.Count().ShouldBe(expected);
-            return actual;
         }
 
 

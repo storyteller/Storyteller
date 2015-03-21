@@ -40,7 +40,7 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
             var paragraph = ModelFor<Paragraph>("AddressVerification", "VerifyAddress");
 
             paragraph.title.ShouldBe("The current address");
-            paragraph.children.ShouldHaveCount(3);
+            paragraph.children.Count().ShouldBe(3);
             paragraph.children[0].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldBe("City");
             paragraph.children[1].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldBe("PostalCode");
             paragraph.children[2].ShouldBeOfType<Sentence>().cells.Single().Key.ShouldBe("StateOrProvince");

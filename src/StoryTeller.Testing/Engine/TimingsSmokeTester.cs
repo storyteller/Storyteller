@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 
