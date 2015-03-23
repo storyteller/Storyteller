@@ -23,3 +23,16 @@ gulp.task('assemblyInfo', function() {
         }))
         .pipe(gulp.dest('src'));
 });
+
+var msbuild = require('gulp-msbuild');
+
+gulp.task('build', [], function() {
+    return gulp
+        .src('**/*.sln')
+        .pipe(msbuild({
+            toolsVersion: 12.0,
+            targets: ['Clean', 'Build'],
+            errorOnFail: true,
+            stdout: true
+        }));
+});
