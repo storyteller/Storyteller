@@ -1,0 +1,29 @@
+NUGET
+  remote: https://www.myget.org/F/fubumvc-edge
+  specs:
+    Bottles (3.0.0.605)
+      FubuCore (>= 1.0.0.210)
+    FubuCore (2.0.0.291)
+    FubuMVC.Core (2.0.0.1912)
+      Bottles (>= 3.0.0.595)
+      FubuCore (>= 1.2.0.259)
+      HtmlTags (>= 1.1.0.114)
+    FubuMVC.Katana (2.0.0.1912)
+      FubuMVC.Core
+    FubuMVC.StructureMap (2.0.0.1912)
+      FubuMVC.Core
+      structuremap (>= 3.0.3.116)
+  remote: http://nuget.org/api/v2
+  specs:
+    Fleck (0.12.0.40)
+    HtmlTags (2.1.0.183)
+    Newtonsoft.Json (6.0.8)
+    NUnit (2.6.3)
+    NUnit.Runners (2.6.3)
+    Owin (1.0)
+    RhinoMocks (3.6.1)
+    Shouldly (2.4.0)
+    structuremap (3.1.4.143)
+    structuremap.automocking (3.1.0.133)
+      RhinoMocks (>= 3.6.1)
+      structuremap (>= 3.0.0)

@@ -1,0 +1,10 @@
+FubuCore
+FubuMVC.Core
+FubuMVC.StructureMap
+FubuMVC.Katana
+structuremap.automocking
+Shouldly
+Newtonsoft.Json
+HtmlTags
+Fleck
+NUnit
