@@ -60,13 +60,13 @@ namespace StoryTeller.Testing
 
         public static object ShouldBeTheSameAs(this object actual, object expected)
         {
-            Assert.AreSame(expected, actual);
+            ReferenceEquals(actual, expected).ShouldBe(true);
             return expected;
         }
 
         public static object ShouldNotBeTheSameAs(this object actual, object expected)
         {
-            Assert.AreNotSame(expected, actual);
+            ReferenceEquals(actual, expected).ShouldBe(false);
             return expected;
         }
 
