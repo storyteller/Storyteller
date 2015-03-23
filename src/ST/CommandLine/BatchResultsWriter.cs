@@ -45,7 +45,7 @@ namespace ST.CommandLine
             var data = "\nvar BatchData = " + JsonSerialization.ToCleanJson(results) + "\n\n";
             document.Head.Add("script").Attr("language", "javascript").Text(data).Encoded(false);
 
-           var js = readFile("batch-bundle.js");
+           var js = readFile("ST.batch-bundle.js");
 
             var foot = new HtmlTag("foot");
             document.Body.Next = foot;
