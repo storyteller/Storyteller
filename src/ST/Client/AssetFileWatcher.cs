@@ -69,8 +69,7 @@ namespace ST.Client
 
         public void Start()
         {
-            watch("assets/client/public/stylesheets/storyteller.css");
-            watch("assets/client/public/javascript/bundle.js");
+            watch("bundle.js");
         }
     }
 

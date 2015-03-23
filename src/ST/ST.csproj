@@ -82,12 +82,6 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="assets\client\public\javascript\batch-bundle.js" />
-    <EmbeddedResource Include="assets\client\public\javascript\bundle.js" />
-    <EmbeddedResource Include="assets\client\public\stylesheets\bootstrap.min.css" />
-    <EmbeddedResource Include="assets\client\public\stylesheets\storyteller.css" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
       <Project>{96c1f8d5-fb46-4f3e-8cb7-a53a919bb424}</Project>
       <Name>StoryTeller</Name>
@@ -101,6 +95,16 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\client\public\stylesheets\bootstrap.min.css">
+      <Link>bootstrap.min.css</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\client\public\stylesheets\storyteller.css">
+      <Link>storyteller.css</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="batch-bundle.js" />
+    <Content Include="bundle.js" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="Bottles">
       <HintPath>..\..\packages\Bottles\lib\Bottles.dll</HintPath>
@@ -244,6 +248,17 @@
       <ItemGroup>
         <Reference Include="Newtonsoft.Json">
           <HintPath>..\..\packages\Newtonsoft.Json\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Owin">
+          <HintPath>..\..\packages\Owin\lib\net40\Owin.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

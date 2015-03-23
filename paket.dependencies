@@ -19,6 +19,7 @@ source https://www.myget.org/F/fubumvc-edge
 source https://www.myget.org/F/fubumvc-edge
 source https://www.myget.org/F/fubumvc-edge
 source https://www.myget.org/F/fubumvc-edge
+source https://www.myget.org/F/fubumvc-edge
 source http://nuget.org/api/v2
 nuget HtmlTags 2.1.0.183
 nuget Fleck 0.12.0.40

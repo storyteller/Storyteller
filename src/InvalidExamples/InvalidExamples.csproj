@@ -44,9 +44,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ripple.dependencies.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
       <Project>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</Project>
       <Name>StoryTeller</Name>

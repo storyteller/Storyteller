@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using FubuCore;
@@ -18,15 +19,15 @@ namespace ST.CommandLine
                 Title = "Storyteller Batch Results for {0}: {1}".ToFormat(results.system, results.suite)
             };
 
-            writeCSS(document);
+            WriteCSS(document);
             writeJavascript(results, document);
 
             return document;
         }
 
-        private static void writeCSS(HtmlDocument document)
+        public static void WriteCSS(HtmlDocument document)
         {
-            var css = readFile("ST.assets.client.public.stylesheets.bootstrap.min.css") + "\n\n" + readFile("ST.assets.client.public.stylesheets.storyteller.css");
+            var css = readFile("ST.bootstrap.min.css") + "\n\n" + readFile("ST.storyteller.css");
 
             document.Head.Add("style").Text(css).Encoded(false);
         }
@@ -44,7 +45,7 @@ namespace ST.CommandLine
             var data = "\nvar BatchData = " + JsonSerialization.ToCleanJson(results) + "\n\n";
             document.Head.Add("script").Attr("language", "javascript").Text(data).Encoded(false);
 
-           var js = readFile("ST.assets.client.public.javascript.batch-bundle.js");
+           var js = readFile("batch-bundle.js");
 
             var foot = new HtmlTag("foot");
             document.Body.Next = foot;
