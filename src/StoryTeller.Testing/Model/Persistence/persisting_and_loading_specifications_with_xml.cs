@@ -65,15 +65,15 @@ namespace StoryTeller.Testing.Model.Persistence
             original.Tags.Add("a");
             original.Tags.Add("b");
             original.Tags.Add("c");
-            persisted.Tags.ShouldHaveTheSameElementsAs(original.Tags);
+            persisted.Tags.ShouldBe(original.Tags);
         }
 
         [Test]
         public void no_tags_no_worries()
         {
-            ShouldBeTestExtensions.ShouldBe(original.Tags.Any(), false);
+            original.Tags.Any().ShouldBe(false);
 
-            ShouldBeTestExtensions.ShouldBe(persisted.Tags.Any(), false);
+            persisted.Tags.Any().ShouldBe(false);
         }
 
         [Test]
