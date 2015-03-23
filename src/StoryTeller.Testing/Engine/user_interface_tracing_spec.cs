@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.Engine
 
 
         }
-
+        /*
         [Test, Explicit("Can only work in Debug builds")]
         public void should_have_captured_debugging_information()
         {
@@ -59,6 +59,7 @@ namespace StoryTeller.Testing.Engine
 
             theResults.Results.Reporting.Any(x => x.html.Contains(expectedText)).ShouldBe(true);
         }
+         * */
 
         [Test]
         public void should_have_broadcast_a_spec_queued_message()

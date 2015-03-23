@@ -12,23 +12,15 @@
     <tags>
     </tags>
     <dependencies>
-      <dependency id="Bottles" />
-      <dependency id="FubuCore" version="0.9.9.159" />
-      <dependency id="HtmlTags" version="1.1.0.80" />
+      <dependency id="FubuCore" version="2.0" />
+      <dependency id="HtmlTags" version="3.0" />
     </dependencies>
   </metadata>
   <files>
-    <file src="ripple.xml" target="tools" />
-    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="lib\net40" />
-    <file src="..\..\src\StoryTellerUI\bin\release\StoryTeller.UserInterface.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\FubuCore.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\HtmlTags.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\StructureMap.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\ShadeTree.Binding.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\Newtonsoft.Json.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\ShadeTree.*" target="tools" />
-    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="tools" />
-    <file src="..\..\src\StoryTellerUI\bin\release\StoryTellerUI.*" target="tools" />
-    <file src="..\..\src\ST\bin\release\ST.*" target="tools" />
+    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="lib\net45" />
+    <file src="..\..\src\ST\bin\release\*.exe" target="tools" />
+    <file src="..\..\src\ST\bin\release\*.dll" target="tools" />
+    <file src="..\..\src\ST\bin\release\*.js" target="tools" />
+    <file src="..\..\src\ST\bin\release\*.css" target="tools" />
   </files>
 </package>

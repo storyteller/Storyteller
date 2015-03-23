@@ -5,21 +5,7 @@ nuget Bottles ~> 3.0
 nuget FubuMVC.Core ~> 2.0.0.1912
 nuget FubuMVC.Katana ~> 2.0.0.1912
 nuget FubuMVC.StructureMap ~> 2.0.0.1912
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
-source https://www.myget.org/F/fubumvc-edge
+
 source http://nuget.org/api/v2
 nuget HtmlTags 2.1.0.183
 nuget Fleck 0.12.0.40

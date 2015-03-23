@@ -1,4 +1,0 @@
-<directives>
-  <runner file="StoryTellerUI.exe" alias="storyteller" />
-  <runner file="ST.exe" alias="run_st" />
-</directives>

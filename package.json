@@ -6,7 +6,7 @@
     "react": "^0.12.2"
   },
   "scripts": {
-    "build": "webpack",
+    "build-client": "webpack",
     "watch": "webpack -w",
     "harness": "node ./server",
     "smoke-test": "karma start smoke-test.conf.js --single-run",
@@ -14,7 +14,10 @@
     "tdd-mocha": "mocha -w -G",
     "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
     "test-karma": "karma start --single-run",
-    "test-mocha": "mocha"
+    "test-mocha": "mocha",
+    "build-server": "gulp",
+    "build": "npm install && npm run build-client && npm run build-server",
+    "ci": "npm run test && gulp ci"
   },
   "devDependencies": {
     "arraybuffer-slice": "^0.1.2",
