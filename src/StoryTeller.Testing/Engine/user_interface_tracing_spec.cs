@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using FubuCore;
 using Newtonsoft.Json.Linq;
@@ -49,12 +50,14 @@ namespace StoryTeller.Testing.Engine
 
         }
 
-        [Test]
+        [Test, Explicit("Can only work in Debug builds")]
         public void should_have_captured_debugging_information()
         {
             var expectedText = "EmbeddedFixture.Setup sent this debug message";
 
-            ShouldBeTestExtensions.ShouldBe(theResults.Results.Reporting.Any(x => x.html.Contains(expectedText)), true);
+            theResults.Results.Reporting.Each(x => Debug.WriteLine("html: " + x.html));
+
+            theResults.Results.Reporting.Any(x => x.html.Contains(expectedText)).ShouldBe(true);
         }
 
         [Test]

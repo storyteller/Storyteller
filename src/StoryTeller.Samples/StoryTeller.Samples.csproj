@@ -124,9 +124,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ripple.dependencies.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
       <Project>{96c1f8d5-fb46-4f3e-8cb7-a53a919bb424}</Project>
       <Name>StoryTeller</Name>

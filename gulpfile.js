@@ -26,13 +26,27 @@ gulp.task('assemblyInfo', function() {
 
 var msbuild = require('gulp-msbuild');
 
-gulp.task('build', [], function() {
+// TODO -- need to make it smart enough to use Debug later
+// and override at CI time
+gulp.task('build', ['assemblyInfo'], function() {
     return gulp
         .src('**/*.sln')
         .pipe(msbuild({
             toolsVersion: 12.0,
             targets: ['Clean', 'Build'],
             errorOnFail: true,
-            stdout: true
+            stdout: true,
+            configuration: 'Debug'
+        }));
+});
+
+var nunit = require('gulp-nunit-runner');
+
+gulp.task('test', ['build'], function () {
+    return gulp
+        .src(['**/bin/**/StoryTeller.Testing.dll'], { read: false })
+        .pipe(nunit({
+        	executable: 'packages/NUnit.Runners/tools/nunit-console.exe'
+            //teamcity: true
         }));
 });

@@ -29,6 +29,7 @@
     "gulp": "^3.8.11",
     "gulp-dotnet-assembly-info": "^0.1.10",
     "gulp-msbuild": "^0.2.8",
+    "gulp-nunit-runner": "^0.4.1",
     "jquery": "^2.1.1",
     "jsx-loader": "^0.12.2",
     "karma": "^0.12.31",
