@@ -24,11 +24,17 @@ gulp.task('assemblyInfo', function() {
         .pipe(gulp.dest('src'));
 });
 
+var run = require('gulp-run');
+
+gulp.task('restore', function(){
+    run('paket restore').exec();
+});
+
 var msbuild = require('gulp-msbuild');
 
 // TODO -- need to make it smart enough to use Debug later
 // and override at CI time
-gulp.task('build', ['assemblyInfo'], function() {
+gulp.task('build', ['assemblyInfo', 'restore'], function() {
     return gulp
         .src('**/*.sln')
         .pipe(msbuild({
