@@ -5,7 +5,7 @@ module.exports = {
     "batch-bundle": ['./client/batch.js']
   },
   output: {
-    path: __dirname + '/client/public/javascript',
+    path: __dirname + '/src/ST',
     filename: "[name].js",
     publicPath: '/client/public/javascript/',
     pathinfo: true

@@ -6,7 +6,7 @@ deploy/*
 *.cache
 *.zip
 *.lnk
-source/CommonAssemblyInfo.cs
+
 _ReSharper.*
 *.csproj.user
 *.resharper.user
@@ -21,9 +21,8 @@ samples/Grammars-results
 StoryTeller.1*
 *ReSharper*
 demo/*
-source/StoryTeller/CommonAssemblyInfo.cs
+
 src/packages
-src/CommonAssemblyInfo.cs
 artifacts
 src/StoryTeller.sln.DotSettings.user
 src/StoryTeller/StoryTeller.csproj.DotSettings.user

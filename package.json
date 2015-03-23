@@ -26,6 +26,8 @@
     "chai": "^1.9.1",
     "express": "^4.9.4",
     "growl": "^1.8.1",
+    "gulp": "^3.8.11",
+    "gulp-dotnet-assembly-info": "^0.1.10",
     "jquery": "^2.1.1",
     "jsx-loader": "^0.12.2",
     "karma": "^0.12.31",
@@ -46,7 +48,9 @@
     "react-bootstrap": "^0.13.3",
     "react-hot-loader": "^0.4.5",
     "react-router": "^0.11.6",
+    "vargs": "^0.1.0",
     "webpack": "^1.7.2",
-    "webpack-dev-server": "^1.7.0"
+    "webpack-dev-server": "^1.7.0",
+    "yargs": "^3.6.0"
   }
 }
