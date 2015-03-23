@@ -43,3 +43,10 @@ src/stresults.htm
 src/results.htm
 results/Storyteller.Core.Testing-TestResults.xml
 packages
+client/public/javascript
+node_modules
+npm-debug.log
+
+test/bundle.js
+
+client/smoke-tests/bundle.js

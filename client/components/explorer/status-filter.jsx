@@ -1,0 +1,64 @@
+/** @jsx React.DOM */
+
+var React = require("react");
+var Postal = require('postal');
+var icons = require('./../icons');
+var Button = require('react-bootstrap/Button');
+var ButtonGroup = require('react-bootstrap/ButtonGroup');
+
+var StatusButton = React.createClass({
+	render: function(){
+		var icon = null;
+		if (this.props.icon){
+			icon = icons[this.props.icon]({});
+		}
+
+		var badge = ( <span className="badge pull-right">{this.props.count}</span> );
+		var content = ( <span className="pull-left">{icon} {this.props.text}</span> );
+
+		if (this.props.active){
+			return (
+				<Button active>{content} {badge}</Button>
+			);
+		}
+
+		var handler = () => {
+			Postal.publish({
+				channel: 'explorer',
+				topic: 'spec-status-filter-changed',
+				data: {status: this.props.status}
+			});
+		}
+
+
+
+
+		
+
+		return (
+			<Button onClick={handler} active={this.props.active}>{content} {badge}</Button>
+		);
+	}
+});
+
+var StatusFilter = React.createClass({
+	render: function(){
+
+		var actives = {any: false, success: false, failed: false, none: false};
+		actives[this.props.status] = true;
+
+		return (
+			<ButtonGroup vertical className="status-filter-buttons">
+				<StatusButton count={this.props.summary.total} active={actives.any} text="All" status="any" />
+				<StatusButton count={this.props.summary.success} active={actives.success} text="Success" status="success" icon="success"/>
+				<StatusButton count={this.props.summary.failed} active={actives.failed} text="Failed" status="failed" icon="failed"/>
+				<StatusButton count={this.props.summary.none} active={actives.none} text="No Results" status="none" icon="none"/>
+
+			</ButtonGroup>
+
+		);
+
+	}
+});
+
+module.exports = StatusFilter;

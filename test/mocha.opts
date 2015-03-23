@@ -1,0 +1,6 @@
+client/lib-tests/**/test-*.js
+--compilers js:babel/register
+--recursive
+--reporter spec
+--bail
+--watch-extensions jsx

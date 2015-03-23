@@ -1,0 +1,219 @@
+// This is the data store for all information regarding the collection
+// of specifications in a Storyteller.js project
+var Postal = require('postal');
+var Suite = require('./suite');
+var _ = require('lodash');
+var Counts = require('./counts');
+
+var specs = {};
+var top = new Suite({});
+var results = {}; // stores the final result of spec-execution-completion
+var lifecycle = 'any';
+var status = 'any';
+
+
+var ArrayList = require('./../array-list');
+var queue = new ArrayList();
+
+var SpecificationStore = require('./../specification-store');
+
+
+function publishHierarchyChanged(){
+	Postal.publish({
+		channel: 'explorer',
+		topic: 'hierarchy-updated',
+		data: {}
+	});
+}
+
+function publishQueueChanged(){
+	Postal.publish({
+		channel: 'explorer',
+		topic: 'queue-updated',
+		data: {}
+	});
+}
+
+var handlers = {};
+handlers['hierarchy-loaded'] = function(data){
+	top = new Suite(data.hierarchy);
+	specs = {};
+
+	top.allSpecs().forEach(x => specs[x.id] = x);
+
+
+	publishHierarchyChanged();
+}
+
+handlers['spec-queued'] = function(data){
+	var spec = specs[data.id];
+	spec.state = 'queued';
+	queue.add(spec);
+
+	publishHierarchyChanged();
+	publishQueueChanged();
+}
+
+
+handlers['spec-canceled'] = function(data){
+	var spec = specs[data.id];
+	spec.state = 'none';
+	queue.remove(spec);
+
+	publishHierarchyChanged();
+	publishQueueChanged();
+}
+
+handlers['spec-running'] = function(data){
+	var spec = specs[data.id];
+	spec.state = 'running';
+	queue.remove(spec);
+
+	publishHierarchyChanged();
+	publishQueueChanged();
+}
+
+handlers['spec-progress'] = function(data){
+	var spec = specs[data.id];
+	var counts = new Counts(data.counts);
+
+	spec.state = 'running';
+	spec.recordRunningResults(counts);
+
+	var outgoing = {
+		spec: spec,
+		counts: counts,
+		step: data.step,
+		total: data.total
+	};
+
+	Postal.publish({
+		channel: 'explorer',
+		topic: 'spec-execution-state',
+		data: outgoing
+	})
+
+	publishHierarchyChanged();
+}
+
+handlers['spec-execution-completed'] = function(data){
+	var spec = specs[data.id];
+
+	data.results.counts = new Counts(data.results.counts);
+
+	spec.recordResults(data.results);
+
+	SpecificationStore.readResults(data.id, data.results);
+
+	publishHierarchyChanged();
+	publishQueueChanged();
+}
+
+
+
+function resetSubscriptions(){
+	Postal.subscribe({
+		channel: 'engine',
+		topic: '*',
+		callback: function(data, envelope){
+			var topic = envelope.topic;
+			if (handlers.hasOwnProperty(topic)){
+				handlers[topic](data);
+			}
+		}
+	});
+
+	Postal.subscribe({
+		channel: 'explorer',
+		topic: 'spec-status-filter-changed',
+		callback: function(data){
+			status = data.status;
+			publishHierarchyChanged();
+		}
+	});
+
+	Postal.subscribe({
+		channel: 'explorer',
+		topic: 'lifecycle-filter-changed',
+		callback: function(data){
+			lifecycle = data.lifecycle;
+			publishHierarchyChanged();
+		}
+	});
+}
+
+var alwaysTrue = function(x){
+	return true;
+}
+
+function toLifecycleFilter(){
+	if (lifecycle == 'any') return alwaysTrue;
+
+	if (lifecycle == 'Regression'){
+		return spec => spec.lifecycle == 'Regression';
+	}
+
+	if (lifecycle == 'Acceptance'){
+		return spec => spec.lifecycle == 'Acceptance';
+	}
+}
+
+function toStatusFilter(){
+	if (status == 'any') return alwaysTrue;
+
+	return spec => spec.status() == status;
+}
+
+module.exports = {
+	lifecycleFilter: function(){
+		return lifecycle;
+	},
+
+	statusFilter: function(){
+		return status;
+	},
+
+	filteredHierarchy: function(){
+		if (status == 'any' && lifecycle == 'any') return top;
+	
+		var lifecycleFilter = toLifecycleFilter();
+		var statusFilter = toStatusFilter();
+
+		var filter = spec => lifecycleFilter(spec) && statusFilter(spec);
+
+		return top.filter(filter);
+	},
+
+	allSpecs: function(){
+		if (top == null) return [];
+
+		return top.allSpecs();
+	},
+
+	summary: function(){
+		return top.summary();
+	},
+
+	queuedSpecs: function(){
+		return queue.toArray();
+	},
+
+	reset: function(){
+		specs = {};
+		top = new Suite({});
+		results = {};
+		queue = new ArrayList();
+		lifecycle = 'any';
+		status = 'any';
+
+		resetSubscriptions();
+	},
+
+	findSpec: function(id){
+		if (specs.hasOwnProperty(id)) return specs[id];
+
+		return null;
+	},
+
+
+}
