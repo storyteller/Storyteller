@@ -16,7 +16,7 @@
     "test-karma": "karma start --single-run",
     "test-mocha": "mocha",
     "build-server": "gulp",
-    "build": "npm install && npm run build-client && npm run build-server",
+    "build": "npm install && npm run test && npm run build-server",
     "ci": "npm run test && gulp ci"
   },
   "devDependencies": {
