@@ -1,5 +1,10 @@
 Storyteller is a tool for crafting [executable specifications](http://www.agilemodeling.com/essays/executableSpecifications.htm). 
 
+Quickstart
+==========
+
+After doing a new git clone of the code, run `npm run build` at the command line from the root directory.
+
 Getting started with the code
 =============================
 
@@ -38,16 +43,16 @@ The client side code is in the /client folder. The javascript code is organized 
 * /lib-tests - Mocha tests against the lib code
 
 
-
 Working on the .Net Code
 ===============================
-The source code is in the /src folder. For the moment, we're using Visual Studio.Net and the solution file is at src/Storyteller.sln. As DNX matures we will probably move to eliminate the .sln and .csproj files in the code repository. You will need to build the Javascript code (`npm run build-client` from the command line) before opening the C# code to build a couple files that are included within the compiled .Net assemblies as embedded resources.
+The source code is in the /src folder. For the moment, we're using Visual Studio.Net and the solution file is at src/Storyteller.sln. As DNX matures we will probably move to eliminate the .sln and .csproj files in the code repository. You will need to run the command line build at least once before opening the C# code in Visual Studio.
 
 From the command line, we're using [gulp](http://gulpjs.com) to build and test the .Net code. The relevant commands are:
 
-* `gulp` - restore nuget packages, build, and test
-* `gulp build`
-* `gulp test`
+* `npm run build-server`- restore nuget packages, build, and test
+* `paket install` - restores nuget packages
+* `gulp` - compiles and runs the .Net tests
+
 
 The .Net code uses [Paket](http://fsprojects.github.io/Paket/) for Nuget dependency management and [Fixie](http://fixie.github.io) for unit testing. At this time we're emulating NUnit behavior, but this is expected to change to Fixie idioms at a later time. 
 

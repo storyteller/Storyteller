@@ -2,8 +2,6 @@ var gulp = require('gulp');
 
 gulp.task('default', ['test']);
 
-// 
-gulp.task('ci', ['test']);
 
 var args = require('yargs').argv,
     assemblyInfo = require('gulp-dotnet-assembly-info');
@@ -25,15 +23,13 @@ gulp.task('assemblyInfo', function() {
         .pipe(gulp.dest('src'));
 });
 
-var run = require('gulp-run');
+var child_process = require('child_process');
 
-gulp.task('restore', function(){
-    run('paket restore').exec();
-});
+
 
 var msbuild = require('gulp-msbuild');
 
-gulp.task('build', ['assemblyInfo', 'restore'], function() {
+gulp.task('build', ['assemblyInfo'], function() {
     return gulp
         .src('**/*.sln')
         .pipe(msbuild({
@@ -44,9 +40,6 @@ gulp.task('build', ['assemblyInfo', 'restore'], function() {
             configuration: config
         }));
 });
-
-var nunit = require('gulp-nunit-runner');
-
 
 gulp.task('test', ['build'], function(){
     var path = require('path');
@@ -66,18 +59,10 @@ gulp.task('test', ['build'], function(){
         'Storyteller.Testing.dll'
     );
 
-    var cmd = executable + ' ' + dll + ' --NUnitXml TestResult.xml';
-    run(cmd).exec();
+    var output = child_process.spawnSync(executable, [dll, '--NUnitXml', 'TestResult.xml']);
+
+    console.log(output.stdout.toString());
+
+    if (output.status != 0) throw new Error('Fixie tests failed!');
 });
 
-gulp.task('pack', ['build'], function(){
-	var cmd = 'ripple local-nuget -v ' + buildVersion;
-
-	run(cmd).exec();
-});
-
-gulp.task('publish', ['test'], function(){
-	var cmd = 'ripple publish -v ' + buildVersion + ' ' + args.apikey + ' --server https://www.myget.org/F/fubumvc-edge';
-
-	run(cmd).exec();
-});

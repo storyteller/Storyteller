@@ -15,9 +15,8 @@
     "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
     "test-karma": "karma start --single-run",
     "test-mocha": "mocha",
-    "build-server": "gulp",
-    "build": "npm install && npm run test && npm run build-server",
-    "ci": "npm run test && gulp ci"
+    "build-server": "paket install && gulp",
+    "build": "npm install && npm run test && webpack && paket install && gulp"
   },
   "devDependencies": {
     "arraybuffer-slice": "^0.1.2",
