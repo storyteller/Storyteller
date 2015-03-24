@@ -19,8 +19,6 @@ NUGET
     Fleck (0.12.0.40)
     HtmlTags (2.1.0.183)
     Newtonsoft.Json (6.0.8)
-    NUnit (2.6.3)
-    NUnit.Runners (2.6.3)
     Owin (1.0)
     RhinoMocks (3.6.1)
     Shouldly (2.4.0)

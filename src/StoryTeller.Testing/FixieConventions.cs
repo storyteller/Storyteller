@@ -6,6 +6,35 @@ using Fixie;
 using FubuCore.Reflection;
 using NUnit.Framework;
 
+namespace NUnit.Framework
+{
+    public class TestFixtureAttribute : Attribute { }
+    public class TestAttribute : Attribute { }
+
+    public class ExplicitAttribute : Attribute
+    {
+        private readonly string _description;
+
+        public ExplicitAttribute()
+        {
+        }
+
+        public ExplicitAttribute(string description)
+        {
+            _description = description;
+        }
+
+        public string description
+        {
+            get { return _description; }
+        }
+    }
+    public class TestFixtureSetUpAttribute : Attribute { }
+    public class SetUpAttribute : Attribute { }
+    public class TearDownAttribute : Attribute { }
+    public class TestFixtureTearDownAttribute : Attribute { }
+}
+
 namespace StoryTeller.Testing
 {
     public class CustomConvention : Convention
@@ -26,47 +55,10 @@ namespace StoryTeller.Testing
                 .Wrap<FixtureSetUpTearDown>();
 
             CaseExecution
-                .Wrap<SupportExpectedExceptions>()
                 .Wrap<SetUpTearDown>();
         }
     }
 
-    class SupportExpectedExceptions : CaseBehavior
-    {
-        public void Execute(Case @case, Action next)
-        {
-            next();
-
-            var attribute = @case.Method.GetCustomAttributes<ExpectedExceptionAttribute>(false).SingleOrDefault();
-
-            if (attribute == null)
-                return;
-
-            if (@case.Exceptions.Count > 1)
-                return;
-
-            var exception = @case.Exceptions.SingleOrDefault();
-
-            if (exception == null)
-                throw new Exception("Expected exception of type " + attribute.ExpectedException + ".");
-
-            if (exception.GetType() != attribute.ExpectedException)
-            {
-                @case.ClearExceptions();
-
-                throw new Exception("Expected exception of type " + attribute.ExpectedException + " but an exception of type " + exception.GetType() + " was thrown.", exception);
-            }
-
-            if (attribute.ExpectedMessage != null && exception.Message != attribute.ExpectedMessage)
-            {
-                @case.ClearExceptions();
-
-                throw new Exception("Expected exception message '" + attribute.ExpectedMessage + "'" + " but was '" + exception.Message + "'.", exception);
-            }
-
-            @case.ClearExceptions();
-        }
-    }
 
     class SetUpTearDown : CaseBehavior
     {

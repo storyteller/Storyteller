@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Shouldly;
@@ -12,12 +13,12 @@ namespace StoryTeller.Testing
         {
             if (context.Results.Count == 0)
             {
-                Assert.Fail("No results were captured");
+                throw new Exception("No results were captured");
             }
 
             if (context.Results.Count > 1)
             {
-                Assert.Fail("Multiple results were captured: " + context.Results.Select(x => x.ToString()).Join(", "));
+                throw new Exception("Multiple results were captured: " + context.Results.Select(x => x.ToString()).Join(", "));
             }
 
             context.Results.Single().ShouldBe(expectation);

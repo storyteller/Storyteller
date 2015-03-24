@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using Shouldly;
 
 namespace StoryTeller.Testing
 {
+    [Obsolete("Replace with the Shouldly equivalent")]
     public static class Exception<T> where T : Exception
     {
         public static T ShouldBeThrownBy(Action action)
@@ -20,7 +20,7 @@ namespace StoryTeller.Testing
                 exception = e.ShouldBeOfType<T>();
             }
 
-            if (exception == null) Assert.Fail("An exception was expected, but not thrown by the given action.");
+            if (exception == null) throw new Exception("An exception was expected, but not thrown by the given action.");
 
             return exception;
         }

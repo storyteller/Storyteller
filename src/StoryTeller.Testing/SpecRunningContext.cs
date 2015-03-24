@@ -60,7 +60,7 @@ namespace StoryTeller.Testing
 
                     if (messages.Any())
                     {
-                        Assert.Fail("Expectations failed!\n" + messages.Join("\n") + "\n\nThe full results were: \n" + _context.Results.Select(x => x.ToString()).Join("\n"));
+                        throw new Exception("Expectations failed!\n" + messages.Join("\n") + "\n\nThe full results were: \n" + _context.Results.Select(x => x.ToString()).Join("\n"));
                     }
                 }
             }

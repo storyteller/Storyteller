@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Shouldly;
 
 namespace StoryTeller.Testing
 {
@@ -14,7 +14,7 @@ namespace StoryTeller.Testing
                 SyntaxErrors = syntaxErrors
             };
 
-            Assert.AreEqual(expected, counts);
+            counts.ShouldBe(expected);
         }
     }
 }

@@ -5,12 +5,14 @@ nuget Fixie
 nuget HtmlTags 2.1.0.183
 nuget Fleck 0.12.0.40
 nuget Newtonsoft.Json
-nuget NUnit 2.6.3
-nuget NUnit.Runners 2.6.3
 nuget Owin 1.0
 nuget Shouldly 2.4.0
 nuget structuremap ~> 3.1
 nuget structuremap.automocking ~> 3.1
+source https://www.myget.org/F/fubumvc-edge
+source http://nuget.org/api/v2
+source https://www.myget.org/F/fubumvc-edge
+source http://nuget.org/api/v2
 source https://www.myget.org/F/fubumvc-edge
 source http://nuget.org/api/v2
 source https://www.myget.org/F/fubumvc-edge
