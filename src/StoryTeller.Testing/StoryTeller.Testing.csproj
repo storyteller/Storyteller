@@ -90,6 +90,7 @@
     <Compile Include="Engine\TimingsSmokeTester.cs" />
     <Compile Include="Engine\user_interface_tracing_spec.cs" />
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />
+    <Compile Include="FixieConventions.cs" />
     <Compile Include="FixtureTester.cs" />
     <Compile Include="Grammars\CheckPropertyGrammar_specs.cs" />
     <Compile Include="Grammars\Decisions\DecisionTableGrammar_specs.cs" />
@@ -131,7 +132,6 @@
     <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_xml.cs" />
     <Compile Include="Model\Persistence\TextParserTester.cs" />
     <Compile Include="Model\StepTester.cs" />
-    <Compile Include="performance_tuning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="recording_json_for_client_development.cs" />
     <Compile Include="record_data_for_client_testing.cs" />
@@ -228,6 +228,17 @@
       <Paket>True</Paket>
     </Reference>
   </ItemGroup>
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Fixie">
+          <HintPath>..\..\packages\Fixie\lib\net45\Fixie.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
   <Choose>
     <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
       <ItemGroup>

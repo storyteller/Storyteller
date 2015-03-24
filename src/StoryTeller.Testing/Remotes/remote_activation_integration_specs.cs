@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldBeNull();
-                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.success.ShouldBe(true);
                 message.system_name.ShouldBe(typeof (GrammarSystem).FullName);
             }
         }
@@ -47,7 +47,7 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldBeNull();
-                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.success.ShouldBe(true);
                 message.system_name.ShouldBe(typeof(NulloSystem).FullName);
             }
         }
@@ -63,7 +63,7 @@ namespace StoryTeller.Testing.Remotes
                 var message = task.Result;
 
                 message.error.ShouldContain("DivideByZero");
-                ShouldBeTestExtensions.ShouldBe(message.success, false);
+                message.success.ShouldBe(false);
                 message.system_name.ShouldBe(typeof(BadSystem.BadSystem).FullName);
             }
         }
@@ -85,7 +85,7 @@ namespace StoryTeller.Testing.Remotes
                 message.error.ShouldContain(typeof(System1).AssemblyQualifiedName);
                 message.error.ShouldContain(typeof(System2).AssemblyQualifiedName);
                 message.error.ShouldContain(typeof(System3).AssemblyQualifiedName);
-                ShouldBeTestExtensions.ShouldBe(message.success, false);
+                message.success.ShouldBe(false);
             }
         }
 
@@ -107,7 +107,7 @@ namespace StoryTeller.Testing.Remotes
 
                 var message = task.Result;
 
-                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.success.ShouldBe(true);
                 message.system_name.ShouldBe(typeof (System2).FullName);
                 
             }
@@ -131,7 +131,7 @@ namespace StoryTeller.Testing.Remotes
 
                 var message = task.Result;
 
-                ShouldBeTestExtensions.ShouldBe(message.success, true);
+                message.success.ShouldBe(true);
                 message.system_name.ShouldBe(typeof(System2).FullName);
 
             }

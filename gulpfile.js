@@ -11,6 +11,7 @@ var args = require('yargs').argv,
 var buildNumber = args.buildNumber || '0';
 var buildVersion = '3.0.0.' + buildNumber;
 var revision = args.git || 'unknown';
+var config = args.config || 'Debug';
 
 gulp.task('assemblyInfo', function() {
     return gulp
@@ -33,8 +34,6 @@ gulp.task('restore', function(){
 var msbuild = require('gulp-msbuild');
 
 gulp.task('build', ['assemblyInfo', 'restore'], function() {
-	var config = args.config || 'Debug';
-
     return gulp
         .src('**/*.sln')
         .pipe(msbuild({
@@ -48,15 +47,28 @@ gulp.task('build', ['assemblyInfo', 'restore'], function() {
 
 var nunit = require('gulp-nunit-runner');
 
-gulp.task('test', ['build'], function () {
-    return gulp
-        .src(['**/bin/**/StoryTeller.Testing.dll'], { read: false })
-        .pipe(nunit({
-        	executable: 'packages/NUnit.Runners/tools/nunit-console.exe'
-        }));
+
+gulp.task('test', ['build'], function(){
+    var path = require('path');
+    var executable = path.join(
+        'packages',
+        'Fixie',
+        'lib',
+        'net45',
+        'Fixie.Console.exe'
+    );
+
+    var dll = path.join(
+        'src',
+        'Storyteller.Testing',
+        'bin',
+        config,
+        'Storyteller.Testing.dll'
+    );
+
+    var cmd = executable + ' ' + dll + ' --NUnitXml TestResult.xml';
+    run(cmd).exec();
 });
-
-
 
 gulp.task('pack', ['build'], function(){
 	var cmd = 'ripple local-nuget -v ' + buildVersion;
@@ -68,8 +80,4 @@ gulp.task('publish', ['test'], function(){
 	var cmd = 'ripple publish -v ' + buildVersion + ' ' + args.apikey + ' --server https://www.myget.org/F/fubumvc-edge';
 
 	run(cmd).exec();
-});
-
-gulp.task('sln', function(){
-	run('src/Storyteller.sln').exec();
 });
