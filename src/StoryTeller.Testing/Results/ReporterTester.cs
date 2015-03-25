@@ -42,7 +42,7 @@ namespace StoryTeller.Testing.Results
             reports[1].html.ShouldContain("<li>4</li>");
         }
 
-        [Test]
+        [Test, Explicit]
         public void debug_tracing()
         {
             var logging = new Reporter();
