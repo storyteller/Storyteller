@@ -2,9 +2,9 @@ var path = require('path');
 var fs = require('fs');
 
 function findPath() {
-  var folder = path.join('C:', 'Program Files', 'MSBuild', '12.0', 'Bin/MSBuild.exe');
-  if (fs.exists(folder)){
-    return folder;
+  var file = path.join('C:', 'Program Files', 'MSBuild', '12.0', 'Bin/MSBuild.exe');
+  if (fs.existsSync(file)){
+    return file;
   }
   else {
     return path.join('C:', 'Program Files (x86)', 'MSBuild', '12.0', 'Bin/MSBuild.exe');
