@@ -18,6 +18,7 @@ module.exports = function(target){
         'Storyteller.Testing.dll'
     );
 
+    console.log('Starting the Fixie tests');
     var exec = require('child_process').spawnSync;
 
       var output = exec(executable, [dll, '--NUnitXml', 'TestResult.xml']);
