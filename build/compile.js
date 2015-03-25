@@ -21,35 +21,40 @@ function findPath() {
 
 };
 
-var exec = require('child_process').execSync;
+var exec = require('child_process').spawnSync;
 
 function ilrepack(target){
+  // packages\ILRepack\tools\ILRepack.exe /lib:src\Storyteller\bin\Debug /out:src\Storyteller\bin\Debug\Storyteller.dll src\Storyteller\bin\Debug\Newtonsoft.Json.dll
+
   var executable = path.join('packages', 'ILRepack', 'tools', 'ILRepack.exe');
-  var lib = path.join('src', 'Storyteller', 'bin', target);
+  var folder = path.join('src', 'Storyteller', 'bin', target);
+  var lib = '/lib:' + folder;
   
-  var out = path.join(lib, 'Storyteller.dll');
-  var ref = path.join(lib, 'Newtonsoft.Json.dll');
+  var out = '/out:' + path.join(folder, 'Storyteller.dll');
+  var ref = path.join(folder, 'Newtonsoft.Json.dll');
 
-  var cmd = executable + ' /lib:' + lib + ' /out:' + out + ' ' + ref;
-
-  console.log('Running: ' + cmd);
-
-  var output = exec(cmd);
-  console.log(output.toString());
+  console.log('ILRepack Newtonsoft');
+  var output = exec(executable, [lib, out, ref]);
+  if (output.status != 0){
+    console.log(output.stdout.toString());
+    throw new Error('Failed in ilrepack');
+  }
 }
 
 module.exports = function(target){
-  
-  var cmd = '"' + findPath() + '" ' 
-    + path.join('src', 'Storyteller.sln') 
-    + '  /target:Clean,Build /property:Configuration='
-    + target;
+  var executable = findPath();
+  var sln = path.join('src', 'Storyteller.sln');
+  var config = '/property:Configuration=' + target;
 
+  console.log('Compiling...');
+  var output = exec(executable, [sln, '/target:Clean,Build', config]);
+  if (output.status != 0){
+    for (key in output){
+      console.log(key + ' = ' + output[key]);
+    }
 
-  console.log('Running: ' + cmd);
-
-  var output = exec(cmd);
-  console.log(output.toString());
+    throw new Error('Failed to compile!');
+  }
 
   ilrepack(target);
 }

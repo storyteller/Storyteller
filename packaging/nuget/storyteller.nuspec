@@ -17,8 +17,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="lib\net45" />
-    <file src="..\..\src\ST\bin\release\*.exe" target="tools" />
-    <file src="..\..\src\ST\bin\release\*.dll" target="tools" />
+    <file src="..\..\src\StoryTeller\bin\Release\StoryTeller.*" target="lib\net45" />
+    <file src="..\..\src\ST\bin\Release\*.exe" target="tools" />
+    <file src="..\..\src\ST\bin\Release\*.dll" target="tools" />
   </files>
 </package>

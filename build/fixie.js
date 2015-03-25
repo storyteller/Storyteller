@@ -18,11 +18,11 @@ module.exports = function(target){
         'Storyteller.Testing.dll'
     );
 
-    var exec = require('child_process').execSync;
+    var exec = require('child_process').spawnSync;
 
-    var cmd = executable + ' ' + dll + ' --NUnitXml TestResult.xml';
-	console.log('Running: ' + cmd);
-
-	var output = exec(cmd);
-	console.log(output.toString());
+      var output = exec(executable, [dll, '--NUnitXml', 'TestResult.xml']);
+      console.log(output.stdout.toString());
+      if (output.status != 0){
+        throw new Error('Fixie tests failed@');
+      }
 }
