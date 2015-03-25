@@ -8,7 +8,7 @@ After doing a new git clone of the code, run `npm run build` at the command line
 Getting started with the code
 =============================
 
-The Storyteller code consists of two parts, a web based client written in Javascript and the actual specification engine and a self-contained web host written in C#. In order to work with the Storyteller code, you'll need to have both an installation of [Node.js](https://nodejs.org) with [npm](https://www.npmjs.com) and .Net 4.5 on your box. To start working with the code, first run the build with the command `npm run build` or if you're on Windows, use the `build.cmd` script. Running this command will:
+The Storyteller code consists of two parts, a web based client written in Javascript and the actual specification engine and a self-contained web host written in C#. In order to work with the Storyteller code, you'll need to have both an installation of [Node.js v12](https://nodejs.org) with [npm](https://www.npmjs.com) and .Net 4.5 on your box. To start working with the code, first run the build with the command `npm run build` or if you're on Windows, use the `build.cmd` script. Running this command will:
 
 1. Install all the necessary npm packages for the client side
 2. Build the bundled javascript products that need to be embedded into the .Net code

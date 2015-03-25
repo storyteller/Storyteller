@@ -1,6 +1,4 @@
-var args = require('yargs').argv,
-    assemblyInfo = require('gulp-dotnet-assembly-info');
-
+var args = require('yargs').argv;
 var buildNumber = args.buildNumber || '0';
 var buildVersion = '3.0.0.' + buildNumber;
 var revision = args.git || 'unknown';
