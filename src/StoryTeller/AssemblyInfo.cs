@@ -6,3 +6,5 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Storyteller")]
+[assembly: AssemblyDescription("Executable Specifications for .Net")]
+[assembly: AssemblyCompany("Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al")]
