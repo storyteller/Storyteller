@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Storyteller</id>
+    <version>3.0.0</version>
+    <authors>Jeremy D. Miller, et al</authors>
+    <owners>Jeremy D. Miller</owners>
+    <licenseUrl>https://github.com/DarthFubuMVC/storyteller/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>http://github.com/DarthFubuMVC/storyteller</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>StoryTeller is an external DSL tool for creating acceptance tests in .Net</description>
+    <tags>
+    </tags>
+    <dependencies>
+      <dependency id="FubuCore" version="2.0" />
+      <dependency id="HtmlTags" version="3.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\src\StoryTeller\bin\release\StoryTeller.*" target="lib\net45" />
+    <file src="..\..\src\ST\bin\release\*.exe" target="tools" />
+    <file src="..\..\src\ST\bin\release\*.dll" target="tools" />
+  </files>
+</package>
