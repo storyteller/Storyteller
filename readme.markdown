@@ -47,11 +47,11 @@ Working on the .Net Code
 ===============================
 The source code is in the /src folder. For the moment, we're using Visual Studio.Net and the solution file is at src/Storyteller.sln. As DNX matures we will probably move to eliminate the .sln and .csproj files in the code repository. You will need to run the command line build at least once before opening the C# code in Visual Studio.
 
-From the command line, we're using [gulp](http://gulpjs.com) to build and test the .Net code. The relevant commands are:
+From the command line, we're just using an npm script `npm run build-server` to build and test the .Net code. The relevant commands are:
 
 * `npm run build-server`- restore nuget packages, build, and test
 * `paket install` - restores nuget packages
-* `gulp` - compiles and runs the .Net tests
+* `node build/buildServer` - compiles and runs the .Net tests if you want to bypass the paket install
 
 
 The .Net code uses [Paket](http://fsprojects.github.io/Paket/) for Nuget dependency management and [Fixie](http://fixie.github.io) for unit testing. At this time we're emulating NUnit behavior, but this is expected to change to Fixie idioms at a later time. 
