@@ -1,19 +1,15 @@
 var path = require('path');
+var fs = require('fs');
 
 function findPath() {
-  var version = '12.0';
-
-  var is64Bit = true;
-
-  if (version === '12.0' || version === '14.0') {
-    var program_files = is64Bit ? 'Program Files (x86)' : 'Program Files';
-    return path.join('C:', program_files, 'MSBuild', version, 'Bin/MSBuild.exe');
+  var folder = path.join('C:', 'Program Files', 'MSBuild', '12.0', 'Bin/MSBuild.exe');
+  if (fs.exists(folder)){
+    return folder;
+  }
+  else {
+    return path.join('C:', 'Program Files (x86)', 'MSBuild', '12.0', 'Bin/MSBuild.exe');
   }
 
-  var windir = process.env.WINDIR;
-
-  var framework = is64Bit ? 'Framework64' : 'Framework';
-  return path.join(windir, 'Microsoft.Net', framework, version, 'MSBuild.exe');
 };
 
 module.exports = function(target){
