@@ -18,6 +18,7 @@ NUGET
     Fixie (1.0.0.11)
     Fleck (0.12.0.40)
     HtmlTags (2.1.0.183)
+    ILRepack (1.25.0)
     Newtonsoft.Json (6.0.8)
     Owin (1.0)
     RhinoMocks (3.6.1)

@@ -21,8 +21,25 @@ function findPath() {
 
 };
 
+var exec = require('child_process').execSync;
+
+function ilrepack(target){
+  var executable = path.join('packages', 'ILRepack', 'tools', 'ILRepack.exe');
+  var lib = path.join('src', 'Storyteller', 'bin', target);
+  
+  var out = path.join(lib, 'Storyteller.dll');
+  var ref = path.join(lib, 'Newtonsoft.Json.dll');
+
+  var cmd = executable + ' /lib:' + lib + ' /out:' + out + ' ' + ref;
+
+  console.log('Running: ' + cmd);
+
+  var output = exec(cmd);
+  console.log(output.toString());
+}
+
 module.exports = function(target){
-  var exec = require('child_process').execSync;
+  
   var cmd = '"' + findPath() + '" ' 
     + path.join('src', 'Storyteller.sln') 
     + '  /target:Clean,Build /property:Configuration='
@@ -33,5 +50,7 @@ module.exports = function(target){
 
   var output = exec(cmd);
   console.log(output.toString());
+
+  ilrepack(target);
 }
 
