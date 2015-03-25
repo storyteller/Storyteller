@@ -25,7 +25,7 @@ module.exports = function(target){
   var exec = require('child_process').execSync;
   var cmd = '"' + findPath() + '" ' 
     + path.join('src', 'Storyteller.sln') 
-    + ' /toolsversion:12.0 /target:Clean,Build /property:Configuration='
+    + '  /target:Clean,Build /property:Configuration='
     + target;
 
 
