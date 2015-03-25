@@ -9,9 +9,9 @@ projectUrl http://github.com/DarthFubuMVC/storyteller
 version 3.0.0
 
 files
-    /bin/release/Storyteller.dll ==> lib/net45
-    ../ST/bin/release/*.exe ==> tools
-    ../ST/bin/release/*.dll ==> tools
+    bin\release\Storyteller.dll ==> lib/net45
+    ..\ST\bin\release\*.exe ==> tools
+    ..\ST\bin\release\*.dll ==> tools
 
 dependencies
     FubuCore ~> 2.0
