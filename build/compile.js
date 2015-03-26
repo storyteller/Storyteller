@@ -24,14 +24,14 @@ function findPath() {
 var exec = require('child_process').spawnSync;
 
 function ilrepack(target){
-  // packages\ILRepack\tools\ILRepack.exe /lib:src\Storyteller\bin\Debug /out:src\Storyteller\bin\Debug\Storyteller.dll src\Storyteller\bin\Debug\Newtonsoft.Json.dll
+  // ILMerge.exe /out:src/StoryTeller/bin/release/StoryTeller.dll /lib:src/StoryTeller/bin/release /target:library /targetplatform:v4 /internalize /ndebug src/StoryTeller/bin/release/StoryTeller.dll src/StoryTeller/bin/release/Newtonsoft.Json.dll
 
   var executable = path.join('packages', 'ILRepack', 'tools', 'ILRepack.exe');
   var folder = path.join('src', 'Storyteller', 'bin', target);
   var lib = '/lib:' + folder;
   
   var out = '/out:' + path.join(folder, 'Storyteller.dll');
-  var ref = path.join(folder, 'Newtonsoft.Json.dll');
+  var ref = path.join(folder, 'Storyteller.dll') + ' ' + path.join(folder, 'Newtonsoft.Json.dll');
 
   console.log('ILRepack Newtonsoft');
   var output = exec(executable, [lib, out, ref]);
