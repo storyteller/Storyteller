@@ -50,7 +50,7 @@ namespace StoryTeller
         /// The currently executing specification context. This property will only
         /// be set at runtime during specification runs
         /// </summary>
-        public ISpecContext Context { get; internal set; }
+        public ISpecContext Context { get; set; }
 
         /// <summary>
         /// Executes before any steps within a section using this Fixture object

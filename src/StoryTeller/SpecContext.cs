@@ -179,9 +179,9 @@ namespace StoryTeller
         }
 
 
-        public static SpecContext Basic()
+        public static SpecContext Basic(IServiceLocator services = null)
         {
-            return new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            return new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), services ?? new InMemoryServiceLocator());
         }
 
         public static SpecContext ForTesting()
