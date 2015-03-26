@@ -31,10 +31,9 @@ function ilrepack(target){
   var lib = '/lib:' + folder;
   
   var out = '/out:' + path.join(folder, 'Storyteller.dll');
-  var ref = path.join(folder, 'Storyteller.dll') + ' ' + path.join(folder, 'Newtonsoft.Json.dll');
 
   console.log('ILRepack Newtonsoft');
-  var output = exec(executable, [lib, out, ref]);
+  var output = exec(executable, [lib, out, path.join(folder, 'Storyteller.dll'), path.join(folder, 'Newtonsoft.Json.dll')]);
   if (output.status != 0){
     console.log(output.stdout.toString());
     throw new Error('Failed in ilrepack');
