@@ -20,7 +20,7 @@ namespace StoryTeller
 
         public static CellHandling Basic()
         {
-            return new CellHandling(new EquivalenceChecker(), Conversions.Basic());
+            return new CellHandling(new EquivalenceChecker(), new Conversions());
         }
     }
 }

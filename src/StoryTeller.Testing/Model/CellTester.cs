@@ -58,8 +58,9 @@ namespace StoryTeller.Testing.Model
         [Test]
         public void use_a_runtime_converter_with_a_value()
         {
-            var conversions = new Conversions(Enumerable.Empty<IConversionProvider>(),
-                new IRuntimeConverter[] {new ColorConverter(),});
+            var conversions = new Conversions();
+            conversions.RegisterRuntimeConversion<ColorConverter>();
+
             var cellHandling = new CellHandling(new EquivalenceChecker(), conversions);
 
             var cell = new Cell(cellHandling, "color", typeof (Color));
@@ -78,8 +79,8 @@ namespace StoryTeller.Testing.Model
         [Test]
         public void use_a_runtime_converter_against_NULL()
         {
-            var conversions = new Conversions(Enumerable.Empty<IConversionProvider>(),
-                new IRuntimeConverter[] {new ColorConverter(),});
+            var conversions = new Conversions();
+            conversions.RegisterRuntimeConversion<ColorConverter>();
             var cellHandling = new CellHandling(new EquivalenceChecker(), conversions);
 
             var cell = new Cell(cellHandling, "color", typeof (Color));
@@ -188,7 +189,7 @@ namespace StoryTeller.Testing.Model
         [Test]
         public void create_with_no_converter()
         {
-            Conversions.Basic().FindConverter(typeof (NoConverterForMe))
+            new Conversions().FindConverter(typeof (NoConverterForMe))
                 .ShouldBeNull();
 
             var cell = Cell.For<NoConverterForMe>("a");

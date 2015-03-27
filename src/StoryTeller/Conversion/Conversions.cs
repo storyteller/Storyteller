@@ -4,47 +4,45 @@ using FubuCore.Util;
 
 namespace StoryTeller.Conversion
 {
-    public class Conversions 
+    public class Conversions
     {
-        private readonly IEnumerable<IRuntimeConverter> _runtimeConvertors;
+        private readonly IList<IRuntimeConverter> _runtimeConvertors = new List<IRuntimeConverter>();
         private readonly IList<IConversionProvider> _providers = new List<IConversionProvider>();
         private readonly Cache<Type, Func<string, object>> _convertors;
 
-        public Conversions(IEnumerable<IConversionProvider> providers, IEnumerable<IRuntimeConverter> runtimeConvertors)
+
+        public Conversions()
         {
-            _runtimeConvertors = runtimeConvertors;
-            _providers.AddRange(providers);
-            _providers.Add(new EnumerationConversion());
-            _providers.Add(new NullableConvertor(this));
+            _convertors =
+                new Cache<Type, Func<string, object>>(
+                    type =>
+                    {
+                        return
+                            _providers.UnionWith(new EnumerationConversion(), new NullableConvertor(this))
+                                .FirstValue(x => x.ConverterFor(type));
+                    });
 
-            _convertors = new Cache<Type, Func<string, object>>(type =>
-            {
-                return _providers.FirstValue(x => x.ConverterFor(type));
-            });
+            RegisterConversion(bool.Parse);
+            RegisterConversion(byte.Parse);
+            RegisterConversion(sbyte.Parse);
+            RegisterConversion(char.Parse);
+            RegisterConversion(decimal.Parse);
+            RegisterConversion(double.Parse);
+            RegisterConversion(Single.Parse);
+            RegisterConversion(Int16.Parse);
+            RegisterConversion(Int32.Parse);
+            RegisterConversion(Int64.Parse);
+            RegisterConversion(UInt16.Parse);
+            RegisterConversion(UInt32.Parse);
+            RegisterConversion(UInt64.Parse);
+            RegisterConversion(DateTimeConverter.GetDateTime);
 
-            Add(bool.Parse);
-            Add(byte.Parse);
-            Add(sbyte.Parse);
-            Add(char.Parse);
-            Add(decimal.Parse);
-            Add(double.Parse);
-            Add(Single.Parse);
-            Add(Int16.Parse);
-            Add(Int32.Parse);
-            Add(Int64.Parse);
-            Add(UInt16.Parse);
-            Add(UInt32.Parse);
-            Add(UInt64.Parse);
-            Add(DateTimeConverter.GetDateTime);
-
-            Add(x =>
+            RegisterConversion(x =>
             {
                 if (x == "EMPTY") return string.Empty;
 
                 return x;
             });
-
-            ;
         }
 
         public IEnumerable<IRuntimeConverter> RuntimeConvertors
@@ -52,7 +50,17 @@ namespace StoryTeller.Conversion
             get { return _runtimeConvertors; }
         }
 
-        public void Add<T>(Func<string, T> convertor)
+        public void RegisterRuntimeConversion<T>() where T : IRuntimeConverter, new()
+        {
+            _runtimeConvertors.Add(new T());
+        }
+
+        public void RegisterConversionProvider<T>() where T : IConversionProvider, new()
+        {
+            _providers.Add(new T());
+        }
+
+        public void RegisterConversion<T>(Func<string, T> convertor)
         {
             _convertors[typeof (T)] = x => convertor(x);
         }
@@ -65,11 +73,6 @@ namespace StoryTeller.Conversion
         public object Convert(Type type, string raw)
         {
             return _convertors[type](raw);
-        }
-
-        public static Conversions Basic()
-        {
-            return new Conversions(new IConversionProvider[0], new IRuntimeConverter[0]);
         }
     }
 }
