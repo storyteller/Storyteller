@@ -75,7 +75,7 @@
     <Compile Include="Conversion\DateTimeConverter.cs" />
     <Compile Include="Conversion\EnumerationConversion.cs" />
     <Compile Include="Conversion\IConversionProvider.cs" />
-    <Compile Include="Conversion\IRuntimeConvertor.cs" />
+    <Compile Include="Conversion\IRuntimeConverter.cs" />
     <Compile Include="Conversion\NullableConvertor.cs" />
     <Compile Include="Conversion\StepValues.cs" />
     <Compile Include="Conversion\StringConverterProvider.cs" />

@@ -1,9 +1,12 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using FubuCore.Reflection;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Conversion;
+using StoryTeller.Equivalence;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -17,15 +20,15 @@ namespace StoryTeller.Testing.Model
         [Test]
         public void can_serialize_cell()
         {
-            var serializer = new Newtonsoft.Json.JsonSerializer();
+            var serializer = new JsonSerializer();
 
-            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof (int));
 
             var writer = new StringWriter();
             serializer.Serialize(writer, cell);
 
             var json = writer.ToString();
-            
+
             json.ShouldContain("\"key\":\"a\"");
         }
 
@@ -38,27 +41,77 @@ namespace StoryTeller.Testing.Model
 
             Cell.For<int>("a").Check(values, 1)
                 .ShouldBe(CellResult.Success("a"));
-
-
         }
 
         [Test]
         public void sad_path_check_for_a_simple_equals_match()
         {
             var values = new StepValues("1");
-            
+
 
             values.Store("a", 1);
 
             Cell.For<int>("a").Check(values, 2)
                 .ShouldBe(CellResult.Failure("a", "2"));
+        }
 
+        [Test]
+        public void use_a_runtime_converter_with_a_value()
+        {
+            var conversions = new Conversions(Enumerable.Empty<IConversionProvider>(),
+                new IRuntimeConverter[] {new ColorConverter(),});
+            var cellHandling = new CellHandling(new EquivalenceChecker(), conversions);
+
+            var cell = new Cell(cellHandling, "color", typeof (Color));
+
+            var values = new StepValues("foo");
+            cell.ConvertValues(new Step("foo").With("color", "Red"), values);
+
+            var delayed = values.DelayedConversions.Single();
+
+            delayed.Key.ShouldBe("color");
+            delayed.Raw.ShouldBe("Red");
+            delayed.Converter.ShouldBeOfType<ColorConverter>();
+        }
+
+
+        [Test]
+        public void use_a_runtime_converter_against_NULL()
+        {
+            var conversions = new Conversions(Enumerable.Empty<IConversionProvider>(),
+                new IRuntimeConverter[] {new ColorConverter(),});
+            var cellHandling = new CellHandling(new EquivalenceChecker(), conversions);
+
+            var cell = new Cell(cellHandling, "color", typeof (Color));
+
+            var values = new StepValues("foo");
+            cell.ConvertValues(new Step("foo").With("color", "NULL"), values);
+
+            values.Get("color").ShouldBeNull();
+        }
+
+        public class ColorConverter : IRuntimeConverter
+        {
+            public object Convert(string raw, ISpecContext context)
+            {
+                return new Color {Name = raw};
+            }
+
+            public bool Matches(Type type)
+            {
+                return type == typeof (Color);
+            }
+        }
+
+        public class Color
+        {
+            public string Name { get; set; }
         }
 
         [Test]
         public void matches_simply()
         {
-            var cell = new Cell(CellHandling.Basic(), "a", typeof(int));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof (int));
             var values1 = new StepValues("foo");
             values1.Store(cell.Key, 5);
 
@@ -68,25 +121,25 @@ namespace StoryTeller.Testing.Model
             var values3 = new StepValues("foo");
             values3.Store(cell.Key, 6);
 
-            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values2), true);
-            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values3), false);
+            cell.Matches(values1, values2).ShouldBe(true);
+            cell.Matches(values1, values3).ShouldBe(false);
         }
 
         [Test]
         public void matches_array_()
         {
-            var cell = new Cell(CellHandling.Basic(), "a", typeof(int[]));
+            var cell = new Cell(CellHandling.Basic(), "a", typeof (int[]));
             var values1 = new StepValues("foo");
-            values1.Store(cell.Key, new[]{1, 2, 3});
+            values1.Store(cell.Key, new[] {1, 2, 3});
 
             var values2 = new StepValues("foo");
-            values2.Store(cell.Key, new[] { 1, 2, 3 });
+            values2.Store(cell.Key, new[] {1, 2, 3});
 
             var values3 = new StepValues("foo");
-            values3.Store(cell.Key, new[] { 1, 2, 4 });
+            values3.Store(cell.Key, new[] {1, 2, 4});
 
-            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values2), true);
-            ShouldBeTestExtensions.ShouldBe(cell.Matches(values1, values3), false);
+            cell.Matches(values1, values2).ShouldBe(true);
+            cell.Matches(values1, values3).ShouldBe(false);
         }
 
         private StepValues convert(Cell cell, string rawValue)
@@ -135,7 +188,7 @@ namespace StoryTeller.Testing.Model
         [Test]
         public void create_with_no_converter()
         {
-            Conversions.Basic().FindConverter(typeof(NoConverterForMe))
+            Conversions.Basic().FindConverter(typeof (NoConverterForMe))
                 .ShouldBeNull();
 
             var cell = Cell.For<NoConverterForMe>("a");
@@ -144,7 +197,7 @@ namespace StoryTeller.Testing.Model
 
             var result = values.Errors.Single().ShouldBeOfType<CellResult>();
             result.cell.ShouldBe("a");
-            result.error.ShouldBe("No converter found for type " + typeof(NoConverterForMe).FullName);
+            result.error.ShouldBe("No converter found for type " + typeof (NoConverterForMe).FullName);
         }
 
         [Test]
@@ -163,7 +216,6 @@ namespace StoryTeller.Testing.Model
 
         public class NoConverterForMe
         {
-            
         }
 
         [Test]
@@ -214,7 +266,7 @@ namespace StoryTeller.Testing.Model
             handling.Lists["States"].AddValues("TX", "MO", "AR");
 
             var fixture = new Fixture();
-            ShouldBeTestExtensions.ShouldBe(fixture.Lists.Has("States"), false);
+            fixture.Lists.Has("States").ShouldBe(false);
 
             var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
             var cell = Cell.For(handling, property, fixture);
@@ -259,7 +311,7 @@ namespace StoryTeller.Testing.Model
 
             var values = new StepValues("foo");
             var step = new Step("key");
-                //.With("Number", "a");
+            //.With("Number", "a");
 
             cell.ConvertValues(step, values);
 
@@ -280,7 +332,7 @@ namespace StoryTeller.Testing.Model
 
             cell.ConvertValues(step, values);
 
-            ShouldBeTestExtensions.ShouldBe(values.Errors.Any(), false);
+            values.Errors.Any().ShouldBe(false);
             values.Get("Number").ShouldBe(111);
         }
     }
@@ -295,7 +347,9 @@ namespace StoryTeller.Testing.Model
 
     public class CellTarget
     {
-        [Header("The City")][Default("Cedar Park")][StoryTeller.Editor("bigtext")]
+        [Header("The City")]
+        [Default("Cedar Park")]
+        [Editor("bigtext")]
         public string City { get; set; }
 
         public bool IsActive { get; set; }

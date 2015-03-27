@@ -160,7 +160,7 @@ namespace StoryTeller.Testing.Grammars
         }
     }
 
-    public class FakeRuntimeConverter : IRuntimeConvertor
+    public class FakeRuntimeConverter : IRuntimeConverter
     {
         public object Convert(string raw, ISpecContext context)
         {
@@ -177,7 +177,7 @@ namespace StoryTeller.Testing.Grammars
         public bool ConversionHappened { get; set; }
     }
 
-    public class RuntimeConverterThatBlowsUp : IRuntimeConvertor
+    public class RuntimeConverterThatBlowsUp : IRuntimeConverter
     {
         public object Convert(string raw, ISpecContext context)
         {

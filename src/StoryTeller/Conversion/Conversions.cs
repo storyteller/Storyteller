@@ -6,11 +6,11 @@ namespace StoryTeller.Conversion
 {
     public class Conversions 
     {
-        private readonly IEnumerable<IRuntimeConvertor> _runtimeConvertors;
+        private readonly IEnumerable<IRuntimeConverter> _runtimeConvertors;
         private readonly IList<IConversionProvider> _providers = new List<IConversionProvider>();
         private readonly Cache<Type, Func<string, object>> _convertors;
 
-        public Conversions(IEnumerable<IConversionProvider> providers, IEnumerable<IRuntimeConvertor> runtimeConvertors)
+        public Conversions(IEnumerable<IConversionProvider> providers, IEnumerable<IRuntimeConverter> runtimeConvertors)
         {
             _runtimeConvertors = runtimeConvertors;
             _providers.AddRange(providers);
@@ -47,6 +47,11 @@ namespace StoryTeller.Conversion
             ;
         }
 
+        public IEnumerable<IRuntimeConverter> RuntimeConvertors
+        {
+            get { return _runtimeConvertors; }
+        }
+
         public void Add<T>(Func<string, T> convertor)
         {
             _convertors[typeof (T)] = x => convertor(x);
@@ -64,7 +69,7 @@ namespace StoryTeller.Conversion
 
         public static Conversions Basic()
         {
-            return new Conversions(new IConversionProvider[0], new IRuntimeConvertor[0]);
+            return new Conversions(new IConversionProvider[0], new IRuntimeConverter[0]);
         }
     }
 }

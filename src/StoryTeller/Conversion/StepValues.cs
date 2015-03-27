@@ -54,11 +54,11 @@ namespace StoryTeller.Conversion
         /// </summary>
         public int Order { get; set; }
 
-        public void RegisterDelayedConversion(string key, string raw, IRuntimeConvertor convertor)
+        public void RegisterDelayedConversion(string key, string raw, IRuntimeConverter converter)
         {
             _delayeds.Add(new Delayed
             {
-                Key = key, Raw = raw, Converter = convertor
+                Key = key, Raw = raw, Converter = converter
             });
         }
 
@@ -96,7 +96,7 @@ namespace StoryTeller.Conversion
         {
             public string Key;
             public string Raw;
-            public IRuntimeConvertor Converter;
+            public IRuntimeConverter Converter;
         }
 
         public bool Has(string key)
@@ -109,7 +109,10 @@ namespace StoryTeller.Conversion
             return Errors.Any();
         }
 
-        
+        public IEnumerable<Delayed> DelayedConversions
+        {
+            get { return _delayeds; }
+        }
     }
 
     public static class StepValuesExtensions

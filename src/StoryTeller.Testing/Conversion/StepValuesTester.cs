@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.Conversion
         }
     }
 
-    public class StubRuntimeConverter : IRuntimeConvertor
+    public class StubRuntimeConverter : IRuntimeConverter
     {
         private readonly string _raw;
         private readonly object _returnedValue;

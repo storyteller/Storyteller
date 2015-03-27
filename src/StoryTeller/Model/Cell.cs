@@ -111,50 +111,86 @@ namespace StoryTeller.Model
         private void selectConverter(CellHandling cells, Type type)
         {
             var converter = cells.Conversions.FindConverter(type);
-            if (converter == null)
+            if (converter != null)
             {
-                var message = "No converter found for type " + type.FullName;
-                _conversion = (step, values) => values.LogError(Key, message);
+                useConverter(converter);
+                return;
             }
-            else
+
+            var runtime = cells.Conversions.RuntimeConvertors.FirstOrDefault(x => x.Matches(type));
+            if (runtime != null)
             {
-                _conversion = (step, values) =>
+                useRuntimeConversion(runtime);
+                return;
+            }
+
+
+            var message = "No converter found for type " + type.FullName;
+            _conversion = (step, values) => values.LogError(Key, message);
+        }
+
+        private void toConversion(Action<string, Step, StepValues> inner)
+        {
+            _conversion = (step, values) =>
+            {
+                if (!step.Values.ContainsKey(Key))
                 {
-                    if (!step.Values.ContainsKey(Key))
+                    if (HasDefault())
                     {
-                        if (HasDefault())
-                        {
-                            step.Values.Add(Key, DefaultValue);
-                        }
-                        else
-                        {
-                            var result = new CellResult(Key, ResultStatus.missing);
-                            values.Errors.Add(result);
-                            return;
-                        }
+                        step.Values.Add(Key, DefaultValue);
                     }
-
-                    try
+                    else
                     {
-                        var rawValue = step.Values[Key];
-                        var converted = rawValue == "NULL" ? null : converter(rawValue);
-                        values.Store(Key, converted);
-                    }
-                    catch (FormatException)
-                    {
-                        var result = new CellResult(Key, ResultStatus.invalid)
-                        {
-                            error = "Invalid Format"
-                        };
-
+                        var result = new CellResult(Key, ResultStatus.missing);
                         values.Errors.Add(result);
+                        return;
                     }
-                    catch (Exception ex)
+                }
+
+                var rawValue = step.Values[Key];
+
+                inner(rawValue, step, values);
+            };
+        }
+
+        private void useRuntimeConversion(IRuntimeConverter runtime)
+        {
+            toConversion((rawValue, step, values) =>
+            {
+                if (rawValue == "NULL")
+                {
+                    values.Store(Key, null);
+                }
+                else
+                {
+                    values.RegisterDelayedConversion(Key, rawValue, runtime);
+                }
+            });
+        }
+
+        private void useConverter(Func<string, object> converter)
+        {
+            toConversion((rawValue, step, values) =>
+            {
+                try
+                {
+                    var converted = rawValue == "NULL" ? null : converter(rawValue);
+                    values.Store(Key, converted);
+                }
+                catch (FormatException)
+                {
+                    var result = new CellResult(Key, ResultStatus.invalid)
                     {
-                        values.LogError(Key, ex);
-                    }
-                };
-            }
+                        error = "Invalid Format"
+                    };
+
+                    values.Errors.Add(result);
+                }
+                catch (Exception ex)
+                {
+                    values.LogError(Key, ex);
+                }
+            });
         }
 
 
