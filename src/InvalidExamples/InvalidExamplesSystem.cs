@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 
@@ -18,7 +19,7 @@ namespace InvalidExamples
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IConversionProvider> ConversionProviders()
+        public CellHandling CreateCellHandling()
         {
             throw new NotImplementedException();
         }

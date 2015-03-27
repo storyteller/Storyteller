@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using StoryTeller.Conversion;
 
 namespace StoryTeller.Engine
 {
@@ -9,7 +7,7 @@ namespace StoryTeller.Engine
     {
         IExecutionContext CreateContext();
 
-        IEnumerable<IConversionProvider> ConversionProviders();
+        CellHandling CreateCellHandling();
 
         Task Warmup();
         Task Recycle();

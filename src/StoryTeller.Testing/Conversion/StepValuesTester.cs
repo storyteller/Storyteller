@@ -113,5 +113,10 @@ namespace StoryTeller.Testing.Conversion
 
             return _returnedValue;
         }
+
+        public bool Matches(Type type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -29,9 +29,9 @@ namespace StoryTeller.Engine
         {
         }
 
-        public IEnumerable<IConversionProvider> ConversionProviders()
+        public CellHandling CreateCellHandling()
         {
-            return new IConversionProvider[0];
+            return CellHandling.Basic();
         }
 
         public class SimpleExecutionContext : IExecutionContext

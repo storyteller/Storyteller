@@ -82,7 +82,7 @@ namespace StoryTeller.Testing.Engine
         public SpecRunner()
         {
             _system = new T();
-            var handling = new CellHandling(new EquivalenceChecker(), new Conversions(_system.ConversionProviders()));
+            var handling = _system.CreateCellHandling();
             var task = FixtureLibrary.CreateForAppDomain(handling);
             task.Wait(15.Seconds());
 

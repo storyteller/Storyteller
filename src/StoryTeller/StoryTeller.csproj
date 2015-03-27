@@ -72,6 +72,7 @@
     <Compile Include="Commands\ForceRecycleCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Conversion\Conversions.cs" />
+    <Compile Include="Conversion\DateTimeConverter.cs" />
     <Compile Include="Conversion\EnumerationConversion.cs" />
     <Compile Include="Conversion\IConversionProvider.cs" />
     <Compile Include="Conversion\IRuntimeConvertor.cs" />

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 
@@ -13,14 +14,14 @@ namespace BadSystem
             
         }
 
+        public CellHandling CreateCellHandling()
+        {
+            return CellHandling.Basic();
+        }
+
         public IExecutionContext CreateContext()
         {
             throw new Exception();
-        }
-
-        public IEnumerable<IConversionProvider> ConversionProviders()
-        {
-            return new IConversionProvider[0];
         }
 
         public Task Warmup()

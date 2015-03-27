@@ -66,7 +66,7 @@ namespace StoryTeller.Engine
         {
             _runner.UseStopConditions(stopConditions);
 
-            var cellHandling = CellHandling.ForSystem(_system);
+            var cellHandling = _system.CreateCellHandling();
 
             var warmup = _system
                 .Warmup()

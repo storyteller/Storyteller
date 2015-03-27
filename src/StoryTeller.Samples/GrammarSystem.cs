@@ -35,9 +35,9 @@ namespace StoryTeller.Samples
         {
         }
 
-        public IEnumerable<IConversionProvider> ConversionProviders()
+        public CellHandling CreateCellHandling()
         {
-            return new IConversionProvider[0];
+            return CellHandling.Basic();
         }
     }
 

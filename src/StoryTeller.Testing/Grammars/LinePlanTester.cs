@@ -169,6 +169,11 @@ namespace StoryTeller.Testing.Grammars
             return raw;
         }
 
+        public bool Matches(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool ConversionHappened { get; set; }
     }
 
@@ -177,6 +182,11 @@ namespace StoryTeller.Testing.Grammars
         public object Convert(string raw, ISpecContext context)
         {
             throw new Exception("You shall not pass!");
+        }
+
+        public bool Matches(Type type)
+        {
+            throw new NotImplementedException();
         }
     }
 }

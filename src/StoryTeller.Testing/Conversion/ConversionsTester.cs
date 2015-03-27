@@ -10,7 +10,7 @@ namespace StoryTeller.Testing.Conversion
     public class ConversionsTester
     {
 
-        private readonly Conversions conversions = new Conversions(new IConversionProvider[0]);
+        private readonly Conversions conversions = Conversions.Basic();
 
         private void assertRoundTrip<T>(T value)
         {
