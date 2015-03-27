@@ -21,7 +21,10 @@ class Table extends CompositeGrammar{
 			},
 
 			buildStep: function(data){
-				return new Step(data || {}, self.cells, this);
+				var step = new Step(data || {}, self.cells, this);
+				step.key = this.key + '-row';
+
+				return step;
 			},
 
 			key: self.key
@@ -46,8 +49,6 @@ class Table extends CompositeGrammar{
 		var step = this.buildStep({cells: {}});
 		var section = this.readSection(step);
 
-		var starterRow = this.fixture.buildStep({cells:{}});
-		section.steps.push(starterRow);
 
 		return step;
 	}
@@ -56,7 +57,7 @@ class Table extends CompositeGrammar{
 		var section = this.readSection(step);
 
 		var cells = this.cells;
-
+		
 		var rows = section.steps.map(step => {
 			var cloneRow = () => {
 				var newStep = this.newRowStep();

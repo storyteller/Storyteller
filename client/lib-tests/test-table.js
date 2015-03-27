@@ -44,10 +44,6 @@ describe('Table Grammar', function(){
  		var holder = table.readSection(step);
  		expect(holder).to.not.be.null;
 
- 		expect(holder.steps.length).to.equal(1);
- 		var firstStep = holder.steps[0];
-
- 		expect(firstStep.args.allKeys()).to.deep.equal(['x', 'y', 'result']);
 	});
 
 	it('can build a step from data', function(){

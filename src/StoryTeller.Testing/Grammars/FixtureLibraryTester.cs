@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using FubuCore;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Model;
@@ -94,6 +95,19 @@ namespace StoryTeller.Testing.Grammars
             var library = TestingContext.Library;
             var model = library.Models.FirstOrDefault(x => x.key == "Failure");
             model.errors.Count().ShouldBe(1);
+        }
+
+        [Test]
+        public void get_list_values_from_the_parent_system()
+        {
+            var library = TestingContext.Library;
+            var model = library.Models["Player"];
+            var grammar = model.FindGrammar("PositionIs");
+            var cell = grammar.As<Table>().cells.FirstOrDefault(x => x.Key == "Position");
+
+            cell.OptionListName.ShouldBe("positions");
+            cell.editor.ShouldBe("select");
+            cell.options.Length.ShouldBe(5);
         }
     }
 

@@ -78,7 +78,6 @@ namespace StoryTeller.Model
         {
         }
 
-        // TODO -- need this to return a grammar error somehow if a converter
         public Cell(CellHandling cells, string key, Type type)
         {
             Type = type;
@@ -233,7 +232,6 @@ namespace StoryTeller.Model
 
         private readonly Func<object, object, bool> _equivalence;
 
-        // TODO -- needs to use default values if the raw value is null
         public void ConvertValues(Step step, StepValues values)
         {
             _conversion(step, values);

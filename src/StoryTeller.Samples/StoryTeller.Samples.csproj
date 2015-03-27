@@ -66,6 +66,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Fixtures\ParkingExpiryFixture.cs" />
+    <Compile Include="Fixtures\PlayerFixture.cs" />
     <Compile Include="Fixtures\SometimesSlowFixture.cs" />
     <Compile Include="GrammarSystem.cs" />
     <Compile Include="Fixtures\CheckObjectFixture.cs" />
@@ -82,6 +83,7 @@
   <ItemGroup>
     <Content Include="Specs\General\Check properties.xml" />
     <Content Include="Specs\General\Occasionally_Times_Out.xml" />
+    <Content Include="Specs\General\System_Defined_Lists_and_Runtime_Converters.xml" />
     <Content Include="Specs\Sentences\Currying.xml" />
     <Content Include="Specs\Sentences\Importing and Currying.xml" />
     <Content Include="Specs\Tables\Boolean Results in a Table.xml" />

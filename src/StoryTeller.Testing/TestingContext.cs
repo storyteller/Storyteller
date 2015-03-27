@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using FubuCore;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Samples;
 
 namespace StoryTeller.Testing
 {
@@ -11,7 +12,7 @@ namespace StoryTeller.Testing
         static TestingContext()
         {
             var fixture = new StoryTeller.Samples.Fixtures.SentenceFixture();
-            _library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
+            _library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
         }
 
         private static readonly Task<FixtureLibrary> _library;

@@ -9,6 +9,7 @@ class CompositeGrammar{
 	}
 
 	writeSection(step, section){
+		section.key = this.collection;
 		step.collections[this.collection] = section;
 	}
 

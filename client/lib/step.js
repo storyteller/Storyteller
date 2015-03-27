@@ -123,6 +123,7 @@ class Step{
 				var section = this.collections[key];
 
 				var sectionData = section.write();
+			
 				data.collections.push(sectionData);
 			}
 		}

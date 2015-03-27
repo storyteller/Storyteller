@@ -82,7 +82,7 @@ namespace StoryTeller.Testing.Engine
             });
 
             // There are 23 specs in the sample project
-            response.records.Length.ShouldBe(23);
+            response.records.Length.ShouldBe(24);
 
             var first = response.records.Single(x => !x.results.WasAborted);
             

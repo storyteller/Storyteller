@@ -1,0 +1,10 @@
+<Spec id="runtime-converter" maxRetries="0" tags="" lifecycle="Acceptance" name="System Defined Lists and Runtime Converters">
+  <Player id="1951ced7-28f8-4bb3-a7fb-34973aef82f9">
+    <Comment id="049651e9-c257-4330-a2bc-22a6e1ee1e6f">Player is a custom type that is read by a runtime conversion. The "Position" cell option list is defined at the System level</Comment>
+    <PositionIs>
+      <table id="2e87da8f-d2bb-45a0-a375-39e38e3f9564">
+        <PositionIs-row Player="Justin Houston" Position="LB" id="justin-houston" />
+      </table>
+    </PositionIs>
+  </Player>
+</Spec>

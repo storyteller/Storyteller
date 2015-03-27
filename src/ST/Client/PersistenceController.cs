@@ -94,12 +94,7 @@ namespace ST.Client
                     using (_watcher.LatchFile(spec.Filename))
                     {
                         specification.ReadNode(spec);
-
-                        var document = new XmlDocument();
-                        document.Load(spec.Filename);
-
-                        XmlWriter.WriteBody(specification, document.DocumentElement);
-
+                        var document = XmlWriter.WriteToXml(specification);
                         document.Save(spec.Filename);
                     }
 
