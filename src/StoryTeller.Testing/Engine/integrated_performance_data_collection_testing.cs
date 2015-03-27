@@ -82,8 +82,8 @@ namespace StoryTeller.Testing.Engine
         public SpecRunner()
         {
             _system = new T();
-            var handling = _system.CreateCellHandling();
-            var task = FixtureLibrary.CreateForAppDomain(handling);
+
+            var task = FixtureLibrary.CreateForAppDomain(_system.Start());
             task.Wait(15.Seconds());
 
             _library = task.Result;

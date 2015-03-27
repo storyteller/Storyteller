@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using FubuCore;
-using StoryTeller.Conversion;
 using StoryTeller.Engine;
 
 namespace StoryTeller.Samples
@@ -26,21 +24,14 @@ namespace StoryTeller.Samples
             return Task.FromResult("recycled");
         }
 
-        public Task Warmup()
-        {
-            return Task.FromResult("warmed up");
-        }
 
         public void Dispose()
         {
         }
 
-        public CellHandling CreateCellHandling()
+        public CellHandling Start()
         {
             return CellHandling.Basic();
         }
     }
-
-
-
 }

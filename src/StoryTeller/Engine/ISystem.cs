@@ -7,9 +7,6 @@ namespace StoryTeller.Engine
     {
         IExecutionContext CreateContext();
 
-        CellHandling CreateCellHandling();
-
-        Task Warmup();
-        Task Recycle();
+        CellHandling Start();
     }
 }

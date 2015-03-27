@@ -24,12 +24,9 @@ namespace BadSystem
             throw new Exception();
         }
 
-        public Task Warmup()
+        public CellHandling Start()
         {
-            return Task.Factory.StartNew(() =>
-            {
-                throw new DivideByZeroException();
-            });
+            throw new DivideByZeroException();
         }
 
         public Task Recycle()

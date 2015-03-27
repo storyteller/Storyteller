@@ -24,7 +24,7 @@ namespace InvalidExamples
             throw new NotImplementedException();
         }
 
-        public Task Warmup()
+        public CellHandling Start()
         {
             throw new NotImplementedException();
         }

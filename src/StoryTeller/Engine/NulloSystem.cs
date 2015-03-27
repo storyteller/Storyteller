@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using FubuCore;
-using StoryTeller.Conversion;
 
 namespace StoryTeller.Engine
 {
@@ -20,18 +18,13 @@ namespace StoryTeller.Engine
             return Task.FromResult("recycled");
         }
 
-        public Task Warmup()
+        public CellHandling Start()
         {
-            return Task.FromResult("warmed up");
+            return CellHandling.Basic();
         }
 
         public void Dispose()
         {
-        }
-
-        public CellHandling CreateCellHandling()
-        {
-            return CellHandling.Basic();
         }
 
         public class SimpleExecutionContext : IExecutionContext
@@ -43,10 +36,13 @@ namespace StoryTeller.Engine
 
             void IDisposable.Dispose()
             {
-
             }
 
-            IServiceLocator IExecutionContext.Services { get { return Services; } }
+            IServiceLocator IExecutionContext.Services
+            {
+                get { return Services; }
+            }
+
             public void AfterExecution(ISpecContext context)
             {
                 // Nothing
@@ -55,8 +51,4 @@ namespace StoryTeller.Engine
             public IServiceLocator Services { get; private set; }
         }
     }
-
-
-
-
 }
