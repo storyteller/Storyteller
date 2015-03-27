@@ -47,6 +47,10 @@ namespace StoryTeller.Engine
             }
 
             IServiceLocator IExecutionContext.Services { get { return Services; } }
+            public void AfterExecution(ISpecContext context)
+            {
+                // Nothing
+            }
 
             public IServiceLocator Services { get; private set; }
         }

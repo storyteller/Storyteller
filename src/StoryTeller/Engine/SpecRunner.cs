@@ -89,6 +89,9 @@ namespace StoryTeller.Engine
                     Status = SpecRunnerStatus.Invalid;
                 }
 
+                // Hook mostly for logging
+                execution.AfterExecution(context);
+
                 return context.FinalizeResults(request.Plan.Attempts);
             }
             finally
