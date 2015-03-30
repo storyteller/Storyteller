@@ -20,7 +20,7 @@ namespace StoryTeller.Samples.Fixtures
             return first + " " + last;
         }
 
-        [FormatAs("{first} {last} should be formatted as {fullname}")]
+        [FormatAs("{first} {results} should be formatted as {fullname}")]
         [return: AliasAs("fullname")]
         public string TheNameIs(string first, [SelectionValues("surname")] string last)
         {

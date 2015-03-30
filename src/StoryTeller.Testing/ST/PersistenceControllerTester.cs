@@ -53,7 +53,7 @@ namespace StoryTeller.Testing.ST
             var completed = new SpecExecutionCompleted("sentence4", new SpecResults());
             ClassUnderTest.Receive(completed);
 
-            ClassUnderTest.Hierarchy.Nodes["sentence4"].last
+            ClassUnderTest.Hierarchy.Nodes["sentence4"].results
                 .ShouldBeTheSameAs(completed);
         }
 
