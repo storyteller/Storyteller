@@ -75,8 +75,14 @@ namespace StoryTeller.Remotes
 
             var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system);
 
-            var engine  = new SpecificationEngine(_system, runner, new NulloObserver());
+            var executionObserver = new UserInterfaceExecutionObserver();
+            var engine  = new SpecificationEngine(_system, runner, executionObserver);
             _controller = new EngineController(engine, observer, runner);
+
+            // Super hokey, but we need some way to feed the spec started
+            // event up to EngineController
+            // TODO -- maybe pull the IExecutionQueue concept from 1-2 back out
+            executionObserver.Controller = (EngineController) _controller;
 
 
             _services.Add(observer);

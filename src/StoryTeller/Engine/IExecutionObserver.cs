@@ -22,6 +22,21 @@ namespace StoryTeller.Engine
         }
     }
 
+    public class UserInterfaceExecutionObserver : IExecutionObserver
+    {
+        public void SpecStarted(SpecExecutionRequest request)
+        {
+            if (Controller != null) Controller.SendQueueState();
+        }
+
+        public EngineController Controller;
+
+        public void SpecFinished(SpecExecutionRequest request)
+        {
+            // nothing
+        }
+    }
+
     public class TeamCityExecutionObserver : IExecutionObserver
     {
         public void SpecStarted(SpecExecutionRequest request)

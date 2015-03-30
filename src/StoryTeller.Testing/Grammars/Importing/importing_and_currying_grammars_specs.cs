@@ -42,7 +42,7 @@ namespace StoryTeller.Testing.Grammars.Importing
         {
             var sentence = ModelFor<Sentence>("TestImports", "SetTo12");
             sentence.format.ShouldBe("Set to 12");
-            ShouldBeTestExtensions.ShouldBe(sentence.cells.Any(), false);
+            sentence.cells.Any().ShouldBe(false);
         }
 
         [Test]
@@ -74,11 +74,12 @@ namespace StoryTeller.Testing.Grammars.Importing
             this["SetTo12"] = Import<StateFixture>("SetTo")
                 .Curry().Template("Set to 12")
                 .Defaults("value:12");
-
         }
     }
 
-    public class MyFoo { }
+    public class MyFoo
+    {
+    }
 
     public class StateFixture : Fixture
     {
@@ -125,7 +126,7 @@ namespace StoryTeller.Testing.Grammars.Importing
             this["Curried2"] = Curry(this["Go1"]).Template("{b} and {c}").Defaults("a:3");
         }
 
-        public void Go1(string a, string b, string c, [Default("4")]string d)
+        public void Go1(string a, string b, string c, [Default("4")] string d)
         {
             A = a;
             B = b;
@@ -133,14 +134,12 @@ namespace StoryTeller.Testing.Grammars.Importing
             D = d;
         }
 
-        public void Go2(string a, string b, [Default("4")]string c, [Default("4")]string d)
+        public void Go2(string a, string b, [Default("4")] string c, [Default("4")] string d)
         {
             A = a;
             B = b;
             C = c;
             D = d;
         }
-
-
     }
 }

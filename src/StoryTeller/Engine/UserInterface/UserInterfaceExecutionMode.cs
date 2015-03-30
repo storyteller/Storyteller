@@ -13,7 +13,6 @@ namespace StoryTeller.Engine.UserInterface
 
         public void BeforeRunning(SpecExecutionRequest request)
         {
-            _observer.SpecStarted(request.Plan);
         }
 
         public void AfterRunning(SpecExecutionRequest request, SpecResults results, IConsumingQueue queue, SpecRunnerStatus status)

@@ -199,7 +199,6 @@
     <Compile Include="Messages\RunSpecs.cs" />
     <Compile Include="Messages\RuntimeError.cs" />
     <Compile Include="Messages\SaveSpecBody.cs" />
-    <Compile Include="Messages\SpecCancelled.cs" />
     <Compile Include="Messages\SpecChanged.cs" />
     <Compile Include="Messages\SpecData.cs" />
     <Compile Include="Messages\SpecDataRequested.cs" />
@@ -207,8 +206,6 @@
     <Compile Include="Messages\SpecNodeAdded.cs" />
     <Compile Include="Messages\SpecNodeChanged.cs" />
     <Compile Include="Messages\SpecProgress.cs" />
-    <Compile Include="Messages\SpecQueued.cs" />
-    <Compile Include="Messages\SpecRunning.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\EmbeddedSection.cs" />

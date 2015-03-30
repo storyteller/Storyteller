@@ -21,6 +21,12 @@ namespace StoryTeller.Testing.Engine
         }
 
         [Test]
+        public void should_send_the_queue_state_message_to_the_client()
+        {
+            assertQueueStateWasUpdated();
+        }
+
+        [Test]
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
@@ -38,12 +44,6 @@ namespace StoryTeller.Testing.Engine
 
             ClassUnderTest.OutstandingRequests().Single()
                 .Node.id.ShouldBe("embeds");
-        }
-
-        [Test]
-        public void should_broadcast_a_spec_queued_message()
-        {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SpecQueued(findSpec("embeds")));
         }
 
         [Test]
@@ -67,6 +67,12 @@ namespace StoryTeller.Testing.Engine
         }
 
         [Test]
+        public void should_send_the_queue_state_message_to_the_client()
+        {
+            assertQueueStateWasUpdated();
+        }
+
+        [Test]
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
@@ -86,11 +92,6 @@ namespace StoryTeller.Testing.Engine
                 .Node.id.ShouldBe("embeds");
         }
 
-        [Test]
-        public void should_broadcast_a_spec_queued_message()
-        {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SpecQueued(findSpec("embeds")));
-        }
 
         [Test]
         public void should_enqueue_the_specification()
@@ -130,6 +131,12 @@ namespace StoryTeller.Testing.Engine
             MockFor<IUserInterfaceObserver>()
                 .AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults)));
         }
+
+        [Test]
+        public void should_send_the_queue_state_message_to_the_client()
+        {
+            assertQueueStateWasUpdated();
+        }
     }
 
     [TestFixture]
@@ -144,6 +151,12 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Expect(x => x.RunSpec("c"));
 
             ClassUnderTest.Receive(new RunSpecs {list = new[] {"a", "b", "c"}});
+        }
+
+        [Test]
+        public void should_send_the_queue_state_message_to_the_client()
+        {
+            assertQueueStateWasUpdated();
         }
 
         [Test]
@@ -167,6 +180,12 @@ namespace StoryTeller.Testing.Engine
         }
 
         [Test]
+        public void should_send_the_queue_state_message_to_the_client()
+        {
+            assertQueueStateWasUpdated();
+        }
+
+        [Test]
         public void should_cancel_the_running_spec()
         {
             MockFor<ISpecificationEngine>().AssertWasCalled(x => x.CancelRunningSpec("embeds"));
@@ -185,11 +204,6 @@ namespace StoryTeller.Testing.Engine
                 .Any().ShouldBe(false);
         }
 
-        [Test]
-        public void should_send_a_spec_canceled_message()
-        {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("embeds")));
-        }
     }
 
     [TestFixture]
@@ -211,12 +225,9 @@ namespace StoryTeller.Testing.Engine
         }
 
         [Test]
-        public void should_broadcast_the_spec_canceled_message()
+        public void should_send_the_queue_state_message_to_the_client()
         {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("embeds")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence1")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence2")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence3")));
+            assertQueueStateWasUpdated();
         }
 
         [Test]
@@ -292,6 +303,11 @@ namespace StoryTeller.Testing.Engine
         protected SpecNode findSpec(string id)
         {
             return TestingContext.Hierarchy.GetAllSpecs().FirstOrDefault(x => x.id == id);
+        }
+
+        protected void assertQueueStateWasUpdated()
+        {
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new QueueState()), x => x.IgnoreArguments());
         }
     }
 }

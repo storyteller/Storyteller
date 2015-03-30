@@ -61,11 +61,6 @@ namespace StoryTeller.Testing.Engine
         }
          * */
 
-        [Test]
-        public void should_have_broadcast_a_spec_queued_message()
-        {
-            theListener.MessageTypesReceived[0].ShouldBe("spec-queued");
-        }
 
         [Test]
         public void spec_has_15_steps_so_15_progress_messages()
@@ -74,11 +69,6 @@ namespace StoryTeller.Testing.Engine
                 .Count().ShouldBe(15);
         }
 
-        [Test]
-        public void should_have_broadcast_a_spec_running_message()
-        {
-            theListener.MessageTypesReceived[1].ShouldBe("spec-running");
-        }
 
         [Test]
         public void should_have_broadcast_the_spec_completion_message()

@@ -70,7 +70,7 @@ namespace StoryTeller.Samples.Fixtures
         public void StartWithTheNumber(int number)
         {
             _number = number;
-            Thread.Sleep(60.Seconds());
+            //Thread.Sleep(60.Seconds());
         }
 
         // END:  ActionMethod

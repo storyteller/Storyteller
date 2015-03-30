@@ -42,6 +42,7 @@ namespace StoryTeller.Engine
         public void Receive(RunSpec message)
         {
             RunSpec(message.id, message.spec);
+            SendQueueState();
         }
 
         public virtual void RunSpec(string id, Specification specification = null)
@@ -53,8 +54,6 @@ namespace StoryTeller.Engine
 
             var request = new SpecExecutionRequest(spec, this, specification);
             _outstanding.Add(request);
-
-            _observer.SpecQueued(spec);
 
             _engine.Enqueue(request);
         }
@@ -79,6 +78,8 @@ namespace StoryTeller.Engine
             _outstanding.Remove(outstanding);
 
             _observer.SendToClient(new SpecExecutionCompleted(node.id, results));
+
+            SendQueueState();
         }
 
         public void Receive(HierarchyLoaded message)
@@ -89,7 +90,7 @@ namespace StoryTeller.Engine
         public void Receive(CancelSpec message)
         {
             CancelSpec(message.id);
-            
+            SendQueueState();
         }
 
         public virtual void CancelSpec(string id)
@@ -98,8 +99,6 @@ namespace StoryTeller.Engine
             _outstanding.RemoveAll(x => x.Node.id == id);
 
             _engine.CancelRunningSpec(id);
-
-            _observer.SendToClient(new SpecCancelled(id));
         }
 
         public void Receive(CancelAllSpecs message)
@@ -110,15 +109,16 @@ namespace StoryTeller.Engine
             outstanding.Each(x =>
             {
                 x.Cancel();
-                _observer.SendToClient(new SpecCancelled(x.Node.id));
             });
 
             _outstanding.Clear();
+            SendQueueState();
         }
 
         public void Receive(RunSpecs message)
         {
             message.list.Each(x => RunSpec(x));
+            SendQueueState();
         }
 
         public QueueState QueueState()
@@ -129,6 +129,11 @@ namespace StoryTeller.Engine
                 queued = _outstanding.Where(x => x.Node.id != running).Select(x => x.Node.id).ToArray(),
                 running = running
             };
+        }
+
+        public void SendQueueState()
+        {
+            _observer.SendToClient(QueueState());
         }
     }
 }

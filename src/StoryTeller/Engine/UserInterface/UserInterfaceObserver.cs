@@ -42,19 +42,9 @@ namespace StoryTeller.Engine.UserInterface
             SendToClient(message);
         }
 
-        public void SpecQueued(SpecNode node)
-        {
-            SendToClient(new SpecQueued(node.id));
-        }
-
         public void SendProgress(SpecProgress progress)
         {
             SendToClient(progress);
-        }
-
-        public void SpecStarted(SpecificationPlan plan)
-        {
-            SendToClient(new SpecRunning(plan.Specification.id));
         }
 
         public void Dispose()
