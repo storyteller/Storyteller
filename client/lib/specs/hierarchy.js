@@ -60,6 +60,13 @@ handlers['spec-canceled'] = function(data){
 	spec.state = 'none';
 	queue.remove(spec);
 
+	if (spec.results){
+		SpecificationStore.readResults(spec.id, spec.results);
+	}
+	else {
+		SpecificationStore.clearResults(spec.id);
+	}
+
 	publishHierarchyChanged();
 	publishQueueChanged();
 }

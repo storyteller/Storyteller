@@ -90,6 +90,12 @@ describe('SpecificationStore', function(){
 		expect(message.id).to.equal('1');
 	});
 
+	var results = {
+		logging: {},
+		performance: {},
+		results: []
+	};
+
 	describe('when responding to spec-data', function(){
 		beforeEach(function(){
 			SpecificationStore.setLibrary(library);
@@ -98,7 +104,8 @@ describe('SpecificationStore', function(){
 				topic: 'spec-data',
 				data: {
 					id: 'spec1',
-					data: specData
+					data: specData,
+					results: results
 				}
 			});
 		});
@@ -118,6 +125,38 @@ describe('SpecificationStore', function(){
 			expect(message.channel).to.equal('editor');
 		});
 
+		it('reads results if they exist', function(){
+			var spec = SpecificationStore.getData('spec1');
+			expect(spec.results.logging).to.equal(results.logging);
+			expect(spec.results.performance).to.equal(results.performance);
+		});
+
+
+	});
+
+	describe('when clearing results', function(){
+		var specification = {
+			cleared: false,
+			clearResults(){
+				this.cleared = true;
+			},
+			id: 'spec1'
+		}
+
+		beforeEach(() => {
+			SpecificationStore.data['spec1'] = specification;
+			SpecificationStore.clearResults('spec1');
+		});
+
+		it('should clear the results on the spec', function(){
+			expect(specification.cleared).to.equal.true;
+		});
+
+		it('should broadcast a spec-results-changed message', function(){
+			var message = findPublishedMessage('spec-results-changed');
+			expect(message.id).to.equal('spec1');
+			expect(message.channel).to.equal('editor');
+		});
 	});
 
 	it('handles the spec-changed message when it does not have the specification', function(){

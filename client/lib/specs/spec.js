@@ -27,10 +27,7 @@ class Spec{
 
 	recordResults(results){
 		this.state = 'none';
-		this.results = {
-			counts: results.counts,
-			duration: results.duration,
-		}
+		this.results = results;
 
 		this.runningCounts = null;
 	}

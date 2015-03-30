@@ -22,9 +22,13 @@ function SpecificationStore(){
 		return self.data[id];
 	}
 
-	self.storeData = function(id, data){
+	self.storeData = function(id, data, results){
 		var spec = new Specification(data, self.library);
 		self.data[id] = spec;
+
+		if (results){
+			spec.readResults(results);
+		}
 
 		Postal.publish({
 			channel: 'editor',
@@ -37,6 +41,19 @@ function SpecificationStore(){
 		if (self.hasData(id)){
 			var spec = self.getData(id);
 			spec.readResults(results);
+			Postal.publish({
+				channel: 'editor',
+				topic: 'spec-results-changed',
+				data: {id: id}
+			});
+		}
+	}
+
+	self.clearResults = function(id){
+		if (self.hasData(id)){
+			var spec = self.getData(id);
+			spec.clearResults();
+
 			Postal.publish({
 				channel: 'editor',
 				topic: 'spec-results-changed',
@@ -136,7 +153,7 @@ function SpecificationStore(){
 		});
 
 		self.subscribe('engine', 'spec-data', function(data){
-			self.storeData(data.id, data.data);
+			self.storeData(data.id, data.data, data.results);
 		});
 
 		self.subscribe('engine', 'spec-changed', function(data){
@@ -147,10 +164,6 @@ function SpecificationStore(){
 
 		self.subscribe('engine', 'hierarchy-loaded', function(data){
 			self.clearData();
-		});
-
-		self.subscribe('engine', 'spec-cancelled', function(data){
-			alert('Got ' + JSON.stringify(data));
 		});
 
 	}
