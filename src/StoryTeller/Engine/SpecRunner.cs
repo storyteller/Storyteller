@@ -58,6 +58,8 @@ namespace StoryTeller.Engine
                     execution = _system.CreateContext();
                 }
 
+                if (request.IsCancelled) return null;
+
                 results = executeSpecification(request, timings, execution);
             }
             catch (Exception ex)

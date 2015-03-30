@@ -99,16 +99,18 @@ namespace StoryTeller.Engine
             _outstanding.RemoveAll(x => x.Node.id == id);
 
             _engine.CancelRunningSpec(id);
+
+            _observer.SendToClient(new SpecCancelled(id));
         }
 
         public void Receive(CancelAllSpecs message)
         {
             _engine.CancelRunningSpec(null);
 
-            var outstanding = OutstandingRequests();
-            outstanding.Each(x =>
+            OutstandingRequests().Each(x =>
             {
                 x.Cancel();
+                _observer.SendToClient(new SpecCancelled(x.Id));
             });
 
             _outstanding.Clear();

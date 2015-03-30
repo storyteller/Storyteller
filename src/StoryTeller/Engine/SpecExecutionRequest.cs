@@ -61,6 +61,16 @@ namespace StoryTeller.Engine
             });
         }
 
+        public string Id
+        {
+            get
+            {
+                if (Node != null) return Node.id;
+                if (Specification != null) return Specification.id;
+                return Plan.Specification.id;
+            }
+        }
+
 
         public void Cancel()
         {

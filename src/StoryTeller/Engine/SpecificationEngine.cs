@@ -30,14 +30,15 @@ namespace StoryTeller.Engine
 
             _executionQueue = new ConsumingQueue(request =>
             {
+                if (request.IsCancelled)
+                {
+                    return;
+                }
+
                 observer.SpecStarted(request);
                 var results = _runner.Execute(request, _executionQueue );
 
-                if (request.IsCancelled)
-                {
-                    // TODO -- what here? Send spec-canceled message?
-                }
-                else
+                if (!request.IsCancelled)
                 {
                     // TODO -- combine the two things here?
                     request.SpecExecutionFinished(results);
