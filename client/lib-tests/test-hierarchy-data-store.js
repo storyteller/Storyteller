@@ -129,6 +129,27 @@ describe('Hierarchy data store functions', function(){
 	});
 
 
+	it('tracks the state in the queue-state message', function(){
+		hierarchyIsPublishedFromEngine();
+
+		publishEngineMessage('queue-state', {queued: ['embeds', 'set1', 'set2']});
+
+		expect(Hierarchy.findSpec('embeds').state).to.equal('queued');
+		expect(Hierarchy.findSpec('set1').state).to.equal('queued');
+		expect(Hierarchy.findSpec('sentence1').state).to.equal('none');
+		expect(Hierarchy.findSpec('sentence2').state).to.equal('none');
+
+
+		publishEngineMessage('queue-state', {queued: ['sentence1'], running: 'sentence2'});
+
+		expect(Hierarchy.findSpec('embeds').state).to.equal('none');
+		expect(Hierarchy.findSpec('set1').state).to.equal('none');
+		expect(Hierarchy.findSpec('sentence1').state).to.equal('queued');
+		expect(Hierarchy.findSpec('sentence2').state).to.equal('running');
+		
+
+	});
+
 	it('builds the spec queue on demand', function(){
 		hierarchyIsPublishedFromEngine();
 

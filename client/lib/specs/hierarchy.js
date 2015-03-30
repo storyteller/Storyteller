@@ -98,7 +98,15 @@ handlers['spec-execution-completed'] = function(data){
 }
 
 handlers['queue-state'] = data => {
+	_.values(specs).forEach(s => s.state = 'none');
+
 	queue = data.queued.map(id => specs[id]);
+
+	queue.forEach(s => s.state = 'queued');
+
+	if (data.running){
+		specs[data.running].state = 'running';
+	}
 
 	publishQueueChanged();
 
