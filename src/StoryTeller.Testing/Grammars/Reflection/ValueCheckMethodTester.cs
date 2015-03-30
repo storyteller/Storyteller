@@ -74,7 +74,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .For(new Target(), x => x.Fullname3(null, null))
                 .Compile(new Fixture(), CellHandling.Basic())
                 .ShouldBeOfType<Sentence>()
-                .format.ShouldBe("Fullname3({first}, {last}) should be {returnValue}");
+                .format.ShouldBe("Fullname3({first}, {results}) should be {returnValue}");
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var grammar = ValueCheckMethod.For(new Target(), x => x.Fullname(null, null));
             var values = new StepValues("1");
             values.Store("first", "Mat");
-            values.Store("last", "Cauthon");
+            values.Store("results", "Cauthon");
             values.Store("expected", "Mat Cauthon");
 
             var context = SpecContext.ForTesting();
@@ -99,7 +99,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var grammar = ValueCheckMethod.For(new Target(), x => x.Fullname(null, null));
             var values = new StepValues("1");
             values.Store("first", "Mat");
-            values.Store("last", "Cauthon");
+            values.Store("results", "Cauthon");
             values.Store("expected", "Rand Al'Thor");
 
             var context = SpecContext.ForTesting();

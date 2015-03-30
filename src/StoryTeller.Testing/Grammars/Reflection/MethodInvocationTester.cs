@@ -39,7 +39,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var values = new StepValues(method.Name);
             values.Store("first", "Jeremy");
             values.Store("middle", "Daniel");
-            values.Store("last", "Miller");
+            values.Store("results", "Miller");
 
             var invocation = new MethodInvocation(method, target);
             invocation.Invoke(values).ShouldBe("Jeremy Daniel Miller");

@@ -231,7 +231,7 @@ namespace ST.Client
                     id = id
                 };
 
-                if (spec.last != null) data.results = spec.last.Results;
+                if (spec.results != null) data.results = spec.results.Results;
 
                 return data;
             });
@@ -316,7 +316,7 @@ namespace ST.Client
 
         public void Receive(SpecExecutionCompleted message)
         {
-            Hierarchy.Nodes[message.Id].last = message;
+            Hierarchy.Nodes[message.Id].results = message;
         }
     }
 
