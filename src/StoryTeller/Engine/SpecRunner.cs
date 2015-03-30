@@ -21,6 +21,8 @@ namespace StoryTeller.Engine
         private readonly IExecutionMode _mode;
         private readonly ISystem _system;
         private StopConditions _stopConditions;
+        private readonly ReaderWriterLockSlim _executionLock = new ReaderWriterLockSlim();
+        private ExecutionRun _current;
 
         public SpecRunner(IExecutionMode mode, ISystem system)
         {
@@ -81,7 +83,13 @@ namespace StoryTeller.Engine
                 var plan = request.Plan;
                 var executor = _mode.BuildExecutor(plan, context);
 
-                runWithTimeout(plan, context, executor, _stopConditions.TimeoutInSeconds.Seconds());
+                _current = new ExecutionRun(plan, context, executor, _stopConditions.TimeoutInSeconds.Seconds());
+                _current.Start();
+
+                if (_current.WasCancelled)
+                {
+                    request.Cancel();
+                }
 
                 // Only tested through integration testing
                 if (context.HadCatastrophicException)
@@ -89,8 +97,11 @@ namespace StoryTeller.Engine
                     Status = SpecRunnerStatus.Invalid;
                 }
 
-                // Hook mostly for logging
-                execution.AfterExecution(context);
+                if (!_current.WasCancelled)
+                {
+                    // Hook mostly for logging
+                    execution.AfterExecution(context);
+                }
 
                 return context.FinalizeResults(request.Plan.Attempts);
             }
@@ -134,44 +145,6 @@ namespace StoryTeller.Engine
             };
         }
 
-        private static void runWithTimeout(SpecificationPlan plan, ISpecContext context, IStepExecutor executor, TimeSpan timeout)
-        {
-            var reset = new ManualResetEvent(false);
-
-            var thread = new Thread(() =>
-            {
-                try
-                {
-                    plan.AcceptVisitor(executor);
-                    reset.Set();
-                }
-                catch (ThreadAbortException)
-                {
-                    // Do nothing here, you catch this down below
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            });
-
-            thread.Name = "StoryTeller-Test-Execution";
-            thread.Start();
-
-            var timedout = !reset.WaitOne(timeout);
-            if (timedout)
-            {
-                context.LogResult(new StepResult
-                {
-                    id = plan.Specification.id,
-                    Status = ResultStatus.error,
-                    error = "Timed out in " + context.Timings.Duration,
-                    position = Stage.timedout
-                });
-            }
-
-
-        }
 
 
         public void UseStopConditions(StopConditions conditions)

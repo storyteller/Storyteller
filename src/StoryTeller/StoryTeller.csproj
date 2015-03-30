@@ -92,6 +92,7 @@
     <Compile Include="Engine\BatchWatcher.cs" />
     <Compile Include="Engine\ConsumingQueue.cs" />
     <Compile Include="Engine\EngineController.cs" />
+    <Compile Include="Engine\ExecutionRun.cs" />
     <Compile Include="Engine\IConsumingQueue.cs" />
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\IExecutionMode.cs" />

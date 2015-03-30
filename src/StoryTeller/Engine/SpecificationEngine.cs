@@ -32,9 +32,16 @@ namespace StoryTeller.Engine
                 observer.SpecStarted(request);
                 var results = _runner.Execute(request, _executionQueue );
 
-                // TODO -- combine the two things here?
-                request.SpecExecutionFinished(results);
-                observer.SpecFinished(request);
+                if (request.IsCancelled)
+                {
+                    // TODO -- what here? Send spec-canceled message?
+                }
+                else
+                {
+                    // TODO -- combine the two things here?
+                    request.SpecExecutionFinished(results);
+                    observer.SpecFinished(request);
+                }
             });
 
         }
