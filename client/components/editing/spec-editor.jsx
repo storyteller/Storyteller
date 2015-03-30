@@ -6,14 +6,7 @@ var StepAdder = require('./step-adder');
 var Router = require('react-router');
 
 
-var Button = require('react-bootstrap/Button');
-var ButtonGroup = require('react-bootstrap/ButtonGroup');
-var Grid = require('react-bootstrap/Grid');
-var Row = require('react-bootstrap/Row');
-var Col = require('react-bootstrap/Col');
-
-var ListGroup = require('react-bootstrap/ListGroup');
-var ListGroupItem = require('react-bootstrap/ListGroupItem');
+var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
 
 var EditorPresenter = require('./../../lib/editor-presenter');
 var loader = require('./component-loader');
@@ -26,6 +19,19 @@ var Running = Icons['running'];
 var Persisting = require('./persisting');
 var SpecResultHeader = require('./spec-result-header');
 
+
+var LifecycleButton = require('./lifecycle-button');
+
+var LinkButton = React.createClass({
+	render: function(){
+		var onclick = e => {
+			window.location = this.props.href;
+			e.stopPropagation();
+		}
+
+		return (<Button onClick={onclick}>{this.props.text}</Button>);
+	}
+});
 
 
 var CommandButton = React.createClass({
@@ -43,7 +49,7 @@ var CommandButton = React.createClass({
 				id={this.props.id}
 				title={this.props.title} 
 				disabled={this.props.disabled} 
-				onClick={onclick}><Icon /></Button>
+				onClick={onclick}><Icon />&nbsp;</Button>
 
 		);
 	}
@@ -156,17 +162,17 @@ module.exports = React.createClass({
 
 		var links = [];
 		if (this.state.mode != 'editing'){
-			var elem = (<ListGroupItem href={'#/spec/editing/' + this.state.id}>Editor</ListGroupItem>);
+			var elem = (<LinkButton href={'#/spec/editing/' + this.state.id} text="Editor"/>);
 			links.push(elem);
 		}
 
 		if (this.state.mode != 'preview'){
-			var elem = (<ListGroupItem href={'#/spec/preview/' + this.state.id}>Preview</ListGroupItem>);
+			var elem = (<LinkButton href={'#/spec/preview/' + this.state.id} text="Preview"/>);
 			links.push(elem);
 		}
 
 		if (this.state.mode != 'results'){
-			var elem = (<ListGroupItem href={'#/spec/results/' + this.state.id}>Results</ListGroupItem>);
+			var elem = (<LinkButton href={'#/spec/results/' + this.state.id} text="Results" />);
 			links.push(elem);
 		}
 
@@ -178,44 +184,35 @@ module.exports = React.createClass({
 		return (
 			<Grid>
 				<Row>
-					<Col xs={4} md={4}>
-
-						
-						<br/>
-						<br/>
-
-					    <ListGroup>
-					      {links}
-					    </ListGroup>
-
-
-						
-						<br/>
-						<br/>
-
-						<p>LIFECYCLE WILL BE HERE!</p>
-						<p>Retries count</p>
-						<p>Tags here</p>
-					
-						<h4>Outline</h4>
-						<SpecOutline outline={this.state.outline} />
-					</Col>
-					
-					<Col xs={8} md={8}>
+					<Col xs={12} md={12}>
 					    <h3 className={headerClass}>
 							{this.state.spec.title}
 							<span className="pull-right">
-								<ButtonGroup>
+								<ButtonGroup style={{marginRight: '30px'}}>
 									<CommandButton title="Run the specification" presenter={this.presenter} icon="run" method="run" disabled={false}></CommandButton>
 									<CommandButton title="Save outstanding changes to the spec" presenter={this.presenter} icon="save" method="save" disabled={!this.state.undoEnabled}></CommandButton>
 									<CommandButton title="Undo the last change" id='undo' presenter={this.presenter} icon="undo" method="undo" disabled={!this.state.undoEnabled}></CommandButton>
 									<CommandButton title="Redo the previous change" id='redo' presenter={this.presenter} icon="redo" method="redo" disabled={!this.state.redoEnabled}></CommandButton>
 								</ButtonGroup>
+
+								<ButtonGroup>
+									{links}
+								</ButtonGroup>
+
+								<LifecycleButton spec={this.state.header} />
 							</span>
 						</h3>
 
-					    <hr />
-
+						<hr />
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={4} md={4}>
+						<h4>Outline</h4>
+						<SpecOutline outline={this.state.outline} />
+					</Col>
+					
+					<Col xs={8} md={8}>
 					    {resultsHeader}
 
 					    <Persisting spec={this.state.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
