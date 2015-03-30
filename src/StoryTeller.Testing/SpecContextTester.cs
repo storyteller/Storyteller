@@ -18,8 +18,8 @@ namespace StoryTeller.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
-
+            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
+                new InMemoryServiceLocator());
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace StoryTeller.Testing
         public void log_exception_logs_a_result()
         {
             var exception = new NotImplementedException();
-            theContext.LogException("1", exception, position: Stage.setup);
+            theContext.LogException("1", exception, Stage.setup);
 
             var result = theContext.Results.Single().ShouldBeOfType<StepResult>();
             result.Status.ShouldBe(ResultStatus.error);
@@ -53,20 +53,13 @@ namespace StoryTeller.Testing
         [Test]
         public void wait_is_true_if_the_condition_is_already_true()
         {
-            ShouldBeTestExtensions.ShouldBe(theContext.Wait(() => true, new TimeSpan(0, 0, 0, 0, 500)), true);
+            theContext.Wait(() => true, new TimeSpan(0, 0, 0, 0, 500)).ShouldBe(true);
         }
 
         [Test]
         public void wait_is_false_if_the_condition_is_never_met()
         {
-            ShouldBeTestExtensions.ShouldBe(theContext.Wait(() => false, new TimeSpan(0, 0, 0, 0, 100), 25), false);
-        }
-
-        [Test]
-        public void automatically_false_if_the_context_is_cancelled()
-        {
-            theContext.RequestCancellation();
-            ShouldBeTestExtensions.ShouldBe(theContext.Wait(() => true, new TimeSpan(0, 0, 0, 500)), false);
+            theContext.Wait(() => false, new TimeSpan(0, 0, 0, 0, 100), 25).ShouldBe(false);
         }
 
         [Test]
@@ -86,8 +79,6 @@ namespace StoryTeller.Testing
             var results = theContext.FinalizeResults(3);
 
             results.Reporting.Count().ShouldBe(2);
-
-            
         }
 
         [Test]
@@ -100,15 +91,15 @@ namespace StoryTeller.Testing
         [Test]
         public void stores_whether_there_was_a_critical_exception()
         {
-            ShouldBeTestExtensions.ShouldBe(theContext.HadCriticalException, false);
-            ShouldBeTestExtensions.ShouldBe(theContext.FinalizeResults(3)
-                    .HadCriticalException, false);
+            theContext.HadCriticalException.ShouldBe(false);
+            theContext.FinalizeResults(3)
+                .HadCriticalException.ShouldBe(false);
 
             theContext.LogException("1", new StorytellerCriticalException("Boo!"));
-            ShouldBeTestExtensions.ShouldBe(theContext.HadCriticalException, true);
+            theContext.HadCriticalException.ShouldBe(true);
 
-            ShouldBeTestExtensions.ShouldBe(theContext.FinalizeResults(3)
-                    .HadCriticalException, true);
+            theContext.FinalizeResults(3)
+                .HadCriticalException.ShouldBe(true);
         }
     }
 
@@ -121,13 +112,14 @@ namespace StoryTeller.Testing
         [SetUp]
         public void SetUp()
         {
-            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new InMemoryServiceLocator());
+            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
+                new InMemoryServiceLocator());
         }
 
         [Test]
         public void just_starting_with_default_options()
         {
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), true);
+            theContext.CanContinue().ShouldBe(true);
         }
 
         [Test]
@@ -137,7 +129,7 @@ namespace StoryTeller.Testing
 
             theContext.LogException("1", new StorytellerCriticalException());
 
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), false);
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -147,15 +139,7 @@ namespace StoryTeller.Testing
 
             theContext.LogException("1", new StorytellerCatastrophicException());
 
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), false);
-        }
-
-        [Test]
-        public void stops_when_the_cancellation_token_has_been_cancelled()
-        {
-            theContext.RequestCancellation();
-
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), false);
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -163,7 +147,7 @@ namespace StoryTeller.Testing
         {
             theContext.LogException("1", new NotImplementedException());
 
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), true);
+            theContext.CanContinue().ShouldBe(true);
         }
 
         [Test]
@@ -173,7 +157,7 @@ namespace StoryTeller.Testing
 
             theContext.LogException("1", new NotImplementedException());
 
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), false);
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
@@ -182,18 +166,17 @@ namespace StoryTeller.Testing
             theContext.StopConditions.BreakOnWrongs = true;
 
             theContext.LogResult(new StepResult("1", ResultStatus.success));
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), true);
+            theContext.CanContinue().ShouldBe(true);
 
             theContext.LogResult(new StepResult("1", ResultStatus.failed));
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), false);
+            theContext.CanContinue().ShouldBe(false);
         }
 
         [Test]
         public void will_not_stop_on_wrong_if_stop_conditions_are_the_defaults()
         {
-
             theContext.LogResult(new StepResult("1", ResultStatus.failed));
-            ShouldBeTestExtensions.ShouldBe(theContext.CanContinue(), true);
+            theContext.CanContinue().ShouldBe(true);
         }
     }
 }

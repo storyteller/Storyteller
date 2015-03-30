@@ -13,8 +13,6 @@ namespace StoryTeller
     public class SpecContext : ISpecContext
     {
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
-        private readonly CancellationToken _cancellation;
-        private readonly CancellationTokenSource _cancellationSource;
         private readonly Specification _specification;
         private readonly IResultObserver _resultObserver;
         private IServiceLocator _services;
@@ -29,8 +27,6 @@ namespace StoryTeller
             _specification = specification;
             _resultObserver = observer;
             StopConditions = stopConditions;
-            _cancellationSource = stopConditions.CreateCancellationSource();
-            _cancellation = _cancellationSource.Token;
             _services = services;
 
             _timings = timings ?? new Timings();
@@ -78,19 +74,9 @@ namespace StoryTeller
 
         public Counts Counts { get; private set; }
 
-        public void RequestCancellation()
-        {
-            _cancellationSource.Cancel();
-        }
-
-        public CancellationToken Cancellation
-        {
-            get { return _cancellation; }
-        }
-
         public bool CanContinue()
         {
-            if (_hasCriticalException || _hasCatastrophicException || _cancellation.IsCancellationRequested)
+            if (_hasCriticalException || _hasCatastrophicException)
                 return false;
 
             return StopConditions.CanContinue(Counts);
@@ -108,7 +94,6 @@ namespace StoryTeller
 
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
-            if (Cancellation.IsCancellationRequested) return false;
             if (condition()) return true;
 
             var clock = new Stopwatch();
@@ -116,7 +101,7 @@ namespace StoryTeller
 
             try
             {
-                while (clock.Elapsed < timeout && !Cancellation.IsCancellationRequested)
+                while (clock.Elapsed < timeout)
                 {
                     Thread.Yield();
                     Thread.Sleep(millisecondPolling);

@@ -15,8 +15,6 @@ namespace StoryTeller
         T Service<T>();
 
         State State { get; }
-        CancellationToken Cancellation { get; }
-        void RequestCancellation();
 
         Counts Counts { get; }
         Specification Specification { get; }

@@ -81,14 +81,14 @@ namespace StoryTeller.Samples.Fixtures
             _number *= multiplier;
             _number += delta;
 
-            Thread.Sleep(1.Seconds());
+            //Thread.Sleep(1.Seconds());
         }
 
         public void Subtract(int operand)
         {
             _number -= operand;
 
-            Thread.Sleep(1.Seconds());
+            //Thread.Sleep(1.Seconds());
         }
 
         public void DivideBy(int operand)

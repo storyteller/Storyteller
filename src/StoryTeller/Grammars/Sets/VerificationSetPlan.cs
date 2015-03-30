@@ -64,9 +64,8 @@ namespace StoryTeller.Grammars.Sets
                         var result = CreateResults(_expected, t.Result);
                         result.id = _section.id;
                         context.LogResult(result);
-                        return;
                     }
-                }).Wait(context.Cancellation);
+                }).Wait();
             }
 
 
