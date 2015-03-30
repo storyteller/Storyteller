@@ -128,70 +128,29 @@ describe('Hierarchy data store functions', function(){
 		expect(Hierarchy.findSpec('set1')).to.not.be.null;;
 	});
 
-	it('handles spec-queued', function(){
-		hierarchyIsPublishedFromEngine();
-
-		expect(Hierarchy.findSpec('embeds').state).to.equal('none');
-
-		publishEngineMessage('spec-queued', {id: 'embeds'});
-
-		assertHierarchyUpdatedWasPublished();
-		assertQueueUpdatedWasPublished();
-
-		expect(Hierarchy.findSpec('embeds').state).to.equal('queued');
-	});
 
 	it('builds the spec queue on demand', function(){
 		hierarchyIsPublishedFromEngine();
 
-		publishEngineMessage('spec-queued', {id: 'embeds'});
-		publishEngineMessage('spec-queued', {id: 'set1'});
-		publishEngineMessage('spec-queued', {id: 'set2'});
+		publishEngineMessage('queue-state', {queued: ['embeds', 'set1', 'set2']});
 
 		var ids = _.map(Hierarchy.queuedSpecs(), function(x){
 			return x.id;
 		});
 
 		expect(ids).to.deep.equal(['embeds', 'set1', 'set2']);
-
-		publishEngineMessage('spec-canceled', {id: 'embeds'});
-
-		ids = _.map(Hierarchy.queuedSpecs(), function(x){
-			return x.id;
-		});
-
-		expect(ids).to.deep.equal(['set1', 'set2']);
 	});
 
 	it('handles spec-canceled', function(){
 		hierarchyIsPublishedFromEngine();
-		publishEngineMessage('spec-queued', {id: 'embeds'});
-		expect(Hierarchy.findSpec('embeds').state).to.equal('queued');
 
 		listener.clear();
 
 		publishEngineMessage('spec-canceled', {id: 'embeds'});
 
 		assertHierarchyUpdatedWasPublished();
-		assertQueueUpdatedWasPublished();
 
 		expect(Hierarchy.findSpec('embeds').state).to.equal('none');
-	});
-
-	it('handles spec-running', function(){
-		hierarchyIsPublishedFromEngine();
-		expect(Hierarchy.findSpec('embeds').state).to.equal('none');
-
-		
-		publishEngineMessage('spec-queued', {id: 'embeds'});
-
-		listener.clear();
-		publishEngineMessage('spec-running', {id: 'embeds'});
-		expect(Hierarchy.findSpec('embeds').state).to.equal('running');
-
-
-		assertQueueUpdatedWasPublished();
-		assertHierarchyUpdatedWasPublished();
 	});
 
 	it('handles spec-progress', function(){

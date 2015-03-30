@@ -24,7 +24,7 @@ var SpecProgressBar = React.createClass({
 			topic: 'spec-execution-state',
 			callback: data => {
 				self.setState({
-					running: true,
+					running: data.running,
 					step: data.step,
 					total: data.total,
 					spec: data.spec,
@@ -32,17 +32,6 @@ var SpecProgressBar = React.createClass({
 				});
 			}
 		});
-
-		Postal.subscribe({
-			channel: 'engine', 
-			topic: 'spec-execution-completed',
-			callback: data => {
-				self.setState({
-					running: false
-				});
-			}
-		})
-
 	},
 
 	render: function(){

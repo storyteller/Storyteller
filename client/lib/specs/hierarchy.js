@@ -12,8 +12,7 @@ var lifecycle = 'any';
 var status = 'any';
 
 
-var ArrayList = require('./../array-list');
-var queue = new ArrayList();
+var queue = [];
 
 var SpecificationStore = require('./../specification-store');
 
@@ -45,20 +44,11 @@ handlers['hierarchy-loaded'] = function(data){
 	publishHierarchyChanged();
 }
 
-handlers['spec-queued'] = function(data){
-	var spec = specs[data.id];
-	spec.state = 'queued';
-	queue.add(spec);
-
-	publishHierarchyChanged();
-	publishQueueChanged();
-}
 
 
 handlers['spec-canceled'] = function(data){
 	var spec = specs[data.id];
 	spec.state = 'none';
-	queue.remove(spec);
 
 	if (spec.results){
 		SpecificationStore.readResults(spec.id, spec.results);
@@ -68,16 +58,6 @@ handlers['spec-canceled'] = function(data){
 	}
 
 	publishHierarchyChanged();
-	publishQueueChanged();
-}
-
-handlers['spec-running'] = function(data){
-	var spec = specs[data.id];
-	spec.state = 'running';
-	queue.remove(spec);
-
-	publishHierarchyChanged();
-	publishQueueChanged();
 }
 
 handlers['spec-progress'] = function(data){
@@ -91,7 +71,8 @@ handlers['spec-progress'] = function(data){
 		spec: spec,
 		counts: counts,
 		step: data.step,
-		total: data.total
+		total: data.total,
+		running: true
 	};
 
 	Postal.publish({
@@ -114,6 +95,22 @@ handlers['spec-execution-completed'] = function(data){
 
 	publishHierarchyChanged();
 	publishQueueChanged();
+}
+
+handlers['queue-state'] = data => {
+	queue = data.queued.map(id => specs[id]);
+
+	publishQueueChanged();
+
+	if (!data.running){
+		Postal.publish({
+			channel: 'explorer',
+			topic: 'spec-execution-state',
+			data: {
+				running: false
+			}
+		})
+	}
 }
 
 
@@ -202,14 +199,14 @@ module.exports = {
 	},
 
 	queuedSpecs: function(){
-		return queue.toArray();
+		return queue;
 	},
 
 	reset: function(){
 		specs = {};
 		top = new Suite({});
 		results = {};
-		queue = new ArrayList();
+		queue = [];
 		lifecycle = 'any';
 		status = 'any';
 
