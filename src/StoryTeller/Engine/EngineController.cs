@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
@@ -19,15 +20,17 @@ namespace StoryTeller.Engine
     {
         private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
+        private readonly ISpecRunner _runner;
         private Task<Suite> _hierarchy;
 
         private readonly IList<SpecExecutionRequest> _outstanding = new List<SpecExecutionRequest>();
 
 
-        public EngineController(ISpecificationEngine engine, IUserInterfaceObserver observer)
+        public EngineController(ISpecificationEngine engine, IUserInterfaceObserver observer, ISpecRunner runner)
         {
             _engine = engine;
             _observer = observer;
+            _runner = runner;
             _hierarchy = Task.Factory.StartNew(() => HierarchyLoader.ReadHierarchy());
         }
 
@@ -116,6 +119,16 @@ namespace StoryTeller.Engine
         public void Receive(RunSpecs message)
         {
             message.list.Each(x => RunSpec(x));
+        }
+
+        public QueueState QueueState()
+        {
+            var running = _runner.RunningSpecId();
+            return new QueueState
+            {
+                queued = _outstanding.Where(x => x.Node.id != running).Select(x => x.Node.id).ToArray(),
+                running = running
+            };
         }
     }
 }

@@ -76,7 +76,7 @@ namespace StoryTeller.Remotes
             var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system);
 
             var engine  = new SpecificationEngine(_system, runner, new NulloObserver());
-            _controller = new EngineController(engine, observer);
+            _controller = new EngineController(engine, observer, runner);
 
 
             _services.Add(observer);

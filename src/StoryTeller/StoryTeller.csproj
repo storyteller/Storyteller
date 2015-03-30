@@ -194,6 +194,7 @@
     <Compile Include="Messages\MarkAsAccepted.cs" />
     <Compile Include="Messages\MarkAsRegression.cs" />
     <Compile Include="Messages\PassthroughMessage.cs" />
+    <Compile Include="Messages\QueueState.cs" />
     <Compile Include="Messages\RunSpec.cs" />
     <Compile Include="Messages\RunSpecs.cs" />
     <Compile Include="Messages\RuntimeError.cs" />

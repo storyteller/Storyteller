@@ -145,11 +145,13 @@ namespace StoryTeller.Engine
             };
         }
 
+
+
         public void Cancel(string id = null)
         {
             try
             {
-                if (_current == null || _current.Finished || _current.WasCancelled) return;
+                if (!IsRunning()) return;
                 if (id.IsEmpty() || id == _current.Plan.Specification.id)
                 {
                     _current.Cancel();
@@ -159,6 +161,17 @@ namespace StoryTeller.Engine
             {
                 Console.WriteLine(e);
             }
+        }
+
+        public bool IsRunning()
+        {
+            if (_current == null) return false;
+            return (!_current.Finished && !_current.WasCancelled);
+        }
+
+        public string RunningSpecId()
+        {
+            return IsRunning() ? _current.Plan.Specification.id : null;
         }
 
         public void UseStopConditions(StopConditions conditions)

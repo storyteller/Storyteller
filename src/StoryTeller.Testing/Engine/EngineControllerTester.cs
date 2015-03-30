@@ -232,6 +232,53 @@ namespace StoryTeller.Testing.Engine
         }
     }
 
+    [TestFixture]
+    public class when_determining_the_queue_state : EngineControllerContext
+    {
+        protected override void theContextIs()
+        {
+            
+        }
+
+        [Test]
+        public void in_the_initial_state()
+        {
+            var state = ClassUnderTest.QueueState();
+            state.queued.Length.ShouldBe(0);
+            state.running.ShouldBeNull();
+        }
+
+        [Test]
+        public void couple_specs_queued_nothing_running()
+        {
+            ClassUnderTest.RunSpec("sentence1");
+            ClassUnderTest.RunSpec("sentence2");
+            ClassUnderTest.RunSpec("sentence3");
+
+            MockFor<ISpecRunner>().Stub(x => x.RunningSpecId()).Return(null);
+
+            var state = ClassUnderTest.QueueState();
+            state.queued.ShouldHaveTheSameElementsAs("sentence1", "sentence2", "sentence3");
+
+            state.running.ShouldBeNull();
+        }
+
+        [Test]
+        public void specs_queued_and_one_running()
+        {
+            ClassUnderTest.RunSpec("sentence1");
+            ClassUnderTest.RunSpec("sentence2");
+            ClassUnderTest.RunSpec("sentence3");
+
+            MockFor<ISpecRunner>().Stub(x => x.RunningSpecId()).Return("sentence1");
+
+            var state = ClassUnderTest.QueueState();
+            state.queued.ShouldHaveTheSameElementsAs("sentence2", "sentence3");
+
+            state.running.ShouldBe("sentence1");
+        }
+    }
+
     public abstract class EngineControllerContext : InteractionContext<EngineController>
     {
         protected override sealed void beforeEach()
