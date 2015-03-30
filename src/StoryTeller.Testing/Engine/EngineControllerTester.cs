@@ -12,13 +12,12 @@ using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Testing.Engine
 {
-
     [TestFixture]
     public class when_receiving_a_run_spec_message_with_only_the_id : EngineControllerContext
     {
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec{id = "embeds"});
+            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
         }
 
         [Test]
@@ -50,9 +49,9 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_enqueue_the_request()
         {
-            MockFor<ISpecificationEngine>().AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
+            MockFor<ISpecificationEngine>()
+                .AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
         }
-
     }
 
 
@@ -64,7 +63,7 @@ namespace StoryTeller.Testing.Engine
         protected override void theContextIs()
         {
             theSpecification = new Specification();
-            ClassUnderTest.Receive(new RunSpec { id = "embeds", spec = theSpecification });
+            ClassUnderTest.Receive(new RunSpec {id = "embeds", spec = theSpecification});
         }
 
         [Test]
@@ -99,7 +98,8 @@ namespace StoryTeller.Testing.Engine
             var specificationEngine = MockFor<ISpecificationEngine>();
             specificationEngine.AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
 
-            var request = specificationEngine.GetArgumentsForCallsMadeOn(x => x.Enqueue(null))[0][0].As<SpecExecutionRequest>();
+            var request =
+                specificationEngine.GetArgumentsForCallsMadeOn(x => x.Enqueue(null))[0][0].As<SpecExecutionRequest>();
 
             request.Specification.ShouldBeTheSameAs(theSpecification);
         }
@@ -112,24 +112,23 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec { id = "embeds" });
+            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
             var node = findSpec("embeds");
-            theResults = new SpecResults { Counts = new Counts(1, 0, 0, 0) };
+            theResults = new SpecResults {Counts = new Counts(1, 0, 0, 0)};
             ClassUnderTest.SpecExecutionFinished(node, theResults);
-
-
         }
 
         [Test]
         public void removes_the_outstanding_request()
         {
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.OutstandingRequests().Any(), false);
+            ClassUnderTest.OutstandingRequests().Any().ShouldBe(false);
         }
 
         [Test]
         public void sends_a_conpletion_message_to_the_client()
         {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults)));
+            MockFor<IUserInterfaceObserver>()
+                .AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults)));
         }
     }
 
@@ -144,7 +143,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Expect(x => x.RunSpec("b"));
             ClassUnderTest.Expect(x => x.RunSpec("c"));
 
-            ClassUnderTest.Receive(new RunSpecs{list = new []{"a", "b", "c"}});
+            ClassUnderTest.Receive(new RunSpecs {list = new[] {"a", "b", "c"}});
         }
 
         [Test]
@@ -161,23 +160,29 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec { id = "embeds" });
+            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
             theOutstandingRequest = ClassUnderTest.OutstandingRequests().Single();
 
-            ClassUnderTest.Receive(new CancelSpec{id = "embeds"});
+            ClassUnderTest.Receive(new CancelSpec {id = "embeds"});
+        }
+
+        [Test]
+        public void should_cancel_the_running_spec()
+        {
+            MockFor<ISpecificationEngine>().AssertWasCalled(x => x.CancelRunningSpec("embeds"));
         }
 
         [Test]
         public void the_outstanding_request_should_be_cancelled()
         {
-            ShouldBeTestExtensions.ShouldBe(theOutstandingRequest.IsCancelled, true);
+            theOutstandingRequest.IsCancelled.ShouldBe(true);
         }
 
         [Test]
         public void should_be_removed_from_the_outstanding_request_list()
         {
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.OutstandingRequests()
-                    .Any(), false);
+            ClassUnderTest.OutstandingRequests()
+                .Any().ShouldBe(false);
         }
 
         [Test]
@@ -194,10 +199,10 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec { id = "embeds" });
-            ClassUnderTest.Receive(new RunSpec { id = "sentence1" });
-            ClassUnderTest.Receive(new RunSpec { id = "sentence2" });
-            ClassUnderTest.Receive(new RunSpec { id = "sentence3" });
+            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
+            ClassUnderTest.Receive(new RunSpec {id = "sentence1"});
+            ClassUnderTest.Receive(new RunSpec {id = "sentence2"});
+            ClassUnderTest.Receive(new RunSpec {id = "sentence3"});
 
             theOutstandingRequests = ClassUnderTest.OutstandingRequests();
             theOutstandingRequests.Count().ShouldBe(4);
@@ -217,21 +222,21 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void all_the_outstanding_requests_should_be_canceled()
         {
-            theOutstandingRequests.Each(x => ShouldBeTestExtensions.ShouldBe(x.IsCancelled, true));
+            theOutstandingRequests.Each(x => x.IsCancelled.ShouldBe(true));
         }
 
         [Test]
         public void should_be_no_outstanding_requests()
         {
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.OutstandingRequests().Any(), false);
+            ClassUnderTest.OutstandingRequests().Any().ShouldBe(false);
         }
     }
 
     public abstract class EngineControllerContext : InteractionContext<EngineController>
     {
-        protected sealed override void beforeEach()
+        protected override sealed void beforeEach()
         {
-            ClassUnderTest.Receive(new HierarchyLoaded{hierarchy = TestingContext.Hierarchy});
+            ClassUnderTest.Receive(new HierarchyLoaded {hierarchy = TestingContext.Hierarchy});
             theContextIs();
         }
 
@@ -242,6 +247,4 @@ namespace StoryTeller.Testing.Engine
             return TestingContext.Hierarchy.GetAllSpecs().FirstOrDefault(x => x.id == id);
         }
     }
-
-    
 }

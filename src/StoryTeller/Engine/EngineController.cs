@@ -91,17 +91,18 @@ namespace StoryTeller.Engine
 
         public virtual void CancelSpec(string id)
         {
-            _outstanding.Where(x => x.Node.id == id).Each(x =>
-            {
-                x.Cancel();
-            });
+            _outstanding.Where(x => x.Node.id == id).Each(x => x.Cancel());
             _outstanding.RemoveAll(x => x.Node.id == id);
+
+            _engine.CancelRunningSpec(id);
 
             _observer.SendToClient(new SpecCancelled(id));
         }
 
         public void Receive(CancelAllSpecs message)
         {
+            _engine.CancelRunningSpec(null);
+
             var outstanding = OutstandingRequests();
             outstanding.Each(x =>
             {

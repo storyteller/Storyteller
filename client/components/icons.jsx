@@ -43,6 +43,7 @@ icon('redo', ['fa-undo', 'fa-rotate-180']);
 icon('run', ['fa-play']);
 icon('save', ['fa-save']);
 icon('copy', ['fa-copy']);
+icon('stop', ['fa-stop']);
 
 
 module.exports = icons;

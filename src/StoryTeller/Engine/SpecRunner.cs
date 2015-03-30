@@ -145,7 +145,21 @@ namespace StoryTeller.Engine
             };
         }
 
-
+        public void Cancel(string id = null)
+        {
+            try
+            {
+                if (_current == null || _current.Finished || _current.WasCancelled) return;
+                if (id.IsEmpty() || id == _current.Plan.Specification.id)
+                {
+                    _current.Cancel();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
 
         public void UseStopConditions(StopConditions conditions)
         {

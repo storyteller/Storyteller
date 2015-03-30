@@ -13,7 +13,7 @@ var CommandButton = React.createClass({
 			var data = {type: this.props.topic, list: this.props.hierarchy.allSpecIds()};
 			Postal.publish({
 				channel: 'engine-request',
-				topic: topic,
+				topic: this.props.topic,
 				data: data
 			});
 

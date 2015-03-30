@@ -12,6 +12,7 @@ namespace StoryTeller.Engine
     public interface ISpecificationEngine
     {
         void Enqueue(SpecExecutionRequest request);
+        void CancelRunningSpec(string id);
     }
 
     public class SpecificationEngine : IDisposable, ISpecificationEngine
@@ -66,6 +67,11 @@ namespace StoryTeller.Engine
             }
 
            
+        }
+
+        public void CancelRunningSpec(string id)
+        {
+            _runner.Cancel(id);
         }
 
         private Task<SystemRecycled> tryToStart()

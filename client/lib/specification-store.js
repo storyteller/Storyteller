@@ -149,6 +149,10 @@ function SpecificationStore(){
 			self.clearData();
 		});
 
+		self.subscribe('engine', 'spec-cancelled', function(data){
+			alert('Got ' + JSON.stringify(data));
+		});
+
 	}
 
 	self.errorCount = function(){
