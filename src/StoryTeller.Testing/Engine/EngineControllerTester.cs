@@ -183,7 +183,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_send_a_spec_canceled_message()
         {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("embeds")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("embeds")));
         }
     }
 
@@ -208,10 +208,10 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_broadcast_the_spec_canceled_message()
         {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("embeds")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("sentence1")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("sentence2")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCanceled("sentence3")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("embeds")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence1")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence2")));
+            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence3")));
         }
 
         [Test]

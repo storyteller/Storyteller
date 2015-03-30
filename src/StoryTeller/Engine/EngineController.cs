@@ -97,7 +97,7 @@ namespace StoryTeller.Engine
             });
             _outstanding.RemoveAll(x => x.Node.id == id);
 
-            _observer.SendToClient(new SpecCanceled(id));
+            _observer.SendToClient(new SpecCancelled(id));
         }
 
         public void Receive(CancelAllSpecs message)
@@ -106,7 +106,7 @@ namespace StoryTeller.Engine
             outstanding.Each(x =>
             {
                 x.Cancel();
-                _observer.SendToClient(new SpecCanceled(x.Node.id));
+                _observer.SendToClient(new SpecCancelled(x.Node.id));
             });
 
             _outstanding.Clear();

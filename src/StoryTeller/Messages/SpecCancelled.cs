@@ -1,15 +1,15 @@
 namespace StoryTeller.Messages
 {
-    public class SpecCanceled : ClientMessage
+    public class SpecCancelled : ClientMessage
     {
         public string id;
 
-        public SpecCanceled(string id) : base("spec-canceled")
+        public SpecCancelled(string id) : base("spec-cancelled")
         {
             this.id = id;
         }
 
-        protected bool Equals(SpecCanceled other)
+        protected bool Equals(SpecCancelled other)
         {
             return string.Equals(id, other.id);
         }
@@ -19,7 +19,7 @@ namespace StoryTeller.Messages
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((SpecCanceled) obj);
+            return Equals((SpecCancelled) obj);
         }
 
         public override int GetHashCode()
