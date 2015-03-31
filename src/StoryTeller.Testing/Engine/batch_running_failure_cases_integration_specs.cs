@@ -88,7 +88,7 @@ namespace StoryTeller.Testing.Engine
             
 
             // first one does run, just fails
-            ShouldBeTestExtensions.ShouldBe(first.results.WasAborted, false);
+            first.results.WasAborted.ShouldBe(false);
 
             var contextCreationError = first.results.Results.OfType<StepResult>().Single();
 

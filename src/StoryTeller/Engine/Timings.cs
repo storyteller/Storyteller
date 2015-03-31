@@ -7,7 +7,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Engine
 {
-    public class Timings
+    public class Timings : IDisposable
     {
         private readonly Stopwatch _stopwatch = new Stopwatch();
         private readonly IList<PerfRecord> _records = new List<PerfRecord>();
@@ -56,6 +56,11 @@ namespace StoryTeller.Engine
             {
                 _record.MarkEnd(_stopwatch.ElapsedMilliseconds);
             }
+        }
+
+        public void Dispose()
+        {
+            if (_stopwatch.IsRunning) _stopwatch.Stop();
         }
     }
 

@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Threading;
+using System.Threading.Tasks;
 using FubuCore;
-using StoryTeller.Grammars;
 using StoryTeller.Results;
 
 namespace StoryTeller.Engine
@@ -17,7 +18,9 @@ namespace StoryTeller.Engine
         private bool _wasCancelled;
         private bool _finished;
         private ISpecContext _context;
+        private Exception _catastrophicException;
 
+       
         public ExecutionRun(IExecutionContext execution, Timings timings, SpecExecutionRequest request, StopConditions stopConditions, IExecutionMode mode)
         {
             _execution = execution;
@@ -50,23 +53,19 @@ namespace StoryTeller.Engine
             _thread.Start();
 
             var timedout = !reset.WaitOne(_stopConditions.TimeoutInSeconds.Seconds());
+            _finished = true;
+
+            if (_catastrophicException != null) throw _catastrophicException;
+            if (_context.CatastrophicException != null) throw _context.CatastrophicException;
+
             if (_context == null) return null;
-            
+
             if (timedout && !_wasCancelled)
             {
                 applyTimeoutMessage();
             }
 
-            _finished = true;
-
-
-
             return _context.FinalizeResults(_request.Plan.Attempts); ;
-        }
-
-        public bool HadCatastrophicException
-        {
-            get { return _context.HadCatastrophicException; }
         }
 
         private void applyTimeoutMessage()

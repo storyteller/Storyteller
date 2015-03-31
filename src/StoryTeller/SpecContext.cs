@@ -17,7 +17,6 @@ namespace StoryTeller
         private readonly IResultObserver _resultObserver;
         private IServiceLocator _services;
         private readonly State _state = new State();
-        private bool _hasCatastrophicException;
         private bool _hasCriticalException;
         private readonly Timings _timings;
 
@@ -76,16 +75,13 @@ namespace StoryTeller
 
         public bool CanContinue()
         {
-            if (_hasCriticalException || _hasCatastrophicException)
+            if (_hasCriticalException || CatastrophicException != null)
                 return false;
 
             return StopConditions.CanContinue(Counts);
         }
 
-        public bool HadCatastrophicException
-        {
-            get { return _hasCatastrophicException; }
-        }
+        public StorytellerCatastrophicException CatastrophicException { get; private set; }
 
         public bool HadCriticalException
         {
@@ -158,7 +154,7 @@ namespace StoryTeller
                 }
             }
 
-            if (ex is StorytellerCatastrophicException) _hasCatastrophicException = true;
+            CatastrophicException = ex as StorytellerCatastrophicException;
 
             LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});
         }

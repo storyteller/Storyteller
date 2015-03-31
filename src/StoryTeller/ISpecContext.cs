@@ -21,8 +21,8 @@ namespace StoryTeller
 
         Timings Timings { get; }
         Reporter Reporting { get; }
-        bool HadCatastrophicException { get; }
         bool HadCriticalException { get; }
+        StorytellerCatastrophicException CatastrophicException { get; }
         SpecResults FinalizeResults(int attempts);
     }
 }

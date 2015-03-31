@@ -48,11 +48,13 @@ namespace StoryTeller.Engine
             request.Plan.Attempts++;
 
             var timings = request.StartNewTimings();
+            
             SpecResults results = null;
+            IExecutionContext execution = null;
 
             try
             {
-                IExecutionContext execution = null;
+                
                 using (timings.Subject("Context", "Creation"))
                 {
                     execution = _system.CreateContext();
@@ -60,53 +62,29 @@ namespace StoryTeller.Engine
 
                 if (request.IsCancelled) return null;
 
-                results = executeSpecification(request, timings, execution);
+                _current = new ExecutionRun(execution, timings, request, _stopConditions, _mode);
+                results = _current.Execute();
             }
-            catch (Exception ex)
+            catch (Exception ex) // Any exception that bubbles up is telling us that the runner is invalid
             {
-                results = processContextCreationFailure(request, results, ex, timings);
+                Status = SpecRunnerStatus.Invalid;
+
+                ConsoleWriter.Write(ConsoleColor.Yellow,
+                    "Failed to create an execution context. No specifications can be processed until this is addressed");
+                ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
+                EventAggregator.SendMessage(new RuntimeError(ex));
+
+                results = buildResultsForContextCreationFailure(request, ex, timings);
             }
             finally
             {
                 _mode.AfterRunning(request, results, queue, Status);
+
+                timings.Dispose();
+                if (_current != null) _current.SafeDispose();
+                if (execution != null) execution.SafeDispose();
             }
 
-            return results;
-        }
-
-        private SpecResults executeSpecification(SpecExecutionRequest request, Timings timings, IExecutionContext execution)
-        {
-            try
-            {
-                _current = new ExecutionRun(execution, timings, request, _stopConditions, _mode);
-                var results = _current.Execute();
-
-                // Only tested through integration testing
-                if (_current.HadCatastrophicException)
-                {
-                    Status = SpecRunnerStatus.Invalid;
-                }
-
-                return results;
-            }
-            finally
-            {
-                _current.SafeDispose();
-                execution.SafeDispose();
-            }
-        }
-
-        private SpecResults processContextCreationFailure(SpecExecutionRequest request, SpecResults results, Exception ex,
-            Timings timings)
-        {
-            results = buildResultsForContextCreationFailure(request, ex, timings);
-
-            Status = SpecRunnerStatus.Invalid;
-
-            ConsoleWriter.Write(ConsoleColor.Yellow,
-                "Failed to create an execution context. No specifications can be processed until this is addressed");
-            ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
-            EventAggregator.SendMessage(new RuntimeError(ex));
             return results;
         }
 
