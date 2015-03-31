@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using System.Xml;
 using FubuCore;
 using FubuCore.Logging;
+using FubuCore.Util;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -25,6 +25,7 @@ namespace ST.Client
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
+        private readonly Cache<string, Specification> _data;
 
 
         public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client, ISpecFileWatcher watcher)
@@ -33,6 +34,16 @@ namespace ST.Client
             _engine = engine;
             _client = client;
             _watcher = watcher;
+
+            _data = new Cache<string, Specification>(key =>
+            {
+                var node = _hierarchy.Nodes[key];
+                var spec = XmlReader.ReadFromFile(node.Filename);
+
+                // TODO -- renumber if necessary
+
+                return spec;
+            });
         }
 
         public void StartWatching(string path)
@@ -114,7 +125,7 @@ namespace ST.Client
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var spec = _hierarchy.Nodes[id];
-                var template = XmlReader.ReadFromFile(spec.Filename);
+                var template = _data[id];
                 template.id = Guid.NewGuid().ToString();
                 template.Name = name;
                 template.Lifecycle = Lifecycle.Acceptance;
@@ -197,7 +208,7 @@ namespace ST.Client
                 var old = _hierarchy.Nodes[id];
                 using (_watcher.LatchFile(old.Filename))
                 {
-                    var specification = XmlReader.ReadFromFile(old.Filename);
+                    var specification = _data[id];
 
                     alteration(specification);
 
@@ -227,11 +238,11 @@ namespace ST.Client
                 var data = new SpecData
                 {
                     
-                    data = XmlReader.ReadFromFile(spec.Filename),
+                    data = _data[id],
                     id = id
                 };
 
-                if (spec.results != null) data.results = spec.results.Results;
+                if (spec.results != null) data.results = spec.results;
 
                 return data;
             });
@@ -250,6 +261,8 @@ namespace ST.Client
                 _lock.Read(() =>
                 {
                     var node = HierarchyLoader.ReadSpecNode(file);
+                    _data.Remove(node.id);
+
                     if (_hierarchy.Nodes.Has(node.id))
                     {
                         var old = _hierarchy.Nodes[node.id];
@@ -282,6 +295,7 @@ namespace ST.Client
                 _lock.Write(() =>
                 {
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
+                    _data.ClearAll();
                     var message = new HierarchyLoaded
                     {
                         hierarchy = _hierarchy.Top
@@ -316,7 +330,7 @@ namespace ST.Client
 
         public void Receive(SpecExecutionCompleted message)
         {
-            Hierarchy.Nodes[message.Id].results = message;
+            Hierarchy.Nodes[message.Id].results = message.Results;
         }
     }
 

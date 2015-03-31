@@ -30,7 +30,7 @@ namespace StoryTeller.Model.Persistence
             return Suite.SuitePathOf(path);
         }
 
-        public SpecExecutionCompleted results;
+        public SpecResults results;
 
         protected bool Equals(SpecNode other)
         {

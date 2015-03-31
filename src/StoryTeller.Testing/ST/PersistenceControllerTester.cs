@@ -54,7 +54,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Receive(completed);
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].results
-                .ShouldBeTheSameAs(completed);
+                .ShouldBeTheSameAs(completed.Results);
         }
 
         [Test]

@@ -28,6 +28,10 @@ class Spec{
 	recordResults(results){
 		this.state = 'none';
 		this.results = results;
+		if (results.counts){
+			this.results.counts = new Counts(results.counts);
+		}
+
 
 		this.runningCounts = null;
 	}

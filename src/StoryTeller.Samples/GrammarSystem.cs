@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
 using StoryTeller.Conversion;
@@ -14,6 +15,11 @@ namespace StoryTeller.Samples
 
         public IExecutionContext CreateContext()
         {
+            if (Project.CurrentProfile == "slow")
+            {
+                Thread.Sleep(30.Seconds());
+            }
+
             if (Project.CurrentProfile == "blowup")
             {
                 throw new Exception("I blew up trying to create an execution context");

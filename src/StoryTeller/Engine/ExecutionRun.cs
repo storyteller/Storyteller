@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,28 +56,50 @@ namespace StoryTeller.Engine
             var timedout = !reset.WaitOne(_stopConditions.TimeoutInSeconds.Seconds());
             _finished = true;
 
-            if (_catastrophicException != null) throw _catastrophicException;
-            if (_context.CatastrophicException != null) throw _context.CatastrophicException;
+            if (_wasCancelled) return null;
 
-            if (_context == null) return null;
+            if (_catastrophicException != null) throw _catastrophicException;
+            if (_context != null && _context.CatastrophicException != null) throw _context.CatastrophicException;
+
+            
 
             if (timedout && !_wasCancelled)
             {
-                applyTimeoutMessage();
+                var result = timeoutMessage();
+
+                if (_context == null)
+                {
+                    var perf = _timings.Finish();
+
+                    return new SpecResults
+                    {
+                        Counts = new Counts(0, 0, 1, 0),
+                        Duration = _timings.Duration,
+                        Performance = perf.ToArray(),
+                        Attempts = _request.Plan.Attempts,
+                        Results = new IResultMessage[] { result},
+                        WasAborted = false
+                    };
+                }
+
+
+                _context.LogResult(result);
             }
 
             return _context.FinalizeResults(_request.Plan.Attempts); ;
         }
 
-        private void applyTimeoutMessage()
+
+        private StepResult timeoutMessage()
         {
-            _context.LogResult(new StepResult
+            var stepResult = new StepResult
             {
                 id = _request.Plan.Specification.id,
                 Status = ResultStatus.error,
-                error = "Timed out in " + _context.Timings.Duration,
+                error = "Timed out in " + _timings.Duration,
                 position = Stage.timedout
-            });
+            };
+            return stepResult;
         }
 
         private void execute(EventWaitHandle reset)

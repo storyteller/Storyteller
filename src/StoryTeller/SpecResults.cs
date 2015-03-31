@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using StoryTeller.Engine;
 using StoryTeller.Results;
 
@@ -26,6 +27,9 @@ namespace StoryTeller
         [JsonProperty("attempts")] public int Attempts = 0;
 
         [JsonProperty("aborted")] public bool WasAborted = false;
+
+        [JsonProperty("time")]
+        public string time = DateTime.Now.ToString("t");
 
         public static SpecResults ForAbortedRun()
         {
