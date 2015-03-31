@@ -96,7 +96,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void was_not_aborted()
         {
-            ShouldBeTestExtensions.ShouldBe(theResults.WasAborted, false);
+            theResults.WasAborted.ShouldBe(false);
         }
 
         [Test]

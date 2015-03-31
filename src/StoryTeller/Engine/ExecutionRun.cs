@@ -9,7 +9,7 @@ namespace StoryTeller.Engine
 {
     public class ExecutionRun : IDisposable
     {
-        private readonly IExecutionContext _execution;
+        private readonly ISystem _system;
         private readonly Timings _timings;
         private readonly SpecExecutionRequest _request;
         private readonly StopConditions _stopConditions;
@@ -19,11 +19,11 @@ namespace StoryTeller.Engine
         private bool _finished;
         private ISpecContext _context;
         private Exception _catastrophicException;
-
+        private IExecutionContext _execution;
        
-        public ExecutionRun(IExecutionContext execution, Timings timings, SpecExecutionRequest request, StopConditions stopConditions, IExecutionMode mode)
+        public ExecutionRun(ISystem system, Timings timings, SpecExecutionRequest request, StopConditions stopConditions, IExecutionMode mode)
         {
-            _execution = execution;
+            _system = system;
             _timings = timings;
             _request = request;
             _stopConditions = stopConditions;
@@ -81,6 +81,23 @@ namespace StoryTeller.Engine
 
         private void execute(EventWaitHandle reset)
         {
+            try
+            {
+                using (_timings.Subject("Context", "Creation"))
+                {
+                    _execution = _system.CreateContext();
+                }
+            }
+            catch (Exception e)
+            {
+                _catastrophicException = e;
+                reset.Set();
+
+                return;
+            }
+
+            if (_request.IsCancelled) return;
+
             _context = new SpecContext(_request.Specification, _timings, _request.Observer, _stopConditions, _execution.Services);
             _context.Reporting.StartDebugListening();
             var executor = _mode.BuildExecutor(_request.Plan, _context);

@@ -20,8 +20,7 @@ namespace StoryTeller.Engine
     {
         private readonly IExecutionMode _mode;
         private readonly ISystem _system;
-        private StopConditions _stopConditions;
-        private readonly ReaderWriterLockSlim _executionLock = new ReaderWriterLockSlim();
+        private StopConditions _stopConditions = new StopConditions();
         private ExecutionRun _current;
 
         public SpecRunner(IExecutionMode mode, ISystem system)
@@ -50,19 +49,10 @@ namespace StoryTeller.Engine
             var timings = request.StartNewTimings();
             
             SpecResults results = null;
-            IExecutionContext execution = null;
 
             try
             {
-                
-                using (timings.Subject("Context", "Creation"))
-                {
-                    execution = _system.CreateContext();
-                }
-
-                if (request.IsCancelled) return null;
-
-                _current = new ExecutionRun(execution, timings, request, _stopConditions, _mode);
+                _current = new ExecutionRun(_system, timings, request, _stopConditions, _mode);
                 results = _current.Execute();
             }
             catch (Exception ex) // Any exception that bubbles up is telling us that the runner is invalid
@@ -82,7 +72,6 @@ namespace StoryTeller.Engine
 
                 timings.Dispose();
                 if (_current != null) _current.SafeDispose();
-                if (execution != null) execution.SafeDispose();
             }
 
             return results;
