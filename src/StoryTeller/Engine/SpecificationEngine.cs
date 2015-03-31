@@ -38,7 +38,7 @@ namespace StoryTeller.Engine
                 observer.SpecStarted(request);
                 var results = _runner.Execute(request, _executionQueue );
 
-                if (!request.IsCancelled)
+                if (!request.IsCancelled && results != null)
                 {
                     // TODO -- combine the two things here?
                     request.SpecExecutionFinished(results);

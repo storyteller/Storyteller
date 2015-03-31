@@ -76,41 +76,39 @@ namespace StoryTeller.Engine
 
         private SpecResults executeSpecification(SpecExecutionRequest request, Timings timings, IExecutionContext execution)
         {
-            SpecContext context = null;
-
             try
             {
-                context = new SpecContext(request.Specification, timings, request.Observer, _stopConditions, execution.Services);
-                context.Reporting.StartDebugListening();
-                var plan = request.Plan;
-                var executor = _mode.BuildExecutor(plan, context);
-
-                _current = new ExecutionRun(plan, context, executor, _stopConditions.TimeoutInSeconds.Seconds());
-                _current.Start();
-
-                if (_current.WasCancelled)
+                _current = new ExecutionRun(execution, timings, request, _stopConditions, _mode);
+                using (var context = _current.Execute())
                 {
-                    request.Cancel();
-                }
+                    if (_current.WasCancelled)
+                    {
+                        request.Cancel();
+                    }
 
-                // Only tested through integration testing
-                if (context.HadCatastrophicException)
-                {
-                    Status = SpecRunnerStatus.Invalid;
-                }
+                    if (context == null)
+                    {
+                        return null;
+                    }
 
-                if (!_current.WasCancelled)
-                {
-                    // Hook mostly for logging
-                    execution.AfterExecution(context);
-                }
+                    // Only tested through integration testing
+                    if (context.HadCatastrophicException)
+                    {
+                        Status = SpecRunnerStatus.Invalid;
+                    }
 
-                return context.FinalizeResults(request.Plan.Attempts);
+                    if (!_current.WasCancelled)
+                    {
+                        // Hook mostly for logging
+                        execution.AfterExecution(context);
+                    }
+
+                    return context.FinalizeResults(request.Plan.Attempts);
+                }
             }
             finally
             {
                 execution.SafeDispose();
-                context.SafeDispose();
             }
         }
 
@@ -154,7 +152,7 @@ namespace StoryTeller.Engine
             try
             {
                 if (!IsRunning()) return;
-                if (id.IsEmpty() || id == _current.Plan.Specification.id)
+                if (id.IsEmpty() || id == _current.Request.Id)
                 {
                     _current.Cancel();
                 }
@@ -173,7 +171,7 @@ namespace StoryTeller.Engine
 
         public string RunningSpecId()
         {
-            return IsRunning() ? _current.Plan.Specification.id : null;
+            return IsRunning() ? _current.Request.Id : null;
         }
 
         public void UseStopConditions(StopConditions conditions)

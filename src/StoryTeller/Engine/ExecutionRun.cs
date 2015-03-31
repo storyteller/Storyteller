@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using FubuCore;
 using StoryTeller.Grammars;
 using StoryTeller.Results;
 
@@ -7,23 +8,26 @@ namespace StoryTeller.Engine
 {
     public class ExecutionRun
     {
-        private readonly SpecificationPlan _plan;
-        private readonly ISpecContext _context;
-        private readonly IStepExecutor _executor;
-        private readonly TimeSpan _timeout;
+        private readonly IExecutionContext _execution;
+        private readonly Timings _timings;
+        private readonly SpecExecutionRequest _request;
+        private readonly StopConditions _stopConditions;
+        private readonly IExecutionMode _mode;
         private Thread _thread;
         private bool _wasCancelled;
         private bool _finished;
+        private ISpecContext _context;
 
-        public ExecutionRun(SpecificationPlan plan, ISpecContext context, IStepExecutor executor, TimeSpan timeout)
+        public ExecutionRun(IExecutionContext execution, Timings timings, SpecExecutionRequest request, StopConditions stopConditions, IExecutionMode mode)
         {
-            _plan = plan;
-            _context = context;
-            _executor = executor;
-            _timeout = timeout;
+            _execution = execution;
+            _timings = timings;
+            _request = request;
+            _stopConditions = stopConditions;
+            _mode = mode;
         }
 
-        public void Start()
+        public ISpecContext Execute()
         {
             var reset = new ManualResetEvent(false);
 
@@ -31,12 +35,11 @@ namespace StoryTeller.Engine
             {
                 try
                 {
-                    _plan.AcceptVisitor(_executor);
-                    reset.Set();
+                    execute(reset);
                 }
                 catch (ThreadAbortException)
                 {
-                    // Do nothing here, you catch this down below
+                    // nothing, it's handled below
                 }
                 catch (Exception e)
                 {
@@ -46,29 +49,40 @@ namespace StoryTeller.Engine
 
             _thread.Start();
 
-            var timedout = !reset.WaitOne(_timeout);
+            var timedout = !reset.WaitOne(_stopConditions.TimeoutInSeconds.Seconds());
             if (timedout && !_wasCancelled)
             {
-                _context.LogResult(new StepResult
+                if (_context != null)
                 {
-                    id = _plan.Specification.id,
-                    Status = ResultStatus.error,
-                    error = "Timed out in " + _context.Timings.Duration,
-                    position = Stage.timedout
-                });
+                    _context.LogResult(new StepResult
+                    {
+                        id = _request.Plan.Specification.id,
+                        Status = ResultStatus.error,
+                        error = "Timed out in " + _context.Timings.Duration,
+                        position = Stage.timedout
+                    });
+                }
             }
 
             _finished = true;
+
+            return _context;
         }
 
-        public ExecutionRun(SpecificationPlan plan)
+        private void execute(EventWaitHandle reset)
         {
-            _plan = plan;
+            _context = new SpecContext(_request.Specification, _timings, _request.Observer, _stopConditions, _execution.Services);
+            _context.Reporting.StartDebugListening();
+            var executor = _mode.BuildExecutor(_request.Plan, _context);
+
+            _request.Plan.AcceptVisitor(executor);
+
+            reset.Set();
         }
 
-        public SpecificationPlan Plan
+        public SpecExecutionRequest Request
         {
-            get { return _plan; }
+            get { return _request; }
         }
 
         public bool Finished
