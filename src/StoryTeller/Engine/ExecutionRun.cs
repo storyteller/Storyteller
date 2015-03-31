@@ -6,7 +6,7 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Engine
 {
-    public class ExecutionRun
+    public class ExecutionRun : IDisposable
     {
         private readonly IExecutionContext _execution;
         private readonly Timings _timings;
@@ -27,7 +27,7 @@ namespace StoryTeller.Engine
             _mode = mode;
         }
 
-        public ISpecContext Execute()
+        public SpecResults Execute()
         {
             var reset = new ManualResetEvent(false);
 
@@ -50,23 +50,34 @@ namespace StoryTeller.Engine
             _thread.Start();
 
             var timedout = !reset.WaitOne(_stopConditions.TimeoutInSeconds.Seconds());
+            if (_context == null) return null;
+            
             if (timedout && !_wasCancelled)
             {
-                if (_context != null)
-                {
-                    _context.LogResult(new StepResult
-                    {
-                        id = _request.Plan.Specification.id,
-                        Status = ResultStatus.error,
-                        error = "Timed out in " + _context.Timings.Duration,
-                        position = Stage.timedout
-                    });
-                }
+                applyTimeoutMessage();
             }
 
             _finished = true;
 
-            return _context;
+
+
+            return _context.FinalizeResults(_request.Plan.Attempts); ;
+        }
+
+        public bool HadCatastrophicException
+        {
+            get { return _context.HadCatastrophicException; }
+        }
+
+        private void applyTimeoutMessage()
+        {
+            _context.LogResult(new StepResult
+            {
+                id = _request.Plan.Specification.id,
+                Status = ResultStatus.error,
+                error = "Timed out in " + _context.Timings.Duration,
+                position = Stage.timedout
+            });
         }
 
         private void execute(EventWaitHandle reset)
@@ -76,6 +87,8 @@ namespace StoryTeller.Engine
             var executor = _mode.BuildExecutor(_request.Plan, _context);
 
             _request.Plan.AcceptVisitor(executor);
+
+            _execution.AfterExecution(_context);
 
             reset.Set();
         }
@@ -97,8 +110,15 @@ namespace StoryTeller.Engine
 
         public void Cancel()
         {
+            _request.Cancel();
             _wasCancelled = true;
             _thread.Abort();
+        }
+
+        public void Dispose()
+        {
+            if (_context != null) _context.SafeDispose();
+            if (_execution != null) _execution.SafeDispose();
         }
     }
 }

@@ -79,35 +79,19 @@ namespace StoryTeller.Engine
             try
             {
                 _current = new ExecutionRun(execution, timings, request, _stopConditions, _mode);
-                using (var context = _current.Execute())
+                var results = _current.Execute();
+
+                // Only tested through integration testing
+                if (_current.HadCatastrophicException)
                 {
-                    if (_current.WasCancelled)
-                    {
-                        request.Cancel();
-                    }
-
-                    if (context == null)
-                    {
-                        return null;
-                    }
-
-                    // Only tested through integration testing
-                    if (context.HadCatastrophicException)
-                    {
-                        Status = SpecRunnerStatus.Invalid;
-                    }
-
-                    if (!_current.WasCancelled)
-                    {
-                        // Hook mostly for logging
-                        execution.AfterExecution(context);
-                    }
-
-                    return context.FinalizeResults(request.Plan.Attempts);
+                    Status = SpecRunnerStatus.Invalid;
                 }
+
+                return results;
             }
             finally
             {
+                _current.SafeDispose();
                 execution.SafeDispose();
             }
         }
