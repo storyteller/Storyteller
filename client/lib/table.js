@@ -26,7 +26,8 @@ class Table extends CompositeGrammar{
 				return loader.tableContext({table: self, section: section});
 			},
 
-			key: self.key
+			key: self.key,
+			title: metadata.title
 		}
 		
 		super(metadata);

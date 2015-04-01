@@ -48,9 +48,12 @@ module.exports = React.createClass({
 		});
 
 		return (
-			<div className="list-group add-steps-container">
-				<AddStepItem holder={holder} grammar={CommentGrammar} />
-				{components}
+			<div>
+				<h5>Add items to {this.props.holder.title}</h5>
+				<div className="list-group add-steps-container">
+					<AddStepItem holder={holder} grammar={CommentGrammar} />
+					{components}
+				</div>
 			</div>
 		);
 	}

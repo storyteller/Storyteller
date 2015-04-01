@@ -33,6 +33,23 @@ var LinkButton = React.createClass({
 	}
 });
 
+var EditorLoading = React.createClass({
+	render: function(){
+		return (
+			<Grid>
+				<Row>
+					<div className="center-block">
+						<br />
+						<br />
+						<br />
+						<h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {this.props.spec.name}...</h3>
+					</div>
+				</Row>
+			</Grid>
+		);
+	}
+});
+
 
 var CommandButton = React.createClass({
 	render: function(){
@@ -111,6 +128,7 @@ module.exports = React.createClass({
 			persisting: false,
 			lastSaved: null,
 			mode: mode,
+			contextualControl: null,
 			header: {hasResults: function(){
 				return false;
 			}}
@@ -131,35 +149,24 @@ module.exports = React.createClass({
 		if (this.state.mode != 'editing') return null;
 
 		if (this.state.spec.active){
-			return StepAdder({holder: this.state.spec});
+			return null;
 		}
 
 		return StepAdderPlaceHolder({holder: this.state.spec.id, text: 'add sections or comments...'});
 	},
 
-	render: function(){
-		if (this.state.loading){
-			return (
-				<Grid>
-					<Row>
-						<div className="center-block">
-							<br />
-							<br />
-							<br />
-							<h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {this.state.spec.name}...</h3>
-						</div>
-					</Row>
-				</Grid>
-			);
+	buildContext: function(){
+		if (this.state.mode != 'editing') return null;
+
+		if (this.state.activeContainer){
+			return this.state.activeContainer.contextualControl(loader.editing);
 		}
-
-		var selector = this.buildSelector();
-
-		var headerClass = "";
-		if (this.state.spec.active){
-			headerClass = "text-primary";
+		else {
+			return null;
 		}
+	},
 
+	buildLinks: function(){
 		var links = [];
 		if (this.state.mode != 'editing'){
 			var elem = (<LinkButton href={'#/spec/editing/' + this.state.id} text="Editor"/>);
@@ -176,10 +183,29 @@ module.exports = React.createClass({
 			links.push(elem);
 		}
 
+		return links;
+	},
+
+	render: function(){
+		if (this.state.loading){
+			return ( <EditorLoading spec={this.state.spec} /> );
+		}
+
+		var selector = this.buildSelector();
+
+		var headerClass = "";
+		if (this.state.spec.active){
+			headerClass = "text-primary";
+		}
+
+		var links = this.buildLinks();
+
 		var resultsHeader = null;
 		if (this.state.header.hasResults()){
 			resultsHeader = (<SpecResultHeader spec={this.state.header} />);
 		}
+
+		var contextualControl = this.buildContext();
 
 		return (
 			<Grid>
@@ -210,6 +236,9 @@ module.exports = React.createClass({
 					<Col xs={4} md={4}>
 						<h4>Outline</h4>
 						<SpecOutline outline={this.state.outline} />
+						<br />
+						<br />
+						{contextualControl}
 					</Col>
 					
 					<Col xs={8} md={8}>
