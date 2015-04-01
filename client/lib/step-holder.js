@@ -4,17 +4,7 @@ var ArrayList = require('./array-list');
 var _ = require('lodash');
 var Comment = require('./comment');
 
-function OutlineNode(holder){
-	this.id = holder.id;
-	this.title = holder.title;
-	this.active = holder.active;
-
-	this.children = _.filter(holder.steps, function(x){
-		return x.isHolder();
-	}).map(function(x){
-		return new OutlineNode(x);
-	});
-}
+var OutlineNode = require('./outline-node');
 
 function StepHolder(id, fixture){
 	if (fixture == null) throw new Error('Missing argument for "fixture"');

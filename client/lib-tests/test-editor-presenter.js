@@ -42,7 +42,7 @@ function FakeView(){
 
 var loader = new StubLoader();
 
-describe.only('EditorPresenter', function(){
+describe('EditorPresenter', function(){
 	var view;
 
 	beforeEach(function(){
