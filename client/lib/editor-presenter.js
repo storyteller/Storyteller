@@ -36,39 +36,27 @@ class EditorPresenter{
 		});
 	}
 
-	enableUndoButtons(){
-		if (this.spec != null){
-			var counts = this.spec.changeStatus();
-			var state = {
-				undoEnabled: (counts.applied > 0),
-				redoEnabled: (counts.unapplied > 0)
-			}
-
-			this.view.setState(state);
-		}
-		else {
-			this.view.setState({
-				undoEnabled: false,
-				redoEnabled: false
-			});
-		}
-	}
-
 
 	refreshEditor(){
 		if (this.spec){
+			var counts = this.spec.changeStatus();
+
 			this.view.setState({
 				spec: this.spec,
 				activeContainer: this.spec.activeHolder,
 				components: this.loader.buildComponents(this.spec),
 				outline: this.spec.outline(),
 				loading: false,
-				header: Hierarchy.findSpec(this.id)
+				header: Hierarchy.findSpec(this.id),
+				undoEnabled: (counts.applied > 0),
+				redoEnabled: (counts.unapplied > 0)
 			});
 		}
 		else{
 			this.view.setState({
-				loading: true
+				loading: true,
+				undoEnabled: false,
+				redoEnabled: false
 			});
 		}
 
@@ -87,7 +75,6 @@ class EditorPresenter{
 		if (SpecificationStore.hasData(this.id)){
 			this.spec = SpecificationStore.getData(this.id);
 			this.refreshEditor();
-			this.enableUndoButtons();
 		}
 		else{
 			this.view.setState({loading: true, spec: this.specHeader});
@@ -166,9 +153,7 @@ class EditorPresenter{
 
 
 	    if (this.spec){
-			this.enableUndoButtons();
 			this.refreshEditor();
-			this.view.setState({spec: this.specHeader})
 	    }
 	    else{
 	    	this.initializeData();
@@ -225,18 +210,16 @@ class EditorPresenter{
 
 	applyChange(data){
 		this.spec.apply(data);
-		this.enableUndoButtons();
+		this.refreshEditor();
 	}
 
 	undo(){
 		this.spec.undo();
-		this.enableUndoButtons();
 		this.refreshEditor();
 	}
 
 	redo(){
 		this.spec.redo();
-		this.enableUndoButtons();
 		this.refreshEditor();
 	}
 
@@ -245,15 +228,11 @@ class EditorPresenter{
 
 		this.spec.baselineAt(data.revision);
 
-
-		// TODO -- maybe find a way to combine the folling two calls
-		// for performance
 		this.view.setState({
 			lastSaved: data.time,
 			persisting: false
 		});
 
-		this.enableUndoButtons();
 	}
 
 

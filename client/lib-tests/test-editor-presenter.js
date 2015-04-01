@@ -42,7 +42,7 @@ function FakeView(){
 
 var loader = new StubLoader();
 
-describe('EditorPresenter', function(){
+describe.only('EditorPresenter', function(){
 	var view;
 
 	beforeEach(function(){
@@ -104,11 +104,10 @@ describe('EditorPresenter', function(){
 		presenter.refreshEditor = function(){
 			wasRefreshed = true;
 			ownedSpec = this.spec;
+			buttonsEnabled = true;
+
 		}
 
-		presenter.enableUndoButtons = function(){
-			buttonsEnabled = true;
-		}
 
 		beforeEach(function(){
 			SpecificationStore.storeData('spec1', ObjectMother.specData());
@@ -140,11 +139,9 @@ describe('EditorPresenter', function(){
 		presenter.refreshEditor = function(){
 			wasRefreshed = true;
 			ownedSpec = this.spec;
-		}
-
-		presenter.enableUndoButtons = function(){
 			buttonsEnabled = true;
 		}
+
 
 		beforeEach(function(){
 			
@@ -581,7 +578,6 @@ describe('EditorPresenter', function(){
 			view = new FakeView();
 			presenter = new EditorPresenter(spec);
 			presenter.refreshEditor = function(){}
-			presenter.enableUndoButtons = function(){}
 
 			presenter.activate(loader, view);
 
@@ -641,11 +637,9 @@ describe('EditorPresenter', function(){
 			view = new FakeView();
 			presenter = new EditorPresenter(spec);
 			
-			presenter.enableUndoButtons = function(){
+			presenter.refreshEditor = function(){
 				undoButtonsCalculated = true;
 			}
-
-			presenter.refreshEditor = function(){}
 			presenter.activate(loader, view);
 
 			presenter.spec = spec;
