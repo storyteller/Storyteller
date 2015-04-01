@@ -44,20 +44,8 @@ describe('QueueCount', function(){
 	it('displays the updated counts after some specs are queued', function(){
 		Postal.publish({
 			channel: 'engine',
-			topic: 'spec-queued',
-			data: {id: 'embeds'}
-		});
-
-		Postal.publish({
-			channel: 'engine',
-			topic: 'spec-queued',
-			data: {id: 'sentence1'}
-		});
-
-		Postal.publish({
-			channel: 'engine',
-			topic: 'spec-queued',
-			data: {id: 'sentence3'}
+			topic: 'queue-state',
+			data: {queued: ['embeds', 'sentence1', 'sentence3']}
 		});
 
 		var element = component.getDOMNode();
@@ -68,20 +56,14 @@ describe('QueueCount', function(){
 	it('displays the updated counts after some are canceled', function(){
 		Postal.publish({
 			channel: 'engine',
-			topic: 'spec-queued',
-			data: {id: 'embeds'}
+			topic: 'queue-state',
+			data: {queued: ['embeds', 'sentence1', 'sentence3']}
 		});
 
 		Postal.publish({
 			channel: 'engine',
-			topic: 'spec-queued',
-			data: {id: 'sentence1'}
-		});
-
-		Postal.publish({
-			channel: 'engine',
-			topic: 'spec-canceled',
-			data: {id: 'sentence1'}
+			topic: 'queue-state',
+			data: {queued: ['embeds']}
 		});
 
 		var element = component.getDOMNode();

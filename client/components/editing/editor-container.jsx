@@ -8,7 +8,7 @@ var DeleteGlyph = require('./delete-glyph');
 module.exports = React.createClass({
 	buildSelector: function(){
 		if (this.props.subject.active){
-			return StepAdder({holder: this.props.subject});
+			return null;
 		}
 
 		return StepAdderPlaceHolder({holder: this.props.subject.id, text: 'add steps...'});

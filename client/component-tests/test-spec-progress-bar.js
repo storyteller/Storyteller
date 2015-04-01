@@ -98,7 +98,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 0, wrongs: 0, errors: 1, invalids: 0}
 		}
 		expect(component.getDOMNode()).to.not.be.null;
-		publishEngineMessage('spec-execution-completed', {id: 'embeds', results: results});
+		publishEngineMessage('queue-state', {running: null, queued: []});
 		expect(component.getDOMNode()).to.be.null;
 	});
 });

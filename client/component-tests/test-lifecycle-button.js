@@ -27,7 +27,7 @@ function findPublishedMessage(topic){
 
 
 
-describe.only('The Lifecycle Button', function(){
+describe('The Lifecycle Button', function(){
 	var div = null;
 	var button = null;
 
