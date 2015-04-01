@@ -58,6 +58,9 @@ var routes = (
 );
 
 module.exports = function(){
+  // activate keyboard shortcuts
+  require('./../lib/keyboard-shortcuts').register();
+
 	Router.run(routes, function (Handler) {
 	  React.render(<Handler/>, document.body);
 	});
