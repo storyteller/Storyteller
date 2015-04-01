@@ -26,6 +26,19 @@ describe('Fixture', function(){
 		fixture = new Fixture(data);
 	});
 
+	it('can build its contextualControl', function(){
+		var loader = new StubLoader();
+
+		var section = {};
+		var control = fixture.contextualControl(section, loader);
+
+		expect(control).to.deep.equal({
+			type: 'stepAdder', 
+			props: {holder: section}
+		});
+	});
+
+
 	it('can calculate error count with no errors', function(){
 		expect(fixture.errorCount()).to.equal(0);
 	});

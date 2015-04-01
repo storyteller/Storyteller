@@ -44,7 +44,8 @@ editor.add('comment', 'comment-editor');
 editor.add('table', 'table-editor');
 editor.add('row', 'body-row');
 editor.add('errorBox', 'error-box');
-
+editor.add('stepAdder', 'step-adder');
+editor.add('tableContext', 'table-context');
 
 
 var preview = new Loader();
@@ -55,6 +56,9 @@ preview.add('table', 'table-preview');
 preview.add('comment', 'comment');
 preview.add('row', 'preview-row');
 preview.add('errorBox', 'error-box');
+
+preview.stepAdder = x => null;
+preview.tableContext = x => null;
 
 var results = new Loader();
 results.add('line', 'line');
@@ -74,6 +78,9 @@ results.add('errorCell', 'error-cell');
 results.add('perfTable', 'perf-table');
 results.add('logComponent', 'log-component');
 results.add('setResultsTable', 'set-results-table');
+
+results.stepAdder = x => null;
+results.tableContext = x => null;
 
 module.exports = {
 	editing: editor,

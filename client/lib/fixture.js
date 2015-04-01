@@ -22,7 +22,9 @@ class Fixture{
 		this.grammars = grammars;
 	}
 
-
+	contextualControl(section, loader){
+		return loader.stepAdder({holder: section});
+	}
 
 	newStep(){
 		return new Section({}, this);

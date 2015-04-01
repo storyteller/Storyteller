@@ -23,6 +23,8 @@ function StubLoader(){
 	this.add('missingCell');
 	this.add('failedCell');
 	this.add('errorRow');
+	this.add('stepAdder');
+	this.add('tableContext');
 
 	this.buildComponents = function(){
 		return [];

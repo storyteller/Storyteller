@@ -26,6 +26,13 @@ describe('Table Grammar', function(){
 		loader = new StubLoader();
 	});
 
+	it('can build its contextual control', function(){
+		var section = {};
+		var control = table.fixture.contextualControl(section, loader);
+
+		expect(control).to.deep.equal({type: 'tableContext', props: {table: table, section: section}});
+	});
+
 	it('should capture the key', function(){
 		expect(table.key).to.equal('AddTable');
 	});

@@ -22,6 +22,18 @@ describe('The FixtureLibrary', function(){
 		]
 	};
 
+	it('can build its contextualControl', function(){
+		var loader = new StubLoader();
+
+		var spec = {};
+		var control = library.contextualControl(spec, loader);
+
+		expect(control).to.deep.equal({
+			type: 'stepAdder', 
+			props: {holder: spec}
+		});
+	});
+
 	it('can find a fixture by name', function(){
 		var math = library.find('Math');
 		var zork = library.find('Zork');

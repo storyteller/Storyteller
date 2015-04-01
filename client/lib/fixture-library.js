@@ -16,6 +16,9 @@ class FixtureLibrary{
 		this.key = 'FixtureLibrary';
 	}
 
+	contextualControl(spec, loader){
+		return loader.stepAdder({holder: spec});
+	}
 
 	find(key){
 		if (!this.fixtures.hasOwnProperty(key)){

@@ -27,6 +27,10 @@ function StepHolder(id, fixture){
 	self.steps = new ArrayList();
 	self.active = false;
 
+	self.contextualControl = function(loader){
+		return this.fixture.contextualControl(this, loader);
+	}
+
 	self.addStep = function(step){
 		step.parent = self;
 

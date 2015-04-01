@@ -11,15 +11,19 @@ class Table extends CompositeGrammar{
 		var self = this;
 
 		this.fixture = {
-			find: function(key){
+			find(key){
 				return this;
 			},
 
-			buildStep: function(data){
+			buildStep(data){
 				var step = new Step(data || {}, self.cells, this);
 				step.key = this.key + '-row';
 
 				return step;
+			},
+
+			contextualControl(section, loader){
+				return loader.tableContext({table: self, section: section});
 			},
 
 			key: self.key
