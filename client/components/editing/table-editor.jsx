@@ -15,12 +15,17 @@ var TableEditor = React.createClass({
 			e.preventDefault();
 		}
 
+		var headerClass = "";
+		if (this.props.section.active == true){
+			headerClass += ' bg-primary';
+		}
+
 		return (
 			
 
 			<table className="table table-bordered table-hover" id={this.props.section.id}>
 				<thead>
-					<tr><th colSpan={tableWidth}><DeleteGlyph step={this.props.step}/>{this.props.title}</th></tr>
+					<tr><th className={headerClass} colSpan={tableWidth}><DeleteGlyph step={this.props.step}/>{this.props.title}</th></tr>
 					<HeaderRow cells={this.props.cells}/>
 				</thead>
 				<tbody>
