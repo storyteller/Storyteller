@@ -73,6 +73,28 @@ describe('Table Grammar', function(){
 		expect(holder.steps[2].findValue('result')).to.equal(13);
 	});
 
+	it('should place its fixture object on the right section of built steps', function(){
+		var data = {
+			collections: [
+				{
+					key: 'steps',
+					steps: [
+						{cells: {x: 1, y: 2, result: 3}},
+						{cells: {x: 4, y: 5, result: 9}},
+						{cells: {x: 6, y: 7, result: 13}}
+
+					]
+				} 
+			]
+		}
+
+		var step = table.buildStep(data);
+
+		var holder = step.collections.steps;
+
+		expect(holder.fixture).to.equal(table.fixture);
+	});
+
 	it('should build an error row if there is a before error', function(){
 		var step = new Step({}, []);
 		table.writeSection(step, {steps: [], results: {}, allErrors: function(){

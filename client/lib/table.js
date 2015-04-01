@@ -8,11 +8,6 @@ var _ = require('lodash');
 
 class Table extends CompositeGrammar{
 	constructor(metadata){
-		super(metadata);
-
-		this.title = metadata.title;
-		this.cells = metadata.cells;
-
 		var self = this;
 
 		this.fixture = {
@@ -29,6 +24,13 @@ class Table extends CompositeGrammar{
 
 			key: self.key
 		}
+		
+		super(metadata);
+
+		this.title = metadata.title;
+		this.cells = metadata.cells;
+
+
 	}
 
 	newRowStep(){

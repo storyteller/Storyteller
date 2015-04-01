@@ -78,28 +78,6 @@ class Fixture{
 }
 
 
-function Fixture(data){
-	this.key = data.key;
-	this.title = data.title || data.key;
-	this.errors = data.errors || [];
-	this.implementation = data.implementation;
-
-	var grammars = {};
-	
-	if (data.grammars){
-		var buildGrammar = require('./grammar-builder');
-
-		data.grammars.forEach(function(metadata){
-			grammars[metadata.key] = buildGrammar(metadata);
-		});
-	}
-
-
-
-	this.grammars = grammars;
-}
-
-
 
 	
 module.exports = Fixture;
