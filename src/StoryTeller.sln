@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Testing", "Stor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specifications", "Specifications\Specifications.csproj", "{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,18 @@ Global
 		{CE6A3137-87EC-4BE2-A39A-518CBC9F2690}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CE6A3137-87EC-4BE2-A39A-518CBC9F2690}.Release|x64.ActiveCfg = Release|Any CPU
 		{CE6A3137-87EC-4BE2-A39A-518CBC9F2690}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD26E9B9-F04D-4C64-A753-4394B1D00C1D}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

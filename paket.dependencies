@@ -18,6 +18,10 @@ source http://nuget.org/api/v2
 source https://www.myget.org/F/fubumvc-edge
 source http://nuget.org/api/v2
 source https://www.myget.org/F/fubumvc-edge
+source http://nuget.org/api/v2
+source https://www.myget.org/F/fubumvc-edge
+source http://nuget.org/api/v2
+source https://www.myget.org/F/fubumvc-edge
 nuget ilrepack
 nuget FubuCore 2.0.0.291
 nuget Bottles ~> 3.0
