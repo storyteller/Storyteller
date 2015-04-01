@@ -46,7 +46,7 @@ class Sentence{
 
 	nextCell(arg, step){
 		if (arg == null) return this.firstCell(step);
-		console.log(JSON.stringify(arg));
+
 		var cell = arg.cell.key;
 
 		if (_.last(this.orderedCells) == cell) return null;

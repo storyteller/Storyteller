@@ -22,6 +22,14 @@ class MissingGrammar{
 	buildStep(data){
 		return new Step(data, []);
 	}
+
+	firstCell(){
+		return null;
+	}
+
+	nextCell(){
+		return null;
+	}
 }
 
 module.exports = MissingGrammar;

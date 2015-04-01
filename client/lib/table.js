@@ -148,7 +148,13 @@ class Table extends CompositeGrammar{
 		return loader.table({cells: this.cells, title: this.title, rows: rows, section: section});
 	}
 
+	firstCell(){
+		return null;
+	}
 
+	nextCell(){
+		return null;
+	}
 }
 
 

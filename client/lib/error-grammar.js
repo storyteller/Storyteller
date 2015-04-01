@@ -19,6 +19,13 @@ class ErrorGrammar{
 		throw new Error("Not implemented yet!");
 	}
 
+	firstCell(){
+		return null;
+	}
+
+	nextCell(){
+		return null;
+	}
 }
 
 
