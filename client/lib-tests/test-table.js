@@ -26,6 +26,22 @@ describe('Table Grammar', function(){
 		loader = new StubLoader();
 	});
 
+	it('the inner fixture grammar can select the first cell', function(){
+		var step = table.fixture.buildStep(null);
+		expect(table.fixture.firstCell(step).cell.key).to.equal('x');
+	});
+
+	it('the inner fixture grammar can select the next cell in a row step', function(){
+		var step = table.fixture.buildStep(null);
+		var x = step.args.find('x');
+		var y = step.args.find('y');
+		var result = step.args.find('result');
+
+		expect(table.fixture.nextCell(x, step)).to.equal(y);
+		expect(table.fixture.nextCell(y, step)).to.equal(result);
+		expect(table.fixture.nextCell(result, step)).to.be.null;
+	});
+
 	it('can build its contextual control', function(){
 		var section = {};
 		var control = table.fixture.contextualControl(section, loader);

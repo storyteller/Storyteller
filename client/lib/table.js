@@ -16,7 +16,7 @@ class Table extends CompositeGrammar{
 			},
 
 			buildStep(data){
-				var step = new Step(data || {}, self.cells, this);
+				var step = new Step(data || {cells:{}}, self.cells, this);
 				step.key = this.key + '-row';
 
 				return step;
@@ -24,6 +24,22 @@ class Table extends CompositeGrammar{
 
 			contextualControl(section, loader){
 				return loader.tableContext({table: self, section: section});
+			},
+
+			firstCell(step){
+				return step.args.find(self.cells[0].key);
+			},
+
+			nextCell(arg, step){
+				if (arg == null) return this.firstCell(step);
+
+				var cell = arg.cell.key;
+
+				if (cell == _.last(self.cells).key) return null;
+
+				var index = _.findIndex(self.cells, c => c.key == cell);
+
+				return step.args.find(self.cells[index + 1].key);
 			},
 
 			key: self.key,
