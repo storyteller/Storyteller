@@ -174,6 +174,57 @@ describe('Sentence', function(){
 		});
 	});
 
+	describe('when choosing the first cell', function(){
+		it('should be null if there are no cells', function(){
+			build({format: 'Do something'});
+			expect(sentence.firstCell({})).to.be.null;
+		});
+
+		it('should choose the first cell in order if one exists', function(){
+			build({
+				format: 'Add {x} to {y} then multiply by {z}'
+			});
+
+			var step = sentence.newStep();
+
+			var arg = sentence.firstCell(step);
+
+			expect(arg.cell.key).to.equal('x');
+		});
+	});
+
+	describe('when choosing the next cell', function(){
+		it('should be null if there are no cells', function(){
+			build({format: 'Do something'});
+			expect(sentence.nextCell(null, {})).to.be.null;
+		});
+
+		it('should choose the next cell by position', function(){
+			build({
+				format: 'Add {x} to {y} then multiply by {z}'
+			});
+
+			var step = sentence.newStep();
+			var x = step.args.find('x');
+			var y = step.args.find('y');
+			var z = step.args.find('z');
+
+			expect(sentence.nextCell(x, step)).to.equal(y);
+			expect(sentence.nextCell(y, step)).to.equal(z);
+		});
+
+		it('should return null if it is on the last arg already', function(){
+			build({
+				format: 'Add {x} to {y} then multiply by {z}'
+			});
+
+			var step = sentence.newStep();
+			var z = step.args.find('z');
+
+			expect(sentence.nextCell(z, step)).to.be.null;
+		});
+	});
+
 	describe('when building the preview controls', function(){
 		it('should create all the right controls for text and cells', function(){
 			var StubLoader = require('./stub-loader');

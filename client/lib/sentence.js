@@ -26,6 +26,8 @@ class Sentence{
 			.filter(part => part.type == "Cell")
 			.map(p => p.cell.key);
 
+		this.orderedCells = usedCells;
+
 		var allCells = _.keys(cells);
 		var unusedCells = _.difference(allCells, usedCells).join(', ');
 
@@ -36,7 +38,22 @@ class Sentence{
 		this.allCells = _.values(this.cells);
 	}
 
+	firstCell(step){
+		if (this.orderedCells.length == 0) return null;
 
+		return step.args.find(this.orderedCells[0]);
+	}
+
+	nextCell(arg, step){
+		if (arg == null) return this.firstCell(step);
+		console.log(JSON.stringify(arg));
+		var cell = arg.cell.key;
+
+		if (_.last(this.orderedCells) == cell) return null;
+
+		var index = _.indexOf(this.orderedCells, arg.cell.key);
+		return step.args.find(this.orderedCells[index + 1]);
+	}
 
 	buildStep(data){
 		return new Step(data, this.allCells, this);
