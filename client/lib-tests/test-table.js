@@ -72,6 +72,8 @@ describe('Table Grammar', function(){
 
 		var holder = step.collections.steps;
 
+		expect(holder.parent).to.equal(step);
+
 		expect(holder.steps.length).to.equal(3);
 
 		// spot check

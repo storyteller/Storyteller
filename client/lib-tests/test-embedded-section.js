@@ -79,6 +79,10 @@ describe('EmbeddedSection', function(){
 
 		var step = grammar.buildStep(stepData);
 
+		it('should put the parent step as the parent of the section', function(){
+			expect(step.collections.steps.parent).to.equal(step);
+		});
+
 		it('should put its fixture on its section', function(){
 			expect(step.collections.steps.fixture).to.equal(grammar.fixture);
 		});
