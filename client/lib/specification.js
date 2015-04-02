@@ -1,6 +1,7 @@
 var StepHolder = require('./step-holder');
 var _ = require('lodash');
 var uuid = require('node-uuid');
+var SpecificationNavigator = require('./specification-navigator');
 
 function Specification(data, library){
 	if (data == undefined || data == null){
@@ -15,7 +16,7 @@ function Specification(data, library){
 	this.results = {};
 	this.active = false;
 
-
+	this.navigator = new SpecificationNavigator(this);
 
 	this.children = function(){
 		return this.steps;
@@ -171,22 +172,6 @@ function Specification(data, library){
 		}
 	}
 
-	var _activeCell = null;
-	var _activeHolder = null;
-
-	var replaceHolder = function(value){
-		if (_activeHolder){
-			if (_activeHolder == value) return false;
-
-			_activeHolder.active = false;
-		}
-
-		value.active = true;
-		_activeHolder = value;
-
-		return true;
-	}
-
 	self.selectCell = function(id, cell){
 		var step = this.find(id);
 		if (!step){
@@ -198,8 +183,7 @@ function Specification(data, library){
 			throw new Error("Unable to find a cell named " + cell + '" for id: ' + id);
 		}
 
-		this.activeCell = arg;
-		replaceHolder(step.parent);
+		this.navigator.replace({holder: step.parent, step: step, cell: arg});
 	}
 
 	self.selectHolder = function(id){
@@ -209,7 +193,7 @@ function Specification(data, library){
 			throw new Error('Unable to find the specified holder with id: ' + id);
 		}
 
-		this.activeHolder = holder;
+		this.navigator.goToHolder(holder);
 	}
 
 	self.logResult = function(result){
@@ -239,17 +223,7 @@ function Specification(data, library){
 		enumerable: true,
 		writeable: true,
 		get: function(){
-			return _activeCell;
-		},
-		set: function(value){
-			if (_activeCell){
-				if (_activeCell == value) return;
-
-				_activeCell.active = false;
-			}
-
-			value.active = true;
-			_activeCell = value;
+			return this.navigator.location.cell;
 		}
 	});
 
@@ -257,37 +231,13 @@ function Specification(data, library){
 		enumerable: true,
 		writeable: true,
 		get: function(){
-			return _activeHolder;
-		},
-		set: function(value){
-			if (replaceHolder(value)){
-				if (_activeCell){
-					_activeCell.active = false;
-					_activeCell = null;
-				}
-			}
-
-		}	
+			return this.navigator.location.holder;
+		}
 	});
 
 	readHolder(this);
 
-	// shouldn't be necessary, but still
-	this.clearActiveState();
-	var lastHolder = _.findLast(this.steps, function(x){
-		return x.isHolder();
-	});
-
-	if (lastHolder){
-		lastHolder.active = true;
-		_activeHolder = lastHolder;
-	}
-	else {
-		_activeHolder = this;
-		this.active = true;
-	}
-
-
+	this.navigator.moveLast();
 }
 
 

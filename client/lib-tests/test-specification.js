@@ -63,12 +63,12 @@ describe('Specification', function(){
 
 		it('can create an outline of holders', function(){
 			var expected = {
-				active: false,
+				active: true,
 				id: specification.id,
 				title: specification.title,
 				children: [
 					{active: false, id: specification.steps[0].id, title: specification.steps[0].title, children: []},
-					{active: true, id: specification.steps[3].id, title: specification.steps[3].title, children: []}
+					{active: false, id: specification.steps[3].id, title: specification.steps[3].title, children: []}
 				]
 			};
 
@@ -440,12 +440,6 @@ describe('Storing and finding steps by id', function(){
 			expect(specification.activeCell).to.be.null;
 			expect(specification.activeHolder).to.equal(specification);
 
-		});
-
-		it('select the last holder in the immediate children if one exists', function(){
-			expect(spec.steps[1].active).to.be.true;
-			expect(spec.activeHolder).to.equal(spec.steps[1]);
-			expect(spec.activeCell).to.be.null;
 		});
 
 		it('when activating a cell for the first time', function(){
