@@ -138,9 +138,9 @@ class Section{
 			deleteSubject = this;
 		}
 
-		components.push(this.adder.editor(loader));
+		var adder = this.adder.editor(loader);
 
-		return loader.container({title: this.fixture.title, components: components, subject: this, deleteSubject: deleteSubject});
+		return loader.container({adder: adder, title: this.fixture.title, components: components, subject: this, deleteSubject: deleteSubject});
 	}
 
 	grammars(){

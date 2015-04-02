@@ -68,8 +68,9 @@ function StepHolder(id, fixture, addText){
 			return;
 		}
 
-		data.steps.forEach(function(x){
+		data.steps.forEach(x => {
 			var step = self.buildStep(x);
+			step.parent = this;
 			self.addStep(step);
 		});
 	}
@@ -134,16 +135,13 @@ function StepHolder(id, fixture, addText){
 	}
 
 	self.selectNext = function(location){
-		if (location.holder != this) return null;
-
-		if (location.step == this.adder) return null;
+		if (location.step == self.adder) return null;
 
 		if (location.step == null) return this.selectFirst();
 
-		if (location.step == _.last(this.steps)) return null;
+		if (location.step == _.last(this.steps)) return {holder: this, step: this.adder, cell: null};
 
 		var index = _.indexOf(this.steps, location.step);
-
 		return this.steps[index + 1].selectFirst();
 	}
 }

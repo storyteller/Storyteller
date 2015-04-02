@@ -6,16 +6,22 @@ function selectNext(location){
 		if (stepNext) return stepNext;
 	}
 
-	if (location.holder){
-		var holderNext = location.holder.selectNext(location);
-		if (holderNext) return holderNext;
+	var holderNext = location.holder.selectNext(location);
+	if (holderNext) return holderNext;
 
+console.log('current holder could not find the next, so try the parent');
+	var holder = location.holder;
+	while (holder.parent){
+		var parent = holder.parent;
 
+		console.log('trying a parent');
+		var next = parent.selectNext({holder: parent, step: holder, cell: null});
+		if (next) return next;
+
+		holder = parent;
 	}
 
 	return null;
-
-	// MORE HERE
 }
 
 function selectPrevious(location){
@@ -55,6 +61,8 @@ class SpecificationNavigator {
 
 
 	moveNext(){
+		if (this.location.step == this.spec.adder) return false;
+
 		var next = selectNext(this.location);
 		if (next){
 			this.replace(next);

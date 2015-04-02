@@ -37,23 +37,21 @@ class EditorPresenter{
 	}
 
 	moveFirst(){
-		this.spec.navigator.moveFirst();
+		this.spec.navigator.moveFirst(); 
 		this.refreshEditor();
 	}
 
 	moveLast(){
-		this.spec.navigator.moveLast();
+		this.spec.navigator.moveLast(); 
 		this.refreshEditor();
 	}
 
 	moveNext(){
-		this.spec.navigator.moveNext();
-		this.refreshEditor();
+		if (this.spec.navigator.moveNext()) this.refreshEditor();
 	}
 
 	movePrevious(){
-		this.spec.navigator.movePrevious();
-		this.refreshEditor();
+		if (this.spec.navigator.movePrevious()) this.refreshEditor();
 	}
 
 

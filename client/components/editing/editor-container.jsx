@@ -21,6 +21,8 @@ module.exports = React.createClass({
 			  </div>
 			  <div className="panel-body">
 			    {this.props.components}
+			    <hr />
+			    {this.props.adder}
 			  </div>
 			</div>
 		);

@@ -197,14 +197,34 @@ class Step{
 		return _.values(this.collections).length > 0;
 	}
 
+	isSimple(){
+		if (this.hasArgs()) return false;
+		if (this.hasCollections()) return false;
+
+		return true;
+	}
+
 	selectFirst(){
-		if (!this.hasArgs() && !this.hasCollections()) return {holder: this.parent, step: this, cell: null};
+		if (this.isSimple()) return {holder: this.parent, step: this, cell: null};
 
 		if (!this.hasCollections()){
 			return {holder: this.parent, step: this, cell: this.grammar.firstCell(this)};
 		}
 
-		throw new Error('not done yet');
+		throw new Error('not done yet -- has collections: ' + this.key);
+	}
+
+	selectNext(location){
+		if (this.isSimple()) return null;
+
+		if (this.hasCollections()){
+			return this.grammar.selectNext(location);
+		}
+
+		var nextCell = this.grammar.nextCell(location.cell);
+		if (nextCell == null) return null;
+
+		return {holder: this.parent, step: this, cell: nextCell};
 	}
 
 }
