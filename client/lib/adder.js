@@ -23,7 +23,13 @@ class Adder {
 		return null;
 	}
 
+	selectLast(){
+		return null;
+	}
 
+	selectFirst(){
+		return null;
+	}
 }
 
 module.exports = Adder;

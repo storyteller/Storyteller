@@ -145,6 +145,24 @@ function StepHolder(id, fixture, addText){
 
 		return this.steps[index + 1].selectFirst();
 	}
+
+	self.selectLast = function(location){
+		return {holder: this, step: this.adder, cell: null};
+	}
+
+	self.selectPrevious = function(location){
+		if (this.steps.length == 0) return null;
+
+		if (location.step == self.adder) return _.last(this.steps).selectLast();
+
+		if (location.step == null) return this.selectLast();
+
+		if (location.step == this.steps[0]) return null;
+
+		var index = _.indexOf(this.steps, location.step);
+
+		return this.steps[index - 1].selectLast();
+	}
 }
 
 module.exports = StepHolder;

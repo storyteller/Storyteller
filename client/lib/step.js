@@ -226,6 +226,29 @@ class Step{
 		return {holder: this.parent, step: this, cell: nextCell};
 	}
 
+	selectPrevious(location){
+		if (this.isSimple()) return null;
+
+		if (this.hasCollections()){
+			return this.grammar.selectPrevious(location);
+		}
+
+		var previousCell = this.grammar.previousCell(location.cell, location.step);
+		if (previousCell == null) return null;
+
+		return {holder: this.parent, step: this, cell: previousCell};
+	}
+
+	selectLast(location){
+		if (this.isSimple()) return {holder: this.parent, step: this, cell: null};
+
+		if (!this.hasCollections()){
+			return {holder: this.parent, step: this, cell: this.grammar.lastCell(this)};
+		}
+
+		return this.grammar.selectLast(this);
+	}
+
 }
 
 

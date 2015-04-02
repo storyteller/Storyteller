@@ -68,7 +68,7 @@ module.exports = {
 		});
 
 		editor({
-			keys: ['ctrl-shift-e', 'end'],
+			keys: ['ctrl+shift+e', 'end'],
 			topic: 'go-end',
 			description: 'Move the focus to the very bottom of the active specification editor'
 		});

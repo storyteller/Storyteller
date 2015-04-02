@@ -10,6 +10,7 @@ class Comment{
 		var cell = new Cell('text', 'Textual comment');
 		cell.editor = 'comment';
 
+		this.type = 'comment';
 		this.arg = new Arg(cell, {cells: data}, this.id);
 	}
 

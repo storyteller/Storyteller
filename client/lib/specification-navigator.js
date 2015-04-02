@@ -23,7 +23,25 @@ function selectNext(location){
 }
 
 function selectPrevious(location){
-	throw new Error('not done yet');
+	if (location.step){
+		var stepPrevious = location.step.selectPrevious(location);
+		if (stepPrevious) return stepPrevious;
+	}
+
+	var holderPrevious = location.holder.selectPrevious(location);
+	if (holderPrevious) return holderPrevious;
+
+	var holder = location.holder;
+	while (holder.parent){
+		var parent = holder.parent;
+
+		var previous = parent.selectPrevious({holder: parent, step: holder, cell: null});
+		if (previous) return previous;
+
+		holder = parent;
+	}
+
+	return null;
 }
 
 class SpecificationNavigator {
@@ -81,7 +99,7 @@ class SpecificationNavigator {
 	}
 
 	moveLast(){
-		if (this.location.step && this.location.step == this.spec.adder) return false;
+		if (this.location.step == this.spec.adder) return false;
 
 		this.replace({holder: this.spec, step: this.spec.adder, cell: null});
 
@@ -92,7 +110,10 @@ class SpecificationNavigator {
 		var previous = selectPrevious(this.location);
 		if (previous){
 			this.replace(previous);
+			return true;
 		}		
+
+		return false;
 	}
 
 	goToHolder(holder){

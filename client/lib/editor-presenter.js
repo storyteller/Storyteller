@@ -113,7 +113,7 @@ class EditorPresenter{
 		var self = this;
 
 		this.subscribe('go-home', () => this.moveFirst());
-		this.subscribe('go-end', () => this.moveEnd());
+		this.subscribe('go-end', () => this.moveLast());
 
 		this.subscribe('go-next', () => this.moveNext());
 		this.subscribe('go-previous', () => this.movePrevious());
