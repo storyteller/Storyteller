@@ -180,6 +180,20 @@ class Table extends CompositeGrammar{
 	selectNext(location){
 		return null;
 	}
+
+	selectPrevious(location){
+		return null;
+	}
+
+	selectLast(step){
+		var section = this.readSection(step);
+		if (section.steps.length == 0){
+			return {holder: section, step: null, cell: null};
+		}
+
+		var step = _.last(section.steps);
+		return step.selectLast();
+	}
 }
 
 
