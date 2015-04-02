@@ -4,6 +4,7 @@ class Adder {
 		this.holder = holder;
 		this.active = false;
 		this.text = text;
+		this.type = 'adder';
 	}
 
 	editor(loader){

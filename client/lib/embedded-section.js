@@ -48,11 +48,12 @@ class EmbeddedSection extends CompositeGrammar{
 		return section.buildResults(loader.chromed(), step);
 	}
 
-	firstCell(){
-		return null;
+	selectFirst(step){
+		var section = this.readSection(step);
+		return section.selectFirst(); 
 	}
 
-	nextCell(){
+	selectNext(location){
 		return null;
 	}
 }

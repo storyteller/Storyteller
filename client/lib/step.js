@@ -211,7 +211,7 @@ class Step{
 			return {holder: this.parent, step: this, cell: this.grammar.firstCell(this)};
 		}
 
-		throw new Error('not done yet -- has collections: ' + this.key);
+		return this.grammar.selectFirst(this);
 	}
 
 	selectNext(location){
@@ -221,7 +221,7 @@ class Step{
 			return this.grammar.selectNext(location);
 		}
 
-		var nextCell = this.grammar.nextCell(location.cell);
+		var nextCell = this.grammar.nextCell(location.cell, location.step);
 		if (nextCell == null) return null;
 
 		return {holder: this.parent, step: this, cell: nextCell};

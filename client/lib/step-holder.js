@@ -142,6 +142,7 @@ function StepHolder(id, fixture, addText){
 		if (location.step == _.last(this.steps)) return {holder: this, step: this.adder, cell: null};
 
 		var index = _.indexOf(this.steps, location.step);
+
 		return this.steps[index + 1].selectFirst();
 	}
 }
