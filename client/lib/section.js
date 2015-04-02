@@ -8,7 +8,7 @@ class Section{
 			throw new Error('NULL data going into Section');
 		}
 
-		StepHolder.call(this, data.id, fixture);
+		StepHolder.call(this, data.id, fixture, 'add steps or comments...');
 
 		if (fixture == null){
 			fixture = library.find(data.key);
@@ -137,6 +137,8 @@ class Section{
 		if (!deleteSubject){
 			deleteSubject = this;
 		}
+
+		components.push(this.adder.editor(loader));
 
 		return loader.container({title: this.fixture.title, components: components, subject: this, deleteSubject: deleteSubject});
 	}

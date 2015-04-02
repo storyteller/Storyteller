@@ -8,7 +8,7 @@ module.exports = React.createClass({
 			Postal.publish({
 				channel: 'editor',
 				topic: 'select-holder',
-				data: {holder: this.props.holder}
+				data: {holder: this.props.holder.id}
 			});
 
 			e.preventDefault();
@@ -17,7 +17,7 @@ module.exports = React.createClass({
 		return (
 			<a 
 				className="step-adder-placeholder"
-				data-holder={this.props.holder} 
+				data-holder={this.props.holder.id} 
 				onClick={onclick}>{this.props.text}</a>
 		);
 	}

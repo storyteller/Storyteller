@@ -7,13 +7,14 @@ function Specification(data, library){
 		throw new Error('Null data being passed into Specification');
 	}
 
-	StepHolder.call(this, data.id, library);
+	StepHolder.call(this, data.id, library, 'add sections or comments...');
 
 	this.title = data.title;
 	this.byId = {};
 	this.type = 'specification';
 	this.results = {};
 	this.active = false;
+
 
 
 	this.children = function(){
@@ -46,7 +47,10 @@ function Specification(data, library){
 	}
 
 	this.editors = function(loader){
-		return this.buildComponents(x => x.editor(loader));
+		var editors = this.buildComponents(x => x.editor(loader));
+		editors.push(this.adder.editor(loader));
+
+		return editors;
 	}
 
 	this.buildResults = function(loader){

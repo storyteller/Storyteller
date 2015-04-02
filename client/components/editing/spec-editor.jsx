@@ -145,16 +145,6 @@ module.exports = React.createClass({
 		this.presenter.deactivate();
 	},
 
-	buildSelector: function(){
-		if (this.state.mode != 'editing') return null;
-
-		if (this.state.spec.active){
-			return null;
-		}
-
-		return StepAdderPlaceHolder({holder: this.state.spec.id, text: 'add sections or comments...'});
-	},
-
 	buildContext: function(){
 		if (this.state.mode != 'editing') return null;
 
@@ -190,8 +180,6 @@ module.exports = React.createClass({
 		if (this.state.loading){
 			return ( <EditorLoading spec={this.state.spec} /> );
 		}
-
-		var selector = this.buildSelector();
 
 		var headerClass = "";
 		if (this.state.spec.active){
@@ -247,7 +235,6 @@ module.exports = React.createClass({
 					    <Persisting spec={this.state.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
 
 					    {this.state.components}
-					    {selector}
 					</Col>
 				</Row>
 			</Grid>

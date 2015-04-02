@@ -3,10 +3,10 @@ var uuid = require('node-uuid');
 var ArrayList = require('./array-list');
 var _ = require('lodash');
 var Comment = require('./comment');
-
+var Adder = require('./adder');
 var OutlineNode = require('./outline-node');
 
-function StepHolder(id, fixture){
+function StepHolder(id, fixture, addText){
 	if (fixture == null) throw new Error('Missing argument for "fixture"');
 
 	var self = this;
@@ -16,6 +16,7 @@ function StepHolder(id, fixture){
 
 	self.steps = new ArrayList();
 	self.active = false;
+	self.adder = new Adder(self, addText);
 
 	self.contextualControl = function(loader){
 		return this.fixture.contextualControl(this, loader);

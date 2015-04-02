@@ -6,17 +6,7 @@ var StepAdder = require('./step-adder');
 var DeleteGlyph = require('./delete-glyph');
 
 module.exports = React.createClass({
-	buildSelector: function(){
-		if (this.props.subject.active){
-			return null;
-		}
-
-		return StepAdderPlaceHolder({holder: this.props.subject.id, text: 'add steps...'});
-	},
-
 	render: function(){
-		var selector = this.buildSelector();
-
 		var panelClass = "panel panel-default";
 		if (this.props.subject.active){
 			panelClass = "panel panel-primary";
@@ -31,7 +21,6 @@ module.exports = React.createClass({
 			  </div>
 			  <div className="panel-body">
 			    {this.props.components}
-			    {selector}
 			  </div>
 			</div>
 		);
