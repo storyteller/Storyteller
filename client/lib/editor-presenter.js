@@ -113,8 +113,10 @@ class EditorPresenter{
 		var self = this;
 
 		this.subscribe('go-home', () => this.moveFirst());
+		this.subscribe('go-end', () => this.moveEnd());
 
 		this.subscribe('go-next', () => this.moveNext());
+		this.subscribe('go-previous', () => this.movePrevious());
 
 		this.subscribe('spec-results-changed', function(data){
 			if (data.id == self.id){

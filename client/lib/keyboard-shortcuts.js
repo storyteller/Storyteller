@@ -50,6 +50,12 @@ module.exports = {
 		});
 
 		editor({
+			keys: 'shift+tab',
+			topic: 'go-previous',
+			description: 'Move to the previous cell or step in the editor'
+		});
+
+		editor({
 			keys: 'ctrl+/',
 			topic: 'shortcut-help',
 			description: 'Get help for the available keyboard shortcuts'
@@ -59,6 +65,12 @@ module.exports = {
 			keys: ['ctrl+shift+h', 'home'],
 			topic: 'go-home',
 			description: 'Move the focus to the top of the active specification editor'
+		});
+
+		editor({
+			keys: ['ctrl-shift-e', 'end'],
+			topic: 'go-end',
+			description: 'Move the focus to the very bottom of the active specification editor'
 		});
 
 		editor({
