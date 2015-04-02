@@ -38,6 +38,7 @@ class Table extends CompositeGrammar{
 				if (cell == _.last(self.cells).key) return null;
 
 				var index = _.findIndex(self.cells, c => c.key == cell);
+				if (index < 0) return null;
 
 				return step.args.find(self.cells[index + 1].key);
 			},

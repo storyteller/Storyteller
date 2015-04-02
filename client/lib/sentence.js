@@ -44,6 +44,12 @@ class Sentence{
 		return step.args.find(this.orderedCells[0]);
 	}
 
+	lastCell(step){
+		if (this.orderedCells.length == 0) return null;
+
+		return step.args.find(_.last(this.orderedCells));
+	}
+
 	nextCell(arg, step){
 		if (arg == null) return this.firstCell(step);
 
@@ -52,7 +58,22 @@ class Sentence{
 		if (_.last(this.orderedCells) == cell) return null;
 
 		var index = _.indexOf(this.orderedCells, arg.cell.key);
+		if (index < 0) return null;
+
 		return step.args.find(this.orderedCells[index + 1]);
+	}
+
+	previousCell(arg, step){
+		if (arg == null) return this.lastCell(step);
+
+		var cell = arg.cell.key;
+
+		if (this.orderedCells[0] == cell) return null;
+
+		var index = _.indexOf(this.orderedCells, arg.cell.key);
+		if (index < 0) return null;
+
+		return step.args.find(this.orderedCells[index - 1]);
 	}
 
 	buildStep(data){

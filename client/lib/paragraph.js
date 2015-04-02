@@ -73,7 +73,6 @@ class Paragraph{
 		return loader.container({title: this.title, components: components});
 	}
 
-
 }
 
 

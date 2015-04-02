@@ -193,6 +193,25 @@ describe('Sentence', function(){
 		});
 	});
 
+	describe('when choosing the last cell', function(){
+		it('should be null if there are no cells', function(){
+			build({format: 'Do something'});
+			expect(sentence.lastCell({})).to.be.null;
+		});		
+
+		it('should choose the last cell in order if one exists', function(){
+			build({
+				format: 'Add {x} to {y} then multiply by {z}'
+			});
+
+			var step = sentence.newStep();
+
+			var arg = sentence.lastCell(step);
+
+			expect(arg.cell.key).to.equal('z');
+		});
+	});
+
 	describe('when choosing the next cell', function(){
 		it('should be null if there are no cells', function(){
 			build({format: 'Do something'});
@@ -223,6 +242,30 @@ describe('Sentence', function(){
 
 			expect(sentence.nextCell(z, step)).to.be.null;
 		});
+	});
+
+	describe('when choosing the previous cell', function(){
+		it('should be null if there are no cells', function(){
+			build({format: 'Do something'});
+			expect(sentence.previousCell(null, {})).to.be.null;
+		});
+
+		it('should choose the previous cell by position', function(){
+			build({
+				format: 'Add {x} to {y} then multiply by {z}'
+			});
+
+			var step = sentence.newStep();
+			var x = step.args.find('x');
+			var y = step.args.find('y');
+			var z = step.args.find('z');
+
+			expect(sentence.previousCell(x, step)).to.be.null;
+			expect(sentence.previousCell(z, step)).to.equal(y);
+			expect(sentence.previousCell(y, step)).to.equal(x);
+		});
+
+
 	});
 
 	describe('when building the preview controls', function(){
