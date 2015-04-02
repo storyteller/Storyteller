@@ -56,8 +56,17 @@ class EmbeddedSection extends CompositeGrammar{
 	selectNext(location){
 		return null;
 	}
+
+	selectPrevious(location){
+		return null;
+
+	}
+
+	selectLast(step){
+		var section = this.readSection(step);
+		return section.selectLast(step);
+	}
+
 }
-
-
 
 module.exports = EmbeddedSection;
