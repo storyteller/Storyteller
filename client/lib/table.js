@@ -30,6 +30,11 @@ class Table extends CompositeGrammar{
 				return step.args.find(self.cells[0].key);
 			},
 
+			lastCell(step){
+				var key = _.last(self.cells).key;
+				return step.args.find(key);
+			},
+
 			nextCell(arg, step){
 				if (arg == null) return this.firstCell(step);
 
@@ -41,6 +46,19 @@ class Table extends CompositeGrammar{
 				if (index < 0) return null;
 
 				return step.args.find(self.cells[index + 1].key);
+			},
+
+			previousCell(arg, step){
+				if (arg == null) return this.lastCell(step);
+
+				var cell = arg.cell.key;
+
+				if (cell == self.cells[0].key) return null;
+
+				var index = _.findIndex(self.cells, c => c.key == cell);
+				if (index < 0) return null;
+
+				return step.args.find(self.cells[index - 1].key);
 			},
 
 			key: self.key,

@@ -31,6 +31,11 @@ describe('Table Grammar', function(){
 		expect(table.fixture.firstCell(step).cell.key).to.equal('x');
 	});
 
+	it('the inner fixture grammar can select the last cell', function(){
+		var step = table.fixture.buildStep(null);
+		expect(table.fixture.lastCell(step).cell.key).to.equal('result');
+	});
+
 	it('the inner fixture grammar can select the next cell in a row step', function(){
 		var step = table.fixture.buildStep(null);
 		var x = step.args.find('x');
@@ -40,6 +45,17 @@ describe('Table Grammar', function(){
 		expect(table.fixture.nextCell(x, step)).to.equal(y);
 		expect(table.fixture.nextCell(y, step)).to.equal(result);
 		expect(table.fixture.nextCell(result, step)).to.be.null;
+	});
+
+	it('the inner fixture grammar can select the previous cell in a row step', function(){
+		var step = table.fixture.buildStep(null);
+		var x = step.args.find('x');
+		var y = step.args.find('y');
+		var result = step.args.find('result');
+
+		expect(table.fixture.previousCell(x, step)).to.be.null;
+		expect(table.fixture.previousCell(y, step)).to.equal(x);
+		expect(table.fixture.previousCell(result, step)).to.equal(y);
 	});
 
 	it('can build its contextual control', function(){
