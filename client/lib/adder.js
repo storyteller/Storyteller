@@ -13,6 +13,16 @@ class Adder {
 
 		return loader.stepAdderPlaceholder({holder: this.holder, text: this.text});
 	}
+
+	selectNext(){
+		return null;
+	}
+
+	selectPrevious(){
+		return null;
+	}
+
+
 }
 
 module.exports = Adder;

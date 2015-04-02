@@ -12,6 +12,10 @@ module.exports = React.createClass({
 			clazz = clazz + " bg-warning";
 		}
 
+		if (this.props.step.active){
+			clazz += ' active';
+		}
+
 		return (
 			<div className={clazz} id={this.props.step.id}>
 				<DeleteGlyph step={this.props.step} />

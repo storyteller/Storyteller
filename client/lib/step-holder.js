@@ -127,6 +127,25 @@ function StepHolder(id, fixture, addText){
 		return new OutlineNode(this);
 	}
 
+	self.selectFirst = function(){
+		if (this.steps.length == 0) return {holder: this, step: this.adder, cell: null};
+
+		return this.steps[0].selectFirst();
+	}
+
+	self.selectNext = function(location){
+		if (location.holder != this) return null;
+
+		if (location.step == this.adder) return null;
+
+		if (location.step == null) return this.selectFirst();
+
+		if (location.step == _.last(this.steps)) return null;
+
+		var index = _.indexOf(this.steps, location.step);
+
+		return this.steps[index + 1].selectFirst();
+	}
 }
 
 module.exports = StepHolder;

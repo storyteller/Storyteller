@@ -56,7 +56,7 @@ module.exports = React.createClass({
 	},
 
 	render: function(){
-		var className = 'cell active-cell';
+		var className = 'cell active-cell mousetrap';
 		if (this.props.classes){
 			className = className + " " + this.props.classes;
 		}

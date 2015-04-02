@@ -74,3 +74,7 @@ td.number-cell{
 	width: 500px;
 	margin-top: 8px
 }
+
+div.active {
+	border: thin solid #337ab7;
+}

@@ -2,7 +2,7 @@
 
 function selectNext(location){
 	if (location.step){
-		var stepNext = location.step.selectNext(location.cell);
+		var stepNext = location.step.selectNext(location);
 		if (stepNext) return stepNext;
 	}
 
@@ -45,11 +45,11 @@ class SpecificationNavigator {
 
 	// needs tests
 	moveFirst(){
-		if (this.spec.children.length == 0){
+		if (this.spec.steps.length == 0){
 			this.replace({holder: this.spec, step: this.spec.adder});
 		}
 		else{
-			this.replace(this.spec.children[0].moveFirst());
+			this.replace(this.spec.steps[0].selectFirst());
 		}
 	}
 
@@ -58,11 +58,18 @@ class SpecificationNavigator {
 		var next = selectNext(this.location);
 		if (next){
 			this.replace(next);
+			return true;
 		}
+
+		return false;
 	}
 
 	moveLast(){
+		if (this.location.step && this.location.step == this.spec.adder) return false;
+
 		this.replace({holder: this.spec, step: this.spec.adder, cell: null});
+
+		return true;
 	}
 
 	movePrevious(){

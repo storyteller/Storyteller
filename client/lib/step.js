@@ -189,6 +189,24 @@ class Step{
 		this.args.clearActiveState();
 	}
 
+	hasArgs(){
+		return this.args.length > 0;
+	}
+
+	hasCollections(){
+		return _.values(this.collections).length > 0;
+	}
+
+	selectFirst(){
+		if (!this.hasArgs() && !this.hasCollections()) return {holder: this.parent, step: this, cell: null};
+
+		if (!this.hasCollections()){
+			return {holder: this.parent, step: this, cell: this.grammar.firstCell(this)};
+		}
+
+		throw new Error('not done yet');
+	}
+
 }
 
 

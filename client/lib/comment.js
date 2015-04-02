@@ -1,3 +1,4 @@
+
 var uuid = require('node-uuid');
 var Arg = require('./arg');
 var Cell = require('./cell');
@@ -49,6 +50,22 @@ class Comment{
 	findByPath(path){
 		if (path == 'text') return this.arg;
 
+		return null;
+	}
+
+	selectFirst(){
+		return {holder: this.parent, step: this, cell: this.arg};
+	}
+
+	selectLast(){
+		return this.selectFirst();
+	}
+
+	selectNext(){
+		return null;
+	}
+
+	selectPrevious(){
 		return null;
 	}
 }

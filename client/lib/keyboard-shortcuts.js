@@ -14,6 +14,8 @@ function add(data){
 			topic: data.topic,
 			data: {}
 		});
+
+		return false;
 	}
 
 	Mousetrap.bind(data.keys, func);
@@ -41,6 +43,12 @@ module.exports = {
 
 
 	register(){
+		editor({
+			keys: 'tab',
+			topic: 'go-next',
+			description: 'Move to the next cell or step in the editor'
+		});
+
 		editor({
 			keys: 'ctrl+/',
 			topic: 'shortcut-help',

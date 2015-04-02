@@ -36,6 +36,26 @@ class EditorPresenter{
 		});
 	}
 
+	moveFirst(){
+		this.spec.navigator.moveFirst();
+		this.refreshEditor();
+	}
+
+	moveLast(){
+		this.spec.navigator.moveLast();
+		this.refreshEditor();
+	}
+
+	moveNext(){
+		this.spec.navigator.moveNext();
+		this.refreshEditor();
+	}
+
+	movePrevious(){
+		this.spec.navigator.movePrevious();
+		this.refreshEditor();
+	}
+
 
 	refreshEditor(){
 		if (this.spec){
@@ -93,6 +113,10 @@ class EditorPresenter{
 		this.specHeader = Hierarchy.findSpec(this.id);
 
 		var self = this;
+
+		this.subscribe('go-home', () => this.moveFirst());
+
+		this.subscribe('go-next', () => this.moveNext());
 
 		this.subscribe('spec-results-changed', function(data){
 			if (data.id == self.id){

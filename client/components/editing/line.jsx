@@ -15,7 +15,7 @@ module.exports = React.createClass({
 		if (this.props.status){
 			clazz += ' ' + statusClass[this.props.status];
 		}
-
+		
 		return (
 			<div className={clazz}>{this.props.components}</div>
 		);

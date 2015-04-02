@@ -15,6 +15,31 @@ describe('Big Bang Smoke Test on the Editor Controls', function(){
 			var driver = new IntegrationDriver(AllSpecData.fixtures, 'editing');
 			driver.loadSpecData(spec);
 		});
+
+		it('can navigate from top to bottom - ' + spec.id, function(){
+			var driver = new IntegrationDriver(AllSpecData.fixtures, 'editing');
+			driver.loadSpecData(spec);
+
+			var presenter = driver.presenter;
+			presenter.moveFirst();
+
+			while (presenter.moveNext()){
+
+			}
+		});
+/*
+		it('can navigate from bottom to top - ' + spec.id, function(){
+			var driver = new IntegrationDriver(AllSpecData.fixtures, 'editing');
+			driver.loadSpecData(spec);
+
+			var presenter = driver.presenter;
+			presenter.moveLast();
+
+			while (presenter.movePrevious()){
+
+			}
+		});
+*/
 	}
 
 	
