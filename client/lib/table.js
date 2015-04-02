@@ -167,11 +167,17 @@ class Table extends CompositeGrammar{
 		return loader.table({cells: this.cells, title: this.title, rows: rows, section: section});
 	}
 
-	firstCell(){
-		return null;
+	selectFirst(step){
+		var section = this.readSection(step);
+		if (section.steps.length == 0){
+			return {holder: section, step: null, cell: null};
+		}
+
+		var step = section.steps[0];
+		return step.selectFirst();
 	}
 
-	nextCell(){
+	selectNext(location){
 		return null;
 	}
 }

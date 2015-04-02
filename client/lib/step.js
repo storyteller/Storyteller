@@ -83,7 +83,6 @@ class Step{
 			}
 		}
 
-
 		return step;
 	}
 
@@ -190,7 +189,7 @@ class Step{
 	}
 
 	hasArgs(){
-		return this.args.length > 0;
+		return this.args.length() > 0;
 	}
 
 	hasCollections(){

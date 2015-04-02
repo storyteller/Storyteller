@@ -1,6 +1,7 @@
 var Step = require('./step');
 var uuid = require('node-uuid');
 var _ = require('lodash');
+var Sentence = require('./sentence');
 
 class Paragraph{
 	constructor(metadata){
@@ -16,6 +17,14 @@ class Paragraph{
 		for (var i = 0; i < this.children.length; i++){
 			this.children[i].position = i.toString();
 		}
+
+		// smelly, but hey, it works
+		var cells = this.children
+			.filter(x => x instanceof Sentence)
+			.map(x => x.orderedCells);
+
+		this.orderedCells = _.flatten(cells);
+		
 	}
 
 
@@ -72,6 +81,46 @@ class Paragraph{
 
 		return loader.container({title: this.title, components: components});
 	}
+
+
+	firstCell(step){
+		if (this.orderedCells.length == 0) return null;
+
+		return step.args.find(this.orderedCells[0]);
+	}
+
+	lastCell(step){
+		if (this.orderedCells.length == 0) return null;
+
+		return step.args.find(_.last(this.orderedCells));
+	}
+
+	nextCell(arg, step){
+		if (arg == null) return this.firstCell(step);
+
+		var cell = arg.cell.key;
+
+		if (_.last(this.orderedCells) == cell) return null;
+
+		var index = _.indexOf(this.orderedCells, arg.cell.key);
+		if (index < 0) return null;
+
+		return step.args.find(this.orderedCells[index + 1]);
+	}
+
+	previousCell(arg, step){
+		if (arg == null) return this.lastCell(step);
+
+		var cell = arg.cell.key;
+
+		if (this.orderedCells[0] == cell) return null;
+
+		var index = _.indexOf(this.orderedCells, arg.cell.key);
+		if (index < 0) return null;
+
+		return step.args.find(this.orderedCells[index - 1]);
+	}
+
 
 }
 

@@ -20,7 +20,7 @@ describe('ArgCollection', function(){
 	});
 
 	it('can build itself with data and grammar', function(){
-		expect(args.length).to.equal(3);
+		expect(args.length()).to.equal(3);
 
 		expect(args.find('A').value).to.equal(1);
 		expect(args.find('B').value).to.equal(2);

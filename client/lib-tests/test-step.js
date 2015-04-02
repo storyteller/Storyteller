@@ -74,7 +74,7 @@ describe('Step', function(){
 
 		var step = new Step(data, cells);
 
-		expect(step.args.length).to.equal(3);
+		expect(step.args.length()).to.equal(3);
 
 		expect(step.args.find('A').value).to.equal(1);
 		expect(step.args.find('B').value).to.equal(2);
@@ -231,6 +231,29 @@ describe('Step', function(){
 		expect(merged.findValue('C')).to.equal(3);
 		expect(merged.findValue('D')).to.equal(4);
 		expect(merged.findValue('E')).to.equal(5);
+	});
+
+	it('has an accurate args count after merging', function(){
+		var cells1 = [new Cell('A'), new Cell('B'), new Cell('C')];
+		var data1 = {key: 'foo', cells: {
+			A: 1,
+			B: 2,
+			C: 3
+		}};
+
+		var step1 = new Step(data1, cells1);
+
+		var cells2 = [new Cell('D'), new Cell('E')];
+		var data2 = {key: 'bar', cells: {
+			D: 4,
+			E: 5
+		}};
+
+		var step2 = new Step(data2, cells2);
+
+		var merged = Step.merge([step1, step2]);
+
+		expect(merged.hasArgs()).to.be.true;
 	});
 
 	it('copies collections on merge', function(){

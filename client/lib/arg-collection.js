@@ -1,4 +1,5 @@
 var Arg = require('./arg');
+var _ = require('lodash');
 
 class ArgCollection {
 	constructor(cells, data, id){
@@ -10,7 +11,11 @@ class ArgCollection {
 		});
 
 		this.args = args;
-		this.length = cells.length;
+		
+	}
+
+	length(){
+		return _.values(this.args).length;
 	}
 
 	allKeys(){

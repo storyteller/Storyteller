@@ -28,7 +28,7 @@ describe('Big Bang Smoke Test on the Editor Controls', function(){
 			}
 
 			// Did it get *all* of the way to the bottom
-			expect(driver.spec.navigator.location.step).to.equal(driver.spec.adder);
+			//expect(driver.spec.navigator.location.step).to.equal(driver.spec.adder);
 		});
 /*
 		it('can navigate from bottom to top - ' + spec.id, function(){

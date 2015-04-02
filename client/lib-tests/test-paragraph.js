@@ -151,4 +151,37 @@ describe('Paragraph grammar', function(){
 		expect(step.findValue('multiplier')).to.equal(4);
 		expect(step.findValue('expected')).to.equal(5);
 	});
+
+  describe('finding cells', function(){
+    var grammar = new Paragraph(metadata);
+    var data = {cells: {starting: 2, operand: 3, multiplier: 4, expected: 5}};
+    var step = grammar.buildStep(data);
+
+    var starting = step.args.find('starting');
+    var operand = step.args.find('operand');
+    var multiplier = step.args.find('multiplier');
+    var expected = step.args.find('expected');
+  
+    it('can select the first cell', function(){
+      expect(grammar.firstCell(step)).to.equal(starting);
+    });
+
+    it('can find the last cell', function(){
+      expect(grammar.lastCell(step)).to.equal(expected);
+    });
+
+    it('can find the next cell', function(){
+      expect(grammar.nextCell(starting, step)).to.equal(operand);
+      expect(grammar.nextCell(operand, step)).to.equal(multiplier);
+      expect(grammar.nextCell(multiplier, step)).to.equal(expected);
+      expect(grammar.nextCell(expected, step)).to.be.null;
+    });
+
+    it('can find the previous cell', function(){
+      expect(grammar.previousCell(expected, step)).to.equal(multiplier);
+      expect(grammar.previousCell(multiplier, step)).to.equal(operand);
+      expect(grammar.previousCell(operand, step)).to.equal(starting);
+      expect(grammar.previousCell(starting, step)).to.be.null;
+    });
+  });
 });

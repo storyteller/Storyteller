@@ -11,7 +11,6 @@ function selectNext(location){
 
 	var holder = location.holder;
 	while (holder.parent){
-		console.log('trying the parent')
 		var parent = holder.parent;
 
 		var next = parent.selectNext({holder: parent, step: holder, cell: null});
@@ -36,7 +35,11 @@ class SpecificationNavigator {
 	// needs tests
 	replace(location){
 		console.log('New holder is ' + location.holder.type + ' / ' + location.holder.id);
-		console.log('New step is ' + location.step.type + ' / ' + location.step.id);
+		if (location.step){
+			console.log('New step is ' + location.step.type + ' / ' + location.step.id);
+		}
+
+		
 		if (location.cell){
 			console.log('new cell is ' + location.cell.key);
 		}
