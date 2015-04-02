@@ -46,6 +46,8 @@ editor.add('row', 'body-row');
 editor.add('errorBox', 'error-box');
 editor.add('stepAdder', 'step-adder');
 editor.add('tableContext', 'table-context');
+editor.add('stepAdderLookup', 'step-adder-lookup');
+editor.add('stepAdderPlaceholder', 'step-adder-placeholder');
 
 
 var preview = new Loader();
