@@ -3,6 +3,11 @@
 var React = require("react");
 
 module.exports = React.createClass({
+	componentDidMount(){
+		var element = this.getDOMNode();
+		element.scrollIntoView();
+	},
+
 	render(){
 		var clazz = '';
 		if (this.props.active){
