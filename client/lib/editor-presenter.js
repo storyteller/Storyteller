@@ -117,6 +117,7 @@ class EditorPresenter{
 
 		this.subscribe('go-next', () => this.moveNext());
 		this.subscribe('go-previous', () => this.movePrevious());
+		this.subscribe('run-spec', () => this.run());
 
 		this.subscribe('spec-results-changed', function(data){
 			if (data.id == self.id){
