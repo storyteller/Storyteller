@@ -77,6 +77,10 @@ class Fixture{
 		return new Section(data, this);
 	}
 
+	addAndSelect(location){
+		return {holder: location.holder, step: location.holder.adder, cell: null};
+	}
+
 }
 
 

@@ -47,7 +47,9 @@ class FixtureLibrary{
 
 	}
 
-
+	addAndSelect(location){
+		return {holder: location.holder, step: location.holder.adder, cell: null};
+	}
 
 }
 

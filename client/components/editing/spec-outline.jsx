@@ -35,9 +35,11 @@ var OutlineItem = React.createClass({
 			e.preventDefault();
 		}
 
+		var id = 'outline-node-' + this.props.id;
+
 		return (
 			<li key={this.props.id}>
-				<a href="#" onClick={onclick}>{this.props.title}</a>
+				<a href="#" id={id} onClick={onclick}>{this.props.title}</a>
 				<ul>{this.props.children}</ul>
 			</li>
 		);

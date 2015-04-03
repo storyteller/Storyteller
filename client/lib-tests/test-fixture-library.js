@@ -49,4 +49,15 @@ describe('The FixtureLibrary', function(){
 		expect(invalid.invalid).to.be.true;
 	});
 
+	it('can addAndSelect for an active section', function(){
+		var holder = {adder: {}};
+		var newLoc = library.addAndSelect({holder: holder});
+
+		expect(newLoc).to.deep.equal({
+			holder: holder,
+			step: holder.adder,
+			cell: null
+		});
+	});
+
 });

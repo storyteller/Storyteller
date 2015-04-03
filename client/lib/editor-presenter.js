@@ -122,6 +122,16 @@ class EditorPresenter{
 		this.subscribe('undo', () => this.undo());
 		this.subscribe('redo', () => this.redo());
 
+		this.subscribe('add-item', () => {
+			var navigator = this.spec.navigator;
+			var location = navigator.location;
+			if (location.holder){
+				var next = location.holder.fixture.addAndSelect(location);
+				navigator.replace(next);
+				this.refreshEditor();
+			}
+		});
+
 		this.subscribe('spec-results-changed', function(data){
 			if (data.id == self.id){
 				self.spec = SpecificationStore.getData(self.id);

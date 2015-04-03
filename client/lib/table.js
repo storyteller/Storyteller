@@ -61,6 +61,11 @@ class Table extends CompositeGrammar{
 				return step.args.find(self.cells[index - 1].key);
 			},
 
+			addAndSelect(location){
+				var newStep = self.addStep(location.holder);
+				return newStep.selectFirst();
+			},
+
 			key: self.key,
 			title: metadata.title
 		}
@@ -71,6 +76,36 @@ class Table extends CompositeGrammar{
 		this.cells = metadata.cells;
 
 
+	}
+
+	addStep(section) {
+		var step = this.newRowStep();
+		var message = changes.stepAdded(section, step);
+
+		Postal.publish({
+			channel: 'editor',
+			topic: 'add-step',
+			data: message
+		});
+
+		return step;
+	}
+
+	toCloneRow (step, section){
+		return () => {
+			var newStep = this.newRowStep();
+
+			this.cells.forEach(c => {
+				var value = step.findValue(c.key);
+				newStep.args.find(c.key).value = value;
+			});
+
+			Postal.publish({
+				channel: 'editor',
+				topic: 'add-step',
+				data: changes.stepAdded(section, newStep)
+			})
+		}
 	}
 
 	newRowStep(){
@@ -101,20 +136,7 @@ class Table extends CompositeGrammar{
 		var cells = this.cells;
 		
 		var rows = section.steps.map(step => {
-			var cloneRow = () => {
-				var newStep = this.newRowStep();
-
-				this.cells.forEach(c => {
-					var value = step.findValue(c.key);
-					newStep.args.find(c.key).value = value;
-				});
-
-				Postal.publish({
-					channel: 'editor',
-					topic: 'add-step',
-					data: changes.stepAdded(section, newStep)
-				})
-			}
+			var cloneRow = this.toCloneRow(step, section);
 
 			return loader.row({cloneRow: cloneRow, step: step, cells: cells, section: section});
 		});
@@ -122,14 +144,7 @@ class Table extends CompositeGrammar{
 		var section = this.readSection(step);
 		
 		var addStep = () => {
-			var step = this.newRowStep();
-			var message = changes.stepAdded(section, step);
-
-			Postal.publish({
-				channel: 'editor',
-				topic: 'add-step',
-				data: message
-			});
+			this.addStep(section);
 		}
 
 		return loader.table({addStep: addStep, cells: this.cells, title: this.title, rows: rows, section: section});

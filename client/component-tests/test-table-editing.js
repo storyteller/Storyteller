@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var IntegrationDriver = require('./spec-editor-harness');
 var $ = require('jquery');
+var Postal = require('postal');
 
 var fixture = {
   "title": "Table",
@@ -409,4 +410,28 @@ describe('Editing Tables', function(){
 		expect(newStep.findValue('y')).to.equal('b');
 		expect(newStep.findValue('sum')).to.equal('c');
 	});
+
+  it('can addAndSelect a new row when a table is active', function(){
+    var section = spec.find("first-table-data");
+    var initialCount = section.steps.length;
+
+    // need to activate the table.
+    var id = '#outline-node-' + section.id;
+    driver.click(id);
+
+    Postal.publish({
+      channel: 'editor',
+      topic: 'add-item',
+      data: {}
+    });
+
+    expect(section.steps.length).to.equal(initialCount + 1);
+
+    var location = driver.spec.navigator.location;
+
+    var newStep = _.last(section.steps);
+
+    expect(location).to.deep.equal(newStep.selectFirst());
+
+  });
 });

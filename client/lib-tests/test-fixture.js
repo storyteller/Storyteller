@@ -26,6 +26,17 @@ describe('Fixture', function(){
 		fixture = new Fixture(data);
 	});
 
+	it('can addAndSelect for an active section', function(){
+		var holder = {adder: {}};
+		var newLoc = fixture.addAndSelect({holder: holder});
+
+		expect(newLoc).to.deep.equal({
+			holder: holder,
+			step: holder.adder,
+			cell: null
+		});
+	});
+
 	it('can build its contextualControl', function(){
 		var loader = new StubLoader();
 
