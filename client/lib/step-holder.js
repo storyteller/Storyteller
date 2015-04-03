@@ -39,6 +39,37 @@ function StepHolder(id, fixture, addText){
 		return position;
 	}
 
+	self.isFirst = function(step){
+		return (self.steps[0] == step);
+	}
+
+	self.isLast = function(step){
+		return _.last(self.steps) == step;
+	}
+
+	self.moveDown = function(step){
+		if (self.isLast(step)) return false;
+
+		var index = _.indexOf(self.steps, step);
+		self.steps.remove(step);
+
+		self.steps.insertAt(index + 1, step);
+
+		return true;
+	}
+
+	self.moveUp = function(step){
+		if (self.isFirst(step)) return false;
+
+		var index = _.indexOf(self.steps, step);
+
+		self.steps.remove(step);
+
+		self.steps.insertAt(index - 1, step);
+
+		return true;
+	}
+
 	self.insertStep = function(index, step){
 		step.parent = self;
 

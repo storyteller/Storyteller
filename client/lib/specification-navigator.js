@@ -52,16 +52,6 @@ class SpecificationNavigator {
 
 	// needs tests
 	replace(location){
-		console.log('New holder is ' + location.holder.type + ' / ' + location.holder.id);
-		if (location.step){
-			console.log('New step is ' + location.step.type + ' / ' + location.step.id);
-		}
-
-		
-		if (location.cell){
-			console.log('new cell is ' + location.cell.key);
-		}
-
 		if (this.location.holder) this.location.holder.active = false;
 		if (this.location.step) this.location.step.active = false;
 		if (this.location.cell) this.location.cell.active = false;

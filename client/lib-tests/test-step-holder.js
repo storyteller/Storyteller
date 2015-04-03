@@ -18,6 +18,117 @@ describe('StepHolder mechanics', function(){
 		expect(step.parent).to.equal(holder);
 	});
 
+	it('can tell you if at end', function(){
+		var holder = new StepHolder(null, new FixtureLibrary([]));
+
+		var step1 = {};
+		var step2 = {};
+		var step3 = {};
+		var step4 = {};
+
+		holder.addStep(step1);
+		holder.addStep(step2);
+		holder.addStep(step3);
+		holder.addStep(step4);
+
+		expect(holder.isLast(step1)).to.be.false;
+		expect(holder.isLast(step2)).to.be.false;
+		expect(holder.isLast(step3)).to.be.false;
+		expect(holder.isLast(step4)).to.be.true;
+	});
+
+
+	it('can tell you if at the beginning', function(){
+		var holder = new StepHolder(null, new FixtureLibrary([]));
+
+		var step1 = {};
+		var step2 = {};
+		var step3 = {};
+		var step4 = {};
+
+		holder.addStep(step1);
+		holder.addStep(step2);
+		holder.addStep(step3);
+		holder.addStep(step4);
+
+		expect(holder.isFirst(step1)).to.be.true;
+		expect(holder.isFirst(step2)).to.be.false;
+		expect(holder.isFirst(step3)).to.be.false;
+		expect(holder.isFirst(step4)).to.be.false;
+	});
+
+
+	it('should all you to move a step down', function(){
+		var holder = new StepHolder(null, new FixtureLibrary([]));
+
+		var step1 = {};
+		var step2 = {};
+		var step3 = {};
+		var step4 = {};
+	
+		holder.addStep(step1);
+		holder.addStep(step2);
+		holder.addStep(step3);
+		holder.addStep(step4);
+
+		expect(holder.moveDown(step1)).to.be.true;
+
+		expect(holder.steps[0]).to.equal(step2);
+		expect(holder.steps[1]).to.equal(step1);
+		expect(holder.steps[2]).to.equal(step3);
+		expect(holder.steps[3]).to.equal(step4);
+
+		// no change
+		expect(holder.moveDown(step4)).to.be.false;
+		expect(holder.steps[0]).to.equal(step2);
+		expect(holder.steps[1]).to.equal(step1);
+		expect(holder.steps[2]).to.equal(step3);
+		expect(holder.steps[3]).to.equal(step4);
+
+
+		holder.moveDown(step3);
+		expect(holder.steps[0]).to.equal(step2);
+		expect(holder.steps[1]).to.equal(step1);
+		expect(holder.steps[2]).to.equal(step4);
+		expect(holder.steps[3]).to.equal(step3);
+
+	});
+
+	it('should allow you to move a step up', function(){
+		var holder = new StepHolder(null, new FixtureLibrary([]));
+
+		var step1 = {key: '1'};
+		var step2 = {key: '2'};
+		var step3 = {key: '3'};
+		var step4 = {key: '4'};
+	
+		holder.addStep(step1);
+		holder.addStep(step2);
+		holder.addStep(step3);
+		holder.addStep(step4);
+
+		// no change
+		expect(holder.moveUp(step1)).to.be.false;
+		expect(holder.steps[0]).to.equal(step1);
+		expect(holder.steps[1]).to.equal(step2);
+		expect(holder.steps[2]).to.equal(step3);
+		expect(holder.steps[3]).to.equal(step4);
+
+		expect(holder.moveUp(step4)).to.be.true;
+		expect(holder.steps[0]).to.equal(step1);
+		expect(holder.steps[1]).to.equal(step2);
+		expect(holder.steps[2]).to.equal(step4);
+		expect(holder.steps[3]).to.equal(step3);
+
+		holder.moveUp(step4);
+		expect(holder.steps[0]).to.equal(step1);
+		expect(holder.steps[1]).to.equal(step4);
+		expect(holder.steps[2]).to.equal(step2);
+		expect(holder.steps[3]).to.equal(step3);
+
+
+	});
+
 	it('should allow you to remove a step and get the original position', function(){
 		var holder = new StepHolder(null, new FixtureLibrary([]));
 

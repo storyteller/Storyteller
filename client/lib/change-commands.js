@@ -25,6 +25,26 @@ function CellChange(id, cell, value){
 	return this;
 }
 
+function StepMovedUp(parent, step){
+	this.apply = store => {
+		parent.moveUp(step);
+	}
+
+	this.unapply = store => {
+		parent.moveDown(step);
+	}
+}
+
+function StepMovedDown(parent, step){
+	this.apply = store => {
+		parent.moveDown(step);
+	}
+
+	this.unapply = store => {
+		parent.moveUp(step);
+	}
+}
+
 function StepAdded(parent, step, index){
 	if (index != null){
 		this.apply = function(store){
@@ -69,6 +89,8 @@ function StepRemoved(parent, step){
 	return this;
 }
 
+
+
 module.exports = {
 	cellValue: function(id, cell, value){
 		return new CellChange(id, cell, value);
@@ -83,6 +105,12 @@ module.exports = {
 		return new StepRemoved(parent, step);
 	},
 
+	moveDown(parent, step){
+		return new StepMovedDown(parent, step);
+	},
 
+	moveUp(parent, step){
+		return new StepMovedUp(parent, step);
+	}
 
 }
