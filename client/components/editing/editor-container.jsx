@@ -7,6 +7,7 @@ var DeleteGlyph = require('./delete-glyph');
 
 module.exports = React.createClass({
 	render: function(){
+
 		var panelClass = "panel panel-default";
 		if (this.props.subject.active){
 			panelClass = "panel panel-primary";

@@ -1,53 +1,57 @@
 var React = require('react');
 var _ = require('lodash');
 
-function Loader(){
-	var self = this;
+class Loader {
+	constructor(parent){
+		this.parent = parent;
+	}
 
-	this.add = function(method, path){
+	
+
+	add(method, path){
 		var component = require('./' + path);
-		self[method] = function(props){
+		this[method] = function(props){
 			return component(props);
 		}
 	}
 
-	this.span = function(text){
+	span(text){
 		return React.DOM.span(null, text);
 	}
 
-	this.chromed = function(){
-		return self;
+	chromed(){
+		return this.parent || this;
 	}
 
-	this.chromeless = function(){
-		var loader = new Loader();
+	chromeless(){
+		var chromeless = new Loader(this);
+		toEditor(chromeless);
 
-		_.assign(loader, this);
+		chromeless.add('line', 'line');
+		chromeless.add('container', 'preview-container');
 
-		loader.add('line', 'line');
-		loader.add('container', 'preview-container');
-		loader.chromed = function(){
-			return self;
-		}
-
-		return loader;
+		return chromeless;
 	}
+}
 
-	return this;
+function toEditor(editor){
+	editor.add('cell', 'cell');
+	editor.add('line', 'line-with-chrome');
+	editor.add('container', 'editor-container');
+	editor.add('comment', 'comment-editor');
+	editor.add('table', 'table-editor');
+	editor.add('row', 'body-row');
+	editor.add('errorBox', 'error-box');
+	editor.add('stepAdder', 'step-adder');
+	editor.add('tableContext', 'table-context');
+	editor.add('stepAdderLookup', 'step-adder-lookup');
+	editor.add('stepAdderPlaceholder', 'step-adder-placeholder');
 }
 
 var editor = new Loader();
-editor.add('cell', 'cell');
-editor.add('line', 'line-with-chrome');
-editor.add('container', 'editor-container');
-editor.add('comment', 'comment-editor');
-editor.add('table', 'table-editor');
-editor.add('row', 'body-row');
-editor.add('errorBox', 'error-box');
-editor.add('stepAdder', 'step-adder');
-editor.add('tableContext', 'table-context');
-editor.add('stepAdderLookup', 'step-adder-lookup');
-editor.add('stepAdderPlaceholder', 'step-adder-placeholder');
+toEditor(editor);
+
+
 
 
 var preview = new Loader();

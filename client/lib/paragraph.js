@@ -53,7 +53,12 @@ class Paragraph{
 
 		var components = this.children.map(g => g.editor(step, chromeless));
 
-		return loader.container({title: this.title, components: components});
+		return loader.container({
+			title: this.title, 
+			components: components, 
+			deleteSubject: step,
+			subject: step
+		});
 	}
 
 	preview(step, loader){
