@@ -2,7 +2,7 @@
 var React = require("react");
 var Postal = require('postal');
 var changes = require('./../../lib/change-commands');
-var Comment = require('./../../lib/comment');
+var CommentGrammar = require('./../../lib/comment-grammar');
 
 var AddStepItem = React.createClass({
 	render: function(){
@@ -29,15 +29,6 @@ var AddStepItem = React.createClass({
 		);
 	}
 });
-
-var CommentGrammar = {
-	newStep: function(){
-		return new Comment({text: 'New comment'});
-	},
-
-	key: 'Comment',
-	title: 'New Comment'
-}
 
 module.exports = React.createClass({
 	render: function(){

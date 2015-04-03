@@ -19,6 +19,15 @@ function IntegrationDriver(fixtureData, mode, results){
 	var self = this;
 
 	this.loadSpecData = function(data){
+	    if (window){
+		    window.$ = $;
+		    window.jQuery = $;
+	    }
+	    
+		require('./../lib/typeahead.jquery.js');
+
+
+
 		// derive the spec header and publish that too
 
 		if (!data.hasOwnProperty('id')){
