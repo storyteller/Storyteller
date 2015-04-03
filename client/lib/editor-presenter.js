@@ -13,6 +13,11 @@ function applyOutstandingChanges(){
 	});
 }
 
+function parentLocation(location){
+	var holder = location.holder;
+	return {holder: holder.parent, step: holder};
+}
+
 class EditorPresenter{
 	constructor(spec){
 		if (spec instanceof Specification || spec.id){
@@ -28,8 +33,29 @@ class EditorPresenter{
 		this.subscriptions = [];
 	}
 
-	reorderUp(){
+	locationForReordering(){
 		var location = this.spec.navigator.location;
+		if (location.step = location.holder.adder){
+			location = parentLocation(location);
+		}
+
+		while (!location.holder.isHolder()){
+			location = parentLocation(location);
+		}	
+
+		return location;
+
+	}
+
+	reorderUp(){
+		var location = this.locationForReordering();
+
+		if (!location.holder.isFirst){
+			for (var key in location.holder){
+				console.log(key + ' - ' + location.holder[key]);
+			}
+		}
+
 		if (location.step && !location.holder.isFirst(location.step)){
 			var change = changes.moveUp(location.holder, location.step);
 			this.applyChange(change);
@@ -37,7 +63,8 @@ class EditorPresenter{
 	}
 
 	reorderDown(){
-		var location = this.spec.navigator.location;
+		var location = this.locationForReordering();
+
 		if (location.step && !location.holder.isLast(location.step)){
 			var change = changes.moveDown(location.holder, location.step);
 			this.applyChange(change);

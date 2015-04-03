@@ -3,6 +3,7 @@
 var React = require("react");
 var _ = require('lodash');
 var GrammarLookup = require('./../../lib/grammar-adder-lookup');
+var $ = require('jquery');
 
 module.exports = React.createClass({
 	componentDidMount(){
@@ -10,6 +11,7 @@ module.exports = React.createClass({
 		element.scrollIntoView();
 
 		var input = element.firstChild;
+		$(input).addClass('mousetrap');
 
 		var lookup = new GrammarLookup(this.props.holder);
 
