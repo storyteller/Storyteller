@@ -2,6 +2,7 @@ var Postal = require('postal');
 var Specification = require('./specification');
 var SpecificationStore = require('./specification-store');
 var Hierarchy = require('./specs/hierarchy');
+var changes = require('./change-commands');
 
 function applyOutstandingChanges(){
 	// If any thing is open, pack it in now
@@ -27,8 +28,21 @@ class EditorPresenter{
 		this.subscriptions = [];
 	}
 
+	reorderUp(){
+		var location = this.spec.navigator.location;
+		if (location.step && !location.holder.isFirst(location.step)){
+			var change = changes.moveUp(location.holder, location.step);
+			this.applyChange(change);
+		}
+	}
 
-
+	reorderDown(){
+		var location = this.spec.navigator.location;
+		if (location.step && !location.holder.isLast(location.step)){
+			var change = changes.moveDown(location.holder, location.step);
+			this.applyChange(change);
+		}
+	}
 
 	deactivate(){
 		this.subscriptions.forEach(function(x){
@@ -121,6 +135,9 @@ class EditorPresenter{
 		this.subscribe('save-spec', () => this.save());
 		this.subscribe('undo', () => this.undo());
 		this.subscribe('redo', () => this.redo());
+
+		this.subscribe('reorder-up', () => this.reorderUp());
+		this.subscribe('reorder-down', () => this.reorderDown());
 
 		this.subscribe('add-item', () => {
 			var navigator = this.spec.navigator;
