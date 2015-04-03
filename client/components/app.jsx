@@ -15,6 +15,8 @@ var Header = require('./header/header');
 var GrammarErrors = require('./grammars/grammar-errors');
 var SpecEditor = require('./editing/spec-editor');
 
+var $ = require('jquery');
+
 
 var App = React.createClass({
   mixins: [Router.State],
@@ -60,6 +62,13 @@ var routes = (
 module.exports = function(){
   // activate keyboard shortcuts
   require('./../lib/keyboard-shortcuts').register();
+
+  if (window){
+    window.$ = $;
+    window.jQuery = $;
+  }
+
+  require('./../lib/typeahead.jquery.js');
 
 	Router.run(routes, function (Handler) {
 	  React.render(<Handler/>, document.body);

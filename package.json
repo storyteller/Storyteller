@@ -49,6 +49,7 @@
     "react-bootstrap": "^0.13.3",
     "react-hot-loader": "^0.4.5",
     "react-router": "^0.11.6",
+    "typeahead.js": "^0.10.5",
     "vargs": "^0.1.0",
     "webpack": "^1.7.2",
     "webpack-dev-server": "^1.7.0",
