@@ -35,7 +35,7 @@ class EditorPresenter{
 
 	locationForReordering(){
 		var location = this.spec.navigator.location;
-		if (location.step = location.holder.adder){
+		if (location.step == location.holder.adder){
 			location = parentLocation(location);
 		}
 

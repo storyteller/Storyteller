@@ -23,8 +23,13 @@ var BodyRow = React.createClass({
 			e.preventDefault();
 		}
 
+		var clazz = 'table-editor-row';
+		if (this.props.step.active){
+			clazz += ' active';
+		}
+
 		return (
-			<tr id={this.props.step.id} className="table-editor-row">
+			<tr id={this.props.step.id} className={clazz}>
 				<td> 
 					<DeleteGlyph step={this.props.step} /> 
 					<a onClick={clickClone} className="clone-table-row" title="Clone this row" href="#"><Copy /></a>
