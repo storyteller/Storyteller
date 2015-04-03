@@ -48,6 +48,8 @@ class EditorPresenter{
 	}
 
 	reorderUp(){
+		applyOutstandingChanges();
+
 		var location = this.locationForReordering();
 
 		if (!location.holder.isFirst){
@@ -63,6 +65,8 @@ class EditorPresenter{
 	}
 
 	reorderDown(){
+		applyOutstandingChanges();
+		
 		var location = this.locationForReordering();
 
 		if (location.step && !location.holder.isLast(location.step)){
