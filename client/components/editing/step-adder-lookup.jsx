@@ -2,6 +2,7 @@
 
 var React = require("react");
 var _ = require('lodash');
+var GrammarLookup = require('./../../lib/grammar-adder-lookup');
 
 module.exports = React.createClass({
 	componentDidMount(){
@@ -10,17 +11,10 @@ module.exports = React.createClass({
 
 		var input = element.firstChild;
 
-		var options = this.props.holder.grammars().map(grammar => {
-			return {grammar: grammar, title: grammar.title, lower: grammar.title.toLowerCase()};
-		});
+		var lookup = new GrammarLookup(this.props.holder);
 
 		var finder = function(query, callback){
-			var fragment = query.toLowerCase();
-
-			var matches = options.filter(x => {
-				return x.lower.search(fragment) > -1;
-			});
-
+			var matches = lookup.findMatches(query);
 			callback(matches);
 		}
 
@@ -40,8 +34,12 @@ module.exports = React.createClass({
 		});
 		
 		$(element).on('typeahead:selected', function(jquery, option){
-			alert('found!');
+			option.select();
+			$(input).val('');
+			input.scrollIntoView();
 		});
+		
+		input.focus();
 	},
 
 	render(){

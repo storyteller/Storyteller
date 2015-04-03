@@ -79,6 +79,10 @@ div.active {
 	border: thin solid #337ab7;
 }
 
+span.twitter-typeahead{
+  width: 100%;
+}
+
 
 
 .typeahead,
