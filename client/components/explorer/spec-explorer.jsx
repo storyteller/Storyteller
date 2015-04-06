@@ -15,19 +15,19 @@ var CommandButtons = require('./command-buttons');
 
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 
-var fetchData = function(){
-	return {
-		status: Hierarchy.statusFilter(), 
-		lifecycle: Hierarchy.lifecycleFilter(),
-		top: Hierarchy.filteredHierarchy()
-	};
-}
 
 
 
 module.exports = React.createClass({
+
 	getInitialState: function(){
-		return fetchData();
+		// Going to change
+
+		return {
+			suite: Hierarchy.top(),
+			status: Hierarchy.statusFilter(), 
+			lifecycle: Hierarchy.lifecycleFilter()
+		}
 	},
 
 	componentDidMount: function(){
@@ -36,7 +36,7 @@ module.exports = React.createClass({
 		this.subscription = Postal.subscribe({
 			channel: 'explorer',
 			topic: 'hierarchy-updated',
-			callback: () => explorer.setState(fetchData())
+			callback: () => explorer.setState(this.getInitialState())
 		});
 	},
 
@@ -45,9 +45,13 @@ module.exports = React.createClass({
 	},
 
 	render: function(){
-		var summary = this.state.top.summary();
+		var filter = Hierarchy.currentFilter();
+		var suite = this.state.suite.filter(filter);
 
-		var suites = this.state.top.suites.map(s => {
+		var summary = suite.summary();
+
+		// This is going to have to change when we do the drill down
+		var suites = suite.suites.map(s => {
 			return (
 				<SuiteNode suite={s} />
 			);
@@ -79,7 +83,7 @@ module.exports = React.createClass({
 
 			<div className="row">
 				<div className="col-md-2 explorer-controls">
-					<CommandButtons hierarchy={this.state.top}/>
+					<CommandButtons hierarchy={this.state.suite}/>
 					<br />
 					<br />
 					<h5>Filter by Status</h5>
@@ -91,7 +95,7 @@ module.exports = React.createClass({
 
 				</div>
 				<div className="col-md-10">
-					<h4>All Specifications <small>{childSuiteLink}</small></h4>
+					<h4><span id="spec-editor-header">All Specifications</span> <small>{childSuiteLink}</small></h4>
 					{suites}
 				</div>
 			</div>

@@ -18,7 +18,7 @@ var StatusButton = React.createClass({
 
 		if (this.props.active){
 			return (
-				<Button active>{content} {badge}</Button>
+				<Button id={this.props.id} active>{content} {badge}</Button>
 			);
 		}
 
@@ -36,7 +36,7 @@ var StatusButton = React.createClass({
 		
 
 		return (
-			<Button onClick={handler} active={this.props.active}>{content} {badge}</Button>
+			<Button id={this.props.id} onClick={handler} active={this.props.active}>{content} {badge}</Button>
 		);
 	}
 });
@@ -49,10 +49,10 @@ var StatusFilter = React.createClass({
 
 		return (
 			<ButtonGroup vertical className="status-filter-buttons">
-				<StatusButton count={this.props.summary.total} active={actives.any} text="All" status="any" />
-				<StatusButton count={this.props.summary.success} active={actives.success} text="Success" status="success" icon="success"/>
-				<StatusButton count={this.props.summary.failed} active={actives.failed} text="Failed" status="failed" icon="failed"/>
-				<StatusButton count={this.props.summary.none} active={actives.none} text="No Results" status="none" icon="none"/>
+				<StatusButton id="status-any" count={this.props.summary.total} active={actives.any} text="All" status="any" />
+				<StatusButton id="status-success" count={this.props.summary.success} active={actives.success} text="Success" status="success" icon="success"/>
+				<StatusButton id="status-failed" count={this.props.summary.failed} active={actives.failed} text="Failed" status="failed" icon="failed"/>
+				<StatusButton id="status-none" count={this.props.summary.none} active={actives.none} text="No Results" status="none" icon="none"/>
 
 			</ButtonGroup>
 

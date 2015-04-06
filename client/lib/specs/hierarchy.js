@@ -199,6 +199,10 @@ module.exports = {
 		return top.filter(filter);
 	},
 
+	top: function(){
+		return top;
+	},
+
 	allSpecs: function(){
 		if (top == null) return [];
 

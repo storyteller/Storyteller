@@ -12,7 +12,7 @@ var LifecycleButton = React.createClass({
 
 		if (this.props.active){
 			return (
-				<Button active>{content} {badge}</Button>
+				<Button id={this.props.id} active>{content} {badge}</Button>
 			);
 		}
 
