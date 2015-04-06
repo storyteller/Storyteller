@@ -44,6 +44,7 @@ icon('run', ['fa-play']);
 icon('save', ['fa-save']);
 icon('copy', ['fa-copy']);
 icon('stop', ['fa-stop']);
+icon('help', ['fa-question']);
 
 
 module.exports = icons;

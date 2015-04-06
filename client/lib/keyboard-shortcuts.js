@@ -55,7 +55,7 @@ module.exports = {
 			description: 'Move to the previous cell or step in the editor'
 		});
 
-		editor({
+		explorer({
 			keys: 'ctrl+/',
 			topic: 'shortcut-help',
 			description: 'Get help for the available keyboard shortcuts'
