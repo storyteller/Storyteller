@@ -45,6 +45,7 @@ icon('save', ['fa-save']);
 icon('copy', ['fa-copy']);
 icon('stop', ['fa-stop']);
 icon('help', ['fa-question']);
+icon('search', ['fa-search']);
 
 
 module.exports = icons;

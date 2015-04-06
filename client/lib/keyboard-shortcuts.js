@@ -43,6 +43,12 @@ module.exports = {
 
 
 	register(){
+		explorer({
+			keys: 'ctrl+n',
+			topic: 'find',
+			description: "Find a specification or suite by name (similar to ReSharper/IntelliJ's ctrl-n functionality",
+		});
+
 		editor({
 			keys: 'tab',
 			topic: 'go-next',

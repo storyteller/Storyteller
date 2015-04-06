@@ -12,6 +12,7 @@ var SpecProgressBar = require('./spec-progress-bar');
 
 var SpecificationStore = require('./../../lib/specification-store');
 var HelpIcon = require('./help');
+var Search = require('./search');
 
 var StatusBar = React.createClass({
 	getInitialState: function(){
@@ -64,6 +65,7 @@ var StatusBar = React.createClass({
 					<QueueCount />
 					<GrammarCount />
 					<RecycleState recycled={this.state.recycled} time={this.state.time} success={this.state.success} recycling={this.state.recycling}/>
+					<Search />
 					<HelpIcon />
 
 				</span>

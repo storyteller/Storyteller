@@ -79,6 +79,18 @@ class Suite{
 
 		return _.flatten(specs);
 	}
+
+	allSuites(){
+		var suites = [];
+		var gather = function(suite){
+			suites.push(suite.suites);
+			suite.suites.forEach(s => gather(s));
+		}
+
+		gather(this);
+
+		return _.flatten(suites);
+	}
 }
 
 

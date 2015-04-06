@@ -207,7 +207,7 @@ module.exports = React.createClass({
 			<Grid>
 				<Row>
 					<Col xs={12} md={12}>
-					    <h3 className={headerClass}>
+					    <h3 ref="header" className={headerClass}>
 							{this.state.spec.title}
 							<span className="pull-right">
 								<ButtonGroup style={{marginRight: '30px'}}>
