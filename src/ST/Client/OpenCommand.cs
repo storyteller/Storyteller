@@ -16,58 +16,19 @@ namespace ST.Client
     {
         public override bool Execute(OpenInput input)
         {
-            var controller = input.BuildRemoteController();
-
-
-            var context = new StorytellerContext(controller, input);
-            context.Start();
-
-            var container = new Container(_ =>
+            using (var runner = new WebApplicationRunner(input))
             {
-                _.For<ISpecFileWatcher>().Use<SpecFileWatcher>();
-                _.For<IRemoteController>().Use(controller);
-                _.For<StorytellerContext>().Use(context);
-                _.ForSingletonOf<IClientConnector>().Use<ClientConnector>();
-                _.ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
-                
+                runner.Start();
+                Console.WriteLine("Launching the browser to " + runner.BaseAddress);
 
-                _.ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
-
-                _.For<ILogger>().Use<Logger>();
-                _.For<ILogListener>().Use<ExceptionListener>();
-
-                _.For<IActivator>().Add<ClientConnectorActivator>();
-                _.For<IActivator>().Add<StartWatchingFilesActivator>();
-                _.For<IActivator>().Add<StartWatchingAssets>();
-
-                _.Scan(x =>
-                {
-                    x.AssemblyContainingType<ICommand>();
-                    x.AssemblyContainingType<OpenInput>();
-
-                    x.AddAllTypesOf<ICommand>();
-                });
-            });
-
-
-
-            using (var server = FubuApplication.DefaultPolicies().StructureMap(container).RunEmbeddedWithAutoPort())
-            {
-                
-
-                Console.WriteLine("Launching the browser to " + server.BaseAddress);
-
-                Process.Start(server.BaseAddress);
+                Process.Start(runner.BaseAddress);
 
                 tellUsersWhatToDo();
                 ConsoleKeyInfo key = Console.ReadKey();
                 while (key.Key != ConsoleKey.Q)
                 {
-                    
-                }
 
-                Console.WriteLine("Shutting down.");
-                controller.Teardown();
+                }
             }
 
             return true;

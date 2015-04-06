@@ -70,6 +70,7 @@
     <Compile Include="Client\SpecFileWatcher.cs" />
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
+    <Compile Include="Client\WebApplicationRunner.cs" />
     <Compile Include="CommandLine\BatchResultsWriter.cs" />
     <Compile Include="CommandLine\PerformanceDataWriter.cs" />
     <Compile Include="CommandLine\ProjectInput.cs" />
