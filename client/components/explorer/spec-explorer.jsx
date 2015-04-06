@@ -45,7 +45,7 @@ module.exports = React.createClass({
 	},
 
 	render: function(){
-		var summary = Hierarchy.summary();
+		var summary = this.state.top.summary();
 
 		var suites = this.state.top.suites.map(s => {
 			return (

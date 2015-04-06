@@ -68,7 +68,7 @@ var SuiteHeader = React.createClass({
 		return (
 			<div className="suite-header">
 				<FolderOpen />
-				{this.props.suite.name}
+				<span className="suite-name">{this.props.suite.name}</span>
 				<CommandLink createMessage={buildMessage} text="run all" />
 				{this.makeNewSpecLink()}
 				{this.makeNewSuiteLink()}
@@ -86,7 +86,7 @@ var SuiteBody = React.createClass({
 		var specs = this.props.suite.specs.map(spec => (<SpecLeaf spec={spec} />) );
 
 		return (
-			<div className="suite-body">
+			<div id={this.props.suite.path} className="suite-body">
 				{childSuites}
 				{specs}
 			</div>
@@ -99,7 +99,7 @@ var SuiteBody = React.createClass({
 var SuiteNode = React.createClass({
 	render: function(){
 		return (
-			<div>
+			<div className="suite-node">
 				<SuiteHeader suite={this.props.suite} />
 				<SuiteBody suite={this.props.suite} />
 			</div>

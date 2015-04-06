@@ -185,14 +185,17 @@ module.exports = {
 		return status;
 	},
 
-	filteredHierarchy: function(){
-		if (status == 'any' && lifecycle == 'any') return top;
+	currentFilter(){
+		if (status == 'any' && lifecycle == 'any') return spec => true;
 	
 		var lifecycleFilter = toLifecycleFilter();
 		var statusFilter = toStatusFilter();
 
-		var filter = spec => lifecycleFilter(spec) && statusFilter(spec);
+		return spec => lifecycleFilter(spec) && statusFilter(spec);
+	},
 
+	filteredHierarchy: function(){
+		var filter = this.currentFilter();
 		return top.filter(filter);
 	},
 

@@ -29,7 +29,7 @@ var LifecycleButton = React.createClass({
 
 
 		return (
-			<Button active={this.props.active} onClick={handler}>{content} {badge}</Button>
+			<Button id={this.props.id} active={this.props.active} onClick={handler}>{content} {badge}</Button>
 		);
 	}
 });
@@ -41,9 +41,9 @@ var LifecycleFilter = React.createClass({
 
 		return (
 			<ButtonGroup vertical>
-				<LifecycleButton count={this.props.summary.total} active={actives.any} text="Any" lifecycle="any" />
-				<LifecycleButton count={this.props.summary.acceptance} active={actives.acceptance} text="Acceptance" lifecycle="Acceptance" />
-				<LifecycleButton count={this.props.summary.regression} active={actives.regression} text="Regression" lifecycle="Regression" />
+				<LifecycleButton id="any-lifecycle" count={this.props.summary.total} active={actives.any} text="Any" lifecycle="any" />
+				<LifecycleButton id="acceptance-lifecycle" count={this.props.summary.acceptance} active={actives.acceptance} text="Acceptance" lifecycle="Acceptance" />
+				<LifecycleButton id="regression-lifecycle" count={this.props.summary.regression} active={actives.regression} text="Regression" lifecycle="Regression" />
 			</ButtonGroup>
 		);
 	}
