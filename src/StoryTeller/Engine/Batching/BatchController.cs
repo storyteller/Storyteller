@@ -25,7 +25,7 @@ namespace StoryTeller.Engine.Batching
             var task = _resultObserver.MonitorBatch(nodes);
 
             nodes
-                .Select(SpecExecutionRequest.For)
+                .Select(node => SpecExecutionRequest.For(LocalSpecDataSource.Flyweight, node))
                 .Each(x => _engine.Enqueue(x));
 
             task.ContinueWith(t =>

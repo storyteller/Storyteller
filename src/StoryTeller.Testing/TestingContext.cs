@@ -19,12 +19,16 @@ namespace StoryTeller.Testing
 
         private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() =>
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+            return HierarchyLoader.ReadHierarchy(SpecFolder);
 
-            return HierarchyLoader.ReadHierarchy(path);
+        });
 
-        }); 
+        public static string SpecFolder = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+            .AppendPath("Storyteller.Samples", "Specs");
+
+        public static ISpecDataSource SpecDataSource = new LocalSpecDataSource(SpecFolder);
+
+
 
         public static FixtureLibrary Library
         {

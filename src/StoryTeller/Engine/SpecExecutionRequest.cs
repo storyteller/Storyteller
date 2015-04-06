@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using StoryTeller.Grammars;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -9,18 +10,21 @@ namespace StoryTeller.Engine
 {
     public class SpecExecutionRequest
     {
+
+        private readonly ISpecDataSource _source;
         private readonly IResultObserver _observer;
         public SpecNode Node { get; private set; }
         public Specification Specification { get; private set; }
         public SpecificationPlan Plan { get; private set; }
 
-        public static SpecExecutionRequest For(SpecNode node)
+        public static SpecExecutionRequest For(ISpecDataSource source, SpecNode node)
         {
-            return new SpecExecutionRequest(node, new NulloResultObserver());
+            return new SpecExecutionRequest(source, node, new NulloResultObserver());
         }
 
-        public SpecExecutionRequest(SpecNode node, IResultObserver observer, Specification specification = null)
+        public SpecExecutionRequest(ISpecDataSource source, SpecNode node, IResultObserver observer, Specification specification = null)
         {
+            _source = source;
             _observer = observer;
             Node = node;
             Specification = specification;
@@ -48,7 +52,9 @@ namespace StoryTeller.Engine
         {
             performAction(() =>
             {
-                Specification = XmlReader.ReadFromFile(Node.Filename);
+                Specification = _source.ReadSpecification(Node.id);
+                if (Specification == null) throw new FileNotFoundException(Node.Filename);
+
                 Specification.id = Node.id;
             });
         }

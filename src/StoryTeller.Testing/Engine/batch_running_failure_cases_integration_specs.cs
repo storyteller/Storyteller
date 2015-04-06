@@ -56,6 +56,7 @@ namespace StoryTeller.Testing.Engine
             {
                 x.ProfileFlag = "slow";
                 x.TimeoutFlag = 5;
+                x.TeamCityTracingFlag = true;
             });
 
             var record = response.records.FirstOrDefault(x => x.header.id == "SometimesSlow");

@@ -14,24 +14,23 @@ namespace StoryTeller.Engine
     public class EngineController : IResultObserver,
         IListener<RunSpec>,
         IListener<RunSpecs>,
-        IListener<HierarchyLoaded>,
         IListener<CancelSpec>,
         IListener<CancelAllSpecs>
     {
+        private readonly ISpecDataSource _dataSource;
         private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
         private readonly ISpecRunner _runner;
-        private Task<Suite> _hierarchy;
 
         private readonly IList<SpecExecutionRequest> _outstanding = new List<SpecExecutionRequest>();
 
 
-        public EngineController(ISpecificationEngine engine, IUserInterfaceObserver observer, ISpecRunner runner)
+        public EngineController(ISpecDataSource dataSource, ISpecificationEngine engine, IUserInterfaceObserver observer, ISpecRunner runner)
         {
+            _dataSource = dataSource;
             _engine = engine;
             _observer = observer;
             _runner = runner;
-            _hierarchy = Task.Factory.StartNew(() => HierarchyLoader.ReadHierarchy());
         }
 
         public IEnumerable<SpecExecutionRequest> OutstandingRequests()
@@ -52,7 +51,7 @@ namespace StoryTeller.Engine
             var spec = findSpec(id);
             if (spec == null) return;
 
-            var request = new SpecExecutionRequest(spec, this, specification);
+            var request = new SpecExecutionRequest(_dataSource, spec, this, specification);
             _outstanding.Add(request);
 
             _engine.Enqueue(request);
@@ -60,9 +59,7 @@ namespace StoryTeller.Engine
 
         private SpecNode findSpec(string id)
         {
-            _hierarchy.Wait(2.Seconds());
-
-            return _hierarchy.Result.GetAllSpecs().FirstOrDefault(x => x.id == id);
+            return _dataSource.ReadNode(id);
         }
 
         void IResultObserver.Handle<T>(T message)
@@ -72,7 +69,7 @@ namespace StoryTeller.Engine
 
         public void SpecExecutionFinished(SpecNode node, SpecResults results)
         {
-            var outstanding = _outstanding.FirstOrDefault(x => x.Node == node);
+            var outstanding = _outstanding.FirstOrDefault(x => Equals(x.Node, node));
             if (outstanding == null) return;
 
             _outstanding.Remove(outstanding);
@@ -80,11 +77,6 @@ namespace StoryTeller.Engine
             _observer.SendToClient(new SpecExecutionCompleted(node.id, results));
 
             SendQueueState();
-        }
-
-        public void Receive(HierarchyLoaded message)
-        {
-            _hierarchy = Task.FromResult(message.hierarchy);
         }
 
         public void Receive(CancelSpec message)

@@ -50,7 +50,7 @@ namespace StoryTeller.Testing.Engine
         public void should_enqueue_the_request()
         {
             MockFor<ISpecificationEngine>()
-                .AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
+                .AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(TestingContext.SpecDataSource, findSpec("embeds"), null)));
         }
     }
 
@@ -97,7 +97,7 @@ namespace StoryTeller.Testing.Engine
         public void should_enqueue_the_specification()
         {
             var specificationEngine = MockFor<ISpecificationEngine>();
-            specificationEngine.AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
+            specificationEngine.AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(TestingContext.SpecDataSource, findSpec("embeds"), null)));
 
             var request =
                 specificationEngine.GetArgumentsForCallsMadeOn(x => x.Enqueue(null))[0][0].As<SpecExecutionRequest>();
@@ -307,13 +307,13 @@ namespace StoryTeller.Testing.Engine
 
     public abstract class EngineControllerContext : InteractionContext<EngineController>
     {
-        protected override sealed void beforeEach()
+        protected abstract void theContextIs();
+
+        protected override void beforeEach()
         {
-            ClassUnderTest.Receive(new HierarchyLoaded {hierarchy = TestingContext.Hierarchy});
+            Services.Inject<ISpecDataSource>(TestingContext.SpecDataSource);
             theContextIs();
         }
-
-        protected abstract void theContextIs();
 
         protected SpecNode findSpec(string id)
         {

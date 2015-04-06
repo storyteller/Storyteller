@@ -14,7 +14,7 @@ namespace StoryTeller.Testing.Engine
     [TestFixture]
     public class SpecExecutionRequestTester
     {
-        private SpecNode theSpec;
+        private readonly SpecNode theSpec;
         private RuntimeErrorListener listener;
 
         public SpecExecutionRequestTester()
@@ -42,7 +42,7 @@ namespace StoryTeller.Testing.Engine
         {
             var action = MockRepository.GenerateMock<IResultObserver>();
 
-            var request = new SpecExecutionRequest(theSpec, action);
+            var request = new SpecExecutionRequest(TestingContext.SpecDataSource, theSpec, action);
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
             request.Plan.Attempts = 3;
@@ -56,53 +56,52 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void read_xml_happy_path()
         {
-            var request = SpecExecutionRequest.For(theSpec);
+            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
 
             request.ReadXml();
 
             request.Specification.ShouldNotBeNull();
             request.Specification.Children.Count.ShouldBeGreaterThan(0);
 
-            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, false);
+            request.IsCancelled.ShouldBe(false);
         }
 
         [Test]
         public void read_xml_sad_path()
         {
-            var request = SpecExecutionRequest.For(new SpecNode {Filename = "nonexistent.xml"});
+            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, new SpecNode { Filename = "nonexistent.xml" });
 
             EventAggregator.Messaging.AddListener(listener);
 
             request.ReadXml();
 
-            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, true);
+            request.IsCancelled.ShouldBe(true);
 
             var error = listener.Errors.Single();
 
             error.error.ShouldContain("System.IO.FileNotFoundException");
-
         }
 
         [Test]
         public void cancel_cancels_the_request()
         {
-            var request = SpecExecutionRequest.For(theSpec);
-            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, false);
+            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
+            request.IsCancelled.ShouldBe(false);
 
             request.Cancel();
 
-            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, true);
+            request.IsCancelled.ShouldBe(true);
         }
 
 
         [Test]
         public void create_plan_happy_path_smoke_test()
         {
-            var request = SpecExecutionRequest.For(theSpec);
+            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
-            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, false);
+            request.IsCancelled.ShouldBe(false);
 
             request.Plan.ShouldNotBeNull();
         }
@@ -110,13 +109,13 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void create_plan_sad_path_smoke_test()
         {
-            var request = SpecExecutionRequest.For(theSpec);
-            
+            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
+
             // No specification, so it blows up
             //request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
-            ShouldBeTestExtensions.ShouldBe(request.IsCancelled, true);
+            request.IsCancelled.ShouldBe(true);
         }
 
         public class RuntimeErrorListener : IListener<RuntimeError>
