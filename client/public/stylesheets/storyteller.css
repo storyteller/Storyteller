@@ -26,7 +26,7 @@ a.explorer-command:link{
 	color: gray;
 }
 
-a.explorer-command:hover{
+a.explorer-command:hover, a.suite-name:hover{
 	color: blue;
 }
 
@@ -38,7 +38,7 @@ a.explorer-command:hover{
 	font-weight: bold;
 }
 
-.spec-state-none{
+.spec-state-none, a.suite-name{
 	font-style: normal;
 	color: black;
 }

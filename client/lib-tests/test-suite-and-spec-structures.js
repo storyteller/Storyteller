@@ -71,6 +71,21 @@ describe('Suite', function(){
 
 	var suite = new Suite(data);
 
+	// was a bug where Suite was double dipping its spec summary
+	it('can summarize for a single suite', function(){
+		var child = suite.childSuite('Sentences');
+		var summary = child.summary();
+
+		expect(summary).to.deep.equal({
+			acceptance: 4,
+			failed: 0,
+			none: 4,
+			regression: 0,
+			success: 0,
+			total: 4
+		});
+	});
+
 	it('can get the id list of all the underlying specs', function(){
 		expect(suite.allSpecIds()).to.deep.equal([3, 4, 1, 2, 5, 6]);
 	});

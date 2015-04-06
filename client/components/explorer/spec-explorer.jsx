@@ -24,7 +24,7 @@ module.exports = React.createClass({
 		// Going to change
 
 		return {
-			suite: Hierarchy.top(),
+			suite: this.props.suite || Hierarchy.top(),
 			status: Hierarchy.statusFilter(), 
 			lifecycle: Hierarchy.lifecycleFilter()
 		}
@@ -44,25 +44,7 @@ module.exports = React.createClass({
 		this.subscription.unsubscribe();
 	},
 
-	render: function(){
-		var filter = Hierarchy.currentFilter();
-		var suite = this.state.suite.filter(filter);
-
-		var summary = suite.summary();
-
-		// This is going to have to change when we do the drill down
-		var suites = suite.suites.map(s => {
-			return (
-				<SuiteNode suite={s} />
-			);
-		});
-
-		if (suites.length == 0){
-			suites = (
-				<div>No matching specifications.</div>
-			);
-		}
-
+	buildAllSpecificationHeader: function(){
 		var buildChildSuiteMessage = name => {
 			return {
 				type: 'add-suite',
@@ -78,6 +60,47 @@ module.exports = React.createClass({
 				commandText="Create" 
 				toMessage={buildChildSuiteMessage}/>
 		);
+
+		return(
+			<h4><span id="spec-editor-header">All Specifications</span> <small>{childSuiteLink}</small></h4>
+		);
+	},
+
+	render: function(){
+		var filter = Hierarchy.currentFilter();
+		var suite = this.state.suite.filter(filter);
+
+		var summary = suite.summary();
+		
+		var header = null;
+		var suites = null;
+
+		if (suite.isHierarchy){
+			header = this.buildAllSpecificationHeader();
+			suites = suite.suites.map(s => {
+				return (
+					<SuiteNode suite={s} />
+				);
+			});
+		}
+		else {
+			// TODO -- fancier later
+			var title = 'Suite: ' + suite.path;
+
+			header = (
+				<h4><span id="spec-editor-header">{title}</span></h4>
+			);
+
+			suites = [(<SuiteNode suite={suite} />)];
+		}
+
+		if (suites.length == 0){
+			suites = (
+				<div id="no-matching-specs">No matching specifications.</div>
+			);
+		}
+
+
 
 		return (
 
@@ -95,7 +118,7 @@ module.exports = React.createClass({
 
 				</div>
 				<div className="col-md-10">
-					<h4><span id="spec-editor-header">All Specifications</span> <small>{childSuiteLink}</small></h4>
+					{header}
 					{suites}
 				</div>
 			</div>

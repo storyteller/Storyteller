@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var AllSpecData = require('./../all-spec-data');
 var SpecExplorer = require('./../components/explorer/spec-explorer');
+var SuiteExplorer = require('./../components/explorer/suite-explorer');
 var Postal = require('postal');
 var React = require('react');
 var $ = require('jquery');
@@ -53,7 +54,7 @@ describe('Spec Explorer', function(){
 	}
 
 	function noSpecsAreShown(){
-		throw new Error('do');
+		expect($('#no-matching-specs', div).length).to.equal(1);
 	}
 
 	function suitesShownShouldBe(suites){
@@ -97,6 +98,13 @@ describe('Spec Explorer', function(){
 		specsForSuiteShouldBe('Sentences', ['Currying', 'Facts', 'Importing and Currying', 'Sentences']);
 	});
 
+	it('shows the message about no matching specs when none match the filter', function(){
+		// No results have been published, so this should hide everything
+		$('#status-success', div).click();
+
+		noSpecsAreShown();
+	});
+
 	it('shows the right badge numbers for the lifecycles', function(){
 		expect(badgeText('any-lifecycle')).to.equal('22');
 		expect(badgeText('acceptance-lifecycle')).to.equal('19');
@@ -137,6 +145,88 @@ describe('Spec Explorer', function(){
 
 	it('opening the explorer to the top should show the All Specifications title', function(){
 		expect($('#spec-editor-header', div).html()).to.equal('All Specifications');
+	});
+
+});
+
+describe('Suite Explorer', function(){
+	var hierarchy = null;
+	var component = null;
+	var div = null;
+
+	beforeEach(() => {
+		hierarchy = AllSpecData.hierarchy;
+
+		Postal.reset();
+
+		Hierarchy.reset();
+
+		Postal.publish({
+			channel: 'engine',
+			topic: 'hierarchy-loaded',
+			data: {hierarchy: hierarchy}
+		});
+
+		div = document.createElement('div');
+		document.documentElement.appendChild(div);
+
+		component = React.render(SuiteExplorer({params: {splat: ['Sentences']}}), div);
+	});
+
+	function badgeText(id){
+		return $('#' + id + ' span.badge', div).html()
+	}
+
+	function noSpecsAreShown(){
+		expect($('#no-matching-specs', div).length).to.equal(1);
+	}
+
+	function suitesShownShouldBe(suites){
+		var names = $.makeArray($('.suite-name', div)).map(x => x.innerHTML);
+		expect(suites).to.deep.equal(names);
+	}
+
+	function specsForSuiteShouldBe(suite, specs){
+		var suiteNode = $('#' + suite, div);
+		var matches = $('a.spec-name', suiteNode);
+		var specNames = $.makeArray(matches).map(x => x.innerHTML);
+
+		expect(specs).to.deep.equal(specNames);
+	}
+
+
+	it('should show only the Sentences suite', function(){
+		suitesShownShouldBe(['Sentences']);
+	});
+
+	it('should show all the specs for the one suite', function(){
+		specsForSuiteShouldBe('Sentences', ['Currying', 'Facts', 'Importing and Currying', 'Sentences']);
+	});
+
+	it('opening the explorer to a suite should show the suite name as the title', function(){
+		expect($('#spec-editor-header', div).html()).to.equal('Suite: Sentences');
+	});
+
+	it('shows the right badge numbers for the lifecycles', function(){
+		expect(badgeText('any-lifecycle')).to.equal('4');
+		expect(badgeText('acceptance-lifecycle')).to.equal('3');
+		expect(badgeText('regression-lifecycle')).to.equal('1');
+	});
+
+	it('shows the badge numbers for status in the initial state', function(){
+		expect(badgeText('status-any')).to.equal('4');
+		expect(badgeText('status-success')).to.equal('0');
+		expect(badgeText('status-failed')).to.equal('0');
+		expect(badgeText('status-none')).to.equal('4');
+	});
+
+	it('shows the right badge numbers for the results after all are finished', function(){
+		publishResults();
+
+		expect(badgeText('status-any')).to.equal('4');
+		expect(badgeText('status-success')).to.equal('0');
+		expect(badgeText('status-failed')).to.equal('4');
+		expect(badgeText('status-none')).to.equal('0');
 	});
 
 });

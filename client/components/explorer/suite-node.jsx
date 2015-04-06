@@ -65,10 +65,12 @@ var SuiteHeader = React.createClass({
 			return {type: 'run-specs', list: list};
 		}
 
+		var href = '#/suite/' + suite.path;
+
 		return (
 			<div className="suite-header">
 				<FolderOpen />
-				<span className="suite-name">{this.props.suite.name}</span>
+				<a href={href} className="suite-name">{this.props.suite.name}</a>
 				<CommandLink createMessage={buildMessage} text="run all" />
 				{this.makeNewSpecLink()}
 				{this.makeNewSuiteLink()}

@@ -7,6 +7,8 @@ class Suite{
 		this.path = data.path;
 		this.parent = parent;
 
+		this.isHierarchy = parent == null || parent == undefined;
+
 		var self = this;
 
 		this.suites = (data.suites || []).map(x => new Suite(x, self));
@@ -14,7 +16,7 @@ class Suite{
 	}
 
 	childSuite(name){
-		return this.suites.find(x => x.name == name);
+		return _.find(this.suites, x => x.name == name);
 	}
 
 	hasAnySpecs(){
@@ -23,6 +25,7 @@ class Suite{
 
 	filter(filter){
 		var filtered = new Suite(this, null);
+		filtered.isHierarchy = this.isHierarchy;
 		filtered.specs = this.specs.filter(filter);
 		filtered.suites = this.suites
 			.map(s => s.filter(filter))
@@ -66,7 +69,7 @@ class Suite{
 
 
 	allSpecs(){
-		var specs = _.union([], this.specs);
+		var specs = [];
 		var gather = function(suite){
 			specs.push(suite.specs);
 			suite.suites.forEach(s => gather(s));
