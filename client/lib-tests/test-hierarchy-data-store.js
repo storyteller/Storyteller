@@ -5,6 +5,7 @@ var data = require('./hierarchy-data');
 var Hierarchy = require('./../lib/specs/hierarchy');
 var Postal = require('postal');
 var Counts = require('./../lib/specs/counts');
+var Suite = require('./../lib/specs/suite');
 
 function publishEngineMessage(topic, data){
 	Postal.publish({
@@ -84,6 +85,20 @@ describe('Hierarchy data store functions', function(){
 		        listener.append(data);
 		    }
 		});
+	});
+
+	it('can find a suite by path', function(){
+		hierarchyIsPublishedFromEngine();
+
+		var suite = Hierarchy.findSuite(['Sentences']);
+		expect(suite.name).to.equal('Sentences');
+
+		var child = new Suite({name: 'Child1'}, suite);
+		suite.suites.push(new Suite({name: 'Child1'}, suite));
+
+		expect(Hierarchy.findSuite(['Sentences', 'Child1']).name).to.equal(child.name);
+	
+		expect(Hierarchy.findSuite(['Sentences', 'Nonsense'])).to.be.null;
 	});
 
 	it('initially has no filters', function(){
@@ -336,6 +351,7 @@ describe('Hierarchy data store functions', function(){
 			expect(names.indexOf('general1') > -1).to.be.false;
 			expect(names.indexOf('general2') > -1).to.be.true;
 		});
+
 	});
 
 	describe('Creating a summary', function(){

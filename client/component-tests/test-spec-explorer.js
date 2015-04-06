@@ -24,7 +24,7 @@ function publishResults(){
 
 
 
-describe.only('Spec Explorer', function(){
+describe('Spec Explorer', function(){
 	var hierarchy = null;
 	var component = null;
 	var div = null;

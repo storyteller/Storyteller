@@ -13,6 +13,10 @@ class Suite{
 		this.specs = (data.specs || []).map(x => new Spec(x));
 	}
 
+	childSuite(name){
+		return this.suites.find(x => x.name == name);
+	}
+
 	hasAnySpecs(){
 		return this.specs.length > 0 || _.any(this.suites, s => s.hasAnySpecs());
 	}

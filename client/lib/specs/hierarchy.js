@@ -234,5 +234,15 @@ module.exports = {
 		return null;
 	},
 
+	findSuite: function(names){
+		var suite = top;
+		names.forEach(x => {
+			if (suite == null) return null;
+			suite = suite.childSuite(x);
+		});
 
+		if (suite == undefined) return null;
+
+		return suite;
+	}
 }
