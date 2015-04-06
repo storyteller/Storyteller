@@ -7,7 +7,7 @@ var HeaderCell = React.createClass({
 		var title = this.props.cell.header || this.props.cell.key;
 
 		return (
-			<th>{title}</th>
+			<th key={this.props.key}>{title}</th>
 		);
 	}
 });
@@ -15,7 +15,7 @@ var HeaderCell = React.createClass({
 var HeaderRow = React.createClass({
 	render: function(){
 		var cells = this.props.cells.map(function(x){
-			return HeaderCell({cell: x});
+			return ( <HeaderCell key={x.key} cell={x} /> );
 		});
 
 		var actionCell = null;

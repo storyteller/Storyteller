@@ -32,9 +32,11 @@ var TableEditor = React.createClass({
 					{this.props.rows}
 				</tbody>
 				<tfoot>
-					<tr><td colSpan={tableWidth}>
-						<a tabIndex="0" className="add-table-step" href="#" onClick={addOnClick}>Add Row</a>
-					</td></tr>
+					<tr>
+						<td colSpan={tableWidth}>
+							<a tabIndex="0" className="add-table-step" href="#" onClick={addOnClick}>Add Row</a>
+						</td>
+					</tr>
 				</tfoot>
 
 			</table>

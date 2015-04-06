@@ -87,8 +87,6 @@ var modes = {
 }
 
 module.exports = React.createClass({
-	mixins: [Router.State],
-
 	// smelly, but oh well
 	gotoResults: function(){
 		if (this.props.mode != 'results'){
@@ -99,23 +97,8 @@ module.exports = React.createClass({
 	getInitialState: function(){
 		// yeah, I know this is an "anti-pattern", but it makes
 		// isolated testing much easier.
-		var id = this.props.id; 
+		var id = this.props.params.id; 
 		var mode = this.props.mode || 'editing';
-
-		try {
-			var params = this.getParams();
-			if (params && params.mode){
-				mode = params.mode;
-			}
-
-			if (id == null || id == undefined){
-				var id = this.getParams().id;
-			}
-		}
-		catch (e){
-			console.log('SpecEditor could not read routing urls');
-		}
-
 
 		return {
 			components: [],
