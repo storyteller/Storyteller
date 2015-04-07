@@ -38,7 +38,7 @@ namespace StoryTeller.Engine
             _mode.BeforeRunning(request);
             if (Status == SpecRunnerStatus.Invalid)
             {
-                var abortedResults = SpecResults.ForAbortedRun();
+                var abortedResults = SpecResults.ForAbortedRun(request.Id);
                 _mode.AfterRunning(request, abortedResults, queue, Status);
                 return abortedResults;
             }
@@ -62,7 +62,7 @@ namespace StoryTeller.Engine
                 ConsoleWriter.Write(ConsoleColor.Yellow,
                     "Failed to create an execution context. No specifications can be processed until this is addressed");
                 ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
-                EventAggregator.SendMessage(new RuntimeError(ex));
+                EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(ex)));
 
                 results = buildResultsForContextCreationFailure(request, ex, timings);
             }

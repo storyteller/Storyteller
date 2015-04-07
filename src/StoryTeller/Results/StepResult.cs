@@ -14,7 +14,8 @@ namespace StoryTeller.Results
         before,
         after,
         timedout,
-        context
+        context,
+        engine
     }
 
     public class StepResult : ClientMessage, IResultMessage

@@ -44,7 +44,7 @@ namespace StoryTeller.Engine
             catch (Exception e)
             {
                 IsCancelled = true;
-                EventAggregator.SendMessage(new RuntimeError(e));
+                EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(e)));
             }
         }
 

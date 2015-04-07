@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
-using StoryTeller.Grammars;
 using StoryTeller.Messages;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
@@ -11,7 +9,9 @@ namespace StoryTeller.Engine.UserInterface
 {
     public class UserInterfaceObserver : IUserInterfaceObserver, IDisposable
     {
-        private readonly BlockingCollection<object> _messages = new BlockingCollection<object>(new ConcurrentQueue<object>());
+        private readonly BlockingCollection<object> _messages =
+            new BlockingCollection<object>(new ConcurrentQueue<object>());
+
         private Task _readingTask;
 
         public UserInterfaceObserver()

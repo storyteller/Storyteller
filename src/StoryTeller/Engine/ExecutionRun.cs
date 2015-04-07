@@ -96,7 +96,7 @@ namespace StoryTeller.Engine
             {
                 id = _request.Plan.Specification.id,
                 Status = ResultStatus.error,
-                error = "Timed out in " + _timings.Duration,
+                error = "Timed out in " + _timings.Duration + " milliseconds",
                 position = Stage.timedout
             };
             return stepResult;

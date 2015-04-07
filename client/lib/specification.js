@@ -57,13 +57,19 @@ function Specification(data, library){
 	this.buildResults = function(loader){
 		var elements = [];
 
-		if (this.results.timeout){
-			elements.push(loader.errorBox({title: 'Timed out!', error: this.results.timeout.error}));
+		if (this.results.timedout){
+			elements.push(loader.errorBox({title: 'Timed out!', error: this.results.timedout.error}));
 		}
 
 		if (this.results.engine){
 			elements.push(loader.errorBox({title: 'Engine Failure', error: this.results.engine.error}));
 		}
+
+
+		if (this.results.context){
+			elements.push(loader.errorBox({title: 'Context Creation Failure in the engine', error: this.results.context.error}));
+		}
+
 
 		// TODO -- use _.flatten some day
 		this.steps.forEach(step => {

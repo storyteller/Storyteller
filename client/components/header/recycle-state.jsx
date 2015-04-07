@@ -1,10 +1,8 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var Button = require('react-bootstrap/Button');
-var Modal = require('react-bootstrap/Modal');
-var ModalTrigger = require('react-bootstrap/ModalTrigger');
-var OverlayMixin = require('react-bootstrap/OverlayMixin');
+var {Button, Modal, ModalTrigger, OverlayMixin} = require('react-bootstrap');
+
 var Icons = require('./../icons');
 
 var SystemProperties = React.createClass({

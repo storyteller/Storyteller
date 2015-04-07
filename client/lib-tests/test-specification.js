@@ -558,7 +558,7 @@ describe('Storing and finding steps by id', function(){
 			// pre-condition
 			expect(spec.buildResults(loader).length).to.equal(0);
 
-			spec.results.timeout = {error: 'Too slow!'};
+			spec.results.timedout = {error: 'Too slow!'};
 
 			var results = spec.buildResults(loader);
 

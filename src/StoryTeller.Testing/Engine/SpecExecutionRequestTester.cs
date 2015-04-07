@@ -76,10 +76,6 @@ namespace StoryTeller.Testing.Engine
             request.ReadXml();
 
             request.IsCancelled.ShouldBe(true);
-
-            var error = listener.Errors.Single();
-
-            error.error.ShouldContain("System.IO.FileNotFoundException");
         }
 
         [Test]

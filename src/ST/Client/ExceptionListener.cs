@@ -34,7 +34,7 @@ namespace ST.Client
             ConsoleWriter.Write(ConsoleColor.Yellow, message);
             ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
 
-            EventAggregator.SendMessage(new RuntimeError(ex));
+            EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(ex)));
         }
 
         public void Error(object correlationId, string message, Exception ex)

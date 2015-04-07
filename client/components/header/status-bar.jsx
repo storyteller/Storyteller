@@ -13,6 +13,7 @@ var SpecProgressBar = require('./spec-progress-bar');
 var SpecificationStore = require('./../../lib/specification-store');
 var HelpIcon = require('./help');
 var Search = require('./search');
+var RuntimeError = require('./runtime-error');
 
 var StatusBar = React.createClass({
 	getInitialState: function(){
@@ -53,6 +54,8 @@ var StatusBar = React.createClass({
 				});
 			}
 		});
+
+
 	},
 
 	render: function(){
@@ -67,7 +70,7 @@ var StatusBar = React.createClass({
 					<RecycleState recycled={this.state.recycled} time={this.state.time} success={this.state.success} recycling={this.state.recycling}/>
 					<Search />
 					<HelpIcon />
-
+					<RuntimeError />
 				</span>
 			</Navbar>
 		);
