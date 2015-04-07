@@ -1,9 +1,9 @@
 using System;
 using FubuCore;
-using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {
+    [Serializable]
     public abstract class Node
     {
         private string _id;

@@ -31,8 +31,13 @@ namespace StoryTeller.Remotes
             return null;
         }
 
-        public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
+        public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener, MarshalByRefObject remoteDataSource)
         {
+            if (remoteDataSource != null)
+            {
+                _dataSource = remoteDataSource.As<ISpecDataSource>();
+            }
+            
             Project.CurrentProject = project;
 
             EventAggregator.Start((IRemoteListener) remoteListener);

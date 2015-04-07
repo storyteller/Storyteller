@@ -28,8 +28,12 @@ namespace ST.Client
             _controller = _input.BuildRemoteController();
             var context = new StorytellerContext(_controller, _input);
 
-            var container = new Container(new WebApplicationRegistry(_controller, context));
+            
 
+            var container = new Container(new WebApplicationRegistry(_controller, context));
+            var dataSource = container.GetInstance<RemoteSpecDataSource>();
+
+            context.Start(dataSource);
 
             _server = FubuApplication.DefaultPolicies().StructureMap(container).RunEmbeddedWithAutoPort();
         }

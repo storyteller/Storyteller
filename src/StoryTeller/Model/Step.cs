@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {
+    [Serializable]
     public class Step : Node
     {
         [JsonIgnore] public readonly Cache<string, Section> Collections =

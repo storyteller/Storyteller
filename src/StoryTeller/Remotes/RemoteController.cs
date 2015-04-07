@@ -108,11 +108,11 @@ namespace StoryTeller.Remotes
             AppDomain.Unload(_domain);
         }
 
-        public Task<SystemRecycled> Start(EngineMode mode)
+        public Task<SystemRecycled> Start(EngineMode mode, MarshalByRefObject dataSource = null)
         {
             _mode = mode;
 
-            var listener = bootstrap(mode);
+            var listener = bootstrap(mode, dataSource);
 
 
             return listener.Task.ContinueWith(x =>
@@ -124,7 +124,7 @@ namespace StoryTeller.Remotes
             });
         }
 
-        private SystemRecycledListener bootstrap(EngineMode mode)
+        private SystemRecycledListener bootstrap(EngineMode mode, MarshalByRefObject dataSource = null)
         {
             var listener = new SystemRecycledListener(_messaging);
 
@@ -136,7 +136,7 @@ namespace StoryTeller.Remotes
 
             _messaging.AddListener(listener);
 
-            _proxy.Start(mode, _project, new RemoteListener(_messaging));
+            _proxy.Start(mode, _project, new RemoteListener(_messaging), dataSource);
 
             return listener;
         }

@@ -1,9 +1,10 @@
+using System;
 using FubuCore;
 using Newtonsoft.Json;
-using StoryTeller.Messages;
 
 namespace StoryTeller.Model.Persistence
 {
+    [Serializable]
     public class SpecNode
     {
         public string name;
@@ -30,6 +31,7 @@ namespace StoryTeller.Model.Persistence
             return Suite.SuitePathOf(path);
         }
 
+        [NonSerialized]
         public SpecResults results;
 
         protected bool Equals(SpecNode other)

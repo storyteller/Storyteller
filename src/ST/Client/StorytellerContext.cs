@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 
 namespace ST.Client
@@ -16,9 +15,9 @@ namespace ST.Client
             _input = input;
         }
 
-        public void Start()
+        public void Start(RemoteSpecDataSource dataSource = null)
         {
-            _startup = _controller.Start(EngineMode.Interactive).ContinueWith(t =>
+            _startup = _controller.Start(EngineMode.Interactive, dataSource).ContinueWith(t =>
             {
                 t.Result.WriteSystemUsage();
 

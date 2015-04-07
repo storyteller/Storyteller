@@ -7,6 +7,7 @@ using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Model
 {
+    [Serializable]
     public class Specification : Node, INodeHolder
     {
         [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
