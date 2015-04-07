@@ -44,8 +44,6 @@ handlers['hierarchy-loaded'] = function(data){
 	publishHierarchyChanged();
 }
 
-
-
 handlers['spec-canceled'] = function(data){
 	var spec = specs[data.id];
 	spec.state = 'none';

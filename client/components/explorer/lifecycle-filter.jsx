@@ -36,14 +36,14 @@ var LifecycleButton = React.createClass({
 
 var LifecycleFilter = React.createClass({
 	render: function(){
-		var actives = {any: false, acceptance: false, regression: false};
+		var actives = {any: false, Acceptance: false, Regression: false};
 		actives[this.props.lifecycle] = true;
 
 		return (
 			<ButtonGroup vertical>
 				<LifecycleButton id="any-lifecycle" count={this.props.summary.total} active={actives.any} text="Any" lifecycle="any" />
-				<LifecycleButton id="acceptance-lifecycle" count={this.props.summary.acceptance} active={actives.acceptance} text="Acceptance" lifecycle="Acceptance" />
-				<LifecycleButton id="regression-lifecycle" count={this.props.summary.regression} active={actives.regression} text="Regression" lifecycle="Regression" />
+				<LifecycleButton id="acceptance-lifecycle" count={this.props.summary.acceptance} active={actives.Acceptance} text="Acceptance" lifecycle="Acceptance" />
+				<LifecycleButton id="regression-lifecycle" count={this.props.summary.regression} active={actives.Regression} text="Regression" lifecycle="Regression" />
 			</ButtonGroup>
 		);
 	}

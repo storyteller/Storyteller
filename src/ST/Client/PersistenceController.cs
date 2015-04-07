@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using FubuCore;
 using FubuCore.Logging;
-using FubuCore.Util;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
+using StructureMap.Util;
 using XmlReader = StoryTeller.Model.Persistence.XmlReader;
 using XmlWriter = StoryTeller.Model.Persistence.XmlWriter;
 
@@ -26,7 +27,7 @@ namespace ST.Client
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
-        private readonly Cache<string, Specification> _data;
+        private readonly FubuCore.Util.Cache<string, Specification> _data;
 
 
         public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client, ISpecFileWatcher watcher)
@@ -36,7 +37,7 @@ namespace ST.Client
             _client = client;
             _watcher = watcher;
 
-            _data = new Cache<string, Specification>(key =>
+            _data = new FubuCore.Util.Cache<string, Specification>(key =>
             {
                 var node = _hierarchy.Nodes[key];
                 var spec = XmlReader.ReadFromFile(node.Filename);
@@ -204,13 +205,6 @@ namespace ST.Client
         {
             if (idList.Length == 0) return;
 
-            if (idList.Length == 1)
-            {
-                var changed = SaveSpecHeader(idList[0], x => x.Lifecycle = lifecycle);
-                _client.SendMessageToClient(changed);
-                return;
-            }
-
             idList.Each(id => SaveSpecHeader(id, x => x.Lifecycle = lifecycle));
             ReloadHierarchy();
         }
@@ -311,14 +305,25 @@ namespace ST.Client
             {
                 _lock.Write(() =>
                 {
+                    var results = new LightweightCache<string, SpecResults>();
+                    _hierarchy.Nodes.GetAll().Where(x => x.results != null).Each(x =>
+                    {
+                        results[x.id] = x.results;
+                    });
+
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
                     _data.ClearAll();
+
+                    results.Each((id, result) =>
+                    {
+                        _hierarchy.Nodes[id].results = result;
+                    });
+
+
                     var message = new HierarchyLoaded
                     {
                         hierarchy = _hierarchy.Top
                     };
-
-                    // TODO -- have it read in the cached result counts
 
                     _client.SendMessageToClient(message);
                     _engine.SendMessage(message);

@@ -240,7 +240,6 @@ namespace StoryTeller.Testing.ST
             XmlReader.ReadFromFile(node.Filename).Lifecycle
                 .ShouldBe(Lifecycle.Regression);
 
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SpecNodeChanged{node = node}));
 
         }
 

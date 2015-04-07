@@ -7,7 +7,7 @@ var {Button} = require('react-bootstrap');
 module.exports = React.createClass({
 	render: function(){
 		var onclick = e => {
-			var topic = 'mark-as-accepted';
+			var topic = 'mark-as-acceptance';
 			if (this.props.spec.lifecycle == 'Acceptance'){
 				topic = 'mark-as-regression'
 			}
@@ -21,6 +21,7 @@ module.exports = React.createClass({
 			e.stopPropagation();
 		}
 
+		
 
 		return (
 			<Button
