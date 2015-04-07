@@ -9,7 +9,6 @@ namespace ST.Client
         private readonly RemoteController _controller;
         private readonly OpenInput _input;
         private Task<SystemRecycled> _startup;
-        private Task<Suite> _hierarchy;
 
         public StorytellerContext(RemoteController controller, OpenInput input)
         {
