@@ -37,6 +37,8 @@ namespace StoryTeller.Testing.ST
 
                 fileSystem.Copy(file, destination);
             });
+
+        
         }
 
         protected override void beforeEach()
@@ -80,8 +82,8 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void should_have_a_hierarchy_upon_starting()
         {
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.Hierarchy.Suites.Any(), true);
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.Hierarchy.Nodes.Any(), true);
+            ClassUnderTest.Hierarchy.Suites.Any().ShouldBe(true);
+            ClassUnderTest.Hierarchy.Nodes.Any().ShouldBe(true);
         }
 
         [Test]
@@ -89,7 +91,7 @@ namespace StoryTeller.Testing.ST
         {
             var node = ClassUnderTest.Hierarchy.Nodes["embeds"];
             var specification = XmlReader.ReadFromFile(node.Filename);
-            specification.Children.Add(new Comment{Text = "a new comment"});
+            specification.Children.Add(new Comment {Text = "a new comment"});
 
             ClassUnderTest.SaveSpecificationBody(node.id, specification);
 
@@ -117,14 +119,14 @@ namespace StoryTeller.Testing.ST
             added.node.lifecycle.ShouldBe("Acceptance");
             added.node.id.ShouldNotBe("sentence2");
             added.node.name.ShouldBe("New Sentence");
-            
+
             added.node.Filename.ShouldBe(expectedPath);
 
             ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.Name.ShouldBe("New Sentence");
-            ShouldBeTestExtensions.ShouldBe(specification.Children.Any(), true);
+            specification.Children.Any().ShouldBe(true);
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
@@ -189,13 +191,57 @@ namespace StoryTeller.Testing.ST
 
             var changed = ClassUnderTest.SaveSpecHeader("sentence4", x => x.Lifecycle = Lifecycle.Regression);
 
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.Hierarchy.Suites["Sentences"].specs.Any(x => ReferenceEquals(x, changed.node)), true);
+            ClassUnderTest.Hierarchy.Suites["Sentences"].specs.Any(x => ReferenceEquals(x, changed.node)).ShouldBe(true);
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].ShouldBe(changed.node);
             changed.node.Filename.ShouldBe(node.Filename);
 
             // wrote the file
             XmlReader.ReadFromFile(node.Filename).Lifecycle.ShouldBe(Lifecycle.Regression);
+        }
+
+        [Test]
+        public void change_lifecycle_of_several_specs()
+        {
+            // sentence1 starts as acceptance
+
+            //Services.PartialMockTheClassUnderTest();
+            //ClassUnderTest.Expect(x => x.ReloadHierarchy());
+
+            var names = new string[] {"sentence1", "sentence2", "sentence3"};
+
+            names.Each(x =>
+            {
+                ClassUnderTest.SaveSpecHeader(x, spec => spec.Lifecycle = Lifecycle.Acceptance);
+            });
+
+            ClassUnderTest.ChangeLifecycle(names, Lifecycle.Regression);
+
+            names.Each(id =>
+            {
+                var node = ClassUnderTest.Hierarchy.Nodes[id];
+                node.lifecycle.ShouldBe(Lifecycle.Regression.ToString());
+
+                XmlReader.ReadFromFile(node.Filename).Lifecycle.ShouldBe(Lifecycle.Regression);
+            });
+
+        }
+
+        [Test]
+        public void change_lifecycle_of_a_single_header_to_acceptance()
+        {
+            ClassUnderTest.SaveSpecHeader("general5", x => x.Lifecycle = Lifecycle.Acceptance);
+        
+            ClassUnderTest.ChangeLifecycle(new string[]{"general5"}, Lifecycle.Regression );
+
+            var node = ClassUnderTest.Hierarchy.Nodes["general5"];
+            node.lifecycle.ShouldBe(Lifecycle.Regression.ToString());
+
+            XmlReader.ReadFromFile(node.Filename).Lifecycle
+                .ShouldBe(Lifecycle.Regression);
+
+            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SpecNodeChanged{node = node}));
+
         }
 
         [Test]
@@ -251,7 +297,7 @@ namespace StoryTeller.Testing.ST
 
             newNode.ShouldNotBeTheSameAs(old);
             newNode.lifecycle.ShouldBe("Regression");
-        
+
             ClassUnderTest.Hierarchy.Suites["General"]
                 .specs.ShouldContain(newNode);
 
@@ -265,7 +311,7 @@ namespace StoryTeller.Testing.ST
         public void file_added()
         {
             var specification = new Specification {Name = "Foo"};
-            
+
             var file = thePath.AppendPath("General", "Foo.xml");
 
             XmlWriter.WriteToXml(specification).Save(file);
@@ -284,7 +330,7 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Deleted(file);
 
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.Hierarchy.Nodes.Has("paragraph"), false);
+            ClassUnderTest.Hierarchy.Nodes.Has("paragraph").ShouldBe(false);
         }
     }
 
@@ -304,7 +350,7 @@ namespace StoryTeller.Testing.ST
             return disposable;
         }
 
-        public readonly IList<Disposable> Disposables = new List<Disposable>(); 
+        public readonly IList<Disposable> Disposables = new List<Disposable>();
 
         public void StartWatching(string path, ISpecFileObserver observer)
         {

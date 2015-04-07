@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using FubuCore;
@@ -199,7 +200,22 @@ namespace ST.Client
             });
         }
 
-        public SpecNodeChanged SaveSpecHeader(string id, Action<Specification> alteration)
+        public void ChangeLifecycle(string[] idList, Lifecycle lifecycle)
+        {
+            if (idList.Length == 0) return;
+
+            if (idList.Length == 1)
+            {
+                var changed = SaveSpecHeader(idList[0], x => x.Lifecycle = lifecycle);
+                _client.SendMessageToClient(changed);
+                return;
+            }
+
+            idList.Each(id => SaveSpecHeader(id, x => x.Lifecycle = lifecycle));
+            ReloadHierarchy();
+        }
+
+        public virtual SpecNodeChanged SaveSpecHeader(string id, Action<Specification> alteration)
         {
             return _lock.Read(() =>
             {
@@ -216,6 +232,7 @@ namespace ST.Client
 
                     var node = specification.ToNode();
                     node.Filename = old.Filename;
+                    node.path = old.path;
 
                     _hierarchy.Nodes[node.id] = node;
                     _hierarchy.Suites[old.SuitePath()].ReplaceNode(node);

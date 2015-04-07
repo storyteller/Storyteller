@@ -13,5 +13,6 @@ namespace ST.Client
         SpecNodeAdded CloneSpecification(string id, string name);
         SpecData LoadSpecification(string id);
         void AddSuite(string parent, string name);
+        void ChangeLifecycle(string[] idList, Lifecycle lifecycle);
     }
 }

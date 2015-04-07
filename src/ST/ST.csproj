@@ -65,6 +65,8 @@
     <Compile Include="Client\Persistence\AddSuiteCommand.cs" />
     <Compile Include="Client\Persistence\CloneSpecCommand.cs" />
     <Compile Include="Client\Persistence\AddSpecCommand.cs" />
+    <Compile Include="Client\Persistence\MarkAsAcceptedCommand.cs" />
+    <Compile Include="Client\Persistence\MarkAsRegressionCommand.cs" />
     <Compile Include="Client\Persistence\RequestSpecDataCommand.cs" />
     <Compile Include="Client\Persistence\SaveSpecBodyCommand.cs" />
     <Compile Include="Client\RemoteSpecDataSource.cs" />
