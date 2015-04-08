@@ -61,20 +61,20 @@ namespace StoryTeller.Testing
         }
 
         
-        /*
+        
         [Test, Explicit("Failing on CI, don't know why yet")]
         public void Composite_with_errors()
         {
             running("Composite with Errors").ShouldEqual(2, 3, 1, 2);
         }
-         * */
+        
         
         [Test]
         public void decision_tables()
         {
             running("Decision Table").ShouldEqual(2, 2, 0, 0);
         }
-        /*
+        
         [Test, Explicit("Failing on CI, don't know why yet")]
         public void embeds()
         {
@@ -91,7 +91,7 @@ namespace StoryTeller.Testing
             Step("2").StatusWas(ResultStatus.failed);
             Step("3").StatusWas(ResultStatus.error);
         }
-                 * */
+
         [Test]
         public void Ordered_set()
         {
