@@ -62,7 +62,7 @@ namespace StoryTeller.Testing
 
         
 
-        [Test, Explicit("Failing on CI, don't know why yet")
+        [Test, Explicit("Failing on CI, don't know why yet")]
         public void Composite_with_errors()
         {
             running("Composite with Errors").ShouldEqual(2, 3, 1, 2);
