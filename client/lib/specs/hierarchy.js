@@ -183,6 +183,10 @@ module.exports = {
 		return status;
 	},
 
+	hasFilter: function(){
+		return (status != 'any' || lifecycle != 'any');
+	},
+
 	currentFilter(){
 		if (status == 'any' && lifecycle == 'any') return spec => true;
 	

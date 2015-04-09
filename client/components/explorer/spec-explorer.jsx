@@ -69,7 +69,11 @@ module.exports = React.createClass({
 	render: function(){
 		var summary = this.state.suite.summary();
 		var filter = Hierarchy.currentFilter();
-		var suite = this.state.suite.filter(filter);
+		var suite = this.state.suite;
+		if (Hierarchy.hasFilter()){
+			this.state.suite.filter(filter);
+		}
+		
 
 		
 		

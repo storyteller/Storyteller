@@ -106,6 +106,18 @@ describe('Hierarchy data store functions', function(){
 		expect(Hierarchy.lifecycleFilter()).to.equal('any');
 	});
 
+	it('can tell you if it has any filter', function(){
+		expect(Hierarchy.hasFilter()).to.be.false;
+
+		changeStatusFilter('failed');
+		expect(Hierarchy.hasFilter()).to.be.true;
+
+		changeStatusFilter('any');
+		changeLifecyleFilter('Acceptance');
+
+		expect(Hierarchy.hasFilter()).to.be.true;
+	});
+
 	it('can change the status filter', function(){
 		changeStatusFilter('failed');
 
