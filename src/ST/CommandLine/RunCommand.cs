@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Model;
@@ -100,6 +101,7 @@ namespace ST.CommandLine
 
             return task.Result;
         }
+
 
         private void writeSystemUsage(SystemRecycled systemRecycled)
         {

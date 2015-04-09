@@ -1,14 +1,6 @@
 using System;
 using System.Diagnostics;
-using Bottles;
 using FubuCore.CommandLine;
-using FubuCore.Logging;
-using FubuMVC.Core;
-using FubuMVC.Katana;
-using FubuMVC.StructureMap;
-using StoryTeller.Commands;
-using StoryTeller.Remotes;
-using StructureMap;
 
 namespace ST.Client
 {
@@ -16,6 +8,8 @@ namespace ST.Client
     {
         public override bool Execute(OpenInput input)
         {
+            input.CreateMissingSpecFolder();
+
             using (var runner = new WebApplicationRunner(input))
             {
                 runner.Start();
@@ -27,7 +21,6 @@ namespace ST.Client
                 ConsoleKeyInfo key = Console.ReadKey();
                 while (key.Key != ConsoleKey.Q)
                 {
-
                 }
             }
 

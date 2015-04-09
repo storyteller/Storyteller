@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using System.IO;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Model;
@@ -64,6 +66,16 @@ namespace ST.CommandLine
             }
 
             return controller;
+        }
+
+        public void CreateMissingSpecFolder()
+        {
+            var specFolder = Path.ToFullPath().AppendPath("Specs");
+            if (!Directory.Exists(specFolder))
+            {
+                Console.WriteLine("Creating /Specs folder at " + specFolder);
+                Directory.CreateDirectory(specFolder);
+            }
         }
 
     }
