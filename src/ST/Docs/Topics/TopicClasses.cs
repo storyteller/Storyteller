@@ -109,6 +109,11 @@ namespace ST.Docs.Topics
         {
             get { return Key.EqualsIgnoreCase("index"); }
         }
+
+        public Topic FindIndex()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class TopicLoader

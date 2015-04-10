@@ -80,6 +80,9 @@
     <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
+    <Compile Include="Docs\Html\HtmlClasses.cs" />
+    <Compile Include="Docs\Html\IUrlResolver.cs" />
+    <Compile Include="Docs\Html\Navigation\NavigationClasses.cs" />
     <Compile Include="Docs\Samples\BlockCommentScanner.cs" />
     <Compile Include="Docs\Samples\CLangSnippetScanner.cs" />
     <Compile Include="Docs\Samples\CodeFileEndpoint.cs" />
