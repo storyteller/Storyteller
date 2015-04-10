@@ -42,7 +42,10 @@ namespace StoryTeller.Model
 
         public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
         {
+            var storytellerAssembly = Assembly.GetExecutingAssembly().GetName().Name;
+
             IEnumerable<Task<CompiledFixture>> fixtures = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(x => x.GetReferencedAssemblies().Any(assem => assem.Name == storytellerAssembly))
                 .SelectMany(FixtureTypesFor)
                 .Select(
                     type => { return Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)); });
