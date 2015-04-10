@@ -125,9 +125,9 @@ namespace StoryTeller.Samples.Fixtures
     {
         private readonly HtmlTag _ul = new HtmlTag("ul").AddClass("list-group");
 
-        public HtmlTag ToHtml()
+        public string ToHtml()
         {
-            return _ul;
+            return _ul.ToString();
         }
 
         public ListReport Add(string text)

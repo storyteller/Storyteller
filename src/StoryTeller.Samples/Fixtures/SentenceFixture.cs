@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 using FubuCore;
 
@@ -63,6 +64,13 @@ namespace StoryTeller.Samples.Fixtures
                 Fact("This fact throws an exception").VerifiedBy(() => { throw new NotImplementedException(); });
         }
 
+        private void say()
+        {
+            Debug.WriteLine("the number is " + _number);
+
+            Context.Reporting.ReporterFor<ListReport>().Add(_number.ToString());
+        }
+
         // END:  GrammarsInConstructor
 
         // SAMPLE:  ActionMethod
@@ -70,6 +78,7 @@ namespace StoryTeller.Samples.Fixtures
         public void StartWithTheNumber(int number)
         {
             _number = number;
+            say();
             //Thread.Sleep(60.Seconds());
         }
 
@@ -80,20 +89,21 @@ namespace StoryTeller.Samples.Fixtures
         {
             _number *= multiplier;
             _number += delta;
-
+            say();
             //Thread.Sleep(1.Seconds());
         }
 
         public void Subtract(int operand)
         {
             _number -= operand;
-
+            say();
             //Thread.Sleep(1.Seconds());
         }
 
         public void DivideBy(int operand)
         {
             _number /= operand;
+            say();
         }
 
         [FormatAs("The number should now be {number}")]

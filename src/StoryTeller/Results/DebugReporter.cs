@@ -16,9 +16,9 @@ namespace StoryTeller.Results
             Debug.Listeners.Add(_listener);
         }
 
-        public HtmlTag ToHtml()
+        public string ToHtml()
         {
-            return new HtmlTag("pre").AddClass("debug-output").Text(_writer.ToString());
+            return new HtmlTag("pre").AddClass("debug-output").Text(_writer.ToString()).ToString();
         }
 
         public string Title

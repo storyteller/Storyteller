@@ -1,10 +1,9 @@
-﻿using HtmlTags;
-
+﻿
 namespace StoryTeller.Results
 {
     public interface IReporter
     {
-        HtmlTag ToHtml();
+        string ToHtml();
         string Title { get; }
     }
 }

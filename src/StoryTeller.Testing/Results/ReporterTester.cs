@@ -72,9 +72,9 @@ namespace StoryTeller.Testing.Results
     {
         private readonly HtmlTag _body = new HtmlTag("body");
 
-        public HtmlTag ToHtml()
+        public string ToHtml()
         {
-            return _body;
+            return _body.ToString();
         }
 
         public DivReport Add(string text)
@@ -93,9 +93,9 @@ namespace StoryTeller.Testing.Results
     {
         private readonly HtmlTag _ul = new HtmlTag("ul");
 
-        public HtmlTag ToHtml()
+        public string ToHtml()
         {
-            return _ul;
+            return _ul.ToString();
         }
 
         public ListReport Add(string text)

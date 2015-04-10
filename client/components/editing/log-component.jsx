@@ -8,8 +8,9 @@ var LogComponent = React.createClass({
 	render: function(){
 		return (
 			<div>
-				<h5>{this.props.title}</h5>
+				<h3>{this.props.title}</h3>
 				<div dangerouslySetInnerHTML={{__html: this.props.html}}></div>
+				<hr />
 			</div>
 		);
 	}
