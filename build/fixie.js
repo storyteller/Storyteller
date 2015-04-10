@@ -22,8 +22,12 @@ module.exports = function(target){
     var exec = require('child_process').spawnSync;
 
       var output = exec(executable, [dll, '--NUnitXml', 'TestResult.xml']);
-      console.log(output.stdout.toString());
+      
       if (output.status != 0){
+        console.log(output.stdout.toString());
         throw new Error('Fixie tests failed@');
+      }
+      else {
+        console.log('Fixie tests succeeded!');
       }
 }
