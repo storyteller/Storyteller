@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using FubuCore;
+using FubuCore.CommandLine;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -131,12 +132,24 @@ namespace StoryTeller.Remotes
             copyStorytellerAssemblyIfNecessary();
 
             _domain = AppDomain.CreateDomain("Storyteller-SpecRunning-Domain", null, _remoteSetup.Setup);
-            Type proxyType = typeof (RemoteProxy);
-            _proxy = (RemoteProxy) _domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 
-            _messaging.AddListener(listener);
 
-            _proxy.Start(mode, _project, new RemoteListener(_messaging), dataSource);
+            try
+            {
+                Type proxyType = typeof(RemoteProxy);
+                _proxy = (RemoteProxy)_domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
+
+                _messaging.AddListener(listener);
+                _proxy.Start(mode, _project, new RemoteListener(_messaging), dataSource);
+            }
+            catch (Exception)
+            {
+                ConsoleWriter.Write(ConsoleColor.Yellow, "Storyteller was unable to start an AppDomain for the specification project. Check that the project has already been compiled.");
+
+                throw;
+            }
+
+            
 
             return listener;
         }
