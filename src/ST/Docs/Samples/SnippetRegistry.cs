@@ -3,6 +3,7 @@ using FubuMVC.Core;
 
 namespace ST.Docs.Samples
 {
+    // TODO -- try to eliminate this completely
     public class SnippetRegistry : FubuPackageRegistry
     {
         public SnippetRegistry()

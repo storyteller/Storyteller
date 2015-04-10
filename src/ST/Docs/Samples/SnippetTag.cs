@@ -4,6 +4,7 @@ using HtmlTags;
 
 namespace ST.Docs.Samples
 {
+    // TODO -- change this when we go to Prism.js
     public class SnippetTag : HtmlTag
     {
         public SnippetTag(Snippet snippet) : base("pre")

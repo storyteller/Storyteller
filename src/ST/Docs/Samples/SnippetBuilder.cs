@@ -11,6 +11,7 @@ namespace ST.Docs.Samples
         private readonly IFubuApplicationFiles _files;
         private readonly IEnumerable<ISnippetScanner> _scanners;
 
+        // TODO -- need to kill this.
         public SnippetBuilder(ISnippetCache cache, IFubuApplicationFiles files, IEnumerable<ISnippetScanner> scanners)
         {
             _cache = cache;
@@ -25,7 +26,7 @@ namespace ST.Docs.Samples
                 log.Trace("Finding snippets with " + finder.GetType().Name);
                 _files.FindFiles(finder.MatchingFileSet).Each(file =>
                 {
-                    var scanner = new SnippetReader(file, finder, s => _cache.Add(s));
+                    var scanner = new SnippetReader(file, finder, s => _cache.AddOrReplace(s));
                     scanner.Start();
                 });
             });

@@ -5,13 +5,6 @@ namespace ST.Docs.Samples
 {
     public class CodeFormatter
     {
-        private readonly bool _levelIndentation;
-
-        public CodeFormatter(bool levelIndentation)
-        {
-            _levelIndentation = levelIndentation;
-        }
-
         public Snippet Format(IFubuFile file, string languageClass = null)
         {
             var snippet = new Snippet(file.Path){

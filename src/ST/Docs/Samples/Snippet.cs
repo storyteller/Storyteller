@@ -14,7 +14,6 @@ namespace ST.Docs.Samples
             _name = name;
         }
 
-        public string BottleName { get; set; }
 
         public string Name
         {

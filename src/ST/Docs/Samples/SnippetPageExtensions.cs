@@ -36,6 +36,7 @@ namespace ST.Docs.Samples
         /// <param name="page"></param>
         /// <param name="snippetName"></param>
         /// <returns></returns>
+        // TODO -- replace this
         public static HtmlTag CodeSnippet(this IFubuPage page, string snippetName)
         {
             var snippet = page.Get<ISnippetCache>().Find(snippetName);
@@ -52,9 +53,10 @@ namespace ST.Docs.Samples
         /// <param name="languageClass">Optional.  Overrides the lang-* class on the element for prettify.css formatting</param>
         /// <param name="levelIndentation">Not yet used.  Will force the display to remove extra indentation for deeply nested code</param>
         /// <returns></returns>
-        public static HtmlTag CodeFile(this IFubuPage page, string fileName, string languageClass = null, bool levelIndentation = false)
+        // TODO -- replace this
+        public static HtmlTag CodeFile(this IFubuPage page, string fileName, string languageClass = null)
         {
-            var formatter = new CodeFormatter(levelIndentation);
+            var formatter = new CodeFormatter();
             var file = page.Get<IFubuApplicationFiles>().Find(fileName);
 
             if (file == null)
@@ -76,6 +78,8 @@ namespace ST.Docs.Samples
         /// <param name="page"></param>
         /// <param name="snippetName"></param>
         /// <returns></returns>
+        /// 
+        // TODO -- replace this
         public static HtmlTag LinkToSnippet(this IFubuPage page, string snippetName)
         {
             var snippet = page.Get<ISnippetCache>().Find(snippetName);
@@ -90,6 +94,7 @@ namespace ST.Docs.Samples
         /// <param name="page"></param>
         /// <param name="fileName">The name of the file relative to the root of the web application or Bottle</param>
         /// <returns></returns>
+        // TODO -- replace this
         public static HtmlTag LinkToCodeFile(this IFubuPage page, string fileName)
         {
             var url = page.Urls.UrlFor(new CodeFileRequest(fileName));

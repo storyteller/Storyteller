@@ -38,8 +38,7 @@ namespace ST.Docs.Samples
             {
                 var snippet = new Snippet(name){
                     Class = _scanner.LanguageClass,
-                    File = _file.RelativePath,
-                    BottleName = _file.Provenance
+                    File = _file.RelativePath
                 };
 
                 _readAction = (txt, num) =>
