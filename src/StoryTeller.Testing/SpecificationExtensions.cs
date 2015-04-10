@@ -31,6 +31,16 @@ namespace StoryTeller.Testing
 
     public static class SpecificationExtensions
     {
+        public static void ShouldBeTrue(this bool anObject)
+        {
+            anObject.ShouldBe(true);
+        }
+
+        public static void ShouldBeFalse(this bool anObject)
+        {
+            anObject.ShouldBe(false);
+        }
+
         public static void ShouldBeNull(this object anObject)
         {
             anObject.ShouldBe(null);

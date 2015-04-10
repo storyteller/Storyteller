@@ -159,6 +159,12 @@
     <Compile Include="StateTester.cs" />
     <Compile Include="StoryTellerAssertTester.cs" />
     <Compile Include="ST\ClientConnectorTester.cs" />
+    <Compile Include="ST\Docs\Samples\CLanguageSnippetFinderTester.cs" />
+    <Compile Include="ST\Docs\Samples\HtmlStyleSnippetScannerTester.cs" />
+    <Compile Include="ST\Docs\Samples\RazorSnippetScannerTester.cs" />
+    <Compile Include="ST\Docs\Samples\RubySnippetScannerTester.cs" />
+    <Compile Include="ST\Docs\Samples\SnippetCacheTester.cs" />
+    <Compile Include="ST\Docs\Samples\SnippetTester.cs" />
     <Compile Include="ST\PersistenceControllerTester.cs" />
     <Compile Include="ST\RunCommand_write_csv_and_json_data_spec.cs" />
     <Compile Include="ST\SaveSpecBodyCommandTester.cs" />
