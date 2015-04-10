@@ -97,6 +97,7 @@
     <Compile Include="Docs\Samples\SnippetRegistry.cs" />
     <Compile Include="Docs\Samples\Snippets.cs" />
     <Compile Include="Docs\Samples\SnippetTag.cs" />
+    <Compile Include="Docs\Topics\TopicClasses.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
