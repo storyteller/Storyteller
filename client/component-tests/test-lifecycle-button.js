@@ -64,7 +64,7 @@ describe('The Lifecycle Button', function(){
 
 		$(button.getDOMNode()).click();
 
-		var message = findPublishedMessage('mark-as-accepted');
+		var message = findPublishedMessage('mark-as-acceptance');
 		expect(message.list).to.deep.equal(['foo']);
 	});
 

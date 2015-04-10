@@ -71,7 +71,7 @@ module.exports = React.createClass({
 		var filter = Hierarchy.currentFilter();
 		var suite = this.state.suite;
 		if (Hierarchy.hasFilter()){
-			this.state.suite.filter(filter);
+			suite = this.state.suite.filter(filter);
 		}
 		
 
