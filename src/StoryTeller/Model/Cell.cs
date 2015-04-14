@@ -31,13 +31,24 @@ namespace StoryTeller.Model
 
         public static Cell For(CellHandling cells, ParameterInfo parameter, Fixture fixture)
         {
-            var cell = new Cell(cells, parameter.Name, parameter.ParameterType);
+            bool isOutput = false;
+            var type = parameter.ParameterType;
+            if (parameter.IsOut)
+            {
+                type = type.GetElementType();
+                isOutput = true;
+            }
+
+            var cell = new Cell(cells, parameter.Name, type) {output = isOutput};
+
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             if (parameter.HasDefaultValue && parameter.DefaultValue != null)
             {
                 cell.DefaultValue = parameter.DefaultValue.ToString();
             }
+
+
 
             cell.ReadLists(cells, fixture);
 

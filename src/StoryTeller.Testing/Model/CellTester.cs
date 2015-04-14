@@ -348,6 +348,31 @@ namespace StoryTeller.Testing.Model
             var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
             cell.DefaultValue.ShouldBe("5");
         }
+
+        [Test]
+        public void is_output_negative_case()
+        {
+            int num = 0;
+            ParameterInfo parameter = ReflectionHelper.GetMethod<CellTarget>(x => x.GoPlaces(out num, 0))
+                .GetParameters()[1];
+
+            var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
+
+            cell.output.ShouldBeFalse();
+        }
+
+        [Test]
+        public void uses_output_parameters()
+        {
+            int num = 0;
+            ParameterInfo parameter = ReflectionHelper.GetMethod<CellTarget>(x => x.GoPlaces(out num, 0))
+                .GetParameters()[0];
+
+            var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
+
+            cell.output.ShouldBeTrue();
+            cell.Type.ShouldBe(typeof(int));
+        }
     }
 
     public enum Directions
