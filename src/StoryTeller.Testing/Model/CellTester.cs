@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -336,6 +337,17 @@ namespace StoryTeller.Testing.Model
             values.Errors.Any().ShouldBe(false);
             values.Get("Number").ShouldBe(111);
         }
+
+        [Test]
+        public void use_default_value_on_parameter_if_one_exists()
+        {
+            int num = 0;
+            ParameterInfo parameter = ReflectionHelper.GetMethod<CellTarget>(x => x.GoPlaces(out num, 0))
+                .GetParameters()[1];
+
+            var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
+            cell.DefaultValue.ShouldBe("5");
+        }
     }
 
     public enum Directions
@@ -364,5 +376,10 @@ namespace StoryTeller.Testing.Model
         public string Country { get; set; }
 
         public int Number { get; set; }
+
+        public void GoPlaces(out int sum,int number = 5)
+        {
+            sum = number;
+        }
     }
 }

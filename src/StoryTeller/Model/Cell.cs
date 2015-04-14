@@ -34,6 +34,11 @@ namespace StoryTeller.Model
             var cell = new Cell(cells, parameter.Name, parameter.ParameterType);
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
+            if (parameter.HasDefaultValue && parameter.DefaultValue != null)
+            {
+                cell.DefaultValue = parameter.DefaultValue.ToString();
+            }
+
             cell.ReadLists(cells, fixture);
 
             return cell;

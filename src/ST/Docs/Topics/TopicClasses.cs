@@ -12,12 +12,12 @@ namespace ST.Docs.Topics
         public readonly IList<Topic> Children = new List<Topic>();
         public Topic Parent { get; set; }
 
-        public Topic(string file)
+        public Topic()
         {
-            Url = Title = Key = Path.GetFileNameWithoutExtension(file);
+            
         }
 
-        public string Key { get; private set; }
+        public string Key { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
 
@@ -130,9 +130,8 @@ namespace ST.Docs.Topics
 
         public static Topic LoadTopic(string file)
         {
-            var topic = new Topic(file);
-
-            topic.Url = topic.Key;
+            var topic = new Topic();
+            topic.Url = topic.Title = topic.Key = Path.GetFileNameWithoutExtension(file);
 
             if (FileSystem.FileExists(file))
             {
