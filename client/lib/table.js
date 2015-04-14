@@ -66,7 +66,7 @@ class Table extends CompositeGrammar{
 				return newStep.selectFirst();
 			},
 
-			key: self.key,
+			key: metadata.key,
 			title: metadata.title
 		}
 		
@@ -147,7 +147,7 @@ class Table extends CompositeGrammar{
 			this.addStep(section);
 		}
 
-		return loader.table({addStep: addStep, cells: this.cells, title: this.title, rows: rows, section: section});
+		return loader.table({addStep: addStep, cells: this.cells, title: this.title, rows: rows, section: section, step: step});
 	}
 
 	buildResults(step, loader){

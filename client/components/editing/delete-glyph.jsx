@@ -8,6 +8,10 @@ var Icons = require('./../icons');
 var Close = Icons['close'];
 
 module.exports = React.createClass({
+	propTypes: {
+		step: React.PropTypes.object.isRequired
+	},
+
 	render: function(){
 		var onclick = e => {
 			Postal.publish({

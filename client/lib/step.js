@@ -70,8 +70,9 @@ class Step{
 		this.args.clearResults();
 	}
 
-	static merge(parts){
+	static merge(id, parts){
 		var step = new Step({}, []);
+		step.id = id;
 
 		for (var i = 0; i < parts.length; i++){
 			var part = parts[i];
@@ -82,6 +83,11 @@ class Step{
 				step.collections[key] = part.collections[key];
 			}
 		}
+
+		_.values(step.collections).forEach(x => x.parent = step);
+
+		step.args.all().forEach(x => x.id = step.id);
+
 
 		return step;
 	}

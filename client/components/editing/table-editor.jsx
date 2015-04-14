@@ -6,6 +6,10 @@ var HeaderRow = require('./header-row');
 
 
 var TableEditor = React.createClass({
+	propTypes: {
+		step: React.PropTypes.object.isRequired
+	},
+	
 	render: function(){
 		var tableWidth = this.props.cells.length + 1;
 

@@ -31,9 +31,9 @@ class Paragraph{
 	buildStep(data){
 		var parts = this.children.map(x => x.buildStep(data));
 
-		var step = Step.merge(parts);
+		var id = data.id || uuid.v4();
+		var step = Step.merge(id, parts);
 
-		step.id = data.id || uuid.v4();
 		step.grammar = this;
 		step.key = data.key;
 

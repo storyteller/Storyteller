@@ -14,6 +14,10 @@ class ArgCollection {
 		
 	}
 
+	all(){
+		return _.values(this.args);
+	}
+
 	length(){
 		return _.values(this.args).length;
 	}

@@ -111,6 +111,8 @@ namespace ST.Client
                         document.Save(spec.Filename);
                     }
 
+                    _data[id] = specification;
+
                     return true;
                 });
             }

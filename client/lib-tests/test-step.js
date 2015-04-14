@@ -224,7 +224,7 @@ describe('Step', function(){
 
 		var step2 = new Step(data2, cells2);
 
-		var merged = Step.merge([step1, step2]);
+		var merged = Step.merge('123', [step1, step2]);
 
 		expect(merged.findValue('A')).to.equal(1);
 		expect(merged.findValue('B')).to.equal(2);
@@ -251,9 +251,38 @@ describe('Step', function(){
 
 		var step2 = new Step(data2, cells2);
 
-		var merged = Step.merge([step1, step2]);
+		var merged = Step.merge('id', [step1, step2]);
 
 		expect(merged.hasArgs()).to.be.true;
+	});
+
+	it('all args should have the id of the parent step after merging', function(){
+		var cells1 = [new Cell('A'), new Cell('B'), new Cell('C')];
+		var data1 = {key: 'foo', cells: {
+			A: 1,
+			B: 2,
+			C: 3
+		}};
+
+		var step1 = new Step(data1, cells1);
+
+		var cells2 = [new Cell('D'), new Cell('E')];
+		var data2 = {key: 'bar', cells: {
+			D: 4,
+			E: 5
+		}};
+
+		var step2 = new Step(data2, cells2);
+
+		var merged = Step.merge('123', [step1, step2]);
+
+		expect(merged.id).to.equal('123');
+
+		expect(merged.args.find('A').id).to.equal(merged.id);
+		expect(merged.args.find('B').id).to.equal(merged.id);
+		expect(merged.args.find('C').id).to.equal(merged.id);
+		expect(merged.args.find('D').id).to.equal(merged.id);
+		expect(merged.args.find('E').id).to.equal(merged.id);
 	});
 
 	it('copies collections on merge', function(){
@@ -268,12 +297,15 @@ describe('Step', function(){
 		var colC = {};
 		step2.collections['C'] = colC;
 
-		var merged = Step.merge([step1, step2]);
+		var merged = Step.merge('123', [step1, step2]);
 
 		expect(merged.collections.A).to.equal(colA);
 		expect(merged.collections.B).to.equal(colB);
 		expect(merged.collections.C).to.equal(colC);
 
+		expect(merged.collections.A.parent).to.equal(merged);
+		expect(merged.collections.B.parent).to.equal(merged);
+		expect(merged.collections.C.parent).to.equal(merged);
 	});
 
 	describe('when logging results', function(){
