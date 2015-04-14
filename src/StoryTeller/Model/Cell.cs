@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Web.UI.WebControls;
 using FubuCore;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
@@ -37,9 +38,10 @@ namespace StoryTeller.Model
             {
                 type = type.GetElementType();
                 isOutput = true;
+                
             }
 
-            var cell = new Cell(cells, parameter.Name, type) {output = isOutput};
+            var cell = new Cell(cells, parameter.Name, type) {output = isOutput, Position = parameter.Position};
 
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
@@ -54,6 +56,9 @@ namespace StoryTeller.Model
 
             return cell;
         }
+
+        [JsonIgnore]
+        public int Position { get; private set; }
 
         public static Cell For(CellHandling cells, PropertyInfo property, Fixture fixture)
         {

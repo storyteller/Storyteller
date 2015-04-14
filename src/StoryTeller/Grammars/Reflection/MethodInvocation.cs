@@ -14,7 +14,7 @@ namespace StoryTeller.Grammars.Reflection
         private readonly string[] _arguments;
         private readonly MethodInfo _method;
         private readonly object _target;
-        private readonly ParameterInfo[] _outputs;
+        private Cell[] _outputs = new Cell[0];
         private Cell[] _cells;
 
         public MethodInvocation(MethodInfo method, object target)
@@ -22,7 +22,6 @@ namespace StoryTeller.Grammars.Reflection
             var parameters = method.GetParameters();
             _arguments = parameters.Select(x => x.Name).ToArray();
 
-            //_outputs = parameters.Where(x => x.IsOut).ToArray();
 
             _method = method;
             _target = target;
@@ -32,8 +31,8 @@ namespace StoryTeller.Grammars.Reflection
 
         public void Compile(Fixture fixture, CellHandling cellHandling)
         {
-            
             _cells = _method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture)).ToArray();
+            _outputs = _cells.Where(x => x.output).ToArray();
 
             if (_method.HasReturn())
             {
@@ -75,20 +74,19 @@ namespace StoryTeller.Grammars.Reflection
         {
             var parameters = _arguments.Select(values.Get).ToArray();
             var returnValue = _method.Invoke(_target, parameters);
-            /*
-            _outputs.Each(param =>
-            {
-                var value = parameters[param.Position];
-                
-            });
-            */
 
+            foreach (var output in _outputs)
+            {
+                var actual = parameters[output.Position];
+                yield return output.Check(values, actual);
+            }
 
             if (ReturnCell != null)
             {
                 yield return ReturnCell.Check(values, returnValue);
             }
         }
+
     }
 
 }

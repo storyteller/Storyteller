@@ -1,10 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using FubuCore;
 using FubuCore.Reflection;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
+using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
@@ -51,7 +54,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
         }
 
         [Test]
-        public void invoke_with_out_parameters()
+        public void invoke_with_out_parameters_happy_path()
         {
             int age = 0;
             double percentAwake = 0;
@@ -61,11 +64,19 @@ namespace StoryTeller.Testing.Grammars.Reflection
 
             var values = new StepValues(method.Name);
             values.Store("name", "Grace Potter");
+            values.Store("age", 5);
+            values.Store("percentAwake", .5);
 
             var invocation = new MethodInvocation(method, target);
+            invocation.Compile(target, CellHandling.Basic());
+
             var results = invocation.Invoke(values).ToArray();
 
-            results.Length.ShouldBe(1);
+            results.ShouldHaveTheSameElementsAs(
+                new CellResult("age", ResultStatus.success),
+                new CellResult("percentAwake", ResultStatus.success)
+                );
+
         }
 
         public class Target : Fixture
@@ -77,11 +88,11 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 this.PercentAwake = percentAwake;
             }
 
-            public void GoOutput(string name, out int age, out double percentage)
+            public void GoOutput(string name, out int age, out double percentAwake)
             {
                 this.Name = name;
                 age = 5;
-                percentage = .5;
+                percentAwake = .5;
             }
 
             public double PercentAwake { get; set; }
