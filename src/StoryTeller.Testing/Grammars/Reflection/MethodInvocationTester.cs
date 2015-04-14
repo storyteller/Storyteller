@@ -1,4 +1,5 @@
-﻿using FubuCore;
+﻿using System.Linq;
+using FubuCore;
 using FubuCore.Reflection;
 using NUnit.Framework;
 using Shouldly;
@@ -23,7 +24,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("age", 41);
             values.Store("percentAwake", 50.1);
 
-            invocation.Invoke(values);
+            invocation.Invoke(values).ToArray();
 
             target.Name.ShouldBe("Jeremy");
             target.Age.ShouldBe(41);
@@ -40,19 +41,47 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("first", "Jeremy");
             values.Store("middle", "Daniel");
             values.Store("last", "Miller");
+            values.Store("returnValue", "foo");
 
             var invocation = new MethodInvocation(method, target);
-            invocation.Invoke(values).ShouldBe("Jeremy Daniel Miller");
+            invocation.Compile(target, CellHandling.Basic());
+
+            invocation.Invoke(values).Single().actual.ShouldBe("Jeremy Daniel Miller");
 
         }
 
-        public class Target
+        [Test]
+        public void invoke_with_out_parameters()
+        {
+            int age = 0;
+            double percentAwake = 0;
+
+            var target = new Target();
+            var method = ReflectionHelper.GetMethod<Target>(x => x.GoOutput(null, out age, out percentAwake));
+
+            var values = new StepValues(method.Name);
+            values.Store("name", "Grace Potter");
+
+            var invocation = new MethodInvocation(method, target);
+            var results = invocation.Invoke(values).ToArray();
+
+            results.Length.ShouldBe(1);
+        }
+
+        public class Target : Fixture
         {
             public void Go(string name, int age, double percentAwake)
             {
                 this.Name = name;
                 this.Age = age;
                 this.PercentAwake = percentAwake;
+            }
+
+            public void GoOutput(string name, out int age, out double percentage)
+            {
+                this.Name = name;
+                age = 5;
+                percentage = .5;
             }
 
             public double PercentAwake { get; set; }

@@ -35,13 +35,13 @@ namespace StoryTeller.Grammars.Reflection
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
-            _invocation.Invoke(values);
-            return Enumerable.Empty<CellResult>();
+            return _invocation.Invoke(values);
         }
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            return _method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture));
+            _invocation.Compile(fixture, cellHandling);
+            return _invocation.Cells;
         }
 
         protected override string format()

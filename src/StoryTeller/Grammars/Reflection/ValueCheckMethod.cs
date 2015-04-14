@@ -33,34 +33,26 @@ namespace StoryTeller.Grammars.Reflection
             _invocation = new MethodInvocation(method, target);
         }
 
-        public Cell ReturnCell { get; private set; }
+        public Cell ReturnCell
+        {
+            get { return _invocation.ReturnCell; }
+        }
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
-            var actual = _invocation.Invoke(values);
-            yield return ReturnCell.Check(values, actual);
+            return _invocation.Invoke(values);
         }
 
         protected override string format()
         {
-            return _method.DeriveFormat();
+            return _invocation.Format;
         }
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            foreach (var cell in _method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture)))
-            {
-                yield return cell;
-            }
+            _invocation.Compile(fixture, cellHandling);
 
-            ReturnCell = Cell.For(cellHandling, _method.ReturnParameter, fixture);
-            ReturnCell.output = true;
-            if (ReturnCell.Key.IsEmpty())
-            {
-                ReturnCell.Key = format().ParseTemplateKeys().LastOrDefault() ?? "returnValue";
-            }
-
-            yield return ReturnCell;
+            return _invocation.Cells;
         }
     }
 }

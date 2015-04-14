@@ -33,7 +33,7 @@ namespace StoryTeller.Grammars.Reflection
 
         public bool PerformTest(StepValues values, ISpecContext context)
         {
-            return (bool) _invocation.Invoke(values);
+            return _invocation.InvokeTest(values);
         }
 
         public static FactMethod For<T>(T target, Expression<Func<T, bool>> methodExpression)
