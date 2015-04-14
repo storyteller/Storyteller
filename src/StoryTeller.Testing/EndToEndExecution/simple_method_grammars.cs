@@ -29,6 +29,26 @@ Name: Doing some addition
             Step("4").Cell("expected").Succeeded();
             Step("5").Cell("expected").FailedWithActual("11");
         }
+
+        [Test]
+        public void execute_with_output_parameter()
+        {
+            execute(@"
+=> Arithmetic
+* WithOutput#1: x=3, y=4, sum=7, product=12
+* WithOutput#2: x=3, y=4, sum=8, product=12
+* WithOutput#3: x=3, y=4, sum=7, product=13
+");
+
+            Step("1").Cell("sum").Succeeded();
+            Step("1").Cell("product").Succeeded();
+
+            Step("2").Cell("sum").FailedWithActual("7");
+            Step("2").Cell("product").Succeeded();
+
+            Step("3").Cell("sum").Succeeded();
+            Step("3").Cell("product").FailedWithActual("12");
+        }
     }
 
     public class ArithmeticFixture : Fixture
@@ -80,6 +100,12 @@ Name: Doing some addition
         public void Throw()
         {
             throw new NotImplementedException();
+        }
+
+        public void WithOutput(int x, int y, out int sum, out int product)
+        {
+            sum = x + y;
+            product = x*y;
         }
     }
 }

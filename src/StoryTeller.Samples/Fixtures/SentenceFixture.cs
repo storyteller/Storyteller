@@ -146,6 +146,8 @@ namespace StoryTeller.Samples.Fixtures
             return (x + y) == sum;
         }
 
+
+
         // END:  FactAssertions
     }
 }
