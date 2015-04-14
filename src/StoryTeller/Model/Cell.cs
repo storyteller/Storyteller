@@ -45,9 +45,17 @@ namespace StoryTeller.Model
 
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
-            if (parameter.HasDefaultValue && parameter.DefaultValue != null)
+            if (parameter.HasDefaultValue)
             {
-                cell.DefaultValue = parameter.DefaultValue.ToString();
+                if (parameter.DefaultValue != null)
+                {
+                    cell.DefaultValue = parameter.DefaultValue.ToString();
+                }
+                else
+                {
+                    cell.DefaultValue = "NULL";
+                }
+                
             }
 
 

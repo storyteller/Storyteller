@@ -350,6 +350,17 @@ namespace StoryTeller.Testing.Model
         }
 
         [Test]
+        public void uses_NULL_from_the_default_value()
+        {
+            ParameterInfo parameter = ReflectionHelper.GetMethod<CellTarget>(x => x.GoPlaces2(null))
+                .GetParameters()[0];
+
+            var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
+            cell.DefaultValue.ShouldBe("NULL");
+        }
+
+
+        [Test]
         public void is_output_negative_case()
         {
             int num = 0;
@@ -406,5 +417,11 @@ namespace StoryTeller.Testing.Model
         {
             sum = number;
         }
+
+        public void GoPlaces2(string foo = null)
+        {
+            
+        }
+
     }
 }

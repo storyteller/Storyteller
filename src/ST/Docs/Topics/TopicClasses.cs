@@ -19,7 +19,15 @@ namespace ST.Docs.Topics
 
         public string Key { get; set; }
         public string Title { get; set; }
-        public string Url { get; set; }
+        public string UrlSegment { get; set; }
+
+        public string Url
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public Topic NextSibling
         {
@@ -114,6 +122,11 @@ namespace ST.Docs.Topics
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Topic> AllTopicsInOrder()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class TopicLoader
@@ -131,7 +144,7 @@ namespace ST.Docs.Topics
         public static Topic LoadTopic(string file)
         {
             var topic = new Topic();
-            topic.Url = topic.Title = topic.Key = Path.GetFileNameWithoutExtension(file);
+            topic.UrlSegment = topic.Title = topic.Key = Path.GetFileNameWithoutExtension(file);
 
             if (FileSystem.FileExists(file))
             {
@@ -150,7 +163,7 @@ namespace ST.Docs.Topics
                     if (rawUrl.IsNotEmpty())
                     {
                         var segment = rawUrl.Split(':').Last().Trim();
-                        topic.Url = topic.Url.ParentUrl().AppendUrl(segment);
+                        topic.UrlSegment = topic.UrlSegment.ParentUrl().AppendUrl(segment);
                     }
                 }
             }
