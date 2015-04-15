@@ -43,6 +43,11 @@ module.exports = React.createClass({
 		var element = this.getDOMNode();
 		element.focus();
 
+		if (this.state.value){
+			element.setSelectionRange(0, this.state.value.length);
+		}
+		
+
 		this.subscription = Postal.subscribe({
 			channel: 'editor',
 			topic: 'apply-changes',
