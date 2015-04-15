@@ -157,6 +157,10 @@ class EditorPresenter{
 
 		var self = this;
 
+		this.subscribe('go-preview', () => this.view.gotoPreview());
+		this.subscribe('go-editing', () => this.view.gotoEditor());
+		this.subscribe('go-results', () => this.view.gotoResults());
+
 		this.subscribe('go-home', () => this.moveFirst());
 		this.subscribe('go-end', () => this.moveLast());
 

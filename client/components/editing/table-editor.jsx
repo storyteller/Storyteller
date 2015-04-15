@@ -4,6 +4,16 @@ var DeleteGlyph = require('./delete-glyph');
 
 var HeaderRow = require('./header-row');
 
+var TableRowAdder = React.createClass({
+	render(){
+		var tableClass = "add-table-step";
+		if (this.props.adder && this.props.adder.active){
+			tableClass += ' active';
+		}
+
+		return (<a tabIndex="0" title="Click to add a new row to this table, or use alt+ins" className={tableClass} href="#" onClick={this.props.addOnClick}>Add Row</a>);
+	}
+});
 
 var TableEditor = React.createClass({
 	propTypes: {
@@ -24,6 +34,8 @@ var TableEditor = React.createClass({
 			headerClass += ' bg-primary';
 		}
 
+
+
 		return (
 			
 
@@ -38,7 +50,7 @@ var TableEditor = React.createClass({
 				<tfoot>
 					<tr>
 						<td colSpan={tableWidth}>
-							<a tabIndex="0" className="add-table-step" href="#" onClick={addOnClick}>Add Row</a>
+							<TableRowAdder adder={this.props.adder} addOnClick={addOnClick} />
 						</td>
 					</tr>
 				</tfoot>

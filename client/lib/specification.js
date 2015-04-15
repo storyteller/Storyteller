@@ -229,7 +229,11 @@ function Specification(data, library){
 		enumerable: true,
 		writeable: true,
 		get: function(){
-			return this.navigator.location.cell;
+			if (this.navigator.location.hasOwnProperty('cell')){
+				return this.navigator.location.cell;
+			}
+
+			return null;
 		}
 	});
 
@@ -243,7 +247,7 @@ function Specification(data, library){
 
 	readHolder(this);
 
-	this.navigator.moveLast();
+	this.navigator.moveFirst();
 }
 
 

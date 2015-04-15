@@ -63,11 +63,11 @@ describe('Specification', function(){
 
 		it('can create an outline of holders', function(){
 			var expected = {
-				active: true,
+				active: false,
 				id: specification.id,
 				title: specification.title,
 				children: [
-					{active: false, id: specification.steps[0].id, title: specification.steps[0].title, children: []},
+					{active: true, id: specification.steps[0].id, title: specification.steps[0].title, children: []},
 					{active: false, id: specification.steps[3].id, title: specification.steps[3].title, children: []}
 				]
 			};

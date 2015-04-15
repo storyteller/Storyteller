@@ -66,7 +66,7 @@ function IntegrationDriver(fixtureData, mode, results){
 
 		var div = document.createElement('div');
 		document.documentElement.appendChild(div);
-		this.editor = React.render(SpecEditor({params: {id: data.id}, mode: mode || 'editing'}), div);
+		this.editor = React.render(SpecEditor({id: data.id, mode: mode || 'editing'}), div);
 		this.getNode = () => this.editor.getDOMNode();
 		this.presenter = this.editor.presenter;
 		this.spec = this.presenter.spec;

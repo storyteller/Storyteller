@@ -3,7 +3,7 @@
 var React = require("react");
 var StepAdderPlaceHolder = require('./step-adder-placeholder');
 var StepAdder = require('./step-adder');
-var Router = require('react-router');
+
 
 
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
@@ -86,9 +86,9 @@ var modes = {
 	}
 }
 
-module.exports = React.createClass({
-    mixins: [Router.State],
 
+
+module.exports = React.createClass({
 	// smelly, but oh well
 	gotoResults: function(){
 		if (this.props.mode != 'results'){
@@ -96,35 +96,19 @@ module.exports = React.createClass({
 		}
 	},
 
+	gotoPreview: function(){
+		if (this.props.mode != 'preview'){
+			window.location = '#/spec/preview/' + this.state.id;
+		}
+	},
+
+	gotoEditor: function(){
+		if (this.props.mode != 'editing'){
+			window.location = '#/spec/editing/' + this.state.id;
+		}
+	},
+
 	getInitialState: function(){
-		// yeah, I know this is an "anti-pattern", but it makes
-		// isolated testing much easier.
-		var id = null;
-
-		if (this.props.params) {
-			id = this.props.params.id; 
-		}
-
-		
-		var mode = this.props.mode || 'editing';
-
-		try {
-			var params = this.getParams();
-			if (params && params.mode){
-				mode = params.mode;
-			}
-
-			if (id == null || id == undefined){
-				var id = this.getParams().id;
-			}
-		}
-		catch (e){
-			console.log('SpecEditor could not read routing urls');
-		}
-
-		console.log('SpecEditor opened with mode ' + mode + ' and id ' + id);
-
-
 		return {
 			components: [],
 			outline: {title: 'placeholder', active: true, children: []},
@@ -132,10 +116,8 @@ module.exports = React.createClass({
 			redoEnabled: false,
 			loading: true,
 			spec: {name: 'temp'},
-			id: id,
 			persisting: false,
 			lastSaved: null,
-			mode: mode,
 			contextualControl: null,
 			header: {hasResults: function(){
 				return false;
@@ -145,8 +127,8 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount: function(){
-		this.presenter = new EditorPresenter(this.state.id);
-		this.presenter.activate(modes[this.state.mode], this);
+		this.presenter = new EditorPresenter(this.props.id);
+		this.presenter.activate(modes[this.props.mode], this);
 	},
 
 	componentWillUnmount: function(){
@@ -154,7 +136,7 @@ module.exports = React.createClass({
 	},
 
 	buildContext: function(){
-		if (this.state.mode != 'editing') return null;
+		if (this.props.mode != 'editing') return null;
 
 		if (this.state.activeContainer){
 			return this.state.activeContainer.contextualControl(loader.editing);
@@ -166,18 +148,18 @@ module.exports = React.createClass({
 
 	buildLinks: function(){
 		var links = [];
-		if (this.state.mode != 'editing'){
-			var elem = (<LinkButton href={'#/spec/editing/' + this.state.id} text="Editor"/>);
+		if (this.props.mode != 'editing'){
+			var elem = (<LinkButton href={'#/spec/editing/' + this.props.id} text="Editor"/>);
 			links.push(elem);
 		}
 
-		if (this.state.mode != 'preview'){
-			var elem = (<LinkButton href={'#/spec/preview/' + this.state.id} text="Preview"/>);
+		if (this.props.mode != 'preview'){
+			var elem = (<LinkButton href={'#/spec/preview/' + this.props.id} text="Preview"/>);
 			links.push(elem);
 		}
 
-		if (this.state.mode != 'results'){
-			var elem = (<LinkButton href={'#/spec/results/' + this.state.id} text="Results" />);
+		if (this.props.mode != 'results'){
+			var elem = (<LinkButton href={'#/spec/results/' + this.props.id} text="Results" />);
 			links.push(elem);
 		}
 

@@ -35,7 +35,8 @@ module.exports = React.createClass({
 			topic: 'system-recycled',
 			callback: function(data, envelope){
 				self.setState({
-					name: data.name
+					name: data.name,
+					profile: data.properties.Profile
 				});
 			}
 		})
@@ -51,6 +52,11 @@ module.exports = React.createClass({
 			
 			return e.preventDefault();
 		}
+
+		var name = this.state.name;
+		if (this.state.profile){
+			name += ' (' + this.state.profile + ')';
+		}
 	
 		return (
 			<div>
@@ -58,7 +64,7 @@ module.exports = React.createClass({
 					<Nav>
 						<a className="navbar-brand" href="#/">Storyteller 3</a>
 
-				        <NavItem eventKey="4" href="#/">{this.state.name}</NavItem>
+				        <NavItem eventKey="4" href="#/">{name}</NavItem>
 					</Nav>
 					<Nav right={true}>
 				          <NavItem eventKey="1" href="#/language">Fixtures and Grammars</NavItem>

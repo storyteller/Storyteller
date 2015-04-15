@@ -44,7 +44,7 @@ module.exports = {
 
 	register(){
 		explorer({
-			keys: 'ctrl+n',
+			keys: ['ctrl+n', 'ctrl+shift+f'],
 			topic: 'find',
 			description: "Find a specification or suite by name (similar to ReSharper/IntelliJ's ctrl-n functionality",
 		});
@@ -149,6 +149,24 @@ module.exports = {
 			keys: ['alt+ins', 'alt+='],
 			topic: 'add-item',
 			description: 'Add an item to the active section or table'
+		});
+
+		editor({
+			keys: 'ctrl+1',
+			topic: 'go-preview',
+			description: 'Activate the preview mode of the current specification'
+		});
+
+		editor({
+			keys: 'ctrl+2',
+			topic: 'go-editing',
+			description: 'Activate the editor mode of the current specification'
+		});
+
+		editor({
+			keys: 'ctrl+3',
+			topic: 'go-results',
+			description: 'Activate the results mode of the current specification'
 		});
 
 	}

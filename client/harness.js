@@ -77,3 +77,8 @@ Postal.subscribe({
 startRouting();
 
 
+Postal.publish({
+	channel: 'engine',
+	topic: 'system-recycled',
+	data: Storyteller.initialization
+});
