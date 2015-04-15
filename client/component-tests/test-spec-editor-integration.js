@@ -17,7 +17,7 @@ describe('Editing a Specification Integration tests', function(){
 
 	describe('Cell display/editing state transitions', function(){
 		it('should display cell values in initial state', function(){
-			driver.cellShouldBeReadonlyWithText('0.0', 'x', '1');
+
 			driver.cellShouldBeReadonlyWithText('0.4', 'y', '2');
 			driver.cellShouldBeReadonlyWithText('0.4', 'result', '3');
 			driver.cellShouldBeReadonlyWithText('3.0', 'y', '2');
