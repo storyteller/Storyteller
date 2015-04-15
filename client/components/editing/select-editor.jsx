@@ -13,7 +13,7 @@ module.exports = React.createClass({
 
 	handleChange: function(event) {
 		if (!event){
-			var value = this.getDOMNode.getAttribute('value');
+			var value = this.getDOMNode().getAttribute('value');
 		}
 		else {
 			var value = event.target.value;
@@ -21,7 +21,7 @@ module.exports = React.createClass({
 
 		this.setState({value: value});
 
-		this.publishChange();
+		this.publishChange(value);
 	},	
 
 	publishChange: function(value){

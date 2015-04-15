@@ -221,6 +221,62 @@ describe('Rendering a Cell', function(){
 		});
 	});
 
+	describe('Rendering a select editor', function(){
+		beforeEach(function(){
+			props.active = true;
+		});
+
+		it('should render a select box when the cell editor is "select"', function(){
+			props.cell.editor = 'select';
+			props.cell.options = [{display: 'TX', value: 'Texas'}, {display: 'MO', value: 'Missouri'}, {display: 'AR', value: 'Arkansas'}];
+			props.value = 'Texas';
+
+			elementTypeShouldBe('select');
+			var opts = $('option', element()).map((i, elem) => {
+				return {display: elem.innerHTML, value: elem.value};
+			}).toArray();
+
+			expect(opts).to.deep.equal(props.cell.options);
+
+			expect($(element()).val()).to.equal('Texas');
+		});
+
+		it('should have the cell class and data-cell att when in editing mode', function(){
+			props.cell.editor = 'select';
+			props.cell.options = [{display: 'TX', value: 'Texas'}, {display: 'MO', value: 'Missouri'}, {display: 'AR', value: 'Arkansas'}];
+			props.value = 'Texas';
+
+			elementShouldHaveAttribute('data-cell', 'X');
+			elementShouldHaveClass('cell');
+		});
+		
+		it('should fire a changed message on changes', function(){
+			props.cell.editor = 'select';
+			props.cell.options = [{display: 'TX', value: 'Texas'}, {display: 'MO', value: 'Missouri'}, {display: 'AR', value: 'Arkansas'}];
+			props.value = 'Texas';
+
+			var elem = element();
+
+			// pre-condition
+			expect($(elem).val()).to.equal('Texas');
+
+			$(elem).val('Arkansas');
+
+			expect($(elem).val()).to.equal('Arkansas');
+
+			TestUtils.Simulate.change(elem);
+
+			var event = listener.events[0];
+
+
+			expect(event.id).to.equal(1);
+			expect(event.cell).to.equal('X');
+			expect(event.value).to.equal('Arkansas');
+
+		});
+
+	});
+
 	describe('Rendering a Cell without results', function(){
 		it('with no default and no value', function(){
 			elementShouldBeLinkWithText('[X]');
