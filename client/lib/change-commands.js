@@ -46,14 +46,24 @@ function StepMovedDown(parent, step){
 }
 
 function StepAdded(parent, step, index){
+	this.navigateOnAdd = store => {
+		if (step.isHolder && step.isHolder()){
+			store.selectHolder(step.id);
+		}
+		else if (step.selectFirst) {
+			var location = step.selectFirst();
+			if (location.cell){
+				store.navigator.replace(location);
+			}
+		}
+	}
+
 	if (index != null){
 		this.apply = function(store){
 			parent.insertStep(index, step);
 			store.storeStep(step);
 
-			if (step.isHolder && step.isHolder()){
-				store.selectHolder(step.id);
-			}
+			this.navigateOnAdd(store);
 		}
 	}
 	else {
@@ -61,9 +71,7 @@ function StepAdded(parent, step, index){
 			parent.addStep(step);
 			store.storeStep(step);
 
-			if (step.isHolder && step.isHolder()){
-				store.selectHolder(step.id);
-			}
+			this.navigateOnAdd(store);
 		}
 	}
 
