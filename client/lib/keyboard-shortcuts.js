@@ -44,7 +44,7 @@ module.exports = {
 
 	register(){
 		explorer({
-			keys: 'ctrl+n',
+			keys: ['ctrl+n', 'ctrl+shift+f'],
 			topic: 'find',
 			description: "Find a specification or suite by name (similar to ReSharper/IntelliJ's ctrl-n functionality",
 		});
