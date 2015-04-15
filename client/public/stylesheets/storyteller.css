@@ -87,7 +87,10 @@ span.twitter-typeahead{
   width: 100%;
 }
 
-
+a.add-table-step.active {
+  border: thin solid #337ab7;
+  padding: 3px;
+}
 
 .typeahead,
 .tt-query,

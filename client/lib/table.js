@@ -147,7 +147,7 @@ class Table extends CompositeGrammar{
 			this.addStep(section);
 		}
 
-		return loader.table({addStep: addStep, cells: this.cells, title: this.title, rows: rows, section: section});
+		return loader.table({addStep: addStep, cells: this.cells, title: this.title, rows: rows, section: section, adder: section.adder});
 	}
 
 	buildResults(step, loader){
@@ -185,7 +185,7 @@ class Table extends CompositeGrammar{
 	selectFirst(step){
 		var section = this.readSection(step);
 		if (section.steps.length == 0){
-			return {holder: section, step: null, cell: null};
+			return {holder: section, step: this.adder, cell: null};
 		}
 
 		var step = section.steps[0];
@@ -201,13 +201,18 @@ class Table extends CompositeGrammar{
 	}
 
 	selectLast(step){
+
+
 		var section = this.readSection(step);
+		return {holder: section, step: section.adder, cell: null};
+/*
 		if (section.steps.length == 0){
 			return {holder: section, step: null, cell: null};
 		}
 
 		var step = _.last(section.steps);
 		return step.selectLast();
+*/
 	}
 }
 
