@@ -96,7 +96,7 @@ var HelpIcon = React.createClass({
 
 
 		return (
-			<Button bsStyle="link" onClick={this.handleToggle} title="Click for help and a list of the available keyboard shortcuts"><Help />Help</Button>
+			<Button id="help-icon" bsStyle="link" onClick={this.handleToggle} title="Click for help and a list of the available keyboard shortcuts"><Help />Help</Button>
 		);
 	}
 });

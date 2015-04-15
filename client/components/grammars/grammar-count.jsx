@@ -47,7 +47,7 @@ var GrammarCount = React.createClass({
 		}
 
 		return (
-			<Button bsStyle="link" onClick={onclick}><Badge>{this.state.count}</Badge> grammar errors</Button>
+			<Button id="grammar-error-count" bsStyle="link" onClick={onclick}><Badge>{this.state.count}</Badge> grammar errors</Button>
 
 		);
 	}

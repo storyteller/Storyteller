@@ -75,7 +75,7 @@ var QueuePage = React.createClass({
 
 		return (
 			<div>
-				<h3>Execution Queue <Button onClick={cancelAll}>Cancel All</Button></h3>
+				<h3>Execution Queue <Button id="cancel-all-specs" onClick={cancelAll}>Cancel All</Button></h3>
 				{items}
 			</div>
 

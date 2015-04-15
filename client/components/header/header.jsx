@@ -14,7 +14,7 @@ var Icons = require('./../icons');
 var Postal = require('postal');
 
 var StatusBar = require('./status-bar');
-
+var SpecificationStore = require('./../../lib/specification-store');
 
 
 
@@ -22,8 +22,11 @@ var StatusBar = require('./status-bar');
 
 module.exports = React.createClass({
 	getInitialState: function(){
+		var data = SpecificationStore.systemRecycled;
+
 		return {
-			name: 'Storyteller Project'
+			name: data.name,
+			profile: data.properties.Profile
 		}
 	},
 
@@ -64,13 +67,13 @@ module.exports = React.createClass({
 					<Nav>
 						<a className="navbar-brand" href="#/">Storyteller 3</a>
 
-				        <NavItem eventKey="4" href="#/">{name}</NavItem>
+				        <NavItem id="project-title" eventKey="4" href="#/">{name}</NavItem>
 					</Nav>
 					<Nav right={true}>
 				          <NavItem eventKey="1" href="#/language">Fixtures and Grammars</NavItem>
 				          <NavItem eventKey="2" href="#/docs">Documentation</NavItem>
 				        <DropdownButton eventKey={1} title="Commands">
-				          <NavItem eventKey="1" onClick={onRecycle}>Recycle System</NavItem>
+				          <NavItem eventKey="1" id="force-recycle" onClick={onRecycle}>Recycle System</NavItem>
 				          <NavItem eventKey="2" >Reload Spec from Disk</NavItem>
 				          <NavItem eventKey="2" >Clear All Results</NavItem>
 				        </DropdownButton>
