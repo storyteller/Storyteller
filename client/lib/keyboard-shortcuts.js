@@ -151,6 +151,24 @@ module.exports = {
 			description: 'Add an item to the active section or table'
 		});
 
+		editor({
+			keys: 'ctrl+1',
+			topic: 'go-preview',
+			description: 'Activate the preview mode of the current specification'
+		});
+
+		editor({
+			keys: 'ctrl+2',
+			topic: 'go-editing',
+			description: 'Activate the editor mode of the current specification'
+		});
+
+		editor({
+			keys: 'ctrl+3',
+			topic: 'go-results',
+			description: 'Activate the results mode of the current specification'
+		});
+
 	}
 
 }

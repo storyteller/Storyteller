@@ -86,6 +86,8 @@ var modes = {
 	}
 }
 
+
+
 module.exports = React.createClass({
     mixins: [Router.State],
 
@@ -93,6 +95,18 @@ module.exports = React.createClass({
 	gotoResults: function(){
 		if (this.props.mode != 'results'){
 			window.location = '#/spec/results/' + this.state.id;
+		}
+	},
+
+	gotoPreview: function(){
+		if (this.props.mode != 'preview'){
+			window.location = '#/spec/preview/' + this.state.id;
+		}
+	},
+
+	gotoEditor: function(){
+		if (this.props.mode != 'editing'){
+			window.location = '#/spec/editing/' + this.state.id;
 		}
 	},
 
