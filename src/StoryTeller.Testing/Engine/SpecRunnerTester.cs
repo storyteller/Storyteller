@@ -117,7 +117,7 @@ namespace StoryTeller.Testing.Engine
             var result = theResults.Results.Single().ShouldBeOfType<StepResult>();
             result.id.ShouldBe(theRequest.Specification.id);
             result.Status.ShouldBe(ResultStatus.error);
-            result.error.ShouldBe(theException.ToString());
+            result.error.ShouldContain(theException.ToString());
             result.position.ShouldBe("context");
             
         }

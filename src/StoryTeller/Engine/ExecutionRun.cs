@@ -58,8 +58,8 @@ namespace StoryTeller.Engine
 
             if (_wasCancelled) return null;
 
-            if (_catastrophicException != null) throw _catastrophicException;
-            if (_context != null && _context.CatastrophicException != null) throw _context.CatastrophicException;
+            if (_catastrophicException != null) throw new StorytellerExecutionException(_catastrophicException);
+            if (_context != null && _context.CatastrophicException != null) throw new StorytellerExecutionException(_context.CatastrophicException);
 
             
 
@@ -158,6 +158,19 @@ namespace StoryTeller.Engine
         {
             if (_context != null) _context.SafeDispose();
             if (_execution != null) _execution.SafeDispose();
+        }
+    }
+
+    [Serializable]
+    public class StorytellerExecutionException : Exception
+    {
+        public StorytellerExecutionException(Exception innerException)
+            : base("A catastropic exception was thrown during execution and the engine is in an invalid state", innerException)
+        {
+        }
+
+        protected StorytellerExecutionException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
         }
     }
 }

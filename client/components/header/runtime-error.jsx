@@ -50,10 +50,10 @@ var RuntimeError = React.createClass({
 		}
 
 		return (
-		    <Modal title="Runtime Error!" onRequestHide={this.handleToggle}>
+		    <Modal style={{width: '80%'}} title="Runtime Error!" onRequestHide={this.handleToggle}>
 		      <div className="modal-body">
 		        
-		      <pre>
+		      <pre style={{width: '100%', overflow: 'auto'}}>
 		      	{this.state.error}
 		      </pre>
 
