@@ -13,7 +13,7 @@ var Documentation = require('./documentation');
 var QueuePage = require('./queue/queue-page');
 var Header = require('./header/header');
 var GrammarErrors = require('./grammars/grammar-errors');
-var SpecEditor = require('./editing/spec-editor');
+var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
 var SuiteExplorer = require('./explorer/suite-explorer');
 
 var $ = require('jquery');
@@ -55,7 +55,7 @@ var routes = (
     <Route name="documentation" path="/docs" handler={Documentation}/>
     <Route name="queue" path="/queue" handler={QueuePage} />
     <Route name="grammar-errors" path="/grammar-errors" handler={GrammarErrors} />
-    <Route name="spec-editor" path="/spec/:mode/:id" handler={SpecEditor} />
+    <Route name="spec-editor" path="/spec/:mode/:id" handler={SpecEditorWrapper} />
     <Route name="suite-explorer" path="/suite/*" handler={SuiteExplorer} />
     <DefaultRoute handler={SpecExplorer}/>
   </Route>
