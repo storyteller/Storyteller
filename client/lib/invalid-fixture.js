@@ -15,6 +15,10 @@ function InvalidFixture(key){
 	this.buildStep = function(data){
 		return new Section(data, this);
 	}
+
+	this.contextualControl = function(){
+		return null;
+	}
 }
 
 module.exports = InvalidFixture;
