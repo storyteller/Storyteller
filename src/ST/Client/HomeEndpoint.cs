@@ -49,6 +49,8 @@ namespace ST.Client
             script.WriteLine();
             script.WriteLine("Storyteller.initialization = {0};", JsonSerialization.ToCleanJson(_context.Startup.Result));
             script.WriteLine();
+            script.WriteLine("Storyteller.queueState = {0};", JsonSerialization.ToCleanJson(_context.QueueState()));
+            script.WriteLine();
             script.WriteLine("Storyteller.wsAddress = '{0}';", _connector.WebSocketsAddress);
             script.WriteLine();
 

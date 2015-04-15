@@ -1,5 +1,8 @@
-﻿namespace StoryTeller.Messages
+﻿using System;
+
+namespace StoryTeller.Messages
 {
+    [Serializable]
     public class QueueState : ClientMessage
     {
         public QueueState() : base("queue-state")

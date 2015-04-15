@@ -45,10 +45,17 @@ Postal.publish({
 });
 
 
+
 Postal.publish({
 	channel: 'engine',
 	topic: 'system-recycled',
 	data: Storyteller.initialization
+});
+
+Postal.publish({
+  channel: 'engine',
+  topic: 'queue-state',
+  data: Storyteller.queueState
 });
 
 var communicator = new Communicator(Storyteller.wsAddress, startRouting);

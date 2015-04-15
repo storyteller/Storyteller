@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using StoryTeller.Messages;
 using StoryTeller.Remotes;
 
 namespace ST.Client
@@ -23,6 +24,11 @@ namespace ST.Client
 
                 return t.Result;
             });
+        }
+
+        public QueueState QueueState()
+        {
+            return _controller.QueueState();
         }
 
         public void AddRemoteListener(object listener)

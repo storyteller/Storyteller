@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace StoryTeller.Messages
 {
+    [Serializable]
     public abstract class ClientMessage
     {
         [JsonProperty("type")]

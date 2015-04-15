@@ -4,6 +4,7 @@ using FubuCore;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Engine.UserInterface;
+using StoryTeller.Messages;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -31,7 +32,11 @@ namespace StoryTeller.Remotes
             return null;
         }
 
-
+        public QueueState QueueState()
+        {
+            var controller = _controller as EngineController;
+            return controller == null ? new QueueState() : controller.QueueState();
+        }
 
         public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener, MarshalByRefObject remoteDataSource)
         {

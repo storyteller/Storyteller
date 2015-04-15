@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.CommandLine;
+using StoryTeller.Messages;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -36,6 +37,13 @@ namespace StoryTeller.Remotes
             _messaging = new MessagingHub();
 
             _messaging.AddListener(this);
+        }
+
+        public QueueState QueueState()
+        {
+            if (_proxy == null) return new QueueState();
+
+            return _proxy.QueueState();
         }
 
         public Project Project
