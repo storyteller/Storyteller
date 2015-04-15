@@ -66,7 +66,7 @@ var CommandButton = React.createClass({
 				id={this.props.id}
 				title={this.props.title} 
 				disabled={this.props.disabled} 
-				onClick={onclick}><Icon />&nbsp;</Button>
+				onClick={onclick}><Icon /></Button>
 
 		);
 	}

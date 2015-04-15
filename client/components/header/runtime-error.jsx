@@ -71,7 +71,7 @@ var RuntimeError = React.createClass({
 		}
 		
 		return (
-			<Button onClick={this.handleToggle} bsStyle="pg-danger">Runtime Error!</Button>
+			<Button onClick={this.handleToggle} bsStyle="danger">Runtime Error!</Button>
 		);
 	}
 });
