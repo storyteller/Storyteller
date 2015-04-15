@@ -57,6 +57,6 @@ namespace StoryTeller.Grammars
             };
         }
 
-
+        public bool IsHidden { get; set; }
     }
 }

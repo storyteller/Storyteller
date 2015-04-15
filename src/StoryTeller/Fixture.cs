@@ -99,10 +99,14 @@ namespace StoryTeller
                 this[grammarKey] = grammar;
             });
 
+            var grammarModels = new List<GrammarModel>();
+
             var grammars = _grammars.GetAllKeys().Select(key =>
             {
-                var model = _grammars[key].Compile(this, conversions);
+                var grammar = _grammars[key];
+                var model = grammar.Compile(this, conversions);
                 model.key = key;
+                model.IsHidden = grammar.IsHidden;
 
                 return model;
             });
@@ -110,7 +114,7 @@ namespace StoryTeller
             return new FixtureModel(Key)
             {
                 title = Title ?? Key.SplitCamelCase(),
-                grammars = grammars.ToArray(),
+                grammars = grammars.Where(x => !x.IsHidden).ToArray(),
                 implementation = GetType().FullName
             };
         }

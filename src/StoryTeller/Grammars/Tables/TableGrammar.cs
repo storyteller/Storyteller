@@ -114,5 +114,7 @@ namespace StoryTeller.Grammars.Tables
                 Subject = Key + ":After"
             };
         }
+
+        public bool IsHidden { get; set; }
     }
 }

@@ -68,6 +68,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Bugs\do_not_put_hidden_fixtures_and_grammars_into_the_fixture_model_to_the_client.cs" />
     <Compile Include="cells_reading_lists_integration_specs.cs" />
     <Compile Include="CommandLine\run_command_integration_specs.cs" />
     <Compile Include="Conversion\ConversionsTester.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Grammars\Decisions\DecisionTableGrammar_specs.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar_specs.cs" />
     <Compile Include="Grammars\FixtureLibraryTester.cs" />
+    <Compile Include="Grammars\GrammarBuilderTester.cs" />
     <Compile Include="Grammars\Importing\importing_and_currying_grammars_specs.cs" />
     <Compile Include="Grammars\InvalidGrammarStepTester.cs" />
     <Compile Include="Grammars\LinePlanTester.cs" />
@@ -181,6 +183,10 @@
     <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj">
       <Project>{5b273c7c-0a4e-48e8-9e6e-3e84d8c2243e}</Project>
       <Name>MultipleSystems</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Specifications\Specifications.csproj">
+      <Project>{bd26e9b9-f04d-4c64-a753-4394b1d00c1d}</Project>
+      <Name>Specifications</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
       <Project>{CAE54634-A689-4CF2-979E-CCBCCA8A3644}</Project>

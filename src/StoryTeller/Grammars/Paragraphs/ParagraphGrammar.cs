@@ -71,6 +71,8 @@ namespace StoryTeller.Grammars.Paragraphs
                 }
             }
         }
+
+        public bool IsHidden { get; set; }
     }
 
 

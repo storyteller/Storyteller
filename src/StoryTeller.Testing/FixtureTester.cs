@@ -29,13 +29,13 @@ namespace StoryTeller.Testing
         [Test]
         public void hidden_when_marked_with_Hidden()
         {
-            ShouldBeTestExtensions.ShouldBe(new HiddenFixture().IsHidden(), true);
+            new HiddenFixture().IsHidden().ShouldBe(true);
         }
 
         [Test]
         public void not_hidden_without_the_attribute()
         {
-            ShouldBeTestExtensions.ShouldBe(new NotHiddenFixture().IsHidden(), false);
+            new NotHiddenFixture().IsHidden().ShouldBe(false);
         }
 
 
@@ -47,7 +47,6 @@ namespace StoryTeller.Testing
 
         public class TargetedReflectionFixture : Fixture
         {
-            
         }
 
         [Test]
@@ -66,7 +65,6 @@ namespace StoryTeller.Testing
 
         public class NotHiddenFixture : Fixture
         {
-            
         }
 
         [Hidden]
@@ -90,9 +88,9 @@ namespace StoryTeller.Testing
             var fixture = new FixtureWithExplicits();
 
             fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
-                new StubGrammarModel{key = "a",},
-                new StubGrammarModel{key = "b",},
-                new StubGrammarModel{key = "c",}
+                new StubGrammarModel {key = "a",},
+                new StubGrammarModel {key = "b",},
+                new StubGrammarModel {key = "c",}
                 );
         }
 
@@ -121,9 +119,9 @@ namespace StoryTeller.Testing
             var fixture = new FixtureWithProgrammaticGrammars();
 
             fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
-                new StubGrammarModel { key = "foo", },
-                new StubGrammarModel { key = "bar", },
-                new StubGrammarModel { key = "baz", }
+                new StubGrammarModel {key = "foo",},
+                new StubGrammarModel {key = "bar",},
+                new StubGrammarModel {key = "baz",}
                 );
         }
 
@@ -142,13 +140,12 @@ namespace StoryTeller.Testing
             var fixture = new FixtureWithGrammarAlias();
 
             fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
-                new StubGrammarModel { key = "GoAlias"}
+                new StubGrammarModel {key = "GoAlias"}
                 );
         }
 
         public class DefaultTitleFixture : Fixture
         {
-            
         }
 
         [Test]
@@ -221,7 +218,7 @@ namespace StoryTeller.Testing
     {
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
@@ -230,6 +227,7 @@ namespace StoryTeller.Testing
         }
 
         public string Key { get; set; }
+        public bool IsHidden { get; set; }
     }
 
     public class StubGrammarModel : GrammarModel
@@ -261,6 +259,4 @@ namespace StoryTeller.Testing
             return "StubGrammar named " + key;
         }
     }
-
-    
-}   
+}

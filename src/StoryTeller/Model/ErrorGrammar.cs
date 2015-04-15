@@ -27,5 +27,6 @@ namespace StoryTeller.Model
         }
 
         public string Key { get; set; }
+        public bool IsHidden { get; set; }
     }
 }

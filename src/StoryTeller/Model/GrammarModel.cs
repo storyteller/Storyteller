@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {
@@ -14,6 +15,9 @@ namespace StoryTeller.Model
         }
 
         private readonly IList<GrammarError> _errors = new List<GrammarError>();
+
+        [JsonIgnore]
+        public bool IsHidden;
 
         public GrammarError[] errors
         {

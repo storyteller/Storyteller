@@ -35,6 +35,8 @@ namespace StoryTeller.Grammars
         {
             return _test(context);
         }
+
+        public bool IsHidden { get; set; }
     }
 
     public interface IFactGrammar : IGrammar

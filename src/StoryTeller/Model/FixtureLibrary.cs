@@ -48,7 +48,7 @@ namespace StoryTeller.Model
                 .Where(x => x.GetReferencedAssemblies().Any(assem => assem.Name == storytellerAssembly))
                 .SelectMany(FixtureTypesFor)
                 .Select(
-                    type => { return Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)); });
+                    type => Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)));
 
             return Task.WhenAll(fixtures).ContinueWith(results =>
             {

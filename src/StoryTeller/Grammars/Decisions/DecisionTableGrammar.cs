@@ -42,5 +42,7 @@ namespace StoryTeller.Grammars.Decisions
         {
             return _inner.Compile(fixture, cells);
         }
+
+        public bool IsHidden { get; set; }
     }
 }

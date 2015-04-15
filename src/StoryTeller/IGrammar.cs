@@ -9,5 +9,7 @@ namespace StoryTeller
         GrammarModel Compile(Fixture fixture, CellHandling cells);
 
         string Key { get; set; }
+
+        bool IsHidden { get; set; }
     }
 }

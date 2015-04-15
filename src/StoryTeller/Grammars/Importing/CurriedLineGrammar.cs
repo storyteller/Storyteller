@@ -61,7 +61,7 @@ namespace StoryTeller.Grammars.Importing
             }).ToArray();
         }
 
-
+        public bool IsHidden { get; set; }
 
 
 

@@ -47,5 +47,6 @@ namespace StoryTeller.Grammars.Reflection
         }
 
         public string Key { get; set; }
+        public bool IsHidden { get; set; }
     }
 }

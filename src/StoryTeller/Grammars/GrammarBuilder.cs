@@ -37,6 +37,8 @@ namespace StoryTeller.Grammars
                     grammar = grammar.AsTable(att.Label).LeafName(att.LeafName);
                 });
 
+                method.ForAttribute<HiddenAttribute>(_ => grammar.IsHidden = true);
+
                 return grammar;
             }
             catch (Exception e)
