@@ -2,8 +2,8 @@
   <TopicFolder id="c18347a5-011f-4294-bc91-94f299978ddc">
     <TheTopicsAre>
       <Rows id="d1fda8b3-9cb5-4253-a9cc-a9a14333adc3">
-        <TheTopicsAre-row Path="index.md" Line1="&lt;!--Title: Creating Documentation--&gt;" Line2="NULL" />
-        <TheTopicsAre-row Path="topics.md" Line1="&lt;!--Url: topic-files--&gt;" Line2="NULL" />
+        <TheTopicsAre-row path="index.md" Line1="&lt;!--Title: Creating Documentation--&gt;" Line2="NULL" />
+        <TheTopicsAre-row path="topics.md" Line1="&lt;!--Url: topic-files--&gt;" Line2="NULL" />
       </Rows>
     </TheTopicsAre>
     <CheckTopic path="index.md" Key="index" Title="Creating Documentation" UrlSegment="EMPTY" />

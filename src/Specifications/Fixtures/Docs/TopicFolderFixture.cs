@@ -64,9 +64,9 @@ namespace Specifications.Fixtures.Docs
         }
 
         [Hidden]
-        public void BuildTopic(string Path, string Line1 = null, string Line2 = null)
+        public void BuildTopic([Header("File Path")]string path, string Line1 = null, string Line2 = null)
         {
-            ForFile(Path);
+            ForFile(path);
             new FileSystem().WriteToFlatFile(_location, writer =>
             {
                 if (Line1.IsNotEmpty()) writer.WriteLine(Line1);

@@ -17,6 +17,7 @@ namespace ST.Docs.Topics
             
         }
 
+        // derived from the position
         public string Key { get; set; }
         public string Title { get; set; }
         public string UrlSegment { get; set; }
