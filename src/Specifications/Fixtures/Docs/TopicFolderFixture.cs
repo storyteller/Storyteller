@@ -83,8 +83,8 @@ namespace Specifications.Fixtures.Docs
             return this["BuildTopic"].AsTable("The topics in this directory are")
                 .After(() =>
                 {
-                    //var root = TopicLoader.LoadDirectory(_directory);
-                    //Context.State.Store(root);
+                    var root = TopicLoader.LoadDirectory(_directory);
+                    Context.State.Store(root);
                 });
         }
 

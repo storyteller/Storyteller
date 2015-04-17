@@ -17,7 +17,13 @@ namespace ST.Docs.Topics
         {
             // Needs to order based on an order.txt
 
-            throw new NotImplementedException();
+            var topicFiles = FileSystem.FindFiles(directory, FileSet.Shallow("*.md")).ToArray();
+            var topics = topicFiles.Select(x => LoadTopic(x, true));
+
+            var index = topics.FirstOrDefault(x => x.Key == "index");
+
+
+            return index;
         }
 
         public static Topic LoadTopic(string file, bool isRoot)

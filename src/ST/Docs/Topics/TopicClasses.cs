@@ -123,7 +123,13 @@ namespace ST.Docs.Topics
 
         public IEnumerable<Topic> AllTopicsInOrder()
         {
-            throw new NotImplementedException();
+            yield return this;
+
+            foreach (var child in Descendents())
+            {
+                yield return child;
+            }
         }
+
     }
 }

@@ -40,7 +40,7 @@ function SetVerification(metadata){
 
 		}
 
-		var width = this.cells + 1;
+		var width = this.cells.length + 1;
 		if (table.ordered){
 			width++;
 		}

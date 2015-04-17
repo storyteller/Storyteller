@@ -3,6 +3,7 @@ using System.Linq;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace StoryTeller.Grammars.Sets
 {
@@ -55,7 +56,7 @@ namespace StoryTeller.Grammars.Sets
                     if (t.IsFaulted)
                     {
                         // TODO -- do the Flatten() trick here on the aggregated exception
-                        context.LogException(_section.id, t.Exception);
+                        context.LogException(_section.id, t.Exception, Stage.before);
                         return;
                     }
 
