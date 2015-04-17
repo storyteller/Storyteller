@@ -24,6 +24,8 @@ namespace Specifications.Fixtures.Docs
         public override void SetUp()
         {
             _directory = Path.GetTempPath().AppendPath(Guid.NewGuid().ToString());
+            Directory.CreateDirectory(_directory);
+
             Debug.WriteLine("Using the directory " + _directory);
         }
 
@@ -72,6 +74,8 @@ namespace Specifications.Fixtures.Docs
                 if (Line1.IsNotEmpty()) writer.WriteLine(Line1);
                 if (Line2.IsNotEmpty()) writer.WriteLine(Line2);
             });
+
+            StoryTellerAssert.Fail(!File.Exists(_location), "File was not written");
         }
 
         public IGrammar TheTopicsAre()
@@ -79,19 +83,19 @@ namespace Specifications.Fixtures.Docs
             return this["BuildTopic"].AsTable("The topics in this directory are")
                 .After(() =>
                 {
-                    var root = TopicLoader.LoadDirectory(_directory);
-                    Context.State.Store(root);
+                    //var root = TopicLoader.LoadDirectory(_directory);
+                    //Context.State.Store(root);
                 });
         }
 
         public IGrammar CheckTopic()
         {
-            return Paragraph("Check the properties of a topic", _ =>
+            return Paragraph("Check the properties of a topic at the root of the topic directory", _ =>
             {
                 _ += this["ForFile"];
                 _ += c =>
                 {
-                    c.State.CurrentObject = TopicLoader.LoadTopic(_location);
+                    c.State.CurrentObject = TopicLoader.LoadTopic(_location, true);
                 };
 
                 _.VerifyPropertiesOf<Topic>(x =>

@@ -1,4 +1,5 @@
 ﻿using System;
+using FubuCore;
 using OpenQA.Selenium;
 using ST.Client;
 using StoryTeller;
@@ -15,7 +16,7 @@ namespace Specifications
 
         public IExecutionContext CreateContext()
         {
-            throw new NotImplementedException();
+            return new NulloSystem.SimpleExecutionContext(new InMemoryServiceLocator());
         }
 
         public CellHandling Start()
@@ -25,8 +26,8 @@ namespace Specifications
 
         public void Dispose()
         {
-            _webDriver.Dispose();
-            _runner.Dispose();
+            //_webDriver.Dispose();
+            //_runner.Dispose();
         }
     }
 }
