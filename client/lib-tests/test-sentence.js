@@ -152,18 +152,6 @@ describe('Sentence', function(){
 			expect(sentence.parts[3].cell.key).to.equal('y');
 		});
 
-		it('gets mad when cells are missing', function(){
-			var builder = function(){
-				build({
-					format: 'Add {x} to {y}',
-					cells: [
-						{key: 'z', description: 'the missing z'}
-					]
-				});
-			}
-
-			expect(builder).to.throw(Error);
-		});
 
 		it('gets mad when brackets are misaligned', function(){
 			expect(function(){

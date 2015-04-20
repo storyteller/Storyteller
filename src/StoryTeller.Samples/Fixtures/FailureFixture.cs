@@ -6,7 +6,7 @@ namespace StoryTeller.Samples.Fixtures
     {
         public FailureFixture()
         {
-            throw new NotImplementedException();
+            throw new Exception("This fixture ctor blew up");
         }
     }
 
@@ -14,7 +14,7 @@ namespace StoryTeller.Samples.Fixtures
     {
         public IGrammar Bad()
         {
-            throw new NotImplementedException();
+            throw new DivideByZeroException();
         }
     }
 }

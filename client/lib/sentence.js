@@ -13,6 +13,7 @@ class Sentence{
 		this.description = metadata.description;
 
 		this.parts = [];
+		this.errors = [];
 
 		this.cells = cells;
 
@@ -31,8 +32,13 @@ class Sentence{
 		var allCells = _.keys(cells);
 		var unusedCells = _.difference(allCells, usedCells).join(', ');
 
+		
+
 		if (unusedCells.length > 0){
-			throw new Error('Cell(s) ' + unusedCells + ' are unaccounted for in the sentence format');
+			this.errors.push({
+				message: 'Cell(s) ' + unusedCells + ' are unaccounted for in the sentence format',
+				error: 'Missing cells in the format'
+			});
 		}
 
 		this.allCells = _.values(this.cells);

@@ -80,6 +80,16 @@ namespace StoryTeller.Testing.Grammars
         }
 
         [Test]
+        public void has_a_grammar_error_for_grammar_that_blows_up()
+        {
+            var fixtureModel = TestingContext.Library.Models["GrammarError"];
+            var grammar = fixtureModel.FindGrammar("Bad");
+            grammar.errors.Single().error.ShouldContain("DivideByZeroException");
+
+            Debug.WriteLine(JsonSerialization.ToIndentedJson(fixtureModel));
+        }
+
+        [Test]
         public void bad_grammar_is_in_the_bigger_model()
         {
             var library = TestingContext.Library;

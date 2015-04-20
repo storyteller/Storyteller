@@ -6,6 +6,7 @@ var _ = require('lodash');
 var library = ObjectMother.library();
 var specData = ObjectMother.specData();
 var Specification = require('./../lib/specification');
+var FixtureLibrary = require('./../lib/fixture-library');
 
 var listener = {
 	events: [],
@@ -364,6 +365,71 @@ describe('SpecificationStore', function(){
 			});
 
 			expect(list).to.deep.equal(['spec1', 'spec2', 'spec3']);
+		});
+	});
+
+	describe('can find all the errors', function(){
+		var grammarErrorFixture = null;
+
+		beforeEach(() => {
+			var data = require('./../all-spec-data').fixtures;
+			var library = new FixtureLibrary(data);
+
+			SpecificationStore.setLibrary(library);
+			grammarErrorFixture = library.fixtures['GrammarError'];
+
+
+		});
+
+		it('exposes errors at the fixture level', () => {
+			var errors = SpecificationStore.errorReport();
+
+			var fixture = _.find(errors, e => e.key == 'Failure');
+			expect(fixture.errors.length).to.equal(1);
+
+			var error = fixture.errors[0];
+			expect(error.error).to.contain('This fixture ctor blew up');
+		});
+
+		it('the fixture can reach grammar errors in errorReport', function(){
+			expect(grammarErrorFixture).to.not.be.null;
+
+			var bad = grammarErrorFixture.grammars['Bad'];
+
+			expect(grammarErrorFixture.errorCount()).to.equal(1);
+
+			expect(grammarErrorFixture.errorReport())
+		});
+
+		it('exposes errors at the grammar level', () => {
+			var errors = SpecificationStore.errorReport();
+
+			var fixture = _.find(errors, e => e.key == 'GrammarError');
+			expect(fixture.errors.length).to.equal(0);
+
+			var grammar = _.find(fixture.grammars, g => g.key == 'Bad');
+			var error = grammar.errors[0];
+			expect(error.error).to.contain('DivideByZeroException');
+		});
+
+		it('exposes errors from sentence format validation on the client', () => {
+			var errors = SpecificationStore.errorReport();
+
+			var fixture = _.find(errors, e => e.key == 'Sentence');
+			expect(fixture.errors.length).to.equal(0);
+
+			var grammar = _.find(fixture.grammars, g => g.key == 'BadSentence');
+
+			expect(grammar).to.not.be.null;
+			expect(grammar).to.not.be.undefined;
+
+
+			expect(grammar.errors.length).to.equal(1);
+
+			var error = grammar.errors[0];
+
+			expect(error.message).to.contain('Cell(s) name are unaccounted for in the sentence format');
+			expect(error.error).to.contain('Missing cells in the format');
 		});
 	});
 });

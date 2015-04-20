@@ -146,7 +146,11 @@ namespace StoryTeller.Samples.Fixtures
             return (x + y) == sum;
         }
 
-
+        [FormatAs("Incomplete format")]
+        public void BadSentence(string name)
+        {
+            
+        }
 
         // END:  FactAssertions
     }
