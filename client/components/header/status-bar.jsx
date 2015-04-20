@@ -8,12 +8,13 @@ var Button = require('react-bootstrap/Button');
 var Postal = require('postal');
 var QueueCount = require('./../queue/queue-count');
 var GrammarCount = require('./../grammars/grammar-count');
-var SpecProgressBar = require('./spec-progress-bar');
+
 
 var SpecificationStore = require('./../../lib/specification-store');
 var HelpIcon = require('./help');
 var Search = require('./search');
 var RuntimeError = require('./runtime-error');
+
 
 var StatusBar = React.createClass({
 	getInitialState: function(){
@@ -61,9 +62,6 @@ var StatusBar = React.createClass({
 	render: function(){
 		return (
 			<Navbar className="bg-info status-bar">
-				<span id="spec-progress-bar" className="pull-left">
-					<SpecProgressBar />
-				</span>
 				<span className="pull-right">
 					<QueueCount />
 					<GrammarCount />
@@ -72,7 +70,9 @@ var StatusBar = React.createClass({
 					<HelpIcon />
 					<RuntimeError />
 				</span>
+
 			</Navbar>
+
 		);
 	}
 });

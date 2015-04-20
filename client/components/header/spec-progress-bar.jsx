@@ -3,7 +3,7 @@
 var React = require("react");
 var Postal = require('postal');
 
-var ProgressBar = require('react-bootstrap/ProgressBar');
+var {ProgressBar, Button, Navbar} = require('react-bootstrap');
 
 var SpecProgressBar = React.createClass({
 	getInitialState: function(){
@@ -50,8 +50,22 @@ var SpecProgressBar = React.createClass({
 			}
 		}
 
+		var cancel = e => {
+			Postal.publish({
+				channel: 'engine-request',
+				topic: 'cancel-spec',
+				data: {id: this.state.step.id}
+			});
+
+			e.preventDefault();
+		}
+
 		return (
-			<ProgressBar label={'Running ' + this.state.spec.name} bsStyle={bsStyle} min={0} max={this.state.total} now={this.state.step} />
+			<div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
+			<Button onClick={cancel} className="pull-right" bsStyle="link" style={{marginLeft: '10px', marginRight: '10px', height: '25px'}}>Cancel Execution</Button>
+			<ProgressBar  label={'Running ' + this.state.spec.name} bsStyle={bsStyle} min={0} max={this.state.total} now={this.state.step} />
+				
+			</div>
 		);
 
 	}

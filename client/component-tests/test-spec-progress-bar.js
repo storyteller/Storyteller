@@ -46,7 +46,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 0, wrongs: 0, errors: 0, invalids: 0}
 		});
 
-		var progressBar = component.getDOMNode();
+		var progressBar = component.getDOMNode().children[1];
 
 		expect(progressBar.tagName).to.equal('DIV');
 		expect(progressBar.className).to.equal('progress');
@@ -64,7 +64,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 3, wrongs: 0, errors: 0, invalids: 0}
 		});
 
-		var progressBar = component.getDOMNode();
+		var progressBar = component.getDOMNode().children[1];
 
 		expect(progressBar.tagName).to.equal('DIV');
 		expect(progressBar.firstChild.className).to.equal('progress-bar progress-bar-success');
@@ -79,7 +79,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 3, wrongs: 2, errors: 0, invalids: 0}
 		});
 
-		var progressBar = component.getDOMNode();
+		var progressBar = component.getDOMNode().children[1];
 
 		expect(progressBar.tagName).to.equal('DIV');
 		expect(progressBar.firstChild.className).to.equal('progress-bar progress-bar-danger');

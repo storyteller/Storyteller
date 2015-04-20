@@ -15,7 +15,7 @@ var Postal = require('postal');
 
 var StatusBar = require('./status-bar');
 var SpecificationStore = require('./../../lib/specification-store');
-
+var SpecProgressBar = require('./spec-progress-bar');
 
 
 
@@ -83,6 +83,7 @@ module.exports = React.createClass({
 				</Navbar>
 				<StatusBar/>
 
+				<SpecProgressBar />;
 			</div>
 
 		);

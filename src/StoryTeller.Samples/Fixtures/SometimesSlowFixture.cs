@@ -9,7 +9,8 @@ namespace StoryTeller.Samples.Fixtures
         {
             if (Project.CurrentProfile == "slow")
             {
-                Thread.Sleep(1.Minutes());
+                Thread.Sleep(10.Seconds());
+                //Thread.Sleep(1.Minutes());
             }
         } 
     }

@@ -7,8 +7,7 @@ div.suite-body {
 }
 
 nav.status-bar {
-	height: 40px !important;
-	min-height: 25px !important;
+	min-height: 40px !important;
 	padding-bottom: 0px !important;
 	margin-bottom: 25px !important;
 }
@@ -71,8 +70,12 @@ td.number-cell{
 }
 
 #spec-progress-bar div.progress{
-	width: 500px;
+	width: '800px' !important;
 	margin-top: 8px
+}
+
+div.progress{
+  margin-bottom: 5px !important;
 }
 
 div.active {
