@@ -6,11 +6,13 @@ var PreviewRow = React.createClass({
 	render: function(){
 		var tds = this.props.cells.map(cell => {
 			var arg = this.props.step.args.find(cell.key);
-			var cell = builders.toText(arg);
 			
+			var text = builders.toText(arg);
+			
+			var key = cell.key;
 
 			return (
-				<td>{cell}</td>
+				<td key={key}>{text}</td>
 			);
 		});
 

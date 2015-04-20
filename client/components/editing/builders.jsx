@@ -8,21 +8,26 @@ var CellTextBox = require('./textbox-editor');
 var CheckboxEditor = require('./checkbox-editor');
 var SelectEditor = require('./select-editor');
 
+function toDisplay(cell, value){
+	if (value == null) return 'NULL';
+
+	return value.toString();
+}
+
 // think this ends up being very similar to component-loaders
 var builders = {
 	add: function(key, strategy){
 		if (typeof(strategy) === 'function'){
 			this[key] = {
 				edit: strategy,
-				display: (cell, value) => {
-					if (value == null) return 'NULL';
-
-					return value.toString();
-				}
+				display: toDisplay
 			}
 		}
 		else {
 			this[key] = strategy;
+			if (!strategy.hasOwnProperty('display')){
+				strategy.display = toDisplay;
+			}
 		}
 	},
 
@@ -41,7 +46,8 @@ var builders = {
 
 	toText: function(arg){
 		var builder = this.findEditor(arg.cell.editor);
-		return builder.display(arg);
+
+		return builder.display(arg.cell.key, arg.value);
 	}
 };
 
