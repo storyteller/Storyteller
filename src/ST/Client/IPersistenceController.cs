@@ -16,5 +16,6 @@ namespace ST.Client
         void ChangeLifecycle(string[] idList, Lifecycle lifecycle);
         void ClearAllResults();
         void ReloadHierarchy();
+        void UpdateMaximumRetries(string id, int number);
     }
 }

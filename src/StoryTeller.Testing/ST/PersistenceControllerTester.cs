@@ -268,6 +268,18 @@ namespace StoryTeller.Testing.ST
         }
 
         [Test]
+        public void update_the_maximum_retries_for_a_spec()
+        {
+            ClassUnderTest.UpdateMaximumRetries("general5", 11);
+
+            var node = ClassUnderTest.Hierarchy.Nodes["general5"];
+            XmlReader.ReadFromFile(node.Filename).MaxRetries.ShouldBe(11);
+
+            ClassUnderTest.UpdateMaximumRetries("general5", 3);
+            XmlReader.ReadFromFile(node.Filename).MaxRetries.ShouldBe(3);
+        }
+
+        [Test]
         public void add_a_suite_to_the_parent()
         {
             Services.PartialMockTheClassUnderTest();

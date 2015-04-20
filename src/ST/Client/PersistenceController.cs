@@ -340,6 +340,13 @@ namespace ST.Client
             }
         }
 
+        public void UpdateMaximumRetries(string id, int number)
+        {
+            if (id.IsEmpty()) return;
+            var changed = SaveSpecHeader(id, x => x.MaxRetries = number);
+            _client.SendMessageToClient(changed);
+        }
+
         public void UpdateHierarchyInClientAndEngine()
         {
             var message = new HierarchyLoaded
