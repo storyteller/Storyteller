@@ -62,7 +62,7 @@ namespace StoryTeller.Testing
 
         
         
-        [Test, Explicit("Failing on CI, don't know why yet")]
+        [Test]
         public void Composite_with_errors()
         {
             running("Composite with Errors").ShouldEqual(2, 3, 1, 2);
@@ -75,14 +75,14 @@ namespace StoryTeller.Testing
             running("Decision Table").ShouldEqual(2, 2, 0, 0);
         }
         
-        [Test, Explicit("Failing on CI, don't know why yet")]
+        [Test]
         public void embeds()
         {
             running("Embeds").ShouldEqual(2, 1, 2, 1);
         }
 
 
-        [Test, Explicit("Failing on CI, don't know why yet")]
+        [Test]
         public void Facts()
         {
             running("Facts").ShouldEqual(1, 1, 1, 0);
@@ -159,6 +159,11 @@ namespace StoryTeller.Testing
             running("Set with Error").ShouldEqual(0, 0, 1, 0);
 
             Step("1").StatusWas(ResultStatus.error);
+
+            var results = theContext.Results.OfType<StepResult>().Where(x => x.id == "1");
+            var result = results.Single(x => "before".Equals(x.position));
+            result.ShouldNotBeNull();
+
         }
         
         [Test]
@@ -171,6 +176,17 @@ namespace StoryTeller.Testing
         public void Table_with_Errors()
         {
             running("Tables with Errors").ShouldEqual(0, 0, 2, 0);
+
+            Step("before").StatusWas(ResultStatus.error);
+            Step("after").StatusWas(ResultStatus.error);
+
+            theContext.Results.OfType<StepResult>()
+                .Where(x => x.id == "before").Single().position.ShouldBe("before");
+
+            theContext.Results.OfType<StepResult>()
+                .Where(x => x.id == "after").Single().position.ShouldBe("after");
+            
+            
         }
         
         [Test]

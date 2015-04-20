@@ -92,19 +92,19 @@ module.exports = React.createClass({
 	// smelly, but oh well
 	gotoResults: function(){
 		if (this.props.mode != 'results'){
-			window.location = '#/spec/results/' + this.state.id;
+			window.location = '#/spec/results/' + this.props.id;
 		}
 	},
 
 	gotoPreview: function(){
 		if (this.props.mode != 'preview'){
-			window.location = '#/spec/preview/' + this.state.id;
+			window.location = '#/spec/preview/' + this.props.id;
 		}
 	},
 
 	gotoEditor: function(){
 		if (this.props.mode != 'editing'){
-			window.location = '#/spec/editing/' + this.state.id;
+			window.location = '#/spec/editing/' + this.props.id;
 		}
 	},
 

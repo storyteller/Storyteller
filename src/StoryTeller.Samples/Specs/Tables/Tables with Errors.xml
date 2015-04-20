@@ -2,12 +2,12 @@
 <Test name="Tables with Errors" lifecycle="Acceptance" id="table4">
   <Table>
     <BeforeThrowsError>
-      <Rows>
+      <Rows id="before">
         <Rows x="11" />
       </Rows>
     </BeforeThrowsError>
     <AfterThrowsError>
-      <Rows>
+      <Rows id="after">
         <Rows x="22" />
       </Rows>
     </AfterThrowsError>
