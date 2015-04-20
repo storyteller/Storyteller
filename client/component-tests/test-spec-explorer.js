@@ -30,7 +30,7 @@ describe('Spec Explorer', function(){
 	var component = null;
 	var div = null;
 
-	beforeEach(() => {
+	before(() => {
 		hierarchy = AllSpecData.hierarchy;
 
 		Postal.reset();

@@ -19,10 +19,12 @@ function forRow(id){
 	}
 }
 
-describe('SetVerification Results Display', function(){
-	it('can display matched rows', () => {
+describe('SetVerification Results Display Normal Mode', function(){
+	before(() => {
 		openResultsTo('set1');
+	});
 
+	it('can display matched rows', () => {
 		// See the file Ordered Set.xml in the sample project for the input data
 
 		expect(forRow('2')).to.deep.equal({header: 'Matched', class: 'success'});
@@ -32,14 +34,10 @@ describe('SetVerification Results Display', function(){
 	});
 
 	it('can display missing rows', () => {
-		openResultsTo('set1');
-
 		expect(forRow('11')).to.deep.equal({header: 'Missing', class: 'danger'});
 	});
 
 	it('can show an extra row', () => {
-		openResultsTo('set1');
-
 		var table = $('#9', driver.div);
 		expect(table.length).to.equal(1);
 
@@ -48,6 +46,11 @@ describe('SetVerification Results Display', function(){
 		expect(row.length).to.equal(1);
 	});
 
+
+
+});
+
+describe('SetVerification Results Display when the Fetch Fails', () => {
 	it('can show an error for a set that could not be fetched', () => {
 		openResultsTo('set3');
 
@@ -57,3 +60,4 @@ describe('SetVerification Results Display', function(){
 		expect($('pre', errorRow).html().toString()).to.be.contain('System.NotImplementedException');
 	});
 });
+
