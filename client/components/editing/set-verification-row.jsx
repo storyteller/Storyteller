@@ -49,8 +49,8 @@ var SetVerificationRow = React.createClass({
 
 
 		return (
-			<tr className={status.rowClass}>
-				<td style={cellStyle} className="set-row-status"> {header} </td>
+			<tr id={step.id} className={status.rowClass}>
+				<td style={cellStyle} className="set-row-status" style={{paddingLeft: '10px', paddingRight: '10px'}}>{header}</td>
 				{cells}
 			</tr>
 		);

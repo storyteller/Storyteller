@@ -14,8 +14,6 @@ function SetVerification(metadata){
 			});
 		}
 
-		console.log('actuals are: ' + JSON.stringify(actuals));
-
 		for (var i = 0; i < section.steps.length; i++){
 			var step = section.steps[i];
 			step.order = i + 1;
@@ -36,8 +34,6 @@ function SetVerification(metadata){
 
 		if (this.ordered){
 			orderSteps(section, section.results.wrongOrders);
-
-
 		}
 
 		var width = this.cells.length + 1;
@@ -46,7 +42,7 @@ function SetVerification(metadata){
 		}
 
 		var rows = _.map(section.allErrors(), function(error){
-			return loader.errorRow({width: width, error: error});
+			return loader.errorRow({width: width, error: error, step: section});
 		});
 
 		rows = rows.concat(_.map(section.steps, function(step){

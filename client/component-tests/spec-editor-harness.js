@@ -70,6 +70,7 @@ function IntegrationDriver(fixtureData, mode, results){
 		this.getNode = () => this.editor.getDOMNode();
 		this.presenter = this.editor.presenter;
 		this.spec = this.presenter.spec;
+		this.div = div;
 	}
 
 	this.idFor = function(search){

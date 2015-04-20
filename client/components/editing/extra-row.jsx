@@ -18,7 +18,7 @@ var ExtraRow = React.createClass({
 		}
 
 		return (
-			<tr className="bg-danger">
+			<tr className="bg-danger extra-row">
 				<td className="set-row-status"><i>Extra</i></td>
 				{cells}
 			</tr>
