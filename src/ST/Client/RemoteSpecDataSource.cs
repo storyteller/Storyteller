@@ -22,5 +22,10 @@ namespace ST.Client
         {
             return _controller.LoadSpecification(id).data;
         }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
     }
 }
