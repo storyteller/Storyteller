@@ -92,18 +92,13 @@ namespace StoryTeller.Engine
 
             _engine.CancelRunningSpec(id);
 
-            _observer.SendToClient(new SpecCancelled(id));
         }
 
         public void Receive(CancelAllSpecs message)
         {
             _engine.CancelRunningSpec(null);
 
-            OutstandingRequests().Each(x =>
-            {
-                x.Cancel();
-                _observer.SendToClient(new SpecCancelled(x.Id));
-            });
+            OutstandingRequests().Each(x => x.Cancel());
 
             _outstanding.Clear();
             SendQueueState();

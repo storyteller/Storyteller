@@ -180,12 +180,6 @@ namespace StoryTeller.Testing.Engine
         }
 
         [Test]
-        public void should_send_spec_cancelled_message()
-        {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("embeds")));
-        }
-
-        [Test]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
@@ -228,15 +222,6 @@ namespace StoryTeller.Testing.Engine
             theOutstandingRequests.Count().ShouldBe(4);
 
             ClassUnderTest.Receive(new CancelAllSpecs());
-        }
-
-        [Test]
-        public void should_send_a_spec_cancelled_message_for_each_queued_spec()
-        {
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("embeds")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence1")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence2")));
-            MockFor<IUserInterfaceObserver>().AssertWasCalled(x => x.SendToClient(new SpecCancelled("sentence3")));
         }
 
         [Test]
