@@ -14,5 +14,7 @@ namespace ST.Client
         SpecData LoadSpecification(string id);
         void AddSuite(string parent, string name);
         void ChangeLifecycle(string[] idList, Lifecycle lifecycle);
+        void ClearAllResults();
+        void ReloadHierarchy();
     }
 }

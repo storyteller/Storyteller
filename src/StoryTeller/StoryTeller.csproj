@@ -187,6 +187,7 @@
     <Compile Include="Messages\AddSuite.cs" />
     <Compile Include="Messages\CancelAllSpecs.cs" />
     <Compile Include="Messages\CancelSpec.cs" />
+    <Compile Include="Messages\ClearAllResults.cs" />
     <Compile Include="Messages\ClientMessage.cs" />
     <Compile Include="Messages\CloneSpec.cs" />
     <Compile Include="Messages\ForceRecycle.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Messages\MarkAsRegression.cs" />
     <Compile Include="Messages\PassthroughMessage.cs" />
     <Compile Include="Messages\QueueState.cs" />
+    <Compile Include="Messages\ReloadSpecs.cs" />
     <Compile Include="Messages\RunSpec.cs" />
     <Compile Include="Messages\RunSpecs.cs" />
     <Compile Include="Messages\RuntimeError.cs" />

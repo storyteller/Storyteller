@@ -211,6 +211,15 @@ namespace ST.Client
             ReloadHierarchy();
         }
 
+        public void ClearAllResults()
+        {
+            _lock.Write(() =>
+            {
+                _hierarchy.Nodes.Each(node => node.results = null);
+                UpdateHierarchyInClientAndEngine();
+            });
+        }
+
         public virtual SpecNodeChanged SaveSpecHeader(string id, Action<Specification> alteration)
         {
             return _lock.Read(() =>
@@ -322,19 +331,24 @@ namespace ST.Client
                     });
 
 
-                    var message = new HierarchyLoaded
-                    {
-                        hierarchy = _hierarchy.Top
-                    };
-
-                    _client.SendMessageToClient(message);
-                    _engine.SendMessage(message);
+                    UpdateHierarchyInClientAndEngine();
                 });
             }
             catch (Exception e)
             {
                 _logger.Error("Failed to reload the spec hierarchy", e);
             }
+        }
+
+        public void UpdateHierarchyInClientAndEngine()
+        {
+            var message = new HierarchyLoaded
+            {
+                hierarchy = _hierarchy.Top
+            };
+
+            _client.SendMessageToClient(message);
+            _engine.SendMessage(message);
         }
 
         public void Added(string file)

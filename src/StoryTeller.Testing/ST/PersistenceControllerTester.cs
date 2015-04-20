@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Bottles.Configuration;
 using FubuCore;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -10,6 +11,7 @@ using ST.Client;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.ST
@@ -57,6 +59,28 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].results
                 .ShouldBeTheSameAs(completed.Results);
+        }
+
+        [Test]
+        public void clear_all_results()
+        {
+            ClassUnderTest.Receive(new SpecExecutionCompleted("sentence4", new SpecResults()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("general1", new SpecResults()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("general2", new SpecResults()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("table1", new SpecResults()));
+        
+            ClassUnderTest.ClearAllResults();
+
+            ClassUnderTest.Hierarchy.Nodes.Each(node => node.results.ShouldBeNull());
+
+            var hierarchyLoaded = new HierarchyLoaded
+            {
+                hierarchy = ClassUnderTest.Hierarchy.Top
+            };
+
+            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(hierarchyLoaded));
+
+            MockFor<IRemoteController>().AssertWasCalled(x => x.SendMessage(hierarchyLoaded));
         }
 
         [Test]
