@@ -46,14 +46,16 @@ module.exports = React.createClass({
 	},
 
 	render: function(){
-		var onRecycle = e => {
-			Postal.publish({
-				channel: 'engine-request',
-				topic: 'force-recycle',
-				data: {}
-			});
-			
-			return e.preventDefault();
+		var toCommand = topic => {
+			return e => {
+				Postal.publish({
+					channel: 'engine-request',
+					topic: topic,
+					data: {}
+				});
+				
+				return e.preventDefault();
+			}
 		}
 
 		var name = this.state.name;
@@ -73,9 +75,9 @@ module.exports = React.createClass({
 				          <NavItem eventKey="1" href="#/language">Fixtures and Grammars</NavItem>
 				          <NavItem eventKey="2" href="#/docs">Documentation</NavItem>
 				        <DropdownButton eventKey={1} title="Commands">
-				          <NavItem eventKey="1" id="force-recycle" onClick={onRecycle}>Recycle System</NavItem>
-				          <NavItem eventKey="2" >Reload Spec from Disk</NavItem>
-				          <NavItem eventKey="2" >Clear All Results</NavItem>
+				          <NavItem eventKey="1" id="force-recycle" onClick={toCommand('force-recycle')}>Recycle System</NavItem>
+				          <NavItem eventKey="2" onClick={toCommand('reload-specs')}>Reload All Specs from Disk</NavItem>
+				          <NavItem eventKey="2" onClick={toCommand('clear-all-results')}>Clear All Results</NavItem>
 				        </DropdownButton>
 					</Nav>
 				</Navbar>

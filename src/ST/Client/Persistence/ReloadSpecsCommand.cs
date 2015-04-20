@@ -4,7 +4,7 @@ using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {
-    public class ReloadSpecsCommand : Command<ClearAllResults>
+    public class ReloadSpecsCommand : Command<ReloadSpecs>
     {
         private readonly Lazy<IPersistenceController> _controller;
 
@@ -13,7 +13,7 @@ namespace ST.Client.Persistence
             _controller = controller;
         }
 
-        public override void HandleMessage(ClearAllResults message)
+        public override void HandleMessage(ReloadSpecs message)
         {
             _controller.Value.ReloadHierarchy();
         }
