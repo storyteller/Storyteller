@@ -44,6 +44,7 @@ namespace StoryTeller.Grammars
             {
                 Subject = Key + ":Before"
             };
+
             return new CompositeExecution(new IExecutionStep[]{silentAction, sectionPlan});
         }
 

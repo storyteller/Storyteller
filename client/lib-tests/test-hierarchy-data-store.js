@@ -382,7 +382,7 @@ describe('Hierarchy data store functions', function(){
 		});
 
 		it('counts the Acceptance specs', function(){
-			expect(summary.acceptance).to.equal(19);
+			expect(summary.acceptance).to.equal(21);
 		});
 
 		it('counts the Regression specs', function(){
@@ -390,7 +390,7 @@ describe('Hierarchy data store functions', function(){
 		});
 
 		it('has the total', function(){
-			expect(summary.total).to.equal(22);
+			expect(summary.total).to.equal(24);
 		});
 
 	});

@@ -106,23 +106,23 @@ describe('Spec Explorer', function(){
 	});
 
 	it('shows the right badge numbers for the lifecycles', function(){
-		expect(badgeText('any-lifecycle')).to.equal('22');
-		expect(badgeText('acceptance-lifecycle')).to.equal('19');
+		expect(badgeText('any-lifecycle')).to.equal('24');
+		expect(badgeText('acceptance-lifecycle')).to.equal('21');
 		expect(badgeText('regression-lifecycle')).to.equal('3');
 	});
 
 	it('shows the badge numbers for status in the initial state', function(){
-		expect(badgeText('status-any')).to.equal('22');
+		expect(badgeText('status-any')).to.equal('24');
 		expect(badgeText('status-success')).to.equal('0');
 		expect(badgeText('status-failed')).to.equal('0');
-		expect(badgeText('status-none')).to.equal('22');
+		expect(badgeText('status-none')).to.equal('24');
 	});
 
 	it('shows the right badge numbers for the results after all are finished', function(){
 		publishResults();
 
-		expect(badgeText('status-any')).to.equal('22');
-		expect(badgeText('status-success')).to.equal('3');
+		expect(badgeText('status-any')).to.equal('24');
+		expect(badgeText('status-success')).to.equal('5');
 		expect(badgeText('status-failed')).to.equal('19');
 		expect(badgeText('status-none')).to.equal('0');
 	});
@@ -132,7 +132,7 @@ describe('Spec Explorer', function(){
 
 		$('#status-success', div).click();
 
-		suitesShownShouldBe(['Sets', 'Tables']);
+		suitesShownShouldBe(['General', 'Sets', 'Tables']);
 	});
 
 	it('can remove the status filter', function(){

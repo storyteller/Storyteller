@@ -2,13 +2,13 @@
   <Embedded id="b1d704cf-6062-40c1-be78-94a8aa901850">
     <ThrowAnExceptionOnTheNextEmbed />
     <EmbeddedMath>
-      <Math id="9b0d699b-e462-4f7f-88e8-ca2053f86061">
+      <Math id="errors">
         <Adding x="5" y="5" returnValue="10" />
       </Math>
     </EmbeddedMath>
     <DoNotThrowAnExceptionOnTheNextEmbed />
     <EmbeddedMath>
-      <Math id="610c8f27-2de5-47a6-abcb-2a646dcf1016">
+      <Math id="no-errors">
         <Adding x="5" y="4" returnValue="9" />
         <Adding x="5" y="5" returnValue="11" />
         <Adding x="5" y="6" returnValue="abc" />

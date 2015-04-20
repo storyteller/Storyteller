@@ -79,6 +79,8 @@ namespace StoryTeller.Testing
         public void embeds()
         {
             running("Embeds").ShouldEqual(2, 1, 2, 1);
+
+            Step("errors").StatusWas(ResultStatus.error);
         }
 
 

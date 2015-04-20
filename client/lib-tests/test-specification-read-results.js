@@ -31,7 +31,10 @@ describe('Specification reading results', function(){
 	});
 
 	it('captures the step results - spot check', function(){
-		var step = specification.find('4cc0fe2a-9acf-448d-8201-bbd33ba55f31');
+		var step = specification.find('errors');
+
+		expect(step).to.not.be.null;
+
 		expect(step.results.before.status).to.equal('error');
 	});
 });

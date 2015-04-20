@@ -77,7 +77,9 @@ namespace StoryTeller.Testing
 
             var json = JsonSerialization.ToIndentedJson(data);
 
-            new FileSystem().WriteStringToFile("all-spec-data.js", "module.exports = " + json);
+            var clientPath = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory().ParentDirectory().AppendPath("client");
+
+            new FileSystem().WriteStringToFile(clientPath.AppendPath("all-spec-data.js"), "module.exports = " + json);
             Debug.WriteLine("Wrote file to all-spec-data.js");
         }
     }
