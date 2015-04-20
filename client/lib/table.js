@@ -185,7 +185,7 @@ class Table extends CompositeGrammar{
 	selectFirst(step){
 		var section = this.readSection(step);
 		if (section.steps.length == 0){
-			return {holder: section, step: this.adder, cell: null};
+			return {holder: section, step: section.adder, cell: section.adder};
 		}
 
 		var step = section.steps[0];

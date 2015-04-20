@@ -85,6 +85,47 @@ describe('Table Grammar', function(){
 
 	});
 
+	it('moves to the row adder position on moveFirst with no rows', function(){
+		var step = table.newStep();
+		var section = table.readSection(step);
+
+		var first = table.selectFirst(step);
+
+		expect(first.holder).to.equal(section);
+		expect(first.step).to.equal(section.adder);
+		expect(first.cell).to.equal(section.adder);
+
+
+
+	});
+
+	it('selects the first cell in the first row if there is a row for selectFirst', () => {
+		var data = {
+			collections: [
+				{
+					key: 'steps',
+					steps: [
+						{cells: {x: 1, y: 2, result: 3}},
+						{cells: {x: 4, y: 5, result: 9}},
+						{cells: {x: 6, y: 7, result: 13}}
+
+					]
+				} 
+			]
+		}
+
+		var step = table.buildStep(data);
+		var section = table.readSection(step);
+		var firstRow = section.steps[0];
+
+		var first = table.selectFirst(step);
+
+		expect(first.holder).to.equal(section);
+		expect(first.step).to.equal(firstRow);
+
+
+	});
+
 	it('can build a step from data', function(){
 		var data = {
 			collections: [
