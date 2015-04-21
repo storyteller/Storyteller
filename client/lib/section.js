@@ -121,10 +121,19 @@ class Section{
 	}
 
 	write(){
+		var steps = this.writeSteps();
+		for (var key in this.activeCells){
+			if (this.activeCells[key] == false){
+				steps.forEach(step => {
+					delete step.cells[key];
+				});
+			}
+		}
+
 		return {
 			key: this.key,
 			type: 'section',
-			steps: this.writeSteps(),
+			steps: steps,
 			id: this.id,
 			activeCells: this.activeCells
 		}

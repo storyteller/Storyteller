@@ -69,6 +69,16 @@ describe('Section', function(){
 		expect(data.steps.length).to.equal(5);
 	});
 
+	it('does not write values for cells that are not used', () => {
+		section.activeCells['x'] = false;
+		var data = section.write();
+
+		expect(data.steps.length).to.equal(5);
+		data.steps.forEach(step => {
+			expect(step.cells.hasOwnProperty('x')).to.be.false;
+		});
+	});
+
 
 	it('should connect the grammar to each child step', function(){
 		expect(section.steps[0].grammar.key).to.equal('StartWith');
