@@ -76,7 +76,13 @@ class Table extends CompositeGrammar{
 
 		this.title = metadata.title;
 		this.cells = metadata.cells;
-		this.optionals = metadata.cells.filter(x => x.default != null && x.default != undefined).map(x => x.key);
+		this.optionals = metadata.cells.filter(x => x.default != null && x.default != undefined)
+			.map(x => {
+				return {
+					header: x.header || x.key,
+					key: x.key
+				}
+			});
 
 	}
 
@@ -210,8 +216,9 @@ class Table extends CompositeGrammar{
 	optionalCells(section){
 		return this.optionals.map(x => {
 			return {
-				cell: x,
-				active: section.isCellActive(x)
+				cell: x.key,
+				header: x.header,
+				active: section.isCellActive(x.key)
 			};
 		});
 	}

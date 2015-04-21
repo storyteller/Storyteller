@@ -13,7 +13,7 @@ describe('Table Grammar and Active Cells', () => {
 			{key: 'v', title: 'Operand 2', description: 'The first operand for addition'},
 			{key: 'x', default: 1, title: 'Operand 3', description: 'The first operand for addition'},
 			{key: 'y', default: 2, title: 'Operand 4', description: 'The second operand for addition'},
-			{key: 'z', default: 3, title: 'Operand 5', description: 'The expected result'},
+			{key: 'z', default: 3, header: 'Zorro', title: 'Operand 5', description: 'The expected result'},
 		]
 	};
 
@@ -30,9 +30,9 @@ describe('Table Grammar and Active Cells', () => {
 		var optionals = table.optionalCells(section);
 
 		expect(optionals).to.deep.equal([
-			{cell: 'x', active: true},
-			{cell: 'y', active: true},
-			{cell: 'z', active: true}
+			{cell: 'x', header: 'x', active: true},
+			{cell: 'y', header: 'y', active: true},
+			{cell: 'z', header: 'Zorro', active: true}
 		]);
 	});
 
@@ -43,9 +43,9 @@ describe('Table Grammar and Active Cells', () => {
 		var optionals = table.optionalCells(section);
 
 		expect(optionals).to.deep.equal([
-			{cell: 'x', active: false},
-			{cell: 'y', active: true},
-			{cell: 'z', active: false}
+			{cell: 'x', header: 'x', active: false},
+			{cell: 'y', header: 'y', active: true},
+			{cell: 'z', header: 'Zorro', active: false}
 		]);
 	});
 });
