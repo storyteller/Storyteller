@@ -60,9 +60,13 @@ describe('Table Grammar', function(){
 
 	it('can build its contextual control', function(){
 		var section = {};
+		var optionals = {};
+		table.optionalCells = section => optionals;
 		var control = table.fixture.contextualControl(section, loader);
 
-		expect(control).to.deep.equal({type: 'tableContext', props: {table: table, section: section}});
+
+
+		expect(control).to.deep.equal({type: 'tableContext', props: {table: table, section: section, optionals: optionals}});
 	});
 
 	it('should capture the key', function(){
