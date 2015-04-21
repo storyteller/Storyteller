@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using FubuCore;
 using FubuCore.Configuration;
@@ -24,18 +25,24 @@ namespace StoryTeller.Model.Persistence
         {
             var sectionElement = parent.AddElement(section.Key);
             sectionElement.SetAttribute(XmlConstants.Id, section.id);
-            sectionElement.SetAttribute(XmlConstants.ActiveCells, section.ActiveCells.Join(","));
+
+            if (section.ActiveCells.Count > 0)
+            {
+                var activeCellString = section.ActiveCells.Select(x => "{0}={1}".ToFormat(x.Key, x.Value)).Join(",");
+                sectionElement.SetAttribute(XmlConstants.ActiveCells, activeCellString);
+            }
+
 
             section.Children.Each(child =>
             {
                 if (child is Comment)
                 {
-                    sectionElement.WriteComment(TypeExtensions.As<Comment>(child));
+                    sectionElement.WriteComment(child.As<Comment>());
                 }
 
                 if (child is Step)
                 {
-                    sectionElement.WriteStep(TypeExtensions.As<Step>(child));
+                    sectionElement.WriteStep(child.As<Step>());
                 }
             });
         }

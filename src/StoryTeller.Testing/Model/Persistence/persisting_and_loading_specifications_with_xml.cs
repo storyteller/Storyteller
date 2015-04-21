@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Shouldly;
@@ -94,15 +95,18 @@ namespace StoryTeller.Testing.Model.Persistence
             var section = new Section("Math")
             {
                 id = Guid.NewGuid().ToString(), 
-                ActiveCells = new[] {"a", "b", "c"}
             };
+
+            section.ActiveCells.Add("A", true);
+            section.ActiveCells.Add("B", false);
 
             original.Children.Add(section);
 
             var persistedSection = persisted.Children.Single().ShouldBeOfType<Section>();
             persistedSection.id.ShouldBe(section.id);
             persistedSection.Key.ShouldBe(section.Key);
-            persistedSection.ActiveCells.ShouldBe(section.ActiveCells);
+            persistedSection.ActiveCells["A"].ShouldBeTrue();
+            persistedSection.ActiveCells["B"].ShouldBeFalse();
         }
 
         [Test]

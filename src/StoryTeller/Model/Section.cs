@@ -28,12 +28,12 @@ namespace StoryTeller.Model
             get { return _children; }
         }
 
-        private string[] _activeCells;
+        private IDictionary<string, bool> _activeCells = new Dictionary<string, bool>();
 
         [JsonProperty("activeCells")]
-        public string[] ActiveCells
+        public IDictionary<string, bool> ActiveCells
         {
-            get { return _activeCells ?? new string[0]; }
+            get { return _activeCells ?? new Dictionary<string, bool>(); }
             set { _activeCells = value; }
         }
 

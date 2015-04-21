@@ -69,7 +69,15 @@ namespace StoryTeller.Model.Persistence
 
             if (element.HasAttribute(ActiveCells))
             {
-                section.ActiveCells = element.GetAttribute(ActiveCells).ToDelimitedArray(',');
+                var text = element.GetAttribute(ActiveCells);
+                if (!text.IsEmpty())
+                {
+                    text.Split(',').Each(str =>
+                    {
+                        var parts = str.Split('=');
+                        section.ActiveCells.Add(parts[0], bool.Parse(parts[1]));
+                    });
+                }
             }
 
             element.ForEachElement(child =>
