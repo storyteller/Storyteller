@@ -18,6 +18,7 @@ var Icons = require('./../icons');
 var Running = Icons['running'];
 var Persisting = require('./persisting');
 var SpecResultHeader = require('./spec-result-header');
+var RetryCount = require('./retry-count');
 
 
 var LifecycleButton = require('./lifecycle-button');
@@ -212,6 +213,7 @@ module.exports = React.createClass({
 				</Row>
 				<Row>
 					<Col xs={4} md={4}>
+						<RetryCount count={this.state.retryCount}/>
 						<h4>Outline</h4>
 						<SpecOutline outline={this.state.outline} />
 						<br />
