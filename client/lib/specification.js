@@ -15,6 +15,7 @@ function Specification(data, library){
 	this.type = 'specification';
 	this.results = {};
 	this.active = false;
+	this['max-retries'] = data['max-retries'];
 
 	this.navigator = new SpecificationNavigator(this);
 
@@ -32,7 +33,8 @@ function Specification(data, library){
 		return {
 			title: this.title,
 			steps: this.writeSteps(),
-			id: this.id
+			id: this.id,
+			'max-retries': this['max-retries']
 		}
 	}
 

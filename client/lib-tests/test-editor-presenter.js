@@ -74,6 +74,28 @@ describe('EditorPresenter', function(){
 		view = new FakeView();
 	})
 
+	describe('when refreshing the editor with data', () => {
+		var presenter = new EditorPresenter('spec1');
+
+		beforeEach(function(){
+			var specData = ObjectMother.specData();
+			specData['max-retries'] = 3;
+			SpecificationStore.storeData('spec1', specData);
+			view = new FakeView();
+			presenter.activate(loader, view);
+			
+
+		});
+
+		afterEach(() => {
+			presenter.deactivate();
+		});
+
+		it('should write the retryCount to the view', () => {
+			expect(view.state.retryCount).to.equal(3);
+		});
+	});
+
 	describe('when activating a new editor that has no data', function(){
 		var presenter = new EditorPresenter('spec1');
 

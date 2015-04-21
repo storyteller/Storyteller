@@ -31,6 +31,7 @@ describe('Specification', function(){
 	describe('when building a specification from data', function(){
 		var specData = {
 			id: 1,
+			'max-retries': 2,
 			title: 'My first specification',
 			steps: [
 				{
@@ -60,6 +61,10 @@ describe('Specification', function(){
 
 		var library = new FixtureLibrary(fixtureData);
 		var specification = new Specification(specData, library);
+
+		it('grabs the max retries', () => {
+			expect(specification['max-retries']).to.equal(2);
+		});
 
 		it('can create an outline of holders', function(){
 			var expected = {

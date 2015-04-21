@@ -120,6 +120,7 @@ module.exports = React.createClass({
 			persisting: false,
 			lastSaved: null,
 			contextualControl: null,
+			retryCount: 0,
 			header: {hasResults: function(){
 				return false;
 			}}

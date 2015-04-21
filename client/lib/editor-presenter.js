@@ -112,7 +112,8 @@ class EditorPresenter{
 				loading: false,
 				header: Hierarchy.findSpec(this.id),
 				undoEnabled: (counts.applied > 0),
-				redoEnabled: (counts.unapplied > 0)
+				redoEnabled: (counts.unapplied > 0),
+				retryCount: this.spec['max-retries']
 			});
 		}
 		else{
