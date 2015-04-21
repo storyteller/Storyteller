@@ -91,12 +91,18 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void read_and_write_a_section_under_a_spec()
         {
-            var section = new Section("Math") {id = Guid.NewGuid().ToString()};
+            var section = new Section("Math")
+            {
+                id = Guid.NewGuid().ToString(), 
+                ActiveCells = new[] {"a", "b", "c"}
+            };
+
             original.Children.Add(section);
 
             var persistedSection = persisted.Children.Single().ShouldBeOfType<Section>();
             persistedSection.id.ShouldBe(section.id);
             persistedSection.Key.ShouldBe(section.Key);
+            persistedSection.ActiveCells.ShouldBe(section.ActiveCells);
         }
 
         [Test]

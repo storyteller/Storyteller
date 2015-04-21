@@ -24,6 +24,7 @@ namespace StoryTeller.Model.Persistence
         {
             var sectionElement = parent.AddElement(section.Key);
             sectionElement.SetAttribute(XmlConstants.Id, section.id);
+            sectionElement.SetAttribute(XmlConstants.ActiveCells, section.ActiveCells.Join(","));
 
             section.Children.Each(child =>
             {

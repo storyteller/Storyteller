@@ -62,7 +62,15 @@ namespace StoryTeller.Model.Persistence
 
         public static Section ReadSection(XmlElement element)
         {
-            var section = new Section(element.Name) {id = element.GetAttribute(Id)};
+            var section = new Section(element.Name)
+            {
+                id = element.GetAttribute(Id)
+            };
+
+            if (element.HasAttribute(ActiveCells))
+            {
+                section.ActiveCells = element.GetAttribute(ActiveCells).ToDelimitedArray(',');
+            }
 
             element.ForEachElement(child =>
             {

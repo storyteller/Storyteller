@@ -28,6 +28,15 @@ namespace StoryTeller.Model
             get { return _children; }
         }
 
+        private string[] _activeCells;
+
+        [JsonProperty("activeCells")]
+        public string[] ActiveCells
+        {
+            get { return _activeCells ?? new string[0]; }
+            set { _activeCells = value; }
+        }
+
         public Section(string key)
         {
             Key = key;

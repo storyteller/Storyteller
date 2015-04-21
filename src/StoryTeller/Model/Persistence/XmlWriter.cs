@@ -23,12 +23,12 @@ namespace StoryTeller.Model.Persistence
             {
                 if (child is Comment)
                 {
-                    root.WriteComment(TypeExtensions.As<Comment>(child));
+                    root.WriteComment(child.As<Comment>());
                 }
 
                 if (child is Section)
                 {
-                    root.WriteSection(TypeExtensions.As<Section>(child));
+                    root.WriteSection(child.As<Section>());
                 }
             });
         }

@@ -9,5 +9,7 @@ namespace StoryTeller.Model.Persistence
         public const string Comment = "Comment";
         public const string Spec = "Spec";
         public const string Name = "name";
+        public const string ActiveCells = "active-cells";
     }
+
 }
