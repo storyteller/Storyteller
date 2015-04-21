@@ -12,6 +12,7 @@ class Arg{
 		this.changed = false;
 		this.data = data;
 		this.editing = false;
+		this.usage = 'visible';
 
 		this.value = data.cells[this.key] || cell.default;
 		this.id = id
@@ -21,7 +22,14 @@ class Arg{
 		}
 	}
 
-
+	toggleUsage(){
+		if (this.usage == 'visible'){
+			this.usage = 'hidden';
+		}
+		else {
+			this.usage = 'visible';
+		}
+	}
 
 	static isMissing(props){
 		return props.value == null && props.cell.default == null;
