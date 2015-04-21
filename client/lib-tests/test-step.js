@@ -131,23 +131,6 @@ describe('Step', function(){
 		expect(data).to.deep.equal({id: step.id, key: 'foo', cells: {A: 4, B: 2, C: 3}});
 	});
 
-	it('should put the id in the packed data', function(){
-		var cells = [new Cell('A'), new Cell('B'), new Cell('C')];
-		var data = {key: 'foo', cells: {
-			A: 1,
-			B: 2,
-			C: 3
-		}};
-
-		var step = new Step(data, cells);
-
-		step.args.find('A').value = 4;
-
-		var data = step.pack();
-
-		expect(data).to.deep.equal({id: step.id, key: 'foo', cells: {A: 4, B: 2, C: 3}});
-	});
-
 	describe('when finding items by path', function(){
 		var step = null;
 

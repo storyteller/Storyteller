@@ -275,11 +275,13 @@ class EditorPresenter{
 
 	run(){
 		applyOutstandingChanges();
-
+for (var key in this.spec){
+	console.log(key);
+}
 		Postal.publish({
 			channel: 'engine-request',
 			topic: 'run-spec',
-			data: {id: this.id, spec: this.spec.pack()}
+			data: {id: this.id, spec: this.spec.write()}
 		});
 
 		this.view.gotoResults();

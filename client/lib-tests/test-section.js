@@ -40,14 +40,6 @@ describe('Section', function(){
 		expect(data.steps.length).to.equal(5);
 	});
 
-	it('can pack data for execution', function(){
-		var data = section.pack();
-
-		expect(data.id).to.equal(section.id);
-		expect(data.type).to.equal('section');
-
-		expect(data.steps.length).to.equal(5);
-	});
 
 	it('should connect the grammar to each child step', function(){
 		expect(section.steps[0].grammar.key).to.equal('StartWith');

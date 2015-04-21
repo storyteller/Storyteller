@@ -80,14 +80,6 @@ function StepHolder(id, fixture, addText){
 		self.steps = new ArrayList();
 	}
 
-	self.packSteps = function(){
-		return _.map(self.steps, function(step){
-			return step.pack();
-		}).filter(function(x){
-			return x != null;
-		});
-	}
-
 	self.writeSteps = function(){
 		return _.map(self.steps, function(step){
 			return step.write();

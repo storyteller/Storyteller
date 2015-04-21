@@ -108,11 +108,6 @@ describe('Specification', function(){
 			expect(data).to.deep.equal(specData);
 		});
 
-		it('should be able to pack data for execution', function(){
-			var data = specification.pack();
-
-			expect(data.steps.length).to.equal(2);
-		});
 	});
 
 

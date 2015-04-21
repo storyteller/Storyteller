@@ -115,26 +115,6 @@ class Step{
 		return data;
 	}
 
-	// TODO -- get rid of the duplication in writing sections
-	pack(){
-		var data = {key: this.key, cells: {}, id: this.id};
-		this.args.store(data);
-		data.id = this.id;
-
-		if (_.keys(this.collections).length > 0){
-			data.collections = [];
-
-			for (var key in this.collections){
-				var section = this.collections[key];
-
-				var sectionData = section.write();
-			
-				data.collections.push(sectionData);
-			}
-		}
-		
-		return data;
-	}
 
 	findValue(key){
 		var arg = this.args.find(key);

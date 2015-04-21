@@ -38,13 +38,6 @@ function Specification(data, library){
 		}
 	}
 
-	this.pack = function(){
-		return {
-			id: this.id,
-			steps: this.packSteps()
-		}
-	}
-
 	this.previews = function(loader){
 		return this.buildComponents(x => x.preview(loader));
 	}

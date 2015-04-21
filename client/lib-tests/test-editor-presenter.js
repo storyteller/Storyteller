@@ -698,14 +698,14 @@ describe('EditorPresenter', function(){
 		var spec = null;
 		var presenter = null;
 		var view = null;
-		var thePackedData = {};
+		var theWrittenData = {};
 		var message;
 		var navigatedToResults = false;
 
 		beforeEach(function(){
 			spec = {
-				pack: function(){
-					return thePackedData;
+				write: function(){
+					return theWrittenData;
 				},
 
 				revision: function(){
@@ -753,7 +753,7 @@ describe('EditorPresenter', function(){
 
 			expect(message).to.deep.equal({
 				id: spec.id,
-				spec: thePackedData,
+				spec: theWrittenData,
 				channel: 'engine-request',
 				topic: 'run-spec'
 			});

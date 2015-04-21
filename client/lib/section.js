@@ -101,23 +101,12 @@ class Section{
 		return this.steps;
 	}
 
-	// for persistence
 	write(){
 		return {
 			key: this.key,
 			type: 'section',
 			steps: this.writeSteps(),
 			id: this.id
-		}
-	}
-
-	// for execution
-	pack(){
-		return {
-			key: this.key,
-			id: this.id,
-			type: 'section',
-			steps: this.packSteps()
 		}
 	}
 
