@@ -14,7 +14,7 @@ describe('Section', function(){
 		id: 1,
 		type: 'section',
 		key: 'Math', 
-		activeCells: ['a', 'b', 'c'],
+		activeCells: {a: true, b: 'false', c: 'true', d: false, e: 'True'},
 		steps: [
 			{key: 'StartWith', cells: {x: 1}},
 			{key: 'Add', cells: {x: 5}},
@@ -31,8 +31,24 @@ describe('Section', function(){
 		expect(section.isHolder()).to.be.true;
 	});
 
-	it('copies the activeCells from the raw data', () => {
-		expect(section.activeCells).to.deep.equal(['a', 'b', 'c']);
+	it('knows if a cell is active for an explicit value', () => {
+		expect(section.isCellActive('a')).to.be.true;
+		expect(section.isCellActive('b')).to.be.false;
+
+	});
+
+	it('a cell with no explicit active setting is assumed to be active', () => {
+		expect(section.isCellActive('g')).to.be.true;
+	});
+
+	it('massages the activeCells from the raw data', () => {
+		expect(section.activeCells).to.deep.equal({
+			a: true,
+			b: false,
+			c: true,
+			d: false,
+			e: true
+		});
 	});
 
 	it('can write for persistence', function(){
@@ -42,7 +58,13 @@ describe('Section', function(){
 		expect(data.hasOwnProperty('id')).to.be.true;
 		expect(data.type).to.equal('section');
 
-		expect(data.activeCells).to.deep.equal(['a', 'b', 'c']);
+		expect(data.activeCells).to.deep.equal({
+			a: true,
+			b: false,
+			c: true,
+			d: false,
+			e: true
+		});
 
 		expect(data.steps.length).to.equal(5);
 	});

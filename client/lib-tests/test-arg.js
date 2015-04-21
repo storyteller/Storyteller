@@ -15,34 +15,26 @@ describe('Arg', function(){
 		expect(arg.key).to.equal('foo');
 	});
 
-	it('should have a usage of visible by default', () => {
+	it('has a default positive', () => {
 		var cell = new Cell('foo');
+		cell.default = 'what?';
+
 		var step = {cells:{foo: 'A'}};
 
 		var arg = new Arg(cell, step, 1);
-		expect(arg.usage).to.equal('visible');
+
+		expect(arg.hasDefault()).to.be.true;
 	});
 
-	it('toggleUsage from visible', () => {
+	it('has a default negative', () => {
 		var cell = new Cell('foo');
+		cell.default = null;
+
 		var step = {cells:{foo: 'A'}};
 
 		var arg = new Arg(cell, step, 1);
-		arg.toggleUsage();
 
-		expect(arg.usage).to.equal('hidden');
-	});
-
-	it('toggleUsage from hidden', () => {
-		var cell = new Cell('foo');
-		var step = {cells:{foo: 'A'}};
-
-		var arg = new Arg(cell, step, 1);
-		arg.usage = 'hidden';
-
-		arg.toggleUsage();
-
-		expect(arg.usage).to.equal('visible');
+		expect(arg.hasDefault()).to.be.false;
 	});
 
 	it('uses text as the default editor if none', function(){

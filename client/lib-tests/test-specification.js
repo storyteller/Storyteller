@@ -38,7 +38,7 @@ describe('Specification', function(){
 					id: 'section1',
 					type: 'section',
 					key: 'Math', 
-					activeCells: [],
+					activeCells: {},
 					steps: [
 						{id: 2, key: 'StartWith', cells: {x: 1}},
 						{id: 3, key: 'Add', cells: {x: 5}},
@@ -52,7 +52,7 @@ describe('Specification', function(){
 				{
 					id: 'section2',
 					type: 'section',
-					activeCells: [],
+					activeCells: {},
 					key: 'Math', 
 					steps: [
 						{id: 9, key: 'Adding', cells:{x:1, y:2, result:3}}

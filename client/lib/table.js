@@ -4,6 +4,7 @@ var StepHolder = require('./step-holder');
 var changes = require('./change-commands');
 var Postal = require('postal');
 var _ = require('lodash');
+var Section = require('./section');
 
 
 class Table extends CompositeGrammar{
@@ -74,7 +75,7 @@ class Table extends CompositeGrammar{
 
 		this.title = metadata.title;
 		this.cells = metadata.cells;
-
+		this.optionals = metadata.cells.filter(x => x.default != null && x.default != undefined).map(x => x.key);
 
 	}
 
@@ -201,18 +202,17 @@ class Table extends CompositeGrammar{
 	}
 
 	selectLast(step){
-
-
 		var section = this.readSection(step);
 		return {holder: section, step: section.adder, cell: null};
-/*
-		if (section.steps.length == 0){
-			return {holder: section, step: null, cell: null};
-		}
+	}
 
-		var step = _.last(section.steps);
-		return step.selectLast();
-*/
+	optionalCells(section){
+		return this.optionals.map(x => {
+			return {
+				cell: x,
+				active: section.isCellActive(x)
+			};
+		});
 	}
 }
 

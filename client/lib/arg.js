@@ -12,7 +12,6 @@ class Arg{
 		this.changed = false;
 		this.data = data;
 		this.editing = false;
-		this.usage = 'visible';
 
 		this.value = data.cells[this.key] || cell.default;
 		this.id = id
@@ -52,6 +51,10 @@ class Arg{
 		if (!data.cells) data.cells = {};
 
 		data.cells[this.key] = this.value || this.cell.default;
+	}
+
+	hasDefault(){
+		return this.cell.default != null && this.cell.default != undefined;
 	}
 
 	buildResults(loader){

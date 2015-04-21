@@ -23,12 +23,30 @@ class Section{
 		this.fixture = fixture;
 		this.title = this.fixture.title;
 		this.results = {};
-		this.activeCells = data.activeCells || [];
+
+		var activeCells = data.activeCells || {};
+		this.activeCells = {};
+		for (var key in activeCells){
+			var raw = activeCells[key];
+			if (raw == true || raw.toString().toLowerCase() == 'true'){
+				this.activeCells[key] = true;
+			}
+			else {
+				this.activeCells[key] = false;
+			}
+		}
 
 		this.readSteps(data);
 	}
 
-
+	isCellActive(key){
+		if (this.activeCells.hasOwnProperty(key)){
+			return this.activeCells[key];
+		}
+		else {
+			return true;
+		}
+	}
 
 	clearResults(){
 		this.results = {};
