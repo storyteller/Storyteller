@@ -39,6 +39,10 @@ class Section{
 		this.readSteps(data);
 	}
 
+	toggleColumn(key){
+		this.activeCells[key] = !this.isCellActive(key);
+	}
+
 	isCellActive(key){
 		if (this.activeCells.hasOwnProperty(key)){
 			return this.activeCells[key];

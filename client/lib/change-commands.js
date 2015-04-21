@@ -25,6 +25,17 @@ function CellChange(id, cell, value){
 	return this;
 }
 
+function ToggleColumn(section, cell){
+	this.section = section;
+	this.cell = cell;
+
+	this.apply = store => {
+		this.section.toggleColumn(cell);
+	}
+
+	this.unapply = this.apply;
+}
+
 function StepMovedUp(parent, step){
 	this.apply = store => {
 		parent.moveUp(step);
@@ -113,6 +124,10 @@ function RetryCountChanged(count){
 
 
 module.exports = {
+	toggleColumn: function(section, cell){
+		return new ToggleColumn(section, cell);
+	},
+
 	changeRetryCount: function(count){
 		return new RetryCountChanged(count);
 	},

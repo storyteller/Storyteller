@@ -69,6 +69,27 @@ describe('Section', function(){
 		expect(data.steps.length).to.equal(5);
 	});
 
+	it('can toggle a column that has no known active cell', () => {
+		section.toggleColumn('ttt');
+
+		expect(section.activeCells['ttt']).to.be.false;
+	});
+
+	it('can toggle a column that explicitly active', () => {
+		section.activeCells['x'] = true;
+
+		section.toggleColumn('x');
+
+		expect(section.isCellActive('x')).to.be.false;
+	});
+
+	it('can toggle a column that is explicitly inactive', () => {
+		section.activeCells['x'] = false;
+		section.toggleColumn('x');
+
+		expect(section.isCellActive('x')).to.be.true;
+	});
+
 	it('does not write values for cells that are not used', () => {
 		section.activeCells['x'] = false;
 		var data = section.write();
