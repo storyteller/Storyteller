@@ -5,6 +5,8 @@ function SetVerification(metadata){
 
 	table.ordered = metadata.ordered;
 
+	table.fixture.contextualControl = (section, loader) => null;
+
 	var orderSteps = function(section, wrongOrders){
 		var actuals = {}
 

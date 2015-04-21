@@ -25,6 +25,8 @@ class Table extends CompositeGrammar{
 
 			contextualControl(section, loader){
 				var optionals = self.optionalCells(section);
+				if (optionals.length == 0) return null;
+
 				return loader.tableContext({table: self, section: section, optionals: optionals});
 			},
 
