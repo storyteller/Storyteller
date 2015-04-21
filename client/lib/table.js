@@ -11,6 +11,25 @@ class Table extends CompositeGrammar{
 	constructor(metadata){
 		var self = this;
 
+		self.findActiveCells = function(step){
+			var section = null;
+			if (step instanceof Section){
+				section = step;
+			}
+			else {
+				section = step.parent;
+			}
+
+			// getting around garbage test data
+			if (!section || !section.isCellActive){
+				return self.cells;
+			}
+
+			return self.cells.filter(cell => {
+				return section.isCellActive(cell.key);
+			});
+		}
+
 		this.fixture = {
 			find(key){
 				return this;
@@ -31,25 +50,34 @@ class Table extends CompositeGrammar{
 			},
 
 			firstCell(step){
-				return step.args.find(self.cells[0].key);
+				var activeCells = self.findActiveCells(step);
+				if (activeCells.length == 0) return null;
+
+				return step.args.find(activeCells[0].key);
 			},
 
 			lastCell(step){
-				var key = _.last(self.cells).key;
+				var activeCells = self.findActiveCells(step);
+				if (activeCells.length == 0) return null;
+
+				var key = _.last(activeCells).key;
 				return step.args.find(key);
 			},
 
 			nextCell(arg, step){
+				var activeCells = self.findActiveCells(step);
+				if (activeCells.length == 0) return null;
+
 				if (arg == null) return this.firstCell(step);
 
 				var cell = arg.cell.key;
 
-				if (cell == _.last(self.cells).key) return null;
+				if (cell == _.last(activeCells).key) return null;
 
-				var index = _.findIndex(self.cells, c => c.key == cell);
+				var index = _.findIndex(activeCells, c => c.key == cell);
 				if (index < 0) return null;
 
-				return step.args.find(self.cells[index + 1].key);
+				return step.args.find(activeCells[index + 1].key);
 			},
 
 			previousCell(arg, step){
@@ -57,12 +85,15 @@ class Table extends CompositeGrammar{
 
 				var cell = arg.cell.key;
 
-				if (cell == self.cells[0].key) return null;
+				var activeCells = self.findActiveCells(step);
+				if (activeCells.length == 0) return null;
 
-				var index = _.findIndex(self.cells, c => c.key == cell);
+				if (cell == activeCells[0].key) return null;
+
+				var index = _.findIndex(activeCells, c => c.key == cell);
 				if (index < 0) return null;
 
-				return step.args.find(self.cells[index - 1].key);
+				return step.args.find(activeCells[index - 1].key);
 			},
 
 			addAndSelect(location){
@@ -143,7 +174,7 @@ class Table extends CompositeGrammar{
 	editor(step, loader){
 		var section = this.readSection(step);
 
-		var cells = this.cells;
+		var cells = this.findActiveCells(section);
 		
 		var rows = section.steps.map(step => {
 			var cloneRow = this.toCloneRow(step, section);
@@ -157,12 +188,12 @@ class Table extends CompositeGrammar{
 			this.addStep(section);
 		}
 
-		return loader.table({addStep: addStep, cells: this.cells, title: this.title, rows: rows, section: section, step: step, adder: section.adder});
+		return loader.table({addStep: addStep, cells: cells, title: this.title, rows: rows, section: section, step: step, adder: section.adder});
 	}
 
 	buildResults(step, loader){
-		var cells = this.cells;
 		var section = this.readSection(step);
+		var cells = this.findActiveCells(section);
 
 		var rows = section.allErrors().map(error => {
 			return loader.errorRow({width: cells.length, error: error});
@@ -178,18 +209,18 @@ class Table extends CompositeGrammar{
 			}
 		});
 
-		return loader.table({cells: this.cells, title: this.title, rows: rows, section: section});
+		return loader.table({cells: cells, title: this.title, rows: rows, section: section});
 	}
 
 	preview(step, loader){
-		var cells = this.cells;
 		var section = this.readSection(step);
+		var cells = this.findActiveCells(section);
 
 		var rows = section.steps.map(step => {
 			return loader.row({step: step, cells: cells}); 
 		});
 
-		return loader.table({cells: this.cells, title: this.title, rows: rows, section: section});
+		return loader.table({cells: cells, title: this.title, rows: rows, section: section});
 	}
 
 	selectFirst(step){

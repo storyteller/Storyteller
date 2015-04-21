@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var Table = require('./../lib/table');
 var StubLoader = require('./stub-loader');
 var Step = require('./../lib/step');
+var Section = require('./../lib/section');
 
 
 describe('Table Grammar', function(){
@@ -28,16 +29,19 @@ describe('Table Grammar', function(){
 
 	it('the inner fixture grammar can select the first cell', function(){
 		var step = table.fixture.buildStep(null);
+		step.parent = new Section({}, table.fixture);
 		expect(table.fixture.firstCell(step).cell.key).to.equal('x');
 	});
 
 	it('the inner fixture grammar can select the last cell', function(){
 		var step = table.fixture.buildStep(null);
+		step.parent = new Section({}, table.fixture);
 		expect(table.fixture.lastCell(step).cell.key).to.equal('result');
 	});
 
 	it('the inner fixture grammar can select the next cell in a row step', function(){
 		var step = table.fixture.buildStep(null);
+		step.parent = new Section({}, table.fixture);
 		var x = step.args.find('x');
 		var y = step.args.find('y');
 		var result = step.args.find('result');
@@ -49,6 +53,7 @@ describe('Table Grammar', function(){
 
 	it('the inner fixture grammar can select the previous cell in a row step', function(){
 		var step = table.fixture.buildStep(null);
+		step.parent = new Section({}, table.fixture);
 		var x = step.args.find('x');
 		var y = step.args.find('y');
 		var result = step.args.find('result');
@@ -183,9 +188,12 @@ describe('Table Grammar', function(){
 
 	it('should build an error row if there is a before error', function(){
 		var step = new Step({}, []);
+
 		table.writeSection(step, {steps: [], results: {}, allErrors: function(){
 			return [];
 		}});
+
+		step.parent = new Section({}, table.fixture);
 
 		// negative condition
 		var initial = table.buildResults(step, loader);
