@@ -97,9 +97,24 @@ function StepRemoved(parent, step){
 	return this;
 }
 
+function RetryCountChanged(count){
+	this.apply = store => {
+		this.old = store['max-retries'];
+		store['max-retries'] = count;
+	}
+
+	this.unapply = store => {
+		store['max-retries'] = this.old;
+	}
+}
+
 
 
 module.exports = {
+	changeRetryCount: function(count){
+		return new RetryCountChanged(count);
+	},
+
 	cellValue: function(id, cell, value){
 		return new CellChange(id, cell, value);
 	},
