@@ -2,6 +2,7 @@
 var React = require("react");
 var {Button, ButtonGroup, ListGroupItem, ListGroup} = require('react-bootstrap');
 var Postal = require('postal');
+var changes = require('./../../lib/change-commands');
 
 
 var OptionalColumn = React.createClass({
@@ -15,15 +16,11 @@ var OptionalColumn = React.createClass({
 			Postal.publish({
 				channel: 'editor',
 				topic: 'changes',
-				data: {
-					// TODO
-				}
+				data: changes.toggleColumn(this.props.section, this.props.cell)
 			})
 
-			e.preventDefault();
+			e.stopPropagation();
 		}
-
-		// <Button style={{minWidth: '100px'}} onClick={onClick} title="Click to toggle the usage of this column in the current table" bsStyle={style}>{this.props.header}</Button>
 
 		return (
 			<ListGroupItem onClick={onClick} disabled={!this.props.active}>
@@ -39,7 +36,7 @@ module.exports = React.createClass({
 		var optionals = null;
 		if (this.props.optionals.length > 0){
 			var buttons = this.props.optionals.map(opt => {
-				return (<OptionalColumn id={this.props.section.id} header={opt.header} cell={opt.cell} active={opt.active} />);
+				return (<OptionalColumn section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
 			});
 
 			optionals = (
