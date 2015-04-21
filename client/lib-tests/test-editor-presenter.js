@@ -695,15 +695,15 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when running a spec from the editor', function(){
-		var spec = null;
-		var presenter = null;
+		var theSpec = null;
+		var thePresenter = null;
 		var view = null;
 		var theWrittenData = {};
 		var message;
 		var navigatedToResults = false;
 
 		beforeEach(function(){
-			spec = {
+			theSpec = {
 				write: function(){
 					return theWrittenData;
 				},
@@ -712,7 +712,7 @@ describe('EditorPresenter', function(){
 					return 'abc'
 				},
 
-				id: uuid.v4(),
+				id: 'the-spec',
 
 				baselineAt: function(rev){
 					this.baselinedRev = rev;
@@ -733,26 +733,31 @@ describe('EditorPresenter', function(){
 			}
 
 
-			presenter = new EditorPresenter(spec);
-			presenter.activate(loader, view);
+			thePresenter = new EditorPresenter(theSpec);
+			thePresenter.activate(loader, view);
 
-			presenter.spec = spec;
+			thePresenter.spec = theSpec;
 
-			presenter.run();
+			thePresenter.run();
 
 			message = findPublishedMessage('run-spec');
 		});
 
 		afterEach(function(){
-			presenter.deactivate();
+			thePresenter.deactivate();
+		});
+
+		it('should also save the spec', () => {
+			var saved = findPublishedMessage('save-spec-body');
+			expect(saved).to.not.be.null;
 		});
 
 
 		it('should send the message with the id and packed data and navigate to the results', function(){
-			console.log(spec.id);
+			console.log(theSpec.id);
 
 			expect(message).to.deep.equal({
-				id: spec.id,
+				id: theSpec.id,
 				spec: theWrittenData,
 				channel: 'engine-request',
 				topic: 'run-spec'

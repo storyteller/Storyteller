@@ -274,10 +274,9 @@ class EditorPresenter{
 	}
 
 	run(){
-		applyOutstandingChanges();
-for (var key in this.spec){
-	console.log(key);
-}
+		// auto save!
+		this.save();
+
 		Postal.publish({
 			channel: 'engine-request',
 			topic: 'run-spec',
