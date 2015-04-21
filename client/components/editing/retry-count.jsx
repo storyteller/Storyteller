@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require("react");
 var Postal = require('postal');
+var changes = require('./../../lib/change-commands');
 
 var RetryCount = React.createClass({
 	render(){
@@ -12,10 +13,8 @@ var RetryCount = React.createClass({
 
 				Postal.publish({
 					channel: 'editor',
-					topic: 'change-retry-count',
-					data: {
-						count: number
-					}
+					topic: 'changes',
+					data: changes.changeRetryCount(number)
 				});
 			}
 

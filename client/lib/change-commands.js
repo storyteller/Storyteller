@@ -98,6 +98,8 @@ function StepRemoved(parent, step){
 }
 
 function RetryCountChanged(count){
+	this.count = count;
+
 	this.apply = store => {
 		this.old = store['max-retries'];
 		store['max-retries'] = count;

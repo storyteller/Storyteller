@@ -66,7 +66,7 @@ describe('RetryCount', () => {
 	it('broadcasts a change message when it receives a good number', () => {
 		TestUtils.Simulate.change(textbox, {target: {value: '3'}});
 
-		var message = findPublishedMessage('change-retry-count');
+		var message = findPublishedMessage('changes');
 		expect(message.count).to.equal(3);
 	});
 });
