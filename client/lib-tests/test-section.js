@@ -14,6 +14,7 @@ describe('Section', function(){
 		id: 1,
 		type: 'section',
 		key: 'Math', 
+		activeCells: ['a', 'b', 'c'],
 		steps: [
 			{key: 'StartWith', cells: {x: 1}},
 			{key: 'Add', cells: {x: 5}},
@@ -30,12 +31,18 @@ describe('Section', function(){
 		expect(section.isHolder()).to.be.true;
 	});
 
+	it('copies the activeCells from the raw data', () => {
+		expect(section.activeCells).to.deep.equal(['a', 'b', 'c']);
+	});
+
 	it('can write for persistence', function(){
 		var data = section.write();
 
 		expect(data.key).to.equal(section.key);
 		expect(data.hasOwnProperty('id')).to.be.true;
 		expect(data.type).to.equal('section');
+
+		expect(data.activeCells).to.deep.equal(['a', 'b', 'c']);
 
 		expect(data.steps.length).to.equal(5);
 	});

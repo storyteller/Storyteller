@@ -23,6 +23,7 @@ class Section{
 		this.fixture = fixture;
 		this.title = this.fixture.title;
 		this.results = {};
+		this.activeCells = data.activeCells || [];
 
 		this.readSteps(data);
 	}
@@ -106,7 +107,8 @@ class Section{
 			key: this.key,
 			type: 'section',
 			steps: this.writeSteps(),
-			id: this.id
+			id: this.id,
+			activeCells: this.activeCells
 		}
 	}
 
