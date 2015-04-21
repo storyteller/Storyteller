@@ -31,11 +31,18 @@ var GrammarError = React.createClass({
 	render: function(){
 		var text = toErrorMessage(this.props.error);
 
+		var title = null;
+		if (this.props.grammar != null && this.props.grammar != 'null'){
+			title = (<h4>Grammar: {this.props.grammar}</h4>);
+		}
+
 		return (
-				<pre>
-					<strong>{this.props.key}</strong> 
-					{text}
-				</pre>
+				<div>
+					{title}
+					<pre>
+						{text}
+					</pre>
+				</div>
 		);
 	}
 });
@@ -44,8 +51,10 @@ var GrammarError = React.createClass({
 
 var FixtureHeader = React.createClass({
 	render: function(){
+		var title = this.props.fixture.key + ' implemented by ' + this.props.fixture.implementation + ' (' + this.props.fixture.title + ')';
+
 		return (
-			<h5>{this.props.fixture.key} implemented by {this.props.fixture.implementation} ({this.props.fixture.title})</h5>
+			<h3>{title}</h3>
 		);
 	}
 });
@@ -92,20 +101,20 @@ var GrammarErrors = React.createClass({
 				body.push(error);
 			});
 
-			fixture.grammars.forEach(function(g){
+			fixture.grammars.forEach(g => {
 				g.errors.forEach(e => {
-					var error = (<GrammarError error={e} key={g.key} />);
+					var error = (<GrammarError error={e} grammar={g.key} />);
 					body.push(error);
 				});
 			});
 
-			
+			body.push(<hr />);
 		});
 
 
 		return (
 			<div>
-			<h3>Grammar Errors</h3>
+			<h2>Grammar Errors</h2>
 
 			{body}
 
