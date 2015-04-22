@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         private void scan(string text)
         {
             var file = new FakeFubuFile(text);
-            var reader = new SnippetReader(file, new CLangSnippetScanner("cs"), theSnippets.Add);
+            var reader = new SnippetReader(file, new CLangSnippetScanner("cs", "csharp"), theSnippets.Add);
 
             reader.Start();
         }
@@ -32,7 +32,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void determine_name()
         {
-            var scanner = new CLangSnippetScanner("cs");
+            var scanner = new CLangSnippetScanner("cs", "csharp");
 
             scanner.DetermineName("// SAMPLE: States").ShouldBe("States");
             scanner.DetermineName("     // SAMPLE: States").ShouldBe("States");
@@ -44,7 +44,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void is_at_end()
         {
-            var scanner = new CLangSnippetScanner("cs");
+            var scanner = new CLangSnippetScanner("cs", "csharp");
             scanner.IsAtEnd("// ENDSAMPLE").ShouldBeTrue();
 
             scanner.IsAtEnd("// SAMPLE: States").ShouldBeFalse();
@@ -80,7 +80,7 @@ New York
             snippet.Start.ShouldBe(7);
             snippet.End.ShouldBe(10);
 
-            snippet.Class.ShouldBe("lang-cs");
+            snippet.Language.ShouldBe("csharp");
         }
 
         [Test]

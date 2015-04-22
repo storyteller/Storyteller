@@ -7,19 +7,19 @@ namespace ST.Docs.Samples
         private readonly string _commentStart;
         private readonly string _commentEnd;
         private readonly string _extension;
-        private readonly string _languageClass;
+        private readonly string _language;
 
-        public BlockCommentScanner(string commentStart, string commentEnd, string extension, string languageClass)
+        public BlockCommentScanner(string commentStart, string commentEnd, string extension, string language)
         {
             _commentStart = commentStart;
             _commentEnd = commentEnd;
             _extension = extension;
-            _languageClass = languageClass;
+            _language = language;
         }
 
-        public string LanguageClass
+        public string Language
         {
-            get { return _languageClass; }
+            get { return _language; }
         }
 
         public FileSet MatchingFileSet

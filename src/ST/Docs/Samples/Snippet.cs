@@ -20,7 +20,7 @@ namespace ST.Docs.Samples
             get { return _name; }
         }
 
-        public string Class
+        public string Language
         {
             get; set;
         }

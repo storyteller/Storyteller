@@ -12,13 +12,12 @@ namespace ST.Docs.Samples
 
             Services(x =>
             {
-                x.AddService<ISnippetScanner>(new CLangSnippetScanner("cs"));
-                x.AddService<ISnippetScanner>(new CLangSnippetScanner("js"));
-                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "spark", "lang-html"));
-                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "htm", "lang-html"));
-                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "html", "lang-html"));
-                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "xml", "lang-xml"));
-                x.AddService<ISnippetScanner>(new BlockCommentScanner("/*", "*/", "css", "lang-css"));
+                x.AddService<ISnippetScanner>(new CLangSnippetScanner("cs", "csharp"));
+                x.AddService<ISnippetScanner>(new CLangSnippetScanner("js", "javascript"));
+                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "htm", "markup"));
+                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "html", "markup"));
+                x.AddService<ISnippetScanner>(new BlockCommentScanner("<!--", "-->", "xml", "markup"));
+                x.AddService<ISnippetScanner>(new BlockCommentScanner("/*", "*/", "css", "css"));
                 x.AddService<ISnippetScanner, RazorSnippetScanner>();
                 x.AddService<ISnippetScanner, RubySnippetScanner>();
 

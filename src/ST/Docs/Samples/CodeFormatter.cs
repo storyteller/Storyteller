@@ -8,7 +8,7 @@ namespace ST.Docs.Samples
         public Snippet Format(IFubuFile file, string languageClass = null)
         {
             var snippet = new Snippet(file.Path){
-                Class = languageClass ?? "lang-" + Path.GetExtension(file.Path).Replace(".", "")
+                Language = languageClass ?? "lang-" + Path.GetExtension(file.Path).Replace(".", "")
             };
 
             file.ReadContents(stream =>

@@ -37,7 +37,7 @@ namespace ST.Docs.Samples
             if (name.IsNotEmpty())
             {
                 var snippet = new Snippet(name){
-                    Class = _scanner.LanguageClass,
+                    Language = _scanner.Language,
                     File = _file.RelativePath
                 };
 

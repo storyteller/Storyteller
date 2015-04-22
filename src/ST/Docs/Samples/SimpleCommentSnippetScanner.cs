@@ -6,12 +6,14 @@ namespace ST.Docs.Samples
     public class SimpleCommentSnippetScanner : ISnippetScanner
     {
         private readonly string _extension;
+        private readonly string _language;
         private readonly string _start;
         private readonly string _end;
 
-        public SimpleCommentSnippetScanner(string extension, string commentMark)
+        public SimpleCommentSnippetScanner(string extension, string commentMark, string language)
         {
             _extension = extension;
+            _language = language;
             _start = commentMark + Snippets.SAMPLE;
             _end = commentMark + Snippets.END;
         }
@@ -31,9 +33,9 @@ namespace ST.Docs.Samples
             return line.Trim().StartsWith(_end);
         }
 
-        public string LanguageClass
+        public string Language
         {
-            get { return "lang-" + _extension; }
+            get { return _language; }
         }
 
         public FileSet MatchingFileSet

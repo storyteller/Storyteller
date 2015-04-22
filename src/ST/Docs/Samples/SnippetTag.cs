@@ -12,9 +12,9 @@ namespace ST.Docs.Samples
             Text(Environment.NewLine + snippet.Text);
             AddClass("prettyprint");
 
-            if (snippet.Class.IsNotEmpty())
+            if (snippet.Language.IsNotEmpty())
             {
-                AddClass(snippet.Class);
+                AddClass(snippet.Language);
             }
 
             if (snippet.Start > 0)

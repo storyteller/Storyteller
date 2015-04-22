@@ -78,7 +78,7 @@ New York
             snippet.Start.ShouldBe(7);
             snippet.End.ShouldBe(10);
 
-            snippet.Class.ShouldBe("lang-rb");
+            snippet.Language.ShouldBe("ruby");
         }
 
         [Test]
