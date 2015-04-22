@@ -165,6 +165,7 @@
     <Compile Include="ST\Docs\Samples\HtmlStyleSnippetScannerTester.cs" />
     <Compile Include="ST\Docs\Samples\RazorSnippetScannerTester.cs" />
     <Compile Include="ST\Docs\Samples\RubySnippetScannerTester.cs" />
+    <Compile Include="ST\Docs\Samples\SampleBuilderTester.cs" />
     <Compile Include="ST\Docs\Samples\SnippetTester.cs" />
     <Compile Include="ST\PersistenceControllerTester.cs" />
     <Compile Include="ST\RunCommand_write_csv_and_json_data_spec.cs" />

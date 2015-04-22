@@ -28,6 +28,11 @@ namespace ST.Docs.Samples
             return null;
         }
 
+        public string Extension
+        {
+            get { return _extension; }
+        }
+
         public bool IsAtEnd(string line)
         {
             return line.Trim().StartsWith(_end);
@@ -38,16 +43,5 @@ namespace ST.Docs.Samples
             get { return _language; }
         }
 
-        public FileSet MatchingFileSet
-        {
-            get
-            {
-                return new FileSet
-                {
-                    DeepSearch = true,
-                    Include = "*." + _extension
-                };
-            }
-        }
     }
 }

@@ -22,12 +22,9 @@ namespace ST.Docs.Samples
             get { return _language; }
         }
 
-        public FileSet MatchingFileSet
+        public string Extension
         {
-            get { return new FileSet{
-                DeepSearch = true,
-                Include = "*." + _extension
-            }; }
+            get { return _extension; }
         }
 
         public string DetermineName(string line)

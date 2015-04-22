@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FubuCore;
@@ -13,18 +12,18 @@ namespace StoryTeller.Testing.ST.Docs.Samples
     [TestFixture]
     public class CLanguageSnippetFinderTester
     {
-        private List<Snippet> theSnippets;
+        private SnippetCache theSnippets;
 
         [SetUp]
         public void SetUp()
         {
-            theSnippets = new List<Snippet>();
+            theSnippets = new SnippetCache();
         }
 
         private void scan(string text)
         {
             var file = new FakeFubuFile(text);
-            var reader = new SnippetReader(file, new CLangSnippetScanner("cs", "csharp"), theSnippets.Add);
+            var reader = new SnippetReader(file, new CLangSnippetScanner("cs", "csharp"), theSnippets);
 
             reader.Start();
         }
@@ -72,7 +71,7 @@ Connecticut
 New York
 ");
 
-            var snippet = theSnippets.Single();
+            var snippet = theSnippets.All().Single();
             snippet.Name.ShouldBe("States");
             
             snippet.Text.TrimEnd().ShouldBe(@"Texas{0}Arkansas{0}Oklahoma{0}Wisconsin".ToFormat(Environment.NewLine));
@@ -110,7 +109,7 @@ Lindsey
 // ENDSAMPLE
 ");
 
-            var snippet1 = theSnippets.First();
+            var snippet1 = theSnippets.Find("States");
             snippet1.Name.ShouldBe("States");
 
             snippet1.Text.TrimEnd().ShouldBe(@"Texas{0}Arkansas{0}Oklahoma{0}Wisconsin".ToFormat(Environment.NewLine));
@@ -118,7 +117,7 @@ Lindsey
             snippet1.Start.ShouldBe(7);
             snippet1.End.ShouldBe(10);
 
-            var snippet2 = theSnippets.Last();
+            var snippet2 = theSnippets.Find("Names");
             snippet2.Name.ShouldBe("Names");
             snippet2.Start.ShouldBe(16);
             snippet2.End.ShouldBe(20);

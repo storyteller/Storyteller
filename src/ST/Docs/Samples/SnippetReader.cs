@@ -7,15 +7,15 @@ namespace ST.Docs.Samples
     public class SnippetReader
     {
         private readonly IFubuFile _file;
-        private readonly Action<Snippet> _onFound;
         private readonly ISnippetScanner _scanner;
+        private readonly ISnippetCache _cache;
         private Action<string, int> _readAction;
 
-        public SnippetReader(IFubuFile file, ISnippetScanner scanner, Action<Snippet> onFound)
+        public SnippetReader(IFubuFile file, ISnippetScanner scanner, ISnippetCache cache)
         {
             _file = file;
             _scanner = scanner;
-            _onFound = onFound;
+            _cache = cache;
         }
 
         public void Start()
@@ -45,7 +45,7 @@ namespace ST.Docs.Samples
                 {
                     if (_scanner.IsAtEnd(txt))
                     {
-                        _onFound(snippet);
+                        _cache.AddOrReplace(snippet);
                         _readAction = lookForNewSnippet;
                     }
                     else
