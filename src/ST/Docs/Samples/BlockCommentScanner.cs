@@ -2,7 +2,7 @@ using FubuCore;
 
 namespace ST.Docs.Samples
 {
-    public class BlockCommentScanner : ISnippetScanner
+    public class BlockCommentScanner : ISampleScanner
     {
         private readonly string _commentStart;
         private readonly string _commentEnd;
@@ -30,9 +30,9 @@ namespace ST.Docs.Samples
         public string DetermineName(string line)
         {
             if (!line.TrimStart().StartsWith(_commentStart)) return null;
-            if (!line.Contains(Snippets.SAMPLE)) return null;
+            if (!line.Contains(Samples.SAMPLE)) return null;
 
-            var start = line.IndexOf(Snippets.SAMPLE) + Snippets.SAMPLE.Length;
+            var start = line.IndexOf(Samples.SAMPLE) + Samples.SAMPLE.Length;
             var end = line.IndexOf(_commentEnd);
 
             return line.Substring(start, end - start).Trim();
@@ -41,7 +41,7 @@ namespace ST.Docs.Samples
         public bool IsAtEnd(string line)
         {
             var text = line.Trim();
-            return text.StartsWith(_commentStart) && text.Contains(Snippets.END) && text.EndsWith(_commentEnd);
+            return text.StartsWith(_commentStart) && text.Contains(Samples.END) && text.EndsWith(_commentEnd);
         }
     }
 }

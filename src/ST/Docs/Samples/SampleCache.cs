@@ -1,0 +1,25 @@
+using System.Collections.Generic;
+using FubuCore.Util;
+
+namespace ST.Docs.Samples
+{
+    public class SampleCache : ISampleCache
+    {
+        private readonly Cache<string, Sample> _snippets = new Cache<string, Sample>();
+
+        public void AddOrReplace(Sample sample)
+        {
+            _snippets[sample.Name] = sample;
+        }
+
+        public Sample Find(string name)
+        {
+            return _snippets[name];
+        }
+
+        public IEnumerable<Sample> All()
+        {
+            return _snippets;
+        }
+    }
+}

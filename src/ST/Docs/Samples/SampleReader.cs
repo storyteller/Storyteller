@@ -4,14 +4,14 @@ using FubuMVC.Core.Runtime.Files;
 
 namespace ST.Docs.Samples
 {
-    public class SnippetReader
+    public class SampleReader
     {
         private readonly IFubuFile _file;
-        private readonly ISnippetScanner _scanner;
-        private readonly ISnippetCache _cache;
+        private readonly ISampleScanner _scanner;
+        private readonly ISampleCache _cache;
         private Action<string, int> _readAction;
 
-        public SnippetReader(IFubuFile file, ISnippetScanner scanner, ISnippetCache cache)
+        public SampleReader(IFubuFile file, ISampleScanner scanner, ISampleCache cache)
         {
             _file = file;
             _scanner = scanner;
@@ -36,7 +36,7 @@ namespace ST.Docs.Samples
 
             if (name.IsNotEmpty())
             {
-                var snippet = new Snippet(name){
+                var snippet = new Sample(name){
                     Language = _scanner.Language,
                     File = _file.RelativePath
                 };

@@ -7,13 +7,13 @@ namespace ST.Docs.Samples
     {
         public SampleRegistry()
         {
-            For<ISnippetScanner>().AddInstances(_ =>
+            For<ISampleScanner>().AddInstances(_ =>
             {
-                _.Type<RazorSnippetScanner>();
-                _.Type<RubySnippetScanner>();
+                _.Type<RazorScanner>();
+                _.Type<RubySampleScanner>();
 
-                _.Object(new CLangSnippetScanner("cs", "csharp"));
-                _.Object(new CLangSnippetScanner("js", "javascript"));
+                _.Object(new CLangSampleScanner("cs", "csharp"));
+                _.Object(new CLangSampleScanner("js", "javascript"));
                 _.Object(new BlockCommentScanner("<!--", "-->", "htm", "markup"));
                 _.Object(new BlockCommentScanner("<!--", "-->", "html", "markup"));
                 _.Object(new BlockCommentScanner("<!--", "-->", "xml", "markup"));
@@ -22,7 +22,7 @@ namespace ST.Docs.Samples
 
             For<IFileSystem>().Use<FileSystem>();
 
-            ForSingletonOf<ISnippetCache>().Use<SnippetCache>();
+            ForSingletonOf<ISampleCache>().Use<SampleCache>();
             ForSingletonOf<ISampleBuilder>().Use<SampleBuilder>();
         }
     }

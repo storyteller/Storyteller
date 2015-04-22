@@ -2,14 +2,14 @@ using System.IO;
 
 namespace ST.Docs.Samples
 {
-    public class Snippet
+    public class Sample
     {
         private readonly string _name;
         private int _start;
         private readonly StringWriter _writer = new StringWriter();
         private int _end;
 
-        public Snippet(string name)
+        public Sample(string name)
         {
             _name = name;
         }

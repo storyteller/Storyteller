@@ -8,18 +8,18 @@ namespace StoryTeller.Testing.ST.Docs.Samples
 
 
     [TestFixture]
-    public class HtmlStyleSnippetScannerTester
+    public class HtmlStyleScannerTester
     {
         private readonly string _sparkText = @"
 <use namespace='FubuMVC.CodeSnippets' />
 <viewdata model='CodeSnippetHarness.HomeModel' />
 <html>
 	<head>
-		<title>Code Snippet Examples</title>
+		<title>Code Sample Examples</title>
     !{this.WriteCssTags('prettify.css')}
   </head>
 	<body>
-		<h1>Snippets!</h1>
+		<h1>Samples!</h1>
 
 		<h4>Javascript</h4>
 		!{this.CodeSnippet('nextTick')}

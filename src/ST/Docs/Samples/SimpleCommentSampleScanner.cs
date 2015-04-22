@@ -3,19 +3,19 @@ using FubuCore;
 
 namespace ST.Docs.Samples
 {
-    public class SimpleCommentSnippetScanner : ISnippetScanner
+    public class SimpleCommentSampleScanner : ISampleScanner
     {
         private readonly string _extension;
         private readonly string _language;
         private readonly string _start;
         private readonly string _end;
 
-        public SimpleCommentSnippetScanner(string extension, string commentMark, string language)
+        public SimpleCommentSampleScanner(string extension, string commentMark, string language)
         {
             _extension = extension;
             _language = language;
-            _start = commentMark + Snippets.SAMPLE;
-            _end = commentMark + Snippets.END;
+            _start = commentMark + Samples.SAMPLE;
+            _end = commentMark + Samples.END;
         }
 
         public string DetermineName(string line)

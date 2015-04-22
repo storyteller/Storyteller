@@ -8,15 +8,15 @@ namespace ST.Docs.Samples
 {
     public static class SnippetPageExtensions
     {
-        // SAMPLE: snippet-page-extensions
+        // SAMPLE: Sample-page-extensions
 
         /// <summary>
-        /// Embed a code snippet into a FubuMVC view
+        /// Embed a code Sample into a FubuMVC view
         /// </summary>
         /// <param name="page"></param>
-        /// <param name="snippet"></param>
+        /// <param name="sample"></param>
         /// <returns></returns>
-        public static HtmlTag CodeSnippet(this IFubuPage page, Snippet snippet)
+        public static HtmlTag CodeSnippet(this IFubuPage page, Sample sample)
         {
             throw new NotImplementedException("Redo this");
             
@@ -27,11 +27,11 @@ namespace ST.Docs.Samples
             assets.Require("bootstrap-prettify.js");
             assets.Require("prettify.css");
             */
-            return new SnippetTag(snippet);
+            return new SampleTag(sample);
         }
 
         /// <summary>
-        /// Embed a named code snippet into a FubuMVC view
+        /// Embed a named code Sample into a FubuMVC view
         /// </summary>
         /// <param name="page"></param>
         /// <param name="snippetName"></param>
@@ -39,7 +39,7 @@ namespace ST.Docs.Samples
         // TODO -- replace this
         public static HtmlTag CodeSnippet(this IFubuPage page, string snippetName)
         {
-            var snippet = page.Get<ISnippetCache>().Find(snippetName);
+            var snippet = page.Get<ISampleCache>().Find(snippetName);
             return page.CodeSnippet(snippet);
         }
         // ENDSAMPLE
@@ -73,7 +73,7 @@ namespace ST.Docs.Samples
         // SAMPLE: link-to-code-files
         /// <summary>
         /// Writes a link to a page that will display the entire contents of the file 
-        /// containing the named snippet
+        /// containing the named Sample
         /// </summary>
         /// <param name="page"></param>
         /// <param name="snippetName"></param>
@@ -82,7 +82,7 @@ namespace ST.Docs.Samples
         // TODO -- replace this
         public static HtmlTag LinkToSnippet(this IFubuPage page, string snippetName)
         {
-            var snippet = page.Get<ISnippetCache>().Find(snippetName);
+            var snippet = page.Get<ISampleCache>().Find(snippetName);
             var fileName = snippet.File;
 
             return page.LinkToCodeFile(fileName);

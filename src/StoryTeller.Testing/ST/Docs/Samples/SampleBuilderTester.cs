@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
 
                 builder.StartWatching(path);
 
-                var cache = container.GetInstance<ISnippetCache>();
+                var cache = container.GetInstance<ISampleCache>();
 
                 var sample = cache.Find("sample-sample-building-test");
                 sample.Language.ShouldBe("csharp");
@@ -53,7 +53,7 @@ var x = 1;
 
                 builder.StartWatching(folder);
 
-                var cache = container.GetInstance<ISnippetCache>();
+                var cache = container.GetInstance<ISampleCache>();
 
                 Wait.Until(() =>
                 {

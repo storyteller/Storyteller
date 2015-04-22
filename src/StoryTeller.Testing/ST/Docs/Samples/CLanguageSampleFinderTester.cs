@@ -10,20 +10,20 @@ using ST.Docs.Samples;
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
     [TestFixture]
-    public class CLanguageSnippetFinderTester
+    public class CLanguageSampleFinderTester
     {
-        private SnippetCache theSnippets;
+        private SampleCache theSamples;
 
         [SetUp]
         public void SetUp()
         {
-            theSnippets = new SnippetCache();
+            theSamples = new SampleCache();
         }
 
         private void scan(string text)
         {
             var file = new FakeFubuFile(text);
-            var reader = new SnippetReader(file, new CLangSnippetScanner("cs", "csharp"), theSnippets);
+            var reader = new SampleReader(file, new CLangSampleScanner("cs", "csharp"), theSamples);
 
             reader.Start();
         }
@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void determine_name()
         {
-            var scanner = new CLangSnippetScanner("cs", "csharp");
+            var scanner = new CLangSampleScanner("cs", "csharp");
 
             scanner.DetermineName("// SAMPLE: States").ShouldBe("States");
             scanner.DetermineName("     // SAMPLE: States").ShouldBe("States");
@@ -43,7 +43,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void is_at_end()
         {
-            var scanner = new CLangSnippetScanner("cs", "csharp");
+            var scanner = new CLangSampleScanner("cs", "csharp");
             scanner.IsAtEnd("// ENDSAMPLE").ShouldBeTrue();
 
             scanner.IsAtEnd("// SAMPLE: States").ShouldBeFalse();
@@ -71,7 +71,7 @@ Connecticut
 New York
 ");
 
-            var snippet = theSnippets.All().Single();
+            var snippet = theSamples.All().Single();
             snippet.Name.ShouldBe("States");
             
             snippet.Text.TrimEnd().ShouldBe(@"Texas{0}Arkansas{0}Oklahoma{0}Wisconsin".ToFormat(Environment.NewLine));
@@ -109,7 +109,7 @@ Lindsey
 // ENDSAMPLE
 ");
 
-            var snippet1 = theSnippets.Find("States");
+            var snippet1 = theSamples.Find("States");
             snippet1.Name.ShouldBe("States");
 
             snippet1.Text.TrimEnd().ShouldBe(@"Texas{0}Arkansas{0}Oklahoma{0}Wisconsin".ToFormat(Environment.NewLine));
@@ -117,7 +117,7 @@ Lindsey
             snippet1.Start.ShouldBe(7);
             snippet1.End.ShouldBe(10);
 
-            var snippet2 = theSnippets.Find("Names");
+            var snippet2 = theSamples.Find("Names");
             snippet2.Name.ShouldBe("Names");
             snippet2.Start.ShouldBe(16);
             snippet2.End.ShouldBe(20);

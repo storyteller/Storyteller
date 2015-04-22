@@ -8,12 +8,12 @@ namespace ST.Docs.Samples
 {
     public class SampleBuilder : IDisposable, ISampleBuilder
     {
-        private readonly ISnippetCache _cache;
+        private readonly ISampleCache _cache;
         private readonly IFileSystem _fileSystem;
-        private readonly IEnumerable<ISnippetScanner> _scanners;
+        private readonly IEnumerable<ISampleScanner> _scanners;
         private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
-        public SampleBuilder(ISnippetCache cache, IFileSystem fileSystem, IEnumerable<ISnippetScanner> scanners)
+        public SampleBuilder(ISampleCache cache, IFileSystem fileSystem, IEnumerable<ISampleScanner> scanners)
         {
             _cache = cache;
             _fileSystem = fileSystem;
@@ -46,9 +46,9 @@ namespace ST.Docs.Samples
         }
 
 
-        public void ReadFile(ISnippetScanner scanner, string file)
+        public void ReadFile(ISampleScanner scanner, string file)
         {
-            var reader = new SnippetReader(new FubuFile(file, null), scanner, _cache);
+            var reader = new SampleReader(new FubuFile(file, null), scanner, _cache);
             reader.Start();
         }
 

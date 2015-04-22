@@ -7,12 +7,12 @@ using ST.Docs.Samples;
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
     [TestFixture]
-    public class SnippetTester
+    public class SampleTester
     {
         [Test]
         public void append()
         {
-            var snippet = new Snippet("the sample");
+            var snippet = new Sample("the sample");
             snippet.Append("something", 5);
 
             snippet.Text.ShouldBe("something" + Environment.NewLine);

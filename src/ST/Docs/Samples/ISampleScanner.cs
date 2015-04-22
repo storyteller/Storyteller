@@ -1,6 +1,6 @@
 namespace ST.Docs.Samples
 {
-    public interface ISnippetScanner
+    public interface ISampleScanner
     {
         string Language { get; }
         string Extension { get; }

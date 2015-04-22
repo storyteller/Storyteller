@@ -10,7 +10,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void is_at_start_positive()
         {
-            var scanner = new RazorSnippetScanner();
+            var scanner = new RazorScanner();
 
             scanner.DetermineName("    @*SAMPLE: UsingCodeSnippetInSpark*@").ShouldBe("UsingCodeSnippetInSpark");
             scanner.DetermineName("@*SAMPLE: UsingCodeSnippetInSpark*@").ShouldBe("UsingCodeSnippetInSpark");
@@ -21,7 +21,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void is_at_start_miss()
         {
-            var scanner = new RazorSnippetScanner();
+            var scanner = new RazorScanner();
 
             scanner.DetermineName("<h1>some html</h1>").ShouldBeNull();
             scanner.DetermineName("SAMPLE: UsingCodeSnippetInSpark").ShouldBeNull();
@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void is_at_end()
         {
-            var scanner = new RazorSnippetScanner();
+            var scanner = new RazorScanner();
 
             scanner.IsAtEnd("@* SAMPLE: something").ShouldBeFalse();
             scanner.IsAtEnd("<p>some html</p>").ShouldBeFalse();
