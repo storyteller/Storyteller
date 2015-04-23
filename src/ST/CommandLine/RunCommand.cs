@@ -54,7 +54,6 @@ namespace ST.CommandLine
 
                 var success = regression.Failed == 0;
 
-                results.success = success;
                 results.suite = input.WorkspaceFlag;
                 results.system = systemRecycled.system_name;
                 results.time = DateTime.Now.ToString();

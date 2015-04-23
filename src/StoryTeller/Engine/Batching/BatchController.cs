@@ -5,7 +5,6 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine.Batching
 {
-    // TODO -- retrofit some UT's
     public class BatchController : IListener<BatchRunRequest>
     {
         private readonly ISpecificationEngine _engine;

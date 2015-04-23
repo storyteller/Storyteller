@@ -120,5 +120,36 @@ namespace StoryTeller.Engine
 
             return timings;
         }
+
+        public static SpecExecutionRequest ForLocal(SpecNode node)
+        {
+            return For(new NodeDataSource(node), node);
+        }
+
+        public class NodeDataSource : ISpecDataSource
+        {
+            private readonly SpecNode _node;
+
+            public NodeDataSource(SpecNode node)
+            {
+                _node = node;
+            }
+
+            public SpecNode ReadNode(string id)
+            {
+                if (id == _node.id) return _node;
+
+                throw new ArgumentOutOfRangeException("id", "This data source only responds to node " + _node.id);
+            }
+
+            public Specification ReadSpecification(string id)
+            {
+                if (id == _node.id) return XmlReader.ReadFromFile(_node.Filename);
+
+                throw new ArgumentOutOfRangeException("id", "This data source only responds to node " + _node.id);
+            }
+        }
     }
+
+    
 }

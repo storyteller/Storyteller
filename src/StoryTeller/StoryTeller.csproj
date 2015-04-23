@@ -279,6 +279,7 @@
     <Compile Include="Results\TimedOut.cs" />
     <Compile Include="SpecContext.cs" />
     <Compile Include="SpecResults.cs" />
+    <Compile Include="SpecRunner.cs" />
     <Compile Include="State.cs" />
     <Compile Include="StopConditions.cs" />
     <Compile Include="StoryTellerAssert.cs" />

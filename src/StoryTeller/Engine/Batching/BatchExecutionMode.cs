@@ -29,8 +29,6 @@ namespace StoryTeller.Engine.Batching
             }
         }
 
-
-
         public IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context)
         {
             return new SynchronousExecutor(context);
