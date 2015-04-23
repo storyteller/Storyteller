@@ -84,12 +84,7 @@ namespace Specifications.Fixtures.Docs
 
         public IGrammar TheTopicsAre()
         {
-            return this["BuildTopic"].AsTable("The topics in this directory are")
-                .After(() =>
-                {
-                    var root = TopicLoader.LoadDirectory(_directory);
-                    Context.State.Store(root);
-                });
+            return this["BuildTopic"].AsTable("The topics in this directory are");
         }
 
         public IGrammar CheckTopic()
@@ -121,7 +116,7 @@ namespace Specifications.Fixtures.Docs
 
         private IEnumerable<Topic> allTopicsInOrder()
         {
-            return Context.State.Retrieve<Topic>().AllTopicsInOrder().ToArray();
+            return TopicLoader.LoadDirectory(_directory).AllTopicsInOrder().ToArray();
         }
 
 

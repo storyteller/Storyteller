@@ -47,10 +47,31 @@ namespace ST.Docs.Topics
             }
         }
 
-        private static IEnumerable<Topic> OrderTopics(string directory, Topic[] others)
+        public static IEnumerable<Topic> OrderTopics(string directory, IEnumerable<Topic> others)
         {
-            // TODO -- apply explicit ordering later
-            return others.OrderBy(x => x.Title).ToArray();
+            var orderFile = directory.AppendPath("order.txt");
+            if (File.Exists(orderFile))
+            {
+                var list = new List<Topic>();
+
+                new FileSystem().ReadTextFile(orderFile, line =>
+                {
+                    var topic = others.FirstOrDefault(x => x.Key.EqualsIgnoreCase(line));
+                    if (topic != null)
+                    {
+                        list.Add(topic);
+                    }
+                });
+
+                var missing = others.Where(x => !list.Contains(x)).OrderBy(x => x.Title);
+                list.AddRange(missing);
+
+                return list;
+            }
+            else
+            {
+                return others.OrderBy(x => x.Title).ToArray();
+            }
         }
 
         public static Topic LoadTopic(string file, bool isRoot)
