@@ -104,7 +104,7 @@
     <Compile Include="Docs\Samples\SampleReader.cs" />
     <Compile Include="Docs\Samples\Samples.cs" />
     <Compile Include="Docs\Samples\SampleTag.cs" />
-    <Compile Include="Docs\Topics\TopicClasses.cs" />
+    <Compile Include="Docs\Topics\Topic.cs" />
     <Compile Include="Docs\Topics\TopicLoader.cs" />
     <Compile Include="Docs\Transformation\ITransformHandler.cs" />
     <Compile Include="Docs\Transformation\Token.cs" />

@@ -18,12 +18,39 @@ namespace ST.Docs.Topics
             // Needs to order based on an order.txt
 
             var topicFiles = FileSystem.FindFiles(directory, FileSet.Shallow("*.md")).ToArray();
-            var topics = topicFiles.Select(x => LoadTopic(x, true));
+            
+            var topics = topicFiles.Select(x => LoadTopic(x, true))
+                .Union(LoadChildDirectories(directory))
+                .ToArray();
 
-            var index = topics.FirstOrDefault(x => x.Key == "index");
+            var index = topics.FirstOrDefault(x => x.IsIndex);
 
+            var others = topics.Where(x => !x.IsIndex).ToArray();
+
+            var ordered = OrderTopics(directory, others);
+            index.AddChildren(ordered);
 
             return index;
+        }
+
+        public static IEnumerable<Topic> LoadChildDirectories(string directory)
+        {
+            foreach (var childDirectory in Directory.GetDirectories(directory, "*", SearchOption.TopDirectoryOnly))
+            {
+                var topic = LoadDirectory(childDirectory);
+                var key = Path.GetFileName(childDirectory);
+
+                topic.UrlSegment = key;
+                topic.PrependKey(key);
+
+                yield return topic;
+            }
+        }
+
+        private static IEnumerable<Topic> OrderTopics(string directory, Topic[] others)
+        {
+            // TODO -- apply explicit ordering later
+            return others.OrderBy(x => x.Title).ToArray();
         }
 
         public static Topic LoadTopic(string file, bool isRoot)
@@ -34,10 +61,14 @@ namespace ST.Docs.Topics
                 throw new FileNotFoundException("No topic file", file);
             }
 
-            var topic = new Topic {Key = Path.GetFileNameWithoutExtension(file).ToLower()};
-
+            var topic = new Topic
+            {
+                Key = Path.GetFileNameWithoutExtension(file).ToLower(),
+                
+            };
 
             var isIndex = Path.GetFileNameWithoutExtension(file).EqualsIgnoreCase("index");
+            topic.UrlSegment = isIndex ? string.Empty : topic.Key.ToLower();
 
             Debug.WriteLine("Parsing topic file " + file.ToFullPath());
 

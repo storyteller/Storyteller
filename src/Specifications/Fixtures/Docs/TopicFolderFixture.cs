@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using FubuCore;
 using ST.Docs.Topics;
 using StoryTeller;
@@ -45,6 +46,9 @@ namespace Specifications.Fixtures.Docs
         public void ForFile(string path)
         {
             _location = _directory.AppendPath(path.Replace('/', Path.DirectorySeparatorChar));
+
+            var parent = _location.ParentDirectory();
+            if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
         }
 
         [Hidden]
@@ -117,7 +121,7 @@ namespace Specifications.Fixtures.Docs
 
         private IEnumerable<Topic> allTopicsInOrder()
         {
-            return Context.State.Retrieve<Topic>().AllTopicsInOrder();
+            return Context.State.Retrieve<Topic>().AllTopicsInOrder().ToArray();
         }
 
 

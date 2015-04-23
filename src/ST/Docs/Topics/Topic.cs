@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FubuCore;
 
 namespace ST.Docs.Topics
 {
     public class Topic
     {
-        public readonly IList<Topic> Children = new List<Topic>();
+        private readonly IList<Topic> _children = new List<Topic>();
         public Topic Parent { get; set; }
 
-        public Topic()
+        public void AddChildren(IEnumerable<Topic> children)
         {
-            
+            _children.AddRange(children);
+            _children.Each(x => x.Parent = this);
+        }
+
+        public IList<Topic> Children
+        {
+            get { return _children; }
         }
 
         // derived from the position
@@ -23,7 +29,16 @@ namespace ST.Docs.Topics
         {
             get
             {
-                throw new NotImplementedException();
+                var url = UrlSegment;
+                var topic = this.Parent;
+                while (topic != null)
+                {
+                    url = topic.UrlSegment.AppendUrl(url);
+                    topic = topic.Parent;
+                }
+                
+
+                return url.TrimStart('/');
             }
         }
 
@@ -31,7 +46,13 @@ namespace ST.Docs.Topics
         {
             get
             {
-                throw new NotImplementedException("Calculate this");
+                if (Parent == null) return null;
+
+                if (ReferenceEquals(Parent.Children.Last(), this)) return null;
+
+                var index = Parent.Children.IndexOf(this);
+
+                return Parent.Children[index + 1];
             }
         }
 
@@ -39,35 +60,25 @@ namespace ST.Docs.Topics
         {
             get
             {
-                throw new NotImplementedException("Calculate this");
+                if (Parent == null) return null;
+
+                if (ReferenceEquals(Parent.Children.First(), this)) return null;
+
+                var index = Parent.Children.IndexOf(this);
+
+                return Parent.Children[index - 1];
             }
         }
 
         public Topic FirstChild
         {
-            get
-            {
-                throw new NotImplementedException("Calculate this");
-            }
+            get { return Children.FirstOrDefault(); }
         }
 
         public Topic LastChild
         {
-            get
-            {
-                throw new NotImplementedException("Calculate this");
-            }
+            get { return Children.LastOrDefault(); }
         }
-
-        public string FullUrl
-        {
-            get
-            {
-                throw new NotImplementedException("Calculate this");
-            }
-        }
-
-
 
         public override string ToString()
         {
@@ -116,20 +127,45 @@ namespace ST.Docs.Topics
             get { return Key.EqualsIgnoreCase("index"); }
         }
 
-        public Topic FindIndex()
+        public Topic FindTop()
         {
-            throw new NotImplementedException();
+            var topic = this;
+            while (topic.Parent != null)
+            {
+                topic = topic.Parent;
+            }
+
+            return topic;
         }
 
         public IEnumerable<Topic> AllTopicsInOrder()
         {
             yield return this;
 
-            foreach (var child in Descendents())
+            var child = FindNext();
+            while (child != null)
             {
                 yield return child;
+                child = child.FindNext();
             }
         }
 
+        public void PrependKey(string key)
+        {
+            if (IsIndex)
+            {
+                Key = key;
+                if (Title == "Index")
+                {
+                    Title = key.Capitalize();
+                }
+            }
+            else
+            {
+                Key = key + "/" + Key;
+            }
+
+            _children.Each(x => x.PrependKey(key));
+        }
     }
 }

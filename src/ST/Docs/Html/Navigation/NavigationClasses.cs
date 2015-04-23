@@ -61,7 +61,7 @@ namespace ST.Docs.Html.Navigation
                 Children.Insert(0, tag);
             }
 
-            var index = node.FindIndex();
+            var index = node.FindTop();
             if (index != null && !ReferenceEquals(node, index) && !ReferenceEquals(index, parent))
             {
                 var indexTag = new NamedTopicLinkTag(node, resolver);
