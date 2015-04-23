@@ -106,6 +106,9 @@
     <Compile Include="Docs\Samples\SampleTag.cs" />
     <Compile Include="Docs\Topics\TopicClasses.cs" />
     <Compile Include="Docs\Topics\TopicLoader.cs" />
+    <Compile Include="Docs\Transformation\ITransformHandler.cs" />
+    <Compile Include="Docs\Transformation\Token.cs" />
+    <Compile Include="Docs\Transformation\Transformer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
