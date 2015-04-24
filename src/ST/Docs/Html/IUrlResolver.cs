@@ -9,6 +9,8 @@ namespace ST.Docs.Html
     public interface IUrlResolver
     {
         string ToUrl(Topic topic);
+        string ToUrl(string url);
+        string RootUrlFrom(Topic current);
     }
 
     public class AbsoluteUrlResolver : IUrlResolver
@@ -16,6 +18,18 @@ namespace ST.Docs.Html
         public string ToUrl(Topic topic)
         {
             return "/" + topic.Url;
+        }
+
+        public string ToUrl(string url)
+        {
+            if (url.StartsWith("/")) return url;
+
+            return "/" + url;
+        }
+
+        public string RootUrlFrom(Topic current)
+        {
+            return "/";
         }
     }
 
@@ -26,6 +40,16 @@ namespace ST.Docs.Html
         public RelativeUrlResolver(IHttpRequest request)
         {
             _request = request;
+        }
+
+        public string ToUrl(string url)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string RootUrlFrom(Topic current)
+        {
+            throw new System.NotImplementedException();
         }
 
         public string ToUrl(Topic topic)
@@ -52,6 +76,16 @@ namespace ST.Docs.Html
     public class FileExportUrlResolver : IUrlResolver
     {
         public string ToUrl(Topic topic)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string ToUrl(string url)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string RootUrlFrom(Topic current)
         {
             throw new System.NotImplementedException();
         }

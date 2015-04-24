@@ -167,5 +167,10 @@ namespace ST.Docs.Topics
 
             _children.Each(x => x.PrependKey(key));
         }
+
+        public Topic FindByKey(string key)
+        {
+            return AllTopicsInOrder().FirstOrDefault(x => x.Key == key);
+        }
     }
 }

@@ -17,6 +17,8 @@ namespace ST.Docs
 
         public DocProject(DocSettings settings)
         {
+            _topic = TopicLoader.LoadDirectory(settings.Root);
+
             _container = new Container(_ =>
             {
                 _.AddRegistry<SampleRegistry>();
@@ -25,9 +27,10 @@ namespace ST.Docs
                 _.For(typeof(IUrlResolver)).Use(settings.UrlResolverType());
 
                 _.For<DocSettings>().Use(settings);
+                _.For<Topic>().Use(_topic);
             });
 
-            _topic = TopicLoader.LoadDirectory(settings.Root);
+            
         }
 
         public Topic Topic
@@ -42,7 +45,8 @@ namespace ST.Docs
 
         public Topic FindTopic(string key)
         {
-            return AllTopics().FirstOrDefault(x => x.Key == key);
+            return _topic.FindByKey(key);
+            
         }
 
         public ITransformer Transformer

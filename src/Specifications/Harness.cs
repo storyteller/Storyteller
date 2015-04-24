@@ -11,11 +11,13 @@ namespace Specifications
 
             var results = runner.Run("transformation-rules");
 
-            results.Counts.AssertSuccess();
+            
 
             var document = runner.GenerateResultsDocument();
 
             document.OpenInBrowser();
+
+            results.Counts.AssertSuccess();
         } 
     }
 }
