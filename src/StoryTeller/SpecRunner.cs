@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
+using HtmlTags;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
@@ -25,9 +26,11 @@ namespace StoryTeller
             return path.AppendPath("Specs");
         }
 
-        private FixtureLibrary _library;
+        private readonly FixtureLibrary _library;
         private readonly T _system;
         private readonly Hierarchy _hierarchy;
+
+        private readonly IList<BatchRecord> _records = new List<BatchRecord>();
 
         public SpecRunner(string specDirectory = null)
         {
@@ -44,6 +47,64 @@ namespace StoryTeller
         }
 
         public string SpecDirectory { get; private set; }
+
+        public SpecResults Run(string idOrPath)
+        {
+            var node = _hierarchy.Nodes.Has(idOrPath)
+                ? _hierarchy.Nodes[idOrPath]
+                : _hierarchy.Nodes.FirstOrDefault(x => x.path == idOrPath);
+
+            if (node == null) throw new ArgumentOutOfRangeException("idOrPath","Could not find a Specification with either id or path equal to " + idOrPath);
+
+            var specification = XmlReader.ReadFromFile(node.Filename);
+
+            var results = Execute(specification);
+
+            _records.Add(new BatchRecord
+            {
+                header = node,
+                results = results,
+                specification = specification
+            });
+
+            return results;
+        }
+
+        public readonly StopConditions StopConditions = new StopConditions();
+
+        public SpecResults Execute(Specification specification)
+        {
+            var plan = specification.CreatePlan(_library);
+            var timings = new Timings();
+            timings.Start(specification);
+
+            IExecutionContext execution = null;
+            ISpecContext context = null;
+
+            try
+            {
+                using (timings.Subject("Context", "Creation"))
+                {
+                    execution = _system.CreateContext();
+                }
+
+                context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
+                    execution.Services);
+
+                context.Reporting.StartDebugListening();
+
+                var executor = new SynchronousExecutor(context);
+                plan.AcceptVisitor(executor);
+            }
+            finally
+            {
+                if (execution != null) execution.Dispose();
+                if (context != null) context.Dispose();
+            }
+
+
+            return context.FinalizeResults(1);
+        }
 
         public BatchRunResponse RunAll(TimeSpan timeout, string output = null, bool openResults = false)
         {
@@ -80,6 +141,19 @@ namespace StoryTeller
             }
 
             return response;
+        }
+
+        public HtmlDocument GenerateResultsDocument()
+        {
+            var response = new BatchRunResponse
+            {
+                fixtures = _library.Models.ToArray(),
+                suite = "Interactive Execution",
+                system = typeof (T).FullName,
+                records = _records.ToArray()
+            };
+
+            throw new NotImplementedException("Need top move the BatchResultsWriter to Storyteller first");
         }
 
         public void Dispose()
