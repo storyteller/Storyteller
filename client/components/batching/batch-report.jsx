@@ -22,6 +22,13 @@ var ResultsView = require('./results-view');
 
 var BatchReport = React.createClass({
 	getInitialState: function(){
+		if (this.props.data.records.length == 1){
+			return {
+				mode: 'spec',
+				id: this.props.data.records[0].header.id
+			}
+		}
+
 		return {
 			mode: 'summary'
 		}

@@ -6,6 +6,7 @@ using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
+using StoryTeller.Results;
 
 namespace ST.CommandLine
 {

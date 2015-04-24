@@ -1,4 +1,5 @@
 ﻿using StoryTeller;
+using StoryTeller.Results;
 
 namespace Specifications
 {
@@ -11,6 +12,10 @@ namespace Specifications
             var results = runner.Run("transformation-rules");
 
             results.Counts.AssertSuccess();
+
+            var document = runner.GenerateResultsDocument();
+
+            document.OpenInBrowser();
         } 
     }
 }

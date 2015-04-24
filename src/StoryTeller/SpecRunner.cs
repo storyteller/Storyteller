@@ -9,6 +9,7 @@ using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Results;
 
 namespace StoryTeller
 {
@@ -153,7 +154,7 @@ namespace StoryTeller
                 records = _records.ToArray()
             };
 
-            throw new NotImplementedException("Need top move the BatchResultsWriter to Storyteller first");
+            return BatchResultsWriter.BuildResults(response);
         }
 
         public void Dispose()

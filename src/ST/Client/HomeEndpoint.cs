@@ -4,6 +4,7 @@ using FubuMVC.Core.UI;
 using HtmlTags;
 using ST.CommandLine;
 using StoryTeller.Remotes.Messaging;
+using StoryTeller.Results;
 
 namespace ST.Client
 {

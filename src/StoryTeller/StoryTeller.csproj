@@ -266,6 +266,7 @@
     <Compile Include="Remotes\SystemRecycled.cs" />
     <Compile Include="Remotes\SystemRecycledListener.cs" />
     <Compile Include="Remotes\SystemRecycleStarted.cs" />
+    <Compile Include="Results\BatchResultsWriter.cs" />
     <Compile Include="Results\CellResult.cs" />
     <Compile Include="Results\DebugReporter.cs" />
     <Compile Include="Results\Envelope.cs" />
@@ -322,6 +323,21 @@
       <Private>True</Private>
       <Paket>True</Paket>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\client\public\stylesheets\storyteller.css">
+      <Link>storyteller.css</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\client\public\stylesheets\bootstrap.min.css">
+      <Link>bootstrap.min.css</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\ST\batch-bundle.js">
+      <Link>batch-bundle.js</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
