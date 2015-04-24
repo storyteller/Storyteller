@@ -6,7 +6,12 @@ using StructureMap.Util;
 
 namespace ST.Docs.Transformation
 {
-    public class Transformer
+    public interface ITransformer
+    {
+        string Transform(Topic current, string before);
+    }
+
+    public class Transformer : ITransformer
     {
         private readonly LightweightCache<string, ITransformHandler> _handlers = 
             new LightweightCache<string, ITransformHandler>(); 

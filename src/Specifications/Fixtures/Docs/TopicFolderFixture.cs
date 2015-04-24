@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FubuCore;
+using ST.Docs;
 using ST.Docs.Topics;
 using StoryTeller;
 using StoryTeller.Grammars.Tables;
@@ -28,6 +29,13 @@ namespace Specifications.Fixtures.Docs
             Directory.CreateDirectory(_directory);
 
             Debug.WriteLine("Using the directory " + _directory);
+
+            var settings = new DocSettings
+            {
+                Root = _directory
+            };
+
+            Context.State.Store(settings);
         }
 
         public override void TearDown()

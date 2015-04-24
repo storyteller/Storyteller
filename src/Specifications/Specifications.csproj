@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fixtures\Docs\TopicFolderFixture.cs" />
+    <Compile Include="Fixtures\Docs\TopicTemplatingFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecificationSystem.cs" />
   </ItemGroup>

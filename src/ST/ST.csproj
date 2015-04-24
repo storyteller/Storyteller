@@ -83,6 +83,8 @@
     <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
+    <Compile Include="Docs\DocProject.cs" />
+    <Compile Include="Docs\DocSettings.cs" />
     <Compile Include="Docs\Html\HtmlClasses.cs" />
     <Compile Include="Docs\Html\IUrlResolver.cs" />
     <Compile Include="Docs\Html\Navigation\NavigationClasses.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Docs\Topics\TopicLoader.cs" />
     <Compile Include="Docs\Transformation\ITransformHandler.cs" />
     <Compile Include="Docs\Transformation\Token.cs" />
+    <Compile Include="Docs\Transformation\TransformationRegistry.cs" />
     <Compile Include="Docs\Transformation\Transformer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
