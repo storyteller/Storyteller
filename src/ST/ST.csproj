@@ -109,6 +109,7 @@
     <Compile Include="Docs\Topics\Topic.cs" />
     <Compile Include="Docs\Topics\TopicLoader.cs" />
     <Compile Include="Docs\Transformation\ITransformHandler.cs" />
+    <Compile Include="Docs\Transformation\TitleHandler.cs" />
     <Compile Include="Docs\Transformation\Token.cs" />
     <Compile Include="Docs\Transformation\TransformationRegistry.cs" />
     <Compile Include="Docs\Transformation\Transformer.cs" />

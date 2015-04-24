@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using FubuCore;
 using ST.Docs.Html;
 
 namespace ST.Docs
@@ -35,6 +37,16 @@ namespace ST.Docs
             }
 
             throw new ArgumentOutOfRangeException("Shouldn't be possible");
+        }
+
+        public static DocSettings ForTesting()
+        {
+            var directory = Path.GetTempPath().AppendPath(Guid.NewGuid().ToString());
+            new FileSystem().CreateDirectory(directory);
+            return new DocSettings
+            {
+                Root = directory
+            };
         }
     }
 }

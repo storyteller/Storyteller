@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ST.Docs.Topics;
@@ -20,6 +21,12 @@ namespace ST.Docs.Transformation
         public Transformer(IEnumerable<ITransformHandler> handlers)
         {
             handlers.Each(x => _handlers[x.Key] = x);
+
+            _handlers.OnMissing = key =>
+            {
+                throw new ArgumentOutOfRangeException("key", key,
+                    "No transformation handler is available for '" + key + "'");
+            };
         }
 
         public string Transform(Topic current, string before)

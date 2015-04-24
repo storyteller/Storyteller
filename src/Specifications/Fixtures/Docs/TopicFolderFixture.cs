@@ -25,30 +25,9 @@ namespace Specifications.Fixtures.Docs
 
         public override void SetUp()
         {
-            _directory = Path.GetTempPath().AppendPath(Guid.NewGuid().ToString());
-            Directory.CreateDirectory(_directory);
-
-            Debug.WriteLine("Using the directory " + _directory);
-
-            var settings = new DocSettings
-            {
-                Root = _directory
-            };
-
-            Context.State.Store(settings);
+            _directory = Context.Service<DocSettings>().Root;
         }
 
-        public override void TearDown()
-        {
-            try
-            {
-                new FileSystem().DeleteDirectory(_directory);
-            }
-            catch (Exception)
-            {
-                
-            }
-        }
 
         [FormatAs("For file {path}")]
         public void ForFile(string path)

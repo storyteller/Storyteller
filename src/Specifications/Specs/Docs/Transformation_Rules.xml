@@ -1,0 +1,15 @@
+<Spec id="662fc07b-d7f5-41b9-95e7-c6cf5cf78a58" maxRetries="0" tags="" lifecycle="Acceptance" name="Transformation Rules">
+  <TopicTemplating id="bf2b151e-0ea4-42cc-ab42-223d6ecabcc8">
+    <TheTopicsAre>
+      <Rows id="130049d4-3333-4638-b6af-1bf8c7a8450d">
+        <TheTopicsAre-row path="index.md" Line1="&lt;!--Title: The Documentation Project--&gt;" Line2="NULL" />
+      </Rows>
+    </TheTopicsAre>
+    <TheUrlResolutionIs style="Absolute" />
+    <TransformsShouldBe>
+      <table id="e054cb32-63d9-4489-bb09-b13c148ee39f">
+        <TransformsShouldBe-row Topic="index" Before="&lt;[title]&gt;" returnValue="The Documentation Project" />
+      </table>
+    </TransformsShouldBe>
+  </TopicTemplating>
+</Spec>

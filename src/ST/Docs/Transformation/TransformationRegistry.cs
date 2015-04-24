@@ -7,6 +7,8 @@ namespace ST.Docs.Transformation
     {
         public TransformationRegistry()
         {
+            For<ITransformer>().Use<Transformer>();
+
             Scan(_ =>
             {
                 _.TheCallingAssembly();
