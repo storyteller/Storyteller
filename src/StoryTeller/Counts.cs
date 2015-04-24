@@ -64,6 +64,11 @@ namespace StoryTeller
             }
         }
 
+        public void AssertSuccess()
+        {
+            StoryTellerAssert.Fail(!WasSuccessful(), ToString());
+        }
+
         public override string ToString()
         {
             return string.Format("Rights: {0}, Wrongs: {1}, Exceptions: {2}, SyntaxErrors: {3}", Rights, Wrongs,

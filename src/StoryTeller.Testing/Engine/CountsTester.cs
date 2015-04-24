@@ -7,6 +7,22 @@ namespace StoryTeller.Testing.Engine
     public class CountsTester
     {
         [Test]
+        public void assert_success_success()
+        {
+            // Nothing should happen
+            new Counts(1, 0, 0, 0).AssertSuccess();
+        }
+
+        [Test]
+        public void assert_success_failure()
+        {
+            Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
+            {
+                new Counts(1, 1, 0, 0).AssertSuccess();
+            });
+        }
+
+        [Test]
         public void add_two_counts()
         {
             var count1 = new Counts
