@@ -3,6 +3,8 @@ Storyteller is a tool for crafting [executable specifications](http://www.agilem
 Quickstart
 ==========
 
+[![Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 After doing a new git clone of the code, run `npm run build` at the command line from the root directory.
 
 Getting started with the code
