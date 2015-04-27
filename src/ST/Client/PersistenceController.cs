@@ -129,7 +129,9 @@ namespace ST.Client
                 if (!_hierarchy.Nodes.Has(id)) return null;
 
                 var spec = _hierarchy.Nodes[id];
-                var template = _data[id];
+
+                // Keep things isolated!
+                var template = XmlReader.ReadFromFile(spec.Filename);
                 template.id = Guid.NewGuid().ToString();
                 template.Name = name;
                 template.Lifecycle = Lifecycle.Acceptance;
@@ -327,7 +329,11 @@ namespace ST.Client
 
                     results.Each((id, result) =>
                     {
-                        _hierarchy.Nodes[id].results = result;
+                        // Specs might have been deleted in the meantime.
+                        if (_hierarchy.Nodes.Has(id))
+                        {
+                            _hierarchy.Nodes[id].results = result;
+                        }
                     });
 
 
