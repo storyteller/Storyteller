@@ -1,6 +1,6 @@
 using System.IO;
 using System.Linq;
-using HtmlTags;
+using Newtonsoft.Json;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 
@@ -19,7 +19,8 @@ namespace StoryTeller.Engine
         public string system;
         public string suite;
 
-        public bool success
+        [JsonProperty("success")]
+        public bool Success
         {
             get
             {

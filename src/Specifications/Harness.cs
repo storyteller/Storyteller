@@ -1,4 +1,5 @@
-﻿using StoryTeller;
+﻿using FubuCore;
+using StoryTeller;
 using StoryTeller.Results;
 
 namespace Specifications
@@ -9,15 +10,14 @@ namespace Specifications
         {
             var runner = new SpecRunner<SpecificationSystem>();
 
-            var results = runner.Run("transformation-rules");
-
-            
+            var results = runner.Run("Docs/Parsing a Single Topic File");
+            //runner.RunAll(1.Minutes());
 
             var document = runner.GenerateResultsDocument();
 
             document.OpenInBrowser();
 
-            results.Counts.AssertSuccess();
+            //results.Counts.AssertSuccess();
         } 
     }
 }

@@ -47,6 +47,11 @@ namespace StoryTeller
 
         }
 
+        public Hierarchy Hierarchy
+        {
+            get { return _hierarchy; }
+        }
+
         public string SpecDirectory { get; private set; }
 
         public SpecResults Run(string idOrPath)
@@ -57,6 +62,11 @@ namespace StoryTeller
 
             if (node == null) throw new ArgumentOutOfRangeException("idOrPath","Could not find a Specification with either id or path equal to " + idOrPath);
 
+            return Run(node);
+        }
+
+        public SpecResults Run(SpecNode node)
+        {
             var specification = XmlReader.ReadFromFile(node.Filename);
 
             var results = Execute(specification);
@@ -109,42 +119,20 @@ namespace StoryTeller
 
         public BatchRunResponse RunAll(TimeSpan timeout, string output = null, bool openResults = false)
         {
-            IBatchObserver batchObserver = new BatchObserver();
-            IExecutionObserver executionObserver = new NulloObserver();
+            var nodes = _hierarchy.Nodes.ToArray();
+            nodes.Each(x => Run(x));
 
-            var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode, _system);
-
-            BatchRunResponse response = null;
-
-            using (var engine = new SpecificationEngine(_system, runner, executionObserver))
-            {
-                var nodes = _hierarchy.Nodes.ToArray();
-
-                var task = batchObserver.MonitorBatch(nodes);
-                nodes
-                    .Select(SpecExecutionRequest.ForLocal)
-                    .Each(x => engine.Enqueue(x));
-
-
-                task.Wait(timeout);
-
-                if (task.IsFaulted)
-                {
-                    throw task.Exception.Flatten();
-                }
-
-                response = new BatchRunResponse
-                {
-                    records = task.Result.ToArray(),
-                    fixtures = _library.Models.ToArray()
-                };
-            }
-
-            return response;
+            return FullResults();
         }
 
         public HtmlDocument GenerateResultsDocument()
+        {
+            var response = FullResults();
+
+            return BatchResultsWriter.BuildResults(response);
+        }
+
+        public BatchRunResponse FullResults()
         {
             var response = new BatchRunResponse
             {
@@ -153,8 +141,7 @@ namespace StoryTeller
                 system = typeof (T).FullName,
                 records = _records.ToArray()
             };
-
-            return BatchResultsWriter.BuildResults(response);
+            return response;
         }
 
         public void Dispose()
