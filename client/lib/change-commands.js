@@ -25,6 +25,17 @@ function CellChange(id, cell, value){
 	return this;
 }
 
+function SpecRenamed(title){
+	this.apply = store => {
+		this.old = store.title;
+		store.title = title;
+	}
+
+	this.unapply = store => {
+		store.title = this.old;
+	}
+}
+
 function ToggleColumn(section, cell){
 	this.section = section;
 	this.cell = cell;
@@ -124,6 +135,10 @@ function RetryCountChanged(count){
 
 
 module.exports = {
+	rename: function(name){
+		return new SpecRenamed(name);
+	},
+
 	toggleColumn: function(section, cell){
 		return new ToggleColumn(section, cell);
 	},
