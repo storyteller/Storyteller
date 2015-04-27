@@ -66,9 +66,17 @@ module.exports = React.createClass({
 			className = className + " " + this.props.classes;
 		}
 
+		var size = 5;
+		if (this.state.value && this.state.value.length > 5){
+			size = this.state.value.length;
+		}
+		
+
 		return (
 			<input 
 				type="text" 
+				size={size}
+				placeholder={this.props.arg.cell.key}
 				value={this.state.value} 
 				onChange={this.handleChange} 
 				tabIndex="0" 
