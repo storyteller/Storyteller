@@ -170,6 +170,10 @@ pre.text-display{
 }
 
 .suite-header.open + .suite-body {
+  -webkit-transform: translate3d(0, 0, 0);
+     -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
   transition: all 350ms ease-out;
 }
 
