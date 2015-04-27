@@ -19,6 +19,7 @@ var Running = Icons['running'];
 var Persisting = require('./persisting');
 var SpecResultHeader = require('./spec-result-header');
 var RetryCount = require('./retry-count');
+var SpecTitle = require('./spec-title');
 
 
 var LifecycleButton = require('./lifecycle-button');
@@ -192,7 +193,7 @@ module.exports = React.createClass({
 				<Row>
 					<Col xs={12} md={12}>
 					    <h3 ref="header" className={headerClass}>
-							{this.state.spec.title}
+							<SpecTitle spec={this.state.spec} />
 							<span className="pull-right">
 								<ButtonGroup style={{marginRight: '30px'}}>
 									<CommandButton title="Run the specification" presenter={this.presenter} icon="run" method="run" disabled={false}></CommandButton>
