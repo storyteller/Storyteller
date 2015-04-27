@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace StoryTeller.Model
 {
     [Serializable]
-    public class Step : Node
+    public class Step : Node, INodeHolder
     {
         [JsonIgnore] public readonly Cache<string, Section> Collections =
             new Cache<string, Section>(key => new Section(key));
@@ -85,6 +85,12 @@ namespace StoryTeller.Model
             Collections[key] = section;
 
             return section;
+        }
+
+        [JsonIgnore]
+        public IList<Node> Children
+        {
+            get { return Collections.OfType<Node>().ToList(); }
         }
     }
 }

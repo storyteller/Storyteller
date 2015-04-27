@@ -1,0 +1,6 @@
+<Spec id="bed36b68-bcc4-41b8-8fc2-a198ed750785" maxRetries="0" tags="" lifecycle="Acceptance" name="Test bed">
+  <TopicFolder id="2b01a3f3-e620-4786-bfde-29cb25f9bfa6">
+    <ForFile path="index.md" id="1"/>
+    <ForFile path="three.md" id="1"/>
+  </TopicFolder>
+</Spec>

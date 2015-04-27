@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using FubuCore;
+using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {
@@ -25,5 +27,21 @@ namespace StoryTeller.Model
                 }
             }
         }
+
+        internal IEnumerable<Node> AllDescendents()
+        {
+            var holder = this as INodeHolder;
+            if (holder == null) yield break;
+
+            foreach (var child in holder.Children)
+            {
+                yield return child;
+
+                foreach (var descendent in child.AllDescendents())
+                {
+                    yield return descendent;
+                }
+            }
+        } 
     }
 }

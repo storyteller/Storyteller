@@ -11,7 +11,16 @@ namespace StoryTeller.Model.Persistence
         public static Specification ReadFromFile(string path)
         {
             var document = new XmlDocument().FromFile(path);
-            return ReadFromXml(document);
+            var specification = ReadFromXml(document);
+
+            if (specification.NeedsToBeRenumbered())
+            {
+                Console.WriteLine("Renumbering id's in {0} because duplicates were detected", path);
+                specification.ApplyRenumbering();
+            }
+
+            return specification;
+
         }
 
         public static Specification ReadFromXml(XmlDocument document)

@@ -282,8 +282,12 @@ namespace ST.Client
         {
             try
             {
+
+
                 _lock.Read(() =>
                 {
+                    
+
                     var node = HierarchyLoader.ReadSpecNode(file);
                     _data.Remove(node.id);
 

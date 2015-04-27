@@ -68,5 +68,36 @@ namespace StoryTeller.Model
             id = node.id;
             Lifecycle = (Lifecycle) Enum.Parse(typeof(Lifecycle), node.lifecycle);
         }
+
+
+        public IEnumerable<Node> AllNodes()
+        {
+            return allNodes().ToArray();
+        }
+
+        private IEnumerable<Node> allNodes()
+        {
+            yield return this;
+
+            foreach (var descendent in AllDescendents())
+            {
+                yield return descendent;
+            }
+        }
+
+
+        public bool NeedsToBeRenumbered()
+        {
+            return AllNodes().GroupBy(x => x.id).Any(x => x.Count() > 1);
+        }
+
+        public void ApplyRenumbering()
+        {
+            AllDescendents().ToArray().GroupBy(x => x.id).Where(x => x.Count() > 1)
+                .Each(group =>
+                {
+                    group.Each(x => x.id = Guid.NewGuid().ToString());
+                });
+        }
     }
 }

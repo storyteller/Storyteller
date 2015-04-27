@@ -175,7 +175,7 @@ describe('SpecificationStore', function(){
 			channel: 'engine',
 			topic: 'spec-changed',
 			data: {
-				id: 'spec2'
+				node: {id:'spec2'}
 			}
 		});
 
@@ -191,7 +191,7 @@ describe('SpecificationStore', function(){
 				channel: 'engine',
 				topic: 'spec-changed',
 				data: {
-					id: 'spec1'
+					node: {id: 'spec1'}
 				}
 			});
 		});

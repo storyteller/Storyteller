@@ -157,8 +157,8 @@ function SpecificationStore(){
 		});
 
 		self.subscribe('engine', 'spec-changed', function(data){
-			if (self.hasData(data.id)){
-				self.removeData(data.id);
+			if (self.hasData(data.node.id)){
+				self.removeData(data.node.id);
 			}
 		});
 
