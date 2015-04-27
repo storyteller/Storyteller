@@ -4,9 +4,11 @@
     "node": true
   },
   "settings": {
-    "ecmascript": 6,
     "jsx": true
   },
+  "plugins": [
+    "react"
+  ],
   "parser": "babel-eslint",
   "rules": {
     "quotes": [1, "single", "avoid-escape"],
