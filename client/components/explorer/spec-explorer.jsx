@@ -27,7 +27,7 @@ module.exports = React.createClass({
 			suite: this.props.suite || Hierarchy.top(),
 			status: Hierarchy.statusFilter(), 
 			lifecycle: Hierarchy.lifecycleFilter()
-		}
+		};
 	},
 
 	componentDidMount: function(){
@@ -84,7 +84,7 @@ module.exports = React.createClass({
 			header = this.buildAllSpecificationHeader();
 			suites = suite.suites.map(s => {
 				return (
-					<SuiteNode suite={s} />
+					<SuiteNode suite={s} key={s.path} />
 				);
 			});
 		}
@@ -96,7 +96,7 @@ module.exports = React.createClass({
 				<h4><span id="spec-editor-header">{title}</span></h4>
 			);
 
-			suites = [(<SuiteNode suite={suite} />)];
+			suites = [(<SuiteNode suite={suite} key={suite.path} />)];
 		}
 
 		if (suites.length == 0){

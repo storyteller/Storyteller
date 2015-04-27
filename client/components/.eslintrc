@@ -1,0 +1,15 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "ecmascript": 6,
+    "jsx": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "quotes": [1, "single", "avoid-escape"],
+    "no-unused-vars": 0
+  }
+}

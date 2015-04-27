@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
+'use strict';
 
-var React = require("react");
+var React = require('react');
 var _ = require('lodash');
 
-var icons = {}
+var icons = {};
 
 var icon = function(name, classes){
 	var all = ['fa', 'fa-fw'].concat(classes);
@@ -14,7 +15,7 @@ var icon = function(name, classes){
 		displayName: name,
 		render: function(){
 			return (
-				<i className={clazz}></i>
+				<i className={clazz + ' ' + this.props.className}></i>
 			);
 
 		}
@@ -23,7 +24,7 @@ var icon = function(name, classes){
 	icons[name] = component;
 
 	return component;
-}
+};
 
 
 var Success = icon('success', ['fa-check', 'text-success']);

@@ -164,3 +164,16 @@ pre.text-display{
 	font-size: small;
 	position: absolute;
 }
+
+.suite-body {
+  overflow: hidden;
+}
+
+.suite-header.open + .suite-body {
+  transition: all 350ms ease-out;
+}
+
+.suite-header.closed + .suite-body {
+  transition: all 350ms ease-in;
+  max-height: 0px !important;
+}
