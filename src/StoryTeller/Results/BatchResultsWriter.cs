@@ -39,10 +39,12 @@ namespace StoryTeller.Results
 
         private static void writeJavascript(BatchRunResponse results, HtmlDocument document)
         {
-            var data = "\nvar BatchData = " + JsonSerialization.ToCleanJson(results) + "\n\n";
-            document.Head.Add("script").Attr("language", "javascript").Text(data).Encoded(false);
+            var cleanJson = JsonSerialization.ToCleanJson(results);
 
-           var js = readFile("StoryTeller.batch-bundle.js");
+            document.Body.Add("div").Hide().Id("batch-data").Text(cleanJson);
+            document.Body.Add("div").Id("main");
+
+            var js = readFile("StoryTeller.batch-bundle.js");
 
             var foot = new HtmlTag("foot");
             document.Body.Next = foot;
