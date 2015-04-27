@@ -223,15 +223,7 @@ class Table extends CompositeGrammar{
 		return loader.table({cells: cells, title: this.title, rows: rows, section: section});
 	}
 
-	selectFirst(step){
-		var section = this.readSection(step);
-		if (section.steps.length == 0){
-			return {holder: section, step: section.adder, cell: section.adder};
-		}
 
-		var step = section.steps[0];
-		return step.selectFirst();
-	}
 
 	selectNext(location){
 		return null;
