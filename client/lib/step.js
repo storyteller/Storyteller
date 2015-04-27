@@ -9,6 +9,10 @@ class Step{
 		this.id = data.id || uuid.v4();
 		this.args = new ArgCollection(cells || [], data, this.id);
 		this.key = data.key;
+		if (!this.key && grammar){
+			this.key = grammar.key;
+		}
+
 		this.type = 'step';
 		this.grammar = grammar; // set by the StepHolder.buildStep() method
 		this.collections = {};
@@ -97,7 +101,9 @@ class Step{
 	}
 
 	write(){
-		var data = {key: this.key, cells: {}, id: this.id};
+		var key = this.key || this.grammar.key;
+
+		var data = {key: key, cells: {}, id: this.id};
 
 		this.args.store(data);
 

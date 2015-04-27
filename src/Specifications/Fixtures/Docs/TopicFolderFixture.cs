@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FubuCore;
@@ -49,15 +46,12 @@ namespace Specifications.Fixtures.Docs
             return this["CaptureLine"].AsTable("The contents are")
                 .After(() =>
                 {
-                    new FileSystem().WriteToFlatFile(_location, writer =>
-                    {
-                        _text.Each(writer.WriteLine);
-                    });
+                    new FileSystem().WriteToFlatFile(_location, writer => _text.Each(writer.WriteLine));
                 });
         }
 
         [Hidden]
-        public void BuildTopic([Header("File Path")]string path, string Line1 = null, string Line2 = null)
+        public void BuildTopic([Header("File Path")] string path, string Line1 = null, string Line2 = null)
         {
             ForFile(path);
             new FileSystem().WriteToFlatFile(_location, writer =>
@@ -79,10 +73,7 @@ namespace Specifications.Fixtures.Docs
             return Paragraph("Check the properties of a topic at the root of the topic directory", _ =>
             {
                 _ += this["ForFile"];
-                _ += c =>
-                {
-                    c.State.CurrentObject = TopicLoader.LoadTopic(_location, true);
-                };
+                _ += c => { c.State.CurrentObject = TopicLoader.LoadTopic(_location, true); };
 
                 _.VerifyPropertiesOf<Topic>(x =>
                 {
@@ -105,7 +96,5 @@ namespace Specifications.Fixtures.Docs
         {
             return TopicLoader.LoadDirectory(_directory).AllTopicsInOrder().ToArray();
         }
-
-
     }
 }

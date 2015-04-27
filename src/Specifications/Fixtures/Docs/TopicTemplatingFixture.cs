@@ -26,6 +26,11 @@ namespace Specifications.Fixtures.Docs
             _project.Dispose();
         }
 
+        public IGrammar IfTheStateIs()
+        {
+            return Embed<TopicFolderFixture>("System State");
+        }
+
         [Hidden]
         public void BuildTopic([Header("File Path")]string path, string Line1 = null, string Line2 = null)
         {
