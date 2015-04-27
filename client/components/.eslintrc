@@ -3,9 +3,6 @@
     "browser": true,
     "node": true
   },
-  "settings": {
-    "jsx": true
-  },
   "plugins": [
     "react"
   ],
