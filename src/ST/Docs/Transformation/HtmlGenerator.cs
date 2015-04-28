@@ -13,18 +13,12 @@ namespace ST.Docs.Transformation
     public class HtmlGenerator : IHtmlGenerator
     {
         private readonly ITransformer _transformer;
-        private readonly Lazy<string> _template;
-        private DocSettings _settings;
+        private readonly DocSettings _settings;
 
         public HtmlGenerator(DocSettings settings, ITransformer transformer)
         {
             _transformer = transformer;
             _settings = settings;
-
-            _template = new Lazy<string>(() =>
-            {
-                return new FileSystem().ReadStringFromFile(settings.Root.AppendPath("layout.htm"));
-            });
         }
 
         public string Generate(Topic topic)
