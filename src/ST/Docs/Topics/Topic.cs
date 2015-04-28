@@ -151,6 +151,11 @@ namespace ST.Docs.Topics
             }
         }
 
+        public string KeyInsideParent()
+        {
+            return Key.Split('/').Last();
+        }
+
         public void PrependKey(string key)
         {
             if (IsIndex)

@@ -4,6 +4,7 @@ using System.Linq;
 using FubuCore;
 using ST.Docs;
 using ST.Docs.Outline;
+using ST.Docs.Topics;
 using StoryTeller;
 using StoryTeller.Grammars.Tables;
 
@@ -48,8 +49,27 @@ namespace Specifications.Fixtures.Docs
         {
             return VerifySetOf(theWrittenFiles)
                 .Titled("The files written to the destination directory should be")
-                .MatchOn(x => x.Path, x => x.FirstLine, x => x.SecondLine);
+                .MatchOn(x => x.Path);
         }
+
+        public IGrammar TheLoadedTopicsShouldBe()
+        {
+            return VerifySetOf(theLoadedTopics)
+                .Titled("The Topic structure loaded from the file system after generating the outline should be")
+                .MatchOn(x => x.Key, x => x.Title, x => x.Url);
+        }
+
+        private IEnumerable<Topic> theLoadedTopics()
+        {
+            var directory = Context.Service<DocSettings>().Root;
+            var top = new OutlineReader(_outlineFile).ReadFile();
+
+            OutlineWriter.WriteToFiles(directory, top);
+
+            var readTop = TopicLoader.LoadDirectory(directory);
+
+            return readTop.AllTopicsInOrder();
+        } 
 
         private IEnumerable<OutlineFile> theWrittenFiles()
         {
@@ -65,26 +85,16 @@ namespace Specifications.Fixtures.Docs
 
             return new FileSystem().FindFiles(directory, fileSet).Select(file =>
             {
-                var outlineFile = new OutlineFile
+                return new OutlineFile
                 {
                     Path = file.PathRelativeTo(directory).Replace(Path.DirectorySeparatorChar, '/'),
                 };
-
-                new FileSystem().AlterFlatFile(file, list =>
-                {
-                    outlineFile.FirstLine = list[0];
-                    outlineFile.SecondLine = list[1];
-                });
-
-                return outlineFile;
             });
         } 
 
         public class OutlineFile
         {
             public string Path { get; set; }
-            public string FirstLine { get; set; }
-            public string SecondLine { get; set; }
         }
     }
 }

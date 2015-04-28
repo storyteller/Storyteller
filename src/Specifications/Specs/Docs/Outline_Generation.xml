@@ -32,5 +32,41 @@
         <TheTopicsReadShouldBe-row Key="roadmap" Title="The Roadmap" Url="plans" />
       </rows>
     </TheTopicsReadShouldBe>
+    <TheWrittenFilesShouldBe>
+      <rows id="923a7fd8-0e4a-46d3-8860-238cce5b1803">
+        <TheWrittenFilesShouldBe-row Path="index.md" />
+        <TheWrittenFilesShouldBe-row Path="order.txt" />
+        <TheWrittenFilesShouldBe-row Path="faq.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/index.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/order.txt" />
+        <TheWrittenFilesShouldBe-row Path="categories/planets/index.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/planets/order.txt" />
+        <TheWrittenFilesShouldBe-row Path="categories/planets/hoth.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/planets/endor.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/planets/tatooine.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/colors/index.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/colors/order.txt" />
+        <TheWrittenFilesShouldBe-row Path="categories/colors/red.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/colors/orange.md" />
+        <TheWrittenFilesShouldBe-row Path="categories/colors/yellow.md" />
+        <TheWrittenFilesShouldBe-row Path="roadmap.md" />
+      </rows>
+    </TheWrittenFilesShouldBe>
+	<TheLoadedTopicsShouldBe>
+		<rows>
+        <row Key="index" Title="Some Stuff" Url="EMPTY" />
+        <row Key="faq" Title="Frequently Asked Questions" Url="faq" />
+        <row Key="categories" Title="Categories" Url="categories" />
+        <row Key="categories/planets" Title="The Planets" Url="categories/planets" />
+        <row Key="categories/planets/hoth" Title="Hoth" Url="categories/planets/hoth" />
+        <row Key="categories/planets/endor" Title="The Sanctuary Moon" Url="categories/planets/endor" />
+        <row Key="categories/planets/tatooine" Title="Tatooine" Url="categories/planets/tatooine" />
+        <row Key="categories/colors" Title="The Colors" Url="categories/colors" />
+        <row Key="categories/colors/red" Title="Red" Url="categories/colors/red" />
+        <row Key="categories/colors/orange" Title="Orange" Url="categories/colors/orange" />
+        <row Key="categories/colors/yellow" Title="Yellow" Url="categories/colors/yellow" />
+        <row Key="roadmap" Title="The Roadmap" Url="plans" />
+		</rows>
+	</TheLoadedTopicsShouldBe>
   </OutlineGeneration>
 </Spec>
