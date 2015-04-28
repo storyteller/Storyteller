@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using FubuCore;
 using ST.Docs.Topics;
 
@@ -12,11 +13,13 @@ namespace ST.Docs.Transformation
     public class HtmlGenerator : IHtmlGenerator
     {
         private readonly ITransformer _transformer;
-        private readonly Lazy<string> _template; 
+        private readonly Lazy<string> _template;
+        private DocSettings _settings;
 
         public HtmlGenerator(DocSettings settings, ITransformer transformer)
         {
             _transformer = transformer;
+            _settings = settings;
 
             _template = new Lazy<string>(() =>
             {
@@ -26,7 +29,28 @@ namespace ST.Docs.Transformation
 
         public string Generate(Topic topic)
         {
-            return _transformer.Transform(topic, _template.Value);
+            try
+            {
+                var template = readTemplate();
+
+                return _transformer.Transform(topic, template);
+            }
+            catch (Exception)
+            {
+                Thread.Sleep(100);
+
+                // One retry because of over-eager file locking
+                var template = readTemplate();
+
+                return _transformer.Transform(topic, template);
+            }
+
+
+        }
+
+        private string readTemplate()
+        {
+            return new FileSystem().ReadStringFromFile(_settings.Root.AppendPath("layout.htm"));
         }
     }
 }

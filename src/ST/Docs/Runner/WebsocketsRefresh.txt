@@ -7,7 +7,8 @@
 
             // when data is comming from the server, this metod is called
             ws.onmessage = function (evt) {
-                location.reload();
+				console.log('Detected a change from the web socket connection. Reloading.')
+                window.location.reload();
             };
 
         }

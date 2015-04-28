@@ -18,6 +18,7 @@ namespace ST.Docs
         private readonly Topic _topic;
         private readonly DocSettings _settings;
         private BrowserRefresher _refresher;
+        private TopicFileWatcher _topicWatcher;
 
         public DocProject(DocSettings settings)
         {
@@ -41,6 +42,9 @@ namespace ST.Docs
             _refresher = new BrowserRefresher();
             _refresher.StartWebSockets();
             _settings.WebsocketAddress = "ws://localhost:" + _refresher.Port;
+
+            _topicWatcher = new TopicFileWatcher(_settings);
+            _topicWatcher.StartWatching(_refresher);
 
             var registry = new TopicRegistry(_topic);
             return FubuApplication.For(registry).StructureMap(_container).RunEmbeddedWithAutoPort(_settings.Root);
@@ -70,7 +74,8 @@ namespace ST.Docs
 
         public void Dispose()
         {
-            _refresher.Dispose();
+            if (_topicWatcher != null) _topicWatcher.Dispose();
+            if (_refresher != null) _refresher.Dispose();
             _container.Dispose();
         }
     }
