@@ -88,6 +88,7 @@
     <Compile Include="Docs\Html\IUrlResolver.cs" />
     <Compile Include="Docs\Html\Navigation\NavigationClasses.cs" />
     <Compile Include="Docs\Outline\OutlineClasses.cs" />
+    <Compile Include="Docs\Outline\OutlineReader.cs" />
     <Compile Include="Docs\Samples\BlockCommentScanner.cs" />
     <Compile Include="Docs\Samples\CLangSampleScanner.cs" />
     <Compile Include="Docs\Samples\CodeFileEndpoint.cs" />

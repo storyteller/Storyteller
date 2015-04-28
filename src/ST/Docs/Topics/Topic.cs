@@ -178,7 +178,12 @@ namespace ST.Docs.Topics
         {
             topic.Parent = this;
             _children.Add(topic);
-            topic.PrependKey(Key);
+
+            if (!IsIndex)
+            {
+                topic.PrependKey(Key);
+            }
+            
         }
     }
 }

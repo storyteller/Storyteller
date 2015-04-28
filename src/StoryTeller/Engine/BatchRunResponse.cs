@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
@@ -15,7 +16,7 @@ namespace StoryTeller.Engine
         public BatchRecord[] records;
         public FixtureModel[] fixtures;
 
-        public string time;
+        public string time = DateTime.Now.ToString();
         public string system;
         public string suite;
 

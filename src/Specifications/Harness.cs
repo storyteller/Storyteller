@@ -10,7 +10,7 @@ namespace Specifications
         {
             var runner = new SpecRunner<SpecificationSystem>();
 
-            var results = runner.Run("Docs/Parsing a Single Topic File");
+            var results = runner.Run("Docs/Outline Generation");
             //runner.RunAll(1.Minutes());
 
             var document = runner.GenerateResultsDocument();

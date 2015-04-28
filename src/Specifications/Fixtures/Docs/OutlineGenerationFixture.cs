@@ -38,7 +38,7 @@ namespace Specifications.Fixtures.Docs
 
         public IGrammar TheTopicsReadShouldBe()
         {
-            return VerifySetOf(() => OutlineReader.ReadFile(_outlineFile).AllTopicsInOrder())
+            return VerifySetOf(() => new OutlineReader(_outlineFile).ReadFile().AllTopicsInOrder())
                 .Titled("The topics generated should be")
                 .MatchOn(x => x.Key, x => x.Title, x => x.Url)
                 .Ordered();
@@ -54,7 +54,7 @@ namespace Specifications.Fixtures.Docs
         private IEnumerable<OutlineFile> theWrittenFiles()
         {
             var directory = Context.Service<DocSettings>().Root;
-            var top = OutlineReader.ReadFile(_outlineFile);
+            var top = new OutlineReader(_outlineFile).ReadFile();
 
             OutlineWriter.WriteToFiles(directory, top);
 

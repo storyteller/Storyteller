@@ -1,0 +1,36 @@
+<Spec id="3efe4054-9ee7-4e88-8626-ceed2de5ff12" maxRetries="0" tags="" lifecycle="Acceptance" name="Outline Generation">
+  <OutlineGeneration id="d9e33b63-28d6-4dc8-afd6-820ad5101647">
+    <TheOutlineFileIs>
+      <Rows id="cce96475-3c19-4ac9-bf9d-570c5317ba4e">
+        <TheOutlineFileIs-row Line="index:Some Stuff" />
+        <TheOutlineFileIs-row Line="faq:Frequently Asked Questions" />
+        <TheOutlineFileIs-row Line="categories" />
+        <TheOutlineFileIs-row Line="categories/planets:The Planets" />
+        <TheOutlineFileIs-row Line="categories/planets/hoth" />
+        <TheOutlineFileIs-row Line="categories/planets/endor:The Sanctuary Moon" />
+        <TheOutlineFileIs-row Line="categories/planets/tatooine" />
+        <TheOutlineFileIs-row Line="categories/colors:The Colors" />
+        <TheOutlineFileIs-row Line="categories/colors/red" />
+        <TheOutlineFileIs-row Line="categories/colors/orange" />
+        <TheOutlineFileIs-row Line="categories/colors/yellow" />
+        <TheOutlineFileIs-row Line="roadmap:The Roadmap:plans" />
+      </Rows>
+    </TheOutlineFileIs>
+    <TheTopicsReadShouldBe>
+      <rows id="67435a92-b2ef-4e81-8796-e7db1500f3ca">
+        <TheTopicsReadShouldBe-row Key="index" Title="Some Stuff" Url="EMPTY" />
+        <TheTopicsReadShouldBe-row Key="faq" Title="Frequently Asked Questions" Url="faq" />
+        <TheTopicsReadShouldBe-row Key="categories" Title="Categories" Url="categories" />
+        <TheTopicsReadShouldBe-row Key="categories/planets" Title="The Planets" Url="categories/planets" />
+        <TheTopicsReadShouldBe-row Key="categories/planets/hoth" Title="Hoth" Url="categories/planets/hoth" />
+        <TheTopicsReadShouldBe-row Key="categories/planets/endor" Title="The Sanctuary Moon" Url="categories/planets/endor" />
+        <TheTopicsReadShouldBe-row Key="categories/planets/tatooine" Title="Tatooine" Url="categories/planets/tatooine" />
+        <TheTopicsReadShouldBe-row Key="categories/colors" Title="The Colors" Url="categories/colors" />
+        <TheTopicsReadShouldBe-row Key="categories/colors/red" Title="Red" Url="categories/colors/red" />
+        <TheTopicsReadShouldBe-row Key="categories/colors/orange" Title="Orange" Url="categories/colors/orange" />
+        <TheTopicsReadShouldBe-row Key="categories/colors/yellow" Title="Yellow" Url="categories/colors/yellow" />
+        <TheTopicsReadShouldBe-row Key="roadmap" Title="The Roadmap" Url="plans" />
+      </rows>
+    </TheTopicsReadShouldBe>
+  </OutlineGeneration>
+</Spec>
