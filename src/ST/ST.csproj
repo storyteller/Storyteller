@@ -93,6 +93,7 @@
     <Compile Include="Docs\Html\Navigation\TableOfContentsTag.cs" />
     <Compile Include="Docs\Outline\OutlineReader.cs" />
     <Compile Include="Docs\Outline\OutlineWriter.cs" />
+    <Compile Include="Docs\Runner\BrowserRefresher.cs" />
     <Compile Include="Docs\Runner\TopicBehavior.cs" />
     <Compile Include="Docs\Runner\TopicChain.cs" />
     <Compile Include="Docs\Runner\TopicNode.cs" />
@@ -149,6 +150,7 @@
   </Target>
   -->
   <ItemGroup>
+    <EmbeddedResource Include="Docs\Runner\WebsocketsRefresh.txt" />
     <EmbeddedResource Include="..\..\client\public\stylesheets\bootstrap.min.css">
       <Link>bootstrap.min.css</Link>
     </EmbeddedResource>

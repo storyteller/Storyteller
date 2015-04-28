@@ -21,6 +21,7 @@ namespace ST.Docs
 
         public UrlStyle UrlStyle { get; set; }
         public string Root { get; set; }
+        public string WebsocketAddress { get; set; }
 
         public Type UrlResolverType()
         {

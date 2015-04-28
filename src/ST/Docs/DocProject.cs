@@ -17,6 +17,7 @@ namespace ST.Docs
         private readonly Container _container;
         private readonly Topic _topic;
         private readonly DocSettings _settings;
+        private BrowserRefresher _refresher;
 
         public DocProject(DocSettings settings)
         {
@@ -37,6 +38,10 @@ namespace ST.Docs
 
         public EmbeddedFubuMvcServer LaunchRunner()
         {
+            _refresher = new BrowserRefresher();
+            _refresher.StartWebSockets();
+            _settings.WebsocketAddress = "ws://localhost:" + _refresher.Port;
+
             var registry = new TopicRegistry(_topic);
             return FubuApplication.For(registry).StructureMap(_container).RunEmbeddedWithAutoPort(_settings.Root);
         }
@@ -65,6 +70,7 @@ namespace ST.Docs
 
         public void Dispose()
         {
+            _refresher.Dispose();
             _container.Dispose();
         }
     }
