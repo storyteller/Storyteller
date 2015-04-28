@@ -128,6 +128,8 @@ namespace ST.Docs.Topics
             get { return Key.EqualsIgnoreCase("index"); }
         }
 
+        public string File { get; set; }
+
         public Topic FindTop()
         {
             var topic = this;

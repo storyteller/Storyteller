@@ -37,6 +37,9 @@ namespace ST.Docs.Topics
         {
             foreach (var childDirectory in Directory.GetDirectories(directory, "*", SearchOption.TopDirectoryOnly))
             {
+                // TODO -- make this go away in later versions of FubuMVC 3
+                if (childDirectory.Contains("fubu-content")) continue;
+
                 var topic = LoadDirectory(childDirectory);
                 var key = Path.GetFileName(childDirectory);
 
@@ -85,7 +88,7 @@ namespace ST.Docs.Topics
             var topic = new Topic
             {
                 Key = Path.GetFileNameWithoutExtension(file).ToLower(),
-                
+                File = file
             };
 
             var isIndex = Path.GetFileNameWithoutExtension(file).EqualsIgnoreCase("index");

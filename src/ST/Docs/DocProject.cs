@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using FubuMVC.Core;
+using FubuMVC.Katana;
+using FubuMVC.StructureMap;
 using ST.Docs.Html;
+using ST.Docs.Runner;
 using ST.Docs.Samples;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
@@ -14,10 +16,12 @@ namespace ST.Docs
     {
         private readonly Container _container;
         private readonly Topic _topic;
+        private readonly DocSettings _settings;
 
         public DocProject(DocSettings settings)
         {
             _topic = TopicLoader.LoadDirectory(settings.Root);
+            _settings = settings;
 
             _container = new Container(_ =>
             {
@@ -29,8 +33,12 @@ namespace ST.Docs
                 _.For<DocSettings>().Use(settings);
                 _.For<Topic>().Use(_topic);
             });
+        }
 
-            
+        public EmbeddedFubuMvcServer LaunchRunner()
+        {
+            var registry = new TopicRegistry(_topic);
+            return FubuApplication.For(registry).StructureMap(_container).RunEmbeddedWithAutoPort(_settings.Root);
         }
 
         public Topic Topic

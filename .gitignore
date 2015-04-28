@@ -52,3 +52,6 @@ client/smoke-tests/bundle.js
 src/ST/*.js
 results
 .vimrc
+
+
+documentation/fubu-content

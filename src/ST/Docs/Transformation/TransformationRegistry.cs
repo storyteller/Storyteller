@@ -8,6 +8,7 @@ namespace ST.Docs.Transformation
         public TransformationRegistry()
         {
             For<ITransformer>().Use<Transformer>();
+            ForSingletonOf<IHtmlGenerator>().Use<HtmlGenerator>();
 
             Scan(_ =>
             {
