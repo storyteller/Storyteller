@@ -62,6 +62,9 @@ namespace ST.Docs.Outline
                 {
                     writer.WriteLine("<!--Title:{0}-->".ToFormat(topic.Title));
                     writer.WriteLine("<!--Url:{0}-->".ToFormat(topic.UrlSegment));
+
+                    writer.WriteLine("");
+                    writer.WriteLine("TODO(Write some content!)");
                 });
             }
             else

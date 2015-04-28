@@ -82,7 +82,9 @@
     <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
+    <Compile Include="Docs\DocInput.cs" />
     <Compile Include="Docs\DocProject.cs" />
+    <Compile Include="Docs\DocSeedCommand.cs" />
     <Compile Include="Docs\DocSettings.cs" />
     <Compile Include="Docs\Html\HtmlClasses.cs" />
     <Compile Include="Docs\Html\IUrlResolver.cs" />
