@@ -25,6 +25,7 @@ namespace ST.Docs.Topics
         public string Title { get; set; }
         public string UrlSegment { get; set; }
 
+
         public string Url
         {
             get
@@ -171,6 +172,13 @@ namespace ST.Docs.Topics
         public Topic FindByKey(string key)
         {
             return AllTopicsInOrder().FirstOrDefault(x => x.Key == key);
+        }
+
+        public void AddChild(Topic topic)
+        {
+            topic.Parent = this;
+            _children.Add(topic);
+            topic.PrependKey(Key);
         }
     }
 }

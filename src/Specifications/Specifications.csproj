@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fixtures\Docs\OutlineGenerationFixture.cs" />
     <Compile Include="Fixtures\Docs\TopicFolderFixture.cs" />
     <Compile Include="Fixtures\Docs\TopicTemplatingFixture.cs" />
     <Compile Include="Harness.cs" />
