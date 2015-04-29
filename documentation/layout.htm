@@ -2,6 +2,7 @@
 	<head>
 		<title>Storyteller - <[title]></title>
 		<[css:content/bootstrap.min.css]>
+		<[css:content/fubudocs.theme.css]>
 	</head>
 
 
@@ -31,15 +32,33 @@
 	      <div id="nav-follow" class="navbar">
 	        <div class="navbar-inner">
 	          <div class="container">
-	          	<span>Top Left Topic Navigation Tag here</span>
-	          	<span>Top Right Topic Navigation Tag here</span>
+	          	<[ParentBreadcrumbs]>
+	          	<[HorizontalPreviousNextTopic]>
 	          </div>
 	        </div>
 	      </div>
 
 	      <div class="row">
-	      	<h1><[title]></h1>
-	      	<[TableOfContents]>
+	      	<div class="span3">
+	            <h3 class="half-margin">Topics</h3>
+
+	            <br/>
+	            <h3>
+	              Storyteller vVersion
+	            </h3>
+
+	            <br/>
+	            <[LeftPaneNavigation]>
+	      	</div>
+
+	      	<div class="span9">
+		      	<h1><[title]></h1>
+		      	<[TableOfContents]>
+	      	</div>
+
+
+
+
 	      </div>
 
 			

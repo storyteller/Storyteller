@@ -14,9 +14,9 @@ namespace ST.Docs.Html.Navigation
         }
     }
 
-    public class TopLeftTopicNavigationTag : HtmlTag
+    public class ParentBreadcrumbsNavigationTag : HtmlTag
     {
-        public TopLeftTopicNavigationTag(Topic node, IUrlResolver resolver)
+        public ParentBreadcrumbsNavigationTag(Topic node, IUrlResolver resolver)
             : base("ul")
         {
             AddClass("nav");
@@ -42,10 +42,10 @@ namespace ST.Docs.Html.Navigation
         }
     }
 
-    public class TopRightTopicNavigationTag : HtmlTag
+    public class HorizontalPreviousNextTopicsTag : HtmlTag
     {
 
-        public TopRightTopicNavigationTag(Topic node, IUrlResolver resolver)
+        public HorizontalPreviousNextTopicsTag(Topic node, IUrlResolver resolver)
             : base("ul")
         {
             AddClass("nav");
@@ -95,8 +95,8 @@ namespace ST.Docs.Html.Navigation
 
         public IEnumerable<HtmlTag> BuildTopTopicLinks(Topic topic)
         {
-            yield return new TopLeftTopicNavigationTag(topic, _resolver);
-            yield return new TopRightTopicNavigationTag(topic, _resolver);
+            yield return new ParentBreadcrumbsNavigationTag(topic, _resolver);
+            yield return new HorizontalPreviousNextTopicsTag(topic, _resolver);
         }
 
 
