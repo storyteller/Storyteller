@@ -39,6 +39,7 @@ namespace ST.Docs.Topics
             {
                 // TODO -- make this go away in later versions of FubuMVC 3
                 if (childDirectory.Contains("fubu-content")) continue;
+                if (Path.GetFileName(childDirectory).EqualsIgnoreCase("content")) continue;
 
                 var topic = LoadDirectory(childDirectory);
                 var key = Path.GetFileName(childDirectory);
