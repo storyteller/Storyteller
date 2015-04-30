@@ -20,6 +20,7 @@ namespace ST.Docs
             var settings = new DocSettings
             {
                 Root = input.DirectoryFlag.ToFullPath(),
+                Version = input.VersionFlag,
                 UrlStyle = UrlStyle.Absolute
             };
 

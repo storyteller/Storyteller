@@ -136,6 +136,7 @@
     <Compile Include="Docs\Transformation\Token.cs" />
     <Compile Include="Docs\Transformation\TransformationRegistry.cs" />
     <Compile Include="Docs\Transformation\Transformer.cs" />
+    <Compile Include="Docs\Transformation\VersionTransformHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

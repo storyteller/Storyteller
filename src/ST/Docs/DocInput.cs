@@ -10,6 +10,9 @@ namespace ST.Docs
         }
 
         [Description("The documentation directory. The default is 'documentation'")]
-        public string DirectoryFlag { get; set; } 
+        public string DirectoryFlag { get; set; }
+
+        [Description("Override the application version. Default is 'Unknown'")]
+        public string VersionFlag { get; set; }
     }
 }
