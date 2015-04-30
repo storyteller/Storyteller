@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using MarkdownDeep;
 using ST.Docs.Topics;
 using StructureMap.Util;
 
@@ -21,6 +23,7 @@ namespace ST.Docs.Transformation
         public Transformer(IEnumerable<ITransformHandler> handlers)
         {
             handlers.Each(x => _handlers[x.Key] = x);
+            _handlers["inner"] = new InnerTransformHandler(this);
 
             _handlers.OnMissing = key =>
             {
@@ -56,6 +59,37 @@ namespace ST.Docs.Transformation
             }
 
             return builder.ToString();
+        }
+
+        private class InnerTransformHandler : ITransformHandler
+        {
+            private readonly ITransformer _transformer;
+
+            public InnerTransformHandler(ITransformer transformer)
+            {
+                _transformer = transformer;
+            }
+
+            public string Key
+            {
+                get
+                {
+                    return "inner";
+                }
+            }
+
+            public string Transform(Topic current, string data)
+            {
+                var text = TopicLoader.FileSystem.ReadStringFromFile(current.File);
+                text = _transformer.Transform(current, text);
+
+                if (Path.GetExtension(current.File) == ".md")
+                {
+                    text = new Markdown().Transform(text);
+                }
+
+                return text;
+            }
         }
     }
 }

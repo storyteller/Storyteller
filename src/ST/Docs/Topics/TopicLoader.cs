@@ -10,7 +10,7 @@ namespace ST.Docs.Topics
 {
     public static class TopicLoader
     {
-        private static readonly FileSystem FileSystem = new FileSystem();
+        public static readonly FileSystem FileSystem = new FileSystem();
         private const string regex = @"<!--(.*?)-->";
 
         public static Topic LoadDirectory(string directory)
