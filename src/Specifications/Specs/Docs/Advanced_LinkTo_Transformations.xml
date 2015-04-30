@@ -16,13 +16,13 @@
     <TransformsShouldBe>
       <table id="e054cb32-63d9-4489-bb09-b13c148ee39f">
         <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:albatross]&gt;" returnValue="&lt;a href=&quot;/albatross&quot;&gt;Albatross&lt;/a&gt;" />
-        <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:albatross:title=The Albatross]&gt;" returnValue="&lt;a href=&quot;/albatross&quot;&gt;The Albatross&lt;/a&gt;" />
+        <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:albatross;title=The Albatross]&gt;" returnValue="&lt;a href=&quot;/albatross&quot;&gt;The Albatross&lt;/a&gt;" />
         <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:{next}]&gt;" returnValue="&lt;a href=&quot;/albatross&quot;&gt;Albatross&lt;/a&gt;" />
         <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:{previous}]&gt;" returnValue="EMPTY" />
         <TransformsShouldBe-row Topic="albatross" Before="&lt;[linkto:{previous}]&gt;" returnValue="&lt;a href=&quot;/&quot;&gt;The Documentation Project&lt;/a&gt;" />
         <TransformsShouldBe-row Topic="faq" Before="&lt;[linkto:{next}]&gt;" returnValue="EMPTY" />
-        <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:faq:template=&lt;li&gt;&lt;a href=&quot;{href}&quot; title=&quot;{title}&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;/li&gt;]&gt;" returnValue="&lt;[linkto:faq:template=&lt;li&gt;&lt;a href=&quot;/faq&quot; title=&quot;Faq&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;/li&gt;]&gt;" />
-        <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:{previous}:template=&lt;li&gt;&lt;a href=&quot;{href}&quot; title=&quot;{title}&quot;&gt;Previous&lt;/a&gt;&lt;/li&gt;]&gt;" returnValue="EMPTY" />
+        <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:faq;&lt;li&gt;&lt;a href=&quot;{href}&quot; title=&quot;{title}&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;/li&gt;]&gt;" returnValue="&lt;li&gt;&lt;a href=&quot;/faq&quot; title=&quot;Faq&quot;&gt;Frequently Asked Questions&lt;/a&gt;&lt;/li&gt;" />
+        <TransformsShouldBe-row Topic="index" Before="&lt;[linkto:{previous};&lt;li&gt;&lt;a href=&quot;{href}&quot; title=&quot;{title}&quot;&gt;Previous&lt;/a&gt;&lt;/li&gt;]&gt;" returnValue="EMPTY" />
       </table>
     </TransformsShouldBe>
   </TopicTemplating>
