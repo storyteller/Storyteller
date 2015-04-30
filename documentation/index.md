@@ -1,4 +1,4 @@
-<!--Title:Storyteller for Executable Specifications and Living Documentation-->
+<!--Title:Documentation-->
 <!--Url:-->
 
 TODO(Write some content!)
