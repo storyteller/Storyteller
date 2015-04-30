@@ -10,7 +10,8 @@ namespace Specifications
         {
             var runner = new SpecRunner<SpecificationSystem>();
 
-            var results = runner.Run("Docs/Outline Generation");
+            var results = runner.Run("Docs/Advanced LinkTo Transformations");
+            //var results = runner.Run("Docs/Transformation Rules");
             //runner.RunAll(1.Minutes());
 
             var document = runner.GenerateResultsDocument();
