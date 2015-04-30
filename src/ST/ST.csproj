@@ -89,8 +89,12 @@
     <Compile Include="Docs\DocSettings.cs" />
     <Compile Include="Docs\Html\HtmlClasses.cs" />
     <Compile Include="Docs\Html\IUrlResolver.cs" />
-    <Compile Include="Docs\Html\Navigation\NavigationClasses.cs" />
+    <Compile Include="Docs\Html\Navigation\HorizontalPreviousNextTopicsTag.cs" />
+    <Compile Include="Docs\Html\Navigation\NamedTopicLinkTag.cs" />
+    <Compile Include="Docs\Html\Navigation\ParentBreadcrumbsNavigationTag.cs" />
     <Compile Include="Docs\Html\Navigation\TableOfContentsTag.cs" />
+    <Compile Include="Docs\Html\Navigation\TopicLinkTag.cs" />
+    <Compile Include="Docs\Html\Navigation\TopicTreeBuilder.cs" />
     <Compile Include="Docs\Outline\OutlineReader.cs" />
     <Compile Include="Docs\Outline\OutlineWriter.cs" />
     <Compile Include="Docs\Runner\BrowserRefresher.cs" />

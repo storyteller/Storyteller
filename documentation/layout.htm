@@ -1,83 +1,276 @@
-<html>
-	<head>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>Storyteller - <[title]></title>
 		<[css:content/bootstrap.min.css]>
-		<[css:content/fubudocs.theme.css]>
-	</head>
-
-
-	<body>
 		
+        
 
-		<div class="container">
-
-			<div class="row">
-			  <div class="span6">
-			    <p class="logo">
-			      <span>Storyteller Logo Here</span>
-			    </p>
-			  </div>
-			  <div class="span6">
-			    <div class="top-header text-right">
-			      <em>
-			      	<a href="">Link to Mailing List Here</a>
-			      </em>
-			      <div class="social">
-			        Put the Gitter Badge Here
-			      </div>
-			    </div>
-			  </div>
-			</div>
-
-	      <div id="nav-follow" class="navbar">
-	        <div class="navbar-inner">
-	          <div class="container">
-	          	<[ParentBreadcrumbs]>
-	          	<[HorizontalPreviousNextTopic]>
-	          </div>
-	        </div>
-	      </div>
-
-	      <div class="row">
-	      	<div class="span3">
-	            <h3 class="half-margin">Topics</h3>
-
-	            <br/>
-	            <h3>
-	              Storyteller vVersion
-	            </h3>
-
-	            <br/>
-	            <[LeftPaneNavigation]>
-	      	</div>
-
-	      	<div class="span9">
-		      	<h1><[title]></h1>
-		      	<[TableOfContents]>
-	      	</div>
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
 
 
+        <!-- CSS code from Bootply.com editor -->
+        
+        <style type="text/css">
+            /*
+A Bootstrap 3.1 affix sidebar template
+from http://bootply.com
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+body {
+ padding-top:50px;
+}
+
+#masthead { 
+ min-height:250px;
+}
+
+#masthead h1 {
+ font-size: 30px;
+ line-height: 1;
+ padding-top:20px;
+}
+
+#masthead .well {
+ margin-top:8%;
+}
+
+@media screen and (min-width: 768px) {
+  #masthead h1 {
+    font-size: 50px;
+  }
+}
+
+.navbar-bright {
+ background-color:#111155;
+ color:#fff;
+}
+
+.affix-top,.affix{
+ position: static;
+}
+
+@media (min-width: 979px) {
+  #sidebar.affix-top {
+    position: static;
+  	margin-top:30px;
+  	width:228px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:228px;
+  }
+}
+
+#sidebar li.active {
+  border:0 #eee solid;
+  border-right-width:5px;
+}
+
+        </style>
+    </head>
+    
+    <!-- HTML code from Bootply.com editor -->
+    
+    <body  >
+        
+        <nav class="navbar navbar-default navbar-fixed-top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/" class="navbar-brand">Bootply</a>
+    </div>
+    <nav class="collapse navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="#sec">Get Started</a>
+        </li>
+        <li>
+          <a href="#sec">Edit</a>
+        </li>
+        <li>
+          <a href="#sec">Visualize</a>
+        </li>
+        <li>
+          <a href="#sec">Prototype</a>
+        </li>
+      </ul>
+    </nav>
 
 
-	      </div>
 
-			
-
-		</div>
+  </div>
+</nav>
 
 
 
+<!--main-->
+<div class="container">
+	<div class="row">
+      <!--left-->
+      <div class="col-md-3" id="leftCol">
+		<ul class="nav nav-stacked affix" id="sidebar">
+          <li class=""><a href="#sec0">Section 0</a></li>
+          <li class="active"><a href="#sec1">Section 1</a></li>
+          <li class=""><a href="#sec2">Section 2</a></li>
+          <li><a href="#sec3">Section 3</a></li>
+          <li class=""><a href="#sec4">Section 4</a></li>
+        </ul>
 
-      <hr />
+        <ul class="nav nav-stacked" id="sidebar">
+            <h3 class="half-margin">Topics</h3>
+
+            <br/>
+            <h3>
+              Storyteller vVersion
+            </h3>
+
+            <br/>
+            <[LeftPaneNavigation]>
+      </div><!--/left-->
+      
+      <!--right-->
+      <div class="col-md-9">
+	      	<h1><[title]></h1>
+	      	<[TableOfContents]>
+
+      </div><!--/right-->
+  	</div><!--/row-->
+</div><!--/container-->
+
+        <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 
-		
-	</body>
 
 
 
 
-	<foot>
+        
+        <!-- JavaScript jQuery code from Bootply.com editor  -->
+        
+        <script type='text/javascript'>
+        
+        $(document).ready(function() {
+        
+            /* activate sidebar */
+$('#sidebar').affix({
+  offset: {
+    top: 235
+  }
+});
 
-	</foot>
-</html>1
+/* activate scrollspy menu */
+var $body   = $(document.body);
+var navHeight = $('.navbar').outerHeight(true) + 10;
+
+$body.scrollspy({
+	target: '#leftCol',
+	offset: navHeight
+});
+
+/* smooth scrolling sections */
+$('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top - 50
+        }, 1000);
+        return false;
+      }
+    }
+});
+        
+        });
+        
+        </script>
+        
+
+        
+        <style>
+            .ad {
+              position: absolute;
+              bottom: 70px;
+              right: 48px;
+              z-index: 992;
+              background-color:#f3f3f3;
+              position: fixed;
+              width: 155px;
+              padding:1px;
+            }
+            
+            .ad-btn-hide {
+              position: absolute;
+              top: -10px;
+              left: -12px;
+              background: #fefefe;
+              background: rgba(240,240,240,0.9);
+              border: 0;
+              border-radius: 26px;
+              cursor: pointer;
+              padding: 2px;
+              height: 25px;
+              width: 25px;
+              font-size: 14px;
+              vertical-align:top;
+              outline: 0;
+            }
+            
+            .carbon-img {
+              float:left;
+              padding: 10px;
+            }
+            
+            .carbon-text {
+              color: #888;
+              display: inline-block;
+              font-family: Verdana;
+              font-size: 11px;
+              font-weight: 400;
+              height: 60px;
+              margin-left: 9px;
+              width: 142px;
+              padding-top: 10px;
+            }
+            
+            .carbon-text:hover {
+              color: #666;
+            }
+            
+            .carbon-poweredby {
+              color: #6A6A6A;
+              float: left;
+              font-family: Verdana;
+              font-size: 11px;
+              font-weight: 400;
+              margin-left: 10px;
+              margin-top: 13px;
+              text-align: center;
+            }
+        </style>
+
+        
+    </body>
+</html>
+
