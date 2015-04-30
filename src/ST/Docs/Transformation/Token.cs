@@ -42,7 +42,7 @@ namespace ST.Docs.Transformation
 
             return new Token
             {
-                Data = parts.Length == 2 ? parts[1] : null,
+                Data = parts.Length > 1 ? parts.Skip(1).Join(":") : null,
                 FirstIndex = i1,
                 LastIndex = i2 + 1,
                 Key = parts.First()

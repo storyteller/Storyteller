@@ -109,6 +109,21 @@ namespace ST.Docs.Topics
             return Parent;
         }
 
+        public IEnumerable<Topic> Ancestors()
+        {
+            return anscestors().Reverse().ToArray();
+        }
+
+        private IEnumerable<Topic> anscestors()
+        {
+            var topic = this;
+            while (topic.Parent != null)
+            {
+                yield return topic.Parent;
+                topic = topic.Parent;
+            }
+        } 
+
 
         public IEnumerable<Topic> Descendents()
         {

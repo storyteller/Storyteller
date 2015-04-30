@@ -37,7 +37,7 @@
 		          <a href="#sec">Documentation</a>
 		        </li>
 		        <li>
-		          <a href="#sec">Github Badges</a>
+<a href="https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a>
 		        </li>
 		        <li>
 		          <a href="#sec">Gitter Badge</a>
@@ -53,7 +53,11 @@
 		  </div>
 		</nav>
 
-
+		  <div class="container">
+		  	<nav class="navbar-inverse">
+		  		<[Breadcrumbs]>
+		  	</nav>
+		  </div>
 
 		<!--main-->
 		<div class="container">
@@ -81,7 +85,20 @@
 		      <!--right-->
 		      <div class="col-md-9">
 			      	<h1><[title]></h1>
-			      	<[TableOfContents]>
+			      	<[TableOfContents]><[TableOfContents]><[TableOfContents]><[TableOfContents]><[TableOfContents]><[TableOfContents]>
+
+			      	<hr />
+			      	<nav>
+				        <span>
+				        	<[linkto:{previous};<strong>Previous: </strong><a href="{href}">{title}</a>]>
+
+				        </span>
+				        <span class="pull-right">
+
+				        	<[linkto:{next};<strong>Next: </strong><a href="{href}">{title}</a>]>
+
+				        </span>
+			      	</nav>
 
 		      </div><!--/right-->
 		  	</div><!--/row-->
