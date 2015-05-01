@@ -34,7 +34,7 @@ namespace ST.Docs.Transformation
 
             if (other == null) return string.Empty;
 
-            var url = _urls.ToUrl(other);
+            var url = _urls.ToUrl(current, other);
 
             var title = other.Title;
             var template = Template;

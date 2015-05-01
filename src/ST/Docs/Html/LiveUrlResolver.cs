@@ -4,7 +4,7 @@ namespace ST.Docs.Html
 {
     public class LiveUrlResolver : IUrlResolver
     {
-        public string ToUrl(Topic topic)
+        public string ToUrl(Topic current, Topic topic)
         {
             return "/" + topic.Url;
         }

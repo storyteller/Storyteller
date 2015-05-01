@@ -25,7 +25,7 @@ namespace ST.Docs.Transformation
 
             current.Ancestors().Each(x =>
             {
-                ol.Add("li/a").Attr("href", _resolver.ToUrl(x)).Text(x.Title);
+                ol.Add("li/a").Attr("href", _resolver.ToUrl(current, x)).Text(x.Title);
             });
 
             ol.Add("li").AddClass("active").Text(current.Title);
