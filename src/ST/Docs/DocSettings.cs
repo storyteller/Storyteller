@@ -34,7 +34,7 @@ namespace ST.Docs
                     return typeof (LiveUrlResolver);
 
                 case UrlStyle.WebsiteExport:
-                    return typeof (WebsiteExportUrlResolver);
+                    return typeof (LiveUrlResolver);
 
                 case UrlStyle.FileExport:
                     return typeof (FileExportUrlResolver);

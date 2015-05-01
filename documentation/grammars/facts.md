@@ -3,4 +3,9 @@
 
 TODO(Write some content!)
 
+
+## Inline
+
 <[sample:FactFixture]>
+
+## Fixture Method

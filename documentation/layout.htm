@@ -76,11 +76,7 @@
 		      	<br />
 
 				<ul class="nav nav-stacked affix" id="sidebar">
-		          <li class=""><a href="#sec0">Section 0</a></li>
-		          <li class="active"><a href="#sec1">Section 1</a></li>
-		          <li class=""><a href="#sec2">Section 2</a></li>
-		          <li><a href="#sec3">Section 3</a></li>
-		          <li class=""><a href="#sec4">Section 4</a></li>
+
 		        </ul>
 
 		        	<[linkto:{next};<h3 class="no-margin">Next</h3><p><a href="{href}">{title}</a></p>]>
@@ -95,8 +91,9 @@
 			      
 			      	<hr />
 
-
-			      	<[inner]>
+			      	<div id="main-pane">
+			      		<[inner]>
+			      	</div>
 
 			      	<hr />
 
@@ -123,9 +120,9 @@
         <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type='text/javascript' src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-        <!-- JavaScript jQuery code from Bootply.com editor  -->
-        <[script:content/affix.js]>
         <[script:content/prism.js]>
+        <[script:content/sidebar.js]>
+        <[script:content/affix.js]>
     </foot>
 </html>
 

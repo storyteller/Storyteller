@@ -25,6 +25,8 @@ namespace ST.Docs.Exporting
         
             foreach (var child in Directory.GetDirectories(directory))
             {
+                if (child.Contains(".git")) continue;
+                
                 fileSystem.DeleteDirectory(child);
             }
 

@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.ST.Docs
         public void select_the_relative_url_transformer_type()
         {
             new DocSettings { UrlStyle = UrlStyle.WebsiteExport }
-                .UrlResolverType().ShouldBe(typeof(WebsiteExportUrlResolver));
+                .UrlResolverType().ShouldBe(typeof(LiveUrlResolver));
         }
 
         [Test]

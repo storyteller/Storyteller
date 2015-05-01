@@ -25,11 +25,11 @@
     </TheExportedFileShouldBe>
     <TheExportedFileForWebsiteShouldBe>
       <table id="5381ae0a-88f1-406c-bbd9-300bf205940c">
-        <TheExportedFileForWebsiteShouldBe-row Key="index" returnValue="index.htm" />
-        <TheExportedFileForWebsiteShouldBe-row Key="faq" returnValue="faq/index.htm" />
-        <TheExportedFileForWebsiteShouldBe-row Key="colors" returnValue="colors/index.htm" />
-        <TheExportedFileForWebsiteShouldBe-row Key="categories/planets" returnValue="categories/planets/index.htm" />
-        <TheExportedFileForWebsiteShouldBe-row Key="categories/planets/hoth" returnValue="categories/planets/hoth/index.htm" />
+        <TheExportedFileForWebsiteShouldBe-row Key="index" returnValue="index.html" />
+        <TheExportedFileForWebsiteShouldBe-row Key="faq" returnValue="faq/index.html" />
+        <TheExportedFileForWebsiteShouldBe-row Key="colors" returnValue="colors/index.html" />
+        <TheExportedFileForWebsiteShouldBe-row Key="categories/planets" returnValue="categories/planets/index.html" />
+        <TheExportedFileForWebsiteShouldBe-row Key="categories/planets/hoth" returnValue="categories/planets/hoth/index.html" />
       </table>
     </TheExportedFileForWebsiteShouldBe>
   </TopicExport>

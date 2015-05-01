@@ -224,7 +224,7 @@ namespace ST.Docs.Topics
         {
 
 
-            return Url.AppendUrl("index.htm").TrimStart('/');
+            return Url.AppendUrl("index.html").TrimStart('/');
         }
     }
 }
