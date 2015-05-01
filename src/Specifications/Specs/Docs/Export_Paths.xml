@@ -1,0 +1,36 @@
+<Spec id="5c6c61a3-162c-4145-ac41-262452cf73fb" maxRetries="0" tags="" lifecycle="Acceptance" name="Export Paths">
+  <TopicExport id="ce049690-33ec-4f3c-a093-b9abdd111570">
+    <TheTopicsAre>
+      <Rows id="3077b63e-4b00-46c3-bf91-f451c1519e24" active-cells="Line1=False,Line2=False">
+        <TheTopicsAre-row path="index.md" />
+        <TheTopicsAre-row path="faq.md" />
+        <TheTopicsAre-row path="contributing.md" />
+        <TheTopicsAre-row path="colors/index.md" />
+        <TheTopicsAre-row path="colors/red.md" />
+        <TheTopicsAre-row path="categories/index.md" />
+        <TheTopicsAre-row path="categories/planets/index.md" />
+        <TheTopicsAre-row path="categories/planets/hoth.md" />
+      </Rows>
+    </TheTopicsAre>
+    <TheExportedFileShouldBe>
+      <table id="0c579a8e-18c1-408d-b2e3-7b262e0bbf51">
+        <TheExportedFileShouldBe-row Key="index" returnValue="index.htm" />
+        <TheExportedFileShouldBe-row Key="faq" returnValue="faq.htm" />
+        <TheExportedFileShouldBe-row Key="contributing" returnValue="contributing.htm" />
+        <TheExportedFileShouldBe-row Key="colors" returnValue="colors/index.htm" />
+        <TheExportedFileShouldBe-row Key="colors/red" returnValue="colors/red.htm" />
+        <TheExportedFileShouldBe-row Key="categories/planets" returnValue="categories/planets/index.htm" />
+        <TheExportedFileShouldBe-row Key="categories/planets/hoth" returnValue="categories/planets/hoth.htm" />
+      </table>
+    </TheExportedFileShouldBe>
+    <TheExportedFileForWebsiteShouldBe>
+      <table id="5381ae0a-88f1-406c-bbd9-300bf205940c">
+        <TheExportedFileForWebsiteShouldBe-row Key="index" returnValue="index.htm" />
+        <TheExportedFileForWebsiteShouldBe-row Key="faq" returnValue="faq/index.htm" />
+        <TheExportedFileForWebsiteShouldBe-row Key="colors" returnValue="colors/index.htm" />
+        <TheExportedFileForWebsiteShouldBe-row Key="categories/planets" returnValue="categories/planets/index.htm" />
+        <TheExportedFileForWebsiteShouldBe-row Key="categories/planets/hoth" returnValue="categories/planets/hoth/index.htm" />
+      </table>
+    </TheExportedFileForWebsiteShouldBe>
+  </TopicExport>
+</Spec>

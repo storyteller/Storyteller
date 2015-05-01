@@ -24,6 +24,7 @@ namespace ST.Docs
         public string Root { get; set; }
         public string WebsocketAddress { get; set; }
         public string Version { get; set; }
+        public string[] SampleDirectories { get; set; }
 
         public Type UrlResolverType()
         {

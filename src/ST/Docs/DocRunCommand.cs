@@ -21,7 +21,8 @@ namespace ST.Docs
             {
                 Root = input.DirectoryFlag.ToFullPath(),
                 Version = input.VersionFlag,
-                UrlStyle = UrlStyle.Absolute
+                UrlStyle = UrlStyle.Absolute,
+                SampleDirectories = input.CodeFlag
             };
 
             using (var project = new DocProject(settings))

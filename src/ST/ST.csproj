@@ -114,6 +114,7 @@
     <Compile Include="Docs\Samples\RazorScanner.cs" />
     <Compile Include="Docs\Samples\RubySampleScanner.cs" />
     <Compile Include="Docs\Samples\SampleBuilder.cs" />
+    <Compile Include="Docs\Samples\SampleExplorer.cs" />
     <Compile Include="Docs\Samples\SampleRegistry.cs" />
     <Compile Include="Docs\Samples\SimpleCommentSampleScanner.cs" />
     <Compile Include="Docs\Samples\Sample.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Docs\Samples\SampleTag.cs" />
     <Compile Include="Docs\Topics\Topic.cs" />
     <Compile Include="Docs\Topics\TopicLoader.cs" />
+    <Compile Include="Docs\Transformation\CodeSampleTransformHandler.cs" />
     <Compile Include="Docs\Transformation\HtmlGenerator.cs" />
     <Compile Include="Docs\Transformation\ITransformHandler.cs" />
     <Compile Include="Docs\Transformation\LinkToTransformHandler.cs" />

@@ -18,6 +18,8 @@ namespace ST.Docs.Samples
             _cache = cache;
         }
 
+        public bool FoundSamples { get; private set; }
+
         public void Start()
         {
             _readAction = lookForNewSnippet;
@@ -38,7 +40,7 @@ namespace ST.Docs.Samples
             {
                 var snippet = new Sample(name){
                     Language = _scanner.Language,
-                    File = _file.RelativePath
+                    File = _file.Path
                 };
 
                 _readAction = (txt, num) =>

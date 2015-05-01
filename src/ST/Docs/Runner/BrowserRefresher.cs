@@ -5,7 +5,35 @@ using FubuMVC.Core;
 
 namespace ST.Docs.Runner
 {
-    public class BrowserRefresher : IDisposable
+    public interface IBrowserRefresher
+    {
+        void RefreshPage();
+        void StartWebSockets();
+        int Port { get; }
+    }
+
+    public class NulloBrowserRefresher : IBrowserRefresher
+    {
+        public void RefreshPage()
+        {
+            // nothing
+        }
+
+        public void StartWebSockets()
+        {
+            throw new NotSupportedException();
+        }
+
+        public int Port
+        {
+            get
+            {
+                throw new NotSupportedException();
+            }
+        }
+    }
+
+    public class BrowserRefresher : IDisposable, IBrowserRefresher
     {
         private int _port;
         private WebSocketServer _server;

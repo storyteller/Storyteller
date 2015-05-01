@@ -207,5 +207,26 @@ namespace ST.Docs.Topics
             }
             
         }
+
+        public string FileExportPath()
+        {
+            if (Parent == null) return "index.htm";
+            
+            if (Children.Any())
+            {
+                return Url.AppendUrl("index.htm");
+            }
+
+
+
+            return Parent.Url.AppendUrl(KeyInsideParent() + ".htm").TrimStart('/');
+        }
+
+        public string WebsiteExportPath()
+        {
+
+
+            return Url.AppendUrl("index.htm").TrimStart('/');
+        }
     }
 }

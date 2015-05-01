@@ -7,6 +7,7 @@ namespace ST.Docs
         public DocInput()
         {
             DirectoryFlag = "documentation";
+            CodeFlag = new string[]{"src"};
         }
 
         [Description("The documentation directory. The default is 'documentation'")]
@@ -14,5 +15,8 @@ namespace ST.Docs
 
         [Description("Override the application version. Default is 'Unknown'")]
         public string VersionFlag { get; set; }
+
+        [Description("Override the directories where sample scanning should be enabled. Default is [src]")]
+        public string[] CodeFlag { get; set; }
     }
 }

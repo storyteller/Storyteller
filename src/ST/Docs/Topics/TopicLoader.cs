@@ -24,6 +24,11 @@ namespace ST.Docs.Topics
                 .ToArray();
 
             var index = topics.FirstOrDefault(x => x.IsIndex);
+            if (index == null)
+            {
+                // todo -- later, look for splash.htm instead
+                throw new Exception("Unable to find an index file for directory " + directory);
+            }
 
             var others = topics.Where(x => !x.IsIndex).ToArray();
 

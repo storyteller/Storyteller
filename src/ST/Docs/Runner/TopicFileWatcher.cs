@@ -18,7 +18,7 @@ namespace ST.Docs.Runner
             };
         }
 
-        public void StartWatching(BrowserRefresher refresher)
+        public void StartWatching(IBrowserRefresher refresher)
         {
             FileSystemEventHandler handler = (sender, e) => refresher.RefreshPage();
 

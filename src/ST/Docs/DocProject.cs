@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using FubuMVC.Core;
 using FubuMVC.Katana;
 using FubuMVC.StructureMap;
@@ -17,7 +19,6 @@ namespace ST.Docs
         private readonly Container _container;
         private readonly Topic _topic;
         private readonly DocSettings _settings;
-        private BrowserRefresher _refresher;
         private TopicFileWatcher _topicWatcher;
 
         public DocProject(DocSettings settings)
@@ -25,11 +26,14 @@ namespace ST.Docs
             _topic = TopicLoader.LoadDirectory(settings.Root);
             _settings = settings;
 
+            
+
             _container = new Container(_ =>
             {
                 _.AddRegistry<SampleRegistry>();
                 _.AddRegistry<TransformationRegistry>();
 
+                _.ForSingletonOf<IBrowserRefresher>().Use<BrowserRefresher>();
                 _.For(typeof(IUrlResolver)).Use(settings.UrlResolverType());
 
                 _.For<DocSettings>().Use(settings);
@@ -39,12 +43,25 @@ namespace ST.Docs
 
         public EmbeddedFubuMvcServer LaunchRunner()
         {
-            _refresher = new BrowserRefresher();
-            _refresher.StartWebSockets();
-            _settings.WebsocketAddress = "ws://localhost:" + _refresher.Port;
+            var refresher = _container.GetInstance<IBrowserRefresher>();
+
+            refresher.StartWebSockets();
+            _settings.WebsocketAddress = "ws://localhost:" + refresher.Port;
+            
 
             _topicWatcher = new TopicFileWatcher(_settings);
-            _topicWatcher.StartWatching(_refresher);
+            _topicWatcher.StartWatching(refresher);
+
+
+
+            var sampleBuilder = _container.GetInstance<ISampleBuilder>();
+            var others = _settings.SampleDirectories.SelectMany(sampleBuilder.StartWatching);
+            var tasks = sampleBuilder.StartWatching(_settings.Root).Union(others).ToArray();
+
+
+            Task.WaitAll(tasks);
+
+            sampleBuilder.EnableWatching();
 
             var registry = new TopicRegistry(_topic);
             return FubuApplication.For(registry).StructureMap(_container).RunEmbeddedWithAutoPort(_settings.Root);
@@ -75,7 +92,6 @@ namespace ST.Docs
         public void Dispose()
         {
             if (_topicWatcher != null) _topicWatcher.Dispose();
-            if (_refresher != null) _refresher.Dispose();
             _container.Dispose();
         }
     }

@@ -70,23 +70,35 @@ Name: whatever
         public bool On;
     }
 
+    // SAMPLE: FactFixture
     public class FactFixture : Fixture
     {
         public static bool IsSo = false;
 
         public FactFixture()
         {
-            this["CheckIsSo"] = Fact("Check is so").VerifiedBy(() => IsSo);
-            this["CheckIsNotSo"] = Fact("Check is not so").VerifiedBy(() => !IsSo);
-            this["SetState"] = Do<string>("Set state to {state}", (text, c) => c.State.Store("state", text));
+            this["CheckIsSo"] = Fact("Check is so")
+                .VerifiedBy(() => IsSo);
+
+            this["CheckIsNotSo"] = Fact("Check is not so")
+                .VerifiedBy(() => !IsSo);
+
+            this["SetState"] 
+                = Do<string>("Set state to {state}", (text, c) => c.State.Store("state", text));
 
 
             this["StateIsTexas"] =
-                Fact("Check that the state is Texas").VerifiedBy(c => c.State.Retrieve<string>("state") == "Texas");
+                Fact("Check that the state is Texas")
+                .VerifiedBy(c => c.State.Retrieve<string>("state") == "Texas");
 
 
-            this["ServiceIsOn"] = Fact("Check service is on").VerifiedBy<CheckService>(s => s.On);
-            this["ServiceIsOff"] = Fact("Check service is off").VerifiedBy<CheckService>(s => !s.On);
+            this["ServiceIsOn"] = Fact("Check service is on")
+                .VerifiedBy<CheckService>(s => s.On);
+
+            this["ServiceIsOff"] = Fact("Check service is off")
+                .VerifiedBy<CheckService>(s => !s.On);
         }
     }
+    // ENDSAMPLE
+
 }
