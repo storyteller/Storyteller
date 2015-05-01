@@ -70,6 +70,8 @@ namespace ST.Docs.Samples
 
             watcher.Changed += onFileChange;
             watcher.Created += onFileChange;
+
+            _watchers.Add(watcher);
         }
 
 

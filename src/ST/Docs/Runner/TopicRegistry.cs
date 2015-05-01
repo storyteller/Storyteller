@@ -4,6 +4,7 @@ using FubuMVC.Core;
 using FubuMVC.Core.Registration;
 using FubuMVC.Core.Registration.Nodes;
 using ST.Docs.Samples;
+using ST.Docs.Todos;
 using ST.Docs.Topics;
 
 namespace ST.Docs.Runner
@@ -18,6 +19,7 @@ namespace ST.Docs.Runner
 
             Actions.FindBy(_ => _.IncludeTypesNamed(x => x.EndsWith("DocTool")));
             Actions.IncludeType<SampleExplorer>();
+            Actions.IncludeType<TodoExplorer>();
 
             Policies.ChainSource(this);
         }

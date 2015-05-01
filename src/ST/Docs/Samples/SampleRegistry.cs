@@ -1,4 +1,5 @@
 using FubuCore;
+using ST.Docs.Runner;
 using StructureMap.Configuration.DSL;
 
 namespace ST.Docs.Samples
@@ -13,14 +14,15 @@ namespace ST.Docs.Samples
                 _.Type<RubySampleScanner>();
 
                 _.Object(new CLangSampleScanner("cs", "csharp"));
-                
-                //_.Object(new CLangSampleScanner("js", "javascript"));
-                //_.Object(new BlockCommentScanner("<!--", "-->", "htm", "markup"));
-                //_.Object(new BlockCommentScanner("<!--", "-->", "html", "markup"));
-                //_.Object(new BlockCommentScanner("<!--", "-->", "xml", "markup"));
-                //_.Object(new BlockCommentScanner("/*", "*/", "css", "css"));
+                _.Object(new CLangSampleScanner("js", "javascript"));
+                _.Object(new BlockCommentScanner("<!--", "-->", "htm", "markup"));
+                _.Object(new BlockCommentScanner("<!--", "-->", "html", "markup"));
+                _.Object(new BlockCommentScanner("<!--", "-->", "xml", "markup"));
+                _.Object(new BlockCommentScanner("/*", "*/", "css", "css"));
                                                              
             });
+
+            For<IBrowserRefresher>().UseIfNone<NulloBrowserRefresher>();
 
             For<IFileSystem>().Use<FileSystem>();
 

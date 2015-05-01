@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Bottles.Services;
 using FubuCore;
 using NUnit.Framework;
@@ -22,7 +24,8 @@ namespace StoryTeller.Testing.ST.Docs.Samples
                 var builder = container.GetInstance<ISampleBuilder>();
                 var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
 
-                builder.ScanFolder(path);
+                var tasks = builder.ScanFolder(path).ToArray();
+                Task.WaitAll(tasks);
 
                 var cache = container.GetInstance<ISampleCache>();
 
@@ -51,7 +54,10 @@ var x = 1;
             {
                 var builder = container.GetInstance<ISampleBuilder>();
 
-                builder.ScanFolder(folder);
+                var tasks = builder.ScanFolder(folder).ToArray();
+                Task.WaitAll(tasks);
+
+                builder.EnableWatching();
 
                 var cache = container.GetInstance<ISampleCache>();
 
