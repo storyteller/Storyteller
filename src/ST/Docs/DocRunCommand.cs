@@ -21,7 +21,7 @@ namespace ST.Docs
             {
                 Root = input.DirectoryFlag.ToFullPath(),
                 Version = input.VersionFlag,
-                UrlStyle = UrlStyle.Absolute,
+                UrlStyle = UrlStyle.Live,
                 SampleDirectories = input.CodeFlag
             };
 

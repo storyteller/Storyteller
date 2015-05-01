@@ -11,21 +11,21 @@ namespace StoryTeller.Testing.ST.Docs
         [Test]
         public void default_url_style_is_absolute()
         {
-            new DocSettings().UrlStyle.ShouldBe(UrlStyle.Absolute);
+            new DocSettings().UrlStyle.ShouldBe(UrlStyle.Live);
         }
 
         [Test]
         public void select_the_absolute_url_transformer_type()
         {
-            new DocSettings {UrlStyle = UrlStyle.Absolute}
-                .UrlResolverType().ShouldBe(typeof (AbsoluteUrlResolver));
+            new DocSettings {UrlStyle = UrlStyle.Live}
+                .UrlResolverType().ShouldBe(typeof (LiveUrlResolver));
         }
 
         [Test]
         public void select_the_relative_url_transformer_type()
         {
-            new DocSettings { UrlStyle = UrlStyle.Relative }
-                .UrlResolverType().ShouldBe(typeof(RelativeUrlResolver));
+            new DocSettings { UrlStyle = UrlStyle.WebsiteExport }
+                .UrlResolverType().ShouldBe(typeof(WebsiteExportUrlResolver));
         }
 
         [Test]

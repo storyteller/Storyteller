@@ -26,8 +26,6 @@ namespace ST.Docs
             _topic = TopicLoader.LoadDirectory(settings.Root);
             _settings = settings;
 
-            
-
             _container = new Container(_ =>
             {
                 _.AddRegistry<SampleRegistry>();
@@ -39,6 +37,11 @@ namespace ST.Docs
                 _.For<DocSettings>().Use(settings);
                 _.For<Topic>().Use(_topic);
             });
+        }
+
+        public void ExportTo(string directory)
+        {
+            
         }
 
         public EmbeddedFubuMvcServer LaunchRunner()

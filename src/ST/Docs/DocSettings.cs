@@ -7,8 +7,8 @@ namespace ST.Docs
 {
     public enum UrlStyle
     {
-        Relative,
-        Absolute,
+        WebsiteExport,
+        Live,
         FileExport
     }
 
@@ -16,7 +16,7 @@ namespace ST.Docs
     {
         public DocSettings()
         {
-            UrlStyle = UrlStyle.Absolute;
+            UrlStyle = UrlStyle.Live;
             Version = "Unknown";
         }
 
@@ -30,11 +30,11 @@ namespace ST.Docs
         {
             switch (UrlStyle)
             {
-                case UrlStyle.Absolute:
-                    return typeof (AbsoluteUrlResolver);
+                case UrlStyle.Live:
+                    return typeof (LiveUrlResolver);
 
-                case UrlStyle.Relative:
-                    return typeof (RelativeUrlResolver);
+                case UrlStyle.WebsiteExport:
+                    return typeof (WebsiteExportUrlResolver);
 
                 case UrlStyle.FileExport:
                     return typeof (FileExportUrlResolver);

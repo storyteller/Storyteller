@@ -19,7 +19,7 @@ namespace ST.Docs.Transformation
         }
         public string Transform(Topic current, string data)
         {
-            var url = _urls.ToUrl(data);
+            var url = _urls.ToUrl(current, data);
 
             return new HtmlTag("link")
                 .Attr("href", url)

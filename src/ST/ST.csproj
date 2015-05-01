@@ -92,6 +92,7 @@
     <Compile Include="Docs\DocSettings.cs" />
     <Compile Include="Docs\Html\HtmlClasses.cs" />
     <Compile Include="Docs\Html\IUrlResolver.cs" />
+    <Compile Include="Docs\Html\LiveUrlResolver.cs" />
     <Compile Include="Docs\Html\Navigation\NamedTopicLinkTag.cs" />
     <Compile Include="Docs\Html\Navigation\TableOfContentsTag.cs" />
     <Compile Include="Docs\Html\Navigation\TopicLinkTag.cs" />
