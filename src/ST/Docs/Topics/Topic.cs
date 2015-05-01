@@ -217,8 +217,6 @@ namespace ST.Docs.Topics
                 return Url.AppendUrl("index.htm");
             }
 
-
-
             return Parent.Url.AppendUrl(KeyInsideParent() + ".htm").TrimStart('/');
         }
 

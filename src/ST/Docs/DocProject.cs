@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FubuMVC.Core;
 using FubuMVC.Katana;
 using FubuMVC.StructureMap;
+using ST.Docs.Exporting;
 using ST.Docs.Html;
 using ST.Docs.Runner;
 using ST.Docs.Samples;
@@ -41,6 +42,23 @@ namespace ST.Docs
 
         public void ExportTo(string directory)
         {
+            var exporter = _container.GetInstance<Exporter>();
+            
+            Console.WriteLine("Cleaning off any existing docs at " + directory);
+
+            exporter.CleanTarget(directory);
+
+            scanForSamples();
+
+            if (_settings.UrlStyle == UrlStyle.FileExport)
+            {
+                exporter.ExportTo(directory, _topic, x => x.FileExportPath());
+            }
+            else
+            {
+                exporter.ExportTo(directory, _topic, x => x.WebsiteExportPath());
+            }
+
             
         }
 
@@ -57,17 +75,23 @@ namespace ST.Docs
 
 
 
-            var sampleBuilder = _container.GetInstance<ISampleBuilder>();
-            var others = _settings.SampleDirectories.SelectMany(sampleBuilder.StartWatching);
-            var tasks = sampleBuilder.StartWatching(_settings.Root).Union(others).ToArray();
-
-
-            Task.WaitAll(tasks);
+            var sampleBuilder = scanForSamples();
 
             sampleBuilder.EnableWatching();
 
             var registry = new TopicRegistry(_topic);
             return FubuApplication.For(registry).StructureMap(_container).RunEmbeddedWithAutoPort(_settings.Root);
+        }
+
+        private ISampleBuilder scanForSamples()
+        {
+            var sampleBuilder = _container.GetInstance<ISampleBuilder>();
+            var others = _settings.SampleDirectories.SelectMany(sampleBuilder.ScanFolder);
+            var tasks = sampleBuilder.ScanFolder(_settings.Root).Union(others).ToArray();
+
+
+            Task.WaitAll(tasks);
+            return sampleBuilder;
         }
 
         public Topic Topic

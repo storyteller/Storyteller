@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
                 var builder = container.GetInstance<ISampleBuilder>();
                 var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
 
-                builder.StartWatching(path);
+                builder.ScanFolder(path);
 
                 var cache = container.GetInstance<ISampleCache>();
 
@@ -51,7 +51,7 @@ var x = 1;
             {
                 var builder = container.GetInstance<ISampleBuilder>();
 
-                builder.StartWatching(folder);
+                builder.ScanFolder(folder);
 
                 var cache = container.GetInstance<ISampleCache>();
 

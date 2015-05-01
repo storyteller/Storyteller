@@ -11,19 +11,7 @@ namespace ST.Docs
     {
         public override bool Execute(DocInput input)
         {
-            if (!Directory.Exists(input.DirectoryFlag))
-            {
-                ConsoleWriter.Write(ConsoleColor.Yellow, "Could not find requested documentation folder " + input.DirectoryFlag);
-                return false;
-            }
-
-            var settings = new DocSettings
-            {
-                Root = input.DirectoryFlag.ToFullPath(),
-                Version = input.VersionFlag,
-                UrlStyle = UrlStyle.Live,
-                SampleDirectories = input.CodeFlag
-            };
+            var settings = input.ToSettings();
 
             using (var project = new DocProject(settings))
             {

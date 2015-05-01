@@ -90,6 +90,8 @@
     <Compile Include="Docs\DocRunCommand.cs" />
     <Compile Include="Docs\DocSeedCommand.cs" />
     <Compile Include="Docs\DocSettings.cs" />
+    <Compile Include="Docs\Exporting\DocExportCommand.cs" />
+    <Compile Include="Docs\Exporting\Exporter.cs" />
     <Compile Include="Docs\Html\FileExportUrlResolver.cs" />
     <Compile Include="Docs\Html\HtmlClasses.cs" />
     <Compile Include="Docs\Html\IUrlResolver.cs" />

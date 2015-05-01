@@ -25,7 +25,7 @@ namespace ST.Docs.Samples
             _scanners = scanners;
         }
 
-        public IEnumerable<Task> StartWatching(string folder)
+        public IEnumerable<Task> ScanFolder(string folder)
         {
             return _scanners.Select(scanner =>
             {

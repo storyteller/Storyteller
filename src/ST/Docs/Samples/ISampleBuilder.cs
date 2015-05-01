@@ -5,7 +5,7 @@ namespace ST.Docs.Samples
 {
     public interface ISampleBuilder
     {
-        IEnumerable<Task> StartWatching(string folder);
+        IEnumerable<Task> ScanFolder(string folder);
         void EnableWatching();
     }
 }
