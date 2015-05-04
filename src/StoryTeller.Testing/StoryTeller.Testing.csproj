@@ -130,6 +130,7 @@
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />
     <Compile Include="Model\Persistence\HierarchyLoaderTester.cs" />
+    <Compile Include="Model\Persistence\HierarchyTester.cs" />
     <Compile Include="Model\Persistence\Json_serialization_formatting_specs.cs" />
     <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_json.cs" />
     <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_xml.cs" />

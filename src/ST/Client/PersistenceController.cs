@@ -270,7 +270,7 @@ namespace ST.Client
                         var old = _hierarchy.Specifications[node.id];
                         var suite = _hierarchy.Suites[old.SuitePath()];
 
-                        suite.ReplaceNode(node);
+                        suite.ReplaceSpecification(node);
                         _hierarchy.Specifications[node.id] = node;
 
                         node.WritePath(suite.path);

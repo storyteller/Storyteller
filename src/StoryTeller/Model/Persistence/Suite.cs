@@ -58,13 +58,15 @@ namespace StoryTeller.Model.Persistence
             return path.Split('/').Reverse().Skip(1).Reverse().Join("/");
         }
 
-        public void ReplaceNode(Specification spec)
+        public void ReplaceSpecification(Specification spec)
         {
             var index = Array.IndexOf(specs, spec);
             if (index > -1)
             {
                 specs[index] = spec;
             }
+
+
         }
 
         public void AddSpec(Specification spec)

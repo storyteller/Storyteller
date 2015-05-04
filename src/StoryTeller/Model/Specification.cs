@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using StoryTeller.Grammars;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Model
 {
@@ -147,6 +148,16 @@ namespace StoryTeller.Model
                 {
                     group.Each(x => x.id = Guid.NewGuid().ToString());
                 });
+        }
+
+        public Specification Clone()
+        {
+            var json = JsonSerialization.ToCleanJson(this);
+            var clone = JsonSerialization.Deserialize<Specification>(json);
+
+            clone.id = Guid.NewGuid().ToString();
+
+            return clone;
         }
     }
 }
