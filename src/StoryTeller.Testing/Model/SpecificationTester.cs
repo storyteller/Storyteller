@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Shouldly;
@@ -10,6 +11,13 @@ namespace StoryTeller.Testing.Model
     [TestFixture]
     public class SpecificationTester
     {
+        [Test]
+        public void is_full_by_default()
+        {
+            new Specification().SpecType
+                .ShouldBe(SpecType.full);
+        }
+
         [Test]
         public void serializes_fine()
         {
@@ -32,6 +40,8 @@ namespace StoryTeller.Testing.Model
             spec.Children.Add(c2);
 
             var json = JsonSerialization.ToJson(spec, true);
+
+            Debug.WriteLine(json);
         }
 
         [Test]

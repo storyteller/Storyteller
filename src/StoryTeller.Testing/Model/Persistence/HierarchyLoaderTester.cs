@@ -31,6 +31,17 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Test]
+        public void the_spec_type_should_be_header_after_loading_a_spec_as_header()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+
+            var spec = HierarchyLoader.ReadSpecNode(path);
+
+            spec.SpecType.ShouldBe(SpecType.header);
+        }
+
+        [Test]
         public void can_read_max_retries()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()

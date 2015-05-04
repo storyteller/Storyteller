@@ -9,7 +9,12 @@ using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Model
 {
-    [Serializable]
+    public enum SpecType
+    {
+        header,
+        full
+    }
+    
     public class Specification : Node, INodeHolder
     {
         [JsonProperty("title")]
@@ -23,6 +28,10 @@ namespace StoryTeller.Model
         [JsonConverter(typeof (StringEnumConverter))] 
         [JsonProperty("lifecycle")] 
         public Lifecycle Lifecycle = Lifecycle.Acceptance;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty("type")] 
+        public SpecType SpecType = Model.SpecType.full;
 
         private string _fileName;
 

@@ -57,7 +57,8 @@ namespace StoryTeller.Model.Persistence
                     id = reader.GetAttribute("id") ?? Guid.NewGuid().ToString(),
                     name = reader.GetAttribute("name"),
                     Lifecycle = reader.GetAttribute("lifecycle").AsLifecycle(),
-                    Filename = filename
+                    Filename = filename,
+                    SpecType = SpecType.header
                 };
 
                 var maxRetries = reader.GetAttribute(XmlConstants.MaxRetries);
