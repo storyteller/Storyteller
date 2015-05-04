@@ -26,7 +26,6 @@ namespace ST.Client
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
-        private readonly FubuCore.Util.Cache<string, Specification> _data;
 
 
         public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client,
@@ -36,16 +35,6 @@ namespace ST.Client
             _engine = engine;
             _client = client;
             _watcher = watcher;
-
-            _data = new FubuCore.Util.Cache<string, Specification>(key =>
-            {
-                var node = _hierarchy.Specifications[key];
-                var spec = XmlReader.ReadFromFile(node.Filename);
-
-                // TODO -- renumber if necessary
-
-                return spec;
-            });
         }
 
         public void StartWatching(string path)
@@ -107,7 +96,7 @@ namespace ST.Client
                         document.Save(spec.Filename);
                     }
 
-                    _data[id] = specification;
+                    _hierarchy.Specifications[id] = specification;
 
                     return true;
                 });
@@ -226,7 +215,7 @@ namespace ST.Client
                 var old = _hierarchy.Specifications[id];
                 using (_watcher.LatchFile(old.Filename))
                 {
-                    var specification = _data[id];
+                    var specification = _hierarchy.Specifications[id];
                     specification.Filename = old.Filename;
 
                     alteration(specification);
@@ -248,9 +237,11 @@ namespace ST.Client
                 if (!_hierarchy.Specifications.Has(id)) return null;
 
                 var spec = _hierarchy.Specifications[id];
+                spec.ReadBody();
+
                 var data = new SpecData
                 {
-                    data = _data[id],
+                    data = _hierarchy.Specifications[id],
                     id = id
                 };
 
@@ -273,7 +264,6 @@ namespace ST.Client
                 _lock.Read(() =>
                 {
                     var node = HierarchyLoader.ReadSpecHeader(file);
-                    _data.Remove(node.id);
 
                     if (_hierarchy.Specifications.Has(node.id))
                     {
@@ -310,7 +300,6 @@ namespace ST.Client
                     _hierarchy.Specifications.GetAll().Where(x => x.results != null).Each(x => { results[x.id] = x.results; });
 
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
-                    _data.ClearAll();
 
                     results.Each((id, result) =>
                     {

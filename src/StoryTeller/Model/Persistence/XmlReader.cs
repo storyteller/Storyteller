@@ -40,6 +40,11 @@ namespace StoryTeller.Model.Persistence
             document.Load(spec.Filename);
 
             ReadBody(document, spec);
+
+            if (spec.NeedsToBeRenumbered())
+            {
+                spec.ApplyRenumbering();
+            }
         }
 
         public static void ReadBody(XmlDocument document, Specification spec)
