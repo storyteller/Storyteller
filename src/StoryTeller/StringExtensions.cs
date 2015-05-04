@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using FubuCore;
+using StoryTeller.Model;
 
 namespace StoryTeller
 {
@@ -14,6 +17,13 @@ namespace StoryTeller
             });
 
             return answer;
+        }
+
+        public static Lifecycle AsLifecycle(this string text)
+        {
+            if (text.IsEmpty()) return Lifecycle.Acceptance;
+
+            return (Lifecycle) Enum.Parse(typeof (Lifecycle), text);
         }
     }
 }

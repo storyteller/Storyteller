@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using StoryTeller.Grammars;
 using StoryTeller.Model.Persistence;
 
@@ -14,7 +15,9 @@ namespace StoryTeller.Model
         private readonly IList<Node> _children = new List<Node>();
         [JsonIgnore] public string FileName;
 
-        [JsonProperty("lifecycle")] public Lifecycle Lifecycle = Lifecycle.Acceptance;
+        [JsonProperty("lifecycle"), JsonConverter(typeof(StringEnumConverter))]
+        public Lifecycle Lifecycle = Lifecycle.Acceptance;
+
 
         [JsonProperty("max-retries")] public int MaxRetries;
 
@@ -58,7 +61,7 @@ namespace StoryTeller.Model
             {
                 name = Name,
                 id = id,
-                lifecycle = Lifecycle.ToString()
+                Lifecycle = Lifecycle
             };
         }
 
@@ -66,7 +69,7 @@ namespace StoryTeller.Model
         {
             Name = node.name;
             id = node.id;
-            Lifecycle = (Lifecycle) Enum.Parse(typeof(Lifecycle), node.lifecycle);
+            Lifecycle = node.Lifecycle;
         }
 
 

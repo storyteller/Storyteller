@@ -1,15 +1,26 @@
 using System;
 using FubuCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace StoryTeller.Model.Persistence
 {
     [Serializable]
     public class SpecNode
     {
+        public SpecNode()
+        {
+            Lifecycle = Lifecycle.Acceptance;
+        }
+
         public string name;
         public string path;
-        public string lifecycle;
+
+        [JsonConverter(typeof (StringEnumConverter))] 
+        [JsonProperty("lifecycle")] 
+        public Lifecycle Lifecycle = Lifecycle.Acceptance;
+
+
         public string id;
 
         private string _fileName;

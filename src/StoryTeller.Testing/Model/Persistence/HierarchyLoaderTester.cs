@@ -4,6 +4,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Shouldly;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -21,7 +22,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var spec = HierarchyLoader.ReadSpecNode(path);
 
             spec.name.ShouldBe("Check properties");
-            spec.lifecycle.ShouldBe("Acceptance");
+            spec.Lifecycle.ShouldBe(Lifecycle.Acceptance);
             spec.id.ShouldBe("general1"); 
             spec.Filename.ShouldBe(path);
         }

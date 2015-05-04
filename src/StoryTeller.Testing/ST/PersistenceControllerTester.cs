@@ -140,7 +140,7 @@ namespace StoryTeller.Testing.ST
             var expectedPath = thePath.AppendPath("Sentences", "New_Sentence.xml");
 
             added.suite.ShouldBe("Sentences");
-            added.node.lifecycle.ShouldBe("Acceptance");
+            added.node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
             added.node.id.ShouldNotBe("sentence2");
             added.node.name.ShouldBe("New Sentence");
 
@@ -166,7 +166,7 @@ namespace StoryTeller.Testing.ST
 
             added.node.name.ShouldBe("The Third Sentence");
             added.node.Filename.ShouldBe(expectedPath);
-            added.node.lifecycle.ShouldBe("Acceptance");
+            added.node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
             added.node.Filename.ShouldBe(expectedPath);
 
@@ -190,7 +190,7 @@ namespace StoryTeller.Testing.ST
 
             added.node.name.ShouldBe("The Third Sentence??");
             added.node.Filename.ShouldBe(expectedPath);
-            added.node.lifecycle.ShouldBe("Acceptance");
+            added.node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
             added.node.Filename.ShouldBe(expectedPath);
 
@@ -210,7 +210,7 @@ namespace StoryTeller.Testing.ST
             // sentence4 starts as acceptance
 
             var node = ClassUnderTest.Hierarchy.Nodes["sentence4"];
-            node.lifecycle.ShouldBe("Acceptance");
+            node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
 
             var changed = ClassUnderTest.SaveSpecHeader("sentence4", x => x.Lifecycle = Lifecycle.Regression);
@@ -244,7 +244,7 @@ namespace StoryTeller.Testing.ST
             names.Each(id =>
             {
                 var node = ClassUnderTest.Hierarchy.Nodes[id];
-                node.lifecycle.ShouldBe(Lifecycle.Regression.ToString());
+                node.Lifecycle.ShouldBe(Lifecycle.Regression);
 
                 XmlReader.ReadFromFile(node.Filename).Lifecycle.ShouldBe(Lifecycle.Regression);
             });
@@ -259,7 +259,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.ChangeLifecycle(new string[]{"general5"}, Lifecycle.Regression );
 
             var node = ClassUnderTest.Hierarchy.Nodes["general5"];
-            node.lifecycle.ShouldBe(Lifecycle.Regression.ToString());
+            node.Lifecycle.ShouldBe(Lifecycle.Regression);
 
             XmlReader.ReadFromFile(node.Filename).Lifecycle
                 .ShouldBe(Lifecycle.Regression);
@@ -331,7 +331,7 @@ namespace StoryTeller.Testing.ST
             var newNode = ClassUnderTest.Hierarchy.Nodes["general1"];
 
             newNode.ShouldNotBeTheSameAs(old);
-            newNode.lifecycle.ShouldBe("Regression");
+            newNode.Lifecycle.ShouldBe(Lifecycle.Regression);
 
             ClassUnderTest.Hierarchy.Suites["General"]
                 .specs.ShouldContain(newNode);

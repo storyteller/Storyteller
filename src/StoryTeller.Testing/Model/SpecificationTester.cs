@@ -3,12 +3,37 @@ using System.Linq;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Model;
+using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model
 {
     [TestFixture]
     public class SpecificationTester
     {
+        [Test]
+        public void serializes_fine()
+        {
+            var spec = new Specification();
+            var c1 = new Comment();
+            spec.Children.Add(c1);
+            var section1 = new Section("Foo");
+            var s1 = section1.AddStep("foo1");
+            var s2 = section1.AddStep("foo1");
+            var s3 = section1.AddStep("foo1");
+
+
+            var section2 = s3.AddCollection("rows");
+            var s4 = section2.AddStep("r1");
+            var s5 = section2.AddStep("r1");
+            var s6 = section2.AddStep("r1");
+
+            spec.Children.Add(section1);
+            var c2 = new Comment();
+            spec.Children.Add(c2);
+
+            var json = JsonSerialization.ToJson(spec, true);
+        }
+
         [Test]
         public void can_find_all_children()
         {

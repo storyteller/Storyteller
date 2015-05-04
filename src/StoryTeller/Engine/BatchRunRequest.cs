@@ -31,7 +31,7 @@ namespace StoryTeller.Engine
 
             if (Lifecycle != Lifecycle.Any)
             {
-                nodes = nodes.Where(x => x.lifecycle == Lifecycle.ToString());
+                nodes = nodes.Where(x => x.Lifecycle == Lifecycle);
             }
 
             

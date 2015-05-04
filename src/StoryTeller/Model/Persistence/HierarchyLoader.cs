@@ -56,7 +56,7 @@ namespace StoryTeller.Model.Persistence
                 {
                     id = reader.GetAttribute("id") ?? Guid.NewGuid().ToString(),
                     name = reader.GetAttribute("name"),
-                    lifecycle = reader.GetAttribute("lifecycle") ?? Lifecycle.Acceptance.ToString(),
+                    Lifecycle = reader.GetAttribute("lifecycle").AsLifecycle(),
                     Filename = filename
                 };
 

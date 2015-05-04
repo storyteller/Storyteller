@@ -135,6 +135,7 @@
     <Compile Include="Model\Persistence\persisting_and_loading_specifications_with_xml.cs" />
     <Compile Include="Model\Persistence\TextParserTester.cs" />
     <Compile Include="Model\SpecificationTester.cs" />
+    <Compile Include="Model\SpecNodeTester.cs" />
     <Compile Include="Model\StepTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="recording_json_for_client_development.cs" />
