@@ -3,7 +3,7 @@ var Counts = require('./counts');
 
 class Spec{
 	constructor(data){
-		this.name = data.name;
+		this.title = data.title || data.name; // older test data still uses name in some places
 		this.id = data.id;
 		this.lifecycle = data.lifecycle || 'Acceptance';
 

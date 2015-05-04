@@ -44,7 +44,7 @@ var EditorLoading = React.createClass({
 						<br />
 						<br />
 						<br />
-						<h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {this.props.spec.name}...</h3>
+						<h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {this.props.spec.title}...</h3>
 					</div>
 				</Row>
 			</Grid>

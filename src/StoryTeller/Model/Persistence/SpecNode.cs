@@ -13,6 +13,7 @@ namespace StoryTeller.Model.Persistence
             Lifecycle = Lifecycle.Acceptance;
         }
 
+        [JsonProperty("title")]
         public string name;
         public string path;
 
@@ -43,6 +44,7 @@ namespace StoryTeller.Model.Persistence
         }
 
         [NonSerialized]
+        [Obsolete("Going to remove this altogether")]
         public SpecResults results;
 
         protected bool Equals(SpecNode other)

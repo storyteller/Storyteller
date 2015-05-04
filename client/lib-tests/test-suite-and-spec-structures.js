@@ -6,10 +6,10 @@ var _ = require('lodash');
 
 describe('Spec', function(){
 	describe('Initial Object', function(){
-		var spec = new Spec({name: 'Foo', id: '123', lifecycle: 'Acceptance'});
+		var spec = new Spec({title: 'Foo', id: '123', lifecycle: 'Acceptance'});
 
 		it('grabs name', function(){
-			expect(spec.name).to.equal('Foo');
+			expect(spec.title).to.equal('Foo');
 		});
 
 		it('grabs id', function(){
@@ -43,23 +43,23 @@ describe('Suite', function(){
 				path: 'Sentences',
 				suites: [
 					{name: 'Facts', path: 'Sentences/Facts', specs: [
-						{id: 1, name: 'True Facts', lifecycle: 'Acceptance'},
-						{id: 2, name: 'False Facts', lifecycle: 'Acceptance'},
+						{id: 1, title: 'True Facts', lifecycle: 'Acceptance'},
+						{id: 2, title: 'False Facts', lifecycle: 'Acceptance'},
 					]}
 
 
 				],
 				specs: [
-					{name: 'Simple 1', id: 3},
-					{name: 'Simple 2', id: 4},
+					{title: 'Simple 1', id: 3},
+					{title: 'Simple 2', id: 4},
 				]
 			},
 			{
 				name: 'Tables',
 				path: 'Tables',
 				specs: [
-					{name: 'Table 1', id: 5, lifecycle: 'regression'},
-					{name: 'Table 2', id: 6, lifecycle: 'regression'},
+					{title: 'Table 1', id: 5, lifecycle: 'regression'},
+					{title: 'Table 2', id: 6, lifecycle: 'regression'},
 				]
 			}
 
@@ -110,8 +110,8 @@ describe('Suite', function(){
 	});
 
 	it('builds specs underneath child suite', function(){
-		expect(suite.suites[0].specs[0].name).to.equal('Simple 1');
-		expect(suite.suites[0].specs[1].name).to.equal('Simple 2');
+		expect(suite.suites[0].specs[0].title).to.equal('Simple 1');
+		expect(suite.suites[0].specs[1].title).to.equal('Simple 2');
 	});
 });
 
@@ -153,19 +153,19 @@ describe('Suite filtering', function(){
 			suites: [
 
 				{name: 'True', path: 'Facts/True', specs: [
-					{name: 'Good Facts', id: 1},
-					{name: 'Bad Facts', id: 2},
-					{name: 'Weird Facts', id: 3},
-					{name: 'Odd Facts', id: 4}
+					{title: 'Good Facts', id: 1},
+					{title: 'Bad Facts', id: 2},
+					{title: 'Weird Facts', id: 3},
+					{title: 'Odd Facts', id: 4}
 				]},
 
 				{
 					name: 'False', path: 'False',
 					specs: [
-						{name: 'Good Facts', id: 5},
-						{name: 'Bad Facts', id: 6},
-						{name: 'Weird Facts', id: 7},
-						{name: 'Odd Facts', id: 8}
+						{title: 'Good Facts', id: 5},
+						{title: 'Bad Facts', id: 6},
+						{title: 'Weird Facts', id: 7},
+						{title: 'Odd Facts', id: 8}
 					]
 				}
 			]
@@ -182,8 +182,8 @@ describe('Suite filtering', function(){
 		expect(filtered.suites[0].name).to.equal('True');
 
 		expect(filtered.suites[0].specs.length).to.equal(2);
-		expect(filtered.suites[0].specs[0].name).to.equal('Good Facts');
-		expect(filtered.suites[0].specs[1].name).to.equal('Bad Facts');
+		expect(filtered.suites[0].specs[0].title).to.equal('Good Facts');
+		expect(filtered.suites[0].specs[1].title).to.equal('Bad Facts');
 		
 	});
 });

@@ -35,7 +35,7 @@ var QueueItem = React.createClass({
 		return (
 			<div id={divId}>
 				{icon}
-				<span className="queued-spec-name">{this.props.spec.name}</span>
+				<span className="queued-spec-name">{this.props.spec.title}</span>
 				<CommandLink createMessage={createMessage} text="cancel" />
 			</div>
 		);

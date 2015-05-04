@@ -8,8 +8,8 @@ function SuiteOption(suite){
 }
 
 function SpecOption(spec){
-	this.text = spec.name.toLowerCase();
-	this.title = 'Spec: ' + spec.name;
+	this.text = spec.title.toLowerCase();
+	this.title = 'Spec: ' + spec.title;
 	this.url = '/#/spec/editing/' + spec.id;
 }
 

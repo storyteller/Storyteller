@@ -53,7 +53,7 @@ var SpecLeaf = React.createClass({
 		return (
 			<div className="spec-leaf">
 				{icon}
-				<a href={href} className={clazz}>{this.props.spec.name}</a>
+				<a href={href} className={clazz}>{this.props.spec.title}</a>
 				{link}{this.cloneLink()}
 			</div>
 		);
