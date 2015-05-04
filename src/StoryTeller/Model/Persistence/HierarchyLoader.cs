@@ -60,6 +60,9 @@ namespace StoryTeller.Model.Persistence
                     Filename = filename
                 };
 
+                var maxRetries = reader.GetAttribute(XmlConstants.MaxRetries);
+                node.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
+
                 return node;
             }
         }

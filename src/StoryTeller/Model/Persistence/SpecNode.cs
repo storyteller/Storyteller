@@ -15,7 +15,11 @@ namespace StoryTeller.Model.Persistence
 
         [JsonProperty("title")]
         public string name;
+
         public string path;
+
+        [JsonProperty("max-retries")]
+        public int MaxRetries;
 
         [JsonConverter(typeof (StringEnumConverter))] 
         [JsonProperty("lifecycle")] 

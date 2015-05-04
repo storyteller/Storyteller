@@ -51,9 +51,7 @@ namespace StoryTeller.Model.Persistence
             spec.Name = top.GetAttribute("name");
 
             var lifecycle = top.GetAttribute(LifecycleAtt);
-            spec.Lifecycle = lifecycle.IsEmpty()
-                ? Lifecycle.Acceptance
-                : Enum.Parse(typeof (Lifecycle), lifecycle).As<Lifecycle>();
+            spec.Lifecycle = lifecycle.AsLifecycle();
 
             spec.id = top.ReadId();
             var maxRetries = top.GetAttribute(MaxRetries);

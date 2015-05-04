@@ -25,6 +25,20 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.Lifecycle.ShouldBe(Lifecycle.Acceptance);
             spec.id.ShouldBe("general1"); 
             spec.Filename.ShouldBe(path);
+
+           
+            spec.MaxRetries.ShouldBe(3);
+        }
+
+        [Test]
+        public void can_read_max_retries()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+
+            var spec = HierarchyLoader.ReadSpecNode(path);
+
+            spec.MaxRetries.ShouldBe(3);
         }
 
         [Test]
