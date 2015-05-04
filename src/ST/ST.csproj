@@ -74,6 +74,7 @@
     <Compile Include="Client\Persistence\RunSpecCommand.cs" />
     <Compile Include="Client\Persistence\RunSpecsCommand.cs" />
     <Compile Include="Client\Persistence\SaveSpecBodyCommand.cs" />
+    <Compile Include="Client\ResultsCache.cs" />
     <Compile Include="Client\SpecFileWatcher.cs" />
     <Compile Include="Client\StartWatchingAssets.cs" />
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
