@@ -80,7 +80,7 @@ namespace ST.Client
         }
 
 
-        public void SaveSpecificationBody(string id, Specification specification)
+        public void SaveSpecification(string id, Specification specification)
         {
             try
             {
@@ -188,45 +188,12 @@ namespace ST.Client
             });
         }
 
-        public void ChangeLifecycle(string[] idList, Lifecycle lifecycle)
-        {
-            if (idList.Length == 0) return;
-
-            idList.Each(id => SaveSpecHeader(id, x => x.Lifecycle = lifecycle));
-            ReloadHierarchy();
-        }
-
         public void ClearAllResults()
         {
             _lock.Write(() =>
             {
                 _hierarchy.Specifications.Each(node => node.results = null);
                 UpdateHierarchyInClientAndEngine();
-            });
-        }
-
-        [Obsolete("Try to kill this.")]
-        public virtual SpecNodeChanged SaveSpecHeader(string id, Action<Specification> alteration)
-        {
-            return _lock.Read(() =>
-            {
-                if (!_hierarchy.Specifications.Has(id)) return null;
-
-                var old = _hierarchy.Specifications[id];
-                using (_watcher.LatchFile(old.Filename))
-                {
-                    var specification = _hierarchy.Specifications[id];
-                    specification.Filename = old.Filename;
-
-                    alteration(specification);
-
-                    XmlWriter.WriteToXml(specification).Save(old.Filename);
-
-                    return new SpecNodeChanged
-                    {
-                        node = specification
-                    };
-                }
             });
         }
 
@@ -320,12 +287,6 @@ namespace ST.Client
             }
         }
 
-        public void UpdateMaximumRetries(string id, int number)
-        {
-            if (id.IsEmpty()) return;
-            var changed = SaveSpecHeader(id, x => x.MaxRetries = number);
-            _client.SendMessageToClient(changed);
-        }
 
         public void UpdateHierarchyInClientAndEngine()
         {

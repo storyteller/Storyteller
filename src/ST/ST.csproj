@@ -69,9 +69,6 @@
     <Compile Include="Client\Persistence\ClearAllResultsCommand.cs" />
     <Compile Include="Client\Persistence\CloneSpecCommand.cs" />
     <Compile Include="Client\Persistence\AddSpecCommand.cs" />
-    <Compile Include="Client\Persistence\MarkAsAcceptedCommand.cs" />
-    <Compile Include="Client\Persistence\MarkAsRegressionCommand.cs" />
-    <Compile Include="Client\Persistence\MaximumRetriedCommand.cs" />
     <Compile Include="Client\Persistence\ReloadSpecsCommand.cs" />
     <Compile Include="Client\Persistence\RequestSpecDataCommand.cs" />
     <Compile Include="Client\Persistence\RunSpecCommand.cs" />

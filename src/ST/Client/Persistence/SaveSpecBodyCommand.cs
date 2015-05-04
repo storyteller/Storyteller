@@ -18,7 +18,7 @@ namespace ST.Client.Persistence
         // TODO -- dunno, maybe a failure message back to the client maybe?
         public override void HandleMessage(SaveSpecBody message)
         {
-            _controller.Value.SaveSpecificationBody(message.id, message.spec);
+            _controller.Value.SaveSpecification(message.id, message.spec);
             _connector.Value.SendMessageToClient(new SpecBodySaved
             {
                 id = message.id,

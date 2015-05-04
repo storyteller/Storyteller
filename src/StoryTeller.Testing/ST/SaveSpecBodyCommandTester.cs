@@ -28,7 +28,7 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void should_have_persisted_the_spec_body()
         {
-            MockFor<IPersistenceController>().AssertWasCalled(x => x.SaveSpecificationBody(theInputMessage.id, theInputMessage.spec));
+            MockFor<IPersistenceController>().AssertWasCalled(x => x.SaveSpecification(theInputMessage.id, theInputMessage.spec));
         }
 
         [Test]
