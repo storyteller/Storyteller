@@ -30,10 +30,10 @@ class BatchResults{
 		this.records = data.records;
 
 		data.records.forEach(record => {
-			var id = record.header.id;
+			var id = record.specification.id;
 			this.specs[id] = record;
 
-			var header = new SpecHeader(record.header);
+			var header = new SpecHeader(record.specification);
 			header.recordResults(record.results);
 			header.results.counts = new Counts(header.results.counts); 
 			header.results.attempts = record.results.attempts;
@@ -73,7 +73,7 @@ class BatchResults{
 		var candidates = this.records;
 		if (lifecycle != 'any'){
 			candidates = _.filter(candidates, function(record){
-				return record.header.lifecycle.toLowerCase() == lifecycle;
+				return record.specification.lifecycle.toLowerCase() == lifecycle;
 			});
 		}
 

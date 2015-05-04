@@ -141,11 +141,11 @@ var SummaryTable = React.createClass({
 		var rows = records.map(x => {
 			return (
 				<SpecRow 
-					path={x.header.path} 
-					id={x.header.id}
+					path={x.specification.path} 
+					id={x.specification.id}
 					counts={x.results.counts}
 					duration={x.results.duration}
-					lifecycle={x.header.lifecycle}
+					lifecycle={x.specification.lifecycle}
 					attempts={x.results.attempts}
 					/>
 			);
