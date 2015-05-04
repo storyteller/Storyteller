@@ -29,6 +29,21 @@ namespace StoryTeller.Model.Persistence
             var spec = ReadHeaderInformation(document);
 
 
+            ReadBody(document, spec);
+
+            return spec;
+        }
+
+        public static void FillBody(Specification spec)
+        {
+            var document = new XmlDocument();
+            document.Load(spec.Filename);
+
+            ReadBody(document, spec);
+        }
+
+        public static void ReadBody(XmlDocument document, Specification spec)
+        {
             document.DocumentElement.ForEachElement(element =>
             {
                 if (element.Name == Comment)
@@ -40,8 +55,6 @@ namespace StoryTeller.Model.Persistence
                     spec.Children.Add(ReadSection(element));
                 }
             });
-
-            return spec;
         }
 
         public static Specification ReadHeaderInformation(XmlDocument document)

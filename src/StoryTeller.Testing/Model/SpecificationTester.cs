@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using FubuCore;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model
@@ -16,6 +18,26 @@ namespace StoryTeller.Testing.Model
         {
             new Specification().SpecType
                 .ShouldBe(SpecType.full);
+        }
+
+        [Test]
+        public void read_spec_data_from_header_mode()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+
+            var spec = HierarchyLoader.ReadSpecNode(path);
+            spec.Children.Any().ShouldBeFalse();
+
+            spec.SpecType.ShouldBe(SpecType.header);
+
+            spec.ReadData();
+
+            spec.SpecType.ShouldBe(SpecType.full);
+
+            spec.Children.Any().ShouldBeTrue();
+
+
         }
 
         [Test]

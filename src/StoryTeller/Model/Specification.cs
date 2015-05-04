@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using FubuCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -50,6 +51,14 @@ namespace StoryTeller.Model
         public string SuitePath()
         {
             return Suite.SuitePathOf(path);
+        }
+
+        public void ReadData()
+        {
+            if (SpecType == SpecType.full) return;
+
+            XmlReader.FillBody(this);
+            SpecType = SpecType.full;
         }
 
         [NonSerialized]
