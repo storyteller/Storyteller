@@ -70,7 +70,12 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void read_xml_sad_path()
         {
-            var request = SpecExecutionRequest.For(new Specification() { Filename = "nonexistent.xml" });
+            var request = SpecExecutionRequest.For(new Specification()
+            {
+                Filename = "nonexistent.xml",
+                SpecType = SpecType.header
+            });
+            
 
             EventAggregator.Messaging.AddListener(listener);
 
@@ -101,18 +106,6 @@ namespace StoryTeller.Testing.Engine
             request.IsCancelled.ShouldBe(false);
 
             request.Plan.ShouldNotBeNull();
-        }
-
-        [Test]
-        public void create_plan_sad_path_smoke_test()
-        {
-            var request = SpecExecutionRequest.For(theSpec);
-
-            // No specification, so it blows up
-            request.ReadXml();
-            request.CreatePlan(TestingContext.Library);
-
-            request.IsCancelled.ShouldBe(true);
         }
 
         public class RuntimeErrorListener : IListener<RuntimeError>

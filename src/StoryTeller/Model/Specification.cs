@@ -31,8 +31,8 @@ namespace StoryTeller.Model
         public Lifecycle Lifecycle = Lifecycle.Acceptance;
 
         [JsonConverter(typeof(StringEnumConverter))]
-        [JsonProperty("type")] 
-        public SpecType SpecType = Model.SpecType.full;
+        [JsonProperty("mode")] 
+        public SpecType SpecType = SpecType.full;
 
         private string _fileName;
 
@@ -53,7 +53,7 @@ namespace StoryTeller.Model
             return Suite.SuitePathOf(path);
         }
 
-        public void ReadData()
+        public void ReadBody()
         {
             if (SpecType == SpecType.full) return;
 

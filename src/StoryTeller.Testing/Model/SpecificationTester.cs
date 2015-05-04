@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.Model
 
             spec.SpecType.ShouldBe(SpecType.header);
 
-            spec.ReadData();
+            spec.ReadBody();
 
             spec.SpecType.ShouldBe(SpecType.full);
 

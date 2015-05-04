@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Bottles.Configuration;
@@ -313,6 +314,8 @@ namespace StoryTeller.Testing.ST
         public void load_spec_json()
         {
             var json = ClassUnderTest.LoadSpecificationJson("sentence3");
+
+            Debug.WriteLine(json);
 
             var spec = JsonSerialization.Deserialize<Specification>(json);
             spec.id.ShouldBe("sentence3");

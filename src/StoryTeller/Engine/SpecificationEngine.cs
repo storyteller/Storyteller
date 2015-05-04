@@ -58,7 +58,7 @@ namespace StoryTeller.Engine
 
         public void Enqueue(SpecExecutionRequest request)
         {
-            if (request.Specification == null)
+            if (request.Specification.SpecType == SpecType.header)
             {
                 _reader.Enqueue(request);
             }

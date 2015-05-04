@@ -46,13 +46,7 @@ namespace StoryTeller.Engine
 
         public void ReadXml()
         {
-            performAction(() =>
-            {
-                Specification = XmlReader.ReadFromFile(Specification.Filename);
-                if (Specification == null) throw new FileNotFoundException(Specification.Filename);
-
-                Specification.id = Specification.id;
-            });
+            performAction(() => Specification.ReadBody());
         }
 
         public void CreatePlan(FixtureLibrary library)
