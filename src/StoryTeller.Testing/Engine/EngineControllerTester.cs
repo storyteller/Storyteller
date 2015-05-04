@@ -136,7 +136,7 @@ namespace StoryTeller.Testing.Engine
         public void sends_a_conpletion_message_to_the_client()
         {
             MockFor<IUserInterfaceObserver>()
-                .AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults)));
+                .AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults, new Specification())));
         }
 
         [Test]

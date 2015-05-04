@@ -55,7 +55,7 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void caches_the_last_execution_for_a_suite()
         {
-            var completed = new SpecExecutionCompleted("sentence4", new SpecResults());
+            var completed = new SpecExecutionCompleted("sentence4", new SpecResults(), new Specification());
             ClassUnderTest.Receive(completed);
 
             ClassUnderTest.Hierarchy.Specifications["sentence4"].results
@@ -65,10 +65,10 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void clear_all_results()
         {
-            ClassUnderTest.Receive(new SpecExecutionCompleted("sentence4", new SpecResults()));
-            ClassUnderTest.Receive(new SpecExecutionCompleted("general1", new SpecResults()));
-            ClassUnderTest.Receive(new SpecExecutionCompleted("general2", new SpecResults()));
-            ClassUnderTest.Receive(new SpecExecutionCompleted("table1", new SpecResults()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("sentence4", new SpecResults(), new Specification()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("general1", new SpecResults(), new Specification()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("general2", new SpecResults(), new Specification()));
+            ClassUnderTest.Receive(new SpecExecutionCompleted("table1", new SpecResults(), new Specification()));
         
             ClassUnderTest.ClearAllResults();
 
@@ -87,7 +87,7 @@ namespace StoryTeller.Testing.ST
         public void load_specification_returns_the_specifiction_and_result_if_it_exists()
         {
             var theResults = new SpecResults();
-            var completed = new SpecExecutionCompleted("sentence4", theResults);
+            var completed = new SpecExecutionCompleted("sentence4", theResults, new Specification());
             ClassUnderTest.Receive(completed);
 
             var message = ClassUnderTest.LoadSpecification("sentence4");

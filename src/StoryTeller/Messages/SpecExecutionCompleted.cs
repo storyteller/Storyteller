@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using StoryTeller.Model;
 
 namespace StoryTeller.Messages
 {
@@ -15,14 +16,19 @@ namespace StoryTeller.Messages
         {
         }
 
-        public SpecExecutionCompleted(string id, SpecResults results) : this()
+        public SpecExecutionCompleted(string id, SpecResults results, Specification data) : this()
         {
             if (results == null) throw new ArgumentNullException("results");
+            if (data == null) throw new ArgumentNullException("data");
 
             Results = results;
             Id = id;
             Time = DateTime.Now;
+            Data = data;
         }
+
+        [JsonProperty("data")]
+        public Specification Data { get; set; }
 
         [JsonProperty("results")]
         public SpecResults Results { get; set; }

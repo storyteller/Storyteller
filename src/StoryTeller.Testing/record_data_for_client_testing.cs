@@ -95,7 +95,7 @@ namespace StoryTeller.Testing
 
         public void SpecExecutionFinished(Specification specification, SpecResults results)
         {
-            Messages.Add(new SpecExecutionCompleted(specification.id, results));
+            Messages.Add(new SpecExecutionCompleted(specification.id, results, new Specification()));
         }
     }
 
