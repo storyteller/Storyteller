@@ -18,7 +18,7 @@ Name: My spec
 ");
 
 
-            spec.Name.ShouldBe("My spec");
+            spec.name.ShouldBe("My spec");
         }
 
         [Test]

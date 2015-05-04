@@ -41,7 +41,7 @@ namespace StoryTeller.Model.Persistence
             root.SetAttribute(MaxRetries, specification.MaxRetries.ToString());
             root.SetAttribute(TagsAtt, specification.Tags.Join(", "));
             root.SetAttribute(LifecycleAtt, specification.Lifecycle.ToString());
-            root.SetAttribute(Name, specification.Name);
+            root.SetAttribute(Name, specification.name);
 
             return root;
         }

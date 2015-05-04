@@ -15,7 +15,7 @@ namespace StoryTeller.Engine
 
         public void Start(Specification spec)
         {
-            _main = new PerfRecord("Specification", spec.Name, 0);
+            _main = new PerfRecord("Specification", spec.name, 0);
             _records.Add(_main);
             _stopwatch.Start();
         }

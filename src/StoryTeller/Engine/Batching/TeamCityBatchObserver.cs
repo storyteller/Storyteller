@@ -17,14 +17,14 @@ namespace StoryTeller.Engine.Batching
 
         public void SpecRequeued(SpecExecutionRequest request)
         {
-            Console.WriteLine("Requeuing {0}, attempt # {1}", request.Specification.Name, request.Plan.Attempts + 1);
+            Console.WriteLine("Requeuing {0}, attempt # {1}", request.Specification.name, request.Plan.Attempts + 1);
         }
 
         public void SpecHandled(SpecExecutionRequest request, SpecResults results)
         {
             _inner.SpecHandled(request, results);
 
-            var name = request.Specification.Name.Escape();
+            var name = request.Specification.name.Escape();
             var resultText = results.Counts.ToString().Escape();
 
             if (results.Counts.WasSuccessful())

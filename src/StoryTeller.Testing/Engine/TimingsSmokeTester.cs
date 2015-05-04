@@ -16,7 +16,7 @@ namespace StoryTeller.Testing.Engine
         {
             var spec = new Specification
             {
-                Name = "Some Name"
+                name = "Some Name"
             };
 
             var timings = new Timings();

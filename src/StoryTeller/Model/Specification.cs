@@ -21,7 +21,7 @@ namespace StoryTeller.Model
 
         [JsonProperty("max-retries")] public int MaxRetries;
 
-        [JsonProperty("title")] public string Name;
+        [JsonProperty("title")] public string name;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
         public IList<Node> Children
@@ -59,7 +59,7 @@ namespace StoryTeller.Model
         {
             return new SpecNode
             {
-                name = Name,
+                name = name,
                 id = id,
                 Lifecycle = Lifecycle
             };
@@ -67,7 +67,7 @@ namespace StoryTeller.Model
 
         public void ReadNode(SpecNode node)
         {
-            Name = node.name;
+            name = node.name;
             id = node.id;
             Lifecycle = node.Lifecycle;
         }

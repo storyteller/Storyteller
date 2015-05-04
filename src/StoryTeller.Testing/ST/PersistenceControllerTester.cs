@@ -149,7 +149,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
-            specification.Name.ShouldBe("New Sentence");
+            specification.name.ShouldBe("New Sentence");
             specification.Children.Any().ShouldBe(true);
 
             // Adds the spec to the node
@@ -173,7 +173,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
-            specification.Name.ShouldBe("The Third Sentence");
+            specification.name.ShouldBe("The Third Sentence");
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
@@ -197,7 +197,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
-            specification.Name.ShouldBe("The Third Sentence??");
+            specification.name.ShouldBe("The Third Sentence??");
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
@@ -345,7 +345,7 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void file_added()
         {
-            var specification = new Specification {Name = "Foo"};
+            var specification = new Specification {name = "Foo"};
 
             var file = thePath.AppendPath("General", "Foo.xml");
 

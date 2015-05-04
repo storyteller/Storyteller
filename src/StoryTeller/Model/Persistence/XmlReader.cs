@@ -48,7 +48,7 @@ namespace StoryTeller.Model.Persistence
         {
             var spec = new Specification();
             var top = document.DocumentElement;
-            spec.Name = top.GetAttribute("name");
+            spec.name = top.GetAttribute("name");
 
             var lifecycle = top.GetAttribute(LifecycleAtt);
             spec.Lifecycle = lifecycle.AsLifecycle();
@@ -57,7 +57,7 @@ namespace StoryTeller.Model.Persistence
             var maxRetries = top.GetAttribute(MaxRetries);
             spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
-            spec.Name = top.GetAttribute(Name);
+            spec.name = top.GetAttribute(Name);
 
             var tags = top.GetAttribute(TagsAtt);
             if (tags.IsNotEmpty())

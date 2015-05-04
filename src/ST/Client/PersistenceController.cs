@@ -130,7 +130,7 @@ namespace ST.Client
                 // Keep things isolated!
                 var template = XmlReader.ReadFromFile(spec.Filename);
                 template.id = Guid.NewGuid().ToString();
-                template.Name = name;
+                template.name = name;
                 template.Lifecycle = Lifecycle.Acceptance;
 
                 var suitePath = spec.SuitePath();
@@ -176,7 +176,7 @@ namespace ST.Client
                 var folder = suite.Folder;
                 var specification = new Specification
                 {
-                    Name = name
+                    name = name
                 };
 
                 var specFileName = Specification.DetermineFilename(name);

@@ -77,7 +77,7 @@ namespace StoryTeller.Model.Persistence
 
             private void parseName(string text)
             {
-                _specification.Name = text.Split(':').Last().Trim();
+                _specification.name = text.Split(':').Last().Trim();
             }
 
             private void parseStep(string text)

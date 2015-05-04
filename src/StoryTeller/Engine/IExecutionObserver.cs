@@ -41,12 +41,12 @@ namespace StoryTeller.Engine
     {
         public void SpecStarted(SpecExecutionRequest request)
         {
-            Console.WriteLine("##teamcity[testStarted name='{0}']", request.Specification.Name.Escape());
+            Console.WriteLine("##teamcity[testStarted name='{0}']", request.Specification.name.Escape());
         }
 
         public void SpecFinished(SpecExecutionRequest request)
         {
-            Console.WriteLine("##teamcity[testFinished name='{0}']", request.Specification.Name.Escape());
+            Console.WriteLine("##teamcity[testFinished name='{0}']", request.Specification.name.Escape());
         }
     }
 }
