@@ -67,7 +67,7 @@ namespace ST.CommandLine
 
                 if (input.CsvFlag.IsNotEmpty())
                 {
-                    Console.WriteLine("Writing performance data as CSV data to " + input.CsvFlag);
+                    Console.WriteLine("Writing performance data as CSV data to " + input.CsvFlag.ToFullPath());
                 
                     PerformanceDataWriter.WriteCSV(results, input.CsvFlag);
                 }
