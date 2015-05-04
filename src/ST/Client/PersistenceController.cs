@@ -20,19 +20,17 @@ namespace ST.Client
         IListener<SpecExecutionCompleted>
     {
         private readonly ILogger _logger;
-        private readonly IRemoteController _engine;
         private readonly IClientConnector _client;
         private readonly ISpecFileWatcher _watcher;
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
+        private readonly ResultsCache _results = new ResultsCache();
 
 
-        public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client,
-            ISpecFileWatcher watcher)
+        public PersistenceController(ILogger logger, IClientConnector client, ISpecFileWatcher watcher)
         {
             _logger = logger;
-            _engine = engine;
             _client = client;
             _watcher = watcher;
         }
@@ -212,19 +210,12 @@ namespace ST.Client
                 var data = new SpecData
                 {
                     data = _hierarchy.Specifications[id],
-                    id = id
+                    id = id,
+                    results = _results.ResultsFor(id).ToArray()
                 };
-
-                if (spec.results != null) data.results = spec.results;
 
                 return data;
             });
-        }
-
-        public string LoadSpecificationJson(string id)
-        {
-            var specification = LoadSpecification(id);
-            return JsonSerialization.ToCleanJson(specification);
         }
 
         public void Changed(string file)
@@ -318,7 +309,7 @@ namespace ST.Client
 
         public void Receive(SpecExecutionCompleted message)
         {
-            // TODO -- do this differently
+            _results.Store(message);
             Hierarchy.Specifications[message.Id].results = message.Results;
         }
     }

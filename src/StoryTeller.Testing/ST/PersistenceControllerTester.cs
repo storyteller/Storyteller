@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.ST
             var message = ClassUnderTest.LoadSpecification("sentence4");
             message.id.ShouldBe("sentence4");
             message.data.ShouldBeOfType<Specification>().id.ShouldBe("sentence4");
-            message.results.ShouldBe(theResults);
+            message.results.ShouldContain(completed);
         }
 
         [Test]
@@ -243,17 +243,6 @@ namespace StoryTeller.Testing.ST
             newSuite.suites.Length.ShouldBe(0);
             newSuite.path.ShouldBe("Tables/Special Tables");
 
-        }
-
-        [Test]
-        public void load_spec_json()
-        {
-            var json = ClassUnderTest.LoadSpecificationJson("sentence3");
-
-            Debug.WriteLine(json);
-
-            var spec = JsonSerialization.Deserialize<Specification>(json);
-            spec.id.ShouldBe("sentence3");
         }
 
         [Test]

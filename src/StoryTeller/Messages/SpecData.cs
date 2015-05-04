@@ -10,6 +10,6 @@ namespace StoryTeller.Messages
 
         public string id;
         public Specification data;
-        public SpecResults results;
+        public SpecExecutionCompleted[] results;
     }
 }
