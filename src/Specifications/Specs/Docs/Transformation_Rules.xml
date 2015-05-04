@@ -16,7 +16,7 @@
         <TheTopicsAre-row path="faq.md" Line1="NULL" Line2="NULL" />
       </Rows>
     </TheTopicsAre>
-    <TheUrlResolutionIs style="Absolute" />
+    <TheUrlResolutionIs style="Live" />
     <TransformsShouldBe>
       <table id="e054cb32-63d9-4489-bb09-b13c148ee39f">
         <TransformsShouldBe-row Topic="index" Before="&lt;[title]&gt;" returnValue="The Documentation Project" />

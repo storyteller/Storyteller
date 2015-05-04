@@ -12,13 +12,12 @@ using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StructureMap.Util;
-using XmlReader = StoryTeller.Model.Persistence.XmlReader;
-using XmlWriter = StoryTeller.Model.Persistence.XmlWriter;
 
 namespace ST.Client
 {
     // TODO -- need to flush results when the file changes maybe?
-    public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable, IListener<SpecExecutionCompleted>
+    public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable,
+        IListener<SpecExecutionCompleted>
     {
         private readonly ILogger _logger;
         private readonly IRemoteController _engine;
@@ -30,7 +29,8 @@ namespace ST.Client
         private readonly FubuCore.Util.Cache<string, Specification> _data;
 
 
-        public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client, ISpecFileWatcher watcher)
+        public PersistenceController(ILogger logger, IRemoteController engine, IClientConnector client,
+            ISpecFileWatcher watcher)
         {
             _logger = logger;
             _engine = engine;
@@ -54,10 +54,7 @@ namespace ST.Client
             {
                 _specPath = path.ToFullPath();
 
-                _lock.Write(() =>
-                {
-                    _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
-                });
+                _lock.Write(() => { _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy(); });
 
 
                 _watcher.StartWatching(path, this);
@@ -261,7 +258,6 @@ namespace ST.Client
                 var spec = _hierarchy.Nodes[id];
                 var data = new SpecData
                 {
-                    
                     data = _data[id],
                     id = id
                 };
@@ -282,12 +278,8 @@ namespace ST.Client
         {
             try
             {
-
-
                 _lock.Read(() =>
                 {
-                    
-
                     var node = HierarchyLoader.ReadSpecNode(file);
                     _data.Remove(node.id);
 
@@ -323,10 +315,7 @@ namespace ST.Client
                 _lock.Write(() =>
                 {
                     var results = new LightweightCache<string, SpecResults>();
-                    _hierarchy.Nodes.GetAll().Where(x => x.results != null).Each(x =>
-                    {
-                        results[x.id] = x.results;
-                    });
+                    _hierarchy.Nodes.GetAll().Where(x => x.results != null).Each(x => { results[x.id] = x.results; });
 
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
                     _data.ClearAll();
@@ -388,5 +377,4 @@ namespace ST.Client
             Hierarchy.Nodes[message.Id].results = message.Results;
         }
     }
-
 }
