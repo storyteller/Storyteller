@@ -1,4 +1,4 @@
-﻿using StoryTeller.Model.Persistence;
+﻿using StoryTeller.Model;
 
 namespace StoryTeller.Messages
 {
@@ -9,6 +9,6 @@ namespace StoryTeller.Messages
         }
 
         public string suite;
-        public SpecNode node;
+        public Specification node;
     }
 }

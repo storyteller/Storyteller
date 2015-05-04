@@ -11,26 +11,24 @@ namespace StoryTeller.Engine
     public class SpecExecutionRequest
     {
 
-        public static SpecExecutionRequest For(SpecNode node)
+        public static SpecExecutionRequest For(Specification spec)
         {
-            return new SpecExecutionRequest(node, new NulloResultObserver());
+            return new SpecExecutionRequest(spec, new NulloResultObserver());
         }
 
         private readonly IResultObserver _observer;
-        public SpecNode Node { get; private set; }
         public Specification Specification { get; private set; }
         public SpecificationPlan Plan { get; private set; }
 
-        public SpecExecutionRequest(SpecNode node, IResultObserver observer, Specification specification = null)
+        public SpecExecutionRequest(Specification specification, IResultObserver observer)
         {
             _observer = observer;
-            Node = node;
             Specification = specification;
         }
 
         public void SpecExecutionFinished(SpecResults results)
         {
-            _observer.SpecExecutionFinished(Node, results);
+            _observer.SpecExecutionFinished(Specification, results);
         }
 
         private void performAction(Action action )
@@ -50,10 +48,10 @@ namespace StoryTeller.Engine
         {
             performAction(() =>
             {
-                Specification = XmlReader.ReadFromFile(Node.Filename);
-                if (Specification == null) throw new FileNotFoundException(Node.Filename);
+                Specification = XmlReader.ReadFromFile(Specification.Filename);
+                if (Specification == null) throw new FileNotFoundException(Specification.Filename);
 
-                Specification.id = Node.id;
+                Specification.id = Specification.id;
             });
         }
 
@@ -69,7 +67,7 @@ namespace StoryTeller.Engine
         {
             get
             {
-                if (Node != null) return Node.id;
+                if (Specification != null) return Specification.id;
                 if (Specification != null) return Specification.id;
                 return Plan.Specification.id;
             }
@@ -90,7 +88,7 @@ namespace StoryTeller.Engine
 
         protected bool Equals(SpecExecutionRequest other)
         {
-            return Equals(Node.id, other.Node.id);
+            return Equals(Specification.id, other.Specification.id);
         }
 
         public override bool Equals(object obj)
@@ -103,12 +101,12 @@ namespace StoryTeller.Engine
 
         public override int GetHashCode()
         {
-            return (Node != null ? Node.GetHashCode() : 0);
+            return (Specification != null ? Specification.GetHashCode() : 0);
         }
 
         public override string ToString()
         {
-            return string.Format("SpecExecutionRequest for {0} ({1})", Node.id, Node.name);
+            return string.Format("SpecExecutionRequest for {0} ({1})", Specification.id, Specification.name);
         }
 
         public Timings StartNewTimings()

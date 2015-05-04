@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using FubuCore;
-using FubuMVC.Core.Resources.Conneg;
 using StoryTeller.Engine;
 using StoryTeller.Remotes.Messaging;
 
@@ -16,9 +15,9 @@ namespace ST.CommandLine
 
                 results.records.Each(record =>
                 {
-                    var suite = record.header.SuitePath();
-                    var name = record.header.name.Replace(',', ' ');
-                    var id = record.header.id;
+                    var suite = record.specification.SuitePath();
+                    var name = record.specification.name.Replace(',', ' ');
+                    var id = record.specification.id;
 
                     record.results.Performance.Each(x =>
                     {

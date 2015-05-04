@@ -59,7 +59,7 @@ namespace StoryTeller.Testing.Engine
                 x.TeamCityTracingFlag = true;
             });
 
-            var record = response.records.FirstOrDefault(x => x.header.id == "SometimesSlow");
+            var record = response.records.FirstOrDefault(x => x.specification.id == "SometimesSlow");
 
             record.results.Counts.ShouldEqual(0, 0, 1, 0);
             var result = record.results.Results.Single().ShouldBeOfType<StepResult>();

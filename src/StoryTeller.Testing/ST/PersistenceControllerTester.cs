@@ -215,7 +215,7 @@ namespace StoryTeller.Testing.ST
 
             var changed = ClassUnderTest.SaveSpecHeader("sentence4", x => x.Lifecycle = Lifecycle.Regression);
 
-            ClassUnderTest.Hierarchy.Suites["Sentences"].specs.Any(x => ReferenceEquals(x, changed.node)).ShouldBe(true);
+            //ClassUnderTest.Hierarchy.Suites["Sentences"].specs.Any(x => ReferenceEquals(x, changed.node)).ShouldBe(true);
 
             ClassUnderTest.Hierarchy.Nodes["sentence4"].ShouldBe(changed.node);
             changed.node.Filename.ShouldBe(node.Filename);

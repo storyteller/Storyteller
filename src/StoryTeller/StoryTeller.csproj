@@ -232,7 +232,6 @@
     <Compile Include="Model\Persistence\HierarchyLoader.cs" />
     <Compile Include="Model\Persistence\JsonCreationConverter.cs" />
     <Compile Include="Model\Persistence\NodeConverter.cs" />
-    <Compile Include="Model\Persistence\SpecNode.cs" />
     <Compile Include="Model\Persistence\Suite.cs" />
     <Compile Include="Model\Persistence\TextParser.cs" />
     <Compile Include="Model\Persistence\XmlConstants.cs" />

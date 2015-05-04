@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using StoryTeller.Grammars;
@@ -9,8 +10,61 @@ using StoryTeller.Model.Persistence;
 namespace StoryTeller.Model
 {
     [Serializable]
-    public class Specification : SpecNode, INodeHolder
+    public class Specification : Node, INodeHolder
     {
+        [JsonProperty("title")]
+        public string name;
+
+        public string path;
+
+        [JsonProperty("max-retries")]
+        public int MaxRetries;
+
+        [JsonConverter(typeof (StringEnumConverter))] 
+        [JsonProperty("lifecycle")] 
+        public Lifecycle Lifecycle = Lifecycle.Acceptance;
+
+        private string _fileName;
+
+        [JsonIgnore]
+        public string Filename
+        {
+            get { return _fileName; }
+            set { _fileName = value.ToFullPath(); }
+        }
+
+        public void WritePath(string parentPath)
+        {
+            path = Suite.JoinPath(parentPath, name);
+        }
+
+        public string SuitePath()
+        {
+            return Suite.SuitePathOf(path);
+        }
+
+        [NonSerialized]
+        [Obsolete("Going to remove this altogether")]
+        public SpecResults results;
+
+        protected bool Equals(Specification other)
+        {
+            return string.Equals(id, other.id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Specification) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return (id != null ? id.GetHashCode() : 0);
+        }
+
         [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
         private readonly IList<Node> _children = new List<Node>();
 
@@ -44,25 +98,6 @@ namespace StoryTeller.Model
             Children.Add(section);
 
             return section;
-        }
-
-        [Obsolete("Think we can make this go away")]
-        public SpecNode ToNode()
-        {
-            return new SpecNode
-            {
-                name = name,
-                id = id,
-                Lifecycle = Lifecycle
-            };
-        }
-
-        [Obsolete("Think we can make this go away")]
-        public void ReadNode(SpecNode node)
-        {
-            name = node.name;
-            id = node.id;
-            Lifecycle = node.Lifecycle;
         }
 
 

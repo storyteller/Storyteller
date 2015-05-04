@@ -13,7 +13,7 @@ namespace StoryTeller.Model.Persistence
         }
 
         public Suite[] suites;
-        public SpecNode[] specs;
+        public Specification[] specs;
         public string name;
         public string path;
 
@@ -48,7 +48,7 @@ namespace StoryTeller.Model.Persistence
             specs.Each(x => hierarchy.Nodes[x.id] = x);
         }
 
-        public IEnumerable<SpecNode> GetAllSpecs()
+        public IEnumerable<Specification> GetAllSpecs()
         {
             return specs.Union(suites.SelectMany(x => x.GetAllSpecs()));
         }
@@ -58,7 +58,7 @@ namespace StoryTeller.Model.Persistence
             return path.Split('/').Reverse().Skip(1).Reverse().Join("/");
         }
 
-        public void ReplaceNode(SpecNode node)
+        public void ReplaceNode(Specification node)
         {
             var index = Array.IndexOf(specs, node);
             if (index > -1)
@@ -67,7 +67,7 @@ namespace StoryTeller.Model.Persistence
             }
         }
 
-        public void AddSpec(SpecNode node)
+        public void AddSpec(Specification node)
         {
             specs = specs.Union(new[] {node}).ToArray();
         }

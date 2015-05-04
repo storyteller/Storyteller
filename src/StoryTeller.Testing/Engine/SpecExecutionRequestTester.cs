@@ -6,6 +6,7 @@ using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -14,7 +15,7 @@ namespace StoryTeller.Testing.Engine
     [TestFixture]
     public class SpecExecutionRequestTester
     {
-        private readonly SpecNode theSpec;
+        private readonly Specification theSpec;
         private RuntimeErrorListener listener;
 
         public SpecExecutionRequestTester()
@@ -69,7 +70,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void read_xml_sad_path()
         {
-            var request = SpecExecutionRequest.For(new SpecNode { Filename = "nonexistent.xml" });
+            var request = SpecExecutionRequest.For(new Specification() { Filename = "nonexistent.xml" });
 
             EventAggregator.Messaging.AddListener(listener);
 
@@ -108,7 +109,7 @@ namespace StoryTeller.Testing.Engine
             var request = SpecExecutionRequest.For(theSpec);
 
             // No specification, so it blows up
-            //request.ReadXml();
+            request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
             request.IsCancelled.ShouldBe(true);

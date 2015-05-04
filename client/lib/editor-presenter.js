@@ -274,9 +274,6 @@ class EditorPresenter{
 	}
 
 	run(){
-		// auto save!
-		this.save();
-
 		Postal.publish({
 			channel: 'engine-request',
 			topic: 'run-spec',

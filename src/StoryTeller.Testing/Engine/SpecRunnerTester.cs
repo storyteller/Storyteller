@@ -5,7 +5,6 @@ using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Engine
@@ -20,9 +19,8 @@ namespace StoryTeller.Testing.Engine
         {
             ClassUnderTest.Status = SpecRunnerStatus.Invalid;
 
-            var specNode = new SpecNode { id = Guid.NewGuid().ToString() };
-            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
-                specification: new Specification { id = specNode.id });
+            var specNode = new Specification() { id = Guid.NewGuid().ToString() };
+            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver());
 
             theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
         }
@@ -30,7 +28,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void the_results_should_show_that_the_spec_was_aborted()
         {
-            ShouldBeTestExtensions.ShouldBe(theResults.WasAborted, true);
+            theResults.WasAborted.ShouldBe(true);
         }
 
 
@@ -63,9 +61,8 @@ namespace StoryTeller.Testing.Engine
 
         protected override void beforeEach()
         {
-            var specNode = new SpecNode{id = Guid.NewGuid().ToString()};
-            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
-                specification: new Specification {id = specNode.id});
+            var specNode = new Specification(){id = Guid.NewGuid().ToString()};
+            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver());
 
             theRequest.CreatePlan(TestingContext.Library);
 

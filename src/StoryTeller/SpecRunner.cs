@@ -65,7 +65,7 @@ namespace StoryTeller
             return Run(node);
         }
 
-        public SpecResults Run(SpecNode node)
+        public SpecResults Run(Specification node)
         {
             var specification = XmlReader.ReadFromFile(node.Filename);
 
@@ -73,7 +73,6 @@ namespace StoryTeller
 
             _records.Add(new BatchRecord
             {
-                header = node,
                 results = results,
                 specification = specification
             });

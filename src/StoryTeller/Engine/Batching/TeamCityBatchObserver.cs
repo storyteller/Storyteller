@@ -45,7 +45,7 @@ namespace StoryTeller.Engine.Batching
         }
 
 
-        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<SpecNode> nodes)
+        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> nodes)
         {
             return _inner.MonitorBatch(nodes);
         }

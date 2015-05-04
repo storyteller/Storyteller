@@ -5,6 +5,7 @@ using FubuCore;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
 
@@ -18,7 +19,7 @@ namespace StoryTeller.Testing
             .AppendPath("Storyteller.Samples", "Specs");
 
         private Suite _hierarchy;
-        private SpecNode[] _allSpecs;
+        private Specification[] _allSpecs;
 
         [TestFixtureSetUp]
         public void SetUp()

@@ -11,16 +11,16 @@ namespace StoryTeller.Engine
         public Lifecycle Lifecycle;
         public string Suite;
 
-        public IEnumerable<SpecNode> Filter(Suite top)
+        public IEnumerable<Specification> Filter(Suite top)
         {
             if (Lifecycle == Lifecycle.Any && Suite.IsEmpty()) return top.GetAllSpecs();
 
-            IEnumerable<SpecNode> nodes = null;
+            IEnumerable<Specification> nodes = null;
 
             if (Suite.IsNotEmpty())
             {
                 var suite = top.suites.FirstOrDefault(x => x.name == Suite);
-                if (suite == null) return new SpecNode[0];
+                if (suite == null) return new Specification[0];
 
                 nodes = suite.GetAllSpecs();
             }

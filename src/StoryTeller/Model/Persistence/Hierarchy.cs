@@ -6,7 +6,7 @@ namespace StoryTeller.Model.Persistence
     {
         public Suite Top { get; set; }
 
-        public readonly Cache<string, SpecNode> Nodes = new Cache<string, SpecNode>();
+        public readonly Cache<string, Specification> Nodes = new Cache<string, Specification>();
         public readonly Cache<string, Suite> Suites = new Cache<string, Suite>(); 
     }
 }

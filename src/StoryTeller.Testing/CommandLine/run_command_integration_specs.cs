@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.CommandLine
 
             var result = task.Result;
 
-            result.records.OrderBy(x => x.header.id).Select(x => x.header.id)
+            result.records.OrderBy(x => x.specification.id).Select(x => x.specification.id)
                 .ShouldHaveTheSameElementsAs("embeds", "paragraph1", "sentence2");
         }
 
@@ -63,9 +63,9 @@ namespace StoryTeller.Testing.CommandLine
 
             var result = task.Result;
 
-            result.records.Any(x => x.header.id == "embeds").ShouldBe(false);
-            result.records.Any(x => x.header.id == "paragraph1").ShouldBe(false);
-            result.records.Any(x => x.header.id == "sentence2").ShouldBe(false);
+            result.records.Any(x => x.specification.id == "embeds").ShouldBe(false);
+            result.records.Any(x => x.specification.id == "paragraph1").ShouldBe(false);
+            result.records.Any(x => x.specification.id == "sentence2").ShouldBe(false);
         }
 
         [Test]
@@ -78,7 +78,7 @@ namespace StoryTeller.Testing.CommandLine
 
             var result = task.Result;
 
-            result.records.OrderBy(x => x.header.id).Select(x => x.header.id)
+            result.records.OrderBy(x => x.specification.id).Select(x => x.specification.id)
                 .ShouldHaveTheSameElementsAs("sentence1", "sentence2", "sentence3", "sentence4");
         }
 
@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.CommandLine
 
             var result = task.Result;
 
-            result.records.OrderBy(x => x.header.id).Select(x => x.header.id)
+            result.records.OrderBy(x => x.specification.id).Select(x => x.specification.id)
                 .ShouldHaveTheSameElementsAs("sentence2");
         }
 

@@ -1,4 +1,4 @@
-﻿using StoryTeller.Model.Persistence;
+﻿using StoryTeller.Model;
 
 namespace StoryTeller.Messages
 {
@@ -8,7 +8,7 @@ namespace StoryTeller.Messages
         {
         }
 
-        public SpecNode node;
+        public Specification node;
 
         protected bool Equals(SpecChanged other)
         {

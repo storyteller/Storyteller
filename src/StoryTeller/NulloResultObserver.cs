@@ -1,3 +1,4 @@
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
 
@@ -10,7 +11,7 @@ namespace StoryTeller
             // Nothing
         }
 
-        public void SpecExecutionFinished(SpecNode node, SpecResults results)
+        public void SpecExecutionFinished(Specification specification, SpecResults results)
         {
             // Nothing
         }

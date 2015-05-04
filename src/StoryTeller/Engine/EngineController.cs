@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using FubuCore;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -34,7 +31,7 @@ namespace StoryTeller.Engine
         public IEnumerable<SpecExecutionRequest> OutstandingRequests()
         {
             return _outstanding.ToArray();
-        } 
+        }
 
         public void Receive(RunSpec message)
         {
@@ -44,12 +41,9 @@ namespace StoryTeller.Engine
 
         public virtual void RunSpec(string id, Specification specification)
         {
-            if (OutstandingRequests().Any(x => x.Node.id == id)) return;
+            if (OutstandingRequests().Any(x => x.Specification.id == id)) return;
 
-            var spec = specification.ToNode();
-            if (spec == null) return;
-
-            var request = new SpecExecutionRequest(spec, this, specification);
+            var request = new SpecExecutionRequest(specification, this);
             _outstanding.Add(request);
 
             _engine.Enqueue(request);
@@ -60,14 +54,14 @@ namespace StoryTeller.Engine
             _observer.SendToClient(message);
         }
 
-        public void SpecExecutionFinished(SpecNode node, SpecResults results)
+        public void SpecExecutionFinished(Specification specification, SpecResults results)
         {
-            var outstanding = _outstanding.FirstOrDefault(x => Equals(x.Node, node));
+            var outstanding = _outstanding.FirstOrDefault(x => Equals(x.Specification, specification));
             if (outstanding == null) return;
 
             _outstanding.Remove(outstanding);
 
-            _observer.SendToClient(new SpecExecutionCompleted(node.id, results));
+            _observer.SendToClient(new SpecExecutionCompleted(specification.id, results));
 
             SendQueueState();
         }
@@ -80,11 +74,10 @@ namespace StoryTeller.Engine
 
         public virtual void CancelSpec(string id)
         {
-            _outstanding.Where(x => x.Node.id == id).Each(x => x.Cancel());
-            _outstanding.RemoveAll(x => x.Node.id == id);
+            _outstanding.Where(x => x.Specification.id == id).Each(x => x.Cancel());
+            _outstanding.RemoveAll(x => x.Specification.id == id);
 
             _engine.CancelRunningSpec(id);
-
         }
 
         public void Receive(CancelAllSpecs message)
@@ -108,7 +101,7 @@ namespace StoryTeller.Engine
             var running = _runner.RunningSpecId();
             return new QueueState
             {
-                queued = _outstanding.Where(x => x.Node.id != running).Select(x => x.Node.id).ToArray(),
+                queued = _outstanding.Where(x => x.Specification.id != running).Select(x => x.Specification.id).ToArray(),
                 running = running
             };
         }

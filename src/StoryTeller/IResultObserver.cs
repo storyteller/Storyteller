@@ -1,5 +1,4 @@
-using StoryTeller.Messages;
-using StoryTeller.Model.Persistence;
+using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller
@@ -7,6 +6,6 @@ namespace StoryTeller
     public interface IResultObserver
     {
         void Handle<T>(T message) where T : IResultMessage;
-        void SpecExecutionFinished(SpecNode node, SpecResults results);
+        void SpecExecutionFinished(Specification specification, SpecResults results);
     }
 }

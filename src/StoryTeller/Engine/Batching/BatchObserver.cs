@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
 
@@ -27,7 +28,7 @@ namespace StoryTeller.Engine.Batching
             _watchers.RemoveAll(x => x.IsCompleted());
         }
 
-        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<SpecNode> nodes)
+        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> nodes)
         {
             var watcher = new BatchWatcher(nodes);
             _watchers.Add(watcher);

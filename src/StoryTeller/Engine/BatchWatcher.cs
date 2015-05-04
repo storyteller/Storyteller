@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StoryTeller.Grammars;
-using StoryTeller.Model.Persistence;
+using StoryTeller.Model;
 
 namespace StoryTeller.Engine
 {
@@ -11,9 +11,9 @@ namespace StoryTeller.Engine
         private readonly IDictionary<string, BatchRecord> _records = new Dictionary<string, BatchRecord>();
         private readonly TaskCompletionSource<IEnumerable<BatchRecord>> _task;
 
-        public BatchWatcher(IEnumerable<SpecNode> nodes)
+        public BatchWatcher(IEnumerable<Specification> nodes)
         {
-            nodes.Each(x => _records.Add(x.id, new BatchRecord{header = x}));
+            nodes.Each(x => _records.Add(x.id, new BatchRecord{specification = x}));
             _task = new TaskCompletionSource<IEnumerable<BatchRecord>>();
         }
 

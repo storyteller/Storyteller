@@ -27,7 +27,7 @@ namespace StoryTeller.Engine
             {
                 if (records == null) return false;
 
-                return !records.Any(x => x.header.Lifecycle == Lifecycle.Regression && !x.WasSuccessful());
+                return !records.Any(x => x.specification.Lifecycle == Lifecycle.Regression && !x.WasSuccessful());
             }
         }
 
@@ -49,8 +49,8 @@ namespace StoryTeller.Engine
             return new LifecycleSummary
             {
                 Lifecycle = lifecycle,
-                Successful = records.Where(x => x.header.Lifecycle == lifecycle && x.WasSuccessful()).Count(),
-                Failed = records.Where(x => x.header.Lifecycle == lifecycle && !x.WasSuccessful()).Count()
+                Successful = records.Where(x => x.specification.Lifecycle == lifecycle && x.WasSuccessful()).Count(),
+                Failed = records.Where(x => x.specification.Lifecycle == lifecycle && !x.WasSuccessful()).Count()
             };
         }
     }

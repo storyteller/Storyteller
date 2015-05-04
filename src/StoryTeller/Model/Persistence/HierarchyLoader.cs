@@ -36,7 +36,7 @@ namespace StoryTeller.Model.Persistence
             };
         }
 
-        public static SpecNode ReadSpecNode(string filename)
+        public static Specification ReadSpecNode(string filename)
         {
             using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
@@ -52,7 +52,7 @@ namespace StoryTeller.Model.Persistence
                     reader.ReadToNextSibling("*");
                 }
 
-                var node = new SpecNode
+                var node = new Specification
                 {
                     id = reader.GetAttribute("id") ?? Guid.NewGuid().ToString(),
                     name = reader.GetAttribute("name"),

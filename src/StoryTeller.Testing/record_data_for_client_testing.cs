@@ -93,9 +93,9 @@ namespace StoryTeller.Testing
             Messages.Add(message.As<ClientMessage>());
         }
 
-        public void SpecExecutionFinished(SpecNode node, SpecResults results)
+        public void SpecExecutionFinished(Specification specification, SpecResults results)
         {
-            Messages.Add(new SpecExecutionCompleted(node.id, results));
+            Messages.Add(new SpecExecutionCompleted(specification.id, results));
         }
     }
 

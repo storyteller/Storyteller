@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.Engine
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldBe("embeds");
+                .Specification.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace StoryTeller.Testing.Engine
             receiveRunSpec("embeds");
 
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldBe("embeds");
+                .Specification.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace StoryTeller.Testing.Engine
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldBe("embeds");
+                .Specification.id.ShouldBe("embeds");
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace StoryTeller.Testing.Engine
             receiveRunSpec("embeds");
 
             ClassUnderTest.OutstandingRequests().Single()
-                .Node.id.ShouldBe("embeds");
+                .Specification.id.ShouldBe("embeds");
         }
 
 
@@ -313,7 +313,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Receive(new RunSpec{id = id, spec = spec});
         }
 
-        protected SpecNode findSpec(string id)
+        protected Specification findSpec(string id)
         {
             return TestingContext.Hierarchy.GetAllSpecs().FirstOrDefault(x => x.id == id);
         }
