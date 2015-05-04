@@ -33,6 +33,12 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Test]
+        public void the_new_specification_should_have_the_same_file_name_as_the_original()
+        {
+            theNew.Filename.ShouldBe(theOriginal.Filename);
+        }
+
+        [Test]
         public void the_old_spec_is_no_longer_held_by_the_suite()
         {
             theHierarchy.Suites[theOriginal.SuitePath()].specs

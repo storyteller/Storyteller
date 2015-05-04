@@ -209,6 +209,7 @@
     <Compile Include="Messages\SpecNodeAdded.cs" />
     <Compile Include="Messages\SpecNodeChanged.cs" />
     <Compile Include="Messages\SpecProgress.cs" />
+    <Compile Include="Messages\SuiteAdded.cs" />
     <Compile Include="Model\Cell.cs" />
     <Compile Include="Model\Comment.cs" />
     <Compile Include="Model\EmbeddedSection.cs" />

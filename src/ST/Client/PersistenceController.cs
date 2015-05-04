@@ -67,10 +67,22 @@ namespace ST.Client
                 var parentSuite = _hierarchy.Suites[parent];
                 if (parentSuite != null)
                 {
-                    var path = parentSuite.Folder.AppendPath(name);
-                    Directory.CreateDirectory(path);
+                    var directory = parentSuite.Folder.AppendPath(name);
+                    Directory.CreateDirectory(directory);
 
-                    ReloadHierarchy();
+                    string newPath = parentSuite.path.AppendUrl(name).TrimStart('/');
+                    var newSuite = new Suite
+                    {
+                        Folder = directory,
+                        name = name,
+                        specs = new Specification[0],
+                        path = newPath,
+                        suites = new Suite[0]
+                    };
+
+                    _hierarchy.Suites[newPath] = newSuite;
+
+                    _client.SendMessageToClient(new SuiteAdded{path = newPath});
                 }
             }
             catch (Exception e)
@@ -88,15 +100,13 @@ namespace ST.Client
                 {
                     if (!_hierarchy.Specifications.Has(id)) return true;
 
-                    var spec = _hierarchy.Specifications[id];
+                    _hierarchy.Replace(specification);
 
-                    using (_watcher.LatchFile(spec.Filename))
+                    using (_watcher.LatchFile(specification.Filename))
                     {
                         var document = XmlWriter.WriteToXml(specification);
-                        document.Save(spec.Filename);
+                        document.Save(specification.Filename);
                     }
-
-                    _hierarchy.Specifications[id] = specification;
 
                     return true;
                 });
@@ -137,8 +147,6 @@ namespace ST.Client
 
                     suite.AddSpec(template);
 
-                    writeHierarchyToRemote();
-
                     return new SpecNodeAdded
                     {
                         suite = suitePath,
@@ -146,11 +154,6 @@ namespace ST.Client
                     };
                 }
             });
-        }
-
-        private void writeHierarchyToRemote()
-        {
-            _engine.SendMessage(new HierarchyLoaded {hierarchy = _hierarchy.Top});
         }
 
         public SpecNodeAdded AddSpec(string path, string name)
@@ -177,8 +180,6 @@ namespace ST.Client
                     _hierarchy.Specifications[specification.id] = specification;
                     suite.AddSpec(specification);
 
-                    writeHierarchyToRemote();
-
                     return new SpecNodeAdded
                     {
                         suite = path,
@@ -190,10 +191,12 @@ namespace ST.Client
 
         public void ClearAllResults()
         {
+            // TODO -- will need to do more
+
             _lock.Write(() =>
             {
                 _hierarchy.Specifications.Each(node => node.results = null);
-                UpdateHierarchyInClientAndEngine();
+                SendHierarchyToClient();
             });
         }
 
@@ -278,7 +281,7 @@ namespace ST.Client
                     });
 
 
-                    UpdateHierarchyInClientAndEngine();
+                    SendHierarchyToClient();
                 });
             }
             catch (Exception e)
@@ -288,7 +291,7 @@ namespace ST.Client
         }
 
 
-        public void UpdateHierarchyInClientAndEngine()
+        public void SendHierarchyToClient()
         {
             var message = new HierarchyLoaded
             {
@@ -296,7 +299,6 @@ namespace ST.Client
             };
 
             _client.SendMessageToClient(message);
-            _engine.SendMessage(message);
         }
 
         public void Added(string file)
@@ -316,6 +318,7 @@ namespace ST.Client
 
         public void Receive(SpecExecutionCompleted message)
         {
+            // TODO -- do this differently
             Hierarchy.Specifications[message.Id].results = message.Results;
         }
     }

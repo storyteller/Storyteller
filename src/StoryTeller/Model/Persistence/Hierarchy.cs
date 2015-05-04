@@ -14,6 +14,7 @@ namespace StoryTeller.Model.Persistence
             var original = Specifications[specification.id];
             var suite = Suites[original.SuitePath()];
 
+            specification.Filename = original.Filename;
             specification.path = original.path;
             suite.ReplaceSpecification(specification);
             Specifications[specification.id] = specification;

@@ -81,7 +81,6 @@ namespace StoryTeller.Testing.ST
 
             MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(hierarchyLoaded));
 
-            MockFor<IRemoteController>().AssertWasCalled(x => x.SendMessage(hierarchyLoaded));
         }
 
         [Test]
@@ -210,31 +209,40 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void add_a_suite_to_the_parent()
         {
-            Services.PartialMockTheClassUnderTest();
             ClassUnderTest.StartWatching(thePath);
 
-            ClassUnderTest.Expect(x => x.ReloadHierarchy());
 
             ClassUnderTest.AddSuite("", "Foo Specs");
 
             Directory.Exists(thePath.AppendPath("Foo Specs"));
 
-            ClassUnderTest.AssertWasCalled(x => x.ReloadHierarchy());
+            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded{path = "Foo Specs"}));
+
+            var newSuite = ClassUnderTest.Hierarchy.Suites["Foo Specs"];
+            newSuite.name.ShouldBe("Foo Specs");
+            newSuite.specs.Length.ShouldBe(0);
+            newSuite.suites.Length.ShouldBe(0);
+            newSuite.path.ShouldBe("Foo Specs");
         }
 
         [Test]
         public void add_suite_to_a_child_suite()
         {
-            Services.PartialMockTheClassUnderTest();
             ClassUnderTest.StartWatching(thePath);
 
-            ClassUnderTest.Expect(x => x.ReloadHierarchy());
 
             ClassUnderTest.AddSuite("Tables", "Special Tables");
 
             Directory.Exists(thePath.AppendPath("Tables", "Special Tables"));
 
-            ClassUnderTest.AssertWasCalled(x => x.ReloadHierarchy());
+            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded { path = "Tables/Special Tables" }));
+
+            var newSuite = ClassUnderTest.Hierarchy.Suites["Tables/Special Tables"];
+            newSuite.name.ShouldBe("Special Tables");
+            newSuite.specs.Length.ShouldBe(0);
+            newSuite.suites.Length.ShouldBe(0);
+            newSuite.path.ShouldBe("Tables/Special Tables");
+
         }
 
         [Test]
