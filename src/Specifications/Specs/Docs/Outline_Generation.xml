@@ -1,4 +1,4 @@
-<Spec id="3efe4054-9ee7-4e88-8626-ceed2de5ff12" maxRetries="0" tags="" lifecycle="Acceptance" name="Outline Generation">
+<Spec id="3efe4054-9ee7-4e88-8626-ceed2de5ff12" maxRetries="0" tags="" lifecycle="Regression" name="Outline Generation">
   <OutlineGeneration id="d9e33b63-28d6-4dc8-afd6-820ad5101647">
     <TheOutlineFileIs>
       <Rows id="cce96475-3c19-4ac9-bf9d-570c5317ba4e">
@@ -52,8 +52,8 @@
         <TheWrittenFilesShouldBe-row Path="roadmap.md" />
       </rows>
     </TheWrittenFilesShouldBe>
-	<TheLoadedTopicsShouldBe>
-		<rows>
+    <TheLoadedTopicsShouldBe>
+      <rows id="321f12b7-3c51-4c4a-b66a-f14befa58154">
         <row Key="index" Title="Some Stuff" Url="EMPTY" />
         <row Key="faq" Title="Frequently Asked Questions" Url="faq" />
         <row Key="categories" Title="Categories" Url="categories" />
@@ -66,7 +66,7 @@
         <row Key="categories/colors/orange" Title="Orange" Url="categories/colors/orange" />
         <row Key="categories/colors/yellow" Title="Yellow" Url="categories/colors/yellow" />
         <row Key="roadmap" Title="The Roadmap" Url="plans" />
-		</rows>
-	</TheLoadedTopicsShouldBe>
+      </rows>
+    </TheLoadedTopicsShouldBe>
   </OutlineGeneration>
 </Spec>

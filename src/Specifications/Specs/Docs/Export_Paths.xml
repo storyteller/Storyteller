@@ -1,4 +1,4 @@
-<Spec id="5c6c61a3-162c-4145-ac41-262452cf73fb" maxRetries="0" tags="" lifecycle="Acceptance" name="Export Paths">
+<Spec id="5c6c61a3-162c-4145-ac41-262452cf73fb" maxRetries="0" tags="" lifecycle="Regression" name="Export Paths">
   <TopicExport id="ce049690-33ec-4f3c-a093-b9abdd111570">
     <TheTopicsAre>
       <Rows id="3077b63e-4b00-46c3-bf91-f451c1519e24" active-cells="Line1=False,Line2=False">
