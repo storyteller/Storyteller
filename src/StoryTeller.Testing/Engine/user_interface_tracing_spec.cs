@@ -35,7 +35,7 @@ namespace StoryTeller.Testing.Engine
             var task = controller.Start(EngineMode.Interactive).ContinueWith(t =>
             {
                 controller.Messaging.AddListener(theListener);
-                return controller.Send(new RunSpec {id = "embeds"}).AndWaitFor<SpecExecutionCompleted>();
+                return controller.Send(new RunSpec {id = "embeds", spec = TestingContext.FindSpecification("embeds")}).AndWaitFor<SpecExecutionCompleted>();
             });
 
             task.Wait();
@@ -79,7 +79,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void should_have_broadcast_intermediate_results()
         {
-            ShouldBeTestExtensions.ShouldBe(theListener.MessageTypesReceived.Any(x => x == "step-result"), true);
+            theListener.MessageTypesReceived.Any(x => x == "step-result").ShouldBe(true);
         }
     }
 

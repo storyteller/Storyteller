@@ -1,4 +1,6 @@
-﻿namespace StoryTeller.Messages
+﻿using StoryTeller.Model;
+
+namespace StoryTeller.Messages
 {
     public class RunSpecs : ClientMessage
     {
@@ -8,5 +10,6 @@
         }
 
         public string[] list;
+        public Specification[] specs;
     }
 }

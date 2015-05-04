@@ -21,8 +21,8 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Status = SpecRunnerStatus.Invalid;
 
             var specNode = new SpecNode { id = Guid.NewGuid().ToString() };
-            theRequest = new SpecExecutionRequest(TestingContext.SpecDataSource, specNode, new NulloResultObserver(),
-                new Specification { id = specNode.id });
+            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
+                specification: new Specification { id = specNode.id });
 
             theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
         }
@@ -64,8 +64,8 @@ namespace StoryTeller.Testing.Engine
         protected override void beforeEach()
         {
             var specNode = new SpecNode{id = Guid.NewGuid().ToString()};
-            theRequest = new SpecExecutionRequest(TestingContext.SpecDataSource, specNode, new NulloResultObserver(),
-                new Specification {id = specNode.id});
+            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver(),
+                specification: new Specification {id = specNode.id});
 
             theRequest.CreatePlan(TestingContext.Library);
 

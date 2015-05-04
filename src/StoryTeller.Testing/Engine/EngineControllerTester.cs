@@ -17,7 +17,7 @@ namespace StoryTeller.Testing.Engine
     {
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
+            receiveRunSpec("embeds");
         }
 
         [Test]
@@ -36,11 +36,14 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void latches_on_runspec_such_that_it_will_not_double_queue()
         {
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
 
             ClassUnderTest.OutstandingRequests().Single()
                 .Node.id.ShouldBe("embeds");
@@ -50,7 +53,7 @@ namespace StoryTeller.Testing.Engine
         public void should_enqueue_the_request()
         {
             MockFor<ISpecificationEngine>()
-                .AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(TestingContext.SpecDataSource, findSpec("embeds"), null)));
+                .AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
         }
     }
 
@@ -62,8 +65,10 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            theSpecification = new Specification();
-            ClassUnderTest.Receive(new RunSpec {id = "embeds", spec = theSpecification});
+            receiveRunSpec("embeds");
+            theSpecification = TestingContext.FindSpecification("embeds");
+
+
         }
 
         [Test]
@@ -82,11 +87,12 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void latches_on_runspec_such_that_it_will_not_double_queue()
         {
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
-            ClassUnderTest.RunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
+            receiveRunSpec("embeds");
 
             ClassUnderTest.OutstandingRequests().Single()
                 .Node.id.ShouldBe("embeds");
@@ -97,12 +103,12 @@ namespace StoryTeller.Testing.Engine
         public void should_enqueue_the_specification()
         {
             var specificationEngine = MockFor<ISpecificationEngine>();
-            specificationEngine.AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(TestingContext.SpecDataSource, findSpec("embeds"), null)));
+            specificationEngine.AssertWasCalled(x => x.Enqueue(new SpecExecutionRequest(findSpec("embeds"), null)));
 
             var request =
                 specificationEngine.GetArgumentsForCallsMadeOn(x => x.Enqueue(null))[0][0].As<SpecExecutionRequest>();
 
-            request.Specification.ShouldBeTheSameAs(theSpecification);
+            request.Specification.id.ShouldBe(theSpecification.id);
         }
     }
 
@@ -113,7 +119,8 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
+            receiveRunSpec("embeds");
+
             var node = findSpec("embeds");
             theResults = new SpecResults {Counts = new Counts(1, 0, 0, 0)};
             ClassUnderTest.SpecExecutionFinished(node, theResults);
@@ -146,9 +153,9 @@ namespace StoryTeller.Testing.Engine
         {
             Services.PartialMockTheClassUnderTest();
 
-            ClassUnderTest.Expect(x => x.RunSpec("a"));
-            ClassUnderTest.Expect(x => x.RunSpec("b"));
-            ClassUnderTest.Expect(x => x.RunSpec("c"));
+            ClassUnderTest.Expect(x => x.RunSpec("a", new Specification{id = "a"}));
+            ClassUnderTest.Expect(x => x.RunSpec("b", new Specification { id = "b" }));
+            ClassUnderTest.Expect(x => x.RunSpec("c", new Specification { id = "c" }));
 
             ClassUnderTest.Receive(new RunSpecs {list = new[] {"a", "b", "c"}});
         }
@@ -173,7 +180,7 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
+            receiveRunSpec("embeds");
             theOutstandingRequest = ClassUnderTest.OutstandingRequests().Single();
 
             ClassUnderTest.Receive(new CancelSpec {id = "embeds"});
@@ -213,10 +220,10 @@ namespace StoryTeller.Testing.Engine
 
         protected override void theContextIs()
         {
-            ClassUnderTest.Receive(new RunSpec {id = "embeds"});
-            ClassUnderTest.Receive(new RunSpec {id = "sentence1"});
-            ClassUnderTest.Receive(new RunSpec {id = "sentence2"});
-            ClassUnderTest.Receive(new RunSpec {id = "sentence3"});
+            receiveRunSpec("embeds");
+            receiveRunSpec("sentence1");
+            receiveRunSpec("sentence2");
+            receiveRunSpec("sentence3");
 
             theOutstandingRequests = ClassUnderTest.OutstandingRequests();
             theOutstandingRequests.Count().ShouldBe(4);
@@ -262,9 +269,9 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void couple_specs_queued_nothing_running()
         {
-            ClassUnderTest.RunSpec("sentence1");
-            ClassUnderTest.RunSpec("sentence2");
-            ClassUnderTest.RunSpec("sentence3");
+            ClassUnderTest.RunSpec("sentence1", new Specification { id = "sentence1" });
+            ClassUnderTest.RunSpec("sentence2", new Specification{id = "sentence2"});
+            ClassUnderTest.RunSpec("sentence3", new Specification{id = "sentence3"});
 
             MockFor<ISpecRunner>().Stub(x => x.RunningSpecId()).Return(null);
 
@@ -277,9 +284,9 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void specs_queued_and_one_running()
         {
-            ClassUnderTest.RunSpec("sentence1");
-            ClassUnderTest.RunSpec("sentence2");
-            ClassUnderTest.RunSpec("sentence3");
+            ClassUnderTest.RunSpec("sentence1", new Specification { id = "sentence1" });
+            ClassUnderTest.RunSpec("sentence2", new Specification { id = "sentence2" });
+            ClassUnderTest.RunSpec("sentence3", new Specification { id = "sentence3" });
 
             MockFor<ISpecRunner>().Stub(x => x.RunningSpecId()).Return("sentence1");
 
@@ -296,8 +303,14 @@ namespace StoryTeller.Testing.Engine
 
         protected override void beforeEach()
         {
-            Services.Inject<ISpecDataSource>(TestingContext.SpecDataSource);
             theContextIs();
+        }
+
+        protected void receiveRunSpec(string id)
+        {
+            var spec = TestingContext.FindSpecification(id);
+
+            ClassUnderTest.Receive(new RunSpec{id = id, spec = spec});
         }
 
         protected SpecNode findSpec(string id)

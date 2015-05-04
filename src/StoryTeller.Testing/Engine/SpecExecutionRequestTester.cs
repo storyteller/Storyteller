@@ -42,7 +42,7 @@ namespace StoryTeller.Testing.Engine
         {
             var action = MockRepository.GenerateMock<IResultObserver>();
 
-            var request = new SpecExecutionRequest(TestingContext.SpecDataSource, theSpec, action);
+            var request = new SpecExecutionRequest(theSpec, action);
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
             request.Plan.Attempts = 3;
@@ -56,7 +56,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void read_xml_happy_path()
         {
-            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
+            var request = SpecExecutionRequest.For(theSpec);
 
             request.ReadXml();
 
@@ -69,7 +69,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void read_xml_sad_path()
         {
-            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, new SpecNode { Filename = "nonexistent.xml" });
+            var request = SpecExecutionRequest.For(new SpecNode { Filename = "nonexistent.xml" });
 
             EventAggregator.Messaging.AddListener(listener);
 
@@ -81,7 +81,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void cancel_cancels_the_request()
         {
-            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
+            var request = SpecExecutionRequest.For(theSpec);
             request.IsCancelled.ShouldBe(false);
 
             request.Cancel();
@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void create_plan_happy_path_smoke_test()
         {
-            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
+            var request = SpecExecutionRequest.For(theSpec);
             request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
@@ -105,7 +105,7 @@ namespace StoryTeller.Testing.Engine
         [Test]
         public void create_plan_sad_path_smoke_test()
         {
-            var request = SpecExecutionRequest.For(TestingContext.SpecDataSource, theSpec);
+            var request = SpecExecutionRequest.For(theSpec);
 
             // No specification, so it blows up
             //request.ReadXml();

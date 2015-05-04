@@ -11,20 +11,18 @@ namespace StoryTeller.Engine
     public class SpecExecutionRequest
     {
 
-        private readonly ISpecDataSource _source;
+        public static SpecExecutionRequest For(SpecNode node)
+        {
+            return new SpecExecutionRequest(node, new NulloResultObserver());
+        }
+
         private readonly IResultObserver _observer;
         public SpecNode Node { get; private set; }
         public Specification Specification { get; private set; }
         public SpecificationPlan Plan { get; private set; }
 
-        public static SpecExecutionRequest For(ISpecDataSource source, SpecNode node)
+        public SpecExecutionRequest(SpecNode node, IResultObserver observer, Specification specification = null)
         {
-            return new SpecExecutionRequest(source, node, new NulloResultObserver());
-        }
-
-        public SpecExecutionRequest(ISpecDataSource source, SpecNode node, IResultObserver observer, Specification specification = null)
-        {
-            _source = source;
             _observer = observer;
             Node = node;
             Specification = specification;
@@ -52,7 +50,7 @@ namespace StoryTeller.Engine
         {
             performAction(() =>
             {
-                Specification = _source.ReadSpecification(Node.id);
+                Specification = XmlReader.ReadFromFile(Node.Filename);
                 if (Specification == null) throw new FileNotFoundException(Node.Filename);
 
                 Specification.id = Node.id;
@@ -121,34 +119,6 @@ namespace StoryTeller.Engine
             return timings;
         }
 
-        public static SpecExecutionRequest ForLocal(SpecNode node)
-        {
-            return For(new NodeDataSource(node), node);
-        }
-
-        public class NodeDataSource : ISpecDataSource
-        {
-            private readonly SpecNode _node;
-
-            public NodeDataSource(SpecNode node)
-            {
-                _node = node;
-            }
-
-            public SpecNode ReadNode(string id)
-            {
-                if (id == _node.id) return _node;
-
-                throw new ArgumentOutOfRangeException("id", "This data source only responds to node " + _node.id);
-            }
-
-            public Specification ReadSpecification(string id)
-            {
-                if (id == _node.id) return XmlReader.ReadFromFile(_node.Filename);
-
-                throw new ArgumentOutOfRangeException("id", "This data source only responds to node " + _node.id);
-            }
-        }
     }
 
     

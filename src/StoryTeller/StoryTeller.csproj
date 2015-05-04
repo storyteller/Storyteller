@@ -230,7 +230,6 @@
     <Compile Include="Model\Paragraph.cs" />
     <Compile Include="Model\Persistence\Hierarchy.cs" />
     <Compile Include="Model\Persistence\HierarchyLoader.cs" />
-    <Compile Include="Model\Persistence\ISpecDataSource.cs" />
     <Compile Include="Model\Persistence\JsonCreationConverter.cs" />
     <Compile Include="Model\Persistence\NodeConverter.cs" />
     <Compile Include="Model\Persistence\SpecNode.cs" />

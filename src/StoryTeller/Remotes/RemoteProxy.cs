@@ -5,7 +5,6 @@ using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Remotes
@@ -17,9 +16,6 @@ namespace StoryTeller.Remotes
         private Project _project;
         private ISystem _system;
         private readonly IList<IDisposable> _services = new List<IDisposable>();
-
-        // TODO -- temporary, set w/ the remove later
-        private ISpecDataSource _dataSource = LocalSpecDataSource.Flyweight;
 
         public void Dispose()
         {
@@ -38,13 +34,8 @@ namespace StoryTeller.Remotes
             return controller == null ? new QueueState() : controller.QueueState();
         }
 
-        public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener, MarshalByRefObject remoteDataSource)
+        public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
         {
-            if (remoteDataSource != null)
-            {
-                _dataSource = remoteDataSource.As<ISpecDataSource>();
-            }
-            
             Project.CurrentProject = project;
 
             EventAggregator.Start((IRemoteListener) remoteListener);
@@ -93,7 +84,7 @@ namespace StoryTeller.Remotes
 
             var executionObserver = new UserInterfaceExecutionObserver();
             var engine  = new SpecificationEngine(_system, runner, executionObserver);
-            _controller = new EngineController(_dataSource, engine, observer, runner);
+            _controller = new EngineController(engine, observer, runner);
 
             // Super hokey, but we need some way to feed the spec started
             // event up to EngineController

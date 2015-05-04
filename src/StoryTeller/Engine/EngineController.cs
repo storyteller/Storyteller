@@ -17,7 +17,6 @@ namespace StoryTeller.Engine
         IListener<CancelSpec>,
         IListener<CancelAllSpecs>
     {
-        private readonly ISpecDataSource _dataSource;
         private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
         private readonly ISpecRunner _runner;
@@ -25,9 +24,8 @@ namespace StoryTeller.Engine
         private readonly IList<SpecExecutionRequest> _outstanding = new List<SpecExecutionRequest>();
 
 
-        public EngineController(ISpecDataSource dataSource, ISpecificationEngine engine, IUserInterfaceObserver observer, ISpecRunner runner)
+        public EngineController(ISpecificationEngine engine, IUserInterfaceObserver observer, ISpecRunner runner)
         {
-            _dataSource = dataSource;
             _engine = engine;
             _observer = observer;
             _runner = runner;
@@ -44,22 +42,17 @@ namespace StoryTeller.Engine
             SendQueueState();
         }
 
-        public virtual void RunSpec(string id, Specification specification = null)
+        public virtual void RunSpec(string id, Specification specification)
         {
             if (OutstandingRequests().Any(x => x.Node.id == id)) return;
 
-            var spec = findSpec(id);
+            var spec = specification.ToNode();
             if (spec == null) return;
 
-            var request = new SpecExecutionRequest(_dataSource, spec, this, specification);
+            var request = new SpecExecutionRequest(spec, this, specification);
             _outstanding.Add(request);
 
             _engine.Enqueue(request);
-        }
-
-        private SpecNode findSpec(string id)
-        {
-            return _dataSource.ReadNode(id);
         }
 
         void IResultObserver.Handle<T>(T message)
@@ -106,7 +99,7 @@ namespace StoryTeller.Engine
 
         public void Receive(RunSpecs message)
         {
-            message.list.Each(x => RunSpec(x));
+            message.specs.Each(x => RunSpec(x.id, x));
             SendQueueState();
         }
 

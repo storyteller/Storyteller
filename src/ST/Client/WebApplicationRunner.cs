@@ -31,9 +31,8 @@ namespace ST.Client
             
 
             var container = new Container(new WebApplicationRegistry(_controller, context));
-            var dataSource = container.GetInstance<RemoteSpecDataSource>();
 
-            context.Start(dataSource);
+            context.Start();
 
             _server = FubuApplication.DefaultPolicies().StructureMap(container).RunEmbeddedWithAutoPort();
         }

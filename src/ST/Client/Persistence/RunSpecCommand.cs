@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
@@ -55,16 +56,9 @@ namespace ST.Client.Persistence
         {
             // TODO -- will change for GH-306
 
-            message.list.Each(x =>
-            {
-                var runSpec = new RunSpec
-                {
-                    id = x,
-                    spec = _controller.Value.LoadSpecification(x).data
-                };
+            message.specs = message.list.Select(x => _controller.Value.LoadSpecification(x).data).ToArray();
+            _engine.SendMessage(message);
 
-                _engine.SendMessage(runSpec);
-            });
         }
     }
 

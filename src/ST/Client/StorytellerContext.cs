@@ -16,9 +16,9 @@ namespace ST.Client
             _input = input;
         }
 
-        public void Start(RemoteSpecDataSource dataSource = null)
+        public void Start()
         {
-            _startup = _controller.Start(EngineMode.Interactive, dataSource).ContinueWith(t =>
+            _startup = _controller.Start(EngineMode.Interactive).ContinueWith(t =>
             {
                 t.Result.WriteSystemUsage();
 

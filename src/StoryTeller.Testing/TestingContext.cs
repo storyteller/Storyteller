@@ -26,9 +26,6 @@ namespace StoryTeller.Testing
         public static string SpecFolder = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
             .AppendPath("Storyteller.Samples", "Specs");
 
-        public static ISpecDataSource SpecDataSource = new LocalSpecDataSource(SpecFolder);
-
-
 
         public static FixtureLibrary Library
         {
@@ -47,6 +44,11 @@ namespace StoryTeller.Testing
         public static Suite Hierarchy
         {
             get { return _hierarchy.Value; }
+        }
+
+        public static Specification FindSpecification(string id)
+        {
+            return XmlReader.ReadFromFile(Hierarchy.ToHierarchy().Nodes[id].Filename);
         }
 
     }
