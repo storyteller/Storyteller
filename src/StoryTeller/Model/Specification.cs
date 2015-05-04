@@ -9,19 +9,10 @@ using StoryTeller.Model.Persistence;
 namespace StoryTeller.Model
 {
     [Serializable]
-    public class Specification : Node, INodeHolder
+    public class Specification : SpecNode, INodeHolder
     {
         [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
         private readonly IList<Node> _children = new List<Node>();
-        [JsonIgnore] public string FileName;
-
-        [JsonProperty("lifecycle"), JsonConverter(typeof(StringEnumConverter))]
-        public Lifecycle Lifecycle = Lifecycle.Acceptance;
-
-
-        [JsonProperty("max-retries")] public int MaxRetries;
-
-        [JsonProperty("title")] public string name;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
         public IList<Node> Children
@@ -55,6 +46,7 @@ namespace StoryTeller.Model
             return section;
         }
 
+        [Obsolete("Think we can make this go away")]
         public SpecNode ToNode()
         {
             return new SpecNode
@@ -65,6 +57,7 @@ namespace StoryTeller.Model
             };
         }
 
+        [Obsolete("Think we can make this go away")]
         public void ReadNode(SpecNode node)
         {
             name = node.name;
