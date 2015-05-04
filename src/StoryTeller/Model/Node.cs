@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using FubuCore;
-using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {

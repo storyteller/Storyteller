@@ -6,7 +6,7 @@ using Newtonsoft.Json.Converters;
 namespace StoryTeller.Model.Persistence
 {
     [Serializable]
-    public class SpecNode
+    public class SpecNode : Node
     {
         public SpecNode()
         {
@@ -20,9 +20,6 @@ namespace StoryTeller.Model.Persistence
         [JsonConverter(typeof (StringEnumConverter))] 
         [JsonProperty("lifecycle")] 
         public Lifecycle Lifecycle = Lifecycle.Acceptance;
-
-
-        public string id;
 
         private string _fileName;
 
