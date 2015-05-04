@@ -58,7 +58,7 @@ namespace StoryTeller.Testing.ST
             var completed = new SpecExecutionCompleted("sentence4", new SpecResults());
             ClassUnderTest.Receive(completed);
 
-            ClassUnderTest.Hierarchy.Nodes["sentence4"].results
+            ClassUnderTest.Hierarchy.Specifications["sentence4"].results
                 .ShouldBeTheSameAs(completed.Results);
         }
 
@@ -72,7 +72,7 @@ namespace StoryTeller.Testing.ST
         
             ClassUnderTest.ClearAllResults();
 
-            ClassUnderTest.Hierarchy.Nodes.Each(node => node.results.ShouldBeNull());
+            ClassUnderTest.Hierarchy.Specifications.Each(node => node.results.ShouldBeNull());
 
             var hierarchyLoaded = new HierarchyLoaded
             {
@@ -108,13 +108,13 @@ namespace StoryTeller.Testing.ST
         public void should_have_a_hierarchy_upon_starting()
         {
             ClassUnderTest.Hierarchy.Suites.Any().ShouldBe(true);
-            ClassUnderTest.Hierarchy.Nodes.Any().ShouldBe(true);
+            ClassUnderTest.Hierarchy.Specifications.Any().ShouldBe(true);
         }
 
         [Test]
         public void save_specification_body()
         {
-            var node = ClassUnderTest.Hierarchy.Nodes["embeds"];
+            var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
             var specification = XmlReader.ReadFromFile(node.Filename);
             specification.Children.Add(new Comment {Text = "a new comment"});
 
@@ -147,7 +147,7 @@ namespace StoryTeller.Testing.ST
 
             added.node.Filename.ShouldBe(expectedPath);
 
-            ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
+            ClassUnderTest.Hierarchy.Specifications[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("New Sentence");
@@ -171,7 +171,7 @@ namespace StoryTeller.Testing.ST
 
             added.node.Filename.ShouldBe(expectedPath);
 
-            ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
+            ClassUnderTest.Hierarchy.Specifications[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("The Third Sentence");
@@ -195,7 +195,7 @@ namespace StoryTeller.Testing.ST
 
             added.node.Filename.ShouldBe(expectedPath);
 
-            ClassUnderTest.Hierarchy.Nodes[added.node.id].ShouldBeTheSameAs(added.node);
+            ClassUnderTest.Hierarchy.Specifications[added.node.id].ShouldBeTheSameAs(added.node);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("The Third Sentence??");
@@ -210,7 +210,7 @@ namespace StoryTeller.Testing.ST
         {
             // sentence4 starts as acceptance
 
-            var node = ClassUnderTest.Hierarchy.Nodes["sentence4"];
+            var node = ClassUnderTest.Hierarchy.Specifications["sentence4"];
             node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
 
@@ -218,7 +218,7 @@ namespace StoryTeller.Testing.ST
 
             //ClassUnderTest.Hierarchy.Suites["Sentences"].specs.Any(x => ReferenceEquals(x, changed.node)).ShouldBe(true);
 
-            ClassUnderTest.Hierarchy.Nodes["sentence4"].ShouldBe(changed.node);
+            ClassUnderTest.Hierarchy.Specifications["sentence4"].ShouldBe(changed.node);
             changed.node.Filename.ShouldBe(node.Filename);
 
             // wrote the file
@@ -244,7 +244,7 @@ namespace StoryTeller.Testing.ST
 
             names.Each(id =>
             {
-                var node = ClassUnderTest.Hierarchy.Nodes[id];
+                var node = ClassUnderTest.Hierarchy.Specifications[id];
                 node.Lifecycle.ShouldBe(Lifecycle.Regression);
 
                 XmlReader.ReadFromFile(node.Filename).Lifecycle.ShouldBe(Lifecycle.Regression);
@@ -259,7 +259,7 @@ namespace StoryTeller.Testing.ST
         
             ClassUnderTest.ChangeLifecycle(new string[]{"general5"}, Lifecycle.Regression );
 
-            var node = ClassUnderTest.Hierarchy.Nodes["general5"];
+            var node = ClassUnderTest.Hierarchy.Specifications["general5"];
             node.Lifecycle.ShouldBe(Lifecycle.Regression);
 
             XmlReader.ReadFromFile(node.Filename).Lifecycle
@@ -273,7 +273,7 @@ namespace StoryTeller.Testing.ST
         {
             ClassUnderTest.UpdateMaximumRetries("general5", 11);
 
-            var node = ClassUnderTest.Hierarchy.Nodes["general5"];
+            var node = ClassUnderTest.Hierarchy.Specifications["general5"];
             XmlReader.ReadFromFile(node.Filename).MaxRetries.ShouldBe(11);
 
             ClassUnderTest.UpdateMaximumRetries("general5", 3);
@@ -324,14 +324,14 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void change_a_file()
         {
-            var file = ClassUnderTest.Hierarchy.Nodes["general1"].Filename;
+            var file = ClassUnderTest.Hierarchy.Specifications["general1"].Filename;
             var old = XmlReader.ReadFromFile(file);
             old.Lifecycle = Lifecycle.Regression;
             XmlWriter.WriteToXml(old).Save(file);
 
             ClassUnderTest.Changed(file);
 
-            var newNode = ClassUnderTest.Hierarchy.Nodes["general1"];
+            var newNode = ClassUnderTest.Hierarchy.Specifications["general1"];
 
             newNode.ShouldNotBeTheSameAs(old);
             newNode.Lifecycle.ShouldBe(Lifecycle.Regression);
@@ -356,19 +356,19 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Added(file);
 
-            ClassUnderTest.Hierarchy.Nodes[specification.id].name.ShouldBe("Foo");
+            ClassUnderTest.Hierarchy.Specifications[specification.id].name.ShouldBe("Foo");
         }
 
         [Test]
         public void file_deleted()
         {
-            var file = ClassUnderTest.Hierarchy.Nodes["paragraph1"].Filename;
+            var file = ClassUnderTest.Hierarchy.Specifications["paragraph1"].Filename;
 
             File.Delete(file);
 
             ClassUnderTest.Deleted(file);
 
-            ClassUnderTest.Hierarchy.Nodes.Has("paragraph").ShouldBe(false);
+            ClassUnderTest.Hierarchy.Specifications.Has("paragraph").ShouldBe(false);
         }
     }
 

@@ -23,7 +23,7 @@ namespace StoryTeller.Testing.Engine
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
-            theSpec = HierarchyLoader.ReadSpecNode(path);
+            theSpec = HierarchyLoader.ReadSpecHeader(path);
         }
 
         [SetUp]

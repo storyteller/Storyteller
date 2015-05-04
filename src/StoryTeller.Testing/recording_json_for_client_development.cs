@@ -32,7 +32,7 @@ namespace StoryTeller.Testing
         public void write_the_table5_spec()
         {
             var hierarchy = TestingContext.Hierarchy;
-            var spec = hierarchy.ToHierarchy().Nodes["table5"];
+            var spec = hierarchy.ToHierarchy().Specifications["table5"];
             var specification = XmlReader.ReadFromFile(spec.Filename);
 
             var json = JsonSerialization.ToIndentedJson(specification);

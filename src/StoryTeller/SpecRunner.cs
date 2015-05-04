@@ -56,18 +56,18 @@ namespace StoryTeller
 
         public SpecResults Run(string idOrPath)
         {
-            var node = _hierarchy.Nodes.Has(idOrPath)
-                ? _hierarchy.Nodes[idOrPath]
-                : _hierarchy.Nodes.FirstOrDefault(x => x.path == idOrPath);
+            var specification = _hierarchy.Specifications.Has(idOrPath)
+                ? _hierarchy.Specifications[idOrPath]
+                : _hierarchy.Specifications.FirstOrDefault(x => x.path == idOrPath);
 
-            if (node == null) throw new ArgumentOutOfRangeException("idOrPath","Could not find a Specification with either id or path equal to " + idOrPath);
+            if (specification == null) throw new ArgumentOutOfRangeException("idOrPath","Could not find a Specification with either id or path equal to " + idOrPath);
 
-            return Run(node);
+            return Run(specification);
         }
 
-        public SpecResults Run(Specification node)
+        public SpecResults Run(Specification specification)
         {
-            var specification = XmlReader.ReadFromFile(node.Filename);
+            specification.ReadBody();
 
             var results = Execute(specification);
 
@@ -118,7 +118,7 @@ namespace StoryTeller
 
         public BatchRunResponse RunAll(TimeSpan timeout, string output = null, bool openResults = false)
         {
-            var nodes = _hierarchy.Nodes.ToArray();
+            var nodes = _hierarchy.Specifications.ToArray();
             nodes.Each(x => Run(x));
 
             return FullResults();

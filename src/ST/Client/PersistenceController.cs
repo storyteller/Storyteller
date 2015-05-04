@@ -39,7 +39,7 @@ namespace ST.Client
 
             _data = new FubuCore.Util.Cache<string, Specification>(key =>
             {
-                var node = _hierarchy.Nodes[key];
+                var node = _hierarchy.Specifications[key];
                 var spec = XmlReader.ReadFromFile(node.Filename);
 
                 // TODO -- renumber if necessary
@@ -97,9 +97,9 @@ namespace ST.Client
             {
                 _lock.Read(() =>
                 {
-                    if (!_hierarchy.Nodes.Has(id)) return true;
+                    if (!_hierarchy.Specifications.Has(id)) return true;
 
-                    var spec = _hierarchy.Nodes[id];
+                    var spec = _hierarchy.Specifications[id];
 
                     using (_watcher.LatchFile(spec.Filename))
                     {
@@ -122,9 +122,9 @@ namespace ST.Client
         {
             return _lock.Read(() =>
             {
-                if (!_hierarchy.Nodes.Has(id)) return null;
+                if (!_hierarchy.Specifications.Has(id)) return null;
 
-                var spec = _hierarchy.Nodes[id];
+                var spec = _hierarchy.Specifications[id];
 
                 // Keep things isolated!
                 var template = XmlReader.ReadFromFile(spec.Filename);
@@ -144,7 +144,7 @@ namespace ST.Client
                     document.Save(file);
 
                     template.Filename = file;
-                    _hierarchy.Nodes[template.id] = template;
+                    _hierarchy.Specifications[template.id] = template;
 
                     suite.AddSpec(template);
 
@@ -185,7 +185,7 @@ namespace ST.Client
                     XmlWriter.WriteToXml(specification).Save(file);
 
                     specification.Filename = file;
-                    _hierarchy.Nodes[specification.id] = specification;
+                    _hierarchy.Specifications[specification.id] = specification;
                     suite.AddSpec(specification);
 
                     writeHierarchyToRemote();
@@ -211,7 +211,7 @@ namespace ST.Client
         {
             _lock.Write(() =>
             {
-                _hierarchy.Nodes.Each(node => node.results = null);
+                _hierarchy.Specifications.Each(node => node.results = null);
                 UpdateHierarchyInClientAndEngine();
             });
         }
@@ -221,9 +221,9 @@ namespace ST.Client
         {
             return _lock.Read(() =>
             {
-                if (!_hierarchy.Nodes.Has(id)) return null;
+                if (!_hierarchy.Specifications.Has(id)) return null;
 
-                var old = _hierarchy.Nodes[id];
+                var old = _hierarchy.Specifications[id];
                 using (_watcher.LatchFile(old.Filename))
                 {
                     var specification = _data[id];
@@ -245,9 +245,9 @@ namespace ST.Client
         {
             return _lock.Read(() =>
             {
-                if (!_hierarchy.Nodes.Has(id)) return null;
+                if (!_hierarchy.Specifications.Has(id)) return null;
 
-                var spec = _hierarchy.Nodes[id];
+                var spec = _hierarchy.Specifications[id];
                 var data = new SpecData
                 {
                     data = _data[id],
@@ -272,16 +272,16 @@ namespace ST.Client
             {
                 _lock.Read(() =>
                 {
-                    var node = HierarchyLoader.ReadSpecNode(file);
+                    var node = HierarchyLoader.ReadSpecHeader(file);
                     _data.Remove(node.id);
 
-                    if (_hierarchy.Nodes.Has(node.id))
+                    if (_hierarchy.Specifications.Has(node.id))
                     {
-                        var old = _hierarchy.Nodes[node.id];
+                        var old = _hierarchy.Specifications[node.id];
                         var suite = _hierarchy.Suites[old.SuitePath()];
 
                         suite.ReplaceNode(node);
-                        _hierarchy.Nodes[node.id] = node;
+                        _hierarchy.Specifications[node.id] = node;
 
                         node.WritePath(suite.path);
                     }
@@ -307,7 +307,7 @@ namespace ST.Client
                 _lock.Write(() =>
                 {
                     var results = new LightweightCache<string, SpecResults>();
-                    _hierarchy.Nodes.GetAll().Where(x => x.results != null).Each(x => { results[x.id] = x.results; });
+                    _hierarchy.Specifications.GetAll().Where(x => x.results != null).Each(x => { results[x.id] = x.results; });
 
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
                     _data.ClearAll();
@@ -315,9 +315,9 @@ namespace ST.Client
                     results.Each((id, result) =>
                     {
                         // Specs might have been deleted in the meantime.
-                        if (_hierarchy.Nodes.Has(id))
+                        if (_hierarchy.Specifications.Has(id))
                         {
-                            _hierarchy.Nodes[id].results = result;
+                            _hierarchy.Specifications[id].results = result;
                         }
                     });
 
@@ -366,7 +366,7 @@ namespace ST.Client
 
         public void Receive(SpecExecutionCompleted message)
         {
-            Hierarchy.Nodes[message.Id].results = message.Results;
+            Hierarchy.Specifications[message.Id].results = message.Results;
         }
     }
 }

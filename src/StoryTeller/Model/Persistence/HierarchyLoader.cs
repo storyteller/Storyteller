@@ -30,13 +30,13 @@ namespace StoryTeller.Model.Persistence
             return new Suite
             {
                 name = Path.GetFileName(folder),
-                specs = FileSystem.FindFiles(folder, FileSet.Shallow("*.xml")).Select(ReadSpecNode).ToArray(),
+                specs = FileSystem.FindFiles(folder, FileSet.Shallow("*.xml")).Select(ReadSpecHeader).ToArray(),
                 suites = FileSystem.ChildDirectoriesFor(folder).Select(ReadSuite).ToArray(),
                 Folder = folder
             };
         }
 
-        public static Specification ReadSpecNode(string filename)
+        public static Specification ReadSpecHeader(string filename)
         {
             using (var stream = new FileStream(filename, FileMode.Open, FileAccess.Read))
             {
@@ -52,7 +52,7 @@ namespace StoryTeller.Model.Persistence
                     reader.ReadToNextSibling("*");
                 }
 
-                var node = new Specification
+                var spec = new Specification
                 {
                     id = reader.GetAttribute("id") ?? Guid.NewGuid().ToString(),
                     name = reader.GetAttribute("name"),
@@ -62,9 +62,9 @@ namespace StoryTeller.Model.Persistence
                 };
 
                 var maxRetries = reader.GetAttribute(XmlConstants.MaxRetries);
-                node.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
+                spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
-                return node;
+                return spec;
             }
         }
     }

@@ -11,9 +11,9 @@ namespace StoryTeller.Engine
         private readonly IDictionary<string, BatchRecord> _records = new Dictionary<string, BatchRecord>();
         private readonly TaskCompletionSource<IEnumerable<BatchRecord>> _task;
 
-        public BatchWatcher(IEnumerable<Specification> nodes)
+        public BatchWatcher(IEnumerable<Specification> specs)
         {
-            nodes.Each(x => _records.Add(x.id, new BatchRecord{specification = x}));
+            specs.Each(x => _records.Add(x.id, new BatchRecord{specification = x}));
             _task = new TaskCompletionSource<IEnumerable<BatchRecord>>();
         }
 

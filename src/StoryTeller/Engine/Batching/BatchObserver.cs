@@ -28,9 +28,9 @@ namespace StoryTeller.Engine.Batching
             _watchers.RemoveAll(x => x.IsCompleted());
         }
 
-        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> nodes)
+        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> specs)
         {
-            var watcher = new BatchWatcher(nodes);
+            var watcher = new BatchWatcher(specs);
             _watchers.Add(watcher);
 
             return watcher.Task;

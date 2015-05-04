@@ -25,7 +25,7 @@ var BatchReport = React.createClass({
 		if (this.props.data.records.length == 1){
 			return {
 				mode: 'spec',
-				id: this.props.data.records[0].header.id
+				id: this.props.data.records[0].specification.id
 			}
 		}
 

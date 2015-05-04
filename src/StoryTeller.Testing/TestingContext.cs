@@ -48,7 +48,7 @@ namespace StoryTeller.Testing
 
         public static Specification FindSpecification(string id)
         {
-            return XmlReader.ReadFromFile(Hierarchy.ToHierarchy().Nodes[id].Filename);
+            return XmlReader.ReadFromFile(Hierarchy.ToHierarchy().Specifications[id].Filename);
         }
 
     }

@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecNode(path);
+            var spec = HierarchyLoader.ReadSpecHeader(path);
 
             spec.name.ShouldBe("Check properties");
             spec.Lifecycle.ShouldBe(Lifecycle.Acceptance);
@@ -36,7 +36,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecNode(path);
+            var spec = HierarchyLoader.ReadSpecHeader(path);
 
             spec.SpecType.ShouldBe(SpecType.header);
         }
@@ -47,7 +47,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecNode(path);
+            var spec = HierarchyLoader.ReadSpecHeader(path);
 
             spec.MaxRetries.ShouldBe(3);
         }
@@ -111,9 +111,9 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
 
-            hierarchy.Nodes["embeds"].ShouldNotBeNull();
-            hierarchy.Nodes["sentence1"].ShouldNotBeNull();
-            hierarchy.Nodes["sentence2"].ShouldNotBeNull();
+            hierarchy.Specifications["embeds"].ShouldNotBeNull();
+            hierarchy.Specifications["sentence1"].ShouldNotBeNull();
+            hierarchy.Specifications["sentence2"].ShouldNotBeNull();
         }
 
         [Test, Explicit]

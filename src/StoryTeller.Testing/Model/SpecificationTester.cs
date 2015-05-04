@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Model
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecNode(path);
+            var spec = HierarchyLoader.ReadSpecHeader(path);
             spec.Children.Any().ShouldBeFalse();
 
             spec.SpecType.ShouldBe(SpecType.header);

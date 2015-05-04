@@ -15,28 +15,28 @@ namespace StoryTeller.Engine
         {
             if (Lifecycle == Lifecycle.Any && Suite.IsEmpty()) return top.GetAllSpecs();
 
-            IEnumerable<Specification> nodes = null;
+            IEnumerable<Specification> specs = null;
 
             if (Suite.IsNotEmpty())
             {
                 var suite = top.suites.FirstOrDefault(x => x.name == Suite);
                 if (suite == null) return new Specification[0];
 
-                nodes = suite.GetAllSpecs();
+                specs = suite.GetAllSpecs();
             }
             else
             {
-                nodes = top.GetAllSpecs();
+                specs = top.GetAllSpecs();
             }
 
             if (Lifecycle != Lifecycle.Any)
             {
-                nodes = nodes.Where(x => x.Lifecycle == Lifecycle);
+                specs = specs.Where(x => x.Lifecycle == Lifecycle);
             }
 
             
 
-            return nodes.ToArray();
+            return specs.ToArray();
         }
     }
 }

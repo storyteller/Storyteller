@@ -37,7 +37,7 @@ namespace StoryTeller.Testing.Engine
 
         private SpecResults runSpec(string id)
         {
-            var node = _hierarchy.ToHierarchy().Nodes[id];
+            var node = _hierarchy.ToHierarchy().Specifications[id];
             var specification = XmlReader.ReadFromFile(node.Filename);
 
             return _runner.Execute(specification);

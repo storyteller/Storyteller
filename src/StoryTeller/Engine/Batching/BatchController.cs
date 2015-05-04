@@ -19,12 +19,12 @@ namespace StoryTeller.Engine.Batching
         public void Receive(BatchRunRequest message)
         {
             var top = HierarchyLoader.ReadHierarchy();
-            var nodes = message.Filter(top).ToArray();
+            var specs = message.Filter(top).ToArray();
 
-            var task = _resultObserver.MonitorBatch(nodes);
+            var task = _resultObserver.MonitorBatch(specs);
 
-            nodes
-                .Select(node => SpecExecutionRequest.For(node))
+            specs
+                .Select(SpecExecutionRequest.For)
                 .Each(x => _engine.Enqueue(x));
 
             task.ContinueWith(t =>
