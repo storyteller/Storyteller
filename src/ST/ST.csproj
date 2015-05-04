@@ -74,6 +74,7 @@
     <Compile Include="Client\Persistence\MaximumRetriedCommand.cs" />
     <Compile Include="Client\Persistence\ReloadSpecsCommand.cs" />
     <Compile Include="Client\Persistence\RequestSpecDataCommand.cs" />
+    <Compile Include="Client\Persistence\RunSpecCommand.cs" />
     <Compile Include="Client\Persistence\SaveSpecBodyCommand.cs" />
     <Compile Include="Client\RemoteSpecDataSource.cs" />
     <Compile Include="Client\SpecFileWatcher.cs" />
