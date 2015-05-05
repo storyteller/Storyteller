@@ -9,13 +9,10 @@ class Spec{
 		this.lifecycle = data.lifecycle || 'Acceptance';
 
 		this.results = null;
-		this.runningCounts = null;
 
 		if (data.results){
 			this.recordResults(data.results);
 		}
-
-
 	}
 
 	get state(){
@@ -36,29 +33,20 @@ class Spec{
 		if (results.counts){
 			this.results.counts = new Counts(results.counts);
 		}
-
-
-		this.runningCounts = null;
 	}
 
 	hasResults(){
 		return (this.results);
 	}
 
-	recordRunningResults(counts){
-		this.runningCounts = counts;
-	}
-
 	icon(){
 		if (this.state == 'running'){
-			if (this.runningCounts){
-				if (this.runningCounts.success()) return 'running-success';
+			var counts = QueueState.runningCounts();
+			if (!counts.anyResults()) return 'running';
 
-				return 'running-failed';
-			}
-			else {
-				return 'running';
-			}
+			if (counts.success()) return 'running-success';
+
+			return 'running-failed';
 		}
 		else {
 			if (this.results == null) return 'none';

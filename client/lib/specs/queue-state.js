@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var Counts = require('./counts');
 
 var queued = {running: null, queued: []};
 
@@ -20,8 +21,13 @@ module.exports = {
 		return 'none';
 	},
 
-	markRunning(id){
+	runningCounts(){
+		return queued.runningCounts || new Counts(0, 0, 0, 0);
+	},
+
+	markRunning(id, counts){
 		queued.running = id;
+		queued.runningCounts = counts || new Counts(0, 0, 0, 0);
 	},
 
 	store(data){

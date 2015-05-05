@@ -52,15 +52,13 @@ describe('Spec node logic', function(){
 	});
 
 	it('select icon when running with currently successful results', function(){
-		QueueState.markRunning(spec.id);
-		spec.recordRunningResults(new Counts({rights: 1, wrongs: 0, errors: 0, invalids: 0}));
-	
+		QueueState.markRunning(spec.id, new Counts({rights: 1, wrongs: 0, errors: 0, invalids: 0}));
+
 		expect(spec.icon()).to.equal('running-success');
 	});
 
 	it('select icon when running with currently failed results', function(){
-		QueueState.markRunning(spec.id);
-		spec.recordRunningResults(new Counts({rights: 0, wrongs: 1, errors: 0, invalids: 0}));
+		QueueState.markRunning(spec.id, new Counts({rights: 0, wrongs: 1, errors: 0, invalids: 0}));
 	
 		expect(spec.icon()).to.equal('running-failed');
 	});	

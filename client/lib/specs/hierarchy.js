@@ -59,10 +59,9 @@ handlers['spec-canceled'] = function(data){
 
 handlers['spec-progress'] = function(data){
 	var spec = specs[data.id];
-	QueueState.markRunning(data.id);
 	var counts = new Counts(data.counts);
 
-	spec.recordRunningResults(counts);
+	QueueState.markRunning(data.id, counts);
 
 	var outgoing = {
 		spec: spec,

@@ -7,6 +7,8 @@ var Postal = require('postal');
 var Counts = require('./../lib/specs/counts');
 var Suite = require('./../lib/specs/suite');
 
+var QueueState = require('./../lib/specs/queue-state');
+
 function publishEngineMessage(topic, data){
 	Postal.publish({
 		channel: 'engine',
@@ -210,10 +212,12 @@ describe('Hierarchy data store functions', function(){
 		var spec = Hierarchy.findSpec('embeds');
 		expect(spec.state).to.equal('running');
 
-		expect(spec.runningCounts.rights).to.equal(1);
-		expect(spec.runningCounts.wrongs).to.equal(2);
-		expect(spec.runningCounts.errors).to.equal(3);
-		expect(spec.runningCounts.invalids).to.equal(4);
+		var counts = QueueState.runningCounts();
+
+		expect(counts.rights).to.equal(1);
+		expect(counts.wrongs).to.equal(2);
+		expect(counts.errors).to.equal(3);
+		expect(counts.invalids).to.equal(4);
 
 		assertHierarchyUpdatedWasPublished();
 	});
