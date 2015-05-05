@@ -185,22 +185,10 @@ class EditorPresenter{
 			}
 		});
 
-		this.subscribe('spec-results-changed', function(data){
+		this.subscribe('spec-changed', function(data){
 			if (data.id == self.id){
 				self.spec = SpecificationStore.getData(self.id);
 				self.refreshEditor();
-			}
-		});
-
-		this.subscribe('spec-data-invalidated', function(data){
-			if (data.id == self.id){
-				self.initializeData();
-			}
-		});
-
-		this.subscribe('spec-data-available', function(data){
-			if (data.id == self.id){
-				self.initializeData();
 			}
 		});
 

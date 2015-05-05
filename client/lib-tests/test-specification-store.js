@@ -121,7 +121,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should have broadcasted the spec-data-available message', function(){
-			var message = findPublishedMessage('spec-data-available');
+			var message = findPublishedMessage('spec-changed');
 			expect(message.id).to.equal('spec1');
 			expect(message.channel).to.equal('editor');
 		});
@@ -154,7 +154,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should broadcast a spec-results-changed message', function(){
-			var message = findPublishedMessage('spec-results-changed');
+			var message = findPublishedMessage('spec-changed');
 			expect(message.id).to.equal('spec1');
 			expect(message.channel).to.equal('editor');
 		});
@@ -229,10 +229,10 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should broadcast a results-available message', function(){
-			var message = findPublishedMessage('spec-results-changed');
+			var message = findPublishedMessage('spec-changed');
 			expect(message).to.deep.equal({
 				channel: 'editor',
-				topic: 'spec-results-changed',
+				topic: 'spec-changed',
 				id: 'spec1'
 			})
 		});

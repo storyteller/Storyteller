@@ -32,7 +32,7 @@ function SpecificationStore(){
 
 		Postal.publish({
 			channel: 'editor',
-			topic: 'spec-data-available',
+			topic: 'spec-changed',
 			data: {id: id}
 		});
 	}
@@ -43,7 +43,7 @@ function SpecificationStore(){
 			spec.readResults(results);
 			Postal.publish({
 				channel: 'editor',
-				topic: 'spec-results-changed',
+				topic: 'spec-changed',
 				data: {id: id}
 			});
 		}
@@ -56,7 +56,7 @@ function SpecificationStore(){
 
 			Postal.publish({
 				channel: 'editor',
-				topic: 'spec-results-changed',
+				topic: 'spec-changed',
 				data: {id: id}
 			});
 		}

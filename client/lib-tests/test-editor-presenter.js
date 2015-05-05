@@ -174,7 +174,7 @@ describe('EditorPresenter', function(){
 
 			Postal.publish({
 				channel: 'editor', 
-				topic: 'spec-data-available', 
+				topic: 'spec-changed', 
 				data: {id: 'spec1'}
 			});
 		});
@@ -226,9 +226,9 @@ describe('EditorPresenter', function(){
 		});
 	});
 
-	describe('when responding to spec-data-invalidated that matches', function(){
+	describe('when responding to spec-changed that matches', function(){
 		var presenter = new EditorPresenter('spec1');
-		var wasInitializedAgain = false;
+		var wasRefreshed = false;
 
 		beforeEach(function(){
 			view = new FakeView();
@@ -236,27 +236,27 @@ describe('EditorPresenter', function(){
 
 			SpecificationStore.storeData('spec1', ObjectMother.specData());
 
-			presenter.initializeData = function(){
-				wasInitializedAgain = true;
+			presenter.refreshEditor = function(){
+				wasRefreshed = true;
 			}
 
 			Postal.publish({
 				channel: 'editor', 
-				topic: 'spec-data-invalidated',
+				topic: 'spec-changed',
 				data: {id: 'spec1'}
 			});
 		});
 
-		it('should intitialize data all over again', function(){
-			expect(wasInitializedAgain).to.be.true;
+		it('should refresh the screen', function(){
+			expect(wasRefreshed).to.be.true;
 		});
 
 
 	});
 
-	describe('when responding to spec-data-invalidated that does not match', function(){
+	describe('when responding to spec-changed that does not match', function(){
 		var presenter = new EditorPresenter('spec1');
-		var wasInitializedAgain = false;
+		var wasRefreshed = false;
 
 		beforeEach(function(){
 			view = new FakeView();
@@ -264,55 +264,24 @@ describe('EditorPresenter', function(){
 
 			SpecificationStore.storeData('spec1', ObjectMother.specData());
 
-			presenter.initializeData = function(){
-				wasInitializedAgain = true;
+			presenter.refreshEditor = function(){
+				wasRefreshed = true;
 			}
 
 			Postal.publish({
 				channel: 'editor', 
-				topic: 'spec-data-invalidated',
+				topic: 'spec-changed',
 				data: {id: 'different'}
 			});
 		});
 
 		it('should NOT intitialize data all over again', function(){
-			expect(wasInitializedAgain).to.be.false;
+			expect(wasRefreshed).to.be.false;
 		});
 
 
 	});
 
-	describe('when responding to spec-results-changed that matches', function(){
-		var spec = null;
-		var presenter = null;
-		var shell = null;
-		var view = null;
-		var wasEditorRefreshed = false;
-
-		beforeEach(function(){
-			spec = ObjectMother.specification();
-			spec.id = 'foo';
-
-			presenter = new EditorPresenter(spec);
-			view = new FakeView();
-			presenter.activate(loader, view);
-
-			wasEditorRefreshed = false;
-			presenter.refreshEditor = function(){
-				wasEditorRefreshed = true;
-			}
-
-			Postal.publish({
-				channel: 'editor',
-				topic: 'spec-results-changed',
-				data: {id: spec.id}
-			});
-		});
-
-		it('should refresh the editor', function(){
-			expect(wasEditorRefreshed).to.be.true;
-		});
-	});
 
 	describe('when responding to a cell selected from the initial state', function(){
 		// var identifier = {step: this.props.id, cell: this.props.cell.key};
