@@ -174,7 +174,7 @@ class EditorPresenter{
 
 		this.subscribe('spec-changed', function(data){
 			if (data.id == self.id){
-				self.spec = SpecificationStore.getData(self.id);
+				self.spec = SpecificationStore.findSpec(self.id);
 				self.refreshEditor();
 			}
 		});
@@ -209,7 +209,7 @@ class EditorPresenter{
 
 
 		if (!this.spec){
-			this.spec = SpecificationStore.getData(this.id);
+			this.spec = SpecificationStore.findSpec(this.id);
 		}
 
 		if (this.spec.mode == 'header'){

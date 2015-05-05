@@ -16,7 +16,7 @@ function SpecificationStore(){
 		return self.data.hasOwnProperty(id);
 	}
 
-	self.getData = function(id){
+	self.findSpec = function(id){
 		if (!self.hasData(id)) return null;
 
 		return self.data[id];
@@ -39,7 +39,7 @@ function SpecificationStore(){
 
 	self.readResults = function(id, results){
 		if (self.hasData(id)){
-			var spec = self.getData(id);
+			var spec = self.findSpec(id);
 			spec.readResults(results);
 			Postal.publish({
 				channel: 'editor',
@@ -51,7 +51,7 @@ function SpecificationStore(){
 
 	self.clearResults = function(id){
 		if (self.hasData(id)){
-			var spec = self.getData(id);
+			var spec = self.findSpec(id);
 			spec.clearResults();
 
 			Postal.publish({
@@ -120,7 +120,7 @@ function SpecificationStore(){
 
 	self.recordResult = function(data){
 		if (self.hasData(data.spec)){
-			var spec = self.getData(data.spec);
+			var spec = self.findSpec(data.spec);
 			var step = spec.find(data.id);
 
 			if (!step){

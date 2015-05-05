@@ -140,7 +140,7 @@ describe('EditorPresenter', function(){
 		});
 
 		it('should get the spec into itself', function(){
-			expect(presenter.spec).to.equal(SpecificationStore.getData('spec1'));
+			expect(presenter.spec).to.equal(SpecificationStore.findSpec('spec1'));
 		});
 
 		it('should refresh the editor immediately', function(){
@@ -182,7 +182,7 @@ describe('EditorPresenter', function(){
 		});
 
 		it('should get the spec into itself', function(){
-			expect(presenter.spec).to.equal(SpecificationStore.getData('spec1'));
+			expect(presenter.spec).to.equal(SpecificationStore.findSpec('spec1'));
 		});
 
 		it('should refresh the editor immediately', function(){

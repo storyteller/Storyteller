@@ -116,7 +116,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('can get the data straight out of the store', function(){
-			var spec = SpecificationStore.getData('spec1');
+			var spec = SpecificationStore.findSpec('spec1');
 			expect(spec instanceof Specification).to.be.true;
 		});
 
@@ -127,7 +127,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('reads results if they exist', function(){
-			var spec = SpecificationStore.getData('spec1');
+			var spec = SpecificationStore.findSpec('spec1');
 			expect(spec.results.logging).to.equal(results.logging);
 			expect(spec.results.performance).to.equal(results.performance);
 		});
@@ -224,7 +224,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should apply the results to the matching spec', function(){
-			var spec = SpecificationStore.getData('spec1');
+			var spec = SpecificationStore.findSpec('spec1');
 			expect(spec.results.logging).to.equal(results.logging);
 		});
 
@@ -256,7 +256,7 @@ describe('SpecificationStore', function(){
 				data: message
 			});
 
-			var spec = SpecificationStore.getData('test-spec');
+			var spec = SpecificationStore.findSpec('test-spec');
 			expect(spec.find(message.id)).to.not.be.null;
 			expect(spec).to.not.be.null;
 			var step = spec.find(message.id);
@@ -290,7 +290,7 @@ describe('SpecificationStore', function(){
 				data: message
 			});
 
-			var spec = SpecificationStore.getData('test-spec');
+			var spec = SpecificationStore.findSpec('test-spec');
 			expect(spec.find(message.id)).to.not.be.null;
 			expect(spec).to.not.be.null;
 			var section = spec.find(message.id);
@@ -313,7 +313,7 @@ describe('SpecificationStore', function(){
 			SpecificationStore.setLibrary(library);
 			SpecificationStore.storeData('spec1', specData);
 
-			originalSpec = SpecificationStore.getData('spec1');
+			originalSpec = SpecificationStore.findSpec('spec1');
 
 			Postal.publish({
 				channel: 'engine',
@@ -325,7 +325,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should have rebuilt the specification', function(){
-			var newSpec = SpecificationStore.getData('spec1');
+			var newSpec = SpecificationStore.findSpec('spec1');
 
 			expect(newSpec).to.not.equal(originalSpec);
 		});
