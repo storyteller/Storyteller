@@ -32,5 +32,6 @@ module.exports = {
 
 	store(data){
 		queued = data;
-	}
+	},
+
 }

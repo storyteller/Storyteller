@@ -8,12 +8,9 @@ class Spec{
 		this.title = data.title || data.name; // older test data still uses name in some places
 		this.id = data.id;
 		this.lifecycle = data.lifecycle || 'Acceptance';
+		this['max-retries'] = data['max-retries'];
 
 		this.results = null;
-
-		if (data.results){
-			this.recordResults(data.results);
-		}
 	}
 
 	get state(){
