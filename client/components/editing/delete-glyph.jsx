@@ -16,7 +16,7 @@ module.exports = React.createClass({
 		var onclick = e => {
 			Postal.publish({
 				channel: 'editor',
-				topic: 'remove-step',
+				topic: 'changes',
 				data: changes.stepRemoved(this.props.step.parent, this.props.step)
 			});
 

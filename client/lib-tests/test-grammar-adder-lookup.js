@@ -75,7 +75,7 @@ describe('Grammar Adder Lookup', function(){
 
 		second.select();
 
-		var message = findPublishedMessage('add-step');
+		var message = findPublishedMessage('changes');
 
 		expect(_.last(spec.steps[0].steps).key).to.equal('Tabulating');
 

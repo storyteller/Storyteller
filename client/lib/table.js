@@ -125,7 +125,7 @@ class Table extends CompositeGrammar{
 
 		Postal.publish({
 			channel: 'editor',
-			topic: 'add-step',
+			topic: 'changes',
 			data: message
 		});
 
@@ -143,7 +143,7 @@ class Table extends CompositeGrammar{
 
 			Postal.publish({
 				channel: 'editor',
-				topic: 'add-step',
+				topic: 'changes',
 				data: changes.stepAdded(section, newStep)
 			})
 		}

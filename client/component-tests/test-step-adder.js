@@ -21,9 +21,8 @@ var listener = {
 
 Postal.subscribe({
     channel  : "editor",
-    topic    : "add-step",
+    topic    : "changes",
     callback : function(data, envelope) {
-    	console.log('GOT SUBSCRIPTION IN POSTAL: ' + JSON.stringify(envelope));
         listener.append(data);
     }
 });

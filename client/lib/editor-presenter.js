@@ -199,18 +199,6 @@ class EditorPresenter{
 	        self.applyChange(data);
 	    });
 
-	    this.subscribe('add-step', function(data, envelope) {
-	        self.applyChange(data);
-	        self.refreshEditor();
-	    });
-
-	    // TODO -- just use changes
-	    this.subscribe('remove-step', function(data, envelope) {
-	        self.applyChange(data);
-	        self.refreshEditor();
-	    });
-
-	    // TODO -- just use changes
 	    this.subscriptions.push(Postal.subscribe({
 	    	channel: 'engine',
 	    	topic: 'spec-body-saved',

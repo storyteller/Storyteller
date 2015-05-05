@@ -16,7 +16,7 @@ class Option {
 
 		Postal.publish({
 			channel: 'editor',
-			topic: 'add-step',
+			topic: 'changes',
 			data: message
 		});
 	}
