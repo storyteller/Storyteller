@@ -20,15 +20,14 @@ function parentLocation(location){
 
 class EditorPresenter{
 	constructor(spec){
-		if (spec instanceof Specification || spec.id){
-			this.id = spec.id;
+		if (spec.id){
 			this.spec = spec;
+			this.id = spec.id;
 		}
-		else{
+		else {
 			this.id = spec;
 		}
-
-
+		
 		this.latched = false;
 		this.subscriptions = [];
 	}
@@ -101,7 +100,14 @@ class EditorPresenter{
 
 
 	refreshEditor(){
-		if (this.spec){
+		if (this.spec.mode == 'header'){
+			this.view.setState({
+				loading: this.spec.mode == 'header',
+				undoEnabled: false,
+				redoEnabled: false
+			});
+		}
+		else {
 			var counts = this.spec.changeStatus();
 
 			this.view.setState({
@@ -109,18 +115,11 @@ class EditorPresenter{
 				activeContainer: this.spec.activeHolder,
 				components: this.loader.buildComponents(this.spec),
 				outline: this.spec.outline(),
-				loading: false,
+				loading: this.spec.mode == 'header',
 				header: Hierarchy.findSpec(this.id),
 				undoEnabled: (counts.applied > 0),
 				redoEnabled: (counts.unapplied > 0),
 				retryCount: this.spec['max-retries']
-			});
-		}
-		else{
-			this.view.setState({
-				loading: true,
-				undoEnabled: false,
-				redoEnabled: false
 			});
 		}
 
@@ -136,14 +135,15 @@ class EditorPresenter{
 	}
 
 	initializeData(){
-		if (SpecificationStore.hasData(this.id)){
+		if (!this.spec){
 			this.spec = SpecificationStore.getData(this.id);
-			this.refreshEditor();
 		}
-		else{
-			this.view.setState({loading: true, spec: this.specHeader});
+
+		if (this.spec.mode == 'header'){
 			SpecificationStore.requestData(this.id);
 		}
+
+		this.refreshEditor();
 	}
 
 
@@ -217,11 +217,13 @@ class EditorPresenter{
 	        self.refreshEditor();
 	    });
 
+	    // TODO -- just use changes
 	    this.subscribe('remove-step', function(data, envelope) {
 	        self.applyChange(data);
 	        self.refreshEditor();
 	    });
 
+	    // TODO -- just use changes
 	    this.subscriptions.push(Postal.subscribe({
 	    	channel: 'engine',
 	    	topic: 'spec-body-saved',
@@ -231,14 +233,7 @@ class EditorPresenter{
 	    }));
 
 
-	    if (this.spec){
-			this.refreshEditor();
-	    }
-	    else{
-	    	this.initializeData();
-	    }
-
-
+	    this.initializeData();
 
 	}
 

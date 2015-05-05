@@ -75,12 +75,13 @@ describe('EditorPresenter', function(){
 	})
 
 	describe('when refreshing the editor with data', () => {
-		var presenter = new EditorPresenter('spec1');
+		var presenter = null;
 
 		beforeEach(function(){
-			var specData = ObjectMother.specData();
+			var specData = ObjectMother.specification();
 			specData['max-retries'] = 3;
-			SpecificationStore.storeData('spec1', specData);
+
+			presenter = new EditorPresenter(specData);
 			view = new FakeView();
 			presenter.activate(loader, view);
 			
@@ -96,8 +97,8 @@ describe('EditorPresenter', function(){
 		});
 	});
 
-	describe('when activating a new editor that has no data', function(){
-		var presenter = new EditorPresenter('spec1');
+	describe('when activating a new editor that has only header information', function(){
+		var presenter = new EditorPresenter({id: 'spec1', mode: 'header'});
 
 		beforeEach(function(){
 			view = new FakeView();
@@ -166,11 +167,12 @@ describe('EditorPresenter', function(){
 
 
 		beforeEach(function(){
-			
+			SpecificationStore.storeData('spec1', ObjectMother.specData());
+
 			view = new FakeView();
 			presenter.activate(loader, view);
 
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			
 
 			Postal.publish({
 				channel: 'editor', 
@@ -207,11 +209,14 @@ describe('EditorPresenter', function(){
 		}
 
 		beforeEach(function(){
-			
+			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			SpecificationStore.storeData('spec2', ObjectMother.specData());
+
+
 			view = new FakeView();
 			presenter.activate(loader, view);
 
-			SpecificationStore.storeData('spec2', ObjectMother.specData());
+			wasRefreshed = false;
 
 			Postal.publish({
 				channel: 'editor', 
@@ -231,10 +236,12 @@ describe('EditorPresenter', function(){
 		var wasRefreshed = false;
 
 		beforeEach(function(){
+			SpecificationStore.storeData('spec1', ObjectMother.specData());
+
 			view = new FakeView();
 			presenter.activate(loader, view);
 
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			
 
 			presenter.refreshEditor = function(){
 				wasRefreshed = true;
@@ -259,10 +266,12 @@ describe('EditorPresenter', function(){
 		var wasRefreshed = false;
 
 		beforeEach(function(){
+			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			
 			view = new FakeView();
 			presenter.activate(loader, view);
 
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			
 
 			presenter.refreshEditor = function(){
 				wasRefreshed = true;
@@ -515,8 +524,13 @@ describe('EditorPresenter', function(){
 		var presenter = null;
 		var view = null;
 
-		before(function(){
-			spec = ObjectMother.specification();
+		beforeEach(function(){
+			Postal.reset();
+			SpecificationStore.reset();
+			SpecificationStore.setLibrary(ObjectMother.library());
+
+			var data = ObjectMother.specData();
+			spec = new Specification(data, ObjectMother.library());
 			spec.path = 'foo/bar';
 
 			view = new FakeView();
@@ -532,7 +546,7 @@ describe('EditorPresenter', function(){
 			});
 		});
 
-		after(function(){
+		afterEach(function(){
 			presenter.deactivate();
 		});
 
