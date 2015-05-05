@@ -88,6 +88,62 @@ describe('Hierarchy data store functions', function(){
 		        listener.append(data);
 		    }
 		});
+
+		Postal.subscribe({
+			channel: 'editor',
+			topic: '*',
+			callback: function(data, env){
+				data.topic = env.topic;
+				data.channel = 'editor';
+				listener.append(data);
+			}
+		});
+	});
+
+	describe('responding to a spec-data message', () => {
+		var data = null;
+
+		beforeEach(() => {
+			hierarchyIsPublishedFromEngine();
+
+			data = {
+				id: 'sentence1',
+				data: {},
+				results: [{}, {}, {}]
+			};
+
+			Postal.publish({
+				channel: 'engine',
+				topic: 'spec-data',
+				data: data
+			});
+		});
+
+
+		it('should publish a spec-changed message', () => {
+			var message = findPublishedMessage('spec-changed');
+
+			expect(message).to.not.be.null;
+			expect(message).to.not.be.undefined;
+			expect(message).to.deep.equal({
+				id: 'sentence1',
+				topic: 'spec-changed',
+				channel: 'editor'
+			});
+		});
+
+		it('should store the new data', () => {
+			expect(Hierarchy.findSpec('sentence1')).to.equal(data.data);
+		});
+
+		it('should replace the results for that spec', () => {
+			var allResults = ResultCache.resultsFor('sentence1');
+
+			expect(allResults[0]).to.equal(data.results[0]);
+			expect(allResults[1]).to.equal(data.results[1]);
+			expect(allResults[2]).to.equal(data.results[2]);
+		});
+
 	});
 
 	it('can find a suite by path', function(){

@@ -36,7 +36,16 @@ function publishQueueChanged(){
 
 var handlers = {};
 
+handlers['spec-data'] = function(data){
+	specs[data.id] = data.data;
+	ResultCache.replaceResults(data.id, data.results);
 
+	Postal.publish({
+		channel: 'editor',
+		topic: 'spec-changed',
+		data: {id: data.id}
+	});
+}
 
 handlers['hierarchy-loaded'] = function(data){
 	top = new Suite(data.hierarchy);
