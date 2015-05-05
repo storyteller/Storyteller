@@ -11,14 +11,17 @@ module.exports = {
 	},
 
 	record(completed){
-
 		if (!results.hasOwnProperty(completed.id)){
 			results[completed.id] = new ArrayList();
 		}
 
 		var counts = null;
+
 		if (completed.counts){
 			counts = new Counts(completed.counts); 
+		}
+		else if (completed.results && completed.results.counts){
+			counts = new Counts(completed.results.counts);
 		}
 		else {
 			counts = new Counts(0, 0, 0, 0);
@@ -34,6 +37,7 @@ module.exports = {
 	},
 
 	lastResultFor(id){
+		console.log('looking for results for ' + id);
 		if (!this.hasResults(id)) return null;
 
 		return results[id].first();

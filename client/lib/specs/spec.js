@@ -1,6 +1,7 @@
 var _ = require("lodash");
 var Counts = require('./counts');
 var QueueState = require('./queue-state');
+var ResultCache = require('./result-cache');
 
 class Spec{
 	constructor(data){
@@ -21,22 +22,15 @@ class Spec{
 
 
 	status(){
-		if (this.results == null) return 'none';
+		if (!this.hasResults()) return 'none';
 
-		if (this.results.counts.success()) return 'success';
+		if (ResultCache.lastResultFor(this.id).counts.success()) return 'success';
 
 		return 'failed';
 	}
 
-	recordResults(results){
-		this.results = results;
-		if (results.counts){
-			this.results.counts = new Counts(results.counts);
-		}
-	}
-
 	hasResults(){
-		return (this.results);
+		return ResultCache.hasResults(this.id);
 	}
 
 	icon(){
@@ -48,13 +42,8 @@ class Spec{
 
 			return 'running-failed';
 		}
-		else {
-			if (this.results == null) return 'none';
 
-			if (this.results.counts.success()) return 'success';
-
-			return 'failed';
-		}
+		return this.status();
 	}
 
 

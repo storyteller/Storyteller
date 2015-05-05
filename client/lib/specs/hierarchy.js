@@ -11,6 +11,7 @@ var results = {}; // stores the final result of spec-execution-completion
 var lifecycle = 'any';
 var status = 'any';
 var QueueState = require('./queue-state');
+var ResultCache = require('./result-cache');
 
 var queue = [];
 
@@ -81,12 +82,14 @@ handlers['spec-progress'] = function(data){
 }
 
 handlers['spec-execution-completed'] = function(data){
+	ResultCache.record(data);
+/*
 	var spec = specs[data.id];
 
 	data.results.counts = new Counts(data.results.counts);
 
 	spec.recordResults(data.results);
-
+*/
 	SpecificationStore.readResults(data.id, data.results);
 
 	publishHierarchyChanged();
@@ -213,6 +216,8 @@ module.exports = {
 
 	reset: function(){
 		QueueState.clear();
+		ResultCache.clear();
+
 		specs = {};
 		top = new Suite({});
 		results = {};
