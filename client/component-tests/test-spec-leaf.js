@@ -6,8 +6,13 @@ var _ = require('lodash');
 
 var SpecLeaf = require('./../components/explorer/spec-leaf');
 var Spec = require('./../lib/specs/spec');
+var QueueState = require('./../lib/specs/queue-state');
 
 describe('the SpecLeaf control', function(){
+	beforeEach(() => {
+		QueueState.clear();
+	});
+
 	function getComponent(specProps) {
 		var spec = new Spec({
 			name: 'Embeds',
@@ -32,14 +37,18 @@ describe('the SpecLeaf control', function(){
 	});
 
 	it('should not render the run link when the state is queued', function(){
-		var component = getComponent({state: 'queued'});
+		QueueState.store({queued: ['embeds']});
+
+		var component = getComponent({});
 		var node = component.getDOMNode();
 
 		expect($('.run', node).length).to.equal(0);
 	});
 
 	it('should not render the run link when the state is running', function(){
-		var component = getComponent({state: 'running'});
+		QueueState.markRunning('embeds');
+
+		var component = getComponent({});
 		var node = component.getDOMNode();
 
 		expect($('.run', node).length).to.equal(0);

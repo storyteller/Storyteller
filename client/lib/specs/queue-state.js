@@ -20,6 +20,10 @@ module.exports = {
 		return 'none';
 	},
 
+	markRunning(id){
+		queued.running = id;
+	},
+
 	store(data){
 		queued = data;
 	}

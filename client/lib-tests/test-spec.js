@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var Spec = require('./../lib/specs/spec');
 var Counts = require('./../lib/specs/counts');
+var QueueState = require('./../lib/specs/queue-state');
 
 // Some of the logic in spec.js is just tested within
 // the spec explorer work
@@ -8,6 +9,7 @@ describe('Spec node logic', function(){
 	var spec = null;
 
 	beforeEach(function(){
+		QueueState.clear();
 		spec = new Spec({id: 'Foo', name: 'The Foo'});
 	});
 
@@ -32,7 +34,7 @@ describe('Spec node logic', function(){
 	});
 
 	it('select icon when running but with no results', function(){
-		spec.state = 'running';
+		QueueState.markRunning(spec.id);
 
 		expect(spec.icon()).to.equal('running');
 	});
@@ -50,12 +52,14 @@ describe('Spec node logic', function(){
 	});
 
 	it('select icon when running with currently successful results', function(){
+		QueueState.markRunning(spec.id);
 		spec.recordRunningResults(new Counts({rights: 1, wrongs: 0, errors: 0, invalids: 0}));
 	
 		expect(spec.icon()).to.equal('running-success');
 	});
 
 	it('select icon when running with currently failed results', function(){
+		QueueState.markRunning(spec.id);
 		spec.recordRunningResults(new Counts({rights: 0, wrongs: 1, errors: 0, invalids: 0}));
 	
 		expect(spec.icon()).to.equal('running-failed');

@@ -1,5 +1,6 @@
 var _ = require("lodash");
 var Counts = require('./counts');
+var QueueState = require('./queue-state');
 
 class Spec{
 	constructor(data){
@@ -7,13 +8,18 @@ class Spec{
 		this.id = data.id;
 		this.lifecycle = data.lifecycle || 'Acceptance';
 
-		this.state = 'none'; // can be queued or running as well
 		this.results = null;
 		this.runningCounts = null;
 
 		if (data.results){
 			this.recordResults(data.results);
 		}
+
+
+	}
+
+	get state(){
+		return QueueState.stateFor(this.id);
 	}
 
 
@@ -26,7 +32,6 @@ class Spec{
 	}
 
 	recordResults(results){
-		this.state = 'none';
 		this.results = results;
 		if (results.counts){
 			this.results.counts = new Counts(results.counts);
@@ -41,7 +46,6 @@ class Spec{
 	}
 
 	recordRunningResults(counts){
-		this.state = 'running';
 		this.runningCounts = counts;
 	}
 

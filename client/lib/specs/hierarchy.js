@@ -10,7 +10,7 @@ var top = new Suite({});
 var results = {}; // stores the final result of spec-execution-completion
 var lifecycle = 'any';
 var status = 'any';
-
+var QueueState = require('./queue-state');
 
 var queue = [];
 
@@ -46,7 +46,6 @@ handlers['hierarchy-loaded'] = function(data){
 
 handlers['spec-canceled'] = function(data){
 	var spec = specs[data.id];
-	spec.state = 'none';
 
 	if (spec.results){
 		SpecificationStore.readResults(spec.id, spec.results);
@@ -60,9 +59,9 @@ handlers['spec-canceled'] = function(data){
 
 handlers['spec-progress'] = function(data){
 	var spec = specs[data.id];
+	QueueState.markRunning(data.id);
 	var counts = new Counts(data.counts);
 
-	spec.state = 'running';
 	spec.recordRunningResults(counts);
 
 	var outgoing = {
@@ -96,15 +95,9 @@ handlers['spec-execution-completed'] = function(data){
 }
 
 handlers['queue-state'] = data => {
-	_.values(specs).forEach(s => s.state = 'none');
+	QueueState.store(data);
 
 	queue = data.queued.map(id => specs[id]);
-
-	queue.forEach(s => s.state = 'queued');
-
-	if (data.running){
-		specs[data.running].state = 'running';
-	}
 
 	publishQueueChanged();
 
@@ -220,6 +213,7 @@ module.exports = {
 	},
 
 	reset: function(){
+		QueueState.clear();
 		specs = {};
 		top = new Suite({});
 		results = {};
