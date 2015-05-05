@@ -36,6 +36,14 @@ module.exports = {
 		return results.hasOwnProperty(id);
 	},
 
+	replaceResults(id, resultHistory){
+		var list = new ArrayList();
+
+		resultHistory.forEach(x => list.add(x));
+
+		results[id] = list;
+	},
+
 	lastResultFor(id){
 		console.log('looking for results for ' + id);
 		if (!this.hasResults(id)) return null;

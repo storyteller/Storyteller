@@ -35,6 +35,9 @@ function publishQueueChanged(){
 }
 
 var handlers = {};
+
+
+
 handlers['hierarchy-loaded'] = function(data){
 	top = new Suite(data.hierarchy);
 	specs = {};

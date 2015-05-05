@@ -24,6 +24,32 @@ describe('ResultCache', () => {
 		expect(last.counts.success()).to.be.true;
 	});
 
+	it('can replace the results for one spec', () => {
+		var result1 = {id: 'foo'};
+		var result2 = {id: 'bar'};
+		var result3 = {id: 'foo'};
+		var result4 = {id: 'bar'};
+		var result5 = {id: 'foo'};
+
+		ResultCache.record(result1);
+		ResultCache.record(result2);
+		ResultCache.record(result3);
+		ResultCache.record(result4);
+		ResultCache.record(result5);
+
+		var result6 = {id: 'foo', counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0}};
+		var result7 = {id: 'foo', counts: {rights: 0, wrongs: 1, errors: 0, invalids: 0}};
+
+
+		ResultCache.replaceResults('foo', [result6, result7]);
+
+		expect(ResultCache.resultsFor('foo').length).to.equal(2);
+
+		//expect(ResultCache.resultsFor('foo')).to.deep.equal([result6, result7]);
+
+
+	});
+
 	it('can return the very last result for a spec', () => {
 		var result1 = {id: 'foo'};
 		var result2 = {id: 'bar'};
