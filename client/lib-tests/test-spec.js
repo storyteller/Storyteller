@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Spec = require('./../lib/specs/spec');
+var Spec = require('./../lib/specification');
 var Counts = require('./../lib/specs/counts');
 var QueueState = require('./../lib/specs/queue-state');
 var ResultCache = require('./../lib/specs/result-cache');

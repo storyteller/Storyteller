@@ -1,12 +1,12 @@
 var expect = require('chai').expect;
 
-var Spec = require('./../lib/specs/spec');
+var Spec = require('./../lib/specification');
 var Suite = require('./../lib/specs/suite');
 var _ = require('lodash');
 
 describe('Spec', function(){
 	describe('Initial Object', function(){
-		var spec = new Spec({title: 'Foo', id: '123', lifecycle: 'Acceptance'});
+		var spec = new Spec({title: 'Foo', id: '123', lifecycle: 'Acceptance'}, {});
 
 		it('grabs name', function(){
 			expect(spec.title).to.equal('Foo');

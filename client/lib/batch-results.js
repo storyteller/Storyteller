@@ -1,6 +1,5 @@
 var FixtureLibrary = require('./fixture-library');
 var Specification = require('./specification');
-var SpecHeader = require('./specs/spec');
 var ResultCache = require('./specs/result-cache');
 var Counts = require('./specs/counts');
 var _ = require('lodash');
@@ -34,7 +33,7 @@ class BatchResults{
 			var id = record.specification.id;
 			this.specs[id] = record;
 
-			var header = new SpecHeader(record.specification);
+			var header = new Specification(record.specification, this.library);
 			ResultCache.record({id: record.specification.id, counts: record.results.counts, results: record.results});
 
 			this[header.lifecycle.toLowerCase()].total++;

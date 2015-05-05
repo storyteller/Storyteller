@@ -5,7 +5,7 @@ var $ = require('jquery');
 var _ = require('lodash');
 
 var SpecLeaf = require('./../components/explorer/spec-leaf');
-var Spec = require('./../lib/specs/spec');
+var Spec = require('./../lib/specification');
 var QueueState = require('./../lib/specs/queue-state');
 
 describe('the SpecLeaf control', function(){

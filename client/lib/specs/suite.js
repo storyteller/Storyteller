@@ -1,4 +1,4 @@
-var Spec = require('./spec');
+var Spec = require('./../specification');
 var _ = require('lodash');
 
 class Suite{

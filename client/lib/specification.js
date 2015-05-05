@@ -2,22 +2,61 @@ var StepHolder = require('./step-holder');
 var _ = require('lodash');
 var uuid = require('node-uuid');
 var SpecificationNavigator = require('./specification-navigator');
+var Counts = require('./specs/counts');
+var QueueState = require('./specs/queue-state');
+var ResultCache = require('./specs/result-cache');
 
 function Specification(data, library){
 	if (data == undefined || data == null){
 		throw new Error('Null data being passed into Specification');
 	}
 
-	StepHolder.call(this, data.id, library, 'add sections or comments...');
+	StepHolder.call(this, data.id, library || {}, 'add sections or comments...');
 
-	this.title = data.title;
+	this.title = data.title || data.name;
 	this.byId = {};
 	this.type = 'specification';
 	this.results = {};
 	this.active = false;
 	this['max-retries'] = data['max-retries'];
+	this.mode = data.mode || 'full';
+	this.lifecycle = data.lifecycle || 'Acceptance';
 
 	this.navigator = new SpecificationNavigator(this);
+
+	Object.defineProperty(this, 'state', {
+		enumerable: true,
+		writeable: false,
+		get: function(){
+			return QueueState.stateFor(this.id);
+		}
+	});
+
+
+	this.status = function(){
+		if (!this.hasResults()) return 'none';
+
+		if (ResultCache.lastResultFor(this.id).counts.success()) return 'success';
+
+		return 'failed';
+	}
+
+	this.hasResults = function(){
+		return ResultCache.hasResults(this.id);
+	}
+
+	this.icon = function(){
+		if (this.state == 'running'){
+			var counts = QueueState.runningCounts();
+			if (!counts.anyResults()) return 'running';
+
+			if (counts.success()) return 'running-success';
+
+			return 'running-failed';
+		}
+
+		return this.status();
+	}
 
 	this.children = function(){
 		return this.steps;
