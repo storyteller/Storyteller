@@ -27,7 +27,7 @@ class EditorPresenter{
 		else {
 			this.id = spec;
 		}
-		
+
 		this.latched = false;
 		this.subscriptions = [];
 	}
@@ -134,19 +134,6 @@ class EditorPresenter{
 		}));
 	}
 
-	initializeData(){
-		if (!this.spec){
-			this.spec = SpecificationStore.getData(this.id);
-		}
-
-		if (this.spec.mode == 'header'){
-			SpecificationStore.requestData(this.id);
-		}
-
-		this.refreshEditor();
-	}
-
-
 	activate(loader, view){
 		if (view == null || view == undefined){
 			throw new Error('Must pass the view component here');
@@ -233,7 +220,15 @@ class EditorPresenter{
 	    }));
 
 
-	    this.initializeData();
+		if (!this.spec){
+			this.spec = SpecificationStore.getData(this.id);
+		}
+
+		if (this.spec.mode == 'header'){
+			SpecificationStore.requestData(this.id);
+		}
+
+		this.refreshEditor();
 
 	}
 
