@@ -9,7 +9,7 @@ class Spec{
 		this.id = data.id;
 		this.lifecycle = data.lifecycle || 'Acceptance';
 		this['max-retries'] = data['max-retries'];
-
+		this.mode = data.mode || 'full';
 		this.results = null;
 	}
 

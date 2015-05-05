@@ -15,6 +15,15 @@ describe('Spec node logic', function(){
 		spec = new Spec({id: 'Foo', name: 'The Foo'});
 	});
 
+	it('mode is full by default', () => {
+		expect(spec.mode).to.equal('full');
+	});
+
+	it('reads the mode off the data', () => {
+		var s = new Spec({id: 'Foo', title: 'the foo', mode: 'header'});
+		expect(s.mode).to.equal('header');
+	});
+
 	it('status is none', function(){
 		expect(spec.status()).to.equal('none');
 	});
