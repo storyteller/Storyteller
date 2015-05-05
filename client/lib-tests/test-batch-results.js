@@ -7,7 +7,7 @@ describe('The Batch Results data structure', function(){
 	var results = new BatchResults(BatchData);
 
 	it('counts the successful specs', function(){
-		expect(results.succeeded).to.equal(3);
+		expect(results.succeeded).to.equal(5);
 	});
 
 	it('counts the failed specs', function(){
@@ -15,7 +15,7 @@ describe('The Batch Results data structure', function(){
 	});
 
 	it('counts the acceptance specs', function(){
-		expect(results.acceptance.total).to.equal(19);
+		expect(results.acceptance.total).to.equal(21);
 	});
 
 	it('counts the regression specs', function(){
@@ -34,16 +34,16 @@ describe('The Batch Results data structure', function(){
 	});
 
 	it('can filter for anything', function(){
-		expect(results.filter('any', 'all').length).to.equal(22);
+		expect(results.filter('any', 'all').length).to.equal(24);
 	});
 
 	it('can filter by lifecycle', function(){
-		expect(results.filter('acceptance', 'all').length).to.equal(19);
+		expect(results.filter('acceptance', 'all').length).to.equal(21);
 		expect(results.filter('regression', 'all').length).to.equal(3);
 	});
 
 	it('can filter by status', function(){
 		expect(results.filter('any', 'failed').length).to.equal(19);
-		expect(results.filter('any', 'success').length).to.equal(3);
+		expect(results.filter('any', 'success').length).to.equal(5);
 	});
 });

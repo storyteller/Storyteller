@@ -111,7 +111,10 @@ namespace StoryTeller.Testing.CommandLine
 
             var json = JsonSerialization.ToIndentedJson(result);
 
-            new FileSystem().WriteStringToFile("batch-result-data.js", "module.exports = " + json);
+            var clientPath = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory().ParentDirectory().AppendPath("client");
+
+
+            new FileSystem().WriteStringToFile(clientPath.AppendPath("batch-result-data.js"), "module.exports = " + json);
         }
     }
 }
