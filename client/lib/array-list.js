@@ -60,6 +60,10 @@ _.extend(ArrayList.prototype, {
     return arr;
   },
 
+  first: function(){
+    return this[0];
+  },
+
   last: function(){
     return this[this.length - 1];
   },
