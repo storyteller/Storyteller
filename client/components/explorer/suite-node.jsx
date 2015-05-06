@@ -101,8 +101,10 @@ var SuiteBody = React.createClass({
 		};
 	},
 	render: function(){
-		var childSuites = this.props.suite.suites.map(suite => (<SuiteNode suite={suite} key={suite.path} />) );
-		var specs = this.props.suite.specs.map(spec => (<SpecLeaf spec={spec} key={spec.id} />) );
+		var suites = _.sortBy(this.props.suite.suites, x => x.name);
+		var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} />) );
+		
+		var specs = _.sortBy(this.props.suite.specs, x => x.title).map(spec => (<SpecLeaf spec={spec} key={spec.id} />) );
 		var style = {
 			maxHeight: this.state.maxHeight
 		};
