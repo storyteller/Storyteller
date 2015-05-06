@@ -21,12 +21,12 @@ namespace ST.Client
             public Latch(SpecFileWatcher parent, string file)
             {
                 _parent = parent;
-                _parent._watcher.EnableRaisingEvents = false;
+                if (_parent._watcher != null) _parent._watcher.EnableRaisingEvents = false;
             }
 
             public void Dispose()
             {
-                _parent._watcher.EnableRaisingEvents = true;
+                if (_parent._watcher != null) _parent._watcher.EnableRaisingEvents = true;
             }
         }
 

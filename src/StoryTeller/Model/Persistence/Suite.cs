@@ -71,6 +71,7 @@ namespace StoryTeller.Model.Persistence
 
         public void AddSpec(Specification spec)
         {
+            spec.WritePath(path);
             specs = specs.Union(new[] {spec}).ToArray();
         }
 
