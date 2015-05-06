@@ -38,6 +38,10 @@ function publishQueueChanged(){
 
 var recordResult = function(data){
 	var spec = specs[data.spec];
+
+	// don't bother trying to capture the result if mode = header
+	if (spec.mode == 'header') return;
+
 	var step = spec.find(data.id);
 
 	if (!step){
@@ -137,8 +141,6 @@ handlers['spec-added'] = function(data){
 	specs[spec.id] = spec;
 
 	var parent = findSuite(data.suite);
-
-console.log('found parent suite for ' + data.suite + ' is ' + parent);
 
 	if (parent){
 		parent.addSpec(spec);

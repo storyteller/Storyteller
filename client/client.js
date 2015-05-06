@@ -37,10 +37,13 @@ var startRouting = require('./components/app');
 
 require('./lib/specs/hierarchy').reset(); // just forcing it to get loaded
 
+var hierarchy = JSON.parse(_.unescape(document.getElementById('hierarchy-data').innerHTML));
+
+
 Postal.publish({
 	channel: 'engine',
 	topic: 'hierarchy-loaded',
-	data: {hierarchy: Storyteller.hierarchy}
+	data: {hierarchy: hierarchy}
 });
 
 

@@ -42,11 +42,13 @@ namespace ST.Client
 
         private void writeInitialDataIntoPage(HtmlDocument document)
         {
+            var cleanJson = JsonSerialization.ToCleanJson(_persistence.Hierarchy.Top);
+
+            document.Body.Add("div").Hide().Id("hierarchy-data").Text(cleanJson);
+
             var script = new StringWriter();
             script.WriteLine();
             script.WriteLine("var Storyteller = {};");
-            script.WriteLine();
-            script.WriteLine("Storyteller.hierarchy = {0};", JsonSerialization.ToCleanJson(_persistence.Hierarchy.Top));
             script.WriteLine();
             script.WriteLine("Storyteller.initialization = {0};", JsonSerialization.ToCleanJson(_context.Startup.Result));
             script.WriteLine();
