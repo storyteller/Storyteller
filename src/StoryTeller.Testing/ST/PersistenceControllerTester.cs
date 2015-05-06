@@ -90,13 +90,6 @@ namespace StoryTeller.Testing.ST
         }
 
         [Test]
-        public void should_tell_the_file_watcher_to_start_upon_start()
-        {
-            theFileWatcher.Path.ShouldBe(thePath);
-            theFileWatcher.Observer.ShouldBeTheSameAs(ClassUnderTest);
-        }
-
-        [Test]
         public void should_have_a_hierarchy_upon_starting()
         {
             ClassUnderTest.Hierarchy.Suites.Any().ShouldBe(true);
