@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var Postal = require('postal');
-var SpecificationStore = require('./../lib/specification-store');
+var Hierarchy = require('./../lib/specs/hierarchy');
 var ObjectMother = require('./object-mother');
 var _ = require('lodash');
 var library = ObjectMother.library();
@@ -35,10 +35,10 @@ function assertMessageWasNotPublished(topic){
 	expect(message).to.be.undefined;
 }
 
-describe('SpecificationStore', function(){
+describe('SpecificationStore Functionality of Hierarchy', function(){
 	beforeEach(function(){
 		Postal.reset();
-		SpecificationStore.reset();
+		Hierarchy.reset();
 
 		listener.clear();
 
@@ -72,20 +72,20 @@ describe('SpecificationStore', function(){
 	});
 
 	it('hasData negative', function(){
-		expect(SpecificationStore.hasData('foo')).to.be.false;
+		expect(Hierarchy.hasData('foo')).to.be.false;
 	});
 
 	it('can set a new library with no spec data', function(){
-		SpecificationStore.setLibrary(library);
+		Hierarchy.setLibrary(library);
 
-		expect(SpecificationStore.fixtures()).to.equal(library);
+		expect(Hierarchy.fixtures()).to.equal(library);
 
 		var message = findPublishedMessage('fixtures-loaded');
 		expect(message).to.not.be.null;
 	});
 
 	it('can request data', function(){
-		SpecificationStore.requestData('1');
+		Hierarchy.requestData('1');
 
 		var message = findPublishedMessage('spec-data-requested');
 		expect(message.id).to.equal('1');
@@ -99,7 +99,7 @@ describe('SpecificationStore', function(){
 
 	describe('when responding to spec-data', function(){
 		beforeEach(function(){
-			SpecificationStore.setLibrary(library);
+			Hierarchy.setLibrary(library);
 			Postal.publish({
 				channel: 'engine',
 				topic: 'spec-data',
@@ -112,11 +112,11 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should now have the data', function(){
-			expect(SpecificationStore.hasData('spec1')).to.be.true;
+			expect(Hierarchy.hasData('spec1')).to.be.true;
 		});
 
 		it('can get the data straight out of the store', function(){
-			var spec = SpecificationStore.findSpec('spec1');
+			var spec = Hierarchy.findSpec('spec1');
 			expect(spec instanceof Specification).to.be.true;
 		});
 
@@ -133,7 +133,7 @@ describe('SpecificationStore', function(){
 
 
 	it('handles the spec-changed message when it does not have the specification', function(){
-		SpecificationStore.setLibrary(library);
+		Hierarchy.setLibrary(library);
 		Postal.publish({
 			channel: 'engine',
 			topic: 'spec-data',
@@ -152,15 +152,15 @@ describe('SpecificationStore', function(){
 		});
 
 		assertMessageWasNotPublished('spec-data-invalidated');
-		expect(SpecificationStore.hasData('spec1')).to.be.true;
+		expect(Hierarchy.hasData('spec1')).to.be.true;
 	});
 
 	describe('storing results for a specification that is already stored', function(){
 		var results = null;
 
 		beforeEach(function(){
-			SpecificationStore.setLibrary(library);
-			SpecificationStore.storeData('spec1', specData);
+			Hierarchy.setLibrary(library);
+			Hierarchy.storeData('spec1', specData);
 
 			results = {
 				results: [],
@@ -168,11 +168,11 @@ describe('SpecificationStore', function(){
 				performance: [{}, {}]
 			};
 
-			SpecificationStore.readResults('spec1', results);
+			Hierarchy.readResults('spec1', results);
 		});
 
 		it('should apply the results to the matching spec', function(){
-			var spec = SpecificationStore.findSpec('spec1');
+			var spec = Hierarchy.findSpec('spec1');
 			expect(spec.results.logging).to.equal(results.logging);
 		});
 
@@ -190,8 +190,8 @@ describe('SpecificationStore', function(){
 		beforeEach(function(){
 			var data = ObjectMother.specData();
 
-			SpecificationStore.setLibrary(library);
-			SpecificationStore.storeData('test-spec', data);
+			Hierarchy.setLibrary(library);
+			Hierarchy.storeData('test-spec', data);
 		});
 
 
@@ -204,7 +204,7 @@ describe('SpecificationStore', function(){
 				data: message
 			});
 
-			var spec = SpecificationStore.findSpec('test-spec');
+			var spec = Hierarchy.findSpec('test-spec');
 			expect(spec.find(message.id)).to.not.be.null;
 			expect(spec).to.not.be.null;
 			var step = spec.find(message.id);
@@ -238,7 +238,7 @@ describe('SpecificationStore', function(){
 				data: message
 			});
 
-			var spec = SpecificationStore.findSpec('test-spec');
+			var spec = Hierarchy.findSpec('test-spec');
 			expect(spec.find(message.id)).to.not.be.null;
 			expect(spec).to.not.be.null;
 			var section = spec.find(message.id);
@@ -258,10 +258,10 @@ describe('SpecificationStore', function(){
 		var originalSpec;
 
 		beforeEach(function(){
-			SpecificationStore.setLibrary(library);
-			SpecificationStore.storeData('spec1', specData);
+			Hierarchy.setLibrary(library);
+			Hierarchy.storeData('spec1', specData);
 
-			originalSpec = SpecificationStore.findSpec('spec1');
+			originalSpec = Hierarchy.findSpec('spec1');
 
 			Postal.publish({
 				channel: 'engine',
@@ -273,7 +273,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('should have rebuilt the specification', function(){
-			var newSpec = SpecificationStore.findSpec('spec1');
+			var newSpec = Hierarchy.findSpec('spec1');
 
 			expect(newSpec).to.not.equal(originalSpec);
 		});
@@ -293,14 +293,14 @@ describe('SpecificationStore', function(){
 			var data = require('./../all-spec-data').fixtures;
 			var library = new FixtureLibrary(data);
 
-			SpecificationStore.setLibrary(library);
+			Hierarchy.setLibrary(library);
 			grammarErrorFixture = library.fixtures['GrammarError'];
 
 
 		});
 
 		it('exposes errors at the fixture level', () => {
-			var errors = SpecificationStore.errorReport();
+			var errors = Hierarchy.errorReport();
 
 			var fixture = _.find(errors, e => e.key == 'Failure');
 			expect(fixture.errors.length).to.equal(1);
@@ -320,7 +320,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('exposes errors at the grammar level', () => {
-			var errors = SpecificationStore.errorReport();
+			var errors = Hierarchy.errorReport();
 
 			var fixture = _.find(errors, e => e.key == 'GrammarError');
 			expect(fixture.errors.length).to.equal(0);
@@ -331,7 +331,7 @@ describe('SpecificationStore', function(){
 		});
 
 		it('exposes errors from sentence format validation on the client', () => {
-			var errors = SpecificationStore.errorReport();
+			var errors = Hierarchy.errorReport();
 
 			var fixture = _.find(errors, e => e.key == 'Sentence');
 			expect(fixture.errors.length).to.equal(0);

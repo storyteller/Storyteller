@@ -6,7 +6,7 @@ var AllSpecData = require('./../all-spec-data');
 var $ = require('jquery');
 
 var Header = require('./../components/header/header');
-var SpecificationStore = require('./../lib/specification-store');
+var Hierarchy = require('./../lib/specs/hierarchy');
 
 var listener = {
 	events: [],
@@ -58,7 +58,7 @@ describe('The Header Control', () => {
 
 	beforeEach(function(){
 		Postal.reset();
-		SpecificationStore.reset();
+		Hierarchy.reset();
 
 		Postal.subscribe({
 		    channel  : "engine-request",
@@ -128,7 +128,7 @@ describe('The Header Control', () => {
 			}
 		});
 
-		var errorCount = SpecificationStore.errorCount();
+		var errorCount = Hierarchy.errorCount();
 
 		var grammarCountText = $('#grammar-error-count .badge', element).html();
 
@@ -146,7 +146,7 @@ describe('The Header Control', () => {
 			fixtures: []
 		});
 
-		expect(SpecificationStore.errorCount()).to.equal(0);
+		expect(Hierarchy.errorCount()).to.equal(0);
 
 		expect($('#grammar-error-count', element).length).to.equal(0);
 	});

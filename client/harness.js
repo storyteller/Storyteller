@@ -5,9 +5,6 @@ var AllSpecData = require('./all-spec-data');
 
 
 require('./lib/specs/hierarchy').reset(); // just forcing it to get loaded
-var SpecificationStore = require('./lib/specification-store')
-
-SpecificationStore.reset(); // just forcing it to get loaded
 
 Postal.publish({
 	channel: 'engine',

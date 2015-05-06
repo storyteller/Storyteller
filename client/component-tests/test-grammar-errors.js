@@ -9,14 +9,14 @@ var FixtureLibrary = require('./../lib/fixture-library');
 var library = new FixtureLibrary(AllSpecData.fixtures);
 
 var GrammarErrors = require('./../components/grammars/grammar-errors');
-var SpecificationStore = require('./../lib/specification-store');
+var Hierarchy = require('./../lib/specs/hierarchy');
 
 describe('GrammarError rendering', () => {
 	var div = null;
 	var html = null;
 
 	before(() => {
-		SpecificationStore.setLibrary(library);
+		Hierarchy.setLibrary(library);
 
 		var instance = TestUtils.renderIntoDocument(<GrammarErrors />);
 

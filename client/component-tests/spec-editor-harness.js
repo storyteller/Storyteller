@@ -9,7 +9,6 @@ var loader = require('./../components/editing/component-loader').editing;
 
 var SpecEditor = require('../components/editing/spec-editor');
 var Hierarchy = require('../lib/specs/hierarchy');
-var SpecificationStore = require('../lib/specification-store');
 var FixtureLibrary = require('../lib/fixture-library');
 var CellDriver = require('./cell-driver');
 
@@ -45,7 +44,6 @@ function IntegrationDriver(fixtureData, mode, results){
 		Postal.reset();
 
 		Hierarchy.reset();
-		SpecificationStore.reset();
 
 		Postal.publish({
 			channel: 'engine',
@@ -54,12 +52,12 @@ function IntegrationDriver(fixtureData, mode, results){
 		})
 
 
-		SpecificationStore.setLibrary(this.library);
-		SpecificationStore.storeData(data.id, data);
+		Hierarchy.setLibrary(this.library);
+		Hierarchy.storeData(data.id, data);
 
 		if (results){
 			results.forEach(function(x){
-				SpecificationStore.recordResult(x);
+				Hierarchy.recordResult(x);
 			});
 		}
 

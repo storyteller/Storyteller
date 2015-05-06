@@ -14,7 +14,7 @@ var Icons = require('./../icons');
 var Postal = require('postal');
 
 var StatusBar = require('./status-bar');
-var SpecificationStore = require('./../../lib/specification-store');
+var Hierarchy = require('./../../lib/specs/hierarchy');
 var SpecProgressBar = require('./spec-progress-bar');
 
 
@@ -22,7 +22,7 @@ var SpecProgressBar = require('./spec-progress-bar');
 
 module.exports = React.createClass({
 	getInitialState: function(){
-		var data = SpecificationStore.systemRecycled();
+		var data = Hierarchy.systemRecycled();
 
 		return {
 			name: data.name,

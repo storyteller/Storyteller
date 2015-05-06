@@ -1,6 +1,5 @@
 var Postal = require('postal');
 var Specification = require('./specification');
-var SpecificationStore = require('./specification-store');
 var Hierarchy = require('./specs/hierarchy');
 var changes = require('./change-commands');
 
@@ -174,7 +173,7 @@ class EditorPresenter{
 
 		this.subscribe('spec-changed', function(data){
 			if (data.id == self.id){
-				self.spec = SpecificationStore.findSpec(self.id);
+				self.spec = Hierarchy.findSpec(self.id);
 				self.refreshEditor();
 			}
 		});
@@ -209,11 +208,11 @@ class EditorPresenter{
 
 
 		if (!this.spec){
-			this.spec = SpecificationStore.findSpec(this.id);
+			this.spec = Hierarchy.findSpec(this.id);
 		}
 
 		if (this.spec.mode == 'header'){
-			SpecificationStore.requestData(this.id);
+			Hierarchy.requestData(this.id);
 		}
 
 		this.refreshEditor();

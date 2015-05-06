@@ -10,7 +10,7 @@ var QueueCount = require('./../queue/queue-count');
 var GrammarCount = require('./../grammars/grammar-count');
 
 
-var SpecificationStore = require('./../../lib/specification-store');
+var Hierarchy = require('./../../lib/specs/hierarchy');
 var HelpIcon = require('./help');
 var Search = require('./search');
 var RuntimeError = require('./runtime-error');
@@ -18,7 +18,7 @@ var RuntimeError = require('./runtime-error');
 
 var StatusBar = React.createClass({
 	getInitialState: function(){
-		var data = SpecificationStore.systemRecycled;
+		var data = Hierarchy.systemRecycled();
 	
 		return {
 			success: data.success,

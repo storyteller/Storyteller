@@ -6,7 +6,7 @@ var ObjectMother = require('./object-mother');
 var changes = require('./../lib/change-commands');
 var Postal = require('postal');
 var _ = require('lodash');
-var SpecificationStore = require('./../lib/specification-store');
+var Hierarchy = require('./../lib/specs/hierarchy');
 var uuid = require('node-uuid');
 
 var listener = {
@@ -47,8 +47,8 @@ describe('EditorPresenter', function(){
 
 	beforeEach(function(){
 		Postal.reset();
-		SpecificationStore.reset();
-		SpecificationStore.setLibrary(ObjectMother.library());
+		Hierarchy.reset();
+		Hierarchy.setLibrary(ObjectMother.library());
 
 		Postal.subscribe({
 		    channel  : "editor",
@@ -110,7 +110,6 @@ describe('EditorPresenter', function(){
 			expect(view.state.loading).to.be.true;
 		});
 
-		// smelly coupling to SpecificationStore, but I'll allow it
 		it('should broadcast a message for the data request', function(){
 			var message = findPublishedMessage('spec-data-requested');
 			expect(message.id).to.equal('spec1');
@@ -133,14 +132,14 @@ describe('EditorPresenter', function(){
 
 
 		beforeEach(function(){
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			Hierarchy.storeData('spec1', ObjectMother.specData());
 			view = new FakeView();
 			presenter.activate(loader, view);
 			presenter.deactivate();
 		});
 
 		it('should get the spec into itself', function(){
-			expect(presenter.spec).to.equal(SpecificationStore.findSpec('spec1'));
+			expect(presenter.spec).to.equal(Hierarchy.findSpec('spec1'));
 		});
 
 		it('should refresh the editor immediately', function(){
@@ -167,7 +166,7 @@ describe('EditorPresenter', function(){
 
 
 		beforeEach(function(){
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			Hierarchy.storeData('spec1', ObjectMother.specData());
 
 			view = new FakeView();
 			presenter.activate(loader, view);
@@ -182,7 +181,7 @@ describe('EditorPresenter', function(){
 		});
 
 		it('should get the spec into itself', function(){
-			expect(presenter.spec).to.equal(SpecificationStore.findSpec('spec1'));
+			expect(presenter.spec).to.equal(Hierarchy.findSpec('spec1'));
 		});
 
 		it('should refresh the editor immediately', function(){
@@ -209,8 +208,8 @@ describe('EditorPresenter', function(){
 		}
 
 		beforeEach(function(){
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
-			SpecificationStore.storeData('spec2', ObjectMother.specData());
+			Hierarchy.storeData('spec1', ObjectMother.specData());
+			Hierarchy.storeData('spec2', ObjectMother.specData());
 
 
 			view = new FakeView();
@@ -236,7 +235,7 @@ describe('EditorPresenter', function(){
 		var wasRefreshed = false;
 
 		beforeEach(function(){
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			Hierarchy.storeData('spec1', ObjectMother.specData());
 
 			view = new FakeView();
 			presenter.activate(loader, view);
@@ -266,7 +265,7 @@ describe('EditorPresenter', function(){
 		var wasRefreshed = false;
 
 		beforeEach(function(){
-			SpecificationStore.storeData('spec1', ObjectMother.specData());
+			Hierarchy.storeData('spec1', ObjectMother.specData());
 			
 			view = new FakeView();
 			presenter.activate(loader, view);
@@ -526,8 +525,8 @@ describe('EditorPresenter', function(){
 
 		beforeEach(function(){
 			Postal.reset();
-			SpecificationStore.reset();
-			SpecificationStore.setLibrary(ObjectMother.library());
+			Hierarchy.reset();
+			Hierarchy.setLibrary(ObjectMother.library());
 
 			var data = ObjectMother.specData();
 			spec = new Specification(data, ObjectMother.library());

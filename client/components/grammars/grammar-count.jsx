@@ -2,14 +2,14 @@
 
 var React = require("react");
 var Postal = require('postal');
-var SpecificationStore = require('./../../lib/specification-store');
+var Hierarchy = require('./../../lib/specs/hierarchy');
 
 var Button = require('react-bootstrap/Button');
 var Badge = require('react-bootstrap/Badge');
 
 
 var getCount = function(){
-	return SpecificationStore.errorCount();
+	return Hierarchy.errorCount();
 }
 
 

@@ -2,7 +2,7 @@
 
 var React = require("react");
 var Postal = require('postal');
-var SpecificationStore = require('./../../lib/specification-store');
+var Hierarchy = require('./../../lib/specs/hierarchy');
 
 var Alert = require('react-bootstrap/Alert');
 
@@ -61,7 +61,7 @@ var FixtureHeader = React.createClass({
 
 
 var getReport = function(){
-	return SpecificationStore.errorReport();
+	return Hierarchy.errorReport();
 }
 
 
