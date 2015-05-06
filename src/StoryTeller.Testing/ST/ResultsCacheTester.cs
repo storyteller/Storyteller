@@ -58,18 +58,44 @@ namespace StoryTeller.Testing.ST
         }
 
         [Test]
-        public void last_counts()
+        public void get_all_results()
         {
-            theCache.ClearAll();
-
             var result1 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
             theCache.Store(result1);
             var result2 = new SpecExecutionCompleted("bar", new SpecResults(), new Specification());
             theCache.Store(result2);
-            var result3 = new SpecExecutionCompleted("foo", new SpecResults{Counts = new Counts()}, new Specification());
+            var result3 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
             theCache.Store(result3);
+            var result4 = new SpecExecutionCompleted("bar", new SpecResults(), new Specification());
+            theCache.Store(result4);
+            var result5 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
+            theCache.Store(result5);
+            var result6 = new SpecExecutionCompleted("bar", new SpecResults(), new Specification());
+            theCache.Store(result6);
 
-            theCache.LastResultFor("foo")
+            var all = theCache.AllResults().ToArray();
+            all.Count().ShouldBe(6);
+            all.ShouldContain(result1);
+            all.ShouldContain(result2);
+            all.ShouldContain(result3);
+            all.ShouldContain(result4);
+            all.ShouldContain(result5);
+            all.ShouldContain(result6);
+        }
+
+        [Test]
+        public void last_counts()
+        {
+            var c = new ResultsCache();
+
+            var result1 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
+            c.Store(result1);
+            var result2 = new SpecExecutionCompleted("bar", new SpecResults(), new Specification());
+            c.Store(result2);
+            var result3 = new SpecExecutionCompleted("foo", new SpecResults{Counts = new Counts()}, new Specification());
+            c.Store(result3);
+
+            c.LastResultFor("foo")
                 .ShouldBe(result3);
         }
     }

@@ -10,6 +10,10 @@ namespace ST.Client
         private readonly Cache<string, Queue<SpecExecutionCompleted>> _results =
             new Cache<string, Queue<SpecExecutionCompleted>>(_ => new Queue<SpecExecutionCompleted>());
 
+        public IEnumerable<SpecExecutionCompleted> AllResults()
+        {
+            return _results.SelectMany(x => x);
+        } 
 
         public void Store(SpecExecutionCompleted result)
         {

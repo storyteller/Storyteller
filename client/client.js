@@ -44,9 +44,13 @@ Postal.publish({
 });
 
 
+var ResultCache = require('./lib/specs/result-cache');
+var results = JSON.parse(_.unescape(document.getElementById('result-data').innerHTML));
+(results || []).forEach(x => {
+  ResultCache.record(x);
+});
+
 var hierarchy = JSON.parse(_.unescape(document.getElementById('hierarchy-data').innerHTML));
-
-
 Postal.publish({
 	channel: 'engine',
 	topic: 'hierarchy-loaded',

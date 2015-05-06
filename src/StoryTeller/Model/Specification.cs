@@ -62,10 +62,6 @@ namespace StoryTeller.Model
             SpecType = SpecType.full;
         }
 
-        [NonSerialized]
-        [Obsolete("Going to remove this altogether")]
-        public SpecResults results;
-
         protected bool Equals(Specification other)
         {
             return string.Equals(id, other.id);

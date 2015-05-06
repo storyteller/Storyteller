@@ -43,8 +43,10 @@ namespace ST.Client
         private void writeInitialDataIntoPage(HtmlDocument document)
         {
             var cleanJson = JsonSerialization.ToCleanJson(_persistence.Hierarchy.Top);
-
             document.Body.Add("div").Hide().Id("hierarchy-data").Text(cleanJson);
+
+            var resultJson = JsonSerialization.ToCleanJson(_persistence.AllCachedResults());
+            document.Body.Add("div").Hide().Id("result-data").Text(resultJson);
 
             var script = new StringWriter();
             script.WriteLine();

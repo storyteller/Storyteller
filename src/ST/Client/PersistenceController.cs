@@ -35,6 +35,11 @@ namespace ST.Client
             _watcher = watcher;
         }
 
+        public SpecExecutionCompleted[] AllCachedResults()
+        {
+            return _results.AllResults().ToArray();
+        }
+
         public void StartWatching(string path)
         {
             try
@@ -195,7 +200,7 @@ namespace ST.Client
 
             _lock.Write(() =>
             {
-                _hierarchy.Specifications.Each(node => node.results = null);
+                _results.ClearAll();
                 SendHierarchyToClient();
             });
         }
@@ -259,21 +264,7 @@ namespace ST.Client
             {
                 _lock.Write(() =>
                 {
-                    var results = new LightweightCache<string, SpecResults>();
-                    _hierarchy.Specifications.GetAll().Where(x => x.results != null).Each(x => { results[x.id] = x.results; });
-
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
-
-                    results.Each((id, result) =>
-                    {
-                        // Specs might have been deleted in the meantime.
-                        if (_hierarchy.Specifications.Has(id))
-                        {
-                            _hierarchy.Specifications[id].results = result;
-                        }
-                    });
-
-
                     SendHierarchyToClient();
                 });
             }
@@ -327,7 +318,6 @@ namespace ST.Client
         public void Receive(SpecExecutionCompleted message)
         {
             _results.Store(message);
-            Hierarchy.Specifications[message.Id].results = message.Results;
         }
     }
 }

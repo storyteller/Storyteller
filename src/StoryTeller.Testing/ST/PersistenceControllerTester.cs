@@ -52,8 +52,8 @@ namespace StoryTeller.Testing.ST
             var completed = new SpecExecutionCompleted("sentence4", new SpecResults(), new Specification());
             ClassUnderTest.Receive(completed);
 
-            ClassUnderTest.Hierarchy.Specifications["sentence4"].results
-                .ShouldBeTheSameAs(completed.Results);
+            ClassUnderTest.AllCachedResults().ShouldContain(completed);
+
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.ClearAllResults();
 
-            ClassUnderTest.Hierarchy.Specifications.Each(node => node.results.ShouldBeNull());
+            ClassUnderTest.AllCachedResults().Any().ShouldBeFalse();
 
             var hierarchyLoaded = new HierarchyLoaded
             {
