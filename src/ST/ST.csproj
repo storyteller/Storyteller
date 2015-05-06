@@ -69,6 +69,7 @@
     <Compile Include="Client\Persistence\ClearAllResultsCommand.cs" />
     <Compile Include="Client\Persistence\CloneSpecCommand.cs" />
     <Compile Include="Client\Persistence\AddSpecCommand.cs" />
+    <Compile Include="Client\Persistence\DeleteSpecCommand.cs" />
     <Compile Include="Client\Persistence\ReloadSpecsCommand.cs" />
     <Compile Include="Client\Persistence\RequestSpecDataCommand.cs" />
     <Compile Include="Client\Persistence\RunSpecCommand.cs" />

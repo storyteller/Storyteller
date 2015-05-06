@@ -15,5 +15,6 @@ namespace ST.Client
         void AddSuite(string parent, string name);
         void ClearAllResults();
         void ReloadHierarchy();
+        void DeleteSpec(string id);
     }
 }

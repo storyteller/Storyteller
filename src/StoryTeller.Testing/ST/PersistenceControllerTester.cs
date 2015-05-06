@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Bottles.Configuration;
 using FubuCore;
 using NUnit.Framework;
 using Rhino.Mocks;
@@ -12,8 +10,6 @@ using ST.Client;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
-using StoryTeller.Remotes;
-using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.ST
 {
@@ -40,8 +36,6 @@ namespace StoryTeller.Testing.ST
 
                 fileSystem.Copy(file, destination);
             });
-
-        
         }
 
         protected override void beforeEach()
@@ -69,7 +63,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Receive(new SpecExecutionCompleted("general1", new SpecResults(), new Specification()));
             ClassUnderTest.Receive(new SpecExecutionCompleted("general2", new SpecResults(), new Specification()));
             ClassUnderTest.Receive(new SpecExecutionCompleted("table1", new SpecResults(), new Specification()));
-        
+
             ClassUnderTest.ClearAllResults();
 
             ClassUnderTest.Hierarchy.Specifications.Each(node => node.results.ShouldBeNull());
@@ -80,7 +74,6 @@ namespace StoryTeller.Testing.ST
             };
 
             MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(hierarchyLoaded));
-
         }
 
         [Test]
@@ -205,7 +198,6 @@ namespace StoryTeller.Testing.ST
         }
 
 
-
         [Test]
         public void add_a_suite_to_the_parent()
         {
@@ -216,7 +208,7 @@ namespace StoryTeller.Testing.ST
 
             Directory.Exists(thePath.AppendPath("Foo Specs"));
 
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded{path = "Foo Specs"}));
+            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded {path = "Foo Specs"}));
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Foo Specs"];
             newSuite.name.ShouldBe("Foo Specs");
@@ -235,14 +227,14 @@ namespace StoryTeller.Testing.ST
 
             Directory.Exists(thePath.AppendPath("Tables", "Special Tables"));
 
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded { path = "Tables/Special Tables" }));
+            MockFor<IClientConnector>()
+                .AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded {path = "Tables/Special Tables"}));
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Tables/Special Tables"];
             newSuite.name.ShouldBe("Special Tables");
             newSuite.specs.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
             newSuite.path.ShouldBe("Tables/Special Tables");
-
         }
 
         [Test]

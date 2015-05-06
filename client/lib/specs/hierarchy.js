@@ -115,6 +115,17 @@ handlers['spec-data'] = function(data){
 	storeSpec(spec);
 }
 
+handlers['spec-deleted'] = function(data){
+	delete specs[data.id];
+	var parent = _.find(top.allSuites(), x => x.hasSpec(data.id));
+	if (parent){
+		parent.removeSpec(data.id);
+	}
+
+	publishHierarchyChanged();
+
+}
+
 handlers['hierarchy-loaded'] = function(data){
 	top = new Suite(data.hierarchy);
 	specs = {};
@@ -315,6 +326,11 @@ module.exports = {
 
 	findSuite: function(names){
 		var suite = top;
+
+		if (names && !(names instanceof Array)){
+			names = [names.split('/')];
+		}
+
 		names.forEach(x => {
 			if (suite == null) return null;
 			suite = suite.childSuite(x);

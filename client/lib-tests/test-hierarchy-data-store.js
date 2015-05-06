@@ -19,7 +19,9 @@ function publishEngineMessage(topic, data){
 }
 
 function hierarchyIsPublishedFromEngine(){
-	publishEngineMessage('hierarchy-loaded', {hierarchy: data});
+	var cloned = JSON.parse(JSON.stringify(data));
+
+	publishEngineMessage('hierarchy-loaded', {hierarchy: cloned});
 }
 
 function changeLifecyleFilter(value){
@@ -97,6 +99,24 @@ describe('Hierarchy data store functions', function(){
 				data.channel = 'editor';
 				listener.append(data);
 			}
+		});
+	});
+
+	describe('responding to spec-deleted message', () => {
+		beforeEach(() => {
+			hierarchyIsPublishedFromEngine();
+
+			Postal.publish({
+				channel: 'engine',
+				topic: 'spec-deleted',
+				data: {id: 'embeds'}
+			})
+		});
+
+		it('should remove the spec from the Hierarchy', () => {
+			expect(Hierarchy.findSpec('embeds')).to.be.null;
+			expect(Hierarchy.findSuite('Embedded').hasSpec('embeds'))
+				.to.be.false;
 		});
 	});
 

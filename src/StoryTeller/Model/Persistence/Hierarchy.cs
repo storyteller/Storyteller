@@ -19,5 +19,19 @@ namespace StoryTeller.Model.Persistence
             suite.ReplaceSpecification(specification);
             Specifications[specification.id] = specification;
         }
+
+        public Specification RemoveSpec(string id)
+        {
+            if (!Specifications.Has(id)) return null;
+
+            var old = Specifications[id];
+            var suite = Suites[old.SuitePath()];
+
+            suite.RemoveSpec(old);
+
+            Specifications.Remove(id);
+
+            return old;
+        }
     }
 }

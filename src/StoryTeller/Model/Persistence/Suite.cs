@@ -73,5 +73,10 @@ namespace StoryTeller.Model.Persistence
         {
             specs = specs.Union(new[] {spec}).ToArray();
         }
+
+        public void RemoveSpec(Specification old)
+        {
+            specs = specs.Where(x => x != old).ToArray();
+        }
     }
 }

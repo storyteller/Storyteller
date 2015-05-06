@@ -190,6 +190,7 @@
     <Compile Include="Messages\ClearAllResults.cs" />
     <Compile Include="Messages\ClientMessage.cs" />
     <Compile Include="Messages\CloneSpec.cs" />
+    <Compile Include="Messages\DeleteSpec.cs" />
     <Compile Include="Messages\ForceRecycle.cs" />
     <Compile Include="Messages\HierarchyLoaded.cs" />
     <Compile Include="Messages\MarkAsAccepted.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Messages\SpecChanged.cs" />
     <Compile Include="Messages\SpecData.cs" />
     <Compile Include="Messages\SpecDataRequested.cs" />
+    <Compile Include="Messages\SpecDeleted.cs" />
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
     <Compile Include="Messages\SpecNodeAdded.cs" />
     <Compile Include="Messages\SpecNodeChanged.cs" />

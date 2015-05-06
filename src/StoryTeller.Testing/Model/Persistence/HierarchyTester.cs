@@ -27,6 +27,27 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Test]
+        public void remove_a_spec_that_exists()
+        {
+            var expected = theHierarchy.Specifications["embeds"];
+
+            var removed = theHierarchy.RemoveSpec("embeds");
+
+            expected.ShouldBeSameAs(removed);
+
+            theHierarchy.Specifications.Has("embeds").ShouldBeFalse();
+
+            // There is only the one spec in Embeds to begin with
+            theHierarchy.Suites["Embedded"].specs.Length.ShouldBe(0);
+        }
+
+        [Test]
+        public void try_to_remove_a_spec_that_does_not_exist()
+        {
+            theHierarchy.RemoveSpec("non existent").ShouldBeNull();
+        }
+
+        [Test]
         public void should_store_the_new_specification()
         {
             theHierarchy.Specifications["embeds"].ShouldBeTheSameAs(theNew);

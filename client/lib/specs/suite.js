@@ -24,6 +24,10 @@ class Suite{
 		this.specs.push(spec);
 	}
 
+	removeSpec(id){
+		_.remove(this.specs, s => s.id == id);
+	}
+
 	childSuite(name){
 		return _.find(this.suites, x => x.name == name);
 	}

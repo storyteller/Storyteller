@@ -281,6 +281,21 @@ namespace ST.Client
             }
         }
 
+        public void DeleteSpec(string id)
+        {
+            var spec = _hierarchy.RemoveSpec(id);
+            if (spec != null)
+            {
+                using (_watcher.LatchFile(spec.Filename))
+                {
+                    new FileSystem().DeleteFile(spec.Filename);
+                }
+
+                
+                _client.SendMessageToClient(new SpecDeleted{id = id});
+            }
+        }
+
 
         public void SendHierarchyToClient()
         {

@@ -36,7 +36,6 @@ var Communicator = require('./lib/communicator');
 var startRouting = require('./components/app');
 
 require('./lib/specs/hierarchy').reset(); // just forcing it to get loaded
-require('./lib/specification-store').reset(); // just forcing it to get loaded
 
 Postal.publish({
 	channel: 'engine',
