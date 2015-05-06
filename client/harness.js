@@ -23,8 +23,9 @@ Postal.publish({
 Postal.subscribe({
 	channel: 'engine-request',
 	topic: '*',
-	callback: function(data){
-		//alert(JSON.stringify(data));
+	callback: function(data, env){
+
+		console.log('Sent to engine (' + env.topic + '): ' + JSON.stringify(data));
 
 	}
 });

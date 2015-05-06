@@ -6,6 +6,8 @@ var icons = require('./../icons');
 
 var CommandLink = require('./command-link');
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
+var DeleteLink = require('./delete-link');
+
 
 var SpecLeaf = React.createClass({
 	cloneLink: function(){
@@ -22,9 +24,6 @@ var SpecLeaf = React.createClass({
 
 	render: function(){
 		var onclick = e => {
-			if (e.shiftKey){
-				alert('I was shift clicked');
-			}
 
 			e.preventDefault();
 		}
@@ -55,6 +54,7 @@ var SpecLeaf = React.createClass({
 				{icon}
 				<a href={href} className={clazz}>{this.props.spec.title}</a>
 				{link}{this.cloneLink()}
+				<DeleteLink spec={this.props.spec}/>
 			</div>
 		);
 	}
