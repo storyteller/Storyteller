@@ -4,18 +4,20 @@ var Postal = require('postal');
 var Suite = require('./suite');
 var _ = require('lodash');
 var Counts = require('./counts');
+var QueueState = require('./queue-state');
+var ResultCache = require('./result-cache');
+var FixtureLibrary = require('./../fixture-library');
+var Specification = require('./../specification');
+
 
 var specs = {};
 var top = new Suite({});
 var results = {}; // stores the final result of spec-execution-completion
 var lifecycle = 'any';
 var status = 'any';
-var QueueState = require('./queue-state');
-var ResultCache = require('./result-cache');
+
 
 var queue = [];
-
-var SpecificationStore = require('./../specification-store');
 
 
 function publishHierarchyChanged(){
@@ -34,10 +36,63 @@ function publishQueueChanged(){
 	});
 }
 
+var recordResult = function(data){
+	var spec = specs[data.spec];
+	var step = spec.find(data.id);
+
+	if (!step){
+		throw new Error('Unable to find a step with id ' + data.id + ' for spec ' + data.spec);
+	}
+
+	step.logResult(data);
+
+	Postal.publish({
+		channel: 'editor',
+		topic: 'spec-changed',
+		data: {id: data.spec}
+	});
+}
+
 var handlers = {};
 
+handlers['step-result'] = recordResult;
+handlers['set-verification-result'] = recordResult;
+
+var library = null;
+var systemRecycled = null;
+var setLibrary = function(lib){
+	library = lib;
+
+	for (var key in specs){
+		var old = specs[key];
+
+		if (old.mode == 'full'){
+			var specData = old.write();
+			var newSpec = new Specification(specData, library);
+			specs[key] = newSpec;
+			Postal.publish({
+				channel: 'editor',
+				topic: 'spec-changed',
+				data: {id: key}
+			});
+		}
+	}
+
+	Postal.publish({
+		channel: 'explorer',
+		topic: 'fixtures-loaded',
+		data: {}
+	});
+}
+
+handlers['system-recycled'] = function(data){
+	systemRecycled = data;
+	setLibrary(new FixtureLibrary(data.fixtures));
+}
+
+
 handlers['spec-data'] = function(data){
-	specs[data.id] = data.data;
+	specs[data.id] = new Specification(data.data, library);
 	ResultCache.replaceResults(data.id, data.results);
 
 	Postal.publish({
@@ -60,12 +115,7 @@ handlers['hierarchy-loaded'] = function(data){
 handlers['spec-canceled'] = function(data){
 	var spec = specs[data.id];
 
-	if (spec.results){
-		SpecificationStore.readResults(spec.id, spec.results);
-	}
-	else {
-		SpecificationStore.clearResults(spec.id);
-	}
+	spec.clearResults();
 
 	publishHierarchyChanged();
 }
@@ -96,7 +146,7 @@ handlers['spec-progress'] = function(data){
 handlers['spec-execution-completed'] = function(data){
 	ResultCache.record(data);
 
-	SpecificationStore.readResults(data.id, data.results);
+	specs[data.id].clearResults();
 
 	publishHierarchyChanged();
 	publishQueueChanged();
@@ -220,6 +270,10 @@ module.exports = {
 		return queue;
 	},
 
+	hasData: function(id){
+		return specs.hasOwnProperty(id);
+	},
+
 	reset: function(){
 		QueueState.clear();
 		ResultCache.clear();
@@ -230,8 +284,14 @@ module.exports = {
 		queue = [];
 		lifecycle = 'any';
 		status = 'any';
+		library = null;
+		systemRecycled = null;
 
 		resetSubscriptions();
+	},
+
+	clearData: function(){
+		specs = {};
 	},
 
 	findSpec: function(id){
@@ -250,5 +310,84 @@ module.exports = {
 		if (suite == undefined) return null;
 
 		return suite;
+	},
+
+
+	errorCount: function(){
+		if (library == null) return 0;
+
+		return library.errorCount();
+	},
+
+	errorReport: function(){
+		if (library == null) return [];
+
+		return library.errorReport();
+	},
+
+	fixtures: function(){
+		return library;
+	},
+
+	storeData: function(id, data){
+		var spec = new Specification(data, library);
+		specs[id] = spec;
+
+		Postal.publish({
+			channel: 'editor',
+			topic: 'spec-changed',
+			data: {id: id}
+		});
+	},
+
+	readResults: function(id, results){
+		if (this.hasData(id)){
+			var spec = this.findSpec(id);
+			spec.readResults(results);
+			Postal.publish({
+				channel: 'editor',
+				topic: 'spec-changed',
+				data: {id: id}
+			});
+		}
+	},
+
+	requestData: function(id){
+		Postal.publish({
+			channel: 'engine-request',
+			topic: 'spec-data-requested',
+			data: {
+				type: 'spec-data-requested',
+				id: id
+			}
+		})
+
+	},
+
+	setLibrary: function(lib){
+		setLibrary(lib);
+	},
+
+	systemRecycled: function(){
+		return systemRecycled;
+	},
+
+	recordResult: function(data){
+		if (this.hasData(data.spec)){
+			var spec = this.findSpec(data.spec);
+			var step = spec.find(data.id);
+
+			if (!step){
+				throw new Error('Unable to find a step with id ' + data.id + ' for spec ' + data.spec);
+			}
+
+			step.logResult(data);
+
+			Postal.publish({
+				channel: 'editor',
+				topic: 'spec-results-changed',
+				data: {id: data.spec}
+			});
+		}
 	}
 }

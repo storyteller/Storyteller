@@ -39,13 +39,19 @@ module.exports = {
 	replaceResults(id, resultHistory){
 		var list = new ArrayList();
 
-		resultHistory.forEach(x => list.add(x));
+		if (!(resultHistory instanceof Array)){
+			resultHistory = [resultHistory];
+		}
+
+		if (resultHistory != null && resultHistory != undefined){
+			resultHistory.forEach(x => list.add(x));
+		}
+		
 
 		results[id] = list;
 	},
 
 	lastResultFor(id){
-		console.log('looking for results for ' + id);
 		if (!this.hasResults(id)) return null;
 
 		return results[id].first();

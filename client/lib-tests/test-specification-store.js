@@ -120,45 +120,17 @@ describe('SpecificationStore', function(){
 			expect(spec instanceof Specification).to.be.true;
 		});
 
-		it('should have broadcasted the spec-data-available message', function(){
+		it('should have broadcasted the spec-changed message', function(){
 			var message = findPublishedMessage('spec-changed');
 			expect(message.id).to.equal('spec1');
 			expect(message.channel).to.equal('editor');
 		});
 
-		it('reads results if they exist', function(){
-			var spec = SpecificationStore.findSpec('spec1');
-			expect(spec.results.logging).to.equal(results.logging);
-			expect(spec.results.performance).to.equal(results.performance);
-		});
 
 
 	});
 
-	describe('when clearing results', function(){
-		var specification = {
-			cleared: false,
-			clearResults(){
-				this.cleared = true;
-			},
-			id: 'spec1'
-		}
 
-		beforeEach(() => {
-			SpecificationStore.data['spec1'] = specification;
-			SpecificationStore.clearResults('spec1');
-		});
-
-		it('should clear the results on the spec', function(){
-			expect(specification.cleared).to.equal.true;
-		});
-
-		it('should broadcast a spec-results-changed message', function(){
-			var message = findPublishedMessage('spec-changed');
-			expect(message.id).to.equal('spec1');
-			expect(message.channel).to.equal('editor');
-		});
-	});
 
 	it('handles the spec-changed message when it does not have the specification', function(){
 		SpecificationStore.setLibrary(library);
@@ -181,30 +153,6 @@ describe('SpecificationStore', function(){
 
 		assertMessageWasNotPublished('spec-data-invalidated');
 		expect(SpecificationStore.hasData('spec1')).to.be.true;
-	});
-
-	describe('handling spec-changed message for a specification that is already stored', function(){
-		beforeEach(function(){
-			SpecificationStore.setLibrary(library);
-			SpecificationStore.storeData('spec1', specData);
-			Postal.publish({
-				channel: 'engine',
-				topic: 'spec-changed',
-				data: {
-					node: {id: 'spec1'}
-				}
-			});
-		});
-
-		it('should no longer have the data', function(){
-			expect(SpecificationStore.hasData('spec1')).to.be.false;
-		});
-
-		it('should have published the spec-data-invalidated message', function(){
-			var message = findPublishedMessage('spec-data-invalidated');
-			expect(message.id).to.equal('spec1');
-			expect(message.channel).to.equal('editor');
-		});
 	});
 
 	describe('storing results for a specification that is already stored', function(){
@@ -263,10 +211,10 @@ describe('SpecificationStore', function(){
 
 			expect(step.results.root).to.equal(message);
 
-			var message = findPublishedMessage('spec-results-changed');
+			var message = findPublishedMessage('spec-changed');
 			expect(message).to.deep.equal({
 				channel: 'editor',
-				topic: 'spec-results-changed',
+				topic: 'spec-changed',
 				id: 'test-spec'
 			});
 		});
@@ -296,10 +244,10 @@ describe('SpecificationStore', function(){
 			var section = spec.find(message.id);
 			expect(section.results.extras).to.equal(extras);
 
-			var message = findPublishedMessage('spec-results-changed');
+			var message = findPublishedMessage('spec-changed');
 			expect(message).to.deep.equal({
 				channel: 'editor',
-				topic: 'spec-results-changed',
+				topic: 'spec-changed',
 				id: 'test-spec'
 			});
 		});
@@ -330,43 +278,13 @@ describe('SpecificationStore', function(){
 			expect(newSpec).to.not.equal(originalSpec);
 		});
 
-		it('should have sent a spec-data-available message for the existing spec', function(){
-			var message = findPublishedMessage('spec-data-available');
+		it('should have sent a spec-changed message for the existing spec', function(){
+			var message = findPublishedMessage('spec-changed');
 			expect(message.channel).to.equal('editor');
 			expect(message.id).to.equal('spec1');
 		});
 	});
 
-	describe('when handling a hierarchy-loaded message', function(){
-		beforeEach(function(){
-			SpecificationStore.setLibrary(library);
-			SpecificationStore.storeData('spec1', specData);
-			SpecificationStore.storeData('spec2', specData);
-			SpecificationStore.storeData('spec3', specData);
-
-			Postal.publish({
-				channel: 'engine',
-				topic: 'hierarchy-loaded',
-				data: {}
-			});
-		});
-
-		it('should have no data', function(){
-			expect(SpecificationStore.hasData('spec1')).to.be.false;
-			expect(SpecificationStore.hasData('spec2')).to.be.false;
-			expect(SpecificationStore.hasData('spec3')).to.be.false;
-		});
-
-		it('should have broadcast invalidated message for each', function(){
-			var list = _.filter(listener.events, function(x){
-				return x.topic == 'spec-data-invalidated';
-			}).map(function(x){
-				return x.id;
-			});
-
-			expect(list).to.deep.equal(['spec1', 'spec2', 'spec3']);
-		});
-	});
 
 	describe('can find all the errors', function(){
 		var grammarErrorFixture = null;

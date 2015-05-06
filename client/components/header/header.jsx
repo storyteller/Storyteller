@@ -22,7 +22,7 @@ var SpecProgressBar = require('./spec-progress-bar');
 
 module.exports = React.createClass({
 	getInitialState: function(){
-		var data = SpecificationStore.systemRecycled;
+		var data = SpecificationStore.systemRecycled();
 
 		return {
 			name: data.name,

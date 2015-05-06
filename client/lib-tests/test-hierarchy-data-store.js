@@ -133,7 +133,7 @@ describe('Hierarchy data store functions', function(){
 		});
 
 		it('should store the new data', () => {
-			expect(Hierarchy.findSpec('sentence1')).to.equal(data.data);
+			expect(Hierarchy.findSpec('sentence1')).to.not.be.null;
 		});
 
 		it('should replace the results for that spec', () => {
