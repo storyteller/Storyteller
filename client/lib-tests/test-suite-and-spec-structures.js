@@ -66,10 +66,17 @@ describe('Suite', function(){
 
 		]
 
-
 	}
 
 	var suite = new Suite(data);
+
+	it('can tell you if it has a spec positive', () => {
+		expect(suite.suites[0].suites[0].hasSpec(1)).to.be.true;
+	});
+
+	it('can tell you if it has a spec negative', () => {
+		expect(suite.hasSpec('non existent')).to.be.false;
+	});
 
 	// was a bug where Suite was double dipping its spec summary
 	it('can summarize for a single suite', function(){

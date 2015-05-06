@@ -37,7 +37,6 @@ function Specification(data, library){
 		if (!this.hasResults()) return 'none';
 
 		var lastResult = ResultCache.lastResultFor(this.id);
-		console.log('last result is ' + JSON.stringify(lastResult));
 
 		if (lastResult.counts.success()) return 'success';
 

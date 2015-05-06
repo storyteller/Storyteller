@@ -58,9 +58,6 @@ module.exports = {
 	lastResultFor(id){
 		if (!this.hasResults(id)) return null;
 
-
-		console.log('results cached are ' + JSON.stringify(results[id]));
-
 		return results[id].first();
 	},
 

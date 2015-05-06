@@ -15,6 +15,12 @@ class Suite{
 		this.specs = (data.specs || []).map(x => new Spec(x));
 	}
 
+	hasSpec(id){
+		this.specs.forEach(x => console.log('id = ' + x.id));
+
+		return _.some(this.specs, {'id': id});
+	}
+
 	childSuite(name){
 		return _.find(this.suites, x => x.name == name);
 	}
