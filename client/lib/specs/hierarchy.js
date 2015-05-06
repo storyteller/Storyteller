@@ -137,6 +137,9 @@ handlers['spec-added'] = function(data){
 	specs[spec.id] = spec;
 
 	var parent = findSuite(data.suite);
+
+console.log('found parent suite for ' + data.suite + ' is ' + parent);
+
 	if (parent){
 		parent.addSpec(spec);
 	}
@@ -247,6 +250,8 @@ handlers['queue-state'] = data => {
 			}
 		})
 	}
+
+	publishHierarchyChanged();
 }
 
 

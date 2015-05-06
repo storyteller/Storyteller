@@ -44,7 +44,7 @@ namespace ST.Client
                 _lock.Write(() => { _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy(); });
 
 
-                _watcher.StartWatching(path, this);
+                //_watcher.StartWatching(path, this);
             }
             catch (Exception e)
             {

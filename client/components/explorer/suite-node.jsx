@@ -119,15 +119,14 @@ var SuiteBody = React.createClass({
 
 	componentDidMount: function () {
 		var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
-		if (this.state.maxHeight != height){
-			this.setState({maxHeight: height});
-		}
-
-		
+		this.setState({maxHeight: height});
 	},
 
 	componentDidUpdate: function(){
-		this.componentDidMount();
+		var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
+		if (this.state.maxHeight != height){
+			this.setState({maxHeight: height});
+		}
 	}
 
 });

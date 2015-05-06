@@ -11,9 +11,6 @@ var SuiteExplorer = React.createClass({
 		var params = this.props.params || this.getParams();
 
 		var path = params.splat;
-		if (!(path instanceof Array)){
-			path = [path];
-		}
 
 		var suite = Hierarchy.findSuite(path);
 
