@@ -208,7 +208,7 @@
     <Compile Include="Messages\SpecDataRequested.cs" />
     <Compile Include="Messages\SpecDeleted.cs" />
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
-    <Compile Include="Messages\SpecNodeAdded.cs" />
+    <Compile Include="Messages\SpecAdded.cs" />
     <Compile Include="Messages\SpecNodeChanged.cs" />
     <Compile Include="Messages\SpecProgress.cs" />
     <Compile Include="Messages\SuiteAdded.cs" />

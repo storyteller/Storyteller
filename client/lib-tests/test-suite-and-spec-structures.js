@@ -70,6 +70,30 @@ describe('Suite', function(){
 
 	var suite = new Suite(data);
 
+	it('can add a top level child suite', () => {
+		var s = new Suite(data);
+		s.addChildSuite('foo');
+
+		var child = s.childSuite('foo');
+
+		expect(child).to.not.be.null;
+		expect(child.path).to.equal('foo');
+		expect(child.name).to.equal('foo');
+	});
+
+	it('can add a child suite to a child suite', () => {
+		var s = new Suite(data);
+		var child = s.childSuite('Sentences');
+
+		child.addChildSuite('Methods');
+
+		var grandchild = child.childSuite('Methods');
+
+		expect(grandchild.path).to.equal('Sentences/Methods');
+		expect(grandchild.name).to.equal('Methods');
+
+	});
+
 	it('can tell you if it has a spec positive', () => {
 		expect(suite.suites[0].suites[0].hasSpec(1)).to.be.true;
 	});

@@ -61,10 +61,10 @@ var communicator = new Communicator(Storyteller.wsAddress, startRouting);
 
 
 Postal.subscribe({
-	channel: 'engine',
-	topic: 'spec-node-added',
+	channel: 'explorer',
+	topic: 'go-to-spec',
 	callback: function(data){
-		var href = '#/spec/editing/' + data.node.id;
+		var href = '#/spec/editing/' + data.id;
 		window.location = href;
 	}
 });

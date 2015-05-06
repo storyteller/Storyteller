@@ -24,11 +24,6 @@ namespace ST.Client.Persistence
             {
                 var added =  _controller.Value.CloneSpecification(message.id, message.name);
 
-                _client.Value.SendMessageToClient(new HierarchyLoaded
-                {
-                    hierarchy = _controller.Value.Hierarchy.Top
-                });
-
                 _client.Value.SendMessageToClient(added);
             }
             catch (Exception e)

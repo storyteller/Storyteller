@@ -24,12 +24,26 @@ class Suite{
 		this.specs.push(spec);
 	}
 
+	addSpec(spec){
+		this.specs.push(spec);
+	}
+
 	removeSpec(id){
 		_.remove(this.specs, s => s.id == id);
 	}
 
 	childSuite(name){
 		return _.find(this.suites, x => x.name == name);
+	}
+
+	addChildSuite(name){
+		var path = name;
+		if (this.parent){
+			path = this.path + '/' + path;
+		}
+
+		var child = new Suite({name: name, path: path}, this);
+		this.suites.push(child);
 	}
 
 	hasAnySpecs(){

@@ -8,9 +8,9 @@ namespace ST.Client
     {
         Hierarchy Hierarchy { get; }
         void StartWatching(string path);
-        SpecNodeAdded AddSpec(string path, string name);
+        SpecAdded AddSpec(string path, string name);
         void SaveSpecification(string id, Specification specification);
-        SpecNodeAdded CloneSpecification(string id, string name);
+        SpecAdded CloneSpecification(string id, string name);
         SpecData LoadSpecification(string id);
         void AddSuite(string parent, string name);
         void ClearAllResults();

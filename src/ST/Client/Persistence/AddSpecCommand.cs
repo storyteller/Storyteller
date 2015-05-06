@@ -23,11 +23,6 @@ namespace ST.Client.Persistence
             var added = _controller.Value.AddSpec(message.parent, message.name);
             try
             {
-                _connector.Value.SendMessageToClient(new HierarchyLoaded
-                {
-                    hierarchy = _controller.Value.Hierarchy.Top
-                });
-
                 _connector.Value.SendMessageToClient(added);
             }
             catch (Exception e)

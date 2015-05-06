@@ -120,6 +120,58 @@ describe('Hierarchy data store functions', function(){
 		});
 	});
 
+	describe('responding to a spec added to top level suite', () => {
+		beforeEach(() => {
+			hierarchyIsPublishedFromEngine();
+
+			Postal.publish({
+				channel: 'engine',
+				topic: 'spec-added',
+				data: {data: {id: 'foo'}, suite: 'Embedded'}
+			});
+		});
+
+		it('should have the new spec', () => {
+			expect(Hierarchy.findSpec('foo')).to.not.be.null;
+		});
+
+		it('should add the new spec to the right suite', () => {
+			var suite = Hierarchy.findSuite('Embedded');
+			expect(suite.hasSpec('foo')).to.be.true;
+		});
+
+		it('should broadcast a hierarchy update message', () => {
+			assertHierarchyUpdatedWasPublished();
+		});
+	});
+
+	describe('responding to a spec added to a sub level suite', () => {
+		beforeEach(() => {
+			hierarchyIsPublishedFromEngine();
+
+			Hierarchy.findSuite('Embedded').addChildSuite('folder1');
+
+			Postal.publish({
+				channel: 'engine',
+				topic: 'spec-added',
+				data: {data: {id: 'foo'}, suite: 'Embedded/folder1'}
+			});
+		});
+
+		it('should have the new spec', () => {
+			expect(Hierarchy.findSpec('foo')).to.not.be.null;
+		});
+
+		it('should add the new spec to the right suite', () => {
+			var suite = Hierarchy.findSuite('Embedded/folder1');
+			expect(suite.hasSpec('foo')).to.be.true;
+		});
+
+		it('should broadcast a hierarchy update message', () => {
+			assertHierarchyUpdatedWasPublished();
+		});
+	});
+
 	describe('responding to a spec-data message', () => {
 		var data = null;
 

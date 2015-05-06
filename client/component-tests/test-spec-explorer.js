@@ -75,7 +75,7 @@ describe('Spec Explorer', function(){
 	});
 
 	it('renders all the specs for a suite in initial setting', function(){
-		specsForSuiteShouldBe('Tables', ['Boolean Results in a Table', 'Decision Table', 'Table with Optional Columns', 'Tables with Errors', 'Tables'])
+		specsForSuiteShouldBe('Tables', ['Boolean Results in a Table', 'Decision Table', 'Table with Optional Columns', 'Tables', 'Tables with Errors'])
 	});
 
 	it('filter by acceptance lifecycle', function(){

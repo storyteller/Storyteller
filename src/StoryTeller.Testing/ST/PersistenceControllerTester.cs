@@ -133,13 +133,13 @@ namespace StoryTeller.Testing.ST
             var expectedPath = thePath.AppendPath("Sentences", "New_Sentence.xml");
 
             added.suite.ShouldBe("Sentences");
-            added.node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
-            added.node.id.ShouldNotBe("sentence2");
-            added.node.name.ShouldBe("New Sentence");
+            added.data.Lifecycle.ShouldBe(Lifecycle.Acceptance);
+            added.data.id.ShouldNotBe("sentence2");
+            added.data.name.ShouldBe("New Sentence");
 
-            added.node.Filename.ShouldBe(expectedPath);
+            added.data.Filename.ShouldBe(expectedPath);
 
-            ClassUnderTest.Hierarchy.Specifications[added.node.id].ShouldBeTheSameAs(added.node);
+            ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("New Sentence");
@@ -147,7 +147,7 @@ namespace StoryTeller.Testing.ST
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
-            suite.specs.ShouldContain(added.node);
+            suite.specs.ShouldContain(added.data);
         }
 
         [Test]
@@ -157,20 +157,20 @@ namespace StoryTeller.Testing.ST
 
             var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.xml");
 
-            added.node.name.ShouldBe("The Third Sentence");
-            added.node.Filename.ShouldBe(expectedPath);
-            added.node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
+            added.data.name.ShouldBe("The Third Sentence");
+            added.data.Filename.ShouldBe(expectedPath);
+            added.data.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
-            added.node.Filename.ShouldBe(expectedPath);
+            added.data.Filename.ShouldBe(expectedPath);
 
-            ClassUnderTest.Hierarchy.Specifications[added.node.id].ShouldBeTheSameAs(added.node);
+            ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("The Third Sentence");
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
-            suite.specs.ShouldContain(added.node);
+            suite.specs.ShouldContain(added.data);
         }
 
 
@@ -181,20 +181,20 @@ namespace StoryTeller.Testing.ST
 
             var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.xml");
 
-            added.node.name.ShouldBe("The Third Sentence??");
-            added.node.Filename.ShouldBe(expectedPath);
-            added.node.Lifecycle.ShouldBe(Lifecycle.Acceptance);
+            added.data.name.ShouldBe("The Third Sentence??");
+            added.data.Filename.ShouldBe(expectedPath);
+            added.data.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
-            added.node.Filename.ShouldBe(expectedPath);
+            added.data.Filename.ShouldBe(expectedPath);
 
-            ClassUnderTest.Hierarchy.Specifications[added.node.id].ShouldBeTheSameAs(added.node);
+            ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
             var specification = XmlReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("The Third Sentence??");
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
-            suite.specs.ShouldContain(added.node);
+            suite.specs.ShouldContain(added.data);
         }
 
 

@@ -115,6 +115,41 @@ handlers['spec-data'] = function(data){
 	storeSpec(spec);
 }
 
+function findSuite(names){
+	var suite = top;
+
+	if (names && !(names instanceof Array)){
+		names = names.split('/');
+	}
+
+	names.forEach(x => {
+		if (suite == null) return null;
+		suite = suite.childSuite(x);
+	});
+
+	if (suite == undefined) return null;
+
+	return suite;
+}
+
+handlers['spec-added'] = function(data){
+	var spec = new Specification(data.data, library);
+	specs[spec.id] = spec;
+
+	var parent = findSuite(data.suite);
+	if (parent){
+		parent.addSpec(spec);
+	}
+
+	publishHierarchyChanged();
+
+	Postal.publish({
+		channel: 'explorer',
+		topic: 'go-to-spec',
+		data: {id: spec.id}
+	});
+}
+
 handlers['spec-deleted'] = function(data){
 	delete specs[data.id];
 	var parent = _.find(top.allSuites(), x => x.hasSpec(data.id));
@@ -325,20 +360,7 @@ module.exports = {
 	},
 
 	findSuite: function(names){
-		var suite = top;
-
-		if (names && !(names instanceof Array)){
-			names = [names.split('/')];
-		}
-
-		names.forEach(x => {
-			if (suite == null) return null;
-			suite = suite.childSuite(x);
-		});
-
-		if (suite == undefined) return null;
-
-		return suite;
+		return findSuite(names);
 	},
 
 

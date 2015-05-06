@@ -115,7 +115,7 @@ namespace ST.Client
             }
         }
 
-        public SpecNodeAdded CloneSpecification(string id, string name)
+        public SpecAdded CloneSpecification(string id, string name)
         {
             return _lock.Read(() =>
             {
@@ -145,16 +145,16 @@ namespace ST.Client
 
                     suite.AddSpec(template);
 
-                    return new SpecNodeAdded
+                    return new SpecAdded
                     {
                         suite = suitePath,
-                        node = template
+                        data = template
                     };
                 }
             });
         }
 
-        public SpecNodeAdded AddSpec(string path, string name)
+        public SpecAdded AddSpec(string path, string name)
         {
             return _lock.Read(() =>
             {
@@ -178,10 +178,10 @@ namespace ST.Client
                     _hierarchy.Specifications[specification.id] = specification;
                     suite.AddSpec(specification);
 
-                    return new SpecNodeAdded
+                    return new SpecAdded
                     {
                         suite = path,
-                        node = specification
+                        data = specification
                     };
                 }
             });
