@@ -91,15 +91,28 @@ handlers['system-recycled'] = function(data){
 }
 
 
-handlers['spec-data'] = function(data){
-	specs[data.id] = new Specification(data.data, library);
-	ResultCache.replaceResults(data.id, data.results);
+var storeSpec = function(spec){
+	specs[spec.id] = spec;
+
+	var parent = _.find(top.allSuites(), x => x.hasSpec(spec.id));
+	if (parent){
+		parent.replaceSpec(spec);
+	}
 
 	Postal.publish({
 		channel: 'editor',
 		topic: 'spec-changed',
-		data: {id: data.id}
+		data: {id: spec.id}
 	});
+}
+
+handlers['spec-data'] = function(data){
+	var spec = new Specification(data.data, library);
+	spec.id = data.id;
+	specs[spec.id] = spec;
+	ResultCache.replaceResults(spec.id, data.results);
+
+	storeSpec(spec);
 }
 
 handlers['hierarchy-loaded'] = function(data){
@@ -331,13 +344,8 @@ module.exports = {
 
 	storeData: function(id, data){
 		var spec = new Specification(data, library);
-		specs[id] = spec;
-
-		Postal.publish({
-			channel: 'editor',
-			topic: 'spec-changed',
-			data: {id: id}
-		});
+		spec.id = id;
+		storeSpec(spec);
 	},
 
 	readResults: function(id, results){
