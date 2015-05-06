@@ -78,6 +78,8 @@ namespace ST.Client
                         suites = new Suite[0]
                     };
 
+                    parentSuite.AddChildSuite(newSuite);
+
                     _hierarchy.Suites[newPath] = newSuite;
 
                     _client.SendMessageToClient(new SuiteAdded{path = newPath});

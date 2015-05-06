@@ -308,6 +308,42 @@ describe('Hierarchy data store functions', function(){
 
 	});
 
+	it('can handle suite-added at the root level', () => {
+		hierarchyIsPublishedFromEngine();
+
+		Postal.publish({
+			channel: 'engine',
+			topic: 'suite-added',
+			data: {path: 'Suite1'}
+		});
+
+		var s = Hierarchy.findSuite('Suite1');
+
+		expect(s).to.not.be.null;
+		expect(s.name).to.equal('Suite1');
+		expect(s.path).to.equal('Suite1');
+
+		assertHierarchyUpdatedWasPublished();
+	});
+
+	it('can handle suite-added at a child level', () => {
+		hierarchyIsPublishedFromEngine();
+
+		Postal.publish({
+			channel: 'engine',
+			topic: 'suite-added',
+			data: {path: 'Embedded/Suite1'}
+		});
+
+		var s = Hierarchy.findSuite('Embedded/Suite1');
+
+		expect(s).to.not.be.null;
+		expect(s.name).to.equal('Suite1');
+		expect(s.path).to.equal('Embedded/Suite1');
+
+		assertHierarchyUpdatedWasPublished();
+	});
+
 	it('builds the spec queue on demand', function(){
 		hierarchyIsPublishedFromEngine();
 

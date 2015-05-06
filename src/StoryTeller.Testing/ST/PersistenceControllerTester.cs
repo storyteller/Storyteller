@@ -215,6 +215,8 @@ namespace StoryTeller.Testing.ST
             newSuite.specs.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
             newSuite.path.ShouldBe("Foo Specs");
+
+            ClassUnderTest.Hierarchy.Suites[""].suites.ShouldContain(newSuite);
         }
 
         [Test]
@@ -235,6 +237,9 @@ namespace StoryTeller.Testing.ST
             newSuite.specs.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
             newSuite.path.ShouldBe("Tables/Special Tables");
+
+            ClassUnderTest.Hierarchy.Suites["Tables"].suites
+                .ShouldContain(newSuite);
         }
 
         [Test]

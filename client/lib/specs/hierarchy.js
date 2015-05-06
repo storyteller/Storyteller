@@ -150,6 +150,26 @@ handlers['spec-added'] = function(data){
 	});
 }
 
+handlers['suite-added'] = function(data){
+	var names = data.path.split('/');
+	if (names.length == 1){
+		top.addChildSuite(names[0]);
+	}
+	else {
+		var parent = top;
+		for (var i = 0; i < names.length - 1; i++){
+			parent = parent.childSuite(names[i]);
+		}
+
+		var name = _.last(names);
+		parent.addChildSuite(name);
+
+		parent.suites.forEach(x => console.log('child: ' + x.name));
+	}
+
+	publishHierarchyChanged();
+}
+
 handlers['spec-deleted'] = function(data){
 	delete specs[data.id];
 	var parent = _.find(top.allSuites(), x => x.hasSpec(data.id));

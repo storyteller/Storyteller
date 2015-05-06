@@ -80,7 +80,7 @@ var SuiteHeader = React.createClass({
 		var openClass = this.state.open ? 'open' : 'closed';
 
 		return (
-			<div className={openClass + ' suite-header'}>
+			<div key={suite.path} className={openClass + ' suite-header'}>
 				<a href='#' onClick={this.openFolder}>
 					{openClosed}
 				</a>
@@ -116,9 +116,20 @@ var SuiteBody = React.createClass({
 			</div>
 		);
 	},
+
 	componentDidMount: function () {
-		this.setState({maxHeight: this.refs.suiteBody.getDOMNode().scrollHeight + 'px'});
+		var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
+		if (this.state.maxHeight != height){
+			this.setState({maxHeight: height});
+		}
+
+		
+	},
+
+	componentDidUpdate: function(){
+		this.componentDidMount();
 	}
+
 });
 
 var SuiteNode = React.createClass({

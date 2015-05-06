@@ -78,5 +78,10 @@ namespace StoryTeller.Model.Persistence
         {
             specs = specs.Where(x => x != old).ToArray();
         }
+
+        public void AddChildSuite(Suite newSuite)
+        {
+            suites = suites.Union(new[] {newSuite}).ToArray();
+        }
     }
 }
