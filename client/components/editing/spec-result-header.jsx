@@ -3,12 +3,14 @@
 var React = require("react");
 
 var Alert = require('react-bootstrap/Alert');
+var ResultCache = require('./../../lib/specs/result-cache');
 
 var SpecResultHeader = React.createClass({
 	render: function(){
 		var succeeded = (this.props.spec.status() == 'success');
 
-		var countsText = this.props.spec.results.counts.toString();
+		var counts = ResultCache.lastResultFor(this.props.spec.id).counts;
+		var countsText = counts.toString();
 
 		if (succeeded){
 			return (
