@@ -16,9 +16,12 @@ class Suite{
 	}
 
 	hasSpec(id){
-		this.specs.forEach(x => console.log('id = ' + x.id));
-
 		return _.some(this.specs, {'id': id});
+	}
+
+	replaceSpec(spec){
+		_.remove(this.specs, s => s.id == spec.id);
+		this.specs.push(spec);
 	}
 
 	childSuite(name){

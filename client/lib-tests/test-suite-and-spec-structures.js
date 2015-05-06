@@ -120,7 +120,43 @@ describe('Suite', function(){
 		expect(suite.suites[0].specs[0].title).to.equal('Simple 1');
 		expect(suite.suites[0].specs[1].title).to.equal('Simple 2');
 	});
+
+	describe('when replacing a spec', () => {
+		var suite = null;
+		var oldSpec = null;
+
+		beforeEach(() => {
+			oldSpec = {title: 'Simple 1', id: 3};
+
+			var data = {
+				name: 'Top',
+				path: '',
+				specs: [
+					oldSpec,
+					{title: 'Simple 2', id: 4},
+				]
+			}
+
+			suite = new Suite(data);
+		});
+
+	
+		it('can replace a spec', () => {
+			var newSpec = {id: 3};
+
+
+			suite.replaceSpec(newSpec);
+
+
+			expect(suite.hasSpec(3)).to.be.true;
+
+			expect(_.contains(suite.allSpecs(), oldSpec)).to.be.false;
+			expect(_.contains(suite.allSpecs(), newSpec)).to.be.true;
+		});
+	});
 });
+
+
 
 describe('Suite filtering', function(){
 	it('can filter the specs', function(){
