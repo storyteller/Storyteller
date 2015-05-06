@@ -31,5 +31,10 @@ namespace ST.Client
         {
             return ResultsFor(id).FirstOrDefault();
         }
+
+        public void ClearAll()
+        {
+            _results.ClearAll();
+        }
     }
 }

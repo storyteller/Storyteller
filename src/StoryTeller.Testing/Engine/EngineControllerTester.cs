@@ -153,11 +153,15 @@ namespace StoryTeller.Testing.Engine
         {
             Services.PartialMockTheClassUnderTest();
 
-            ClassUnderTest.Expect(x => x.RunSpec("a", new Specification{id = "a"}));
-            ClassUnderTest.Expect(x => x.RunSpec("b", new Specification { id = "b" }));
-            ClassUnderTest.Expect(x => x.RunSpec("c", new Specification { id = "c" }));
+            var specA = new Specification { id = "a" };
+            var specB = new Specification { id = "b" };
+            var specC = new Specification { id = "c" };
 
-            ClassUnderTest.Receive(new RunSpecs {list = new[] {"a", "b", "c"}});
+            ClassUnderTest.Expect(x => x.RunSpec("a", specA));
+            ClassUnderTest.Expect(x => x.RunSpec("b", specB));
+            ClassUnderTest.Expect(x => x.RunSpec("c", specC));
+
+            ClassUnderTest.Receive(new RunSpecs { specs = new Specification[] { specA, specB, specC } });
         }
 
         [Test]

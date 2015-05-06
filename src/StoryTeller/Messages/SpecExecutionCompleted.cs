@@ -56,5 +56,10 @@ namespace StoryTeller.Messages
                 return ((Id != null ? Id.GetHashCode() : 0)*397) ^ (Results.Counts != null ? Results.Counts.GetHashCode() : 0);
             }
         }
+
+        public override string ToString()
+        {
+            return string.Format("SpecExecutionCompleted for Id: {0}, Time: {1}", Id, Time);
+        }
     }
 }

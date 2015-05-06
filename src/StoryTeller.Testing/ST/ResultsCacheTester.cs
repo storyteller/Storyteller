@@ -60,6 +60,8 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void last_counts()
         {
+            theCache.ClearAll();
+
             var result1 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
             theCache.Store(result1);
             var result2 = new SpecExecutionCompleted("bar", new SpecResults(), new Specification());
