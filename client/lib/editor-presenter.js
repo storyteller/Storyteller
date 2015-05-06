@@ -115,7 +115,6 @@ class EditorPresenter{
 				components: this.loader.buildComponents(this.spec),
 				outline: this.spec.outline(),
 				loading: this.spec.mode == 'header',
-				header: Hierarchy.findSpec(this.id),
 				undoEnabled: (counts.applied > 0),
 				redoEnabled: (counts.unapplied > 0),
 				retryCount: this.spec['max-retries']

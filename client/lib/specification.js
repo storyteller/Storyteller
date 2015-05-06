@@ -36,7 +36,10 @@ function Specification(data, library){
 	this.status = function(){
 		if (!this.hasResults()) return 'none';
 
-		if (ResultCache.lastResultFor(this.id).counts.success()) return 'success';
+		var lastResult = ResultCache.lastResultFor(this.id);
+		console.log('last result is ' + JSON.stringify(lastResult));
+
+		if (lastResult.counts.success()) return 'success';
 
 		return 'failed';
 	}
@@ -73,6 +76,8 @@ function Specification(data, library){
 			title: this.title,
 			steps: this.writeSteps(),
 			id: this.id,
+			lifecycle: this.lifecycle,
+			mode: this.mode,
 			'max-retries': this['max-retries']
 		}
 	}

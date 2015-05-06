@@ -33,6 +33,8 @@ describe('Specification', function(){
 			id: 1,
 			'max-retries': 2,
 			title: 'My first specification',
+			mode: 'header',
+			lifecycle: 'Regression',
 			steps: [
 				{
 					id: 'section1',
@@ -112,7 +114,63 @@ describe('Specification', function(){
 
 	});
 
+describe('When writing itself', () => {
+	var specData = {
+		id: 1,
+		'max-retries': 2,
+		title: 'My first specification',
+		lifecycle: 'Regression',
+		mode: 'header',
+		steps: [
+			{
+				id: 'section1',
+				type: 'section',
+				key: 'Math', 
+				
+				activeCells: {},
+				steps: [
+					{id: 2, key: 'StartWith', cells: {x: 1}},
+					{id: 3, key: 'Add', cells: {x: 5}},
+					{id: 4, key: 'Subtract', cells: {x: 2}},
+					{id: 5, key: 'TheResultShouldBe', cells: {x: 4}},
+					{id: 6, key: 'Adding', cells:{x:1, y:2, result:3}}
+				]
+			},
+			{id: 7, type: 'comment', text: 'foo'},
+			{id: 8, type: 'comment', text: 'bar'},
+			{
+				id: 'section2',
+				type: 'section',
+				activeCells: {},
+				key: 'Math', 
+				steps: [
+					{id: 9, key: 'Adding', cells:{x:1, y:2, result:3}}
+				]
+			},
+		]
+	}
 
+	var library = new FixtureLibrary(fixtureData);
+	var specification = new Specification(specData, library);
+
+	var writtenData = specification.write();
+
+	it('should persist the title', () => {
+		expect(writtenData.title).to.equal('My first specification');
+	});
+
+	it('should persist the lifecycle', () => {
+		expect(writtenData.lifecycle).to.equal('Regression');
+	});
+
+	it('should persist the mode', () => {
+		expect(writtenData.mode).to.equal('header');
+	});
+
+	it('should persist the max-retries', () => {
+		expect(writtenData['max-retries']).to.equal(2);
+	});
+});
 
 describe('Storing and finding steps by id', function(){
 	var spec = null;

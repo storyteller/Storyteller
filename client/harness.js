@@ -2,9 +2,9 @@ var Postal = require('postal');
 var startRouting = require('./components/app');
 
 var AllSpecData = require('./all-spec-data');
+var Hierarchy = require('./lib/specs/hierarchy');
 
-
-require('./lib/specs/hierarchy').reset(); // just forcing it to get loaded
+Hierarchy.reset(); // just forcing it to get loaded
 
 Postal.publish({
 	channel: 'engine',

@@ -33,11 +33,15 @@ module.exports = {
 	},
 
 	hasResults(id){
-		return results.hasOwnProperty(id);
+		return results.hasOwnProperty(id) && results[id].length > 0;
 	},
 
 	replaceResults(id, resultHistory){
 		var list = new ArrayList();
+
+		if (resultHistory == null || resultHistory == undefined){
+			resultHistory = [];
+		}
 
 		if (!(resultHistory instanceof Array)){
 			resultHistory = [resultHistory];
@@ -53,6 +57,9 @@ module.exports = {
 
 	lastResultFor(id){
 		if (!this.hasResults(id)) return null;
+
+
+		console.log('results cached are ' + JSON.stringify(results[id]));
 
 		return results[id].first();
 	},

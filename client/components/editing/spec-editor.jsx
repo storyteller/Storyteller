@@ -183,7 +183,7 @@ module.exports = React.createClass({
 
 		var resultsHeader = null;
 		if (this.state.header.hasResults()){
-			resultsHeader = (<SpecResultHeader spec={this.state.header} />);
+			resultsHeader = (<SpecResultHeader spec={this.state.spec} />);
 		}
 
 		var contextualControl = this.buildContext();
@@ -206,7 +206,7 @@ module.exports = React.createClass({
 									{links}
 								</ButtonGroup>
 
-								<LifecycleButton spec={this.state.header} />
+								<LifecycleButton spec={this.state.spec} />
 							</span>
 						</h3>
 
