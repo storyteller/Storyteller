@@ -2,7 +2,7 @@ var Spec = require('./../specification');
 var _ = require('lodash');
 
 class Suite{
-	constructor(data, parent){
+	constructor(data, parent, library){
 		this.name = data.name;
 		this.path = data.path;
 		this.parent = parent;
@@ -11,8 +11,8 @@ class Suite{
 
 		var self = this;
 
-		this.suites = (data.suites || []).map(x => new Suite(x, self));
-		this.specs = (data.specs || []).map(x => new Spec(x));
+		this.suites = (data.suites || []).map(x => new Suite(x, self, library));
+		this.specs = (data.specs || []).map(x => new Spec(x, library));
 	}
 
 	hasSpec(id){

@@ -187,7 +187,7 @@ handlers['spec-deleted'] = function(data){
 }
 
 handlers['hierarchy-loaded'] = function(data){
-	top = new Suite(data.hierarchy);
+	top = new Suite(data.hierarchy, null, library);
 	specs = {};
 
 	top.allSpecs().forEach(x => specs[x.id] = x);
@@ -269,6 +269,15 @@ function resetSubscriptions(){
 			}
 		}
 	});
+
+Postal.subscribe({
+	channel: 'engine-request',
+	topic: 'clear-all-results',
+	callback: function(){
+		ResultCache.clear();
+		publishHierarchyChanged();
+	}
+})
 
 	Postal.subscribe({
 		channel: 'explorer',

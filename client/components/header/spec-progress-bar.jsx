@@ -63,7 +63,7 @@ var SpecProgressBar = React.createClass({
 		return (
 			<div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
 			<Button onClick={cancel} className="pull-right" bsStyle="link" style={{marginLeft: '10px', marginRight: '10px', height: '25px'}}>Cancel Execution</Button>
-			<ProgressBar  label={'Running ' + this.state.spec.name} bsStyle={bsStyle} min={0} max={this.state.total} now={this.state.step} />
+			<ProgressBar  label={'Running ' + this.state.spec.title} bsStyle={bsStyle} min={0} max={this.state.total} now={this.state.step} />
 				
 			</div>
 		);

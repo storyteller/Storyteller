@@ -1,18 +1,20 @@
 var ArrayList = require('./../array-list');
 var Counts = require('./counts');
-
+var Postal = require('postal');
 var results = {};
 
 
 
-module.exports = {
+var ResultsCache = {
+	results: {},
+
 	clear(){
-		results = {}
+		this.results = {}
 	},
 
 	record(completed){
-		if (!results.hasOwnProperty(completed.id)){
-			results[completed.id] = new ArrayList();
+		if (!this.results.hasOwnProperty(completed.id)){
+			this.results[completed.id] = new ArrayList();
 		}
 
 		var counts = null;
@@ -29,11 +31,11 @@ module.exports = {
 
 		completed.counts = counts;
 
-		results[completed.id].insertAt(0, completed);
+		this.results[completed.id].insertAt(0, completed);
 	},
 
 	hasResults(id){
-		return results.hasOwnProperty(id) && results[id].length > 0;
+		return this.results.hasOwnProperty(id) && this.results[id].length > 0;
 	},
 
 	replaceResults(id, resultHistory){
@@ -52,18 +54,22 @@ module.exports = {
 		}
 		
 
-		results[id] = list;
+		this.results[id] = list;
 	},
 
 	lastResultFor(id){
 		if (!this.hasResults(id)) return null;
 
-		return results[id].first();
+		return this.results[id].first();
 	},
 
 	resultsFor(id){
-		if (this.hasResults(id)) return results[id].toArray();
+		if (this.hasResults(id)) return this.results[id].toArray();
 
 		return [];
 	}
 }
+
+
+
+module.exports = ResultsCache;
