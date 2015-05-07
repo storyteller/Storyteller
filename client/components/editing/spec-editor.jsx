@@ -120,17 +120,12 @@ module.exports = React.createClass({
 			return ( <EditorLoading spec={this.state.spec} /> );
 		}
 
-		var resultsHeader = null;
-		if (this.state.spec.hasResults()){
-			resultsHeader = (<SpecResultHeader spec={this.state.spec} />);
-		}
-
 		if (this.props.mode != 'editing'){
 			return (
 			<Grid>
 				<SpecHeader spec={this.state.spec} mode={this.props.mode} />
 				<Row>
-				    {resultsHeader}
+				    <SpecResultHeader spec={this.state.spec} />
 
 				    <Persisting spec={this.state.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
 
@@ -152,7 +147,7 @@ module.exports = React.createClass({
 						outline={this.state.outline}/>
 					
 					<Col xs={8} md={8}>
-					    {resultsHeader}
+					    <SpecResultHeader spec={this.state.spec} />
 
 					    <Persisting spec={this.state.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
 

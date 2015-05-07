@@ -1,29 +1,28 @@
-<?xml version="1.0"?>
-<Test name="Unsuccessful Ordering" lifecycle="Acceptance" id="set5">
-  <Sets>
+<Spec id="set5" maxRetries="0" tags="" lifecycle="Acceptance" name="Unsuccessful Ordering">
+  <Sets id="a1dd4de2-85ac-4100-8e63-effb613d81c7">
     <TheDataIs>
-      <name>
-        <name name="Jeremy" />
-        <name name="Josh" />
-        <name name="Gary" />
-        <name name="Kevin" />
-        <name name="Chad" />
-        <name name="Rand" />
-        <name name="Perrin" />
-        <name name="Mat" />
+      <name id="61c521ec-1d41-4492-b00c-695d8cc4440b">
+        <TheDataIs-row name="Jeremy" />
+        <TheDataIs-row name="Josh" />
+        <TheDataIs-row name="Gary" />
+        <TheDataIs-row name="Kevin" />
+        <TheDataIs-row name="Chad" />
+        <TheDataIs-row name="Rand" />
+        <TheDataIs-row name="Perrin" />
+        <TheDataIs-row name="Mat" />
       </name>
     </TheDataIs>
-    <Comment><![CDATA[All data is correct, but in the wrong order]]></Comment>
+    <Comment id="017f178b-b729-4c5a-b2f2-e0e201865b24">All data is correct, but in the wrong order</Comment>
     <OrderedStringSet>
-      <Rows>
-        <Rows expected="Jeremy" Index="1" />
-        <Rows expected="Josh" Index="2" />
-        <Rows expected="Gary" Index="3" />
-        <Rows expected="Chad" Index="5" />
-        <Rows expected="Kevin" Index="4" />
-        <Rows expected="Egwene" />
-        <Rows expected="Perrin" />
+      <Rows id="4f091fff-8c47-4a91-90c4-19c01477dddb">
+        <OrderedStringSet-row expected="Jeremy" />
+        <OrderedStringSet-row expected="Josh" />
+        <OrderedStringSet-row expected="Gary" />
+        <OrderedStringSet-row expected="Chad" />
+        <OrderedStringSet-row expected="Kevin" />
+        <OrderedStringSet-row expected="Egwene" />
+        <OrderedStringSet-row expected="Perrin" />
       </Rows>
     </OrderedStringSet>
   </Sets>
-</Test>
+</Spec>

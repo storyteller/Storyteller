@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<Test name="Tables with Errors" lifecycle="Acceptance" id="table4">
-  <Table>
+<Spec id="table4" maxRetries="0" tags="" lifecycle="Acceptance" name="Tables with Errors">
+  <Table id="16e7b1ee-6292-4822-83e2-ca5ae2351a40">
     <BeforeThrowsError>
       <Rows id="before">
-        <Rows x="11" />
+        <BeforeThrowsError-row x="11" />
       </Rows>
     </BeforeThrowsError>
     <AfterThrowsError>
       <Rows id="after">
-        <Rows x="22" />
+        <AfterThrowsError-row x="22" />
       </Rows>
     </AfterThrowsError>
   </Table>
-</Test>
+</Spec>
