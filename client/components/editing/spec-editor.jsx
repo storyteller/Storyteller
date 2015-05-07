@@ -44,7 +44,32 @@ var modes = {
 	}
 }
 
+var ContextualPane = React.createClass({
+	buildContext: function(){
+		if (this.props.activeContainer){
+			return this.props.activeContainer.contextualControl(this.props.loader.editing);
+		}
+		else {
+			return null;
+		}
+	},
 
+	render: function(){
+		var contextualControl = this.buildContext();
+
+
+		return (
+			<Col xs={4} md={4}>
+				<RetryCount count={this.props.spec['max-retries']}/>
+				<h4>Outline</h4>
+				<SpecOutline outline={this.props.outline} />
+				<br />
+				<br />
+				{contextualControl}
+			</Col>
+		);
+	}
+});
 
 module.exports = React.createClass({
 	// smelly, but oh well
@@ -87,16 +112,7 @@ module.exports = React.createClass({
 		this.presenter.deactivate();
 	},
 
-	buildContext: function(){
-		if (this.props.mode != 'editing') return null;
 
-		if (this.state.activeContainer){
-			return this.state.activeContainer.contextualControl(loader.editing);
-		}
-		else {
-			return null;
-		}
-	},
 
 
 	render: function(){
@@ -104,27 +120,36 @@ module.exports = React.createClass({
 			return ( <EditorLoading spec={this.state.spec} /> );
 		}
 
-
-
 		var resultsHeader = null;
 		if (this.state.spec.hasResults()){
 			resultsHeader = (<SpecResultHeader spec={this.state.spec} />);
 		}
 
-		var contextualControl = this.buildContext();
+		if (this.props.mode != 'editing'){
+			return (
+			<Grid>
+				<SpecHeader spec={this.state.spec} mode={this.props.mode} />
+				<Row>
+				    {resultsHeader}
+
+				    <Persisting spec={this.state.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
+
+				    {this.state.components}
+				</Row>
+			</Grid>
+			);
+		}
 
 		return (
 			<Grid>
 				<SpecHeader spec={this.state.spec} mode={this.props.mode} />
 				<Row>
-					<Col xs={4} md={4}>
-						<RetryCount count={this.state.spec['max-retries']}/>
-						<h4>Outline</h4>
-						<SpecOutline outline={this.state.outline} />
-						<br />
-						<br />
-						{contextualControl}
-					</Col>
+					
+					<ContextualPane 
+						spec={this.state.spec} 
+						loader={loader} 
+						activeContainer={this.state.activeContainer}
+						outline={this.state.outline}/>
 					
 					<Col xs={8} md={8}>
 					    {resultsHeader}

@@ -358,7 +358,7 @@ var specData = {
 };
 
 describe('Editing Tables', function(){
-	var driver = new IntegrationDriver([fixture]);
+	var driver = new IntegrationDriver([fixture], 'editing');
 	var editCell = driver.editCell;
 	var idFor = driver.idFor;
   var spec = null;
