@@ -20,20 +20,11 @@ var Persisting = require('./persisting');
 var SpecResultHeader = require('./spec-result-header');
 var RetryCount = require('./retry-count');
 var SpecTitle = require('./spec-title');
-
+var SpecLinks = require('./header/spec-links');
 
 var LifecycleButton = require('./lifecycle-button');
 
-var LinkButton = React.createClass({
-	render: function(){
-		var onclick = e => {
-			window.location = this.props.href;
-			e.stopPropagation();
-		}
 
-		return (<Button onClick={onclick}>{this.props.text}</Button>);
-	}
-});
 
 var EditorLoading = React.createClass({
 	render: function(){
@@ -149,25 +140,6 @@ module.exports = React.createClass({
 		}
 	},
 
-	buildLinks: function(){
-		var links = [];
-		if (this.props.mode != 'editing'){
-			var elem = (<LinkButton href={'#/spec/editing/' + this.props.id} text="Editor"/>);
-			links.push(elem);
-		}
-
-		if (this.props.mode != 'preview'){
-			var elem = (<LinkButton href={'#/spec/preview/' + this.props.id} text="Preview"/>);
-			links.push(elem);
-		}
-
-		if (this.props.mode != 'results'){
-			var elem = (<LinkButton href={'#/spec/results/' + this.props.id} text="Results" />);
-			links.push(elem);
-		}
-
-		return links;
-	},
 
 	render: function(){
 		if (this.state.loading){
@@ -178,8 +150,6 @@ module.exports = React.createClass({
 		if (this.state.spec.active){
 			headerClass = "text-primary";
 		}
-
-		var links = this.buildLinks();
 
 		var resultsHeader = null;
 		if (this.state.header.hasResults()){
@@ -202,9 +172,7 @@ module.exports = React.createClass({
 									<CommandButton title="Redo the previous change" id='redo' presenter={this.presenter} icon="redo" method="redo" disabled={!this.state.redoEnabled}></CommandButton>
 								</ButtonGroup>
 
-								<ButtonGroup>
-									{links}
-								</ButtonGroup>
+								<SpecLinks id={this.state.spec.id} mode={this.props.mode} />
 
 								<LifecycleButton spec={this.state.spec} />
 							</span>
