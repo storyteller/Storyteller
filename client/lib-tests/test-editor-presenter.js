@@ -422,6 +422,11 @@ describe('EditorPresenter', function(){
 			presenter.deactivate();
 		});
 
+		it('should publish a spec-edited message', () => {
+			var message = findPublishedMessage('spec-edited');
+			expect(message).to.not.be.null;
+		});
+
 
 		it('should apply the change to the spec itself', function(){
 			expect(spec.steps[0].steps[1].findValue('x')).to.equal(11);
@@ -655,9 +660,6 @@ describe('EditorPresenter', function(){
 			expect(view.state.lastSaved).to.equal('5 minutes ago');
 		});
 
-		it('should baseline the spec', function(){
-			expect(spec.baselinedRev).to.equal('abcd');
-		});
 	});
 
 	describe('when running a spec from the editor', function(){

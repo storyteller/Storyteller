@@ -15,8 +15,6 @@ namespace StoryTeller.Samples
 
         public IExecutionContext CreateContext()
         {
-            Thread.Sleep(5.Seconds());
-
             if (Project.CurrentProfile == "blowup")
             {
                 throw new Exception("I blew up trying to create an execution context");

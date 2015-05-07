@@ -102,6 +102,23 @@ describe('Hierarchy data store functions', function(){
 		});
 	});
 
+	it('knows if any specs are dirty', () => {
+		hierarchyIsPublishedFromEngine();
+
+		expect(Hierarchy.hasUnsavedChanges()).to.be.false;
+
+		var spec = Hierarchy.allSpecs()[4];
+
+		spec.apply({
+			apply: () => {},
+			unapply: () => {}
+		});
+
+		expect(spec.isDirty()).to.be.true;
+
+		expect(Hierarchy.hasUnsavedChanges()).to.be.true;
+	});
+
 	describe('responding to spec-deleted message', () => {
 		beforeEach(() => {
 			hierarchyIsPublishedFromEngine();

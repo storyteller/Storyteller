@@ -66,7 +66,6 @@ namespace StoryTeller.Samples.Fixtures
 
         private void say()
         {
-            Thread.Sleep(3.Seconds());
 
             Debug.WriteLine("the number is " + _number);
 
@@ -126,7 +125,6 @@ namespace StoryTeller.Samples.Fixtures
 
         public void ThisLineAlwaysThrowsExceptions()
         {
-            Thread.Sleep(3.Seconds());
             StoryTellerAssert.Fail("No go!");
         }
 
@@ -134,14 +132,12 @@ namespace StoryTeller.Samples.Fixtures
         [FormatAs("This line is always true")]
         public bool ThisLineIsAlwaysTrue()
         {
-            Thread.Sleep(3.Seconds());
             return true;
         }
 
         [FormatAs("This line is always false")]
         public bool ThisLineIsAlwaysFalse()
         {
-            Thread.Sleep(3.Seconds());
             return false;
         }
 

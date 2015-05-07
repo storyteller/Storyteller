@@ -217,18 +217,7 @@ class EditorPresenter{
 	save(){
 		applyOutstandingChanges();
 
-		var message = {
-			type: 'save-spec-body', 
-			id: this.spec.id, 
-			spec: this.spec.write(), 
-			revision: this.spec.revision()
-		};
-
-		Postal.publish({
-			channel: 'engine-request',
-			topic: 'save-spec-body',
-			data: message
-		});
+		Hierarchy.saveSpecData(this.spec);
 
 		this.view.setState({persisting: true});
 	}
@@ -260,22 +249,38 @@ class EditorPresenter{
 	applyChange(data){
 		this.spec.apply(data);
 		this.refreshEditor();
+
+        Postal.publish({
+        	channel: 'editor',
+        	topic: 'spec-edited',
+        	data: {}
+        });
 	}
 
 	undo(){
 		this.spec.undo();
 		this.refreshEditor();
+
+        Postal.publish({
+        	channel: 'editor',
+        	topic: 'spec-edited',
+        	data: {}
+        });
 	}
 
 	redo(){
 		this.spec.redo();
 		this.refreshEditor();
+
+        Postal.publish({
+        	channel: 'editor',
+        	topic: 'spec-edited',
+        	data: {}
+        });
 	}
 
 	specBodySaved(data){
 		if (data.id != this.spec.id) return;
-
-		this.spec.baselineAt(data.revision);
 
 		this.view.setState({
 			lastSaved: data.time,

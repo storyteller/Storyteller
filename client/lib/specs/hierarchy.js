@@ -136,6 +136,16 @@ function findSuite(names){
 	return suite;
 }
 
+handlers['spec-body-saved'] = function(data){
+	if (specs.hasOwnProperty(data.id)){
+		var spec = specs[data.id];
+		spec.baselineAt(data.revision);
+
+		publishHierarchyChanged();
+	}
+
+}
+
 handlers['spec-added'] = function(data){
 	var spec = new Specification(data.data, library);
 	specs[spec.id] = spec;
@@ -352,9 +362,15 @@ module.exports = {
 	},
 
 	allSpecs: function(){
-		if (top == null) return [];
+		return _.values(specs);
+	},
 
-		return top.allSpecs();
+	hasUnsavedChanges: function(){
+		for (var key in specs){
+			if (specs[key].isDirty()) return true;
+		}
+
+		return false;
 	},
 
 	summary: function(){
@@ -471,5 +487,20 @@ module.exports = {
 				data: {id: data.spec}
 			});
 		}
+	},
+
+	saveSpecData: function(spec){
+		var message = {
+			type: 'save-spec-body', 
+			id: spec.id, 
+			spec: spec.write(), 
+			revision: spec.revision()
+		};
+
+		Postal.publish({
+			channel: 'engine-request',
+			topic: 'save-spec-body',
+			data: message
+		});
 	}
 }

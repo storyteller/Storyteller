@@ -14,6 +14,7 @@ var Hierarchy = require('./../../lib/specs/hierarchy');
 var HelpIcon = require('./help');
 var Search = require('./search');
 var RuntimeError = require('./runtime-error');
+var UnsavedChanges = require('./unsaved-changes');
 
 
 var StatusBar = React.createClass({
@@ -63,6 +64,7 @@ var StatusBar = React.createClass({
 		return (
 			<Navbar className="bg-info status-bar">
 				<span className="pull-right">
+					<UnsavedChanges />
 					<QueueCount />
 					<GrammarCount />
 					<RecycleState recycled={this.state.recycled} time={this.state.time} success={this.state.success} recycling={this.state.recycling}/>
