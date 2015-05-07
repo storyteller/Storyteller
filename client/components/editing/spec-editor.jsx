@@ -24,24 +24,9 @@ var SpecLinks = require('./header/spec-links');
 
 var LifecycleButton = require('./lifecycle-button');
 var SpecCommands = require('./header/spec-commands');
+var EditorLoading = require('./editor-loading');
 
 
-var EditorLoading = React.createClass({
-	render: function(){
-		return (
-			<Grid>
-				<Row>
-					<div className="center-block">
-						<br />
-						<br />
-						<br />
-						<h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {this.props.spec.title}...</h3>
-					</div>
-				</Row>
-			</Grid>
-		);
-	}
-});
 
 
 
