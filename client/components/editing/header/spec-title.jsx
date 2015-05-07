@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var changes = require('./../../lib/change-commands');
+var changes = require('./../../../lib/change-commands');
 var Postal = require('postal');
 
 var SpecTitleEditor = React.createClass({

@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var Postal = require('postal');
 var $ = require('jquery');
 
-var LifecycleButton = require('./../components/editing/lifecycle-button');
+var LifecycleButton = require('./../components/editing/header/lifecycle-button');
 
 var listener = {
 	events: [],

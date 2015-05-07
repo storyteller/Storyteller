@@ -19,13 +19,12 @@ var Running = Icons['running'];
 var Persisting = require('./persisting');
 var SpecResultHeader = require('./spec-result-header');
 var RetryCount = require('./retry-count');
-var SpecTitle = require('./spec-title');
-var SpecLinks = require('./header/spec-links');
 
-var LifecycleButton = require('./lifecycle-button');
-var SpecCommands = require('./header/spec-commands');
+
+
+
 var EditorLoading = require('./editor-loading');
-
+var SpecHeader = require('./header/spec-header');
 
 
 
@@ -112,10 +111,7 @@ module.exports = React.createClass({
 			return ( <EditorLoading spec={this.state.spec} /> );
 		}
 
-		var headerClass = "";
-		if (this.state.spec.active){
-			headerClass = "text-primary";
-		}
+
 
 		var resultsHeader = null;
 		if (this.state.header.hasResults()){
@@ -126,22 +122,7 @@ module.exports = React.createClass({
 
 		return (
 			<Grid>
-				<Row>
-					<Col xs={12} md={12}>
-					    <h3 ref="header" className={headerClass}>
-							<SpecTitle spec={this.state.spec} />
-							<span className="pull-right">
-								<SpecCommands spec={this.state.spec}/>
-
-								<SpecLinks id={this.state.spec.id} mode={this.props.mode} />
-
-								<LifecycleButton spec={this.state.spec} />
-							</span>
-						</h3>
-
-						<hr />
-					</Col>
-				</Row>
+				<SpecHeader spec={this.state.spec} mode={this.props.mode} />
 				<Row>
 					<Col xs={4} md={4}>
 						<RetryCount count={this.state.retryCount}/>
