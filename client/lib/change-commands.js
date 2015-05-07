@@ -1,3 +1,5 @@
+var Postal = require('postal');
+
 function CellChange(id, cell, value){
 	this.id = id;
 	this.cell = cell;
@@ -42,6 +44,19 @@ function ToggleColumn(section, cell){
 
 	this.apply = store => {
 		this.section.toggleColumn(cell);
+	}
+
+	this.unapply = this.apply;
+}
+
+function ToggleLifecycle(){
+	this.apply = store => {
+		if (store.lifecycle == 'Acceptance'){
+			store.lifecycle = 'Regression';
+		}
+		else {
+			store.lifecycle = 'Acceptance';
+		}
 	}
 
 	this.unapply = this.apply;
@@ -137,6 +152,10 @@ function RetryCountChanged(count){
 module.exports = {
 	rename: function(name){
 		return new SpecRenamed(name);
+	},
+
+	toggleLifecycle: function(){
+		return new ToggleLifecycle();
 	},
 
 	toggleColumn: function(section, cell){

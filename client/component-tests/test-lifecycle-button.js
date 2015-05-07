@@ -36,7 +36,7 @@ describe('The Lifecycle Button', function(){
 		listener.clear();
 
 		Postal.subscribe({
-		    channel  : "engine-request",
+		    channel  : "editor",
 		    topic    : "*",
 		    callback : function(data, envelope) {
 		    	data.topic = envelope.topic;
@@ -59,13 +59,13 @@ describe('The Lifecycle Button', function(){
 		
 	});
 
-	it('should send a mark-as-accepted message if in Regression', function(){
+	it('should send toggle-lifecycle message on click', function(){
 		write({lifecycle: 'Regression', id: 'foo'});
 
 		$(button.getDOMNode()).click();
 
-		var message = findPublishedMessage('mark-as-acceptance');
-		expect(message.list).to.deep.equal(['foo']);
+		var message = findPublishedMessage('changes');
+		expect(message).to.not.be.null;
 	});
 
 	it('should show Regression for that lifecycle', function(){
@@ -77,12 +77,4 @@ describe('The Lifecycle Button', function(){
 	});
 
 
-	it('should send a mark-as-regression message if in Acceptance', function(){
-		write({lifecycle: 'Acceptance', id: 'foo'});
-
-		$(button.getDOMNode()).click();
-
-		var message = findPublishedMessage('mark-as-regression');
-		expect(message.list).to.deep.equal(['foo']);
-	});
 });

@@ -3,6 +3,7 @@
 var React = require("react");
 var Postal = require('postal');
 var {Button} = require('react-bootstrap');
+var changes = require('./../../../lib/change-commands');
 
 module.exports = React.createClass({
 	render: function(){
@@ -13,9 +14,9 @@ module.exports = React.createClass({
 			}
 
 			Postal.publish({
-				channel: 'engine-request',
-				topic: topic,
-				data: {list: [this.props.spec.id]}
+				channel: 'editor',
+				topic: 'changes',
+				data: changes.toggleLifecycle()
 			});
 
 			e.stopPropagation();
