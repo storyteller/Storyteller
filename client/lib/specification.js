@@ -169,6 +169,14 @@ function Specification(data, library){
 		return {applied: this.undoList.length, unapplied: this.redoList.length};
 	}
 
+	this.isDirty = function(){
+		return this.undoList.length > 0;
+	}
+
+	this.canRedo = function(){
+		return this.redoList.length > 0;
+	}
+
 	this.undo = function(){
 		if (this.undoList.length == 0) return;
 

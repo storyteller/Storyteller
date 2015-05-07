@@ -358,6 +358,42 @@ describe('Storing and finding steps by id', function(){
 		expect(spec.revision()).to.equal(change1.revision);
 	});
 
+	it('can tell you if it is dirty', () => {
+		expect(spec.isDirty()).to.be.false;
+
+		var change1 = new FakeChange();
+		var change2 = new FakeChange();
+
+
+
+		spec.apply(change1);
+		spec.apply(change2);
+
+		expect(spec.isDirty()).to.be.true;
+
+		spec.undo();
+		expect(spec.isDirty()).to.be.true;
+
+		spec.undo();
+		expect(spec.isDirty()).to.be.false;
+	});
+
+	it('knows if it has redos', () => {
+		expect(spec.canRedo()).to.be.false;
+
+		var change1 = new FakeChange();
+		var change2 = new FakeChange();
+
+		spec.apply(change1);
+		spec.apply(change2);
+
+		expect(spec.canRedo()).to.be.false;
+
+		spec.undo();
+
+		expect(spec.canRedo()).to.be.true;
+	});
+
 	it('can undo', function(){
 		var change1 = new FakeChange();
 		var change2 = new FakeChange();
