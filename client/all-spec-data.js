@@ -4005,7 +4005,7 @@ module.exports = {
     "embeds": {
       "title": "Embeds",
       "path": null,
-      "max-retries": 0,
+      "max-retries": 3,
       "lifecycle": "Regression",
       "mode": "full",
       "tags": [],
@@ -6174,7 +6174,7 @@ module.exports = {
           {
             "title": "Embeds",
             "path": "Embedded/Embeds",
-            "max-retries": 0,
+            "max-retries": 3,
             "lifecycle": "Regression",
             "mode": "header",
             "tags": [],

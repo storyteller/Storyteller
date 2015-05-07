@@ -70,18 +70,11 @@ module.exports = React.createClass({
 		return {
 			components: [],
 			outline: {title: 'placeholder', active: true, children: []},
-			undoEnabled: false, 
-			redoEnabled: false,
 			loading: true,
 			spec: {name: 'temp'},
 			persisting: false,
 			lastSaved: null,
 			contextualControl: null,
-			retryCount: 0,
-			header: {hasResults: function(){
-				return false;
-			}}
-
 		}
 	},
 
@@ -114,7 +107,7 @@ module.exports = React.createClass({
 
 
 		var resultsHeader = null;
-		if (this.state.header.hasResults()){
+		if (this.state.spec.hasResults()){
 			resultsHeader = (<SpecResultHeader spec={this.state.spec} />);
 		}
 
@@ -125,7 +118,7 @@ module.exports = React.createClass({
 				<SpecHeader spec={this.state.spec} mode={this.props.mode} />
 				<Row>
 					<Col xs={4} md={4}>
-						<RetryCount count={this.state.retryCount}/>
+						<RetryCount count={this.state.spec['max-retries']}/>
 						<h4>Outline</h4>
 						<SpecOutline outline={this.state.outline} />
 						<br />
