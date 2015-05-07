@@ -21,7 +21,7 @@ namespace ST.Client.Persistence
         {
             // TODO -- will change for GH-306
 
-            message.specs = message.list.Select(x => _controller.Value.LoadSpecification(x).data).ToArray();
+            message.specs = message.list.Select(x => _controller.Value.LoadSpecification(x).data).Union(message.specs).ToArray();
             _engine.SendMessage(message);
 
         }

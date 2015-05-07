@@ -3,6 +3,21 @@ var Counts = require('./counts');
 var Postal = require('postal');
 var results = {};
 
+var setCounts = function(completed){
+	var counts = null;
+
+	if (completed.counts){
+		counts = new Counts(completed.counts); 
+	}
+	else if (completed.results && completed.results.counts){
+		counts = new Counts(completed.results.counts);
+	}
+	else {
+		counts = new Counts(0, 0, 0, 0);
+	}
+
+	completed.counts = counts;
+}
 
 
 var ResultsCache = {
@@ -17,19 +32,7 @@ var ResultsCache = {
 			this.results[completed.id] = new ArrayList();
 		}
 
-		var counts = null;
-
-		if (completed.counts){
-			counts = new Counts(completed.counts); 
-		}
-		else if (completed.results && completed.results.counts){
-			counts = new Counts(completed.results.counts);
-		}
-		else {
-			counts = new Counts(0, 0, 0, 0);
-		}
-
-		completed.counts = counts;
+		setCounts(completed);
 
 		this.results[completed.id].insertAt(0, completed);
 	},
@@ -50,7 +53,10 @@ var ResultsCache = {
 		}
 
 		if (resultHistory != null && resultHistory != undefined){
-			resultHistory.forEach(x => list.add(x));
+			resultHistory.forEach(x => {
+				setCounts(x);
+				list.add(x);
+			});
 		}
 		
 

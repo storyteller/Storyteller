@@ -223,11 +223,7 @@ class EditorPresenter{
 	}
 
 	run(){
-		Postal.publish({
-			channel: 'engine-request',
-			topic: 'run-spec',
-			data: {id: this.id, spec: this.spec.write(), revision: this.spec.revision()}
-		});
+		Hierarchy.runSpec(this.spec);
 
 		this.view.gotoResults();
 	}

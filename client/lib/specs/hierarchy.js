@@ -502,5 +502,13 @@ module.exports = {
 			topic: 'save-spec-body',
 			data: message
 		});
+	},
+
+	runSpec: function(spec){
+		Postal.publish({
+			channel: 'engine-request',
+			topic: 'run-spec',
+			data: {id: spec.id, spec: spec.write(), revision: spec.revision()}
+		});
 	}
 }
