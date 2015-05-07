@@ -3,7 +3,7 @@
 var React = require("react");
 var StepAdderPlaceHolder = require('./step-adder-placeholder');
 var StepAdder = require('./step-adder');
-
+var Icons = require('./../icons');
 
 
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
@@ -13,7 +13,7 @@ var loader = require('./component-loader');
 
 var SpecOutline = require('./spec-outline');
 
-var Icons = require('./../icons');
+
 
 var Running = Icons['running'];
 var Persisting = require('./persisting');
@@ -23,7 +23,7 @@ var SpecTitle = require('./spec-title');
 var SpecLinks = require('./header/spec-links');
 
 var LifecycleButton = require('./lifecycle-button');
-
+var SpecCommands = require('./header/spec-commands');
 
 
 var EditorLoading = React.createClass({
@@ -44,26 +44,7 @@ var EditorLoading = React.createClass({
 });
 
 
-var CommandButton = React.createClass({
-	render: function(){
-		var self = this;
 
-		var presenter = this.props.presenter;
-
-		var onclick = presenter[this.props.method].bind(presenter);
-
-		var Icon = Icons[this.props.icon];
-
-		return (
-			<Button 
-				id={this.props.id}
-				title={this.props.title} 
-				disabled={this.props.disabled} 
-				onClick={onclick}><Icon /></Button>
-
-		);
-	}
-});
 
 var modes = {
 	results: {
@@ -165,12 +146,7 @@ module.exports = React.createClass({
 					    <h3 ref="header" className={headerClass}>
 							<SpecTitle spec={this.state.spec} />
 							<span className="pull-right">
-								<ButtonGroup style={{marginRight: '30px'}}>
-									<CommandButton title="Run the specification" presenter={this.presenter} icon="run" method="run" disabled={false}></CommandButton>
-									<CommandButton title="Save outstanding changes to the spec" presenter={this.presenter} icon="save" method="save" disabled={!this.state.spec.isDirty()}></CommandButton>
-									<CommandButton title="Undo the last change" id='undo' presenter={this.presenter} icon="undo" method="undo" disabled={!this.state.spec.isDirty()}></CommandButton>
-									<CommandButton title="Redo the previous change" id='redo' presenter={this.presenter} icon="redo" method="redo" disabled={!this.state.spec.canRedo()}></CommandButton>
-								</ButtonGroup>
+								<SpecCommands spec={this.state.spec}/>
 
 								<SpecLinks id={this.state.spec.id} mode={this.props.mode} />
 
