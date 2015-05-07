@@ -1,1 +1,3 @@
-<Spec id="615f51f5-69e2-46e4-b982-f503e2fbee51" maxRetries="0" tags="" lifecycle="Regression" name="defense" />
+<Spec id="615f51f5-69e2-46e4-b982-f503e2fbee51" maxRetries="0" tags="" lifecycle="Regression" name="defense">
+  <Comment id="049644ec-953b-474a-bd94-c2fe2173e597">Go now!</Comment>
+</Spec>

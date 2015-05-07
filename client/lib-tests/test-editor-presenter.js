@@ -728,7 +728,8 @@ describe('EditorPresenter', function(){
 				id: theSpec.id,
 				spec: theWrittenData,
 				channel: 'engine-request',
-				topic: 'run-spec'
+				topic: 'run-spec',
+				revision: 'abc'
 			});
 
 			expect(navigatedToResults).to.be.true;

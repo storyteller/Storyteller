@@ -226,7 +226,7 @@ class EditorPresenter{
 		Postal.publish({
 			channel: 'engine-request',
 			topic: 'run-spec',
-			data: {id: this.id, spec: this.spec.write()}
+			data: {id: this.id, spec: this.spec.write(), revision: this.spec.revision()}
 		});
 
 		this.view.gotoResults();

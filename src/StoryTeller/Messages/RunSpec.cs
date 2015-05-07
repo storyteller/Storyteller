@@ -10,5 +10,6 @@ namespace StoryTeller.Messages
 
         public string id;
         public Specification spec;
+        public string revision;
     }
 }

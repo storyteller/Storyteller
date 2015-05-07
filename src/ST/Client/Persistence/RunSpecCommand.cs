@@ -26,7 +26,7 @@ namespace ST.Client.Persistence
                 _saveSpec.HandleMessage(new SaveSpecBody
                 {
                     id = message.id,
-                    revision = Guid.NewGuid().ToString(), // TODO -- send the revision up
+                    revision = message.revision,
                     spec = message.spec
                 });
             }
