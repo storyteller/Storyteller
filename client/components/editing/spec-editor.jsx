@@ -167,9 +167,9 @@ module.exports = React.createClass({
 							<span className="pull-right">
 								<ButtonGroup style={{marginRight: '30px'}}>
 									<CommandButton title="Run the specification" presenter={this.presenter} icon="run" method="run" disabled={false}></CommandButton>
-									<CommandButton title="Save outstanding changes to the spec" presenter={this.presenter} icon="save" method="save" disabled={!this.state.undoEnabled}></CommandButton>
-									<CommandButton title="Undo the last change" id='undo' presenter={this.presenter} icon="undo" method="undo" disabled={!this.state.undoEnabled}></CommandButton>
-									<CommandButton title="Redo the previous change" id='redo' presenter={this.presenter} icon="redo" method="redo" disabled={!this.state.redoEnabled}></CommandButton>
+									<CommandButton title="Save outstanding changes to the spec" presenter={this.presenter} icon="save" method="save" disabled={!this.state.spec.isDirty()}></CommandButton>
+									<CommandButton title="Undo the last change" id='undo' presenter={this.presenter} icon="undo" method="undo" disabled={!this.state.spec.isDirty()}></CommandButton>
+									<CommandButton title="Redo the previous change" id='redo' presenter={this.presenter} icon="redo" method="redo" disabled={!this.state.spec.canRedo()}></CommandButton>
 								</ButtonGroup>
 
 								<SpecLinks id={this.state.spec.id} mode={this.props.mode} />

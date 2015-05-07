@@ -147,9 +147,6 @@ describe('EditorPresenter', function(){
 			expect(wasRefreshed).to.be.true;
 		});
 
-		it('should enable the undo/redo buttons', function(){
-			expect(buttonsEnabled).to.be.true;
-		});
 	});
 
 	describe('when data becomes available for the first time', function(){
@@ -189,9 +186,6 @@ describe('EditorPresenter', function(){
 			expect(wasRefreshed).to.be.true;
 		});
 
-		it('should enable the undo/redo buttons', function(){
-			expect(buttonsEnabled).to.be.true;
-		});
 	});
 
 	describe('when data comes available, but does not match the spec', function(){
@@ -428,10 +422,6 @@ describe('EditorPresenter', function(){
 			presenter.deactivate();
 		});
 
-		it('should update the undo/redo button states', function(){
-			expect(view.state.undoEnabled).to.be.true;
-			expect(view.state.redoEnabled).to.be.false;
-		});
 
 		it('should apply the change to the spec itself', function(){
 			expect(spec.steps[0].steps[1].findValue('x')).to.equal(11);
@@ -474,17 +464,11 @@ describe('EditorPresenter', function(){
 			presenter.deactivate();
 		});
 
-		it('should update the undo/redo button states', function(){
-			expect(view.state.undoEnabled).to.be.true;
-			expect(view.state.redoEnabled).to.be.false;
-
-		});
-
 		it('can apply an undo', function(){
 			presenter.undo();
 
-			expect(view.state.undoEnabled).to.be.true;
-			expect(view.state.redoEnabled).to.be.true;
+			expect(presenter.spec.isDirty()).to.be.true;
+			expect(presenter.spec.canRedo()).to.be.true;
 
 
 			expect(step.findValue('x')).to.equal(12);
@@ -495,8 +479,8 @@ describe('EditorPresenter', function(){
 			presenter.undo();
 			presenter.undo();
 
-			expect(view.state.undoEnabled).to.be.false;
-			expect(view.state.redoEnabled).to.be.true;
+			expect(presenter.spec.isDirty()).to.be.false;
+			expect(presenter.spec.canRedo()).to.be.true;
 			
 
 			expect(presenter.spec.changeStatus()).to.deep.equal({applied: 0, unapplied: 3});
@@ -510,8 +494,8 @@ describe('EditorPresenter', function(){
 
 			presenter.redo();
 
-			expect(view.state.undoEnabled).to.be.true;
-			expect(view.state.redoEnabled).to.be.true;
+			expect(presenter.spec.isDirty()).to.be.true;
+			expect(presenter.spec.canRedo()).to.be.true;
 
 			expect(step.findValue('x')).to.equal(12);
 		});
@@ -550,8 +534,8 @@ describe('EditorPresenter', function(){
 		});
 
 		it('should update the undo/redo button states', function(){
-			expect(view.state.undoEnabled).to.be.true;
-			expect(view.state.redoEnabled).to.be.false;
+			expect(presenter.spec.isDirty()).to.be.true;
+			expect(presenter.spec.canRedo()).to.be.false;
 		});
 
 		it('should apply the change to the spec itself', function(){

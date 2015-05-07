@@ -107,16 +107,12 @@ class EditorPresenter{
 			});
 		}
 		else {
-			var counts = this.spec.changeStatus();
-
 			this.view.setState({
 				spec: this.spec,
 				activeContainer: this.spec.activeHolder,
 				components: this.loader.buildComponents(this.spec),
 				outline: this.spec.outline(),
 				loading: this.spec.mode == 'header',
-				undoEnabled: (counts.applied > 0),
-				redoEnabled: (counts.unapplied > 0),
 				retryCount: this.spec['max-retries']
 			});
 		}
