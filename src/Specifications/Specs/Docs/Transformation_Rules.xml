@@ -27,6 +27,8 @@
         <TransformsShouldBe-row Topic="index" Before="&lt;[css:go.css]&gt;" returnValue="&lt;link href=&quot;/go.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;" />
         <TransformsShouldBe-row Topic="index" Before="&lt;[css:folder/go.css]&gt;" returnValue="&lt;link href=&quot;/folder/go.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;" />
         <TransformsShouldBe-row Topic="index" Before="&lt;[RootUrl]&gt;" returnValue="/" />
+        <TransformsShouldBe-row Topic="index" Before="&lt;[spec:foos/ball]&gt;" returnValue="&lt;div data-path=&quot;foos/ball&quot; class=&quot;spec-preview&quot;&gt;&lt;/div&gt;" />
+        <TransformsShouldBe-row Topic="index" Before="&lt;[spec-result:foos/ball]&gt;" returnValue="&lt;div data-path=&quot;foos/ball&quot; class=&quot;spec-result&quot;&gt;&lt;/div&gt;" />
       </table>
     </TransformsShouldBe>
   </TopicTemplating>

@@ -139,6 +139,7 @@
     <Compile Include="Docs\Transformation\ParentBreadcrumbsTransformHandler.cs" />
     <Compile Include="Docs\Transformation\RootUrlTransformer.cs" />
     <Compile Include="Docs\Transformation\ScriptTransformHandler.cs" />
+    <Compile Include="Docs\Transformation\SpecTransformHandler.cs" />
     <Compile Include="Docs\Transformation\StylesheetTransformHandler.cs" />
     <Compile Include="Docs\Transformation\TableOfContentsTransformHandler.cs" />
     <Compile Include="Docs\Transformation\TitleHandler.cs" />
