@@ -1,4 +1,4 @@
-<Spec id="524a9eaf-1760-4fc6-97aa-cf34b0e325ab" maxRetries="0" tags="" lifecycle="Regression" name="Parsing a Single Topic File">
+<Spec id="524a9eaf-1760-4fc6-97aa-cf34b0e325ab" maxRetries="0" tags="" lifecycle="Acceptance" name="Parsing a Single Topic File">
   <TopicFolder id="c18347a5-011f-4294-bc91-94f299978ddc">
     <TheTopicsAre>
       <Rows id="d1fda8b3-9cb5-4253-a9cc-a9a14333adc3">

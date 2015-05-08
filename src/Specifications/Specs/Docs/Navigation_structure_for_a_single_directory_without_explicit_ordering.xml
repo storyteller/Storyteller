@@ -1,4 +1,4 @@
-<Spec id="b2bf7c97-5c10-454e-a068-8f9256376467" maxRetries="0" tags="" lifecycle="Regression" name="Navigation structure for a single directory without explicit ordering">
+<Spec id="b2bf7c97-5c10-454e-a068-8f9256376467" maxRetries="0" tags="" lifecycle="Acceptance" name="Navigation structure for a single directory without explicit ordering">
   <TopicFolder id="3ab58bfd-7d6c-4210-8035-5db7b32e893c">
     <TheTopicsAre>
       <Rows id="d88aef89-71d3-42a3-ab97-ae5a69dcc4b7">

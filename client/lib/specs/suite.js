@@ -12,7 +12,11 @@ class Suite{
 		var self = this;
 
 		this.suites = (data.suites || []).map(x => new Suite(x, self, library));
-		this.specs = (data.specs || []).map(x => new Spec(x, library));
+		this.specs = (data.specs || []).map(x => {
+			if (x instanceof Spec) return x;
+
+			return new Spec(x, library);
+		});
 	}
 
 	hasSpec(id){

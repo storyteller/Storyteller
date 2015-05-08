@@ -17,5 +17,6 @@ namespace ST.Client
         void ReloadHierarchy();
         void DeleteSpec(string id);
         SpecExecutionCompleted[] AllCachedResults();
+        void SetLifecycle(string id, Lifecycle lifecycle);
     }
 }

@@ -21,8 +21,6 @@ var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 module.exports = React.createClass({
 
 	getInitialState: function(){
-		// Going to change
-
 		return {
 			suite: this.props.suite || Hierarchy.top(),
 			status: Hierarchy.statusFilter(), 

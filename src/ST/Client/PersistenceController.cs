@@ -40,6 +40,28 @@ namespace ST.Client
             return _results.AllResults().ToArray();
         }
 
+        public void SetLifecycle(string id, Lifecycle lifecycle)
+        {
+            var spec = _hierarchy.Specifications[id];
+            if (spec.Lifecycle == lifecycle) return;
+
+            _lock.Write(() =>
+            {
+                spec.Lifecycle = lifecycle;
+                spec.ReadBody();
+                XmlWriter.WriteToXml(spec).Save(spec.Filename);
+            });
+
+            var data = LoadSpecification(id);
+            _client.SendMessageToClient(data);
+
+        }
+
+        public ResultsCache Results
+        {
+            get { return _results; }
+        }
+
         public void StartWatching(string path)
         {
             try

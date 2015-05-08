@@ -284,7 +284,69 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Hierarchy.Specifications.Has("paragraph").ShouldBe(false);
         }
+
+        [Test]
+        public void setting_the_lifecycle_when_the_lifecycle_matches_already()
+        {
+            var spec = ClassUnderTest.Hierarchy.Specifications["general1"];
+            var lifecycle = spec.Lifecycle;
+
+            ClassUnderTest.SetLifecycle("general1", lifecycle);
+
+            // Nothing should happen here
+            MockFor<IClientConnector>().AssertWasNotCalled(x => x.SendMessageToClient(null), x => x.IgnoreArguments());
+        }
+
+        [Test]
+        public void setting_the_lifecycle_when_the_new_lifecycle_is_different()
+        {
+
+            var spec = ClassUnderTest.Hierarchy.Specifications["general1"];
+            var newLifecycle = spec.Lifecycle == Lifecycle.Acceptance ? Lifecycle.Regression : Lifecycle.Acceptance;
+
+            var completed1 = new SpecExecutionCompleted{Id = spec.id};
+            var completed2 = new SpecExecutionCompleted{Id = spec.id};
+            var completed3 = new SpecExecutionCompleted{Id = spec.id};
+
+            ClassUnderTest.Results.Store(completed1);
+            ClassUnderTest.Results.Store(completed2);
+            ClassUnderTest.Results.Store(completed3);
+
+            ClassUnderTest.SetLifecycle("general1", newLifecycle);
+
+            // Did save
+            XmlReader.ReadFromFile(spec.Filename).Lifecycle
+                .ShouldBe(newLifecycle);
+
+
+            var message = MockFor<IClientConnector>().GetArgumentsForCallsMadeOn(x => x.SendMessageToClient(null))
+                [0][0].As<SpecData>();
+
+            message.data.ShouldBeSameAs(spec);
+            message.data.id.ShouldBe(spec.id);
+            message.results.Any(x => ReferenceEquals(x, completed1)).ShouldBeTrue();
+            message.results.Any(x => ReferenceEquals(x, completed2)).ShouldBeTrue();
+            message.results.Any(x => ReferenceEquals(x, completed3)).ShouldBeTrue();
+
+        }
     }
+
+    public class StubClientConnector : IClientConnector
+    {
+        public string WebSocketsAddress { get; private set; }
+        public void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public readonly IList<object> Messages = new List<object>(); 
+
+        public void SendMessageToClient(object message)
+        {
+            Messages.Add(message);
+        }
+    }
+    
 
     public class NulloSpecFileWatcher : ISpecFileWatcher
     {

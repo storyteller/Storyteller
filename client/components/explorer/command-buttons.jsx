@@ -6,19 +6,19 @@ var Button = require('react-bootstrap/Button');
 var ButtonGroup = require('react-bootstrap/ButtonGroup');
 var Postal = require('postal');
 var Hierarchy = require('./../../lib/specs/hierarchy');
+var changes = require('./../../lib/change-commands');
 
 
 var CommandButton = React.createClass({
 	render: function(){
 		var onclick = e => {
+			var specs = this.props.hierarchy.filter(Hierarchy.currentFilter()).allSpecs();
 
+			var heads = _.filter(specs, x => x.mode == 'header');
+			var fulls = _.filter(specs, x => x.mode == 'full')
 
 			if (this.props.topic == 'run-specs'){
-				var specs = this.props.hierarchy.allSpecs();
-
-				var heads = _.filter(specs, x => x.mode == 'header').map(x => x.id);
-
-				var fulls = _.filter(specs, x => x.mode == 'full').forEach(spec => {
+				fulls.forEach(spec => {
 					Hierarchy.runSpec(spec);
 				});
 
@@ -26,24 +26,55 @@ var CommandButton = React.createClass({
 					channel: 'engine-request',
 					topic: 'run-specs',
 					data: {
-						list: heads
+						list: heads.map(x => x.id)
 					}
 				});
 			}
-			else {
-				// look for what doesn't fit, then apply a toggleLifecycle
-				// and publish hierarchy-loaded
+			else if (this.props.topic == 'mark-as-acceptance'){
+				_.filter(fulls, x => x.lifecycle == 'Regression').forEach(spec => {
+					spec.apply(changes.toggleLifecycle());
+				});
 
-				alert('not doing anything yet for ' + this.props.topic);
+				var ids = _.filter(heads, x => x.lifecycle == 'Regression')
+					.map(x => x.id);
+
+				if (ids.length > 0){
+					Postal.publish({
+						channel: 'engine-request',
+						topic: 'mark-as-acceptance',
+						data: {list: ids}
+					});
+				}
+
+				Postal.publish({
+					channel: 'explorer',
+					topic: 'hierarchy-updated',
+					data: {}
+				});
 			}
-/*
-			var data = {type: this.props.topic, list: this.props.hierarchy.allSpecIds()};
-			Postal.publish({
-				channel: 'engine-request',
-				topic: this.props.topic,
-				data: data
-			});
-*/
+			else if (this.props.topic == 'mark-as-regression'){
+				_.filter(fulls, x => x.lifecycle == 'Acceptance').forEach(spec => {
+					spec.apply(changes.toggleLifecycle());
+				});
+
+				var ids = _.filter(heads, x => x.lifecycle == 'Acceptance')
+					.map(x => x.id);
+
+				if (ids.length > 0){
+					Postal.publish({
+						channel: 'engine-request',
+						topic: 'mark-as-regression',
+						data: {list: ids}
+					});
+				}
+
+				Postal.publish({
+					channel: 'explorer',
+					topic: 'hierarchy-updated',
+					data: {}
+				});
+			}
+
 
 			e.preventDefault();
 		}

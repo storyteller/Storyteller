@@ -1,4 +1,4 @@
-<Spec id="030ea6ca-7e7f-449a-b64e-666612809c6k" maxRetries="0" tags="" lifecycle="Regression" name="Navigation structure of a directory with partial explicit ordering">
+<Spec id="030ea6ca-7e7f-449a-b64e-666612809c6k" maxRetries="0" tags="" lifecycle="Acceptance" name="Navigation structure of a directory with partial explicit ordering">
   <TopicFolder id="3ab58bfd-7d6c-4210-8035-5db7b32e893c">
     <TheTopicsAre>
       <Rows id="d88aef89-71d3-42a3-ab97-ae5a69dcc4b7">

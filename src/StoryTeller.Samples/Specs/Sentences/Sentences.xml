@@ -1,18 +1,18 @@
 <Spec id="sentence4" maxRetries="0" tags="" lifecycle="Acceptance" name="Sentences">
   <Sentence id="9e5d49fb-4d60-465a-9668-9da55482506c">
     <Comment id="90334c64-4a7c-4dee-9ac4-6fdc86656ed0">Show a syntax failure</Comment>
-    <StartWithTheNumber number="a" />
+    <StartWithTheNumber id="1" number="a" />
     <Comment id="e0e30763-acfa-492b-b077-fdda171984b3">Work correctly</Comment>
     <StartWithTheNumber number="5" />
     <MultiplyThenAdd multiplier="3" delta="4" />
     <Subtract operand="2" />
     <Comment id="7f82508f-1edd-45db-b08b-e2f1cf9e8a04">Correct assertion</Comment>
-    <TheValueShouldBe number="17" />
+    <TheValueShouldBe number="17" id="2" />
     <Comment id="3edbb5b1-0f94-4800-860e-f669b718003d">Incorrect assertion</Comment>
     <TheSumOf number1="2" number2="2" sum="5" />
     <Comment id="d20a5d0d-c053-4dd7-8766-b550572872b8">Line assertions</Comment>
-    <ThisLineIsAlwaysTrue />
-    <ThisLineIsAlwaysFalse />
-    <ThisLineAlwaysThrowsExceptions />
+    <ThisLineIsAlwaysTrue id="3" />
+    <ThisLineIsAlwaysFalse id="4" />
+    <ThisLineAlwaysThrowsExceptions id="5" />
   </Sentence>
 </Spec>

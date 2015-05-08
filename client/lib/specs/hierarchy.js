@@ -117,6 +117,8 @@ handlers['spec-data'] = function(data){
 	ResultCache.replaceResults(spec.id, data.results);
 
 	storeSpec(spec);
+
+	publishHierarchyChanged();
 }
 
 function findSuite(names){
