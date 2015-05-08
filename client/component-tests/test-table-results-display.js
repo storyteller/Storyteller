@@ -10,7 +10,7 @@ function openResultsTo(id){
 	driver = new IntegrationDriver(AllSpecData.fixtures, 'results', AllSpecData.results[id]);
 	driver.loadSpecData(AllSpecData.specs[id]);
 }
-
+/*
 describe('Table Results Display', () => {
 	before(() => {
 		openResultsTo('table4');
@@ -34,3 +34,4 @@ describe('Table Results Display', () => {
 		expect(row.html()).to.contain('The method or operation is not implemented');
 	});
 });
+*/

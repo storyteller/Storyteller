@@ -50,7 +50,7 @@ namespace StoryTeller.Testing
 
                 using (var execution = theSystem.CreateContext())
                 {
-                    var observer = new RecordingObserver();
+                    var observer = new RecordingObserver(data.results);
                     using (var context = new SpecContext(spec, null, observer, new StopConditions(), execution.Services)
                         )
                     {
@@ -61,8 +61,6 @@ namespace StoryTeller.Testing
                         plan.AcceptVisitor(executor);
 
                         observer.SpecExecutionFinished(header, context.FinalizeResults(1));
-
-                        data.results.Add(spec.id, observer.Messages.ToArray());
                     }
                     
                     
@@ -86,7 +84,13 @@ namespace StoryTeller.Testing
 
     public class RecordingObserver : IResultObserver
     {
-        public readonly IList<ClientMessage> Messages = new List<ClientMessage>(); 
+        private readonly IDictionary<string, SpecExecutionCompleted> _completed;
+        public readonly IList<ClientMessage> Messages = new List<ClientMessage>();
+
+        public RecordingObserver(IDictionary<string, SpecExecutionCompleted> completed)
+        {
+            _completed = completed;
+        }
 
         public void Handle<T>(T message) where T : IResultMessage
         {
@@ -95,7 +99,9 @@ namespace StoryTeller.Testing
 
         public void SpecExecutionFinished(Specification specification, SpecResults results)
         {
-            Messages.Add(new SpecExecutionCompleted(specification.id, results, new Specification()));
+            var completed = new SpecExecutionCompleted(specification.id, results, specification);
+            _completed.Add(specification.id, completed);
+
         }
     }
 
@@ -105,6 +111,6 @@ namespace StoryTeller.Testing
         public readonly Dictionary<string, Specification> specs = new Dictionary<string, Specification>();
         public Suite hierarchy;
 
-        public readonly Dictionary<string, ClientMessage[]> results = new Dictionary<string, ClientMessage[]>(); 
+        public readonly Dictionary<string, SpecExecutionCompleted> results = new Dictionary<string, SpecExecutionCompleted>(); 
     }
 }

@@ -14,8 +14,13 @@ var icon = function(name, classes){
 	var component = React.createClass({
 		displayName: name,
 		render: function(){
+			var className = clazz;
+			if (this.props.className){
+				className = clazz + ' ' + this.props.className;
+			}
+
 			return (
-				<i className={clazz + ' ' + this.props.className}></i>
+				<i className={className}></i>
 			);
 
 		}

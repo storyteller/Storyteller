@@ -29,7 +29,6 @@ var listener = {
 	},
 
 	append: function(data){
-		//console.log(JSON.stringify(data));
 		this.events.push(data);
 		
 	}

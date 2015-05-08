@@ -50,12 +50,6 @@ class EditorPresenter{
 
 		var location = this.locationForReordering();
 
-		if (!location.holder.isFirst){
-			for (var key in location.holder){
-				console.log(key + ' - ' + location.holder[key]);
-			}
-		}
-
 		if (location.step && !location.holder.isFirst(location.step)){
 			var change = changes.moveUp(location.holder, location.step);
 			this.applyChange(change);
@@ -101,9 +95,7 @@ class EditorPresenter{
 	refreshEditor(){
 		if (this.spec.mode == 'header'){
 			this.view.setState({
-				loading: this.spec.mode == 'header',
-				undoEnabled: false,
-				redoEnabled: false
+				loading: this.spec.mode == 'header'
 			});
 		}
 		else {
@@ -200,7 +192,6 @@ class EditorPresenter{
 	    		self.specBodySaved(data);
 	    	}
 	    }));
-
 
 		if (!this.spec){
 			this.spec = Hierarchy.findSpec(this.id);

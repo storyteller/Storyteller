@@ -11,7 +11,7 @@ describe('Specification reading results', function(){
 
 	var specification = new Specification(specData, library);
 
-	var completed = _.last(AllSpecData.results.embeds);
+	var completed = AllSpecData.results.embeds;
 
 	expect(completed.type).to.equal('spec-execution-completed');
 

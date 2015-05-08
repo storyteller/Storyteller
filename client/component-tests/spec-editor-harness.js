@@ -11,9 +11,12 @@ var SpecEditor = require('../components/editing/spec-editor');
 var Hierarchy = require('../lib/specs/hierarchy');
 var FixtureLibrary = require('../lib/fixture-library');
 var CellDriver = require('./cell-driver');
+var ResultCache = require('./../lib/specs/result-cache');
 
 function IntegrationDriver(fixtureData, mode, results){
 	this.library = new FixtureLibrary(fixtureData);
+
+	Hierarchy.setLibrary(this.library);
 
 	var self = this;
 
@@ -56,9 +59,7 @@ function IntegrationDriver(fixtureData, mode, results){
 		Hierarchy.storeData(data.id, data);
 
 		if (results){
-			results.forEach(function(x){
-				Hierarchy.recordResult(x);
-			});
+			ResultCache.record(results);
 		}
 
 
@@ -69,6 +70,7 @@ function IntegrationDriver(fixtureData, mode, results){
 		this.presenter = this.editor.presenter;
 		this.spec = this.presenter.spec;
 		this.div = div;
+
 	}
 
 	this.idFor = function(search){

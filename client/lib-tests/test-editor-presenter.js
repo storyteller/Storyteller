@@ -17,7 +17,6 @@ var listener = {
 	},
 
 	append: function(data){
-		//console.log(JSON.stringify(data));
 		this.events.push(data);
 		
 	}
@@ -722,8 +721,6 @@ describe('EditorPresenter', function(){
 
 
 		it('should send the message with the id and packed data and navigate to the results', function(){
-			console.log(theSpec.id);
-
 			expect(message).to.deep.equal({
 				id: theSpec.id,
 				spec: theWrittenData,

@@ -267,7 +267,7 @@ function Specification(data, library){
 			var child = self.find(x.id);
 			if (child){
 				child.logResult(x);
-			}
+			} 
 		});
 	}
 

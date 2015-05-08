@@ -22,21 +22,41 @@ namespace StoryTeller.Grammars.Sets
         public string[] matches
         {
             get { return _matches.ToArray(); }
+            set
+            {
+                _matches.Clear();
+                if (value != null) _matches.AddRange(value);
+            }
         }
 
         public string[] missing
         {
             get { return _missing.ToArray(); }
+            set
+            {
+                _missing.Clear();
+                if (value != null) _missing.AddRange(value);
+            }
         }
 
         public IDictionary<string, object>[] extras
         {
             get { return _extras.ToArray(); }
+            set
+            {
+                _extras.Clear();
+                if (value != null) _extras.AddRange(value);
+            }
         }
 
         public WrongOrder[] wrongOrdered
         {
             get { return _wrongOrders.ToArray(); }
+            set
+            {
+                _wrongOrders.Clear();
+                if (value != null) _wrongOrders.AddRange(value);
+            }
         }
 
         public void Tabulate(Counts counts)

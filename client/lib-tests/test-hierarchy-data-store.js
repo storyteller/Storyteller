@@ -443,6 +443,9 @@ describe('Hierarchy data store functions', function(){
 
 		assertQueueUpdatedWasPublished();
 		assertHierarchyUpdatedWasPublished();
+
+		// needs to broadcast spec-changed to update the spec-editor if it's open
+		expect(findPublishedMessage('spec-changed').id).to.equal('embeds');
 	});
 
 	function allFilteredSpecNames(){

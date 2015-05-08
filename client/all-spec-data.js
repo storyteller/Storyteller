@@ -4018,7 +4018,7 @@ module.exports = {
               "key": "ThrowAnExceptionOnTheNextEmbed",
               "cells": {},
               "collections": [],
-              "id": "f41e6e7a-64d0-4cdc-a684-569f0ae4b120"
+              "id": "b16a752b-9485-4810-8dfc-c55a24c122ec"
             },
             {
               "key": "EmbeddedMath",
@@ -4036,20 +4036,20 @@ module.exports = {
                         "returnValue": "10"
                       },
                       "collections": [],
-                      "id": "a750dcb0-3115-4a30-a14b-45dc499e783e"
+                      "id": "f71dc601-a089-4bcb-8fbd-73f2a969b2e9"
                     }
                   ],
                   "activeCells": {},
                   "id": "errors"
                 }
               ],
-              "id": "d6844808-ff69-4781-b306-69a8717a578d"
+              "id": "f4cf4ebe-5bee-4077-a948-925685e33103"
             },
             {
               "key": "DoNotThrowAnExceptionOnTheNextEmbed",
               "cells": {},
               "collections": [],
-              "id": "487ee9b5-eb06-43a7-a915-506b4754ba1a"
+              "id": "6c6da469-8837-4c1b-ad0a-395608cfa1c5"
             },
             {
               "key": "EmbeddedMath",
@@ -4067,7 +4067,7 @@ module.exports = {
                         "returnValue": "9"
                       },
                       "collections": [],
-                      "id": "ed8c0c29-76be-425a-be5f-932e846ccc5e"
+                      "id": "259f4dec-9ddb-498e-ae5d-07a5565f8c5f"
                     },
                     {
                       "key": "Adding",
@@ -4077,7 +4077,7 @@ module.exports = {
                         "returnValue": "11"
                       },
                       "collections": [],
-                      "id": "59795e43-19d6-4b8e-a6c4-6f90316215b5"
+                      "id": "57bff1c9-7ad1-43c2-8bee-434c90c4fd29"
                     },
                     {
                       "key": "Adding",
@@ -4087,20 +4087,20 @@ module.exports = {
                         "returnValue": "abc"
                       },
                       "collections": [],
-                      "id": "49f07d2d-805d-44c6-a195-be5631c09fe0"
+                      "id": "d802494b-26b0-4f14-9c85-5638118cef47"
                     },
                     {
                       "key": "Throw",
                       "cells": {},
                       "collections": [],
-                      "id": "0a014514-dbde-4260-b9dd-d8c1f44d2506"
+                      "id": "c437e6dc-e589-4ed1-ad78-f8b88410f9a6"
                     }
                   ],
                   "activeCells": {},
                   "id": "no-errors"
                 }
               ],
-              "id": "806562b2-d86b-4ddd-8704-c398cbf98e38"
+              "id": "576245ad-8d68-44a5-bc37-bb803465b7a8"
             }
           ],
           "activeCells": {},
@@ -4132,7 +4132,7 @@ module.exports = {
                 "PostalCode": "70071"
               },
               "collections": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98"
+              "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55"
             },
             {
               "key": "TheAddressShouldBe",
@@ -4142,7 +4142,7 @@ module.exports = {
                 "City": "Carthage"
               },
               "collections": [],
-              "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3"
+              "id": "a1c6edd9-ad17-4ffb-bf2c-16af1998a9ae"
             },
             {
               "key": "TheAddressShouldBe",
@@ -4152,11 +4152,11 @@ module.exports = {
                 "City": "wrong"
               },
               "collections": [],
-              "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d"
+              "id": "41cde134-34c3-4043-8574-d6b385478dd0"
             }
           ],
           "activeCells": {},
-          "id": "b65dfd37-c3a3-41fb-a02c-76673c2fd2de"
+          "id": "3b780dc6-da30-4f54-b7ad-9c196811049a"
         }
       ],
       "id": "general1"
@@ -4182,7 +4182,7 @@ module.exports = {
               "key": "Slow",
               "cells": {},
               "collections": [],
-              "id": "3154813b-76d9-4d08-8137-628f48f20597"
+              "id": "9078db41-d98a-4d4e-b3c0-3c87e6a2ba97"
             }
           ],
           "activeCells": {},
@@ -4211,7 +4211,7 @@ module.exports = {
                 "fullname": "Jeremy Smith"
               },
               "collections": [],
-              "id": "cbfea921-ff7f-40d9-9208-54c7eb38c262"
+              "id": "b81ab6ee-6ffe-4932-ba77-29f1a8979e61"
             },
             {
               "key": "FirstAndLastName",
@@ -4229,7 +4229,7 @@ module.exports = {
                         "fullname": "Hank Miller"
                       },
                       "collections": [],
-                      "id": "88b3261d-b963-4d89-a2c8-231ac5c04a32"
+                      "id": "427427d7-44c9-4724-9f17-df93857e2173"
                     },
                     {
                       "key": "table",
@@ -4239,14 +4239,14 @@ module.exports = {
                         "fullname": "Harold Mueller"
                       },
                       "collections": [],
-                      "id": "1d64f866-99cd-429c-8754-eb623ea411ba"
+                      "id": "8cb0033a-cf25-4617-95a2-cf56ee6f655d"
                     }
                   ],
                   "activeCells": {},
-                  "id": "665074cb-2169-4a82-ad5e-60a3bd149471"
+                  "id": "472184b4-8c96-4504-bc74-dc542eaf40c7"
                 }
               ],
-              "id": "af5e1ea9-a355-418c-a14d-b69a273538f2"
+              "id": "a06ade8e-c5e8-466b-96fa-47e5cacf60d2"
             },
             {
               "key": "names",
@@ -4264,14 +4264,14 @@ module.exports = {
                         "Fullname": "Tobin Smith"
                       },
                       "collections": [],
-                      "id": "7c21f166-ea26-416a-950b-db216a3d71ae"
+                      "id": "f1f876d0-4a14-4b41-a6ae-dfbef199df83"
                     }
                   ],
                   "activeCells": {},
-                  "id": "942be78d-ec26-4e98-ab1a-bbfebf5a2c11"
+                  "id": "c780f507-8233-4fbf-820d-50e43401dfcc"
                 }
               ],
-              "id": "79918dbb-7863-4395-9a84-397afe0b66f0"
+              "id": "1da3ea80-73e9-4519-ba64-c9b6831cc76b"
             },
             {
               "key": "TheEnumOptionIs",
@@ -4280,11 +4280,11 @@ module.exports = {
                 "selectedOption": "0"
               },
               "collections": [],
-              "id": "03fb29c4-ee7f-4524-8d96-5772c77cad3f"
+              "id": "5203d25a-8bcf-4d31-a22b-822221fd2357"
             }
           ],
           "activeCells": {},
-          "id": "f1c8d8fb-d3ab-4720-882c-3ce59a9b79e5"
+          "id": "708a9ebc-77e9-43f6-bac3-8a53903b1c3c"
         }
       ],
       "id": "general2"
@@ -4307,7 +4307,7 @@ module.exports = {
                 "value": "5"
               },
               "collections": [],
-              "id": "a1fad000-f852-49e4-bf7b-f871f4179388"
+              "id": "b71d722c-659c-47c5-8695-ed7f0db53174"
             },
             {
               "key": "Check",
@@ -4315,7 +4315,7 @@ module.exports = {
                 "value": "5"
               },
               "collections": [],
-              "id": "5015a053-be05-4c7f-b706-1ad3b9015c29"
+              "id": "55ecda0e-b4ac-47f8-a382-9190364bfb69"
             },
             {
               "key": "Set",
@@ -4323,7 +4323,7 @@ module.exports = {
                 "value": "6"
               },
               "collections": [],
-              "id": "eb97905d-ecd0-4acb-baa7-12e7253e1220"
+              "id": "bf722ee2-a021-49d7-bc45-3084d0eba66a"
             },
             {
               "key": "Check",
@@ -4331,7 +4331,7 @@ module.exports = {
                 "value": "7"
               },
               "collections": [],
-              "id": "ab4982ef-eba4-476f-b474-82c20546e982"
+              "id": "1f7bd202-10d8-43df-97ff-3b31b77893cc"
             },
             {
               "key": "Set",
@@ -4339,11 +4339,11 @@ module.exports = {
                 "value": "abc"
               },
               "collections": [],
-              "id": "f1a5157c-ef8a-4f8c-ba42-45530ab24162"
+              "id": "6533aeb5-fd17-4d45-97c2-2dd3df521f44"
             }
           ],
           "activeCells": {},
-          "id": "b29bcb78-2f7b-45bc-8e62-e9d76a00b236"
+          "id": "7351612a-6e43-44ca-99ca-a2c8bb83f0cd"
         }
       ],
       "id": "general3"
@@ -4380,14 +4380,14 @@ module.exports = {
                         "Position": "LB"
                       },
                       "collections": [],
-                      "id": "17d49a81-41d5-40b1-8038-9c5b95e6e4a7"
+                      "id": "486b1a30-bb4f-408f-b555-7ea4cf65215f"
                     }
                   ],
                   "activeCells": {},
                   "id": "2e87da8f-d2bb-45a0-a375-39e38e3f9564"
                 }
               ],
-              "id": "344e290e-ed9c-496f-a43d-7565562d9520"
+              "id": "2532f4a0-78d6-4a49-b4f3-a7178e2dc1ac"
             }
           ],
           "activeCells": {},
@@ -4412,23 +4412,23 @@ module.exports = {
               "key": "BadGrammar1",
               "cells": {},
               "collections": [],
-              "id": "5bc07ecc-e4e9-42fc-b247-b06e13415606"
+              "id": "a4935a76-aa83-4ce6-a15c-8b70c7ccb83b"
             },
             {
               "key": "BadGrammar2",
               "cells": {},
               "collections": [],
-              "id": "48c81576-9f83-430d-9d58-a84e2dc2468c"
+              "id": "f15a002e-70f5-4a08-bd46-66c4e416a72d"
             },
             {
               "key": "BadGrammar3",
               "cells": {},
               "collections": [],
-              "id": "2d101a2c-bc76-4ea6-b954-b5d93e054a8f"
+              "id": "1123f952-3d01-469b-bd5c-e6dc1c6091dd"
             }
           ],
           "activeCells": {},
-          "id": "fa5c9964-98bb-42af-9767-c943d822b551"
+          "id": "768fc3d1-719f-45a2-939a-09ae1dddc5bd"
         }
       ],
       "id": "general4"
@@ -4472,7 +4472,7 @@ module.exports = {
                 "expected": "80"
               },
               "collections": [],
-              "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553"
+              "id": "5fddf50b-8480-4a35-b39d-20e4d707a08b"
             },
             {
               "key": "AddAndMultiplyTable",
@@ -4491,7 +4491,7 @@ module.exports = {
                         "expected": "25"
                       },
                       "collections": [],
-                      "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca"
+                      "id": "59d66b5a-fcb8-44f8-a9d6-2c9ce07dac31"
                     },
                     {
                       "key": "Rows",
@@ -4502,7 +4502,7 @@ module.exports = {
                         "expected": "80"
                       },
                       "collections": [],
-                      "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec"
+                      "id": "a184ad4c-e010-49df-a901-a1105e4cef53"
                     },
                     {
                       "key": "Rows",
@@ -4513,14 +4513,14 @@ module.exports = {
                         "expected": "77"
                       },
                       "collections": [],
-                      "id": "b40eaa29-4e6a-426d-a33c-57c05c500684"
+                      "id": "621d03b8-7b44-4d33-9d39-05d385fb59f3"
                     }
                   ],
                   "activeCells": {},
-                  "id": "9d5481df-8b74-47a3-8c9d-dc8ed241e89f"
+                  "id": "621f3c53-3bb7-4f46-a167-94e6bed70703"
                 }
               ],
-              "id": "fcbc9014-db27-4f64-9101-6e8be45253b0"
+              "id": "3c5e5eb5-88e2-4e00-aae4-cf908a0551fe"
             },
             {
               "key": "AddAndMultiplyThrow",
@@ -4531,11 +4531,11 @@ module.exports = {
                 "expected": "20"
               },
               "collections": [],
-              "id": "fd043fcf-6a98-4544-8401-214079e3b9b9"
+              "id": "88342d38-f2dd-4efa-babc-7ef11f20d4ce"
             }
           ],
           "activeCells": {},
-          "id": "449cd557-1027-4f3d-82ac-bda861e2ac4d"
+          "id": "a874e20e-6d77-445e-ab1a-4f835388d85c"
         }
       ],
       "id": "paragraph1"
@@ -4561,7 +4561,7 @@ module.exports = {
                 "expected": "80"
               },
               "collections": [],
-              "id": "0f882d95-647e-46cd-b99d-636fcf210edd"
+              "id": "b4157bbd-e1b6-48aa-8485-6159573733e4"
             },
             {
               "key": "AddAndMultiply",
@@ -4572,7 +4572,7 @@ module.exports = {
                 "expected": "77"
               },
               "collections": [],
-              "id": "f58f31fa-6764-451f-b9b6-eede53083eec"
+              "id": "6816c3a7-43f6-45ee-9c4a-98b4b6ad56dd"
             },
             {
               "key": "AddAndMultiplyTable",
@@ -4591,7 +4591,7 @@ module.exports = {
                         "expected": "25"
                       },
                       "collections": [],
-                      "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a"
+                      "id": "8e082506-024b-4d16-ac2f-a257d1ef4a74"
                     },
                     {
                       "key": "Rows",
@@ -4602,7 +4602,7 @@ module.exports = {
                         "expected": "80"
                       },
                       "collections": [],
-                      "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f"
+                      "id": "a696709c-29cf-4aa7-b999-018ab2966c55"
                     },
                     {
                       "key": "Rows",
@@ -4613,18 +4613,18 @@ module.exports = {
                         "expected": "77"
                       },
                       "collections": [],
-                      "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b"
+                      "id": "b072ea80-f5c7-4579-9dc0-a3986de7c79d"
                     }
                   ],
                   "activeCells": {},
-                  "id": "730ca16d-3e49-4954-96c3-58f671ba9c5f"
+                  "id": "9560b17c-3999-4ff2-9076-b1e6f14baa41"
                 }
               ],
-              "id": "ad6315b6-2450-4f6a-8cb3-a19f57d76b0a"
+              "id": "17e02eab-fbab-40b2-92ac-ec79558b767e"
             }
           ],
           "activeCells": {},
-          "id": "98d9d7a8-5404-40ce-8c9b-e97fefaf3c97"
+          "id": "c06a44b2-782d-4b32-975d-afd1d84cd19b"
         }
       ],
       "id": "paragraph2"
@@ -4649,7 +4649,7 @@ module.exports = {
                 "y": "5"
               },
               "collections": [],
-              "id": "f97154a1-44c6-4b86-bb80-62b167a0e5ec"
+              "id": "89a6e125-491d-40bf-a909-e2c3a7f04790"
             },
             {
               "key": "AddTo5",
@@ -4659,11 +4659,11 @@ module.exports = {
                 "y": "5"
               },
               "collections": [],
-              "id": "bbcc9094-a4bf-4810-b71c-441c568942b2"
+              "id": "2b08f905-c218-4cdc-8d1f-3e84cdf963c2"
             }
           ],
           "activeCells": {},
-          "id": "dd41834a-ff27-48b3-8435-e0d102a7223c"
+          "id": "12173c0b-d5de-4152-be40-a7b13c3935d3"
         }
       ],
       "id": "sentence1"
@@ -4736,7 +4736,7 @@ module.exports = {
                 "x": "5"
               },
               "collections": [],
-              "id": "0396c296-639d-4f5a-abd9-9b95ebd4f2fd"
+              "id": "3efbbbc7-784e-4fe5-a86b-e2dffda27f1b"
             },
             {
               "key": "AddingTo5",
@@ -4746,11 +4746,11 @@ module.exports = {
                 "x": "5"
               },
               "collections": [],
-              "id": "f437a7b5-da0e-4dfb-aca6-fc4f5d605377"
+              "id": "45d93a52-c60a-4d41-9c1f-83fa4d6b94e0"
             }
           ],
           "activeCells": {},
-          "id": "de87abc3-e10d-447c-b434-7f0b05ea6068"
+          "id": "d553aee2-d4ae-4019-9ce7-063c61605909"
         }
       ],
       "id": "sentence3"
@@ -4792,7 +4792,7 @@ module.exports = {
                 "number": "5"
               },
               "collections": [],
-              "id": "5a1c941c-eabc-46b0-88aa-f2b4c1205093"
+              "id": "c7cf4fe7-dc87-4aaa-b48b-98ca17cf3832"
             },
             {
               "key": "MultiplyThenAdd",
@@ -4801,7 +4801,7 @@ module.exports = {
                 "delta": "4"
               },
               "collections": [],
-              "id": "61fdca90-642e-4147-a5b9-a18138a525cd"
+              "id": "8571c3cc-ba12-4769-bde4-381f5d1f3b77"
             },
             {
               "key": "Subtract",
@@ -4809,7 +4809,7 @@ module.exports = {
                 "operand": "2"
               },
               "collections": [],
-              "id": "e6118d55-1cf9-4523-a98f-471e387ac582"
+              "id": "68cd3281-6ae2-4ea7-b7c6-b1a51df87553"
             },
             {
               "text": "Correct assertion",
@@ -4838,7 +4838,7 @@ module.exports = {
                 "sum": "5"
               },
               "collections": [],
-              "id": "8f49f693-375b-42f1-ba1b-db3c681a964e"
+              "id": "7f401aab-24e5-4e26-bef3-90adf0aee9d4"
             },
             {
               "text": "Line assertions",
@@ -4904,7 +4904,7 @@ module.exports = {
                         "Date": "TODAY"
                       },
                       "collections": [],
-                      "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663"
+                      "id": "c10797ed-f0c0-4e08-9008-552a4787f7de"
                     },
                     {
                       "key": "Rows",
@@ -4914,7 +4914,7 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb"
+                      "id": "8e8a57b1-c133-45a5-abc5-82f50334cd0c"
                     },
                     {
                       "key": "Rows",
@@ -4924,19 +4924,19 @@ module.exports = {
                         "Date": "TODAY+2"
                       },
                       "collections": [],
-                      "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3"
+                      "id": "7ca9a194-a6bb-420d-bbc5-80a4f5f6eafe"
                     }
                   ],
                   "activeCells": {},
-                  "id": "923ef2c2-99c9-4c59-908d-59d8611676b0"
+                  "id": "a079b959-d7e7-42ce-af70-09804676a167"
                 }
               ],
-              "id": "6212e977-05f8-4372-ab5c-dcd8f3931697"
+              "id": "758ebf1a-c706-46f4-9338-c105da4e3f6e"
             },
             {
               "text": "Completely successful ordering",
               "type": "comment",
-              "id": "e787ab30-8995-472d-997b-8a3c4f8ef2cc"
+              "id": "de271493-c5f9-4487-93c3-b7105d78fb1e"
             },
             {
               "key": "OrderedDetailsAre",
@@ -4987,12 +4987,12 @@ module.exports = {
                   "id": "1"
                 }
               ],
-              "id": "a36ddea3-7c1b-4edb-b7be-ff08d97fa481"
+              "id": "6c2119b1-4d86-4fa4-8304-30a3a665bc21"
             },
             {
               "text": "Out of order",
               "type": "comment",
-              "id": "61044907-8b0a-4f37-935d-8274391e9d67"
+              "id": "cf1d5d75-e2e9-40b3-8450-41163514f887"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5043,12 +5043,12 @@ module.exports = {
                   "id": "5"
                 }
               ],
-              "id": "ea744199-256f-4741-aa93-aa67508083d5"
+              "id": "b121507a-51b5-41ed-b9b9-67966354f474"
             },
             {
               "text": "Should have one exra",
               "type": "comment",
-              "id": "5734b07c-228a-4d48-b65a-e21cd1a2d3d8"
+              "id": "a9a0dcfa-ea3b-42b8-b714-ca4b215f5a53"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5067,7 +5067,7 @@ module.exports = {
                         "Date": "TODAY"
                       },
                       "collections": [],
-                      "id": "7d756572-e332-47a8-8d61-f27d617297b9"
+                      "id": "05dda8aa-ee89-4ec6-a968-5c48bf23d2c8"
                     },
                     {
                       "key": "Rows",
@@ -5078,19 +5078,19 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "e45a3d89-0485-45e6-b561-d93ae26809c5"
+                      "id": "958dd41c-8832-4f31-b32e-30b30503c03f"
                     }
                   ],
                   "activeCells": {},
                   "id": "9"
                 }
               ],
-              "id": "78f8ac7c-0773-4b97-b063-bf53b3217edd"
+              "id": "c03e2a97-49a6-4ccd-8f07-37f87c079337"
             },
             {
               "text": "Should mark one expected result as missing",
               "type": "comment",
-              "id": "b0fd0522-bc82-4b21-92d5-4c9d886c61aa"
+              "id": "ad3aca82-b231-4b8b-be91-d8cd8f3e92b7"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5109,7 +5109,7 @@ module.exports = {
                         "Date": "TODAY"
                       },
                       "collections": [],
-                      "id": "c144b685-cfd8-477c-86ea-c7fca8bff663"
+                      "id": "ac24c859-b7b4-4274-abed-06da93fc9720"
                     },
                     {
                       "key": "Rows",
@@ -5120,7 +5120,7 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "9066f4a6-2f85-41b3-9571-47a55b615886"
+                      "id": "d2b4c09c-936f-437b-9a8d-68121d378cb3"
                     },
                     {
                       "key": "Rows",
@@ -5131,7 +5131,7 @@ module.exports = {
                         "Date": "TODAY+2"
                       },
                       "collections": [],
-                      "id": "dc1c9193-1dbe-4012-bc87-c23dc60a5ee1"
+                      "id": "83f4d5d2-c8f8-46a5-b109-524c0b5ec710"
                     },
                     {
                       "key": "Rows",
@@ -5150,12 +5150,12 @@ module.exports = {
                   "id": "10"
                 }
               ],
-              "id": "bfd361e5-3734-490d-a800-c4347c0b91c8"
+              "id": "b629a000-fe11-43f3-8744-19fc3074d9c2"
             },
             {
               "text": "One syntax error",
               "type": "comment",
-              "id": "87490036-5e52-4c13-9c5d-ae6037060384"
+              "id": "19059090-6894-4705-a09b-7072cef12df6"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5186,7 +5186,7 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "2f721869-a0ac-486a-8f3c-eafb91d7d105"
+                      "id": "8156d779-9cbe-4e6f-ac99-b79cfa0a6a35"
                     },
                     {
                       "key": "Rows",
@@ -5197,18 +5197,18 @@ module.exports = {
                         "Date": "TODAY+2"
                       },
                       "collections": [],
-                      "id": "f34cce50-0bd1-4018-9cd4-4a96e5e48fde"
+                      "id": "ef75a1fd-e7f7-4752-9d02-9327bb457a9d"
                     }
                   ],
                   "activeCells": {},
-                  "id": "9d83408d-28ee-4574-9b87-b8b88d594caf"
+                  "id": "4d000ce8-cdd9-40da-8c66-28df295c9032"
                 }
               ],
-              "id": "e49cbda2-4461-4327-8664-70e214474bbd"
+              "id": "57d55c88-062b-4baa-ae2b-9cc6ae725bfe"
             }
           ],
           "activeCells": {},
-          "id": "2714a968-6fd1-4190-8ee6-b262e08ac3cc"
+          "id": "40934b95-9e12-4424-93c1-ef67c1472387"
         }
       ],
       "id": "set1"
@@ -5239,7 +5239,7 @@ module.exports = {
                         "name": "Jeremy"
                       },
                       "collections": [],
-                      "id": "33bb7e80-a0f6-42d2-b9f5-fcec611d3afb"
+                      "id": "0c955564-d334-4c09-b877-29dd6678fc3d"
                     },
                     {
                       "key": "name",
@@ -5247,7 +5247,7 @@ module.exports = {
                         "name": "Josh"
                       },
                       "collections": [],
-                      "id": "fde79dfc-cd7c-42a2-a1bd-6e01aff3fe7f"
+                      "id": "f19fe832-832f-43fd-8f25-385f056d11bf"
                     },
                     {
                       "key": "name",
@@ -5255,7 +5255,7 @@ module.exports = {
                         "name": "Gary"
                       },
                       "collections": [],
-                      "id": "2bf308fd-ab36-4aa5-aba5-e3b3906b8969"
+                      "id": "9f0136cf-7a69-4829-90ba-83e2fef13358"
                     },
                     {
                       "key": "name",
@@ -5263,7 +5263,7 @@ module.exports = {
                         "name": "Kevin"
                       },
                       "collections": [],
-                      "id": "137e2b05-7561-4443-be6a-d68906a642ff"
+                      "id": "1c8990bb-a824-4be1-a215-e451b680e13a"
                     },
                     {
                       "key": "name",
@@ -5271,14 +5271,14 @@ module.exports = {
                         "name": "Chad"
                       },
                       "collections": [],
-                      "id": "955d37e0-7dfe-466b-ae5e-12ca0f7ebf78"
+                      "id": "1dce8ad7-fe2c-459d-92bf-e99e0d467236"
                     }
                   ],
                   "activeCells": {},
-                  "id": "4b7cd980-850e-4d94-9e75-cdbcf0dfc9be"
+                  "id": "5d8c4c00-fbc3-453e-86f4-daadd4b6c389"
                 }
               ],
-              "id": "b26f4144-3fe3-40d7-a5fd-8cee5c555afd"
+              "id": "0464de61-9cc4-410f-8128-277f4659ea0f"
             },
             {
               "key": "OrderedStringSet",
@@ -5295,7 +5295,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "6f5fa337-f366-4fa9-81b8-b8fcabe3ff6d"
+                      "id": "29d61f63-1bbe-4431-ad3b-c9bc21283c44"
                     },
                     {
                       "key": "Rows",
@@ -5304,7 +5304,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "fac5cc62-45e8-476d-ad7a-28ceb7fd7a10"
+                      "id": "1e061dd3-3ab5-4778-9aed-03dcf0f5861c"
                     },
                     {
                       "key": "Rows",
@@ -5313,7 +5313,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "47ef6156-141c-49e3-91b7-8d618c334f67"
+                      "id": "948cff8a-ba21-4a79-b9a9-f0de99f73d97"
                     },
                     {
                       "key": "Rows",
@@ -5322,7 +5322,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "b6648653-96bd-407b-b52e-f8bbe7f93ecf"
+                      "id": "61e07240-aa51-4d0a-81e6-28edb78df1c1"
                     },
                     {
                       "key": "Rows",
@@ -5331,14 +5331,14 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "12732d33-01de-453d-a607-3d6a33de7f31"
+                      "id": "0d82c1af-9ce8-4c35-9874-dbea4ea2af72"
                     }
                   ],
                   "activeCells": {},
-                  "id": "583b0a46-bd86-4a21-824a-965d6fa9523f"
+                  "id": "23e3a654-6a19-4849-b872-8c6dd44ef25f"
                 }
               ],
-              "id": "16d834d5-ebcb-48a6-a9c0-d970aa373aa3"
+              "id": "51fe73be-1cbe-47da-8701-4bfe96e145a0"
             },
             {
               "key": "UnorderedStringSet",
@@ -5355,7 +5355,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "de015315-dbbf-4c60-b69f-65e7f8cb1ac9"
+                      "id": "19389a97-40f3-4d51-9377-498e68913bd8"
                     },
                     {
                       "key": "Rows",
@@ -5364,7 +5364,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "481e7fc7-6da5-4f86-98c2-5e6895b2f52d"
+                      "id": "5fa62841-6a49-45c7-8f31-c7a9da1c0f1b"
                     },
                     {
                       "key": "Rows",
@@ -5373,7 +5373,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "a1d6451d-515d-4732-9903-c5cc7c627a7b"
+                      "id": "69595a4f-9dd6-45b1-9280-d1dc0c39c69c"
                     },
                     {
                       "key": "Rows",
@@ -5382,7 +5382,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "08bd9fb0-b295-43b7-935c-584abe3c01c6"
+                      "id": "1007561d-4394-432f-b98e-a6009e10a4bb"
                     },
                     {
                       "key": "Rows",
@@ -5391,18 +5391,18 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "39da7d10-75a2-49b6-baa7-d7b946c693d1"
+                      "id": "61cbc23a-34bd-4163-adf4-03ce951c4868"
                     }
                   ],
                   "activeCells": {},
-                  "id": "ac95f99f-a7ed-4949-8e6d-a52a6d3f17b9"
+                  "id": "954e8408-c040-4a10-bd2b-3b747f4deb33"
                 }
               ],
-              "id": "c4853f42-db3d-4720-a252-92bbc45e614e"
+              "id": "767f3420-c197-41d7-b031-63565b8f5dbf"
             }
           ],
           "activeCells": {},
-          "id": "91d15600-df98-4b6b-83cc-418b42467c69"
+          "id": "7a740f32-c2c7-484b-a37e-cf47641146ca"
         }
       ],
       "id": "set2"
@@ -5433,7 +5433,7 @@ module.exports = {
                         "Name": "a"
                       },
                       "collections": [],
-                      "id": "1317697d-6baa-4fe0-8d55-cea7a4724ec1"
+                      "id": "37269b49-5f7e-482d-9ee9-e451ee246f86"
                     },
                     {
                       "key": "rows",
@@ -5441,7 +5441,7 @@ module.exports = {
                         "Name": "b"
                       },
                       "collections": [],
-                      "id": "71be8bf1-c2c7-4a9c-9ce7-97fed57044b3"
+                      "id": "fdae5282-68e2-43a7-9758-a41d05df1ba2"
                     },
                     {
                       "key": "rows",
@@ -5449,18 +5449,18 @@ module.exports = {
                         "Name": "c"
                       },
                       "collections": [],
-                      "id": "c5089757-3b8c-43d2-93ce-f1faf185a028"
+                      "id": "2c75deda-2fe4-4077-858e-fe9d0cb775f9"
                     }
                   ],
                   "activeCells": {},
                   "id": "1"
                 }
               ],
-              "id": "f98841a2-427e-4a3e-a41f-2c1dc837f2ec"
+              "id": "e9d97d86-f8f4-4d2d-a8fc-0e070d5d0c29"
             }
           ],
           "activeCells": {},
-          "id": "d315cc53-40c7-4a11-b5e1-1c73cb54a2c9"
+          "id": "702de1e6-655f-441d-9fce-447642d3da98"
         }
       ],
       "id": "set3"
@@ -5493,7 +5493,7 @@ module.exports = {
                         "Name": "Cord"
                       },
                       "collections": [],
-                      "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e"
+                      "id": "80ece145-b02b-4b08-9bb1-506908396807"
                     },
                     {
                       "key": "Rows",
@@ -5503,7 +5503,7 @@ module.exports = {
                         "Name": "Drill"
                       },
                       "collections": [],
-                      "id": "f10e8303-5900-45a0-9325-300b31c171d2"
+                      "id": "195e435d-b723-4128-b21c-043a17aa9b18"
                     },
                     {
                       "key": "Rows",
@@ -5513,14 +5513,14 @@ module.exports = {
                         "Name": "Hammer"
                       },
                       "collections": [],
-                      "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951"
+                      "id": "a1209da4-2102-40df-b060-cda190d453f9"
                     }
                   ],
                   "activeCells": {},
-                  "id": "69d3322c-92bf-49ce-94f6-1bc2805ae14f"
+                  "id": "67e730e1-e5a3-451b-9aa8-14b0c320e43f"
                 }
               ],
-              "id": "c2d3cbcd-f789-4621-b64d-61ea6343aece"
+              "id": "68b7b1ab-8ea2-49fa-985d-1cd7f845de9e"
             },
             {
               "key": "UnorderedDetailsAre",
@@ -5538,7 +5538,7 @@ module.exports = {
                         "Name": "Drill"
                       },
                       "collections": [],
-                      "id": "0b7d9735-06e6-41ed-92fc-d0bb4ec1f864"
+                      "id": "1d889429-b14d-4e25-a4d4-9d3f01be6e01"
                     },
                     {
                       "key": "Rows",
@@ -5548,18 +5548,18 @@ module.exports = {
                         "Name": "Hammer"
                       },
                       "collections": [],
-                      "id": "352925c6-83e4-4b88-867c-b205f41ca32f"
+                      "id": "39e67f06-347a-4b0a-aec8-00808a905bf0"
                     }
                   ],
                   "activeCells": {},
-                  "id": "cf8484c4-6af2-42d1-a828-8fb16b9740b1"
+                  "id": "84e15dd2-7f79-4b77-aae3-4bf7200488bb"
                 }
               ],
-              "id": "d1e9bf84-d7d5-413f-8938-d0bf13d734d5"
+              "id": "607bccfc-ef66-4614-ba89-55de2028a903"
             }
           ],
           "activeCells": {},
-          "id": "004bd1e0-442e-4922-9580-b28738327bfa"
+          "id": "0ec0d4f4-3738-4132-b882-1997b5a44cdd"
         }
       ],
       "id": "set4"
@@ -5590,7 +5590,7 @@ module.exports = {
                         "name": "Jeremy"
                       },
                       "collections": [],
-                      "id": "c331e438-b5fb-40b4-9d2e-c0dd1a71d571"
+                      "id": "627ad9e8-b9dd-407f-af56-510ab56742f1"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5598,7 +5598,7 @@ module.exports = {
                         "name": "Josh"
                       },
                       "collections": [],
-                      "id": "bacf4e5f-3198-4ebe-ab5b-197c7ba934cf"
+                      "id": "a9fe76bf-acf4-4fe5-969d-b0a69f9b53d4"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5606,7 +5606,7 @@ module.exports = {
                         "name": "Gary"
                       },
                       "collections": [],
-                      "id": "3d4f2f1c-86a5-4707-9bc2-4c684eff8e83"
+                      "id": "2e3c312e-9bd1-466b-8a6d-5c1a79f06681"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5614,7 +5614,7 @@ module.exports = {
                         "name": "Kevin"
                       },
                       "collections": [],
-                      "id": "be0004fa-89bf-4817-8be2-de329719c14b"
+                      "id": "7637431c-8ba2-4370-bad0-c6ab4466c654"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5622,7 +5622,7 @@ module.exports = {
                         "name": "Chad"
                       },
                       "collections": [],
-                      "id": "bcdafeed-bcfc-4acc-934a-7ca58d9666ae"
+                      "id": "483509bb-8e15-429b-bd2d-757faca31f72"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5630,7 +5630,7 @@ module.exports = {
                         "name": "Rand"
                       },
                       "collections": [],
-                      "id": "3767032e-6139-45b8-a4fd-24fffb833fc2"
+                      "id": "956295dd-0d76-4110-9105-4bb26f783af5"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5638,7 +5638,7 @@ module.exports = {
                         "name": "Perrin"
                       },
                       "collections": [],
-                      "id": "ea8f0e63-1e4f-43b2-a7ab-7184a7345ed6"
+                      "id": "a66b84d0-cdc4-4e93-b4e5-87c2ab93093a"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -5646,14 +5646,14 @@ module.exports = {
                         "name": "Mat"
                       },
                       "collections": [],
-                      "id": "e619ac16-5e33-4e24-b6aa-a5477553d477"
+                      "id": "337802b6-59d8-4168-96a7-a0dfd91d5365"
                     }
                   ],
                   "activeCells": {},
                   "id": "61c521ec-1d41-4492-b00c-695d8cc4440b"
                 }
               ],
-              "id": "dbdbae3f-dd5c-49e1-9b18-b80673294265"
+              "id": "ab58a316-106e-42f7-b4e1-3299841bd569"
             },
             {
               "text": "All data is correct, but in the wrong order",
@@ -5674,7 +5674,7 @@ module.exports = {
                         "expected": "Jeremy"
                       },
                       "collections": [],
-                      "id": "ff23547b-ed57-403c-a421-f274ede39f49"
+                      "id": "b8fa0a86-7021-4c50-865c-d4f65c678bae"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -5682,7 +5682,7 @@ module.exports = {
                         "expected": "Josh"
                       },
                       "collections": [],
-                      "id": "ca349651-76a5-40e1-91e3-0f5113e721c6"
+                      "id": "cb80661a-5aa6-489f-a2ec-b759ae169b7c"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -5690,7 +5690,7 @@ module.exports = {
                         "expected": "Gary"
                       },
                       "collections": [],
-                      "id": "fbcf8f86-ae7a-4d32-a76a-2bde929e8f0c"
+                      "id": "91853301-c8fa-4e2a-aa66-0ab2d79df882"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -5698,7 +5698,7 @@ module.exports = {
                         "expected": "Chad"
                       },
                       "collections": [],
-                      "id": "fc7411c7-c14d-4c2a-9221-e429d3f1c5d3"
+                      "id": "972b3a1f-9e39-4d2c-b62a-993e4bb9c43f"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -5706,7 +5706,7 @@ module.exports = {
                         "expected": "Kevin"
                       },
                       "collections": [],
-                      "id": "7888ecd8-2c61-4d50-b97c-117f1009b896"
+                      "id": "7a2c6479-b09d-423f-a492-387eb60e25a1"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -5714,7 +5714,7 @@ module.exports = {
                         "expected": "Egwene"
                       },
                       "collections": [],
-                      "id": "b4b144be-df60-4033-a39d-a990af9e638f"
+                      "id": "0ba4bf6f-aadd-49e8-9377-e3c47425faae"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -5722,14 +5722,14 @@ module.exports = {
                         "expected": "Perrin"
                       },
                       "collections": [],
-                      "id": "141157d1-291c-4fa5-94ad-37bc6f82ce82"
+                      "id": "32045d38-9d88-41f8-a306-87f08f455b15"
                     }
                   ],
                   "activeCells": {},
                   "id": "4f091fff-8c47-4a91-90c4-19c01477dddb"
                 }
               ],
-              "id": "257e47ea-ca6e-43ea-ac77-24009230801c"
+              "id": "e2f9287e-e9cf-4c6f-8a14-02673e344472"
             }
           ],
           "activeCells": {},
@@ -5766,7 +5766,7 @@ module.exports = {
                         "IsEven": "true"
                       },
                       "collections": [],
-                      "id": "cb1380f8-71ad-43ef-b217-8a0460b91389"
+                      "id": "da77ae0b-f02f-49d2-8ebf-ea11a83442b2"
                     },
                     {
                       "key": "row",
@@ -5775,18 +5775,18 @@ module.exports = {
                         "IsEven": "false"
                       },
                       "collections": [],
-                      "id": "f9164f40-0632-432d-b69f-bc1a27fec713"
+                      "id": "c5b66f8e-2bad-4dc3-9d09-6d0da52a9adb"
                     }
                   ],
                   "activeCells": {},
-                  "id": "223f067b-3280-4d4d-8a74-6ab2c2442b67"
+                  "id": "b24f76f8-6ec3-45ab-bfc5-b12ac41c894b"
                 }
               ],
-              "id": "a7a8e392-783d-4106-82b4-50e7c8c3c3d2"
+              "id": "41c424e0-6477-4ff9-bbbe-4f588d758fca"
             }
           ],
           "activeCells": {},
-          "id": "fc9fc340-9714-4bb5-85c6-7548caaa7638"
+          "id": "78bc686f-8437-4a8c-bc52-6b381759f85c"
         }
       ],
       "id": "table1"
@@ -5820,7 +5820,7 @@ module.exports = {
                         "LastNameFirst": "Miller, Jeremy"
                       },
                       "collections": [],
-                      "id": "cea69189-7ccb-47ec-b2a2-c7c432cac352"
+                      "id": "a4de20c6-320d-40c7-8f08-bd20a8fc1688"
                     },
                     {
                       "key": "decisions",
@@ -5831,11 +5831,11 @@ module.exports = {
                         "LastNameFirst": "Chief, Big"
                       },
                       "collections": [],
-                      "id": "c0e6f984-6b51-4d63-98a9-4e5d353a7b62"
+                      "id": "d3a05165-1ba0-42c6-a3fa-430e68125716"
                     }
                   ],
                   "activeCells": {},
-                  "id": "a66a46f9-4d97-43d2-b431-9118cbfc67e7"
+                  "id": "d6205303-11a0-4cae-85d2-901a4fe9b171"
                 },
                 {
                   "key": "table",
@@ -5850,7 +5850,7 @@ module.exports = {
                         "LastNameFirst": "Miller, Jeremy"
                       },
                       "collections": [],
-                      "id": "eec1ad15-923f-4f61-bdcf-0e37e20d0678"
+                      "id": "942afc27-052d-45cf-bdfe-5da4d8696202"
                     },
                     {
                       "key": "row",
@@ -5861,18 +5861,18 @@ module.exports = {
                         "LastNameFirst": "Miller Hank"
                       },
                       "collections": [],
-                      "id": "c614cd66-acb8-4f9f-9bfc-18f1de28f051"
+                      "id": "22cabc42-11ff-483a-b1d6-eb6afe87ab84"
                     }
                   ],
                   "activeCells": {},
-                  "id": "ae7fd170-5901-4530-a98e-29af3295aa1d"
+                  "id": "c4a8e4c4-1d13-41c9-8232-df0e45fe103d"
                 }
               ],
-              "id": "ca739165-d9e2-4d42-af94-5a00bad8c48d"
+              "id": "5d32c261-32a2-4be4-886c-0104822dc4a3"
             }
           ],
           "activeCells": {},
-          "id": "4d209dd4-32a3-4a3f-b5aa-13369019374f"
+          "id": "8b3fcf69-add5-496e-a1d6-3b5d6356f3fb"
         }
       ],
       "id": "table2"
@@ -5907,7 +5907,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "5d3fe8ef-f049-49ab-8e27-eb1c6cde3428"
+                      "id": "70646fad-a420-42f0-acd6-9985f18d13e7"
                     },
                     {
                       "key": "TableWithLotsOfOptions-row",
@@ -5919,7 +5919,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "5731c818-262e-4d1b-9031-45bef4205bf7"
+                      "id": "2f0cd057-48b0-41dd-b47b-81e48cb08c35"
                     },
                     {
                       "key": "TableWithLotsOfOptions-row",
@@ -5931,7 +5931,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "1b7959f4-a3a6-4202-9f4c-3ced1a9a629d"
+                      "id": "c796aa72-5dff-4084-8012-a5a6bad5c224"
                     },
                     {
                       "key": "TableWithLotsOfOptions-row",
@@ -5943,7 +5943,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "1764709c-2e76-4c58-82d7-744689115e79"
+                      "id": "135c9db6-057c-4e2d-8d09-3595c21651ff"
                     }
                   ],
                   "activeCells": {
@@ -5953,7 +5953,7 @@ module.exports = {
                   "id": "3c402eda-44ab-48b2-bc1e-e83730c123cf"
                 }
               ],
-              "id": "abd97da4-7069-4ec1-9d48-996970162811"
+              "id": "4439239a-be2a-46eb-aaed-53665869d7eb"
             }
           ],
           "activeCells": {},
@@ -5988,14 +5988,14 @@ module.exports = {
                         "x": "11"
                       },
                       "collections": [],
-                      "id": "837b6852-7d47-4e6a-99c4-f2c2b1022b1e"
+                      "id": "05f41992-d937-4379-b7c0-f74ae2137100"
                     }
                   ],
                   "activeCells": {},
                   "id": "before"
                 }
               ],
-              "id": "ca3fa272-c547-4bdf-889a-07bd1f168b94"
+              "id": "6c4fa246-345c-48de-a5f3-9bfc31575b84"
             },
             {
               "key": "AfterThrowsError",
@@ -6011,14 +6011,14 @@ module.exports = {
                         "x": "22"
                       },
                       "collections": [],
-                      "id": "fd5b6e7c-391a-4157-8c48-b95575c25980"
+                      "id": "70c31b4a-0e5a-469d-b4d2-eed013a34bb2"
                     }
                   ],
                   "activeCells": {},
                   "id": "after"
                 }
               ],
-              "id": "8b6c0349-7682-49a2-957e-2b83b1cd70d2"
+              "id": "0b940a59-6986-43ae-a7a0-7ecdddb61589"
             }
           ],
           "activeCells": {},
@@ -6042,7 +6042,7 @@ module.exports = {
             {
               "text": "Table by the ExposeAsTable attribute",
               "type": "comment",
-              "id": "e0038f16-e6f4-46df-9e19-51179369a983"
+              "id": "98a66a22-72da-46a6-8cbf-2723d72d880d"
             },
             {
               "key": "Sum",
@@ -6071,7 +6071,7 @@ module.exports = {
                         "sum": "4"
                       },
                       "collections": [],
-                      "id": "6a0685cd-b4d0-488a-900f-570fba985459"
+                      "id": "dcdd80e1-8302-4849-a273-0c12b330613d"
                     },
                     {
                       "key": "sum",
@@ -6081,19 +6081,19 @@ module.exports = {
                         "sum": "5"
                       },
                       "collections": [],
-                      "id": "3b2bd8e0-def4-412c-97b7-2a51e3adc502"
+                      "id": "6c491a4f-4b21-4787-958c-a4309ee10834"
                     }
                   ],
                   "activeCells": {},
-                  "id": "222478db-7bfa-4de4-a103-b785e2f59188"
+                  "id": "54c2fcf9-c6ee-406e-8b77-91da163eeb76"
                 }
               ],
-              "id": "8735452d-7bf8-4e7d-aab7-1ff9c572a47e"
+              "id": "4128fe49-6cfe-4324-8f4c-2ba6fc38490e"
             },
             {
               "text": "Table fixture from script",
               "type": "comment",
-              "id": "4fc443de-2905-4ea4-a787-e798e4eed782"
+              "id": "48cabd47-6009-45bf-8765-488e6409451b"
             },
             {
               "key": "Divide",
@@ -6133,7 +6133,7 @@ module.exports = {
                         "product": "****"
                       },
                       "collections": [],
-                      "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196"
+                      "id": "b905b81e-d932-4fab-8303-2927e040b96f"
                     },
                     {
                       "key": "Rows",
@@ -6143,18 +6143,18 @@ module.exports = {
                         "product": "****"
                       },
                       "collections": [],
-                      "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a"
+                      "id": "6213d009-626c-4617-ab26-4107bfe3b6cd"
                     }
                   ],
                   "activeCells": {},
-                  "id": "591f139c-6b8c-43a8-9617-c0883ce7af26"
+                  "id": "0018418f-fd06-4733-96b9-8e884c6c7991"
                 }
               ],
-              "id": "247ad797-59bb-4fd6-9eee-d9eae8c8b802"
+              "id": "36ec0c5c-e741-4982-a822-3a229ca6b78a"
             }
           ],
           "activeCells": {},
-          "id": "08611c2c-5ccc-4b83-9d7c-a04f8577ccfc"
+          "id": "78510fe7-9f3d-491a-8ad7-4465b955b21d"
         }
       ],
       "id": "table5"
@@ -6450,6426 +6450,4436 @@ module.exports = {
     "path": ""
   },
   "results": {
-    "embeds": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "f41e6e7a-64d0-4cdc-a684-569f0ae4b120",
-        "spec": "embeds",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
+    "embeds": {
+      "id": "embeds",
+      "data": {
+        "title": "Embeds",
+        "path": "Embedded/Embeds",
+        "max-retries": 0,
+        "lifecycle": "Regression",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "embeds"
       },
-      {
-        "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.<.ctor>b__0(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-        "cells": [],
-        "id": "errors",
-        "spec": "embeds",
-        "position": "before",
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+      "results": {
+        "results": [
           {
-            "actual": null,
             "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "a750dcb0-3115-4a30-a14b-45dc499e783e",
-        "spec": "embeds",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "487ee9b5-eb06-43a7-a915-506b4754ba1a",
-        "spec": "embeds",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "ed8c0c29-76be-425a-be5f-932e846ccc5e",
-        "spec": "embeds",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "10",
-            "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "59795e43-19d6-4b8e-a6c4-6f90316215b5",
-        "spec": "embeds",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "returnValue",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "49f07d2d-805d-44c6-a195-be5631c09fe0",
-        "spec": "embeds",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 120\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
-        "cells": [],
-        "id": "0a014514-dbde-4260-b9dd-d8c1f44d2506",
-        "spec": "embeds",
-        "position": null,
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "id": "embeds",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "27621b25-ca40-4e9a-a7ec-c09a06cd295e"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "f41e6e7a-64d0-4cdc-a684-569f0ae4b120",
-              "spec": "embeds",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.<.ctor>b__0(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-              "cells": [],
-              "id": "errors",
-              "spec": "embeds",
-              "position": "before",
-              "status": "error",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "a750dcb0-3115-4a30-a14b-45dc499e783e",
-              "spec": "embeds",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "487ee9b5-eb06-43a7-a915-506b4754ba1a",
-              "spec": "embeds",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "ed8c0c29-76be-425a-be5f-932e846ccc5e",
-              "spec": "embeds",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "10",
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "59795e43-19d6-4b8e-a6c4-6f90316215b5",
-              "spec": "embeds",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "49f07d2d-805d-44c6-a195-be5631c09fe0",
-              "spec": "embeds",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 120\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
-              "cells": [],
-              "id": "0a014514-dbde-4260-b9dd-d8c1f44d2506",
-              "spec": "embeds",
-              "position": null,
-              "status": "error",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Embedded:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThrowAnExceptionOnTheNextEmbed",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "EmbeddedMath:Before",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Math:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Math:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "DoNotThrowAnExceptionOnTheNextEmbed",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "EmbeddedMath:Before",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Math:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Throw",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Math:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Embedded:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\">EmbeddedFixture.Setup sent this debug message\r\n</pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 1,
-            "errors": 2,
-            "invalids": 1
-          }
-        },
-        "time": "2015-05-07T21:03:14.8356226-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "general1": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "8b44576a-fcce-4622-b760-09461929ed98",
-        "spec": "general1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8b44576a-fcce-4622-b760-09461929ed98",
-        "spec": "general1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8b44576a-fcce-4622-b760-09461929ed98",
-        "spec": "general1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8b44576a-fcce-4622-b760-09461929ed98",
-        "spec": "general1",
-        "position": "4",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8b44576a-fcce-4622-b760-09461929ed98",
-        "spec": "general1",
-        "position": "5",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8b44576a-fcce-4622-b760-09461929ed98",
-        "spec": "general1",
-        "position": "6",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "Address1",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3",
-        "spec": "general1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "Address2",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3",
-        "spec": "general1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "City",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3",
-        "spec": "general1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "2035 Ozark",
-            "error": null,
-            "cell": "Address1",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d",
-        "spec": "general1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "Apt 3",
-            "error": null,
-            "cell": "Address2",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d",
-        "spec": "general1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "Carthage",
-            "error": null,
-            "cell": "City",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d",
-        "spec": "general1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "general1",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "d92be208-966e-46fc-8fcf-ce2558d71f8e"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98",
-              "spec": "general1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98",
-              "spec": "general1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98",
-              "spec": "general1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98",
-              "spec": "general1",
-              "position": "4",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98",
-              "spec": "general1",
-              "position": "5",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8b44576a-fcce-4622-b760-09461929ed98",
-              "spec": "general1",
-              "position": "6",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "Address1",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3",
-              "spec": "general1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "Address2",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3",
-              "spec": "general1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "City",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "2c1f1870-9d0c-46d0-9e79-a26a41737dd3",
-              "spec": "general1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "2035 Ozark",
-                  "error": null,
-                  "cell": "Address1",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d",
-              "spec": "general1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "Apt 3",
-                  "error": null,
-                  "cell": "Address2",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d",
-              "spec": "general1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "Carthage",
-                  "error": null,
-                  "cell": "City",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "da2bb98b-5c1e-4aa1-9289-99fd8df85b0d",
-              "spec": "general1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "CheckObject:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:5",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IfTheAddressIs:6",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheAddressShouldBe:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheAddressShouldBe:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheAddressShouldBe:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheAddressShouldBe:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheAddressShouldBe:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheAddressShouldBe:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "CheckObject:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 3,
-            "wrongs": 3,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.8446235-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "SometimesSlow": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "3154813b-76d9-4d08-8137-628f48f20597",
-        "spec": "SometimesSlow",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "SometimesSlow",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "14c1d339-b07d-41ab-a883-0c457397d0f3"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "3154813b-76d9-4d08-8137-628f48f20597",
-              "spec": "SometimesSlow",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "SometimesSlow:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Slow",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "SometimesSlow:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.849624-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "general2": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "fullname",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "cbfea921-ff7f-40d9-9208-54c7eb38c262",
-        "spec": "general2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "fullname",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "88b3261d-b963-4d89-a2c8-231ac5c04a32",
-        "spec": "general2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "Harold Miller",
-            "error": null,
-            "cell": "fullname",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "1d64f866-99cd-429c-8754-eb623ea411ba",
-        "spec": "general2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "First",
-            "id": null,
-            "status": "ok"
+            "cells": [],
+            "id": "b16a752b-9485-4810-8dfc-c55a24c122ec",
+            "spec": "embeds",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
           },
           {
-            "actual": null,
-            "error": null,
-            "cell": "Last",
-            "id": null,
-            "status": "ok"
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.<.ctor>b__0(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
+            "cells": [],
+            "id": "errors",
+            "spec": "embeds",
+            "position": "before",
+            "status": "error",
+            "type": "step-result"
           },
           {
-            "actual": null,
             "error": null,
-            "cell": "Fullname",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "7c21f166-ea26-416a-950b-db216a3d71ae",
-        "spec": "general2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "selectedOption",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "03fb29c4-ee7f-4524-8d96-5772c77cad3f",
-        "spec": "general2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "general2",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "dbf942ef-c978-4e94-a063-804cdabeb460"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "fullname",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "cbfea921-ff7f-40d9-9208-54c7eb38c262",
-              "spec": "general2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "fullname",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "88b3261d-b963-4d89-a2c8-231ac5c04a32",
-              "spec": "general2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "Harold Miller",
-                  "error": null,
-                  "cell": "fullname",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "1d64f866-99cd-429c-8754-eb623ea411ba",
-              "spec": "general2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "First",
-                  "id": null,
-                  "status": "ok"
-                },
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "Last",
-                  "id": null,
-                  "status": "ok"
-                },
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "Fullname",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "7c21f166-ea26-416a-950b-db216a3d71ae",
-              "spec": "general2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "selectedOption",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "03fb29c4-ee7f-4524-8d96-5772c77cad3f",
-              "spec": "general2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "SelectionList:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheNameIs",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "FirstAndLastName:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "FirstAndLastName:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": null,
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheEnumOptionIs",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "SelectionList:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 4,
-            "wrongs": 1,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.8586249-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "general3": [
-      {
-        "error": "Fixture with key 'Service' does not exist",
-        "cells": [],
-        "id": "b29bcb78-2f7b-45bc-8e62-e9d76a00b236",
-        "spec": "general3",
-        "position": "setup",
-        "status": "invalid",
-        "type": "step-result"
-      },
-      {
-        "id": "general3",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "3addc95e-2139-4f20-82c5-ea7b6c962573"
-        },
-        "results": {
-          "results": [
-            {
-              "error": "Fixture with key 'Service' does not exist",
-              "cells": [],
-              "id": "b29bcb78-2f7b-45bc-8e62-e9d76a00b236",
-              "spec": "general3",
-              "position": "setup",
-              "status": "invalid",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Service:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 1
-          }
-        },
-        "time": "2015-05-07T21:03:14.8676258-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "runtime-converter": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "Position",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "17d49a81-41d5-40b1-8038-9c5b95e6e4a7",
-        "spec": "runtime-converter",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "runtime-converter",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "68a3135c-3215-430e-80b9-9ee0eda1469f"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "Position",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "17d49a81-41d5-40b1-8038-9c5b95e6e4a7",
-              "spec": "runtime-converter",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Player:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "PositionIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Player:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 1,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.8746265-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "general4": [
-      {
-        "error": "Grammar 'BadGrammar1' is not implemented",
-        "cells": [],
-        "id": "5bc07ecc-e4e9-42fc-b247-b06e13415606",
-        "spec": "general4",
-        "position": null,
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "error": "Grammar 'BadGrammar2' is not implemented",
-        "cells": [],
-        "id": "48c81576-9f83-430d-9d58-a84e2dc2468c",
-        "spec": "general4",
-        "position": null,
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "error": "Grammar 'BadGrammar3' is not implemented",
-        "cells": [],
-        "id": "2d101a2c-bc76-4ea6-b954-b5d93e054a8f",
-        "spec": "general4",
-        "position": null,
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "id": "general4",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "6445dd2a-bde4-489a-ac65-0b5ce08356fc"
-        },
-        "results": {
-          "results": [
-            {
-              "error": "Grammar 'BadGrammar1' is not implemented",
-              "cells": [],
-              "id": "5bc07ecc-e4e9-42fc-b247-b06e13415606",
-              "spec": "general4",
-              "position": null,
-              "status": "error",
-              "type": "step-result"
-            },
-            {
-              "error": "Grammar 'BadGrammar2' is not implemented",
-              "cells": [],
-              "id": "48c81576-9f83-430d-9d58-a84e2dc2468c",
-              "spec": "general4",
-              "position": null,
-              "status": "error",
-              "type": "step-result"
-            },
-            {
-              "error": "Grammar 'BadGrammar3' is not implemented",
-              "cells": [],
-              "id": "2d101a2c-bc76-4ea6-b954-b5d93e054a8f",
-              "spec": "general4",
-              "position": null,
-              "status": "error",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Math:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Missing",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Missing",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Missing",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Math:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 3,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.8826273-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "general5": [
-      {
-        "error": "Fixture with key 'FixtureThatDoesNotExist' does not exist",
-        "cells": [],
-        "id": "1",
-        "spec": "general5",
-        "position": "setup",
-        "status": "invalid",
-        "type": "step-result"
-      },
-      {
-        "id": "general5",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "0a66a430-476a-4a08-bf95-b822d9d0d178"
-        },
-        "results": {
-          "results": [
-            {
-              "error": "Fixture with key 'FixtureThatDoesNotExist' does not exist",
-              "cells": [],
-              "id": "1",
-              "spec": "general5",
-              "position": "setup",
-              "status": "invalid",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "FixtureThatDoesNotExist:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 1
-          }
-        },
-        "time": "2015-05-07T21:03:14.8876278-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "paragraph1": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-        "spec": "paragraph1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "operand",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-        "spec": "paragraph1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-        "spec": "paragraph1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "50",
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-        "spec": "paragraph1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "starting",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-        "spec": "paragraph1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-        "spec": "paragraph1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-        "spec": "paragraph1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "540",
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-        "spec": "paragraph1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-        "spec": "paragraph1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-        "spec": "paragraph1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-        "spec": "paragraph1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-        "spec": "paragraph1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-        "spec": "paragraph1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-        "spec": "paragraph1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-        "spec": "paragraph1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "80",
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-        "spec": "paragraph1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-        "spec": "paragraph1",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-        "spec": "paragraph1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-        "spec": "paragraph1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<.ctor>b__3(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-        "cells": [],
-        "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-        "spec": "paragraph1",
-        "position": "3",
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-        "spec": "paragraph1",
-        "position": "4",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "paragraph1",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "2b861479-041d-44b7-8ff8-0193c63265f5"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-              "spec": "paragraph1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "operand",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-              "spec": "paragraph1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-              "spec": "paragraph1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "50",
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "40b3d1b1-2514-4d0a-9d98-c4fcf5e3e553",
-              "spec": "paragraph1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "starting",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-              "spec": "paragraph1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-              "spec": "paragraph1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-              "spec": "paragraph1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "540",
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "8ac73aa5-c13c-477a-8d1e-1b9697207bca",
-              "spec": "paragraph1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-              "spec": "paragraph1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-              "spec": "paragraph1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-              "spec": "paragraph1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "8bff2f7d-a837-470a-85b7-cd6fd2417eec",
-              "spec": "paragraph1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-              "spec": "paragraph1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-              "spec": "paragraph1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-              "spec": "paragraph1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "80",
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "b40eaa29-4e6a-426d-a33c-57c05c500684",
-              "spec": "paragraph1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-              "spec": "paragraph1",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-              "spec": "paragraph1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-              "spec": "paragraph1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<.ctor>b__3(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-              "cells": [],
-              "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-              "spec": "paragraph1",
-              "position": "3",
-              "status": "error",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "fd043fcf-6a98-4544-8401-214079e3b9b9",
-              "spec": "paragraph1",
-              "position": "4",
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Composite:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Composite:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 50\r\nthe number is 54\r\nthe number is 540\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 5\r\nthe number is 20\r\n</pre>",
-              "title": "Debug Output"
-            },
-            {
-              "html": "<ul class=\"list-group\"><li class=\"list-group-item\">5</li><li class=\"list-group-item\">50</li><li class=\"list-group-item\">54</li><li class=\"list-group-item\">540</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">3</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">20</li></ul>",
-              "title": "Some Numbers"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 3,
-            "errors": 1,
-            "invalids": 2
-          }
-        },
-        "time": "2015-05-07T21:03:14.899629-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "paragraph2": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-        "spec": "paragraph2",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-        "spec": "paragraph2",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-        "spec": "paragraph2",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-        "spec": "paragraph2",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-        "spec": "paragraph2",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-        "spec": "paragraph2",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-        "spec": "paragraph2",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "80",
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-        "spec": "paragraph2",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-        "spec": "paragraph2",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-        "spec": "paragraph2",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-        "spec": "paragraph2",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "70",
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-        "spec": "paragraph2",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-        "spec": "paragraph2",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-        "spec": "paragraph2",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-        "spec": "paragraph2",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-        "spec": "paragraph2",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-        "spec": "paragraph2",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-        "spec": "paragraph2",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-        "spec": "paragraph2",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "80",
-            "error": null,
-            "cell": "expected",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-        "spec": "paragraph2",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "paragraph2",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "c5d682b1-d360-40ac-a144-f7d4d967b06c"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-              "spec": "paragraph2",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-              "spec": "paragraph2",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-              "spec": "paragraph2",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "0f882d95-647e-46cd-b99d-636fcf210edd",
-              "spec": "paragraph2",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-              "spec": "paragraph2",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-              "spec": "paragraph2",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-              "spec": "paragraph2",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "80",
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "f58f31fa-6764-451f-b9b6-eede53083eec",
-              "spec": "paragraph2",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-              "spec": "paragraph2",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-              "spec": "paragraph2",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-              "spec": "paragraph2",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "70",
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "370d8a5c-74e5-46ff-a58d-a64c4d08d43a",
-              "spec": "paragraph2",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-              "spec": "paragraph2",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-              "spec": "paragraph2",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-              "spec": "paragraph2",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "e67e1e17-913f-4dc3-8504-5be9a7b6786f",
-              "spec": "paragraph2",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-              "spec": "paragraph2",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-              "spec": "paragraph2",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-              "spec": "paragraph2",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "80",
-                  "error": null,
-                  "cell": "expected",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "9366ba37-db5f-48e4-9c23-bb947d5faf0b",
-              "spec": "paragraph2",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Composite:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndMultiplyThrow:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AddAndCheck:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Composite:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 7\r\nthe number is 70\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\n</pre>",
-              "title": "Debug Output"
-            },
-            {
-              "html": "<ul class=\"list-group\"><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">3</li><li class=\"list-group-item\">7</li><li class=\"list-group-item\">70</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li></ul>",
-              "title": "Some Numbers"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 3,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.9046295-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "sentence1": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "f97154a1-44c6-4b86-bb80-62b167a0e5ec",
-        "spec": "sentence1",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "10",
-            "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "bbcc9094-a4bf-4810-b71c-441c568942b2",
-        "spec": "sentence1",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "sentence1",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "4acf2909-0b83-4210-baeb-f62547cf9e75"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "f97154a1-44c6-4b86-bb80-62b167a0e5ec",
-              "spec": "sentence1",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "10",
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "bbcc9094-a4bf-4810-b71c-441c568942b2",
-              "spec": "sentence1",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Math:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Math:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 1,
-            "wrongs": 1,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.9106301-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "sentence2": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "1",
-        "spec": "sentence2",
-        "position": null,
-        "status": "success",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "2",
-        "spec": "sentence2",
-        "position": null,
-        "status": "failed",
-        "type": "step-result"
-      },
-      {
-        "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.<.ctor>b__2() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Fixture.FactExpression.<>c__DisplayClass28.<VerifiedBy>b__27(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 295\r\n   at StoryTeller.Grammars.FactGrammar.PerformTest(StepValues values, ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 36\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 63\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
-        "cells": [],
-        "id": "3",
-        "spec": "sentence2",
-        "position": null,
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "id": "sentence2",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "2f11dd95-374a-4c4e-a02c-ba419e69c46c"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "1",
-              "spec": "sentence2",
-              "position": null,
-              "status": "success",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "2",
-              "spec": "sentence2",
-              "position": null,
-              "status": "failed",
-              "type": "step-result"
-            },
-            {
-              "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.<.ctor>b__2() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Fixture.FactExpression.<>c__DisplayClass28.<VerifiedBy>b__27(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 295\r\n   at StoryTeller.Grammars.FactGrammar.PerformTest(StepValues values, ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 36\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 63\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
-              "cells": [],
-              "id": "3",
-              "spec": "sentence2",
-              "position": null,
-              "status": "error",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sentence:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThisFactIsTrue",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThisFactIsFalse",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThisFactThrowsException",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sentence:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 1,
-            "wrongs": 1,
-            "errors": 1,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.9226313-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "sentence3": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "0396c296-639d-4f5a-abd9-9b95ebd4f2fd",
-        "spec": "sentence3",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "17",
-            "error": null,
-            "cell": "returnValue",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "f437a7b5-da0e-4dfb-aca6-fc4f5d605377",
-        "spec": "sentence3",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "sentence3",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "5f50ab93-912f-40d0-83c4-2c8bbf587a30"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "0396c296-639d-4f5a-abd9-9b95ebd4f2fd",
-              "spec": "sentence3",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "17",
-                  "error": null,
-                  "cell": "returnValue",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "f437a7b5-da0e-4dfb-aca6-fc4f5d605377",
-              "spec": "sentence3",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "CurriedMath:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Adding",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "CurriedMath:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 1,
-            "wrongs": 1,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.9276318-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "sentence4": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "number",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "1",
-        "spec": "sentence4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5a1c941c-eabc-46b0-88aa-f2b4c1205093",
-        "spec": "sentence4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "61fdca90-642e-4147-a5b9-a18138a525cd",
-        "spec": "sentence4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "e6118d55-1cf9-4523-a98f-471e387ac582",
-        "spec": "sentence4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "number",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "2",
-        "spec": "sentence4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": "4",
-            "error": null,
-            "cell": "sum",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "8f49f693-375b-42f1-ba1b-db3c681a964e",
-        "spec": "sentence4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "3",
-        "spec": "sentence4",
-        "position": null,
-        "status": "success",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "4",
-        "spec": "sentence4",
-        "position": null,
-        "status": "failed",
-        "type": "step-result"
-      },
-      {
-        "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> StoryTeller.StorytellerAssertionException: No go!\r\n   at StoryTeller.StoryTellerAssert.Fail(String message) in z:\\code\\Storyteller\\src\\StoryTeller\\StoryTellerAssert.cs:line 17\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.ThisLineAlwaysThrowsExceptions() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 128\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
-        "cells": [],
-        "id": "5",
-        "spec": "sentence4",
-        "position": null,
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "id": "sentence4",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "6536480b-d245-4e96-8759-c80490630ba7"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "number",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "1",
-              "spec": "sentence4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5a1c941c-eabc-46b0-88aa-f2b4c1205093",
-              "spec": "sentence4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "61fdca90-642e-4147-a5b9-a18138a525cd",
-              "spec": "sentence4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "e6118d55-1cf9-4523-a98f-471e387ac582",
-              "spec": "sentence4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "number",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "2",
-              "spec": "sentence4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "4",
-                  "error": null,
-                  "cell": "sum",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "8f49f693-375b-42f1-ba1b-db3c681a964e",
-              "spec": "sentence4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "3",
-              "spec": "sentence4",
-              "position": null,
-              "status": "success",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "4",
-              "spec": "sentence4",
-              "position": null,
-              "status": "failed",
-              "type": "step-result"
-            },
-            {
-              "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> StoryTeller.StorytellerAssertionException: No go!\r\n   at StoryTeller.StoryTellerAssert.Fail(String message) in z:\\code\\Storyteller\\src\\StoryTeller\\StoryTellerAssert.cs:line 17\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.ThisLineAlwaysThrowsExceptions() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 128\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
-              "cells": [],
-              "id": "5",
-              "spec": "sentence4",
-              "position": null,
-              "status": "error",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sentence:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "StartWithTheNumber",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "StartWithTheNumber",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "MultiplyThenAdd",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Subtract",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheValueShouldBe",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheSumOf",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThisLineIsAlwaysTrue",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThisLineIsAlwaysFalse",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "ThisLineAlwaysThrowsExceptions",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sentence:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 19\r\nthe number is 17\r\n</pre>",
-              "title": "Debug Output"
-            },
-            {
-              "html": "<ul class=\"list-group\"><li class=\"list-group-item\">5</li><li class=\"list-group-item\">19</li><li class=\"list-group-item\">17</li></ul>",
-              "title": "Some Numbers"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 2,
-            "errors": 1,
-            "invalids": 1
-          }
-        },
-        "time": "2015-05-07T21:03:14.9376328-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "set1": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663",
-        "spec": "set1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663",
-        "spec": "set1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663",
-        "spec": "set1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb",
-        "spec": "set1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb",
-        "spec": "set1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb",
-        "spec": "set1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3",
-        "spec": "set1",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3",
-        "spec": "set1",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3",
-        "spec": "set1",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "spec": "set1",
-        "matches": [
-          "2",
-          "3",
-          "4"
-        ],
-        "missing": [],
-        "extras": [],
-        "wrongOrdered": [],
-        "id": "1",
-        "type": "set-verification-result"
-      },
-      {
-        "spec": "set1",
-        "matches": [],
-        "missing": [],
-        "extras": [],
-        "wrongOrdered": [
-          {
-            "actual": 2,
-            "id": "6"
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "f71dc601-a089-4bcb-8fbd-73f2a969b2e9",
+            "spec": "embeds",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
           },
           {
-            "actual": 3,
-            "id": "7"
+            "error": null,
+            "cells": [],
+            "id": "6c6da469-8837-4c1b-ad0a-395608cfa1c5",
+            "spec": "embeds",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
           },
           {
-            "actual": 1,
-            "id": "8"
-          }
-        ],
-        "id": "5",
-        "type": "set-verification-result"
-      },
-      {
-        "spec": "set1",
-        "matches": [
-          "7d756572-e332-47a8-8d61-f27d617297b9",
-          "e45a3d89-0485-45e6-b561-d93ae26809c5"
-        ],
-        "missing": [],
-        "extras": [
-          {
-            "Amount": 300.3,
-            "Date": "2015-05-09T00:00:00-05:00",
-            "Name": "Hammer"
-          }
-        ],
-        "wrongOrdered": [],
-        "id": "9",
-        "type": "set-verification-result"
-      },
-      {
-        "spec": "set1",
-        "matches": [
-          "c144b685-cfd8-477c-86ea-c7fca8bff663",
-          "9066f4a6-2f85-41b3-9571-47a55b615886",
-          "dc1c9193-1dbe-4012-bc87-c23dc60a5ee1"
-        ],
-        "missing": [
-          "11"
-        ],
-        "extras": [],
-        "wrongOrdered": [],
-        "id": "10",
-        "type": "set-verification-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "Date",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "12",
-        "spec": "set1",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "set1",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "86d87736-3952-4b86-8dab-79ae2a401e6e"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663",
-              "spec": "set1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663",
-              "spec": "set1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "ab0f1f4a-e98c-4e5b-a278-4f9493880663",
-              "spec": "set1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb",
-              "spec": "set1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb",
-              "spec": "set1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "72f3995f-2dcc-4488-b5f7-1f18dcf899eb",
-              "spec": "set1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3",
-              "spec": "set1",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3",
-              "spec": "set1",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5dd594f2-cf24-47cc-92a7-ae2f4af816c3",
-              "spec": "set1",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "spec": "set1",
-              "matches": [
-                "2",
-                "3",
-                "4"
-              ],
-              "missing": [],
-              "extras": [],
-              "wrongOrdered": [],
-              "id": "1",
-              "type": "set-verification-result"
-            },
-            {
-              "spec": "set1",
-              "matches": [],
-              "missing": [],
-              "extras": [],
-              "wrongOrdered": [
-                {
-                  "actual": 2,
-                  "id": "6"
-                },
-                {
-                  "actual": 3,
-                  "id": "7"
-                },
-                {
-                  "actual": 1,
-                  "id": "8"
-                }
-              ],
-              "id": "5",
-              "type": "set-verification-result"
-            },
-            {
-              "spec": "set1",
-              "matches": [
-                "7d756572-e332-47a8-8d61-f27d617297b9",
-                "e45a3d89-0485-45e6-b561-d93ae26809c5"
-              ],
-              "missing": [],
-              "extras": [
-                {
-                  "Amount": 300.3,
-                  "Date": "2015-05-09T00:00:00-05:00",
-                  "Name": "Hammer"
-                }
-              ],
-              "wrongOrdered": [],
-              "id": "9",
-              "type": "set-verification-result"
-            },
-            {
-              "spec": "set1",
-              "matches": [
-                "c144b685-cfd8-477c-86ea-c7fca8bff663",
-                "9066f4a6-2f85-41b3-9571-47a55b615886",
-                "dc1c9193-1dbe-4012-bc87-c23dc60a5ee1"
-              ],
-              "missing": [
-                "11"
-              ],
-              "extras": [],
-              "wrongOrdered": [],
-              "id": "10",
-              "type": "set-verification-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "Date",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "12",
-              "spec": "set1",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sets:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAreBefore",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sets:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 8,
-            "wrongs": 5,
-            "errors": 0,
-            "invalids": 1
-          }
-        },
-        "time": "2015-05-07T21:03:14.9616352-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "set2": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "33bb7e80-a0f6-42d2-b9f5-fcec611d3afb",
-        "spec": "set2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "fde79dfc-cd7c-42a2-a1bd-6e01aff3fe7f",
-        "spec": "set2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "2bf308fd-ab36-4aa5-aba5-e3b3906b8969",
-        "spec": "set2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "137e2b05-7561-4443-be6a-d68906a642ff",
-        "spec": "set2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "955d37e0-7dfe-466b-ae5e-12ca0f7ebf78",
-        "spec": "set2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "spec": "set2",
-        "matches": [
-          "6f5fa337-f366-4fa9-81b8-b8fcabe3ff6d",
-          "fac5cc62-45e8-476d-ad7a-28ceb7fd7a10",
-          "47ef6156-141c-49e3-91b7-8d618c334f67",
-          "b6648653-96bd-407b-b52e-f8bbe7f93ecf",
-          "12732d33-01de-453d-a607-3d6a33de7f31"
-        ],
-        "missing": [],
-        "extras": [],
-        "wrongOrdered": [],
-        "id": "583b0a46-bd86-4a21-824a-965d6fa9523f",
-        "type": "set-verification-result"
-      },
-      {
-        "spec": "set2",
-        "matches": [
-          "de015315-dbbf-4c60-b69f-65e7f8cb1ac9",
-          "481e7fc7-6da5-4f86-98c2-5e6895b2f52d",
-          "a1d6451d-515d-4732-9903-c5cc7c627a7b",
-          "08bd9fb0-b295-43b7-935c-584abe3c01c6",
-          "39da7d10-75a2-49b6-baa7-d7b946c693d1"
-        ],
-        "missing": [],
-        "extras": [],
-        "wrongOrdered": [],
-        "id": "ac95f99f-a7ed-4949-8e6d-a52a6d3f17b9",
-        "type": "set-verification-result"
-      },
-      {
-        "id": "set2",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "c677cdef-c976-4ffe-9945-9d65745231ad"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "33bb7e80-a0f6-42d2-b9f5-fcec611d3afb",
-              "spec": "set2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "fde79dfc-cd7c-42a2-a1bd-6e01aff3fe7f",
-              "spec": "set2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "2bf308fd-ab36-4aa5-aba5-e3b3906b8969",
-              "spec": "set2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "137e2b05-7561-4443-be6a-d68906a642ff",
-              "spec": "set2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "955d37e0-7dfe-466b-ae5e-12ca0f7ebf78",
-              "spec": "set2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "spec": "set2",
-              "matches": [
-                "6f5fa337-f366-4fa9-81b8-b8fcabe3ff6d",
-                "fac5cc62-45e8-476d-ad7a-28ceb7fd7a10",
-                "47ef6156-141c-49e3-91b7-8d618c334f67",
-                "b6648653-96bd-407b-b52e-f8bbe7f93ecf",
-                "12732d33-01de-453d-a607-3d6a33de7f31"
-              ],
-              "missing": [],
-              "extras": [],
-              "wrongOrdered": [],
-              "id": "583b0a46-bd86-4a21-824a-965d6fa9523f",
-              "type": "set-verification-result"
-            },
-            {
-              "spec": "set2",
-              "matches": [
-                "de015315-dbbf-4c60-b69f-65e7f8cb1ac9",
-                "481e7fc7-6da5-4f86-98c2-5e6895b2f52d",
-                "a1d6451d-515d-4732-9903-c5cc7c627a7b",
-                "08bd9fb0-b295-43b7-935c-584abe3c01c6",
-                "39da7d10-75a2-49b6-baa7-d7b946c693d1"
-              ],
-              "missing": [],
-              "extras": [],
-              "wrongOrdered": [],
-              "id": "ac95f99f-a7ed-4949-8e6d-a52a6d3f17b9",
-              "type": "set-verification-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sets:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIsBefore",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sets:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 10,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.969636-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "set3": [
-      {
-        "error": "System.AggregateException: One or more errors occurred. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<ThrowsErrorOnDataFetch>b__f() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 82\r\n   at StoryTeller.Fixture.<>c__DisplayClass21`1.<VerifySetOf>b__20(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 459\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3.<Fetch>b__0() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---> (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<ThrowsErrorOnDataFetch>b__f() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 82\r\n   at StoryTeller.Fixture.<>c__DisplayClass21`1.<VerifySetOf>b__20(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 459\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3.<Fetch>b__0() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()<---\r\n",
-        "cells": [],
-        "id": "1",
-        "spec": "set3",
-        "position": "before",
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "id": "set3",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "373a2557-eefe-4a79-9ca6-04235e826e71"
-        },
-        "results": {
-          "results": [
-            {
-              "error": "System.AggregateException: One or more errors occurred. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<ThrowsErrorOnDataFetch>b__f() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 82\r\n   at StoryTeller.Fixture.<>c__DisplayClass21`1.<VerifySetOf>b__20(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 459\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3.<Fetch>b__0() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---> (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<ThrowsErrorOnDataFetch>b__f() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 82\r\n   at StoryTeller.Fixture.<>c__DisplayClass21`1.<VerifySetOf>b__20(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 459\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3.<Fetch>b__0() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()<---\r\n",
-              "cells": [],
-              "id": "1",
-              "spec": "set3",
-              "position": "before",
-              "status": "error",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sets:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sets:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 1,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.9836374-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "set4": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e",
-        "spec": "set4",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e",
-        "spec": "set4",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e",
-        "spec": "set4",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "f10e8303-5900-45a0-9325-300b31c171d2",
-        "spec": "set4",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "f10e8303-5900-45a0-9325-300b31c171d2",
-        "spec": "set4",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "f10e8303-5900-45a0-9325-300b31c171d2",
-        "spec": "set4",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951",
-        "spec": "set4",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951",
-        "spec": "set4",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951",
-        "spec": "set4",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "Amount",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "0b7d9735-06e6-41ed-92fc-d0bb4ec1f864",
-        "spec": "set4",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "set4",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "de8bea94-0192-4d5c-9687-00018289d25c"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e",
-              "spec": "set4",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e",
-              "spec": "set4",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "17d200f3-9e52-4223-9acf-eddb5a108f5e",
-              "spec": "set4",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "f10e8303-5900-45a0-9325-300b31c171d2",
-              "spec": "set4",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "f10e8303-5900-45a0-9325-300b31c171d2",
-              "spec": "set4",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "f10e8303-5900-45a0-9325-300b31c171d2",
-              "spec": "set4",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951",
-              "spec": "set4",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951",
-              "spec": "set4",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "2ef72ed4-8943-4b78-adbc-cb0d5ba71951",
-              "spec": "set4",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "Amount",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "0b7d9735-06e6-41ed-92fc-d0bb4ec1f864",
-              "spec": "set4",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sets:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAreBefore",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "InvoiceDetailsAre:Row:4",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sets:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 1
-          }
-        },
-        "time": "2015-05-07T21:03:14.9906381-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "set5": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "c331e438-b5fb-40b4-9d2e-c0dd1a71d571",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "bacf4e5f-3198-4ebe-ab5b-197c7ba934cf",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "3d4f2f1c-86a5-4707-9bc2-4c684eff8e83",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "be0004fa-89bf-4817-8be2-de329719c14b",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "bcdafeed-bcfc-4acc-934a-7ca58d9666ae",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "3767032e-6139-45b8-a4fd-24fffb833fc2",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "ea8f0e63-1e4f-43b2-a7ab-7184a7345ed6",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "e619ac16-5e33-4e24-b6aa-a5477553d477",
-        "spec": "set5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "spec": "set5",
-        "matches": [
-          "ff23547b-ed57-403c-a421-f274ede39f49",
-          "ca349651-76a5-40e1-91e3-0f5113e721c6",
-          "fbcf8f86-ae7a-4d32-a76a-2bde929e8f0c",
-          "141157d1-291c-4fa5-94ad-37bc6f82ce82"
-        ],
-        "missing": [
-          "b4b144be-df60-4033-a39d-a990af9e638f"
-        ],
-        "extras": [
-          {
-            "expected": "Rand"
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "259f4dec-9ddb-498e-ae5d-07a5565f8c5f",
+            "spec": "embeds",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
           },
           {
-            "expected": "Mat"
-          }
-        ],
-        "wrongOrdered": [
-          {
-            "actual": 5,
-            "id": "fc7411c7-c14d-4c2a-9221-e429d3f1c5d3"
+            "error": null,
+            "cells": [
+              {
+                "actual": "10",
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "57bff1c9-7ad1-43c2-8bee-434c90c4fd29",
+            "spec": "embeds",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
           },
           {
-            "actual": 4,
-            "id": "7888ecd8-2c61-4d50-b97c-117f1009b896"
-          }
-        ],
-        "id": "4f091fff-8c47-4a91-90c4-19c01477dddb",
-        "type": "set-verification-result"
-      },
-      {
-        "id": "set5",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "31d100f3-d725-4471-a8ad-6d11b73b0819"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "c331e438-b5fb-40b4-9d2e-c0dd1a71d571",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "bacf4e5f-3198-4ebe-ab5b-197c7ba934cf",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "3d4f2f1c-86a5-4707-9bc2-4c684eff8e83",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "be0004fa-89bf-4817-8be2-de329719c14b",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "bcdafeed-bcfc-4acc-934a-7ca58d9666ae",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "3767032e-6139-45b8-a4fd-24fffb833fc2",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "ea8f0e63-1e4f-43b2-a7ab-7184a7345ed6",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "e619ac16-5e33-4e24-b6aa-a5477553d477",
-              "spec": "set5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "spec": "set5",
-              "matches": [
-                "ff23547b-ed57-403c-a421-f274ede39f49",
-                "ca349651-76a5-40e1-91e3-0f5113e721c6",
-                "fbcf8f86-ae7a-4d32-a76a-2bde929e8f0c",
-                "141157d1-291c-4fa5-94ad-37bc6f82ce82"
-              ],
-              "missing": [
-                "b4b144be-df60-4033-a39d-a990af9e638f"
-              ],
-              "extras": [
-                {
-                  "expected": "Rand"
-                },
-                {
-                  "expected": "Mat"
-                }
-              ],
-              "wrongOrdered": [
-                {
-                  "actual": 5,
-                  "id": "fc7411c7-c14d-4c2a-9221-e429d3f1c5d3"
-                },
-                {
-                  "actual": 4,
-                  "id": "7888ecd8-2c61-4d50-b97c-117f1009b896"
-                }
-              ],
-              "id": "4f091fff-8c47-4a91-90c4-19c01477dddb",
-              "type": "set-verification-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Sets:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIsBefore",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TheDataIs:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Rows",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Sets:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 4,
-            "wrongs": 5,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:14.9976388-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "table1": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
             "error": null,
-            "cell": "IsEven",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "cb1380f8-71ad-43ef-b217-8a0460b91389",
-        "spec": "table1",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "IsEven",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "f9164f40-0632-432d-b69f-bc1a27fec713",
-        "spec": "table1",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "table1",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "1440da89-abb5-4894-8989-808f5a3dd028"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "IsEven",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "cb1380f8-71ad-43ef-b217-8a0460b91389",
-              "spec": "table1",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "IsEven",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "f9164f40-0632-432d-b69f-bc1a27fec713",
-              "spec": "table1",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Table:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IsPositive:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "IsPositive:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Table:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:15.0046395-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "table2": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "FirstName",
-            "id": null,
-            "status": "ok"
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "returnValue",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "d802494b-26b0-4f14-9c85-5638118cef47",
+            "spec": "embeds",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
           },
           {
-            "actual": null,
-            "error": null,
-            "cell": "LastName",
-            "id": null,
-            "status": "ok"
+            "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 120\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
+            "cells": [],
+            "id": "c437e6dc-e589-4ed1-ad78-f8b88410f9a6",
+            "spec": "embeds",
+            "position": null,
+            "status": "error",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Embedded:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": null,
-            "error": null,
-            "cell": "FullName",
-            "id": null,
-            "status": "success"
+            "type": "Grammar",
+            "subject": "ThrowAnExceptionOnTheNextEmbed",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": null,
-            "error": null,
-            "cell": "LastNameFirst",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "eec1ad15-923f-4f61-bdcf-0e37e20d0678",
-        "spec": "table2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": null,
-            "cell": "FirstName",
-            "id": null,
-            "status": "ok"
+            "type": "Grammar",
+            "subject": "EmbeddedMath:Before",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": null,
-            "error": null,
-            "cell": "LastName",
-            "id": null,
-            "status": "ok"
+            "type": "Fixture",
+            "subject": "Math:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": "Hank Hill",
-            "error": null,
-            "cell": "FullName",
-            "id": null,
-            "status": "failed"
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": "Hill, Hank",
-            "error": null,
-            "cell": "LastNameFirst",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "c614cd66-acb8-4f9f-9bfc-18f1de28f051",
-        "spec": "table2",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "table2",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "9e3f0917-9b7d-4023-a510-3d8af9836553"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "FirstName",
-                  "id": null,
-                  "status": "ok"
-                },
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "LastName",
-                  "id": null,
-                  "status": "ok"
-                },
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "FullName",
-                  "id": null,
-                  "status": "success"
-                },
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "LastNameFirst",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "eec1ad15-923f-4f61-bdcf-0e37e20d0678",
-              "spec": "table2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "FirstName",
-                  "id": null,
-                  "status": "ok"
-                },
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "LastName",
-                  "id": null,
-                  "status": "ok"
-                },
-                {
-                  "actual": "Hank Hill",
-                  "error": null,
-                  "cell": "FullName",
-                  "id": null,
-                  "status": "failed"
-                },
-                {
-                  "actual": "Hill, Hank",
-                  "error": null,
-                  "cell": "LastNameFirst",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "c614cd66-acb8-4f9f-9bfc-18f1de28f051",
-              "spec": "table2",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Table:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": null,
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": null,
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Table:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 2,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:15.0126403-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "table3": [
-      {
-        "error": null,
-        "cells": [],
-        "id": "5d3fe8ef-f049-49ab-8e27-eb1c6cde3428",
-        "spec": "table3",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5731c818-262e-4d1b-9031-45bef4205bf7",
-        "spec": "table3",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "1b7959f4-a3a6-4202-9f4c-3ced1a9a629d",
-        "spec": "table3",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "1764709c-2e76-4c58-82d7-744689115e79",
-        "spec": "table3",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "table3",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "3182de89-c04b-4a19-9666-6f0a00c78747"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [],
-              "id": "5d3fe8ef-f049-49ab-8e27-eb1c6cde3428",
-              "spec": "table3",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5731c818-262e-4d1b-9031-45bef4205bf7",
-              "spec": "table3",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "1b7959f4-a3a6-4202-9f4c-3ced1a9a629d",
-              "spec": "table3",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "1764709c-2e76-4c58-82d7-744689115e79",
-              "spec": "table3",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Table:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TableWithLotsOfOptions:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TableWithLotsOfOptions:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TableWithLotsOfOptions:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "TableWithLotsOfOptions:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Table:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 0,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:15.0166407-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "table4": [
-      {
-        "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<BeforeThrowsError>b__5() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 40\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass2.<Before>b__1(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 65\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-        "cells": [],
-        "id": "before",
-        "spec": "table4",
-        "position": "before",
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "837b6852-7d47-4e6a-99c4-f2c2b1022b1e",
-        "spec": "table4",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "fd5b6e7c-391a-4157-8c48-b95575c25980",
-        "spec": "table4",
-        "position": "0",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<AfterThrowsError>b__b() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 47\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass5.<After>b__4(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 76\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-        "cells": [],
-        "id": "after",
-        "spec": "table4",
-        "position": "after",
-        "status": "error",
-        "type": "step-result"
-      },
-      {
-        "id": "table4",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "a0fff81a-f408-44a9-accf-432a9cfaca5d"
-        },
-        "results": {
-          "results": [
-            {
-              "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<BeforeThrowsError>b__5() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 40\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass2.<Before>b__1(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 65\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-              "cells": [],
-              "id": "before",
-              "spec": "table4",
-              "position": "before",
-              "status": "error",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "837b6852-7d47-4e6a-99c4-f2c2b1022b1e",
-              "spec": "table4",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "fd5b6e7c-391a-4157-8c48-b95575c25980",
-              "spec": "table4",
-              "position": "0",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<AfterThrowsError>b__b() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 47\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass5.<After>b__4(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 76\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
-              "cells": [],
-              "id": "after",
-              "spec": "table4",
-              "position": "after",
-              "status": "error",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Table:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "BeforeThrowsErrorBefore",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "BeforeThrowsError:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AfterThrowsError:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "AfterThrowsError:After",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Table:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 0,
-            "wrongs": 0,
-            "errors": 2,
-            "invalids": 0
-          }
-        },
-        "time": "2015-05-07T21:03:15.0266417-05:00",
-        "type": "spec-execution-completed"
-      }
-    ],
-    "table5": [
-      {
-        "error": null,
-        "cells": [
-          {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "x",
-            "id": null,
-            "status": "invalid"
+            "type": "Fixture",
+            "subject": "Math:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "y",
-            "id": null,
-            "status": "invalid"
+            "type": "Grammar",
+            "subject": "DoNotThrowAnExceptionOnTheNextEmbed",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "sum",
-            "id": null,
-            "status": "invalid"
+            "type": "Grammar",
+            "subject": "EmbeddedMath:Before",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Math:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Throw",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Math:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Embedded:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           }
         ],
-        "id": "1",
-        "spec": "table5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+        "duration": 0,
+        "logging": [
           {
-            "actual": null,
+            "html": "<pre class=\"debug-output\">EmbeddedFixture.Setup sent this debug message\r\n</pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 1,
+          "errors": 2,
+          "invalids": 1
+        }
+      },
+      "time": "2015-05-08T09:48:13.8694359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "general1": {
+      "id": "general1",
+      "data": {
+        "title": "Check properties",
+        "path": "General/Check properties",
+        "max-retries": 3,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "general1"
+      },
+      "results": {
+        "results": [
+          {
             "error": null,
-            "cell": "sum",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "6a0685cd-b4d0-488a-900f-570fba985459",
-        "spec": "table5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+            "cells": [],
+            "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55",
+            "spec": "general1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
           {
-            "actual": "4",
             "error": null,
-            "cell": "sum",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "3b2bd8e0-def4-412c-97b7-2a51e3adc502",
-        "spec": "table5",
-        "position": null,
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "4",
-        "spec": "table5",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "4",
-        "spec": "table5",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+            "cells": [],
+            "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55",
+            "spec": "general1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
           {
-            "actual": null,
             "error": null,
-            "cell": "product",
-            "id": null,
-            "status": "success"
-          }
-        ],
-        "id": "4",
-        "spec": "table5",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5",
-        "spec": "table5",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "5",
-        "spec": "table5",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+            "cells": [],
+            "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55",
+            "spec": "general1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
           {
-            "actual": "Infinity",
             "error": null,
-            "cell": "product",
-            "id": null,
-            "status": "failed"
-          }
-        ],
-        "id": "5",
-        "spec": "table5",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+            "cells": [],
+            "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55",
+            "spec": "general1",
+            "position": "4",
+            "status": "ok",
+            "type": "step-result"
+          },
           {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "x",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196",
-        "spec": "table5",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196",
-        "spec": "table5",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+            "error": null,
+            "cells": [],
+            "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55",
+            "spec": "general1",
+            "position": "5",
+            "status": "ok",
+            "type": "step-result"
+          },
           {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "product",
-            "id": null,
-            "status": "invalid"
-          }
-        ],
-        "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196",
-        "spec": "table5",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a",
-        "spec": "table5",
-        "position": "1",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [],
-        "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a",
-        "spec": "table5",
-        "position": "2",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "error": null,
-        "cells": [
+            "error": null,
+            "cells": [],
+            "id": "7b3f86d4-09cb-4a43-a44f-36d061962a55",
+            "spec": "general1",
+            "position": "6",
+            "status": "ok",
+            "type": "step-result"
+          },
           {
-            "actual": null,
-            "error": "Invalid Format",
-            "cell": "product",
-            "id": null,
-            "status": "invalid"
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "Address1",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "a1c6edd9-ad17-4ffb-bf2c-16af1998a9ae",
+            "spec": "general1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "Address2",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "a1c6edd9-ad17-4ffb-bf2c-16af1998a9ae",
+            "spec": "general1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "City",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "a1c6edd9-ad17-4ffb-bf2c-16af1998a9ae",
+            "spec": "general1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "2035 Ozark",
+                "error": null,
+                "cell": "Address1",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "41cde134-34c3-4043-8574-d6b385478dd0",
+            "spec": "general1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "Apt 3",
+                "error": null,
+                "cell": "Address2",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "41cde134-34c3-4043-8574-d6b385478dd0",
+            "spec": "general1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "Carthage",
+                "error": null,
+                "cell": "City",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "41cde134-34c3-4043-8574-d6b385478dd0",
+            "spec": "general1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
           }
         ],
-        "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a",
-        "spec": "table5",
-        "position": "3",
-        "status": "ok",
-        "type": "step-result"
-      },
-      {
-        "id": "table5",
-        "data": {
-          "title": null,
-          "path": null,
-          "max-retries": 0,
-          "lifecycle": "Acceptance",
-          "mode": "full",
-          "tags": [],
-          "steps": [],
-          "id": "e35312ea-6832-49a5-b357-b711af49c491"
-        },
-        "results": {
-          "results": [
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "x",
-                  "id": null,
-                  "status": "invalid"
-                },
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "y",
-                  "id": null,
-                  "status": "invalid"
-                },
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "sum",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "1",
-              "spec": "table5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "sum",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "6a0685cd-b4d0-488a-900f-570fba985459",
-              "spec": "table5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "4",
-                  "error": null,
-                  "cell": "sum",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "3b2bd8e0-def4-412c-97b7-2a51e3adc502",
-              "spec": "table5",
-              "position": null,
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "4",
-              "spec": "table5",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "4",
-              "spec": "table5",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": null,
-                  "cell": "product",
-                  "id": null,
-                  "status": "success"
-                }
-              ],
-              "id": "4",
-              "spec": "table5",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5",
-              "spec": "table5",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "5",
-              "spec": "table5",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": "Infinity",
-                  "error": null,
-                  "cell": "product",
-                  "id": null,
-                  "status": "failed"
-                }
-              ],
-              "id": "5",
-              "spec": "table5",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "x",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196",
-              "spec": "table5",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196",
-              "spec": "table5",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "product",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "bb7d4201-d0a1-453d-ad7d-7e3b1626e196",
-              "spec": "table5",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a",
-              "spec": "table5",
-              "position": "1",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [],
-              "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a",
-              "spec": "table5",
-              "position": "2",
-              "status": "ok",
-              "type": "step-result"
-            },
-            {
-              "error": null,
-              "cells": [
-                {
-                  "actual": null,
-                  "error": "Invalid Format",
-                  "cell": "product",
-                  "id": null,
-                  "status": "invalid"
-                }
-              ],
-              "id": "3125dbbf-f8ad-4eef-91da-556c7ee2280a",
-              "spec": "table5",
-              "position": "3",
-              "status": "ok",
-              "type": "step-result"
-            }
-          ],
-          "performance": [
-            {
-              "type": "Fixture",
-              "subject": "Table:SetUp",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Sum:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Sum:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Sum:Row",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:0",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:1",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:2",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Grammar",
-              "subject": "Divide:Row:3",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            },
-            {
-              "type": "Fixture",
-              "subject": "Table:TearDown",
-              "start": 0,
-              "end": 0,
-              "duration": 0
-            }
-          ],
-          "duration": 0,
-          "logging": [
-            {
-              "html": "<pre class=\"debug-output\"></pre>",
-              "title": "Debug Output"
-            }
-          ],
-          "attempts": 1,
-          "aborted": false,
-          "time": "9:03 PM",
-          "counts": {
-            "rights": 2,
-            "wrongs": 2,
-            "errors": 0,
-            "invalids": 6
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "CheckObject:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:5",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IfTheAddressIs:6",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheAddressShouldBe:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheAddressShouldBe:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheAddressShouldBe:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheAddressShouldBe:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheAddressShouldBe:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheAddressShouldBe:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "CheckObject:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
           }
-        },
-        "time": "2015-05-07T21:03:15.0346425-05:00",
-        "type": "spec-execution-completed"
-      }
-    ]
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 3,
+          "wrongs": 3,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.8804359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "SometimesSlow": {
+      "id": "SometimesSlow",
+      "data": {
+        "title": "Occasionally Times Out",
+        "path": "General/Occasionally Times Out",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "SometimesSlow"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "9078db41-d98a-4d4e-b3c0-3c87e6a2ba97",
+            "spec": "SometimesSlow",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "SometimesSlow:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Slow",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "SometimesSlow:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.8844359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "general2": {
+      "id": "general2",
+      "data": {
+        "title": "Selection List Values",
+        "path": "General/Selection List Values",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "general2"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "fullname",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "b81ab6ee-6ffe-4932-ba77-29f1a8979e61",
+            "spec": "general2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "fullname",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "427427d7-44c9-4724-9f17-df93857e2173",
+            "spec": "general2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "Harold Miller",
+                "error": null,
+                "cell": "fullname",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "8cb0033a-cf25-4617-95a2-cf56ee6f655d",
+            "spec": "general2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "First",
+                "id": null,
+                "status": "ok"
+              },
+              {
+                "actual": null,
+                "error": null,
+                "cell": "Last",
+                "id": null,
+                "status": "ok"
+              },
+              {
+                "actual": null,
+                "error": null,
+                "cell": "Fullname",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "f1f876d0-4a14-4b41-a6ae-dfbef199df83",
+            "spec": "general2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "selectedOption",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "5203d25a-8bcf-4d31-a22b-822221fd2357",
+            "spec": "general2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "SelectionList:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheNameIs",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "FirstAndLastName:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "FirstAndLastName:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": null,
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheEnumOptionIs",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "SelectionList:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 4,
+          "wrongs": 1,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.8894359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "general3": {
+      "id": "general3",
+      "data": {
+        "title": "Services",
+        "path": "General/Services",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "general3"
+      },
+      "results": {
+        "results": [
+          {
+            "error": "Fixture with key 'Service' does not exist",
+            "cells": [],
+            "id": "7351612a-6e43-44ca-99ca-a2c8bb83f0cd",
+            "spec": "general3",
+            "position": "setup",
+            "status": "invalid",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Service:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 1
+        }
+      },
+      "time": "2015-05-08T09:48:13.8954359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "runtime-converter": {
+      "id": "runtime-converter",
+      "data": {
+        "title": "System Defined Lists and Runtime Converters",
+        "path": "General/System Defined Lists and Runtime Converters",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "runtime-converter"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "Position",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "486b1a30-bb4f-408f-b555-7ea4cf65215f",
+            "spec": "runtime-converter",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Player:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "PositionIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Player:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 1,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.8994359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "general4": {
+      "id": "general4",
+      "data": {
+        "title": "Test with Bad Grammar Name",
+        "path": "General/Test with Bad Grammar Name",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "general4"
+      },
+      "results": {
+        "results": [
+          {
+            "error": "Grammar 'BadGrammar1' is not implemented",
+            "cells": [],
+            "id": "a4935a76-aa83-4ce6-a15c-8b70c7ccb83b",
+            "spec": "general4",
+            "position": null,
+            "status": "error",
+            "type": "step-result"
+          },
+          {
+            "error": "Grammar 'BadGrammar2' is not implemented",
+            "cells": [],
+            "id": "f15a002e-70f5-4a08-bd46-66c4e416a72d",
+            "spec": "general4",
+            "position": null,
+            "status": "error",
+            "type": "step-result"
+          },
+          {
+            "error": "Grammar 'BadGrammar3' is not implemented",
+            "cells": [],
+            "id": "1123f952-3d01-469b-bd5c-e6dc1c6091dd",
+            "spec": "general4",
+            "position": null,
+            "status": "error",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Math:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Missing",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Missing",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Missing",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Math:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 3,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9024359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "general5": {
+      "id": "general5",
+      "data": {
+        "title": "Test with Missing Fixture Name",
+        "path": "General/Test with Missing Fixture Name",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "general5"
+      },
+      "results": {
+        "results": [
+          {
+            "error": "Fixture with key 'FixtureThatDoesNotExist' does not exist",
+            "cells": [],
+            "id": "1",
+            "spec": "general5",
+            "position": "setup",
+            "status": "invalid",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "FixtureThatDoesNotExist:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 1
+        }
+      },
+      "time": "2015-05-08T09:48:13.9054359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "paragraph1": {
+      "id": "paragraph1",
+      "data": {
+        "title": "Composite with Errors",
+        "path": "Paragraphs/Composite with Errors",
+        "max-retries": 0,
+        "lifecycle": "Regression",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "paragraph1"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "5fddf50b-8480-4a35-b39d-20e4d707a08b",
+            "spec": "paragraph1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "operand",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "5fddf50b-8480-4a35-b39d-20e4d707a08b",
+            "spec": "paragraph1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "5fddf50b-8480-4a35-b39d-20e4d707a08b",
+            "spec": "paragraph1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "50",
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "5fddf50b-8480-4a35-b39d-20e4d707a08b",
+            "spec": "paragraph1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "starting",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "59d66b5a-fcb8-44f8-a9d6-2c9ce07dac31",
+            "spec": "paragraph1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "59d66b5a-fcb8-44f8-a9d6-2c9ce07dac31",
+            "spec": "paragraph1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "59d66b5a-fcb8-44f8-a9d6-2c9ce07dac31",
+            "spec": "paragraph1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "540",
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "59d66b5a-fcb8-44f8-a9d6-2c9ce07dac31",
+            "spec": "paragraph1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a184ad4c-e010-49df-a901-a1105e4cef53",
+            "spec": "paragraph1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a184ad4c-e010-49df-a901-a1105e4cef53",
+            "spec": "paragraph1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a184ad4c-e010-49df-a901-a1105e4cef53",
+            "spec": "paragraph1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "a184ad4c-e010-49df-a901-a1105e4cef53",
+            "spec": "paragraph1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "621d03b8-7b44-4d33-9d39-05d385fb59f3",
+            "spec": "paragraph1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "621d03b8-7b44-4d33-9d39-05d385fb59f3",
+            "spec": "paragraph1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "621d03b8-7b44-4d33-9d39-05d385fb59f3",
+            "spec": "paragraph1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "80",
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "621d03b8-7b44-4d33-9d39-05d385fb59f3",
+            "spec": "paragraph1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "88342d38-f2dd-4efa-babc-7ef11f20d4ce",
+            "spec": "paragraph1",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "88342d38-f2dd-4efa-babc-7ef11f20d4ce",
+            "spec": "paragraph1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "88342d38-f2dd-4efa-babc-7ef11f20d4ce",
+            "spec": "paragraph1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<.ctor>b__3(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
+            "cells": [],
+            "id": "88342d38-f2dd-4efa-babc-7ef11f20d4ce",
+            "spec": "paragraph1",
+            "position": "3",
+            "status": "error",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "88342d38-f2dd-4efa-babc-7ef11f20d4ce",
+            "spec": "paragraph1",
+            "position": "4",
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Composite:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Composite:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 50\r\nthe number is 54\r\nthe number is 540\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 5\r\nthe number is 20\r\n</pre>",
+            "title": "Debug Output"
+          },
+          {
+            "html": "<ul class=\"list-group\"><li class=\"list-group-item\">5</li><li class=\"list-group-item\">50</li><li class=\"list-group-item\">54</li><li class=\"list-group-item\">540</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">3</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">20</li></ul>",
+            "title": "Some Numbers"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 3,
+          "errors": 1,
+          "invalids": 2
+        }
+      },
+      "time": "2015-05-08T09:48:13.9124359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "paragraph2": {
+      "id": "paragraph2",
+      "data": {
+        "title": "Simple Composite",
+        "path": "Paragraphs/Simple Composite",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "paragraph2"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "b4157bbd-e1b6-48aa-8485-6159573733e4",
+            "spec": "paragraph2",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "b4157bbd-e1b6-48aa-8485-6159573733e4",
+            "spec": "paragraph2",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "b4157bbd-e1b6-48aa-8485-6159573733e4",
+            "spec": "paragraph2",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "b4157bbd-e1b6-48aa-8485-6159573733e4",
+            "spec": "paragraph2",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "6816c3a7-43f6-45ee-9c4a-98b4b6ad56dd",
+            "spec": "paragraph2",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "6816c3a7-43f6-45ee-9c4a-98b4b6ad56dd",
+            "spec": "paragraph2",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "6816c3a7-43f6-45ee-9c4a-98b4b6ad56dd",
+            "spec": "paragraph2",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "80",
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "6816c3a7-43f6-45ee-9c4a-98b4b6ad56dd",
+            "spec": "paragraph2",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8e082506-024b-4d16-ac2f-a257d1ef4a74",
+            "spec": "paragraph2",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8e082506-024b-4d16-ac2f-a257d1ef4a74",
+            "spec": "paragraph2",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8e082506-024b-4d16-ac2f-a257d1ef4a74",
+            "spec": "paragraph2",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "70",
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "8e082506-024b-4d16-ac2f-a257d1ef4a74",
+            "spec": "paragraph2",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a696709c-29cf-4aa7-b999-018ab2966c55",
+            "spec": "paragraph2",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a696709c-29cf-4aa7-b999-018ab2966c55",
+            "spec": "paragraph2",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a696709c-29cf-4aa7-b999-018ab2966c55",
+            "spec": "paragraph2",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "a696709c-29cf-4aa7-b999-018ab2966c55",
+            "spec": "paragraph2",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "b072ea80-f5c7-4579-9dc0-a3986de7c79d",
+            "spec": "paragraph2",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "b072ea80-f5c7-4579-9dc0-a3986de7c79d",
+            "spec": "paragraph2",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "b072ea80-f5c7-4579-9dc0-a3986de7c79d",
+            "spec": "paragraph2",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "80",
+                "error": null,
+                "cell": "expected",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "b072ea80-f5c7-4579-9dc0-a3986de7c79d",
+            "spec": "paragraph2",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Composite:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Composite:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 7\r\nthe number is 70\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\n</pre>",
+            "title": "Debug Output"
+          },
+          {
+            "html": "<ul class=\"list-group\"><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">3</li><li class=\"list-group-item\">7</li><li class=\"list-group-item\">70</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li><li class=\"list-group-item\">5</li><li class=\"list-group-item\">8</li><li class=\"list-group-item\">80</li></ul>",
+            "title": "Some Numbers"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 3,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9164359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "sentence1": {
+      "id": "sentence1",
+      "data": {
+        "title": "Currying",
+        "path": "Sentences/Currying",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "sentence1"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "89a6e125-491d-40bf-a909-e2c3a7f04790",
+            "spec": "sentence1",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "10",
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "2b08f905-c218-4cdc-8d1f-3e84cdf963c2",
+            "spec": "sentence1",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Math:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Math:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 1,
+          "wrongs": 1,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9214359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "sentence2": {
+      "id": "sentence2",
+      "data": {
+        "title": "Facts",
+        "path": "Sentences/Facts",
+        "max-retries": 3,
+        "lifecycle": "Regression",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "sentence2"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "1",
+            "spec": "sentence2",
+            "position": null,
+            "status": "success",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "2",
+            "spec": "sentence2",
+            "position": null,
+            "status": "failed",
+            "type": "step-result"
+          },
+          {
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.<.ctor>b__2() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Fixture.FactExpression.<>c__DisplayClass28.<VerifiedBy>b__27(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 295\r\n   at StoryTeller.Grammars.FactGrammar.PerformTest(StepValues values, ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 36\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 63\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
+            "cells": [],
+            "id": "3",
+            "spec": "sentence2",
+            "position": null,
+            "status": "error",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sentence:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "ThisFactIsTrue",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "ThisFactIsFalse",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "ThisFactThrowsException",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sentence:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 1,
+          "wrongs": 1,
+          "errors": 1,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9284359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "sentence3": {
+      "id": "sentence3",
+      "data": {
+        "title": "Importing and Currying",
+        "path": "Sentences/Importing and Currying",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "sentence3"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "3efbbbc7-784e-4fe5-a86b-e2dffda27f1b",
+            "spec": "sentence3",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "17",
+                "error": null,
+                "cell": "returnValue",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "45d93a52-c60a-4d41-9c1f-83fa4d6b94e0",
+            "spec": "sentence3",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "CurriedMath:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "CurriedMath:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 1,
+          "wrongs": 1,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9324359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "sentence4": {
+      "id": "sentence4",
+      "data": {
+        "title": "Sentences",
+        "path": "Sentences/Sentences",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "sentence4"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "number",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "1",
+            "spec": "sentence4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "c7cf4fe7-dc87-4aaa-b48b-98ca17cf3832",
+            "spec": "sentence4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8571c3cc-ba12-4769-bde4-381f5d1f3b77",
+            "spec": "sentence4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "68cd3281-6ae2-4ea7-b7c6-b1a51df87553",
+            "spec": "sentence4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "number",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "2",
+            "spec": "sentence4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "4",
+                "error": null,
+                "cell": "sum",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "7f401aab-24e5-4e26-bef3-90adf0aee9d4",
+            "spec": "sentence4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "3",
+            "spec": "sentence4",
+            "position": null,
+            "status": "success",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "4",
+            "spec": "sentence4",
+            "position": null,
+            "status": "failed",
+            "type": "step-result"
+          },
+          {
+            "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> StoryTeller.StorytellerAssertionException: No go!\r\n   at StoryTeller.StoryTellerAssert.Fail(String message) in z:\\code\\Storyteller\\src\\StoryTeller\\StoryTellerAssert.cs:line 17\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.ThisLineAlwaysThrowsExceptions() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 128\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
+            "cells": [],
+            "id": "5",
+            "spec": "sentence4",
+            "position": null,
+            "status": "error",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sentence:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "StartWithTheNumber",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "StartWithTheNumber",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "MultiplyThenAdd",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Subtract",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheValueShouldBe",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheSumOf",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "ThisLineIsAlwaysTrue",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "ThisLineIsAlwaysFalse",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "ThisLineAlwaysThrowsExceptions",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sentence:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 19\r\nthe number is 17\r\n</pre>",
+            "title": "Debug Output"
+          },
+          {
+            "html": "<ul class=\"list-group\"><li class=\"list-group-item\">5</li><li class=\"list-group-item\">19</li><li class=\"list-group-item\">17</li></ul>",
+            "title": "Some Numbers"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 2,
+          "errors": 1,
+          "invalids": 1
+        }
+      },
+      "time": "2015-05-08T09:48:13.9454359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "set1": {
+      "id": "set1",
+      "data": {
+        "title": "Ordered Set",
+        "path": "Sets/Ordered Set",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "set1"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "c10797ed-f0c0-4e08-9008-552a4787f7de",
+            "spec": "set1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "c10797ed-f0c0-4e08-9008-552a4787f7de",
+            "spec": "set1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "c10797ed-f0c0-4e08-9008-552a4787f7de",
+            "spec": "set1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8e8a57b1-c133-45a5-abc5-82f50334cd0c",
+            "spec": "set1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8e8a57b1-c133-45a5-abc5-82f50334cd0c",
+            "spec": "set1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "8e8a57b1-c133-45a5-abc5-82f50334cd0c",
+            "spec": "set1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "7ca9a194-a6bb-420d-bbc5-80a4f5f6eafe",
+            "spec": "set1",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "7ca9a194-a6bb-420d-bbc5-80a4f5f6eafe",
+            "spec": "set1",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "7ca9a194-a6bb-420d-bbc5-80a4f5f6eafe",
+            "spec": "set1",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "spec": "set1",
+            "matches": [
+              "2",
+              "3",
+              "4"
+            ],
+            "missing": [],
+            "extras": [],
+            "wrongOrdered": [],
+            "id": "1",
+            "type": "set-verification-result"
+          },
+          {
+            "spec": "set1",
+            "matches": [],
+            "missing": [],
+            "extras": [],
+            "wrongOrdered": [
+              {
+                "actual": 2,
+                "id": "6"
+              },
+              {
+                "actual": 3,
+                "id": "7"
+              },
+              {
+                "actual": 1,
+                "id": "8"
+              }
+            ],
+            "id": "5",
+            "type": "set-verification-result"
+          },
+          {
+            "spec": "set1",
+            "matches": [
+              "05dda8aa-ee89-4ec6-a968-5c48bf23d2c8",
+              "958dd41c-8832-4f31-b32e-30b30503c03f"
+            ],
+            "missing": [],
+            "extras": [
+              {
+                "Amount": 300.3,
+                "Date": "2015-05-10T00:00:00-05:00",
+                "Name": "Hammer"
+              }
+            ],
+            "wrongOrdered": [],
+            "id": "9",
+            "type": "set-verification-result"
+          },
+          {
+            "spec": "set1",
+            "matches": [
+              "ac24c859-b7b4-4274-abed-06da93fc9720",
+              "d2b4c09c-936f-437b-9a8d-68121d378cb3",
+              "83f4d5d2-c8f8-46a5-b109-524c0b5ec710"
+            ],
+            "missing": [
+              "11"
+            ],
+            "extras": [],
+            "wrongOrdered": [],
+            "id": "10",
+            "type": "set-verification-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "Date",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "12",
+            "spec": "set1",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sets:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAreBefore",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sets:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 8,
+          "wrongs": 5,
+          "errors": 0,
+          "invalids": 1
+        }
+      },
+      "time": "2015-05-08T09:48:13.9634359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "set2": {
+      "id": "set2",
+      "data": {
+        "title": "Successful OrderedStrings",
+        "path": "Sets/Successful OrderedStrings",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "set2"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "0c955564-d334-4c09-b877-29dd6678fc3d",
+            "spec": "set2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "f19fe832-832f-43fd-8f25-385f056d11bf",
+            "spec": "set2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "9f0136cf-7a69-4829-90ba-83e2fef13358",
+            "spec": "set2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "1c8990bb-a824-4be1-a215-e451b680e13a",
+            "spec": "set2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "1dce8ad7-fe2c-459d-92bf-e99e0d467236",
+            "spec": "set2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "spec": "set2",
+            "matches": [
+              "29d61f63-1bbe-4431-ad3b-c9bc21283c44",
+              "1e061dd3-3ab5-4778-9aed-03dcf0f5861c",
+              "948cff8a-ba21-4a79-b9a9-f0de99f73d97",
+              "61e07240-aa51-4d0a-81e6-28edb78df1c1",
+              "0d82c1af-9ce8-4c35-9874-dbea4ea2af72"
+            ],
+            "missing": [],
+            "extras": [],
+            "wrongOrdered": [],
+            "id": "23e3a654-6a19-4849-b872-8c6dd44ef25f",
+            "type": "set-verification-result"
+          },
+          {
+            "spec": "set2",
+            "matches": [
+              "19389a97-40f3-4d51-9377-498e68913bd8",
+              "5fa62841-6a49-45c7-8f31-c7a9da1c0f1b",
+              "69595a4f-9dd6-45b1-9280-d1dc0c39c69c",
+              "1007561d-4394-432f-b98e-a6009e10a4bb",
+              "61cbc23a-34bd-4163-adf4-03ce951c4868"
+            ],
+            "missing": [],
+            "extras": [],
+            "wrongOrdered": [],
+            "id": "954e8408-c040-4a10-bd2b-3b747f4deb33",
+            "type": "set-verification-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sets:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIsBefore",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sets:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 10,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9694359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "set3": {
+      "id": "set3",
+      "data": {
+        "title": "Set with Error",
+        "path": "Sets/Set with Error",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "set3"
+      },
+      "results": {
+        "results": [
+          {
+            "error": "System.AggregateException: One or more errors occurred. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<ThrowsErrorOnDataFetch>b__f() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 82\r\n   at StoryTeller.Fixture.<>c__DisplayClass21`1.<VerifySetOf>b__20(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 459\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3.<Fetch>b__0() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---> (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<ThrowsErrorOnDataFetch>b__f() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 82\r\n   at StoryTeller.Fixture.<>c__DisplayClass21`1.<VerifySetOf>b__20(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Fixture.cs:line 459\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3.<Fetch>b__0() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()<---\r\n",
+            "cells": [],
+            "id": "1",
+            "spec": "set3",
+            "position": "before",
+            "status": "error",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sets:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sets:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 1,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9734359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "set4": {
+      "id": "set4",
+      "data": {
+        "title": "Unordered Set",
+        "path": "Sets/Unordered Set",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "set4"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "80ece145-b02b-4b08-9bb1-506908396807",
+            "spec": "set4",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "80ece145-b02b-4b08-9bb1-506908396807",
+            "spec": "set4",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "80ece145-b02b-4b08-9bb1-506908396807",
+            "spec": "set4",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "195e435d-b723-4128-b21c-043a17aa9b18",
+            "spec": "set4",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "195e435d-b723-4128-b21c-043a17aa9b18",
+            "spec": "set4",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "195e435d-b723-4128-b21c-043a17aa9b18",
+            "spec": "set4",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a1209da4-2102-40df-b060-cda190d453f9",
+            "spec": "set4",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a1209da4-2102-40df-b060-cda190d453f9",
+            "spec": "set4",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a1209da4-2102-40df-b060-cda190d453f9",
+            "spec": "set4",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "Amount",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "1d889429-b14d-4e25-a4d4-9d3f01be6e01",
+            "spec": "set4",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sets:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAreBefore",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:4",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sets:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 1
+        }
+      },
+      "time": "2015-05-08T09:48:13.9764359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "set5": {
+      "id": "set5",
+      "data": {
+        "title": "Unsuccessful Ordering",
+        "path": "Sets/Unsuccessful Ordering",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "set5"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "627ad9e8-b9dd-407f-af56-510ab56742f1",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a9fe76bf-acf4-4fe5-969d-b0a69f9b53d4",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "2e3c312e-9bd1-466b-8a6d-5c1a79f06681",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "7637431c-8ba2-4370-bad0-c6ab4466c654",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "483509bb-8e15-429b-bd2d-757faca31f72",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "956295dd-0d76-4110-9105-4bb26f783af5",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "a66b84d0-cdc4-4e93-b4e5-87c2ab93093a",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "337802b6-59d8-4168-96a7-a0dfd91d5365",
+            "spec": "set5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "spec": "set5",
+            "matches": [
+              "b8fa0a86-7021-4c50-865c-d4f65c678bae",
+              "cb80661a-5aa6-489f-a2ec-b759ae169b7c",
+              "91853301-c8fa-4e2a-aa66-0ab2d79df882",
+              "32045d38-9d88-41f8-a306-87f08f455b15"
+            ],
+            "missing": [
+              "0ba4bf6f-aadd-49e8-9377-e3c47425faae"
+            ],
+            "extras": [
+              {
+                "expected": "Rand"
+              },
+              {
+                "expected": "Mat"
+              }
+            ],
+            "wrongOrdered": [
+              {
+                "actual": 5,
+                "id": "972b3a1f-9e39-4d2c-b62a-993e4bb9c43f"
+              },
+              {
+                "actual": 4,
+                "id": "7a2c6479-b09d-423f-a492-387eb60e25a1"
+              }
+            ],
+            "id": "4f091fff-8c47-4a91-90c4-19c01477dddb",
+            "type": "set-verification-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Sets:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIsBefore",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheDataIs:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Rows",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Sets:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 4,
+          "wrongs": 5,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9784359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "table1": {
+      "id": "table1",
+      "data": {
+        "title": "Boolean Results in a Table",
+        "path": "Tables/Boolean Results in a Table",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "table1"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "IsEven",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "da77ae0b-f02f-49d2-8ebf-ea11a83442b2",
+            "spec": "table1",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "IsEven",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "c5b66f8e-2bad-4dc3-9d09-6d0da52a9adb",
+            "spec": "table1",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Table:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IsPositive:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "IsPositive:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Table:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9834359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "table2": {
+      "id": "table2",
+      "data": {
+        "title": "Decision Table",
+        "path": "Tables/Decision Table",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "table2"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "FirstName",
+                "id": null,
+                "status": "ok"
+              },
+              {
+                "actual": null,
+                "error": null,
+                "cell": "LastName",
+                "id": null,
+                "status": "ok"
+              },
+              {
+                "actual": null,
+                "error": null,
+                "cell": "FullName",
+                "id": null,
+                "status": "success"
+              },
+              {
+                "actual": null,
+                "error": null,
+                "cell": "LastNameFirst",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "942afc27-052d-45cf-bdfe-5da4d8696202",
+            "spec": "table2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "FirstName",
+                "id": null,
+                "status": "ok"
+              },
+              {
+                "actual": null,
+                "error": null,
+                "cell": "LastName",
+                "id": null,
+                "status": "ok"
+              },
+              {
+                "actual": "Hank Hill",
+                "error": null,
+                "cell": "FullName",
+                "id": null,
+                "status": "failed"
+              },
+              {
+                "actual": "Hill, Hank",
+                "error": null,
+                "cell": "LastNameFirst",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "22cabc42-11ff-483a-b1d6-eb6afe87ab84",
+            "spec": "table2",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Table:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": null,
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": null,
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Table:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 2,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9864359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "table3": {
+      "id": "table3",
+      "data": {
+        "title": "Table with Optional Columns",
+        "path": "Tables/Table with Optional Columns",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "table3"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [],
+            "id": "70646fad-a420-42f0-acd6-9985f18d13e7",
+            "spec": "table3",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "2f0cd057-48b0-41dd-b47b-81e48cb08c35",
+            "spec": "table3",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "c796aa72-5dff-4084-8012-a5a6bad5c224",
+            "spec": "table3",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "135c9db6-057c-4e2d-8d09-3595c21651ff",
+            "spec": "table3",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Table:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TableWithLotsOfOptions:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TableWithLotsOfOptions:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TableWithLotsOfOptions:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "TableWithLotsOfOptions:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Table:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 0,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9914359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "table4": {
+      "id": "table4",
+      "data": {
+        "title": "Tables with Errors",
+        "path": "Tables/Tables with Errors",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "table4"
+      },
+      "results": {
+        "results": [
+          {
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<BeforeThrowsError>b__5() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 40\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass2.<Before>b__1(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 65\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
+            "cells": [],
+            "id": "before",
+            "spec": "table4",
+            "position": "before",
+            "status": "error",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "05f41992-d937-4379-b7c0-f74ae2137100",
+            "spec": "table4",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "70c31b4a-0e5a-469d-b4d2-eed013a34bb2",
+            "spec": "table4",
+            "position": "0",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<AfterThrowsError>b__b() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 47\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass5.<After>b__4(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 76\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
+            "cells": [],
+            "id": "after",
+            "spec": "table4",
+            "position": "after",
+            "status": "error",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Table:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "BeforeThrowsErrorBefore",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "BeforeThrowsError:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AfterThrowsError:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AfterThrowsError:After",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Table:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 0,
+          "wrongs": 0,
+          "errors": 2,
+          "invalids": 0
+        }
+      },
+      "time": "2015-05-08T09:48:13.9974359-05:00",
+      "type": "spec-execution-completed"
+    },
+    "table5": {
+      "id": "table5",
+      "data": {
+        "title": "Tables",
+        "path": "Tables/Tables",
+        "max-retries": 0,
+        "lifecycle": "Acceptance",
+        "mode": "header",
+        "tags": [],
+        "steps": [],
+        "id": "table5"
+      },
+      "results": {
+        "results": [
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "x",
+                "id": null,
+                "status": "invalid"
+              },
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "y",
+                "id": null,
+                "status": "invalid"
+              },
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "sum",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "1",
+            "spec": "table5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "sum",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "dcdd80e1-8302-4849-a273-0c12b330613d",
+            "spec": "table5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "4",
+                "error": null,
+                "cell": "sum",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "6c491a4f-4b21-4787-958c-a4309ee10834",
+            "spec": "table5",
+            "position": null,
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "4",
+            "spec": "table5",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "4",
+            "spec": "table5",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": null,
+                "cell": "product",
+                "id": null,
+                "status": "success"
+              }
+            ],
+            "id": "4",
+            "spec": "table5",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "5",
+            "spec": "table5",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "5",
+            "spec": "table5",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": "Infinity",
+                "error": null,
+                "cell": "product",
+                "id": null,
+                "status": "failed"
+              }
+            ],
+            "id": "5",
+            "spec": "table5",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "x",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "b905b81e-d932-4fab-8303-2927e040b96f",
+            "spec": "table5",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "b905b81e-d932-4fab-8303-2927e040b96f",
+            "spec": "table5",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "product",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "b905b81e-d932-4fab-8303-2927e040b96f",
+            "spec": "table5",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "6213d009-626c-4617-ab26-4107bfe3b6cd",
+            "spec": "table5",
+            "position": "1",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [],
+            "id": "6213d009-626c-4617-ab26-4107bfe3b6cd",
+            "spec": "table5",
+            "position": "2",
+            "status": "ok",
+            "type": "step-result"
+          },
+          {
+            "error": null,
+            "cells": [
+              {
+                "actual": null,
+                "error": "Invalid Format",
+                "cell": "product",
+                "id": null,
+                "status": "invalid"
+              }
+            ],
+            "id": "6213d009-626c-4617-ab26-4107bfe3b6cd",
+            "spec": "table5",
+            "position": "3",
+            "status": "ok",
+            "type": "step-result"
+          }
+        ],
+        "performance": [
+          {
+            "type": "Fixture",
+            "subject": "Table:SetUp",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Sum:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Sum:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Sum:Row",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:0",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:1",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:2",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Divide:Row:3",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          },
+          {
+            "type": "Fixture",
+            "subject": "Table:TearDown",
+            "start": 0,
+            "end": 0,
+            "duration": 0
+          }
+        ],
+        "duration": 0,
+        "logging": [
+          {
+            "html": "<pre class=\"debug-output\"></pre>",
+            "title": "Debug Output"
+          }
+        ],
+        "attempts": 1,
+        "aborted": false,
+        "time": "9:48 AM",
+        "counts": {
+          "rights": 2,
+          "wrongs": 2,
+          "errors": 0,
+          "invalids": 6
+        }
+      },
+      "time": "2015-05-08T09:48:14.0014359-05:00",
+      "type": "spec-execution-completed"
+    }
   }
 }

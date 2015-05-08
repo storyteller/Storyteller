@@ -84,6 +84,7 @@ results.add('errorCell', 'error-cell');
 results.add('perfTable', 'perf-table');
 results.add('logComponent', 'log-component');
 results.add('setResultsTable', 'set-results-table');
+results.add('noResults', 'no-results');
 
 results.stepAdder = x => null;
 results.tableContext = x => null;

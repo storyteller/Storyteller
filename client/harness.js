@@ -24,9 +24,7 @@ Postal.subscribe({
 	channel: 'engine-request',
 	topic: '*',
 	callback: function(data, env){
-
 		console.log('Sent to engine (' + env.topic + '): ' + JSON.stringify(data));
-
 	}
 });
 
@@ -52,20 +50,16 @@ Postal.subscribe({
 	callback: function(data){
 		var results = AllSpecData.results[data.id];
 
+		results.data = AllSpecData.specs[data.id];
+
 		if (!results){
 			throw new Error('no results for ' + data.id);
 		}
 
-
-		console.log('wanting to run specification ' + data.id);
-
-
-		results.forEach(function(x){
-			Postal.publish({
-				channel: 'engine',
-				topic: x.type,
-				data: x
-			});
+		Postal.publish({
+			channel: 'engine',
+			topic: 'spec-execution-completed',
+			data: results
 		});
 
 

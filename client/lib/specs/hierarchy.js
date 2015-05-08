@@ -114,6 +114,7 @@ handlers['spec-data'] = function(data){
 	var spec = new Specification(data.data, library);
 	spec.id = data.id;
 	specs[spec.id] = spec;
+
 	ResultCache.replaceResults(spec.id, data.results);
 
 	storeSpec(spec);
@@ -180,8 +181,6 @@ handlers['suite-added'] = function(data){
 
 		var name = _.last(names);
 		parent.addChildSuite(name);
-
-		parent.suites.forEach(x => console.log('child: ' + x.name));
 	}
 
 	publishHierarchyChanged();
@@ -246,6 +245,12 @@ handlers['spec-execution-completed'] = function(data){
 
 	publishHierarchyChanged();
 	publishQueueChanged();
+
+	Postal.publish({
+		channel: 'editor',
+		topic: 'spec-changed',
+		data: {id: data.id}
+	});
 }
 
 handlers['queue-state'] = data => {

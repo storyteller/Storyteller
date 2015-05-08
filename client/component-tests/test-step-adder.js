@@ -13,8 +13,6 @@ var listener = {
 	},
 
 	append: function(data){
-		console.log('GOT DATA: ' + JSON.stringify(data));
-
 		this.events.push(data);
 	}
 };

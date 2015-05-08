@@ -19,6 +19,7 @@ function forRow(id){
 	}
 }
 
+/*
 describe('SetVerification Results Display Normal Mode', function(){
 	before(() => {
 		openResultsTo('set1');
@@ -50,6 +51,7 @@ describe('SetVerification Results Display Normal Mode', function(){
 
 });
 
+
 describe('SetVerification Results Display when the Fetch Fails', () => {
 	it('can show an error for a set that could not be fetched', () => {
 		openResultsTo('set3');
@@ -60,4 +62,6 @@ describe('SetVerification Results Display when the Fetch Fails', () => {
 		expect($('pre', errorRow).html().toString()).to.be.contain('System.NotImplementedException');
 	});
 });
+
+*/
 

@@ -19,9 +19,9 @@ namespace ST.Client.Persistence
 
         public override void HandleMessage(RunSpecs message)
         {
-            // TODO -- will change for GH-306
+            if (message.list == null) return;
 
-            message.specs = message.list.Select(x => _controller.Value.LoadSpecification(x).data).Union(message.specs).ToArray();
+            message.specs = message.list.Select(x => _controller.Value.LoadSpecification(x).data).ToArray();
             _engine.SendMessage(message);
 
         }

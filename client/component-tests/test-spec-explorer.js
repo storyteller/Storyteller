@@ -10,8 +10,7 @@ var _ = require('lodash');
 
 function publishResults(){
 	for (var id in AllSpecData.results){
-		var results = AllSpecData.results[id];
-		var completed = _.last(results);
+		var completed = AllSpecData.results[id];
 
 
 		Postal.publish({

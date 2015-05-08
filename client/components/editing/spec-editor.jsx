@@ -9,6 +9,7 @@ var Icons = require('./../icons');
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
 
 var EditorPresenter = require('./../../lib/editor-presenter');
+var ResultsPresenter = require('./../../lib/results-presenter');
 var loader = require('./component-loader');
 
 var SpecOutline = require('./spec-outline');
@@ -32,7 +33,8 @@ var SpecHeader = require('./header/spec-header');
 
 var modes = {
 	results: {
-		buildComponents: spec => spec.buildResults(loader.results)
+		buildComponents: spec => spec.buildResults(loader.results),
+		noResults: loader.results.noResults
 	},
 
 	editing: {
@@ -104,7 +106,14 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount: function(){
-		this.presenter = new EditorPresenter(this.props.id);
+		if (this.props.mode == 'results'){
+			this.presenter = new ResultsPresenter(this.props.id);
+		}
+		else {
+			this.presenter = new EditorPresenter(this.props.id);
+		}
+
+		
 		this.presenter.activate(modes[this.props.mode], this);
 	},
 

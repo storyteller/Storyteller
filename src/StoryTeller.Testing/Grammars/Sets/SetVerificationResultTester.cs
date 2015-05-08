@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Sets;
+using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
@@ -14,6 +17,24 @@ namespace StoryTeller.Testing.Grammars.Sets
         public void SetUp()
         {
             theResult = new SetVerificationResult();
+        }
+
+        [Test]
+        public void round_trip_serialization()
+        {
+            theResult.MarkMatched("1");
+            theResult.MarkExtra(new StepValues("foo"));
+            theResult.MarkMissing("bar"); 
+            theResult.MarkWrongOrder(Guid.NewGuid().ToString(), 1);
+
+            var json = JsonSerialization.ToJson(theResult);
+
+            var newResult = JsonSerialization.Deserialize<SetVerificationResult>(json);
+
+            newResult.matches.Single().ShouldBe("1");
+            newResult.extras.Count().ShouldBe(1);
+            newResult.missing.Single().ShouldBe("bar");
+            newResult.wrongOrdered.Count().ShouldBe(1);
         }
 
         private void theCountsShouldBe(int right, int wrong, int ex, int syntax)
