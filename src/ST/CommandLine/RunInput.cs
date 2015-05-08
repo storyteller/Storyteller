@@ -27,6 +27,9 @@ namespace ST.CommandLine
         [Description("Write the raw result information to JSON format at the specified path")]
         public string JsonFlag { get; set; }
 
+        [Description("Dump the raw JSON history of the batch run to the specified path")]
+        public string DumpFlag { get; set; }
+
         public Task<BatchRunResponse> StartBatch(RemoteController controller)
         {
             var request = new BatchRunRequest

@@ -6,6 +6,7 @@ using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
+using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
 namespace ST.CommandLine
@@ -64,6 +65,13 @@ namespace ST.CommandLine
                 var document = BatchResultsWriter.BuildResults(results);
                 Console.WriteLine("Writing results to " + input.ResultsPathFlag);
                 document.WriteToFile(input.ResultsPathFlag);
+
+                if (input.DumpFlag.IsNotEmpty())
+                {
+                    Console.WriteLine("Dumping the raw JSON results to " + input.DumpFlag);
+                    var json = JsonSerialization.ToIndentedJson(results);
+                    new FileSystem().WriteStringToFile(input.DumpFlag, json);
+                }
 
                 if (input.CsvFlag.IsNotEmpty())
                 {
