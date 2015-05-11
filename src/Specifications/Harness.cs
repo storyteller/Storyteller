@@ -10,7 +10,7 @@ namespace Specifications
         {
             var runner = new SpecRunner<SpecificationSystem>();
 
-            var results = runner.Run("Docs/Transformation Rules");
+            var results = runner.Run("Docs/Navigation structure of a single directory using a splash page");
             //var results = runner.Run("Docs/Transformation Rules");
             //runner.RunAll(1.Minutes());
 
