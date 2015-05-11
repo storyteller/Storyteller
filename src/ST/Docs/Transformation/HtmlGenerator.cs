@@ -23,6 +23,11 @@ namespace ST.Docs.Transformation
 
         public string Generate(Topic topic)
         {
+            if (topic.IsSplashPage())
+            {
+                return _transformer.Transform(topic, new FileSystem().ReadStringFromFile(topic.File));
+            }
+
             try
             {
                 var template = readTemplate();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using FubuCore;
 
@@ -222,9 +223,12 @@ namespace ST.Docs.Topics
 
         public string WebsiteExportPath()
         {
-
-
             return Url.AppendUrl("index.html").TrimStart('/');
+        }
+
+        public bool IsSplashPage()
+        {
+            return Path.GetFileName(File).EqualsIgnoreCase("splash.htm");
         }
     }
 }
