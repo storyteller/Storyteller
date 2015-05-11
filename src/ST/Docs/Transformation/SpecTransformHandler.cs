@@ -23,7 +23,7 @@ namespace ST.Docs.Transformation
         {
             var specData = _specData.DataForPath(data);
 
-            return new HtmlTag("div")
+            return new HtmlTag("p")
                 .Attr("data-path", data)
                 .Attr("data-spec", JsonSerialization.ToCleanJson(specData.Specification))
                 .Attr("data-fixtures", JsonSerialization.ToCleanJson(specData.Fixtures))
@@ -50,7 +50,7 @@ namespace ST.Docs.Transformation
         {
             var specData = _specData.DataForPath(data);
 
-            return new HtmlTag("div")
+            return new HtmlTag("p")
                 .Attr("data-path", data)
                 .Attr("data-spec", JsonSerialization.ToCleanJson(specData.Specification))
                 .Attr("data-fixtures", JsonSerialization.ToCleanJson(specData.Fixtures))

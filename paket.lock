@@ -15,11 +15,11 @@ NUGET
       structuremap (>= 3.0.3.116)
   remote: http://nuget.org/api/v2
   specs:
+    CommonMark.NET (0.9.0)
     Fixie (1.0.0.11)
     Fleck (0.12.0.40)
     HtmlTags (2.1.0.183)
     ILRepack (1.25.0)
-    MarkdownDeep.NET (1.5)
     Newtonsoft.Json (6.0.8)
     Owin (1.0)
     RhinoMocks (3.6.1)

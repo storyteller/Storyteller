@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using MarkdownDeep;
 using ST.Docs.Topics;
 using StructureMap.Util;
 
@@ -81,15 +80,15 @@ namespace ST.Docs.Transformation
             public string Transform(Topic current, string data)
             {
                 var text = TopicLoader.FileSystem.ReadStringFromFile(current.File);
+
                 text = _transformer.Transform(current, text);
 
                 if (Path.GetExtension(current.File) == ".md")
                 {
-                    text = new Markdown
-                    {
-                        SafeMode = false
-                    }.Transform(text);
+                    text = CommonMark.CommonMarkConverter.Convert(text);
                 }
+
+                
 
                 return text;
             }
