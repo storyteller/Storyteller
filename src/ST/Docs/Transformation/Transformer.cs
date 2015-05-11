@@ -85,7 +85,10 @@ namespace ST.Docs.Transformation
 
                 if (Path.GetExtension(current.File) == ".md")
                 {
-                    text = new Markdown().Transform(text);
+                    text = new Markdown
+                    {
+                        SafeMode = false
+                    }.Transform(text);
                 }
 
                 return text;
