@@ -49,7 +49,11 @@ namespace ST.Docs.Exporting
                 var path = pathing(topic);
                 var parentDirectory = path.ParentUrl();
 
-                fileSystem.CreateDirectory(parentDirectory);
+                if (parentDirectory.IsNotEmpty())
+                {
+                    fileSystem.CreateDirectory(directory.AppendPath(parentDirectory));
+                }
+                
 
                 var text = _generator.Generate(topic);
                 fileSystem.WriteStringToFile(directory.AppendPath(path), text);

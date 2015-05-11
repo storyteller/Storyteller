@@ -9,6 +9,8 @@ var EmbeddedSpec = require('./components/embedded-spec');
 $(document).ready(() => {
 	$('.spec-preview').each((i, div) => {
 		var path = $(div).attr('data-path');
+		console.log('Writing spec results for ' + path);
+		
 		var fixtures = JSON.parse(_.unescape($(div).attr('data-fixtures')));
 		var specData = JSON.parse(_.unescape($(div).attr('data-spec')));
 		var library = new FixtureLibrary(fixtures);
@@ -23,7 +25,10 @@ $(document).ready(() => {
 	});
 
 	$('.spec-result').each((i, div) => {
+
 		var path = $(div).attr('data-path');
+		console.log('Writing spec results for ' + path);
+
 		var fixtures = JSON.parse(_.unescape($(div).attr('data-fixtures')));
 		var specData = JSON.parse(_.unescape($(div).attr('data-spec')));
 		var results = JSON.parse(_.unescape($(div).attr('data-results')));
