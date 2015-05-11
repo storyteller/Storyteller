@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using StoryTeller.Messages;
 
 namespace StoryTeller.Results
@@ -26,7 +27,7 @@ namespace StoryTeller.Results
 
         public StepResult(string id, ResultStatus status) : this()
         {
-            this.Status = status;
+            this.status = status;
             this.id = id;
         }
 
@@ -47,14 +48,8 @@ namespace StoryTeller.Results
             }
         }
 
-        [JsonIgnore]
-        public ResultStatus Status;
-
-        [JsonProperty("status")]
-        public string StatusDescription
-        {
-            get { return Status.ToString(); }
-        }
+        [JsonConverter(typeof(StringEnumConverter))] 
+        public ResultStatus status;
 
         public string error;
 
@@ -63,7 +58,7 @@ namespace StoryTeller.Results
 
         public void Tabulate(Counts counts)
         {
-            counts.Increment(Status);
+            counts.Increment(status);
             if (cells != null)
             {
                 cells.Each(x => counts.Increment(x.Status));
@@ -72,7 +67,7 @@ namespace StoryTeller.Results
 
         protected bool Equals(StepResult other)
         {
-            return string.Equals(position, other.position) && Status == other.Status && string.Equals(error, other.error) && string.Equals(id, other.id);
+            return string.Equals(position, other.position) && status == other.status && string.Equals(error, other.error) && string.Equals(id, other.id);
         }
 
         public override bool Equals(object obj)
@@ -88,7 +83,7 @@ namespace StoryTeller.Results
             unchecked
             {
                 int hashCode = (position != null ? position.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (int) Status;
+                hashCode = (hashCode*397) ^ (int) status;
                 hashCode = (hashCode*397) ^ (error != null ? error.GetHashCode() : 0);
                 hashCode = (hashCode*397) ^ (id != null ? id.GetHashCode() : 0);
                 return hashCode;
@@ -103,7 +98,7 @@ namespace StoryTeller.Results
                 description += "." + position;
             }
 
-            description += " Status: {0}".ToFormat(Status);
+            description += " status: {0}".ToFormat(status);
             if (error.IsNotEmpty())
             {
                 description += "\n  error!\n" + error;

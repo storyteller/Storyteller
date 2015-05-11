@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using FubuCore;
 using FubuCore.CommandLine;
+using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
@@ -68,16 +69,12 @@ namespace ST.CommandLine
 
                 if (input.DumpFlag.IsNotEmpty())
                 {
-                    Console.WriteLine("Dumping the raw JSON results to " + input.DumpFlag);
-                    var json = JsonSerialization.ToIndentedJson(results);
-                    new FileSystem().WriteStringToFile(input.DumpFlag, json);
+                    dumpJson(input, results);
                 }
 
                 if (input.CsvFlag.IsNotEmpty())
                 {
-                    Console.WriteLine("Writing performance data as CSV data to " + input.CsvFlag.ToFullPath());
-                
-                    PerformanceDataWriter.WriteCSV(results, input.CsvFlag);
+                    writePerformanceData(input, results);
                 }
 
                 if (input.JsonFlag.IsNotEmpty())
@@ -108,6 +105,20 @@ namespace ST.CommandLine
             controller.SafeDispose();
 
             return task.Result;
+        }
+
+        private static void writePerformanceData(RunInput input, BatchRunResponse results)
+        {
+            Console.WriteLine("Writing performance data as CSV data to " + input.CsvFlag.ToFullPath());
+
+            PerformanceDataWriter.WriteCSV(results, input.CsvFlag);
+        }
+
+        private static void dumpJson(RunInput input, BatchRunResponse results)
+        {
+            Console.WriteLine("Dumping the raw JSON results to " + input.DumpFlag);
+            var json = JsonSerialization.ToJson(results);
+            new FileSystem().WriteStringToFile(input.DumpFlag, json);
         }
 
 

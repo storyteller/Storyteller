@@ -19,13 +19,15 @@ namespace ST.Docs.Samples
                 _.Object(new BlockCommentScanner("<!--", "-->", "html", "markup"));
                 _.Object(new BlockCommentScanner("<!--", "-->", "xml", "markup"));
                 _.Object(new BlockCommentScanner("/*", "*/", "css", "css"));
-                                                             
             });
+
+
 
             For<IBrowserRefresher>().UseIfNone<NulloBrowserRefresher>();
 
             For<IFileSystem>().Use<FileSystem>();
 
+            ForSingletonOf<IEmbeddedSpecData>().Use<EmbeddedSpecData>();
             ForSingletonOf<ISampleCache>().Use<SampleCache>();
             ForSingletonOf<ISampleBuilder>().Use<SampleBuilder>();
         }

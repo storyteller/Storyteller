@@ -2,7 +2,8 @@ var ProgressPlugin = require('./util/progress-plugin');
 module.exports = {
   entry: {
     "bundle": ['./client/client.js'],
-    "batch-bundle": ['./client/batch.js']
+    "batch-bundle": ['./client/batch.js'],
+    "embed": ['./client/embed.js']
   },
   output: {
     path: __dirname + '/src/ST',

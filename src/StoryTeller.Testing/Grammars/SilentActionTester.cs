@@ -41,7 +41,7 @@ namespace StoryTeller.Testing.Grammars
 
             result.id.ShouldBe(section.id);
             result.position.ShouldBe(Stage.teardown.ToString());
-            result.Status.ShouldBe(ResultStatus.error);
+            result.status.ShouldBe(ResultStatus.error);
             result.error.ShouldContain("DivideByZeroException");
 
 

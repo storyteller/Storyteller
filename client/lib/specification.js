@@ -268,6 +268,9 @@ function Specification(data, library){
 			if (child){
 				child.logResult(x);
 			} 
+			else {
+				console.log('Unable to find a matching step for ' + JSON.stringify(x));
+			}
 		});
 	}
 

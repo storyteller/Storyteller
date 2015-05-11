@@ -46,7 +46,7 @@ namespace StoryTeller.Testing.Grammars
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
             result.id.ShouldBe(values.id);
-            result.Status.ShouldBe(ResultStatus.ok);
+            result.status.ShouldBe(ResultStatus.ok);
             result.cells.ShouldHaveTheSameElementsAs(cells);
 
         }
@@ -122,7 +122,7 @@ namespace StoryTeller.Testing.Grammars
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
             result.id.ShouldBe(values.id);
-            result.Status.ShouldBe(ResultStatus.ok);
+            result.status.ShouldBe(ResultStatus.ok);
             result.cells.ShouldHaveTheSameElementsAs(new[]
             {
                 new CellResult("a", ResultStatus.error){error = "don't like you"}

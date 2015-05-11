@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FubuMVC.Core;
+using FubuMVC.Core.Assets;
 using FubuMVC.Core.Registration;
 using FubuMVC.Core.Registration.Nodes;
 using ST.Docs.Samples;
@@ -22,6 +23,11 @@ namespace ST.Docs.Runner
             Actions.IncludeType<TodoExplorer>();
 
             Policies.ChainSource(this);
+
+            AlterSettings<AssetSettings>(_ =>
+            {
+                _.AllowableExtensions.Add(".json");
+            });
         }
 
         public IEnumerable<BehaviorChain> BuildChains(BehaviorGraph graph)

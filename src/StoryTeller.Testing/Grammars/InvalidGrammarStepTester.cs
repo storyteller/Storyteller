@@ -36,7 +36,7 @@ namespace StoryTeller.Testing.Grammars
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
 
             result.id.ShouldBe("the id");
-            result.Status.ShouldBe(ResultStatus.error);
+            result.status.ShouldBe(ResultStatus.error);
             result.error.ShouldBe("grammar is wonky");
         }
     }

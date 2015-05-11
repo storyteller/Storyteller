@@ -112,6 +112,7 @@
     <Compile Include="Docs\Samples\CLangSampleScanner.cs" />
     <Compile Include="Docs\Samples\CodeFileEndpoint.cs" />
     <Compile Include="Docs\Samples\CodeFormatter.cs" />
+    <Compile Include="Docs\Samples\EmbeddedSpecData.cs" />
     <Compile Include="Docs\Samples\ISampleBuilder.cs" />
     <Compile Include="Docs\Samples\ISampleCache.cs" />
     <Compile Include="Docs\Samples\ISampleScanner.cs" />

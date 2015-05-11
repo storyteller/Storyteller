@@ -181,9 +181,9 @@ namespace StoryTeller.Testing
                         return "Unable to find any result for Step " + _id;
                     }
 
-                    if (result.Status != ResultStatus.error)
+                    if (result.status != ResultStatus.error)
                     {
-                        return "The Status for {0} was not error.".ToFormat(_id);
+                        return "The status for {0} was not error.".ToFormat(_id);
                     }
 
                     if (!result.error.Contains(text))
@@ -211,9 +211,9 @@ namespace StoryTeller.Testing
                     var result = findStepResult(c);
                     if (result != null)
                     {
-                        if (result.Status != resultStatus)
+                        if (result.status != resultStatus)
                         {
-                            return "Expected Status {0} for #{1}, but got {1}".ToFormat(resultStatus, _id, result.Status);
+                            return "Expected status {0} for #{1}, but got {1}".ToFormat(resultStatus, _id, result.status);
                         }
                     }
 
@@ -285,7 +285,7 @@ namespace StoryTeller.Testing
                         if (result.Status != ResultStatus.failed)
                         {
                             return
-                                "Step {0}, cell {1} was supposed to fail, but finished w/ Status {2}".ToFormat(
+                                "Step {0}, cell {1} was supposed to fail, but finished w/ status {2}".ToFormat(
                                     _parent._id, _cell, result.Status);
                         }
                         
@@ -316,7 +316,7 @@ namespace StoryTeller.Testing
                             if (result.Status != ResultStatus.invalid)
                             {
                                 return
-                                    "Step {0}, cell {1} was supposed to be invalid, but finished w/ Status {2}".ToFormat(
+                                    "Step {0}, cell {1} was supposed to be invalid, but finished w/ status {2}".ToFormat(
                                         _parent._id, _cell);
                             }
 
