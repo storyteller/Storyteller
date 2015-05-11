@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.Engine
             return task.Result.Result;
         }
 
-        [Test]
+        [Test, Explicit("Not reliable enough for CI")]
         public void spec_fails_with_timeout()
         {
             var response = execute(x =>

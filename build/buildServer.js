@@ -9,7 +9,10 @@ var config = args.config || 'Debug';
 var fs = require('fs');
 if (!fs.existsSync('artifacts')) fs.mkdirSync('artifacts');
 
+var assemblyInfo = require('./assemblyInfo');
+assemblyInfo(buildVersion, revision);
 
 require('./compile')(config);
 require('./fixie')(config);
+require('./run-specs')(config);
 

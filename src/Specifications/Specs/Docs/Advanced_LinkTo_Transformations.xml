@@ -1,4 +1,4 @@
-<Spec id="b2954434-61e8-426f-9d7d-31cd453a8377" maxRetries="0" tags="" lifecycle="Acceptance" name="Advanced LinkTo Transformations">
+<Spec id="b2954434-61e8-426f-9d7d-31cd453a8377" maxRetries="0" tags="" lifecycle="Regression" name="Advanced LinkTo Transformations">
   <TopicTemplating id="bf2b151e-0ea4-42cc-ab42-223d6ecabcc8">
     <TheTopicsAre>
       <Rows id="130049d4-3333-4638-b6af-1bf8c7a8450d">

@@ -1,4 +1,4 @@
-<Spec id="64321ccb-24c9-4942-badc-f577ea2e14cb" maxRetries="0" tags="" lifecycle="Acceptance" name="Navigation structure with nested folders and implicit ordering">
+<Spec id="64321ccb-24c9-4942-badc-f577ea2e14cb" maxRetries="0" tags="" lifecycle="Regression" name="Navigation structure with nested folders and implicit ordering">
   <TopicFolder id="3ab58bfd-7d6c-4210-8035-5db7b32e893c">
     <TheTopicsAre>
       <Rows id="d88aef89-71d3-42a3-ab97-ae5a69dcc4b7">

@@ -41,9 +41,6 @@ function ilrepack(target){
 }
 
 module.exports = function(target){
-  var assemblyInfo = require('./assemblyInfo');
-  assemblyInfo(buildVersion, revision);
-  
   var executable = findPath();
   var sln = path.join('src', 'Storyteller.sln');
   var config = '/property:Configuration=' + target;
