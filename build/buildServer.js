@@ -6,8 +6,9 @@ var config = args.config || 'Debug';
 
 
 
-var fs = require('fs');
+var fs = require('fs-extra');
 if (!fs.existsSync('artifacts')) fs.mkdirSync('artifacts');
+
 
 var assemblyInfo = require('./assemblyInfo');
 assemblyInfo(buildVersion, revision);
