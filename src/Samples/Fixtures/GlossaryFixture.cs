@@ -41,6 +41,7 @@ namespace Samples.Fixtures
             public string Location { get; set; }
         }
 
+        // SAMPLE: login-paragraph
         [Hidden, FormatAs("Enter the user name {user}")]
         public void EnterUserName(string user)
         {
@@ -68,6 +69,25 @@ namespace Samples.Fixtures
                 _ += this["ClickLoginButton"];
             });
         }
+        // ENDSAMPLE
+
+        // SAMPLE: implicit-login-with-silent-action
+        public IGrammar Login2()
+        {
+            return Paragraph("Enter login credentials", _ =>
+            {
+                _ += this["EnterUserName"];
+                _ += this["EnterPassword"];
+
+                // Lastly, a silent action
+                _ += c =>
+                {
+                    // supply a Lambda that would click
+                    // the login button
+                };
+            });
+        }
+        // ENDSAMPLE
 
         public IGrammar Preferences()
         {

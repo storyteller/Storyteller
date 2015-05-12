@@ -22,6 +22,7 @@ namespace StoryTeller.Samples.Fixtures
             return x + y;
         }
 
+        // SAMPLE: paragraph-with-grammars-built-inline
         public IGrammar Divide()
         {
             return Paragraph("Divide numbers", x =>
@@ -32,6 +33,7 @@ namespace StoryTeller.Samples.Fixtures
                 x += Check("product", () => _first/_second);
             }).AsTable("Subtract numbers");
         }
+        // ENDSAMPLE
 
         public IGrammar BeforeThrowsError()
         {
