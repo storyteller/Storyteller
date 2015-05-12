@@ -1,0 +1,5 @@
+<Spec id="f2d78bb0-44a5-46b3-8223-fcbd28b444bf" maxRetries="0" tags="" lifecycle="Acceptance" name="Section">
+  <Glossary id="fd8ae32d-55a1-42f5-844a-fb7ae61053bd">
+    <Comment id="acf611c0-1106-4c40-9f98-5f3b23d8aa8e">This section of a specification would expose Grammar's to manipulate and verify the state of the application being tested using a single Fixture titled "The Application Portal Page"</Comment>
+  </Glossary>
+</Spec>

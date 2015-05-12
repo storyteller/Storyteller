@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Application\Calculator.cs" />
     <Compile Include="Fixtures\CalculatorFixture.cs" />
+    <Compile Include="Fixtures\GlossaryFixture.cs" />
+    <Compile Include="Fixtures\SampleFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

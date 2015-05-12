@@ -1,0 +1,8 @@
+<Spec id="38484d20-901c-4d12-901c-f19d6dc24d87" maxRetries="0" tags="" lifecycle="Acceptance" name="Sentences">
+  <Calculator id="cbfeaf97-f2ef-4f16-bc19-4d8eb7ef4639">
+    <Comment id="d66d8ac3-dfa0-48ee-aca9-7b160b98718c">The three lines below are sentences</Comment>
+    <StartWith value="5" />
+    <MultiplyBy value="2" />
+    <TheValueShouldBe value="10" />
+  </Calculator>
+</Spec>

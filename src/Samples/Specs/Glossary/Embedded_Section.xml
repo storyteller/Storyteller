@@ -1,0 +1,13 @@
+<Spec id="2f8cbde5-964c-457c-995c-d5397fd3d702" maxRetries="0" tags="" lifecycle="Acceptance" name="Embedded Section">
+  <Comment id="0fb381ef-c22a-4761-940e-8648d35276e8">The panel box below is a "Section" within the specification that uses a "Fixture" titled "Glossary"</Comment>
+  <Glossary id="892471e2-2a92-496e-96a7-2a3339897596">
+    <Comment id="5ee46f28-93cf-40ba-9d54-3ffefd447fac">An "Embedded Section" allows you to embed a Section for another Fixture inside the parent Section like so</Comment>
+    <Preferences>
+      <Preferences id="5d061c01-3a54-455e-a12f-f45f4c2ec70c">
+        <Comment id="29973364-7680-4945-ab65-afdb9a2b6d52">"Preferences" is an entirely different Fixture that contains all the grammars you would use to alter the current user's preferences</Comment>
+        <EnableGPS enabled="true" />
+        <EnableNotifications enabled="true" />
+      </Preferences>
+    </Preferences>
+  </Glossary>
+</Spec>

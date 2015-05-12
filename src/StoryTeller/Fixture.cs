@@ -17,7 +17,12 @@ using StoryTeller.Model.Lists;
 
 namespace StoryTeller
 {
-    public class Fixture
+    public interface IFixtureModel
+    {
+            
+    }
+
+    public class Fixture : IFixtureModel
     {
         private static readonly List<Type> _ignoredTypes = new List<Type>
         {

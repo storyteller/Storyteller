@@ -6,7 +6,12 @@ var Postal = require('postal');
 
 module.exports = React.createClass({
 	getInitialState: function() {
-		return {value: this.props.arg.value};
+		var value = this.props.arg.value;
+		if (value == null || value == undefined){
+			value = false;
+		}
+
+		return {value: value};
 	},
 
 
