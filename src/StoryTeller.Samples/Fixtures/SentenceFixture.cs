@@ -120,7 +120,6 @@ namespace StoryTeller.Samples.Fixtures
         {
             return number1 + number2;
         }
-
         // END:  ValueCheckMethod
 
         public void ThisLineAlwaysThrowsExceptions()

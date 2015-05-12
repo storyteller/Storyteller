@@ -1,0 +1,9 @@
+<Spec id="f6aca131-be42-405b-ae76-ad3f6359f8ed" maxRetries="0" tags="" lifecycle="Acceptance" name="Bad Values">
+  <Calculator id="f753bec2-a16c-48aa-a64d-c3791d5cbdd2">
+    <Comment id="9290656a-2ba9-495e-b0e4-a3961df7fa65">Punching in values to the calculator</Comment>
+    <StartWith value="3" />
+    <MultiplyBy value="2" />
+    <Comment id="3ffefa75-5ce9-4e3c-a706-b92ba3f91e70">This value is wrong and the specification should fail</Comment>
+    <TheValueShouldBe value="7" />
+  </Calculator>
+</Spec>

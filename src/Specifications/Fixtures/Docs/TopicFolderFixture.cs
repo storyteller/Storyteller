@@ -20,10 +20,16 @@ namespace Specifications.Fixtures.Docs
             Title = "Inside a folder of topic files";
         }
 
+        // SAMPLE: getting-context-from-fixture
+
+        // This is taken from a Fixture class that is used
+        // internally to test Storyteller's documentation
+        // generation
         public override void SetUp()
         {
             _directory = Context.Service<DocSettings>().Root;
         }
+        // ENDSAMPLE
 
 
         [FormatAs("For file {path}")]
@@ -35,6 +41,10 @@ namespace Specifications.Fixtures.Docs
             if (!Directory.Exists(parent)) Directory.CreateDirectory(parent);
         }
 
+        // SAMPLE: hiding-a-grammar
+
+        // CaptureLine will not be visible in the user interface for user
+        // selection when authoring a specification, but can be used internally
         [Hidden]
         public void CaptureLine(string Text)
         {
@@ -43,12 +53,15 @@ namespace Specifications.Fixtures.Docs
 
         public IGrammar WriteFile()
         {
+            // The WriteFile grammar uses the CaptureLine grammar
+            // as the basis for a table
             return this["CaptureLine"].AsTable("The contents are")
                 .After(() =>
                 {
                     new FileSystem().WriteToFlatFile(_location, writer => _text.Each(writer.WriteLine));
                 });
         }
+        // ENDSAMPLE
 
         [Hidden]
         public void BuildTopic([Header("File Path")] string path, string Line1 = null, string Line2 = null)
@@ -68,6 +81,7 @@ namespace Specifications.Fixtures.Docs
             return this["BuildTopic"].AsTable("The topics in this directory are");
         }
 
+        // SAMPLE: grammar-from-igrammar-return
         public IGrammar CheckTopic()
         {
             return Paragraph("Check the properties of a topic at the root of the topic directory", _ =>
@@ -83,6 +97,7 @@ namespace Specifications.Fixtures.Docs
                 });
             });
         }
+        // ENDSAMPLE
 
         public IGrammar AllTopicsShouldBe()
         {

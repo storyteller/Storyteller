@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using CommonMark;
 using ST.Docs.Topics;
 using StructureMap.Util;
 
@@ -86,6 +87,11 @@ namespace ST.Docs.Transformation
                 if (Path.GetExtension(current.File) == ".md")
                 {
                     text = CommonMark.CommonMarkConverter.Convert(text);
+                    /*
+                    text = text
+                        .Replace("<p></code></pre></p>", string.Empty)
+                        .Replace("<pre><code>", string.Empty);
+                     */
                 }
 
                 

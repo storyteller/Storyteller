@@ -129,11 +129,13 @@ namespace StoryTeller.Testing.Grammars
         }
     }
 
+    // SAMPLE: hidden-fixture
     [Hidden]
     public class SecretFixture : Fixture
     {
         
     }
+    // ENDSAMPLE
 
     public class OpenFixture : Fixture
     {

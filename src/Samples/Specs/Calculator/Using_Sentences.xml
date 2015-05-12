@@ -1,0 +1,11 @@
+<Spec id="17e4de49-522f-48f5-81d6-b41749174441" maxRetries="0" tags="" lifecycle="Acceptance" name="Using Sentences">
+  <Calculator id="f753bec2-a16c-48aa-a64d-c3791d5cbdd2">
+    <Comment id="9290656a-2ba9-495e-b0e4-a3961df7fa65">Punching in values to the calculator</Comment>
+    <StartWith value="3" />
+    <MultiplyBy value="2" />
+    <Comment id="70fa2976-93e8-4432-90a1-daea42c77b93">Check the current value on the calculator screen</Comment>
+    <TheValueShouldBe value="6" />
+    <Comment id="3ffefa75-5ce9-4e3c-a706-b92ba3f91e70">You can use more than one input for a sentence</Comment>
+    <AddingNumbersTogether x="2" y="3" returnValue="5" />
+  </Calculator>
+</Spec>

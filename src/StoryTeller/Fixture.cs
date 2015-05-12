@@ -40,6 +40,7 @@ namespace StoryTeller
             Key = GetType().Name.Replace("Fixture", "");
         }
 
+        // SAMPLE: fixture-grammars
         [IndexerName("Grammars")]
         public IGrammar this[string key]
         {
@@ -50,6 +51,7 @@ namespace StoryTeller
                 value.Key = key;
             }
         }
+        // ENDSAMPLE
 
         /// <summary>
         /// The currently executing specification context. This property will only

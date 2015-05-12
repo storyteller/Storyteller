@@ -8,12 +8,13 @@ namespace Samples.Fixtures
     {
         private readonly Calculator _calculator = new Calculator();
 
-
+        // SAMPLE: start-with-sentence
         [FormatAs("Start with {value}")]
         public void StartWith(double value)
         {
             _calculator.Value = value;
         }
+        // ENDSAMPLE
 
         [FormatAs("Add {value}")]
         public void Add(double value)
@@ -39,14 +40,16 @@ namespace Samples.Fixtures
             _calculator.DivideBy(value);
         }
 
+        // SAMPLE: the-value-should-be-sentence
         [FormatAs("The value should be {value}")]
-        [return: AliasAs("value")]
         public double TheValueShouldBe()
         {
             return _calculator.Value;
         }
+        // ENDSAMPLE
 
 
+        // SAMPLE: multiple-inputs-sentence
         [FormatAs("Adding {x} to {y} should equal {returnValue}")]
         public double AddingNumbersTogether(double x, double y)
         {
@@ -54,6 +57,7 @@ namespace Samples.Fixtures
             _calculator.Add(y);
             return _calculator.Value;
         }
+        // ENDSAMPLE
 
         [ExposeAsTable("The sum of two columns should be")]
         [return: AliasAs("sum")]
@@ -63,6 +67,15 @@ namespace Samples.Fixtures
             _calculator.Add(y);
             return _calculator.Value;
         }
+
+        // SAMPLE: sentence-with-output-parameters
+        [FormatAs("For X={X} and Y={Y}, the Sum should be {Sum} and the Product should be {Product}")]
+        public void SumAndProduct(int X, int Y, out int Sum, out int Product)
+        {
+            Sum = X + Y;
+            Product = X * Y;
+        }
+        // ENDSAMPLE
 
         [ExposeAsTable("Sum and Product Operations")]
         public void Operations(int X, int Y, out int Sum, out int Product)

@@ -1,0 +1,5 @@
+<Spec id="c3805c4e-a83c-4fe7-8d81-1ac15f6d5f06" maxRetries="0" tags="" lifecycle="Acceptance" name="Implicit Action">
+  <BatchProcess id="806cb1df-c29b-40bd-863f-2adf13e03b94">
+    <Comment id="c44a9e3f-b0f9-4294-9c93-fc6a95bd0d09">Do whatever assertions you need to do to verify that the batch process ran correctly</Comment>
+  </BatchProcess>
+</Spec>

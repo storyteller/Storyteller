@@ -156,7 +156,21 @@ namespace StoryTeller
 
             CatastrophicException = ex as StorytellerCatastrophicException;
 
-            LogResult(new StepResult(id, ResultStatus.error) {error = ex.ToString(), position = position});
+            string errorMessage = null;
+            if (ex is StorytellerAssertionException)
+            {
+                errorMessage = ex.Message;
+            }
+            else if (ex.InnerException is StorytellerAssertionException)
+            {
+                errorMessage = ex.InnerException.Message;
+            }
+            else
+            {
+                errorMessage = ex.ToString();
+            }
+
+            LogResult(new StepResult(id, ResultStatus.error) {error = errorMessage, position = position});
         }
 
 
