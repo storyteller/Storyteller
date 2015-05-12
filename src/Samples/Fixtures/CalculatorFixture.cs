@@ -77,12 +77,14 @@ namespace Samples.Fixtures
         }
         // ENDSAMPLE
 
+        // SAMPLE: decision-tree-with-multiple-outputs
         [ExposeAsTable("Sum and Product Operations")]
         public void Operations(int X, int Y, out int Sum, out int Product)
         {
             Sum = X + Y;
             Product = X*Y;
         }
+        // ENDSAMPLE
     }
 
 }
