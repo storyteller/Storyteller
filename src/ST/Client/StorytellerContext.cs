@@ -51,5 +51,10 @@ namespace ST.Client
         {
             get { return _startup; }
         }
+
+        public SystemRecycled LatestSystemRecycled
+        {
+            get { return _controller.LatestSystemRecycled ?? Startup.Result; }
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace ST.Client
             script.WriteLine();
             script.WriteLine("var Storyteller = {};");
             script.WriteLine();
-            script.WriteLine("Storyteller.initialization = {0};", JsonSerialization.ToCleanJson(_context.Startup.Result));
+            script.WriteLine("Storyteller.initialization = {0};", JsonSerialization.ToCleanJson(_context.LatestSystemRecycled));
             script.WriteLine();
             script.WriteLine("Storyteller.queueState = {0};", JsonSerialization.ToCleanJson(_context.QueueState()));
             script.WriteLine();

@@ -104,9 +104,13 @@ namespace StoryTeller.Remotes
             bootstrap(_mode).Task.ContinueWith(x =>
             {
                 _messaging.Send(x.Result);
+
+                LatestSystemRecycled = x.Result;
                 return x.Result;
             });
         }
+
+        public SystemRecycled LatestSystemRecycled { get; private set; }
 
         public void Teardown()
         {
@@ -128,6 +132,8 @@ namespace StoryTeller.Remotes
             {
                 _watcher = new FixtureLibraryWatcher(Recycle);
                 _watcher.WatchBinariesAt(_path);
+
+                LatestSystemRecycled = x.Result;
 
                 return x.Result;
             });
