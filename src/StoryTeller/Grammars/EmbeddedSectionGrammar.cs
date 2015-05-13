@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -12,6 +15,7 @@ namespace StoryTeller.Grammars
         // TODO -- does this become something that's configurable later?
         // TODO -- only matters if we care in paragraph
         private readonly string _leafName;
+        private Action<ISpecContext> _after;
 
         public EmbeddedSectionGrammar()
         {
@@ -28,24 +32,41 @@ namespace StoryTeller.Grammars
         {
             _before = action;
             return this;
+        }
+
+        public EmbeddedSectionGrammar<T> After(Action<ISpecContext> action)
+        {
+            _after = action;
+            return this;
         } 
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
+            return new CompositeExecution(determineSteps(step, library).ToArray());
+        }
+
+        private IEnumerable<IExecutionStep> determineSteps(Step step, FixtureLibrary library)
+        {
             var section = step.Collections[_leafName];
             var sectionPlan = section.CreatePlan(library, _fixture);
 
-            if (_before == null)
+            if (_before != null)
             {
-                return sectionPlan;
+                yield return new SilentAction("Grammar", Stage.before, _before, section)
+                {
+                    Subject = Key + ":Before"
+                };
             }
 
-            var silentAction = new SilentAction("Grammar", Stage.before, _before, section)
-            {
-                Subject = Key + ":Before"
-            };
+            yield return sectionPlan;
 
-            return new CompositeExecution(new IExecutionStep[]{silentAction, sectionPlan});
+            if (_after != null)
+            {
+                yield return new SilentAction("Grammar", Stage.after, _after, section)
+                {
+                    Subject = Key + ":After"
+                };
+            }
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

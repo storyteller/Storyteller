@@ -56,6 +56,26 @@ Name: Embedded
         }
 
         [Test]
+        public void runs_all_nested_steps_setup_and_teardown_with_an_after_action()
+        {
+            execute(@"
+Name: Embedded
+=> EmbeddedGrammar
+* AfterColors
+  -> Recording
+  * Blue#1
+  * Green#2
+  * Red#3
+
+");
+
+            RecordingFixture.Traced.ShouldHaveTheSameElementsAs("SetUp", "Blue", "Green", "Red", "TearDown", "After");
+            Step("1").StatusWas(ResultStatus.ok);
+            Step("2").StatusWas(ResultStatus.ok);
+            Step("3").StatusWas(ResultStatus.ok);
+        }
+
+        [Test]
         public void builds_the_model()
         {
             var section = ModelFor<EmbeddedSection>("EmbeddedGrammar", "Colors");
@@ -74,6 +94,12 @@ Name: Embedded
                 .Before(c =>
                 {
                     RecordingFixture.Traced.Add("Before");
+                });
+
+            this["AfterColors"] = Embed<RecordingFixture>("In the recording fixture")
+                .After(c =>
+                {
+                    RecordingFixture.Traced.Add("After");
                 });
         }
     }
