@@ -10,7 +10,6 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Grammars
 {
-    // TODO -- add default values here
     public class CheckPropertyGrammar : LineGrammar
     {
         private readonly Accessor _accessor;
@@ -19,7 +18,10 @@ namespace StoryTeller.Grammars
         public CheckPropertyGrammar(Accessor accessor)
         {
             _accessor = accessor;
+            CellModifications = new CellModifications();
         }
+
+        public CellModifications CellModifications { get; private set; }
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
@@ -44,6 +46,8 @@ namespace StoryTeller.Grammars
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             _cell = Cell.For(cellHandling, _accessor, fixture);
+            CellModifications.Apply(_cell);
+
             return new[] {_cell};
         }
 

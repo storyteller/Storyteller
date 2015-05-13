@@ -43,12 +43,16 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
     {
         public ConfigureObjectFixture()
         {
-            this["SetProps"] = new ConfigureObjectGrammar<Address, string>("data", (a, data) =>
+            var grammar = new ConfigureObjectGrammar<Address, string>("data", (a, data) =>
             {
                 var values = data.Split('-');
                 a.City = values.First();
                 a.StateOrProvince = values.Last();
-            }).Default("Austin-Texas");
+            });
+
+            grammar.CellModifications.DefaultValue("Austin-Texas");
+
+            this["SetProps"] = grammar;
         }
 
         [FormatAs("The city should be {city}")]

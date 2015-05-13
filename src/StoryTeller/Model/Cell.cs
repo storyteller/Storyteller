@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Web.UI.WebControls;
 using FubuCore;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
@@ -12,7 +11,7 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Model
 {
-    public class Cell
+    public class Cell : ICellExpression
     {
         /// <summary>
         /// Just for testing data setup
@@ -274,15 +273,42 @@ namespace StoryTeller.Model
 
         [JsonIgnore]
         public string OptionListName { get; set; }
-    }
 
-    public interface ICellExpression
-    {
-        ICellExpression Header(string header);
-        ICellExpression Editor(string editor);
-        ICellExpression DefaultValue(string @default);
-        ICellExpression SelectionValues(params string[] values);
-        ICellExpression SelectionValues(params Option[] options);
+        ICellExpression ICellExpression.Header(string header)
+        {
+            this.header = header;
+            return this;
+        }
+
+        ICellExpression ICellExpression.Editor(string editor)
+        {
+            this.editor = editor;
+            return this;
+        }
+
+        ICellExpression ICellExpression.DefaultValue(string @default)
+        {
+            this.DefaultValue = @default;
+            return this;
+        }
+
+        ICellExpression ICellExpression.SelectionValues(params string[] values)
+        {
+            options = values.Select(x => new Option {display = x, value = x}).ToArray();
+            return this;
+        }
+
+        ICellExpression ICellExpression.SelectionOptions(params Option[] options)
+        {
+            this.options = options;
+            return this;
+        }
+
+        ICellExpression ICellExpression.SelectionList(string listName)
+        {
+            OptionListName = listName;
+            return this;
+        }
     }
 
     // Tested through integration tests in the SetVerificationGrammar

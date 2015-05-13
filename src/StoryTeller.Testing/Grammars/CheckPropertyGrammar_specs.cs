@@ -1,5 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
+using Shouldly;
 using StoryTeller.Grammars;
+using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars
 {
@@ -22,13 +25,25 @@ namespace StoryTeller.Testing.Grammars
             Step("1").Cell("Name").Succeeded();
             Step("2").Cell("Name").FailedWithActual("Jeremy");
         }
+
+        [Test]
+        public void building_the_model()
+        {
+            var model = ModelFor<Sentence>("CheckProperty", "Check");
+            var cell = model.cells.Single();
+
+            cell.header.ShouldBe("The Name");
+            cell.DefaultValue.ShouldBe("Jeremy");
+        }
     }
 
     public class CheckPropertyFixture : Fixture
     {
         public CheckPropertyFixture()
         {
-            this["Check"] = CheckPropertyGrammar.For<CheckPropertyTarget>(x => x.Name);
+            var grammar = CheckPropertyGrammar.For<CheckPropertyTarget>(x => x.Name);
+            grammar.CellModifications.Header("The Name").DefaultValue("Jeremy");
+            this["Check"] = grammar;
         }
 
         public void SetName(string name)

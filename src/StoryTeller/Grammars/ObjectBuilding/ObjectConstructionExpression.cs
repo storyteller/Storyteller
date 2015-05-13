@@ -4,6 +4,7 @@ using System.Reflection;
 using FubuCore;
 using FubuCore.Reflection;
 using StoryTeller.Grammars.Paragraphs;
+using StoryTeller.Model;
 
 namespace StoryTeller.Grammars.ObjectBuilding
 {
@@ -48,16 +49,13 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public ObjectConstructionExpression<T> SetProperty(Expression<Func<T, object>> expression, string defaultValue = null)
+        public ICellExpression SetProperty(Expression<Func<T, object>> expression)
         {
-            var grammar = new SetPropertyGrammar(expression.ToAccessor())
-            {
-                DefaultValue = defaultValue
-            };
+            var grammar = new SetPropertyGrammar(expression.ToAccessor());
 
             _grammar.AddGrammar(grammar);
 
-            return this;
+            return grammar.CellModifications;
         }
         
         /// <summary>
@@ -146,15 +144,13 @@ namespace StoryTeller.Grammars.ObjectBuilding
                 _name = name;
             }
 
-            // TODO -- do something more usable than this?
-            // TODO -- have it return a Cell instead
-            // _.Cell['foo'] = (loc, cell) => ?
-            public ConfigureObjectGrammar<T, TCell> Configure(Action<T, TCell> configure)
+
+            public ICellExpression Configure(Action<T, TCell> configure)
             {
                 var grammar = new ConfigureObjectGrammar<T, TCell>(_name, configure);
                 _parent._grammar.AddGrammar(grammar);
 
-                return grammar;
+                return grammar.CellModifications;
             }
         }
 

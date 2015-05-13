@@ -38,13 +38,26 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             cell.Key.ShouldBe("City");
 
         }
+
+        [Test]
+        public void build_the_model_with_overrides()
+        {
+            var model = ModelFor<Sentence>("SetPropertyGrammar", "SetCity");
+            var cell = model.cells.Single();
+
+            cell.header.ShouldBe("The City");
+            cell.DefaultValue.ShouldBe("Austin");
+        }
     }
 
     public class SetPropertyGrammarFixture : Fixture
     {
         public SetPropertyGrammarFixture()
         {
-            this["SetCity"] = SetPropertyGrammar.For<Address>(x => x.City);
+            var grammar = SetPropertyGrammar.For<Address>(x => x.City);
+            grammar.CellModifications.Header("The City").DefaultValue("Austin");
+
+            this["SetCity"] = grammar;
         }
 
         [FormatAs("The city should be {city}")]

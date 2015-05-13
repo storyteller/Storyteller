@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using FubuCore;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -383,6 +384,68 @@ namespace StoryTeller.Testing.Model
 
             cell.output.ShouldBeTrue();
             cell.Type.ShouldBe(typeof(int));
+        }
+
+        [Test]
+        public void set_header_through_fi()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+
+            cell.As<ICellExpression>().Header("Foo").ShouldBeSameAs(cell);
+            cell.header.ShouldBe("Foo");
+
+        }
+
+        [Test]
+        public void set_editor_through_FI()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+            cell.As<ICellExpression>().Editor("big").ShouldBeTheSameAs(cell);
+
+            cell.editor.ShouldBe("big");
+        }
+
+        [Test]
+        public void set_default_value_through_fi()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+            cell.As<ICellExpression>().DefaultValue("123").ShouldBeSameAs(cell);
+
+            cell.DefaultValue.ShouldBe("123");
+        }
+
+        [Test]
+        public void set_selection_values_through_fi()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+            cell.As<ICellExpression>().SelectionValues("1", "2").ShouldBeSameAs(cell);
+
+            cell.options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("1", "2");
+        }
+
+        [Test]
+        public void set_selection_options_throug_fi()
+        {
+            var opt1 = new Option {display = "One", value = "1"};
+            var opt2 = new Option {display = "Two", value = "2"};
+
+            var cell = Cell.For<CellTarget>(x => x.Number);
+            cell.As<ICellExpression>().SelectionOptions(opt1, opt2).ShouldBeSameAs(cell);
+
+            cell.options
+                .ShouldHaveTheSameElementsAs(opt1, opt2);
+        }
+
+        [Test]
+        public void set_selection_list_through_fi()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Number);
+            cell.As<ICellExpression>().SelectionList("names")
+                .ShouldBeSameAs(cell);
+
+            cell.OptionListName.ShouldBe("names");
+
         }
     }
 

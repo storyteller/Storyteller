@@ -59,6 +59,15 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
         }
 
         [Test]
+        public void set_the_default_value_on_with_input()
+        {
+            var cell = ModelFor<Paragraph>("CreateLocation", "UsingWithInput")
+                .cells.FirstOrDefault(x => x.Key == "data");
+
+            cell.DefaultValue.ShouldBe("1;2");
+        }
+
+        [Test]
         public void set_all_primitive_properties()
         {
             execute(@"
@@ -101,7 +110,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
 
                     location.X = int.Parse(parts.First());
                     location.Y = int.Parse(parts.Last());
-                }).DefaultValue = "1;2";
+                }).DefaultValue("1;2");
 
                 _.Do(x => _location = x);
             });
@@ -130,7 +139,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             return CreateObject<Location>("The location is",_ =>
             {
                 _.LoadObjectBy = this["LoadLocation"];
-                _.SetProperty(x => x.X, "23");
+                _.SetProperty(x => x.X).DefaultValue("23");
                 _.SetProperty(x => x.Y);
             });
         }

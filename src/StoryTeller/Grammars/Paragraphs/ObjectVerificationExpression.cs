@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using FubuCore;
 using FubuCore.Reflection;
+using StoryTeller.Model;
 
 namespace StoryTeller.Grammars.Paragraphs
 {
@@ -21,11 +22,12 @@ namespace StoryTeller.Grammars.Paragraphs
             set { _grammar.Do(c => c.State.CurrentObject = value()); }
         }
 
-        public ObjectVerificationExpression<T> Check(Expression<Func<T, object>> expression)
+        public ICellExpression Check(Expression<Func<T, object>> expression)
         {
-            _grammar.AddGrammar(CheckPropertyGrammar.For(expression));
+            var grammar = CheckPropertyGrammar.For(expression);
+            _grammar.AddGrammar(grammar);
 
-            return this;
+            return grammar.CellModifications;
         }
 
         public ObjectVerificationExpression<T> CheckAllSimpleProperties()

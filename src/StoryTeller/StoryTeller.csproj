@@ -220,6 +220,7 @@
     <Compile Include="Model\FixtureModel.cs" />
     <Compile Include="Model\GrammarError.cs" />
     <Compile Include="Model\GrammarModel.cs" />
+    <Compile Include="Model\ICellExpression.cs" />
     <Compile Include="Model\IModelWithCells.cs" />
     <Compile Include="Model\INodeHolder.cs" />
     <Compile Include="Model\InvalidFixture.cs" />

@@ -21,9 +21,10 @@ namespace StoryTeller.Grammars.ObjectBuilding
         {
             _accessor = accessor;
             _template = "{0} = {{{0}}}".ToFormat(_accessor.Name);
+            CellModifications = new CellModifications();
         }
 
-        public string DefaultValue { get; set; }
+        public CellModifications CellModifications { get; private set; }
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
@@ -40,10 +41,9 @@ namespace StoryTeller.Grammars.ObjectBuilding
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType)
-            {
-                DefaultValue = DefaultValue
-            };
+            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType);
+            CellModifications.Apply(_cell);
+
             return new[] {_cell};
         }
 

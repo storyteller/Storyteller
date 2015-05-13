@@ -19,16 +19,11 @@ namespace StoryTeller.Grammars.ObjectBuilding
         {
             _key = key;
             _configure = configure;
+
+            CellModifications = new CellModifications();
         }
 
-        public string DefaultValue { get; set; }
-
-
-        public ConfigureObjectGrammar<TObject, TInput> Default(string defaultValue)
-        {
-            DefaultValue = defaultValue;
-            return this;
-        }
+        public CellModifications CellModifications { get; private set; }
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
@@ -48,7 +43,9 @@ namespace StoryTeller.Grammars.ObjectBuilding
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, _key, typeof (TInput)) {DefaultValue = DefaultValue};
+            _cell = new Cell(cellHandling, _key, typeof (TInput));
+
+            CellModifications.Apply(_cell);
 
             return new[] {_cell};
         }
