@@ -21,13 +21,10 @@ module.exports = React.createClass({
 		var builder = builders.findEditor(this.props.cell.editor);
 		var clazz = "cell label label-default";
 		var text = builder.display(this.props.cell, this.props.value);
-		if (!this.props.value){
+		if (this.props.value == null || this.props.value == undefined){
 			clazz = clazz + " missing";
 			text = '[' + this.props.cell.key + ']';
 		}
-		
-
-
 
 		var identifier = {step: this.props.id, cell: this.props.cell.key};
 

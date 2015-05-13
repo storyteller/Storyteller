@@ -42,6 +42,7 @@
     <Compile Include="Application\Calculator.cs" />
     <Compile Include="Fixtures\Actions\BatchProcessFixture.cs" />
     <Compile Include="Fixtures\CalculatorFixture.cs" />
+    <Compile Include="Fixtures\CellsFixture.cs" />
     <Compile Include="Fixtures\FactFixture.cs" />
     <Compile Include="Fixtures\GlossaryFixture.cs" />
     <Compile Include="Fixtures\SampleFixture.cs" />

@@ -46,7 +46,6 @@ var builders = {
 
 	toText: function(arg){
 		var builder = this.findEditor(arg.cell.editor);
-
 		return builder.display(arg.cell.key, arg.value);
 	}
 };

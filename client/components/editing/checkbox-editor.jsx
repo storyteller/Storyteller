@@ -22,6 +22,7 @@ module.exports = React.createClass({
 	},
 
 	publishChange: function(value){
+		console.log('publishing ' + value);
 		var arg = this.props.arg;
 
 		var cellChanged = changes.cellValue(arg.id, arg.cell.key, value);
@@ -47,9 +48,11 @@ module.exports = React.createClass({
 			channel: 'editor',
 			topic: 'apply-changes',
 			callback: (data, envelope) => {
-				var value = element.value;
+				console.log('I am trying to apply changes');
+				var value = element.checked;
 
 				if (value != component.props.arg.value){
+
 					component.publishChange(value);
 				}
 			}

@@ -229,6 +229,13 @@ namespace StoryTeller.Testing.Model
         }
 
         [Test]
+        public void default_value_is_false_for_a_boolean_type()
+        {
+            var cell = Cell.For<CellTarget>(x => x.IsActive);
+            cell.DefaultValue.ShouldBe(false.ToString());
+        }
+
+        [Test]
         public void use_a_select_editor_for_an_enum()
         {
             var cell = Cell.For<CellTarget>(x => x.Direction);

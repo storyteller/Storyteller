@@ -74,20 +74,24 @@ class EditorPresenter{
 	}
 
 	moveFirst(){
+		applyOutstandingChanges();
 		this.spec.navigator.moveFirst(); 
 		this.refreshEditor();
 	}
 
 	moveLast(){
+		applyOutstandingChanges();
 		this.spec.navigator.moveLast(); 
 		this.refreshEditor();
 	}
 
 	moveNext(){
+		applyOutstandingChanges();
 		if (this.spec.navigator.moveNext()) this.refreshEditor();
 	}
 
 	movePrevious(){
+		applyOutstandingChanges();
 		if (this.spec.navigator.movePrevious()) this.refreshEditor();
 	}
 
@@ -149,6 +153,8 @@ class EditorPresenter{
 		this.subscribe('reorder-down', () => this.reorderDown());
 
 		this.subscribe('add-item', () => {
+			applyOutstandingChanges();
+
 			var navigator = this.spec.navigator;
 			var location = navigator.location;
 			if (location.holder){
@@ -228,6 +234,8 @@ class EditorPresenter{
 	}
 
 	selectHolder(data){
+		applyOutstandingChanges();
+
 		this.spec.selectHolder(data.holder);
 
 		this.refreshEditor();

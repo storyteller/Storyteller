@@ -127,6 +127,7 @@ namespace StoryTeller.Model
             if (type == typeof (bool))
             {
                 editor = "boolean";
+                DefaultValue = false.ToString();
             }
             else if (type.IsEnum)
             {
