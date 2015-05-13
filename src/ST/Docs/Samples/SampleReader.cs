@@ -38,6 +38,8 @@ namespace ST.Docs.Samples
 
             if (name.IsNotEmpty())
             {
+                FoundSamples = true;
+
                 var snippet = new Sample(name){
                     Language = _scanner.Language,
                     File = _file.Path

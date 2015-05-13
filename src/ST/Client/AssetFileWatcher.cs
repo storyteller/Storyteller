@@ -9,11 +9,12 @@ namespace ST.Client
 {
     public class AssetFileWatcher : IDisposable
     {
+	// SAMPLE: declarations4
         private readonly IAssetFinder _finder;
         private readonly IClientConnector _connector;
         private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
         private DateTime _lastUpdate = DateTime.UtcNow;
-
+	// ENDSAMPLE
         public AssetFileWatcher(IAssetFinder finder, IClientConnector connector)
         {
             _finder = finder;

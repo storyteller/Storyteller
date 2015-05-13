@@ -56,6 +56,8 @@ namespace ST.Docs.Samples
         private void buildFileWatcherForScanner(string folder, string filter, ISampleScanner scanner)
         {
             var watcher = new FileSystemWatcher(folder, filter);
+            watcher.IncludeSubdirectories = true;
+
             FileSystemEventHandler onFileChange = (o, e) =>
             {
                 var path = e.FullPath;
