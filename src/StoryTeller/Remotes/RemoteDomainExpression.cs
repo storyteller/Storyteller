@@ -34,13 +34,14 @@ namespace StoryTeller.Remotes
                     _setup.PrivateBinPath = "bin";
                 }
 
-                if (fileSystem.DirectoryExists(value, "bin", "Release"))
-                {
-                    _setup.PrivateBinPath = "bin".AppendPath("Release");
-                }
-                else if (fileSystem.DirectoryExists(value, "bin", "Debug"))
+                // Favor Debug over release
+                if (fileSystem.DirectoryExists(value, "bin", "Debug"))
                 {
                     _setup.PrivateBinPath = "bin".AppendPath("Debug");
+                }
+                else if (fileSystem.DirectoryExists(value, "bin", "Release"))
+                {
+                    _setup.PrivateBinPath = "bin".AppendPath("Release");
                 }
 
                 if (fileSystem.FileExists(value.AppendPath("App.config")))

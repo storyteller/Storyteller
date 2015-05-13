@@ -19,7 +19,7 @@ namespace ST.CommandLine
         [Description("Path to the StoryTeller project file or the project directory")]
         public string Path { get; set; }
 
-        [Description("Specify a build target to force Storyteller to choose that profile")]
+        [Description("Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'")]
         public string BuildFlag { get; set; }
 
         [Description("Storyteller test mode profile for systems like Serenity that use this")]
