@@ -20,8 +20,17 @@ class Sentence{
 		// TODO: Someday this needs to become an object.defineproperty getter
 		this.title = metadata.format;
 
-		var parser = new SentenceParser(metadata.format, this);
-		parser.parse();
+		try {
+			var parser = new SentenceParser(metadata.format, this);
+			parser.parse();
+		}
+		catch (e){
+			this.errors.push({
+				message: 'Sentence parsing with format "' + metadata.format + '" failed.',
+				error: e.toString()
+			});
+		}
+
 
 		var usedCells = this.parts
 			.filter(part => part.type == "Cell")

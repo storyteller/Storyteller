@@ -154,11 +154,11 @@ describe('Sentence', function(){
 
 
 		it('gets mad when brackets are misaligned', function(){
-			expect(function(){
-				build({
-					format: 'Add {x to something'
-				});
-			}).to.throw();
+			build({
+				format: 'Add {x to something'
+			});
+
+			expect(sentence.errors.length).to.equal(1);
 		});
 	});
 

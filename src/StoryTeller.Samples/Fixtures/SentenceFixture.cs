@@ -72,6 +72,12 @@ namespace StoryTeller.Samples.Fixtures
             Context.Reporting.ReporterFor<ListReport>().Add(_number.ToString());
         }
 
+        [FormatAs("{one is better than {two")]
+        public void BadGrammar(string one, string two)
+        {
+            
+        }
+
         // END:  GrammarsInConstructor
 
         // SAMPLE:  ActionMethod
