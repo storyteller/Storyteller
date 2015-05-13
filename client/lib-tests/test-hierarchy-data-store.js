@@ -425,12 +425,17 @@ describe('Hierarchy data store functions', function(){
 		hierarchyIsPublishedFromEngine();
 		listener.clear();
 
+		QueueState.markRunning('embeds');
+		expect(QueueState.stateFor('embeds')).to.equal('running');
+
 		var results = {
 			counts: new Counts(1,2,3,4)
 		}
 
 		publishEngineMessage('spec-execution-completed', {id: 'embeds', results: results});
 	
+		expect(QueueState.stateFor('embeds')).to.equal('none');
+
 		var spec = Hierarchy.findSpec('embeds');
 		expect(spec.state).to.equal('none');
 

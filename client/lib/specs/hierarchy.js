@@ -243,6 +243,8 @@ handlers['spec-execution-completed'] = function(data){
 
 	specs[data.id].clearResults();
 
+	QueueState.markCompleted(data.id);
+
 	publishHierarchyChanged();
 	publishQueueChanged();
 

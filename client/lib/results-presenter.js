@@ -19,8 +19,9 @@ class ResultsPresenter extends EditorPresenter{
 		}
 		else {
 			var spec = this.spec;
-
+			
 			if (QueueState.stateFor(this.id) != 'running'){
+				console.log('Using historical result data');
 				var completed = ResultCache.lastResultFor(this.id);
 
 				if (completed == null){

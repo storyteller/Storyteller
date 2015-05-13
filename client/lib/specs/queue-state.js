@@ -30,6 +30,12 @@ module.exports = {
 		queued.runningCounts = counts || new Counts(0, 0, 0, 0);
 	},
 
+	markCompleted(id){
+		if (queued.running == id){
+			queued.running = null;
+		}
+	},
+
 	store(data){
 		queued = data;
 	},
