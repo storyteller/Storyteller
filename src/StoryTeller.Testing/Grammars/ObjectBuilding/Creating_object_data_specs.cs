@@ -103,7 +103,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
                     location.Y = int.Parse(parts.Last());
                 }).DefaultValue = "1;2";
 
-                _.Do = x => _location = x;
+                _.Do(x => _location = x);
             });
         }
          
@@ -120,7 +120,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             return CreateNewObject<Location>("The location is", _ =>
             {
                 _.SetAllPrimitivePropertiesSpecificToThisType();
-                _.Do = x => _location = x;
+                _.Do(x => _location = x);
             });
         }
 
@@ -149,7 +149,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             {
                 _.ObjectIs = c => new Location {X = Context.State.Retrieve<int>()};
                 _.SetProperty(x => x.Y);
-                _.Do = location => _location = location;
+                _.Do(location => _location = location);
             });
         }
          

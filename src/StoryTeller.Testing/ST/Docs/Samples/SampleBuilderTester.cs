@@ -36,7 +36,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         }
         // ENDSAMPLE
 
-        [Test]
+        [Test, Explicit("Too flakey with timings to be in C#")]
         public void try_to_find_a_new_snippet_in_a_changed_file()
         {
             var folder = AppDomain.CurrentDomain.BaseDirectory.AppendPath(Guid.NewGuid().ToString());

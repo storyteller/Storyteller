@@ -7,7 +7,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b61e5285-5159-491e-841a-0e9cd7e00b01",
+            "id": "fe243970-470e-4335-9e47-24f4de65d614",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -33,7 +33,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "da0aec84-6a0e-4713-bc71-8b9c70ab81a4",
+            "id": "1c3202b7-362c-44ff-a22e-80d99036eba4",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -42,7 +42,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e01d387-16a3-4bf3-aad1-c41b7d040087",
+            "id": "e1650a24-e7c1-4381-8047-e154e7a5c3b6",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -59,7 +59,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "2d176a90-c874-4135-877d-921f2241a93e",
+            "id": "9dccff2b-9494-4477-a317-88eae264134a",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -76,7 +76,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "1dade52d-9197-4ca7-882e-873871940fa9",
+            "id": "21dd03e4-1dfd-48de-84ae-5c3ca46de549",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -93,7 +93,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "0cc57677-703b-4559-8264-e7a71b89eac2",
+            "id": "5a363644-d933-4eec-a4cb-ea4a113e22dd",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -102,7 +102,7 @@ module.exports = {
             "status": "error",
             "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 120\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__e.MoveNext() in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 76\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 38",
             "cells": [],
-            "id": "3c47510d-e17b-4b68-8d3b-ae326c2f9e6e",
+            "id": "5b5bca77-0712-4b3f-ac9a-63694ddc2f09",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -113,123 +113,123 @@ module.exports = {
             "type": "Specification",
             "subject": "Embeds",
             "start": 0,
-            "end": 108,
-            "duration": 108
+            "end": 104,
+            "duration": 104
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 4,
-            "end": 4,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Embedded:SetUp",
-            "start": 97,
-            "end": 99,
+            "start": 95,
+            "end": 97,
             "duration": 2
           },
           {
             "type": "Grammar",
             "subject": "ThrowAnExceptionOnTheNextEmbed",
-            "start": 100,
-            "end": 103,
+            "start": 97,
+            "end": 100,
             "duration": 3
           },
           {
             "type": "Grammar",
             "subject": "EmbeddedMath:Before",
-            "start": 103,
-            "end": 104,
+            "start": 100,
+            "end": 101,
             "duration": 1
           },
           {
             "type": "Fixture",
             "subject": "Math:SetUp",
-            "start": 104,
-            "end": 104,
+            "start": 101,
+            "end": 101,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 104,
-            "end": 105,
+            "start": 101,
+            "end": 102,
             "duration": 1
           },
           {
             "type": "Fixture",
             "subject": "Math:TearDown",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "DoNotThrowAnExceptionOnTheNextEmbed",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "EmbeddedMath:Before",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:SetUp",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 105,
-            "end": 105,
+            "start": 102,
+            "end": 102,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Throw",
-            "start": 105,
-            "end": 107,
-            "duration": 2
+            "start": 102,
+            "end": 103,
+            "duration": 1
           },
           {
             "type": "Fixture",
             "subject": "Math:TearDown",
-            "start": 107,
-            "end": 107,
+            "start": 103,
+            "end": 103,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Embedded:TearDown",
-            "start": 107,
-            "end": 107,
+            "start": 103,
+            "end": 103,
             "duration": 0
           }
         ],
-        "duration": 108,
+        "duration": 104,
         "logging": [
           {
             "html": "<pre class=\"debug-output\">EmbeddedFixture.Setup sent this debug message\r\n</pre>",
@@ -238,7 +238,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 1,
@@ -262,7 +262,7 @@ module.exports = {
                 "key": "ThrowAnExceptionOnTheNextEmbed",
                 "cells": {},
                 "collections": [],
-                "id": "b61e5285-5159-491e-841a-0e9cd7e00b01"
+                "id": "fe243970-470e-4335-9e47-24f4de65d614"
               },
               {
                 "key": "EmbeddedMath",
@@ -280,20 +280,20 @@ module.exports = {
                           "returnValue": "10"
                         },
                         "collections": [],
-                        "id": "da0aec84-6a0e-4713-bc71-8b9c70ab81a4"
+                        "id": "1c3202b7-362c-44ff-a22e-80d99036eba4"
                       }
                     ],
                     "activeCells": {},
                     "id": "errors"
                   }
                 ],
-                "id": "61a3a7f9-a10c-4ae0-b3a8-9c12af8544ae"
+                "id": "ac649958-78f2-487f-82e0-7d321b5ba205"
               },
               {
                 "key": "DoNotThrowAnExceptionOnTheNextEmbed",
                 "cells": {},
                 "collections": [],
-                "id": "4e01d387-16a3-4bf3-aad1-c41b7d040087"
+                "id": "e1650a24-e7c1-4381-8047-e154e7a5c3b6"
               },
               {
                 "key": "EmbeddedMath",
@@ -311,7 +311,7 @@ module.exports = {
                           "returnValue": "9"
                         },
                         "collections": [],
-                        "id": "2d176a90-c874-4135-877d-921f2241a93e"
+                        "id": "9dccff2b-9494-4477-a317-88eae264134a"
                       },
                       {
                         "key": "Adding",
@@ -321,7 +321,7 @@ module.exports = {
                           "returnValue": "11"
                         },
                         "collections": [],
-                        "id": "1dade52d-9197-4ca7-882e-873871940fa9"
+                        "id": "21dd03e4-1dfd-48de-84ae-5c3ca46de549"
                       },
                       {
                         "key": "Adding",
@@ -331,20 +331,20 @@ module.exports = {
                           "returnValue": "abc"
                         },
                         "collections": [],
-                        "id": "0cc57677-703b-4559-8264-e7a71b89eac2"
+                        "id": "5a363644-d933-4eec-a4cb-ea4a113e22dd"
                       },
                       {
                         "key": "Throw",
                         "cells": {},
                         "collections": [],
-                        "id": "3c47510d-e17b-4b68-8d3b-ae326c2f9e6e"
+                        "id": "5b5bca77-0712-4b3f-ac9a-63694ddc2f09"
                       }
                     ],
                     "activeCells": {},
                     "id": "no-errors"
                   }
                 ],
-                "id": "5e899b9c-bf5c-462a-b24b-2502b67ecf28"
+                "id": "908f919b-fbdc-44e8-bd0e-cfc1cbc81f41"
               }
             ],
             "activeCells": {},
@@ -361,7 +361,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de",
+            "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -370,7 +370,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de",
+            "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -379,7 +379,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de",
+            "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8",
             "spec": "general1",
             "position": "3",
             "type": "step-result"
@@ -388,7 +388,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de",
+            "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8",
             "spec": "general1",
             "position": "4",
             "type": "step-result"
@@ -397,7 +397,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de",
+            "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8",
             "spec": "general1",
             "position": "5",
             "type": "step-result"
@@ -406,7 +406,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de",
+            "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8",
             "spec": "general1",
             "position": "6",
             "type": "step-result"
@@ -423,7 +423,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9de18ccb-ff9f-4962-9074-0e43f51ced4b",
+            "id": "cb289095-4c6c-4aeb-82bb-421f3ecc6f19",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -440,7 +440,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9de18ccb-ff9f-4962-9074-0e43f51ced4b",
+            "id": "cb289095-4c6c-4aeb-82bb-421f3ecc6f19",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -457,7 +457,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9de18ccb-ff9f-4962-9074-0e43f51ced4b",
+            "id": "cb289095-4c6c-4aeb-82bb-421f3ecc6f19",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -474,7 +474,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "ec0c487e-22ae-42b3-a1a3-272f6c1d7e43",
+            "id": "908ad8ba-db93-4850-87c4-e6dd1ded8bef",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -491,7 +491,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "ec0c487e-22ae-42b3-a1a3-272f6c1d7e43",
+            "id": "908ad8ba-db93-4850-87c4-e6dd1ded8bef",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -508,7 +508,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "ec0c487e-22ae-42b3-a1a3-272f6c1d7e43",
+            "id": "908ad8ba-db93-4850-87c4-e6dd1ded8bef",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -540,15 +540,15 @@ module.exports = {
             "type": "Grammar",
             "subject": "IfTheAddressIs:0",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "IfTheAddressIs:1",
-            "start": 1,
+            "start": 0,
             "end": 1,
-            "duration": 0
+            "duration": 1
           },
           {
             "type": "Grammar",
@@ -596,42 +596,42 @@ module.exports = {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:1",
             "start": 2,
-            "end": 2,
-            "duration": 0
+            "end": 3,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:2",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:0",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:1",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:2",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "CheckObject:TearDown",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           }
         ],
@@ -644,7 +644,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 3,
           "wrongs": 3,
@@ -675,7 +675,7 @@ module.exports = {
                   "PostalCode": "70071"
                 },
                 "collections": [],
-                "id": "f0b8d089-2ceb-41e7-a45b-e42ead3185de"
+                "id": "deb46142-176e-42e5-94a3-d77e4d80eeb8"
               },
               {
                 "key": "TheAddressShouldBe",
@@ -685,7 +685,7 @@ module.exports = {
                   "City": "Carthage"
                 },
                 "collections": [],
-                "id": "9de18ccb-ff9f-4962-9074-0e43f51ced4b"
+                "id": "cb289095-4c6c-4aeb-82bb-421f3ecc6f19"
               },
               {
                 "key": "TheAddressShouldBe",
@@ -695,11 +695,11 @@ module.exports = {
                   "City": "wrong"
                 },
                 "collections": [],
-                "id": "ec0c487e-22ae-42b3-a1a3-272f6c1d7e43"
+                "id": "908ad8ba-db93-4850-87c4-e6dd1ded8bef"
               }
             ],
             "activeCells": {},
-            "id": "8ad57273-2541-4e92-9d9b-904773d9784f"
+            "id": "68a3d960-8307-46c7-81f6-8ea8dde640b9"
           }
         ],
         "id": "general1"
@@ -712,7 +712,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "68f09f85-9ae4-4f77-8327-637ff569b788",
+            "id": "42e307e9-0ab4-4480-b17d-2780db1429a5",
             "spec": "SometimesSlow",
             "position": null,
             "type": "step-result"
@@ -764,7 +764,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -793,7 +793,7 @@ module.exports = {
                 "key": "Slow",
                 "cells": {},
                 "collections": [],
-                "id": "68f09f85-9ae4-4f77-8327-637ff569b788"
+                "id": "42e307e9-0ab4-4480-b17d-2780db1429a5"
               }
             ],
             "activeCells": {},
@@ -818,7 +818,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9112768e-93a3-4297-931e-f993792a94a5",
+            "id": "431168c5-3672-4b6f-8bdf-f2760e376e80",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -835,7 +835,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "531c3170-4cc3-47c4-8a2b-aff2ed220a81",
+            "id": "aa44cc98-c939-4111-86db-7646b5c0fed0",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -852,7 +852,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "b86755d4-9643-4cf1-9a48-16a7a986638b",
+            "id": "c6f3035a-75de-4334-8206-d01c868ce632",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -883,7 +883,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "adaa7c8a-64d6-4e82-8805-6f4decffde6d",
+            "id": "ffe1ac4e-5cde-43e4-b7d5-44d2062a5a24",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -900,7 +900,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "bb74f326-1f35-4a85-a61a-324eae059d80",
+            "id": "8ef91258-8051-4f94-a540-aa4c40991a96",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -939,35 +939,35 @@ module.exports = {
             "type": "Grammar",
             "subject": "FirstAndLastName:Row",
             "start": 0,
-            "end": 0,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "FirstAndLastName:Row",
-            "start": 0,
-            "end": 0,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": null,
-            "start": 0,
             "end": 1,
             "duration": 1
           },
           {
             "type": "Grammar",
-            "subject": "TheEnumOptionIs",
+            "subject": "FirstAndLastName:Row",
             "start": 1,
             "end": 1,
             "duration": 0
           },
           {
+            "type": "Grammar",
+            "subject": null,
+            "start": 1,
+            "end": 2,
+            "duration": 1
+          },
+          {
+            "type": "Grammar",
+            "subject": "TheEnumOptionIs",
+            "start": 2,
+            "end": 2,
+            "duration": 0
+          },
+          {
             "type": "Fixture",
             "subject": "SelectionList:TearDown",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           }
         ],
@@ -980,7 +980,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 4,
           "wrongs": 1,
@@ -1008,7 +1008,7 @@ module.exports = {
                   "fullname": "Jeremy Smith"
                 },
                 "collections": [],
-                "id": "9112768e-93a3-4297-931e-f993792a94a5"
+                "id": "431168c5-3672-4b6f-8bdf-f2760e376e80"
               },
               {
                 "key": "FirstAndLastName",
@@ -1026,7 +1026,7 @@ module.exports = {
                           "fullname": "Hank Miller"
                         },
                         "collections": [],
-                        "id": "531c3170-4cc3-47c4-8a2b-aff2ed220a81"
+                        "id": "aa44cc98-c939-4111-86db-7646b5c0fed0"
                       },
                       {
                         "key": "table",
@@ -1036,14 +1036,14 @@ module.exports = {
                           "fullname": "Harold Mueller"
                         },
                         "collections": [],
-                        "id": "b86755d4-9643-4cf1-9a48-16a7a986638b"
+                        "id": "c6f3035a-75de-4334-8206-d01c868ce632"
                       }
                     ],
                     "activeCells": {},
-                    "id": "e358c258-bdb6-43c6-8a7b-1e77d0c64ec1"
+                    "id": "4be4fabf-d783-47e3-88d9-4a7e7aaa4de8"
                   }
                 ],
-                "id": "40c61856-0973-43e9-9f63-a88f6f4f47d7"
+                "id": "140f7fe6-1a11-455f-bec9-dc411e269844"
               },
               {
                 "key": "names",
@@ -1061,14 +1061,14 @@ module.exports = {
                           "Fullname": "Tobin Smith"
                         },
                         "collections": [],
-                        "id": "adaa7c8a-64d6-4e82-8805-6f4decffde6d"
+                        "id": "ffe1ac4e-5cde-43e4-b7d5-44d2062a5a24"
                       }
                     ],
                     "activeCells": {},
-                    "id": "a63f7a25-e588-47e7-92a5-d4abcc782b17"
+                    "id": "d58d08e3-e0f8-404c-aba7-2a118932c91e"
                   }
                 ],
-                "id": "0e84888e-e12b-432e-806c-bd4e1c773e6c"
+                "id": "cecfdab9-167f-4315-adb1-45ff3a720ab5"
               },
               {
                 "key": "TheEnumOptionIs",
@@ -1077,11 +1077,11 @@ module.exports = {
                   "selectedOption": "0"
                 },
                 "collections": [],
-                "id": "bb74f326-1f35-4a85-a61a-324eae059d80"
+                "id": "8ef91258-8051-4f94-a540-aa4c40991a96"
               }
             ],
             "activeCells": {},
-            "id": "90da1ee5-650f-4173-916d-8e38ae358a34"
+            "id": "8c484d0d-cc24-490c-a98d-688792af0bae"
           }
         ],
         "id": "general2"
@@ -1094,7 +1094,7 @@ module.exports = {
             "status": "invalid",
             "error": "Fixture with key 'Service' does not exist",
             "cells": [],
-            "id": "770d02d7-fec4-4094-84e4-3e3149a7714d",
+            "id": "bd234685-d199-4705-828f-a5a240228f95",
             "spec": "general3",
             "position": "setup",
             "type": "step-result"
@@ -1132,7 +1132,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -1158,7 +1158,7 @@ module.exports = {
                   "value": "5"
                 },
                 "collections": [],
-                "id": "8994fd0b-46d3-49d0-97d6-77a90fc8817d"
+                "id": "5066cc92-5d5b-4dbe-98d3-71928c6134c5"
               },
               {
                 "key": "Check",
@@ -1166,7 +1166,7 @@ module.exports = {
                   "value": "5"
                 },
                 "collections": [],
-                "id": "891927a6-6248-4a97-aaad-ca07d338fa7f"
+                "id": "514a1d71-2c9f-4011-819a-0db4dc7deb1c"
               },
               {
                 "key": "Set",
@@ -1174,7 +1174,7 @@ module.exports = {
                   "value": "6"
                 },
                 "collections": [],
-                "id": "eb114eba-a384-4163-b049-0c0b635b5a24"
+                "id": "648bb6e4-7b32-4210-9949-9de74cc1d4f3"
               },
               {
                 "key": "Check",
@@ -1182,7 +1182,7 @@ module.exports = {
                   "value": "7"
                 },
                 "collections": [],
-                "id": "ccf3e0f6-7307-4029-87eb-6cff1e74637b"
+                "id": "b3cae736-4c6e-46cf-aef5-59b611db55cc"
               },
               {
                 "key": "Set",
@@ -1190,11 +1190,11 @@ module.exports = {
                   "value": "abc"
                 },
                 "collections": [],
-                "id": "61214122-dbd2-440e-94a8-9277197e41f7"
+                "id": "f144dd95-04b9-4e69-bca8-31b747296b50"
               }
             ],
             "activeCells": {},
-            "id": "770d02d7-fec4-4094-84e4-3e3149a7714d"
+            "id": "bd234685-d199-4705-828f-a5a240228f95"
           }
         ],
         "id": "general3"
@@ -1215,7 +1215,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "854dd10f-3e46-42e6-8850-448403c98916",
+            "id": "623d9bce-623a-441b-b84d-5e5f9cf4f0e0",
             "spec": "runtime-converter",
             "position": null,
             "type": "step-result"
@@ -1267,7 +1267,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 1,
           "wrongs": 0,
@@ -1307,14 +1307,14 @@ module.exports = {
                           "Position": "LB"
                         },
                         "collections": [],
-                        "id": "854dd10f-3e46-42e6-8850-448403c98916"
+                        "id": "623d9bce-623a-441b-b84d-5e5f9cf4f0e0"
                       }
                     ],
                     "activeCells": {},
                     "id": "2e87da8f-d2bb-45a0-a375-39e38e3f9564"
                   }
                 ],
-                "id": "037eec23-014e-493e-a2ff-9fa284a2087e"
+                "id": "6d3be61e-ce43-4363-bc47-5a687005bd57"
               }
             ],
             "activeCells": {},
@@ -1331,7 +1331,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar1' is not implemented",
             "cells": [],
-            "id": "9544bc7c-54c2-49e2-9d0e-901a4a1c17c6",
+            "id": "e5ee8709-6de3-4176-8257-1a8b1ccc53c6",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -1340,7 +1340,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar2' is not implemented",
             "cells": [],
-            "id": "82e0122a-95d1-420f-ab30-ccc4fe5c5599",
+            "id": "954989d2-0da6-4902-96c3-b813a29a4b5f",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -1349,7 +1349,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar3' is not implemented",
             "cells": [],
-            "id": "7df16cb7-d69e-4aaa-84d0-1dbdf43e6b10",
+            "id": "456a26ff-7246-4da5-9807-bd197c977b92",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -1415,7 +1415,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -1439,23 +1439,23 @@ module.exports = {
                 "key": "BadGrammar1",
                 "cells": {},
                 "collections": [],
-                "id": "9544bc7c-54c2-49e2-9d0e-901a4a1c17c6"
+                "id": "e5ee8709-6de3-4176-8257-1a8b1ccc53c6"
               },
               {
                 "key": "BadGrammar2",
                 "cells": {},
                 "collections": [],
-                "id": "82e0122a-95d1-420f-ab30-ccc4fe5c5599"
+                "id": "954989d2-0da6-4902-96c3-b813a29a4b5f"
               },
               {
                 "key": "BadGrammar3",
                 "cells": {},
                 "collections": [],
-                "id": "7df16cb7-d69e-4aaa-84d0-1dbdf43e6b10"
+                "id": "456a26ff-7246-4da5-9807-bd197c977b92"
               }
             ],
             "activeCells": {},
-            "id": "49319351-9784-40b5-91a0-708611f1f16f"
+            "id": "1134100b-c7ca-4f27-aeb6-637ed09053b9"
           }
         ],
         "id": "general4"
@@ -1506,7 +1506,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -1540,7 +1540,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3751c794-6417-4d5a-9a69-e2e2d3fe1bce",
+            "id": "214d030d-739e-4a8f-b487-3370efbf7065",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1557,7 +1557,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "3751c794-6417-4d5a-9a69-e2e2d3fe1bce",
+            "id": "214d030d-739e-4a8f-b487-3370efbf7065",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1566,7 +1566,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3751c794-6417-4d5a-9a69-e2e2d3fe1bce",
+            "id": "214d030d-739e-4a8f-b487-3370efbf7065",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1583,7 +1583,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "3751c794-6417-4d5a-9a69-e2e2d3fe1bce",
+            "id": "214d030d-739e-4a8f-b487-3370efbf7065",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1600,7 +1600,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "a5ce9caa-63c8-4871-851f-69c60aa968a1",
+            "id": "02de405b-5480-4515-b412-5ef4551b717d",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1609,7 +1609,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a5ce9caa-63c8-4871-851f-69c60aa968a1",
+            "id": "02de405b-5480-4515-b412-5ef4551b717d",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1618,7 +1618,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a5ce9caa-63c8-4871-851f-69c60aa968a1",
+            "id": "02de405b-5480-4515-b412-5ef4551b717d",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1635,7 +1635,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "a5ce9caa-63c8-4871-851f-69c60aa968a1",
+            "id": "02de405b-5480-4515-b412-5ef4551b717d",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1644,7 +1644,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "31f00aca-3d29-4027-bfe9-6870763544d2",
+            "id": "1bb4126d-2c41-42bc-97ae-2d48e629b35a",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1653,7 +1653,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "31f00aca-3d29-4027-bfe9-6870763544d2",
+            "id": "1bb4126d-2c41-42bc-97ae-2d48e629b35a",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1662,7 +1662,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "31f00aca-3d29-4027-bfe9-6870763544d2",
+            "id": "1bb4126d-2c41-42bc-97ae-2d48e629b35a",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1679,7 +1679,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "31f00aca-3d29-4027-bfe9-6870763544d2",
+            "id": "1bb4126d-2c41-42bc-97ae-2d48e629b35a",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1688,7 +1688,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "40487892-da3d-4ece-93c0-57260b21486b",
+            "id": "1827c796-5fc9-44e9-a67c-bac789f4ec04",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1697,7 +1697,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "40487892-da3d-4ece-93c0-57260b21486b",
+            "id": "1827c796-5fc9-44e9-a67c-bac789f4ec04",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1706,7 +1706,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "40487892-da3d-4ece-93c0-57260b21486b",
+            "id": "1827c796-5fc9-44e9-a67c-bac789f4ec04",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1723,7 +1723,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "40487892-da3d-4ece-93c0-57260b21486b",
+            "id": "1827c796-5fc9-44e9-a67c-bac789f4ec04",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1732,7 +1732,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7ea31dfa-a48e-4f3f-b652-dc19189327a8",
+            "id": "cf5cb2b9-01d7-42ea-9ee2-ab0742c71f44",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1741,7 +1741,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7ea31dfa-a48e-4f3f-b652-dc19189327a8",
+            "id": "cf5cb2b9-01d7-42ea-9ee2-ab0742c71f44",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1750,7 +1750,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7ea31dfa-a48e-4f3f-b652-dc19189327a8",
+            "id": "cf5cb2b9-01d7-42ea-9ee2-ab0742c71f44",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1759,7 +1759,7 @@ module.exports = {
             "status": "error",
             "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<.ctor>b__3(ISpecContext c) in z:\\code\\Storyteller\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(ISpecContext context) in z:\\code\\Storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 89",
             "cells": [],
-            "id": "7ea31dfa-a48e-4f3f-b652-dc19189327a8",
+            "id": "cf5cb2b9-01d7-42ea-9ee2-ab0742c71f44",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1776,7 +1776,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "7ea31dfa-a48e-4f3f-b652-dc19189327a8",
+            "id": "cf5cb2b9-01d7-42ea-9ee2-ab0742c71f44",
             "spec": "paragraph1",
             "position": "4",
             "type": "step-result"
@@ -1787,8 +1787,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Composite with Errors",
             "start": 0,
-            "end": 2,
-            "duration": 2
+            "end": 3,
+            "duration": 3
           },
           {
             "type": "Context",
@@ -1808,22 +1808,22 @@ module.exports = {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 1,
+            "start": 2,
             "end": 2,
-            "duration": 1
+            "duration": 0
           },
           {
             "type": "Grammar",
@@ -1941,25 +1941,25 @@ module.exports = {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:3",
             "start": 2,
-            "end": 2,
-            "duration": 0
+            "end": 3,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Composite:TearDown",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           }
         ],
-        "duration": 2,
+        "duration": 3,
         "logging": [
           {
             "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 50\r\nthe number is 54\r\nthe number is 540\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 5\r\nthe number is 20\r\n</pre>",
@@ -1972,7 +1972,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 3,
@@ -2001,7 +2001,7 @@ module.exports = {
                   "expected": "80"
                 },
                 "collections": [],
-                "id": "3751c794-6417-4d5a-9a69-e2e2d3fe1bce"
+                "id": "214d030d-739e-4a8f-b487-3370efbf7065"
               },
               {
                 "key": "AddAndMultiplyTable",
@@ -2020,7 +2020,7 @@ module.exports = {
                           "expected": "25"
                         },
                         "collections": [],
-                        "id": "a5ce9caa-63c8-4871-851f-69c60aa968a1"
+                        "id": "02de405b-5480-4515-b412-5ef4551b717d"
                       },
                       {
                         "key": "Rows",
@@ -2031,7 +2031,7 @@ module.exports = {
                           "expected": "80"
                         },
                         "collections": [],
-                        "id": "31f00aca-3d29-4027-bfe9-6870763544d2"
+                        "id": "1bb4126d-2c41-42bc-97ae-2d48e629b35a"
                       },
                       {
                         "key": "Rows",
@@ -2042,14 +2042,14 @@ module.exports = {
                           "expected": "77"
                         },
                         "collections": [],
-                        "id": "40487892-da3d-4ece-93c0-57260b21486b"
+                        "id": "1827c796-5fc9-44e9-a67c-bac789f4ec04"
                       }
                     ],
                     "activeCells": {},
-                    "id": "102c4758-0a7f-4fba-951c-10582995f5db"
+                    "id": "15b7a11e-fe9d-43c9-94e6-57c384f28e64"
                   }
                 ],
-                "id": "20cacba0-84f4-49dc-b42c-c60dcb949db8"
+                "id": "81afefd4-7623-4010-b8d5-731f25bf4fa3"
               },
               {
                 "key": "AddAndMultiplyThrow",
@@ -2060,11 +2060,11 @@ module.exports = {
                   "expected": "20"
                 },
                 "collections": [],
-                "id": "7ea31dfa-a48e-4f3f-b652-dc19189327a8"
+                "id": "cf5cb2b9-01d7-42ea-9ee2-ab0742c71f44"
               }
             ],
             "activeCells": {},
-            "id": "0146f6cc-e1db-4d47-831d-0032bc91c408"
+            "id": "01d0354d-24aa-4c13-ab0f-a2eb0d6d3217"
           }
         ],
         "id": "paragraph1"
@@ -2077,7 +2077,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a6619ba8-d84d-4bf8-baf5-0bc7ac930093",
+            "id": "a2adf4e8-34f0-4346-a597-36b56af6a6dd",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2086,7 +2086,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a6619ba8-d84d-4bf8-baf5-0bc7ac930093",
+            "id": "a2adf4e8-34f0-4346-a597-36b56af6a6dd",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2095,7 +2095,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a6619ba8-d84d-4bf8-baf5-0bc7ac930093",
+            "id": "a2adf4e8-34f0-4346-a597-36b56af6a6dd",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2112,7 +2112,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "a6619ba8-d84d-4bf8-baf5-0bc7ac930093",
+            "id": "a2adf4e8-34f0-4346-a597-36b56af6a6dd",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2121,7 +2121,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "57240d9f-4671-4449-9aef-3c1104c1e24b",
+            "id": "2750fc83-3b7b-4212-aee7-2e3f8f4549ec",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2130,7 +2130,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "57240d9f-4671-4449-9aef-3c1104c1e24b",
+            "id": "2750fc83-3b7b-4212-aee7-2e3f8f4549ec",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2139,7 +2139,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "57240d9f-4671-4449-9aef-3c1104c1e24b",
+            "id": "2750fc83-3b7b-4212-aee7-2e3f8f4549ec",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2156,7 +2156,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "57240d9f-4671-4449-9aef-3c1104c1e24b",
+            "id": "2750fc83-3b7b-4212-aee7-2e3f8f4549ec",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2165,7 +2165,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1f2cd40b-4aea-4117-8c34-2fb559688218",
+            "id": "51e03ed0-cbfe-4f44-9d8a-ff77d6f8ea8a",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2174,7 +2174,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1f2cd40b-4aea-4117-8c34-2fb559688218",
+            "id": "51e03ed0-cbfe-4f44-9d8a-ff77d6f8ea8a",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2183,7 +2183,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1f2cd40b-4aea-4117-8c34-2fb559688218",
+            "id": "51e03ed0-cbfe-4f44-9d8a-ff77d6f8ea8a",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2200,7 +2200,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "1f2cd40b-4aea-4117-8c34-2fb559688218",
+            "id": "51e03ed0-cbfe-4f44-9d8a-ff77d6f8ea8a",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2209,7 +2209,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "29790696-22c2-415e-93b9-b6b7ce67526e",
+            "id": "7f0bc264-41e2-40ac-bccd-2ca12c5beaed",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2218,7 +2218,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "29790696-22c2-415e-93b9-b6b7ce67526e",
+            "id": "7f0bc264-41e2-40ac-bccd-2ca12c5beaed",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2227,7 +2227,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "29790696-22c2-415e-93b9-b6b7ce67526e",
+            "id": "7f0bc264-41e2-40ac-bccd-2ca12c5beaed",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2244,7 +2244,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "29790696-22c2-415e-93b9-b6b7ce67526e",
+            "id": "7f0bc264-41e2-40ac-bccd-2ca12c5beaed",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2253,7 +2253,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa4a4dbd-d0d7-4158-97e1-57b7d3cf0643",
+            "id": "f00b2e09-ecce-4eea-9ab2-8cb621d8225e",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2262,7 +2262,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa4a4dbd-d0d7-4158-97e1-57b7d3cf0643",
+            "id": "f00b2e09-ecce-4eea-9ab2-8cb621d8225e",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2271,7 +2271,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa4a4dbd-d0d7-4158-97e1-57b7d3cf0643",
+            "id": "f00b2e09-ecce-4eea-9ab2-8cb621d8225e",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2288,7 +2288,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "fa4a4dbd-d0d7-4158-97e1-57b7d3cf0643",
+            "id": "f00b2e09-ecce-4eea-9ab2-8cb621d8225e",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2432,35 +2432,35 @@ module.exports = {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Composite:TearDown",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           }
         ],
@@ -2477,7 +2477,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 3,
@@ -2506,7 +2506,7 @@ module.exports = {
                   "expected": "80"
                 },
                 "collections": [],
-                "id": "a6619ba8-d84d-4bf8-baf5-0bc7ac930093"
+                "id": "a2adf4e8-34f0-4346-a597-36b56af6a6dd"
               },
               {
                 "key": "AddAndMultiply",
@@ -2517,7 +2517,7 @@ module.exports = {
                   "expected": "77"
                 },
                 "collections": [],
-                "id": "57240d9f-4671-4449-9aef-3c1104c1e24b"
+                "id": "2750fc83-3b7b-4212-aee7-2e3f8f4549ec"
               },
               {
                 "key": "AddAndMultiplyTable",
@@ -2536,7 +2536,7 @@ module.exports = {
                           "expected": "25"
                         },
                         "collections": [],
-                        "id": "1f2cd40b-4aea-4117-8c34-2fb559688218"
+                        "id": "51e03ed0-cbfe-4f44-9d8a-ff77d6f8ea8a"
                       },
                       {
                         "key": "Rows",
@@ -2547,7 +2547,7 @@ module.exports = {
                           "expected": "80"
                         },
                         "collections": [],
-                        "id": "29790696-22c2-415e-93b9-b6b7ce67526e"
+                        "id": "7f0bc264-41e2-40ac-bccd-2ca12c5beaed"
                       },
                       {
                         "key": "Rows",
@@ -2558,18 +2558,18 @@ module.exports = {
                           "expected": "77"
                         },
                         "collections": [],
-                        "id": "fa4a4dbd-d0d7-4158-97e1-57b7d3cf0643"
+                        "id": "f00b2e09-ecce-4eea-9ab2-8cb621d8225e"
                       }
                     ],
                     "activeCells": {},
-                    "id": "ba8dadc2-611b-4d20-9237-f9c89c7dcedd"
+                    "id": "107356e4-3a79-4eea-941b-22a208c17d33"
                   }
                 ],
-                "id": "940ea76a-76bd-4e20-b03b-b9a9d1f73453"
+                "id": "2248ec20-c79f-4c46-9635-b4c4743afe66"
               }
             ],
             "activeCells": {},
-            "id": "a435a0fe-5765-4b1e-9098-2e12cc3951ce"
+            "id": "4ea6791a-9678-4d98-9d84-e7ea6314caab"
           }
         ],
         "id": "paragraph2"
@@ -2590,7 +2590,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "6f9a3c35-cc87-4f18-b87b-1332f6712812",
+            "id": "9c0b69ab-635d-4016-a622-28ad2d67a972",
             "spec": "sentence1",
             "position": null,
             "type": "step-result"
@@ -2607,7 +2607,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "a3cee63c-9207-470e-bdf1-b5d389659f73",
+            "id": "b43adfeb-f473-4746-b54c-067095f48f8b",
             "spec": "sentence1",
             "position": null,
             "type": "step-result"
@@ -2666,7 +2666,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -2694,7 +2694,7 @@ module.exports = {
                   "y": "5"
                 },
                 "collections": [],
-                "id": "6f9a3c35-cc87-4f18-b87b-1332f6712812"
+                "id": "9c0b69ab-635d-4016-a622-28ad2d67a972"
               },
               {
                 "key": "AddTo5",
@@ -2704,11 +2704,11 @@ module.exports = {
                   "y": "5"
                 },
                 "collections": [],
-                "id": "a3cee63c-9207-470e-bdf1-b5d389659f73"
+                "id": "b43adfeb-f473-4746-b54c-067095f48f8b"
               }
             ],
             "activeCells": {},
-            "id": "883be1cc-2234-4004-827a-0b2140090093"
+            "id": "a7561f5d-516f-45c8-b102-7aaee4915351"
           }
         ],
         "id": "sentence1"
@@ -2805,7 +2805,7 @@ module.exports = {
         ],
         "attempts": 4,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -2877,7 +2877,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "aa6bfd16-f2eb-42a5-a2cd-fc1faa293985",
+            "id": "715a950b-5295-48e5-a7a6-45969d723690",
             "spec": "sentence3",
             "position": null,
             "type": "step-result"
@@ -2894,7 +2894,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "5b172ea7-1ce0-48d9-ab03-db1c06e0a66c",
+            "id": "c9bfb8b3-e69c-4590-b91d-048154e753e1",
             "spec": "sentence3",
             "position": null,
             "type": "step-result"
@@ -2953,7 +2953,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -2981,7 +2981,7 @@ module.exports = {
                   "x": "5"
                 },
                 "collections": [],
-                "id": "aa6bfd16-f2eb-42a5-a2cd-fc1faa293985"
+                "id": "715a950b-5295-48e5-a7a6-45969d723690"
               },
               {
                 "key": "AddingTo5",
@@ -2991,11 +2991,11 @@ module.exports = {
                   "x": "5"
                 },
                 "collections": [],
-                "id": "5b172ea7-1ce0-48d9-ab03-db1c06e0a66c"
+                "id": "c9bfb8b3-e69c-4590-b91d-048154e753e1"
               }
             ],
             "activeCells": {},
-            "id": "fa1dcc71-cf6e-422d-8eed-03afcf1a2c1b"
+            "id": "a5cfe94a-ea51-483b-aa07-81a35339abef"
           }
         ],
         "id": "sentence3"
@@ -3025,7 +3025,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "377bf308-bfb7-46dc-a389-6f603ba0202e",
+            "id": "a9dc62f8-47ad-441d-a8e0-33913e0c7c9a",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3034,7 +3034,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e1342839-8e41-4463-9245-286dcff8f514",
+            "id": "36f86ffb-25a6-4fef-8380-6384d3cb19af",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3043,7 +3043,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "556ec496-c394-44cd-b6cc-4a203dfaeed8",
+            "id": "4bd8dcab-2d57-4998-9d06-c2f121e7b98a",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3077,7 +3077,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "c556d2f4-a20c-439b-ba9d-18d33e1ddb72",
+            "id": "b2e8270f-378e-4174-85ff-bad7b38b9591",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3164,15 +3164,15 @@ module.exports = {
             "type": "Grammar",
             "subject": "TheValueShouldBe",
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "TheSumOf",
-            "start": 0,
+            "start": 1,
             "end": 1,
-            "duration": 1
+            "duration": 0
           },
           {
             "type": "Grammar",
@@ -3216,7 +3216,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -3261,7 +3261,7 @@ module.exports = {
                   "number": "5"
                 },
                 "collections": [],
-                "id": "377bf308-bfb7-46dc-a389-6f603ba0202e"
+                "id": "a9dc62f8-47ad-441d-a8e0-33913e0c7c9a"
               },
               {
                 "key": "MultiplyThenAdd",
@@ -3270,7 +3270,7 @@ module.exports = {
                   "delta": "4"
                 },
                 "collections": [],
-                "id": "e1342839-8e41-4463-9245-286dcff8f514"
+                "id": "36f86ffb-25a6-4fef-8380-6384d3cb19af"
               },
               {
                 "key": "Subtract",
@@ -3278,7 +3278,7 @@ module.exports = {
                   "operand": "2"
                 },
                 "collections": [],
-                "id": "556ec496-c394-44cd-b6cc-4a203dfaeed8"
+                "id": "4bd8dcab-2d57-4998-9d06-c2f121e7b98a"
               },
               {
                 "text": "Correct assertion",
@@ -3307,7 +3307,7 @@ module.exports = {
                   "sum": "5"
                 },
                 "collections": [],
-                "id": "c556d2f4-a20c-439b-ba9d-18d33e1ddb72"
+                "id": "b2e8270f-378e-4174-85ff-bad7b38b9591"
               },
               {
                 "text": "Line assertions",
@@ -3353,7 +3353,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "92f56cfb-1999-4c51-8722-379578780ca3",
+            "id": "197a66af-94d6-4982-953b-97b3cf5967a9",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -3362,7 +3362,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "92f56cfb-1999-4c51-8722-379578780ca3",
+            "id": "197a66af-94d6-4982-953b-97b3cf5967a9",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -3371,7 +3371,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "92f56cfb-1999-4c51-8722-379578780ca3",
+            "id": "197a66af-94d6-4982-953b-97b3cf5967a9",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -3380,7 +3380,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4ceb91d7-f7c3-4aee-832a-a50d6bdf4560",
+            "id": "50714529-e0d8-4542-92cb-6b469a3ede14",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -3389,7 +3389,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4ceb91d7-f7c3-4aee-832a-a50d6bdf4560",
+            "id": "50714529-e0d8-4542-92cb-6b469a3ede14",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -3398,7 +3398,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4ceb91d7-f7c3-4aee-832a-a50d6bdf4560",
+            "id": "50714529-e0d8-4542-92cb-6b469a3ede14",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -3407,7 +3407,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e6c269b9-b7c9-43ec-87fa-6c248029b065",
+            "id": "40bd3d6c-879f-4c9e-92e1-5c75f466513a",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -3416,7 +3416,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e6c269b9-b7c9-43ec-87fa-6c248029b065",
+            "id": "40bd3d6c-879f-4c9e-92e1-5c75f466513a",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -3425,7 +3425,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e6c269b9-b7c9-43ec-87fa-6c248029b065",
+            "id": "40bd3d6c-879f-4c9e-92e1-5c75f466513a",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -3468,8 +3468,8 @@ module.exports = {
           {
             "spec": "set1",
             "matches": [
-              "b78c2606-3d9c-4d71-a828-eb3dd7d223f6",
-              "05a67552-b981-4024-ab4b-271e94037ed6"
+              "41f594c5-8fc3-4b19-ba90-fdb60270871d",
+              "5c9d270d-97a3-4310-abc1-9afe736aba6b"
             ],
             "missing": [],
             "extras": [
@@ -3486,9 +3486,9 @@ module.exports = {
           {
             "spec": "set1",
             "matches": [
-              "b6c98192-fd1e-479d-ae63-8ed48ae45ad0",
-              "e23d6e33-de6b-47b7-8f68-d46d72d5fd1c",
-              "25e60e67-e002-4ded-bee5-e30f8cace9be"
+              "862efa44-f496-4446-82c4-e6223ebd1430",
+              "e92cc73e-30da-4094-8de4-1be5706f6b0e",
+              "d7492d3f-5880-41ca-9787-a99b9824d543"
             ],
             "missing": [
               "11"
@@ -3570,15 +3570,15 @@ module.exports = {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:3",
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:4",
-            "start": 0,
+            "start": 1,
             "end": 1,
-            "duration": 1
+            "duration": 0
           },
           {
             "type": "Grammar",
@@ -3661,15 +3661,15 @@ module.exports = {
             "type": "Grammar",
             "subject": "rows",
             "start": 6,
-            "end": 7,
-            "duration": 1
+            "end": 6,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 7,
+            "start": 6,
             "end": 7,
-            "duration": 0
+            "duration": 1
           },
           {
             "type": "Grammar",
@@ -3702,7 +3702,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 8,
           "wrongs": 5,
@@ -3738,7 +3738,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "92f56cfb-1999-4c51-8722-379578780ca3"
+                        "id": "197a66af-94d6-4982-953b-97b3cf5967a9"
                       },
                       {
                         "key": "Rows",
@@ -3748,7 +3748,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "4ceb91d7-f7c3-4aee-832a-a50d6bdf4560"
+                        "id": "50714529-e0d8-4542-92cb-6b469a3ede14"
                       },
                       {
                         "key": "Rows",
@@ -3758,19 +3758,19 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "e6c269b9-b7c9-43ec-87fa-6c248029b065"
+                        "id": "40bd3d6c-879f-4c9e-92e1-5c75f466513a"
                       }
                     ],
                     "activeCells": {},
-                    "id": "1c4d2382-3afa-46c2-aa15-04e21878b345"
+                    "id": "9824a890-4ae7-4d36-b67c-be6ceae0d549"
                   }
                 ],
-                "id": "c7464c04-3d57-46ab-89e6-f080cce8d13d"
+                "id": "7d15de24-9574-4a27-91a4-fdec37288463"
               },
               {
                 "text": "Completely successful ordering",
                 "type": "comment",
-                "id": "b9e72035-933f-4daf-9e63-f32fd0311e6c"
+                "id": "0bb489d5-cc06-405e-bc56-94b059d1e160"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -3821,12 +3821,12 @@ module.exports = {
                     "id": "1"
                   }
                 ],
-                "id": "8ce04fa1-23a6-4c3e-9ff0-e6f944ed8f92"
+                "id": "750fecac-24d4-4708-aaaf-7f259ac85b1a"
               },
               {
                 "text": "Out of order",
                 "type": "comment",
-                "id": "8305dba0-e47b-43ae-837f-2e42c3324054"
+                "id": "3c67ad17-60a6-4cc7-a89d-2c178a3fbac1"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -3877,12 +3877,12 @@ module.exports = {
                     "id": "5"
                   }
                 ],
-                "id": "6213e161-2c86-4758-a97c-2ab5f7e83ffd"
+                "id": "bb1bf1c8-5171-4260-9a08-c46903d55cf2"
               },
               {
                 "text": "Should have one exra",
                 "type": "comment",
-                "id": "6fb0003c-65d4-46a4-b740-6b7cfe0c428c"
+                "id": "9baa32e1-fe54-4b7c-b924-0d8066134acd"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -3901,7 +3901,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "b78c2606-3d9c-4d71-a828-eb3dd7d223f6"
+                        "id": "41f594c5-8fc3-4b19-ba90-fdb60270871d"
                       },
                       {
                         "key": "Rows",
@@ -3912,19 +3912,19 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "05a67552-b981-4024-ab4b-271e94037ed6"
+                        "id": "5c9d270d-97a3-4310-abc1-9afe736aba6b"
                       }
                     ],
                     "activeCells": {},
                     "id": "9"
                   }
                 ],
-                "id": "e9e2685f-af63-4a89-a035-7250f1156c92"
+                "id": "24ae9a8a-189f-47f9-af39-dff0961d757e"
               },
               {
                 "text": "Should mark one expected result as missing",
                 "type": "comment",
-                "id": "1f955739-827b-4fa8-ac63-28f1f224326e"
+                "id": "e78a86c8-4fb4-42cf-bab6-6566d293c2ba"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -3943,7 +3943,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "b6c98192-fd1e-479d-ae63-8ed48ae45ad0"
+                        "id": "862efa44-f496-4446-82c4-e6223ebd1430"
                       },
                       {
                         "key": "Rows",
@@ -3954,7 +3954,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "e23d6e33-de6b-47b7-8f68-d46d72d5fd1c"
+                        "id": "e92cc73e-30da-4094-8de4-1be5706f6b0e"
                       },
                       {
                         "key": "Rows",
@@ -3965,7 +3965,7 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "25e60e67-e002-4ded-bee5-e30f8cace9be"
+                        "id": "d7492d3f-5880-41ca-9787-a99b9824d543"
                       },
                       {
                         "key": "Rows",
@@ -3984,12 +3984,12 @@ module.exports = {
                     "id": "10"
                   }
                 ],
-                "id": "2bc80ac5-98d0-4e1f-9524-9f9fa36049fe"
+                "id": "9283a88f-7d3d-42a9-a9b4-d3afeae5d0ba"
               },
               {
                 "text": "One syntax error",
                 "type": "comment",
-                "id": "f8f89a3a-6284-4b70-8a93-310d485fd708"
+                "id": "82a5eed3-2820-4830-a3a8-dd4f5476f98a"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -4020,7 +4020,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "3d722272-5642-4cff-a49d-d06d8e0098c9"
+                        "id": "7f33e394-81d9-44b5-b98c-ef049fad2587"
                       },
                       {
                         "key": "Rows",
@@ -4031,18 +4031,18 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "6ba5e492-5800-4e92-ad9c-91d858771592"
+                        "id": "cf5789bf-0115-419b-89b0-eaf899b2763c"
                       }
                     ],
                     "activeCells": {},
-                    "id": "761d619f-6d62-4de6-87d0-74318c129ac9"
+                    "id": "e3c106b7-2e3a-4a73-98a1-3b578517175b"
                   }
                 ],
-                "id": "4b3f182c-178b-44ec-b584-01bc0adf0d80"
+                "id": "0e40883e-8411-46f2-aaa3-00878f1aad0d"
               }
             ],
             "activeCells": {},
-            "id": "c0ad0f49-2876-4209-bebc-1d30458a415d"
+            "id": "35a2c8cb-6593-4ffe-b877-6ba988cadc5f"
           }
         ],
         "id": "set1"
@@ -4055,7 +4055,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3ee168ad-7eab-4e01-a77a-28fd5bb453e0",
+            "id": "20f89d14-3675-4c2c-bfba-4362277d4470",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4064,7 +4064,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "48f7a34e-22e4-4057-b3b3-26c9f492150e",
+            "id": "49a24151-0011-43b6-a46f-1316960c257e",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4073,7 +4073,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "032d0863-587c-4091-b8de-31056b193106",
+            "id": "9250c476-c709-44bc-97e7-a3db33d4570b",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4082,7 +4082,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6e27318e-1ecd-43fd-8b2e-942c770bed2d",
+            "id": "2771db98-1e96-4788-8efe-1c2136836592",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4091,7 +4091,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "39bd46dd-4082-49de-ae87-e7dfb251c59a",
+            "id": "4dd92347-a892-4d9c-b02f-99d604d00014",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4099,31 +4099,31 @@ module.exports = {
           {
             "spec": "set2",
             "matches": [
-              "d771aa9d-0fd4-4bf0-8d02-8d434057d77d",
-              "5ad2d895-3ece-4bca-b89b-ae39847afc62",
-              "c2cffa82-2543-4f60-91cd-aded5979c0a0",
-              "07737f2a-8336-4198-bf70-30aa1542f975",
-              "a3dcb9cc-5532-40e7-b914-1e7d461189d9"
+              "3db08439-a9db-4be6-a045-2b08f0f6485f",
+              "0b1355fe-d0f1-4854-b5aa-b8ad87f9b9b8",
+              "c4eba593-ec8e-4590-a286-0e8670034841",
+              "99c2c47a-a348-4cd0-bd41-9f2fd613b5ac",
+              "58a62bbf-3fe4-4d08-beb5-7141b998f929"
             ],
             "missing": [],
             "extras": [],
             "wrongOrdered": [],
-            "id": "e26bc207-f6ce-4288-9a18-585c5f7cf595",
+            "id": "9f6bf468-e025-4eed-8628-89dbe0733c9e",
             "type": "set-verification-result"
           },
           {
             "spec": "set2",
             "matches": [
-              "1ed73dcd-ccf2-4500-824e-d0cf6a55bb45",
-              "1d291db5-10d6-438b-91a7-04021a8dedb3",
-              "feea88a3-63be-4e44-80aa-4ccf6b308cb5",
-              "38b7622e-5ab7-4840-9526-f433a7e07ccf",
-              "0acd1cf7-94a6-462c-a333-6aa7367abfc2"
+              "987048b0-8e1d-49de-addf-929bdb3beb35",
+              "dc60fd03-eff2-423c-b55a-7db52f0b58ed",
+              "ec41de8f-ad16-4805-ba57-dd7e8f4dc6e4",
+              "d88d669a-9aee-4815-9aa9-87e407b42164",
+              "3ae58c8b-bff0-472a-8375-7ea7c851279f"
             ],
             "missing": [],
             "extras": [],
             "wrongOrdered": [],
-            "id": "61416075-6a23-4f92-a393-9d68c6744084",
+            "id": "2d5b9a12-58ff-42d2-8242-ee2d26336567",
             "type": "set-verification-result"
           }
         ],
@@ -4222,7 +4222,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 10,
           "wrongs": 0,
@@ -4256,7 +4256,7 @@ module.exports = {
                           "name": "Jeremy"
                         },
                         "collections": [],
-                        "id": "3ee168ad-7eab-4e01-a77a-28fd5bb453e0"
+                        "id": "20f89d14-3675-4c2c-bfba-4362277d4470"
                       },
                       {
                         "key": "name",
@@ -4264,7 +4264,7 @@ module.exports = {
                           "name": "Josh"
                         },
                         "collections": [],
-                        "id": "48f7a34e-22e4-4057-b3b3-26c9f492150e"
+                        "id": "49a24151-0011-43b6-a46f-1316960c257e"
                       },
                       {
                         "key": "name",
@@ -4272,7 +4272,7 @@ module.exports = {
                           "name": "Gary"
                         },
                         "collections": [],
-                        "id": "032d0863-587c-4091-b8de-31056b193106"
+                        "id": "9250c476-c709-44bc-97e7-a3db33d4570b"
                       },
                       {
                         "key": "name",
@@ -4280,7 +4280,7 @@ module.exports = {
                           "name": "Kevin"
                         },
                         "collections": [],
-                        "id": "6e27318e-1ecd-43fd-8b2e-942c770bed2d"
+                        "id": "2771db98-1e96-4788-8efe-1c2136836592"
                       },
                       {
                         "key": "name",
@@ -4288,14 +4288,14 @@ module.exports = {
                           "name": "Chad"
                         },
                         "collections": [],
-                        "id": "39bd46dd-4082-49de-ae87-e7dfb251c59a"
+                        "id": "4dd92347-a892-4d9c-b02f-99d604d00014"
                       }
                     ],
                     "activeCells": {},
-                    "id": "139dfd2c-0958-469c-9bb9-6bdf88433df1"
+                    "id": "999897ef-abc4-44de-9077-482f012621df"
                   }
                 ],
-                "id": "9276f9a0-cb3e-435c-8f92-ba1c89f2549a"
+                "id": "beff5bde-e07f-4536-ae6e-de058605e2db"
               },
               {
                 "key": "OrderedStringSet",
@@ -4312,7 +4312,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "d771aa9d-0fd4-4bf0-8d02-8d434057d77d"
+                        "id": "3db08439-a9db-4be6-a045-2b08f0f6485f"
                       },
                       {
                         "key": "Rows",
@@ -4321,7 +4321,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "5ad2d895-3ece-4bca-b89b-ae39847afc62"
+                        "id": "0b1355fe-d0f1-4854-b5aa-b8ad87f9b9b8"
                       },
                       {
                         "key": "Rows",
@@ -4330,7 +4330,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "c2cffa82-2543-4f60-91cd-aded5979c0a0"
+                        "id": "c4eba593-ec8e-4590-a286-0e8670034841"
                       },
                       {
                         "key": "Rows",
@@ -4339,7 +4339,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "07737f2a-8336-4198-bf70-30aa1542f975"
+                        "id": "99c2c47a-a348-4cd0-bd41-9f2fd613b5ac"
                       },
                       {
                         "key": "Rows",
@@ -4348,14 +4348,14 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "a3dcb9cc-5532-40e7-b914-1e7d461189d9"
+                        "id": "58a62bbf-3fe4-4d08-beb5-7141b998f929"
                       }
                     ],
                     "activeCells": {},
-                    "id": "e26bc207-f6ce-4288-9a18-585c5f7cf595"
+                    "id": "9f6bf468-e025-4eed-8628-89dbe0733c9e"
                   }
                 ],
-                "id": "f1ddfa86-aedd-44ad-8cf3-36c45861ccf3"
+                "id": "a61647c5-b7ce-439b-a508-cbfa10ff3d77"
               },
               {
                 "key": "UnorderedStringSet",
@@ -4372,7 +4372,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "1ed73dcd-ccf2-4500-824e-d0cf6a55bb45"
+                        "id": "987048b0-8e1d-49de-addf-929bdb3beb35"
                       },
                       {
                         "key": "Rows",
@@ -4381,7 +4381,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "1d291db5-10d6-438b-91a7-04021a8dedb3"
+                        "id": "dc60fd03-eff2-423c-b55a-7db52f0b58ed"
                       },
                       {
                         "key": "Rows",
@@ -4390,7 +4390,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "feea88a3-63be-4e44-80aa-4ccf6b308cb5"
+                        "id": "ec41de8f-ad16-4805-ba57-dd7e8f4dc6e4"
                       },
                       {
                         "key": "Rows",
@@ -4399,7 +4399,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "38b7622e-5ab7-4840-9526-f433a7e07ccf"
+                        "id": "d88d669a-9aee-4815-9aa9-87e407b42164"
                       },
                       {
                         "key": "Rows",
@@ -4408,18 +4408,18 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "0acd1cf7-94a6-462c-a333-6aa7367abfc2"
+                        "id": "3ae58c8b-bff0-472a-8375-7ea7c851279f"
                       }
                     ],
                     "activeCells": {},
-                    "id": "61416075-6a23-4f92-a393-9d68c6744084"
+                    "id": "2d5b9a12-58ff-42d2-8242-ee2d26336567"
                   }
                 ],
-                "id": "29c944ab-f968-40ce-af33-ad76f0f65ae5"
+                "id": "46ba57b0-2fd9-4432-bd12-e81e652dd002"
               }
             ],
             "activeCells": {},
-            "id": "015efd2f-ea0e-4c2b-bcc9-983b20618295"
+            "id": "532ccffd-f630-4756-972c-1ff39012f044"
           }
         ],
         "id": "set2"
@@ -4484,7 +4484,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -4518,7 +4518,7 @@ module.exports = {
                           "Name": "a"
                         },
                         "collections": [],
-                        "id": "c8fbbf96-9f3e-41dd-bcb3-1074fb66aacc"
+                        "id": "83fcab72-7e28-4e03-bd67-dba4485b0395"
                       },
                       {
                         "key": "rows",
@@ -4526,7 +4526,7 @@ module.exports = {
                           "Name": "b"
                         },
                         "collections": [],
-                        "id": "66b5b16f-e72c-4b33-952a-aaa9b71fb8a7"
+                        "id": "84e6ce13-2de6-48f9-9c79-4b57d697632e"
                       },
                       {
                         "key": "rows",
@@ -4534,18 +4534,18 @@ module.exports = {
                           "Name": "c"
                         },
                         "collections": [],
-                        "id": "03cd4f57-e975-49e7-af53-2727c4b38338"
+                        "id": "3824e606-a892-41bf-bc5a-26393e18ebd4"
                       }
                     ],
                     "activeCells": {},
                     "id": "1"
                   }
                 ],
-                "id": "e3dcd467-2df7-4637-9fd0-1310ebf3ca1a"
+                "id": "c013d6c3-e38f-46a2-ad2b-ec84692e9d14"
               }
             ],
             "activeCells": {},
-            "id": "91109945-704a-490c-ba07-490ebb7aab27"
+            "id": "662ac3bd-768b-495c-983a-df2468a38e90"
           }
         ],
         "id": "set3"
@@ -4558,7 +4558,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6b350ddb-39a3-441e-b937-b90c75d6bfcb",
+            "id": "6545eb6b-07a0-4adf-b0ab-00390e53b50d",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -4567,7 +4567,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6b350ddb-39a3-441e-b937-b90c75d6bfcb",
+            "id": "6545eb6b-07a0-4adf-b0ab-00390e53b50d",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -4576,7 +4576,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6b350ddb-39a3-441e-b937-b90c75d6bfcb",
+            "id": "6545eb6b-07a0-4adf-b0ab-00390e53b50d",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -4585,7 +4585,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b4ded314-c433-4859-bb79-f793f04f36b8",
+            "id": "4fe8436b-33e6-460b-820b-48494468385b",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -4594,7 +4594,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b4ded314-c433-4859-bb79-f793f04f36b8",
+            "id": "4fe8436b-33e6-460b-820b-48494468385b",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -4603,7 +4603,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b4ded314-c433-4859-bb79-f793f04f36b8",
+            "id": "4fe8436b-33e6-460b-820b-48494468385b",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -4612,7 +4612,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "467345aa-a641-44d9-a999-074e7c08be9c",
+            "id": "65a476ca-d5fa-4e51-908a-b02aba68858e",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -4621,7 +4621,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "467345aa-a641-44d9-a999-074e7c08be9c",
+            "id": "65a476ca-d5fa-4e51-908a-b02aba68858e",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -4630,7 +4630,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "467345aa-a641-44d9-a999-074e7c08be9c",
+            "id": "65a476ca-d5fa-4e51-908a-b02aba68858e",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -4647,7 +4647,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "70a9ec63-6269-4021-9e00-9beafe459421",
+            "id": "f6843efd-d8cb-4335-87f1-5a20f127d382",
             "spec": "set4",
             "position": null,
             "type": "step-result"
@@ -4811,7 +4811,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -4847,7 +4847,7 @@ module.exports = {
                           "Name": "Cord"
                         },
                         "collections": [],
-                        "id": "6b350ddb-39a3-441e-b937-b90c75d6bfcb"
+                        "id": "6545eb6b-07a0-4adf-b0ab-00390e53b50d"
                       },
                       {
                         "key": "Rows",
@@ -4857,7 +4857,7 @@ module.exports = {
                           "Name": "Drill"
                         },
                         "collections": [],
-                        "id": "b4ded314-c433-4859-bb79-f793f04f36b8"
+                        "id": "4fe8436b-33e6-460b-820b-48494468385b"
                       },
                       {
                         "key": "Rows",
@@ -4867,14 +4867,14 @@ module.exports = {
                           "Name": "Hammer"
                         },
                         "collections": [],
-                        "id": "467345aa-a641-44d9-a999-074e7c08be9c"
+                        "id": "65a476ca-d5fa-4e51-908a-b02aba68858e"
                       }
                     ],
                     "activeCells": {},
-                    "id": "4efde1dc-a8cf-45ca-8a76-79d052ed5a1c"
+                    "id": "b3753b2f-3539-4288-bbb8-bb7c3f860e72"
                   }
                 ],
-                "id": "0f929141-1ad6-4d16-b9a3-979270c74409"
+                "id": "0ab8cf90-30ca-46fa-ad6a-775ac84eecbc"
               },
               {
                 "key": "UnorderedDetailsAre",
@@ -4892,7 +4892,7 @@ module.exports = {
                           "Name": "Drill"
                         },
                         "collections": [],
-                        "id": "70a9ec63-6269-4021-9e00-9beafe459421"
+                        "id": "f6843efd-d8cb-4335-87f1-5a20f127d382"
                       },
                       {
                         "key": "Rows",
@@ -4902,18 +4902,18 @@ module.exports = {
                           "Name": "Hammer"
                         },
                         "collections": [],
-                        "id": "98254340-2730-44bf-9bb2-2d3658d7fa8b"
+                        "id": "8a408b1a-cacf-469c-87ac-cc03d7db3faf"
                       }
                     ],
                     "activeCells": {},
-                    "id": "f17358f4-f8a0-4862-af60-a7c8b51f50ca"
+                    "id": "536d3109-0ab0-4d81-af82-df1f85acbac4"
                   }
                 ],
-                "id": "a90d1c1a-f2f8-4541-9d63-1718197eb00c"
+                "id": "567e663c-2f12-4629-ab21-ae513fa34f28"
               }
             ],
             "activeCells": {},
-            "id": "2c540a86-f629-4f24-bda0-5a15e4b20de7"
+            "id": "8a937adc-1109-41d2-93d9-dceaee731496"
           }
         ],
         "id": "set4"
@@ -4926,7 +4926,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a71918f4-327c-4434-9609-4d0b62d4f12c",
+            "id": "26f2223a-9070-44af-a801-d6f861a1f4f6",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4935,7 +4935,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e1a61651-361e-46f5-809c-9ed7c0523115",
+            "id": "f7f7bbb7-9d0a-4b01-a1f5-a20dc16868ff",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4944,7 +4944,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "5e1f1aee-2fce-4305-a1f3-bff69056d71b",
+            "id": "7b70f530-6510-4cc8-99c9-9ca28441531e",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4953,7 +4953,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8bdeed3d-80d4-4402-b71f-fba1d5bef525",
+            "id": "385b7603-9b11-4bed-9b66-597c645e135b",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4962,7 +4962,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "da791765-147d-4aeb-ab51-4cd06bca9a49",
+            "id": "69dfae21-16a5-4a37-968d-3518cc5d1298",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4971,7 +4971,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "d962dde1-1ada-4700-9cfd-54aa39824a61",
+            "id": "3570f872-0a62-40e8-ba2f-842483df328d",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4980,7 +4980,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "59310e2f-5945-47c3-b0ee-4a3e1a602be3",
+            "id": "faa0b0f6-5e1c-4798-99bf-09583f82a577",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4989,7 +4989,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "c9a4ac5e-811e-4b0f-924f-8c34e677c6a8",
+            "id": "4621e807-bee2-4ddf-96c3-40b516b17fec",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -4997,13 +4997,13 @@ module.exports = {
           {
             "spec": "set5",
             "matches": [
-              "d260af51-c2ab-4e69-bb4e-9c6bcebbb781",
-              "f6914ebd-3b6f-43f0-b791-f8a8773b35b8",
-              "8af8c13a-b308-4a1d-a798-008c56259b25",
-              "3aad2b0f-01e3-48ea-a66d-72c456853bbc"
+              "7e6994d4-1bdb-4d9b-a19d-dd520cc0b985",
+              "79312c3c-bc7a-48e6-8031-ca896c2cf1b1",
+              "ca22e1b1-9391-4976-b763-e7a970350b9f",
+              "a2d98461-1da4-48ec-99a2-9f75421d10e2"
             ],
             "missing": [
-              "b77cc616-1cbf-4777-a7c4-e91d746cae9a"
+              "61d8cf09-be95-4ef1-a1c7-14d039494e31"
             ],
             "extras": [
               {
@@ -5016,11 +5016,11 @@ module.exports = {
             "wrongOrdered": [
               {
                 "actual": 5,
-                "id": "c2c9f600-3ed2-409f-9b8e-475cae6a19d0"
+                "id": "1708b813-944a-4d1a-b79e-ecacc7fa9e39"
               },
               {
                 "actual": 4,
-                "id": "d466cb97-dbc1-4da7-a688-e35b616080a2"
+                "id": "b187af10-2478-4824-aa9d-dca333eafd9b"
               }
             ],
             "id": "4f091fff-8c47-4a91-90c4-19c01477dddb",
@@ -5032,8 +5032,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Unsuccessful Ordering",
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Context",
@@ -5127,7 +5127,7 @@ module.exports = {
             "duration": 0
           }
         ],
-        "duration": 0,
+        "duration": 1,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -5136,7 +5136,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 4,
           "wrongs": 5,
@@ -5170,7 +5170,7 @@ module.exports = {
                           "name": "Jeremy"
                         },
                         "collections": [],
-                        "id": "a71918f4-327c-4434-9609-4d0b62d4f12c"
+                        "id": "26f2223a-9070-44af-a801-d6f861a1f4f6"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5178,7 +5178,7 @@ module.exports = {
                           "name": "Josh"
                         },
                         "collections": [],
-                        "id": "e1a61651-361e-46f5-809c-9ed7c0523115"
+                        "id": "f7f7bbb7-9d0a-4b01-a1f5-a20dc16868ff"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5186,7 +5186,7 @@ module.exports = {
                           "name": "Gary"
                         },
                         "collections": [],
-                        "id": "5e1f1aee-2fce-4305-a1f3-bff69056d71b"
+                        "id": "7b70f530-6510-4cc8-99c9-9ca28441531e"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5194,7 +5194,7 @@ module.exports = {
                           "name": "Kevin"
                         },
                         "collections": [],
-                        "id": "8bdeed3d-80d4-4402-b71f-fba1d5bef525"
+                        "id": "385b7603-9b11-4bed-9b66-597c645e135b"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5202,7 +5202,7 @@ module.exports = {
                           "name": "Chad"
                         },
                         "collections": [],
-                        "id": "da791765-147d-4aeb-ab51-4cd06bca9a49"
+                        "id": "69dfae21-16a5-4a37-968d-3518cc5d1298"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5210,7 +5210,7 @@ module.exports = {
                           "name": "Rand"
                         },
                         "collections": [],
-                        "id": "d962dde1-1ada-4700-9cfd-54aa39824a61"
+                        "id": "3570f872-0a62-40e8-ba2f-842483df328d"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5218,7 +5218,7 @@ module.exports = {
                           "name": "Perrin"
                         },
                         "collections": [],
-                        "id": "59310e2f-5945-47c3-b0ee-4a3e1a602be3"
+                        "id": "faa0b0f6-5e1c-4798-99bf-09583f82a577"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5226,14 +5226,14 @@ module.exports = {
                           "name": "Mat"
                         },
                         "collections": [],
-                        "id": "c9a4ac5e-811e-4b0f-924f-8c34e677c6a8"
+                        "id": "4621e807-bee2-4ddf-96c3-40b516b17fec"
                       }
                     ],
                     "activeCells": {},
                     "id": "61c521ec-1d41-4492-b00c-695d8cc4440b"
                   }
                 ],
-                "id": "f2b5f13f-876e-44e7-bc9b-ead9b5f1ed88"
+                "id": "5bc47dbb-767e-4cfb-a58a-c43b0a0a9100"
               },
               {
                 "text": "All data is correct, but in the wrong order",
@@ -5254,7 +5254,7 @@ module.exports = {
                           "expected": "Jeremy"
                         },
                         "collections": [],
-                        "id": "d260af51-c2ab-4e69-bb4e-9c6bcebbb781"
+                        "id": "7e6994d4-1bdb-4d9b-a19d-dd520cc0b985"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5262,7 +5262,7 @@ module.exports = {
                           "expected": "Josh"
                         },
                         "collections": [],
-                        "id": "f6914ebd-3b6f-43f0-b791-f8a8773b35b8"
+                        "id": "79312c3c-bc7a-48e6-8031-ca896c2cf1b1"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5270,7 +5270,7 @@ module.exports = {
                           "expected": "Gary"
                         },
                         "collections": [],
-                        "id": "8af8c13a-b308-4a1d-a798-008c56259b25"
+                        "id": "ca22e1b1-9391-4976-b763-e7a970350b9f"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5278,7 +5278,7 @@ module.exports = {
                           "expected": "Chad"
                         },
                         "collections": [],
-                        "id": "c2c9f600-3ed2-409f-9b8e-475cae6a19d0"
+                        "id": "1708b813-944a-4d1a-b79e-ecacc7fa9e39"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5286,7 +5286,7 @@ module.exports = {
                           "expected": "Kevin"
                         },
                         "collections": [],
-                        "id": "d466cb97-dbc1-4da7-a688-e35b616080a2"
+                        "id": "b187af10-2478-4824-aa9d-dca333eafd9b"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5294,7 +5294,7 @@ module.exports = {
                           "expected": "Egwene"
                         },
                         "collections": [],
-                        "id": "b77cc616-1cbf-4777-a7c4-e91d746cae9a"
+                        "id": "61d8cf09-be95-4ef1-a1c7-14d039494e31"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5302,14 +5302,14 @@ module.exports = {
                           "expected": "Perrin"
                         },
                         "collections": [],
-                        "id": "3aad2b0f-01e3-48ea-a66d-72c456853bbc"
+                        "id": "a2d98461-1da4-48ec-99a2-9f75421d10e2"
                       }
                     ],
                     "activeCells": {},
                     "id": "4f091fff-8c47-4a91-90c4-19c01477dddb"
                   }
                 ],
-                "id": "3ab611f0-e928-4c4a-8e4c-bfbc63431072"
+                "id": "34a64fcd-49d4-42b6-bded-c26533091015"
               }
             ],
             "activeCells": {},
@@ -5334,7 +5334,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "1d9ca518-70f2-4b89-92d7-eac02ee2727d",
+            "id": "e1d23716-311c-4d83-80ae-fee8235d2ad4",
             "spec": "table1",
             "position": null,
             "type": "step-result"
@@ -5351,7 +5351,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "8e531dde-5f7e-4930-b698-4a9bf9b5f2e9",
+            "id": "d39c4701-d1f6-42e2-ad40-968852ba523c",
             "spec": "table1",
             "position": null,
             "type": "step-result"
@@ -5410,7 +5410,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 0,
@@ -5446,7 +5446,7 @@ module.exports = {
                           "IsEven": "true"
                         },
                         "collections": [],
-                        "id": "1d9ca518-70f2-4b89-92d7-eac02ee2727d"
+                        "id": "e1d23716-311c-4d83-80ae-fee8235d2ad4"
                       },
                       {
                         "key": "row",
@@ -5455,18 +5455,18 @@ module.exports = {
                           "IsEven": "false"
                         },
                         "collections": [],
-                        "id": "8e531dde-5f7e-4930-b698-4a9bf9b5f2e9"
+                        "id": "d39c4701-d1f6-42e2-ad40-968852ba523c"
                       }
                     ],
                     "activeCells": {},
-                    "id": "c1bef8ad-5765-49e9-8e6d-bb3eaac9b36d"
+                    "id": "5f04ad33-c748-422f-90cb-4745e9c5b940"
                   }
                 ],
-                "id": "dcd1b897-0f63-4d0d-8bd8-8c5b1c72cf94"
+                "id": "58c13b1b-0716-497b-850f-b0b1339fe56f"
               }
             ],
             "activeCells": {},
-            "id": "9d8413b0-adc2-4cdf-a799-e68ecb3e6e71"
+            "id": "7332e1ec-2f5a-45da-888a-07193128e347"
           }
         ],
         "id": "table1"
@@ -5508,7 +5508,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "325a0083-b47a-4173-894b-7f10224c97ec",
+            "id": "49340f49-c691-4ff9-ad10-816265f1d74e",
             "spec": "table2",
             "position": null,
             "type": "step-result"
@@ -5546,7 +5546,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "3cda72cd-e791-41b5-9b78-afd3414aac54",
+            "id": "bb133ac8-9e4d-4cda-be34-de7f24086282",
             "spec": "table2",
             "position": null,
             "type": "step-result"
@@ -5557,8 +5557,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Decision Table",
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Context",
@@ -5585,18 +5585,18 @@ module.exports = {
             "type": "Grammar",
             "subject": null,
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Fixture",
             "subject": "Table:TearDown",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           }
         ],
-        "duration": 0,
+        "duration": 1,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -5605,7 +5605,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -5642,7 +5642,7 @@ module.exports = {
                           "LastNameFirst": "Miller, Jeremy"
                         },
                         "collections": [],
-                        "id": "9614f62c-dd42-4d2a-8be7-08dc1ea4921d"
+                        "id": "fb920e78-e73d-4792-b817-bb90ebfb8c72"
                       },
                       {
                         "key": "decisions",
@@ -5653,11 +5653,11 @@ module.exports = {
                           "LastNameFirst": "Chief, Big"
                         },
                         "collections": [],
-                        "id": "d3fd739e-40a7-4477-9cff-f30418b04eb7"
+                        "id": "bf0c8630-74a3-4e01-9aac-7c134f3a9604"
                       }
                     ],
                     "activeCells": {},
-                    "id": "62f29e53-fe73-4a5a-a88b-84390c0f61b6"
+                    "id": "8a9329b6-d7e6-470e-a88f-6a5f4c7d84cc"
                   },
                   {
                     "key": "table",
@@ -5672,7 +5672,7 @@ module.exports = {
                           "LastNameFirst": "Miller, Jeremy"
                         },
                         "collections": [],
-                        "id": "325a0083-b47a-4173-894b-7f10224c97ec"
+                        "id": "49340f49-c691-4ff9-ad10-816265f1d74e"
                       },
                       {
                         "key": "row",
@@ -5683,18 +5683,18 @@ module.exports = {
                           "LastNameFirst": "Miller Hank"
                         },
                         "collections": [],
-                        "id": "3cda72cd-e791-41b5-9b78-afd3414aac54"
+                        "id": "bb133ac8-9e4d-4cda-be34-de7f24086282"
                       }
                     ],
                     "activeCells": {},
-                    "id": "09b7a1a2-d26c-4596-a22d-16cea2641ea9"
+                    "id": "159f0797-1957-4640-8b7d-e3e0df633bdf"
                   }
                 ],
-                "id": "b571d3de-c592-412a-bd03-1c0f632c083c"
+                "id": "89b6d5c9-c5df-423c-8354-762659188939"
               }
             ],
             "activeCells": {},
-            "id": "bb5605a9-af94-45ca-b533-b707472f1646"
+            "id": "860004a6-ae4e-48bb-8dba-0dd5bb7fb4ad"
           }
         ],
         "id": "table2"
@@ -5707,7 +5707,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "39d62995-73d7-4251-90db-2d7f4c50994d",
+            "id": "84832004-193d-42d7-a718-c6a569ecac54",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -5716,7 +5716,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "dc2f1685-0bfb-4595-934f-4dfabe7113bf",
+            "id": "c0a273d6-f2c7-47ef-819a-e660f336dffe",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -5725,7 +5725,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "14ae3aea-0c5a-4ca8-8c32-269de2ab7769",
+            "id": "5c7a13c4-9245-4275-989a-d37a535c5823",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -5734,7 +5734,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b31c8bef-7f85-41f3-98e0-fd422904d98c",
+            "id": "495ac1df-3c24-40cb-8489-2d989ab116ef",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -5807,7 +5807,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -5845,7 +5845,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "39d62995-73d7-4251-90db-2d7f4c50994d"
+                        "id": "84832004-193d-42d7-a718-c6a569ecac54"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -5857,7 +5857,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "dc2f1685-0bfb-4595-934f-4dfabe7113bf"
+                        "id": "c0a273d6-f2c7-47ef-819a-e660f336dffe"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -5869,7 +5869,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "14ae3aea-0c5a-4ca8-8c32-269de2ab7769"
+                        "id": "5c7a13c4-9245-4275-989a-d37a535c5823"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -5881,7 +5881,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "b31c8bef-7f85-41f3-98e0-fd422904d98c"
+                        "id": "495ac1df-3c24-40cb-8489-2d989ab116ef"
                       }
                     ],
                     "activeCells": {
@@ -5891,7 +5891,7 @@ module.exports = {
                     "id": "3c402eda-44ab-48b2-bc1e-e83730c123cf"
                   }
                 ],
-                "id": "f569d08d-74dc-49d5-a074-b0f8fbf3b1c3"
+                "id": "aa9f6cce-b9e1-41c1-baac-4a3d6278ba88"
               }
             ],
             "activeCells": {},
@@ -5917,7 +5917,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "87cc73a0-422f-4725-b8ff-b0ef451445e5",
+            "id": "40c15289-231d-4399-a0b7-ed4d7f23fc79",
             "spec": "table4",
             "position": "0",
             "type": "step-result"
@@ -5926,7 +5926,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "76008a15-08a4-4bb5-9256-336fb55ab25d",
+            "id": "745766a7-517a-4999-8310-29e5120c8f06",
             "spec": "table4",
             "position": "0",
             "type": "step-result"
@@ -6008,7 +6008,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -6042,14 +6042,14 @@ module.exports = {
                           "x": "11"
                         },
                         "collections": [],
-                        "id": "87cc73a0-422f-4725-b8ff-b0ef451445e5"
+                        "id": "40c15289-231d-4399-a0b7-ed4d7f23fc79"
                       }
                     ],
                     "activeCells": {},
                     "id": "before"
                   }
                 ],
-                "id": "9155f289-8035-45d5-9e8a-7dbf3748320f"
+                "id": "d55ddec1-109e-4d01-bf70-88be319bf32f"
               },
               {
                 "key": "AfterThrowsError",
@@ -6065,14 +6065,14 @@ module.exports = {
                           "x": "22"
                         },
                         "collections": [],
-                        "id": "76008a15-08a4-4bb5-9256-336fb55ab25d"
+                        "id": "745766a7-517a-4999-8310-29e5120c8f06"
                       }
                     ],
                     "activeCells": {},
                     "id": "after"
                   }
                 ],
-                "id": "ba3095e9-e255-4648-ad0e-303386b72c79"
+                "id": "1c4da4d6-6740-4909-98d9-26f45c02e3ca"
               }
             ],
             "activeCells": {},
@@ -6128,7 +6128,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "b641b4fc-5fa5-4704-8743-2aa047022ab0",
+            "id": "eab714c9-d191-499f-9ae7-1cb6a214cc7d",
             "spec": "table5",
             "position": null,
             "type": "step-result"
@@ -6145,7 +6145,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "a3986e4c-c835-4f66-b96d-a40d5aed0ae3",
+            "id": "b663de73-d414-4a73-b72e-e07e8166a886",
             "spec": "table5",
             "position": null,
             "type": "step-result"
@@ -6232,7 +6232,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "77e6bc25-82c8-4cba-a768-8941df8a98cc",
+            "id": "8e01181a-dc20-4050-b90f-addc91083f43",
             "spec": "table5",
             "position": "1",
             "type": "step-result"
@@ -6241,7 +6241,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "77e6bc25-82c8-4cba-a768-8941df8a98cc",
+            "id": "8e01181a-dc20-4050-b90f-addc91083f43",
             "spec": "table5",
             "position": "2",
             "type": "step-result"
@@ -6258,7 +6258,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "77e6bc25-82c8-4cba-a768-8941df8a98cc",
+            "id": "8e01181a-dc20-4050-b90f-addc91083f43",
             "spec": "table5",
             "position": "3",
             "type": "step-result"
@@ -6267,7 +6267,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ea0dd8da-2da9-4c9a-8310-8debf4cb20e9",
+            "id": "8a101696-2990-4ddd-8bd3-48dd114cd173",
             "spec": "table5",
             "position": "1",
             "type": "step-result"
@@ -6276,7 +6276,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ea0dd8da-2da9-4c9a-8310-8debf4cb20e9",
+            "id": "8a101696-2990-4ddd-8bd3-48dd114cd173",
             "spec": "table5",
             "position": "2",
             "type": "step-result"
@@ -6293,7 +6293,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "ea0dd8da-2da9-4c9a-8310-8debf4cb20e9",
+            "id": "8a101696-2990-4ddd-8bd3-48dd114cd173",
             "spec": "table5",
             "position": "3",
             "type": "step-result"
@@ -6471,7 +6471,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "7:38 AM",
+        "time": "8:44 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -6494,7 +6494,7 @@ module.exports = {
               {
                 "text": "Table by the ExposeAsTable attribute",
                 "type": "comment",
-                "id": "a784b57b-53ec-4dbe-b358-88b7de682c8b"
+                "id": "aea6c3e7-f819-4452-951e-7af4f854de95"
               },
               {
                 "key": "Sum",
@@ -6523,7 +6523,7 @@ module.exports = {
                           "sum": "4"
                         },
                         "collections": [],
-                        "id": "b641b4fc-5fa5-4704-8743-2aa047022ab0"
+                        "id": "eab714c9-d191-499f-9ae7-1cb6a214cc7d"
                       },
                       {
                         "key": "sum",
@@ -6533,19 +6533,19 @@ module.exports = {
                           "sum": "5"
                         },
                         "collections": [],
-                        "id": "a3986e4c-c835-4f66-b96d-a40d5aed0ae3"
+                        "id": "b663de73-d414-4a73-b72e-e07e8166a886"
                       }
                     ],
                     "activeCells": {},
-                    "id": "7193cc5f-df78-4124-8f16-49cb885e509e"
+                    "id": "795ce602-c467-484f-8b38-ae253a2f3da7"
                   }
                 ],
-                "id": "5953e59a-f490-4be8-9c77-4cffd4391ade"
+                "id": "0a497211-54cb-4d21-94ae-88ffc11f2979"
               },
               {
                 "text": "Table fixture from script",
                 "type": "comment",
-                "id": "66b390cd-8208-424e-95f2-0010a44faf31"
+                "id": "885eebb6-dbdc-4f9e-85db-3aac1c10a563"
               },
               {
                 "key": "Divide",
@@ -6585,7 +6585,7 @@ module.exports = {
                           "product": "****"
                         },
                         "collections": [],
-                        "id": "77e6bc25-82c8-4cba-a768-8941df8a98cc"
+                        "id": "8e01181a-dc20-4050-b90f-addc91083f43"
                       },
                       {
                         "key": "Rows",
@@ -6595,18 +6595,18 @@ module.exports = {
                           "product": "****"
                         },
                         "collections": [],
-                        "id": "ea0dd8da-2da9-4c9a-8310-8debf4cb20e9"
+                        "id": "8a101696-2990-4ddd-8bd3-48dd114cd173"
                       }
                     ],
                     "activeCells": {},
-                    "id": "fdfb94af-3d35-4518-8877-ce0117227111"
+                    "id": "499c9499-c8f4-4e14-a017-ecdd7c90fb1c"
                   }
                 ],
-                "id": "fae873f7-1e7d-41ca-aa66-2da234644915"
+                "id": "df5bea1a-1abd-4106-8f6d-144ff1a440e9"
               }
             ],
             "activeCells": {},
-            "id": "98a31406-8b03-4f8d-9ab5-37ae2755fa28"
+            "id": "02985d41-1a8d-41c7-aba5-fe3ac6803c64"
           }
         ],
         "id": "table5"
@@ -10615,7 +10615,7 @@ module.exports = {
       "errors": []
     }
   ],
-  "time": "5/13/2015 7:38:41 AM",
+  "time": "5/13/2015 8:44:49 AM",
   "system": null,
   "suite": null,
   "success": false,

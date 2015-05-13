@@ -64,7 +64,7 @@ namespace StoryTeller.Samples.Fixtures
                 x.SetProperty(o => o.Amount);
                 x.SetProperty(o => o.Date);
                 x.SetProperty(o => o.Name);
-                x.Do = d => _details.Add(d);
+                x.Do(d => _details.Add(d));
             }).AsTable("The InvoiceDetails are").Before(() => _details.Clear());
 
             this["UnorderedDetailsAre"] = VerifySetOf(() => _details)

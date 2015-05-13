@@ -38,9 +38,9 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// Perform some type of silent action on the current
         /// object being created
         /// </summary>
-        public Action<T> Do
+        public void Do(Action<T> value)
         {
-            set { _grammar.Do(c => value((T) c.State.CurrentObject)); }
+            _grammar.Do(c => value((T) c.State.CurrentObject));
         }
 
         /// <summary>
@@ -147,6 +147,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
             }
 
             // TODO -- do something more usable than this?
+            // TODO -- have it return a Cell instead
             // _.Cell['foo'] = (loc, cell) => ?
             public ConfigureObjectGrammar<T, TCell> Configure(Action<T, TCell> configure)
             {
