@@ -12,13 +12,12 @@
     <tags>
     </tags>
     <dependencies>
-      <dependency id="FubuCore" version="2.0" />
-      <dependency id="HtmlTags" version="3.0" />
     </dependencies>
   </metadata>
   <files>
     <file src="..\..\src\StoryTeller\bin\Release\StoryTeller.*" target="lib\net45" />
     <file src="..\..\src\ST\bin\Release\*.exe" target="tools" />
     <file src="..\..\src\ST\bin\Release\*.dll" target="tools" />
+    <file src="..\..\src\ST\*.js" target="tools" />
   </files>
 </package>
