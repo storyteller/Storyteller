@@ -85,11 +85,13 @@ Name: Embedded
         }
     }
 
+    // SAMPLE: using-before-and-after-actions-in-embedded-fixtures
     public class EmbeddedGrammarFixture : Fixture
     {
         public EmbeddedGrammarFixture()
         {
             this["Colors"] = Embed<RecordingFixture>("In the recording fixture");
+
             this["BeforeColors"] = Embed<RecordingFixture>("In the recording fixture")
                 .Before(c =>
                 {
@@ -103,6 +105,7 @@ Name: Embedded
                 });
         }
     }
+    // ENDSAMPLE
 
     public class RecordingFixture : Fixture
     {

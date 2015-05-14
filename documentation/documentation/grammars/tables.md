@@ -32,7 +32,7 @@ Assuming that you are using a method as the basic for a _Table_ grammar, you can
 
 <[sample:overriding-table-options]>
 
-See <[linkto:documentation/cells]> and <[linkto:documentation/selection_lists]> for more information;
+See <[linkto:documentation/cells]> and <[linkto:documentation/cells/selection_lists]> for more information;
 
 
 ## Before and After Actions

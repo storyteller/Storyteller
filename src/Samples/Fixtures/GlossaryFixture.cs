@@ -89,12 +89,19 @@ namespace Samples.Fixtures
         }
         // ENDSAMPLE
 
+        // SAMPLE: exposing-embedded-section
         public IGrammar Preferences()
         {
-            return Embed<PreferencesFixture>("Set the current user's preferences");
+            return Embed<PreferencesFixture>("Set the current user's preferences")
+                .Before(c =>
+                {
+                    // Do something to open the preferences dialog
+                });
         }
+        // ENDSAMPLE
     }
 
+    // SAMPLE: preferences-fixture
     public class PreferencesFixture : Fixture
     {
         [FormatAs("Enable notifications? {enabled}")]
@@ -109,4 +116,5 @@ namespace Samples.Fixtures
             
         }
     }
+    // ENDSAMPLE
 }

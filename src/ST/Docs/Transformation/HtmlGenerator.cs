@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using FubuCore;
+using FubuCore.CommandLine;
+using HtmlTags;
 using ST.Docs.Topics;
 
 namespace ST.Docs.Transformation
@@ -30,6 +32,31 @@ namespace ST.Docs.Transformation
 
             try
             {
+                return generate(topic);
+            }
+            catch (Exception e)
+            {
+                ConsoleWriter.Write(ConsoleColor.Yellow, "Failed to transform topic at " + topic.File);
+                ConsoleWriter.Write(ConsoleColor.Red, e.ToString());
+
+                var document = new HtmlDocument
+                {
+                    Title = "Error!"
+                };
+
+                document.Add("h1").Text("Error!");
+
+                document.Add("pre").Text(e.ToString());
+
+
+                return document.ToString();
+            }
+        }
+
+        private string generate(Topic topic)
+        {
+            try
+            {
                 var template = readTemplate();
 
                 return _transformer.Transform(topic, template);
@@ -43,8 +70,6 @@ namespace ST.Docs.Transformation
 
                 return _transformer.Transform(topic, template);
             }
-
-
         }
 
         private string readTemplate()
