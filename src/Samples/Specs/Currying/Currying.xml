@@ -1,0 +1,8 @@
+<Spec id="93be7129-3144-4b0f-94b4-56707296b11f" maxRetries="0" tags="" lifecycle="Acceptance" name="Currying">
+  <Currying id="1d5fd235-cebf-4a97-a5c1-1ab15f74b95e">
+    <Comment id="1d9cdc91-5685-4bfa-9668-5a367d76883b">Without currying and supplying all the information</Comment>
+    <CreateInvoice Id="#1" DueDate="TODAY+5" IsOpen="True" />
+    <Comment id="abc2745e-0467-494d-b4ee-3ae3b0475694">If all the spec cares about is that the invoice is open</Comment>
+    <OpenInvoice Id="#2" />
+  </Currying>
+</Spec>
