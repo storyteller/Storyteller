@@ -13,9 +13,15 @@ namespace StoryTeller.Grammars.Sets
         }
 
 
-        public SetVerificationGrammar Titled(string title)
+        /// <summary>
+        /// Specify the appearance of the html for this set verification grammar
+        /// </summary>
+        /// <param name="title">The text that appears in the title bar in the rendered html for this grammar</param>
+        /// <param name="header">The text that will appear in the header column in the rendered html</param>
+        /// <returns></returns>
+        public SetVerificationGrammar Titled(string title, string header = "expected")
         {
-            var comparison = new StringListComparison("expected", _dataSource);
+            var comparison = new StringListComparison(header, _dataSource);
 
             return new SetVerificationGrammar(title, "Rows", comparison);
         }

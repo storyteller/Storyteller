@@ -20,7 +20,9 @@ namespace StoryTeller.Testing.Grammars.Sets
         public void SetUp()
         {
             comparer = new ObjectComparison<Address>(c => addresses);
-            comparer.MatchOn(x => x.City).MatchOn((x => x.Address1)).MatchOn(x => x.DistanceFromOffice);
+            comparer.Compare(x => x.City);
+            comparer.Compare((x => x.Address1));
+            comparer.Compare(x => x.DistanceFromOffice);
         }
 
         [Test]

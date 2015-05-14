@@ -74,7 +74,12 @@ namespace StoryTeller.Samples.Fixtures
             this["OrderedDetailsAre"] = VerifySetOf(() => _details)
                 .Titled("The Ordered details should be")
                 .Ordered()
-                .MatchOn(o => o.Amount, o => o.Date, o => o.Name);
+                .MatchOn(_ =>
+                {
+                    _.Compare(o => o.Amount).DefaultValue("100").Header("The Amount");
+                    _.Compare(o => o.Date);
+                    _.Compare(o => o.Name).Header("The Name");
+                });
         }
 
         public IGrammar ThrowsErrorOnDataFetch()

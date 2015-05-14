@@ -107,7 +107,6 @@
     <Compile Include="Docs\Runner\TopicRegistry.cs" />
     <Compile Include="Docs\Samples\BlockCommentScanner.cs" />
     <Compile Include="Docs\Samples\CLangSampleScanner.cs" />
-    <Compile Include="Docs\Samples\CodeFileEndpoint.cs" />
     <Compile Include="Docs\Samples\CodeFormatter.cs" />
     <Compile Include="Docs\Samples\EmbeddedSpecData.cs" />
     <Compile Include="Docs\Samples\ISampleBuilder.cs" />
@@ -121,7 +120,6 @@
     <Compile Include="Docs\Samples\SimpleCommentSampleScanner.cs" />
     <Compile Include="Docs\Samples\Sample.cs" />
     <Compile Include="Docs\Samples\SampleCache.cs" />
-    <Compile Include="Docs\Samples\SnippetPageExtensions.cs" />
     <Compile Include="Docs\Samples\SampleReader.cs" />
     <Compile Include="Docs\Samples\Samples.cs" />
     <Compile Include="Docs\Samples\SampleTag.cs" />

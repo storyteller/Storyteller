@@ -40,13 +40,10 @@ namespace StoryTeller.Grammars.Sets
             return this;
         }
 
-        public SetVerificationGrammar MatchOn(params Expression<Func<T, object>>[] properties)
+        public SetVerificationGrammar MatchOn(Action<ObjectComparison<T>> configure)
         {
             var comparer = new ObjectComparison<T>(_dataSource);
-            foreach (var property in properties)
-            {
-                comparer.MatchOn(property);
-            }
+            configure(comparer);
 
             var grammar = new SetVerificationGrammar(_title, _leafName, comparer);
             if (_ordered)
@@ -55,6 +52,11 @@ namespace StoryTeller.Grammars.Sets
             }
 
             return grammar;
+        }
+
+        public SetVerificationGrammar MatchOn(params Expression<Func<T, object>>[] properties)
+        {
+            return MatchOn(_ => properties.Each(x => _.Compare(x)));
         }
 
 
