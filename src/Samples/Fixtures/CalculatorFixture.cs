@@ -22,6 +22,7 @@ namespace Samples.Fixtures
             _calculator.Add(value);
         }
 
+
         [FormatAs("Subtract {value}")]
         public void Subtract(double value)
         {

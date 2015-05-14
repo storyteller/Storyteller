@@ -1,0 +1,11 @@
+<Spec id="a309305e-69cc-4510-b9c2-4480ed786dea" maxRetries="0" tags="" lifecycle="Acceptance" name="Before and After Actions">
+  <Tables id="d4879886-3883-4c6c-979e-0f41f445302c">
+    <TableWithBeforeAndAfterSteps>
+      <Rows id="f2ea7dd9-847f-47d4-ac11-77757b47843d">
+        <TableWithBeforeAndAfterSteps-row First="LeBron" Last="James" />
+        <TableWithBeforeAndAfterSteps-row First="James" Last="Harden" />
+        <TableWithBeforeAndAfterSteps-row First="Chris" Last="Paul" />
+      </Rows>
+    </TableWithBeforeAndAfterSteps>
+  </Tables>
+</Spec>

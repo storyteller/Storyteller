@@ -1,0 +1,10 @@
+<Spec id="e42d39dc-f39f-48c0-b34c-364203254935" maxRetries="0" tags="" lifecycle="Acceptance" name="Using a Paragraph">
+  <Tables id="bef9227b-7ebd-4e71-8f25-c4f08c42562b">
+    <Divide>
+      <Rows id="cf3ec912-a167-4643-b734-1faf44affbcb">
+        <Divide-row x="10" y="5" quotient="2" />
+        <Divide-row x="5" y="2" quotient="2.5" />
+      </Rows>
+    </Divide>
+  </Tables>
+</Spec>

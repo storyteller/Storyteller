@@ -4,7 +4,6 @@ facts
 assertions
 paragraphs
 tables
-decision_tables
 sets
 embedded_section
 reusing

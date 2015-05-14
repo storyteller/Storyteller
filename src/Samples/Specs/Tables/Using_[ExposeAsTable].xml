@@ -1,0 +1,11 @@
+<Spec id="ffabe405-f276-4421-97e0-0cfbc7a3d3a2" maxRetries="0" tags="" lifecycle="Acceptance" name="Using [ExposeAsTable]">
+  <Tables id="f05369d8-82d2-4bcf-aba6-e368e2028d5c">
+    <Sum>
+      <sum id="6b4604ce-1d81-48b8-9e6c-3d83a3b51945">
+        <Sum-row x="1" y="1" sum="2" />
+        <Sum-row x="3" y="4" sum="7" />
+        <Sum-row x="4" y="9" sum="13" />
+      </sum>
+    </Sum>
+  </Tables>
+</Spec>
