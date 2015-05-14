@@ -4,6 +4,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Shouldly;
+using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model;
@@ -35,12 +36,41 @@ namespace StoryTeller.Testing
 
         protected void executeSpec(Specification spec)
         {
-            _context = new SpecContext(spec, null, new NulloResultObserver(), new StopConditions(), Services);
+            _context = new SpecContext(spec, null, new NulloResultObserver(), new StopConditions(), new TestExecutionContext(Services));
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
             var executor = new SynchronousExecutor(_context);
             plan.AcceptVisitor(executor);
+        }
+
+        public class TestExecutionContext : IExecutionContext
+        {
+            private readonly InMemoryServiceLocator _services;
+
+            public void Register<T>(T service)
+            {
+                _services.Add(service);
+            }
+
+            public TestExecutionContext(InMemoryServiceLocator services)
+            {
+                _services = services;
+            }
+
+            void IDisposable.Dispose()
+            {
+            }
+
+            public T GetService<T>()
+            {
+                return _services.GetInstance<T>();
+            }
+
+            public void AfterExecution(ISpecContext context)
+            {
+                // Nothing
+            }
         }
 
 

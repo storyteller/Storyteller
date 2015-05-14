@@ -99,7 +99,7 @@ namespace StoryTeller
                 }
 
                 context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
-                    execution.Services);
+                    execution);
 
                 context.Reporting.StartDebugListening();
 

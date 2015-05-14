@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using FubuCore;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
@@ -11,8 +9,6 @@ namespace StoryTeller.Samples
 {
     public class GrammarSystem : ISystem
     {
-        public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
-
         public IExecutionContext CreateContext()
         {
             if (Project.CurrentProfile == "blowup")
@@ -20,7 +16,7 @@ namespace StoryTeller.Samples
                 throw new Exception("I blew up trying to create an execution context");
             }
 
-            return new NulloSystem.SimpleExecutionContext(Services);
+            return new SimpleExecutionContext();
         }
 
         public void Dispose()
@@ -42,12 +38,10 @@ namespace StoryTeller.Samples
     {
         public static readonly IList<Player> Players = new List<Player>
         {
-            new Player{FirstName = "Justin", LastName = "Houston", Position = "LB"},
-            new Player{FirstName = "Jeremy", LastName = "Maclin", Position = "WR"},
-            new Player{FirstName = "Jamaal", LastName = "Charles", Position = "RB"},
-
-
-        }; 
+            new Player {FirstName = "Justin", LastName = "Houston", Position = "LB"},
+            new Player {FirstName = "Jeremy", LastName = "Maclin", Position = "WR"},
+            new Player {FirstName = "Jamaal", LastName = "Charles", Position = "RB"},
+        };
 
         public object Convert(string raw, ISpecContext context)
         {

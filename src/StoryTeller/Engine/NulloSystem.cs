@@ -6,11 +6,16 @@ namespace StoryTeller.Engine
 {
     public class NulloSystem : ISystem
     {
-        public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
+        private readonly InMemoryServiceLocator _services = new InMemoryServiceLocator();
 
         public IExecutionContext CreateContext()
         {
-            return new SimpleExecutionContext(Services);
+            return new SimpleExecutionContext(_services);
+        }
+
+        public void Register<T>(T service)
+        {
+            _services.Add(service);
         }
 
         public Task Recycle()
@@ -26,29 +31,39 @@ namespace StoryTeller.Engine
         public void Dispose()
         {
         }
+    }
 
-        public class SimpleExecutionContext : IExecutionContext
+    public class SimpleExecutionContext : IExecutionContext
+    {
+        private readonly InMemoryServiceLocator _services;
+
+        public SimpleExecutionContext()
         {
-            public SimpleExecutionContext(IServiceLocator services)
-            {
-                Services = services;
-            }
+            _services = new InMemoryServiceLocator();
+        }
 
-            void IDisposable.Dispose()
-            {
-            }
+        public void Register<T>(T service)
+        {
+            _services.Add(service);
+        }
 
-            IServiceLocator IExecutionContext.Services
-            {
-                get { return Services; }
-            }
+        internal SimpleExecutionContext(InMemoryServiceLocator services)
+        {
+            _services = services;
+        }
 
-            public void AfterExecution(ISpecContext context)
-            {
-                // Nothing
-            }
+        void IDisposable.Dispose()
+        {
+        }
 
-            public IServiceLocator Services { get; private set; }
+        public T GetService<T>()
+        {
+            return _services.GetInstance<T>();
+        }
+
+        public void AfterExecution(ISpecContext context)
+        {
+            // Nothing
         }
     }
 }

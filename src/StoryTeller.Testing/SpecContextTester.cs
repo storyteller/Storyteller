@@ -4,6 +4,7 @@ using System.Threading;
 using FubuCore;
 using NUnit.Framework;
 using Shouldly;
+using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Results;
 using StoryTeller.Testing.Results;
@@ -19,7 +20,7 @@ namespace StoryTeller.Testing
         public void SetUp()
         {
             theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
-                new InMemoryServiceLocator());
+                new SimpleExecutionContext());
         }
 
         [Test]
@@ -113,7 +114,7 @@ namespace StoryTeller.Testing
         public void SetUp()
         {
             theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
-                new InMemoryServiceLocator());
+                new SimpleExecutionContext());
         }
 
         [Test]

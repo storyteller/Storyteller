@@ -1,11 +1,12 @@
 ﻿using System;
-using FubuCore;
 
 namespace StoryTeller.Engine
 {
+    // SAMPLE: IExecutionContext
     public interface IExecutionContext : IDisposable
     {
-        IServiceLocator Services { get; }
         void AfterExecution(ISpecContext context);
+        T GetService<T>();
     }
+    // ENDSAMPLE
 }

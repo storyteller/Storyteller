@@ -111,7 +111,7 @@ namespace StoryTeller.Testing.Engine
             }
 
             var context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
-                execution.Services);
+                execution);
 
             context.Reporting.StartDebugListening();
 

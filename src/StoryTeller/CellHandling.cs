@@ -5,6 +5,7 @@ using StoryTeller.Model.Lists;
 
 namespace StoryTeller
 {
+    // SAMPLE: CellHandling
     public class CellHandling
     {
         public CellHandling(EquivalenceChecker equivalence, Conversions conversions)
@@ -23,4 +24,5 @@ namespace StoryTeller
             return new CellHandling(new EquivalenceChecker(), new Conversions());
         }
     }
+    // ENDSAMPLE
 }

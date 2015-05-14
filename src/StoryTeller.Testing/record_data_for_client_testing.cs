@@ -51,7 +51,7 @@ namespace StoryTeller.Testing
                 using (var execution = theSystem.CreateContext())
                 {
                     var observer = new RecordingObserver(data.results);
-                    using (var context = new SpecContext(spec, null, observer, new StopConditions(), execution.Services)
+                    using (var context = new SpecContext(spec, null, observer, new StopConditions(), execution)
                         )
                     {
                         context.Reporting.StartDebugListening();

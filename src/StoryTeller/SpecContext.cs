@@ -15,18 +15,18 @@ namespace StoryTeller
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         private readonly Specification _specification;
         private readonly IResultObserver _resultObserver;
-        private IServiceLocator _services;
+        private readonly IExecutionContext _execution;
         private readonly State _state = new State();
         private bool _hasCriticalException;
         private readonly Timings _timings;
 
-        public SpecContext(Specification specification, Timings timings, IResultObserver observer, StopConditions stopConditions, IServiceLocator services)
+        public SpecContext(Specification specification, Timings timings, IResultObserver observer, StopConditions stopConditions, IExecutionContext execution)
         {
             Counts = new Counts();
             _specification = specification;
             _resultObserver = observer;
+            _execution = execution;
             StopConditions = stopConditions;
-            _services = services;
 
             _timings = timings ?? new Timings();
 
@@ -58,7 +58,6 @@ namespace StoryTeller
         {
             Reporting.Dispose();
             _state.Dispose();
-            _services = null;
         }
 
         public Timings Timings
@@ -115,7 +114,7 @@ namespace StoryTeller
 
         public T Service<T>()
         {
-            return _services.GetInstance<T>();
+            return _execution.GetService<T>();
         }
 
         public State State
@@ -174,9 +173,9 @@ namespace StoryTeller
         }
 
 
-        public static SpecContext Basic(IServiceLocator services = null)
+        public static SpecContext Basic()
         {
-            return new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), services ?? new InMemoryServiceLocator());
+            return new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(), new SimpleExecutionContext());
         }
 
         public static SpecContext ForTesting()

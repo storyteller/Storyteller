@@ -50,9 +50,9 @@ namespace Specifications
             new FileSystem().DeleteDirectory(_docSettings.Root);
         }
 
-        public IServiceLocator Services
+        public T GetService<T>()
         {
-            get { return _services; }
+            return _services.GetInstance<T>();
         }
 
         public void AfterExecution(ISpecContext context)

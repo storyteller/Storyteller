@@ -77,6 +77,11 @@ namespace StoryTeller.Samples.Fixtures
                     _.Compare(o => o.Date);
                     _.Compare(o => o.Name).Header("The Name");
                 });
+
+            this["TheDataIs"] = this["AddName"]
+                .AsTable("The data is")
+                .LeafName("name")
+                .Before(() => _names.Clear());
         }
 
         public IGrammar ThrowsErrorOnDataFetch()
