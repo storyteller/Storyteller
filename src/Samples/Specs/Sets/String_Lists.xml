@@ -1,0 +1,35 @@
+<Spec id="a32d31b5-e60a-47a5-890c-a4b669d89eed" maxRetries="0" tags="" lifecycle="Acceptance" name="String Lists">
+  <NameList id="1bcccd5b-d7ee-4bbd-9159-fb55f4b8dcc7">
+    <TheNamesAre>
+      <Rows id="6acfc9da-cb29-431f-84c9-bb0177e420e9">
+        <TheNamesAre-row name="Luke" />
+        <TheNamesAre-row name="Han" />
+        <TheNamesAre-row name="Chewie" />
+      </Rows>
+    </TheNamesAre>
+    <Comment id="142515d9-bcc3-4537-861d-ff0de0b5d4cc">The order is incorrect and this declaration should fail</Comment>
+    <TheNamesShouldBe>
+      <Rows id="4b2b3b61-f412-4110-801e-8e43318d81df">
+        <TheNamesShouldBe-row Name="Luke" />
+        <TheNamesShouldBe-row Name="Chewie" />
+        <TheNamesShouldBe-row Name="Han" />
+      </Rows>
+    </TheNamesShouldBe>
+    <Comment id="aa71a666-cabb-41b9-b8e5-8b7ea63cc794">Chewie got lost, so this fails too</Comment>
+    <TheNamesShouldBe>
+      <Rows id="102e7d44-2635-4eb9-9246-9b6fdd2faf89">
+        <TheNamesShouldBe-row Name="Luke" />
+        <TheNamesShouldBe-row Name="Han" />
+      </Rows>
+    </TheNamesShouldBe>
+    <Comment id="df0da80d-883d-43ed-9bc4-cbb148f69a28">Leia wasn't with them at the time, so this declaration fails too</Comment>
+    <TheNamesShouldBe>
+      <Rows id="5b1c4aa0-2e20-4848-9d22-8986ccaed258">
+        <TheNamesShouldBe-row Name="Luke" />
+        <TheNamesShouldBe-row Name="Han" />
+        <TheNamesShouldBe-row Name="Chewie" />
+        <TheNamesShouldBe-row Name="Leia" />
+      </Rows>
+    </TheNamesShouldBe>
+  </NameList>
+</Spec>

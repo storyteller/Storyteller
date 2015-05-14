@@ -71,6 +71,7 @@
     <Compile Include="CellHandling.cs" />
     <Compile Include="Commands\ForceRecycleCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Conversion\ArrayConversion.cs" />
     <Compile Include="Conversion\Conversions.cs" />
     <Compile Include="Conversion\DateTimeConverter.cs" />
     <Compile Include="Conversion\EnumerationConversion.cs" />

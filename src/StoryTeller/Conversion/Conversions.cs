@@ -18,7 +18,7 @@ namespace StoryTeller.Conversion
                     type =>
                     {
                         return
-                            _providers.UnionWith(new EnumerationConversion(), new NullableConvertor(this))
+                            _providers.UnionWith(new EnumerationConversion(), new NullableConvertor(this), new ArrayConversion(this))
                                 .FirstValue(x => x.ConverterFor(type));
                     });
 

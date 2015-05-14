@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -229,7 +230,22 @@ namespace StoryTeller.Model
             var expected = values.Get(Key);
             return _equivalence(expected, actual) ? 
                 CellResult.Success(Key) : 
-                CellResult.Failure(Key, actual.ToString());
+                CellResult.Failure(Key, toStringDisplay(actual));
+        }
+
+        // TODO -- make this a *lot* smarter later
+        private string toStringDisplay(object actual)
+        {
+            if (actual == null) return "NULL";
+
+            if (actual == string.Empty) return "EMPTY";
+
+            if (actual.GetType().IsArray)
+            {
+                return actual.As<Array>().OfType<object>().Select(toStringDisplay).Join(", ");
+            }
+
+            return actual.ToString();
         }
 
         public bool Matches(StepValues one, StepValues two)

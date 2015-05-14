@@ -6,9 +6,7 @@ fixtures
 cells
 grammars
 comments
-selection_lists
 system_state
-conversion
 ui
 performance
 instrumentation

@@ -54,10 +54,7 @@ namespace StoryTeller.Samples.Fixtures
             this["UnorderedStringSet"] = VerifyStringList(() => _names)
                 .Titled("The names in no order should be");
 
-            this["TheDataIs"] = this["AddName"]
-                .AsTable("The data is")
-                .LeafName("name")
-                .Before(() => _names.Clear());
+
 
             this["InvoiceDetailsAre"] = CreateNewObject<InvoiceDetail>("",x =>
             {

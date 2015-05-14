@@ -53,6 +53,22 @@ namespace StoryTeller.Testing.Conversion
         }
 
         [Test]
+        public void convert_string_array()
+        {
+            conversions.Convert(typeof(string[]), "a, b, c, d").ShouldBeOfType<string[]>()
+                .ShouldHaveTheSameElementsAs("a", "b", "c", "d");
+        }
+
+        [Test]
+        public void convert_number_array()
+        {
+            conversions.Convert(typeof(int[]), "1,2, 3, 4").ShouldBeOfType<int[]>()
+                .ShouldHaveTheSameElementsAs(1, 2, 3, 4
+                
+                );
+        }
+
+        [Test]
         public void convert_string_as_EMPTY()
         {
             conversions.Convert(typeof (string), "EMPTY").ShouldBe(string.Empty);

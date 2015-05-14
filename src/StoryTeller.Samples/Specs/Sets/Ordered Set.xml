@@ -1,52 +1,51 @@
-<?xml version="1.0"?>
-<Test name="Ordered Set" lifecycle="Acceptance" id="set1">
-  <Sets>
+<Spec id="set1" maxRetries="0" tags="" lifecycle="Acceptance" name="Ordered Set">
+  <Sets id="be350e10-4eea-43f2-af1f-1049c2d78284">
     <InvoiceDetailsAre>
-      <Rows>
-        <Rows Name="Cord" Amount="100.1" Date="TODAY" />
-        <Rows Name="Drill" Amount="200.2" Date="TODAY+1" />
-        <Rows Name="Hammer" Amount="300.3" Date="TODAY+2" />
+      <Rows id="47ca51ad-076a-431e-9168-dbc70315cec0">
+        <InvoiceDetailsAre-row Amount="100.1" Date="TODAY" Name="Cord" />
+        <InvoiceDetailsAre-row Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <InvoiceDetailsAre-row Amount="300.3" Date="TODAY+2" Name="Hammer" />
       </Rows>
     </InvoiceDetailsAre>
-    <Comment><![CDATA[Completely successful ordering]]></Comment>
+    <Comment id="5f83f81d-4275-40c6-a7d2-f40fdb14b987">Completely successful ordering</Comment>
     <OrderedDetailsAre>
       <rows id="1">
-        <Rows Name="Cord" Amount="100.1" Order="1" Date="TODAY" id="2"/>
-        <Rows Name="Drill" Amount="200.2" Order="2" Date="TODAY+1" id="3"/>
-        <Rows Name="Hammer" Amount="300.3" Order="3" Date="TODAY+2" id="4"/>
+        <OrderedDetailsAre-row Amount="100.1" Date="TODAY" Name="Cord" />
+        <OrderedDetailsAre-row Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <OrderedDetailsAre-row Amount="300.3" Date="TODAY+2" Name="Hammer" />
       </rows>
     </OrderedDetailsAre>
-    <Comment><![CDATA[Out of order]]></Comment>
+    <Comment id="fc3c940b-cecb-4d29-9d2b-3c9da9ceaf7d">Out of order</Comment>
     <OrderedDetailsAre>
       <rows id="5">
-        <Rows Name="Drill" Amount="200.2" Order="1" Date="TODAY+1" id="6"/>
-        <Rows Name="Hammer" Amount="300.3" Order="2" Date="TODAY+2" id="7"/>
-        <Rows Name="Cord" Amount="100.1" Order="3" Date="TODAY" id="8"/>
+        <OrderedDetailsAre-row Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <OrderedDetailsAre-row Amount="300.3" Date="TODAY+2" Name="Hammer" />
+        <OrderedDetailsAre-row Amount="100.1" Date="TODAY" Name="Cord" />
       </rows>
     </OrderedDetailsAre>
-    <Comment><![CDATA[Should have one exra]]></Comment>
+    <Comment id="35a25eb5-6189-4df5-a267-0c1ac6dd35e6">Should have one exra</Comment>
     <OrderedDetailsAre>
       <rows id="9">
-        <Rows Name="Cord" Amount="100.1" Order="1" Date="TODAY"/>
-        <Rows Name="Drill" Amount="200.2" Order="2" Date="TODAY+1"/>
+        <OrderedDetailsAre-row Amount="100.1" Date="TODAY" Name="Cord" />
+        <OrderedDetailsAre-row Amount="200.2" Date="TODAY+1" Name="Drill" />
       </rows>
     </OrderedDetailsAre>
-    <Comment><![CDATA[Should mark one expected result as missing]]></Comment>
+    <Comment id="f6234896-5a75-44bf-8701-05e62c2511ae">Should mark one expected result as missing</Comment>
     <OrderedDetailsAre>
       <rows id="10">
-        <Rows Name="Cord" Amount="100.1" Order="1" Date="TODAY"/>
-        <Rows Name="Drill" Amount="200.2" Order="2" Date="TODAY+1" />
-        <Rows Name="Hammer" Amount="300.3" Order="3" Date="TODAY+2"/>
-        <Rows Name="Hammer" Amount="400.3" Order="4" Date="TODAY+3" id="11"/>
+        <OrderedDetailsAre-row Amount="100.1" Date="TODAY" Name="Cord" />
+        <OrderedDetailsAre-row Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <OrderedDetailsAre-row Amount="300.3" Date="TODAY+2" Name="Hammer" />
+        <OrderedDetailsAre-row Amount="400.3" Date="TODAY+3" Name="Hammer" />
       </rows>
     </OrderedDetailsAre>
-    <Comment><![CDATA[One syntax error]]></Comment>
+    <Comment id="26f7665e-e467-4a6e-bb30-5f38bec08b8f">One syntax error</Comment>
     <OrderedDetailsAre>
-      <rows>
-        <Rows Name="Cord" Amount="100.1" Order="1" Date="Syntax Error" id="12"/>
-        <Rows Name="Drill" Amount="200.2" Order="2" Date="TODAY+1" />
-        <Rows Name="Hammer" Amount="300.3" Order="3" Date="TODAY+2"/>
+      <rows id="ef6f3eed-b1a8-4e8a-8e03-537ee10bc249">
+        <OrderedDetailsAre-row Amount="100.1" Date="Syntax Error" Name="Cord" />
+        <OrderedDetailsAre-row Amount="200.2" Date="TODAY+1" Name="Drill" />
+        <OrderedDetailsAre-row Amount="300.3" Date="TODAY+2" Name="Hammer" />
       </rows>
     </OrderedDetailsAre>
   </Sets>
-</Test>
+</Spec>
