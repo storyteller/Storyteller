@@ -17,6 +17,10 @@ Before you write specifications, you need a vocabulary to express the actions an
 ## Fixture
 A closely related collection of grammars implemented in a single class. In common usage, you will create a separate Fixture for each individual screen or service in your system. See <[linkto:documentation/fixtures]> for more information.
 
+## Cell
+
+_Cell's_ are the user-supplied values exposed by grammars. See <[linkto:documentation/cells]> for more information.
+
 ## Sentence
 A type of grammar that is expressed in a single line. A sentence can have zero to many inputs. Sentences can also be used to assert a fact or check one or more expected values. The small specification below uses three different Sentence grammars:
 

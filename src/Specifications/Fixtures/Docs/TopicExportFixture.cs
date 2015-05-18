@@ -24,7 +24,10 @@ namespace Specifications.Fixtures.Docs
 
 
         [Hidden]
-        public void BuildTopic([Header("File Path")] string path, string Line1 = null, string Line2 = null)
+        public void BuildTopic(
+            [Header("File Path")] string path, 
+            string Line1 = null, 
+            string Line2 = null)
         {
             var location = _directory.AppendPath(path.Replace('/', Path.DirectorySeparatorChar));
 

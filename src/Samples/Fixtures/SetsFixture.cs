@@ -6,6 +6,32 @@ using StoryTeller.Grammars.Tables;
 
 namespace Samples.Fixtures
 {
+    public class SetsSampleFixture : Fixture
+    {
+        private IEnumerable<InvoiceDetail> getDetails()
+        {
+            return new InvoiceDetail[0];
+        }
+
+        // SAMPLE: using-cell-expression
+        public IGrammar OrderedDetailsAre()
+        {
+            return VerifySetOf(getDetails)
+                .Titled("The Ordered details should be")
+                .Ordered()
+
+                // Use this syntax if you want to customize
+                // the cells in this SetVerification grammar
+                .MatchOn(_ =>
+                {
+                    _.Compare(o => o.Amount).DefaultValue("100").Header("The Amount");
+                    _.Compare(o => o.Date);
+                    _.Compare(o => o.Name).Header("The Name");
+                });
+        }
+        // ENDSAMPLE
+    }
+
     // SAMPLE: sets-fixture
     public class SetsFixture : Fixture
     {

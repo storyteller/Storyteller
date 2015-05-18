@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace StoryTeller.Model
 {
+    // SAMPLE: ICellExpression
     public interface ICellExpression
     {
         /// <summary>
@@ -48,6 +49,7 @@ namespace StoryTeller.Model
         /// <returns></returns>
         ICellExpression SelectionList(string listName);
     }
+    // ENDSAMPLE
 
     public class CellModifications : ICellExpression
     {

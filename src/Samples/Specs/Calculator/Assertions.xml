@@ -1,0 +1,10 @@
+<Spec id="049595b5-4e05-43d8-bbc0-129ad9d63f69" maxRetries="0" tags="" lifecycle="Acceptance" name="Assertions">
+  <Calculator id="6309dbe4-1ffe-4d77-82b0-4cc22be07165">
+    <Comment id="fb7002ab-ea0f-490d-b666-ea75a08945aa">A matching assertion</Comment>
+    <AddingNumbersTogether x="2" y="2" returnValue="4" />
+    <Comment id="58ebbcf6-8c5a-4273-ae68-1d74f2cd53f2">This is only true in the book 1984</Comment>
+    <AddingNumbersTogether x="2" y="2" returnValue="5" />
+    <Comment id="03b8e01b-0b87-4e46-90fb-ef95fd5f35da">Bad input altogether</Comment>
+    <AddingNumbersTogether x="ABC" y="2" returnValue="2" />
+  </Calculator>
+</Spec>

@@ -1,0 +1,11 @@
+<Spec id="4c93dbcb-e1d8-409b-ba27-a8a8be432b13" maxRetries="0" tags="" lifecycle="Acceptance" name="Table with Options">
+  <Tables id="fce149e9-6add-4579-b4ef-9407fa27feda">
+    <TableWithLotsOfOptions>
+      <table id="2152e621-9fbd-4e8c-8b64-b70dfad74015">
+        <TableWithLotsOfOptions-row player="Nolan Ryan" position="Pitcher" />
+        <TableWithLotsOfOptions-row player="Willy Mays" position="Outfield" />
+        <TableWithLotsOfOptions-row player="Johnny Bench" position="Catcher" />
+      </table>
+    </TableWithLotsOfOptions>
+  </Tables>
+</Spec>
