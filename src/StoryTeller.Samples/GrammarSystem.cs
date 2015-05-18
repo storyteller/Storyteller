@@ -23,17 +23,23 @@ namespace StoryTeller.Samples
         {
         }
 
+        // SAMPLE: registering-custom-runtime-converter
         public CellHandling Start()
         {
             var handling = CellHandling.Basic();
 
+            // Adding a system wide list. 
             handling.Lists["positions"].AddValues("LB", "OL", "DL", "WR", "RB");
+
+            // This is where you can register a custom runtime conversion
             handling.Conversions.RegisterRuntimeConversion<PlayerConverter>();
 
             return handling;
         }
+        // ENDSAMPLE
     }
 
+    // SAMPLE: PlayerConverter
     public class PlayerConverter : IRuntimeConverter
     {
         public static readonly IList<Player> Players = new List<Player>
@@ -65,4 +71,5 @@ namespace StoryTeller.Samples
             return "{0} {1}".ToFormat(FirstName, LastName);
         }
     }
+    // ENDSAMPLE
 }

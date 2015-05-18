@@ -15,7 +15,7 @@ namespace StoryTeller.Testing.Conversion
 
             date.DayOfWeek.ShouldBe(DayOfWeek.Saturday);
             date.Date.AddHours(14).AddMinutes(30).ShouldBe(date);
-            ShouldBeTestExtensions.ShouldBe((date >= DateTime.Today), true);
+            (date >= DateTime.Today).ShouldBe(true);
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.Conversion
 
             date.DayOfWeek.ShouldBe(DayOfWeek.Monday);
             date.Date.AddHours(14).AddMinutes(30).ShouldBe(date);
-            ShouldBeTestExtensions.ShouldBe((date >= DateTime.Today), true);
+            (date >= DateTime.Today).ShouldBe(true);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace StoryTeller.Testing.Conversion
 
             date.DayOfWeek.ShouldBe(DayOfWeek.Wednesday);
             date.Date.AddHours(14).AddMinutes(30).ShouldBe(date);
-            ShouldBeTestExtensions.ShouldBe((date >= DateTime.Today), true);
+            (date >= DateTime.Today).ShouldBe(true);
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace StoryTeller.Testing.Conversion
         {
             var date = DateTimeConverter.GetDateTime("2012-06-01T12:52:35Z");
 
-            var gmtOffsetInHours = (int)TimeZone.CurrentTimeZone.GetUtcOffset(date).TotalHours;
+            var gmtOffsetInHours = (int) TimeZone.CurrentTimeZone.GetUtcOffset(date).TotalHours;
             date.ShouldBe(new DateTime(2012, 06, 01, 12, 52, 35, DateTimeKind.Local).AddHours(gmtOffsetInHours));
         }
 
@@ -78,6 +78,5 @@ namespace StoryTeller.Testing.Conversion
         {
             DateTimeConverter.GetDateTime("TODAY+5").ShouldBe(DateTime.Today.AddDays(5));
         }
-
     }
 }

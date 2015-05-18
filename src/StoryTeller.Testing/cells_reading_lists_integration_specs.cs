@@ -37,21 +37,28 @@ namespace StoryTeller.Testing
         }
     }
 
+    
     public class SelectionValuesFixture : Fixture
     {
+        // SAMPLE: selection-lists-in-fixture
         public SelectionValuesFixture()
         {
             AddSelectionValues("Names", "Jeremy", "Monte", "Max");
         }
+        // ENDSAMPLE
 
         [ExposeAsTable("Add some people")]
         public void AddPerson([SelectionValues("Chad", "Josh")] string name)
         {
         }
 
-        public void DoSomething([SelectionValues("Tom", "Todd")] string name, [SelectionList("Numbers")]int x, int y)
+        // SAMPLE: selection-values-cell
+        public void DoSomething(
+            [SelectionValues("Tom", "Todd")] string name, 
+            [SelectionList("Numbers")]int x, int y)
         {
         }
+        // ENDSAMPLE
 
         public void DoAnotherThing([SelectionList("Names")] string name, int x, int y)
         {
@@ -69,4 +76,5 @@ namespace StoryTeller.Testing
             return null;
         }
     }
+    
 }

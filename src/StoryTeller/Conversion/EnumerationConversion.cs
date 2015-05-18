@@ -2,6 +2,7 @@ using System;
 
 namespace StoryTeller.Conversion
 {
+    // SAMPLE: EnumerationConversion
     public class EnumerationConversion : IConversionProvider
     {
         public Func<string, object> ConverterFor(Type type)
@@ -14,4 +15,5 @@ namespace StoryTeller.Conversion
             return null;
         }
     }
+    // ENDSAMPLE
 }

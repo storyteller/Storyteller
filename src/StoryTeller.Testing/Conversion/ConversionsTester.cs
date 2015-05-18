@@ -97,7 +97,29 @@ namespace StoryTeller.Testing.Conversion
             conversions.Convert(typeof (int?), "123")
                 .ShouldBe(123);
         }
+
+        // SAMPLE: string-ctor-in-action
+        [Test]
+        public void string_ctor_conversion()
+        {
+            conversions.Convert(typeof(Color), "Red")
+                .ShouldBeOfType<Color>()
+                .Name.ShouldBe("Red");
+        }
+        // ENDSAMPLE
     }
+
+    // SAMPLE: creating-color-by-ctor
+    public class Color
+    {
+        public string Name { get; set; }
+
+        public Color(string name)
+        {
+            this.Name = name;
+        }
+    }
+    // ENDSAMPLE
 
     
 }
