@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using FubuCore;
 using FubuCore.CommandLine;
 
 namespace ST.Docs

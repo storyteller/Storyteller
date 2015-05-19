@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FubuMVC.Core;
 using FubuMVC.Katana;
 using FubuMVC.StructureMap;
+using ST.Docs.Commands;
 using ST.Docs.Exporting;
 using ST.Docs.Html;
 using ST.Docs.Runner;
@@ -34,6 +35,8 @@ namespace ST.Docs
 
                 _.ForSingletonOf<IBrowserRefresher>().Use<BrowserRefresher>();
                 _.For(typeof(IUrlResolver)).Use(settings.UrlResolverType());
+
+                _.ForSingletonOf<ICommandUsageCache>().Use<CommandUsageCache>();
 
                 _.For<DocSettings>().Use(settings);
                 _.For<Topic>().Use(_topic);

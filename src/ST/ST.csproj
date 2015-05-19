@@ -84,6 +84,15 @@
     <Compile Include="CommandLine\ProjectInput.cs" />
     <Compile Include="CommandLine\RunCommand.cs" />
     <Compile Include="CommandLine\RunInput.cs" />
+    <Compile Include="Docs\Commands\ArgumentsTag.cs" />
+    <Compile Include="Docs\Commands\CommandUsageHeaderTransformHandler.cs" />
+    <Compile Include="Docs\Commands\CommandSectionTag.cs" />
+    <Compile Include="Docs\Commands\CommandUsageBodyTransformHandler.cs" />
+    <Compile Include="Docs\Commands\CommandUsageCache.cs" />
+    <Compile Include="Docs\Commands\FlagsTag.cs" />
+    <Compile Include="Docs\Commands\ICommandUsageCache.cs" />
+    <Compile Include="Docs\Commands\SingleUsageTag.cs" />
+    <Compile Include="Docs\Commands\UsageTableTag.cs" />
     <Compile Include="Docs\DocInput.cs" />
     <Compile Include="Docs\DocProject.cs" />
     <Compile Include="Docs\DocRunCommand.cs" />
