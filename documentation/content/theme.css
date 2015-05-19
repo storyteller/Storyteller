@@ -1,5 +1,9 @@
 h2{
-	margin-top: 30px;
+	margin-top: 50px;
+}
+
+div.alert{
+	font-size: 14px !important;
 }
 
 div.single-command-usage {

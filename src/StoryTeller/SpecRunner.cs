@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using FubuCore;
 using HtmlTags;
 using StoryTeller.Engine;
@@ -89,7 +88,7 @@ namespace StoryTeller
             timings.Start(specification);
 
             IExecutionContext execution = null;
-            ISpecContext context = null;
+            SpecContext context = null;
 
             try
             {

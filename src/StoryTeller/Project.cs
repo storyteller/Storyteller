@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using FubuCore;
+using FubuCore.CommandLine;
 using StoryTeller.Engine;
 
 namespace StoryTeller
@@ -68,14 +69,18 @@ namespace StoryTeller
 
         private static Type[] FindSystemTypesInCurrentAssembly()
         {
+            var assemblyName = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory);
+
             try
             {
-                var assemblyName = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory);
+                
                 var assembly = Assembly.Load(assemblyName);
                 return FindSystemTypes(assembly).ToArray();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                ConsoleWriter.Write("Error trying to find types in an assembly named '{0}'", assemblyName);
+                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
                 return new Type[0];
             }
         }

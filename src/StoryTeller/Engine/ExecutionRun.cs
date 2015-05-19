@@ -18,7 +18,7 @@ namespace StoryTeller.Engine
         private Thread _thread;
         private bool _wasCancelled;
         private bool _finished;
-        private ISpecContext _context;
+        private SpecContext _context;
         private Exception _catastrophicException;
         private IExecutionContext _execution;
        

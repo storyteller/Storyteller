@@ -2,9 +2,9 @@
 {
     public class SynchronousExecutor : IStepExecutor
     {
-        private readonly ISpecContext _context;
+        private readonly SpecContext _context;
 
-        public SynchronousExecutor(ISpecContext context)
+        public SynchronousExecutor(SpecContext context)
         {
             _context = context;
         }

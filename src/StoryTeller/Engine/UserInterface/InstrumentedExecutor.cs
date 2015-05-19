@@ -11,7 +11,7 @@ namespace StoryTeller.Engine.UserInterface
         private int _step;
         private readonly SpecificationPlan _plan;
 
-        public InstrumentedExecutor(ISpecContext context, SpecificationPlan plan, IUserInterfaceObserver observer) : base(context)
+        public InstrumentedExecutor(SpecContext context, SpecificationPlan plan, IUserInterfaceObserver observer) : base(context)
         {
             _observer = observer;
             _total = plan.Count();

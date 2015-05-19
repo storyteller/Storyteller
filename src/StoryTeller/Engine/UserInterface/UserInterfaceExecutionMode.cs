@@ -20,7 +20,7 @@ namespace StoryTeller.Engine.UserInterface
             
         }
 
-        public IStepExecutor BuildExecutor(SpecificationPlan plan, ISpecContext context)
+        public IStepExecutor BuildExecutor(SpecificationPlan plan, SpecContext context)
         {
             return new InstrumentedExecutor(context, plan, _observer);
         }
