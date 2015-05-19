@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using StoryTeller;
 using StoryTeller.Grammars.Tables;
+using StoryTeller.Model;
 
 namespace Samples.Fixtures
 {
@@ -25,8 +26,26 @@ namespace Samples.Fixtures
                 .MatchOn(_ =>
                 {
                     _.Compare(o => o.Amount).DefaultValue("100").Header("The Amount");
-                    _.Compare(o => o.Date);
-                    _.Compare(o => o.Name).Header("The Name");
+
+                    _.Compare(o => o.Date)
+
+                        // Adding a selection list by display/value
+                        .SelectionOptions(
+                            new Option("Today", "TODAY"), 
+                            new Option("Yesterday", "TODAY-1"), 
+                            new Option("Tomorrow", "TODAY+1")
+                        );
+
+                    _.Compare(o => o.Name)
+                        .Header("The Name")
+
+                        // Simple value list
+                        .SelectionValues("Hank", "Tom", "Alice");
+
+                    // Simply refer to a selection list 
+                    // defined elsewhere by name
+                    _.Compare(o => o.Part)
+                        .SelectionList("Parts");
                 });
         }
         // ENDSAMPLE
@@ -144,6 +163,7 @@ namespace Samples.Fixtures
         public double Amount { get; set; }
         public DateTime Date { get; set; }
         public string Name { get; set; }
+        public string Part { get; set; }
     }
     // ENDSAMPLE
 }
