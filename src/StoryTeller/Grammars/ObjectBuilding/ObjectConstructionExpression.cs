@@ -47,7 +47,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// <summary>
         /// Creates a line to set a single property
         /// </summary>
-        /// <param name="expression"></param>
+        /// <param format="expression"></param>
         /// <returns></returns>
         public ICellExpression SetProperty(Expression<Func<T, object>> expression)
         {
@@ -71,9 +71,9 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// Adds a property setter for all primitive properties on T that
         /// meet the filter
         /// </summary>
-        /// <param name="filter"></param>
+        /// <param format="filter"></param>
         /// <returns></returns>
-        public ObjectConstructionExpression<T> SetAllPrimitiveProperties(Predicate<PropertyInfo> filter)
+        public ObjectConstructionExpression<T> SetAllPrimitiveProperties(Func<PropertyInfo, bool> filter)
         {
             foreach (PropertyInfo property in typeof (T).GetProperties())
             {
@@ -96,7 +96,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// Adds a property setter for all primitive properties declared
         /// by type T
         /// </summary>
-        /// <param name="filter"></param>
+        /// <param format="filter"></param>
         /// <returns></returns>
         public ObjectConstructionExpression<T> SetAllPrimitivePropertiesSpecificToThisType()
         {
@@ -107,7 +107,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// <summary>
         /// Create setters for multiple properties
         /// </summary>
-        /// <param name="properties"></param>
+        /// <param format="properties"></param>
         /// <returns></returns>
         public ObjectConstructionExpression<T> SetProperties(params Expression<Func<T, object>>[] properties)
         {
@@ -123,31 +123,36 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// <summary>
         /// Apply changes to the object being built
         /// </summary>
-        /// <typeparam name="TCell"></typeparam>
-        /// <param name="cellName"></param>
+        /// <typeparam format="TCell"></typeparam>
+        /// <param format="format"></param>
         /// <returns></returns>
-        public InputExpression<TCell> WithInput<TCell>(string cellName)
+        public InputExpression<TCell> WithInput<TCell>(string format)
         {
-            return new InputExpression<TCell>(this, cellName);
+            return new InputExpression<TCell>(this, format);
         }
 
 
 
         public class InputExpression<TCell>
         {
-            private readonly string _name;
+            private readonly string _format;
             private readonly ObjectConstructionExpression<T> _parent;
 
-            public InputExpression(ObjectConstructionExpression<T> expression, string name)
+            public InputExpression(ObjectConstructionExpression<T> expression, string format)
             {
                 _parent = expression;
-                _name = name;
+                _format = format;
             }
 
-
+            /// <summary>
+            /// Either modify or do some kind of action against the T subject and
+            /// the input data
+            /// </summary>
+            /// <param name="configure"></param>
+            /// <returns></returns>
             public ICellExpression Configure(Action<T, TCell> configure)
             {
-                var grammar = new ConfigureObjectGrammar<T, TCell>(_name, configure);
+                var grammar = new ConfigureObjectGrammar<T, TCell>(_format, configure);
                 _parent._grammar.AddGrammar(grammar);
 
                 return grammar.CellModifications;

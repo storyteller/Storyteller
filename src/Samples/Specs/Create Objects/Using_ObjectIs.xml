@@ -1,0 +1,5 @@
+<Spec id="055bb224-ae27-4352-9492-5107de6ec559" maxRetries="0" tags="" lifecycle="Acceptance" name="Using ObjectIs">
+  <Address id="49ac1423-b211-4cd0-b2c3-ae1d7d39058e">
+    <AddressWithObjectIs Address1="15 Lovers Lane" Address2="EMPTY" />
+  </Address>
+</Spec>

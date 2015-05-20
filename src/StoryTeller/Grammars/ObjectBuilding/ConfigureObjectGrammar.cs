@@ -4,6 +4,7 @@ using System.Linq;
 using FubuCore;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
+using StoryTeller.Grammars.Reflection;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -12,12 +13,24 @@ namespace StoryTeller.Grammars.ObjectBuilding
     public class ConfigureObjectGrammar<TObject, TInput> : LineGrammar
     {
         private Cell _cell;
-        private readonly string _key;
+        private readonly string _format;
         private readonly Action<TObject, TInput> _configure;
+        private readonly string _key;
 
-        public ConfigureObjectGrammar(string key, Action<TObject, TInput> configure)
+        public ConfigureObjectGrammar(string format, Action<TObject, TInput> configure)
         {
-            _key = key;
+            var keys = format.ParseTemplateKeys();
+            if (keys.Any())
+            {
+                _format = format;
+                _key = keys.Single();
+            }
+            else
+            {
+                _key = format;
+                _format = "Configure {0} with {1} = {{{1}}}".ToFormat(typeof (TObject).Name, _key);
+            }
+
             _configure = configure;
 
             CellModifications = new CellModifications();
@@ -38,7 +51,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
 
         protected override string format()
         {
-            return "Configure {0} with {{{0}}}".ToFormat(_cell);
+            return _format;
         }
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)

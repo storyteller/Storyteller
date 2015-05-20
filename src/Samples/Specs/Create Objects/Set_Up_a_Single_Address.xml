@@ -1,0 +1,6 @@
+<Spec id="4f84d9c8-ec0c-4030-b402-e254e86391b8" maxRetries="0" tags="" lifecycle="Acceptance" name="Set Up a Single Address">
+  <Address id="2598ce6a-0992-4576-844b-2866858bb5f5">
+    <Comment id="26bf456d-bae1-47d6-9da1-71383ae4a961">The paragraph below creates a new Address object</Comment>
+    <IfTheAddressIs Address1="22 Cherry Lane" Address2="EMPTY" City="Austin" StateOrProvince="TX" Country="USA" PostalCode="78703" />
+  </Address>
+</Spec>

@@ -1,0 +1,5 @@
+<Spec id="a63b603a-cbf4-4b20-b080-91b1e2387edf" maxRetries="0" tags="" lifecycle="Acceptance" name="Using LoadObjectBy">
+  <Address id="4d2c1647-9cc5-4fc0-b9e5-208499d2b5ba">
+    <AddressByStreet line1="222 Easy Street" line2="EMPTY" City="Austin" StateOrProvince="TX" />
+  </Address>
+</Spec>

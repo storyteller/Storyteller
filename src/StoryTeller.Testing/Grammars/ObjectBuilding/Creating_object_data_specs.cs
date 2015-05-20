@@ -104,7 +104,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
         {
             return CreateNewObject<Location>("The location is", _ =>
             {
-                _.WithInput<string>("data").Configure((location, data) =>
+                _.WithInput<string>("data is {data}").Configure((location, data) =>
                 {
                     var parts = data.Split(';');
 

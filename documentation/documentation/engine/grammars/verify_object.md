@@ -1,3 +1,3 @@
-<!--Title:Configuring Complex Objects-->
+<!--Title:Verifying an Object-->
 
-VerifyObject<T>()
+TODO(write this up on VerifyObject())

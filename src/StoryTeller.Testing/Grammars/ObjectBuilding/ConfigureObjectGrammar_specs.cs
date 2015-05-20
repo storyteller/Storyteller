@@ -43,7 +43,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
     {
         public ConfigureObjectFixture()
         {
-            var grammar = new ConfigureObjectGrammar<Address, string>("data", (a, data) =>
+            var grammar = new ConfigureObjectGrammar<Address, string>("the data is {data}", (a, data) =>
             {
                 var values = data.Split('-');
                 a.City = values.First();
