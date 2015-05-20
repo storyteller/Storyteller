@@ -146,7 +146,7 @@ namespace Samples.Fixtures
         }
         // ENDSAMPLE
 
-
+        // SAMPLE: using-verify-properties-of
         public IGrammar TheAddressShouldBe()
         {
             return VerifyPropertiesOf<Address>("then the new address properties should be", x =>
@@ -156,6 +156,7 @@ namespace Samples.Fixtures
                 x.Check(o => o.City);
             });
         }
+        // ENDSAMPLE
     }
 
     // SAMPLE: address

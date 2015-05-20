@@ -1,0 +1,6 @@
+<Spec id="de8736db-3402-42f7-b2bd-8e0e78d9f4bd" maxRetries="0" tags="" lifecycle="Acceptance" name="Using VerifyProperties">
+  <Address id="a0e321f1-a3df-40df-82ea-761b39b3504e">
+    <IfTheAddressIs Address1="3 1st Street" Address2="EMPTY" City="Austin" StateOrProvince="TX" Country="USA" PostalCode="78703" />
+    <TheAddressShouldBe Address1="3 1st Street" Address2="EMPTY" City="Dallas" />
+  </Address>
+</Spec>
