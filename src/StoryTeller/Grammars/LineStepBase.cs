@@ -17,7 +17,7 @@ namespace StoryTeller.Grammars
 
         protected abstract StepResult execute(ISpecContext context);
 
-        public void Execute(ISpecContext context)
+        public void Execute(SpecContext context)
         {
             using (context.Timings.Subject(Type, Subject))
             {

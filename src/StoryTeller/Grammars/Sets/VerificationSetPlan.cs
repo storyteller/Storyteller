@@ -35,7 +35,7 @@ namespace StoryTeller.Grammars.Sets
             executor.Line(this);
         }
 
-        public void Execute(ISpecContext context)
+        public void Execute(SpecContext context)
         {
             using (context.Timings.Subject("Grammar", _section.Key))
             {

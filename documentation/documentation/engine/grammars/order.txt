@@ -7,4 +7,5 @@ tables
 sets
 embedded_section
 currying
+verify_object
 custom

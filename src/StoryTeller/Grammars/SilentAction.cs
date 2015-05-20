@@ -80,7 +80,7 @@ namespace StoryTeller.Grammars
         }
 
 
-        public void Execute(ISpecContext context)
+        public void Execute(SpecContext context)
         {
             using (context.Timings.Subject(_type, Subject))
 

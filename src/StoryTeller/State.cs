@@ -3,7 +3,17 @@ using FubuCore.Util;
 
 namespace StoryTeller
 {
-    public class State : IDisposable
+    // SAMPLE: IState
+    public interface IState
+    {
+        void Store<T>(T value);
+        void Store<T>(string key, T value);
+        T Retrieve<T>();
+        T Retrieve<T>(string key);
+    }
+    // ENDSAMPLE
+
+    public class State : IDisposable, IState
     {
         // TODO -- replace w/ the lightweight cache from StructureMap
         private readonly Cache<Type, object> _byType = new Cache<Type, object>();
@@ -31,7 +41,7 @@ namespace StoryTeller
 
         public object CurrentObject;
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             _byName.ClearAll();
             _byType.ClearAll();

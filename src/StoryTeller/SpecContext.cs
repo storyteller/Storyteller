@@ -57,7 +57,7 @@ namespace StoryTeller
         public void Dispose()
         {
             Reporting.Dispose();
-            _state.Dispose();
+            _state.As<IDisposable>().Dispose();
         }
 
         public Timings Timings

@@ -525,5 +525,18 @@ namespace StoryTeller
 
         public readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
 
+        /// <summary>
+        /// Shortcut to get or set the current object on the context state
+        /// </summary>
+        public object CurrentObject
+        {
+            get
+            {
+                if (Context != null) return Context.State.CurrentObject;
+                return null;
+            }
+            set { if (Context != null) Context.State.CurrentObject = value; }
+        }
+
     }
 }
