@@ -34,7 +34,7 @@ Fixture objects find their grammars by reflecting over its `Type` and looking fo
 
 For methods that either have a `Void` signature or return a value that's not `IGrammar`, a Fixture object will create a _Sentence_ grammar that will call that method on the Fixture object when it executes a specification.
 
-See <[linkto:documentation/grammars/sentences]> for more information.
+See <[linkto:documentation/engine/grammars/sentences]> for more information.
 
 
 
@@ -46,7 +46,28 @@ The `ISpecContext` object for the currently executing specification is exposed o
 
 Note that the `Context` property is set during execution before any `SetUp` method or Grammar's from the Section are called. **Only use the `Context` property and never cache the `ISpecContext` in a private field to avoid accessing stale data from a previous specification**.
 
-See <[linkto:documentation/context]> for more information.
+
+## Retrieving Application Services
+
+Storyteller supplies a lightweight abstraction to provide access to running services in the system under test via this syntax taken from one of the specifications for Storyteller itself:
+
+<[sample:retrieving-service-in-fixture]>
+
+The `GetService<T>` method delegates to the `IExecutionContext` method of the same name that is built from the system under test for each specification execution. See <[linkto:documentation/engine/system_under_test]> for more information.
+
+
+## The Current Specification
+
+Storyteller has been used on a couple systems that involved reading and working with textual files. While the Storyteller team usually prefers to do define all specification setup data in the specification itself, sometimes we have opted to use the raw textual files. What we wanted to do was simply put the specification input files side by side to whereever the actual Storyteller specification file is persisted and then read files in from relative paths later. That was not really possible in early Storyteller, but is now.
+
+The currently executing specification is reachable inside any `Fixture` class from this code:
+
+<[sample:use-specification-from-fixture]>
+
+An object of the `Specification` class contains all the information and expression of that specification, but also "knows" where it is persisted on the file system.
+
+The Storyteller team theorizes that exposing the current `Specification` may be valuable to "warm up" or parallelize specification execution for better throughput, but we have not yet exploited this.
+
 
 
 ## SetUp() and TearDown()

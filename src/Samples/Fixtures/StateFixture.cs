@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FubuCore;
 using FubuCore.Dates;
 using StoryTeller;
 
@@ -67,6 +68,21 @@ namespace Samples.Fixtures
 
             // The code above is just shorthand for this below:
             // Context.State.CurrentObject = new Invoice();
+        }
+        // ENDSAMPLE
+    }
+
+    [Hidden]
+    public class UsingSpecificationFixture : Fixture
+    {
+        // SAMPLE: use-specification-from-fixture
+        [FormatAs("Load the file {filename}")]
+        public void LoadFile(string filename)
+        {
+            var currentDirectory = Context.Specification.Filename.ParentDirectory();
+            var path = currentDirectory.AppendPath(filename);
+
+            // do something with the file at 'path'
         }
         // ENDSAMPLE
     }

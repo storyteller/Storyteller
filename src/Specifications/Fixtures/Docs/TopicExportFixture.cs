@@ -17,10 +17,16 @@ namespace Specifications.Fixtures.Docs
             Title = "Topic Exporting";
         }
 
+        // SAMPLE: retrieving-service-in-fixture
         public override void SetUp()
         {
+            // In this case, the DocSettings object is 
+            // ultimately resolved by the underlying
+            // IoC container (StructureMap of course) for 
+            // the running documentation application
             _directory = Context.Service<DocSettings>().Root;
         }
+        // ENDSAMPLE
 
 
         [Hidden]
