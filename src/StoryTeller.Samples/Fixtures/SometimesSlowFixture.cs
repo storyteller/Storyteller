@@ -3,6 +3,7 @@ using FubuCore;
 
 namespace StoryTeller.Samples.Fixtures
 {
+    // SAMPLE: using-project-current-profile
     public class SometimesSlowFixture : Fixture
     {
         public void Slow()
@@ -13,4 +14,5 @@ namespace StoryTeller.Samples.Fixtures
             }
         } 
     }
+    // ENDSAMPLE
 }

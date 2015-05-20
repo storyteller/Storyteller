@@ -49,4 +49,3 @@ See also:
 * <[linkto:documentation/engine/grammars/actions]>
 * <[linkto:documentation/engine/grammars/assertions]>
 * <[linkto:documentation/engine/grammars/facts]>
-* <[linkto:documentation/engine/grammars/custom]>
