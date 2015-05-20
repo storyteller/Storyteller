@@ -12,24 +12,24 @@ StoryTeller projects are organized into Suite’s of closely related specificati
 
 ## Grammar
 
-Before you write specifications, you need a vocabulary to express the actions and assertions you want to use against the system under test. The implementation of the specification language is referred to as _Grammars_. See <[linkto:documentation/grammars]> for more information
+Before you write specifications, you need a vocabulary to express the actions and assertions you want to use against the system under test. The implementation of the specification language is referred to as _Grammars_. See <[linkto:documentation/engine/grammars]> for more information
 
 ## Fixture
-A closely related collection of grammars implemented in a single class. In common usage, you will create a separate Fixture for each individual screen or service in your system. See <[linkto:documentation/fixtures]> for more information.
+A closely related collection of grammars implemented in a single class. In common usage, you will create a separate Fixture for each individual screen or service in your system. See <[linkto:documentation/engine/fixtures]> for more information.
 
 ## Cell
 
-_Cell's_ are the user-supplied values exposed by grammars. See <[linkto:documentation/cells]> for more information.
+_Cell's_ are the user-supplied values exposed by grammars. See <[linkto:documentation/engine/cells]> for more information.
 
 ## Sentence
 A type of grammar that is expressed in a single line. A sentence can have zero to many inputs. Sentences can also be used to assert a fact or check one or more expected values. The small specification below uses three different Sentence grammars:
 
 <[spec:Glossary/Sentences]>
 
-See <[linkto:documentation/grammars/sentences]> for more information.
+See <[linkto:documentation/engine/grammars/sentences]> for more information.
 
 ## Fact
-A special _Sentence_ with no inputs that simply declares that a fact about the current state of the system should be true. See <[linkto:documentation/grammars/facts]>.
+A special _Sentence_ with no inputs that simply declares that a fact about the current state of the system should be true. See <[linkto:documentation/engine/grammars/facts]>.
 
 ## Table
 A grammar expressed as in tabular form. Table’s can be used to set up input state or express decision trees. Table’s are valuable for example driven tests and are analagous to the old FitNesse [ColumnFixture](http://fitnesse.org/FitNesse.UserGuide.FixtureGallery.BasicFitFixtures.ColumnFixture) or [RowFixture](http://fitnesse.org/FitNesse.UserGuide.FixtureGallery.BasicFitFixtures.RowFixture). 
@@ -38,7 +38,7 @@ The specification below shows the usage of a Table grammar to set up system stat
 
 <[spec:Glossary/Using a Table]>
 
-See <[linkto:documentation/grammars/tables]>.
+See <[linkto:documentation/engine/grammars/tables]>.
 
 ## Set Verification
 Set Verification grammars are a special type of Table that can be used to specify the expected contents of some sort of tabular data.
@@ -47,7 +47,7 @@ The specification below shows the usage of a Set Verification:
 
 <[spec:Glossary/Sets]>
 
-See <[linkto:documentation/grammars/sets]>.
+See <[linkto:documentation/engine/grammars/sets]>.
 
 
 
@@ -59,7 +59,7 @@ The specification below shows an example usage of an Embedded Section:
 
 <[spec:Glossary/Embedded Section]>
 
-See <[linkto:documentation/grammars/embedded_section]>.
+See <[linkto:documentation/engine/grammars/embedded_section]>.
 
 ## Paragraph
 A grammar that expresses a macro of other grammars. Use a Paragraph anytime you find yourself repeating the same basic sequence of steps or if you want to force a consistent structure in your specifications. 
@@ -68,7 +68,7 @@ The specification below shows a sample usage of a Paragraph to create a reusable
 
 <[spec:Glossary/Paragraph]>
 
-See <[linkto:documentation/grammars/paragraphs]>.
+See <[linkto:documentation/engine/grammars/paragraphs]>.
 
 ## Section
 A Section is just a region that invokes a specified Fixture.

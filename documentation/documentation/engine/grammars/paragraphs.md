@@ -26,7 +26,7 @@ It's frequently useful to execute some kind of operation before, after, or betwe
 Silent grammars can be added to a _Paragraph_ with the signatures:
 
 1. `Action`
-1. `Action<ISpecContext>` -- see <[linkto:documentation/context]> for more information
+1. `Action<ISpecContext>` -- if you need information about the current specification, <[linkto:documentation/engine/state;title=access to the execution state]>, or want to resolve services from the system under test.
 
 
 

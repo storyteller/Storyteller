@@ -22,7 +22,7 @@ Storyteller 3 introduces two new exceptions that you can choose to throw yoursel
 1. `StorytellerCriticalException` -- tells Storyteller that the current specification cannot possibly succeed and causes Storyteller to stop executing the specification wherever it's at. Internally, Storyteller treats any failure in `Fixture.SetUp()` or `Fixture.TearDown()` as a critical exception. A classic example is using Storyteller to test a web application where a section of a specification starts by trying to open the application to a certain Url. If the web server returns an error on the request, Storyteller should not bother to try to find the expected elements on the screen. It should fail quickly with a clear indication that it was unable to load the web page.
 1. `StorytellerCatastropicException` -- tells Storyteller that the current system under test is in an invalid state and to stop trying to execute anything else. You can throw this exception yourself if you detect something like an unavailable database connection that makes the system unusable. Internally, Storyteller throws this exception if the `ISystem` fails to start or if it cannot create an `IExecutionContext`.
 
-See <[linkto:documentation/system_under_test]> for more information.
+See <[linkto:documentation/engine/system_under_test]> for more information.
 
 
 

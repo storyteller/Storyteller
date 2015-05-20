@@ -4,7 +4,7 @@
 Storyteller provides a couple mechanisms to reuse grammars across fixtures or even within the same fixture:
 
 1. Subclass a `Fixture` with inheritance. 
-1. Use <[linkto:documentation/grammars/embedded_section]>
+1. Use <[linkto:documentation/engine/grammars/embedded_section]>
 1. Use _Currying_ to use an existing grammar in a more specific way. Shown below.
 1. Use the `Fixture.Import()` method shown below
 

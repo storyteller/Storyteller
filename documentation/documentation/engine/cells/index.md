@@ -1,6 +1,6 @@
 <!--Title: Cells-->
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong> Cell's in Stortyteller are <b>not</b> limited to being scalar or simple value types like strings or numbers or date's. If Storyteller "knows" how to convert or locate an object type from a string, that type can be used as a a Cell. See <[linkto:documentation/cells/conversion]> for more information.</div>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Cell's in Stortyteller are <b>not</b> limited to being scalar or simple value types like strings or numbers or date's. If Storyteller "knows" how to convert or locate an object type from a string, that type can be used as a a Cell. See <[linkto:documentation/engine/cells/conversion]> for more information.</div>
 
 
 If you had a sentence grammar (explained below) with the template "Enter the user name {username}", the value _username_ is a _Cell_ used to collect information from a user. The template above would result in this bit of html in the specification editor:
@@ -19,7 +19,7 @@ Cells can be either inputs (the "Arrange" or "Act" portion of a specification) o
 
 In the case of invalid data, you can click on the yellow cell to see a popup modal with the full error message for the conversion failure.
 
-See <[linkto:documentation/grammars/assertions]> for more information.
+See <[linkto:documentation/engine/grammars/assertions]> for more information.
 
 
 ## Customizing Cells
@@ -34,8 +34,8 @@ You can customize Cell appearance and editing in a couple different ways:
 
 1. Header -- change the heading for Cell's within tabular grammars
 1. Editor -- change the editor control that Storyteller uses for the cell in the specification editor. This isn't terribly useful **now** as the only choices are the default textbox, select lists, and a checkbox for boolean values, but the plan is for more options in the future.
-1. Selection lists and values -- To guide the usage in the editor, you can force the user to provide Cell inputs from a selection list. See <[linkto:documentation/cells/selection_lists]> for much more information.
-1. Default Values -- You can supply a default value for a Cell as a string. The immediate benefit is to make specification editing quicker if you can live with the default values. Also see <[linkto:documentation/grammars/tables]> for more information about using optional columns in table grammars.
+1. Selection lists and values -- To guide the usage in the editor, you can force the user to provide Cell inputs from a selection list. See <[linkto:documentation/engine/cells/selection_lists]> for much more information.
+1. Default Values -- You can supply a default value for a Cell as a string. The immediate benefit is to make specification editing quicker if you can live with the default values. Also see <[linkto:documentation/engine/grammars/tables]> for more information about using optional columns in table grammars.
 
 ## Customizing via Attributes
 

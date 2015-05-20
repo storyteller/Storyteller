@@ -46,7 +46,7 @@ Used in a specification, that grammar would look like this:
 
 
 See also:
-* <[linkto:documentation/grammars/actions]>
-* <[linkto:documentation/grammars/assertions]>
-* <[linkto:documentation/grammars/facts]>
-* <[linkto:documentation/grammars/custom]>
+* <[linkto:documentation/engine/grammars/actions]>
+* <[linkto:documentation/engine/grammars/assertions]>
+* <[linkto:documentation/engine/grammars/facts]>
+* <[linkto:documentation/engine/grammars/custom]>

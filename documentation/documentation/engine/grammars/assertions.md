@@ -42,7 +42,7 @@ Any assertion sentence grammar can be turned into a tabular decision tree by dec
 
 <[sample:sentence-with-output-parameters]>
 
-See <[linkto:documentation/grammars/tables]> for more information.
+See <[linkto:documentation/engine/grammars/tables]> for more information.
 
 ## Assertions in Action
 

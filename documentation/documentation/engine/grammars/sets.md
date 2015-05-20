@@ -30,7 +30,7 @@ Some things to note:
 1. You can verify an array of any .Net type that Storyteller knows how to convert or parse from a string -- including your own application types
 1. The results are shown using the ToString() method of the inner element type. **Do consider using custom ToString() methods to provide more information in the case of specification failures**.
 
-See <[linkto:documentation/cells/conversion]> for more information on how the conversion process works.
+See <[linkto:documentation/engine/cells/conversion]> for more information on how the conversion process works.
 
 
 ## String Lists
