@@ -1,4 +1,4 @@
-<!--Title:The User Interface-->
+<!--Title:The Specification Editor and Interactive Runner-->
 <!--Url:ui-->
 
 TODO(Write some content!)

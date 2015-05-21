@@ -4,6 +4,7 @@ using FubuCore.CommandLine;
 
 namespace ST.Client
 {
+    [CommandDescription("Opens the specification editor web tool")]
     public class OpenCommand : FubuCommand<OpenInput>
     {
         public override bool Execute(OpenInput input)

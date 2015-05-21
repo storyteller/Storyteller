@@ -4,7 +4,7 @@
   <Commands>
     <CommandReport>
       <Name>open</Name>
-      <Description>OpenCommand</Description>
+      <Description>Opens the specification editor web tool</Description>
       <Arguments>
         <ArgumentReport>
           <Name>path</Name>
@@ -39,7 +39,7 @@
       </Flags>
       <Usages>
         <UsageReport>
-          <Description>OpenCommand</Description>
+          <Description>Opens the specification editor web tool</Description>
           <Usage>st open &lt;path&gt; [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</Usage>
         </UsageReport>
       </Usages>
