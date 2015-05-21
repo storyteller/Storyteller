@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<Test name="Currying" lifecycle="Acceptance" id="sentence1">
-  <Math>
-    <AddTo5 isStep="True" x="3" returnValue="8" />
-    <AddTo5 isStep="True" x="5" returnValue="9" />
+<Spec id="sentence1" maxRetries="0" tags="" lifecycle="Acceptance" name="Currying">
+  <Math id="4f4c2489-4ffd-47a8-84e3-096a96811022">
+    <AddTo5 x="3" returnValue="8" />
+    <AddTo5 x="5" returnValue="9" />
   </Math>
-</Test>
+</Spec>

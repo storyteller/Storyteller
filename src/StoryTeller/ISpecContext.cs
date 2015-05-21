@@ -45,7 +45,7 @@ namespace StoryTeller
         /// Can be used to add custom html tracing to 
         /// the specification results
         /// </summary>
-        Reporter Reporting { get; }
+        IReporting Reporting { get; }
 
         /// <summary>
         /// Yet another implementation of a polling wait until

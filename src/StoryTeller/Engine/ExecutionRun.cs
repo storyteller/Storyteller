@@ -122,7 +122,7 @@ namespace StoryTeller.Engine
             if (_request.IsCancelled) return;
 
             _context = new SpecContext(_request.Specification, _timings, _request.Observer, _stopConditions, _execution);
-            _context.Reporting.StartDebugListening();
+            _context.Reporting.As<Reporting>().StartDebugListening();
             var executor = _mode.BuildExecutor(_request.Plan, _context);
 
             _request.Plan.AcceptVisitor(executor);

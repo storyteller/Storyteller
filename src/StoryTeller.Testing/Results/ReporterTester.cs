@@ -13,7 +13,7 @@ namespace StoryTeller.Testing.Results
         [Test]
         public void creation_of_reports()
         {
-            var logging = new Reporter();
+            var logging = new Reporting();
 
             logging.ReporterFor<DivReport>()
                 .ShouldBeTheSameAs(logging.ReporterFor<DivReport>());
@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.Results
         [Test]
         public void generate_reports()
         {
-            var logging = new Reporter();
+            var logging = new Reporting();
             logging.ReporterFor<DivReport>().Add("1").Add("2");
             logging.ReporterFor<ListReport>().Add("3").Add("4");
 
@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Results
         [Test, Explicit]
         public void debug_tracing()
         {
-            var logging = new Reporter();
+            var logging = new Reporting();
             logging.StartDebugListening();
 
             Debug.WriteLine("Whoa!");
@@ -56,7 +56,7 @@ namespace StoryTeller.Testing.Results
 
             Debug.WriteLine("NOT HERE");
 
-            var html = logging.ReporterFor<DebugReporter>().ToHtml().ToString();
+            var html = logging.ReporterFor<DebugReport>().ToHtml().ToString();
 
             html.ShouldContain("Whoa!");
             html.ShouldContain("You don&#39;t say");
@@ -68,7 +68,7 @@ namespace StoryTeller.Testing.Results
         }
     }
 
-    public class DivReport : IReporter
+    public class DivReport : Report
     {
         private readonly HtmlTag _body = new HtmlTag("body");
 
@@ -89,7 +89,7 @@ namespace StoryTeller.Testing.Results
         }
     }
 
-    public class ListReport : IReporter
+    public class ListReport : Report
     {
         private readonly HtmlTag _ul = new HtmlTag("ul");
 

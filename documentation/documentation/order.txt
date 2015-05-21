@@ -1,6 +1,5 @@
 getting_started
 terminology
-application
 ui
 engine
 best_practices

@@ -48,9 +48,11 @@
     <Compile Include="Fixtures\Dimensions.cs" />
     <Compile Include="Fixtures\FactFixture.cs" />
     <Compile Include="Fixtures\GlossaryFixture.cs" />
+    <Compile Include="Fixtures\LoggingFixture.cs" />
     <Compile Include="Fixtures\SampleFixture.cs" />
     <Compile Include="Fixtures\SetsFixture.cs" />
     <Compile Include="Fixtures\StateFixture.cs" />
+    <Compile Include="Fixtures\StorytellerAssertSample.cs" />
     <Compile Include="Fixtures\TableFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

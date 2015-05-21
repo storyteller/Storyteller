@@ -271,13 +271,13 @@
     <Compile Include="Remotes\SystemRecycleStarted.cs" />
     <Compile Include="Results\BatchResultsWriter.cs" />
     <Compile Include="Results\CellResult.cs" />
-    <Compile Include="Results\DebugReporter.cs" />
+    <Compile Include="Results\DebugReport.cs" />
     <Compile Include="Results\Envelope.cs" />
     <Compile Include="Results\Finished.cs" />
     <Compile Include="Results\HtmlReport.cs" />
-    <Compile Include="Results\IReporter.cs" />
+    <Compile Include="Results\Report.cs" />
     <Compile Include="Results\IResultMessage.cs" />
-    <Compile Include="Results\Reporter.cs" />
+    <Compile Include="Results\Reporting.cs" />
     <Compile Include="Results\ResultStatus.cs" />
     <Compile Include="Results\StepResult.cs" />
     <Compile Include="Results\TimedOut.cs" />

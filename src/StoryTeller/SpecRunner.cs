@@ -100,7 +100,7 @@ namespace StoryTeller
                 context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
                     execution);
 
-                context.Reporting.StartDebugListening();
+                context.Reporting.As<Reporting>().StartDebugListening();
 
                 var executor = new SynchronousExecutor(context);
                 plan.AcceptVisitor(executor);

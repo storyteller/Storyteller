@@ -56,7 +56,9 @@ namespace StoryTeller.Samples.Fixtures
         {
             Debug.WriteLine("the number is " + _number);
 
+            // SAMPLE: using-custom-reporter-in-fixture
             Context.Reporting.ReporterFor<ListReport>().Add(_number.ToString());
+            // ENDSAMPLE
         }
 
         [FormatAs("*= {multiplier}")]
@@ -113,7 +115,7 @@ namespace StoryTeller.Samples.Fixtures
                 x += this["TheValueShouldBe"];
             });
         }
-        // END:  ReturnGrammarFromMethod
+        // ENDSAMPLE:  ReturnGrammarFromMethod
 
         public void Throw()
         {
@@ -121,7 +123,8 @@ namespace StoryTeller.Samples.Fixtures
         }
     }
 
-    public class ListReport : IReporter
+    // SAMPLE: custom-IReporter
+    public class ListReport : Report
     {
         private readonly HtmlTag _ul = new HtmlTag("ul").AddClass("list-group");
 
@@ -141,6 +144,7 @@ namespace StoryTeller.Samples.Fixtures
             get { return "Some Numbers"; }
         }
     }
+    // ENDSAMPLE
 
     public class DoSomeMathFixture : Fixture
     {

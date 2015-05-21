@@ -30,11 +30,11 @@ namespace StoryTeller
 
             _timings = timings ?? new Timings();
 
-            Reporting = new Reporter();
+            Reporting = new Reporting();
         }
 
         public StopConditions StopConditions { get; private set; }
-        public Reporter Reporting { get; private set; }
+        public IReporting Reporting { get; private set; }
 
         public SpecResults FinalizeResults(int attempts)
         {
@@ -46,7 +46,7 @@ namespace StoryTeller
                 Results = Results.ToArray(),
                 Performance = performance,
                 Duration = _timings.Duration,
-                Reporting = Reporting.GenerateReports(),
+                Reporting = Reporting.As<Reporting>().GenerateReports(),
                 Attempts = attempts,
                 HadCriticalException = HadCriticalException
             };
@@ -56,7 +56,7 @@ namespace StoryTeller
 
         public void Dispose()
         {
-            Reporting.Dispose();
+            Reporting.As<IDisposable>().Dispose();
             _state.As<IDisposable>().Dispose();
         }
 

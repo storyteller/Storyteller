@@ -54,7 +54,7 @@ namespace StoryTeller.Testing
                     using (var context = new SpecContext(spec, null, observer, new StopConditions(), execution)
                         )
                     {
-                        context.Reporting.StartDebugListening();
+                        context.Reporting.As<Reporting>().StartDebugListening();
                         var plan = spec.CreatePlan(library);
                         var executor = new SynchronousExecutor(context);
 

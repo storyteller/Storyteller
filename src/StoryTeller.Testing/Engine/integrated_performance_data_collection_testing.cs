@@ -9,6 +9,7 @@ using StoryTeller.Engine.Batching;
 using StoryTeller.Equivalence;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Results;
 using StoryTeller.Samples;
 
 namespace StoryTeller.Testing.Engine
@@ -113,7 +114,7 @@ namespace StoryTeller.Testing.Engine
             var context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
                 execution);
 
-            context.Reporting.StartDebugListening();
+            context.Reporting.As<Reporting>().StartDebugListening();
 
             var executor = new SynchronousExecutor(context);
             plan.AcceptVisitor(executor);
