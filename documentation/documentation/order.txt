@@ -1,3 +1,4 @@
+getting_started
 terminology
 application
 ui
