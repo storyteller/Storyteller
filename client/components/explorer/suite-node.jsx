@@ -75,6 +75,8 @@ var SuiteHeader = React.createClass({
 			return {type: 'run-specs', list: list};
 		};
 
+		var count = suite.allSpecs().length;
+
 		var href = '#/suite/' + suite.path;
 		var openClosed = this.state.open ? <FolderOpen /> : <FolderClosed />;
 		var openClass = this.state.open ? 'open' : 'closed';
@@ -84,7 +86,7 @@ var SuiteHeader = React.createClass({
 				<a href='#' onClick={this.openFolder}>
 					{openClosed}
 				</a>
-				<a href={href} className='suite-name'>{this.props.suite.name}</a>
+				<a href={href} className='suite-name'>{this.props.suite.name}</a> ({count}) 
 				<CommandLink createMessage={buildMessage} text='run all' />
 				{this.makeNewSpecLink()}
 				{this.makeNewSuiteLink()}
@@ -100,6 +102,7 @@ var SuiteBody = React.createClass({
 			maxHeight: '0px'
 		};
 	},
+
 	render: function(){
 		var suites = _.sortBy(this.props.suite.suites, x => x.name);
 		var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} />) );
@@ -118,12 +121,15 @@ var SuiteBody = React.createClass({
 	},
 
 	componentDidMount: function () {
-		var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
+		var height = (this.props.suite.height() * 16 + 50) + 'px';
+
+		//var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
 		this.setState({maxHeight: height});
 	},
 
 	componentDidUpdate: function(){
-		var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
+		var height = (this.props.suite.height() * 16 + 50) + 'px';
+		//var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
 		if (this.state.maxHeight != height){
 			this.setState({maxHeight: height});
 		}
