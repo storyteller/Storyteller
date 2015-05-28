@@ -11,6 +11,8 @@ class Table extends CompositeGrammar{
 	constructor(metadata){
 		var self = this;
 
+		this.type = 'table';
+
 		self.findActiveCells = function(step){
 			var section = null;
 			if (step instanceof Section){

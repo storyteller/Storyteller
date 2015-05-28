@@ -3,6 +3,7 @@ var Step = require('./step');
 class MissingGrammar{
 	constructor(key){
 		this.key = key;
+		this.type = 'missing';
 	}
 	
 	preview(step, loader){

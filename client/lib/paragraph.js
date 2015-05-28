@@ -7,6 +7,7 @@ class Paragraph{
 	constructor(metadata){
 		this.title = metadata.title;
 		this.key = metadata.key;
+		this.type = 'paragraph';
 
 		var buildGrammar = require('./grammar-builder');
 

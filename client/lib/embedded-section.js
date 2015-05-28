@@ -7,6 +7,8 @@ class EmbeddedSection extends CompositeGrammar{
 	constructor(metadata){
 		super(metadata);
 
+		this.type = 'embedded-section';
+
 		this.fixture = new Fixture(metadata.fixture);
 		if (!this.title)
 		{

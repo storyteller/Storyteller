@@ -1,6 +1,7 @@
 class ErrorGrammar{
 	constructor(metadata){
 		this.errors = metadata.errors;
+		this.type = 'error';
 	}
 
 	buildStep(data, steps){

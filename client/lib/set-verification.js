@@ -3,6 +3,7 @@ var Table = require('./table');
 function SetVerification(metadata){
 	var table = new Table(metadata);
 
+	table.type = 'set-verification';
 	table.ordered = metadata.ordered;
 
 	table.fixture.contextualControl = (section, loader) => null;

@@ -3,6 +3,7 @@
 var React = require("react");
 var Hierarchy = require('./../lib/specs/hierarchy');
 var Postal = require('postal');
+var _ = require('lodash');
 
 
 var FixtureTable = React.createClass({
@@ -10,10 +11,18 @@ var FixtureTable = React.createClass({
 		var fixtures = _.sortBy(_.values(this.props.library.fixtures), x => x.title);
 
 		var rows = fixtures.map(x => {
+			var href = '#/fixture/' + x.key;
+			var clazz = '';
+			if (x.errorCount() > 0){
+				clazz = 'warning';
+			}
+
+
 			return (
-				<tr>
-					<td>{x.title}</td>
+				<tr className={clazz}>
+					<td><a href={href}>{x.title}</a></td>
 					<td>{x.implementation}</td>
+					<td style={{textAlign: 'right'}}>{x.errorCount()}</td>
 				</tr>
 			);
 		});
@@ -24,6 +33,7 @@ var FixtureTable = React.createClass({
 					<tr>
 						<th>Fixture Title</th>
 						<th>Implementation</th>
+						<th>Errors</th>
 					</tr>
 				</thead>
 				<tbody>

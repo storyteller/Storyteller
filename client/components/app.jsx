@@ -16,6 +16,8 @@ var GrammarErrors = require('./grammars/grammar-errors');
 var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
 var SuiteExplorer = require('./explorer/suite-explorer');
 
+var FixtureTable = require('./fixture-table');
+
 var $ = require('jquery');
 
 
@@ -57,6 +59,7 @@ var routes = (
     <Route name="grammar-errors" path="/grammar-errors" handler={GrammarErrors} />
     <Route name="spec-editor" path="/spec/:mode/:id" handler={SpecEditorWrapper} />
     <Route name="suite-explorer" path="/suite/*" handler={SuiteExplorer} />
+    <Route name="fixture" path="/fixture/:key" handler={FixtureTable} />
     <DefaultRoute handler={SpecExplorer}/>
   </Route>
 );

@@ -2,7 +2,7 @@ var Step = require('./step');
 
 class Silent{
 	constructor(data){
-
+		this.type = 'silent';
 	}
 
 
