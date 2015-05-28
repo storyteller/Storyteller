@@ -70,6 +70,14 @@ describe('Suite', function(){
 
 	var suite = new Suite(data);
 
+	it('knows its height', () => {
+		expect(suite.height()).to.equal(10);
+
+		expect(suite.suites[0].height()).to.equal(6);
+		expect(suite.suites[0].suites[0].height()).to.equal(3);
+		expect(suite.suites[1].height()).to.equal(3);
+	});
+
 	it('can add a top level child suite', () => {
 		var s = new Suite(data);
 		s.addChildSuite('foo');

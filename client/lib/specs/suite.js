@@ -19,6 +19,13 @@ class Suite{
 		});
 	}
 
+	height(){
+		var total = 1 + this.specs.length;
+		this.suites.forEach(x => total += x.height());
+
+		return total;
+	}
+
 	hasSpec(id){
 		return _.some(this.specs, {'id': id});
 	}
