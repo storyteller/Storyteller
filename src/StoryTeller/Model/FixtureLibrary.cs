@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace StoryTeller.Model
 {
     public class FixtureLibrary
     {
+        private static readonly string AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+
         public static readonly Cache<Type, Fixture> FixtureCache =
             new Cache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
 
@@ -39,13 +42,21 @@ namespace StoryTeller.Model
             }
         }
 
+        
 
         public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
         {
-            var storytellerAssembly = Assembly.GetExecutingAssembly().GetName().Name;
+            var currentDomain = AppDomain.CurrentDomain;
+            var assemPath = currentDomain.BaseDirectory;
+            var binPath = currentDomain.SetupInformation.PrivateBinPath;
+            if (binPath.IsNotEmpty())
+            {
+                assemPath = assemPath.AppendPath(binPath);
+            }
 
-            IEnumerable<Task<CompiledFixture>> fixtures = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(x => x.GetReferencedAssemblies().Any(assem => assem.Name == storytellerAssembly))
+
+
+            IEnumerable<Task<CompiledFixture>> fixtures = AssembliesFromPath(assemPath, x => referencesStoryteller(x))
                 .SelectMany(FixtureTypesFor)
                 .Select(
                     type => Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)));
@@ -62,6 +73,52 @@ namespace StoryTeller.Model
 
                 return library;
             });
+        }
+
+        private static bool referencesStoryteller(Assembly x)
+        {
+            return x.GetReferencedAssemblies().Any(assem => assem.Name == AssemblyName);
+        }
+
+        public static IEnumerable<Assembly> AssembliesFromPath(string path, Predicate<Assembly> assemblyFilter)
+        {
+
+
+            var assemblyPaths = Directory.GetFiles(path)
+                .Where(file =>
+                       Path.GetExtension(file).Equals(
+                           ".exe",
+                           StringComparison.OrdinalIgnoreCase)
+                       ||
+                       Path.GetExtension(file).Equals(
+                           ".dll",
+                           StringComparison.OrdinalIgnoreCase));
+
+            foreach (string assemblyPath in assemblyPaths)
+            {
+                Assembly assembly =
+                    AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(
+                        x => x.GetName().Name == Path.GetFileNameWithoutExtension(assemblyPath));
+
+                if (assembly == null)
+                {
+                    try
+                    {
+                        assembly = Assembly.LoadFrom(assemblyPath);
+                    }
+                    catch
+                    {
+                    }
+                }
+
+
+
+
+                if (assembly != null && assemblyFilter(assembly))
+                {
+                    yield return assembly;
+                }
+            }
         }
 
         public static CompiledFixture CreateCompiledFixture(CellHandling cellHandling, Type type)

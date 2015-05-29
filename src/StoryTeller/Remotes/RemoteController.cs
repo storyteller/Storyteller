@@ -131,7 +131,7 @@ namespace StoryTeller.Remotes
             return listener.Task.ContinueWith(x =>
             {
                 _watcher = new FixtureLibraryWatcher(Recycle);
-                _watcher.WatchBinariesAt(_path);
+                _watcher.WatchBinariesAt(_path.AppendPath("bin"));
 
                 LatestSystemRecycled = x.Result;
 

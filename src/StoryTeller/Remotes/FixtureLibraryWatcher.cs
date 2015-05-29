@@ -35,6 +35,8 @@ namespace StoryTeller.Remotes
                 return;
             }
 
+            Console.WriteLine("Detected a change to watched file {0}", e.FullPath);
+
             _callback();
             _lastUpdate = DateTime.Now;
         }
