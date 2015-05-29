@@ -33,7 +33,7 @@ function ilrepack(target){
   var out = '/out:' + path.join(folder, 'Storyteller.dll');
 
   console.log('ILRepack Newtonsoft, FubuCore, and HtmlTags');
-  var output = exec(executable, [lib, out, path.join(folder, 'Storyteller.dll'), path.join(folder, 'Newtonsoft.Json.dll'), path.join(folder, 'FubuCore.dll'), path.join(folder, 'HtmlTags.dll')]);
+  var output = exec(executable, [lib, out, path.join(folder, 'Storyteller.dll'), path.join(folder, 'Newtonsoft.Json.dll'), path.join(folder, 'FubuCore.dll'), path.join(folder, 'HtmlTags.dll'), '/internalize']);
   if (output.status != 0){
     console.log(output.stdout.toString());
     throw new Error('Failed in ilrepack');

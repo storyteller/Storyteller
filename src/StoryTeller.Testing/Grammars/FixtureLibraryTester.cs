@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.Grammars
 
             library.Fixtures["HanSolo"].ShouldBeOfType<AliasedFixture>();
 
-            ShouldBeTestExtensions.ShouldBe(library.Fixtures.Has(new SecretFixture().Key), false);
+            library.Fixtures.Has(new SecretFixture().Key).ShouldBe(false);
         }
 
         [Test]
