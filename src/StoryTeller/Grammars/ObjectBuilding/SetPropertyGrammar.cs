@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using FubuCore;
 using FubuCore.Reflection;
 using StoryTeller.Conversion;
@@ -24,10 +25,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
             CellModifications = new CellModifications();
         }
 
-        public SetPropertyGrammar(Expression expression) : this(ReflectionHelper.GetAccessor(expression))
-        {
-
-        }
+        public SetPropertyGrammar(PropertyInfo property) : this(new SingleProperty(property)) { }
 
         public CellModifications CellModifications { get; private set; }
 
@@ -54,7 +52,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
 
         public static SetPropertyGrammar For<T>(Expression<Func<T, object>> expression)
         {
-            return new SetPropertyGrammar(expression);
+            return new SetPropertyGrammar(expression.ToAccessor());
         }
 
     }
