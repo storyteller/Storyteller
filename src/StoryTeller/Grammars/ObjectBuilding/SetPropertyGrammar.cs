@@ -17,11 +17,16 @@ namespace StoryTeller.Grammars.ObjectBuilding
         private readonly string _template;
         private Cell _cell;
 
-        public SetPropertyGrammar(Accessor accessor)
+        internal SetPropertyGrammar(Accessor accessor)
         {
             _accessor = accessor;
             _template = "{0} = {{{0}}}".ToFormat(_accessor.Name);
             CellModifications = new CellModifications();
+        }
+
+        public SetPropertyGrammar(Expression expression) : this(ReflectionHelper.GetAccessor(expression))
+        {
+
         }
 
         public CellModifications CellModifications { get; private set; }
@@ -49,7 +54,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
 
         public static SetPropertyGrammar For<T>(Expression<Func<T, object>> expression)
         {
-            return new SetPropertyGrammar(expression.ToAccessor());
+            return new SetPropertyGrammar(expression);
         }
 
     }

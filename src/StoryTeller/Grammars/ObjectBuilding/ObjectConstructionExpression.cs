@@ -51,7 +51,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// <returns></returns>
         public ICellExpression SetProperty(Expression<Func<T, object>> expression)
         {
-            var grammar = new SetPropertyGrammar(expression.ToAccessor());
+            var grammar = new SetPropertyGrammar(expression);
 
             _grammar.AddGrammar(grammar);
 
