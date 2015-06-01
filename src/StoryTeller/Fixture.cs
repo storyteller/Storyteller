@@ -54,6 +54,16 @@ namespace StoryTeller
         // ENDSAMPLE
 
         /// <summary>
+        /// Shorthand for Context.Service&lt;T&gt;()
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T Retrieve<T>()
+        {
+            return Context.Service<T>();
+        }
+
+        /// <summary>
         /// The currently executing specification context. This property will only
         /// be set at runtime during specification runs
         /// </summary>
