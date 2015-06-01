@@ -41,6 +41,14 @@ namespace StoryTeller.Testing.Conversion
         }
 
         [Test]
+        public void uri()
+        {
+            conversions.Convert(typeof(Uri), "foo://1")
+                .ShouldBeOfType<Uri>()
+                .AbsoluteUri.ShouldBe("foo://1/");
+        }
+
+        [Test]
         public void enumerations()
         {
             assertRoundTrip(ResultStatus.error);

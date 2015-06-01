@@ -48,6 +48,11 @@ namespace StoryTeller.Grammars.Reflection
         public string Format { get; private set; }
         public Cell ReturnCell { get; private set; }
 
+        public IEnumerable<Cell> InputCells()
+        {
+            return _cells;
+        } 
+
         public IEnumerable<Cell> Cells
         {
             get

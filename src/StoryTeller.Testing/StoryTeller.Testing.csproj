@@ -110,6 +110,7 @@
     <Compile Include="Grammars\Paragraphs\ParagraphGrammarTester.cs" />
     <Compile Include="Grammars\Paragraphs\VerifyPropertiesOf_specs.cs" />
     <Compile Include="Grammars\Reflection\ActionMethodGrammarTester.cs" />
+    <Compile Include="Grammars\Reflection\FactCheckMethod_specs.cs" />
     <Compile Include="Grammars\Reflection\FactMethod_specs.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocationTester.cs" />
     <Compile Include="Grammars\Reflection\ValueCheckMethodTester.cs" />

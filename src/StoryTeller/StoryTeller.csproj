@@ -149,6 +149,7 @@
     <Compile Include="Grammars\Paragraphs\ObjectVerificationExpression.cs" />
     <Compile Include="Grammars\Paragraphs\ParagraphGrammar.cs" />
     <Compile Include="Grammars\Reflection\ActionMethodGrammar.cs" />
+    <Compile Include="Grammars\Reflection\FactCheckMethod.cs" />
     <Compile Include="Grammars\Reflection\FactMethod.cs" />
     <Compile Include="Grammars\Reflection\MethodExtensions.cs" />
     <Compile Include="Grammars\Reflection\MethodInvocation.cs" />

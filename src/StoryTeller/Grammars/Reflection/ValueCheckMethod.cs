@@ -24,12 +24,10 @@ namespace StoryTeller.Grammars.Reflection
             return grammar;
         }
 
-        private readonly MethodInfo _method;
         private readonly MethodInvocation _invocation;
 
         public ValueCheckMethod(MethodInfo method, object target)
         {
-            _method = method;
             _invocation = new MethodInvocation(method, target);
         }
 
@@ -55,4 +53,6 @@ namespace StoryTeller.Grammars.Reflection
             return _invocation.Cells;
         }
     }
+
+
 }

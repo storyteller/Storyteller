@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using FubuCore;
 using FubuCore.Reflection;
 using StoryTeller.Grammars.Reflection;
 using StoryTeller.Grammars.Tables;
@@ -15,6 +16,7 @@ namespace StoryTeller.Grammars
          {
              new ProgrammaticGrammarBuilder(),
              new FactMethodBuilder(),
+             new FactMethodWithInputsBuilder(),
              new VoidMethodActionBuilder(),
              new ValueCheckMethodBuilder()
          };
@@ -92,6 +94,28 @@ namespace StoryTeller.Grammars
         public IGrammar Build(MethodInfo method, Fixture fixture)
         {
             return new FactMethod(method, fixture);
+        }
+    }
+
+    internal class FactMethodWithInputsBuilder : IGrammarBuilder
+    {
+        public bool Matches(MethodInfo method)
+        {
+            if (!method.HasReturn()) return false;
+            if (method.ReturnType != typeof (bool)) return false;
+
+            var format = method.DeriveFormat();
+            var key = "returnValue";
+            method.ReturnParameter.ForAttribute<AliasAsAttribute>(att => key = att.Alias);
+
+            if (TemplateParser.GetSubstitutions(format).Contains(key)) return false;
+
+            return true;
+        }
+
+        public IGrammar Build(MethodInfo method, Fixture fixture)
+        {
+            return new FactCheckMethod(method, fixture);
         }
     }
 
