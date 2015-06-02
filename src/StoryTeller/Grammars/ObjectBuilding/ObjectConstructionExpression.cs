@@ -49,11 +49,16 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// </summary>
         /// <param format="expression"></param>
         /// <returns></returns>
-        public ICellExpression SetProperty(Expression<Func<T, object>> expression)
+        public ICellExpression SetProperty(Expression<Func<T, object>> expression, string defaultValue = null)
         {
             var grammar = SetPropertyGrammar.For(expression);
 
             _grammar.AddGrammar(grammar);
+
+            if (defaultValue.IsNotEmpty())
+            {
+                grammar.CellModifications.DefaultValue(defaultValue);
+            }
 
             return grammar.CellModifications;
         }
@@ -126,9 +131,9 @@ namespace StoryTeller.Grammars.ObjectBuilding
         /// <typeparam format="TCell"></typeparam>
         /// <param format="format"></param>
         /// <returns></returns>
-        public InputExpression<TCell> WithInput<TCell>(string format)
+        public InputExpression<TCell> WithInput<TCell>(string format, string defaultValue = null)
         {
-            return new InputExpression<TCell>(this, format);
+            return new InputExpression<TCell>(this, format, defaultValue);
         }
 
 
@@ -136,12 +141,14 @@ namespace StoryTeller.Grammars.ObjectBuilding
         public class InputExpression<TCell>
         {
             private readonly string _format;
+            private readonly string _defaultValue;
             private readonly ObjectConstructionExpression<T> _parent;
 
-            public InputExpression(ObjectConstructionExpression<T> expression, string format)
+            public InputExpression(ObjectConstructionExpression<T> expression, string format, string defaultValue)
             {
                 _parent = expression;
                 _format = format;
+                _defaultValue = defaultValue;
             }
 
             /// <summary>
@@ -154,6 +161,11 @@ namespace StoryTeller.Grammars.ObjectBuilding
             {
                 var grammar = new ConfigureObjectGrammar<T, TCell>(_format, configure);
                 _parent._grammar.AddGrammar(grammar);
+
+                if (_defaultValue.IsNotEmpty())
+                {
+                    grammar.CellModifications.DefaultValue(_defaultValue);
+                }
 
                 return grammar.CellModifications;
             }

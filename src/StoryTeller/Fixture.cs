@@ -420,6 +420,21 @@ namespace StoryTeller
         }
 
         /// <summary>
+        /// Creates a grammar that will instantiate a new object of type T on the
+        /// Context.State.CurrentObject property and establish child grammar steps
+        /// to set properties on the new object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="title"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static ParagraphGrammar CreateNewObject<T>(Action<ObjectConstructionExpression<T>> action)
+            where T : new()
+        {
+            return CreateNewObject("Create " + typeof (T).Name, action);
+        }
+
+        /// <summary>
         /// Create a paragraph grammar to verify values on an existing object
         /// </summary>
         /// <typeparam name="T"></typeparam>
