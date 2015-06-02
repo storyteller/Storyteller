@@ -26,6 +26,7 @@
     "babel-core": "^4.7.16",
     "babel-loader": "^4.1.0",
     "babel-eslint": "^3.0.1",
+    "eslint-plugin-react": "^2.2.0",
     "body-parser": "^1.8.3",
     "bootstrap": "^3.2.0",
     "chai": "^1.9.1",
