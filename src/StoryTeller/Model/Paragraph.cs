@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using FubuCore;
 
 namespace StoryTeller.Model
 {
+    
     public class Paragraph : GrammarModel, IModelWithCells
     {
         public GrammarModel[] children;
@@ -23,8 +23,7 @@ namespace StoryTeller.Model
         {
             get
             {
-                // TODO -- throw good message if not all the children are IModelWithCells
-                return children.SelectMany(x => x.As<IModelWithCells>().cells).ToArray();
+                return children.OfType<IModelWithCells>().SelectMany(x => x.cells).ToArray();
             }
         }
     }
