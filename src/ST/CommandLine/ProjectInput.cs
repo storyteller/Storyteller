@@ -4,6 +4,7 @@ using System.IO;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 
 namespace ST.CommandLine
@@ -70,7 +71,7 @@ namespace ST.CommandLine
 
         public void CreateMissingSpecFolder()
         {
-            var specFolder = Path.ToFullPath().AppendPath("Specs");
+            var specFolder = HierarchyLoader.SelectSpecPath(Path.ToFullPath());
             if (!Directory.Exists(specFolder))
             {
                 Console.WriteLine("Creating /Specs folder at " + specFolder);

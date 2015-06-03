@@ -42,7 +42,8 @@ namespace ST.Docs.Runner
 
         public void StartWebSockets()
         {
-            _port = PortFinder.FindPort(8181);
+            // Make sure that under no circumstances does this thing conflict w/ Raven's 8080
+            _port = PortFinder.FindPort(8200);
             _webSocketsAddress = "ws://0.0.0.0:" + _port;
 
             Console.WriteLine("Broadcasting auto-refresh messages via WebSockets at " + _webSocketsAddress);

@@ -35,8 +35,8 @@ namespace StoryTeller.Testing.Grammars
         {
             var library = TestingContext.Library;
 
-            library.Models["Open"].grammars.Select(x => x.key)
-                .ShouldHaveTheSameElementsAs("NotHidden");
+            library.Models["Open"].grammars.OrderBy(x => x.key).Select(x => x.key)
+                .ShouldHaveTheSameElementsAs("NotHidden", "TODO");
         }
 
         [Test]

@@ -16,7 +16,7 @@ namespace StoryTeller.Testing.Bugs
             var compiledFixture = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof (TopicFolderFixture));
 
             compiledFixture.Model.grammars.OrderBy(x => x.key).Select(x => x.key)
-                .ShouldHaveTheSameElementsAs("AllTopicsShouldBe", "CheckTopic", "ForFile", "TheTopicsAre", "WriteFile");
+                .ShouldHaveTheSameElementsAs("AllTopicsShouldBe", "CheckTopic", "ForFile", "TheTopicsAre", "TODO", "WriteFile");
         }
     }
 }

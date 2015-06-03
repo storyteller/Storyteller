@@ -38,6 +38,8 @@ namespace StoryTeller
             _grammars = new Cache<string, IGrammar>(findGrammar);
             
             Key = GetType().Name.Replace("Fixture", "");
+
+            this["TODO"] = Do<string>("TODO: {message}", StoryTellerAssert.Fail);
         }
 
         // SAMPLE: fixture-grammars

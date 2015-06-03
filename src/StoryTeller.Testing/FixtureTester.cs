@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Shouldly;
+using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
 using StoryTeller.Samples.Fixtures;
 
@@ -24,6 +25,12 @@ namespace StoryTeller.Testing
 
             fixture.Lists["Animals"].Options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("Lions", "Tigers", "Pumas");
+        }
+
+        [Test]
+        public void has_a_TODO_grammar()
+        {
+            new HiddenFixture()["TODO"].ShouldBeOfType<ActionGrammar<string>>();
         }
 
         [Test]
@@ -87,7 +94,7 @@ namespace StoryTeller.Testing
         {
             var fixture = new FixtureWithExplicits();
 
-            fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
+            fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
                 new StubGrammarModel {key = "a",},
                 new StubGrammarModel {key = "b",},
                 new StubGrammarModel {key = "c",}
@@ -118,7 +125,7 @@ namespace StoryTeller.Testing
         {
             var fixture = new FixtureWithProgrammaticGrammars();
 
-            fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
+            fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
                 new StubGrammarModel {key = "foo",},
                 new StubGrammarModel {key = "bar",},
                 new StubGrammarModel {key = "baz",}
@@ -139,7 +146,7 @@ namespace StoryTeller.Testing
         {
             var fixture = new FixtureWithGrammarAlias();
 
-            fixture.Compile(CellHandling.Basic()).grammars.ShouldHaveTheSameElementsAs(
+            fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
                 new StubGrammarModel {key = "GoAlias"}
                 );
         }

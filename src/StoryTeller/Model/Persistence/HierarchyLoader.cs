@@ -9,17 +9,24 @@ namespace StoryTeller.Model.Persistence
     {
         public static readonly string SpecDirectory;
 
+        public static string SelectSpecPath(string baseDirectory)
+        {
+            var specPath = baseDirectory.AppendPath("Specs");
+            if (Directory.Exists(specPath)) return specPath;
+
+            var testsPath = baseDirectory.AppendPath("Tests");
+            if (Directory.Exists(testsPath))
+            {
+                return testsPath;
+            }
+
+            return specPath;
+        }
+
         static HierarchyLoader()
         {
-            SpecDirectory = AppDomain.CurrentDomain.BaseDirectory.AppendPath("Specs");
-            if (!Directory.Exists(SpecDirectory))
-            {
-                var testsPath = AppDomain.CurrentDomain.BaseDirectory.AppendPath("Tests");
-                if (Directory.Exists(testsPath))
-                {
-                    SpecDirectory = testsPath;
-                }
-            }
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            SpecDirectory = SelectSpecPath(baseDirectory);
         }
         
 
