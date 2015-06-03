@@ -7,6 +7,9 @@ namespace StoryTeller.Equivalence
     {
         public bool Matches(object one, object two)
         {
+            if (one == null) return two == null;
+            if (two == null) return false;
+
             return one.As<IEquatable<T>>().Equals((T)two);
         }
     }
