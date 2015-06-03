@@ -1,4 +1,5 @@
 ﻿using System;
+using FubuCore;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
@@ -21,14 +22,18 @@ namespace ST.Client.Persistence
 
         public override void HandleMessage(RunSpec message)
         {
+            
             if (message.spec != null)
             {
-                _saveSpec.HandleMessage(new SaveSpecBody
+                if (message.revision.IsNotEmpty())
                 {
-                    id = message.id,
-                    revision = message.revision,
-                    spec = message.spec
-                });
+                    _saveSpec.HandleMessage(new SaveSpecBody
+                    {
+                        id = message.id,
+                        revision = message.revision,
+                        spec = message.spec
+                    });
+                }
             }
             else
             {
