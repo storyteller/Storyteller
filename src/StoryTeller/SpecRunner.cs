@@ -23,7 +23,7 @@ namespace StoryTeller
                 path = path.ParentDirectory();
             }
 
-            return path.AppendPath("Specs");
+            return Model.Persistence.HierarchyLoader.SelectSpecPath(path);
         }
 
         private readonly FixtureLibrary _library;
