@@ -123,12 +123,20 @@ namespace StoryTeller
             return FullResults();
         }
 
-        public HtmlDocument GenerateResultsDocument()
+        public void WriteResultsDocument(string file)
         {
             var response = FullResults();
-
-            return BatchResultsWriter.BuildResults(response);
+            var document = BatchResultsWriter.BuildResults(response);
+            document.WriteToFile(file);
         }
+
+        public void OpenResultsInBrowser()
+        {
+            var response = FullResults();
+            var document = BatchResultsWriter.BuildResults(response);
+            document.OpenInBrowser();
+        }
+
 
         public BatchRunResponse FullResults()
         {

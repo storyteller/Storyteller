@@ -89,6 +89,7 @@ namespace StoryTeller.Engine
                     success = false,
                     fixtures = new FixtureModel[0],
                     system_name = _system.ToString(),
+                    system_full_name = _system.GetType().FullName,
                     name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory),
                     error = ex.ToString()
                 };

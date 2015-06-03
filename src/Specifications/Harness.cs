@@ -14,9 +14,7 @@ namespace Specifications
             //var results = runner.Run("Docs/Transformation Rules");
             //runner.RunAll(1.Minutes());
 
-            var document = runner.GenerateResultsDocument();
-
-            document.OpenInBrowser();
+            runner.OpenResultsInBrowser();
 
             //results.Counts.AssertSuccess();
         } 

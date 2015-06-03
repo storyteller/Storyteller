@@ -28,6 +28,7 @@ namespace StoryTeller.Remotes
         public string time = DateTime.Now.ToString("t");
 
         public string system_name;
+        public string system_full_name;
         public bool success;
         public string error;
 

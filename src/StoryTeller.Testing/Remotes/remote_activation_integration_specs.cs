@@ -109,7 +109,7 @@ namespace StoryTeller.Testing.Remotes
 
                 message.success.ShouldBe(true);
                 message.system_name.ShouldBe(typeof (System2).FullName);
-                
+                message.system_full_name.ShouldBe(typeof(System2).FullName);
             }
         }
 
