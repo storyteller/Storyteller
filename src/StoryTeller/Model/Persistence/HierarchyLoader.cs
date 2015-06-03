@@ -7,7 +7,21 @@ namespace StoryTeller.Model.Persistence
 {
     public class HierarchyLoader
     {
-        public static string SpecDirectory = AppDomain.CurrentDomain.BaseDirectory.AppendPath("Specs");
+        public static readonly string SpecDirectory;
+
+        static HierarchyLoader()
+        {
+            SpecDirectory = AppDomain.CurrentDomain.BaseDirectory.AppendPath("Specs");
+            if (!Directory.Exists(SpecDirectory))
+            {
+                var testsPath = AppDomain.CurrentDomain.BaseDirectory.AppendPath("Tests");
+                if (Directory.Exists(testsPath))
+                {
+                    SpecDirectory = testsPath;
+                }
+            }
+        }
+        
 
         public static readonly IFileSystem FileSystem = new FileSystem();
 
