@@ -78,6 +78,12 @@ describe('Suite', function(){
 		expect(suite.suites[1].height()).to.equal(3);
 	});
 
+	it('adds itself as the parent to all specs', () => {
+		suite.suites[0].specs.forEach(s => {
+			expect(s.suite).to.equal(suite.suites[0]);
+		});
+	});
+
 	it('can add a top level child suite', () => {
 		var s = new Suite(data);
 		s.addChildSuite('foo');
@@ -153,6 +159,13 @@ describe('Suite', function(){
 		expect(suite.suites[0].specs[1].title).to.equal('Simple 2');
 	});
 
+	it('sets itself as the suite to a new spec', () => {
+		var spec = {};
+		suite.addSpec(spec);
+
+		expect(spec.suite).to.equal(suite);
+	});
+
 	describe('when replacing a spec', () => {
 		var suite = null;
 		var oldSpec = null;
@@ -181,6 +194,8 @@ describe('Suite', function(){
 
 
 			expect(suite.hasSpec(3)).to.be.true;
+
+			expect(newSpec.suite).to.equal(suite);
 
 			expect(_.contains(suite.allSpecs(), oldSpec)).to.be.false;
 			expect(_.contains(suite.allSpecs(), newSpec)).to.be.true;

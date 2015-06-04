@@ -18,6 +18,8 @@ class Suite{
 
 			return new Spec(x, library);
 		});
+
+		this.specs.forEach(x => x.suite = this);
 	}
 
 	toggleAll(){
@@ -58,11 +60,13 @@ class Suite{
 
 	replaceSpec(spec){
 		_.remove(this.specs, s => s.id == spec.id);
+		spec.suite = this;
 		this.specs.push(spec);
 	}
 
 	addSpec(spec){
 		this.specs.push(spec);
+		spec.suite = this;
 	}
 
 	removeSpec(id){

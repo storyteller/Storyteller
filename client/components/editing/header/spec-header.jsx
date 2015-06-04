@@ -7,6 +7,7 @@ var SpecTitle = require('./spec-title');
 var SpecLinks = require('./spec-links');
 var SpecCommands = require('./spec-commands');
 var LifecycleButton = require('./lifecycle-button');
+var SuitePath = require('./../../explorer/suite-path');
 
 var SpecHeader = React.createClass({
 	render(){
@@ -20,15 +21,21 @@ var SpecHeader = React.createClass({
 			<Row>
 				<Col xs={12} md={12}>
 				    <h3 ref="header" className={headerClass}>
+				    	<SuitePath suite={this.props.spec.suite} linkToLeaf={true} />
 						<SpecTitle spec={this.props.spec} />
+
+					</h3>
+
+					<p>
+						<SpecCommands spec={this.props.spec}/>
 						<span className="pull-right">
-							<SpecCommands spec={this.props.spec}/>
+							
 
 							<SpecLinks id={this.props.spec.id} mode={this.props.mode} />
 
 							<LifecycleButton spec={this.props.spec} />
 						</span>
-					</h3>
+					</p>
 
 					<hr />
 				</Col>
