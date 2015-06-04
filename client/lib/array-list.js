@@ -46,6 +46,10 @@ _.extend(ArrayList.prototype, {
     return this;
   },
 
+  insertFirst: function(element){
+    return this.insertAt(0, element);
+  },
+
   isEmpty: function(){
     return !this.length;
   },

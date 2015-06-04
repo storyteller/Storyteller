@@ -3,7 +3,7 @@
 var React = require("react");
 
 
-
+var SuitePath = require('./suite-path');
 var icons = require('./../icons');
 var Hierarchy = require('./../../lib/specs/hierarchy');
 var Postal = require('postal');
@@ -83,8 +83,7 @@ module.exports = React.createClass({
 			links.push(childSuiteLink);
 		}
 		else {
-			// TODO -- fancier later
-			title = 'Suite: ' + suite.path;
+			title = (<SuitePath suite={suite} />)
 		}
 
 		if (suite.suites.length > 0){

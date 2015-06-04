@@ -11,6 +11,7 @@ var CommandLink = require('./command-link');
 var FolderOpen = icons['folder-open'];
 var FolderClosed = icons['folder-closed'];
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
+var SuitePath = require('./suite-path');
 
 var SuiteHeader = React.createClass({
 	makeNewSuiteLink: function(){

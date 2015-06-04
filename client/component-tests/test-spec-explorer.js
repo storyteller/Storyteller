@@ -203,7 +203,7 @@ describe('Suite Explorer', function(){
 	});
 
 	it('opening the explorer to a suite should show the suite name as the title', function(){
-		expect($('#spec-editor-header', div).html()).to.equal('Suite: Sentences');
+		expect($('#spec-editor-header', div).html()).to.contain('Sentences');
 	});
 
 	it('shows the right badge numbers for the lifecycles', function(){

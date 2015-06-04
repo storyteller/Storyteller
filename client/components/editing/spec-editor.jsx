@@ -4,7 +4,7 @@ var React = require("react");
 var StepAdderPlaceHolder = require('./step-adder-placeholder');
 var StepAdder = require('./step-adder');
 var Icons = require('./../icons');
-
+var SuitePath = require('./../explorer/suite-path');
 
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
 
