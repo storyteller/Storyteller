@@ -58,14 +58,15 @@ var SuiteHeader = React.createClass({
 	},
 
 	openFolder: function (e) {
-		if (e.altKey){
-			this.props.suite.toggleAll();
-		}
-		else {
-			this.props.suite.toggleClosed();
-		}
+		this.props.suite.toggleClosed();
 
-		this.setState({ open: this.props.suite.isExpanded });
+		e.stopPropagation();
+		e.preventDefault();
+
+
+		this.setState({ 'foo':3 });
+
+
 	},
 
 	render: function(){
@@ -110,32 +111,15 @@ var SuiteBody = React.createClass({
 		var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} />) );
 		
 		var specs = _.sortBy(this.props.suite.specs, x => x.title).map(spec => (<SpecLeaf spec={spec} key={spec.id} />) );
-		var style = {
-			maxHeight: this.state.maxHeight
-		};
 
 		return (
-			<div id={this.props.suite.path} className='suite-body' ref='suiteBody' style={style}>
+			<div id={this.props.suite.path} className='suite-body' ref='suiteBody'>
 				{childSuites}
 				{specs}
 			</div>
 		);
 	},
 
-	componentDidMount: function () {
-		var height = (this.props.suite.height() * 16 + 50) + 'px';
-
-		//var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
-		this.setState({maxHeight: height});
-	},
-
-	componentDidUpdate: function(){
-		var height = (this.props.suite.height() * 16 + 50) + 'px';
-		//var height = this.refs.suiteBody.getDOMNode().scrollHeight + 'px';
-		if (this.state.maxHeight != height){
-			this.setState({maxHeight: height});
-		}
-	}
 
 });
 
