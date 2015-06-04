@@ -17,6 +17,7 @@ var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
 var SuiteExplorer = require('./explorer/suite-explorer');
 
 var FixtureTable = require('./fixture-table');
+var uuid = require('node-uuid');
 
 var $ = require('jquery');
 
@@ -25,17 +26,9 @@ var App = React.createClass({
   mixins: [Router.State],
 
   getHandlerKey: function () {
-    var childDepth = 1; // assuming App is top-level route
-    var key = this.getRoutes()[childDepth].name;
-    var id = this.getParams().id;
-    if (id) { key += id; }
-
-    var mode = this.getParams().mode;
-    if (mode){
-    	key += ':' + mode;
-    }
-
-    return key;
+    // leave this here. Force the router to actually
+    // do routing things
+    return uuid.v4();
   },
 
 	render: function(){
