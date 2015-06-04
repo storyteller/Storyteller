@@ -203,7 +203,6 @@ handlers['hierarchy-loaded'] = function(data){
 
 	top.allSpecs().forEach(x => specs[x.id] = x);
 
-
 	publishHierarchyChanged();
 }
 

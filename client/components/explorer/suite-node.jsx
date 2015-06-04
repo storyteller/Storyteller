@@ -13,11 +13,6 @@ var FolderClosed = icons['folder-closed'];
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 
 var SuiteHeader = React.createClass({
-	getInitialState: function () {
-		return {
-			open: true
-		};
-	},
 	makeNewSuiteLink: function(){
 		var self = this;
 
@@ -62,8 +57,15 @@ var SuiteHeader = React.createClass({
 		);
 	},
 
-	openFolder: function () {
-		this.setState({ open: !this.state.open });
+	openFolder: function (e) {
+		if (e.altKey){
+			this.props.suite.toggleAll();
+		}
+		else {
+			this.props.suite.toggleClosed();
+		}
+
+		this.setState({ open: this.props.suite.isExpanded });
 	},
 
 	render: function(){
@@ -78,8 +80,8 @@ var SuiteHeader = React.createClass({
 		var count = suite.allSpecs().length;
 
 		var href = '#/suite/' + suite.path;
-		var openClosed = this.state.open ? <FolderOpen /> : <FolderClosed />;
-		var openClass = this.state.open ? 'open' : 'closed';
+		var openClosed = suite.isExpanded ? <FolderOpen /> : <FolderClosed />;
+		var openClass = suite.isExpanded ? 'open' : 'closed';
 
 		return (
 			<div key={suite.path} className={openClass + ' suite-header'}>

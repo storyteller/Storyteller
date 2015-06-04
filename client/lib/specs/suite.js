@@ -6,6 +6,7 @@ class Suite{
 		this.name = data.name;
 		this.path = data.path;
 		this.parent = parent;
+		this.isExpanded = true;
 
 		this.isHierarchy = parent == null || parent == undefined;
 
@@ -17,6 +18,31 @@ class Suite{
 
 			return new Spec(x, library);
 		});
+	}
+
+	toggleAll(){
+		if (this.isExpanded){
+			this.closeAll();
+		}
+		else {
+			this.expandAll();
+		}
+	}
+
+	closeAll(){
+		this.suites.forEach(x => {
+			x.isExpanded = false;
+			x.closeAll();
+		});
+	}
+
+	expandAll(){
+		this.isExpanded = true;
+		this.suites.forEach(x => x.expandAll());
+	}
+
+	toggleClosed(){
+		this.isExpanded = !this.isExpanded;
 	}
 
 	height(){

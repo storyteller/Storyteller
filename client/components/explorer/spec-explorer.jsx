@@ -21,8 +21,19 @@ var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 module.exports = React.createClass({
 
 	getInitialState: function(){
+		var suite = this.props.suite || Hierarchy.top();
+
+		var total = suite.allSpecs().length;
+		suite.isExpanded = true;
+		if (total >= 50){
+			suite.closeAll();
+		}
+		else {
+			suite.expandAll();
+		}
+
 		return {
-			suite: this.props.suite || Hierarchy.top(),
+			suite: suite,
 			status: Hierarchy.statusFilter(), 
 			lifecycle: Hierarchy.lifecycleFilter()
 		};
@@ -42,26 +53,64 @@ module.exports = React.createClass({
 		this.subscription.unsubscribe();
 	},
 
-	buildAllSpecificationHeader: function(){
-		var buildChildSuiteMessage = name => {
-			return {
-				type: 'add-suite',
-				name: name,
-				parent: ''
-			};
-		};
 
-		var childSuiteLink = (
-			<CommandWithNameEntryLink 
-				title="Add a new Child Suite" 
-				text="new suite" 
-				commandText="Create" 
-				toMessage={buildChildSuiteMessage}/>
-		);
+	buildSuiteHeader: function(){
+		var suite = this.state.suite;
+
+		var links = [];
+
+
+		var title = '';
+		if (suite.isHierarchy){
+			title = 'All Specifications';
+
+			var buildChildSuiteMessage = name => {
+				return {
+					type: 'add-suite',
+					name: name,
+					parent: ''
+				};
+			};
+
+			var childSuiteLink = (
+				<small><CommandWithNameEntryLink 
+					title="Add a new Child Suite" 
+					text="new suite" 
+					commandText="Create" 
+					toMessage={buildChildSuiteMessage}/></small>
+			);
+
+			links.push(childSuiteLink);
+		}
+		else {
+			// TODO -- fancier later
+			title = 'Suite: ' + suite.path;
+		}
+
+		if (suite.suites.length > 0){
+			var expandAll = () => {
+				this.state.suite.expandAll();
+				this.setState({foo: 1});
+			}
+
+			var collapseAll = () => {
+				this.state.suite.closeAll();
+				this.setState({foo:2});
+			}
+
+			var expandLink = (<small><a className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );
+			links.push(expandLink);
+
+			var collapseLink = (<small><a className="explorer-command" title="Collapse All Suite nodes in the Tree View" onClick={collapseAll}>collapse all</a></small>);
+			links.push(collapseLink);	
+		}
 
 		return(
-			<h4><span id="spec-editor-header">All Specifications</span> <small>{childSuiteLink}</small></h4>
+			<h4><span id="spec-editor-header">{title}</span> 
+				{links}
+			</h4>
 		);
+
 	},
 
 	render: function(){
@@ -71,15 +120,12 @@ module.exports = React.createClass({
 		if (Hierarchy.hasFilter()){
 			suite = this.state.suite.filter(filter);
 		}
-		
 
 		
-		
-		var header = null;
+		var header = this.buildSuiteHeader();
 		var suites = null;
 
 		if (suite.isHierarchy){
-			header = this.buildAllSpecificationHeader();
 			suites = suite.suites.map(s => {
 				return (
 					<SuiteNode suite={s} key={s.path} />
@@ -87,13 +133,6 @@ module.exports = React.createClass({
 			});
 		}
 		else {
-			// TODO -- fancier later
-			var title = 'Suite: ' + suite.path;
-
-			header = (
-				<h4><span id="spec-editor-header">{title}</span></h4>
-			);
-
 			suites = [(<SuiteNode suite={suite} key={suite.path} />)];
 		}
 
