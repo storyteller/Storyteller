@@ -16,7 +16,7 @@ var ErrorBox = React.createClass({
 
 		if (title){
 			return (
-				<pre style={style} className="error">
+				<pre style={style} className="error bg-warning">
 					{title}
 					<hr />
 					{this.props.error}
