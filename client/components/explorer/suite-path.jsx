@@ -14,6 +14,10 @@ var SuiteLink = React.createClass({
 var SuitePath = React.createClass({
 	render(){
 		var suite = this.props.suite;
+		if (!suite){
+			return null;
+		}
+
 		if (suite.isHierarchy){
 			return null;
 		}
