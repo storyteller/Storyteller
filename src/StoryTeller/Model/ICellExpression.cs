@@ -51,6 +51,24 @@ namespace StoryTeller.Model
     }
     // ENDSAMPLE
 
+    public static class CellExpressionExtensions
+    {
+        /// <summary>
+        /// Shorthand for DefaultValue("NULL")
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static ICellExpression DefaultIsNull(this ICellExpression expression)
+        {
+            return expression.DefaultValue("NULL");
+        }
+
+        public static ICellExpression DefaultIsEmpty(this ICellExpression expression)
+        {
+            return expression.DefaultValue("EMPTY");
+        }
+    }
+
     public class CellModifications : ICellExpression
     {
         private readonly IList<Action<ICellExpression>> _modifications = new List<Action<ICellExpression>>();

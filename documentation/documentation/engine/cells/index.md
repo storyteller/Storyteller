@@ -72,6 +72,8 @@ In usage, the cell expression is used as part of a [fluent interface](http://mar
 
 <[sample:using-cell-expression]>
 
+Because the usage was so common on a big project, there are now `DefaultIsEmpty()` and `DefaultIsNull()` extension methods for setting default cell values.
+
 
 ## Default Editors
 
