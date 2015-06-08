@@ -74,6 +74,27 @@ namespace StoryTeller.Remotes
 
                 EventAggregator.SendMessage(message);
             }
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            AppDomain.CurrentDomain.DomainUnload += CurrentDomainOnDomainUnload;
+        }
+
+        private void CurrentDomainOnDomainUnload(object sender, EventArgs eventArgs)
+        {
+            if (_engine != null)
+            {
+                _engine.SafeDispose();
+            }
+        }
+
+        void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine("Uncaught exception, shutting down.");
+            Console.WriteLine(e.ExceptionObject.ToString());
+            if (_engine != null)
+            {
+                _engine.Dispose();
+            }
         }
 
         private SpecificationEngine buildUserInterfaceEngine()
