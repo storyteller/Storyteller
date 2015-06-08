@@ -1,4 +1,5 @@
 using StoryTeller.Grammars;
+using StoryTeller.Messages;
 
 namespace StoryTeller.Engine.UserInterface
 {
@@ -13,6 +14,9 @@ namespace StoryTeller.Engine.UserInterface
 
         public void BeforeRunning(SpecExecutionRequest request)
         {
+            var total = request.Plan.Count();
+            var starting = new SpecProgress(request.Id, new Counts(), 0, total);
+            _observer.SendProgress(starting);
         }
 
         public void AfterRunning(SpecExecutionRequest request, SpecResults results, IConsumingQueue queue, SpecRunnerStatus status)

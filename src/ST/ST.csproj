@@ -79,6 +79,7 @@
     <Compile Include="Client\StartWatchingAssets.cs" />
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
+    <Compile Include="Client\WebApplicationRegistry.cs" />
     <Compile Include="Client\WebApplicationRunner.cs" />
     <Compile Include="CommandLine\PerformanceDataWriter.cs" />
     <Compile Include="CommandLine\ProjectInput.cs" />

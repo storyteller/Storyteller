@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using FubuCore;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
@@ -14,6 +15,11 @@ namespace StoryTeller.Samples
             if (Project.CurrentProfile == "blowup")
             {
                 throw new Exception("I blew up trying to create an execution context");
+            }
+
+            if (Project.CurrentProfile == "slow")
+            {
+                Thread.Sleep(45.Seconds());
             }
 
             return new SimpleExecutionContext();

@@ -63,10 +63,10 @@ namespace StoryTeller.Testing.Engine
 
 
         [Test]
-        public void spec_has_15_steps_so_15_progress_messages()
+        public void spec_has_15_steps_so_15_plus_1_for_starting_progress_messages()
         {
             theListener.MessageTypesReceived.Where(x => x == "spec-progress")
-                .Count().ShouldBe(15);
+                .Count().ShouldBe(16);
         }
 
 
