@@ -19,6 +19,7 @@ namespace StoryTeller
         private readonly State _state = new State();
         private bool _hasCriticalException;
         private readonly Timings _timings;
+        private bool _latched;
 
         public SpecContext(Specification specification, Timings timings, IResultObserver observer, StopConditions stopConditions, IExecutionContext execution)
         {
@@ -56,6 +57,7 @@ namespace StoryTeller
 
         public void Dispose()
         {
+            _latched = true;
             Reporting.As<IDisposable>().Dispose();
             _state.As<IDisposable>().Dispose();
         }
@@ -125,6 +127,8 @@ namespace StoryTeller
 
         public void LogResult<T>(T result) where T : IResultMessage
         {
+            if (_latched) return;
+
             if (result.id.IsEmpty())
                 throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
 

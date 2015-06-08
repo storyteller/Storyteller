@@ -3,7 +3,6 @@ using System.Linq;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine

@@ -288,14 +288,14 @@ function resetSubscriptions(){
 		}
 	});
 
-Postal.subscribe({
-	channel: 'engine-request',
-	topic: 'clear-all-results',
-	callback: function(){
-		ResultCache.clear();
-		publishHierarchyChanged();
-	}
-})
+	Postal.subscribe({
+		channel: 'engine-request',
+		topic: 'clear-all-results',
+		callback: function(){
+			ResultCache.clear();
+			publishHierarchyChanged();
+		}
+	})
 
 	Postal.subscribe({
 		channel: 'explorer',

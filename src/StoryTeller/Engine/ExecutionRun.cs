@@ -149,6 +149,7 @@ namespace StoryTeller.Engine
 
         public void Cancel()
         {
+            _context.Dispose();
             _request.Cancel();
             _wasCancelled = true;
             _thread.Abort();
