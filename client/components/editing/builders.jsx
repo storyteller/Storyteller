@@ -11,7 +11,12 @@ var SelectEditor = require('./select-editor');
 function toDisplay(cell, value){
 	if (value == null) return 'NULL';
 
-	return value.toString();
+	var text = value.toString();
+	if (text != '') return text;
+
+	if (cell.default) return cell.default;
+
+	return '[' + (cell.header || cell.key) + ']';
 }
 
 // think this ends up being very similar to component-loaders
