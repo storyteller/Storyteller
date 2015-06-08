@@ -69,6 +69,10 @@ td.number-cell{
 	text-align: right;
 }
 
+table.table{
+  width: auto !important;
+}
+
 #spec-progress-bar div.progress{
 	width: '800px' !important;
 	margin-top: 8px
