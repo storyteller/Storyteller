@@ -1,7 +1,17 @@
 var Postal = require('postal');
 
-function Communicator(address, continuation){
+function Communicator(address, continuation, disconnect){
 	this.socket = new WebSocket(address);
+
+	this.socket.onclose = function(){
+		console.log('The socket closed');
+		disconnect();
+	};
+
+	this.socket.onerror = function(evt){
+		console.log(JSON.stringify(evt));
+	}
+
 	this.socket.onmessage = function(evt){
 		var message = JSON.parse(evt.data);
 		console.log('Got: ' + JSON.stringify(message) + ' with topic ' + message.type);
@@ -27,7 +37,12 @@ function Communicator(address, continuation){
 	}
 
 	this.send = function(message){
-		this.socket.send(JSON.stringify(message));
+		if (this.socket.readyState != 1){
+			disconnect();
+		}
+		else {
+			this.socket.send(JSON.stringify(message));
+		}
 	}
 	
 	var self = this;

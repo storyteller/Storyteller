@@ -63,6 +63,7 @@ namespace ST.Client
 
         public void Dispose()
         {
+            _sockets.Each(x => x.Close());
             _sockets.Clear();
             if (_server != null) _server.Dispose();
 

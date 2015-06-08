@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using FubuCore;
 using FubuMVC.Core.Assets;
+using FubuMVC.Core.Runtime.Files;
 using FubuMVC.Core.UI;
 using HtmlTags;
 using ST.CommandLine;
@@ -16,14 +18,16 @@ namespace ST.Client
         private readonly FubuHtmlDocument _document;
         private readonly IPersistenceController _persistence;
         private readonly IAssetTagBuilder _tags;
+        private readonly IFubuApplicationFiles _files;
 
-        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document, IPersistenceController persistence, IAssetTagBuilder tags)
+        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document, IPersistenceController persistence, IAssetTagBuilder tags, IFubuApplicationFiles files)
         {
             _connector = connector;
             _context = context;
             _document = document;
             _persistence = persistence;
             _tags = tags;
+            _files = files;
         }
 
         public HtmlDocument Index()
@@ -35,19 +39,15 @@ namespace ST.Client
             _document.Add("div").Id("header-container");
             _document.Add("div").Id("body-pane").AddClass("container");
 
-
-
-            try
+            if (File.Exists(_files.GetApplicationPath().AppendPath("public", "stylesheets", "storyteller.css")))
             {
                 _tags.BuildStylesheetTags(new String[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"});
             }
-            catch (Exception)
+            else
             {
                 BatchResultsWriter.WriteCSS(_document);
                 _document.Head.Add("link").Attr("rel", "stylesheet").Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
-
             }
-
 
             _document.Body.Append(_document.Script("bundle.js"));
 

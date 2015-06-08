@@ -66,7 +66,10 @@ Postal.publish({
   data: Storyteller.queueState
 });
 
-var communicator = new Communicator(Storyteller.wsAddress, startRouting);
+
+var disconnect = require('./components/disconnected');
+var communicator = new Communicator(Storyteller.wsAddress, startRouting, disconnect);
+
 
 
 Postal.subscribe({
