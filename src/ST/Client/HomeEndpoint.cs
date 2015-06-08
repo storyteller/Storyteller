@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using FubuMVC.Core.Assets;
 using FubuMVC.Core.UI;
@@ -14,13 +15,15 @@ namespace ST.Client
         private readonly StorytellerContext _context;
         private readonly FubuHtmlDocument _document;
         private readonly IPersistenceController _persistence;
+        private readonly IAssetTagBuilder _tags;
 
-        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document, IPersistenceController persistence)
+        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document, IPersistenceController persistence, IAssetTagBuilder tags)
         {
             _connector = connector;
             _context = context;
             _document = document;
             _persistence = persistence;
+            _tags = tags;
         }
 
         public HtmlDocument Index()
@@ -32,8 +35,19 @@ namespace ST.Client
             _document.Add("div").Id("header-container");
             _document.Add("div").Id("body-pane").AddClass("container");
 
-            BatchResultsWriter.WriteCSS(_document);
-            _document.Head.Add("link").Attr("rel", "stylesheet").Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+
+            try
+            {
+                _tags.BuildStylesheetTags(new String[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"});
+            }
+            catch (Exception)
+            {
+                BatchResultsWriter.WriteCSS(_document);
+                _document.Head.Add("link").Attr("rel", "stylesheet").Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
+            }
+
 
             _document.Body.Append(_document.Script("bundle.js"));
 

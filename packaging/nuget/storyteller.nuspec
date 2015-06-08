@@ -19,5 +19,6 @@
     <file src="..\..\src\ST\bin\Release\*.exe" target="tools" />
     <file src="..\..\src\ST\bin\Release\*.dll" target="tools" />
     <file src="..\..\src\ST\*.js" target="tools" />
+    <file src="..\..\client\public\*.*" target="tools/public" />
   </files>
 </package>
