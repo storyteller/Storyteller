@@ -10,7 +10,7 @@ var ResultRow = React.createClass({
 			var inner = arg.buildResults(loader);
 
 			return (
-				<td>{inner}</td>
+				<td nowrap>{inner}</td>
 			);
 		});
 

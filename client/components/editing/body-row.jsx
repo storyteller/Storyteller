@@ -13,7 +13,7 @@ var BodyRow = React.createClass({
 			var cell = Cell(arg);
 
 			return (
-				<td key={cell.key}>{cell}</td>
+				<td nowrap key={cell.key}>{cell}</td>
 			);
 		});
 

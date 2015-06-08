@@ -69,6 +69,12 @@ td.number-cell{
 	text-align: right;
 }
 
+table.table{
+  width: auto !important;
+  z-index: 99999;
+  background-color: white !important;
+}
+
 #spec-progress-bar div.progress{
 	width: '800px' !important;
 	margin-top: 8px
@@ -165,15 +171,4 @@ pre.text-display{
 	position: absolute;
 }
 
-.suite-body {
-  overflow: hidden;
-}
 
-.suite-header.open + .suite-body {
-  transition: all 350ms ease-out;
-}
-
-.suite-header.closed + .suite-body {
-  transition: all 350ms ease-in;
-  max-height: 0px !important;
-}

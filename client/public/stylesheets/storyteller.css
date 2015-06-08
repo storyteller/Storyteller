@@ -71,6 +71,8 @@ td.number-cell{
 
 table.table{
   width: auto !important;
+  z-index: 99999;
+  background-color: white !important;
 }
 
 #spec-progress-bar div.progress{

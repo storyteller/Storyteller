@@ -12,7 +12,7 @@ var PreviewRow = React.createClass({
 			var key = cell.key;
 
 			return (
-				<td key={key}>{text}</td>
+				<td nowrap key={key}>{text}</td>
 			);
 		});
 
