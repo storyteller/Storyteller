@@ -17,11 +17,6 @@ namespace StoryTeller.Samples
                 throw new Exception("I blew up trying to create an execution context");
             }
 
-            if (Project.CurrentProfile == "slow")
-            {
-                Thread.Sleep(45.Seconds());
-            }
-
             return new SimpleExecutionContext();
         }
 

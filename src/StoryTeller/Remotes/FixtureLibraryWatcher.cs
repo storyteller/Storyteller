@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace StoryTeller.Remotes
@@ -7,7 +9,7 @@ namespace StoryTeller.Remotes
     {
         private readonly Action _callback;
         private DateTime _lastUpdate;
-        private FileSystemWatcher _watcher;
+        private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
         public FixtureLibraryWatcher(Action callback)
         {
@@ -18,14 +20,23 @@ namespace StoryTeller.Remotes
         {
             cleanUpWatcher();
 
-            // TODO -- also watch for changes to *.config files?
-            _watcher = new FileSystemWatcher(directory, "*.dll");
-            _watcher.Changed += fileChanged;
-            _watcher.IncludeSubdirectories = true;
-            _watcher.EnableRaisingEvents = true;
-            _watcher.NotifyFilter = NotifyFilters.LastWrite;
+            addWatcher("*.dll", directory);
+            addWatcher("*.exe", directory);
+            addWatcher("*.config", directory);
 
             _lastUpdate = DateTime.Now;
+        }
+
+        private void addWatcher(string extension, string directory)
+        {
+            var watcher = new FileSystemWatcher(directory, extension);
+            watcher.Changed += fileChanged;
+            watcher.Created += fileChanged;
+            watcher.IncludeSubdirectories = true;
+            watcher.EnableRaisingEvents = true;
+            watcher.NotifyFilter = NotifyFilters.LastWrite;
+
+            _watchers.Add(watcher);
         }
 
         private void fileChanged(object sender, FileSystemEventArgs e)
@@ -43,20 +54,20 @@ namespace StoryTeller.Remotes
 
         private void cleanUpWatcher()
         {
-            if (_watcher == null)
+            _watchers.Each(x =>
             {
-                return;
-            }
+                try
+                {
+                    x.Changed -= fileChanged;
+                    x.EnableRaisingEvents = false;
+                    x.Dispose();
+                }
+                catch (Exception)
+                {
+                }
+            });
 
-            try
-            {
-                _watcher.Changed -= fileChanged;
-                _watcher.EnableRaisingEvents = false;
-                _watcher.Dispose();
-            }
-            catch (Exception)
-            {
-            }
+            _watchers.Clear();
         }
 
         public void Dispose()
