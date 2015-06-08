@@ -54,6 +54,7 @@ namespace StoryTeller.Engine
             _executionQueue.Dispose();
             if (_planning != null) _planning.Dispose();
             if (_reader != null) _reader.Dispose();
+            _runner.Cancel();
         }
 
         public void Enqueue(SpecExecutionRequest request)

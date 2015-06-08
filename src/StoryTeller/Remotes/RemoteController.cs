@@ -99,8 +99,11 @@ namespace StoryTeller.Remotes
         public void Recycle()
         {
             _messaging.Send(new SystemRecycleStarted());
-
+           
             Teardown();
+
+            _messaging.Send(new QueueState());
+
             bootstrap(_mode).Task.ContinueWith(x =>
             {
                 _messaging.Send(x.Result);
