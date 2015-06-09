@@ -7,7 +7,7 @@ namespace ST.Docs.Samples
     {
         public SampleTag(Sample sample) : base("pre")
         {
-            Add("code").AddClass("language-" + sample.Language).Text(Environment.NewLine + sample.Text).Encoded(false);
+            Add("code").AddClass("language-" + sample.Language).Text(Environment.NewLine + sample.Text);
         }
     }
 }

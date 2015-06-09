@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using CommonMark;
+using FubuCore.CommandLine;
 using ST.Docs.Topics;
 using StructureMap.Util;
 
@@ -53,10 +55,7 @@ namespace ST.Docs.Transformation
                 position = token.LastIndex + 1;
             });
 
-            if (position < before.Length)
-            {
-                builder.Append(before.Substring(position));
-            }
+            ConsoleWriter.Write(ConsoleColor.Cyan, builder.ToString());
 
             return builder.ToString();
         }

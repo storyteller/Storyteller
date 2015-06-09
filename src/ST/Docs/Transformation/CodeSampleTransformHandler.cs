@@ -1,4 +1,5 @@
-﻿using ST.Docs.Samples;
+﻿using System;
+using ST.Docs.Samples;
 using ST.Docs.Topics;
 
 namespace ST.Docs.Transformation
@@ -21,7 +22,11 @@ namespace ST.Docs.Transformation
         {
             var sample = _cache.Find(data);
 
-            return new SampleTag(sample).ToString();
+            var subject = "<p>" + Guid.NewGuid().ToString() + "</p>";
+
+            current.Substitutions[subject] = new SampleTag(sample).ToString();
+
+            return subject;
         }
     }
 }

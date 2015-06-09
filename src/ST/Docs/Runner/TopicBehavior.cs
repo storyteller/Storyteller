@@ -1,5 +1,9 @@
+using System;
+using System.Diagnostics;
 using System.Reflection;
+using System.Text;
 using FubuCore;
+using FubuCore.CommandLine;
 using FubuMVC.Core.Behaviors;
 using FubuMVC.Core.Runtime;
 using ST.Docs.Topics;
@@ -36,11 +40,20 @@ namespace ST.Docs.Runner
         {
             var html = _generator.Generate(_topic);
 
+            var builder = new StringBuilder(html);
+            _topic.Substitutions.Each((key, value) =>
+            {
+                builder.Replace(key, value);
+            });
+
+            ConsoleWriter.Write(ConsoleColor.Green, builder.ToString());
+
             var script = _webSocketScript.Replace("%WEB_SOCKET_ADDRESS%", _settings.WebsocketAddress);
-            html = html.Replace("</head>", script + "\n</head>");
+            builder.Replace("</head>", script + "\n</head>");
 
 
-            _writer.Write(MimeType.Html, html);
+
+            _writer.Write(MimeType.Html, builder.ToString());
         }
 
         public void InvokePartial()

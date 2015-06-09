@@ -1,12 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Caching;
 using FubuCore;
+using FubuCore.Util;
 
 namespace ST.Docs.Topics
 {
     public class Topic
     {
+        public readonly Cache<string, string> Substitutions = new Cache<string, string>();
+
         private readonly IList<Topic> _children = new List<Topic>();
         public Topic Parent { get; set; }
 

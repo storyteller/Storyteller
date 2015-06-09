@@ -5,7 +5,6 @@ engine
 best_practices
 lifecycle
 language
-system_state
 instrumentation
 ci
 docs
