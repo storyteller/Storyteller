@@ -29,6 +29,8 @@ To clear any existing results in the specification editor and explorer views, us
 
 The second navigation bar in light gray immediately below the navigation bar has links for the system status and help:
 
+1. A link for "Save All Changes" appears if any specifications have local, unsaved changes.
+1. The number of specifications in the execution queue. This link is not shown if the queue is empty.
 1. A count of grammar errors with the specification language if there are any problems detected. See the section below on Grammar Errors.
 1. A link for the status of the system under test. If the system is still being loaded or recycled, the text will read "Recycling" with a spinning icon. If the system is in a ready state, the link text will read something like "Recycled at [time]" telling you when the system was last loaded. Clicking this link will bring up the system properties modal window explained below.
 1. _Search_ for a specfication or suite. More information below.
@@ -59,3 +61,20 @@ If there are any errors detected in the specification language when the system u
 ## Search for Specifications or Suites
 
 Clicking the "Search" link in the status bar, or using the `ctrl+n` or `ctrl+shift+f` keyboard shortcuts, will bring up a modal dialog with a single typeahead textbox to search for a specification or suite by name. The functionality is patterned after IntelliJ/ReSharper's `ctrl-n` finder function.
+
+
+## Queue Count and Execution Queue
+
+Clicking the queue count link will open a new page just showing what specifications are executing and queued for execution. This page provides buttons to cancel specifications one by one or to cancel all the specifications in the queue.
+
+## Progress Bar
+
+
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Creating a better look and feel for the progress bar would be an awesome pull request if anyone is interested;-)
+</div>
+
+
+If a specification is currently executing, a 3rd bar will be shown at the top of the page just below the status bar. The progress bar attempts to show the current progress of any running specification and a button to cancel the current specification. 
+
+
+

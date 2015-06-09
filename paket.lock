@@ -1,16 +1,16 @@
 NUGET
   remote: https://www.myget.org/F/fubumvc-edge
   specs:
-    Bottles (3.0.0.605)
+    Bottles (3.0.0.618)
       FubuCore (>= 1.0.0.210)
     FubuCore (2.0.0.291)
-    FubuMVC.Core (2.0.0.1912)
+    FubuMVC.Core (2.1.1.1963)
       Bottles (>= 3.0.0.595)
       FubuCore (>= 1.2.0.259)
       HtmlTags (>= 1.1.0.114)
-    FubuMVC.Katana (2.0.0.1912)
+    FubuMVC.Katana (2.1.1.1963)
       FubuMVC.Core
-    FubuMVC.StructureMap (2.0.0.1912)
+    FubuMVC.StructureMap (2.1.1.1963)
       FubuMVC.Core
       structuremap (>= 3.0.3.116)
   remote: http://nuget.org/api/v2
@@ -26,7 +26,7 @@ NUGET
     Selenium.RC (2.45.0)
     Selenium.WebDriver (2.45.0)
     Shouldly (2.4.0)
-    structuremap (3.1.4.143)
+    structuremap (3.1.5.154)
     structuremap.automocking (3.1.0.133)
       RhinoMocks (>= 3.6.1)
       structuremap (>= 3.0.0)

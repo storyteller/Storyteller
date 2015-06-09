@@ -30,7 +30,10 @@ namespace ST.Client
 
             context.Start();
 
-            _server = FubuApplication.DefaultPolicies().StructureMap(container).RunEmbeddedWithAutoPort();
+            var registry = new FubuRegistry();
+            registry.AlterSettings<DiagnosticsSettings>(_ => _.TraceLevel = TraceLevel.Verbose);
+
+            _server = FubuApplication.For(registry).StructureMap(container).RunEmbeddedWithAutoPort();
         }
 
         public string BaseAddress
