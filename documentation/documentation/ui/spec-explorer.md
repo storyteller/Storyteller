@@ -5,6 +5,8 @@ The "Specification Explorer" is the main view of the Storyteller specification e
 
 The specification explorer consists of a tree view component displaying all the suites and specifications and a vertical pane on the left that contains the controls to filter the specification tree or perform batched operations on the specifications shown on the tree.
 
+<h5><strong>The Specification Explorer page</strong></h5>
+<img src="<[url:content/images/spec-explorer.png]>" width="100%"/>
 
 ## Specification State
 
@@ -58,17 +60,30 @@ The specification tree can be filtered by any combination of result state (none,
 
 To add a new top-level suite, click the "new suite" link just to the right of the title "All Specifications" at the top of the tree view to bring up the modal dialog for adding a suite. Note that you can only add top level suites when you are on the home page of the specification explorer.
 
+<h5><strong>The add suite dialog</strong></h5>
+<img src="<[url:content/images/new-suite.png]>" width="100%"/>
+
+
 ## Adding Child Suites
 
 Click the "new child suite" link just to the right of any suite node in the tree view to open up the modal dialog for adding child suites.
+
+<h5><strong>The add a child suite dialog</strong></h5>
+<img src="<[url:content/images/new-child-suite.png]>" width="100%"/>
 
 ## Adding Specifications
 
 Click the "new spec" link to the right of any suite node to bring up a modal dialog to add a specification to that suite.
 
+<h5><strong>The new specification dialog</strong></h5>
+<img src="<[url:content/images/new-specification.png]>" width="100%"/>
+
 ## Cloning an Existing Specification
 
 Clicking the "clone" link to the right of any Specification leaf in the tree will bring up a modal dialog to enter the name for the new Specification. When cloning a specification, Storyteller copies the entire structure of the original Specification but *always sets the lifecycle of the new specification to "Acceptance"*.
+
+<h5><strong>Clone a specification dialog</strong></h5>
+<img src="<[url:content/images/clone-specification.png]>" width="100%"/>
 
 ## Deleting Specifications
 

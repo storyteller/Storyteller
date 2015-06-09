@@ -1,8 +1,13 @@
 <!--Title:The Application Shell-->
 
-## The Navigation Bar
 
-At the top of each page is a navigation bar split into two horizontal lines. The top bar (in black) has these options from left to right:
+At the top of each page is a navigation bar split into two horizontal lines: 
+
+<h5><strong>Navigation Bar and Status Bar</strong></h5>
+<img src="<[url:content/images/navigation-bar.png]>" width="100%"/>
+
+
+The top bar (in black) has these options from left to right:
 
 1. The _Storyteller 3_ name is a link back to the entry page
 1. The name of the active <[linkto:documentation/engine/system_under_test]>. If the editor tool was launched with a "profile" from the command line options, that profile will be shown after the system name in parantheses. Clicking the system name will reload the main <[linkto:documentation/ui/spec-explorer;title=specification editor]>.
@@ -10,7 +15,10 @@ At the top of each page is a navigation bar split into two horizontal lines. The
 1. The "Documentation" link will open this website in another tab
 1. The _Commands_ menu with options discussed in sections below
 
+<br />  
 
+<h5><strong>The <i>Commands</i> menu</strong></h5>
+ <img src="<[url:content/images/commands.png]>" width="100%"/>
 
 ## Reloading Specifications
 
@@ -37,12 +45,25 @@ The second navigation bar in light gray immediately below the navigation bar has
 1. The _Help_ link will open a modal window listing the available keyboard shortcuts. Use "ctrl+/" as a shortcut to bring up this window at any time.
 
 
+## Keyboard Shortcut Lookup
+
+Click the _Help_ link at top or type `ctrl+/` to open the help dialog that lists the available keyboard shortcuts.
+
+
+<h5><strong>The keyboard help dialog</strong></h5>
+<img src="<[url:content/images/help.png]>" width="100%"/>
+
+
 
 ## System Properties
 
 Clicking the "Recyled at [time]" menu will bring up a modal dialog explaining how Storyteller has built the testing AppDomain to connect to the system under test that will look like this sample:
 
-<dl class="dl-horizontal" data-reactid=".3l.1.0.0.1:0.0"><dt data-reactid=".3l.1.0.0.1:0.0.0">System Name</dt><dd data-reactid=".3l.1.0.0.1:0.0.1">StoryTeller.Samples.GrammarSystem</dd><dt data-reactid=".3l.1.0.0.1:0.0.2:0">ConfigFile</dt><dd data-reactid=".3l.1.0.0.1:0.0.2:1">C:\code\storyteller\src\Storyteller.Samples\App.config</dd><dt data-reactid=".3l.1.0.0.1:0.0.2:2">BaseDirectory</dt><dd data-reactid=".3l.1.0.0.1:0.0.2:3">C:\code\storyteller\src\Storyteller.Samples</dd><dt data-reactid=".3l.1.0.0.1:0.0.2:4">BinPath</dt><dd data-reactid=".3l.1.0.0.1:0.0.2:5">bin\Debug</dd><dt data-reactid=".3l.1.0.0.1:0.0.2:6">Profile</dt><dd data-reactid=".3l.1.0.0.1:0.0.2:7">Safari</dd></dl>
+<h5><strong>System Properties Dialog</strong></h5>
+<img src="<[url:content/images/system-properties.png]>" width="100%"/>
+
+<br />
+<br />
 
 In previous usage, the selection of the AppDomain configuration file and/or the bin path for loading assemblies has caused some confusion. Use this dialog to see what Storyteller is doing behind the scenes.
 
@@ -56,11 +77,19 @@ If there are any errors encountered when trying to load or recycle the system un
 
 If there are any errors detected in the specification language when the system under test is loaded or recycled, the status bar will display a link for grammar errors with a count. Clicking this link will take you to a page that lists all the problems detected, which `Fixture` has the error, and if applicable, which `Grammar`. 
 
+Some sample grammar errors from Storyteller's internal tests is shown below:
+
+<h5><strong>The grammar errors screen</strong></h5>
+<img src="<[url:content/images/grammar-errors.png]>" width="100%"/>
+
 
 
 ## Search for Specifications or Suites
 
 Clicking the "Search" link in the status bar, or using the `ctrl+n` or `ctrl+shift+f` keyboard shortcuts, will bring up a modal dialog with a single typeahead textbox to search for a specification or suite by name. The functionality is patterned after IntelliJ/ReSharper's `ctrl-n` finder function.
+
+<h5><strong>The search dialog</strong></h5>
+<img src="<[url:content/images/search.png]>" width="100%"/>
 
 
 ## Queue Count and Execution Queue
