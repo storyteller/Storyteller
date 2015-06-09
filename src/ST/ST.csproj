@@ -140,6 +140,7 @@
     <Compile Include="Docs\Topics\TopicLoader.cs" />
     <Compile Include="Docs\Transformation\CodeSampleTransformHandler.cs" />
     <Compile Include="Docs\Transformation\HtmlGenerator.cs" />
+    <Compile Include="Docs\Transformation\ImageTransformHandler.cs" />
     <Compile Include="Docs\Transformation\ITransformHandler.cs" />
     <Compile Include="Docs\Transformation\LinkToTransformHandler.cs" />
     <Compile Include="Docs\Transformation\ParentBreadcrumbsTransformHandler.cs" />
