@@ -1,15 +1,12 @@
 <!--Title:Automated Testing Best Practices-->
 
-The Storyteller team has over a decade of experience in building system-level integration tests and business-facing executable specifications. As such, the Storyteller team has developed some strong opinions about how this kind of testing is best accomplished. The feature set and implementation of Storyteller was guided by these opinions.
+The Storyteller team has over a decade of experience in building system-level integration tests and business-facing executable specifications. As such, the Storyteller team has developed some strong opinions about how this kind of testing is best accomplished and those opinions naturally guided the feature set and approach of Storyteller.
 
 ## Executable Specifications
 
-One of the most pernicious sources of wasted effort and project failures in software development is the result of misinterpreting vaguely worded or insufficiently detailed requirements. Far too many times in my own career I have found myself arguing with business analysts or testers because they simply interpreted a requirements document differently than the developers did when they built the code.
+One of the most pernicious sources of wasted effort and project failures in software development is the result of vaguely worded or insufficiently detailed requirements. Far too many times in my own career I have found myself arguing with business analysts or testers because they simply interpreted a requirements document differently than the developers did when they built the code.
 
 We believe that the practice of _Executable Specifications_ makes for a superior form of requirements by forcing the stakeholders and development team members to agree on detailed scenarios that can be unambiguously verified against the running system. 
-
-All of this might be a long winded way of saying **try to capture your detailed requirements as Storyteller specifications** in a collaborative effort between the development team (including testers) and business stakeholders or users.
- 
 
 
 

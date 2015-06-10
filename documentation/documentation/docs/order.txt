@@ -1,6 +1,7 @@
+getting_started
+authoring
 navigation
 outlines
-topics
 samples
 theme
 running
