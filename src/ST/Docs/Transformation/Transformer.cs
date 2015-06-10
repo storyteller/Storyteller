@@ -55,7 +55,10 @@ namespace ST.Docs.Transformation
                 position = token.LastIndex + 1;
             });
 
-            ConsoleWriter.Write(ConsoleColor.Cyan, builder.ToString());
+             if (position < before.Length)
+             {
+                 builder.Append(before.Substring(position));
+             }
 
             return builder.ToString();
         }

@@ -56,6 +56,13 @@ namespace ST.Docs.Exporting
                 
 
                 var text = _generator.Generate(topic);
+
+                // Hoakum
+                topic.Substitutions.Each((key, value) =>
+                {
+                    text = text.Replace(key, value);
+                });
+
                 fileSystem.WriteStringToFile(directory.AppendPath(path), text);
             });
         }

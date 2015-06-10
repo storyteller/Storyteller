@@ -46,8 +46,6 @@ namespace ST.Docs.Runner
                 builder.Replace(key, value);
             });
 
-            ConsoleWriter.Write(ConsoleColor.Green, builder.ToString());
-
             var script = _webSocketScript.Replace("%WEB_SOCKET_ADDRESS%", _settings.WebsocketAddress);
             builder.Replace("</head>", script + "\n</head>");
 
