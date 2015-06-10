@@ -58,18 +58,6 @@ var SuiteHeader = React.createClass({
 		);
 	},
 
-	openFolder: function (e) {
-		this.props.suite.toggleClosed();
-
-		e.stopPropagation();
-		e.preventDefault();
-
-
-		this.setState({ 'foo':3 });
-
-
-	},
-
 	render: function(){
 		var suite = this.props.suite;
 
@@ -87,7 +75,7 @@ var SuiteHeader = React.createClass({
 
 		return (
 			<div key={suite.path} className={openClass + ' suite-header'}>
-				<a href='#' onClick={this.openFolder}>
+				<a href='#' onClick={this.props.toggle}>
 					{openClosed}
 				</a>
 				<a href={href} className='suite-name'>{this.props.suite.name}</a> ({count}) 
@@ -126,10 +114,27 @@ var SuiteBody = React.createClass({
 
 var SuiteNode = React.createClass({
 	render: function(){
+		var body = null;
+
+		if (this.props.suite.isExpanded){
+			body = (<SuiteBody suite={this.props.suite} />);
+		}
+
+		var toggle = e => {
+			this.props.suite.toggleClosed();
+
+			e.stopPropagation();
+			e.preventDefault();
+
+
+			this.setState({ 'foo':3 });
+		}
+
+
 		return (
 			<div className='suite-node'>
-				<SuiteHeader suite={this.props.suite} />
-				<SuiteBody suite={this.props.suite} />
+				<SuiteHeader suite={this.props.suite} toggle={toggle} />
+				{body}
 			</div>
 		);
 	}

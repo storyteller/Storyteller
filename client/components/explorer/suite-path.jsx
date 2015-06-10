@@ -25,6 +25,7 @@ var SuitePath = React.createClass({
 		var items = new ArrayList();
 		if (this.props.linkToLeaf){
 			var link = (<SuiteLink suite={suite} />);
+			items.insertFirst(link);
 		}
 		else {
 			var span = (<span>{suite.name}</span>)

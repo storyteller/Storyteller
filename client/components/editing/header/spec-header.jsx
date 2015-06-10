@@ -22,6 +22,7 @@ var SpecHeader = React.createClass({
 				<Col xs={12} md={12}>
 				    <h3 ref="header" className={headerClass}>
 				    	<SuitePath suite={this.props.spec.suite} linkToLeaf={true} />
+						<span> / </span>
 						<SpecTitle spec={this.props.spec} />
 
 					</h3>
