@@ -1,0 +1,9 @@
+<Spec id="1789826e-e8a0-4712-a7ac-6e99771b2e3e" maxRetries="0" tags="" lifecycle="Acceptance" name="Splash">
+  <Splash id="33279d82-7510-4035-9aa6-4f23f2c9c0d4">
+    <AsMember />
+    <WantRequirements />
+    <AreHumanReadable />
+    <ThatAreAutomated />
+    <SoThat />
+  </Splash>
+</Spec>

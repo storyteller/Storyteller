@@ -51,6 +51,7 @@
     <Compile Include="Fixtures\LoggingFixture.cs" />
     <Compile Include="Fixtures\SampleFixture.cs" />
     <Compile Include="Fixtures\SetsFixture.cs" />
+    <Compile Include="Fixtures\SplashFixture.cs" />
     <Compile Include="Fixtures\StateFixture.cs" />
     <Compile Include="Fixtures\StorytellerAssertSample.cs" />
     <Compile Include="Fixtures\TableFixture.cs" />
