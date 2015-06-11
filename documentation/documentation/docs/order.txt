@@ -1,9 +1,11 @@
 getting_started
-authoring
-linking
-navigation
-outlines
-samples
-theme
 running
 export
+theme
+authoring
+navigation
+linking
+samples
+images
+outlines
+
