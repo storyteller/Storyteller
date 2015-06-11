@@ -30,7 +30,9 @@ Our philosophy is that the act of testing is more about reducing project risk by
 
 The system state for specifications should, *as much as feasible*, be done by using the actual internal services and 
 
-
+* don't test logic through the UI
+* what about page objects?
+* Good failures
 
 * Self-contained specs
 * Set up your own state
