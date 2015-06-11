@@ -6,11 +6,11 @@ The secondary feature set of Storyteller is the means to author and publish "Liv
 
 The Storyteller documentation consists of three small applications:
 
-1. An embedded web application in the `ST.exe` tool distributed with Storyteller that provides an auto-reloading preview of the documentation.
+1. An embedded web application in the `ST.exe` tool (`st doc-run`) distributed with Storyteller that provides an auto-reloading preview of the documentation.
 
-1. A command line tool bundled into `ST.exe` that generates static html from your raw documentation that can be published on the web (the Storyteller documentation is hosted in [GitHub Pages](https://pages.github.com)) or in a form that is browsable from the file system so that the content could be included in downloadable packages.
+1. A command line tool (`st doc-export`) bundled into `ST.exe` that generates static html from your raw documentation that can be published on the web (the Storyteller documentation is hosted in [GitHub Pages](https://pages.github.com)) or in a form that is browsable from the file system so that the content could be included in downloadable packages.
 
-1. A command line tool bundled into `ST.exe` to quickly generate the shell of a documentation structure.
+1. A command line tool (`st doc-seed`) bundled into `ST.exe` to quickly generate the shell of a documentation structure.
 
 Documentation content is written the the popular [Markdown syntax](http://daringfireball.net/projects/markdown/syntax) with some Storyteller specific customizations for navigation elements, embedding code samples, or Storyteller specifications. 
 
