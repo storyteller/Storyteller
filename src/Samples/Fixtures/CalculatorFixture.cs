@@ -88,4 +88,54 @@ namespace Samples.Fixtures
         // ENDSAMPLE
     }
 
+
+
+    /*
+    // SAMPLE: CalculatorFixture
+    public class CalculatorFixture : Fixture
+    {
+        private readonly Calculator _calculator = new Calculator();
+
+        [FormatAs("Start with {value}")]
+        public void StartWith(double value)
+        {
+            _calculator.Value = value;
+        }
+
+        [FormatAs("Add {value}")]
+        public void Add(double value)
+        {
+            _calculator.Add(value);
+        }
+
+
+        [FormatAs("Subtract {value}")]
+        public void Subtract(double value)
+        {
+            _calculator.Subtract(value);
+        }
+
+        [FormatAs("Multiply by {value}")]
+        public void MultiplyBy(double value)
+        {
+            _calculator.MultiplyBy(value);
+        }
+
+        [FormatAs("Divide by {value}")]
+        public void DivideBy(double value)
+        {
+            _calculator.DivideBy(value);
+        }
+
+        [FormatAs("The value should be {value}")]
+        public double TheValueShouldBe()
+        {
+            return _calculator.Value;
+        }
+
+    }
+    // ENDSAMPLE
+
+     */
+
 }
