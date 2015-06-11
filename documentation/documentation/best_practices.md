@@ -47,14 +47,20 @@ Why do we say this?
 * It's nice to find problems in the real data access code too
 
 
+## Specifications should be Self Contained
 
-* what about page objects?
-* Good failures
+We strongly believe that specifications should be responsible for setting up whatever input state they require. Having automated tests rely on some sort of shared, static data set to be set up by something else, somewhere has been very brittle in our experience. Shared testing data sets can easily cause more harm than good when you find yourself wanting to add new data for a new test that ends up breaking other tests. As much as possible, we think you should strive for specifications that are completely isolated from the other specifications. 
 
-* Self-contained specs
-* Set up your own state
-* Go in through the front door
-* Only set up data that's germane to the spec
-* Be declarative
-* Separate the Expression of the Specification from the Innards
-* Treat it as a Specification/Living Documentation
+In our opinion, having the test input in the same Storyteller specification as the expected results makes the specifications much easier to understand because the cause and effects are in the same place. Because of this philosophy, the Storyteller team has deeply invested in features that make setting up the system state as easy to express as possible.
+
+## Only Express Facts that are Germane to the Specification
+
+Try not to allow too many technical implementation details leak into the *expression* of the specification. Hide details like starting up a web server, or executing a command line for batch programming, or initializing a polling system behind the language of the specification. Remember that you ideally want Storyteller specifications to act as system documentation. We also recommend that the Storyteller specifications be as decoupled from the details of the system architecture as possible so as to not hinder the evolution of your architecture. Put another way, you want to be able to change your system architecture and have the expressed goal of the Specification remain the same.
+
+
+For data setup, using Storyteller can make tests easier to understand by making data setup much more declarative than it would be if you were writing raw SQL scripts or writing directly to a data access layer. We advise you to be aggressive with default values in your fixtures and to quietly set up fields in the Fixture code that are required by your database constraints, but are not really relevant to your specification.
+
+See [My Opinions on Data Setup for Functional Tests](http://jeremydmiller.com/2013/01/26/my-opinions-on-data-setup-for-functional-tests/) for more explanation of this thinking.
+
+
+

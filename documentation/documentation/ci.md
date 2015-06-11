@@ -38,15 +38,15 @@ To that end, Storyteller 3 changes the retry policy a bit to [fail faster](http:
 * If in the course of executing a Specification the Storyteller engine hits a "critical" or "catastropic" exception, the specification will no longer be retried even if it has not exceeded its maxiumum number of retries. A "critical" exception is any failure from a `Fixture.SetUp()`, `Fixture.TearDown()`, or the `StorytellerCriticalException` being thrown by grammars. 
 * If the system under test itself fails to start or cannot create an execution context, the entire batch of specifications is aborted, but the results are still shown.
 
-TODO(see instrumentation, which should involve exception throwing now too)
+See <[linkto:documentation/instrumentation]> for more information on adding and using instrumentation against your Storyteller specifications.
 
 
-TODO(link to the lifecycle topic when it exists)
 
 ## Lifecycle
 
 Storyteller has always treated _Acceptance_ and _Regression_ specifications somewhat differently in the command line execution. _Acceptance_ specifications are executed strictly for informational purposes, are never retried in the case of failures, and do not count toward the success or failure of the execution run. _Regression_ specifications on the other hand can be retried and any number of _Regression_ failures will cause the `st run` command to return a non-zero return code denoting a failure.
 
+See <[linkto:documentation/lifecycle]> for more information.
 
 ## Results
 
