@@ -5,12 +5,12 @@ Quickstart
 
 [![Join the chat at https://gitter.im/storyteller/Storyteller](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/storyteller/Storyteller?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Join the chat at https://gitter.im/DarthFubuMVC/StoryTeller2](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/DarthFubuMVC/StoryTeller2?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 After doing a new git clone of the code, run `npm run build` at the command line from the root directory.
 
 Getting started with the code
 =============================
+
+UPDATE: Storyteller seems to work just fine with io.js as well, but please tell us if you encounter any issues developing with io.js instead of node.js.
 
 The Storyteller code consists of two parts, a web based client written in Javascript and the actual specification engine and a self-contained web host written in C#. In order to work with the Storyteller code, you'll need to have both an installation of [Node.js v12](https://nodejs.org) with [npm](https://www.npmjs.com) and .Net 4.5 on your box. To start working with the code, first run the build with the command `npm run build` or if you're on Windows, use the `build.cmd` script. Running this command will:
 
