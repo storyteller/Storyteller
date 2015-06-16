@@ -16,10 +16,11 @@ The hook in your code that Storyteller uses to govern this lifecycle is the `ISy
 
 <[sample:ISystem]>
 
-The `ISystem` interface only has three methods:
+The `ISystem` interface only has four methods:
 1. `Start() : CellHandling` -- this is a hook to do any kind of system bootstrapping or activation and an opportunity to put together any custom cell conversions and system wide selection lists. This method is only called **once** each time the testing `AppDomain` is loaded.
 1. `CreateContext() : IExecutionContext` -- this method is executed as the first step in executing a specification. Use this method to perform any globally applicable state setup actions that will apply to all specifications.
 1. `Dispose()` -- Clean up after yourself! This method is called when the Storyteller application is shut down and anytime Storyteller tries to recycle the system under test.
+1. `Warmup() : Task` -- For systems that might need a little head start in bootstrapping, this method gives Storyteller a chance to "warm up" the system under test before you run any actual specifications
 
 The `IExecutionContext` only lives for the lifetime of a specification execution and is disposed immediately after the specification runs. The `Dispose()` method is called even if the specification times out or aborts early with a critical exception.
 
