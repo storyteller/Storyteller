@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using FubuCore;
 using OpenQA.Selenium;
 using ST.Client;
@@ -30,6 +31,11 @@ namespace Specifications
         {
             //_webDriver.Dispose();
             //_runner.Dispose();
+        }
+
+        public Task Warmup()
+        {
+            return Task.FromResult(string.Empty);
         }
     }
 

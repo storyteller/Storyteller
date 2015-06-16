@@ -33,5 +33,10 @@ namespace InvalidExamples
         {
             throw new NotImplementedException();
         }
+
+        public Task Warmup()
+        {
+            return Task.FromResult(string.Empty);
+        }
     }
 }

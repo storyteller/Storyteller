@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using FubuCore;
@@ -34,6 +36,9 @@ namespace StoryTeller
 
         public SpecRunner(string specDirectory = null)
         {
+            Debug.WriteLine("SpecRunner is starting up for system " + typeof(T).FullName);
+            Debug.WriteLine("using {0} as the configuration file", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
             SpecDirectory = specDirectory ?? GuessSpecDirectory();
 
             _system = new T();

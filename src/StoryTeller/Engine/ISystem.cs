@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace StoryTeller.Engine
 {
@@ -20,6 +21,12 @@ namespace StoryTeller.Engine
         /// </summary>
         /// <returns></returns>
         IExecutionContext CreateContext();
+
+        /// <summary>
+        /// Use to bootstrap the system when it first starts
+        /// </summary>
+        /// <returns></returns>
+        Task Warmup();
     }
     // ENDSAMPLE
 }

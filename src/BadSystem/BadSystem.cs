@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using StoryTeller;
-using StoryTeller.Conversion;
 using StoryTeller.Engine;
 
 namespace BadSystem
@@ -11,7 +9,6 @@ namespace BadSystem
     {
         public void Dispose()
         {
-            
         }
 
         public CellHandling CreateCellHandling()
@@ -29,9 +26,9 @@ namespace BadSystem
             throw new DivideByZeroException();
         }
 
-        public Task Recycle()
+        public Task Warmup()
         {
-            return Task.FromResult("ok");
+            return Task.FromResult(string.Empty);
         }
     }
 }

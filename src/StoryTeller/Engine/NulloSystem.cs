@@ -31,6 +31,11 @@ namespace StoryTeller.Engine
         public void Dispose()
         {
         }
+
+        public Task Warmup()
+        {
+            return Task.FromResult(string.Empty);
+        }
     }
 
     public class SimpleExecutionContext : IExecutionContext

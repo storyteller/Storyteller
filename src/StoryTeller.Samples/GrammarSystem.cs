@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using FubuCore;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
@@ -38,6 +39,16 @@ namespace StoryTeller.Samples
             return handling;
         }
         // ENDSAMPLE
+
+        public Task Warmup()
+        {
+            if (Project.CurrentProfile == "slow")
+            {
+                return Task.Delay(10.Seconds());
+            }
+
+            return Task.FromResult(string.Empty);
+        }
     }
 
     // SAMPLE: PlayerConverter
