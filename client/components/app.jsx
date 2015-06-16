@@ -15,6 +15,7 @@ var Header = require('./header/header');
 var GrammarErrors = require('./grammars/grammar-errors');
 var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
 var SuiteExplorer = require('./explorer/suite-explorer');
+var ResultsTable = require('./results/results-table');
 
 var FixtureTable = require('./fixture-table');
 var uuid = require('node-uuid');
@@ -53,6 +54,7 @@ var routes = (
     <Route name="spec-editor" path="/spec/:mode/:id" handler={SpecEditorWrapper} />
     <Route name="suite-explorer" path="/suite/*" handler={SuiteExplorer} />
     <Route name="fixture" path="/fixture/:key" handler={FixtureTable} />
+    <Route name="results" path="/results" handler={ResultsTable} />
     <DefaultRoute handler={SpecExplorer}/>
   </Route>
 );

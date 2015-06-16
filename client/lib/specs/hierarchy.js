@@ -254,6 +254,12 @@ handlers['spec-execution-completed'] = function(data){
 		topic: 'spec-changed',
 		data: {id: data.id}
 	});
+
+	Postal.publish({
+		channel: 'results',
+		topic: 'results-changed',
+		data: {}
+	})
 }
 
 handlers['queue-state'] = data => {
@@ -297,6 +303,12 @@ function resetSubscriptions(){
 		callback: function(){
 			ResultCache.clear();
 			publishHierarchyChanged();
+
+			Postal.publish({
+				channel: 'results',
+				topic: 'results-changed',
+				data: {}
+			})
 		}
 	})
 

@@ -74,6 +74,7 @@ module.exports = React.createClass({
 					<Nav right={true}>
 				          <NavItem eventKey="1" href="#/language">Fixtures and Grammars</NavItem>
 				          <NavItem eventKey="2" href="#/docs">Documentation</NavItem>
+				          <NavItem eventKey="3" href="#/results">Results</NavItem>
 				        <DropdownButton eventKey={1} title="Commands">
 				          <NavItem eventKey="1" id="force-recycle" onClick={toCommand('force-recycle')}>Recycle System</NavItem>
 				          <NavItem eventKey="2" onClick={toCommand('reload-specs')}>Reload All Specs from Disk</NavItem>

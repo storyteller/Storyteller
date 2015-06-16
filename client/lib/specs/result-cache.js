@@ -27,6 +27,10 @@ var ResultsCache = {
 		this.results = {}
 	},
 
+	latestResults(){
+		return _.values(this.results).map(x => x.first());
+	},
+
 	record(completed){
 		if (!this.results.hasOwnProperty(completed.id)){
 			this.results[completed.id] = new ArrayList();
@@ -34,6 +38,7 @@ var ResultsCache = {
 
 		setCounts(completed);
 
+		completed.timestamp = Date.now();
 		this.results[completed.id].insertAt(0, completed);
 	},
 
