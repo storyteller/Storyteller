@@ -2,6 +2,10 @@
 	margin-bottom: 0px !important;
 }
 
+div.active{
+  border: none !important;
+}
+
 div.suite-body {
 	margin-left: 20px;
 }

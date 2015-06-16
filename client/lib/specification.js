@@ -108,8 +108,6 @@ function Specification(data, library){
 			elements.push(loader.errorBox({title: 'Context Creation Failure in the engine', error: this.results.context.error}));
 		}
 
-
-		// TODO -- use _.flatten some day
 		this.steps.forEach(step => {
 			var element = step.buildResults(loader);
 			if (element instanceof Array){
@@ -120,13 +118,31 @@ function Specification(data, library){
 			}
 		});
 
+		
+		var tabs = [];
+
+
+		tabs.push(loader.tab(elements, 0, 'Specification'));
+
 		if (this.results.performance){
-			elements.push(loader.perfTable({records: this.results.performance}));
+			var table = loader.perfTable({records: this.results.performance});
+			tabs.push(loader.tab(table, 1, 'Performance'));
 		}
 
-		var logs = (this.results.logging || []).map(x => loader.logComponent(x));
+		var logs = (this.results.logging || []);
+		for (var i = 0; i < logs.length; i++){
+			var log = logs[i];
+			if (log.count > 0){
+				var logElement = loader.logComponent(log);
+				var tab = loader.tab(logElement, i + 2, log['short_title']);
+				
+				tabs.push(tab);
+			}
+		}
 
-		return elements.concat(logs);
+		var tabbedArea = loader.tabbedArea({defaultActiveKey: 0, children: tabs});
+
+		return [tabbedArea];
 	}
 
 

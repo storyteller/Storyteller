@@ -25,6 +25,8 @@ function StubLoader(){
 	this.add('errorRow');
 	this.add('stepAdder');
 	this.add('tableContext');
+	this.add('tab');
+	this.add('tabbedArea');
 
 	this.buildComponents = function(){
 		return [];

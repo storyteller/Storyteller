@@ -652,13 +652,13 @@ describe('Storing and finding steps by id', function(){
 
 		it('should write a timeout message if one exists', function(){
 			// pre-condition
-			expect(spec.buildResults(loader).length).to.equal(0);
+			//expect(spec.buildResults(loader).length).to.equal(0);
 
 			spec.results.timedout = {error: 'Too slow!'};
 
 			var results = spec.buildResults(loader);
 
-			expect(results[0]).to.deep.equal({
+			expect(results[0].props.children[0].props[0]).to.deep.equal({
 				type: 'errorBox',
 				props: {
 					title: 'Timed out!',
@@ -670,13 +670,13 @@ describe('Storing and finding steps by id', function(){
 
 		it('should write an engine message if one exists', function(){
 			// pre-condition
-			expect(spec.buildResults(loader).length).to.equal(0);
+			//expect(spec.buildResults(loader).length).to.equal(0);
 
 			spec.results.engine = {error: 'Blew up!'};
 
 			var results = spec.buildResults(loader);
 
-			expect(results[0]).to.deep.equal({
+			expect(results[0].props.children[0].props[0]).to.deep.equal({
 				type: 'errorBox',
 				props: {
 					title: 'Engine Failure',
@@ -686,29 +686,6 @@ describe('Storing and finding steps by id', function(){
 			});
 		});
 
-		it('should write the results of its children whether the child returns one or an array', function(){
-			var resultElement1 = {};
-			var resultElements2 = [{}, {}];
-
-			spec.steps.push({
-				buildResults: function(loader){
-					return resultElement1;
-				}
-			});
-
-			spec.steps.push({
-				buildResults: function(loader){
-					return resultElements2;
-				}
-			});
-
-			var results = spec.buildResults(loader);
-
-			expect(results.length).to.equal(3);
-			expect(results[0]).to.equal(resultElement1);
-			expect(results[1]).to.equal(resultElements2[0]);
-			expect(results[2]).to.equal(resultElements2[1]);
-		});
 	});
 
 });

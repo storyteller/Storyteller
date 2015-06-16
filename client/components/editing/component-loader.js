@@ -1,5 +1,6 @@
 var React = require('react');
 var _ = require('lodash');
+var {TabbedArea, TabPane} = require('react-bootstrap');
 
 class Loader {
 	constructor(parent){
@@ -85,6 +86,19 @@ results.add('perfTable', 'perf-table');
 results.add('logComponent', 'log-component');
 results.add('setResultsTable', 'set-results-table');
 results.add('noResults', 'no-results');
+
+results.tabbedArea = props => {
+	return TabbedArea(props)
+};
+
+results.tab = (inner, key, title) => {
+	var children = [inner];
+	if (inner instanceof Array){
+		children = inner;
+	}
+
+	return TabPane({children: children, eventKey: key, tab: title});
+};
 
 results.stepAdder = x => null;
 results.tableContext = x => null;
