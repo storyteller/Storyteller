@@ -19,6 +19,7 @@ class ResultsPresenter extends EditorPresenter{
 		}
 		else {
 			var spec = this.spec;
+			var suite = spec.suite;
 			
 			if (QueueState.stateFor(this.id) != 'running'){
 				console.log('Using historical result data');
@@ -35,6 +36,8 @@ class ResultsPresenter extends EditorPresenter{
 				}
 
 				spec = new Specification(completed.data, Hierarchy.fixtures());
+				spec.suite = suite;
+
 				spec.readResults(completed.results);
 			}
 

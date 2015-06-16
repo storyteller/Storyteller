@@ -201,7 +201,9 @@ handlers['hierarchy-loaded'] = function(data){
 	top = new Suite(data.hierarchy, null, library);
 	specs = {};
 
-	top.allSpecs().forEach(x => specs[x.id] = x);
+	top.allSpecs().forEach(x => {
+		specs[x.id] = x;
+	});
 
 	publishHierarchyChanged();
 }
