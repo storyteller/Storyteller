@@ -16,7 +16,7 @@ namespace StoryTeller.Engine
         public BatchRecord[] records;
         public FixtureModel[] fixtures;
 
-        public string time = DateTime.Now.ToString();
+        public string time = DateTime.Now.ToString("g");
         public string system;
         public string suite;
 
