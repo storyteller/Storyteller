@@ -6,6 +6,8 @@ namespace StoryTeller.Results
     {
         string ToHtml();
         string Title { get; }
+        string ShortTitle { get; }
+        int Count { get; }
     }
     // ENDSAMPLE
 }

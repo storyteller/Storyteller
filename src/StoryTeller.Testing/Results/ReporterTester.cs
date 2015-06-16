@@ -40,6 +40,11 @@ namespace StoryTeller.Testing.Results
 
             reports[1].html.ShouldContain("<li>3</li>");
             reports[1].html.ShouldContain("<li>4</li>");
+
+            reports[0].count.ShouldBe(2);
+
+
+            
         }
 
         [Test, Explicit]
@@ -71,6 +76,7 @@ namespace StoryTeller.Testing.Results
     public class DivReport : Report
     {
         private readonly HtmlTag _body = new HtmlTag("body");
+        private int _count;
 
         public string ToHtml()
         {
@@ -79,6 +85,7 @@ namespace StoryTeller.Testing.Results
 
         public DivReport Add(string text)
         {
+            _count++;
             _body.Add("div").Text(text);
             return this;
         }
@@ -87,11 +94,22 @@ namespace StoryTeller.Testing.Results
         {
             get { return "Divs"; }
         }
+
+        public string ShortTitle
+        {
+            get { return "Divs"; }
+        }
+
+        public int Count
+        {
+            get { return _count; }
+        }
     }
 
     public class ListReport : Report
     {
         private readonly HtmlTag _ul = new HtmlTag("ul");
+        private int _count;
 
         public string ToHtml()
         {
@@ -107,6 +125,16 @@ namespace StoryTeller.Testing.Results
         public string Title
         {
             get { return "Lists"; }
+        }
+
+        public string ShortTitle
+        {
+            get { return "Lists"; }
+        }
+
+        public int Count
+        {
+            get { return _count; }
         }
     }
 }

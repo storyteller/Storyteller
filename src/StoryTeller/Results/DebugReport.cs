@@ -1,19 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using HtmlTags;
 
 namespace StoryTeller.Results
 {
-    public class DebugReport : Report, IDisposable
+    public class DebugReport : TraceListener, Report, IDisposable
     {
         private readonly StringWriter _writer = new StringWriter();
-        private TextWriterTraceListener _listener;
+        private int _count = 0;
 
         public void StartListening()
         {
-            _listener = new TextWriterTraceListener(_writer);
-            Debug.Listeners.Add(_listener);
+            Debug.Listeners.Add(this);
         }
 
         public string ToHtml()
@@ -26,9 +26,30 @@ namespace StoryTeller.Results
             get { return "Debug Output"; }
         }
 
+        public string ShortTitle
+        {
+            get { return "Debug"; }
+        }
+
+        public int Count
+        {
+            get { return _count; }
+        }
+
         public void Dispose()
         {
-            Debug.Listeners.Remove(_listener);
+            Debug.Listeners.Remove(this);
+        }
+
+        public override void Write(string message)
+        {
+            _writer.Write(message);
+        }
+
+        public override void WriteLine(string message)
+        {
+            _count++;
+            _writer.WriteLine(message);
         }
     }
 }

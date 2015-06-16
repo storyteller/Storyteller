@@ -127,6 +127,7 @@ namespace StoryTeller.Samples.Fixtures
     public class ListReport : Report
     {
         private readonly HtmlTag _ul = new HtmlTag("ul").AddClass("list-group");
+        private int _count;
 
         public string ToHtml()
         {
@@ -135,6 +136,7 @@ namespace StoryTeller.Samples.Fixtures
 
         public ListReport Add(string text)
         {
+            _count++;
             _ul.Add("li").AddClass("list-group-item").Text(text);
             return this;
         }
@@ -142,6 +144,16 @@ namespace StoryTeller.Samples.Fixtures
         public string Title
         {
             get { return "Some Numbers"; }
+        }
+
+        public string ShortTitle
+        {
+            get { return "Numbers"; }
+        }
+
+        public int Count
+        {
+            get { return _count; }
         }
     }
     // ENDSAMPLE

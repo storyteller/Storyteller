@@ -70,7 +70,9 @@ namespace StoryTeller.Results
                 return new HtmlReport
                 {
                     html = x.ToHtml(),
-                    title = x.Title
+                    title = x.Title,
+                    ShortTitle = x.ShortTitle,
+                    count = x.Count
                 };
             }).Union(_reports).ToArray();
         }
