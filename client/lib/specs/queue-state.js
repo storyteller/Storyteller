@@ -3,10 +3,28 @@ var Counts = require('./counts');
 
 var queued = {running: null, queued: []};
 
+var hasChanges = function(original, next){
+	if (!(original.running === next.running)){
+		return true;
+	}
+
+	if (original.queued.length != next.queued.length) return true;
+
+	var one = _.sortBy(original.queued, x => x.toString());
+	var two = _.sortBy(next.queued, x => x.toString());
+
+
+
+	for (var i = 0; i < one.length; i++){
+		if (one[i] != two[i]) return true;
+	}
+
+	return false;
+}
 
 module.exports = {
 	clear(){
-		queued = {}
+		queued = {queued:[]}
 	},
 
 	stateFor(id){
@@ -37,7 +55,13 @@ module.exports = {
 	},
 
 	store(data){
+		if (!data.queued) data.queued = [];
+
+		var changed = hasChanges(queued, data);
+
 		queued = data;
+
+		return changed;
 	},
 
 }

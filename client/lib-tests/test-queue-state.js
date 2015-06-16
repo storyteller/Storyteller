@@ -26,4 +26,44 @@ describe('The QueueState', () => {
 		expect(QueueState.stateFor('baz')).to.equal('queued');
 		expect(QueueState.stateFor('foo')).to.equal('none');
 	});
+
+	it('knows when there are no changes in queued specs', () => {
+		QueueState.store({queued: ['bar', 'baz']});
+
+		//expect(QueueState.store({queued: ['bar', 'baz']})).to.be.false;
+		expect(QueueState.store({queued: ['baz', 'bar']})).to.be.false;
+	});
+
+	it('knows there are no changes to the running spec', () => {
+		QueueState.store({queued: [], running: 'bar'});
+		expect(QueueState.store({queued: [], running: 'bar'})).to.be.false;
+	});
+
+	it('knows there are changes when the running spec changes', () => {
+		QueueState.store({queued: [], running: 'baz'});
+		expect(QueueState.store({queued: [], running: 'bar'})).to.be.true;
+	});
+
+	it('knows there are changes when the running spec changes 2', () => {
+		QueueState.store({queued: [], running: null});
+		expect(QueueState.store({queued: [], running: 'bar'})).to.be.true;
+	});
+
+	it('knows there are changes when the running spec changes 3', () => {
+		QueueState.store({queued: [], running: 'baz'});
+		expect(QueueState.store({queued: [], running: null})).to.be.true;
+	});
+
+	it('knows when there are changes to the queued specs', () => {
+		QueueState.store({queued: ['bar', 'baz']});
+
+		expect(QueueState.store({queued: ['bar', 'baz', 'foo']})).to.be.true;
+	});
+
+
+	it('knows when there are changes to the queued specs', () => {
+		QueueState.store({queued: ['bar', 'baz', 'wrong']});
+
+		expect(QueueState.store({queued: ['bar', 'baz', 'foo']})).to.be.true;
+	});
 });

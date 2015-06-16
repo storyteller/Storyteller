@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Timers;
 using FubuCore;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
@@ -17,9 +19,13 @@ namespace StoryTeller.Remotes
         private ISystem _system;
         private readonly IList<IDisposable> _services = new List<IDisposable>();
 
+        private readonly Timer _timer = new Timer(5000){Enabled = false};
+
         public void Dispose()
         {
-            _services.Each(x => x.Dispose());
+            _timer.Enabled = false;
+            _timer.SafeDispose();
+            _services.ToArray().Each(x => x.Dispose());
             _services.Clear();
         }
 
@@ -50,9 +56,18 @@ namespace StoryTeller.Remotes
                 _system = Activator.CreateInstance(systemType).As<ISystem>();
                 _services.Add(_system);
 
-                _engine = mode == EngineMode.Batch
-                    ? buildBatchedEngine(project.TracingStyle)
-                    : buildUserInterfaceEngine();
+                if (mode == EngineMode.Interactive)
+                {
+                    _engine = buildUserInterfaceEngine();
+                    _timer.AutoReset = true;
+                    
+                    _timer.Elapsed += (sender, args) => _controller.As<EngineController>().SendQueueState();
+                    _timer.Enabled = true;
+                }
+                else
+                {
+                    _engine = buildBatchedEngine(project.TracingStyle);
+                }
 
 
                 _engine.Start(project.StopConditions);

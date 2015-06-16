@@ -255,7 +255,8 @@ handlers['spec-execution-completed'] = function(data){
 }
 
 handlers['queue-state'] = data => {
-	QueueState.store(data);
+	var hasChanges = QueueState.store(data);
+	if (!hasChanges) return;
 
 	queue = data.queued.map(id => specs[id]);
 
