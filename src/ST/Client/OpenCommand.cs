@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Threading;
 using FubuCore.CommandLine;
 
 namespace ST.Client
@@ -11,6 +12,8 @@ namespace ST.Client
         {
             input.CreateMissingSpecFolder();
 
+            var reset = new ManualResetEvent(false);
+
             using (var runner = new WebApplicationRunner(input))
             {
                 runner.Start();
@@ -18,19 +21,22 @@ namespace ST.Client
 
                 Process.Start(runner.BaseAddress);
 
-                tellUsersWhatToDo();
-                ConsoleKeyInfo key = Console.ReadKey();
-                while (key.Key != ConsoleKey.Q)
+                Console.CancelKeyPress += (s, e) =>
                 {
-                }
+                    reset.Set();
+                };
+
+                tellUsersWhatToDo();
+                reset.WaitOne();
             }
 
             return true;
         }
 
+
         private static void tellUsersWhatToDo()
         {
-            Console.WriteLine("Press 'q' to quit");
+            Console.WriteLine("Type 'ctrl + c' to quit");
         }
     }
 }
