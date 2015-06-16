@@ -42,6 +42,11 @@ namespace StoryTeller.Samples
 
         public Task Warmup()
         {
+            if (Project.CurrentProfile == "warmup-failure")
+            {
+                throw new Exception("Warmup failed!");
+            }
+
             if (Project.CurrentProfile == "slow")
             {
                 return Task.Delay(10.Seconds());

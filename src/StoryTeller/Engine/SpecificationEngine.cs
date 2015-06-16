@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FubuCore;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
@@ -22,6 +23,7 @@ namespace StoryTeller.Engine
         private ConsumingQueue _reader;
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
+        private Task _warmup;
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
         {
@@ -35,6 +37,8 @@ namespace StoryTeller.Engine
                     return;
                 }
 
+                _warmup.Wait(30.Seconds());
+
                 observer.SpecStarted(request);
                 var results = _runner.Execute(request, _executionQueue );
 
@@ -46,6 +50,13 @@ namespace StoryTeller.Engine
                 }
             });
 
+            _warmup = _system.Warmup().ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                {
+                    _runner.MarkAsInvalid(t.Exception);
+                }
+            });
         }
 
         public void Dispose()

@@ -1,3 +1,5 @@
+using System;
+
 namespace StoryTeller.Engine
 {
     public interface ISpecRunner
@@ -7,5 +9,6 @@ namespace StoryTeller.Engine
         void Cancel(string id = null);
         bool IsRunning();
         string RunningSpecId();
+        void MarkAsInvalid(Exception ex);
     }
 }

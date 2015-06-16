@@ -1,9 +1,7 @@
 using System;
 using System.Linq;
-using System.Threading;
 using FubuCore;
 using FubuCore.CommandLine;
-using StoryTeller.Grammars;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
@@ -47,7 +45,7 @@ namespace StoryTeller.Engine
             request.Plan.Attempts++;
 
             var timings = request.StartNewTimings();
-            
+
             SpecResults results = null;
 
             try
@@ -57,12 +55,7 @@ namespace StoryTeller.Engine
             }
             catch (Exception ex) // Any exception that bubbles up is telling us that the runner is invalid
             {
-                Status = SpecRunnerStatus.Invalid;
-
-                ConsoleWriter.Write(ConsoleColor.Yellow,
-                    "Failed to create an execution context. No specifications can be processed until this is addressed");
-                ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
-                EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(ex)));
+                MarkAsInvalid(ex);
 
                 results = buildResultsForContextCreationFailure(request, ex, timings);
             }
@@ -75,6 +68,16 @@ namespace StoryTeller.Engine
             }
 
             return results;
+        }
+
+        public void MarkAsInvalid(Exception ex)
+        {
+            Status = SpecRunnerStatus.Invalid;
+
+            ConsoleWriter.Write(ConsoleColor.Yellow,
+                "Failed to create an execution context. No specifications can be processed until this is addressed");
+            ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
+            EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(ex)));
         }
 
         private static SpecResults buildResultsForContextCreationFailure(SpecExecutionRequest request, Exception ex,
@@ -95,7 +98,6 @@ namespace StoryTeller.Engine
                 }
             };
         }
-
 
 
         public void Cancel(string id = null)
@@ -130,6 +132,4 @@ namespace StoryTeller.Engine
             _stopConditions = conditions;
         }
     }
-
-
 }
