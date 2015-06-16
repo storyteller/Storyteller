@@ -8,6 +8,7 @@ var Postal = require('postal');
 
 var CommandLink = require('./../explorer/command-link');
 var icons = require('./../icons');
+var SuitePath = require('./../explorer/suite-path');
 
 
 var cancelAll = e => {
@@ -35,6 +36,8 @@ var QueueItem = React.createClass({
 		return (
 			<div id={divId}>
 				{icon}
+				<SuitePath suite={this.props.spec.suite} linkToLeaf={true} />
+				<span> / </span>
 				<span className="queued-spec-name">{this.props.spec.title}</span>
 				<CommandLink createMessage={createMessage} text="cancel" />
 			</div>

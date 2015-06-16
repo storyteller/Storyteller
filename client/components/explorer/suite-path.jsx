@@ -33,7 +33,7 @@ var SuitePath = React.createClass({
 		}
 
 		var s = suite.parent;
-		while (!s.isHierarchy){
+		while (s && !s.isHierarchy){
 			var spacer = (<span> / </span>);
 			items.insertFirst(spacer);
 

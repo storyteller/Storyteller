@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using FubuCore;
+using FubuCore.CommandLine;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Engine.UserInterface;
@@ -23,10 +24,17 @@ namespace StoryTeller.Remotes
 
         public void Dispose()
         {
-            _timer.Enabled = false;
-            _timer.SafeDispose();
-            _services.ToArray().Each(x => x.Dispose());
-            _services.Clear();
+            try
+            {
+                _timer.Enabled = false;
+                _timer.SafeDispose();
+                _services.ToArray().Each(x => x.SafeDispose());
+                _services.Clear();
+            }
+            catch (Exception e)
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, e.ToString());
+            }
         }
 
         public override object InitializeLifetimeService()

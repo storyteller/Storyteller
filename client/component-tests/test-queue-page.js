@@ -96,7 +96,7 @@ describe('The Queue Page', function(){
 		var element = component.getDOMNode();
 		var specElement = $('#queued-spec-general2', element);
 
-		React.addons.TestUtils.Simulate.click($('a', specElement).get(0));
+		React.addons.TestUtils.Simulate.click($('a.explorer-command', specElement).get(0));
 
 		var message = findPublishedMessage('cancel-spec');
 		expect(message.id).to.equal('general2');

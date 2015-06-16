@@ -12,7 +12,7 @@ class Suite{
 
 		var self = this;
 
-		this.suites = (data.suites || []).map(x => new Suite(x, self, library));
+		this.suites = (data.suites || []).map(x => new Suite(x, this, library));
 		this.specs = (data.specs || []).map(x => {
 			if (x instanceof Spec) return x;
 
