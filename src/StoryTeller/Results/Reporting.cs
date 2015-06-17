@@ -21,7 +21,7 @@ namespace StoryTeller.Results
         /// </summary>
         /// <param name="title"></param>
         /// <param name="html"></param>
-        void Log(string title, string html);
+        void Log(string title, string html, string shortTitle = null);
 
         /// <summary>
         /// Explicitly add a new IReporter to the
@@ -44,12 +44,14 @@ namespace StoryTeller.Results
             return _reporters[typeof (T)].As<T>();
         }
 
-        public void Log(string title, string html)
+        public void Log(string title, string html, string shortTitle = null)
         {
             _reports.Add(new HtmlReport
             {
                 html = html,
-                title = title
+                title = title,
+                count = 1,
+                ShortTitle = shortTitle
             });
         }
 
