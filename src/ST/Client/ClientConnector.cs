@@ -20,9 +20,9 @@ namespace ST.Client
         private readonly ILogger _logger;
         private readonly IRemoteController _controller;
         private readonly IEnumerable<ICommand> _commands;
-        private readonly int _port;
+        private int _port;
         private readonly IList<IWebSocketConnection> _sockets = new List<IWebSocketConnection>();
-        private readonly string _webSocketsAddress;
+        private string _webSocketsAddress;
         private WebSocketServer _server;
 
         public ClientConnector(ILogger logger, IRemoteController controller, IEnumerable<ICommand> commands)
@@ -30,10 +30,9 @@ namespace ST.Client
             _logger = logger;
             _controller = controller;
             _commands = commands;
-            _port = PortFinder.FindPort(8181);
+            _port = PortFinder.FindPort(8200);
 
-            // TODO -- will only work locally. What do we do otherwise?
-            _webSocketsAddress = "ws://127.0.0.1:" + _port;
+
         }
 
         public int Port
@@ -48,6 +47,10 @@ namespace ST.Client
 
         public void Start()
         {
+            _port = PortFinder.FindPort(8201);
+            // TODO -- will only work locally. What do we do otherwise?
+            _webSocketsAddress = "ws://127.0.0.1:" + _port;
+
             Console.WriteLine("Publishing client messages via web sockets at " + _webSocketsAddress);
 
             _server = new WebSocketServer(_webSocketsAddress);
