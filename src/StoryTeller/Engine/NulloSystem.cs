@@ -70,5 +70,10 @@ namespace StoryTeller.Engine
         {
             // Nothing
         }
+
+        public void BeforeExecution(ISpecContext context)
+        {
+            // Nothing
+        }
     }
 }

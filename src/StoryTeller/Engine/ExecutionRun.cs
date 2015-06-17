@@ -122,6 +122,15 @@ namespace StoryTeller.Engine
             if (_request.IsCancelled) return;
 
             _context = new SpecContext(_request.Specification, _timings, _request.Observer, _stopConditions, _execution);
+            try
+            {
+                _execution.BeforeExecution(_context);
+            }
+            catch (Exception e)
+            {
+                _context.LogException(_request.Id, e, "BeforeExecution");
+            }
+
             _context.Reporting.As<Reporting>().StartDebugListening();
             var executor = _mode.BuildExecutor(_request.Plan, _context);
 

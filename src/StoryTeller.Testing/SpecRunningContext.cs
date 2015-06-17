@@ -67,6 +67,11 @@ namespace StoryTeller.Testing
                 return _services.GetInstance<T>();
             }
 
+            public void BeforeExecution(ISpecContext context)
+            {
+                
+            }
+
             public void AfterExecution(ISpecContext context)
             {
                 // Nothing

@@ -61,6 +61,11 @@ namespace Specifications
             return _services.GetInstance<T>();
         }
 
+        public void BeforeExecution(ISpecContext context)
+        {
+            // Nothing
+        }
+
         public void AfterExecution(ISpecContext context)
         {
             // Nothing
