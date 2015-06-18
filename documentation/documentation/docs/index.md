@@ -1,7 +1,7 @@
 <!--Title:Living Documentation Generation-->
 <!--Url:docs-->
 
-The secondary feature set of Storyteller is the means to author and publish "Living Documentation" for code-centric projects. The documentation authoring and publishing is somewhat inspired by Read The Docs](http://readthedocs.org). The primary philosophy guiding this tooling has been to make it as easy as possible to keep the documentation synchronized with the API it documents and quick to update.
+The secondary feature set of Storyteller is the means to author and publish "Living Documentation" for code-centric projects. The documentation authoring and publishing is somewhat inspired by [Read The Docs](http://readthedocs.org). The primary philosophy guiding this tooling has been to make it as easy as possible to keep the documentation synchronized with the API it documents and quick to update.
 
 
 The Storyteller documentation consists of three small applications:
