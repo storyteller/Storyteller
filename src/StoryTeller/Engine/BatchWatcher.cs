@@ -13,24 +13,30 @@ namespace StoryTeller.Engine
 
         public BatchWatcher(IEnumerable<Specification> specs)
         {
-            specs.Each(x => _records.Add(x.id, new BatchRecord{specification = x}));
+            specs.Each(x => _records.Add(x.id, new BatchRecord {specification = x}));
             _task = new TaskCompletionSource<IEnumerable<BatchRecord>>();
+            CompleteCheck();
         }
 
-        public Task<IEnumerable<BatchRecord>>  Task
+        public Task<IEnumerable<BatchRecord>> Task
         {
             get { return _task.Task; }
         }
-        
+
         public void SpecHandled(SpecificationPlan plan, SpecResults specResults)
         {
             var record = _records[plan.Specification.id];
             record.results = specResults;
             record.specification = plan.Specification;
-
-            if (IsCompleted()) _task.SetResult(_records.Values.ToArray());
+            CompleteCheck();
         }
-         
+
+        private void CompleteCheck()
+        {
+            if (IsCompleted())
+                _task.SetResult(_records.Values.ToArray());
+        }
+
 
         public bool IsCompleted()
         {
