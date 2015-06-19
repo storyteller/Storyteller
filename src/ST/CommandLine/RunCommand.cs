@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.Linq;
 using FubuCore;
 using FubuCore.CommandLine;
 using StoryTeller.Engine;
 using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
@@ -23,6 +24,22 @@ namespace ST.CommandLine
 
         public override bool Execute(RunInput input)
         {
+            try
+            {
+                var top = HierarchyLoader.ReadHierarchy(input.Path);
+                var specs = input.BatchRunRequest.Filter(top);
+
+                if (!specs.Any())
+                {
+                    ConsoleWriter.Write(ConsoleColor.Yellow, "Warning: No specs found!");
+                }
+            }
+            catch (SuiteNotFoundException ex)
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, ex.Message);
+                return false;
+            }
+
             var controller = input.BuildRemoteController();
             var task = controller.Start(EngineMode.Batch).ContinueWith(t =>
             {
@@ -32,7 +49,6 @@ namespace ST.CommandLine
                     systemRecycled.WriteSystemUsage();
                     return false;
                 }
-
 
                 writeSystemUsage(systemRecycled);
                 var execution = input.StartBatch(controller);
@@ -61,7 +77,6 @@ namespace ST.CommandLine
                 results.system = systemRecycled.system_name;
                 results.time = DateTime.Now.ToString();
                 results.fixtures = systemRecycled.fixtures;
-
 
                 var document = BatchResultsWriter.BuildResults(results);
                 Console.WriteLine("Writing results to " + input.ResultsPathFlag);
