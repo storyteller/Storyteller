@@ -24,6 +24,19 @@ namespace StoryTeller.Testing
         }
 
         [Test]
+        public void log_exception_captures_it_in_the_Exceptions_report()
+        {
+            var ex = new NotImplementedException("No go");
+
+            theContext.Reporting.ReporterFor<ExceptionReport>().Count.ShouldBe(0);
+            theContext.LogException("1", ex);
+
+            theContext.Reporting.ReporterFor<ExceptionReport>().Count.ShouldBe(1);
+
+            theContext.Reporting.ReporterFor<ExceptionReport>().ToHtml().ShouldContain("No go");
+        }
+
+        [Test]
         public void log_exception_does_the_counts()
         {
             theContext.LogException("1", new NotImplementedException());
