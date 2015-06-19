@@ -141,6 +141,8 @@ namespace StoryTeller
 
         public void LogException(string id, Exception ex, object position = null)
         {
+            Reporting.ReporterFor<ExceptionReport>().Log(ex);
+
             if (ex is StorytellerCriticalException)
             {
                 _hasCriticalException = true;
@@ -189,4 +191,6 @@ namespace StoryTeller
             return context;
         }
     }
+
+
 }

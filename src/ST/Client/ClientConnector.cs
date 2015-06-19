@@ -47,21 +47,46 @@ namespace ST.Client
 
         public void Start()
         {
-            _port = PortFinder.FindPort(8201);
+            bool connected = false;
+            int attempts = 0;
+            while (!connected && attempts < 5)
+            {
+                connected = tryStart();
+                attempts++;
+            }
+
+        }
+
+        private bool tryStart()
+        {
+            var increment = new Random(5).Next(1, 50);
+            _port = PortFinder.FindPort(_port + increment);
+
             // TODO -- will only work locally. What do we do otherwise?
             _webSocketsAddress = "ws://127.0.0.1:" + _port;
 
-            Console.WriteLine("Publishing client messages via web sockets at " + _webSocketsAddress);
-
-            _server = new WebSocketServer(_webSocketsAddress);
-            _server.Start(socket =>
+            try
             {
-                socket.OnOpen = () => _sockets.Add(socket);
+                
 
-                socket.OnClose = () => _sockets.Remove(socket);
+                _server = new WebSocketServer(_webSocketsAddress);
+                _server.Start(socket =>
+                {
+                    socket.OnOpen = () => _sockets.Add(socket);
 
-                socket.OnMessage = HandleJson;
-            });
+                    socket.OnClose = () => _sockets.Remove(socket);
+
+                    socket.OnMessage = HandleJson;
+                });
+
+                Console.WriteLine("Publishing client messages via web sockets at " + _webSocketsAddress);
+                return true;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Failed to open web sockets to " + _webSocketsAddress + ", trying another port");
+                return false;
+            }
         }
 
         public void Dispose()
