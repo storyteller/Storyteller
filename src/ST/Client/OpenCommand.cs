@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using FubuCore;
 using FubuCore.CommandLine;
 
 namespace ST.Client
@@ -21,8 +22,14 @@ namespace ST.Client
 
                 Process.Start(runner.BaseAddress);
 
+                AppDomain.CurrentDomain.DomainUnload += (sender, args) =>
+                {
+                    runner.SafeDispose();
+                };
+
                 Console.CancelKeyPress += (s, e) =>
                 {
+                    Console.WriteLine("Shutdown detected, tearing down the testing harness...");
                     reset.Set();
                 };
 
