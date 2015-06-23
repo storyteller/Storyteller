@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require("react");
-var Cell = require('./cell');
+var TableCell = require('./table-cell');
 var DeleteGlyph = require('./delete-glyph');
 var Icons = require('./../icons');
 var Copy = Icons['copy'];
@@ -10,11 +10,9 @@ var BodyRow = React.createClass({
 		var tds = this.props.cells.map(cell => {
 			var arg = this.props.step.args.find(cell.key);
 
-			var cell = Cell(arg);
+			var cell = TableCell(arg);
 
-			return (
-				<td nowrap key={cell.key}>{cell}</td>
-			);
+			return cell;
 		});
 
 		var clickClone = e => {
