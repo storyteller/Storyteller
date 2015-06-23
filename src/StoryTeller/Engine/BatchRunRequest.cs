@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
@@ -15,12 +16,13 @@ namespace StoryTeller.Engine
         {
             if (Lifecycle == Lifecycle.Any && Suite.IsEmpty()) return top.GetAllSpecs();
 
-            IEnumerable<Specification> specs = null;
+            IEnumerable<Specification> specs;
 
             if (Suite.IsNotEmpty())
             {
                 var suite = top.suites.FirstOrDefault(x => x.name == Suite);
-                if (suite == null) return new Specification[0];
+                if (suite == null)
+                    throw new SuiteNotFoundException(Suite, top);
 
                 specs = suite.GetAllSpecs();
             }
@@ -34,9 +36,13 @@ namespace StoryTeller.Engine
                 specs = specs.Where(x => x.Lifecycle == Lifecycle);
             }
 
-            
-
             return specs.ToArray();
         }
+    }
+
+    public class SuiteNotFoundException : Exception
+    {
+        public SuiteNotFoundException(string suite, Suite top)
+            : base("Unable to find suite '{0}' in {1}".ToFormat(suite, top.Folder)) { }
     }
 }

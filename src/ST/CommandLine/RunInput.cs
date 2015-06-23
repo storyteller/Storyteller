@@ -30,14 +30,22 @@ namespace ST.CommandLine
         [Description("Dump the raw JSON history of the batch run to the specified path")]
         public string DumpFlag { get; set; }
 
-        public Task<BatchRunResponse> StartBatch(RemoteController controller)
+        private BatchRunRequest _batchRunRequest;
+        public BatchRunRequest BatchRunRequest
         {
-            var request = new BatchRunRequest
+            get
             {
-                Lifecycle = LifecycleFlag,
-                Suite = WorkspaceFlag
-            };
+                return _batchRunRequest ?? (_batchRunRequest = new BatchRunRequest
+                {
+                    Lifecycle = LifecycleFlag,
+                    Suite = WorkspaceFlag
+                });
+            }
+        }
 
+        public Task<BatchRunResponse> StartBatch(IRemoteController controller)
+        {
+            var request = BatchRunRequest;
             return controller.Send(request).AndWaitFor<BatchRunResponse>();
         }
     }
