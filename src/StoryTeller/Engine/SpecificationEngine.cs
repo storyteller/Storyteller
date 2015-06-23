@@ -87,7 +87,7 @@ namespace StoryTeller.Engine
             _runner.Cancel(id);
         }
 
-        private Task<SystemRecycled> tryToStart()
+        private SystemRecycled tryToStart()
         {
             CellHandling cellHandling = null;
             try
@@ -106,24 +106,21 @@ namespace StoryTeller.Engine
                     error = ex.ToString()
                 };
 
-                return Task.FromResult(message);
+                return message;
             }
 
-            return FixtureLibrary.CreateForAppDomain(cellHandling)
-                .ContinueWith(t =>
-                {
-                    var library = t.Result;
 
-                    startTheConsumingQueues(library);
+            var library = FixtureLibrary.CreateForAppDomain(cellHandling);
 
-                    return new SystemRecycled
-                    {
-                        success = true,
-                        fixtures = library.Models.GetAll().ToArray(),
-                        system_name = _system.ToString(),
-                        name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
-                    };
-                });
+            startTheConsumingQueues(library);
+
+            return new SystemRecycled
+            {
+                success = true,
+                fixtures = library.Models.GetAll().ToArray(),
+                system_name = _system.ToString(),
+                name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
+            };
 
             
         }
@@ -151,7 +148,8 @@ namespace StoryTeller.Engine
             _runner.UseStopConditions(stopConditions);
             _executionQueue.Start();
 
-            tryToStart().ContinueWith(t => EventAggregator.SendMessage(t.Result));
+            var recycled = tryToStart();
+            EventAggregator.SendMessage(recycled);
         }
 
     }

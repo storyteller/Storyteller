@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using FubuCore;
 using HtmlTags;
 using StoryTeller.Engine;
@@ -42,12 +43,10 @@ namespace StoryTeller
             SpecDirectory = specDirectory ?? GuessSpecDirectory();
 
             _system = new T();
-            var task = FixtureLibrary.CreateForAppDomain(_system.Start());
+            _library = FixtureLibrary.CreateForAppDomain(_system.Start());
             _hierarchy = HierarchyLoader.ReadHierarchy(SpecDirectory).ToHierarchy();
-            
-            task.Wait();
 
-            _library = task.Result;
+            _warmup = _system.Warmup();
 
         }
 
@@ -85,11 +84,16 @@ namespace StoryTeller
         }
 
         public readonly StopConditions StopConditions = new StopConditions();
+        private readonly Task _warmup;
 
         public SpecResults Execute(Specification specification)
         {
+            
             var plan = specification.CreatePlan(_library);
             var timings = new Timings();
+
+            _warmup.Wait(1.Minutes());
+
             timings.Start(specification);
 
             IExecutionContext execution = null;

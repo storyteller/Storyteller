@@ -15,11 +15,8 @@ namespace StoryTeller.Testing.Grammars
         [Test]
         public void builds_for_all_the_non_hidden_fixtures()
         {
-            var task = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
+            var library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
             
-            task.Wait();
-
-            var library = task.Result;
 
             library.Fixtures["Open"].ShouldBeOfType<OpenFixture>();
 

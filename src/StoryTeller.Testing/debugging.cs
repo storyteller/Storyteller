@@ -13,13 +13,12 @@ namespace StoryTeller.Testing
         [Test]
         public void serialize_fixtures()
         {
-            var task = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
-            task.Wait();
+            var library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
 
             // CreateLocation
             // AddressVerification
 
-            var fixtureModels = task.Result.Models.GetAll().ToArray();
+            var fixtureModels = library.Models.GetAll().ToArray();
 
             var json = JsonSerialization.ToJson(fixtureModels);
 

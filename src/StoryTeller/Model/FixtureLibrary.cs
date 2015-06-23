@@ -44,7 +44,7 @@ namespace StoryTeller.Model
 
         
 
-        public static Task<FixtureLibrary> CreateForAppDomain(CellHandling cellHandling)
+        public static FixtureLibrary CreateForAppDomain(CellHandling cellHandling)
         {
             var currentDomain = AppDomain.CurrentDomain;
             var assemPath = currentDomain.BaseDirectory;
@@ -56,23 +56,21 @@ namespace StoryTeller.Model
 
 
 
-            IEnumerable<Task<CompiledFixture>> fixtures = AssembliesFromPath(assemPath, x => referencesStoryteller(x))
+            var fixtures = AssembliesFromPath(assemPath, referencesStoryteller)
                 .SelectMany(FixtureTypesFor)
                 .Select(
-                    type => Task.Factory.StartNew(() => CreateCompiledFixture(cellHandling, type)));
+                    type => CreateCompiledFixture(cellHandling, type));
 
-            return Task.WhenAll(fixtures).ContinueWith(results =>
+
+            var library = new FixtureLibrary();
+
+            fixtures.Each(x =>
             {
-                var library = new FixtureLibrary();
-
-                results.Result.Each(x =>
-                {
-                    library.Fixtures[x.Fixture.Key] = x.Fixture;
-                    library.Models[x.Fixture.Key] = x.Model;
-                });
-
-                return library;
+                library.Fixtures[x.Fixture.Key] = x.Fixture;
+                library.Models[x.Fixture.Key] = x.Model;
             });
+
+            return library;
         }
 
         private static bool referencesStoryteller(Assembly x)

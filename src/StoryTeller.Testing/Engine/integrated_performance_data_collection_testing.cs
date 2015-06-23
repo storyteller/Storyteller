@@ -84,10 +84,7 @@ namespace StoryTeller.Testing.Engine
         {
             _system = new T();
 
-            var task = FixtureLibrary.CreateForAppDomain(_system.Start());
-            task.Wait(15.Seconds());
-
-            _library = task.Result;
+            _library = FixtureLibrary.CreateForAppDomain(_system.Start());
         }
 
         public void Dispose()

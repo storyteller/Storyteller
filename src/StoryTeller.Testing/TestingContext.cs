@@ -15,7 +15,7 @@ namespace StoryTeller.Testing
             _library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
         }
 
-        private static readonly Task<FixtureLibrary> _library;
+        private static readonly FixtureLibrary _library;
 
         private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() =>
         {
@@ -29,16 +29,7 @@ namespace StoryTeller.Testing
 
         public static FixtureLibrary Library
         {
-            get
-            {
-                _library.Wait();
-                if (_library.IsFaulted)
-                {
-                    throw _library.Exception;
-                }
-
-                return _library.Result;
-            }
+            get { return _library; }
         }
 
         public static Suite Hierarchy
