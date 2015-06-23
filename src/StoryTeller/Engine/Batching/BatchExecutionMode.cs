@@ -42,7 +42,10 @@ namespace StoryTeller.Engine.Batching
 
             if (specification.Lifecycle == Lifecycle.Acceptance) return false;
 
-            return specification.MaxRetries > (results.Attempts - 1);
+
+
+            return specification.MaxRetries > (results.Attempts - 1) ||
+                   Project.CurrentMaxRetries > (results.Attempts);
         }
     }
 }

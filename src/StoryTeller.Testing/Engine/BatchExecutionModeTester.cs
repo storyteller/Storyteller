@@ -15,6 +15,8 @@ namespace StoryTeller.Testing.Engine
 
         protected override void beforeEach()
         {
+            Project.CurrentProject = new Project{MaxRetries = 0};
+
             theSpecification = new Specification();
             theResults = new SpecResults
             {
@@ -28,7 +30,7 @@ namespace StoryTeller.Testing.Engine
         public void never_retry_a_spec_marked_acceptance()
         {
             theSpecification.Lifecycle = Lifecycle.Acceptance;
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
 
@@ -37,7 +39,7 @@ namespace StoryTeller.Testing.Engine
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
             theResults.HadCriticalException = true;
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
         [Test]
@@ -45,7 +47,7 @@ namespace StoryTeller.Testing.Engine
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
             theStatus = SpecRunnerStatus.Invalid;
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
         [Test]
@@ -55,14 +57,28 @@ namespace StoryTeller.Testing.Engine
             theResults.Attempts = 1;
 
             theSpecification.MaxRetries = 0;
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
 
             theSpecification.MaxRetries = 1;
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), true);
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(true);
 
             theResults.Attempts = 2;
             theSpecification.MaxRetries = 1;
-            ShouldBeTestExtensions.ShouldBe(ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus), false);
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
+        }
+
+        [Test]
+        public void retry_if_the_number_of_attempts_is_less_than_the_project_minimum()
+        {
+            theSpecification.Lifecycle = Lifecycle.Regression;
+            theResults.Attempts = 1;
+
+            theSpecification.MaxRetries = 0;
+            Project.CurrentProject.MaxRetries = 2;
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(true);
+
+            theResults.Attempts = 2;
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
     }

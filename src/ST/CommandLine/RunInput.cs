@@ -31,21 +31,20 @@ namespace ST.CommandLine
         public string DumpFlag { get; set; }
 
         private BatchRunRequest _batchRunRequest;
-        public BatchRunRequest BatchRunRequest
+
+        public BatchRunRequest GetBatchRunRequest()
         {
-            get
+            return _batchRunRequest ?? (_batchRunRequest = new BatchRunRequest
             {
-                return _batchRunRequest ?? (_batchRunRequest = new BatchRunRequest
-                {
-                    Lifecycle = LifecycleFlag,
-                    Suite = WorkspaceFlag
-                });
-            }
+                Lifecycle = LifecycleFlag,
+                Suite = WorkspaceFlag
+            });
         }
 
         public Task<BatchRunResponse> StartBatch(IRemoteController controller)
         {
-            var request = BatchRunRequest;
+            
+            var request = GetBatchRunRequest();
             return controller.Send(request).AndWaitFor<BatchRunResponse>();
         }
     }

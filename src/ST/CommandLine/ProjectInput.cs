@@ -39,6 +39,9 @@ namespace ST.CommandLine
         [Description("Optional. Override the config file selection of the Storyteller test running AppDomain")]
         public string ConfigFlag { get; set; }
 
+        [Description("Sets a minimum number of retry attempts for this execution")]
+        public int RetriesFlag { get; set; }
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
@@ -59,6 +62,7 @@ namespace ST.CommandLine
                 controller.Project.TracingStyle = "TeamCity";
             }
 
+            controller.Project.MaxRetries = RetriesFlag;
             controller.Project.Profile = ProfileFlag;
 
             if (ConfigFlag.IsNotEmpty())

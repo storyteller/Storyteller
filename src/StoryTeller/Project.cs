@@ -18,6 +18,11 @@ namespace StoryTeller
             get { return CurrentProject == null ? null : CurrentProject.Profile; }
         }
 
+        public static int CurrentMaxRetries
+        {
+            get { return CurrentProject == null ? 0 : CurrentProject.MaxRetries; }
+        }
+
         public static readonly string FILE = "storyteller.config";
 
         public string SystemTypeName { get; set; }
@@ -26,6 +31,7 @@ namespace StoryTeller
         public string ConfigFile { get; set; }
         public string Profile { get; set; }
         public static Project CurrentProject { get; set; }
+        public int MaxRetries { get; set; }
 
         public StopConditions StopConditions = new StopConditions();
 

@@ -27,7 +27,7 @@ namespace ST.CommandLine
             try
             {
                 var top = HierarchyLoader.ReadHierarchy(input.Path);
-                var specs = input.BatchRunRequest.Filter(top);
+                var specs = input.GetBatchRunRequest().Filter(top);
 
                 if (!specs.Any())
                 {

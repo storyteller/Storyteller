@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.CommandLine
 
             theController = new RemoteController(directory);
 
-            theInput = new RunInput {Path = directory};
+            theInput = new RunInput {Path = directory,RetriesFlag = 1};
             theController = theInput.BuildRemoteController();
             var task = theController.Start(EngineMode.Batch);
             task.Wait(3.Seconds());
@@ -37,6 +37,12 @@ namespace StoryTeller.Testing.CommandLine
         public void TearDown()
         {
             theController.Dispose();
+        }
+
+        [Test]
+        public void the_project_max_attempts_should_be_set_from_retries_flag()
+        {
+            theController.Project.MaxRetries.ShouldBe(1);
         }
 
         [Test]
