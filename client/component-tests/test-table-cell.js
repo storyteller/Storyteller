@@ -1,0 +1,151 @@
+var React = require('react');
+var expect = require('chai').expect;
+
+var TableCell = require('../components/editing/table-cell');
+var Arg = require('../lib/arg');
+var $ = require('jquery');
+var Postal = require('postal');
+
+var listener = {
+	events: [],
+
+	clear: function(){
+		this.events = [];
+	},
+
+	append: function(data){
+		this.events.push(data);
+	}
+};
+
+Postal.subscribe({
+    channel  : "editor",
+    topic    : "changes",
+    callback : function(data, envelope) {
+        listener.append(data);
+    }
+});
+
+Postal.subscribe({
+    channel  : "editor",
+    topic    : "select-cell",
+    callback : function(data, envelope) {
+        listener.append(data);
+    }
+});
+
+function singleEventReceivedShouldBe(expected){
+	expect(listener.events.length).to.equal(1);
+	expect(listener.events[0]).to.deep.equal(expected);
+}
+
+describe('Rendering a TableCell', function(){
+	var props = null;
+	var instance = null;
+
+	beforeEach(function(){
+		props = new Arg({key: 'X', description: 'The operand'}, {cells: {X: null}}, 1);
+		listener.clear();
+	});
+
+	function element(){
+		instance = TestUtils.renderIntoDocument(
+			<table>
+			<tbody>
+			<tr>
+			<TableCell {... props} />
+			</tr>
+			</tbody>
+			</table>
+		);
+		var top = instance.getDOMNode();
+
+		var cell = $('td', top).get(0);
+		return cell;
+	}
+
+	function elementShouldHaveClass(clazz){
+		var classes = element().className.split(' ');
+		expect(classes).to.contain(clazz);
+	}
+
+	function elementShouldNotHaveClass(clazz){
+		var classes = element().className.split(' ');
+		expect(classes).to.not.contain(clazz);
+	}
+
+	function elementShouldHaveAttribute(att, value){
+		var elem = element();
+
+		expect(elem.getAttribute(att)).to.equal(value);
+	}
+
+	function elementTypeShouldBe(type){
+		expect(element().nodeName).to.equal(type.toUpperCase());
+	}
+
+	function elementShouldBeLinkWithText(text){
+		elementTypeShouldBe('TD');
+		innerTextShouldBe(text);
+	}
+
+	function innerTextShouldBe(text){
+		expect(element().innerHTML).to.equal(text);
+	}
+
+	describe('default visualizations', function(){
+		it('should be a readonly TD', function(){
+			elementTypeShouldBe('td');
+		});
+
+		it('should have the cell class', function(){
+			elementShouldHaveClass('table-cell');
+		});
+
+		it('should have the data-class attribute', function(){
+			elementShouldHaveAttribute('data-cell', 'X');
+		});
+
+		it('has the description in the title', function(){
+			props.cell.description = 'a description of this cell';
+			expect(element().title).to.equal('a description of this cell');
+		});
+	});
+
+	describe('render changed display', function(){
+		it('should show as changed if changed', function(){
+			props.changed = true;
+
+			elementShouldHaveClass('changed');
+		});
+
+		it('should not show as changed if not changed', function(){
+			props.changed = false;
+			elementShouldNotHaveClass('changed');
+		});
+	});
+
+	describe('Rendering a cell in editing mode', function(){
+		beforeEach(function(){
+			props.active = true;
+		});
+
+		it('should render a textbox when the cell editor is "text"', function(){
+			props.cell.editor = 'text';
+			props.value = 'foo';
+
+			var elem = element().firstChild;
+
+			expect(elem.tagName).to.equal('INPUT');
+		});
+
+
+
+	});
+
+
+
+
+});
+
+
