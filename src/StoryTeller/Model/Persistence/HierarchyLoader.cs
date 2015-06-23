@@ -25,7 +25,7 @@ namespace StoryTeller.Model.Persistence
 
         static HierarchyLoader()
         {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory.ToFullPath();
             SpecDirectory = SelectSpecPath(baseDirectory);
         }
         
