@@ -14,6 +14,11 @@ var labelStatus = {
 module.exports = React.createClass({
 
 	render: function(){
+		if (this.props.cell.editor == 'display-only'){
+			var text = this.props.value || 'NULL';
+			return (<span>{text}</span>);
+		}
+
 		if (this.props.active){
 			return builders.toEditor(this.props);
 		}

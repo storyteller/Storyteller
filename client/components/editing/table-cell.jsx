@@ -7,6 +7,11 @@ var Postal = require('postal');
 module.exports = React.createClass({
 
 	render: function(){
+		if (this.props.cell.editor == 'display-only'){
+			var text = this.props.value || 'NULL';
+			return (<td>{text}</td>);
+		}
+
 		var clazz = 'table-cell';
 
 

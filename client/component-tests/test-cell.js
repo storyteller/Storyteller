@@ -116,6 +116,15 @@ describe('Rendering a Cell', function(){
 		});
 	});
 
+	it('can render display-only cell', function(){
+		props.cell.editor = 'display-only';
+		props.value = 'The Lakers';
+
+		var elem = element();
+		expect(elem.tagName).to.equal('SPAN');
+		expect(elem.innerHTML).to.equal('The Lakers');
+	});
+
 	describe('Rendering a cell in editing mode', function(){
 		beforeEach(function(){
 			props.active = true;

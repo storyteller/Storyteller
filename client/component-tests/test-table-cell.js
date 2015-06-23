@@ -93,6 +93,8 @@ describe('Rendering a TableCell', function(){
 		expect(element().innerHTML).to.equal(text);
 	}
 
+
+
 	describe('default visualizations', function(){
 		it('should be a readonly TD', function(){
 			elementTypeShouldBe('td');
@@ -110,6 +112,15 @@ describe('Rendering a TableCell', function(){
 			props.cell.description = 'a description of this cell';
 			expect(element().title).to.equal('a description of this cell');
 		});
+	});
+
+	it('can render display-only cell', function(){
+		props.cell.editor = 'display-only';
+		props.value = 'The Lakers';
+
+		var elem = element();
+		expect(elem.tagName).to.equal('TD');
+		expect(elem.innerHTML).to.equal('The Lakers');
 	});
 
 	describe('render changed display', function(){
