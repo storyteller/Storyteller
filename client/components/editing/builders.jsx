@@ -7,6 +7,7 @@ var Postal = require('postal');
 var CellTextBox = require('./textbox-editor');
 var CheckboxEditor = require('./checkbox-editor');
 var SelectEditor = require('./select-editor');
+var BigText = require('./big-text');
 
 function toDisplay(cell, value){
 	if (value == null) return 'NULL';
@@ -73,6 +74,9 @@ builders.add('select', function(arg){
 	return SelectEditor({arg: arg});
 });
 
+builders.add('big-text', function(arg){
+	return BigText({arg:arg});
+})
 
 
 

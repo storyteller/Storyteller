@@ -157,6 +157,46 @@ describe('Rendering a Cell', function(){
 
 	});
 
+
+	describe('Rendering a big-text editor in editing mode', function(){
+		beforeEach(function(){
+			props.active = true;
+			props.cell.editor = 'big-text';
+		});
+
+		it('should render a textbox when the cell editor is "big-text"', function(){
+			props.cell.editor = 'big-text';
+			props.value = 'foo';
+
+			elementTypeShouldBe('textarea');
+			expect(element().innerHTML).to.equal('foo');
+		});
+
+		it('should have the cell class and data-cell att when in editing mode', function(){
+			props.value = 'Foo!';
+
+			elementShouldHaveAttribute('data-cell', 'X');
+			elementShouldHaveClass('cell');
+		});
+
+
+		it('should fire a cell changed event on changes', function(){
+			props.value = 'Foo!';
+
+			var elem = element();
+			$(elem).val('Bar!');
+			TestUtils.Simulate.change(elem);
+
+			var event = listener.events[0];
+
+			expect(event.id).to.equal(1);
+			expect(event.cell).to.equal('X');
+			expect(event.value).to.equal('Bar!');
+
+		});
+
+	});
+
 	describe('Rendering a cell with a boolean editor', function(){
 		beforeEach(function(){
 			props.active = true;

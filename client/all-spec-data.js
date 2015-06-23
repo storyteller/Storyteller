@@ -15,7 +15,7 @@ module.exports = {
               "default": null,
               "header": null,
               "output": false,
-              "editor": null,
+              "editor": 'big-text',
               "options": null
             }
           ],

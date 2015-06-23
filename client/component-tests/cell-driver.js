@@ -20,6 +20,10 @@ function CellDriver(getDOMNode){
 			return element.innerHTML;
 		}
 
+		if (element.tagName == 'TEXTAREA'){
+			return element.innerHTML;
+		}
+
 		return $(element).val();
 	};
 
@@ -30,6 +34,7 @@ function CellDriver(getDOMNode){
 	this.hasFocus = function(){
 		return getDOMNode() == document.activeElement;
 	};
+
 }
 
 module.exports = CellDriver;

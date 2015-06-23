@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var TextboxEditor = require('./textbox-editor');
+var BigText = require('./big-text');
 var DeleteGlyph = require('./delete-glyph');
 var Postal = require('postal');
 
 module.exports = React.createClass({
 	render: function(){
 		if (this.props.arg.active){
-			var editor = TextboxEditor({arg: this.props.arg, classes: 'form-control'});
+			var editor = BigText({arg: this.props.arg, classes: 'form-control'});
 
 			return (
 				<div id={this.props.step.id} className="comment">{editor}</div>

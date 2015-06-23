@@ -73,6 +73,10 @@ function IntegrationDriver(fixtureData, mode, results){
 
 	}
 
+	this.html = function(){
+		return this.div.innerHTML;
+	}
+
 	this.idFor = function(search){
 		return self.spec.findByPath(search).id;
 	}
