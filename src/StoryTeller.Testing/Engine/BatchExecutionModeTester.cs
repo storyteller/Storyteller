@@ -20,10 +20,22 @@ namespace StoryTeller.Testing.Engine
             theSpecification = new Specification();
             theResults = new SpecResults
             {
-                HadCriticalException = false
+                HadCriticalException = false,
+                Counts = new Counts(0, 1, 0, 0)
             };
 
             theStatus = SpecRunnerStatus.Valid;
+        }
+
+        [Test]
+        public void never_retry_a_spec_that_succeeded()
+        {
+            theResults.Counts = new Counts(1, 0, 0, 0);
+            Project.CurrentProject.MaxRetries = 5;
+            theSpecification.MaxRetries = 3;
+            theSpecification.Lifecycle = Lifecycle.Regression;
+            
+            ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBeFalse();
         }
 
         [Test]

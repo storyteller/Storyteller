@@ -20,14 +20,11 @@ namespace StoryTeller.Remotes
         private ISystem _system;
         private readonly IList<IDisposable> _services = new List<IDisposable>();
 
-        private readonly Timer _timer = new Timer(5000){Enabled = false};
 
         public void Dispose()
         {
             try
             {
-                _timer.Enabled = false;
-                _timer.SafeDispose();
                 _services.ToArray().Each(x => x.SafeDispose());
                 _services.Clear();
             }
@@ -67,10 +64,6 @@ namespace StoryTeller.Remotes
                 if (mode == EngineMode.Interactive)
                 {
                     _engine = buildUserInterfaceEngine();
-                    _timer.AutoReset = true;
-                    
-                    _timer.Elapsed += (sender, args) => _controller.As<EngineController>().SendQueueState();
-                    _timer.Enabled = true;
                 }
                 else
                 {

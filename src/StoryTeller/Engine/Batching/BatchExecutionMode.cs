@@ -36,6 +36,8 @@ namespace StoryTeller.Engine.Batching
 
         public bool ShouldRetry(SpecResults results, Specification specification, SpecRunnerStatus status)
         {
+            if (results.Counts.WasSuccessful()) return false;
+
             if (status == SpecRunnerStatus.Invalid) return false;
 
             if (results.HadCriticalException) return false;
