@@ -264,11 +264,12 @@ handlers['spec-execution-completed'] = function(data){
 
 handlers['queue-state'] = data => {
 	var hasChanges = QueueState.store(data);
-	if (!hasChanges) return;
-
+	
 	queue = data.queued.map(id => specs[id]);
 
 	publishQueueChanged();
+
+	if (!hasChanges) return;
 
 	if (!data.running){
 		Postal.publish({

@@ -44,6 +44,7 @@
     <Compile Include="Fixtures\CalculatorFixture.cs" />
     <Compile Include="Fixtures\CellsFixture.cs" />
     <Compile Include="Fixtures\AddressFixture.cs" />
+    <Compile Include="Fixtures\CheckboxFixture.cs" />
     <Compile Include="Fixtures\CurryingFixture.cs" />
     <Compile Include="Fixtures\Dimensions.cs" />
     <Compile Include="Fixtures\FactFixture.cs" />
