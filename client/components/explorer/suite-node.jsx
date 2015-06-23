@@ -73,11 +73,14 @@ var SuiteHeader = React.createClass({
 		var openClosed = suite.isExpanded ? <FolderOpen /> : <FolderClosed />;
 		var openClass = suite.isExpanded ? 'open' : 'closed';
 
+		var icon = icons[suite.icon()]({});
+
 		return (
 			<div key={suite.path} className={openClass + ' suite-header'}>
 				<a href='#' onClick={this.props.toggle}>
 					{openClosed}
 				</a>
+				{icon}
 				<a href={href} className='suite-name'>{this.props.suite.name}</a> ({count}) 
 				<CommandLink createMessage={buildMessage} text='run all' />
 				{this.makeNewSpecLink()}

@@ -276,5 +276,63 @@ describe('Suite filtering', function(){
 		expect(filtered.suites[0].specs[1].title).to.equal('Bad Facts');
 		
 	});
+
+	describe('Can determine its icon', () => {
+		var suite = null;
+
+		beforeEach(() => {
+			suite = new Suite({name: 'Facts', path: 'Facts'});
+		});
+
+		it('has none for no specs', () => {
+			expect(suite.icon()).to.equal('none');
+		});
+
+		it('has none if no successful, none running, no failures', () => {
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+
+			expect(suite.icon()).to.equal('none');
+		});
+
+		it('has failed if any failures but no running', () => {
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'success'});
+			suite.specs.push({status: () => 'failed'});
+
+			expect(suite.icon()).to.equal('failed');
+		});
+
+		it('has success if any successful, none running, no failures', () => {
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'success'});
+
+			expect(suite.icon()).to.equal('success');
+		});
+
+		it('uses the running spec icon if one exists', () => {
+			var running = {
+				status: () => 'running',
+				icon: () => 'running'
+			};
+
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'none'});
+			suite.specs.push({status: () => 'success'});
+			suite.specs.push({status: () => 'failed'});
+			suite.specs.push(running);
+
+
+			expect(suite.icon()).to.equal('running');
+
+			running.icon = () => 'running-success';
+			expect(suite.icon()).to.equal('running-success');
+		});
+	});
 });
 
