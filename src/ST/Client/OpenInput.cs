@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using FubuCore;
 using StoryTeller.Model.Persistence;
 using ProjectInput = ST.CommandLine.ProjectInput;
 
@@ -8,7 +9,7 @@ namespace ST.Client
     {
         public string SpecPath
         {
-            get { return HierarchyLoader.SelectSpecPath(Path); }
+            get { return HierarchyLoader.SelectSpecPath(Path.ToFullPath()); }
         }
 
         public Task<Suite> ReadHierarchy()

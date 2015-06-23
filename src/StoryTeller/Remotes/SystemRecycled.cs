@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using StoryTeller.Messages;
 using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Remotes
 {
@@ -11,7 +13,7 @@ namespace StoryTeller.Remotes
         public SystemRecycled() : base("system-recycled")
         {
             properties.Add("ConfigFile", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            properties.Add("BaseDirectory", AppDomain.CurrentDomain.BaseDirectory);
+            properties.Add("BaseDirectory", AppDomain.CurrentDomain.BaseDirectory.ToFullPath());
             properties.Add("BinPath", AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
             properties.Add("Profile", Project.CurrentProfile);
         }

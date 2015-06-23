@@ -54,7 +54,13 @@ namespace ST.Client
 
         public SystemRecycled LatestSystemRecycled
         {
-            get { return _controller.LatestSystemRecycled ?? Startup.Result; }
+            get
+            {
+                var recycled = _controller.LatestSystemRecycled ?? Startup.Result;
+                recycled.properties["Spec Directory"] = _input.SpecPath;
+
+                return recycled;
+            }
         }
     }
 }
