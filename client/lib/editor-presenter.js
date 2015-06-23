@@ -68,6 +68,9 @@ class EditorPresenter{
 	}
 
 	deactivate(){
+		this.deactivated = true;
+		applyOutstandingChanges();
+
 		this.subscriptions.forEach(function(x){
 			x.unsubscribe();
 		});
@@ -97,6 +100,8 @@ class EditorPresenter{
 
 
 	refreshEditor(){
+		if (this.deactivated) return;
+
 		if (this.spec.mode == 'header'){
 			this.view.setState({
 				loading: this.spec.mode == 'header'

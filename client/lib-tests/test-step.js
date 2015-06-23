@@ -19,6 +19,11 @@ describe('Step', function(){
 			expect(step.findValue('A')).to.equal(1);
 		});
 
+		it('should be able to find a "false" value', () => {
+			step.args.find("C").value = false;
+			expect(step.findValue('C')).to.be.false;
+		});
+
 		it('should resolve to null if the cell arg is missing', function(){
 			expect(step.findValue('D')).to.be.null;
 		});

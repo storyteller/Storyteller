@@ -126,6 +126,8 @@ class Step{
 		var arg = this.args.find(key);
 		if (arg == null) return null;
 
+		if (arg.value === false) return false;
+
 		return arg.value || arg.default;
 	}
 
