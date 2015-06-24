@@ -64,7 +64,7 @@ class Step{
 			return this.results.root;
 		}
 		else {
-			return {status: 'ok'};
+			return {status: 'none'};
 		}
 
 	}
