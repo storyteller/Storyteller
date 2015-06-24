@@ -67,6 +67,8 @@ preview.add('errorBox', 'error-box');
 preview.stepAdder = x => null;
 preview.tableContext = x => null;
 
+var CheckboxIcon = require('./../icons')['checked'];
+
 var results = new Loader();
 results.add('line', 'line');
 results.add('container', 'preview-container');
@@ -86,6 +88,7 @@ results.add('perfTable', 'perf-table');
 results.add('logComponent', 'log-component');
 results.add('setResultsTable', 'set-results-table');
 results.add('noResults', 'no-results');
+results.checked = () => CheckboxIcon({});
 
 results.tabbedArea = props => {
 	return TabbedArea(props)

@@ -52,6 +52,7 @@ icon('copy', ['fa-copy']);
 icon('stop', ['fa-stop']);
 icon('help', ['fa-question']);
 icon('search', ['fa-search']);
+icon('checked', ['fa-check']);
 
 
 module.exports = icons;

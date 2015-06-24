@@ -113,9 +113,13 @@ class Sentence{
 	}
 
 	buildResults(step, loader){
-		var components = this.parts.map(part => part.buildResults(step, loader));
-
 		var result = step.getResult(this.position) || {status: 'none'};
+console.log('sentence result was ' + JSON.stringify(result));
+
+		var components = this.parts.map(part => part.buildResults(step, loader));
+		if (result.status == 'ok'){
+			components = [loader.checked()].concat(components);
+		}
 
 		var line = loader.line({
 			components: components, 
