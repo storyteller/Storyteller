@@ -1,12 +1,12 @@
 var expect = require('chai').expect;
 var Postal = require('postal');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 var ObjectMother = require('./object-mother');
 var _ = require('lodash');
 var library = ObjectMother.library();
 var specData = ObjectMother.specData();
-var Specification = require('./../lib/specification');
-var FixtureLibrary = require('./../lib/fixture-library');
+var Specification = require('./../lib/model/specification');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 var listener = {
 	events: [],

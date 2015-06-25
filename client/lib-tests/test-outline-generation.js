@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
-var OutlineNode = require('./../lib/outline-node');
+var OutlineNode = require('./../lib/model/outline-node');
 var AllSpecData = require('./../all-spec-data');
-var Specification = require('./../lib/specification');
-var FixtureLibrary = require('./../lib/fixture-library');
+var Specification = require('./../lib/model/specification');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 var library = new FixtureLibrary(AllSpecData.fixtures);
 

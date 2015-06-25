@@ -1,8 +1,8 @@
 var React = require('react');
 var expect = require('chai').expect;
 
-var Cell = require('../components/editing/cell');
-var Arg = require('../lib/arg');
+var Cell = require('../components/editing/cells/cell');
+var Arg = require('../lib/model/arg');
 var $ = require('jquery');
 var Postal = require('postal');
 

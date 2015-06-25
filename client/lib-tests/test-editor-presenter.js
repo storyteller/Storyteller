@@ -1,12 +1,12 @@
 var expect = require('chai').expect;
 var StubLoader = require('./stub-loader');
-var EditorPresenter = require('./../lib/editor-presenter');
-var Specification = require('./../lib/specification');
+var EditorPresenter = require('./../lib/presentation/editor-presenter');
+var Specification = require('./../lib/model/specification');
 var ObjectMother = require('./object-mother');
-var changes = require('./../lib/change-commands');
+var changes = require('./../lib/model/change-commands');
 var Postal = require('postal');
 var _ = require('lodash');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 var uuid = require('node-uuid');
 
 var listener = {

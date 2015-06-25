@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 
-var Spec = require('./../lib/specification');
-var Suite = require('./../lib/specs/suite');
+var Spec = require('./../lib/model/specification');
+var Suite = require('./../lib/model/suite');
 var _ = require('lodash');
 
 describe('Spec', function(){

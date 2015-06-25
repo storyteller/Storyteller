@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
-var Spec = require('./../lib/specification');
-var Counts = require('./../lib/specs/counts');
-var QueueState = require('./../lib/specs/queue-state');
-var ResultCache = require('./../lib/specs/result-cache');
+var Spec = require('./../lib/model/specification');
+var Counts = require('./../lib/model/counts');
+var QueueState = require('./../lib/stores/queue-state');
+var ResultCache = require('./../lib/stores/result-cache');
 
 // Some of the logic in spec.js is just tested within
 // the spec explorer work

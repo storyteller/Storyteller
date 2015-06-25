@@ -10,7 +10,7 @@ var QueueCount = require('./../queue/queue-count');
 var GrammarCount = require('./../grammars/grammar-count');
 
 
-var Hierarchy = require('./../../lib/specs/hierarchy');
+var Hierarchy = require('./../../lib/stores/hierarchy');
 var HelpIcon = require('./help');
 var Search = require('./search');
 var RuntimeError = require('./runtime-error');

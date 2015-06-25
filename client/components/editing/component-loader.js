@@ -36,17 +36,17 @@ class Loader {
 }
 
 function toEditor(editor){
-	editor.add('cell', 'cell');
-	editor.add('line', 'line-with-chrome');
-	editor.add('container', 'editor-container');
-	editor.add('comment', 'comment-editor');
-	editor.add('table', 'table-editor');
-	editor.add('row', 'body-row');
-	editor.add('errorBox', 'error-box');
-	editor.add('stepAdder', 'step-adder');
-	editor.add('tableContext', 'table-context');
-	editor.add('stepAdderLookup', 'step-adder-lookup');
-	editor.add('stepAdderPlaceholder', 'step-adder-placeholder');
+	editor.add('cell', 'cells/cell');
+	editor.add('line', 'lines/line-with-chrome');
+	editor.add('container', 'containers/editor-container');
+	editor.add('comment', 'comments/comment-editor');
+	editor.add('table', 'tables/table-editor');
+	editor.add('row', 'tables/body-row');
+	editor.add('errorBox', 'lines/error-box');
+	editor.add('stepAdder', 'adders/step-adder');
+	editor.add('tableContext', 'tables/table-context');
+	editor.add('stepAdderLookup', 'adders/step-adder-lookup');
+	editor.add('stepAdderPlaceholder', 'adders/step-adder-placeholder');
 }
 
 var editor = new Loader();
@@ -56,13 +56,13 @@ toEditor(editor);
 
 
 var preview = new Loader();
-preview.add('line', 'line');
-preview.add('container', 'preview-container');
-preview.add('cell', 'preview-cell');
-preview.add('table', 'table-preview');
-preview.add('comment', 'comment');
-preview.add('row', 'preview-row');
-preview.add('errorBox', 'error-box');
+preview.add('line', 'lines/line');
+preview.add('container', 'containers/preview-container');
+preview.add('cell', 'cells/preview-cell');
+preview.add('table', 'tables/table-preview');
+preview.add('comment', 'comments/comment');
+preview.add('row', 'tables/preview-row');
+preview.add('errorBox', 'lines/error-box');
 
 preview.stepAdder = x => null;
 preview.tableContext = x => null;
@@ -70,24 +70,24 @@ preview.tableContext = x => null;
 var CheckboxIcon = require('./../icons')['checked'];
 
 var results = new Loader();
-results.add('line', 'line');
-results.add('container', 'preview-container');
-results.add('cell', 'preview-cell');
-results.add('table', 'table-preview');
-results.add('errorRow', 'error-row');
-results.add('row', 'result-row');
-results.add('errorBox', 'error-box');
-results.add('matchedRow', 'set-verification-row');
-results.add('extraRow', 'extra-row');
-results.add('comment', 'comment');
-results.add('successCell', 'success-cell');
-results.add('failedCell', 'failure-cell');
-results.add('missingCell', 'missing-cell');
-results.add('errorCell', 'error-cell');
-results.add('perfTable', 'perf-table');
-results.add('logComponent', 'log-component');
-results.add('setResultsTable', 'set-results-table');
-results.add('noResults', 'no-results');
+results.add('line', 'lines/line');
+results.add('container', 'containers/preview-container');
+results.add('cell', 'cells/preview-cell');
+results.add('table', 'tables/table-preview');
+results.add('errorRow', 'tables/error-row');
+results.add('row', 'tables/result-row');
+results.add('errorBox', 'lines/error-box');
+results.add('matchedRow', 'tables/set-verification-row');
+results.add('extraRow', 'tables/extra-row');
+results.add('comment', 'comments/comment');
+results.add('successCell', 'cells/success-cell');
+results.add('failedCell', 'cells/failure-cell');
+results.add('missingCell', 'cells/missing-cell');
+results.add('errorCell', 'cells/error-cell');
+results.add('perfTable', 'logging/perf-table');
+results.add('logComponent', 'logging/log-component');
+results.add('setResultsTable', 'tables/set-results-table');
+results.add('noResults', 'alerts/no-results');
 results.checked = () => CheckboxIcon({});
 
 results.tabbedArea = props => {

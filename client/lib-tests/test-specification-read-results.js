@@ -1,6 +1,6 @@
-var Specification = require('./../lib/specification');
+var Specification = require('./../lib/model/specification');
 var expect = require('chai').expect;
-var FixtureLibrary = require('./../lib/fixture-library');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 var AllSpecData = require('./../all-spec-data');
 var _ = require('lodash');
 

@@ -8,7 +8,7 @@ var Route = Router.Route, DefaultRoute = Router.DefaultRoute,
 
 
 var SpecExplorer = require('./explorer/spec-explorer');
-var Language = require('./language');
+var Language = require('./language/language');
 var Documentation = require('./documentation');
 var QueuePage = require('./queue/queue-page');
 var Header = require('./header/header');
@@ -17,7 +17,7 @@ var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
 var SuiteExplorer = require('./explorer/suite-explorer');
 var ResultsTable = require('./results/results-table');
 
-var FixtureTable = require('./fixture-table');
+var FixtureTable = require('./language/fixture-table');
 var uuid = require('node-uuid');
 
 var $ = require('jquery');
@@ -61,14 +61,14 @@ var routes = (
 
 module.exports = function(){
   // activate keyboard shortcuts
-  require('./../lib/keyboard-shortcuts').register();
+  require('./../lib/presentation/keyboard-shortcuts').register();
 
   if (window){
     window.$ = $;
     window.jQuery = $;
   }
 
-  require('./../lib/typeahead.jquery.js');
+  require('./../lib/presentation/typeahead.jquery.js');
 
 	Router.run(routes, function (Handler) {
 	  React.render(<Handler/>, document.body);

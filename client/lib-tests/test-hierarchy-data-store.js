@@ -2,13 +2,13 @@ var expect = require('chai').expect;
 var _ = require('lodash');
 
 var data = require('./hierarchy-data');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 var Postal = require('postal');
-var Counts = require('./../lib/specs/counts');
-var Suite = require('./../lib/specs/suite');
+var Counts = require('./../lib/model/counts');
+var Suite = require('./../lib/model/suite');
 
-var QueueState = require('./../lib/specs/queue-state');
-var ResultCache = require('./../lib/specs/result-cache');
+var QueueState = require('./../lib/stores/queue-state');
+var ResultCache = require('./../lib/stores/result-cache');
 
 function publishEngineMessage(topic, data){
 	Postal.publish({

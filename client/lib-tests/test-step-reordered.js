@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 var ObjectMother = require('./object-mother');
-var changes = require('./../lib/change-commands');
-var StepHolder = require('./../lib/step-holder');
-var Specification = require('./../lib/specification');
+var changes = require('./../lib/model/change-commands');
+var StepHolder = require('./../lib/model/step-holder');
+var Specification = require('./../lib/model/specification');
 
 describe('Reordering Steps', function(){
 	var step1 = {};

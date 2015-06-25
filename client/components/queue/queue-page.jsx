@@ -3,7 +3,7 @@
 var React = require("react");
 var Button = require('react-bootstrap/Button');
 
-var Hierarchy = require('./../../lib/specs/hierarchy');
+var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 
 var CommandLink = require('./../explorer/command-link');

@@ -1,4 +1,4 @@
-var Counts = require('./../lib/specs/counts');
+var Counts = require('./../lib/model/counts');
 var expect = require('chai').expect;
 
 describe('Counts', function(){

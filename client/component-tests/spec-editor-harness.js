@@ -8,10 +8,10 @@ var loader = require('./../components/editing/component-loader').editing;
 
 
 var SpecEditor = require('../components/editing/spec-editor');
-var Hierarchy = require('../lib/specs/hierarchy');
-var FixtureLibrary = require('../lib/fixture-library');
+var Hierarchy = require('../lib/stores/hierarchy');
+var FixtureLibrary = require('../lib/fixtures/fixture-library');
 var CellDriver = require('./cell-driver');
-var ResultCache = require('./../lib/specs/result-cache');
+var ResultCache = require('./../lib/stores/result-cache');
 
 function IntegrationDriver(fixtureData, mode, results){
 	this.library = new FixtureLibrary(fixtureData);
@@ -26,7 +26,7 @@ function IntegrationDriver(fixtureData, mode, results){
 		    window.jQuery = $;
 	    }
 	    
-		require('./../lib/typeahead.jquery.js');
+		require('./../lib/presentation/typeahead.jquery.js');
 
 
 

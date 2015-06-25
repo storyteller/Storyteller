@@ -2,7 +2,7 @@
 var React = require("react");
 var Router = require('react-router');
 var SpecExplorer = require('./spec-explorer');
-var Hierarchy = require('./../../lib/specs/hierarchy');
+var Hierarchy = require('./../../lib/stores/hierarchy');
 
 var SuiteExplorer = React.createClass({
 	mixins: [Router.State],

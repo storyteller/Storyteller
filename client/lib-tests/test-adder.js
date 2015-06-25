@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Adder = require('./../lib/adder');
+var Adder = require('./../lib/presentation/adder');
 var StubLoader = require('./stub-loader');
 
 describe('Adder', function(){

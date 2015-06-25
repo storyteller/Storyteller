@@ -2,7 +2,7 @@
 
 var React = require("react");
 var Postal = require('postal');
-var Hierarchy = require('./../../lib/specs/hierarchy');
+var Hierarchy = require('./../../lib/stores/hierarchy');
 
 var Alert = require('react-bootstrap/Alert');
 

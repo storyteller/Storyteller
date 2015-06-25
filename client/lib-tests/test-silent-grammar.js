@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var SilentGrammar = require('./../lib/silent-grammar');
+var SilentGrammar = require('./../lib/grammars/silent-grammar');
 var StubLoader = require('./stub-loader');
 
 describe('SilentGrammar', function(){

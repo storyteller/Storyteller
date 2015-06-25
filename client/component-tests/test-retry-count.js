@@ -2,7 +2,7 @@ var React = require('react');
 var expect = require('chai').expect;
 var Postal = require('postal');
 var $ = require('jquery');
-var RetryCount = require('./../components/editing/retry-count');
+var RetryCount = require('./../components/editing/header/retry-count');
 
 var listener = {
 	events: [],

@@ -4,12 +4,12 @@ var Postal = require('postal');
 var $ = require('jquery');
 
 var AllSpecData = require('./../all-spec-data');
-var FixtureLibrary = require('./../lib/fixture-library');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 var library = new FixtureLibrary(AllSpecData.fixtures);
 
 var GrammarErrors = require('./../components/grammars/grammar-errors');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 
 describe('GrammarError rendering', () => {
 	var div = null;

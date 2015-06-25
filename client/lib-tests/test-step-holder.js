@@ -1,11 +1,11 @@
 var expect = require('chai').expect;
-var StepHolder = require('../lib/step-holder');
+var StepHolder = require('../lib/model/step-holder');
 
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
-var FixtureLibrary = require('./../lib/fixture-library');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 var library = new FixtureLibrary(fixtureData);
-var Comment = require('./../lib/comment');
-var Fixture = require('./../lib/fixture');
+var Comment = require('./../lib/model/comment');
+var Fixture = require('./../lib/fixtures/fixture');
 
 describe('StepHolder mechanics', function(){
 	it('should set the parent on add', function(){

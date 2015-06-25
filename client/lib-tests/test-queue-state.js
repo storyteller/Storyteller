@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 
-var QueueState = require('./../lib/specs/queue-state');
+var QueueState = require('./../lib/stores/queue-state');
 
 describe('The QueueState', () => {
 	beforeEach(() => QueueState.clear());

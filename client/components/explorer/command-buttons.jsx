@@ -5,8 +5,8 @@ var React = require("react");
 var Button = require('react-bootstrap/Button');
 var ButtonGroup = require('react-bootstrap/ButtonGroup');
 var Postal = require('postal');
-var Hierarchy = require('./../../lib/specs/hierarchy');
-var changes = require('./../../lib/change-commands');
+var Hierarchy = require('./../../lib/stores/hierarchy');
+var changes = require('./../../lib/model/change-commands');
 
 
 var CommandButton = React.createClass({

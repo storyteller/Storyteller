@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
-var Sentence = require('./../lib/sentence');
-var Step = require('./../lib/step');
-var EmbeddedSection = require('./../lib/embedded-section');
-var Fixture = require('./../lib/fixture');
+var Sentence = require('./../lib/grammars/sentence');
+var Step = require('./../lib/model/step');
+var EmbeddedSection = require('./../lib/grammars/embedded-section');
+var Fixture = require('./../lib/fixtures/fixture');
 
 describe('EmbeddedSection', function(){
 	var metadata = {

@@ -35,7 +35,7 @@ var Communicator = require('./lib/communicator');
 
 var startRouting = require('./components/app');
 
-require('./lib/specs/hierarchy').reset(); // just forcing it to get loaded
+require('./lib/stores/hierarchy').reset(); // just forcing it to get loaded
 
 Postal.publish({
   channel: 'engine',
@@ -44,7 +44,7 @@ Postal.publish({
 });
 
 
-var ResultCache = require('./lib/specs/result-cache');
+var ResultCache = require('./lib/stores/result-cache');
 var results = JSON.parse(_.unescape(document.getElementById('result-data').innerHTML));
 (results || []).forEach(x => {
   ResultCache.record(x);

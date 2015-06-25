@@ -5,7 +5,7 @@ var React = require("react");
 var Postal = require('postal');
 var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
 var Icons = require('./../icons');
-var KeyboardShortcuts = require('./../../lib/keyboard-shortcuts');
+var KeyboardShortcuts = require('./../../lib/presentation/keyboard-shortcuts');
 
 
 var ShortcutRow = React.createClass({

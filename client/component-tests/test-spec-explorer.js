@@ -5,7 +5,7 @@ var SuiteExplorer = require('./../components/explorer/suite-explorer');
 var Postal = require('postal');
 var React = require('react');
 var $ = require('jquery');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 var _ = require('lodash');
 
 function publishResults(){

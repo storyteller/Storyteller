@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var React = require('react');
-var FixtureLibrary = require('./lib/fixture-library');
-var Specification = require('./lib/specification');
+var FixtureLibrary = require('./lib/fixtures/fixture-library');
+var Specification = require('./lib/model/specification');
 var ComponentLoader = require('./components/editing/component-loader');
 var EmbeddedSpec = require('./components/embedded-spec');
 

@@ -1,11 +1,11 @@
 var expect = require('chai').expect;
-var FixtureLibrary = require('./../lib/fixture-library');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
 
 var StubLoader = require('./stub-loader');
 
-var Comment = require('./../lib/comment');
+var Comment = require('./../lib/model/comment');
 
 describe('The FixtureLibrary', function(){
 	var library = new FixtureLibrary(fixtureData);

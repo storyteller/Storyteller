@@ -2,7 +2,7 @@
 
 var React = require("react");
 var Postal = require("postal");
-var Counts = require('./../../lib/specs/counts');
+var Counts = require('./../../lib/model/counts');
 
 
 var SpecRow = React.createClass({

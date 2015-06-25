@@ -6,7 +6,7 @@ var AllSpecData = require('./../all-spec-data');
 var $ = require('jquery');
 
 var Header = require('./../components/header/header');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 
 var listener = {
 	events: [],

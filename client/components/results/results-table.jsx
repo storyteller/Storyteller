@@ -4,8 +4,8 @@ var React = require('react');
 var Postal = require('postal');
 
 var SuitePath = require('./../explorer/suite-path');
-var ResultsCache = require('./../../lib/specs/result-cache');
-var Hierarchy = require('./../../lib/specs/hierarchy');
+var ResultsCache = require('./../../lib/stores/result-cache');
+var Hierarchy = require('./../../lib/stores/hierarchy');
 
 
 var ResultsRow = React.createClass({

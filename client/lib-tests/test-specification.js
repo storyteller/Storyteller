@@ -1,10 +1,10 @@
 var expect = require('chai').expect;
 
-var FixtureLibrary = require('./../lib/fixture-library');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
 
-var Specification = require('./../lib/specification');
+var Specification = require('./../lib/model/specification');
 
 function FakeChange(){
 	this.applied = 0;

@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Comment = require('./../lib/comment');
+var Comment = require('./../lib/model/comment');
 
 describe('Comment', function(){
 	it('assigns an id on creation', function(){

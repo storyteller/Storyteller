@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var ResultCache = require('./../lib/specs/result-cache');
+var ResultCache = require('./../lib/stores/result-cache');
 var Postal = require('postal');
 
 describe('ResultCache', () => {

@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 
-var Cell = require('./../lib/cell');
-var Arg = require('./../lib/arg');
-var ArgCollection = require('./../lib/arg-collection');
+var Cell = require('./../lib/model/cell');
+var Arg = require('./../lib/model/arg');
+var ArgCollection = require('./../lib/model/arg-collection');
 
 
 describe('ArgCollection', function(){

@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
-var Specification = require('./../lib/specification');
+var Specification = require('./../lib/model/specification');
 var ObjectMother = require('./object-mother');
-var changes = require('./../lib/change-commands');
+var changes = require('./../lib/model/change-commands');
 
 describe('Rename a Spec', () => {
 	var spec = null;

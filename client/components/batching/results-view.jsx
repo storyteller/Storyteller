@@ -5,7 +5,7 @@ var Postal = require("postal");
 
 var Grid = require('react-bootstrap/Grid');
 var Row = require('react-bootstrap/Row');
-var SpecResultHeader = require('./../editing/spec-result-header');
+var SpecResultHeader = require('./../editing/header/spec-result-header');
 
 var ResultsView = React.createClass({
 	render: function(){

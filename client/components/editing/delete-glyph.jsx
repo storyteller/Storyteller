@@ -2,7 +2,7 @@
 
 var React = require("react");
 var Postal = require('postal');
-var changes = require('./../../lib/change-commands');
+var changes = require('./../../lib/model/change-commands');
 var Icons = require('./../icons');
 
 var Close = Icons['close'];

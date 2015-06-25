@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var ObjectMother = require('./object-mother');
-var changes = require('./../lib/change-commands');
+var changes = require('./../lib/model/change-commands');
 
 describe('Toggling a Specification Lifecycle', () => {
 	it('can change from Acceptance to Regression', () => {

@@ -1,6 +1,6 @@
 var React = require('react');
 var expect = require('chai').expect;
-var StepAdder = require('./../components/editing/step-adder');
+var StepAdder = require('./../components/editing/adders/step-adder');
 var ObjectMother = require('./../lib-tests/object-mother');
 var $ = require('jquery');
 var Postal = require('postal');

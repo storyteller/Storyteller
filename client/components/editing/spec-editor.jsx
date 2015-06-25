@@ -1,15 +1,15 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var StepAdderPlaceHolder = require('./step-adder-placeholder');
-var StepAdder = require('./step-adder');
+var StepAdderPlaceHolder = require('./adders/step-adder-placeholder');
+var StepAdder = require('./adders/step-adder');
 var Icons = require('./../icons');
 var SuitePath = require('./../explorer/suite-path');
 
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
 
-var EditorPresenter = require('./../../lib/editor-presenter');
-var ResultsPresenter = require('./../../lib/results-presenter');
+var EditorPresenter = require('./../../lib/presentation/editor-presenter');
+var ResultsPresenter = require('./../../lib/presentation/results-presenter');
 var loader = require('./component-loader');
 
 var SpecOutline = require('./spec-outline');
@@ -17,14 +17,14 @@ var SpecOutline = require('./spec-outline');
 
 
 var Running = Icons['running'];
-var Persisting = require('./persisting');
-var SpecResultHeader = require('./spec-result-header');
-var RetryCount = require('./retry-count');
+var Persisting = require('./alerts/persisting');
+var SpecResultHeader = require('./header/spec-result-header');
+var RetryCount = require('./header/retry-count');
 
 
 
 
-var EditorLoading = require('./editor-loading');
+var EditorLoading = require('./alerts/editor-loading');
 var SpecHeader = require('./header/spec-header');
 
 

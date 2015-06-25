@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var Postal = require('postal');
 var ObjectMother = require('./object-mother');
-var GrammarLookup = require('./../lib/grammar-adder-lookup');
+var GrammarLookup = require('./../lib/presentation/grammar-adder-lookup');
 var _ = require('lodash');
 
 var listener = {

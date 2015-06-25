@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
-var changes = require('./../lib/change-commands');
-var StepHolder = require('./../lib/step-holder');
-var Specification = require('./../lib/specification');
+var changes = require('./../lib/model/change-commands');
+var StepHolder = require('./../lib/model/step-holder');
+var Specification = require('./../lib/model/specification');
 var ObjectMother = require('./object-mother');
 var _ = require('lodash');
 

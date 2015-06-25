@@ -1,7 +1,7 @@
 var React = require('react');
 var expect = require('chai').expect;
 var Postal = require('postal');
-var Hierarchy = require('./../lib/specs/hierarchy');
+var Hierarchy = require('./../lib/stores/hierarchy');
 var $ = require('jquery');
 
 

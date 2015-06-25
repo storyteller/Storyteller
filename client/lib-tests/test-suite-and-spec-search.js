@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 
-var Hierarchy = require('./../lib/specs/hierarchy');
-var Search = require('./../lib/specs/search');
+var Hierarchy = require('./../lib/stores/hierarchy');
+var Search = require('./../lib/presentation/search');
 var Postal = require('postal');
 var AllSpecData = require('./../all-spec-data');
 var _ = require('lodash');

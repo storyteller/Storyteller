@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var Sentence = require('./../lib/sentence');
-var Step = require('./../lib/step');
+var Sentence = require('./../lib/grammars/sentence');
+var Step = require('./../lib/model/step');
 
 describe('Sentence', function(){
 	var sentence = null;

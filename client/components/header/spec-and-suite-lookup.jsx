@@ -2,7 +2,7 @@
 
 var React = require("react");
 var $ = require('jquery');
-var Search = require('./../../lib/specs/search');
+var Search = require('./../../lib/presentation/search');
 
 var SuiteAndSpecLookup = React.createClass({
 	componentDidMount(){

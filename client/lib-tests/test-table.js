@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
-var Table = require('./../lib/table');
+var Table = require('./../lib/grammars/table');
 var StubLoader = require('./stub-loader');
-var Step = require('./../lib/step');
-var Section = require('./../lib/section');
+var Step = require('./../lib/model/step');
+var Section = require('./../lib/model/section');
 
 
 describe('Table Grammar', function(){

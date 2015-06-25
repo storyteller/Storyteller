@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var changes = require('./../lib/change-commands');
+var changes = require('./../lib/model/change-commands');
 
 describe('RetryCountChanged', () => {
 	it('can apply itself', () => {

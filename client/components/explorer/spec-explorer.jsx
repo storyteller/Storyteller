@@ -5,7 +5,7 @@ var React = require("react");
 
 var SuitePath = require('./suite-path');
 var icons = require('./../icons');
-var Hierarchy = require('./../../lib/specs/hierarchy');
+var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 
 var LifecycleFilter = require('./lifecycle-filter');

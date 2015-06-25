@@ -106,8 +106,8 @@ var metadata = {
 }
 
 var expect = require('chai').expect;
-var Paragraph = require('./../lib/paragraph');
-var Step = require('./../lib/step');
+var Paragraph = require('./../lib/grammars/paragraph');
+var Step = require('./../lib/model/step');
 
 
 describe('Paragraph grammar', function(){

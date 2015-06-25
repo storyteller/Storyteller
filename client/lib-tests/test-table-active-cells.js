@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var Table = require('./../lib/table');
+var Table = require('./../lib/grammars/table');
 var _ = require('lodash');
 
 describe('Table Grammar and Active Cells', () => {

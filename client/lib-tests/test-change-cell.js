@@ -1,9 +1,9 @@
 var expect = require('chai').expect;
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
 
-var Specification = require('./../lib/specification');
-var FixtureLibrary = require('./../lib/fixture-library');
-var changes = require('./../lib/change-commands');
+var Specification = require('./../lib/model/specification');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
+var changes = require('./../lib/model/change-commands');
 
 describe('ChangeCell', function(){
 	var spec = null;

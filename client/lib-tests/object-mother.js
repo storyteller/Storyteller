@@ -61,8 +61,8 @@ var hierarchy = {
 }
 
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
-var Specification = require('./../lib/specification');
-var FixtureLibrary = require('./../lib/fixture-library');
+var Specification = require('./../lib/model/specification');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 module.exports = {
 	library: function(){

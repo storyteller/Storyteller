@@ -1,9 +1,9 @@
 var expect = require('chai').expect;
-var Sentence = require('./../lib/sentence');
-var Fixture= require('./../lib/fixture');
-var MissingGrammar = require('./../lib/missing-grammar');
-var Section = require('./../lib/section');
-var FixtureLibrary = require('./../lib/fixture-library');
+var Sentence = require('./../lib/grammars/sentence');
+var Fixture= require('./../lib/fixtures/fixture');
+var MissingGrammar = require('./../lib/grammars/missing-grammar');
+var Section = require('./../lib/model/section');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 var StubLoader = require('./stub-loader');
 
 describe('Fixture', function(){

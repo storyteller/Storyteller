@@ -1,10 +1,10 @@
 var expect = require('chai').expect;
-var Section = require('./../lib/section');
-var Fixture = require('./../lib/fixture');
-var Sentence = require('./../lib/sentence');
-var Step = require('./../lib/step');
+var Section = require('./../lib/model/section');
+var Fixture = require('./../lib/fixtures/fixture');
+var Sentence = require('./../lib/grammars/sentence');
+var Step = require('./../lib/model/step');
 var _ = require('lodash');
-var FixtureLibrary = require('./../lib/fixture-library');
+var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 
 describe('Section', function(){
 	var fixtureData = require('./math-fixture-data');

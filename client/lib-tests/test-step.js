@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 
-var Cell = require('./../lib/cell');
-var Step = require('./../lib/step');
-var StepHolder = require('./../lib/step-holder');
+var Cell = require('./../lib/model/cell');
+var Step = require('./../lib/model/step');
+var StepHolder = require('./../lib/model/step-holder');
 
 describe('Step', function(){
 	describe('when getting a cell value', function(){

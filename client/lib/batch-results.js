@@ -1,7 +1,7 @@
-var FixtureLibrary = require('./fixture-library');
-var Specification = require('./specification');
-var ResultCache = require('./specs/result-cache');
-var Counts = require('./specs/counts');
+var FixtureLibrary = require('./fixtures/fixture-library');
+var Specification = require('./model/specification');
+var ResultCache = require('./stores/result-cache');
+var Counts = require('./model/counts');
 var _ = require('lodash');
 
 function LifecycleSummary(name){
