@@ -2,7 +2,7 @@ var Postal = require('postal');
 var startRouting = require('./components/app');
 
 var AllSpecData = require('./all-spec-data');
-var Hierarchy = require('./lib/specs/hierarchy');
+var Hierarchy = require('./lib/stores/hierarchy');
 
 Hierarchy.reset(); // just forcing it to get loaded
 

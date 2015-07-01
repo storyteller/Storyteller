@@ -149,7 +149,9 @@ class Sentence{
 		this.parts.push(new TextPart(text));
 	}
 
-
+	selectFirst(step){
+		return {step: step, holder: step.parent, cell: this.firstCell(step)};
+	}
 
 }
 
