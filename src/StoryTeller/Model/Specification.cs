@@ -27,6 +27,24 @@ namespace StoryTeller.Model
         [JsonProperty("max-retries")]
         public int MaxRetries;
 
+        [JsonProperty("expiration-period")]
+        public int? ExpirationPeriod;
+
+        [JsonProperty("last-updated")]
+        public DateTime LastUpdated
+        {
+            get
+            {
+                if (!_lastUpdated.HasValue)
+                {
+                    _lastUpdated = DateTime.Now;
+                }
+                return _lastUpdated.Value;
+            }
+            set { _lastUpdated = value; }
+        }
+
+
         [JsonConverter(typeof (StringEnumConverter))] 
         [JsonProperty("lifecycle")] 
         public Lifecycle Lifecycle = Lifecycle.Acceptance;
@@ -82,6 +100,7 @@ namespace StoryTeller.Model
 
         [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
         private readonly IList<Node> _children = new List<Node>();
+        private DateTime? _lastUpdated;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
         public IList<Node> Children

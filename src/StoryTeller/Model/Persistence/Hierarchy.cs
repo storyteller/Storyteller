@@ -1,3 +1,4 @@
+using System;
 using FubuCore.Util;
 
 namespace StoryTeller.Model.Persistence
@@ -18,6 +19,12 @@ namespace StoryTeller.Model.Persistence
             specification.path = original.path;
             suite.ReplaceSpecification(specification);
             Specifications[specification.id] = specification;
+        }
+
+        public void Replace(Specification specification, DateTime updatedTime)
+        {
+            specification.LastUpdated = updatedTime;
+            Replace(specification);
         }
 
         public Specification RemoveSpec(string id)

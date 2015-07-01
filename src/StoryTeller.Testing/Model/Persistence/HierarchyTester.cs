@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using FubuCore.Dates;
 using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StructureMap.AutoMocking;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
@@ -12,6 +15,7 @@ namespace StoryTeller.Testing.Model.Persistence
         private Hierarchy theHierarchy;
         private Specification theOriginal;
         private Specification theNew;
+        private DateTime theTime;
 
         [SetUp]
         public void SetUp()
@@ -22,8 +26,8 @@ namespace StoryTeller.Testing.Model.Persistence
             theNew = theOriginal.Clone();
             theNew.path = null;
             theNew.id = theOriginal.id; // gets a new id by default
-
-            theHierarchy.Replace(theNew);
+            theTime = DateTime.Now;
+            theHierarchy.Replace(theNew, theTime);
         }
 
         [Test]
@@ -79,6 +83,12 @@ namespace StoryTeller.Testing.Model.Persistence
         public void the_new_spec_should_know_its_suite_path()
         {
             theNew.SuitePath().ShouldBe(theOriginal.SuitePath());
+        }
+
+        [Test]
+        public void the_new_spec_should_have_updated_time()
+        {
+            theNew.LastUpdated.ShouldBe(theTime);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FubuCore;
+using FubuCore.Dates;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Shouldly;
@@ -108,6 +109,19 @@ namespace StoryTeller.Testing.ST
             var written = XmlReader.ReadFromFile(node.Filename);
             written.Children.Last().ShouldBeOfType<Comment>()
                 .Text.ShouldBe("a new comment");
+        }
+
+        [Test]
+        public void save_specification_updates_last_updated_time()
+        {
+            var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
+            var specification = XmlReader.ReadFromFile(node.Filename);
+            var theTime = new DateTime(2015, 5, 24);
+            LocalSystemTime = theTime;
+            
+            ClassUnderTest.SaveSpecification(node.id, specification);
+            var written = XmlReader.ReadFromFile(node.Filename);
+            written.LastUpdated.ShouldBe(theTime);
         }
 
 
