@@ -116,7 +116,7 @@ module.exports = {
 		});
 
 		editor({
-			keys: 'ctrl+shift+r',
+			keys: ['ctrl+shift+p', ],
 			topic: 'run-spec',
 			description: 'Execute the current specification from the specification editor'
 		});
