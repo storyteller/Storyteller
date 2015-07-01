@@ -116,16 +116,17 @@ module.exports = {
 		});
 
 		editor({
-			keys: 'ctrl+r',
+			keys: 'ctrl+shift+r',
 			topic: 'run-spec',
 			description: 'Execute the current specification from the specification editor'
 		});
-
+/*
 		editor({
 			keys: 'ctrl+shift+r',
 			topic: 'run-spec-auto',
 			description: 'Toggle the auto-run state of the current specification editor screen'
 		});
+*/
 
 		editor({
 			keys: 'ctrl+s',
