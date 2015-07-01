@@ -10,9 +10,14 @@ var BodyRow = React.createClass({
 		var tds = this.props.cells.map(cell => {
 			var arg = this.props.step.args.find(cell.key);
 
-			var cell = TableCell(arg);
+			var value = null;
+			if (arg){
+				value = arg.value;
+			}
 
-			return cell;
+			return (
+				<TableCell cell={cell} value={value} />
+			)
 		});
 
 		var clickClone = e => {

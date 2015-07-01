@@ -6,6 +6,10 @@ var Postal = require('postal');
 
 module.exports = React.createClass({
 
+	propTypes: {
+		cell: React.PropTypes.any.isRequired
+	},
+
 	render: function(){
 		if (this.props.cell.editor == 'display-only'){
 			var text = this.props.value || 'NULL';

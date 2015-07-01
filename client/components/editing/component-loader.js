@@ -28,8 +28,8 @@ class Loader {
 		var chromeless = new Loader(this);
 		toEditor(chromeless);
 
-		chromeless.add('line', 'line');
-		chromeless.add('container', 'preview-container');
+		chromeless.add('line', 'lines/line');
+		chromeless.add('container', 'containers/preview-container');
 
 		return chromeless;
 	}
