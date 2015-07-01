@@ -204,6 +204,14 @@ class EditorPresenter{
 	    	}
 	    }));
 
+	    this.subscriptions.push(Postal.subscribe({
+	    	channel: 'engine-request',
+	    	topic: 'clear-all-results',
+	    	callback: data => {
+	    		this.view.gotoPreview();
+	    	}
+	    }));
+
 		if (!this.spec){
 			this.spec = Hierarchy.findSpec(this.id);
 		}

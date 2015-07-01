@@ -303,6 +303,11 @@ function resetSubscriptions(){
 		topic: 'clear-all-results',
 		callback: function(){
 			ResultCache.clear();
+
+			_.values(specs).forEach(x => {
+				x.clearResults();
+			});
+
 			publishHierarchyChanged();
 
 			Postal.publish({
