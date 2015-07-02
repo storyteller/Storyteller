@@ -9,6 +9,8 @@ var CheckboxEditor = require('./checkbox-editor');
 var SelectEditor = require('./select-editor');
 var BigText = require('./big-text');
 
+var defaultEditor = 'text';
+
 function toDisplay(cell, value){
 	if (value == null) return 'NULL';
 
@@ -38,11 +40,12 @@ var builders = {
 	},
 
 	findEditor: function(editor){
-		if (!this.hasOwnProperty(editor || 'text')){
+    var defaultedEditor = editor || defaultEditor;
+		if (!this.hasOwnProperty(defaultedEditor)){
 			throw new Error('builders do not recognize editor: ' + editor);
 		}
 
-		return this[editor];
+		return this[defaultedEditor];
 	},
 
 	toEditor: function(arg){
