@@ -4,6 +4,7 @@ using System.Linq;
 using System.Timers;
 using FubuCore;
 using FubuCore.CommandLine;
+using FubuCore.Dates;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Engine.UserInterface;
@@ -19,6 +20,7 @@ namespace StoryTeller.Remotes
         private Project _project;
         private ISystem _system;
         private readonly IList<IDisposable> _services = new List<IDisposable>();
+        private SpecExpiration _specExpiration;
 
 
         public void Dispose()
@@ -60,6 +62,11 @@ namespace StoryTeller.Remotes
                 systemType = _project.DetermineSystemType();
                 _system = Activator.CreateInstance(systemType).As<ISystem>();
                 _services.Add(_system);
+
+                var timeZone = new MachineTimeZoneContext();
+                var clock = new Clock();
+                var systemTime = new SystemTime(clock, timeZone);
+                _specExpiration = new SpecExpiration(systemTime);
 
                 if (mode == EngineMode.Interactive)
                 {
@@ -117,7 +124,7 @@ namespace StoryTeller.Remotes
         {
             var observer = new UserInterfaceObserver();
 
-            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system);
+            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system, _specExpiration);
 
             var executionObserver = new UserInterfaceExecutionObserver();
             var engine  = new SpecificationEngine(_system, runner, executionObserver);
@@ -149,7 +156,7 @@ namespace StoryTeller.Remotes
             }
 
             var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode, _system);
+            var runner = new SpecRunner(executionMode, _system, _specExpiration);
 
             var engine = new SpecificationEngine(
                 _system, runner, executionObserver);

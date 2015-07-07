@@ -28,7 +28,7 @@ namespace StoryTeller.Model
         public int MaxRetries;
 
         [JsonProperty("expiration-period")]
-        public int? ExpirationPeriod;
+        public int ExpirationPeriod;
 
         [JsonProperty("last-updated")]
         public DateTime LastUpdated

@@ -52,6 +52,40 @@ namespace StoryTeller.Testing.Engine
     }
 
     [TestFixture]
+    public class executing_when_spec_has_expired : InteractionContext<SpecRunner>
+    {
+        private SpecExecutionRequest theRequest;
+        private SpecResults theResults;
+
+        protected override void beforeEach()
+        {
+            var specNode = new Specification() { id = Guid.NewGuid().ToString() };
+            MockFor<ISpecExpiration>().Stub(x => x.IsExpired(Arg<Specification>.Is.Anything)).Return(true);
+            theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver());
+            theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
+        }
+
+        [Test]
+        public void the_proper_results_are_given()
+        {
+            theResults.WasAborted.ShouldBe(true);
+            theResults.Attempts.ShouldBe(0);
+        }
+
+        [Test]
+        public void should_call_through_to_the_before_running_method_on_mode()
+        {
+            MockFor<IExecutionMode>().AssertWasCalled(x => x.BeforeRunning(theRequest));
+        }
+
+        [Test]
+        public void should_call_through_to_the_after_running_method_on_the_active_mode()
+        {
+            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>(), ClassUnderTest.Status));
+        }
+    }
+
+    [TestFixture]
     public class executing_a_spec_when_context_creation_blows_up : InteractionContext<SpecRunner>
     {
         private SpecExecutionRequest theRequest;
