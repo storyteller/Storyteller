@@ -54,7 +54,7 @@ var SpecProgressBar = React.createClass({
 			Postal.publish({
 				channel: 'engine-request',
 				topic: 'cancel-spec',
-				data: {id: this.state.step.id}
+				data: {id: this.state.spec.id}
 			});
 
 			e.preventDefault();
