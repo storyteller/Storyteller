@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 var React = require("react");
 var CheckboxIcon = require('./../../icons')['checked'];
+var Arg = require('./../../../lib/model/arg');
+var _ = require('lodash');
 
 var ResultRow = React.createClass({
 	render: function(){
@@ -14,6 +16,10 @@ var ResultRow = React.createClass({
 
 		var cells = this.props.cells.map(cell => {
 			var arg = this.props.step.args.find(cell.key);
+			if (!arg){
+				arg = new Arg(cell, {cells:{}}, this.props.step.id);
+			}
+
 			var inner = arg.buildResults(loader);
 
 			return (
@@ -23,6 +29,9 @@ var ResultRow = React.createClass({
 
 		if (result.status == 'ok'){
 			var arg = this.props.step.args.find(this.props.cells[0].key);
+			if (!arg){
+				arg = new Arg(cell, {cells:{}}, this.props.step.id);
+			}
 			var inner = arg.buildResults(loader);
 
 

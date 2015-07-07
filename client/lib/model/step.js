@@ -49,7 +49,14 @@ class Step{
 		var self = this;
 		if (result.cells){
 			result.cells.forEach(cellResult => {
-				self.args.find(cellResult.cell).result = cellResult;
+				var arg = self.args.find(cellResult.cell);
+				if (arg){
+					arg.result = cellResult;
+				}
+				else {
+					console.log('Unable to find an Arg for cell ' + cellResult.cell + ' of step ' + self.id);
+				}
+				
 			});
 		}
 
