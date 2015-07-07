@@ -128,6 +128,7 @@
     <Compile Include="InteractionContext.cs" />
     <Compile Include="InvalidFixtureTester.cs" />
     <Compile Include="json_serialization_of_fixture_model.cs" />
+    <Compile Include="Messages\QueueStateTester.cs" />
     <Compile Include="Model\CellTester.cs" />
     <Compile Include="Model\ErrorGrammarTester.cs" />
     <Compile Include="Model\MissingGrammarTester.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.CommandLine;
@@ -16,6 +17,7 @@ namespace StoryTeller.Remotes
         void Recycle();
         void SendMessage<T>(T message);
         RemoteController.ResponseExpression Send<T>(T message);
+        QueueState QueueState();
     }
 
     public class RemoteController : IDisposable, IRemoteController
@@ -99,7 +101,7 @@ namespace StoryTeller.Remotes
         public void Recycle()
         {
             _messaging.Send(new SystemRecycleStarted());
-           
+
             Teardown();
 
             _messaging.Send(new QueueState());
@@ -109,6 +111,7 @@ namespace StoryTeller.Remotes
                 _messaging.Send(x.Result);
 
                 LatestSystemRecycled = x.Result;
+
                 return x.Result;
             });
         }

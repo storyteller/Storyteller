@@ -1,11 +1,10 @@
-<?xml version="1.0"?>
-<Test name="Boolean Results in a Table" lifecycle="Acceptance" id="table1">
-  <Table>
-    <IsPositive isStep="True">
-      <table>
-        <row isStep="True" number="5" Number="true" IsEven="true" />
-        <row isStep="True" number="-5" IsEven="false" />
+<Spec id="table1" maxRetries="0" tags="" lifecycle="Acceptance" name="Boolean Results in a Table">
+  <Table id="3ebd1088-3f9a-4623-bf69-8c04668dd246">
+    <IsPositive>
+      <table id="a481d76f-66ae-464f-8c6f-2739e4c39d3e">
+        <IsPositive-row number="5" IsEven="true" />
+        <IsPositive-row number="-5" IsEven="false" />
       </table>
     </IsPositive>
   </Table>
-</Test>
+</Spec>

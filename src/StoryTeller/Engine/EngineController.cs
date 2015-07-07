@@ -92,6 +92,7 @@ namespace StoryTeller.Engine
         public void Receive(RunSpecs message)
         {
             message.specs.Each(x => RunSpec(x.id, x));
+
             SendQueueState();
         }
 

@@ -15,6 +15,7 @@ namespace ST.Client
         IListener<PassthroughMessage>, 
         IListener<SystemRecycled>, 
         IListener<SystemRecycleStarted>, 
+        IListener<QueueState>, 
         IClientConnector
     {
         private readonly ILogger _logger;
@@ -122,6 +123,7 @@ namespace ST.Client
             SendMessageToClient(message);
         }
 
+
         public void HandleJson(string json)
         {
             try
@@ -145,6 +147,10 @@ namespace ST.Client
         }
 
 
+        public void Receive(QueueState message)
+        {
+            SendMessageToClient(message);
+        }
     }
 
 
