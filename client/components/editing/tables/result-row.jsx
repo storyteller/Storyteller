@@ -30,7 +30,7 @@ var ResultRow = React.createClass({
 		if (result.status == 'ok'){
 			var arg = this.props.step.args.find(this.props.cells[0].key);
 			if (!arg){
-				arg = new Arg(cell, {cells:{}}, this.props.step.id);
+				arg = new Arg(this.props.cells[0], {cells:{}}, this.props.step.id);
 			}
 			var inner = arg.buildResults(loader);
 
