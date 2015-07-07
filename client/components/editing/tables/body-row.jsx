@@ -13,12 +13,14 @@ var BodyRow = React.createClass({
 			var arg = this.props.step.args.find(cell.key);
 
 			var value = null;
+			var active = false;
 			if (arg){
 				value = arg.value;
+				active = arg.active;
 			}
 
 			return (
-				<TableCell cell={cell} value={value} active={arg.active} id={this.props.step.id} />
+				<TableCell cell={cell} value={value} active={active} id={this.props.step.id} />
 			)
 		});
 
