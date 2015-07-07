@@ -45,10 +45,12 @@ class EditorPresenter{
 
 	}
 
-	reorderUp(){
+	reorderUp(location){
 		applyOutstandingChanges();
 
-		var location = this.locationForReordering();
+		if (!location){
+			location = this.locationForReordering();
+		}
 
 		if (location.step && !location.holder.isFirst(location.step)){
 			var change = changes.moveUp(location.holder, location.step);
@@ -56,10 +58,12 @@ class EditorPresenter{
 		}
 	}
 
-	reorderDown(){
+	reorderDown(location){
 		applyOutstandingChanges();
 		
-		var location = this.locationForReordering();
+		if (!location){
+			location = this.locationForReordering();
+		}
 
 		if (location.step && !location.holder.isLast(location.step)){
 			var change = changes.moveDown(location.holder, location.step);
