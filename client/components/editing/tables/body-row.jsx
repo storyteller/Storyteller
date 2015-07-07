@@ -2,6 +2,8 @@
 var React = require("react");
 var TableCell = require('./table-cell');
 var DeleteGlyph = require('./../delete-glyph');
+var ReorderGlyph = require('./../reorder-glyph');
+
 var Icons = require('./../../icons');
 var Copy = Icons['copy'];
 
@@ -33,8 +35,9 @@ var BodyRow = React.createClass({
 
 		return (
 			<tr id={this.props.step.id} key={this.props.step.id} className={clazz}>
-				<td> 
+				<td nowrap> 
 					<DeleteGlyph step={this.props.step} /> 
+					<ReorderGlyph step={this.props.step} /> 
 					<a onClick={clickClone} className="clone-table-row" title="Clone this row" href="#"><Copy /></a>
 				</td>
 				{tds}

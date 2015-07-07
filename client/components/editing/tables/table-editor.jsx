@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require("react");
 var DeleteGlyph = require('./../delete-glyph');
+var ReorderGlyph = require('./../reorder-glyph');
 
 var HeaderRow = require('./header-row');
 
@@ -41,7 +42,13 @@ var TableEditor = React.createClass({
 
 			<table className="table table-bordered table-hover" id={this.props.section.id}>
 				<thead>
-					<tr><th className={headerClass} colSpan={tableWidth}><DeleteGlyph step={this.props.step}/>{this.props.title}</th></tr>
+					<tr>
+						<th className={headerClass} colSpan={tableWidth}>
+							<DeleteGlyph step={this.props.step}/>
+							{this.props.title}
+							<ReorderGlyph step={this.props.step}/>
+						</th>
+					</tr>
 					<HeaderRow cells={this.props.cells}/>
 				</thead>
 				<tbody>

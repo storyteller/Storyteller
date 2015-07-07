@@ -56,6 +56,8 @@ icon('checked', ['fa-check']);
 
 icon('down-arrow', ['fa-chevron-down']);
 icon('up-arrow', ['fa-chevron-up']);
+icon('reorder-inactive', ['fa-bars']);
+icon('reorder-active', ['fa-bars', 'text-success']);
 
 
 module.exports = icons;

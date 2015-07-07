@@ -21,7 +21,7 @@ var HeaderRow = React.createClass({
 		var actionCell = null;
 		if (!this.props.hideActions){
 			actionCell = (
-				<th></th>
+				<th>Actions</th>
 			);
 		}
 

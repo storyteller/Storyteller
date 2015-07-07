@@ -3,6 +3,7 @@
 var React = require("react");
 var BigText = require('./../editors/big-text');
 var DeleteGlyph = require('./../delete-glyph');
+var ReorderGlyph = require('./../reorder-glyph');
 var Postal = require('postal');
 
 module.exports = React.createClass({
@@ -36,6 +37,8 @@ module.exports = React.createClass({
 					 >
 						<DeleteGlyph step={this.props.step} />
 						<span className="comment-text" tabIndex="0" role="button" onClick={editCell} onFocus={editCell}>{this.props.arg.value}</span>
+				
+						<ReorderGlyph step={this.props.step} />
 				</div>
 			);
 		}
