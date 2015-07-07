@@ -82,7 +82,7 @@ namespace StoryTeller.Samples.Fixtures
 
         // SAMPLE:  ActionMethod
         [FormatAs("Start with the number {number}")]
-        public void StartWithTheNumber(int number)
+        public void StartWithTheNumber(int number = 5)
         {
             _number = number;
             say();

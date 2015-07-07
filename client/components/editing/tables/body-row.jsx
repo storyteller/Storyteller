@@ -18,7 +18,7 @@ var BodyRow = React.createClass({
 			}
 
 			return (
-				<TableCell cell={cell} value={value} />
+				<TableCell cell={cell} value={value} active={arg.active} />
 			)
 		});
 

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using StoryTeller.Grammars.Decisions;
 using StoryTeller.Grammars.Tables;
 
@@ -28,8 +29,9 @@ namespace StoryTeller.Samples.Fixtures
         }
 
         [FormatAs("The Enum value of {option} should be {selectedOption}")]
+
         [return: AliasAs("selectedOption")]
-        public string TheEnumOptionIs([SelectionValues(typeof(SampleEnum))] string option)
+        public string TheEnumOptionIs([SelectionValues(typeof(SampleEnum)), Default("SecondOption")] string option)
         {
             return EnumValueFor<SampleEnum>(option).ToString();
         }
