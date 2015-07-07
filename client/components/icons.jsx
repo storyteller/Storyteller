@@ -54,5 +54,8 @@ icon('help', ['fa-question']);
 icon('search', ['fa-search']);
 icon('checked', ['fa-check']);
 
+icon('down-arrow', ['fa-chevron-down']);
+icon('up-arrow', ['fa-chevron-up']);
+
 
 module.exports = icons;

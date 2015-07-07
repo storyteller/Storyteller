@@ -158,8 +158,8 @@ class EditorPresenter{
 		this.subscribe('undo', () => this.undo());
 		this.subscribe('redo', () => this.redo());
 
-		this.subscribe('reorder-up', () => this.reorderUp());
-		this.subscribe('reorder-down', () => this.reorderDown());
+		this.subscribe('reorder-up', data => this.reorderUp(data.location));
+		this.subscribe('reorder-down', data => this.reorderDown(data.location));
 
 		this.subscribe('add-item', () => {
 			applyOutstandingChanges();
