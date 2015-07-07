@@ -58,7 +58,7 @@ namespace StoryTeller.Samples.Fixtures
         }
 
         [ExposeAsTable("Is Positive?")]
-        [return: AliasAs("IsEven")]
+        [return: AliasAs("IsEven"), Default("true")]
         public bool IsPositive(int number)
         {
             return number >= 0;            
