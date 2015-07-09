@@ -5,6 +5,7 @@ namespace StoryTeller.Model.Persistence
         public const string LifecycleAtt = "lifecycle";
         public const string MaxRetries = "maxRetries";
         public const string LastUpdated = "lastUpdated";
+        public const string ExpirationPeriod = "expirationPeriod";
         public const string Id = "id";
         public const string TagsAtt = "tags";
         public const string Comment = "Comment";

@@ -1,4 +1,4 @@
-var expect = require('chai').expect;
+var {expect} = require('chai');
 var changes = require('./../lib/model/change-commands');
 
 describe('RetryCountChanged', () => {

@@ -1,4 +1,4 @@
-<Spec id="embeds" maxRetries="0" tags="" lifecycle="Regression" name="Embeds">
+<Spec id="embeds" maxRetries="0" tags="" lifecycle="Regression" name="Embeds" lastUpdated="Wednesday, July 08, 2015" expirationPeriod="3">
   <Embedded id="b1d704cf-6062-40c1-be78-94a8aa901850">
     <ThrowAnExceptionOnTheNextEmbed />
     <EmbeddedMath>

@@ -124,6 +124,18 @@ namespace StoryTeller.Testing.ST
             written.LastUpdated.ShouldBe(theTime);
         }
 
+        [Test]
+        public void save_specification_updates_expiration_period()
+        {
+            var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
+            var specification = XmlReader.ReadFromFile(node.Filename);
+            specification.ExpirationPeriod = 5;
+            
+            ClassUnderTest.SaveSpecification(node.id, specification);
+            var written = XmlReader.ReadFromFile(node.Filename);
+            written.ExpirationPeriod.ShouldBe(5);
+        }
+
 
         [Test]
         public void clone_a_specification()

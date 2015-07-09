@@ -19,6 +19,8 @@ function Specification(data, library){
 	this.results = {};
 	this.active = false;
 	this['max-retries'] = data['max-retries'];
+	this['expiration-period'] = data['expiration-period'];
+	this['last-updated'] = data['last-updated'];
 	this.mode = data.mode || 'full';
 	this.lifecycle = data.lifecycle || 'Acceptance';
 
@@ -77,7 +79,8 @@ function Specification(data, library){
 			id: this.id,
 			lifecycle: this.lifecycle,
 			mode: this.mode,
-			'max-retries': this['max-retries']
+			'max-retries': this['max-retries'],
+			'expiration-period': this['expiration-period']
 		}
 	}
 

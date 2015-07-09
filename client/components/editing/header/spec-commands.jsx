@@ -22,10 +22,10 @@ var CommandButton = React.createClass({
 		var Icon = Icons[this.props.icon];
 
 		return (
-			<Button 
+			<Button
 				id={this.props.id}
-				title={this.props.title} 
-				disabled={this.props.disabled} 
+				title={this.props.title}
+				disabled={this.props.disabled}
 				onClick={onclick}><Icon /></Button>
 
 		);
@@ -38,33 +38,33 @@ var SpecCommands = React.createClass({
 
 		return (
 			<ButtonGroup style={{marginRight: '30px'}}>
-				<CommandButton 
-					title="Run the specification" 
-					spec={this.props.spec} 
-					icon="run"  
+				<CommandButton
+					title="Run the specification"
+					spec={this.props.spec}
+					icon="run"
 					message="run-spec"
 					disabled={false} />
 
-				<CommandButton 
-					title="Save outstanding changes to the spec" 
-					spec={this.props.spec} 
-					icon="save" 
+				<CommandButton
+					title="Save outstanding changes to the spec"
+					spec={this.props.spec}
+					icon="save"
 					message="save-spec"
 					disabled={!this.props.spec.isDirty()}/>
 
-				<CommandButton 
-					title="Undo the last change" 
-					spec={this.props.spec} 
-					id='undo' 
-					icon="undo" 
+				<CommandButton
+					title="Undo the last change"
+					spec={this.props.spec}
+					id='undo'
+					icon="undo"
 					message="undo"
 					disabled={!this.props.spec.isDirty()} />
 
-				<CommandButton 
-					title="Redo the previous change" 
-					spec={this.props.spec} 
-					id='redo' 
-					icon="redo" 
+				<CommandButton
+					title="Redo the previous change"
+					spec={this.props.spec}
+					id='redo'
+					icon="redo"
 					message="redo"
 					disabled={!this.props.spec.canRedo()}/>
 			</ButtonGroup>

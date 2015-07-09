@@ -147,6 +147,19 @@ function RetryCountChanged(count){
 	}
 }
 
+function ExpirationPeriodChanged(period){
+	this.period = period;
+
+	this.apply = store => {
+		this.old = store['expiration-period'];
+		store['expiration-period'] = period;
+	}
+
+	this.unapply = store => {
+		store['expiration-period'] = this.old;
+	}
+}
+
 
 
 module.exports = {
@@ -164,6 +177,10 @@ module.exports = {
 
 	changeRetryCount: function(count){
 		return new RetryCountChanged(count);
+	},
+
+	changeExpirationPeriod: function(period){
+		return new ExpirationPeriodChanged(period);
 	},
 
 	cellValue: function(id, cell, value){

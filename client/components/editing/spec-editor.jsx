@@ -20,6 +20,7 @@ var Running = Icons['running'];
 var Persisting = require('./alerts/persisting');
 var SpecResultHeader = require('./header/spec-result-header');
 var RetryCount = require('./header/retry-count');
+var ExpirationPeriod = require('./header/expiration-period');
 
 
 
@@ -63,6 +64,7 @@ var ContextualPane = React.createClass({
 		return (
 			<Col xs={4} md={4}>
 				<RetryCount count={this.props.spec['max-retries']}/>
+				<ExpirationPeriod expirationPeriod={this.props.spec['expiration-period']}/>
 				<h4>Outline</h4>
 				<SpecOutline outline={this.props.outline} />
 				<br />
