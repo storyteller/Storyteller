@@ -166,6 +166,7 @@
     <Compile Include="SpecRunningContext.cs" />
     <Compile Include="StateTester.cs" />
     <Compile Include="StoryTellerAssertTester.cs" />
+    <Compile Include="ST\BumpSpecDateCommandTester.cs" />
     <Compile Include="ST\ClientConnectorTester.cs" />
     <Compile Include="ST\Docs\DocSettingsTester.cs" />
     <Compile Include="ST\Docs\Samples\CLanguageSampleFinderTester.cs" />

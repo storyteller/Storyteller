@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -69,7 +69,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Attributes.cs" />
     <Compile Include="CellHandling.cs" />
-    <Compile Include="Commands\ForceRecycleCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Conversion\ArrayConversion.cs" />
     <Compile Include="Conversion\Conversions.cs" />

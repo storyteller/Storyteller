@@ -65,6 +65,11 @@ namespace ST.Client
             get { return _results; }
         }
 
+        public Specification LoadSpecificationById(string id)
+        {
+            return Hierarchy.Specifications[id];
+        }
+
         public void StartWatching(string path)
         {
             try
