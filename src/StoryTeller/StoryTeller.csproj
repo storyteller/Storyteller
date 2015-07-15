@@ -188,6 +188,7 @@
     <Compile Include="IWithValues.cs" />
     <Compile Include="Messages\AddSpec.cs" />
     <Compile Include="Messages\AddSuite.cs" />
+    <Compile Include="Messages\BumpSpecDate.cs" />
     <Compile Include="Messages\CancelAllSpecs.cs" />
     <Compile Include="Messages\CancelSpec.cs" />
     <Compile Include="Messages\ClearAllResults.cs" />

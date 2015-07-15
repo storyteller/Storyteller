@@ -30,6 +30,7 @@ namespace StoryTeller.Model
         [JsonProperty("expiration-period")]
         public int ExpirationPeriod;
 
+        [JsonConverter(typeof(LastUpdatedConverter))]
         [JsonProperty("last-updated")]
         public DateTime LastUpdated
         {
@@ -173,6 +174,24 @@ namespace StoryTeller.Model
             clone.id = Guid.NewGuid().ToString();
 
             return clone;
+        }
+    }
+
+    public class LastUpdatedConverter : JsonConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((DateTime) value).ToLongDateString());
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            return DateTime.Parse((string)existingValue);
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof (DateTime);
         }
     }
 }
