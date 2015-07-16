@@ -41,7 +41,7 @@ var ExpirationPeriod = React.createClass({
     var message = this.getExpirationPeriod() ? <p>Expires in: {this.getSelect()} months.</p> : <p>Never expires. {this.getSelect()} months.</p>;
     return <div id='expiration-period' className='clearfix'>
       {message}
-      <p><em><small>Last Updated: {this.props.spec['last-updated']}</small></em></p>
+      <p className='last-updated'><em><small>Last Updated: {this.props.spec['last-updated']}</small></em></p>
       <button disabled={this.props.disabled} className='pull-right btn' onClick={this.clickFunc}>Update</button>
     </div>;
   },
