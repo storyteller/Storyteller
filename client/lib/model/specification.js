@@ -7,318 +7,316 @@ var QueueState = require('./../stores/queue-state');
 var ResultCache = require('./../stores/result-cache');
 
 function Specification(data, library){
-	if (data == undefined || data == null){
-		throw new Error('Null data being passed into Specification');
-	}
-
-	StepHolder.call(this, data.id, library || {}, 'add sections or comments...');
-
-	this.title = data.title || data.name;
-	this.byId = {};
-	this.type = 'specification';
-	this.results = {};
-	this.active = false;
-	this['max-retries'] = data['max-retries'];
-	this['expiration-period'] = data['expiration-period'];
-	this['last-updated'] = data['last-updated'];
-	this.mode = data.mode || 'full';
-	this.lifecycle = data.lifecycle || 'Acceptance';
-
-	this.navigator = new SpecificationNavigator(this);
-
-	Object.defineProperty(this, 'state', {
-		enumerable: true,
-		writeable: false,
-		get: function(){
-			return QueueState.stateFor(this.id);
-		}
-	});
-
-
-	this.status = function(){
-		if (!this.hasResults()) return 'none';
-
-		var lastResult = ResultCache.lastResultFor(this.id);
-
-		if (lastResult.counts.success()) return 'success';
-
-		return 'failed';
-	}
-
-	this.hasResults = function(){
-		return ResultCache.hasResults(this.id);
-	}
-
-	this.icon = function(){
-		if (this.state == 'running'){
-			var counts = QueueState.runningCounts();
-			if (!counts.anyResults()) return 'running';
-
-			if (counts.success()) return 'running-success';
-
-			return 'running-failed';
-		}
-
-		return this.status();
-	}
-
-	this.children = function(){
-		return this.steps;
-	}
-
-	this.grammars = function(){
-		return _.sortBy(library.fixtures, function(x){
-			return x.title;
-		});
-	}
-
-	this.write = function(){
-		return {
-			title: this.title,
-			steps: this.writeSteps(),
-			id: this.id,
-			lifecycle: this.lifecycle,
-			mode: this.mode,
-			'max-retries': this['max-retries'],
-			'expiration-period': this['expiration-period'],
-			'last-updated': this['last-updated']
-		}
-	}
-
-	this.previews = function(loader){
-		return this.buildComponents(x => x.preview(loader));
-	}
-
-	this.editors = function(loader){
-		var editors = this.buildComponents(x => x.editor(loader));
-		editors.push(this.adder.editor(loader));
-
-		return editors;
-	}
-
-	this.buildResults = function(loader){
-		var elements = [];
-
-		if (this.results.timedout){
-			elements.push(loader.errorBox({title: 'Timed out!', error: this.results.timedout.error}));
-		}
-
-		if (this.results.engine){
-			elements.push(loader.errorBox({title: 'Engine Failure', error: this.results.engine.error}));
-		}
+  if (data == undefined || data == null){
+    throw new Error('Null data being passed into Specification');
+  }
+
+  StepHolder.call(this, data.id, library || {}, 'add sections or comments...');
+
+  this.updateHeader = function (headData) {
+    let {title, name, mode, lifecycle} = headData;
+    this.title = title || name;
+    this['max-retries'] = headData['max-retries'];
+    this['expiration-period'] = headData['expiration-period'];
+    this['last-updated'] = headData['last-updated'];
+    this.mode = mode || 'full';
+    this.lifecycle = lifecycle || 'Acceptance';
+  }
+
+  this.byId = {};
+  this.type = 'specification';
+  this.results = {};
+  this.active = false;
+  this.updateHeader(data);
+
+
+  this.navigator = new SpecificationNavigator(this);
 
+  Object.defineProperty(this, 'state', {
+    enumerable: true,
+    writeable: false,
+    get: function(){
+      return QueueState.stateFor(this.id);
+    }
+  });
 
-		if (this.results.context){
-			elements.push(loader.errorBox({title: 'Context Creation Failure in the engine', error: this.results.context.error}));
-		}
+
+  this.status = function(){
+    if (!this.hasResults()) return 'none';
+
+    var lastResult = ResultCache.lastResultFor(this.id);
+
+    if (lastResult.counts.success()) return 'success';
+
+    return 'failed';
+  }
+
+  this.hasResults = function(){
+    return ResultCache.hasResults(this.id);
+  }
 
-		this.steps.forEach(step => {
-			var element = step.buildResults(loader);
-			if (element instanceof Array){
-				elements = elements.concat(element);
-			}
-			else{
-				elements.push(element);
-			}
-		});
+  this.icon = function(){
+    if (this.state == 'running'){
+      var counts = QueueState.runningCounts();
+      if (!counts.anyResults()) return 'running';
 
-		
-		var tabs = [];
+      if (counts.success()) return 'running-success';
 
+      return 'running-failed';
+    }
+
+    return this.status();
+  }
 
-		tabs.push(loader.tab(elements, 0, 'Specification'));
+  this.children = function(){
+    return this.steps;
+  }
 
-		if (this.results.performance){
-			var table = loader.perfTable({records: this.results.performance});
-			tabs.push(loader.tab(table, 1, 'Performance'));
-		}
+  this.grammars = function(){
+    return _.sortBy(library.fixtures, function(x){
+      return x.title;
+    });
+  }
 
-		var logs = (this.results.logging || []);
-		for (var i = 0; i < logs.length; i++){
-			var log = logs[i];
-			if (log.count > 0){
-				var logElement = loader.logComponent(log);
-				var tab = loader.tab(logElement, i + 2, log['short_title']);
-				
-				tabs.push(tab);
-			}
-		}
+  this.write = function(){
+    return {
+      title: this.title,
+      steps: this.writeSteps(),
+      id: this.id,
+      lifecycle: this.lifecycle,
+      mode: this.mode,
+      'max-retries': this['max-retries'],
+      'expiration-period': this['expiration-period'],
+      'last-updated': this['last-updated']
+    }
+  }
 
-		var tabbedArea = loader.tabbedArea({defaultActiveKey: 0, children: tabs});
+  this.previews = function(loader){
+    return this.buildComponents(x => x.preview(loader));
+  }
 
-		return [tabbedArea];
-	}
+  this.editors = function(loader){
+    var editors = this.buildComponents(x => x.editor(loader));
+    editors.push(this.adder.editor(loader));
 
+    return editors;
+  }
 
-	this.find = function(id){
-		if (this.byId.hasOwnProperty(id)){
-			return this.byId[id];
-		}
+  this.buildResults = function(loader){
+    var elements = [];
 
-		return null;
-	}
+    if (this.results.timedout){
+      elements.push(loader.errorBox({title: 'Timed out!', error: this.results.timedout.error}));
+    }
 
-	this.undoList = [];
-	this.redoList = [];
+    if (this.results.engine){
+      elements.push(loader.errorBox({title: 'Engine Failure', error: this.results.engine.error}));
+    }
 
-	this.apply = function(change){
-		change.revision = uuid.v4();
-		change.apply(this);
-		this.undoList.push(change);
 
-		this.redoList = [];
-	}
+    if (this.results.context){
+      elements.push(loader.errorBox({title: 'Context Creation Failure in the engine', error: this.results.context.error}));
+    }
 
-	this.revision = function(){
-		if (this.undoList.length == 0) return null;
+    this.steps.forEach(step => {
+      var element = step.buildResults(loader);
+      if (element instanceof Array){
+        elements = elements.concat(element);
+      }
+      else{
+        elements.push(element);
+      }
+    });
 
-		return this.undoList[this.undoList.length - 1].revision;
-	}
+    var tabs = [];
 
-	this.baselineAt = function(revision){
-		var index = this.undoList.findIndex(change => {
-			return change.revision == revision;
-		});
 
-		if (index > -1){
-			this.undoList = this.undoList.slice(index + 1);
-		}
-	}
+    tabs.push(loader.tab(elements, 0, 'Specification'));
 
-	this.changeStatus = function(){
-		return {applied: this.undoList.length, unapplied: this.redoList.length};
-	}
+    if (this.results.performance){
+      var table = loader.perfTable({records: this.results.performance});
+      tabs.push(loader.tab(table, 1, 'Performance'));
+    }
 
-	this.isDirty = function(){
-		return this.undoList.length > 0;
-	}
+    var logs = (this.results.logging || []);
+    for (var i = 0; i < logs.length; i++){
+      var log = logs[i];
+      if (log.count > 0){
+        var logElement = loader.logComponent(log);
+        var tab = loader.tab(logElement, i + 2, log['short_title']);
+        tabs.push(tab);
+      }
+    }
 
-	this.canRedo = function(){
-		return this.redoList.length > 0;
-	}
+    var tabbedArea = loader.tabbedArea({defaultActiveKey: 0, children: tabs});
 
-	this.undo = function(){
-		if (this.undoList.length == 0) return;
+    return [tabbedArea];
+  }
 
-		var last = this.undoList.pop();
-		last.unapply(this);
 
-		this.redoList.push(last);
-	}
+  this.find = function(id){
+    return this.byId[id]
+  }
 
-	this.redo = function(){
-		if (this.redoList.length == 0) return;
+  this.undoList = [];
+  this.redoList = [];
 
-		var last = this.redoList.pop();
-		last.apply(this);
+  this.apply = function(change){
+    change.revision = uuid.v4();
+    change.apply(this);
+    this.undoList.push(change);
 
-		this.undoList.push(last);
-	}
+    this.redoList = [];
+  }
 
-	var removeStepBase = this.removeStep;
+  this.revision = function(){
+    if (this.undoList.length == 0) return null;
 
-	this.removeStep = function(step){
-		delete this.byId[step.id];
-		return removeStepBase(step);
-	}
+    return this.undoList[this.undoList.length - 1].revision;
+  }
 
+  this.baselineAt = function(revision){
+    var index = this.undoList.findIndex(change => {
+      return change.revision == revision;
+    });
 
+    if (index > -1){
+      this.undoList = this.undoList.slice(index + 1);
+    }
+  }
 
-	this.storeStep = function(step){
-		this.byId[step.id] = step;
-	}
+  this.changeStatus = function(){
+    return {applied: this.undoList.length, unapplied: this.redoList.length};
+  }
 
-	this.readSteps(data);
+  this.isDirty = function(){
+    return this.undoList.length > 0;
+  }
 
-	var self = this;
-	var readHolder = function(holder){
-		self.byId[holder.id] = holder;
+  this.canRedo = function(){
+    return this.redoList.length > 0;
+  }
 
-		if (!holder.children)
-			return;
+  this.undo = function(){
+    if (this.undoList.length == 0) return;
 
-		var children = holder.children();
+    var last = this.undoList.pop();
+    last.unapply(this);
 
-		for (var i = 0; i < children.length; i++){
-			readHolder(children[i]);
-		}
-	}
+    this.redoList.push(last);
+  }
 
-	self.selectCell = function(id, cell){
-		var step = this.find(id);
-		if (!step){
-			throw new Error('Unable to find a step with id: ' + id);
-		}
+  this.redo = function(){
+    if (this.redoList.length == 0) return;
 
-		var arg = step.findByPath(cell);
-		if (!arg){
-			throw new Error("Unable to find a cell named " + cell + '" for id: ' + id);
-		}
+    var last = this.redoList.pop();
+    last.apply(this);
 
-		this.navigator.replace({holder: step.parent, step: step, cell: arg});
-	}
+    this.undoList.push(last);
+  }
 
-	self.selectHolder = function(id){
-		var holder = this.find(id);
+  var removeStepBase = this.removeStep;
 
-		if (!holder){
-			throw new Error('Unable to find the specified holder with id: ' + id);
-		}
+  this.removeStep = function(step){
+    delete this.byId[step.id];
+    return removeStepBase(step);
+  }
 
-		this.navigator.goToHolder(holder);
-	}
 
-	self.logResult = function(result){
-		self.results[result.position] = result;
-	}
 
-	self.clearResults = function(){
-		self.results = {};
-		self.steps.forEach(s => s.clearResults());
-	}
+  this.storeStep = function(step){
+    this.byId[step.id] = step;
+  }
 
-	self.readResults = function(results){
-		self.clearResults();
+  this.readSteps(data);
 
-		self.results.logging = results.logging;
-		self.results.performance = results.performance;
+  var self = this;
+  var readHolder = function(holder){
+    self.byId[holder.id] = holder;
 
-		results.results.forEach(x => {
-			var child = self.find(x.id);
-			if (child){
-				child.logResult(x);
-			} 
-			else {
-				console.log('Unable to find a matching step for ' + JSON.stringify(x));
-			}
-		});
-	}
+    if (!holder.children)
+      return;
 
-	Object.defineProperty(self, 'activeCell', {
-		enumerable: true,
-		writeable: true,
-		get: function(){
-			if (this.navigator.location.hasOwnProperty('cell')){
-				return this.navigator.location.cell;
-			}
+    var children = holder.children();
 
-			return null;
-		}
-	});
+    for (var i = 0; i < children.length; i++){
+      readHolder(children[i]);
+    }
+  }
 
-	Object.defineProperty(self, 'activeHolder', {
-		enumerable: true,
-		writeable: true,
-		get: function(){
-			return this.navigator.location.holder;
-		}
-	});
+  self.selectCell = function(id, cell){
+    var step = this.find(id);
+    if (!step){
+      throw new Error('Unable to find a step with id: ' + id);
+    }
 
-	readHolder(this);
+    var arg = step.findByPath(cell);
+    if (!arg){
+      throw new Error("Unable to find a cell named " + cell + '" for id: ' + id);
+    }
 
-	this.navigator.moveFirst();
+    this.navigator.replace({holder: step.parent, step: step, cell: arg});
+  }
+
+  self.selectHolder = function(id){
+    var holder = this.find(id);
+
+    if (!holder){
+      throw new Error('Unable to find the specified holder with id: ' + id);
+    }
+
+    this.navigator.goToHolder(holder);
+  }
+
+  self.logResult = function(result){
+    self.results[result.position] = result;
+  }
+
+  self.clearResults = function(){
+    self.results = {};
+    self.steps.forEach(s => s.clearResults());
+  }
+
+  self.readResults = function(results){
+    self.clearResults();
+
+    self.results.logging = results.logging;
+    self.results.performance = results.performance;
+
+    results.results.forEach(x => {
+      var child = self.find(x.id);
+      if (child){
+        child.logResult(x);
+      } 
+      else {
+        console.log('Unable to find a matching step for ' + JSON.stringify(x));
+      }
+    });
+  }
+
+  Object.defineProperty(self, 'activeCell', {
+    enumerable: true,
+    writeable: true,
+    get: function(){
+      if (this.navigator.location.hasOwnProperty('cell')){
+        return this.navigator.location.cell;
+      }
+
+      return null;
+    }
+  });
+
+  Object.defineProperty(self, 'activeHolder', {
+    enumerable: true,
+    writeable: true,
+    get: function(){
+      return this.navigator.location.holder;
+    }
+  });
+
+  readHolder(this);
+
+  this.navigator.moveFirst();
 }
-
-
 
 module.exports = Specification;

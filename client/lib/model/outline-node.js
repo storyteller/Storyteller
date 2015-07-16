@@ -17,7 +17,7 @@ function OutlineNode(holder){
 
 				_.values(step.collections).forEach(section => {
 					this.children.push(new OutlineNode(section));
-				});	
+				});
 			}
 		}
 	});

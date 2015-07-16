@@ -58,7 +58,7 @@ describe('Add Step', function(){
 			added.apply(spec);
 			added.unapply(spec);
 
-			expect(spec.find(newStep.id)).to.be.null;
+			expect(spec.find(newStep.id)).to.be.falsey;
 		});
 	});
 
@@ -113,7 +113,7 @@ describe('Add Step', function(){
 			added.apply(spec);
 			added.unapply(spec);
 
-			expect(spec.find(newStep.id)).to.be.null;
+			expect(spec.find(newStep.id)).to.be.falsey;
 		});
 
 	});
