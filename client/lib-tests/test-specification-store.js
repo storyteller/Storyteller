@@ -18,7 +18,6 @@ var listener = {
 	append: function(data){
 		//console.log(JSON.stringify(data));
 		this.events.push(data);
-		
 	}
 };
 
@@ -125,9 +124,6 @@ describe('SpecificationStore Functionality of Hierarchy', function(){
 			expect(message.id).to.equal('spec1');
 			expect(message.channel).to.equal('editor');
 		});
-
-
-
 	});
 
 
@@ -186,7 +182,7 @@ describe('SpecificationStore Functionality of Hierarchy', function(){
 		});
 	});
 
-	describe('applying results for a spec that it has', function(){
+	describe('applying results for a spec that it', function(){
 		beforeEach(function(){
 			var data = ObjectMother.specData();
 
@@ -195,7 +191,7 @@ describe('SpecificationStore Functionality of Hierarchy', function(){
 		});
 
 
-		it('applies the spec-result message', function(){
+		it('applies the step-result message', function(){
 			var message = {type: 'step-result', status: 'failed', id: 'first-step', spec: 'test-spec'};
 
 			Postal.publish({
@@ -211,7 +207,7 @@ describe('SpecificationStore Functionality of Hierarchy', function(){
 
 			expect(step.results.root).to.equal(message);
 
-			var message = findPublishedMessage('spec-changed');
+			message = findPublishedMessage('spec-changed');
 			expect(message).to.deep.equal({
 				channel: 'editor',
 				topic: 'spec-changed',

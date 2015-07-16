@@ -38,8 +38,7 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void it_publishes_the_spec_body_saved_event()
         {
-            MockFor<IClientConnector>()
-                .AssertWasCalled(x => x.SendMessageToClient(Arg<SpecDateBumped>.Matches(y => y.id == theMessage.id)));
+            theController.AssertWasCalled(x => x.ReloadHierarchy());
         }
     }
 }

@@ -42,7 +42,7 @@ function FakeView(){
 var loader = new StubLoader();
 
 describe('EditorPresenter', function(){
-	var view;
+	var view, presenter;
 
 	beforeEach(function(){
 		Postal.reset();
@@ -70,12 +70,12 @@ describe('EditorPresenter', function(){
 		});
 
 
+    Hierarchy.storeData('spec1', ObjectMother.specData());
 		view = new FakeView();
-	})
+    presenter = new EditorPresenter('spec1');
+	});
 
 	describe('when refreshing the editor with data', () => {
-		var presenter = null;
-
 		beforeEach(function(){
 			var specData = ObjectMother.specification();
 			specData['max-retries'] = 3;
@@ -83,8 +83,6 @@ describe('EditorPresenter', function(){
 			presenter = new EditorPresenter(specData);
 			view = new FakeView();
 			presenter.activate(loader, view);
-			
-
 		});
 
 		afterEach(() => {
@@ -97,9 +95,10 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when activating a new editor that has only header information', function(){
-		var presenter = new EditorPresenter({id: 'spec1', mode: 'header'});
-
 		beforeEach(function(){
+      var spec = ObjectMother.specData();
+      spec.mode = 'header';
+			Hierarchy.storeData('spec1', spec);
 			view = new FakeView();
 			presenter.activate(loader, view);
 			presenter.deactivate();
@@ -117,22 +116,21 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when activating a new editor and the data is known', function(){
-		var presenter = new EditorPresenter('spec1');
 		var wasRefreshed = false;
 		var ownedSpec = null;
 		var buttonsEnabled = false;
-
-		presenter.refreshEditor = function(){
-			wasRefreshed = true;
-			ownedSpec = this.spec;
-			buttonsEnabled = true;
-
-		}
 
 
 		beforeEach(function(){
 			Hierarchy.storeData('spec1', ObjectMother.specData());
 			view = new FakeView();
+      presenter = new EditorPresenter('spec1');
+
+      presenter.refreshEditor = function(){
+        wasRefreshed = true;
+        ownedSpec = this.spec;
+        buttonsEnabled = true;
+      }
 			presenter.activate(loader, view);
 			presenter.deactivate();
 		});
@@ -149,25 +147,23 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when data becomes available for the first time', function(){
-		var presenter = new EditorPresenter('spec1');
 		var wasRefreshed = false;
 		var ownedSpec = null;
 		var buttonsEnabled = false;
-
-		presenter.refreshEditor = function(){
-			wasRefreshed = true;
-			ownedSpec = this.spec;
-			buttonsEnabled = true;
-		}
 
 
 		beforeEach(function(){
 			Hierarchy.storeData('spec1', ObjectMother.specData());
 
+
+      presenter = new EditorPresenter('spec1');
+      presenter.refreshEditor = function(){
+        wasRefreshed = true;
+        ownedSpec = this.spec;
+        buttonsEnabled = true;
+      }
 			view = new FakeView();
 			presenter.activate(loader, view);
-
-			
 
 			Postal.publish({
 				channel: 'editor', 
@@ -188,17 +184,8 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when data comes available, but does not match the spec', function(){
-		var presenter = new EditorPresenter('spec1');
 		var wasRefreshed = false;
 		var buttonsEnabled = false;
-
-		presenter.refreshEditor = function(){
-			wasRefreshed = true;
-		}
-
-		presenter.enableUndoButtons = function(){
-			buttonsEnabled = true;
-		}
 
 		beforeEach(function(){
 			Hierarchy.storeData('spec1', ObjectMother.specData());
@@ -206,6 +193,15 @@ describe('EditorPresenter', function(){
 
 
 			view = new FakeView();
+
+      presenter = new EditorPresenter('spec1');
+      presenter.refreshEditor = function(){
+        wasRefreshed = true;
+      }
+
+      presenter.enableUndoButtons = function(){
+        buttonsEnabled = true;
+      }
 			presenter.activate(loader, view);
 
 			wasRefreshed = false;
@@ -224,16 +220,14 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when responding to spec-changed that matches', function(){
-		var presenter = new EditorPresenter('spec1');
 		var wasRefreshed = false;
 
 		beforeEach(function(){
 			Hierarchy.storeData('spec1', ObjectMother.specData());
 
 			view = new FakeView();
+      presenter = new EditorPresenter('spec1');
 			presenter.activate(loader, view);
-
-			
 
 			presenter.refreshEditor = function(){
 				wasRefreshed = true;
@@ -254,13 +248,13 @@ describe('EditorPresenter', function(){
 	});
 
 	describe('when responding to spec-changed that does not match', function(){
-		var presenter = new EditorPresenter('spec1');
 		var wasRefreshed = false;
 
 		beforeEach(function(){
 			Hierarchy.storeData('spec1', ObjectMother.specData());
 			
 			view = new FakeView();
+      presenter = new EditorPresenter('spec1');
 			presenter.activate(loader, view);
 
 			
@@ -286,14 +280,11 @@ describe('EditorPresenter', function(){
 
 	describe('when responding to a cell selected from the initial state', function(){
 		// var identifier = {step: this.props.id, cell: this.props.cell.key};
-
 		var spec = null;
-		var presenter = null;
-		var shell = null;
-		var view = null;
 
 		beforeEach(function(){
 			spec = ObjectMother.specification();
+      spec.mode = 'full';
 			spec.id = 'foo';
 
 			presenter = new EditorPresenter(spec);
@@ -304,6 +295,10 @@ describe('EditorPresenter', function(){
 
 			presenter.selectCell({step: stepId, cell: 'x'});
 		});
+
+    afterEach(function () {
+      presenter.deactivate();
+    });
 
 		it('should make the right cell active', function(){
 			expect(spec.steps[0].steps[1].args.find('x').active).to.be.true;
@@ -326,12 +321,12 @@ describe('EditorPresenter', function(){
 		// var identifier = {step: this.props.id, cell: this.props.cell.key};
 
 		var spec = null;
-		var presenter = null;
 		var view = null;
 
 		beforeEach(function(){
 			spec = ObjectMother.specification();
 			spec.path = 'foo/bar';
+      spec.mode = 'full';
 
 			view = new FakeView();
 			presenter = new EditorPresenter(spec);
@@ -367,12 +362,12 @@ describe('EditorPresenter', function(){
 		// var identifier = {step: this.props.id, cell: this.props.cell.key};
 
 		var spec = null;
-		var presenter = null;
 		var view = null;
 
 		beforeEach(function(){
 			spec = ObjectMother.specification();
 			spec.path = 'foo/bar';
+      spec.mode = 'full';
 
 			view = new FakeView();
 			presenter = new EditorPresenter(spec);
@@ -403,7 +398,6 @@ describe('EditorPresenter', function(){
 
 	describe('when handling a spec change directly', function(){
 		var spec = null;
-		var presenter = null;
 		var view = null;
 
 		beforeEach(function(){
@@ -434,7 +428,6 @@ describe('EditorPresenter', function(){
 
 	describe('when handling multiple spec changes', function(){
 		var spec = null;
-		var presenter = null;
 		var view = null;
 		var step = null;
 
@@ -508,7 +501,6 @@ describe('EditorPresenter', function(){
 
 	describe('when handling a spec change from Postal subscription', function(){
 		var spec = null;
-		var presenter = null;
 		var view = null;
 
 		beforeEach(function(){
@@ -549,7 +541,6 @@ describe('EditorPresenter', function(){
 
 	describe('when saving a spec', function(){
 		var spec = null;
-		var presenter = null;
 		var view = null;
 		var theWrittenData = {};
 		var message;
@@ -603,7 +594,6 @@ describe('EditorPresenter', function(){
 
 	describe('when receiving the spec-body-saved message', function(){
 		var spec = null;
-		var presenter = null;
 		var view = null;
 		var theWrittenData = {};
 		var message;
@@ -732,4 +722,38 @@ describe('EditorPresenter', function(){
 			expect(navigatedToResults).to.be.true;
 		});
 	});
+
+  describe('when the spec date is bumped', function () {
+    var theSpec;
+    beforeEach(function () {
+      theSpec = ObjectMother.specData();
+      presenter = new EditorPresenter(theSpec);
+      presenter.activate(loader, view);
+    });
+
+    afterEach(function () {
+      presenter.deactivate();
+    })
+
+    it('sets state of the view to updatingDate', function () {
+      presenter.specDateUpdating();
+      expect(view.state.updatingDate).to.be.true;
+    });
+
+    it('sets the state of the view to not updatingDate', function () {
+      presenter.specDateUpdated();
+      expect(view.state.updatingDate).to.be.false;
+    });
+
+    it('sets the state of the spec to the new info', function () {
+      expect(view.state.spec).to.equal(theSpec);
+
+      var newSpec = ObjectMother.specData();
+      newSpec.title = 'A brand new spec';
+      Hierarchy.storeData(newSpec.id, newSpec);
+      presenter.specDateUpdated();
+
+      expect(view.state.spec.title).to.equal(newSpec.title);
+    });
+  });
 });

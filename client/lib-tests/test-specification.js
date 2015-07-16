@@ -31,7 +31,8 @@ describe('Specification', function(){
 	describe('when building a specification from data', function(){
 		var specData = {
 			id: 1,
-			'max-retries': 2,
+      'max-retries': 2,
+      'expiration-period': 3,
 			title: 'My first specification',
 			mode: 'header',
 			lifecycle: 'Regression',

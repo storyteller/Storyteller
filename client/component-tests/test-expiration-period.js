@@ -24,7 +24,7 @@ function findPublishedMessage(topic){
 }
 
 describe('ExpirationPeriod', () => {
-  let instance, options, select;
+  let instance, options, select, theSpec, small, button;
 
 	beforeEach(() => {
 		Postal.reset();
@@ -39,9 +39,26 @@ describe('ExpirationPeriod', () => {
 		    }
 		});
 
-		instance = TestUtils.renderIntoDocument(<ExpirationPeriod expirationPeriod={4} />);
+		Postal.subscribe({
+		    channel  : "engine-request",
+		    topic    : "*",
+		    callback : function(data, envelope) {
+		    	data.topic = envelope.topic;
+		        listener.append(data);
+		    }
+		});
+
+    theSpec = {
+      'id': 'theSpec',
+      'expiration-period': 4,
+      'last-updated': 'Thursday, July 9, 2015'
+    }
+
+		instance = TestUtils.renderIntoDocument(<ExpirationPeriod spec={theSpec} disabled={false} />);
     options = TestUtils.scryRenderedDOMComponentsWithTag(instance, 'option');
     select = TestUtils.findRenderedDOMComponentWithTag(instance, 'select');
+    small = TestUtils.findRenderedDOMComponentWithTag(instance, 'small');
+    button = TestUtils.findRenderedDOMComponentWithTag(instance, 'button');
 	});
 
   it('renders 13 options for the range', () => {
@@ -57,13 +74,24 @@ describe('ExpirationPeriod', () => {
     expect(select.getDOMNode().value).to.equal('4');
   });
 
+  it('sets the disabled value', function () {
+    expect(button.props.disabled).to.be.false;
+
+		instance = TestUtils.renderIntoDocument(<ExpirationPeriod spec={theSpec} disabled={true} />);
+    button = TestUtils.findRenderedDOMComponentWithTag(instance, 'button');
+    expect(button.props.disabled).to.be.true;
+  });
+
   it('gives the "Never expires." message when given a 0 period', () => {
-		instance = TestUtils.renderIntoDocument(<ExpirationPeriod expirationPeriod={0} />);
+    theSpec['expiration-period'] = 0;
+		instance = TestUtils.renderIntoDocument(<ExpirationPeriod spec={theSpec} />);
     expect(instance.getDOMNode().innerHTML).to.contain('Never expires.');
+    expect(instance.getDOMNode().innerHTML).not.to.contain('Expires in:');
   })
 
   it('gives the "Expires in:" message when given a greater than 0 period', () => {
     expect(instance.getDOMNode().innerHTML).to.contain('Expires in:');
+    expect(instance.getDOMNode().innerHTML).not.to.contain('Never expires.');
   })
 
 	it('broadcasts a change message when it changes', () => {
@@ -72,4 +100,26 @@ describe('ExpirationPeriod', () => {
 		var message = findPublishedMessage('changes');
 		expect(message.period).to.equal(3);
 	});
+
+  it('displays the last updated date', () => {
+    expect(small.props.children[0]).to.equal(`Last Updated: `);
+    expect(small.props.children[1]).to.equal(theSpec['last-updated'])
+  });
+
+  it('updates the date', () => {
+		TestUtils.Simulate.click(button, {});
+
+		var message = findPublishedMessage('bump-spec-date');
+		expect(message.id).to.equal(theSpec.id);
+  });
+
+  describe('when the button is clicked', () => {
+    beforeEach(function () {
+      TestUtils.Simulate.click(button, {});
+    })
+    it('updates the date', () => {
+      var message = findPublishedMessage('bump-spec-date');
+      expect(message.id).to.equal(theSpec.id);
+    });
+  });
 });

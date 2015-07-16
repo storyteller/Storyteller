@@ -3,7 +3,7 @@ var React = require("react");
 var Postal = require('postal');
 var changes = require('./../../../lib/model/change-commands');
 var range = require('./../../../lib/array-helpers').range;
-
+var hierarchy = require('./../../../lib/stores/hierarchy');
 
 var ExpirationPeriod = React.createClass({
   changeFunc(e){
@@ -21,23 +21,30 @@ var ExpirationPeriod = React.createClass({
     });
   },
 
+  clickFunc(e) {
+    e.preventDefault();
+    hierarchy.bumpSpecDate(this.props.spec);
+  },
+
+  getExpirationPeriod(){
+    return this.props.spec['expiration-period']
+  },
+
   getSelect(){
     const options = range(0, 12).map(function (val) {
       return <option value={val} key={val}>{val}</option>
     })
-    const select = <select id="expiration-period" onChange={this.changeFunc} type="text" value={this.props.expirationPeriod}>{options}</select>;
-    if (!this.props.expirationPeriod) {
-      return <div>Never expires. ({select} months)</div>;
-    }
-
-		return (
-      <div>Expires in: {select} months.</div>
-		);
+    return <select id="expiration-period-select" onChange={this.changeFunc} type="text" value={this.getExpirationPeriod()}>{options}</select>;
   },
 
 	render(){
-    return this.getSelect();
-	}
+    var message = this.getExpirationPeriod() ? <p>Expires in: {this.getSelect()} months.</p> : <p>Never expires. {this.getSelect()} months.</p>;
+    return <div id='expiration-period' className='clearfix'>
+      {message}
+      <p><em><small>Last Updated: {this.props.spec['last-updated']}</small></em></p>
+      <button disabled={this.props.disabled} className='pull-right btn' onClick={this.clickFunc}>Update</button>
+    </div>;
+  },
 });
 
 module.exports = ExpirationPeriod;

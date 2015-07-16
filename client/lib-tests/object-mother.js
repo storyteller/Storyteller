@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 var specData = {
 	id: 'test-spec',
 	title: 'My first specification',
@@ -5,7 +7,7 @@ var specData = {
 		{
 			id: 'first-section',
 			type: 'section',
-			key: 'Math', 
+			key: 'Math',
 			steps: [
 				{key: 'StartWith', cells: {x: 1}, id: 'first-step'},
 				{key: 'Add', cells: {x: 5}},
@@ -31,14 +33,14 @@ var specData = {
 		{type: 'comment', text: 'bar'},
 		{
 			type: 'section',
-			key: 'Math', 
+			key: 'Math',
 			steps: [
 				{key: 'Adding', cells:{x:1, y:2, result:3}}
 			]
 		},
 		{
 			type: 'section',
-			key: 'Math', 
+			key: 'Math',
 			steps: [
 				{key: 'StartWith', cells: {x: 1}},
 				{key: 'Add', cells: {x: 5}},
@@ -47,7 +49,10 @@ var specData = {
 				{key: 'Adding', cells:{x:1, y:2, result:3}}
 			]
 		}
-	]
+	],
+  outline: function(){
+    return {};
+  }
 }
 
 var hierarchy = {
@@ -70,15 +75,15 @@ module.exports = {
 	},
 
 	specData: function(){
-		return specData;
+		return _.clone(specData);
 	},
 
 	fixtureData: function(){
-		return fixtureData;
+		return _.clone(fixtureData);
 	},
 
 	hierarchy: function(){
-		return hierarchy;
+		return _.clone(hierarchy);
 	},
 
 	specification: function(){

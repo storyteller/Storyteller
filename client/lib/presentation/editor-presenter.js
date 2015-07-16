@@ -39,7 +39,7 @@ class EditorPresenter{
 
 		while (!location.holder.isHolder()){
 			location = parentLocation(location);
-		}	
+		}
 
 		return location;
 
@@ -59,8 +59,8 @@ class EditorPresenter{
 	}
 
 	reorderDown(location){
-		applyOutstandingChanges();
-		
+    applyOutstandingChanges();
+
 		if (!location){
 			location = this.locationForReordering();
 		}
@@ -82,13 +82,13 @@ class EditorPresenter{
 
 	moveFirst(){
 		applyOutstandingChanges();
-		this.spec.navigator.moveFirst(); 
+		this.spec.navigator.moveFirst();
 		this.refreshEditor();
 	}
 
 	moveLast(){
 		applyOutstandingChanges();
-		this.spec.navigator.moveLast(); 
+		this.spec.navigator.moveLast();
 		this.refreshEditor();
 	}
 
@@ -121,8 +121,6 @@ class EditorPresenter{
 				retryCount: this.spec['max-retries']
 			});
 		}
-
-
 	}
 
 	subscribe(topic, callback){
@@ -131,7 +129,19 @@ class EditorPresenter{
 			topic: topic,
 			callback: callback
 		}));
-	}
+  }
+
+  specDateUpdating(){
+    this.view.setState({updatingDate: true});
+  }
+
+  specDateUpdated(){
+    this.spec = Hierarchy.findSpec(this.id)
+    this.view.setState({
+      spec: this.spec,
+      updatingDate: false
+    });
+  }
 
 	activate(loader, view){
 		if (view == null || view == undefined){
@@ -188,45 +198,60 @@ class EditorPresenter{
 	        self.selectCell(data);
 	    });
 
-	    this.subscribe('select-holder', function(data, envelope) {
-			if (!data.holder){
-				return;
-			}
+    this.subscribe('select-holder', function(data, envelope) {
+      if (!data.holder){
+        return;
+      }
+      self.selectHolder(data);
+    });
 
-	        self.selectHolder(data);
-	    });
+    this.subscribe('changes', function(data, envelope) {
+        self.applyChange(data);
+    });
 
-	    this.subscribe('changes', function(data, envelope) {
-	        self.applyChange(data);
-	    });
+    this.subscriptions.push(Postal.subscribe({
+      channel: 'engine',
+      topic: 'spec-body-saved',
+      callback: function(data){
+        self.specBodySaved(data);
+      }
+    }));
 
-	    this.subscriptions.push(Postal.subscribe({
-	    	channel: 'engine',
-	    	topic: 'spec-body-saved',
-	    	callback: function(data){
-	    		self.specBodySaved(data);
-	    	}
-	    }));
+    this.subscriptions.push(Postal.subscribe({
+      channel: 'engine-request',
+      topic: 'clear-all-results',
+      callback: data => {
+        this.view.gotoPreview();
+      }
+    }));
 
-	    this.subscriptions.push(Postal.subscribe({
-	    	channel: 'engine-request',
-	    	topic: 'clear-all-results',
-	    	callback: data => {
-	    		this.view.gotoPreview();
-	    	}
-	    }));
+    this.subscriptions.push(Postal.subscribe({
+      channel: 'engine-request',
+      topic: 'bump-spec-date',
+      callback: () => {
+        self.specDateUpdating();
+      }
+    }));
 
-		if (!this.spec){
-			this.spec = Hierarchy.findSpec(this.id);
-		}
+    this.subscriptions.push(Postal.subscribe({
+      channel: 'explorer',
+      topic: 'hierarchy-updated',
+      callback: function(){
+        self.specDateUpdated();
+      }
+    }));
 
-		if (this.spec.mode == 'header'){
-			Hierarchy.requestData(this.id);
-		}
 
-		this.refreshEditor();
+    if (!this.spec){
+      this.spec = Hierarchy.findSpec(this.id);
+    }
 
-	}
+    if (this.spec.mode == 'header'){
+      Hierarchy.requestData(this.id);
+    }
+
+    this.refreshEditor();
+  }
 
 	save(){
 		applyOutstandingChanges();

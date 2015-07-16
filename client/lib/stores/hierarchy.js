@@ -146,7 +146,6 @@ handlers['spec-body-saved'] = function(data){
 
 		publishHierarchyChanged();
 	}
-
 }
 
 handlers['spec-added'] = function(data){
@@ -520,9 +519,9 @@ module.exports = {
 
 	saveSpecData: function(spec){
 		var message = {
-			type: 'save-spec-body', 
-			id: spec.id, 
-			spec: spec.write(), 
+			type: 'save-spec-body',
+			id: spec.id,
+			spec: spec.write(),
 			revision: spec.revision()
 		};
 
@@ -532,6 +531,18 @@ module.exports = {
 			data: message
 		});
 	},
+
+  bumpSpecDate(spec) {
+    let message = {
+      id: spec.id
+    }
+
+    Postal.publish({
+      channel: 'engine-request',
+      topic: 'bump-spec-date',
+      data: message
+    })
+  },
 
 	runSpec: function(spec){
 		Postal.publish({

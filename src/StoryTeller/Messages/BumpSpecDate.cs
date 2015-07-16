@@ -8,13 +8,4 @@
 
         public string id;
     }
-
-    public class SpecDateBumped : ClientMessage
-    {
-        public SpecDateBumped() : base("spec-date-bumped")
-        {
-        }
-
-        public string id;
-    }
 }
