@@ -80,7 +80,8 @@ function Specification(data, library){
 			lifecycle: this.lifecycle,
 			mode: this.mode,
 			'max-retries': this['max-retries'],
-			'expiration-period': this['expiration-period']
+			'expiration-period': this['expiration-period'],
+			'last-updated': this['last-updated']
 		}
 	}
 
