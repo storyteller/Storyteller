@@ -32,13 +32,14 @@ var ExpirationPeriod = React.createClass({
 
   getSelect(){
     const options = range(0, 12).map(function (val) {
-      return <option value={val} key={val}>{val}</option>
+      var display = (val) ? val : "Never";
+      return <option value={val} key={val}>{display}</option>
     })
     return <select id="expiration-period-select" onChange={this.changeFunc} type="text" value={this.getExpirationPeriod()}>{options}</select>;
   },
 
-	render(){
-    var message = this.getExpirationPeriod() ? <p>Expires in: {this.getSelect()} months.</p> : <p>Never expires. {this.getSelect()} months.</p>;
+  render(){
+    var message = this.getExpirationPeriod() ? <p>Expires in: {this.getSelect()} months.</p> : <p>{this.getSelect()} expires.</p>;
     return <div id='expiration-period' className='clearfix'>
       {message}
       <p className='last-updated'><em><small>Last Updated: {this.props.spec['last-updated']}</small></em></p>
