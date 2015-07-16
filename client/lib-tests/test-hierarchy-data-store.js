@@ -624,8 +624,7 @@ describe('Hierarchy data store functions', function(){
         channel: 'engine',
         topic: 'spec-header-updated',
         data: {
-          suite: 'newSuite',
-          data: theNewSpec
+          spec: theNewSpec
         }
       });
 

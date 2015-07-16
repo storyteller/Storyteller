@@ -145,7 +145,7 @@ function findSuite(names){
 }
 
 handlers['spec-header-updated'] = (data) => {
-  let specData = data.data;
+  let specData = data.spec;
   let spec = new Specification(specData, library);
   specs[spec.id].updateHeader(spec);
   Postal.publish({

@@ -2,6 +2,7 @@
 using Rhino.Mocks;
 using StoryTeller.Messages;
 using StoryTeller.Model;
+using StoryTeller.Remotes;
 using StoryTeller.Testing.Results;
 using ST.Client;
 using ST.Client.Persistence;
@@ -38,7 +39,8 @@ namespace StoryTeller.Testing.ST
         [Test]
         public void it_publishes_the_spec_body_saved_event()
         {
-            theController.AssertWasCalled(x => x.ReloadHierarchy());
+            Services.Get<IClientConnector>()
+                .AssertWasCalled(x => x.SendMessageToClient(Arg<SpecHeaderUpdated>.Matches(y => y.spec.Equals(theSpecification))));
         }
     }
 }
