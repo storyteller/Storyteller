@@ -4,131 +4,130 @@ var Hierarchy = require('./../stores/hierarchy');
 var changes = require('./../model/change-commands');
 
 function applyOutstandingChanges(){
-	// If any thing is open, pack it in now
-	Postal.publish({
-		channel: 'editor',
-		topic: 'apply-changes',
-		data: {}
-	});
+  // If any thing is open, pack it in now
+  Postal.publish({
+    channel: 'editor',
+    topic: 'apply-changes',
+    data: {}
+  });
 }
 
 function parentLocation(location){
-	var holder = location.holder;
-	return {holder: holder.parent, step: holder};
+  var holder = location.holder;
+  return {holder: holder.parent, step: holder};
 }
 
 class EditorPresenter{
-	constructor(spec){
-		if (spec.id){
-			this.spec = spec;
-			this.id = spec.id;
-		}
-		else {
-			this.id = spec;
-		}
+  constructor(spec){
+    if (spec.id){
+      this.spec = spec;
+      this.id = spec.id;
+    }
+    else {
+      this.id = spec;
+    }
 
-		this.latched = false;
-		this.subscriptions = [];
-	}
+    this.latched = false;
+    this.subscriptions = [];
+  }
 
-	locationForReordering(){
-		var location = this.spec.navigator.location;
-		if (location.step == location.holder.adder){
-			location = parentLocation(location);
-		}
+  locationForReordering(){
+    var location = this.spec.navigator.location;
+    if (location.step == location.holder.adder){
+      location = parentLocation(location);
+    }
 
-		while (!location.holder.isHolder()){
-			location = parentLocation(location);
-		}
+    while (!location.holder.isHolder()){
+      location = parentLocation(location);
+    }
 
-		return location;
+    return location;
+  }
 
-	}
-
-	reorderUp(location){
-		applyOutstandingChanges();
-
-		if (!location){
-			location = this.locationForReordering();
-		}
-
-		if (location.step && !location.holder.isFirst(location.step)){
-			var change = changes.moveUp(location.holder, location.step);
-			this.applyChange(change);
-		}
-	}
-
-	reorderDown(location){
+  reorderUp(location){
     applyOutstandingChanges();
 
-		if (!location){
-			location = this.locationForReordering();
-		}
+    if (!location){
+      location = this.locationForReordering();
+    }
 
-		if (location.step && !location.holder.isLast(location.step)){
-			var change = changes.moveDown(location.holder, location.step);
-			this.applyChange(change);
-		}
-	}
+    if (location.step && !location.holder.isFirst(location.step)){
+      var change = changes.moveUp(location.holder, location.step);
+      this.applyChange(change);
+    }
+  }
 
-	deactivate(){
-		this.deactivated = true;
-		applyOutstandingChanges();
+  reorderDown(location){
+    applyOutstandingChanges();
 
-		this.subscriptions.forEach(function(x){
-			x.unsubscribe();
-		});
-	}
+    if (!location){
+      location = this.locationForReordering();
+    }
 
-	moveFirst(){
-		applyOutstandingChanges();
-		this.spec.navigator.moveFirst();
-		this.refreshEditor();
-	}
+    if (location.step && !location.holder.isLast(location.step)){
+      var change = changes.moveDown(location.holder, location.step);
+      this.applyChange(change);
+    }
+  }
 
-	moveLast(){
-		applyOutstandingChanges();
-		this.spec.navigator.moveLast();
-		this.refreshEditor();
-	}
+  deactivate(){
+    this.deactivated = true;
+    applyOutstandingChanges();
 
-	moveNext(){
-		applyOutstandingChanges();
-		if (this.spec.navigator.moveNext()) this.refreshEditor();
-	}
+    this.subscriptions.forEach(function(x){
+      x.unsubscribe();
+    });
+  }
 
-	movePrevious(){
-		applyOutstandingChanges();
-		if (this.spec.navigator.movePrevious()) this.refreshEditor();
-	}
+  moveFirst(){
+    applyOutstandingChanges();
+    this.spec.navigator.moveFirst();
+    this.refreshEditor();
+  }
+
+  moveLast(){
+    applyOutstandingChanges();
+    this.spec.navigator.moveLast();
+    this.refreshEditor();
+  }
+
+  moveNext(){
+    applyOutstandingChanges();
+    if (this.spec.navigator.moveNext()) this.refreshEditor();
+  }
+
+  movePrevious(){
+    applyOutstandingChanges();
+    if (this.spec.navigator.movePrevious()) this.refreshEditor();
+  }
 
 
-	refreshEditor(){
-		if (this.deactivated) return;
+  refreshEditor(){
+    if (this.deactivated) return;
 
-		if (this.spec.mode == 'header'){
-			this.view.setState({
-				loading: this.spec.mode == 'header'
-			});
-		}
-		else {
-			this.view.setState({
-				spec: this.spec,
-				activeContainer: this.spec.activeHolder,
-				components: this.loader.buildComponents(this.spec),
-				outline: this.spec.outline(),
-				loading: this.spec.mode == 'header',
-				retryCount: this.spec['max-retries']
-			});
-		}
-	}
+    if (this.spec.mode == 'header'){
+      this.view.setState({
+        loading: this.spec.mode == 'header'
+      });
+    }
+    else {
+      this.view.setState({
+        spec: this.spec,
+        activeContainer: this.spec.activeHolder,
+        components: this.loader.buildComponents(this.spec),
+        outline: this.spec.outline(),
+        loading: this.spec.mode == 'header',
+        retryCount: this.spec['max-retries']
+      });
+    }
+  }
 
-	subscribe(topic, callback){
-		this.subscriptions.push(Postal.subscribe({
-			channel: 'editor',
-			topic: topic,
-			callback: callback
-		}));
+  subscribe(topic, callback){
+    this.subscriptions.push(Postal.subscribe({
+      channel: 'editor',
+      topic: topic,
+      callback: callback
+    }));
   }
 
   specDateUpdating(){
@@ -143,60 +142,60 @@ class EditorPresenter{
     });
   }
 
-	activate(loader, view){
-		if (view == null || view == undefined){
-			throw new Error('Must pass the view component here');
-		}
+  activate(loader, view){
+    if (view == null || view == undefined){
+      throw new Error('Must pass the view component here');
+    }
 
-		this.loader = loader;
-		this.view = view;
-		this.specHeader = Hierarchy.findSpec(this.id);
+    this.loader = loader;
+    this.view = view;
+    this.specHeader = Hierarchy.findSpec(this.id);
 
-		var self = this;
+    var self = this;
 
-		this.subscribe('go-preview', () => this.view.gotoPreview());
-		this.subscribe('go-editing', () => this.view.gotoEditor());
-		this.subscribe('go-results', () => this.view.gotoResults());
+    this.subscribe('go-preview', () => this.view.gotoPreview());
+    this.subscribe('go-editing', () => this.view.gotoEditor());
+    this.subscribe('go-results', () => this.view.gotoResults());
 
-		this.subscribe('go-home', () => this.moveFirst());
-		this.subscribe('go-end', () => this.moveLast());
+    this.subscribe('go-home', () => this.moveFirst());
+    this.subscribe('go-end', () => this.moveLast());
 
-		this.subscribe('go-next', () => this.moveNext());
-		this.subscribe('go-previous', () => this.movePrevious());
-		this.subscribe('run-spec', () => this.run());
-		this.subscribe('save-spec', () => this.save());
-		this.subscribe('undo', () => this.undo());
-		this.subscribe('redo', () => this.redo());
+    this.subscribe('go-next', () => this.moveNext());
+    this.subscribe('go-previous', () => this.movePrevious());
+    this.subscribe('run-spec', () => this.run());
+    this.subscribe('save-spec', () => this.save());
+    this.subscribe('undo', () => this.undo());
+    this.subscribe('redo', () => this.redo());
 
-		this.subscribe('reorder-up', data => this.reorderUp(data.location));
-		this.subscribe('reorder-down', data => this.reorderDown(data.location));
+    this.subscribe('reorder-up', data => this.reorderUp(data.location));
+    this.subscribe('reorder-down', data => this.reorderDown(data.location));
 
-		this.subscribe('add-item', () => {
-			applyOutstandingChanges();
+    this.subscribe('add-item', () => {
+      applyOutstandingChanges();
 
-			var navigator = this.spec.navigator;
-			var location = navigator.location;
-			if (location.holder){
-				var next = location.holder.fixture.addAndSelect(location);
-				navigator.replace(next);
-				this.refreshEditor();
-			}
-		});
+      var navigator = this.spec.navigator;
+      var location = navigator.location;
+      if (location.holder){
+        var next = location.holder.fixture.addAndSelect(location);
+        navigator.replace(next);
+        this.refreshEditor();
+      }
+    });
 
-		this.subscribe('spec-changed', function(data){
-			if (data.id == self.id){
-				self.spec = Hierarchy.findSpec(self.id);
-				self.refreshEditor();
-			}
-		});
+    this.subscribe('spec-changed', function(data){
+      if (data.id == self.id){
+        self.spec = Hierarchy.findSpec(self.id);
+        self.refreshEditor();
+      }
+    });
 
-		this.subscribe('select-cell', function(data, envelope) {
-			if (!data.step){
-				return;
-			}
+    this.subscribe('select-cell', function(data, envelope) {
+      if (!data.step){
+        return;
+      }
 
-	        self.selectCell(data);
-	    });
+          self.selectCell(data);
+      });
 
     this.subscribe('select-holder', function(data, envelope) {
       if (!data.holder){
@@ -234,8 +233,8 @@ class EditorPresenter{
     }));
 
     this.subscriptions.push(Postal.subscribe({
-      channel: 'explorer',
-      topic: 'hierarchy-updated',
+      channel: 'editor',
+      topic: 'updated-spec-header',
       callback: function(){
         self.specDateUpdated();
       }
@@ -253,85 +252,78 @@ class EditorPresenter{
     this.refreshEditor();
   }
 
-	save(){
-		applyOutstandingChanges();
+  save(){
+    applyOutstandingChanges();
 
-		Hierarchy.saveSpecData(this.spec);
+    Hierarchy.saveSpecData(this.spec);
 
-		this.view.setState({persisting: true});
-	}
+    this.view.setState({persisting: true});
+  }
 
-	run(){
-		Hierarchy.runSpec(this.spec);
+  run(){
+    Hierarchy.runSpec(this.spec);
 
-		this.view.gotoResults();
-	}
+    this.view.gotoResults();
+  }
 
-	selectCell(data){
-		applyOutstandingChanges();
+  selectCell(data){
+    applyOutstandingChanges();
 
-		this.spec.selectCell(data.step, data.cell);
+    this.spec.selectCell(data.step, data.cell);
 
-		this.refreshEditor();
-	}
+    this.refreshEditor();
+  }
 
-	selectHolder(data){
-		applyOutstandingChanges();
+  selectHolder(data){
+    applyOutstandingChanges();
 
-		this.spec.selectHolder(data.holder);
+    this.spec.selectHolder(data.holder);
 
-		this.refreshEditor();
-	}
+    this.refreshEditor();
+  }
 
-	applyChange(data){
-		this.spec.apply(data);
-		this.refreshEditor();
+  applyChange(data){
+    this.spec.apply(data);
+    this.refreshEditor();
 
-        Postal.publish({
-        	channel: 'editor',
-        	topic: 'spec-edited',
-        	data: {}
-        });
-	}
+    Postal.publish({
+      channel: 'editor',
+      topic: 'spec-edited',
+      data: {}
+    });
+  }
 
-	undo(){
-		this.spec.undo();
-		this.refreshEditor();
+  undo(){
+    this.spec.undo();
+    this.refreshEditor();
 
-        Postal.publish({
-        	channel: 'editor',
-        	topic: 'spec-edited',
-        	data: {}
-        });
-	}
+    Postal.publish({
+      channel: 'editor',
+      topic: 'spec-edited',
+      data: {}
+    });
+  }
 
-	redo(){
-		this.spec.redo();
-		this.refreshEditor();
+  redo(){
+    this.spec.redo();
+    this.refreshEditor();
 
-        Postal.publish({
-        	channel: 'editor',
-        	topic: 'spec-edited',
-        	data: {}
-        });
-	}
+    Postal.publish({
+      channel: 'editor',
+      topic: 'spec-edited',
+      data: {}
+    });
+  }
 
-	specBodySaved(data){
-		if (data.id != this.spec.id) return;
+  specBodySaved(data){
+    if (data.id != this.spec.id) return;
 
-		this.view.setState({
-			lastSaved: data.time,
-			persisting: false
-		});
+    this.view.setState({
+      lastSaved: data.time,
+      persisting: false
+    });
 
-	}
-
-
-
+  }
 }
-
-
-
-
 
 module.exports = EditorPresenter;
