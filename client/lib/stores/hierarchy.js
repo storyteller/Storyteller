@@ -37,10 +37,8 @@ function publishQueueChanged(){
 const publishHeaderChanged = (specId) => {
   Postal.publish({
     channel: 'editor',
-    topic: 'spec-header-changed',
-    data: {
-      id: specId
-    }
+    topic: 'updated-spec-header',
+    data: { id: specId }
   });
 }
 
@@ -148,11 +146,7 @@ handlers['spec-header-updated'] = (data) => {
   let specData = data.spec;
   let spec = new Specification(specData, library);
   specs[spec.id].updateHeader(spec);
-  Postal.publish({
-    channel: 'editor',
-    topic: 'updated-spec-header',
-    data: { id: spec.id }
-  });
+  publishHeaderChanged(spec.id);
 };
 
 handlers['spec-body-saved'] = function(data){
