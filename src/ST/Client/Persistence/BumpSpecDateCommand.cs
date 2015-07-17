@@ -21,6 +21,7 @@ namespace ST.Client.Persistence
             var cont = _controller.Value;
             var connector = _clientConnector.Value;
             var spec = cont.LoadSpecificationById(message.id);
+            spec.ExpirationPeriod = message.timePeriod;
             cont.SaveSpecification(message.id, spec);
             connector.SendMessageToClient(new SpecHeaderUpdated
             {

@@ -9,6 +9,7 @@ namespace StoryTeller.Messages
         }
 
         public string id;
+        public int timePeriod;
     }
 
     public class SpecHeaderUpdated : ClientMessage

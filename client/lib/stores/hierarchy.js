@@ -541,7 +541,8 @@ module.exports = {
 
   bumpSpecDate(spec) {
     let message = {
-      id: spec.id
+      id: spec.id,
+      timePeriod: spec['expiration-period']
     }
 
     Postal.publish({

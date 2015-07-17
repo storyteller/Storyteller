@@ -81,24 +81,25 @@ describe('Hierarchy data store functions', function(){
     Hierarchy.reset();
     listener.clear();
 
-    Postal.subscribe({
-        channel  : "explorer",
-        topic    : "*",
-        callback : function(data, envelope) {
-          data.topic = envelope.topic;
-            listener.append(data);
-        }
-    });
-
-    Postal.subscribe({
-      channel: 'editor',
-      topic: '*',
-      callback: function(data, env){
+    let getSubCallback = (channel) => {
+      return (data, env) => {
+        data.channel = channel;
         data.topic = env.topic;
-        data.channel = 'editor';
         listener.append(data);
       }
-    });
+    }
+
+    let subscribe = (channel) => {
+      Postal.subscribe({
+        channel  : channel,
+        topic    : "*",
+        callback : getSubCallback(channel)
+      });
+    }
+
+    subscribe('explorer');
+    subscribe('editor');
+    subscribe('engine-request');
   });
 
   it('knows if any specs are dirty', () => {
@@ -642,6 +643,26 @@ describe('Hierarchy data store functions', function(){
 
     it('publishes a updated-spec-header message on the editor channel', function () {
       expect(findPublishedMessage('updated-spec-header').id).to.equal(theNewSpec.id);
+    });
+  });
+
+  describe('bumpSpecDate', () => {
+    var testSpec, targetMessage;
+
+    beforeEach(function () {
+      hierarchyIsPublishedFromEngine();
+      testSpec = {
+        id: 'embeds',
+        'expiration-period': 6
+      };
+
+      Hierarchy.bumpSpecDate(testSpec);
+      targetMessage = findPublishedMessage('bump-spec-date');
+    });
+
+    it('has the right info', function () {
+      expect(targetMessage.id).to.equal(testSpec.id);
+      expect(targetMessage.timePeriod).to.equal(testSpec['expiration-period']);
     });
   });
 });

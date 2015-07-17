@@ -4,6 +4,7 @@ import ExpirationPeriod from './../components/editing/header/expiration-period';
 import {expect} from 'chai';
 import {iit, ddescribe} from './test-helpers';
 import {range} from '../lib/array-helpers';
+import {OverlayTrigger, Tooltip} from 'react-bootstrap';
 
 let listener = {
   events: [],
@@ -24,7 +25,8 @@ function findPublishedMessage(topic){
 }
 
 describe('ExpirationPeriod', () => {
-  let instance, options, select, theSpec, small, button;
+  let instance, options, select, theSpec, small, button,
+    overlayTrigger;
 
   beforeEach(() => {
     Postal.reset();
@@ -59,6 +61,7 @@ describe('ExpirationPeriod', () => {
     select = TestUtils.findRenderedDOMComponentWithTag(instance, 'select');
     small = TestUtils.findRenderedDOMComponentWithTag(instance, 'small');
     button = TestUtils.findRenderedDOMComponentWithTag(instance, 'button');
+    overlayTrigger = TestUtils.findRenderedComponentWithType(instance, OverlayTrigger)
   });
 
   it('renders 13 options for the range', () => {
@@ -122,4 +125,15 @@ describe('ExpirationPeriod', () => {
       expect(message.id).to.equal(theSpec.id);
     });
   });
+
+  describe('the tooltip', () => {
+    it('has the bottom placement', () => {
+      expect(overlayTrigger.props.placement).to.equal('bottom');
+    });
+
+    it('has the correct tooltip text', () => {
+      expect(overlayTrigger.props.overlay.props.children).to.equal('This button will bump the "Last Updated" date.');
+    });
+  });
 });
+

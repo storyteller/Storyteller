@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Rhino.Mocks;
+using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
@@ -19,15 +20,23 @@ namespace StoryTeller.Testing.ST
         {
             theMessage = new BumpSpecDate
             {
-                id = "targetSpec"
+                id = "targetSpec",
+                timePeriod = 6
             };
             theSpecification = new Specification
             {
-                id = "targetSpec"
+                id = "targetSpec",
+                ExpirationPeriod = 0
             };
             theController = MockFor<IPersistenceController>();
             theController.Stub(x => x.LoadSpecificationById(theMessage.id)).Return(theSpecification);
             ClassUnderTest.HandleMessage(theMessage);
+        }
+
+        [Test]
+        public void it_updates_the_spec_expiration_period()
+        {
+            theSpecification.ExpirationPeriod.ShouldBe(6);
         }
 
         [Test]
