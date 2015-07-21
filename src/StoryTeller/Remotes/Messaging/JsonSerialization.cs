@@ -31,11 +31,8 @@ namespace StoryTeller.Remotes.Messaging
             var token = JToken.Parse(json);
             var type = token.Value<string>("type");
 
-            if (type.IsEmpty()) return null;
-
-
-            return _messageTypes.Has(type) 
-                ? _messageTypes[type] 
+            return (!type.IsEmpty() && _messageTypes.Has(type))
+                ?_messageTypes[type]
                 : null;
         }
 

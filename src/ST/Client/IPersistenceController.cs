@@ -7,6 +7,7 @@ namespace ST.Client
     public interface IPersistenceController
     {
         Hierarchy Hierarchy { get; }
+        Specification LoadSpecificationById(string id);
         void StartWatching(string path);
         SpecAdded AddSpec(string path, string name);
         void SaveSpecification(string id, Specification specification);

@@ -97,12 +97,14 @@
     <Compile Include="Engine\IExecutionContext.cs" />
     <Compile Include="Engine\IExecutionMode.cs" />
     <Compile Include="Engine\IExecutionObserver.cs" />
+    <Compile Include="Engine\ISpecExpiration.cs" />
     <Compile Include="Engine\ISpecRunner.cs" />
     <Compile Include="Engine\IStepExecutor.cs" />
     <Compile Include="Engine\ISystem.cs" />
     <Compile Include="Engine\LifecycleSummary.cs" />
     <Compile Include="Engine\NulloSystem.cs" />
     <Compile Include="Engine\SpecExecutionRequest.cs" />
+    <Compile Include="Engine\SpecExpiration.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
     <Compile Include="Engine\SpecRunner.cs" />
     <Compile Include="Engine\Timings.cs" />
@@ -186,6 +188,7 @@
     <Compile Include="IWithValues.cs" />
     <Compile Include="Messages\AddSpec.cs" />
     <Compile Include="Messages\AddSuite.cs" />
+    <Compile Include="Messages\BumpSpecDate.cs" />
     <Compile Include="Messages\CancelAllSpecs.cs" />
     <Compile Include="Messages\CancelSpec.cs" />
     <Compile Include="Messages\ClearAllResults.cs" />

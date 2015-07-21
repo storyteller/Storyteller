@@ -9,52 +9,58 @@ var ResultCache = require('./result-cache');
 var FixtureLibrary = require('./../fixtures/fixture-library');
 var Specification = require('./../model/specification');
 
-
 var specs = {};
 var top = new Suite({});
 var results = {}; // stores the final result of spec-execution-completion
 var lifecycle = 'any';
 var status = 'any';
 
-
 var queue = [];
 
 
 function publishHierarchyChanged(){
-	Postal.publish({
-		channel: 'explorer',
-		topic: 'hierarchy-updated',
-		data: {}
-	});
+  Postal.publish({
+    channel: 'explorer',
+    topic: 'hierarchy-updated',
+    data: {}
+  });
 }
 
 function publishQueueChanged(){
-	Postal.publish({
-		channel: 'explorer',
-		topic: 'queue-updated',
-		data: {}
-	});
+  Postal.publish({
+    channel: 'explorer',
+    topic: 'queue-updated',
+    data: {}
+  });
+}
+
+const publishHeaderChanged = (specId) => {
+  Postal.publish({
+    channel: 'editor',
+    topic: 'updated-spec-header',
+    data: { id: specId }
+  });
 }
 
 var recordResult = function(data){
-	var spec = specs[data.spec];
+  var spec = specs[data.spec];
 
-	// don't bother trying to capture the result if mode = header
-	if (spec.mode == 'header') return;
+  // don't bother trying to capture the result if mode = header
+  if (spec.mode == 'header') return;
 
-	var step = spec.find(data.id);
+  var step = spec.find(data.id);
 
-	if (!step){
-		throw new Error('Unable to find a step with id ' + data.id + ' for spec ' + data.spec);
-	}
+  if (!step){
+    throw new Error('Unable to find a step with id ' + data.id + ' for spec ' + data.spec);
+  }
 
-	step.logResult(data);
+  step.logResult(data);
 
-	Postal.publish({
-		channel: 'editor',
-		topic: 'spec-changed',
-		data: {id: data.spec}
-	});
+  Postal.publish({
+    channel: 'editor',
+    topic: 'spec-changed',
+    data: {id: data.spec}
+  });
 }
 
 var handlers = {};
@@ -65,479 +71,492 @@ handlers['set-verification-result'] = recordResult;
 var library = null;
 var systemRecycled = null;
 var setLibrary = function(lib){
-	library = lib;
+  library = lib;
+  let targetKeys = _.keys(specs).filter((key) => specs[key].mode === 'full');
+  targetKeys.forEach((key) => {
+    let old = specs[key];
+    var specData = old.write();
+    var newSpec = new Specification(specData, library);
+    specs[key] = newSpec;
+    Postal.publish({
+      channel: 'editor',
+      topic: 'spec-changed',
+      data: {id: key}
+    });
+  })
 
-	for (var key in specs){
-		var old = specs[key];
-
-		if (old.mode == 'full'){
-			var specData = old.write();
-			var newSpec = new Specification(specData, library);
-			specs[key] = newSpec;
-			Postal.publish({
-				channel: 'editor',
-				topic: 'spec-changed',
-				data: {id: key}
-			});
-		}
-	}
-
-	Postal.publish({
-		channel: 'explorer',
-		topic: 'fixtures-loaded',
-		data: {}
-	});
+  Postal.publish({
+    channel: 'explorer',
+    topic: 'fixtures-loaded',
+    data: {}
+  });
 }
 
 handlers['system-recycled'] = function(data){
-	systemRecycled = data;
-	setLibrary(new FixtureLibrary(data.fixtures));
+  systemRecycled = data;
+  setLibrary(new FixtureLibrary(data.fixtures));
 }
 
 
 var storeSpec = function(spec){
-	specs[spec.id] = spec;
+  specs[spec.id] = spec;
 
-	var parent = _.find(top.allSuites(), x => x.hasSpec(spec.id));
-	if (parent){
-		parent.replaceSpec(spec);
-	}
+  var parent = _.find(top.allSuites(), x => x.hasSpec(spec.id));
+  if (parent){
+    parent.replaceSpec(spec);
+  }
 
-	Postal.publish({
-		channel: 'editor',
-		topic: 'spec-changed',
-		data: {id: spec.id}
-	});
+  Postal.publish({
+    channel: 'editor',
+    topic: 'spec-changed',
+    data: {id: spec.id}
+  });
 }
 
 handlers['spec-data'] = function(data){
-	var spec = new Specification(data.data, library);
-	spec.id = data.id;
-	specs[spec.id] = spec;
+  var spec = new Specification(data.data, library);
+  spec.id = data.id;
+  specs[spec.id] = spec;
 
-	ResultCache.replaceResults(spec.id, data.results);
+  ResultCache.replaceResults(spec.id, data.results);
 
-	storeSpec(spec);
+  storeSpec(spec);
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 }
 
 function findSuite(names){
-	var suite = top;
+  var suite = top;
 
-	if (names && !(names instanceof Array)){
-		names = names.split('/');
-	}
+  if (names && !(names instanceof Array)){
+    names = names.split('/');
+  }
 
-	names.forEach(x => {
-		if (suite == null) return null;
-		suite = suite.childSuite(x);
-	});
+  names.forEach(x => {
+    if (suite == null) return null;
+    suite = suite.childSuite(x);
+  });
 
-	if (suite == undefined) return null;
+  if (suite == undefined) return null;
 
-	return suite;
+  return suite;
 }
 
+handlers['spec-header-updated'] = (data) => {
+  let specData = data.spec;
+  let spec = new Specification(specData, library);
+  specs[spec.id].updateHeader(spec);
+  publishHeaderChanged(spec.id);
+};
+
 handlers['spec-body-saved'] = function(data){
-	if (specs.hasOwnProperty(data.id)){
-		var spec = specs[data.id];
-		spec.baselineAt(data.revision);
+  if (specs.hasOwnProperty(data.id)){
+    var spec = specs[data.id];
+    spec.baselineAt(data.revision);
 
-		publishHierarchyChanged();
-	}
-
+    publishHierarchyChanged();
+  }
 }
 
 handlers['spec-added'] = function(data){
-	var spec = new Specification(data.data, library);
-	specs[spec.id] = spec;
+  var spec = new Specification(data.data, library);
+  specs[spec.id] = spec;
 
-	var parent = findSuite(data.suite);
+  var parent = findSuite(data.suite);
 
-	if (parent){
-		parent.addSpec(spec);
-	}
+  if (parent){
+    parent.addSpec(spec);
+  }
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 
-	Postal.publish({
-		channel: 'explorer',
-		topic: 'go-to-spec',
-		data: {id: spec.id}
-	});
+  Postal.publish({
+    channel: 'explorer',
+    topic: 'go-to-spec',
+    data: {id: spec.id}
+  });
 }
 
 handlers['suite-added'] = function(data){
-	var names = data.path.split('/');
-	if (names.length == 1){
-		top.addChildSuite(names[0]);
-	}
-	else {
-		var parent = top;
-		for (var i = 0; i < names.length - 1; i++){
-			parent = parent.childSuite(names[i]);
-		}
+  var names = data.path.split('/');
+  if (names.length == 1){
+    top.addChildSuite(names[0]);
+  }
+  else {
+    var parent = top;
+    for (var i = 0; i < names.length - 1; i++){
+      parent = parent.childSuite(names[i]);
+    }
 
-		var name = _.last(names);
-		parent.addChildSuite(name);
-	}
+    var name = _.last(names);
+    parent.addChildSuite(name);
+  }
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 }
 
 handlers['spec-deleted'] = function(data){
-	delete specs[data.id];
-	var parent = _.find(top.allSuites(), x => x.hasSpec(data.id));
-	if (parent){
-		parent.removeSpec(data.id);
-	}
+  delete specs[data.id];
+  var parent = _.find(top.allSuites(), x => x.hasSpec(data.id));
+  if (parent){
+    parent.removeSpec(data.id);
+  }
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 
 }
 
 handlers['hierarchy-loaded'] = function(data){
-	top = new Suite(data.hierarchy, null, library);
-	specs = {};
+  top = new Suite(data.hierarchy, null, library);
+  specs = {};
 
-	top.allSpecs().forEach(x => {
-		specs[x.id] = x;
-	});
+  top.allSpecs().forEach(x => {
+    specs[x.id] = x;
+  });
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 }
 
 handlers['spec-canceled'] = function(data){
-	var spec = specs[data.id];
+  var spec = specs[data.id];
 
-	spec.clearResults();
+  spec.clearResults();
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 }
 
 handlers['spec-progress'] = function(data){
-	var spec = specs[data.id];
-	var counts = new Counts(data.counts);
+  var spec = specs[data.id];
+  var counts = new Counts(data.counts);
 
-	QueueState.markRunning(data.id, counts);
+  QueueState.markRunning(data.id, counts);
 
-	var outgoing = {
-		spec: spec,
-		counts: counts,
-		step: data.step,
-		total: data.total,
-		running: true
-	};
+  var outgoing = {
+    spec: spec,
+    counts: counts,
+    step: data.step,
+    total: data.total,
+    running: true
+  };
 
-	Postal.publish({
-		channel: 'explorer',
-		topic: 'spec-execution-state',
-		data: outgoing
-	})
+  Postal.publish({
+    channel: 'explorer',
+    topic: 'spec-execution-state',
+    data: outgoing
+  })
 
-	publishHierarchyChanged();
+  publishHierarchyChanged();
 }
 
 handlers['spec-execution-completed'] = function(data){
-	ResultCache.record(data);
+  ResultCache.record(data);
 
-	specs[data.id].clearResults();
+  specs[data.id].clearResults();
 
-	QueueState.markCompleted(data.id);
+  QueueState.markCompleted(data.id);
 
-	publishHierarchyChanged();
-	publishQueueChanged();
+  publishHierarchyChanged();
+  publishQueueChanged();
 
-	Postal.publish({
-		channel: 'editor',
-		topic: 'spec-changed',
-		data: {id: data.id}
-	});
+  Postal.publish({
+    channel: 'editor',
+    topic: 'spec-changed',
+    data: {id: data.id}
+  });
 
-	Postal.publish({
-		channel: 'results',
-		topic: 'results-changed',
-		data: {}
-	})
+  Postal.publish({
+    channel: 'results',
+    topic: 'results-changed',
+    data: {}
+  })
 }
 
 handlers['queue-state'] = data => {
-	var hasChanges = QueueState.store(data);
-	
-	queue = data.queued.map(id => specs[id]);
+  var hasChanges = QueueState.store(data);
 
-	publishQueueChanged();
+  queue = data.queued.map(id => specs[id]);
 
-	if (!hasChanges) return;
+  publishQueueChanged();
 
-	if (!data.running){
-		Postal.publish({
-			channel: 'explorer',
-			topic: 'spec-execution-state',
-			data: {
-				running: false
-			}
-		})
-	}
+  if (!hasChanges) return;
 
-	publishHierarchyChanged();
+  if (!data.running){
+    Postal.publish({
+      channel: 'explorer',
+      topic: 'spec-execution-state',
+      data: {
+        running: false
+      }
+    })
+  }
+
+  publishHierarchyChanged();
 }
 
-
-
 function resetSubscriptions(){
-	Postal.subscribe({
-		channel: 'engine',
-		topic: '*',
-		callback: function(data, envelope){
-			var topic = envelope.topic;
-			if (handlers.hasOwnProperty(topic)){
-				handlers[topic](data);
-			}
-		}
-	});
+  Postal.subscribe({
+    channel: 'engine',
+    topic: '*',
+    callback: function(data, envelope){
+      var topic = envelope.topic;
+      (handlers[topic] || _.noop)(data);
+    }
+  });
 
-	Postal.subscribe({
-		channel: 'engine-request',
-		topic: 'clear-all-results',
-		callback: function(){
-			ResultCache.clear();
+  Postal.subscribe({
+    channel: 'engine-request',
+    topic: 'clear-all-results',
+    callback: function(){
+      ResultCache.clear();
 
-			_.values(specs).forEach(x => {
-				x.clearResults();
-			});
+      _.values(specs).forEach(x => {
+        x.clearResults();
+      });
 
-			publishHierarchyChanged();
+      publishHierarchyChanged();
 
-			Postal.publish({
-				channel: 'results',
-				topic: 'results-changed',
-				data: {}
-			})
-		}
-	})
+      Postal.publish({
+        channel: 'results',
+        topic: 'results-changed',
+        data: {}
+      })
+    }
+  })
 
-	Postal.subscribe({
-		channel: 'explorer',
-		topic: 'spec-status-filter-changed',
-		callback: function(data){
-			status = data.status;
-			publishHierarchyChanged();
-		}
-	});
+  Postal.subscribe({
+    channel: 'explorer',
+    topic: 'spec-status-filter-changed',
+    callback: function(data){
+      status = data.status;
+      publishHierarchyChanged();
+    }
+  });
 
-	Postal.subscribe({
-		channel: 'explorer',
-		topic: 'lifecycle-filter-changed',
-		callback: function(data){
-			lifecycle = data.lifecycle;
-			publishHierarchyChanged();
-		}
-	});
+  Postal.subscribe({
+    channel: 'explorer',
+    topic: 'lifecycle-filter-changed',
+    callback: function(data){
+      lifecycle = data.lifecycle;
+      publishHierarchyChanged();
+    }
+  });
 }
 
 var alwaysTrue = function(x){
-	return true;
+  return true;
 }
 
 function toLifecycleFilter(){
-	if (lifecycle == 'any') return alwaysTrue;
+  if (lifecycle == 'any') return alwaysTrue;
 
-	if (lifecycle == 'Regression'){
-		return spec => spec.lifecycle == 'Regression';
-	}
+  if (lifecycle == 'Regression'){
+    return spec => spec.lifecycle == 'Regression';
+  }
 
-	if (lifecycle == 'Acceptance'){
-		return spec => spec.lifecycle == 'Acceptance';
-	}
+  if (lifecycle == 'Acceptance'){
+    return spec => spec.lifecycle == 'Acceptance';
+  }
 }
 
 function toStatusFilter(){
-	if (status == 'any') return alwaysTrue;
-
-	return spec => spec.status() == status;
+  if (status == 'any') {
+    return alwaysTrue;
+  }
+  return spec => spec.status() == status;
 }
 
 module.exports = {
-	lifecycleFilter: function(){
-		return lifecycle;
-	},
+  lifecycleFilter: function(){
+    return lifecycle;
+  },
 
-	statusFilter: function(){
-		return status;
-	},
+  statusFilter: function(){
+    return status;
+  },
 
-	hasFilter: function(){
-		return (status != 'any' || lifecycle != 'any');
-	},
+  hasFilter: function(){
+    return (status != 'any' || lifecycle != 'any');
+  },
 
-	currentFilter(){
-		if (status == 'any' && lifecycle == 'any') return spec => true;
-	
-		var lifecycleFilter = toLifecycleFilter();
-		var statusFilter = toStatusFilter();
+  currentFilter(){
+    if (status == 'any' && lifecycle == 'any') return spec => true;
 
-		return spec => lifecycleFilter(spec) && statusFilter(spec);
-	},
+    var lifecycleFilter = toLifecycleFilter();
+    var statusFilter = toStatusFilter();
 
-	filteredHierarchy: function(){
-		var filter = this.currentFilter();
-		return top.filter(filter);
-	},
+    return spec => lifecycleFilter(spec) && statusFilter(spec);
+  },
 
-	top: function(){
-		return top;
-	},
+  filteredHierarchy: function(){
+    var filter = this.currentFilter();
+    return top.filter(filter);
+  },
 
-	allSpecs: function(){
-		return _.values(specs);
-	},
+  top: function(){
+    return top;
+  },
 
-	hasUnsavedChanges: function(){
-		for (var key in specs){
-			if (specs[key].isDirty()) return true;
-		}
+  allSpecs: function(){
+    return _.values(specs);
+  },
 
-		return false;
-	},
+  hasUnsavedChanges: function(){
+    for (var key in specs){
+      if (specs[key].isDirty()) return true;
+    }
 
-	summary: function(){
-		return top.summary();
-	},
+    return false;
+  },
 
-	queuedSpecs: function(){
-		return queue;
-	},
+  summary: function(){
+    return top.summary();
+  },
 
-	hasData: function(id){
-		return specs.hasOwnProperty(id);
-	},
+  queuedSpecs: function(){
+    return queue;
+  },
 
-	reset: function(){
-		QueueState.clear();
-		ResultCache.clear();
+  hasData: function(id){
+    return specs.hasOwnProperty(id);
+  },
 
-		specs = {};
-		top = new Suite({});
-		results = {};
-		queue = [];
-		lifecycle = 'any';
-		status = 'any';
-		library = null;
-		systemRecycled = null;
+  reset: function(){
+    QueueState.clear();
+    ResultCache.clear();
 
-		resetSubscriptions();
-	},
+    specs = {};
+    top = new Suite({});
+    results = {};
+    queue = [];
+    lifecycle = 'any';
+    status = 'any';
+    library = null;
+    systemRecycled = null;
 
-	clearData: function(){
-		specs = {};
-	},
+    resetSubscriptions();
+  },
 
-	findSpec: function(id){
-		if (specs.hasOwnProperty(id)) return specs[id];
+  clearData: function(){
+    specs = {};
+  },
 
-		return null;
-	},
+  findSpec: function(id){
+    if (specs.hasOwnProperty(id)) return specs[id];
 
-	findSuite: function(names){
-		return findSuite(names);
-	},
+    return null;
+  },
+
+  findSuite: function(names){
+    return findSuite(names);
+  },
 
 
-	errorCount: function(){
-		if (library == null) return 0;
+  errorCount: function(){
+    if (library == null) return 0;
 
-		return library.errorCount();
-	},
+    return library.errorCount();
+  },
 
-	errorReport: function(){
-		if (library == null) return [];
+  errorReport: function(){
+    if (library == null) return [];
 
-		return library.errorReport();
-	},
+    return library.errorReport();
+  },
 
-	fixtures: function(){
-		return library;
-	},
+  fixtures: function(){
+    return library;
+  },
 
-	storeData: function(id, data){
-		var spec = new Specification(data, library);
-		spec.id = id;
-		storeSpec(spec);
-	},
+  storeData: function(id, data){
+    var spec = new Specification(data, library);
+    spec.id = id;
+    storeSpec(spec);
+  },
 
-	readResults: function(id, results){
-		if (this.hasData(id)){
-			var spec = this.findSpec(id);
-			spec.readResults(results);
-			Postal.publish({
-				channel: 'editor',
-				topic: 'spec-changed',
-				data: {id: id}
-			});
-		}
-	},
+  readResults: function(id, results){
+    if (this.hasData(id)){
+      var spec = this.findSpec(id);
+      spec.readResults(results);
+      Postal.publish({
+        channel: 'editor',
+        topic: 'spec-changed',
+        data: {id: id}
+      });
+    }
+  },
 
-	requestData: function(id){
-		Postal.publish({
-			channel: 'engine-request',
-			topic: 'spec-data-requested',
-			data: {
-				type: 'spec-data-requested',
-				id: id
-			}
-		})
+  requestData: function(id){
+    Postal.publish({
+      channel: 'engine-request',
+      topic: 'spec-data-requested',
+      data: {
+        type: 'spec-data-requested',
+        id: id
+      }
+    })
 
-	},
+  },
 
-	setLibrary: function(lib){
-		setLibrary(lib);
-	},
+  setLibrary: function(lib){
+    setLibrary(lib);
+  },
 
-	systemRecycled: function(){
-		return systemRecycled;
-	},
+  systemRecycled: function(){
+    return systemRecycled;
+  },
 
-	recordResult: function(data){
-		if (this.hasData(data.spec)){
-			var spec = this.findSpec(data.spec);
-			var step = spec.find(data.id);
+  recordResult: function(data){
+    if (this.hasData(data.spec)){
+      var spec = this.findSpec(data.spec);
+      var step = spec.find(data.id);
 
-			if (!step){
-				throw new Error('Unable to find a step with id ' + data.id + ' for spec ' + data.spec);
-			}
+      if (!step){
+        throw new Error('Unable to find a step with id ' + data.id + ' for spec ' + data.spec);
+      }
 
-			step.logResult(data);
+      step.logResult(data);
 
-			Postal.publish({
-				channel: 'editor',
-				topic: 'spec-results-changed',
-				data: {id: data.spec}
-			});
-		}
-	},
+      Postal.publish({
+        channel: 'editor',
+        topic: 'spec-results-changed',
+        data: {id: data.spec}
+      });
+    }
+  },
 
-	saveSpecData: function(spec){
-		var message = {
-			type: 'save-spec-body', 
-			id: spec.id, 
-			spec: spec.write(), 
-			revision: spec.revision()
-		};
+  saveSpecData: function(spec){
+    var message = {
+      type: 'save-spec-body',
+      id: spec.id,
+      spec: spec.write(),
+      revision: spec.revision()
+    };
 
-		Postal.publish({
-			channel: 'engine-request',
-			topic: 'save-spec-body',
-			data: message
-		});
-	},
+    Postal.publish({
+      channel: 'engine-request',
+      topic: 'save-spec-body',
+      data: message
+    });
+  },
 
-	runSpec: function(spec){
-		Postal.publish({
-			channel: 'engine-request',
-			topic: 'run-spec',
-			data: {id: spec.id, spec: spec.write(), revision: spec.revision()}
-		});
-	}
+  bumpSpecDate(spec) {
+    let message = {
+      id: spec.id,
+      timePeriod: spec['expiration-period']
+    }
+
+    Postal.publish({
+      channel: 'engine-request',
+      topic: 'bump-spec-date',
+      data: message
+    })
+  },
+
+  runSpec: function(spec){
+    Postal.publish({
+      channel: 'engine-request',
+      topic: 'run-spec',
+      data: {id: spec.id, spec: spec.write(), revision: spec.revision()}
+    });
+  }
 }

@@ -75,6 +75,15 @@ namespace StoryTeller.Model.Persistence
             var maxRetries = top.GetAttribute(MaxRetries);
             spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
+            var lastUpdatedString = top.GetAttribute(LastUpdated);
+            var lastUpdated = !lastUpdatedString.IsEmpty() ? DateTime.Parse(top.GetAttribute(LastUpdated)) : DateTime.Now;
+            spec.LastUpdated = lastUpdated;
+
+            var expirationPeriodString = top.GetAttribute(ExpirationPeriod);
+            var expirationPeriod = expirationPeriodString.IsEmpty() ? 0 : int.Parse(expirationPeriodString);
+            spec.ExpirationPeriod = expirationPeriod;
+
+
             spec.name = top.GetAttribute(Name);
 
             var tags = top.GetAttribute(TagsAtt);

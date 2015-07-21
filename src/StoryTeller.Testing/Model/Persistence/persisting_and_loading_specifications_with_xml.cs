@@ -61,6 +61,13 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Test]
+        public void full_cycle_spec_last_updated()
+        {
+            original.LastUpdated = new DateTime(2015, 3, 6);
+            persisted.LastUpdated.ShouldBe(original.LastUpdated);
+        }
+
+        [Test]
         public void full_cycle_tags()
         {
             original.Tags.Add("a");

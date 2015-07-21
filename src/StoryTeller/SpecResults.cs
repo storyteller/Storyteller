@@ -26,7 +26,7 @@ namespace StoryTeller
 
         [JsonProperty("time")] public string time = DateTime.Now.ToString("t");
 
-        public static SpecResults ForAbortedRun(string id)
+        private static SpecResults GetAbortedResults(string id, string message)
         {
             return new SpecResults
             {
@@ -37,10 +37,20 @@ namespace StoryTeller
                     new StepResult(id, ResultStatus.error)
                     {
                         position = Stage.engine,
-                        error = "Invalid Engine State, aborted Specification execution"
+                        error = message
                     }
                 }
             };
+        }
+
+        public static SpecResults ForAbortedRun(string id)
+        {
+            return GetAbortedResults(id, "Invalid Engine State, aborted Specification execution");
+        }
+
+        public static SpecResults ForExpiredRun(string id)
+        {
+            return GetAbortedResults(id, "This test has expired and needs to be updated.");
         }
     }
 }

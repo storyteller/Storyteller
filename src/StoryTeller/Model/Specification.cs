@@ -1,4 +1,5 @@
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -26,6 +27,25 @@ namespace StoryTeller.Model
 
         [JsonProperty("max-retries")]
         public int MaxRetries;
+
+        [JsonProperty("expiration-period")]
+        public int ExpirationPeriod;
+
+        [JsonConverter(typeof(LastUpdatedConverter))]
+        [JsonProperty("last-updated")]
+        public DateTime LastUpdated
+        {
+            get
+            {
+                if (!_lastUpdated.HasValue)
+                {
+                    _lastUpdated = DateTime.Now;
+                }
+                return _lastUpdated.Value;
+            }
+            set { _lastUpdated = value; }
+        }
+
 
         [JsonConverter(typeof (StringEnumConverter))] 
         [JsonProperty("lifecycle")] 
@@ -82,6 +102,7 @@ namespace StoryTeller.Model
 
         [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
         private readonly IList<Node> _children = new List<Node>();
+        private DateTime? _lastUpdated;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
         public IList<Node> Children
@@ -154,6 +175,24 @@ namespace StoryTeller.Model
             clone.id = Guid.NewGuid().ToString();
 
             return clone;
+        }
+    }
+
+    public class LastUpdatedConverter : JsonConverter
+    {
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((DateTime) value).ToLongDateString());
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            return DateTime.Parse(reader.Value.ToString());
+        }
+
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof (DateTime);
         }
     }
 }

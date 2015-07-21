@@ -85,6 +85,18 @@ namespace StoryTeller.Model.Persistence
                 var maxRetries = reader.GetAttribute(XmlConstants.MaxRetries);
                 spec.MaxRetries = maxRetries.IsEmpty() ? 0 : int.Parse(maxRetries);
 
+                var lastUpdatedString = reader.GetAttribute(XmlConstants.LastUpdated);
+                var lastUpdated = !lastUpdatedString.IsEmpty()
+                    ? DateTime.Parse(reader.GetAttribute(XmlConstants.LastUpdated))
+                    : DateTime.Now;
+                spec.LastUpdated = lastUpdated;
+
+                var expirationPeriodString = reader.GetAttribute(XmlConstants.ExpirationPeriod);
+                var expirationPeriod = string.IsNullOrEmpty(expirationPeriodString)
+                    ? 0
+                    : int.Parse(expirationPeriodString);
+                spec.ExpirationPeriod = expirationPeriod;
+
                 return spec;
             }
         }

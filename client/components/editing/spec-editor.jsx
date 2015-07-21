@@ -20,6 +20,7 @@ var Running = Icons['running'];
 var Persisting = require('./alerts/persisting');
 var SpecResultHeader = require('./header/spec-result-header');
 var RetryCount = require('./header/retry-count');
+var ExpirationPeriod = require('./header/expiration-period');
 
 
 
@@ -59,10 +60,10 @@ var ContextualPane = React.createClass({
 	render: function(){
 		var contextualControl = this.buildContext();
 
-
 		return (
 			<Col xs={4} md={4}>
 				<RetryCount count={this.props.spec['max-retries']}/>
+				<ExpirationPeriod spec={this.props.spec} disabled={this.props.updatingDate} />
 				<h4>Outline</h4>
 				<SpecOutline outline={this.props.outline} />
 				<br />
@@ -101,7 +102,8 @@ module.exports = React.createClass({
 			spec: {name: 'temp'},
 			persisting: false,
 			lastSaved: null,
-			contextualControl: null,
+      contextualControl: null,
+      updatingDate: false
 		}
 	},
 
@@ -149,11 +151,13 @@ module.exports = React.createClass({
 				<SpecHeader spec={this.state.spec} mode={this.props.mode} />
 				<Row>
 					
-					<ContextualPane 
-						spec={this.state.spec} 
-						loader={loader} 
+					<ContextualPane
+						spec={this.state.spec}
+						loader={loader}
 						activeContainer={this.state.activeContainer}
-						outline={this.state.outline}/>
+            outline={this.state.outline}
+            updatingDate={this.state.updatingDate}
+          />
 					
 					<Col xs={8} md={8}>
 					    <SpecResultHeader spec={this.state.spec} />

@@ -42,6 +42,8 @@ namespace StoryTeller.Model.Persistence
             root.SetAttribute(TagsAtt, specification.Tags.Join(", "));
             root.SetAttribute(LifecycleAtt, specification.Lifecycle.ToString());
             root.SetAttribute(Name, specification.name);
+            root.SetAttribute(LastUpdated, specification.LastUpdated.ToLongDateString());
+            root.SetAttribute(ExpirationPeriod, specification.ExpirationPeriod.ToString());
 
             return root;
         }

@@ -88,6 +88,7 @@
     <Compile Include="Engine\EngineControllerTester.cs" />
     <Compile Include="Engine\integrated_performance_data_collection_testing.cs" />
     <Compile Include="Engine\SpecExecutionRequestTester.cs" />
+    <Compile Include="Engine\SpecExpirationTester.cs" />
     <Compile Include="Engine\SpecRunnerTester.cs" />
     <Compile Include="Engine\TimingsSmokeTester.cs" />
     <Compile Include="Engine\user_interface_tracing_spec.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="SpecRunningContext.cs" />
     <Compile Include="StateTester.cs" />
     <Compile Include="StoryTellerAssertTester.cs" />
+    <Compile Include="ST\BumpSpecDateCommandTester.cs" />
     <Compile Include="ST\ClientConnectorTester.cs" />
     <Compile Include="ST\Docs\DocSettingsTester.cs" />
     <Compile Include="ST\Docs\Samples\CLanguageSampleFinderTester.cs" />
