@@ -20,10 +20,11 @@ var CommandWithNameEntryLink  = React.createClass({
 	},
 
 	getInitialState: function () {
+		var value = this.props.value;
 		return {
 	    	isModalOpen: false,
-	    	buttonDisabled: true,
-	    	name: null
+	    	buttonDisabled: !(value && value.length > 0),
+	    	name: value 
 	    };
 	},
 
@@ -42,15 +43,12 @@ var CommandWithNameEntryLink  = React.createClass({
 
 		var onTextEntry = e => {
 			var value = e.target.value;
-
 			var canDo = (value && value.length > 0);
 			this.setState({
-				buttonDisabled: false,
+				buttonDisabled: !canDo,
 				name: value
 			});
 		}
-
-
 
 		var apply = e => {
 			var name = this.state.name;
@@ -77,7 +75,7 @@ var CommandWithNameEntryLink  = React.createClass({
 		    <Modal title={this.props.title} onRequestHide={this.handleToggle}>
 		      <div className="modal-body">
 
-		      		<div className="form-group">
+	      		<div className="form-group">
     					<label for="modal-name">Name:</label>
     					<input 
     						onKeyPress={onKeyDown}
@@ -86,16 +84,15 @@ var CommandWithNameEntryLink  = React.createClass({
     						type="text" 
     						className="form-control" 
     						id="modal-name" 
-    						placeholder={this.props.placeholder}/>
+    						placeholder={this.props.placeholder} 
+    						value={this.state.name} />
   					</div>
 
-		      
-
 		      </div>
+
 		      <div className="modal-footer">
 		      	<Button tabIndex="1001" disabled={this.state.buttonDisabled} onClick={apply} bsStyle="primary">{this.props.commandText}</Button> 
 		        <Button onClick={this.handleToggle}>Cancel</Button>
-		        
 		      </div>
 		    </Modal>
 		  );
