@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require("react");
 var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
-var $ = require('jquery');
+var domUtils = require('./../../../lib/dom-utils');
 
 var AddStepItem = React.createClass({
 	render: function(){
@@ -30,13 +30,13 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount: function() {
-		var element = $(this.getDOMNode());
+		var node = this.getDOMNode();
 
 		window.addEventListener('scroll', this.handleScroll);
 
 		this.setState({
-			offsetTop: element.offset().top,
-			width: element.width()
+			offsetTop: domUtils.offsetTop(node),
+			width: domUtils.width(node)
 		});
 	},
 
@@ -46,7 +46,7 @@ module.exports = React.createClass({
 
 	handleScroll: function(event) {
 		var offsetTop = this.state.offsetTop;
-		var scrollOffset = $(window).scrollTop();
+		var scrollOffset = domUtils.scrollTop(window);
 
 		if (offsetTop < scrollOffset) {
 			this.setState({
