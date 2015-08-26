@@ -84,7 +84,7 @@ module.exports = React.createClass({
 				</Navbar>
 				<StatusBar/>
 
-				<SpecProgressBar />;
+				<SpecProgressBar />
 			</div>
 
 		);
