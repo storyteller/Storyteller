@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -10,9 +9,7 @@ using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
-using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
-using StructureMap.Util;
 
 namespace ST.Client
 {
@@ -30,7 +27,8 @@ namespace ST.Client
         private readonly ResultsCache _results = new ResultsCache();
 
 
-        public PersistenceController(ILogger logger, IClientConnector client, ISpecFileWatcher watcher, ISystemTime systemTime)
+        public PersistenceController(ILogger logger, IClientConnector client, ISpecFileWatcher watcher,
+            ISystemTime systemTime)
         {
             _logger = logger;
             _client = client;
@@ -57,7 +55,6 @@ namespace ST.Client
 
             var data = LoadSpecification(id);
             _client.SendMessageToClient(data);
-
         }
 
         public ResultsCache Results
@@ -79,7 +76,7 @@ namespace ST.Client
                 _lock.Write(() => { _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy(); });
 
 
-                //_watcher.StartWatching(path, this);
+                _watcher.StartWatching(path, this);
             }
             catch (Exception e)
             {
@@ -103,7 +100,7 @@ namespace ST.Client
                     var directory = parentSuite.Folder.AppendPath(name);
                     Directory.CreateDirectory(directory);
 
-                    string newPath = parentSuite.path.AppendUrl(name).TrimStart('/');
+                    var newPath = parentSuite.path.AppendUrl(name).TrimStart('/');
                     var newSuite = new Suite
                     {
                         Folder = directory,
@@ -117,7 +114,7 @@ namespace ST.Client
 
                     _hierarchy.Suites[newPath] = newSuite;
 
-                    _client.SendMessageToClient(new SuiteAdded{path = newPath});
+                    _client.SendMessageToClient(new SuiteAdded {path = newPath});
                 }
             }
             catch (Exception e)
@@ -137,11 +134,11 @@ namespace ST.Client
 
                     _hierarchy.Replace(specification, _systemTime.UtcNow());
 
-                    using (_watcher.LatchFile(specification.Filename))
+                    _watcher.WriteFiles(() =>
                     {
                         var document = XmlWriter.WriteToXml(specification);
                         document.Save(specification.Filename);
-                    }
+                    });
 
                     return true;
                 });
@@ -172,22 +169,22 @@ namespace ST.Client
                 var suite = _hierarchy.Suites[suitePath];
                 var file = suite.Folder.AppendPath(filename);
 
-                using (_watcher.LatchFile(file))
+                _watcher.WriteFiles(() =>
                 {
                     var document = XmlWriter.WriteToXml(template);
                     document.Save(file);
+                });
 
-                    template.Filename = file;
-                    _hierarchy.Specifications[template.id] = template;
+                template.Filename = file;
+                _hierarchy.Specifications[template.id] = template;
 
-                    suite.AddSpec(template);
+                suite.AddSpec(template);
 
-                    return new SpecAdded
-                    {
-                        suite = suitePath,
-                        data = template
-                    };
-                }
+                return new SpecAdded
+                {
+                    suite = suitePath,
+                    data = template
+                };
             });
         }
 
@@ -207,20 +204,17 @@ namespace ST.Client
                 var specFileName = Specification.DetermineFilename(name);
                 var file = folder.AppendPath(specFileName);
 
-                using (_watcher.LatchFile(file))
+                _watcher.WriteFiles(() => { XmlWriter.WriteToXml(specification).Save(file); });
+
+                specification.Filename = file;
+                _hierarchy.Specifications[specification.id] = specification;
+                suite.AddSpec(specification);
+
+                return new SpecAdded
                 {
-                    XmlWriter.WriteToXml(specification).Save(file);
-
-                    specification.Filename = file;
-                    _hierarchy.Specifications[specification.id] = specification;
-                    suite.AddSpec(specification);
-
-                    return new SpecAdded
-                    {
-                        suite = path,
-                        data = specification
-                    };
-                }
+                    suite = path,
+                    data = specification
+                };
             });
         }
 
@@ -309,13 +303,10 @@ namespace ST.Client
             var spec = _hierarchy.RemoveSpec(id);
             if (spec != null)
             {
-                using (_watcher.LatchFile(spec.Filename))
-                {
-                    new FileSystem().DeleteFile(spec.Filename);
-                }
+                _watcher.WriteFiles(() => { new FileSystem().DeleteFile(spec.Filename); });
 
-                
-                _client.SendMessageToClient(new SpecDeleted{id = id});
+
+                _client.SendMessageToClient(new SpecDeleted {id = id});
             }
         }
 

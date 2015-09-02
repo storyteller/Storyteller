@@ -381,14 +381,6 @@ namespace StoryTeller.Testing.ST
             // nothing
         }
 
-        public IDisposable LatchFile(string file)
-        {
-            var disposable = new Disposable(file);
-
-            Disposables.Add(disposable);
-
-            return disposable;
-        }
 
         public readonly IList<Disposable> Disposables = new List<Disposable>();
 
@@ -401,6 +393,11 @@ namespace StoryTeller.Testing.ST
         public ISpecFileObserver Observer { get; set; }
 
         public string Path { get; set; }
+
+        public void WriteFiles(Action action)
+        {
+            action();
+        }
 
         public class Disposable : IDisposable
         {

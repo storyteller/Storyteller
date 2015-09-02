@@ -1,61 +1,41 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using FubuCore;
+using FubuMVC.Core.Runtime.Files;
 
 namespace ST.Client
 {
-    public class SpecFileWatcher : ISpecFileWatcher
+    public class SpecFileWatcher : ISpecFileWatcher, IChangeSetHandler
     {
-        private FileSystemWatcher _watcher;
+        private FileChangeWatcher _watcher;
+        private ISpecFileObserver _observer;
 
         public void Dispose()
         {
-            _watcher.EnableRaisingEvents = false;
             _watcher.Dispose();
         }
 
-        public class Latch : IDisposable
+
+        public void WriteFiles(Action action)
         {
-            private readonly SpecFileWatcher _parent;
-
-            public Latch(SpecFileWatcher parent, string file)
-            {
-                _parent = parent;
-                if (_parent._watcher != null) _parent._watcher.EnableRaisingEvents = false;
-            }
-
-            public void Dispose()
-            {
-                if (_parent._watcher != null) _parent._watcher.EnableRaisingEvents = true;
-            }
+            _watcher.Latch(action);
         }
 
-        public IDisposable LatchFile(string file)
+        public void Handle(ChangeSet changes)
         {
-            return new Latch(this, file);
+            changes.Changed.Each(x => _observer.Changed(x.Path));
+            changes.Deleted.Each(x => _observer.Deleted(x));
+            changes.Added.Each(x => _observer.Added(x.Path));
         }
 
         public void StartWatching(string path, ISpecFileObserver observer)
         {
             var fullPath = path.ToFullPath();
-            _watcher = new FileSystemWatcher(fullPath, "*.xml");
-            _watcher.IncludeSubdirectories = true;
-            _watcher.Changed += (sender, args) =>
-            {
-                observer.Changed(args.FullPath);
-            };
+            _watcher = new FileChangeWatcher(fullPath, FileSet.Deep("*.xml"), this);
+            _watcher.Start();
 
-            _watcher.Deleted += (sender, args) =>
-            {
-                observer.Deleted(args.FullPath);
-            };
-
-            _watcher.Created += (sender, args) =>
-            {
-                observer.Added(args.FullPath);
-            };
-
-            _watcher.EnableRaisingEvents = true;
+            _observer = observer;
         }
     }
 }

@@ -53,7 +53,6 @@
     <Compile Include="Client\AssetFileWatcher.cs" />
     <Compile Include="Client\ClientConnectorActivator.cs" />
     <Compile Include="Client\ExceptionListener.cs" />
-    <Compile Include="Client\FixtureLibraryWatcher.cs" />
     <Compile Include="Client\ForceRecycleCommand.cs" />
     <Compile Include="Client\IPersistenceController.cs" />
     <Compile Include="Client\ISpecFileObserver.cs" />

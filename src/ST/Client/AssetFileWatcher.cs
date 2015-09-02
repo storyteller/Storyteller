@@ -3,57 +3,40 @@ using System.Collections.Generic;
 using System.IO;
 using FubuCore;
 using FubuMVC.Core.Assets;
+using FubuMVC.Core.Runtime.Files;
 using StoryTeller.Messages;
 
 namespace ST.Client
 {
-    public class AssetFileWatcher : IDisposable
+    public class AssetFileWatcher : IDisposable, IChangeSetHandler
     {
 	// SAMPLE: declarations4
-        private readonly IAssetFinder _finder;
         private readonly IClientConnector _connector;
-        private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
-        private DateTime _lastUpdate = DateTime.UtcNow;
+        private readonly FileChangeWatcher _watcher;
 	// ENDSAMPLE
         public AssetFileWatcher(IAssetFinder finder, IClientConnector connector)
         {
-            _finder = finder;
             _connector = connector;
+
+            var asset = finder.FindAsset("bundle.js");
+            var path = asset.File.Path;
+
+            _watcher = new FileChangeWatcher(path.ParentDirectory(), FileSet.Shallow("bundle.js"), this);
         }
 
-        private void watch(string search)
+        void IChangeSetHandler.Handle(ChangeSet changes)
         {
-            var asset = _finder.FindAsset(search);
-            var path = asset.File.Path;
-            var watcher = new FileSystemWatcher(path.ParentDirectory(), Path.GetFileName(path))
-            {
-                EnableRaisingEvents = true,
-            };
-
-            watcher.Changed += (sender, args) =>
-            {
-                if (DateTime.UtcNow.Subtract(_lastUpdate) > 1.Seconds())
-                {
-                    _lastUpdate = DateTime.UtcNow;
-                    _connector.SendMessageToClient(new RefreshPage());
-                }
-            };
-
-            _watchers.Add(watcher);
+            _connector.SendMessageToClient(new RefreshPage());
         }
 
         public void Dispose()
         {
-            _watchers.Each(x =>
-            {
-                x.EnableRaisingEvents = false;
-                x.Dispose();
-            });
+            _watcher.Dispose();
         }
 
         public void Start()
         {
-            watch("bundle.js");
+            _watcher.Start();
         }
     }
 

@@ -3,11 +3,13 @@ using System.IO;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.CommandLine;
+using FubuMVC.Core.Services.Remote;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
+using RemoteDomainExpression = StoryTeller.Remotes.RemoteDomainExpression;
 
 namespace ST.Client
 {
@@ -29,7 +31,7 @@ namespace ST.Client
         private AppDomain _domain;
         private readonly MessagingHub _messaging;
         private RemoteProxy _proxy;
-        private FixtureLibraryWatcher _watcher;
+        private AppDomainFileChangeWatcher _watcher;
         private EngineMode _mode = EngineMode.Interactive;
 
         public RemoteController(string path)
@@ -137,7 +139,7 @@ namespace ST.Client
 
             return listener.Task.ContinueWith(x =>
             {
-                _watcher = new FixtureLibraryWatcher(Recycle);
+                _watcher = new AppDomainFileChangeWatcher(Recycle);
                 _watcher.WatchBinariesAt(_path.AppendPath("bin"));
 
                 LatestSystemRecycled = x.Result;

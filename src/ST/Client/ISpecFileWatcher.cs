@@ -4,7 +4,7 @@ namespace ST.Client
 {
     public interface ISpecFileWatcher : IDisposable
     {
-        IDisposable LatchFile(string file);
+        void WriteFiles(Action action);
         void StartWatching(string path, ISpecFileObserver observer);
     }
 }
