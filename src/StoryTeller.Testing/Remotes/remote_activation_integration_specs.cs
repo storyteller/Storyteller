@@ -3,6 +3,7 @@ using FubuCore;
 using MultipleSystems;
 using NUnit.Framework;
 using Shouldly;
+using ST.Client;
 using StoryTeller.Engine;
 using StoryTeller.Remotes;
 using StoryTeller.Samples;

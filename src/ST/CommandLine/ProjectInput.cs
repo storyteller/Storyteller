@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using FubuCore;
 using FubuCore.CommandLine;
+using ST.Client;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;

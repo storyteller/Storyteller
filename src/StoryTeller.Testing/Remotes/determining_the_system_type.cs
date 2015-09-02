@@ -1,5 +1,6 @@
 ﻿using FubuCore;
 using NUnit.Framework;
+using ST.Client;
 using StoryTeller.Remotes;
 
 namespace StoryTeller.Testing.Remotes

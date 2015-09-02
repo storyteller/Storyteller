@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace StoryTeller.Remotes
+namespace ST.Client
 {
     public class FixtureLibraryWatcher : IDisposable
     {

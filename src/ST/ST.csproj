@@ -53,6 +53,7 @@
     <Compile Include="Client\AssetFileWatcher.cs" />
     <Compile Include="Client\ClientConnectorActivator.cs" />
     <Compile Include="Client\ExceptionListener.cs" />
+    <Compile Include="Client\FixtureLibraryWatcher.cs" />
     <Compile Include="Client\ForceRecycleCommand.cs" />
     <Compile Include="Client\IPersistenceController.cs" />
     <Compile Include="Client\ISpecFileObserver.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Client\Persistence\RunSpecCommand.cs" />
     <Compile Include="Client\Persistence\RunSpecsCommand.cs" />
     <Compile Include="Client\Persistence\SaveSpecBodyCommand.cs" />
+    <Compile Include="Client\RemoteController.cs" />
     <Compile Include="Client\ResultsCache.cs" />
     <Compile Include="Client\SpecFileWatcher.cs" />
     <Compile Include="Client\StartWatchingAssets.cs" />

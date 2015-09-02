@@ -255,7 +255,6 @@
     <Compile Include="NulloResultObserver.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Remotes\EngineMode.cs" />
-    <Compile Include="Remotes\FixtureLibraryWatcher.cs" />
     <Compile Include="Remotes\Messaging\EventAggregator.cs" />
     <Compile Include="Remotes\Messaging\IListener.cs" />
     <Compile Include="Remotes\Messaging\IMessagingHub.cs" />
@@ -266,7 +265,6 @@
     <Compile Include="Remotes\Messaging\MessagingHubExtensions.cs" />
     <Compile Include="Remotes\Messaging\RemoteListener.cs" />
     <Compile Include="Remotes\Messaging\ServiceMessage.cs" />
-    <Compile Include="Remotes\RemoteController.cs" />
     <Compile Include="Remotes\RemoteDomainExpression.cs" />
     <Compile Include="Remotes\RemoteProxy.cs" />
     <Compile Include="Remotes\SystemRecycled.cs" />

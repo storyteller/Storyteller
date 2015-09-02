@@ -5,6 +5,7 @@ using FubuCore;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Shouldly;
+using ST.Client;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;

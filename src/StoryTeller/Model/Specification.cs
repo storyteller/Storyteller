@@ -1,8 +1,6 @@
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using FubuCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -17,21 +15,18 @@ namespace StoryTeller.Model
         header,
         full
     }
-    
+
     public class Specification : Node, INodeHolder
     {
-        [JsonProperty("title")]
-        public string name;
+        [JsonProperty("title")] public string name;
 
         public string path;
 
-        [JsonProperty("max-retries")]
-        public int MaxRetries;
+        [JsonProperty("max-retries")] public int MaxRetries;
 
-        [JsonProperty("expiration-period")]
-        public int ExpirationPeriod;
+        [JsonProperty("expiration-period")] public int ExpirationPeriod;
 
-        [JsonConverter(typeof(LastUpdatedConverter))]
+        [JsonConverter(typeof (LastUpdatedConverter))]
         [JsonProperty("last-updated")]
         public DateTime LastUpdated
         {
@@ -47,13 +42,10 @@ namespace StoryTeller.Model
         }
 
 
-        [JsonConverter(typeof (StringEnumConverter))] 
-        [JsonProperty("lifecycle")] 
-        public Lifecycle Lifecycle = Lifecycle.Acceptance;
+        [JsonConverter(typeof (StringEnumConverter))] [JsonProperty("lifecycle")] public Lifecycle Lifecycle =
+            Lifecycle.Acceptance;
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        [JsonProperty("mode")] 
-        public SpecType SpecType = SpecType.full;
+        [JsonConverter(typeof (StringEnumConverter))] [JsonProperty("mode")] public SpecType SpecType = SpecType.full;
 
         private string _fileName;
 
@@ -161,10 +153,7 @@ namespace StoryTeller.Model
         public void ApplyRenumbering()
         {
             AllDescendents().ToArray().GroupBy(x => x.id).Where(x => x.Count() > 1)
-                .Each(group =>
-                {
-                    group.Each(x => x.id = Guid.NewGuid().ToString());
-                });
+                .Each(group => { group.Each(x => x.id = Guid.NewGuid().ToString()); });
         }
 
         public Specification Clone()
@@ -185,7 +174,8 @@ namespace StoryTeller.Model
             writer.WriteValue(((DateTime) value).ToLongDateString());
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
             return DateTime.Parse(reader.Value.ToString());
         }

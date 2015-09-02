@@ -3,6 +3,7 @@ using System.Linq;
 using FubuCore;
 using NUnit.Framework;
 using Shouldly;
+using ST.Client;
 using ST.CommandLine;
 using StoryTeller.Model;
 using StoryTeller.Remotes;

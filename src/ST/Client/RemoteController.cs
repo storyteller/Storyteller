@@ -1,14 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.CommandLine;
+using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
-namespace StoryTeller.Remotes
+namespace ST.Client
 {
     public interface IRemoteController
     {
