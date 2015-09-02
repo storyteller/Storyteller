@@ -1,9 +1,17 @@
 var React = require('react');
 var expect = require('chai').expect;
-var StepAdder = require('./../components/editing/adders/step-adder');
+var StepAdderInjector = require('inject!./../components/editing/adders/step-adder');
 var ObjectMother = require('./../lib-tests/object-mother');
 var $ = require('jquery');
 var Postal = require('postal');
+
+var StepAdder = StepAdderInjector({
+	'./../../../lib/dom-utils': {
+		offsetTop: function() { return 51; },
+		scrollTop: function(domNode) { return 52; },
+		width: function() { return 53; }
+	}
+});
 
 var listener = {
 	events: [],
@@ -103,4 +111,26 @@ describe('The StepAdder component', function(){
 		expect(listener.events.length).to.equal(1);
 	});
 */
+
+	it ('changes to position fixed when scrolled out of view', function() {
+		var adder = TestUtils.renderIntoDocument(
+			<StepAdder holder={spec} />
+		);
+		var node = $(adder.getDOMNode());
+		expect(node.css('position')).to.be.empty;
+
+		adder.handleScroll();
+		expect(node.css('position')).to.equal('fixed');
+	});
+
+	it ('keeps original width after scrolled out of view', function() {
+		var adder = TestUtils.renderIntoDocument(
+			<StepAdder holder={spec} />
+		);
+		var node = $(adder.getDOMNode());
+		expect(node.css('width')).to..equal('0px');
+
+		adder.handleScroll();
+		expect(node.css('width')).to.equal('53px');
+	});
 });
