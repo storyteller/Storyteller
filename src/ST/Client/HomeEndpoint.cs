@@ -1,11 +1,9 @@
-using System;
 using System.IO;
 using FubuCore;
 using FubuMVC.Core.Assets;
 using FubuMVC.Core.Runtime.Files;
-using FubuMVC.Core.UI;
+using FubuMVC.Core.View;
 using HtmlTags;
-using ST.CommandLine;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
@@ -20,7 +18,8 @@ namespace ST.Client
         private readonly IAssetTagBuilder _tags;
         private readonly IFubuApplicationFiles _files;
 
-        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document, IPersistenceController persistence, IAssetTagBuilder tags, IFubuApplicationFiles files)
+        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document,
+            IPersistenceController persistence, IAssetTagBuilder tags, IFubuApplicationFiles files)
         {
             _connector = connector;
             _context = context;
@@ -39,14 +38,16 @@ namespace ST.Client
             _document.Add("div").Id("header-container");
             _document.Add("div").Id("body-pane").AddClass("container");
 
-            if (File.Exists(_files.GetApplicationPath().AppendPath("public", "stylesheets", "storyteller.css")))
+            if (File.Exists(_files.RootPath.AppendPath("public", "stylesheets", "storyteller.css")))
             {
-                _tags.BuildStylesheetTags(new String[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"});
+                _tags.BuildStylesheetTags(new[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"});
             }
             else
             {
                 BatchResultsWriter.WriteCSS(_document);
-                _document.Head.Add("link").Attr("rel", "stylesheet").Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+                _document.Head.Add("link")
+                    .Attr("rel", "stylesheet")
+                    .Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
             }
 
             _document.Body.Append(_document.Script("bundle.js"));
@@ -66,7 +67,8 @@ namespace ST.Client
             script.WriteLine();
             script.WriteLine("var Storyteller = {};");
             script.WriteLine();
-            script.WriteLine("Storyteller.initialization = {0};", JsonSerialization.ToCleanJson(_context.LatestSystemRecycled));
+            script.WriteLine("Storyteller.initialization = {0};",
+                JsonSerialization.ToCleanJson(_context.LatestSystemRecycled));
             script.WriteLine();
             script.WriteLine("Storyteller.queueState = {0};", JsonSerialization.ToCleanJson(_context.QueueState()));
             script.WriteLine();

@@ -1,10 +1,8 @@
 ﻿using System;
 using FubuCore;
 using FubuMVC.Core;
-using FubuMVC.Katana;
-using FubuMVC.StructureMap;
+using FubuMVC.Core.Http.Hosting;
 using StoryTeller.Remotes;
-using StructureMap;
 
 namespace ST.Client
 {
@@ -12,7 +10,7 @@ namespace ST.Client
     {
         private readonly OpenInput _input;
         private RemoteController _controller;
-        private EmbeddedFubuMvcServer _server;
+        private FubuRuntime _server;
 
         public WebApplicationRunner(OpenInput input)
         {
@@ -24,16 +22,20 @@ namespace ST.Client
             _controller = _input.BuildRemoteController();
             var context = new StorytellerContext(_controller, _input);
 
-            
-
-            var container = new Container(new WebApplicationRegistry(_controller, context));
-
             context.Start();
 
             var registry = new FubuRegistry();
-            registry.AlterSettings<DiagnosticsSettings>(_ => _.TraceLevel = TraceLevel.Verbose);
 
-            _server = FubuApplication.For(registry).StructureMap(container).RunEmbeddedWithAutoPort();
+
+            registry.AlterSettings<DiagnosticsSettings>(_ => _.TraceLevel = TraceLevel.Verbose);
+            registry.HostWith<NOWIN>();
+            registry.Services.For<IRemoteController>().Use(_controller);
+            registry.Services.For<StorytellerContext>().Use(context);
+            
+            registry.Services.IncludeRegistry<WebApplicationRegistry>();
+
+
+            _server = registry.ToRuntime();
         }
 
         public string BaseAddress

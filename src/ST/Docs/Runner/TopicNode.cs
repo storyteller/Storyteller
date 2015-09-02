@@ -1,6 +1,6 @@
 using FubuMVC.Core.Registration.Nodes;
-using FubuMVC.Core.Registration.ObjectGraph;
 using ST.Docs.Topics;
+using StructureMap.Pipeline;
 
 namespace ST.Docs.Runner
 {
@@ -13,12 +13,12 @@ namespace ST.Docs.Runner
             _topic = topic;
         }
 
-        protected override ObjectDef buildObjectDef()
+        protected override IConfiguredInstance buildInstance()
         {
-            var def = new ObjectDef(typeof (TopicBehavior));
-            def.DependencyByValue(_topic);
+            var instance = new SmartInstance<TopicBehavior>();
+            instance.Ctor<Topic>().Is(_topic);
 
-            return def;
+            return instance;
         }
 
         public override BehaviorCategory Category

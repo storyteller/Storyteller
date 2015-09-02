@@ -1,5 +1,5 @@
-﻿using Bottles;
-using FubuCore.Logging;
+﻿using FubuCore.Logging;
+using FubuMVC.Core;
 using StoryTeller.Commands;
 using StoryTeller.Remotes;
 using StructureMap.Configuration.DSL;
@@ -8,11 +8,10 @@ namespace ST.Client
 {
     public class WebApplicationRegistry : Registry
     {
-        public WebApplicationRegistry(IRemoteController controller, StorytellerContext context)
+        public WebApplicationRegistry()
         {
             For<ISpecFileWatcher>().Use<SpecFileWatcher>();
-            For<IRemoteController>().Use(controller);
-            For<StorytellerContext>().Use(context);
+
             ForSingletonOf<IClientConnector>().Use<ClientConnector>();
             ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
 

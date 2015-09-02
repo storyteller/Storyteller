@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using Bottles;
-using Bottles.Diagnostics;
+using FubuMVC.Core;
+using FubuMVC.Core.Diagnostics.Packaging;
 using StoryTeller.Remotes;
 
 namespace ST.Client
@@ -16,7 +15,7 @@ namespace ST.Client
             _controller = controller;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IActivationLog log, IPerfTimer timer)
         {
             _connector.Start();
             _controller.AddListener(_connector);

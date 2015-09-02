@@ -1,21 +1,18 @@
 source https://www.myget.org/F/fubumvc-edge
 source http://nuget.org/api/v2
 
-
 nuget CommonMark.NET
+nuget Nowin
+nuget RhinoMocks
 nuget Selenium.WebDriver
 nuget Selenium.RC
 nuget ilrepack
 nuget FubuCore 2.0.0.291
-nuget Bottles ~> 3.0
-nuget FubuMVC.Core ~> 2.1
-nuget FubuMVC.Katana ~> 2.1
-nuget FubuMVC.StructureMap ~> 2.1
+nuget FubuMVC.Core 3.0.0.2074
 nuget Fixie
-nuget HtmlTags 2.1.0.183
+nuget HtmlTags 3.0.0.186
 nuget Fleck 0.12.0.40
-nuget Newtonsoft.Json
+nuget Newtonsoft.Json 4.5.9
 nuget Owin 1.0
 nuget Shouldly 2.4.0
-nuget structuremap ~> 3.1
-nuget structuremap.automocking ~> 3.1
+nuget structuremap 3.2.0.217-alpha

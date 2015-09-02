@@ -8,7 +8,7 @@ namespace StoryTeller.Model.Persistence
         protected override Node Create(Type objectType, JObject jsonObject)
         {
             JToken typeValue;
-            jsonObject.TryGetValue("type", StringComparison.Ordinal, out typeValue);
+            jsonObject.TryGetValue("type", out typeValue);
 
             if (typeValue == null)
             {

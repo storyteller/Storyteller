@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FubuMVC.Core;
-using FubuMVC.Katana;
-using FubuMVC.StructureMap;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
 using ST.Docs.Html;
@@ -34,7 +32,7 @@ namespace ST.Docs
                 _.AddRegistry<TransformationRegistry>();
 
                 _.ForSingletonOf<IBrowserRefresher>().Use<BrowserRefresher>();
-                _.For(typeof(IUrlResolver)).Use(settings.UrlResolverType());
+                _.For(typeof (IUrlResolver)).Use(settings.UrlResolverType());
 
                 _.ForSingletonOf<ICommandUsageCache>().Use<CommandUsageCache>();
 
@@ -46,7 +44,7 @@ namespace ST.Docs
         public void ExportTo(string directory)
         {
             var exporter = _container.GetInstance<Exporter>();
-            
+
             Console.WriteLine("Cleaning off any existing docs at " + directory);
 
             exporter.CleanTarget(directory);
@@ -61,29 +59,27 @@ namespace ST.Docs
             {
                 exporter.ExportTo(directory, _topic, x => x.WebsiteExportPath());
             }
-
-            
         }
 
-        public EmbeddedFubuMvcServer LaunchRunner()
+        public FubuRuntime LaunchRunner()
         {
             var refresher = _container.GetInstance<IBrowserRefresher>();
 
             refresher.StartWebSockets();
             _settings.WebsocketAddress = "ws://localhost:" + refresher.Port;
-            
+
 
             _topicWatcher = new TopicFileWatcher(_settings);
             _topicWatcher.StartWatching(refresher);
-
 
 
             var sampleBuilder = scanForSamples();
 
             sampleBuilder.EnableWatching();
 
-            var registry = new TopicRegistry(_topic);
-            return FubuApplication.For(registry).StructureMap(_container).RunEmbeddedWithAutoPort(_settings.Root);
+            var registry = new TopicRegistry(_topic) {RootPath = _settings.Root};
+            registry.StructureMap(_container);
+            return registry.ToRuntime();
         }
 
         private ISampleBuilder scanForSamples()
@@ -110,7 +106,6 @@ namespace ST.Docs
         public Topic FindTopic(string key)
         {
             return _topic.FindByKey(key);
-            
         }
 
         public ITransformer Transformer

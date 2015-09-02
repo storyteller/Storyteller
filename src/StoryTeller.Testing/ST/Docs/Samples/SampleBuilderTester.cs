@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Bottles.Services;
 using FubuCore;
+using FubuMVC.Core.Services;
 using NUnit.Framework;
 using Shouldly;
 using ST.Docs.Samples;

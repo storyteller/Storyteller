@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using Bottles;
-using Bottles.Diagnostics;
+﻿using FubuMVC.Core;
+using FubuMVC.Core.Diagnostics.Packaging;
 
 namespace ST.Client
 {
@@ -13,7 +12,7 @@ namespace ST.Client
             _watcher = watcher;
         }
 
-        public void Activate(IEnumerable<IPackageInfo> packages, IPackageLog log)
+        public void Activate(IActivationLog log, IPerfTimer timer)
         {
             _watcher.Start();
         }

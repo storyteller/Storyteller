@@ -79,7 +79,7 @@ namespace ST.Docs.Samples
 
         public bool ReadFile(ISampleScanner scanner, string file)
         {
-            var reader = new SampleReader(new FubuFile(file, null), scanner, _cache);
+            var reader = new SampleReader(new FubuFile(file), scanner, _cache);
             reader.Start();
             return reader.FoundSamples;
         }

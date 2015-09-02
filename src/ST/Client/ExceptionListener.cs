@@ -1,7 +1,7 @@
 using System;
-using Bottles.Services.Messaging;
 using FubuCore.CommandLine;
 using FubuCore.Logging;
+using FubuMVC.Core.Services.Messaging;
 using StoryTeller.Messages;
 
 namespace ST.Client

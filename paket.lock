@@ -1,32 +1,27 @@
 NUGET
-  remote: https://www.myget.org/F/fubumvc-edge
-  specs:
-    Bottles (3.0.0.618)
-      FubuCore (>= 1.0.0.210)
-    FubuCore (2.0.0.291)
-    FubuMVC.Core (2.1.1.1963)
-      Bottles (>= 3.0.0.595)
-      FubuCore (>= 1.2.0.259)
-      HtmlTags (>= 1.1.0.114)
-    FubuMVC.Katana (2.1.1.1963)
-      FubuMVC.Core
-    FubuMVC.StructureMap (2.1.1.1963)
-      FubuMVC.Core
-      structuremap (>= 3.0.3.116)
   remote: http://nuget.org/api/v2
   specs:
-    CommonMark.NET (0.9.0)
-    Fixie (1.0.0.11)
+    CommonMark.NET (0.9.1)
+    Fixie (1.0.0.29)
     Fleck (0.12.0.40)
-    HtmlTags (2.1.0.183)
-    ILRepack (1.25.0)
-    Newtonsoft.Json (6.0.8)
+    FubuLocalization (1.1.0.182)
+      FubuCore (>= 0.9.9.139)
+    HtmlTags (3.0.0.186)
+    ILRepack (2.0.5)
+    Newtonsoft.Json (4.5.9)
+    Nowin (0.17.1.0)
     Owin (1.0)
     RhinoMocks (3.6.1)
-    Selenium.RC (2.45.0)
-    Selenium.WebDriver (2.45.0)
+    Selenium.RC (2.47.0)
+    Selenium.WebDriver (2.47.0)
     Shouldly (2.4.0)
-    structuremap (3.1.5.154)
-    structuremap.automocking (3.1.0.133)
-      RhinoMocks (>= 3.6.1)
-      structuremap (>= 3.0.0)
+    structuremap (3.2.0.217-alpha)
+  remote: https://www.myget.org/F/fubumvc-edge
+  specs:
+    FubuCore (2.0.0.291)
+    FubuMVC.Core (3.0.0.2074)
+      FubuCore (>= 2.0)
+      FubuLocalization (>= 1.1)
+      HtmlTags (>= 3.0)
+      Newtonsoft.Json (4.5.9)
+      structuremap (>= 3.2)
