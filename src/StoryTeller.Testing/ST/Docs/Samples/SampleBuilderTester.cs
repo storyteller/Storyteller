@@ -52,35 +52,38 @@ var x = 1;
 
             using (var container = Container.For<SampleRegistry>())
             {
-                var builder = container.GetInstance<ISampleBuilder>();
-
-                var tasks = builder.ScanFolder(folder).ToArray();
-                Task.WaitAll(tasks);
-
-                builder.EnableWatching();
-
-                var cache = container.GetInstance<ISampleCache>();
-
-                Wait.Until(() =>
+                using (var builder = container.GetInstance<ISampleBuilder>())
                 {
-                    return cache.Find("fake-sample").Text.Contains("var x = 1;");
-                });
+                    var tasks = builder.ScanFolder(folder).ToArray();
+                    Task.WaitAll(tasks);
 
-                var sample = cache.Find("fake-sample");
-                sample.Text.ShouldContain("var x = 1;");
-                
-                new FileSystem().WriteStringToFile(file, @"
+                    builder.EnableWatching();
+
+                    var cache = container.GetInstance<ISampleCache>();
+
+                    Wait.Until(() =>
+                    {
+                        return cache.Find("fake-sample").Text.Contains("var x = 1;");
+                    });
+
+                    var sample = cache.Find("fake-sample");
+                    sample.Text.ShouldContain("var x = 1;");
+
+                    new FileSystem().WriteStringToFile(file, @"
 // SAMPLE: fake-sample
 var x = 2;
 // ENDSAMPLE
 
 ");
 
-                Wait.Until(() =>
-                {
-                    return cache.Find("fake-sample").Text.Contains("var x = 2;");
-                })
-                .ShouldBeTrue();
+                    Wait.Until(() =>
+                    {
+                        return cache.Find("fake-sample").Text.Contains("var x = 2;");
+                    })
+                    .ShouldBeTrue();
+                }
+
+
 
                 
             }

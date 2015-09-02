@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
@@ -9,15 +8,16 @@ using ST.Docs.Runner;
 
 namespace ST.Docs.Samples
 {
-    public class SampleBuilder : IDisposable, ISampleBuilder
+    public class SampleBuilder : ISampleBuilder
     {
         private readonly ISampleCache _cache;
         private readonly IFileSystem _fileSystem;
         private readonly IBrowserRefresher _browser;
         private readonly IEnumerable<ISampleScanner> _scanners;
-        private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
+        private readonly IList<FileChangeWatcher> _watchers = new List<FileChangeWatcher>();
 
-        public SampleBuilder(ISampleCache cache, IFileSystem fileSystem, IBrowserRefresher browser, IEnumerable<ISampleScanner> scanners)
+        public SampleBuilder(ISampleCache cache, IFileSystem fileSystem, IBrowserRefresher browser,
+            IEnumerable<ISampleScanner> scanners)
         {
             _cache = cache;
             _fileSystem = fileSystem;
@@ -38,42 +38,47 @@ namespace ST.Docs.Samples
 
                 return Task.Factory.StartNew(() =>
                 {
-                    Console.WriteLine("Scanning for samples for language {0} in directory {1} with file extension {2}", scanner.Language, folder, scanner.Extension);
+                    Console.WriteLine("Scanning for samples for language {0} in directory {1} with file extension {2}",
+                        scanner.Language, folder, scanner.Extension);
                     _fileSystem.FindFiles(folder, matching)
                         .Where(file => !file.Contains("node_modules"))
                         .Each(file => ReadFile(scanner, file));
-
-                    
                 });
             }).ToArray();
         }
 
         public void EnableWatching()
         {
-            _watchers.Each(x => x.EnableRaisingEvents = true);
+            _watchers.Each(x => x.Start());
         }
 
         private void buildFileWatcherForScanner(string folder, string filter, ISampleScanner scanner)
         {
-            var watcher = new FileSystemWatcher(folder, filter);
-            watcher.IncludeSubdirectories = true;
-
-            FileSystemEventHandler onFileChange = (o, e) =>
-            {
-                var path = e.FullPath;
-                Console.WriteLine("Reading {0} for code samples", path);
-                var foundChanges = ReadFile(scanner, path);
-
-                if (foundChanges)
-                {
-                    _browser.RefreshPage();
-                }
-            };
-
-            watcher.Changed += onFileChange;
-            watcher.Created += onFileChange;
-
+            var watcher = new FileChangeWatcher(folder, FileSet.Deep(filter), new ScannerChangeHandler(this, scanner));
             _watchers.Add(watcher);
+        }
+
+        public class ScannerChangeHandler : IChangeSetHandler
+        {
+            private readonly SampleBuilder _parent;
+            private readonly ISampleScanner _scanner;
+
+            public ScannerChangeHandler(SampleBuilder parent, ISampleScanner scanner)
+            {
+                _parent = parent;
+                _scanner = scanner;
+            }
+
+            public void Handle(ChangeSet changes)
+            {
+                changes.Added.Select(x => x.Path).Each(file => _parent.ReadFile(_scanner, file));
+                changes.Changed.Select(x => x.Path).Each(file => _parent.ReadFile(_scanner, file));
+
+                if (changes.HasChanges())
+                {
+                    _parent._browser.RefreshPage();
+                }
+            }
         }
 
 
@@ -86,11 +91,7 @@ namespace ST.Docs.Samples
 
         public void Dispose()
         {
-            _watchers.Each(x =>
-            {
-                x.EnableRaisingEvents = false;
-                x.Dispose();
-            });
+            _watchers.Each(x => x.Dispose());
         }
     }
 }
