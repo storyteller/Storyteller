@@ -24,8 +24,8 @@ namespace StoryTeller.Testing.ST.Docs.Samples
                 var builder = container.GetInstance<ISampleBuilder>();
                 var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
 
-                var tasks = builder.ScanFolder(path).ToArray();
-                Task.WaitAll(tasks);
+                var tasks = builder.ScanFolder(path);
+                tasks.Wait();
 
                 var cache = container.GetInstance<ISampleCache>();
 
@@ -54,17 +54,15 @@ var x = 1;
             {
                 using (var builder = container.GetInstance<ISampleBuilder>())
                 {
-                    var tasks = builder.ScanFolder(folder).ToArray();
-                    Task.WaitAll(tasks);
-
-                    builder.EnableWatching();
+                    var tasks = builder.ScanFolder(folder);
+                    tasks.Wait();
 
                     var cache = container.GetInstance<ISampleCache>();
 
                     Wait.Until(() =>
                     {
                         return cache.Find("fake-sample").Text.Contains("var x = 1;");
-                    });
+                    }, timeoutInMilliseconds:10000);
 
                     var sample = cache.Find("fake-sample");
                     sample.Text.ShouldContain("var x = 1;");

@@ -1,37 +1,37 @@
 ﻿using System;
-using System.IO;
+using FubuCore;
+using FubuMVC.Core.Runtime.Files;
 
 namespace ST.Docs.Runner
 {
-    public class TopicFileWatcher : IDisposable
+    public class TopicFileWatcher : IDisposable, IChangeSetHandler
     {
         private readonly DocSettings _settings;
-        private FileSystemWatcher _watcher;
+        private FileChangeWatcher _watcher;
+        private IBrowserRefresher _refresher;
 
         public TopicFileWatcher(DocSettings settings)
         {
             _settings = settings;
-            _watcher = new FileSystemWatcher(_settings.Root, "*.*")
-            {
-                IncludeSubdirectories = true
-                
-            };
         }
 
         public void StartWatching(IBrowserRefresher refresher)
         {
-            FileSystemEventHandler handler = (sender, e) => refresher.RefreshPage();
+            _refresher = refresher;
 
-            _watcher.Changed += handler;
-            _watcher.Created += handler;
-
-            _watcher.EnableRaisingEvents = true;
+            _watcher = new FileChangeWatcher(_settings.Root, FileSet.Deep("*.*"), this);
+            _watcher.Start();
         }
 
 
         public void Dispose()
         {
             _watcher.Dispose();
+        }
+
+        void IChangeSetHandler.Handle(ChangeSet changes)
+        {
+            _refresher.RefreshPage();
         }
     }
 }

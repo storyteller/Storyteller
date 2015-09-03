@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Caching;
 using FubuCore;
+using FubuCore.Util;
 using FubuMVC.Core.Runtime.Files;
 using ST.Docs.Runner;
 
@@ -13,8 +16,10 @@ namespace ST.Docs.Samples
         private readonly ISampleCache _cache;
         private readonly IFileSystem _fileSystem;
         private readonly IBrowserRefresher _browser;
-        private readonly IEnumerable<ISampleScanner> _scanners;
         private readonly IList<FileChangeWatcher> _watchers = new List<FileChangeWatcher>();
+
+        private readonly Cache<string, ISampleScanner> _scanners = new Cache<string, ISampleScanner>();
+        private readonly FileSet _fileSet;
 
         public SampleBuilder(ISampleCache cache, IFileSystem fileSystem, IBrowserRefresher browser,
             IEnumerable<ISampleScanner> scanners)
@@ -22,63 +27,68 @@ namespace ST.Docs.Samples
             _cache = cache;
             _fileSystem = fileSystem;
             _browser = browser;
-            _scanners = scanners;
-        }
 
-        public IEnumerable<Task> ScanFolder(string folder)
-        {
-            return _scanners.Select(scanner =>
+            scanners.Each(x =>
             {
-                var filter = "*." + scanner.Extension;
-                var matching = FileSet.Deep(filter);
-                matching.AppendExclude("node_modules/*.*");
+                var ext = x.Extension.ToLower();
+                if (!ext.StartsWith(".")) ext = "." + ext;
 
+                _scanners[ext] = x;
+            });
 
-                buildFileWatcherForScanner(folder, filter, scanner);
+            var search = _scanners.GetAllKeys().Select(x => "*" + x).Join(";");
 
-                return Task.Factory.StartNew(() =>
-                {
-                    Console.WriteLine("Scanning for samples for language {0} in directory {1} with file extension {2}",
-                        scanner.Language, folder, scanner.Extension);
-                    _fileSystem.FindFiles(folder, matching)
-                        .Where(file => !file.Contains("node_modules"))
-                        .Each(file => ReadFile(scanner, file));
-                });
-            }).ToArray();
+            _fileSet = FileSet.Deep(search, "node_modules/*.*");
         }
 
-        public void EnableWatching()
-        {
-            _watchers.Each(x => x.Start());
-        }
 
-        private void buildFileWatcherForScanner(string folder, string filter, ISampleScanner scanner)
+        public class ChangeHandler : IChangeSetHandler
         {
-            var watcher = new FileChangeWatcher(folder, FileSet.Deep(filter), new ScannerChangeHandler(this, scanner));
-            _watchers.Add(watcher);
-        }
-
-        public class ScannerChangeHandler : IChangeSetHandler
-        {
+            private readonly string _root;
             private readonly SampleBuilder _parent;
-            private readonly ISampleScanner _scanner;
 
-            public ScannerChangeHandler(SampleBuilder parent, ISampleScanner scanner)
+            public ChangeHandler(string root, SampleBuilder parent)
             {
+                _root = root;
                 _parent = parent;
-                _scanner = scanner;
             }
 
             public void Handle(ChangeSet changes)
             {
-                changes.Added.Select(x => x.Path).Each(file => _parent.ReadFile(_scanner, file));
-                changes.Changed.Select(x => x.Path).Each(file => _parent.ReadFile(_scanner, file));
+                _parent.readFiles(changes.Added.Select(x => _root.AppendPath(x.RelativePath)));
+                _parent.readFiles(changes.Changed.Select(x => _root.AppendPath(x.RelativePath)));
 
-                if (changes.HasChanges())
-                {
-                    _parent._browser.RefreshPage();
-                }
+                _parent._browser.RefreshPage();
             }
+        }
+
+        private void readFiles(IEnumerable<string> files)
+        {
+            files.Each(x =>
+            {
+                var ext = Path.GetExtension(x).ToLower();
+                var scanner = _scanners[ext];
+                ReadFile(scanner, x);
+            });
+        }
+
+        public Task ScanFolder(string folder)
+        {
+            var watcher = new FileChangeWatcher(folder, _fileSet, new ChangeHandler(folder, this));
+            watcher.PollingInterval = 5000;
+            watcher.ChangeBuffer = 0;
+            _watchers.Add(watcher);
+
+            return Task.Factory.StartNew(() =>
+            {
+                watcher.Start();
+
+                readFiles(watcher.CurrentFiles);
+
+                Console.WriteLine("Sample watching ready for directory " + folder);
+            });
+
+            
         }
 
 

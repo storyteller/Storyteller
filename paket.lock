@@ -19,7 +19,7 @@ NUGET
   remote: https://www.myget.org/F/fubumvc-edge
   specs:
     FubuCore (2.0.0.291)
-    FubuMVC.Core (3.0.0.2074)
+    FubuMVC.Core (3.0.0.2076)
       FubuCore (>= 2.0)
       FubuLocalization (>= 1.1)
       HtmlTags (>= 3.0)

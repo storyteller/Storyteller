@@ -20,6 +20,7 @@ namespace ST.Docs
         private readonly Topic _topic;
         private readonly DocSettings _settings;
         private TopicFileWatcher _topicWatcher;
+        private ISampleBuilder _sampleBuilder;
 
         public DocProject(DocSettings settings)
         {
@@ -73,9 +74,7 @@ namespace ST.Docs
             _topicWatcher.StartWatching(refresher);
 
 
-            var sampleBuilder = scanForSamples();
-
-            sampleBuilder.EnableWatching();
+            _sampleBuilder = scanForSamples();
 
             var registry = new TopicRegistry(_topic) {RootPath = _settings.Root};
             registry.StructureMap(_container);
@@ -85,11 +84,12 @@ namespace ST.Docs
         private ISampleBuilder scanForSamples()
         {
             var sampleBuilder = _container.GetInstance<ISampleBuilder>();
-            var others = _settings.SampleDirectories.SelectMany(sampleBuilder.ScanFolder);
-            var tasks = sampleBuilder.ScanFolder(_settings.Root).Union(others).ToArray();
+            var tasks = _settings.SampleDirectories.Select(sampleBuilder.ScanFolder).ToList();
+            tasks.Add(sampleBuilder.ScanFolder(_settings.Root));
 
 
-            Task.WaitAll(tasks);
+
+            Task.WaitAll(tasks.ToArray());
             return sampleBuilder;
         }
 
@@ -116,6 +116,8 @@ namespace ST.Docs
 
         public void Dispose()
         {
+            if (_sampleBuilder != null) _sampleBuilder.Dispose();
+
             if (_topicWatcher != null) _topicWatcher.Dispose();
             _container.Dispose();
         }
