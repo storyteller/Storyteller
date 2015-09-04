@@ -40,8 +40,21 @@ var ResultRow = React.createClass({
 			);
 		}
 
+		var clazz = '';
+		if (result.status == 'success'){
+			clazz = 'success';
+		}
+
+		if (result.status == 'failed'){
+			clazz = 'danger';
+		}
+
+		if (result.status == 'error'){
+			clazz = 'warning';
+		}
+
 		return (
-			<tr>{cells}</tr>
+			<tr className={clazz}>{cells}</tr>
 		);
 	}
 });
