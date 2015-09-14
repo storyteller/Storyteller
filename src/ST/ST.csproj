@@ -142,6 +142,7 @@
     <Compile Include="Docs\Topics\Topic.cs" />
     <Compile Include="Docs\Topics\TopicLoader.cs" />
     <Compile Include="Docs\Transformation\CodeSampleTransformHandler.cs" />
+    <Compile Include="Docs\Transformation\FullTableOfContentsTransformHandler.cs" />
     <Compile Include="Docs\Transformation\HtmlGenerator.cs" />
     <Compile Include="Docs\Transformation\ImageTransformHandler.cs" />
     <Compile Include="Docs\Transformation\ITransformHandler.cs" />

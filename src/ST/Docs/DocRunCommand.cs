@@ -23,6 +23,9 @@ namespace ST.Docs
                     ConsoleKeyInfo key = Console.ReadKey();
                     while (key.Key != ConsoleKey.Q)
                     {
+                        Console.WriteLine();
+                        Console.WriteLine("Shutting down the Storyteller documentation preview runner....");
+                        Console.WriteLine();
                     }
                 }
             }
