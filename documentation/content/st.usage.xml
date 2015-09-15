@@ -36,11 +36,15 @@
           <UsageDescription>[-c, --config &lt;confi&gt;]</UsageDescription>
           <Description>Optional. Override the config file selection of the Storyteller test running AppDomain</Description>
         </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-r, --retries &lt;retries&gt;]</UsageDescription>
+          <Description>Sets a minimum number of retry attempts for this execution</Description>
+        </FlagReport>
       </Flags>
       <Usages>
         <UsageReport>
           <Description>Opens the specification editor web tool</Description>
-          <Usage>st open &lt;path&gt; [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</Usage>
+          <Usage>st open &lt;path&gt; [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -102,15 +106,19 @@
           <UsageDescription>[-c, --config &lt;confi&gt;]</UsageDescription>
           <Description>Optional. Override the config file selection of the Storyteller test running AppDomain</Description>
         </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-r, --retries &lt;retries&gt;]</UsageDescription>
+          <Description>Sets a minimum number of retry attempts for this execution</Description>
+        </FlagReport>
       </Flags>
       <Usages>
         <UsageReport>
           <Description>Execute</Description>
-          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</Usage>
+          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
         </UsageReport>
         <UsageReport>
           <Description>Execute and save results</Description>
-          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;]</Usage>
+          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>

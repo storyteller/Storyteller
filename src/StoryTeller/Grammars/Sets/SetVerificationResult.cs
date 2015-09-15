@@ -8,7 +8,7 @@ namespace StoryTeller.Grammars.Sets
 {
     public class SetVerificationResult : ClientMessage, IResultMessage
     {
-        private readonly IList<IDictionary<string, object>> _extras = new List<IDictionary<string, object>>();
+        private readonly IList<IDictionary<string, string>> _extras = new List<IDictionary<string, string>>();
         private readonly IList<string> _matches = new List<string>();
         private readonly IList<string> _missing = new List<string>();
         private readonly IList<WrongOrder> _wrongOrders = new List<WrongOrder>();
@@ -39,7 +39,7 @@ namespace StoryTeller.Grammars.Sets
             }
         }
 
-        public IDictionary<string, object>[] extras
+        public IDictionary<string, string>[] extras
         {
             get { return _extras.ToArray(); }
             set
@@ -77,7 +77,24 @@ namespace StoryTeller.Grammars.Sets
 
         public void MarkExtra(StepValues values)
         {
-            _extras.Add(values.RawData);
+            var extra = new Dictionary<string, string>();
+            values.RawData.Each(pair =>
+            {
+                if (pair.Value == null)
+                {
+                    extra.Add(pair.Key, "NULL");
+                }
+                else if (pair.Value == string.Empty)
+                {
+                    extra.Add(pair.Key, "BLANK");
+                }
+                else
+                {
+                    extra.Add(pair.Key, pair.Value.ToString());
+                }
+            });
+
+            _extras.Add(extra);
         }
 
         public void MarkMissing(string id)

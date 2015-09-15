@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void can_fetch_data_for_a_spec_path()
         {
-            var data = theEmbeddedData.DataForPath("Sentences/Sentences");
+            var data = theEmbeddedData.DataForPath("Sets/Arrays");
 
             data.ShouldNotBeNull();
             data.Fixtures.ShouldNotBeNull();
@@ -37,8 +37,8 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         [Test]
         public void filters_the_fixtures_to_only_the_ones_used_by_the_spec()
         {
-            var data = theEmbeddedData.DataForPath("Sentences/Sentences");
-            data.Fixtures.Single().key.ShouldBe("Sentence");
+            var data = theEmbeddedData.DataForPath("Sets/Arrays");
+            data.Fixtures.Single().key.ShouldBe("NameArray");
         }
     }
 }

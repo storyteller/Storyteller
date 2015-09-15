@@ -238,7 +238,7 @@
   <ItemGroup>
     <None Include="Model\Persistence\spec.json" />
     <None Include="samples.specs.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

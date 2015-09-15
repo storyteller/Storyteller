@@ -141,8 +141,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.matches.ShouldHaveTheSameElementsAs("a", "b", "c");
             var extra = theResult.extras.Single();
 
-            extra["x"].ShouldBe(5);
-            extra["y"].ShouldBe(6);
+            extra["x"].ShouldBe(5.ToString());
+            extra["y"].ShouldBe(6.ToString());
 
             theResult.missing.ShouldBeEmpty();
         }
@@ -166,8 +166,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.matches.OrderBy(x => x).ShouldHaveTheSameElementsAs("a", "b", "c");
             var extra = theResult.extras.Single();
 
-            extra["x"].ShouldBe(5);
-            extra["y"].ShouldBe(6);
+            extra["x"].ShouldBe(5.ToString());
+            extra["y"].ShouldBe(6.ToString());
 
             theResult.missing.ShouldBeEmpty();
         }

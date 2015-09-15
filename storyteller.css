@@ -2,8 +2,12 @@
 	margin-bottom: 0px !important;
 }
 
+div.active{
+  border: none !important;
+}
+
 div.suite-body {
-	margin-left: 20px;
+	margin-left: 40px;
 }
 
 nav.status-bar {
@@ -171,4 +175,23 @@ pre.text-display{
 	position: absolute;
 }
 
+#expiration-period {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(169, 169, 169);
+}
 
+#expiration-period p {
+  margin-bottom: -2px;
+}
+
+#expiration-period .last-updated {
+  margin-bottom: 10px;
+}
+
+#expiration-period small {
+  font-size: 70%;
+}
