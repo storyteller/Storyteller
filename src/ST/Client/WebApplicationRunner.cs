@@ -22,6 +22,11 @@ namespace ST.Client
             _controller = _input.BuildRemoteController();
             var context = new StorytellerContext(_controller, _input);
 
+            if (_controller.BinPath.IsEmpty())
+            {
+                throw new Exception("Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
+            }
+
             context.Start();
 
             var registry = new FubuRegistry();
