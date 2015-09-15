@@ -33,6 +33,14 @@ namespace StoryTeller.Engine
             return new Marker(record, _stopwatch);
         }
 
+        public IEnumerable<PerfRecord> AllRecords
+        {
+            get
+            {
+                return _records.OrderBy(x => x.Start).ToArray();
+            }
+        } 
+
         public IEnumerable<PerfRecord> Finish()
         {
             if (_main != null) _main.MarkEnd(_stopwatch.ElapsedMilliseconds);

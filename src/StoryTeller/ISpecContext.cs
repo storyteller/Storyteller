@@ -58,6 +58,9 @@ namespace StoryTeller
         /// <param name="millisecondPolling"></param>
         /// <returns></returns>
         bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500);
+
+        void LogResult<T>(T result) where T : IResultMessage;
+        void LogException(string id, Exception ex, object position = null);
     }
     // ENDSAMPLE
 
