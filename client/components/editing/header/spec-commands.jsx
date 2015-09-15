@@ -10,8 +10,13 @@ var CommandButton = React.createClass({
 		var onclick = e => {
 			var data = {id: this.props.spec.id};
 
+			var channel = 'editor';
+			if (this.props.channel){
+				channel = this.props.channel;
+			}
+
 			Postal.publish({
-				channel: 'editor',
+				channel: channel,
 				topic: this.props.message,
 				data: data
 			});
@@ -67,6 +72,15 @@ var SpecCommands = React.createClass({
 					icon="redo"
 					message="redo"
 					disabled={!this.props.spec.canRedo()}/>
+
+				<CommandButton
+					title="Open this specification in a file editor"
+					spec={this.props.spec}
+					id="open"
+					icon="open"
+					message="open-in-editor"
+					channel="engine-request"
+					disabled={false} />
 			</ButtonGroup>
 		);
 	}

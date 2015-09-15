@@ -57,6 +57,7 @@
     <Compile Include="Client\IPersistenceController.cs" />
     <Compile Include="Client\ISpecFileObserver.cs" />
     <Compile Include="Client\ISpecFileWatcher.cs" />
+    <Compile Include="Client\OpenInEditorCommand.cs" />
     <Compile Include="Client\OpenInput.cs" />
     <Compile Include="Client\ClientConnector.cs" />
     <Compile Include="Client\HomeEndpoint.cs" />

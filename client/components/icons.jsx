@@ -59,5 +59,6 @@ icon('up-arrow', ['fa-chevron-up']);
 icon('reorder-inactive', ['fa-bars']);
 icon('reorder-active', ['fa-bars', 'text-success']);
 
+icon('open', ['fa-external-link']);
 
 module.exports = icons;
