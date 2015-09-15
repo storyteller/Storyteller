@@ -32,6 +32,7 @@ namespace ST.Client
 
 
             registry.AlterSettings<DiagnosticsSettings>(_ => _.TraceLevel = TraceLevel.Verbose);
+            registry.Mode = "development";
             registry.HostWith<NOWIN>();
             registry.Services.For<IRemoteController>().Use(_controller);
             registry.Services.For<StorytellerContext>().Use(context);
