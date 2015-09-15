@@ -23,7 +23,7 @@ namespace StoryTeller.Messages
 
             Results = results;
             Id = id;
-            Time = DateTime.Now;
+            Time = DateTime.Now.ToString("T");
             Data = data;
         }
 
@@ -34,7 +34,7 @@ namespace StoryTeller.Messages
         public SpecResults Results { get; set; }
 
         [JsonProperty("time")]
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
         protected bool Equals(SpecExecutionCompleted other)
         {
