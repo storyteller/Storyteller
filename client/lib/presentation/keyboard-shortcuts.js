@@ -36,6 +36,14 @@ function engine(data){
 	add(data);
 }
 
+Mousetrap.bind('enter', (e, combo) => {
+	Postal.publish({
+		channel: 'editor',
+		topic: 'add-table-step',
+		data: {evt: e}
+	});
+});
+
 
 
 module.exports = {

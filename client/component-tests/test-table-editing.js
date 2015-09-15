@@ -386,7 +386,7 @@ describe('Editing Tables', function(){
 
 		expect(spec.find("first-table-data").steps.length).to.equal(3);
 
-		driver.click('#first-table-data a.add-table-step');
+		driver.click('#first-table-data button.add-table-step');
 
 		expect(spec.find("first-table-data").steps.length).to.equal(4);
 
