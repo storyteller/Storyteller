@@ -35,6 +35,13 @@ module.exports = React.createClass({
 		this.publishChange(value);
 	},	
 
+	componentWillReceiveProps: function(props){
+		if (this.isMounted()){
+			this.setState({value: props.arg.value});
+		}
+		
+	},
+
 	resize: function(e){
 		AutoGrowTextArea(this.getDOMNode());
 	},

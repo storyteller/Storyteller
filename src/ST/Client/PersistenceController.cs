@@ -238,15 +238,22 @@ namespace ST.Client
                 var spec = _hierarchy.Specifications[id];
                 spec.ReadBody();
 
-                var data = new SpecData
-                {
-                    data = _hierarchy.Specifications[id],
-                    id = id,
-                    results = _results.ResultsFor(id).ToArray()
-                };
+                var data = getSpecDataFor(id);
 
                 return data;
             });
+        }
+
+        private SpecData getSpecDataFor(string id)
+        {
+            var data = new SpecData
+            {
+                data = _hierarchy.Specifications[id],
+                id = id,
+                results = _results.ResultsFor(id).ToArray()
+            };
+
+            return data;
         }
 
         public void Changed(string file)
@@ -256,6 +263,7 @@ namespace ST.Client
                 _lock.Read(() =>
                 {
                     var node = HierarchyLoader.ReadSpecHeader(file);
+                    node.ReadBody();
 
                     if (_hierarchy.Specifications.Has(node.id))
                     {
@@ -266,12 +274,18 @@ namespace ST.Client
                         _hierarchy.Specifications[node.id] = node;
 
                         node.WritePath(suite.path);
+
+
+                      
+                        _client.SendMessageToClient(new SpecData
+                        {
+                            data = node,
+                            id = node.id,
+                            results = _results.ResultsFor(node.id).ToArray()
+                        });
                     }
 
-                    _client.SendMessageToClient(new SpecChanged
-                    {
-                        node = node
-                    });
+
 
                     return true;
                 });

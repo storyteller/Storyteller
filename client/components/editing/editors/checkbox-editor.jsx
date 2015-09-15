@@ -14,6 +14,17 @@ module.exports = React.createClass({
 		return {value: value};
 	},
 
+	componentWillReceiveProps: function(props){
+		if (!this.isMounted()) return;
+
+		var value = props.arg.value;
+		if (value == null || value == undefined){
+			value = false;
+		}
+
+		this.setState({value: value});
+	},
+
 
 	toggle: function(){
 		var value = this.getDOMNode().checked;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using FubuCore;
 using FubuCore.Dates;
 using NUnit.Framework;
@@ -279,10 +280,13 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Hierarchy.Suites["General"]
                 .specs.ShouldContain(newNode);
 
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SpecChanged
-            {
-                node = newNode
-            }));
+           var sent =  MockFor<IClientConnector>().GetArgumentsForCallsMadeOn(x => x.SendMessageToClient(new SpecData()))[0][0] as SpecData;
+
+            sent.ShouldNotBeNull();
+
+            sent.data.ShouldBe(newNode);
+            sent.id.ShouldBe("general1");
+
         }
 
         [Test]

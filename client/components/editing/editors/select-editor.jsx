@@ -11,6 +11,11 @@ module.exports = React.createClass({
 		return {value: this.props.arg.value};
 	},
 
+	componentWillReceiveProps: function(props){
+		if (!this.isMounted()) return;
+		this.setState({value: props.arg.value});
+	},
+
 	handleChange: function(event) {
 		if (!event){
 			var value = this.getDOMNode().getAttribute('value');
