@@ -450,9 +450,11 @@ describe('EditorPresenter', function(){
         console.log('');
       }
 
-      presenter.applyChange(changes.cellValue(step.id, 'x', 11));
-      presenter.applyChange(changes.cellValue(step.id, 'x', 12));  
-      presenter.applyChange(changes.cellValue(step.id, 'x', 13));
+      var CellChange = require('./../lib/model/cell-change');
+
+      presenter.applyChange(new CellChange(step.id, 'x', 11));
+      presenter.applyChange(new CellChange(step.id, 'x', 12));  
+      presenter.applyChange(new CellChange(step.id, 'x', 13));
       expect(presenter.spec.changeStatus()).to.deep.equal({applied: 3, unapplied: 0});
     });
 

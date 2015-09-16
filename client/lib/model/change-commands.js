@@ -1,31 +1,7 @@
-var Postal = require('postal');
+var Broadcaster = require('./../broadcaster');
+var CellChange = require('./cell-change');
 
-function CellChange(id, cell, value){
-	this.id = id;
-	this.cell = cell;
-	this.value = value;
 
-	this.apply = function(store){
-		var step = store.find(id);
-
-		var arg = step.findByPath(cell);
-
-		this.oldValue = arg.value;
-		this.oldChanged = arg.changed;
-
-		arg.value = value;
-		arg.changed = true;
-	}
-
-	this.unapply = function(store){
-		var arg = store.find(id).findByPath(cell);
-
-		arg.value = this.oldValue;
-		arg.changed = this.oldChanged;
-	}
-
-	return this;
-}
 
 function SpecRenamed(title){
 	this.apply = store => {
@@ -164,44 +140,47 @@ function ExpirationPeriodChanged(period){
 
 module.exports = {
 	rename: function(name){
-		return new SpecRenamed(name);
+		return Broadcaster.applyChange(new SpecRenamed(name));
 	},
 
 	toggleLifecycle: function(){
-		return new ToggleLifecycle();
+		return Broadcaster.applyChange(new ToggleLifecycle());
 	},
 
 	toggleColumn: function(section, cell){
-		return new ToggleColumn(section, cell);
+		return Broadcaster.applyChange(new ToggleColumn(section, cell));
 	},
 
 	changeRetryCount: function(count){
-		return new RetryCountChanged(count);
+		return Broadcaster.applyChange(new RetryCountChanged(count));
 	},
 
 	changeExpirationPeriod: function(period){
-		return new ExpirationPeriodChanged(period);
+		return Broadcaster.applyChange(new ExpirationPeriodChanged(period));
 	},
 
 	cellValue: function(id, cell, value){
-		return new CellChange(id, cell, value);
+		var change = new CellChange(id, cell, value);
+		Broadcaster.applyChange(change);
+
+		return change;
 	},
 
 	// the following two can do sections too
 	stepAdded: function(parent, step, index){
-		return new StepAdded(parent, step, index);
+		return Broadcaster.applyChange(new StepAdded(parent, step, index));
 	},
 
 	stepRemoved: function(parent, step){
-		return new StepRemoved(parent, step);
+		return Broadcaster.applyChange(new StepRemoved(parent, step));
 	},
 
 	moveDown(parent, step){
-		return new StepMovedDown(parent, step);
+		return Broadcaster.applyChange(new StepMovedDown(parent, step));
 	},
 
 	moveUp(parent, step){
-		return new StepMovedUp(parent, step);
+		return Broadcaster.applyChange(new StepMovedUp(parent, step));
 	}
 
 }
