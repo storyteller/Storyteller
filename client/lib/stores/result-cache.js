@@ -1,6 +1,5 @@
 var ArrayList = require('./../array-list');
 var Counts = require('./../model/counts');
-var Postal = require('postal');
 var results = {};
 
 var setCounts = function(completed){
