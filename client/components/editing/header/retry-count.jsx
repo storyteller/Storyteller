@@ -11,11 +11,7 @@ var RetryCount = React.createClass({
 
 			if (!isNaN(number)){
 
-				Postal.publish({
-					channel: 'editor',
-					topic: 'changes',
-					data: changes.changeRetryCount(number)
-				});
+				changes.changeRetryCount(number);
 			}
 
 			e.preventDefault();

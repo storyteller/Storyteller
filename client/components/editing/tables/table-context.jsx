@@ -13,11 +13,7 @@ var OptionalColumn = React.createClass({
 		}
 
 		var onClick = e => {
-			Postal.publish({
-				channel: 'editor',
-				topic: 'changes',
-				data: changes.toggleColumn(this.props.section, this.props.cell)
-			})
+			changes.toggleColumn(this.props.section, this.props.cell);
 
 			e.stopPropagation();
 		}

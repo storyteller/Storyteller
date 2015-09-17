@@ -1,6 +1,6 @@
 var Broadcaster = require('./../broadcaster');
 var CellChange = require('./cell-change');
-
+var ToggleLifecycle = require('./toggle-lifecycle');
 
 
 function SpecRenamed(title){
@@ -25,18 +25,7 @@ function ToggleColumn(section, cell){
 	this.unapply = this.apply;
 }
 
-function ToggleLifecycle(){
-	this.apply = store => {
-		if (store.lifecycle == 'Acceptance'){
-			store.lifecycle = 'Regression';
-		}
-		else {
-			store.lifecycle = 'Acceptance';
-		}
-	}
 
-	this.unapply = this.apply;
-}
 
 function StepMovedUp(parent, step){
 	this.apply = store => {

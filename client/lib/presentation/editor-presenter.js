@@ -52,8 +52,7 @@ class EditorPresenter{
     }
 
     if (location.step && !location.holder.isFirst(location.step)){
-      var change = changes.moveUp(location.holder, location.step);
-      this.applyChange(change);
+      changes.moveUp(location.holder, location.step);
     }
   }
 
@@ -65,8 +64,7 @@ class EditorPresenter{
     }
 
     if (location.step && !location.holder.isLast(location.step)){
-      var change = changes.moveDown(location.holder, location.step);
-      this.applyChange(change);
+      changes.moveDown(location.holder, location.step);
     }
   }
 

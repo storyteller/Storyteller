@@ -12,13 +12,7 @@ class Option {
 
 	select(){
 		var step = this.grammar.newStep();
-		var message = changes.stepAdded(this.holder, step);
-
-		Postal.publish({
-			channel: 'editor',
-			topic: 'changes',
-			data: message
-		});
+		changes.stepAdded(this.holder, step);
 	}
 }
 

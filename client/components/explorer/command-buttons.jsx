@@ -7,7 +7,7 @@ var ButtonGroup = require('react-bootstrap/ButtonGroup');
 var Postal = require('postal');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var changes = require('./../../lib/model/change-commands');
-
+var ToggleLifecycle = require('./../../lib/model/toggle-lifecycle');
 
 var CommandButton = React.createClass({
 	render: function(){
@@ -32,7 +32,7 @@ var CommandButton = React.createClass({
 			}
 			else if (this.props.topic == 'mark-as-acceptance'){
 				_.filter(fulls, x => x.lifecycle == 'Regression').forEach(spec => {
-					spec.apply(changes.toggleLifecycle());
+					spec.apply(new ToggleLifecycle());
 				});
 
 				var ids = _.filter(heads, x => x.lifecycle == 'Regression')
@@ -54,7 +54,7 @@ var CommandButton = React.createClass({
 			}
 			else if (this.props.topic == 'mark-as-regression'){
 				_.filter(fulls, x => x.lifecycle == 'Acceptance').forEach(spec => {
-					spec.apply(changes.toggleLifecycle());
+					spec.apply(new ToggleLifecycle());
 				});
 
 				var ids = _.filter(heads, x => x.lifecycle == 'Acceptance')

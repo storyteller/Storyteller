@@ -15,11 +15,7 @@ var ExpirationPeriod = React.createClass({
       return;
     }
 
-    Postal.publish({
-      channel: 'editor',
-      topic: 'changes',
-      data: changes.changeExpirationPeriod(number)
-    });
+    changes.changeExpirationPeriod(number);
   },
 
   clickFunc(e) {

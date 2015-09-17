@@ -49,13 +49,7 @@ module.exports = React.createClass({
 	publishChange: function(value){
 		var arg = this.props.arg;
 
-		var cellChanged = changes.cellValue(arg.id, arg.cell.key, value);
-
-		Postal.publish({
-			channel: 'editor',
-			topic: 'changes',
-			data: cellChanged
-		});
+		changes.cellValue(arg.id, arg.cell.key, value);
 	},
 
 	componentWillUnmount: function(){

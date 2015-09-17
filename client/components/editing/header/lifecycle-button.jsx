@@ -13,11 +13,7 @@ module.exports = React.createClass({
 				topic = 'mark-as-regression'
 			}
 
-			Postal.publish({
-				channel: 'editor',
-				topic: 'changes',
-				data: changes.toggleLifecycle()
-			});
+			changes.toggleLifecycle();
 
 			e.stopPropagation();
 		}

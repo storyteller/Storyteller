@@ -42,11 +42,7 @@ var SpecTitle = React.createClass({
 	},	
 
 	publishChange(value){
-		Postal.publish({
-			channel: 'editor',
-			topic: 'changes',
-			data: changes.rename(value)
-		});
+		changes.rename(value);
 	},
 
 

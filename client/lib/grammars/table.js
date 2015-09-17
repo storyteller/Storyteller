@@ -123,13 +123,7 @@ class Table extends CompositeGrammar{
 
 	addStep(section) {
 		var step = this.newRowStep();
-		var message = changes.stepAdded(section, step);
-
-		Postal.publish({
-			channel: 'editor',
-			topic: 'changes',
-			data: message
-		});
+		changes.stepAdded(section, step);
 
 		return step;
 	}
@@ -143,11 +137,7 @@ class Table extends CompositeGrammar{
 				newStep.args.find(c.key).value = value;
 			});
 
-			Postal.publish({
-				channel: 'editor',
-				topic: 'changes',
-				data: changes.stepAdded(section, newStep)
-			})
+			changes.stepAdded(section, newStep);
 		}
 	}
 
