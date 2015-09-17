@@ -1,6 +1,7 @@
 // This is the data store for all information regarding the collection
 // of specifications in a Storyteller.js project
 var Postal = require('postal');
+var Broadcaster = require('./../broadcaster');
 var Suite = require('./../model/suite');
 var _ = require('lodash');
 var Counts = require('./../model/counts');
@@ -19,27 +20,15 @@ var queue = [];
 
 
 function publishHierarchyChanged(){
-  Postal.publish({
-    channel: 'explorer',
-    topic: 'hierarchy-updated',
-    data: {}
-  });
+  Broadcaster.toExplorer('hierarchy-updated');
 }
 
 function publishQueueChanged(){
-  Postal.publish({
-    channel: 'explorer',
-    topic: 'queue-updated',
-    data: {}
-  });
+  Broadcaster.toExplorer('queue-updated');
 }
 
 const publishHeaderChanged = (specId) => {
-  Postal.publish({
-    channel: 'editor',
-    topic: 'updated-spec-header',
-    data: { id: specId }
-  });
+  Broadcaster.toExplorer('updated-spec-header', { id: specId });
 }
 
 var recordResult = function(data){
@@ -56,11 +45,7 @@ var recordResult = function(data){
 
   step.logResult(data);
 
-  Postal.publish({
-    channel: 'editor',
-    topic: 'spec-changed',
-    data: {id: data.spec}
-  });
+  Broadcaster.toEditor('spec-changed', {id: data.spec});
 }
 
 var handlers = {};
@@ -85,11 +70,7 @@ var setLibrary = function(lib){
     });
   })
 
-  Postal.publish({
-    channel: 'explorer',
-    topic: 'fixtures-loaded',
-    data: {}
-  });
+  Broadcaster.toExplorer('fixtures-loaded');
 }
 
 handlers['system-recycled'] = function(data){
@@ -106,11 +87,7 @@ var storeSpec = function(spec){
     parent.replaceSpec(spec);
   }
 
-  Postal.publish({
-    channel: 'editor',
-    topic: 'spec-changed',
-    data: {id: spec.id}
-  });
+  Broadcaster.toEditor('spec-changed', {id: spec.id});
 }
 
 handlers['spec-data'] = function(data){
@@ -170,11 +147,7 @@ handlers['spec-added'] = function(data){
 
   publishHierarchyChanged();
 
-  Postal.publish({
-    channel: 'explorer',
-    topic: 'go-to-spec',
-    data: {id: spec.id}
-  });
+  Broadcaster.toExplorer('go-to-spec', {id: spec.id});
 }
 
 handlers['suite-added'] = function(data){
@@ -258,11 +231,8 @@ handlers['spec-execution-completed'] = function(data){
   publishHierarchyChanged();
   publishQueueChanged();
 
-  Postal.publish({
-    channel: 'editor',
-    topic: 'spec-changed',
-    data: {id: data.id}
-  });
+  Broadcaster.toEditor('spec-changed', {id: data.id});
+
 
   Postal.publish({
     channel: 'results',
@@ -281,13 +251,7 @@ handlers['queue-state'] = data => {
   if (!hasChanges) return;
 
   if (!data.running){
-    Postal.publish({
-      channel: 'explorer',
-      topic: 'spec-execution-state',
-      data: {
-        running: false
-      }
-    })
+    Broadcaster.toExplorer('spec-execution-state', {running: false});
   }
 
   publishHierarchyChanged();

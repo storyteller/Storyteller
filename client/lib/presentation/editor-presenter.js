@@ -2,14 +2,11 @@ var Postal = require('postal');
 var Specification = require('./../model/specification');
 var Hierarchy = require('./../stores/hierarchy');
 var changes = require('./../model/change-commands');
+var Broadcaster = require('./../broadcaster');
 
 function applyOutstandingChanges(){
   // If any thing is open, pack it in now
-  Postal.publish({
-    channel: 'editor',
-    topic: 'apply-changes',
-    data: {}
-  });
+  Broadcaster.toEditor('apply-changes');
 }
 
 function parentLocation(location){
@@ -284,11 +281,7 @@ class EditorPresenter{
     this.spec.apply(data);
     this.refreshEditor();
 
-    Postal.publish({
-      channel: 'editor',
-      topic: 'spec-edited',
-      data: {}
-    });
+    Broadcaster.toEditor('spec-edited');
   }
 
   undo(){
