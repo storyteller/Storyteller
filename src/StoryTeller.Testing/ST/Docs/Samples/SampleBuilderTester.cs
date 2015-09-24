@@ -21,6 +21,10 @@ namespace StoryTeller.Testing.ST.Docs.Samples
 
             using (var container = Container.For<SampleRegistry>())
             {
+                // In the real app, we're using the DocProject as the SampleCache now,
+                // so it's not in the SampleRegistry
+                container.Inject<ISampleCache>(new SampleCache());
+
                 var builder = container.GetInstance<ISampleBuilder>();
                 var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
 

@@ -28,8 +28,7 @@ namespace ST.Docs.Samples
             For<IFileSystem>().Use<FileSystem>();
 
             ForSingletonOf<IEmbeddedSpecData>().Use<EmbeddedSpecData>();
-            ForSingletonOf<ISampleCache>().Use<SampleCache>();
-            ForSingletonOf<ISampleBuilder>().Use<SampleBuilder>();
+            For<ISampleBuilder>().Use<SampleBuilder>();
         }
     }
 }

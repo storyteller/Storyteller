@@ -18,23 +18,27 @@ using StructureMap;
 
 namespace ST.Docs
 {
-    public class DocProject : IDisposable
+    public class DocProject : IDisposable, ISampleCache
     {
         private readonly Container _container;
         private Topic _topic;
         private readonly DocSettings _settings;
         private TopicFileWatcher _topicWatcher;
-        private ISampleBuilder _sampleBuilder;
 
         private readonly Cache<string, Topic> _topicByUrl = new Cache<string, Topic>();
+        private readonly Task _sampleBuilder;
+        private readonly ISampleCache _samples = new SampleCache();
 
         public DocProject(DocSettings settings)
         {
             readTopics(TopicLoader.LoadDirectory(settings.Root));
             _settings = settings;
 
+
+
             _container = new Container(_ =>
             {
+                _.For<ISampleCache>().Use(this);
                 _.For<DocProject>().Use(this);
                 _.AddRegistry<SampleRegistry>();
                 _.AddRegistry<TransformationRegistry>();
@@ -47,6 +51,28 @@ namespace ST.Docs
                 _.For<DocSettings>().Use(settings);
                 _.For<Topic>().Use(_topic);
             });
+
+            _sampleBuilder = scanForSamples();
+
+        }
+
+        void ISampleCache.AddOrReplace(Sample sample)
+        {
+            _samples.AddOrReplace(sample);
+        }
+
+        Sample ISampleCache.Find(string name)
+        {
+            if (!_sampleBuilder.IsCompleted) _sampleBuilder.Wait();
+
+            return _samples.Find(name);
+        }
+
+        IEnumerable<Sample> ISampleCache.All()
+        {
+            if (!_sampleBuilder.IsCompleted) _sampleBuilder.Wait();
+
+            return _samples.All();
         }
 
         private void readTopics(Topic topic)
@@ -90,9 +116,6 @@ namespace ST.Docs
             _topicWatcher = new TopicFileWatcher(_settings);
             _topicWatcher.StartWatching(refresher);
 
-
-            _sampleBuilder = scanForSamples();
-
             var registry = new TopicRegistry() {RootPath = _settings.Root};
             registry.AlterSettings<OwinSettings>(_ =>
             {
@@ -103,16 +126,13 @@ namespace ST.Docs
             return registry.ToRuntime();
         }
 
-        private ISampleBuilder scanForSamples()
+        private Task scanForSamples()
         {
             var sampleBuilder = _container.GetInstance<ISampleBuilder>();
             var tasks = _settings.SampleDirectories.Select(sampleBuilder.ScanFolder).ToList();
             tasks.Add(sampleBuilder.ScanFolder(_settings.Root));
 
-
-
-            Task.WaitAll(tasks.ToArray());
-            return sampleBuilder;
+            return Task.WhenAll(tasks);
         }
 
         public Topic Topic
@@ -138,8 +158,6 @@ namespace ST.Docs
 
         public void Dispose()
         {
-            if (_sampleBuilder != null) _sampleBuilder.Dispose();
-
             if (_topicWatcher != null) _topicWatcher.Dispose();
             _container.Dispose();
         }

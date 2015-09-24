@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Caching;
 using FubuCore;
 using FubuCore.Util;
 using FubuMVC.Core.Runtime.Files;
@@ -55,21 +54,26 @@ namespace ST.Docs.Samples
 
             public void Handle(ChangeSet changes)
             {
-                _parent.readFiles(changes.Added.Select(x => _root.AppendPath(x.RelativePath)));
-                _parent.readFiles(changes.Changed.Select(x => _root.AppendPath(x.RelativePath)));
+                var added = _parent.readFiles(changes.Added.Select(x => _root.AppendPath(x.RelativePath)));
+                var modified = _parent.readFiles(changes.Changed.Select(x => _root.AppendPath(x.RelativePath)));
 
-                _parent._browser.RefreshPage();
+                Task.WhenAll(added, modified).ContinueWith(t => _parent._browser.RefreshPage());
             }
         }
 
-        private void readFiles(IEnumerable<string> files)
+        private Task readFiles(IEnumerable<string> files)
         {
-            files.Each(x =>
+            var tasks = files.Select(x =>
             {
-                var ext = Path.GetExtension(x).ToLower();
-                var scanner = _scanners[ext];
-                ReadFile(scanner, x);
+                return Task.Factory.StartNew(() =>
+                {
+                    var ext = Path.GetExtension(x).ToLower();
+                    var scanner = _scanners[ext];
+                    ReadFile(scanner, x);
+                });
             });
+
+            return Task.WhenAll(tasks);
         }
 
         public Task ScanFolder(string folder)
@@ -79,16 +83,11 @@ namespace ST.Docs.Samples
             watcher.ChangeBuffer = 0;
             _watchers.Add(watcher);
 
-            return Task.Factory.StartNew(() =>
+            watcher.Start();
+            return readFiles(watcher.CurrentFiles).ContinueWith(t =>
             {
-                watcher.Start();
-
-                readFiles(watcher.CurrentFiles);
-
                 Console.WriteLine("Sample watching ready for directory " + folder);
             });
-
-            
         }
 
 
