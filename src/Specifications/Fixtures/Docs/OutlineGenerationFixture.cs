@@ -67,6 +67,7 @@ namespace Specifications.Fixtures.Docs
             OutlineWriter.WriteToFiles(directory, top);
 
             var readTop = TopicLoader.LoadDirectory(directory);
+            readTop.ParseAndOrder().Wait();
 
             return readTop.AllTopicsInOrder();
         } 

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.Util;
 
@@ -15,20 +16,12 @@ namespace ST.Docs.Topics
         public readonly Cache<string, string> Substitutions = new Cache<string, string>();
 
         private readonly IList<Topic> _children = new List<Topic>();
+        private string _urlSegment;
 
         public Topic(string key, string file, bool isRoot)
         {
             Key = key;
             File = file;
-            IsRoot = isRoot;
-
-            UrlSegment = IsIndex ? string.Empty : Key.ToLower();
-
-            if (Path.GetFileNameWithoutExtension(File).EqualsIgnoreCase("splash"))
-            {
-                Key = "index";
-                UrlSegment = String.Empty;
-            }   
         }
 
         public Topic Parent { get; set; }
@@ -47,16 +40,42 @@ namespace ST.Docs.Topics
         // derived from the position
         public string Key { get; private set; }
         public string Title { get; set; }
-        public string UrlSegment { get; set; }
+
+        public bool IsRoot
+        {
+            get { return Parent == null; }
+        }
+
+        public string UrlSegment
+        {
+            get
+            {
+                if (_urlSegment.IsNotEmpty()) return _urlSegment;
+
+                if (IsIndex) return Path.GetFileNameWithoutExtension(File.ParentDirectory());
+
+                return Key;
+
+
+            }
+            set { _urlSegment = value; }
+        }
 
 
         public string Url
         {
             get
             {
+                if (IsRoot) return "";
+
+                if (Title == "Tutorial")
+                {
+                    Debug.WriteLine("Here");
+                }
+
                 var url = UrlSegment;
                 var topic = this.Parent;
-                while (topic != null)
+                while (topic != null && !topic.IsRoot)
                 {
                     url = topic.UrlSegment.AppendUrl(url);
                     topic = topic.Parent;
@@ -168,7 +187,6 @@ namespace ST.Docs.Topics
         }
 
         public string File { get; private set; }
-        public bool IsRoot { get; set; }
 
         public Topic FindTop()
         {
@@ -317,7 +335,7 @@ namespace ST.Docs.Topics
             return from Match match in matches select match.Groups[1].Value.Trim();
         }
 
-        public void OrderChildren()
+        internal void OrderChildren()
         {
             var others = _children.ToArray();
             _children.Clear();
@@ -345,6 +363,16 @@ namespace ST.Docs.Topics
             }
 
             _children.Each(x => x.OrderChildren());
+        }
+
+        public Task ParseAndOrder()
+        {
+            var all = AllTopicsInOrder().Select(t =>
+            {
+                return Task.Factory.StartNew(t.ParseFile);
+            }).ToArray();
+
+            return Task.WhenAll(all).ContinueWith(t => OrderChildren());
         }
     }
 }

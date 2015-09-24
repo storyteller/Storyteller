@@ -87,7 +87,12 @@ namespace Specifications.Fixtures.Docs
             return Paragraph("Check the properties of a topic at the root of the topic directory", _ =>
             {
                 _ += this["ForFile"];
-                _ += c => { c.State.CurrentObject = TopicLoader.LoadTopic(_location, true); };
+                _ += c =>
+                {
+                    var topic = TopicLoader.LoadTopic(_location, true);
+                    topic.ParseFile();
+                    c.State.CurrentObject = topic;
+                };
 
                 _.VerifyPropertiesOf<Topic>(x =>
                 {
@@ -111,7 +116,9 @@ namespace Specifications.Fixtures.Docs
 
         private IEnumerable<Topic> allTopicsInOrder()
         {
-            return TopicLoader.LoadDirectory(_directory).AllTopicsInOrder().ToArray();
+            var topic = TopicLoader.LoadDirectory(_directory);
+            topic.ParseAndOrder().Wait();
+            return topic.AllTopicsInOrder().ToArray();
         }
     }
 }

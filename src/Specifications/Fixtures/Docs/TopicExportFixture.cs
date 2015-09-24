@@ -54,6 +54,7 @@ namespace Specifications.Fixtures.Docs
                 .After(() =>
                 {
                     _top = TopicLoader.LoadDirectory(_directory);
+                    _top.ParseAndOrder().Wait();
                 });
         }
 

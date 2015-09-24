@@ -53,6 +53,8 @@ namespace ST.Docs
         {
             _topic = topic;
 
+            _topic.ParseAndOrder().Wait();
+
             _topicByUrl.ClearAll();
             _topic.AllTopicsInOrder().Each(x => _topicByUrl[x.Url] = x);
         }

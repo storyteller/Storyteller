@@ -11,13 +11,13 @@ namespace ST.Docs.Topics
     {
         public static readonly FileSystem FileSystem = new FileSystem();
 
-        public static Topic LoadDirectory(string directory)
+        public static Topic LoadDirectory(string directory, bool isRoot = true)
         {
             // Needs to order based on an order.txt
 
             var topicFiles = FileSystem.FindFiles(directory, FileSet.Shallow("*.md")).ToArray();
             
-            var topics = topicFiles.Select(x => LoadTopic(x, true))
+            var topics = topicFiles.Select(x => LoadTopic(x, isRoot))
                 .Union(LoadChildDirectories(directory))
                 .ToArray();
 
@@ -39,8 +39,6 @@ namespace ST.Docs.Topics
 
             index.AddChildren(others);
 
-            index.OrderChildren();
-
             return index;
         }
 
@@ -52,7 +50,7 @@ namespace ST.Docs.Topics
                 if (childDirectory.Contains("fubu-content")) continue;
                 if (Path.GetFileName(childDirectory).EqualsIgnoreCase("content")) continue;
 
-                var topic = LoadDirectory(childDirectory);
+                var topic = LoadDirectory(childDirectory, false);
                 var key = Path.GetFileName(childDirectory);
 
                 topic.UrlSegment = key;
@@ -73,8 +71,6 @@ namespace ST.Docs.Topics
             }
 
             var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file, isRoot);
-
-            topic.ParseFile();
 
             return topic;
         }
