@@ -46,10 +46,9 @@ namespace ST.Docs.Outline
                 key = key.Split('/').Last();
                 var urlSegment = parts.Length == 3 ? parts[2] : key;
 
-                var topic = new Topic
+                var topic = new Topic(key, "")
                 {
                     Title = title,
-                    Key = key,
                     UrlSegment = urlSegment
                 };
 
@@ -59,9 +58,8 @@ namespace ST.Docs.Outline
             }
             else if (_top == null)
             {
-                _top = new Topic
+                _top = new Topic("index", "")
                 {
-                    Key = "index",
                     Title = title,
                     UrlSegment = ""
                 };
@@ -70,9 +68,8 @@ namespace ST.Docs.Outline
             {
                 var urlSegment = parts.Length == 3 ? parts[2] : key;
 
-                var topic = new Topic
+                var topic = new Topic(key, "")
                 {
-                    Key = key,
                     Title = title,
                     UrlSegment = urlSegment
                 };

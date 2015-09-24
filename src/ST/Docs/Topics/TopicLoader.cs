@@ -30,8 +30,6 @@ namespace ST.Docs.Topics
                 if (File.Exists(splashPath))
                 {
                     index = LoadTopic(splashPath, true);
-                    index.Key = "index";
-                    index.UrlSegment = string.Empty;
                 }
                 else
                 {
@@ -100,11 +98,9 @@ namespace ST.Docs.Topics
                 throw new FileNotFoundException("No topic file", file);
             }
 
-            var topic = new Topic
-            {
-                Key = Path.GetFileNameWithoutExtension(file).ToLower(),
-                File = file
-            };
+            var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file);
+
+
 
             var isIndex = Path.GetFileNameWithoutExtension(file).EqualsIgnoreCase("index");
             topic.UrlSegment = isIndex ? string.Empty : topic.Key.ToLower();

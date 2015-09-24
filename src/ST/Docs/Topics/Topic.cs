@@ -12,6 +12,19 @@ namespace ST.Docs.Topics
         public readonly Cache<string, string> Substitutions = new Cache<string, string>();
 
         private readonly IList<Topic> _children = new List<Topic>();
+
+        public Topic(string key, string file)
+        {
+            Key = key;
+            File = file;
+
+            if (Path.GetFileNameWithoutExtension(File).EqualsIgnoreCase("splash"))
+            {
+                Key = "index";
+                UrlSegment = string.Empty;
+            }   
+        }
+
         public Topic Parent { get; set; }
 
         public void AddChildren(IEnumerable<Topic> children)
@@ -26,7 +39,7 @@ namespace ST.Docs.Topics
         }
 
         // derived from the position
-        public string Key { get; set; }
+        public string Key { get; private set; }
         public string Title { get; set; }
         public string UrlSegment { get; set; }
 
@@ -148,7 +161,7 @@ namespace ST.Docs.Topics
             get { return Key.EqualsIgnoreCase("index"); }
         }
 
-        public string File { get; set; }
+        public string File { get; private set; }
 
         public Topic FindTop()
         {
