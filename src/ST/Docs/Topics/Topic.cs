@@ -16,10 +16,11 @@ namespace ST.Docs.Topics
 
         private readonly IList<Topic> _children = new List<Topic>();
 
-        public Topic(string key, string file)
+        public Topic(string key, string file, bool isRoot)
         {
             Key = key;
             File = file;
+            IsRoot = isRoot;
 
             if (Path.GetFileNameWithoutExtension(File).EqualsIgnoreCase("splash"))
             {
@@ -165,6 +166,7 @@ namespace ST.Docs.Topics
         }
 
         public string File { get; private set; }
+        public bool IsRoot { get; set; }
 
         public Topic FindTop()
         {
@@ -251,24 +253,24 @@ namespace ST.Docs.Topics
             return Path.GetFileName(File).EqualsIgnoreCase("splash.htm");
         }
 
-        public static void ParseTopic(string file, bool isRoot, Topic topic)
+        public void ParseFile()
         {
-            Debug.WriteLine("Parsing topic file " + file.ToFullPath());
+            Debug.WriteLine("Parsing topic file " + File.ToFullPath());
 
 
-            var comments = findComments(file).ToArray();
+            var comments = findComments(File).ToArray();
 
-            applyExplicitTitle(comments, topic);
-            applyExplicitUrlSegment(comments, topic);
+            applyExplicitTitle(comments, this);
+            applyExplicitUrlSegment(comments, this);
 
-            if (topic.UrlSegment == null)
+            if (UrlSegment == null)
             {
-                topic.UrlSegment = determineUrlSegmentFromFile(file, topic.IsIndex, isRoot);
+                UrlSegment = determineUrlSegmentFromFile(File, IsIndex, IsRoot);
             }
 
-            if (topic.Title.IsEmpty())
+            if (Title.IsEmpty())
             {
-                topic.Title = topic.Key.Capitalize().SplitPascalCase();
+                Title = Key.Capitalize().SplitPascalCase();
             }
         }
 

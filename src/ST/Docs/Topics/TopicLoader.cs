@@ -96,10 +96,10 @@ namespace ST.Docs.Topics
                 throw new FileNotFoundException("No topic file", file);
             }
 
-            var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file);
+            var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file, isRoot);
             topic.UrlSegment = topic.IsIndex ? string.Empty : topic.Key.ToLower();
 
-            Topic.ParseTopic(file, isRoot, topic);
+            topic.ParseFile();
 
             return topic;
         }
