@@ -47,20 +47,42 @@ module.exports = React.createClass({
 	handleScroll: function(event) {
 		var offsetTop = this.state.offsetTop;
 		var scrollOffset = domUtils.scrollTop(window);
+		var node = this.getDOMNode();
+		var self = this;
 
 		if (offsetTop < scrollOffset) {
 			this.setState({
-				containerStyle: {
-					position: 'fixed',
-					top: 0,
-					width: this.state.width
-				}
+				containerStyle: generateFloatingStyle()
 			});
 		}
 		else {
 			this.setState({
 				containerStyle: {}
 			});
+		}
+
+		function generateFloatingStyle()
+		{
+			var style = {
+				position: 'fixed',
+				top: 0,
+				width: self.state.width
+			};
+			if (isNodeOffPage()) {
+				addVerticalScrolling(style);
+			}
+			return style;
+		}
+
+		function addVerticalScrolling(style)
+		{
+			style.height = domUtils.screenHeight() + 1;
+			style['overflow-y'] = 'scroll';
+		}
+
+		function isNodeOffPage()
+		{
+			return domUtils.screenHeight() < domUtils.height(node);
 		}
 	},
 

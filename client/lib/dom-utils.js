@@ -15,8 +15,20 @@ function width(domNode)
 	return $(domNode).width();
 }
 
+function height(domNode)
+{
+	return $(domNode).height();
+}
+
+function screenHeight()
+{
+	return $(window).height();
+}
+
 export default {
 	offsetTop,
 	scrollTop,
-	width
+	width,
+	height,
+	screenHeight
 };

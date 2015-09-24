@@ -4,15 +4,18 @@ var StepAdderInjector = require('inject!./../components/editing/adders/step-adde
 var ObjectMother = require('./../lib-tests/object-mother');
 var $ = require('jquery');
 var Postal = require('postal');
-
-var StepAdder = StepAdderInjector({
-	'./../../../lib/dom-utils': {
-		offsetTop: function() { return 51; },
-		scrollTop: function(domNode) { return 52; },
-		width: function() { return 53; }
-	}
-});
-
+var defaultDomUtils = {
+	offsetTop: function() { return 51; },
+	scrollTop: function(domNode) { return 52; },
+	width: function() { return 53; },
+	screenHeight: function() { return 50; },
+	height: function() { return 49; }
+};
+var domUtilsOffPage = {
+	...defaultDomUtils,
+	height: function() { return 51; }
+}
+var StepAdder;
 var listener = {
 	events: [],
 
@@ -40,6 +43,7 @@ function singleEventReceivedShouldBe(expected){
 
 describe('The StepAdder component', function(){
 	beforeEach(function(){
+		StepAdder = StepAdderInjector({'./../../../lib/dom-utils': defaultDomUtils});
 		listener.clear();
 	});
 
@@ -128,9 +132,33 @@ describe('The StepAdder component', function(){
 			<StepAdder holder={spec} />
 		);
 		var node = $(adder.getDOMNode());
-		expect(node.css('width')).to..equal('0px');
+		expect(node.css('width')).to.equal('0px');
 
 		adder.handleScroll();
 		expect(node.css('width')).to.equal('53px');
 	});
+
+	it ('enabled scrolling when node is off the page', function() {
+		StepAdder = StepAdderInjector({'./../../../lib/dom-utils': domUtilsOffPage});
+		var adder = TestUtils.renderIntoDocument(
+			<StepAdder holder={spec} />
+		);
+		var node = $(adder.getDOMNode());
+		expect(node.css('overflow-y')).to.be.empty;
+
+		adder.handleScroll();
+		expect(node.css('overflow-y')).to.equal('scroll');
+	});
+
+	it ('does not enable scrolling when node height is not too large', function() {
+		var adder = TestUtils.renderIntoDocument(
+			<StepAdder holder={spec} />
+		);
+		var node = $(adder.getDOMNode());
+		expect(node.css('overflow-y')).to.be.empty;
+
+		adder.handleScroll();
+		expect(node.css('overflow-y')).to.be.empty;
+	});
+
 });
