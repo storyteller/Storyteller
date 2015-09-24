@@ -316,5 +316,35 @@ namespace ST.Docs.Topics
             var matches = Regex.Matches(text, regex);
             return from Match match in matches select match.Groups[1].Value.Trim();
         }
+
+        public void OrderChildren()
+        {
+            var others = _children.ToArray();
+            _children.Clear();
+
+            var directory = File.ParentDirectory();
+            var orderFile = directory.AppendPath("order.txt");
+            if (System.IO.File.Exists(orderFile))
+            {
+                new FileSystem().ReadTextFile(orderFile, line =>
+                {
+                    var topic = others.FirstOrDefault(x => x.Key.EqualsIgnoreCase(line));
+                    if (topic != null)
+                    {
+                        _children.Add(topic);
+                    }
+                });
+
+                var missing = others.Where(x => !_children.Contains(x)).OrderBy(x => x.Title);
+                _children.AddRange(missing);
+
+            }
+            else
+            {
+                _children.AddRange(others.OrderBy(x => x.Title).ToArray());
+            }
+
+            _children.Each(x => x.OrderChildren());
+        }
     }
 }
