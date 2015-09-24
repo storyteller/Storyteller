@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using FubuCore;
 using FubuCore.Util;
 
@@ -8,6 +11,7 @@ namespace ST.Docs.Topics
 {
     public class Topic
     {
+        private const string regex = @"<!--(.*?)-->";
         public readonly Cache<string, string> Substitutions = new Cache<string, string>();
 
         private readonly IList<Topic> _children = new List<Topic>();
@@ -20,7 +24,7 @@ namespace ST.Docs.Topics
             if (Path.GetFileNameWithoutExtension(File).EqualsIgnoreCase("splash"))
             {
                 Key = "index";
-                UrlSegment = string.Empty;
+                UrlSegment = String.Empty;
             }   
         }
 
@@ -100,7 +104,7 @@ namespace ST.Docs.Topics
 
         public override string ToString()
         {
-            return string.Format("Topic: {0}", Title);
+            return String.Format("Topic: {0}", Title);
         }
 
         public Topic FindNext()
@@ -245,6 +249,68 @@ namespace ST.Docs.Topics
         public bool IsSplashPage()
         {
             return Path.GetFileName(File).EqualsIgnoreCase("splash.htm");
+        }
+
+        public static void ParseTopic(string file, bool isRoot, Topic topic)
+        {
+            Debug.WriteLine("Parsing topic file " + file.ToFullPath());
+
+
+            var comments = findComments(file).ToArray();
+
+            applyExplicitTitle(comments, topic);
+            applyExplicitUrlSegment(comments, topic);
+
+            if (topic.UrlSegment == null)
+            {
+                topic.UrlSegment = determineUrlSegmentFromFile(file, topic.IsIndex, isRoot);
+            }
+
+            if (topic.Title.IsEmpty())
+            {
+                topic.Title = topic.Key.Capitalize().SplitPascalCase();
+            }
+        }
+
+        private static string determineUrlSegmentFromFile(string file, bool isIndex, bool isRoot)
+        {
+            if (isRoot) return String.Empty;
+
+            if (isIndex) return Path.GetFileName(file.ParentDirectory());
+
+            return Path.GetFileNameWithoutExtension(file);
+        }
+
+        private static void applyExplicitUrlSegment(IEnumerable<string> comments, Topic topic)
+        {
+            var rawUrl = comments.FirstOrDefault(x => x.StartsWith("Url:", StringComparison.OrdinalIgnoreCase));
+            if (rawUrl.IsNotEmpty())
+            {
+                topic.UrlSegment = rawUrl.Split(':').Last().Trim();
+            }
+        }
+
+        private static void applyExplicitTitle(IEnumerable<string> comments, Topic topic)
+        {
+            var rawTitle = comments.FirstOrDefault(x => x.StartsWith("Title:", StringComparison.OrdinalIgnoreCase));
+            if (rawTitle != null)
+            {
+                var title = rawTitle.Split(':').Last().Trim();
+                topic.Title = title;
+            }
+        }
+
+        private static IEnumerable<string> findComments(string file)
+        {
+            var text = TopicLoader.FileSystem.ReadStringFromFile(file);
+
+            return FindComments(text);
+        }
+
+        public static IEnumerable<string> FindComments(string text)
+        {
+            var matches = Regex.Matches(text, regex);
+            return from Match match in matches select match.Groups[1].Value.Trim();
         }
     }
 }
