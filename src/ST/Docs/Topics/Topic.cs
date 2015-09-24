@@ -362,7 +362,13 @@ namespace ST.Docs.Topics
                 _children.AddRange(others.OrderBy(x => x.Title).ToArray());
             }
 
-            _children.Each(x => x.OrderChildren());
+
+            var tasks = _children.Select(x =>
+            {
+                return Task.Factory.StartNew(x.OrderChildren);
+            });
+
+            Task.WaitAll(tasks.ToArray());
         }
 
         public Task ParseAndOrder()
