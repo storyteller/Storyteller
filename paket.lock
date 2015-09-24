@@ -9,7 +9,7 @@ NUGET
     HtmlTags (3.0.0.186)
     ILRepack (2.0.5)
     Newtonsoft.Json (4.5.9)
-    Nowin (0.17.1.0)
+    Nowin (0.18.0.0)
     Owin (1.0)
     RhinoMocks (3.6.1)
     Selenium.RC (2.47.0)

@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Caching;
+using FubuCore.Util;
 using FubuMVC.Core;
+using FubuMVC.Core.Http.Owin;
+using FubuMVC.Core.Http.Owin.Middleware;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
 using ST.Docs.Html;
@@ -17,18 +21,21 @@ namespace ST.Docs
     public class DocProject : IDisposable
     {
         private readonly Container _container;
-        private readonly Topic _topic;
+        private Topic _topic;
         private readonly DocSettings _settings;
         private TopicFileWatcher _topicWatcher;
         private ISampleBuilder _sampleBuilder;
 
+        private readonly Cache<string, Topic> _topicByUrl = new Cache<string, Topic>();
+
         public DocProject(DocSettings settings)
         {
-            _topic = TopicLoader.LoadDirectory(settings.Root);
+            readTopics(TopicLoader.LoadDirectory(settings.Root));
             _settings = settings;
 
             _container = new Container(_ =>
             {
+                _.For<DocProject>().Use(this);
                 _.AddRegistry<SampleRegistry>();
                 _.AddRegistry<TransformationRegistry>();
 
@@ -40,6 +47,14 @@ namespace ST.Docs
                 _.For<DocSettings>().Use(settings);
                 _.For<Topic>().Use(_topic);
             });
+        }
+
+        private void readTopics(Topic topic)
+        {
+            _topic = topic;
+
+            _topicByUrl.ClearAll();
+            _topic.AllTopicsInOrder().Each(x => _topicByUrl[x.Url] = x);
         }
 
         public void ExportTo(string directory)
@@ -76,7 +91,12 @@ namespace ST.Docs
 
             _sampleBuilder = scanForSamples();
 
-            var registry = new TopicRegistry(_topic) {RootPath = _settings.Root};
+            var registry = new TopicRegistry() {RootPath = _settings.Root};
+            registry.AlterSettings<OwinSettings>(_ =>
+            {
+                _.Middleware.InsertFirst(new MiddlewareNode<TopicMiddleware>());
+            });
+
             registry.StructureMap(_container);
             return registry.ToRuntime();
         }
@@ -120,6 +140,11 @@ namespace ST.Docs
 
             if (_topicWatcher != null) _topicWatcher.Dispose();
             _container.Dispose();
+        }
+
+        public Topic FindTopicByUrl(string url)
+        {
+            return _topicByUrl.Has(url) ? _topicByUrl[url] : null;
         }
     }
 }
