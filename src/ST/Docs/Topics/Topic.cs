@@ -22,6 +22,8 @@ namespace ST.Docs.Topics
             File = file;
             IsRoot = isRoot;
 
+            UrlSegment = IsIndex ? string.Empty : Key.ToLower();
+
             if (Path.GetFileNameWithoutExtension(File).EqualsIgnoreCase("splash"))
             {
                 Key = "index";

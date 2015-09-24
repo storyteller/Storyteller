@@ -97,7 +97,6 @@ namespace ST.Docs.Topics
             }
 
             var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file, isRoot);
-            topic.UrlSegment = topic.IsIndex ? string.Empty : topic.Key.ToLower();
 
             topic.ParseFile();
 
