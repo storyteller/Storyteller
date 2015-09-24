@@ -99,12 +99,15 @@ namespace ST.Docs.Topics
             }
 
             var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file);
+            topic.UrlSegment = topic.IsIndex ? string.Empty : topic.Key.ToLower();
 
+            ParseTopic(file, isRoot, topic);
 
+            return topic;
+        }
 
-            var isIndex = Path.GetFileNameWithoutExtension(file).EqualsIgnoreCase("index");
-            topic.UrlSegment = isIndex ? string.Empty : topic.Key.ToLower();
-
+        public static void ParseTopic(string file, bool isRoot, Topic topic)
+        {
             Debug.WriteLine("Parsing topic file " + file.ToFullPath());
 
 
@@ -115,15 +118,13 @@ namespace ST.Docs.Topics
 
             if (topic.UrlSegment == null)
             {
-                topic.UrlSegment = determineUrlSegmentFromFile(file, isIndex, isRoot);
+                topic.UrlSegment = determineUrlSegmentFromFile(file, topic.IsIndex, isRoot);
             }
 
             if (topic.Title.IsEmpty())
             {
                 topic.Title = topic.Key.Capitalize().SplitPascalCase();
             }
-
-            return topic;
         }
 
         private static string determineUrlSegmentFromFile(string file, bool isIndex, bool isRoot)
