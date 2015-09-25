@@ -13,7 +13,8 @@ namespace StoryTeller.Testing
         public void get_list_values_from_the_global_handling()
         {
             var handling = CellHandling.Basic();
-            handling.Lists["Numbers"].AddValues("1", "2", "3");
+
+            handling.AddSystemLevelList("Numbers", new[] { "1", "2", "3" });
 
             var fixture = new SelectionValuesFixture();
             var model = fixture.Compile(handling);
