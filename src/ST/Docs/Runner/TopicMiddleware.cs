@@ -4,8 +4,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using FubuCore;
+using FubuMVC.Core.Assets;
 using FubuMVC.Core.Http.Owin;
 using FubuMVC.Core.Http.Owin.Middleware;
+using HtmlTags;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
 
@@ -18,6 +20,7 @@ namespace ST.Docs.Runner
         private readonly IHtmlGenerator _generator;
         private readonly DocSettings _settings;
         private readonly string _webSocketScript;
+        private readonly string _topicJS;
 
 
         public TopicMiddleware(Func<IDictionary<string, object>, Task> inner, DocProject project, IHtmlGenerator generator, DocSettings settings)
@@ -31,12 +34,25 @@ namespace ST.Docs.Runner
                 .GetManifestResourceStream(typeof(TopicMiddleware), "WebsocketsRefresh.txt");
 
             _webSocketScript = stream.ReadAllText();
+            _topicJS = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(Program),"topics.js").ReadAllText();
         }
 
         public Task Invoke(IDictionary<string, object> environment)
         {
             var path = environment[OwinConstants.RequestPathKey].As<string>().TrimStart('/');
 
+            if (path == "topics.js")
+            {
+                return Task.Factory.StartNew(() =>
+                {
+                    var response = new OwinHttpResponse(environment);
+                    response.WriteContentType("text/javascript");
+                    new AssetSettings().Headers.Each((key, func) => response.AppendHeader(key, func()));
+                    response.Write(_topicJS);
+
+                    response.Flush();
+                });
+            }
 
             var topic = _project.FindTopicByUrl(path);
             if (topic == null)
@@ -67,6 +83,9 @@ namespace ST.Docs.Runner
 
             var script = _webSocketScript.Replace("%WEB_SOCKET_ADDRESS%", _settings.WebsocketAddress);
             builder.Replace("</head>", script + "\n</head>");
+
+            var tag = new HtmlTag("script").Attr("language", "javascript").Attr("src", "/topics.js");
+            builder.Replace("</head>", tag.ToString() + "\n</head>");
 
             return builder.ToString();
         }

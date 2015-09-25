@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Web.Caching;
-using FubuCore;
 using FubuCore.Util;
 using FubuMVC.Core;
 using FubuMVC.Core.Http.Owin;
 using FubuMVC.Core.Http.Owin.Middleware;
-using FubuMVC.Core.Runtime.Files;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
 using ST.Docs.Html;
@@ -36,7 +34,7 @@ namespace ST.Docs
         {
 
             _settings = settings;
-            readTopics();
+            ReadTopics();
 
 
             _container = new Container(_ =>
@@ -78,7 +76,7 @@ namespace ST.Docs
             return _samples.All();
         }
 
-        private void readTopics()
+        public void ReadTopics()
         {
             _topic = TopicLoader.LoadDirectory(_settings.Root);
 
@@ -131,11 +129,12 @@ namespace ST.Docs
 
         private Task scanForSamples()
         {
-            var sampleBuilder = _container.GetInstance<ISampleBuilder>();
-            var tasks = _settings.SampleDirectories.Select(sampleBuilder.ScanFolder).ToList();
-            tasks.Add(sampleBuilder.ScanFolder(_settings.Root));
-
-            return Task.WhenAll(tasks);
+            return Task.Factory.StartNew(() =>
+            {
+                var sampleBuilder = _container.GetInstance<ISampleBuilder>();
+                var tasks = _settings.SampleDirectories.Select(sampleBuilder.ScanFolder).ToList();
+                tasks.Add(sampleBuilder.ScanFolder(_settings.Root));
+            }).ContinueWith(t => Task.WhenAll(t)).Unwrap();
         }
 
         public Topic Topic
@@ -171,58 +170,12 @@ namespace ST.Docs
         }
 
 
-
-        public class TopicFileWatcher : IDisposable, IChangeSetHandler
+        public Task HardRefresh()
         {
-            private readonly DocSettings _settings;
-            private readonly DocProject _project;
-            private FileChangeWatcher _watcher;
-            private IBrowserRefresher _refresher;
+            var samples = scanForSamples();
+            ReadTopics();
 
-            public TopicFileWatcher(DocSettings settings, DocProject project)
-            {
-                _settings = settings;
-                _project = project;
-            }
-
-            public void StartWatching(IBrowserRefresher refresher)
-            {
-                _refresher = refresher;
-
-                _watcher = new FileChangeWatcher(_settings.Root, FileSet.Deep("*.*"), this);
-                _watcher.Start();
-            }
-
-
-            public void Dispose()
-            {
-                _watcher.Dispose();
-            }
-
-            public bool FileChangeShouldRegenerateTopicTree(string file)
-            {
-                if (Path.GetExtension(file) == ".md") return true;
-
-                var name = Path.GetFileName(file);
-
-                return name.EqualsIgnoreCase("splash.htm") || name.EqualsIgnoreCase("order.txt");
-            }
-
-            void IChangeSetHandler.Handle(ChangeSet changes)
-            {
-                if (changes.Added.Concat(changes.Changed).Any(x => FileChangeShouldRegenerateTopicTree(x.Path)) ||
-                    changes.Deleted.Any())
-                {
-                    _project.readTopics();
-                    _refresher.RefreshPage();
-                }
-                else
-                {
-                    _refresher.RefreshPage();
-                }
-
-
-            }
+            return samples;
         }
     }
 }

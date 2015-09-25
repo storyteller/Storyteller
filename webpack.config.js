@@ -3,7 +3,8 @@ module.exports = {
   entry: {
     "bundle": ['./client/client.js'],
     "batch-bundle": ['./client/batch.js'],
-    "embed": ['./client/embed.js']
+    "embed": ['./client/embed.js'],
+    "topics": ['./client/topics']
   },
   output: {
     path: __dirname + '/src/ST',

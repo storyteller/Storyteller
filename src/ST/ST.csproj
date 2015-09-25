@@ -114,6 +114,7 @@
     <Compile Include="Docs\Outline\OutlineReader.cs" />
     <Compile Include="Docs\Outline\OutlineWriter.cs" />
     <Compile Include="Docs\Runner\BrowserRefresher.cs" />
+    <Compile Include="Docs\Runner\DocRunEndpoints.cs" />
     <Compile Include="Docs\Runner\TopicRegistry.cs" />
     <Compile Include="Docs\Samples\BlockCommentScanner.cs" />
     <Compile Include="Docs\Samples\CLangSampleScanner.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Docs\Todos\TodoTableTag.cs" />
     <Compile Include="Docs\Todos\TodoTask.cs" />
     <Compile Include="Docs\Runner\TopicMiddleware.cs" />
+    <Compile Include="Docs\TopicFileWatcher.cs" />
     <Compile Include="Docs\Topics\Topic.cs" />
     <Compile Include="Docs\Topics\TopicLoader.cs" />
     <Compile Include="Docs\Transformation\CodeSampleTransformHandler.cs" />
@@ -178,6 +180,7 @@
   </Target>
   -->
   <ItemGroup>
+    <EmbeddedResource Include="topics.js" />
     <EmbeddedResource Include="Docs\Runner\WebsocketsRefresh.txt" />
     <EmbeddedResource Include="..\..\client\public\stylesheets\bootstrap.min.css">
       <Link>bootstrap.min.css</Link>

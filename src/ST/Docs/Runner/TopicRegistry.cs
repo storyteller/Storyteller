@@ -15,7 +15,7 @@ namespace ST.Docs.Runner
             Actions.FindBy(_ => _.IncludeTypesNamed(x => x.EndsWith("DocTool")));
             Actions.IncludeType<SampleExplorer>();
             Actions.IncludeType<TodoExplorer>();
-            Actions.DisableDefaultActionSource();
+            //Actions.DisableDefaultActionSource();
 
             AlterSettings<AssetSettings>(_ => _.AllowableExtensions.Add(".json"));
         }
