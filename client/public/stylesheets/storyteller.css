@@ -195,3 +195,7 @@ pre.text-display{
 #expiration-period small {
   font-size: 70%;
 }
+
+.debug-output{
+  overflow-x:scroll;
+}
