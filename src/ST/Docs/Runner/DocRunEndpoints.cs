@@ -1,4 +1,7 @@
-﻿namespace ST.Docs.Runner
+﻿using System;
+using System.Diagnostics;
+
+namespace ST.Docs.Runner
 {
     public class DocRunEndpoints
     {
@@ -15,6 +18,22 @@
         {
             _project.HardRefresh().ContinueWith(t => _refresher.RefreshPage());
         }
+
+        public void post_open(OpenFile request)
+        {
+            var url = new Uri(request.topic);
+
+            var topic = _project.FindTopicByUrl(url.AbsolutePath.TrimStart('/'));
+            if (topic != null)
+            {
+                Process.Start(topic.File);
+            }
+        }
+    }
+
+    public class OpenFile
+    {
+        public string topic { get; set; }
     }
 
     public class HardRefresh
