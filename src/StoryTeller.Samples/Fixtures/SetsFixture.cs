@@ -71,7 +71,7 @@ namespace StoryTeller.Samples.Fixtures
             this["OrderedDetailsAre"] = VerifySetOf(() => _details)
                 .Titled("The Ordered details should be")
                 .Ordered()
-                .MatchOn(_ =>
+                .Comparisons(_ =>
                 {
                     _.Compare(o => o.Amount).DefaultValue("100").Header("The Amount");
                     _.Compare(o => o.Date);

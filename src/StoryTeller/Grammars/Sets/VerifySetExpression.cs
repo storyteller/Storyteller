@@ -40,7 +40,13 @@ namespace StoryTeller.Grammars.Sets
             return this;
         }
 
-        public SetVerificationGrammar MatchOn(Action<ObjectComparison<T>> configure)
+        /// <summary>
+        /// Use this method if you want to explicitly customize the comparison cells
+        /// with editors, defaults, headers, or selection lists
+        /// </summary>
+        /// <param name="configure"></param>
+        /// <returns></returns>
+        public SetVerificationGrammar Comparisons(Action<ObjectComparison<T>> configure)
         {
             var comparer = new ObjectComparison<T>(_dataSource);
             configure(comparer);
@@ -54,9 +60,14 @@ namespace StoryTeller.Grammars.Sets
             return grammar;
         }
 
+        /// <summary>
+        /// Quickly define comparisons based on properties
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
         public SetVerificationGrammar MatchOn(params Expression<Func<T, object>>[] properties)
         {
-            return MatchOn(_ => properties.Each(x => _.Compare(x)));
+            return Comparisons(_ => properties.Each(x => _.Compare(x)));
         }
 
 

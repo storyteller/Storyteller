@@ -23,7 +23,7 @@ namespace Samples.Fixtures
 
                 // Use this syntax if you want to customize
                 // the cells in this SetVerification grammar
-                .MatchOn(_ =>
+                .Comparisons(_ =>
                 {
                     _.Compare(o => o.Amount).DefaultValue("100").Header("The Amount");
 
@@ -73,7 +73,7 @@ namespace Samples.Fixtures
 
                 // Use this syntax if you want to customize
                 // the cells in this SetVerification grammar
-                .MatchOn(_ =>
+                .Comparisons(_ =>
                 {
                     _.Compare(o => o.Amount).DefaultValue("100").Header("The Amount");
                     _.Compare(o => o.Date);
