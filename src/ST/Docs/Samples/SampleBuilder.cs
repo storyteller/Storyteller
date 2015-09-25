@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,18 +14,21 @@ namespace ST.Docs.Samples
     public class SampleBuilder : ISampleBuilder
     {
         private readonly ISampleCache _cache;
-        private readonly IFileSystem _fileSystem;
         private readonly IBrowserRefresher _browser;
-        private readonly IList<FileChangeWatcher> _watchers = new List<FileChangeWatcher>();
+        private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
         private readonly Cache<string, ISampleScanner> _scanners = new Cache<string, ISampleScanner>();
-        private readonly FileSet _fileSet;
 
-        public SampleBuilder(ISampleCache cache, IFileSystem fileSystem, IBrowserRefresher browser,
-            IEnumerable<ISampleScanner> scanners)
+        public static IEnumerable<string> FindFiles(string directory, string ext)
+        {
+            var children = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories).Where(x => !x.Contains("obj") && !x.Contains("bin") && !x.Contains("node_modules"));
+            return children.SelectMany(x => Directory.EnumerateFiles(x, ext));
+        } 
+
+
+        public SampleBuilder(ISampleCache cache, IBrowserRefresher browser, IEnumerable<ISampleScanner> scanners)
         {
             _cache = cache;
-            _fileSystem = fileSystem;
             _browser = browser;
 
             scanners.Each(x =>
@@ -34,10 +38,6 @@ namespace ST.Docs.Samples
 
                 _scanners[ext] = x;
             });
-
-            var search = _scanners.GetAllKeys().Select(x => "*" + x).Join(";");
-
-            _fileSet = FileSet.Deep(search, "node_modules/*.*");
         }
 
 
@@ -78,16 +78,38 @@ namespace ST.Docs.Samples
 
         public Task ScanFolder(string folder)
         {
-            var watcher = new FileChangeWatcher(folder, _fileSet, new ChangeHandler(folder, this));
-            watcher.PollingInterval = 5000;
-            watcher.ChangeBuffer = 0;
-            _watchers.Add(watcher);
+            var tasks = _scanners.SelectMany(scanner =>
+            {
+                var filter = "*" + scanner.Extension;
+                var watcher = new FileSystemWatcher(folder, filter) {NotifyFilter = NotifyFilters.LastWrite};
+                watcher.Created += FileChanged;
+                watcher.Changed += FileChanged;
 
-            watcher.Start();
-            return readFiles(watcher.CurrentFiles).ContinueWith(t =>
+                watcher.EnableRaisingEvents = true;
+                watcher.IncludeSubdirectories = true;
+
+                _watchers.Add(watcher);
+
+                var files = FindFiles(folder, filter);
+                return files.Select(x =>
+                {
+                    return Task.Factory.StartNew(() =>
+                    {
+                        ReadFile(scanner, x);
+                    });
+                });
+            });
+
+            return Task.WhenAll(tasks).ContinueWith(t =>
             {
                 Console.WriteLine("Sample watching ready for directory " + folder);
             });
+        }
+
+        private void FileChanged(object sender, FileSystemEventArgs fileSystemEventArgs)
+        {
+            var file = fileSystemEventArgs.FullPath;
+            readFiles(new[] {file}).ContinueWith(t => _browser.RefreshPage());
         }
 
 
