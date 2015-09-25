@@ -39,6 +39,14 @@ namespace ST.Docs.Topics
 
         // derived from the position
         public string Key { get; private set; }
+
+        public string KeyWithinParent
+        {
+            get { return Key.Split('/').Last(); }
+        }
+
+
+
         public string Title { get; set; }
 
         public bool IsRoot
@@ -346,7 +354,7 @@ namespace ST.Docs.Topics
             {
                 new FileSystem().ReadTextFile(orderFile, line =>
                 {
-                    var topic = others.FirstOrDefault(x => x.Key.EqualsIgnoreCase(line));
+                    var topic = others.FirstOrDefault(x => x.KeyWithinParent.EqualsIgnoreCase(line));
                     if (topic != null)
                     {
                         _children.Add(topic);

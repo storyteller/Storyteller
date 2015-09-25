@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Caching;
+using FubuCore;
 using FubuCore.Util;
 using FubuMVC.Core;
 using FubuMVC.Core.Http.Owin;
 using FubuMVC.Core.Http.Owin.Middleware;
+using FubuMVC.Core.Runtime.Files;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
 using ST.Docs.Html;
@@ -31,9 +34,9 @@ namespace ST.Docs
 
         public DocProject(DocSettings settings)
         {
-            readTopics(TopicLoader.LoadDirectory(settings.Root));
-            _settings = settings;
 
+            _settings = settings;
+            readTopics();
 
 
             _container = new Container(_ =>
@@ -75,9 +78,9 @@ namespace ST.Docs
             return _samples.All();
         }
 
-        private void readTopics(Topic topic)
+        private void readTopics()
         {
-            _topic = topic;
+            _topic = TopicLoader.LoadDirectory(_settings.Root);
 
             _topic.ParseAndOrder().Wait();
 
@@ -113,7 +116,7 @@ namespace ST.Docs
             _settings.WebsocketAddress = "ws://localhost:" + refresher.Port;
 
 
-            _topicWatcher = new TopicFileWatcher(_settings);
+            _topicWatcher = new TopicFileWatcher(_settings, this);
             _topicWatcher.StartWatching(refresher);
 
             var registry = new TopicRegistry() {RootPath = _settings.Root};
@@ -165,6 +168,61 @@ namespace ST.Docs
         public Topic FindTopicByUrl(string url)
         {
             return _topicByUrl.Has(url) ? _topicByUrl[url] : null;
+        }
+
+
+
+        public class TopicFileWatcher : IDisposable, IChangeSetHandler
+        {
+            private readonly DocSettings _settings;
+            private readonly DocProject _project;
+            private FileChangeWatcher _watcher;
+            private IBrowserRefresher _refresher;
+
+            public TopicFileWatcher(DocSettings settings, DocProject project)
+            {
+                _settings = settings;
+                _project = project;
+            }
+
+            public void StartWatching(IBrowserRefresher refresher)
+            {
+                _refresher = refresher;
+
+                _watcher = new FileChangeWatcher(_settings.Root, FileSet.Deep("*.*"), this);
+                _watcher.Start();
+            }
+
+
+            public void Dispose()
+            {
+                _watcher.Dispose();
+            }
+
+            public bool FileChangeShouldRegenerateTopicTree(string file)
+            {
+                if (Path.GetExtension(file) == ".md") return true;
+
+                var name = Path.GetFileName(file);
+
+                return name.EqualsIgnoreCase("splash.htm") || name.EqualsIgnoreCase("order.txt");
+            }
+
+            void IChangeSetHandler.Handle(ChangeSet changes)
+            {
+                if (changes.Added.Concat(changes.Changed).Any(x => FileChangeShouldRegenerateTopicTree(x.Path)) ||
+                    changes.Deleted.Any())
+                {
+                    _project.readTopics();
+                    _refresher.RefreshPage();
+                }
+                else
+                {
+                    _refresher.RefreshPage();
+                }
+
+
+            }
         }
     }
 }

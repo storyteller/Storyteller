@@ -114,7 +114,6 @@
     <Compile Include="Docs\Outline\OutlineReader.cs" />
     <Compile Include="Docs\Outline\OutlineWriter.cs" />
     <Compile Include="Docs\Runner\BrowserRefresher.cs" />
-    <Compile Include="Docs\Runner\TopicFileWatcher.cs" />
     <Compile Include="Docs\Runner\TopicRegistry.cs" />
     <Compile Include="Docs\Samples\BlockCommentScanner.cs" />
     <Compile Include="Docs\Samples\CLangSampleScanner.cs" />
