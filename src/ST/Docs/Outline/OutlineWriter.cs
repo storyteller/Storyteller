@@ -25,7 +25,7 @@ namespace ST.Docs.Outline
 
             topLevel.Children.Each(child =>
             {
-                var key = child.KeyInsideParent();
+                var key = child.KeyWithinParent;
 
                 if (child.Children.Any())
                 {
@@ -47,7 +47,7 @@ namespace ST.Docs.Outline
 
                 parent.Children.Each(child =>
                 {
-                    var key = child.KeyInsideParent();
+                    var key = child.KeyWithinParent;
                     list.Add(key);
                 });
             });
@@ -61,7 +61,12 @@ namespace ST.Docs.Outline
                 new FileSystem().WriteToFlatFile(file, writer =>
                 {
                     writer.WriteLine("<!--Title:{0}-->".ToFormat(topic.Title));
-                    writer.WriteLine("<!--Url:{0}-->".ToFormat(topic.UrlSegment));
+
+                    if (topic.HasExplicitUrl())
+                    {
+                        writer.WriteLine("<!--Url:{0}-->".ToFormat(topic.UrlSegment));
+                    }
+                    
 
                     writer.WriteLine("");
                     writer.WriteLine("TODO(Write some content!)");

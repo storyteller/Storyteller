@@ -70,7 +70,9 @@ namespace ST.Docs.Topics
                 throw new FileNotFoundException("No topic file", file);
             }
 
-            var topic = new Topic(Path.GetFileNameWithoutExtension(file).ToLower(), file, isRoot);
+            var key = Path.GetFileNameWithoutExtension(file).EqualsIgnoreCase("splash") ? "index" : Path.GetFileNameWithoutExtension(file);
+
+            var topic = new Topic(key.ToLower(), file);
 
             return topic;
         }

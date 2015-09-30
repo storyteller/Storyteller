@@ -18,7 +18,7 @@ namespace ST.Docs.Topics
         private readonly IList<Topic> _children = new List<Topic>();
         private string _urlSegment;
 
-        public Topic(string key, string file, bool isRoot)
+        public Topic(string key, string file)
         {
             Key = key;
             File = file;
@@ -60,13 +60,21 @@ namespace ST.Docs.Topics
             {
                 if (_urlSegment.IsNotEmpty()) return _urlSegment;
 
-                if (IsIndex) return Path.GetFileNameWithoutExtension(File.ParentDirectory());
+                if (IsRoot) return "";
+                
+                if (IsIndex)
+                {
+                    return Path.GetFileNameWithoutExtension(File.ParentDirectory());
+                }
 
-                return Key;
+                return KeyWithinParent;
 
 
             }
-            set { _urlSegment = value; }
+            set
+            {
+                _urlSegment = value;
+            }
         }
 
 
@@ -75,11 +83,6 @@ namespace ST.Docs.Topics
             get
             {
                 if (IsRoot) return "";
-
-                if (Title == "Tutorial")
-                {
-                    Debug.WriteLine("Here");
-                }
 
                 var url = UrlSegment;
                 var topic = this.Parent;
@@ -219,11 +222,6 @@ namespace ST.Docs.Topics
             }
         }
 
-        public string KeyInsideParent()
-        {
-            return Key.Split('/').Last();
-        }
-
         public void PrependKey(string key)
         {
             if (IsIndex)
@@ -231,7 +229,7 @@ namespace ST.Docs.Topics
                 Key = key;
                 if (Title == "Index")
                 {
-                    Title = key.Capitalize();
+                    Title = KeyWithinParent.Capitalize();
                 }
             }
             else
@@ -268,7 +266,7 @@ namespace ST.Docs.Topics
                 return Url.AppendUrl("index.htm");
             }
 
-            return Parent.Url.AppendUrl(KeyInsideParent() + ".htm").TrimStart('/');
+            return Parent.Url.AppendUrl(KeyWithinParent + ".htm").TrimStart('/');
         }
 
         public string WebsiteExportPath()
@@ -298,7 +296,7 @@ namespace ST.Docs.Topics
 
             if (Title.IsEmpty())
             {
-                Title = Key.Capitalize().SplitPascalCase();
+                Title = KeyWithinParent.Capitalize().SplitPascalCase();
             }
         }
 
@@ -387,6 +385,11 @@ namespace ST.Docs.Topics
             }).ToArray();
 
             return Task.WhenAll(all).ContinueWith(t => OrderChildren());
+        }
+
+        public bool HasExplicitUrl()
+        {
+            return _urlSegment.IsNotEmpty();
         }
     }
 }
