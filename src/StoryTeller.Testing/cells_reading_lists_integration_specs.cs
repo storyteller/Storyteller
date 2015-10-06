@@ -25,6 +25,23 @@ namespace StoryTeller.Testing
         }
 
         [Test]
+        public void get_list_options_from_the_global_handling()
+        {
+            var handling = CellHandling.Basic();
+            
+            var options = new[] { new Option("1", "A"), new Option("2", "B") };
+
+            handling.AddSystemLevelList("Numbers", options);
+
+            var fixture = new SelectionValuesFixture();
+            var model = fixture.Compile(handling);
+
+            model.FindGrammar("DoSomething").ShouldBeOfType<Sentence>()
+                 .FindCell("x").options
+                 .ShouldHaveTheSameElementsAs(options);
+        }
+
+        [Test]
         public void get_list_values_from_fixture()
         {
             var handling = CellHandling.Basic();
