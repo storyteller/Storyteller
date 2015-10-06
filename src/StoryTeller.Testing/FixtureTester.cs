@@ -9,262 +9,261 @@ using StoryTeller.Samples.Fixtures;
 
 namespace StoryTeller.Testing
 {
-	[TestFixture]
-	public class FixtureTester
-	{
-		[Test]
-		public void add_selection_values()
-		{
-			var fixture = new Fixture();
+    [TestFixture]
+    public class FixtureTester
+    {
+        [Test]
+        public void add_selection_values()
+        {
+            var fixture = new Fixture();
 
-			fixture.AddSelectionValues("States", "TX", "AR", "MO");
-			fixture.AddSelectionValues("Animals", "Lions", "Tigers", "Pumas");
+            fixture.AddSelectionValues("States", "TX", "AR", "MO");
+            fixture.AddSelectionValues("Animals", "Lions", "Tigers", "Pumas");
 
-			fixture.GetSelectionValues("States")
-				.ShouldHaveTheSameElementsAs("TX", "AR", "MO");
+            fixture.Lists["States"].Options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("TX", "AR", "MO");
 
-			fixture.GetSelectionValues("Animals")
-				.ShouldHaveTheSameElementsAs("Lions", "Tigers", "Pumas");
-		}
+            fixture.Lists["Animals"].Options.Select(x => x.value)
+                .ShouldHaveTheSameElementsAs("Lions", "Tigers", "Pumas");
+        }
 
-		[Test]
-		public void has_a_TODO_grammar()
-		{
-			new HiddenFixture()["TODO"].ShouldBeOfType<ActionGrammar<string>>();
-		}
+        [Test]
+        public void has_a_TODO_grammar()
+        {
+            new HiddenFixture()["TODO"].ShouldBeOfType<ActionGrammar<string>>();
+        }
 
-		[Test]
-		public void hidden_when_marked_with_Hidden()
-		{
-			new HiddenFixture().IsHidden().ShouldBe(true);
-		}
+        [Test]
+        public void hidden_when_marked_with_Hidden()
+        {
+            new HiddenFixture().IsHidden().ShouldBe(true);
+        }
 
-		[Test]
-		public void not_hidden_without_the_attribute()
-		{
-			new NotHiddenFixture().IsHidden().ShouldBe(false);
-		}
-
-
-		[Test]
-		public void get_the_name_using_convention_if_the_alias_as_attribute_does_not_exist()
-		{
-			new TargetedReflectionFixture().Key.ShouldBe("TargetedReflection");
-		}
-
-		public class TargetedReflectionFixture : Fixture
-		{
-		}
-
-		[Test]
-		public void get_the_name_using_the_alias_attribute_if_it_exists()
-		{
-			new SecondFixture().Key.ShouldBe("TheSecondFixture");
-		}
-
-		public class SecondFixture : Fixture
-		{
-			public SecondFixture()
-			{
-				Key = "TheSecondFixture";
-			}
-		}
-
-		public class NotHiddenFixture : Fixture
-		{
-		}
-
-		[Hidden]
-		public class HiddenFixture : Fixture
-		{
-		}
-
-		public class FixtureWithExplicits : Fixture
-		{
-			public FixtureWithExplicits()
-			{
-				this["a"] = new StubGrammar();
-				this["b"] = new StubGrammar();
-				this["c"] = new StubGrammar();
-			}
-		}
-
-		[Test]
-		public void can_resolve_grammars_added_explicitly()
-		{
-			var fixture = new FixtureWithExplicits();
-
-			fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
-				new StubGrammarModel { key = "a", },
-				new StubGrammarModel { key = "b", },
-				new StubGrammarModel { key = "c", }
-				);
-		}
-
-		public class FixtureWithProgrammaticGrammars : Fixture
-		{
-			public IGrammar foo()
-			{
-				return new StubGrammar();
-			}
-
-			public IGrammar bar()
-			{
-				return new StubGrammar();
-			}
-
-			public IGrammar baz()
-			{
-				return new StubGrammar();
-			}
-		}
+        [Test]
+        public void not_hidden_without_the_attribute()
+        {
+            new NotHiddenFixture().IsHidden().ShouldBe(false);
+        }
 
 
-		[Test]
-		public void can_resolve_grammars_created_by_a_public_method()
-		{
-			var fixture = new FixtureWithProgrammaticGrammars();
+        [Test]
+        public void get_the_name_using_convention_if_the_alias_as_attribute_does_not_exist()
+        {
+            new TargetedReflectionFixture().Key.ShouldBe("TargetedReflection");
+        }
 
-			fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
-				new StubGrammarModel { key = "foo", },
-				new StubGrammarModel { key = "bar", },
-				new StubGrammarModel { key = "baz", }
-				);
-		}
+        public class TargetedReflectionFixture : Fixture
+        {
+        }
 
-		public class FixtureWithGrammarAlias : Fixture
-		{
-			[AliasAs("GoAlias")]
-			public IGrammar Go()
-			{
-				return new StubGrammar();
-			}
-		}
+        [Test]
+        public void get_the_name_using_the_alias_attribute_if_it_exists()
+        {
+            new SecondFixture().Key.ShouldBe("TheSecondFixture");
+        }
 
-		[Test]
-		public void use_alias_for_on_grammar_method()
-		{
-			var fixture = new FixtureWithGrammarAlias();
+        public class SecondFixture : Fixture
+        {
+            public SecondFixture()
+            {
+                Key = "TheSecondFixture";
+            }
+        }
 
-			fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
-				new StubGrammarModel { key = "GoAlias" }
-				);
-		}
+        public class NotHiddenFixture : Fixture
+        {
+        }
 
-		public class DefaultTitleFixture : Fixture
-		{
-		}
+        [Hidden]
+        public class HiddenFixture : Fixture
+        {
+        }
 
-		[Test]
-		public void builds_default_title_in_model()
-		{
-			new DefaultTitleFixture()
-				.Compile(CellHandling.Basic())
-				.title.ShouldBe("Default Title");
-		}
+        public class FixtureWithExplicits : Fixture
+        {
+            public FixtureWithExplicits()
+            {
+                this["a"] = new StubGrammar();
+                this["b"] = new StubGrammar();
+                this["c"] = new StubGrammar();
+            }
+        }
 
-		[Test]
-		public void adds_the_implementation_to_the_model()
-		{
-			new DefaultTitleFixture()
-				.Compile(CellHandling.Basic())
-				.implementation.ShouldBe(typeof(DefaultTitleFixture).FullName);
-		}
+        [Test]
+        public void can_resolve_grammars_added_explicitly()
+        {
+            var fixture = new FixtureWithExplicits();
 
-		public class ExplicitTitleFixture : Fixture
-		{
-			public ExplicitTitleFixture()
-			{
-				Title = "The special title";
-			}
-		}
+            fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
+                new StubGrammarModel {key = "a",},
+                new StubGrammarModel {key = "b",},
+                new StubGrammarModel {key = "c",}
+                );
+        }
 
-		[Test]
-		public void builds_model_with_explicit_title()
-		{
-			new ExplicitTitleFixture()
-				.Compile(CellHandling.Basic())
-				.title.ShouldBe("The special title");
-		}
+        public class FixtureWithProgrammaticGrammars : Fixture
+        {
+            public IGrammar foo()
+            {
+                return new StubGrammar();
+            }
 
-		public class FixtureWithBadGrammar : Fixture
-		{
-			public IGrammar Bad()
-			{
-				throw new Exception("No!");
-			}
-		}
+            public IGrammar bar()
+            {
+                return new StubGrammar();
+            }
 
-		[Test]
-		public void Fixture_can_handle_a_grammar_that_fails_to_construct_itself()
-		{
-			var fixture = new FixtureWithBadGrammar();
+            public IGrammar baz()
+            {
+                return new StubGrammar();
+            }
+        }
 
-			var grammar = fixture["Bad"].ShouldBeOfType<ErrorGrammar>();
-			grammar.errors.Single().error.ShouldContain("No!");
-		}
 
-		[Test]
-		public void fixture_returns_a_missing_grammar_for_something_that_is_unknown()
-		{
-			var fixture = new Fixture();
-			fixture.GrammarFor("DoesNotExist").ShouldBeOfType<MissingGrammar>();
-		}
+        [Test]
+        public void can_resolve_grammars_created_by_a_public_method()
+        {
+            var fixture = new FixtureWithProgrammaticGrammars();
 
-		[Test]
-		public void fixture_puts_a_fixture_key_on_all_grammars()
-		{
-			var fixture = new MathFixture();
-			fixture.Compile(CellHandling.Basic());
-			var allGrammars = fixture.AllGrammars().ToArray();
-			allGrammars.Each(x => x.Key.ShouldNotBeNull());
-		}
-	}
+            fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
+                new StubGrammarModel {key = "foo",},
+                new StubGrammarModel {key = "bar",},
+                new StubGrammarModel {key = "baz",}
+                );
+        }
 
-	public class StubGrammar : IGrammar
-	{
-		public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
-		{
-			throw new NotImplementedException();
-		}
+        public class FixtureWithGrammarAlias : Fixture
+        {
+            [AliasAs("GoAlias")]
+            public IGrammar Go()
+            {
+                return new StubGrammar();
+            }
+        }
 
-		public GrammarModel Compile(Fixture fixture, CellHandling cells)
-		{
-			return new StubGrammarModel();
-		}
+        [Test]
+        public void use_alias_for_on_grammar_method()
+        {
+            var fixture = new FixtureWithGrammarAlias();
 
-		public string Key { get; set; }
-		public bool IsHidden { get; set; }
-	}
+            fixture.Compile(CellHandling.Basic()).grammars.OfType<StubGrammarModel>().ShouldHaveTheSameElementsAs(
+                new StubGrammarModel {key = "GoAlias"}
+                );
+        }
 
-	public class StubGrammarModel : GrammarModel
-	{
-		public StubGrammarModel()
-			: base("stub")
-		{
-		}
+        public class DefaultTitleFixture : Fixture
+        {
+        }
 
-		protected bool Equals(StubGrammarModel other)
-		{
-			return key.Equals(other.key);
-		}
+        [Test]
+        public void builds_default_title_in_model()
+        {
+            new DefaultTitleFixture()
+                .Compile(CellHandling.Basic())
+                .title.ShouldBe("Default Title");
+        }
 
-		public override bool Equals(object obj)
-		{
-			if (ReferenceEquals(null, obj)) return false;
-			if (ReferenceEquals(this, obj)) return true;
-			if (obj.GetType() != this.GetType()) return false;
-			return Equals((StubGrammarModel)obj);
-		}
+        [Test]
+        public void adds_the_implementation_to_the_model()
+        {
+            new DefaultTitleFixture()
+                .Compile(CellHandling.Basic())
+                .implementation.ShouldBe(typeof (DefaultTitleFixture).FullName);
+        }
 
-		public override int GetHashCode()
-		{
-			return key.GetHashCode();
-		}
+        public class ExplicitTitleFixture : Fixture
+        {
+            public ExplicitTitleFixture()
+            {
+                Title = "The special title";
+            }
+        }
 
-		public override string ToString()
-		{
-			return "StubGrammar named " + key;
-		}
-	}
+        [Test]
+        public void builds_model_with_explicit_title()
+        {
+            new ExplicitTitleFixture()
+                .Compile(CellHandling.Basic())
+                .title.ShouldBe("The special title");
+        }
+
+        public class FixtureWithBadGrammar : Fixture
+        {
+            public IGrammar Bad()
+            {
+                throw new Exception("No!");
+            }
+        }
+
+        [Test]
+        public void Fixture_can_handle_a_grammar_that_fails_to_construct_itself()
+        {
+            var fixture = new FixtureWithBadGrammar();
+
+            var grammar = fixture["Bad"].ShouldBeOfType<ErrorGrammar>();
+            grammar.errors.Single().error.ShouldContain("No!");
+        }
+
+        [Test]
+        public void fixture_returns_a_missing_grammar_for_something_that_is_unknown()
+        {
+            var fixture = new Fixture();
+            fixture.GrammarFor("DoesNotExist").ShouldBeOfType<MissingGrammar>();
+        }
+
+        [Test]
+        public void fixture_puts_a_fixture_key_on_all_grammars()
+        {
+            var fixture = new MathFixture();
+            fixture.Compile(CellHandling.Basic());
+            var allGrammars = fixture.AllGrammars().ToArray();
+            allGrammars.Each(x => x.Key.ShouldNotBeNull());
+        }
+    }
+
+    public class StubGrammar : IGrammar
+    {
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        {
+            throw new NotImplementedException();
+        }
+
+        public GrammarModel Compile(Fixture fixture, CellHandling cells)
+        {
+            return new StubGrammarModel();
+        }
+
+        public string Key { get; set; }
+        public bool IsHidden { get; set; }
+    }
+
+    public class StubGrammarModel : GrammarModel
+    {
+        public StubGrammarModel() : base("stub")
+        {
+        }
+
+        protected bool Equals(StubGrammarModel other)
+        {
+            return key.Equals(other.key);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((StubGrammarModel) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return key.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "StubGrammar named " + key;
+        }
+    }
 }
