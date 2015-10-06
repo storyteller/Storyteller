@@ -32,13 +32,14 @@ namespace StoryTeller.Samples
             var handling = CellHandling.Basic();
 
             // Adding a system wide list. 
-            handling.Lists["positions"].AddValues("LB", "OL", "DL", "WR", "RB");
+            handling.AddSystemLevelList("positions", new[] { "LB", "OL", "DL", "WR", "RB" });
 
             // This is where you can register a custom runtime conversion
             handling.Conversions.RegisterRuntimeConversion<PlayerConverter>();
 
             return handling;
         }
+        // ENDSAMPLE
         // ENDSAMPLE
 
         public Task Warmup()

@@ -32,7 +32,7 @@ namespace StoryTeller
         /// <summary>
         /// All the system level selection lists
         /// </summary>
-        public readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
+        internal readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
 
         /// <summary>
         /// Add a system level selection list by string values

@@ -20,10 +20,10 @@ namespace StoryTeller.Testing
             fixture.AddSelectionValues("States", "TX", "AR", "MO");
             fixture.AddSelectionValues("Animals", "Lions", "Tigers", "Pumas");
 
-            fixture.Lists["States"].Options.Select(x => x.value)
+            fixture.GetSelectionValues("States")
                 .ShouldHaveTheSameElementsAs("TX", "AR", "MO");
 
-            fixture.Lists["Animals"].Options.Select(x => x.value)
+            fixture.GetSelectionValues("Animals")
                 .ShouldHaveTheSameElementsAs("Lions", "Tigers", "Pumas");
         }
 
