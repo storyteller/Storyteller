@@ -550,7 +550,21 @@ namespace StoryTeller
             Lists[key].AddValues(values);
         }
 
-        public readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
+		/// <summary>
+		/// Gets the values defined for a selection list added using <see cref="AddSelectionValues"/>.
+		/// </summary>
+		/// <param name="key"></param>
+		public IEnumerable<string> GetSelectionValues(string key)
+		{
+            if (Lists.Has(key))
+			{
+				return Lists[key].Options.Select(x => x.value);
+			}
+
+			return Enumerable.Empty<string>();
+		}
+
+        internal readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
 
         /// <summary>
         /// Shortcut to get or set the current object on the context state

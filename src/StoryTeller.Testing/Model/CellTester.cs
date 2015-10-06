@@ -273,10 +273,10 @@ namespace StoryTeller.Testing.Model
         public void if_list_is_not_on_fixture_picks_up_from_cellHandling()
         {
             var handling = CellHandling.Basic();
-            handling.Lists["States"].AddValues("TX", "MO", "AR");
+            handling.AddSystemLevelList("States", new[] { "TX", "MO", "AR" });
 
             var fixture = new Fixture();
-            fixture.Lists.Has("States").ShouldBe(false);
+            fixture.GetSelectionValues("States").ShouldBeEmpty();
 
             var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
             var cell = Cell.For(handling, property, fixture);
@@ -288,10 +288,10 @@ namespace StoryTeller.Testing.Model
         public void list_on_fixture_has_precedence()
         {
             var handling = CellHandling.Basic();
-            handling.Lists["States"].AddValues("TX", "MO", "AR");
+            handling.AddSystemLevelList("States", new[] { "TX", "MO", "AR" });
 
             var fixture = new Fixture();
-            fixture.Lists["States"].AddValues("NY", "CT");
+            fixture.AddSelectionValues("States", "NY", "CT");
 
             var property = ReflectionHelper.GetProperty<CellTarget>(x => x.State);
             var cell = Cell.For(handling, property, fixture);

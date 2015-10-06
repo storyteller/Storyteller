@@ -9,7 +9,7 @@ namespace StoryTeller.Samples.Fixtures
     {
         public SelectionListFixture()
         {
-            Lists["surname"].AddValues("Miller", "Smith", "Brown");
+            AddSelectionValues("surname", "Miller", "Smith", "Brown");
 
             this["names"] = new NameTable();
         }
