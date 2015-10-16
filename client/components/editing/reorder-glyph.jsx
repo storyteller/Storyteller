@@ -35,7 +35,7 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<span className="pull-right">
+			<span style={{marginLeft: '10px'}}>
 				<a 
 					style={{color: 'inherit'}}
 					title="Move this step or section up in order" 
