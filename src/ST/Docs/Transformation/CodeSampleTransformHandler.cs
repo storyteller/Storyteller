@@ -1,4 +1,6 @@
 ﻿using System;
+using FubuCore;
+using HtmlTags;
 using ST.Docs.Samples;
 using ST.Docs.Topics;
 
@@ -20,13 +22,30 @@ namespace ST.Docs.Transformation
 
         public string Transform(Topic current, string data)
         {
-            var sample = _cache.Find(data);
+            var tag = TagForSample(data);
 
             var subject = "<p>" + Guid.NewGuid().ToString() + "</p>";
 
-            current.Substitutions[subject] = new SampleTag(sample).ToString();
+            current.Substitutions[subject] = tag.ToString();
 
             return subject;
+        }
+
+        public HtmlTag TagForSample(string sampleName)
+        {
+            var sample = _cache.Find(sampleName);
+            return sample == null ? (HtmlTag) new MissingSampleTag(sampleName) : new SampleTag(sample);
+        }
+    }
+
+    public class MissingSampleTag : HtmlTag
+    {
+        public MissingSampleTag(string sampleName) : base("p")
+        {
+            Style("padding", "10px");
+            AddClass("bg-warning");
+            Add("b").Text("Missing code sample '{0}'".ToFormat(sampleName));
+            Add("small").Text(" -- Wait for ST to catch up reading samples or CTRL+SHIFT+R to force refresh");
         }
     }
 }

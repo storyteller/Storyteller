@@ -176,6 +176,7 @@
     <Compile Include="ST\Docs\Samples\RubySampleScannerTester.cs" />
     <Compile Include="ST\Docs\Samples\SampleBuilderTester.cs" />
     <Compile Include="ST\Docs\Samples\SampleTester.cs" />
+    <Compile Include="ST\Docs\Transformation\CodeSampleTransformHandlerTester.cs" />
     <Compile Include="ST\Docs\Transformation\TransformerTester.cs" />
     <Compile Include="ST\PersistenceControllerTester.cs" />
     <Compile Include="ST\Persistence\RunSpecCommandTester.cs" />

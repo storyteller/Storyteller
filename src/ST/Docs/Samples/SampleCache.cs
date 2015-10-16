@@ -14,7 +14,7 @@ namespace ST.Docs.Samples
 
         public Sample Find(string name)
         {
-            return _snippets[name];
+            return _snippets.Has(name) ? _snippets[name] : null;
         }
 
         public IEnumerable<Sample> All()
