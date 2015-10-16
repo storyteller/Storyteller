@@ -30,10 +30,26 @@ namespace ST.Docs.Transformation
             var props = data.Split(';');
             var key = props.First();
 
-            var other = findOther(current, key);
+            
 
-            if (other == null) return string.Empty;
+            try
+            {
+                var other = findOther(current, key);
+                if (other == null) return string.Empty;
 
+                return transformFromTopic(current, other, props);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                var tag = new HtmlTag("p").AddClass("bg-warning").Style("padding", "5px");
+                tag.Add("b").Text("Unknown topic key '{0}'".ToFormat(key));
+                tag.Add("small").Text(" -- CTRL+SHIFT+R to force refresh the topic tree");
+                return tag.ToString();
+            }
+        }
+
+        private string transformFromTopic(Topic current, Topic other, string[] props)
+        {
             var url = _urls.ToUrl(current, other);
 
             var title = other.Title;
@@ -50,9 +66,6 @@ namespace ST.Docs.Transformation
                     template = props[i];
                 }
             }
-
-
-
 
             return template.Replace("{href}", url).Replace("{title}", title);
         }
