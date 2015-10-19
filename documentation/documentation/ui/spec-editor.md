@@ -24,7 +24,7 @@ The status bar tells you the resulting counts if any, and when the specification
 
 
 
-## Running, Saving, and Undo/Redo Changes
+## Running, Saving, Undo/Redo Changes, and Opening the File
 
 At the top left of the screen, just below the specification title, is a series of buttons providing contextual actions on a specification.
 
@@ -37,6 +37,12 @@ From left to right, the buttons are:
 1. The save button is enabled if there are any outstanding changes to the specification. When the specification is saved, an alert will momentarily appear below the specification title.
 
 1. Undo and Redo buttons to rollback any unsaved changes or to reapply changes that were previously rolled back. 
+
+1. An "Open" button that will try to open the underlying specification file in your default editor for xml files as a quick shortcut
+   to make edits by hand. Any changes to the file should be reflected in the editor shorly after saving the file, but the file system watchers have
+   been known to be slow sometimes. **It's freqently quicker to make large scale reorderings directly to the file than it is with the editor.**
+
+
 
 
 
@@ -92,6 +98,11 @@ Individual cells in the specification are edited by either textbox's, checkbox's
 <[img:content/images/editing/editing-cells.png;Editing Cells]>
 
 
+## Specification Expiration
+
+At the top left of the specification editor is a small control to review and edit the specification expiration date for this specification.
+
+See <[linkto:documentation/expiration]> for more information. 
 
 
 ## The Specification Outline and Step "Containers"
@@ -171,8 +182,9 @@ Or by the contextual links in the left pane for an active container:
 
 ## Reordering Steps or Sections
 
-Sections, comments, and steps can be reordered within their parent container by using keyboard shortcuts:
+Sections, comments, and steps can be reordered by clicking on the up and down caret icons in the editor controls.
 
+Sections, comments, and steps can also be reordered within their parent container by using keyboard shortcuts:
 
 1. Reorder steps or sections by moving the active step or section up with `ctrl + alt + up` or `ctrl + pageup`
 1. Reorder steps or sections by moving the active step or section down with `ctrl + alt + down` or `ctrl + pagedown`

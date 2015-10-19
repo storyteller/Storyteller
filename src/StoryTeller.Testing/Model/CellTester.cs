@@ -466,10 +466,12 @@ namespace StoryTeller.Testing.Model
 
     public class CellTarget
     {
+        // SAMPLE: using-bigtext
         [Header("The City")]
         [Default("Cedar Park")]
         [Editor("bigtext")]
         public string City { get; set; }
+        // ENDSAMPLE
 
         public bool IsActive { get; set; }
 
@@ -481,7 +483,10 @@ namespace StoryTeller.Testing.Model
         [SelectionValues("United States", "Canada", "Mexico")]
         public string Country { get; set; }
 
+        // SAMPLE: using-display-only
+        [Editor("display-only")]
         public int Number { get; set; }
+        // ENDSAMPLE
 
         public void GoPlaces(out int sum,int number = 5)
         {

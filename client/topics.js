@@ -7,5 +7,5 @@ Mousetrap.bind('ctrl+shift+r', (e, combo) => {
 
 Mousetrap.bind('ctrl+shift+e', () => {
 	var topic = window.location.href;
-	$.post('/open', {topic: topic});
+	$.post('/open', {topic: topic}, () => {}, 'json');
 });

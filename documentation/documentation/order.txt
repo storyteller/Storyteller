@@ -4,6 +4,7 @@ ui
 engine
 best_practices
 lifecycle
+expiration
 language
 instrumentation
 ci

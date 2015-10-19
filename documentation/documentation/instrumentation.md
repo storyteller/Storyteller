@@ -37,6 +37,10 @@ Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
 </pre></div><hr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2.2"></div>
 
+## Exceptions
+
+Because we have had some periodic trouble with exceptions not being surfaced correctly through the html results (we swear this is fixed now), there's a built in results tab that just shows the stacktraces for every .Net exception detected by Storyteller during a specification run.
+
 ## Custom Logging
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The Storyteller HTML rendering uses <a href="http://getbootstrap.com">Bootstrap</a> for all of its styling. You can assume that Bootstrap styles are loaded into any html rendering of your custom html to take advantage of Bootstrap styling.

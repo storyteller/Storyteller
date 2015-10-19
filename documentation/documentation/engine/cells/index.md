@@ -75,7 +75,7 @@ In usage, the cell expression is used as part of a [fluent interface](http://mar
 Because the usage was so common on a big project, there are now `DefaultIsEmpty()` and `DefaultIsNull()` extension methods for setting default cell values.
 
 
-## Default Editors
+## Default Editor Rules
 
 There are only a couple built in rules (for now) for how Storyteller selects an editor for a cell:
 
@@ -83,4 +83,23 @@ There are only a couple built in rules (for now) for how Storyteller selects an 
 * If a cell type is a boolean, use a checkbox as the editor
 * If a cell has either a named selection list or selection values, use a select box
 * Otherwise, use a textbox that grows or shrinks to the size of the cell value (a big improvement for 3.0 in the opinion of this author).
+
+## Big Text Editor
+
+If you need to use a string cell in your specifications that would be more easily edited and displayed with a larger, multi-line textbox, you can use the _bigtext_ editor like this:
+
+<[sample:using-bigtext]>
+
+
+## Display Only Cells
+
+This is admittedly an oddball feature, but you can also mark cells as _display-only_ such that they are not editable in the specification editor:
+
+<[sample:using-display-only]>
+
+We added this feature at the request of one of our project teams that generated Storyteller specification files programmatically. I'm not entirely sure
+how useful this editor feature will be outside of that one project.
+
+
+
 

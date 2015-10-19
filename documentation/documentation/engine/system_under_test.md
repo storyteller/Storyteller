@@ -26,7 +26,7 @@ The `IExecutionContext` only lives for the lifetime of a specification execution
 
 <[sample:IExecutionContext]>
 
-Use the `Dispose()` method to do any kind of global state cleanup between specification runs.
+Use the `Dispose()` method to do any kind of global state cleanup between specification runs. The `BeforeExecution(ISpecContext)` and `AfterExecution(ISpecContext)` methods can be used to do any kind of per specification set up, clean up, or even to log additional errors and failures for non-functional concerns like performance.
 
 <div class="alert alert-info" role="warning"><strong>Note!</strong> Make sure that the <code>Dispose()</code> method for your <code>ISystem</code> is thorough in how it shuts down the system to release resources like file locks, database connections, or network ports. Failing to do this when Storyteller tries to reload the system under test for new changes will cause you no end of grief. And yes, that's the voice of experience talking.
 </div>
