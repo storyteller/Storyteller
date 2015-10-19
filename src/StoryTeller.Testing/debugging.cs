@@ -7,7 +7,7 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture, Explicit]
+    [TestFixture]
     public class debugging
     {
         [Test]

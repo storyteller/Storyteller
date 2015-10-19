@@ -23,7 +23,7 @@ namespace StoryTeller.Model
         {
             get
             {
-                return children.OfType<IModelWithCells>().SelectMany(x => x.cells).ToArray();
+                return children.OfType<IModelWithCells>().Where(x => x.cells != null).SelectMany(x => x.cells).ToArray();
             }
         }
     }

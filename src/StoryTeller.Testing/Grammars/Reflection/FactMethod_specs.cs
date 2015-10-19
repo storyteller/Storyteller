@@ -29,6 +29,21 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var sentence = ModelFor<Sentence>("JustTheFacts", "AlwaysTrue");
             sentence.format.ShouldBe("This is always true");
         }
+
+        [Test]
+        public void paragraph_of_facts()
+        {
+            execute(@"
+=> JustTheFacts
+* FactParagraph#1
+
+");
+
+
+
+            CountsShouldBe(3, 0, 0, 0);
+            
+        }
     }
 
     public class JustTheFactsFixture : Fixture
@@ -42,6 +57,32 @@ namespace StoryTeller.Testing.Grammars.Reflection
         public bool AlwaysFalse()
         {
             return false;
+        }
+
+        [FormatAs("Fact1 should be true")]
+        public bool Fact1()
+        {
+            return true;
+        }
+
+        public bool Fact2()
+        {
+            return true;
+        }
+
+        public bool Fact3()
+        {
+            return true;
+        }
+
+        public IGrammar FactParagraph()
+        {
+            return Paragraph("Just the facts", _ =>
+            {
+                _ += this["Fact1"];
+                _ += this["Fact2"];
+                _ += this["Fact3"];
+            });
         }
     }
 }
