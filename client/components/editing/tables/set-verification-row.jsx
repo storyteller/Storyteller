@@ -47,10 +47,14 @@ var SetVerificationRow = React.createClass({
 			fontStyle: 'italic'
 		}
 
+		var errorIcon = '';
+		if (status.rowClass != 'success') {
+			errorIcon = <i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>;
+		}
 
 		return (
 			<tr id={step.id} className={status.rowClass}>
-				<td style={cellStyle} className="set-row-status" style={{paddingLeft: '10px', paddingRight: '10px'}}>{header}</td>
+				<td style={cellStyle} className="set-row-status" style={{paddingLeft: '10px', paddingRight: '10px'}}>{errorIcon}{header}</td>
 				{cells}
 			</tr>
 		);
