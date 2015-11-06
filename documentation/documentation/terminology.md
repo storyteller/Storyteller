@@ -7,7 +7,7 @@
 A _Specification_ is a single document describing some expected behavior of the system under test. For the 3.0 release, Storyteller has replaced the older _Test_ nomenclature with _Specification_.
 
 ## Suites
-StoryTeller projects are organized into Suite’s of closely related specifications. Every specification must be in a suite (an historical quirk that we may eliminate soon).
+StoryTeller projects are organized into Suites of closely related specifications. Every specification must be in a suite (an historical quirk that we may eliminate soon).
 
 
 ## Grammar
