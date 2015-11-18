@@ -1,4 +1,4 @@
-<Spec id="cc3b1eb6-7095-4a40-adec-0c96f13216f6" maxRetries="0" tags="" lifecycle="Acceptance" name="Flow vs Table">
+<Spec id="cc3b1eb6-7095-4a40-adec-0c96f13216f6" maxRetries="0" tags="" lifecycle="Acceptance" name="Flow vs Table" lastUpdated="Monday, October 26, 2015" expirationPeriod="0">
   <Calculator id="5c8292d0-7f5c-4fb3-a0a9-b3aacdc6317c">
     <Comment id="581822ba-40ce-4a4a-bba5-e1f84bb8458b">This is an example of doing flow-based testing</Comment>
     <StartWith value="5" />
@@ -9,6 +9,7 @@
       <table id="b8897308-1a4e-401a-9af6-d3c9f8d6e271">
         <AddingNumbersTogetherAsTable-row x="5" y="6" sum="11" />
         <AddingNumbersTogetherAsTable-row x="10" y="2" sum="12" />
+        <AddingNumbersTogetherAsTable-row x="13" y="3" sum="76" />
       </table>
     </AddingNumbersTogetherAsTable>
   </Calculator>

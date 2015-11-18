@@ -2,7 +2,7 @@
 <!--Url:ui-->
 
 
-<div class="alert alert-warning" role="alert"><strong>Warning!</strong> As of now, Storyteller 3.0 is only running on Windows. Before Storyteller 3.0 is officially released, we will be replacing Katana with NOWIN -- an alternative that does not require elevated privileges. We will also ensure that Storyteller 3.0 is completely usable on OSX and Linux via Mono.
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong> As of now, Storyteller 3.0 is only running on Windows. Before Storyteller 3.0 is officially released, we will also ensure that Storyteller 3.0 is completely usable on OSX and Linux via Mono.
 </div>
 
 Storyteller comes with an embedded web application to author and interactively execute specifications with a rich client. To launch the application, use the `st open` command from described below. See <[linkto:documentation/getting_started]> for more information about the `ST.exe` tool distributed with Storyteller.

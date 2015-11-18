@@ -14,6 +14,12 @@ namespace StoryTeller.Engine
         // execution
         void AfterExecution(ISpecContext context);
 
+        /// <summary>
+        /// Retrieve a service from the running system
+        /// by type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         T GetService<T>();
     }
     // ENDSAMPLE

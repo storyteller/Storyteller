@@ -89,11 +89,11 @@ div.progress{
 }
 
 div.active {
-	border: thin solid #337ab7;
+	border: thin solid #337ab7 !important;
 }
 
 tr.active {
-  border: thin solid #337ab7;
+  border: thin solid #337ab7 !important;
 }
 
 span.twitter-typeahead{
@@ -194,4 +194,8 @@ pre.text-display{
 
 #expiration-period small {
   font-size: 70%;
+}
+
+.debug-output{
+  overflow-x:scroll;
 }

@@ -1,7 +1,7 @@
 <!--Title:Getting Started-->
 <!--Url:getting_started-->
 
-<div class="alert alert-warning" role="alert"><strong>Warning!</strong> As of now, Storyteller 3.0 is only running on Windows. Additionally, the usage of the Katana web server requires users to have administrative privileges in order to use the embedded web application (there's an odd workaround to this issue, but we'd rather just replace Katana than describe it). Before Storyteller 3.0 is officially released, we will be replacing Katana with NOWIN -- an alternative that does not require elevated privileges. We will also ensure that Storyteller 3.0 is completely usable on OSX and Linux via Mono.
+<div class="alert alert-warning" role="alert"><strong>Warning!</strong> As of now, Storyteller 3.0 is only running on Windows. Before Storyteller 3.0 is officially released, we will ensure that Storyteller 3.0 is completely usable on OSX and Linux via Mono and/or the CoreCLR.
 </div>
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> Making the "getting started" story much simpler and easier than earlier versions has been a major goal of the Storyteller 3.0 release. The old "project.xml" file from Storyteller 1-2 is now gone. 3.0 has replaced the upfront configuration with a combination of out of the box defaults and command line flags for explicit overrides.

@@ -17,8 +17,7 @@
     "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
     "test-karma": "karma start --single-run",
     "test-mocha": "mocha",
-    "build-server": "paket install && node build/buildServer.js",
-    "build": "npm install && npm run test && webpack && npm run build-server"
+    "build-server": "paket install && node build/buildServer.js"
   },
   "devDependencies": {
     "arraybuffer-slice": "^0.1.2",
