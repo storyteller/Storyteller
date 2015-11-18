@@ -1,9 +1,6 @@
 <!--Title:Verifying Sets-->
 <!--Url:sets-->
 
-<div class="alert alert-info" role="alert"><strong>Info</strong> The Storyteller team and the shops we work in tend to use document databases or ORM's for persistence, so for the moment the raw `DataTable` set verification from earlier versions has been left out of Storyteller 3. This feature will be added back in at a later time. See the <a href="https://github.com/DarthFubuMVC/StoryTeller2/issues/67">GitHub issue here</a>.</div>
-
-
 One of the most powerful features of Storyteller is the ability to declaratively compare a set of expected results against the system state and report back:
 
 1. Which expected items were matched to the actual results
