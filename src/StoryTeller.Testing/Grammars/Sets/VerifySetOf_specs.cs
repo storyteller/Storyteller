@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             verification.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("City", "StateOrProvince", "PostalCode");
 
-            ShouldBeTestExtensions.ShouldBe(verification.ordered, false);
+            verification.ordered.ShouldBe(false);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             verification.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("City", "StateOrProvince", "PostalCode");
 
-            ShouldBeTestExtensions.ShouldBe(verification.ordered, true);
+            verification.ordered.ShouldBe(true);
         }
 
         [Test]

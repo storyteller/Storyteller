@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using FubuCore;
 using StoryTeller.Model;
@@ -53,5 +54,16 @@ namespace StoryTeller.Grammars.Sets
                 StoryTellerAssert.Fail(message);
             }
         }
+    }
+
+    internal static class DataTableExtensions
+    {
+        internal static IEnumerable<DataRow> ToRows(this DataTable table)
+        {
+            foreach (DataRow row in table.Rows)
+            {
+                yield return row;
+            }
+        } 
     }
 }

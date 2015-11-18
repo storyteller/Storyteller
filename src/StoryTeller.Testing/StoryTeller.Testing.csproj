@@ -117,6 +117,7 @@
     <Compile Include="Grammars\Reflection\MethodInvocationTester.cs" />
     <Compile Include="Grammars\Reflection\ValueCheckMethodTester.cs" />
     <Compile Include="Grammars\Sets\DataColumnMatchTester.cs" />
+    <Compile Include="Grammars\Sets\data_table_verification_specs.cs" />
     <Compile Include="Grammars\Sets\ObjectComparisonTester.cs" />
     <Compile Include="Grammars\Sets\SetVerificationResultTester.cs" />
     <Compile Include="Grammars\Sets\StringListComparisonTester.cs" />

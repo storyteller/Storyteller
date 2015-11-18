@@ -71,3 +71,26 @@ The grammars above in action will render html results like so:
 1. Since the world doesn't always conform to simple object structures, consider using intermediate types in your _Set Verification_ grammars just to translate the actual system data to something that's easier to consume inside of Storyteller.
 1. Do take advantage of Storyteller's ability to customize string conversions so that you can specify more complex types in _Set Verification_ columns.
 1. The `Compare(x => [expression])` and `MatchOn(x => [expression], x => [expression]) syntax can support following multiple properties and methods. So `Compare(x => x.Detail.Name)` is valid syntax that can be used inside of Storyteller. 
+
+
+## Data Tables and Relational Databases
+
+Set verification can also be done against a .Net `DataTable` so that you can easily and declaratively verify the expected
+results of a database table, view, or query. This feature was built specifically to ease testing against relational databases.
+
+To set up a set verification against a `DataTable`, use the `Fixture.VerifyDataTable()` method as shown below:
+
+<[sample:using-verify-data-table]> 
+
+When you use this method, the key things you have to supply are:
+
+1. Some mechanism for fetching the `DataTable` to be verified. The `VerifyDataTable()` method has overloads for `Func<ISpecContext, DataTable>` and 
+   `Func<DataTable>`. The easiest approach is probably to make a private method that returns a `DataTable` and refer to that method.
+1. A title for the set verification grammar
+1. The columns in the DataTable you wish to verify. At a minimum, you'll need to supply the column name and a .Net Type. You can also optionally 
+   configure `Cell` properties like headers and editors just like any other cell in Storyteller.
+
+
+You can see the set verification grammar we built above in action inside a specification below:
+
+<[spec-result:Sets/Data Tables]>

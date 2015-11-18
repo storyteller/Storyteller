@@ -47,6 +47,7 @@
     <Compile Include="Fixtures\CheckboxFixture.cs" />
     <Compile Include="Fixtures\CrazyParagraphFixture.cs" />
     <Compile Include="Fixtures\CurryingFixture.cs" />
+    <Compile Include="Fixtures\DataTableFixture.cs" />
     <Compile Include="Fixtures\Dimensions.cs" />
     <Compile Include="Fixtures\FactFixture.cs" />
     <Compile Include="Fixtures\GlossaryFixture.cs" />

@@ -55,6 +55,15 @@ namespace StoryTeller.Testing.Grammars.Sets
             cell.Type.ShouldBe(typeof(string));
         }
 
+        [Test]
+        public void blow_up_with_descriptive_message_if_the_column_does_not_exist()
+        {
+            var match = new DataColumnMatch("Foo", typeof(int));
+            Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
+            {
+                match.GetValue(table.Rows[0]);
+            }).Message.ShouldContain("Requested column 'Foo' does not exist");
+        }
 
         [Test]
         public void read_the_actual_values()

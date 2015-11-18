@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -578,6 +579,30 @@ namespace StoryTeller
             }
             set { if (Context != null) Context.State.CurrentObject = value; }
         }
+
+
+        /// <summary>
+        /// Validate a set of tabular data. Useful for writing specifications
+        /// against relational databases
+        /// </summary>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
+        public static VerifyDataTableExpression VerifyDataTable(Func<ISpecContext, DataTable> dataSource)
+        {
+            return new VerifyDataTableExpression(dataSource);
+        }
+
+        /// <summary>
+        /// Validate a set of tabular data. Useful for writing specifications
+        /// against relational databases
+        /// </summary>
+        /// <param name="dataSource"></param>
+        /// <returns></returns>
+        public static VerifyDataTableExpression VerifyDataTable(Func<DataTable> dataSource)
+        {
+            return new VerifyDataTableExpression(c => dataSource());
+        }
+
 
     }
 }

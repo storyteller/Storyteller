@@ -1,0 +1,43 @@
+<Spec id="c33a220d-ba91-4321-8319-bcee74114211" maxRetries="0" tags="" lifecycle="Acceptance" name="Data Tables" lastUpdated="Wednesday, November 18, 2015" expirationPeriod="0">
+  <DataTable id="524c0cc3-cfd0-4447-b43f-4138def07c05">
+    <TheDataTableIs>
+      <Rows id="a3b07d16-ae2f-4219-82d2-ac85b75dd67e">
+        <TheDataTableIs-row City="Austin" Distance="5" ZipCode="78750" />
+        <TheDataTableIs-row City="Jasper" Distance="600" ZipCode="64755" />
+        <TheDataTableIs-row City="Bentonville" Distance="550" ZipCode="72712" />
+      </Rows>
+    </TheDataTableIs>
+    <Comment>Happy Path</Comment>
+    <VerifyRows>
+      <rows id="8ff689ba-e36d-4ee4-8b65-a225a965acd8">
+        <VerifyRows-row City="Austin" Distance="5" Zip="78750" />
+        <VerifyRows-row City="Jasper" Distance="600" Zip="64755" />
+        <VerifyRows-row City="Bentonville" Distance="550" Zip="72712" />
+      </rows>
+    </VerifyRows>
+    <Comment>Extra Rows Detected from the Database</Comment>
+    <VerifyRows>
+      <rows id="559b7c4c-ed97-4d9f-b1d1-56d77240851f">
+        <VerifyRows-row City="Austin" Distance="5" Zip="78750" />
+        <VerifyRows-row City="Jasper" Distance="600" Zip="64755" />
+      </rows>
+    </VerifyRows>
+    <Comment>Missing Rows in the Database</Comment>
+    <VerifyRows>
+      <rows id="1381e6d3-7352-400a-a87a-d70c28cbf858">
+        <VerifyRows-row City="Austin" Distance="5" Zip="78750" />
+        <VerifyRows-row City="Jasper" Distance="600" Zip="64755" />
+        <VerifyRows-row City="Bentonville" Distance="550" Zip="72712" />
+        <VerifyRows-row City="Joplin" Distance="575" Zip="64801" />
+      </rows>
+    </VerifyRows>
+    <Comment>Mismatch in Rows</Comment>
+    <VerifyRows>
+      <rows id="75f2de80-d263-41c7-a674-093fb2c227c0">
+        <VerifyRows-row City="Round Rock" Distance="5" Zip="78750" />
+        <VerifyRows-row City="Jasper" Distance="600" Zip="64755" />
+        <VerifyRows-row City="Bentonville" Distance="550" Zip="72712" />
+      </rows>
+    </VerifyRows>
+  </DataTable>
+</Spec>

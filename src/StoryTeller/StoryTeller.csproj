@@ -169,6 +169,7 @@
     <Compile Include="Grammars\Sets\StringListComparison.cs" />
     <Compile Include="Grammars\Sets\UnorderedSetMatcher.cs" />
     <Compile Include="Grammars\Sets\VerificationSetPlan.cs" />
+    <Compile Include="Grammars\Sets\VerifyDataTableExpression.cs" />
     <Compile Include="Grammars\Sets\VerifySetExpression.cs" />
     <Compile Include="Grammars\Sets\VerifyStringListExpression.cs" />
     <Compile Include="Grammars\Sets\WrongOrder.cs" />

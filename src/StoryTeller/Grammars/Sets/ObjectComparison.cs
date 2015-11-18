@@ -12,7 +12,7 @@ namespace StoryTeller.Grammars.Sets
     public class ObjectComparison<T> : ISetComparison
     {
         private readonly Func<ISpecContext, IEnumerable<T>> _source;
-        private readonly IList<IColumnMatch> _accessors = new List<IColumnMatch>();
+        private readonly IList<IColumnMatch> _matches = new List<IColumnMatch>();
 
         public ObjectComparison(Func<ISpecContext, IEnumerable<T>> source)
         {
@@ -24,7 +24,7 @@ namespace StoryTeller.Grammars.Sets
             return Task.Factory.StartNew(() => _source(context).Select(x =>
             {
                 var values = new StepValues("actual");
-                _accessors.Each(a => values.Store(a.Name, a.GetValue(x)));
+                _matches.Each(a => values.Store(a.Name, a.GetValue(x)));
 
                 return values;
 
@@ -33,14 +33,19 @@ namespace StoryTeller.Grammars.Sets
 
         public Cell[] BuildCells(CellHandling handling, Fixture fixture)
         {
-            return _accessors.Select(x => x.BuildCell(handling, fixture)).ToArray();
+            return _matches.Select(x => x.BuildCell(handling, fixture)).ToArray();
         }
 
         public ICellExpression Compare(Accessor accessor)
         {
             var accessorMatch = new AccessorMatch(accessor);
-            _accessors.Add(accessorMatch);
+            _matches.Add(accessorMatch);
             return accessorMatch.CellModifications;
+        }
+
+        public void AddMatches(IEnumerable<IColumnMatch> matches)
+        {
+            _matches.AddRange(matches);
         }
 
         /// <summary>
