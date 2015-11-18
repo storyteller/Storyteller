@@ -9,36 +9,10 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Grammars.Sets
 {
-    public class AccessorMatch
-    {
-        private readonly Accessor _accessor;
-
-        public AccessorMatch(Accessor accessor)
-        {
-            _accessor = accessor;
-            CellModifications = new CellModifications();
-        }
-
-        public Accessor Accessor
-        {
-            get { return _accessor; }
-        }
-
-        public CellModifications CellModifications { get; private set; }
-
-        public Cell BuildCell(CellHandling handling, Fixture fixture)
-        {
-            var cell = new Cell(handling, _accessor.Name, _accessor.PropertyType);
-            CellModifications.Apply(cell);
-
-            return cell;
-        }
-    }
-
     public class ObjectComparison<T> : ISetComparison
     {
         private readonly Func<ISpecContext, IEnumerable<T>> _source;
-        private readonly IList<AccessorMatch> _accessors = new List<AccessorMatch>();
+        private readonly IList<IColumnMatch> _accessors = new List<IColumnMatch>();
 
         public ObjectComparison(Func<ISpecContext, IEnumerable<T>> source)
         {
@@ -50,7 +24,7 @@ namespace StoryTeller.Grammars.Sets
             return Task.Factory.StartNew(() => _source(context).Select(x =>
             {
                 var values = new StepValues("actual");
-                _accessors.Each(a => values.Store(a.Accessor.Name, a.Accessor.GetValue(x)));
+                _accessors.Each(a => values.Store(a.Name, a.GetValue(x)));
 
                 return values;
 
