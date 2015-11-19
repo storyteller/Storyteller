@@ -11,13 +11,11 @@ namespace StoryTeller.Engine
     {
         public Lifecycle Lifecycle;
         public string Suite;
+        public string[] Tags;
 
         public IEnumerable<Specification> Filter(Suite top)
         {
-            if (Lifecycle == Lifecycle.Any && Suite.IsEmpty()) return top.GetAllSpecs();
-
             IEnumerable<Specification> specs;
-
             if (Suite.IsNotEmpty())
             {
                 var suite = top.suites.FirstOrDefault(x => x.name == Suite);
@@ -34,6 +32,12 @@ namespace StoryTeller.Engine
             if (Lifecycle != Lifecycle.Any)
             {
                 specs = specs.Where(x => x.Lifecycle == Lifecycle);
+            }
+
+            var tags = Tags ?? new string[0];
+            if (tags.Any())
+            {
+                specs = specs.Where(spec => tags.All(tag => !spec.Tags.Contains(tag)));
             }
 
             return specs.ToArray();

@@ -1,5 +1,8 @@
+using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
+using FubuCore.CommandLine;
 using ST.Client;
 using StoryTeller.Engine;
 using StoryTeller.Remotes;
@@ -19,6 +22,10 @@ namespace ST.CommandLine
         [Description("Optional.  Runs only one workspace")]
         public string WorkspaceFlag { get; set; }
 
+        [Description("Optional. Excludes specs with any of the specified tags (comma-delimited)")]
+        [FlagAlias("exclude-tags", 'e')]
+        public string ExcludeTagsFlag { get; set; }
+
         [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
         public bool OpenFlag { get; set; }
 
@@ -35,16 +42,17 @@ namespace ST.CommandLine
 
         public BatchRunRequest GetBatchRunRequest()
         {
+            var tags = ExcludeTagsFlag ?? "";
             return _batchRunRequest ?? (_batchRunRequest = new BatchRunRequest
             {
                 Lifecycle = LifecycleFlag,
-                Suite = WorkspaceFlag
+                Suite = WorkspaceFlag,
+                Tags = tags.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray()
             });
         }
 
         public Task<BatchRunResponse> StartBatch(IRemoteController controller)
         {
-            
             var request = GetBatchRunRequest();
             return controller.Send(request).AndWaitFor<BatchRunResponse>();
         }

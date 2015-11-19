@@ -25,8 +25,8 @@ namespace StoryTeller.Testing.Engine
                 suites = new Suite[0],
                 specs = new[]
                 {
-                    new Specification { name = "Spec 1a", Lifecycle = Lifecycle.Acceptance },
-                    new Specification { name = "Spec 1b", Lifecycle = Lifecycle.Regression }
+                    new Specification { name = "Spec 1a", Lifecycle = Lifecycle.Acceptance, Tags = { "tag1", "tag2" }},
+                    new Specification { name = "Spec 1b", Lifecycle = Lifecycle.Regression, Tags = { "tag2" } }
                 }
             };
 
@@ -36,8 +36,8 @@ namespace StoryTeller.Testing.Engine
                 suites = new Suite[0],
                 specs = new[]
                 {
-                    new Specification { name = "Spec 2a", Lifecycle = Lifecycle.Acceptance },
-                    new Specification { name = "Spec 2b", Lifecycle = Lifecycle.Regression }
+                    new Specification { name = "Spec 2a", Lifecycle = Lifecycle.Acceptance, Tags = { "tag1", "tag2", "tag3" } },
+                    new Specification { name = "Spec 2b", Lifecycle = Lifecycle.Regression, Tags = { "tag4" } }
                 }
             };
 
@@ -86,6 +86,20 @@ namespace StoryTeller.Testing.Engine
             theRequest.Lifecycle = Lifecycle.Acceptance;
             theRequest.Suite = childSuite1.name;
             theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite1.specs[0]);
+        }
+
+        [Test]
+        public void filter_by_single_excluded_tag()
+        {
+            theRequest.Tags = new[] {"tag1"};
+            theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite1.specs[1], childSuite2.specs[1]);
+        }
+
+        [Test]
+        public void filter_by_multiple_excluded_tags()
+        {
+            theRequest.Tags = new[] { "tag1", "tag2" };
+            theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite2.specs[1]);
         }
 
         private IEnumerable<Specification> theFilteredSpecs
