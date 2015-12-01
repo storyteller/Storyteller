@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FubuCore;
@@ -96,6 +97,10 @@ namespace StoryTeller.Model.Persistence
                     ? 0
                     : int.Parse(expirationPeriodString);
                 spec.ExpirationPeriod = expirationPeriod;
+
+                var tags = reader.GetAttribute(XmlConstants.TagsAtt);
+                if (tags.IsNotEmpty())
+                    spec.Tags.AddRange(tags.ToDelimitedArray());
 
                 return spec;
             }
