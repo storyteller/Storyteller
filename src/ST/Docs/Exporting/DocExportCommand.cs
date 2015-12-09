@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using FubuCore;
 using FubuCore.CommandLine;
 
 namespace ST.Docs.Exporting
@@ -12,7 +13,26 @@ namespace ST.Docs.Exporting
         {
             var settings = input.ToSettings();
 
-            settings.UrlStyle = input.ExportMode == ExportStyle.FileDump ? UrlStyle.FileExport : UrlStyle.WebsiteExport;
+            switch (input.ExportMode)
+            {
+                case ExportStyle.FileDump:
+                    settings.UrlStyle = UrlStyle.FileExport;
+                    break;
+
+                case ExportStyle.Website:
+                    settings.UrlStyle = UrlStyle.WebsiteExport;
+                    break;
+
+                case ExportStyle.ProjectWebsite:
+                    if (input.ProjectFlag.IsNotEmpty())
+                    {
+                        throw new Exception("You need to specify the GitHub project name as the --project flag in order to use the ProjectWebsite export mode");
+                    }
+
+                    settings.UrlStyle = UrlStyle.ProjectWebsiteExport;
+                    break;
+            }
+
 
             var project = new DocProject(settings);
 
@@ -31,7 +51,8 @@ namespace ST.Docs.Exporting
     public enum ExportStyle
     {
         FileDump,
-        Website
+        Website,
+        ProjectWebsite
     }
 
     public class DocExportInput : DocInput

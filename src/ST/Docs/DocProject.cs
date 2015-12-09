@@ -100,6 +100,10 @@ namespace ST.Docs
             {
                 exporter.ExportTo(directory, _topic, x => x.FileExportPath());
             }
+            else if (_settings.UrlStyle == UrlStyle.WebsiteExport)
+            {
+                exporter.ExportTo(directory, _topic, x => x.WebsiteExportPath());
+            }
             else
             {
                 exporter.ExportTo(directory, _topic, x => x.WebsiteExportPath());

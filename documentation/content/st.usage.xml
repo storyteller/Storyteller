@@ -67,6 +67,10 @@
           <Description>Optional.  Runs only one workspace</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-e, --exclude-tags &lt;excludetags&gt;]</UsageDescription>
+          <Description>Optional. Excludes specs with any of the specified tags (comma-delimited)</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-o, --open]</UsageDescription>
           <Description>Open the results in a browser after the run. DO NOT DO THIS IN CI!</Description>
         </FlagReport>
@@ -114,11 +118,11 @@
       <Usages>
         <UsageReport>
           <Description>Execute</Description>
-          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
+          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
         </UsageReport>
         <UsageReport>
           <Description>Execute and save results</Description>
-          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
+          <Usage>st run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --teamcity] [-c, --config &lt;confi&gt;] [-r, --retries &lt;retries&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -136,6 +140,10 @@
           <Description>Override the application version. Default is 'Unknown'</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-p, --project &lt;project&gt;]</UsageDescription>
+          <Description>GitHub project name when exporting to project pages of a GitHub repo</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-c, --code [&lt;code1 code2 code3 ...&gt;]]</UsageDescription>
           <Description>Override the directories where sample scanning should be enabled. Default is [src]</Description>
         </FlagReport>
@@ -143,7 +151,7 @@
       <Usages>
         <UsageReport>
           <Description>Run the documentation in a live mode</Description>
-          <Usage>st doc-run [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
+          <Usage>st doc-run [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-p, --project &lt;project&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -161,6 +169,10 @@
           <Description>Override the application version. Default is 'Unknown'</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-p, --project &lt;project&gt;]</UsageDescription>
+          <Description>GitHub project name when exporting to project pages of a GitHub repo</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-c, --code [&lt;code1 code2 code3 ...&gt;]]</UsageDescription>
           <Description>Override the directories where sample scanning should be enabled. Default is [src]</Description>
         </FlagReport>
@@ -168,7 +180,7 @@
       <Usages>
         <UsageReport>
           <Description>Seeds a topic file structure from an outline.txt file</Description>
-          <Usage>st doc-seed [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
+          <Usage>st doc-seed [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-p, --project &lt;project&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -195,6 +207,10 @@
           <Description>Override the application version. Default is 'Unknown'</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-p, --project &lt;project&gt;]</UsageDescription>
+          <Description>GitHub project name when exporting to project pages of a GitHub repo</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-c, --code [&lt;code1 code2 code3 ...&gt;]]</UsageDescription>
           <Description>Override the directories where sample scanning should be enabled. Default is [src]</Description>
         </FlagReport>
@@ -202,7 +218,7 @@
       <Usages>
         <UsageReport>
           <Description>Export a documentation project to static html</Description>
-          <Usage>st doc-export &lt;destination&gt; FileDump|Website [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
+          <Usage>st doc-export &lt;destination&gt; FileDump|Website|ProjectWebsite [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-p, --project &lt;project&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>

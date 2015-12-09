@@ -20,8 +20,13 @@ namespace ST.Docs
         [Description("Override the application version. Default is 'Unknown'")]
         public string VersionFlag { get; set; }
 
+        [Description("GitHub project name when exporting to project pages of a GitHub repo")]
+        public string ProjectFlag { get; set; }
+
         [Description("Override the directories where sample scanning should be enabled. Default is [src]")]
         public string[] CodeFlag { get; set; }
+
+
 
         public DocSettings ToSettings()
         {
@@ -35,7 +40,8 @@ namespace ST.Docs
                 Root = DirectoryFlag.ToFullPath(),
                 Version = VersionFlag,
                 UrlStyle = UrlStyle.Live,
-                SampleDirectories = CodeFlag
+                SampleDirectories = CodeFlag,
+                ProjectName = ProjectFlag
             };
         }
     }

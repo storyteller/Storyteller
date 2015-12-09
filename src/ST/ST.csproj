@@ -110,6 +110,7 @@
     <Compile Include="Docs\Html\IUrlResolver.cs" />
     <Compile Include="Docs\Html\LiveUrlResolver.cs" />
     <Compile Include="Docs\Html\Navigation\TableOfContentsTag.cs" />
+    <Compile Include="Docs\Html\ProjectWebsiteExportUrlResolver.cs" />
     <Compile Include="Docs\Html\StringExtensions.cs" />
     <Compile Include="Docs\Outline\OutlineReader.cs" />
     <Compile Include="Docs\Outline\OutlineWriter.cs" />

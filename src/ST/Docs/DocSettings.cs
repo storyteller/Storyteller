@@ -9,7 +9,8 @@ namespace ST.Docs
     {
         WebsiteExport,
         Live,
-        FileExport
+        FileExport,
+        ProjectWebsiteExport
     }
 
     public class DocSettings
@@ -25,6 +26,7 @@ namespace ST.Docs
         public string WebsocketAddress { get; set; }
         public string Version { get; set; }
         public string[] SampleDirectories { get; set; }
+        public string ProjectName { get; set; }
 
         public Type UrlResolverType()
         {
@@ -35,6 +37,9 @@ namespace ST.Docs
 
                 case UrlStyle.WebsiteExport:
                     return typeof (LiveUrlResolver);
+
+                case UrlStyle.ProjectWebsiteExport:
+                    return typeof (ProjectWebsiteExportUrlResolver);
 
                 case UrlStyle.FileExport:
                     return typeof (FileExportUrlResolver);
