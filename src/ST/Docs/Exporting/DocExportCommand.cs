@@ -24,7 +24,7 @@ namespace ST.Docs.Exporting
                     break;
 
                 case ExportStyle.ProjectWebsite:
-                    if (input.ProjectFlag.IsNotEmpty())
+                    if (input.ProjectFlag.IsEmpty())
                     {
                         throw new Exception("You need to specify the GitHub project name as the --project flag in order to use the ProjectWebsite export mode");
                     }
