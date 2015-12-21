@@ -1,3 +1,4 @@
+"use strict";
 
 var uuid = require('node-uuid');
 var Arg = require('./../model/arg');

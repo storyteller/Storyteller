@@ -1,3 +1,5 @@
+"use strict";
+
 var uuid = require('node-uuid');
 
 class Arg{

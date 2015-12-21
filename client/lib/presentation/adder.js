@@ -1,3 +1,4 @@
+"use strict";
 
 class Adder {
 	constructor(holder, text){

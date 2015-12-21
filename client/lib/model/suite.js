@@ -1,3 +1,5 @@
+"use strict";
+
 var Spec = require('./specification');
 var _ = require('lodash');
 

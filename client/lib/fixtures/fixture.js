@@ -1,3 +1,5 @@
+"use strict";
+
 var MissingGrammar = require('./../grammars/missing-grammar');
 var Section = require('./../model/section');
 var _ = require('lodash');

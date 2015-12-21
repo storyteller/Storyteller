@@ -1,3 +1,5 @@
+"use strict";
+
 var Fixture = require('./fixture');
 var Comment = require('./../model/comment');
 var _ = require('lodash');

@@ -1,3 +1,5 @@
+"use strict";
+
 var Arg = require('./arg');
 var _ = require('lodash');
 

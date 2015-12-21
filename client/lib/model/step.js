@@ -1,3 +1,4 @@
+"use strict";
 
 var uuid = require('node-uuid');
 var ArgCollection = require('./arg-collection');

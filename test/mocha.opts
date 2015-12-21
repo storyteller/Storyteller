@@ -1,5 +1,5 @@
 client/lib-tests/**/test-*.js
---compilers js:babel/register
+--compilers js:babel-core/register
 --recursive
 --reporter spec
 --bail

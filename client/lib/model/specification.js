@@ -1,3 +1,5 @@
+"use strict";
+
 var StepHolder = require('./step-holder');
 var _ = require('lodash');
 var uuid = require('node-uuid');

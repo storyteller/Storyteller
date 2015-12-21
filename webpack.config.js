@@ -28,6 +28,13 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel', // 'babel-loader' is also a legal name to reference 
+        query: {
+          presets: ['es2015']
+        }
       }
     ]
   },

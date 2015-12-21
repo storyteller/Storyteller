@@ -1,3 +1,5 @@
+"use strict";
+
 var Step = require('./../model/step');
 
 class MissingGrammar{

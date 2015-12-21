@@ -1,3 +1,5 @@
+"use strict";
+
 var FixtureLibrary = require('./fixtures/fixture-library');
 var Specification = require('./model/specification');
 var ResultCache = require('./stores/result-cache');
