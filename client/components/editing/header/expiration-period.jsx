@@ -2,9 +2,12 @@
 var React = require("react");
 var Postal = require('postal');
 var changes = require('./../../../lib/model/change-commands');
-var range = require('./../../../lib/array-helpers').range;
 var hierarchy = require('./../../../lib/stores/hierarchy');
 var {OverlayTrigger, Tooltip} = require('react-bootstrap');
+
+function range (begin, end) {
+  return Array.from(Array(end + 1).keys()).slice(begin);
+}
 
 var ExpirationPeriod = React.createClass({
   changeFunc(e){

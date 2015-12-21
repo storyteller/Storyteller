@@ -3,10 +3,7 @@
 var React = require("react");
 var Postal = require("postal");
 
-var Modal = require('react-bootstrap/Modal');
-var ModalTrigger = require('react-bootstrap/ModalTrigger');
-var OverlayMixin = require('react-bootstrap/OverlayMixin');
-var Button = require('react-bootstrap/Button');
+var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
 var $ = require('jquery');
 
 var CommandWithNameEntryLink  = React.createClass({

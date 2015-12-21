@@ -4,7 +4,7 @@ var React = require("react");
 var Postal = require('postal');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 
-var Alert = require('react-bootstrap/Alert');
+var {Alert} = require('react-bootstrap');
 
 function toErrorMessage(data){
 	if (data.error != null && data.message != null){

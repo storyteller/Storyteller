@@ -3,8 +3,7 @@
 var React = require("react");
 var Postal = require('postal');
 var icons = require('./../icons');
-var Button = require('react-bootstrap/Button');
-var ButtonGroup = require('react-bootstrap/ButtonGroup');
+var {Button, ButtonGroup} = require('react-bootstrap');
 
 var StatusButton = React.createClass({
 	render: function(){

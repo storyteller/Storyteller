@@ -3,8 +3,7 @@
 var React = require("react");
 var Postal = require("postal");
 
-var Grid = require('react-bootstrap/Grid');
-var Row = require('react-bootstrap/Row');
+var {Grid, Row} = require('react-bootstrap');
 var SpecResultHeader = require('./../editing/header/spec-result-header');
 
 var ResultsView = React.createClass({

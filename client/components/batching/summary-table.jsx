@@ -2,9 +2,7 @@
 
 var Postal = require('postal');
 var React = require("react");
-var Button = require('react-bootstrap/Button');
-var ButtonGroup = require('react-bootstrap/ButtonGroup');
-var Well = require('react-bootstrap/Well');
+var {Button, ButtonGroup, Well} = require('react-bootstrap');
 
 
 var SpecRow = require('./spec-row');

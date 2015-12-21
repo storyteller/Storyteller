@@ -3,8 +3,7 @@
 var React = require("react");
 
 var RecycleState = require('./recycle-state');
-var Navbar = require('react-bootstrap/Navbar');
-var Button = require('react-bootstrap/Button');
+var {Navbar, Button} = require('react-bootstrap');
 var Postal = require('postal');
 var QueueCount = require('./../queue/queue-count');
 var GrammarCount = require('./../grammars/grammar-count');

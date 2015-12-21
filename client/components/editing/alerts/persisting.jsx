@@ -4,7 +4,7 @@ var React = require("react");
 var Icons = require('./../../icons');
 var Running = Icons['running'];
 
-var Alert = require('react-bootstrap/Alert');
+var {Alert} = require('react-bootstrap');
 
 
 var PersistedAlert = React.createClass({

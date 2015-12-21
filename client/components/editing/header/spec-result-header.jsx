@@ -3,7 +3,7 @@
 var React = require("react");
 var Postal = require('postal');
 
-var Alert = require('react-bootstrap/Alert');
+var {Alert} = require('react-bootstrap');
 var ResultCache = require('./../../../lib/stores/result-cache');
 var QueueState = require('./../../../lib/stores/queue-state');
 var Icons = require('./../../icons');

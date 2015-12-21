@@ -1,8 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var Button = require('react-bootstrap/Button');
-var ButtonGroup = require('react-bootstrap/ButtonGroup');
+var {Button, ButtonGroup} = require('react-bootstrap');
 var Postal = require('postal');
 
 var LifecycleButton = React.createClass({

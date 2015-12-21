@@ -22,8 +22,13 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { test: /\.jsx$/, loader: 'jsx?harmony'},
-      { test: /\.js$/, exclude: /(node_modules)|(-data\.js$)/, loader: "babel"}
+      {
+        test: /\.jsx?$/,
+        loader: 'babel', // 'babel-loader' is also a legal name to reference 
+        query: {
+          presets: ['react', 'es2015']
+        }
+      }
     ]
   },
   devtool: 'eval'

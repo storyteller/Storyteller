@@ -4,8 +4,7 @@ var React = require("react");
 var Postal = require('postal');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 
-var Button = require('react-bootstrap/Button');
-var Badge = require('react-bootstrap/Badge');
+var {Button, Badge} = require('react-bootstrap');
 
 
 var getCount = function(){

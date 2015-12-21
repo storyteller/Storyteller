@@ -2,8 +2,7 @@
 
 var React = require("react");
 
-var Button = require('react-bootstrap/Button');
-var ButtonGroup = require('react-bootstrap/ButtonGroup');
+var {Button, ButtonGroup} = require('react-bootstrap');
 var Postal = require('postal');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var changes = require('./../../lib/model/change-commands');

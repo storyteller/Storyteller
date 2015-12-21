@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require("react");
-var Button = require('react-bootstrap/Button');
+var {Button} = require('react-bootstrap');
 
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');

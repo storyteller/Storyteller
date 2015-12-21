@@ -2,12 +2,7 @@
 
 var React = require("react");
 
-var Navbar = require('react-bootstrap/Navbar');
-var Nav = require('react-bootstrap/Nav');
-var DropdownButton = require('react-bootstrap/DropdownButton');
-var MenuItem = require('react-bootstrap/MenuItem');
-var NavItem = require('react-bootstrap/NavItem');
-var Button = require('react-bootstrap/Button');
+var {Nav, Navbar, DropdownButton, MenuItem, NavItem, Button} = require('react-bootstrap');
 
 var Icons = require('./../icons');
 

@@ -4,9 +4,8 @@ var React = require("react");
 var Postal = require("postal");
 var _ = require('lodash');
 
-var Grid = require('react-bootstrap/Grid');
-var Row = require('react-bootstrap/Row');
-var Alert = require('react-bootstrap/Alert');
+var {Grid, Row, Alert} = require('react-bootstrap');
+
 
 var BatchResults = require('./../../lib/batch-results');
 
