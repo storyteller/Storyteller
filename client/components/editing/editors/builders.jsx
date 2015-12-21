@@ -62,23 +62,23 @@ var builders = {
 
 
 builders.add('text', function(arg){
-	return CellTextBox({arg: arg});
+	return ( <CellTextBox arg={arg} />);
 });
 
 builders.add('boolean', function(arg){
-	return CheckboxEditor({arg: arg});
+	return ( <CheckboxEditor arg={arg} />);
 });
 
 builders.add('comment', function(arg){
-	return CellTextBox({arg: arg, classes: 'form-control'});
+	return ( <CellTextBox arg={arg} classes="form-control" />);
 });
 
 builders.add('select', function(arg){
-	return SelectEditor({arg: arg});
+	return ( <SelectEditor arg={arg} /> );
 });
 
 builders.add('big-text', function(arg){
-	return BigText({arg:arg});
+	return ( <BigText arg={arg} /> );
 })
 
 

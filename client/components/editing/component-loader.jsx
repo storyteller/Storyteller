@@ -10,9 +10,9 @@ class Loader {
 	
 
 	add(method, path){
-		var component = require('./' + path);
+		var Component = require('./' + path);
 		this[method] = function(props){
-			return component(props);
+			return ( <Component {...props} /> );
 		}
 	}
 
@@ -88,10 +88,12 @@ results.add('perfTable', 'logging/perf-table');
 results.add('logComponent', 'logging/log-component');
 results.add('setResultsTable', 'tables/set-results-table');
 results.add('noResults', 'alerts/no-results');
-results.checked = () => CheckboxIcon({});
+results.checked = () => {
+	return ( <CheckboxIcon /> );
+};
 
 results.tabbedArea = props => {
-	return TabbedArea(props)
+	return (<TabbedArea {...props} /> )
 };
 
 results.tab = (inner, key, title) => {
@@ -100,7 +102,7 @@ results.tab = (inner, key, title) => {
 		children = inner;
 	}
 
-	return TabPane({children: children, eventKey: key, tab: title});
+	return (<TabPane children={children} eventKey={key} tab={title} />);
 };
 
 results.stepAdder = x => null;

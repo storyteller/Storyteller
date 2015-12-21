@@ -92,7 +92,7 @@ module.exports = React.createClass({
 		var containerStyle = this.state.containerStyle;
 
 		var components = lookup.options.map(x => {
-			return AddStepItem({option: x});
+			return ( <AddStepItem option={x} /> );
 		});
 
 		return (
