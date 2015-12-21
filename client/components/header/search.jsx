@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
 var Icons = require('./../icons');

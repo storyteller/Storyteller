@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var {Badge, Button} = require('react-bootstrap');
 var Hierarchy = require('./../../lib/stores/hierarchy');

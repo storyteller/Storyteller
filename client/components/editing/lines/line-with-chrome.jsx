@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var DeleteGlyph = require('./../delete-glyph');
 var ReorderGlyph = require('./../reorder-glyph');

@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var React = require("react");
 var PreviewCell = require('./../cells/preview-cell');
 

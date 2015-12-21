@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');

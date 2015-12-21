@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var React = require("react");
 var CheckboxIcon = require('./../../icons')['checked'];
 var Arg = require('./../../../lib/model/arg');

@@ -9,6 +9,7 @@ var Section = require('./../model/section');
 
 class Table extends CompositeGrammar{
 	constructor(metadata){
+		super(metadata);
 		var self = this;
 
 		this.type = 'table';

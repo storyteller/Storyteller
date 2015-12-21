@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 
 var {Button, ButtonGroup} = require('react-bootstrap');

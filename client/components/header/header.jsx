@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 
 var {Nav, Navbar, DropdownButton, MenuItem, NavItem, Button} = require('react-bootstrap');
