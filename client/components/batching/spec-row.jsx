@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var Postal = require("postal");
 var Counts = require('./../../lib/model/counts');

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var StepAdderPlaceHolder = require('./../adders/step-adder-placeholder');
 var StepAdder = require('./../adders/step-adder');

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var Postal = require('postal');
 var React = require("react");
 var {Button, ButtonGroup, Well} = require('react-bootstrap');

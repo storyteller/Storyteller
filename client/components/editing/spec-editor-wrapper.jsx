@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var Router = require('react-router');
 var SpecEditor = require('./spec-editor');

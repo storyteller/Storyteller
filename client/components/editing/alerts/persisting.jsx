@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var Icons = require('./../../icons');
 var Running = Icons['running'];

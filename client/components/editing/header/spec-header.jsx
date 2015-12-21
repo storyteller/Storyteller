@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var {Row, Col} = require('react-bootstrap');
 

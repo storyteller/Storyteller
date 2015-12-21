@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var React = require("react");
 var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
 var domUtils = require('./../../../lib/dom-utils');

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require("react");
 var BigText = require('./../editors/big-text');
 var DeleteGlyph = require('./../delete-glyph');

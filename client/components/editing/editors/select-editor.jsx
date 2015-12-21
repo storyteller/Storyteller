@@ -1,6 +1,3 @@
-/** @jsx React.DOM */
-
-
 var React = require("react");
 var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
