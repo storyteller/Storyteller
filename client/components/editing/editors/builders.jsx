@@ -1,5 +1,7 @@
 var React = require("react");
+
 var changes = require('./../../../lib/model/change-commands');
+
 var Postal = require('postal');
 
 var CellTextBox = require('./textbox-editor');
@@ -94,3 +96,4 @@ builders.get = function(type){
 
 
 module.exports = builders;
+

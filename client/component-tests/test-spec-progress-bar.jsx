@@ -47,13 +47,14 @@ describe('The SpecProgressBar', function(){
 		});
 
 		var progressBar = component.getDOMNode().children[1];
+		var span = $('span', progressBar).get(0);
 
 		expect(progressBar.tagName).to.equal('DIV');
 		expect(progressBar.className).to.equal('progress');
 		expect(progressBar.firstChild.className).to.equal('progress-bar');
 
-		expect(progressBar.getAttribute('min')).to.equal('0');
-		expect(progressBar.getAttribute('max')).to.equal('10');
+		expect(span.getAttribute('min')).to.equal('0');
+		expect(span.getAttribute('max')).to.equal('10');
 	});
 
 	it('shows as succeeding if non-zero success counts with no wrongs or errors', function(){

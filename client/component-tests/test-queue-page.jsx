@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var Postal = require('postal');
 var Hierarchy = require('./../lib/stores/hierarchy');
 var $ = require('jquery');
-
+var TestUtils = require('react-addons-test-utils');
 
 var QueuePage = require('./../components/queue/queue-page');
 
@@ -96,7 +96,7 @@ describe('The Queue Page', function(){
 		var element = component.getDOMNode();
 		var specElement = $('#queued-spec-general2', element);
 
-		React.addons.TestUtils.Simulate.click($('a.explorer-command', specElement).get(0));
+		TestUtils.Simulate.click($('a.explorer-command', specElement).get(0));
 
 		var message = findPublishedMessage('cancel-spec');
 		expect(message.id).to.equal('general2');

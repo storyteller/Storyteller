@@ -3,8 +3,11 @@ import Postal from 'postal';
 import ExpirationPeriod from './../components/editing/header/expiration-period';
 import {expect} from 'chai';
 import {iit, ddescribe} from './test-helpers';
-import {range} from '../lib/array-helpers';
 import {OverlayTrigger, Tooltip} from 'react-bootstrap';
+
+function range (begin, end) {
+  return Array.from(Array(end + 1).keys()).slice(begin);
+}
 
 let listener = {
   events: [],

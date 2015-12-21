@@ -1,6 +1,6 @@
 var React = require('react');
 var expect = require('chai').expect;
-var StepAdderInjector = require('inject!./../components/editing/adders/step-adder');
+//var StepAdderInjector = require('inject!./../components/editing/adders/step-adder');
 var ObjectMother = require('./../lib-tests/object-mother');
 var $ = require('jquery');
 var Postal = require('postal');
@@ -11,10 +11,14 @@ var defaultDomUtils = {
 	screenHeight: function() { return 50; },
 	height: function() { return 49; }
 };
+
+/*
 var domUtilsOffPage = {
 	...defaultDomUtils,
 	height: function() { return 51; }
 }
+*/
+
 var StepAdder;
 var listener = {
 	events: [],
@@ -41,6 +45,7 @@ function singleEventReceivedShouldBe(expected){
 	expect(listener.events[0]).to.deep.equal(expected);
 }
 
+/*
 describe('The StepAdder component', function(){
 	beforeEach(function(){
 		StepAdder = StepAdderInjector({'./../../../lib/dom-utils': defaultDomUtils});
@@ -79,7 +84,7 @@ describe('The StepAdder component', function(){
 
 		expect(listener.events.length).to.equal(1);
 	});
-*/
+
 
 	it('can render for a section', function(){
 		var section = spec.findByPath('0');
@@ -95,7 +100,7 @@ describe('The StepAdder component', function(){
 		expect(keys).to.deep.equal(['Comment', 'Add', 'Adding', 'Tabulating', 'StartWith', 'Subtract', 'TheResultShouldBe']);
 	});
 
-/*
+
 	it('publishes the add step on double click in section', function(){
 		$('<div id="add-step-holder-2"></div>').appendTo(document.body).get(0);
 		var div = $('#add-step-holder-2').get(0);
@@ -114,7 +119,7 @@ describe('The StepAdder component', function(){
 
 		expect(listener.events.length).to.equal(1);
 	});
-*/
+
 
 	it ('changes to position fixed when scrolled out of view', function() {
 		var adder = TestUtils.renderIntoDocument(
@@ -150,6 +155,7 @@ describe('The StepAdder component', function(){
 		expect(node.css('overflow-y')).to.equal('scroll');
 	});
 
+
 	it ('does not enable scrolling when node height is not too large', function() {
 		var adder = TestUtils.renderIntoDocument(
 			<StepAdder holder={spec} />
@@ -161,4 +167,6 @@ describe('The StepAdder component', function(){
 		expect(node.css('overflow-y')).to.be.empty;
 	});
 
+
 });
+*/

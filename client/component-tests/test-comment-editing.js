@@ -32,23 +32,7 @@ describe('Comment Editing', function(){
 			expect(driver.value(search)).to.equal('foo');
 		});
 
-		/* You need to test this manually, but it does work at least
-		it.only('can edit a comment', function(){
-			var id = spec.findByPath('1').id;
-			driver.click('#' + id + ' span.comment-text');
 
-			$(driver.div, '#' + id + ' textarea').keypress('different comment text');
-
-			// Moving off to make it commit
-			cellFor('0.0', 'x').click();	
-
-			// In the UI
-			var text = driver.html('#' + id + ' .comment-text');
-			expect(text).to.equal('different comment text');
-
-			expect(spec.find(id).arg.value).to.equal('different comment text');
-		});
-*/
 
 		it('can delete a comment', function(){
 			var id = spec.findByPath('1').id;
@@ -65,6 +49,7 @@ describe('Comment Editing', function(){
 
 
 });
+
 
 
 

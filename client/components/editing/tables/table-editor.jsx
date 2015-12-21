@@ -32,7 +32,15 @@ var TableRowAdder = React.createClass({
 		}
 
 
-		return (<Button ref="adder" tabIndex="0" bsSize="small" title="Click to add a new row to this table, press enter or alt+ins" className={tableClass} onClick={this.props.addOnClick} ref='adder'>Add Row</Button>);
+		return (
+			<Button 
+				ref="adder" 
+				tabIndex="0" 
+				bsSize="small" 
+				title="Click to add a new row to this table, press enter or alt+ins" 
+				className={tableClass} 
+				onClick={this.props.addOnClick} >Add Row</Button>
+				);
 	}
 });
 

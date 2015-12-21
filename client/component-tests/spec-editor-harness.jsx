@@ -6,12 +6,13 @@ var expect = require('chai').expect;
 
 var loader = require('./../components/editing/component-loader').editing;
 
-
 var SpecEditor = require('../components/editing/spec-editor');
 var Hierarchy = require('../lib/stores/hierarchy');
 var FixtureLibrary = require('../lib/fixtures/fixture-library');
 var CellDriver = require('./cell-driver');
 var ResultCache = require('./../lib/stores/result-cache');
+
+
 
 function IntegrationDriver(fixtureData, mode, results){
 	this.library = new FixtureLibrary(fixtureData);
@@ -65,7 +66,10 @@ function IntegrationDriver(fixtureData, mode, results){
 
 		var div = document.createElement('div');
 		document.documentElement.appendChild(div);
-		this.editor = React.render(SpecEditor({id: data.id, mode: mode || 'editing'}), div);
+
+		var component = ( <SpecEditor id={data.id} mode={mode || 'editing'} />);
+
+		this.editor = React.render(component, div);
 		this.getNode = () => this.editor.getDOMNode();
 		this.presenter = this.editor.presenter;
 		this.spec = this.presenter.spec;

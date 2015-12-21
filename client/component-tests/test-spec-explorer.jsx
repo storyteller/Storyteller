@@ -45,7 +45,9 @@ describe('Spec Explorer', function(){
 		div = document.createElement('div');
 		document.documentElement.appendChild(div);
 
-		component = React.render(SpecExplorer({params: null}), div);
+		var c = ( <SpecExplorer params={null} /> );
+
+		component = React.render(c, div);
 	});
 
 	function badgeText(id){
@@ -169,7 +171,8 @@ describe('Suite Explorer', function(){
 		div = document.createElement('div');
 		document.documentElement.appendChild(div);
 
-		component = React.render(SuiteExplorer({params: {splat: ['Sentences']}}), div);
+		var c = ( <SuiteExplorer params={{splat: ['Sentences']}} /> );
+		component = React.render(c, div);
 	});
 
 	function badgeText(id){

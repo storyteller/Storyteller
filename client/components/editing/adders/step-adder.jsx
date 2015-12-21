@@ -34,8 +34,8 @@ module.exports = React.createClass({
 		window.addEventListener('scroll', this.handleScroll);
 
 		this.setState({
-			offsetTop: domUtils.offsetTop(node),
-			width: domUtils.width(node)
+			offsetTop: domUtils.default.offsetTop(node),
+			width: domUtils.default.width(node)
 		});
 	},
 

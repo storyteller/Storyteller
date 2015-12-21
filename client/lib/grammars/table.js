@@ -1,3 +1,5 @@
+"use strict";
+
 var Step = require('./../model/step');
 var CompositeGrammar = require('./composite-grammar');
 var StepHolder = require('./../model/step-holder');

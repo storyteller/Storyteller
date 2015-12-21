@@ -1,5 +1,7 @@
 var should = require('chai').should();
-var builders = require('../components/editing/editors/builders');
+
+var builders = require('./../components/editing/editors/builders');
+
 
 describe('Building an editor', function() {
   function undefinedEditor() {
@@ -23,3 +25,4 @@ describe('Building an editor', function() {
     builders.findEditor(null).should.equal(builders['text']);
   });
 });
+

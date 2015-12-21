@@ -1,3 +1,5 @@
+"use strict";
+
 var React = require('react');
 var _ = require('lodash');
 var {TabbedArea, TabPane} = require('react-bootstrap');
@@ -79,6 +81,7 @@ results.add('row', 'tables/result-row');
 results.add('errorBox', 'lines/error-box');
 results.add('matchedRow', 'tables/set-verification-row');
 results.add('extraRow', 'tables/extra-row');
+
 results.add('comment', 'comments/comment');
 results.add('successCell', 'cells/success-cell');
 results.add('failedCell', 'cells/failure-cell');
@@ -88,6 +91,7 @@ results.add('perfTable', 'logging/perf-table');
 results.add('logComponent', 'logging/log-component');
 results.add('setResultsTable', 'tables/set-results-table');
 results.add('noResults', 'alerts/no-results');
+
 results.checked = () => {
 	return ( <CheckboxIcon /> );
 };
@@ -113,3 +117,4 @@ module.exports = {
 	preview: preview,
 	results: results
 }
+
