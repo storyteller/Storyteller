@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
@@ -15,7 +16,7 @@ module.exports = React.createClass({
 
 	handleChange: function(event) {
 		if (!event){
-			var value = this.getDOMNode.getAttribute('value');
+			var value = ReactDOM.findDOMNode(this).getAttribute('value');
 		}
 		else {
 			var value = event.target.value;
@@ -37,19 +38,18 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount: function(){
-		var element = this.getDOMNode();
+		var element = ReactDOM.findDOMNode(this);
 		element.focus();
 
 		if (this.state.value){
 			element.setSelectionRange(0, this.state.value.length);
 		}
-		
 
 		this.subscription = Postal.subscribe({
 			channel: 'editor',
 			topic: 'apply-changes',
 			callback: (data, envelope) => {
-				var value = this.getDOMNode().value;
+				var value = ReactDOM.findDOMNode(this).value;
 				if (value != this.state.value){
 					this.publishChange(value);
 				}

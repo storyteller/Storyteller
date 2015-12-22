@@ -1,10 +1,11 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Search = require('./../../lib/presentation/search');
 
 var SuiteAndSpecLookup = React.createClass({
 	componentDidMount(){
-		var element = this.getDOMNode();
+		var element = ReactDOM.findDOMNode(this);
 		var input = element.firstChild;
 
 		var finder = function(query, callback){

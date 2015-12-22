@@ -2,6 +2,7 @@ var React = require("react");
 var {Button, ButtonGroup, ListGroupItem, ListGroup} = require('react-bootstrap');
 var Postal = require('postal');
 var changes = require('./../../../lib/model/change-commands');
+var uuid = require('node-uuid');
 
 
 var OptionalColumn = React.createClass({
@@ -17,9 +18,11 @@ var OptionalColumn = React.createClass({
 			e.stopPropagation();
 		}
 
+		var onChange = e => {};
+
 		return (
-			<ListGroupItem onClick={onClick} disabled={!this.props.active}>
-				<input onClick={onClick} type="checkbox" checked={this.props.active}  />
+			<ListGroupItem key={this.props.cell.key} onClick={onClick} disabled={!this.props.active}>
+				<input onClick={onClick} onChange={onChange} type="checkbox" checked={this.props.active}  />
 				<span>{this.props.header}</span>
 			</ListGroupItem>
 		);
@@ -31,7 +34,7 @@ module.exports = React.createClass({
 		var optionals = null;
 		if (this.props.optionals.length > 0){
 			var buttons = this.props.optionals.map(opt => {
-				return (<OptionalColumn section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
+				return (<OptionalColumn key={uuid.v4()} section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
 			});
 
 			optionals = (

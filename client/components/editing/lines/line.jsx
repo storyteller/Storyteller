@@ -1,4 +1,5 @@
 var React = require("react");
+var uuid = require('node-uuid');
 
 var statusClass = {
 	success: 'bg-success',
@@ -20,7 +21,7 @@ module.exports = React.createClass({
 		}
 		
 		return (
-			<div className={clazz}>{errorIcon}{this.props.components}</div>
+			<div key={uuid.v4()} className={clazz}>{errorIcon}{this.props.components}</div>
 		);
 	}
 });

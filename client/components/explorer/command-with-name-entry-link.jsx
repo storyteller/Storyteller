@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 var Postal = require("postal");
 
 var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
@@ -9,7 +10,7 @@ var CommandWithNameEntryLink  = React.createClass({
 
 	componentDidUpdate: function(){
 		if (this.state.isModalOpen){
-			var element = this.getDOMNode();
+			var element = ReactDOM.findDOMNode(this);
 			$('#modal-name').focus();
 		}
 	},

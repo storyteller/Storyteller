@@ -1,11 +1,12 @@
 var React = require("react");
+var uuid = require('node-uuid');
 
 var ErrorBox = React.createClass({
 	render: function(){
 		var title = null;
 		if (this.props.title){
 			title = (
-				<span>{this.props.title}</span>
+				<span key={uuid.v4()}>{this.props.title}</span>
 			);
 		}
 
@@ -15,7 +16,7 @@ var ErrorBox = React.createClass({
 
 		if (title){
 			return (
-				<pre style={style} className="error bg-warning">
+				<pre key={uuid.v4()} style={style} className="error bg-warning">
 					{title}
 					<hr />
 					{this.props.error}
@@ -24,7 +25,7 @@ var ErrorBox = React.createClass({
 		}
 
 		return (
-			<pre style={style} className="error bg-warning">
+			<pre key={uuid.v4()} style={style} className="error bg-warning">
 				{this.props.error}
 			</pre>
 		);

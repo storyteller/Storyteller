@@ -25,7 +25,7 @@ var SpecHeader = React.createClass({
 
 					</h3>
 
-					<p>
+					<div>
 						<SpecCommands spec={this.props.spec}/>
 						<span className="pull-right">
 							
@@ -34,7 +34,7 @@ var SpecHeader = React.createClass({
 
 							<LifecycleButton spec={this.props.spec} />
 						</span>
-					</p>
+					</div>
 
 					<hr />
 				</Col>

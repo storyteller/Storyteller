@@ -29,7 +29,7 @@ var ExpirationPeriod = React.createClass({
   },
 
   getTooltip(){
-    return <Tooltip animation={true}>This button will bump the "Last Updated" date.</Tooltip>;
+    return <Tooltip id="expiration-tooltip" animation={true}>This button will bump the "Last Updated" date.</Tooltip>;
   },
 
   getSelect(){

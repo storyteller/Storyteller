@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
@@ -25,7 +26,7 @@ module.exports = React.createClass({
 
 
 	toggle: function(){
-		var value = this.getDOMNode().checked;
+		var value = ReactDOM.findDOMNode(this).checked;
 		this.setState({value: value});
 		this.publishChange();
 	},
@@ -47,7 +48,7 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount: function(){
-		var element = this.getDOMNode();
+		var element = ReactDOM.findDOMNode(this);
 		element.focus();
 
 		var component = this;

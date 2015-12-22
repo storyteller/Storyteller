@@ -19,7 +19,7 @@ var BodyRow = React.createClass({
 			}
 
 			return (
-				<TableCell cell={cell} value={value} active={active} id={this.props.step.id} />
+				<TableCell key={cell.key} cell={cell} value={value} active={active} id={this.props.step.id} />
 			)
 		});
 

@@ -7,10 +7,10 @@ var buildItem = function(item){
 	var children = item.children.map(x => buildItem(x));
 
 	if (item.active){
-		return ( <ActiveOutlineItem title={item.title} children={children}/> );
+		return ( <ActiveOutlineItem key={item.id} title={item.title} children={children}/> );
 	}
 	else {
-		return ( <OutlineItem title={item.title} id={item.id} children={children} /> );
+		return ( <OutlineItem key={item.id} title={item.title} id={item.id} children={children} /> );
 	}
 }
 

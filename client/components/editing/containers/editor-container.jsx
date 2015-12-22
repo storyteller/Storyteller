@@ -3,6 +3,7 @@ var StepAdderPlaceHolder = require('./../adders/step-adder-placeholder');
 var StepAdder = require('./../adders/step-adder');
 var DeleteGlyph = require('./../delete-glyph');
 var ReorderGlyph = require('./../reorder-glyph');
+var uuid = require('node-uuid');
 
 module.exports = React.createClass({
 	render: function(){
@@ -15,7 +16,7 @@ module.exports = React.createClass({
 		var deleteSubject = this.props.deleteSubject || this.props.subject;
 
 		return (
-			<div className={panelClass} id={this.props.subject.id}>
+			<div key={uuid.v4()} className={panelClass} id={this.props.subject.id}>
 			  <div className="panel-heading">
 			    <h3 className="panel-title">
 			    	<DeleteGlyph step={deleteSubject}/>

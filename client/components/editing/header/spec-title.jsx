@@ -1,10 +1,11 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
 var SpecTitleEditor = React.createClass({
 	componentDidMount(){
-		var element = this.getDOMNode();
+		var element = ReactDOM.findDOMNode(this);
 		element.focus();
 
 		if (this.props.title){
@@ -30,7 +31,7 @@ var SpecTitle = React.createClass({
 
 	handleChange(event) {
 		if (!event){
-			var title = this.getDOMNode().getAttribute('value');
+			var title = ReactDOM.findDOMNode(this).getAttribute('value');
 		}
 		else {
 			var title = event.target.value;

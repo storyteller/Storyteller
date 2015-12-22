@@ -1,6 +1,8 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
 var domUtils = require('./../../../lib/dom-utils');
+var uuid = require('node-uuid');
 
 var AddStepItem = React.createClass({
 	render: function(){
@@ -29,7 +31,7 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount: function() {
-		var node = this.getDOMNode();
+		var node = ReactDOM.findDOMNode(this);
 
 		window.addEventListener('scroll', this.handleScroll);
 
@@ -46,7 +48,7 @@ module.exports = React.createClass({
 	handleScroll: function(event) {
 		var offsetTop = this.state.offsetTop;
 		var scrollOffset = domUtils.scrollTop(window);
-		var node = this.getDOMNode();
+		var node = ReactDOM.findDOMNode(this);
 		var self = this;
 
 		if (offsetTop < scrollOffset) {
@@ -91,7 +93,7 @@ module.exports = React.createClass({
 		var containerStyle = this.state.containerStyle;
 
 		var components = lookup.options.map(x => {
-			return ( <AddStepItem option={x} /> );
+			return ( <AddStepItem key={uuid.v4()} option={x} /> );
 		});
 
 		return (

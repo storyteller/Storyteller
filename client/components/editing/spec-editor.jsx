@@ -59,7 +59,7 @@ var ContextualPane = React.createClass({
 		var contextualControl = this.buildContext();
 
 		return (
-			<Col xs={4} md={4}>
+			<Col key="left" xs={4} md={4}>
 				<RetryCount count={this.props.spec['max-retries']}/>
 				<ExpirationPeriod spec={this.props.spec} disabled={this.props.updatingDate} />
 				<h4>Outline</h4>
@@ -157,7 +157,7 @@ module.exports = React.createClass({
             updatingDate={this.state.updatingDate}
           />
 					
-					<Col xs={8} md={8}>
+					<Col key="right" xs={8} md={8}>
 					    <SpecResultHeader spec={this.state.spec} />
 
 					    <Persisting spec={this.state.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>

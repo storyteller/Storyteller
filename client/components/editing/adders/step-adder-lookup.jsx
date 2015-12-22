@@ -1,11 +1,12 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var _ = require('lodash');
 var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
 var $ = require('jquery');
 
 module.exports = React.createClass({
 	componentDidMount(){
-		var element = this.getDOMNode();
+		var element = ReactDOM.findDOMNode(this);
 		element.scrollIntoView();
 
 		var input = element.firstChild;

@@ -3,6 +3,7 @@
 var React = require('react');
 var _ = require('lodash');
 var {TabbedArea, TabPane} = require('react-bootstrap');
+var uuid = require('node-uuid');
 
 class Loader {
 	constructor(parent){
@@ -14,12 +15,12 @@ class Loader {
 	add(method, path){
 		var Component = require('./' + path);
 		this[method] = function(props){
-			return ( <Component {...props} /> );
+			return ( <Component {...props} key={uuid.v4()} /> );
 		}
 	}
 
 	span(text){
-		return React.DOM.span(null, text);
+		return ( <span key={uuid.v4()}>{text}</span> );
 	}
 
 	chromed(){
