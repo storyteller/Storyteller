@@ -1,5 +1,4 @@
 var React = require("react");
-var Router = require('react-router');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 var _ = require('lodash');
@@ -36,8 +35,6 @@ var GrammarTable = React.createClass({
 });
 
 var FixtureTable = React.createClass({
-	mixins: [Router.State],
-
 	componentDidMount(){
 		this.subscription = Postal.subscribe({
 			channel: 'explorer',
@@ -54,17 +51,8 @@ var FixtureTable = React.createClass({
 		this.subscription.unsubscribe();
 	},
 
-	getInitialState(){
-		var params = this.getParams();
-		var fixtureKey = params.key;
-
-		return {
-			fixtureKey: fixtureKey
-		}
-	},
-
 	render(){
-		var fixture = Hierarchy.fixtures().find(this.state.fixtureKey);
+		var fixture = Hierarchy.fixtures().find(this.props.params.key);
 
 		return (
 			<div>
