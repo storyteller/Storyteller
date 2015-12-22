@@ -26,7 +26,11 @@ config.plugins.push(new webpack.HotModuleReplacementPlugin());
 var jsxLoader = _.find(config.module.loaders, function (entry) {
   return /jsx/.test(entry.test.toString());
 });
-jsxLoader.loader = 'react-hot!' + jsxLoader.loader;
+
+jsxLoader.loaders = ['react-hot', jsxLoader.loader];
+delete jsxLoader.loader;
+
+//jsxLoader.loader = 'react-hot!' + jsxLoader.loader;
 
 var comments = [];
 

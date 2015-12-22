@@ -72,7 +72,8 @@ var SuiteHeader = React.createClass({
 		var openClosed = suite.isExpanded ? <FolderOpen /> : <FolderClosed />;
 		var openClass = suite.isExpanded ? 'open' : 'closed';
 
-		var icon = icons[suite.icon()]({});
+		var Icon = icons[suite.icon()];
+		var icon = (<Icon />);
 
 		return (
 			<div key={suite.path} className={openClass + ' suite-header'}>

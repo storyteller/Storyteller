@@ -22,14 +22,11 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-        { 
-          test: /\.(js|jsx)$/, 
-          loader: 'babel', 
-          exclude: /node_modules/, 
-          query: { 
-            presets: ['react', 'es2015'] 
-          } 
-        },
+      { 
+        test: /\.(js|jsx)$/, 
+        loader: 'babel?{"presets": ["es2015", "react"]}', 
+        exclude: /node_modules/, 
+      },
     ]
   },
   devtool: 'eval'

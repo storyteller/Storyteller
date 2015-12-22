@@ -41,7 +41,8 @@ var SpecLeaf = React.createClass({
 		}
 
 
-		var icon = icons[this.props.spec.icon()]({});
+		var Icon = icons[this.props.spec.icon()];
+		var icon = (<Icon />);
 
 		var clazz = 'spec-name spec-state-' + this.props.spec.state;
 

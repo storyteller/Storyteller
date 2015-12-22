@@ -7,7 +7,8 @@ var StatusButton = React.createClass({
 	render: function(){
 		var icon = null;
 		if (this.props.icon){
-			icon = icons[this.props.icon]({});
+			var Icon = icons[this.props.icon];
+			icon = (<Icon />);
 		}
 
 		var badge = ( <span className="badge pull-right">{this.props.count}</span> );
