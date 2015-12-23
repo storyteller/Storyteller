@@ -1,28 +1,28 @@
 var React = require("react");
 var Postal = require('postal');
 
-var {Button, Modal, ModalTrigger, OverlayMixin} = require('react-bootstrap');
+var {Button, Modal} = require('react-bootstrap');
 
 module.exports = React.createClass({
-	mixins: [OverlayMixin],
-
-	getInitialState: function () {
-		return {
-	    	isModalOpen: false
-	    };
+	getInitialState() {
+		return { showModal: false };
 	},
 
-	handleToggle: function(){
+	close() {
+		this.setState({ showModal: false });
+	},
+
+	handleToggle(){
 		this.setState({
-			isModalOpen: !this.state.isModalOpen
+			showModal: !this.state.showModal
 		});
 	},
 
-	renderOverlay: function () {	
-		if (!this.state.isModalOpen) {
-		  	return <span/>;
-		}
+	open() {
+		this.setState({ showModal: true });
+	},
 
+	render(){
 		var deleteSpec = e => {
 			this.handleToggle();
 
@@ -36,24 +36,23 @@ module.exports = React.createClass({
 		};
 
 		return (
-		    <Modal title="Delete this Specification?" onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
-		        
-		      	<p>Okay to delete specification '{this.props.spec.title}'?</p>
-
-		      </div>
-		      <div className="modal-footer">
-
+			<a href="#" onClick={this.handleToggle} className="explorer-command">delete
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>Delete this Specification?</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body>
+	          	<p>Okay to delete specification '{this.props.spec.title}'?</p>
+	          </Modal.Body>
+	          <Modal.Footer>
 		      	<Button tabIndex="1001" onClick={deleteSpec}>Delete</Button>
 		        <Button onClick={this.handleToggle}>Cancel</Button>
-		      </div>
-		    </Modal>
-		  );
-	},
+	          </Modal.Footer>
+			</Modal>
+			</a>
 
-	render: function(){
-		return (
-			<a href="#" onClick={this.handleToggle} className="explorer-command">delete</a>
+
 		);
 	}
 });
+
