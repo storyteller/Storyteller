@@ -1,5 +1,5 @@
 var React = require("react");
-var {Modal, ModalTrigger, OverlayMixin, Button, NavItem} = require('react-bootstrap');
+var {Modal, Button, NavItem} = require('react-bootstrap');
 var Icons = require('./../icons');
 var SpecAndSuiteLookup = require('./spec-and-suite-lookup');
 var Postal = require('postal');

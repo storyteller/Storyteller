@@ -1,5 +1,5 @@
 var React = require("react");
-var {Button, Modal, ModalTrigger, OverlayMixin} = require('react-bootstrap');
+var {Button, Modal} = require('react-bootstrap');
 var uuid = require('node-uuid');
 var Icons = require('./../icons');
 
