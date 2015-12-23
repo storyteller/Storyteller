@@ -1,62 +1,53 @@
 var React = require("react");
-var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
+var {Modal, ModalTrigger, OverlayMixin, Button, NavItem} = require('react-bootstrap');
 var Icons = require('./../icons');
 var SpecAndSuiteLookup = require('./spec-and-suite-lookup');
 var Postal = require('postal');
 
-var Search = React.createClass({
-	mixins: [OverlayMixin],
 
-	componentDidMount(){
-		Postal.subscribe({
-			channel: 'explorer',
-			topic: 'find',
-			callback: data => {
-				if (!this.state.isModalOpen){
-					this.handleToggle();
-				}
-			}
-		})
+var Search = React.createClass({
+	getInitialState() {
+		return { showModal: false };
 	},
 
-
-	getInitialState() {
-		return {
-	    	isModalOpen: false
-	    };
+	close() {
+		this.setState({ showModal: false });
 	},
 
 	handleToggle(){
 		this.setState({
-			isModalOpen: !this.state.isModalOpen
+			showModal: !this.state.showModal
 		});
 	},
 
-	renderOverlay() {	
-		if (!this.state.isModalOpen) {
-		  	return (<span/>);
-		}
-
-		return (
-		    <Modal title="Search for Specifications or Suites" onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
-		      	<SpecAndSuiteLookup  close={this.handleToggle}/>
-		      </div>
-		      <div className="modal-footer">
-		        <Button onClick={this.handleToggle}>Close</Button>
-		      </div>
-		    </Modal>
-		  );
+	open() {
+		this.setState({ showModal: true });
 	},
 
-	render: function(){
+	render(){
 		var SearchIcon = Icons['search'];
 
 
 		return (
-			<Button bsStyle="link" onClick={this.handleToggle} title="Click to search for a specification or suite"><SearchIcon /> Search</Button>
+			<Button bsStyle="link" onClick={this.handleToggle} title="Click to search for a specification or suite"><SearchIcon /> Search
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>Search for Specifications or Suites</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body>
+	          	<SpecAndSuiteLookup  close={this.handleToggle}/>
+	          </Modal.Body>
+	          <Modal.Footer>
+	          	<Button onClick={this.close}>Close</Button>
+	          </Modal.Footer>
+			</Modal>
+			</Button>
+
+
 		);
 	}
 });
+
+
 
 module.exports = Search;
