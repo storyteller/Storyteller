@@ -1,15 +1,15 @@
 var React = require("react");
 var {Button, Modal, ModalTrigger, OverlayMixin} = require('react-bootstrap');
-
+var uuid = require('node-uuid');
 var Icons = require('./../icons');
 
 var SystemProperties = React.createClass({
 	render: function(){
 		var propDefs = [];
 		var properties = this.props.recycled.properties;
-		for (key in properties){
-			var dt = ( <dt>{key}</dt> );
-			var dd = ( <dd>{properties[key]}</dd> );
+		for (var key in properties){
+			var dt = ( <dt key={uuid.v4()}>{key}</dt> );
+			var dd = ( <dd key={uuid.v4()}>{properties[key]}</dd> );
 
 			propDefs.push(dt);
 			propDefs.push(dd);
@@ -40,44 +40,26 @@ var SystemError = React.createClass({
 	}
 });
 
-
-
 var RecycleState = React.createClass({
-	mixins: [OverlayMixin],
-
-	getInitialState: function () {
-		return {
-	    	isModalOpen: false
-	    };
+	getInitialState() {
+		return { showModal: false };
 	},
 
-	handleToggle: function(){
+	close() {
+		this.setState({ showModal: false });
+	},
+
+	handleToggle(){
 		this.setState({
-			isModalOpen: !this.state.isModalOpen
+			showModal: !this.state.showModal
 		});
 	},
 
-	renderOverlay: function () {	
-		if (!this.state.isModalOpen) {
-		  	return <span/>;
-		}
-
-		return (
-		    <Modal title="System State" onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
-		        
-		      <SystemProperties recycled={this.props.recycled} />
-		      <SystemError recycled={this.props.recycled} />
-
-		      </div>
-		      <div className="modal-footer">
-		        <Button onClick={this.handleToggle}>Close</Button>
-		      </div>
-		    </Modal>
-		  );
+	open() {
+		this.setState({ showModal: true });
 	},
 
-	render: function(){
+	render(){
 		if (this.props.recycling){
 			var Running = Icons['running'];
 		
@@ -97,9 +79,27 @@ var RecycleState = React.createClass({
 
 
 		return (
-			<Button onClick={this.handleToggle} bsStyle={bsStyle}>{text}</Button>
+			<Button onClick={this.handleToggle} bsStyle={bsStyle}>{text}
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>System State</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body>
+			      <SystemProperties recycled={this.props.recycled} />
+			      <SystemError recycled={this.props.recycled} />
+	          </Modal.Body>
+	          <Modal.Footer>
+	          	<Button onClick={this.close}>Close</Button>
+	          </Modal.Footer>
+			</Modal>
+			</Button>
+
+
 		);
 	}
 });
+
+
+
 
 module.exports = RecycleState;
