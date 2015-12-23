@@ -1,7 +1,7 @@
 var React = require("react");
 
 var Postal = require('postal');
-var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
+var {Modal, Button} = require('react-bootstrap');
 var Icons = require('./../icons');
 var KeyboardShortcuts = require('./../../lib/presentation/keyboard-shortcuts');
 
@@ -45,9 +45,7 @@ var Help = React.createClass({
 	}
 });
 
-var HelpIcon = React.createClass({
-	mixins: [OverlayMixin],
-
+var HelpButton = React.createClass({
 	componentDidMount(){
 		Postal.subscribe({
 			channel: 'explorer',
@@ -61,42 +59,47 @@ var HelpIcon = React.createClass({
 	},
 
 	getInitialState() {
-		return {
-	    	isModalOpen: false
-	    };
+		return { showModal: false };
+	},
+
+	close() {
+		this.setState({ showModal: false });
 	},
 
 	handleToggle(){
 		this.setState({
-			isModalOpen: !this.state.isModalOpen
+			showModal: !this.state.showModal
 		});
 	},
 
-	renderOverlay() {	
-		if (!this.state.isModalOpen) {
-		  	return (<span/>);
-		}
-
-		return (
-		    <Modal title="Keyboard Shortcuts and Help" onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
-		      	<Help />
-		      </div>
-		      <div className="modal-footer">
-		        <Button onClick={this.handleToggle}>Close</Button>
-		      </div>
-		    </Modal>
-		  );
+	open() {
+		this.setState({ showModal: true });
 	},
 
-	render: function(){
-		var Help = Icons['help'];
+	render(){
+		var HelpIcon = Icons['help'];
 
 
 		return (
-			<Button id="help-icon" bsStyle="link" onClick={this.handleToggle} title="Click for help and a list of the available keyboard shortcuts"><Help />Help</Button>
+			<Button id="help-icon" bsStyle="link" onClick={this.handleToggle} title="Keyboard Shortcuts and Help"><HelpIcon />Help
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>Keyboard Shortcuts and Help</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body>
+	          	<Help />
+	          </Modal.Body>
+	          <Modal.Footer>
+	          	<Button onClick={this.close}>Close</Button>
+	          </Modal.Footer>
+			</Modal>
+			</Button>
+
+
 		);
 	}
 });
 
-module.exports = HelpIcon;
+
+
+module.exports = HelpButton;

@@ -6,6 +6,18 @@ var Postal = require('postal');
 
 
 var Search = React.createClass({
+	componentDidMount(){
+		Postal.subscribe({
+			channel: 'explorer',
+			topic: 'find',
+			callback: data => {
+				if (!this.state.showModal){
+					this.open();
+				}
+			}
+		});
+	},
+
 	getInitialState() {
 		return { showModal: false };
 	},
