@@ -1,17 +1,8 @@
 var React = require("react");
-var {Button, Modal, ModalTrigger, OverlayMixin} = require('react-bootstrap');
+var {Button, Modal} = require('react-bootstrap');
 var Postal = require('postal');
 
 var RuntimeError = React.createClass({
-	mixins: [OverlayMixin],
-
-	getInitialState: function () {
-		return {
-	    	isModalOpen: false,
-	    	error: null
-	    };
-	},
-
 	componentDidMount: function(){
 		Postal.subscribe({
 			channel: 'engine',
@@ -19,7 +10,7 @@ var RuntimeError = React.createClass({
 			callback: data => {
 				this.setState({
 					error: data.error,
-					isModalOpen: true
+					showModal: true
 				});
 			}
 		});
@@ -29,49 +20,54 @@ var RuntimeError = React.createClass({
 			topic: 'system-recycled',
 			callback: () => {
 				this.setState({
-					isModalOpen: false,
+					showModal: false,
 					error: null
 				});
 			}
 		})
 	},
 
-	handleToggle: function(){
+	getInitialState() {
+		return { showModal: false, error: null };
+	},
+
+	close() {
+		this.setState({ showModal: false });
+	},
+
+	handleToggle(){
 		this.setState({
-			isModalOpen: !this.state.isModalOpen
+			showModal: !this.state.showModal
 		});
 	},
 
-	renderOverlay: function () {	
-		if (!this.state.isModalOpen) {
-		  	return (<span/>);
-		}
-
-		return (
-		    <Modal style={{width: '80%'}} title="Runtime Error!" onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
-		        
-		      <pre style={{width: '100%', overflow: 'auto'}}>
-		      	{this.state.error}
-		      </pre>
-
-		      </div>
-		      <div className="modal-footer">
-		        <Button onClick={this.handleToggle}>Close</Button>
-		      </div>
-		    </Modal>
-		  );
+	open() {
+		this.setState({ showModal: true });
 	},
 
-	render: function(){
-		if (this.state.error == null){
-			return (<span/>);
-		}
-		
+	render(){
 		return (
-			<Button onClick={this.handleToggle} bsStyle="danger">Runtime Error!</Button>
+			<Button onClick={this.handleToggle} bsStyle="danger">Runtime Error!
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>Runtime Error!</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body style={{width: '80%'}} >
+			      <pre style={{width: '100%', overflow: 'auto'}}>
+			      	{this.state.error}
+			      </pre>
+	          </Modal.Body>
+	          <Modal.Footer>
+	          	<Button onClick={this.close}>Close</Button>
+	          </Modal.Footer>
+			</Modal>
+			</Button>
+
+
 		);
 	}
 });
+
+
 
 module.exports = RuntimeError;
