@@ -1,47 +1,52 @@
 var React = require("react");
 
-var {Button, Modal, ModalTrigger, OverlayMixin} = require('react-bootstrap');
+var {Button, Modal, ModalTrigger} = require('react-bootstrap');
 
 var ErrorBox = require('./../lines/error-box');
 
 var ErrorCell = React.createClass({
-	mixins: [OverlayMixin],
-
-	getInitialState: function () {
-		return {
-	    	isModalOpen: false
-	    };
+	getInitialState() {
+		return { showModal: false };
 	},
 
-	handleToggle: function(){
+	close() {
+		this.setState({ showModal: false });
+	},
+
+	handleToggle(){
 		this.setState({
-			isModalOpen: !this.state.isModalOpen
+			showModal: !this.state.showModal
 		});
 	},
 
-	renderOverlay: function () {	
-		if (!this.state.isModalOpen) {
-		  	return <span/>;
-		}
-
-		var title = "Cell Error in '" + this.props.cell.key + "'";
-
-		return (
-		    <Modal title={title} onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
-		        
-		      	<ErrorBox error={this.props.error} />
-
-		      </div>
-		    </Modal>
-		  );
+	open() {
+		this.setState({ showModal: true });
 	},
 
-	render: function(){
+	render(){
+		var title = "Cell Error in '" + this.props.cell.key + "'";
+
+
+
 		return (
-			<Button bsSize="xsmall" onClick={this.handleToggle} bsStyle="warning">{this.props.value} (Error!)</Button>
+			<Button bsSize="xsmall" onClick={this.handleToggle} bsStyle="warning">{this.props.value} (Error!)
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>{title}</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body>
+	          	<ErrorBox error={this.props.error} />
+	          </Modal.Body>
+	          <Modal.Footer>
+	          	<Button onClick={this.close}>Close</Button>
+	          </Modal.Footer>
+			</Modal>
+			</Button>
+
+
 		);
 	}
 });
+
 
 module.exports = ErrorCell;
