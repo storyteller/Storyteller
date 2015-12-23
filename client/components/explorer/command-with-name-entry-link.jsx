@@ -2,14 +2,12 @@ var React = require("react");
 var ReactDOM = require('react-dom');
 var Postal = require("postal");
 
-var {Modal, ModalTrigger, OverlayMixin, Button} = require('react-bootstrap');
+var {Modal, ModalTrigger, Button} = require('react-bootstrap');
 var $ = require('jquery');
 
 var CommandWithNameEntryLink  = React.createClass({
-	mixins: [OverlayMixin],
-
 	componentDidUpdate: function(){
-		if (this.state.isModalOpen){
+		if (this.state.showModal){
 			var element = ReactDOM.findDOMNode(this);
 			$('#modal-name').focus();
 		}
@@ -18,25 +16,27 @@ var CommandWithNameEntryLink  = React.createClass({
 	getInitialState: function () {
 		var value = this.props.value;
 		return {
-	    	isModalOpen: false,
+	    	showModal: false,
 	    	buttonDisabled: !(value && value.length > 0),
 	    	name: value 
 	    };
 	},
 
-	handleToggle: function(e){
-		this.setState({
-			isModalOpen: !this.state.isModalOpen
-		});
-
-		e.preventDefault();
+	close() {
+		this.setState({ showModal: false });
 	},
 
-	renderOverlay: function () {	
-		if (!this.state.isModalOpen) {
-		  	return <span/>;
-		}
+	handleToggle(){
+		this.setState({
+			showModal: !this.state.showModal
+		});
+	},
 
+	open() {
+		this.setState({ showModal: true });
+	},
+
+	render(){
 		var onTextEntry = e => {
 			var value = e.target.value;
 			var canDo = (value && value.length > 0);
@@ -67,12 +67,16 @@ var CommandWithNameEntryLink  = React.createClass({
 			}
 		}
 
-		return (
-		    <Modal title={this.props.title} onRequestHide={this.handleToggle}>
-		      <div className="modal-body">
 
+		return (
+			<a href="#" title={this.props.title} onClick={this.handleToggle} className="explorer-command">{this.props.text}
+			<Modal show={this.state.showModal} onHide={this.close}>
+	          <Modal.Header closeButton>
+	            <Modal.Title>{this.props.title}</Modal.Title>
+	          </Modal.Header>
+	          <Modal.Body>
 	      		<div className="form-group">
-    					<label for="modal-name">Name:</label>
+    					<label forHtml="modal-name">Name:</label>
     					<input 
     						onKeyPress={onKeyDown}
     						tabIndex="1000" 
@@ -82,23 +86,20 @@ var CommandWithNameEntryLink  = React.createClass({
     						id="modal-name" 
     						placeholder={this.props.placeholder} 
     						value={this.state.name} />
-  					</div>
-
-		      </div>
-
-		      <div className="modal-footer">
+  				</div>
+	          </Modal.Body>
+	          <Modal.Footer>
 		      	<Button tabIndex="1001" disabled={this.state.buttonDisabled} onClick={apply} bsStyle="primary">{this.props.commandText}</Button> 
 		        <Button onClick={this.handleToggle}>Cancel</Button>
-		      </div>
-		    </Modal>
-		  );
-	},
+	          </Modal.Footer>
+			</Modal>
+			</a>
 
-	render: function(){
-		return (
-			<a href="#" title={this.props.title} onClick={this.handleToggle} className="explorer-command">{this.props.text}</a>
+
 		);
 	}
 });
+
+
 
 module.exports = CommandWithNameEntryLink;
