@@ -17,7 +17,7 @@ module.exports = React.createClass({
 		}
 
 		if (statusClass[this.props.status] == statusClass.failed) {
-			errorIcon = <i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>; 
+			errorIcon = <i key="error-icon" className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>; 
 		}
 		
 		return (

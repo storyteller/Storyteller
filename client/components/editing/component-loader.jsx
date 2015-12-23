@@ -2,7 +2,7 @@
 
 var React = require('react');
 var _ = require('lodash');
-var {TabbedArea, TabPane} = require('react-bootstrap');
+var {Tabs, Tab} = require('react-bootstrap');
 var uuid = require('node-uuid');
 
 class Loader {
@@ -94,11 +94,11 @@ results.add('setResultsTable', 'tables/set-results-table');
 results.add('noResults', 'alerts/no-results');
 
 results.checked = () => {
-	return ( <CheckboxIcon /> );
+	return ( <CheckboxIcon key="check" /> );
 };
 
 results.tabbedArea = props => {
-	return (<TabbedArea {...props} /> )
+	return (<Tabs key="result-tabs" {...props} /> )
 };
 
 results.tab = (inner, key, title) => {
@@ -107,7 +107,7 @@ results.tab = (inner, key, title) => {
 		children = inner;
 	}
 
-	return (<TabPane children={children} eventKey={key} tab={title} />);
+	return (<Tab key={uuid.v4()} children={children} eventKey={key} tab={title} />);
 };
 
 results.stepAdder = x => null;

@@ -1,4 +1,5 @@
 var React = require("react");
+var uuid = require('node-uuid');
 
 var PerfRow = React.createClass({
 	render: function(){
@@ -18,7 +19,7 @@ var PerfRow = React.createClass({
 var PerfTable = React.createClass({
 	render: function(){
 		var rows = this.props.records.map(function(r){
-			return PerfRow(r);
+			return ( <PerfRow key={uuid.v4()}  {...r} />);
 		});
 
 		return (
@@ -29,6 +30,7 @@ var PerfTable = React.createClass({
 			<h5>Execution Timing <small>all timings in milliseconds</small></h5>
 
 			<table className="table table-striped">
+				<thead>
 				<tr>
 					<th>Type</th>
 					<th>Subject</th>
@@ -36,7 +38,10 @@ var PerfTable = React.createClass({
 					<th>End</th>
 					<th>Duration</th>
 				</tr>
+				</thead>
+				<tbody>
 				{rows}
+				</tbody>
 			</table>
 
 

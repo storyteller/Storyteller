@@ -37,6 +37,7 @@ namespace ST.Client
 
             _document.Add("div").Id("header-container");
             _document.Add("div").Id("body-pane").AddClass("container");
+            _document.Add("div").Id("main");
 
             if (File.Exists(_files.RootPath.AppendPath("public", "stylesheets", "storyteller.css")))
             {
