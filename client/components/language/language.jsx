@@ -2,6 +2,7 @@ var React = require("react");
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 var _ = require('lodash');
+var uuid = require('node-uuid');
 
 
 var FixtureTable = React.createClass({
@@ -17,7 +18,7 @@ var FixtureTable = React.createClass({
 
 
 			return (
-				<tr className={clazz}>
+				<tr key={uuid.v4()} className={clazz}>
 					<td><a href={href}>{x.title}</a></td>
 					<td>{x.implementation}</td>
 					<td style={{textAlign: 'right'}}>{x.errorCount()}</td>

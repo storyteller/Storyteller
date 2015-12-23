@@ -46,6 +46,11 @@ var RuntimeError = React.createClass({
 	},
 
 	render(){
+		if (this.state.error == null){
+			return (<span/>);
+		}
+
+
 		return (
 			<Button onClick={this.handleToggle} bsStyle="danger">Runtime Error!
 			<Modal show={this.state.showModal} onHide={this.close}>

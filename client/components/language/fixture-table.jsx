@@ -2,6 +2,7 @@ var React = require("react");
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 var _ = require('lodash');
+var uuid = require('node-uuid');
 
 var GrammarTable = React.createClass({
 
@@ -10,7 +11,7 @@ var GrammarTable = React.createClass({
 
 		var rows = grammars.map(x => {
 			return (
-				<tr>
+				<tr key={uuid.v4()}>
 					<td>{x.title}</td>
 					<td>{x.type}</td>
 				</tr>
@@ -55,7 +56,7 @@ var FixtureTable = React.createClass({
 		var fixture = Hierarchy.fixtures().find(this.props.params.key);
 
 		return (
-			<div>
+			<div key={uuid.v4()}>
 				<h2>Fixture '{fixture.title}' ({fixture.implementation})</h2>
 				<hr />
 				<GrammarTable fixture={fixture} />
