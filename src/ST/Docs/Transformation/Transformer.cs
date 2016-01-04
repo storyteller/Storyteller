@@ -29,7 +29,7 @@ namespace ST.Docs.Transformation
 
             _handlers.OnMissing = key =>
             {
-                throw new ArgumentOutOfRangeException("key", key,
+                throw new ArgumentOutOfRangeException(nameof(key), key,
                     "No transformation handler is available for '" + key + "'");
             };
         }

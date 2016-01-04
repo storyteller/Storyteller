@@ -33,7 +33,7 @@ namespace ST.Docs.Transformation
 
         public HtmlTag TagForSample(string sampleName)
         {
-            var sample = _cache.Find(sampleName);
+            var sample = _cache.Find(sampleName.Trim());
             return sample == null ? (HtmlTag) new MissingSampleTag(sampleName) : new SampleTag(sample);
         }
     }
