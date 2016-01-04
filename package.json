@@ -27,6 +27,7 @@
     "body-parser": "^1.14.2",
     "chai": "^3.4.1",
     "express": "^4.13.3",
+    "fs-extra": "^0.26.3",
     "growl": "^1.8.1",
     "history": "^1.13.1",
     "jquery": "^2.1.4",
