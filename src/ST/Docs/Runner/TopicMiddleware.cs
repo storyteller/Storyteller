@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuMVC.Core.Assets;
+using FubuMVC.Core.Http;
 using FubuMVC.Core.Http.Owin;
 using FubuMVC.Core.Http.Owin.Middleware;
 using HtmlTags;
@@ -47,9 +48,11 @@ namespace ST.Docs.Runner
                 {
                     var response = new OwinHttpResponse(environment);
                     response.WriteContentType("text/javascript");
-                    new AssetSettings().Headers.Each((key, func) => response.AppendHeader(key, func()));
+
                     response.Write(_topicJS);
 
+
+                   
                     response.Flush();
                 });
             }
@@ -64,6 +67,11 @@ namespace ST.Docs.Runner
             {
                 var response = new OwinHttpResponse(environment);
                 response.WriteContentType("text/html");
+
+                response.AppendHeader(HttpGeneralHeaders.CacheControl, "no-cache, no-store, must-revalidate");
+                response.AppendHeader(HttpResponseHeaders.Pragma, "no-cache");
+                response.AppendHeader(HttpResponseHeaders.Expires, "0");
+
 
                 var html = GenerateHtml(topic);
 

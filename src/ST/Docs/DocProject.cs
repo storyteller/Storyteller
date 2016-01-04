@@ -128,6 +128,8 @@ namespace ST.Docs
             });
 
             registry.StructureMap(_container);
+            registry.Mode = FubuModeExtensions.Development;
+
             return registry.ToRuntime();
         }
 
