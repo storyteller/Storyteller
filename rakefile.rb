@@ -64,8 +64,9 @@ end
 
 desc 'Compile the code'
 task :compile => [:npm, :clean, :version] do
-	sh "paket.exe install"
-	sh "C:/Windows/Microsoft.NET/Framework/v4.0.30319/msbuild.exe src/Storyteller.sln   /property:Configuration=#{COMPILE_TARGET} /v:m /t:rebuild /nr:False /maxcpucount:2"
+	sh "paket.exe restore"
+	msbuild = '"C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe"'
+	sh "#{msbuild} src/Storyteller.sln   /property:Configuration=#{COMPILE_TARGET} /v:m /t:rebuild /nr:False /maxcpucount:2"
 end
 
 desc 'Run the unit tests'

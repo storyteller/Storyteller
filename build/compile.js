@@ -2,12 +2,13 @@ var path = require('path');
 var fs = require('fs');
 
 function findPath() {
-  var file = path.join('C:', 'Windows', 'Microsoft.NET', 'Framework', 'v4.0.30319', 'MSBuild.exe');
+  // msbuild = '"C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe"'
+  var file = path.join('C:', 'Program Files (x86)', 'MSBuild', '14.0', 'Bin', 'MSBuild.exe');
   if (fs.existsSync(file)) return file;
 
   console.log('Could not find ' + file + ', falling through');
 
-  file = path.join('C:', 'Program Files', 'MSBuild', '12.0', 'Bin/MSBuild.exe');
+  file = path.join('C:', 'Program Files', 'MSBuild', '14.0', 'Bin/MSBuild.exe');
   if (fs.existsSync(file)){
     return file;
   }
