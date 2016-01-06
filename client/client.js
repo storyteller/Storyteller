@@ -35,14 +35,23 @@ var Communicator = require('./lib/communicator');
 
 var startRouting = require('./components/app');
 
-require('./lib/stores/hierarchy').reset(); // just forcing it to get loaded
+var store = require('./lib/stores/hierarchy').reset(); // just forcing it to get loaded
+
+Postal.subscribe({
+   channel: 'engine',
+   topic: '*',
+   callback: (data, env) => {
+       data.type = env.topic;
+       store.dispatch(data);
+   } 
+});
+
 
 Postal.publish({
   channel: 'engine',
   topic: 'system-recycled',
   data: Storyteller.initialization
 });
-
 
 var ResultCache = require('./lib/stores/result-cache');
 var results = JSON.parse(_.unescape(document.getElementById('result-data').innerHTML));
@@ -68,7 +77,7 @@ Postal.publish({
 
 
 var disconnect = require('./components/disconnected');
-var communicator = new Communicator(Storyteller.wsAddress, startRouting, disconnect);
+var communicator = new Communicator(Storyteller.wsAddress, () => startRouting(store), disconnect);
 
 
 

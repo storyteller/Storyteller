@@ -89,18 +89,14 @@ namespace StoryTeller.Model
 
         public override int GetHashCode()
         {
-            return (id != null ? id.GetHashCode() : 0);
+            return id?.GetHashCode() ?? 0;
         }
 
         [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
-        private readonly IList<Node> _children = new List<Node>();
         private DateTime? _lastUpdated;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
-        public IList<Node> Children
-        {
-            get { return _children; }
-        }
+        public IList<Node> Children { get; } = new List<Node>();
 
         public SpecificationPlan CreatePlan(FixtureLibrary library)
         {

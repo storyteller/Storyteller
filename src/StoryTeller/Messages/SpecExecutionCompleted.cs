@@ -18,8 +18,8 @@ namespace StoryTeller.Messages
 
         public SpecExecutionCompleted(string id, SpecResults results, Specification data) : this()
         {
-            if (results == null) throw new ArgumentNullException("results");
-            if (data == null) throw new ArgumentNullException("data");
+            if (results == null) throw new ArgumentNullException(nameof(results));
+            if (data == null) throw new ArgumentNullException(nameof(data));
 
             Results = results;
             Id = id;
@@ -59,7 +59,7 @@ namespace StoryTeller.Messages
 
         public override string ToString()
         {
-            return string.Format("SpecExecutionCompleted for Id: {0}, Time: {1}", Id, Time);
+            return $"SpecExecutionCompleted for Id: {Id}, Time: {Time}";
         }
     }
 }

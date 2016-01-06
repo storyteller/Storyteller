@@ -18,6 +18,12 @@ var status = 'any';
 
 var queue = [];
 
+var Reducer  = require('./../state/reducer');
+
+var { createStore } = require('redux');
+var store = null;
+
+
 
 function publishHierarchyChanged(){
   Broadcaster.toExplorer('hierarchy-updated');
@@ -55,6 +61,7 @@ handlers['set-verification-result'] = recordResult;
 
 var library = null;
 var systemRecycled = null;
+
 var setLibrary = function(lib){
   library = lib;
   let targetKeys = _.keys(specs).filter((key) => specs[key].mode === 'full');
@@ -385,6 +392,8 @@ module.exports = {
   },
 
   reset: function(){
+    store = createStore(Reducer);
+      
     QueueState.clear();
     ResultCache.clear();
 
@@ -398,6 +407,8 @@ module.exports = {
     systemRecycled = null;
 
     resetSubscriptions();
+    
+    return store;
   },
 
   clearData: function(){

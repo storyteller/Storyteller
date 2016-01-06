@@ -4,10 +4,6 @@ var startRouting = require('./components/app');
 var AllSpecData = require('./all-spec-data');
 var Hierarchy = require('./lib/stores/hierarchy');
 
-var Reducer  = require('./lib/state/reducer');
-
-var { createStore } = require('redux');
-let store = createStore(Reducer);
 
 Postal.subscribe({
    channel: 'engine',
@@ -18,7 +14,7 @@ Postal.subscribe({
    } 
 });
 
-Hierarchy.reset(); // just forcing it to get loaded
+var store = Hierarchy.reset(); // just forcing it to get loaded
 
 Postal.publish({
 	channel: 'engine',

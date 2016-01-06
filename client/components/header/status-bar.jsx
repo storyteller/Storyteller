@@ -13,15 +13,6 @@ var Search = require('./search');
 var RuntimeError = require('./runtime-error');
 var UnsavedChanges = require('./unsaved-changes');
 
-/*
-                <UnsavedChanges />
-                <QueueCount />
-                <GrammarCount />
-                <RecycleState recycled={this.state.recycled} time={this.state.time} success={this.state.success} recycling={this.state.recycling}/>
-                <Search />
-                <HelpIcon />
-                <RuntimeError />
-*/
 
 var StatusBar = function(props){
     return (
