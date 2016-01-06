@@ -40,7 +40,7 @@ var Header = (props) => {
 
 
 //            <SpecProgressBar />
-// <StatusBar/>
+
 
     return (
         <div>
@@ -61,7 +61,7 @@ var Header = (props) => {
                     </NavDropdown>
                 </Nav>
             </Navbar>
-            
+            <StatusBar {...props}/>
 
         </div>
 

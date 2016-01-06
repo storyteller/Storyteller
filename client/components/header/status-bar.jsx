@@ -13,67 +13,31 @@ var Search = require('./search');
 var RuntimeError = require('./runtime-error');
 var UnsavedChanges = require('./unsaved-changes');
 
+/*
+                <UnsavedChanges />
+                <QueueCount />
+                <GrammarCount />
+                <RecycleState recycled={this.state.recycled} time={this.state.time} success={this.state.success} recycling={this.state.recycling}/>
+                <Search />
+                <HelpIcon />
+                <RuntimeError />
+*/
 
-var StatusBar = React.createClass({
-	getInitialState: function(){
-		var data = Hierarchy.systemRecycled();
-	
-		return {
-			success: data.success,
-			time: data.time,
-			recycled: data,
-			recycling: false
-		}
-	},
+var StatusBar = function(props){
+    return (
+        <Navbar className="bg-info status-bar">
+            <span className="pull-right">
+                <UnsavedChanges />
+                <QueueCount />
+                <GrammarCount />
+                <RecycleState {...props}/>
+                <Search />
+                <HelpIcon />
+                <RuntimeError />
+            </span>
+        </Navbar>
 
-	
-	
-	componentDidMount: function(){
-		var self = this;
-
-		Postal.subscribe({
-			channel: 'engine',
-			topic: 'system-recycled',
-			callback: data => {
-				self.setState({
-					success: data.success,
-					time: data.time,
-					recycled: data,
-					recycling: false
-				});
-			}
-		});
-		
-		Postal.subscribe({
-			channel: 'engine',
-			topic: 'system-recycle-start',
-			callback: data => {
-				self.setState({
-					recycling: true
-				});
-			}
-		});
-
-
-	},
-
-	render: function(){
-		return (
-			<Navbar className="bg-info status-bar">
-				<span className="pull-right">
-					<UnsavedChanges />
-					<QueueCount />
-					<GrammarCount />
-					<RecycleState recycled={this.state.recycled} time={this.state.time} success={this.state.success} recycling={this.state.recycling}/>
-					<Search />
-					<HelpIcon />
-					<RuntimeError />
-				</span>
-
-			</Navbar>
-
-		);
-	}
-});
+    );
+}
 
 module.exports = StatusBar;

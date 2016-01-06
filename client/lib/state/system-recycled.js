@@ -40,10 +40,13 @@ var _ = require('lodash');
 
 export default function SystemRecycled(state, action) {
     var system = _.extend({}, action);
+    
     delete system.fixtures;
     delete system.types;
+    system.recycling = false;
+    
+    var systemState = fromJS(system);
     
     // TODO -- do something with fixtures here too!
-    
-    return state.set('system-state', fromJS(system));
+    return state.set('system-state', systemState);
 }

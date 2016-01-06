@@ -3,64 +3,59 @@ var {Button, Modal} = require('react-bootstrap');
 var uuid = require('node-uuid');
 var Icons = require('./../icons');
 
-var SystemProperties = React.createClass({
-	render: function(){
-		var propDefs = [];
-		var properties = this.props.recycled.properties;
-		for (var key in properties){
-			var dt = ( <dt key={uuid.v4()}>{key}</dt> );
-			var dd = ( <dd key={uuid.v4()}>{properties[key]}</dd> );
+var SystemProperties = function(props){
+    var propDefs = [];
+    var properties = props.system.get('properties');
+    
+    var i = 0;
 
-			propDefs.push(dt);
-			propDefs.push(dd);
-		}
+    var entries = properties.toJS();
+    for (var key in entries){
+        var dt = ( <dt key={++i}>{key}</dt> );
+        var dd = ( <dd key={++i}>{entries[key]}</dd> );
 
-		return (
-				<dl className="dl-horizontal">
-				  <dt>System Name</dt>
-				  <dd>{this.props.recycled.system_name}</dd>
-				  {propDefs}
-				</dl>
-		);
+        propDefs.push(dt);
+        propDefs.push(dd);
+    }
 
-	}
-});
 
-var SystemError = React.createClass({
-	render: function(){
-		if (this.props.recycled.success){
-			return (
-				<div></div>
-			);
-		}
+    return (
+            <dl className="dl-horizontal">
+                <dt>System Name</dt>
+                <dd>{props.system.get('system_name')}</dd>
+                {propDefs}
+            </dl>
+    );
+}
 
-		return (
-			<div className="recycle-error bg-danger">{this.props.recycled.error}</div>
-		);
-	}
-});
+var SystemError = function(props){
+    if (props.system.get('success')){
+        return (
+            <div></div>
+        );
+    }
 
-var RecycleState = React.createClass({
-	getInitialState() {
-		return { showModal: false };
-	},
+    return (
+        <div className="recycle-error bg-danger">{props.system.get('error')}</div>
+    );
+}
 
-	close() {
-		this.setState({ showModal: false });
-	},
+class RecycleState extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {showModal: false};
+    }
 
-	handleToggle(){
-		this.setState({
-			showModal: !this.state.showModal
-		});
-	},
-
-	open() {
-		this.setState({ showModal: true });
-	},
-
-	render(){
-		if (this.props.recycling){
+    render(){
+        var handleToggle = () => {
+            this.setState({
+                showModal: !this.state.showModal
+            });
+        }
+        
+        var close = () => this.setState({showModal: false});
+        
+		if (this.props.system.get('recycling')){
 			var Running = Icons['running'];
 		
 			return (
@@ -69,35 +64,36 @@ var RecycleState = React.createClass({
 		}
 	
 		var bsStyle = 'link';
-		var date = this.props.time;
+		var date = this.props.system.get('time');
 		var text = 'Recycled at ' + date;
 
-		if (!this.props.success){
+		if (!this.props.system.get('success')){
 			bsStyle = "danger";
 			text = "Recycle Failure!";
 		}
 
 
 		return (
-			<Button onClick={this.handleToggle} bsStyle={bsStyle}>{text}
-			<Modal show={this.state.showModal} onHide={this.close}>
+			<Button onClick={handleToggle} bsStyle={bsStyle}>{text}
+			<Modal show={this.state.showModal} onHide={close}>
 	          <Modal.Header closeButton>
 	            <Modal.Title>System State</Modal.Title>
 	          </Modal.Header>
 	          <Modal.Body>
-			      <SystemProperties recycled={this.props.recycled} />
-			      <SystemError recycled={this.props.recycled} />
+			      <SystemProperties system={this.props.system} />
+			      <SystemError system={this.props.system} />
 	          </Modal.Body>
 	          <Modal.Footer>
-	          	<Button onClick={this.close}>Close</Button>
+	          	<Button onClick={close}>Close</Button>
 	          </Modal.Footer>
 			</Modal>
 			</Button>
 
 
 		);
-	}
-});
+    }
+}
+
 
 
 
