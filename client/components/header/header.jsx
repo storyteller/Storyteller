@@ -12,11 +12,13 @@ var Hierarchy = require('./../../lib/stores/hierarchy');
 var SpecProgressBar = require('./spec-progress-bar');
 
 function findSystemData(state){
-    return state.get('system-recycled');
+    return {system: state.get('system-recycled')};
     
 }
 
 var Header = (props) => {
+    var system = props.system;
+    
     // TODO -- let's eliminate this one?
     var toCommand = topic => {
         return e => {
@@ -30,12 +32,15 @@ var Header = (props) => {
         }
     }
 
-    var name = props.name;
-    if (props.properties.Profile){
-        name += ' (' + props.properties.Profile + ')';
+    var name = system.get('name');
+    var properties = system.get('properties');
+    if (properties.has('Profile')){
+        name += ' (' + properties.get('Profile') + ')';
     }
 
+
 //            <SpecProgressBar />
+// <StatusBar/>
 
     return (
         <div>
@@ -56,7 +61,7 @@ var Header = (props) => {
                     </NavDropdown>
                 </Nav>
             </Navbar>
-            <StatusBar/>
+            
 
         </div>
 

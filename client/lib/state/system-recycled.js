@@ -35,7 +35,7 @@
 
 // 'system-recycled'
 
-var {Record, Map} = require('immutable');
+var {Record, Map, fromJS} = require('immutable');
 var _ = require('lodash');
 
 export default function SystemRecycled(state, action) {
@@ -45,5 +45,5 @@ export default function SystemRecycled(state, action) {
     
     // TODO -- do something with fixtures here too!
     
-    return state.set('system-recycled', system);
+    return state.set('system-recycled', fromJS(system));
 }
