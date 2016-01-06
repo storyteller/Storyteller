@@ -12,7 +12,7 @@ var Hierarchy = require('./../../lib/stores/hierarchy');
 var SpecProgressBar = require('./spec-progress-bar');
 
 function findSystemData(state){
-    return {system: state.get('system-recycled')};
+    return {system: state.get('system-state')};
     
 }
 

@@ -45,5 +45,5 @@ export default function SystemRecycled(state, action) {
     
     // TODO -- do something with fixtures here too!
     
-    return state.set('system-recycled', fromJS(system));
+    return state.set('system-state', fromJS(system));
 }
