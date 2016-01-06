@@ -43,6 +43,11 @@ namespace ST.Client
             _server = registry.ToRuntime();
         }
 
+        public RemoteController Controller
+        {
+            get { return _controller; }
+        }
+
         public string BaseAddress
         {
             get { return _server.BaseAddress; }

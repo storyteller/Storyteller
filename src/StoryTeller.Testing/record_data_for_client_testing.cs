@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
@@ -10,6 +11,7 @@ using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 using StoryTeller.Samples;
+using ST.Client;
 
 namespace StoryTeller.Testing
 {
@@ -29,6 +31,16 @@ namespace StoryTeller.Testing
         public void TearDown()
         {
             theSystem.Dispose();
+        }
+
+        [Test]
+        public void what_are_the_client_message_names()
+        {
+            var types = typeof (ClientMessage).Assembly.GetExportedTypes()
+                .Concat(typeof (ClientConnector).Assembly.GetExportedTypes())
+                .Where(x => x.IsConcrete() && x.CanBeCastTo<ClientMessage>()).Select(x => x.Name).OrderBy(x => x).ToArray();
+
+            types.Each(x => Debug.WriteLine(x));
         }
 
         [Test]

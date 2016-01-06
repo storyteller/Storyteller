@@ -86,7 +86,6 @@ namespace StoryTeller.Samples.Fixtures
         {
             _number = number;
             say();
-            //Thread.Sleep(60.Seconds());
         }
 
         // END:  ActionMethod

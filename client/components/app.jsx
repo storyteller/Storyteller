@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 
 
 var {Router, Route, IndexRoute, Link, RouteHandler} = require('react-router');
+var { Provider } = require('react-redux');
 
 
 var SpecExplorer = require('./explorer/spec-explorer');
@@ -23,7 +24,7 @@ var $ = require('jquery');
 
 
 
-module.exports = function(){
+module.exports = function(store){
   // activate keyboard shortcuts
   require('./../lib/presentation/keyboard-shortcuts').register();
 
@@ -35,9 +36,12 @@ module.exports = function(){
   require('./../lib/presentation/typeahead.jquery.js');
 
   ReactDOM.render(
+      <Provider store={store}>
       <div>
+        
         <Header />
         <div className="container">
+          
           <Router>
             <Route name="app" path="/" >
               <Route name="language" path="/language" component={Language}/>
@@ -51,10 +55,11 @@ module.exports = function(){
               <IndexRoute component={SpecExplorer}/>
             </Route>
           </Router>
+          
         </div>
-
+        
       </div>
-
+      </Provider>
 
 
   , document.getElementById("main"));

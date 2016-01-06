@@ -466,6 +466,7 @@ module.exports = {
   },
 
   systemRecycled: function(){
+    throw new Error('Use Redux store instead!');
     return systemRecycled;
   },
 
