@@ -94,7 +94,7 @@ function SuiteHeader(props){
 
 function SuiteBody(props){
     var suites = _.sortBy(props.suite.suites, x => x.name);
-    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} />) );
+    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} />) );
     
     var specs = props.suite.specs.map(x => props.specs.get(x));
     
@@ -109,10 +109,18 @@ function SuiteBody(props){
     );
 }
 
+function isExpanded(props){
+    if (!props.treeState.has(props.suite.path)) return true;
+    
+    return props.treeState.get(props.suite.path);
+}
+
 function SuiteNode(props){
     var body = null;
 
-    if (props.suite.isExpanded){
+
+
+    if (isExpanded(props)){
         body = (<SuiteBody {...props} />);
     }
 

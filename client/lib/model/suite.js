@@ -7,7 +7,6 @@ class Suite{
 		this.name = data.name;
 		this.path = data.path;
 		this.parent = parent;
-		this.isExpanded = true;
 
 		this.isHierarchy = parent == null || parent == undefined;
 

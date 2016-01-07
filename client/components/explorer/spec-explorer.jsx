@@ -5,7 +5,13 @@ function getExplorerState(state){
     var status = state.get('status-filter');
     var lifecycle = state.get('lifecycle-filter');
     
-    return {suite: state.get('hierarchy'), status: status, lifecycle: lifecycle, specs: state.get('specs')}
+    return {
+        suite: state.get('hierarchy'), 
+        status: status, 
+        lifecycle: lifecycle, 
+        specs: state.get('specs'), 
+        treeState: state.get('tree-state')
+    };
 }
 
 function addDispatch(dispatch){

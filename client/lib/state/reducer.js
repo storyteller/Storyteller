@@ -22,10 +22,23 @@ module.exports = function Reducer(state = initialState, action){
       return state.updateIn(['system-state', 'recycling'], _ => true);
       
     case 'hierarchy-loaded':
-        // 'lifecycle-filter'
-        // 'status-filter'
-        // 'hierarchy'
-        // 'specs'
+        return HierarchyLoaded(state, action);
+      
+    case 'expand-all':
+        var treeState = state.get('tree-state').toJS();
+        var suite = state.get('hierarchy');
+        
+        suite.allSuites().forEach(s => treeState[s.path] = true);
+        
+        return state.set('tree-state', Immutable.Map(treeState));
+        
+    case 'collapse-all':
+        var treeState = state.get('tree-state').toJS();
+        var suite = state.get('hierarchy');
+        
+        suite.allSuites().forEach(s => treeState[s.path] = false);
+        
+        return state.set('tree-state', Immutable.Map(treeState));
       
     default:
       console.log("Reducer does not know how to handle: " + action.type);

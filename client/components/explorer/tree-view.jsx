@@ -67,22 +67,14 @@ function SuiteHeader(props){
     }
 
     if (suite.suites.length > 0){
-        var expandAll = () => {
-            // TODO -- do this with dispatch()
-            //this.state.suite.expandAll();
-            // TODO -- do this with dispatch() this.setState({foo: 1});
-        }
+        var expandAll = () => props.dispatch({type: 'expand-all'});
 
-        var collapseAll = () => {
-            // TODO -- do this with dispatch()
-            //this.state.suite.closeAll();
-            //this.setState({foo:2});
-        }
+        var collapseAll = () => props.dispatch({type: 'collapse-all'});
 
-        var expandLink = (<small key="expand"><a style={{color: 'gray'}} className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );
+        var expandLink = (<small key="expand"><a className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );
         links.push(expandLink);
 
-        var collapseLink = (<small key="collapse"><a style={{color: 'gray'}} className="explorer-command" title="Collapse All Suite nodes in the Tree View" onClick={collapseAll}>collapse all</a></small>);
+        var collapseLink = (<small key="collapse"><a className="explorer-command" title="Collapse All Suite nodes in the Tree View" onClick={collapseAll}>collapse all</a></small>);
         links.push(collapseLink);	
     }
 
@@ -111,12 +103,12 @@ module.exports = function TreeView(props){
     if (suite.isHierarchy){
         suites = suite.suites.map(s => {
             return (
-                <SuiteNode suite={s} key={s.path} specs={props.specs} />
+                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} />
             );
         });
     }
     else {
-        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} />)];
+        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} />)];
     }
 
     if (suites.length == 0){
