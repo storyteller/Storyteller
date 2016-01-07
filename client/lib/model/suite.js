@@ -30,7 +30,7 @@ class Suite{
 	filter(filter, specs){
 		var filtered = new Suite(this, null);
 		filtered.isHierarchy = this.isHierarchy;
-		filtered.specs = this.specs.filter(id => filter(specs[id])); 
+		filtered.specs = this.specs.filter(id => filter(specs.get(id))); 
 		filtered.suites = this.suites
 			.map(s => s.filter(filter))
 			.filter(x => x.hasAnySpecs());
@@ -39,7 +39,7 @@ class Suite{
 	}
 
 	summary(specDict){
-		var specs = this.allSpecs().map(x => specDict[x]);
+		var specs = this.allSpecs().map(x => specDict.get(x));
 
 		var totals = {
 			total: specs.length,

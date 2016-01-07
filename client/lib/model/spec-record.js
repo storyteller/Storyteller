@@ -7,8 +7,6 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     constructor(data, library, last_result){
         var spec = new Specification(data, library);
         super({id: data.id, spec: spec, version: 0, last_results: last_result});
-        
-        
     }
     
     get lifecycle() {

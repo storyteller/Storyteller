@@ -116,10 +116,6 @@ module.exports = function(initialization){
               <IndexRoute component={SpecExplorer}/>
 */
 
-var Standin = function(props){
-    return (<div><h1>Stand in!</h1></div>);
-}
-
 
   ReactDOM.render(
       <Provider store={store}>
@@ -133,7 +129,7 @@ var Standin = function(props){
                 <Route name="language" path="/language" component={Language}/>
                 <Route name="documentation" path="/docs" component={Documentation}/>
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
-                <IndexRoute component={Standin}/>
+                <IndexRoute component={SpecExplorer}/>
             </Route>
           </Router>
           

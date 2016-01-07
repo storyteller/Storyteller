@@ -3,9 +3,10 @@ var HierarchyLoaded = require('./hierarchy-loaded');
 var Immutable = require('immutable');
 
 var initialState = Immutable.Map({
-    'lifecycle-filter': x => true, 
-    'status-filter': x => true,
-    'tree-state': Immutable.Map({})
+    'lifecycle-filter': 'any', 
+    'status-filter': 'any',
+    'tree-state': Immutable.Map({}),
+    'specs': Immutable.Map({})
 });
 
 module.exports = function Reducer(state = initialState, action){
