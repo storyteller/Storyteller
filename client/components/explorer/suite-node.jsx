@@ -65,17 +65,15 @@ function SuiteHeader(props){
 
     var href = '#/suite/' + suite.path;
     
-    // TODO -- this will have to change
-    var isExpanded = true;
-    
-    var openClosed = isExpanded ? <FolderOpen /> : <FolderClosed />;
-    var openClass = isExpanded ? 'open' : 'closed';
+
+    var openClosed = props.expanded ? <FolderOpen /> : <FolderClosed />;
+    var openClass = props.expanded ? 'open' : 'closed';
 
     var Icon = icons[suite.icon(props.specs)];
     var icon = (<Icon />);
     
     // TODO -- this will need to do something
-    var toggle = () => {};
+    var toggle = () => props.dispatch({type:'toggle-tree-state', path: suite.path});
 
     return (
         <div key={suite.path} className={openClass + ' suite-header'}>
@@ -94,7 +92,7 @@ function SuiteHeader(props){
 
 function SuiteBody(props){
     var suites = _.sortBy(props.suite.suites, x => x.name);
-    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} />) );
+    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} />) );
     
     var specs = props.suite.specs.map(x => props.specs.get(x));
     
@@ -119,17 +117,17 @@ function SuiteNode(props){
     var body = null;
 
 
-
+    var expanded = false;
     if (isExpanded(props)){
         body = (<SuiteBody {...props} />);
+        expanded = true;
     }
 
-    // TODO -- do something w/ dispatch()
-    var toggle = e => {};
+    var toggle = e => props.dispatch({type: 'toggle-tree-state', path: props.suite.path});
 
     return (
         <div className='suite-node'>
-            <SuiteHeader {...props} toggle={toggle} />
+            <SuiteHeader {...props} toggle={toggle} expanded={expanded} />
             {body}
         </div>
     );

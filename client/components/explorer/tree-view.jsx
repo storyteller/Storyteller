@@ -103,12 +103,12 @@ module.exports = function TreeView(props){
     if (suite.isHierarchy){
         suites = suite.suites.map(s => {
             return (
-                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} />
+                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} />
             );
         });
     }
     else {
-        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} />)];
+        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} />)];
     }
 
     if (suites.length == 0){

@@ -39,7 +39,14 @@ module.exports = function Reducer(state = initialState, action){
         suite.allSuites().forEach(s => treeState[s.path] = false);
         
         return state.set('tree-state', Immutable.Map(treeState));
-      
+     
+    case 'toggle-tree-state': 
+        if (state.get('tree-state').has(action.path)){
+            return state.updateIn(['tree-state', action.path], x => !x);
+        }
+    
+        return state.setIn(['tree-state', action.path], false);
+     
     default:
       console.log("Reducer does not know how to handle: " + action.type);
       return state;
