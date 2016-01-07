@@ -130,6 +130,7 @@ var Standin = function(props){
           
           <Router>
             <Route name="app" path="/" >
+                <Route name="language" path="/language" component={Language}/>
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
                 <IndexRoute component={Standin}/>
             </Route>
