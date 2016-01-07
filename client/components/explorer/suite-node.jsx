@@ -12,135 +12,121 @@ var FolderClosed = icons['folder-closed'];
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 var SuitePath = require('./suite-path');
 
-var SuiteHeader = React.createClass({
-	makeNewSuiteLink: function(){
-		var self = this;
+function NewSpecLink(props){
+    var toMessage = function(name){
+        return {
+            type: 'add-spec',
+            name: name,
+            parent: props.suite.path
+        };
+    };
 
-		var toMessage = name => {
-			return {
-				type: 'add-suite',
-				name: name,
-				parent: self.props.suite.path
-			};
-		};
+    var title = 'Add a new Specification to ' + props.suite.path;
 
-		var title = 'Add a new Child Suite to ' + self.props.suite.path;
+    return (
+        <CommandWithNameEntryLink
+            title={title}
+            text='new spec'
+            commandText='Create'
+            toMessage={toMessage}/>
+    );
+}
 
-		return (
-			<CommandWithNameEntryLink
-				title={title}
-				text='new child suite'
-				commandText='Create'
-				toMessage={toMessage}/>
-		);
-	},
+function NewSuiteLink(props){
+    var toMessage = name => {
+        return {
+            type: 'add-suite',
+            name: name,
+            parent: props.suite.path
+        };
+    };
 
-	makeNewSpecLink: function(){
-		var self = this;
+    var title = 'Add a new Child Suite to ' + props.suite.path;
 
-		var toMessage = function(name){
-			return {
-				type: 'add-spec',
-				name: name,
-				parent: self.props.suite.path
-			};
-		};
+    return (
+        <CommandWithNameEntryLink
+            title={title}
+            text='new child suite'
+            commandText='Create'
+            toMessage={toMessage}/>
+    );
+}
 
-		var title = 'Add a new Specification to ' + self.props.suite.path;
+function SuiteHeader(props){
+    var suite = props.suite;
 
-		return (
-			<CommandWithNameEntryLink
-				title={title}
-				text='new spec'
-				commandText='Create'
-				toMessage={toMessage}/>
-		);
-	},
+    var buildMessage = function(){
+        var list = suite.allSpecs();
 
-	render: function(){
-		var suite = this.props.suite;
+        return {type: 'run-specs', list: list};
+    };
 
-		var buildMessage = function(){
-			var list = suite.allSpecs().map(spec => spec.id);
+    var count = suite.allSpecs().length;
 
-			return {type: 'run-specs', list: list};
-		};
+    var href = '#/suite/' + suite.path;
+    
+    // TODO -- this will have to change
+    var isExpanded = true;
+    
+    var openClosed = isExpanded ? <FolderOpen /> : <FolderClosed />;
+    var openClass = isExpanded ? 'open' : 'closed';
 
-		var count = suite.allSpecs().length;
+    var Icon = icons[suite.icon(props.specs)];
+    var icon = (<Icon />);
+    
+    // TODO -- this will need to do something
+    var toggle = () => {};
 
-		var href = '#/suite/' + suite.path;
-		var openClosed = suite.isExpanded ? <FolderOpen /> : <FolderClosed />;
-		var openClass = suite.isExpanded ? 'open' : 'closed';
+    return (
+        <div key={suite.path} className={openClass + ' suite-header'}>
+            <a href='#' onClick={toggle}>
+                {openClosed}
+            </a>
+            {icon}
+            <a href={href} className='suite-name'>{props.suite.name}</a> ({count}) 
+            <CommandLink createMessage={buildMessage} text='run all' />
+            <NewSpecLink {...props} />
+            <NewSuiteLink {...props} />
+        </div>
 
-		var Icon = icons[suite.icon()];
-		var icon = (<Icon />);
+    );
+}
 
-		return (
-			<div key={suite.path} className={openClass + ' suite-header'}>
-				<a href='#' onClick={this.props.toggle}>
-					{openClosed}
-				</a>
-				{icon}
-				<a href={href} className='suite-name'>{this.props.suite.name}</a> ({count}) 
-				<CommandLink createMessage={buildMessage} text='run all' />
-				{this.makeNewSpecLink()}
-				{this.makeNewSuiteLink()}
-			</div>
+function SuiteBody(props){
+    var suites = _.sortBy(props.suite.suites, x => x.name);
+    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} />) );
+    
+    var specs = props.suite.specs.map(x => props.specs.get(x));
+    
+    
+    var specLeaves = _.sortBy(specs, x => x.spec.title).map(x => (<SpecLeaf spec={x.spec} key={x.id} />) );
 
-		);
-	}
-});
+    return (
+        <div id={props.suite.path} className='suite-body' >
+            {childSuites}
+            {specLeaves}
+        </div>
+    );
+}
 
-var SuiteBody = React.createClass({
-	getInitialState: function () {
-		return {
-			maxHeight: '0px'
-		};
-	},
+function SuiteNode(props){
+    var body = null;
 
-	render: function(){
-		var suites = _.sortBy(this.props.suite.suites, x => x.name);
-		var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} />) );
-		
-		var specs = _.sortBy(this.props.suite.specs, x => x.title).map(spec => (<SpecLeaf spec={spec} key={spec.id} />) );
+    if (props.suite.isExpanded){
+        body = (<SuiteBody {...props} />);
+    }
 
-		return (
-			<div id={this.props.suite.path} className='suite-body' ref='suiteBody'>
-				{childSuites}
-				{specs}
-			</div>
-		);
-	},
+    // TODO -- do something w/ dispatch()
+    var toggle = e => {};
 
-
-});
-
-var SuiteNode = React.createClass({
-	render: function(){
-		var body = null;
-
-		if (this.props.suite.isExpanded){
-			body = (<SuiteBody suite={this.props.suite} />);
-		}
-
-		var toggle = e => {
-			this.props.suite.toggleClosed();
-
-			e.stopPropagation();
-			e.preventDefault();
+    return (
+        <div className='suite-node'>
+            <SuiteHeader {...props} toggle={toggle} />
+            {body}
+        </div>
+    );
+}
 
 
-			this.setState({ 'foo':3 });
-		}
-
-
-		return (
-			<div className='suite-node'>
-				<SuiteHeader suite={this.props.suite} toggle={toggle} />
-				{body}
-			</div>
-		);
-	}
-});
 
 module.exports = SuiteNode;

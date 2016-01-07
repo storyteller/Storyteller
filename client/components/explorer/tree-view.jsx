@@ -11,37 +11,6 @@ var CommandButtons = require('./command-buttons');
 
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 
-/*
-		var summary = this.state.suite.summary();
-		var filter = Hierarchy.currentFilter();
-		var suite = this.state.suite;
-		if (Hierarchy.hasFilter()){
-			suite = this.state.suite.filter(filter);
-		}
-
-		
-		var header = this.buildSuiteHeader();
-		var suites = null;
-
-		if (suite.isHierarchy){
-			suites = suite.suites.map(s => {
-				return (
-					<SuiteNode suite={s} key={s.path} />
-				);
-			});
-		}
-		else {
-			suites = [(<SuiteNode suite={suite} key={suite.path} />)];
-		}
-
-		if (suites.length == 0){
-			suites = (
-				<div id="no-matching-specs">No matching specifications.</div>
-			);
-		}
-
-*/
-
 var alwaysTrue = x => true;
 
 function toLifecycleFilter(lifecycle){
@@ -125,11 +94,6 @@ function SuiteHeader(props){
 }
 
 module.exports = function TreeView(props){
-    /*
-                {header}
-                {suites}
-    */
-    
     var suite = props.suite;
     if (props.status != 'any' || props.lifecycle != 'any'){
         var lifecycleFilter = toLifecycleFilter(props.lifecycle);
@@ -140,6 +104,28 @@ module.exports = function TreeView(props){
     }
     
     var summary = suite.summary(props.specs);
+
+    var suites = null;
+
+    // TODO -- pull this out.
+    if (suite.isHierarchy){
+        suites = suite.suites.map(s => {
+            return (
+                <SuiteNode suite={s} key={s.path} specs={props.specs} />
+            );
+        });
+    }
+    else {
+        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} />)];
+    }
+
+    if (suites.length == 0){
+        suites = (
+            <div id="no-matching-specs">No matching specifications.</div>
+        );
+    }
+
+
 
     
     return (
@@ -159,7 +145,7 @@ module.exports = function TreeView(props){
             </div>
             <div className="col-md-10">
                 <SuiteHeader suite={suite} dispatch={props.dispatch}/>
-                <h1>Nothing yet</h1>
+                {suites}
             </div>
         </div>
         

@@ -80,20 +80,20 @@ class Suite{
 		return _.flatten(specs);
 	}
 
-	icon(){
+	icon(specDict){
 		if (this.specs.length == 0 && this.suites.length == 0) return 'none';
 
 		var specs = this.allSpecs();
 
-		var running = _.find(specs, x => x.status() == 'running');
+		var running = _.find(specs, x => specDict.get(x).status() == 'running');
 		if (running){
 			return running.icon();
 		}
 
-		var firstFailure = _.find(specs, x => x.status() == 'failed');
+		var firstFailure = _.find(specs, x => specDict.get(x).status() == 'failed');
 		if (firstFailure) return 'failed';
 
-		var firstSuccess = _.find(specs, x => x.status() == 'success') ;
+		var firstSuccess = _.find(specs, x => specDict.get(x).status() == 'success') ;
 		if (firstSuccess) return 'success';
 
 		return 'none';

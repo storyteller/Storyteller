@@ -51,15 +51,9 @@ namespace ST.Client
             return _proxy.QueueState();
         }
 
-        public Project Project
-        {
-            get { return _project; }
-        }
+        public Project Project => _project;
 
-        public string Path
-        {
-            get { return _path; }
-        }
+        public string Path => _path;
 
         public string ConfigFile
         {
@@ -198,11 +192,6 @@ namespace ST.Client
         public ResponseExpression Send<T>(T message)
         {
             return new ResponseExpression(() => SendMessage(message), _messaging);
-        }
-
-        public Suite LoadHierarchy()
-        {
-            return HierarchyLoader.ReadHierarchy(_path);
         }
 
         public class ResponseExpression

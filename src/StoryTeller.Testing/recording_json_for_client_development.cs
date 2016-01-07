@@ -45,6 +45,7 @@ namespace StoryTeller.Testing
                         .ParentDirectory()
                         .ParentDirectory()
                         .AppendPath("Storyteller.Samples"),
+
                 ProfileFlag = "Safari"
             };
 
@@ -52,7 +53,7 @@ namespace StoryTeller.Testing
             {
                 controller.Start(EngineMode.Batch).Wait(30.Seconds());
 
-                var hierarchy = controller.LoadHierarchy();
+                var hierarchy = HierarchyLoader.ReadHierarchy(input.Path.AppendPath("Specs"));
                 var request = new BatchRunRequest();
                 var response = controller.Send(request).AndWaitFor<BatchRunResponse>();
 
