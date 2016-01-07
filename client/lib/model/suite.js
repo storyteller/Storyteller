@@ -4,7 +4,7 @@ var Spec = require('./specification');
 var _ = require('lodash');
 
 class Suite{
-	constructor(data, parent, library){
+	constructor(data, parent, library, specs){
 		this.name = data.name;
 		this.path = data.path;
 		this.parent = parent;
@@ -12,11 +12,12 @@ class Suite{
 
 		this.isHierarchy = parent == null || parent == undefined;
 
-		var self = this;
-
-		this.suites = (data.suites || []).map(x => new Suite(x, this, library));
+		this.suites = (data.suites || []).map(x => new Suite(x, this, library, specs));
 		this.specs = (data.specs || []).map(x => {
 			if (x instanceof Spec) return x;
+            
+            // This is new
+            if (x instanceof String) return specs[x];
 
 			return new Spec(x, library);
 		});

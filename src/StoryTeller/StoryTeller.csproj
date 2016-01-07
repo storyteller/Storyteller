@@ -201,6 +201,7 @@
     <Compile Include="Messages\DeleteSpec.cs" />
     <Compile Include="Messages\ForceRecycle.cs" />
     <Compile Include="Messages\HierarchyLoaded.cs" />
+    <Compile Include="Messages\InitialModel.cs" />
     <Compile Include="Messages\MarkAsAccepted.cs" />
     <Compile Include="Messages\MarkAsRegression.cs" />
     <Compile Include="Messages\MaximumRetries.cs" />

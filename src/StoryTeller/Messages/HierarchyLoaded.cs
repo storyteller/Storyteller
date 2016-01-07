@@ -4,25 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
-using StoryTeller.Remotes;
 
 namespace StoryTeller.Messages
 {
-    public class InitialModel : ClientMessage
-    {
-        [JsonProperty("recycled")]
-        public SystemRecycled Recycled { get; }
-        public HierarchyLoaded Hierarchy { get; }
-        public int port { get; set; }
-
-        public InitialModel(SystemRecycled recycled, HierarchyLoaded hierarchy) : base("initial-model")
-        {
-            Recycled = recycled;
-            Hierarchy = hierarchy;
-        }
-    }
-
-
     public class HierarchyLoaded : ClientMessage
     {
         public readonly Suite hierarchy;
@@ -48,7 +32,7 @@ namespace StoryTeller.Messages
             if (obj.GetType() != this.GetType()) return false;
             return Equals((HierarchyLoaded)obj);
         }
-
+        
         public override int GetHashCode()
         {
             return (hierarchy != null ? hierarchy.GetHashCode() : 0);
