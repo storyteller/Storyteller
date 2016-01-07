@@ -99,7 +99,7 @@ function SuiteBody(props){
     var specs = props.suite.specs.map(x => props.specs.get(x));
     
     
-    var specLeaves = _.sortBy(specs, x => x.spec.title).map(x => (<SpecLeaf spec={x.spec} key={x.id} />) );
+    var specLeaves = _.sortBy(specs, x => x.title).map(x => (<SpecLeaf spec={x} key={x.id} />) );
 
     return (
         <div id={props.suite.path} className='suite-body' >

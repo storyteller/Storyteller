@@ -52,15 +52,15 @@ class Suite{
 			}).length,
 
 			success: specs.filter(x => {
-				return x.status() == 'success';
+				return x.status == 'success';
 			}).length,
 
 			failed: specs.filter(x => {
-				return x.status() == 'failed';
+				return x.status == 'failed';
 			}).length,
 
 			none: specs.filter(x => {
-				return x.status() == 'none';
+				return x.status == 'none';
 			}).length
 		}
 
@@ -85,15 +85,15 @@ class Suite{
 
 		var specs = this.allSpecs();
 
-		var running = _.find(specs, x => specDict.get(x).status() == 'running');
+		var running = _.find(specs, x => specDict.get(x).status == 'running');
 		if (running){
 			return running.icon();
 		}
 
-		var firstFailure = _.find(specs, x => specDict.get(x).status() == 'failed');
+		var firstFailure = _.find(specs, x => specDict.get(x).status == 'failed');
 		if (firstFailure) return 'failed';
 
-		var firstSuccess = _.find(specs, x => specDict.get(x).status() == 'success') ;
+		var firstSuccess = _.find(specs, x => specDict.get(x).status == 'success') ;
 		if (firstSuccess) return 'success';
 
 		return 'none';

@@ -19,58 +19,57 @@ var toCloneText = (text) => {
 	}
 }
 
-var SpecLeaf = React.createClass({
-	cloneLink: function(){
-		var toMessage = name => {return {type: 'clone-spec', id: this.props.spec.id, name: name}};
-		var defaultValue = toCloneText(this.props.spec.title);
+function CloneLink(props){
+    var toMessage = name => {return {type: 'clone-spec', id: props.spec.id, name: name}};
+    var defaultValue = toCloneText(props.spec.title);
 
-		return (
-			<CommandWithNameEntryLink 
-				title="Clone a Specification" 
-				text="clone" 
-				commandText="Clone" 
-				toMessage={toMessage}
-				value={defaultValue} />
-		);
-	},
+    return (
+        <CommandWithNameEntryLink 
+            title="Clone a Specification" 
+            text="clone" 
+            commandText="Clone" 
+            toMessage={toMessage}
+            value={defaultValue} />
+    );
+}
 
-	render: function(){
-		var onclick = e => {
+function SpecLeaf(props){
+    var onclick = e => {
 
-			e.preventDefault();
-		}
-
-
-		var Icon = icons[this.props.spec.icon()];
-		var icon = (<Icon />);
-
-		var clazz = 'spec-name spec-state-' + this.props.spec.state;
-
-		var spec = this.props.spec;
+        e.preventDefault();
+    }
 
 
+    var Icon = icons[props.spec.icon()];
+    var icon = (<Icon />);
 
-		var link = null;
-		if (spec.state == 'none'){
-			var buildMessage = () => {return {type: 'run-spec', id: spec.id}};
+    var clazz = 'spec-name spec-state-' + props.spec.state;
 
-			link = (<CommandLink identifier="run" createMessage={buildMessage} text="run" />);
-		}
+    var spec = props.spec;
 
-		var href = '#/spec/editing/' + spec.id;
-		if (spec.hasResults()){
-			href = '#/spec/results/' + spec.id;
-		}
 
-		return (
-			<div className="spec-leaf">
-				{icon}
-				<a href={href} className={clazz}>{this.props.spec.title}</a>
-				{link}{this.cloneLink()}
-				<DeleteLink spec={this.props.spec}/>
-			</div>
-		);
-	}
-});
+
+    var link = null;
+    if (spec.state == 'none'){
+        var buildMessage = () => {return {type: 'run-spec', id: spec.id}};
+
+        link = (<CommandLink identifier="run" createMessage={buildMessage} text="run" />);
+    }
+
+    var href = '#/spec/editing/' + spec.id;
+    if (spec.hasResults()){
+        href = '#/spec/results/' + spec.id;
+    }
+
+    return (
+        <div className="spec-leaf">
+            {icon}
+            <a href={href} className={clazz}>{props.spec.title}</a>
+            {link}<CloneLink {...props} />
+            <DeleteLink spec={props.spec}/>
+        </div>
+    );
+}
+
 
 module.exports = SpecLeaf;
