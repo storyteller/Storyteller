@@ -3,51 +3,26 @@ var Postal = require('postal');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 
 var {Button, Badge} = require('react-bootstrap');
+var { connect } = require('react-redux');
 
-
-var getCount = function(){
-	return Hierarchy.errorCount();
+function getCount(state){
+    return {count: state.get('fixtures').errorCount()};
 }
 
+function GrammarCount(props){
+    if (props.count == 0)
+    {
+        return null;
+    }
 
-var GrammarCount = React.createClass({
-	getInitialState: function(){
-		return {
-			count: getCount()
-		}
-	},
+    var onclick = function(){
+        window.location = '#/grammar-errors'
+    }
 
-	componentDidMount: function(){
-		var self = this;
+    return (
+        <Button id="grammar-error-count" bsStyle="link" onClick={onclick}><Badge>{props.count}</Badge> grammar errors</Button>
 
-		Postal.subscribe({
-			channel: 'explorer',
-			topic: 'fixtures-loaded',
-			callback: function(data, envelope){
-				self.setState({
-					count: getCount()
-				});
-			}
-		});
-		
+    );
+}
 
-	},
-
-	render: function(){
-		if (this.state.count == 0)
-		{
-			return null;
-		}
-
-		var onclick = function(){
-			window.location = '#/grammar-errors'
-		}
-
-		return (
-			<Button id="grammar-error-count" bsStyle="link" onClick={onclick}><Badge>{this.state.count}</Badge> grammar errors</Button>
-
-		);
-	}
-});
-
-module.exports = GrammarCount;
+module.exports = connect(getCount)(GrammarCount);
