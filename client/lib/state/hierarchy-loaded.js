@@ -12,7 +12,7 @@ function HierarchyLoaded(state, action){
     var library = state.get('fixtures');
     var specs = {};
     action.specs.forEach(x => {
-        var record = SpecRecord(x.data, library, x.last_result);
+        var record = new SpecRecord(x.data, library, x.last_result);
         specs[record.id] = record;
     });
     
@@ -21,6 +21,8 @@ function HierarchyLoaded(state, action){
     
     var hierarchy = new Suite(action.hierarchy, null, library, specs);
     state = state.set('hierarchy', hierarchy);
+    
+
     
     return state;
 }

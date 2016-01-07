@@ -2,7 +2,13 @@ import SystemRecycled from './system-recycled';
 var HierarchyLoaded = require('./hierarchy-loaded');
 var Immutable = require('immutable');
 
-module.exports = function Reducer(state = Immutable.Map({}), action){
+var initialState = Immutable.Map({
+    'lifecycle-filter': x => true, 
+    'status-filter': x => true,
+    'tree-state': Immutable.Map({})
+});
+
+module.exports = function Reducer(state = initialState, action){
   switch (action.type) {
     case 'initial-model':
         var one = SystemRecycled(state, action.recycled);
@@ -10,6 +16,7 @@ module.exports = function Reducer(state = Immutable.Map({}), action){
       
     case 'system-recycled':
       return SystemRecycled(state, action);
+      
     case 'system-recycle-start':
       return state.updateIn(['system-state', 'recycling'], _ => true);
       

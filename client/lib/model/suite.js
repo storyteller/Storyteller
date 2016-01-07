@@ -1,10 +1,9 @@
 "use strict";
 
-var Spec = require('./specification');
 var _ = require('lodash');
 
 class Suite{
-	constructor(data, parent, library, specs){
+	constructor(data, parent){
 		this.name = data.name;
 		this.path = data.path;
 		this.parent = parent;
@@ -12,92 +11,26 @@ class Suite{
 
 		this.isHierarchy = parent == null || parent == undefined;
 
-		this.suites = (data.suites || []).map(x => new Suite(x, this, library, specs));
-		this.specs = (data.specs || []).map(x => {
-			if (x instanceof Spec) return x;
-            
-            // This is new
-            if (x instanceof String) return specs[x];
-
-			return new Spec(x, library);
-		});
-
-		this.specs.forEach(x => x.suite = this);
-	}
-
-	toggleAll(){
-		if (this.isExpanded){
-			this.closeAll();
-		}
-		else {
-			this.expandAll();
-		}
-	}
-
-	closeAll(){
-		this.suites.forEach(x => {
-			x.isExpanded = false;
-			x.closeAll();
-		});
-	}
-
-	expandAll(){
-		this.isExpanded = true;
-		this.suites.forEach(x => x.expandAll());
-	}
-
-	toggleClosed(){
-		this.isExpanded = !this.isExpanded;
-	}
-
-	height(){
-		var total = 1 + this.specs.length;
-		this.suites.forEach(x => total += x.height());
-
-		return total;
+		this.suites = (data.suites || []).map(x => new Suite(x, this));
+		this.specs = data.specs || [];
 	}
 
 	hasSpec(id){
-		return _.some(this.specs, {'id': id});
-	}
-
-	replaceSpec(spec){
-		_.remove(this.specs, s => s.id == spec.id);
-		spec.suite = this;
-		this.specs.push(spec);
-	}
-
-	addSpec(spec){
-		this.specs.push(spec);
-		spec.suite = this;
-	}
-
-	removeSpec(id){
-		_.remove(this.specs, s => s.id == id);
+		return this.specs.includes(id);
 	}
 
 	childSuite(name){
 		return _.find(this.suites, x => x.name == name);
 	}
 
-	addChildSuite(name){
-		var path = name;
-		if (this.parent){
-			path = this.path + '/' + path;
-		}
-
-		var child = new Suite({name: name, path: path}, this);
-		this.suites.push(child);
-	}
-
 	hasAnySpecs(){
 		return this.specs.length > 0 || _.any(this.suites, s => s.hasAnySpecs());
 	}
 
-	filter(filter){
+	filter(filter, specs){
 		var filtered = new Suite(this, null);
 		filtered.isHierarchy = this.isHierarchy;
-		filtered.specs = this.specs.filter(filter);
+		filtered.specs = this.specs.filter(id => filter(specs[id])); 
 		filtered.suites = this.suites
 			.map(s => s.filter(filter))
 			.filter(x => x.hasAnySpecs());
@@ -105,12 +38,8 @@ class Suite{
 		return filtered;
 	}
 
-	allSpecIds(){
-		return this.allSpecs().map(s => s.id);
-	}
-
-	summary(){
-		var specs = this.allSpecs();
+	summary(specDict){
+		var specs = this.allSpecs().map(x => specDict[x]);
 
 		var totals = {
 			total: specs.length,
