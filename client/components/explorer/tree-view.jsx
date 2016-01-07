@@ -42,13 +42,105 @@ var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 
 */
 
+var alwaysTrue = x => true;
+
+function toLifecycleFilter(lifecycle){
+  if (lifecycle == 'any') return alwaysTrue;
+
+  if (lifecycle == 'Regression'){
+    return spec => spec.lifecycle == 'Regression';
+  }
+
+  if (lifecycle == 'Acceptance'){
+    return spec => spec.lifecycle == 'Acceptance';
+  }
+}
+
+function toStatusFilter(status){
+  if (status == 'any') {
+    return alwaysTrue;
+  }
+  
+  return spec => spec.status() == status;
+}
+
+
+function SuiteHeader(props){
+    var suite = props.suite;
+
+    var links = [];
+
+
+    var title = '';
+    if (suite.isHierarchy){
+        title = 'All Specifications';
+
+        var buildChildSuiteMessage = name => {
+            return {
+                type: 'add-suite',
+                name: name,
+                parent: ''
+            };
+        };
+
+        var childSuiteLink = (
+            <small key="child-suite"><CommandWithNameEntryLink 
+                title="Add a new Child Suite" 
+                text="new suite" 
+                commandText="Create" 
+                toMessage={buildChildSuiteMessage}/></small>
+        );
+
+        links.push(childSuiteLink);
+    }
+    else {
+        title = (<SuitePath suite={suite} />)
+    }
+
+    if (suite.suites.length > 0){
+        var expandAll = () => {
+            // TODO -- do this with dispatch()
+            //this.state.suite.expandAll();
+            // TODO -- do this with dispatch() this.setState({foo: 1});
+        }
+
+        var collapseAll = () => {
+            // TODO -- do this with dispatch()
+            //this.state.suite.closeAll();
+            //this.setState({foo:2});
+        }
+
+        var expandLink = (<small key="expand"><a style={{color: 'gray'}} className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );
+        links.push(expandLink);
+
+        var collapseLink = (<small key="collapse"><a style={{color: 'gray'}} className="explorer-command" title="Collapse All Suite nodes in the Tree View" onClick={collapseAll}>collapse all</a></small>);
+        links.push(collapseLink);	
+    }
+
+    return(
+        <h4><span id="spec-editor-header">{title}</span> 
+            {links}
+        </h4>
+    );
+}
 
 module.exports = function TreeView(props){
     /*
                 {header}
                 {suites}
     */
-    var summary = props.suite.summary(props.specs);
+    
+    var suite = props.suite;
+    if (props.status != 'any' || props.lifecycle != 'any'){
+        var lifecycleFilter = toLifecycleFilter(props.lifecycle);
+        var statusFilter = toStatusFilter(props.status);
+
+        var filter = spec => lifecycleFilter(spec) && statusFilter(spec);
+        suite = suite.filter(filter, props.specs);
+    }
+    
+    var summary = suite.summary(props.specs);
+
     
     return (
         
@@ -66,6 +158,7 @@ module.exports = function TreeView(props){
 
             </div>
             <div className="col-md-10">
+                <SuiteHeader suite={suite} dispatch={props.dispatch}/>
                 <h1>Nothing yet</h1>
             </div>
         </div>
