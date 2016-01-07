@@ -42,7 +42,7 @@ namespace StoryTeller.Testing.Model.Persistence
             theHierarchy.Specifications.Has("embeds").ShouldBeFalse();
 
             // There is only the one spec in Embeds to begin with
-            theHierarchy.Suites["Embedded"].specs.Length.ShouldBe(0);
+            theHierarchy.Suites["Embedded"].Specifications.Length.ShouldBe(0);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void the_old_spec_is_no_longer_held_by_the_suite()
         {
-            theHierarchy.Suites[theOriginal.SuitePath()].specs
+            theHierarchy.Suites[theOriginal.SuitePath()].Specifications
                 .Any(x => ReferenceEquals(x, theOriginal))
                 .ShouldBeFalse();
         }
@@ -74,7 +74,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Test]
         public void the_new_spec_is_in_the_parent_suite()
         {
-            theHierarchy.Suites[theOriginal.SuitePath()].specs
+            theHierarchy.Suites[theOriginal.SuitePath()].Specifications
                 .Any(x => ReferenceEquals(x, theNew))
                 .ShouldBeTrue();
         }

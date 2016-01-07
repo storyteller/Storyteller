@@ -82,7 +82,7 @@ namespace StoryTeller.Testing.Engine
                 x.TimeoutFlag = 5;
             });
 
-            // There are 23 specs in the sample project
+            // There are 23 Specifications in the sample project
             response.records.Length.ShouldBe(24);
 
             var first = response.records.Single(x => !x.results.WasAborted);

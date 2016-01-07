@@ -1,14 +1,40 @@
+using System;
+using System.Collections;
+using System.Linq;
+using Newtonsoft.Json;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
 
 namespace StoryTeller.Messages
 {
+    public class InitialModel : ClientMessage
+    {
+        [JsonProperty("recycled")]
+        public SystemRecycled Recycled { get; }
+        public HierarchyLoaded Hierarchy { get; }
+        public int port { get; set; }
+
+        public InitialModel(SystemRecycled recycled, HierarchyLoaded hierarchy) : base("initial-model")
+        {
+            Recycled = recycled;
+            Hierarchy = hierarchy;
+        }
+    }
+
+
     public class HierarchyLoaded : ClientMessage
     {
-        public Suite hierarchy;
+        public readonly Suite hierarchy;
+        public readonly SpecRecord[] specs;
 
-        public HierarchyLoaded() : base("hierarchy-loaded")
+        public HierarchyLoaded(Suite top, ResultsCache results) : base("hierarchy-loaded")
         {
+            hierarchy = top;
+
+            specs = top.GetAllSpecs().Select(x => new SpecRecord(x, results)).ToArray();
         }
+
 
         protected bool Equals(HierarchyLoaded other)
         {
@@ -20,12 +46,27 @@ namespace StoryTeller.Messages
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((HierarchyLoaded) obj);
+            return Equals((HierarchyLoaded)obj);
         }
 
         public override int GetHashCode()
         {
             return (hierarchy != null ? hierarchy.GetHashCode() : 0);
         }
+    }
+
+    public class SpecRecord
+    {
+        public SpecRecord(Specification data, ResultsCache cache)
+        {
+            this.data = data;
+            LastResults = cache.LastResultFor(data.id);
+        }
+
+        [JsonProperty("last_result")]
+        public SpecExecutionCompleted LastResults { get; set; }
+
+        public Specification data { get; }
+
     }
 }

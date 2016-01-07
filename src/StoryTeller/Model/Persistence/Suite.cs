@@ -13,19 +13,27 @@ namespace StoryTeller.Model.Persistence
         }
 
         public Suite[] suites;
-        public Specification[] specs;
+
+        [JsonIgnore]
+        public Specification[] Specifications;
+
         public string name;
         public string path;
 
         [JsonIgnore]
         public string Folder;
 
+        public string[] specs
+        {
+            get { return Specifications.Select(x => x.id).ToArray(); }
+        }
+
         public void WritePath(string parentFolder)
         {
             path = JoinPath(parentFolder, name);
 
             if (suites != null) suites.Each(x => x.WritePath(path));
-            if (specs != null) specs.Each(x => x.WritePath(path));
+            if (Specifications != null) Specifications.Each(x => x.WritePath(path));
         }
 
         public Hierarchy ToHierarchy()
@@ -45,12 +53,12 @@ namespace StoryTeller.Model.Persistence
             hierarchy.Suites[path] = this;
             suites.Each(x => x.organizeIntoHierarchy(hierarchy));
 
-            specs.Each(x => hierarchy.Specifications[x.id] = x);
+            Specifications.Each(x => hierarchy.Specifications[x.id] = x);
         }
 
         public IEnumerable<Specification> GetAllSpecs()
         {
-            return specs.Union(suites.SelectMany(x => x.GetAllSpecs()));
+            return Specifications.Union(suites.SelectMany(x => x.GetAllSpecs()));
         }
 
         public static string SuitePathOf(string path)
@@ -60,10 +68,10 @@ namespace StoryTeller.Model.Persistence
 
         public void ReplaceSpecification(Specification spec)
         {
-            var index = Array.IndexOf(specs, spec);
+            var index = Array.IndexOf(Specifications, spec);
             if (index > -1)
             {
-                specs[index] = spec;
+                Specifications[index] = spec;
             }
 
 
@@ -72,12 +80,12 @@ namespace StoryTeller.Model.Persistence
         public void AddSpec(Specification spec)
         {
             spec.WritePath(path);
-            specs = specs.Union(new[] {spec}).ToArray();
+            Specifications = Specifications.Union(new[] {spec}).ToArray();
         }
 
         public void RemoveSpec(Specification old)
         {
-            specs = specs.Where(x => x != old).ToArray();
+            Specifications = Specifications.Where(x => x != old).ToArray();
         }
 
         public void AddChildSuite(Suite newSuite)

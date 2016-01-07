@@ -52,7 +52,7 @@ namespace StoryTeller.Model.Persistence
             return new Suite
             {
                 name = Path.GetFileName(folder),
-                specs = FileSystem.FindFiles(folder, FileSet.Shallow("*.xml")).Select(ReadSpecHeader).ToArray(),
+                Specifications = FileSystem.FindFiles(folder, FileSet.Shallow("*.xml")).Select(ReadSpecHeader).ToArray(),
                 suites = FileSystem.ChildDirectoriesFor(folder).Select(ReadSuite).ToArray(),
                 Folder = folder
             };

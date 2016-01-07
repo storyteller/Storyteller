@@ -1,34 +1,8 @@
 var Postal = require('postal');
 var startRouting = require('./components/app');
 
-var AllSpecData = require('./all-spec-data');
-var Hierarchy = require('./lib/stores/hierarchy');
+var initialization = require('./initialization');
 
-
-Postal.subscribe({
-   channel: 'engine',
-   topic: '*',
-   callback: (data, env) => {
-     data.type = env.topic;
-     store.dispatch(data);  
-   } 
-});
-
-var store = Hierarchy.reset(); // just forcing it to get loaded
-
-Postal.publish({
-	channel: 'engine',
-	topic: 'hierarchy-loaded',
-	data: {hierarchy: AllSpecData.hierarchy}
-});
-
-Storyteller.initialization.fixtures = AllSpecData.fixtures;
-
-Postal.publish({
-	channel: 'engine',
-	topic: 'system-recycled',
-	data: Storyteller.initialization
-});
 
 Postal.subscribe({
 	channel: 'engine-request',
@@ -76,11 +50,5 @@ Postal.subscribe({
 	}
 });
 
-startRouting(store);
+startRouting(initialization);
 
-
-Postal.publish({
-	channel: 'engine',
-	topic: 'system-recycled',
-	data: Storyteller.initialization
-});

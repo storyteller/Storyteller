@@ -105,7 +105,7 @@ namespace ST.Client
                     {
                         Folder = directory,
                         name = name,
-                        specs = new Specification[0],
+                        Specifications = new Specification[0],
                         path = newPath,
                         suites = new Suite[0]
                     };
@@ -327,10 +327,7 @@ namespace ST.Client
 
         public void SendHierarchyToClient()
         {
-            var message = new HierarchyLoaded
-            {
-                hierarchy = _hierarchy.Top
-            };
+            var message = new HierarchyLoaded(_hierarchy.Top, _results);
 
             _client.SendMessageToClient(message);
         }

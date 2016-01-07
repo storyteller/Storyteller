@@ -2,7 +2,7 @@
 {
     public class ReloadSpecs : ClientMessage
     {
-        public ReloadSpecs() : base("reload-specs")
+        public ReloadSpecs() : base("reload-Specifications")
         {
         }
     }

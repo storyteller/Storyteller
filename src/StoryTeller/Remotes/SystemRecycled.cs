@@ -4,12 +4,20 @@ using System.Linq;
 using FubuCore;
 using StoryTeller.Messages;
 using StoryTeller.Model;
-using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Remotes
 {
     public class SystemRecycled : ClientMessage
     {
+        private readonly IList<FixtureModel> _fixtures = new List<FixtureModel>();
+        public string error;
+        public IDictionary<string, object> properties = new Dictionary<string, object>();
+        public bool success;
+        public string system_full_name;
+
+        public string system_name;
+        public string time = DateTime.Now.ToString("t");
+
         public SystemRecycled() : base("system-recycled")
         {
             properties.Add("ConfigFile", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
@@ -27,25 +35,13 @@ namespace StoryTeller.Remotes
                 _fixtures.AddRange(value);
             }
         }
-        public string time = DateTime.Now.ToString("t");
-
-        public string system_name;
-        public string system_full_name;
-        public bool success;
-        public string error;
-
-        private readonly IList<FixtureModel> _fixtures = new List<FixtureModel>(); 
 
         public string name { get; set; }
-        public IDictionary<string, object> properties = new Dictionary<string, object>();
 
         public void WriteSystemUsage()
         {
             Console.WriteLine("Using System: " + system_name);
-            properties.Each(pair =>
-            {
-                Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
-            });
+            properties.Each(pair => { Console.WriteLine("{0}: {1}", pair.Key, pair.Value); });
             Console.WriteLine();
         }
     }

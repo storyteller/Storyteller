@@ -208,6 +208,7 @@
     <Compile Include="Messages\PassthroughMessage.cs" />
     <Compile Include="Messages\QueueState.cs" />
     <Compile Include="Messages\ReloadSpecs.cs" />
+    <Compile Include="Messages\ResultsCache.cs" />
     <Compile Include="Messages\RunSpec.cs" />
     <Compile Include="Messages\RunSpecs.cs" />
     <Compile Include="Messages\RuntimeError.cs" />

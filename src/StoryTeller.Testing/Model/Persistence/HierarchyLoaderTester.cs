@@ -79,7 +79,7 @@ namespace StoryTeller.Testing.Model.Persistence
         public void SuitePathOf_spec_path()
         {
             var hierarchy = TestingContext.Hierarchy.ToHierarchy();
-            hierarchy.Suites["General"].specs.Each(x =>
+            hierarchy.Suites["General"].Specifications.Each(x =>
             {
                 x.SuitePath().ShouldBe("General");
             });

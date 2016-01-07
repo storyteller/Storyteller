@@ -1,14 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using FubuCore;
 using NUnit.Framework;
+using StoryTeller.Engine;
+using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
+using ST.Client;
+using ST.CommandLine;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    [TestFixture, Explicit]
     public class recording_json_for_client_development
     {
         [Test]
@@ -25,7 +31,56 @@ namespace StoryTeller.Testing
 
             var json = JsonSerialization.ToIndentedJson(dictionary);
 
-            new FileSystem().WriteStringToFile("specs.js", "module.exports = " + json);
+            new FileSystem().WriteStringToFile("Specifications.js", "module.exports = " + json);
+        }
+
+        [Test]
+        public void write_initial_model()
+        {
+            // You need to compile everything before trying to use this
+            var input = new ProjectInput
+            {
+                Path =
+                    AppDomain.CurrentDomain.BaseDirectory.ParentDirectory()
+                        .ParentDirectory()
+                        .ParentDirectory()
+                        .AppendPath("Storyteller.Samples"),
+                ProfileFlag = "Safari"
+            };
+
+            using (var controller = input.BuildRemoteController())
+            {
+                controller.Start(EngineMode.Batch).Wait(30.Seconds());
+
+                var hierarchy = controller.LoadHierarchy();
+                var request = new BatchRunRequest();
+                var response = controller.Send(request).AndWaitFor<BatchRunResponse>();
+
+                var cache = new ResultsCache();
+                response.Result.records.Each(
+                    x =>
+                    {
+                        var completed = new SpecExecutionCompleted(x.specification.id, x.results, x.specification);
+                        cache.Store(completed);
+                    });
+
+                var hierarchyLoaded = new HierarchyLoaded(hierarchy, cache);
+
+                var initialization = new InitialModel(controller.LatestSystemRecycled, hierarchyLoaded)
+                {
+                    port = 8200
+                };
+
+                var json = JsonSerialization.ToIndentedJson(initialization);
+
+                var path = AppDomain.CurrentDomain.BaseDirectory
+                    .ParentDirectory().ParentDirectory() // project dir
+                    .ParentDirectory().ParentDirectory() // root
+                    .AppendPath("client", "initialization.js");
+
+                new FileSystem().WriteStringToFile(path, "module.exports = " + json);
+
+            }
         }
 
         [Test]

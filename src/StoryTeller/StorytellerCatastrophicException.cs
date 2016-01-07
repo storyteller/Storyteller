@@ -5,7 +5,7 @@ namespace StoryTeller
 {
     /// <summary>
     /// Means that the entire system under test is invalid and
-    /// no more specs should be executed
+    /// no more Specifications should be executed
     /// </summary>
     [Serializable]
     public class StorytellerCatastrophicException : Exception

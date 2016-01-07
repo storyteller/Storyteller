@@ -70,11 +70,7 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.AllCachedResults().Any().ShouldBeFalse();
 
-            var hierarchyLoaded = new HierarchyLoaded
-            {
-                hierarchy = ClassUnderTest.Hierarchy.Top
-            };
-
+            var hierarchyLoaded = new HierarchyLoaded(ClassUnderTest.Hierarchy.Top, ClassUnderTest.Results);
             MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(hierarchyLoaded));
         }
 
@@ -167,7 +163,7 @@ namespace StoryTeller.Testing.ST
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
-            suite.specs.ShouldContain(added.data);
+            suite.Specifications.ShouldContain(added.data);
         }
 
         [Test]
@@ -190,7 +186,7 @@ namespace StoryTeller.Testing.ST
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
-            suite.specs.ShouldContain(added.data);
+            suite.Specifications.ShouldContain(added.data);
         }
 
 
@@ -214,7 +210,7 @@ namespace StoryTeller.Testing.ST
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
-            suite.specs.ShouldContain(added.data);
+            suite.Specifications.ShouldContain(added.data);
         }
 
 
@@ -232,7 +228,7 @@ namespace StoryTeller.Testing.ST
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Foo Specs"];
             newSuite.name.ShouldBe("Foo Specs");
-            newSuite.specs.Length.ShouldBe(0);
+            newSuite.Specifications.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
             newSuite.path.ShouldBe("Foo Specs");
 
@@ -254,7 +250,7 @@ namespace StoryTeller.Testing.ST
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Tables/Special Tables"];
             newSuite.name.ShouldBe("Special Tables");
-            newSuite.specs.Length.ShouldBe(0);
+            newSuite.Specifications.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
             newSuite.path.ShouldBe("Tables/Special Tables");
 
@@ -278,7 +274,7 @@ namespace StoryTeller.Testing.ST
             newNode.Lifecycle.ShouldBe(Lifecycle.Regression);
 
             ClassUnderTest.Hierarchy.Suites["General"]
-                .specs.ShouldContain(newNode);
+                .Specifications.ShouldContain(newNode);
 
            var sent =  MockFor<IClientConnector>().GetArgumentsForCallsMadeOn(x => x.SendMessageToClient(new SpecData()))[0][0] as SpecData;
 

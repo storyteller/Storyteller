@@ -183,7 +183,7 @@
     <Compile Include="ST\Docs\Transformation\TransformerTester.cs" />
     <Compile Include="ST\PersistenceControllerTester.cs" />
     <Compile Include="ST\Persistence\RunSpecCommandTester.cs" />
-    <Compile Include="ST\ResultsCacheTester.cs" />
+    <Compile Include="Messages\ResultsCacheTester.cs" />
     <Compile Include="ST\RunCommandTester.cs" />
     <Compile Include="ST\SaveSpecBodyCommandTester.cs" />
     <Compile Include="TestingContext.cs" />
