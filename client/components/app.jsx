@@ -15,6 +15,7 @@ var Header = require('./header/header');
 var GrammarErrors = require('./grammars/grammar-errors');
 var SpecEditor = require('./editing/spec-editor');
 var SpecPreview = require('./editing/spec-preview');
+var SpecResults = require('./editing/spec-results');
 var SuiteExplorer = require('./explorer/suite-explorer');
 var ResultsTable = require('./results/results-table');
 
@@ -62,20 +63,6 @@ module.exports = function(initialization, register){
   //var communicator = new Communicator(store, Storyteller.wsAddress, () => startRouting(store), disconnect);
 
 
-/*
-
-              <Route name="language" path="/language" component={Language}/>
-              <Route name="documentation" path="/docs" component={Documentation}/>
-              <Route name="queue" path="/queue" component={QueuePage} />
-              <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
-              <Route name="spec-editor" path="/spec/:mode/:id" component={SpecEditorWrapper} />
-              <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
-              <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
-              <Route name="results" path="/results" component={ResultsTable} />
-              <IndexRoute component={SpecExplorer}/>
-*/
-
-
 
   ReactDOM.render(
       <Provider store={store}>
@@ -88,11 +75,14 @@ module.exports = function(initialization, register){
             <Route name="app" path="/" >
                 <Route name="language" path="/language" component={Language}/>
                 <Route name="documentation" path="/docs" component={Documentation}/>
+                <Route name="queue" path="/queue" component={QueuePage} />
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
                 <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
                 <Route name="spec-editor" path="/spec/editing/:id" component={SpecEditor} />
+                <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
                 <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
                 <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
+                <Route name="results" path="/results" component={ResultsTable} />
                 <IndexRoute component={SpecExplorer}/>
             </Route>
           </Router>
