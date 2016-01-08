@@ -30,7 +30,7 @@ function toStatusFilter(status){
     return alwaysTrue;
   }
   
-  return spec => spec.status() == status;
+  return spec => spec.status == status;
 }
 
 
@@ -87,6 +87,8 @@ function SuiteHeader(props){
 
 module.exports = function TreeView(props){
     var suite = props.suite;
+    var top = suite;
+    
     if (props.status != 'any' || props.lifecycle != 'any'){
         var lifecycleFilter = toLifecycleFilter(props.lifecycle);
         var statusFilter = toStatusFilter(props.status);
@@ -95,7 +97,7 @@ module.exports = function TreeView(props){
         suite = suite.filter(filter, props.specs);
     }
     
-    var summary = suite.summary(props.specs);
+    var summary = top.summary(props.specs);
 
     var suites = null;
 
@@ -128,11 +130,11 @@ module.exports = function TreeView(props){
                 <br />
                 <br />
                 <h5>Filter by Status</h5>
-                <StatusFilter summary={summary} status={props.status}/>
+                <StatusFilter summary={summary} status={props.status} dispatch={props.dispatch}/>
                 <br />
                 <br />
                 <h5>Filter by Lifecycle</h5>
-                <LifecycleFilter summary={summary} lifecycle={props.lifecycle}/>
+                <LifecycleFilter summary={summary} lifecycle={props.lifecycle} dispatch={props.dispatch}/>
 
             </div>
             <div className="col-md-10">

@@ -31,7 +31,7 @@ class Suite{
 		filtered.isHierarchy = this.isHierarchy;
 		filtered.specs = this.specs.filter(id => filter(specs.get(id))); 
 		filtered.suites = this.suites
-			.map(s => s.filter(filter))
+			.map(s => s.filter(filter, specs))
 			.filter(x => x.hasAnySpecs());
 
 		return filtered;

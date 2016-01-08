@@ -33,7 +33,7 @@ module.exports = function Reducer(state = initialState, action){
         return state.set('tree-state', Immutable.Map(treeState));
         
     case 'collapse-all':
-        var treeState = state.get('tree-state').toJS();
+        var treeState = {};
         var suite = state.get('hierarchy');
         
         suite.allSuites().forEach(s => treeState[s.path] = false);
@@ -46,6 +46,9 @@ module.exports = function Reducer(state = initialState, action){
         }
     
         return state.setIn(['tree-state', action.path], false);
+     
+    case 'spec-status-filter-changed':
+        return state.set('status-filter', action.status);
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);
