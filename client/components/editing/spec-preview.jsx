@@ -36,7 +36,6 @@ function SpecPreview(props){
         return ( <EditorLoading spec={props.spec} /> );
     }
     
-    // <SpecResultHeader spec={this.props.spec} />
     // <Persisting spec={this.props.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
     
     var components = props.spec.spec.previews(loader);
