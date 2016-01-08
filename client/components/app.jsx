@@ -14,6 +14,7 @@ var QueuePage = require('./queue/queue-page');
 var Header = require('./header/header');
 var GrammarErrors = require('./grammars/grammar-errors');
 var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
+var SpecPreview = require('./editing/spec-preview');
 var SuiteExplorer = require('./explorer/suite-explorer');
 var ResultsTable = require('./results/results-table');
 
@@ -23,69 +24,15 @@ var uuid = require('node-uuid');
 var $ = require('jquery');
 
 var Reducer  = require('./../lib/state/reducer');
+var Communicator = require('./../communicator');
 
 var { createStore } = require('redux');
 
 
-function Communicator(store, address, continuation, disconnect){
-	this.socket = new WebSocket(address);
-
-	this.socket.onclose = function(){
-		console.log('The socket closed');
-		disconnect();
-	};
-
-	this.socket.onerror = function(evt){
-		console.log(JSON.stringify(evt));
-	}
-
-	this.socket.onmessage = function(evt){
-		var message = JSON.parse(evt.data);
-		console.log('Got: ' + JSON.stringify(message) + ' with topic ' + message.type);
-	
-		if (message.type == 'refresh-page'){
-			location.reload();
-			
-			return;
-		}
-	
-		store.dispatch(evt);
-	};
-	
-	
-	
-	this.socket.onopen = function(){
-		console.log('Opened a socket at ' + address);
-		continuation();
-	}
-
-	this.send = function(message){
-		if (this.socket.readyState != 1){
-			disconnect();
-		}
-		else {
-			this.socket.send(JSON.stringify(message));
-		}
-	}
-	
-	var self = this;
-	
-	Postal.subscribe({
-		channel: 'engine-request',
-		topic: '*',
-		callback: function(data, envelope){
-			data.type = envelope.topic;
-			
-			console.log("Sending message to server: " + JSON.stringify(data));
-			
-			self.send(data);
-		}
-	});
-}
 
 var disconnect = require('./../components/disconnected');
 
-module.exports = function(initialization){
+module.exports = function(initialization, register){
   // activate keyboard shortcuts
   require('./../lib/presentation/keyboard-shortcuts').register();
 
@@ -98,6 +45,10 @@ module.exports = function(initialization){
   
   var store = createStore(Reducer);
   store.dispatch(initialization);
+  
+  if (register){
+      register(store);
+  }
   
   // TODO -- use this someday very soon
   //var communicator = new Communicator(store, Storyteller.wsAddress, () => startRouting(store), disconnect);
@@ -129,6 +80,7 @@ module.exports = function(initialization){
                 <Route name="language" path="/language" component={Language}/>
                 <Route name="documentation" path="/docs" component={Documentation}/>
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
+                <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
                 <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
                 <IndexRoute component={SpecExplorer}/>
             </Route>
@@ -140,8 +92,7 @@ module.exports = function(initialization){
       </Provider>
 
 
-  , document.getElementById("main"));
-
+  , document.getElementById("main"));;
 }
 
 

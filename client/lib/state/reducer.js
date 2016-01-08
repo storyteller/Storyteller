@@ -1,6 +1,7 @@
 import SystemRecycled from './system-recycled';
 var HierarchyLoaded = require('./hierarchy-loaded');
 var Immutable = require('immutable');
+var Specification = require('./../model/specification');
 
 var initialState = Immutable.Map({
     'lifecycle-filter': 'any', 
@@ -52,6 +53,11 @@ module.exports = function Reducer(state = initialState, action){
         
     case 'lifecycle-filter-changed':
         return state.set('lifecycle-filter', action.lifecycle);
+        
+    case 'spec-data':
+        var library = state.get('fixtures');
+        var spec = new Specification(action.data, library);
+        return state.updateIn(['specs', action.id], x => x.replace(spec));
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);

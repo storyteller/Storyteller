@@ -30,6 +30,10 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.set('state', 'running');
     }
     
+    replace(spec){
+        return this.set('spec', spec);
+    }
+    
     recordLastResult(result){
         return this.set('state', 'none').set('last_result', result).set('status', statusForResults(result));
     }
