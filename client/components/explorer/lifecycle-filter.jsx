@@ -2,48 +2,37 @@ var React = require("react");
 var {Button, ButtonGroup} = require('react-bootstrap');
 var Postal = require('postal');
 
-var LifecycleButton = React.createClass({
-	render: function(){
-		var badge = ( <span className="badge pull-right">{this.props.count}</span> );
-		var content = ( <span className="pull-left">{this.props.text}</span> );
+function LifecycleButton(props){
+    var badge = ( <span className="badge pull-right">{props.count}</span> );
+    var content = ( <span className="pull-left">{props.text}</span> );
 
-		if (this.props.active){
-			return (
-				<Button id={this.props.id} active>{content} {badge}</Button>
-			);
-		}
+    if (props.active){
+        return (
+            <Button id={props.id} active>{content} {badge}</Button>
+        );
+    }
 
-		var handler = e => {
-			Postal.publish({
-				channel: 'explorer',
-				topic: 'lifecycle-filter-changed',
-				data: {lifecycle: this.props.lifecycle}
-			});
-
-			e.preventDefault();
-		}
+    var handler = e => props.dispatch({type: 'lifecycle-filter-changed', lifecycle: props.lifecycle})
 
 
+    return (
+        <Button id={props.id} active={props.active} onClick={handler}>{content} {badge}</Button>
+    );
+}
 
-		return (
-			<Button id={this.props.id} active={this.props.active} onClick={handler}>{content} {badge}</Button>
-		);
-	}
-});
+function LifecycleFilter(props){
+    var actives = {any: false, Acceptance: false, Regression: false};
+    actives[props.lifecycle] = true;
 
-var LifecycleFilter = React.createClass({
-	render: function(){
-		var actives = {any: false, Acceptance: false, Regression: false};
-		actives[this.props.lifecycle] = true;
+    return (
+        <ButtonGroup vertical>
+            <LifecycleButton id="any-lifecycle" count={props.summary.total} active={actives.any} text="Any" lifecycle="any" dispatch={props.dispatch} />
+            <LifecycleButton id="acceptance-lifecycle" count={props.summary.acceptance} active={actives.Acceptance} text="Acceptance" lifecycle="Acceptance" dispatch={props.dispatch} />
+            <LifecycleButton id="regression-lifecycle" count={props.summary.regression} active={actives.Regression} text="Regression" lifecycle="Regression" dispatch={props.dispatch} />
+        </ButtonGroup>
+    );
+}
 
-		return (
-			<ButtonGroup vertical>
-				<LifecycleButton id="any-lifecycle" count={this.props.summary.total} active={actives.any} text="Any" lifecycle="any" />
-				<LifecycleButton id="acceptance-lifecycle" count={this.props.summary.acceptance} active={actives.Acceptance} text="Acceptance" lifecycle="Acceptance" />
-				<LifecycleButton id="regression-lifecycle" count={this.props.summary.regression} active={actives.Regression} text="Regression" lifecycle="Regression" />
-			</ButtonGroup>
-		);
-	}
-});
+
 
 module.exports = LifecycleFilter;

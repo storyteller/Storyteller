@@ -49,6 +49,9 @@ module.exports = function Reducer(state = initialState, action){
      
     case 'spec-status-filter-changed':
         return state.set('status-filter', action.status);
+        
+    case 'lifecycle-filter-changed':
+        return state.set('lifecycle-filter', action.lifecycle);
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);
