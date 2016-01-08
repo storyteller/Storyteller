@@ -91,6 +91,7 @@ module.exports = function(initialization, register){
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
                 <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
                 <Route name="spec-editor" path="/spec/editing/:id" component={SpecEditor} />
+                <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
                 <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
                 <IndexRoute component={SpecExplorer}/>
             </Route>

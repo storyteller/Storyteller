@@ -2,67 +2,55 @@ var React = require("react");
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 var _ = require('lodash');
-var uuid = require('node-uuid');
+var { connect } = require('react-redux');
 
-var GrammarTable = React.createClass({
 
-	render(){
-		var grammars = _.sortBy(_.values(this.props.fixture.grammars), x => x.title);
 
-		var rows = grammars.map(x => {
-			return (
-				<tr key={uuid.v4()}>
-					<td>{x.title}</td>
-					<td>{x.type}</td>
-				</tr>
-			);
-		});
+function GrammarTable(props){
+    var grammars = _.sortBy(_.values(props.fixture.grammars), x => x.title);
 
-		return (
-			<table className="table">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Type</th>
-					</tr>
-				</thead>
-				<tbody>
-					{rows}
-				</tbody>
-			</table>
-		);
-	}
+    var i = 0;
+    var rows = grammars.map(x => {
+        return (
+            <tr key={++i}>
+                <td>{x.title}</td>
+                <td>{x.type}</td>
+            </tr>
+        );
+    });
 
-});
+    return (
+        <table className="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rows}
+            </tbody>
+        </table>
+    );
+}
 
-var FixtureTable = React.createClass({
-	componentDidMount(){
-		this.subscription = Postal.subscribe({
-			channel: 'explorer',
-			topic: 'fixtures-loaded',
-			callback: data => {
-				this.setState({
-					x: 0
-				});
-			}
-		});
-	},
+function FixtureTable(props){
+    var fixture = props.fixture;
 
-	componentWillUnMount(){
-		this.subscription.unsubscribe();
-	},
+    return (
+        <div>
+            <h2>Fixture '{fixture.title}' ({fixture.implementation})</h2>
+            <hr />
+            <GrammarTable fixture={fixture} />
+        </div>
+    );
+}
 
-	render(){
-		var fixture = Hierarchy.fixtures().find(this.props.params.key);
+function getFixture(state, ownProps){
+    var fixtures = state.get('fixtures');
+    var fixture = fixtures.find(ownProps.params.key);
+    
+    return {fixture: fixture};
+}
 
-		return (
-			<div key={uuid.v4()}>
-				<h2>Fixture '{fixture.title}' ({fixture.implementation})</h2>
-				<hr />
-				<GrammarTable fixture={fixture} />
-			</div>
-		);
-	}
-});
-
-module.exports = FixtureTable;
+module.exports = connect(getFixture)(FixtureTable);
