@@ -3,6 +3,8 @@ var Postal = require('postal');
 var {connect} = require('react-redux');
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
 var EditorLoading = require('./alerts/editor-loading');
+var SpecHeader = require('./header/spec-header');
+var loader = require('./component-loader').preview;
 
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
@@ -28,18 +30,26 @@ function addDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-class SpecPreview extends React.Component{
-    constructor(props){
-        super(props);
+function SpecPreview(props){
+    if (props.loading){
+        return ( <EditorLoading spec={props.spec} /> );
     }
     
-    render(){
-        if (this.props.loading){
-            return ( <EditorLoading spec={this.props.spec} /> );
-        }
-        
-        return (<div><h1>Standin for {this.props.spec.title}</h1></div>);
-    }
+    // <SpecResultHeader spec={this.props.spec} />
+    // <Persisting spec={this.props.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
+    
+    var components = props.spec.spec.previews(loader);
+    
+    return (
+        <Grid>
+            <SpecHeader spec={props.spec} mode='preview' />
+            <Row>
+                {components}
+            </Row>
+        </Grid>
+    );
 }
+
+
 
 module.exports = connect(getSpec, addDispatch)(SpecPreview);

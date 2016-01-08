@@ -30,6 +30,18 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.set('state', 'running');
     }
     
+    isDirty(){
+        return this.spec.isDirty();
+    }
+    
+    canRedo(){
+        return this.spec.canRedo();
+    }
+    
+    canUndo(){
+        return this.spec.canUndo();
+    }
+    
     replace(spec){
         return this.set('spec', spec);
     }
