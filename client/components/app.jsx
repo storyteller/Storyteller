@@ -13,7 +13,7 @@ var Documentation = require('./documentation');
 var QueuePage = require('./queue/queue-page');
 var Header = require('./header/header');
 var GrammarErrors = require('./grammars/grammar-errors');
-var SpecEditorWrapper = require('./editing/spec-editor-wrapper');
+var SpecEditor = require('./editing/spec-editor');
 var SpecPreview = require('./editing/spec-preview');
 var SuiteExplorer = require('./explorer/suite-explorer');
 var ResultsTable = require('./results/results-table');
@@ -81,6 +81,7 @@ module.exports = function(initialization, register){
                 <Route name="documentation" path="/docs" component={Documentation}/>
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
                 <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
+                <Route name="spec-editor" path="/spec/editing/:id" component={SpecEditor} />
                 <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
                 <IndexRoute component={SpecExplorer}/>
             </Route>
