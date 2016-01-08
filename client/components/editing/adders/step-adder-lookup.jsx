@@ -50,7 +50,7 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<div class="input-group">
+			<div className="input-group">
 			  <input style={{width: '100%'}} ref="text" type="text" className="form-control" placeholder="Add steps or comments" aria-describedby="basic-addon2" />
 			</div>
 		)

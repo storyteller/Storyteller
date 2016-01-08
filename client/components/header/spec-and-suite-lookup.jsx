@@ -39,7 +39,7 @@ var SuiteAndSpecLookup = React.createClass({
 
 	render(){
 		return (
-			<div class="input-group">
+			<div className="input-group">
 			  <input style={{width: '100%'}} ref="text" type="text" className="form-control" placeholder="Find specifications or suites by name" aria-describedby="basic-addon2" />
 			</div>
 		)

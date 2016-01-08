@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var Postal = require('postal');
 
 
-var {Router, Route, IndexRoute, Link, RouteHandler} = require('react-router');
+var {Router, Route, IndexRoute, Link, RouteHandler, browserHistory} = require('react-router');
 var { Provider } = require('react-redux');
 
 
@@ -50,6 +50,14 @@ module.exports = function(initialization, register){
       register(store);
   }
   
+    var { createHistory } = require('history');
+    var history = createHistory();
+
+    history.listen(location => {
+        console.log('location is ' + JSON.stringify(location));
+    })
+
+  
   // TODO -- use this someday very soon
   //var communicator = new Communicator(store, Storyteller.wsAddress, () => startRouting(store), disconnect);
 
@@ -66,6 +74,7 @@ module.exports = function(initialization, register){
               <Route name="results" path="/results" component={ResultsTable} />
               <IndexRoute component={SpecExplorer}/>
 */
+
 
 
   ReactDOM.render(
