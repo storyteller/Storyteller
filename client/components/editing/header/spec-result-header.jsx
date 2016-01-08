@@ -2,101 +2,77 @@ var React = require("react");
 var Postal = require('postal');
 
 var {Alert} = require('react-bootstrap');
-var ResultCache = require('./../../../lib/stores/result-cache');
-var QueueState = require('./../../../lib/stores/queue-state');
 var Icons = require('./../../icons');
+var Counts = require('./../../../lib/model/counts');
 
+function SpecResultHeader(props){
+    var icon = props.spec.icon();
+    var status = props.spec.status;
+    
+    var queued = props.spec.state;
+    var counts = null;
+    var duration = null;
+    var time = null;
+    
+    /*
+    
+    // TODO -- show the running state here!
+    
+    var counts = new Counts(0, 0, 0, 0);
+    if (queued == 'running'){
+        // Should be the running counts
+        counts = new Counts(0, 0, 0, 0);
+    }
+    else if (ResultCache.hasResults(this.props.spec.id)){
+        var result = ResultCache.lastResultFor(this.props.spec.id);
 
-var SpecResultHeader = React.createClass({
-	getData: function(){
-		var counts = null;
-		var duration = null;
-		var time = null;
+        counts = result.counts;
+        duration = result.results.duration;
+        time = result.time;
+    }
+    */
+    
+    if (queued == 'none' && status == 'none') return (<span />);
 
-		var queued = this.props.spec.state;
-		if (queued == 'running'){
-			counts = QueueState.runningCounts();
-		}
-		else if (ResultCache.hasResults(this.props.spec.id)){
-			var result = ResultCache.lastResultFor(this.props.spec.id);
+    var Icon = Icons[icon];
 
-			counts = result.counts;
-			duration = result.results.duration;
-			time = result.time;
-		}
+    var bsStyle = 'info';
+    if (counts && counts.anyResults()){
+        if (counts.success()){
+            bsStyle = 'success';
+        }
+        else {
+            bsStyle = 'danger';
+        }
+    }
 
+    var text = null;
 
+    if (queued == 'queued'){
+        if (status == 'none'){
+            text = 'Queued for Execution';
+        }
+        else {
+            text = (<span>Queued for Execution, last run was {counts.toString()}</span>);
+        }
+        
+    }
+    else if (queued == 'running'){
+        text = (<span>Running with {counts.toString()}</span>);
+    }
+    else if (status == 'success') {
+        text = (<span>Succeeded in {duration} ms with {counts.toString()} at {time}</span>)
+    }
+    else {
+        text = (<span>Failed in {duration} ms with {counts.toString()} at {time}</span>)
+    }
 
-		return {
-			icon: this.props.spec.icon(),
-			status: this.props.spec.status(),
-			queued: queued,
-			counts: counts,
-			duration: duration,
-			time: time
-		}
-	},
+    return (
+        <Alert bsStyle={bsStyle}>
+            <Icon /> {text}
+        </Alert>
+    );
+}
 
-	getInitialState: function(){
-		return this.getData();
-	},
-
-	componentDidMount: function(){
-		this.subscription = Postal.subscribe({
-			channel: 'explorer',
-			topic: 'hierarchy-updated',
-			callback: () => {
-				this.setState(this.getData());
-			}
-		});
-	},
-
-	componentWillUnmount: function(){
-		this.subscription.unsubscribe();
-	},
-
-	render: function(){
-		if (this.state.queued == 'none' && this.state.status == 'none') return null;
-
-		var Icon = Icons[this.state.icon];
-
-		var bsStyle = 'info';
-		if (this.state.counts && this.state.counts.anyResults()){
-			if (this.state.counts.success()){
-				bsStyle = 'success';
-			}
-			else {
-				bsStyle = 'danger';
-			}
-		}
-
-		var text = null;
-
-		if (this.state.queued == 'queued'){
-			if (this.state.status == 'none'){
-				text = 'Queued for Execution';
-			}
-			else {
-				text = (<span>Queued for Execution, last run was {this.state.counts.toString()}</span>);
-			}
-			
-		}
-		else if (this.state.queued == 'running'){
-			text = (<span>Running with {this.state.counts.toString()}</span>);
-		}
-		else if (this.state.status == 'success') {
-			text = (<span>Succeeded in {this.state.duration} ms with {this.state.counts.toString()} at {this.state.time}</span>)
-		}
-		else {
-			text = (<span>Failed in {this.state.duration} ms with {this.state.counts.toString()} at {this.state.time}</span>)
-		}
-
-		return (
-			<Alert bsStyle={bsStyle}>
-				<Icon /> {text}
-			</Alert>
-		);
-	}
-});
 
 module.exports = SpecResultHeader;

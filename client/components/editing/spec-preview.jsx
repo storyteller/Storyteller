@@ -4,6 +4,7 @@ var {connect} = require('react-redux');
 var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
 var EditorLoading = require('./alerts/editor-loading');
 var SpecHeader = require('./header/spec-header');
+var SpecResultHeader = require('./header/spec-result-header');
 var loader = require('./component-loader').preview;
 
 function getSpec(state, ownProps){
@@ -44,6 +45,7 @@ function SpecPreview(props){
         <Grid>
             <SpecHeader spec={props.spec} mode='preview' />
             <Row>
+                <SpecResultHeader spec={props.spec} />
                 {components}
             </Row>
         </Grid>
