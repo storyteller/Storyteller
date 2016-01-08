@@ -72,8 +72,10 @@ function SuiteHeader(props){
     var Icon = icons[suite.icon(props.specs)];
     var icon = (<Icon />);
     
-    // TODO -- this will need to do something
-    var toggle = () => props.dispatch({type:'toggle-tree-state', path: suite.path});
+    var toggle = e => {
+        props.dispatch({type:'toggle-tree-state', path: suite.path});
+        e.preventDefault();
+    }
 
     return (
         <div key={suite.path} className={openClass + ' suite-header'}>

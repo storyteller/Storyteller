@@ -129,6 +129,7 @@ module.exports = function(initialization){
                 <Route name="language" path="/language" component={Language}/>
                 <Route name="documentation" path="/docs" component={Documentation}/>
                 <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
+                <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
                 <IndexRoute component={SpecExplorer}/>
             </Route>
           </Router>

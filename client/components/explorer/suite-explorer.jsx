@@ -1,17 +1,50 @@
-var React = require("react");
-var SpecExplorer = require('./spec-explorer');
-var Hierarchy = require('./../../lib/stores/hierarchy');
+var TreeView = require('./tree-view');
+var {connect} = require('react-redux');
+var React = require('react');
 
-var SuiteExplorer = React.createClass({
-	render(){
-		var params = this.props.params;
+function findSuite(names, top){
+  var suite = top;
 
-		var path = params.splat;
+  if (names && !(names instanceof Array)){
+    names = names.split('/');
+  }
 
-		var suite = Hierarchy.findSuite(path);
+  names.forEach(x => {
+    if (suite == null) return null;
+    suite = suite.childSuite(x);
+  });
 
-		return (<SpecExplorer suite={suite} />);
-	}
-});
+  if (suite == undefined) return null;
 
-module.exports = SuiteExplorer;
+  return suite;
+}
+
+function getExplorerState(state){
+    var status = state.get('status-filter');
+    var lifecycle = state.get('lifecycle-filter');
+    
+    return {
+        suite: state.get('hierarchy'), 
+        status: status, 
+        lifecycle: lifecycle, 
+        specs: state.get('specs'), 
+        treeState: state.get('tree-state')
+    };
+}
+
+function addDispatch(dispatch){
+    return {dispatch: dispatch};
+}
+
+function SuiteExplorer(props){
+    var params = props.params;
+
+    var path = params.splat;
+    
+    var top = props.suite;
+    var suite = findSuite(path, top);
+
+    return (<TreeView {...props} suite={suite} />);
+}
+
+module.exports = connect(getExplorerState, addDispatch)(SuiteExplorer);
