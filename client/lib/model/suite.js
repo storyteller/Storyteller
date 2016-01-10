@@ -15,7 +15,7 @@ class Suite{
 	}
 
 	hasSpec(id){
-		return this.specs.includes(id);
+		return this.specs.indexOf(id) > -1;
 	}
 
 	childSuite(name){

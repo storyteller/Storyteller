@@ -4,3 +4,4 @@ client/lib-tests/**/test-*.js
 --reporter spec
 --bail
 --watch-extensions jsx
+--harmony
