@@ -16,7 +16,7 @@ var SpecOutline = require('./spec-outline');
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
-    var loading = spec.spec.mode == 'header';
+    var loading = spec.mode == 'header';
 
     if (loading){
         // TODO -- do this differently
@@ -35,7 +35,7 @@ function getSpec(state, ownProps){
     return {
         spec: spec, 
         loading: loading, 
-        activeContainer: spec.spec.activeContainer,
+        activeContainer: spec.activeContainer,
         updatingDate: false
     };
 }
@@ -67,7 +67,7 @@ function SpecEditor(props){
 
     // TODO -- get the updatingDate? Think that would be something we do w/ redux now
     
-    var components = props.spec.spec.editors(loader);
+    var components = props.spec.editors(loader);
     
     // TODO -- put Persisting back
     // <Persisting spec={props.spec} lastSaved={props.lastSaved} persisting={props.persisting}/>
@@ -81,7 +81,7 @@ function SpecEditor(props){
                     spec={props.spec}
                     loader={loader}
                     activeContainer={props.activeContainer}
-                    outline={props.spec.spec.outline()}
+                    outline={props.spec.outline()}
                     updatingDate={props.updatingDate}
                 />
                 

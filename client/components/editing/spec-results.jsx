@@ -10,7 +10,7 @@ var loader = require('./component-loader').results;
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
-    var loading = spec.spec.mode == 'header';
+    var loading = spec.mode == 'header';
 
     if (loading){
         // TODO -- do this differently
@@ -38,7 +38,7 @@ function SpecResults(props){
     
     // <Persisting spec={this.props.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
     
-    var components = props.spec.spec.buildResults(loader);
+    var components = props.spec.buildResults(loader);
     
     return (
         <Grid>

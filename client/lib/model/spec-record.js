@@ -26,6 +26,14 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.spec.title;
     }
     
+    get mode(){
+        return this.spec.mode;
+    }
+    
+    get activeContainer(){
+        return this.spec.activeContainer;
+    }
+    
     markRunning(){
         return this.set('state', 'running');
     }
@@ -40,6 +48,22 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     
     canUndo(){
         return this.spec.canUndo();
+    }
+    
+    editors(loader){
+        return this.spec.editors(loader);
+    }
+    
+    outline(){
+        return this.spec.outline();
+    }
+    
+    buildResults(loader){
+        return this.spec.buildResults(loader);
+    }
+    
+    previews(loader){
+        return this.spec.previews(loader);
     }
     
     replace(spec){
