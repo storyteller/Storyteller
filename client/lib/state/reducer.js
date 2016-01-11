@@ -78,6 +78,9 @@ module.exports = function Reducer(state = initialState, action){
     
         return state.set('running', action.id).set('progress', action);
 
+    case 'spec-execution-completed':
+        return state.updateIn(['specs', action.id], record => record.recordLastResult(action));
+   
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);

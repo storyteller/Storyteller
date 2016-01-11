@@ -79,15 +79,15 @@ class Suite{
 		return _.flatten(specs);
 	}
 
-	icon(specDict){
+	icon(specDict, runningSpec, queued, progress){
 		if (this.specs.length == 0 && this.suites.length == 0) return 'none';
 
 		var specs = this.allSpecs();
 
-		var running = _.find(specs, x => specDict.get(x).status == 'running');
-		if (running){
-			return running.icon();
-		}
+        if (this.hasSpec(runningSpec)){
+            var running = specDict.get(runningSpec);
+            return running.icon(runningSpec, queued, progress);
+        }
 
 		var firstFailure = _.find(specs, x => specDict.get(x).status == 'failed');
 		if (firstFailure) return 'failed';

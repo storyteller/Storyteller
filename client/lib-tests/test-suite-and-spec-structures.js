@@ -120,4 +120,92 @@ describe('Suite', function(){
 
 });
 
+var reducer = require('./../lib/state/reducer');
+var { createStore } = require('redux');
+var initial = require('./../initialization');
+var Counts = require('./../lib/model/counts');
+
+describe('When calculating the icon for suite status', () => {
+   var store, top;
+   
+   beforeEach(() => {
+       store = createStore(reducer);
+       store.dispatch(initial);
+       
+       top = store.getState().get('hierarchy');
+   });
+   
+   it('is none with no results, running, or queued', () => {
+      expect(top instanceof Suite).to.be.true;
+       
+      var suite = top.childSuite('Embedded');
+      var specs = store.getState().get('specs');
+      
+      expect(suite.icon(specs, null, [], {})).to.equal('none');
+   });
+   
+   it('is running if any spec is running', () => {
+      var suite = top.childSuite('Embedded');
+       
+      console.log(suite.specs);
+       
+      
+      var specs = store.getState().get('specs');
+      
+      expect(suite.icon(specs, 'embeds', [], {counts: new Counts(0, 0, 0, 0)})).to.equal('running');
+   });
+   
+   it('is running-success if any spec is running successfully', () => {
+      var suite = top.childSuite('Embedded');
+       
+      console.log(suite.specs);
+       
+      var specs = store.getState().get('specs');
+      
+      expect(suite.icon(specs, 'embeds', [], {counts: new Counts(1, 0, 0, 0)})).to.equal('running-success');
+   });
+   
+   
+   it('is running-failed if any spec is running and failing', () => {
+      var suite = top.childSuite('Embedded');
+
+      var specs = store.getState().get('specs');
+      
+      expect(suite.icon(specs, 'embeds', [], {counts: new Counts(1, 1, 0, 0)})).to.equal('running-failed');
+   });
+   
+   it('is failed if any spec has failed', () => {
+       store.dispatch({
+           type: 'spec-execution-completed', 
+           id: 'embeds', 
+           results: {
+               counts: {rights: 1, wrongs: 1, errors: 1, invalids: 0}
+           }
+       });
+   
+       var suite = top.childSuite('Embedded');
+       var specs = store.getState().get('specs');
+      
+       expect(suite.icon(specs, null, [], {})).to.equal('failed');
+   });
+   
+   it('is success if any spec has succeeded with no failures', () => {
+       store.dispatch({
+           type: 'spec-execution-completed', 
+           id: 'embeds', 
+           results: {
+               counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0}
+           }
+       });
+   
+        
+   
+       var suite = top.childSuite('Embedded');
+       var specs = store.getState().get('specs');
+       
+       expect(specs.get('embeds').status).to.equal('success');
+      
+       expect(suite.icon(specs, null, [], {})).to.equal('success');
+   });
+});
 
