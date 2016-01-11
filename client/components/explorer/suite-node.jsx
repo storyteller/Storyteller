@@ -69,7 +69,7 @@ function SuiteHeader(props){
     var openClosed = props.expanded ? <FolderOpen /> : <FolderClosed />;
     var openClass = props.expanded ? 'open' : 'closed';
 
-    var Icon = icons[suite.icon(props.specs)];
+    var Icon = icons[suite.icon(props.specs, props.running, props.queued, props.progress)];
     var icon = (<Icon />);
     
     var toggle = e => {

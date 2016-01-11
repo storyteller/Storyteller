@@ -10,7 +10,10 @@ function getExplorerState(state){
         status: status, 
         lifecycle: lifecycle, 
         specs: state.get('specs'), 
-        treeState: state.get('tree-state')
+        treeState: state.get('tree-state'),
+        running: state.get('running'),
+        queued: state.get('queued'),
+        progress: state.get('progress')
     };
 }
 

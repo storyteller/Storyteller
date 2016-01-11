@@ -105,12 +105,12 @@ module.exports = function TreeView(props){
     if (suite.isHierarchy){
         suites = suite.suites.map(s => {
             return (
-                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} />
+                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} {...props} />
             );
         });
     }
     else {
-        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} />)];
+        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} {...props}/>)];
     }
 
     if (suites.length == 0){
@@ -138,7 +138,7 @@ module.exports = function TreeView(props){
 
             </div>
             <div className="col-md-10">
-                <SuiteHeader suite={suite} dispatch={props.dispatch}/>
+                <SuiteHeader suite={suite} dispatch={props.dispatch} {...props}/>
                 {suites}
             </div>
         </div>
