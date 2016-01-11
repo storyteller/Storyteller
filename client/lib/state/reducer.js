@@ -2,6 +2,7 @@ import SystemRecycled from './system-recycled';
 var HierarchyLoaded = require('./hierarchy-loaded');
 var Immutable = require('immutable');
 var Specification = require('./../model/specification');
+var Counts = require('./../model/counts');
 var _ = require('lodash');
 
 var initialState = Immutable.Map({
@@ -10,7 +11,8 @@ var initialState = Immutable.Map({
     'tree-state': Immutable.Map({}),
     'specs': Immutable.Map({}),
     'running': null,
-    'queued': []
+    'queued': [],
+    'progress': null
 });
 
 module.exports = function Reducer(state = initialState, action){
@@ -70,6 +72,19 @@ module.exports = function Reducer(state = initialState, action){
         else {
             return one;
         }
+        
+    case 'spec-progress':
+        action.counts = new Counts(action.counts);
+    
+        return state.set('running', action.id).set('progress', action);
+    
+    /*
+        public string id;
+        public Counts counts;
+        public int step;
+        public int total;
+    */
+    
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);

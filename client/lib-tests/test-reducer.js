@@ -48,5 +48,23 @@ describe('Reducer', () => {
         });
    });
    
+    describe('Handling spec-progress', () => {
+       it('recalculates state', () => {
+            store.dispatch({
+                type: 'spec-progress',
+                id: 'a',
+                counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0},
+                step: 3,
+                total: 10
+            });
+            
+            var state = store.getState();
+            
+            expect(state.get('running')).to.equal('a');
+            
+            var progress = state.get('progress');
 
+            expect(progress.counts.success()).to.be.true; 
+       });
+    });
 });
