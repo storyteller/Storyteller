@@ -31,61 +31,33 @@
 }(this));
 
 var Postal = require('postal');
-var Communicator = require('./lib/communicator');
-
-var startRouting = require('./components/app');
-
-var store = require('./lib/stores/hierarchy').reset(); // just forcing it to get loaded
-
-Postal.subscribe({
-   channel: 'engine',
-   topic: '*',
-   callback: (data, env) => {
-       data.type = env.topic;
-       store.dispatch(data);
-   } 
-});
-
-
-Postal.publish({
-  channel: 'engine',
-  topic: 'system-recycled',
-  data: Storyteller.initialization
-});
-
-var ResultCache = require('./lib/stores/result-cache');
-var results = JSON.parse(_.unescape(document.getElementById('result-data').innerHTML));
-(results || []).forEach(x => {
-  ResultCache.record(x);
-});
-
-var hierarchy = JSON.parse(_.unescape(document.getElementById('hierarchy-data').innerHTML));
-Postal.publish({
-	channel: 'engine',
-	topic: 'hierarchy-loaded',
-	data: {hierarchy: hierarchy}
-});
-
-
-
-
-Postal.publish({
-  channel: 'engine',
-  topic: 'queue-state',
-  data: Storyteller.queueState
-});
-
-
+var app = require('./components/app');
 var disconnect = require('./components/disconnected');
-var communicator = new Communicator(Storyteller.wsAddress, () => startRouting(store), disconnect);
 
-
-
-Postal.subscribe({
-	channel: 'explorer',
-	topic: 'go-to-spec',
-	callback: function(data){
-		var href = '#/spec/editing/' + data.id;
-		window.location = href;
-	}
+// TODO -- HOKEY!!!!!
+var theStore = null;
+var startRouting = app(Storyteller.initialization, store => {
+    theStore = store;
+    
+    Postal.subscribe({
+        channel: 'engine',
+        topic: '*',
+        callback: (data, env) => {
+            data.type = env.topic;
+            store.dispatch(data);
+            
+            if (env.topic == 'go-to-spec'){
+                var href = '#/spec/editing/' + data.id;
+                window.location = href;
+            }
+        } 
+    });
 });
+
+var Communicator = require('./communicator');
+var wsAddress = Storyteller.initialization.wsAddress;
+var communicator = new Communicator(theStore, wsAddress, () => startRouting(), disconnect);
+
+
+
+

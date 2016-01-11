@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require('react-dom');
 
 var Disconnected = React.createClass({
 	render(){
@@ -18,5 +19,5 @@ var Disconnected = React.createClass({
 });
 
 module.exports = function(){
-	React.render(<Disconnected/>, document.body);
+	ReactDOM.render(<Disconnected/>, document.getElementById("main"));
 }

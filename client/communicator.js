@@ -55,3 +55,5 @@ function Communicator(store, address, continuation, disconnect){
 		}
 	});
 }
+
+module.exports = Communicator;

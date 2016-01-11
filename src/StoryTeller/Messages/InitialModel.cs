@@ -10,7 +10,7 @@ namespace StoryTeller.Messages
 
         [JsonProperty("hierarchy")]
         public HierarchyLoaded Hierarchy { get; }
-        public int port { get; set; }
+        public string wsAddress { get; set; }
 
         public InitialModel(SystemRecycled recycled, HierarchyLoaded hierarchy) : base("initial-model")
         {

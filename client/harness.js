@@ -1,5 +1,5 @@
 var Postal = require('postal');
-var startRouting = require('./components/app');
+var app = require('./components/app');
 var AllSpecData = require('./all-spec-data');
 
 var initialization = require('./initialization');
@@ -48,7 +48,8 @@ function register(store){
 }
 
 
-startRouting(initialization, register);
+var startRouting = app(initialization, register);
+startRouting();
 
 
 

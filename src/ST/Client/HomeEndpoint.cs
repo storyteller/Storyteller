@@ -4,6 +4,7 @@ using FubuMVC.Core.Assets;
 using FubuMVC.Core.Runtime.Files;
 using FubuMVC.Core.View;
 using HtmlTags;
+using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
@@ -64,17 +65,19 @@ namespace ST.Client
             var resultJson = JsonSerialization.ToCleanJson(_persistence.AllCachedResults());
             document.Body.Add("div").Hide().Id("result-data").Text(resultJson);
 
+            var model = new InitialModel(_context.LatestSystemRecycled, new HierarchyLoaded(_persistence.Hierarchy.Top, _persistence.Results));
+            model.wsAddress = _connector.WebSocketsAddress;
+
+            // TODO -- put the queue state on here too!!!!!
+
             var script = new StringWriter();
             script.WriteLine();
             script.WriteLine("var Storyteller = {};");
             script.WriteLine();
             script.WriteLine("Storyteller.initialization = {0};",
-                JsonSerialization.ToCleanJson(_context.LatestSystemRecycled));
+                JsonSerialization.ToCleanJson(model));
             script.WriteLine();
-            script.WriteLine("Storyteller.queueState = {0};", JsonSerialization.ToCleanJson(_context.QueueState()));
-            script.WriteLine();
-            script.WriteLine("Storyteller.wsAddress = '{0}';", _connector.WebSocketsAddress);
-            script.WriteLine();
+
 
             document.Head.Add("script").Encoded(false).Text(script.ToString()).Attr("type", "text/javascript");
         }

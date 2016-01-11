@@ -19,13 +19,13 @@ var SpecResults = require('./editing/spec-results');
 var SuiteExplorer = require('./explorer/suite-explorer');
 var ResultsTable = require('./results/results-table');
 
+
 var FixtureTable = require('./language/fixture-table');
 var uuid = require('node-uuid');
 
 var $ = require('jquery');
 
 var Reducer  = require('./../lib/state/reducer');
-var Communicator = require('./../communicator');
 
 var { createStore } = require('redux');
 
@@ -51,49 +51,52 @@ module.exports = function(initialization, register){
       register(store);
   }
   
-    var { createHistory } = require('history');
-    var history = createHistory();
+  var { createHistory } = require('history');
+  var history = createHistory();
 
-    history.listen(location => {
-        console.log('location is ' + JSON.stringify(location));
-    })
+  history.listen(location => {
+    // TODO -- this will tie into *something* later
+    console.log('location is ' + JSON.stringify(location));
+  });
 
-  
-  // TODO -- use this someday very soon
-  //var communicator = new Communicator(store, Storyteller.wsAddress, () => startRouting(store), disconnect);
-
-
-
-  ReactDOM.render(
-      <Provider store={store}>
-      <div>
-        
-        <Header />
-        <div className="container">
-          
-          <Router>
-            <Route name="app" path="/" >
-                <Route name="language" path="/language" component={Language}/>
-                <Route name="documentation" path="/docs" component={Documentation}/>
-                <Route name="queue" path="/queue" component={QueuePage} />
-                <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
-                <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
-                <Route name="spec-editor" path="/spec/editing/:id" component={SpecEditor} />
-                <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
-                <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
-                <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
-                <Route name="results" path="/results" component={ResultsTable} />
-                <IndexRoute component={SpecExplorer}/>
-            </Route>
-          </Router>
-          
+  return () => {
+    ReactDOM.render(
+        <Provider store={store}>
+        <div>
+            
+            <Header />
+            <div className="container">
+            
+            <Router>
+                <Route name="app" path="/" >
+                    <Route name="language" path="/language" component={Language}/>
+                    <Route name="documentation" path="/docs" component={Documentation}/>
+                    <Route name="queue" path="/queue" component={QueuePage} />
+                    <Route name="grammar-errors" path="/grammar-errors" component={GrammarErrors} />
+                    <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
+                    <Route name="spec-editor" path="/spec/editing/:id" component={SpecEditor} />
+                    <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
+                    <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
+                    <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
+                    <Route name="results" path="/results" component={ResultsTable} />
+                    <IndexRoute component={SpecExplorer}/>
+                </Route>
+            </Router>
+            
+            </div>
+            
         </div>
-        
-      </div>
-      </Provider>
+        </Provider>
 
 
-  , document.getElementById("main"));;
+    , document.getElementById("main"));;
+    
+    register(store);
+  };
+
+
+
+
 }
 
 
