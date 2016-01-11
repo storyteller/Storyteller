@@ -3,42 +3,32 @@ var Postal = require('postal');
 
 var {Alert} = require('react-bootstrap');
 var Icons = require('./../../icons');
-var Counts = require('./../../../lib/model/counts');
+var {connect} = require('react-redux');
+
+function getState(state, ownProps){
+    return {
+        spec: ownProps.spec,
+        running: state.get('running'),
+        queued: state.get('queued'),
+        progress: state.get('progress')
+    }
+}
+
 
 function SpecResultHeader(props){
-    var icon = props.spec.icon();
-    var status = props.spec.status;
-    
-    var queued = props.spec.state;
+    var icon = props.spec.icon(props.running, props.queued, props.progress);
+
     var counts = null;
     var duration = null;
     var time = null;
-    
-    /*
-    
-    // TODO -- show the running state here!
-    
-    var counts = new Counts(0, 0, 0, 0);
-    if (queued == 'running'){
-        // Should be the running counts
-        counts = new Counts(0, 0, 0, 0);
-    }
-    else if (ResultCache.hasResults(this.props.spec.id)){
-        var result = ResultCache.lastResultFor(this.props.spec.id);
 
-        counts = result.counts;
-        duration = result.results.duration;
-        time = result.time;
-    }
-    */
-    
-    if (queued == 'none' && status == 'none') return (<span />);
+    if (icon == 'none') return (<span />);
 
     var Icon = Icons[icon];
 
     var bsStyle = 'info';
-    if (counts && counts.anyResults()){
-        if (counts.success()){
+    if (props.spec.hasResults()){
+        if (props.spec.status == 'success'){
             bsStyle = 'success';
         }
         else {
@@ -48,8 +38,8 @@ function SpecResultHeader(props){
 
     var text = null;
 
-    if (queued == 'queued'){
-        if (status == 'none'){
+    if (icon == 'queued'){
+        if (props.spec.status == 'none'){
             text = 'Queued for Execution';
         }
         else {
@@ -57,14 +47,22 @@ function SpecResultHeader(props){
         }
         
     }
-    else if (queued == 'running'){
-        text = (<span>Running with {counts.toString()}</span>);
+    else if (icon == 'running'){
+        text = (<span>Running with {props.progress.counts.toString()}</span>);
+    }
+    else if (icon == 'running-success'){
+        bsStyle = 'success';
+        text = (<span>Running with {props.progress.counts.toString()}</span>);
+    }
+    else if (icon == 'running-failed'){
+        bsStyle = 'failed';
+        text = (<span>Running with {props.progress.counts.toString()}</span>);
     }
     else if (status == 'success') {
-        text = (<span>Succeeded in {duration} ms with {counts.toString()} at {time}</span>)
+        text = (<span>Succeeded in {duration} ms with {props.spec.last_result.results.counts.toString()} at {time}</span>)
     }
     else {
-        text = (<span>Failed in {duration} ms with {counts.toString()} at {time}</span>)
+        text = (<span>Failed in {duration} ms with {props.spec.last_result.results.counts.toString()} at {time}</span>)
     }
 
     return (
@@ -75,4 +73,4 @@ function SpecResultHeader(props){
 }
 
 
-module.exports = SpecResultHeader;
+module.exports = connect(getState)(SpecResultHeader);
