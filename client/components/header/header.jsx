@@ -35,7 +35,12 @@ var Header = (props) => {
     var name = system.get('name');
     var properties = system.get('properties');
     if (properties.has('Profile')){
-        name += ' (' + properties.get('Profile') + ')';
+        var profile = properties.get('Profile');
+        if (profile){
+            name += ' (' + properties.get('Profile') + ')';
+        }
+        
+        
     }
 
 
