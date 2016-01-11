@@ -77,14 +77,7 @@ module.exports = function Reducer(state = initialState, action){
         action.counts = new Counts(action.counts);
     
         return state.set('running', action.id).set('progress', action);
-    
-    /*
-        public string id;
-        public Counts counts;
-        public int step;
-        public int total;
-    */
-    
+
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);

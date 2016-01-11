@@ -312,4 +312,27 @@ describe('Reducer', () => {
            expect(store.getState().get('lifecycle-filter')).to.equal('Acceptance'); 
        });
     });
+    
+    describe('handling spec-data', () => {
+       beforeEach(() => {
+           store.dispatch(initial);
+       });
+       
+       it('can replace the spec', () => {
+          var record1 = store.getState().getIn(['specs', 'set1']); 
+          
+          var data = {
+            
+          }
+          
+          store.dispatch({type: 'spec-data', data: data, id: 'set1'});
+          
+          var record2 = store.getState().getIn(['specs', 'set1']); 
+          
+          expect(record2).to.not.equal(record1);
+          
+          var Specification = require('./../lib/model/specification');
+          expect(record2.spec instanceof Specification).to.be.true;
+       });
+    });
 });
