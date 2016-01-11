@@ -254,4 +254,62 @@ describe('Reducer', () => {
           });
        });
     });
+    
+    describe('Handling toggle-tree-state', () => {
+       beforeEach(() => {
+           store.dispatch(initial);
+
+       });
+       
+       it('toggles from open to closed', () => {
+           store.dispatch({type: 'expand-all'});
+           store.dispatch({type: 'toggle-tree-state', path: 'Embedded'});
+           
+           var treeState = store.getState().get('tree-state');
+           
+           expect(treeState.get('Embedded')).to.be.false;
+       });
+       
+       it('toggles from closed to open', () => {
+           store.dispatch({type: 'collapse-all'});
+
+           store.dispatch({type: 'toggle-tree-state', path: 'Embedded'});
+           
+           var treeState = store.getState().get('tree-state');
+
+           expect(treeState.get('Embedded')).to.be.true;
+       });
+    });
+    
+    describe('handling spec-status-filter-changed', () => {
+       beforeEach(() => {
+           store.dispatch(initial);
+       });
+       
+       it('the initial filter is any', () => {
+            expect(store.getState().get('status-filter')).to.equal('any'); 
+       });
+       
+       it('changes that filter on the message', () => {
+          store.dispatch({type: 'spec-status-filter-changed', status: 'failed'});
+          
+           expect(store.getState().get('status-filter')).to.equal('failed'); 
+       });
+    });
+    
+    describe('handling lifecycle-filter-changed', () => {
+       beforeEach(() => {
+           store.dispatch(initial);
+       });
+       
+       it('the initial filter is any', () => {
+            expect(store.getState().get('lifecycle-filter')).to.equal('any'); 
+       });
+       
+       it('changes that filter on the message', () => {
+          store.dispatch({type: 'lifecycle-filter-changed', lifecycle: 'Acceptance'});
+          
+           expect(store.getState().get('lifecycle-filter')).to.equal('Acceptance'); 
+       });
+    });
 });
