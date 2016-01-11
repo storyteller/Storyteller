@@ -2,12 +2,15 @@ import SystemRecycled from './system-recycled';
 var HierarchyLoaded = require('./hierarchy-loaded');
 var Immutable = require('immutable');
 var Specification = require('./../model/specification');
+var _ = require('lodash');
 
 var initialState = Immutable.Map({
     'lifecycle-filter': 'any', 
     'status-filter': 'any',
     'tree-state': Immutable.Map({}),
-    'specs': Immutable.Map({})
+    'specs': Immutable.Map({}),
+    'running': null,
+    'queued': []
 });
 
 module.exports = function Reducer(state = initialState, action){
@@ -58,6 +61,15 @@ module.exports = function Reducer(state = initialState, action){
         var library = state.get('fixtures');
         var spec = new Specification(action.data, library);
         return state.updateIn(['specs', action.id], x => x.replace(spec));
+    
+    case 'queue-state':
+        var one = state.set('running', action.running);
+        if (!_.isEqual(state.get('queued'), action.queued)){
+            return one.set('queued', action.queued);
+        }
+        else {
+            return one;
+        }
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);
