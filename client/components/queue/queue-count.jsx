@@ -2,46 +2,27 @@ var React = require("react");
 var {Badge, Button} = require('react-bootstrap');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
+var { connect } = require('react-redux');
 
 
 
-var getCount = function(){
-	return Hierarchy.queuedSpecs().length;
+var getCount = function(state){
+	return {count: state.get('queued').length};
 }
 
-var QueueCount = React.createClass({
-	getInitialState: function(){
-		return {count: getCount()};
-	},
+function QueueCount(props){
+    if (props.count == 0){
+        return ( <span></span> );
+    }
 
-	componentDidMount: function(){
-		var self = this;
+    var onclick = function(){
+        window.location = '#/queue';
+    }
 
-		Postal.subscribe({
-			channel: 'explorer',
-			topic: 'queue-updated',
-			callback: function(data, envelope){
-				self.setState({
-					count: getCount()
-				});
-			}
-		});
+    return (
+        <Button bsStyle="link" onClick={onclick}><Badge>{props.count}</Badge> Specs queued</Button>
+    );
+}
 
-	},
 
-	render: function(){
-		if (this.state.count == 0){
-			return ( <span></span> );
-		}
-
-		var onclick = function(){
-			window.location = '#/queue';
-		}
-
-		return (
-			<Button bsStyle="link" onClick={onclick}><Badge>{this.state.count}</Badge> Specs queued</Button>
-		);
-	}
-});
-
-module.exports = QueueCount;
+module.exports = connect(getCount)(QueueCount);

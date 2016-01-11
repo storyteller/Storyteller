@@ -1,8 +1,10 @@
 var React = require("react");
 var Postal = require('postal');
 var Counts = require('./../../lib/model/counts');
+var { connect } = require('react-redux');
 
 var {ProgressBar, Button, Navbar} = require('react-bootstrap');
+
 
 function findState(state){
     var running = state.get('running');

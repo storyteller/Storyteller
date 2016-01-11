@@ -1,5 +1,6 @@
 var React = require("react");
 var {Button} = require('react-bootstrap');
+var { connect } = require('react-redux');
 
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
@@ -8,6 +9,16 @@ var CommandLink = require('./../explorer/command-link');
 var icons = require('./../icons');
 var SuitePath = require('./../explorer/suite-path');
 
+
+function getQueue(state){
+    var specs = state.get('specs');
+    var queued = state.get('queued');
+    
+    return {
+        queued: queued,
+        specs: specs
+    };
+}
 
 var cancelAll = e => {
 	Postal.publish({
@@ -19,69 +30,47 @@ var cancelAll = e => {
 	e.preventDefault();
 }
 
-var QueueItem = React.createClass({
+function QueueItem(props){
+    var id = props.spec.id;
 
-	render: function(){
-		var id = this.props.spec.id;
+    var createMessage = function(){
+        return {type: 'cancel-spec', id: id};
+    }
 
-		var createMessage = function(){
-			return {type: 'cancel-spec', id: id};
-		}
+    var icon = icons[props.spec.icon(null, [], {})]({});
+    var divId = 'queued-spec-' + id;
 
-		var icon = icons[this.props.spec.icon()]({});
-		var divId = 'queued-spec-' + id;
+    // TODO -- put <SuitePath suite={this.props.spec.suite} linkToLeaf={true} /> back
 
-		return (
-			<div id={divId}>
-				{icon}
-				<SuitePath suite={this.props.spec.suite} linkToLeaf={true} />
-				<span> / </span>
-				<span className="queued-spec-name">{this.props.spec.title}</span>
-				<CommandLink createMessage={createMessage} text="cancel" />
-			</div>
-		);
-	}
-});
+    return (
+        <div id={divId}>
+            {icon}
+            
+            <span> / </span>
+            <span className="queued-spec-name">{props.spec.title}</span>
+            <CommandLink createMessage={createMessage} text="cancel" />
+        </div>
+    );
+}
 
-var QueuePage = React.createClass({
-	getInitialState: function(){
-		return {queue: Hierarchy.queuedSpecs()};
-	},
 
-	componentDidMount: function(){
-		var self = this;
+function QueuePage(props){
+    var queue = props.queued.map(id => props.specs.get(id));
+    
+    var items = queue.map(spec => {
+        return (
+            <QueueItem spec={spec} />
+        );
+    });
 
-		this.subscription = Postal.subscribe({
-			channel: 'explorer',
-			topic: 'queue-updated',
-			callback: function(data, envelope){
-				self.setState({
-					queue: Hierarchy.queuedSpecs()
-				});
-			}
-		});
+    return (
+        <div>
+            <h3>Execution Queue <Button id="cancel-all-specs" onClick={cancelAll}>Cancel All</Button></h3>
+            {items}
+        </div>
 
-	},
+    );
+}
 
-	 componentWillUnmount : function(){
-		this.subscription.unsubscribe();
-	},
 
-	render: function(){
-		var items = this.state.queue.map(spec => {
-			return (
-				<QueueItem spec={spec} />
-			);
-		});
-
-		return (
-			<div>
-				<h3>Execution Queue <Button id="cancel-all-specs" onClick={cancelAll}>Cancel All</Button></h3>
-				{items}
-			</div>
-
-		);
-	}
-});
-
-module.exports = QueuePage;
+module.exports = connect(getQueue)(QueuePage);
