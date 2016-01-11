@@ -11,7 +11,7 @@ function statusForResults(results){
     return 'failed';
 }
 
-class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, last_result: null, state: 'none', status: 'none'}) {
+class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, last_result: null, status: 'none'}) {
     constructor(data, library, last_result){
         var spec = new Specification(data, library);
 
@@ -33,11 +33,7 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     get activeContainer(){
         return this.spec.activeContainer;
     }
-    
-    markRunning(){
-        return this.set('state', 'running');
-    }
-    
+
     isDirty(){
         return this.spec.isDirty();
     }
@@ -71,13 +67,18 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     }
     
     recordLastResult(result){
-        return this.set('state', 'none').set('last_result', result).set('status', statusForResults(result));
+        return this.set('last_result', result).set('status', statusForResults(result));
+    }
+    
+    clearResults(){
+        return this.set('last_result', null).set('status', 'none');
     }
     
     hasResults(){
         return this.last_result != null;
     }
     
+    // TODO -- this is gonna have to take in running state and spec progress
     icon(){
         if (this.state == 'running'){
             return 'running';
@@ -95,6 +96,12 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.status;
     }
 
+    acceptChange(func){
+        var version = this.get('version') + 1;
+        func(this.spec);
+        
+        return this.set('version', version);
+    }
 
 }
 
