@@ -88,7 +88,7 @@ function SuiteHeader(props){
 module.exports = function TreeView(props){
     var suite = props.suite;
     var top = suite;
-    
+
     if (props.status != 'any' || props.lifecycle != 'any'){
         var lifecycleFilter = toLifecycleFilter(props.lifecycle);
         var statusFilter = toStatusFilter(props.status);
@@ -105,12 +105,12 @@ module.exports = function TreeView(props){
     if (suite.isHierarchy){
         suites = suite.suites.map(s => {
             return (
-                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} {...props} />
+                <SuiteNode suite={s} key={s.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} running={props.running} queued={props.queued} progress={props.progress} />
             );
         });
     }
     else {
-        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} {...props}/>)];
+        suites = [(<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} running={props.running} queued={props.queued} progress={props.progress}/>)];
     }
 
     if (suites.length == 0){

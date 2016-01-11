@@ -94,7 +94,7 @@ function SuiteHeader(props){
 
 function SuiteBody(props){
     var suites = _.sortBy(props.suite.suites, x => x.name);
-    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} />) );
+    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} running={props.running} queued={props.queued} progress={props.progress} />) );
     
     var specs = props.suite.specs.map(x => props.specs.get(x));
     
