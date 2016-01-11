@@ -200,4 +200,58 @@ describe('Reducer', () => {
             expect(progress.counts.success()).to.be.true; 
        });
     });
+    
+    describe('Handling expand-all', () => {
+       var state;
+       
+       beforeEach(() => {
+           store.dispatch(initial);
+           store.dispatch({type: 'collapse-all'});
+           store.dispatch({type: 'expand-all'});
+           
+           state = store.getState();
+       }) ;
+       
+       it('should expand every suite', () => {
+          var top = state.get('hierarchy');
+          var suites = top.allSuites();
+          
+          var treeState = state.get('tree-state').toJS();
+          
+          for (var key in treeState){
+              expect(treeState[key]).to.be.true;
+          } 
+          
+          suites.forEach(s => {
+             expect(treeState[s.path]).to.be.true; 
+          });
+       });
+    });
+    
+    describe('Handling collapse-all', () => {
+       var state;
+       
+       beforeEach(() => {
+           store.dispatch(initial);
+           store.dispatch({type: 'expand-all'});
+           store.dispatch({type: 'collapse-all'});
+           
+           state = store.getState();
+       }) ;
+       
+       it('should expand every suite', () => {
+          var top = state.get('hierarchy');
+          var suites = top.allSuites();
+          
+          var treeState = state.get('tree-state').toJS();
+          
+          for (var key in treeState){
+              expect(treeState[key]).to.be.false;
+          } 
+          
+          suites.forEach(s => {
+             expect(treeState[s.path]).to.be.false; 
+          });
+       });
+    });
 });
