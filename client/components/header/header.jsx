@@ -43,10 +43,6 @@ var Header = (props) => {
         
     }
 
-
-//            <SpecProgressBar />
-
-
     return (
         <div>
             <Navbar inverse={true} id="top-nav">
@@ -67,7 +63,7 @@ var Header = (props) => {
                 </Nav>
             </Navbar>
             <StatusBar {...props}/>
-
+            <SpecProgressBar />
         </div>
 
     );
