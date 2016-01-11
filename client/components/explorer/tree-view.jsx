@@ -11,27 +11,6 @@ var CommandButtons = require('./command-buttons');
 
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 
-var alwaysTrue = x => true;
-
-function toLifecycleFilter(lifecycle){
-  if (lifecycle == 'any') return alwaysTrue;
-
-  if (lifecycle == 'Regression'){
-    return spec => spec.lifecycle == 'Regression';
-  }
-
-  if (lifecycle == 'Acceptance'){
-    return spec => spec.lifecycle == 'Acceptance';
-  }
-}
-
-function toStatusFilter(status){
-  if (status == 'any') {
-    return alwaysTrue;
-  }
-  
-  return spec => spec.status == status;
-}
 
 
 function SuiteHeader(props){
@@ -85,23 +64,17 @@ function SuiteHeader(props){
     );
 }
 
+var filterSuite = require('./../../lib/filter-suite');
+
 module.exports = function TreeView(props){
     var suite = props.suite;
     var top = suite;
 
-    if (props.status != 'any' || props.lifecycle != 'any'){
-        var lifecycleFilter = toLifecycleFilter(props.lifecycle);
-        var statusFilter = toStatusFilter(props.status);
-
-        var filter = spec => lifecycleFilter(spec) && statusFilter(spec);
-        suite = suite.filter(filter, props.specs);
-    }
+    suite = filterSuite(top, props.specs, props.status, props.lifecycle);
     
     var summary = top.summary(props.specs);
 
     var suites = null;
-
-    // TODO -- pull this out.
     if (suite.isHierarchy){
         suites = suite.suites.map(s => {
             return (
