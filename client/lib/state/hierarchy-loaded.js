@@ -3,10 +3,6 @@ var SpecRecord = require('./../model/spec-record');
 var Immutable = require('immutable');
 var Suite = require('./../model/suite');
 
-        // 'lifecycle-filter'
-        // 'status-filter'
-        // 'hierarchy'
-        // 'specs'
 
 function HierarchyLoaded(state, action){
     var library = state.get('fixtures');
