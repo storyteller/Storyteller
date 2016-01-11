@@ -25,6 +25,7 @@ function SpecProgressBar(props){
         return (<span />);
     }
     
+    var bsStyle = "info";
     if (props.counts.anyResults()){
         if (props.counts.success()){
             bsStyle = "success";

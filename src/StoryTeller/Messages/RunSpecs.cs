@@ -5,7 +5,7 @@ namespace StoryTeller.Messages
     public class RunSpecs : ClientMessage
     {
         public RunSpecs()
-            : base("run-Specifications")
+            : base("run-specs")
         {
         }
 

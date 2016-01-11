@@ -19,6 +19,10 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         super({id: data.id, spec: spec, version: 0, last_result: last_result, status: statusForResults(last_result)});
     }
     
+    get revision(){
+        return this.spec.revision();
+    }
+    
     get lifecycle() {
         return this.spec.lifecycle;
     }
@@ -113,6 +117,12 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         
         return this.set('version', version)
     }
+    
+    write(){
+        return this.spec.write();
+    }
+    
+    
 
 }
 

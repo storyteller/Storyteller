@@ -22,7 +22,7 @@ function Communicator(store, address, continuation, disconnect){
 			return;
 		}
 	
-		store.dispatch(evt);
+		store.dispatch(message);
 	};
 	
 	
@@ -37,7 +37,9 @@ function Communicator(store, address, continuation, disconnect){
 			disconnect();
 		}
 		else {
-			this.socket.send(JSON.stringify(message));
+            var json = JSON.stringify(message);
+            console.log('Sending to engine: ' + json);
+			this.socket.send(json);
 		}
 	}
 	

@@ -75,7 +75,6 @@ module.exports = function Reducer(state = initialState, action){
         
     case 'spec-progress':
         action.counts = new Counts(action.counts);
-    
         return state.set('running', action.id).set('progress', action);
 
     case 'spec-execution-completed':
