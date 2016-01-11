@@ -25,7 +25,9 @@ describe('Reducer', () => {
         var state;
         
         beforeEach(() => {
+            store.dispatch({type: 'system-recycle-start'});
             store.dispatch(initial.recycled);
+           
             
             state = store.getState();
         });
@@ -34,6 +36,10 @@ describe('Reducer', () => {
             var FixtureLibrary = require('./../lib/fixtures/fixture-library');
             
             expect(state.get('fixtures') instanceof FixtureLibrary).to.be.true;
+        });
+        
+        it('should mark recycling as false', () => {
+           expect(state.getIn(['system-state', 'recycling'])).to.be.false; 
         });
         
         it('captures the system state', () => {
@@ -131,6 +137,20 @@ describe('Reducer', () => {
             expect(state.get('fixtures') instanceof FixtureLibrary).to.be.true;
         });
         
+    });
+    
+    describe('Handling system-recycle-start', () => {
+        var state;
+        
+        beforeEach(() => {
+            store.dispatch(initial);
+            store.dispatch({type: 'system-recycle-start'});
+            state = store.getState();
+        });
+        
+        it('should mark the recycling = true', () => {
+           expect(state.getIn(['system-state', 'recycling'])).to.be.true; 
+        });
     });
    
     describe('Handling queue-state', () => {
