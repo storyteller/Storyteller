@@ -1,6 +1,7 @@
 var Immutable = require('immutable');
 var Specification = require('./specification');
 var Counts = require('./counts');
+var _ = require('lodash');
 
 function statusForResults(results){
     if (!results) return 'none';
@@ -78,29 +79,39 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.last_result != null;
     }
     
-    // TODO -- this is gonna have to take in running state and spec progress
-    icon(){
-        if (this.state == 'running'){
-            return 'running';
-            // TODO -- need to add the progress counts here?
-            /*
-            var counts = QueueState.runningCounts();
-            if (!counts.anyResults()) return 'running';
-
-            if (counts.success()) return 'running-success';
-            
-            return 'running-failed';
-            */
+    icon(running, queued, progress){
+    
+        if (this.id == running){
+            if (progress.counts.anyResults()){
+                if (progress.counts.success()){
+                    return 'running-success';
+                }
+                else {
+                    return 'running-failed';
+                }
+            }
+            else {
+                return 'running';
+            }
+        }
+        else if (_.includes(queued, this.id)){
+            return 'queued';
+        }
+        else if (this.hasResults()){
+            return this.status;
+        }
+        else {
+            return 'none';
         }
 
-        return this.status;
+
     }
 
     acceptChange(func){
         var version = this.get('version') + 1;
         func(this.spec);
         
-        return this.set('version', version);
+        return this.set('version', version)
     }
 
 }

@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var Spec = require('./../lib/model/specification');
 var SpecRecord = require('./../lib/model/spec-record');
+var Counts = require('./../lib/model/counts');
 var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
 
@@ -147,5 +148,73 @@ describe('SpecRecord', () => {
      expect(record2.version).to.equal(1);
      expect(record2.lifecycle).to.equal('Acceptance');
      expect(record2).to.not.equal(record); 
+  });
+  
+  describe('when determining the icon', () => {
+      var running = null;
+      var queued = [];
+      var progress;
+      
+      beforeEach(() => {
+        running = null;
+        queued = [];
+        progress = {
+            counts: new Counts({rights: 0, wrongs: 0, errors: 0, invalids: 0})
+        };
+      });
+      
+      it('none when not running or queued or any results', () => {
+        expect(record.icon(running, queued, progress)).to.equal('none'); 
+      });
+      
+      it('success when not running or queued but previously successful', () => {
+        var results = {
+            results: {
+                counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0}
+            }
+        };
+        
+        record = record.recordLastResult(results);
+        
+        expect(record.icon(running, queued, progress)).to.equal('success');  
+      });
+      
+      it('failed when not running or queued but previously failed', () => {
+        var results = {
+            results: {
+                counts: {rights: 1, wrongs: 1, errors: 0, invalids: 0}
+            }
+        };
+        
+        record = record.recordLastResult(results);
+        
+        expect(record.icon(running, queued, progress)).to.equal('failed');    
+      });
+      
+      it('queued when queued but not yet running', () => {
+          queued = [record.id];
+          
+          expect(record.icon(running, queued, progress)).to.equal('queued');    
+      });
+      
+      it('running when running without any determinant counts', () => {
+          running = record.id;
+          
+          expect(record.icon(running, queued, progress)).to.equal('running');    
+      });
+      
+      it('running and succeeding', () => {
+          running = record.id;
+          progress.counts.rights = 1;
+          
+          expect(record.icon(running, queued, progress)).to.equal('running-success');
+      });
+      
+      it('running and failing', () => {
+          running = record.id;
+          progress.counts.wrongs = 1;
+          
+          expect(record.icon(running, queued, progress)).to.equal('running-failed');
+      });
   });
 });
