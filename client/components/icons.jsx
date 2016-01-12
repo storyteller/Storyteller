@@ -38,6 +38,7 @@ var Running = icon('running', ['fa-spinner', 'fa-spin']);
 var RunningSuccess = icon('running-success', ['fa-spinner', 'fa-spin', 'text-success']);
 var RunningFailed = icon('running-failed', ['fa-spinner', 'fa-spin', 'text-danger']);
 var Close = icon('close', ['fa-close']);
+icon('queued', ['fa-hourglass-o']);
 
 icon('remove', ['fa-remove']);
 icon('folder-open', ['fa-caret-down']);

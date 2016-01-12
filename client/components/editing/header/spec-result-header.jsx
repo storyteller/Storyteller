@@ -26,6 +26,10 @@ function SpecResultHeader(props){
     if (icon == 'none') return (<span />);
 
     var Icon = Icons[icon];
+    
+    if (!Icon){
+        throw new Error('could not find an icon for ' + icon);
+    }
 
     var bsStyle = 'info';
     if (props.spec.hasResults()){
@@ -44,7 +48,8 @@ function SpecResultHeader(props){
             text = 'Queued for Execution';
         }
         else {
-            text = (<span>Queued for Execution, last run was {counts.toString()}</span>);
+            var countDescription = new Counts(props.spec.last_result.results.counts).toString();
+            text = (<span>Queued for Execution, last run was {countDescription}</span>);
         }
         
     }
