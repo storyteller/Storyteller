@@ -35,7 +35,7 @@ function getSpec(state, ownProps){
     return {
         spec: spec, 
         loading: loading, 
-        activeContainer: spec.activeContainer,
+        activeContainer: spec.spec.activeHolder,
         updatingDate: false
     };
 }
