@@ -16,7 +16,14 @@ var initialState = Immutable.Map({
 });
 
 function updateSpec(state, id, func){
-    return state.updateIn(['specs', id], r => r.acceptChange(func));
+    try {
+        return state.updateIn(['specs', id], r => r.acceptChange(func));
+    }
+    catch (e){
+        console.error('Error trying to update spec: ' + id);
+        throw e;
+    }
+    
 }
 
 module.exports = function Reducer(state = initialState, action){

@@ -166,12 +166,12 @@ subscribe('select-cell', data => {
    } 
    
    applyOutstandingChanges();
-   store.dispatch({type: 'select-cell', step: data.step, cell: data.cell});
+   store.dispatch({type: 'select-cell', id: spec, step: data.step, cell: data.cell});
 });
 
 subscribe('select-holder', data => {
     applyOutstandingChanges();
-    store.dispatch({type: 'select-holder', holder: data.holder});
+    store.dispatch({type: 'select-holder', id: spec, holder: data.holder});
 });
 
 subscribe('changes', data => {
