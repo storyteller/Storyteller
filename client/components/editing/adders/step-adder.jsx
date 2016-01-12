@@ -33,7 +33,7 @@ module.exports = React.createClass({
 	componentDidMount: function() {
 		var node = ReactDOM.findDOMNode(this);
 
-		window.addEventListener('scroll', this.handleScroll);
+		//window.addEventListener('scroll', this.handleScroll);
 
 		this.setState({
 			offsetTop: domUtils.default.offsetTop(node),
@@ -42,7 +42,7 @@ module.exports = React.createClass({
 	},
 
 	componentWillUnmount: function() {
-		window.removeEventListener('scroll', this.handleScroll);
+		//window.removeEventListener('scroll', this.handleScroll);
 	},
 
 	handleScroll: function(event) {
