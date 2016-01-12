@@ -75,7 +75,7 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
             return spec.buildResults(loader);
         }
         
-        return this.spec.buildResults(loader);
+        return loader.noResults();
     }
     
     
