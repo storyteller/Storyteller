@@ -44,9 +44,6 @@ function subscribe(topic, callback, channel = 'editor'){
         channel: channel,
         topic: topic,
         callback: (data, env) => {
-            console.log('GOT: ' + env.topic);
-            console.log('Spec is ' + spec);
-            
             if (spec){
                 callback(data, env);
             }
@@ -82,13 +79,13 @@ subscribe('go-results', gotoResults);
 
 subscribe('run-spec', x => {
     applyOutstandingChanges();
-    var record = store.get('specs').get(spec);
+    var record = store.getState().get('specs').get(spec);
     
     var message = {
         type: 'run-spec',
         id: spec,
         spec: record.write(),
-        revision: record.revision()
+        revision: record.revision
     }
     
     communicator.send(message);
@@ -97,13 +94,13 @@ subscribe('run-spec', x => {
 });
 
 subscribe('save-spec', x => {
-    var record = store.get('specs').get(spec);
+    var record = store.getState().get('specs').get(spec);
     
     var message = {
         type: 'save-spec-body',
         id: spec,
         spec: record.write(),
-        revision: record.revision()
+        revision: record.revision
         
     }
     
