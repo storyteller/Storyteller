@@ -98,7 +98,11 @@ results.checked = () => {
 };
 
 results.tabbedArea = props => {
-	return (<Tabs key="result-tabs" {...props} /> )
+	return (
+        <Tabs key="result-tabs" defaultActiveKey={0} {...props}>
+            {props.children}
+        </Tabs> 
+    );
 };
 
 results.tab = (inner, key, title) => {
@@ -107,7 +111,7 @@ results.tab = (inner, key, title) => {
 		children = inner;
 	}
 
-	return (<Tab key={uuid.v4()} children={children} eventKey={key} tab={title} />);
+	return (<Tab key={key} eventKey={key} title={title}>{children}</Tab>);
 };
 
 results.stepAdder = x => null;
