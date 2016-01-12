@@ -96,6 +96,15 @@ module.exports = function Reducer(state = initialState, action){
     case 'clear-all-results':
         throw new Error('Do this!');
    
+    case 'step-result':
+        if (state.get('specs').get(action.spec).mode == 'header') return state;
+    
+        return updateSpec(state, action.spec, spec => spec.logResult(action));
+    
+    case 'set-verification-result':
+        if (state.get('specs').get(action.spec).mode == 'header') return state;
+    
+        return updateSpec(state, action.spec, spec => spec.logResult(action));
     
     case 'go-home':
         return updateSpec(state, action.id, spec => spec.navigator.moveFirst());

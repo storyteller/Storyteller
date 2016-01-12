@@ -61,7 +61,7 @@ function SpecResultHeader(props){
         text = (<span>Running with {props.progress.counts.toString()}</span>);
     }
     else if (icon == 'running-failed'){
-        bsStyle = 'failed';
+        bsStyle = 'danger';
         text = (<span>Running with {props.progress.counts.toString()}</span>);
     }
     else if (status == 'success') {

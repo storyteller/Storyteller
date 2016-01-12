@@ -10,6 +10,7 @@ var loader = require('./component-loader').results;
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
+    
     var loading = spec.mode == 'header';
 
     if (loading){
