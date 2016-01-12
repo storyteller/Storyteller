@@ -3,55 +3,42 @@ var Postal = require('postal');
 var Hierarchy = require('./../../lib/stores/hierarchy');
 var Icons = require('./../icons');
 var {Button} = require('react-bootstrap');
+var { connect } = require('react-redux');
+var _ = require('lodash');
 
-var UnsavedChanges = React.createClass({
-	getInitialState: function(){
-		return {
-			hasUnsavedChanges: Hierarchy.hasUnsavedChanges()
-		};
-	},
+function getState(state){
+    return {specs: state.get('specs')}
+}
 
-	updateData: function(){
-		this.setState({
-			hasUnsavedChanges: Hierarchy.hasUnsavedChanges()
-		});
-	},
+function UnsavedChanges(props){
+    var dirties = props.specs.toList().toArray().filter(x => x.spec.isDirty());
 
-	componentDidMount: function(){
-		Postal.subscribe({
-			channel: 'editor',
-			topic: '*',
-			callback: data => this.updateData()
-		});
+    if (dirties.length == 0) return (<span />);
 
-		Postal.subscribe({
-			channel: 'explorer',
-			topic: '*',
-			callback: data => this.updateData()
-		});
-	},
+    var SaveIcon = Icons['save'];
 
-	render: function(){
-		if (!this.state.hasUnsavedChanges) return null;
+    var onClick = e => {
+        dirties.forEach(spec => {
+            var message = {
+                type: 'save-spec-body',
+                id: spec.id,
+                spec: spec.write(),
+                revision: spec.revision
+            };
 
-		var SaveIcon = Icons['save'];
+            Postal.publish({
+                channel: 'engine-request',
+                topic: 'save-spec-body',
+                data: message
+            });
+        });
 
-		var onClick = e => {
-			var dirtys = _.filter(Hierarchy.allSpecs(), x => x.isDirty());
+        e.preventDefault();
+    };
 
-			dirtys.forEach(spec => {
-				Hierarchy.saveSpecData(spec);
-			});
+    return (
+        <Button bsStyle="link" onClick={onClick} title="Click to save all specifications with unsaved changes"><SaveIcon />Save All Changes</Button>
+    );
+}
 
-			e.preventDefault();
-		};
-
-		return (
-			<Button bsStyle="link" onClick={onClick} title="Click to save all specifications with unsaved changes"><SaveIcon />Save All Changes</Button>
-		);
-	}
-
-
-});
-
-module.exports = UnsavedChanges;
+module.exports = connect(getState)(UnsavedChanges);
