@@ -50,14 +50,7 @@ module.exports = function(initialization, register){
   if (register){
       register(store);
   }
-  
-  var { createHistory } = require('history');
-  var history = createHistory();
 
-  history.listen(location => {
-    // TODO -- this will tie into *something* later
-    console.log('location is ' + JSON.stringify(location));
-  });
 
   return () => {
     ReactDOM.render(

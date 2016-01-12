@@ -165,11 +165,11 @@ module.exports = {
 	},
 
 	moveDown(parent, step){
-		return Broadcaster.applyChange(new StepMovedDown(parent, step));
+		return new StepMovedDown(parent, step);
 	},
 
 	moveUp(parent, step){
-		return Broadcaster.applyChange(new StepMovedUp(parent, step));
+		return new StepMovedUp(parent, step);
 	}
 
 }

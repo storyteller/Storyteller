@@ -59,6 +59,7 @@ var wsAddress = Storyteller.initialization.wsAddress;
 var communicator = new Communicator(theStore, wsAddress, () => startRouting(), disconnect);
 
 require('./lib/command-processor')(communicator, theStore);
+require('./lib/presentation/spec-editor-presenter')(theStore, communicator);
 
 
 

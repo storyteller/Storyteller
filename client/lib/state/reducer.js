@@ -15,6 +15,10 @@ var initialState = Immutable.Map({
     'progress': null
 });
 
+function updateSpec(state, id, func){
+    return state.updateIn(['specs', id], r => r.acceptChange(func));
+}
+
 module.exports = function Reducer(state = initialState, action){
   switch (action.type) {
     case 'initial-model':
@@ -78,8 +82,59 @@ module.exports = function Reducer(state = initialState, action){
         return state.set('running', action.id).set('progress', action);
 
     case 'spec-execution-completed':
+        // TODO -- clear the results out
         return state.updateIn(['specs', action.id], record => record.recordLastResult(action));
+
    
+    case 'clear-all-results':
+        throw new Error('Do this!');
+   
+    
+    case 'go-home':
+        return updateSpec(state, action.id, spec => spec.navigator.moveFirst());
+    
+    case 'go-end':
+        return updateSpec(state, action.id, spec => spec.navigator.moveLast());
+    
+    case 'go-next':
+        return updateSpec(state, action.id, spec => spec.navigator.moveNext());
+    
+    case 'go-previous':
+        return updateSpec(state, action.id, spec => spec.navigator.movePrevious());
+    
+    case 'undo':
+        return updateSpec(state, action.id, spec => spec.undo());
+        
+    case 'redo':
+        return updateSpec(state, action.id, spec => spec.redo());
+
+    case 'add-item':
+        return updateSpec(state, action.id, spec => {
+            var navigator = spec.navigator;
+            var location = navigator.location;
+            if (location.holder){
+                var next = location.holder.fixture.addAndSelect(location);
+                navigator.replace(next);
+            }
+        });
+    
+    case 'select-cell':
+        return updateSpec(state, action.id, spec => {
+            spec.selectCell(action.step, action.cell);
+        });
+    
+    case 'select-holder':
+        return updateSpec(state, action.id, spec => {
+            spec.selectHolder(action.holder);
+        });
+        
+    case 'changes':
+        return updateSpec(state, action.id, spec => spec.apply(action.change));
+    
+    case 'bump-spec-date':
+    
+    case 'updated-spec-header':
+    
      
     default:
       console.log("Reducer does not know how to handle: " + action.type);

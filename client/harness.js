@@ -45,11 +45,24 @@ function register(store){
 
         }
     });
+    
+    var communicator = {
+        send(message){
+            var json = JSON.stringify(message);
+            console.log('Sent to backend: ' + json);
+        }
+    }
+    
+    require('./lib/presentation/spec-editor-presenter')(store, communicator);
 }
+
+
 
 
 var startRouting = app(initialization, register);
 startRouting();
+
+
 
 
 

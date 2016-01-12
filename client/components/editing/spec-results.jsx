@@ -24,6 +24,10 @@ function getSpec(state, ownProps){
         });
     }
     
+    // TODO -- use the current spec if it is running,
+    // use the historical data if there are results
+    // Show no results if none
+    
     return {spec: spec, loading: loading};
 }
 
