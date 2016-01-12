@@ -19,13 +19,19 @@ var spec = null;
 var subscriptions = [];
 
 function setLocation(location){
+    console.log('location is ' + JSON.stringify(location));
     var parts = location.hash.split('/');
-    if (parts[0] == '#spec'){
-        spec = parts[2];
+    if (parts[1] == 'spec'){
+        spec = parts[3].split('?')[0];
+    }
+    else if (parts[0] = '#spec'){
+        spec = parts[2].split('?')[0];
     }
     else {
         spec = null;
     }
+    
+    console.log('spec was set to ' + spec);
 }
 
 var history = createHistory();
@@ -38,6 +44,9 @@ function subscribe(topic, callback, channel = 'editor'){
         channel: channel,
         topic: topic,
         callback: (data, env) => {
+            console.log('GOT: ' + env.topic);
+            console.log('Spec is ' + spec);
+            
             if (spec){
                 callback(data, env);
             }
