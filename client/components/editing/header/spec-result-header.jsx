@@ -4,6 +4,7 @@ var Postal = require('postal');
 var {Alert} = require('react-bootstrap');
 var Icons = require('./../../icons');
 var {connect} = require('react-redux');
+var Counts = require('./../../../lib/model/counts');
 
 function getState(state, ownProps){
     return {
@@ -62,7 +63,9 @@ function SpecResultHeader(props){
         text = (<span>Succeeded in {duration} ms with {props.spec.last_result.results.counts.toString()} at {time}</span>)
     }
     else {
-        text = (<span>Failed in {duration} ms with {props.spec.last_result.results.counts.toString()} at {time}</span>)
+        var countDescription = new Counts(props.spec.last_result.results.counts).toString();
+        
+        text = (<span>Failed in {props.spec.last_result.results.duration} ms with {countDescription} at {props.spec.last_result.time}</span>)
     }
 
     return (
