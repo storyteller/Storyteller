@@ -20,10 +20,10 @@ var subscriptions = [];
 
 function setLocation(location){
     var parts = location.hash.split('/');
-    if (parts[1] == 'spec'){
+    if (parts.length == 4 && parts[1] == 'spec'){
         spec = parts[3].split('?')[0];
     }
-    else if (parts[0] = '#spec'){
+    else if (parts[0] == '#spec'){
         spec = parts[2].split('?')[0];
     }
     else {
