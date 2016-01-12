@@ -59,11 +59,17 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.spec.outline();
     }
     
-    buildResults(loader){
+    buildResults(loader, running){
+        console.log("I am rebuilding the results page, and running is " + running);
+        if (running){
+            
+            return this.spec.buildResults(loader);
+        }
+        
         if (this.hasResults()){
             var library = this.spec.fixture;
             
-            var spec = new Specification(this.last_result, library);
+            var spec = new Specification(this.last_result.data, library);
             spec.readResults(this.last_result.results);
             
             return spec.buildResults(loader);
@@ -71,6 +77,8 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         
         return this.spec.buildResults(loader);
     }
+    
+    
     
     previews(loader){
         return this.spec.previews(loader);

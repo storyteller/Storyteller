@@ -278,6 +278,16 @@ function Specification(data, library){
     self.results = {};
     self.steps.forEach(s => s.clearResults());
   }
+  
+  self.readResult =function(result){
+      var child = self.find(result.id);
+      if (child){
+        child.logResult(result);
+      } 
+      else {
+        console.log('Unable to find a matching step for ' + JSON.stringify(result));
+      }
+  }
 
   self.readResults = function(results){
     self.clearResults();
@@ -286,13 +296,7 @@ function Specification(data, library){
     self.results.performance = results.performance;
 
     results.results.forEach(x => {
-      var child = self.find(x.id);
-      if (child){
-        child.logResult(x);
-      } 
-      else {
-        console.log('Unable to find a matching step for ' + JSON.stringify(x));
-      }
+      self.readResult(x);
     });
   }
 

@@ -69,7 +69,7 @@ namespace StoryTeller.Testing
 
                 var initialization = new InitialModel(controller.LatestSystemRecycled, hierarchyLoaded)
                 {
-                    port = 8200
+                    wsAddress = "ws://localhost:" + 8200
                 };
 
                 var json = JsonSerialization.ToIndentedJson(initialization);

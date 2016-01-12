@@ -89,7 +89,6 @@ module.exports = function Reducer(state = initialState, action){
         return state.set('running', action.id).set('progress', action);
 
     case 'spec-execution-completed':
-        // TODO -- clear the results out
         return state.updateIn(['specs', action.id], record => record.recordLastResult(action));
 
    
@@ -99,12 +98,12 @@ module.exports = function Reducer(state = initialState, action){
     case 'step-result':
         if (state.get('specs').get(action.spec).mode == 'header') return state;
     
-        return updateSpec(state, action.spec, spec => spec.logResult(action));
+        return updateSpec(state, action.spec, spec => spec.readResult(action));
     
     case 'set-verification-result':
         if (state.get('specs').get(action.spec).mode == 'header') return state;
     
-        return updateSpec(state, action.spec, spec => spec.logResult(action));
+        return updateSpec(state, action.spec, spec => spec.readResult(action));
     
     case 'go-home':
         return updateSpec(state, action.id, spec => spec.navigator.moveFirst());

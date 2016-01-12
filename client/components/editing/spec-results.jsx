@@ -29,7 +29,9 @@ function getSpec(state, ownProps){
     // use the historical data if there are results
     // Show no results if none
     
-    return {spec: spec, loading: loading};
+    var running = state.get('running') === id;
+    
+    return {spec: spec, loading: loading, running: running};
 }
 
 function addDispatch(dispatch){
@@ -43,7 +45,7 @@ function SpecResults(props){
     
     // <Persisting spec={this.props.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
     
-    var components = props.spec.buildResults(loader);
+    var components = props.spec.buildResults(loader, props.running);
     
     return (
         <Grid>
