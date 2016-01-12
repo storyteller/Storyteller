@@ -19,7 +19,6 @@ var spec = null;
 var subscriptions = [];
 
 function setLocation(location){
-    console.log('location is ' + JSON.stringify(location));
     var parts = location.hash.split('/');
     if (parts[1] == 'spec'){
         spec = parts[3].split('?')[0];
@@ -30,8 +29,6 @@ function setLocation(location){
     else {
         spec = null;
     }
-    
-    console.log('spec was set to ' + spec);
 }
 
 var history = createHistory();
@@ -113,7 +110,7 @@ subscribe('save-spec', x => {
 
 
 function locationForReordering(){
-    var record = store.get('specs').get(spec);
+    var record = store.getState().get('specs').get(spec);
     var location = record.spec.navigator.location;
     if (location.step == location.holder.adder){
         location = parentLocation(location);
@@ -129,8 +126,8 @@ function locationForReordering(){
 function reorderUp(location){
     applyOutstandingChanges();
 
-    if (!location){
-        location = this.locationForReordering();
+    if (!location || !location.holder){
+        location = locationForReordering();
     }
 
     if (location.step && !location.holder.isFirst(location.step)){
@@ -142,8 +139,8 @@ function reorderUp(location){
   function reorderDown(location){
     applyOutstandingChanges();
 
-    if (!location){
-      location = this.locationForReordering();
+    if (!location || !location.holder){
+      location = locationForReordering();
     }
 
     if (location.step && !location.holder.isLast(location.step)){
@@ -175,7 +172,7 @@ subscribe('changes', data => {
     store.dispatch({type: 'changes', id: spec, change: data});
 });
 
-subscribe('clear-all-results', gotoPreview);
+subscribe('clear-all-results', gotoPreview, 'engine-request');
 
 module.exports = function start(theStore, theCommunicator){
     store = theStore;
