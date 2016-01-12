@@ -30,9 +30,9 @@ function SpecRow(props){
 function ResultsTable(props){
     var specs = props.specs;
 
-    
+    var i = 0;
     var rows = _.sortBy(specs, x => x.path).map(x => {
-       return (<SpecRow spec={x} />); 
+       return (<SpecRow spec={x} key={++i}/>); 
     });
     
     return (
