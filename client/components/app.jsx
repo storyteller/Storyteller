@@ -17,7 +17,7 @@ var SpecEditor = require('./editing/spec-editor');
 var SpecPreview = require('./editing/spec-preview');
 var SpecResults = require('./editing/spec-results');
 var SuiteExplorer = require('./explorer/suite-explorer');
-var ResultsTable = require('./results/results-table');
+var ResultsPane = require('./results/results-pane');
 
 
 var FixtureTable = require('./language/fixture-table');
@@ -71,7 +71,7 @@ module.exports = function(initialization, register){
                     <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
                     <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
                     <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
-                    <Route name="results" path="/results" component={ResultsTable} />
+                    <Route name="results" path="/results" component={ResultsPane} />
                     <IndexRoute component={SpecExplorer}/>
                 </Route>
             </Router>

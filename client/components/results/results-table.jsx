@@ -1,92 +1,57 @@
 var React = require('react');
-var Postal = require('postal');
+var Counts = require('./../../lib/model/counts');
 
-var SuitePath = require('./../explorer/suite-path');
-var ResultsCache = require('./../../lib/stores/result-cache');
-var Hierarchy = require('./../../lib/stores/hierarchy');
+function SpecRow(props){
+    var bsStyle = 'info';
+    
+    if (props.spec.status == 'success'){
+        bsStyle = 'success';
+    }
+    else {
+        bsStyle = 'danger';
+    }
 
+    
+    var href = '#spec/results/' + props.spec.id;
+    
+    var counts = new Counts(props.spec.last_result.results.counts);
+    
+    return (
+        <tr className={bsStyle}>
+            <td><a href={href}>{props.spec.path}</a></td>
+            <td>{props.spec.lifecycle}</td>
+            <td>{counts.toString()}</td>
+            <td className="number-cell">{props.spec.last_result.results.duration}</td>
+            <td className="number-cell">{props.spec.last_result.results.attempts}</td>
+        </tr>
+    );
+}
 
-var ResultsRow = React.createClass({
-	render(){
-		var href = "#/spec/results/" + this.props.spec.id;
+function ResultsTable(props){
+    var specs = props.specs;
 
-		var bsStyle = 'bg-danger';
+    
+    var rows = _.sortBy(specs, x => x.path).map(x => {
+       return (<SpecRow spec={x} />); 
+    });
+    
+    return (
+        <table className="table">
+            <thead>
+            <tr>
+                <th>Specification</th>
+                <th>Lifecycle</th>
+                <th>Results</th>
+                <th>Duration (ms)</th>
+                <th>Attempts</th>
+            </tr>
+            </thead>
+            <tbody>
+            {rows}
+            </tbody>
+        </table>  
+    );
+}
 
-		if (this.props.counts.success()){
-			bsStyle = 'bg-success'
-		}
-
-		return (
-			<tr className={bsStyle}>
-				<td><SuitePath suite={this.props.spec.suite} linkToLeaf={true} /></td>
-				<td><a href={href}>{this.props.spec.title}</a></td>
-				<td>{this.props.counts.toString()}</td>
-				<td className="number-cell">{this.props.duration}</td>
-			</tr>
-		);
-	}
-});
-
-var ResultsTable = React.createClass({
-	componentDidMount(){
-		this.subscription = Postal.subscribe({
-			channel: 'results',
-			topic: 'results-changed',
-			callback: () => {
-				this.setState({});
-			}
-		});
-	},
-
-	componentWillUnmount(){
-		this.subscription.unsubscribe();
-	},
-
-	render(){
-		var results = ResultsCache.latestResults();
-
-		if (results.length == 0){
-			return (
-				<div>
-					<br />
-					<br />
-					<h1 style={{textAlign: 'center'}}>No results yet.</h1>
-
-				</div>
-
-			);
-		}
-
-		var ordered = _.sortBy(results, 'timestamp').reverse();
-
-		var rows = ordered.map(completed => {
-			var spec = Hierarchy.findSpec(completed.id);
-			return (<ResultsRow spec={spec} counts={completed.counts} duration={completed.results.duration} />);
-		});
-
-		return (
-			<div>
-
-			<h2>Most Recent Results</h2>
-
-			<table className="table table-bordered">
-				<thead>
-					<tr>
-						<th>Suite</th>
-						<th>Specification</th>
-						<th>Counts</th>
-						<th>Duration (ms)</th>
-					</tr>
-				</thead>
-				<tbody>
-					{rows}
-				</tbody>
-			</table>
-
-
-			</div>
-		);
-	}
-});
 
 module.exports = ResultsTable;

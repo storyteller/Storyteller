@@ -15,8 +15,12 @@ function findState(state){
     
     var spec = state.get('specs').get(running);
     var progress = state.get('progress');
-    var counts = new Counts(progress.counts);
-    
+    var counts = new Counts(0, 0, 0, 0);
+    if (progress){
+        counts = new Counts(progress.counts);
+    }
+
+
     return {running: true, spec: spec, progress: progress, counts: counts};
 }
 
@@ -24,6 +28,11 @@ function SpecProgressBar(props){
     if (!props.running){
         return (<span />);
     }
+    
+    if (!props.progress){
+        return (<span />);
+    }
+    
     
     var bsStyle = "info";
     if (props.counts.anyResults()){

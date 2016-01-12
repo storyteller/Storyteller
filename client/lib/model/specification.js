@@ -30,6 +30,7 @@ function Specification(data, library){
   this.results = {};
   this.active = false;
   this.updateHeader(data);
+  this.path = data.path;
 
 
   this.navigator = new SpecificationNavigator(this);

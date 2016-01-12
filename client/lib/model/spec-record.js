@@ -19,6 +19,10 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         super({id: data.id, spec: spec, version: 0, last_result: last_result, status: statusForResults(last_result)});
     }
     
+    get path(){
+        return this.spec.path;
+    }
+    
     get revision(){
         return this.spec.revision();
     }
