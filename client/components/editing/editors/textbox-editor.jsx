@@ -42,7 +42,13 @@ module.exports = React.createClass({
 		element.focus();
 
 		if (this.state.value){
-			element.setSelectionRange(0, this.state.value.length);
+            if (this.props.arg.changed){
+                element.setSelectionRange(this.state.value.length, this.state.value.length);
+            }
+            else {
+                element.setSelectionRange(0, this.state.value.length);
+            }
+			
 		}
 
 		this.subscription = Postal.subscribe({
