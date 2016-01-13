@@ -10,7 +10,7 @@
     "smoke-test": "karma start smoke-test.conf.js --single-run",
     "tdd-karma": "karma start --auto-watch",
     "tdd-mocha": "mocha -w -G",
-    "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
+    "test": "npm run test-mocha",
     "test-karma": "karma start --single-run",
     "test-mocha": "mocha --compilers js:babel-core/register",
     "build-server": "paket install && node build/buildServer.js"
