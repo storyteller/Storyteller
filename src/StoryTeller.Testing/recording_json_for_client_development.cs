@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using FubuCore;
 using NUnit.Framework;
 using StoryTeller.Engine;
@@ -57,6 +58,7 @@ namespace StoryTeller.Testing
                 var request = new BatchRunRequest();
                 var response = controller.Send(request).AndWaitFor<BatchRunResponse>();
 
+
                 var cache = new ResultsCache();
                 response.Result.records.Each(
                     x =>
@@ -65,6 +67,9 @@ namespace StoryTeller.Testing
                         cache.Store(completed);
                     });
 
+                response.Result.fixtures = controller.LatestSystemRecycled.fixtures;
+
+
                 var hierarchyLoaded = new HierarchyLoaded(hierarchy, cache);
 
                 var initialization = new InitialModel(controller.LatestSystemRecycled, hierarchyLoaded)
@@ -72,16 +77,33 @@ namespace StoryTeller.Testing
                     wsAddress = "ws://localhost:" + 8200
                 };
 
-                var json = JsonSerialization.ToIndentedJson(initialization);
-
-                var path = AppDomain.CurrentDomain.BaseDirectory
-                    .ParentDirectory().ParentDirectory() // project dir
-                    .ParentDirectory().ParentDirectory() // root
-                    .AppendPath("client", "initialization.js");
-
-                new FileSystem().WriteStringToFile(path, "module.exports = " + json);
-
+                writeResponse(response.Result);
+                //writeInitialization(initialization);
             }
+        }
+
+        private void writeResponse(BatchRunResponse response)
+        {
+            var json = JsonSerialization.ToIndentedJson(response);
+
+            var path = AppDomain.CurrentDomain.BaseDirectory
+                .ParentDirectory().ParentDirectory() // project dir
+                .ParentDirectory().ParentDirectory() // root
+                .AppendPath("client", "batch-run-response-data.js");
+
+            new FileSystem().WriteStringToFile(path, "module.exports = " + json);
+        }
+
+        private static void writeInitialization(InitialModel initialization)
+        {
+            var json = JsonSerialization.ToIndentedJson(initialization);
+
+            var path = AppDomain.CurrentDomain.BaseDirectory
+                .ParentDirectory().ParentDirectory() // project dir
+                .ParentDirectory().ParentDirectory() // root
+                .AppendPath("client", "initialization.js");
+
+            new FileSystem().WriteStringToFile(path, "module.exports = " + json);
         }
 
         [Test]

@@ -28,8 +28,6 @@ var SpecHeader = React.createClass({
 					<div>
 						<SpecCommands spec={this.props.spec}/>
 						<span className="pull-right">
-							
-
 							<SpecLinks id={this.props.spec.id} mode={this.props.mode} />
 
 							<LifecycleButton spec={this.props.spec} />

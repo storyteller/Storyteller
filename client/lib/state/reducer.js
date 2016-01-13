@@ -1,5 +1,6 @@
 import SystemRecycled from './system-recycled';
 var HierarchyLoaded = require('./hierarchy-loaded');
+var BatchRunResponse = require('./batch-run-response');
 var Immutable = require('immutable');
 var Specification = require('./../model/specification');
 var Counts = require('./../model/counts');
@@ -28,6 +29,9 @@ function updateSpec(state, id, func){
 
 module.exports = function Reducer(state = initialState, action){
   switch (action.type) {
+    case '@@redux/INIT':
+        return state;
+      
     case 'initial-model':
         var one = SystemRecycled(state, action.recycled);
         return HierarchyLoaded(one, action.hierarchy);
@@ -37,6 +41,9 @@ module.exports = function Reducer(state = initialState, action){
       
     case 'system-recycle-start':
       return state.updateIn(['system-state', 'recycling'], _ => true);
+      
+    case 'batch-run-response':
+      return BatchRunResponse(state, action);
       
     case 'hierarchy-loaded':
         return HierarchyLoaded(state, action);
