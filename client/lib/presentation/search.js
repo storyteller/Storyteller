@@ -13,12 +13,11 @@ function SpecOption(spec){
 }
 
 module.exports = {
-	findMatches(query){
-        // TODO -- needs to pull this out of the store somehow
-		var top = Hierarchy.top();
+	findMatches(state, query){
+		var top = state.get('hierarchy');
 
 		var suites = top.allSuites().map(x => new SuiteOption(x));
-		var specs = top.allSpecs().map(x => new SpecOption(x));
+		var specs = state.get('specs').toList().toArray().map(x => new SpecOption(x));
 
 		var all = _.sortBy(suites.concat(specs), x => x.text);
 

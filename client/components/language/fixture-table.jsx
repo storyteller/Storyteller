@@ -1,6 +1,4 @@
 var React = require("react");
-var Hierarchy = require('./../../lib/stores/hierarchy');
-var Postal = require('postal');
 var _ = require('lodash');
 var { connect } = require('react-redux');
 

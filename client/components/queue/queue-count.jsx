@@ -1,7 +1,5 @@
 var React = require("react");
 var {Badge, Button} = require('react-bootstrap');
-var Hierarchy = require('./../../lib/stores/hierarchy');
-var Postal = require('postal');
 var { connect } = require('react-redux');
 
 

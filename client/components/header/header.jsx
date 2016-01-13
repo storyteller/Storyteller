@@ -8,7 +8,6 @@ var Icons = require('./../icons');
 var Postal = require('postal');
 
 var StatusBar = require('./status-bar');
-var Hierarchy = require('./../../lib/stores/hierarchy');
 var SpecProgressBar = require('./spec-progress-bar');
 
 function findSystemData(state){

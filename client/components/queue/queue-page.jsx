@@ -2,7 +2,6 @@ var React = require("react");
 var {Button} = require('react-bootstrap');
 var { connect } = require('react-redux');
 
-var Hierarchy = require('./../../lib/stores/hierarchy');
 var Postal = require('postal');
 
 var CommandLink = require('./../explorer/command-link');
