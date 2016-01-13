@@ -1,4 +1,3 @@
-var Hierarchy = require('./../stores/hierarchy');
 var _ = require('lodash');
 
 function SuiteOption(suite){
@@ -15,6 +14,7 @@ function SpecOption(spec){
 
 module.exports = {
 	findMatches(query){
+        // TODO -- needs to pull this out of the store somehow
 		var top = Hierarchy.top();
 
 		var suites = top.allSuites().map(x => new SuiteOption(x));

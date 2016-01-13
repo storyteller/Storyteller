@@ -1,6 +1,5 @@
 var expect = require('chai').expect;
 
-var Hierarchy = require('./../lib/stores/hierarchy');
 var Search = require('./../lib/presentation/search');
 var Postal = require('postal');
 var AllSpecData = require('./../all-spec-data');
@@ -13,7 +12,6 @@ describe('The Spec and Suite Lookup Search', function(){
     
 	beforeEach(() => {
 		Postal.reset();
-		Hierarchy.reset();
 
 		Postal.publish({
 			channel: 'engine',

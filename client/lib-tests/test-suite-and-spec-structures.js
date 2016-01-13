@@ -20,9 +20,6 @@ describe('Spec', function(){
 			expect(spec.lifecycle).to.equal('Acceptance');
 		});
 
-		it('uses none as the default state', function(){
-			expect(spec.state).to.equal('none');
-		});
 
 	});
 

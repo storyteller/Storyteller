@@ -5,8 +5,6 @@ var _ = require('lodash');
 var uuid = require('node-uuid');
 var SpecificationNavigator = require('./specification-navigator');
 var Counts = require('./counts');
-var QueueState = require('./../stores/queue-state');
-var ResultCache = require('./../stores/result-cache');
 
 function Specification(data, library){
   if (data == undefined || data == null){
@@ -34,42 +32,6 @@ function Specification(data, library){
 
 
   this.navigator = new SpecificationNavigator(this);
-
-  Object.defineProperty(this, 'state', {
-    enumerable: true,
-    writeable: false,
-    get: function(){
-      return QueueState.stateFor(this.id);
-    }
-  });
-
-
-  this.status = function(){
-    if (!this.hasResults()) return 'none';
-
-    var lastResult = ResultCache.lastResultFor(this.id);
-
-    if (lastResult.counts.success()) return 'success';
-
-    return 'failed';
-  }
-
-  this.hasResults = function(){
-    return ResultCache.hasResults(this.id);
-  }
-
-  this.icon = function(){
-    if (this.state == 'running'){
-      var counts = QueueState.runningCounts();
-      if (!counts.anyResults()) return 'running';
-
-      if (counts.success()) return 'running-success';
-
-      return 'running-failed';
-    }
-
-    return this.status();
-  }
 
   this.children = function(){
     return this.steps;
