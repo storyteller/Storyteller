@@ -4,27 +4,18 @@ var Postal = require("postal");
 var {Grid, Row} = require('react-bootstrap');
 var SpecResultHeader = require('./../editing/header/spec-result-header');
 
-var ResultsView = React.createClass({
-	render: function(){
-		var onClick = e => {
-			Postal.publish({
-				channel: 'batch',
-				topic: 'show-summary',
-				data: {}
-			});
-
-			e.preventDefault();
-		}
-
-		return (
-			<div>
-				<h4>{this.props.title} ({this.props.header.results.attempts} attempts) <small style={{marginLeft: '25px'}}><a onClick={onClick}>  back to summary</a></small></h4>
-				<hr />
-				<SpecResultHeader spec={this.props.header} />
-				{this.props.components}
-			</div>
-		);
-	}
-});
+function ResultsView(props){
+    var loader = require('./../editing/component-loader').results;
+    var components = props.spec.buildResults(loader, false);
+    
+    return (
+        <div>
+            <h4>{props.spec.title} ({props.spec.last_result.results.attempts} attempts) <small style={{marginLeft: '25px'}}><a href="#/">  back to summary</a></small></h4>
+            <hr />
+            <SpecResultHeader spec={props.spec} />
+            {components}
+        </div>
+    );
+}
 
 module.exports = ResultsView;

@@ -48,9 +48,14 @@ namespace StoryTeller.Results
 
             var foot = new HtmlTag("foot");
             document.Body.Next = foot;
+
+
             foot.Add("script").Attr("language", "javascript").Text("\n\n" + js + "\n\n").Encoded(false);
-
-
+            /*
+            foot.Add("script")
+                .Attr("language", "Javascript")
+                .Attr("src", "file://Z:/code/storyteller/src/ST/batch-bundle.js");
+                */
 
         }
     }
