@@ -60,6 +60,14 @@ describe('SpecRecord', () => {
     
   });
   
+  it('can replace the library', () => {
+      var lib2 = new FixtureLibrary(fixtureData);
+      var record2 = record.replaceLibrary(lib2);
+      
+      expect(record2).to.not.equal(record);
+      expect(record2.spec.fixture).to.equal(lib2);
+  });
+  
   it('can read the lifecycle', () => {
      expect(record.lifecycle).to.equal(specData.lifecycle); 
   });

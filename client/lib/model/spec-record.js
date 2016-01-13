@@ -63,6 +63,11 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.spec.outline();
     }
     
+    replaceLibrary(library){
+        var data = this.spec.write();
+        return this.set('spec', new Specification(data, library));
+    }
+    
     buildResults(loader, running){
         console.log("I am rebuilding the results page, and running is " + running);
         if (running){
