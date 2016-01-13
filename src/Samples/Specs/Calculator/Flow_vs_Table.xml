@@ -9,7 +9,7 @@
       <table id="b8897308-1a4e-401a-9af6-d3c9f8d6e271">
         <AddingNumbersTogetherAsTable-row x="5" y="6" sum="11" />
         <AddingNumbersTogetherAsTable-row x="10" y="2" sum="12" />
-        <AddingNumbersTogetherAsTable-row x="13" y="3" sum="76" />
+        <AddingNumbersTogetherAsTable-row x="13" y="3" sum="16" />
       </table>
     </AddingNumbersTogetherAsTable>
   </Calculator>
