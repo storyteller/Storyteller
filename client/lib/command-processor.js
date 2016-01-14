@@ -42,7 +42,7 @@ function CommandProcessor(communicator, store){
         var fulls = _.filter(specs, x => x.mode == 'full');
         
         _.filter(fulls, x => x.lifecycle == 'Regression').forEach(spec => {
-            store.dispatch({type: 'spec-change', id: spec.id, change: new ToggleLifecycle()});
+            store.dispatch({type: 'changes', id: spec.id, change: new ToggleLifecycle()});
         });
 
         var ids = _.filter(heads, x => x.lifecycle == 'Regression')
@@ -50,9 +50,8 @@ function CommandProcessor(communicator, store){
 
         if (ids.length > 0){
             communicator.send({
-                channel: 'engine-request',
-                topic: 'mark-as-acceptance',
-                data: {list: ids}
+                type: 'mark-as-acceptance',
+                list: ids
             });
         }
     };
@@ -63,7 +62,7 @@ function CommandProcessor(communicator, store){
         var fulls = _.filter(specs, x => x.mode == 'full');
         
         _.filter(fulls, x => x.lifecycle == 'Acceptance').forEach(spec => {
-            store.dispatch({type: 'spec-change', id: spec.id, change: new ToggleLifecycle()});
+            store.dispatch({type: 'changes', id: spec.id, change: new ToggleLifecycle()});
         });
 
         var ids = _.filter(heads, x => x.lifecycle == 'Acceptance')
@@ -71,9 +70,8 @@ function CommandProcessor(communicator, store){
 
         if (ids.length > 0){
             communicator.send({
-                channel: 'engine-request',
-                topic: 'mark-as-regression',
-                data: {list: ids}
+                type: 'mark-as-regression',
+                list: ids
             });
         }
     }
