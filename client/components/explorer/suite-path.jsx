@@ -2,51 +2,54 @@ var React = require('react');
 var ArrayList = require('./../../lib/array-list');
 var uuid = require('node-uuid');
 
-var SuiteLink = React.createClass({
-	render(){
-		var href = "#/suite/" + this.props.suite.path;
+function SuiteLink(props){
+    var href = "#/suite/" + props.path;
+    
 
-		return (<a key={this.props.suite.path} href={href}>{this.props.suite.name}</a>);
-	}
-});
-
-var SuitePath = React.createClass({
-	render(){
-		var suite = this.props.suite;
-		if (!suite){
-			return null;
-		}
-
-		if (suite.isHierarchy){
-			return null;
-		}
-
-		var items = new ArrayList();
-		if (this.props.linkToLeaf){
-			var link = (<SuiteLink key={suite.path} suite={suite} />);
-			items.insertFirst(link);
-		}
-		else {
-			var span = (<span key={suite.path}>{suite.name}</span>)
-			items.insertFirst(span);
-		}
-
-		var s = suite.parent;
-		while (s && !s.isHierarchy){
-			var spacer = (<span key={uuid.v4()}> / </span>);
-			items.insertFirst(spacer);
-
-			var link = (<SuiteLink key={suite.path} suite={s} />);
-			items.insertFirst(link);
-
-			s = s.parent;
+    return (<a href={href}>{props.name}</a>);
+}
 
 
-		}
+function SuitePath(props){
+    // path == spec path
+    // linkToLeaf = {true}
+    
+    var parts = [];
+    if (props.suite){
+        parts = props.suite.split('/');
+    }
+    else if (props.path){
+        parts = props.path.split('/');
+        parts = parts.slice(0, parts.length - 1);
+    }
+    
+    var leafName = parts[parts.length - 1];
+    parts = parts.slice(0, parts.length - 1);
+
+    var items = [];
+    for (var i = 0; i < parts.length; i++){
+        var path = parts.slice(0, i + 1).join('/');
+        var name = parts[i];
+        
+        var item = (<SuiteLink path={path} name={name} key={i}/>);
+        items.push(item);
+        
+        var spacer = (<span key={'spacer:' + i}> / </span>);
+	    items.push(spacer);
+    }
+    
+    if (props.linkToLeaf){
+        var path = parts.join('/') + '/' + leafName;
+        var item = (<SuiteLink path={path} name={leafName} key="leaf"/>);
+        items.push(item);
+    }
+    else {
+        items.push(<span key="leaf">{leafName}</span>);
+    }
+    
+    return (<span>{items}</span>);
+}
 
 
-		return (<span>{items}</span>);
-	}
-});
 
 module.exports = SuitePath;

@@ -53,11 +53,12 @@ namespace StoryTeller.Testing
             
             var hierarchy = TestingContext.Hierarchy;
 
+            hierarchy.GetAllSpecs().Each(x => x.path.ShouldNotBeNull());
+
             hierarchy.GetAllSpecs().Each(header =>
             {
-                Debug.WriteLine("Running " + header.name);
-
-                var spec = XmlReader.ReadFromFile(header.Filename);
+                var spec = header;
+                spec.ReadBody();
                 data.specs.Add(spec.id, spec);
 
                 using (var execution = theSystem.CreateContext())
@@ -80,7 +81,7 @@ namespace StoryTeller.Testing
                 }
             });
 
-
+            data.specs.Values.Each(x => x.path.ShouldNotBeNull());
 
             data.hierarchy = hierarchy;
             data.fixtures = library.Models.Where(x => x.implementation.Contains("StoryTeller.Samples")).ToArray();

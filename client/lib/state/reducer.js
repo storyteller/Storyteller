@@ -100,12 +100,7 @@ module.exports = function Reducer(state = initialState, action){
         var spec = new Specification(action.data, library);
         return state.updateIn(['specs', action.id], x => x.replace(spec));
     
-    case 'spec-changed':
-        var library = state.get('fixtures');
-        var spec = new Specification(action.spec, library);
-        return state.updateIn(['specs', action.spec.id], x => x.replace(spec));
-    
-    
+
     case 'queue-state':
         var one = state.set('running', action.running);
         if (!_.isEqual(state.get('queued'), action.queued)){

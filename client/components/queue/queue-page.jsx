@@ -39,12 +39,10 @@ function QueueItem(props){
     var icon = icons[props.spec.icon(null, [], {})]({});
     var divId = 'queued-spec-' + id;
 
-    // TODO -- put <SuitePath suite={this.props.spec.suite} linkToLeaf={true} /> back
-
     return (
         <div id={divId}>
             {icon}
-            
+            <SuitePath path={props.spec.path} linkToLeaf={true} />
             <span> / </span>
             <span className="queued-spec-name">{props.spec.title}</span>
             <CommandLink createMessage={createMessage} text="cancel" />

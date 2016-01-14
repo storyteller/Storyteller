@@ -42,7 +42,7 @@ function SuiteHeader(props){
         links.push(childSuiteLink);
     }
     else {
-        title = (<SuitePath suite={suite} />)
+        title = (<SuitePath suite={suite.path} linkToLeaf={false}/>)
     }
 
     if (suite.suites.length > 0){

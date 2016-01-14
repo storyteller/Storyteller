@@ -34,6 +34,11 @@ _.extend(ArrayList.prototype, {
 
     return this;
   },
+  
+  addRange: function(array){
+    array.forEach(x => this.add(x));
+    return this;  
+  },
 
   insertAt: function(index, element){
     if (index == 0){

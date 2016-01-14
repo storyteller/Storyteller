@@ -7,38 +7,41 @@ var SpecCommands = require('./spec-commands');
 var LifecycleButton = require('./lifecycle-button');
 var SuitePath = require('./../../explorer/suite-path');
 
-var SpecHeader = React.createClass({
-	render(){
-		// Hokey, but letting it pass
-		var headerClass = "";
-		if (this.props.mode == 'editor' && this.props.spec.active){
-			headerClass = "text-primary";
-		}
 
-		return (
-			<Row>
-				<Col xs={12} md={12}>
-				    <h3 ref="header" className={headerClass}>
-				    	<SuitePath suite={this.props.spec.suite} linkToLeaf={true} />
-						<span> / </span>
-						<SpecTitle spec={this.props.spec} />
+function SpecHeader(props){
+    // Hokey, but letting it pass
+    var headerClass = "";
+    if (props.mode == 'editor' && props.spec.active){
+        headerClass = "text-primary";
+    }
+if (!props.spec.path){
+    throw new Error('No path on the specification!');
+}
+    return (
+        <Row>
+            <Col xs={12} md={12}>
+                <h3 className={headerClass}>
+                    <SuitePath path={props.spec.path} linkToLeaf={true} />
+                    <span> / </span>
+                    <SpecTitle spec={props.spec} />
 
-					</h3>
+                </h3>
 
-					<div>
-						<SpecCommands spec={this.props.spec}/>
-						<span className="pull-right">
-							<SpecLinks id={this.props.spec.id} mode={this.props.mode} />
+                <div>
+                    <SpecCommands spec={props.spec}/>
+                    <span className="pull-right">
+                        <SpecLinks id={props.spec.id} mode={props.mode} />
 
-							<LifecycleButton spec={this.props.spec} />
-						</span>
-					</div>
+                        <LifecycleButton spec={props.spec} />
+                    </span>
+                </div>
 
-					<hr />
-				</Col>
-			</Row>
-		);
-	}
-});
+                <hr />
+            </Col>
+        </Row>
+    );
+}
+
+
 
 module.exports = SpecHeader;
