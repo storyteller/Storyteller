@@ -2,6 +2,8 @@ var expect = require('chai').expect;
 var reducer = require('./../lib/state/reducer');
 var { createStore } = require('redux');
 var initial = require('./../initialization');
+var SpecRecord = require('./../lib/model/spec-record');
+var Suite = require('./../lib/model/suite');
 
 describe('Reducer', () => {
     var store;
@@ -96,6 +98,85 @@ describe('Reducer', () => {
         it('captures the hierarchy', () => {
             var Suite = require('./../lib/model/suite');
             
+            expect(state.get('hierarchy') instanceof Suite).to.be.true;
+        });
+    });
+    
+    describe('Handling spec-added', () => {
+        var state, data, hierarchy2, originalHierarchy;
+        
+        beforeEach(() => {
+            store.dispatch(initial.recycled);
+            store.dispatch(initial.hierarchy);
+            
+            originalHierarchy = store.getState('hierarchy');
+            
+            hierarchy2 = JSON.parse(JSON.stringify(initial.hierarchy.hierarchy));
+            data = {id: 'foo'};
+            
+            store.dispatch({type: 'spec-added', hierarchy: hierarchy2, data: data})
+            
+            state = store.getState();
+        });
+        
+        it('adds the new spec', () => {
+           expect(state.get('specs').get('foo') instanceof SpecRecord).to.be.true; 
+        });
+        
+        it('replaces the hierarchy', () => {
+            expect(state.get('hierarchy')).to.not.equal(originalHierarchy);
+            expect(state.get('hierarchy') instanceof Suite).to.be.true;
+        });
+    });
+    
+    describe('Handling spec-deleted', () => {
+        var state, data, hierarchy2, originalHierarchy;
+        
+        beforeEach(() => {
+            store.dispatch(initial.recycled);
+            store.dispatch(initial.hierarchy);
+            
+            originalHierarchy = store.getState('hierarchy');
+            
+            hierarchy2 = JSON.parse(JSON.stringify(initial.hierarchy.hierarchy));
+            
+            if (!store.getState().get('specs').has('general1')){
+                throw new Error('Jeremy, your test data is wrong, check the id');
+            }
+            
+            store.dispatch({type: 'spec-deleted', hierarchy: hierarchy2, id: 'general1'})
+            
+            state = store.getState();
+        });
+        
+        it('removes the old spec', () => {
+           expect(state.get('specs').has('general1')).to.be.false; 
+        });
+        
+        it('replaces the hierarchy', () => {
+            expect(state.get('hierarchy')).to.not.equal(originalHierarchy);
+            expect(state.get('hierarchy') instanceof Suite).to.be.true;
+        });
+    });
+    
+    describe('Handling suite-added', () => {
+        var state, hierarchy2, originalHierarchy;
+        
+        beforeEach(() => {
+            store.dispatch(initial.recycled);
+            store.dispatch(initial.hierarchy);
+            
+            originalHierarchy = store.getState('hierarchy');
+            
+            hierarchy2 = JSON.parse(JSON.stringify(initial.hierarchy.hierarchy));
+            
+            store.dispatch({type: 'suite-added', hierarchy: hierarchy2})
+            
+            state = store.getState();
+        });
+        
+        it('replaces the hierarchy', () => {
+            expect(state.get('hierarchy')).to.not.equal(originalHierarchy);
             expect(state.get('hierarchy') instanceof Suite).to.be.true;
         });
     });

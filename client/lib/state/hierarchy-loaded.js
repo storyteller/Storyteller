@@ -15,7 +15,7 @@ function HierarchyLoaded(state, action){
     var specMap = Immutable.Map(specs);
     state = state.set('specs', specMap);
     
-    var hierarchy = new Suite(action.hierarchy, null, library, specs);
+    var hierarchy = new Suite(action.hierarchy, null);
     state = state.set('hierarchy', hierarchy);
     
 

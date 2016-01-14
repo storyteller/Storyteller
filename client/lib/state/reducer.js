@@ -3,6 +3,8 @@ var HierarchyLoaded = require('./hierarchy-loaded');
 var BatchRunResponse = require('./batch-run-response');
 var Immutable = require('immutable');
 var Specification = require('./../model/specification');
+var SpecRecord = require('./../model/spec-record');
+var Suite = require('./../model/suite');
 var Counts = require('./../model/counts');
 var _ = require('lodash');
 
@@ -47,6 +49,22 @@ module.exports = function Reducer(state = initialState, action){
       
     case 'hierarchy-loaded':
         return HierarchyLoaded(state, action);
+        
+    case 'spec-added':
+        var library = state.get('fixtures');
+        var spec = new SpecRecord(action.data, library, null);
+        return state
+            .set('hierarchy', new Suite(action.hierarchy, null))
+            .setIn(['specs', action.data.id], spec);
+            
+    case 'spec-deleted':
+        return state
+            .set('hierarchy', new Suite(action.hierarchy, null))
+            .deleteIn(['specs', action.id]);
+      
+    case 'suite-added':
+        return state
+            .set('hierarchy', new Suite(action.hierarchy, null));
       
     case 'expand-all':
         var treeState = state.get('tree-state').toJS();
