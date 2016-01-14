@@ -114,7 +114,7 @@ namespace ST.Client
 
                     _hierarchy.Suites[newPath] = newSuite;
 
-                    _client.SendMessageToClient(new SuiteAdded {path = newPath});
+                    _client.SendMessageToClient(new SuiteAdded(_hierarchy.Top));
                 }
             }
             catch (Exception e)
@@ -180,11 +180,7 @@ namespace ST.Client
 
                 suite.AddSpec(template);
 
-                return new SpecAdded
-                {
-                    suite = suitePath,
-                    data = template
-                };
+                return new SpecAdded(_hierarchy.Top, template);
             });
         }
 
@@ -210,11 +206,7 @@ namespace ST.Client
                 _hierarchy.Specifications[specification.id] = specification;
                 suite.AddSpec(specification);
 
-                return new SpecAdded
-                {
-                    suite = path,
-                    data = specification
-                };
+                return new SpecAdded(_hierarchy.Top, specification);
             });
         }
 
@@ -320,7 +312,7 @@ namespace ST.Client
                 _watcher.WriteFiles(() => { new FileSystem().DeleteFile(spec.Filename); });
 
 
-                _client.SendMessageToClient(new SpecDeleted {id = id});
+                _client.SendMessageToClient(new SpecDeleted(_hierarchy.Top, id));
             }
         }
 

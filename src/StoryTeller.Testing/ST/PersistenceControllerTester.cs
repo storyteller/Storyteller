@@ -148,7 +148,7 @@ namespace StoryTeller.Testing.ST
 
             var expectedPath = thePath.AppendPath("Sentences", "New_Sentence.xml");
 
-            added.suite.ShouldBe("Sentences");
+            added.hierarchy.ShouldBeTheSameAs(ClassUnderTest.Hierarchy.Top);
             added.data.Lifecycle.ShouldBe(Lifecycle.Acceptance);
             added.data.id.ShouldNotBe("sentence2");
             added.data.name.ShouldBe("New Sentence");
@@ -224,7 +224,7 @@ namespace StoryTeller.Testing.ST
 
             Directory.Exists(thePath.AppendPath("Foo Specs"));
 
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded {path = "Foo Specs"}));
+            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top)));
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Foo Specs"];
             newSuite.name.ShouldBe("Foo Specs");
@@ -246,7 +246,7 @@ namespace StoryTeller.Testing.ST
             Directory.Exists(thePath.AppendPath("Tables", "Special Tables"));
 
             MockFor<IClientConnector>()
-                .AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded {path = "Tables/Special Tables"}));
+                .AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top)));
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Tables/Special Tables"];
             newSuite.name.ShouldBe("Special Tables");

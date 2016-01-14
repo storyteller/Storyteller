@@ -1,14 +1,17 @@
 ﻿using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Messages
 {
     public class SpecAdded : ClientMessage
     {
-        public SpecAdded() : base("spec-added")
+        public SpecAdded(Suite hierarchy, Specification data) : base("spec-added")
         {
+            this.hierarchy = hierarchy;
+            this.data = data;
         }
 
-        public string suite;
-        public Specification data;
+        public readonly Suite hierarchy;
+        public readonly Specification data;
     }
 }

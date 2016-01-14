@@ -1,16 +1,19 @@
+using StoryTeller.Model.Persistence;
+
 namespace StoryTeller.Messages
 {
     public class SuiteAdded : ClientMessage
     {
-        public SuiteAdded() : base("suite-added")
-        {
-        }
+        public readonly Suite hierarchy;
 
-        public string path;
+        public SuiteAdded(Suite hierarchy) : base("suite-added")
+        {
+            this.hierarchy = hierarchy;
+        }
 
         protected bool Equals(SuiteAdded other)
         {
-            return string.Equals(path, other.path);
+            return Equals(hierarchy, other.hierarchy);
         }
 
         public override bool Equals(object obj)
@@ -23,7 +26,7 @@ namespace StoryTeller.Messages
 
         public override int GetHashCode()
         {
-            return (path != null ? path.GetHashCode() : 0);
+            return (hierarchy != null ? hierarchy.GetHashCode() : 0);
         }
     }
 
