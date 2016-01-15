@@ -45,22 +45,29 @@ var startRouting = app(Storyteller.initialization, store => {
         callback: (data, env) => {
             data.type = env.topic;
             store.dispatch(data);
-            
-            if (env.topic == 'go-to-spec'){
-                var href = '#/spec/editing/' + data.id;
-                window.location = href;
-            }
         } 
     });
 });
 
 var Communicator = require('./communicator');
 var wsAddress = Storyteller.initialization.wsAddress;
-var communicator = new Communicator(theStore, wsAddress, () => startRouting(), disconnect);
+
+
+var dispatch = msg => {
+    theStore.dispatch(msg);
+    
+    switch (msg.type){
+        case 'spec-added':
+            var href = '#/spec/editing/' + msg.data.id;
+            window.location = href;
+    }
+}
+
+var communicator = new Communicator(dispatch, wsAddress, disconnect);
 
 require('./lib/command-processor')(communicator, theStore);
 require('./lib/presentation/spec-editor-presenter')(theStore, communicator);
 
-
+startRouting();
 
 

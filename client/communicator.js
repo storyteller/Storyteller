@@ -1,6 +1,6 @@
 var Postal = require('postal');
 
-function Communicator(store, address, continuation, disconnect){
+function Communicator(dispatch, address, disconnect){
 	this.socket = new WebSocket(address);
 
 	this.socket.onclose = function(){
@@ -22,14 +22,13 @@ function Communicator(store, address, continuation, disconnect){
 			return;
 		}
 	
-		store.dispatch(message);
+		dispatch(message);
 	};
 	
 	
 	
 	this.socket.onopen = function(){
 		console.log('Opened a socket at ' + address);
-		continuation();
 	}
 
 	this.send = function(message){
