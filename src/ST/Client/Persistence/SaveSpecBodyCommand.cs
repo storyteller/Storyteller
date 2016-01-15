@@ -19,11 +19,6 @@ namespace ST.Client.Persistence
         public override void HandleMessage(SaveSpecBody message)
         {
             _controller.Value.SaveSpecification(message.id, message.spec);
-            _connector.Value.SendMessageToClient(new SpecBodySaved
-            {
-                id = message.id,
-                revision = message.revision
-            });
 
             _connector.Value.SendMessageToClient(new SpecSaved
             {

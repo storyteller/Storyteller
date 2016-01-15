@@ -52,14 +52,26 @@ var startRouting = app(Storyteller.initialization, store => {
 var Communicator = require('./communicator');
 var wsAddress = Storyteller.initialization.wsAddress;
 
+var rebroadcast = m => {
+    Postal.publish({
+        channel: 'engine',
+        topic: m.type,
+        data: m
+    });
+}
 
 var dispatch = msg => {
     theStore.dispatch(msg);
+    
+
     
     switch (msg.type){
         case 'spec-added':
             var href = '#/spec/editing/' + msg.data.id;
             window.location = href;
+            
+        case 'runtime-error':
+            rebroadcast(msg);
     }
 }
 

@@ -204,7 +204,6 @@
     <Compile Include="Messages\InitialModel.cs" />
     <Compile Include="Messages\MarkAsAccepted.cs" />
     <Compile Include="Messages\MarkAsRegression.cs" />
-    <Compile Include="Messages\MaximumRetries.cs" />
     <Compile Include="Messages\OpenInEditor.cs" />
     <Compile Include="Messages\PassthroughMessage.cs" />
     <Compile Include="Messages\QueueState.cs" />
@@ -220,7 +219,6 @@
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
     <Compile Include="Messages\SpecAdded.cs" />
     <Compile Include="Messages\SpecSaved.cs" />
-    <Compile Include="Messages\SpecNodeChanged.cs" />
     <Compile Include="Messages\SpecProgress.cs" />
     <Compile Include="Messages\SuiteAdded.cs" />
     <Compile Include="Model\Cell.cs" />
