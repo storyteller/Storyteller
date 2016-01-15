@@ -16,7 +16,7 @@ module.exports = React.createClass({
 			Postal.publish({
 				channel: 'editor',
 				topic: 'reorder-up',
-				data: {location: location}
+				data: location
 			});
 
 			e.preventDefault();
@@ -26,7 +26,7 @@ module.exports = React.createClass({
 			Postal.publish({
 				channel: 'editor',
 				topic: 'reorder-down',
-				data: {location: location}
+				data: location
 			});
 
 			e.preventDefault();
