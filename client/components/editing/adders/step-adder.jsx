@@ -92,8 +92,9 @@ module.exports = React.createClass({
 		var lookup = new GrammarLookup(this.props.holder);
 		var containerStyle = this.state.containerStyle;
 
+        var i = 0;
 		var components = lookup.options.map(x => {
-			return ( <AddStepItem key={uuid.v4()} option={x} /> );
+			return ( <AddStepItem key={++i} option={x} /> );
 		});
 
 		return (

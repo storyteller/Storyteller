@@ -16,7 +16,7 @@ module.exports = React.createClass({
 		var deleteSubject = this.props.deleteSubject || this.props.subject;
 
 		return (
-			<div key={uuid.v4()} className={panelClass} id={this.props.subject.id}>
+			<div className={panelClass} id={this.props.subject.id}>
 			  <div className="panel-heading">
 			    <h3 className="panel-title">
 			    	<DeleteGlyph step={deleteSubject}/>

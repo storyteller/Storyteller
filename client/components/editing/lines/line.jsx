@@ -21,7 +21,7 @@ module.exports = React.createClass({
 		}
 		
 		return (
-			<div key={uuid.v4()} className={clazz}>{errorIcon}{this.props.components}</div>
+			<div className={clazz}>{errorIcon}{this.props.components}</div>
 		);
 	}
 });

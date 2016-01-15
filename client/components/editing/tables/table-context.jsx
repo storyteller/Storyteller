@@ -33,8 +33,9 @@ module.exports = React.createClass({
 	render: function(){
 		var optionals = null;
 		if (this.props.optionals.length > 0){
+            var i = 0;
 			var buttons = this.props.optionals.map(opt => {
-				return (<OptionalColumn key={uuid.v4()} section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
+				return (<OptionalColumn key={++i} section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
 			});
 
 			optionals = (

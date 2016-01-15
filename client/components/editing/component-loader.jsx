@@ -8,19 +8,22 @@ var uuid = require('node-uuid');
 class Loader {
 	constructor(parent){
 		this.parent = parent;
+        this.count = 0;
 	}
 
-	
+	reset(){
+        this.count = 0;
+    }
 
 	add(method, path){
 		var Component = require('./' + path);
 		this[method] = function(props){
-			return ( <Component {...props} key={uuid.v4()} /> );
+			return ( <Component {...props} key={++this.count} /> );
 		}
 	}
 
 	span(text){
-		return ( <span key={uuid.v4()}>{text}</span> );
+		return ( <span key={++this.count}>{text}</span> );
 	}
 
 	chromed(){
@@ -94,7 +97,7 @@ results.add('setResultsTable', 'tables/set-results-table');
 results.add('noResults', 'alerts/no-results');
 
 results.checked = () => {
-	return ( <CheckboxIcon key="check" /> );
+	return ( <CheckboxIcon key={++results.count} /> );
 };
 
 results.tabbedArea = props => {
@@ -111,7 +114,7 @@ results.tab = (inner, key, title) => {
 		children = inner;
 	}
 
-	return (<Tab key={key} eventKey={key} title={title}>{children}</Tab>);
+	return (<Tab key={++results.count} eventKey={key} title={title}>{children}</Tab>);
 };
 
 results.stepAdder = x => null;

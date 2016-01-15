@@ -17,7 +17,7 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<div key={uuid.v4()} className={clazz} id={this.props.step.id}>
+			<div className={clazz} id={this.props.step.id}>
 				<DeleteGlyph step={this.props.step} />
 				{this.props.components}
 				<ReorderGlyph step={this.props.step} />

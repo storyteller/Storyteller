@@ -36,7 +36,9 @@ function QueueItem(props){
         return {type: 'cancel-spec', id: id};
     }
 
-    var icon = icons[props.spec.icon(null, [], {})]({});
+    var Icon = icons[props.spec.icon(null, [], {})];
+    var icon = (<Icon />);
+    
     var divId = 'queued-spec-' + id;
 
     return (
@@ -54,9 +56,10 @@ function QueueItem(props){
 function QueuePage(props){
     var queue = props.queued.map(id => props.specs.get(id));
     
+    var i = 0;
     var items = queue.map(spec => {
         return (
-            <QueueItem spec={spec} />
+            <QueueItem spec={spec} key={++i} />
         );
     });
 

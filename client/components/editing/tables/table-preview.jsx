@@ -14,7 +14,7 @@ var TablePreview = React.createClass({
 		}
 
 		return (
-			<table key={uuid.v4()} className="table table-bordered table-hover" id={this.props.section.id}>
+			<table className="table table-bordered table-hover" id={this.props.section.id}>
 				<thead>
 					<tr><th colSpan={tableWidth}>{this.props.title}</th></tr>
 					<HeaderRow cells={this.props.cells} hideActions={true}/>

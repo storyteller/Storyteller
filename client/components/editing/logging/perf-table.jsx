@@ -18,8 +18,9 @@ var PerfRow = React.createClass({
 
 var PerfTable = React.createClass({
 	render: function(){
+        var i = 0;
 		var rows = this.props.records.map(function(r){
-			return ( <PerfRow key={uuid.v4()}  {...r} />);
+			return ( <PerfRow key={++i}  {...r} />);
 		});
 
 		return (

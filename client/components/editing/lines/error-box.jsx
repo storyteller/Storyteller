@@ -6,7 +6,7 @@ var ErrorBox = React.createClass({
 		var title = null;
 		if (this.props.title){
 			title = (
-				<span key={uuid.v4()}>{this.props.title}</span>
+				<span>{this.props.title}</span>
 			);
 		}
 
@@ -16,7 +16,7 @@ var ErrorBox = React.createClass({
 
 		if (title){
 			return (
-				<pre key={uuid.v4()} style={style} className="error bg-warning">
+				<pre style={style} className="error bg-warning">
 					{title}
 					<hr />
 					{this.props.error}
@@ -25,7 +25,7 @@ var ErrorBox = React.createClass({
 		}
 
 		return (
-			<pre key={uuid.v4()} style={style} className="error bg-warning">
+			<pre style={style} className="error bg-warning">
 				{this.props.error}
 			</pre>
 		);

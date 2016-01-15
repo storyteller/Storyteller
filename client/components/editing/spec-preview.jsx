@@ -38,6 +38,7 @@ function SpecPreview(props){
     
     // <Persisting spec={this.props.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
     
+    loader.reset();
     var components = props.spec.previews(loader);
     
     return (
