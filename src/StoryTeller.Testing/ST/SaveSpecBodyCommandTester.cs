@@ -31,14 +31,5 @@ namespace StoryTeller.Testing.ST
             MockFor<IPersistenceController>().AssertWasCalled(x => x.SaveSpecification(theInputMessage.id, theInputMessage.spec));
         }
 
-        [Test]
-        public void should_send_a_response_to_the_client()
-        {
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(new SpecBodySaved
-            {
-                id = theInputMessage.id,
-                revision = theInputMessage.revision
-            }));
-        }
     }
 }

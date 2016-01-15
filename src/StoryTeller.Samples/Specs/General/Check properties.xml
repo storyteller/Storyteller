@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
-<Test name="Check properties" lifecycle="Acceptance" id="general1" maxRetries="3">
-  <CheckObject>
-    <IfTheAddressIs isStep="True" Address1="2035 Ozark" Address2="Apt 3" City="Carthage" StateOrProvince="MO" Country="USA" PostalCode="70071" />
-    <TheAddressShouldBe isStep="True" Address1="2035 Ozark" Address2="Apt 3" City="Carthage" />
-    <TheAddressShouldBe isStep="True" Address1="wrong" Address2="wrong" City="wrong" />
+<Spec id="general1" maxRetries="3" tags="" lifecycle="Acceptance" name="Check properties" lastUpdated="Friday, January 15, 2016" expirationPeriod="0">
+  <CheckObject id="a788f007-4da5-436e-9802-8400269e0caf">
+    <IfTheAddressIs Address1="2035 Ozark" Address2="Apt 3" City="Carthage" StateOrProvince="MO" Country="USA" PostalCode="70071" />
+    <TheAddressShouldBe Address1="2035 Ozark" Address2="Apt 3" City="Carthage" />
+    <TheAddressShouldBe Address1="wrong" Address2="wrong" City="wrong" />
   </CheckObject>
-</Test>
+</Spec>

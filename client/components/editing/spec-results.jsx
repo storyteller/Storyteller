@@ -6,6 +6,7 @@ var EditorLoading = require('./alerts/editor-loading');
 var SpecHeader = require('./header/spec-header');
 var SpecResultHeader = require('./header/spec-result-header');
 var loader = require('./component-loader').results;
+var Persisting = require('./alerts/persisting');
 
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
@@ -42,9 +43,7 @@ function SpecResults(props){
     if (props.loading){
         return ( <EditorLoading spec={props.spec} /> );
     }
-    
-    // <Persisting spec={this.props.spec} lastSaved={this.state.lastSaved} persisting={this.state.persisting}/>
-    
+
     loader.reset();
     var components = props.spec.buildResults(loader, props.running);
     
@@ -53,6 +52,7 @@ function SpecResults(props){
             <SpecHeader spec={props.spec} mode='results' />
             <Row>
                 <SpecResultHeader spec={props.spec} />
+                <Persisting id={props.spec.id}/>
                 {components}
             </Row>
         </Grid>

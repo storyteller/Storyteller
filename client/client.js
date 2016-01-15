@@ -70,6 +70,9 @@ var dispatch = msg => {
             var href = '#/spec/editing/' + msg.data.id;
             window.location = href;
             
+        case 'spec-saved':
+            rebroadcast(msg);
+            
         case 'runtime-error':
             rebroadcast(msg);
     }

@@ -103,8 +103,11 @@ subscribe('save-spec', x => {
     
     communicator.send(message);
 
-    // TODO --for the persisting alert
-    //this.view.setState({persisting: true});
+    Postal.publish({
+        channel: 'editor',
+        topic: 'persisting',
+        data: {id: spec}
+    });
 });
 
 

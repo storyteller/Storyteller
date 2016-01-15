@@ -10,7 +10,7 @@ var loader = require('./component-loader').editing;
 var RetryCount = require('./header/retry-count');
 var ExpirationPeriod = require('./header/expiration-period');
 var SpecOutline = require('./spec-outline');
-
+var Persisting = require('./alerts/persisting');
 
 // TODO -- centralize this one!
 function getSpec(state, ownProps){
@@ -29,9 +29,7 @@ function getSpec(state, ownProps){
             }
         });
     }
-    
-    // updatingDate: WHAT --> disables the ExpirationPeriod while it's being updated
-    
+
     return {
         spec: spec, 
         loading: loading, 
@@ -67,9 +65,7 @@ function SpecEditor(props){
     loader.reset();
     var components = props.spec.editors(loader);
     
-    // TODO -- put Persisting back
-    // <Persisting spec={props.spec} lastSaved={props.lastSaved} persisting={props.persisting}/>
-    
+
     return (
         <Grid>
             <SpecHeader spec={props.spec} mode="editing" />
@@ -85,7 +81,7 @@ function SpecEditor(props){
                 
                 <Col key="right" xs={8} md={8}>
                     <SpecResultHeader spec={props.spec} />
-
+                    <Persisting id={props.spec.id}/>
                     
 
                     {components}
