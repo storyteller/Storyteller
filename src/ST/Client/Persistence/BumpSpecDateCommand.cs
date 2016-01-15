@@ -18,12 +18,16 @@ namespace ST.Client.Persistence
 
         public override void HandleMessage(BumpSpecDate message)
         {
-            var cont = _controller.Value;
+            var controller = _controller.Value;
             var connector = _clientConnector.Value;
-            var spec = cont.LoadSpecificationById(message.id);
+            var spec = controller.LoadSpecificationById(message.id);
             spec.ExpirationPeriod = message.timePeriod;
-            cont.SaveSpecification(message.id, spec);
-            connector.SendMessageToClient(new SpecHeaderUpdated
+            controller.SaveSpecification(message.id, spec);
+
+
+
+
+            connector.SendMessageToClient(new SpecSaved
             {
                 spec = spec
             });

@@ -1,6 +1,4 @@
-﻿using StoryTeller.Model;
-
-namespace StoryTeller.Messages
+﻿namespace StoryTeller.Messages
 {
     public class BumpSpecDate : ClientMessage
     {
@@ -10,14 +8,5 @@ namespace StoryTeller.Messages
 
         public string id;
         public int timePeriod;
-    }
-
-    public class SpecHeaderUpdated : ClientMessage
-    {
-        public SpecHeaderUpdated() : base("spec-header-updated")
-        {
-        }
-
-        public Specification spec;
     }
 }

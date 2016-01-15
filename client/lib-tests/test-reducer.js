@@ -220,6 +220,37 @@ describe('Reducer', () => {
         
     });
     
+    describe('handling spec-saved', () => {
+        var data, original;
+        
+        beforeEach(() => {
+            store.dispatch(initial);
+            
+            original = store.getState().get('specs').get('general1');
+            expect(original).to.not.be.null;
+
+            data = initial.hierarchy.specs.filter(x => x.data.id == 'general1')[0].data;
+            expect(data.id).to.equal('general1');
+            
+            data['last-updated'] = 'now';
+            
+            store.dispatch({type: 'spec-saved', spec: data});
+        });
+        
+        it('replaces the spec record', () => {
+           var record = store.getState().get('specs').get('general1');
+           expect(record).to.not.equal(original);
+           expect(record instanceof SpecRecord).to.be.true;
+           
+        });
+        
+        it('is using the new spec data', () => {
+            var record = store.getState().get('specs').get('general1');
+            expect(record.spec['last-updated']).to.equal('now');
+        });
+        
+    });
+    
     describe('Handling system-recycle-start', () => {
         var state;
         

@@ -172,9 +172,9 @@ module.exports = function Reducer(state = initialState, action){
     case 'changes':
         return updateSpec(state, action.id, spec => spec.apply(action.change));
     
-    case 'bump-spec-date':
-    
-    case 'updated-spec-header':
+
+    case 'spec-saved':
+        return state.updateIn(['specs', action.spec.id], r => r.replaceData(action.spec));
     
      
     default:

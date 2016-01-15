@@ -24,7 +24,8 @@ namespace ST.Client.Persistence
                 id = message.id,
                 revision = message.revision
             });
-            _connector.Value.SendMessageToClient(new SpecHeaderUpdated
+
+            _connector.Value.SendMessageToClient(new SpecSaved
             {
                 spec = _controller.Value.LoadSpecificationById(message.spec.id)
             });

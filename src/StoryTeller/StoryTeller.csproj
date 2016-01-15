@@ -219,6 +219,7 @@
     <Compile Include="Messages\SpecDeleted.cs" />
     <Compile Include="Messages\SpecExecutionCompleted.cs" />
     <Compile Include="Messages\SpecAdded.cs" />
+    <Compile Include="Messages\SpecSaved.cs" />
     <Compile Include="Messages\SpecNodeChanged.cs" />
     <Compile Include="Messages\SpecProgress.cs" />
     <Compile Include="Messages\SuiteAdded.cs" />

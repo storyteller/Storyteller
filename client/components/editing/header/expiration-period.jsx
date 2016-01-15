@@ -2,7 +2,6 @@ var React = require("react");
 var Postal = require('postal');
 var {range} = require('./../../../lib/array-helpers');
 var changes = require('./../../../lib/model/change-commands');
-//var hierarchy = require('./../../../lib/stores/hierarchy');
 var {OverlayTrigger, Tooltip} = require('react-bootstrap');
 
 
@@ -21,7 +20,16 @@ var ExpirationPeriod = React.createClass({
 
   clickFunc(e) {
     e.preventDefault();
-    hierarchy.bumpSpecDate(this.props.spec);
+    
+
+    Postal.publish({
+        channel: 'engine-request',
+        topic: 'bump-spec-date',
+        data: {
+            id: this.props.spec.id,
+            timePeriod: this.props.spec['expiration-period']
+        }
+    });
   },
 
   getExpirationPeriod(){

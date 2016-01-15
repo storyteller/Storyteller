@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.ST
         public void it_publishes_the_spec_body_saved_event()
         {
             Services.Get<IClientConnector>()
-                .AssertWasCalled(x => x.SendMessageToClient(Arg<SpecHeaderUpdated>.Matches(y => y.spec.Equals(theSpecification))));
+                .AssertWasCalled(x => x.SendMessageToClient(Arg<SpecSaved>.Matches(y => y.spec.Equals(theSpecification))));
         }
     }
 }

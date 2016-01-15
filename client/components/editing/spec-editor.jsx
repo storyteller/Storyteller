@@ -64,8 +64,6 @@ function ContextualPane(props){
 }
 
 function SpecEditor(props){
-
-    // TODO -- get the updatingDate? Think that would be something we do w/ redux now
     loader.reset();
     var components = props.spec.editors(loader);
     
