@@ -55,7 +55,6 @@ describe('The Lifecycle Button', function(){
 
 		var text = $(button.getDOMNode()).html();
 		expect(text).to.equal('Acceptance');
-		
 	});
 
 	it('should send toggle-lifecycle message on click', function(){
