@@ -18,7 +18,7 @@ class Listener {
             topic: '*',
             callback: (data, env) => {
                 data.type = env.topic;
-                this.listener.append(data);
+                this.events.push(data);
             } 
         });
     }
@@ -34,7 +34,7 @@ class Listener {
     
     findPublishedMessage(topic){
         return _.find(this.events, x => {
-            return x.topic == topic;
+            return x.type == topic;
         });
     }
 }
