@@ -3,25 +3,19 @@ var expect = require('chai').expect;
 var Postal = require('postal');
 var $ = require('jquery');
 
-var AllSpecData = require('./../all-spec-data');
-var FixtureLibrary = require('./../lib/fixtures/fixture-library');
-
-var library = new FixtureLibrary(AllSpecData.fixtures);
-
+var ComponentHarness = require('./component-harness');
 var GrammarErrors = require('./../components/grammars/grammar-errors');
-var Hierarchy = require('./../lib/stores/hierarchy');
+
 
 describe('GrammarError rendering', () => {
-	var div = null;
-	var html = null;
+	var harness, html;
 
 	before(() => {
-		Hierarchy.setLibrary(library);
-
-		var instance = TestUtils.renderIntoDocument(<GrammarErrors />);
-
-		div = instance.getDOMNode();
-		html = $(div).html();
+		var component = (<GrammarErrors />);
+        var harness = new ComponentHarness();
+        harness.render(component);
+        
+        html = harness.html();
 	});
 
 	it('can render without error', () => {
