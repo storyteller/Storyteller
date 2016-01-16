@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var expect = require('chai').expect;
 
 var Cell = require('../components/editing/cells/cell');
@@ -52,7 +53,7 @@ describe('Rendering a Cell', function(){
 		instance = TestUtils.renderIntoDocument(
 			<Cell {... props} />
 		);
-		return instance.getDOMNode();
+		return ReactDOM.findDOMNode(instance);
 	}
 
 	function elementShouldHaveClass(clazz){

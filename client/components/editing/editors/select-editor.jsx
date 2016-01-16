@@ -70,17 +70,17 @@ module.exports = React.createClass({
 
 		var value = this.state.value;
 
+        var i = 0;
 		var options = this.props.arg.cell.options.map(function(x){
-			var selected = (x.value == value);
-
 			return ( 
-				<option selected={selected} value={x.value}>{x.display}</option> 
+				<option key={++i} value={x.value}>{x.display}</option> 
 			);
 		});
 
 		return (
 			<select 
 				type="text" 
+                defaultValue={value}
 				value={this.state.value} 
 				onChange={this.handleChange} 
 				tabIndex="0" 

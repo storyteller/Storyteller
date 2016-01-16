@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var expect = require('chai').expect;
 
 var TableCell = require('../components/editing/tables/table-cell');
@@ -58,7 +59,8 @@ describe('Rendering a TableCell', function(){
 			</tbody>
 			</table>
 		);
-		var top = instance.getDOMNode();
+
+        var top = ReactDOM.findDOMNode(instance);
 
 		var cell = $('td', top).get(0);
 		return cell;
