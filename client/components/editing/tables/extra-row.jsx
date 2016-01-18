@@ -5,9 +5,10 @@ var ExtraRow = React.createClass({
 	render: function(){
 		var data = this.props.data;
 
+        var i = 0;
 		var cells = this.props.cells.map(function(cell){
 			return (
-				<td><PreviewCell cell={cell} value={data[cell.key]}/></td>
+				<td key={i++}><PreviewCell cell={cell} value={data[cell.key]}/></td>
 			);
 		});
 

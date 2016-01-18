@@ -92,6 +92,18 @@ class ComponentHarness {
         , this.div);
     }
     
+    openResults(id){
+        var SpecResults = require('./../components/editing/spec-results');
+        var component = (<SpecResults params={{id: id}} />);
+        this.render(component);
+    }
+    
+    openEditor(id){
+        var SpecEditor = require('./../components/editing/spec-editor');
+        var component = (<SpecEditor params={{id: id}} />);
+        this.render(component);
+    }
+    
     $(match){
         return $(match, this.div);
     }

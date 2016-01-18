@@ -13,6 +13,7 @@ var ResultRow = React.createClass({
 			result = this.props.step.getResult(this.props.step.position);
 		}
 
+        var i = 1;
 		var cells = this.props.cells.map(cell => {
 			var arg = this.props.step.args.find(cell.key);
 			if (!arg){
@@ -22,7 +23,7 @@ var ResultRow = React.createClass({
 			var inner = arg.buildResults(loader);
 
 			return (
-				<td nowrap>{inner}</td>
+				<td key={i++} nowrap>{inner}</td>
 			);
 		});
 
@@ -35,7 +36,7 @@ var ResultRow = React.createClass({
 
 
 			cells[0] = (
-				<td nowrap><CheckboxIcon /> {inner}</td>
+				<td key={0} nowrap><CheckboxIcon /> {inner}</td>
 			);
 		}
 

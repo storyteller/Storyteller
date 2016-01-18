@@ -31,14 +31,14 @@ var SetVerificationRow = React.createClass({
 
 		var header = status.header;
 
-
+        var i = 0;
 		var cells = this.props.cells.map(cell => {
 			var arg = step.args.find(cell.key);
 			var inner = arg.buildResults(loader);
 
 
 			return (
-				<td>{inner}</td>
+				<td key={++i}>{inner}</td>
 			);
 		});
 
@@ -54,7 +54,7 @@ var SetVerificationRow = React.createClass({
 					className="set-row-status" 
 					style={{paddingLeft: '10px', paddingRight: '10px', fontStyle: 'italic'}} >
 					{errorIcon}
-					{header}
+					<span className="set-row-header">{header}</span>
 				</td>
 				{cells}
 			</tr>

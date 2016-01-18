@@ -8,11 +8,21 @@ var SpecResultHeader = require('./header/spec-result-header');
 var loader = require('./component-loader').results;
 var Persisting = require('./alerts/persisting');
 
+
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
     
     var loading = spec.mode == 'header';
+    var running = state.get('running') === id;
+    if (running){
+        return {spec: spec, loading: loading, running: running};
+    }
+    else if (spec.last_result){
+        return {spec: spec, loading: false, running: false}
+    }
+    
+    
 
     if (loading){
         // TODO -- do this differently
@@ -25,14 +35,9 @@ function getSpec(state, ownProps){
             }
         });
     }
+
     
-    // TODO -- use the current spec if it is running,
-    // use the historical data if there are results
-    // Show no results if none
-    
-    var running = state.get('running') === id;
-    
-    return {spec: spec, loading: loading, running: running};
+
 }
 
 function addDispatch(dispatch){

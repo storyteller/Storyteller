@@ -13,8 +13,9 @@ var HeaderCell = React.createClass({
 
 var HeaderRow = React.createClass({
 	render: function(){
+        var i = 0;
 		var cells = this.props.cells.map(function(x){
-			return ( <HeaderCell key={x.key} cell={x} /> );
+			return ( <HeaderCell key={i++} cell={x} /> );
 		});
 
 		var actionCell = null;

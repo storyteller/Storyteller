@@ -2,6 +2,7 @@ var Immutable = require('immutable');
 var Specification = require('./specification');
 var Counts = require('./counts');
 var _ = require('lodash');
+var FixtureLibrary = require('./../fixtures/fixture-library');
 
 function statusForResults(results){
     if (!results) return 'none';
@@ -17,6 +18,14 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         var spec = new Specification(data, library);
 
         super({id: data.id, spec: spec, version: 0, last_result: last_result, status: statusForResults(last_result)});
+    }
+    
+    forResults(){
+        var data = this.last_result.data;
+        var spec = new Specification(data, this.spec.fixture);
+        spec.readResults(this.last_result.results);
+        
+        return this.set('spec', spec);
     }
     
     get path(){
@@ -74,9 +83,7 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     }
     
     buildResults(loader, running){
-        console.log("I am rebuilding the results page, and running is " + running);
         if (running){
-            
             return this.spec.buildResults(loader);
         }
         
