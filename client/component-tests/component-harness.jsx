@@ -23,6 +23,10 @@ class Listener {
         });
     }
     
+    send(msg){
+        this.events.push(msg);
+    }
+    
     clear(){
         this.events = [];
     }
@@ -52,12 +56,18 @@ class ComponentHarness {
         this.engineMessages = new Listener('engine-request');
         this.editorMessages = new Listener('editor');
         this.explorerMessages = new Listener('explorer');
+        
+        var SpecEditorPresenter = require('./../lib/presentation/spec-editor-presenter');
+
+        SpecEditorPresenter(this.store, this.engineRequests);
     }
     
     reset(){
         this.engineMessages.clear();
         this.editorMessages.clear();
         this.explorerMessages.clear();
+        
+        this.store.dispatch({type: 'reset-all', initialization: initialization});
     }
     
     render(component){

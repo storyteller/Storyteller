@@ -78,8 +78,8 @@ function SuiteHeader(props){
     }
 
     return (
-        <div key={suite.path} className={openClass + ' suite-header'}>
-            <a href='#' onClick={toggle}>
+        <div key={suite.path} data-path={suite.path} className={openClass + ' suite-header'}>
+            <a className="toggle" href='#' onClick={toggle}>
                 {openClosed}
             </a>
             {icon}
@@ -99,7 +99,7 @@ function SuiteBody(props){
     var specs = props.suite.specs.map(x => props.specs.get(x));
     
     
-    var specLeaves = _.sortBy(specs, x => x.title).map(x => (<SpecLeaf spec={x} key={x.id} />) );
+    var specLeaves = _.sortBy(specs, x => x.title).map(x => (<SpecLeaf spec={x} key={x.id} running={props.running} queued={props.queued} progress={props.progress} />) );
 
     return (
         <div id={props.suite.path} className='suite-body' >
@@ -128,7 +128,7 @@ function SuiteNode(props){
     var toggle = e => props.dispatch({type: 'toggle-tree-state', path: props.suite.path});
 
     return (
-        <div className='suite-node'>
+        <div className='suite-node' data-path={props.suite.path}>
             <SuiteHeader {...props} toggle={toggle} expanded={expanded} />
             {body}
         </div>

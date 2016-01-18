@@ -31,6 +31,11 @@ function updateSpec(state, id, func){
 
 module.exports = function Reducer(state = initialState, action){
   switch (action.type) {
+    case 'reset-all':
+        state = initialState;
+        state = SystemRecycled(state, action.initialization.recycled);
+        return HierarchyLoaded(state, action.initialization.hierarchy);
+      
     case '@@redux/INIT':
         return state;
       
@@ -82,7 +87,7 @@ module.exports = function Reducer(state = initialState, action){
         
         return state.set('tree-state', Immutable.Map(treeState));
      
-    case 'toggle-tree-state': 
+    case 'toggle-tree-state':
         if (state.get('tree-state').has(action.path)){
             return state.updateIn(['tree-state', action.path], x => !x);
         }

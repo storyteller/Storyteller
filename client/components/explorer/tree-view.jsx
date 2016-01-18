@@ -48,12 +48,14 @@ function SuiteHeader(props){
     if (suite.suites.length > 0){
         var expandAll = () => props.dispatch({type: 'expand-all'});
 
-        var collapseAll = () => props.dispatch({type: 'collapse-all'});
+        var collapseAll = () => {
+            props.dispatch({type: 'collapse-all'});
+        };
 
-        var expandLink = (<small key="expand"><a className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );
+        var expandLink = (<small key="expand"><a id="expand-all" className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );
         links.push(expandLink);
 
-        var collapseLink = (<small key="collapse"><a className="explorer-command" title="Collapse All Suite nodes in the Tree View" onClick={collapseAll}>collapse all</a></small>);
+        var collapseLink = (<small key="collapse"><a id="collapse-all" className="explorer-command" title="Collapse All Suite nodes in the Tree View" onClick={collapseAll}>collapse all</a></small>);
         links.push(collapseLink);	
     }
 

@@ -39,8 +39,7 @@ function SpecLeaf(props){
         e.preventDefault();
     }
 
-
-    var Icon = icons[props.spec.icon()];
+    var Icon = icons[props.spec.icon(props.running, props.queued, props.progress)];
     var icon = (<Icon />);
 
     var clazz = 'spec-name spec-state-' + props.spec.state;
@@ -61,8 +60,10 @@ function SpecLeaf(props){
         href = '#/spec/results/' + spec.id;
     }
 
+    
+
     return (
-        <div className="spec-leaf">
+        <div className="spec-leaf" data-path={props.spec.spec.path}>
             {icon}
             <a href={href} className={clazz}>{props.spec.title}</a>
             {link}<CloneLink {...props} />
