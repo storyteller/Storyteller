@@ -75,6 +75,17 @@ class SpecificationNavigator {
 		}
 	}
 
+    atHome(){
+        if (this.spec.steps.length == 0){
+            return true;
+        }
+        else {
+            var first = this.spec.steps[0].selectFirst();
+            return this.location.holder == first.holder 
+                && this.location.step == first.step 
+                && this.location.cell == first.cell;
+        }
+    }
 
 	moveNext(){
 		if (this.location.step == this.spec.adder) return false;
@@ -89,12 +100,16 @@ class SpecificationNavigator {
 	}
 
 	moveLast(){
-		if (this.location.step == this.spec.adder) return false;
+		if (this.atEnd()) return false;
 
 		this.replace({holder: this.spec, step: this.spec.adder, cell: null});
 
 		return true;
 	}
+    
+    atEnd(){
+        return (this.location.step == this.spec.adder);
+    }
 
 	movePrevious(){
 		var previous = selectPrevious(this.location);

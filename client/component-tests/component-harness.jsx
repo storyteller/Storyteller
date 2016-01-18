@@ -60,6 +60,18 @@ class ComponentHarness {
         var SpecEditorPresenter = require('./../lib/presentation/spec-editor-presenter');
 
         SpecEditorPresenter(this.store, this.engineRequests);
+        
+        global.$ = $;
+        global.jQuery = $;
+        
+ 
+	    if (window){
+		    window.$ = $;
+		    window.jQuery = $;
+	    }
+	    
+        
+        require('./../lib/presentation/typeahead.jquery.js');
     }
     
     reset(){
