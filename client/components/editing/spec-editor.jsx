@@ -18,18 +18,6 @@ function getSpec(state, ownProps){
     var spec = state.get('specs').get(id);
     var loading = spec.mode == 'header';
 
-    if (loading){
-        // TODO -- do this differently
-        Postal.publish({
-            channel: 'engine-request',
-            topic: 'spec-data-requested',
-            data: {
-                type: 'spec-data-requested',
-                id: id
-            }
-        });
-    }
-
     return {
         spec: spec, 
         loading: loading, 
@@ -61,34 +49,51 @@ function ContextualPane(props){
     );
 }
 
-function SpecEditor(props){
-    loader.reset();
-    var components = props.spec.editors(loader);
+class SpecEditor extends React.Component{
+    componentDidMount(){
+        if (this.props.loading){
+            Postal.publish({
+                channel: 'engine-request',
+                topic: 'spec-data-requested',
+                data: {
+                    type: 'spec-data-requested',
+                    id: this.props.spec.id
+                }
+            });
+        }
+    }
     
-
-    return (
-        <Grid>
-            <SpecHeader spec={props.spec} mode="editing" />
-            <Row>
-                
-				<ContextualPane
-                    spec={props.spec}
-                    loader={loader}
-                    activeContainer={props.activeContainer}
-                    outline={props.spec.outline()}
-                    updatingDate={props.updatingDate}
-                />
-                
-                <Col key="right" xs={8} md={8}>
-                    <SpecResultHeader spec={props.spec} />
-                    <Persisting id={props.spec.id}/>
+    render(){
+        loader.reset();
+        var spec = this.props.spec;
+        
+        var components = spec.editors(loader);
+        
+        return (
+            <Grid>
+                <SpecHeader spec={spec} mode="editing" />
+                <Row>
                     
+                    <ContextualPane
+                        spec={spec}
+                        loader={loader}
+                        activeContainer={this.props.activeContainer}
+                        outline={spec.outline()}
+                        updatingDate={this.props.updatingDate}
+                    />
+                    
+                    <Col key="right" xs={8} md={8}>
+                        <SpecResultHeader spec={spec} />
+                        <Persisting id={spec.id}/>
+                        
 
-                    {components}
-                </Col>
-            </Row>
-        </Grid>
-    );
+                        {components}
+                    </Col>
+                </Row>
+            </Grid>
+        );
+    }
+
 }
 
 

@@ -15,7 +15,8 @@ var initialState = Immutable.Map({
     'specs': Immutable.Map({}),
     'running': null,
     'queued': [],
-    'progress': null
+    'progress': null,
+    'running-spec': null
 });
 
 function updateSpec(state, id, func){
@@ -28,6 +29,7 @@ function updateSpec(state, id, func){
     }
     
 }
+
 
 module.exports = function Reducer(state = initialState, action){
   switch (action.type) {

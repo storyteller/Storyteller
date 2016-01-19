@@ -13,18 +13,6 @@ function getSpec(state, ownProps){
     var spec = state.get('specs').get(id);
     var loading = spec.mode == 'header';
 
-    if (loading){
-        // TODO -- do this differently
-        Postal.publish({
-            channel: 'engine-request',
-            topic: 'spec-data-requested',
-            data: {
-                type: 'spec-data-requested',
-                id: id
-            }
-        });
-    }
-    
     return {spec: spec, loading: loading};
 }
 
@@ -32,24 +20,41 @@ function addDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-function SpecPreview(props){
-    if (props.loading){
-        return ( <EditorLoading spec={props.spec} /> );
+class SpecPreview extends React.Component {
+    componentDidMount(){
+        if (this.props.loading){
+            Postal.publish({
+                channel: 'engine-request',
+                topic: 'spec-data-requested',
+                data: {
+                    type: 'spec-data-requested',
+                    id: this.props.spec.id
+                }
+            });
+        }
     }
-
-    loader.reset();
-    var components = props.spec.previews(loader);
     
-    return (
-        <Grid>
-            <SpecHeader spec={props.spec} mode='preview' />
-            <Row>
-                <SpecResultHeader spec={props.spec} />
-                <Persisting id={props.spec.id}/>
-                {components}
-            </Row>
-        </Grid>
-    );
+    render(){
+        if (this.props.loading){
+            return ( <EditorLoading spec={this.props.spec} /> );
+        }
+
+        loader.reset();
+        var components = this.props.spec.previews(loader);
+        
+        return (
+            <Grid>
+                <SpecHeader spec={this.props.spec} mode='preview' />
+                <Row>
+                    <SpecResultHeader spec={this.props.spec} />
+                    <Persisting id={this.props.spec.id}/>
+                    {components}
+                </Row>
+            </Grid>
+        );
+    }
+    
+
 }
 
 

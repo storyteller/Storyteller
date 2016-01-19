@@ -45,24 +45,28 @@ function addDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-function SpecResults(props){
-    if (props.loading){
-        return ( <EditorLoading spec={props.spec} /> );
+class SpecResults extends React.Component {
+    
+    render(){
+        if (this.props.loading){
+            return ( <EditorLoading spec={this.props.spec} /> );
+        }
+
+        loader.reset();
+        var components = this.props.spec.buildResults(loader, this.props.running);
+        
+        return (
+            <Grid>
+                <SpecHeader spec={this.props.spec} mode='results' />
+                <Row>
+                    <SpecResultHeader spec={this.props.spec} />
+                    <Persisting id={this.props.spec.id}/>
+                    {components}
+                </Row>
+            </Grid>
+        );
     }
 
-    loader.reset();
-    var components = props.spec.buildResults(loader, props.running);
-    
-    return (
-        <Grid>
-            <SpecHeader spec={props.spec} mode='results' />
-            <Row>
-                <SpecResultHeader spec={props.spec} />
-                <Persisting id={props.spec.id}/>
-                {components}
-            </Row>
-        </Grid>
-    );
 }
 
 
