@@ -149,6 +149,52 @@ describe('The Spec Explorer', () => {
     it('spec has the failure icon when a spec has failed and is not running or queued', () => {
         iconIs('General/Check properties', 'failed');
     });
+
+	it('spec leaf should render the run link when the state is none', function(){
+		var element = findSpecElement('Embedded/Embeds');
+        
+        var hasRun = $('a.run', element).length == 1;
+        expect(hasRun).to.be.true;
+	});
+    
+	it('spec leaf should not render the run link the spec is running', function(){
+        harness.store.dispatch({type: 'spec-progress', id: 'embeds', step: 1, total: 10, counts: {rights: 0, wrongs: 0, errors: 0, invalids: 0}})
+        harness.store.dispatch({type: 'queue-state', queued: [], running: 'embeds'});
+        
+        var element = findSpecElement('Embedded/Embeds');
+
+        var hasRun = $('a.run', element).length == 1;
+        expect(hasRun).to.be.false;
+	});
+    
+	it('spec leaf should not render the run link the spec is running-success', function(){
+        harness.store.dispatch({type: 'spec-progress', id: 'embeds', step: 1, total: 10, counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0}})
+        harness.store.dispatch({type: 'queue-state', queued: [], running: 'embeds'});
+        
+        var element = findSpecElement('Embedded/Embeds');
+
+        var hasRun = $('a.run', element).length == 1;
+        expect(hasRun).to.be.false;
+	});
+    
+	it('spec leaf should not render the run link the spec is running-failed', function(){
+        harness.store.dispatch({type: 'spec-progress', id: 'embeds', step: 1, total: 10, counts: {rights: 1, wrongs: 1, errors: 1, invalids: 0}})
+        harness.store.dispatch({type: 'queue-state', queued: [], running: 'embeds'});
+        
+        var element = findSpecElement('Embedded/Embeds');
+
+        var hasRun = $('a.run', element).length == 1;
+        expect(hasRun).to.be.false;
+	});
+
+	it('spec leaf should not render the run link when the state is queued', function(){
+		harness.store.dispatch({type: 'queue-state', queued: ['embeds'], running: null})
+        
+        var element = findSpecElement('Embedded/Embeds');
+
+        var hasRun = $('a.run', element).length == 1;
+        expect(hasRun).to.be.false;
+	});
     
     it('suite state in intial load', () => {
        suiteIconIs('General', 'failed'); 
@@ -156,17 +202,15 @@ describe('The Spec Explorer', () => {
     });
     
     it('picks up running icon on spec', () => {
-        
-        
         harness.store.dispatch({type: 'spec-progress', id: 'embeds', step: 1, total: 10, counts: {rights: 0, wrongs: 0, errors: 0, invalids: 0}})
         harness.store.dispatch({type: 'queue-state', queued: [], running: 'embeds'});
         
         iconIs('Embedded/Embeds', 'running'); 
     });
     
+    
+    
     it('picks up running-success icon on spec', () => {
-        
-        
         harness.store.dispatch({type: 'spec-progress', id: 'embeds', step: 1, total: 10, counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0}})
         harness.store.dispatch({type: 'queue-state', queued: [], running: 'embeds'});
         
@@ -174,8 +218,6 @@ describe('The Spec Explorer', () => {
     });
     
     it('picks up running-failed icon on spec', () => {
-        
-        
         harness.store.dispatch({type: 'spec-progress', id: 'embeds', counts: {rights: 0, wrongs: 1, errors: 0, invalids: 0}})
         harness.store.dispatch({type: 'queue-state', queued: [], running: 'embeds'});
         

@@ -39,17 +39,16 @@ function SpecLeaf(props){
         e.preventDefault();
     }
 
-    var Icon = icons[props.spec.icon(props.running, props.queued, props.progress)];
+    var iconName = props.spec.icon(props.running, props.queued, props.progress);
+    var Icon = icons[iconName];
     var icon = (<Icon />);
 
     var clazz = 'spec-name spec-state-' + props.spec.state;
 
     var spec = props.spec;
 
-
-
     var link = null;
-    if (spec.state == 'none'){
+    if (iconName != 'queued' && !iconName.includes('running')){
         var buildMessage = () => {return {type: 'run-spec', id: spec.id}};
 
         link = (<CommandLink identifier="run" createMessage={buildMessage} text="run" />);
