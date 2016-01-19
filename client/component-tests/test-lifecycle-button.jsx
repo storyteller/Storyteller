@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var expect = require('chai').expect;
 var Postal = require('postal');
 var $ = require('jquery');
@@ -47,7 +48,7 @@ describe('The Lifecycle Button', function(){
 	function write(spec){
 		var div = document.createElement('div');
 		document.documentElement.appendChild(div);
-		button = React.render((<LifecycleButton spec={spec} />), div);
+		button = ReactDOM.render((<LifecycleButton spec={spec} />), div);
 	}
 
 	it('should show Acceptance for that lifecycle', function(){

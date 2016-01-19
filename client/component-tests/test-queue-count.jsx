@@ -6,7 +6,7 @@ var React = require('react');
 describe('QueueCount', function(){
 	var component, harness;
 
-	beforeEach(function(){
+	before(function(){
         component = (<QueueCount />);
         harness = new ComponentHarness();
         harness.render(component);

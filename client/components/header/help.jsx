@@ -25,8 +25,9 @@ var ShortcutRow = React.createClass({
 
 var Help = React.createClass({
 	render(){
+        var i = 0;
 		var shortcuts = KeyboardShortcuts.shortcuts().map(x => {
-			return (<ShortcutRow shortcut={x} />);
+			return (<ShortcutRow key={i++} shortcut={x} />);
 		});
 
 		return ( 

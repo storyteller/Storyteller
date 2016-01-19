@@ -45,11 +45,11 @@ class Listener {
 
 class ComponentHarness {
     constructor(){
-        this.store = createStore(Reducer);
-        this.store.dispatch(initialization);
-        
         Postal.reset();
         
+        this.store = createStore(Reducer);
+        this.store.dispatch(initialization);
+
 		this.div = document.createElement('div');
 		document.documentElement.appendChild(this.div);
 

@@ -104,10 +104,14 @@ describe('The Spec Explorer', () => {
    
     var harness, component;
 
-    beforeEach(() => {
+    before(() => {
         harness = new ComponentHarness();
         component = (<SpecExplorer />);
         harness.render(component); 
+    });
+    
+    beforeEach(() => {
+        harness.reset(); 
     });
    
     it('can render all the suites', () => {

@@ -8,12 +8,16 @@ var $ = require('jquery');
 describe('The SpecProgressBar', function(){
 	var component, harness;
 
-	beforeEach(function(){
+	before(function(){
 		harness = new ComponentHarness();
 		component = (<SpecProgressBar />);
         
         harness.render(component);
 	});
+    
+    beforeEach(() => {
+        harness.reset();
+    })
 
 	it('shows nothing in the initial state', function(){
         var element = harness.element();
