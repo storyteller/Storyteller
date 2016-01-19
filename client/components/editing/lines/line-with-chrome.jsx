@@ -3,8 +3,6 @@ var DeleteGlyph = require('./../delete-glyph');
 var ReorderGlyph = require('./../reorder-glyph');
 var uuid = require('node-uuid');
 
-// TODO -- also needs to take in the actual Step
-
 module.exports = React.createClass({
 	render: function(){
 		var clazz = "sentence";

@@ -181,8 +181,6 @@ class Step{
 	}
 
 	isHolder(){
-		// TODO: Will need to get fancier later when we
-		// introduce embedded sections and tables
 		return false;
 	}
 

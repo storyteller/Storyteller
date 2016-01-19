@@ -18,7 +18,6 @@ function findSystemData(state){
 var Header = (props) => {
     var system = props.system;
     
-    // TODO -- let's eliminate this one?
     var toCommand = topic => {
         return e => {
             Postal.publish({
