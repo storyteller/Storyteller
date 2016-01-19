@@ -48,7 +48,7 @@ class SuiteAndSpecLookup extends React.Component {
 	render(){
 		return (
 			<div  style={{width: '100%'}} className="input-group">
-			  <input ref="text" type="text" className="form-control" placeholder="Find specifications or suites by name" aria-describedby="basic-addon2" />
+			  <input id="search-input" ref="text" type="text" className="form-control" placeholder="Find specifications or suites by name" aria-describedby="basic-addon2" />
 			</div>
 		)
 	}

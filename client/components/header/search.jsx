@@ -44,7 +44,7 @@ class Search extends React.Component{
         var close = () => this.close();
 
 		return (
-			<Button bsStyle="link" onClick={handleToggle} title="Click to search for a specification or suite"><SearchIcon /> Search
+			<Button id="search-button" bsStyle="link" onClick={handleToggle} title="Click to search for a specification or suite"><SearchIcon /> Search
 			<Modal show={this.state.showModal} onHide={close}>
 	          <Modal.Header closeButton>
 	            <Modal.Title>Search for Specifications or Suites</Modal.Title>
