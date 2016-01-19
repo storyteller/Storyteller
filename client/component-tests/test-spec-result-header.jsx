@@ -5,7 +5,7 @@ var React = require('react');
 var SpecPreview = require('./../components/editing/spec-preview');
 var $ = require('jquery');
 
-describe.only('The SpecResultHeader', () => {
+describe('The SpecResultHeader', () => {
     var harness;
     
     before(() => {

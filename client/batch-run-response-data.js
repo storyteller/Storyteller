@@ -10206,7 +10206,7 @@ module.exports = {
     }
   ],
   "time": "1/13/2016 7:30 AM",
-  "system": null,
+  "system": 'The Test System',
   "suite": null,
   "success": true,
   "type": "batch-run-response"

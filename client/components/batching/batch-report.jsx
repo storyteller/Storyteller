@@ -41,8 +41,8 @@ function BatchReport(props){
     return (
         <Grid>
             <Row>
-                <Alert bsStyle={alertStyle}>
-                    <h3>Storyteller Results for {headerText} <small>{alertText} at {props.time}</small></h3>
+                <Alert id="header-alert" bsStyle={alertStyle}>
+                    <h3>Storyteller Results for <span id="batch-header-text">{headerText}</span> <small>{alertText} at {props.time}</small></h3>
                 </Alert>
 
                 <SummaryTable {...props} />
@@ -53,10 +53,9 @@ function BatchReport(props){
 
 function getSpecs(state){
     var specs = state.get('specs').toList().toArray();
-    var success = (specs.filter(x => x.status == 'failed' && x.lifecycle == 'Regression').size == 0);
     return {
         specs: specs, 
-        success: success, 
+        success: state.get('success'), 
         suite: state.get('suite'), 
         system: state.get('system'), 
         time: state.get('time'), 
@@ -84,7 +83,7 @@ module.exports = function startRouting(data){
     if (store.getState().get('specs').size == 1){
         var spec = store.getState().get('specs').toList().toArray()[0];
         
-        ReactDOM.render(<ResultsView spec={spec} />, document.getElementById("main"));
+        ReactDOM.render(<Provider store={store}><ResultsView spec={spec} /></Provider>, document.getElementById("main"));
     }   
     else {
         var screen = (

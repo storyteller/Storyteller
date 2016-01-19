@@ -10,7 +10,8 @@ module.exports = function BatchRunResponse(state, action){
         .set('time', action.time)
         .set('system', action.system)
         .set('suite', action.suite)
-        .set('fixtures', library);
+        .set('fixtures', library)
+        .set('success', action.success);
         
     var specs = {};
     action.records.forEach(x => {

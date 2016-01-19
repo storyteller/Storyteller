@@ -16,9 +16,11 @@ function SpecRow(props){
     
     var counts = new Counts(props.spec.last_result.results.counts);
     
+    bsStyle = 'spec-row ' + bsStyle;
+    
     return (
         <tr className={bsStyle}>
-            <td><a href={href}>{props.spec.path}</a></td>
+            <td><a className="spec-link" href={href}>{props.spec.path}</a></td>
             <td>{props.spec.lifecycle}</td>
             <td>{counts.toString()}</td>
             <td className="number-cell">{props.spec.last_result.results.duration}</td>
@@ -36,7 +38,7 @@ function ResultsTable(props){
     });
     
     return (
-        <table className="table">
+        <table id="results-table" className="table">
             <thead>
             <tr>
                 <th>Specification</th>

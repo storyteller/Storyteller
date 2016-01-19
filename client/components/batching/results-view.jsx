@@ -9,8 +9,8 @@ function ResultsView(props){
     var components = props.spec.buildResults(loader, false);
     
     return (
-        <div>
-            <h4>{props.spec.title} ({props.spec.last_result.results.attempts} attempts) <small style={{marginLeft: '25px'}}><a href="#/">  back to summary</a></small></h4>
+        <div className="results-view">
+            <h4 id="spec-title">{props.spec.title} ({props.spec.last_result.results.attempts} attempts) <small style={{marginLeft: '25px'}}><a href="#/">  back to summary</a></small></h4>
             <hr />
             <SpecResultHeader spec={props.spec} />
             {components}
