@@ -49,7 +49,7 @@ namespace ST.Client
                 BatchResultsWriter.WriteCSS(_document);
                 _document.Head.Add("link")
                     .Attr("rel", "stylesheet")
-                    .Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+                    .Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
             }
 
             _document.Body.Append(_document.Script("bundle.js"));

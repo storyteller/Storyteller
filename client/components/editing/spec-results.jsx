@@ -14,6 +14,7 @@ function getSpec(state, ownProps){
     var spec = state.get('specs').get(id);
     
     var loading = spec.mode == 'header';
+    
     var running = state.get('running') === id;
     if (running){
         return {spec: spec, loading: loading, running: running};
@@ -37,7 +38,7 @@ function getSpec(state, ownProps){
     }
 
     
-
+    return {spec: spec, loading: loading, running: running};
 }
 
 function addDispatch(dispatch){
