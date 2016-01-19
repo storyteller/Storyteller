@@ -64,8 +64,10 @@ function SpecResultHeader(props){
         bsStyle = 'danger';
         text = (<span>Running with {props.progress.counts.toString()}</span>);
     }
-    else if (status == 'success') {
-        text = (<span>Succeeded in {duration} ms with {props.spec.last_result.results.counts.toString()} at {time}</span>)
+    else if (props.spec.status == 'success') {
+        var countDescription = new Counts(props.spec.last_result.results.counts).toString();
+        
+        text = (<span>Succeeded in {props.spec.last_result.results.duration} ms with {countDescription} at {props.spec.last_result.time}</span>)
     }
     else {
         var countDescription = new Counts(props.spec.last_result.results.counts).toString();
@@ -74,7 +76,7 @@ function SpecResultHeader(props){
     }
 
     return (
-        <Alert bsStyle={bsStyle}>
+        <Alert id="spec-result-header" bsStyle={bsStyle}>
             <Icon /> {text}
         </Alert>
     );
