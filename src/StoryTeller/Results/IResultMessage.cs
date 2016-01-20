@@ -1,6 +1,6 @@
 namespace StoryTeller.Results
 {
-    public interface IResultMessage
+    public interface IResultMessage : IBatchedMessage
     {
         void Tabulate(Counts counts);
 

@@ -13,18 +13,16 @@ namespace StoryTeller
     public class SpecContext : ISpecContext
     {
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
-        private readonly Specification _specification;
         private readonly IResultObserver _resultObserver;
         private readonly IExecutionContext _execution;
         private readonly State _state = new State();
-        private bool _hasCriticalException;
         private readonly Timings _timings;
         private bool _latched;
 
         public SpecContext(Specification specification, Timings timings, IResultObserver observer, StopConditions stopConditions, IExecutionContext execution)
         {
             Counts = new Counts();
-            _specification = specification;
+            Specification = specification;
             _resultObserver = observer;
             _execution = execution;
             StopConditions = stopConditions;
@@ -34,8 +32,8 @@ namespace StoryTeller
             Reporting = new Reporting();
         }
 
-        public StopConditions StopConditions { get; private set; }
-        public IReporting Reporting { get; private set; }
+        public StopConditions StopConditions { get; }
+        public IReporting Reporting { get; }
 
         public SpecResults FinalizeResults(int attempts)
         {
@@ -62,21 +60,15 @@ namespace StoryTeller
             _state.As<IDisposable>().Dispose();
         }
 
-        public Timings Timings
-        {
-            get { return _timings; }
-        }
+        public Timings Timings => _timings;
 
-        public Specification Specification
-        {
-            get { return _specification; }
-        }
+        public Specification Specification { get; }
 
-        public Counts Counts { get; private set; }
+        public Counts Counts { get; }
 
         public bool CanContinue()
         {
-            if (_hasCriticalException || CatastrophicException != null)
+            if (HadCriticalException || CatastrophicException != null)
                 return false;
 
             return StopConditions.CanContinue(Counts);
@@ -84,10 +76,7 @@ namespace StoryTeller
 
         public StorytellerCatastrophicException CatastrophicException { get; private set; }
 
-        public bool HadCriticalException
-        {
-            get { return _hasCriticalException; }
-        }
+        public bool HadCriticalException { get; private set; }
 
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
@@ -145,7 +134,7 @@ namespace StoryTeller
 
             if (ex is StorytellerCriticalException)
             {
-                _hasCriticalException = true;
+                HadCriticalException = true;
 
                 // TODO -- hokey. Watch if this becomes a pattern
                 if (ex.InnerException is MissingFixtureException)

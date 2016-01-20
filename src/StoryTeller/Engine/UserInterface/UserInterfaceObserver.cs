@@ -13,6 +13,7 @@ namespace StoryTeller.Engine.UserInterface
             new BlockingCollection<object>(new ConcurrentQueue<object>());
 
         private Task _readingTask;
+        
 
         public UserInterfaceObserver()
         {

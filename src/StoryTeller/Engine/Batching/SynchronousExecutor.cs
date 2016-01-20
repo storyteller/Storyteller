@@ -13,7 +13,6 @@
         {
             if (!_context.CanContinue()) return;
 
-            // TODO -- shouldn't throw exceptions, but you know I'll slip up so try/catch here.
             execution.Execute(_context);
         }
 
@@ -30,9 +29,6 @@
             }
         }
 
-        public ISpecContext CurrentContext
-        {
-            get { return _context; }
-        }
+        public ISpecContext CurrentContext => _context;
     }
 }

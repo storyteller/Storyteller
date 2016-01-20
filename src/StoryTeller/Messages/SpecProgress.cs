@@ -1,6 +1,8 @@
+using StoryTeller.Results;
+
 namespace StoryTeller.Messages
 {
-    public class SpecProgress : ClientMessage
+    public class SpecProgress : ClientMessage, IBatchedMessage
     {
         public string id;
         public Counts counts;

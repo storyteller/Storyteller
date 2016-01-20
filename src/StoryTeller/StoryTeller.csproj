@@ -192,6 +192,7 @@
     <Compile Include="IWithValues.cs" />
     <Compile Include="Messages\AddSpec.cs" />
     <Compile Include="Messages\AddSuite.cs" />
+    <Compile Include="Messages\Batch.cs" />
     <Compile Include="Messages\BumpSpecDate.cs" />
     <Compile Include="Messages\CancelAllSpecs.cs" />
     <Compile Include="Messages\CancelSpec.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Results\Envelope.cs" />
     <Compile Include="Results\Finished.cs" />
     <Compile Include="Results\HtmlReport.cs" />
+    <Compile Include="Results\IBatchedMessage.cs" />
     <Compile Include="Results\Report.cs" />
     <Compile Include="Results\IResultMessage.cs" />
     <Compile Include="Results\Reporting.cs" />
