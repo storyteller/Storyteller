@@ -60,7 +60,7 @@ function recordResult(state, action){
     return state.update('running-spec', x => x.readResult(action));
 }
 
-module.exports = function Reducer(state = initialState, action){
+function Reducer(state = initialState, action){
   switch (action.type) {
     case 'reset-all':
         state = initialState;
@@ -222,3 +222,18 @@ module.exports = function Reducer(state = initialState, action){
       return state;
   }
 }
+
+function Batched(state, action){
+    if (action.type == 'batch'){
+        for (var i = 0; i < action.messages.length; i++){
+            state = Reducer(state, action.messages[i]);
+        }
+        
+        return state;
+    }
+    
+    return Reducer(state, action);
+}
+
+
+module.exports = Batched;
