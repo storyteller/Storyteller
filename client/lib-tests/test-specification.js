@@ -37,6 +37,7 @@ describe('Specification', function(){
       title: 'My first specification',
       mode: 'header',
       lifecycle: 'Regression',
+      path: 'Suite/My first specification',
       steps: [
         {
           id: 'section1',

@@ -17,11 +17,10 @@ function getSpec(state, ownProps){
     
     var running = state.get('running');
     if (running && running.id == id){
-        // TODO -- this is gonna change
-        return {spec: spec, loading: loading, running: true};
+        return {spec: state.get('running-spec'), loading: loading, running: true};
     }
     else if (spec.last_result){
-        return {spec: spec, loading: false, running: false}
+        return {spec: spec.forResults(), loading: false, running: false}
     }
     
     return {spec: spec, loading: loading, running: running};

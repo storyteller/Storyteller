@@ -50,6 +50,7 @@ function Specification(data, library){
       id: this.id,
       lifecycle: this.lifecycle,
       mode: this.mode,
+      path: this.path,
       'max-retries': this['max-retries'],
       'expiration-period': this['expiration-period'],
       'last-updated': this['last-updated']

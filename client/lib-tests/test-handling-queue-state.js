@@ -5,32 +5,37 @@ var initial = require('./../initialization');
 var SpecRecord = require('./../lib/model/spec-record');
 var Suite = require('./../lib/model/suite');
 var RunningState = require('./../lib/model/running-state');
+var RunningSpec = require('./../lib/model/running-spec');
 
 describe('Handling queue-state', () => {
     var store;
    
     beforeEach(() => {
         store = createStore(reducer);
+        store.dispatch(initial);
     });
    
     
     it('can initialize the running state', () => {
-        store.dispatch({type: 'queue-state', running: 'c', queued: ['a', 'b']});
+        store.dispatch({type: 'queue-state', running: 'embeds', queued: ['a', 'b']});
     
         var state = store.getState();
     
         expect(state.get('running') instanceof RunningState).to.be.true;
-        expect(state.get('running').id).to.equal('c');
+        expect(state.get('running').id).to.equal('embeds');
     });
     
     it('can replace the running state', () => {
-        store.dispatch({type: 'queue-state', running: 'a', queued: ['a', 'b']});
-        store.dispatch({type: 'queue-state', running: 'c', queued: ['a', 'b']});
+        store.dispatch({type: 'queue-state', running: 'general1', queued: ['a', 'b']});
+        store.dispatch({type: 'queue-state', running: 'embeds', queued: ['a', 'b']});
     
         var state = store.getState();
     
         expect(state.get('running') instanceof RunningState).to.be.true;
-        expect(state.get('running').id).to.equal('c');
+        expect(state.get('running').id).to.equal('embeds');
+        
+        expect(state.get('running-spec') instanceof RunningSpec).to.be.true;
+        expect(state.get('running-spec').id).to.equal('embeds');
     });
 
     it('can replace queued state', () => {

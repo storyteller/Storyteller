@@ -3,6 +3,7 @@ var Specification = require('./specification');
 var Counts = require('./counts');
 var _ = require('lodash');
 var FixtureLibrary = require('./../fixtures/fixture-library');
+var RunningSpec = require('./running-spec');
 
 function statusForResults(results){
     if (!results) return 'none';
@@ -22,10 +23,16 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     
     forResults(){
         var data = this.last_result.data;
+        data.path = this.spec.path;
         var spec = new Specification(data, this.spec.fixture);
         spec.readResults(this.last_result.results);
         
         return this.set('spec', spec);
+    }
+    
+    forRunning(){
+        var data = this.spec.write();
+        return new RunningSpec(data, this.spec.fixture);
     }
     
     get path(){
@@ -82,11 +89,7 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return this.set('spec', spec);
     }
     
-    buildResults(loader, running){
-        if (running){
-            return this.spec.buildResults(loader);
-        }
-        
+    buildResults(loader){
         if (this.hasResults()){
             var library = this.spec.fixture;
             

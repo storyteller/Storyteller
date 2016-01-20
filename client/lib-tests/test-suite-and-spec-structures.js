@@ -143,10 +143,7 @@ describe('When calculating the icon for suite status', () => {
    
    it('is running if any spec is running', () => {
       var suite = top.childSuite('Embedded');
-       
-      console.log(suite.specs);
-       
-      
+
       var specs = store.getState().get('specs');
       
       expect(suite.icon(specs, {id:'embeds', status: 'none'}, [], {counts: new Counts(0, 0, 0, 0)})).to.equal('running');

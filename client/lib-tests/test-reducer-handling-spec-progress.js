@@ -11,12 +11,13 @@ describe('Handling spec-progress in the reducer', () => {
    
     beforeEach(() => {
         store = createStore(reducer);
+        store.dispatch(initial);
     });
     
     it('resets the running state if none', () => {
         var action = {
             type: 'spec-progress',
-            id: 'a',
+            id: 'embeds',
             counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0},
             step: 3,
             total: 10
@@ -28,16 +29,16 @@ describe('Handling spec-progress in the reducer', () => {
         
         var running = state.get('running');
         expect(running instanceof RunningState).to.be.true;
-        expect(running.id).to.equal('a');
+        expect(running.id).to.equal('embeds');
         expect(running.status).to.equal('success');
     });
     
     it('resets the running state if different', () => {
-        store.dispatch({type: 'queue-state', running: 'b', queued: []});
+        store.dispatch({type: 'queue-state', running: 'general1', queued: []});
         
         var action = {
             type: 'spec-progress',
-            id: 'a',
+            id: 'general1',
             counts: {rights: 0, wrongs: 0, errors: 0, invalids: 0},
             step: 3,
             total: 10
@@ -49,14 +50,14 @@ describe('Handling spec-progress in the reducer', () => {
         
         var running = state.get('running');
         expect(running instanceof RunningState).to.be.true;
-        expect(running.id).to.equal('a');
+        expect(running.id).to.equal('general1');
         expect(running.status).to.equal('none');
     });
    
     it('recalculates state', () => {
         var action = {
             type: 'spec-progress',
-            id: 'a',
+            id: 'general1',
             counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0},
             step: 3,
             total: 10
@@ -70,7 +71,7 @@ describe('Handling spec-progress in the reducer', () => {
     it('updates the running status', () => {
         store.dispatch({
             type: 'spec-progress',
-            id: 'a',
+            id: 'general1',
             counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0},
             step: 3,
             total: 10
@@ -78,7 +79,7 @@ describe('Handling spec-progress in the reducer', () => {
         
         store.dispatch({
             type: 'spec-progress',
-            id: 'a',
+            id: 'general1',
             counts: {rights: 1, wrongs: 1, errors: 0, invalids: 0},
             step: 3,
             total: 10

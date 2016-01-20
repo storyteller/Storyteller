@@ -38,16 +38,26 @@ function replaceRunning(state, running){
     var currentRunning = state.get('running');
     
     if (running == null && currentRunning != null){
-        return state.set('running', null);
+        return state.set('running', null).set('running-spec', null);
     }
     
-    if (currentRunning == null || currentRunning.id != running){
-        return state.set('running', new RunningState(running))
+    if (running != null && (currentRunning == null || currentRunning.id != running)){
+        state = state.set('running', new RunningState(running));
+
+        var record = state.get('specs').get(running);
+        return state.set('running-spec', record.forRunning());
     }
     
     
     
     return state;
+}
+
+function recordResult(state, action){
+    var runningState = state.get('running-spec');
+    if (!runningState || runningState.id != action.id) return state;
+    
+    return state.update('running-spec', x => x.readResult(action));
 }
 
 module.exports = function Reducer(state = initialState, action){
@@ -124,8 +134,12 @@ module.exports = function Reducer(state = initialState, action){
     case 'spec-data':
         var library = state.get('fixtures');
         var spec = new Specification(action.data, library);
-        return state.updateIn(['specs', action.id], x => x.replace(spec));
-    
+        state = state.updateIn(['specs', action.id], x => x.replace(spec));
+        if (state.get('running-spec') != null){
+            state = state.update('running-spec', x => x.replaceData(action.data))
+        }
+        return state;
+
 
     case 'queue-state':
         state = replaceRunning(state, action.running);
@@ -152,14 +166,10 @@ module.exports = function Reducer(state = initialState, action){
         return state.updateIn(['specs', action.id], record => record.recordLastResult(action));
 
     case 'step-result':
-        if (state.get('specs').get(action.spec).mode == 'header') return state;
-    
-        return updateSpec(state, action.spec, spec => spec.readResult(action));
-    
+        return recordResult(state, action);
+        
     case 'set-verification-result':
-        if (state.get('specs').get(action.spec).mode == 'header') return state;
-    
-        return updateSpec(state, action.spec, spec => spec.readResult(action));
+        return recordResult(state, action);
     
     case 'go-home':
         return updateSpec(state, action.id, spec => spec.navigator.moveFirst());

@@ -75,8 +75,6 @@ subscribe('go-editing', x => window.location = '#spec/editing/' + spec);
 subscribe('go-results', gotoResults);
 
 subscribe('run-spec', x => {
-console.log('got run-spec: ' + JSON.stringify(x));    
-    
     applyOutstandingChanges();
     var record = store.getState().get('specs').get(spec);
     

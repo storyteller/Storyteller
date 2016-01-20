@@ -1,6 +1,7 @@
 var expect = require('chai').expect;
 var Spec = require('./../lib/model/specification');
 var SpecRecord = require('./../lib/model/spec-record');
+var RunningSpec = require('./../lib/model/running-spec');
 var Counts = require('./../lib/model/counts');
 var FixtureLibrary = require('./../lib/fixtures/fixture-library');
 var fixtureData = [require('./math-fixture-data'), require('./zork-fixture-data')];
@@ -156,6 +157,14 @@ describe('SpecRecord', () => {
      expect(record2.version).to.equal(1);
      expect(record2.lifecycle).to.equal('Acceptance');
      expect(record2).to.not.equal(record); 
+  });
+  
+  it('can create a running spec', () => {
+     var running = record.forRunning();
+     expect(running.id).to.equal(record.id);
+     expect(running instanceof RunningSpec).to.be.true;
+    
+     
   });
   
   describe('when determining the icon', () => {
