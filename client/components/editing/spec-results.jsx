@@ -15,28 +15,14 @@ function getSpec(state, ownProps){
     
     var loading = spec.mode == 'header';
     
-    var running = state.get('running') === id;
-    if (running){
-        return {spec: spec, loading: loading, running: running};
+    var running = state.get('running');
+    if (running && running.id == id){
+        // TODO -- this is gonna change
+        return {spec: spec, loading: loading, running: true};
     }
     else if (spec.last_result){
         return {spec: spec, loading: false, running: false}
     }
-    
-    
-
-    if (loading){
-        // TODO -- do this differently
-        Postal.publish({
-            channel: 'engine-request',
-            topic: 'spec-data-requested',
-            data: {
-                type: 'spec-data-requested',
-                id: id
-            }
-        });
-    }
-
     
     return {spec: spec, loading: loading, running: running};
 }
@@ -46,6 +32,19 @@ function addDispatch(dispatch){
 }
 
 class SpecResults extends React.Component {
+    componentDidMount(){
+        if (this.props.loading){
+            Postal.publish({
+                channel: 'engine-request',
+                topic: 'spec-data-requested',
+                data: {
+                    type: 'spec-data-requested',
+                    id: this.props.spec.id
+                }
+            });
+        }
+    }
+    
     
     render(){
         if (this.props.loading){

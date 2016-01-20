@@ -4,6 +4,7 @@ var { createStore } = require('redux');
 var initial = require('./../initialization');
 var SpecRecord = require('./../lib/model/spec-record');
 var Suite = require('./../lib/model/suite');
+var RunningState = require('./../lib/model/running-state');
 
 describe('Reducer', () => {
     var store;
@@ -67,6 +68,7 @@ describe('Reducer', () => {
         
         
     });
+
     
     describe('Handling hierarchy-loaded', () => {
         var state;
@@ -265,54 +267,9 @@ describe('Reducer', () => {
         });
     });
    
-    describe('Handling queue-state', () => {
-        it('can replace the running state', () => {
-            store.dispatch({type: 'queue-state', running: 'c', queued: ['a', 'b']});
-        
-            var state = store.getState();
-        
-            expect(state.get('running')).to.equal('c');
-        });
 
-        it('can replace queued state', () => {
-            store.dispatch({type: 'queue-state', running: null, queued: ['a', 'b']});
-            
-            var state = store.getState();
-            expect(state.get('queued')).to.deep.equal(['a', 'b']); 
-        });
-        
-        it('does not replace the queue state when the array is the same', () => {
-           var initial = ['a', 'b'];
-           
-            store.dispatch({type: 'queue-state', running: null, queued: initial});
-            store.dispatch({type: 'queue-state', running: null, queued: ['a', 'b']});
-            
-            
-            var state = store.getState();
-            expect(state.get('queued')).to.equal(initial);    
-        });
-   });
    
-    describe('Handling spec-progress', () => {
-       it('recalculates state', () => {
-            store.dispatch({
-                type: 'spec-progress',
-                id: 'a',
-                counts: {rights: 1, wrongs: 0, errors: 0, invalids: 0},
-                step: 3,
-                total: 10
-            });
-            
-            var state = store.getState();
-            
-            expect(state.get('running')).to.equal('a');
-            
-            var progress = state.get('progress');
 
-            expect(progress.counts.success()).to.be.true; 
-       });
-    });
-    
     describe('Handling expand-all', () => {
        var state;
        

@@ -42,6 +42,10 @@ function SpecResultHeader(props){
     }
 
     var text = null;
+    var runningCount = null;
+    if (props.progress && props.progress.counts){
+        runningCount = new Counts(props.progress.counts).toString();
+    }
 
     if (icon == 'queued'){
         if (props.spec.status == 'none'){
@@ -54,15 +58,15 @@ function SpecResultHeader(props){
         
     }
     else if (icon == 'running'){
-        text = (<span>Running with {props.progress.counts.toString()}</span>);
+        text = (<span>Running with {runningCount}</span>);
     }
     else if (icon == 'running-success'){
         bsStyle = 'success';
-        text = (<span>Running with {props.progress.counts.toString()}</span>);
+        text = (<span>Running with {runningCount}</span>);
     }
     else if (icon == 'running-failed'){
         bsStyle = 'danger';
-        text = (<span>Running with {props.progress.counts.toString()}</span>);
+        text = (<span>Running with {runningCount}</span>);
     }
     else if (props.spec.status == 'success') {
         var countDescription = new Counts(props.spec.last_result.results.counts).toString();

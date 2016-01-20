@@ -206,20 +206,20 @@ describe('SpecRecord', () => {
       });
       
       it('running when running without any determinant counts', () => {
-          running = record.id;
+          running = {id: record.id, status: 'none'};
           
           expect(record.icon(running, queued, progress)).to.equal('running');    
       });
       
       it('running and succeeding', () => {
-          running = record.id;
+          running = {id: record.id, status: 'success'};
           progress.counts.rights = 1;
           
           expect(record.icon(running, queued, progress)).to.equal('running-success');
       });
       
       it('running and failing', () => {
-          running = record.id;
+          running = {id: record.id, status: 'failed'};
           progress.counts.wrongs = 1;
           
           expect(record.icon(running, queued, progress)).to.equal('running-failed');

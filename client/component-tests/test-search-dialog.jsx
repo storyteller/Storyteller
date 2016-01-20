@@ -3,7 +3,7 @@ var Search = require('./../components/header/search');
 var ComponentHarness = require('./component-harness');
 var React = require('react');
 
-describe.only('The Search Dialog', () => {
+describe('The Search Dialog', () => {
 	var component, harness;
 
 	before(function(){

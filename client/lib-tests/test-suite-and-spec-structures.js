@@ -149,7 +149,7 @@ describe('When calculating the icon for suite status', () => {
       
       var specs = store.getState().get('specs');
       
-      expect(suite.icon(specs, 'embeds', [], {counts: new Counts(0, 0, 0, 0)})).to.equal('running');
+      expect(suite.icon(specs, {id:'embeds', status: 'none'}, [], {counts: new Counts(0, 0, 0, 0)})).to.equal('running');
    });
    
    it('is running-success if any spec is running successfully', () => {
@@ -157,7 +157,7 @@ describe('When calculating the icon for suite status', () => {
 
       var specs = store.getState().get('specs');
       
-      expect(suite.icon(specs, 'embeds', [], {counts: new Counts(1, 0, 0, 0)})).to.equal('running-success');
+      expect(suite.icon(specs, {id:'embeds', status: 'success'}, [], {counts: new Counts(1, 0, 0, 0)})).to.equal('running-success');
    });
    
    
@@ -166,7 +166,7 @@ describe('When calculating the icon for suite status', () => {
 
       var specs = store.getState().get('specs');
       
-      expect(suite.icon(specs, 'embeds', [], {counts: new Counts(1, 1, 0, 0)})).to.equal('running-failed');
+      expect(suite.icon(specs, {id:'embeds', status: 'failed'}, [], {counts: new Counts(1, 1, 0, 0)})).to.equal('running-failed');
    });
    
    it('is failed if any spec has failed', () => {

@@ -4,6 +4,7 @@ var BatchRunResponse = require('./batch-run-response');
 var Immutable = require('immutable');
 var Specification = require('./../model/specification');
 var SpecRecord = require('./../model/spec-record');
+var RunningState = require('./../model/running-state');
 var Suite = require('./../model/suite');
 var Counts = require('./../model/counts');
 var _ = require('lodash');
@@ -30,6 +31,24 @@ function updateSpec(state, id, func){
     
 }
 
+
+function replaceRunning(state, running){
+    
+    
+    var currentRunning = state.get('running');
+    
+    if (running == null && currentRunning != null){
+        return state.set('running', null);
+    }
+    
+    if (currentRunning == null || currentRunning.id != running){
+        return state.set('running', new RunningState(running))
+    }
+    
+    
+    
+    return state;
+}
 
 module.exports = function Reducer(state = initialState, action){
   switch (action.type) {
@@ -109,25 +128,29 @@ module.exports = function Reducer(state = initialState, action){
     
 
     case 'queue-state':
-        var one = state.set('running', action.running);
+        state = replaceRunning(state, action.running);
+    
         if (!_.isEqual(state.get('queued'), action.queued)){
-            return one.set('queued', action.queued);
+            return state.set('queued', action.queued);
         }
         else {
-            return one;
+            return state;
         }
         
     case 'spec-progress':
-        action.counts = new Counts(action.counts);
-        return state.set('running', action.id).set('progress', action);
+        state = replaceRunning(state, action.id);
+        state = state.update('running', x => x.updateCounts(action));
+    
+        return state.set('progress', action);
 
     case 'spec-execution-completed':
+        var running = state.get('running');
+        if (running && running.id == action.id){
+            state = state.set('running', null);
+        }
+    
         return state.updateIn(['specs', action.id], record => record.recordLastResult(action));
 
-   
-    case 'clear-all-results':
-        throw new Error('Do this!');
-   
     case 'step-result':
         if (state.get('specs').get(action.spec).mode == 'header') return state;
     

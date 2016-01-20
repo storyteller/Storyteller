@@ -9,11 +9,11 @@ var {ProgressBar, Button, Navbar} = require('react-bootstrap');
 function findState(state){
     var running = state.get('running');
     
-    if (running == null){
+    if (!running){
         return {running: false};
     }
     
-    var spec = state.get('specs').get(running);
+    var spec = state.get('specs').get(running.id);
     var progress = state.get('progress');
     var counts = new Counts(0, 0, 0, 0);
     if (progress){

@@ -123,24 +123,12 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
     }
     
     icon(running, queued, progress){
-    
-        if (this.id == running){
-            var counts = progress.counts;
-            if (!(progress.counts instanceof Counts)){
-                counts = new Counts(progress.counts);
-            }
-            
-            if (counts.anyResults()){
-                if (counts.success()){
-                    return 'running-success';
-                }
-                else {
-                    return 'running-failed';
-                }
-            }
-            else {
-                return 'running';
-            }
+        if (running && this.id == running.id){
+            return {
+                'none': 'running', 
+                'success': 'running-success', 
+                'failed': 'running-failed'}[running.status];
+
         }
         else if (_.includes(queued, this.id)){
             return 'queued';

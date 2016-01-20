@@ -28,4 +28,12 @@ describe('Counts', function(){
 		expect(new Counts(0, 0, 1, 0).anyResults()).to.be.true;
 		expect(new Counts(0, 0, 0, 1).anyResults()).to.be.true;
 	});
+    
+    it('can determine its status', () => {
+        expect(new Counts(0, 0, 0, 0).status()).to.equal('none'); 
+        expect(new Counts(1, 0, 0, 0).status()).to.equal('success'); 
+        expect(new Counts(1, 1, 0, 0).status()).to.equal('failed'); 
+        expect(new Counts(0, 0, 1, 0).status()).to.equal('failed'); 
+        expect(new Counts(0, 0, 0, 1).status()).to.equal('failed'); 
+    });
 });

@@ -29,4 +29,12 @@ Counts.prototype.success = function(){
 	return (this.wrongs + this.errors + this.invalids) == 0;
 }
 
+Counts.prototype.status = function(){
+    if (!this.anyResults()) return 'none';
+    
+    if (this.success()) return 'success';
+    
+    return 'failed';
+}
+
 module.exports = Counts;

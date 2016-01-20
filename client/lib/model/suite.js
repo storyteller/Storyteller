@@ -84,8 +84,8 @@ class Suite{
 
 		var specs = this.allSpecs();
 
-        if (this.hasSpec(runningSpec)){
-            var running = specDict.get(runningSpec);
+        if (runningSpec && this.hasSpec(runningSpec.id)){
+            var running = specDict.get(runningSpec.id);
             return running.icon(runningSpec, queued, progress);
         }
 
