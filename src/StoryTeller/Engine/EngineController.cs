@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FubuCore;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -50,7 +51,7 @@ namespace StoryTeller.Engine
 
         void IResultObserver.Handle<T>(T message)
         {
-            _observer.SendToClient(message);
+            _observer.SendToClient(message.As<ClientMessage>());
         }
 
         public void SpecExecutionFinished(Specification specification, SpecResults results)

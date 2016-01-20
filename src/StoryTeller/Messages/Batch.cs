@@ -26,5 +26,15 @@ namespace StoryTeller.Messages
                 _messages.AddRange(value);
             }
         }
+
+        public void Add(ClientMessage message)
+        {
+            _messages.Add(message);
+        }
+
+        public void Clear()
+        {
+            _messages.Clear();
+        }
     }
 }

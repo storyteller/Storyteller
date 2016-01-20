@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using FubuCore;
+using StoryTeller.Results;
 
 namespace StoryTeller.Messages
 {
     [Serializable]
-    public class QueueState : ClientMessage
+    public class QueueState : ClientMessage, IBatchedMessage
     {
         public QueueState() : base("queue-state")
         {
