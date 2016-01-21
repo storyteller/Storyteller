@@ -326,7 +326,10 @@ namespace ST.Client
 
         public void Added(string file)
         {
-            ReloadHierarchy();
+            if (!_hierarchy.Specifications.Any(x => x.Filename.EqualsIgnoreCase(file)))
+            {
+                ReloadHierarchy();
+            }
         }
 
         public void Deleted(string file)

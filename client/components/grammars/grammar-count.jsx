@@ -11,7 +11,7 @@ function getCount(state){
 function GrammarCount(props){
     if (props.count == 0)
     {
-        return null;
+        return (<span />);
     }
 
     var onclick = function(){
