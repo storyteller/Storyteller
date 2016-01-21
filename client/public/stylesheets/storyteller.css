@@ -2,9 +2,6 @@
 	margin-bottom: 0px !important;
 }
 
-div.active{
-  border: none !important;
-}
 
 div.suite-body {
 	margin-left: 40px;
@@ -88,8 +85,9 @@ div.progress{
   margin-bottom: 5px !important;
 }
 
-div.active {
-	border: thin solid #337ab7 !important;
+div.contextual-control{
+    max-height: 75%;
+    overflow-y: auto
 }
 
 tr.active {

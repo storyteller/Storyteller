@@ -2,7 +2,8 @@ var React = require('react');
 
 var Postal = require('postal');
 var {connect} = require('react-redux');
-var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem} = require('react-bootstrap');
+var {Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem, Tab, Tabs} = require('react-bootstrap');
+var {AutoAffix} = require('react-overlays');
 var EditorLoading = require('./alerts/editor-loading');
 var SpecHeader = require('./header/spec-header');
 var SpecResultHeader = require('./header/spec-result-header');
@@ -11,6 +12,7 @@ var RetryCount = require('./header/retry-count');
 var ExpirationPeriod = require('./header/expiration-period');
 var SpecOutline = require('./spec-outline');
 var Persisting = require('./alerts/persisting');
+
 
 // TODO -- centralize this one!
 function getSpec(state, ownProps){
@@ -30,24 +32,57 @@ function addDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-function ContextualPane(props){
-    var contextualControl = null;
-    if (props.activeContainer){
-        contextualControl = props.activeContainer.contextualControl(loader);
-    }
-    
+function SpecProperties(props){
     return (
-        <Col key="left" xs={4} md={4}>
+        <div>
             <RetryCount count={props.spec.spec['max-retries']}/>
             <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
             <h4>Outline</h4>
-            <SpecOutline outline={props.outline} />
-            <br />
-            <br />
-            {contextualControl}
-        </Col>
+            <SpecOutline outline={props.outline} />  
+        </div>
     );
 }
+
+class ContextualPane extends React.Component{
+    render(){
+        var contextualControl = null;
+
+        if (this.props.activeContainer){
+            contextualControl = this.props.activeContainer.contextualControl(loader);
+            
+            var title = 'Add Sections';
+            if (!AutoAffix) throw new Error('do not have AutoAffix!');
+            
+            return (
+                <Col key="left" xs={4} md={4}>
+                <AutoAffix viewportOffsetTop={15} container={this.props.editor}>
+                <Tabs defaultActiveKey={0}>
+                    <Tab eventKey={0} title={title} ref="tab">
+                        <div className="contextual-control">
+                            {contextualControl}
+                        </div>
+                    </Tab>
+                    
+                    <Tab eventKey={1} title="Properties">
+                        <SpecProperties {...this.props} />
+                    </Tab>
+                </Tabs>
+                </AutoAffix>
+                </Col>
+            ) 
+            
+        }
+        
+        return (
+            <Col key="left" xs={4} md={4}>
+            
+                <AutoAffix viewportOffsetTop={15} container={this.props.editor}><SpecProperties {...this.props} /></AutoAffix>
+            </Col>
+        );
+    }
+}
+
+
 
 class SpecEditor extends React.Component{
     componentDidMount(){
@@ -75,6 +110,7 @@ class SpecEditor extends React.Component{
                 <Row>
                     
                     <ContextualPane
+                        editor={this}
                         spec={spec}
                         loader={loader}
                         activeContainer={this.props.activeContainer}
