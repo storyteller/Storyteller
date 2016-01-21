@@ -85,7 +85,13 @@ div.progress{
   margin-bottom: 5px !important;
 }
 
+div.sentence + div.panel{
+    margin-top: 20px;
+}
 
+div.sentence {
+   padding: 5px;
+}
 
 div.contextual-control{
     max-height: 75%;
