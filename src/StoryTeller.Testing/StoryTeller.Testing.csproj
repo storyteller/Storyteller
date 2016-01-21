@@ -92,7 +92,6 @@
     <Compile Include="Engine\SpecExpirationTester.cs" />
     <Compile Include="Engine\SpecRunnerTester.cs" />
     <Compile Include="Engine\TimingsSmokeTester.cs" />
-    <Compile Include="Engine\user_interface_tracing_spec.cs" />
     <Compile Include="Engine\using_runtime_converter_spec.cs" />
     <Compile Include="Equivalence\EquivalenceCheckerTester.cs" />
     <Compile Include="FixieConventions.cs" />
