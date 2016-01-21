@@ -29,13 +29,13 @@ var OptionalColumn = React.createClass({
 	}
 });
 
-module.exports = React.createClass({
-	render: function(){
+class TableContext extends React.Component{
+    render(){
 		var optionals = null;
 		if (this.props.optionals.length > 0){
             var i = 0;
 			var buttons = this.props.optionals.map(opt => {
-				return (<OptionalColumn key={++i} section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
+				return (<OptionalColumn style={{width: '100%'}} key={++i} section={this.props.section} header={opt.header} cell={opt.cell} active={opt.active} />);
 			});
 
 			optionals = (
@@ -47,10 +47,16 @@ module.exports = React.createClass({
 		}
 
 		return (
-			<div>
+			<div className="table-column-context">
 				<h4>{this.props.table.title}</h4>
 				{optionals}
 			</div>
 		);
-	}
-});
+    }
+    
+    title(){
+        return 'Optional Columns';
+    }
+}
+
+module.exports = TableContext;

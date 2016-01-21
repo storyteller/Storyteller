@@ -19,7 +19,7 @@ class FixtureLibrary{
 	}
 
 	contextualControl(spec, loader){
-		return loader.stepAdder({holder: spec});
+		return loader.stepAdder({holder: spec, title: 'Fixtures'});
 	}
 
 	find(key){

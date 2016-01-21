@@ -4,106 +4,42 @@ var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
 var domUtils = require('./../../../lib/dom-utils');
 var uuid = require('node-uuid');
 
-var AddStepItem = React.createClass({
-	render: function(){
-		var onclick = e => {
-			this.props.option.select();
+function AddStepItem(props){
+    var onclick = e => {
+        props.option.select();
 
-			e.preventDefault();
-		}
+        e.preventDefault();
+    }
 
 
-		return (
-			<a 
-				href="#" 
-				data-key={this.props.option.grammar.key} 
-				onClick={onclick}
-				className="list-group-item add-step">{this.props.option.title}</a>
-		);
-	}
-});
+    return (
+        <a 
+            href="#" 
+            data-key={props.option.grammar.key} 
+            onClick={onclick}
+            className="list-group-item add-step">{props.option.title}</a>
+    );
+};
 
-module.exports = React.createClass({
-	getInitialState: function() {
-		return {
-			containerStyle: {}
-		};
-	},
 
-	componentDidMount: function() {
-		var node = ReactDOM.findDOMNode(this);
+function StepAdder(props){
+    var holder = props.holder;
+    var lookup = new GrammarLookup(props.holder);
 
-		//window.addEventListener('scroll', this.handleScroll);
+    var i = 0;
+    var components = lookup.options.map(x => {
+        return ( <AddStepItem key={++i} option={x} /> );
+    });
 
-		this.setState({
-			offsetTop: domUtils.default.offsetTop(node),
-			width: domUtils.default.width(node)
-		});
-	},
+    return (
+        <div>
 
-	componentWillUnmount: function() {
-		//window.removeEventListener('scroll', this.handleScroll);
-	},
+            <div className="list-group add-steps-container">
+                {components}
+            </div>
+        </div>
+    );
 
-	handleScroll: function(event) {
-		var offsetTop = this.state.offsetTop;
-		var scrollOffset = domUtils.scrollTop(window);
-		var node = ReactDOM.findDOMNode(this);
-		var self = this;
+}
 
-		if (offsetTop < scrollOffset) {
-			this.setState({
-				containerStyle: generateFloatingStyle()
-			});
-		}
-		else {
-			this.setState({
-				containerStyle: {}
-			});
-		}
-
-		function generateFloatingStyle()
-		{
-			var style = {
-				position: 'fixed',
-				top: 0,
-				width: self.state.width
-			};
-			if (isNodeOffPage()) {
-				addVerticalScrolling(style);
-			}
-			return style;
-		}
-
-		function addVerticalScrolling(style)
-		{
-			style.height = domUtils.screenHeight() + 1;
-			style['overflow-y'] = 'scroll';
-		}
-
-		function isNodeOffPage()
-		{
-			return domUtils.screenHeight() < domUtils.height(node);
-		}
-	},
-
-	render: function(){
-		var holder = this.props.holder;
-		var lookup = new GrammarLookup(this.props.holder);
-		var containerStyle = this.state.containerStyle;
-
-        var i = 0;
-		var components = lookup.options.map(x => {
-			return ( <AddStepItem key={++i} option={x} /> );
-		});
-
-		return (
-			<div style={containerStyle}>
-				<h5>Add items to {this.props.holder.title}</h5>
-				<div className="list-group add-steps-container">
-					{components}
-				</div>
-			</div>
-		);
-	}
-});
+module.exports = StepAdder;

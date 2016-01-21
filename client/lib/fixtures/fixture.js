@@ -25,7 +25,7 @@ class Fixture{
 	}
 
 	contextualControl(section, loader){
-		return loader.stepAdder({holder: section});
+		return loader.stepAdder({holder: section, title: 'Grammars'});
 	}
 
 	newStep(){

@@ -32,54 +32,58 @@ function addDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-function SpecProperties(props){
-    return (
-        <div>
-            <RetryCount count={props.spec.spec['max-retries']}/>
-            <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
-            <h4>Outline</h4>
-            <SpecOutline outline={props.outline} />  
-        </div>
-    );
-}
 
-class ContextualPane extends React.Component{
-    render(){
-        var contextualControl = null;
+function ContextualPane(props){
+    var contextualControl = null;
 
-        if (this.props.activeContainer){
-            contextualControl = this.props.activeContainer.contextualControl(loader);
-            
-            var title = 'Add Sections';
-            if (!AutoAffix) throw new Error('do not have AutoAffix!');
-            
-            return (
-                <Col key="left" xs={4} md={4}>
-                <AutoAffix viewportOffsetTop={15} container={this.props.editor}>
-                <Tabs defaultActiveKey={0}>
-                    <Tab eventKey={0} title={title} ref="tab">
-                        <div className="contextual-control">
-                            {contextualControl}
-                        </div>
-                    </Tab>
-                    
-                    <Tab eventKey={1} title="Properties">
-                        <SpecProperties {...this.props} />
-                    </Tab>
-                </Tabs>
-                </AutoAffix>
-                </Col>
-            ) 
-            
-        }
+    if (props.activeContainer){
+        contextualControl = props.activeContainer.contextualControl(loader);
+
+        var title = contextualControl.props.title;
+        if (!AutoAffix) throw new Error('do not have AutoAffix!');
         
         return (
             <Col key="left" xs={4} md={4}>
-            
-                <AutoAffix viewportOffsetTop={15} container={this.props.editor}><SpecProperties {...this.props} /></AutoAffix>
+            <AutoAffix viewportOffsetTop={15} container={props.editor}>
+            <Tabs defaultActiveKey={0}>
+                <Tab eventKey={0} title={title}>
+                    <div className="contextual-control">
+                        {contextualControl}
+                    </div>
+                </Tab>
+                
+                <Tab eventKey={1} title="Outline">
+                    <SpecOutline outline={props.outline} />  
+                </Tab>
+                
+                <Tab eventKey={2} title="Properties">
+                    <RetryCount count={props.spec.spec['max-retries']}/>
+                    <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
+                </Tab>
+            </Tabs>
+            </AutoAffix>
             </Col>
-        );
+        ) 
+        
     }
+    
+    return (
+        <Col key="left" xs={4} md={4}>
+            <AutoAffix viewportOffsetTop={15} container={props.editor}>
+            <Tabs defaultActiveKey={1}>
+                <Tab eventKey={1} title="Outline">
+                    <SpecOutline outline={props.outline} />  
+                </Tab>
+                
+                <Tab eventKey={2} title="Properties">
+                    <RetryCount count={props.spec.spec['max-retries']}/>
+                    <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
+                </Tab>
+            </Tabs>
+            </AutoAffix>
+        </Col>
+    );
+
 }
 
 

@@ -85,9 +85,17 @@ div.progress{
   margin-bottom: 5px !important;
 }
 
+
+
 div.contextual-control{
     max-height: 75%;
     overflow-y: auto
+}
+
+.table-column-context button{
+    width: 100%;
+    text-align: left
+    
 }
 
 tr.active {
