@@ -59,9 +59,22 @@ var TableEditor = React.createClass({
 		}
 
 		var headerClass = "";
-		if (this.props.section.active == true){
+		var onHeaderClick = () => {};
+        if (this.props.section.active == true){
 			headerClass += ' bg-primary';
 		}
+        else {
+            onHeaderClick = e => {
+                console.log('YOU CLICKED THE HEADER');
+                Postal.publish({
+                    channel: 'editor',
+                    topic: 'select-holder',
+                    data: {holder: this.props.section.id}
+                });
+                
+                e.stopPropagation();
+            }
+        }
 
 		return (
 			
@@ -70,9 +83,11 @@ var TableEditor = React.createClass({
 				<thead>
 					<tr>
 						<th className={headerClass} colSpan={tableWidth}>
-							<DeleteGlyph step={this.props.step}/>
+							<div onClick={onHeaderClick}>
+                            <DeleteGlyph step={this.props.step}/>
 							{this.props.title}
 							<ReorderGlyph step={this.props.step}/>
+                            </div>
 						</th>
 					</tr>
 					<HeaderRow cells={this.props.cells}/>
