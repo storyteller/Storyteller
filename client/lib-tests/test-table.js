@@ -71,7 +71,7 @@ describe('Table Grammar', function(){
 
 
 
-		expect(control).to.deep.equal({type: 'tableContext', props: {table: table, section: section, optionals: optionals}});
+		expect(control).to.deep.equal({type: 'tableContext', props: {table: table, section: section, optionals: optionals, title: 'Optional Columns'}});
 	});
 
 	it('should capture the key', function(){

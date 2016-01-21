@@ -45,7 +45,7 @@ describe('Fixture', function(){
 
 		expect(control).to.deep.equal({
 			type: 'stepAdder', 
-			props: {holder: section}
+			props: {holder: section, title: 'Grammars'}
 		});
 	});
 

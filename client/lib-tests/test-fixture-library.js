@@ -30,7 +30,7 @@ describe('The FixtureLibrary', function(){
 
 		expect(control).to.deep.equal({
 			type: 'stepAdder', 
-			props: {holder: spec}
+			props: {holder: spec, title: 'Fixtures'}
 		});
 	});
 
