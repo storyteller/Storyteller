@@ -83,7 +83,7 @@ var OutlineItem = React.createClass({
 var OutlineContainer = React.createClass({
 	render: function() {
 		return (
-			<ul className="outline-container spec-outline">
+			<ul className="outline-container">
 			{
 				this.props.children.map(item => {
 					return item.active ?
