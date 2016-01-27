@@ -53,6 +53,7 @@ icon('stop', ['fa-stop']);
 icon('help', ['fa-question']);
 icon('search', ['fa-search']);
 icon('checked', ['fa-check']);
+icon('error', ['fa-exclamation-circle']);
 
 icon('down-arrow', ['fa-chevron-down']);
 icon('up-arrow', ['fa-chevron-up']);

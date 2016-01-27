@@ -212,3 +212,27 @@ pre.text-display{
 .debug-output{
   overflow-x:scroll;
 }
+
+div.sentence.fact{
+    margin: 3px;
+}
+
+div.sentence.fact.bg-success{
+    border: thin solid green;
+}
+
+div.sentence.fact.bg-danger{
+    border: thin solid red;
+}
+
+div.sentence.fact.bg-warning{
+    border: thin solid black;
+}
+
+div.sentence.fact.bg-warning > pre{
+    margin-top: 5px;
+}
+
+div.sentence.fact.bg-warning > pre > i.fa{
+    display: none;
+}

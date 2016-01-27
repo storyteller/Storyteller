@@ -116,21 +116,36 @@ class Sentence{
 		var result = step.getResult(this.position) || {status: 'none'};
 
 		var components = this.parts.map(part => part.buildResults(step, loader));
-		if (result.status == 'ok'){
-			components = [loader.checked()].concat(components);
-		}
+		
+        switch (result.status){
+            case 'ok':
+                components = [loader.checked()].concat(components);
+                break;
+                
+            case 'success':
+                components = [loader.success()].concat(components);
+                break;
+                
+            case 'failed':
+                components = [loader.failed()].concat(components);
+                break;
+                
+            case 'error':
+                components = [loader.error()].concat(components);
+                break;
+        }
+        
 
+
+		if (result.status == 'error'){
+            components.push(loader.errorBox({error: result.error}));
+            
+		}
+        
 		var line = loader.line({
 			components: components, 
 			status: result.status
 		});
-
-		if (result.status == 'error'){
-			return [
-				line,
-				loader.errorBox({error: result.error})
-			]
-		}
 
 		return line;
 	}

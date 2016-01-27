@@ -26,7 +26,7 @@ var ErrorBox = React.createClass({
 
 		return (
 			<pre style={style} className="error bg-warning">
-				{this.props.error}
+				<i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>{this.props.error}
 			</pre>
 		);
 

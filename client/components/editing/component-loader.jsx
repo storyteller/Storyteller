@@ -4,6 +4,7 @@ var React = require('react');
 var _ = require('lodash');
 var {Tabs, Tab} = require('react-bootstrap');
 var uuid = require('node-uuid');
+var Icons = require('./../icons');
 
 class Loader {
 	constructor(parent){
@@ -99,6 +100,23 @@ results.add('noResults', 'alerts/no-results');
 results.checked = () => {
 	return ( <CheckboxIcon key={++results.count} /> );
 };
+
+results.success = () => {
+    var Success = Icons['success'];
+    return (<Success key={++results.count} />);
+}
+
+results.failed = () => {
+    var Failed = Icons['failed'];
+    return (<Failed key={++results.count} />);
+}
+
+results.error = () => {
+    var Error = Icons['error'];
+    return (<Error key={++results.count} />);
+}
+
+
 
 results.tabbedArea = props => {
 	return (

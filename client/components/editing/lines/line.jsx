@@ -7,21 +7,17 @@ var statusClass = {
 	error: 'bg-warning'
 }
 
-module.exports = React.createClass({
-	render: function(){
-		var clazz = "sentence";
-		var errorIcon = '';
+function Line(props){
+    var clazz = "sentence";
+    var icon = '';
 
-		if (this.props.status){
-			clazz += ' ' + statusClass[this.props.status];
-		}
+    if (props.status){
+        clazz += ' ' + statusClass[props.status] + ' fact';
+    }
 
-		if (statusClass[this.props.status] == statusClass.failed) {
-			errorIcon = <i key="error-icon" className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>; 
-		}
-		
-		return (
-			<div className={clazz}>{errorIcon}{this.props.components}</div>
-		);
-	}
-});
+    return (
+        <div className={clazz}>{props.components}</div>
+    );
+}
+
+module.exports = Line;
