@@ -19,7 +19,10 @@ var ExtraRow = React.createClass({
 
 		return (
 			<tr className="bg-danger extra-row">
-				<td className="set-row-status"><i>Extra</i></td>
+				<td className="set-row-status">
+                    <i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>
+                    <i>Extra</i>
+                </td>
 				{cells}
 			</tr>
 		);

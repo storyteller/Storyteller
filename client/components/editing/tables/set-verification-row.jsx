@@ -43,17 +43,21 @@ var SetVerificationRow = React.createClass({
 		});
 
 
-		var errorIcon = '';
+		var icon = '';
 		if (status.rowClass != 'success') {
-			errorIcon = (<i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>);
+			icon = (<i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>);
 		}
+        else {
+            icon = (<i className="fa fa-check" style={{paddingRight: '5px'}}></i>);
+        }
+        
 
 		return (
 			<tr id={step.id} className={status.rowClass}>
 				<td 
 					className="set-row-status" 
 					style={{paddingLeft: '10px', paddingRight: '10px', fontStyle: 'italic'}} >
-					{errorIcon}
+					{icon}
 					<span className="set-row-header">{header}</span>
 				</td>
 				{cells}
