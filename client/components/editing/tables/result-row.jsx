@@ -32,6 +32,10 @@ function ResultCell(props){
             return (<td className="bg-warning"><ErrorCell cell={arg.cell} error={arg.result.error} value={arg.value} result={arg.result}/></td>);
         }
         
+        if (result == 'failed'){
+            return (<td className="bg-danger">{text} but was <i>{arg.result.actual}</i></td>);
+        }
+        
         clazz = clazz + ' ' + classes[result];
     }
 
@@ -59,11 +63,12 @@ var ResultRow = React.createClass({
 			var arg = this.props.step.args.find(cell.key);
 			if (!arg){
 				arg = new Arg(cell, {cells:{}}, this.props.step.id);
+                arg.result = result;
 			}
 
 
 			return (
-				<ResultCell key={i++} nowrap arg={arg}/>
+				<ResultCell key={i++} nowrap arg={arg} actual={result.actual}/>
 			);
 		});
 

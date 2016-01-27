@@ -7,7 +7,7 @@ var FailureCell = React.createClass({
 		var text = builder.display(this.props.cell, this.props.value);
 
 		return (
-			<span className="label label-danger">{text} but was {this.props.actual}</span>
+			<span className="label label-danger">{text} but was <i>{this.props.actual}</i></span>
 		);
 	}
 });
