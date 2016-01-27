@@ -39,31 +39,35 @@ function ContextualPane(props){
     if (props.activeContainer){
         contextualControl = props.activeContainer.contextualControl(loader);
 
-        var title = contextualControl.props.title;
-        if (!AutoAffix) throw new Error('do not have AutoAffix!');
-        
-        return (
-            <Col key="left" xs={4} md={4}>
-            <AutoAffix viewportOffsetTop={15} container={props.editor}>
-            <Tabs defaultActiveKey={0}>
-                <Tab eventKey={0} title={title}>
-                    <div className="contextual-control">
-                        {contextualControl}
-                    </div>
-                </Tab>
-                
-                <Tab eventKey={1} title="Outline">
-                    <SpecOutline outline={props.outline} />  
-                </Tab>
-                
-                <Tab eventKey={2} title="Properties">
-                    <RetryCount count={props.spec.spec['max-retries']}/>
-                    <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
-                </Tab>
-            </Tabs>
-            </AutoAffix>
-            </Col>
-        ) 
+        if (contextualControl){
+            var title = contextualControl.props.title;
+            if (!AutoAffix) throw new Error('do not have AutoAffix!');
+            
+            return (
+                <Col key="left" xs={4} md={4}>
+                <AutoAffix viewportOffsetTop={15} container={props.editor}>
+                <Tabs defaultActiveKey={0}>
+                    <Tab eventKey={0} title={title}>
+                        <div className="contextual-control">
+                            {contextualControl}
+                        </div>
+                    </Tab>
+                    
+                    <Tab eventKey={1} title="Outline">
+                        <SpecOutline outline={props.outline} />  
+                    </Tab>
+                    
+                    <Tab eventKey={2} title="Properties">
+                        <RetryCount count={props.spec.spec['max-retries']}/>
+                        <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
+                    </Tab>
+                </Tabs>
+                </AutoAffix>
+                </Col>
+            ) 
+        }
+
+
         
     }
     
