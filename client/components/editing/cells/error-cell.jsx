@@ -29,7 +29,7 @@ var ErrorCell = React.createClass({
 
 
 		return (
-			<Button bsSize="xsmall" onClick={this.handleToggle} bsStyle="warning">{this.props.value} (Error!)
+			<Button bsSize="xsmall" onClick={this.handleToggle} bsStyle="warning"><i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>{this.props.value} (Error!)
 			<Modal show={this.state.showModal} onHide={this.close}>
 	          <Modal.Header closeButton>
 	            <Modal.Title>{title}</Modal.Title>
