@@ -26,9 +26,7 @@ var PerfTable = React.createClass({
 		return (
 			<div>
 
-			<hr/>
-
-			<h5>Execution Timing <small>all timings in milliseconds</small></h5>
+			<h3>Execution Timing <small>all timings in milliseconds</small></h3>
 
 			<table className="table table-striped">
 				<thead>
