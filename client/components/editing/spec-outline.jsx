@@ -49,6 +49,6 @@ module.exports = React.createClass({
 	render: function(){
 		var outline = buildItem(this.props.outline);
 
-		return (<ul className="spec-outline">{outline}</ul>);
+		return (<ul style={{marginTop: '20px'}} className="spec-outline">{outline}</ul>);
 	}
 });

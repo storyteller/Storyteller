@@ -17,7 +17,7 @@ var RetryCount = React.createClass({
 		};
 
 		return (
-			<div>Retry Count: <input id="retry-count" onChange={onChange} type="text" value={this.props.count}/></div>
+			<div style={{marginTop: '25px'}}>Retry Count: <input id="retry-count" onChange={onChange} type="text" value={this.props.count}/></div>
 		);
 	}
 });
