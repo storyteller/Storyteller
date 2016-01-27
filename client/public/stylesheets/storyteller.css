@@ -85,9 +85,11 @@ div.progress{
   margin-bottom: 5px !important;
 }
 
-div.sentence + div.panel{
+div.sentence + div.panel, div.comment + div.panel, div.sentence + table, div.comment + table{
     margin-top: 20px;
 }
+
+
 
 div.sentence {
    padding: 5px;
