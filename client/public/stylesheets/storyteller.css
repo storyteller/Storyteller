@@ -248,3 +248,7 @@ div.sentence.fact.bg-warning > pre > i.fa{
     cursor: pointer;
     margin-right: 5px;
 }
+
+.spec-outline {
+  margin-top: 20px;
+}

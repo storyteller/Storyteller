@@ -83,7 +83,7 @@ var OutlineItem = React.createClass({
 var OutlineContainer = React.createClass({
 	render: function() {
 		return (
-			<ul className="outline-container">
+			<ul className="outline-container spec-outline">
 			{
 				this.props.children.map(item => {
 					return item.active ?
@@ -98,6 +98,10 @@ var OutlineContainer = React.createClass({
 
 module.exports = React.createClass({
 	render: function(){
-		return <OutlineContainer children={this.props.outline.children} />;
+		return (
+			<div className="spec-outline">
+				<OutlineContainer children={this.props.outline.children} />
+			</div>
+		);
 	}
 });
