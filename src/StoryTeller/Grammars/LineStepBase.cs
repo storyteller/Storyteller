@@ -8,7 +8,9 @@ namespace StoryTeller.Grammars
 {
     public abstract class LineStepBase : ILineExecution
     {
-        public StepValues Values { get; private set; }
+        public StepValues Values { get; }
+
+        public string Id => Values.id;
 
         protected LineStepBase(StepValues values)
         {

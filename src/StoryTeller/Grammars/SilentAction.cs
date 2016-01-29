@@ -52,22 +52,15 @@ namespace StoryTeller.Grammars
 
         public string Subject { get; set; }
 
-        public string type
-        {
-            get { return _type; }
-        }
+        public string type => _type;
 
-        public Action<ISpecContext> Action
-        {
-            get { return _action; }
-        }
+        public Action<ISpecContext> Action => _action;
 
-        public Node Node
-        {
-            get { return _node; }
-        }
+        public Node Node => _node;
 
         public object Position { get; set; }
+
+        public string Id => _node.id;
 
         public int Count()
         {

@@ -13,7 +13,7 @@ namespace StoryTeller.Conversion
 
         public StepValues(string id)
         {
-            base.id = id;
+            this.id = id;
         }
 
         public void DoDelayedConversions(ISpecContext context)

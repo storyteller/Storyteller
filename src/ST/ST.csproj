@@ -81,6 +81,7 @@
     <Compile Include="Client\SpecFileWatcher.cs" />
     <Compile Include="Client\StartWatchingAssets.cs" />
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
+    <Compile Include="Client\Stepthrough\StepthroughClasses.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
     <Compile Include="Client\WebApplicationRegistry.cs" />
     <Compile Include="Client\WebApplicationRunner.cs" />

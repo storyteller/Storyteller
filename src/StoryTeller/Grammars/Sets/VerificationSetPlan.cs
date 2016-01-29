@@ -25,6 +25,8 @@ namespace StoryTeller.Grammars.Sets
             _cells = cells;
         }
 
+        public string Id => _section.id;
+
         public int Count()
         {
             return 1;
