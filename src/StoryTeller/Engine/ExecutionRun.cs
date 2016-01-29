@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
@@ -21,7 +20,8 @@ namespace StoryTeller.Engine
         private SpecContext _context;
         private Exception _catastrophicException;
         private IExecutionContext _execution;
-       
+        private ManualResetEvent _reset;
+
         public ExecutionRun(ISystem system, Timings timings, SpecExecutionRequest request, StopConditions stopConditions, IExecutionMode mode)
         {
             _system = system;
@@ -33,13 +33,13 @@ namespace StoryTeller.Engine
 
         public SpecResults Execute()
         {
-            var reset = new ManualResetEvent(false);
+            _reset = new ManualResetEvent(false);
 
             _thread = new Thread(() =>
             {
                 try
                 {
-                    execute(reset);
+                    execute();
                 }
                 catch (ThreadAbortException)
                 {
@@ -53,13 +53,13 @@ namespace StoryTeller.Engine
 
             _thread.Start();
 
-            var timedout = !reset.WaitOne(_stopConditions.TimeoutInSeconds.Seconds());
+            var timedout = !_reset.WaitOne(_stopConditions.TimeoutInSeconds.Seconds());
             _finished = true;
 
             if (_wasCancelled) return null;
 
             if (_catastrophicException != null) throw new StorytellerExecutionException(_catastrophicException);
-            if (_context != null && _context.CatastrophicException != null) throw new StorytellerExecutionException(_context.CatastrophicException);
+            if (_context?.CatastrophicException != null) throw new StorytellerExecutionException(_context.CatastrophicException);
 
             
 
@@ -92,17 +92,16 @@ namespace StoryTeller.Engine
 
         private StepResult timeoutMessage()
         {
-            var stepResult = new StepResult
+            return new StepResult
             {
                 id = _request.Plan.Specification.id,
                 status = ResultStatus.error,
                 error = "Timed out in " + _timings.Duration + " milliseconds",
                 position = Stage.timedout
             };
-            return stepResult;
         }
 
-        private void execute(EventWaitHandle reset)
+        private void execute()
         {
             try
             {
@@ -114,7 +113,7 @@ namespace StoryTeller.Engine
             catch (Exception e)
             {
                 _catastrophicException = e;
-                reset.Set();
+                _reset.Set();
 
                 return;
             }
@@ -122,6 +121,7 @@ namespace StoryTeller.Engine
             if (_request.IsCancelled) return;
 
             _context = new SpecContext(_request.Specification, _timings, _request.Observer, _stopConditions, _execution);
+
             try
             {
                 _execution.BeforeExecution(_context);
@@ -138,23 +138,14 @@ namespace StoryTeller.Engine
 
             _execution.AfterExecution(_context);
 
-            reset.Set();
+            _reset.Set();
         }
 
-        public SpecExecutionRequest Request
-        {
-            get { return _request; }
-        }
+        public SpecExecutionRequest Request => _request;
 
-        public bool Finished
-        {
-            get { return _finished; }
-        }
+        public bool Finished => _finished;
 
-        public bool WasCancelled
-        {
-            get { return _wasCancelled; }
-        }
+        public bool WasCancelled => _wasCancelled;
 
         public void Cancel()
         {
@@ -162,25 +153,14 @@ namespace StoryTeller.Engine
             _request.Cancel();
             _wasCancelled = true;
             _thread.Abort();
+            _reset.Set();
+
         }
 
         public void Dispose()
         {
-            if (_context != null) _context.SafeDispose();
-            if (_execution != null) _execution.SafeDispose();
-        }
-    }
-
-    [Serializable]
-    public class StorytellerExecutionException : Exception
-    {
-        public StorytellerExecutionException(Exception innerException)
-            : base("A catastropic exception was thrown during execution and the engine is in an invalid state", innerException)
-        {
-        }
-
-        protected StorytellerExecutionException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
+            _context?.SafeDispose();
+            _execution?.SafeDispose();
         }
     }
 }

@@ -107,6 +107,7 @@
     <Compile Include="Engine\SpecExpiration.cs" />
     <Compile Include="Engine\SpecificationEngine.cs" />
     <Compile Include="Engine\SpecRunner.cs" />
+    <Compile Include="Engine\StorytellerExecutionException.cs" />
     <Compile Include="Engine\Timings.cs" />
     <Compile Include="Engine\UserInterface\InstrumentedExecutor.cs" />
     <Compile Include="Engine\UserInterface\IUserInterfaceObserver.cs" />

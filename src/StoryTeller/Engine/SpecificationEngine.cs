@@ -23,7 +23,7 @@ namespace StoryTeller.Engine
         private ConsumingQueue _reader;
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
-        private Task _warmup;
+        private readonly Task _warmup;
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
         {
@@ -63,8 +63,8 @@ namespace StoryTeller.Engine
         {
             _system.Dispose();
             _executionQueue.Dispose();
-            if (_planning != null) _planning.Dispose();
-            if (_reader != null) _reader.Dispose();
+            _planning?.Dispose();
+            _reader?.Dispose();
             _runner.Cancel();
         }
 
