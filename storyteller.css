@@ -2,9 +2,6 @@
 	margin-bottom: 0px !important;
 }
 
-div.active{
-  border: none !important;
-}
 
 div.suite-body {
 	margin-left: 40px;
@@ -88,9 +85,27 @@ div.progress{
   margin-bottom: 5px !important;
 }
 
-div.active {
-	border: thin solid #337ab7 !important;
+div.sentence + div.panel, div.comment + div.panel, div.sentence + table, div.comment + table{
+    margin-top: 20px;
 }
+
+
+
+div.sentence {
+   padding: 5px;
+}
+
+div.contextual-control{
+    max-height: 75%;
+    overflow-y: auto
+}
+
+.table-column-context button{
+    width: 100%;
+    text-align: left
+    
+}
+
 
 tr.active {
   border: thin solid #337ab7 !important;
@@ -198,4 +213,28 @@ pre.text-display{
 
 .debug-output{
   overflow-x:scroll;
+}
+
+div.sentence.fact{
+    margin: 3px;
+}
+
+div.sentence.fact.bg-success{
+    border: thin solid green;
+}
+
+div.sentence.fact.bg-danger{
+    border: thin solid red;
+}
+
+div.sentence.fact.bg-warning{
+    border: thin solid black;
+}
+
+div.sentence.fact.bg-warning > pre{
+    margin-top: 5px;
+}
+
+div.sentence.fact.bg-warning > pre > i.fa{
+    display: none;
 }
