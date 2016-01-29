@@ -1,50 +1,83 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Security.AccessControl;
 using FubuMVC.Core;
 using StoryTeller;
 using StoryTeller.Engine;
 using StoryTeller.Engine.UserInterface;
+using StoryTeller.Grammars;
 
 namespace ST.Client.Stepthrough
 {
+    /*
+    What if we put breakpoints directly on the ILineExecution?
+
+
+
+    */
+
+
+    public class BreakpointCollection
+    {
+        private readonly IList<Breakpoint> _breakpoints = new List<Breakpoint>();
+
+        public void Set(Breakpoint breakpoint)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Breakpoint breakpoint)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearAll()
+        {
+            _breakpoints.Clear();
+        }
+
+        public bool Matches(ILineExecution line)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class StepthroughExecutor : IStepExecutor
     {
         private readonly IUserInterfaceObserver _observer;
+        private readonly IList<ILineExecution> _lines = new List<ILineExecution>();
+        private readonly SpecContext _context;
 
-        public StepthroughExecutor(ISpecContext current, IUserInterfaceObserver observer)
+
+
+
+        public StepthroughExecutor(SpecContext context, SpecificationPlan plan, IUserInterfaceObserver observer)
         {
             _observer = observer;
-            CurrentContext = current;
+            _context = context;
+            plan.AcceptVisitor(this);
         }
 
+        ISpecContext IStepExecutor.CurrentContext => _context;
 
-
-        public void ClearAllBreakpoints()
+        void IStepExecutor.Line(ILineExecution execution)
         {
-            throw new NotImplementedException();
+            _lines.Add(execution);
         }
 
-        public void RemoveBreakpoint(Breakpoint breakpoint)
+        void IStepExecutor.Composite(ICompositeExecution execution)
         {
-            throw new System.NotImplementedException();
+            foreach (var executionStep in execution.Steps)
+            {
+                executionStep.AcceptVisitor(this);
+            }
         }
 
-        public void SetBreakpoint(Breakpoint breakpoint)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void Composite(ICompositeExecution execution)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Line(ILineExecution execution)
-        {
-            throw new NotImplementedException();
-        }
 
-        public ISpecContext CurrentContext { get; }
+
     }
 
     public class NextStep : ClientMessage
