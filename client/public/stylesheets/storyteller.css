@@ -238,3 +238,17 @@ div.sentence.fact.bg-warning > pre{
 div.sentence.fact.bg-warning > pre > i.fa{
     display: none;
 }
+
+.outline-container {
+    padding-left: 30px;
+}
+
+.outline-container-collapse {
+    color: #333;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.spec-outline {
+  margin-top: 20px;
+}
