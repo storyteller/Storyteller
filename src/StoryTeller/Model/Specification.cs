@@ -56,6 +56,39 @@ namespace StoryTeller.Model
             set { _fileName = value.ToFullPath(); }
         }
 
+        private readonly IList<Breakpoint> _breakpoints = new List<Breakpoint>(); 
+
+        [JsonProperty("breakpoints")]
+        public Breakpoint[] Breakpoints
+        {
+            get { return _breakpoints.ToArray(); }
+            set
+            {
+                _breakpoints.Clear();
+                _breakpoints.AddRange(value);
+            }
+        }
+
+        public void SetBreakpoint(Breakpoint breakpoint)
+        {
+            _breakpoints.Fill(breakpoint);
+        }
+
+        public void RemoveBreakpoint(Breakpoint breakpoint)
+        {
+            _breakpoints.Remove(breakpoint);
+        }
+
+        public bool MatchesBreakpoint(string id, object position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearBreakpoints()
+        {
+            _breakpoints.Clear();
+        }
+
         public void WritePath(string parentPath)
         {
             path = Suite.JoinPath(parentPath, name);

@@ -108,10 +108,7 @@ namespace StoryTeller
             return _execution.GetService<T>();
         }
 
-        public State State
-        {
-            get { return _state; }
-        }
+        public State State => _state;
 
 
         public void LogResult<T>(T result) where T : IResultMessage
@@ -119,7 +116,9 @@ namespace StoryTeller
             if (_latched) return;
 
             if (result.id.IsEmpty())
-                throw new ArgumentOutOfRangeException("result", "The id of the result cannot be empty");
+            {
+                throw new ArgumentOutOfRangeException(nameof(result), "The id of the result cannot be empty");
+            }
 
             result.spec = Specification.id;
 
