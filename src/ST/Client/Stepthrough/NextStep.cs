@@ -8,11 +8,13 @@ namespace ST.Client.Stepthrough
     {
         public string id;
         public object position;
+        public string spec;
 
-        public NextStep(ILineExecution next) : base("next-step")
+        public NextStep(string spec, ILineExecution next) : base("next-step")
         {
             id = next.Id;
             position = next.Position;
+            this.spec = spec;
         }
     }
 

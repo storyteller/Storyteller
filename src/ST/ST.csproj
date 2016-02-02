@@ -83,7 +83,7 @@
     <Compile Include="Client\StartWatchingFilesActivator.cs" />
     <Compile Include="Client\Stepthrough\ExecutionStepGatherer.cs" />
     <Compile Include="Client\Stepthrough\NextStep.cs" />
-    <Compile Include="Client\Stepthrough\StartWalkthrough.cs" />
+    <Compile Include="Client\Stepthrough\StartStepthrough.cs" />
     <Compile Include="Client\Stepthrough\StepthroughExecutor.cs" />
     <Compile Include="Client\StorytellerContext.cs" />
     <Compile Include="Client\WebApplicationRegistry.cs" />

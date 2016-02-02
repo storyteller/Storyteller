@@ -158,5 +158,10 @@ namespace StoryTeller.Samples.Fixtures
         }
 
         // END:  FactAssertions
+
+        public void JustGo()
+        {
+            
+        }
     }
 }

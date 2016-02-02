@@ -105,10 +105,7 @@ namespace StoryTeller.Testing
             }
         }
 
-        protected SpecContext theContext
-        {
-            get { return _context; }
-        }
+        protected SpecContext theContext => _context;
 
         protected T ModelFor<T>(string fixtureName, string grammarName) where T : GrammarModel
         {
@@ -133,7 +130,17 @@ namespace StoryTeller.Testing
         {
             expect = context =>
             {
-                var actual = context.Results.Select(x => x.id).Distinct().OrderBy(x => x).ToArray();
+                var actual = context.Results.Where(x =>
+                {
+                    if (x is SetVerificationResult) return true;
+
+                    var result = x.As<StepResult>();
+                    if (result.position == null) return true;
+
+                    if (result.position.Equals(Stage.setup.ToString()) || result.position.Equals(Stage.teardown.ToString())) return false;
+
+                    return true;
+                }).Select(x => x.id).Distinct().OrderBy(x => x).ToArray();
                 var expected = idList.OrderBy(x => x).ToArray();
 
                 if (!actual.SequenceEqual(expected))
@@ -147,10 +154,7 @@ namespace StoryTeller.Testing
             };
         }
 
-        protected State SpecContextState
-        {
-            get { return _context.State; }
-        }
+        protected State SpecContextState => _context.State;
 
         protected ResultExpression Step(string id)
         {

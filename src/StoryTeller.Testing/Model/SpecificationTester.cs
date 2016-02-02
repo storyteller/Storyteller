@@ -244,8 +244,8 @@ namespace StoryTeller.Testing.Model
             specification.SetBreakpoint(breakpoint1);
             specification.SetBreakpoint(breakpoint2);
 
-            //specification.MatchesBreakpoint("3", null).ShouldBeFalse();
-            //specification.MatchesBreakpoint("2", 1).ShouldBeFalse();
+            specification.MatchesBreakpoint("3", null).ShouldBeFalse();
+            specification.MatchesBreakpoint("2", 1).ShouldBeFalse();
             specification.MatchesBreakpoint("2", 0).ShouldBeTrue();
             specification.MatchesBreakpoint("1", null).ShouldBeTrue();
 

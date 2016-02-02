@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
 using StoryTeller.Conversion;
@@ -32,15 +30,16 @@ namespace StoryTeller.Samples
             var handling = CellHandling.Basic();
 
             // Adding a system wide list. 
-            handling.AddSystemLevelList("positions", new[] { "LB", "OL", "DL", "WR", "RB" });
+            handling.AddSystemLevelList("positions", new[] {"LB", "OL", "DL", "WR", "RB"});
 
             // This is where you can register a custom runtime conversion
             handling.Conversions.RegisterRuntimeConversion<PlayerConverter>();
 
             return handling;
         }
+
         // ENDSAMPLE
-        // ENDSAMPLE
+
 
         public Task Warmup()
         {
@@ -65,7 +64,7 @@ namespace StoryTeller.Samples
         {
             new Player {FirstName = "Justin", LastName = "Houston", Position = "LB"},
             new Player {FirstName = "Jeremy", LastName = "Maclin", Position = "WR"},
-            new Player {FirstName = "Jamaal", LastName = "Charles", Position = "RB"},
+            new Player {FirstName = "Jamaal", LastName = "Charles", Position = "RB"}
         };
 
         public object Convert(string raw, ISpecContext context)
@@ -90,5 +89,6 @@ namespace StoryTeller.Samples
             return "{0} {1}".ToFormat(FirstName, LastName);
         }
     }
+
     // ENDSAMPLE
 }

@@ -2,6 +2,7 @@
 using FubuCore;
 using StoryTeller.Engine;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace StoryTeller.Grammars
 {
@@ -80,6 +81,7 @@ namespace StoryTeller.Grammars
             try
             {
                 _action(context);
+                context.LogResult(new StepResult(Id, ResultStatus.ok) {position = Position});
             }
             catch (Exception ex)
             {

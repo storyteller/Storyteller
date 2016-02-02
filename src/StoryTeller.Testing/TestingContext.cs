@@ -12,30 +12,18 @@ namespace StoryTeller.Testing
         static TestingContext()
         {
             var fixture = new StoryTeller.Samples.Fixtures.SentenceFixture();
-            _library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+            Library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
         }
 
-        private static readonly FixtureLibrary _library;
-
-        private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() =>
-        {
-            return HierarchyLoader.ReadHierarchy(SpecFolder);
-
-        });
+        private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() => HierarchyLoader.ReadHierarchy(SpecFolder));
 
         public static string SpecFolder = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
             .AppendPath("Storyteller.Samples", "Specs");
 
 
-        public static FixtureLibrary Library
-        {
-            get { return _library; }
-        }
+        public static FixtureLibrary Library { get; }
 
-        public static Suite Hierarchy
-        {
-            get { return _hierarchy.Value; }
-        }
+        public static Suite Hierarchy => _hierarchy.Value;
 
         public static Specification FindSpecification(string id)
         {

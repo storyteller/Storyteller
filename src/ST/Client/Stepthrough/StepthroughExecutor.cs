@@ -41,6 +41,8 @@ namespace ST.Client.Stepthrough
             _request = request;
             _observer = observer;
             var gatherer = new ExecutionStepGatherer(_context);
+            _request.Plan.AcceptVisitor(gatherer);
+
             _steps = gatherer.Lines;
 
 
@@ -53,7 +55,11 @@ namespace ST.Client.Stepthrough
                 _context.LogException(_request.Id, e, "BeforeExecution");
             }
 
+            _observer.SendProgress(new SpecProgress(_request.Id, _context.Counts, 0, _steps.Count));
+            sendNextStepMessage();
         }
+
+        public SpecContext Context => _context;
 
 
         public void WaitUntilFinished()
@@ -66,9 +72,9 @@ namespace ST.Client.Stepthrough
             _position++;
         }
 
-        private ILineExecution current => _position == -1 || _position == _steps.Count ? null : _steps[_position];
+        public ILineExecution Current => _position == -1 || _position == _steps.Count ? null : _steps[_position];
 
-        private ILineExecution next => _position >= _steps.Count ? null : _steps[_position + 1];
+        public ILineExecution Next => (_position + 1) >= _steps.Count ? null : _steps[_position + 1];
 
         private void finish()
         {
@@ -91,26 +97,26 @@ namespace ST.Client.Stepthrough
         public void RunNext()
         {
             moveNext();
-            if (current == null)
+            if (Current == null)
             {
                 finish();
             }
             else
             {
                 executeCurrentStep();
-                _observer.SendToClient(new NextStep(next));
+                sendNextStepMessage();
             }
         }
 
         private void executeCurrentStep()
         {
-            current.Execute(_context);
+            Current.Execute(_context);
             _observer.SendProgress(new SpecProgress(_request.Id, _context.Counts, _position + 1, _steps.Count));
         }
 
         public void RunToEnd()
         {
-            while (next != null)
+            while (Next != null)
             {
                 moveNext();
                 executeCurrentStep();
@@ -121,22 +127,25 @@ namespace ST.Client.Stepthrough
 
         public void RunToEndpoint()
         {
-            while (next != null && !_request.Specification.MatchesBreakpoint(next.Id, next.Position))
+            while (Next != null && !_request.Specification.MatchesBreakpoint(Next.Id, Next.Position))
             {
                 moveNext();
                 executeCurrentStep();
             }
 
-            if (next == null)
+            if (Next == null)
             {
                 finish();
             }
             else
             {
-                _observer.SendToClient(new NextStep(next));
+                sendNextStepMessage();
             }
         }
 
-
+        private void sendNextStepMessage()
+        {
+            _observer.SendToClient(new NextStep(_request.Id, Next));
+        }
     }
 }
