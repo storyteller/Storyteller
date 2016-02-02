@@ -185,5 +185,70 @@ namespace StoryTeller.Testing.Model
             s5.id.ShouldNotBe(s6.id);
             s4.id.ShouldNotBe(s6.id);
         }
+
+        [Test]
+        public void clear_breakpoints()
+        {
+            var specification = new Specification();
+            var breakpoint1 = new Breakpoint("1", null);
+            var breakpoint2 = new Breakpoint("2", null);
+            specification.Breakpoints = new[] {breakpoint1, breakpoint2,};
+
+            specification.ClearBreakpoints();
+
+            specification.Breakpoints.Any().ShouldBeFalse();
+        }
+
+        [Test]
+        public void set_breakpoint()
+        {
+            var breakpoint1 = new Breakpoint("1", null);
+            var breakpoint2 = new Breakpoint("2", null);
+
+            var specification = new Specification();
+
+            specification.SetBreakpoint(breakpoint1);
+            specification.SetBreakpoint(breakpoint2);
+
+            specification.SetBreakpoint(breakpoint1);
+            specification.SetBreakpoint(breakpoint2);
+
+            specification.Breakpoints.ShouldHaveTheSameElementsAs(breakpoint1, breakpoint2);
+        }
+
+        [Test]
+        public void remove_breakpoint()
+        {
+            var breakpoint1 = new Breakpoint("1", null);
+            var breakpoint2 = new Breakpoint("2", null);
+
+            var specification = new Specification();
+
+            specification.SetBreakpoint(breakpoint1);
+            specification.SetBreakpoint(breakpoint2);
+
+            specification.RemoveBreakpoint(breakpoint1);
+
+            specification.Breakpoints.Single()
+                .ShouldBe(breakpoint2);
+        }
+
+        [Test]
+        public void matches_breakpoint()
+        {
+            var breakpoint1 = new Breakpoint("1", null);
+            var breakpoint2 = new Breakpoint("2", 0);
+
+            var specification = new Specification();
+
+            specification.SetBreakpoint(breakpoint1);
+            specification.SetBreakpoint(breakpoint2);
+
+            //specification.MatchesBreakpoint("3", null).ShouldBeFalse();
+            //specification.MatchesBreakpoint("2", 1).ShouldBeFalse();
+            specification.MatchesBreakpoint("2", 0).ShouldBeTrue();
+            specification.MatchesBreakpoint("1", null).ShouldBeTrue();
+
+        }
     }
 }

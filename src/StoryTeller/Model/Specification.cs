@@ -81,7 +81,7 @@ namespace StoryTeller.Model
 
         public bool MatchesBreakpoint(string id, object position)
         {
-            throw new NotImplementedException();
+            return _breakpoints.Any(x => x.Matches(id, position));
         }
 
         public void ClearBreakpoints()

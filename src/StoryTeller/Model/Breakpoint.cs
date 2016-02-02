@@ -5,6 +5,16 @@ namespace StoryTeller.Model
         public string id;
         public object position;
 
+        public Breakpoint()
+        {
+        }
+
+        public Breakpoint(string id, object position)
+        {
+            this.id = id;
+            this.position = position;
+        }
+
         public bool Matches(ILineExecution execution)
         {
             return execution.Position == position && execution.Id == id;
@@ -34,6 +44,15 @@ namespace StoryTeller.Model
         public override string ToString()
         {
             return $"Breakpoint, Id: {id}, Position: {position}";
+        }
+
+        public bool Matches(string id, object position)
+        {
+            if (this.id != id) return false;
+
+            if (this.position == null) return position == null;
+
+            return this.position.Equals(position);
         }
     }
 }
