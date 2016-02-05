@@ -1,1 +1,3 @@
-npm run build
+echo You may have to install mocha, webpack, and karma globally for this build to work
+
+npm install && npm run build-client && paket restore && "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe" src/Storyteller.sln   /property:Configuration=debug /v:m /t:rebuild /nr:False /maxcpucount:2 && packages\Fixie\lib\net45\Fixie.Console.exe src/Storyteller.Testing/bin/debug/Storyteller.Testing.dll --NUnitXml results/TestResult.xml

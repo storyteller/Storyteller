@@ -293,17 +293,19 @@ describe('Sentence', function(){
 
 			var preview = sentence.buildResults(step, loader);
 
-			expect(preview[0]).to.deep.equal({
+			expect(preview).to.deep.equal({
 				type: 'line',
 				props: {
 					status: 'error',
 					components: [
+                        loader.error(),
 						loader.span('Add '),
 						loader.cell({cell: {key: 'x', editor: 'text'}, value: 1}),
 						loader.span(' to '),
 						loader.cell({cell: {key: 'y', editor: 'text'}, value: 2}),
 						loader.span(' should be '),
-						loader.cell({cell: {key: 'sum', editor: 'text'}, value: 3})
+						loader.cell({cell: {key: 'sum', editor: 'text'}, value: 3}),
+                        {"type":"errorBox","props":{"error":"bad!"}}
 					]
 				}
 
