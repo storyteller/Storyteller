@@ -12,7 +12,7 @@ Getting started with the code
 
 UPDATE: Storyteller seems to work just fine with io.js as well, but please tell us if you encounter any issues developing with io.js instead of node.js.
 
-The Storyteller code consists of two parts, a web based client written in Javascript and the actual specification engine and a self-contained web host written in C#. In order to work with the Storyteller code, you'll need to have both an installation of [Node.js v12](https://nodejs.org) with [npm](https://www.npmjs.com) and .Net 4.5 on your box. To start working with the code, first run the build with the command `npm run build` or if you're on Windows, use the `build.cmd` script. Running this command will:
+The Storyteller code consists of two parts, a web based client written in Javascript and the actual specification engine and a self-contained web host written in C#. In order to work with the Storyteller code, you'll need to have both an installation of [Node.js v12](https://nodejs.org) with [npm](https://www.npmjs.com) and .Net 4.5 on your box. To start working with the code, first run the build script with `rake`, or if you'd rather not use a Ruby-based build, the `build.cmd` script will set up both the Node.js and .Net dependencies and run most of the unit tests. Running these commands will:
 
 1. Install all the necessary npm packages for the client side
 2. Build the bundled javascript products that need to be embedded into the .Net code
@@ -51,12 +51,10 @@ Working on the .Net Code
 ===============================
 The source code is in the /src folder. For the moment, we're using Visual Studio.Net and the solution file is at src/Storyteller.sln. As DNX matures we will probably move to eliminate the .sln and .csproj files in the code repository. You will need to run the command line build at least once before opening the C# code in Visual Studio.
 
-From the command line, we're just using an npm script `npm run build-server` to build and test the .Net code. The relevant commands are:
-
-* `npm run build-server`- restore nuget packages, build, and test
-* `paket install` - restores nuget packages
-* `node build/buildServer` - compiles and runs the .Net tests if you want to bypass the paket install
+From the command line, you can run the `rake test` command to run all the .Net unit tests.
 
 
 The .Net code uses [Paket](http://fsprojects.github.io/Paket/) for Nuget dependency management and [Fixie](http://fixie.github.io) for unit testing. At this time we're emulating NUnit behavior, but this is expected to change to Fixie idioms at a later time. 
+
+UPDATE: Storyteller will transition to xUnit.Net for unit testing at some point prior to starting work on CoreCLR & DNX support.
 
