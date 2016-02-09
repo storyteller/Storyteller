@@ -24,7 +24,7 @@ class Silent{
 
 	buildResults(step, loader){
 		var result = step.getResult(this.position);
-		if (result){
+		if (result && result.status != 'ok'){
 			return loader.errorBox({title: 'Silent Action', error: result.error});
 		}
 		else {
