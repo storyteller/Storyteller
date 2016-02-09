@@ -100,7 +100,7 @@ class Section{
 		}
 
 
-		if (this.results.setup){
+		if (this.results.setup && this.results.setup.status != 'ok'){
 			elements.push(loader.errorBox({title: 'SetUp Error', error: this.results.setup.error}));
 		}
 
@@ -115,7 +115,7 @@ class Section{
 			}
 		});
 
-		if (this.results.teardown){
+		if (this.results.teardown && this.results.teardown.status != 'ok'){
 			elements.push(loader.errorBox({title: 'TearDown Error', error: this.results.teardown.error}));
 		}
 
