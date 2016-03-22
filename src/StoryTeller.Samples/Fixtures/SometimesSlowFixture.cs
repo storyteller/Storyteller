@@ -12,7 +12,13 @@ namespace StoryTeller.Samples.Fixtures
             {
                 Thread.Sleep(1.Minutes());
             }
-        } 
+        }
+
+
+        public void ReadText([Editor("big-text")]string text)
+        {
+            
+        }
     }
     // ENDSAMPLE
 }

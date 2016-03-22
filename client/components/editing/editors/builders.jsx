@@ -79,7 +79,11 @@ builders.add('select', function(arg){
 
 builders.add('bigtext', function(arg){
 	return ( <BigText arg={arg} /> );
-})
+});
+
+builders.add('big-text', function(arg){
+	return ( <BigText arg={arg} /> );
+});
 
 
 
