@@ -77,7 +77,7 @@ builders.add('select', function(arg){
 	return ( <SelectEditor arg={arg} /> );
 });
 
-builders.add('big-text', function(arg){
+builders.add('bigtext', function(arg){
 	return ( <BigText arg={arg} /> );
 })
 
