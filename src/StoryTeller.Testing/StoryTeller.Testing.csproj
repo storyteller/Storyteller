@@ -188,6 +188,7 @@
     <Compile Include="ST\SaveSpecBodyCommandTester.cs" />
     <Compile Include="ST\Stepthrough\StepthroughContext.cs" />
     <Compile Include="ST\Stepthrough\stepthrough_one_step_at_a_time_Tests.cs" />
+    <Compile Include="ST\Stepthrough\stepthrough_to_break_points_Tests.cs" />
     <Compile Include="TestingContext.cs" />
   </ItemGroup>
   <ItemGroup>

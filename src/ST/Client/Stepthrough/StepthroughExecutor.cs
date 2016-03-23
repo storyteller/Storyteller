@@ -125,14 +125,38 @@ namespace ST.Client.Stepthrough
             finish();
         }
 
-        public void RunToEndpoint()
+        public void RunToBreakpoint()
         {
-            while (Next != null && !_request.Specification.MatchesBreakpoint(Next.Id, Next.Position))
+            if (isAtBreakpoint())
+            {
+                moveNext();
+                executeCurrentStep();
+
+                if (!isAtBreakpoint())
+                {
+                    RunToBreakpoint();
+                }
+                else
+                {
+                    sendNextOrFinishedMessage();
+                }
+
+                
+
+                return;
+            }
+
+            while (Next != null && !isAtBreakpoint())
             {
                 moveNext();
                 executeCurrentStep();
             }
 
+            sendNextOrFinishedMessage();
+        }
+
+        private void sendNextOrFinishedMessage()
+        {
             if (Next == null)
             {
                 finish();
@@ -141,6 +165,12 @@ namespace ST.Client.Stepthrough
             {
                 sendNextStepMessage();
             }
+        }
+
+        private bool isAtBreakpoint()
+        {
+            var matchesBreakpoint = _request.Specification.MatchesBreakpoint(Next.Id, Next.Position);
+            return matchesBreakpoint;
         }
 
         private void sendNextStepMessage()
