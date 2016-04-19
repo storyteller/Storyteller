@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
+using System.Threading;
+using FubuCore;
 using StoryTeller.Grammars;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -51,6 +54,12 @@ namespace StoryTeller.Engine
 
         public void CreatePlan(FixtureLibrary library)
         {
+            var culture = Project.CurrentProject?.Culture;
+            if (culture.IsNotEmpty())
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+            }
+
             performAction(() =>
             {
                 Plan = Specification.CreatePlan(library);

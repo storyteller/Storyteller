@@ -67,22 +67,13 @@ namespace ST.Client
             set { _remoteSetup.Setup.PrivateBinPath = value; }
         }
 
-        public MessagingHub Messaging
-        {
-            get { return _messaging; }
-        }
+        public MessagingHub Messaging => _messaging;
 
         public void Dispose()
         {
-            if (_watcher != null)
-            {
-                _watcher.Dispose();
-            }
+            _watcher?.Dispose();
 
-            if (_proxy != null)
-            {
-                _proxy.Dispose();
-            }
+            _proxy?.Dispose();
 
             if (_domain != null)
             {

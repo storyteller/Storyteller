@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
 using StoryTeller.Model;
@@ -129,6 +131,12 @@ namespace StoryTeller.Engine
         {
             _planning = new ConsumingQueue(request =>
             {
+                var culture = Project.CurrentProject?.Culture;
+                if (culture.IsNotEmpty())
+                {
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+                }
+
                 request.CreatePlan(library);
                 _executionQueue.Enqueue(request);
             });

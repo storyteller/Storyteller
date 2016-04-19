@@ -45,10 +45,7 @@ namespace StoryTeller.Conversion
             });
         }
 
-        public IEnumerable<IRuntimeConverter> RuntimeConvertors
-        {
-            get { return _runtimeConvertors; }
-        }
+        public IEnumerable<IRuntimeConverter> RuntimeConvertors => _runtimeConvertors;
 
         public void RegisterRuntimeConversion<T>() where T : IRuntimeConverter, new()
         {

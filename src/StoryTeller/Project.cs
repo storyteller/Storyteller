@@ -32,6 +32,7 @@ namespace StoryTeller
         public string Profile { get; set; }
         public static Project CurrentProject { get; set; }
         public int MaxRetries { get; set; }
+        public string Culture { get; set; }
 
         public StopConditions StopConditions = new StopConditions();
 

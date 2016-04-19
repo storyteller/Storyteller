@@ -43,11 +43,17 @@ namespace ST.CommandLine
         [Description("Sets a minimum number of retry attempts for this execution")]
         public int RetriesFlag { get; set; }
 
+        [Description("Force Storyteller to use this culture in all value conversions")]
+        public string CultureFlag { get; set; }
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
 
             var controller = new RemoteController(path);
+            controller.Project.Culture = CultureFlag;
+
+
             if (BuildFlag.IsNotEmpty())
             {
                 controller.UseBuildProfile(BuildFlag);
@@ -62,6 +68,8 @@ namespace ST.CommandLine
             {
                 controller.Project.TracingStyle = "TeamCity";
             }
+
+                
 
             controller.Project.MaxRetries = RetriesFlag;
             controller.Project.Profile = ProfileFlag;
