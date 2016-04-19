@@ -7,10 +7,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
     {
         private readonly IList<object> _received = new List<object>();
 
-        public IEnumerable<object> Received
-        {
-            get { return _received; }
-        }
+        public IEnumerable<object> Received => _received;
 
         public void Clear()
         {

@@ -95,7 +95,7 @@ class Section{
 	buildResults(loader){
 		var elements = [];
 
-		if (this.results.before){
+		if (this.results.before && this.results.before.status != 'ok'){
 			elements.push(loader.errorBox({title: 'Error before the Section', error: this.results.before.error}));
 		}
 

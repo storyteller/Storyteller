@@ -36,15 +36,9 @@ namespace ST.Client
 
         }
 
-        public int Port
-        {
-            get { return _port; }
-        }
+        public int Port => _port;
 
-        public string WebSocketsAddress
-        {
-            get { return _webSocketsAddress; }
-        }
+        public string WebSocketsAddress => _webSocketsAddress;
 
         public void Start()
         {
@@ -94,8 +88,7 @@ namespace ST.Client
         {
             _sockets.Each(x => x.Close());
             _sockets.Clear();
-            if (_server != null) _server.Dispose();
-
+            _server?.Dispose();
         }
 
         public void Receive(PassthroughMessage message)
