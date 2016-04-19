@@ -87,6 +87,7 @@ namespace StoryTeller.Engine
             OutstandingRequests().Each(x => x.Cancel());
 
             _outstanding.Clear();
+
             SendQueueState();
         }
 

@@ -131,6 +131,16 @@ namespace StoryTeller
         {
             Reporting.ReporterFor<ExceptionReport>().Log(ex);
 
+            if (ex.InnerException is StorytellerCriticalException)
+            {
+                ex = ex.InnerException;
+            }
+
+            if (ex.InnerException is StorytellerCatastrophicException)
+            {
+                ex = ex.InnerException;
+            }
+
             if (ex is StorytellerCriticalException)
             {
                 HadCriticalException = true;

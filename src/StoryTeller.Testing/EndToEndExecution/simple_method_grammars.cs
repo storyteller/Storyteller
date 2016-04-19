@@ -5,6 +5,28 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.EndToEndExecution
 {
+    public class stops_on_critical_exception : SpecRunningContext
+    {
+        [Test]
+        public void stop_on_critical_exception_thrown_by_grammar()
+        {
+            execute(@"
+Name: Fail Fast
+=> Arithmetic
+* StartWith#1: starting=2
+* MultiplyBy#2: multiplier=3
+* ThrowCritical#3
+* Add#4: operand=5
+* TheValueShouldBe#5: expected=11
+* TheValueShouldBe#6: expected=12
+* Throw#7
+");
+
+            TheStepsThatExecutedWere("1", "2", "3");
+            CountsShouldBe(0, 0, 1, 0);
+        }
+    }
+
     public class simple_method_grammars : SpecRunningContext
     {
         [Test]
@@ -54,6 +76,12 @@ Name: Doing some addition
     public class ArithmeticFixture : Fixture
     {
         private double _number;
+
+
+        public void ThrowCritical()
+        {
+            throw new StorytellerCriticalException("I'm done.");
+        }
 
         public void StartWith(double starting)
         {
