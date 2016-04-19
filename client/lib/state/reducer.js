@@ -31,6 +31,23 @@ function updateSpec(state, id, func){
     
 }
 
+function expandAll(state){
+    var treeState = state.get('tree-state').toJS();
+    var suite = state.get('hierarchy');
+    
+    suite.allSuites().forEach(s => treeState[s.path] = true);
+    
+    return state.set('tree-state', Immutable.Map(treeState));
+}
+
+function collapseAll(state){
+    var treeState = {};
+    var suite = state.get('hierarchy');
+    
+    suite.allSuites().forEach(s => treeState[s.path] = false);
+    
+    return state.set('tree-state', Immutable.Map(treeState));
+}
 
 function replaceRunning(state, running){
     
@@ -72,7 +89,16 @@ function Reducer(state = initialState, action){
       
     case 'initial-model':
         var one = SystemRecycled(state, action.recycled);
-        return HierarchyLoaded(one, action.hierarchy);
+        var two = HierarchyLoaded(one, action.hierarchy);
+        
+        var suite = two.get('hierarchy');
+        if (suite.allSpecs().length > 50){
+            return collapseAll(two);
+        }
+        else {
+            return expandAll(two);
+        }
+
       
     case 'system-recycled':
       return SystemRecycled(state, action);
@@ -103,20 +129,10 @@ function Reducer(state = initialState, action){
             .set('hierarchy', new Suite(action.hierarchy, null));
       
     case 'expand-all':
-        var treeState = state.get('tree-state').toJS();
-        var suite = state.get('hierarchy');
-        
-        suite.allSuites().forEach(s => treeState[s.path] = true);
-        
-        return state.set('tree-state', Immutable.Map(treeState));
+        return expandAll(state);
         
     case 'collapse-all':
-        var treeState = {};
-        var suite = state.get('hierarchy');
-        
-        suite.allSuites().forEach(s => treeState[s.path] = false);
-        
-        return state.set('tree-state', Immutable.Map(treeState));
+        return collapseAll(state);
      
     case 'toggle-tree-state':
         if (state.get('tree-state').has(action.path)){
