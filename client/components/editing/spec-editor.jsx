@@ -36,7 +36,7 @@ function addDispatch(dispatch){
 function ContextualPane(props){
     var contextualControl = null;
 
-    if (props.activeContainer){
+    if (props.activeContainer && props.activeContainer.contextualControl){
         contextualControl = props.activeContainer.contextualControl(loader);
 
         if (contextualControl){
