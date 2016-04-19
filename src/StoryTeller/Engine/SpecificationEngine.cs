@@ -143,7 +143,11 @@ namespace StoryTeller.Engine
 
             _reader = new ConsumingQueue(request =>
             {
-                request.ReadXml();
+                if (request.Specification.SpecType == SpecType.header)
+                {
+                    request.ReadXml();
+                }
+
                 _planning.Enqueue(request);
             });
 

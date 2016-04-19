@@ -49,7 +49,25 @@ namespace StoryTeller.Engine
 
         public void ReadXml()
         {
-            performAction(() => Specification.ReadBody());
+            performAction(() =>
+            {
+                try
+                {
+                    Specification.ReadBody();
+                }
+                catch (ArgumentNullException e)
+                {
+                    if (e.Message.Contains("System.Xml.XmlTextReaderImpl"))
+                    {
+                        // try again
+                        Specification.ReadBody();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            });
         }
 
         public void CreatePlan(FixtureLibrary library)
