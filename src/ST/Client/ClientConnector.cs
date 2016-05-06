@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fleck;
+using FubuCore;
 using FubuCore.Logging;
 using FubuMVC.Core.Runtime;
 using StoryTeller.Commands;
@@ -21,6 +22,7 @@ namespace ST.Client
         private readonly ILogger _logger;
         private readonly IRemoteController _controller;
         private readonly IEnumerable<ICommand> _commands;
+        private string _host;
         private int _port;
         private readonly IList<IWebSocketConnection> _sockets = new List<IWebSocketConnection>();
         private string _webSocketsAddress;
@@ -31,9 +33,8 @@ namespace ST.Client
             _logger = logger;
             _controller = controller;
             _commands = commands;
+            _host = controller.WebSocketAddress.IsNotEmpty() ? controller.WebSocketAddress : "127.0.0.1";
             _port = PortFinder.FindPort(8200);
-
-
         }
 
         public int Port => _port;
@@ -57,13 +58,10 @@ namespace ST.Client
             var increment = new Random(5).Next(1, 50);
             _port = PortFinder.FindPort(_port + increment);
 
-            // TODO -- will only work locally. What do we do otherwise?
-            _webSocketsAddress = "ws://127.0.0.1:" + _port;
+            _webSocketsAddress = "ws://" + _host + ":" + _port;
 
             try
             {
-                
-
                 _server = new WebSocketServer(_webSocketsAddress);
                 _server.Start(socket =>
                 {

@@ -46,6 +46,9 @@ namespace ST.CommandLine
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
 
+        [Description("Optional. Explicitly specify web socket address to use when starting server. Defaults to 127.0.0.1")]
+        public string WebSocketAddressFlag { get; set; }
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
@@ -69,7 +72,10 @@ namespace ST.CommandLine
                 controller.Project.TracingStyle = "TeamCity";
             }
 
-                
+            if (WebSocketAddressFlag.IsNotEmpty())
+            {
+                controller.WebSocketAddress = WebSocketAddressFlag;
+            }
 
             controller.Project.MaxRetries = RetriesFlag;
             controller.Project.Profile = ProfileFlag;

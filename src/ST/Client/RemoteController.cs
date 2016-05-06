@@ -21,6 +21,7 @@ namespace ST.Client
         void SendMessage<T>(T message);
         RemoteController.ResponseExpression Send<T>(T message);
         QueueState QueueState();
+        string WebSocketAddress { get; set; }
     }
 
     public class RemoteController : IDisposable, IRemoteController
@@ -54,6 +55,8 @@ namespace ST.Client
         public Project Project => _project;
 
         public string Path => _path;
+
+        public string WebSocketAddress { get; set; }
 
         public string ConfigFile
         {
