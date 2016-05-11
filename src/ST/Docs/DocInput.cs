@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using FubuCore;
@@ -11,7 +12,7 @@ namespace ST.Docs
         public DocInput()
         {
             DirectoryFlag = "documentation";
-            CodeFlag = new string[]{"src"};
+            CodeFlag = new List<string>() {"src"};
         }
 
         [Description("The documentation directory. The default is 'documentation'")]
@@ -24,7 +25,7 @@ namespace ST.Docs
         public string ProjectFlag { get; set; }
 
         [Description("Override the directories where sample scanning should be enabled. Default is [src]")]
-        public string[] CodeFlag { get; set; }
+        public List<string> CodeFlag { get; set; }
 
 
 
