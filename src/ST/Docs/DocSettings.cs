@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using FubuCore;
 using ST.Docs.Html;
@@ -25,7 +26,7 @@ namespace ST.Docs
         public string Root { get; set; }
         public string WebsocketAddress { get; set; }
         public string Version { get; set; }
-        public string[] SampleDirectories { get; set; }
+        public List<string> SampleDirectories { get; set; }
         public string ProjectName { get; set; }
 
         public Type UrlResolverType()
