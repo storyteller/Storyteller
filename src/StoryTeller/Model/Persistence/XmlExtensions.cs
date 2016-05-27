@@ -23,7 +23,7 @@ namespace StoryTeller.Model.Persistence
 
         public static void WriteSection(this XmlElement parent, Section section)
         {
-            var sectionElement = parent.AddElement(section.Key);
+            var sectionElement = parent.AddElement(XmlConvert.EncodeName(section.Key));
             sectionElement.SetAttribute(XmlConstants.Id, section.id);
 
             if (section.ActiveCells.Count > 0)
@@ -49,8 +49,8 @@ namespace StoryTeller.Model.Persistence
 
         public static void WriteStep(this XmlElement parent, Step step)
         {
-            var element = parent.AddElement(step.Key);
-            step.Values.Each(pair => element.SetAttribute(pair.Key, pair.Value));
+            var element = parent.AddElement(XmlConvert.EncodeName(step.Key));
+            step.Values.Each(pair => element.SetAttribute(XmlConvert.EncodeName(pair.Key), pair.Value));
 
             step.Collections.Each(element.WriteSection);
         }

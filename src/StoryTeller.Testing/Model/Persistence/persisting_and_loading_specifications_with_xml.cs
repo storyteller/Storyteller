@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
 using Shouldly;
@@ -173,9 +172,45 @@ namespace StoryTeller.Testing.Model.Persistence
             persistedStep.Collections["Letters"].Children
                 .Single().ShouldBeOfType<Comment>()
                 .Text.ShouldBe("I'm in letters");
+        }
 
+        [Test]
+        public void section_name_is_correctly_encoded()
+        {
+            original.AddSection("Total in £");
 
+            var persistedSection = persisted
+                .Children.Single().ShouldBeOfType<Section>();
 
+            persistedSection.Key.ShouldBe("Total in £");
+        }
+
+        [Test]
+        public void step_name_is_correctly_encoded()
+        {
+            original.AddSection("MySection")
+                .Children.Add(new Step("Sub Total in £"));
+
+            var persistedStep = persisted
+                .Children.Single().ShouldBeOfType<Section>()
+                .Children.Single().ShouldBeOfType<Step>();
+
+            persistedStep.Key.ShouldBe("Sub Total in £");
+        }
+
+        [Test]
+        public void step_value_are_encoded()
+        {
+            var step = new Step("MyStep").With("Total £", "1").With("Total $", "2");
+
+            original.AddSection("MySection")
+                .Children.Add(step);
+
+            var persistedStep = persisted
+                .Children.Single().ShouldBeOfType<Section>()
+                .Children.Single().ShouldBeOfType<Step>();
+
+            persistedStep.AssertValuesMatch(step);
         }
     }
 }

@@ -103,7 +103,7 @@ namespace StoryTeller.Model.Persistence
 
         public static Section ReadSection(XmlElement element)
         {
-            var section = new Section(element.Name)
+            var section = new Section(XmlConvert.DecodeName(element.Name))
             {
                 id = element.GetAttribute(Id)
             };
@@ -139,13 +139,13 @@ namespace StoryTeller.Model.Persistence
 
         public static Step ReadStep(XmlElement child)
         {
-            var step = new Step(child.Name) {id = child.ReadId()};
+            var step = new Step(XmlConvert.DecodeName(child.Name)) {id = child.ReadId()};
 
             foreach (XmlAttribute att in child.Attributes)
             {
                 if (att.Name == "isStep") continue; // Old detritus
 
-                step.Values[att.Name] = att.Value;
+                step.Values[XmlConvert.DecodeName(att.Name)] = att.Value;
             }
 
             child.ForEachElement(collection =>
