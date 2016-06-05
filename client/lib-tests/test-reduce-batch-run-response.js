@@ -29,9 +29,10 @@ describe('Handling BatchRunResponse message in Reducer', () => {
     });
     
     it('builds all the spec records', () => {
-       expect(state.get('specs').length).to.equal(21); 
-       
        var specs = state.get('specs').toList().toArray();
+       expect(specs.length).to.equal(21); 
+       
+       
        specs.forEach(x => {
            expect(x instanceof SpecRecord).to.be.true;
        });

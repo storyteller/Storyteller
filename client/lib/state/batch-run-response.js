@@ -26,7 +26,6 @@ module.exports = function BatchRunResponse(state, action){
         
         specs[spec.id] = spec; 
     });
-    
-        
+
     return state.set('specs', new Immutable.Map(specs));
 }
