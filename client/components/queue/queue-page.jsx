@@ -29,14 +29,14 @@ var cancelAll = e => {
 	e.preventDefault();
 }
 
-function QueueItem(props){
-    var id = props.spec.id;
+function QueueItem({spec}){
+    var id = spec.id;
 
     var createMessage = function(){
         return {type: 'cancel-spec', id: id};
     }
 
-    var Icon = icons[props.spec.icon(null, [], {})];
+    var Icon = icons[spec.icon(null, [], {})];
     var icon = (<Icon />);
     
     var divId = 'queued-spec-' + id;
@@ -44,17 +44,17 @@ function QueueItem(props){
     return (
         <div id={divId}>
             {icon}
-            <SuitePath path={props.spec.path} linkToLeaf={true} />
+            <SuitePath path={spec.path} linkToLeaf={true} />
             <span> / </span>
-            <span className="queued-spec-name">{props.spec.title}</span>
+            <span className="queued-spec-name">{spec.title}</span>
             <CommandLink createMessage={createMessage} text="cancel" />
         </div>
     );
 }
 
 
-function QueuePage(props){
-    var queue = props.queued.map(id => props.specs.get(id));
+function QueuePage({queued, specs}){
+    var queue = queued.map(id => specs.get(id));
     
     var i = 0;
     var items = queue.map(spec => {

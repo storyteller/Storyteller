@@ -1,15 +1,13 @@
 var React = require("react");
 var builders = require("./../editors/builders");
 
-var FailureCell = React.createClass({
-	render: function(){
-		var builder = builders.get(this.props.cell.type);
-		var text = builder.display(this.props.cell, this.props.value);
+function FailureCell({cell, value, actual}){
+	var builder = builders.get(cell.type);
+	var text = builder.display(cell, value);
 
-		return (
-			<span className="label label-danger">{text} but was <i>{this.props.actual}</i></span>
-		);
-	}
-});
+	return (
+		<span className="label label-danger">{text} but was <i>{actual}</i></span>
+	);
+}
 
 module.exports = FailureCell;

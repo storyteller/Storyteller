@@ -5,46 +5,43 @@ var {Modal, Button} = require('react-bootstrap');
 var Icons = require('./../icons');
 var KeyboardShortcuts = require('./../../lib/presentation/keyboard-shortcuts');
 
-
-var ShortcutRow = React.createClass({
-	render(){
-		var shortcut = this.props.shortcut;
-		var text = shortcut.keys.toString();
-		if (shortcut.keys instanceof Array){
-			text = shortcut.keys.join(' or ');
-		}
-
-		return (
-			<tr key={shortcut.topic}>
-				<td>{shortcut.description}</td>
-				<td>{text}</td>
-			</tr>
-		);
+function ShortcutRow({shortcut}){
+	var shortcut = shortcut;
+	var text = shortcut.keys.toString();
+	if (shortcut.keys instanceof Array){
+		text = shortcut.keys.join(' or ');
 	}
-});
 
-var Help = React.createClass({
-	render(){
-        var i = 0;
-		var shortcuts = KeyboardShortcuts.shortcuts().map(x => {
-			return (<ShortcutRow key={i++} shortcut={x} />);
-		});
+	return (
+		<tr key={shortcut.topic}>
+			<td>{shortcut.description}</td>
+			<td>{text}</td>
+		</tr>
+	);
+}
 
-		return ( 
-			<table className="table table-striped">
-				<thead>
-					<tr>
-						<th>Description</th>
-						<th>Keystrokes</th>
-					</tr>
-				</thead>
-				<tbody>
-					{shortcuts}
-				</tbody>
-			</table>
-		);
-	}
-});
+function Help(props){
+	var i = 0;
+	var shortcuts = KeyboardShortcuts.shortcuts().map(x => {
+		return (<ShortcutRow key={i++} shortcut={x} />);
+	});
+
+	return ( 
+		<table className="table table-striped">
+			<thead>
+				<tr>
+					<th>Description</th>
+					<th>Keystrokes</th>
+				</tr>
+			</thead>
+			<tbody>
+				{shortcuts}
+			</tbody>
+		</table>
+	);
+}
+
+
 
 var HelpButton = React.createClass({
 	componentDidMount(){

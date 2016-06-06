@@ -12,16 +12,16 @@ var FolderClosed = icons['folder-closed'];
 var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 var SuitePath = require('./suite-path');
 
-function NewSpecLink(props){
+function NewSpecLink({suite}){
     var toMessage = function(name){
         return {
             type: 'add-spec',
             name: name,
-            parent: props.suite.path
+            parent: suite.path
         };
     };
 
-    var title = 'Add a new Specification to ' + props.suite.path;
+    var title = 'Add a new Specification to ' + suite.path;
 
     return (
         <CommandWithNameEntryLink
@@ -32,16 +32,16 @@ function NewSpecLink(props){
     );
 }
 
-function NewSuiteLink(props){
+function NewSuiteLink({suite}){
     var toMessage = name => {
         return {
             type: 'add-suite',
             name: name,
-            parent: props.suite.path
+            parent: suite.path
         };
     };
 
-    var title = 'Add a new Child Suite to ' + props.suite.path;
+    var title = 'Add a new Child Suite to ' + suite.path;
 
     return (
         <CommandWithNameEntryLink
@@ -92,27 +92,27 @@ function SuiteHeader(props){
     );
 }
 
-function SuiteBody(props){
-    var suites = _.sortBy(props.suite.suites, x => x.name);
-    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={props.specs} treeState={props.treeState} dispatch={props.dispatch} running={props.running} queued={props.queued} progress={props.progress} />) );
+function SuiteBody({suite, specs, treeState, dispatch, running, queued, progress}){
+    var suites = _.sortBy(suite.suites, x => x.name);
+    var childSuites = suites.map(suite => (<SuiteNode suite={suite} key={suite.path} specs={specs} treeState={treeState} dispatch={dispatch} running={running} queued={queued} progress={progress} />) );
     
-    var specs = props.suite.specs.map(x => props.specs.get(x));
+    var specs = suite.specs.map(x => specs.get(x));
     
     
-    var specLeaves = _.sortBy(specs, x => x.title).map(x => (<SpecLeaf spec={x} key={x.id} running={props.running} queued={props.queued} progress={props.progress} />) );
+    var specLeaves = _.sortBy(specs, x => x.title).map(x => (<SpecLeaf spec={x} key={x.id} running={running} queued={queued} progress={progress} />) );
 
     return (
-        <div id={props.suite.path} className='suite-body' >
+        <div id={suite.path} className='suite-body' >
             {childSuites}
             {specLeaves}
         </div>
     );
 }
 
-function isExpanded(props){
-    if (!props.treeState.has(props.suite.path)) return true;
+function isExpanded({treeState, suite}){
+    if (!treeState.has(suite.path)) return true;
     
-    return props.treeState.get(props.suite.path);
+    return treeState.get(suite.path);
 }
 
 function SuiteNode(props){

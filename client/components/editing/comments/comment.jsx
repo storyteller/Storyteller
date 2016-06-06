@@ -1,16 +1,13 @@
 var React = require("react");
 
-var Comment = React.createClass({
-	render: function(){
-		return (
+function Comment({arg, step}){
+	return (
 		<div 
-			id={this.props.step.id} 
-			className="comment" 
-			 >
-				<span className="comment-text">{this.props.arg.value}</span>
+			id={step.id} 
+			className="comment">
+				<span className="comment-text">{arg.value}</span>
 		</div>
-		);
-	}
-});
+	);
+}
 
 module.exports = Comment;

@@ -10,8 +10,8 @@ function addDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-function ResultsPane(props){
-    var specs = props.specs.toList().toArray().filter(x => x.hasResults());
+function ResultsPane({specs, status, lifecycle, dispatch}){
+    var specs = specs.toList().toArray().filter(x => x.hasResults());
     
     if (specs.length == 0){
         return (
@@ -28,7 +28,7 @@ function ResultsPane(props){
             <h2>Current Results</h2>
             <hr />
             
-            <SummaryTable specs={specs} status={props.status} lifecycle={props.lifecycle} dispatch={props.dispatch}/>
+            <SummaryTable specs={specs} status={status} lifecycle={lifecycle} dispatch={dispatch}/>
         </div>
         
     )

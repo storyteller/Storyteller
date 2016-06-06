@@ -12,20 +12,20 @@ function toErrorMessage(data){
 }
 
 
-function FixtureError(props){
-    var text = toErrorMessage(props.error);
+function FixtureError({error}){
+    var text = toErrorMessage(error);
 
     return (
         <pre>{text}</pre>
     );
 }
 
-function GrammarError(props){
-    var text = toErrorMessage(props.error);
+function GrammarError({error, grammar}){
+    var text = toErrorMessage(error);
 
     var title = null;
-    if (props.grammar != null && props.grammar != 'null'){
-        title = (<h4>Grammar: {props.grammar}</h4>);
+    if (grammar != null && grammar != 'null'){
+        title = (<h4>Grammar: {grammar}</h4>);
     }
 
     return (
@@ -38,8 +38,8 @@ function GrammarError(props){
     );
 }
 
-function FixtureHeader(props){
-    var title = props.fixture.key + ' implemented by ' + props.fixture.implementation + ' (' + props.fixture.title + ')';
+function FixtureHeader({fixture}){
+    var title = fixture.key + ' implemented by ' + fixture.implementation + ' (' + fixture.title + ')';
 
     return (
         <h3>{title}</h3>
@@ -52,12 +52,12 @@ var getReport = function(state){
 	return {report: state.get('fixtures').errorReport()};
 }
 
-function GrammarReport(props){
+function GrammarReport({report}){
     var body = [];
 
     var i = 0;
 
-    props.report.forEach(fixture => {
+    report.forEach(fixture => {
         var header = (<FixtureHeader fixture={fixture} key={++i} />);
         body.push(header);
 

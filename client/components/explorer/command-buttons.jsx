@@ -5,26 +5,24 @@ var Postal = require('postal');
 
 
 
-function CommandButton(props){
+function CommandButton({hierarchy, children, topic}){
     var onclick = e => {
         Postal.publish({
             channel: 'commands',
-            topic: props.topic,
-            data: {suite: props.hierarchy}
+            topic: topic,
+            data: {suite: hierarchy}
         });
     };
     
-    return (<Button onClick={onclick}>{props.children}</Button>);
+    return (<Button onClick={onclick}>{children}</Button>);
 }
 
-function CommandButtons(props){
-    var hierarchy = props.hierarchy;
-
+function CommandButtons({hierarchy}){
     return (
         <ButtonGroup vertical>
-            <CommandButton hierarchy={props.hierarchy} topic="run-specs">Run All</CommandButton>
-            <CommandButton hierarchy={props.hierarchy} topic="mark-as-acceptance">Mark as Acceptance</CommandButton>
-            <CommandButton hierarchy={props.hierarchy} topic="mark-as-regression">Mark as Regression</CommandButton>
+            <CommandButton hierarchy={hierarchy} topic="run-specs">Run All</CommandButton>
+            <CommandButton hierarchy={hierarchy} topic="mark-as-acceptance">Mark as Acceptance</CommandButton>
+            <CommandButton hierarchy={hierarchy} topic="mark-as-regression">Mark as Regression</CommandButton>
         </ButtonGroup>
     );
 }

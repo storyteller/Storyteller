@@ -13,9 +13,7 @@ var CommandWithNameEntryLink = require('./command-with-name-entry-link');
 
 
 
-function SuiteHeader(props){
-    var suite = props.suite;
-
+function SuiteHeader({suite, dispatch, }){
     var links = [];
 
 
@@ -46,10 +44,10 @@ function SuiteHeader(props){
     }
 
     if (suite.suites.length > 0){
-        var expandAll = () => props.dispatch({type: 'expand-all'});
+        var expandAll = () => dispatch({type: 'expand-all'});
 
         var collapseAll = () => {
-            props.dispatch({type: 'collapse-all'});
+            dispatch({type: 'collapse-all'});
         };
 
         var expandLink = (<small key="expand"><a id="expand-all" className="explorer-command" title="Expand All Suite nodes in the Tree View" onClick={expandAll}>expand all</a></small> );

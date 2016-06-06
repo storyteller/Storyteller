@@ -4,9 +4,9 @@ var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
 var domUtils = require('./../../../lib/dom-utils');
 var uuid = require('node-uuid');
 
-function AddStepItem(props){
+function AddStepItem({option}){
     var onclick = e => {
-        props.option.select();
+        option.select();
 
         e.preventDefault();
     }
@@ -15,16 +15,15 @@ function AddStepItem(props){
     return (
         <a 
             href="#" 
-            data-key={props.option.grammar.key} 
+            data-key={option.grammar.key} 
             onClick={onclick}
-            className="list-group-item add-step">{props.option.title}</a>
+            className="list-group-item add-step">{option.title}</a>
     );
 };
 
 
-function StepAdder(props){
-    var holder = props.holder;
-    var lookup = new GrammarLookup(props.holder);
+function StepAdder({holder}){
+    var lookup = new GrammarLookup(holder);
 
     var i = 0;
     var components = lookup.options.map(x => {

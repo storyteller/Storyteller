@@ -24,19 +24,19 @@ function findState(state){
     return {running: true, spec: spec, progress: progress, counts: counts};
 }
 
-function SpecProgressBar(props){
-    if (!props.running){
+function SpecProgressBar({running, progress, counts, spec}){
+    if (!running){
         return (<span />);
     }
     
-    if (!props.progress){
+    if (!progress){
         return (<span />);
     }
     
     
     var bsStyle = "info";
-    if (props.counts.anyResults()){
-        if (props.counts.success()){
+    if (counts.anyResults()){
+        if (counts.success()){
             bsStyle = "success";
         }
         else{
@@ -48,7 +48,7 @@ function SpecProgressBar(props){
         Postal.publish({
             channel: 'engine-request',
             topic: 'cancel-spec',
-            data: {id: props.spec.id}
+            data: {id: spec.id}
         });
 
         e.preventDefault();
@@ -58,11 +58,11 @@ function SpecProgressBar(props){
         <div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
         <Button onClick={cancel} className="pull-right" bsStyle="link" style={{marginLeft: '10px', marginRight: '10px', height: '25px'}}>Cancel Execution</Button>
         <ProgressBar  
-            label={'Running ' + props.spec.title} 
+            label={'Running ' + spec.title} 
             bsStyle={bsStyle} 
             min={0} 
-            max={props.progress.total} 
-            now={props.progress.step} />
+            max={progress.total} 
+            now={progress.step} />
             
         </div>
     );

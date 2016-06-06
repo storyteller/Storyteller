@@ -2,24 +2,23 @@ var React = require('react');
 var ArrayList = require('./../../lib/array-list');
 var uuid = require('node-uuid');
 
-function SuiteLink(props){
-    var href = "#/suite/" + props.path;
-    
+function SuiteLink({path, name}){
+    var href = "#/suite/" + path;
 
-    return (<a href={href}>{props.name}</a>);
+    return (<a href={href}>{name}</a>);
 }
 
 
-function SuitePath(props){
+function SuitePath({suite, path, linkToLeaf}){
     // path == spec path
     // linkToLeaf = {true}
     
     var parts = [];
-    if (props.suite){
-        parts = props.suite.split('/');
+    if (suite){
+        parts = suite.split('/');
     }
-    else if (props.path){
-        parts = props.path.split('/');
+    else if (path){
+        parts = path.split('/');
         parts = parts.slice(0, parts.length - 1);
     }
     
@@ -38,7 +37,7 @@ function SuitePath(props){
 	    items.push(spacer);
     }
     
-    if (props.linkToLeaf){
+    if (linkToLeaf){
         var path = parts.join('/') + '/' + leafName;
         var item = (<SuiteLink path={path} name={leafName} key="leaf"/>);
         items.push(item);

@@ -8,8 +8,8 @@ function getCount(state){
     return {count: state.get('fixtures').errorCount()};
 }
 
-function GrammarCount(props){
-    if (props.count == 0)
+function GrammarCount({count}){
+    if (count == 0)
     {
         return (<span />);
     }
@@ -19,7 +19,7 @@ function GrammarCount(props){
     }
 
     return (
-        <Button id="grammar-error-count" bsStyle="link" onClick={onclick}><Badge>{props.count}</Badge> grammar errors</Button>
+        <Button id="grammar-error-count" bsStyle="link" onClick={onclick}><Badge>{count}</Badge> grammar errors</Button>
 
     );
 }

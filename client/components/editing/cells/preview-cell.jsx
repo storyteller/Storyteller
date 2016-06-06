@@ -1,14 +1,12 @@
 var React = require("react");
 var builders = require("./../editors/builders");
 
-module.exports = React.createClass({
-	render: function(){
-		var builder = builders.get(this.props.cell.editor);
+module.exports = function({cell, value}){
+	var builder = builders.get(cell.editor);
 
-		var text = builder.display(this.props.cell, this.props.value);
+	var text = builder.display(cell, value);
 
-		return (
-			<span className="preview-cell" title={this.props.cell.description}>{text}</span>
-		);
-	}
-});
+	return (
+		<span className="preview-cell" title={cell.description}>{text}</span>
+	);
+}

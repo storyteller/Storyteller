@@ -4,43 +4,43 @@ var icons = require('./../icons');
 var {Button, ButtonGroup} = require('react-bootstrap');
 
 
-function StatusButton(props){
+function StatusButton({icon, count, text, active, id, status, dispatch}){
     var icon = null;
-    if (props.icon){
-        var Icon = icons[props.icon];
+    if (icon){
+        var Icon = icons[icon];
         icon = (<Icon />);
     }
 
-    var badge = ( <span className="badge pull-right">{props.count}</span> );
-    var content = ( <span className="pull-left">{icon} {props.text}</span> );
+    var badge = ( <span className="badge pull-right">{count}</span> );
+    var content = ( <span className="pull-left">{icon} {text}</span> );
 
-    if (props.active){
+    if (active){
         return (
-            <Button id={props.id} active>{content} {badge}</Button>
+            <Button id={id} active>{content} {badge}</Button>
         );
     }
 
     var handler = () => {
-        props.dispatch({type:'spec-status-filter-changed', status: props.status});
+        dispatch({type:'spec-status-filter-changed', status: status});
     }
 
     return (
-        <Button id={props.id} onClick={handler} active={props.active}>{content} {badge}</Button>
+        <Button id={id} onClick={handler} active={active}>{content} {badge}</Button>
     );
 }
 
 
 
-function StatusFilter(props){
+function StatusFilter({status, summary, dispatch}){
     var actives = {any: false, success: false, failed: false, none: false};
-    actives[props.status] = true;
+    actives[status] = true;
 
     return (
         <ButtonGroup vertical className="status-filter-buttons">
-            <StatusButton id="status-any" count={props.summary.total} active={actives.any} text="All" status="any" dispatch={props.dispatch} />
-            <StatusButton id="status-success" count={props.summary.success} active={actives.success} text="Success" status="success" icon="success" dispatch={props.dispatch}/>
-            <StatusButton id="status-failed" count={props.summary.failed} active={actives.failed} text="Failed" status="failed" icon="failed" dispatch={props.dispatch}/>
-            <StatusButton id="status-none" count={props.summary.none} active={actives.none} text="No Results" status="none" icon="none" dispatch={props.dispatch}/>
+            <StatusButton id="status-any" count={summary.total} active={actives.any} text="All" status="any" dispatch={dispatch} />
+            <StatusButton id="status-success" count={summary.success} active={actives.success} text="Success" status="success" icon="success" dispatch={dispatch}/>
+            <StatusButton id="status-failed" count={summary.failed} active={actives.failed} text="Failed" status="failed" icon="failed" dispatch={dispatch}/>
+            <StatusButton id="status-none" count={summary.none} active={actives.none} text="No Results" status="none" icon="none" dispatch={dispatch}/>
 
         </ButtonGroup>
 

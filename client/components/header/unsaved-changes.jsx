@@ -9,8 +9,8 @@ function getState(state){
     return {specs: state.get('specs')}
 }
 
-function UnsavedChanges(props){
-    var dirties = props.specs.toList().toArray().filter(x => x.spec.isDirty());
+function UnsavedChanges({specs}){
+    var dirties = specs.toList().toArray().filter(x => x.spec.isDirty());
 
     if (dirties.length == 0) return (<span />);
 

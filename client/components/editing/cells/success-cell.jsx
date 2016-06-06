@@ -1,11 +1,9 @@
 var React = require("react");
 
-var SuccessCell = React.createClass({
-	render: function(){
-		return (
-			<span className="label label-success">{this.props.value}</span>
-		);
-	}
-});
+function SuccessCell({value}){
+	return (
+		<span className="label label-success">{value}</span>
+	);
+}
 
 module.exports = SuccessCell;

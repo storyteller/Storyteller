@@ -1,7 +1,7 @@
 var React = require("react");
 var {Grid, Row} = require('react-bootstrap');
 
-function EditorLoading(props){
+function EditorLoading({spec}){
     return (
         <Grid>
             <Row>
@@ -9,7 +9,7 @@ function EditorLoading(props){
                     <br />
                     <br />
                     <br />
-                    <h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {props.spec.title}...</h3>
+                    <h3><i className="fa fa-spinner fa-2x fa-spin"></i> Loading {spec.title}...</h3>
                 </div>
             </Row>
         </Grid>

@@ -2,33 +2,32 @@ var React = require("react");
 var {Button, ButtonGroup} = require('react-bootstrap');
 var Postal = require('postal');
 
-function LifecycleButton(props){
-    var badge = ( <span className="badge pull-right">{props.count}</span> );
-    var content = ( <span className="pull-left">{props.text}</span> );
+function LifecycleButton({count, text, active, lifecycle, id, dispatch}){
+    var badge = ( <span className="badge pull-right">{count}</span> );
+    var content = ( <span className="pull-left">{text}</span> );
 
-    if (props.active){
+    if (active){
         return (
-            <Button id={props.id} active>{content} {badge}</Button>
+            <Button id={id} active>{content} {badge}</Button>
         );
     }
 
-    var handler = e => props.dispatch({type: 'lifecycle-filter-changed', lifecycle: props.lifecycle})
-
+    var handler = e => dispatch({type: 'lifecycle-filter-changed', lifecycle: lifecycle})
 
     return (
-        <Button id={props.id} active={props.active} onClick={handler}>{content} {badge}</Button>
+        <Button id={id} active={active} onClick={handler}>{content} {badge}</Button>
     );
 }
 
-function LifecycleFilter(props){
+function LifecycleFilter({summary, dispatch, lifecycle}){
     var actives = {any: false, Acceptance: false, Regression: false};
-    actives[props.lifecycle] = true;
+    actives[lifecycle] = true;
 
     return (
         <ButtonGroup vertical>
-            <LifecycleButton id="any-lifecycle" count={props.summary.total} active={actives.any} text="Any" lifecycle="any" dispatch={props.dispatch} />
-            <LifecycleButton id="acceptance-lifecycle" count={props.summary.acceptance} active={actives.Acceptance} text="Acceptance" lifecycle="Acceptance" dispatch={props.dispatch} />
-            <LifecycleButton id="regression-lifecycle" count={props.summary.regression} active={actives.Regression} text="Regression" lifecycle="Regression" dispatch={props.dispatch} />
+            <LifecycleButton id="any-lifecycle" count={summary.total} active={actives.any} text="Any" lifecycle="any" dispatch={dispatch} />
+            <LifecycleButton id="acceptance-lifecycle" count={summary.acceptance} active={actives.Acceptance} text="Acceptance" lifecycle="Acceptance" dispatch={dispatch} />
+            <LifecycleButton id="regression-lifecycle" count={summary.regression} active={actives.Regression} text="Regression" lifecycle="Regression" dispatch={dispatch} />
         </ButtonGroup>
     );
 }

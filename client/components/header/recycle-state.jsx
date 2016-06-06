@@ -3,9 +3,9 @@ var {Button, Modal} = require('react-bootstrap');
 var uuid = require('node-uuid');
 var Icons = require('./../icons');
 
-var SystemProperties = function(props){
+var SystemProperties = function({system}){
     var propDefs = [];
-    var properties = props.system.get('properties');
+    var properties = system.get('properties');
     
     var i = 0;
 
@@ -22,21 +22,21 @@ var SystemProperties = function(props){
     return (
             <dl className="dl-horizontal">
                 <dt>System Name</dt>
-                <dd>{props.system.get('system_name')}</dd>
+                <dd>{system.get('system_name')}</dd>
                 {propDefs}
             </dl>
     );
 }
 
-var SystemError = function(props){
-    if (props.system.get('success')){
+var SystemError = function({system}){
+    if (system.get('success')){
         return (
             <div></div>
         );
     }
 
     return (
-        <div className="recycle-error bg-danger">{props.system.get('error')}</div>
+        <div className="recycle-error bg-danger">{system.get('error')}</div>
     );
 }
 

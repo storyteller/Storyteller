@@ -6,8 +6,8 @@ function getLibrary(state){
     return {library: state.get('fixtures')};
 }
 
-function FixtureTable(props){
-    var fixtures = _.sortBy(_.values(props.library.fixtures), x => x.title);
+function FixtureTable({library}){
+    var fixtures = _.sortBy(_.values(library.fixtures), x => x.title);
 
     var i = 0;
 

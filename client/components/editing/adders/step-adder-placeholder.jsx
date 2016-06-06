@@ -1,23 +1,22 @@
 var React = require("react");
 var Postal = require('postal');
 
-module.exports = React.createClass({
-	render: function(){
-		var onclick = e => {
-			Postal.publish({
-				channel: 'editor',
-				topic: 'select-holder',
-				data: {holder: this.props.holder.id}
-			});
+module.exports = function({holder, text}){
+	var onclick = e => {
+		Postal.publish({
+			channel: 'editor',
+			topic: 'select-holder',
+			data: {holder: holder.id}
+		});
 
-			e.preventDefault();
-		}
-
-		return (
-			<a 
-				className="step-adder-placeholder"
-				data-holder={this.props.holder.id} 
-				onClick={onclick}>{this.props.text}</a>
-		);
+		e.preventDefault();
 	}
-});
+
+	return (
+		<a 
+			className="step-adder-placeholder"
+			data-holder={holder.id} 
+			onClick={onclick}>{text}</a>
+	);	
+}
+

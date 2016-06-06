@@ -8,8 +8,8 @@ var getCount = function(state){
 	return {count: state.get('queued').length};
 }
 
-function QueueCount(props){
-    if (props.count == 0){
+function QueueCount({count}){
+    if (count == 0){
         return ( <span></span> );
     }
 
@@ -18,7 +18,7 @@ function QueueCount(props){
     }
 
     return (
-        <Button bsStyle="link" onClick={onclick}><Badge>{props.count}</Badge> Specs queued</Button>
+        <Button bsStyle="link" onClick={onclick}><Badge>{count}</Badge> Specs queued</Button>
     );
 }
 

@@ -4,8 +4,8 @@ var { connect } = require('react-redux');
 
 
 
-function GrammarTable(props){
-    var grammars = _.sortBy(_.values(props.fixture.grammars), x => x.title);
+function GrammarTable({fixture}){
+    var grammars = _.sortBy(_.values(fixture.grammars), x => x.title);
 
     var i = 0;
     var rows = grammars.map(x => {
@@ -32,9 +32,7 @@ function GrammarTable(props){
     );
 }
 
-function FixtureTable(props){
-    var fixture = props.fixture;
-
+function FixtureTable({fixture}){
     return (
         <div>
             <h2>Fixture '{fixture.title}' ({fixture.implementation})</h2>
