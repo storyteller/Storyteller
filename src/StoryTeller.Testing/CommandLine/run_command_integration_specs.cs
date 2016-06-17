@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FubuCore;
+using MultipleSystems;
 using NUnit.Framework;
 using Shouldly;
 using ST.Client;
@@ -122,6 +123,21 @@ namespace StoryTeller.Testing.CommandLine
 
 
             new FileSystem().WriteStringToFile(clientPath.AppendPath("batch-result-data.js"), "module.exports = " + json);
+        }
+
+        [Test]
+        public void use_specific_system_in_multi_system_project()
+        {
+            var directory = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("MultipleSystems");
+
+            var input = new RunInput {Path = directory, SystemNameFlag = "System2"};
+            var multiSystemController = input.BuildRemoteController();
+            var task = multiSystemController.Start(EngineMode.Batch);
+            task.Wait(3.Seconds());
+
+            task.Result.system_name.ShouldBe("MultipleSystems.System2");
+            multiSystemController.Dispose();
         }
     }
 }
