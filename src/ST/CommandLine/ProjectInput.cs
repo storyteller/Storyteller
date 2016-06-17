@@ -49,6 +49,9 @@ namespace ST.CommandLine
         [Description("Optional. Explicitly specify web socket address to use when starting server. Defaults to 127.0.0.1")]
         public string WebSocketAddressFlag { get; set; }
 
+        [Description("Optional. Tell Storyteller which which ISystem to use")]
+        public string SystemNameFlag { get; set; }
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
@@ -75,6 +78,11 @@ namespace ST.CommandLine
             if (WebSocketAddressFlag.IsNotEmpty())
             {
                 controller.WebSocketAddress = WebSocketAddressFlag;
+            }
+
+            if (SystemNameFlag.IsNotEmpty())
+            {
+                controller.Project.SystemTypeName = SystemNameFlag;
             }
 
             controller.Project.MaxRetries = RetriesFlag;
