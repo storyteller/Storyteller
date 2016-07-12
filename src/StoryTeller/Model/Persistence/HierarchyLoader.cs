@@ -8,8 +8,6 @@ namespace StoryTeller.Model.Persistence
 {
     public class HierarchyLoader
     {
-        public static readonly string SpecDirectory;
-
         public static string SelectSpecPath(string baseDirectory)
         {
             var specPath = baseDirectory.AppendPath("Specs");
@@ -24,19 +22,7 @@ namespace StoryTeller.Model.Persistence
             return specPath;
         }
 
-        static HierarchyLoader()
-        {
-            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory.ToFullPath();
-            SpecDirectory = SelectSpecPath(baseDirectory);
-        }
-        
-
         public static readonly IFileSystem FileSystem = new FileSystem();
-
-        public static Suite ReadHierarchy()
-        {
-            return ReadHierarchy(SpecDirectory);
-        }
 
         public static Suite ReadHierarchy(string folder)
         {

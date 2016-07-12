@@ -11,6 +11,7 @@ namespace StoryTeller.Engine
     {
         public Lifecycle Lifecycle;
         public string Suite;
+        public string SpecPath;
         public string[] Tags;
 
         public IEnumerable<Specification> Filter(Suite top)

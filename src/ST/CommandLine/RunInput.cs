@@ -46,6 +46,7 @@ namespace ST.CommandLine
             return _batchRunRequest ?? (_batchRunRequest = new BatchRunRequest
             {
                 Lifecycle = LifecycleFlag,
+                SpecPath = SpecPath,
                 Suite = WorkspaceFlag,
                 Tags = tags.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray()
             });
