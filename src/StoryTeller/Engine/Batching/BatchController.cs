@@ -19,8 +19,6 @@ namespace StoryTeller.Engine.Batching
 
         public void Receive(BatchRunRequest message)
         {
-            Console.WriteLine(message.SpecPath);
-
             var top = HierarchyLoader.ReadHierarchy(message.SpecPath);
             var specs = message.Filter(top).ToArray();
 
