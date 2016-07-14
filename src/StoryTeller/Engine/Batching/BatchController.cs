@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
@@ -18,7 +19,7 @@ namespace StoryTeller.Engine.Batching
 
         public void Receive(BatchRunRequest message)
         {
-            var top = HierarchyLoader.ReadHierarchy();
+            var top = HierarchyLoader.ReadHierarchy(message.SpecPath);
             var specs = message.Filter(top).ToArray();
 
             var task = _resultObserver.MonitorBatch(specs);

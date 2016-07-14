@@ -40,8 +40,23 @@ namespace ST.CommandLine
         [Description("Optional. Override the config file selection of the Storyteller test running AppDomain")]
         public string ConfigFlag { get; set; }
 
+        [Description("Optional. Override the spec directory")]
+        [FlagAlias("specs", 's')]
+        public string SpecsFlag { get; set; }
+
         [Description("Sets a minimum number of retry attempts for this execution")]
         public int RetriesFlag { get; set; }
+
+        public string SpecPath
+        {
+            get
+            {
+                if (SpecsFlag.IsNotEmpty())
+                    return SpecsFlag.ToFullPath();
+
+                return HierarchyLoader.SelectSpecPath(Path.ToFullPath());
+            }
+        }
 
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
@@ -98,11 +113,10 @@ namespace ST.CommandLine
 
         public void CreateMissingSpecFolder()
         {
-            var specFolder = HierarchyLoader.SelectSpecPath(Path.ToFullPath());
-            if (!Directory.Exists(specFolder))
+            if (!Directory.Exists(SpecPath))
             {
-                Console.WriteLine("Creating /Specs folder at " + specFolder);
-                Directory.CreateDirectory(specFolder);
+                Console.WriteLine("Creating specifications directory at " + SpecPath);
+                Directory.CreateDirectory(SpecPath);
             }
         }
 
