@@ -55,7 +55,11 @@ namespace StoryTeller.Testing
                 controller.Start(EngineMode.Batch).Wait(30.Seconds());
 
                 var hierarchy = HierarchyLoader.ReadHierarchy(input.Path.AppendPath("Specs"));
-                var request = new BatchRunRequest();
+                var request = new BatchRunRequest
+                {
+                    SpecPath = input.SpecPath
+                };
+
                 var response = controller.Send(request).AndWaitFor<BatchRunResponse>();
 
 
