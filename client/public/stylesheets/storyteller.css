@@ -19,7 +19,7 @@ div.recycle-error {
 
 a.explorer-command {
   margin-left: 10px;
-  
+
 }
 
 a.explorer-command:link{
@@ -106,7 +106,7 @@ div.contextual-control{
 .table-column-context button{
     width: 100%;
     text-align: left
-    
+
 }
 
 
@@ -258,4 +258,23 @@ div.sentence.fact.bg-warning > pre > i.fa{
 
 .navbar {
   border-radius: 0;
+}
+
+.preview-cell {
+  white-space: pre-wrap;
+}
+
+.label-default {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.label-danger {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.label-success {
+  text-align: left;
+  white-space: pre-wrap;
 }
