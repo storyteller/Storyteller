@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using StoryTeller.Model;
@@ -28,15 +27,15 @@ namespace StoryTeller.Grammars
 
         public string Title { get; set; }
 
-        public EmbeddedSectionGrammar<T> Before(Action<ISpecContext> action)
+        public EmbeddedSectionGrammar<T> Before(Action<IEmbeddedSpecContext<T>> action)
         {
-            _before = action;
+            _before = x => action(new EmbeddedSpecContext<T>(x, _fixture));
             return this;
         }
 
-        public EmbeddedSectionGrammar<T> After(Action<ISpecContext> action)
+        public EmbeddedSectionGrammar<T> After(Action<IEmbeddedSpecContext<T>> action)
         {
-            _after = action;
+            _after = x => action(new EmbeddedSpecContext<T>(x, _fixture));
             return this;
         } 
 
