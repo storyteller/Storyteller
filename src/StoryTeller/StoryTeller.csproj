@@ -131,9 +131,11 @@
     <Compile Include="Grammars\Decisions\SetterProperty.cs" />
     <Compile Include="Grammars\Decisions\TableLineGrammar.cs" />
     <Compile Include="Grammars\EmbeddedSectionGrammar.cs" />
+    <Compile Include="Grammars\EmbeddedSpecContext.cs" />
     <Compile Include="Grammars\FactPlan.cs" />
     <Compile Include="Grammars\GrammarBuilder.cs" />
     <Compile Include="Grammars\GrammarTypes.cs" />
+    <Compile Include="Grammars\IEmbeddedSpecContext.cs" />
     <Compile Include="Grammars\Importing\CurriedLineGrammar.cs" />
     <Compile Include="Grammars\Importing\Expressions.cs" />
     <Compile Include="Grammars\Importing\ImportedExecutionStep.cs" />

@@ -95,13 +95,13 @@ Name: Embedded
             this["BeforeColors"] = Embed<RecordingFixture>("In the recording fixture")
                 .Before(c =>
                 {
-                    RecordingFixture.Traced.Add("Before");
+                    c.Fixture.AddTrace("Before");
                 });
 
             this["AfterColors"] = Embed<RecordingFixture>("In the recording fixture")
                 .After(c =>
                 {
-                    RecordingFixture.Traced.Add("After");
+                    c.Fixture.AddTrace("After");
                 });
         }
     }
@@ -110,6 +110,11 @@ Name: Embedded
     public class RecordingFixture : Fixture
     {
         public static readonly IList<string> Traced = new List<string>();
+
+        public void AddTrace(string message)
+        {
+            Traced.Add(message);
+        }
 
         public override void SetUp()
         {
