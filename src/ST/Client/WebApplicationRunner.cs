@@ -8,7 +8,6 @@ namespace ST.Client
     public class WebApplicationRunner : IDisposable
     {
         private readonly OpenInput _input;
-        private RemoteController _controller;
         private FubuRuntime _server;
 
         public WebApplicationRunner(OpenInput input)
@@ -18,10 +17,10 @@ namespace ST.Client
 
         public void Start()
         {
-            _controller = _input.BuildRemoteController();
-            var context = new StorytellerContext(_controller, _input);
+            Controller = _input.BuildRemoteController();
+            var context = new StorytellerContext(Controller, _input);
 
-            if (_controller.BinPath.IsEmpty())
+            if (Controller.BinPath.IsEmpty())
             {
                 throw new Exception("Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
             }
@@ -34,28 +33,31 @@ namespace ST.Client
             registry.AlterSettings<DiagnosticsSettings>(_ => _.TraceLevel = TraceLevel.Verbose);
             registry.Mode = "development";
             registry.HostWith<NOWIN>();
-            registry.Services.For<IRemoteController>().Use(_controller);
+            registry.Services.For<IRemoteController>().Use(Controller);
             registry.Services.For<StorytellerContext>().Use(context);
             
             registry.Services.IncludeRegistry<WebApplicationRegistry>();
 
 
             _server = registry.ToRuntime();
+            var connector = _server.Get<IClientConnector>();
+            connector.Start();
+            Controller.AddListener(connector);
+
+            _server.Get<AssetFileWatcher>().Start();
+
+            var persistence = _server.Get<IPersistenceController>();
+            persistence.StartWatching(context.SpecPath);
+            context.AddRemoteListener(persistence);
         }
 
-        public RemoteController Controller
-        {
-            get { return _controller; }
-        }
+        public RemoteController Controller { get; private set; }
 
-        public string BaseAddress
-        {
-            get { return _server.BaseAddress; }
-        }
+        public string BaseAddress => _server.BaseAddress;
 
         public void Dispose()
         {
-            _controller.Teardown();
+            Controller.Teardown();
             _server.SafeDispose();
         }
     }

@@ -51,7 +51,6 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Client\AssetFileWatcher.cs" />
-    <Compile Include="Client\ClientConnectorActivator.cs" />
     <Compile Include="Client\ExceptionListener.cs" />
     <Compile Include="Client\ForceRecycleCommand.cs" />
     <Compile Include="Client\IPersistenceController.cs" />
@@ -79,8 +78,6 @@
     <Compile Include="Client\Persistence\SaveSpecBodyCommand.cs" />
     <Compile Include="Client\RemoteController.cs" />
     <Compile Include="Client\SpecFileWatcher.cs" />
-    <Compile Include="Client\StartWatchingAssets.cs" />
-    <Compile Include="Client\StartWatchingFilesActivator.cs" />
     <Compile Include="Client\Stepthrough\ExecutionStepGatherer.cs" />
     <Compile Include="Client\Stepthrough\NextStep.cs" />
     <Compile Include="Client\Stepthrough\StartStepthrough.cs" />
