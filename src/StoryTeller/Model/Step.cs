@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore;
-using FubuCore.Util;
+using Baseline;
+
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model

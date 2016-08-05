@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using FubuCore.Util;
+using Baseline;
 
 namespace StoryTeller.Conversion
 {
@@ -8,13 +8,13 @@ namespace StoryTeller.Conversion
     {
         private readonly IList<IRuntimeConverter> _runtimeConvertors = new List<IRuntimeConverter>();
         private readonly IList<IConversionProvider> _providers = new List<IConversionProvider>();
-        private readonly Cache<Type, Func<string, object>> _convertors;
+        private readonly LightweightCache<Type, Func<string, object>> _convertors;
 
 
         public Conversions()
         {
             _convertors =
-                new Cache<Type, Func<string, object>>(
+                new LightweightCache<Type, Func<string, object>>(
                     type =>
                     {
                         return

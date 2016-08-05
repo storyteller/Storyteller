@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
-using FubuCore;
-using FubuCore.CommandLine;
-using FubuCore.Dates;
+using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Engine.UserInterface;
@@ -63,10 +60,7 @@ namespace StoryTeller.Remotes
                 _system = Activator.CreateInstance(systemType).As<ISystem>();
                 _services.Add(_system);
 
-                var timeZone = new MachineTimeZoneContext();
-                var clock = new Clock();
-                var systemTime = new SystemTime(clock, timeZone);
-                _specExpiration = new SpecExpiration(systemTime);
+                _specExpiration = new SpecExpiration();
 
                 if (mode == EngineMode.Interactive)
                 {

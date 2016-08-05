@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FubuCore;
-using FubuCore.Util;
+using Baseline;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StoryTeller.Messages;
@@ -12,7 +12,7 @@ namespace StoryTeller.Remotes.Messaging
 {
     public static class JsonSerialization
     {
-        private static readonly Cache<string, Type> _messageTypes = new Cache<string, Type>(); 
+        private static readonly LightweightCache<string, Type> _messageTypes = new LightweightCache<string, Type>(); 
 
         static JsonSerialization()
         {

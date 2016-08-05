@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using FubuCore.Util;
+using Baseline;
 using StoryTeller.Conversion;
 using StoryTeller.Equivalence;
 using StoryTeller.Model;
@@ -32,7 +31,7 @@ namespace StoryTeller
         /// <summary>
         /// All the system level selection lists
         /// </summary>
-        internal readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
+        internal readonly LightweightCache<string, OptionList> Lists = new LightweightCache<string, OptionList>(key => new OptionList(key));
 
         /// <summary>
         /// Add a system level selection list by string values

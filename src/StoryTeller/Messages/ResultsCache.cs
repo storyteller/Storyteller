@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore.Util;
+using Baseline;
+
 
 namespace StoryTeller.Messages
 {
     public class ResultsCache
     {
-        private readonly Cache<string, Queue<SpecExecutionCompleted>> _results =
-            new Cache<string, Queue<SpecExecutionCompleted>>(_ => new Queue<SpecExecutionCompleted>());
+        private readonly LightweightCache<string, Queue<SpecExecutionCompleted>> _results =
+            new LightweightCache<string, Queue<SpecExecutionCompleted>>(_ => new Queue<SpecExecutionCompleted>());
 
         public IEnumerable<SpecExecutionCompleted> AllResults()
         {

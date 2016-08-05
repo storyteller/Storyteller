@@ -1,6 +1,7 @@
 source https://www.myget.org/F/fubumvc-edge
 source http://nuget.org/api/v2
 
+nuget Baseline
 nuget CommonMark.NET
 nuget Nowin
 nuget RhinoMocks

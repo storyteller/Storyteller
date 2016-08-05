@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using FubuCore;
+using Baseline;
 
 namespace StoryTeller.Engine
 {
     public class NulloSystem : ISystem
     {
-        private readonly InMemoryServiceLocator _services = new InMemoryServiceLocator();
+
+        private readonly LightweightCache<Type, object> _services = new LightweightCache<Type, object>();
 
         public IExecutionContext CreateContext()
         {
@@ -15,7 +17,7 @@ namespace StoryTeller.Engine
 
         public void Register<T>(T service)
         {
-            _services.Add(service);
+            _services[typeof(T)] = service;
         }
 
         public Task Recycle()
@@ -40,19 +42,19 @@ namespace StoryTeller.Engine
 
     public class SimpleExecutionContext : IExecutionContext
     {
-        private readonly InMemoryServiceLocator _services;
+        private readonly LightweightCache<Type, object> _services;
 
         public SimpleExecutionContext()
         {
-            _services = new InMemoryServiceLocator();
+            _services = new LightweightCache<Type, object>();
         }
 
         public void Register<T>(T service)
         {
-            _services.Add(service);
+            _services[typeof(T)] = service;
         }
 
-        internal SimpleExecutionContext(InMemoryServiceLocator services)
+        internal SimpleExecutionContext(LightweightCache<Type, object> services)
         {
             _services = services;
         }
@@ -63,7 +65,7 @@ namespace StoryTeller.Engine
 
         public T GetService<T>()
         {
-            return _services.GetInstance<T>();
+            return (T) _services[typeof(T)];
         }
 
         public void AfterExecution(ISpecContext context)
