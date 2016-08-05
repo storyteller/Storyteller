@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using FubuCore;
-using FubuCore.Configuration;
+using Baseline;
+using StoryTeller.Util;
 
 namespace StoryTeller.Model.Persistence
 {

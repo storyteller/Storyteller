@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using FubuCore.Reflection;
+using Baseline.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 

@@ -1,8 +1,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using FubuCore;
-using FubuCore.Reflection;
+using Baseline;
+using Baseline.Reflection;
 using StoryTeller.Grammars.Paragraphs;
 using StoryTeller.Model;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FubuCore;
+using Baseline;
 
 namespace StoryTeller.Model.Persistence
 {

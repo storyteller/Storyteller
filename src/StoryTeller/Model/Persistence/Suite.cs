@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Baseline;
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model.Persistence
@@ -32,8 +33,8 @@ namespace StoryTeller.Model.Persistence
         {
             path = JoinPath(parentFolder, name);
 
-            if (suites != null) suites.Each(x => x.WritePath(path));
-            if (Specifications != null) Specifications.Each(x => x.WritePath(path));
+            suites?.Each(x => x.WritePath(path));
+            Specifications?.Each(x => x.WritePath(path));
         }
 
         public Hierarchy ToHierarchy()

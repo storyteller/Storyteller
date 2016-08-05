@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore.Util;
+using Baseline;
 
 namespace StoryTeller.Equivalence
 {
     public class EquivalenceChecker
     {
-        private readonly Cache<Type, Func<object, object, bool>> _comparisons 
-            = new Cache<Type, Func<object, object, bool>>();
+        private readonly LightweightCache<Type, Func<object, object, bool>> _comparisons 
+            = new LightweightCache<Type, Func<object, object, bool>>();
 
         private readonly IList<IEquivalenceCheckerPolicy> _policies = new List<IEquivalenceCheckerPolicy>()
         {

@@ -1,5 +1,5 @@
 ﻿using System;
-using FubuCore;
+using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -41,7 +41,7 @@ namespace StoryTeller.Grammars
         {
             if (node.id.IsEmpty())
             {
-                throw new ArgumentOutOfRangeException("node", "The node must have an id");
+                throw new ArgumentOutOfRangeException(nameof(node), "The node must have an id");
             }
 
             Position = position;
