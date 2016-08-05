@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using FubuCore;
-using FubuMVC.Core.Assets;
 using StoryTeller.Messages;
 using ST.Files;
 
@@ -12,12 +12,11 @@ namespace ST.Client
         private readonly IClientConnector _connector;
         private readonly FileChangeWatcher _watcher;
 	// ENDSAMPLE
-        public AssetFileWatcher(IAssetFinder finder, IClientConnector connector)
+        public AssetFileWatcher(IClientConnector connector)
         {
             _connector = connector;
 
-            var asset = finder.FindAsset("bundle.js");
-            var path = asset.File.Path;
+            var path = Directory.GetCurrentDirectory().AppendPath("bundle.js");
 
             _watcher = new FileChangeWatcher(path.ParentDirectory(), FileSet.Shallow("bundle.js"), this);
         }
