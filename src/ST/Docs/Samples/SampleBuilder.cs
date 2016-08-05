@@ -6,8 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuCore.Util;
-using FubuMVC.Core.Runtime.Files;
 using ST.Docs.Runner;
+using ST.Files;
+using ChangeSet = FubuMVC.Core.Runtime.Files.ChangeSet;
+using IChangeSetHandler = FubuMVC.Core.Runtime.Files.IChangeSetHandler;
 
 namespace ST.Docs.Samples
 {
@@ -115,7 +117,7 @@ namespace ST.Docs.Samples
 
         public bool ReadFile(ISampleScanner scanner, string file)
         {
-            var reader = new SampleReader(new FubuFile(file), scanner, _cache);
+            var reader = new SampleReader(new FileReference(file), scanner, _cache);
             reader.Start();
             return reader.FoundSamples;
         }

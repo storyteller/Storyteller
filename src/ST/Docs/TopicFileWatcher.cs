@@ -2,8 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using FubuCore;
-using FubuMVC.Core.Runtime.Files;
 using ST.Docs.Runner;
+using ST.Files;
 
 namespace ST.Docs
 {
