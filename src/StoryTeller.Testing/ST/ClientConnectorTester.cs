@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.ST
             theCommand = new RecordingCommand<RunSpec>();
             theRemoteController = MockRepository.GenerateMock<IRemoteController>();
 
-            theConnector = new ClientConnector(new RecordingLogger(), theRemoteController, new ICommand[] {theCommand});
+            theConnector = new ClientConnector(theRemoteController, new ICommand[] {theCommand});
         }
 
         [Test]

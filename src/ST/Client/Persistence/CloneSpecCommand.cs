@@ -1,5 +1,4 @@
 ﻿using System;
-using FubuCore.Logging;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
 
@@ -7,13 +6,11 @@ namespace ST.Client.Persistence
 {
     public class CloneSpecCommand : Command<CloneSpec>
     {
-        private readonly ILogger _logger;
         private readonly Lazy<IPersistenceController> _controller;
         private readonly Lazy<IClientConnector> _client;
 
-        public CloneSpecCommand(ILogger logger, Lazy<IPersistenceController> controller, Lazy<IClientConnector> client)
+        public CloneSpecCommand(Lazy<IPersistenceController> controller, Lazy<IClientConnector> client)
         {
-            _logger = logger;
             _controller = controller;
             _client = client;
         }
@@ -28,7 +25,7 @@ namespace ST.Client.Persistence
             }
             catch (Exception e)
             {
-                _logger.Error("Error trying to clone spec " + message.id, e);
+                Logger.Error("Error trying to clone spec " + message.id, e);
             }
         }
     }
