@@ -1,12 +1,11 @@
 using System.IO;
+using System.Linq;
 using FubuCore;
-using FubuMVC.Core.Assets;
-using FubuMVC.Core.Runtime.Files;
-using FubuMVC.Core.View;
 using HtmlTags;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
+using ST.Files;
 
 namespace ST.Client
 {
@@ -14,19 +13,15 @@ namespace ST.Client
     {
         private readonly IClientConnector _connector;
         private readonly StorytellerContext _context;
-        private readonly FubuHtmlDocument _document;
+        private readonly HtmlDocument _document = new HtmlDocument();
         private readonly IPersistenceController _persistence;
-        private readonly IAssetTagBuilder _tags;
-        private readonly IFubuApplicationFiles _files;
+        private readonly IApplicationFiles _files;
 
-        public HomeEndpoint(IClientConnector connector, StorytellerContext context, FubuHtmlDocument document,
-            IPersistenceController persistence, IAssetTagBuilder tags, IFubuApplicationFiles files)
+        public HomeEndpoint(IClientConnector connector, StorytellerContext context, IPersistenceController persistence, IApplicationFiles files)
         {
             _connector = connector;
             _context = context;
-            _document = document;
             _persistence = persistence;
-            _tags = tags;
             _files = files;
         }
 
@@ -42,7 +37,14 @@ namespace ST.Client
 
             if (File.Exists(_files.RootPath.AppendPath("public", "stylesheets", "storyteller.css")))
             {
-                _tags.BuildStylesheetTags(new[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"});
+                var stylesheets = new[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"};
+                var tags = stylesheets.Select(file =>
+                {
+                    var path = $"/public/stylesheets/{file}";
+                    return new HtmlTag("link").Attr("rel", "stylesheet").Attr("href", path);
+                });
+
+                _document.Head.Append(tags);
             }
             else
             {
@@ -52,7 +54,8 @@ namespace ST.Client
                     .Attr("href", "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
             }
 
-            _document.Body.Append(_document.Script("bundle.js"));
+            var scriptTag = new HtmlTag("script").Attr("type", "text/javascript").Attr("src", "/bundle.js");
+            _document.Body.Append(scriptTag);
 
             return _document;
         }
