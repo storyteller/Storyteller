@@ -164,6 +164,16 @@
     <Compile Include="Docs\Transformation\Transformer.cs" />
     <Compile Include="Docs\Transformation\UrlTransformer.cs" />
     <Compile Include="Docs\Transformation\VersionTransformHandler.cs" />
+    <Compile Include="Files\ApplicationFiles.cs" />
+    <Compile Include="Files\ChangeSet.cs" />
+    <Compile Include="Files\FileChangeWatcher.cs" />
+    <Compile Include="Files\FileReference.cs" />
+    <Compile Include="Files\FileReferenceExtensions.cs" />
+    <Compile Include="Files\IApplicationFiles.cs" />
+    <Compile Include="Files\IChangeSetHandler.cs" />
+    <Compile Include="Files\IFileReference.cs" />
+    <Compile Include="Files\TrackedSet.cs" />
+    <Compile Include="PortFinder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

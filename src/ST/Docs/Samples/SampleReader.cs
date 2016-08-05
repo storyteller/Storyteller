@@ -1,17 +1,18 @@
 using System;
 using FubuCore;
 using FubuMVC.Core.Runtime.Files;
+using ST.Files;
 
 namespace ST.Docs.Samples
 {
     public class SampleReader
     {
-        private readonly IFubuFile _file;
+        private readonly IFileReference _file;
         private readonly ISampleScanner _scanner;
         private readonly ISampleCache _cache;
         private Action<string, int> _readAction;
 
-        public SampleReader(IFubuFile file, ISampleScanner scanner, ISampleCache cache)
+        public SampleReader(IFileReference file, ISampleScanner scanner, ISampleCache cache)
         {
             _file = file;
             _scanner = scanner;
