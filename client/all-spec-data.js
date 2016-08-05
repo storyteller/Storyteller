@@ -1361,7 +1361,7 @@ module.exports = {
       "errors": [
         {
           "message": "Fixture StoryTeller.Samples.Fixtures.FailureFixture could not be loaded",
-          "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: This fixture ctor blew up\r\n   at StoryTeller.Samples.Fixtures.FailureFixture..ctor() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\FailureFixture.cs:line 9\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)\r\n   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)\r\n   at System.Activator.CreateInstance(Type type, Boolean nonPublic)\r\n   at System.Activator.CreateInstance(Type type)\r\n   at StoryTeller.Model.FixtureLibrary.CreateCompiledFixture(CellHandling cellHandling, Type type) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Model\\FixtureLibrary.cs:line 126"
+          "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: This fixture ctor blew up\r\n   at StoryTeller.Samples.Fixtures.FailureFixture..ctor() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\FailureFixture.cs:line 9\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)\r\n   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)\r\n   at System.Activator.CreateInstance(Type type, Boolean nonPublic)\r\n   at System.Activator.CreateInstance(Type type)\r\n   at StoryTeller.Model.FixtureLibrary.CreateCompiledFixture(CellHandling cellHandling, Type type) in C:\\code\\storyteller\\src\\StoryTeller\\Model\\FixtureLibrary.cs:line 126"
         }
       ]
     },
@@ -1394,7 +1394,7 @@ module.exports = {
           "errors": [
             {
               "message": null,
-              "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.DivideByZeroException: Attempted to divide by zero.\r\n   at StoryTeller.Samples.Fixtures.GrammarErrorFixture.Bad() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\FailureFixture.cs:line 17\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at StoryTeller.Grammars.ProgrammaticGrammarBuilder.Build(MethodInfo method, Fixture fixture) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\GrammarBuilder.cs:line 68\r\n   at StoryTeller.Grammars.GrammarBuilder.BuildGrammar(MethodInfo method, Fixture fixture) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\GrammarBuilder.cs:line 35"
+              "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.DivideByZeroException: Attempted to divide by zero.\r\n   at StoryTeller.Samples.Fixtures.GrammarErrorFixture.Bad() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\FailureFixture.cs:line 17\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.ProgrammaticGrammarBuilder.Build(MethodInfo method, Fixture fixture) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\GrammarBuilder.cs:line 68\r\n   at StoryTeller.Grammars.GrammarBuilder.BuildGrammar(MethodInfo method, Fixture fixture) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\GrammarBuilder.cs:line 35"
             }
           ]
         }
@@ -4541,7 +4541,7 @@ module.exports = {
               "key": "ThrowAnExceptionOnTheNextEmbed",
               "cells": {},
               "collections": [],
-              "id": "0d7d0162-fb93-43e3-aee9-3b67b2c95316"
+              "id": "1e0eca57-2dd1-4121-8d0e-9b03c7fce380"
             },
             {
               "key": "EmbeddedMath",
@@ -4559,20 +4559,20 @@ module.exports = {
                         "returnValue": "10"
                       },
                       "collections": [],
-                      "id": "7701c4f0-1a2b-4b88-8ef3-a2b073f3cdd3"
+                      "id": "3d84a5dd-e9a4-4a27-b828-2231c27138ac"
                     }
                   ],
                   "activeCells": {},
                   "id": "errors"
                 }
               ],
-              "id": "36a28d4d-03ea-4730-be14-4a84ce72a5bd"
+              "id": "ce01949b-5836-48a6-9ee9-3df8710e6d2a"
             },
             {
               "key": "DoNotThrowAnExceptionOnTheNextEmbed",
               "cells": {},
               "collections": [],
-              "id": "41e32793-d0ab-4635-a3e6-478190cd1e95"
+              "id": "47256bff-843f-4dbb-aee9-5d7bd9fc67be"
             },
             {
               "key": "EmbeddedMath",
@@ -4590,7 +4590,7 @@ module.exports = {
                         "returnValue": "9"
                       },
                       "collections": [],
-                      "id": "1fbb9b7f-519f-4c3a-81bf-77dd94354e45"
+                      "id": "82271640-1613-4ff9-b29a-86cbfae5c465"
                     },
                     {
                       "key": "Adding",
@@ -4600,7 +4600,7 @@ module.exports = {
                         "returnValue": "11"
                       },
                       "collections": [],
-                      "id": "95e7d3ad-b563-45f2-8694-76dddfedf1b7"
+                      "id": "f83a34a1-dbdf-42bb-a397-c5f15c566a71"
                     },
                     {
                       "key": "Adding",
@@ -4610,20 +4610,20 @@ module.exports = {
                         "returnValue": "abc"
                       },
                       "collections": [],
-                      "id": "829c2b04-9ce4-4400-94c1-8a8bbd0c3f6f"
+                      "id": "5ff14875-1e25-43df-b87b-78e7ae46a854"
                     },
                     {
                       "key": "Throw",
                       "cells": {},
                       "collections": [],
-                      "id": "a3299ce3-b5a3-4732-ad8d-3192a3911105"
+                      "id": "c4e34419-de19-4c3f-a6ae-b1053e55bc78"
                     }
                   ],
                   "activeCells": {},
                   "id": "no-errors"
                 }
               ],
-              "id": "e04fbb85-3a9e-4cc0-b572-16f1a5a5a416"
+              "id": "224216ae-690b-4f41-a0e3-d0e03efa59f7"
             }
           ],
           "activeCells": {},
@@ -4658,7 +4658,7 @@ module.exports = {
                 "PostalCode": "70071"
               },
               "collections": [],
-              "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6"
+              "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628"
             },
             {
               "key": "TheAddressShouldBe",
@@ -4668,7 +4668,7 @@ module.exports = {
                 "City": "Carthage"
               },
               "collections": [],
-              "id": "bdd819f0-ee09-4c0d-81f4-fceed6cbf724"
+              "id": "7adebdce-6110-429d-9ca8-046a6bb7d0af"
             },
             {
               "key": "TheAddressShouldBe",
@@ -4678,7 +4678,7 @@ module.exports = {
                 "City": "wrong"
               },
               "collections": [],
-              "id": "34d9ee5a-a7da-48b6-b1fb-4653a01976d9"
+              "id": "dc24d66d-78a7-4969-8da3-38e276b6dff5"
             }
           ],
           "activeCells": {},
@@ -4695,7 +4695,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -4711,7 +4711,7 @@ module.exports = {
               "key": "Slow",
               "cells": {},
               "collections": [],
-              "id": "8b3a15e9-210b-4749-a72d-5cda9c3ecfb0"
+              "id": "9793c9a8-e59b-4959-863d-33205d0891ac"
             }
           ],
           "activeCells": {},
@@ -4728,7 +4728,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -4743,7 +4743,7 @@ module.exports = {
                 "fullname": "Jeremy Smith"
               },
               "collections": [],
-              "id": "a7e048a4-547d-4120-94aa-e1ad9e23aa24"
+              "id": "a2238e37-2107-496b-8d66-1b32f9d85961"
             },
             {
               "key": "FirstAndLastName",
@@ -4761,7 +4761,7 @@ module.exports = {
                         "fullname": "Hank Miller"
                       },
                       "collections": [],
-                      "id": "c35c9128-449a-4007-97d5-fa57c5fb0782"
+                      "id": "01b4381c-4cf3-43a7-845e-15d384d8369a"
                     },
                     {
                       "key": "table",
@@ -4771,14 +4771,14 @@ module.exports = {
                         "fullname": "Harold Mueller"
                       },
                       "collections": [],
-                      "id": "d99134e5-c320-4e04-867b-2888c683cd44"
+                      "id": "982c7c3b-ff0d-487c-831b-adc046937d9c"
                     }
                   ],
                   "activeCells": {},
-                  "id": "b7672e2b-90cf-4835-b16f-895e861be505"
+                  "id": "f082c790-bfd2-46ab-9808-45d719ee1a69"
                 }
               ],
-              "id": "9f5740a9-68da-4886-bc04-03769adb1fe0"
+              "id": "91481904-211f-40ee-b4a4-027f8aaf4a1b"
             },
             {
               "key": "names",
@@ -4796,14 +4796,14 @@ module.exports = {
                         "Fullname": "Tobin Smith"
                       },
                       "collections": [],
-                      "id": "3b57c6d6-d758-43cd-9264-51931ae6fade"
+                      "id": "cbe4fde0-9964-4510-a3db-b9c7f10ab9da"
                     }
                   ],
                   "activeCells": {},
-                  "id": "0fb1174d-9ea1-42d2-8fae-f6ad3dfdc85f"
+                  "id": "2b85a724-6237-44b5-8345-a4ff83807364"
                 }
               ],
-              "id": "ee50c906-d908-40e7-a655-ca9d9e5fe430"
+              "id": "3d5b06db-2dc7-483a-ac4d-1ac8a8a26d31"
             },
             {
               "key": "TheEnumOptionIs",
@@ -4812,11 +4812,11 @@ module.exports = {
                 "selectedOption": "0"
               },
               "collections": [],
-              "id": "91d3fe57-5ee3-4157-8bbd-9c63fc968cce"
+              "id": "4b249c47-1164-4eb7-90a7-748823505c8d"
             }
           ],
           "activeCells": {},
-          "id": "605ad208-4d16-41ea-881a-2af531001319"
+          "id": "5e361a3c-a530-465c-88fc-8a039abbf30f"
         }
       ],
       "id": "general2"
@@ -4829,7 +4829,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -4842,7 +4842,7 @@ module.exports = {
                 "value": "5"
               },
               "collections": [],
-              "id": "f6d3b1f1-2e57-4e0f-bac0-fb50e73d6efc"
+              "id": "86e771cd-1cce-44c7-8913-3e1c000bfa7e"
             },
             {
               "key": "Check",
@@ -4850,7 +4850,7 @@ module.exports = {
                 "value": "5"
               },
               "collections": [],
-              "id": "4394c7d6-eac6-4ac8-a517-fe390327e1a0"
+              "id": "53f2fc59-279c-42f6-a386-c4f4b467fdc3"
             },
             {
               "key": "Set",
@@ -4858,7 +4858,7 @@ module.exports = {
                 "value": "6"
               },
               "collections": [],
-              "id": "fdc9e415-1822-4e71-b099-c2801aa509b2"
+              "id": "a239a9d8-4b07-42c3-9d91-317a4d8d5fc2"
             },
             {
               "key": "Check",
@@ -4866,7 +4866,7 @@ module.exports = {
                 "value": "7"
               },
               "collections": [],
-              "id": "df97a537-d3c6-4eed-8680-3ceb1b30ba3e"
+              "id": "e6ae5811-603e-4940-bd79-dfd6d003b661"
             },
             {
               "key": "Set",
@@ -4874,11 +4874,11 @@ module.exports = {
                 "value": "abc"
               },
               "collections": [],
-              "id": "306a1fc7-3efe-4b6b-820f-0e6137863962"
+              "id": "2339740a-58bc-459b-99cc-17128cae6ade"
             }
           ],
           "activeCells": {},
-          "id": "89e81409-3537-4037-879b-e561b001c5e0"
+          "id": "8c027666-d9aa-47a1-ba88-dd358172a08d"
         }
       ],
       "id": "general3"
@@ -4891,7 +4891,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -4918,14 +4918,14 @@ module.exports = {
                         "Position": "LB"
                       },
                       "collections": [],
-                      "id": "de14ba6e-e547-4432-a611-57939ceae330"
+                      "id": "ee25ce09-3492-4acf-a4a7-cbac38715f95"
                     }
                   ],
                   "activeCells": {},
                   "id": "2e87da8f-d2bb-45a0-a375-39e38e3f9564"
                 }
               ],
-              "id": "051dac52-2347-487d-be0a-f6a72e32e141"
+              "id": "d6c8257c-ac6a-45ea-ac68-5aff0c2883f3"
             }
           ],
           "activeCells": {},
@@ -4942,7 +4942,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -4953,23 +4953,23 @@ module.exports = {
               "key": "BadGrammar1",
               "cells": {},
               "collections": [],
-              "id": "b847f049-dfc3-4925-8a85-e7a41c0d8c23"
+              "id": "edf1ca79-537e-4b69-945f-80d402405a28"
             },
             {
               "key": "BadGrammar2",
               "cells": {},
               "collections": [],
-              "id": "1a3d2640-180d-40db-833c-ed885c7fdb95"
+              "id": "9666f3be-7b90-4431-a3b2-9a2bfed5fcbb"
             },
             {
               "key": "BadGrammar3",
               "cells": {},
               "collections": [],
-              "id": "634a6966-ed94-4cf2-b393-a965f131d931"
+              "id": "c4619381-30c5-4f31-8ca7-eb48d6dfdf1f"
             }
           ],
           "activeCells": {},
-          "id": "627e8c6d-237a-468f-a212-087585665d30"
+          "id": "df8fcd98-e6ba-46b8-b9e8-bcb7fa742af6"
         }
       ],
       "id": "general4"
@@ -4982,7 +4982,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5003,7 +5003,7 @@ module.exports = {
       "lifecycle": "Regression",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5019,7 +5019,7 @@ module.exports = {
                 "expected": "80"
               },
               "collections": [],
-              "id": "f708619f-df5c-413f-b7b4-aa0a78bd82cd"
+              "id": "25df4d32-cd1c-4022-a8e2-18647e46dd33"
             },
             {
               "key": "AddAndMultiplyTable",
@@ -5038,7 +5038,7 @@ module.exports = {
                         "expected": "25"
                       },
                       "collections": [],
-                      "id": "06d9dc90-8336-4e6f-9246-4f935e3c6be0"
+                      "id": "58331735-d373-472f-a7f3-c85594caab3f"
                     },
                     {
                       "key": "Rows",
@@ -5049,7 +5049,7 @@ module.exports = {
                         "expected": "80"
                       },
                       "collections": [],
-                      "id": "376abf48-6aa0-4405-8890-3a3b45896d72"
+                      "id": "36dd1c69-af83-4f7a-b495-95048cd0bb4e"
                     },
                     {
                       "key": "Rows",
@@ -5060,14 +5060,14 @@ module.exports = {
                         "expected": "77"
                       },
                       "collections": [],
-                      "id": "57a021ca-efcd-4631-96e7-a6ec494a40a7"
+                      "id": "4ff8f6c2-2dc1-4373-9cbc-6acc4f198621"
                     }
                   ],
                   "activeCells": {},
-                  "id": "f9724122-2195-4dfa-9811-f8618b1b860d"
+                  "id": "6c6bf81f-1f28-4894-abfb-a621aa69f2fe"
                 }
               ],
-              "id": "37f181f6-9a50-4860-9413-68372ceb8165"
+              "id": "2f30fc74-f5cf-4521-a5b1-7ed950e66a7b"
             },
             {
               "key": "AddAndMultiplyThrow",
@@ -5078,11 +5078,11 @@ module.exports = {
                 "expected": "20"
               },
               "collections": [],
-              "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca"
+              "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4"
             }
           ],
           "activeCells": {},
-          "id": "424f1087-ea03-49c3-a7a5-124201a003bc"
+          "id": "18027726-f59a-4747-b0f8-a8d3cc85ec4f"
         }
       ],
       "id": "paragraph1"
@@ -5095,7 +5095,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5111,7 +5111,7 @@ module.exports = {
                 "expected": "80"
               },
               "collections": [],
-              "id": "44e922ca-e4b5-495c-9274-04489944cd9a"
+              "id": "5c8b97f9-6adf-48b4-93d4-c3a10665c286"
             },
             {
               "key": "AddAndMultiply",
@@ -5122,7 +5122,7 @@ module.exports = {
                 "expected": "77"
               },
               "collections": [],
-              "id": "b9d1c0e5-e585-4b3f-920c-9b1634465aaf"
+              "id": "d4d6c412-ec1f-4b1b-b710-e7c439365912"
             },
             {
               "key": "AddAndMultiplyTable",
@@ -5141,7 +5141,7 @@ module.exports = {
                         "expected": "25"
                       },
                       "collections": [],
-                      "id": "be908c15-5fec-4645-93d6-643241cd426d"
+                      "id": "d3e22bb3-c677-4720-9cc7-bd0387dc0394"
                     },
                     {
                       "key": "Rows",
@@ -5152,7 +5152,7 @@ module.exports = {
                         "expected": "80"
                       },
                       "collections": [],
-                      "id": "eeb01f0e-35f1-44cd-ada7-942df4f7a6a8"
+                      "id": "ae26dc6d-6495-4ae5-a01d-268000c705d4"
                     },
                     {
                       "key": "Rows",
@@ -5163,18 +5163,18 @@ module.exports = {
                         "expected": "77"
                       },
                       "collections": [],
-                      "id": "d4dc7490-1ccf-4b6a-bfed-3596fca42d56"
+                      "id": "f5cf076f-74b5-431e-9ad8-72910c995406"
                     }
                   ],
                   "activeCells": {},
-                  "id": "65d9718a-fb63-41bc-ac6f-e9e8ac09b4ca"
+                  "id": "7636bdf6-134a-4cd1-9fe1-188650f67f01"
                 }
               ],
-              "id": "a82a1e54-a98d-4e3f-8353-671c4ca50410"
+              "id": "77b6dd92-637d-4b75-a3a2-44de17f9d51a"
             }
           ],
           "activeCells": {},
-          "id": "a6052a63-5ddc-414a-85d8-c1a864338f25"
+          "id": "8c35e9f3-3480-4487-9f7a-fa4d9d6f09c6"
         }
       ],
       "id": "paragraph2"
@@ -5187,7 +5187,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5202,7 +5202,7 @@ module.exports = {
                 "y": "5"
               },
               "collections": [],
-              "id": "e09b1b6e-e7b7-4027-af2f-11c530d56cbe"
+              "id": "8d76b450-1bf3-4257-9123-0e9dae07be66"
             },
             {
               "key": "AddTo5",
@@ -5212,7 +5212,7 @@ module.exports = {
                 "y": "5"
               },
               "collections": [],
-              "id": "04821e02-2df0-4a71-90ae-d02725c56b52"
+              "id": "6b892a44-40e2-4ba8-b691-95b3a2671c4c"
             }
           ],
           "activeCells": {},
@@ -5229,7 +5229,7 @@ module.exports = {
       "lifecycle": "Regression",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5280,7 +5280,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5295,7 +5295,7 @@ module.exports = {
                 "x": "5"
               },
               "collections": [],
-              "id": "a32fe313-b571-40db-9591-c6745a3a3471"
+              "id": "11b81e62-d5e2-46c3-a2bf-005bd4d665c3"
             },
             {
               "key": "AddingTo5",
@@ -5305,11 +5305,11 @@ module.exports = {
                 "x": "5"
               },
               "collections": [],
-              "id": "11171966-d900-4598-98bc-2ef96ba03de4"
+              "id": "d1fda66c-dc10-490f-ba23-dcca00a226eb"
             }
           ],
           "activeCells": {},
-          "id": "9cef115b-e26a-41c2-a293-7b5c155bb58c"
+          "id": "673d05a0-e04f-44a6-a863-b509feee047b"
         }
       ],
       "id": "sentence3"
@@ -5322,7 +5322,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5354,7 +5354,7 @@ module.exports = {
                 "number": "5"
               },
               "collections": [],
-              "id": "734f9528-5d50-4415-8d20-97589877e905"
+              "id": "22c1320a-021f-4fac-86f4-0562a6cec110"
             },
             {
               "key": "MultiplyThenAdd",
@@ -5363,7 +5363,7 @@ module.exports = {
                 "delta": "4"
               },
               "collections": [],
-              "id": "ae762d24-91e6-4681-b528-29748e654455"
+              "id": "226f27c5-e0be-44de-9327-51b4511e798f"
             },
             {
               "key": "Subtract",
@@ -5371,7 +5371,7 @@ module.exports = {
                 "operand": "2"
               },
               "collections": [],
-              "id": "00765e78-786c-4a17-85f9-8d04def2a4ce"
+              "id": "f9b81b69-dc35-496f-81f2-b6fde1706b8e"
             },
             {
               "text": "Correct assertion",
@@ -5400,7 +5400,7 @@ module.exports = {
                 "sum": "5"
               },
               "collections": [],
-              "id": "37e1803b-63f8-4329-910f-4d6816f5a49a"
+              "id": "eef25f93-3aba-4659-8128-d3e488a9346b"
             },
             {
               "text": "Line assertions",
@@ -5446,7 +5446,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5469,7 +5469,7 @@ module.exports = {
                         "Date": "TODAY"
                       },
                       "collections": [],
-                      "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513"
+                      "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218"
                     },
                     {
                       "key": "Rows",
@@ -5479,7 +5479,7 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221"
+                      "id": "5d2b1c63-f179-49f1-8508-3b593554021b"
                     },
                     {
                       "key": "Rows",
@@ -5489,19 +5489,19 @@ module.exports = {
                         "Date": "TODAY+2"
                       },
                       "collections": [],
-                      "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180"
+                      "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2"
                     }
                   ],
                   "activeCells": {},
-                  "id": "86df0ea3-8df3-42a7-a43e-770c98ba0154"
+                  "id": "e11cb76c-b12a-4d9c-a96e-4fde62093b45"
                 }
               ],
-              "id": "a7c07741-e37f-4f03-8ae8-79579fb69c20"
+              "id": "c26eae06-a1ad-453e-ae74-907b4bb73def"
             },
             {
               "text": "Completely successful ordering",
               "type": "comment",
-              "id": "0416254a-1cdf-47fd-95d6-fd02a5620a84"
+              "id": "7cf23277-d398-48cf-b458-352864c92d0f"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5552,12 +5552,12 @@ module.exports = {
                   "id": "1"
                 }
               ],
-              "id": "adfde037-3de5-40f8-8eef-3a0e901fcc24"
+              "id": "a5e29b3a-3ca4-4fed-b7fa-6452d69ae7b8"
             },
             {
               "text": "Out of order",
               "type": "comment",
-              "id": "dddf826f-1fe3-4a30-b3d5-8b2eb72b0546"
+              "id": "634d4752-442f-4436-809b-6a5e2185321d"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5608,12 +5608,12 @@ module.exports = {
                   "id": "5"
                 }
               ],
-              "id": "cc35d328-7cdf-4d68-9afb-bc9140c7f596"
+              "id": "fb9c6dbe-5a81-4e4b-b428-62fbabdc72a1"
             },
             {
               "text": "Should have one exra",
               "type": "comment",
-              "id": "e98e15e3-4e25-40c4-b64b-9d8fd9c64b68"
+              "id": "dcec6378-8cc0-46f4-bf3f-19b5d5c5cd13"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5632,7 +5632,7 @@ module.exports = {
                         "Date": "TODAY"
                       },
                       "collections": [],
-                      "id": "dfcb7f02-5a97-411d-b564-b0e2f18d4d40"
+                      "id": "01fba135-3461-4d2c-a944-cbac71a263e2"
                     },
                     {
                       "key": "Rows",
@@ -5643,19 +5643,19 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "53766ef6-8a83-4685-8d88-c5809d64923a"
+                      "id": "a07b0bcd-4185-45f4-8c5a-8815f1ab3b62"
                     }
                   ],
                   "activeCells": {},
                   "id": "9"
                 }
               ],
-              "id": "4fa65227-4549-4f0b-a17e-b05d9bbe2917"
+              "id": "bfd21173-ce27-4116-b003-bd967936773c"
             },
             {
               "text": "Should mark one expected result as missing",
               "type": "comment",
-              "id": "d9a6f8d9-e269-4271-9e78-b87f55e85c78"
+              "id": "edbfee4e-02b9-4ff8-95e5-c176f2eb5469"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5674,7 +5674,7 @@ module.exports = {
                         "Date": "TODAY"
                       },
                       "collections": [],
-                      "id": "1ca8e212-2846-4623-8fbd-3e29ccff392e"
+                      "id": "2faf7bc2-7fe5-4ff0-a11c-90d5e980026d"
                     },
                     {
                       "key": "Rows",
@@ -5685,7 +5685,7 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "a0ab98b0-a1ac-42c5-a3fd-39e21dad31ce"
+                      "id": "0619c8aa-c8b1-41ca-b5a5-c23dc95172fb"
                     },
                     {
                       "key": "Rows",
@@ -5696,7 +5696,7 @@ module.exports = {
                         "Date": "TODAY+2"
                       },
                       "collections": [],
-                      "id": "c6a70d76-e225-4b9f-a21f-dcd1ce726065"
+                      "id": "464cfa77-16fc-4645-96ce-83bd60aff9fb"
                     },
                     {
                       "key": "Rows",
@@ -5715,12 +5715,12 @@ module.exports = {
                   "id": "10"
                 }
               ],
-              "id": "85d3600e-79aa-4ae6-ba34-4aeedd1abdcf"
+              "id": "16f5fd66-00c7-49bf-8668-3a71478d9ef4"
             },
             {
               "text": "One syntax error",
               "type": "comment",
-              "id": "957da2fe-0b69-4db9-b493-680e379b168e"
+              "id": "814b39ab-ac85-445c-afab-30841a2b3bba"
             },
             {
               "key": "OrderedDetailsAre",
@@ -5751,7 +5751,7 @@ module.exports = {
                         "Date": "TODAY+1"
                       },
                       "collections": [],
-                      "id": "f560fdb8-e102-4f10-bac0-6572dd5e95a7"
+                      "id": "b8cd4609-886c-41cd-85f2-06e073fef9ca"
                     },
                     {
                       "key": "Rows",
@@ -5762,18 +5762,18 @@ module.exports = {
                         "Date": "TODAY+2"
                       },
                       "collections": [],
-                      "id": "35fdec81-7e23-4b04-a85a-5b5307ace87e"
+                      "id": "b369c7e9-87a1-4c1d-9615-c64a9d0cc073"
                     }
                   ],
                   "activeCells": {},
-                  "id": "ce1c185b-e192-4121-b275-7e7449984e5c"
+                  "id": "12bc8aae-c2cc-4812-964d-1a84b886ba13"
                 }
               ],
-              "id": "041175ec-b37e-41f1-9b4e-fbbb1b065b71"
+              "id": "55a29424-b85f-45e3-a6c4-8c6933cef1c8"
             }
           ],
           "activeCells": {},
-          "id": "7c70ff26-8328-498b-beac-aa83249f4b17"
+          "id": "db4b26f7-6c14-45ef-8a78-0b516809750a"
         }
       ],
       "id": "set1"
@@ -5786,7 +5786,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -5807,7 +5807,7 @@ module.exports = {
                         "name": "Jeremy"
                       },
                       "collections": [],
-                      "id": "ca6b2756-8896-4e82-a684-5ca776befeaa"
+                      "id": "ecc6ba92-92ee-4c9a-9a44-052f08ed437d"
                     },
                     {
                       "key": "name",
@@ -5815,7 +5815,7 @@ module.exports = {
                         "name": "Josh"
                       },
                       "collections": [],
-                      "id": "4464555f-c634-4d3e-bdc6-460b85e58ea0"
+                      "id": "b53930f4-01f9-4a42-96c1-30d3f599589f"
                     },
                     {
                       "key": "name",
@@ -5823,7 +5823,7 @@ module.exports = {
                         "name": "Gary"
                       },
                       "collections": [],
-                      "id": "53715901-7f35-4c03-9277-9759903b2a19"
+                      "id": "3243eaf3-e81f-453b-a8b8-0a6c570c0ec8"
                     },
                     {
                       "key": "name",
@@ -5831,7 +5831,7 @@ module.exports = {
                         "name": "Kevin"
                       },
                       "collections": [],
-                      "id": "19ea89c8-c87b-47d4-900b-fdf4ffd8d160"
+                      "id": "4b291447-3890-4a4b-bde6-60770c6d39ec"
                     },
                     {
                       "key": "name",
@@ -5839,14 +5839,14 @@ module.exports = {
                         "name": "Chad"
                       },
                       "collections": [],
-                      "id": "83a6ab78-0102-4344-9ad7-9e082e3a1c33"
+                      "id": "9614399e-24f1-4fb2-968f-6fb7fe51a1ad"
                     }
                   ],
                   "activeCells": {},
-                  "id": "87a348a6-84e9-477d-8397-3b7ce6ee482b"
+                  "id": "a3513fce-763c-4586-8385-facf5f18d824"
                 }
               ],
-              "id": "758403fb-92c5-4dfa-a30c-0dcb854fba2d"
+              "id": "1e002f25-da8e-421d-a846-d0e5e1908155"
             },
             {
               "key": "OrderedStringSet",
@@ -5863,7 +5863,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "8c0bc09b-7969-42b5-9f57-2a67fffd0081"
+                      "id": "e4f28def-0caf-48f8-b281-f57f0a9ab91c"
                     },
                     {
                       "key": "Rows",
@@ -5872,7 +5872,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "cd223ff1-e84e-40ff-9134-9445bb71c8c1"
+                      "id": "c79e8432-5e6b-403a-875e-a1b31bc4e4b3"
                     },
                     {
                       "key": "Rows",
@@ -5881,7 +5881,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "0712c78d-93f7-4c9b-84e8-cb2c84b739f6"
+                      "id": "4ad517fd-e620-4924-9e24-e352d87f065a"
                     },
                     {
                       "key": "Rows",
@@ -5890,7 +5890,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "a2e400bc-3f83-4607-81c8-48401cd00087"
+                      "id": "8c2697c4-fd02-43e4-b9c3-40cda10b3fb3"
                     },
                     {
                       "key": "Rows",
@@ -5899,14 +5899,14 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "a1d4207c-c74a-4ab9-936e-f5e12eaafd90"
+                      "id": "3fe91b18-fe7b-4607-82f0-cc318345aef7"
                     }
                   ],
                   "activeCells": {},
-                  "id": "19862903-7244-4670-aa5e-086bcf7bf9f7"
+                  "id": "815d2082-7a45-46a0-bf8e-ceaca9e2152f"
                 }
               ],
-              "id": "c67b3a76-c8d7-4509-bf2b-bc7d86cc54fc"
+              "id": "7b009748-51e4-45bc-93c0-b66490193750"
             },
             {
               "key": "UnorderedStringSet",
@@ -5923,7 +5923,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "27fb4ae7-f117-4672-9bcc-5b20f8c4276c"
+                      "id": "0011e53e-e928-445c-848b-ab7407d060dc"
                     },
                     {
                       "key": "Rows",
@@ -5932,7 +5932,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "d91774d4-3f49-42b6-b43b-33e451d36e92"
+                      "id": "ec262d84-2bdc-4f92-843a-2dcca07cde60"
                     },
                     {
                       "key": "Rows",
@@ -5941,7 +5941,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "90d9478d-a4da-4f36-997d-179cf4152665"
+                      "id": "3bca777f-e244-416d-bf61-4e6ae28473b8"
                     },
                     {
                       "key": "Rows",
@@ -5950,7 +5950,7 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "ccbdf471-bde9-46c4-b82d-65d8cba4936e"
+                      "id": "4192bcc5-605b-4c28-99bd-cdb094917ba7"
                     },
                     {
                       "key": "Rows",
@@ -5959,18 +5959,18 @@ module.exports = {
                         "Index": ""
                       },
                       "collections": [],
-                      "id": "1908c8ea-368a-46e4-b4de-2d8bd4d90d80"
+                      "id": "9cff0717-df16-4678-a725-c2e87b83e024"
                     }
                   ],
                   "activeCells": {},
-                  "id": "06a42844-e138-4c56-a277-2d042f01fe11"
+                  "id": "bd883bb2-1a7a-421f-ac09-12f39d69c263"
                 }
               ],
-              "id": "5a52b208-8a87-4e33-ae1f-bd7ae140d140"
+              "id": "a0b02df9-958e-47dc-bddd-ea45116f7b3c"
             }
           ],
           "activeCells": {},
-          "id": "646dd5e1-59f6-43d5-897b-c270a47c4f6d"
+          "id": "a500f493-6fdb-4ae2-8a1f-0a0c3761e7b6"
         }
       ],
       "id": "set2"
@@ -5983,7 +5983,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6004,7 +6004,7 @@ module.exports = {
                         "Name": "a"
                       },
                       "collections": [],
-                      "id": "d32a075d-0f5b-4360-a80e-daa218fa27b6"
+                      "id": "12d4e543-6e60-4f26-ac06-399116fea74b"
                     },
                     {
                       "key": "rows",
@@ -6012,7 +6012,7 @@ module.exports = {
                         "Name": "b"
                       },
                       "collections": [],
-                      "id": "4e5c0635-238e-4c16-9236-894652244c4c"
+                      "id": "1ff4cc2f-a9d3-4d8e-a0e3-1468afe56f6d"
                     },
                     {
                       "key": "rows",
@@ -6020,18 +6020,18 @@ module.exports = {
                         "Name": "c"
                       },
                       "collections": [],
-                      "id": "a3f6cb94-e095-43a9-b11f-456df73d8495"
+                      "id": "90d3171f-80fc-4e59-b85b-7533465141aa"
                     }
                   ],
                   "activeCells": {},
                   "id": "1"
                 }
               ],
-              "id": "e48f0f48-ab06-4ae6-9f65-f67cad3e568c"
+              "id": "439a4b8b-c7db-436b-be1a-6d6f711ce004"
             }
           ],
           "activeCells": {},
-          "id": "3a5cf2cb-27a2-4f26-a56e-7a9f2bb9e50e"
+          "id": "e6210665-515c-4b57-bf74-9aa69760d2de"
         }
       ],
       "id": "set3"
@@ -6044,7 +6044,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6067,7 +6067,7 @@ module.exports = {
                         "Name": "Cord"
                       },
                       "collections": [],
-                      "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63"
+                      "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb"
                     },
                     {
                       "key": "Rows",
@@ -6077,7 +6077,7 @@ module.exports = {
                         "Name": "Drill"
                       },
                       "collections": [],
-                      "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1"
+                      "id": "2c15b041-e490-41dc-b32c-214f3cec6b26"
                     },
                     {
                       "key": "Rows",
@@ -6087,14 +6087,14 @@ module.exports = {
                         "Name": "Hammer"
                       },
                       "collections": [],
-                      "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e"
+                      "id": "9b3134d9-6603-4026-a293-0b8100aa7850"
                     }
                   ],
                   "activeCells": {},
-                  "id": "1bedae0d-9580-4bb4-8467-d6a110064bc4"
+                  "id": "a9d793ed-3c66-46bb-9971-491820ef726d"
                 }
               ],
-              "id": "f00abf5f-8fe2-4985-bccb-85594813bb60"
+              "id": "85931023-79d0-44c9-a1da-3653e309e4dc"
             },
             {
               "key": "UnorderedDetailsAre",
@@ -6112,7 +6112,7 @@ module.exports = {
                         "Name": "Drill"
                       },
                       "collections": [],
-                      "id": "fec7b3c6-04da-45a5-8ae7-7fe501df2c48"
+                      "id": "707af0cd-f384-4749-927b-268d2c207cff"
                     },
                     {
                       "key": "Rows",
@@ -6122,18 +6122,18 @@ module.exports = {
                         "Name": "Hammer"
                       },
                       "collections": [],
-                      "id": "cd68abd9-2d85-401d-a8eb-24378639ecab"
+                      "id": "31c937ff-5dae-4a85-a002-f5521b3c6e6a"
                     }
                   ],
                   "activeCells": {},
-                  "id": "703280b8-8877-4a91-832c-954705a862be"
+                  "id": "33586a8a-83f1-4f1b-9afd-0088bb7d1385"
                 }
               ],
-              "id": "34cf6fef-6014-45b2-a111-30cbd9222294"
+              "id": "63c7397e-5349-4e60-a953-639ed2ed7742"
             }
           ],
           "activeCells": {},
-          "id": "3ac477e4-7611-4875-9ce8-5eb3580481aa"
+          "id": "62aa9bf2-2def-4e6e-bdaf-b59b17875743"
         }
       ],
       "id": "set4"
@@ -6146,7 +6146,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6167,7 +6167,7 @@ module.exports = {
                         "name": "Jeremy"
                       },
                       "collections": [],
-                      "id": "c9c3cc98-373e-4818-a3ac-382108cd5ae0"
+                      "id": "78e3a4d2-2c9a-40ab-b6c8-47806fa447f6"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6175,7 +6175,7 @@ module.exports = {
                         "name": "Josh"
                       },
                       "collections": [],
-                      "id": "d90300ce-40a8-4c50-86c7-c57fdb884dd6"
+                      "id": "4eaf05b3-9800-4d01-904b-9d3692a870b8"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6183,7 +6183,7 @@ module.exports = {
                         "name": "Gary"
                       },
                       "collections": [],
-                      "id": "73abb6e2-b89a-4cfd-87b2-3cdea20a36ef"
+                      "id": "18728cd3-6fa3-4eeb-92bd-bba761d554b8"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6191,7 +6191,7 @@ module.exports = {
                         "name": "Kevin"
                       },
                       "collections": [],
-                      "id": "c7d75560-0b4d-4560-a10d-25f70428e4bd"
+                      "id": "83bc473a-c38a-4132-937c-b6535e092d60"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6199,7 +6199,7 @@ module.exports = {
                         "name": "Chad"
                       },
                       "collections": [],
-                      "id": "03b521b6-6e78-4645-8455-593497a79b6a"
+                      "id": "8eab1ca0-6c48-4995-83bd-6290f731d090"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6207,7 +6207,7 @@ module.exports = {
                         "name": "Rand"
                       },
                       "collections": [],
-                      "id": "f51b9370-547f-43d9-85f6-91624dc1e79b"
+                      "id": "29c11d2a-56f5-4801-8acd-7f0071c2a411"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6215,7 +6215,7 @@ module.exports = {
                         "name": "Perrin"
                       },
                       "collections": [],
-                      "id": "c9d10f39-2fdd-465f-b81d-2c20896945c8"
+                      "id": "55aec264-aa1d-4d64-8b93-82c4826eba8f"
                     },
                     {
                       "key": "TheDataIs-row",
@@ -6223,14 +6223,14 @@ module.exports = {
                         "name": "Mat"
                       },
                       "collections": [],
-                      "id": "0c6fa885-a7d2-4d24-ab5e-8d99d257e58b"
+                      "id": "1350d81d-3af0-4c05-9426-b2d464e98dcb"
                     }
                   ],
                   "activeCells": {},
                   "id": "61c521ec-1d41-4492-b00c-695d8cc4440b"
                 }
               ],
-              "id": "e00b6ce3-c3f8-4991-875f-64057b84fa76"
+              "id": "3cbc9576-74da-46c3-ae47-e4d6ac4281a6"
             },
             {
               "text": "All data is correct, but in the wrong order",
@@ -6251,7 +6251,7 @@ module.exports = {
                         "expected": "Jeremy"
                       },
                       "collections": [],
-                      "id": "908e66f9-d7cf-4e6a-9b9c-ec643a998f70"
+                      "id": "f629c52f-c411-48b2-9c53-4f5e2246420e"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -6259,7 +6259,7 @@ module.exports = {
                         "expected": "Josh"
                       },
                       "collections": [],
-                      "id": "80f6485c-defb-47ce-a8cb-202e20d11d17"
+                      "id": "65cb5dbc-6008-4e48-beae-afa8d40001c5"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -6267,7 +6267,7 @@ module.exports = {
                         "expected": "Gary"
                       },
                       "collections": [],
-                      "id": "f824930e-e43c-4f46-b620-66e1e54844f7"
+                      "id": "f2fc2733-2d07-4cf4-8a9d-0b3d5c5779cb"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -6275,7 +6275,7 @@ module.exports = {
                         "expected": "Chad"
                       },
                       "collections": [],
-                      "id": "cc312ef8-0517-48a9-b279-652787e1ac41"
+                      "id": "040b469b-8802-4e63-8f6d-c72944c624bc"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -6283,7 +6283,7 @@ module.exports = {
                         "expected": "Kevin"
                       },
                       "collections": [],
-                      "id": "00465e9a-6d02-4d20-ba82-c6b11b16452d"
+                      "id": "3f816c35-7ae9-4ffa-ad16-cf9962575bd7"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -6291,7 +6291,7 @@ module.exports = {
                         "expected": "Egwene"
                       },
                       "collections": [],
-                      "id": "8fefea8d-24c2-4e4f-9808-ee9c1c1b599a"
+                      "id": "53ff82ba-5a24-4a6e-839b-7edd9dad4824"
                     },
                     {
                       "key": "OrderedStringSet-row",
@@ -6299,14 +6299,14 @@ module.exports = {
                         "expected": "Perrin"
                       },
                       "collections": [],
-                      "id": "9dde504f-6f92-491c-9960-2471054cc8ba"
+                      "id": "607e264a-889d-45e2-9d73-ada0ed0514c8"
                     }
                   ],
                   "activeCells": {},
                   "id": "4f091fff-8c47-4a91-90c4-19c01477dddb"
                 }
               ],
-              "id": "b3d8c22f-b5aa-4ad6-bb38-8a8b644d1795"
+              "id": "eb3a37d3-525a-4064-a858-d73b2b39bdc4"
             }
           ],
           "activeCells": {},
@@ -6323,7 +6323,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6345,7 +6345,7 @@ module.exports = {
                         "IsEven": "true"
                       },
                       "collections": [],
-                      "id": "98c7f5cf-48b6-4aa0-8a8b-24959e086da8"
+                      "id": "2c060eeb-d652-4b36-a507-303f8657702a"
                     },
                     {
                       "key": "IsPositive-row",
@@ -6354,14 +6354,14 @@ module.exports = {
                         "IsEven": "false"
                       },
                       "collections": [],
-                      "id": "8509b293-8cc3-4c34-b3c1-98b0b39dcb88"
+                      "id": "4746b9ca-b78e-4c69-8d28-714dd04fa165"
                     }
                   ],
                   "activeCells": {},
                   "id": "a481d76f-66ae-464f-8c6f-2739e4c39d3e"
                 }
               ],
-              "id": "eeae6f5a-1cdf-44d5-8c99-5bcde0ba0b06"
+              "id": "42506e44-3f7d-4e4b-80ec-9b74e3575c3e"
             }
           ],
           "activeCells": {},
@@ -6378,7 +6378,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6402,7 +6402,7 @@ module.exports = {
                         "LastNameFirst": "Miller, Jeremy"
                       },
                       "collections": [],
-                      "id": "0e529145-44c6-43c1-b1fc-898a4e66fb76"
+                      "id": "a7f57abb-285f-4299-9c03-7bebfc24b634"
                     },
                     {
                       "key": "decisions",
@@ -6413,11 +6413,11 @@ module.exports = {
                         "LastNameFirst": "Chief, Big"
                       },
                       "collections": [],
-                      "id": "cb325d1c-edb4-43f3-9c08-51b3daa83425"
+                      "id": "4a4802a0-7657-406f-9df5-b5957af6bcc2"
                     }
                   ],
                   "activeCells": {},
-                  "id": "84ca383a-6f30-4d2a-99cb-fba6c16f2677"
+                  "id": "4364bce0-8bf0-4c64-812b-f363ec6cfaa8"
                 },
                 {
                   "key": "table",
@@ -6432,7 +6432,7 @@ module.exports = {
                         "LastNameFirst": "Miller, Jeremy"
                       },
                       "collections": [],
-                      "id": "526d0db1-a3b2-4f61-93d3-32bc16994c38"
+                      "id": "b0a56641-0db7-4c2b-9adc-0aaa62db4e4d"
                     },
                     {
                       "key": "row",
@@ -6443,18 +6443,18 @@ module.exports = {
                         "LastNameFirst": "Miller Hank"
                       },
                       "collections": [],
-                      "id": "0584fe5d-7970-4841-b948-5e3e54d03e63"
+                      "id": "06b055f4-ae41-4af8-8207-7e7d99cf7a37"
                     }
                   ],
                   "activeCells": {},
-                  "id": "1dc44cec-104a-4346-b0c5-527ce20f9fb3"
+                  "id": "66e9e6e6-f1f5-492f-bd52-d2ce32359f09"
                 }
               ],
-              "id": "9677d92a-fd02-4bfc-a910-6e652d076b6e"
+              "id": "3865fc35-2d0a-4499-863e-8d9ba43fc9d9"
             }
           ],
           "activeCells": {},
-          "id": "e0702618-0b44-4906-a291-4b6b5d69e07a"
+          "id": "c5c89aa6-2983-4df2-bd53-57c9fc1d59c1"
         }
       ],
       "id": "table2"
@@ -6467,7 +6467,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6492,7 +6492,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "62829559-3385-4edb-887d-4acb5bd0b1e6"
+                      "id": "3736c617-c813-4928-a5c6-c9782200b1f7"
                     },
                     {
                       "key": "TableWithLotsOfOptions-row",
@@ -6504,7 +6504,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "84d86a61-5dfc-40ea-8508-db2df9719fe7"
+                      "id": "161ae80e-43bd-47e8-ad5f-fb29a27b1c08"
                     },
                     {
                       "key": "TableWithLotsOfOptions-row",
@@ -6516,7 +6516,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "4a04313f-f37d-4265-aac6-e2f0b6a3c955"
+                      "id": "2ce9f28a-2c22-4262-af7b-131013701c1a"
                     },
                     {
                       "key": "TableWithLotsOfOptions-row",
@@ -6528,7 +6528,7 @@ module.exports = {
                         "c": "3"
                       },
                       "collections": [],
-                      "id": "8981a09d-a451-408a-b5cf-1aea54e038c1"
+                      "id": "efbe90f1-e8c3-4aaa-8b44-36f828aae2a8"
                     }
                   ],
                   "activeCells": {
@@ -6538,7 +6538,7 @@ module.exports = {
                   "id": "3c402eda-44ab-48b2-bc1e-e83730c123cf"
                 }
               ],
-              "id": "bf0b9a6f-aeb1-4e61-aef8-f49f14997e79"
+              "id": "e92dde79-8fa8-46bb-a2f9-d8672401ff79"
             }
           ],
           "activeCells": {},
@@ -6555,7 +6555,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6576,14 +6576,14 @@ module.exports = {
                         "x": "11"
                       },
                       "collections": [],
-                      "id": "f5311b04-dfa1-4df7-adc4-be7d3043fd1e"
+                      "id": "c6399d96-8383-4df0-bc56-1b302164e5a9"
                     }
                   ],
                   "activeCells": {},
                   "id": "before"
                 }
               ],
-              "id": "8a251af7-8272-457d-919b-8f0542b0d543"
+              "id": "f40c2ab2-db84-4968-a62c-8115e8e6b35e"
             },
             {
               "key": "AfterThrowsError",
@@ -6599,14 +6599,14 @@ module.exports = {
                         "x": "22"
                       },
                       "collections": [],
-                      "id": "e6c38291-fb0b-42ea-a5a7-ad6769a0d0d0"
+                      "id": "c59519e8-eabd-4942-9c57-200c279f4878"
                     }
                   ],
                   "activeCells": {},
                   "id": "after"
                 }
               ],
-              "id": "8147c337-9eb4-4da2-af9a-5c6ad693b1e9"
+              "id": "66d00759-0a88-4a5f-85cf-7328e9fae5ce"
             }
           ],
           "activeCells": {},
@@ -6623,7 +6623,7 @@ module.exports = {
       "lifecycle": "Acceptance",
       "mode": "full",
       "tags": [],
-      "last-updated": "Friday, July 22, 2016",
+      "last-updated": "Friday, August 05, 2016",
       "breakpoints": [],
       "steps": [
         {
@@ -6633,7 +6633,7 @@ module.exports = {
             {
               "text": "Table by the ExposeAsTable attribute",
               "type": "comment",
-              "id": "efa87efc-7fb2-412f-b66f-5f1e993758ab"
+              "id": "0fc8d5be-f898-49db-85a8-dfcff2d0e6f7"
             },
             {
               "key": "Sum",
@@ -6662,7 +6662,7 @@ module.exports = {
                         "sum": "4"
                       },
                       "collections": [],
-                      "id": "bbe25ecd-c572-4c8f-a84f-7cfe9c900b20"
+                      "id": "7054d2eb-074c-45f6-b894-20d23e3125c6"
                     },
                     {
                       "key": "sum",
@@ -6672,19 +6672,19 @@ module.exports = {
                         "sum": "5"
                       },
                       "collections": [],
-                      "id": "06cfc9b0-2ef0-4243-9e58-937da09c6bfe"
+                      "id": "a24f9eaf-5e22-4165-a98f-be4f44f6015d"
                     }
                   ],
                   "activeCells": {},
-                  "id": "32748198-2d27-4f97-b8e1-bf8deb420362"
+                  "id": "220d94c1-b5cf-4cae-805b-b54c94199e84"
                 }
               ],
-              "id": "fd093f68-a5c1-4594-9e10-448af6434f16"
+              "id": "03170a48-df7f-495f-9328-fcca03562f4c"
             },
             {
               "text": "Table fixture from script",
               "type": "comment",
-              "id": "41b97399-08f5-4437-9ef9-6ddb3b9446fd"
+              "id": "611fde72-d275-44e7-b88f-1f23cc9f3f92"
             },
             {
               "key": "Divide",
@@ -6724,7 +6724,7 @@ module.exports = {
                         "product": "****"
                       },
                       "collections": [],
-                      "id": "f5f32a5d-0588-474c-8600-206e9f352fb9"
+                      "id": "1c4c0a4e-ee93-4e28-8141-bdbe06e80c0c"
                     },
                     {
                       "key": "Rows",
@@ -6734,18 +6734,18 @@ module.exports = {
                         "product": "****"
                       },
                       "collections": [],
-                      "id": "874ea367-2624-4e01-941b-6c07c337f078"
+                      "id": "2cd86c2c-0447-4283-b784-3e33d8e1f885"
                     }
                   ],
                   "activeCells": {},
-                  "id": "29029ebf-79bd-4535-8bac-2e0ab06f6a08"
+                  "id": "687d4998-9731-4ec3-b05c-d46791a7d406"
                 }
               ],
-              "id": "8e266e58-8dfd-42f0-ab7b-1692d7b867bc"
+              "id": "5feb8c17-7b00-4195-adf1-5b343c0bfba2"
             }
           ],
           "activeCells": {},
-          "id": "f547523e-98d8-4b0a-9ee4-b6304787b56a"
+          "id": "2e581d96-7d04-40dd-9ecb-e41e8411fe3d"
         }
       ],
       "id": "table5"
@@ -6846,7 +6846,7 @@ module.exports = {
                 "key": "ThrowAnExceptionOnTheNextEmbed",
                 "cells": {},
                 "collections": [],
-                "id": "0d7d0162-fb93-43e3-aee9-3b67b2c95316"
+                "id": "1e0eca57-2dd1-4121-8d0e-9b03c7fce380"
               },
               {
                 "key": "EmbeddedMath",
@@ -6864,20 +6864,20 @@ module.exports = {
                           "returnValue": "10"
                         },
                         "collections": [],
-                        "id": "7701c4f0-1a2b-4b88-8ef3-a2b073f3cdd3"
+                        "id": "3d84a5dd-e9a4-4a27-b828-2231c27138ac"
                       }
                     ],
                     "activeCells": {},
                     "id": "errors"
                   }
                 ],
-                "id": "36a28d4d-03ea-4730-be14-4a84ce72a5bd"
+                "id": "ce01949b-5836-48a6-9ee9-3df8710e6d2a"
               },
               {
                 "key": "DoNotThrowAnExceptionOnTheNextEmbed",
                 "cells": {},
                 "collections": [],
-                "id": "41e32793-d0ab-4635-a3e6-478190cd1e95"
+                "id": "47256bff-843f-4dbb-aee9-5d7bd9fc67be"
               },
               {
                 "key": "EmbeddedMath",
@@ -6895,7 +6895,7 @@ module.exports = {
                           "returnValue": "9"
                         },
                         "collections": [],
-                        "id": "1fbb9b7f-519f-4c3a-81bf-77dd94354e45"
+                        "id": "82271640-1613-4ff9-b29a-86cbfae5c465"
                       },
                       {
                         "key": "Adding",
@@ -6905,7 +6905,7 @@ module.exports = {
                           "returnValue": "11"
                         },
                         "collections": [],
-                        "id": "95e7d3ad-b563-45f2-8694-76dddfedf1b7"
+                        "id": "f83a34a1-dbdf-42bb-a397-c5f15c566a71"
                       },
                       {
                         "key": "Adding",
@@ -6915,20 +6915,20 @@ module.exports = {
                           "returnValue": "abc"
                         },
                         "collections": [],
-                        "id": "829c2b04-9ce4-4400-94c1-8a8bbd0c3f6f"
+                        "id": "5ff14875-1e25-43df-b87b-78e7ae46a854"
                       },
                       {
                         "key": "Throw",
                         "cells": {},
                         "collections": [],
-                        "id": "a3299ce3-b5a3-4732-ad8d-3192a3911105"
+                        "id": "c4e34419-de19-4c3f-a6ae-b1053e55bc78"
                       }
                     ],
                     "activeCells": {},
                     "id": "no-errors"
                   }
                 ],
-                "id": "e04fbb85-3a9e-4cc0-b572-16f1a5a5a416"
+                "id": "224216ae-690b-4f41-a0e3-d0e03efa59f7"
               }
             ],
             "activeCells": {},
@@ -6952,14 +6952,14 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "0d7d0162-fb93-43e3-aee9-3b67b2c95316",
+            "id": "1e0eca57-2dd1-4121-8d0e-9b03c7fce380",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
           },
           {
             "status": "error",
-            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.<.ctor>b__1_0(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84",
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.<.ctor>b__1_0(IEmbeddedSpecContext`1 c) in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.EmbeddedSectionGrammar`1.<>c__DisplayClass13_0.<Before>b__0(ISpecContext x) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\EmbeddedSectionGrammar.cs:line 32\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83",
             "cells": [],
             "id": "errors",
             "spec": "embeds",
@@ -6987,7 +6987,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "7701c4f0-1a2b-4b88-8ef3-a2b073f3cdd3",
+            "id": "3d84a5dd-e9a4-4a27-b828-2231c27138ac",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -7005,7 +7005,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "41e32793-d0ab-4635-a3e6-478190cd1e95",
+            "id": "47256bff-843f-4dbb-aee9-5d7bd9fc67be",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -7040,7 +7040,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "1fbb9b7f-519f-4c3a-81bf-77dd94354e45",
+            "id": "82271640-1613-4ff9-b29a-86cbfae5c465",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -7057,7 +7057,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "95e7d3ad-b563-45f2-8694-76dddfedf1b7",
+            "id": "f83a34a1-dbdf-42bb-a397-c5f15c566a71",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -7074,16 +7074,16 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "829c2b04-9ce4-4400-94c1-8a8bbd0c3f6f",
+            "id": "5ff14875-1e25-43df-b87b-78e7ae46a854",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
           },
           {
             "status": "error",
-            "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 122\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__19.MoveNext() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 81\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 18\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40",
+            "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 122\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__19.MoveNext() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 81\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40",
             "cells": [],
-            "id": "a3299ce3-b5a3-4732-ad8d-3192a3911105",
+            "id": "c4e34419-de19-4c3f-a6ae-b1053e55bc78",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -7217,13 +7217,13 @@ module.exports = {
         "duration": 0,
         "logging": [
           {
-            "html": "<pre class=\"debug-output\"></pre>",
+            "html": "<pre class=\"debug-output\">EmbeddedFixture.Setup sent this debug message\r\n</pre>",
             "title": "Debug Output",
-            "count": 0,
+            "count": 1,
             "short_title": "Debug"
           },
           {
-            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.&lt;.ctor&gt;b__1_0(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84</pre>\n<pre class=\"bg-warning\">System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---&gt; System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 122\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.&lt;Invoke&gt;d__19.MoveNext() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 81\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 18\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40</pre>",
+            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.EmbeddedFixture.&lt;.ctor&gt;b__1_0(IEmbeddedSpecContext`1 c) in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\EmbeddedFixture.cs:line 13\r\n   at StoryTeller.Grammars.EmbeddedSectionGrammar`1.&lt;&gt;c__DisplayClass13_0.&lt;Before&gt;b__0(ISpecContext x) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\EmbeddedSectionGrammar.cs:line 32\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83</pre>\n<pre class=\"bg-warning\">System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---&gt; System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\MathFixture.cs:line 122\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.&lt;Invoke&gt;d__19.MoveNext() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 81\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 2,
             "short_title": "Exceptions"
@@ -7231,7 +7231,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 1,
@@ -7239,7 +7239,7 @@ module.exports = {
           "invalids": 1
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "general1": {
@@ -7270,7 +7270,7 @@ module.exports = {
                   "PostalCode": "70071"
                 },
                 "collections": [],
-                "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6"
+                "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628"
               },
               {
                 "key": "TheAddressShouldBe",
@@ -7280,7 +7280,7 @@ module.exports = {
                   "City": "Carthage"
                 },
                 "collections": [],
-                "id": "bdd819f0-ee09-4c0d-81f4-fceed6cbf724"
+                "id": "7adebdce-6110-429d-9ca8-046a6bb7d0af"
               },
               {
                 "key": "TheAddressShouldBe",
@@ -7290,7 +7290,7 @@ module.exports = {
                   "City": "wrong"
                 },
                 "collections": [],
-                "id": "34d9ee5a-a7da-48b6-b1fb-4653a01976d9"
+                "id": "dc24d66d-78a7-4969-8da3-38e276b6dff5"
               }
             ],
             "activeCells": {},
@@ -7314,7 +7314,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -7323,7 +7323,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -7332,7 +7332,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -7341,7 +7341,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "3",
             "type": "step-result"
@@ -7350,7 +7350,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "4",
             "type": "step-result"
@@ -7359,7 +7359,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "5",
             "type": "step-result"
@@ -7368,7 +7368,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b1c58b48-de27-4b77-9009-d54193ad6fd6",
+            "id": "d750b9ce-f6d2-46ed-8705-7aad736eb628",
             "spec": "general1",
             "position": "6",
             "type": "step-result"
@@ -7385,7 +7385,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "bdd819f0-ee09-4c0d-81f4-fceed6cbf724",
+            "id": "7adebdce-6110-429d-9ca8-046a6bb7d0af",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -7402,7 +7402,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "bdd819f0-ee09-4c0d-81f4-fceed6cbf724",
+            "id": "7adebdce-6110-429d-9ca8-046a6bb7d0af",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -7419,7 +7419,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "bdd819f0-ee09-4c0d-81f4-fceed6cbf724",
+            "id": "7adebdce-6110-429d-9ca8-046a6bb7d0af",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -7436,7 +7436,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "34d9ee5a-a7da-48b6-b1fb-4653a01976d9",
+            "id": "dc24d66d-78a7-4969-8da3-38e276b6dff5",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -7453,7 +7453,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "34d9ee5a-a7da-48b6-b1fb-4653a01976d9",
+            "id": "dc24d66d-78a7-4969-8da3-38e276b6dff5",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -7470,7 +7470,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "34d9ee5a-a7da-48b6-b1fb-4653a01976d9",
+            "id": "dc24d66d-78a7-4969-8da3-38e276b6dff5",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -7603,7 +7603,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 3,
           "wrongs": 3,
@@ -7611,7 +7611,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "SometimesSlow": {
@@ -7624,7 +7624,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -7640,7 +7640,7 @@ module.exports = {
                 "key": "Slow",
                 "cells": {},
                 "collections": [],
-                "id": "8b3a15e9-210b-4749-a72d-5cda9c3ecfb0"
+                "id": "9793c9a8-e59b-4959-863d-33205d0891ac"
               }
             ],
             "activeCells": {},
@@ -7664,7 +7664,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8b3a15e9-210b-4749-a72d-5cda9c3ecfb0",
+            "id": "9793c9a8-e59b-4959-863d-33205d0891ac",
             "spec": "SometimesSlow",
             "position": null,
             "type": "step-result"
@@ -7713,7 +7713,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -7721,7 +7721,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "general2": {
@@ -7734,7 +7734,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -7749,7 +7749,7 @@ module.exports = {
                   "fullname": "Jeremy Smith"
                 },
                 "collections": [],
-                "id": "a7e048a4-547d-4120-94aa-e1ad9e23aa24"
+                "id": "a2238e37-2107-496b-8d66-1b32f9d85961"
               },
               {
                 "key": "FirstAndLastName",
@@ -7767,7 +7767,7 @@ module.exports = {
                           "fullname": "Hank Miller"
                         },
                         "collections": [],
-                        "id": "c35c9128-449a-4007-97d5-fa57c5fb0782"
+                        "id": "01b4381c-4cf3-43a7-845e-15d384d8369a"
                       },
                       {
                         "key": "table",
@@ -7777,14 +7777,14 @@ module.exports = {
                           "fullname": "Harold Mueller"
                         },
                         "collections": [],
-                        "id": "d99134e5-c320-4e04-867b-2888c683cd44"
+                        "id": "982c7c3b-ff0d-487c-831b-adc046937d9c"
                       }
                     ],
                     "activeCells": {},
-                    "id": "b7672e2b-90cf-4835-b16f-895e861be505"
+                    "id": "f082c790-bfd2-46ab-9808-45d719ee1a69"
                   }
                 ],
-                "id": "9f5740a9-68da-4886-bc04-03769adb1fe0"
+                "id": "91481904-211f-40ee-b4a4-027f8aaf4a1b"
               },
               {
                 "key": "names",
@@ -7802,14 +7802,14 @@ module.exports = {
                           "Fullname": "Tobin Smith"
                         },
                         "collections": [],
-                        "id": "3b57c6d6-d758-43cd-9264-51931ae6fade"
+                        "id": "cbe4fde0-9964-4510-a3db-b9c7f10ab9da"
                       }
                     ],
                     "activeCells": {},
-                    "id": "0fb1174d-9ea1-42d2-8fae-f6ad3dfdc85f"
+                    "id": "2b85a724-6237-44b5-8345-a4ff83807364"
                   }
                 ],
-                "id": "ee50c906-d908-40e7-a655-ca9d9e5fe430"
+                "id": "3d5b06db-2dc7-483a-ac4d-1ac8a8a26d31"
               },
               {
                 "key": "TheEnumOptionIs",
@@ -7818,11 +7818,11 @@ module.exports = {
                   "selectedOption": "0"
                 },
                 "collections": [],
-                "id": "91d3fe57-5ee3-4157-8bbd-9c63fc968cce"
+                "id": "4b249c47-1164-4eb7-90a7-748823505c8d"
               }
             ],
             "activeCells": {},
-            "id": "605ad208-4d16-41ea-881a-2af531001319"
+            "id": "5e361a3c-a530-465c-88fc-8a039abbf30f"
           }
         ],
         "id": "general2"
@@ -7833,7 +7833,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "605ad208-4d16-41ea-881a-2af531001319",
+            "id": "5e361a3c-a530-465c-88fc-8a039abbf30f",
             "spec": "general2",
             "position": "setup",
             "type": "step-result"
@@ -7850,7 +7850,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "a7e048a4-547d-4120-94aa-e1ad9e23aa24",
+            "id": "a2238e37-2107-496b-8d66-1b32f9d85961",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -7867,7 +7867,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "c35c9128-449a-4007-97d5-fa57c5fb0782",
+            "id": "01b4381c-4cf3-43a7-845e-15d384d8369a",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -7884,7 +7884,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "d99134e5-c320-4e04-867b-2888c683cd44",
+            "id": "982c7c3b-ff0d-487c-831b-adc046937d9c",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -7915,7 +7915,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "3b57c6d6-d758-43cd-9264-51931ae6fade",
+            "id": "cbe4fde0-9964-4510-a3db-b9c7f10ab9da",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -7932,7 +7932,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "91d3fe57-5ee3-4157-8bbd-9c63fc968cce",
+            "id": "4b249c47-1164-4eb7-90a7-748823505c8d",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -7941,7 +7941,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "605ad208-4d16-41ea-881a-2af531001319",
+            "id": "5e361a3c-a530-465c-88fc-8a039abbf30f",
             "spec": "general2",
             "position": "teardown",
             "type": "step-result"
@@ -8009,7 +8009,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 4,
           "wrongs": 1,
@@ -8017,7 +8017,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "general3": {
@@ -8030,7 +8030,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -8043,7 +8043,7 @@ module.exports = {
                   "value": "5"
                 },
                 "collections": [],
-                "id": "f6d3b1f1-2e57-4e0f-bac0-fb50e73d6efc"
+                "id": "86e771cd-1cce-44c7-8913-3e1c000bfa7e"
               },
               {
                 "key": "Check",
@@ -8051,7 +8051,7 @@ module.exports = {
                   "value": "5"
                 },
                 "collections": [],
-                "id": "4394c7d6-eac6-4ac8-a517-fe390327e1a0"
+                "id": "53f2fc59-279c-42f6-a386-c4f4b467fdc3"
               },
               {
                 "key": "Set",
@@ -8059,7 +8059,7 @@ module.exports = {
                   "value": "6"
                 },
                 "collections": [],
-                "id": "fdc9e415-1822-4e71-b099-c2801aa509b2"
+                "id": "a239a9d8-4b07-42c3-9d91-317a4d8d5fc2"
               },
               {
                 "key": "Check",
@@ -8067,7 +8067,7 @@ module.exports = {
                   "value": "7"
                 },
                 "collections": [],
-                "id": "df97a537-d3c6-4eed-8680-3ceb1b30ba3e"
+                "id": "e6ae5811-603e-4940-bd79-dfd6d003b661"
               },
               {
                 "key": "Set",
@@ -8075,11 +8075,11 @@ module.exports = {
                   "value": "abc"
                 },
                 "collections": [],
-                "id": "306a1fc7-3efe-4b6b-820f-0e6137863962"
+                "id": "2339740a-58bc-459b-99cc-17128cae6ade"
               }
             ],
             "activeCells": {},
-            "id": "89e81409-3537-4037-879b-e561b001c5e0"
+            "id": "8c027666-d9aa-47a1-ba88-dd358172a08d"
           }
         ],
         "id": "general3"
@@ -8090,7 +8090,7 @@ module.exports = {
             "status": "invalid",
             "error": "Fixture with key 'Service' does not exist",
             "cells": [],
-            "id": "89e81409-3537-4037-879b-e561b001c5e0",
+            "id": "8c027666-d9aa-47a1-ba88-dd358172a08d",
             "spec": "general3",
             "position": "setup",
             "type": "step-result"
@@ -8114,7 +8114,7 @@ module.exports = {
             "short_title": "Debug"
           },
           {
-            "html": "<pre class=\"bg-warning\">StoryTeller.StorytellerCriticalException: Failed at position &#39;setup&#39; ---&gt; StoryTeller.Model.MissingFixtureException: Fixture with key &#39;Service&#39; does not exist\r\n   at StoryTeller.Model.MissingFixture.SetUp() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Model\\MissingFixture.cs:line 15\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 21\r\n   --- End of inner exception stack trace ---\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 33\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84</pre>",
+            "html": "<pre class=\"bg-warning\">StoryTeller.StorytellerCriticalException: Failed at position &#39;setup&#39; ---&gt; StoryTeller.Model.MissingFixtureException: Fixture with key &#39;Service&#39; does not exist\r\n   at StoryTeller.Model.MissingFixture.SetUp() in C:\\code\\storyteller\\src\\StoryTeller\\Model\\MissingFixture.cs:line 15\r\n   at StoryTeller.Model.Section.&lt;&gt;c__DisplayClass13_0.&lt;toExecutionSteps&gt;b__0(ISpecContext x) in C:\\code\\storyteller\\src\\StoryTeller\\Model\\Section.cs:line 66\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 21\r\n   --- End of inner exception stack trace ---\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 33\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 1,
             "short_title": "Exceptions"
@@ -8122,7 +8122,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -8130,7 +8130,7 @@ module.exports = {
           "invalids": 1
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "runtime-converter": {
@@ -8143,7 +8143,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -8170,14 +8170,14 @@ module.exports = {
                           "Position": "LB"
                         },
                         "collections": [],
-                        "id": "de14ba6e-e547-4432-a611-57939ceae330"
+                        "id": "ee25ce09-3492-4acf-a4a7-cbac38715f95"
                       }
                     ],
                     "activeCells": {},
                     "id": "2e87da8f-d2bb-45a0-a375-39e38e3f9564"
                   }
                 ],
-                "id": "051dac52-2347-487d-be0a-f6a72e32e141"
+                "id": "d6c8257c-ac6a-45ea-ac68-5aff0c2883f3"
               }
             ],
             "activeCells": {},
@@ -8209,7 +8209,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "de14ba6e-e547-4432-a611-57939ceae330",
+            "id": "ee25ce09-3492-4acf-a4a7-cbac38715f95",
             "spec": "runtime-converter",
             "position": null,
             "type": "step-result"
@@ -8258,7 +8258,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 1,
           "wrongs": 0,
@@ -8266,7 +8266,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "general4": {
@@ -8279,7 +8279,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -8290,23 +8290,23 @@ module.exports = {
                 "key": "BadGrammar1",
                 "cells": {},
                 "collections": [],
-                "id": "b847f049-dfc3-4925-8a85-e7a41c0d8c23"
+                "id": "edf1ca79-537e-4b69-945f-80d402405a28"
               },
               {
                 "key": "BadGrammar2",
                 "cells": {},
                 "collections": [],
-                "id": "1a3d2640-180d-40db-833c-ed885c7fdb95"
+                "id": "9666f3be-7b90-4431-a3b2-9a2bfed5fcbb"
               },
               {
                 "key": "BadGrammar3",
                 "cells": {},
                 "collections": [],
-                "id": "634a6966-ed94-4cf2-b393-a965f131d931"
+                "id": "c4619381-30c5-4f31-8ca7-eb48d6dfdf1f"
               }
             ],
             "activeCells": {},
-            "id": "627e8c6d-237a-468f-a212-087585665d30"
+            "id": "df8fcd98-e6ba-46b8-b9e8-bcb7fa742af6"
           }
         ],
         "id": "general4"
@@ -8317,7 +8317,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "627e8c6d-237a-468f-a212-087585665d30",
+            "id": "df8fcd98-e6ba-46b8-b9e8-bcb7fa742af6",
             "spec": "general4",
             "position": "setup",
             "type": "step-result"
@@ -8326,7 +8326,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar1' is not implemented",
             "cells": [],
-            "id": "b847f049-dfc3-4925-8a85-e7a41c0d8c23",
+            "id": "edf1ca79-537e-4b69-945f-80d402405a28",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -8335,7 +8335,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar2' is not implemented",
             "cells": [],
-            "id": "1a3d2640-180d-40db-833c-ed885c7fdb95",
+            "id": "9666f3be-7b90-4431-a3b2-9a2bfed5fcbb",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -8344,7 +8344,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar3' is not implemented",
             "cells": [],
-            "id": "634a6966-ed94-4cf2-b393-a965f131d931",
+            "id": "c4619381-30c5-4f31-8ca7-eb48d6dfdf1f",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -8353,7 +8353,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "627e8c6d-237a-468f-a212-087585665d30",
+            "id": "df8fcd98-e6ba-46b8-b9e8-bcb7fa742af6",
             "spec": "general4",
             "position": "teardown",
             "type": "step-result"
@@ -8407,7 +8407,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -8415,7 +8415,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "general5": {
@@ -8428,7 +8428,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -8471,7 +8471,7 @@ module.exports = {
             "short_title": "Debug"
           },
           {
-            "html": "<pre class=\"bg-warning\">StoryTeller.StorytellerCriticalException: Failed at position &#39;setup&#39; ---&gt; StoryTeller.Model.MissingFixtureException: Fixture with key &#39;FixtureThatDoesNotExist&#39; does not exist\r\n   at StoryTeller.Model.MissingFixture.SetUp() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Model\\MissingFixture.cs:line 15\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 21\r\n   --- End of inner exception stack trace ---\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 33\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84</pre>",
+            "html": "<pre class=\"bg-warning\">StoryTeller.StorytellerCriticalException: Failed at position &#39;setup&#39; ---&gt; StoryTeller.Model.MissingFixtureException: Fixture with key &#39;FixtureThatDoesNotExist&#39; does not exist\r\n   at StoryTeller.Model.MissingFixture.SetUp() in C:\\code\\storyteller\\src\\StoryTeller\\Model\\MissingFixture.cs:line 15\r\n   at StoryTeller.Model.Section.&lt;&gt;c__DisplayClass13_0.&lt;toExecutionSteps&gt;b__0(ISpecContext x) in C:\\code\\storyteller\\src\\StoryTeller\\Model\\Section.cs:line 66\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 21\r\n   --- End of inner exception stack trace ---\r\n   at StoryTeller.Grammars.SilentAction.&lt;&gt;c__DisplayClass3_0.&lt;AsCritical&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 33\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 1,
             "short_title": "Exceptions"
@@ -8479,7 +8479,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -8487,7 +8487,7 @@ module.exports = {
           "invalids": 1
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "paragraph1": {
@@ -8500,7 +8500,7 @@ module.exports = {
         "lifecycle": "Regression",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -8516,7 +8516,7 @@ module.exports = {
                   "expected": "80"
                 },
                 "collections": [],
-                "id": "f708619f-df5c-413f-b7b4-aa0a78bd82cd"
+                "id": "25df4d32-cd1c-4022-a8e2-18647e46dd33"
               },
               {
                 "key": "AddAndMultiplyTable",
@@ -8535,7 +8535,7 @@ module.exports = {
                           "expected": "25"
                         },
                         "collections": [],
-                        "id": "06d9dc90-8336-4e6f-9246-4f935e3c6be0"
+                        "id": "58331735-d373-472f-a7f3-c85594caab3f"
                       },
                       {
                         "key": "Rows",
@@ -8546,7 +8546,7 @@ module.exports = {
                           "expected": "80"
                         },
                         "collections": [],
-                        "id": "376abf48-6aa0-4405-8890-3a3b45896d72"
+                        "id": "36dd1c69-af83-4f7a-b495-95048cd0bb4e"
                       },
                       {
                         "key": "Rows",
@@ -8557,14 +8557,14 @@ module.exports = {
                           "expected": "77"
                         },
                         "collections": [],
-                        "id": "57a021ca-efcd-4631-96e7-a6ec494a40a7"
+                        "id": "4ff8f6c2-2dc1-4373-9cbc-6acc4f198621"
                       }
                     ],
                     "activeCells": {},
-                    "id": "f9724122-2195-4dfa-9811-f8618b1b860d"
+                    "id": "6c6bf81f-1f28-4894-abfb-a621aa69f2fe"
                   }
                 ],
-                "id": "37f181f6-9a50-4860-9413-68372ceb8165"
+                "id": "2f30fc74-f5cf-4521-a5b1-7ed950e66a7b"
               },
               {
                 "key": "AddAndMultiplyThrow",
@@ -8575,11 +8575,11 @@ module.exports = {
                   "expected": "20"
                 },
                 "collections": [],
-                "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca"
+                "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4"
               }
             ],
             "activeCells": {},
-            "id": "424f1087-ea03-49c3-a7a5-124201a003bc"
+            "id": "18027726-f59a-4747-b0f8-a8d3cc85ec4f"
           }
         ],
         "id": "paragraph1"
@@ -8590,7 +8590,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "424f1087-ea03-49c3-a7a5-124201a003bc",
+            "id": "18027726-f59a-4747-b0f8-a8d3cc85ec4f",
             "spec": "paragraph1",
             "position": "setup",
             "type": "step-result"
@@ -8599,7 +8599,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f708619f-df5c-413f-b7b4-aa0a78bd82cd",
+            "id": "25df4d32-cd1c-4022-a8e2-18647e46dd33",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -8616,7 +8616,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "f708619f-df5c-413f-b7b4-aa0a78bd82cd",
+            "id": "25df4d32-cd1c-4022-a8e2-18647e46dd33",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -8625,7 +8625,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f708619f-df5c-413f-b7b4-aa0a78bd82cd",
+            "id": "25df4d32-cd1c-4022-a8e2-18647e46dd33",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -8642,7 +8642,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "f708619f-df5c-413f-b7b4-aa0a78bd82cd",
+            "id": "25df4d32-cd1c-4022-a8e2-18647e46dd33",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -8659,7 +8659,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "06d9dc90-8336-4e6f-9246-4f935e3c6be0",
+            "id": "58331735-d373-472f-a7f3-c85594caab3f",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -8668,7 +8668,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "06d9dc90-8336-4e6f-9246-4f935e3c6be0",
+            "id": "58331735-d373-472f-a7f3-c85594caab3f",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -8677,7 +8677,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "06d9dc90-8336-4e6f-9246-4f935e3c6be0",
+            "id": "58331735-d373-472f-a7f3-c85594caab3f",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -8694,7 +8694,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "06d9dc90-8336-4e6f-9246-4f935e3c6be0",
+            "id": "58331735-d373-472f-a7f3-c85594caab3f",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -8703,7 +8703,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "376abf48-6aa0-4405-8890-3a3b45896d72",
+            "id": "36dd1c69-af83-4f7a-b495-95048cd0bb4e",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -8712,7 +8712,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "376abf48-6aa0-4405-8890-3a3b45896d72",
+            "id": "36dd1c69-af83-4f7a-b495-95048cd0bb4e",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -8721,7 +8721,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "376abf48-6aa0-4405-8890-3a3b45896d72",
+            "id": "36dd1c69-af83-4f7a-b495-95048cd0bb4e",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -8738,7 +8738,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "376abf48-6aa0-4405-8890-3a3b45896d72",
+            "id": "36dd1c69-af83-4f7a-b495-95048cd0bb4e",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -8747,7 +8747,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "57a021ca-efcd-4631-96e7-a6ec494a40a7",
+            "id": "4ff8f6c2-2dc1-4373-9cbc-6acc4f198621",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -8756,7 +8756,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "57a021ca-efcd-4631-96e7-a6ec494a40a7",
+            "id": "4ff8f6c2-2dc1-4373-9cbc-6acc4f198621",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -8765,7 +8765,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "57a021ca-efcd-4631-96e7-a6ec494a40a7",
+            "id": "4ff8f6c2-2dc1-4373-9cbc-6acc4f198621",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -8782,7 +8782,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "57a021ca-efcd-4631-96e7-a6ec494a40a7",
+            "id": "4ff8f6c2-2dc1-4373-9cbc-6acc4f198621",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -8791,7 +8791,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca",
+            "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -8800,7 +8800,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca",
+            "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -8809,16 +8809,16 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca",
+            "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
           },
           {
             "status": "error",
-            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<>c.<.ctor>b__0_2(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84",
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<>c.<.ctor>b__0_2(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83",
             "cells": [],
-            "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca",
+            "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -8835,7 +8835,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "b8bb9fdb-f56d-435f-9b15-b3b1b116e5ca",
+            "id": "bd44a0d9-2549-4598-9cf5-b1837542d9b4",
             "spec": "paragraph1",
             "position": "4",
             "type": "step-result"
@@ -8844,7 +8844,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "424f1087-ea03-49c3-a7a5-124201a003bc",
+            "id": "18027726-f59a-4747-b0f8-a8d3cc85ec4f",
             "spec": "paragraph1",
             "position": "teardown",
             "type": "step-result"
@@ -9016,9 +9016,9 @@ module.exports = {
         "duration": 0,
         "logging": [
           {
-            "html": "<pre class=\"debug-output\"></pre>",
+            "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 50\r\nthe number is 54\r\nthe number is 540\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 5\r\nthe number is 20\r\n</pre>",
             "title": "Debug Output",
-            "count": 0,
+            "count": 13,
             "short_title": "Debug"
           },
           {
@@ -9028,7 +9028,7 @@ module.exports = {
             "short_title": "Numbers"
           },
           {
-            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.&lt;&gt;c.&lt;.ctor&gt;b__0_2(ISpecContext c) in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84</pre>",
+            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.&lt;&gt;c.&lt;.ctor&gt;b__0_2(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\CompositeFixture.cs:line 25\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 1,
             "short_title": "Exceptions"
@@ -9036,7 +9036,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 3,
@@ -9044,7 +9044,7 @@ module.exports = {
           "invalids": 2
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "paragraph2": {
@@ -9057,7 +9057,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -9073,7 +9073,7 @@ module.exports = {
                   "expected": "80"
                 },
                 "collections": [],
-                "id": "44e922ca-e4b5-495c-9274-04489944cd9a"
+                "id": "5c8b97f9-6adf-48b4-93d4-c3a10665c286"
               },
               {
                 "key": "AddAndMultiply",
@@ -9084,7 +9084,7 @@ module.exports = {
                   "expected": "77"
                 },
                 "collections": [],
-                "id": "b9d1c0e5-e585-4b3f-920c-9b1634465aaf"
+                "id": "d4d6c412-ec1f-4b1b-b710-e7c439365912"
               },
               {
                 "key": "AddAndMultiplyTable",
@@ -9103,7 +9103,7 @@ module.exports = {
                           "expected": "25"
                         },
                         "collections": [],
-                        "id": "be908c15-5fec-4645-93d6-643241cd426d"
+                        "id": "d3e22bb3-c677-4720-9cc7-bd0387dc0394"
                       },
                       {
                         "key": "Rows",
@@ -9114,7 +9114,7 @@ module.exports = {
                           "expected": "80"
                         },
                         "collections": [],
-                        "id": "eeb01f0e-35f1-44cd-ada7-942df4f7a6a8"
+                        "id": "ae26dc6d-6495-4ae5-a01d-268000c705d4"
                       },
                       {
                         "key": "Rows",
@@ -9125,18 +9125,18 @@ module.exports = {
                           "expected": "77"
                         },
                         "collections": [],
-                        "id": "d4dc7490-1ccf-4b6a-bfed-3596fca42d56"
+                        "id": "f5cf076f-74b5-431e-9ad8-72910c995406"
                       }
                     ],
                     "activeCells": {},
-                    "id": "65d9718a-fb63-41bc-ac6f-e9e8ac09b4ca"
+                    "id": "7636bdf6-134a-4cd1-9fe1-188650f67f01"
                   }
                 ],
-                "id": "a82a1e54-a98d-4e3f-8353-671c4ca50410"
+                "id": "77b6dd92-637d-4b75-a3a2-44de17f9d51a"
               }
             ],
             "activeCells": {},
-            "id": "a6052a63-5ddc-414a-85d8-c1a864338f25"
+            "id": "8c35e9f3-3480-4487-9f7a-fa4d9d6f09c6"
           }
         ],
         "id": "paragraph2"
@@ -9147,7 +9147,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a6052a63-5ddc-414a-85d8-c1a864338f25",
+            "id": "8c35e9f3-3480-4487-9f7a-fa4d9d6f09c6",
             "spec": "paragraph2",
             "position": "setup",
             "type": "step-result"
@@ -9156,7 +9156,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "44e922ca-e4b5-495c-9274-04489944cd9a",
+            "id": "5c8b97f9-6adf-48b4-93d4-c3a10665c286",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -9165,7 +9165,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "44e922ca-e4b5-495c-9274-04489944cd9a",
+            "id": "5c8b97f9-6adf-48b4-93d4-c3a10665c286",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -9174,7 +9174,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "44e922ca-e4b5-495c-9274-04489944cd9a",
+            "id": "5c8b97f9-6adf-48b4-93d4-c3a10665c286",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -9191,7 +9191,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "44e922ca-e4b5-495c-9274-04489944cd9a",
+            "id": "5c8b97f9-6adf-48b4-93d4-c3a10665c286",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -9200,7 +9200,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b9d1c0e5-e585-4b3f-920c-9b1634465aaf",
+            "id": "d4d6c412-ec1f-4b1b-b710-e7c439365912",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -9209,7 +9209,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b9d1c0e5-e585-4b3f-920c-9b1634465aaf",
+            "id": "d4d6c412-ec1f-4b1b-b710-e7c439365912",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -9218,7 +9218,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b9d1c0e5-e585-4b3f-920c-9b1634465aaf",
+            "id": "d4d6c412-ec1f-4b1b-b710-e7c439365912",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -9235,7 +9235,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "b9d1c0e5-e585-4b3f-920c-9b1634465aaf",
+            "id": "d4d6c412-ec1f-4b1b-b710-e7c439365912",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -9244,7 +9244,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "be908c15-5fec-4645-93d6-643241cd426d",
+            "id": "d3e22bb3-c677-4720-9cc7-bd0387dc0394",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -9253,7 +9253,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "be908c15-5fec-4645-93d6-643241cd426d",
+            "id": "d3e22bb3-c677-4720-9cc7-bd0387dc0394",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -9262,7 +9262,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "be908c15-5fec-4645-93d6-643241cd426d",
+            "id": "d3e22bb3-c677-4720-9cc7-bd0387dc0394",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -9279,7 +9279,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "be908c15-5fec-4645-93d6-643241cd426d",
+            "id": "d3e22bb3-c677-4720-9cc7-bd0387dc0394",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -9288,7 +9288,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "eeb01f0e-35f1-44cd-ada7-942df4f7a6a8",
+            "id": "ae26dc6d-6495-4ae5-a01d-268000c705d4",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -9297,7 +9297,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "eeb01f0e-35f1-44cd-ada7-942df4f7a6a8",
+            "id": "ae26dc6d-6495-4ae5-a01d-268000c705d4",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -9306,7 +9306,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "eeb01f0e-35f1-44cd-ada7-942df4f7a6a8",
+            "id": "ae26dc6d-6495-4ae5-a01d-268000c705d4",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -9323,7 +9323,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "eeb01f0e-35f1-44cd-ada7-942df4f7a6a8",
+            "id": "ae26dc6d-6495-4ae5-a01d-268000c705d4",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -9332,7 +9332,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "d4dc7490-1ccf-4b6a-bfed-3596fca42d56",
+            "id": "f5cf076f-74b5-431e-9ad8-72910c995406",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -9341,7 +9341,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "d4dc7490-1ccf-4b6a-bfed-3596fca42d56",
+            "id": "f5cf076f-74b5-431e-9ad8-72910c995406",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -9350,7 +9350,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "d4dc7490-1ccf-4b6a-bfed-3596fca42d56",
+            "id": "f5cf076f-74b5-431e-9ad8-72910c995406",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -9367,7 +9367,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "d4dc7490-1ccf-4b6a-bfed-3596fca42d56",
+            "id": "f5cf076f-74b5-431e-9ad8-72910c995406",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -9376,7 +9376,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a6052a63-5ddc-414a-85d8-c1a864338f25",
+            "id": "8c35e9f3-3480-4487-9f7a-fa4d9d6f09c6",
             "spec": "paragraph2",
             "position": "teardown",
             "type": "step-result"
@@ -9541,9 +9541,9 @@ module.exports = {
         "duration": 0,
         "logging": [
           {
-            "html": "<pre class=\"debug-output\"></pre>",
+            "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 3\r\nthe number is 7\r\nthe number is 70\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\nthe number is 5\r\nthe number is 8\r\nthe number is 80\r\n</pre>",
             "title": "Debug Output",
-            "count": 0,
+            "count": 15,
             "short_title": "Debug"
           },
           {
@@ -9555,7 +9555,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 3,
@@ -9563,7 +9563,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "sentence1": {
@@ -9576,7 +9576,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -9591,7 +9591,7 @@ module.exports = {
                   "y": "5"
                 },
                 "collections": [],
-                "id": "e09b1b6e-e7b7-4027-af2f-11c530d56cbe"
+                "id": "8d76b450-1bf3-4257-9123-0e9dae07be66"
               },
               {
                 "key": "AddTo5",
@@ -9601,7 +9601,7 @@ module.exports = {
                   "y": "5"
                 },
                 "collections": [],
-                "id": "04821e02-2df0-4a71-90ae-d02725c56b52"
+                "id": "6b892a44-40e2-4ba8-b691-95b3a2671c4c"
               }
             ],
             "activeCells": {},
@@ -9633,7 +9633,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "e09b1b6e-e7b7-4027-af2f-11c530d56cbe",
+            "id": "8d76b450-1bf3-4257-9123-0e9dae07be66",
             "spec": "sentence1",
             "position": null,
             "type": "step-result"
@@ -9650,7 +9650,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "04821e02-2df0-4a71-90ae-d02725c56b52",
+            "id": "6b892a44-40e2-4ba8-b691-95b3a2671c4c",
             "spec": "sentence1",
             "position": null,
             "type": "step-result"
@@ -9706,7 +9706,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -9714,7 +9714,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "sentence2": {
@@ -9727,7 +9727,7 @@ module.exports = {
         "lifecycle": "Regression",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -9801,7 +9801,7 @@ module.exports = {
           },
           {
             "status": "error",
-            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.<>c.<.ctor>b__1_2() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 64\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40",
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.<>c.<.ctor>b__1_2() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Fixture.FactExpression.<>c__DisplayClass2_0.<VerifiedBy>b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Fixture.cs:line 315\r\n   at StoryTeller.Grammars.FactGrammar.PerformTest(StepValues values, ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 37\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 64\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40",
             "cells": [],
             "id": "3",
             "spec": "sentence2",
@@ -9864,7 +9864,7 @@ module.exports = {
             "short_title": "Debug"
           },
           {
-            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.&lt;&gt;c.&lt;.ctor&gt;b__1_2() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 64\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40</pre>",
+            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.&lt;&gt;c.&lt;.ctor&gt;b__1_2() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 64\r\n   at StoryTeller.Fixture.FactExpression.&lt;&gt;c__DisplayClass2_0.&lt;VerifiedBy&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Fixture.cs:line 315\r\n   at StoryTeller.Grammars.FactGrammar.PerformTest(StepValues values, ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 37\r\n   at StoryTeller.Grammars.FactPlan.execute(ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\FactPlan.cs:line 64\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 1,
             "short_title": "Exceptions"
@@ -9872,7 +9872,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -9880,7 +9880,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "sentence3": {
@@ -9893,7 +9893,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -9908,7 +9908,7 @@ module.exports = {
                   "x": "5"
                 },
                 "collections": [],
-                "id": "a32fe313-b571-40db-9591-c6745a3a3471"
+                "id": "11b81e62-d5e2-46c3-a2bf-005bd4d665c3"
               },
               {
                 "key": "AddingTo5",
@@ -9918,11 +9918,11 @@ module.exports = {
                   "x": "5"
                 },
                 "collections": [],
-                "id": "11171966-d900-4598-98bc-2ef96ba03de4"
+                "id": "d1fda66c-dc10-490f-ba23-dcca00a226eb"
               }
             ],
             "activeCells": {},
-            "id": "9cef115b-e26a-41c2-a293-7b5c155bb58c"
+            "id": "673d05a0-e04f-44a6-a863-b509feee047b"
           }
         ],
         "id": "sentence3"
@@ -9933,7 +9933,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9cef115b-e26a-41c2-a293-7b5c155bb58c",
+            "id": "673d05a0-e04f-44a6-a863-b509feee047b",
             "spec": "sentence3",
             "position": "setup",
             "type": "step-result"
@@ -9950,7 +9950,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "a32fe313-b571-40db-9591-c6745a3a3471",
+            "id": "11b81e62-d5e2-46c3-a2bf-005bd4d665c3",
             "spec": "sentence3",
             "position": null,
             "type": "step-result"
@@ -9967,7 +9967,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "11171966-d900-4598-98bc-2ef96ba03de4",
+            "id": "d1fda66c-dc10-490f-ba23-dcca00a226eb",
             "spec": "sentence3",
             "position": null,
             "type": "step-result"
@@ -9976,7 +9976,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9cef115b-e26a-41c2-a293-7b5c155bb58c",
+            "id": "673d05a0-e04f-44a6-a863-b509feee047b",
             "spec": "sentence3",
             "position": "teardown",
             "type": "step-result"
@@ -10023,7 +10023,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -10031,7 +10031,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "sentence4": {
@@ -10044,7 +10044,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -10076,7 +10076,7 @@ module.exports = {
                   "number": "5"
                 },
                 "collections": [],
-                "id": "734f9528-5d50-4415-8d20-97589877e905"
+                "id": "22c1320a-021f-4fac-86f4-0562a6cec110"
               },
               {
                 "key": "MultiplyThenAdd",
@@ -10085,7 +10085,7 @@ module.exports = {
                   "delta": "4"
                 },
                 "collections": [],
-                "id": "ae762d24-91e6-4681-b528-29748e654455"
+                "id": "226f27c5-e0be-44de-9327-51b4511e798f"
               },
               {
                 "key": "Subtract",
@@ -10093,7 +10093,7 @@ module.exports = {
                   "operand": "2"
                 },
                 "collections": [],
-                "id": "00765e78-786c-4a17-85f9-8d04def2a4ce"
+                "id": "f9b81b69-dc35-496f-81f2-b6fde1706b8e"
               },
               {
                 "text": "Correct assertion",
@@ -10122,7 +10122,7 @@ module.exports = {
                   "sum": "5"
                 },
                 "collections": [],
-                "id": "37e1803b-63f8-4329-910f-4d6816f5a49a"
+                "id": "eef25f93-3aba-4659-8128-d3e488a9346b"
               },
               {
                 "text": "Line assertions",
@@ -10192,7 +10192,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "734f9528-5d50-4415-8d20-97589877e905",
+            "id": "22c1320a-021f-4fac-86f4-0562a6cec110",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -10201,7 +10201,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ae762d24-91e6-4681-b528-29748e654455",
+            "id": "226f27c5-e0be-44de-9327-51b4511e798f",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -10210,7 +10210,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "00765e78-786c-4a17-85f9-8d04def2a4ce",
+            "id": "f9b81b69-dc35-496f-81f2-b6fde1706b8e",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -10244,7 +10244,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "37e1803b-63f8-4329-910f-4d6816f5a49a",
+            "id": "eef25f93-3aba-4659-8128-d3e488a9346b",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -10368,9 +10368,9 @@ module.exports = {
         "duration": 0,
         "logging": [
           {
-            "html": "<pre class=\"debug-output\"></pre>",
+            "html": "<pre class=\"debug-output\">the number is 5\r\nthe number is 19\r\nthe number is 17\r\n</pre>",
             "title": "Debug Output",
-            "count": 0,
+            "count": 3,
             "short_title": "Debug"
           },
           {
@@ -10380,7 +10380,7 @@ module.exports = {
             "short_title": "Numbers"
           },
           {
-            "html": "<pre class=\"bg-warning\">System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---&gt; StoryTeller.StorytellerAssertionException: No go!\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.ThisLineAlwaysThrowsExceptions() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 132\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.&lt;Invoke&gt;d__19.MoveNext() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 81\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 18\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40</pre>",
+            "html": "<pre class=\"bg-warning\">System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---&gt; StoryTeller.StorytellerAssertionException: No go!\r\n   at StoryTeller.StoryTellerAssert.Fail(String message) in C:\\code\\storyteller\\src\\StoryTeller\\StoryTellerAssert.cs:line 17\r\n   at StoryTeller.Samples.Fixtures.SentenceFixture.ThisLineAlwaysThrowsExceptions() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SentenceFixture.cs:line 132\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.&lt;Invoke&gt;d__19.MoveNext() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Reflection\\MethodInvocation.cs:line 81\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LinePlan.cs:line 20\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\LineStepBase.cs:line 40</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 1,
             "short_title": "Exceptions"
@@ -10388,7 +10388,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -10396,7 +10396,7 @@ module.exports = {
           "invalids": 1
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "set1": {
@@ -10409,7 +10409,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -10432,7 +10432,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513"
+                        "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218"
                       },
                       {
                         "key": "Rows",
@@ -10442,7 +10442,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221"
+                        "id": "5d2b1c63-f179-49f1-8508-3b593554021b"
                       },
                       {
                         "key": "Rows",
@@ -10452,19 +10452,19 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180"
+                        "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2"
                       }
                     ],
                     "activeCells": {},
-                    "id": "86df0ea3-8df3-42a7-a43e-770c98ba0154"
+                    "id": "e11cb76c-b12a-4d9c-a96e-4fde62093b45"
                   }
                 ],
-                "id": "a7c07741-e37f-4f03-8ae8-79579fb69c20"
+                "id": "c26eae06-a1ad-453e-ae74-907b4bb73def"
               },
               {
                 "text": "Completely successful ordering",
                 "type": "comment",
-                "id": "0416254a-1cdf-47fd-95d6-fd02a5620a84"
+                "id": "7cf23277-d398-48cf-b458-352864c92d0f"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -10515,12 +10515,12 @@ module.exports = {
                     "id": "1"
                   }
                 ],
-                "id": "adfde037-3de5-40f8-8eef-3a0e901fcc24"
+                "id": "a5e29b3a-3ca4-4fed-b7fa-6452d69ae7b8"
               },
               {
                 "text": "Out of order",
                 "type": "comment",
-                "id": "dddf826f-1fe3-4a30-b3d5-8b2eb72b0546"
+                "id": "634d4752-442f-4436-809b-6a5e2185321d"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -10571,12 +10571,12 @@ module.exports = {
                     "id": "5"
                   }
                 ],
-                "id": "cc35d328-7cdf-4d68-9afb-bc9140c7f596"
+                "id": "fb9c6dbe-5a81-4e4b-b428-62fbabdc72a1"
               },
               {
                 "text": "Should have one exra",
                 "type": "comment",
-                "id": "e98e15e3-4e25-40c4-b64b-9d8fd9c64b68"
+                "id": "dcec6378-8cc0-46f4-bf3f-19b5d5c5cd13"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -10595,7 +10595,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "dfcb7f02-5a97-411d-b564-b0e2f18d4d40"
+                        "id": "01fba135-3461-4d2c-a944-cbac71a263e2"
                       },
                       {
                         "key": "Rows",
@@ -10606,19 +10606,19 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "53766ef6-8a83-4685-8d88-c5809d64923a"
+                        "id": "a07b0bcd-4185-45f4-8c5a-8815f1ab3b62"
                       }
                     ],
                     "activeCells": {},
                     "id": "9"
                   }
                 ],
-                "id": "4fa65227-4549-4f0b-a17e-b05d9bbe2917"
+                "id": "bfd21173-ce27-4116-b003-bd967936773c"
               },
               {
                 "text": "Should mark one expected result as missing",
                 "type": "comment",
-                "id": "d9a6f8d9-e269-4271-9e78-b87f55e85c78"
+                "id": "edbfee4e-02b9-4ff8-95e5-c176f2eb5469"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -10637,7 +10637,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "1ca8e212-2846-4623-8fbd-3e29ccff392e"
+                        "id": "2faf7bc2-7fe5-4ff0-a11c-90d5e980026d"
                       },
                       {
                         "key": "Rows",
@@ -10648,7 +10648,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "a0ab98b0-a1ac-42c5-a3fd-39e21dad31ce"
+                        "id": "0619c8aa-c8b1-41ca-b5a5-c23dc95172fb"
                       },
                       {
                         "key": "Rows",
@@ -10659,7 +10659,7 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "c6a70d76-e225-4b9f-a21f-dcd1ce726065"
+                        "id": "464cfa77-16fc-4645-96ce-83bd60aff9fb"
                       },
                       {
                         "key": "Rows",
@@ -10678,12 +10678,12 @@ module.exports = {
                     "id": "10"
                   }
                 ],
-                "id": "85d3600e-79aa-4ae6-ba34-4aeedd1abdcf"
+                "id": "16f5fd66-00c7-49bf-8668-3a71478d9ef4"
               },
               {
                 "text": "One syntax error",
                 "type": "comment",
-                "id": "957da2fe-0b69-4db9-b493-680e379b168e"
+                "id": "814b39ab-ac85-445c-afab-30841a2b3bba"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -10714,7 +10714,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "f560fdb8-e102-4f10-bac0-6572dd5e95a7"
+                        "id": "b8cd4609-886c-41cd-85f2-06e073fef9ca"
                       },
                       {
                         "key": "Rows",
@@ -10725,18 +10725,18 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "35fdec81-7e23-4b04-a85a-5b5307ace87e"
+                        "id": "b369c7e9-87a1-4c1d-9615-c64a9d0cc073"
                       }
                     ],
                     "activeCells": {},
-                    "id": "ce1c185b-e192-4121-b275-7e7449984e5c"
+                    "id": "12bc8aae-c2cc-4812-964d-1a84b886ba13"
                   }
                 ],
-                "id": "041175ec-b37e-41f1-9b4e-fbbb1b065b71"
+                "id": "55a29424-b85f-45e3-a6c4-8c6933cef1c8"
               }
             ],
             "activeCells": {},
-            "id": "7c70ff26-8328-498b-beac-aa83249f4b17"
+            "id": "db4b26f7-6c14-45ef-8a78-0b516809750a"
           }
         ],
         "id": "set1"
@@ -10747,7 +10747,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7c70ff26-8328-498b-beac-aa83249f4b17",
+            "id": "db4b26f7-6c14-45ef-8a78-0b516809750a",
             "spec": "set1",
             "position": "setup",
             "type": "step-result"
@@ -10756,7 +10756,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "86df0ea3-8df3-42a7-a43e-770c98ba0154",
+            "id": "e11cb76c-b12a-4d9c-a96e-4fde62093b45",
             "spec": "set1",
             "position": "before",
             "type": "step-result"
@@ -10765,7 +10765,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513",
+            "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218",
             "spec": "set1",
             "position": "0",
             "type": "step-result"
@@ -10774,7 +10774,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513",
+            "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -10783,7 +10783,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513",
+            "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -10792,7 +10792,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513",
+            "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -10801,7 +10801,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1bbe3b2b-7cb0-4508-b350-5642797e6513",
+            "id": "d13f97a4-50c8-4c96-932d-e2d6e6092218",
             "spec": "set1",
             "position": "4",
             "type": "step-result"
@@ -10810,7 +10810,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221",
+            "id": "5d2b1c63-f179-49f1-8508-3b593554021b",
             "spec": "set1",
             "position": "0",
             "type": "step-result"
@@ -10819,7 +10819,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221",
+            "id": "5d2b1c63-f179-49f1-8508-3b593554021b",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -10828,7 +10828,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221",
+            "id": "5d2b1c63-f179-49f1-8508-3b593554021b",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -10837,7 +10837,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221",
+            "id": "5d2b1c63-f179-49f1-8508-3b593554021b",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -10846,7 +10846,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "51de5ff6-114f-4695-b0f6-f1acd77cc221",
+            "id": "5d2b1c63-f179-49f1-8508-3b593554021b",
             "spec": "set1",
             "position": "4",
             "type": "step-result"
@@ -10855,7 +10855,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180",
+            "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2",
             "spec": "set1",
             "position": "0",
             "type": "step-result"
@@ -10864,7 +10864,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180",
+            "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -10873,7 +10873,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180",
+            "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -10882,7 +10882,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180",
+            "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -10891,7 +10891,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fa5f6d84-2d40-4728-bf93-ee9e329e2180",
+            "id": "d4f225ef-e354-4192-8f47-3f87ac2092f2",
             "spec": "set1",
             "position": "4",
             "type": "step-result"
@@ -10934,14 +10934,14 @@ module.exports = {
           {
             "spec": "set1",
             "matches": [
-              "dfcb7f02-5a97-411d-b564-b0e2f18d4d40",
-              "53766ef6-8a83-4685-8d88-c5809d64923a"
+              "01fba135-3461-4d2c-a944-cbac71a263e2",
+              "a07b0bcd-4185-45f4-8c5a-8815f1ab3b62"
             ],
             "missing": [],
             "extras": [
               {
                 "Amount": "300.3",
-                "Date": "7/24/2016 12:00:00 AM",
+                "Date": "8/7/2016 12:00:00 AM",
                 "Name": "Hammer"
               }
             ],
@@ -10952,9 +10952,9 @@ module.exports = {
           {
             "spec": "set1",
             "matches": [
-              "1ca8e212-2846-4623-8fbd-3e29ccff392e",
-              "a0ab98b0-a1ac-42c5-a3fd-39e21dad31ce",
-              "c6a70d76-e225-4b9f-a21f-dcd1ce726065"
+              "2faf7bc2-7fe5-4ff0-a11c-90d5e980026d",
+              "0619c8aa-c8b1-41ca-b5a5-c23dc95172fb",
+              "464cfa77-16fc-4645-96ce-83bd60aff9fb"
             ],
             "missing": [
               "11"
@@ -10985,7 +10985,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7c70ff26-8328-498b-beac-aa83249f4b17",
+            "id": "db4b26f7-6c14-45ef-8a78-0b516809750a",
             "spec": "set1",
             "position": "teardown",
             "type": "step-result"
@@ -11165,7 +11165,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 8,
           "wrongs": 5,
@@ -11173,7 +11173,7 @@ module.exports = {
           "invalids": 1
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "set2": {
@@ -11186,7 +11186,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -11207,7 +11207,7 @@ module.exports = {
                           "name": "Jeremy"
                         },
                         "collections": [],
-                        "id": "ca6b2756-8896-4e82-a684-5ca776befeaa"
+                        "id": "ecc6ba92-92ee-4c9a-9a44-052f08ed437d"
                       },
                       {
                         "key": "name",
@@ -11215,7 +11215,7 @@ module.exports = {
                           "name": "Josh"
                         },
                         "collections": [],
-                        "id": "4464555f-c634-4d3e-bdc6-460b85e58ea0"
+                        "id": "b53930f4-01f9-4a42-96c1-30d3f599589f"
                       },
                       {
                         "key": "name",
@@ -11223,7 +11223,7 @@ module.exports = {
                           "name": "Gary"
                         },
                         "collections": [],
-                        "id": "53715901-7f35-4c03-9277-9759903b2a19"
+                        "id": "3243eaf3-e81f-453b-a8b8-0a6c570c0ec8"
                       },
                       {
                         "key": "name",
@@ -11231,7 +11231,7 @@ module.exports = {
                           "name": "Kevin"
                         },
                         "collections": [],
-                        "id": "19ea89c8-c87b-47d4-900b-fdf4ffd8d160"
+                        "id": "4b291447-3890-4a4b-bde6-60770c6d39ec"
                       },
                       {
                         "key": "name",
@@ -11239,14 +11239,14 @@ module.exports = {
                           "name": "Chad"
                         },
                         "collections": [],
-                        "id": "83a6ab78-0102-4344-9ad7-9e082e3a1c33"
+                        "id": "9614399e-24f1-4fb2-968f-6fb7fe51a1ad"
                       }
                     ],
                     "activeCells": {},
-                    "id": "87a348a6-84e9-477d-8397-3b7ce6ee482b"
+                    "id": "a3513fce-763c-4586-8385-facf5f18d824"
                   }
                 ],
-                "id": "758403fb-92c5-4dfa-a30c-0dcb854fba2d"
+                "id": "1e002f25-da8e-421d-a846-d0e5e1908155"
               },
               {
                 "key": "OrderedStringSet",
@@ -11263,7 +11263,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "8c0bc09b-7969-42b5-9f57-2a67fffd0081"
+                        "id": "e4f28def-0caf-48f8-b281-f57f0a9ab91c"
                       },
                       {
                         "key": "Rows",
@@ -11272,7 +11272,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "cd223ff1-e84e-40ff-9134-9445bb71c8c1"
+                        "id": "c79e8432-5e6b-403a-875e-a1b31bc4e4b3"
                       },
                       {
                         "key": "Rows",
@@ -11281,7 +11281,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "0712c78d-93f7-4c9b-84e8-cb2c84b739f6"
+                        "id": "4ad517fd-e620-4924-9e24-e352d87f065a"
                       },
                       {
                         "key": "Rows",
@@ -11290,7 +11290,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "a2e400bc-3f83-4607-81c8-48401cd00087"
+                        "id": "8c2697c4-fd02-43e4-b9c3-40cda10b3fb3"
                       },
                       {
                         "key": "Rows",
@@ -11299,14 +11299,14 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "a1d4207c-c74a-4ab9-936e-f5e12eaafd90"
+                        "id": "3fe91b18-fe7b-4607-82f0-cc318345aef7"
                       }
                     ],
                     "activeCells": {},
-                    "id": "19862903-7244-4670-aa5e-086bcf7bf9f7"
+                    "id": "815d2082-7a45-46a0-bf8e-ceaca9e2152f"
                   }
                 ],
-                "id": "c67b3a76-c8d7-4509-bf2b-bc7d86cc54fc"
+                "id": "7b009748-51e4-45bc-93c0-b66490193750"
               },
               {
                 "key": "UnorderedStringSet",
@@ -11323,7 +11323,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "27fb4ae7-f117-4672-9bcc-5b20f8c4276c"
+                        "id": "0011e53e-e928-445c-848b-ab7407d060dc"
                       },
                       {
                         "key": "Rows",
@@ -11332,7 +11332,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "d91774d4-3f49-42b6-b43b-33e451d36e92"
+                        "id": "ec262d84-2bdc-4f92-843a-2dcca07cde60"
                       },
                       {
                         "key": "Rows",
@@ -11341,7 +11341,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "90d9478d-a4da-4f36-997d-179cf4152665"
+                        "id": "3bca777f-e244-416d-bf61-4e6ae28473b8"
                       },
                       {
                         "key": "Rows",
@@ -11350,7 +11350,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "ccbdf471-bde9-46c4-b82d-65d8cba4936e"
+                        "id": "4192bcc5-605b-4c28-99bd-cdb094917ba7"
                       },
                       {
                         "key": "Rows",
@@ -11359,18 +11359,18 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "1908c8ea-368a-46e4-b4de-2d8bd4d90d80"
+                        "id": "9cff0717-df16-4678-a725-c2e87b83e024"
                       }
                     ],
                     "activeCells": {},
-                    "id": "06a42844-e138-4c56-a277-2d042f01fe11"
+                    "id": "bd883bb2-1a7a-421f-ac09-12f39d69c263"
                   }
                 ],
-                "id": "5a52b208-8a87-4e33-ae1f-bd7ae140d140"
+                "id": "a0b02df9-958e-47dc-bddd-ea45116f7b3c"
               }
             ],
             "activeCells": {},
-            "id": "646dd5e1-59f6-43d5-897b-c270a47c4f6d"
+            "id": "a500f493-6fdb-4ae2-8a1f-0a0c3761e7b6"
           }
         ],
         "id": "set2"
@@ -11381,7 +11381,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "646dd5e1-59f6-43d5-897b-c270a47c4f6d",
+            "id": "a500f493-6fdb-4ae2-8a1f-0a0c3761e7b6",
             "spec": "set2",
             "position": "setup",
             "type": "step-result"
@@ -11390,7 +11390,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "87a348a6-84e9-477d-8397-3b7ce6ee482b",
+            "id": "a3513fce-763c-4586-8385-facf5f18d824",
             "spec": "set2",
             "position": "before",
             "type": "step-result"
@@ -11399,7 +11399,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ca6b2756-8896-4e82-a684-5ca776befeaa",
+            "id": "ecc6ba92-92ee-4c9a-9a44-052f08ed437d",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -11408,7 +11408,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4464555f-c634-4d3e-bdc6-460b85e58ea0",
+            "id": "b53930f4-01f9-4a42-96c1-30d3f599589f",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -11417,7 +11417,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "53715901-7f35-4c03-9277-9759903b2a19",
+            "id": "3243eaf3-e81f-453b-a8b8-0a6c570c0ec8",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -11426,7 +11426,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "19ea89c8-c87b-47d4-900b-fdf4ffd8d160",
+            "id": "4b291447-3890-4a4b-bde6-60770c6d39ec",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -11435,7 +11435,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "83a6ab78-0102-4344-9ad7-9e082e3a1c33",
+            "id": "9614399e-24f1-4fb2-968f-6fb7fe51a1ad",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -11443,38 +11443,38 @@ module.exports = {
           {
             "spec": "set2",
             "matches": [
-              "8c0bc09b-7969-42b5-9f57-2a67fffd0081",
-              "cd223ff1-e84e-40ff-9134-9445bb71c8c1",
-              "0712c78d-93f7-4c9b-84e8-cb2c84b739f6",
-              "a2e400bc-3f83-4607-81c8-48401cd00087",
-              "a1d4207c-c74a-4ab9-936e-f5e12eaafd90"
+              "e4f28def-0caf-48f8-b281-f57f0a9ab91c",
+              "c79e8432-5e6b-403a-875e-a1b31bc4e4b3",
+              "4ad517fd-e620-4924-9e24-e352d87f065a",
+              "8c2697c4-fd02-43e4-b9c3-40cda10b3fb3",
+              "3fe91b18-fe7b-4607-82f0-cc318345aef7"
             ],
             "missing": [],
             "extras": [],
             "wrongOrdered": [],
-            "id": "19862903-7244-4670-aa5e-086bcf7bf9f7",
+            "id": "815d2082-7a45-46a0-bf8e-ceaca9e2152f",
             "type": "set-verification-result"
           },
           {
             "spec": "set2",
             "matches": [
-              "27fb4ae7-f117-4672-9bcc-5b20f8c4276c",
-              "d91774d4-3f49-42b6-b43b-33e451d36e92",
-              "90d9478d-a4da-4f36-997d-179cf4152665",
-              "ccbdf471-bde9-46c4-b82d-65d8cba4936e",
-              "1908c8ea-368a-46e4-b4de-2d8bd4d90d80"
+              "0011e53e-e928-445c-848b-ab7407d060dc",
+              "ec262d84-2bdc-4f92-843a-2dcca07cde60",
+              "3bca777f-e244-416d-bf61-4e6ae28473b8",
+              "4192bcc5-605b-4c28-99bd-cdb094917ba7",
+              "9cff0717-df16-4678-a725-c2e87b83e024"
             ],
             "missing": [],
             "extras": [],
             "wrongOrdered": [],
-            "id": "06a42844-e138-4c56-a277-2d042f01fe11",
+            "id": "bd883bb2-1a7a-421f-ac09-12f39d69c263",
             "type": "set-verification-result"
           },
           {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "646dd5e1-59f6-43d5-897b-c270a47c4f6d",
+            "id": "a500f493-6fdb-4ae2-8a1f-0a0c3761e7b6",
             "spec": "set2",
             "position": "teardown",
             "type": "step-result"
@@ -11563,7 +11563,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 10,
           "wrongs": 0,
@@ -11571,7 +11571,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "set3": {
@@ -11584,7 +11584,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -11605,7 +11605,7 @@ module.exports = {
                           "Name": "a"
                         },
                         "collections": [],
-                        "id": "d32a075d-0f5b-4360-a80e-daa218fa27b6"
+                        "id": "12d4e543-6e60-4f26-ac06-399116fea74b"
                       },
                       {
                         "key": "rows",
@@ -11613,7 +11613,7 @@ module.exports = {
                           "Name": "b"
                         },
                         "collections": [],
-                        "id": "4e5c0635-238e-4c16-9236-894652244c4c"
+                        "id": "1ff4cc2f-a9d3-4d8e-a0e3-1468afe56f6d"
                       },
                       {
                         "key": "rows",
@@ -11621,18 +11621,18 @@ module.exports = {
                           "Name": "c"
                         },
                         "collections": [],
-                        "id": "a3f6cb94-e095-43a9-b11f-456df73d8495"
+                        "id": "90d3171f-80fc-4e59-b85b-7533465141aa"
                       }
                     ],
                     "activeCells": {},
                     "id": "1"
                   }
                 ],
-                "id": "e48f0f48-ab06-4ae6-9f65-f67cad3e568c"
+                "id": "439a4b8b-c7db-436b-be1a-6d6f711ce004"
               }
             ],
             "activeCells": {},
-            "id": "3a5cf2cb-27a2-4f26-a56e-7a9f2bb9e50e"
+            "id": "e6210665-515c-4b57-bf74-9aa69760d2de"
           }
         ],
         "id": "set3"
@@ -11643,14 +11643,14 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3a5cf2cb-27a2-4f26-a56e-7a9f2bb9e50e",
+            "id": "e6210665-515c-4b57-bf74-9aa69760d2de",
             "spec": "set3",
             "position": "setup",
             "type": "step-result"
           },
           {
             "status": "error",
-            "error": "System.AggregateException: One or more errors occurred. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<>c.<ThrowsErrorOnDataFetch>b__3_0() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3_0.<Fetch>b__0() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---> (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<>c.<ThrowsErrorOnDataFetch>b__3_0() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3_0.<Fetch>b__0() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()<---\r\n",
+            "error": "System.AggregateException: One or more errors occurred. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<>c.<ThrowsErrorOnDataFetch>b__3_0() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Fixture.<>c__DisplayClass42_0`1.<VerifySetOf>b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Fixture.cs:line 494\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3_0.<Fetch>b__0() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---> (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.<>c.<ThrowsErrorOnDataFetch>b__3_0() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Fixture.<>c__DisplayClass42_0`1.<VerifySetOf>b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Fixture.cs:line 494\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.<>c__DisplayClass3_0.<Fetch>b__0() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()<---\r\n",
             "cells": [],
             "id": "1",
             "spec": "set3",
@@ -11661,7 +11661,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3a5cf2cb-27a2-4f26-a56e-7a9f2bb9e50e",
+            "id": "e6210665-515c-4b57-bf74-9aa69760d2de",
             "spec": "set3",
             "position": "teardown",
             "type": "step-result"
@@ -11699,7 +11699,7 @@ module.exports = {
             "short_title": "Debug"
           },
           {
-            "html": "<pre class=\"bg-warning\">System.AggregateException: One or more errors occurred. ---&gt; System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.&lt;&gt;c.&lt;ThrowsErrorOnDataFetch&gt;b__3_0() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.&lt;&gt;c__DisplayClass3_0.&lt;Fetch&gt;b__0() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---&gt; (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.&lt;&gt;c.&lt;ThrowsErrorOnDataFetch&gt;b__3_0() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.&lt;&gt;c__DisplayClass3_0.&lt;Fetch&gt;b__0() in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()&lt;---\r\n</pre>",
+            "html": "<pre class=\"bg-warning\">System.AggregateException: One or more errors occurred. ---&gt; System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.&lt;&gt;c.&lt;ThrowsErrorOnDataFetch&gt;b__3_0() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Fixture.&lt;&gt;c__DisplayClass42_0`1.&lt;VerifySetOf&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Fixture.cs:line 494\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.&lt;&gt;c__DisplayClass3_0.&lt;Fetch&gt;b__0() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()\r\n   --- End of inner exception stack trace ---\r\n---&gt; (Inner Exception #0) System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.SetsFixture.&lt;&gt;c.&lt;ThrowsErrorOnDataFetch&gt;b__3_0() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\SetsFixture.cs:line 89\r\n   at StoryTeller.Fixture.&lt;&gt;c__DisplayClass42_0`1.&lt;VerifySetOf&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Fixture.cs:line 494\r\n   at StoryTeller.Grammars.Sets.ObjectComparison`1.&lt;&gt;c__DisplayClass3_0.&lt;Fetch&gt;b__0() in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Sets\\ObjectComparison.cs:line 24\r\n   at System.Threading.Tasks.Task`1.InnerInvoke()\r\n   at System.Threading.Tasks.Task.Execute()&lt;---\r\n</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 1,
             "short_title": "Exceptions"
@@ -11707,7 +11707,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -11715,7 +11715,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "set4": {
@@ -11728,7 +11728,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -11751,7 +11751,7 @@ module.exports = {
                           "Name": "Cord"
                         },
                         "collections": [],
-                        "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63"
+                        "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb"
                       },
                       {
                         "key": "Rows",
@@ -11761,7 +11761,7 @@ module.exports = {
                           "Name": "Drill"
                         },
                         "collections": [],
-                        "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1"
+                        "id": "2c15b041-e490-41dc-b32c-214f3cec6b26"
                       },
                       {
                         "key": "Rows",
@@ -11771,14 +11771,14 @@ module.exports = {
                           "Name": "Hammer"
                         },
                         "collections": [],
-                        "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e"
+                        "id": "9b3134d9-6603-4026-a293-0b8100aa7850"
                       }
                     ],
                     "activeCells": {},
-                    "id": "1bedae0d-9580-4bb4-8467-d6a110064bc4"
+                    "id": "a9d793ed-3c66-46bb-9971-491820ef726d"
                   }
                 ],
-                "id": "f00abf5f-8fe2-4985-bccb-85594813bb60"
+                "id": "85931023-79d0-44c9-a1da-3653e309e4dc"
               },
               {
                 "key": "UnorderedDetailsAre",
@@ -11796,7 +11796,7 @@ module.exports = {
                           "Name": "Drill"
                         },
                         "collections": [],
-                        "id": "fec7b3c6-04da-45a5-8ae7-7fe501df2c48"
+                        "id": "707af0cd-f384-4749-927b-268d2c207cff"
                       },
                       {
                         "key": "Rows",
@@ -11806,18 +11806,18 @@ module.exports = {
                           "Name": "Hammer"
                         },
                         "collections": [],
-                        "id": "cd68abd9-2d85-401d-a8eb-24378639ecab"
+                        "id": "31c937ff-5dae-4a85-a002-f5521b3c6e6a"
                       }
                     ],
                     "activeCells": {},
-                    "id": "703280b8-8877-4a91-832c-954705a862be"
+                    "id": "33586a8a-83f1-4f1b-9afd-0088bb7d1385"
                   }
                 ],
-                "id": "34cf6fef-6014-45b2-a111-30cbd9222294"
+                "id": "63c7397e-5349-4e60-a953-639ed2ed7742"
               }
             ],
             "activeCells": {},
-            "id": "3ac477e4-7611-4875-9ce8-5eb3580481aa"
+            "id": "62aa9bf2-2def-4e6e-bdaf-b59b17875743"
           }
         ],
         "id": "set4"
@@ -11828,7 +11828,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3ac477e4-7611-4875-9ce8-5eb3580481aa",
+            "id": "62aa9bf2-2def-4e6e-bdaf-b59b17875743",
             "spec": "set4",
             "position": "setup",
             "type": "step-result"
@@ -11837,7 +11837,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1bedae0d-9580-4bb4-8467-d6a110064bc4",
+            "id": "a9d793ed-3c66-46bb-9971-491820ef726d",
             "spec": "set4",
             "position": "before",
             "type": "step-result"
@@ -11846,7 +11846,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63",
+            "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb",
             "spec": "set4",
             "position": "0",
             "type": "step-result"
@@ -11855,7 +11855,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63",
+            "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -11864,7 +11864,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63",
+            "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -11873,7 +11873,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63",
+            "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -11882,7 +11882,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fca682e8-bb0b-4ef3-bb5d-427a60b47f63",
+            "id": "36621138-0bd3-4cfa-b0d8-4c11124a3aeb",
             "spec": "set4",
             "position": "4",
             "type": "step-result"
@@ -11891,7 +11891,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1",
+            "id": "2c15b041-e490-41dc-b32c-214f3cec6b26",
             "spec": "set4",
             "position": "0",
             "type": "step-result"
@@ -11900,7 +11900,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1",
+            "id": "2c15b041-e490-41dc-b32c-214f3cec6b26",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -11909,7 +11909,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1",
+            "id": "2c15b041-e490-41dc-b32c-214f3cec6b26",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -11918,7 +11918,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1",
+            "id": "2c15b041-e490-41dc-b32c-214f3cec6b26",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -11927,7 +11927,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "ec14bc31-5408-4cd6-8553-c55b2a364ce1",
+            "id": "2c15b041-e490-41dc-b32c-214f3cec6b26",
             "spec": "set4",
             "position": "4",
             "type": "step-result"
@@ -11936,7 +11936,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e",
+            "id": "9b3134d9-6603-4026-a293-0b8100aa7850",
             "spec": "set4",
             "position": "0",
             "type": "step-result"
@@ -11945,7 +11945,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e",
+            "id": "9b3134d9-6603-4026-a293-0b8100aa7850",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -11954,7 +11954,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e",
+            "id": "9b3134d9-6603-4026-a293-0b8100aa7850",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -11963,7 +11963,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e",
+            "id": "9b3134d9-6603-4026-a293-0b8100aa7850",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -11972,7 +11972,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2d5c438a-1928-4ffc-a8e7-71d7494e007e",
+            "id": "9b3134d9-6603-4026-a293-0b8100aa7850",
             "spec": "set4",
             "position": "4",
             "type": "step-result"
@@ -11989,7 +11989,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "fec7b3c6-04da-45a5-8ae7-7fe501df2c48",
+            "id": "707af0cd-f384-4749-927b-268d2c207cff",
             "spec": "set4",
             "position": null,
             "type": "step-result"
@@ -11998,7 +11998,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3ac477e4-7611-4875-9ce8-5eb3580481aa",
+            "id": "62aa9bf2-2def-4e6e-bdaf-b59b17875743",
             "spec": "set4",
             "position": "teardown",
             "type": "step-result"
@@ -12150,7 +12150,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -12158,7 +12158,7 @@ module.exports = {
           "invalids": 1
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "set5": {
@@ -12171,7 +12171,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -12192,7 +12192,7 @@ module.exports = {
                           "name": "Jeremy"
                         },
                         "collections": [],
-                        "id": "c9c3cc98-373e-4818-a3ac-382108cd5ae0"
+                        "id": "78e3a4d2-2c9a-40ab-b6c8-47806fa447f6"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12200,7 +12200,7 @@ module.exports = {
                           "name": "Josh"
                         },
                         "collections": [],
-                        "id": "d90300ce-40a8-4c50-86c7-c57fdb884dd6"
+                        "id": "4eaf05b3-9800-4d01-904b-9d3692a870b8"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12208,7 +12208,7 @@ module.exports = {
                           "name": "Gary"
                         },
                         "collections": [],
-                        "id": "73abb6e2-b89a-4cfd-87b2-3cdea20a36ef"
+                        "id": "18728cd3-6fa3-4eeb-92bd-bba761d554b8"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12216,7 +12216,7 @@ module.exports = {
                           "name": "Kevin"
                         },
                         "collections": [],
-                        "id": "c7d75560-0b4d-4560-a10d-25f70428e4bd"
+                        "id": "83bc473a-c38a-4132-937c-b6535e092d60"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12224,7 +12224,7 @@ module.exports = {
                           "name": "Chad"
                         },
                         "collections": [],
-                        "id": "03b521b6-6e78-4645-8455-593497a79b6a"
+                        "id": "8eab1ca0-6c48-4995-83bd-6290f731d090"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12232,7 +12232,7 @@ module.exports = {
                           "name": "Rand"
                         },
                         "collections": [],
-                        "id": "f51b9370-547f-43d9-85f6-91624dc1e79b"
+                        "id": "29c11d2a-56f5-4801-8acd-7f0071c2a411"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12240,7 +12240,7 @@ module.exports = {
                           "name": "Perrin"
                         },
                         "collections": [],
-                        "id": "c9d10f39-2fdd-465f-b81d-2c20896945c8"
+                        "id": "55aec264-aa1d-4d64-8b93-82c4826eba8f"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -12248,14 +12248,14 @@ module.exports = {
                           "name": "Mat"
                         },
                         "collections": [],
-                        "id": "0c6fa885-a7d2-4d24-ab5e-8d99d257e58b"
+                        "id": "1350d81d-3af0-4c05-9426-b2d464e98dcb"
                       }
                     ],
                     "activeCells": {},
                     "id": "61c521ec-1d41-4492-b00c-695d8cc4440b"
                   }
                 ],
-                "id": "e00b6ce3-c3f8-4991-875f-64057b84fa76"
+                "id": "3cbc9576-74da-46c3-ae47-e4d6ac4281a6"
               },
               {
                 "text": "All data is correct, but in the wrong order",
@@ -12276,7 +12276,7 @@ module.exports = {
                           "expected": "Jeremy"
                         },
                         "collections": [],
-                        "id": "908e66f9-d7cf-4e6a-9b9c-ec643a998f70"
+                        "id": "f629c52f-c411-48b2-9c53-4f5e2246420e"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -12284,7 +12284,7 @@ module.exports = {
                           "expected": "Josh"
                         },
                         "collections": [],
-                        "id": "80f6485c-defb-47ce-a8cb-202e20d11d17"
+                        "id": "65cb5dbc-6008-4e48-beae-afa8d40001c5"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -12292,7 +12292,7 @@ module.exports = {
                           "expected": "Gary"
                         },
                         "collections": [],
-                        "id": "f824930e-e43c-4f46-b620-66e1e54844f7"
+                        "id": "f2fc2733-2d07-4cf4-8a9d-0b3d5c5779cb"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -12300,7 +12300,7 @@ module.exports = {
                           "expected": "Chad"
                         },
                         "collections": [],
-                        "id": "cc312ef8-0517-48a9-b279-652787e1ac41"
+                        "id": "040b469b-8802-4e63-8f6d-c72944c624bc"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -12308,7 +12308,7 @@ module.exports = {
                           "expected": "Kevin"
                         },
                         "collections": [],
-                        "id": "00465e9a-6d02-4d20-ba82-c6b11b16452d"
+                        "id": "3f816c35-7ae9-4ffa-ad16-cf9962575bd7"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -12316,7 +12316,7 @@ module.exports = {
                           "expected": "Egwene"
                         },
                         "collections": [],
-                        "id": "8fefea8d-24c2-4e4f-9808-ee9c1c1b599a"
+                        "id": "53ff82ba-5a24-4a6e-839b-7edd9dad4824"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -12324,14 +12324,14 @@ module.exports = {
                           "expected": "Perrin"
                         },
                         "collections": [],
-                        "id": "9dde504f-6f92-491c-9960-2471054cc8ba"
+                        "id": "607e264a-889d-45e2-9d73-ada0ed0514c8"
                       }
                     ],
                     "activeCells": {},
                     "id": "4f091fff-8c47-4a91-90c4-19c01477dddb"
                   }
                 ],
-                "id": "b3d8c22f-b5aa-4ad6-bb38-8a8b644d1795"
+                "id": "eb3a37d3-525a-4064-a858-d73b2b39bdc4"
               }
             ],
             "activeCells": {},
@@ -12364,7 +12364,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "c9c3cc98-373e-4818-a3ac-382108cd5ae0",
+            "id": "78e3a4d2-2c9a-40ab-b6c8-47806fa447f6",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12373,7 +12373,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "d90300ce-40a8-4c50-86c7-c57fdb884dd6",
+            "id": "4eaf05b3-9800-4d01-904b-9d3692a870b8",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12382,7 +12382,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "73abb6e2-b89a-4cfd-87b2-3cdea20a36ef",
+            "id": "18728cd3-6fa3-4eeb-92bd-bba761d554b8",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12391,7 +12391,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "c7d75560-0b4d-4560-a10d-25f70428e4bd",
+            "id": "83bc473a-c38a-4132-937c-b6535e092d60",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12400,7 +12400,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "03b521b6-6e78-4645-8455-593497a79b6a",
+            "id": "8eab1ca0-6c48-4995-83bd-6290f731d090",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12409,7 +12409,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f51b9370-547f-43d9-85f6-91624dc1e79b",
+            "id": "29c11d2a-56f5-4801-8acd-7f0071c2a411",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12418,7 +12418,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "c9d10f39-2fdd-465f-b81d-2c20896945c8",
+            "id": "55aec264-aa1d-4d64-8b93-82c4826eba8f",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12427,7 +12427,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "0c6fa885-a7d2-4d24-ab5e-8d99d257e58b",
+            "id": "1350d81d-3af0-4c05-9426-b2d464e98dcb",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -12435,13 +12435,13 @@ module.exports = {
           {
             "spec": "set5",
             "matches": [
-              "908e66f9-d7cf-4e6a-9b9c-ec643a998f70",
-              "80f6485c-defb-47ce-a8cb-202e20d11d17",
-              "f824930e-e43c-4f46-b620-66e1e54844f7",
-              "9dde504f-6f92-491c-9960-2471054cc8ba"
+              "f629c52f-c411-48b2-9c53-4f5e2246420e",
+              "65cb5dbc-6008-4e48-beae-afa8d40001c5",
+              "f2fc2733-2d07-4cf4-8a9d-0b3d5c5779cb",
+              "607e264a-889d-45e2-9d73-ada0ed0514c8"
             ],
             "missing": [
-              "8fefea8d-24c2-4e4f-9808-ee9c1c1b599a"
+              "53ff82ba-5a24-4a6e-839b-7edd9dad4824"
             ],
             "extras": [
               {
@@ -12454,11 +12454,11 @@ module.exports = {
             "wrongOrdered": [
               {
                 "actual": 5,
-                "id": "cc312ef8-0517-48a9-b279-652787e1ac41"
+                "id": "040b469b-8802-4e63-8f6d-c72944c624bc"
               },
               {
                 "actual": 4,
-                "id": "00465e9a-6d02-4d20-ba82-c6b11b16452d"
+                "id": "3f816c35-7ae9-4ffa-ad16-cf9962575bd7"
               }
             ],
             "id": "4f091fff-8c47-4a91-90c4-19c01477dddb",
@@ -12571,7 +12571,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 4,
           "wrongs": 5,
@@ -12579,7 +12579,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "table1": {
@@ -12592,7 +12592,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -12614,7 +12614,7 @@ module.exports = {
                           "IsEven": "true"
                         },
                         "collections": [],
-                        "id": "98c7f5cf-48b6-4aa0-8a8b-24959e086da8"
+                        "id": "2c060eeb-d652-4b36-a507-303f8657702a"
                       },
                       {
                         "key": "IsPositive-row",
@@ -12623,14 +12623,14 @@ module.exports = {
                           "IsEven": "false"
                         },
                         "collections": [],
-                        "id": "8509b293-8cc3-4c34-b3c1-98b0b39dcb88"
+                        "id": "4746b9ca-b78e-4c69-8d28-714dd04fa165"
                       }
                     ],
                     "activeCells": {},
                     "id": "a481d76f-66ae-464f-8c6f-2739e4c39d3e"
                   }
                 ],
-                "id": "eeae6f5a-1cdf-44d5-8c99-5bcde0ba0b06"
+                "id": "42506e44-3f7d-4e4b-80ec-9b74e3575c3e"
               }
             ],
             "activeCells": {},
@@ -12662,7 +12662,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "98c7f5cf-48b6-4aa0-8a8b-24959e086da8",
+            "id": "2c060eeb-d652-4b36-a507-303f8657702a",
             "spec": "table1",
             "position": null,
             "type": "step-result"
@@ -12679,7 +12679,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "8509b293-8cc3-4c34-b3c1-98b0b39dcb88",
+            "id": "4746b9ca-b78e-4c69-8d28-714dd04fa165",
             "spec": "table1",
             "position": null,
             "type": "step-result"
@@ -12735,7 +12735,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 0,
@@ -12743,7 +12743,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "table2": {
@@ -12756,7 +12756,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -12780,7 +12780,7 @@ module.exports = {
                           "LastNameFirst": "Miller, Jeremy"
                         },
                         "collections": [],
-                        "id": "0e529145-44c6-43c1-b1fc-898a4e66fb76"
+                        "id": "a7f57abb-285f-4299-9c03-7bebfc24b634"
                       },
                       {
                         "key": "decisions",
@@ -12791,11 +12791,11 @@ module.exports = {
                           "LastNameFirst": "Chief, Big"
                         },
                         "collections": [],
-                        "id": "cb325d1c-edb4-43f3-9c08-51b3daa83425"
+                        "id": "4a4802a0-7657-406f-9df5-b5957af6bcc2"
                       }
                     ],
                     "activeCells": {},
-                    "id": "84ca383a-6f30-4d2a-99cb-fba6c16f2677"
+                    "id": "4364bce0-8bf0-4c64-812b-f363ec6cfaa8"
                   },
                   {
                     "key": "table",
@@ -12810,7 +12810,7 @@ module.exports = {
                           "LastNameFirst": "Miller, Jeremy"
                         },
                         "collections": [],
-                        "id": "526d0db1-a3b2-4f61-93d3-32bc16994c38"
+                        "id": "b0a56641-0db7-4c2b-9adc-0aaa62db4e4d"
                       },
                       {
                         "key": "row",
@@ -12821,18 +12821,18 @@ module.exports = {
                           "LastNameFirst": "Miller Hank"
                         },
                         "collections": [],
-                        "id": "0584fe5d-7970-4841-b948-5e3e54d03e63"
+                        "id": "06b055f4-ae41-4af8-8207-7e7d99cf7a37"
                       }
                     ],
                     "activeCells": {},
-                    "id": "1dc44cec-104a-4346-b0c5-527ce20f9fb3"
+                    "id": "66e9e6e6-f1f5-492f-bd52-d2ce32359f09"
                   }
                 ],
-                "id": "9677d92a-fd02-4bfc-a910-6e652d076b6e"
+                "id": "3865fc35-2d0a-4499-863e-8d9ba43fc9d9"
               }
             ],
             "activeCells": {},
-            "id": "e0702618-0b44-4906-a291-4b6b5d69e07a"
+            "id": "c5c89aa6-2983-4df2-bd53-57c9fc1d59c1"
           }
         ],
         "id": "table2"
@@ -12843,7 +12843,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e0702618-0b44-4906-a291-4b6b5d69e07a",
+            "id": "c5c89aa6-2983-4df2-bd53-57c9fc1d59c1",
             "spec": "table2",
             "position": "setup",
             "type": "step-result"
@@ -12881,7 +12881,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "526d0db1-a3b2-4f61-93d3-32bc16994c38",
+            "id": "b0a56641-0db7-4c2b-9adc-0aaa62db4e4d",
             "spec": "table2",
             "position": null,
             "type": "step-result"
@@ -12919,7 +12919,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "0584fe5d-7970-4841-b948-5e3e54d03e63",
+            "id": "06b055f4-ae41-4af8-8207-7e7d99cf7a37",
             "spec": "table2",
             "position": null,
             "type": "step-result"
@@ -12928,7 +12928,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e0702618-0b44-4906-a291-4b6b5d69e07a",
+            "id": "c5c89aa6-2983-4df2-bd53-57c9fc1d59c1",
             "spec": "table2",
             "position": "teardown",
             "type": "step-result"
@@ -12975,7 +12975,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -12983,7 +12983,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "table3": {
@@ -12996,7 +12996,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -13021,7 +13021,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "62829559-3385-4edb-887d-4acb5bd0b1e6"
+                        "id": "3736c617-c813-4928-a5c6-c9782200b1f7"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -13033,7 +13033,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "84d86a61-5dfc-40ea-8508-db2df9719fe7"
+                        "id": "161ae80e-43bd-47e8-ad5f-fb29a27b1c08"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -13045,7 +13045,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "4a04313f-f37d-4265-aac6-e2f0b6a3c955"
+                        "id": "2ce9f28a-2c22-4262-af7b-131013701c1a"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -13057,7 +13057,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "8981a09d-a451-408a-b5cf-1aea54e038c1"
+                        "id": "efbe90f1-e8c3-4aaa-8b44-36f828aae2a8"
                       }
                     ],
                     "activeCells": {
@@ -13067,7 +13067,7 @@ module.exports = {
                     "id": "3c402eda-44ab-48b2-bc1e-e83730c123cf"
                   }
                 ],
-                "id": "bf0b9a6f-aeb1-4e61-aef8-f49f14997e79"
+                "id": "e92dde79-8fa8-46bb-a2f9-d8672401ff79"
               }
             ],
             "activeCells": {},
@@ -13091,7 +13091,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "62829559-3385-4edb-887d-4acb5bd0b1e6",
+            "id": "3736c617-c813-4928-a5c6-c9782200b1f7",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -13100,7 +13100,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "84d86a61-5dfc-40ea-8508-db2df9719fe7",
+            "id": "161ae80e-43bd-47e8-ad5f-fb29a27b1c08",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -13109,7 +13109,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4a04313f-f37d-4265-aac6-e2f0b6a3c955",
+            "id": "2ce9f28a-2c22-4262-af7b-131013701c1a",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -13118,7 +13118,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8981a09d-a451-408a-b5cf-1aea54e038c1",
+            "id": "efbe90f1-e8c3-4aaa-8b44-36f828aae2a8",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -13188,7 +13188,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -13196,7 +13196,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "table4": {
@@ -13209,7 +13209,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -13230,14 +13230,14 @@ module.exports = {
                           "x": "11"
                         },
                         "collections": [],
-                        "id": "f5311b04-dfa1-4df7-adc4-be7d3043fd1e"
+                        "id": "c6399d96-8383-4df0-bc56-1b302164e5a9"
                       }
                     ],
                     "activeCells": {},
                     "id": "before"
                   }
                 ],
-                "id": "8a251af7-8272-457d-919b-8f0542b0d543"
+                "id": "f40c2ab2-db84-4968-a62c-8115e8e6b35e"
               },
               {
                 "key": "AfterThrowsError",
@@ -13253,14 +13253,14 @@ module.exports = {
                           "x": "22"
                         },
                         "collections": [],
-                        "id": "e6c38291-fb0b-42ea-a5a7-ad6769a0d0d0"
+                        "id": "c59519e8-eabd-4942-9c57-200c279f4878"
                       }
                     ],
                     "activeCells": {},
                     "id": "after"
                   }
                 ],
-                "id": "8147c337-9eb4-4da2-af9a-5c6ad693b1e9"
+                "id": "66d00759-0a88-4a5f-85cf-7328e9fae5ce"
               }
             ],
             "activeCells": {},
@@ -13282,7 +13282,7 @@ module.exports = {
           },
           {
             "status": "error",
-            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<>c.<BeforeThrowsError>b__5_2() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 39\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84",
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<>c.<BeforeThrowsError>b__5_2() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 39\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass16_0.<Before>b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 65\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83",
             "cells": [],
             "id": "before",
             "spec": "table4",
@@ -13293,7 +13293,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f5311b04-dfa1-4df7-adc4-be7d3043fd1e",
+            "id": "c6399d96-8383-4df0-bc56-1b302164e5a9",
             "spec": "table4",
             "position": "0",
             "type": "step-result"
@@ -13302,14 +13302,14 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e6c38291-fb0b-42ea-a5a7-ad6769a0d0d0",
+            "id": "c59519e8-eabd-4942-9c57-200c279f4878",
             "spec": "table4",
             "position": "0",
             "type": "step-result"
           },
           {
             "status": "error",
-            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<>c.<AfterThrowsError>b__6_2() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 46\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84",
+            "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.<>c.<AfterThrowsError>b__6_2() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 46\r\n   at StoryTeller.Grammars.Tables.TableGrammar.<>c__DisplayClass18_0.<After>b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 76\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83",
             "cells": [],
             "id": "after",
             "spec": "table4",
@@ -13379,7 +13379,7 @@ module.exports = {
             "short_title": "Debug"
           },
           {
-            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.&lt;&gt;c.&lt;BeforeThrowsError&gt;b__5_2() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 39\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84</pre>\n<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.&lt;&gt;c.&lt;AfterThrowsError&gt;b__6_2() in c:\\projects\\StoryTeller2\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 46\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in c:\\projects\\StoryTeller2\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 84</pre>",
+            "html": "<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.&lt;&gt;c.&lt;BeforeThrowsError&gt;b__5_2() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 39\r\n   at StoryTeller.Grammars.Tables.TableGrammar.&lt;&gt;c__DisplayClass16_0.&lt;Before&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 65\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83</pre>\n<pre class=\"bg-warning\">System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.TableFixture.&lt;&gt;c.&lt;AfterThrowsError&gt;b__6_2() in C:\\code\\storyteller\\src\\StoryTeller.Samples\\Fixtures\\TableFixture.cs:line 46\r\n   at StoryTeller.Grammars.Tables.TableGrammar.&lt;&gt;c__DisplayClass18_0.&lt;After&gt;b__0(ISpecContext c) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\Tables\\TableGrammar.cs:line 76\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context) in C:\\code\\storyteller\\src\\StoryTeller\\Grammars\\SilentAction.cs:line 83</pre>",
             "title": "Logged Exceptions in Storyteller",
             "count": 2,
             "short_title": "Exceptions"
@@ -13387,7 +13387,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -13395,7 +13395,7 @@ module.exports = {
           "invalids": 0
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     },
     "table5": {
@@ -13408,7 +13408,7 @@ module.exports = {
         "lifecycle": "Acceptance",
         "mode": "full",
         "tags": [],
-        "last-updated": "Friday, July 22, 2016",
+        "last-updated": "Friday, August 05, 2016",
         "breakpoints": [],
         "steps": [
           {
@@ -13418,7 +13418,7 @@ module.exports = {
               {
                 "text": "Table by the ExposeAsTable attribute",
                 "type": "comment",
-                "id": "efa87efc-7fb2-412f-b66f-5f1e993758ab"
+                "id": "0fc8d5be-f898-49db-85a8-dfcff2d0e6f7"
               },
               {
                 "key": "Sum",
@@ -13447,7 +13447,7 @@ module.exports = {
                           "sum": "4"
                         },
                         "collections": [],
-                        "id": "bbe25ecd-c572-4c8f-a84f-7cfe9c900b20"
+                        "id": "7054d2eb-074c-45f6-b894-20d23e3125c6"
                       },
                       {
                         "key": "sum",
@@ -13457,19 +13457,19 @@ module.exports = {
                           "sum": "5"
                         },
                         "collections": [],
-                        "id": "06cfc9b0-2ef0-4243-9e58-937da09c6bfe"
+                        "id": "a24f9eaf-5e22-4165-a98f-be4f44f6015d"
                       }
                     ],
                     "activeCells": {},
-                    "id": "32748198-2d27-4f97-b8e1-bf8deb420362"
+                    "id": "220d94c1-b5cf-4cae-805b-b54c94199e84"
                   }
                 ],
-                "id": "fd093f68-a5c1-4594-9e10-448af6434f16"
+                "id": "03170a48-df7f-495f-9328-fcca03562f4c"
               },
               {
                 "text": "Table fixture from script",
                 "type": "comment",
-                "id": "41b97399-08f5-4437-9ef9-6ddb3b9446fd"
+                "id": "611fde72-d275-44e7-b88f-1f23cc9f3f92"
               },
               {
                 "key": "Divide",
@@ -13509,7 +13509,7 @@ module.exports = {
                           "product": "****"
                         },
                         "collections": [],
-                        "id": "f5f32a5d-0588-474c-8600-206e9f352fb9"
+                        "id": "1c4c0a4e-ee93-4e28-8141-bdbe06e80c0c"
                       },
                       {
                         "key": "Rows",
@@ -13519,18 +13519,18 @@ module.exports = {
                           "product": "****"
                         },
                         "collections": [],
-                        "id": "874ea367-2624-4e01-941b-6c07c337f078"
+                        "id": "2cd86c2c-0447-4283-b784-3e33d8e1f885"
                       }
                     ],
                     "activeCells": {},
-                    "id": "29029ebf-79bd-4535-8bac-2e0ab06f6a08"
+                    "id": "687d4998-9731-4ec3-b05c-d46791a7d406"
                   }
                 ],
-                "id": "8e266e58-8dfd-42f0-ab7b-1692d7b867bc"
+                "id": "5feb8c17-7b00-4195-adf1-5b343c0bfba2"
               }
             ],
             "activeCells": {},
-            "id": "f547523e-98d8-4b0a-9ee4-b6304787b56a"
+            "id": "2e581d96-7d04-40dd-9ecb-e41e8411fe3d"
           }
         ],
         "id": "table5"
@@ -13541,7 +13541,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f547523e-98d8-4b0a-9ee4-b6304787b56a",
+            "id": "2e581d96-7d04-40dd-9ecb-e41e8411fe3d",
             "spec": "table5",
             "position": "setup",
             "type": "step-result"
@@ -13589,7 +13589,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "bbe25ecd-c572-4c8f-a84f-7cfe9c900b20",
+            "id": "7054d2eb-074c-45f6-b894-20d23e3125c6",
             "spec": "table5",
             "position": null,
             "type": "step-result"
@@ -13606,7 +13606,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "06cfc9b0-2ef0-4243-9e58-937da09c6bfe",
+            "id": "a24f9eaf-5e22-4165-a98f-be4f44f6015d",
             "spec": "table5",
             "position": null,
             "type": "step-result"
@@ -13703,7 +13703,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f5f32a5d-0588-474c-8600-206e9f352fb9",
+            "id": "1c4c0a4e-ee93-4e28-8141-bdbe06e80c0c",
             "spec": "table5",
             "position": "0",
             "type": "step-result"
@@ -13720,7 +13720,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "f5f32a5d-0588-474c-8600-206e9f352fb9",
+            "id": "1c4c0a4e-ee93-4e28-8141-bdbe06e80c0c",
             "spec": "table5",
             "position": "1",
             "type": "step-result"
@@ -13729,7 +13729,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f5f32a5d-0588-474c-8600-206e9f352fb9",
+            "id": "1c4c0a4e-ee93-4e28-8141-bdbe06e80c0c",
             "spec": "table5",
             "position": "2",
             "type": "step-result"
@@ -13746,7 +13746,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "f5f32a5d-0588-474c-8600-206e9f352fb9",
+            "id": "1c4c0a4e-ee93-4e28-8141-bdbe06e80c0c",
             "spec": "table5",
             "position": "3",
             "type": "step-result"
@@ -13755,7 +13755,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "874ea367-2624-4e01-941b-6c07c337f078",
+            "id": "2cd86c2c-0447-4283-b784-3e33d8e1f885",
             "spec": "table5",
             "position": "0",
             "type": "step-result"
@@ -13764,7 +13764,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "874ea367-2624-4e01-941b-6c07c337f078",
+            "id": "2cd86c2c-0447-4283-b784-3e33d8e1f885",
             "spec": "table5",
             "position": "1",
             "type": "step-result"
@@ -13773,7 +13773,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "874ea367-2624-4e01-941b-6c07c337f078",
+            "id": "2cd86c2c-0447-4283-b784-3e33d8e1f885",
             "spec": "table5",
             "position": "2",
             "type": "step-result"
@@ -13790,7 +13790,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "874ea367-2624-4e01-941b-6c07c337f078",
+            "id": "2cd86c2c-0447-4283-b784-3e33d8e1f885",
             "spec": "table5",
             "position": "3",
             "type": "step-result"
@@ -13799,7 +13799,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f547523e-98d8-4b0a-9ee4-b6304787b56a",
+            "id": "2e581d96-7d04-40dd-9ecb-e41e8411fe3d",
             "spec": "table5",
             "position": "teardown",
             "type": "step-result"
@@ -13965,7 +13965,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "1:52 PM",
+        "time": "9:27 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -13973,7 +13973,7 @@ module.exports = {
           "invalids": 6
         }
       },
-      "time": "1:52:57 PM",
+      "time": "9:27:38 AM",
       "type": "spec-execution-completed"
     }
   }

@@ -6,6 +6,7 @@ using FubuMVC.Core.Runtime.Files;
 using NUnit.Framework;
 using Shouldly;
 using ST.Docs.Samples;
+using ST.Files;
 
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
@@ -22,7 +23,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
 
         private void scan(string text)
         {
-            var file = new FakeFubuFile(text);
+            var file = new FakeFile(text);
             var reader = new SampleReader(file, new CLangSampleScanner("cs", "csharp"), theSamples);
 
             reader.Start();
@@ -128,15 +129,15 @@ Lindsey
         
     }
 
-    public class FakeFubuFile : IFubuFile
+    public class FakeFile : IFileReference
     {
         private readonly StringWriter _writer = new StringWriter();
 
-        public FakeFubuFile()
+        public FakeFile()
         {
         }
 
-        public FakeFubuFile(string text)
+        public FakeFile(string text)
         {
             _writer.WriteLine(text.Trim());
         }

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using FubuCore;
 using FubuMVC.Core.Assets;
-using FubuMVC.Core.Runtime.Files;
 using StoryTeller.Messages;
+using ST.Files;
 
 namespace ST.Client
 {

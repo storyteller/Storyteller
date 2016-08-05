@@ -21,7 +21,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
 
         private void scan(string text)
         {
-            var file = new FakeFubuFile(text);
+            var file = new FakeFile(text);
             var reader = new SampleReader(file, new RubySampleScanner(), theSamples);
 
             reader.Start();
