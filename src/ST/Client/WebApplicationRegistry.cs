@@ -18,9 +18,6 @@ namespace ST.Client
 
             ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
 
-            For<ILogger>().Use<Logger>();
-            For<ILogListener>().Use<ExceptionListener>();
-
             For<IActivator>().Add<ClientConnectorActivator>();
             For<IActivator>().Add<StartWatchingFilesActivator>();
             For<IActivator>().Add<StartWatchingAssets>();

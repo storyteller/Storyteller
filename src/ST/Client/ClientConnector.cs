@@ -18,18 +18,16 @@ namespace ST.Client
         IListener<QueueState>, 
         IClientConnector
     {
-        private readonly ILogger _logger;
         private readonly IRemoteController _controller;
         private readonly IEnumerable<ICommand> _commands;
-        private string _host;
+        private readonly string _host;
         private int _port;
         private readonly IList<IWebSocketConnection> _sockets = new List<IWebSocketConnection>();
         private string _webSocketsAddress;
         private WebSocketServer _server;
 
-        public ClientConnector(ILogger logger, IRemoteController controller, IEnumerable<ICommand> commands)
+        public ClientConnector(IRemoteController controller, IEnumerable<ICommand> commands)
         {
-            _logger = logger;
             _controller = controller;
             _commands = commands;
             _host = controller.WebSocketAddress.IsNotEmpty() ? controller.WebSocketAddress : "127.0.0.1";
@@ -132,7 +130,7 @@ namespace ST.Client
             }
             catch (Exception ex)
             {
-                _logger.Error("Json message: " + json, ex);
+                Logger.Error("Json message: " + json, ex);
             }
         }
 
