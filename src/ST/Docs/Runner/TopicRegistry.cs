@@ -1,5 +1,4 @@
 using FubuMVC.Core;
-using FubuMVC.Core.Assets;
 using FubuMVC.Core.Http.Hosting;
 using ST.Docs.Samples;
 using ST.Docs.Todos;
@@ -15,9 +14,7 @@ namespace ST.Docs.Runner
             Actions.FindBy(_ => _.IncludeTypesNamed(x => x.EndsWith("DocTool")));
             Actions.IncludeType<SampleExplorer>();
             Actions.IncludeType<TodoExplorer>();
-            //Actions.DisableDefaultActionSource();
 
-            AlterSettings<AssetSettings>(_ => _.AllowableExtensions.Add(".json"));
         }
     }
 }
