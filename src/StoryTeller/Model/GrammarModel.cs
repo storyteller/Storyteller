@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Baseline;
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model
@@ -7,6 +8,7 @@ namespace StoryTeller.Model
     public abstract class GrammarModel
     {
         public string key;
+
         public readonly string type;
 
         protected GrammarModel(string type)

@@ -1,5 +1,6 @@
 using System;
-using FubuCore.Util;
+using Baseline;
+
 
 namespace StoryTeller.Model.Persistence
 {
@@ -7,8 +8,8 @@ namespace StoryTeller.Model.Persistence
     {
         public Suite Top { get; set; }
 
-        public readonly Cache<string, Specification> Specifications = new Cache<string, Specification>();
-        public readonly Cache<string, Suite> Suites = new Cache<string, Suite>();
+        public readonly LightweightCache<string, Specification> Specifications = new LightweightCache<string, Specification>();
+        public readonly LightweightCache<string, Suite> Suites = new LightweightCache<string, Suite>();
 
         public void Replace(Specification specification)
         {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using FubuCore.Reflection;
+using Baseline;
+using Baseline.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 

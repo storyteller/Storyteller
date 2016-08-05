@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
-using FubuCore;
-using FubuCore.CommandLine;
+using Baseline;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;

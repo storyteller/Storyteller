@@ -1,5 +1,6 @@
 using System;
-using FubuCore.Util;
+using Baseline;
+
 
 namespace StoryTeller
 {
@@ -15,9 +16,8 @@ namespace StoryTeller
 
     public class State : IDisposable, IState
     {
-        // TODO -- replace w/ the lightweight cache from StructureMap
-        private readonly Cache<Type, object> _byType = new Cache<Type, object>();
-        private readonly Cache<Type, Cache<string, object>> _byName = new Cache<Type, Cache<string, object>>(t => new Cache<string, object>()); 
+        private readonly LightweightCache<Type, object> _byType = new LightweightCache<Type, object>();
+        private readonly LightweightCache<Type, LightweightCache<string, object>> _byName = new LightweightCache<Type, LightweightCache<string, object>>(t => new LightweightCache<string, object>()); 
 
         public void Store<T>(T value)
         {

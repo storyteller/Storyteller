@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 

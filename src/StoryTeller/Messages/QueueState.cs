@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using FubuCore;
+using Baseline;
 using StoryTeller.Results;
 
 namespace StoryTeller.Messages

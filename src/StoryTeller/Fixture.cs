@@ -4,9 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using FubuCore;
-using FubuCore.Reflection;
-using FubuCore.Util;
+using Baseline;
+using HtmlTags.Reflection;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Importing;
 using StoryTeller.Grammars.Lines;
@@ -32,12 +31,12 @@ namespace StoryTeller
         };
 
         public string Title;
-        private readonly Cache<string, IGrammar> _grammars;
+        private readonly LightweightCache<string, IGrammar> _grammars;
 
         public Fixture()
         {
-            _grammars = new Cache<string, IGrammar>(findGrammar);
-            
+            _grammars = new LightweightCache<string, IGrammar>(findGrammar);
+
             Key = GetType().Name.Replace("Fixture", "");
 
             this["TODO"] = Do<string>("TODO: {message}", StoryTellerAssert.Fail);
@@ -116,20 +115,21 @@ namespace StoryTeller
                 if (_grammars.Has(grammarKey)) return;
 
                 var grammar = GrammarBuilder.BuildGrammar(method, this);
+                grammar.Key = grammarKey;
                 this[grammarKey] = grammar;
             });
 
-            var grammarModels = new List<GrammarModel>();
-
-            var grammars = _grammars.GetAllKeys().Select(key =>
+            var grammars = new List<GrammarModel>();
+            _grammars.Each((key, grammar) =>
             {
-                var grammar = _grammars[key];
                 var model = grammar.Compile(this, conversions);
                 model.key = key;
                 model.IsHidden = grammar.IsHidden;
 
-                return model;
+                grammars.Add(model);
             });
+
+
 
             return new FixtureModel(Key)
             {

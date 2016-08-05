@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using FubuCore;
-using FubuCore.Reflection;
-using FubuCore.Util;
+using Baseline;
 
 namespace StoryTeller.Model
 {
@@ -14,11 +11,13 @@ namespace StoryTeller.Model
     {
         private static readonly string AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
 
-        public static readonly Cache<Type, Fixture> FixtureCache =
-            new Cache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
+        public static readonly LightweightCache<Type, Fixture> FixtureCache =
+            new LightweightCache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));
 
-        public readonly Cache<string, Fixture> Fixtures = new Cache<string, Fixture>(key => new MissingFixture(key));
-        public readonly Cache<string, FixtureModel> Models = new Cache<string, FixtureModel>();
+        public readonly LightweightCache<string, Fixture> Fixtures =
+            new LightweightCache<string, Fixture>(key => new MissingFixture(key));
+
+        public readonly LightweightCache<string, FixtureModel> Models = new LightweightCache<string, FixtureModel>();
 
         public static bool IsFixtureType(Type type)
         {
@@ -42,7 +41,6 @@ namespace StoryTeller.Model
             }
         }
 
-        
 
         public static FixtureLibrary CreateForAppDomain(CellHandling cellHandling)
         {
@@ -53,7 +51,6 @@ namespace StoryTeller.Model
             {
                 assemPath = assemPath.AppendPath(binPath);
             }
-
 
 
             var fixtures = AssembliesFromPath(assemPath, referencesStoryteller)
@@ -80,21 +77,19 @@ namespace StoryTeller.Model
 
         public static IEnumerable<Assembly> AssembliesFromPath(string path, Predicate<Assembly> assemblyFilter)
         {
-
-
             var assemblyPaths = Directory.GetFiles(path)
                 .Where(file =>
-                       Path.GetExtension(file).Equals(
-                           ".exe",
-                           StringComparison.OrdinalIgnoreCase)
-                       ||
-                       Path.GetExtension(file).Equals(
-                           ".dll",
-                           StringComparison.OrdinalIgnoreCase));
+                    Path.GetExtension(file).Equals(
+                        ".exe",
+                        StringComparison.OrdinalIgnoreCase)
+                    ||
+                    Path.GetExtension(file).Equals(
+                        ".dll",
+                        StringComparison.OrdinalIgnoreCase));
 
-            foreach (string assemblyPath in assemblyPaths)
+            foreach (var assemblyPath in assemblyPaths)
             {
-                Assembly assembly =
+                var assembly =
                     AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(
                         x => x.GetName().Name == Path.GetFileNameWithoutExtension(assemblyPath));
 
@@ -108,8 +103,6 @@ namespace StoryTeller.Model
                     {
                     }
                 }
-
-
 
 
                 if (assembly != null && assemblyFilter(assembly))
