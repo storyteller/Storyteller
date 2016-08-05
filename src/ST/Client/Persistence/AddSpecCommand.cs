@@ -7,13 +7,11 @@ namespace ST.Client.Persistence
 {
     public class AddSpecCommand : Command<AddSpec>
     {
-        private readonly ILogger _logger;
         private readonly Lazy<IPersistenceController> _controller;
         private readonly Lazy<IClientConnector> _connector;
 
-        public AddSpecCommand(ILogger logger, Lazy<IPersistenceController> controller, Lazy<IClientConnector> connector)
+        public AddSpecCommand(Lazy<IPersistenceController> controller, Lazy<IClientConnector> connector)
         {
-            _logger = logger;
             _controller = controller;
             _connector = connector;
         }
@@ -27,7 +25,7 @@ namespace ST.Client.Persistence
             }
             catch (Exception e)
             {
-                _logger.Error("Error trying to add a spec named " + message.name, e);
+                Logger.Error("Error trying to add a spec named " + message.name, e);
             }
         }
     }

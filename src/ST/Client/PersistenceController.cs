@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using FubuCore;
 using FubuCore.Dates;
-using FubuCore.Logging;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -17,7 +16,6 @@ namespace ST.Client
     public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable,
         IListener<SpecExecutionCompleted>
     {
-        private readonly ILogger _logger;
         private readonly IClientConnector _client;
         private readonly ISpecFileWatcher _watcher;
         private readonly ISystemTime _systemTime;
@@ -27,10 +25,8 @@ namespace ST.Client
         private readonly ResultsCache _results = new ResultsCache();
 
 
-        public PersistenceController(ILogger logger, IClientConnector client, ISpecFileWatcher watcher,
-            ISystemTime systemTime)
+        public PersistenceController(IClientConnector client, ISpecFileWatcher watcher, ISystemTime systemTime)
         {
-            _logger = logger;
             _client = client;
             _watcher = watcher;
             _systemTime = systemTime;
@@ -80,14 +76,11 @@ namespace ST.Client
             }
             catch (Exception e)
             {
-                _logger.Error("Failed to start watching spec files", e);
+                Logger.Error("Failed to start watching spec files", e);
             }
         }
 
-        public Hierarchy Hierarchy
-        {
-            get { return _hierarchy; }
-        }
+        public Hierarchy Hierarchy => _hierarchy;
 
         public void AddSuite(string parent, string name)
         {
@@ -119,7 +112,7 @@ namespace ST.Client
             }
             catch (Exception e)
             {
-                _logger.Error("Error while trying to add Suite {0} to parent {1}".ToFormat(name, parent), e);
+                Logger.Error("Error while trying to add Suite {0} to parent {1}".ToFormat(name, parent), e);
             }
         }
 
@@ -145,7 +138,7 @@ namespace ST.Client
             }
             catch (Exception e)
             {
-                _logger.Error("Error trying to save specification " + id, e);
+                Logger.Error("Error trying to save specification " + id, e);
             }
         }
 
@@ -284,7 +277,7 @@ namespace ST.Client
             }
             catch (Exception e)
             {
-                _logger.Error("Failed to handle a changed file: " + file, e);
+                Logger.Error("Failed to handle a changed file: " + file, e);
             }
         }
 
@@ -300,7 +293,7 @@ namespace ST.Client
             }
             catch (Exception e)
             {
-                _logger.Error("Failed to reload the spec hierarchy", e);
+                Logger.Error("Failed to reload the spec hierarchy", e);
             }
         }
 
