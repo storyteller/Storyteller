@@ -1,19 +1,44 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using FubuCore;
-using FubuCore.Reflection;
-using Xunit;
+﻿using System.Linq;
+using Baseline;
+using Baseline.Reflection;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
 using StoryTeller.Results;
+using Xunit;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
-    
     public class MethodInvocationTester
     {
+        public class Target : Fixture
+        {
+            public double PercentAwake { get; set; }
+
+            public int Age { get; set; }
+
+            public string Name { get; set; }
+
+            public void Go(string name, int age, double percentAwake)
+            {
+                Name = name;
+                Age = age;
+                PercentAwake = percentAwake;
+            }
+
+            public void GoOutput(string name, out int age, out double percentAwake)
+            {
+                Name = name;
+                age = 5;
+                percentAwake = .5;
+            }
+
+            public string Fullname(string first, string middle, string last)
+            {
+                return "{0} {1} {2}".ToFormat(first, middle, last);
+            }
+        }
+
         [Fact]
         public void execute()
         {
@@ -35,28 +60,9 @@ namespace StoryTeller.Testing.Grammars.Reflection
         }
 
         [Fact]
-        public void invoke_with_return_value()
-        {
-            var target = new Target();
-            var method = ReflectionHelper.GetMethod<Target>(x => x.Fullname(null, null, null));
-
-            var values = new StepValues(method.Name);
-            values.Store("first", "Jeremy");
-            values.Store("middle", "Daniel");
-            values.Store("last", "Miller");
-            values.Store("returnValue", "foo");
-
-            var invocation = new MethodInvocation(method, target);
-            invocation.Compile(target, CellHandling.Basic());
-
-            invocation.Invoke(values).Single().actual.ShouldBe("Jeremy Daniel Miller");
-
-        }
-
-        [Fact]
         public void invoke_with_out_parameters_happy_path()
         {
-            int age = 0;
+            var age = 0;
             double percentAwake = 0;
 
             var target = new Target();
@@ -75,38 +81,25 @@ namespace StoryTeller.Testing.Grammars.Reflection
             results.ShouldHaveTheSameElementsAs(
                 new CellResult("age", ResultStatus.success),
                 new CellResult("percentAwake", ResultStatus.success)
-                );
-
+            );
         }
 
-        public class Target : Fixture
+        [Fact]
+        public void invoke_with_return_value()
         {
-            public void Go(string name, int age, double percentAwake)
-            {
-                this.Name = name;
-                this.Age = age;
-                this.PercentAwake = percentAwake;
-            }
+            var target = new Target();
+            var method = ReflectionHelper.GetMethod<Target>(x => x.Fullname(null, null, null));
 
-            public void GoOutput(string name, out int age, out double percentAwake)
-            {
-                this.Name = name;
-                age = 5;
-                percentAwake = .5;
-            }
+            var values = new StepValues(method.Name);
+            values.Store("first", "Jeremy");
+            values.Store("middle", "Daniel");
+            values.Store("last", "Miller");
+            values.Store("returnValue", "foo");
 
-            public double PercentAwake { get; set; }
+            var invocation = new MethodInvocation(method, target);
+            invocation.Compile(target, CellHandling.Basic());
 
-            public int Age { get; set; }
-
-            public string Name { get; set; }
-
-            public string Fullname(string first, string middle, string last)
-            {
-                return "{0} {1} {2}".ToFormat(first, middle, last);
-            }
+            invocation.Invoke(values).Single().actual.ShouldBe("Jeremy Daniel Miller");
         }
     }
-
-
 }

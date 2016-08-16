@@ -1,11 +1,10 @@
-FubuCore
-FubuMVC.Core
 Shouldly
 Newtonsoft.Json
 HtmlTags
 Fleck
-Nowin
 Baseline
 xUnit
 NSubstitute
 Oakton
+Microsoft.AspNetCore.Server.Kestrel
+StructureMap

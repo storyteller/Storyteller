@@ -1,17 +1,15 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-using FubuCore;
-using Oakton;
-using FubuCore.Util;
+using Baseline;
 using Oakton.Reporting;
 
 namespace ST.Docs.Commands
 {
     public class CommandUsageCache : ICommandUsageCache
     {
-        private readonly DocSettings _settings;
         private readonly Cache<string, CommandLineApplicationReport> _reports;
+        private readonly DocSettings _settings;
 
         public CommandUsageCache(DocSettings settings)
         {
@@ -21,11 +19,9 @@ namespace ST.Docs.Commands
             {
                 var file = _settings.Root.AppendPath("content", app + ".usage.xml");
                 if (!File.Exists(file))
-                {
                     throw new FileNotFoundException("Cannot find a command usage file for {0} at {1}".ToFormat(app, file));
-                }
 
-                var serializer = new XmlSerializer(typeof (CommandLineApplicationReport));
+                var serializer = new XmlSerializer(typeof(CommandLineApplicationReport));
                 using (var reader = new StreamReader(file))
                 {
                     return serializer.Deserialize(reader).As<CommandLineApplicationReport>();

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Baseline;
 using CommonMark;
-using Oakton;
 using ST.Docs.Topics;
-using StructureMap.Util;
 
 namespace ST.Docs.Transformation
 {
@@ -18,8 +16,8 @@ namespace ST.Docs.Transformation
 
     public class Transformer : ITransformer
     {
-        private readonly LightweightCache<string, ITransformHandler> _handlers = 
-            new LightweightCache<string, ITransformHandler>(); 
+        private readonly LightweightCache<string, ITransformHandler> _handlers =
+            new LightweightCache<string, ITransformHandler>();
 
 
         public Transformer(IEnumerable<ITransformHandler> handlers)
@@ -41,13 +39,11 @@ namespace ST.Docs.Transformation
             if (!tokens.Any()) return before;
 
             var builder = new StringBuilder();
-            int position = 0;
+            var position = 0;
             tokens.Each(token =>
             {
                 if (token.FirstIndex > position)
-                {
                     builder.Append(before.Substring(position, token.FirstIndex - position));
-                }
 
                 var handler = _handlers[token.Key];
                 builder.Append(handler.Transform(current, token.Data));
@@ -55,10 +51,8 @@ namespace ST.Docs.Transformation
                 position = token.LastIndex + 1;
             });
 
-             if (position < before.Length)
-             {
-                 builder.Append(before.Substring(position));
-             }
+            if (position < before.Length)
+                builder.Append(before.Substring(position));
 
             return builder.ToString();
         }
@@ -74,10 +68,7 @@ namespace ST.Docs.Transformation
 
             public string Key
             {
-                get
-                {
-                    return "inner";
-                }
+                get { return "inner"; }
             }
 
             public string Transform(Topic current, string data)
@@ -87,16 +78,8 @@ namespace ST.Docs.Transformation
                 text = _transformer.Transform(current, text);
 
                 if (Path.GetExtension(current.File) == ".md")
-                {
-                    text = CommonMark.CommonMarkConverter.Convert(text);
-                    /*
-                    text = text
-                        .Replace("<p></code></pre></p>", string.Empty)
-                        .Replace("<pre><code>", string.Empty);
-                     */
-                }
+                    text = CommonMarkConverter.Convert(text);
 
-                
 
                 return text;
             }

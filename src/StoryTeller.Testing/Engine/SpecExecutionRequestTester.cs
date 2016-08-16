@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using Xunit;
 using NSubstitute;
 using Shouldly;

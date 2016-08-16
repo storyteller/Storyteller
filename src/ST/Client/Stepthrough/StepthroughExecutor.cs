@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using FubuCore;
+using Baseline;
 using StoryTeller;
 using StoryTeller.Engine;
 using StoryTeller.Engine.UserInterface;

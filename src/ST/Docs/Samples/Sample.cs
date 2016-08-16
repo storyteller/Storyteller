@@ -4,21 +4,17 @@ namespace ST.Docs.Samples
 {
     public class Sample
     {
-        private readonly string _name;
         private int _start;
         private readonly StringWriter _writer = new StringWriter();
         private int _end;
 
         public Sample(string name)
         {
-            _name = name;
+            Name = name;
         }
 
 
-        public string Name
-        {
-            get { return _name; }
-        }
+        public string Name { get; }
 
         public string Language
         {
@@ -38,22 +34,15 @@ namespace ST.Docs.Samples
             _end = lineNumber;
         }
 
-        public int Start
-        {
-            get { return _start; }
-        }
+        public int Start => _start;
 
-        public int End
-        {
-            get { return _end; }
-        }
+        public int End => _end;
 
-        public string Text
+        public string Text => _writer.ToString();
+
+        public override string ToString()
         {
-            get
-            {
-                return _writer.ToString();
-            }
+            return $"{nameof(Name)}: {Name}, {nameof(Language)}: {Language}";
         }
     }
 }

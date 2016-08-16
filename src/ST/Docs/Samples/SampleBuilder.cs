@@ -1,31 +1,21 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using FubuCore;
-using FubuCore.Util;
+using Baseline;
 using ST.Docs.Runner;
 using ST.Files;
-using ChangeSet = FubuMVC.Core.Runtime.Files.ChangeSet;
-using IChangeSetHandler = FubuMVC.Core.Runtime.Files.IChangeSetHandler;
 
 namespace ST.Docs.Samples
 {
     public class SampleBuilder : ISampleBuilder
     {
-        private readonly ISampleCache _cache;
         private readonly IBrowserRefresher _browser;
-        private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
+        private readonly ISampleCache _cache;
 
         private readonly Cache<string, ISampleScanner> _scanners = new Cache<string, ISampleScanner>();
-
-        public static IEnumerable<string> FindFiles(string directory, string ext)
-        {
-            var children = Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories).Where(x => !x.Contains("obj") && !x.Contains("bin") && !x.Contains("node_modules"));
-            return children.SelectMany(x => Directory.EnumerateFiles(x, ext));
-        } 
+        private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
 
         public SampleBuilder(ISampleCache cache, IBrowserRefresher browser, IEnumerable<ISampleScanner> scanners)
@@ -40,42 +30,6 @@ namespace ST.Docs.Samples
 
                 _scanners[ext] = x;
             });
-        }
-
-
-        public class ChangeHandler : IChangeSetHandler
-        {
-            private readonly string _root;
-            private readonly SampleBuilder _parent;
-
-            public ChangeHandler(string root, SampleBuilder parent)
-            {
-                _root = root;
-                _parent = parent;
-            }
-
-            public void Handle(ChangeSet changes)
-            {
-                var added = _parent.readFiles(changes.Added.Select(x => _root.AppendPath(x.RelativePath)));
-                var modified = _parent.readFiles(changes.Changed.Select(x => _root.AppendPath(x.RelativePath)));
-
-                Task.WhenAll(added, modified).ContinueWith(t => _parent._browser.RefreshPage());
-            }
-        }
-
-        private Task readFiles(IEnumerable<string> files)
-        {
-            var tasks = files.Select(x =>
-            {
-                return Task.Factory.StartNew(() =>
-                {
-                    var ext = Path.GetExtension(x).ToLower();
-                    var scanner = _scanners[ext];
-                    ReadFile(scanner, x);
-                });
-            });
-
-            return Task.WhenAll(tasks);
         }
 
         public Task ScanFolder(string folder)
@@ -93,19 +47,40 @@ namespace ST.Docs.Samples
                 _watchers.Add(watcher);
 
                 var files = FindFiles(folder, filter);
-                return files.Select(x =>
+                return files.Select(x => { return Task.Factory.StartNew(() => { ReadFile(scanner, x); }); });
+            });
+
+            return
+                Task.WhenAll(tasks)
+                    .ContinueWith(t => { Console.WriteLine("Sample watching ready for directory " + folder); });
+        }
+
+        public void Dispose()
+        {
+            _watchers.Each(x => x.Dispose());
+        }
+
+        public static IEnumerable<string> FindFiles(string directory, string ext)
+        {
+            var children =
+                Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories)
+                    .Where(x => !x.Contains("obj") && !x.Contains("bin") && !x.Contains("node_modules"));
+            return children.SelectMany(x => Directory.EnumerateFiles(x, ext));
+        }
+
+        private Task readFiles(IEnumerable<string> files)
+        {
+            var tasks = files.Select(x =>
+            {
+                return Task.Factory.StartNew(() =>
                 {
-                    return Task.Factory.StartNew(() =>
-                    {
-                        ReadFile(scanner, x);
-                    });
+                    var ext = Path.GetExtension(x).ToLower();
+                    var scanner = _scanners[ext];
+                    ReadFile(scanner, x);
                 });
             });
 
-            return Task.WhenAll(tasks).ContinueWith(t =>
-            {
-                Console.WriteLine("Sample watching ready for directory " + folder);
-            });
+            return Task.WhenAll(tasks);
         }
 
         private void FileChanged(object sender, FileSystemEventArgs fileSystemEventArgs)
@@ -122,9 +97,25 @@ namespace ST.Docs.Samples
             return reader.FoundSamples;
         }
 
-        public void Dispose()
+
+        public class ChangeHandler : IChangeSetHandler
         {
-            _watchers.Each(x => x.Dispose());
+            private readonly SampleBuilder _parent;
+            private readonly string _root;
+
+            public ChangeHandler(string root, SampleBuilder parent)
+            {
+                _root = root;
+                _parent = parent;
+            }
+
+            public void Handle(ChangeSet changes)
+            {
+                var added = _parent.readFiles(changes.Added.Select(x => _root.AppendPath(x.RelativePath)));
+                var modified = _parent.readFiles(changes.Changed.Select(x => _root.AppendPath(x.RelativePath)));
+
+                Task.WhenAll(added, modified).ContinueWith(t => _parent._browser.RefreshPage());
+            }
         }
     }
 }

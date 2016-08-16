@@ -1,6 +1,5 @@
 using System;
-using FubuCore;
-using FubuMVC.Core.Runtime.Files;
+using Baseline;
 using ST.Files;
 
 namespace ST.Docs.Samples

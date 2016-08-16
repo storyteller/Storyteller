@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using Xunit;
 using Shouldly;
+using Specifications;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Grammars.Sets;

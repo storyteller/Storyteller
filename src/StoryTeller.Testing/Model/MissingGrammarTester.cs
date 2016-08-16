@@ -1,5 +1,5 @@
 using System.Linq;
-using FubuCore;
+using Baseline;
 using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;

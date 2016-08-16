@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using ST.Docs.Topics;
 
 namespace ST.Docs.Outline

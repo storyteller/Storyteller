@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
-using System.Web.Caching;
-using FubuCore.Util;
-using FubuMVC.Core;
-using FubuMVC.Core.Http.Owin;
-using FubuMVC.Core.Http.Owin.Middleware;
+using Baseline;
+using StructureMap;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
 using ST.Docs.Html;
@@ -15,24 +11,21 @@ using ST.Docs.Runner;
 using ST.Docs.Samples;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
-using StructureMap;
 
 namespace ST.Docs
 {
     public class DocProject : IDisposable, ISampleCache
     {
         private readonly Container _container;
-        private Topic _topic;
-        private readonly DocSettings _settings;
-        private TopicFileWatcher _topicWatcher;
-
-        private readonly Cache<string, Topic> _topicByUrl = new Cache<string, Topic>();
         private readonly Task _sampleBuilder;
         private readonly ISampleCache _samples = new SampleCache();
+        private readonly DocSettings _settings;
+
+        private readonly Cache<string, Topic> _topicByUrl = new Cache<string, Topic>();
+        private TopicFileWatcher _topicWatcher;
 
         public DocProject(DocSettings settings)
         {
-
             _settings = settings;
             ReadTopics();
 
@@ -45,16 +38,29 @@ namespace ST.Docs
                 _.AddRegistry<TransformationRegistry>();
 
                 _.ForSingletonOf<IBrowserRefresher>().Use<BrowserRefresher>();
-                _.For(typeof (IUrlResolver)).Use(settings.UrlResolverType());
+                _.For(typeof(IUrlResolver)).Use(settings.UrlResolverType());
 
                 _.ForSingletonOf<ICommandUsageCache>().Use<CommandUsageCache>();
 
                 _.For<DocSettings>().Use(settings);
-                _.For<Topic>().Use(_topic);
+                _.For<Topic>().Use(Topic);
             });
 
             _sampleBuilder = scanForSamples();
+        }
 
+        public Topic Topic { get; private set; }
+
+        public ITransformer Transformer
+        {
+            get { return _container.GetInstance<ITransformer>(); }
+        }
+
+
+        public void Dispose()
+        {
+            if (_topicWatcher != null) _topicWatcher.Dispose();
+            _container.Dispose();
         }
 
         void ISampleCache.AddOrReplace(Sample sample)
@@ -78,12 +84,12 @@ namespace ST.Docs
 
         public void ReadTopics()
         {
-            _topic = TopicLoader.LoadDirectory(_settings.Root);
+            Topic = TopicLoader.LoadDirectory(_settings.Root);
 
-            _topic.ParseAndOrder().Wait();
+            Topic.ParseAndOrder().Wait();
 
             _topicByUrl.ClearAll();
-            _topic.AllTopicsInOrder().Each(x => _topicByUrl[x.Url] = x);
+            Topic.AllTopicsInOrder().Each(x => _topicByUrl[x.Url] = x);
         }
 
         public void ExportTo(string directory)
@@ -97,21 +103,20 @@ namespace ST.Docs
             scanForSamples();
 
             if (_settings.UrlStyle == UrlStyle.FileExport)
-            {
-                exporter.ExportTo(directory, _topic, x => x.FileExportPath());
-            }
+                exporter.ExportTo(directory, Topic, x => x.FileExportPath());
             else if (_settings.UrlStyle == UrlStyle.WebsiteExport)
-            {
-                exporter.ExportTo(directory, _topic, x => x.WebsiteExportPath());
-            }
+                exporter.ExportTo(directory, Topic, x => x.WebsiteExportPath());
             else
-            {
-                exporter.ExportTo(directory, _topic, x => x.WebsiteExportPath());
-            }
+                exporter.ExportTo(directory, Topic, x => x.WebsiteExportPath());
         }
 
-        public FubuRuntime LaunchRunner()
+        public IDisposable LaunchRunner()
         {
+            throw new NotImplementedException();
+
+            /*
+
+
             var refresher = _container.GetInstance<IBrowserRefresher>();
 
             refresher.StartWebSockets();
@@ -130,6 +135,7 @@ namespace ST.Docs
             registry.StructureMap(_container);
 
             return registry.ToRuntime();
+            */
         }
 
         private Task scanForSamples()
@@ -142,11 +148,6 @@ namespace ST.Docs
             }).ContinueWith(t => Task.WhenAll(t)).Unwrap();
         }
 
-        public Topic Topic
-        {
-            get { return _topic; }
-        }
-
         public IEnumerable<Topic> AllTopics()
         {
             return Topic.AllTopicsInOrder();
@@ -154,19 +155,7 @@ namespace ST.Docs
 
         public Topic FindTopic(string key)
         {
-            return _topic.FindByKey(key);
-        }
-
-        public ITransformer Transformer
-        {
-            get { return _container.GetInstance<ITransformer>(); }
-        }
-
-
-        public void Dispose()
-        {
-            if (_topicWatcher != null) _topicWatcher.Dispose();
-            _container.Dispose();
+            return Topic.FindByKey(key);
         }
 
         public Topic FindTopicByUrl(string url)

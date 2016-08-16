@@ -1,5 +1,4 @@
 ﻿using System;
-using FubuCore.Logging;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
 

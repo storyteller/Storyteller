@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
-using FubuCore.Dates;
 using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
-using StructureMap.AutoMocking;
 
 namespace StoryTeller.Testing.Model.Persistence
 {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Baseline;
 using Xunit;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;

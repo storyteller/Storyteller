@@ -1,6 +1,6 @@
 using System.IO;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using HtmlTags;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
