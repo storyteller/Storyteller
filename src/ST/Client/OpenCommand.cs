@@ -2,12 +2,12 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using FubuCore;
-using FubuCore.CommandLine;
+using Oakton;
 
 namespace ST.Client
 {
-    [CommandDescription("Opens the specification editor web tool")]
-    public class OpenCommand : FubuCommand<OpenInput>
+    [Description("Opens the specification editor web tool")]
+    public class OpenCommand : OaktonCommand<OpenInput>
     {
         public override bool Execute(OpenInput input)
         {

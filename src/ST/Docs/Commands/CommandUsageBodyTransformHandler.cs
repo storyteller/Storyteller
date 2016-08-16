@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using FubuCore.CommandLine;
+using Oakton;
 using HtmlTags;
+using Oakton.Reporting;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
 
@@ -16,10 +17,7 @@ namespace ST.Docs.Commands
             _cache = cache;
         }
 
-        public string Key
-        {
-            get { return "/command-usage"; }
-        }
+        public string Key => "/command-usage";
 
         public string Transform(Topic current, string data)
         {
