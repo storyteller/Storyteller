@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
@@ -14,14 +14,14 @@ namespace StoryTeller.Testing.Grammars.Lines
         [Fact]
         public void execute_delegates()
         {
-            var action = MockRepository.GenerateMock<System.Action<ISpecContext>>();
+            var action = Substitute.For<System.Action<ISpecContext>>();
             var grammar = new ActionGrammar("do something", action);
 
             var context = SpecContext.ForTesting();
 
             grammar.Execute(new StepValues("foo"), context).ToArray();
 
-            action.AssertWasCalled(x => x.Invoke(context));
+            action.Received().Invoke(context);
         }
 
         [Fact]
@@ -31,9 +31,9 @@ namespace StoryTeller.Testing.Grammars.Lines
 
             var model = grammar.Compile(new Fixture(), CellHandling.Basic()).ShouldBeOfType<Sentence>();
 
-            ShouldBeTestExtensions.ShouldBe(model.errors.Any(), false);
+            model.errors.Any().ShouldBe(false);
             model.format.ShouldBe("do something");
-            ShouldBeTestExtensions.ShouldBe(model.cells.Any(), false);
+            model.cells.Any().ShouldBe(false);
         }
     }
 }

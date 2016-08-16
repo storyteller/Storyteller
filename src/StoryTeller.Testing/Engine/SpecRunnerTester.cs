@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
@@ -15,7 +16,8 @@ namespace StoryTeller.Testing.Engine
         private SpecExecutionRequest theRequest;
         private SpecResults theResults;
 
-        protected override void beforeEach()
+
+        public executing_when_the_runner_is_invalid()
         {
             ClassUnderTest.Status = SpecRunnerStatus.Invalid;
 
@@ -24,6 +26,7 @@ namespace StoryTeller.Testing.Engine
 
             theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
         }
+
 
         [Fact]
         public void the_results_should_show_that_the_spec_was_aborted()
@@ -41,13 +44,13 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void should_call_through_to_the_before_running_method_on_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.BeforeRunning(theRequest));
+            MockFor<IExecutionMode>().Received().BeforeRunning(theRequest);
         }
 
         [Fact]
         public void should_call_through_to_the_after_running_method_on_the_active_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>(), SpecRunnerStatus.Invalid));
+            MockFor<IExecutionMode>().Received().AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>(), SpecRunnerStatus.Invalid);
         }
     }
 
@@ -57,13 +60,14 @@ namespace StoryTeller.Testing.Engine
         private SpecExecutionRequest theRequest;
         private SpecResults theResults;
 
-        protected override void beforeEach()
+        public executing_when_spec_has_expired()
         {
             var specNode = new Specification() { id = Guid.NewGuid().ToString() };
-            MockFor<ISpecExpiration>().Stub(x => x.IsExpired(Arg<Specification>.Is.Anything)).Return(true);
+            MockFor<ISpecExpiration>().IsExpired(Arg.Any<Specification>()).Returns(true);
             theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver());
             theResults = ClassUnderTest.Execute(theRequest, MockFor<IConsumingQueue>());
         }
+
 
         [Fact]
         public void the_proper_results_are_given()
@@ -75,13 +79,13 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void should_call_through_to_the_before_running_method_on_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.BeforeRunning(theRequest));
+            MockFor<IExecutionMode>().Received().BeforeRunning(theRequest);
         }
 
         [Fact]
         public void should_call_through_to_the_after_running_method_on_the_active_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>(), ClassUnderTest.Status));
+            MockFor<IExecutionMode>().Received().AfterRunning(theRequest, theResults, MockFor<IConsumingQueue>(), ClassUnderTest.Status);
         }
     }
 
@@ -93,9 +97,9 @@ namespace StoryTeller.Testing.Engine
         private DivideByZeroException theException;
         private SpecResults theResults;
 
-        protected override void beforeEach()
+        public executing_a_spec_when_context_creation_blows_up()
         {
-            var specNode = new Specification(){id = Guid.NewGuid().ToString()};
+            var specNode = new Specification() { id = Guid.NewGuid().ToString() };
             theRequest = new SpecExecutionRequest(specNode, new NulloResultObserver());
 
             theRequest.CreatePlan(TestingContext.Library);
@@ -104,7 +108,7 @@ namespace StoryTeller.Testing.Engine
 
             theException = new DivideByZeroException("Wrong!");
 
-            MockFor<ISystem>().Stub(x => x.CreateContext()).Throw(theException);
+            MockFor<ISystem>().CreateContext().Throws(theException);
 
             ClassUnderTest.Status.ShouldBe(SpecRunnerStatus.Valid);
 
@@ -156,13 +160,13 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void should_call_through_to_the_before_running_method_on_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.BeforeRunning(theRequest));
+            MockFor<IExecutionMode>().Received().BeforeRunning(theRequest);
         }
 
         [Fact]
         public void should_call_through_to_the_after_running_method_on_the_active_mode()
         {
-            MockFor<IExecutionMode>().AssertWasCalled(x => x.AfterRunning(theRequest, theResults, theQueue, SpecRunnerStatus.Invalid));
+            MockFor<IExecutionMode>().Received().AfterRunning(theRequest, theResults, theQueue, SpecRunnerStatus.Invalid);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
@@ -38,17 +38,17 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void finishing_a_spec()
         {
-            var action = MockRepository.GenerateMock<IResultObserver>();
+            var action = Substitute.For<IResultObserver>();
 
             var request = new SpecExecutionRequest(theSpec, action);
-
+            request.ReadXml();
             request.CreatePlan(TestingContext.Library);
             request.Plan.Attempts = 3;
 
             var results = new SpecResults();
             request.SpecExecutionFinished(results);
 
-            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, results));
+            action.Received().SpecExecutionFinished(theSpec, results);
         }
 
         [Fact]
@@ -56,12 +56,30 @@ namespace StoryTeller.Testing.Engine
         {
             var request = SpecExecutionRequest.For(theSpec);
 
+            request.ReadXml();
+
             request.Specification.ShouldNotBeNull();
             request.Specification.Children.Count.ShouldBeGreaterThan(0);
 
             request.IsCancelled.ShouldBe(false);
         }
 
+        [Fact]
+        public void read_xml_sad_path()
+        {
+            var request = SpecExecutionRequest.For(new Specification()
+            {
+                Filename = "nonexistent.xml",
+                SpecType = SpecType.header
+            });
+            
+
+            EventAggregator.Messaging.AddListener(listener);
+
+            request.ReadXml();
+
+            request.IsCancelled.ShouldBe(true);
+        }
 
         [Fact]
         public void cancel_cancels_the_request()
@@ -79,6 +97,7 @@ namespace StoryTeller.Testing.Engine
         public void create_plan_happy_path_smoke_test()
         {
             var request = SpecExecutionRequest.For(theSpec);
+            request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
             request.IsCancelled.ShouldBe(false);

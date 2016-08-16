@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
@@ -15,13 +15,13 @@ namespace StoryTeller.Testing.Grammars
         [Fact]
         public void accept_visitor()
         {
-            var executor = MockRepository.GenerateMock<IStepExecutor>();
+            var executor = Substitute.For<IStepExecutor>();
 
             var step = new InvalidGrammarStep(new StepValues("foo"), "grammar is wonky");
 
             step.AcceptVisitor(executor);
 
-            executor.AssertWasCalled(x => x.Line(step));
+            executor.Received().Line(step);
         }
 
         [Fact]

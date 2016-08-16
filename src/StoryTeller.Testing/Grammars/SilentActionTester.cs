@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Grammars;
@@ -58,19 +58,19 @@ namespace StoryTeller.Testing.Grammars
 
             action.Execute(context);
 
-            ShouldBeTestExtensions.ShouldBe(context.CanContinue(), false);
+            context.CanContinue().ShouldBe(false);
         }
 
         [Fact]
         public void accept_visitor()
         {
-            var executor = MockRepository.GenerateMock<IStepExecutor>();
+            var executor = Substitute.For<IStepExecutor>();
 
             var action = new SilentAction("Fixture", Stage.setup, x => { }, new Section("Math"));
 
             action.AcceptVisitor(executor);
 
-            executor.AssertWasCalled(x => x.Line(action));
+            executor.Received().Line(action);
         }
     }
 }
