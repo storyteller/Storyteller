@@ -4,7 +4,7 @@ Shouldly
 Newtonsoft.Json
 HtmlTags
 Fleck
-RhinoMocks
 Nowin
 Baseline
 xUnit
+NSubstitute

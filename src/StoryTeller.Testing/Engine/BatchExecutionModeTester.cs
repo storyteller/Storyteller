@@ -13,9 +13,9 @@ namespace StoryTeller.Testing.Engine
         private SpecResults theResults;
         private SpecRunnerStatus theStatus = SpecRunnerStatus.Valid;
 
-        protected override void beforeEach()
+        public BatchExecutionModeTester()
         {
-            Project.CurrentProject = new Project{MaxRetries = 0};
+            Project.CurrentProject = new Project { MaxRetries = 0 };
 
             theSpecification = new Specification();
             theResults = new SpecResults
@@ -26,6 +26,7 @@ namespace StoryTeller.Testing.Engine
 
             theStatus = SpecRunnerStatus.Valid;
         }
+
 
         [Fact]
         public void never_retry_a_spec_that_succeeded()

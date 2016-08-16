@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FubuCore;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -58,7 +58,7 @@ namespace StoryTeller.Testing.ST
             Directory.Exists(thePath.AppendPath("Foo Specs"));
 
             MockFor<IClientConnector>()
-                .AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top)));
+                .Received().SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top));
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Foo Specs"];
             newSuite.name.ShouldBe("Foo Specs");
@@ -127,7 +127,7 @@ namespace StoryTeller.Testing.ST
             Directory.Exists(thePath.AppendPath("Tables", "Special Tables"));
 
             MockFor<IClientConnector>()
-                .AssertWasCalled(x => x.SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top)));
+                .Received().SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top));
 
             var newSuite = ClassUnderTest.Hierarchy.Suites["Tables/Special Tables"];
             newSuite.name.ShouldBe("Special Tables");
@@ -166,9 +166,8 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Hierarchy.Suites["General"]
                 .Specifications.ShouldContain(newNode);
 
-            var sent =
-                MockFor<IClientConnector>().GetArgumentsForCallsMadeOn(x => x.SendMessageToClient(new SpecData()))[0][0]
-                    as SpecData;
+
+            var sent = MockFor<IClientConnector>().ReceivedCalls().First().GetArguments().First().As<SpecData>();
 
             sent.ShouldNotBeNull();
 
@@ -189,7 +188,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.AllCachedResults().Any().ShouldBeFalse();
 
             var hierarchyLoaded = new HierarchyLoaded(ClassUnderTest.Hierarchy.Top, ClassUnderTest.Results);
-            MockFor<IClientConnector>().AssertWasCalled(x => x.SendMessageToClient(hierarchyLoaded));
+            MockFor<IClientConnector>().Received().SendMessageToClient(hierarchyLoaded);
         }
 
 
@@ -312,7 +311,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.SetLifecycle("general1", lifecycle);
 
             // Nothing should happen here
-            MockFor<IClientConnector>().AssertWasNotCalled(x => x.SendMessageToClient(null), x => x.IgnoreArguments());
+            MockFor<IClientConnector>().DidNotReceive().SendMessageToClient(Arg.Any<object>());
         }
 
         [Fact]
@@ -336,8 +335,10 @@ namespace StoryTeller.Testing.ST
                 .ShouldBe(newLifecycle);
 
 
-            var message = MockFor<IClientConnector>().GetArgumentsForCallsMadeOn(x => x.SendMessageToClient(null))
-                [0][0].As<SpecData>();
+
+            
+
+            var message = MockFor<IClientConnector>().ReceivedCalls().First().GetArguments().First().As<SpecData>();
 
             message.data.ShouldBeSameAs(spec);
             message.data.id.ShouldBe(spec.id);

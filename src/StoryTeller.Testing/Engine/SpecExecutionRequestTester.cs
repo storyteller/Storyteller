@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
@@ -38,7 +38,7 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void finishing_a_spec()
         {
-            var action = MockRepository.GenerateMock<IResultObserver>();
+            var action = Substitute.For<IResultObserver>();
 
             var request = new SpecExecutionRequest(theSpec, action);
             request.ReadXml();
@@ -48,7 +48,7 @@ namespace StoryTeller.Testing.Engine
             var results = new SpecResults();
             request.SpecExecutionFinished(results);
 
-            action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, results));
+            action.Received().SpecExecutionFinished(theSpec, results);
         }
 
         [Fact]

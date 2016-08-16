@@ -4,7 +4,7 @@ source http://nuget.org/api/v2
 nuget Baseline
 nuget CommonMark.NET
 nuget Nowin
-nuget RhinoMocks
+nuget NSubstitute
 nuget Selenium.WebDriver
 nuget Selenium.RC
 nuget ilrepack

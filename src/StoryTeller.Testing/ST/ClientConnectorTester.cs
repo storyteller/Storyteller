@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using Shouldly;
 using ST.Client;
 using StoryTeller.Commands;
@@ -21,7 +21,7 @@ namespace StoryTeller.Testing.ST
         public ClientConnectorTester()
         {
             theCommand = new RecordingCommand<RunSpec>();
-            theRemoteController = MockRepository.GenerateMock<IRemoteController>();
+            theRemoteController = Substitute.For<IRemoteController>();
 
             theConnector = new ClientConnector(theRemoteController, new ICommand[] { theCommand });
         }
@@ -38,7 +38,7 @@ namespace StoryTeller.Testing.ST
             theCommand.Received.Single()
                 .id.ShouldBe("foo");
 
-            theRemoteController.AssertWasNotCalled(x => x.SendJsonMessage(json));
+            theRemoteController.DidNotReceive().SendJsonMessage(json);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace StoryTeller.Testing.ST
 
             theConnector.HandleJson(json);
 
-            theRemoteController.AssertWasCalled(x => x.SendJsonMessage(json));
+            theRemoteController.Received().SendJsonMessage(json);
         }
     }
 

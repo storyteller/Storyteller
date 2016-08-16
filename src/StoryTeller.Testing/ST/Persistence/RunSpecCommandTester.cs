@@ -1,6 +1,6 @@
 ﻿using System;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using ST.Client;
 using ST.Client.Persistence;
 using StoryTeller.Messages;
@@ -17,8 +17,8 @@ namespace StoryTeller.Testing.ST.Persistence
         {
             var theSpecRetrievedFromPersistence = new Specification();
 
-            MockFor<IPersistenceController>().Stub(x => x.LoadSpecification("foo"))
-                .Return(new SpecData
+            MockFor<IPersistenceController>().LoadSpecification("foo")
+                .Returns(new SpecData
                 {
                     data = theSpecRetrievedFromPersistence
                 });
@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.ST.Persistence
             var theMessage = new RunSpec{id = "foo"};
             ClassUnderTest.HandleMessage(theMessage);
 
-            MockFor<IRemoteController>().AssertWasCalled(x => x.SendMessage(theMessage));
+            MockFor<IRemoteController>().Received().SendMessage(theMessage);
 
             theMessage.spec.ShouldBeTheSameAs(theSpecRetrievedFromPersistence);
         }
@@ -45,10 +45,10 @@ namespace StoryTeller.Testing.ST.Persistence
 
             ClassUnderTest.HandleMessage(theMessage);
 
-            MockFor<IRemoteController>().AssertWasCalled(x => x.SendMessage(theMessage));
+            MockFor<IRemoteController>().Received().SendMessage(theMessage);
 
             // do not auto-save
-            MockFor<IPersistenceController>().AssertWasNotCalled(x => x.SaveSpecification("foo", theSpecSentFromTheClient));
+            MockFor<IPersistenceController>().DidNotReceive().SaveSpecification("foo", theSpecSentFromTheClient);
 
         }
 
@@ -66,10 +66,10 @@ namespace StoryTeller.Testing.ST.Persistence
 
             ClassUnderTest.HandleMessage(theMessage);
 
-            MockFor<IRemoteController>().AssertWasCalled(x => x.SendMessage(theMessage));
+            MockFor<IRemoteController>().Received().SendMessage(theMessage);
 
             // *do* auto-save
-            MockFor<IPersistenceController>().AssertWasCalled(x => x.SaveSpecification("foo", theSpecSentFromTheClient));
+            MockFor<IPersistenceController>().Received().SaveSpecification("foo", theSpecSentFromTheClient);
 
         }
     }
