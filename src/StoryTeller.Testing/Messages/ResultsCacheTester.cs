@@ -1,23 +1,18 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Messages
 {
-    [TestFixture]
+    
     public class ResultsCacheTester
     {
-        private ResultsCache theCache;
+        private ResultsCache theCache = new ResultsCache();
 
-        [SetUp]
-        public void SetUp()
-        {
-            theCache = new ResultsCache();
-        }
 
-        [Test]
+        [Fact]
         public void stores_the_last_five_per_spec()
         {
             theCache.Store(new SpecExecutionCompleted("foo", new SpecResults(), new Specification()));
@@ -35,7 +30,7 @@ namespace StoryTeller.Testing.Messages
             theCache.ResultsFor("foo").Count().ShouldBe(5);
         }
 
-        [Test]
+        [Fact]
         public void retrieve_results_for_a_spec()
         {
             var result1 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
@@ -56,7 +51,7 @@ namespace StoryTeller.Testing.Messages
 
         }
 
-        [Test]
+        [Fact]
         public void get_all_results()
         {
             var result1 = new SpecExecutionCompleted("foo", new SpecResults(), new Specification());
@@ -82,7 +77,7 @@ namespace StoryTeller.Testing.Messages
             all.ShouldContain(result6);
         }
 
-        [Test, Explicit("Too flakey in batches. No earthly idea why")]
+        // The time comparison is off from using DateTime.UtcNow [Fact]
         public void last_counts()
         {
             var c = new ResultsCache();

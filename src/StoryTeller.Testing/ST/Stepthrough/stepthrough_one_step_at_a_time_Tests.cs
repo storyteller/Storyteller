@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
@@ -8,13 +8,10 @@ using ST.Client.Stepthrough;
 
 namespace StoryTeller.Testing.ST.Stepthrough
 {
-    [TestFixture]
+    
     public class stepthrough_one_step_at_a_time_Tests : StepthroughContext
     {
-        
-
-        [SetUp]
-        public void SetUp()
+        public stepthrough_one_step_at_a_time_Tests()
         {
             TheSpecIs(@"
 => Sentence#0
@@ -26,7 +23,9 @@ namespace StoryTeller.Testing.ST.Stepthrough
 ");
         }
 
-        [Test]
+
+
+        [Fact]
         public void can_gather_up_the_lines()
         {
             var gatherer = new ExecutionStepGatherer(Executor.Context);
@@ -46,7 +45,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
             gatherer.Lines.Last().ShouldBeOfType<SilentAction>();
         }
 
-        [Test]
+        [Fact]
         public void the_initial_progress()
         {
             // Initial progress
@@ -56,7 +55,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
             LastProgress.id.ShouldBe(Specification.id);
         }
 
-        [Test]
+        [Fact]
         public void sends_the_next_step_message_to_the_beginning()
         {
             var next = LastNextStepMessageReceivedByClient;
@@ -66,7 +65,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
             next.position.ShouldBe(Stage.setup);
         }
 
-        [Test]
+        [Fact]
         public void run_next_from_the_beginning()
         {
             Executor.RunNext();
@@ -79,7 +78,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
             LastProgress.id.ShouldBe(Specification.id);
         }
 
-        [Test]
+        [Fact]
         public void run_to_end_even_with_breakpoints()
         {
             Specification.SetBreakpoint(new Breakpoint("2", null));

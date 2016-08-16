@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Samples.Fixtures;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class json_serialization_of_fixture_model
     {
-        [Test]
+        [Fact]
         public void smoke_test_of_fixture_model_serialization()
         {
             var fixture = new SentenceFixture();

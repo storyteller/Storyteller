@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class string_list_verification_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void exact_match_by_simple()
         {
             StringListFixture.Strings.Clear();
@@ -30,7 +30,7 @@ Name: whatever
             CountsShouldBe(3, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void exact_match_by_simple_ordered()
         {
             StringListFixture.Strings.Clear();
@@ -50,7 +50,7 @@ Name: whatever
             CountsShouldBe(3, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void exact_match_by_simple_ordered_out_of_order()
         {
             StringListFixture.Strings.Clear();
@@ -75,7 +75,7 @@ Name: whatever
 
 
 
-        [Test]
+        [Fact]
         public void exact_match_by_simple_ordered_missing_and_extra()
         {
             StringListFixture.Strings.Clear();
@@ -103,7 +103,7 @@ Name: whatever
         }
 
 
-        [Test]
+        [Fact]
         public void an_extra_a_missing_and_some_rights()
         {
             StringListFixture.Strings.Clear();
@@ -128,7 +128,7 @@ Name: whatever
             result.extras.Single()["expected"].ShouldBe("extra");
         }
 
-        [Test]
+        [Fact]
         public void exact_match_by_func_on_context()
         {
             execute(@"
@@ -142,7 +142,7 @@ Name: whatever
 ");
         }
 
-        [Test]
+        [Fact]
         public void exact_match_by_service()
         {
             Services.Add(new StringSource("a", "c", "f"));

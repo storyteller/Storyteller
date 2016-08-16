@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
@@ -10,17 +10,38 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
+    
     public class SpecificationTester
-    {
-        [Test]
+    { 
+
+        [Fact]
         public void is_full_by_default()
         {
             new Specification().SpecType
                 .ShouldBe(SpecType.full);
         }
 
-        [Test]
+        [Fact]
+        public void read_spec_data_from_header_mode()
+        {
+            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
+                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+
+            var spec = HierarchyLoader.ReadSpecHeader(path);
+            spec.Children.Any().ShouldBeFalse();
+
+            spec.SpecType.ShouldBe(SpecType.header);
+
+            spec.ReadBody();
+
+            spec.SpecType.ShouldBe(SpecType.full);
+
+            spec.Children.Any().ShouldBeTrue();
+
+
+        }
+
+        [Fact]
         public void serializes_fine()
         {
             var spec = new Specification();
@@ -46,7 +67,7 @@ namespace StoryTeller.Testing.Model
             Debug.WriteLine(json);
         }
 
-        [Test]
+        [Fact]
         public void can_find_all_children()
         {
             var spec = new Specification();
@@ -85,7 +106,7 @@ namespace StoryTeller.Testing.Model
             nodes.ShouldContain(s6);
         }
 
-        [Test]
+        [Fact]
         public void needs_renumbering_negative()
         {
             var spec = new Specification();
@@ -110,7 +131,7 @@ namespace StoryTeller.Testing.Model
         }
 
 
-        [Test]
+        [Fact]
         public void needs_renumbering_is_true_because_there_are_duplicate_ids()
         {
             var spec = new Specification();
@@ -136,7 +157,7 @@ namespace StoryTeller.Testing.Model
             spec.NeedsToBeRenumbered().ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void apply_renumbering()
         {
             var spec = new Specification();
@@ -166,7 +187,7 @@ namespace StoryTeller.Testing.Model
             s4.id.ShouldNotBe(s6.id);
         }
 
-        [Test]
+        [Fact]
         public void clear_breakpoints()
         {
             var specification = new Specification();
@@ -179,7 +200,7 @@ namespace StoryTeller.Testing.Model
             specification.Breakpoints.Any().ShouldBeFalse();
         }
 
-        [Test]
+        [Fact]
         public void set_breakpoint()
         {
             var breakpoint1 = new Breakpoint("1", null);
@@ -196,7 +217,7 @@ namespace StoryTeller.Testing.Model
             specification.Breakpoints.ShouldHaveTheSameElementsAs(breakpoint1, breakpoint2);
         }
 
-        [Test]
+        [Fact]
         public void remove_breakpoint()
         {
             var breakpoint1 = new Breakpoint("1", null);
@@ -213,7 +234,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldBe(breakpoint2);
         }
 
-        [Test]
+        [Fact]
         public void matches_breakpoint()
         {
             var breakpoint1 = new Breakpoint("1", null);

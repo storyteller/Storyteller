@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class StringListComparisonTester
     {
-        [Test]
+        [Fact]
         public void build_cells()
         {
             var comparison = new StringListComparison("expected", c => new String[0]);
@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             cell.Type.ShouldBe(typeof (string));
         }
 
-        [Test]
+        [Fact]
         public void fetch()
         {
             var comparison = new StringListComparison("expected", c => new String[]{"red", "blue", "green"});

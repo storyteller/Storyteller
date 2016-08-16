@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using FubuCore.Util;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Grammars.Tables;
 
 namespace StoryTeller.Testing.Grammars.Tables
 {
-    [TestFixture]
+    
     public class TableGrammar_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void running_from_ext_method_with_no_before_or_after()
         {
             execute(@"
@@ -25,7 +25,7 @@ Name: whatever
             TestTableFixture.Traced["Table1"].ShouldHaveTheSameElementsAs("Hello", "Goodbye", "Laters");
         }
 
-        [Test]
+        [Fact]
         public void running_from_ext_method_with_before_and_after()
         {
             execute(@"
@@ -42,7 +42,7 @@ Name: whatever
             TestTableFixture.Traced["Table2"].ShouldHaveTheSameElementsAs("Before", "Hello", "Goodbye", "Laters", "After");
         }
 
-        [Test]
+        [Fact]
         public void running_from_attribute_marked_action_method()
         {
             execute(@"
@@ -59,7 +59,7 @@ Name: whatever
             TestTableFixture.Traced["Table3"].ShouldHaveTheSameElementsAs("Hello", "Goodbye", "Laters");
         }
 
-        [Test]
+        [Fact]
         public void run_from_attribute_marked_method_with_value_check()
         {
             execute(@"

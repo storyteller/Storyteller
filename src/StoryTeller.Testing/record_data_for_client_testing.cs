@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -15,25 +15,22 @@ using ST.Client;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture, Explicit]
-    public class record_data_for_client_testing
+    public class record_data_for_client_testing : IDisposable
     {
         private GrammarSystem theSystem;
 
-
-        [TestFixtureSetUp]
-        public void SetUp()
+        public record_data_for_client_testing()
         {
             theSystem = new GrammarSystem();
         }
 
-        [TestFixtureTearDown]
-        public void TearDown()
+        public void Dispose()
         {
             theSystem.Dispose();
         }
 
-        [Test]
+
+        //[Fact]
         public void what_are_the_client_message_names()
         {
             var types = typeof (ClientMessage).Assembly.GetExportedTypes()
@@ -43,7 +40,7 @@ namespace StoryTeller.Testing
             types.Each(x => Debug.WriteLine(x));
         }
 
-        [Test]
+        //[Fact]
         public void record_and_save_file()
         {
             var data = new ClientData();

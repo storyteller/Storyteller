@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class using_runtime_converter_spec : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void can_use_a_runtime_converter()
         {
             execute(@"

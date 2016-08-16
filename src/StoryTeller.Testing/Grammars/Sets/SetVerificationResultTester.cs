@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Sets;
@@ -8,18 +8,12 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class SetVerificationResultTester
     {
-        private SetVerificationResult theResult;
+        private SetVerificationResult theResult = new SetVerificationResult();
 
-        [SetUp]
-        public void SetUp()
-        {
-            theResult = new SetVerificationResult();
-        }
-
-        [Test]
+        [Fact]
         public void round_trip_serialization()
         {
             theResult.MarkMatched("1");
@@ -45,7 +39,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             counts.ShouldEqual(right, wrong, ex, syntax);
         }
 
-        [Test]
+        [Fact]
         public void tabulate_matches()
         {
             theResult.MarkMatched("1");
@@ -55,7 +49,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theCountsShouldBe(3, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void tabulate_extras()
         {
             theResult.MarkExtra(new StepValues("foo"));
@@ -64,7 +58,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theCountsShouldBe(0, 2, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void tabulate_missing()
         {
             theResult.MarkMissing(Guid.NewGuid().ToString());
@@ -75,7 +69,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theCountsShouldBe(0, 4, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void tabulate_out_of_orders()
         {
             theResult.MarkWrongOrder(Guid.NewGuid().ToString(), 1);

@@ -1,15 +1,15 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Results
 {
-    [TestFixture]
+    
     public class StepResultTester
     {
-        [Test]
+        [Fact]
         public void modify_increments()
         {
             var counts = new Counts();
@@ -27,14 +27,14 @@ namespace StoryTeller.Testing.Results
             counts.ShouldEqual(1, 1, 1, 0);
         }
 
-        [Test]
+        [Fact]
         public void default_position_is_null()
         {
             new StepResult("1", ResultStatus.error).position
                 .ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void modify_increments_with_cell_results()
         {
             var result = new StepResult("foo", ResultStatus.ok)
@@ -56,7 +56,7 @@ namespace StoryTeller.Testing.Results
             counts.ShouldEqual(1, 3, 2, 0);
         }
 
-        [Test]
+        [Fact]
         public void serialize_status()
         {
             var result = new StepResult("foo", ResultStatus.ok)

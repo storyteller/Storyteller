@@ -2,24 +2,17 @@ using System;
 using System.IO;
 using System.Linq;
 using FubuCore;
-using FubuMVC.Core.Runtime.Files;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using ST.Docs.Samples;
 using ST.Files;
 
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
-    [TestFixture]
+    
     public class CLanguageSampleFinderTester
     {
-        private SampleCache theSamples;
-
-        [SetUp]
-        public void SetUp()
-        {
-            theSamples = new SampleCache();
-        }
+        private SampleCache theSamples = new SampleCache();
 
         private void scan(string text)
         {
@@ -29,7 +22,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
             reader.Start();
         }
 
-        [Test]
+        [Fact]
         public void determine_name()
         {
             var scanner = new CLangSampleScanner("cs", "csharp");
@@ -41,7 +34,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
             scanner.DetermineName("SAMPLE:").ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void is_at_end()
         {
             var scanner = new CLangSampleScanner("cs", "csharp");
@@ -53,7 +46,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
             scanner.IsAtEnd("// Something else").ShouldBeFalse();
         }
 
-        [Test]
+        [Fact]
         public void find_easy()
         {
             scan(@"
@@ -83,7 +76,7 @@ New York
             snippet.Language.ShouldBe("csharp");
         }
 
-        [Test]
+        [Fact]
         public void find_multiples()
         {
             scan(@"

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
+    
     public class StepTester
     {
-        [Test]
+        [Fact]
         public void find_step_values()
         {
             IDictionary<string, string> values = Step.ParseValues("a:1, b:2, c:3");
@@ -18,7 +18,7 @@ namespace StoryTeller.Testing.Model
             values["c"].ShouldBe("3");
         }
 
-        [Test]
+        [Fact]
         public void parse_values_works_just_fine_with_blank_or_null_values()
         {
             Step.ParseValues(null).ShouldNotBeNull();

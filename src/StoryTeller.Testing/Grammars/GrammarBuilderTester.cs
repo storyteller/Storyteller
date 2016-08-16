@@ -1,34 +1,34 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class GrammarBuilderTester
     {
         private readonly GrammarTargetFixture theFixture = new GrammarTargetFixture();
 
-        [Test]
+        [Fact]
         public void processes_hidden_for_programmatic_grammars()
         {
             theFixture.GrammarFor("NotHidden").IsHidden.ShouldBeFalse();
             theFixture.GrammarFor("Hidden").IsHidden.ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void determines_hidden_for_actions()
         {
             theFixture.GrammarFor("VisibleAction").IsHidden.ShouldBeFalse();
             theFixture.GrammarFor("HiddenAction").IsHidden.ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void determines_hidden_for_assertions()
         {
             theFixture.GrammarFor("VisibleAssertion").IsHidden.ShouldBeFalse();
             theFixture.GrammarFor("HiddenAssertion").IsHidden.ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void determines_hidden_for_facts()
         {
             theFixture.GrammarFor("VisibleFact").IsHidden.ShouldBeFalse();

@@ -2,7 +2,7 @@
 using System.Linq;
 using FubuCore;
 using MultipleSystems;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using ST.Client;
 using ST.CommandLine;
@@ -12,22 +12,21 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.CommandLine
 {
-    [TestFixture]
-    public class run_command_integration_specs
+    
+    public class run_command_integration_specs : IDisposable
     {
         private RunInput theInput;
         private RemoteController theController;
         private FixtureModel[] theFixtures;
 
-        [SetUp]
-        public void SetUp()
+        public run_command_integration_specs()
         {
             var directory = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples");
 
             theController = new RemoteController(directory);
 
-            theInput = new RunInput {Path = directory,RetriesFlag = 1};
+            theInput = new RunInput { Path = directory, RetriesFlag = 1 };
             theController = theInput.BuildRemoteController();
             var task = theController.Start(EngineMode.Batch);
             task.Wait(3.Seconds());
@@ -35,19 +34,19 @@ namespace StoryTeller.Testing.CommandLine
             theFixtures = task.Result.fixtures;
         }
 
-        [TearDown]
-        public void TearDown()
+
+        public void Dispose()
         {
             theController.Dispose();
         }
 
-        [Test]
+        [Fact]
         public void the_project_max_attempts_should_be_set_from_retries_flag()
         {
             theController.Project.MaxRetries.ShouldBe(1);
         }
 
-        [Test]
+        [Fact]
         public void filter_by_regression_lifecycle()
         {
             theInput.LifecycleFlag = Lifecycle.Regression;
@@ -61,7 +60,7 @@ namespace StoryTeller.Testing.CommandLine
                 .ShouldHaveTheSameElementsAs("embeds", "paragraph1", "sentence2");
         }
 
-        [Test]
+        [Fact]
         public void filter_by_acceptance_lifecycle()
         {
             theInput.LifecycleFlag = Lifecycle.Acceptance;
@@ -76,7 +75,7 @@ namespace StoryTeller.Testing.CommandLine
             result.records.Any(x => x.specification.id == "sentence2").ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void filter_by_suite()
         {
             theInput.WorkspaceFlag = "Sentences";
@@ -90,7 +89,7 @@ namespace StoryTeller.Testing.CommandLine
                 .ShouldHaveTheSameElementsAs("sentence1", "sentence2", "sentence3", "sentence4");
         }
 
-        [Test]
+        [Fact]
         public void filter_by_both_suite_and_lifecycle()
         {
             theInput.WorkspaceFlag = "Sentences";
@@ -105,7 +104,7 @@ namespace StoryTeller.Testing.CommandLine
                 .ShouldHaveTheSameElementsAs("sentence2");
         }
 
-        [Test]
+        [Fact]
         public void record_data_for_client()
         {
             var task = theInput.StartBatch(theController);
@@ -125,7 +124,7 @@ namespace StoryTeller.Testing.CommandLine
             new FileSystem().WriteStringToFile(clientPath.AppendPath("batch-result-data.js"), "module.exports = " + json);
         }
 
-        [Test]
+        [Fact]
         public void use_specific_system_in_multi_system_project()
         {
             var directory = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()

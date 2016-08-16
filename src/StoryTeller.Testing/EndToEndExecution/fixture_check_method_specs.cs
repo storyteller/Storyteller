@@ -1,14 +1,14 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.EndToEndExecution
 {
-    [TestFixture]
+    
     public class fixture_check_method_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void check_simple()
         {
             execute(@"
@@ -22,7 +22,7 @@ Name: Test Run
             Step("2").Cell("text").FailedWithActual("right");
         }
 
-        [Test]
+        [Fact]
         public void check_against_context()
         {
             execute(@"
@@ -37,7 +37,7 @@ Name: Test Run
             Step("2").Cell("text").FailedWithActual("right");
         }
 
-        [Test]
+        [Fact]
         public void build_grammar()
         {
             var model = ModelFor<Sentence>("CheckGrammar", "CheckSimple");

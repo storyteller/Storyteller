@@ -1,19 +1,19 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using StoryTeller.Messages;
 
 namespace StoryTeller.Testing.Messages
 {
-    [TestFixture]
+    
     public class QueueStateTester
     {
-        [Test]
+        [Fact]
         public void all_spec_ids_with_only_running()
         {
             new QueueState{running = "foo"}.AllSpecIds()
                 .ShouldHaveTheSameElementsAs("foo");
         }
 
-        [Test]
+        [Fact]
         public void all_spec_ids_with_only_queued()
         {
             new QueueState{queued = new []{"a", "b"}}.AllSpecIds()
@@ -21,7 +21,7 @@ namespace StoryTeller.Testing.Messages
 
         }
 
-        [Test]
+        [Fact]
         public void all_spec_ids_with_both_running_and_queued()
         {
             new QueueState{queued = new []{"foo", "bar"}, running = "baz"}.AllSpecIds()

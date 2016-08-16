@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class SpecResultsTester
     {
-        [Test]
+        [Fact]
         public void build_for_an_aborted_spec_run()
         {
             var results = SpecResults.ForAbortedRun("foo");
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing
             results.WasAborted.ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void build_for_expired_run()
         {
             var results = SpecResults.ForExpiredRun("foo");

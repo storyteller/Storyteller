@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Util;
 
 namespace StoryTeller.Testing.Util
 {
-    [TestFixture]
+    
     public class TemplateParserTester
     {
-        [Test]
+        [Fact]
         public void should_replace_a_single_variable()
         {
             var template = "this is a {test} template";
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Util
                 .ShouldBe("this is a replaced template");
         }
 
-        [Test]
+        [Fact]
         public void should_return_replacement_string_with_missing_key_not_replaced()
         {
             var template = "http://testreplacement.com/{notfound}/blah-blah";
@@ -33,7 +33,7 @@ namespace StoryTeller.Testing.Util
                 .ShouldBe("http://testreplacement.com/{notfound}/blah-blah");
         }
 
-        [Test]
+        [Fact]
         public void should_replace_variables_that_are_found_and_retain_missing_keys()
         {
             var template = "http://testreplacement.com/{replaced}/{missing-key}/{goodkey}";
@@ -48,7 +48,7 @@ namespace StoryTeller.Testing.Util
                 .ShouldBe("http://testreplacement.com/gotreplaced/{missing-key}/alsoreplaced");
         }
 
-        [Test]
+        [Fact]
         public void should_replace_a_single_variable_with_a_dash()
         {
             var template = "this is a {test-name} template";
@@ -63,7 +63,7 @@ namespace StoryTeller.Testing.Util
         }
 
 
-        [Test]
+        [Fact]
         public void template_is_one_from_the_end()
         {
             var template = "*{db}*";
@@ -75,7 +75,7 @@ namespace StoryTeller.Testing.Util
             TemplateParser.Parse(template, substitutions).ShouldBe("*blue*");
         }
 
-        [Test]
+        [Fact]
         public void template_is_at_the_end()
         {
             var template = "**{db}";
@@ -87,7 +87,7 @@ namespace StoryTeller.Testing.Util
             TemplateParser.Parse(template, substitutions).ShouldBe("**blue");
         }
 
-        [Test]
+        [Fact]
         public void should_replace_multiple_variables()
         {
             var template = "this {is} a {test} template with {a} few {variables}";
@@ -104,7 +104,7 @@ namespace StoryTeller.Testing.Util
                 .ShouldBe("this is a replaced template with more than a few witty tricks.");
         }
 
-        [Test]
+        [Fact]
         public void should_replace_values_when_template_begins_with_a_variable()
         {
             var template = "{that} is a {test} template";
@@ -119,13 +119,13 @@ namespace StoryTeller.Testing.Util
                 .ShouldBe("this is a replaced template");
         }
 
-        [Test]
+        [Fact]
         public void get_substitutions()
         {
             TemplateParser.GetSubstitutions("{that} is a {test} template").ShouldHaveTheSameElementsAs("that", "test");
         }
 
-        [Test]
+        [Fact]
         public void should_handle_templates_found_in_replacement_values() //TEMPLATE-CEPTION!
         {
             var template = "{who} have to go {where}";

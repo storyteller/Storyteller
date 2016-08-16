@@ -1,15 +1,15 @@
 using System;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using ST.Docs.Samples;
 
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
-    [TestFixture]
+    
     public class SampleTester
     {
-        [Test]
+        [Fact]
         public void append()
         {
             var snippet = new Sample("the sample");

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars;
@@ -8,10 +8,10 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
+    
     public class ErrorGrammarTester
     {
-        [Test]
+        [Fact]
         public void compile_just_returns_itself()
         {
             var grammar = new ErrorGrammar("bad", "Bad!");
@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldBeTheSameAs(grammar);
         }
 
-        [Test]
+        [Fact]
         public void create_an_error_grammar_adds_error_to_itself()
         {
             var grammar = new ErrorGrammar("bad", "Bad!");
@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.Model
             grammar.errors.Single().error.ShouldBe("Bad!");
         }
 
-        [Test]
+        [Fact]
         public void create_plan_returns_an_invalid_grammar_step()
         {
             var grammar = new ErrorGrammar("bad", "Bad!");

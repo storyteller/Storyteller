@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
 {
-    [TestFixture]
+    
     public class RemoteListenerTester
     {
-        [Test]
+        [Fact]
         public void can_wait_for_a_condition()
         {
             var hub = new MessagingHub();

@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -11,7 +12,7 @@ using ST.Client.Stepthrough;
 
 namespace StoryTeller.Testing.ST.Stepthrough
 {
-    public class StepthroughContext : IResultObserver, IUserInterfaceObserver
+    public class StepthroughContext : IResultObserver, IUserInterfaceObserver, IDisposable
     {
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         public readonly IList<ClientMessage> ClientMessages = new List<ClientMessage>();
@@ -19,13 +20,13 @@ namespace StoryTeller.Testing.ST.Stepthrough
 
         public StepthroughExecutor Executor { get; private set; }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             Executor.Cancel();
             Results.Clear();
             ClientMessages.Clear();
         }
+
 
         public void TheSpecIs(string text)
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
@@ -13,8 +13,8 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
-    public abstract class SpecRunningContext
+    
+    public abstract class SpecRunningContext : IDisposable
     {
         private SpecContext _context;
         private readonly IList<Func<SpecContext, string>> _expectations 
@@ -81,8 +81,7 @@ namespace StoryTeller.Testing
 
         public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             try
             {

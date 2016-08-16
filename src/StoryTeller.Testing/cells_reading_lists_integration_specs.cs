@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Tables;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class cells_reading_lists_integration_specs
     {
-        [Test]
+        [Fact]
         public void get_list_values_from_the_global_handling()
         {
             var handling = CellHandling.Basic();
@@ -24,7 +24,7 @@ namespace StoryTeller.Testing
                 .ShouldHaveTheSameElementsAs("1", "2", "3");
         }
 
-        [Test]
+        [Fact]
         public void get_list_options_from_the_global_handling()
         {
             var handling = CellHandling.Basic();
@@ -41,7 +41,7 @@ namespace StoryTeller.Testing
                  .ShouldHaveTheSameElementsAs(options);
         }
 
-        [Test]
+        [Fact]
         public void get_list_values_from_fixture()
         {
             var handling = CellHandling.Basic();

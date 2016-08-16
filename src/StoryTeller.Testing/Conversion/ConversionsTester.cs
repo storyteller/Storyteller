@@ -1,12 +1,12 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Conversion
 {
-    [TestFixture]
+    
     public class ConversionsTester
     {
 
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Conversion
 
 
 
-        [Test]
+        [Fact]
         public void intrinsic_types()
         {
             assertRoundTrip(true);
@@ -40,7 +40,7 @@ namespace StoryTeller.Testing.Conversion
             assertRoundTrip<Single>(34);
         }
 
-        [Test]
+        [Fact]
         public void uri()
         {
             conversions.Convert(typeof(Uri), "foo://1")
@@ -48,26 +48,26 @@ namespace StoryTeller.Testing.Conversion
                 .AbsoluteUri.ShouldBe("foo://1/");
         }
 
-        [Test]
+        [Fact]
         public void enumerations()
         {
             assertRoundTrip(ResultStatus.error);
         }
 
-        [Test]
+        [Fact]
         public void convert_string_is_passthrough_on_value()
         {
             conversions.Convert(typeof (string), "foo").ShouldBe("foo");
         }
 
-        [Test]
+        [Fact]
         public void convert_string_array()
         {
             conversions.Convert(typeof(string[]), "a, b, c, d").ShouldBeOfType<string[]>()
                 .ShouldHaveTheSameElementsAs("a", "b", "c", "d");
         }
 
-        [Test]
+        [Fact]
         public void convert_number_array()
         {
             conversions.Convert(typeof(int[]), "1,2, 3, 4").ShouldBeOfType<int[]>()
@@ -76,7 +76,7 @@ namespace StoryTeller.Testing.Conversion
                 );
         }
 
-        [Test]
+        [Fact]
         public void convert_string_as_EMPTY()
         {
             conversions.Convert(typeof (string), "EMPTY").ShouldBe(string.Empty);
@@ -90,13 +90,13 @@ namespace StoryTeller.Testing.Conversion
             West
         }
 
-        [Test]
+        [Fact]
         public void can_round_trip_enumerable_values()
         {
             assertRoundTrip(Directions.North);
         }
 
-        [Test]
+        [Fact]
         public void nullable_conversion()
         {
             conversions.Convert(typeof(int?), "NULL")
@@ -107,7 +107,7 @@ namespace StoryTeller.Testing.Conversion
         }
 
         // SAMPLE: string-ctor-in-action
-        [Test]
+        [Fact]
         public void string_ctor_conversion()
         {
             conversions.Convert(typeof(Color), "Red")

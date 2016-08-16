@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Grammars;
@@ -7,10 +7,10 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class BatchWatcherTester
     {
-        [Test]
+        [Fact]
         public void complete_immediately_with_no_specs()
         {
             var watcher = new BatchWatcher(Enumerable.Empty<Specification>());
@@ -18,7 +18,7 @@ namespace StoryTeller.Testing.Engine
             watcher.Task.Result.ShouldBe(Enumerable.Empty<BatchRecord>());
         }
 
-        [Test]
+        [Fact]
         public void does_not_complete_until_all_specs_are_handled()
         {
             var specs = new[]

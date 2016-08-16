@@ -1,15 +1,15 @@
 ﻿using System.Data;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class data_table_verification_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void happy_path()
         {
             execute(@"
@@ -28,7 +28,7 @@ Name:DataTable
             CountsShouldBe(4, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void sad_path_by_missing_on_one_column()
         {
             execute(@"
@@ -51,7 +51,7 @@ Name:DataTable
             result.extras.Single()["City"].ShouldBe("Paris");
         }
 
-        [Test]
+        [Fact]
         public void sad_path_with_missing()
         {
             execute(@"
@@ -74,7 +74,7 @@ Name:DataTable
             result.missing.ShouldContain("1");
         }
 
-        [Test]
+        [Fact]
         public void sad_path_with_extra()
         {
             execute(@"
