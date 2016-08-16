@@ -1,7 +1,6 @@
 using System.Linq;
-using FubuCore;
+using Baseline;
 using ST.Docs.Topics;
-using StructureMap.Util;
 
 namespace ST.Docs.Outline
 {

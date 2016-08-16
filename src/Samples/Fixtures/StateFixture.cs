@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using FubuCore;
-using FubuCore.Dates;
+using Baseline;
 using StoryTeller;
 
 namespace Samples.Fixtures
@@ -10,9 +8,10 @@ namespace Samples.Fixtures
     // SAMPLE: invoice-invoice-detail
     public class Invoice
     {
-        public readonly IList<InvoiceDetail> Details 
+        public readonly IList<InvoiceDetail> Details
             = new List<InvoiceDetail>();
     }
+
     // ENDSAMPLE
 
     // SAMPLE: read-object-from-state
@@ -24,9 +23,12 @@ namespace Samples.Fixtures
             // Build a new detail
             var detail = new InvoiceDetail
             {
-                Amount = amount, Date = date, Name = name, Part = part
+                Amount = amount,
+                Date = date,
+                Name = name,
+                Part = part
             };
-           
+
             // Add the new detail to the current Invoice
             Context.State.Retrieve<Invoice>().Details.Add(detail);
         }
@@ -34,6 +36,7 @@ namespace Samples.Fixtures
         // And many more grammars for all the optional properties of a
         // real world invoice detail
     }
+
     // ENDSAMPLE
 
     // SAMPLE: store-object-in-state
@@ -51,6 +54,7 @@ namespace Samples.Fixtures
             return Embed<InvoiceDetailFixture>("with invoice detail:");
         }
     }
+
     // ENDSAMPLE
 
 
@@ -69,6 +73,7 @@ namespace Samples.Fixtures
             // The code above is just shorthand for this below:
             // Context.State.CurrentObject = new Invoice();
         }
+
         // ENDSAMPLE
     }
 
@@ -84,6 +89,7 @@ namespace Samples.Fixtures
 
             // do something with the file at 'path'
         }
+
         // ENDSAMPLE
     }
 }

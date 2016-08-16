@@ -1,62 +1,47 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using FubuCore;
+using Baseline;
 using Oakton;
-using FubuMVC.Core.Services.Remote;
 using StoryTeller;
 using StoryTeller.Messages;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
-using RemoteDomainExpression = StoryTeller.Remotes.RemoteDomainExpression;
 
 namespace ST.Client
 {
     public interface IRemoteController
     {
+        string WebSocketAddress { get; set; }
         void SendJsonMessage(string json);
         void AddListener(object listener);
         void Recycle();
         void SendMessage<T>(T message);
         RemoteController.ResponseExpression Send<T>(T message);
         QueueState QueueState();
-        string WebSocketAddress { get; set; }
     }
 
     public class RemoteController : IDisposable, IRemoteController
     {
-        private readonly string _path;
-        private readonly Project _project;
         private readonly RemoteDomainExpression _remoteSetup = new RemoteDomainExpression();
         private AppDomain _domain;
-        private readonly MessagingHub _messaging;
+        private EngineMode _mode = EngineMode.Interactive;
         private RemoteProxy _proxy;
         private AppDomainFileChangeWatcher _watcher;
-        private EngineMode _mode = EngineMode.Interactive;
 
         public RemoteController(string path)
         {
             _remoteSetup.ServiceDirectory = path;
-            _project = Project.LoadForFolder(path);
-            _path = path;
-            _messaging = new MessagingHub();
+            Project = Project.LoadForFolder(path);
+            Path = path;
+            Messaging = new MessagingHub();
 
-            _messaging.AddListener(this);
+            Messaging.AddListener(this);
         }
 
-        public QueueState QueueState()
-        {
-            if (_proxy == null) return new QueueState();
+        public Project Project { get; }
 
-            return _proxy.QueueState();
-        }
-
-        public Project Project => _project;
-
-        public string Path => _path;
-
-        public string WebSocketAddress { get; set; }
+        public string Path { get; }
 
         public string ConfigFile
         {
@@ -70,7 +55,9 @@ namespace ST.Client
             set { _remoteSetup.Setup.PrivateBinPath = value; }
         }
 
-        public MessagingHub Messaging => _messaging;
+        public MessagingHub Messaging { get; }
+
+        public SystemRecycled LatestSystemRecycled { get; private set; }
 
         public void Dispose()
         {
@@ -79,27 +66,29 @@ namespace ST.Client
             _proxy?.Dispose();
 
             if (_domain != null)
-            {
                 AppDomain.Unload(_domain);
-            }
         }
 
-        public void UseBuildProfile(string profile)
+        public QueueState QueueState()
         {
-            _remoteSetup.BuildProfile = profile;
+            if (_proxy == null) return new QueueState();
+
+            return _proxy.QueueState();
         }
+
+        public string WebSocketAddress { get; set; }
 
         public void Recycle()
         {
-            _messaging.Send(new SystemRecycleStarted());
+            Messaging.Send(new SystemRecycleStarted());
 
             Teardown();
 
-            _messaging.Send(new QueueState());
+            Messaging.Send(new QueueState());
 
             bootstrap(_mode).Task.ContinueWith(x =>
             {
-                _messaging.Send(x.Result);
+                Messaging.Send(x.Result);
 
                 LatestSystemRecycled = x.Result;
 
@@ -107,12 +96,38 @@ namespace ST.Client
             });
         }
 
-        public SystemRecycled LatestSystemRecycled { get; private set; }
         public bool DisableAppDomainFileWatching { get; set; }
+
+        public void SendMessage<T>(T message)
+        {
+            var json = JsonSerialization.ToJson(message);
+            _proxy.SendMessage(json);
+        }
+
+        public ResponseExpression Send<T>(T message)
+        {
+            return new ResponseExpression(() => SendMessage(message), Messaging);
+        }
+
+        public void SendJsonMessage(string json)
+        {
+            _proxy.SendMessage(json);
+        }
+
+        public void AddListener(object listener)
+        {
+            Messaging.AddListener(listener);
+        }
+
+        public void UseBuildProfile(string profile)
+        {
+            _remoteSetup.BuildProfile = profile;
+        }
+
 
         public void Teardown()
         {
-            if (_proxy == null || _domain == null) return;
+            if ((_proxy == null) || (_domain == null)) return;
 
             _proxy.Dispose();
 
@@ -142,7 +157,7 @@ namespace ST.Client
 
         private SystemRecycledListener bootstrap(EngineMode mode)
         {
-            var listener = new SystemRecycledListener(_messaging);
+            var listener = new SystemRecycledListener(Messaging);
 
             copyStorytellerAssemblyIfNecessary();
 
@@ -151,45 +166,31 @@ namespace ST.Client
 
             try
             {
-                Type proxyType = typeof(RemoteProxy);
-                _proxy = (RemoteProxy)_domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
+                var proxyType = typeof(RemoteProxy);
+                _proxy = (RemoteProxy) _domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 
-                _messaging.AddListener(listener);
-                _proxy.Start(mode, _project, new RemoteListener(_messaging));
+                Messaging.AddListener(listener);
+                _proxy.Start(mode, Project, new RemoteListener(Messaging));
             }
             catch (Exception)
             {
-                ConsoleWriter.Write(ConsoleColor.Yellow, "Storyteller was unable to start an AppDomain for the specification project. Check that the project has already been compiled.");
+                ConsoleWriter.Write(ConsoleColor.Yellow,
+                    "Storyteller was unable to start an AppDomain for the specification project. Check that the project has already been compiled.");
 
                 throw;
             }
 
-            
 
             return listener;
         }
 
         private void copyStorytellerAssemblyIfNecessary()
         {
-            string directory = _remoteSetup.Setup.ApplicationBase.AppendPath(BinPath);
-            string fileName = GetType().Assembly.GetName().Name + ".dll";
-            string file = directory.AppendPath(fileName);
+            var directory = _remoteSetup.Setup.ApplicationBase.AppendPath(BinPath);
+            var fileName = GetType().Assembly.GetName().Name + ".dll";
+            var file = directory.AppendPath(fileName);
             if (!File.Exists(file))
-            {
                 File.Copy(GetType().Assembly.Location, file);
-            }
-        }
-
-
-        public void SendMessage<T>(T message)
-        {
-            string json = JsonSerialization.ToJson(message);
-            _proxy.SendMessage(json);
-        }
-
-        public ResponseExpression Send<T>(T message)
-        {
-            return new ResponseExpression(() => SendMessage(message), _messaging);
         }
 
         public class ResponseExpression
@@ -212,16 +213,6 @@ namespace ST.Client
 
                 return watcher.Task;
             }
-        }
-
-        public void SendJsonMessage(string json)
-        {
-            _proxy.SendMessage(json);
-        }
-
-        public void AddListener(object listener)
-        {
-            _messaging.AddListener(listener);
         }
     }
 }

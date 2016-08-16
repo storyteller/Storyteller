@@ -1,10 +1,9 @@
-FubuCore
-FubuMVC.Core
 Newtonsoft.Json
 HtmlTags
 Fleck
 Owin
 CommonMark.NET
-Nowin
 Baseline
 Oakton
+Microsoft.AspNetCore.Server.Kestrel
+StructureMap

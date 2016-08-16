@@ -3,14 +3,12 @@ source http://nuget.org/api/v2
 
 nuget Baseline
 nuget CommonMark.NET
-nuget Nowin
+nuget Microsoft.AspNetCore.Server.Kestrel
 nuget NSubstitute
 nuget Oakton
 nuget Selenium.WebDriver
 nuget Selenium.RC
 nuget ilrepack
-nuget FubuCore 2.0.0.291
-nuget FubuMVC.Core 3.0.0.2076
 nuget HtmlTags 3.0.0.186
 nuget Fleck 0.12.0.40
 nuget Newtonsoft.Json 4.5.9

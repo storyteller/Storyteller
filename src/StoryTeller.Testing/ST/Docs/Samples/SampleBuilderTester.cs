@@ -1,43 +1,14 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using FubuCore;
-using FubuMVC.Core.Services;
-using Xunit;
+using Baseline;
 using Shouldly;
-using ST.Docs.Samples;
 using StructureMap;
+using ST.Docs.Samples;
+using Xunit;
 
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
-    
     public class SampleBuilderTester
     {
-        // SAMPLE: sample-sample-building-test
-        [Fact]
-        public void try_it_out_on_this()
-        {
-            // I wrote a comment here
-
-            using (var container = Container.For<SampleRegistry>())
-            {
-                // In the real app, we're using the DocProject as the SampleCache now,
-                // so it's not in the SampleRegistry
-                container.Inject<ISampleCache>(new SampleCache());
-
-                var builder = container.GetInstance<ISampleBuilder>();
-                var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
-
-                var tasks = builder.ScanFolder(path);
-                tasks.Wait();
-
-                var cache = container.GetInstance<ISampleCache>();
-
-                var sample = cache.Find("sample-sample-building-test");
-                sample.Language.ShouldBe("csharp");
-                sample.Text.ShouldContain("// I wrote a comment here");
-            }
-        }
         // ENDSAMPLE
 
         // Too flakey with timings to be in C#
@@ -63,10 +34,8 @@ var x = 1;
 
                     var cache = container.GetInstance<ISampleCache>();
 
-                    Wait.Until(() =>
-                    {
-                        return cache.Find("fake-sample").Text.Contains("var x = 1;");
-                    }, timeoutInMilliseconds:10000);
+                    Wait.Until(() => { return cache.Find("fake-sample").Text.Contains("var x = 1;"); },
+                        timeoutInMilliseconds: 10000);
 
                     var sample = cache.Find("fake-sample");
                     sample.Text.ShouldContain("var x = 1;");
@@ -78,18 +47,36 @@ var x = 2;
 
 ");
 
-                    Wait.Until(() =>
-                    {
-                        return cache.Find("fake-sample").Text.Contains("var x = 2;");
-                    })
-                    .ShouldBeTrue();
+                    Wait.Until(() => { return cache.Find("fake-sample").Text.Contains("var x = 2;"); })
+                        .ShouldBeTrue();
                 }
-
-
-
-                
             }
+        }
 
+        // SAMPLE: sample-sample-building-test
+        [Fact]
+        public void try_it_out_on_this()
+        {
+            // I wrote a comment here
+
+            using (var container = Container.For<SampleRegistry>())
+            {
+                // In the real app, we're using the DocProject as the SampleCache now,
+                // so it's not in the SampleRegistry
+                container.Inject<ISampleCache>(new SampleCache());
+
+                var builder = container.GetInstance<ISampleBuilder>();
+                var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
+
+                var tasks = builder.ScanFolder(path);
+                tasks.Wait();
+
+                var cache = container.GetInstance<ISampleCache>();
+
+                var sample = cache.Find("fake-sample");
+                sample.Language.ShouldBe("csharp");
+                sample.Text.ShouldContain("var x = 2;");
+            }
         }
     }
 }

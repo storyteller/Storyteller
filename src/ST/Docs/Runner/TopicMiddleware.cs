@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FubuCore;
-using FubuMVC.Core.Http;
-using FubuMVC.Core.Http.Owin;
-using FubuMVC.Core.Http.Owin.Middleware;
+using Baseline;
 using HtmlTags;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
 
 namespace ST.Docs.Runner
 {
-    public class TopicMiddleware : IOwinMiddleware
+    public class TopicMiddleware 
     {
         private readonly Func<IDictionary<string, object>, Task> _inner;
         private readonly DocProject _project;
@@ -39,6 +36,8 @@ namespace ST.Docs.Runner
 
         public Task Invoke(IDictionary<string, object> environment)
         {
+            throw new NotImplementedException();
+            /*
             var path = environment[OwinConstants.RequestPathKey].As<string>().TrimStart('/');
 
             if (path == "topics.js")
@@ -78,6 +77,8 @@ namespace ST.Docs.Runner
                 response.Write(html);
                 response.Flush();
             });
+
+    */
 
         }
 

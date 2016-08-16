@@ -1,18 +1,32 @@
 ﻿using System;
-using FubuCore;
-using FubuMVC.Core;
-using FubuMVC.Core.Http.Hosting;
+using Baseline;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ST.Client
 {
     public class WebApplicationRunner : IDisposable
     {
         private readonly OpenInput _input;
-        private FubuRuntime _server;
 
         public WebApplicationRunner(OpenInput input)
         {
             _input = input;
+        }
+
+        public RemoteController Controller { get; private set; }
+
+        public string BaseAddress
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public void Dispose()
+        {
+            Controller.Teardown();
+            //_server.SafeDispose();
         }
 
         public void Start()
@@ -21,12 +35,14 @@ namespace ST.Client
             var context = new StorytellerContext(Controller, _input);
 
             if (Controller.BinPath.IsEmpty())
-            {
-                throw new Exception("Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
-            }
+                throw new Exception(
+                    "Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
 
             context.Start();
 
+            throw new NotImplementedException();
+
+            /*
             var registry = new FubuRegistry();
 
 
@@ -49,16 +65,7 @@ namespace ST.Client
             var persistence = _server.Get<IPersistenceController>();
             persistence.StartWatching(context.SpecPath);
             context.AddRemoteListener(persistence);
-        }
-
-        public RemoteController Controller { get; private set; }
-
-        public string BaseAddress => _server.BaseAddress;
-
-        public void Dispose()
-        {
-            Controller.Teardown();
-            _server.SafeDispose();
+            */
         }
     }
 }

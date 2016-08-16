@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Baseline;
 
 namespace ST.Files
 {
@@ -34,7 +35,8 @@ namespace ST.Files
 
         public override string ToString()
         {
-            return string.Format("changed: {0}, added: {1}, deleted: {2}", Changed.Select(x => x.RelativePath).Join(", "), Added.Select(x => x.RelativePath).Join(", "), Deleted.Join(", "));
+            return
+                $"changed: {Changed.Select(x => x.RelativePath).Join(", ")}, added: {Added.Select(x => x.RelativePath).Join(", ")}, deleted: {Deleted.Join(", ")}";
         }
     }
 }

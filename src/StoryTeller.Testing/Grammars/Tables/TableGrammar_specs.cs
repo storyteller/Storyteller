@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FubuCore.Util;
+using Baseline;
 using Xunit;
 using StoryTeller.Grammars.Tables;
 
@@ -83,7 +83,7 @@ Name: whatever
 
     public class TestTableFixture : Fixture
     {
-        public static readonly Cache<string, List<string>> Traced = new Cache<string, List<string>>(_ => new List<string>()); 
+        public static readonly LightweightCache<string, List<string>> Traced = new LightweightCache<string, List<string>>(_ => new List<string>()); 
 
         public TestTableFixture()
         {

@@ -2,8 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading;
-using FubuCore;
-using FubuCore.Dates;
+using Baseline;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -18,18 +17,16 @@ namespace ST.Client
     {
         private readonly IClientConnector _client;
         private readonly ISpecFileWatcher _watcher;
-        private readonly ISystemTime _systemTime;
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private readonly ResultsCache _results = new ResultsCache();
 
 
-        public PersistenceController(IClientConnector client, ISpecFileWatcher watcher, ISystemTime systemTime)
+        public PersistenceController(IClientConnector client, ISpecFileWatcher watcher)
         {
             _client = client;
             _watcher = watcher;
-            _systemTime = systemTime;
         }
 
         public SpecExecutionCompleted[] AllCachedResults()
@@ -125,7 +122,7 @@ namespace ST.Client
                 {
                     if (!_hierarchy.Specifications.Has(id)) return true;
 
-                    _hierarchy.Replace(specification, _systemTime.UtcNow());
+                    _hierarchy.Replace(specification, DateTime.UtcNow);
 
                     _watcher.WriteFiles(() =>
                     {
