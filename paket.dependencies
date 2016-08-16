@@ -5,6 +5,7 @@ nuget Baseline
 nuget CommonMark.NET
 nuget Nowin
 nuget NSubstitute
+nuget Oakton
 nuget Selenium.WebDriver
 nuget Selenium.RC
 nuget ilrepack

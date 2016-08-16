@@ -1,13 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
 using System.IO;
 using FubuCore;
-using FubuCore.CommandLine;
+using Oakton;
 
 namespace ST.Docs.Exporting
 {
-    [CommandDescription("Export a documentation project to static html", Name = "doc-export")]
-    public class DocExportCommand : FubuCommand<DocExportInput>
+    [Description("Export a documentation project to static html", Name = "doc-export")]
+    public class DocExportCommand : OaktonCommand<DocExportInput>
     {
         public override bool Execute(DocExportInput input)
         {

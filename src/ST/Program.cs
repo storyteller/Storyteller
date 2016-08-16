@@ -1,39 +1,21 @@
 ﻿using System;
-using FubuCore.CommandLine;
+using Oakton;
 using RunCommand = ST.CommandLine.RunCommand;
 
 namespace ST
 {
     internal class Program
     {
-        private static bool success;
-
         public static int Main(string[] args)
         {
-            try
+            var executor = CommandExecutor.For(_ =>
             {
-                var factory = new CommandFactory();
-                factory.RegisterCommands(typeof (RunCommand).Assembly);
-                factory.RegisterCommands(typeof (Program).Assembly);
+                _.RegisterCommands(typeof(RunCommand).Assembly);
+                _.RegisterCommands(typeof(Program).Assembly);
+            });
 
-                var executor = new CommandExecutor(factory);
-                success = executor.Execute(args);
-            }
-            catch (CommandFailureException e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: " + e.Message);
-                Console.ResetColor();
-                return 1;
-            }
-            catch (Exception ex)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ERROR: " + ex);
-                Console.ResetColor();
-                return 1;
-            }
-            return success ? 0 : 1;
+
+            return executor.Execute(args);
         }
     }
 }

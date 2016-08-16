@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
-using FubuCore.CommandLine;
+using Oakton;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
@@ -13,8 +13,8 @@ using StoryTeller.Results;
 
 namespace ST.CommandLine
 {
-    [CommandDescription("Run a suite of StoryTeller tests")]
-    public class RunCommand : FubuCommand<RunInput>
+    [Description("Run a suite of StoryTeller tests")]
+    public class RunCommand : OaktonCommand<RunInput>
     {
         public RunCommand()
         {

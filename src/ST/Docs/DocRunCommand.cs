@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using FubuCore.CommandLine;
+using Oakton;
 
 namespace ST.Docs
 {
-    [CommandDescription("Run the documentation in a live mode", Name = "doc-run")]
-    public class DocRunCommand : FubuCommand<DocInput>
+    [Description("Run the documentation in a live mode", Name = "doc-run")]
+    public class DocRunCommand : OaktonCommand<DocInput>
     {
         public override bool Execute(DocInput input)
         {
