@@ -30,9 +30,8 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void it_returns_true_if_the_expiration_time_has_passed()
         {
-            LocalSystemTime = new DateTime(2015, 7, 6);
             _theSpec.ExpirationPeriod = 6;
-            _theSpec.LastUpdated = new DateTime(2015, 1, 5);
+            _theSpec.LastUpdated = DateTime.UtcNow.AddMonths(-7);
             ClassUnderTest.IsExpired(_theSpec).ShouldBeTrue();
         }
     }

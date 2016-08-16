@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using HtmlTags;
 using Oakton.Reporting;
+using Baseline;
 
 namespace ST.Docs.Commands
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;

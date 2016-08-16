@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using NSubstitute;
 using Shouldly;
 using StoryTeller.Messages;
@@ -289,18 +289,6 @@ namespace StoryTeller.Testing.ST
             written.ExpirationPeriod.ShouldBe(5);
         }
 
-        [Fact]
-        public void save_specification_updates_last_updated_time()
-        {
-            var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
-            var specification = XmlReader.ReadFromFile(node.Filename);
-            var theTime = new DateTime(2015, 5, 24);
-            LocalSystemTime = theTime;
-
-            ClassUnderTest.SaveSpecification(node.id, specification);
-            var written = XmlReader.ReadFromFile(node.Filename);
-            written.LastUpdated.ShouldBe(theTime);
-        }
 
         [Fact]
         public void setting_the_lifecycle_when_the_lifecycle_matches_already()

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using FubuCore;
+using Baseline;
 using Xunit;
 using Shouldly;
 using ST.CommandLine;

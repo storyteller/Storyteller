@@ -5,8 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using FubuCore;
-using FubuCore.Util;
+using Baseline;
 
 namespace ST.Docs.Topics
 {

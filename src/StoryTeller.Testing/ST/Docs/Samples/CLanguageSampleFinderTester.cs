@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
-using FubuCore;
+using Baseline;
 using Xunit;
 using Shouldly;
 using ST.Docs.Samples;

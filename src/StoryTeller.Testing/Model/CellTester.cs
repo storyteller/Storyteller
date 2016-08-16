@@ -2,8 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using FubuCore;
-using FubuCore.Reflection;
+using Baseline;
+using Baseline.Reflection;
 using Newtonsoft.Json;
 using Xunit;
 using Shouldly;

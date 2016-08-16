@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using FubuCore;
+using Baseline;
 using OpenQA.Selenium;
 using ST.Client;
 using ST.Docs;
@@ -71,4 +71,37 @@ namespace Specifications
             // Nothing
         }
     }
+
+
+
+    public class InMemoryServiceLocator 
+    {
+        private readonly Cache<Type, object> _services = new Cache<Type, object>();
+        private readonly Cache<string, object> _namedServices = new Cache<string, object>();
+
+        public void Add<T>(T service)
+        {
+            _services[typeof(T)] = service;
+        }
+        public void Add<T>(T service, string name)
+        {
+            _namedServices[name] = service;
+        }
+
+        public T GetInstance<T>()
+        {
+            return (T)_services[typeof(T)];
+        }
+
+        public T GetInstance<T>(string name)
+        {
+            return (T)_namedServices[name];
+        }
+
+        public object GetInstance(Type type)
+        {
+            return _services[type];
+        }
+    }
+
 }

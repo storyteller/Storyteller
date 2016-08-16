@@ -4,6 +4,7 @@ using System.Linq;
 using Xunit;
 using Shouldly;
 using StoryTeller.Results;
+using Baseline;
 
 namespace StoryTeller.Testing
 {
