@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FubuCore.Dates;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
@@ -9,7 +9,7 @@ using StructureMap.AutoMocking;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
-    [TestFixture]
+    
     public class when_replacing_a_specification
     {
         private Hierarchy theHierarchy;
@@ -17,8 +17,7 @@ namespace StoryTeller.Testing.Model.Persistence
         private Specification theNew;
         private DateTime theTime;
 
-        [SetUp]
-        public void SetUp()
+        public when_replacing_a_specification()
         {
             theHierarchy = HierarchyLoader.ReadHierarchy(TestingContext.SpecFolder).ToHierarchy();
 
@@ -30,7 +29,7 @@ namespace StoryTeller.Testing.Model.Persistence
             theHierarchy.Replace(theNew, theTime);
         }
 
-        [Test]
+        [Fact]
         public void remove_a_spec_that_exists()
         {
             var expected = theHierarchy.Specifications["embeds"];
@@ -45,25 +44,25 @@ namespace StoryTeller.Testing.Model.Persistence
             theHierarchy.Suites["Embedded"].Specifications.Length.ShouldBe(0);
         }
 
-        [Test]
+        [Fact]
         public void try_to_remove_a_spec_that_does_not_exist()
         {
             theHierarchy.RemoveSpec("non existent").ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void should_store_the_new_specification()
         {
             theHierarchy.Specifications["embeds"].ShouldBeTheSameAs(theNew);
         }
 
-        [Test]
+        [Fact]
         public void the_new_specification_should_have_the_same_file_name_as_the_original()
         {
             theNew.Filename.ShouldBe(theOriginal.Filename);
         }
 
-        [Test]
+        [Fact]
         public void the_old_spec_is_no_longer_held_by_the_suite()
         {
             theHierarchy.Suites[theOriginal.SuitePath()].Specifications
@@ -71,7 +70,7 @@ namespace StoryTeller.Testing.Model.Persistence
                 .ShouldBeFalse();
         }
         
-        [Test]
+        [Fact]
         public void the_new_spec_is_in_the_parent_suite()
         {
             theHierarchy.Suites[theOriginal.SuitePath()].Specifications
@@ -79,13 +78,13 @@ namespace StoryTeller.Testing.Model.Persistence
                 .ShouldBeTrue();
         }
 
-        [Test]
+        [Fact]
         public void the_new_spec_should_know_its_suite_path()
         {
             theNew.SuitePath().ShouldBe(theOriginal.SuitePath());
         }
 
-        [Test]
+        [Fact]
         public void the_new_spec_should_have_updated_time()
         {
             theNew.LastUpdated.ShouldBe(theTime);

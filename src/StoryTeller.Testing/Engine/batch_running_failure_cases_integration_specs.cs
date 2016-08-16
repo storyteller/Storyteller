@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using ST.CommandLine;
 using StoryTeller.Engine;
@@ -10,7 +10,7 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class batch_running_failure_cases_integration_specs
     {
         private BatchRunResponse execute(Action<RunInput> configure)
@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.Engine
             return task.Result.Result;
         }
 
-        [Test, Explicit("Not reliable enough for CI")]
+        // Not reliable enough for CI
         public void spec_fails_with_timeout()
         {
             var response = execute(x =>
@@ -71,7 +71,7 @@ namespace StoryTeller.Testing.Engine
 
         }
 
-        [Test]
+        [Fact]
         public void spec_will_fail_if_the_system_blows_up_while_trying_to_create_an_execution_context()
         {
             // See GrammarSystem.CreateContext() to understand why this 

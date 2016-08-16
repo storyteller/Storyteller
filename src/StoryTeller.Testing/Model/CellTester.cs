@@ -5,7 +5,7 @@ using System.Reflection;
 using FubuCore;
 using FubuCore.Reflection;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Equivalence;
@@ -14,12 +14,12 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Model
 {
-    [TestFixture]
+    
     public class CellTester
     {
         private readonly Fixture fixture = new Fixture();
 
-        [Test]
+        [Fact]
         public void can_serialize_cell()
         {
             var serializer = new JsonSerializer();
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Model
             json.ShouldContain("\"key\":\"a\"");
         }
 
-        [Test]
+        [Fact]
         public void happy_check_for_a_simple_equals_match()
         {
             var values = new StepValues("1");
@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldBe(CellResult.Success("a"));
         }
 
-        [Test]
+        [Fact]
         public void sad_path_check_for_a_simple_equals_match()
         {
             var values = new StepValues("1");
@@ -57,7 +57,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldBe(CellResult.Failure("a", "2"));
         }
 
-        [Test]
+        [Fact]
         public void use_a_runtime_converter_with_a_value()
         {
             var conversions = new Conversions();
@@ -78,7 +78,7 @@ namespace StoryTeller.Testing.Model
         }
 
 
-        [Test]
+        [Fact]
         public void use_a_runtime_converter_against_NULL()
         {
             var conversions = new Conversions();
@@ -111,7 +111,7 @@ namespace StoryTeller.Testing.Model
             public string Name { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void matches_simply()
         {
             var cell = new Cell(CellHandling.Basic(), "a", typeof (int));
@@ -128,7 +128,7 @@ namespace StoryTeller.Testing.Model
             cell.Matches(values1, values3).ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void matches_array_()
         {
             var cell = new Cell(CellHandling.Basic(), "a", typeof (int[]));
@@ -160,7 +160,7 @@ namespace StoryTeller.Testing.Model
             return values;
         }
 
-        [Test]
+        [Fact]
         public void create_with_basic_converter_and_convert_happy_path()
         {
             var cell = Cell.For<int>("a");
@@ -169,7 +169,7 @@ namespace StoryTeller.Testing.Model
             values.Get("a").ShouldBe(1);
         }
 
-        [Test]
+        [Fact]
         public void NULL_is_converted_as_wait_for_it_null()
         {
             var cell = Cell.For<string>("foo");
@@ -177,7 +177,7 @@ namespace StoryTeller.Testing.Model
             values.Get("foo").ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void create_with_basic_converter_and_convert_with_errors()
         {
             var cell = Cell.For<int>("a");
@@ -188,7 +188,7 @@ namespace StoryTeller.Testing.Model
             result.error.ShouldBe("Invalid Format");
         }
 
-        [Test]
+        [Fact]
         public void create_with_no_converter()
         {
             new Conversions().FindConverter(typeof (NoConverterForMe))
@@ -203,14 +203,14 @@ namespace StoryTeller.Testing.Model
             result.error.ShouldBe("No converter found for type " + typeof (NoConverterForMe).FullName);
         }
 
-        [Test]
+        [Fact]
         public void Cell_picks_up_the_header_attributes()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
             cell.header.ShouldBe("The City");
         }
 
-        [Test]
+        [Fact]
         public void Cell_picks_up_the_default_value_attribute()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
@@ -221,21 +221,21 @@ namespace StoryTeller.Testing.Model
         {
         }
 
-        [Test]
+        [Fact]
         public void use_a_boolean_editor_for_boolean_type()
         {
             var cell = Cell.For<CellTarget>(x => x.IsActive);
             cell.editor.ShouldBe("boolean");
         }
 
-        [Test]
+        [Fact]
         public void default_value_is_false_for_a_boolean_type()
         {
             var cell = Cell.For<CellTarget>(x => x.IsActive);
             cell.DefaultValue.ShouldBe(false.ToString());
         }
 
-        [Test]
+        [Fact]
         public void use_a_select_editor_for_an_enum()
         {
             var cell = Cell.For<CellTarget>(x => x.Direction);
@@ -244,14 +244,14 @@ namespace StoryTeller.Testing.Model
                 .ShouldHaveTheSameElementsAs("North", "South", "East", "West");
         }
 
-        [Test]
+        [Fact]
         public void picks_up_the_editor_attribute()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
             cell.editor.ShouldBe("bigtext");
         }
 
-        [Test]
+        [Fact]
         public void cell_picks_up_selection_values()
         {
             var cell = Cell.For<CellTarget>(x => x.Country);
@@ -260,7 +260,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldHaveTheSameElementsAs("United States", "Canada", "Mexico");
         }
 
-        [Test]
+        [Fact]
         public void cell_picks_up_selection_list_name()
         {
             var cell = Cell.For<CellTarget>(x => x.State);
@@ -269,7 +269,7 @@ namespace StoryTeller.Testing.Model
             cell.OptionListName.ShouldBe("States");
         }
 
-        [Test]
+        [Fact]
         public void if_list_is_not_on_fixture_picks_up_from_cellHandling()
         {
             var handling = CellHandling.Basic();
@@ -284,7 +284,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldHaveTheSameElementsAs("TX", "MO", "AR");
         }
 
-        [Test]
+        [Fact]
         public void list_on_fixture_has_precedence()
         {
             var handling = CellHandling.Basic();
@@ -299,7 +299,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldHaveTheSameElementsAs("NY", "CT");
         }
 
-        [Test]
+        [Fact]
         public void cell_logs_an_invalid_status_when_the_conversion_fails_with_format_exception()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -314,7 +314,7 @@ namespace StoryTeller.Testing.Model
             result.Status.ShouldBe(ResultStatus.invalid);
         }
 
-        [Test]
+        [Fact]
         public void cell_logs_a_missing_status_when_the_raw_value_is_not_found_and_no_default()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -330,7 +330,7 @@ namespace StoryTeller.Testing.Model
             result.Status.ShouldBe(ResultStatus.missing);
         }
 
-        [Test]
+        [Fact]
         public void cell_uses_the_default_for_conversion_when_no_value_exists()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -346,7 +346,7 @@ namespace StoryTeller.Testing.Model
             values.Get("Number").ShouldBe(111);
         }
 
-        [Test]
+        [Fact]
         public void use_default_value_on_parameter_if_one_exists()
         {
             int num = 0;
@@ -357,7 +357,7 @@ namespace StoryTeller.Testing.Model
             cell.DefaultValue.ShouldBe("5");
         }
 
-        [Test]
+        [Fact]
         public void uses_NULL_from_the_default_value()
         {
             ParameterInfo parameter = ReflectionHelper.GetMethod<CellTarget>(x => x.GoPlaces2(null))
@@ -368,7 +368,7 @@ namespace StoryTeller.Testing.Model
         }
 
 
-        [Test]
+        [Fact]
         public void is_output_negative_case()
         {
             int num = 0;
@@ -380,7 +380,7 @@ namespace StoryTeller.Testing.Model
             cell.output.ShouldBeFalse();
         }
 
-        [Test]
+        [Fact]
         public void uses_output_parameters()
         {
             int num = 0;
@@ -393,7 +393,7 @@ namespace StoryTeller.Testing.Model
             cell.Type.ShouldBe(typeof(int));
         }
 
-        [Test]
+        [Fact]
         public void set_header_through_fi()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -403,7 +403,7 @@ namespace StoryTeller.Testing.Model
 
         }
 
-        [Test]
+        [Fact]
         public void set_editor_through_FI()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -412,7 +412,7 @@ namespace StoryTeller.Testing.Model
             cell.editor.ShouldBe("big");
         }
 
-        [Test]
+        [Fact]
         public void set_default_value_through_fi()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -421,7 +421,7 @@ namespace StoryTeller.Testing.Model
             cell.DefaultValue.ShouldBe("123");
         }
 
-        [Test]
+        [Fact]
         public void set_selection_values_through_fi()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);
@@ -431,7 +431,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldHaveTheSameElementsAs("1", "2");
         }
 
-        [Test]
+        [Fact]
         public void set_selection_options_throug_fi()
         {
             var opt1 = new Option {display = "One", value = "1"};
@@ -444,7 +444,7 @@ namespace StoryTeller.Testing.Model
                 .ShouldHaveTheSameElementsAs(opt1, opt2);
         }
 
-        [Test]
+        [Fact]
         public void set_selection_list_through_fi()
         {
             var cell = Cell.For<CellTarget>(x => x.Number);

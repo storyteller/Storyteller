@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Paragraphs;
@@ -7,10 +7,10 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Paragraphs
 {
-    [TestFixture]
+    
     public class ParagraphGrammarTester
     {
-        [Test]
+        [Fact]
         public void do_adds_a_silent_grammar_at_the_right_position()
         {
             var paragraph = new ParagraphGrammar("Something");
@@ -32,7 +32,7 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
 
         }
 
-        [Test]
+        [Fact]
         public void sets_the_key_for_all_children()
         {
             var paragraph = new ParagraphGrammar("Something");
@@ -47,7 +47,7 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
             paragraph.Children[2].Key.ShouldBe("Foo:2");
         }
 
-        [Test]
+        [Fact]
         public void surfaces_all_the_child_errors()
         {
             var child1 = new Sentence();

@@ -3,7 +3,7 @@ using System.Reflection;
 using FubuCore;
 using FubuCore.Dates;
 using FubuCore.Logging;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using StructureMap;
 using StructureMap.AutoMocking;
@@ -105,14 +105,7 @@ namespace StoryTeller.Testing
 
     public class InteractionContext<T> where T : class
     {
-        private SettableClock _clock;
-
-        public IContainer Container { get { return Services.Container; } }
-        public RhinoAutoMocker<T> Services { get; private set; }
-        public T ClassUnderTest { get { return Services.ClassUnderTest; } }
-
-        [SetUp]
-        public void SetUp()
+        public InteractionContext()
         {
             _clock = new SettableClock();
 
@@ -120,6 +113,12 @@ namespace StoryTeller.Testing
             Services.Inject<ISystemTime>(_clock);
             beforeEach();
         }
+
+        private SettableClock _clock;
+
+        public IContainer Container { get { return Services.Container; } }
+        public RhinoAutoMocker<T> Services { get; private set; }
+        public T ClassUnderTest { get { return Services.ClassUnderTest; } }
 
 
         // Override this for context specific setup

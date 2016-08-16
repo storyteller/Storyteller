@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using ST.Docs.Samples;
 using ST.Docs.Topics;
@@ -6,10 +6,9 @@ using ST.Docs.Transformation;
 
 namespace StoryTeller.Testing.ST.Docs.Transformation
 {
-    [Test]
     public class CodeSampleTransformHandlerTester
     {
-        [Test]
+        [Fact]
         public void sample_hit()
         {
             var cache = new SampleCache();
@@ -23,7 +22,7 @@ namespace StoryTeller.Testing.ST.Docs.Transformation
 
         }
 
-        [Test]
+        [Fact]
         public void sample_miss()
         {
             var cache = new SampleCache();

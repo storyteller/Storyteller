@@ -1,10 +1,10 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Rhino.Mocks;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
 {
-    [TestFixture]
+    
     public class MessagingHubTester
     {
         private MessagingHub theHub;
@@ -17,8 +17,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
         private IListener<Message2> listener7;
         private IListener<Message2> listener8;
 
-        [SetUp]
-        public void SetUp()
+        public MessagingHubTester()
         {
             theHub = new MessagingHub();
 
@@ -49,7 +48,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
             return listener;
         }
 
-        [Test]
+        [Fact]
         public void send_a_message_to_generic_listeners()
         {
             var message = new Message1 {Name = "this one"};
@@ -62,7 +61,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
         }
 
-        [Test]
+        [Fact]
         public void send_a_message_to_all_listeners_for_that_specific_message()
         {
             var message = new Message1 { Name = "this one" };
@@ -74,7 +73,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
             listener6.AssertWasCalled(x => x.Receive(message));
         }
 
-        [Test]
+        [Fact]
         public void send_a_message_to_all_listeners_2()
         {
             var message = new Message2 { Name = "that one" };
@@ -89,7 +88,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
             listener8.AssertWasCalled(x => x.Receive(message));
         }
 
-        [Test]
+        [Fact]
         public void send_json_message()
         {
             var message = new Message2 { Name = "that one" };

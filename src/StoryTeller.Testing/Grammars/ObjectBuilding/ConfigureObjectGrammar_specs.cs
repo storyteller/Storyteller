@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
@@ -8,10 +8,10 @@ using StoryTeller.Testing.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.ObjectBuilding
 {
-    [TestFixture]
+    
     public class ConfigureObjectGrammar_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execution()
         {
             execute(@"
@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             Step("2").Cell("state").Succeeded();
         }
 
-        [Test]
+        [Fact]
         public void building_up_the_cell()
         {
             var cell = ModelFor<Sentence>("ConfigureObject", "SetProps")

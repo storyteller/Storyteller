@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using FubuCore;
-using NUnit.Framework;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
-using ST.Client;
 using ST.CommandLine;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture, Explicit]
     public class recording_json_for_client_development
     {
-        [Test]
+        //[Fact]
         public void record_specification_json()
         {
             var hierarchy = TestingContext.Hierarchy;
@@ -35,7 +31,7 @@ namespace StoryTeller.Testing
             new FileSystem().WriteStringToFile("Specifications.js", "module.exports = " + json);
         }
 
-        [Test]
+        //[Fact]
         public void write_initial_model()
         {
             // You need to compile everything before trying to use this
@@ -46,7 +42,6 @@ namespace StoryTeller.Testing
                         .ParentDirectory()
                         .ParentDirectory()
                         .AppendPath("Storyteller.Samples"),
-
                 ProfileFlag = "Safari"
             };
 
@@ -110,7 +105,7 @@ namespace StoryTeller.Testing
             new FileSystem().WriteStringToFile(path, "module.exports = " + json);
         }
 
-        [Test]
+        //[Fact]
         public void write_the_table5_spec()
         {
             var hierarchy = TestingContext.Hierarchy;

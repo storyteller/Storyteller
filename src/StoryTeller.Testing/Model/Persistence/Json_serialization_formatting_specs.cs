@@ -1,17 +1,17 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
-    [TestFixture]
+    
     public class Json_serialization_formatting_specs
     {
-        [Test]
+        [Fact]
         public void write_a_comment()
         {
             var comment = new Comment {id = "foo", Text = "some text"};
@@ -21,7 +21,7 @@ namespace StoryTeller.Testing.Model.Persistence
             json.ShouldBe("{\"text\":\"some text\",\"type\":\"comment\",\"id\":\"foo\"}");
         }
 
-        [Test]
+        [Fact]
         public void section_with_a_single_comment()
         {
             var section = new Section("Math");
@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.Model.Persistence
             Debug.WriteLine(section.ToJson());
         }
 
-        [Test]
+        [Fact]
         public void section_with_a_single_step_that_only_has_values()
         {
             var section = new Section("Math");
@@ -39,7 +39,7 @@ namespace StoryTeller.Testing.Model.Persistence
             Debug.WriteLine(section.ToJson());
         }
 
-        [Test]
+        [Fact]
         public void step_that_has_collections()
         {
             var step = new Step("Adding");
@@ -50,7 +50,7 @@ namespace StoryTeller.Testing.Model.Persistence
             Debug.WriteLine(step.ToJson());
         }
 
-        [Test]
+        [Fact]
         public void bug_with_deserializing_a_step_from_client_json()
         {
             var json =

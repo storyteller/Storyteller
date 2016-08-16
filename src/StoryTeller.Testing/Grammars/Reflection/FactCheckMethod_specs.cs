@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
-    [TestFixture]
+    
     public class FactCheckMethod_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void run_positive_and_negative()
         {
             execute(@"

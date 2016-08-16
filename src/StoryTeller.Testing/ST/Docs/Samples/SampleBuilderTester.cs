@@ -3,18 +3,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using FubuCore;
 using FubuMVC.Core.Services;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using ST.Docs.Samples;
 using StructureMap;
 
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
-    [TestFixture]
+    
     public class SampleBuilderTester
     {
         // SAMPLE: sample-sample-building-test
-        [Test]
+        [Fact]
         public void try_it_out_on_this()
         {
             // I wrote a comment here
@@ -40,7 +40,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         }
         // ENDSAMPLE
 
-        [Test, Explicit("Too flakey with timings to be in C#")]
+        // Too flakey with timings to be in C#
         public void try_to_find_a_new_snippet_in_a_changed_file()
         {
             var folder = AppDomain.CurrentDomain.BaseDirectory.AppendPath(Guid.NewGuid().ToString());

@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Importing;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Importing
 {
-    [TestFixture]
+    
     public class importing_and_currying_grammars_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execute_an_import_without_currying()
         {
             execute(@"
@@ -23,7 +23,7 @@ namespace StoryTeller.Testing.Grammars.Importing
             Step("2").Cell("value").Succeeded();
         }
 
-        [Test]
+        [Fact]
         public void running_a_curried_imported_step()
         {
             execute(@"
@@ -37,7 +37,7 @@ namespace StoryTeller.Testing.Grammars.Importing
             Step("2").Cell("value").Succeeded();
         }
 
-        [Test]
+        [Fact]
         public void curry_builds_the_model()
         {
             var sentence = ModelFor<Sentence>("TestImports", "SetTo12");
@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Grammars.Importing
             sentence.cells.Any().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void currying_selects_the_right_cells()
         {
             ModelFor<Sentence>("Curried", "Curried1")

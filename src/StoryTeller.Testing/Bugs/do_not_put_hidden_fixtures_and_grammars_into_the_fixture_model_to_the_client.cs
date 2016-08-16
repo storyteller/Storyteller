@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Specifications.Fixtures.Docs;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Bugs
 {
-    [TestFixture]
+    
     public class do_not_put_hidden_fixtures_and_grammars_into_the_fixture_model_to_the_client
     {
-        [Test]
+        [Fact]
         public void no_hidden_grammars_in_fixture_model()
         {
             var compiledFixture = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof (TopicFolderFixture));

@@ -1,22 +1,22 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class SilentGrammarTester
     {
-        [Test]
+        [Fact]
         public void compile_just_returns_the_silent_flyweight()
         {
             new SilentGrammar(1, c => { }).Compile(new Fixture(), CellHandling.Basic())
                 .ShouldBeTheSameAs(Silent.Flyweight);
         }
 
-        [Test]
+        [Fact]
         public void create_plan()
         {
             Action<ISpecContext> action = c => { };

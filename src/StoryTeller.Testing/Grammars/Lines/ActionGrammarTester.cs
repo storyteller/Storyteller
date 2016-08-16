@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Conversion;
@@ -8,10 +8,10 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Lines
 {
-    [TestFixture]
+    
     public class ActionGrammarTester
     {
-        [Test]
+        [Fact]
         public void execute_delegates()
         {
             var action = MockRepository.GenerateMock<System.Action<ISpecContext>>();
@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.Grammars.Lines
             action.AssertWasCalled(x => x.Invoke(context));
         }
 
-        [Test]
+        [Fact]
         public void build_out_the_grammar_model()
         {
             var grammar = new ActionGrammar("do something", c => { });

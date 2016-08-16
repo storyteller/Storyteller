@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.ObjectBuilding
 {
-    [TestFixture]
+    
     public class CreateObjectGrammar_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execute()
         {
             execute(@"
@@ -25,7 +25,7 @@ Name: whatever
 
         }
 
-        [Test]
+        [Fact]
         public void builds_up_the_cell()
         {
             var cell = ModelFor<Sentence>("NumberedThing", "Create")

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Engine;
@@ -12,11 +13,11 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
-    public class SpecExecutionRequestTester
+    
+    public class SpecExecutionRequestTester : IDisposable
     {
         private readonly Specification theSpec;
-        private RuntimeErrorListener listener;
+        private readonly RuntimeErrorListener listener;
 
         public SpecExecutionRequestTester()
         {
@@ -24,21 +25,17 @@ namespace StoryTeller.Testing.Engine
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
             theSpec = HierarchyLoader.ReadSpecHeader(path);
-        }
 
-        [SetUp]
-        public void SetUp()
-        {
             listener = new RuntimeErrorListener();
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             EventAggregator.Messaging.RemoveListener(listener);
         }
 
-        [Test]
+
+        [Fact]
         public void finishing_a_spec()
         {
             var action = MockRepository.GenerateMock<IResultObserver>();
@@ -54,7 +51,7 @@ namespace StoryTeller.Testing.Engine
             action.AssertWasCalled(x => x.SpecExecutionFinished(theSpec, results));
         }
 
-        [Test]
+        [Fact]
         public void read_xml_happy_path()
         {
             var request = SpecExecutionRequest.For(theSpec);
@@ -67,7 +64,7 @@ namespace StoryTeller.Testing.Engine
             request.IsCancelled.ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void read_xml_sad_path()
         {
             var request = SpecExecutionRequest.For(new Specification()
@@ -84,7 +81,7 @@ namespace StoryTeller.Testing.Engine
             request.IsCancelled.ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void cancel_cancels_the_request()
         {
             var request = SpecExecutionRequest.For(theSpec);
@@ -96,7 +93,7 @@ namespace StoryTeller.Testing.Engine
         }
 
 
-        [Test]
+        [Fact]
         public void create_plan_happy_path_smoke_test()
         {
             var request = SpecExecutionRequest.For(theSpec);

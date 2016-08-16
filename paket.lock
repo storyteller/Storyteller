@@ -21,7 +21,6 @@ NUGET
       System.Threading.Thread (>= 4.0.0)
       System.Xml.XmlSerializer (>= 4.0.11)
     CommonMark.NET (0.9.1)
-    Fixie (1.0.0.29)
     Fleck (0.12.0.40)
     FubuLocalization (1.1.0.182)
       FubuCore (>= 0.9.9.139)
@@ -368,6 +367,53 @@ NUGET
       System.Threading (>= 4.0.11)
       System.Xml.ReaderWriter (>= 4.0.11)
       System.Xml.XmlDocument (>= 4.0.1)
+    xunit (2.1.0)
+      xunit.assert (2.1.0)
+      xunit.core (2.1.0)
+    xunit.abstractions (2.0.0) - framework: dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.1, wpv8.0, portable-net45+win80+wp80+wpa81, >= net45
+    xunit.assert (2.1.0)
+      System.Collections (>= 4.0.0) - framework: dnxcore50
+      System.Diagnostics.Debug (>= 4.0.0) - framework: dnxcore50
+      System.Globalization (>= 4.0.0) - framework: dnxcore50
+      System.Linq (>= 4.0.0) - framework: dnxcore50
+      System.ObjectModel (>= 4.0.0) - framework: dnxcore50
+      System.Reflection (>= 4.0.0) - framework: dnxcore50
+      System.Reflection.Extensions (>= 4.0.0) - framework: dnxcore50
+      System.Runtime (>= 4.0.0) - framework: dnxcore50
+      System.Runtime.Extensions (>= 4.0.0) - framework: dnxcore50
+      System.Text.RegularExpressions (>= 4.0.0) - framework: dnxcore50
+      System.Threading.Tasks (>= 4.0.0) - framework: dnxcore50
+    xunit.core (2.1.0)
+      System.Collections (>= 4.0.0) - framework: dnxcore50
+      System.Diagnostics.Debug (>= 4.0.0) - framework: dnxcore50
+      System.Globalization (>= 4.0.0) - framework: dnxcore50
+      System.Linq (>= 4.0.0) - framework: dnxcore50
+      System.Reflection (>= 4.0.0) - framework: dnxcore50
+      System.Reflection.Extensions (>= 4.0.0) - framework: dnxcore50
+      System.Runtime (>= 4.0.0) - framework: dnxcore50
+      System.Runtime.Extensions (>= 4.0.0) - framework: dnxcore50
+      System.Threading.Tasks (>= 4.0.0) - framework: dnxcore50
+      xunit.abstractions (>= 2.0.0) - framework: dnxcore50
+      xunit.extensibility.core (2.1.0) - framework: dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.1, wpv8.0, portable-net45+win80+wp80+wpa81, >= net45
+      xunit.extensibility.execution (2.1.0) - framework: dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.1, wpv8.0, portable-net45+win80+wp80+wpa81, >= net45
+    xunit.extensibility.core (2.1.0) - framework: dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.1, wpv8.0, portable-net45+win80+wp80+wpa81, >= net45
+      xunit.abstractions (2.0.0)
+    xunit.extensibility.execution (2.1.0) - framework: dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.1, wpv8.0, portable-net45+win80+wp80+wpa81, >= net45
+      System.Collections (>= 4.0.0) - framework: dnxcore50
+      System.Diagnostics.Debug (>= 4.0.0) - framework: dnxcore50
+      System.Globalization (>= 4.0.0) - framework: dnxcore50
+      System.IO (>= 4.0.0) - framework: dnxcore50
+      System.Linq (>= 4.0.0) - framework: dnxcore50
+      System.Linq.Expressions (>= 4.0.0) - framework: dnxcore50
+      System.Reflection (>= 4.0.0) - framework: dnxcore50
+      System.Reflection.Extensions (>= 4.0.0) - framework: dnxcore50
+      System.Runtime (>= 4.0.0) - framework: dnxcore50
+      System.Runtime.Extensions (>= 4.0.0) - framework: dnxcore50
+      System.Text.Encoding (>= 4.0.0) - framework: dnxcore50
+      System.Threading (>= 4.0.0) - framework: dnxcore50
+      System.Threading.Tasks (>= 4.0.0) - framework: dnxcore50
+      xunit.abstractions (>= 2.0.0) - framework: dnxcore50
+      xunit.extensibility.core (2.1.0) - framework: dnx451, dnxcore50, monoandroid, monotouch, xamarinios, winv4.5, wpv8.1, wpv8.0, >= net45
   remote: https://www.myget.org/F/fubumvc-edge
   specs:
     FubuCore (2.0.0.291)

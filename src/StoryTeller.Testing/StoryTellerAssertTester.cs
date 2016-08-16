@@ -1,13 +1,13 @@
 ﻿using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class StoryTellerAssertTester
     {
-        [Test]
+        [Fact]
         public void fail_directly()
         {
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
@@ -16,13 +16,13 @@ namespace StoryTeller.Testing
             }).Message.ShouldBe("You stink!");
         }
 
-        [Test]
+        [Fact]
         public void does_not_fail_conditionally()
         {
             StoryTellerAssert.Fail(() => false, "Bad!");
         }
 
-        [Test]
+        [Fact]
         public void does_fail_conditionally()
         {
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
@@ -31,7 +31,7 @@ namespace StoryTeller.Testing
             }).Message.ShouldBe("Bad!");
         }
 
-        [Test]
+        [Fact]
         public void fail_with_boolean()
         {
             StoryTellerAssert.Fail(false, "anything");
@@ -42,7 +42,7 @@ namespace StoryTeller.Testing
             }).Message.ShouldBe("Not good");
         }
 
-        [Test]
+        [Fact]
         public void fail_with_string_builder()
         {
             StoryTellerAssert.Fail(false, () => "bad");

@@ -1,23 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using Xunit;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
     public class BatchRunRequestTester
     {
-        private Suite theTopSuite;
-        private Suite childSuite1;
-        private Suite childSuite2;
-        private BatchRunRequest theRequest;
-
-        [SetUp]
-        public void SetUp()
+        public BatchRunRequestTester()
         {
             childSuite1 = new Suite
             {
@@ -25,8 +18,8 @@ namespace StoryTeller.Testing.Engine
                 suites = new Suite[0],
                 Specifications = new[]
                 {
-                    new Specification { name = "Spec 1a", Lifecycle = Lifecycle.Acceptance, Tags = { "tag1", "tag2" }},
-                    new Specification { name = "Spec 1b", Lifecycle = Lifecycle.Regression, Tags = { "tag2" } }
+                    new Specification {name = "Spec 1a", Lifecycle = Lifecycle.Acceptance, Tags = {"tag1", "tag2"}},
+                    new Specification {name = "Spec 1b", Lifecycle = Lifecycle.Regression, Tags = {"tag2"}}
                 }
             };
 
@@ -36,8 +29,13 @@ namespace StoryTeller.Testing.Engine
                 suites = new Suite[0],
                 Specifications = new[]
                 {
-                    new Specification { name = "Spec 2a", Lifecycle = Lifecycle.Acceptance, Tags = { "tag1", "tag2", "tag3" } },
-                    new Specification { name = "Spec 2b", Lifecycle = Lifecycle.Regression, Tags = { "tag4" } }
+                    new Specification
+                    {
+                        name = "Spec 2a",
+                        Lifecycle = Lifecycle.Acceptance,
+                        Tags = {"tag1", "tag2", "tag3"}
+                    },
+                    new Specification {name = "Spec 2b", Lifecycle = Lifecycle.Regression, Tags = {"tag4"}}
                 }
             };
 
@@ -50,37 +48,48 @@ namespace StoryTeller.Testing.Engine
                 }
             };
 
-            theRequest = new BatchRunRequest { Lifecycle = Lifecycle.Any };
+            theRequest = new BatchRunRequest {Lifecycle = Lifecycle.Any};
         }
 
-        [Test]
+        private readonly Suite theTopSuite;
+        private readonly Suite childSuite1;
+        private readonly Suite childSuite2;
+        private readonly BatchRunRequest theRequest;
+
+        private IEnumerable<Specification> theFilteredSpecs
+        {
+            get { return theRequest.Filter(theTopSuite); }
+        }
+
+
+        [Fact]
         public void default_filter_returns_all_specs()
         {
             theFilteredSpecs.ShouldHaveTheSameElementsAs(theTopSuite.GetAllSpecs().ToArray());
         }
 
-        [Test]
-        public void filter_top_by_lifecycle()
+        [Fact]
+        public void filter_by_multiple_excluded_tags()
         {
-            theRequest.Lifecycle = Lifecycle.Regression;
+            theRequest.Tags = new[] {"tag1", "tag2"};
+            theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite2.Specifications[1]);
+        }
+
+        [Fact]
+        public void filter_by_single_excluded_tag()
+        {
+            theRequest.Tags = new[] {"tag1"};
             theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite1.Specifications[1], childSuite2.Specifications[1]);
         }
 
-        [Test]
+        [Fact]
         public void filter_by_suite()
         {
             theRequest.Suite = childSuite1.name;
             theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite1.Specifications);
         }
 
-        [Test]
-        public void throw_when_filtering_by_suite_that_does_not_exist()
-        {
-            theRequest.Suite = "Doesn't Exist";
-            Should.Throw<SuiteNotFoundException>(() => theRequest.Filter(theTopSuite));
-        }
-
-        [Test]
+        [Fact]
         public void filter_by_suite_and_lifecycle()
         {
             theRequest.Lifecycle = Lifecycle.Acceptance;
@@ -88,23 +97,18 @@ namespace StoryTeller.Testing.Engine
             theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite1.Specifications[0]);
         }
 
-        [Test]
-        public void filter_by_single_excluded_tag()
+        [Fact]
+        public void filter_top_by_lifecycle()
         {
-            theRequest.Tags = new[] {"tag1"};
+            theRequest.Lifecycle = Lifecycle.Regression;
             theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite1.Specifications[1], childSuite2.Specifications[1]);
         }
 
-        [Test]
-        public void filter_by_multiple_excluded_tags()
+        [Fact]
+        public void throw_when_filtering_by_suite_that_does_not_exist()
         {
-            theRequest.Tags = new[] { "tag1", "tag2" };
-            theFilteredSpecs.ShouldHaveTheSameElementsAs(childSuite2.Specifications[1]);
-        }
-
-        private IEnumerable<Specification> theFilteredSpecs
-        {
-            get { return theRequest.Filter(theTopSuite); }
+            theRequest.Suite = "Doesn't Exist";
+            Should.Throw<SuiteNotFoundException>(() => theRequest.Filter(theTopSuite));
         }
     }
 }

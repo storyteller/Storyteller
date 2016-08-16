@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class ObjectComparisonTester
     {
         private ObjectComparison<Address> comparer;
@@ -16,8 +16,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             new Address{City = "Cedar Park", Address1 = "3 Road", DistanceFromOffice = 15},
         };
 
-        [SetUp]
-        public void SetUp()
+
+        public ObjectComparisonTester()
         {
             comparer = new ObjectComparison<Address>(c => addresses);
             comparer.Compare(x => x.City);
@@ -25,7 +25,8 @@ namespace StoryTeller.Testing.Grammars.Sets
             comparer.Compare(x => x.DistanceFromOffice);
         }
 
-        [Test]
+
+        [Fact]
         public void build_cells()
         {
             var cells = comparer.BuildCells(CellHandling.Basic(), new Fixture());
@@ -34,7 +35,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             cells.Select(x => x.Type).ShouldHaveTheSameElementsAs(typeof(string), typeof(string), typeof(double));
         }
 
-        [Test]
+        [Fact]
         public void fetch()
         {
             var task = comparer.Fetch(SpecContext.ForTesting());

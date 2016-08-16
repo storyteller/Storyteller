@@ -1,15 +1,15 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 
 namespace StoryTeller.Testing.Conversion
 {
-    [TestFixture]
+    
     public class StringConstrucutorConversionProviderTester
     {
         private readonly StringConverterProvider provider = new StringConverterProvider();
 
-        [Test]
+        [Fact]
         public void provide_instance_with_string_constructor() {
             var @object = provider.ConverterFor(typeof(TestKlass)).ShouldNotBeNull();
 
@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Conversion
                 .S.ShouldBe ("Sample");
         }
 
-        [Test]
+        [Fact]
         public void return_null_for_invalid_class() {
             var @object = provider.ConverterFor(typeof(TestKlass2));
             @object.ShouldBeNull ();

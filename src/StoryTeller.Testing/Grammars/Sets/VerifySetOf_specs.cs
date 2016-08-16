@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class VerifySetOf_specs : SpecRunningContext
     {
 
-        [Test]
+        [Fact]
         public void spot_check_the_model_for_unordered()
         {
             var verification = ModelFor<SetVerification>("VerifyAddressSet", "TheAddressesShouldBe");
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             verification.ordered.ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void spot_check_the_model_for_ordered()
         {
             var verification = ModelFor<SetVerification>("VerifyAddressSet", "TheOrderedAddressesShouldBe");
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             verification.ordered.ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void execute_unordered_happy_path()
         {
             execute(@"
@@ -51,7 +51,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             CountsShouldBe(3, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void on_ordered_wrong_because_of_a_bad_value()
         {
             execute(@"
@@ -74,7 +74,7 @@ namespace StoryTeller.Testing.Grammars.Sets
         }
 
 
-        [Test]
+        [Fact]
         public void execute_ordered_happy_path()
         {
             execute(@"
@@ -90,7 +90,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             CountsShouldBe(3, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void execute_out_of_order()
         {
             execute(@"

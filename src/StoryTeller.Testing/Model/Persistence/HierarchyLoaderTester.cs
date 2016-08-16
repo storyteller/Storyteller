@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
@@ -10,10 +10,10 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
-    [TestFixture]
+    
     public class HierarchyLoaderTester
     {
-        [Test]
+        [Fact]
         public void read_a_spec_node()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.MaxRetries.ShouldBe(3);
         }
 
-        [Test]
+        [Fact]
         public void the_spec_type_should_be_header_after_loading_a_spec_as_header()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -41,7 +41,7 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.SpecType.ShouldBe(SpecType.header);
         }
 
-        [Test]
+        [Fact]
         public void can_read_max_retries()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -52,7 +52,7 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.MaxRetries.ShouldBe(3);
         }
 
-        [Test]
+        [Fact]
         public void read_an_entire_suite()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -75,7 +75,7 @@ namespace StoryTeller.Testing.Model.Persistence
              * */
         }
 
-        [Test]
+        [Fact]
         public void SuitePathOf_spec_path()
         {
             var hierarchy = TestingContext.Hierarchy.ToHierarchy();
@@ -85,7 +85,7 @@ namespace StoryTeller.Testing.Model.Persistence
             });
         }
 
-        [Test]
+        [Fact]
         public void convert_the_top_suite_to_a_hierarchy_gets_the_suites()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -102,7 +102,7 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
 
-        [Test]
+        [Fact]
         public void convert_the_top_suite_to_a_hierarchy_gets_the_specs()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -116,7 +116,7 @@ namespace StoryTeller.Testing.Model.Persistence
             hierarchy.Specifications["sentence2"].ShouldNotBeNull();
         }
 
-        [Test, Explicit]
+        [Fact]
         public void pretty_print_for_sample_data()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()

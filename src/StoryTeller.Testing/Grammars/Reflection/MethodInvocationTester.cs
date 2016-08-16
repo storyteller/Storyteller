@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using FubuCore;
 using FubuCore.Reflection;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
@@ -11,10 +11,10 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
-    [TestFixture]
+    
     public class MethodInvocationTester
     {
-        [Test]
+        [Fact]
         public void execute()
         {
             var target = new Target();
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             target.PercentAwake.ShouldBe(50.1);
         }
 
-        [Test]
+        [Fact]
         public void invoke_with_return_value()
         {
             var target = new Target();
@@ -53,7 +53,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
 
         }
 
-        [Test]
+        [Fact]
         public void invoke_with_out_parameters_happy_path()
         {
             int age = 0;

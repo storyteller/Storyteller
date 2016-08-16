@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Conversion
 {
-    [TestFixture]
+    
     public class StepValuesTester
     {
-        [Test]
+        [Fact]
         public void store_and_retrieve()
         {
             var values = new StepValues("1");
@@ -19,7 +19,7 @@ namespace StoryTeller.Testing.Conversion
             values.Get("a").ShouldBe(1);
         }
 
-        [Test]
+        [Fact]
         public void apply_ordering()
         {
             var values = new StepValues[]
@@ -41,7 +41,7 @@ namespace StoryTeller.Testing.Conversion
 
         }
 
-        [Test]
+        [Fact]
         public void process_delayed_runtime_converters_successfully()
         {
             var context = SpecContext.ForTesting();
@@ -60,7 +60,7 @@ namespace StoryTeller.Testing.Conversion
             ShouldBeTestExtensions.ShouldBe(values.Errors.Any(), false);
         }
 
-        [Test]
+        [Fact]
         public void process_delayed_runtime_convertor_that_fails_with_exception()
         {
             var context = SpecContext.ForTesting();
@@ -76,7 +76,7 @@ namespace StoryTeller.Testing.Conversion
             result.error.ShouldContain("NotImplementedException");
         }
 
-        [Test]
+        [Fact]
         public void process_delayed_runtime_convertor_that_fails_with_a_null()
         {
             var context = SpecContext.ForTesting();

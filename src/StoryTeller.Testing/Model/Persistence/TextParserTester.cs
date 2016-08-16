@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
-    [TestFixture]
+    
     public class TextParserTester
     {
-        [Test]
+        [Fact]
         public void build_a_new_specification_with_name()
         {
             var spec = TextParser.Parse(@"
@@ -21,7 +21,7 @@ Name: My spec
             spec.name.ShouldBe("My spec");
         }
 
-        [Test]
+        [Fact]
         public void read_a_single_section()
         {
             var spec = TextParser.Parse(@"
@@ -33,7 +33,7 @@ Name: My spec
                 .Key.ShouldBe("Math");
         }
 
-        [Test]
+        [Fact]
         public void read_an_id_in_a_section()
         {
             var spec = TextParser.Parse(@"
@@ -45,7 +45,7 @@ Name: My spec
                 .id.ShouldBe("1");
         }
 
-        [Test]
+        [Fact]
         public void read_steps_in_a_section_without_an_id()
         {
             var spec = TextParser.Parse(@"
@@ -67,7 +67,7 @@ Name: My spec
             step2.Values["x"].ShouldBe("5");
         }
 
-        [Test]
+        [Fact]
         public void read_steps_in_a_section_with_an_id()
         {
             var spec = TextParser.Parse(@"
@@ -92,7 +92,7 @@ Name: My spec
 
 
 
-        [Test]
+        [Fact]
         public void read_multiple_sections()
         {
             var spec = TextParser.Parse(@"
@@ -117,7 +117,7 @@ Name: My spec
 
         }
 
-        [Test]
+        [Fact]
         public void read_collection_of_a_step()
         {
             var spec = TextParser.Parse(@"

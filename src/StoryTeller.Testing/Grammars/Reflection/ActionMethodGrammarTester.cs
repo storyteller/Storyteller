@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
@@ -8,12 +8,12 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
-    [TestFixture]
+    
     public class ActionMethodGrammarTester
     {
         private readonly Target theTarget = new Target();
 
-        [Test]
+        [Fact]
         public void select_default_format()
         {
            var grammar = ActionMethodGrammar.Create(x => x.Go(null, 0, 0), theTarget);
@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
 
         }
 
-        [Test]
+        [Fact]
         public void select_format_by_names()
         {
             var grammar = ActionMethodGrammar.Create(x => x.FancyGo(null, 0, 0), theTarget);
@@ -33,7 +33,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             model.format.ShouldBe("fancy go {name}, {age}, {percentAwake}");
         }
 
-        [Test]
+        [Fact]
         public void execute()
         {
             var grammar = ActionMethodGrammar.Create(x => x.Go(null, 0, 0), theTarget);

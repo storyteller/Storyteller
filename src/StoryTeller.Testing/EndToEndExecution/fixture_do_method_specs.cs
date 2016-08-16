@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.EndToEndExecution
 {
-    [TestFixture]
+    
     public class fixture_do_method_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void run_do_with_argument()
         {
             DoActionsFixture.RecordedText = null;
@@ -25,7 +25,7 @@ Name: Do
             DoActionsFixture.RecordedText.ShouldBe("Hello!");
         }
 
-        [Test]
+        [Fact]
         public void run_do_with_argument_against_context()
         {
             execute(@"
@@ -39,7 +39,7 @@ Name: Do
                 .ShouldBe(13);
         }
 
-        [Test]
+        [Fact]
         public void run_do_with_argument_and_service()
         {
             var service = new RecordingService();
@@ -56,7 +56,7 @@ Name: Do
             service.Number.ShouldBe(13.2);
         }
 
-        [Test]
+        [Fact]
         public void action_grammar_of_T_can_build_grammar_model()
         {
             var model = ModelFor<Sentence>("DoActions", "CallService");

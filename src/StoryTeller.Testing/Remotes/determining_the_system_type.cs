@@ -1,14 +1,14 @@
 ﻿using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using ST.Client;
 using StoryTeller.Remotes;
 
 namespace StoryTeller.Testing.Remotes
 {
-    [TestFixture]
+    
     public class determining_the_system_type
     {
-        [Test]
+        [Fact]
         public void when_there_is_only_one_type()
         {
             // GrammarSystem is the only type in the Samples project

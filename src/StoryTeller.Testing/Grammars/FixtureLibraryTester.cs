@@ -2,17 +2,17 @@
 using System.Diagnostics;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class FixtureLibraryTester
     {
-        [Test]
+        [Fact]
         public void builds_for_all_the_non_hidden_fixtures()
         {
             var library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());
@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.Grammars
             library.Fixtures.Has(new SecretFixture().Key).ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void hidden_grammars_are_not_in_the_fixture_model()
         {
             var library = TestingContext.Library;
@@ -36,7 +36,7 @@ namespace StoryTeller.Testing.Grammars
                 .ShouldHaveTheSameElementsAs("NotHidden", "TODO");
         }
 
-        [Test]
+        [Fact]
         public void serialize_for_TableFixture()
         {
             var library = TestingContext.Library;
@@ -44,28 +44,28 @@ namespace StoryTeller.Testing.Grammars
         }
 
 
-        [Test]
+        [Fact]
         public void serialize_for_CompositeFixture()
         {
             var library = TestingContext.Library;
             Debug.WriteLine(JsonSerialization.ToIndentedJson(library.Models["Composite"].FindGrammar("AddAndMultiply")));
         }
 
-        [Test]
+        [Fact]
         public void serialize_for_SentenceFixture()
         {
             var library = TestingContext.Library;
             Debug.WriteLine(JsonSerialization.ToIndentedJson(library.Models["Sentence"]));
         }
 
-        [Test]
+        [Fact]
         public void build_for_fixture_that_blows_up()
         {
             var compiled = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof (FixtureThatBlowsUp));
             compiled.Model.implementation.ShouldBe(typeof (FixtureThatBlowsUp).FullName);
         }
 
-        [Test]
+        [Fact]
         public void build_for_grammar_that_blows_up_in_a_method()
         {
             var compiled = FixtureLibrary.CreateCompiledFixture(CellHandling.Basic(), typeof(FixtureWithGrammarThatBlowsUp));
@@ -76,7 +76,7 @@ namespace StoryTeller.Testing.Grammars
                 .error.ShouldContain("No!");
         }
 
-        [Test]
+        [Fact]
         public void has_a_grammar_error_for_grammar_that_blows_up()
         {
             var fixtureModel = TestingContext.Library.Models["GrammarError"];
@@ -86,7 +86,7 @@ namespace StoryTeller.Testing.Grammars
             Debug.WriteLine(JsonSerialization.ToIndentedJson(fixtureModel));
         }
 
-        [Test]
+        [Fact]
         public void bad_grammar_is_in_the_bigger_model()
         {
             var library = TestingContext.Library;
@@ -96,7 +96,7 @@ namespace StoryTeller.Testing.Grammars
             fixtureKeysWithErrors.ShouldContain("WithGrammarThatBlowsUp");
         }
 
-        [Test]
+        [Fact]
         public void fixtures_that_blow_up_have_grammar_errors()
         {
             var library = TestingContext.Library;
@@ -104,7 +104,7 @@ namespace StoryTeller.Testing.Grammars
             model.errors.Count().ShouldBe(1);
         }
 
-        [Test]
+        [Fact]
         public void get_list_values_from_the_parent_system()
         {
             var library = TestingContext.Library;
