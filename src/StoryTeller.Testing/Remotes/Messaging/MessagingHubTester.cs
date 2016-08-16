@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
         private IListener createListener()
         {
-            var listener = MockRepository.GenerateMock<IListener>();
+            var listener = Substitute.For<IListener>();
             theHub.AddListener(listener);
 
             return listener;
@@ -42,7 +42,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
         private IListener<T> createListener<T>()
         {
-            var listener = MockRepository.GenerateMock<IListener<T>>();
+            var listener = Substitute.For<IListener<T>>();
             theHub.AddListener(listener);
 
             return listener;
@@ -55,9 +55,9 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
             theHub.Send(message);
 
-            listener1.AssertWasCalled(x => x.Receive(message));
-            listener2.AssertWasCalled(x => x.Receive(message));
-            listener3.AssertWasCalled(x => x.Receive(message));
+            listener1.Received().Receive(message);
+            listener2.Received().Receive(message);
+            listener3.Received().Receive(message);
 
         }
 
@@ -68,9 +68,9 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
             theHub.Send(message);
 
-            listener4.AssertWasCalled(x => x.Receive(message));
-            listener5.AssertWasCalled(x => x.Receive(message));
-            listener6.AssertWasCalled(x => x.Receive(message));
+            listener4.Received().Receive(message);
+            listener5.Received().Receive(message);
+            listener6.Received().Receive(message);
         }
 
         [Fact]
@@ -80,12 +80,13 @@ namespace StoryTeller.Testing.Remotes.Messaging
 
             theHub.Send(message);
 
-            listener1.AssertWasCalled(x => x.Receive(message));
-            listener2.AssertWasCalled(x => x.Receive(message));
-            listener3.AssertWasCalled(x => x.Receive(message));
+            listener1.Received().Receive(message);
+            listener2.Received().Receive(message);
+            listener3.Received().Receive(message);
+
+            listener7.Received().Receive(message);
+            listener8.Received().Receive(message);
             
-            listener7.AssertWasCalled(x => x.Receive(message));
-            listener8.AssertWasCalled(x => x.Receive(message));
         }
 
         [Fact]
@@ -97,12 +98,13 @@ namespace StoryTeller.Testing.Remotes.Messaging
             var json = JsonSerialization.ToJson(message);
             theHub.SendJson(json);
 
-            listener1.AssertWasCalled(x => x.Receive(message));
-            listener2.AssertWasCalled(x => x.Receive(message));
-            listener3.AssertWasCalled(x => x.Receive(message));
 
-            listener7.AssertWasCalled(x => x.Receive(message));
-            listener8.AssertWasCalled(x => x.Receive(message));
+            listener1.Received().Receive(message);
+            listener2.Received().Receive(message);
+            listener3.Received().Receive(message);
+
+            listener7.Received().Receive(message);
+            listener8.Received().Receive(message);
         }
     }
 }

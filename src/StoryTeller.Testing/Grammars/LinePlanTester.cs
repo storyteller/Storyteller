@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Xunit;
-using Rhino.Mocks;
+using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
@@ -23,7 +24,7 @@ namespace StoryTeller.Testing.Grammars
         {
             values = new StepValues(Guid.NewGuid().ToString());
             context = SpecContext.ForTesting();
-            theLineGrammar = MockRepository.GenerateMock<ILineGrammar>();
+            theLineGrammar = Substitute.For<ILineGrammar>();
         }
 
 
@@ -40,7 +41,7 @@ namespace StoryTeller.Testing.Grammars
                 new CellResult("a", ResultStatus.error), new CellResult("b", ResultStatus.error)
             };
 
-            theLineGrammar.Stub(x => x.Execute(values, context)).Return(cells);
+            theLineGrammar.Execute(values, context).Returns(cells);
 
             afterExecuting();
 
@@ -59,7 +60,7 @@ namespace StoryTeller.Testing.Grammars
                 new CellResult("a", ResultStatus.error), new CellResult("b", ResultStatus.error)
             };
 
-            theLineGrammar.Stub(x => x.Execute(values, context)).Return(cells);
+            theLineGrammar.Execute(values, context).Returns(cells);
 
             afterExecuting();
 
@@ -71,7 +72,7 @@ namespace StoryTeller.Testing.Grammars
         public void no_conversion_errors_but_the_action_blows_up()
         {
             var ex = new NotImplementedException();
-            theLineGrammar.Expect(x => x.Execute(values, context)).Throw(ex);
+            theLineGrammar.Execute(values, context).Throws(ex);
 
             afterExecuting();
 
@@ -83,7 +84,7 @@ namespace StoryTeller.Testing.Grammars
         public void no_conversion_errors_but_the_action_blows_up_sets_the_position()
         {
             var ex = new NotImplementedException();
-            theLineGrammar.Expect(x => x.Execute(values, context)).Throw(ex);
+            theLineGrammar.Execute(values, context).Throws(ex);
 
             afterExecuting();
 
@@ -100,14 +101,14 @@ namespace StoryTeller.Testing.Grammars
             values.RegisterDelayedConversion("a", "1", c1);
             values.RegisterDelayedConversion("b", "2", c2);
 
-            theLineGrammar.Expect(x => x.Execute(values, context)).Return(new CellResult[0]);
+            theLineGrammar.Execute(values, context).Returns(new CellResult[0]);
 
             afterExecuting();
 
-            theLineGrammar.VerifyAllExpectations();
+            theLineGrammar.Received().Execute(values, context);
 
-            ShouldBeTestExtensions.ShouldBe(c1.ConversionHappened, true);
-            ShouldBeTestExtensions.ShouldBe(c2.ConversionHappened, true);
+            c1.ConversionHappened.ShouldBe(true);
+            c2.ConversionHappened.ShouldBe(true);
 
         }
 
@@ -118,7 +119,7 @@ namespace StoryTeller.Testing.Grammars
 
             afterExecuting();
 
-            theLineGrammar.AssertWasNotCalled(x => x.Execute(values, context));
+            theLineGrammar.DidNotReceive().Execute(values, context);
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>();
             result.id.ShouldBe(values.id);
@@ -137,7 +138,7 @@ namespace StoryTeller.Testing.Grammars
 
             afterExecuting();
 
-            theLineGrammar.AssertWasNotCalled(x => x.Execute(values, context));
+            theLineGrammar.DidNotReceive().Execute(values, context);
 
             var result = context.Results.Single().ShouldBeOfType<StepResult>()
                 .cells.Single();
@@ -150,13 +151,13 @@ namespace StoryTeller.Testing.Grammars
         [Fact]
         public void accept_visitor_calls_through_to_line()
         {
-            var executor = MockRepository.GenerateMock<IStepExecutor>();
+            var executor = Substitute.For<IStepExecutor>();
 
             var step = new LineStep(values, theLineGrammar);
 
             step.AcceptVisitor(executor);
 
-            executor.AssertWasCalled(x => x.Line(step));
+            executor.Received().Line(step);
         }
     }
 

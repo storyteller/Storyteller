@@ -1,22 +1,16 @@
-﻿using Xunit;
-using Rhino.Mocks;
+﻿using NSubstitute;
 using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Model;
-using StoryTeller.Remotes;
-using StoryTeller.Testing.Results;
 using ST.Client;
 using ST.Client.Persistence;
+using Xunit;
 
 namespace StoryTeller.Testing.ST
 {
     public class BumpSpecDateCommandTester : InteractionContext<BumpSpecDateCommand>
     {
-        public BumpSpecDate theMessage;
-        private Specification theSpecification;
-        private IPersistenceController theController;
-
-        protected override void beforeEach()
+        public BumpSpecDateCommandTester()
         {
             theMessage = new BumpSpecDate
             {
@@ -28,28 +22,36 @@ namespace StoryTeller.Testing.ST
                 id = "targetSpec",
                 ExpirationPeriod = 0
             };
+
             theController = MockFor<IPersistenceController>();
-            theController.Stub(x => x.LoadSpecificationById(theMessage.id)).Return(theSpecification);
+            theController.LoadSpecificationById(theMessage.id).Returns(theSpecification);
+
             ClassUnderTest.HandleMessage(theMessage);
         }
 
+        public BumpSpecDate theMessage;
+        private readonly Specification theSpecification;
+        private readonly IPersistenceController theController;
+
         [Fact]
-        public void it_updates_the_spec_expiration_period()
+        public void it_publishes_the_spec_body_saved_event()
         {
-            theSpecification.ExpirationPeriod.ShouldBe(6);
+            MockFor<IClientConnector>()
+                .Received()
+                .SendMessageToClient(Arg.Is<SpecSaved>(y => y.spec.Equals(theSpecification)));
         }
 
         [Fact]
         public void it_saves_the_existing_specification_by_id()
         {
-            theController.AssertWasCalled(x => x.SaveSpecification(theMessage.id, theSpecification));
+            theController.Received().SaveSpecification(theMessage.id, theSpecification);
         }
 
+
         [Fact]
-        public void it_publishes_the_spec_body_saved_event()
+        public void it_updates_the_spec_expiration_period()
         {
-            Services.Get<IClientConnector>()
-                .AssertWasCalled(x => x.SendMessageToClient(Arg<SpecSaved>.Matches(y => y.spec.Equals(theSpecification))));
+            theSpecification.ExpirationPeriod.ShouldBe(6);
         }
     }
 }
