@@ -50,6 +50,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Client\AppDomainFileChangeWatcher.cs" />
     <Compile Include="Client\AssetFileWatcher.cs" />
     <Compile Include="Client\ExceptionListener.cs" />
     <Compile Include="Client\ForceRecycleCommand.cs" />
