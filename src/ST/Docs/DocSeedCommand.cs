@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using FubuCore;
-using FubuCore.CommandLine;
+using Oakton;
 using ST.Docs.Outline;
 
 namespace ST.Docs
 {
-    [CommandDescription("Seeds a topic file structure from an outline.txt file", Name = "doc-seed")]
-    public class DocSeedCommand : FubuCommand<DocInput>
+    [Description("Seeds a topic file structure from an outline.txt file", Name = "doc-seed")]
+    public class DocSeedCommand : OaktonCommand<DocInput>
     {
         public override bool Execute(DocInput input)
         {
