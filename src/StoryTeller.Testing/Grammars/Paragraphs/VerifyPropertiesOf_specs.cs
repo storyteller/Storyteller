@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Testing.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Paragraphs
 {
-    [TestFixture]
+    
     public class VerifyPropertiesOf_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execute()
         {
             AddressVerificationFixture.Address.City = "Austin";
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
 
         }
 
-        [Test]
+        [Fact]
         public void spot_check_the_model()
         {
             var paragraph = ModelFor<Paragraph>("AddressVerification", "VerifyAddress");

@@ -3,22 +3,21 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
-    [TestFixture]
+    
     public class persisting_and_loading_specifications_with_json
     {
-        [SetUp]
-        public void SetUp()
+        public persisting_and_loading_specifications_with_json()
         {
             original = new Specification();
 
-            
+
 
             _persisted = new Lazy<Specification>(() =>
             {
@@ -42,28 +41,28 @@ namespace StoryTeller.Testing.Model.Persistence
             get { return _persisted.Value; }
         }
 
-        [Test]
+        [Fact]
         public void full_cycle_lifecycle()
         {
             original.Lifecycle = Lifecycle.Regression;
             persisted.Lifecycle.ShouldBe(Lifecycle.Regression);
         }
 
-        [Test]
+        [Fact]
         public void full_cycle_max_retries()
         {
             original.MaxRetries = 3;
             persisted.MaxRetries.ShouldBe(3);
         }
 
-        [Test]
+        [Fact]
         public void full_cycle_spec_id()
         {
             original.id = Guid.NewGuid().ToString();
             persisted.id.ShouldBe(original.id);
         }
 
-        [Test]
+        [Fact]
         public void full_cycle_tags()
         {
             original.Tags.Add("a");
@@ -72,7 +71,7 @@ namespace StoryTeller.Testing.Model.Persistence
             persisted.Tags.ShouldBe(original.Tags);
         }
 
-        [Test]
+        [Fact]
         public void no_tags_no_worries()
         {
             original.Tags.Any().ShouldBe(false);
@@ -80,7 +79,7 @@ namespace StoryTeller.Testing.Model.Persistence
             persisted.Tags.Any().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void read_and_write_comment_directly_under_spec()
         {
             var comment = new Comment {id = Guid.NewGuid().ToString(), Text = "something here"};
@@ -92,7 +91,7 @@ namespace StoryTeller.Testing.Model.Persistence
             persistedComment.Text.ShouldBe(comment.Text);
         }
 
-        [Test]
+        [Fact]
         public void read_and_write_a_section_under_a_spec()
         {
             var section = new Section("Math") {id = Guid.NewGuid().ToString()};
@@ -103,7 +102,7 @@ namespace StoryTeller.Testing.Model.Persistence
             persistedSection.Key.ShouldBe(section.Key);
         }
 
-        [Test]
+        [Fact]
         public void read_and_write_a_step_with_plain_values_under_a_section()
         {
             var step = new Step("Add").With("x", "1").With("y", "2").With("sum", "3");
@@ -121,7 +120,7 @@ namespace StoryTeller.Testing.Model.Persistence
             persistedStep.AssertValuesMatch(step);
         }
 
-        [Test]
+        [Fact]
         public void read_and_write_a_comment_within_a_section()
         {
             var section = new Section("Math") { id = Guid.NewGuid().ToString() };
@@ -139,7 +138,7 @@ namespace StoryTeller.Testing.Model.Persistence
             persistedComment.Text.ShouldBe(comment.Text);
         }
 
-        [Test]
+        [Fact]
         public void persist_collection_sections_within_a_step()
         {
             var step = new Step("Adding");

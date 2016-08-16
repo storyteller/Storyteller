@@ -1,15 +1,15 @@
 ﻿using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Messages;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Messages
 {
-    [TestFixture]
+    
     public class the_batched_messages
     {
-        [Test]
+        [Fact]
         public void these_types_should_be_batched()
         {
             typeof (StepResult).CanBeCastTo<IBatchedMessage>();

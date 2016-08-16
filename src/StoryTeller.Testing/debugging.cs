@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class debugging
     {
-        [Test]
+        [Fact]
         public void serialize_fixtures()
         {
             var library = FixtureLibrary.CreateForAppDomain(CellHandling.Basic());

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Conversion;
@@ -9,10 +9,10 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class InvalidGrammarStepTester
     {
-        [Test]
+        [Fact]
         public void accept_visitor()
         {
             var executor = MockRepository.GenerateMock<IStepExecutor>();
@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.Grammars
             executor.AssertWasCalled(x => x.Line(step));
         }
 
-        [Test]
+        [Fact]
         public void execute_logs_a_step_result_error()
         {
             var context = SpecContext.ForTesting();

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
-using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
@@ -11,19 +10,14 @@ using StoryTeller.Testing.Results;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class SpecContextTester
     {
-        private SpecContext theContext;
-
-        [SetUp]
-        public void SetUp()
-        {
-            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
+        private SpecContext theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
                 new SimpleExecutionContext());
-        }
 
-        [Test]
+
+        [Fact]
         public void log_exception_captures_it_in_the_Exceptions_report()
         {
             var ex = new NotImplementedException("No go");
@@ -36,7 +30,7 @@ namespace StoryTeller.Testing
             theContext.Reporting.ReporterFor<ExceptionReport>().ToHtml().ShouldContain("No go");
         }
 
-        [Test]
+        [Fact]
         public void log_exception_does_the_counts()
         {
             theContext.LogException("1", new NotImplementedException());
@@ -44,7 +38,7 @@ namespace StoryTeller.Testing
             theContext.Counts.ShouldEqual(0, 0, 1, 0);
         }
 
-        [Test]
+        [Fact]
         public void log_exception_will_unwrap_the_exception_message()
         {
             theContext.LogException("1", new StorytellerAssertionException("It is wrong"));
@@ -52,7 +46,7 @@ namespace StoryTeller.Testing
                 .ShouldBe("It is wrong");
         }
 
-        [Test]
+        [Fact]
         public void log_exception_logs_a_result()
         {
             var exception = new NotImplementedException();
@@ -64,19 +58,19 @@ namespace StoryTeller.Testing
             result.position.ShouldBe(Stage.setup.ToString());
         }
 
-        [Test]
+        [Fact]
         public void wait_is_true_if_the_condition_is_already_true()
         {
             theContext.Wait(() => true, new TimeSpan(0, 0, 0, 0, 500)).ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void wait_is_false_if_the_condition_is_never_met()
         {
             theContext.Wait(() => false, new TimeSpan(0, 0, 0, 0, 100), 25).ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void puts_the_spec_id_on_result_messages()
         {
             theContext.LogException("1", new NotImplementedException());
@@ -84,7 +78,7 @@ namespace StoryTeller.Testing
             theContext.Results.Last().spec.ShouldBe(theContext.Specification.id);
         }
 
-        [Test]
+        [Fact]
         public void writes_contextual_logging_into_results()
         {
             theContext.Reporting.ReporterFor<DivReport>().Add("1");
@@ -95,14 +89,14 @@ namespace StoryTeller.Testing
             results.Reporting.Count().ShouldBe(2);
         }
 
-        [Test]
+        [Fact]
         public void stores_the_attempt_number_on_the_finalized_results()
         {
             var results = theContext.FinalizeResults(3);
             results.Attempts.ShouldBe(3);
         }
 
-        [Test]
+        [Fact]
         public void stores_whether_there_was_a_critical_exception()
         {
             theContext.HadCriticalException.ShouldBe(false);
@@ -117,26 +111,22 @@ namespace StoryTeller.Testing
         }
     }
 
-    [TestFixture]
+    
     public class when_testing_for_should_continue
     {
-        private SpecContext theContext;
+        private SpecContext theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
+                new SimpleExecutionContext());
         private CancellationTokenSource theCancellation;
 
-        [SetUp]
-        public void SetUp()
-        {
-            theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
-                new SimpleExecutionContext());
-        }
 
-        [Test]
+
+        [Fact]
         public void just_starting_with_default_options()
         {
             theContext.CanContinue().ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void stops_with_a_critical_exception_even_if_there_is_no_other_failure()
         {
             theContext.StopConditions.BreakOnExceptions = false;
@@ -146,7 +136,7 @@ namespace StoryTeller.Testing
             theContext.CanContinue().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void stops_with_a_catastropic_exception_even_if_there_is_no_other_failure()
         {
             theContext.StopConditions.BreakOnExceptions = false;
@@ -156,7 +146,7 @@ namespace StoryTeller.Testing
             theContext.CanContinue().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void do_not_stop_on_normal_exceptions_if_the_type_is_not_critical()
         {
             theContext.LogException("1", new NotImplementedException());
@@ -164,7 +154,7 @@ namespace StoryTeller.Testing
             theContext.CanContinue().ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void stop_on_the_first_exception_if_condition_is_to_do_that()
         {
             theContext.StopConditions.BreakOnExceptions = true;
@@ -174,7 +164,7 @@ namespace StoryTeller.Testing
             theContext.CanContinue().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void stop_on_the_first_wrong_when_stop_conditions_say_so()
         {
             theContext.StopConditions.BreakOnWrongs = true;
@@ -186,7 +176,7 @@ namespace StoryTeller.Testing
             theContext.CanContinue().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void will_not_stop_on_wrong_if_stop_conditions_are_the_defaults()
         {
             theContext.LogResult(new StepResult("1", ResultStatus.failed));

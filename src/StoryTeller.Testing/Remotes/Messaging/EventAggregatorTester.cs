@@ -1,25 +1,19 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
 {
-    [TestFixture]
-    public class EventAggregatorTester
+    
+    public class EventAggregatorTester : IDisposable
     {
         private RecordingListener theListener;
 
-        [TearDown]
-        public void Teardown()
-        {
-            EventAggregator.Stop();
-        }
-
-        [SetUp]
-        public void SetUp()
+        public EventAggregatorTester()
         {
             theListener = new RecordingListener();
             var hub = new MessagingHub();
@@ -29,8 +23,12 @@ namespace StoryTeller.Testing.Remotes.Messaging
             EventAggregator.Start(remoteListener);
         }
 
+        public void Dispose()
+        {
+            EventAggregator.Stop();
+        }
 
-        [Test]
+        [Fact]
         public void request_response()
         {
             EventAggregator.Messaging.AddListener(new Responder());

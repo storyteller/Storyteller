@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 
@@ -12,10 +12,10 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
      * 
      */
 
-    [TestFixture]
+    
     public class Creating_object_data_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void create_object_with_another_grammar()
         {
             execute(@"
@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             Step("2").Cell("Y").Succeeded();
         }
 
-        [Test]
+        [Fact]
         public void create_object_with_object_is()
         {
             execute(@"
@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             Step("2").Cell("Y").Succeeded();
         }
 
-        [Test]
+        [Fact]
         public void set_the_default_value_with_SetProperty()
         {
             var cell = ModelFor<Paragraph>("CreateLocation", "UsingLoadObjectBy")
@@ -58,7 +58,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             cell.DefaultValue.ShouldBe("23");
         }
 
-        [Test]
+        [Fact]
         public void set_the_default_value_on_with_input()
         {
             var cell = ModelFor<Paragraph>("CreateLocation", "UsingWithInput")
@@ -67,7 +67,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             cell.DefaultValue.ShouldBe("1;2");
         }
 
-        [Test]
+        [Fact]
         public void set_all_primitive_properties()
         {
             execute(@"
@@ -81,7 +81,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             CountsShouldBe(3, 0, 0, 0);
         }
 
-        [Test]
+        [Fact]
         public void use_with_input()
         {
             execute(@"

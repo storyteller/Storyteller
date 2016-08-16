@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class EmbeddedSectionGrammar_specs : SpecRunningContext
     {
-        [SetUp]
-        public void SetUp()
+        public EmbeddedSectionGrammar_specs()
         {
             RecordingFixture.Traced.Clear();
         }
 
-        [Test]
+
+        [Fact]
         public void runs_all_nested_steps_setup_and_teardown()
         {
             execute(@"
@@ -35,7 +35,7 @@ Name: Embedded
             Step("3").StatusWas(ResultStatus.ok);
         }
 
-        [Test]
+        [Fact]
         public void runs_all_nested_steps_setup_and_teardown_with_a_before_action()
         {
             execute(@"
@@ -55,7 +55,7 @@ Name: Embedded
             Step("3").StatusWas(ResultStatus.ok);
         }
 
-        [Test]
+        [Fact]
         public void runs_all_nested_steps_setup_and_teardown_with_an_after_action()
         {
             execute(@"
@@ -75,7 +75,7 @@ Name: Embedded
             Step("3").StatusWas(ResultStatus.ok);
         }
 
-        [Test]
+        [Fact]
         public void builds_the_model()
         {
             var section = ModelFor<EmbeddedSection>("EmbeddedGrammar", "Colors");

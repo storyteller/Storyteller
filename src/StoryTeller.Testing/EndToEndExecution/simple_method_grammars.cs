@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.EndToEndExecution
 {
     public class stops_on_critical_exception : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void stop_on_critical_exception_thrown_by_grammar()
         {
             execute(@"
@@ -29,7 +29,7 @@ Name: Fail Fast
 
     public class simple_method_grammars : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void run_with_actions_and_assertions_success_and_failure_and_exception()
         {
             execute(@"
@@ -52,7 +52,7 @@ Name: Doing some addition
             Step("5").Cell("expected").FailedWithActual("11");
         }
 
-        [Test]
+        [Fact]
         public void execute_with_output_parameter()
         {
             execute(@"

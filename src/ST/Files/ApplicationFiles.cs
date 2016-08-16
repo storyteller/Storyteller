@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FubuCore;
-using StructureMap.Util;
+using Baseline;
+using GenericEnumerableExtensions = System.Collections.Generic.GenericEnumerableExtensions;
 
 namespace ST.Files
 {
     public class ApplicationFiles : IApplicationFiles
     {
         private readonly string _root;
-        private readonly LightweightCache<string, IFileReference> _files;
+        private readonly StructureMap.Util.LightweightCache<string, IFileReference> _files;
         private readonly static IFileSystem _fileSystem = new FileSystem();
 
         public ApplicationFiles(string root)
         {
             _root = root.ToFullPath();
-            _files = new LightweightCache<string, IFileReference>(findFile);
+            _files = new StructureMap.Util.LightweightCache<string, IFileReference>(findFile);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace ST.Files
                 var files = FindFiles(FileSet.Deep("*")).Select(x => x.Path);
 
                 var description = "Could not find " + relativeName;
-                files.Each(x => description += "\n" + x);
+                GenericEnumerableExtensions.Each(files, x => description += "\n" + x);
 
                 throw new Exception(description);
             }

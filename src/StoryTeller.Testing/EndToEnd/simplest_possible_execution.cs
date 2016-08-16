@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NUnit.Framework;
+using Xunit;
 
 namespace StoryTeller.Testing.EndToEnd
 {
@@ -45,14 +45,15 @@ namespace StoryTeller.Testing.EndToEnd
 
     public class simplest_possible_execution : SpecRunningContext
     {
-        [SetUp]
-        public void SetUp()
+        public simplest_possible_execution()
         {
             SimpleActionFixture.BlowUpInSetUp = false;
             SimpleActionFixture.BlowUpInTearDown = false;
         }
 
-        [Test]
+
+
+        [Fact]
         public void run_actions()
         {
             execute(@"
@@ -70,7 +71,7 @@ Name: Simple Actions
 
         }
 
-        [Test]
+        [Fact]
         public void stop_if_setup_blows_up()
         {
             SimpleActionFixture.BlowUpInSetUp = true;
@@ -92,7 +93,7 @@ Name: Simple Actions
             Step("4").ShouldNotHaveExecuted();
         }
 
-        [Test]
+        [Fact]
         public void stop_if_teardown_blows_up()
         {
             SimpleActionFixture.BlowUpInTearDown = true;
@@ -117,7 +118,7 @@ Name: Simple Actions
             TheStepsThatExecutedWere("2", "3", "4");
         }
 
-        [Test]
+        [Fact]
         public void setup_and_teardown_are_called_before_and_after_nested_steps()
         {
             SimpleActionFixture.Messages.Clear();
@@ -135,7 +136,7 @@ Name: Simple Actions
 
         }
 
-        [Test]
+        [Fact]
         public void continues_on_normal_exception()
         {
             execute(@"
@@ -152,7 +153,7 @@ Name: Normal Exception
             TheStepsThatExecutedWere("1", "2", "3", "4");
         }
 
-        [Test]
+        [Fact]
         public void would_stop_on_a_critical_exception()
         {
             execute(@"
@@ -170,7 +171,7 @@ Name: Normal Exception
         }
 
 
-        [Test]
+        [Fact]
         public void would_stop_on_a_catastrophic_exception()
         {
             execute(@"

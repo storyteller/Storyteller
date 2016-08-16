@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
@@ -8,10 +8,10 @@ using StoryTeller.Testing.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.ObjectBuilding
 {
-    [TestFixture]
+    
     public class SetPropertyGrammar_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void run_the_grammar()
         {
             execute(@"
@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             Step("1").Cell("city").Succeeded();
         }
 
-        [Test]
+        [Fact]
         public void build_the_model()
         {
             var model = ModelFor<Sentence>("SetPropertyGrammar", "SetCity");
@@ -39,7 +39,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
 
         }
 
-        [Test]
+        [Fact]
         public void build_the_model_with_overrides()
         {
             var model = ModelFor<Sentence>("SetPropertyGrammar", "SetCity");

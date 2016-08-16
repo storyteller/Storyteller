@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class InvalidFixtureTester
     {
-        [Test]
+        [Fact]
         public void creates_the_grammar_error()
         {
             var ex = new DivideByZeroException("No!");
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing
             error.message.ShouldBe("Fixture StoryTeller.Testing.FixtureThatBlowsUp could not be loaded");
         }
 
-        [Test]
+        [Fact]
         public void invalid_fixtures_are_trapped_inside_the_creation_of_fixture_library()
         {
             TestingContext.Library.Fixtures["ThatBlowsUp"].ShouldBeOfType<InvalidFixture>();

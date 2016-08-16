@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class StateTester
     {
-        [Test]
+        [Fact]
         public void store_and_retrieve_by_type()
         {
             var state = new State();
@@ -17,7 +17,7 @@ namespace StoryTeller.Testing
             state.Retrieve<double>().ShouldBe(11.1);
         }
 
-        [Test]
+        [Fact]
         public void store_and_retrieve_by_type_and_key()
         {
             var state = new State();

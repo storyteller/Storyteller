@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Engine;
@@ -10,10 +10,10 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class SilentActionTester
     {
-        [Test]
+        [Fact]
         public void execute_happy_path()
         {
             var wasCalled = false;
@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Grammars
 
         }
 
-        [Test]
+        [Fact]
         public void execute_sad_path()
         {
             var context = SpecContext.ForTesting();
@@ -47,7 +47,7 @@ namespace StoryTeller.Testing.Grammars
 
         }
 
-        [Test]
+        [Fact]
         public void exceptions_are_critical()
         {
             var context = SpecContext.ForTesting();
@@ -61,7 +61,7 @@ namespace StoryTeller.Testing.Grammars
             ShouldBeTestExtensions.ShouldBe(context.CanContinue(), false);
         }
 
-        [Test]
+        [Fact]
         public void accept_visitor()
         {
             var executor = MockRepository.GenerateMock<IStepExecutor>();

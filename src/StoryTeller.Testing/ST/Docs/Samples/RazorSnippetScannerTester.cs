@@ -1,13 +1,13 @@
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using ST.Docs.Samples;
 
 namespace StoryTeller.Testing.ST.Docs.Samples
 {
-    [TestFixture]
+    
     public class RazorSnippetScannerTester
     {
-        [Test]
+        [Fact]
         public void is_at_start_positive()
         {
             var scanner = new RazorScanner();
@@ -18,7 +18,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
             scanner.DetermineName("@*  SAMPLE: UsingCodeSnippetInSpark  *@").ShouldBe("UsingCodeSnippetInSpark");
         }
 
-        [Test]
+        [Fact]
         public void is_at_start_miss()
         {
             var scanner = new RazorScanner();
@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
             scanner.DetermineName("SAMPLE: UsingCodeSnippetInSpark").ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void is_at_end()
         {
             var scanner = new RazorScanner();

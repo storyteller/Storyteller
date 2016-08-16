@@ -1,19 +1,19 @@
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class CountsTester
     {
-        [Test]
+        [Fact]
         public void assert_success_success()
         {
             // Nothing should happen
             new Counts(1, 0, 0, 0).AssertSuccess();
         }
 
-        [Test]
+        [Fact]
         public void assert_success_failure()
         {
             Exception<StorytellerAssertionException>.ShouldBeThrownBy(() =>
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Engine
             });
         }
 
-        [Test]
+        [Fact]
         public void add_two_counts()
         {
             var count1 = new Counts
@@ -53,7 +53,7 @@ namespace StoryTeller.Testing.Engine
             count2.SyntaxErrors.ShouldBe(14);
         }
 
-        [Test]
+        [Fact]
         public void counts_are_all_zero_on_construction()
         {
             var counts = new Counts();
@@ -64,7 +64,7 @@ namespace StoryTeller.Testing.Engine
             counts.SyntaxErrors.ShouldBe(0);
         }
 
-        [Test]
+        [Fact]
         public void is_success()
         {
             ShouldBeTestExtensions.ShouldBe(new Counts
@@ -111,7 +111,7 @@ namespace StoryTeller.Testing.Engine
             }.WasSuccessful(), false);
         }
 
-        [Test]
+        [Fact]
         public void reset_clears_all_counts_to_zero()
         {
             var count1 = new Counts

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Reflection;
@@ -9,10 +9,10 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
-    [TestFixture]
+    
     public class ValueCheckMethodTester
     {
-        [Test]
+        [Fact]
         public void select_return_att_name_by_explicit_attribute()
         {
             var returnCell = ValueCheckMethod
@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             
         }
 
-        [Test]
+        [Fact]
         public void the_return_cell_is_marked_as_output()
         {
             ShouldBeTestExtensions.ShouldBe(ValueCheckMethod
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
                     .output, true);
         }
 
-        [Test]
+        [Fact]
         public void select_return_att_name_by_last_key()
         {
             var returnCell = ValueCheckMethod
@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             returnCell.Type.ShouldBe(typeof(string));
         }
 
-        [Test]
+        [Fact]
         public void select_return_att_name_by_default()
         {
             var returnCell = ValueCheckMethod
@@ -57,7 +57,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             returnCell.Type.ShouldBe(typeof(string));
         }
 
-        [Test]
+        [Fact]
         public void format_from_attribute_if_it_exists()
         {
             ValueCheckMethod
@@ -67,7 +67,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .format.ShouldBe("The fullname for {first} & {second} should be {expected}");
         }
 
-        [Test]
+        [Fact]
         public void derived_format_has_the_return_value_too()
         {
             ValueCheckMethod
@@ -77,7 +77,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 .format.ShouldBe("Fullname3({first}, {last}) should be {returnValue}");
         }
 
-        [Test]
+        [Fact]
         public void execute_happy()
         {
             var grammar = ValueCheckMethod.For(new Target(), x => x.Fullname(null, null));
@@ -93,7 +93,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             result.Status.ShouldBe(ResultStatus.success);
         }
 
-        [Test]
+        [Fact]
         public void execute_sad()
         {
             var grammar = ValueCheckMethod.For(new Target(), x => x.Fullname(null, null));

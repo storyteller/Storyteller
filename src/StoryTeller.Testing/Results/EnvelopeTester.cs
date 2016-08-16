@@ -1,20 +1,20 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Results
 {
-    [TestFixture]
+    
     public class EnvelopeTester
     {
-        [Test]
+        [Fact]
         public void derive_topic_name()
         {
             Envelope.ToTopic(typeof (TheFooMessage))
                 .ShouldBe("the-foo-message");
         }
 
-        [Test]
+        [Fact]
         public void create_envelope_from_message()
         {
             var envelope = new Envelope(new TheFooMessage());

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Conversion;
@@ -10,7 +10,7 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class LinePlanTester
     {
         private StepValues values;
@@ -19,20 +19,20 @@ namespace StoryTeller.Testing.Grammars
         private int thePosition = 5;
 
 
-        [SetUp]
-        public void SetUp()
+        public LinePlanTester()
         {
             values = new StepValues(Guid.NewGuid().ToString());
             context = SpecContext.ForTesting();
             theLineGrammar = MockRepository.GenerateMock<ILineGrammar>();
         }
 
+
         private void afterExecuting()
         {
             new LineStep(values, theLineGrammar){Position = thePosition}.Execute(context);
         }
 
-        [Test]
+        [Fact]
         public void run_happy_path_with_no_conversions_and_no_errors()
         {
             var cells = new[]
@@ -51,7 +51,7 @@ namespace StoryTeller.Testing.Grammars
 
         }
 
-        [Test]
+        [Fact]
         public void run_puts_the_position_on_the_result_happy_path()
         {
             var cells = new[]
@@ -67,7 +67,7 @@ namespace StoryTeller.Testing.Grammars
             result.position.ShouldBe(thePosition.ToString());
         }
 
-        [Test]
+        [Fact]
         public void no_conversion_errors_but_the_action_blows_up()
         {
             var ex = new NotImplementedException();
@@ -79,7 +79,7 @@ namespace StoryTeller.Testing.Grammars
         }
 
 
-        [Test]
+        [Fact]
         public void no_conversion_errors_but_the_action_blows_up_sets_the_position()
         {
             var ex = new NotImplementedException();
@@ -91,7 +91,7 @@ namespace StoryTeller.Testing.Grammars
             result.position.ShouldBe(thePosition.ToString());
         }
 
-        [Test]
+        [Fact]
         public void runs_all_the_delayed_conversions_before_performing_the_action()
         {
             var c1 = new FakeRuntimeConverter();
@@ -111,7 +111,7 @@ namespace StoryTeller.Testing.Grammars
 
         }
 
-        [Test]
+        [Fact]
         public void when_there_are_conversion_errors_a_head_of_time()
         {
             values.LogError("a", "don't like you");
@@ -130,7 +130,7 @@ namespace StoryTeller.Testing.Grammars
 
         }
 
-        [Test]
+        [Fact]
         public void when_there_are_errors_in_the_runtime_conversion()
         {
             values.RegisterDelayedConversion("a", "foo", new RuntimeConverterThatBlowsUp());
@@ -147,7 +147,7 @@ namespace StoryTeller.Testing.Grammars
             
         }
 
-        [Test]
+        [Fact]
         public void accept_visitor_calls_through_to_line()
         {
             var executor = MockRepository.GenerateMock<IStepExecutor>();

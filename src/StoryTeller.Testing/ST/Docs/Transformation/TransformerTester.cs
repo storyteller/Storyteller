@@ -1,11 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
 
 namespace StoryTeller.Testing.ST.Docs.Transformation
 {
-    [TestFixture]
+    
     public class TransformerTester
     {
          private readonly Transformer theTransformer = new Transformer(new ITransformHandler[]
@@ -14,14 +14,14 @@ namespace StoryTeller.Testing.ST.Docs.Transformation
              new LowercaseTransformer(), 
          });
 
-        [Test]
+        [Fact]
         public void passthrough_if_no_tokens()
         {
             theTransformer.Transform(null, "Hello.")
                 .ShouldBe("Hello.");
         }
 
-        [Test]
+        [Fact]
         public void tokenize_in_the_middle()
         {
             var token = Token.Find("***<[capitalize:bar]>***", 0);
@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.ST.Docs.Transformation
             token.Data.ShouldBe("bar");
         }
 
-        [Test]
+        [Fact]
         public void tokenize_at_the_beginning()
         {
             var token = Token.Find("<[capitalize:bar]>***", 0);
@@ -39,7 +39,7 @@ namespace StoryTeller.Testing.ST.Docs.Transformation
             token.Data.ShouldBe("bar");
         }
 
-        [Test]
+        [Fact]
         public void tokenize_at_the_end()
         {
             var token = Token.Find("***<[capitalize:bar]>", 0);
@@ -48,7 +48,7 @@ namespace StoryTeller.Testing.ST.Docs.Transformation
             token.Data.ShouldBe("bar");
         }
 
-        [Test]
+        [Fact]
         public void tokenize_starting_in_the_middle()
         {
                                   //012345678
@@ -60,35 +60,35 @@ namespace StoryTeller.Testing.ST.Docs.Transformation
 
 
 
-        [Test]
+        [Fact]
         public void apply_a_transform_at_the_beginning()
         {
             theTransformer.Transform(null, "<[lower:Foo]>***")
                 .ShouldBe("foo***");
         }
 
-        [Test]
+        [Fact]
         public void apply_a_transform_at_the_end()
         {
             theTransformer.Transform(null, "***<[capitalize:bar]>")
                 .ShouldBe("***BAR");
         }
 
-        [Test]
+        [Fact]
         public void apply_a_transform_in_the_middle()
         {
             theTransformer.Transform(null, "*<[lower:KNICKS]>*")
                 .ShouldBe("*knicks*");
         }
 
-        [Test]
+        [Fact]
         public void apply_multiple_transforms()
         {
             theTransformer.Transform(null, "**<[lower:Foo]>**<[capitalize:bar]>**<[lower:KNICKS]>**")
                 .ShouldBe("**foo**BAR**knicks**");
         }
 
-        [Test]
+        [Fact]
         public void apply_adjacent_transforms()
         {
             theTransformer.Transform(null, "**<[lower:Foo]><[capitalize:bar]><[lower:KNICKS]>**")

@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.EndToEndExecution
 {
-    [TestFixture]
+    
     public class fixture_fact_methods_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execute_simple_fact_positive()
         {
             FactFixture.IsSo = true;
@@ -24,7 +24,7 @@ Name: whatever
             Step("2").StatusWas(ResultStatus.failed);
         }
 
-        [Test]
+        [Fact]
         public void execute_fact_by_context()
         {
             execute(@"
@@ -40,7 +40,7 @@ Name: whatever
             Step("2").StatusWas(ResultStatus.failed);
         }
 
-        [Test]
+        [Fact]
         public void execute_fact_by_service()
         {
             Services.Add(new CheckService{On = true});
@@ -56,7 +56,7 @@ Name: whatever
             Step("2").StatusWas(ResultStatus.failed);
         }
 
-        [Test]
+        [Fact]
         public void build_the_cell_model()
         {
             var sentence = ModelFor<Sentence>("Fact", "CheckIsSo");

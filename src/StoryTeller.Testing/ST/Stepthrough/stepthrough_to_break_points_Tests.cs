@@ -1,14 +1,13 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.ST.Stepthrough
 {
-    [TestFixture]
+    
     public class stepthrough_to_break_points_Tests : StepthroughContext
     {
-        [SetUp]
-        public void SetUp()
+        public stepthrough_to_break_points_Tests()
         {
             TheSpecIs(@"
 => Sentence#0
@@ -24,7 +23,8 @@ namespace StoryTeller.Testing.ST.Stepthrough
 ");
         }
 
-        [Test]
+
+        [Fact]
         public void can_run_to_a_breakpoint_for_the_first_one()
         {
             Specification.SetBreakpoint(new Breakpoint("3", null));
@@ -39,7 +39,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
 
         }
 
-        [Test]
+        [Fact]
         public void run_to_a_subsequent_breakpoint()
         {
             Specification.SetBreakpoint(new Breakpoint("3", null));
@@ -53,7 +53,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
             LastNextStepMessageReceivedByClient.id.ShouldBe("7");
         }
 
-        [Test]
+        [Fact]
         public void run_to_adjoining_breakpoints()
         {
             Specification.SetBreakpoint(new Breakpoint("6", null));

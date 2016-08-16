@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Decisions;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Decisions
 {
-    [TestFixture]
+    
     public class DecisionTableGrammar_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execute()
         {
             execute(@"
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Grammars.Decisions
 
         }
 
-        [Test]
+        [Fact]
         public void check_the_model()
         {
             var table = ModelFor<Table>("MathDecisions", "Math");

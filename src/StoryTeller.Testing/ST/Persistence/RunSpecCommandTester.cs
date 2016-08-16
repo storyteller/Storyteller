@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using ST.Client;
 using ST.Client.Persistence;
@@ -9,10 +9,10 @@ using StoryTeller.Remotes;
 
 namespace StoryTeller.Testing.ST.Persistence
 {
-    [TestFixture]
+    
     public class RunSpecCommandTester : InteractionContext<RunSpecCommand>
     {
-        [Test]
+        [Fact]
         public void run_spec_by_id_only()
         {
             var theSpecRetrievedFromPersistence = new Specification();
@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.ST.Persistence
             theMessage.spec.ShouldBeTheSameAs(theSpecRetrievedFromPersistence);
         }
 
-        [Test]
+        [Fact]
         public void run_spec_with_body_but_no_revision()
         {
             var theSpecSentFromTheClient = new Specification();
@@ -52,7 +52,7 @@ namespace StoryTeller.Testing.ST.Persistence
 
         }
 
-        [Test]
+        [Fact]
         public void run_spec_with_body_and_revision_denoting_auto_save()
         {
             var theSpecSentFromTheClient = new Specification();

@@ -1,19 +1,16 @@
 ﻿using System.Data;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class DataColumnMatchTester
     {
-        #region Setup/Teardown
-
-        [SetUp]
-        public void SetUp()
+        public DataColumnMatchTester()
         {
             table = new DataTable();
             table.Columns.Add("City", typeof(string));
@@ -29,7 +26,6 @@ namespace StoryTeller.Testing.Grammars.Sets
             _matchZip = new DataColumnMatch("Zip", typeof(string));
         }
 
-        #endregion
 
         private DataTable table;
         private DataColumnMatch _matchCity;
@@ -37,7 +33,7 @@ namespace StoryTeller.Testing.Grammars.Sets
         private DataColumnMatch _matchZip;
 
 
-        [Test]
+        [Fact]
         public void get_cell()
         {
             Cell cell = _matchCity.As<IColumnMatch>().BuildCell(CellHandling.Basic(), new Fixture());
@@ -45,7 +41,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             cell.Type.ShouldBe(typeof(string));
         }
 
-        [Test]
+        [Fact]
         public void build_cell_with_modifications()
         {
             _matchCity.CellModifications.Header("The City");
@@ -55,7 +51,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             cell.Type.ShouldBe(typeof(string));
         }
 
-        [Test]
+        [Fact]
         public void blow_up_with_descriptive_message_if_the_column_does_not_exist()
         {
             var match = new DataColumnMatch("Foo", typeof(int));
@@ -65,7 +61,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             }).Message.ShouldContain("Requested column 'Foo' does not exist");
         }
 
-        [Test]
+        [Fact]
         public void read_the_actual_values()
         {
             var row = table.Rows[2];

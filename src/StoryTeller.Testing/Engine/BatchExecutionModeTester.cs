@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
@@ -6,7 +6,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class BatchExecutionModeTester : InteractionContext<BatchExecutionMode>
     {
         private Specification theSpecification;
@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.Engine
             theStatus = SpecRunnerStatus.Valid;
         }
 
-        [Test]
+        [Fact]
         public void never_retry_a_spec_that_succeeded()
         {
             theResults.Counts = new Counts(1, 0, 0, 0);
@@ -38,7 +38,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBeFalse();
         }
 
-        [Test]
+        [Fact]
         public void never_retry_a_spec_marked_acceptance()
         {
             theSpecification.Lifecycle = Lifecycle.Acceptance;
@@ -46,7 +46,7 @@ namespace StoryTeller.Testing.Engine
         }
 
 
-        [Test]
+        [Fact]
         public void never_retry_when_the_spec_encountered_a_critical_exception()
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
@@ -54,7 +54,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void never_retry_when_the_spec_runner_is_in_an_invalid_state()
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
@@ -62,7 +62,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void retry_if_the_number_of_attempts_is_less_than_the_max_retries()
         {
             theSpecification.Lifecycle = Lifecycle.Regression;
@@ -79,7 +79,7 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.ShouldRetry(theResults, theSpecification, theStatus).ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void retry_if_the_number_of_attempts_is_less_than_the_project_minimum()
         {
             theSpecification.Lifecycle = Lifecycle.Regression;

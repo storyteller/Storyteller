@@ -1,14 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using NUnit.Framework;
+using Xunit;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
 {
-    [TestFixture]
+    
     public class MessageWaitConditionTester
     {
-        [Test]
+        [Fact]
         public void watches_for_the_right_message()
         {
             var m1 = new Message();
@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.Remotes.Messaging
             condition.Received.ShouldBeTheSameAs(m4);
         }
 
-        [Test]
+        [Fact]
         public void wait_lasts_until_we_get_it()
         {
             var m1 = new Message();

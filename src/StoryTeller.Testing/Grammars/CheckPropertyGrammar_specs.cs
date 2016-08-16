@@ -1,15 +1,15 @@
 ﻿using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars
 {
-    [TestFixture]
+    
     public class CheckPropertyGrammar_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void execute()
         {
             execute(@"
@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Grammars
             Step("2").Cell("Name").FailedWithActual("Jeremy");
         }
 
-        [Test]
+        [Fact]
         public void building_the_model()
         {
             var model = ModelFor<Sentence>("CheckProperty", "Check");

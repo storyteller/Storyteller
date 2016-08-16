@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
 {
-    [TestFixture]
+    
     public class JsonSerializationTester
     {
-        [Test]
+        [Fact]
         public void can_pick_up_the_type_of_a_client_message_from_the_json_bodyy()
         {
             var message = new RunSpec {id = "embeds"};

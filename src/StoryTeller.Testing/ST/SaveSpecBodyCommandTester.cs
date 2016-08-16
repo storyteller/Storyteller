@@ -1,5 +1,5 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using ST.Client;
 using ST.Client.Persistence;
@@ -8,7 +8,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.ST
 {
-    [TestFixture]
+    
     public class SaveSpecBodyCommandTester : InteractionContext<SaveSpecBodyCommand>
     {
         private SaveSpecBody theInputMessage;
@@ -25,7 +25,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.HandleMessage(theInputMessage);
         }
 
-        [Test]
+        [Fact]
         public void should_have_persisted_the_spec_body()
         {
             MockFor<IPersistenceController>().AssertWasCalled(x => x.SaveSpecification(theInputMessage.id, theInputMessage.spec));

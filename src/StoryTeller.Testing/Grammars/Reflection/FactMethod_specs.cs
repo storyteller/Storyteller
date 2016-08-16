@@ -1,14 +1,14 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Grammars.Reflection
 {
-    [TestFixture]
+    
     public class FactMethod_specs : SpecRunningContext
     {
-        [Test]
+        [Fact]
         public void run_positive_and_negative()
         {
             execute(@"
@@ -23,14 +23,14 @@ namespace StoryTeller.Testing.Grammars.Reflection
             Step("2").StatusWas(ResultStatus.failed);
         }
 
-        [Test]
+        [Fact]
         public void spot_check_the_model()
         {
             var sentence = ModelFor<Sentence>("JustTheFacts", "AlwaysTrue");
             sentence.format.ShouldBe("This is always true");
         }
 
-        [Test]
+        [Fact]
         public void paragraph_of_facts()
         {
             execute(@"

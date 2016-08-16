@@ -1,16 +1,16 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using HtmlTags;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Results;
 
 namespace StoryTeller.Testing.Results
 {
-    [TestFixture]
+    
     public class ReporterTester
     {
-        [Test]
+        [Fact]
         public void creation_of_reports()
         {
             var logging = new Reporting();
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Results
                 .ShouldBeTheSameAs(logging.ReporterFor<ListReport>());
         }
 
-        [Test]
+        [Fact]
         public void generate_reports()
         {
             var logging = new Reporting();
@@ -47,7 +47,6 @@ namespace StoryTeller.Testing.Results
             
         }
 
-        [Test, Explicit]
         public void debug_tracing()
         {
             var logging = new Reporting();

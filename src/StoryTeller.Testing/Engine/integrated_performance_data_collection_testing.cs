@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
 using Shouldly;
-using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
-using StoryTeller.Equivalence;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
 using StoryTeller.Samples;
+using Xunit;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
-    public class integrated_performance_data_collection_testing
+    public class integrated_performance_data_collection_testing : IDisposable
     {
-        private SpecRunner<GrammarSystem> _runner;
-        private Suite _hierarchy;
-        private SpecResults theResults;
+        private readonly SpecRunner<GrammarSystem> _runner;
+        private readonly Suite _hierarchy;
+        private readonly SpecResults theResults;
 
-        [TestFixtureSetUp]
-        public void SetUp()
+        public integrated_performance_data_collection_testing()
         {
             _runner = new SpecRunner<GrammarSystem>();
             _hierarchy = TestingContext.Hierarchy;
@@ -30,8 +26,7 @@ namespace StoryTeller.Testing.Engine
             theResults = runSpec("sentence4");
         }
 
-        [TestFixtureTearDown]
-        public void TearDown()
+        public void Dispose()
         {
             _runner.Dispose();
         }
@@ -44,29 +39,31 @@ namespace StoryTeller.Testing.Engine
             return _runner.Execute(specification);
         }
 
-        [Test]
+        [Fact]
         public void measures_the_context_creation()
         {
             var creation = theResults.Performance.Single(x => x.Type == "Context");
             creation.Subject.ShouldBe("Creation");
         }
 
-        [Test]
+        [Fact]
         public void measures_the_specification_time_itself()
         {
             var record = theResults.Performance.Single(x => x.Type == "Specification");
             record.ShouldNotBeNull();
         }
 
-        [Test]
+        [Fact]
         public void records_each_grammar()
         {
             var records = theResults.Performance.Where(x => x.Type == "Grammar");
             records.Select(x => x.Subject)
-                .ShouldHaveTheSameElementsAs("StartWithTheNumber", "StartWithTheNumber", "MultiplyThenAdd", "Subtract", "TheValueShouldBe", "TheSumOf", "ThisLineIsAlwaysTrue", "ThisLineIsAlwaysFalse", "ThisLineAlwaysThrowsExceptions");
+                .ShouldHaveTheSameElementsAs("StartWithTheNumber", "StartWithTheNumber", "MultiplyThenAdd", "Subtract",
+                    "TheValueShouldBe", "TheSumOf", "ThisLineIsAlwaysTrue", "ThisLineIsAlwaysFalse",
+                    "ThisLineAlwaysThrowsExceptions");
         }
 
-        [Test]
+        [Fact]
         public void records_the_fixture_setup_and_teardown()
         {
             var records = theResults.Performance.Where(x => x.Type == "Fixture");
@@ -77,8 +74,10 @@ namespace StoryTeller.Testing.Engine
 
     public class SpecRunner<T> : IDisposable where T : ISystem, new()
     {
-        private readonly T _system;
         private readonly FixtureLibrary _library;
+        private readonly T _system;
+
+        public readonly StopConditions StopConditions = new StopConditions();
 
         public SpecRunner()
         {
@@ -91,8 +90,6 @@ namespace StoryTeller.Testing.Engine
         {
             _system.Dispose();
         }
-
-        public readonly StopConditions StopConditions = new StopConditions();
 
 
         public SpecResults Execute(Specification specification)
@@ -115,7 +112,6 @@ namespace StoryTeller.Testing.Engine
 
             var executor = new SynchronousExecutor(context);
             plan.AcceptVisitor(executor);
-
 
 
             execution.Dispose();

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FubuCore;
-using NUnit.Framework;
+using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Engine;
@@ -12,7 +12,7 @@ using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class when_receiving_a_run_spec_message_with_only_the_id : EngineControllerContext
     {
         protected override void theContextIs()
@@ -20,20 +20,20 @@ namespace StoryTeller.Testing.Engine
             receiveRunSpec("embeds");
         }
 
-        [Test]
+        [Fact]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
         }
 
-        [Test]
+        [Fact]
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
                 .Specification.id.ShouldBe("embeds");
         }
 
-        [Test]
+        [Fact]
         public void latches_on_runspec_such_that_it_will_not_double_queue()
         {
             receiveRunSpec("embeds");
@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.Engine
                 .Specification.id.ShouldBe("embeds");
         }
 
-        [Test]
+        [Fact]
         public void should_enqueue_the_request()
         {
             MockFor<ISpecificationEngine>()
@@ -58,7 +58,7 @@ namespace StoryTeller.Testing.Engine
     }
 
 
-    [TestFixture]
+    
     public class when_receiving_a_run_spec_message_with_the_actual_spec : EngineControllerContext
     {
         private Specification theSpecification;
@@ -71,20 +71,20 @@ namespace StoryTeller.Testing.Engine
 
         }
 
-        [Test]
+        [Fact]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
         }
 
-        [Test]
+        [Fact]
         public void should_keep_track_of_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Single()
                 .Specification.id.ShouldBe("embeds");
         }
 
-        [Test]
+        [Fact]
         public void latches_on_runspec_such_that_it_will_not_double_queue()
         {
             receiveRunSpec("embeds");
@@ -99,7 +99,7 @@ namespace StoryTeller.Testing.Engine
         }
 
 
-        [Test]
+        [Fact]
         public void should_enqueue_the_specification()
         {
             var specificationEngine = MockFor<ISpecificationEngine>();
@@ -112,7 +112,7 @@ namespace StoryTeller.Testing.Engine
         }
     }
 
-    [TestFixture]
+    
     public class when_receiving_the_spec_execution_finished : EngineControllerContext
     {
         private SpecResults theResults;
@@ -126,27 +126,27 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.SpecExecutionFinished(node, theResults);
         }
 
-        [Test]
+        [Fact]
         public void removes_the_outstanding_request()
         {
             ClassUnderTest.OutstandingRequests().Any().ShouldBe(false);
         }
 
-        [Test]
+        [Fact]
         public void sends_a_conpletion_message_to_the_client()
         {
             MockFor<IUserInterfaceObserver>()
                 .AssertWasCalled(x => x.SendToClient(new SpecExecutionCompleted("embeds", theResults, new Specification())));
         }
 
-        [Test]
+        [Fact]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
         }
     }
 
-    [TestFixture]
+    
     public class when_receiving_a_run_specs_message : EngineControllerContext
     {
         protected override void theContextIs()
@@ -164,20 +164,20 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Receive(new RunSpecs { specs = new Specification[] { specA, specB, specC } });
         }
 
-        [Test]
+        [Fact]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
         }
 
-        [Test]
+        [Fact]
         public void enqueues_each_spec()
         {
             ClassUnderTest.VerifyAllExpectations();
         }
     }
 
-    [TestFixture]
+    
     public class when_receiving_a_request_to_cancel_a_spec : EngineControllerContext
     {
         private SpecExecutionRequest theOutstandingRequest;
@@ -190,25 +190,25 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Receive(new CancelSpec {id = "embeds"});
         }
 
-        [Test]
+        [Fact]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
         }
 
-        [Test]
+        [Fact]
         public void should_cancel_the_running_spec()
         {
             MockFor<ISpecificationEngine>().AssertWasCalled(x => x.CancelRunningSpec("embeds"));
         }
 
-        [Test]
+        [Fact]
         public void the_outstanding_request_should_be_cancelled()
         {
             theOutstandingRequest.IsCancelled.ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void should_be_removed_from_the_outstanding_request_list()
         {
             ClassUnderTest.OutstandingRequests()
@@ -217,7 +217,7 @@ namespace StoryTeller.Testing.Engine
 
     }
 
-    [TestFixture]
+    
     public class When_receiving_the_request_to_cancel_all_specs : EngineControllerContext
     {
         private IEnumerable<SpecExecutionRequest> theOutstandingRequests;
@@ -235,26 +235,26 @@ namespace StoryTeller.Testing.Engine
             ClassUnderTest.Receive(new CancelAllSpecs());
         }
 
-        [Test]
+        [Fact]
         public void should_send_the_queue_state_message_to_the_client()
         {
             assertQueueStateWasUpdated();
         }
 
-        [Test]
+        [Fact]
         public void all_the_outstanding_requests_should_be_canceled()
         {
             theOutstandingRequests.Each(x => x.IsCancelled.ShouldBe(true));
         }
 
-        [Test]
+        [Fact]
         public void should_be_no_outstanding_requests()
         {
             ClassUnderTest.OutstandingRequests().Any().ShouldBe(false);
         }
     }
 
-    [TestFixture]
+    
     public class when_determining_the_queue_state : EngineControllerContext
     {
         protected override void theContextIs()
@@ -262,7 +262,7 @@ namespace StoryTeller.Testing.Engine
             
         }
 
-        [Test]
+        [Fact]
         public void in_the_initial_state()
         {
             var state = ClassUnderTest.QueueState();
@@ -270,7 +270,7 @@ namespace StoryTeller.Testing.Engine
             state.running.ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void couple_specs_queued_nothing_running()
         {
             ClassUnderTest.RunSpec("sentence1", new Specification { id = "sentence1" });
@@ -285,7 +285,7 @@ namespace StoryTeller.Testing.Engine
             state.running.ShouldBeNull();
         }
 
-        [Test]
+        [Fact]
         public void specs_queued_and_one_running()
         {
             ClassUnderTest.RunSpec("sentence1", new Specification { id = "sentence1" });

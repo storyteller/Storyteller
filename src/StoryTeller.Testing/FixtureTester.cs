@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
@@ -9,10 +9,10 @@ using StoryTeller.Samples.Fixtures;
 
 namespace StoryTeller.Testing
 {
-    [TestFixture]
+    
     public class FixtureTester
     {
-        [Test]
+        [Fact]
         public void add_selection_values()
         {
             var fixture = new Fixture();
@@ -27,26 +27,26 @@ namespace StoryTeller.Testing
                 .ShouldHaveTheSameElementsAs("Lions", "Tigers", "Pumas");
         }
 
-        [Test]
+        [Fact]
         public void has_a_TODO_grammar()
         {
             new HiddenFixture()["TODO"].ShouldBeOfType<ActionGrammar<string>>();
         }
 
-        [Test]
+        [Fact]
         public void hidden_when_marked_with_Hidden()
         {
             new HiddenFixture().IsHidden().ShouldBe(true);
         }
 
-        [Test]
+        [Fact]
         public void not_hidden_without_the_attribute()
         {
             new NotHiddenFixture().IsHidden().ShouldBe(false);
         }
 
 
-        [Test]
+        [Fact]
         public void get_the_name_using_convention_if_the_alias_as_attribute_does_not_exist()
         {
             new TargetedReflectionFixture().Key.ShouldBe("TargetedReflection");
@@ -56,7 +56,7 @@ namespace StoryTeller.Testing
         {
         }
 
-        [Test]
+        [Fact]
         public void get_the_name_using_the_alias_attribute_if_it_exists()
         {
             new SecondFixture().Key.ShouldBe("TheSecondFixture");
@@ -89,7 +89,7 @@ namespace StoryTeller.Testing
             }
         }
 
-        [Test]
+        [Fact]
         public void can_resolve_grammars_added_explicitly()
         {
             var fixture = new FixtureWithExplicits();
@@ -120,7 +120,7 @@ namespace StoryTeller.Testing
         }
 
 
-        [Test]
+        [Fact]
         public void can_resolve_grammars_created_by_a_public_method()
         {
             var fixture = new FixtureWithProgrammaticGrammars();
@@ -141,7 +141,7 @@ namespace StoryTeller.Testing
             }
         }
 
-        [Test]
+        [Fact]
         public void use_alias_for_on_grammar_method()
         {
             var fixture = new FixtureWithGrammarAlias();
@@ -155,7 +155,7 @@ namespace StoryTeller.Testing
         {
         }
 
-        [Test]
+        [Fact]
         public void builds_default_title_in_model()
         {
             new DefaultTitleFixture()
@@ -163,7 +163,7 @@ namespace StoryTeller.Testing
                 .title.ShouldBe("Default Title");
         }
 
-        [Test]
+        [Fact]
         public void adds_the_implementation_to_the_model()
         {
             new DefaultTitleFixture()
@@ -179,7 +179,7 @@ namespace StoryTeller.Testing
             }
         }
 
-        [Test]
+        [Fact]
         public void builds_model_with_explicit_title()
         {
             new ExplicitTitleFixture()
@@ -195,7 +195,7 @@ namespace StoryTeller.Testing
             }
         }
 
-        [Test]
+        [Fact]
         public void Fixture_can_handle_a_grammar_that_fails_to_construct_itself()
         {
             var fixture = new FixtureWithBadGrammar();
@@ -204,14 +204,14 @@ namespace StoryTeller.Testing
             grammar.errors.Single().error.ShouldContain("No!");
         }
 
-        [Test]
+        [Fact]
         public void fixture_returns_a_missing_grammar_for_something_that_is_unknown()
         {
             var fixture = new Fixture();
             fixture.GrammarFor("DoesNotExist").ShouldBeOfType<MissingGrammar>();
         }
 
-        [Test]
+        [Fact]
         public void fixture_puts_a_fixture_key_on_all_grammars()
         {
             var fixture = new MathFixture();

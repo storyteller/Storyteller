@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Sets;
@@ -8,16 +8,16 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    [TestFixture]
+    
     public class UnorderedSetMatcherTester
     {
-        [SetUp]
-        public void SetUp()
+        public UnorderedSetMatcherTester()
         {
             _expected.Clear();
             _actual.Clear();
             theResult = null;
         }
+
 
         private readonly IList<StepValues> _expected = new List<StepValues>();
         private readonly IList<StepValues> _actual = new List<StepValues>();
@@ -49,7 +49,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult = comparer.Match(cells, _expected, _actual);
         }
 
-        [Test]
+        [Fact]
         public void exact_match()
         {
             expectedRow("a", 1, 2);
@@ -67,7 +67,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.missing.ShouldBeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void unordered_but_still_matching()
         {
             expectedRow("c", 3, 4);
@@ -86,7 +86,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.missing.ShouldBeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void one_missing()
         {
             expectedRow("a", 1, 2);
@@ -104,7 +104,7 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.missing.Single().ShouldBe("b");
         }
 
-        [Test]
+        [Fact]
         public void one_missing_un_ordered()
         {
             expectedRow("a", 1, 2);
@@ -124,7 +124,7 @@ namespace StoryTeller.Testing.Grammars.Sets
         }
 
 
-        [Test]
+        [Fact]
         public void one_extra()
         {
             expectedRow("a", 1, 2);
@@ -148,7 +148,7 @@ namespace StoryTeller.Testing.Grammars.Sets
         }
 
 
-        [Test]
+        [Fact]
         public void one_extra_unordered()
         {
             expectedRow("c", 3, 4);

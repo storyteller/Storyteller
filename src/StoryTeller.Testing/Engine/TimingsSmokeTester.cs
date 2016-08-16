@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using NUnit.Framework;
+using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Engine
 {
-    [TestFixture]
+    
     public class TimingsSmokeTester
     {
-        [Test]
+        [Fact]
         public void record_data()
         {
             var spec = new Specification

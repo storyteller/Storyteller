@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using Rhino.Mocks;
 using Shouldly;
 using StoryTeller.Messages;
@@ -33,19 +33,19 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.HandleMessage(theMessage);
         }
 
-        [Test]
+        [Fact]
         public void it_updates_the_spec_expiration_period()
         {
             theSpecification.ExpirationPeriod.ShouldBe(6);
         }
 
-        [Test]
+        [Fact]
         public void it_saves_the_existing_specification_by_id()
         {
             theController.AssertWasCalled(x => x.SaveSpecification(theMessage.id, theSpecification));
         }
 
-        [Test]
+        [Fact]
         public void it_publishes_the_spec_body_saved_event()
         {
             Services.Get<IClientConnector>()
