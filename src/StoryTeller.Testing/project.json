@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "System.Runtime.Serialization.Primitives": "4.1.1",
+    "xunit": "2.2.0-beta2-build3300",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "StoryTeller": { "target": "project" },
+    "ST": { "target": "project" },
+    "Specifications": { "target": "project" },
+    "Samples": { "target": "project" },
+    "MultipleSystems": { "target": "project" },
+    "BadSystem": { "target": "project" },
+    "InvalidExamples": { "target": "project" },
+    "StoryTeller.Samples": { "target": "project" },
+    "StoryTeller.Gallery": { "target": "project" },
+    "Shouldly": "2.8.2",
+    "NSubstitute": "2.0.0-rc"
+  },
+  "testRunner": "xunit",
+  "frameworks": {
+    "net46": {} 
+  }
+}
