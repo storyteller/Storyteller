@@ -93,3 +93,4 @@ client/.DS_Store
 
 project.lock.json
 *.xproj.user
+.vs
