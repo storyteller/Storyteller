@@ -52,16 +52,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecificationSystem.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
-      <Project>{104dffdd-2229-4f23-ae66-d8bc4af622ab}</Project>
-      <Name>StoryTeller.Samples</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ST\ST.csproj">
-      <Project>{7d034f5b-1786-4d0f-a4c6-d6e689f522a4}</Project>
-      <Name>ST</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

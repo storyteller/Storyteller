@@ -1,6 +1,6 @@
 using Baseline;
 using ST.Docs.Runner;
-using StructureMap.Configuration.DSL;
+using StructureMap;
 
 namespace ST.Docs.Samples
 {

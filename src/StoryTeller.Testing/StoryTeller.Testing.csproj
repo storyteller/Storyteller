@@ -193,33 +193,9 @@
     <Compile Include="Wait.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BadSystem\BadSystem.csproj">
-      <Project>{912a12c9-5c6c-4661-806f-28633ae0666d}</Project>
-      <Name>BadSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InvalidExamples\InvalidExamples.csproj">
-      <Project>{73443ed3-feb9-4a4d-9724-141be99602a7}</Project>
-      <Name>InvalidExamples</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj">
-      <Project>{5b273c7c-0a4e-48e8-9e6e-3e84d8c2243e}</Project>
-      <Name>MultipleSystems</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Specifications\Specifications.csproj">
       <Project>{bd26e9b9-f04d-4c64-a753-4394b1d00c1d}</Project>
       <Name>Specifications</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj">
-      <Project>{CAE54634-A689-4CF2-979E-CCBCCA8A3644}</Project>
-      <Name>StoryTeller.Gallery</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj">
-      <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
-      <Name>StoryTeller.Samples</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ST\ST.csproj">
-      <Project>{7d034f5b-1786-4d0f-a4c6-d6e689f522a4}</Project>
-      <Name>ST</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

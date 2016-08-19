@@ -1,8 +1,11 @@
 {
-  "version": "1.0.0-*",
   "buildOptions": {
     "debugType": "portable",
-    "emitEntryPoint": false
+    "emitEntryPoint": false,
+    "compile": [
+      "**/*.cs",
+      "../CommonAssemblyInfo.cs"
+    ]
   },
   "version": "3.0.0-alpha-*",
   "title": "Storyteller",
@@ -21,12 +24,6 @@
       "type": "git",
       "url": "git://github.com/storyteller/storyteller"
     }
-  },
-  "buildOptions": {
-    "compile": [
-      "**/*.cs",
-      "../CommonAssemblyInfo.cs"
-    ]
   },
   "dependencies":{
 	"HtmlTags.AspNetCore": "4.1.0",

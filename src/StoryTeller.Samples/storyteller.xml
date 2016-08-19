@@ -1,7 +1,0 @@
-﻿<?xml version="1.0"?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <BinaryFolder>bin\debug</BinaryFolder>
-  <TestFolder>Tests</TestFolder>
-  <TimeoutInSeconds>30</TimeoutInSeconds>
-  <Name>Samples</Name>
-</Project>
