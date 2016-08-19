@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "StoryTeller": { "target": "project" },
+    "ST":  {"target": "project" } 
+  },
+  "frameworks": {
+    "net46": {
+	  }
+  }
+}

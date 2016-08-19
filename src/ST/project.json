@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": true,
+    "compile": [
+      "**/*.cs",
+      "../CommonAssemblyInfo.cs"
+    ]
+  },
+  "dependencies": {
+	  "StoryTeller": {"target": "project"},
+	  "Newtonsoft.Json": "9.0.1",
+	  "Oakton": "1.0.0",
+	  "CommonMark.Net": "0.13.4",
+	  "StructureMap": "4.4.0",
+	  "Fleck": "0.13.0.57"
+  },
+  "frameworks": {
+    "net46": {
+	}
+  }
+}
