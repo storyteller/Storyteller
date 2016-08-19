@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using StoryTeller.Commands;
-using StructureMap.Configuration.DSL;
+using StructureMap;
 using ST.Files;
 
 namespace ST.Client
