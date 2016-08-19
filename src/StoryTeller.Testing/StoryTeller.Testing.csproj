@@ -217,10 +217,6 @@
       <Project>{104DFFDD-2229-4F23-AE66-D8BC4AF622AB}</Project>
       <Name>StoryTeller.Samples</Name>
     </ProjectReference>
-    <ProjectReference Include="..\StoryTeller\StoryTeller.csproj">
-      <Project>{96C1F8D5-FB46-4F3E-8CB7-A53A919BB424}</Project>
-      <Name>StoryTeller</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ST\ST.csproj">
       <Project>{7d034f5b-1786-4d0f-a4c6-d6e689f522a4}</Project>
       <Name>ST</Name>

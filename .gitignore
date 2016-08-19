@@ -90,3 +90,6 @@ client/public/.DS_Store
 client/.DS_Store
 
 *.tmp
+
+project.lock.json
+*.xproj.user
