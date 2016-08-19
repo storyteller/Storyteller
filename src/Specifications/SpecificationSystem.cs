@@ -1,8 +1,6 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Baseline;
-using OpenQA.Selenium;
 using ST.Client;
 using ST.Docs;
 using StoryTeller;
@@ -14,7 +12,6 @@ namespace Specifications
     {
         public static readonly string Path;
 
-        private readonly IWebDriver _webDriver;
         private readonly WebApplicationRunner _runner;
 
         public IExecutionContext CreateContext()
@@ -29,8 +26,7 @@ namespace Specifications
 
         public void Dispose()
         {
-            //_webDriver.Dispose();
-            //_runner.Dispose();
+
         }
 
         public Task Warmup()
