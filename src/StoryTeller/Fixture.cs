@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Baseline;
+using Baseline.Reflection;
 using HtmlTags.Reflection;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Importing;
