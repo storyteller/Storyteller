@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": false
+  },
+  "version": "3.0.0-alpha-*",
+  "title": "Storyteller",
+  "description": "Automated Acceptance Testing and Technical Documentation Authoring",
+  "language": "en-US",
+  "authors": [
+    "Jeremy D. Miller"
+  ],
+  "packOptions": {
+    "projectUrl": "http://storyteller.github.io",
+    "tags": [
+      "testing"
+    ],
+    "licenseUrl": "https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/storyteller/storyteller"
+    }
+  },
+  "buildOptions": {
+    "compile": [
+      "**/*.cs",
+      "../CommonAssemblyInfo.cs"
+    ]
+  },
+  "dependencies":{
+	"HtmlTags.AspNetCore": "4.1.0",
+	
+  },
+  "frameworks": {
+    "net46": {
+		"frameworkAssemblies":{
+			"System.Data": "",
+			"System.Reflection": "",
+		},
+		"dependencies":{
+			"Baseline": "1.1.0",
+			"System.Reflection.TypeExtensions": "4.1.0"
+		}
+	}
+  }
+}
