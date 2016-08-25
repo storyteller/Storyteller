@@ -10,8 +10,7 @@ namespace StoryTeller.Testing.ST
     
     public class RunCommandTester
     {
-        public readonly string Path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-               .AppendPath("Storyteller.Samples");
+        public readonly string Path = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
         [Fact]
         public void write_csv_results()

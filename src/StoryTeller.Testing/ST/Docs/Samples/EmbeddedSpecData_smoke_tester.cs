@@ -16,7 +16,7 @@ namespace StoryTeller.Testing.ST.Docs.Samples
         {
             var settings = new DocSettings
             {
-                Root = ".".ToFullPath()
+                Root = TestingContext.FindProjectFolder()
             };
 
             theEmbeddedData = new EmbeddedSpecData(settings);

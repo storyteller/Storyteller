@@ -21,6 +21,8 @@ namespace ST.Files
         /// </summary>
         public int ChangeBuffer = 100;
 
+        private bool _disposed;
+
 
         public FileChangeWatcher(string root, FileSet fileSet, IChangeSetHandler handler)
         {
@@ -53,18 +55,21 @@ namespace ST.Files
 
         public void Dispose()
         {
+            _disposed = true;
             _timer.Dispose();
         }
 
         private void execute(object state)
         {
+            if (_disposed) return;
             _timer.Change(10000, PollingIntervalInMilliseconds);
 
-            if (!_latched)
+            if (!_latched && !_disposed)
             {
                 processChanges();
             }
 
+            if (_disposed) return;
             _timer.Change(0, PollingIntervalInMilliseconds);
         }
 

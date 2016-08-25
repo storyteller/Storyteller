@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Baseline;
 using Xunit;
 using Shouldly;
 using ST.CommandLine;
@@ -15,8 +14,7 @@ namespace StoryTeller.Testing.Engine
     {
         private BatchRunResponse execute(Action<RunInput> configure)
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
 
             var input = new RunInput
