@@ -23,8 +23,8 @@ namespace StoryTeller.Testing.Model
         [Fact]
         public void read_spec_data_from_header_mode()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples")
+                .AppendPath("Specs", "General", "Check properties.xml");
 
             var spec = HierarchyLoader.ReadSpecHeader(path);
             spec.Children.Any().ShouldBeFalse();

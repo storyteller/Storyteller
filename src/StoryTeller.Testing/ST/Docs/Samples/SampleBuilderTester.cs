@@ -66,7 +66,7 @@ var x = 2;
                 container.Inject<ISampleCache>(new SampleCache());
 
                 var builder = container.GetInstance<ISampleBuilder>();
-                var path = AppDomain.CurrentDomain.BaseDirectory.ParentDirectory().ParentDirectory();
+                var path = TestingContext.FindProjectFolder();
 
                 var tasks = builder.ScanFolder(path);
                 tasks.Wait();

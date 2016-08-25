@@ -25,8 +25,8 @@ namespace StoryTeller.Testing.ST
 
         public void CopyFiles()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+
 
             thePath = ".".ToFullPath().AppendPath(Guid.NewGuid().ToString());
             var fileSystem = new FileSystem();

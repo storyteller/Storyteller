@@ -16,8 +16,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_a_spec_node()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
 
             var spec = HierarchyLoader.ReadSpecHeader(path);
 
@@ -33,8 +32,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void the_spec_type_should_be_header_after_loading_a_spec_as_header()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
 
             var spec = HierarchyLoader.ReadSpecHeader(path);
 
@@ -44,8 +42,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void can_read_max_retries()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
 
             var spec = HierarchyLoader.ReadSpecHeader(path);
 
@@ -55,8 +52,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_an_entire_suite()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);
@@ -88,8 +84,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void convert_the_top_suite_to_a_hierarchy_gets_the_suites()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
@@ -105,8 +100,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void convert_the_top_suite_to_a_hierarchy_gets_the_specs()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
@@ -119,8 +113,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void pretty_print_for_sample_data()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);

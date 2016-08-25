@@ -17,8 +17,8 @@ namespace StoryTeller.Testing
 
         private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() => HierarchyLoader.ReadHierarchy(SpecFolder));
 
-        public static string SpecFolder = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-            .AppendPath("Storyteller.Samples", "Specs");
+        public static string SpecFolder = FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+
 
 
         public static FixtureLibrary Library { get; }
@@ -28,6 +28,43 @@ namespace StoryTeller.Testing
         public static Specification FindSpecification(string id)
         {
             return XmlReader.ReadFromFile(Hierarchy.ToHierarchy().Specifications[id].Filename);
+        }
+
+        public static string FindParallelDirectory(string projectName)
+        {
+            var path = ".".ToFullPath();
+            while (!path.EndsWith("src"))
+            {
+                path = path.ParentDirectory();
+            }
+
+            path = path.AppendPath(projectName);
+
+            return path;
+        }
+
+        public static string FindProjectFolder()
+        {
+            var path = ".".ToFullPath();
+            while (!path.EndsWith("Storyteller.Testing", StringComparison.OrdinalIgnoreCase))
+            {
+                path = path.ParentDirectory();
+            }
+
+            return path;
+        }
+
+        public static string FindClientFolder()
+        {
+            var path = ".".ToFullPath();
+            while (!path.EndsWith("src"))
+            {
+                path = path.ParentDirectory();
+            }
+
+            path = path.ParentDirectory().AppendPath("client");
+
+            return path;
         }
 
     }

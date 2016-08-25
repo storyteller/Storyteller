@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Reflection;
 using Baseline;
 using HtmlTags;
@@ -46,11 +47,7 @@ namespace StoryTeller.Results
 
             var js = readFile("StoryTeller.batch-bundle.js");
 
-            var foot = new HtmlTag("foot");
-            document.Body.Next = foot;
-
-
-            foot.Add("script").Attr("language", "javascript").Text("\n\n" + js + "\n\n").Encoded(false);
+            document.Body.Add("script").Attr("language", "javascript").Text("\n\n" + js + "\n\n").Encoded(false);
             /*
             foot.Add("script")
                 .Attr("language", "Javascript")
