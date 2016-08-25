@@ -14,9 +14,7 @@ namespace StoryTeller.Testing
     
     public class integration_tests_with_the_grammar_project : SpecRunningContext
     {
-        private readonly string _folder = ".".ToFullPath()
-            .ParentDirectory().ParentDirectory().ParentDirectory()
-            .AppendPath("Storyteller.Samples", "Specs");
+        private readonly string _folder = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
         private Suite _hierarchy;
         private Specification[] _allSpecs;

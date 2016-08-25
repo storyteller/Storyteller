@@ -21,8 +21,8 @@ namespace StoryTeller.Testing.Engine
 
         public SpecExecutionRequestTester()
         {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples")
+            .AppendPath("Specs", "General", "Check properties.xml");
 
             theSpec = HierarchyLoader.ReadSpecHeader(path);
 

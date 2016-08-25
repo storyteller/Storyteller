@@ -21,8 +21,8 @@ namespace StoryTeller.Testing.CommandLine
 
         public run_command_integration_specs()
         {
-            var directory = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples");
+            var directory = TestingContext.FindParallelDirectory("Storyteller.Samples");
+
 
             theController = new RemoteController(directory);
 
@@ -118,7 +118,7 @@ namespace StoryTeller.Testing.CommandLine
 
             var json = JsonSerialization.ToIndentedJson(result);
 
-            var clientPath = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory().ParentDirectory().AppendPath("client");
+            var clientPath = TestingContext.FindClientFolder();
 
 
             new FileSystem().WriteStringToFile(clientPath.AppendPath("batch-result-data.js"), "module.exports = " + json);
@@ -127,8 +127,8 @@ namespace StoryTeller.Testing.CommandLine
         [Fact]
         public void use_specific_system_in_multi_system_project()
         {
-            var directory = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("MultipleSystems");
+            var directory = TestingContext.FindParallelDirectory("MultipleSystems");
+
 
             var input = new RunInput {Path = directory, SystemNameFlag = "System2"};
             var multiSystemController = input.BuildRemoteController();

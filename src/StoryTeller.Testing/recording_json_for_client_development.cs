@@ -14,6 +14,8 @@ namespace StoryTeller.Testing
 {
     public class recording_json_for_client_development
     {
+        private readonly string samplesFolder = TestingContext.FindParallelDirectory("Storyteller.Samples");
+
         //[Fact]
         public void record_specification_json()
         {
@@ -38,10 +40,7 @@ namespace StoryTeller.Testing
             var input = new ProjectInput
             {
                 Path =
-                    AppDomain.CurrentDomain.BaseDirectory.ParentDirectory()
-                        .ParentDirectory()
-                        .ParentDirectory()
-                        .AppendPath("Storyteller.Samples"),
+                    samplesFolder,
                 ProfileFlag = "Safari"
             };
 
@@ -85,10 +84,7 @@ namespace StoryTeller.Testing
         {
             var json = JsonSerialization.ToIndentedJson(response);
 
-            var path = AppDomain.CurrentDomain.BaseDirectory
-                .ParentDirectory().ParentDirectory() // project dir
-                .ParentDirectory().ParentDirectory() // root
-                .AppendPath("client", "batch-run-response-data.js");
+            var path = TestingContext.FindClientFolder().AppendPath("batch-run-response-data.js");
 
             new FileSystem().WriteStringToFile(path, "module.exports = " + json);
         }
@@ -97,10 +93,7 @@ namespace StoryTeller.Testing
         {
             var json = JsonSerialization.ToIndentedJson(initialization);
 
-            var path = AppDomain.CurrentDomain.BaseDirectory
-                .ParentDirectory().ParentDirectory() // project dir
-                .ParentDirectory().ParentDirectory() // root
-                .AppendPath("client", "initialization.js");
+            var path = TestingContext.FindClientFolder().AppendPath("initialization.js");
 
             new FileSystem().WriteStringToFile(path, "module.exports = " + json);
         }
