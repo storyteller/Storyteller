@@ -7,11 +7,19 @@ namespace ST.Client
 {
     public class WebApplicationRegistry : Registry
     {
-        public WebApplicationRegistry()
+        public WebApplicationRegistry(string webSocketAddress, WebSocketsHandler webSockets, IRemoteController controller, StorytellerContext context)
         {
+            For<StorytellerContext>().Use(context);
+            For<IRemoteController>().Use(controller);
+
+            ForSingletonOf<IClientConnector>()
+                .Use<ClientConnector>()
+                .SetProperty(x => x.WebSocketsAddress = webSocketAddress);
+
+            For<WebSocketsHandler>().Use(webSockets);
+
             For<ISpecFileWatcher>().Use<SpecFileWatcher>();
 
-            ForSingletonOf<IClientConnector>().Use<ClientConnector>();
             ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
 
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Fleck;
 
 namespace ST.Docs.Runner
 {
