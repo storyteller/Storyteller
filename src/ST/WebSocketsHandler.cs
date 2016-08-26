@@ -42,6 +42,8 @@ namespace ST
             webSocket.Dispose();
         }
 
+        public Action<string> Received = x => { };
+
         public async Task Send(string text)
         {
             var token = CancellationToken.None;

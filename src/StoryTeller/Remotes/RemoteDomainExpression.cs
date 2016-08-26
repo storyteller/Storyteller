@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Baseline;
 using StoryTeller.Remotes.Messaging;
 
@@ -22,6 +23,18 @@ namespace StoryTeller.Remotes
             get { return _setup; }
         }
 
+        private string correctBinPath(string serviceDirectory, string binPath)
+        {
+            var dllFile = new FileSystem().FindFiles(serviceDirectory.AppendPath(binPath), FileSet.Deep("Storyteller.dll")).FirstOrDefault();
+
+            if (dllFile.IsNotEmpty())
+            {
+                return dllFile.PathRelativeTo(serviceDirectory).ParentDirectory();
+            }
+
+            return binPath;
+        }
+
         public string ServiceDirectory
         {
             get { return _setup.ApplicationBase; }
@@ -37,11 +50,11 @@ namespace StoryTeller.Remotes
                 // Favor Debug over release
                 if (fileSystem.DirectoryExists(value, "bin", "Debug"))
                 {
-                    _setup.PrivateBinPath = "bin".AppendPath("Debug");
+                    _setup.PrivateBinPath = correctBinPath(value, "bin".AppendPath("Debug"));
                 }
                 else if (fileSystem.DirectoryExists(value, "bin", "Release"))
                 {
-                    _setup.PrivateBinPath = "bin".AppendPath("Release");
+                    _setup.PrivateBinPath = correctBinPath(value, "bin".AppendPath("Release"));
                 }
 
                 if (fileSystem.FileExists(value.AppendPath("App.config")))

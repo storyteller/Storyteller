@@ -6,24 +6,24 @@ using Shouldly;
 using ST.Client;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
-using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
+using ST;
 
 namespace StoryTeller.Testing.ST
 {
     
     public class ClientConnectorTester
     {
-        private RecordingCommand<RunSpec> theCommand;
-        private IRemoteController theRemoteController;
-        private ClientConnector theConnector;
+        private readonly RecordingCommand<RunSpec> theCommand;
+        private readonly IRemoteController theRemoteController;
+        private readonly ClientConnector theConnector;
 
         public ClientConnectorTester()
         {
             theCommand = new RecordingCommand<RunSpec>();
             theRemoteController = Substitute.For<IRemoteController>();
 
-            theConnector = new ClientConnector(theRemoteController, new ICommand[] { theCommand });
+            theConnector = new ClientConnector(new WebSocketsHandler(), theRemoteController, new ICommand[] { theCommand });
         }
 
 
