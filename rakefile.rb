@@ -64,23 +64,25 @@ end
 
 desc 'Compile the code'
 task :compile => [:npm, :clean, :version] do
-	sh "paket.exe restore"
-	msbuild = '"C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe"'
-	sh "#{msbuild} src/Storyteller.sln   /property:Configuration=#{COMPILE_TARGET} /v:m /t:rebuild /nr:False /maxcpucount:2"
+	sh "dotnet restore src/Storyteller.Testing"
+	sh "dotnet restore src/Storyteller.Samples"
+	sh "dotnet restore src/Specifications"
+	sh "dotnet restore src/Samples"
+	sh "dotnet build src/Storyteller.Testing"
 end
 
 desc 'Run the unit tests'
 task :test => [:compile] do
-	sh "packages/Fixie/lib/net45/Fixie.Console.exe src/Storyteller.Testing/bin/#{COMPILE_TARGET}/Storyteller.Testing.dll --NUnitXml results/TestResult.xml"
+	sh "dotnet test src/Storyteller.Testing"
 end
 
 desc 'Build Nuspec packages'
 task :pack => [:compile] do
-	sh "nuget.exe pack packaging/nuget/storyteller.nuspec -VERSION #{build_number}-alpha -OutputDirectory artifacts"
+	sh "dotnet pack src/Storyteller --output artifacts --version-suffix #{build_revision}"
 end
 
 task :publish => [:pack] do
-	sh "nuget.exe push artifacts/Storyteller.#{build_number}-alpha.nupkg #{NUGET_KEY} "
+	#sh "nuget.exe push artifacts/Storyteller.#{build_number}-alpha.nupkg #{NUGET_KEY} "
 end
 
 
@@ -97,17 +99,17 @@ end
 
 desc "Run the storyteller specifications"
 task :storyteller => [:compile] do
-	sh "packages/Storyteller/tools/st.exe run src/FubuMVC.IntegrationTesting --retries 3 --results-path artifacts/stresults.htm --build #{COMPILE_TARGET}"
+	sh "dotnet run --project src/ST run src/FubuMVC.IntegrationTesting --retries 3 --results-path artifacts/stresults.htm --build #{COMPILE_TARGET}"
 end
 
 desc "Run the storyteller specifications"
 task :samples do
-	sh "src/st/bin/debug/st.exe open src/Samples"
+	sh "dotnet run --project src/ST open src/Samples"
 end
 
 desc "Run the storyteller specifications"
 task :specifications do
-	sh "src/st/bin/debug/st.exe open src/Specifications"
+	sh "dotnet run --project src/ST open src/Specifications"
 end
 
 
