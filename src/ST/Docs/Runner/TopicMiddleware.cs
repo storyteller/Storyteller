@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Baseline;
 using HtmlTags;
+using Microsoft.AspNetCore.Http;
 using ST.Docs.Topics;
 using ST.Docs.Transformation;
 
@@ -12,7 +14,6 @@ namespace ST.Docs.Runner
 {
     public class TopicMiddleware 
     {
-        private readonly Func<IDictionary<string, object>, Task> _inner;
         private readonly DocProject _project;
         private readonly IHtmlGenerator _generator;
         private readonly DocSettings _settings;
@@ -20,9 +21,8 @@ namespace ST.Docs.Runner
         private readonly string _topicJS;
 
 
-        public TopicMiddleware(Func<IDictionary<string, object>, Task> inner, DocProject project, IHtmlGenerator generator, DocSettings settings)
+        public TopicMiddleware(DocProject project, IHtmlGenerator generator, DocSettings settings)
         {
-            _inner = inner;
             _project = project;
             _generator = generator;
             _settings = settings;
@@ -34,51 +34,34 @@ namespace ST.Docs.Runner
             _topicJS = Assembly.GetExecutingAssembly().GetManifestResourceStream(typeof(Program),"topics.js").ReadAllText();
         }
 
-        public Task Invoke(IDictionary<string, object> environment)
+        public Task Invoke(HttpContext context)
         {
-            throw new NotImplementedException();
-            /*
-            var path = environment[OwinConstants.RequestPathKey].As<string>().TrimStart('/');
+            var path = context.Request.Path.Value.TrimStart('/');
 
             if (path == "topics.js")
             {
-                return Task.Factory.StartNew(() =>
-                {
-                    var response = new OwinHttpResponse(environment);
-                    response.WriteContentType("text/javascript");
-
-                    response.Write(_topicJS);
-
-
-                   
-                    response.Flush();
-                });
+                context.Response.Headers["content-type"] = "text/javascript";
+                return context.Response.WriteAsync(_topicJS);
             }
 
             var topic = _project.FindTopicByUrl(path);
             if (topic == null)
             {
-                return _inner(environment);
+                context.Response.StatusCode = 404;
+                context.Response.Headers["content-type"] = "text/plain";
+
+                return context.Response.WriteAsync("Unknown topic");
             }
 
-            return Task.Factory.StartNew(() =>
-            {
-                var response = new OwinHttpResponse(environment);
-                response.WriteContentType("text/html");
+            context.Response.Headers["cache-control"] = "no-cache, no-store, must-revalidate";
+            context.Response.Headers["pragma"] = "no-cache";
+            context.Response.Headers["expires"] = "0";
 
-                response.AppendHeader(HttpGeneralHeaders.CacheControl, "no-cache, no-store, must-revalidate");
-                response.AppendHeader(HttpResponseHeaders.Pragma, "no-cache");
-                response.AppendHeader(HttpResponseHeaders.Expires, "0");
+            var html = GenerateHtml(topic);
 
+            context.Response.Headers["content-type"] = "text/html";
 
-                var html = GenerateHtml(topic);
-
-
-                response.Write(html);
-                response.Flush();
-            });
-
-    */
+            return context.Response.WriteAsync(html);
 
         }
 
