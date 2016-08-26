@@ -21,12 +21,8 @@ namespace ST.Docs.Samples
                 _.Object(new BlockCommentScanner("/*", "*/", "css", "css"));
             });
 
-
-
-            For<IBrowserRefresher>().UseIfNone<NulloBrowserRefresher>();
-
             For<IFileSystem>().Use<FileSystem>();
-
+            For<IBrowserRefresher>().UseIfNone<NulloBrowserRefresher>();
             ForSingletonOf<IEmbeddedSpecData>().Use<EmbeddedSpecData>();
             For<ISampleBuilder>().Use<SampleBuilder>();
         }

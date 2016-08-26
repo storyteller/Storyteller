@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
+using System.Text;
 using System.Threading.Tasks;
 using Baseline;
 using HtmlTags;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.FileProviders;
+using Newtonsoft.Json;
 using StructureMap;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
@@ -23,12 +28,13 @@ namespace ST.Docs
     public class DocProject : IDisposable, ISampleCache
     {
         private readonly Container _container;
-        private readonly Task _sampleBuilder;
+        private Task _sampleBuilder;
         private readonly ISampleCache _samples = new SampleCache();
         private readonly DocSettings _settings;
 
         private readonly LightweightCache<string, Topic> _topicByUrl = new LightweightCache<string, Topic>();
         private TopicFileWatcher _topicWatcher;
+        private BrowserRefresher _refresher;
 
         public DocProject(DocSettings settings)
         {
@@ -46,7 +52,6 @@ namespace ST.Docs
                 _.AddRegistry<SampleRegistry>();
                 _.AddRegistry<TransformationRegistry>();
 
-                _.ForSingletonOf<IBrowserRefresher>().Use<BrowserRefresher>();
                 _.For(typeof(IUrlResolver)).Use(settings.UrlResolverType());
 
                 _.ForSingletonOf<ICommandUsageCache>().Use<CommandUsageCache>();
@@ -55,7 +60,7 @@ namespace ST.Docs
                 _.For<Topic>().Use(Topic);
             });
 
-            _sampleBuilder = scanForSamples();
+            
         }
 
         public string BaseAddress { get; set; }
@@ -67,6 +72,7 @@ namespace ST.Docs
 
         public void Dispose()
         {
+            _refresher?.Dispose();
             _topicWatcher?.Dispose();
             _container.Dispose();
         }
@@ -102,13 +108,15 @@ namespace ST.Docs
 
         public void ExportTo(string directory)
         {
+            var scanning = scanForSamples();
+
             var exporter = _container.GetInstance<Exporter>();
 
             Console.WriteLine("Cleaning off any existing docs at " + directory);
 
             exporter.CleanTarget(directory);
 
-            scanForSamples();
+            scanning.Wait();
 
             if (_settings.UrlStyle == UrlStyle.FileExport)
                 exporter.ExportTo(directory, Topic, x => x.FileExportPath());
@@ -121,25 +129,43 @@ namespace ST.Docs
         public IDisposable LaunchRunner()
         {
             var middleware = new TopicMiddleware(this, _container.GetInstance<IHtmlGenerator>(), _settings);
+            var webSockets = new WebSocketsHandler();
+            _refresher = new BrowserRefresher(webSockets);
+
+            var port = PortFinder.FindPort(5000);
 
 
+            _settings.WebsocketAddress = $"ws://localhost:{port}";
+            
+
+            _container.Inject<IBrowserRefresher>(_refresher);
+            _sampleBuilder = scanForSamples();
+
+            var host = startHost(port, webSockets, middleware);
+
+            _topicWatcher = new TopicFileWatcher(_settings, this);
+            
+
+            _topicWatcher.StartWatching(_refresher);
+
+            return host;
+        }
+
+        private IWebHost startHost(int port, WebSocketsHandler webSockets, TopicMiddleware middleware)
+        {
             var host = new WebHostBuilder()
-
-                
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls()
-
+                .UseUrls($"http://localhost:{port}")
                 .Configure(app =>
                 {
-                    
                     app.UseWebSockets();
 
                     app.Use(async (http, next) =>
                     {
                         if (http.WebSockets.IsWebSocketRequest)
                         {
-                            //await handleSocket(http);
+                            await webSockets.HandleSocket(http).ConfigureAwait(false);
                         }
                         else
                         {
@@ -153,13 +179,41 @@ namespace ST.Docs
                         FileProvider = new PhysicalFileProvider(_settings.Root)
                     });
 
+                    app.Use(async (http, next) =>
+                    {
+                        if (http.Request.Method.EqualsIgnoreCase("POST"))
+                        {
+                            switch (http.Request.Path)
+                            {
+                                case "/refresh":
+                                    await HardRefresh().ConfigureAwait(false);
+
+                                    _refresher.RefreshPage();
+                                    break;
+
+                                case "/open":
+                                    var url = new Uri(http.Request.Headers["referer"]);
+
+                                    var topic = FindTopicByUrl(url.AbsolutePath.TrimStart('/'));
+                                    if (topic != null)
+                                    {
+                                        Process.Start(topic.File);
+                                    }
+
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            await next().ConfigureAwait(false);
+                        }
+                    });
 
                     app.Run(middleware.Invoke);
                 })
                 .Build();
 
             host.Start();
-
             return host;
         }
 
