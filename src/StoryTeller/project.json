@@ -6,7 +6,7 @@
       "**/*.cs",
       "../CommonAssemblyInfo.cs"
     ],
-    "embed": ["../../client/public/**/*.css", "../ST/**/*.js"]
+    "embed": ["../../client/public/**/*.css", "../ST/batch-bundle.js"]
   },
   "version": "3.0.0-alpha-*",
   "title": "Storyteller",
