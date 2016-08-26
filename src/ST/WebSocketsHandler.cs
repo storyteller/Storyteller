@@ -31,7 +31,7 @@ namespace ST
                             buffer.Offset,
                             received.Count);
 
-                        Console.WriteLine("Got: " + request);
+                        Received(request);
 
                         break;
                 }
