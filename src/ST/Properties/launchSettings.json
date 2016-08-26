@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ST": {
+      "commandName": "Project",
+      "commandLineArgs": "doc-run",
+      "workingDirectory": "C:\\code\\storyteller"
+    }
+  }
+}

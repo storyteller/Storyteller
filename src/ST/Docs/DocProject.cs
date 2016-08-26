@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Baseline;
+using HtmlTags;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.FileProviders;
 using StructureMap;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
@@ -21,11 +27,14 @@ namespace ST.Docs
         private readonly ISampleCache _samples = new SampleCache();
         private readonly DocSettings _settings;
 
-        private readonly Cache<string, Topic> _topicByUrl = new Cache<string, Topic>();
+        private readonly LightweightCache<string, Topic> _topicByUrl = new LightweightCache<string, Topic>();
         private TopicFileWatcher _topicWatcher;
 
         public DocProject(DocSettings settings)
         {
+            var port = PortFinder.FindPort(5000);
+            BaseAddress = "http://localhost:" + port;
+
             _settings = settings;
             ReadTopics();
 
@@ -49,17 +58,16 @@ namespace ST.Docs
             _sampleBuilder = scanForSamples();
         }
 
+        public string BaseAddress { get; set; }
+
         public Topic Topic { get; private set; }
 
-        public ITransformer Transformer
-        {
-            get { return _container.GetInstance<ITransformer>(); }
-        }
+        public ITransformer Transformer => _container.GetInstance<ITransformer>();
 
 
         public void Dispose()
         {
-            if (_topicWatcher != null) _topicWatcher.Dispose();
+            _topicWatcher?.Dispose();
             _container.Dispose();
         }
 
@@ -112,30 +120,47 @@ namespace ST.Docs
 
         public IDisposable LaunchRunner()
         {
-            throw new NotImplementedException();
-
-            /*
+            var middleware = new TopicMiddleware(this, _container.GetInstance<IHtmlGenerator>(), _settings);
 
 
-            var refresher = _container.GetInstance<IBrowserRefresher>();
+            var host = new WebHostBuilder()
 
-            refresher.StartWebSockets();
-            _settings.WebsocketAddress = "ws://localhost:" + refresher.Port;
+                
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls()
+
+                .Configure(app =>
+                {
+                    
+                    app.UseWebSockets();
+
+                    app.Use(async (http, next) =>
+                    {
+                        if (http.WebSockets.IsWebSocketRequest)
+                        {
+                            //await handleSocket(http);
+                        }
+                        else
+                        {
+                            await next().ConfigureAwait(false);
+                        }
+                    });
+
+                    app.UseStaticFiles(new StaticFileOptions
+                    {
+                        ServeUnknownFileTypes = true,
+                        FileProvider = new PhysicalFileProvider(_settings.Root)
+                    });
 
 
-            _topicWatcher = new TopicFileWatcher(_settings, this);
-            _topicWatcher.StartWatching(refresher);
+                    app.Run(middleware.Invoke);
+                })
+                .Build();
 
-            var registry = new TopicRegistry() {RootPath = _settings.Root};
-            registry.AlterSettings<OwinSettings>(_ =>
-            {
-                _.Middleware.InsertFirst(new MiddlewareNode<TopicMiddleware>());
-            });
+            host.Start();
 
-            registry.StructureMap(_container);
-
-            return registry.ToRuntime();
-            */
+            return host;
         }
 
         private Task scanForSamples()

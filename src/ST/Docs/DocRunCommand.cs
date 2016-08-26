@@ -15,13 +15,11 @@ namespace ST.Docs
             {
                 using (var server = project.LaunchRunner())
                 {
-                    throw new NotImplementedException();
+                    
+                    Console.WriteLine("Launching the browser to " + project.BaseAddress);
 
-                    /*
-                    Console.WriteLine("Launching the browser to " + server.BaseAddress);
-
-                    Process.Start(server.BaseAddress);
-                    */
+                    Process.Start(project.BaseAddress);
+                    
 
                     tellUsersWhatToDo();
                     ConsoleKeyInfo key = Console.ReadKey();
