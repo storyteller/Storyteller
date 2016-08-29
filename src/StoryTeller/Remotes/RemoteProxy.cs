@@ -16,16 +16,19 @@ namespace StoryTeller.Remotes
         private SpecificationEngine _engine;
         private Project _project;
         private ISystem _system;
-        private readonly IList<IDisposable> _services = new List<IDisposable>();
+        private readonly IList<IDisposable> _disposables = new List<IDisposable>();
         private SpecExpiration _specExpiration;
+        private SocketConnection _socket;
 
 
         public void Dispose()
         {
             try
             {
-                _services.ToArray().Each(x => x.SafeDispose());
-                _services.Clear();
+                _disposables.ToArray().Each(x => x.SafeDispose());
+                _disposables.Clear();
+
+
             }
             catch (Exception e)
             {
@@ -44,11 +47,17 @@ namespace StoryTeller.Remotes
             return controller == null ? new QueueState() : controller.QueueState();
         }
 
-        public void Start(EngineMode mode, Project project, MarshalByRefObject remoteListener)
+        public void Start(EngineMode mode, Project project, int socketPort)
         {
             Project.CurrentProject = project;
 
-            EventAggregator.Start((IRemoteListener) remoteListener);
+            _socket = new SocketConnection(socketPort, false, (s, json) =>
+            {
+                EventAggregator.Messaging.SendJson(json);
+            });
+            _disposables.Add(_socket);
+
+            EventAggregator.Start(_socket);
 
             _project = project;
 
@@ -58,18 +67,13 @@ namespace StoryTeller.Remotes
             {
                 systemType = _project.DetermineSystemType();
                 _system = Activator.CreateInstance(systemType).As<ISystem>();
-                _services.Add(_system);
+                _disposables.Add(_system);
 
                 _specExpiration = new SpecExpiration();
 
-                if (mode == EngineMode.Interactive)
-                {
-                    _engine = buildUserInterfaceEngine();
-                }
-                else
-                {
-                    _engine = buildBatchedEngine(project.TracingStyle);
-                }
+                _engine = mode == EngineMode.Interactive 
+                    ? buildUserInterfaceEngine() 
+                    : buildBatchedEngine(project.TracingStyle);
 
 
                 _engine.Start(project.StopConditions);
@@ -98,20 +102,16 @@ namespace StoryTeller.Remotes
 
         private void CurrentDomainOnDomainUnload(object sender, EventArgs eventArgs)
         {
-            if (_engine != null)
-            {
-                _engine.SafeDispose();
-            }
+            _engine?.SafeDispose();
+            _socket?.SafeDispose();
         }
 
         void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             Console.WriteLine("Uncaught exception, shutting down.");
             Console.WriteLine(e.ExceptionObject.ToString());
-            if (_engine != null)
-            {
-                _engine.Dispose();
-            }
+            _engine?.Dispose();
+            _socket?.SafeDispose();
         }
 
         private SpecificationEngine buildUserInterfaceEngine()
@@ -130,8 +130,8 @@ namespace StoryTeller.Remotes
             executionObserver.Controller = (EngineController) _controller;
 
 
-            _services.Add(observer);
-            _services.Add(engine);
+            _disposables.Add(observer);
+            _disposables.Add(engine);
 
             EventAggregator.Messaging.AddListener(_controller);
 
@@ -157,16 +157,11 @@ namespace StoryTeller.Remotes
 
             _controller = new BatchController(engine, batchObserver);
 
-            _services.Add(engine);
+            _disposables.Add(engine);
 
             EventAggregator.Messaging.AddListener(_controller);
 
             return engine;
-        }
-
-        public void SendMessage(string json)
-        {
-            EventAggregator.Messaging.SendJson(json);
         }
 
     }

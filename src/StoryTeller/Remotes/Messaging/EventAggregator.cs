@@ -8,24 +8,20 @@ namespace StoryTeller.Remotes.Messaging
     public static class EventAggregator
     {
         private static readonly BlockingCollection<object> _messages;
-        private static IRemoteListener _remoteListener;
         private static CancellationTokenSource _cancellationSource;
         private static readonly IMessagingHub _messaging = new MessagingHub();
+        private static ISocketConnection _sockets;
 
         static EventAggregator()
         {
             _messages = new BlockingCollection<object>(new ConcurrentQueue<object>());
         }
 
-        public static IMessagingHub Messaging
-        {
-            get { return _messaging; }
-        }
+        public static IMessagingHub Messaging => _messaging;
 
-        public static void Start(IRemoteListener remoteListener)
+        public static void Start(ISocketConnection sockets)
         {
-            _remoteListener = remoteListener;
-
+            _sockets = sockets;
             _cancellationSource = new CancellationTokenSource();
             Task.Factory.StartNew(read, _cancellationSource.Token);
         }
@@ -34,17 +30,14 @@ namespace StoryTeller.Remotes.Messaging
         {
             foreach (object o in _messages.GetConsumingEnumerable(_cancellationSource.Token))
             {
-                // TODO -- should this be async as well?  Or assume that the remote listener will handle it?
                 var json = JsonSerialization.ToJson(o);
-                _remoteListener.Send(json);
-
-                // TODO -- send to a local messaging hub?
+                _sockets.SendMessage(json);
             }
         }
 
         public static void Stop()
         {
-            if (_cancellationSource != null) _cancellationSource.Cancel();
+            _cancellationSource?.Cancel();
         }
 
 
