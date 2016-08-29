@@ -9,7 +9,7 @@ namespace StoryTeller.Samples.Fixtures
             throw new Exception("This fixture ctor blew up");
         }
     }
-
+    
     public class GrammarErrorFixture : Fixture
     {
         public IGrammar Bad()

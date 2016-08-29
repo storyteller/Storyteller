@@ -14,10 +14,7 @@ namespace StoryTeller.Remotes
             _completion = new TaskCompletionSource<SystemRecycled>();
         }
 
-        public Task<SystemRecycled> Task
-        {
-            get { return _completion.Task; }
-        }
+        public Task<SystemRecycled> Task => _completion.Task;
 
         public void Receive(SystemRecycled message)
         {

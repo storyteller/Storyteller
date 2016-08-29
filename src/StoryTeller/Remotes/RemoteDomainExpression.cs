@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.Hosting;
 using Baseline;
 using StoryTeller.Remotes.Messaging;
 
@@ -8,7 +9,6 @@ namespace StoryTeller.Remotes
     public class RemoteDomainExpression
     {
         private static readonly FileSystem fileSystem = new FileSystem();
-        private readonly MessagingHub _listeners = new MessagingHub();
 
         private readonly AppDomainSetup _setup = new AppDomainSetup
         {
@@ -18,10 +18,7 @@ namespace StoryTeller.Remotes
             ApplicationBase = ".".ToFullPath()
         };
 
-        public AppDomainSetup Setup
-        {
-            get { return _setup; }
-        }
+        public AppDomainSetup Setup => _setup;
 
         private string correctBinPath(string serviceDirectory, string binPath)
         {
@@ -34,6 +31,14 @@ namespace StoryTeller.Remotes
 
             return binPath;
         }
+
+        public int Port
+        {
+            set
+            {
+                _setup.AppDomainInitializerArguments = new []{value.ToString()};
+            }
+        } 
 
         public string ServiceDirectory
         {
@@ -91,9 +96,6 @@ namespace StoryTeller.Remotes
             }
         }
 
-        public MessagingHub Listeners
-        {
-            get { return _listeners; }
-        }
+        public MessagingHub Listeners { get; } = new MessagingHub();
     }
 }

@@ -23,18 +23,33 @@ namespace ST.Client
 
     public class RemoteController : IDisposable, IRemoteController
     {
+        public static int Port = 2500;
+
         private readonly RemoteDomainExpression _remoteSetup = new RemoteDomainExpression();
         private AppDomain _domain;
         private EngineMode _mode = EngineMode.Interactive;
         private RemoteProxy _proxy;
         private AppDomainFileChangeWatcher _watcher;
+        private readonly int _port;
+        private readonly SocketConnection _socket;
 
         public RemoteController(string path)
         {
+            _port = PortFinder.FindPort(++Port);
+            _remoteSetup.Port = _port;
+
             _remoteSetup.ServiceDirectory = path;
+
+            
+
             Project = Project.LoadForFolder(path);
             Path = path;
             Messaging = new MessagingHub();
+
+            _socket = new SocketConnection(_port, true, (s, json) =>
+            {
+                Messaging.SendJson(json);
+            });
 
             Messaging.AddListener(this);
         }
@@ -101,7 +116,7 @@ namespace ST.Client
         public void SendMessage<T>(T message)
         {
             var json = JsonSerialization.ToJson(message);
-            _proxy.SendMessage(json);
+            _socket.SendMessage(json);
         }
 
         public ResponseExpression Send<T>(T message)
@@ -111,7 +126,7 @@ namespace ST.Client
 
         public void SendJsonMessage(string json)
         {
-            _proxy.SendMessage(json);
+            _socket.SendMessage(json);
         }
 
         public void AddListener(object listener)
@@ -170,7 +185,7 @@ namespace ST.Client
                 _proxy = (RemoteProxy) _domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 
                 Messaging.AddListener(listener);
-                _proxy.Start(mode, Project, new RemoteListener(Messaging));
+                _proxy.Start(mode, Project, _port);
             }
             catch (Exception)
             {
