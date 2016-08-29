@@ -2,8 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
+using NSubstitute;
 using Xunit;
 using Shouldly;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Remotes.Messaging
@@ -11,16 +13,12 @@ namespace StoryTeller.Testing.Remotes.Messaging
     
     public class EventAggregatorTester : IDisposable
     {
-        private RecordingListener theListener;
+
+        private readonly ISocketConnection theSocket = Substitute.For<ISocketConnection>();
 
         public EventAggregatorTester()
         {
-            theListener = new RecordingListener();
-            var hub = new MessagingHub();
-            hub.AddListener(theListener);
-
-            var remoteListener = new RemoteListener(hub);
-            EventAggregator.Start(remoteListener);
+            EventAggregator.Start(theSocket);
         }
 
         public void Dispose()

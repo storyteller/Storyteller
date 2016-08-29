@@ -9,10 +9,7 @@ namespace StoryTeller.Remotes.Messaging
         // TODO -- need to do some locking on this bad boy
         private readonly IList<object> _listeners = new List<object>();
 
-        public IEnumerable<object> Listeners
-        {
-            get { return _listeners; }
-        }
+        public IEnumerable<object> Listeners => _listeners;
 
         public void AddListener(object listener)
         {

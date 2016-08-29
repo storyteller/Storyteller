@@ -70,7 +70,7 @@ namespace StoryTeller.Engine
                 _mode.AfterRunning(request, results, queue, Status);
 
                 timings.Dispose();
-                if (_current != null) _current.SafeDispose();
+                _current?.SafeDispose();
             }
 
             return results;
