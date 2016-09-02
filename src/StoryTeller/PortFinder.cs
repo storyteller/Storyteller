@@ -3,11 +3,11 @@ using System.Net;
 using System.Net.Sockets;
 using Baseline;
 
-namespace ST
+namespace StoryTeller
 {
-    internal static class PortFinder
+    public static class PortFinder
     {
-        internal static int FindPort(int start)
+        public static int FindPort(int start)
         {
             for (int i = start; i < start + 50; i++)
             {
