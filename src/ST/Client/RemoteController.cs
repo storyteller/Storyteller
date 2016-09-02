@@ -23,27 +23,18 @@ namespace ST.Client
 
     public class RemoteController : IDisposable, IRemoteController
     {
+        private readonly ISystemLifecycle _lifecycle;
         public static int Port = 2500;
 
-        private readonly RemoteDomainExpression _remoteSetup = new RemoteDomainExpression();
-        private AppDomain _domain;
         private EngineMode _mode = EngineMode.Interactive;
-        private RemoteProxy _proxy;
         private AppDomainFileChangeWatcher _watcher;
         private readonly SocketConnection _socket;
 
-        public RemoteController(Project project)
+        public RemoteController(Project project, ISystemLifecycle lifecycle)
         {
+            _lifecycle = lifecycle;
             Project = project;
 
-
-            // These will move to the new IApplicationUnderTest
-            _remoteSetup.Port = Project.Port;
-            _remoteSetup.ServiceDirectory = project.ProjectPath;
-            if (project.ConfigFile.IsNotEmpty())
-            {
-                _remoteSetup.Setup.ConfigurationFile = project.ConfigFile;
-            }
 
             Messaging = new MessagingHub();
 
@@ -57,9 +48,6 @@ namespace ST.Client
 
         public Project Project { get; }
 
-        // TODO -- this will go away when it's encapsulated into ISystemLifecycle
-        public string BinPath => _remoteSetup.Setup.PrivateBinPath;
-
         public MessagingHub Messaging { get; }
 
         public SystemRecycled LatestSystemRecycled { get; private set; }
@@ -68,17 +56,15 @@ namespace ST.Client
         {
             _watcher?.Dispose();
 
-            _proxy?.Dispose();
+            _lifecycle.Teardown();
 
-            if (_domain != null)
-                AppDomain.Unload(_domain);
+
         }
 
+        // TODO -- move to being a Task<QueueState>
         public QueueState QueueState()
         {
-            if (_proxy == null) return new QueueState();
-
-            return _proxy.QueueState();
+            return _lifecycle.QueueState();
         }
 
         public string WebSocketAddress { get; set; }
@@ -124,19 +110,9 @@ namespace ST.Client
             Messaging.AddListener(listener);
         }
 
-        public void UseBuildProfile(string profile)
-        {
-            _remoteSetup.BuildProfile = profile;
-        }
-
-
         public void Teardown()
         {
-            if ((_proxy == null) || (_domain == null)) return;
-
-            _proxy.Dispose();
-
-            AppDomain.Unload(_domain);
+            _lifecycle.Teardown();
         }
 
         public Task<SystemRecycled> Start(EngineMode mode)
@@ -164,24 +140,11 @@ namespace ST.Client
         {
             var listener = new SystemRecycledListener(Messaging);
 
-            _domain = AppDomain.CreateDomain("Storyteller-SpecRunning-Domain", null, _remoteSetup.Setup);
+            Messaging.AddListener(listener);
+
+            _lifecycle.Start(mode);
 
 
-            try
-            {
-                var proxyType = typeof(RemoteProxy);
-                _proxy = (RemoteProxy) _domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
-
-                Messaging.AddListener(listener);
-                _proxy.Start(mode, Project, Project.Port);
-            }
-            catch (Exception)
-            {
-                ConsoleWriter.Write(ConsoleColor.Yellow,
-                    "Storyteller was unable to start an AppDomain for the specification project. Check that the project has already been compiled.");
-
-                throw;
-            }
 
 
             return listener;
@@ -212,11 +175,7 @@ namespace ST.Client
 
         public void AssertValid()
         {
-            // TODO -- this should go within the new ISystemLifecycle
-            if (BinPath.IsEmpty())
-                throw new Exception(
-                    "Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
-
+            _lifecycle.AssertValid();
         }
     }
 }
