@@ -144,9 +144,6 @@ namespace ST.Client
 
             _lifecycle.Start(mode);
 
-
-
-
             return listener;
         }
 

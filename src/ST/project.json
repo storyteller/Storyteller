@@ -8,7 +8,7 @@
       "../CommonAssemblyInfo.cs"
     ],
     "embed": {
-      "include": [ "topics.js", "**/*.txt" ]
+      "include": [ "**/*.txt", "*.js" ]
     },
     "copyToOutput": {
       "include": [ "*.js" ]
@@ -21,7 +21,6 @@
     "StoryTeller": { "target": "project" },
     "Newtonsoft.Json": "9.0.1",
     "Oakton": "1.0.0",
-    "CommonMark.Net": "0.13.4",
     "StructureMap": "4.4.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.Hosting": "1.0.0",

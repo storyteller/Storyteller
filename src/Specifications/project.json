@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "StoryTeller": { "target": "project" },
-    "ST":  {"target": "project" } 
+    "StorytellerDocGen": {"target": "project"}
   },
   "frameworks": {
     "net46": {

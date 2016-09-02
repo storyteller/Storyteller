@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Baseline;
-using ST.Client;
-using ST.Docs;
+using StorytellerDocGen;
 using StoryTeller;
 using StoryTeller.Engine;
 
@@ -12,7 +11,6 @@ namespace Specifications
     {
         public static readonly string Path;
 
-        private readonly WebApplicationRunner _runner;
 
         public IExecutionContext CreateContext()
         {
