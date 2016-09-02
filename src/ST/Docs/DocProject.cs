@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
 using Baseline;
-using HtmlTags;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.FileProviders;
-using Newtonsoft.Json;
+using StoryTeller;
 using StructureMap;
 using ST.Docs.Commands;
 using ST.Docs.Exporting;
@@ -28,13 +23,13 @@ namespace ST.Docs
     public class DocProject : IDisposable, ISampleCache
     {
         private readonly Container _container;
-        private Task _sampleBuilder;
         private readonly ISampleCache _samples = new SampleCache();
         private readonly DocSettings _settings;
 
         private readonly LightweightCache<string, Topic> _topicByUrl = new LightweightCache<string, Topic>();
-        private TopicFileWatcher _topicWatcher;
         private BrowserRefresher _refresher;
+        private Task _sampleBuilder;
+        private TopicFileWatcher _topicWatcher;
 
         public DocProject(DocSettings settings)
         {
@@ -59,8 +54,6 @@ namespace ST.Docs
                 _.For<DocSettings>().Use(settings);
                 _.For<Topic>().Use(Topic);
             });
-
-            
         }
 
         public string BaseAddress { get; set; }
@@ -136,7 +129,7 @@ namespace ST.Docs
 
 
             _settings.WebsocketAddress = $"ws://localhost:{port}";
-            
+
 
             _container.Inject<IBrowserRefresher>(_refresher);
             _sampleBuilder = scanForSamples();
@@ -144,7 +137,7 @@ namespace ST.Docs
             var host = startHost(port, webSockets, middleware);
 
             _topicWatcher = new TopicFileWatcher(_settings, this);
-            
+
 
             _topicWatcher.StartWatching(_refresher);
 
@@ -164,13 +157,9 @@ namespace ST.Docs
                     app.Use(async (http, next) =>
                     {
                         if (http.WebSockets.IsWebSocketRequest)
-                        {
                             await webSockets.HandleSocket(http).ConfigureAwait(false);
-                        }
                         else
-                        {
                             await next().ConfigureAwait(false);
-                        }
                     });
 
                     app.UseStaticFiles(new StaticFileOptions
@@ -182,7 +171,6 @@ namespace ST.Docs
                     app.Use(async (http, next) =>
                     {
                         if (http.Request.Method.EqualsIgnoreCase("POST"))
-                        {
                             switch (http.Request.Path)
                             {
                                 case "/refresh":
@@ -196,17 +184,12 @@ namespace ST.Docs
 
                                     var topic = FindTopicByUrl(url.AbsolutePath.TrimStart('/'));
                                     if (topic != null)
-                                    {
                                         Process.Start(topic.File);
-                                    }
 
                                     break;
                             }
-                        }
                         else
-                        {
                             await next().ConfigureAwait(false);
-                        }
                     });
 
                     app.Run(middleware.Invoke);
