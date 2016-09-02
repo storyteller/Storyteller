@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Baseline;
-using MultipleSystems;
 using Xunit;
 using Shouldly;
 using ST.Client;
@@ -24,7 +23,7 @@ namespace StoryTeller.Testing.CommandLine
             var directory = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
 
-            theController = new RemoteController(directory);
+            theController = new RemoteController(Project.LoadForFolder(directory));
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
             theController = theInput.BuildRemoteController();

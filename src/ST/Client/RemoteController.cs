@@ -32,14 +32,14 @@ namespace ST.Client
         private AppDomainFileChangeWatcher _watcher;
         private readonly SocketConnection _socket;
 
-        public RemoteController(string path)
+        public RemoteController(Project project)
         {
-            Project = Project.LoadForFolder(path);
+            Project = project;
 
 
             // These will move to the new IApplicationUnderTest
             _remoteSetup.Port = Project.Port;
-            _remoteSetup.ServiceDirectory = path;
+            _remoteSetup.ServiceDirectory = project.ProjectPath;
 
             Messaging = new MessagingHub();
 

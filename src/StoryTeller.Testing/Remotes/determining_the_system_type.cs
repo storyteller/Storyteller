@@ -15,7 +15,7 @@ namespace StoryTeller.Testing.Remotes
 
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
-            var controller = new RemoteController(path);
+            var controller = new RemoteController(Project.LoadForFolder(path));
         }
     }
 }
