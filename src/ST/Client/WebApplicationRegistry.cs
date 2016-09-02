@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using StoryTeller.Commands;
+using StoryTeller.Files;
 using StructureMap;
-using ST.Files;
 
 namespace ST.Client
 {

@@ -27,19 +27,22 @@
     }
   },
   "dependencies":{
-	"HtmlTags.AspNetCore": "4.1.0",
+	  "HtmlTags.AspNetCore": "4.1.0",
 	
   },
   "frameworks": {
     "net46": {
-		"frameworkAssemblies":{
-			"System.Data": "",
-			"System.Reflection": "",
-		},
-		"dependencies":{
-			"Baseline": "1.1.0",
-			"System.Reflection.TypeExtensions": "4.1.0"
-		}
-	}
+      "frameworkAssemblies": {
+        "System.Data": "",
+        "System.Reflection": ""
+      },
+      "dependencies": {
+        "Baseline": "1.1.0",
+        "System.Reflection.TypeExtensions": "4.1.0"
+      }
+    },
+    "netstandard1.3": {
+
+    }
   }
 }

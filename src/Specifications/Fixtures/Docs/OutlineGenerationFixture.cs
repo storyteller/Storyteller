@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using Baseline;
-using ST.Docs;
-using ST.Docs.Outline;
-using ST.Docs.Topics;
+using StorytellerDocGen;
+using StorytellerDocGen.Outline;
+using StorytellerDocGen.Topics;
 using StoryTeller;
 using StoryTeller.Grammars.Tables;
 
