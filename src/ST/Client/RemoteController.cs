@@ -40,6 +40,10 @@ namespace ST.Client
             // These will move to the new IApplicationUnderTest
             _remoteSetup.Port = Project.Port;
             _remoteSetup.ServiceDirectory = project.ProjectPath;
+            if (project.ConfigFile.IsNotEmpty())
+            {
+                _remoteSetup.Setup.ConfigurationFile = project.ConfigFile;
+            }
 
             Messaging = new MessagingHub();
 
@@ -53,19 +57,8 @@ namespace ST.Client
 
         public Project Project { get; }
 
-        // TODO -- move this onto Project instead
-        public string ConfigFile
-        {
-            get { return _remoteSetup.Setup.ConfigurationFile; }
-            set { _remoteSetup.Setup.ConfigurationFile = value; }
-        }
-
-        // TODO -- move this onto Project instead
-        public string BinPath
-        {
-            get { return _remoteSetup.Setup.PrivateBinPath; }
-            set { _remoteSetup.Setup.PrivateBinPath = value; }
-        }
+        // TODO -- this will go away when it's encapsulated into ISystemLifecycle
+        public string BinPath => _remoteSetup.Setup.PrivateBinPath;
 
         public MessagingHub Messaging { get; }
 
@@ -215,6 +208,15 @@ namespace ST.Client
 
                 return watcher.Task;
             }
+        }
+
+        public void AssertValid()
+        {
+            // TODO -- this should go within the new ISystemLifecycle
+            if (BinPath.IsEmpty())
+                throw new Exception(
+                    "Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
+
         }
     }
 }
