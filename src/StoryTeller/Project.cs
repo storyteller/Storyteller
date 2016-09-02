@@ -12,15 +12,9 @@ namespace StoryTeller
     [Serializable]
     public class Project
     {
-        public static string CurrentProfile
-        {
-            get { return CurrentProject == null ? null : CurrentProject.Profile; }
-        }
+        public static string CurrentProfile => CurrentProject?.Profile;
 
-        public static int CurrentMaxRetries
-        {
-            get { return CurrentProject == null ? 0 : CurrentProject.MaxRetries; }
-        }
+        public static int CurrentMaxRetries => CurrentProject?.MaxRetries ?? 0;
 
         public static readonly string FILE = "storyteller.config";
 
