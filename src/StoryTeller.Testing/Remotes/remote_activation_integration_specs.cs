@@ -17,7 +17,8 @@ namespace StoryTeller.Testing.Remotes
         {
             var path = TestingContext.FindParallelDirectory(projectFolder);
 
-            return new RemoteController(Project.LoadForFolder(path));
+            var project = Project.LoadForFolder(path);
+            return new RemoteController(project, new AppDomainSystemLifecycle(project));
         }
 
         [Fact]

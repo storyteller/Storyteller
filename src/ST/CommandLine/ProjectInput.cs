@@ -73,21 +73,24 @@ namespace ST.CommandLine
             var path = Path.ToFullPath();
             var project = Project.LoadForFolder(path);
 
+            if (BuildFlag.IsNotEmpty())
+            {
+                project.BuildProfile = BuildFlag;
+            }
+
             if (ConfigFlag.IsNotEmpty())
             {
                 project.ConfigFile = ConfigFlag;
             }
 
-            var controller = new RemoteController(project);
-            controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
 
+            // This will change later w/ the new separate process lifecycle
+            var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
             controller.Project.Culture = CultureFlag;
+			controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
 
 
-            if (BuildFlag.IsNotEmpty())
-            {
-                controller.UseBuildProfile(BuildFlag);
-            }
+
 
             if (TimeoutFlag.HasValue)
             {

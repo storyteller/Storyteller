@@ -23,7 +23,8 @@ namespace StoryTeller.Testing.CommandLine
             var directory = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
 
-            theController = new RemoteController(Project.LoadForFolder(directory));
+            var project = Project.LoadForFolder(directory);
+            theController = new RemoteController(project, new AppDomainSystemLifecycle(project));
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
             theController = theInput.BuildRemoteController();
