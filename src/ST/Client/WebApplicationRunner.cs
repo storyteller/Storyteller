@@ -37,9 +37,8 @@ namespace ST.Client
             Controller = _input.BuildRemoteController();
             var context = new StorytellerContext(Controller, _input);
 
-            if (Controller.BinPath.IsEmpty())
-                throw new Exception(
-                    "Could not determine any BinPath for the testing AppDomain. Has the Storyteller specification project been compiled, \nor is Storyteller using the wrong compilation target maybe?\n\ntype 'st.exe ? open' or st.exe ? run' to see the command usages\n\n");
+            Controller.AssertValid();
+
 
             context.Start();
 
