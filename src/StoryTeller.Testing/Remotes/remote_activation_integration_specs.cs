@@ -73,7 +73,7 @@ namespace StoryTeller.Testing.Remotes
         {
             using (var controller = controllerForProject("MultipleSystems"))
             {
-                new FileSystem().DeleteFile(controller.Path.AppendPath(Project.FILE));
+                new FileSystem().DeleteFile(controller.Project.ProjectPath.AppendPath(Project.FILE));
                 Thread.Sleep(100);
 
                 var task = controller.Start(EngineMode.Batch);
@@ -99,7 +99,7 @@ namespace StoryTeller.Testing.Remotes
                     SystemTypeName = typeof (System2).AssemblyQualifiedName
                 };
 
-                new FileSystem().WriteObjectToFile(controller.Path.AppendPath(Project.FILE), project);
+                new FileSystem().WriteObjectToFile(controller.Project.ProjectPath.AppendPath(Project.FILE), project);
                 Thread.Sleep(100);
 
                 var task = controller.Start(EngineMode.Batch);
@@ -123,7 +123,7 @@ namespace StoryTeller.Testing.Remotes
                     SystemTypeName = typeof(System2).Name
                 };
 
-                new FileSystem().WriteObjectToFile(controller.Path.AppendPath(Project.FILE), project);
+                new FileSystem().WriteObjectToFile(controller.Project.ProjectPath.AppendPath(Project.FILE), project);
                 Thread.Sleep(100);
 
                 var task = controller.Start(EngineMode.Batch);

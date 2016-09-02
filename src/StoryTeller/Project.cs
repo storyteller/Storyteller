@@ -12,6 +12,8 @@ namespace StoryTeller
     [Serializable]
     public class Project
     {
+        public static int StartingPort = 2499;
+
         public static string CurrentProfile => CurrentProject?.Profile;
 
         public static int CurrentMaxRetries => CurrentProject?.MaxRetries ?? 0;
@@ -29,17 +31,25 @@ namespace StoryTeller
 
         public StopConditions StopConditions = new StopConditions();
 
+        public Project()
+        {
+            Port = PortFinder.FindPort(++StartingPort);
+        }
+
+        public int Port { get; set; }
+
+        public string ProjectPath { get; set; }
+
         public static Project LoadForFolder(string folder)
         {
             var system = new FileSystem();
             var file = folder.AppendPath(FILE);
 
-            if (system.FileExists(file))
-            {
-                return system.LoadFromFile<Project>(file);
-            }
+            var project = system.FileExists(file) ? system.LoadFromFile<Project>(file) : new Project();
 
-            return new Project();
+            project.ProjectPath = folder;
+
+            return project;
         }
 
         public Type DetermineSystemType()

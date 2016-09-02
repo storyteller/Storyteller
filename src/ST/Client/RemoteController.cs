@@ -30,23 +30,20 @@ namespace ST.Client
         private EngineMode _mode = EngineMode.Interactive;
         private RemoteProxy _proxy;
         private AppDomainFileChangeWatcher _watcher;
-        private readonly int _port;
         private readonly SocketConnection _socket;
 
         public RemoteController(string path)
         {
-            _port = PortFinder.FindPort(++Port);
-            _remoteSetup.Port = _port;
+            Project = Project.LoadForFolder(path);
 
+
+            // These will move to the new IApplicationUnderTest
+            _remoteSetup.Port = Project.Port;
             _remoteSetup.ServiceDirectory = path;
 
-            
-
-            Project = Project.LoadForFolder(path);
-            Path = path;
             Messaging = new MessagingHub();
 
-            _socket = new SocketConnection(_port, true, (s, json) =>
+            _socket = new SocketConnection(Project.Port, true, (s, json) =>
             {
                 Messaging.SendJson(json);
             });
@@ -56,7 +53,6 @@ namespace ST.Client
 
         public Project Project { get; }
 
-        public string Path { get; }
 
         public string ConfigFile
         {
@@ -161,7 +157,7 @@ namespace ST.Client
                 if (!DisableAppDomainFileWatching)
                 {
                     _watcher = new AppDomainFileChangeWatcher(Recycle);
-                    _watcher.WatchBinariesAt(_path.AppendPath("bin"));
+                    _watcher.WatchBinariesAt(Project.ProjectPath.AppendPath("bin"));
                 }
 
                 LatestSystemRecycled = x.Result;
@@ -185,7 +181,7 @@ namespace ST.Client
                 _proxy = (RemoteProxy) _domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 
                 Messaging.AddListener(listener);
-                _proxy.Start(mode, Project, _port);
+                _proxy.Start(mode, Project, Project.Port);
             }
             catch (Exception)
             {
