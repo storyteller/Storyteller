@@ -39,6 +39,7 @@ namespace StoryTeller
         public int Port { get; set; }
 
         public string ProjectPath { get; set; }
+        public string BuildProfile { get; set; }
 
         public static Project LoadForFolder(string folder)
         {
