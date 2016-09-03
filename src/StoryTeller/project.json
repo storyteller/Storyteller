@@ -26,9 +26,10 @@
       "url": "git://github.com/storyteller/storyteller"
     }
   },
-  "dependencies":{
-	  "HtmlTags.AspNetCore": "4.1.0",
-	
+  "dependencies": {
+    "HtmlTags.AspNetCore": "4.1.0",
+    "Baseline": "1.1.0",
+    "System.Reflection.TypeExtensions": "4.1.0"
   },
   "frameworks": {
     "net46": {
@@ -37,12 +38,19 @@
         "System.Reflection": ""
       },
       "dependencies": {
-        "Baseline": "1.1.0",
-        "System.Reflection.TypeExtensions": "4.1.0"
+        "System.Data.Common": "4.1.0"
+
       }
     },
-    "netstandard1.3": {
-
+    "netstandard1.6": {
+      "dependencies": {
+        "System.Data.Common": "4.1.0",
+        "System.Xml.XmlDocument": "4.0.1",
+        "System.Net.Sockets": "4.1.0",
+        "System.Diagnostics.TextWriterTraceListener": "4.0.0",
+        "System.Threading.Thread": "4.0.0",
+        "System.Threading.Timer": "4.0.1"
+      }
     }
   }
 }

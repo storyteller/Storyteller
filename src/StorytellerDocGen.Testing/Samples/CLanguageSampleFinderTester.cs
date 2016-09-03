@@ -4,6 +4,7 @@ using System.Linq;
 using Baseline;
 using Shouldly;
 using StorytellerDocGen.Samples;
+using StoryTeller.Files;
 using Xunit;
 
 namespace StorytellerDocGen.Testing.Samples

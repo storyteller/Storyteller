@@ -30,7 +30,11 @@ namespace StoryTeller.Files
             _fileSet = fileSet;
             _handler = handler;
 
+#if NET46
             _timer = new Timer(execute);
+#else
+            _timer = new Timer(execute, this, 0, PollingIntervalInMilliseconds);
+#endif
 
 
             Root = root;

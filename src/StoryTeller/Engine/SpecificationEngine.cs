@@ -93,7 +93,7 @@ namespace StoryTeller.Engine
                     fixtures = new FixtureModel[0],
                     system_name = _system.ToString(),
                     system_full_name = _system.GetType().FullName,
-                    name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory),
+                    name = Path.GetFileName(AppContext.BaseDirectory),
                     error = ex.ToString()
                 };
 
@@ -110,7 +110,7 @@ namespace StoryTeller.Engine
                 success = true,
                 fixtures = library.Models.GetAll().ToArray(),
                 system_name = _system.ToString(),
-                name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
+                name = Path.GetFileName(AppContext.BaseDirectory)
             };
 
             

@@ -7,7 +7,9 @@ namespace StoryTeller
     /// Means that the current spec fun is invalid and should be 
     /// stopped immediately
     /// </summary>
+#if NET46
     [Serializable]
+#endif
     public class StorytellerCriticalException : Exception
     {
         public StorytellerCriticalException()
@@ -22,8 +24,10 @@ namespace StoryTeller
         {
         }
 
+#if NET46
         protected StorytellerCriticalException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
+#endif
     }
 }

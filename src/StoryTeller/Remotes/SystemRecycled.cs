@@ -20,9 +20,11 @@ namespace StoryTeller.Remotes
 
         public SystemRecycled() : base("system-recycled")
         {
+#if NET46
             properties.Add("ConfigFile", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
             properties.Add("BaseDirectory", AppDomain.CurrentDomain.BaseDirectory.ToFullPath());
             properties.Add("BinPath", AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
+#endif
             properties.Add("Profile", Project.CurrentProfile);
         }
 

@@ -9,7 +9,9 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Model
 {
+#if NET46
     [Serializable]
+#endif
     public class Section : Node, INodeHolder
     {
         [JsonProperty("key")]

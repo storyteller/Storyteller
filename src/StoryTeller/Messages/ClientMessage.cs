@@ -3,7 +3,9 @@ using Newtonsoft.Json;
 
 namespace StoryTeller.Messages
 {
+#if NET46
     [Serializable]
+#endif
     public abstract class ClientMessage
     {
         [JsonProperty("type")]

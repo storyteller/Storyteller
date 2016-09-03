@@ -16,11 +16,7 @@ namespace StorytellerDocGen.Testing.Samples
         // Too flakey with timings to be in C#
         public void try_to_find_a_new_snippet_in_a_changed_file()
         {
-#if NET46
-            var folder = AppDomain.CurrentDomain.BaseDirectory.AppendPath(Guid.NewGuid().ToString());
-#else
-            var folder = AppContext.BaseDirectory;
-#endif
+            var folder = AppContext.BaseDirectory.AppendPath(Guid.NewGuid().ToString());
             var file = folder.AppendPath("fake.cs");
 
             new FileSystem().WriteStringToFile(file, @"

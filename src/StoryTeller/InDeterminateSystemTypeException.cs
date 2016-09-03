@@ -6,7 +6,9 @@ using Baseline;
 
 namespace StoryTeller
 {
+#if NET46
     [Serializable]
+#endif
     public class InDeterminateSystemTypeException : Exception
     {
         public static string ToMessage(IEnumerable<Type> candidates)
@@ -15,9 +17,11 @@ namespace StoryTeller
                    + candidates.Select(x => x.AssemblyQualifiedName).Join("\n");
         }
 
+#if NET46
         protected InDeterminateSystemTypeException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
+#endif
 
         public InDeterminateSystemTypeException(IEnumerable<Type> candidates) : base(ToMessage(candidates))
         {
