@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET46
+using System;
 using System.Linq;
 using System.Runtime.Hosting;
 using Baseline;
@@ -99,3 +100,5 @@ namespace StoryTeller.Remotes
         public MessagingHub Listeners { get; } = new MessagingHub();
     }
 }
+
+#endif

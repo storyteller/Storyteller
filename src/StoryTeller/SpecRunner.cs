@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Baseline;
-using HtmlTags;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
@@ -19,14 +17,14 @@ namespace StoryTeller
     {
         public static string GuessSpecDirectory()
         {
-            var path = AppDomain.CurrentDomain.BaseDirectory;
+            var path = AppContext.BaseDirectory;
             while (Path.GetFileName(path).EqualsIgnoreCase("bin") || Path.GetFileName(path).EqualsIgnoreCase("debug") ||
                    Path.GetFileName(path).EqualsIgnoreCase("release"))
             {
                 path = path.ParentDirectory();
             }
 
-            return Model.Persistence.HierarchyLoader.SelectSpecPath(path);
+            return HierarchyLoader.SelectSpecPath(path);
         }
 
         private readonly FixtureLibrary _library;
@@ -50,10 +48,7 @@ namespace StoryTeller
 
         }
 
-        public Hierarchy Hierarchy
-        {
-            get { return _hierarchy; }
-        }
+        public Hierarchy Hierarchy => _hierarchy;
 
         public string SpecDirectory { get; private set; }
 

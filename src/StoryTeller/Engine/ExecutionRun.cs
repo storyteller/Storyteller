@@ -153,6 +153,7 @@ namespace StoryTeller.Engine
             _request.Cancel();
             _wasCancelled = true;
             _thread.Abort();
+
             _reset.Set();
 
         }

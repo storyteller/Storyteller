@@ -581,6 +581,8 @@ namespace StoryTeller
             set { if (Context != null) Context.State.CurrentObject = value; }
         }
 
+#if NET46
+
 
         /// <summary>
         /// Validate a set of tabular data. Useful for writing specifications
@@ -603,7 +605,8 @@ namespace StoryTeller
         {
             return new VerifyDataTableExpression(c => dataSource());
         }
-
+        
+#endif
 
     }
 }

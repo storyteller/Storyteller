@@ -2,7 +2,9 @@ using System;
 
 namespace StoryTeller
 {
+#if NET46
     [Serializable]
+#endif
     public class StopConditions
     {
         public bool BreakOnExceptions;

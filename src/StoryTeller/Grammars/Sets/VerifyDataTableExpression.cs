@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET46
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -80,3 +81,5 @@ namespace StoryTeller.Grammars.Sets
         }
     }
 }
+
+#endif
