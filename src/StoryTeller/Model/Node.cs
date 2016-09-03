@@ -4,7 +4,9 @@ using Baseline;
 
 namespace StoryTeller.Model
 {
+#if NET46
     [Serializable]
+#endif
     public abstract class Node
     {
         private string _id;

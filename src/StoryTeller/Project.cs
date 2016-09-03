@@ -9,7 +9,9 @@ using StoryTeller.Engine;
 namespace StoryTeller
 {
 
+#if NET46
     [Serializable]
+#endif
     public class Project
     {
         public static int StartingPort = 2499;
@@ -80,12 +82,17 @@ namespace StoryTeller
 
         private static Type[] FindSystemTypesInCurrentAssembly()
         {
-            var assemblyName = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory);
+            var directory = AppContext.BaseDirectory;
+            var assemblyName = Path.GetFileName(directory);
 
             try
             {
-                
+
+#if NET46
                 var assembly = Assembly.Load(assemblyName);
+#else
+                var assembly = Assembly.Load(new AssemblyName(assemblyName));
+#endif
                 return FindSystemTypes(assembly).ToArray();
             }
             catch (Exception e)

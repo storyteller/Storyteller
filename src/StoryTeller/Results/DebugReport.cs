@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using HtmlTags;
@@ -21,20 +20,11 @@ namespace StoryTeller.Results
             return new HtmlTag("pre").AddClass("debug-output").Text(_writer.ToString()).ToString();
         }
 
-        public string Title
-        {
-            get { return "Debug Output"; }
-        }
+        public string Title => "Debug Output";
 
-        public string ShortTitle
-        {
-            get { return "Debug"; }
-        }
+        public string ShortTitle => "Debug";
 
-        public int Count
-        {
-            get { return _count; }
-        }
+        public int Count => _count;
 
         public void Dispose()
         {

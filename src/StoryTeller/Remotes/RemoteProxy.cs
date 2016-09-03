@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NET46
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
@@ -10,6 +11,7 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Remotes
 {
+
     public class RemoteProxy : MarshalByRefObject, IDisposable
     {
         private object _controller;
@@ -165,4 +167,7 @@ namespace StoryTeller.Remotes
         }
 
     }
+
 }
+
+#endif

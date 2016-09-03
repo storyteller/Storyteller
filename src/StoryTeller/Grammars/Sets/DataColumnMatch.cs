@@ -1,3 +1,4 @@
+#if NET46
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -37,7 +38,7 @@ namespace StoryTeller.Grammars.Sets
 
         public CellModifications CellModifications { get; private set; }
 
-
+                        
 
         private void assertColumnExists(DataRow row)
         {
@@ -67,3 +68,5 @@ namespace StoryTeller.Grammars.Sets
         } 
     }
 }
+
+#endif

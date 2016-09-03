@@ -5,7 +5,9 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Messages
 {
+#if NET46
     [Serializable]
+#endif
     public class QueueState : ClientMessage, IBatchedMessage
     {
         public QueueState() : base("queue-state")
