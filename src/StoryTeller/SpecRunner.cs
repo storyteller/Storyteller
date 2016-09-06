@@ -36,7 +36,9 @@ namespace StoryTeller
         public SpecRunner(string specDirectory = null)
         {
             Debug.WriteLine("SpecRunner is starting up for system " + typeof(T).FullName);
+#if NET46
             Debug.WriteLine("using {0} as the configuration file", AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+#endif
 
             SpecDirectory = specDirectory ?? GuessSpecDirectory();
 

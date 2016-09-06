@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
@@ -15,9 +16,9 @@ namespace StoryTeller.Grammars.Decisions
         public TableLineGrammar(IBeforeAndAfter target)
         {
             _target = target;
-            foreach (var property in target.GetType().GetProperties())
+            foreach (var property in target.GetType().GetTypeInfo().GetProperties())
             {
-                if (property.DeclaringType == typeof (object) || property.DeclaringType.Assembly == GetType().Assembly)
+                if (property.DeclaringType == typeof (object) || property.DeclaringType.GetTypeInfo().Assembly == GetType().GetTypeInfo().Assembly)
                 {
                     continue;
                 }

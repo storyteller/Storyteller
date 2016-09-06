@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 using Baseline;
 
 namespace StoryTeller.Conversion
@@ -11,7 +12,7 @@ namespace StoryTeller.Conversion
             if (!type.IsConcrete()) {
                 return null;
             }
-            var constructor = type.GetConstructor (new [] { typeof(string) });
+            var constructor = type.GetTypeInfo().GetConstructor (new [] { typeof(string) });
             if (constructor == null) {
                 return null;
             }

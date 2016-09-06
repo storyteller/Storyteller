@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 using Baseline;
 using StoryTeller.Util;
@@ -36,7 +37,11 @@ namespace StoryTeller.Model.Persistence
         public static void FillBody(Specification spec)
         {
             var document = new XmlDocument();
-            document.Load(spec.Filename);
+            using (var stream = new FileStream(spec.Filename, FileMode.Open))
+            {
+                document.Load(stream);
+            }
+
 
             ReadBody(document, spec);
 

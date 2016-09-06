@@ -9,7 +9,7 @@ namespace StoryTeller.Model
 {
     public class FixtureLibrary
     {
-        private static readonly string AssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+        private static readonly string AssemblyName = typeof(FixtureLibrary).GetTypeInfo().Assembly.GetName().Name;
 
         public static readonly LightweightCache<Type, Fixture> FixtureCache =
             new LightweightCache<Type, Fixture>(type => (Fixture) Activator.CreateInstance(type));

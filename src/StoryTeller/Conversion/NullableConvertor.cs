@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using Baseline;
 
 namespace StoryTeller.Conversion
@@ -18,7 +19,7 @@ namespace StoryTeller.Conversion
             if (!type.IsNullable()) return null;
 
 
-            var innerType = type.GetGenericArguments().First();
+            var innerType = type.GetTypeInfo().GetGenericArguments().First();
             var inner = _conversions.FindConverter(innerType);
 
             return str =>
