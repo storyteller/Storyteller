@@ -200,7 +200,7 @@ namespace StoryTeller.Model
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue(((DateTime) value).ToLongDateString());
+            writer.WriteValue(((DateTime) value).ToString("D"));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,

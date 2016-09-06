@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Baseline;
 
 namespace StoryTeller.Equivalence
@@ -29,7 +30,7 @@ namespace StoryTeller.Equivalence
 
         public Func<object, object, bool> CreateComparison(Type type, EquivalenceChecker checker)
         {
-            var elementType = type.GetGenericArguments().First();
+            var elementType = type.GetTypeInfo().GetGenericArguments().First();
             var inner = checker.CheckerFor(elementType);
 
             return (expected, actual) => new CollectionComparer(inner).Matches(expected, actual);

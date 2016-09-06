@@ -10,7 +10,7 @@ namespace StoryTeller.Messages
         }
 
         public Specification spec;
-        public string lastSaved = DateTime.Now.ToLongTimeString();
+        public string lastSaved = DateTime.Now.ToString("T");
 
         protected bool Equals(SpecSaved other)
         {

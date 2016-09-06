@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Baseline;
 using Baseline.Reflection;
 using StoryTeller.Model;
@@ -32,7 +32,7 @@ namespace StoryTeller.Grammars.Paragraphs
 
         public ObjectVerificationExpression<T> CheckAllSimpleProperties()
         {
-            typeof (T)
+            typeof (T).GetTypeInfo()
                 .GetProperties()
                 .Where(x => x.PropertyType.IsSimple())
                 .Each(prop =>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Baseline;
 
 using Newtonsoft.Json;
@@ -16,7 +17,7 @@ namespace StoryTeller.Remotes.Messaging
 
         static JsonSerialization()
         {
-            var types = typeof (JsonSerialization).Assembly.GetExportedTypes()
+            var types = typeof (JsonSerialization).GetTypeInfo().Assembly.GetExportedTypes()
                 .Where(x => x.IsConcreteWithDefaultCtor() && x.IsConcreteTypeOf<ClientMessage>());
 
             types.Each(x =>

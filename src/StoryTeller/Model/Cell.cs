@@ -130,7 +130,7 @@ namespace StoryTeller.Model
                 editor = "boolean";
                 DefaultValue = false.ToString();
             }
-            else if (type.IsEnum)
+            else if (type.GetTypeInfo().IsEnum)
             {
                 editor = "select";
                 options = Option.For(Enum.GetNames(type));
