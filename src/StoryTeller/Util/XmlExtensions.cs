@@ -16,7 +16,11 @@ namespace StoryTeller.Util
 
         public static XmlDocument FromFile(this XmlDocument document, string fileName)
         {
-            document.Load(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open))
+            {
+                document.Load(stream);
+            }
+
             return document;
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -10,7 +11,7 @@ namespace StoryTeller.Model.Persistence
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(T).IsAssignableFrom(objectType);
+            return typeof(T).GetTypeInfo().IsAssignableFrom(objectType);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, 

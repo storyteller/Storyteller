@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 namespace StoryTeller.Conversion
 {
@@ -7,7 +8,7 @@ namespace StoryTeller.Conversion
     {
         public Func<string, object> ConverterFor(Type type)
         {
-            if (type.IsEnum)
+            if (type.GetTypeInfo().IsEnum)
             {
                 return x => Enum.Parse(type, x);
             }

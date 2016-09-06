@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model;
@@ -89,7 +90,6 @@ namespace StoryTeller
             {
                 while (clock.Elapsed < timeout)
                 {
-                    Thread.Yield();
                     Thread.Sleep(millisecondPolling);
 
                     if (condition()) return true;

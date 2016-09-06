@@ -41,6 +41,7 @@ namespace StoryTeller.Engine
                 {
                     execute();
                 }
+
                 catch (ThreadAbortException)
                 {
                     // nothing, it's handled below
@@ -152,6 +153,7 @@ namespace StoryTeller.Engine
             _context.Dispose();
             _request.Cancel();
             _wasCancelled = true;
+
             _thread.Abort();
 
             _reset.Set();

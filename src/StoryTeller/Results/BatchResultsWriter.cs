@@ -33,7 +33,7 @@ namespace StoryTeller.Results
 
         private static string readFile(string name)
         {
-            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(name);
+            var stream = typeof(BatchResultsWriter).GetTypeInfo().Assembly.GetManifestResourceStream(name);
             var reader = new StreamReader(stream);
             return reader.ReadToEnd();
         }
