@@ -22,9 +22,13 @@ namespace StorytellerDocGen.Commands
                     throw new FileNotFoundException("Cannot find a command usage file for {0} at {1}".ToFormat(app, file));
 
                 var serializer = new XmlSerializer(typeof(CommandLineApplicationReport));
-                using (var reader = new StreamReader(file))
+
+                using (var stream = new FileStream(file, FileMode.Open))
                 {
-                    return serializer.Deserialize(reader).As<CommandLineApplicationReport>();
+                    using (var reader = new StreamReader(stream))
+                    {
+                        return serializer.Deserialize(reader).As<CommandLineApplicationReport>();
+                    }
                 }
             });
         }
