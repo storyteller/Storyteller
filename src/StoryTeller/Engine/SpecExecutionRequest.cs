@@ -75,7 +75,11 @@ namespace StoryTeller.Engine
             var culture = Project.CurrentProject?.Culture;
             if (culture.IsNotEmpty())
             {
+#if NET46
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+#else
+                CultureInfo.CurrentCulture = new CultureInfo(culture);
+#endif
             }
 
             performAction(() =>

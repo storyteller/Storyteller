@@ -12,7 +12,11 @@ namespace StoryTeller.Results
 
         public void StartListening()
         {
+#if NET46
             Debug.Listeners.Add(this);
+#else
+            Trace.Listeners.Add(this);
+#endif
         }
 
         public string ToHtml()
@@ -28,7 +32,11 @@ namespace StoryTeller.Results
 
         public void Dispose()
         {
+#if NET46
             Debug.Listeners.Remove(this);
+#else
+            Trace.Listeners.Remove(this);
+#endif
         }
 
         public override void Write(string message)
