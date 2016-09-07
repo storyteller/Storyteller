@@ -24,40 +24,43 @@ namespace StorytellerDocGen.Todos
             var i = 0;
             var regex = @"TODO\((.*?)\)";
 
-            using (StreamReader streamReader = new StreamReader(topic.File))
+            using (var stream = new FileStream(topic.File, FileMode.Open))
             {
-                string text;
-                while ((text = streamReader.ReadLine()) != null)
+                using (StreamReader streamReader = new StreamReader(stream))
                 {
-                    i++;
-
-                    if (text.Contains("TODO"))
+                    string text;
+                    while ((text = streamReader.ReadLine()) != null)
                     {
-                        var matches = Regex.Matches(text, regex);
-                        foreach (Match match in matches)
-                        {
-                            var message = match.Groups[1].Value.Trim();
-                            yield return new TodoTask
-                            {
-                                File = topic.File,
-                                Key = topic.Key,
-                                Line = i,
-                                Message = message
-                            };
-                        }
+                        i++;
 
-                        if (matches.Count == 0)
+                        if (text.Contains("TODO"))
                         {
-                            var index = text.IndexOf("TODO");
-                            var message = text.Substring(index + 4).Trim();
-
-                            yield return new TodoTask
+                            var matches = Regex.Matches(text, regex);
+                            foreach (Match match in matches)
                             {
-                                File = topic.File,
-                                Key = topic.Key,
-                                Line = i,
-                                Message = message
-                            };
+                                var message = match.Groups[1].Value.Trim();
+                                yield return new TodoTask
+                                {
+                                    File = topic.File,
+                                    Key = topic.Key,
+                                    Line = i,
+                                    Message = message
+                                };
+                            }
+
+                            if (matches.Count == 0)
+                            {
+                                var index = text.IndexOf("TODO");
+                                var message = text.Substring(index + 4).Trim();
+
+                                yield return new TodoTask
+                                {
+                                    File = topic.File,
+                                    Key = topic.Key,
+                                    Line = i,
+                                    Message = message
+                                };
+                            }
                         }
                     }
                 }
