@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using Oakton;
 
 namespace StorytellerDocGen
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
+            var executor = CommandExecutor.For(_ =>
+            {
+                _.RegisterCommands(typeof(Program).GetTypeInfo().Assembly);
+            });
+
+
+            return executor.Execute(args);
         }
     }
 }

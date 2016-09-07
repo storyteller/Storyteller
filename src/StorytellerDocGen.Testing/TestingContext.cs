@@ -20,8 +20,8 @@ namespace StorytellerDocGen.Testing
 
         public static string FindProjectFolder()
         {
-            var path = ".".ToFullPath();
-            while (!path.EndsWith("Storyteller.Testing", StringComparison.OrdinalIgnoreCase))
+            var path = AppContext.BaseDirectory;
+            while (!path.EndsWith("StorytellerDocGen.Testing", StringComparison.OrdinalIgnoreCase))
             {
                 path = path.ParentDirectory();
             }

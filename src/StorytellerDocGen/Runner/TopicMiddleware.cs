@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Baseline;
@@ -27,7 +28,6 @@ namespace StorytellerDocGen.Runner
 
             var topicAssembly = typeof(TopicMiddleware).GetAssembly();
 
-            // TODO -- pretty likely this is going to end up being wrong w/ the Stream names
             var stream = topicAssembly.GetManifestResourceStream("StorytellerDocGen.Runner.WebsocketsRefresh.txt");
 
             _webSocketScript = stream.ReadAllText();
@@ -38,30 +38,31 @@ namespace StorytellerDocGen.Runner
         {
             var path = context.Request.Path.Value.TrimStart('/');
 
+            var response = context.Response;
             if (path == "topics.js")
             {
-                context.Response.Headers["content-type"] = "text/javascript";
-                return context.Response.WriteAsync(_topicJS);
+                response.Headers["content-type"] = "text/javascript";
+                return response.WriteAsync(_topicJS);
             }
 
             var topic = _project.FindTopicByUrl(path);
             if (topic == null)
             {
-                context.Response.StatusCode = 404;
-                context.Response.Headers["content-type"] = "text/plain";
+                response.StatusCode = 404;
+                response.Headers["content-type"] = "text/plain";
 
-                return context.Response.WriteAsync("Unknown topic");
+                return response.WriteAsync("Unknown topic");
             }
 
-            context.Response.Headers["cache-control"] = "no-cache, no-store, must-revalidate";
-            context.Response.Headers["pragma"] = "no-cache";
-            context.Response.Headers["expires"] = "0";
+            response.Headers["cache-control"] = "no-cache, no-store, must-revalidate";
+            response.Headers["pragma"] = "no-cache";
+            response.Headers["expires"] = "0";
 
             var html = GenerateHtml(topic);
 
-            context.Response.Headers["content-type"] = "text/html";
+            response.Headers["content-type"] = "text/html";
 
-            return context.Response.WriteAsync(html);
+            return response.WriteAsync(html);
 
         }
 

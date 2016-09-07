@@ -20,10 +20,7 @@ namespace StorytellerDocGen.Transformation
             _top = top;
         }
 
-        public string Key
-        {
-            get { return "linkto"; }
-        }
+        public string Key => "linkto";
 
         public string Transform(Topic current, string data)
         {
@@ -57,7 +54,7 @@ namespace StorytellerDocGen.Transformation
 
             for (int i = 1; i < props.Length; i++)
             {
-                if (props[i].StartsWith("title=", StringComparison.InvariantCulture))
+                if (props[i].StartsWith("title=", StringComparison.Ordinal))
                 {
                     title = props[i].Split('=').Last().Trim();
                 }

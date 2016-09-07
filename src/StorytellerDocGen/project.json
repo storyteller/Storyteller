@@ -7,7 +7,7 @@
       "../CommonAssemblyInfo.cs",
       "../ST/WebSocketsHandler.cs"
     ],
-    "embed": "../ST/topics.js"
+    "embed": [ "../ST/topics.js", "Runner/WebsocketsRefresh.txt" ]
   },
 
   "dependencies": {
