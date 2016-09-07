@@ -42,10 +42,12 @@ namespace StoryTeller.Engine
                     execute();
                 }
 
+#if NET46
                 catch (ThreadAbortException)
                 {
                     // nothing, it's handled below
-                }
+                } 
+#endif
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
@@ -154,7 +156,9 @@ namespace StoryTeller.Engine
             _request.Cancel();
             _wasCancelled = true;
 
+#if NET46
             _thread.Abort();
+#endif
 
             _reset.Set();
 

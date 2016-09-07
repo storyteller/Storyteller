@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Baseline;
+using Microsoft.Extensions.DependencyModel;
 
 namespace StoryTeller.Model
 {
@@ -44,6 +45,7 @@ namespace StoryTeller.Model
 
         public static FixtureLibrary CreateForAppDomain(CellHandling cellHandling)
         {
+#if NET46
             var currentDomain = AppDomain.CurrentDomain;
             var assemPath = currentDomain.BaseDirectory;
             var binPath = currentDomain.SetupInformation.PrivateBinPath;
@@ -58,6 +60,13 @@ namespace StoryTeller.Model
                 .Select(
                     type => CreateCompiledFixture(cellHandling, type));
 
+#else
+            var fixtures = GetReferencingAssemblies("Storyteller")
+                .SelectMany(FixtureTypesFor)
+                .Select(
+                    type => CreateCompiledFixture(cellHandling, type));
+#endif
+
 
             var library = new FixtureLibrary();
 
@@ -70,6 +79,7 @@ namespace StoryTeller.Model
             return library;
         }
 
+#if NET46
         private static bool referencesStoryteller(Assembly x)
         {
             return x.GetReferencedAssemblies().Any(assem => assem.Name == AssemblyName);
@@ -111,6 +121,31 @@ namespace StoryTeller.Model
                 }
             }
         }
+#else
+        // Polyfill lifted from http://www.michael-whelan.net/replacing-appdomain-in-dotnet-core/
+        public static IEnumerable<Assembly> GetReferencingAssemblies(string assemblyName)
+        {
+            var assemblies = new List<Assembly>();
+            var dependencies = DependencyContext.Default.RuntimeLibraries;
+            foreach (var library in dependencies)
+            {
+                if (IsCandidateLibrary(library, assemblyName))
+                {
+                    var assembly = Assembly.Load(new AssemblyName(library.Name));
+                    assemblies.Add(assembly);
+                }
+            }
+            return assemblies;
+        }
+
+        private static bool IsCandidateLibrary(RuntimeLibrary library, string assemblyName)
+        {
+            return library.Name == (assemblyName)
+                || library.Dependencies.Any(d => d.Name.StartsWith(assemblyName));
+        }
+#endif
+
+
 
         public static CompiledFixture CreateCompiledFixture(CellHandling cellHandling, Type type)
         {

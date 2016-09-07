@@ -1,12 +1,13 @@
 {
   "buildOptions": {
+    "outputName": "Storyteller",
     "debugType": "portable",
     "emitEntryPoint": false,
     "compile": [
       "**/*.cs",
       "../CommonAssemblyInfo.cs"
     ],
-    "embed": ["../../client/public/**/*.css", "../ST/batch-bundle.js"]
+    "embed": [ "../../client/public/**/*.css", "../ST/batch-bundle.js" ]
   },
   "version": "3.0.0-alpha-*",
   "title": "Storyteller",
@@ -44,13 +45,15 @@
     },
     "netstandard1.6": {
       "dependencies": {
+        "System.Diagnostics.Debug": "4.0.11",
         "System.Data.Common": "4.1.0",
         "System.Xml.XmlDocument": "4.0.1",
+        "System.Net.NameResolution": "4.0.0",
         "System.Net.Sockets": "4.1.0",
         "System.Diagnostics.TextWriterTraceListener": "4.0.0",
         "System.Threading.Thread": "4.0.0",
         "System.Threading.Timer": "4.0.1",
-        "System.Threading": "4.0.11" 
+        "System.Threading": "4.0.11"
       }
     }
   }
