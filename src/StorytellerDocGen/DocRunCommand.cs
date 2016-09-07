@@ -18,7 +18,16 @@ namespace StorytellerDocGen
                     
                     Console.WriteLine("Launching the browser to " + project.BaseAddress);
 
-                    Process.Start(project.BaseAddress);
+                    try
+                    {
+                        Process.Start(project.BaseAddress);
+                    }
+                    catch (System.Exception)
+                    {
+                        // Nothing
+
+                    }
+
                     
 
                     tellUsersWhatToDo();

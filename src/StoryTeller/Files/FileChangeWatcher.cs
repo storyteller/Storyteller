@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Baseline;
+using Microsoft.AspNetCore.Razor.Compilation.TagHelpers;
 
 namespace StoryTeller.Files
 {
@@ -70,7 +71,15 @@ namespace StoryTeller.Files
 
             if (!_latched && !_disposed)
             {
-                processChanges();
+                try
+                {
+                    processChanges();
+                }
+                catch (Exception)
+                {
+                    // nothing here
+                }
+
             }
 
             if (_disposed) return;
@@ -81,6 +90,7 @@ namespace StoryTeller.Files
         private void processChanges()
         {
             var files = findFiles();
+
             var changes = _tracking.DetectChanges(files);
             if (!changes.HasChanges())
             {
