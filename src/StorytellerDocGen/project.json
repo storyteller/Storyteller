@@ -20,7 +20,8 @@
     "HtmlTags.AspNetCore": "4.1.0",
     "Baseline": "1.1.0",
     "StructureMap": "4.4.0",
-    "StoryTeller":  {"target": "project"} 
+    "StoryTeller":  {"target": "project"} ,
+    "System.AppContext": "4.1.0"
   },
 
   "frameworks": {

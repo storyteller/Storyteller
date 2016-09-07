@@ -1,10 +1,14 @@
 ﻿using System.Linq;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using Baseline;
 using HtmlTags;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Oakton;
 using StorytellerDocGen.Topics;
 using StorytellerDocGen.Transformation;
 using StructureMap.TypeRules;
