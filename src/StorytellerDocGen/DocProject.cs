@@ -191,7 +191,7 @@ namespace StorytellerDocGen
                                     if (topic != null)
                                     {
                                         try {
-                                                                                        var start = new ProcessStartInfo();
+                                            var start = new ProcessStartInfo();
                                             start.UseShellExecute = true;
                                             start.FileName = "open";
                                             start.Arguments = topic.File;
@@ -199,8 +199,6 @@ namespace StorytellerDocGen
                                             
                                         }
                                         catch (Exception ex){
-Console.WriteLine(ex.ToString());
-
                                             Process.Start(topic.File);
                                         }
 
