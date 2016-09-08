@@ -20,7 +20,6 @@ namespace ST.Client
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
-        private readonly ResultsCache _results = new ResultsCache();
 
 
         public PersistenceController(IClientConnector client, ISpecFileWatcher watcher)
@@ -31,7 +30,7 @@ namespace ST.Client
 
         public SpecExecutionCompleted[] AllCachedResults()
         {
-            return _results.AllResults().ToArray();
+            return Results.AllResults().ToArray();
         }
 
         public void SetLifecycle(string id, Lifecycle lifecycle)
@@ -43,17 +42,18 @@ namespace ST.Client
             {
                 spec.Lifecycle = lifecycle;
                 spec.ReadBody();
-                XmlWriter.WriteToXml(spec).Save(spec.Filename);
+
+                using (var stream = new FileStream(spec.Filename, FileMode.Create))
+                {
+                    XmlWriter.WriteToXml(spec).Save(stream);
+                }
             });
 
             var data = LoadSpecification(id);
             _client.SendMessageToClient(data);
         }
 
-        public ResultsCache Results
-        {
-            get { return _results; }
-        }
+        public ResultsCache Results { get; } = new ResultsCache();
 
         public Specification LoadSpecificationById(string id)
         {
@@ -206,7 +206,7 @@ namespace ST.Client
 
             _lock.Write(() =>
             {
-                _results.ClearAll();
+                Results.ClearAll();
                 SendHierarchyToClient();
             });
         }
@@ -232,7 +232,7 @@ namespace ST.Client
             {
                 data = _hierarchy.Specifications[id],
                 id = id,
-                results = _results.ResultsFor(id).ToArray()
+                results = Results.ResultsFor(id).ToArray()
             };
 
             return data;
@@ -263,7 +263,7 @@ namespace ST.Client
                         {
                             data = node,
                             id = node.id,
-                            results = _results.ResultsFor(node.id).ToArray()
+                            results = Results.ResultsFor(node.id).ToArray()
                         });
                     }
 
@@ -309,7 +309,7 @@ namespace ST.Client
 
         public void SendHierarchyToClient()
         {
-            var message = new HierarchyLoaded(_hierarchy.Top, _results);
+            var message = new HierarchyLoaded(_hierarchy.Top, Results);
 
             _client.SendMessageToClient(message);
         }
@@ -334,7 +334,7 @@ namespace ST.Client
 
         public void Receive(SpecExecutionCompleted message)
         {
-            _results.Store(message);
+            Results.Store(message);
         }
     }
 }

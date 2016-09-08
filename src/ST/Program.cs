@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Oakton;
 using RunCommand = ST.CommandLine.RunCommand;
 
@@ -10,8 +11,8 @@ namespace ST
         {
             var executor = CommandExecutor.For(_ =>
             {
-                _.RegisterCommands(typeof(RunCommand).Assembly);
-                _.RegisterCommands(typeof(Program).Assembly);
+                _.RegisterCommands(typeof(RunCommand).GetTypeInfo().Assembly);
+                _.RegisterCommands(typeof(Program).GetTypeInfo().Assembly);
             });
 
 

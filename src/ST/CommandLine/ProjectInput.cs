@@ -70,6 +70,21 @@ namespace ST.CommandLine
 
         public RemoteController BuildRemoteController()
         {
+            var project = configureProject();
+
+
+            // This will change later w/ the new separate process lifecycle
+#if NET46
+            var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
+#else
+            var controller = new RemoteController(project, new ProcessRunnerSystemLifecycle(project));
+#endif
+
+            return controller;
+        }
+
+        private Project configureProject()
+        {
             var path = Path.ToFullPath();
             var project = Project.LoadForFolder(path);
 
@@ -83,41 +98,31 @@ namespace ST.CommandLine
                 project.ConfigFile = ConfigFlag;
             }
 
-
             // This will change later w/ the new separate process lifecycle
             var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
-            controller.Project.Culture = CultureFlag;
 			controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
 
-
+            project.Culture = CultureFlag;
 
 
             if (TimeoutFlag.HasValue)
             {
-                controller.Project.StopConditions.TimeoutInSeconds = TimeoutFlag.Value;
+                project.StopConditions.TimeoutInSeconds = TimeoutFlag.Value;
             }
 
             if (TeamCityTracingFlag)
             {
-                controller.Project.TracingStyle = "TeamCity";
-            }
-
-            if (WebSocketAddressFlag.IsNotEmpty())
-            {
-                controller.WebSocketAddress = WebSocketAddressFlag;
+                project.TracingStyle = "TeamCity";
             }
 
             if (SystemNameFlag.IsNotEmpty())
             {
-                controller.Project.SystemTypeName = SystemNameFlag;
+                project.SystemTypeName = SystemNameFlag;
             }
 
-            controller.Project.MaxRetries = RetriesFlag;
-            controller.Project.Profile = ProfileFlag;
-
-
-
-            return controller;
+            project.MaxRetries = RetriesFlag;
+            project.Profile = ProfileFlag;
+            return project;
         }
 
         public void CreateMissingSpecFolder()
