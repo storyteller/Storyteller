@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Xml;
 using Baseline;
@@ -8,6 +9,18 @@ namespace StoryTeller.Model.Persistence
 {
     public static class XmlExtensions
     {
+#if !NET46
+        public static void Save(this XmlDocument document, string file)
+        {
+            using (var stream = new FileStream(file, FileMode.Open))
+            {
+                document.Save(stream);
+                stream.Flush();
+            }
+        }
+#endif
+
+
         public static string ReadId(this XmlElement element)
         {
             var id = element.GetAttribute(XmlConstants.Id);
