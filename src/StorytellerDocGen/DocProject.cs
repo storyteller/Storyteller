@@ -17,7 +17,6 @@ using StorytellerDocGen.Topics;
 using StorytellerDocGen.Transformation;
 using StoryTeller;
 using StructureMap;
-using ST;
 
 namespace StorytellerDocGen
 {

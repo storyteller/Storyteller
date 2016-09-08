@@ -4,8 +4,7 @@
     "emitEntryPoint": true,
     "compile": [
       "**/*.cs",
-      "../CommonAssemblyInfo.cs",
-      "../ST/WebSocketsHandler.cs"
+      "../CommonAssemblyInfo.cs"
     ],
     "embed": [ "../ST/topics.js", "Runner/WebsocketsRefresh.txt" ]
   },

@@ -1,7 +1,8 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "debugType": "portable"
+    "debugType": "portable",
+    "emitEntryPoint": true
   },
   "dependencies": {
     "StoryTeller": { "target": "project" },
@@ -9,6 +10,7 @@
   },
   "frameworks": {
     "net46": {
-	  }
+    },
+    "netcoreapp1.0": {}
   }
 }
