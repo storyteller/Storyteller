@@ -7,7 +7,8 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    
+        
+#if NET46       
     public class DataColumnMatchTester
     {
         public DataColumnMatchTester()
@@ -68,4 +69,5 @@ namespace StoryTeller.Testing.Grammars.Sets
             _matchCity.GetValue(row).ShouldBe("Paris");
         }
     }
+#endif
 }

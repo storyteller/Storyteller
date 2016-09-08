@@ -6,7 +6,8 @@ using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Testing.Grammars.Sets
 {
-    
+
+#if NET46       
     public class data_table_verification_specs : SpecRunningContext
     {
         [Fact]
@@ -126,4 +127,5 @@ Name:DataTable
             return table;
         }
     }
+#endif
 }

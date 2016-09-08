@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using Baseline;
 using Xunit;
 using StoryTeller.Engine.Batching;
@@ -33,8 +34,8 @@ namespace StoryTeller.Testing
         //[Fact]
         public void what_are_the_client_message_names()
         {
-            var types = typeof (ClientMessage).Assembly.GetExportedTypes()
-                .Concat(typeof (ClientConnector).Assembly.GetExportedTypes())
+            var types = typeof (ClientMessage).GetTypeInfo().Assembly.GetExportedTypes()
+                .Concat(typeof (ClientConnector).GetTypeInfo().Assembly.GetExportedTypes())
                 .Where(x => x.IsConcrete() && x.CanBeCastTo<ClientMessage>()).Select(x => x.Name).OrderBy(x => x).ToArray();
 
             types.Each(x => Debug.WriteLine(x));

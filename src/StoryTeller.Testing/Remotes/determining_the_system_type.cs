@@ -16,7 +16,11 @@ namespace StoryTeller.Testing.Remotes
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
             var project = Project.LoadForFolder(path);
+#if NET46       
             var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
+#else
+            var controller = new RemoteController(project, new ProcessRunnerSystemLifecycle(project));
+#endif
         }
     }
 }
