@@ -175,17 +175,39 @@ namespace StorytellerDocGen
                             switch (http.Request.Path)
                             {
                                 case "/refresh":
+                                Console.WriteLine("Hey, I got the order to do the hard refresh!");
                                     await HardRefresh().ConfigureAwait(false);
 
                                     _refresher.RefreshPage();
                                     break;
 
                                 case "/open":
+                                
                                     var url = new Uri(http.Request.Headers["referer"]);
+
+                                    Console.WriteLine("Open requested to " + url);
 
                                     var topic = FindTopicByUrl(url.AbsolutePath.TrimStart('/'));
                                     if (topic != null)
-                                        Process.Start(topic.File);
+                                    {
+                                        try {
+                                                                                        var start = new ProcessStartInfo();
+                                            start.UseShellExecute = true;
+                                            start.FileName = "open";
+                                            start.Arguments = topic.File;
+                                            Process.Start(start);
+                                            
+                                        }
+                                        catch (Exception ex){
+Console.WriteLine(ex.ToString());
+
+                                            Process.Start(topic.File);
+                                        }
+
+
+                                        
+                                    }
+                                        
 
                                     break;
                             }
