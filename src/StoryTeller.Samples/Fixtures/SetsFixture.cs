@@ -12,6 +12,7 @@ namespace StoryTeller.Samples.Fixtures
         public string Name { get; set; }
     }
 
+#if NET46
     public class DataTableFixture : Fixture
     {
         private DataTable _table = new DataTable();
@@ -39,6 +40,7 @@ namespace StoryTeller.Samples.Fixtures
 
 
     }
+#endif
 
     public class SetsFixture : Fixture
     {

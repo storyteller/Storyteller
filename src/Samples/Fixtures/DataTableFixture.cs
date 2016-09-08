@@ -5,6 +5,7 @@ using StoryTeller.Grammars.Tables;
 
 namespace Samples.Fixtures
 {
+#if NET46
     public class DataTableFixture : Fixture
     {
         private readonly DataTable _table = new DataTable();
@@ -36,6 +37,7 @@ namespace Samples.Fixtures
             return _table;
         }
 
+
         // SAMPLE: using-verify-data-table
         public IGrammar VerifyRows()
         {
@@ -49,8 +51,10 @@ namespace Samples.Fixtures
                     x.Column<string>("Zip").Header("Postal Code");
                 });
         }
-        // ENDSAMPLE
+        // ENDSAMPLE 
+
 
 
     }
+#endif
 }

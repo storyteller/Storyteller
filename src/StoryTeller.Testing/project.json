@@ -21,7 +21,19 @@
   },
   "testRunner": "xunit",
   "frameworks": {
-    "net46": {}
-  },
-  "netstandard1.6": {}
+    "net46": {} ,
+
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        }
+      },
+      "imports": [
+        "dotnet5.4",
+        "portable-net451+win8"
+      ]
+    }
+  }
 }

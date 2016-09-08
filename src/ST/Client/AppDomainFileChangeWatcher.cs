@@ -39,6 +39,7 @@ namespace ST.Client
 
         public void Dispose()
         {
+            Console.WriteLine("Shutting down the AppDomain file watcher");
             _watcher.Dispose();
         }
 
