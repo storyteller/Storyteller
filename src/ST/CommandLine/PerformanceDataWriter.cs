@@ -10,30 +10,33 @@ namespace ST.CommandLine
     {
         public static void WriteCSV(BatchRunResponse results, string file)
         {
-            using (var writer = new StreamWriter(file))
+            using (var stream = new FileStream(file, FileMode.Create))
             {
-
-                results.records.Each(record =>
+                using (var writer = new StreamWriter(stream))
                 {
-                    var suite = record.specification.SuitePath();
-                    var name = record.specification.name.Replace(',', ' ');
-                    var id = record.specification.id;
 
-                    record.results.Performance.Each(x =>
+                    results.records.Each(record =>
                     {
-                        writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7}",
-                            id,
-                            suite,
-                            name,
-                            x.Type,
-                            x.Subject,
-                            x.Duration,
-                            x.Start,
-                            x.End
+                        var suite = record.specification.SuitePath();
+                        var name = record.specification.name.Replace(',', ' ');
+                        var id = record.specification.id;
+
+                        record.results.Performance.Each(x =>
+                        {
+                            writer.WriteLine("{0},{1},{2},{3},{4},{5},{6},{7}",
+                                id,
+                                suite,
+                                name,
+                                x.Type,
+                                x.Subject,
+                                x.Duration,
+                                x.Start,
+                                x.End
                             );
 
+                        });
                     });
-                });
+                }
             }
         }
 

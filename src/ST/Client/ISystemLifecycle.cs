@@ -15,6 +15,7 @@ namespace ST.Client
         void Start(EngineMode mode);
     }
 
+#if NET46
     public class AppDomainSystemLifecycle : ISystemLifecycle
     {
         private readonly RemoteDomainExpression _remoteSetup = new RemoteDomainExpression();
@@ -90,4 +91,34 @@ namespace ST.Client
             }
         }
     }
+
+
+#else
+    public class ProcessRunnerSystemLifecycle : ISystemLifecycle
+    {
+        public ProcessRunnerSystemLifecycle(Project project)
+        {
+        }
+
+        public void AssertValid()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Teardown()
+        {
+            throw new NotImplementedException();
+        }
+
+        public QueueState QueueState()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Start(EngineMode mode)
+        {
+            throw new NotImplementedException();
+        }
+    }
+#endif
 }

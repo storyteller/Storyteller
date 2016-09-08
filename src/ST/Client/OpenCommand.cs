@@ -22,10 +22,12 @@ namespace ST.Client
 
                 Process.Start(runner.BaseAddress);
 
+#if NET46
                 AppDomain.CurrentDomain.DomainUnload += (sender, args) =>
                 {
                     runner.SafeDispose();
                 };
+#endif
 
                 Console.CancelKeyPress += (s, e) =>
                 {
@@ -35,6 +37,10 @@ namespace ST.Client
 
                 tellUsersWhatToDo();
                 reset.WaitOne();
+
+#if !NET46
+                runner.Dispose();
+#endif
             }
 
             return true;
