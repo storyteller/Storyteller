@@ -24,8 +24,11 @@ namespace StorytellerDocGen
                     }
                     catch (System.Exception)
                     {
-                        // Nothing
-
+                        var start = new ProcessStartInfo();
+                        start.UseShellExecute = false;
+                        start.FileName = "open";
+                        start.Arguments = project.BaseAddress;
+                        Process.Start(start);
                     }
 
                     
