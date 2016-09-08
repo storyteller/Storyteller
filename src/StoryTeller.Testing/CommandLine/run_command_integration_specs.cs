@@ -24,7 +24,11 @@ namespace StoryTeller.Testing.CommandLine
 
 
             var project = Project.LoadForFolder(directory);
+#if NET46       
             theController = new RemoteController(project, new AppDomainSystemLifecycle(project));
+#else
+            throw new NotImplementedException("Not done yet for CoreCLR");
+#endif
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
             theController = theInput.BuildRemoteController();

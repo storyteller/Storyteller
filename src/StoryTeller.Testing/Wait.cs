@@ -15,7 +15,9 @@ namespace StoryTeller.Testing
 
             while (clock.ElapsedMilliseconds < timeoutInMilliseconds)
             {
+#if NET46
                 Thread.Yield();
+#endif
                 Thread.Sleep(500);
 
                 if (condition()) return true;
