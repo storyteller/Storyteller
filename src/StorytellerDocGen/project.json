@@ -30,6 +30,7 @@
     },
     "netcoreapp1.0": {
       "dependencies": {
+        "System.Runtime.Extensions": "4.1.0",
         "Microsoft.NETCore.App": {
           "type": "platform",
           "version": "1.0.0"
