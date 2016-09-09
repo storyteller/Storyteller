@@ -7,20 +7,18 @@ namespace StoryTeller.Remotes
 {
     public class RemoteProxy : MarshalByRefObject, IDisposable
     {
-        private readonly EngineAgent _agent;
+        private EngineAgent _agent;
 
         public RemoteProxy()
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             AppDomain.CurrentDomain.DomainUnload += CurrentDomainOnDomainUnload;
-
-            _agent = new EngineAgent();
         }
 
 
         public void Dispose()
         {
-            _agent.Dispose();
+            _agent?.Dispose();
         }
 
         public override object InitializeLifetimeService()
@@ -30,11 +28,12 @@ namespace StoryTeller.Remotes
 
         public QueueState QueueState()
         {
-            return _agent.QueueState();
+            return _agent?.QueueState() ?? new QueueState();
         }
 
         public void Start(Project project)
         {
+            _agent = new EngineAgent(project.Port);
             _agent.Start(project);
         }
 
