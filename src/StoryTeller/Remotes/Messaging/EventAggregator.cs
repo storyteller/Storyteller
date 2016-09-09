@@ -21,6 +21,9 @@ namespace StoryTeller.Remotes.Messaging
 
         public static void Start(ISocketConnection sockets)
         {
+            // only start once
+            if (_sockets != null) return;
+
             _sockets = sockets;
             _cancellationSource = new CancellationTokenSource();
             Task.Factory.StartNew(read, _cancellationSource.Token);
