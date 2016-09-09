@@ -12,6 +12,8 @@ namespace ST.Client
         void AssertValid();
         void Teardown();
         QueueState QueueState();
+
+        // TODO -- make this return a Task<SystemRecycled>
         void Start(EngineMode mode);
     }
 
@@ -93,32 +95,5 @@ namespace ST.Client
     }
 
 
-#else
-    public class ProcessRunnerSystemLifecycle : ISystemLifecycle
-    {
-        public ProcessRunnerSystemLifecycle(Project project)
-        {
-        }
-
-        public void AssertValid()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Teardown()
-        {
-            throw new NotImplementedException();
-        }
-
-        public QueueState QueueState()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Start(EngineMode mode)
-        {
-            throw new NotImplementedException();
-        }
-    }
 #endif
 }

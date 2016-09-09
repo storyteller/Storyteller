@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -21,11 +20,11 @@ namespace StoryTeller.Engine
     public class SpecificationEngine : IDisposable, ISpecificationEngine
     {
         private readonly ConsumingQueue _executionQueue;
-        private ConsumingQueue _planning;
-        private ConsumingQueue _reader;
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
         private readonly Task _warmup;
+        private ConsumingQueue _planning;
+        private ConsumingQueue _reader;
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
         {
@@ -35,16 +34,14 @@ namespace StoryTeller.Engine
             _executionQueue = new ConsumingQueue(request =>
             {
                 if (request.IsCancelled)
-                {
                     return;
-                }
 
                 _warmup.Wait(30.Seconds());
 
                 observer.SpecStarted(request);
-                var results = _runner.Execute(request, _executionQueue );
+                var results = _runner.Execute(request, _executionQueue);
 
-                if (!request.IsCancelled && results != null)
+                if (!request.IsCancelled && (results != null))
                 {
                     // TODO -- combine the two things here?
                     request.SpecExecutionFinished(results);
@@ -55,9 +52,7 @@ namespace StoryTeller.Engine
             _warmup = _system.Warmup().ContinueWith(t =>
             {
                 if (t.IsFaulted)
-                {
                     _runner.MarkAsInvalid(t.Exception);
-                }
             });
         }
 
@@ -73,15 +68,9 @@ namespace StoryTeller.Engine
         public void Enqueue(SpecExecutionRequest request)
         {
             if (request.Specification.SpecType == SpecType.header)
-            {
                 _reader.Enqueue(request);
-            }
             else
-            {
                 _planning.Enqueue(request);
-            }
-
-           
         }
 
         public void CancelRunningSpec(string id)
@@ -123,8 +112,6 @@ namespace StoryTeller.Engine
                 system_name = _system.ToString(),
                 name = Path.GetFileName(AppContext.BaseDirectory)
             };
-
-            
         }
 
         private void startTheConsumingQueues(FixtureLibrary library)
@@ -148,9 +135,7 @@ namespace StoryTeller.Engine
             _reader = new ConsumingQueue(request =>
             {
                 if (request.Specification.SpecType == SpecType.header)
-                {
                     request.ReadXml();
-                }
 
                 _planning.Enqueue(request);
             });
@@ -167,6 +152,7 @@ namespace StoryTeller.Engine
             var recycled = tryToStart();
             EventAggregator.SendMessage(recycled);
         }
+
 
     }
 }
