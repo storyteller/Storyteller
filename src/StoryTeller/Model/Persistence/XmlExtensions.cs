@@ -12,7 +12,7 @@ namespace StoryTeller.Model.Persistence
 #if !NET46
         public static void Save(this XmlDocument document, string file)
         {
-            using (var stream = new FileStream(file, FileMode.Open))
+            using (var stream = new FileStream(file, FileMode.Create))
             {
                 document.Save(stream);
                 stream.Flush();
