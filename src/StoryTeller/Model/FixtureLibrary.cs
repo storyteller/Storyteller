@@ -61,7 +61,7 @@ namespace StoryTeller.Model
                     type => CreateCompiledFixture(cellHandling, type));
 
 #else
-            var fixtures = GetReferencingAssemblies("Storyteller")
+            var fixtures = GetReferencingAssemblies()
                 .SelectMany(FixtureTypesFor)
                 .Select(
                     type => CreateCompiledFixture(cellHandling, type));
@@ -122,27 +122,15 @@ namespace StoryTeller.Model
             }
         }
 #else
-        // Polyfill lifted from http://www.michael-whelan.net/replacing-appdomain-in-dotnet-core/
-        public static IEnumerable<Assembly> GetReferencingAssemblies(string assemblyName)
+
+        public static IEnumerable<Assembly> GetReferencingAssemblies()
         {
-            var assemblies = new List<Assembly>();
-            var dependencies = DependencyContext.Default.RuntimeLibraries;
-            foreach (var library in dependencies)
-            {
-                if (IsCandidateLibrary(library, assemblyName))
-                {
-                    var assembly = Assembly.Load(new AssemblyName(library.Name));
-                    assemblies.Add(assembly);
-                }
-            }
-            return assemblies;
+            var assemblyName = typeof(FixtureLibrary).GetTypeInfo().Assembly.GetName();
+
+            return DependencyContext.Default.RuntimeLibraries.Where(x => x.Dependencies.Any(_ => _.Name.EqualsIgnoreCase(assemblyName.Name)))
+                .Select(x => Assembly.Load(new AssemblyName(x.Name)));
         }
 
-        private static bool IsCandidateLibrary(RuntimeLibrary library, string assemblyName)
-        {
-            return library.Name == (assemblyName)
-                || library.Dependencies.Any(d => d.Name.StartsWith(assemblyName));
-        }
 #endif
 
 
