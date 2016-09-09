@@ -10,15 +10,34 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine
 {
-    public class EngineAgent : IDisposable
+    public class EngineAgent : IDisposable, IListener<StartProject>
     {
         private readonly IList<IDisposable> _disposables = new List<IDisposable>();
         private SpecificationEngine _engine;
         private object _controller;
-        private SocketConnection _socket;
+        private readonly SocketConnection _socket;
         private Project _project;
         private ISystem _system;
         private SpecExpiration _specExpiration;
+
+        public EngineAgent(int port)
+        {
+            _socket = new SocketConnection(port, false, (s, json) =>
+            {
+                EventAggregator.Messaging.SendJson(json);
+            });
+
+            _disposables.Add(_socket);
+
+            EventAggregator.Start(_socket);
+        }
+
+        public EngineAgent(int port, ISystem system) : this(port)
+        {
+            _system = system;
+
+            _disposables.Add(system);
+        }
 
         public void Dispose()
         {
@@ -40,18 +59,15 @@ namespace StoryTeller.Engine
             return controller == null ? new QueueState() : controller.QueueState();
         }
 
+        void IListener<StartProject>.Receive(StartProject message)
+        {
+            Start(message.Project);
+        }
+
         public void Start(Project project)
         {
             Project.CurrentProject = project;
 
-            _socket = new SocketConnection(project.Port, false, (s, json) =>
-            {
-                EventAggregator.Messaging.SendJson(json);
-            });
-
-            _disposables.Add(_socket);
-
-            EventAggregator.Start(_socket);
 
             _project = project;
 
@@ -59,9 +75,13 @@ namespace StoryTeller.Engine
 
             try
             {
-                systemType = _project.DetermineSystemType();
-                _system = Activator.CreateInstance(systemType).As<ISystem>();
-                _disposables.Add(_system);
+                if (_system == null)
+                {
+                    systemType = _project.DetermineSystemType();
+                    _system = Activator.CreateInstance(systemType).As<ISystem>();
+                    _disposables.Add(_system);
+                }
+
 
                 _specExpiration = new SpecExpiration();
 
@@ -71,8 +91,6 @@ namespace StoryTeller.Engine
 
 
                 _engine.Start(project.StopConditions);
-
-
             }
             catch (Exception e)
             {
@@ -142,5 +160,17 @@ namespace StoryTeller.Engine
 
             return engine;
         }
+
+
+    }
+
+
+    public class StartProject : ClientMessage
+    {
+        public StartProject() : base("start-project")
+        {
+        }
+
+        public Project Project { get; set; }
     }
 }

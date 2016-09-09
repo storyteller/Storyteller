@@ -47,7 +47,12 @@ namespace ST.Client
 
     public class StorytellerAgent
     {
-        
+        public StorytellerAgent(int port)
+        {
+            EventAggregator.Messaging.AddListener(this);
+
+
+        }
     }
 
     /*
