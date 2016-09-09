@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Reflection;
 using Baseline;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Samples;
+using StoryTeller.Samples.Fixtures;
 
 namespace StoryTeller.Testing
 {
@@ -11,17 +12,30 @@ namespace StoryTeller.Testing
     {
         static TestingContext()
         {
-            var fixture = new StoryTeller.Samples.Fixtures.SentenceFixture();
-            Library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+            _library = new Lazy<FixtureLibrary>(() =>
+            {
+                try
+                {
+                    var fixture = new SentenceFixture();
+                    return FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    throw;
+                }
+            });
+
+
         }
 
         private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() => HierarchyLoader.ReadHierarchy(SpecFolder));
 
         public static string SpecFolder = FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+        private static readonly Lazy<FixtureLibrary> _library;
 
 
-
-        public static FixtureLibrary Library { get; }
+        public static FixtureLibrary Library => _library.Value;
 
         public static Suite Hierarchy => _hierarchy.Value;
 
@@ -32,7 +46,7 @@ namespace StoryTeller.Testing
 
         public static string FindParallelDirectory(string projectName)
         {
-            var path = ".".ToFullPath();
+            var path = AppContext.BaseDirectory;
             while (!path.EndsWith("src"))
             {
                 path = path.ParentDirectory();

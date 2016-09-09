@@ -64,11 +64,7 @@ end
 
 desc 'Compile the code'
 task :compile => [:npm, :clean, :version] do
-	sh "dotnet restore src/Storyteller"
-	sh "dotnet restore src/Storyteller.Testing"
-	sh "dotnet restore src/Storyteller.Samples"
-	sh "dotnet restore src/Specifications"
-	sh "dotnet restore src/Samples"
+	sh "dotnet restore src"
 	sh "dotnet build src/Storyteller.Testing"
 end
 
