@@ -45,6 +45,11 @@ namespace ST.Client
         
     }
 
+    public class StorytellerAgent
+    {
+        
+    }
+
     /*
     // NEED a way to "know" when it's done.
     public class StorytellerAgent : IDisposable, IListener<StartProject>, IListener<Shutdown>

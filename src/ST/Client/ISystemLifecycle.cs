@@ -79,10 +79,12 @@ namespace ST.Client
 
             try
             {
+                _project.Mode = mode;
+
                 var proxyType = typeof(RemoteProxy);
                 _proxy = (RemoteProxy)_domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 
-                _proxy.Start(mode, _project, _project.Port);
+                _proxy.Start(_project);
             }
             catch (Exception)
             {

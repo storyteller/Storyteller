@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Baseline;
 using StoryTeller.Engine;
+using StoryTeller.Remotes;
 
 namespace StoryTeller
 {
@@ -30,6 +31,8 @@ namespace StoryTeller
         public static Project CurrentProject { get; set; }
         public int MaxRetries { get; set; }
         public string Culture { get; set; }
+
+        public EngineMode Mode { get; set; } = EngineMode.Batch;
 
         public StopConditions StopConditions = new StopConditions();
 
