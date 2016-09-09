@@ -40,11 +40,11 @@ namespace StoryTeller.Engine
             return controller == null ? new QueueState() : controller.QueueState();
         }
 
-        public void Start(EngineMode mode, Project project, int socketPort)
+        public void Start(Project project)
         {
             Project.CurrentProject = project;
 
-            _socket = new SocketConnection(socketPort, false, (s, json) =>
+            _socket = new SocketConnection(project.Port, false, (s, json) =>
             {
                 EventAggregator.Messaging.SendJson(json);
             });
@@ -65,7 +65,7 @@ namespace StoryTeller.Engine
 
                 _specExpiration = new SpecExpiration();
 
-                _engine = mode == EngineMode.Interactive
+                _engine = project.Mode == EngineMode.Interactive
                     ? buildUserInterfaceEngine()
                     : buildBatchedEngine(project.TracingStyle);
 

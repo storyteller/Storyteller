@@ -33,9 +33,9 @@ namespace StoryTeller.Remotes
             return _agent.QueueState();
         }
 
-        public void Start(EngineMode mode, Project project, int socketPort)
+        public void Start(Project project)
         {
-            _agent.Start(mode, project, socketPort);
+            _agent.Start(project);
         }
 
         private void CurrentDomainOnDomainUnload(object sender, EventArgs eventArgs)
