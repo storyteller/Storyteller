@@ -21,7 +21,7 @@ namespace StoryTeller.Testing.Remotes
 #if NET46       
             return new RemoteController(project, new AppDomainSystemLauncher(project));
 #else
-            return new RemoteController(project, new ProcessRunnerSystemLifecycle(project));
+            return new RemoteController(project, new ProcessRunnerSystemLauncher(project));
 #endif
         }
 
