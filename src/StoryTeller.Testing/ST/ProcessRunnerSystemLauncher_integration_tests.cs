@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Shouldly;
@@ -59,6 +60,16 @@ namespace StoryTeller.Testing.ST
 
             recycled.success.ShouldBeFalse();
             recycled.error.ShouldContain(nameof(DivideByZeroException));
+
+        }
+
+        [Fact]
+        public async Task start_a_remote_system_that_blows_up_fast()
+        {
+            var recycled = await start("BlowsUp");
+
+            recycled.success.ShouldBeFalse();
+            recycled.error.ShouldContain("Unable to start process");
 
         }
     }

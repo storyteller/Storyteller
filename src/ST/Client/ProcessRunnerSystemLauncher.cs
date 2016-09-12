@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Baseline;
 using Oakton;
 using StoryTeller;
 using StoryTeller.Engine;
+using StoryTeller.Model;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
@@ -14,6 +17,9 @@ namespace ST.Client
         private readonly Project _project;
         private Process _process;
         private IRemoteController _controller;
+        private string _command;
+        private bool _agentReady;
+        private object _readyLock = new object();
 
         public ProcessRunnerSystemLauncher(Project project)
         {
@@ -40,12 +46,16 @@ namespace ST.Client
         {
             _controller = remoteController;
 
-            var start = new ProcessStartInfo();
-            start.UseShellExecute = true;
-            start.CreateNoWindow = false;
-            start.WorkingDirectory = _project.ProjectPath.ToFullPath();
+            var start = new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                CreateNoWindow = false,
+                WorkingDirectory = _project.ProjectPath.ToFullPath(),
+                FileName = "dotnet"
+            };
 
-            start.FileName = "dotnet";
+
+
 
 #if NET46
             var framework = "NET46";
@@ -57,11 +67,71 @@ namespace ST.Client
             // TODO -- need to lock this down somehow
             start.Arguments = $"run --framework {framework} -- {_project.Port}";
 
+            _command = $"dotnet {start.Arguments}";
+
             _process = Process.Start(start);
+            _process.Exited += _process_Exited;
+
+            lock (_readyLock)
+            {
+                _agentReady = false;
+            }
+
+            Task.Delay(5.Seconds()).ContinueWith(t =>
+            {
+                lock (_readyLock)
+                {
+                    if (!_agentReady)
+                    {
+                        // TODO -- send a timeout message here.
+                    }
+                }
+
+                if (_process.HasExited)
+                {
+                    sendFailedToStartMessage();
+                }
+            });
+
+            if (_process.HasExited)
+            {
+                sendFailedToStartMessage();
+            }
+        }
+
+        private void sendFailedToStartMessage()
+        {
+            var message = new SystemRecycled
+            {
+                success = false,
+                fixtures = new FixtureModel[0],
+                system_name = "Unknown",
+                system_full_name = "Unknown",
+                name = Path.GetFileName(AppContext.BaseDirectory),
+                error = $"Unable to start process '{_command}'"
+            };
+
+            EventAggregator.SendMessage(message);
+        }
+
+        private void _process_Exited(object sender, EventArgs e)
+        {
+            if (_process.ExitCode != 0)
+            {
+                sendFailedToStartMessage();
+            }
+            
+            
+
         }
 
         public void Receive(AgentReady message)
         {
+            lock (_readyLock)
+            {
+                _agentReady = true;
+            }
+
             ConsoleWriter.Write(ConsoleColor.Cyan, $"Agent ready at {_project.Port}.");
             _controller.SendMessage(new StartProject { Project = _project });
 
