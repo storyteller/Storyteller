@@ -17,7 +17,7 @@ namespace StoryTeller.Testing.Remotes
 
             var project = Project.LoadForFolder(path);
       
-            var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
+            var controller = new RemoteController(project, new AppDomainSystemLauncher(project));
 
         }
     }
