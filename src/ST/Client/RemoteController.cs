@@ -45,7 +45,7 @@ namespace ST.Client
 
         public string WebSocketAddress { get; set; }
 
-        public void Recycle()
+        public Task<SystemRecycled> Recycle()
         {
             Messaging.Send(new SystemRecycleStarted());
 
@@ -53,7 +53,7 @@ namespace ST.Client
 
             Messaging.Send(new QueueState());
 
-            bootstrap().Task.ContinueWith(x =>
+            return bootstrap().Task.ContinueWith(x =>
             {
                 Messaging.Send(x.Result);
 

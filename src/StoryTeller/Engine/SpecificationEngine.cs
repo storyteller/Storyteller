@@ -87,6 +87,8 @@ namespace StoryTeller.Engine
             }
             catch (Exception ex)
             {
+                ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
+
                 var message = new SystemRecycled
                 {
                     success = false,
