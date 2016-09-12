@@ -75,6 +75,7 @@ namespace StoryTeller.Remotes
                             catch (EndOfStreamException)
                             {
                                 // nothing, it's an artifact of a client shutting down
+                                handler.Dispose();
                             }
                             catch (Exception e)
                             {

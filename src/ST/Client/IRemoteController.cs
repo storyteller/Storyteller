@@ -1,11 +1,14 @@
-﻿namespace ST.Client
+﻿using System.Threading.Tasks;
+using StoryTeller.Remotes;
+
+namespace ST.Client
 {
     public interface IRemoteController
     {
         string WebSocketAddress { get; set; }
         void SendJsonMessage(string json);
         void AddListener(object listener);
-        void Recycle();
+        Task<SystemRecycled> Recycle();
         void SendMessage<T>(T message);
         RemoteController.ResponseExpression Send<T>(T message);
     }
