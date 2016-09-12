@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using Shouldly;
 using StoryTeller.Remotes;
 using ST.Client;
 using Xunit;
@@ -33,7 +35,31 @@ namespace StoryTeller.Testing.ST
         {
             var recycled = await start("Storyteller.Gallery");
 
-            recycled.ShouldNotBeNull();
+            recycled.success.ShouldBeTrue();
+        }
+
+        [Fact]
+        public async Task start_and_recycle()
+        {
+            var recycled = await start("Storyteller.Gallery");
+
+            recycled.success.ShouldBeTrue();
+
+            var recycled2 = await _controller.Recycle();
+
+            recycled2.success.ShouldBeTrue();
+
+
+        }
+
+        [Fact]
+        public async Task start_a_remote_system_that_fails_in_project_start()
+        {
+            var recycled = await start("BadSystem");
+
+            recycled.success.ShouldBeFalse();
+            recycled.error.ShouldContain(nameof(DivideByZeroException));
+
         }
     }
 }

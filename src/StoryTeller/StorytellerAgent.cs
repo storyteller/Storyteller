@@ -56,7 +56,7 @@ namespace StoryTeller
 
         public static void Run(string[] args, ISystem system)
         {
-            var agent = new StorytellerAgent(int.Parse(args[0]), new NulloSystem());
+            var agent = new StorytellerAgent(int.Parse(args[0]), system);
             agent._completion.WaitOne();
         }
     }
