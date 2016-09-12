@@ -16,6 +16,8 @@ namespace StoryTeller
 
         public StorytellerAgent(int port, ISystem system)
         {
+            ConsoleWriter.Write(ConsoleColor.Green, $"Running the StorytellerAgent at port {port} with system {system.GetType().Name}");
+
             EventAggregator.Messaging.AddListener(this);
 
             _engine = new EngineAgent(port, system);

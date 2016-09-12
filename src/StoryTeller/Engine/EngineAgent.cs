@@ -31,6 +31,7 @@ namespace StoryTeller.Engine
 
             EventAggregator.Start(_socket);
 
+            ConsoleWriter.Write(ConsoleColor.Cyan, "Sending the agent ready message.");
             EventAggregator.SendMessage(new AgentReady());
         }
 
@@ -83,6 +84,9 @@ namespace StoryTeller.Engine
 
 
                 _engine.Start(project.StopConditions);
+
+
+                ConsoleWriter.Write(ConsoleColor.Cyan, "Specification running engine ready at " + project.ProjectPath);
             }
             catch (Exception e)
             {
