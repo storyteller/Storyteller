@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using Baseline;
-using Oakton;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
@@ -10,23 +9,11 @@ using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
 {
-    public interface IRemoteController
-    {
-        string WebSocketAddress { get; set; }
-        void SendJsonMessage(string json);
-        void AddListener(object listener);
-        void Recycle();
-        void SendMessage<T>(T message);
-        RemoteController.ResponseExpression Send<T>(T message);
-        QueueState QueueState();
-    }
-
     public class RemoteController : IDisposable, IRemoteController
     {
         private readonly ISystemLifecycle _lifecycle;
         public static int Port = 2500;
 
-        private EngineMode _mode = EngineMode.Interactive;
         private AppDomainFileChangeWatcher _watcher;
         private readonly SocketConnection _socket;
 
@@ -61,12 +48,6 @@ namespace ST.Client
 
         }
 
-        // TODO -- move to being a Task<QueueState>
-        public QueueState QueueState()
-        {
-            return _lifecycle.QueueState();
-        }
-
         public string WebSocketAddress { get; set; }
 
         public void Recycle()
@@ -77,7 +58,7 @@ namespace ST.Client
 
             Messaging.Send(new QueueState());
 
-            bootstrap(_mode).Task.ContinueWith(x =>
+            bootstrap().Task.ContinueWith(x =>
             {
                 Messaging.Send(x.Result);
 
@@ -115,11 +96,9 @@ namespace ST.Client
             _lifecycle.Teardown();
         }
 
-        public Task<SystemRecycled> Start(EngineMode mode)
+        public Task<SystemRecycled> Start()
         {
-            _mode = mode;
-
-            var listener = bootstrap(mode);
+            var listener = bootstrap();
 
 
             return listener.Task.ContinueWith(x =>
@@ -136,13 +115,13 @@ namespace ST.Client
             });
         }
 
-        private SystemRecycledListener bootstrap(EngineMode mode)
+        private SystemRecycledListener bootstrap()
         {
             var listener = new SystemRecycledListener(Messaging);
 
             Messaging.AddListener(listener);
 
-            _lifecycle.Start(mode);
+            _lifecycle.Start();
 
             return listener;
         }

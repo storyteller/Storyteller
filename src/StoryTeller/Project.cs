@@ -32,7 +32,7 @@ namespace StoryTeller
         public int MaxRetries { get; set; }
         public string Culture { get; set; }
 
-        public EngineMode Mode { get; set; } = EngineMode.Batch;
+        public EngineMode Mode { get; set; } = EngineMode.Interactive;
 
         public StopConditions StopConditions = new StopConditions();
 

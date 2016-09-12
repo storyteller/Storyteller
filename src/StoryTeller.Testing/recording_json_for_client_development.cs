@@ -37,7 +37,7 @@ namespace StoryTeller.Testing
         public void write_initial_model()
         {
             // You need to compile everything before trying to use this
-            var input = new ProjectInput
+            var input = new ProjectInput(EngineMode.Batch)
             {
                 Path =
                     samplesFolder,
@@ -46,7 +46,7 @@ namespace StoryTeller.Testing
 
             using (var controller = input.BuildRemoteController())
             {
-                controller.Start(EngineMode.Batch).Wait(30.Seconds());
+                controller.Start().Wait(30.Seconds());
 
                 var hierarchy = HierarchyLoader.ReadHierarchy(input.Path.AppendPath("Specs"));
                 var request = new BatchRunRequest

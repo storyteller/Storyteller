@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.Remotes
         {
             using (var controller = controllerForProject("Storyteller.Samples"))
             {
-                var task = controller.Start(EngineMode.Batch);
+                var task = controller.Start();
                 task.Wait(5.Seconds());
 
                 var message = task.Result;
@@ -46,7 +46,7 @@ namespace StoryTeller.Testing.Remotes
         {
             using (var controller = controllerForProject("Storyteller.Gallery"))
             {
-                var task = controller.Start(EngineMode.Batch);
+                var task = controller.Start();
                 task.Wait(5.Seconds());
 
                 var message = task.Result;
@@ -62,7 +62,7 @@ namespace StoryTeller.Testing.Remotes
         {
             using (var controller = controllerForProject("BadSystem"))
             {
-                var task = controller.Start(EngineMode.Batch);
+                var task = controller.Start();
                 task.Wait(5.Seconds());
 
                 var message = task.Result;
@@ -81,7 +81,7 @@ namespace StoryTeller.Testing.Remotes
                 new FileSystem().DeleteFile(controller.Project.ProjectPath.AppendPath(Project.FILE));
                 Thread.Sleep(100);
 
-                var task = controller.Start(EngineMode.Batch);
+                var task = controller.Start();
                 task.Wait(5.Seconds());
 
                 var message = task.Result;
@@ -107,7 +107,7 @@ namespace StoryTeller.Testing.Remotes
                 new FileSystem().WriteObjectToFile(controller.Project.ProjectPath.AppendPath(Project.FILE), project);
                 Thread.Sleep(100);
 
-                var task = controller.Start(EngineMode.Batch);
+                var task = controller.Start();
                 task.Wait(5.Seconds());
 
                 var message = task.Result;
@@ -131,7 +131,7 @@ namespace StoryTeller.Testing.Remotes
                 new FileSystem().WriteObjectToFile(controller.Project.ProjectPath.AppendPath(Project.FILE), project);
                 Thread.Sleep(100);
 
-                var task = controller.Start(EngineMode.Batch);
+                var task = controller.Start();
                 task.Wait(5.Seconds());
 
                 var message = task.Result;

@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using Oakton;
 using ST.Client;
 using StoryTeller.Engine;
+using StoryTeller.Remotes;
 
 namespace ST.CommandLine
 {
     public class RunInput : ProjectInput
     {
-        public RunInput()
+        public RunInput() : base(EngineMode.Batch)
         {
             ResultsPathFlag = "stresults.htm";
             _disableAppDomainFileWatching = true;

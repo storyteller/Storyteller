@@ -32,7 +32,7 @@ namespace StoryTeller.Testing.CommandLine
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
             theController = theInput.BuildRemoteController();
-            var task = theController.Start(EngineMode.Batch);
+            var task = theController.Start();
             task.Wait(3.Seconds());
 
             theFixtures = task.Result.fixtures;
@@ -136,7 +136,7 @@ namespace StoryTeller.Testing.CommandLine
 
             var input = new RunInput {Path = directory, SystemNameFlag = "System2"};
             var multiSystemController = input.BuildRemoteController();
-            var task = multiSystemController.Start(EngineMode.Batch);
+            var task = multiSystemController.Start();
             task.Wait(3.Seconds());
 
             task.Result.system_name.ShouldBe("MultipleSystems.System2");
