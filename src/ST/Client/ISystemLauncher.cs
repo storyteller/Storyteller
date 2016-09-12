@@ -7,7 +7,7 @@ using StoryTeller.Remotes;
 
 namespace ST.Client
 {
-    public interface ISystemLifecycle
+    public interface ISystemLauncher
     {
         void AssertValid();
         void Teardown();
@@ -17,14 +17,14 @@ namespace ST.Client
     }
 
 #if NET46
-    public class AppDomainSystemLifecycle : ISystemLifecycle
+    public class AppDomainSystemLauncher : ISystemLauncher
     {
         private readonly RemoteDomainExpression _remoteSetup = new RemoteDomainExpression();
         private AppDomain _domain;
         private RemoteProxy _proxy;
         private readonly Project _project;
 
-        public AppDomainSystemLifecycle(Project project)
+        public AppDomainSystemLauncher(Project project)
         {
             _remoteSetup.Port = project.Port;
             _remoteSetup.ServiceDirectory = project.ProjectPath;

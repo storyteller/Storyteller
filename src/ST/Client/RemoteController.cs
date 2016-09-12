@@ -11,15 +11,15 @@ namespace ST.Client
 {
     public class RemoteController : IDisposable, IRemoteController
     {
-        private readonly ISystemLifecycle _lifecycle;
+        private readonly ISystemLauncher _launcher;
         public static int Port = 2500;
 
         private AppDomainFileChangeWatcher _watcher;
         private readonly SocketConnection _socket;
 
-        public RemoteController(Project project, ISystemLifecycle lifecycle)
+        public RemoteController(Project project, ISystemLauncher launcher)
         {
-            _lifecycle = lifecycle;
+            _launcher = launcher;
             Project = project;
 
 
@@ -43,7 +43,7 @@ namespace ST.Client
         {
             _watcher?.Dispose();
 
-            _lifecycle.Teardown();
+            _launcher.Teardown();
 
 
         }
@@ -93,7 +93,7 @@ namespace ST.Client
 
         public void Teardown()
         {
-            _lifecycle.Teardown();
+            _launcher.Teardown();
         }
 
         public Task<SystemRecycled> Start()
@@ -121,7 +121,7 @@ namespace ST.Client
 
             Messaging.AddListener(listener);
 
-            _lifecycle.Start();
+            _launcher.Start();
 
             return listener;
         }
@@ -151,7 +151,7 @@ namespace ST.Client
 
         public void AssertValid()
         {
-            _lifecycle.AssertValid();
+            _launcher.AssertValid();
         }
     }
 }

@@ -78,7 +78,7 @@ namespace ST.CommandLine
 
             // This will change later w/ the new separate process lifecycle
 #if NET46
-            var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
+            var controller = new RemoteController(project, new AppDomainSystemLauncher(project));
 #else
             var controller = new RemoteController(project, new ProcessRunnerSystemLifecycle(project));
 #endif

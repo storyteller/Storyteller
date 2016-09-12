@@ -12,12 +12,12 @@ using StoryTeller.Remotes;
 
 namespace ST.Client
 {
-    public class ProcessRunnerSystemLifecycle : ISystemLifecycle
+    public class ProcessRunnerSystemLauncher : ISystemLauncher
     {
         private readonly Project _project;
         private Process _process;
 
-        public ProcessRunnerSystemLifecycle(Project project)
+        public ProcessRunnerSystemLauncher(Project project)
         {
             _project = project;
         }
