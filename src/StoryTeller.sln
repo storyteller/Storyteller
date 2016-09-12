@@ -29,6 +29,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StorytellerDocGen", "Storyt
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StorytellerDocGen.Testing", "StorytellerDocGen.Testing\StorytellerDocGen.Testing.xproj", "{EDC482AE-9234-40F2-A2B9-4E0F7932C00C}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BlowsUp", "BlowsUp\BlowsUp.xproj", "{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -233,6 +235,22 @@ Global
 		{EDC482AE-9234-40F2-A2B9-4E0F7932C00C}.Release|x64.Build.0 = Release|Any CPU
 		{EDC482AE-9234-40F2-A2B9-4E0F7932C00C}.Release|x86.ActiveCfg = Release|Any CPU
 		{EDC482AE-9234-40F2-A2B9-4E0F7932C00C}.Release|x86.Build.0 = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Debug|x86.Build.0 = Debug|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|x64.Build.0 = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|x86.ActiveCfg = Release|Any CPU
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -241,6 +259,7 @@ Global
 		{C24C1C85-EE17-4487-898F-FE9F9C51B606} = {B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}
 		{6B9DFE48-B8D3-470E-868C-3AAD5C2E95F4} = {B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}
 		{9DDB7903-7B0A-45F6-9EB6-1A5236F77A25} = {B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}
+		{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF} = {B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = StoryTeller\StoryTeller.csproj
