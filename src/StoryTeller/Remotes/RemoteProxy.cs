@@ -26,11 +26,6 @@ namespace StoryTeller.Remotes
             return null;
         }
 
-        public QueueState QueueState()
-        {
-            return _agent?.QueueState() ?? new QueueState();
-        }
-
         public void Start(Project project)
         {
             _agent = new EngineAgent(project.Port);
