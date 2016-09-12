@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Baseline;
 using Oakton;
 using StoryTeller;
@@ -28,7 +29,11 @@ namespace ST.Client
 
         public void Teardown()
         {
-            _process?.Kill();
+            _controller.SendMessage(new Shutdown());
+
+            _process.WaitForExit(5000);
+
+            ConsoleWriter.Write("Shut down the spec running process at " + _project.ProjectPath);
         }
 
         public void Start(IRemoteController remoteController)
