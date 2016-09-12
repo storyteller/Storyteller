@@ -80,7 +80,7 @@ namespace ST.CommandLine
 #if NET46
             var controller = new RemoteController(project, new AppDomainSystemLauncher(project));
 #else
-            var controller = new RemoteController(project, new ProcessRunnerSystemLifecycle(project));
+            var controller = new RemoteController(project, new ProcessRunnerSystemLauncher(project));
 #endif
 
             return controller;
