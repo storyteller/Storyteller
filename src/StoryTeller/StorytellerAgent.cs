@@ -30,9 +30,13 @@ namespace StoryTeller
 
         public void Receive(Shutdown message)
         {
+            Console.WriteLine("Shutdown requested...");
+
             try
             {
                 _engine.Dispose();
+
+                ConsoleWriter.Write(ConsoleColor.Green, "Shut down gracefully.");
             }
             catch (Exception e)
             {

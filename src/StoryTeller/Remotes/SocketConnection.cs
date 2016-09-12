@@ -72,10 +72,15 @@ namespace StoryTeller.Remotes
                                 var json = reader.ReadString();
                                 _onReceived(_listener, json);
                             }
-                            catch (Exception)
+                            catch (EndOfStreamException)
+                            {
+                                // nothing, it's an artifact of a client shutting down
+                            }
+                            catch (Exception e)
                             {
                                 if (handler.Connected)
                                 {
+                                    ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
                                     throw;
                                 }
                             }

@@ -16,7 +16,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3a84e56a-46dc-451e-858d-a0be748e7421",
+            "id": "492e7ba6-c69a-4333-b44d-bfde99e4304d",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -51,7 +51,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9048db33-2649-485e-a919-c0ea62b5e2f7",
+            "id": "8ccff6d8-97f0-4885-9b4b-67960af4e9cc",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -69,7 +69,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b32e4412-0108-46b5-b171-948d6cbcd9e2",
+            "id": "0f6f3017-4191-42ac-a666-ea9da7c1bed3",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -104,7 +104,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9c1533a5-6fe4-4f82-adbd-dfc2c6044214",
+            "id": "7c76db70-e261-4151-83f5-64799b9b2f55",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -121,7 +121,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "aec61a73-92fb-4a3d-9870-e63d410d0e19",
+            "id": "e2dde2eb-65d4-4afc-ae21-8a14adee6508",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -138,7 +138,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "00fd5cac-f719-4f30-a613-d5095de32f2e",
+            "id": "29ded688-2859-479f-8cc5-ee851a840dc2",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -147,7 +147,7 @@ module.exports = {
             "status": "error",
             "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.MathFixture.Throw()\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.Reflection.MethodInvocation.<Invoke>d__19.MoveNext()\r\n   at System.Linq.Buffer`1..ctor(IEnumerable`1 source)\r\n   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)\r\n   at StoryTeller.Grammars.LineStep.execute(ISpecContext context)\r\n   at StoryTeller.Grammars.LineStepBase.Execute(SpecContext context)",
             "cells": [],
-            "id": "67d8ba64-4541-4002-901f-dcbc7b2ca75b",
+            "id": "45a57a60-a5cc-47eb-9ab5-025733cb53bd",
             "spec": "embeds",
             "position": null,
             "type": "step-result"
@@ -176,123 +176,123 @@ module.exports = {
             "type": "Specification",
             "subject": "Embeds",
             "start": 0,
-            "end": 73,
-            "duration": 73
+            "end": 47,
+            "duration": 47
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 18,
-            "end": 19,
+            "start": 2,
+            "end": 3,
             "duration": 1
           },
           {
             "type": "Fixture",
             "subject": "Embedded:SetUp",
-            "start": 45,
-            "end": 53,
-            "duration": 8
+            "start": 21,
+            "end": 35,
+            "duration": 14
           },
           {
             "type": "Grammar",
             "subject": "ThrowAnExceptionOnTheNextEmbed",
-            "start": 54,
-            "end": 57,
-            "duration": 3
+            "start": 35,
+            "end": 39,
+            "duration": 4
           },
           {
             "type": "Grammar",
             "subject": "EmbeddedMath:Before",
-            "start": 57,
-            "end": 60,
-            "duration": 3
+            "start": 39,
+            "end": 41,
+            "duration": 2
           },
           {
             "type": "Fixture",
             "subject": "Math:SetUp",
-            "start": 60,
-            "end": 60,
+            "start": 41,
+            "end": 41,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 60,
-            "end": 63,
-            "duration": 3
+            "start": 41,
+            "end": 41,
+            "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:TearDown",
-            "start": 63,
-            "end": 63,
-            "duration": 0
+            "start": 41,
+            "end": 42,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "DoNotThrowAnExceptionOnTheNextEmbed",
-            "start": 63,
-            "end": 63,
+            "start": 42,
+            "end": 42,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "EmbeddedMath:Before",
-            "start": 63,
-            "end": 63,
+            "start": 42,
+            "end": 42,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:SetUp",
-            "start": 63,
-            "end": 63,
+            "start": 42,
+            "end": 42,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 63,
-            "end": 63,
+            "start": 42,
+            "end": 42,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 63,
-            "end": 70,
-            "duration": 7
+            "start": 42,
+            "end": 42,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 70,
-            "end": 71,
-            "duration": 1
+            "start": 42,
+            "end": 44,
+            "duration": 2
           },
           {
             "type": "Grammar",
             "subject": "Throw",
-            "start": 71,
-            "end": 72,
-            "duration": 1
+            "start": 44,
+            "end": 46,
+            "duration": 2
           },
           {
             "type": "Fixture",
             "subject": "Math:TearDown",
-            "start": 72,
-            "end": 72,
+            "start": 46,
+            "end": 46,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Embedded:TearDown",
-            "start": 72,
-            "end": 72,
+            "start": 46,
+            "end": 46,
             "duration": 0
           }
         ],
-        "duration": 74,
+        "duration": 47,
         "logging": [
           {
             "html": "<pre class=\"debug-output\">EmbeddedFixture.Setup sent this debug message&#xD;&#xA;</pre>",
@@ -309,7 +309,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 1,
@@ -336,7 +336,7 @@ module.exports = {
                 "key": "ThrowAnExceptionOnTheNextEmbed",
                 "cells": {},
                 "collections": [],
-                "id": "3a84e56a-46dc-451e-858d-a0be748e7421"
+                "id": "492e7ba6-c69a-4333-b44d-bfde99e4304d"
               },
               {
                 "key": "EmbeddedMath",
@@ -354,20 +354,20 @@ module.exports = {
                           "returnValue": "10"
                         },
                         "collections": [],
-                        "id": "9048db33-2649-485e-a919-c0ea62b5e2f7"
+                        "id": "8ccff6d8-97f0-4885-9b4b-67960af4e9cc"
                       }
                     ],
                     "activeCells": {},
                     "id": "errors"
                   }
                 ],
-                "id": "37b2d515-be3d-4a11-b116-f34c8636e5bb"
+                "id": "d4559955-5d83-4e6c-8645-9c498af43d1e"
               },
               {
                 "key": "DoNotThrowAnExceptionOnTheNextEmbed",
                 "cells": {},
                 "collections": [],
-                "id": "b32e4412-0108-46b5-b171-948d6cbcd9e2"
+                "id": "0f6f3017-4191-42ac-a666-ea9da7c1bed3"
               },
               {
                 "key": "EmbeddedMath",
@@ -385,7 +385,7 @@ module.exports = {
                           "returnValue": "9"
                         },
                         "collections": [],
-                        "id": "9c1533a5-6fe4-4f82-adbd-dfc2c6044214"
+                        "id": "7c76db70-e261-4151-83f5-64799b9b2f55"
                       },
                       {
                         "key": "Adding",
@@ -395,7 +395,7 @@ module.exports = {
                           "returnValue": "11"
                         },
                         "collections": [],
-                        "id": "aec61a73-92fb-4a3d-9870-e63d410d0e19"
+                        "id": "e2dde2eb-65d4-4afc-ae21-8a14adee6508"
                       },
                       {
                         "key": "Adding",
@@ -405,20 +405,20 @@ module.exports = {
                           "returnValue": "abc"
                         },
                         "collections": [],
-                        "id": "00fd5cac-f719-4f30-a613-d5095de32f2e"
+                        "id": "29ded688-2859-479f-8cc5-ee851a840dc2"
                       },
                       {
                         "key": "Throw",
                         "cells": {},
                         "collections": [],
-                        "id": "67d8ba64-4541-4002-901f-dcbc7b2ca75b"
+                        "id": "45a57a60-a5cc-47eb-9ab5-025733cb53bd"
                       }
                     ],
                     "activeCells": {},
                     "id": "no-errors"
                   }
                 ],
-                "id": "f1e793c2-b418-4c9c-a958-f4111bb69217"
+                "id": "0f19027f-0928-46a9-98f4-26f9ccc0ec12"
               }
             ],
             "activeCells": {},
@@ -444,7 +444,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -453,7 +453,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -462,7 +462,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -471,7 +471,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "3",
             "type": "step-result"
@@ -480,7 +480,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "4",
             "type": "step-result"
@@ -489,7 +489,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "5",
             "type": "step-result"
@@ -498,7 +498,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b45d81a-41a3-40de-aca2-9133e83918a6",
+            "id": "5b289045-6503-4b98-90e4-7b236365dc48",
             "spec": "general1",
             "position": "6",
             "type": "step-result"
@@ -515,7 +515,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "58ffd717-8684-4558-8aab-2798450390ee",
+            "id": "653e50bb-6219-41aa-b6e0-3a48cdca974e",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -532,7 +532,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "58ffd717-8684-4558-8aab-2798450390ee",
+            "id": "653e50bb-6219-41aa-b6e0-3a48cdca974e",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -549,7 +549,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "58ffd717-8684-4558-8aab-2798450390ee",
+            "id": "653e50bb-6219-41aa-b6e0-3a48cdca974e",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -566,7 +566,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "bb8ae15b-6623-40d0-9314-abcfdcd97b14",
+            "id": "19eab3ab-8150-4f0b-a886-13ffc97bb926",
             "spec": "general1",
             "position": "0",
             "type": "step-result"
@@ -583,7 +583,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "bb8ae15b-6623-40d0-9314-abcfdcd97b14",
+            "id": "19eab3ab-8150-4f0b-a886-13ffc97bb926",
             "spec": "general1",
             "position": "1",
             "type": "step-result"
@@ -600,7 +600,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "bb8ae15b-6623-40d0-9314-abcfdcd97b14",
+            "id": "19eab3ab-8150-4f0b-a886-13ffc97bb926",
             "spec": "general1",
             "position": "2",
             "type": "step-result"
@@ -620,8 +620,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Check properties",
             "start": 0,
-            "end": 8,
-            "duration": 8
+            "end": 3,
+            "duration": 3
           },
           {
             "type": "Context",
@@ -634,15 +634,15 @@ module.exports = {
             "type": "Fixture",
             "subject": "CheckObject:SetUp",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "IfTheAddressIs:0",
-            "start": 1,
+            "start": 0,
             "end": 1,
-            "duration": 0
+            "duration": 1
           },
           {
             "type": "Grammar",
@@ -690,53 +690,53 @@ module.exports = {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:0",
             "start": 2,
-            "end": 4,
-            "duration": 2
+            "end": 3,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:1",
-            "start": 4,
-            "end": 4,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:2",
-            "start": 4,
-            "end": 4,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:0",
-            "start": 4,
-            "end": 4,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:1",
-            "start": 4,
-            "end": 4,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheAddressShouldBe:2",
-            "start": 4,
-            "end": 4,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "CheckObject:TearDown",
-            "start": 4,
-            "end": 4,
+            "start": 3,
+            "end": 3,
             "duration": 0
           }
         ],
-        "duration": 8,
+        "duration": 3,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -747,7 +747,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 3,
           "wrongs": 3,
@@ -781,7 +781,7 @@ module.exports = {
                   "PostalCode": "70071"
                 },
                 "collections": [],
-                "id": "1b45d81a-41a3-40de-aca2-9133e83918a6"
+                "id": "5b289045-6503-4b98-90e4-7b236365dc48"
               },
               {
                 "key": "TheAddressShouldBe",
@@ -791,7 +791,7 @@ module.exports = {
                   "City": "Carthage"
                 },
                 "collections": [],
-                "id": "58ffd717-8684-4558-8aab-2798450390ee"
+                "id": "653e50bb-6219-41aa-b6e0-3a48cdca974e"
               },
               {
                 "key": "TheAddressShouldBe",
@@ -801,7 +801,7 @@ module.exports = {
                   "City": "wrong"
                 },
                 "collections": [],
-                "id": "bb8ae15b-6623-40d0-9314-abcfdcd97b14"
+                "id": "19eab3ab-8150-4f0b-a886-13ffc97bb926"
               }
             ],
             "activeCells": {},
@@ -827,7 +827,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "bd80b545-7563-4269-8c77-d2a42b444f00",
+            "id": "a57dfc21-c2c4-4279-b4e8-e521e59af339",
             "spec": "SometimesSlow",
             "position": null,
             "type": "step-result"
@@ -847,39 +847,39 @@ module.exports = {
             "type": "Specification",
             "subject": "Occasionally Times Out",
             "start": 0,
-            "end": 3,
-            "duration": 3
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "SometimesSlow:SetUp",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Slow",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "SometimesSlow:TearDown",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           }
         ],
-        "duration": 3,
+        "duration": 2,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -890,7 +890,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -922,7 +922,7 @@ module.exports = {
                 "key": "Slow",
                 "cells": {},
                 "collections": [],
-                "id": "bd80b545-7563-4269-8c77-d2a42b444f00"
+                "id": "a57dfc21-c2c4-4279-b4e8-e521e59af339"
               }
             ],
             "activeCells": {},
@@ -939,7 +939,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e869c799-a890-4b7e-a962-fd6d4b609a85",
+            "id": "89d7b269-b9a1-4bdb-99a2-c7f3760f86c2",
             "spec": "general2",
             "position": "setup",
             "type": "step-result"
@@ -956,7 +956,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "81f42c01-c59a-410a-ba07-aadaeef68964",
+            "id": "479cb172-211e-4316-b7c8-f758aa22f228",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -973,7 +973,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "a2de5451-a6ea-4f44-b112-249be2450521",
+            "id": "b829db7c-6ef2-4bf9-a097-c0d567263f43",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -990,7 +990,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "7c004a65-9de0-4e1b-8c57-2bd2fe48c1c8",
+            "id": "8bd0da67-35dd-4b19-9b20-b79b12a15778",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -1021,7 +1021,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "3d50c4bb-c0cf-4613-aab3-6a8689948aef",
+            "id": "4f87462a-abf8-4f58-8b70-0cba2753cff2",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -1038,7 +1038,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "8740ad90-c77c-47fc-92f2-b5574513f228",
+            "id": "6eade31e-f032-4bd8-9ccd-d203d607749a",
             "spec": "general2",
             "position": null,
             "type": "step-result"
@@ -1047,7 +1047,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e869c799-a890-4b7e-a962-fd6d4b609a85",
+            "id": "89d7b269-b9a1-4bdb-99a2-c7f3760f86c2",
             "spec": "general2",
             "position": "teardown",
             "type": "step-result"
@@ -1058,67 +1058,67 @@ module.exports = {
             "type": "Specification",
             "subject": "Selection List Values",
             "start": 0,
-            "end": 12,
-            "duration": 12
+            "end": 7,
+            "duration": 7
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 7,
-            "end": 7,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "SelectionList:SetUp",
-            "start": 7,
-            "end": 7,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheNameIs",
-            "start": 7,
-            "end": 8,
+            "start": 1,
+            "end": 2,
             "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "FirstAndLastName:Row",
-            "start": 8,
-            "end": 8,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "FirstAndLastName:Row",
-            "start": 8,
-            "end": 8,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": null,
-            "start": 8,
-            "end": 11,
-            "duration": 3
+            "start": 2,
+            "end": 4,
+            "duration": 2
           },
           {
             "type": "Grammar",
             "subject": "TheEnumOptionIs",
-            "start": 11,
-            "end": 11,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "SelectionList:TearDown",
-            "start": 11,
-            "end": 11,
+            "start": 4,
+            "end": 4,
             "duration": 0
           }
         ],
-        "duration": 12,
+        "duration": 7,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -1129,7 +1129,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 4,
           "wrongs": 1,
@@ -1160,7 +1160,7 @@ module.exports = {
                   "fullname": "Jeremy Smith"
                 },
                 "collections": [],
-                "id": "81f42c01-c59a-410a-ba07-aadaeef68964"
+                "id": "479cb172-211e-4316-b7c8-f758aa22f228"
               },
               {
                 "key": "FirstAndLastName",
@@ -1178,7 +1178,7 @@ module.exports = {
                           "fullname": "Hank Miller"
                         },
                         "collections": [],
-                        "id": "a2de5451-a6ea-4f44-b112-249be2450521"
+                        "id": "b829db7c-6ef2-4bf9-a097-c0d567263f43"
                       },
                       {
                         "key": "table",
@@ -1188,14 +1188,14 @@ module.exports = {
                           "fullname": "Harold Mueller"
                         },
                         "collections": [],
-                        "id": "7c004a65-9de0-4e1b-8c57-2bd2fe48c1c8"
+                        "id": "8bd0da67-35dd-4b19-9b20-b79b12a15778"
                       }
                     ],
                     "activeCells": {},
-                    "id": "fd958e12-b420-45a6-bf39-950987586eaa"
+                    "id": "19873648-ce5e-4b7a-87af-bd32e53bdc4f"
                   }
                 ],
-                "id": "3ac580a5-aa80-4a13-93ab-21e35a9c10c0"
+                "id": "cae0a625-8a4a-4600-9909-dba913d94241"
               },
               {
                 "key": "names",
@@ -1213,14 +1213,14 @@ module.exports = {
                           "Fullname": "Tobin Smith"
                         },
                         "collections": [],
-                        "id": "3d50c4bb-c0cf-4613-aab3-6a8689948aef"
+                        "id": "4f87462a-abf8-4f58-8b70-0cba2753cff2"
                       }
                     ],
                     "activeCells": {},
-                    "id": "cb1f0aa8-ee7b-43be-81e1-dc390e43eb8f"
+                    "id": "26ad24a1-1071-43d0-84f7-2040377eb967"
                   }
                 ],
-                "id": "3a061b55-9f26-493d-821e-c4fb6303cc98"
+                "id": "1211563b-15bb-4a35-82d8-6402d0f13f95"
               },
               {
                 "key": "TheEnumOptionIs",
@@ -1229,11 +1229,11 @@ module.exports = {
                   "selectedOption": "0"
                 },
                 "collections": [],
-                "id": "8740ad90-c77c-47fc-92f2-b5574513f228"
+                "id": "6eade31e-f032-4bd8-9ccd-d203d607749a"
               }
             ],
             "activeCells": {},
-            "id": "e869c799-a890-4b7e-a962-fd6d4b609a85"
+            "id": "89d7b269-b9a1-4bdb-99a2-c7f3760f86c2"
           }
         ],
         "id": "general2"
@@ -1246,7 +1246,7 @@ module.exports = {
             "status": "invalid",
             "error": "Fixture with key 'Service' does not exist",
             "cells": [],
-            "id": "130e7227-7206-431b-9c92-652b648a7e8b",
+            "id": "1034215d-3358-4b37-a5db-22527a8f1573",
             "spec": "general3",
             "position": "setup",
             "type": "step-result"
@@ -1257,25 +1257,25 @@ module.exports = {
             "type": "Specification",
             "subject": "Services",
             "start": 0,
-            "end": 3,
-            "duration": 3
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 2,
-            "end": 2,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Service:SetUp",
-            "start": 2,
-            "end": 3,
-            "duration": 1
+            "start": 0,
+            "end": 0,
+            "duration": 0
           }
         ],
-        "duration": 3,
+        "duration": 1,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -1292,7 +1292,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -1321,7 +1321,7 @@ module.exports = {
                   "value": "5"
                 },
                 "collections": [],
-                "id": "0d932dbf-3b3e-4807-899f-a10a7abbf586"
+                "id": "6df15909-8952-417c-966b-eaceca9c1ce7"
               },
               {
                 "key": "Check",
@@ -1329,7 +1329,7 @@ module.exports = {
                   "value": "5"
                 },
                 "collections": [],
-                "id": "8adf066b-47d7-4094-b988-153dcd327049"
+                "id": "8bcca49f-9ad0-4251-bb8f-cc5fd7b30f58"
               },
               {
                 "key": "Set",
@@ -1337,7 +1337,7 @@ module.exports = {
                   "value": "6"
                 },
                 "collections": [],
-                "id": "2154a6c6-607c-4166-a0cf-b6cb29efaf0b"
+                "id": "4553c386-9c99-4579-8f2a-25b11b7288c4"
               },
               {
                 "key": "Check",
@@ -1345,7 +1345,7 @@ module.exports = {
                   "value": "7"
                 },
                 "collections": [],
-                "id": "4646dd91-1ab1-4f8f-9377-ede5b62146a5"
+                "id": "3c658cd9-af91-434a-8846-8620afac5fcf"
               },
               {
                 "key": "Set",
@@ -1353,11 +1353,11 @@ module.exports = {
                   "value": "abc"
                 },
                 "collections": [],
-                "id": "1cc27018-bca2-4b0d-a161-5e23941ab874"
+                "id": "6b60c378-06bc-43b1-bae5-599499de4b01"
               }
             ],
             "activeCells": {},
-            "id": "130e7227-7206-431b-9c92-652b648a7e8b"
+            "id": "1034215d-3358-4b37-a5db-22527a8f1573"
           }
         ],
         "id": "general3"
@@ -1387,7 +1387,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "a607515f-ea5e-48dd-afc9-36e08a7657b3",
+            "id": "c6aca9ea-2ae2-4772-bed2-f89ae05c6a65",
             "spec": "runtime-converter",
             "position": null,
             "type": "step-result"
@@ -1407,39 +1407,39 @@ module.exports = {
             "type": "Specification",
             "subject": "System Defined Lists and Runtime Converters",
             "start": 0,
-            "end": 4,
-            "duration": 4
+            "end": 3,
+            "duration": 3
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 2,
-            "end": 2,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Player:SetUp",
-            "start": 2,
-            "end": 2,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "PositionIs:Row",
-            "start": 2,
-            "end": 3,
-            "duration": 1
+            "start": 0,
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Fixture",
             "subject": "Player:TearDown",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           }
         ],
-        "duration": 4,
+        "duration": 3,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -1450,7 +1450,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 1,
           "wrongs": 0,
@@ -1493,14 +1493,14 @@ module.exports = {
                           "Position": "LB"
                         },
                         "collections": [],
-                        "id": "a607515f-ea5e-48dd-afc9-36e08a7657b3"
+                        "id": "c6aca9ea-2ae2-4772-bed2-f89ae05c6a65"
                       }
                     ],
                     "activeCells": {},
                     "id": "2e87da8f-d2bb-45a0-a375-39e38e3f9564"
                   }
                 ],
-                "id": "3c105722-2870-4d26-b795-94e2cd637545"
+                "id": "85fcf9bf-0458-4e6c-bb9b-323a9558d892"
               }
             ],
             "activeCells": {},
@@ -1517,7 +1517,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "35415ba5-2859-4a5a-a68b-4261580a4885",
+            "id": "065af707-c446-409a-ae98-22b5451bcf31",
             "spec": "general4",
             "position": "setup",
             "type": "step-result"
@@ -1526,7 +1526,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar1' is not implemented",
             "cells": [],
-            "id": "0534e6fb-93ce-4ccc-b9de-71461ce6db58",
+            "id": "72e70de9-ec9f-48df-82fd-4c7d65c44146",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -1535,7 +1535,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar2' is not implemented",
             "cells": [],
-            "id": "de7c46a3-b6c4-42fd-afd6-059f529a1b7e",
+            "id": "125dce4b-427f-4b8f-977c-b4a8d7ce7a8a",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -1544,7 +1544,7 @@ module.exports = {
             "status": "error",
             "error": "Grammar 'BadGrammar3' is not implemented",
             "cells": [],
-            "id": "73cdb499-5a5f-42ed-8f33-7d2b7b573e52",
+            "id": "dee97e32-a831-47ec-98f3-d56dcfea2cf1",
             "spec": "general4",
             "position": null,
             "type": "step-result"
@@ -1553,7 +1553,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "35415ba5-2859-4a5a-a68b-4261580a4885",
+            "id": "065af707-c446-409a-ae98-22b5451bcf31",
             "spec": "general4",
             "position": "teardown",
             "type": "step-result"
@@ -1564,53 +1564,53 @@ module.exports = {
             "type": "Specification",
             "subject": "Test with Bad Grammar Name",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 4,
+            "duration": 4
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:SetUp",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 3,
+            "duration": 1
+          },
+          {
+            "type": "Grammar",
+            "subject": "Missing",
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Missing",
-            "start": 0,
-            "end": 0,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Missing",
-            "start": 0,
-            "end": 0,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "Missing",
-            "start": 0,
-            "end": 0,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:TearDown",
-            "start": 0,
-            "end": 0,
+            "start": 3,
+            "end": 3,
             "duration": 0
           }
         ],
-        "duration": 1,
+        "duration": 4,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -1621,7 +1621,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -1648,23 +1648,23 @@ module.exports = {
                 "key": "BadGrammar1",
                 "cells": {},
                 "collections": [],
-                "id": "0534e6fb-93ce-4ccc-b9de-71461ce6db58"
+                "id": "72e70de9-ec9f-48df-82fd-4c7d65c44146"
               },
               {
                 "key": "BadGrammar2",
                 "cells": {},
                 "collections": [],
-                "id": "de7c46a3-b6c4-42fd-afd6-059f529a1b7e"
+                "id": "125dce4b-427f-4b8f-977c-b4a8d7ce7a8a"
               },
               {
                 "key": "BadGrammar3",
                 "cells": {},
                 "collections": [],
-                "id": "73cdb499-5a5f-42ed-8f33-7d2b7b573e52"
+                "id": "dee97e32-a831-47ec-98f3-d56dcfea2cf1"
               }
             ],
             "activeCells": {},
-            "id": "35415ba5-2859-4a5a-a68b-4261580a4885"
+            "id": "065af707-c446-409a-ae98-22b5451bcf31"
           }
         ],
         "id": "general4"
@@ -1688,25 +1688,25 @@ module.exports = {
             "type": "Specification",
             "subject": "Test with Missing Fixture Name",
             "start": 0,
-            "end": 2,
-            "duration": 2
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 2,
-            "end": 2,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "FixtureThatDoesNotExist:SetUp",
-            "start": 2,
-            "end": 2,
+            "start": 1,
+            "end": 1,
             "duration": 0
           }
         ],
-        "duration": 2,
+        "duration": 1,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -1723,7 +1723,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -1760,7 +1760,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "75d025fb-3f80-4f21-bc66-be34d84a71b1",
+            "id": "70d61ca1-518b-481b-8ea2-9c5f3ae593cd",
             "spec": "paragraph1",
             "position": "setup",
             "type": "step-result"
@@ -1769,7 +1769,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "744e10d6-c906-4eb5-b08a-30a9b4e54c6c",
+            "id": "93b9c648-34cd-4b2b-871c-7469925d8758",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1786,7 +1786,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "744e10d6-c906-4eb5-b08a-30a9b4e54c6c",
+            "id": "93b9c648-34cd-4b2b-871c-7469925d8758",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1795,7 +1795,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "744e10d6-c906-4eb5-b08a-30a9b4e54c6c",
+            "id": "93b9c648-34cd-4b2b-871c-7469925d8758",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1812,7 +1812,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "744e10d6-c906-4eb5-b08a-30a9b4e54c6c",
+            "id": "93b9c648-34cd-4b2b-871c-7469925d8758",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1829,7 +1829,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "b54e8c95-5d4d-4803-a988-b8f070611b30",
+            "id": "626f4509-31c8-45b7-b24a-e290a7c4bcfa",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1838,7 +1838,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b54e8c95-5d4d-4803-a988-b8f070611b30",
+            "id": "626f4509-31c8-45b7-b24a-e290a7c4bcfa",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1847,7 +1847,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b54e8c95-5d4d-4803-a988-b8f070611b30",
+            "id": "626f4509-31c8-45b7-b24a-e290a7c4bcfa",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1864,7 +1864,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "b54e8c95-5d4d-4803-a988-b8f070611b30",
+            "id": "626f4509-31c8-45b7-b24a-e290a7c4bcfa",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1873,7 +1873,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "dd5605b5-6a3c-433f-ba49-e5e48582fe31",
+            "id": "7f852507-88cc-484d-b971-48a50e98e22f",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1882,7 +1882,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "dd5605b5-6a3c-433f-ba49-e5e48582fe31",
+            "id": "7f852507-88cc-484d-b971-48a50e98e22f",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1891,7 +1891,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "dd5605b5-6a3c-433f-ba49-e5e48582fe31",
+            "id": "7f852507-88cc-484d-b971-48a50e98e22f",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1908,7 +1908,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "dd5605b5-6a3c-433f-ba49-e5e48582fe31",
+            "id": "7f852507-88cc-484d-b971-48a50e98e22f",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1917,7 +1917,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "18b2b7b2-fb99-4faf-90df-114f04eed5b3",
+            "id": "2fb1ec07-ce5b-412a-9e85-e2a7bdf12132",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1926,7 +1926,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "18b2b7b2-fb99-4faf-90df-114f04eed5b3",
+            "id": "2fb1ec07-ce5b-412a-9e85-e2a7bdf12132",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1935,7 +1935,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "18b2b7b2-fb99-4faf-90df-114f04eed5b3",
+            "id": "2fb1ec07-ce5b-412a-9e85-e2a7bdf12132",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1952,7 +1952,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "18b2b7b2-fb99-4faf-90df-114f04eed5b3",
+            "id": "2fb1ec07-ce5b-412a-9e85-e2a7bdf12132",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -1961,7 +1961,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2b1711dd-fd08-444a-92c8-37602bf9f6e6",
+            "id": "96230790-add1-46a1-bbe6-4ae0464e9154",
             "spec": "paragraph1",
             "position": "0",
             "type": "step-result"
@@ -1970,7 +1970,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2b1711dd-fd08-444a-92c8-37602bf9f6e6",
+            "id": "96230790-add1-46a1-bbe6-4ae0464e9154",
             "spec": "paragraph1",
             "position": "1",
             "type": "step-result"
@@ -1979,7 +1979,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2b1711dd-fd08-444a-92c8-37602bf9f6e6",
+            "id": "96230790-add1-46a1-bbe6-4ae0464e9154",
             "spec": "paragraph1",
             "position": "2",
             "type": "step-result"
@@ -1988,7 +1988,7 @@ module.exports = {
             "status": "error",
             "error": "System.NotImplementedException: The method or operation is not implemented.\r\n   at StoryTeller.Samples.Fixtures.CompositeFixture.<>c.<.ctor>b__0_2(ISpecContext c)\r\n   at StoryTeller.Grammars.SilentAction.Execute(SpecContext context)",
             "cells": [],
-            "id": "2b1711dd-fd08-444a-92c8-37602bf9f6e6",
+            "id": "96230790-add1-46a1-bbe6-4ae0464e9154",
             "spec": "paragraph1",
             "position": "3",
             "type": "step-result"
@@ -2005,7 +2005,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "2b1711dd-fd08-444a-92c8-37602bf9f6e6",
+            "id": "96230790-add1-46a1-bbe6-4ae0464e9154",
             "spec": "paragraph1",
             "position": "4",
             "type": "step-result"
@@ -2014,7 +2014,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "75d025fb-3f80-4f21-bc66-be34d84a71b1",
+            "id": "70d61ca1-518b-481b-8ea2-9c5f3ae593cd",
             "spec": "paragraph1",
             "position": "teardown",
             "type": "step-result"
@@ -2025,179 +2025,179 @@ module.exports = {
             "type": "Specification",
             "subject": "Composite with Errors",
             "start": 0,
-            "end": 9,
-            "duration": 9
+            "end": 3,
+            "duration": 3
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 4,
-            "end": 4,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Composite:SetUp",
-            "start": 4,
-            "end": 4,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 4,
-            "end": 8,
-            "duration": 4
+            "start": 0,
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 8,
-            "end": 8,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:2",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:0",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:1",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndMultiplyThrow:2",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:2",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:0",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:1",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndMultiplyThrow:2",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:2",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:0",
-            "start": 8,
-            "end": 8,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "AddAndCheck:1",
-            "start": 8,
-            "end": 9,
+            "start": 2,
+            "end": 3,
             "duration": 1
           },
           {
             "type": "Grammar",
-            "subject": "AddAndMultiplyThrow:2",
-            "start": 9,
-            "end": 9,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:2",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:0",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndCheck:1",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "AddAndMultiplyThrow:2",
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:3",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Composite:TearDown",
-            "start": 9,
-            "end": 9,
+            "start": 3,
+            "end": 3,
             "duration": 0
           }
         ],
-        "duration": 9,
+        "duration": 3,
         "logging": [
           {
             "html": "<pre class=\"debug-output\">the number is 5&#xD;&#xA;the number is 50&#xD;&#xA;the number is 54&#xD;&#xA;the number is 540&#xD;&#xA;the number is 5&#xD;&#xA;the number is 8&#xD;&#xA;the number is 80&#xD;&#xA;the number is 5&#xD;&#xA;the number is 8&#xD;&#xA;the number is 80&#xD;&#xA;the number is 3&#xD;&#xA;the number is 5&#xD;&#xA;the number is 20&#xD;&#xA;</pre>",
@@ -2220,7 +2220,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 3,
@@ -2252,7 +2252,7 @@ module.exports = {
                   "expected": "80"
                 },
                 "collections": [],
-                "id": "744e10d6-c906-4eb5-b08a-30a9b4e54c6c"
+                "id": "93b9c648-34cd-4b2b-871c-7469925d8758"
               },
               {
                 "key": "AddAndMultiplyTable",
@@ -2271,7 +2271,7 @@ module.exports = {
                           "expected": "25"
                         },
                         "collections": [],
-                        "id": "b54e8c95-5d4d-4803-a988-b8f070611b30"
+                        "id": "626f4509-31c8-45b7-b24a-e290a7c4bcfa"
                       },
                       {
                         "key": "Rows",
@@ -2282,7 +2282,7 @@ module.exports = {
                           "expected": "80"
                         },
                         "collections": [],
-                        "id": "dd5605b5-6a3c-433f-ba49-e5e48582fe31"
+                        "id": "7f852507-88cc-484d-b971-48a50e98e22f"
                       },
                       {
                         "key": "Rows",
@@ -2293,14 +2293,14 @@ module.exports = {
                           "expected": "77"
                         },
                         "collections": [],
-                        "id": "18b2b7b2-fb99-4faf-90df-114f04eed5b3"
+                        "id": "2fb1ec07-ce5b-412a-9e85-e2a7bdf12132"
                       }
                     ],
                     "activeCells": {},
-                    "id": "8ba1a8de-1092-45e7-969d-71c452f48d2e"
+                    "id": "723d3a1a-4b97-4e1e-9f25-3f24f5c22eb2"
                   }
                 ],
-                "id": "b2e5bbe4-5fa0-45a2-96c3-1b9ebf5702a8"
+                "id": "be156fe1-ebd9-46f4-9040-92d5e2afcd17"
               },
               {
                 "key": "AddAndMultiplyThrow",
@@ -2311,11 +2311,11 @@ module.exports = {
                   "expected": "20"
                 },
                 "collections": [],
-                "id": "2b1711dd-fd08-444a-92c8-37602bf9f6e6"
+                "id": "96230790-add1-46a1-bbe6-4ae0464e9154"
               }
             ],
             "activeCells": {},
-            "id": "75d025fb-3f80-4f21-bc66-be34d84a71b1"
+            "id": "70d61ca1-518b-481b-8ea2-9c5f3ae593cd"
           }
         ],
         "id": "paragraph1"
@@ -2328,7 +2328,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4b1a4f97-6bdf-4698-bb9b-e3a907700cf2",
+            "id": "80b01b79-edde-44a2-b385-8199cac3ff08",
             "spec": "paragraph2",
             "position": "setup",
             "type": "step-result"
@@ -2337,7 +2337,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8d6e1fdb-274c-4e07-ac11-53da568b1f37",
+            "id": "b1381fb4-f02e-4f99-ad80-64fd401c0ed1",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2346,7 +2346,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8d6e1fdb-274c-4e07-ac11-53da568b1f37",
+            "id": "b1381fb4-f02e-4f99-ad80-64fd401c0ed1",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2355,7 +2355,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8d6e1fdb-274c-4e07-ac11-53da568b1f37",
+            "id": "b1381fb4-f02e-4f99-ad80-64fd401c0ed1",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2372,7 +2372,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "8d6e1fdb-274c-4e07-ac11-53da568b1f37",
+            "id": "b1381fb4-f02e-4f99-ad80-64fd401c0ed1",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2381,7 +2381,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "98815b31-c83a-433a-99dd-2d6fe9612c44",
+            "id": "93738795-f744-4692-87bc-88ae7d0755d8",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2390,7 +2390,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "98815b31-c83a-433a-99dd-2d6fe9612c44",
+            "id": "93738795-f744-4692-87bc-88ae7d0755d8",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2399,7 +2399,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "98815b31-c83a-433a-99dd-2d6fe9612c44",
+            "id": "93738795-f744-4692-87bc-88ae7d0755d8",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2416,7 +2416,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "98815b31-c83a-433a-99dd-2d6fe9612c44",
+            "id": "93738795-f744-4692-87bc-88ae7d0755d8",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2425,7 +2425,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fde2309a-d232-42d4-9cb2-d256f88255e8",
+            "id": "4a75d153-c297-4866-a45e-33932b970b03",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2434,7 +2434,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fde2309a-d232-42d4-9cb2-d256f88255e8",
+            "id": "4a75d153-c297-4866-a45e-33932b970b03",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2443,7 +2443,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "fde2309a-d232-42d4-9cb2-d256f88255e8",
+            "id": "4a75d153-c297-4866-a45e-33932b970b03",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2460,7 +2460,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "fde2309a-d232-42d4-9cb2-d256f88255e8",
+            "id": "4a75d153-c297-4866-a45e-33932b970b03",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2469,7 +2469,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9da6ab17-aea2-41a4-a958-aaae2f3b6081",
+            "id": "6b2ae080-2a8b-4298-a91c-2284e229ba90",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2478,7 +2478,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9da6ab17-aea2-41a4-a958-aaae2f3b6081",
+            "id": "6b2ae080-2a8b-4298-a91c-2284e229ba90",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2487,7 +2487,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9da6ab17-aea2-41a4-a958-aaae2f3b6081",
+            "id": "6b2ae080-2a8b-4298-a91c-2284e229ba90",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2504,7 +2504,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "9da6ab17-aea2-41a4-a958-aaae2f3b6081",
+            "id": "6b2ae080-2a8b-4298-a91c-2284e229ba90",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2513,7 +2513,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "230905f5-4168-4cba-9e44-dab06dc6d030",
+            "id": "e6063b72-d109-42a1-a8d5-2730820ef6ea",
             "spec": "paragraph2",
             "position": "0",
             "type": "step-result"
@@ -2522,7 +2522,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "230905f5-4168-4cba-9e44-dab06dc6d030",
+            "id": "e6063b72-d109-42a1-a8d5-2730820ef6ea",
             "spec": "paragraph2",
             "position": "1",
             "type": "step-result"
@@ -2531,7 +2531,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "230905f5-4168-4cba-9e44-dab06dc6d030",
+            "id": "e6063b72-d109-42a1-a8d5-2730820ef6ea",
             "spec": "paragraph2",
             "position": "2",
             "type": "step-result"
@@ -2548,7 +2548,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "230905f5-4168-4cba-9e44-dab06dc6d030",
+            "id": "e6063b72-d109-42a1-a8d5-2730820ef6ea",
             "spec": "paragraph2",
             "position": "3",
             "type": "step-result"
@@ -2557,7 +2557,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4b1a4f97-6bdf-4698-bb9b-e3a907700cf2",
+            "id": "80b01b79-edde-44a2-b385-8199cac3ff08",
             "spec": "paragraph2",
             "position": "teardown",
             "type": "step-result"
@@ -2568,172 +2568,172 @@ module.exports = {
             "type": "Specification",
             "subject": "Simple Composite",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Composite:SetUp",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 0,
-            "end": 0,
-            "duration": 0
+            "start": 1,
+            "end": 2,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:0",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:1",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndMultiplyThrow:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "AddAndCheck:2",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Composite:TearDown",
-            "start": 0,
-            "end": 1,
-            "duration": 1
+            "start": 2,
+            "end": 2,
+            "duration": 0
           }
         ],
-        "duration": 1,
+        "duration": 2,
         "logging": [
           {
             "html": "<pre class=\"debug-output\">the number is 5&#xD;&#xA;the number is 8&#xD;&#xA;the number is 80&#xD;&#xA;the number is 5&#xD;&#xA;the number is 8&#xD;&#xA;the number is 80&#xD;&#xA;the number is 3&#xD;&#xA;the number is 7&#xD;&#xA;the number is 70&#xD;&#xA;the number is 5&#xD;&#xA;the number is 8&#xD;&#xA;the number is 80&#xD;&#xA;the number is 5&#xD;&#xA;the number is 8&#xD;&#xA;the number is 80&#xD;&#xA;</pre>",
@@ -2750,7 +2750,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 3,
@@ -2782,7 +2782,7 @@ module.exports = {
                   "expected": "80"
                 },
                 "collections": [],
-                "id": "8d6e1fdb-274c-4e07-ac11-53da568b1f37"
+                "id": "b1381fb4-f02e-4f99-ad80-64fd401c0ed1"
               },
               {
                 "key": "AddAndMultiply",
@@ -2793,7 +2793,7 @@ module.exports = {
                   "expected": "77"
                 },
                 "collections": [],
-                "id": "98815b31-c83a-433a-99dd-2d6fe9612c44"
+                "id": "93738795-f744-4692-87bc-88ae7d0755d8"
               },
               {
                 "key": "AddAndMultiplyTable",
@@ -2812,7 +2812,7 @@ module.exports = {
                           "expected": "25"
                         },
                         "collections": [],
-                        "id": "fde2309a-d232-42d4-9cb2-d256f88255e8"
+                        "id": "4a75d153-c297-4866-a45e-33932b970b03"
                       },
                       {
                         "key": "Rows",
@@ -2823,7 +2823,7 @@ module.exports = {
                           "expected": "80"
                         },
                         "collections": [],
-                        "id": "9da6ab17-aea2-41a4-a958-aaae2f3b6081"
+                        "id": "6b2ae080-2a8b-4298-a91c-2284e229ba90"
                       },
                       {
                         "key": "Rows",
@@ -2834,18 +2834,18 @@ module.exports = {
                           "expected": "77"
                         },
                         "collections": [],
-                        "id": "230905f5-4168-4cba-9e44-dab06dc6d030"
+                        "id": "e6063b72-d109-42a1-a8d5-2730820ef6ea"
                       }
                     ],
                     "activeCells": {},
-                    "id": "c7f5e2f4-a09c-4a16-b1ba-dfee60a98f14"
+                    "id": "57d30560-90fa-4174-8bd7-bf31015cac7e"
                   }
                 ],
-                "id": "52865c6c-7253-42b9-a83f-21f9c0ba7b6f"
+                "id": "fe4b6275-53b4-4c1e-a0e9-15cccbd7fecb"
               }
             ],
             "activeCells": {},
-            "id": "4b1a4f97-6bdf-4698-bb9b-e3a907700cf2"
+            "id": "80b01b79-edde-44a2-b385-8199cac3ff08"
           }
         ],
         "id": "paragraph2"
@@ -2875,7 +2875,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "53210f94-75d8-48bc-a161-12bb7360336a",
+            "id": "dc02eb90-c6ba-4a4b-b3b9-5d8436c309dd",
             "spec": "sentence1",
             "position": null,
             "type": "step-result"
@@ -2892,7 +2892,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "a37cf696-9dd8-4ca5-9692-e7494d529705",
+            "id": "a1b88f6f-2fcf-45ea-bd75-1949e59d9589",
             "spec": "sentence1",
             "position": null,
             "type": "step-result"
@@ -2912,46 +2912,46 @@ module.exports = {
             "type": "Specification",
             "subject": "Currying",
             "start": 0,
-            "end": 5,
-            "duration": 5
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 4,
-            "end": 4,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:SetUp",
-            "start": 4,
-            "end": 5,
-            "duration": 1
-          },
-          {
-            "type": "Grammar",
-            "subject": "Adding",
-            "start": 5,
-            "end": 5,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 5,
-            "end": 5,
+            "start": 2,
+            "end": 2,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "Adding",
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Math:TearDown",
-            "start": 5,
-            "end": 5,
+            "start": 2,
+            "end": 2,
             "duration": 0
           }
         ],
-        "duration": 5,
+        "duration": 2,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -2962,7 +2962,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -2993,7 +2993,7 @@ module.exports = {
                   "y": "5"
                 },
                 "collections": [],
-                "id": "53210f94-75d8-48bc-a161-12bb7360336a"
+                "id": "dc02eb90-c6ba-4a4b-b3b9-5d8436c309dd"
               },
               {
                 "key": "AddTo5",
@@ -3003,7 +3003,7 @@ module.exports = {
                   "y": "5"
                 },
                 "collections": [],
-                "id": "a37cf696-9dd8-4ca5-9692-e7494d529705"
+                "id": "a1b88f6f-2fcf-45ea-bd75-1949e59d9589"
               }
             ],
             "activeCells": {},
@@ -3067,8 +3067,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Facts",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Context",
@@ -3113,7 +3113,7 @@ module.exports = {
             "duration": 0
           }
         ],
-        "duration": 1,
+        "duration": 2,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -3130,7 +3130,7 @@ module.exports = {
         ],
         "attempts": 4,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -3197,7 +3197,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "146c0473-472c-46ad-8dff-566a4caac37c",
+            "id": "76b4a81f-4b2a-45bb-a799-055c35937ea1",
             "spec": "sentence3",
             "position": "setup",
             "type": "step-result"
@@ -3214,7 +3214,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "c23ebb6c-9773-4e81-9028-45afbf76da32",
+            "id": "142ec428-311d-4b74-b55a-1270479a63f3",
             "spec": "sentence3",
             "position": null,
             "type": "step-result"
@@ -3231,7 +3231,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "8c2caf21-48ae-404f-aad8-8f1930ab418a",
+            "id": "c11e5360-078b-4758-b299-d265cb780790",
             "spec": "sentence3",
             "position": null,
             "type": "step-result"
@@ -3240,7 +3240,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "146c0473-472c-46ad-8dff-566a4caac37c",
+            "id": "76b4a81f-4b2a-45bb-a799-055c35937ea1",
             "spec": "sentence3",
             "position": "teardown",
             "type": "step-result"
@@ -3251,46 +3251,46 @@ module.exports = {
             "type": "Specification",
             "subject": "Importing and Currying",
             "start": 0,
-            "end": 4,
-            "duration": 4
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "CurriedMath:SetUp",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Adding",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "CurriedMath:TearDown",
-            "start": 1,
-            "end": 1,
+            "start": 2,
+            "end": 2,
             "duration": 0
           }
         ],
-        "duration": 4,
+        "duration": 2,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -3301,7 +3301,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 1,
           "wrongs": 1,
@@ -3332,7 +3332,7 @@ module.exports = {
                   "x": "5"
                 },
                 "collections": [],
-                "id": "c23ebb6c-9773-4e81-9028-45afbf76da32"
+                "id": "142ec428-311d-4b74-b55a-1270479a63f3"
               },
               {
                 "key": "AddingTo5",
@@ -3342,11 +3342,11 @@ module.exports = {
                   "x": "5"
                 },
                 "collections": [],
-                "id": "8c2caf21-48ae-404f-aad8-8f1930ab418a"
+                "id": "c11e5360-078b-4758-b299-d265cb780790"
               }
             ],
             "activeCells": {},
-            "id": "146c0473-472c-46ad-8dff-566a4caac37c"
+            "id": "76b4a81f-4b2a-45bb-a799-055c35937ea1"
           }
         ],
         "id": "sentence3"
@@ -3385,7 +3385,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e19d5fd-b3cd-4aea-9efb-ae3570be2b16",
+            "id": "fc6df424-2070-4c09-84a2-525d4018ac92",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3394,7 +3394,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1b91d15a-b8cc-479a-8b04-034f2a4cabe7",
+            "id": "651409f9-b4f3-4b10-83a7-23f7beb6241c",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3403,7 +3403,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "51c41b54-30f3-4e48-b84f-c9d4975dc03f",
+            "id": "3e11e2f5-a14f-48d0-8960-a03ca163f408",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3437,7 +3437,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "5477c4cf-f131-480c-82f4-760e8d14c648",
+            "id": "e01bfb9b-d4d5-43ff-a6b8-9315c4a999ca",
             "spec": "sentence4",
             "position": null,
             "type": "step-result"
@@ -3484,36 +3484,36 @@ module.exports = {
             "type": "Specification",
             "subject": "Sentences",
             "start": 0,
-            "end": 6,
-            "duration": 6
+            "end": 5,
+            "duration": 5
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 2,
-            "end": 2,
+            "start": 3,
+            "end": 3,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Sentence:SetUp",
-            "start": 2,
-            "end": 2,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "StartWithTheNumber",
-            "start": 2,
-            "end": 2,
-            "duration": 0
-          },
-          {
-            "type": "Grammar",
-            "subject": "StartWithTheNumber",
-            "start": 2,
+            "start": 3,
             "end": 3,
-            "duration": 1
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "StartWithTheNumber",
+            "start": 3,
+            "end": 3,
+            "duration": 0
+          },
+          {
+            "type": "Grammar",
+            "subject": "StartWithTheNumber",
+            "start": 3,
+            "end": 3,
+            "duration": 0
           },
           {
             "type": "Grammar",
@@ -3554,15 +3554,15 @@ module.exports = {
             "type": "Grammar",
             "subject": "ThisLineIsAlwaysFalse",
             "start": 4,
-            "end": 5,
-            "duration": 1
+            "end": 4,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "ThisLineAlwaysThrowsExceptions",
-            "start": 5,
+            "start": 4,
             "end": 5,
-            "duration": 0
+            "duration": 1
           },
           {
             "type": "Fixture",
@@ -3572,7 +3572,7 @@ module.exports = {
             "duration": 0
           }
         ],
-        "duration": 6,
+        "duration": 5,
         "logging": [
           {
             "html": "<pre class=\"debug-output\">the number is 5&#xD;&#xA;the number is 19&#xD;&#xA;the number is 17&#xD;&#xA;</pre>",
@@ -3595,7 +3595,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -3643,7 +3643,7 @@ module.exports = {
                   "number": "5"
                 },
                 "collections": [],
-                "id": "4e19d5fd-b3cd-4aea-9efb-ae3570be2b16"
+                "id": "fc6df424-2070-4c09-84a2-525d4018ac92"
               },
               {
                 "key": "MultiplyThenAdd",
@@ -3652,7 +3652,7 @@ module.exports = {
                   "delta": "4"
                 },
                 "collections": [],
-                "id": "1b91d15a-b8cc-479a-8b04-034f2a4cabe7"
+                "id": "651409f9-b4f3-4b10-83a7-23f7beb6241c"
               },
               {
                 "key": "Subtract",
@@ -3660,7 +3660,7 @@ module.exports = {
                   "operand": "2"
                 },
                 "collections": [],
-                "id": "51c41b54-30f3-4e48-b84f-c9d4975dc03f"
+                "id": "3e11e2f5-a14f-48d0-8960-a03ca163f408"
               },
               {
                 "text": "Correct assertion",
@@ -3689,7 +3689,7 @@ module.exports = {
                   "sum": "5"
                 },
                 "collections": [],
-                "id": "5477c4cf-f131-480c-82f4-760e8d14c648"
+                "id": "e01bfb9b-d4d5-43ff-a6b8-9315c4a999ca"
               },
               {
                 "text": "Line assertions",
@@ -3735,7 +3735,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3e40df2f-149f-4b59-9490-397154a61931",
+            "id": "ebf9e496-1b09-4d5d-9ee4-0bd9e4f17d94",
             "spec": "set1",
             "position": "setup",
             "type": "step-result"
@@ -3744,7 +3744,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "86e22e45-88f5-4505-9369-885d59c2cdf9",
+            "id": "8cc352cb-a5f6-4d47-bd57-ad8ea436b4d2",
             "spec": "set1",
             "position": "before",
             "type": "step-result"
@@ -3753,7 +3753,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1867ad4c-7288-4675-ac38-09e911d829d3",
+            "id": "a705492a-1d29-4642-95d0-ac560ec758e8",
             "spec": "set1",
             "position": "0",
             "type": "step-result"
@@ -3762,7 +3762,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1867ad4c-7288-4675-ac38-09e911d829d3",
+            "id": "a705492a-1d29-4642-95d0-ac560ec758e8",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -3771,7 +3771,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1867ad4c-7288-4675-ac38-09e911d829d3",
+            "id": "a705492a-1d29-4642-95d0-ac560ec758e8",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -3780,7 +3780,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1867ad4c-7288-4675-ac38-09e911d829d3",
+            "id": "a705492a-1d29-4642-95d0-ac560ec758e8",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -3789,7 +3789,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1867ad4c-7288-4675-ac38-09e911d829d3",
+            "id": "a705492a-1d29-4642-95d0-ac560ec758e8",
             "spec": "set1",
             "position": "4",
             "type": "step-result"
@@ -3798,7 +3798,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1209beb2-cb17-4238-aa4d-cd87f66cae12",
+            "id": "b99ae70f-d63b-4834-950d-9d95a8849ca4",
             "spec": "set1",
             "position": "0",
             "type": "step-result"
@@ -3807,7 +3807,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1209beb2-cb17-4238-aa4d-cd87f66cae12",
+            "id": "b99ae70f-d63b-4834-950d-9d95a8849ca4",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -3816,7 +3816,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1209beb2-cb17-4238-aa4d-cd87f66cae12",
+            "id": "b99ae70f-d63b-4834-950d-9d95a8849ca4",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -3825,7 +3825,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1209beb2-cb17-4238-aa4d-cd87f66cae12",
+            "id": "b99ae70f-d63b-4834-950d-9d95a8849ca4",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -3834,7 +3834,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1209beb2-cb17-4238-aa4d-cd87f66cae12",
+            "id": "b99ae70f-d63b-4834-950d-9d95a8849ca4",
             "spec": "set1",
             "position": "4",
             "type": "step-result"
@@ -3843,7 +3843,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e4c0032-420b-4fa7-80cd-cc228130eabc",
+            "id": "0ce7318c-b708-44e0-a120-babc8142a7a3",
             "spec": "set1",
             "position": "0",
             "type": "step-result"
@@ -3852,7 +3852,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e4c0032-420b-4fa7-80cd-cc228130eabc",
+            "id": "0ce7318c-b708-44e0-a120-babc8142a7a3",
             "spec": "set1",
             "position": "1",
             "type": "step-result"
@@ -3861,7 +3861,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e4c0032-420b-4fa7-80cd-cc228130eabc",
+            "id": "0ce7318c-b708-44e0-a120-babc8142a7a3",
             "spec": "set1",
             "position": "2",
             "type": "step-result"
@@ -3870,7 +3870,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e4c0032-420b-4fa7-80cd-cc228130eabc",
+            "id": "0ce7318c-b708-44e0-a120-babc8142a7a3",
             "spec": "set1",
             "position": "3",
             "type": "step-result"
@@ -3879,7 +3879,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4e4c0032-420b-4fa7-80cd-cc228130eabc",
+            "id": "0ce7318c-b708-44e0-a120-babc8142a7a3",
             "spec": "set1",
             "position": "4",
             "type": "step-result"
@@ -3922,8 +3922,8 @@ module.exports = {
           {
             "spec": "set1",
             "matches": [
-              "7bf6e126-1e55-4ede-84dc-c73f2447880b",
-              "48dfb2cd-194a-48ae-86ab-9f90fe975ea0"
+              "3084f4fb-1fcd-44b1-916a-02018a27bc85",
+              "2e9cba9d-9cea-40ec-94d0-004227537e7d"
             ],
             "missing": [],
             "extras": [
@@ -3940,9 +3940,9 @@ module.exports = {
           {
             "spec": "set1",
             "matches": [
-              "a70d36f4-ad12-4f79-ac15-b40ddab514a6",
-              "b86a944f-0e7a-45eb-82ea-7eecaac2b5c5",
-              "ace24f53-9159-4386-b323-d7043e48e6ef"
+              "22503ecd-9347-4c08-b0d2-b45b4cf18bba",
+              "9ae61c4e-2289-4643-97fb-1f10a0675c70",
+              "4e36b12c-109d-4a63-bbc2-47e5b654b945"
             ],
             "missing": [
               "11"
@@ -3973,7 +3973,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "3e40df2f-149f-4b59-9490-397154a61931",
+            "id": "ebf9e496-1b09-4d5d-9ee4-0bd9e4f17d94",
             "spec": "set1",
             "position": "teardown",
             "type": "step-result"
@@ -3984,179 +3984,179 @@ module.exports = {
             "type": "Specification",
             "subject": "Ordered Set",
             "start": 0,
-            "end": 23,
-            "duration": 23
+            "end": 13,
+            "duration": 13
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 0,
-            "end": 0,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Sets:SetUp",
-            "start": 0,
-            "end": 0,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAreBefore",
-            "start": 0,
-            "end": 0,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:0",
-            "start": 0,
-            "end": 0,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:1",
-            "start": 0,
-            "end": 0,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:2",
-            "start": 0,
-            "end": 1,
-            "duration": 1
-          },
-          {
-            "type": "Grammar",
-            "subject": "InvoiceDetailsAre:Row:3",
-            "start": 1,
-            "end": 1,
+            "start": 4,
+            "end": 4,
             "duration": 0
           },
           {
             "type": "Grammar",
+            "subject": "InvoiceDetailsAre:Row:3",
+            "start": 4,
+            "end": 5,
+            "duration": 1
+          },
+          {
+            "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:4",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:0",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:1",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:2",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:3",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:4",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:0",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:1",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:2",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:3",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "InvoiceDetailsAre:Row:4",
-            "start": 1,
-            "end": 1,
+            "start": 5,
+            "end": 5,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 3,
-            "end": 17,
-            "duration": 14
+            "start": 6,
+            "end": 12,
+            "duration": 6
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 17,
-            "end": 21,
-            "duration": 4
+            "start": 12,
+            "end": 12,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 21,
-            "end": 22,
+            "start": 12,
+            "end": 13,
             "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 22,
-            "end": 23,
-            "duration": 1
+            "start": 13,
+            "end": 13,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 23,
-            "end": 23,
+            "start": 13,
+            "end": 13,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Sets:TearDown",
-            "start": 23,
-            "end": 23,
+            "start": 13,
+            "end": 13,
             "duration": 0
           }
         ],
-        "duration": 23,
+        "duration": 13,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -4167,7 +4167,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 8,
           "wrongs": 5,
@@ -4206,7 +4206,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "1867ad4c-7288-4675-ac38-09e911d829d3"
+                        "id": "a705492a-1d29-4642-95d0-ac560ec758e8"
                       },
                       {
                         "key": "Rows",
@@ -4216,7 +4216,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "1209beb2-cb17-4238-aa4d-cd87f66cae12"
+                        "id": "b99ae70f-d63b-4834-950d-9d95a8849ca4"
                       },
                       {
                         "key": "Rows",
@@ -4226,19 +4226,19 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "4e4c0032-420b-4fa7-80cd-cc228130eabc"
+                        "id": "0ce7318c-b708-44e0-a120-babc8142a7a3"
                       }
                     ],
                     "activeCells": {},
-                    "id": "86e22e45-88f5-4505-9369-885d59c2cdf9"
+                    "id": "8cc352cb-a5f6-4d47-bd57-ad8ea436b4d2"
                   }
                 ],
-                "id": "729c08a7-0d37-4c0b-8117-dbc9f899b226"
+                "id": "52dbe2ee-76dc-4776-83f0-c3374cbe00f8"
               },
               {
                 "text": "Completely successful ordering",
                 "type": "comment",
-                "id": "db84bc3e-f3b5-4e19-a593-e3472f436fa3"
+                "id": "6fd95b00-9baf-43ac-b860-a30855d0f642"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -4289,12 +4289,12 @@ module.exports = {
                     "id": "1"
                   }
                 ],
-                "id": "64df11a7-64e0-474c-879e-dc48086d4c17"
+                "id": "220fd722-f345-468c-82e6-e3ed62d083ab"
               },
               {
                 "text": "Out of order",
                 "type": "comment",
-                "id": "281e1fac-5044-4d45-97ce-60b48a0914e4"
+                "id": "5bf4b563-4e1e-49a4-ba2d-a7168bdb6698"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -4345,12 +4345,12 @@ module.exports = {
                     "id": "5"
                   }
                 ],
-                "id": "454814c1-a986-4aef-b61f-dc2239de3bc9"
+                "id": "eff11901-9902-4eed-acf3-c39948715c5d"
               },
               {
                 "text": "Should have one exra",
                 "type": "comment",
-                "id": "bf3071fe-c5cf-4f9f-8982-17a4fdeeaf00"
+                "id": "5d08f079-be91-43f2-8963-1f2a140f6d6f"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -4369,7 +4369,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "7bf6e126-1e55-4ede-84dc-c73f2447880b"
+                        "id": "3084f4fb-1fcd-44b1-916a-02018a27bc85"
                       },
                       {
                         "key": "Rows",
@@ -4380,19 +4380,19 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "48dfb2cd-194a-48ae-86ab-9f90fe975ea0"
+                        "id": "2e9cba9d-9cea-40ec-94d0-004227537e7d"
                       }
                     ],
                     "activeCells": {},
                     "id": "9"
                   }
                 ],
-                "id": "dcc69179-89a2-4195-a21b-9aba690db216"
+                "id": "970a1ee1-445d-4529-b38c-1d02505eb793"
               },
               {
                 "text": "Should mark one expected result as missing",
                 "type": "comment",
-                "id": "5e255f99-c20e-4743-bd5c-a5a4e788a568"
+                "id": "c7bad69d-15bf-4c21-8586-b44dc2875dbf"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -4411,7 +4411,7 @@ module.exports = {
                           "Date": "TODAY"
                         },
                         "collections": [],
-                        "id": "a70d36f4-ad12-4f79-ac15-b40ddab514a6"
+                        "id": "22503ecd-9347-4c08-b0d2-b45b4cf18bba"
                       },
                       {
                         "key": "Rows",
@@ -4422,7 +4422,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "b86a944f-0e7a-45eb-82ea-7eecaac2b5c5"
+                        "id": "9ae61c4e-2289-4643-97fb-1f10a0675c70"
                       },
                       {
                         "key": "Rows",
@@ -4433,7 +4433,7 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "ace24f53-9159-4386-b323-d7043e48e6ef"
+                        "id": "4e36b12c-109d-4a63-bbc2-47e5b654b945"
                       },
                       {
                         "key": "Rows",
@@ -4452,12 +4452,12 @@ module.exports = {
                     "id": "10"
                   }
                 ],
-                "id": "358da881-964e-4642-a61d-fd046a8d6a67"
+                "id": "a16fff4d-2a20-4ee0-bd80-6156920ba669"
               },
               {
                 "text": "One syntax error",
                 "type": "comment",
-                "id": "8bd1a2ae-098f-4113-985e-b7209988d978"
+                "id": "1e7c9627-065c-4e89-96bb-1c032434dde0"
               },
               {
                 "key": "OrderedDetailsAre",
@@ -4488,7 +4488,7 @@ module.exports = {
                           "Date": "TODAY+1"
                         },
                         "collections": [],
-                        "id": "ef2f8752-3e6c-4927-9cc9-a8f55ccae736"
+                        "id": "7f65fb91-2cda-4cb2-8c8d-1cc5bf4890b7"
                       },
                       {
                         "key": "Rows",
@@ -4499,18 +4499,18 @@ module.exports = {
                           "Date": "TODAY+2"
                         },
                         "collections": [],
-                        "id": "893ffe19-c807-47a8-9728-b599394bb00f"
+                        "id": "9d15f341-a4f3-44c4-8daa-1dd132a794d0"
                       }
                     ],
                     "activeCells": {},
-                    "id": "c657278d-27f8-4843-b71c-59a4d652fc2e"
+                    "id": "8a03d075-a6d4-4c07-9023-7b8a723bf656"
                   }
                 ],
-                "id": "c1bb3b85-a76d-4bf3-868b-3ec6eafc1675"
+                "id": "cbb35c9b-19ef-4bb5-a4d0-fe67d6ebc15d"
               }
             ],
             "activeCells": {},
-            "id": "3e40df2f-149f-4b59-9490-397154a61931"
+            "id": "ebf9e496-1b09-4d5d-9ee4-0bd9e4f17d94"
           }
         ],
         "id": "set1"
@@ -4523,7 +4523,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b31195d1-05d5-4068-b068-2f84935dd504",
+            "id": "a3b817ce-2f13-452d-9446-c8f04d2a0c65",
             "spec": "set2",
             "position": "setup",
             "type": "step-result"
@@ -4532,7 +4532,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "87b1dec4-70fe-4e09-8e53-4793599dbb99",
+            "id": "cb8eeaa7-3e99-432f-ba93-6b96d766f5f0",
             "spec": "set2",
             "position": "before",
             "type": "step-result"
@@ -4541,7 +4541,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "4655cf5a-3920-4567-a7e7-6951265bb694",
+            "id": "ee319b13-b16e-4e5f-882e-847cbcd58bb8",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4550,7 +4550,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "91366bc3-ceae-4f80-815a-b0d3fcf74210",
+            "id": "f341d9b4-20aa-4b55-9a83-1240b6ca4531",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4559,7 +4559,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7651788f-da31-4388-8f15-ff1cb56bcf8b",
+            "id": "fee2f502-985b-4ee5-9b11-e1e9e81cb11d",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4568,7 +4568,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "d994b492-d3f2-454f-b13f-41b9e2aac618",
+            "id": "f6e730df-98a9-4f9b-bd19-b5bd1d07eecd",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4577,7 +4577,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "e8ca158c-3db3-4a3e-94a8-2a5b09a107d6",
+            "id": "fe084a9a-e502-4739-b2fa-b8fe1b43b074",
             "spec": "set2",
             "position": null,
             "type": "step-result"
@@ -4585,38 +4585,38 @@ module.exports = {
           {
             "spec": "set2",
             "matches": [
-              "f99f5248-e7ca-45b6-a5ba-631d87296c40",
-              "52b45815-0f6a-4845-9838-c1a05967d4f1",
-              "9d8cf7dc-05a0-470e-a772-f2f4e8bc2178",
-              "7d12d95e-c88d-436b-9a27-c35ca6da0378",
-              "d452b554-7766-43d7-b7e1-87538d5ab08d"
+              "1477b438-c429-4d57-9e44-4fa485789b6f",
+              "02b2e724-d145-450c-858e-f87bc4ebf14e",
+              "9467dac1-6c75-4dcf-8963-4fdf5cac29b0",
+              "730e57f7-fc7d-4ffc-9fac-736d42d443c1",
+              "a6102e9c-ba93-4029-a0bf-2ec9b95b2bfb"
             ],
             "missing": [],
             "extras": [],
             "wrongOrdered": [],
-            "id": "5142949d-e5a6-4c4e-ad9c-0b1786712c7a",
+            "id": "807f21f7-be3d-48c7-9e0c-cf0f9c222253",
             "type": "set-verification-result"
           },
           {
             "spec": "set2",
             "matches": [
-              "34a9a066-8ed3-458b-83e3-14cbdb7c1273",
-              "63a07588-48b0-48ef-88de-8cc2c326d188",
-              "5a08cc54-e088-4771-bf98-47f8f5aa41d7",
-              "cc156b56-3ade-430e-a733-437d63f5a593",
-              "18bb6314-4fbd-4c5c-8329-46dcc6b879ef"
+              "08c9357f-60a9-4dbf-8541-f5dc65002528",
+              "aad41ebe-a397-4fc2-9977-192169dcadcd",
+              "77d8042f-3b1b-4677-94c7-2b6855905f9d",
+              "699f87c3-838e-4a1b-9ba1-fe08b4cbd8d1",
+              "b373e141-d9d4-493c-8e2e-e02234d3788b"
             ],
             "missing": [],
             "extras": [],
             "wrongOrdered": [],
-            "id": "f091f9ab-b5df-4627-8139-0e6aec4d2c39",
+            "id": "85d0700a-2521-4b8e-97fc-bd52491d7142",
             "type": "set-verification-result"
           },
           {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "b31195d1-05d5-4068-b068-2f84935dd504",
+            "id": "a3b817ce-2f13-452d-9446-c8f04d2a0c65",
             "spec": "set2",
             "position": "teardown",
             "type": "step-result"
@@ -4627,8 +4627,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Successful OrderedStrings",
             "start": 0,
-            "end": 5,
-            "duration": 5
+            "end": 4,
+            "duration": 4
           },
           {
             "type": "Context",
@@ -4690,25 +4690,25 @@ module.exports = {
             "type": "Grammar",
             "subject": "Rows",
             "start": 0,
-            "end": 4,
-            "duration": 4
+            "end": 1,
+            "duration": 1
           },
           {
             "type": "Grammar",
             "subject": "Rows",
-            "start": 4,
-            "end": 5,
-            "duration": 1
+            "start": 1,
+            "end": 4,
+            "duration": 3
           },
           {
             "type": "Fixture",
             "subject": "Sets:TearDown",
-            "start": 5,
-            "end": 5,
+            "start": 4,
+            "end": 4,
             "duration": 0
           }
         ],
-        "duration": 5,
+        "duration": 4,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -4719,7 +4719,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 10,
           "wrongs": 0,
@@ -4756,7 +4756,7 @@ module.exports = {
                           "name": "Jeremy"
                         },
                         "collections": [],
-                        "id": "4655cf5a-3920-4567-a7e7-6951265bb694"
+                        "id": "ee319b13-b16e-4e5f-882e-847cbcd58bb8"
                       },
                       {
                         "key": "name",
@@ -4764,7 +4764,7 @@ module.exports = {
                           "name": "Josh"
                         },
                         "collections": [],
-                        "id": "91366bc3-ceae-4f80-815a-b0d3fcf74210"
+                        "id": "f341d9b4-20aa-4b55-9a83-1240b6ca4531"
                       },
                       {
                         "key": "name",
@@ -4772,7 +4772,7 @@ module.exports = {
                           "name": "Gary"
                         },
                         "collections": [],
-                        "id": "7651788f-da31-4388-8f15-ff1cb56bcf8b"
+                        "id": "fee2f502-985b-4ee5-9b11-e1e9e81cb11d"
                       },
                       {
                         "key": "name",
@@ -4780,7 +4780,7 @@ module.exports = {
                           "name": "Kevin"
                         },
                         "collections": [],
-                        "id": "d994b492-d3f2-454f-b13f-41b9e2aac618"
+                        "id": "f6e730df-98a9-4f9b-bd19-b5bd1d07eecd"
                       },
                       {
                         "key": "name",
@@ -4788,14 +4788,14 @@ module.exports = {
                           "name": "Chad"
                         },
                         "collections": [],
-                        "id": "e8ca158c-3db3-4a3e-94a8-2a5b09a107d6"
+                        "id": "fe084a9a-e502-4739-b2fa-b8fe1b43b074"
                       }
                     ],
                     "activeCells": {},
-                    "id": "87b1dec4-70fe-4e09-8e53-4793599dbb99"
+                    "id": "cb8eeaa7-3e99-432f-ba93-6b96d766f5f0"
                   }
                 ],
-                "id": "69b25585-fc19-4c0e-82f4-6f5fdce036d7"
+                "id": "dec63beb-71ca-427b-8902-8b65291d6e30"
               },
               {
                 "key": "OrderedStringSet",
@@ -4812,7 +4812,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "f99f5248-e7ca-45b6-a5ba-631d87296c40"
+                        "id": "1477b438-c429-4d57-9e44-4fa485789b6f"
                       },
                       {
                         "key": "Rows",
@@ -4821,7 +4821,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "52b45815-0f6a-4845-9838-c1a05967d4f1"
+                        "id": "02b2e724-d145-450c-858e-f87bc4ebf14e"
                       },
                       {
                         "key": "Rows",
@@ -4830,7 +4830,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "9d8cf7dc-05a0-470e-a772-f2f4e8bc2178"
+                        "id": "9467dac1-6c75-4dcf-8963-4fdf5cac29b0"
                       },
                       {
                         "key": "Rows",
@@ -4839,7 +4839,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "7d12d95e-c88d-436b-9a27-c35ca6da0378"
+                        "id": "730e57f7-fc7d-4ffc-9fac-736d42d443c1"
                       },
                       {
                         "key": "Rows",
@@ -4848,14 +4848,14 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "d452b554-7766-43d7-b7e1-87538d5ab08d"
+                        "id": "a6102e9c-ba93-4029-a0bf-2ec9b95b2bfb"
                       }
                     ],
                     "activeCells": {},
-                    "id": "5142949d-e5a6-4c4e-ad9c-0b1786712c7a"
+                    "id": "807f21f7-be3d-48c7-9e0c-cf0f9c222253"
                   }
                 ],
-                "id": "13659a48-9bf8-4dc4-9e2c-5a9d8cd1a64e"
+                "id": "f24b85fa-fc9c-4360-96af-18e1574fe591"
               },
               {
                 "key": "UnorderedStringSet",
@@ -4872,7 +4872,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "34a9a066-8ed3-458b-83e3-14cbdb7c1273"
+                        "id": "08c9357f-60a9-4dbf-8541-f5dc65002528"
                       },
                       {
                         "key": "Rows",
@@ -4881,7 +4881,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "63a07588-48b0-48ef-88de-8cc2c326d188"
+                        "id": "aad41ebe-a397-4fc2-9977-192169dcadcd"
                       },
                       {
                         "key": "Rows",
@@ -4890,7 +4890,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "5a08cc54-e088-4771-bf98-47f8f5aa41d7"
+                        "id": "77d8042f-3b1b-4677-94c7-2b6855905f9d"
                       },
                       {
                         "key": "Rows",
@@ -4899,7 +4899,7 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "cc156b56-3ade-430e-a733-437d63f5a593"
+                        "id": "699f87c3-838e-4a1b-9ba1-fe08b4cbd8d1"
                       },
                       {
                         "key": "Rows",
@@ -4908,18 +4908,18 @@ module.exports = {
                           "Index": ""
                         },
                         "collections": [],
-                        "id": "18bb6314-4fbd-4c5c-8329-46dcc6b879ef"
+                        "id": "b373e141-d9d4-493c-8e2e-e02234d3788b"
                       }
                     ],
                     "activeCells": {},
-                    "id": "f091f9ab-b5df-4627-8139-0e6aec4d2c39"
+                    "id": "85d0700a-2521-4b8e-97fc-bd52491d7142"
                   }
                 ],
-                "id": "840941a1-6473-481c-a87f-e7ba74f4aa80"
+                "id": "e23dc7c8-34a0-48b6-a22a-20fc3fa04cfd"
               }
             ],
             "activeCells": {},
-            "id": "b31195d1-05d5-4068-b068-2f84935dd504"
+            "id": "a3b817ce-2f13-452d-9446-c8f04d2a0c65"
           }
         ],
         "id": "set2"
@@ -4932,7 +4932,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "82d1c4af-ee91-4471-98a0-65f33b1f42ac",
+            "id": "82411e9a-dafa-4f10-99c5-7cec4bd8640c",
             "spec": "set3",
             "position": "setup",
             "type": "step-result"
@@ -4950,7 +4950,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "82d1c4af-ee91-4471-98a0-65f33b1f42ac",
+            "id": "82411e9a-dafa-4f10-99c5-7cec4bd8640c",
             "spec": "set3",
             "position": "teardown",
             "type": "step-result"
@@ -4961,39 +4961,39 @@ module.exports = {
             "type": "Specification",
             "subject": "Set with Error",
             "start": 0,
-            "end": 0,
-            "duration": 0
+            "end": 3,
+            "duration": 3
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 0,
-            "end": 0,
+            "start": 1,
+            "end": 1,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Sets:SetUp",
-            "start": 0,
-            "end": 0,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "rows",
-            "start": 0,
-            "end": 0,
-            "duration": 0
+            "start": 2,
+            "end": 3,
+            "duration": 1
           },
           {
             "type": "Fixture",
             "subject": "Sets:TearDown",
-            "start": 0,
-            "end": 0,
+            "start": 3,
+            "end": 3,
             "duration": 0
           }
         ],
-        "duration": 0,
+        "duration": 3,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -5010,7 +5010,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -5047,7 +5047,7 @@ module.exports = {
                           "Name": "a"
                         },
                         "collections": [],
-                        "id": "b38843e7-0b11-407b-8d8a-500393c47ad2"
+                        "id": "72c427a4-bb62-4fdc-8e9d-e3b286256920"
                       },
                       {
                         "key": "rows",
@@ -5055,7 +5055,7 @@ module.exports = {
                           "Name": "b"
                         },
                         "collections": [],
-                        "id": "3fcd0b2c-3060-43ae-817a-f5a431a6382b"
+                        "id": "aeddcf64-ad23-4b13-a077-46f2c26a7ce7"
                       },
                       {
                         "key": "rows",
@@ -5063,18 +5063,18 @@ module.exports = {
                           "Name": "c"
                         },
                         "collections": [],
-                        "id": "1f968fbc-8aac-4b4a-ae44-6401791ccdfb"
+                        "id": "9b6ecd41-f7b0-4dc5-9244-d5b731b8a5ee"
                       }
                     ],
                     "activeCells": {},
                     "id": "1"
                   }
                 ],
-                "id": "0f55ba39-4777-4172-8951-995f0f4b7bcb"
+                "id": "47463126-bc76-497d-8f17-7aa44f9dcd7f"
               }
             ],
             "activeCells": {},
-            "id": "82d1c4af-ee91-4471-98a0-65f33b1f42ac"
+            "id": "82411e9a-dafa-4f10-99c5-7cec4bd8640c"
           }
         ],
         "id": "set3"
@@ -5087,7 +5087,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "0aae9673-c5ba-45d8-84b8-16a8da6fc514",
+            "id": "fb5513f6-7c8e-44b0-9bc6-85c8ae67b8e2",
             "spec": "set4",
             "position": "setup",
             "type": "step-result"
@@ -5096,7 +5096,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2fa168b6-44ec-4009-b411-9d6475b47ea8",
+            "id": "dc8e4495-38ed-4189-9d7b-8e7fc0d74957",
             "spec": "set4",
             "position": "before",
             "type": "step-result"
@@ -5105,7 +5105,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "63714d6d-d3ae-4716-959c-1463321e1c9f",
+            "id": "4ecddb2e-4703-4eb5-a7fa-c8b17c06f311",
             "spec": "set4",
             "position": "0",
             "type": "step-result"
@@ -5114,7 +5114,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "63714d6d-d3ae-4716-959c-1463321e1c9f",
+            "id": "4ecddb2e-4703-4eb5-a7fa-c8b17c06f311",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -5123,7 +5123,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "63714d6d-d3ae-4716-959c-1463321e1c9f",
+            "id": "4ecddb2e-4703-4eb5-a7fa-c8b17c06f311",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -5132,7 +5132,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "63714d6d-d3ae-4716-959c-1463321e1c9f",
+            "id": "4ecddb2e-4703-4eb5-a7fa-c8b17c06f311",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -5141,7 +5141,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "63714d6d-d3ae-4716-959c-1463321e1c9f",
+            "id": "4ecddb2e-4703-4eb5-a7fa-c8b17c06f311",
             "spec": "set4",
             "position": "4",
             "type": "step-result"
@@ -5150,7 +5150,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9458c7ba-875c-49a5-9a81-c49656b4a8bb",
+            "id": "22ffed0f-5c05-4878-83f5-15ceea54ff9d",
             "spec": "set4",
             "position": "0",
             "type": "step-result"
@@ -5159,7 +5159,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9458c7ba-875c-49a5-9a81-c49656b4a8bb",
+            "id": "22ffed0f-5c05-4878-83f5-15ceea54ff9d",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -5168,7 +5168,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9458c7ba-875c-49a5-9a81-c49656b4a8bb",
+            "id": "22ffed0f-5c05-4878-83f5-15ceea54ff9d",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -5177,7 +5177,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9458c7ba-875c-49a5-9a81-c49656b4a8bb",
+            "id": "22ffed0f-5c05-4878-83f5-15ceea54ff9d",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -5186,7 +5186,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9458c7ba-875c-49a5-9a81-c49656b4a8bb",
+            "id": "22ffed0f-5c05-4878-83f5-15ceea54ff9d",
             "spec": "set4",
             "position": "4",
             "type": "step-result"
@@ -5195,7 +5195,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f03f69e4-ca88-4101-9029-441d6cce42f2",
+            "id": "65b87577-0eaa-4d12-ab84-26420caa97f6",
             "spec": "set4",
             "position": "0",
             "type": "step-result"
@@ -5204,7 +5204,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f03f69e4-ca88-4101-9029-441d6cce42f2",
+            "id": "65b87577-0eaa-4d12-ab84-26420caa97f6",
             "spec": "set4",
             "position": "1",
             "type": "step-result"
@@ -5213,7 +5213,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f03f69e4-ca88-4101-9029-441d6cce42f2",
+            "id": "65b87577-0eaa-4d12-ab84-26420caa97f6",
             "spec": "set4",
             "position": "2",
             "type": "step-result"
@@ -5222,7 +5222,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f03f69e4-ca88-4101-9029-441d6cce42f2",
+            "id": "65b87577-0eaa-4d12-ab84-26420caa97f6",
             "spec": "set4",
             "position": "3",
             "type": "step-result"
@@ -5231,7 +5231,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "f03f69e4-ca88-4101-9029-441d6cce42f2",
+            "id": "65b87577-0eaa-4d12-ab84-26420caa97f6",
             "spec": "set4",
             "position": "4",
             "type": "step-result"
@@ -5248,7 +5248,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "beccf64f-4a77-405e-b931-5ddab8ebd8a8",
+            "id": "5424f288-fd31-46bb-8e2c-a5d6a229e85d",
             "spec": "set4",
             "position": null,
             "type": "step-result"
@@ -5257,7 +5257,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "0aae9673-c5ba-45d8-84b8-16a8da6fc514",
+            "id": "fb5513f6-7c8e-44b0-9bc6-85c8ae67b8e2",
             "spec": "set4",
             "position": "teardown",
             "type": "step-result"
@@ -5268,8 +5268,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Unordered Set",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Context",
@@ -5412,7 +5412,7 @@ module.exports = {
             "duration": 0
           }
         ],
-        "duration": 1,
+        "duration": 0,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -5423,7 +5423,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -5462,7 +5462,7 @@ module.exports = {
                           "Name": "Cord"
                         },
                         "collections": [],
-                        "id": "63714d6d-d3ae-4716-959c-1463321e1c9f"
+                        "id": "4ecddb2e-4703-4eb5-a7fa-c8b17c06f311"
                       },
                       {
                         "key": "Rows",
@@ -5472,7 +5472,7 @@ module.exports = {
                           "Name": "Drill"
                         },
                         "collections": [],
-                        "id": "9458c7ba-875c-49a5-9a81-c49656b4a8bb"
+                        "id": "22ffed0f-5c05-4878-83f5-15ceea54ff9d"
                       },
                       {
                         "key": "Rows",
@@ -5482,14 +5482,14 @@ module.exports = {
                           "Name": "Hammer"
                         },
                         "collections": [],
-                        "id": "f03f69e4-ca88-4101-9029-441d6cce42f2"
+                        "id": "65b87577-0eaa-4d12-ab84-26420caa97f6"
                       }
                     ],
                     "activeCells": {},
-                    "id": "2fa168b6-44ec-4009-b411-9d6475b47ea8"
+                    "id": "dc8e4495-38ed-4189-9d7b-8e7fc0d74957"
                   }
                 ],
-                "id": "a89222b4-9d89-4991-b00b-5c514248f15c"
+                "id": "54ef1cc8-1236-450c-ae8f-55060e5da1ee"
               },
               {
                 "key": "UnorderedDetailsAre",
@@ -5507,7 +5507,7 @@ module.exports = {
                           "Name": "Drill"
                         },
                         "collections": [],
-                        "id": "beccf64f-4a77-405e-b931-5ddab8ebd8a8"
+                        "id": "5424f288-fd31-46bb-8e2c-a5d6a229e85d"
                       },
                       {
                         "key": "Rows",
@@ -5517,18 +5517,18 @@ module.exports = {
                           "Name": "Hammer"
                         },
                         "collections": [],
-                        "id": "6eacaf27-95aa-42f2-ae25-a5ee28032905"
+                        "id": "5618064b-4b3b-4aef-9804-2ce5b1312c10"
                       }
                     ],
                     "activeCells": {},
-                    "id": "c6cdb0e9-52ef-4eed-9650-18667f62de06"
+                    "id": "6157778e-63ac-408f-879e-d9e759d2ef10"
                   }
                 ],
-                "id": "4e451248-7f24-4ebc-afd8-34929df2e109"
+                "id": "b03572fa-323a-4847-b435-1ea3128095a2"
               }
             ],
             "activeCells": {},
-            "id": "0aae9673-c5ba-45d8-84b8-16a8da6fc514"
+            "id": "fb5513f6-7c8e-44b0-9bc6-85c8ae67b8e2"
           }
         ],
         "id": "set4"
@@ -5559,7 +5559,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "06a60333-1fc9-4e88-a5a6-546c924e85f0",
+            "id": "882f5894-87ec-496e-99a6-b2829ab25695",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5568,7 +5568,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2f999bbb-fb06-4d58-ab6b-3e9c885e62d9",
+            "id": "f91f3fb9-eb11-4a20-9571-03b5fbac0185",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5577,7 +5577,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "309eb0da-7db2-4bf6-a978-3c6d7fb36beb",
+            "id": "5fde74c4-d26e-48b3-8b8f-cda0f4206145",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5586,7 +5586,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "0e8c37ef-147f-44b4-98ea-188fe5b2016e",
+            "id": "93dc9937-5021-4e4b-abf3-85c698feb616",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5595,7 +5595,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "7f88179e-c8d9-4f1b-94ca-aa115705d014",
+            "id": "0477c90c-09ba-4b75-95fe-196c6da1dcaf",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5604,7 +5604,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "cc0aba89-2fbc-45f6-bc85-2735c9627d83",
+            "id": "d473b950-94b8-4baa-8512-9109b9b82030",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5613,7 +5613,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "31ecee01-c7ed-415f-b701-a856b67a65bd",
+            "id": "6e6727ad-e73b-4523-a9f4-9e4e9ffb30fc",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5622,7 +5622,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "8d76ab34-932d-4164-9a1d-350d0fcea6ca",
+            "id": "bff67759-4648-4fd9-b53d-eb71a902dba7",
             "spec": "set5",
             "position": null,
             "type": "step-result"
@@ -5630,13 +5630,13 @@ module.exports = {
           {
             "spec": "set5",
             "matches": [
-              "74b67586-cb02-4f4b-8d90-3f268ec7066d",
-              "7e14b93b-f469-456f-8327-243a13ad4909",
-              "128dd9a9-aecb-40fd-b592-85ac48dc8061",
-              "0d62ebfe-b58c-4af3-87ee-f3c58f648b29"
+              "002e4391-7c03-4b46-84ca-56d55c72f08c",
+              "d94e6615-802d-4dc0-8c16-445e7dd672ee",
+              "e319c945-2a44-4b76-aa1b-dd841e5bf56b",
+              "4d8cd2ee-eed9-47c1-baaf-ab763adda1dd"
             ],
             "missing": [
-              "92703e04-8da5-4f52-9b32-85b0e111d15a"
+              "00dbd558-659e-43ff-bc5e-6a34bc9f44e1"
             ],
             "extras": [
               {
@@ -5649,11 +5649,11 @@ module.exports = {
             "wrongOrdered": [
               {
                 "actual": 5,
-                "id": "fbdef853-ba0a-4a07-b5b0-fbb08739e45d"
+                "id": "1c628875-3b46-4b80-9fc1-22c15c937511"
               },
               {
                 "actual": 4,
-                "id": "a060e959-9508-4895-97d7-8e695efa0c11"
+                "id": "146ecdea-2440-4f63-9087-453119e9273d"
               }
             ],
             "id": "4f091fff-8c47-4a91-90c4-19c01477dddb",
@@ -5674,102 +5674,102 @@ module.exports = {
             "type": "Specification",
             "subject": "Unsuccessful Ordering",
             "start": 0,
-            "end": 14,
-            "duration": 14
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Sets:SetUp",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIsBefore",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TheDataIs:Row",
-            "start": 13,
-            "end": 13,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Rows",
-            "start": 13,
-            "end": 14,
-            "duration": 1
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Sets:TearDown",
-            "start": 14,
-            "end": 14,
+            "start": 0,
+            "end": 0,
             "duration": 0
           }
         ],
-        "duration": 14,
+        "duration": 0,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -5780,7 +5780,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 4,
           "wrongs": 5,
@@ -5817,7 +5817,7 @@ module.exports = {
                           "name": "Jeremy"
                         },
                         "collections": [],
-                        "id": "06a60333-1fc9-4e88-a5a6-546c924e85f0"
+                        "id": "882f5894-87ec-496e-99a6-b2829ab25695"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5825,7 +5825,7 @@ module.exports = {
                           "name": "Josh"
                         },
                         "collections": [],
-                        "id": "2f999bbb-fb06-4d58-ab6b-3e9c885e62d9"
+                        "id": "f91f3fb9-eb11-4a20-9571-03b5fbac0185"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5833,7 +5833,7 @@ module.exports = {
                           "name": "Gary"
                         },
                         "collections": [],
-                        "id": "309eb0da-7db2-4bf6-a978-3c6d7fb36beb"
+                        "id": "5fde74c4-d26e-48b3-8b8f-cda0f4206145"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5841,7 +5841,7 @@ module.exports = {
                           "name": "Kevin"
                         },
                         "collections": [],
-                        "id": "0e8c37ef-147f-44b4-98ea-188fe5b2016e"
+                        "id": "93dc9937-5021-4e4b-abf3-85c698feb616"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5849,7 +5849,7 @@ module.exports = {
                           "name": "Chad"
                         },
                         "collections": [],
-                        "id": "7f88179e-c8d9-4f1b-94ca-aa115705d014"
+                        "id": "0477c90c-09ba-4b75-95fe-196c6da1dcaf"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5857,7 +5857,7 @@ module.exports = {
                           "name": "Rand"
                         },
                         "collections": [],
-                        "id": "cc0aba89-2fbc-45f6-bc85-2735c9627d83"
+                        "id": "d473b950-94b8-4baa-8512-9109b9b82030"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5865,7 +5865,7 @@ module.exports = {
                           "name": "Perrin"
                         },
                         "collections": [],
-                        "id": "31ecee01-c7ed-415f-b701-a856b67a65bd"
+                        "id": "6e6727ad-e73b-4523-a9f4-9e4e9ffb30fc"
                       },
                       {
                         "key": "TheDataIs-row",
@@ -5873,14 +5873,14 @@ module.exports = {
                           "name": "Mat"
                         },
                         "collections": [],
-                        "id": "8d76ab34-932d-4164-9a1d-350d0fcea6ca"
+                        "id": "bff67759-4648-4fd9-b53d-eb71a902dba7"
                       }
                     ],
                     "activeCells": {},
                     "id": "61c521ec-1d41-4492-b00c-695d8cc4440b"
                   }
                 ],
-                "id": "4a7d7992-658f-4fd5-94d4-f4adbc654459"
+                "id": "3341346a-0031-4ae0-b631-6754786834a7"
               },
               {
                 "text": "All data is correct, but in the wrong order",
@@ -5901,7 +5901,7 @@ module.exports = {
                           "expected": "Jeremy"
                         },
                         "collections": [],
-                        "id": "74b67586-cb02-4f4b-8d90-3f268ec7066d"
+                        "id": "002e4391-7c03-4b46-84ca-56d55c72f08c"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5909,7 +5909,7 @@ module.exports = {
                           "expected": "Josh"
                         },
                         "collections": [],
-                        "id": "7e14b93b-f469-456f-8327-243a13ad4909"
+                        "id": "d94e6615-802d-4dc0-8c16-445e7dd672ee"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5917,7 +5917,7 @@ module.exports = {
                           "expected": "Gary"
                         },
                         "collections": [],
-                        "id": "128dd9a9-aecb-40fd-b592-85ac48dc8061"
+                        "id": "e319c945-2a44-4b76-aa1b-dd841e5bf56b"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5925,7 +5925,7 @@ module.exports = {
                           "expected": "Chad"
                         },
                         "collections": [],
-                        "id": "fbdef853-ba0a-4a07-b5b0-fbb08739e45d"
+                        "id": "1c628875-3b46-4b80-9fc1-22c15c937511"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5933,7 +5933,7 @@ module.exports = {
                           "expected": "Kevin"
                         },
                         "collections": [],
-                        "id": "a060e959-9508-4895-97d7-8e695efa0c11"
+                        "id": "146ecdea-2440-4f63-9087-453119e9273d"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5941,7 +5941,7 @@ module.exports = {
                           "expected": "Egwene"
                         },
                         "collections": [],
-                        "id": "92703e04-8da5-4f52-9b32-85b0e111d15a"
+                        "id": "00dbd558-659e-43ff-bc5e-6a34bc9f44e1"
                       },
                       {
                         "key": "OrderedStringSet-row",
@@ -5949,14 +5949,14 @@ module.exports = {
                           "expected": "Perrin"
                         },
                         "collections": [],
-                        "id": "0d62ebfe-b58c-4af3-87ee-f3c58f648b29"
+                        "id": "4d8cd2ee-eed9-47c1-baaf-ab763adda1dd"
                       }
                     ],
                     "activeCells": {},
                     "id": "4f091fff-8c47-4a91-90c4-19c01477dddb"
                   }
                 ],
-                "id": "e503c0b1-1bf3-4075-8ae0-da3b0692d9f3"
+                "id": "89362b2c-bd0f-4ff8-9718-2385b0e41fb7"
               }
             ],
             "activeCells": {},
@@ -5990,7 +5990,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "1d64ed64-e9f1-48f8-9306-9b0acc1e6c34",
+            "id": "f2bce6a5-05d3-4996-8bb6-d38350077b7a",
             "spec": "table1",
             "position": null,
             "type": "step-result"
@@ -6007,7 +6007,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "d037d7a9-9bfc-4489-af8f-8bcd90d96d1c",
+            "id": "2f6b7ac2-8b6f-40e9-92b8-b7b340593e6d",
             "spec": "table1",
             "position": null,
             "type": "step-result"
@@ -6027,46 +6027,46 @@ module.exports = {
             "type": "Specification",
             "subject": "Boolean Results in a Table",
             "start": 0,
-            "end": 11,
-            "duration": 11
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 5,
-            "end": 5,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:SetUp",
-            "start": 5,
-            "end": 5,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "IsPositive:Row",
-            "start": 5,
-            "end": 6,
-            "duration": 1
+            "start": 0,
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "IsPositive:Row",
-            "start": 6,
-            "end": 6,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:TearDown",
-            "start": 6,
-            "end": 6,
+            "start": 0,
+            "end": 0,
             "duration": 0
           }
         ],
-        "duration": 11,
+        "duration": 0,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -6077,7 +6077,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 0,
@@ -6115,7 +6115,7 @@ module.exports = {
                           "IsEven": "true"
                         },
                         "collections": [],
-                        "id": "1d64ed64-e9f1-48f8-9306-9b0acc1e6c34"
+                        "id": "f2bce6a5-05d3-4996-8bb6-d38350077b7a"
                       },
                       {
                         "key": "IsPositive-row",
@@ -6124,14 +6124,14 @@ module.exports = {
                           "IsEven": "false"
                         },
                         "collections": [],
-                        "id": "d037d7a9-9bfc-4489-af8f-8bcd90d96d1c"
+                        "id": "2f6b7ac2-8b6f-40e9-92b8-b7b340593e6d"
                       }
                     ],
                     "activeCells": {},
                     "id": "a481d76f-66ae-464f-8c6f-2739e4c39d3e"
                   }
                 ],
-                "id": "363c3ce2-5792-45be-8135-9de1b9c82ba4"
+                "id": "92fd97b6-9514-419c-84bf-136aa31fcda0"
               }
             ],
             "activeCells": {},
@@ -6148,7 +6148,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a09f36fe-4862-4152-9691-a704d7b2ebca",
+            "id": "37c75aa7-f1c6-431e-94f2-6f9ca8a57386",
             "spec": "table2",
             "position": "setup",
             "type": "step-result"
@@ -6186,7 +6186,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "e55a74c7-9f91-4486-8a66-8041dffedd7a",
+            "id": "5eda6250-f056-4a4a-ae62-0acd8f222a0e",
             "spec": "table2",
             "position": null,
             "type": "step-result"
@@ -6224,7 +6224,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "815e825c-bfbb-423a-82be-a8c7cc54b04e",
+            "id": "2630ae95-1d0e-4bb2-a382-bbc0185e32d2",
             "spec": "table2",
             "position": null,
             "type": "step-result"
@@ -6233,7 +6233,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "a09f36fe-4862-4152-9691-a704d7b2ebca",
+            "id": "37c75aa7-f1c6-431e-94f2-6f9ca8a57386",
             "spec": "table2",
             "position": "teardown",
             "type": "step-result"
@@ -6244,46 +6244,46 @@ module.exports = {
             "type": "Specification",
             "subject": "Decision Table",
             "start": 0,
-            "end": 14,
-            "duration": 14
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 12,
-            "end": 12,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:SetUp",
-            "start": 12,
-            "end": 12,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": null,
-            "start": 12,
-            "end": 12,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": null,
-            "start": 12,
-            "end": 12,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:TearDown",
-            "start": 12,
-            "end": 12,
+            "start": 0,
+            "end": 0,
             "duration": 0
           }
         ],
-        "duration": 14,
+        "duration": 0,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -6294,7 +6294,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -6334,7 +6334,7 @@ module.exports = {
                           "LastNameFirst": "Miller, Jeremy"
                         },
                         "collections": [],
-                        "id": "4a3a6735-0874-498b-b845-0f38cbe3e2ec"
+                        "id": "ee0c5356-9f9d-463c-a054-fc37aa431783"
                       },
                       {
                         "key": "decisions",
@@ -6345,11 +6345,11 @@ module.exports = {
                           "LastNameFirst": "Chief, Big"
                         },
                         "collections": [],
-                        "id": "56a5c91e-9a93-40a8-8ac1-c46c83356526"
+                        "id": "c17d1ff4-3559-4ae7-95d2-c9045afa8221"
                       }
                     ],
                     "activeCells": {},
-                    "id": "cfa29041-f1a0-4844-aa87-cc857d041fa4"
+                    "id": "291b6b1c-f96e-45d7-876f-df2624905d19"
                   },
                   {
                     "key": "table",
@@ -6364,7 +6364,7 @@ module.exports = {
                           "LastNameFirst": "Miller, Jeremy"
                         },
                         "collections": [],
-                        "id": "e55a74c7-9f91-4486-8a66-8041dffedd7a"
+                        "id": "5eda6250-f056-4a4a-ae62-0acd8f222a0e"
                       },
                       {
                         "key": "row",
@@ -6375,18 +6375,18 @@ module.exports = {
                           "LastNameFirst": "Miller Hank"
                         },
                         "collections": [],
-                        "id": "815e825c-bfbb-423a-82be-a8c7cc54b04e"
+                        "id": "2630ae95-1d0e-4bb2-a382-bbc0185e32d2"
                       }
                     ],
                     "activeCells": {},
-                    "id": "bcc3f5a1-4c32-4288-bfab-5ab0dd646b5c"
+                    "id": "22fb768b-2587-406a-89bb-d6ad3b007672"
                   }
                 ],
-                "id": "546e4dd3-2894-4453-8a8c-9955aa0a5f59"
+                "id": "82e49910-15af-4dc5-a2a8-23f04a058037"
               }
             ],
             "activeCells": {},
-            "id": "a09f36fe-4862-4152-9691-a704d7b2ebca"
+            "id": "37c75aa7-f1c6-431e-94f2-6f9ca8a57386"
           }
         ],
         "id": "table2"
@@ -6408,7 +6408,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "2b17268b-a60d-4b76-aeca-9e5df6bae896",
+            "id": "82fec274-00cb-46a8-9c3d-bd9f093d6696",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -6417,7 +6417,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "1000a7af-0f6a-4890-b97a-fd99e4db529a",
+            "id": "a8e1d93a-9454-4d78-a7bb-2a6a1a93f4fa",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -6426,7 +6426,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "719f8d47-3b34-42b4-bbf1-54e27cb16c68",
+            "id": "95c4bbe6-227f-4f1b-89ef-03c3bca6aea0",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -6435,7 +6435,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "157fab41-1f87-493d-861f-ad2d42d22525",
+            "id": "f3f192b4-7eb3-4981-b791-57dc73779e7b",
             "spec": "table3",
             "position": null,
             "type": "step-result"
@@ -6455,60 +6455,60 @@ module.exports = {
             "type": "Specification",
             "subject": "Table with Optional Columns",
             "start": 0,
-            "end": 3,
-            "duration": 3
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Context",
             "subject": "Creation",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:SetUp",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TableWithLotsOfOptions:Row",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TableWithLotsOfOptions:Row",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TableWithLotsOfOptions:Row",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "TableWithLotsOfOptions:Row",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:TearDown",
-            "start": 3,
-            "end": 3,
+            "start": 0,
+            "end": 0,
             "duration": 0
           }
         ],
-        "duration": 3,
+        "duration": 0,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -6519,7 +6519,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -6560,7 +6560,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "2b17268b-a60d-4b76-aeca-9e5df6bae896"
+                        "id": "82fec274-00cb-46a8-9c3d-bd9f093d6696"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -6572,7 +6572,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "1000a7af-0f6a-4890-b97a-fd99e4db529a"
+                        "id": "a8e1d93a-9454-4d78-a7bb-2a6a1a93f4fa"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -6584,7 +6584,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "719f8d47-3b34-42b4-bbf1-54e27cb16c68"
+                        "id": "95c4bbe6-227f-4f1b-89ef-03c3bca6aea0"
                       },
                       {
                         "key": "TableWithLotsOfOptions-row",
@@ -6596,7 +6596,7 @@ module.exports = {
                           "c": "3"
                         },
                         "collections": [],
-                        "id": "157fab41-1f87-493d-861f-ad2d42d22525"
+                        "id": "f3f192b4-7eb3-4981-b791-57dc73779e7b"
                       }
                     ],
                     "activeCells": {
@@ -6606,7 +6606,7 @@ module.exports = {
                     "id": "3c402eda-44ab-48b2-bc1e-e83730c123cf"
                   }
                 ],
-                "id": "53406ccc-0a75-4d3b-b412-eadd0db17153"
+                "id": "fbdc9a67-6d3a-40f3-a44e-345d8bfd3505"
               }
             ],
             "activeCells": {},
@@ -6641,7 +6641,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "dd5bd6f0-ab47-4f33-a855-500a911072d6",
+            "id": "13121375-932c-404f-b53c-0590a413c855",
             "spec": "table4",
             "position": "0",
             "type": "step-result"
@@ -6650,7 +6650,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "9d298744-1a05-4c65-9bf5-d4b276dfd0ef",
+            "id": "4677a8ac-272d-4557-8441-49ee01e3c33b",
             "spec": "table4",
             "position": "0",
             "type": "step-result"
@@ -6749,7 +6749,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 0,
           "wrongs": 0,
@@ -6786,14 +6786,14 @@ module.exports = {
                           "x": "11"
                         },
                         "collections": [],
-                        "id": "dd5bd6f0-ab47-4f33-a855-500a911072d6"
+                        "id": "13121375-932c-404f-b53c-0590a413c855"
                       }
                     ],
                     "activeCells": {},
                     "id": "before"
                   }
                 ],
-                "id": "59237ee3-a3bb-47dd-82a9-eaf37258c9cd"
+                "id": "a8ff0d80-1a7c-4993-bfa7-2ebe5925351a"
               },
               {
                 "key": "AfterThrowsError",
@@ -6809,14 +6809,14 @@ module.exports = {
                           "x": "22"
                         },
                         "collections": [],
-                        "id": "9d298744-1a05-4c65-9bf5-d4b276dfd0ef"
+                        "id": "4677a8ac-272d-4557-8441-49ee01e3c33b"
                       }
                     ],
                     "activeCells": {},
                     "id": "after"
                   }
                 ],
-                "id": "fd76bee6-d550-4e83-8261-ef6d5eb797b2"
+                "id": "d14404ef-7dac-4348-a1bd-7b72fc6346ca"
               }
             ],
             "activeCells": {},
@@ -6833,7 +6833,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "007c9768-a982-4163-be55-21cf389e937e",
+            "id": "abd07978-b598-490c-bfc1-3d8f5177d8e0",
             "spec": "table5",
             "position": "setup",
             "type": "step-result"
@@ -6881,7 +6881,7 @@ module.exports = {
                 "status": "success"
               }
             ],
-            "id": "bb199561-b50a-4cbe-bf33-964da7912527",
+            "id": "0e6b8f3f-bc01-43ab-95f5-6ae9f5629892",
             "spec": "table5",
             "position": null,
             "type": "step-result"
@@ -6898,7 +6898,7 @@ module.exports = {
                 "status": "failed"
               }
             ],
-            "id": "f6dbfdb4-b2eb-4c20-8e07-47c31bc23d58",
+            "id": "0f2d609d-86a3-4fec-bcbf-e22a7670194a",
             "spec": "table5",
             "position": null,
             "type": "step-result"
@@ -6995,7 +6995,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "952df997-519c-49d6-a2a9-798298157436",
+            "id": "235f1d00-4922-417d-a792-df355158cecf",
             "spec": "table5",
             "position": "0",
             "type": "step-result"
@@ -7012,7 +7012,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "952df997-519c-49d6-a2a9-798298157436",
+            "id": "235f1d00-4922-417d-a792-df355158cecf",
             "spec": "table5",
             "position": "1",
             "type": "step-result"
@@ -7021,7 +7021,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "952df997-519c-49d6-a2a9-798298157436",
+            "id": "235f1d00-4922-417d-a792-df355158cecf",
             "spec": "table5",
             "position": "2",
             "type": "step-result"
@@ -7038,7 +7038,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "952df997-519c-49d6-a2a9-798298157436",
+            "id": "235f1d00-4922-417d-a792-df355158cecf",
             "spec": "table5",
             "position": "3",
             "type": "step-result"
@@ -7047,7 +7047,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6d2809c0-8d0d-4955-ab62-acbf05d77f1d",
+            "id": "6054857d-4abc-4658-acbd-cd5e24cbdbfe",
             "spec": "table5",
             "position": "0",
             "type": "step-result"
@@ -7056,7 +7056,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6d2809c0-8d0d-4955-ab62-acbf05d77f1d",
+            "id": "6054857d-4abc-4658-acbd-cd5e24cbdbfe",
             "spec": "table5",
             "position": "1",
             "type": "step-result"
@@ -7065,7 +7065,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "6d2809c0-8d0d-4955-ab62-acbf05d77f1d",
+            "id": "6054857d-4abc-4658-acbd-cd5e24cbdbfe",
             "spec": "table5",
             "position": "2",
             "type": "step-result"
@@ -7082,7 +7082,7 @@ module.exports = {
                 "status": "invalid"
               }
             ],
-            "id": "6d2809c0-8d0d-4955-ab62-acbf05d77f1d",
+            "id": "6054857d-4abc-4658-acbd-cd5e24cbdbfe",
             "spec": "table5",
             "position": "3",
             "type": "step-result"
@@ -7091,7 +7091,7 @@ module.exports = {
             "status": "ok",
             "error": null,
             "cells": [],
-            "id": "007c9768-a982-4163-be55-21cf389e937e",
+            "id": "abd07978-b598-490c-bfc1-3d8f5177d8e0",
             "spec": "table5",
             "position": "teardown",
             "type": "step-result"
@@ -7102,8 +7102,8 @@ module.exports = {
             "type": "Specification",
             "subject": "Tables",
             "start": 0,
-            "end": 3,
-            "duration": 3
+            "end": 2,
+            "duration": 2
           },
           {
             "type": "Context",
@@ -7144,123 +7144,123 @@ module.exports = {
             "type": "Grammar",
             "subject": "Divide:Row:0",
             "start": 0,
-            "end": 1,
-            "duration": 1
+            "end": 0,
+            "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:1",
-            "start": 1,
-            "end": 1,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:2",
-            "start": 1,
-            "end": 1,
+            "start": 0,
+            "end": 0,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:3",
-            "start": 1,
-            "end": 3,
+            "start": 0,
+            "end": 2,
             "duration": 2
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:0",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:1",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:2",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:3",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:0",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:1",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:2",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:3",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:0",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:1",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:2",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Grammar",
             "subject": "Divide:Row:3",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           },
           {
             "type": "Fixture",
             "subject": "Table:TearDown",
-            "start": 3,
-            "end": 3,
+            "start": 2,
+            "end": 2,
             "duration": 0
           }
         ],
-        "duration": 3,
+        "duration": 2,
         "logging": [
           {
             "html": "<pre class=\"debug-output\"></pre>",
@@ -7271,7 +7271,7 @@ module.exports = {
         ],
         "attempts": 1,
         "aborted": false,
-        "time": "8:05 AM",
+        "time": "9:29 AM",
         "counts": {
           "rights": 2,
           "wrongs": 2,
@@ -7297,7 +7297,7 @@ module.exports = {
               {
                 "text": "Table by the ExposeAsTable attribute",
                 "type": "comment",
-                "id": "b7721995-6d33-4f0d-9505-dfc0852b6dcd"
+                "id": "d03213fb-fa34-4d61-a746-0802c2e4f272"
               },
               {
                 "key": "Sum",
@@ -7326,7 +7326,7 @@ module.exports = {
                           "sum": "4"
                         },
                         "collections": [],
-                        "id": "bb199561-b50a-4cbe-bf33-964da7912527"
+                        "id": "0e6b8f3f-bc01-43ab-95f5-6ae9f5629892"
                       },
                       {
                         "key": "sum",
@@ -7336,19 +7336,19 @@ module.exports = {
                           "sum": "5"
                         },
                         "collections": [],
-                        "id": "f6dbfdb4-b2eb-4c20-8e07-47c31bc23d58"
+                        "id": "0f2d609d-86a3-4fec-bcbf-e22a7670194a"
                       }
                     ],
                     "activeCells": {},
-                    "id": "f69c1e61-2097-4b5d-807b-c5850dafea2d"
+                    "id": "abe54871-b09b-4893-938f-2a4508c832b3"
                   }
                 ],
-                "id": "807c9d73-5d33-4265-85d3-4cfed33048ce"
+                "id": "988fe5b4-4f09-48d2-a28b-ffc2939ad371"
               },
               {
                 "text": "Table fixture from script",
                 "type": "comment",
-                "id": "9eacb8eb-07f9-40fe-94cf-654df0b60c7e"
+                "id": "63b3f168-33b6-44c7-bdd6-162f490a17f4"
               },
               {
                 "key": "Divide",
@@ -7388,7 +7388,7 @@ module.exports = {
                           "product": "****"
                         },
                         "collections": [],
-                        "id": "952df997-519c-49d6-a2a9-798298157436"
+                        "id": "235f1d00-4922-417d-a792-df355158cecf"
                       },
                       {
                         "key": "Rows",
@@ -7398,4597 +7398,26 @@ module.exports = {
                           "product": "****"
                         },
                         "collections": [],
-                        "id": "6d2809c0-8d0d-4955-ab62-acbf05d77f1d"
+                        "id": "6054857d-4abc-4658-acbd-cd5e24cbdbfe"
                       }
                     ],
                     "activeCells": {},
-                    "id": "77538199-7e66-4e73-9695-bcc668feceb7"
+                    "id": "ac15745f-f171-48ee-8529-24d07dc8a1a0"
                   }
                 ],
-                "id": "be9dcc24-ce5a-435f-ba54-a5202e761e88"
+                "id": "55def00f-cf20-49af-b154-89ae78c68dd8"
               }
             ],
             "activeCells": {},
-            "id": "007c9768-a982-4163-be55-21cf389e937e"
+            "id": "abd07978-b598-490c-bfc1-3d8f5177d8e0"
           }
         ],
         "id": "table5"
       }
     }
   ],
-  "fixtures": [
-    {
-      "title": "Check Properties",
-      "key": "CheckObject",
-      "implementation": "StoryTeller.Samples.Fixtures.CheckObjectFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "children": [
-            {
-              "key": null,
-              "type": "silent",
-              "cells": [],
-              "errors": []
-            },
-            {
-              "format": "Address1 = {Address1}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "Address1",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "Address2 = {Address2}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "Address2",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "City = {City}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "City",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "StateOrProvince = {StateOrProvince}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "StateOrProvince",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "Country = {Country}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "Country",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "PostalCode = {PostalCode}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "PostalCode",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            }
-          ],
-          "title": "If the new address is",
-          "key": "IfTheAddressIs",
-          "type": "paragraph",
-          "cells": [
-            {
-              "key": "Address1",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Address2",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "City",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "StateOrProvince",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Country",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "PostalCode",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "children": [
-            {
-              "format": "Address1 should be {Address1}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "Address1",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "Address2 should be {Address2}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "Address2",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "City should be {City}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "City",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            }
-          ],
-          "title": "then the new address properties should be",
-          "key": "TheAddressShouldBe",
-          "type": "paragraph",
-          "cells": [
-            {
-              "key": "Address1",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Address2",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "City",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Composite",
-      "key": "Composite",
-      "implementation": "StoryTeller.Samples.Fixtures.CompositeFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Adding {x} to {y} should be {returnValue}",
-          "key": "Adding",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "returnValue",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Adding {x} to 5 should be {returnValue}",
-          "key": "AddTo5",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "returnValue",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should start with {starting}",
-          "key": "StartWith",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "+= {operand}",
-          "key": "Add",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "*= {multiplier}",
-          "key": "MultiplyBy",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Value should be {expected}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "children": [
-            {
-              "format": "The number should start with {starting}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "starting",
-                  "default": "11",
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "+= {operand}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "operand",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "*= {multiplier}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "multiplier",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "Value should be {expected}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "expected",
-                  "default": null,
-                  "header": null,
-                  "output": true,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            }
-          ],
-          "title": "Add and Multiply",
-          "key": "AddAndMultiply",
-          "type": "paragraph",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "title": "Add and Multiply in a Table",
-          "key": "AddAndMultiplyTable",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "children": [
-            {
-              "format": "The number should start with {starting}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "starting",
-                  "default": "11",
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "+= {operand}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "operand",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "*= {multiplier}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "multiplier",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "key": null,
-              "type": "silent",
-              "cells": [],
-              "errors": []
-            },
-            {
-              "format": "Value should be {expected}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "expected",
-                  "default": null,
-                  "header": null,
-                  "output": true,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            }
-          ],
-          "title": "Add and Multiply",
-          "key": "AddAndMultiplyThrow",
-          "type": "paragraph",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "-= {operand}",
-          "key": "Subtract",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "operation",
-          "title": "When adding numbers",
-          "key": "AddTable",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "children": [
-            {
-              "format": "The number should start with {starting}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "starting",
-                  "default": "11",
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "+= {operand}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "operand",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "Value should be {expected}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "expected",
-                  "default": null,
-                  "header": null,
-                  "output": true,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            }
-          ],
-          "title": "Add and check",
-          "key": "AddAndCheck",
-          "type": "paragraph",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Throw()",
-          "key": "Throw",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Embedded",
-      "key": "Embedded",
-      "implementation": "StoryTeller.Samples.Fixtures.EmbeddedFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "fixture": {
-            "title": "Math",
-            "key": "Math",
-            "implementation": "StoryTeller.Samples.Fixtures.MathFixture",
-            "grammars": [
-              {
-                "format": "TODO: {message}",
-                "key": "TODO",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "message",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Adding {x} to {y} should be {returnValue}",
-                "key": "Adding",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "y",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "returnValue",
-                    "default": "NULL",
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Adding {x} to 5 should be {returnValue}",
-                "key": "AddTo5",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "returnValue",
-                    "default": "NULL",
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "The number should start with {starting}",
-                "key": "StartWith",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "starting",
-                    "default": "11",
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "*= {multiplier}",
-                "key": "MultiplyBy",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "multiplier",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "-= {operand}",
-                "key": "Subtract",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "+= {operand}",
-                "key": "Add",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Value should be {expected}",
-                "key": "TheValueShouldBe",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "expected",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "y",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "sum",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "collection": "operation",
-                "title": "When adding numbers",
-                "key": "AddTable",
-                "type": "table",
-                "errors": []
-              },
-              {
-                "children": [
-                  {
-                    "format": "The number should start with {starting}",
-                    "key": null,
-                    "type": "sentence",
-                    "cells": [
-                      {
-                        "key": "starting",
-                        "default": "11",
-                        "header": null,
-                        "output": false,
-                        "editor": null,
-                        "options": null
-                      }
-                    ],
-                    "errors": []
-                  },
-                  {
-                    "format": "+= {operand}",
-                    "key": null,
-                    "type": "sentence",
-                    "cells": [
-                      {
-                        "key": "operand",
-                        "default": null,
-                        "header": null,
-                        "output": false,
-                        "editor": null,
-                        "options": null
-                      }
-                    ],
-                    "errors": []
-                  },
-                  {
-                    "format": "Value should be {expected}",
-                    "key": null,
-                    "type": "sentence",
-                    "cells": [
-                      {
-                        "key": "expected",
-                        "default": null,
-                        "header": null,
-                        "output": true,
-                        "editor": null,
-                        "options": null
-                      }
-                    ],
-                    "errors": []
-                  }
-                ],
-                "title": "Add and check",
-                "key": "AddAndCheck",
-                "type": "paragraph",
-                "cells": [
-                  {
-                    "key": "starting",
-                    "default": "11",
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "expected",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Throw()",
-                "key": "Throw",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              }
-            ],
-            "type": "fixture",
-            "errors": []
-          },
-          "title": "Do some Math",
-          "collection": "Math",
-          "key": "EmbeddedMath",
-          "type": "embedded-section",
-          "errors": []
-        },
-        {
-          "format": "ThrowAnExceptionOnTheNextEmbed()",
-          "key": "ThrowAnExceptionOnTheNextEmbed",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "DoNotThrowAnExceptionOnTheNextEmbed()",
-          "key": "DoNotThrowAnExceptionOnTheNextEmbed",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": null,
-      "key": "Failure",
-      "implementation": "StoryTeller.Samples.Fixtures.FailureFixture",
-      "grammars": [],
-      "type": "fixture",
-      "errors": [
-        {
-          "message": "Fixture StoryTeller.Samples.Fixtures.FailureFixture could not be loaded",
-          "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: This fixture ctor blew up\r\n   at StoryTeller.Samples.Fixtures.FailureFixture..ctor()\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)\r\n   at System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)\r\n   at System.Activator.CreateInstance(Type type, Boolean nonPublic)\r\n   at System.Activator.CreateInstance(Type type)\r\n   at StoryTeller.Model.FixtureLibrary.CreateCompiledFixture(CellHandling cellHandling, Type type)"
-        }
-      ]
-    },
-    {
-      "title": "Grammar Error",
-      "key": "GrammarError",
-      "implementation": "StoryTeller.Samples.Fixtures.GrammarErrorFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "key": null,
-          "type": "error",
-          "IsHidden": false,
-          "Key": null,
-          "errors": [
-            {
-              "message": null,
-              "error": "System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.DivideByZeroException: Attempted to divide by zero.\r\n   at StoryTeller.Samples.Fixtures.GrammarErrorFixture.Bad()\r\n   --- End of inner exception stack trace ---\r\n   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)\r\n   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)\r\n   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\r\n   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)\r\n   at StoryTeller.Grammars.ProgrammaticGrammarBuilder.Build(MethodInfo method, Fixture fixture)\r\n   at StoryTeller.Grammars.GrammarBuilder.BuildGrammar(MethodInfo method, Fixture fixture)"
-            }
-          ]
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Curried Math",
-      "key": "CurriedMath",
-      "implementation": "StoryTeller.Samples.Fixtures.CurriedMathFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should start with {starting}",
-          "key": "StartWith",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Add 5",
-          "key": "Add5",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "Adding {y} to 5 should be {returnValue}",
-          "key": "AddingTo5",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "returnValue",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Value should be {expected}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Math",
-      "key": "Math",
-      "implementation": "StoryTeller.Samples.Fixtures.MathFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Adding {x} to {y} should be {returnValue}",
-          "key": "Adding",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "returnValue",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Adding {x} to 5 should be {returnValue}",
-          "key": "AddTo5",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "returnValue",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should start with {starting}",
-          "key": "StartWith",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "*= {multiplier}",
-          "key": "MultiplyBy",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "-= {operand}",
-          "key": "Subtract",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "+= {operand}",
-          "key": "Add",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Value should be {expected}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "operation",
-          "title": "When adding numbers",
-          "key": "AddTable",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "children": [
-            {
-              "format": "The number should start with {starting}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "starting",
-                  "default": "11",
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "+= {operand}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "operand",
-                  "default": null,
-                  "header": null,
-                  "output": false,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            },
-            {
-              "format": "Value should be {expected}",
-              "key": null,
-              "type": "sentence",
-              "cells": [
-                {
-                  "key": "expected",
-                  "default": null,
-                  "header": null,
-                  "output": true,
-                  "editor": null,
-                  "options": null
-                }
-              ],
-              "errors": []
-            }
-          ],
-          "title": "Add and check",
-          "key": "AddAndCheck",
-          "type": "paragraph",
-          "cells": [
-            {
-              "key": "starting",
-              "default": "11",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Throw()",
-          "key": "Throw",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Do Some Math",
-      "key": "DoSomeMath",
-      "implementation": "StoryTeller.Samples.Fixtures.DoSomeMathFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "fixture": {
-            "title": "Math",
-            "key": "Math",
-            "implementation": "StoryTeller.Samples.Fixtures.MathFixture",
-            "grammars": [
-              {
-                "format": "TODO: {message}",
-                "key": "TODO",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "message",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Adding {x} to {y} should be {returnValue}",
-                "key": "Adding",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "y",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "returnValue",
-                    "default": "NULL",
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Adding {x} to 5 should be {returnValue}",
-                "key": "AddTo5",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "returnValue",
-                    "default": "NULL",
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "The number should start with {starting}",
-                "key": "StartWith",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "starting",
-                    "default": "11",
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "*= {multiplier}",
-                "key": "MultiplyBy",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "multiplier",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "-= {operand}",
-                "key": "Subtract",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "+= {operand}",
-                "key": "Add",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Value should be {expected}",
-                "key": "TheValueShouldBe",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "expected",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "y",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "sum",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "collection": "operation",
-                "title": "When adding numbers",
-                "key": "AddTable",
-                "type": "table",
-                "errors": []
-              },
-              {
-                "children": [
-                  {
-                    "format": "The number should start with {starting}",
-                    "key": null,
-                    "type": "sentence",
-                    "cells": [
-                      {
-                        "key": "starting",
-                        "default": "11",
-                        "header": null,
-                        "output": false,
-                        "editor": null,
-                        "options": null
-                      }
-                    ],
-                    "errors": []
-                  },
-                  {
-                    "format": "+= {operand}",
-                    "key": null,
-                    "type": "sentence",
-                    "cells": [
-                      {
-                        "key": "operand",
-                        "default": null,
-                        "header": null,
-                        "output": false,
-                        "editor": null,
-                        "options": null
-                      }
-                    ],
-                    "errors": []
-                  },
-                  {
-                    "format": "Value should be {expected}",
-                    "key": null,
-                    "type": "sentence",
-                    "cells": [
-                      {
-                        "key": "expected",
-                        "default": null,
-                        "header": null,
-                        "output": true,
-                        "editor": null,
-                        "options": null
-                      }
-                    ],
-                    "errors": []
-                  }
-                ],
-                "title": "Add and check",
-                "key": "AddAndCheck",
-                "type": "paragraph",
-                "cells": [
-                  {
-                    "key": "starting",
-                    "default": "11",
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "expected",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Throw()",
-                "key": "Throw",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              }
-            ],
-            "type": "fixture",
-            "errors": []
-          },
-          "title": "Now do some math",
-          "collection": "Math",
-          "key": "DoSomeMath",
-          "type": "embedded-section",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Parking Expiry Rules",
-      "key": "ParkingExpiry",
-      "implementation": "StoryTeller.Samples.Fixtures.ParkingExpiryFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "day",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": "select",
-              "options": [
-                {
-                  "display": "Sunday",
-                  "value": "Sunday"
-                },
-                {
-                  "display": "Monday",
-                  "value": "Monday"
-                },
-                {
-                  "display": "Tuesday",
-                  "value": "Tuesday"
-                },
-                {
-                  "display": "Wednesday",
-                  "value": "Wednesday"
-                },
-                {
-                  "display": "Thursday",
-                  "value": "Thursday"
-                },
-                {
-                  "display": "Friday",
-                  "value": "Friday"
-                },
-                {
-                  "display": "Saturday",
-                  "value": "Saturday"
-                }
-              ]
-            },
-            {
-              "key": "minutes",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "amount",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "ticketedAmount",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "table",
-          "title": "Expiry Ticket Decision Rules",
-          "key": "TicketIsGiven",
-          "type": "table",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Kansas City Chiefs 2015",
-      "key": "Player",
-      "implementation": "StoryTeller.Samples.Fixtures.PlayerFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "Player",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Position",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": "select",
-              "options": [
-                {
-                  "display": "LB",
-                  "value": "LB"
-                },
-                {
-                  "display": "OL",
-                  "value": "OL"
-                },
-                {
-                  "display": "DL",
-                  "value": "DL"
-                },
-                {
-                  "display": "WR",
-                  "value": "WR"
-                },
-                {
-                  "display": "RB",
-                  "value": "RB"
-                }
-              ]
-            }
-          ],
-          "collection": "table",
-          "title": "Player Positions",
-          "key": "PositionIs",
-          "type": "table",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Selection List",
-      "key": "SelectionList",
-      "implementation": "StoryTeller.Samples.Fixtures.SelectionListFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "First",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Last",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": "select",
-              "options": [
-                {
-                  "display": "surname",
-                  "value": "surname"
-                }
-              ]
-            },
-            {
-              "key": "Fullname",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "table",
-          "title": "The names should be",
-          "key": "names",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "first",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "last",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": "select",
-              "options": [
-                {
-                  "display": "surname",
-                  "value": "surname"
-                }
-              ]
-            },
-            {
-              "key": "fullname",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "table",
-          "title": "The names are",
-          "key": "FirstAndLastName",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "format": "{first} {last} should be formatted as {fullname}",
-          "key": "TheNameIs",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "first",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "last",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": "select",
-              "options": [
-                {
-                  "display": "surname",
-                  "value": "surname"
-                }
-              ]
-            },
-            {
-              "key": "fullname",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The Enum value of {option} should be {selectedOption}",
-          "key": "TheEnumOptionIs",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "option",
-              "default": "SecondOption",
-              "header": null,
-              "output": false,
-              "editor": "select",
-              "options": [
-                {
-                  "display": "FirstOption",
-                  "value": "FirstOption"
-                },
-                {
-                  "display": "SecondOption",
-                  "value": "SecondOption"
-                }
-              ]
-            },
-            {
-              "key": "selectedOption",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Simple",
-      "key": "Simple",
-      "implementation": "StoryTeller.Samples.Fixtures.SimpleFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "A()",
-          "key": "A",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "B()",
-          "key": "B",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "C()",
-          "key": "C",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "D()",
-          "key": "D",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Embedded Choices",
-      "key": "EmbeddedChoices",
-      "implementation": "StoryTeller.Samples.Fixtures.EmbeddedChoicesFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "fixture": {
-            "title": "Simple",
-            "key": "Simple",
-            "implementation": "StoryTeller.Samples.Fixtures.SimpleFixture",
-            "grammars": [
-              {
-                "format": "TODO: {message}",
-                "key": "TODO",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "message",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "A()",
-                "key": "A",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "B()",
-                "key": "B",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "C()",
-                "key": "C",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "D()",
-                "key": "D",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              }
-            ],
-            "type": "fixture",
-            "errors": []
-          },
-          "title": "simple",
-          "collection": "Simple",
-          "key": "Simple",
-          "type": "embedded-section",
-          "errors": []
-        },
-        {
-          "fixture": {
-            "title": "Sentence Grammars",
-            "key": "SingleSelection",
-            "implementation": "StoryTeller.Samples.Fixtures.SingleSelectionFixture",
-            "grammars": [
-              {
-                "format": "TODO: {message}",
-                "key": "TODO",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "message",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "This fact is always true",
-                "key": "ThisFactIsTrue",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "This fact is always false",
-                "key": "ThisFactIsFalse",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "This fact throws an exception",
-                "key": "ThisFactThrowsException",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "{one is better than {two",
-                "key": "BadGrammar",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "one",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "two",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Start with the number {number}",
-                "key": "StartWithTheNumber",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "number",
-                    "default": "5",
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Multiply by {multiplier} then add {delta}",
-                "key": "MultiplyThenAdd",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "multiplier",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "delta",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Subtract({operand})",
-                "key": "Subtract",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "DivideBy({operand})",
-                "key": "DivideBy",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "The number should now be {number}",
-                "key": "TheValueShouldBe",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "number",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "The sum of {number1} and {number2} should be {sum}",
-                "key": "TheSumOf",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "number1",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "number2",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "sum",
-                    "default": "NULL",
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "ThisLineAlwaysThrowsExceptions()",
-                "key": "ThisLineAlwaysThrowsExceptions",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "This line is always true",
-                "key": "ThisLineIsAlwaysTrue",
-                "type": "sentence",
-                "cells": null,
-                "errors": []
-              },
-              {
-                "format": "This line is always false",
-                "key": "ThisLineIsAlwaysFalse",
-                "type": "sentence",
-                "cells": null,
-                "errors": []
-              },
-              {
-                "format": "{x} + {y} should be {sum}",
-                "key": "XplusYShouldBe",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "y",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "sum",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Incomplete format",
-                "key": "BadSentence",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "name",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "JustGo()",
-                "key": "JustGo",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              }
-            ],
-            "type": "fixture",
-            "errors": []
-          },
-          "title": "single",
-          "collection": "SingleSelection",
-          "key": "Single",
-          "type": "embedded-section",
-          "errors": []
-        },
-        {
-          "fixture": {
-            "title": "Simple",
-            "key": "Simple",
-            "implementation": "StoryTeller.Samples.Fixtures.SimpleFixture",
-            "grammars": [
-              {
-                "format": "TODO: {message}",
-                "key": "TODO",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "message",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "A()",
-                "key": "A",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "B()",
-                "key": "B",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "C()",
-                "key": "C",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "D()",
-                "key": "D",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              }
-            ],
-            "type": "fixture",
-            "errors": []
-          },
-          "title": "simple",
-          "collection": "Simple",
-          "key": "Inline",
-          "type": "embedded-section",
-          "errors": []
-        },
-        {
-          "fixture": {
-            "title": "Sentence Grammars",
-            "key": "MandatorySelection",
-            "implementation": "StoryTeller.Samples.Fixtures.MandatorySelectionFixture",
-            "grammars": [
-              {
-                "format": "TODO: {message}",
-                "key": "TODO",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "message",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "This fact is always true",
-                "key": "ThisFactIsTrue",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "This fact is always false",
-                "key": "ThisFactIsFalse",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "This fact throws an exception",
-                "key": "ThisFactThrowsException",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "{one is better than {two",
-                "key": "BadGrammar",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "one",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "two",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Start with the number {number}",
-                "key": "StartWithTheNumber",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "number",
-                    "default": "5",
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Multiply by {multiplier} then add {delta}",
-                "key": "MultiplyThenAdd",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "multiplier",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "delta",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Subtract({operand})",
-                "key": "Subtract",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "DivideBy({operand})",
-                "key": "DivideBy",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "operand",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "The number should now be {number}",
-                "key": "TheValueShouldBe",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "number",
-                    "default": null,
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "The sum of {number1} and {number2} should be {sum}",
-                "key": "TheSumOf",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "number1",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "number2",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "sum",
-                    "default": "NULL",
-                    "header": null,
-                    "output": true,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "ThisLineAlwaysThrowsExceptions()",
-                "key": "ThisLineAlwaysThrowsExceptions",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              },
-              {
-                "format": "This line is always true",
-                "key": "ThisLineIsAlwaysTrue",
-                "type": "sentence",
-                "cells": null,
-                "errors": []
-              },
-              {
-                "format": "This line is always false",
-                "key": "ThisLineIsAlwaysFalse",
-                "type": "sentence",
-                "cells": null,
-                "errors": []
-              },
-              {
-                "format": "{x} + {y} should be {sum}",
-                "key": "XplusYShouldBe",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "x",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "y",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  },
-                  {
-                    "key": "sum",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "Incomplete format",
-                "key": "BadSentence",
-                "type": "sentence",
-                "cells": [
-                  {
-                    "key": "name",
-                    "default": null,
-                    "header": null,
-                    "output": false,
-                    "editor": null,
-                    "options": null
-                  }
-                ],
-                "errors": []
-              },
-              {
-                "format": "JustGo()",
-                "key": "JustGo",
-                "type": "sentence",
-                "cells": [],
-                "errors": []
-              }
-            ],
-            "type": "fixture",
-            "errors": []
-          },
-          "title": "mandatory",
-          "collection": "MandatorySelection",
-          "key": "MandatorySelection",
-          "type": "embedded-section",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Sentence Grammars",
-      "key": "SingleSelection",
-      "implementation": "StoryTeller.Samples.Fixtures.SingleSelectionFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "This fact is always true",
-          "key": "ThisFactIsTrue",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact is always false",
-          "key": "ThisFactIsFalse",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact throws an exception",
-          "key": "ThisFactThrowsException",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "{one is better than {two",
-          "key": "BadGrammar",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "one",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "two",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Start with the number {number}",
-          "key": "StartWithTheNumber",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": "5",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Multiply by {multiplier} then add {delta}",
-          "key": "MultiplyThenAdd",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "delta",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Subtract({operand})",
-          "key": "Subtract",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "DivideBy({operand})",
-          "key": "DivideBy",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should now be {number}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The sum of {number1} and {number2} should be {sum}",
-          "key": "TheSumOf",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number1",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "number2",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "ThisLineAlwaysThrowsExceptions()",
-          "key": "ThisLineAlwaysThrowsExceptions",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This line is always true",
-          "key": "ThisLineIsAlwaysTrue",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "This line is always false",
-          "key": "ThisLineIsAlwaysFalse",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "{x} + {y} should be {sum}",
-          "key": "XplusYShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Incomplete format",
-          "key": "BadSentence",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "JustGo()",
-          "key": "JustGo",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Sentence Grammars",
-      "key": "OneOrMoreSelection",
-      "implementation": "StoryTeller.Samples.Fixtures.OneOrMoreSelectionFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "This fact is always true",
-          "key": "ThisFactIsTrue",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact is always false",
-          "key": "ThisFactIsFalse",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact throws an exception",
-          "key": "ThisFactThrowsException",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "{one is better than {two",
-          "key": "BadGrammar",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "one",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "two",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Start with the number {number}",
-          "key": "StartWithTheNumber",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": "5",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Multiply by {multiplier} then add {delta}",
-          "key": "MultiplyThenAdd",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "delta",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Subtract({operand})",
-          "key": "Subtract",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "DivideBy({operand})",
-          "key": "DivideBy",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should now be {number}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The sum of {number1} and {number2} should be {sum}",
-          "key": "TheSumOf",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number1",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "number2",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "ThisLineAlwaysThrowsExceptions()",
-          "key": "ThisLineAlwaysThrowsExceptions",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This line is always true",
-          "key": "ThisLineIsAlwaysTrue",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "This line is always false",
-          "key": "ThisLineIsAlwaysFalse",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "{x} + {y} should be {sum}",
-          "key": "XplusYShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Incomplete format",
-          "key": "BadSentence",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "JustGo()",
-          "key": "JustGo",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Sentence Grammars",
-      "key": "MandatorySelection",
-      "implementation": "StoryTeller.Samples.Fixtures.MandatorySelectionFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "This fact is always true",
-          "key": "ThisFactIsTrue",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact is always false",
-          "key": "ThisFactIsFalse",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact throws an exception",
-          "key": "ThisFactThrowsException",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "{one is better than {two",
-          "key": "BadGrammar",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "one",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "two",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Start with the number {number}",
-          "key": "StartWithTheNumber",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": "5",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Multiply by {multiplier} then add {delta}",
-          "key": "MultiplyThenAdd",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "delta",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Subtract({operand})",
-          "key": "Subtract",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "DivideBy({operand})",
-          "key": "DivideBy",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should now be {number}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The sum of {number1} and {number2} should be {sum}",
-          "key": "TheSumOf",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number1",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "number2",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "ThisLineAlwaysThrowsExceptions()",
-          "key": "ThisLineAlwaysThrowsExceptions",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This line is always true",
-          "key": "ThisLineIsAlwaysTrue",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "This line is always false",
-          "key": "ThisLineIsAlwaysFalse",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "{x} + {y} should be {sum}",
-          "key": "XplusYShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Incomplete format",
-          "key": "BadSentence",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "JustGo()",
-          "key": "JustGo",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Sentence Grammars",
-      "key": "Sentence",
-      "implementation": "StoryTeller.Samples.Fixtures.SentenceFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "This fact is always true",
-          "key": "ThisFactIsTrue",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact is always false",
-          "key": "ThisFactIsFalse",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This fact throws an exception",
-          "key": "ThisFactThrowsException",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "{one is better than {two",
-          "key": "BadGrammar",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "one",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "two",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Start with the number {number}",
-          "key": "StartWithTheNumber",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": "5",
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Multiply by {multiplier} then add {delta}",
-          "key": "MultiplyThenAdd",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "multiplier",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "delta",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Subtract({operand})",
-          "key": "Subtract",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "DivideBy({operand})",
-          "key": "DivideBy",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "operand",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The number should now be {number}",
-          "key": "TheValueShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "The sum of {number1} and {number2} should be {sum}",
-          "key": "TheSumOf",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "number1",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "number2",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": "NULL",
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "ThisLineAlwaysThrowsExceptions()",
-          "key": "ThisLineAlwaysThrowsExceptions",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "This line is always true",
-          "key": "ThisLineIsAlwaysTrue",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "This line is always false",
-          "key": "ThisLineIsAlwaysFalse",
-          "type": "sentence",
-          "cells": null,
-          "errors": []
-        },
-        {
-          "format": "{x} + {y} should be {sum}",
-          "key": "XplusYShouldBe",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Incomplete format",
-          "key": "BadSentence",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "JustGo()",
-          "key": "JustGo",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Set Verification with DataTable's",
-      "key": "DataTable",
-      "implementation": "StoryTeller.Samples.Fixtures.DataTableFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "firstName",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "lastName",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "title": "If the data is",
-          "key": "TheDataIs",
-          "type": "table",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Sets",
-      "key": "Sets",
-      "implementation": "StoryTeller.Samples.Fixtures.SetsFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "ordered": true,
-          "title": "The names in order should be",
-          "key": "OrderedStringSet",
-          "type": "set-verification",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "expected",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "ordered": false,
-          "title": "The names in no order should be",
-          "key": "UnorderedStringSet",
-          "type": "set-verification",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "Amount",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Date",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "title": "The InvoiceDetails are",
-          "key": "InvoiceDetailsAre",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "Amount",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Date",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "rows",
-          "ordered": false,
-          "title": "The unordered details should be",
-          "key": "UnorderedDetailsAre",
-          "type": "set-verification",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "Amount",
-              "default": "100",
-              "header": "The Amount",
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Date",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "Name",
-              "default": null,
-              "header": "The Name",
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "rows",
-          "ordered": true,
-          "title": "The Ordered details should be",
-          "key": "OrderedDetailsAre",
-          "type": "set-verification",
-          "errors": []
-        },
-        {
-          "format": "AddName({name})",
-          "key": "AddName",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "name",
-          "title": "The data is",
-          "key": "TheDataIs",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "Name",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "rows",
-          "ordered": false,
-          "title": "Verify Set of InvoiceDetail",
-          "key": "ThrowsErrorOnDataFetch",
-          "type": "set-verification",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Sometimes Slow",
-      "key": "SometimesSlow",
-      "implementation": "StoryTeller.Samples.Fixtures.SometimesSlowFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "format": "Slow()",
-          "key": "Slow",
-          "type": "sentence",
-          "cells": [],
-          "errors": []
-        },
-        {
-          "format": "ReadText({text})",
-          "key": "ReadText",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "text",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": "big-text",
-              "options": null
-            }
-          ],
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    },
-    {
-      "title": "Table",
-      "key": "Table",
-      "implementation": "StoryTeller.Samples.Fixtures.TableFixture",
-      "grammars": [
-        {
-          "format": "TODO: {message}",
-          "key": "TODO",
-          "type": "sentence",
-          "cells": [
-            {
-              "key": "message",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "FirstName",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "LastName",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "FullName",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "LastNameFirst",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "table",
-          "title": "decisions",
-          "key": "decisions",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "sum",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "sum",
-          "title": "Adding numbers together",
-          "key": "Sum",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "y",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "product",
-              "default": null,
-              "header": null,
-              "output": true,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "title": "Subtract numbers",
-          "key": "Divide",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "title": "Throw error on the Before",
-          "key": "BeforeThrowsError",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "x",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "Rows",
-          "title": "Throw error on the After",
-          "key": "AfterThrowsError",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "a",
-              "default": null,
-              "header": "A",
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "b",
-              "default": "2",
-              "header": "B",
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "c",
-              "default": "3",
-              "header": "C",
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "d",
-              "default": "4",
-              "header": "D",
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "e",
-              "default": "5",
-              "header": "E",
-              "output": false,
-              "editor": null,
-              "options": null
-            }
-          ],
-          "collection": "table",
-          "title": "Table with lots of options",
-          "key": "TableWithLotsOfOptions",
-          "type": "table",
-          "errors": []
-        },
-        {
-          "cells": [
-            {
-              "key": "number",
-              "default": null,
-              "header": null,
-              "output": false,
-              "editor": null,
-              "options": null
-            },
-            {
-              "key": "IsEven",
-              "default": "true",
-              "header": null,
-              "output": true,
-              "editor": "boolean",
-              "options": null
-            }
-          ],
-          "collection": "table",
-          "title": "Is Positive?",
-          "key": "IsPositive",
-          "type": "table",
-          "errors": []
-        }
-      ],
-      "type": "fixture",
-      "errors": []
-    }
-  ],
-  "time": "9/12/2016 8:05 AM",
+  "fixtures": [],
+  "time": "9/12/2016 9:29 AM",
   "system": null,
   "suite": null,
   "success": false,
