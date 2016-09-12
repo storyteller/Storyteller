@@ -18,17 +18,12 @@ namespace ST.Client
 
         public void Start()
         {
-            _startup = _controller.Start(EngineMode.Interactive).ContinueWith(t =>
+            _startup = _controller.Start().ContinueWith(t =>
             {
                 t.Result.WriteSystemUsage();
 
                 return t.Result;
             });
-        }
-
-        public QueueState QueueState()
-        {
-            return _controller.QueueState();
         }
 
         public void AddRemoteListener(object listener)
@@ -41,16 +36,10 @@ namespace ST.Client
             _startup.Wait();
         }
 
-        public string SpecPath
-        {
-            get { return _input.SpecPath; }
-        }
+        public string SpecPath => _input.SpecPath;
 
 
-        public Task<SystemRecycled> Startup
-        {
-            get { return _startup; }
-        }
+        public Task<SystemRecycled> Startup => _startup;
 
         public SystemRecycled LatestSystemRecycled
         {

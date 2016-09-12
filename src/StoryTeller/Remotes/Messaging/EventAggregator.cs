@@ -95,10 +95,7 @@ namespace StoryTeller.Remotes.Messaging
             _task = new TaskCompletionSource<T>();
         }
 
-        public Task<T> Task
-        {
-            get { return _task.Task; }
-        }
+        public Task<T> Task => _task.Task;
 
         public void Receive(T message)
         {

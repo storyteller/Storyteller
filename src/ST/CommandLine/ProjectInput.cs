@@ -6,13 +6,17 @@ using StoryTeller;
 using ST.Client;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Remotes;
 
 namespace ST.CommandLine
 {
     public class ProjectInput
     {
-        public ProjectInput()
+        private readonly EngineMode _mode;
+
+        public ProjectInput(EngineMode mode)
         {
+            _mode = mode;
             LifecycleFlag = Lifecycle.Any;
         }
 
@@ -72,7 +76,6 @@ namespace ST.CommandLine
         {
             var project = configureProject();
 
-
             // This will change later w/ the new separate process lifecycle
 #if NET46
             var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
@@ -122,6 +125,9 @@ namespace ST.CommandLine
 
             project.MaxRetries = RetriesFlag;
             project.Profile = ProfileFlag;
+
+            project.Mode = _mode;
+
             return project;
         }
 

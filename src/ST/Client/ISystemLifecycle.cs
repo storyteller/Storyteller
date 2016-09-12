@@ -11,10 +11,9 @@ namespace ST.Client
     {
         void AssertValid();
         void Teardown();
-        QueueState QueueState();
 
         // TODO -- make this return a Task<SystemRecycled>
-        void Start(EngineMode mode);
+        void Start();
     }
 
 #if NET46
@@ -65,22 +64,13 @@ namespace ST.Client
             }
         }
 
-        public QueueState QueueState()
-        {
-            if (_proxy == null) return new QueueState();
-
-            return _proxy.QueueState();
-        }
-
-        public void Start(EngineMode mode)
+        public void Start()
         {
             _domain = AppDomain.CreateDomain("Storyteller-SpecRunning-Domain", null, _remoteSetup.Setup);
 
 
             try
             {
-                _project.Mode = mode;
-
                 var proxyType = typeof(RemoteProxy);
                 _proxy = (RemoteProxy)_domain.CreateInstanceAndUnwrap(proxyType.Assembly.FullName, proxyType.FullName);
 

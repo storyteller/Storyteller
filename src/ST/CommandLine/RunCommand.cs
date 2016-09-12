@@ -41,7 +41,7 @@ namespace ST.CommandLine
             }
 
             var controller = input.BuildRemoteController();
-            var task = controller.Start(EngineMode.Batch).ContinueWith(t =>
+            var task = controller.Start().ContinueWith(t =>
             {
                 var systemRecycled = t.Result;
                 if (!systemRecycled.success)

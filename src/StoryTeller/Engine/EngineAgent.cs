@@ -10,7 +10,7 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine
 {
-    public class EngineAgent : IDisposable, IListener<StartProject>
+    public class EngineAgent : IDisposable
     {
         private readonly IList<IDisposable> _disposables = new List<IDisposable>();
         private SpecificationEngine _engine;
@@ -30,6 +30,8 @@ namespace StoryTeller.Engine
             _disposables.Add(_socket);
 
             EventAggregator.Start(_socket);
+
+            EventAggregator.SendMessage(new AgentReady());
         }
 
         public EngineAgent(int port, ISystem system) : this(port)
@@ -38,6 +40,7 @@ namespace StoryTeller.Engine
 
             _disposables.Add(system);
         }
+
 
         public void Dispose()
         {
@@ -52,17 +55,6 @@ namespace StoryTeller.Engine
             }
         }
 
-
-        public QueueState QueueState()
-        {
-            var controller = _controller as EngineController;
-            return controller == null ? new QueueState() : controller.QueueState();
-        }
-
-        void IListener<StartProject>.Receive(StartProject message)
-        {
-            Start(message.Project);
-        }
 
         public void Start(Project project)
         {
@@ -172,5 +164,12 @@ namespace StoryTeller.Engine
         }
 
         public Project Project { get; set; }
+    }
+
+    public class AgentReady : ClientMessage
+    {
+        public AgentReady() : base("agent-ready")
+        {
+        }
     }
 }
