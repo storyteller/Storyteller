@@ -8,16 +8,16 @@ namespace ST.Client.Persistence
 {
     public class RunSpecCommand : Command<RunSpec>
     {
-        private readonly Lazy<IPersistenceController> _controller;
+        private readonly Lazy<IPersistenceController> _persistence;
         private readonly SaveSpecBodyCommand _saveSpec;
-        private readonly IRemoteController _engine;
+        private readonly IRemoteController _remote;
 
-        public RunSpecCommand(Lazy<IPersistenceController> controller, SaveSpecBodyCommand saveSpec, IRemoteController engine)
+        public RunSpecCommand(Lazy<IPersistenceController> persistence, SaveSpecBodyCommand saveSpec, IRemoteController remote)
         {
-            if (saveSpec == null) throw new ArgumentNullException("saveSpec");
-            _controller = controller;
+            if (saveSpec == null) throw new ArgumentNullException(nameof(saveSpec));
+            _persistence = persistence;
             _saveSpec = saveSpec;
-            _engine = engine;
+            _remote = remote;
         }
 
         public override void HandleMessage(RunSpec message)
@@ -37,10 +37,10 @@ namespace ST.Client.Persistence
             }
             else
             {
-                message.spec = _controller.Value.LoadSpecification(message.id).data;
+                message.spec = _persistence.Value.LoadSpecification(message.id).data;
             }
 
-            _engine.SendMessage(message);
+            _remote.SendMessage(message);
         }
     }
 }
