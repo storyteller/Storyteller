@@ -5,10 +5,10 @@ namespace StoryTeller.Remotes
 {
     public class SystemRecycledListener : IListener<SystemRecycled>
     {
-        private readonly MessagingHub _messaging;
+        private readonly IMessagingHub _messaging;
         private readonly TaskCompletionSource<SystemRecycled> _completion;
 
-        public SystemRecycledListener(MessagingHub messaging)
+        public SystemRecycledListener(IMessagingHub messaging)
         {
             _messaging = messaging;
             _completion = new TaskCompletionSource<SystemRecycled>();

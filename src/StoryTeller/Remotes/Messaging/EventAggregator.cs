@@ -54,7 +54,7 @@ namespace StoryTeller.Remotes.Messaging
             catch (Exception e)
             {
                 // THIS IS IMPORTANT, NO FAILURES CAN POSSIBLY GET OUT HERE
-                Console.WriteLine(e);
+                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
             }
         }
 

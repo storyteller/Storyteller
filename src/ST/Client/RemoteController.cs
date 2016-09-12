@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Baseline;
 using StoryTeller;
@@ -11,11 +10,11 @@ namespace ST.Client
 {
     public class RemoteController : IDisposable, IRemoteController
     {
-        private readonly ISystemLauncher _launcher;
         public static int Port = 2500;
+        private readonly ISystemLauncher _launcher;
+        private readonly SocketConnection _socket;
 
         private AppDomainFileChangeWatcher _watcher;
-        private readonly SocketConnection _socket;
 
         public RemoteController(Project project, ISystemLauncher launcher)
         {
@@ -23,19 +22,17 @@ namespace ST.Client
             Project = project;
 
 
-            Messaging = new MessagingHub();
+            Messaging = EventAggregator.Messaging;
 
-            _socket = new SocketConnection(Project.Port, true, (s, json) =>
-            {
-                Messaging.SendJson(json);
-            });
+            _socket = new SocketConnection(Project.Port, true, (s, json) => { Messaging.SendJson(json); });
 
             Messaging.AddListener(this);
+            Messaging.AddListener(launcher);
         }
 
         public Project Project { get; }
 
-        public MessagingHub Messaging { get; }
+        public IMessagingHub Messaging { get; }
 
         public SystemRecycled LatestSystemRecycled { get; private set; }
 
@@ -44,8 +41,6 @@ namespace ST.Client
             _watcher?.Dispose();
 
             _launcher.Teardown();
-
-
         }
 
         public string WebSocketAddress { get; set; }
@@ -121,18 +116,23 @@ namespace ST.Client
 
             Messaging.AddListener(listener);
 
-            _launcher.Start();
+            _launcher.Start(this);
 
             return listener;
+        }
+
+        public void AssertValid()
+        {
+            _launcher.AssertValid();
         }
 
 
         public class ResponseExpression
         {
-            private readonly MessagingHub _messaging;
+            private readonly IMessagingHub _messaging;
             private readonly Action _sendAction;
 
-            public ResponseExpression(Action sendAction, MessagingHub messaging)
+            public ResponseExpression(Action sendAction, IMessagingHub messaging)
             {
                 _sendAction = sendAction;
                 _messaging = messaging;
@@ -147,11 +147,6 @@ namespace ST.Client
 
                 return watcher.Task;
             }
-        }
-
-        public void AssertValid()
-        {
-            _launcher.AssertValid();
         }
     }
 }
