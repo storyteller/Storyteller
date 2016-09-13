@@ -26,7 +26,7 @@ namespace StoryTeller.Remotes
         {
             _onReceived = onReceived;
                 
-            IPAddress ipAddress = Dns.GetHostAddressesAsync(Dns.GetHostName()).GetAwaiter().GetResult()[0];
+            IPAddress ipAddress = Dns.GetHostAddressesAsync("localhost").GetAwaiter().GetResult()[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
 
             _listener = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
