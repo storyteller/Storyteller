@@ -91,6 +91,12 @@ namespace StoryTeller.Files
         {
             var files = findFiles();
 
+            if (_tracking == null)
+            {
+                _tracking = new TrackedSet(files);
+                return;
+            }
+
             var changes = _tracking.DetectChanges(files);
             if (!changes.HasChanges())
             {

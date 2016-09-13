@@ -19,7 +19,7 @@ namespace ST.Client
         private IRemoteController _controller;
         private string _command;
         private bool _agentReady;
-        private object _readyLock = new object();
+        private readonly object _readyLock = new object();
 
         public ProcessRunnerSystemLauncher(Project project)
         {
@@ -35,9 +35,17 @@ namespace ST.Client
 
         public void Teardown()
         {
+            if (_process == null) return;
+
             _controller.SendMessage(new Shutdown());
 
             _process.WaitForExit(5000);
+
+            if (!_process.HasExited)
+            {
+                _process?.Kill();
+            }
+            _process = null;
 
             ConsoleWriter.Write("Shut down the spec running process at " + _project.ProjectPath);
         }
@@ -46,10 +54,10 @@ namespace ST.Client
         {
             _controller = remoteController;
 
+            // Watch UseShellExecute.
             var start = new ProcessStartInfo
             {
-                UseShellExecute = true,
-                CreateNoWindow = false,
+                UseShellExecute = false,
                 WorkingDirectory = _project.ProjectPath.ToFullPath(),
                 FileName = "dotnet"
             };

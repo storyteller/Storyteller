@@ -1,9 +1,19 @@
 {
   "profiles": {
-    "ST": {
+    "Open Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
-    }
+    },
+	"Open Gallery": {
+      "commandName": "Project",
+      "commandLineArgs": "open src/Storyteller.Gallery",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
+	"Open Specifications": {
+      "commandName": "Project",
+      "commandLineArgs": "open src/Specifications",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
   }
 }

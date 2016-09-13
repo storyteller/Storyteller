@@ -72,6 +72,13 @@ namespace StoryTeller.Remotes
                                 var json = reader.ReadString();
                                 _onReceived(_listener, json);
                             }
+                            catch (SocketException e)
+                            {
+                                if (e.Message.Contains("An existing connection was forcibly closed by the remote host"))
+                                {
+                                    // do nothing
+                                }
+                            }
                             catch (EndOfStreamException)
                             {
                                 // nothing, it's an artifact of a client shutting down

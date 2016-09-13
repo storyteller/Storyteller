@@ -78,7 +78,13 @@ namespace ST.CommandLine
 
             // This will change later w/ the new separate process lifecycle
 #if NET46
-            var controller = new RemoteController(project, new AppDomainSystemLauncher(project));
+
+            // TODO -- this will have to change later
+            var file = project.ProjectPath.AppendPath("project.json");
+
+
+            var launcher = File.Exists(file) ? (ISystemLauncher) new ProcessRunnerSystemLauncher(project) : new AppDomainSystemLauncher(project);
+            var controller = new RemoteController(project, launcher);
 #else
             var controller = new RemoteController(project, new ProcessRunnerSystemLauncher(project));
 #endif
