@@ -41,6 +41,8 @@ namespace ST.Client
             _watcher?.Dispose();
 
             _launcher.Teardown();
+
+            _socket?.Dispose();
         }
 
         public string WebSocketAddress { get; set; }

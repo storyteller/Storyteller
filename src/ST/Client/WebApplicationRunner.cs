@@ -60,6 +60,7 @@ namespace ST.Client
             var registry = new WebApplicationRegistry(webSocketsAddress, webSockets, Controller, context);
             _container = new Container(registry);
 
+            
 
             var baseDirectory = AppContext.BaseDirectory;
             var host = new WebHostBuilder()
