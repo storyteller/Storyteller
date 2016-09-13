@@ -59,7 +59,10 @@ namespace StoryTeller.Engine
 
         public void Start(Project project)
         {
-            Console.WriteLine($"Trying to start specification runner for {_system.GetType().Name} at {project.ProjectPath} and port {project.Port}");
+            if (_system != null)
+            {
+                Console.WriteLine($"Trying to start specification runner for {_system.GetType().Name} at {project.ProjectPath} and port {project.Port}");
+            }
 
             Project.CurrentProject = project;
 
