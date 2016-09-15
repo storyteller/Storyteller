@@ -89,7 +89,13 @@ namespace ST.Client
 
             if (_domain != null)
             {
-                AppDomain.Unload(_domain);
+                try {
+                    AppDomain.Unload(_domain);
+                }
+                catch (Exception) {
+                    // nothing, but don't blow up here
+                }
+                
                 _domain = null;
             }
         }

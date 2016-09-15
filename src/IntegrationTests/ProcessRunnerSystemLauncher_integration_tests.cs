@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Globalization;
-using System.Threading;
 using System.Threading.Tasks;
+using IntegrationTests.CommandLine;
 using Shouldly;
+using StoryTeller;
 using StoryTeller.Remotes;
 using ST.Client;
 using Xunit;
 
-namespace StoryTeller.Testing.ST
+namespace IntegrationTests
 {
     public class ProcessRunnerSystemLauncher_integration_tests : IDisposable
     {
@@ -36,7 +36,7 @@ namespace StoryTeller.Testing.ST
         {
             var recycled = await start("Storyteller.Gallery");
 
-            recycled.success.ShouldBeTrue();
+            ShouldBeBooleanExtensions.ShouldBeTrue(recycled.success);
         }
 
         [Fact]
@@ -44,11 +44,11 @@ namespace StoryTeller.Testing.ST
         {
             var recycled = await start("Storyteller.Gallery");
 
-            recycled.success.ShouldBeTrue();
+            ShouldBeBooleanExtensions.ShouldBeTrue(recycled.success);
 
             var recycled2 = await _controller.Recycle();
 
-            recycled2.success.ShouldBeTrue();
+            ShouldBeBooleanExtensions.ShouldBeTrue(recycled2.success);
 
 
         }
@@ -58,7 +58,7 @@ namespace StoryTeller.Testing.ST
         {
             var recycled = await start("BadSystem");
 
-            recycled.success.ShouldBeFalse();
+            ShouldBeBooleanExtensions.ShouldBeFalse(recycled.success);
             recycled.error.ShouldContain(nameof(DivideByZeroException));
 
         }
@@ -68,7 +68,7 @@ namespace StoryTeller.Testing.ST
         {
             var recycled = await start("BlowsUp");
 
-            recycled.success.ShouldBeFalse();
+            ShouldBeBooleanExtensions.ShouldBeFalse(recycled.success);
             recycled.error.ShouldContain("Unable to start process");
 
         }

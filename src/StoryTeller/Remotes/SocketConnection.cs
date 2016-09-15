@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Baseline;
 
 namespace StoryTeller.Remotes
 {
@@ -134,7 +135,7 @@ namespace StoryTeller.Remotes
             _cancellation.Cancel();
 
 #if NET46
-            _receiveLoop.Dispose();
+            _receiveLoop.SafeDispose();
 #endif
             _listener.Dispose();
         }
