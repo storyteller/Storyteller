@@ -43,7 +43,13 @@ namespace StoryTeller.Remotes
         public void WriteSystemUsage()
         {
             Console.WriteLine("Using System: " + system_name);
-            properties.Each(pair => { Console.WriteLine("{0}: {1}", pair.Key, pair.Value); });
+            properties.Each(pair =>
+            {
+                if (pair.Value != null)
+                {
+                    Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
+                }
+            });
             Console.WriteLine();
         }
     }
