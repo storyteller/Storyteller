@@ -7,15 +7,11 @@ namespace StoryTeller
     {
         public static void GotoUrl(string url)
         {
-            Console.WriteLine("Website available at " + url);
-            Console.WriteLine("Trying to launch now...");
-
-
             try
             {
                 Process.Start(url);
             }
-            catch (Exception e1)
+            catch (Exception)
             {
                 try
                 {

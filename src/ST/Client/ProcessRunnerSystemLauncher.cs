@@ -45,9 +45,10 @@ namespace ST.Client
             {
                 _process?.Kill();
             }
-            _process = null;
+            
+            ConsoleWriter.Write($"Shut down the spec running process at {_project.ProjectPath} with exit code {_process.ExitCode}");
 
-            ConsoleWriter.Write("Shut down the spec running process at " + _project.ProjectPath);
+            _process = null;
         }
 
         public void Start(IRemoteController remoteController)
@@ -140,7 +141,7 @@ namespace ST.Client
                 _agentReady = true;
             }
 
-            ConsoleWriter.Write(ConsoleColor.Cyan, $"Agent ready at {_project.Port}.");
+            ConsoleWriter.Write($"Agent ready at {_project.Port}.");
             _controller.SendMessage(new StartProject { Project = _project });
 
         }

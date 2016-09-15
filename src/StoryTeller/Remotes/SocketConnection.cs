@@ -132,6 +132,10 @@ namespace StoryTeller.Remotes
         public void Dispose()
         {
             _cancellation.Cancel();
+
+#if NET46
+            _receiveLoop.Dispose();
+#endif
             _listener.Dispose();
         }
     }

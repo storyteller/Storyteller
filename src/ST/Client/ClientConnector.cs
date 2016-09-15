@@ -47,7 +47,8 @@ namespace ST.Client
         {
             var json = JsonSerialization.ToCleanJson(message);
 
-            Console.WriteLine("Sending: " + message);
+            // TODO -- only do this in verbose mode
+            //Console.WriteLine("Sending: " + message);
 
 #pragma warning disable 4014
             _handler.Send(json);

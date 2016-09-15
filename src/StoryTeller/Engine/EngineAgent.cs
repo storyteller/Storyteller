@@ -31,7 +31,7 @@ namespace StoryTeller.Engine
 
             EventAggregator.Start(_socket);
 
-            ConsoleWriter.Write(ConsoleColor.Cyan, "Sending the agent ready message.");
+            Console.WriteLine("AGENT: Sending AgentReady message");
             EventAggregator.SendMessage(new AgentReady());
         }
 
@@ -61,7 +61,7 @@ namespace StoryTeller.Engine
         {
             if (_system != null)
             {
-                Console.WriteLine($"Trying to start specification runner for {_system.GetType().Name} at {project.ProjectPath} and port {project.Port}");
+                Console.WriteLine($"AGENT: Trying to start specification runner for {_system.GetType().Name} at {project.ProjectPath} and port {project.Port}");
             }
 
             Project.CurrentProject = project;
@@ -91,7 +91,7 @@ namespace StoryTeller.Engine
                 _engine.Start(project.StopConditions);
 
 
-                ConsoleWriter.Write(ConsoleColor.Cyan, "Specification running engine ready at " + project.ProjectPath);
+                ConsoleWriter.Write("AGENT: Specification running engine ready at " + project.ProjectPath);
             }
             catch (Exception e)
             {

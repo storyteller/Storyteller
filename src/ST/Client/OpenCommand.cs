@@ -30,7 +30,7 @@ namespace ST.Client
                 };
 
 #else
-                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => runner.SafeDispose();
+                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => runner.Dispose();
 #endif
 
                 Console.CancelKeyPress += (s, e) =>
@@ -40,7 +40,7 @@ namespace ST.Client
                     reset.Set();
                 };
 
-                tellUsersWhatToDo();
+                tellUsersWhatToDo(runner.BaseAddress);
                 reset.WaitOne();
             }
 
@@ -48,8 +48,9 @@ namespace ST.Client
         }
 
 
-        private static void tellUsersWhatToDo()
+        private static void tellUsersWhatToDo(string runnerBaseAddress)
         {
+            ConsoleWriter.Write(ConsoleColor.Cyan, "Website available at " + runnerBaseAddress);
             Console.WriteLine("Type 'ctrl + c' to quit");
         }
     }
