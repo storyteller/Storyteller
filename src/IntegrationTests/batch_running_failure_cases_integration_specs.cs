@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using IntegrationTests.CommandLine;
 using Xunit;
 using Shouldly;
 using ST.CommandLine;

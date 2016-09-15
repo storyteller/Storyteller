@@ -1,14 +1,15 @@
 ﻿using System.Threading;
 using Baseline;
+using IntegrationTests.CommandLine;
 using MultipleSystems;
-using Xunit;
 using Shouldly;
-using ST.Client;
+using StoryTeller;
 using StoryTeller.Engine;
-using StoryTeller.Remotes;
 using StoryTeller.Samples;
+using ST.Client;
+using Xunit;
 
-namespace StoryTeller.Testing.Remotes
+namespace IntegrationTests
 {
     
     public class remote_activation_integration_specs
