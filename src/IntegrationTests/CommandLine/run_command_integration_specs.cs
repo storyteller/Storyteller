@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Linq;
 using Baseline;
-using Xunit;
 using Shouldly;
+using StoryTeller;
+using StoryTeller.Model;
+using StoryTeller.Remotes.Messaging;
 using ST.Client;
 using ST.CommandLine;
-using StoryTeller.Model;
-using StoryTeller.Remotes;
-using StoryTeller.Remotes.Messaging;
+using Xunit;
 
-namespace StoryTeller.Testing.CommandLine
+namespace IntegrationTests.CommandLine
 {
-    
     public class run_command_integration_specs : IDisposable
     {
         private RunInput theInput;
@@ -128,19 +127,5 @@ namespace StoryTeller.Testing.CommandLine
             new FileSystem().WriteStringToFile(clientPath.AppendPath("batch-result-data.js"), "module.exports = " + json);
         }
 
-        [Fact]
-        public void use_specific_system_in_multi_system_project()
-        {
-            var directory = TestingContext.FindParallelDirectory("MultipleSystems");
-
-
-            var input = new RunInput {Path = directory, SystemNameFlag = "System2"};
-            var multiSystemController = input.BuildRemoteController();
-            var task = multiSystemController.Start();
-            task.Wait(3.Seconds());
-
-            task.Result.system_name.ShouldBe("MultipleSystems.System2");
-            multiSystemController.Dispose();
-        }
     }
 }

@@ -12,8 +12,7 @@
     "tdd-mocha": "mocha -w -G",
     "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
     "test-karma": "karma start --single-run",
-    "test-mocha": "mocha --compilers js:babel-core/register",
-    "build-server": "paket install && node build/buildServer.js"
+    "test-mocha": "mocha --compilers js:babel-core/register"
   },
   "devDependencies": {
     "babel": "^6.3.13",
