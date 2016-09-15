@@ -16,7 +16,7 @@ namespace StoryTeller
 
         public StorytellerAgent(int port, ISystem system)
         {
-            ConsoleWriter.Write(ConsoleColor.Green, $"Running the StorytellerAgent at port {port} with system {system.GetType().Name}");
+            Console.WriteLine($"AGENT: Running the StorytellerAgent at port {port} with system {system.GetType().Name}");
 
             EventAggregator.Messaging.AddListener(this);
 
@@ -36,7 +36,7 @@ namespace StoryTeller
             {
                 _engine.Dispose();
 
-                ConsoleWriter.Write(ConsoleColor.Green, "Shut down gracefully.");
+                Console.WriteLine("Shut down gracefully.");
             }
             catch (Exception e)
             {

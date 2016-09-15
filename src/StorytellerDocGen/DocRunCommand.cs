@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Oakton;
+using StoryTeller;
 
 namespace StorytellerDocGen
 {
@@ -15,25 +16,10 @@ namespace StorytellerDocGen
             {
                 using (var server = project.LaunchRunner())
                 {
-                    
-                    Console.WriteLine("Launching the browser to " + project.BaseAddress);
+                    ProcessLauncher.GotoUrl(project.BaseAddress);
 
-                    try
-                    {
-                        Process.Start(project.BaseAddress);
-                    }
-                    catch (System.Exception)
-                    {
-                        var start = new ProcessStartInfo();
-                        start.UseShellExecute = false;
-                        start.FileName = "open";
-                        start.Arguments = project.BaseAddress;
-                        Process.Start(start);
-                    }
 
-                    
-
-                    tellUsersWhatToDo();
+                    tellUsersWhatToDo(project.BaseAddress);
                     ConsoleKeyInfo key = Console.ReadKey();
                     while (key.Key != ConsoleKey.Q)
                     {
@@ -47,8 +33,11 @@ namespace StorytellerDocGen
             return true;
         }
 
-        private static void tellUsersWhatToDo()
+        private static void tellUsersWhatToDo(string url)
         {
+            ConsoleWriter.Write(ConsoleColor.Cyan, "Website available at " + url);
+
+
             Console.WriteLine("Press 'q' to quit");
         }
     }
