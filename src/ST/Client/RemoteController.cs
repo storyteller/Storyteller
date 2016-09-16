@@ -108,6 +108,7 @@ namespace ST.Client
         }
 
         public SystemRecycled LatestSystemRecycled { get; private set; }
+        public bool DisableAppDomainFileWatching { get; set; }
 
         public void Teardown()
         {
@@ -127,8 +128,11 @@ namespace ST.Client
 
             return listener.Task.ContinueWith(x =>
             {
-                _watcher = new AppDomainFileChangeWatcher(Recycle);
-                _watcher.WatchBinariesAt(_path.AppendPath("bin"));
+                if (!DisableAppDomainFileWatching)
+                {
+                    _watcher = new AppDomainFileChangeWatcher(Recycle);
+                    _watcher.WatchBinariesAt(_path.AppendPath("bin"));
+                }
 
                 LatestSystemRecycled = x.Result;
 

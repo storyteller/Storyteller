@@ -14,6 +14,7 @@ namespace ST.CommandLine
         public RunInput()
         {
             ResultsPathFlag = "stresults.htm";
+            _disableAppDomainFileWatching = true;
         }
 
         [Description("Path to write out the results. Default is stresults.htm")]

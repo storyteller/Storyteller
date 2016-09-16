@@ -67,11 +67,15 @@ namespace ST.CommandLine
         [Description("Optional. Tell Storyteller which which ISystem to use")]
         public string SystemNameFlag { get; set; }
 
+        protected bool _disableAppDomainFileWatching = false;
+
         public RemoteController BuildRemoteController()
         {
             var path = Path.ToFullPath();
 
             var controller = new RemoteController(path);
+            controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
+
             controller.Project.Culture = CultureFlag;
 
 
@@ -119,6 +123,8 @@ namespace ST.CommandLine
                 Directory.CreateDirectory(SpecPath);
             }
         }
+
+        
 
     }
 }
