@@ -22,7 +22,6 @@ namespace StoryTeller.Engine
     {
         private readonly ConsumingQueue _executionQueue;
         private ConsumingQueue _planning;
-        private ConsumingQueue _reader;
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
         private readonly Task _warmup;
@@ -66,22 +65,12 @@ namespace StoryTeller.Engine
             _system.Dispose();
             _executionQueue.Dispose();
             _planning?.Dispose();
-            _reader?.Dispose();
             _runner.Cancel();
         }
 
         public void Enqueue(SpecExecutionRequest request)
         {
-            if (request.Specification.SpecType == SpecType.header)
-            {
-                _reader.Enqueue(request);
-            }
-            else
-            {
-                _planning.Enqueue(request);
-            }
-
-           
+            _planning.Enqueue(request);
         }
 
         public void CancelRunningSpec(string id)
@@ -141,17 +130,6 @@ namespace StoryTeller.Engine
                 _executionQueue.Enqueue(request);
             });
 
-            _reader = new ConsumingQueue(request =>
-            {
-                if (request.Specification.SpecType == SpecType.header)
-                {
-                    request.ReadXml();
-                }
-
-                _planning.Enqueue(request);
-            });
-
-            _reader.Start();
             _planning.Start();
         }
 

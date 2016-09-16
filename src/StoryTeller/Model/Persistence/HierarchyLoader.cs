@@ -88,6 +88,8 @@ namespace StoryTeller.Model.Persistence
                 if (tags.IsNotEmpty())
                     spec.Tags.AddRange(tags.ToDelimitedArray());
 
+                spec.ReadBody();
+
                 return spec;
             }
         }

@@ -21,26 +21,6 @@ namespace StoryTeller.Testing.Model
         }
 
         [Test]
-        public void read_spec_data_from_header_mode()
-        {
-            var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
-
-            var spec = HierarchyLoader.ReadSpecHeader(path);
-            spec.Children.Any().ShouldBeFalse();
-
-            spec.SpecType.ShouldBe(SpecType.header);
-
-            spec.ReadBody();
-
-            spec.SpecType.ShouldBe(SpecType.full);
-
-            spec.Children.Any().ShouldBeTrue();
-
-
-        }
-
-        [Test]
         public void serializes_fine()
         {
             var spec = new Specification();

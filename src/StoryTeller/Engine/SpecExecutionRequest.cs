@@ -6,14 +6,12 @@ using FubuCore;
 using StoryTeller.Grammars;
 using StoryTeller.Messages;
 using StoryTeller.Model;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine
 {
     public class SpecExecutionRequest
     {
-
         public static SpecExecutionRequest For(Specification spec)
         {
             return new SpecExecutionRequest(spec, new NulloResultObserver());
@@ -25,6 +23,11 @@ namespace StoryTeller.Engine
 
         public SpecExecutionRequest(Specification specification, IResultObserver observer)
         {
+            if (specification.SpecType == SpecType.header)
+            {
+                throw new ArgumentOutOfRangeException(nameof(specification), "Specification must be full bodied, this on is header only");
+            }
+
             _observer = observer;
             Specification = specification;
         }
@@ -45,29 +48,6 @@ namespace StoryTeller.Engine
                 IsCancelled = true;
                 EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(e)));
             }
-        }
-
-        public void ReadXml()
-        {
-            performAction(() =>
-            {
-                try
-                {
-                    Specification.ReadBody();
-                }
-                catch (ArgumentNullException e)
-                {
-                    if (e.Message.Contains("System.Xml.XmlTextReaderImpl"))
-                    {
-                        // try again
-                        Specification.ReadBody();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            });
         }
 
         public void CreatePlan(FixtureLibrary library)

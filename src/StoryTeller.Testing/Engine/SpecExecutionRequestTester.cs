@@ -44,7 +44,7 @@ namespace StoryTeller.Testing.Engine
             var action = MockRepository.GenerateMock<IResultObserver>();
 
             var request = new SpecExecutionRequest(theSpec, action);
-            request.ReadXml();
+
             request.CreatePlan(TestingContext.Library);
             request.Plan.Attempts = 3;
 
@@ -59,30 +59,12 @@ namespace StoryTeller.Testing.Engine
         {
             var request = SpecExecutionRequest.For(theSpec);
 
-            request.ReadXml();
-
             request.Specification.ShouldNotBeNull();
             request.Specification.Children.Count.ShouldBeGreaterThan(0);
 
             request.IsCancelled.ShouldBe(false);
         }
 
-        [Test]
-        public void read_xml_sad_path()
-        {
-            var request = SpecExecutionRequest.For(new Specification()
-            {
-                Filename = "nonexistent.xml",
-                SpecType = SpecType.header
-            });
-            
-
-            EventAggregator.Messaging.AddListener(listener);
-
-            request.ReadXml();
-
-            request.IsCancelled.ShouldBe(true);
-        }
 
         [Test]
         public void cancel_cancels_the_request()
@@ -100,7 +82,6 @@ namespace StoryTeller.Testing.Engine
         public void create_plan_happy_path_smoke_test()
         {
             var request = SpecExecutionRequest.For(theSpec);
-            request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
             request.IsCancelled.ShouldBe(false);
