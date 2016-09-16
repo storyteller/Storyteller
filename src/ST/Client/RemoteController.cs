@@ -102,7 +102,7 @@ namespace ST.Client
             {
                 if (!DisableAppDomainFileWatching)
                 {
-                    _watcher = new AppDomainFileChangeWatcher(Recycle);
+                    _watcher = new AppDomainFileChangeWatcher(() => Recycle());
                     _watcher.WatchBinariesAt(Project.ProjectPath.AppendPath("bin"));
                 }
 
