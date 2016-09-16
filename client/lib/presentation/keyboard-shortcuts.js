@@ -51,6 +51,12 @@ module.exports = {
 
 
 	register(){
+		engine({
+			keys: ['ctrl+shift+b'],
+			topic: "force-recycle",
+			description: "Recycle the System Under Test"
+		});
+
 		explorer({
 			keys: ['ctrl+n', 'ctrl+shift+f'],
 			topic: 'find',
