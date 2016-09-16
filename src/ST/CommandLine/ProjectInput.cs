@@ -87,7 +87,9 @@ namespace ST.CommandLine
             var controller = new RemoteController(project, launcher);
 #else
             var controller = new RemoteController(project, new ProcessRunnerSystemLauncher(project));
+
 #endif
+            controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
 
             return controller;
         }
@@ -106,10 +108,6 @@ namespace ST.CommandLine
             {
                 project.ConfigFile = ConfigFlag;
             }
-
-            // This will change later w/ the new separate process lifecycle
-            var controller = new RemoteController(project, new AppDomainSystemLifecycle(project));
-			controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
 
             project.Culture = CultureFlag;
 
