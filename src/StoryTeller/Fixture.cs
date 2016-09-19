@@ -575,38 +575,11 @@ namespace StoryTeller
         {
             get
             {
-                if (Context != null) return Context.State.CurrentObject;
-                return null;
+                return Context?.State.CurrentObject;
             }
             set { if (Context != null) Context.State.CurrentObject = value; }
         }
 
-#if NET46
-
-
-        /// <summary>
-        /// Validate a set of tabular data. Useful for writing specifications
-        /// against relational databases
-        /// </summary>
-        /// <param name="dataSource"></param>
-        /// <returns></returns>
-        public static VerifyDataTableExpression VerifyDataTable(Func<ISpecContext, DataTable> dataSource)
-        {
-            return new VerifyDataTableExpression(dataSource);
-        }
-
-        /// <summary>
-        /// Validate a set of tabular data. Useful for writing specifications
-        /// against relational databases
-        /// </summary>
-        /// <param name="dataSource"></param>
-        /// <returns></returns>
-        public static VerifyDataTableExpression VerifyDataTable(Func<DataTable> dataSource)
-        {
-            return new VerifyDataTableExpression(c => dataSource());
-        }
-        
-#endif
 
     }
 }
