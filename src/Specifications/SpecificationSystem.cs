@@ -70,8 +70,8 @@ namespace Specifications
 
     public class InMemoryServiceLocator 
     {
-        private readonly Cache<Type, object> _services = new Cache<Type, object>();
-        private readonly Cache<string, object> _namedServices = new Cache<string, object>();
+        private readonly LightweightCache<Type, object> _services = new LightweightCache<Type, object>();
+        private readonly LightweightCache<string, object> _namedServices = new LightweightCache<string, object>();
 
         public void Add<T>(T service)
         {

@@ -12,8 +12,8 @@ namespace StoryTeller.Model
 #endif
     public class Step : Node, INodeHolder
     {
-        [JsonIgnore] public readonly Cache<string, Section> Collections =
-            new Cache<string, Section>(key => new Section(key));
+        [JsonIgnore] public readonly LightweightCache<string, Section> Collections =
+            new LightweightCache<string, Section>(key => new Section(key));
 
 
         [JsonProperty("key")] public readonly string Key;

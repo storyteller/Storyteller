@@ -14,7 +14,7 @@ namespace StorytellerDocGen.Samples
         private readonly IBrowserRefresher _browser;
         private readonly ISampleCache _cache;
 
-        private readonly Cache<string, ISampleScanner> _scanners = new Cache<string, ISampleScanner>();
+        private readonly LightweightCache<string, ISampleScanner> _scanners = new LightweightCache<string, ISampleScanner>();
         private readonly IList<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
 
