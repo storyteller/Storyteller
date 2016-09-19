@@ -34,8 +34,8 @@ namespace StoryTeller.Results
 
     public class Reporting : IDisposable, IReporting
     {
-        private readonly Cache<Type, Report> _reporters 
-            = new Cache<Type, Report>(type => Activator.CreateInstance(type).As<Report>());
+        private readonly LightweightCache<Type, Report> _reporters 
+            = new LightweightCache<Type, Report>(type => Activator.CreateInstance(type).As<Report>());
 
         private readonly IList<HtmlReport> _reports = new List<HtmlReport>(); 
 

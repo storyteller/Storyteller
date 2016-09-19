@@ -566,7 +566,7 @@ namespace StoryTeller
             return Enumerable.Empty<string>();
         }
 
-        internal readonly Cache<string, OptionList> Lists = new Cache<string, OptionList>(key => new OptionList(key));
+        internal readonly LightweightCache<string, OptionList> Lists = new LightweightCache<string, OptionList>(key => new OptionList(key));
 
         /// <summary>
         /// Shortcut to get or set the current object on the context state
