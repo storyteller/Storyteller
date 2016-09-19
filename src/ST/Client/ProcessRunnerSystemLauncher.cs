@@ -33,6 +33,17 @@ namespace ST.Client
             // Nothing
         }
 
+        private void killLingeringProcesses()
+        {
+            var processName = Path.GetFileName(_project.ProjectPath) + ".exe";
+            var lingering = Process.GetProcessesByName(processName);
+            foreach (var process in lingering)
+            {
+                ConsoleWriter.Write(ConsoleColor.Yellow, $"Killing process '{process.ProcessName}' #{process.Id}");
+                process.Kill();
+            }
+        }
+
         public void Teardown()
         {
             if (_process == null) return;
@@ -49,10 +60,14 @@ namespace ST.Client
             ConsoleWriter.Write($"Shut down the spec running process at {_project.ProjectPath} with exit code {_process.ExitCode}");
 
             _process = null;
+
+            killLingeringProcesses();
         }
 
         public void Start(IRemoteController remoteController)
         {
+            killLingeringProcesses();
+
             _controller = remoteController;
 
             // Watch UseShellExecute.
