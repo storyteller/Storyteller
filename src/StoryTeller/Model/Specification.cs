@@ -99,14 +99,6 @@ namespace StoryTeller.Model
             return Suite.SuitePathOf(path);
         }
 
-        public void ReadBody()
-        {
-            if (SpecType == SpecType.full) return;
-
-            XmlReader.FillBody(this);
-            SpecType = SpecType.full;
-        }
-
         protected bool Equals(Specification other)
         {
             return string.Equals(id, other.id);

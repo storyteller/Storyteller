@@ -21,25 +21,6 @@ namespace StoryTeller.Testing.Model
                 .ShouldBe(SpecType.full);
         }
 
-        [Fact]
-        public void read_spec_data_from_header_mode()
-        {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples")
-                .AppendPath("Specs", "General", "Check properties.xml");
-
-            var spec = HierarchyLoader.ReadSpecHeader(path);
-            spec.Children.Any().ShouldBeFalse();
-
-            spec.SpecType.ShouldBe(SpecType.header);
-
-            spec.ReadBody();
-
-            spec.SpecType.ShouldBe(SpecType.full);
-
-            spec.Children.Any().ShouldBeTrue();
-
-
-        }
 
         [Fact]
         public void serializes_fine()

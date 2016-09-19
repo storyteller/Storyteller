@@ -53,10 +53,8 @@ namespace StoryTeller.Testing
 
             hierarchy.GetAllSpecs().Each(x => x.path.ShouldNotBeNull());
 
-            hierarchy.GetAllSpecs().Each(header =>
+            hierarchy.GetAllSpecs().Each(spec =>
             {
-                var spec = header;
-                spec.ReadBody();
                 data.specs.Add(spec.id, spec);
 
                 using (var execution = theSystem.CreateContext())
@@ -71,7 +69,7 @@ namespace StoryTeller.Testing
 
                         plan.AcceptVisitor(executor);
 
-                        observer.SpecExecutionFinished(header, context.FinalizeResults(1));
+                        observer.SpecExecutionFinished(spec, context.FinalizeResults(1));
                     }
                     
                     

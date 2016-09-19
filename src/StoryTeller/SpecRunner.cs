@@ -60,15 +60,13 @@ namespace StoryTeller
                 ? _hierarchy.Specifications[idOrPath]
                 : _hierarchy.Specifications.FirstOrDefault(x => x.path == idOrPath);
 
-            if (specification == null) throw new ArgumentOutOfRangeException("idOrPath","Could not find a Specification with either id or path equal to " + idOrPath);
+            if (specification == null) throw new ArgumentOutOfRangeException(nameof(idOrPath),"Could not find a Specification with either id or path equal to " + idOrPath);
 
             return Run(specification);
         }
 
         public SpecResults Run(Specification specification)
         {
-            specification.ReadBody();
-
             var results = Execute(specification);
 
             _records.Add(new BatchRecord
