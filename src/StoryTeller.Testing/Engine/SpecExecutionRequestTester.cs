@@ -41,7 +41,6 @@ namespace StoryTeller.Testing.Engine
             var action = Substitute.For<IResultObserver>();
 
             var request = new SpecExecutionRequest(theSpec, action);
-            request.ReadXml();
             request.CreatePlan(TestingContext.Library);
             request.Plan.Attempts = 3;
 
@@ -55,8 +54,6 @@ namespace StoryTeller.Testing.Engine
         public void read_xml_happy_path()
         {
             var request = SpecExecutionRequest.For(theSpec);
-
-            request.ReadXml();
 
             request.Specification.ShouldNotBeNull();
             request.Specification.Children.Count.ShouldBeGreaterThan(0);
@@ -75,8 +72,6 @@ namespace StoryTeller.Testing.Engine
             
 
             EventAggregator.Messaging.AddListener(listener);
-
-            request.ReadXml();
 
             request.IsCancelled.ShouldBe(true);
         }
@@ -97,7 +92,6 @@ namespace StoryTeller.Testing.Engine
         public void create_plan_happy_path_smoke_test()
         {
             var request = SpecExecutionRequest.For(theSpec);
-            request.ReadXml();
             request.CreatePlan(TestingContext.Library);
 
             request.IsCancelled.ShouldBe(false);

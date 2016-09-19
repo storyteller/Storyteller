@@ -21,11 +21,9 @@ namespace StoryTeller.Engine
     {
         private readonly ConsumingQueue _executionQueue;
         private ConsumingQueue _planning;
-
         private readonly ISpecRunner _runner;
         private readonly ISystem _system;
         private readonly Task _warmup;
-        private ConsumingQueue _planning;
         private ConsumingQueue _reader;
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)

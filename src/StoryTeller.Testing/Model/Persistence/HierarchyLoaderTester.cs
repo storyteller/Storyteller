@@ -29,7 +29,7 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.MaxRetries.ShouldBe(3);
         }
 
-        [Test]
+        [Fact]
         public void can_read_max_retries()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
@@ -50,15 +50,6 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.SpecType.ShouldBe(SpecType.header);
         }
 
-        [Fact]
-        public void can_read_max_retries()
-        {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
-
-            var spec = HierarchyLoader.ReadSpecHeader(path);
-
-            spec.MaxRetries.ShouldBe(3);
-        }
 
         [Fact]
         public void read_an_entire_suite()
