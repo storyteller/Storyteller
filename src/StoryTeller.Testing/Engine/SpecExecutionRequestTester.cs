@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.Engine
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples")
             .AppendPath("Specs", "General", "Check properties.xml");
 
-            theSpec = HierarchyLoader.ReadSpecHeader(path);
+            theSpec = XmlReader.ReadFromFile(path);
 
             listener = new RuntimeErrorListener();
         }

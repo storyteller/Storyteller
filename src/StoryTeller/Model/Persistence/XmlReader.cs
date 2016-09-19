@@ -19,36 +19,19 @@ namespace StoryTeller.Model.Persistence
                 specification.ApplyRenumbering();
             }
 
+            specification.Filename = path;
+
             return specification;
 
         }
 
         public static Specification ReadFromXml(XmlDocument document)
         {
-            XmlElement top;
             var spec = ReadHeaderInformation(document);
-
 
             ReadBody(document, spec);
 
             return spec;
-        }
-
-        public static void FillBody(Specification spec)
-        {
-            var document = new XmlDocument();
-            using (var stream = new FileStream(spec.Filename, FileMode.Open))
-            {
-                document.Load(stream);
-            }
-
-
-            ReadBody(document, spec);
-
-            if (spec.NeedsToBeRenumbered())
-            {
-                spec.ApplyRenumbering();
-            }
         }
 
         public static void ReadBody(XmlDocument document, Specification spec)
@@ -64,6 +47,11 @@ namespace StoryTeller.Model.Persistence
                     spec.Children.Add(ReadSection(element));
                 }
             });
+
+            if (spec.NeedsToBeRenumbered())
+            {
+                spec.ApplyRenumbering();
+            }
         }
 
         public static Specification ReadHeaderInformation(XmlDocument document)

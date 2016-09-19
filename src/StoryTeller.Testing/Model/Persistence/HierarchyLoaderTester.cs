@@ -18,7 +18,7 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecHeader(path);
+            var spec = XmlReader.ReadFromFile(path);
 
             spec.name.ShouldBe("Check properties");
             spec.Lifecycle.ShouldBe(Lifecycle.Acceptance);
@@ -35,7 +35,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
                 .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecHeader(path);
+            var spec = XmlReader.ReadFromFile(path);
 
             spec.MaxRetries.ShouldBe(3);
         }
@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
 
-            var spec = HierarchyLoader.ReadSpecHeader(path);
+            var spec = XmlReader.ReadFromFile(path);
 
             spec.SpecType.ShouldBe(SpecType.header);
         }

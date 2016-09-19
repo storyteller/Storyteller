@@ -41,7 +41,6 @@ namespace ST.Client
             _lock.Write(() =>
             {
                 spec.Lifecycle = lifecycle;
-                spec.ReadBody();
 
                 using (var stream = new FileStream(spec.Filename, FileMode.Create))
                 {
@@ -217,12 +216,7 @@ namespace ST.Client
             {
                 if (!_hierarchy.Specifications.Has(id)) return null;
 
-                var spec = _hierarchy.Specifications[id];
-                spec.ReadBody();
-
-                var data = getSpecDataFor(id);
-
-                return data;
+                return getSpecDataFor(id);
             });
         }
 
@@ -244,8 +238,8 @@ namespace ST.Client
             {
                 _lock.Read(() =>
                 {
-                    var node = HierarchyLoader.ReadSpecHeader(file);
-                    node.ReadBody();
+                    var node = XmlReader.ReadFromFile(file);
+
 
                     if (_hierarchy.Specifications.Has(node.id))
                     {
