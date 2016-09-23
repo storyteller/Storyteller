@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using Baseline;
 using Shouldly;
@@ -16,7 +17,7 @@ namespace StorytellerDocGen.Testing.Samples
         // Too flakey with timings to be in C#
         public void try_to_find_a_new_snippet_in_a_changed_file()
         {
-            var folder = AppContext.BaseDirectory.AppendPath(Guid.NewGuid().ToString());
+            var folder = Path.GetTempPath().AppendPath(Guid.NewGuid().ToString());
             var file = folder.AppendPath("fake.cs");
 
             new FileSystem().WriteStringToFile(file, @"

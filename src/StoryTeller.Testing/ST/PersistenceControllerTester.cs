@@ -28,7 +28,7 @@ namespace StoryTeller.Testing.ST
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
 
-            thePath = ".".ToFullPath().AppendPath(Guid.NewGuid().ToString());
+            thePath = AppContext.BaseDirectory.ToFullPath().AppendPath(Guid.NewGuid().ToString());
             var fileSystem = new FileSystem();
 
             var files = fileSystem.FindFiles(path, FileSet.Deep("*.xml"));
