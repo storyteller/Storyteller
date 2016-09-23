@@ -40,7 +40,7 @@ namespace StorytellerDocGen.Samples
             {
                 FoundSamples = true;
 
-                var snippet = new Sample(name){
+                var sample = new Sample(name){
                     Language = _scanner.Language,
                     File = _file.Path
                 };
@@ -49,12 +49,12 @@ namespace StorytellerDocGen.Samples
                 {
                     if (_scanner.IsAtEnd(txt))
                     {
-                        _cache.AddOrReplace(snippet);
+                        _cache.AddOrReplace(sample);
                         _readAction = lookForNewSnippet;
                     }
                     else
                     {
-                        snippet.Append(txt, num);
+                        sample.Append(txt, num);
                     }
                 };
             }

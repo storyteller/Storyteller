@@ -21,7 +21,7 @@ namespace StorytellerDocGen.Testing.Samples
 
             new FileSystem().WriteStringToFile(file, @"
 // SAMPLE: fake-sample
-var x = 1;
+    var x = 1;
 // ENDSAMPLE
 
 ");
