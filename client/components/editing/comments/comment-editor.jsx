@@ -30,10 +30,10 @@ module.exports = function({arg, step}){
 
 		return (
 			<div 
-				id={this.props.step.id} 
+				id={step.id} 
 				className="comment" 
 					>
-					<DeleteGlyph step={this.props.step} />
+					<DeleteGlyph step={step} />
 					<span className="comment-text" tabIndex="0" role="button" onClick={editCell} onFocus={editCell}>{arg.value}</span>
 			
 					<ReorderGlyph step={step} />
