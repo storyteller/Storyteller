@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Baseline;
-using CommonMark;
 using StorytellerDocGen.Topics;
 
 namespace StorytellerDocGen.Transformation
@@ -66,10 +65,7 @@ namespace StorytellerDocGen.Transformation
                 _transformer = transformer;
             }
 
-            public string Key
-            {
-                get { return "inner"; }
-            }
+            public string Key => "inner";
 
             public string Transform(Topic current, string data)
             {
@@ -78,7 +74,9 @@ namespace StorytellerDocGen.Transformation
                 text = _transformer.Transform(current, text);
 
                 if (Path.GetExtension(current.File) == ".md")
-                    text = CommonMarkConverter.Convert(text);
+                {
+                    text = Markdig.Markdown.ToHtml(text);
+                }
 
 
                 return text;
