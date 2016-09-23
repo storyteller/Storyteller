@@ -12,21 +12,53 @@ namespace StorytellerDocGen.Testing.Samples
         [Fact]
         public void append()
         {
-            var snippet = new Sample("the sample");
-            snippet.Append("something", 5);
+            var sample = new Sample("the sample");
+            sample.Append("something", 5);
 
-            snippet.Text.ShouldBe("something" + Environment.NewLine);
-            snippet.Start.ShouldBe(5);
-            snippet.End.ShouldBe(5);
+            sample.Text.ShouldBe("something" + Environment.NewLine);
+            sample.Start.ShouldBe(5);
+            sample.End.ShouldBe(5);
 
-            snippet.Append("else", 6);
-            snippet.Append("and more", 7);
+            sample.Append("else", 6);
+            sample.Append("and more", 7);
 
-            snippet.Start.ShouldBe(5);
-            snippet.End.ShouldBe(7);
+            sample.Start.ShouldBe(5);
+            sample.End.ShouldBe(7);
 
-            snippet.Text.ShouldBe(@"something{0}else{0}and more{0}".ToFormat(Environment.NewLine).TrimStart());
+            sample.Text.ShouldBe(@"something{0}else{0}and more{0}".ToFormat(Environment.NewLine).TrimStart());
             
         }
+
+        [Fact]
+        public void find_the_leading_spaces()
+        {
+            Sample.LeadingSpaces("foo").ShouldBe(0);
+            Sample.LeadingSpaces(" foo").ShouldBe(1);
+            Sample.LeadingSpaces("  foo").ShouldBe(2);
+            Sample.LeadingSpaces("   foo").ShouldBe(3);
+            Sample.LeadingSpaces("    foo").ShouldBe(4);
+        }
+
+        [Fact]
+        public void level_indention_with_none()
+        {
+            var sample = new Sample("something");
+            sample.Append("something", 5);
+            sample.Append("    else", 6);
+
+            sample.Text.ShouldBe(@"something{0}    else{0}".ToFormat(Environment.NewLine).TrimStart());
+        }
+
+        [Fact]
+        public void level_indention()
+        {
+            var sample = new Sample("something");
+            sample.Append("    something", 5);
+            sample.Append("        else", 6);
+
+            sample.Text.ShouldBe(@"something{0}    else{0}".ToFormat(Environment.NewLine).TrimStart());
+        }
     }
+
+
 }
