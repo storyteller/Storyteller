@@ -14,6 +14,13 @@ namespace StorytellerDocGen.Transformation
 
     public class HtmlGenerator : IHtmlGenerator
     {
+        static HtmlGenerator()
+        {
+            TagRegister.Register("nav");
+            TagRegister.Register("em");
+            TagRegister.Register("section");
+        }
+
         private readonly ITransformer _transformer;
         private readonly DocSettings _settings;
 
@@ -76,5 +83,23 @@ namespace StorytellerDocGen.Transformation
         {
             return new FileSystem().ReadStringFromFile(_settings.Root.AppendPath("layout.htm"));
         }
+
+        private class TagRegister : HtmlTextWriter
+        {
+            private TagRegister() : base(null) { }
+
+            public static void Register(string tagName)
+            {
+                try
+                {
+                    RegisterTag(tagName, HtmlTextWriterTag.Unknown);
+                }
+                catch (Exception)
+                {
+                    // don't care
+                }
+            }
+        }
+
     }
 }
