@@ -86,10 +86,7 @@ namespace StoryTeller.Engine
 
         public bool IsCancelled { get; private set; }
 
-        public IResultObserver Observer
-        {
-            get { return _observer; }
-        }
+        public IResultObserver Observer => _observer;
 
         protected bool Equals(SpecExecutionRequest other)
         {

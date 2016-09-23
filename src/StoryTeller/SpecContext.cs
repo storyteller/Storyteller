@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model;
@@ -187,6 +186,11 @@ namespace StoryTeller
             SpecContext context = Basic();
 
             return context;
+        }
+
+        public void Cancel()
+        {
+            StopConditions.Cancel();
         }
     }
 

@@ -87,6 +87,7 @@ namespace StoryTeller.Engine
 
 
                 _context.LogResult(result);
+                _context.Cancel();
             }
 
             return _context.FinalizeResults(_request.Plan.Attempts); ;
