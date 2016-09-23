@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -580,6 +581,17 @@ namespace StoryTeller
             set { if (Context != null) Context.State.CurrentObject = value; }
         }
 
-
+        /// <summary>
+        /// Writes the message to the Storyteller "Debug" results tab
+        /// </summary>
+        /// <param name="message"></param>
+        public void WriteTrace(string message)
+        {
+#if NET46
+            Debug.WriteLine(message);
+#else
+            Trace.WriteLine(message);
+#endif
+        }
     }
 }

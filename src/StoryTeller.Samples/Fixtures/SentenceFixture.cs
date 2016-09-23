@@ -68,6 +68,7 @@ namespace StoryTeller.Samples.Fixtures
         {
 
             Debug.WriteLine("the number is " + _number);
+            Trace.WriteLine("the number is " + _number);
 
             Context.Reporting.ReporterFor<ListReport>().Add(_number.ToString());
         }
