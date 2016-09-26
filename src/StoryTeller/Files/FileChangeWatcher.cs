@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Baseline;
-using Microsoft.AspNetCore.Razor.Compilation.TagHelpers;
 
 namespace StoryTeller.Files
 {

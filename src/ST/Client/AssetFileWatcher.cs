@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Baseline;
 using StoryTeller.Files;
 using StoryTeller.Messages;
@@ -11,14 +10,18 @@ namespace ST.Client
 	// SAMPLE: declarations4
         private readonly IClientConnector _connector;
         private readonly FileChangeWatcher _watcher;
-	// ENDSAMPLE
+        // ENDSAMPLE
+
+        private readonly FileChangeWatcher _watcherAssets;
+
+
         public AssetFileWatcher(IClientConnector connector)
         {
             _connector = connector;
 
-            var path = Directory.GetCurrentDirectory().AppendPath("bundle.js");
 
-            _watcher = new FileChangeWatcher(path.ParentDirectory(), FileSet.Shallow("bundle.js"), this);
+            _watcher = new FileChangeWatcher(FindRootFolder(), FileSet.Shallow("bundle.js"), this);
+            _watcherAssets = new FileChangeWatcher(FindClientFolder().AppendPath("public"), FileSet.Everything(), this);
         }
 
         void IChangeSetHandler.Handle(ChangeSet changes)
@@ -29,11 +32,29 @@ namespace ST.Client
         public void Dispose()
         {
             _watcher.Dispose();
+            _watcherAssets.Dispose();
         }
 
         public void Start()
         {
             _watcher.Start();
+            _watcherAssets.Start();
+        }
+
+        public static string FindRootFolder()
+        {
+            var path = AppContext.BaseDirectory;
+            while (!path.EndsWith("ST"))
+            {
+                path = path.ParentDirectory();
+            }
+
+            return path;
+        }
+
+        public static string FindClientFolder()
+        {
+            return FindRootFolder().ParentDirectory().ParentDirectory().AppendPath("client"); ;
         }
     }
 

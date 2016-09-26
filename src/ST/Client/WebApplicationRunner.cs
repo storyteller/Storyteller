@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Primitives;
 using StoryTeller;
 using StoryTeller.Commands;
 using StructureMap;
@@ -16,6 +17,7 @@ namespace ST.Client
         private readonly OpenInput _input;
         private IContainer _container;
         private IWebHost _server;
+        private AssetFileWatcher _watcher;
 
         public WebApplicationRunner(OpenInput input)
         {
@@ -30,6 +32,7 @@ namespace ST.Client
             Controller.Teardown();
             _server.SafeDispose();
             _container.Dispose();
+            _watcher?.Dispose();
         }
 
         public void Start()
@@ -83,11 +86,9 @@ namespace ST.Client
                         }
                     });
 
-                    app.UseStaticFiles(new StaticFileOptions
-                    {
-                        ServeUnknownFileTypes = true,
-                        FileProvider = new PhysicalFileProvider(baseDirectory)
-                    });
+#if DEBUG
+                    configureStaticFiles(app);
+#endif
 
                     app.Run(async (http) =>
                     {
@@ -109,7 +110,27 @@ namespace ST.Client
             var persistence = _container.GetInstance<IPersistenceController>();
             persistence.StartWatching(context.SpecPath);
             context.AddRemoteListener(persistence);
-            
+
+
+#if DEBUG
+            _watcher = new AssetFileWatcher(_container.GetInstance<IClientConnector>());
+#endif   
         }
+
+        private void configureStaticFiles(IApplicationBuilder app)
+        {
+            var baseDirectory = AssetFileWatcher.FindRootFolder();
+
+            var clientRoot = AssetFileWatcher.FindClientFolder();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ServeUnknownFileTypes = true,
+                FileProvider = new CompositeFileProvider(new PhysicalFileProvider(baseDirectory), new PhysicalFileProvider(clientRoot))
+            });
+        }
+
     }
+
+
 }
