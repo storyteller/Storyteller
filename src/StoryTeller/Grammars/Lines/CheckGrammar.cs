@@ -37,6 +37,7 @@ namespace StoryTeller.Grammars.Lines
             {
                 output = true
             };
+
             return new [] {_cell};
         }
     }

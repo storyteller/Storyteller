@@ -5,6 +5,11 @@
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "Scratchpad": {
+      "commandName": "Project",
+      "commandLineArgs": "open src/Samples",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
 	"Open Gallery": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Gallery",

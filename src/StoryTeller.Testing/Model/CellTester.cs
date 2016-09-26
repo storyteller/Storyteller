@@ -454,6 +454,20 @@ namespace StoryTeller.Testing.Model
             cell.OptionListName.ShouldBe("names");
 
         }
+
+        [Fact]
+        public void display_empty_array_actual_as_empty()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Names);
+            cell.ToStringDisplay(new string[0]).ShouldBe("EMPTY");
+        }
+
+        [Fact]
+        public void display_array_actual()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Names);
+            cell.ToStringDisplay(new string[] {"Bob", "Bill", "John"}).ShouldBe("Bob, Bill, John");
+        }
     }
 
     public enum Directions
@@ -497,6 +511,8 @@ namespace StoryTeller.Testing.Model
         {
             
         }
+
+        public string Names { get; set; }
 
     }
 }

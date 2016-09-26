@@ -9,6 +9,7 @@ using Baseline.Reflection;
 using Newtonsoft.Json;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
+using static System.String;
 
 namespace StoryTeller.Model
 {
@@ -230,19 +231,23 @@ namespace StoryTeller.Model
             var expected = values.Get(Key);
             return _equivalence(expected, actual) ? 
                 CellResult.Success(Key) : 
-                CellResult.Failure(Key, toStringDisplay(actual));
+                CellResult.Failure(Key, ToStringDisplay(actual));
         }
 
-        // TODO -- make this a *lot* smarter later
-        private string toStringDisplay(object actual)
+        public string ToStringDisplay(object actual)
         {
             if (actual == null) return "NULL";
 
+#pragma warning disable CS0252 // Possible unintended reference comparison; left hand side needs cast
             if (actual == string.Empty) return "EMPTY";
+#pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
 
             if (actual.GetType().IsArray)
             {
-                return actual.As<Array>().OfType<object>().Select(toStringDisplay).Join(", ");
+                var array = actual.As<Array>();
+                if (array.Length == 0) return "EMPTY";
+
+                return array.OfType<object>().Select(ToStringDisplay).Join(", ");
             }
 
             return actual.ToString();
