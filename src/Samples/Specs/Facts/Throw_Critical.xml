@@ -1,0 +1,13 @@
+<Spec id="bf005f5c-c01d-4809-b742-e079975b5531" maxRetries="0" tags="" lifecycle="Acceptance" name="Throw Critical" lastUpdated="Tuesday, September 27, 2016" expirationPeriod="0">
+  <CriticalThrowing id="c25c503b-8d2a-4732-93c9-06622c4e9a0d">
+    <ThrowNormal />
+    <Comment id="f1a29b50-2cca-4b20-bf0d-00f34af57548">Should stop after this one</Comment>
+    <SetupBlows>
+      <SetupBlowup id="9fd86519-08eb-49f0-8dd2-8f50d4f10c72">
+        <Go />
+      </SetupBlowup>
+    </SetupBlows>
+    <ThrowCritical />
+    <ThrowNormal />
+  </CriticalThrowing>
+</Spec>
