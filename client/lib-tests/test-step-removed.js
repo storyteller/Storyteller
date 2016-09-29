@@ -73,6 +73,6 @@ describe('stepRemoved working to remove a section from the top specification', f
 
 		event.apply(spec);
 
-		expect(_.contains(spec.steps, section)).to.be.false;
+		expect(_.includes(spec.steps, section)).to.be.false;
 	});
 });

@@ -148,11 +148,11 @@ describe('Section', function(){
 	it('can return the immediate children', function(){
 		var descendents = section.children();
 
-		expect(_.contains(descendents, section.steps[0])).to.be.true;
-		expect(_.contains(descendents, section.steps[1])).to.be.true;
-		expect(_.contains(descendents, section.steps[2])).to.be.true;
-		expect(_.contains(descendents, section.steps[3])).to.be.true;
-		expect(_.contains(descendents, section.steps[4])).to.be.true;
+		expect(_.includes(descendents, section.steps[0])).to.be.true;
+		expect(_.includes(descendents, section.steps[1])).to.be.true;
+		expect(_.includes(descendents, section.steps[2])).to.be.true;
+		expect(_.includes(descendents, section.steps[3])).to.be.true;
+		expect(_.includes(descendents, section.steps[4])).to.be.true;
 	});
 });
 
