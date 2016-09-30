@@ -25,6 +25,7 @@ module.exports = function(entryFile) {
         'karma-mocha-reporter',
         'karma-osx-reporter',
         'karma-phantomjs-launcher',
+        'karma-chrome-launcher',
         'karma-webpack'
       ],
 
@@ -68,7 +69,7 @@ module.exports = function(entryFile) {
 
       // start these browsers
       // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-      browsers: ['PhantomJS'],
+      browsers: ['Chrome'],
     });
   };
 };
