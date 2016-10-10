@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Baseline;
@@ -24,14 +25,22 @@ namespace StorytellerDocGen.Samples
             var lines = _writer.ToString().ReadLines().ToArray();
             if (!lines.Any()) return string.Empty;
 
-            var indention = lines.Min(s => s.LeadingSpaces());
+            var indention = lines.Where(x => x.IsNotEmpty()).Min(s => s.LeadingSpaces());
 
             if (indention == 0) return _writer.ToString();
 
             var writer = new StringWriter();
             foreach (var line in lines)
             {
-                writer.WriteLine(line.Substring(indention));
+                if (line.IsEmpty())
+                {
+                    writer.WriteLine();
+                }
+                else
+                {
+                    writer.WriteLine(line.Substring(indention));
+                }
+                
             }
 
             return writer.ToString();

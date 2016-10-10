@@ -20,5 +20,6 @@
       "commandLineArgs": "open src/Specifications",
       "workingDirectory": "C:\\code\\storyteller"
     },
+
   }
 }

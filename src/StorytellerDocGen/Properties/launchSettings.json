@@ -4,6 +4,16 @@
       "commandName": "Project",
       "commandLineArgs": "doc-run",
       "workingDirectory": "C:\\code\\storyteller"
+    },
+	"Run FubuMVC Docs": {
+      "commandName": "Project",
+      "commandLineArgs": "doc-run --version 3.0 --code src/Examples",
+      "workingDirectory": "C:\\code\\fubumvc"
+    },
+	"Publish FubuMVC Docs": {
+      "commandName": "Project",
+      "commandLineArgs": "doc-export c:\\code\\fubumvc.github.io --version 3.0 --code src/Examples",
+      "workingDirectory": "C:\\code\\fubumvc"
     }
   }
 }
