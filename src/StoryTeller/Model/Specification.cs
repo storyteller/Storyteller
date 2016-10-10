@@ -10,6 +10,7 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Model
 {
+    [Obsolete("Let's get rid of this. Made the client and backend way more complicated than necessary")]
     public enum SpecType
     {
         header,
@@ -22,12 +23,12 @@ namespace StoryTeller.Model
 
         public string path;
 
-        [JsonProperty("max-retries")] public int MaxRetries;
+        [JsonProperty(SpecConstants.MaxRetries)] public int MaxRetries;
 
-        [JsonProperty("expiration-period")] public int ExpirationPeriod;
+        [JsonProperty(SpecConstants.ExpirationPeriod)] public int ExpirationPeriod;
 
         [JsonConverter(typeof (LastUpdatedConverter))]
-        [JsonProperty("last-updated")]
+        [JsonProperty(SpecConstants.LastUpdated)]
         public DateTime LastUpdated
         {
             get
@@ -42,8 +43,9 @@ namespace StoryTeller.Model
         }
 
 
-        [JsonConverter(typeof (StringEnumConverter))] [JsonProperty("lifecycle")] public Lifecycle Lifecycle =
+        [JsonConverter(typeof (StringEnumConverter))] [JsonProperty(SpecConstants.Lifecycle)] public Lifecycle Lifecycle =
             Lifecycle.Acceptance;
+
 
         [JsonConverter(typeof (StringEnumConverter))] [JsonProperty("mode")] public SpecType SpecType = SpecType.full;
 
@@ -117,7 +119,7 @@ namespace StoryTeller.Model
             return id?.GetHashCode() ?? 0;
         }
 
-        [JsonProperty("tags")] public readonly IList<string> Tags = new List<string>();
+        [JsonProperty(SpecConstants.Tags)] public readonly IList<string> Tags = new List<string>();
         private DateTime? _lastUpdated;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]

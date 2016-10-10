@@ -4,6 +4,8 @@ using System.Linq;
 using Baseline;
 
 using Newtonsoft.Json;
+using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model
 {
@@ -90,9 +92,44 @@ namespace StoryTeller.Model
         }
 
         [JsonIgnore]
-        public IList<Node> Children
+        public IList<Node> Children => Collections.OfType<Node>().ToList();
+
+        public string[] StagedValues { get; set; }
+
+
+        public override string ToString()
         {
-            get { return Collections.OfType<Node>().ToList(); }
+            return ToValueString();
+        }
+
+        public static Step Parse(string text)
+        {
+            var line = text.Trim().Substring(2).Trim();
+            var tokens = line.Tokenize().ToArray();
+
+            var step = new Step(tokens[0]);
+
+
+            var valueIndex = line.IndexOf(step.Key) + step.Key.Length;
+            var valueText = line.Substring(valueIndex);
+
+            var values = valueText.ToDelimitedArray();
+            if (!values.Any()) return step;
+
+            if (values.All(x => x.Contains("=")))
+            {
+                foreach (var value in values)
+                {
+                    var parts = value.TrimEnd(',').ToDelimitedArray('=');
+                    step.Values.Add(parts[0], parts[1]);
+                }
+            }
+            else
+            {
+                step.StagedValues = values;
+            }
+
+            return step;
         }
     }
 }

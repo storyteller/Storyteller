@@ -25,5 +25,24 @@ namespace StoryTeller
 
             return (Lifecycle) Enum.Parse(typeof (Lifecycle), text);
         }
+
+        public static int LeadingSpaces(this string text)
+        {
+            var i = 0;
+
+            foreach (char c in text)
+            {
+                if (c == ' ')
+                {
+                    i++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return i;
+        }
     }
 }

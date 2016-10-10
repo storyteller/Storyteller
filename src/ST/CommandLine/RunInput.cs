@@ -29,10 +29,10 @@ namespace ST.CommandLine
         [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
         public bool OpenFlag { get; set; }
 
-        [Description("Write the performance data in CSV format to the specified path")]
+        [Description("WriteToText the performance data in CSV format to the specified path")]
         public string CsvFlag { get; set; }
 
-        [Description("Write the raw result information to JSON format at the specified path")]
+        [Description("WriteToText the raw result information to JSON format at the specified path")]
         public string JsonFlag { get; set; }
 
         [Description("Dump the raw JSON history of the batch run to the specified path")]

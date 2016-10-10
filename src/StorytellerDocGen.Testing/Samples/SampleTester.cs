@@ -3,6 +3,7 @@ using Baseline;
 using Shouldly;
 using StorytellerDocGen.Samples;
 using Xunit;
+using StringExtensions = StoryTeller.StringExtensions;
 
 namespace StorytellerDocGen.Testing.Samples
 {
@@ -32,11 +33,11 @@ namespace StorytellerDocGen.Testing.Samples
         [Fact]
         public void find_the_leading_spaces()
         {
-            Sample.LeadingSpaces("foo").ShouldBe(0);
-            Sample.LeadingSpaces(" foo").ShouldBe(1);
-            Sample.LeadingSpaces("  foo").ShouldBe(2);
-            Sample.LeadingSpaces("   foo").ShouldBe(3);
-            Sample.LeadingSpaces("    foo").ShouldBe(4);
+            StringExtensions.LeadingSpaces("foo").ShouldBe(0);
+            StringExtensions.LeadingSpaces(" foo").ShouldBe(1);
+            StringExtensions.LeadingSpaces("  foo").ShouldBe(2);
+            StringExtensions.LeadingSpaces("   foo").ShouldBe(3);
+            StringExtensions.LeadingSpaces("    foo").ShouldBe(4);
         }
 
         [Fact]

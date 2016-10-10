@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Baseline;
 using Newtonsoft.Json;
@@ -19,16 +20,10 @@ namespace StoryTeller.Model
         private readonly IList<Node> _children = new List<Node>();
 
         [JsonProperty("type")]
-        public string Type
-        {
-            get { return "section"; }
-        }
+        public string Type => "section";
 
         [JsonProperty("steps", ItemConverterType = typeof(NodeConverter))]
-        public IList<Node> Children
-        {
-            get { return _children; }
-        }
+        public IList<Node> Children => _children;
 
         private IDictionary<string, bool> _activeCells = new Dictionary<string, bool>();
 
@@ -85,7 +80,7 @@ namespace StoryTeller.Model
 
         public Comment AddComment(string text)
         {
-            var comment = new Comment {Text = text};
+            var comment = new Comment {Text = text.Trim()};
             Children.Add(comment);
 
             return comment;
@@ -97,6 +92,24 @@ namespace StoryTeller.Model
             Children.Add(step);
 
             return step;
+        }
+
+        public bool IsAllTheSameTypeOfStep()
+        {
+            if (Children.OfType<Comment>().Any()) return false;
+
+            return Children.OfType<Step>().Select(x => x.Key).Distinct().Count() == 1;
+        }
+
+        public string[] GetActiveCells()
+        {
+            if (ActiveCells.Count == 0 || ActiveCells.All(x => !x.Value))
+            {
+                return Children.OfType<Step>().SelectMany(x => x.Values.Keys)
+                    .Distinct().ToArray();
+            }
+
+            return ActiveCells.Where(x => x.Value).Select(x => x.Key).ToArray();
         }
     }
 }

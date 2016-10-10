@@ -2,6 +2,8 @@ using System;
 using System.IO;
 using System.Linq;
 using Baseline;
+using StoryTeller;
+using StringExtensions = StoryTeller.StringExtensions;
 
 namespace StorytellerDocGen.Samples
 {
@@ -22,7 +24,7 @@ namespace StorytellerDocGen.Samples
             var lines = _writer.ToString().ReadLines().ToArray();
             if (!lines.Any()) return string.Empty;
 
-            var indention = lines.Min(LeadingSpaces);
+            var indention = lines.Min(s => s.LeadingSpaces());
 
             if (indention == 0) return _writer.ToString();
 
@@ -65,25 +67,6 @@ namespace StorytellerDocGen.Samples
         public override string ToString()
         {
             return $"{nameof(Name)}: {Name}, {nameof(Language)}: {Language}";
-        }
-
-        public static int LeadingSpaces(string text)
-        {
-            var i = 0;
-
-            foreach (char c in text)
-            {
-                if (c == ' ')
-                {
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            return i;
         }
     }
 }

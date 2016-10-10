@@ -74,7 +74,7 @@ namespace Samples.Fixtures
                     // Add the new address to a list somewhere?
                     // Set a private field on the Fixture?
                     // Stash in Context.State?
-                    // Write to a database or file?
+                    // WriteToText to a database or file?
                     // Send to another service as an input?
                 });
             });

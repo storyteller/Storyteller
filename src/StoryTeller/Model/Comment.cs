@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model
@@ -10,7 +11,23 @@ namespace StoryTeller.Model
     {
         public string type => "comment";
 
+        private string _text;
+
         [JsonProperty("text")]
-        public string Text;
+        public string Text
+        {
+            get { return _text; }
+            set
+            {
+                _text = value?.Trim() ?? string.Empty;
+            }
+        }
+
+        public void WriteText(TextWriter writer)
+        {
+            writer.WriteLine();
+            writer.WriteLine(Text);
+            writer.WriteLine();
+        }
     }
 }

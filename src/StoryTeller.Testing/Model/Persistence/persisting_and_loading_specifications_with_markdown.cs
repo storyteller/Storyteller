@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Linq;
-using Xunit;
 using Shouldly;
 using StoryTeller.Model;
-using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
+using Xunit;
 
 namespace StoryTeller.Testing.Model.Persistence
 {
-    
-    public class persisting_and_loading_specifications_with_xml
+    public class persisting_and_loading_specifications_with_markdown
     {
-        public persisting_and_loading_specifications_with_xml()
+        public persisting_and_loading_specifications_with_markdown()
         {
             original = new Specification();
 
@@ -18,9 +17,9 @@ namespace StoryTeller.Testing.Model.Persistence
 
             _persisted = new Lazy<Specification>(() =>
             {
-                var document = XmlWriter.WriteToXml(original);
+                var text = MarkdownWriter.WriteToText(original);
 
-                var x = XmlReader.ReadFromXml(document);
+                var x = MarkdownReader.ReadFromText(text);
 
                 x.ShouldNotBeTheSameAs(original);
 
@@ -33,6 +32,35 @@ namespace StoryTeller.Testing.Model.Persistence
 
 
         private Specification persisted => _persisted.Value;
+
+        [Fact]
+        public void smoke_test_of_all()
+        {
+            var specs = TestingContext.Hierarchy.GetAllSpecs();
+
+            foreach (var spec in specs)
+            {
+                Console.WriteLine($"Spec: {spec.name}");
+                Console.WriteLine("=======================================================");
+
+                var text = MarkdownWriter.WriteToText(spec);
+
+                Console.WriteLine(text);
+
+                Console.WriteLine("=======================================================");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+            }
+        }
+
+        [Fact]
+        public void full_cycle_name()
+        {
+            original.name = "My fabulous spec";
+
+            persisted.name.ShouldBe(original.name);
+        }
 
         [Fact]
         public void full_cycle_lifecycle()
@@ -82,22 +110,18 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_and_write_comment_directly_under_spec()
         {
-            var comment = new Comment {id = Guid.NewGuid().ToString(), Text = "something here"};
+            var comment = new Comment { Text = "something here" };
             original.Children.Add(comment);
 
             var persistedComment = persisted.Children.Single().ShouldBeOfType<Comment>();
             persistedComment.ShouldNotBeTheSameAs(comment);
-            persistedComment.id.ShouldBe(comment.id);
             persistedComment.Text.ShouldBe(comment.Text);
         }
 
         [Fact]
         public void read_and_write_a_section_under_a_spec()
         {
-            var section = new Section("Math")
-            {
-                id = Guid.NewGuid().ToString(), 
-            };
+            var section = new Section("Math");
 
             section.ActiveCells.Add("A", true);
             section.ActiveCells.Add("B", false);
@@ -105,7 +129,6 @@ namespace StoryTeller.Testing.Model.Persistence
             original.Children.Add(section);
 
             var persistedSection = persisted.Children.Single().ShouldBeOfType<Section>();
-            persistedSection.id.ShouldBe(section.id);
             persistedSection.Key.ShouldBe(section.Key);
             persistedSection.ActiveCells["A"].ShouldBeTrue();
             persistedSection.ActiveCells["B"].ShouldBeFalse();
@@ -115,7 +138,6 @@ namespace StoryTeller.Testing.Model.Persistence
         public void read_and_write_a_step_with_plain_values_under_a_section()
         {
             var step = new Step("Add").With("x", "1").With("y", "2").With("sum", "3");
-            step.id = Guid.NewGuid().ToString();
 
             var section = new Section("Math");
             section.Children.Add(step);
@@ -132,10 +154,10 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_and_write_a_comment_within_a_section()
         {
-            var section = new Section("Math") { id = Guid.NewGuid().ToString() };
+            var section = new Section("Math") {  };
             original.Children.Add(section);
 
-            var comment = new Comment { id = Guid.NewGuid().ToString(), Text = "something here" };
+            var comment = new Comment {  Text = "something here" };
             section.Children.Add(comment);
 
             var persistedComment = persisted.Children.Single()
@@ -143,7 +165,6 @@ namespace StoryTeller.Testing.Model.Persistence
                 .ShouldBeOfType<Comment>();
 
             persistedComment.ShouldNotBeTheSameAs(comment);
-            persistedComment.id.ShouldBe(comment.id);
             persistedComment.Text.ShouldBe(comment.Text);
         }
 
@@ -153,7 +174,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var step = new Step("Adding");
             step.AddCollection("Numbers").AddComment("I'm in numbers");
             step.AddCollection("Letters").AddComment("I'm in letters");
-            
+
 
             original.AddSection("Math").Children.Add(step);
 
@@ -185,13 +206,13 @@ namespace StoryTeller.Testing.Model.Persistence
         public void step_name_is_correctly_encoded()
         {
             original.AddSection("MySection")
-                .Children.Add(new Step("Sub Total in £"));
+                .Children.Add(new Step("Sub_Total_in_£"));
 
             var persistedStep = persisted
                 .Children.Single().ShouldBeOfType<Section>()
                 .Children.Single().ShouldBeOfType<Step>();
 
-            persistedStep.Key.ShouldBe("Sub Total in £");
+            persistedStep.Key.ShouldBe("Sub_Total_in_£");
         }
 
         [Fact]
