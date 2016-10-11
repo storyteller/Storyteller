@@ -34,6 +34,7 @@ namespace StorytellerDocGen.Exporting
 
 
             var project = new DocProject(settings);
+            project.StartScanning();
 
             if (!Directory.Exists(input.Destination))
             {

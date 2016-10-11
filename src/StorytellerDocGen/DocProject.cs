@@ -133,7 +133,7 @@ namespace StorytellerDocGen
 
 
             _container.Inject<IBrowserRefresher>(_refresher);
-            _sampleBuilder = scanForSamples();
+            StartScanning();
 
             var host = startHost(port, webSockets, middleware);
 
@@ -143,6 +143,11 @@ namespace StorytellerDocGen
             _topicWatcher.StartWatching(_refresher);
 
             return host;
+        }
+
+        public void StartScanning()
+        {
+            _sampleBuilder = scanForSamples();
         }
 
         private IWebHost startHost(int port, WebSocketsHandler webSockets, TopicMiddleware middleware)
