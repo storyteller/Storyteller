@@ -23,15 +23,15 @@ namespace StoryTeller.Model.Persistence.DSL
         {
             if (line.IsHeaderTwo())
             {
-                _title = line.Trim().TrimStart('#', ' ');
-                _sentence.format = _title;
+                _key = line.Trim().TrimStart('#', ' ');
+                _sentence.key = _key;
                 return this;
             }
 
             if (line.IsHeaderThree())
             {
-                _key = line.Trim().TrimStart('#', ' ');
-                _sentence.key = _key;
+                _title = line.Trim().TrimStart('#', ' ');
+                _sentence.format = _title;
                 return this;
             }
 

@@ -29,6 +29,7 @@ namespace StoryTeller.Model.Persistence.DSL
             cell.DefaultValue = defaultValue;
             cell.editor = editor;
             cell.options = parseOptions(options);
+            cell.result = result;
 
             _sentence.AddCell(cell);
 

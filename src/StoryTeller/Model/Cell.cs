@@ -280,6 +280,8 @@ namespace StoryTeller.Model
 
         public Option[] options;
 
+        public string result;
+
         private readonly Func<object, object, bool> _equivalence;
 
         public void ConvertValues(Step step, StepValues values)

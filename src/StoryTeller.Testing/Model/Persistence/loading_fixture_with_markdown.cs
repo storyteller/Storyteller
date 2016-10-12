@@ -19,8 +19,8 @@ namespace StoryTeller.Testing.Model.Persistence
         public void reads_sentence()
         {
             var result = FixtureReader.ReadFrom(@"
-## a title
-### a key");
+## a key
+### a title");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -32,8 +32,7 @@ namespace StoryTeller.Testing.Model.Persistence
         public void reads_sentence_cells()
         {
             var result = FixtureReader.ReadFrom(@"
-## a title
-### a key
+## a key
 |first|default|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -52,8 +51,7 @@ namespace StoryTeller.Testing.Model.Persistence
         public void reads_sentence_cells_with_options()
         {
             var result = FixtureReader.ReadFrom(@"
-## a title
-### a key
+## a key
 |first|default|hello, goodbye, ciao|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -76,8 +74,8 @@ namespace StoryTeller.Testing.Model.Persistence
         public void reads_sentence_cells_with_quoted_options()
         {
             var result = FixtureReader.ReadFrom(@"
-## a title
-### a key
+## a key
+### a title
 |first|default|hello, ""goodbye, friend"", ciao|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -100,8 +98,8 @@ namespace StoryTeller.Testing.Model.Persistence
         public void reads_sentence_cells_with_editor()
         {
             var result = FixtureReader.ReadFrom(@"
-## a title
-### a key
+## a key
+### a title
 |first|||text|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -117,11 +115,31 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Fact]
+        public void reads_sentence_cells_with_result()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## a key
+### a title
+|first||||result|");
+            result.grammars.ShouldNotBeNull();
+            result.grammars.Length.ShouldBe(1);
+            result.grammars[0].ShouldBeOfType<Sentence>();
+
+            var sentence = result.grammars[0].As<Sentence>();
+            sentence.cells.ShouldNotBeNull();
+            sentence.cells.Length.ShouldBe(1);
+
+            var cell = sentence.cells[0];
+            cell.Key.ShouldBe("first");
+            cell.result.ShouldBe("result");
+        }
+
+        [Fact]
         public void reads_table()
         {
             var result = FixtureReader.ReadFrom(@"
-## a title
-### a key
+## a key
+### a title
 |table|col1|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);

@@ -8,11 +8,11 @@ namespace StoryTeller.Model.Persistence.DSL
         private readonly Table _table;
         private int _rowCount;
 
-        public TableMode(string title, string key, FixtureModel fixture)
+        public TableMode(string key, string title,  FixtureModel fixture)
         {
             _table = new Table();
-            _table.title = title;
             _table.key = key;
+            _table.title = title;
             fixture.AddGrammar(_table);
         }
 
