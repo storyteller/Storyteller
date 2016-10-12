@@ -2,44 +2,21 @@
 using System.IO;
 using Baseline;
 
-namespace StoryTeller.Model.Persistence.Markdown
+namespace StoryTeller.Model.Persistence
 {
-    public class MarkdownReader
+    public class BaseReader<T>
     {
         private readonly TextReader _reader;
-        private readonly Specification _spec;
-
         private readonly Stack<IReaderMode> _modes = new Stack<IReaderMode>();
 
-        public static Specification ReadFromFile(string file)
-        {
-            using (var stream = new FileStream(file, FileMode.Open))
-            {
-                var reader = new StreamReader(stream);
-
-                var spec =  new MarkdownReader(reader).Read();
-                spec.Filename = file;
-
-                return spec;
-            }
-        }
-
-        public static Specification ReadFromText(string text)
-        {
-            var reader = new MarkdownReader(new StringReader(text));
-
-            return reader.Read();
-        }
-
-        public MarkdownReader(TextReader reader)
+        public BaseReader(TextReader reader)
         {
             _reader = reader;
-            _spec = new Specification();
-
-            _modes.Push(new HeaderMode(_spec));
         }
 
-        public Specification Read()
+        protected T Target { get; set; }
+
+        public T Read()
         {
             string line = null;
             while ((line = _reader.ReadLine()) != null)
@@ -48,11 +25,15 @@ namespace StoryTeller.Model.Persistence.Markdown
                 parseLine(indention, line.Trim());
             }
 
-            return _spec;
+            return Target;
         }
 
-        private IReaderMode current => _modes.Peek();
+        protected IReaderMode current => _modes.Peek();
 
+        protected void Push(IReaderMode mode)
+        {
+            _modes.Push(mode);
+        }
 
         private void parseLine(int indention, string line)
         {
@@ -68,16 +49,17 @@ namespace StoryTeller.Model.Persistence.Markdown
             else if (!ReferenceEquals(mode, current))
             {
                 _modes.Push(mode);
+                startNewMode(indention, line);
             }
         }
 
         private void startNewMode(int indention, string line)
         {
+            if (_modes.Count == 0) return;
+
             var next = current.Read(indention, line);
             if (next == null)
             {
-                if (current is HeaderMode) return;
-
                 _modes.Pop();
                 startNewMode(indention, line);
             }

@@ -1,4 +1,4 @@
-namespace StoryTeller.Model.Persistence.Markdown
+namespace StoryTeller.Model.Persistence
 {
     public interface IReaderMode
     {
