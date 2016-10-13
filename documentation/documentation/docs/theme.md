@@ -41,15 +41,16 @@ To embed the url to the root of the documentation project, use <code>&lt;[RootUr
 You can add a link to edit the current documentation topic in GitHub (or any other hosting provider) by using the `<[FilePath]>` transform like this example shown below that is taken from the Storyteller documentation itself:
 
 <pre>
-&lt;a 
+&lt;a
 	href="https://github.com/storyteller/storyteller/blob/master/documentation/&lt;[FilePath]&gt;"  
-	class="text-muted fa fa-github" 
-	&gt; Edit on GitHub&lt;/a&gt;
+	class="text-muted"&gt;
+	&lt;i class="fa fa-github"&gt;&lt;/i&gt; Edit on GitHub
+&lt;/a&gt;
 </pre>
 
 This usage results in the following html:
 
-<a href="https://github.com/storyteller/storyteller/blob/master/documentation/<[FilePath]>"  class="text-muted fa fa-github" style="margin-top: 10px"> Edit on GitHub</a>
+<a href="https://github.com/storyteller/storyteller/blob/master/documentation/<[FilePath]>"  class="text-muted" style="margin-top: 10px"><i class="fa fa-github"></i> Edit on GitHub</a>
 
 I used [font-awesome](http://fortawesome.github.io/Font-Awesome/) for the icon above, but that is neither required nor in the box for the Storyteller documentation.
 
@@ -61,7 +62,7 @@ To link to CSS files with Storyteller's pathing rules in exports, use this synta
 
 <code>&lt;[css:content/bootstrap.min.css]&gt;</code>
 
-The path in `css:[path]` should be relative to the root of the documentation directory. 
+The path in `css:[path]` should be relative to the root of the documentation directory.
 
 ## Script Files
 
