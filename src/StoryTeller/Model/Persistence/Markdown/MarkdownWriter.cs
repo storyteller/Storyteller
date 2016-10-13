@@ -4,20 +4,29 @@ using Baseline;
 
 namespace StoryTeller.Model.Persistence.Markdown
 {
+    public enum IdStyle
+    {
+        Ignore,
+        Write
+    }
+
     public class MarkdownWriter
     {
         private readonly TextWriter _writer;
+        private readonly IdStyle _style;
         private int _depth = 0;
+        public const string SectionEnd = "~~~";
 
-        public MarkdownWriter(TextWriter writer)
+        public MarkdownWriter(TextWriter writer, IdStyle style)
         {
             _writer = writer;
+            _style = style;
         }
 
         public static string WriteToText(Specification specification)
         {
             var text = new StringWriter();
-            var writer = new MarkdownWriter(text);
+            var writer = new MarkdownWriter(text, IdStyle.Write);
 
             writer.Write(specification);
 
@@ -34,10 +43,13 @@ namespace StoryTeller.Model.Persistence.Markdown
             {
                 _writer.WriteLine(); // spacer
 
-                (child as Comment)?.WriteText(_writer);
+                (child as Comment)?.WriteText(_depth * 4, _writer);
 
-                if (child is Section)
-                    writeTopSection((Section) child);
+                var section = child as Section;
+                if (section != null)
+                {
+                    writeTopSection(section);
+                }
             }
         }
 
@@ -46,9 +58,18 @@ namespace StoryTeller.Model.Persistence.Markdown
             return "".PadRight(_depth*4);
         }
 
+        private void writeSectionHeader(Section section)
+        {
+            var text = _style == IdStyle.Write 
+                ? $"[{section.Key}#{section.id}]" 
+                : $"[{section.Key}]";
+
+            write(text);
+        }
+
         private void writeTopSection(Section section)
         {
-            _writer.WriteLine($"[{section.Key}]");
+            writeSectionHeader(section);
 
             foreach (var cell in section.ActiveCells)
             {
@@ -57,10 +78,16 @@ namespace StoryTeller.Model.Persistence.Markdown
 
             foreach (var child in section.Children)
             {
-                (child as Comment)?.WriteText(_writer);
+                (child as Comment)?.WriteText(_depth * 4, _writer);
 
-                if (child is Step) writeStep((Step)child);
+                var step = child as Step;
+                if (step != null)
+                {
+                    writeStep(step);
+                }
             }
+
+            write(SectionEnd);
         }
 
         private void write(string text)
@@ -70,16 +97,22 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         private void writeStep(Step step)
         {
+            var key = step.Key;
+            if (_style == IdStyle.Write)
+            {
+                key = $"{key}#{step.id}";
+            }
+
             var hasValues = step.Values.Any();
             if (hasValues)
             {
                 // TODO -- deal with *big* text here. 
                 var values = step.Values.Select(x => $"{x.Key}={x.Value}").Join(", ");
-                write($"|> {step.Key} {values}");
+                write($"|> {key} {values}");
             }
             else
             {
-                write($"|> {step.Key}");
+                write($"|> {key}");
             }
 
             var counter = 1;
@@ -101,7 +134,7 @@ namespace StoryTeller.Model.Persistence.Markdown
                 _writer.WriteLine();
             }
 
-            write($"[{collection.Key}]");
+            writeSectionHeader(collection);
             foreach (var cell in collection.ActiveCells)
             {
                 write($"-> {cell.Key} = {cell.Value}");
@@ -119,7 +152,7 @@ namespace StoryTeller.Model.Persistence.Markdown
                 {
                     if (child is Comment)
                     {
-                        child.As<Comment>().WriteText(_writer);
+                        child.As<Comment>().WriteText(_depth * 4, _writer);
                     }
                     else
                     {

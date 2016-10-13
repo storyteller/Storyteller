@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Baseline;
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model
@@ -23,10 +24,13 @@ namespace StoryTeller.Model
             }
         }
 
-        public void WriteText(TextWriter writer)
+        public void WriteText(int indention, TextWriter writer)
         {
             writer.WriteLine();
-            writer.WriteLine(Text);
+            foreach (var line in _text.ReadLines())
+            {
+                writer.WriteLine("".PadRight(indention) + line);
+            }
             writer.WriteLine();
         }
     }

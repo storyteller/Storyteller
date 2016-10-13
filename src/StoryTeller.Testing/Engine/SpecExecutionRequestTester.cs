@@ -61,20 +61,6 @@ namespace StoryTeller.Testing.Engine
             request.IsCancelled.ShouldBe(false);
         }
 
-        [Fact]
-        public void read_xml_sad_path()
-        {
-            var request = SpecExecutionRequest.For(new Specification()
-            {
-                Filename = "nonexistent.xml",
-                SpecType = SpecType.header
-            });
-            
-
-            EventAggregator.Messaging.AddListener(listener);
-
-            request.IsCancelled.ShouldBe(true);
-        }
 
         [Fact]
         public void cancel_cancels_the_request()

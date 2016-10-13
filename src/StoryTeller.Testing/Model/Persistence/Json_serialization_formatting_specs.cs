@@ -2,7 +2,6 @@
 using System.IO;
 using Newtonsoft.Json;
 using Xunit;
-using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 
@@ -11,15 +10,6 @@ namespace StoryTeller.Testing.Model.Persistence
     
     public class Json_serialization_formatting_specs
     {
-        [Fact]
-        public void write_a_comment()
-        {
-            var comment = new Comment {id = "foo", Text = "some text"};
-
-            var json = comment.ToJson();
-            Debug.WriteLine(json);
-            json.ShouldBe("{\"text\":\"some text\",\"type\":\"comment\",\"id\":\"foo\"}");
-        }
 
         [Fact]
         public void section_with_a_single_comment()

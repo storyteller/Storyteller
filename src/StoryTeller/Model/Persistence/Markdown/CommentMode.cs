@@ -26,6 +26,8 @@ namespace StoryTeller.Model.Persistence.Markdown
                 return null;
             }
 
+            if (text == MarkdownWriter.SectionEnd) return null;
+
             if (_comment.Text.IsEmpty())
             {
                 _comment.Text = text;

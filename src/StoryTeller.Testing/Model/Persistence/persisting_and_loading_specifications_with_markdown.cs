@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.Markdown;
+using StoryTeller.Remotes.Messaging;
 using Xunit;
 
 namespace StoryTeller.Testing.Model.Persistence
@@ -34,23 +36,81 @@ namespace StoryTeller.Testing.Model.Persistence
         private Specification persisted => _persisted.Value;
 
         [Fact]
-        public void smoke_test_of_all()
+        public void smoke_test_of_writing_all()
         {
             var specs = TestingContext.Hierarchy.GetAllSpecs();
 
             foreach (var spec in specs)
             {
-                Console.WriteLine($"Spec: {spec.name}");
-                Console.WriteLine("=======================================================");
+//                Console.WriteLine($"Spec: {spec.name}");
+//                Console.WriteLine("=======================================================");
 
                 var text = MarkdownWriter.WriteToText(spec);
 
-                Console.WriteLine(text);
+//                Console.WriteLine(text);
+//
+//                Console.WriteLine("=======================================================");
+//                Console.WriteLine();
+//                Console.WriteLine();
+//                Console.WriteLine();
+            }
+        }
 
-                Console.WriteLine("=======================================================");
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine();
+        private void roundTripCheck(Specification spec)
+        {
+            spec.ApplyRenumbering();
+            spec.path = null; // doesn't matter for the markdown persistence
+
+            var markdown = MarkdownWriter.WriteToText(spec);
+
+            Console.WriteLine(markdown);
+
+            var readCopy = MarkdownReader.ReadFromText(markdown);
+
+            compare(spec, readCopy);
+        }
+
+        private void compare(Specification expected, Specification actual)
+        {
+            actual.LastUpdated.ShouldBe(expected.LastUpdated);
+            actual.ExpirationPeriod.ShouldBe(expected.ExpirationPeriod);
+            actual.Breakpoints.ShouldBe(expected.Breakpoints);
+            actual.Lifecycle.ShouldBe(expected.Lifecycle);
+            actual.MaxRetries.ShouldBe(expected.MaxRetries);
+            actual.id.ShouldBe(expected.id);
+            actual.name.ShouldBe(expected.name);
+
+
+            compare(expected.Children, actual.Children);
+
+
+        }
+
+        private void compare(IList<Node> expected, IList<Node> actual)
+        {
+            actual.Count.ShouldBe(expected.Count);
+            actual.Select(x => x.GetType().Name)
+                .ShouldHaveTheSameElementsAs(expected.Select(x => x.GetType().Name).ToArray());
+        }
+
+        [Fact]
+        public void end_to_end_test_of_writing_and_reading_all()
+        {
+            var specs = TestingContext.Hierarchy.GetAllSpecs();
+
+            foreach (var spec in specs)
+            {
+//                Console.WriteLine($"Spec: {spec.name}");
+//                Console.WriteLine("=======================================================");
+
+
+                roundTripCheck(spec);
+
+
+//                Console.WriteLine("=======================================================");
+//                Console.WriteLine();
+//                Console.WriteLine();
+//                Console.WriteLine();
             }
         }
 

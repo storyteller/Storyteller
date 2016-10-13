@@ -1,11 +1,9 @@
-using System;
+using Baseline;
 
 namespace StoryTeller.Model.Persistence.Markdown
 {
     public class StepMode : IReaderMode
     {
-        public Step Step { get; set; }
-
         public StepMode(Step step)
         {
             Step = step;
@@ -16,6 +14,8 @@ namespace StoryTeller.Model.Persistence.Markdown
             Step = Step.Parse(firstLine);
         }
 
+        public Step Step { get; set; }
+
         public IReaderMode Read(int indention, string text)
         {
             // New step, go on
@@ -23,27 +23,34 @@ namespace StoryTeller.Model.Persistence.Markdown
 
             if (text.IsSectionHeader())
             {
-                var section = new Section(text.SectionName());
+                var section = text.ToSection();
                 Step.Collections[section.Key] = section;
 
-                return new SectionMode(section);
+                return new SectionMode(section)
+                {
+                    Indention = indention
+                };
             }
 
+            if (text.IsTableLine())
+            {
+                var section = new Section("rows");
+                var table = new TableParser(section) {Indention = indention};
 
-            // Not dealing with tables yet
-            return this;
+                table.Read(indention, text);
+
+                return table;
+            }
+
+            if (text.IsEmpty()) return this;
+
+            return null;
         }
 
         public int Indention { get; set; }
     }
 
-    public class TableParser
-    {
-        
-    }
-
     public class BigTextParser //: IReaderMode
     {
-        
     }
 }

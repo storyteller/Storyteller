@@ -45,6 +45,10 @@ namespace StoryTeller.Model.Persistence.Markdown
                 return this;
             }
 
+            if (indention != Indention) return null;
+
+            if (text == MarkdownWriter.SectionEnd) return null;
+
             // Assume it's a comment
             var comment = new CommentMode(Section);
             comment.Read(indention, text);

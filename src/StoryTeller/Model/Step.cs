@@ -107,10 +107,22 @@ namespace StoryTeller.Model
             var line = text.Trim().Substring(2).Trim();
             var tokens = line.Tokenize().ToArray();
 
-            var step = new Step(tokens[0]);
+            var key = tokens[0];
+            Step step = null;
+            if (key.Contains("#"))
+            {
+                var parts = key.ToDelimitedArray('#');
+                step = new Step(parts[0])
+                {
+                    id = parts[1]
+                };
+            }
+            else
+            {
+                step = new Step(key);
+            }
 
-
-            var valueIndex = line.IndexOf(step.Key) + step.Key.Length;
+            var valueIndex = line.IndexOf(key) + key.Length;
             var valueText = line.Substring(valueIndex);
 
             var values = valueText.ToDelimitedArray();

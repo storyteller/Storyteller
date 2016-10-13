@@ -30,12 +30,13 @@ namespace StoryTeller.Model.Persistence.Markdown
 
             if (line.IsSectionHeader())
             {
-                var key = line.SectionName();
-                var section = new Section(key);
+                var section = line.ToSection();
                 _spec.Children.Add(section);
 
                 return new SectionMode(section);
             }
+
+            if (line == MarkdownWriter.SectionEnd) return this;
 
             var mode = new CommentMode(_spec);
             mode.Read(indention, line);

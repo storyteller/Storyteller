@@ -40,16 +40,6 @@ namespace StoryTeller.Testing.Model.Persistence
             spec.MaxRetries.ShouldBe(3);
         }
 
-        [Fact]
-        public void the_spec_type_should_be_header_after_loading_a_spec_as_header()
-        {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
-
-            var spec = XmlReader.ReadFromFile(path);
-
-            spec.SpecType.ShouldBe(SpecType.header);
-        }
-
 
         [Fact]
         public void read_an_entire_suite()

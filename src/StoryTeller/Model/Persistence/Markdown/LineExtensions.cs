@@ -68,10 +68,18 @@ namespace StoryTeller.Model.Persistence.Markdown
             return line.StartsWith("[") && line.EndsWith("]");
         }
 
-        public static string SectionName(this string line)
+        public static Section ToSection(this string line)
         {
-            return line.TrimStart('[').TrimEnd(']').Trim();
+            var key = line.TrimStart('[').TrimEnd(']').Trim();
+            if (key.Contains("#"))
+            {
+                var parts = key.ToDelimitedArray('#');
+                return new Section(parts[0]) {id = parts[1]};
+            }
+
+            return new Section(key);
         }
+
 
         public class TokenParser
         {
