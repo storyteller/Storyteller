@@ -5,12 +5,12 @@ using Baseline;
 
 namespace StoryTeller.Model.Persistence
 {
-    public class ReaderBase<T> : IDisposable
+    public abstract class ReaderBase<T> : IDisposable
     {
         private readonly TextReader _reader;
         private readonly Stack<IReaderMode> _modes = new Stack<IReaderMode>();
 
-        public ReaderBase(TextReader reader)
+        protected ReaderBase(TextReader reader)
         {
             _reader = reader;
         }
@@ -73,7 +73,7 @@ namespace StoryTeller.Model.Persistence
 
         public void Dispose()
         {
-            _reader?.Dispose();
+            _reader?.SafeDispose();
         }
     }
 }

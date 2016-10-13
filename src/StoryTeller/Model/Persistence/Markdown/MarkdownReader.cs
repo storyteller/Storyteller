@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Baseline;
 
 namespace StoryTeller.Model.Persistence.Markdown
 {
-    public class MarkdownReader
+    public class MarkdownReader : IDisposable
     {
         private readonly TextReader _reader;
         private readonly Specification _spec;
@@ -26,9 +27,10 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         public static Specification ReadFromText(string text)
         {
-            var reader = new MarkdownReader(new StringReader(text));
-
-            return reader.Read();
+            using (var reader = new MarkdownReader(new StringReader(text)))
+            {
+                return reader.Read();
+            }
         }
 
         public MarkdownReader(TextReader reader)
@@ -86,6 +88,11 @@ namespace StoryTeller.Model.Persistence.Markdown
                 next.Indention = indention;
                 _modes.Push(next);
             }
+        }
+
+        public void Dispose()
+        {
+            _reader?.SafeDispose();
         }
     }
 }

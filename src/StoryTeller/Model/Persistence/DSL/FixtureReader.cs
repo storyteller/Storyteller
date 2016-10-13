@@ -6,8 +6,10 @@ namespace StoryTeller.Model.Persistence.DSL
     {
         public static FixtureModel ReadFrom(string text)
         {
-            var reader = new FixtureReader(new StringReader(text));
-            return reader.Read();
+            using (var reader = new FixtureReader(new StringReader(text)))
+            {
+                return reader.Read();
+            }
         }
 
         public FixtureReader(TextReader reader)
