@@ -33,6 +33,7 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var result = FixtureReader.ReadFrom(@"
 ## a key
+|cell|default|
 |first|default|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -52,6 +53,7 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var result = FixtureReader.ReadFrom(@"
 ## a key
+|cell|default|options|
 |first|default|hello, goodbye, ciao|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -76,6 +78,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
+|cell|default|options|
 |first|default|hello, ""goodbye, friend"", ciao|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
@@ -100,7 +103,8 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|first|||text|");
+|cell|editor|
+|first|text|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -120,7 +124,8 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|first||||result|");
+|cell|result|
+|first|result|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -151,6 +156,54 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = table.cells[0];
             cell.Key.ShouldBe("col1");
+        }
+
+        [Fact]
+        public void reads_table_default_value()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## a key
+### a title
+|table|col1|
+|default|one|");
+            result.grammars.ShouldNotBeNull();
+            result.grammars.Length.ShouldBe(1);
+            result.grammars[0].ShouldBeOfType<Table>();
+
+            var table = result.grammars[0].As<Table>();
+            table.cells.ShouldNotBeNull();
+            table.cells.Length.ShouldBe(1);
+
+            var cell = table.cells[0];
+            cell.Key.ShouldBe("col1");
+            cell.DefaultValue.ShouldBe("one");
+        }
+
+        [Fact]
+        public void reads_table_multiple_columns()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## a key
+### a title
+|table|column 1|column 2|
+|default|one|two|
+|editor|text||");
+            result.grammars.ShouldNotBeNull();
+            result.grammars.Length.ShouldBe(1);
+            result.grammars[0].ShouldBeOfType<Table>();
+
+            var table = result.grammars[0].As<Table>();
+            table.cells.ShouldNotBeNull();
+            table.cells.Length.ShouldBe(2);
+
+            var cell = table.cells[0];
+            cell.Key.ShouldBe("column 1");
+            cell.DefaultValue.ShouldBe("one");
+            cell.editor.ShouldBe("text");
+
+            cell = table.cells[1];
+            cell.Key.ShouldBe("column 2");
+            cell.DefaultValue.ShouldBe("two");
         }
     }
 }

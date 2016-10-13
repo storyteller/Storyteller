@@ -2,7 +2,7 @@
 
 namespace StoryTeller.Model.Persistence.DSL
 {
-    public class FixtureReader : BaseReader<FixtureModel>
+    public class FixtureReader : ReaderBase<FixtureModel>
     {
         public static FixtureModel ReadFrom(string text)
         {

@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Baseline;
 
 namespace StoryTeller.Model.Persistence
 {
-    public class BaseReader<T>
+    public class ReaderBase<T> : IDisposable
     {
         private readonly TextReader _reader;
         private readonly Stack<IReaderMode> _modes = new Stack<IReaderMode>();
 
-        public BaseReader(TextReader reader)
+        public ReaderBase(TextReader reader)
         {
             _reader = reader;
         }
@@ -68,6 +69,11 @@ namespace StoryTeller.Model.Persistence
                 next.Indention = indention;
                 _modes.Push(next);
             }
+        }
+
+        public void Dispose()
+        {
+            _reader?.Dispose();
         }
     }
 }
