@@ -94,11 +94,19 @@ namespace StoryTeller.Model
             return step;
         }
 
-        public bool IsAllTheSameTypeOfStep()
+        public bool IsTabular()
         {
             if (Children.OfType<Comment>().Any()) return false;
 
-            return Children.OfType<Step>().Select(x => x.Key).Distinct().Count() == 1;
+            var keys = Children.OfType<Step>().Select(x => x.Key).Distinct().ToArray();
+
+            if (keys.Length != 1) return false;
+
+            var key = keys.Single();
+
+            return key.StartsWith("row", StringComparison.OrdinalIgnoreCase)
+                   || key == Key;
+
         }
 
         public string[] GetActiveCells()

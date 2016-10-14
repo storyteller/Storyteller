@@ -28,14 +28,7 @@ namespace StoryTeller.Model.Persistence.Markdown
 
             if (text == MarkdownWriter.SectionEnd) return null;
 
-            if (_comment.Text.IsEmpty())
-            {
-                _comment.Text = text;
-            }
-            else
-            {
-                _comment.Text += Environment.NewLine + text;
-            }
+            _comment.AddLine(text);
 
             return this;
         }

@@ -17,10 +17,22 @@ namespace StoryTeller.Model
         [JsonProperty("text")]
         public string Text
         {
-            get { return _text; }
+            get { return _text.Trim(); }
             set
             {
                 _text = value?.Trim() ?? string.Empty;
+            }
+        }
+
+        public void AddLine(string line)
+        {
+            if (_text.IsEmpty())
+            {
+                _text = line.Trim();
+            }
+            else
+            {
+                _text += Environment.NewLine + line.Trim();
             }
         }
 

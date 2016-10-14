@@ -42,15 +42,19 @@ namespace StoryTeller.Model.Persistence.Markdown
                 return table;
             }
 
+            if (text.StartsWith(BigTextParser.Delimiter))
+            {
+                return new BigTextParser(Step, text)
+                {
+                    Indention = indention
+                };
+            }
+
             if (text.IsEmpty()) return this;
 
             return null;
         }
 
         public int Indention { get; set; }
-    }
-
-    public class BigTextParser //: IReaderMode
-    {
     }
 }

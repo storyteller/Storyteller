@@ -49,6 +49,18 @@ namespace StoryTeller.Model.Persistence.Markdown
 
             if (text == MarkdownWriter.SectionEnd) return null;
 
+            if (text.IsTableLine())
+            {
+                var table = new TableParser(Section)
+                {
+                    Indention = indention
+                };
+
+                table.Read(indention, text);
+
+                return table;
+            }
+
             // Assume it's a comment
             var comment = new CommentMode(Section);
             comment.Read(indention, text);

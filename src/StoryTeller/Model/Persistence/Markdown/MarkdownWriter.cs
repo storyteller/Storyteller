@@ -12,6 +12,16 @@ namespace StoryTeller.Model.Persistence.Markdown
 
     public class MarkdownWriter
     {
+        public static bool ShouldBeBigText(string text)
+        {
+            if (text.Contains('\n')) return true;
+            if (text.Contains('\r')) return true;
+            if (text.Contains(',')) return true;
+            if (text.Contains('=')) return true;
+
+            return text.Length > 25;
+        }
+
         private readonly TextWriter _writer;
         private readonly IdStyle _style;
         private int _depth = 0;
@@ -103,16 +113,31 @@ namespace StoryTeller.Model.Persistence.Markdown
                 key = $"{key}#{step.id}";
             }
 
-            var hasValues = step.Values.Any();
-            if (hasValues)
+            var bigTextValues = step.Values.Where(x => ShouldBeBigText(x.Value)).ToArray();
+            var inlineValues = step.Values.Where(x => !ShouldBeBigText(x.Value)).ToArray();
+
+            if (inlineValues.Any())
             {
                 // TODO -- deal with *big* text here. 
-                var values = step.Values.Select(x => $"{x.Key}={x.Value}").Join(", ");
+                var values = inlineValues.Select(x => $"{x.Key}={x.Value}").Join(", ");
                 write($"|> {key} {values}");
             }
             else
             {
                 write($"|> {key}");
+            }
+
+            foreach (var value in bigTextValues)
+            {
+                write($"{BigTextParser.Delimiter} {value.Key}");
+
+                foreach (var line in value.Value.ReadLines())
+                {
+                    write(line);
+                }
+
+                write(BigTextParser.Delimiter);
+                _writer.WriteLine();
             }
 
             var counter = 1;
@@ -142,7 +167,7 @@ namespace StoryTeller.Model.Persistence.Markdown
 
 
 
-            if (collection.IsAllTheSameTypeOfStep() && collection.Children.Count > 1)
+            if (collection.IsTabular() && collection.Children.Count > 1)
             {
                 writeTableData(collection);
             }

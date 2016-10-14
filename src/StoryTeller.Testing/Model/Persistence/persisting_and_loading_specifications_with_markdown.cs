@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Baseline;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.Markdown;
@@ -20,6 +21,8 @@ namespace StoryTeller.Testing.Model.Persistence
             _persisted = new Lazy<Specification>(() =>
             {
                 var text = MarkdownWriter.WriteToText(original);
+
+                Console.WriteLine(text);
 
                 var x = MarkdownReader.ReadFromText(text);
 
@@ -91,12 +94,59 @@ namespace StoryTeller.Testing.Model.Persistence
             actual.Count.ShouldBe(expected.Count);
             actual.Select(x => x.GetType().Name)
                 .ShouldHaveTheSameElementsAs(expected.Select(x => x.GetType().Name).ToArray());
+
+
+            for (int i = 0; i < expected.Count; i++)
+            {
+                var expectedNode = expected[i];
+                var actualNode = actual[i];
+
+                if (expectedNode is Comment)
+                {
+                    actualNode.As<Comment>().Text.ShouldBe(expectedNode.As<Comment>().Text);
+                }
+
+                if (expectedNode is Section)
+                {
+                    var expectedSection = expectedNode.As<Section>();
+                    var actualSection = actualNode.As<Section>();
+
+                    compare(expectedSection, actualSection);
+                }
+
+                if (expectedNode is Step)
+                {
+                    compare(expectedNode.As<Step>(), actualNode.As<Step>());
+                }
+            }
+        }
+
+        private void compare(Step expected, Step actual)
+        {
+            if (actual.Key != "row")
+            {
+                actual.Key.ShouldBe(expected.Key);
+            }
+
+            expected.Values.Keys.Where(x => x != "id").Each(key =>
+            {
+                actual.Values[key].ShouldBe(expected.Values[key]);
+            });
+
+            compare(expected.collections.OrderBy(x => x.Key).OfType<Node>().ToList(), actual.collections.OrderBy(x => x.Key).OfType<Node>().ToList());
+        }
+
+        private void compare(Section expected, Section actual)
+        {
+            actual.Key.ShouldBe(expected.Key);
+            compare(expected.Children, actual.Children);
         }
 
         [Fact]
         public void end_to_end_test_of_writing_and_reading_all()
         {
             var specs = TestingContext.Hierarchy.GetAllSpecs();
+                //.Where(x => x.name == "Selection List Values");
 
             foreach (var spec in specs)
             {
@@ -288,6 +338,106 @@ namespace StoryTeller.Testing.Model.Persistence
                 .Children.Single().ShouldBeOfType<Step>();
 
             persistedStep.AssertValuesMatch(step);
+        }
+
+        [Fact]
+        public void can_handle_multi_line_comments()
+        {
+            original.name = "Some spec";
+
+            var comment = new Comment
+            {
+                Text = @"hello,
+how are you today?
+
+** Well, thank you"
+            };
+
+            original.Children.Add(comment);
+
+            compare(original, persisted);
+        }
+
+        [Fact]
+        public void can_handle_multi_line_comment_within_a_section()
+        {
+            original.name = "Some spec";
+
+            var comment = new Comment
+            {
+                Text = @"hello,
+how are you today?
+
+** Well, thank you"
+            };
+
+            var section = new Section("MyThing");
+            section.AddStep("Go");
+            section.Children.Add(comment);
+            section.AddStep("Stop");
+
+            original.Children.Add(section);
+
+            compare(original, persisted);
+
+            original.Children.Add(new Comment {Text = "Hey\nyou!"});
+        }
+
+        [Fact]
+        public void cell_value_with_a_comma_or_equals_or_line_breaks()
+        {
+            original.name = "Some spec";
+
+            var step = new Step("Add").With("x", "1,2,3").With("y", "3=2").With("sum", "3\r\n3");
+
+            var section = new Section("Math");
+            section.Children.Add(step);
+
+            original.Children.Add(section);
+
+            compare(original, persisted);
+        }
+
+        [Fact]
+        public void cell_value_with_really_big_text()
+        {
+            original.name = "Some spec";
+
+            var bigtext = "Very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, long text";
+
+
+            var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", "3\r\n3");
+
+            var section = new Section("Math");
+            section.Children.Add(step);
+
+            original.Children.Add(section);
+
+            compare(original, persisted);
+        }
+
+        [Fact]
+        public void cell_value_with_lots_of_line_breaks()
+        {
+            original.name = "Some spec";
+
+            var bigtext = @"Very,
+very,
+very,
+very,
+very,
+very,
+very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, long text";
+
+
+            var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", "3\r\n3");
+
+            var section = new Section("Math");
+            section.Children.Add(step);
+
+            original.Children.Add(section);
+
+            compare(original, persisted);
         }
     }
 }
