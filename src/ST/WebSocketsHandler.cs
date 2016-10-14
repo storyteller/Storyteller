@@ -4,6 +4,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Baseline;
 using Microsoft.AspNetCore.Http;
 
 namespace ST
@@ -29,7 +30,10 @@ namespace ST
 
                 if (received.EndOfMessage)
                 {
-                    Received(json);
+                    if (json.IsNotEmpty())
+                    {
+                        Received(json);
+                    }
                 }
                 else
                 {
