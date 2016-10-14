@@ -20,6 +20,10 @@
       "commandLineArgs": "open src/Specifications",
       "workingDirectory": "C:\\code\\storyteller"
     },
-
+	"Convert Specifications": {
+      "commandName": "Project",
+      "commandLineArgs": "convert src/Specifications",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
   }
 }

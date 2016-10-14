@@ -15,9 +15,9 @@ namespace ST.CommandLine
         public string Path { get; set; } = Directory.GetCurrentDirectory();
 
         [Description("Optional. Override the spec directory")]
-        public string SpecsFlag { get; set; } = "Specs";
+        public string SpecsFlag { get; set; }
 
-        public string SpecPath => SpecsFlag.IsNotEmpty() ? SpecsFlag.ToFullPath() : HierarchyLoader.SelectSpecPath(Path.ToFullPath());
+        public string SpecPath => SpecsFlag.IsNotEmpty() ? Path.ToFullPath().AppendPath(SpecsFlag) : HierarchyLoader.SelectSpecPath(Path.ToFullPath());
     }
 
     [Description("Converts the persisted specifications from the 1.0-3.0 Xml format to the 4.0 markdown format")]
