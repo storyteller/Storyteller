@@ -34,7 +34,8 @@ namespace ST.CommandLine
             var files = new FileSystem().FindFiles(input.SpecPath, FileSet.Deep("*.xml"));
             foreach (var file in files)
             {
-                var mdFile = Path.GetFileNameWithoutExtension(file) + ".md";
+                var mdFilename = Path.GetFileNameWithoutExtension(file) + ".md";
+                var mdFile = file.ParentDirectory().AppendPath(mdFilename);
 
                 var spec = XmlReader.ReadFromFile(file);
 
