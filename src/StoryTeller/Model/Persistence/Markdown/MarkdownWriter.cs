@@ -26,6 +26,7 @@ namespace StoryTeller.Model.Persistence.Markdown
         private readonly IdStyle _style;
         private int _depth = 0;
         public const string SectionEnd = "~~~";
+        public const string PipebarEscape = "&pipe;";
 
         public MarkdownWriter(TextWriter writer, IdStyle style)
         {
@@ -208,7 +209,7 @@ namespace StoryTeller.Model.Persistence.Markdown
                 for (int i = 0; i < activeCells.Length; i++)
                 {
                     var key = activeCells[i];
-                    var value = step.Values.ContainsKey(key) ? step.Values[key] : string.Empty;
+                    var value = step.Values.ContainsKey(key) ? step.Values[key].Replace("|", PipebarEscape) : string.Empty;
 
                     line += value.PadRight(lengths[i]) + "|";
                 }

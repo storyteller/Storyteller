@@ -22,8 +22,6 @@ namespace StoryTeller.Testing.Model.Persistence
             {
                 var text = MarkdownWriter.WriteToText(original);
 
-                Console.WriteLine(text);
-
                 var x = MarkdownReader.ReadFromText(text);
 
                 x.ShouldNotBeTheSameAs(original);
@@ -438,6 +436,25 @@ very, very, very, very, very, very, very, very, very, very, very, very, very, ve
             original.Children.Add(section);
 
             compare(original, persisted);
+        }
+
+        [Fact]
+        public void can_escape_pipe_bar_in_table_data()
+        {
+            original.name = "Some spec";
+            var section = new Section("Math");
+
+            var tableStep = section.AddStep("table");
+            var rows = tableStep.AddCollection("rows");
+
+            rows.AddStep("row").With("a", "1");
+            rows.AddStep("row").With("a", "2");
+            rows.AddStep("row").With("a", "1|2|3");
+
+            original.Children.Add(section);
+
+            compare(original, persisted);
+
         }
     }
 }

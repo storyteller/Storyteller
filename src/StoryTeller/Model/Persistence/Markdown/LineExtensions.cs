@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Baseline;
 
 namespace StoryTeller.Model.Persistence.Markdown
@@ -50,7 +51,7 @@ namespace StoryTeller.Model.Persistence.Markdown
         public static string[] ToTableValues(this string line)
         {
             var trimmed = line.Trim().TrimStart('|').TrimEnd('|');
-            return trimmed.ToDelimitedArray('|');
+            return trimmed.ToDelimitedArray('|').Select(x => x.Replace(MarkdownWriter.PipebarEscape, "|")).ToArray();
         }
 
         public static bool StartsStep(this string line)
