@@ -44,5 +44,13 @@ namespace StoryTeller
 
             return i;
         }
+
+        public static bool IsGuidString(this string text)
+        {
+            if (text.IsEmpty()) return false;
+
+            Guid id;
+            return Guid.TryParse(text, out id);
+        }
     }
 }

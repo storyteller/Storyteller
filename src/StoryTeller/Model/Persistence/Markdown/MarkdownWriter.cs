@@ -4,11 +4,6 @@ using Baseline;
 
 namespace StoryTeller.Model.Persistence.Markdown
 {
-    public enum IdStyle
-    {
-        Ignore,
-        Write
-    }
 
     public class MarkdownWriter
     {
@@ -23,21 +18,19 @@ namespace StoryTeller.Model.Persistence.Markdown
         }
 
         private readonly TextWriter _writer;
-        private readonly IdStyle _style;
         private int _depth = 0;
         public const string SectionEnd = "~~~";
         public const string PipebarEscape = "&pipe;";
 
-        public MarkdownWriter(TextWriter writer, IdStyle style)
+        public MarkdownWriter(TextWriter writer)
         {
             _writer = writer;
-            _style = style;
         }
 
         public static string WriteToText(Specification specification)
         {
             var text = new StringWriter();
-            var writer = new MarkdownWriter(text, IdStyle.Write);
+            var writer = new MarkdownWriter(text);
 
             writer.Write(specification);
 
@@ -71,7 +64,7 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         private void writeSectionHeader(Section section)
         {
-            var text = _style == IdStyle.Write 
+            var text = !section.id.IsGuidString() 
                 ? $"[{section.Key}#{section.id}]" 
                 : $"[{section.Key}]";
 
@@ -109,7 +102,7 @@ namespace StoryTeller.Model.Persistence.Markdown
         private void writeStep(Step step)
         {
             var key = step.Key;
-            if (_style == IdStyle.Write)
+            if (step.id.IsNotEmpty() && !step.id.IsGuidString())
             {
                 key = $"{key}#{step.id}";
             }
