@@ -23,11 +23,6 @@ namespace StoryTeller.Engine
 
         public SpecExecutionRequest(Specification specification, IResultObserver observer)
         {
-            if (specification.SpecType == SpecType.header)
-            {
-                throw new ArgumentOutOfRangeException(nameof(specification), "Specification must be full bodied, this on is header only");
-            }
-
             _observer = observer;
             Specification = specification;
         }

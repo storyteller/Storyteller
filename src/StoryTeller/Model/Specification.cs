@@ -10,13 +10,6 @@ using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Model
 {
-    [Obsolete("Let's get rid of this. Made the client and backend way more complicated than necessary")]
-    public enum SpecType
-    {
-        header,
-        full
-    }
-
     public class Specification : Node, INodeHolder
     {
         [JsonProperty("title")] public string name;
@@ -46,8 +39,6 @@ namespace StoryTeller.Model
         [JsonConverter(typeof (StringEnumConverter))] [JsonProperty(SpecConstants.Lifecycle)] public Lifecycle Lifecycle =
             Lifecycle.Acceptance;
 
-
-        [JsonConverter(typeof (StringEnumConverter))] [JsonProperty("mode")] public SpecType SpecType = SpecType.full;
 
         private string _fileName;
 

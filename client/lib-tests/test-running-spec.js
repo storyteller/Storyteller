@@ -67,20 +67,7 @@ describe('SpecRecord', () => {
     expect(running.spec instanceof Spec).to.be.true; 
   });
   
-  it('knows when it is loading positive', () => {
-    specData.mode = 'header';
-    
-    var running = new RunningSpec(specData, library);
-    expect(running.loading).to.be.true;
-  });
-  
-  it('knows when it is not loading', () => {
-    specData.mode = 'full';
-    
-    var running = new RunningSpec(specData, library);
-    expect(running.loading).to.be.false;
-  });
-  
+
   it('can replace its data', () => {
     specData.mode = 'header';
     

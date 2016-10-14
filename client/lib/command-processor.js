@@ -17,11 +17,8 @@ function CommandProcessor(communicator, store){
     
     this["run-specs"] = data => {
         var specs = findFilteredSpecs(data.suite);
-        
-        var heads = _.filter(specs, x => x.mode == 'header');
-        var fulls = _.filter(specs, x => x.mode == 'full');
-        
-        fulls.forEach(spec => {
+       
+        specs.forEach(spec => {
             var message = {
                 type: 'run-spec',
                 id: spec.id,
@@ -38,42 +35,18 @@ function CommandProcessor(communicator, store){
     
     this["mark-as-acceptance"] = data => {
         var specs = findFilteredSpecs(data.suite);
-        var heads = _.filter(specs, x => x.mode == 'header');
-        var fulls = _.filter(specs, x => x.mode == 'full');
-        
-        _.filter(fulls, x => x.lifecycle == 'Regression').forEach(spec => {
+
+        _.filter(specs, x => x.lifecycle == 'Regression').forEach(spec => {
             store.dispatch({type: 'changes', id: spec.id, change: new ToggleLifecycle()});
         });
-
-        var ids = _.filter(heads, x => x.lifecycle == 'Regression')
-            .map(x => x.id);
-
-        if (ids.length > 0){
-            communicator.send({
-                type: 'mark-as-acceptance',
-                list: ids
-            });
-        }
     };
     
     this["mark-as-regression"] = data => {
         var specs = findFilteredSpecs(data.suite);
-        var heads = _.filter(specs, x => x.mode == 'header');
-        var fulls = _.filter(specs, x => x.mode == 'full');
-        
-        _.filter(fulls, x => x.lifecycle == 'Acceptance').forEach(spec => {
+
+        _.filter(specs, x => x.lifecycle == 'Acceptance').forEach(spec => {
             store.dispatch({type: 'changes', id: spec.id, change: new ToggleLifecycle()});
         });
-
-        var ids = _.filter(heads, x => x.lifecycle == 'Acceptance')
-            .map(x => x.id);
-
-        if (ids.length > 0){
-            communicator.send({
-                type: 'mark-as-regression',
-                list: ids
-            });
-        }
     }
     
     

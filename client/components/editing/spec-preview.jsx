@@ -11,9 +11,8 @@ var Persisting = require('./alerts/persisting');
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
-    var loading = spec.mode == 'header';
 
-    return {spec: spec, loading: loading};
+    return {spec: spec};
 }
 
 function addDispatch(dispatch){
@@ -21,24 +20,7 @@ function addDispatch(dispatch){
 }
 
 class SpecPreview extends React.Component {
-    componentDidMount(){
-        if (this.props.loading){
-            Postal.publish({
-                channel: 'engine-request',
-                topic: 'spec-data-requested',
-                data: {
-                    type: 'spec-data-requested',
-                    id: this.props.spec.id
-                }
-            });
-        }
-    }
-    
     render(){
-        if (this.props.loading){
-            return ( <EditorLoading spec={this.props.spec} /> );
-        }
-
         loader.reset();
         var components = this.props.spec.previews(loader);
         

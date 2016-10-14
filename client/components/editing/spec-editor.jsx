@@ -18,11 +18,9 @@ var Persisting = require('./alerts/persisting');
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
-    var loading = spec.mode == 'header';
 
     return {
-        spec: spec, 
-        loading: loading, 
+        spec: spec,  
         activeContainer: spec.spec.activeHolder,
         updatingDate: false
     };
@@ -93,19 +91,6 @@ function ContextualPane(props){
 
 
 class SpecEditor extends React.Component{
-    componentDidMount(){
-        if (this.props.loading){
-            Postal.publish({
-                channel: 'engine-request',
-                topic: 'spec-data-requested',
-                data: {
-                    type: 'spec-data-requested',
-                    id: this.props.spec.id
-                }
-            });
-        }
-    }
-    
     render(){
         loader.reset();
         var spec = this.props.spec;

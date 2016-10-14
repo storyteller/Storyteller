@@ -12,18 +12,16 @@ var Persisting = require('./alerts/persisting');
 function getSpec(state, ownProps){
     var id = ownProps.params.id;
     var spec = state.get('specs').get(id);
-    
-    var loading = spec.mode == 'header';
-    
+
     var running = state.get('running');
     if (running && running.id == id){
-        return {spec: state.get('running-spec'), loading: loading, running: true};
+        return {spec: state.get('running-spec'), running: true};
     }
     else if (spec.last_result){
-        return {spec: spec.forResults(), loading: false, running: false}
+        return {spec: spec.forResults(), running: false}
     }
     
-    return {spec: spec, loading: loading, running: running};
+    return {spec: spec, running: running};
 }
 
 function addDispatch(dispatch){
@@ -31,25 +29,7 @@ function addDispatch(dispatch){
 }
 
 class SpecResults extends React.Component {
-    componentDidMount(){
-        if (this.props.loading){
-            Postal.publish({
-                channel: 'engine-request',
-                topic: 'spec-data-requested',
-                data: {
-                    type: 'spec-data-requested',
-                    id: this.props.spec.id
-                }
-            });
-        }
-    }
-    
-    
     render(){
-        if (this.props.loading){
-            return ( <EditorLoading spec={this.props.spec} /> );
-        }
-
         loader.reset();
         var components = this.props.spec.buildResults(loader, this.props.running);
         
