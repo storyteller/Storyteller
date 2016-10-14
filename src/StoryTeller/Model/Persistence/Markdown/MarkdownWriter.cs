@@ -231,5 +231,18 @@ namespace StoryTeller.Model.Persistence.Markdown
             _writer.WriteLine($"-> {SpecConstants.ExpirationPeriod} = {spec.ExpirationPeriod}");
             _writer.WriteLine($"-> {SpecConstants.Tags} = {spec.Tags.Join(", ")}");
         }
+
+        public static void WriteToFile(Specification spec, string file)
+        {
+            using (var stream = new FileStream(file, FileMode.Create))
+            {
+                var writer = new StreamWriter(stream);
+
+                var mdWriter = new MarkdownWriter(writer);
+                mdWriter.Write(spec);
+
+                writer.Flush();
+            }
+        }
     }
 }
