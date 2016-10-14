@@ -11,6 +11,16 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         private readonly Stack<IReaderMode> _modes = new Stack<IReaderMode>();
 
+        public static Specification ReadFromFile(string file)
+        {
+            using (var stream = new FileStream(file, FileMode.Open))
+            {
+                var reader = new StreamReader(stream);
+
+                return new MarkdownReader(reader).Read();
+            }
+        }
+
         public static Specification ReadFromText(string text)
         {
             var reader = new MarkdownReader(new StringReader(text));

@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Xml;
 using Baseline;
+using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence
 {
     public class HierarchyLoader
     {
+        public static readonly IFileSystem FileSystem = new FileSystem();
+
         public static string SelectSpecPath(string baseDirectory)
         {
             var specPath = baseDirectory.AppendPath("Specs");
@@ -16,14 +16,10 @@ namespace StoryTeller.Model.Persistence
 
             var testsPath = baseDirectory.AppendPath("Tests");
             if (Directory.Exists(testsPath))
-            {
                 return testsPath;
-            }
 
             return specPath;
         }
-
-        public static readonly IFileSystem FileSystem = new FileSystem();
 
         public static Suite ReadHierarchy(string folder)
         {
@@ -39,7 +35,8 @@ namespace StoryTeller.Model.Persistence
             return new Suite
             {
                 name = Path.GetFileName(folder),
-                Specifications = FileSystem.FindFiles(folder, FileSet.Shallow("*.xml")).Select(XmlReader.ReadFromFile).ToArray(),
+                Specifications =
+                    FileSystem.FindFiles(folder, FileSet.Shallow("*.md")).Select(MarkdownReader.ReadFromFile).ToArray(),
                 suites = FileSystem.ChildDirectoriesFor(folder).Select(ReadSuite).ToArray(),
                 Folder = folder
             };
