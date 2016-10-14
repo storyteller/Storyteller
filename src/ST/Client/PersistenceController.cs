@@ -7,6 +7,7 @@ using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
@@ -42,10 +43,7 @@ namespace ST.Client
             {
                 spec.Lifecycle = lifecycle;
 
-                using (var stream = new FileStream(spec.Filename, FileMode.Create))
-                {
-                    XmlWriter.WriteToXml(spec).Save(stream);
-                }
+                MarkdownWriter.WriteToFile(spec, spec.Filename);
             });
 
             var data = LoadSpecification(id);
@@ -65,7 +63,10 @@ namespace ST.Client
             {
                 _specPath = path.ToFullPath();
 
-                _lock.Write(() => { _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy(); });
+                _lock.Write(() =>
+                {
+                    _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
+                });
 
 
                 _watcher.StartWatching(path, this);
@@ -125,8 +126,7 @@ namespace ST.Client
 
                     _watcher.WriteFiles(() =>
                     {
-                        var document = XmlWriter.WriteToXml(specification);
-                        document.Save(specification.Filename);
+                        MarkdownWriter.WriteToFile(specification, specification.Filename);
                     });
 
                     return true;
@@ -147,7 +147,7 @@ namespace ST.Client
                 var spec = _hierarchy.Specifications[id];
 
                 // Keep things isolated!
-                var template = XmlReader.ReadFromFile(spec.Filename);
+                var template = MarkdownReader.ReadFromFile(spec.Filename);
                 template.id = Guid.NewGuid().ToString();
                 template.name = name;
                 template.Lifecycle = Lifecycle.Acceptance;
@@ -160,8 +160,7 @@ namespace ST.Client
 
                 _watcher.WriteFiles(() =>
                 {
-                    var document = XmlWriter.WriteToXml(template);
-                    document.Save(file);
+                    MarkdownWriter.WriteToFile(template, file);
                 });
 
                 template.Filename = file;
@@ -189,7 +188,10 @@ namespace ST.Client
                 var specFileName = Specification.DetermineFilename(name);
                 var file = folder.AppendPath(specFileName);
 
-                _watcher.WriteFiles(() => { XmlWriter.WriteToXml(specification).Save(file); });
+                _watcher.WriteFiles(() =>
+                {
+                    MarkdownWriter.WriteToFile(specification, file);
+                });
 
                 specification.Filename = file;
                 _hierarchy.Specifications[specification.id] = specification;
@@ -238,7 +240,7 @@ namespace ST.Client
             {
                 _lock.Read(() =>
                 {
-                    var node = XmlReader.ReadFromFile(file);
+                    var node = MarkdownReader.ReadFromFile(file);
 
 
                     if (_hierarchy.Specifications.Has(node.id))

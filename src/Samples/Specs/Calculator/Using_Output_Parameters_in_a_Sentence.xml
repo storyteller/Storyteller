@@ -1,5 +1,0 @@
-<Spec id="bcdc78f5-030d-40b7-908d-f76a65e9f035" maxRetries="0" tags="" lifecycle="Acceptance" name="Using Output Parameters in a Sentence">
-  <Calculator id="bf46494c-5c77-4efb-a4dc-a034980202a2">
-    <SumAndProduct X="3" Y="4" Sum="7" Product="12" />
-  </Calculator>
-</Spec>

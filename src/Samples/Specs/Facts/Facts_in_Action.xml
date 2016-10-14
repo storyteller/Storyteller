@@ -1,9 +1,0 @@
-<Spec id="98769c4b-6fd5-43aa-bf01-0ea75439437b" maxRetries="0" tags="" lifecycle="Acceptance" name="Facts in Action">
-  <Fact id="eac95bfe-f1a4-4d53-bfa8-f0bc620332e6">
-    <AnotherTruth />
-    <ThisLineIsAlwaysTrue />
-    <ThisLineIsAlwaysFalse />
-    <ThisLineAlwaysThrowsExceptions />
-    <TheConfirmationEmailWasSent />
-  </Fact>
-</Spec>

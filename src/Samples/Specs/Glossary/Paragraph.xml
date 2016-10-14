@@ -1,7 +1,0 @@
-<Spec id="948c1484-7390-40b9-9186-27dac44b3c02" maxRetries="0" tags="" lifecycle="Acceptance" name="Paragraph">
-  <Comment id="0fb381ef-c22a-4761-940e-8648d35276e8">The panel box below is a "Section" within the specification that uses a "Fixture" titled "Glossary"</Comment>
-  <Glossary id="892471e2-2a92-496e-96a7-2a3339897596">
-    <Comment id="6666b587-16d9-4e0c-89a3-3a8ee6b741fc">You can group a number of grammars together in a pre-canned macro called a "Paragraph" grammar like this one below:</Comment>
-    <Login user="sa" password="tiger" />
-  </Glossary>
-</Spec>

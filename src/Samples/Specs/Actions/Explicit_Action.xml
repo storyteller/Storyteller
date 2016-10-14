@@ -1,7 +1,0 @@
-<Spec id="84dbbfa8-14c7-4034-9b85-4bbb9504ba0f" maxRetries="0" tags="" lifecycle="Acceptance" name="Explicit Action">
-  <ExplicitExecution id="92d3e6a1-9851-4c93-b16e-920aa024359f">
-    <Comment id="b9e0ab0e-5aba-4a3a-ae8d-f51b7d656e11">Kick off the batch process manually</Comment>
-    <StartTheBatchProcess />
-    <Comment id="4895cc9e-cffe-4e3d-9c47-b472397a4792">Do whatever assertions you need to verify the system behavior here.</Comment>
-  </ExplicitExecution>
-</Spec>

@@ -6,6 +6,7 @@ using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Model.Persistence
@@ -16,9 +17,9 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_a_spec_node()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.xml");
+            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.md");
 
-            var spec = XmlReader.ReadFromFile(path);
+            var spec = MarkdownReader.ReadFromFile(path);
 
             spec.name.ShouldBe("Check properties");
             spec.Lifecycle.ShouldBe(Lifecycle.Acceptance);
@@ -33,9 +34,9 @@ namespace StoryTeller.Testing.Model.Persistence
         public void can_read_max_retries()
         {
             var path = ".".ToFullPath().ParentDirectory().ParentDirectory().ParentDirectory()
-                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.xml");
+                .AppendPath("Storyteller.Samples", "Specs", "General", "Check properties.md");
 
-            var spec = XmlReader.ReadFromFile(path);
+            var spec = MarkdownReader.ReadFromFile(path);
 
             spec.MaxRetries.ShouldBe(3);
         }

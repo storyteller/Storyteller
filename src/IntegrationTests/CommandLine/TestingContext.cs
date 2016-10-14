@@ -2,6 +2,7 @@
 using Baseline;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Samples;
 using StoryTeller.Samples.Fixtures;
 
@@ -40,7 +41,7 @@ namespace IntegrationTests.CommandLine
 
         public static Specification FindSpecification(string id)
         {
-            return XmlReader.ReadFromFile(Hierarchy.ToHierarchy().Specifications[id].Filename);
+            return MarkdownReader.ReadFromFile(Hierarchy.ToHierarchy().Specifications[id].Filename);
         }
 
         public static string FindParallelDirectory(string projectName)

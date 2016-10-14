@@ -1,9 +1,0 @@
-<Spec id="c394d009-8f07-4e9b-b8c4-e9bb54989620" maxRetries="0" tags="" lifecycle="Acceptance" name="As Table">
-  <Address id="1e20c371-5a16-4e4c-88dd-70a8e3344e15">
-    <TheAddressesAre>
-      <Rows id="457612a1-7457-452a-8b61-1604184934d1">
-        <TheAddressesAre-row Address1="111 Easy Street" Address2="EMPTY" City="Austin" />
-      </Rows>
-    </TheAddressesAre>
-  </Address>
-</Spec>

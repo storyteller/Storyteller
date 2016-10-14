@@ -21,20 +21,32 @@ namespace ST
             while (webSocket.State == WebSocketState.Open)
             {
                 var token = CancellationToken.None;
+
                 var buffer = new ArraySegment<Byte>(new Byte[100000]);
                 var received = await webSocket.ReceiveAsync(buffer, token);
 
-                switch (received.MessageType)
+                var json = buffer.ReadString(received);
+
+                if (received.EndOfMessage)
                 {
-                    case WebSocketMessageType.Text:
-                        var request = Encoding.UTF8.GetString(buffer.Array,
-                            buffer.Offset,
-                            received.Count);
-
-                        Received(request);
-
-                        break;
+                    Received(json);
                 }
+                else
+                {
+                    var builder = new StringBuilder(json);
+
+                    while (!received.EndOfMessage)
+                    {
+                        received = await webSocket.ReceiveAsync(buffer, token);
+                        json = buffer.ReadString(received);
+
+                        builder.Append(json);
+                    }
+
+                    Received(builder.ToString());
+                }
+
+
             }
 
             _sockets.Remove(webSocket);
@@ -65,6 +77,18 @@ namespace ST
             foreach (var socket in _sockets)
             {
                 socket.Dispose();
+            }
+        }
+    }
+
+    public static class ArraySegmentExtensions
+    {
+        public static string ReadString(this ArraySegment<byte> buffer, WebSocketReceiveResult result)
+        {
+            {
+                return Encoding.UTF8.GetString(buffer.Array,
+                    buffer.Offset,
+                    result.Count);
             }
         }
     }

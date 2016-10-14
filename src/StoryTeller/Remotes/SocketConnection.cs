@@ -127,6 +127,8 @@ namespace StoryTeller.Remotes
                 var writer = new BinaryWriter(stream);
 
                 writer.Write(json);
+
+                writer.Flush();
             }
         }
 

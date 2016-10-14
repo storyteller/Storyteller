@@ -30,7 +30,7 @@ namespace ST.Client
         public void StartWatching(string path, ISpecFileObserver observer)
         {
             var fullPath = path.ToFullPath();
-            _watcher = new FileChangeWatcher(fullPath, FileSet.Deep("*.xml"), this);
+            _watcher = new FileChangeWatcher(fullPath, FileSet.Deep("*.md"), this);
             _watcher.Start();
 
             _observer = observer;

@@ -17,7 +17,10 @@ namespace StoryTeller.Model.Persistence.Markdown
             {
                 var reader = new StreamReader(stream);
 
-                return new MarkdownReader(reader).Read();
+                var spec =  new MarkdownReader(reader).Read();
+                spec.Filename = file;
+
+                return spec;
             }
         }
 

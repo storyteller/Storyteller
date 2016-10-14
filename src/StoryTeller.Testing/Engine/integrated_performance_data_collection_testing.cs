@@ -6,6 +6,7 @@ using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Results;
 using StoryTeller.Samples;
 using Xunit;
@@ -34,7 +35,7 @@ namespace StoryTeller.Testing.Engine
         private SpecResults runSpec(string id)
         {
             var node = _hierarchy.ToHierarchy().Specifications[id];
-            var specification = XmlReader.ReadFromFile(node.Filename);
+            var specification = MarkdownReader.ReadFromFile(node.Filename);
 
             return _runner.Execute(specification);
         }

@@ -124,7 +124,7 @@ namespace StoryTeller.Model
 
         public static string DetermineFilename(string name)
         {
-            var filename = name + ".xml";
+            var filename = name + ".md";
 
             if (filename.Contains(" "))
             {

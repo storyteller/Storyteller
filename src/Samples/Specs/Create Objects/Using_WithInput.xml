@@ -1,5 +1,0 @@
-<Spec id="21812dcf-4d4b-4086-8c1c-f07e70bc3f83" maxRetries="0" tags="" lifecycle="Acceptance" name="Using WithInput">
-  <Address id="df8fd4ad-6d95-47e0-9dea-d493eff8ddba">
-    <AddressWithStreetAddress street="333 Easy Street, Apt A" City="Lamar" StateOrProvince="MO" />
-  </Address>
-</Spec>

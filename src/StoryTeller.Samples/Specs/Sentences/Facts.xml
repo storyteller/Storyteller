@@ -1,8 +1,0 @@
-<Spec id="sentence2" maxRetries="3" tags="" lifecycle="Regression" name="Facts">
-  <Sentence id="738ebb43-b0c9-46c3-b1af-5b2d2c313122" active-cells="">
-    <ThisFactIsTrue id="1"/>
-    <ThisFactIsFalse id="2"/>
-    <ThisFactThrowsException id="3"/>
-  </Sentence>
-  <Comment id="b12f43e8-e133-44d3-a857-2888741b80f6">comment text..;aslkdfjfaslkjfas;lkjfl;askjf;lkasjf;lkasjflksajfl;kasjflksajflksjafllkasjdflksajddflkasjflkjasdlfkjaslkdfjlaskjflakskjfl;kasjflk;asjdflksjaddfl;ksjgiih;oaishhdl;kklkh;alkjt;aihalkjbiaeia;slkjasssssssssssssssssssssssssss.</Comment>
-</Spec>

@@ -1,8 +1,0 @@
-<Spec id="2086cf01-21fc-460b-a971-857a847786ad" maxRetries="0" tags="" lifecycle="Acceptance" name="Cells">
-  <Cells id="51147e67-8d1c-41ed-8b11-26a2de57a251">
-    <Enable enabled="" />
-    <Enable enabled="" />
-    <Enable enabled="" />
-    <Direction direction="South" />
-  </Cells>
-</Spec>

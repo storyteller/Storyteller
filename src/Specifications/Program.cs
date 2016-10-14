@@ -1,4 +1,5 @@
 ﻿using System;
+using StoryTeller;
 
 namespace Specifications
 {
@@ -6,7 +7,7 @@ namespace Specifications
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello from specs");
+            StorytellerAgent.Run(args, new SpecificationSystem());
         }
     }
 }

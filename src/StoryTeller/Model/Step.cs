@@ -94,6 +94,7 @@ namespace StoryTeller.Model
         [JsonIgnore]
         public IList<Node> Children => Collections.OfType<Node>().ToList();
 
+        [JsonIgnore]
         public string[] StagedValues { get; set; }
 
 

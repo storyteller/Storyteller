@@ -6,6 +6,7 @@ using StoryTeller.Engine;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using ST.CommandLine;
@@ -24,7 +25,7 @@ namespace StoryTeller.Testing
 
             hierarchy.GetAllSpecs().Each(x =>
             {
-                var spec = XmlReader.ReadFromFile(x.Filename);
+                var spec = MarkdownReader.ReadFromFile(x.Filename);
                 dictionary.Add(x.id, spec);
             });
 
@@ -103,7 +104,7 @@ namespace StoryTeller.Testing
         {
             var hierarchy = TestingContext.Hierarchy;
             var spec = hierarchy.ToHierarchy().Specifications["table5"];
-            var specification = XmlReader.ReadFromFile(spec.Filename);
+            var specification = MarkdownReader.ReadFromFile(spec.Filename);
 
             var json = JsonSerialization.ToIndentedJson(specification);
 

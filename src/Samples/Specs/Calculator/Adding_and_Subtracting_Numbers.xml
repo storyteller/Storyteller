@@ -1,8 +1,0 @@
-<Spec id="4e1903e9-2594-4de3-b22c-12e804ce7618" maxRetries="0" tags="" lifecycle="Acceptance" name="Adding and Subtracting Numbers" lastUpdated="Monday, October 26, 2015" expirationPeriod="0">
-  <Calculator id="f9057251-8503-406a-ac44-8872c806b883">
-    <StartWith value="5" />
-    <Add value="3" />
-    <Subtract value="2" />
-    <TheValueShouldBe value="6" />
-  </Calculator>
-</Spec>

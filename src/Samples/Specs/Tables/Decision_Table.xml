@@ -1,9 +1,0 @@
-<Spec id="f4527f5b-1d33-4ec4-9cba-db454ff6b380" maxRetries="0" tags="" lifecycle="Acceptance" name="Decision Table">
-  <Tables id="4c274df7-74fa-4589-be0f-ef4f36e26dd8">
-    <decisions>
-      <table id="0602a6cb-bd47-48ed-a9bd-3646c8029630">
-        <decisions-row FirstName="Tim" LastName="Tebow" FullName="Tim Tebow" LastNameFirst="Tebow, Tim" />
-      </table>
-    </decisions>
-  </Tables>
-</Spec>

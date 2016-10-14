@@ -9,6 +9,7 @@ using StoryTeller.Engine;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Testing.Engine
@@ -22,9 +23,9 @@ namespace StoryTeller.Testing.Engine
         public SpecExecutionRequestTester()
         {
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples")
-            .AppendPath("Specs", "General", "Check properties.xml");
+            .AppendPath("Specs", "General", "Check properties.md");
 
-            theSpec = XmlReader.ReadFromFile(path);
+            theSpec = MarkdownReader.ReadFromFile(path);
 
             listener = new RuntimeErrorListener();
         }

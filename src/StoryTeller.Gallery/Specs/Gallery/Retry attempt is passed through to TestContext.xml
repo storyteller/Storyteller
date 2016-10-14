@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<Test name="Retry attempt is passed through to TestContext" lifecycle="Regression" attemptNumber="0">
-  <RetryAttempt>
-    <OnlyPassesOnAttempt isStep="True" retryAttempt="3" />
-  </RetryAttempt>
-</Test>

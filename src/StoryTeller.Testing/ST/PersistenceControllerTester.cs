@@ -8,6 +8,7 @@ using Shouldly;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.Markdown;
 using ST.Client;
 using Xunit;
 
@@ -31,7 +32,7 @@ namespace StoryTeller.Testing.ST
             thePath = AppContext.BaseDirectory.ToFullPath().AppendPath(Guid.NewGuid().ToString());
             var fileSystem = new FileSystem();
 
-            var files = fileSystem.FindFiles(path, FileSet.Deep("*.xml"));
+            var files = fileSystem.FindFiles(path, FileSet.Deep("*.md"));
             files.Each(file =>
             {
                 var relativePath = file.PathRelativeTo(path);
@@ -74,7 +75,7 @@ namespace StoryTeller.Testing.ST
         {
             var added = ClassUnderTest.AddSpec("Sentences", "The Third Sentence");
 
-            var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.xml");
+            var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.md");
 
             added.data.name.ShouldBe("The Third Sentence");
             added.data.Filename.ShouldBe(expectedPath);
@@ -84,7 +85,7 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
-            var specification = XmlReader.ReadFromFile(expectedPath);
+            var specification = MarkdownReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("The Third Sentence");
 
             // Adds the spec to the node
@@ -98,7 +99,7 @@ namespace StoryTeller.Testing.ST
         {
             var added = ClassUnderTest.AddSpec("Sentences", "The Third Sentence??");
 
-            var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.xml");
+            var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.md");
 
             added.data.name.ShouldBe("The Third Sentence??");
             added.data.Filename.ShouldBe(expectedPath);
@@ -108,7 +109,7 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
-            var specification = XmlReader.ReadFromFile(expectedPath);
+            var specification = MarkdownReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("The Third Sentence??");
 
             // Adds the spec to the node
@@ -152,9 +153,9 @@ namespace StoryTeller.Testing.ST
         public void change_a_file()
         {
             var file = ClassUnderTest.Hierarchy.Specifications["general1"].Filename;
-            var old = XmlReader.ReadFromFile(file);
+            var old = MarkdownReader.ReadFromFile(file);
             old.Lifecycle = Lifecycle.Regression;
-            XmlWriter.WriteToXml(old).Save(file);
+            MarkdownWriter.WriteToFile(old, file);
 
             ClassUnderTest.Changed(file);
 
@@ -204,7 +205,7 @@ namespace StoryTeller.Testing.ST
 
             var added = ClassUnderTest.CloneSpecification("sentence2", "New Sentence");
 
-            var expectedPath = thePath.AppendPath("Sentences", "New_Sentence.xml");
+            var expectedPath = thePath.AppendPath("Sentences", "New_Sentence.md");
 
             added.hierarchy.ShouldBeTheSameAs(ClassUnderTest.Hierarchy.Top);
             added.data.Lifecycle.ShouldBe(Lifecycle.Acceptance);
@@ -215,7 +216,7 @@ namespace StoryTeller.Testing.ST
 
             ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
-            var specification = XmlReader.ReadFromFile(expectedPath);
+            var specification = MarkdownReader.ReadFromFile(expectedPath);
             specification.name.ShouldBe("New Sentence");
             specification.Children.Any().ShouldBe(true);
 
@@ -229,9 +230,9 @@ namespace StoryTeller.Testing.ST
         {
             var specification = new Specification {name = "Foo"};
 
-            var file = thePath.AppendPath("General", "Foo.xml");
+            var file = thePath.AppendPath("General", "Foo.md");
 
-            XmlWriter.WriteToXml(specification).Save(file);
+            MarkdownWriter.WriteToFile(specification, file);
 
             ClassUnderTest.Added(file);
 
@@ -267,12 +268,12 @@ namespace StoryTeller.Testing.ST
         public void save_specification_body()
         {
             var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
-            var specification = XmlReader.ReadFromFile(node.Filename);
+            var specification = MarkdownReader.ReadFromFile(node.Filename);
             specification.Children.Add(new Comment {Text = "a new comment"});
 
             ClassUnderTest.SaveSpecification(node.id, specification);
 
-            var written = XmlReader.ReadFromFile(node.Filename);
+            var written = MarkdownReader.ReadFromFile(node.Filename);
             written.Children.Last().ShouldBeOfType<Comment>()
                 .Text.ShouldBe("a new comment");
         }
@@ -281,11 +282,11 @@ namespace StoryTeller.Testing.ST
         public void save_specification_updates_expiration_period()
         {
             var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
-            var specification = XmlReader.ReadFromFile(node.Filename);
+            var specification = MarkdownReader.ReadFromFile(node.Filename);
             specification.ExpirationPeriod = 5;
 
             ClassUnderTest.SaveSpecification(node.id, specification);
-            var written = XmlReader.ReadFromFile(node.Filename);
+            var written = MarkdownReader.ReadFromFile(node.Filename);
             written.ExpirationPeriod.ShouldBe(5);
         }
 
@@ -319,7 +320,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.SetLifecycle("general1", newLifecycle);
 
             // Did save
-            XmlReader.ReadFromFile(spec.Filename).Lifecycle
+            MarkdownReader.ReadFromFile(spec.Filename).Lifecycle
                 .ShouldBe(newLifecycle);
 
 

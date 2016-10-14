@@ -25,5 +25,10 @@
       "commandLineArgs": "convert src/Specifications",
       "workingDirectory": "C:\\code\\storyteller"
     },
+	"Convert Samples": {
+      "commandName": "Project",
+      "commandLineArgs": "convert src/Storyteller.Gallery",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
   }
 }

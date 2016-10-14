@@ -1,6 +1,0 @@
-<Spec id="46412e01-5db5-4bc6-946a-e7e7fcfe030d" maxRetries="0" tags="" lifecycle="Acceptance" name="Array Failure Displays" lastUpdated="Monday, September 26, 2016" expirationPeriod="0">
-  <Array id="742f270c-4611-4cc0-bdce-25a63bff8ecb">
-    <TheNameArrayShouldBe names="Tom, Dick, Jane" />
-    <ReturnsEmpty names="Tom, Harold, Jane" />
-  </Array>
-</Spec>

@@ -1,6 +1,0 @@
-<Spec id="SometimesSlow" maxRetries="0" tags="" lifecycle="Acceptance" name="Occasionally Times Out">
-  <SometimesSlow id="8830a9be-79c5-4152-812a-8222ce399c76">
-    <Comment id="5d0a8e4a-0695-4123-8e85-11350ee10e7d">If in the 'slow' profile, this grammar will run for a minute</Comment>
-    <Slow />
-  </SometimesSlow>
-</Spec>
