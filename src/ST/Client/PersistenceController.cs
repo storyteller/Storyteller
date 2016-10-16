@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Baseline;
+using Oakton;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -242,7 +243,6 @@ namespace ST.Client
                 {
                     var node = MarkdownReader.ReadFromFile(file);
 
-
                     if (_hierarchy.Specifications.Has(node.id))
                     {
                         var old = _hierarchy.Specifications[node.id];
@@ -254,7 +254,7 @@ namespace ST.Client
                         node.WritePath(suite.path);
 
 
-                      
+
                         _client.SendMessageToClient(new SpecData
                         {
                             data = node,
@@ -263,10 +263,12 @@ namespace ST.Client
                         });
                     }
 
-
-
                     return true;
                 });
+            }
+            catch (IOException)
+            {
+                ConsoleWriter.Write(ConsoleColor.Yellow, $"Unable to reload {file}, file may be locked by your editor");
             }
             catch (Exception e)
             {
