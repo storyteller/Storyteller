@@ -44,5 +44,27 @@ namespace StoryTeller.Model
         {
             _grammars.Remove(grammar);
         }
+
+        public override GrammarModel Copy()
+        {
+            var model = new FixtureModel(key);
+            model.title = title;
+            model.implementation = implementation;
+            model.grammars = grammars.Select(x => x.Copy()).ToArray();
+            return model;
+        }
+
+        public override void ApplyOverrides(GrammarModel grammar)
+        {
+            var fixture = grammar as FixtureModel;
+            if (fixture == null) return;
+
+            title = fixture.title;
+            grammars.Each(g =>
+            {
+                var match = fixture.grammars.FirstOrDefault(x => x.key == g.key);
+                match?.ApplyOverrides(g);
+            });
+        }
     }
 }

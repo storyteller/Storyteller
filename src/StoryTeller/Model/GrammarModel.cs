@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
@@ -40,6 +41,15 @@ namespace StoryTeller.Model
         public void AddErrorRange(IEnumerable<GrammarError> grammarErrors)
         {
             _errors.AddRange(grammarErrors);
+        }
+
+        public virtual GrammarModel Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void ApplyOverrides(GrammarModel grammar)
+        {
         }
     }
 }

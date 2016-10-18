@@ -20,6 +20,31 @@ namespace StoryTeller.Model
 
         public readonly LightweightCache<string, FixtureModel> Models = new LightweightCache<string, FixtureModel>();
 
+        public FixtureLibrary ApplyOverrides(FixtureLibrary overrides)
+        {
+            var newLibrary = new FixtureLibrary();
+
+            Models.Each(model =>
+            {
+                newLibrary.Models[model.key] = (FixtureModel) model.Copy();
+            });
+
+            overrides.Models.Each(over =>
+            {
+                FixtureModel fixture;
+                if (!newLibrary.Models.TryRetrieve(over.key, out fixture))
+                {
+                    newLibrary.Models[over.key] = (FixtureModel) over.Copy();
+                }
+                else
+                {
+                    fixture.ApplyOverrides(over);
+                }
+            });
+
+            return newLibrary;
+        }
+
         public static bool IsFixtureType(Type type)
         {
             if (!type.CanBeCastTo<Fixture>()) return false;

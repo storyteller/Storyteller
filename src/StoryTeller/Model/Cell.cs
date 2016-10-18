@@ -333,6 +333,27 @@ namespace StoryTeller.Model
             OptionListName = listName;
             return this;
         }
+
+        public Cell Copy()
+        {
+            var cell = new Cell(CellHandling.Basic(), Key, Type);
+            cell.DefaultValue = DefaultValue;
+            cell.result = result;
+            cell.editor = editor;
+            cell.header = header;
+            cell.options = options?.Select(x => x.Copy()).ToArray();
+            cell.OptionListName = OptionListName;
+            cell.Position = Position;
+            return cell;
+        }
+
+        public void ApplyOverrides(Cell cell)
+        {
+            DefaultValue = cell.DefaultValue;
+            result = cell.result;
+            editor = cell.editor;
+            header = cell.header;
+        }
     }
 
     // Tested through integration tests in the SetVerificationGrammar

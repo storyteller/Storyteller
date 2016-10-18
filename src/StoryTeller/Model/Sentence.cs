@@ -35,5 +35,27 @@ namespace StoryTeller.Model
         {
             _cells.Add(cell);
         }
+
+        public override GrammarModel Copy()
+        {
+            var sentence = new Sentence();
+            sentence.key = key;
+            sentence.format = format;
+            sentence.cells = cells?.Select(x => x.Copy()).ToArray();
+            return sentence;
+        }
+
+        public override void ApplyOverrides(GrammarModel grammar)
+        {
+            var sentence = grammar as Sentence;
+            if (sentence == null) return;
+
+            format = sentence.format;
+            cells.Each(c =>
+            {
+                var match = sentence.cells.FirstOrDefault(x => x.Key == c.Key);
+                match?.ApplyOverrides(c);
+            });
+        }
     }
 }
