@@ -7,7 +7,7 @@ namespace StoryTeller.Model.Persistence.DSL
 {
     public class FixtureLoader
     {
-        public IEnumerable<FixtureModel> LoadFromPath(string path)
+        public static IEnumerable<FixtureModel> LoadFromPath(string path)
         {
             var fixturePaths = Directory.GetFiles(path)
                 .Where(file =>

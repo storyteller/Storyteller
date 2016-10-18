@@ -111,6 +111,9 @@ namespace ST.Client
             persistence.StartWatching(context.SpecPath);
             context.AddRemoteListener(persistence);
 
+            var dsl = _container.GetInstance<IFixtureController>();
+            dsl.StartWatching(context.FixturePath);
+            context.AddRemoteListener(dsl);
 
 #if DEBUG
             _watcher = new AssetFileWatcher(_container.GetInstance<IClientConnector>());
@@ -131,6 +134,4 @@ namespace ST.Client
         }
 
     }
-
-
 }

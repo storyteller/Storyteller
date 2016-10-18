@@ -22,8 +22,8 @@ namespace ST.Client
 
             ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
 
-
             ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
+            ForSingletonOf<IFixtureController>().Use<FixtureController>();
 
             For<IApplicationFiles>().Use(new ApplicationFiles(Directory.GetCurrentDirectory()));
 

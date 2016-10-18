@@ -37,6 +37,7 @@ namespace ST.Client
         }
 
         public string SpecPath => _input.SpecPath;
+        public string FixturePath => _input.FixturePath;
 
 
         public Task<SystemRecycled> Startup => _startup;
