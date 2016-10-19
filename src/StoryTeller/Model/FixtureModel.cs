@@ -65,6 +65,13 @@ namespace StoryTeller.Model
                 return g.ApplyOverrides(match);
             }).ToArray();
 
+            var keys = model.grammars.Select(x => x.key).ToList();
+            var missing = over.grammars.Where(x => !keys.Contains(x.key));
+            missing.Each(x =>
+            {
+                model.AddGrammar(x.ApplyOverrides(null));
+            });
+
             return model;
         }
     }

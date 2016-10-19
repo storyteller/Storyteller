@@ -20,6 +20,7 @@ namespace StoryTeller.Model
                 }
             }
         }
+
         public string format;
 
         public Sentence() : base("sentence")
@@ -45,7 +46,7 @@ namespace StoryTeller.Model
             if (over == null)
             {
                 sentence.format = format;
-                sentence.cells = cells?.Select(c => c.ApplyOverrides(null)).ToArray();
+                sentence.cells = cells.Select(c => c.ApplyOverrides(null)).ToArray();
                 return sentence;
             }
 
@@ -55,6 +56,13 @@ namespace StoryTeller.Model
                 var match = sentence.cells.FirstOrDefault(x => x.Key == c.Key);
                 return c.ApplyOverrides(match);
             }).ToArray();
+
+            var keys = sentence.cells.Select(x => x.Key).ToList();
+            var missing = over.cells.Where(x => !keys.Contains(x.Key));
+            missing.Each(c =>
+            {
+                sentence.AddCell(c.ApplyOverrides(null));
+            });
 
             return sentence;
         }

@@ -31,10 +31,8 @@ namespace StoryTeller.Model
                 newLibrary.Models[model.key] = (FixtureModel) model.ApplyOverrides(over);
             });
 
-            var keys = Models.Select(x => x.key).ToList();
-
+            var keys = newLibrary.Models.Select(x => x.key).ToList();
             var missing = overrides.Models.Where(x => !keys.Contains(x.key));
-
             missing.Each(model =>
             {
                 newLibrary.Models[model.key] = (FixtureModel) model.ApplyOverrides(null);

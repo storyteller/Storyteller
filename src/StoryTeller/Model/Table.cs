@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Baseline;
 
@@ -29,11 +30,16 @@ namespace StoryTeller.Model
 
             table.title = over.title.IsNotEmpty() ? over.title : title;
             table.collection = over.collection.IsNotEmpty() ? over.collection : collection;
-            table.cells = cells?.Select(c =>
+
+            var matchedCells = cells?.Select(c =>
             {
                 var match = over.cells.FirstOrDefault(x => x.Key == c.Key);
                 return c.ApplyOverrides(match);
-            }).ToArray();
+            }).ToList() ?? new List<Cell>();
+
+            var keys = table.cells.Select(x => x.Key).ToList();
+            var missingCells = over.cells.Where(x => !keys.Contains(x.Key)).Select(x => x.ApplyOverrides(null));
+            table.cells = matchedCells.Concat(missingCells).ToArray();
 
             return table;
         }
