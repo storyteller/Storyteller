@@ -1,24 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Baseline;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
     public class FixtureLoader
     {
-        public static IEnumerable<FixtureModel> LoadFromPath(string path)
+        public static string SelectFixturePath(string baseDirectory)
+        {
+            var specPath = baseDirectory.AppendPath("Fixtures");
+            if (Directory.Exists(specPath)) return specPath;
+
+            return specPath;
+        }
+
+        public static FixtureLibrary LoadFromPath(string path)
         {
             var fixturePaths = Directory.GetFiles(path)
                 .Where(file =>
                     Path.GetExtension(file).Equals(
-                        ".fixture",
+                        ".md",
                         StringComparison.OrdinalIgnoreCase));
 
-            foreach (var fixture in fixturePaths)
+            var lib = new FixtureLibrary();
+
+            foreach (var fp in fixturePaths)
             {
-                yield return FixtureReader.ReadFrom(File.ReadAllText(fixture));
+                var fixture = FixtureReader.ReadFrom(File.ReadAllText(fp));
+                lib.Models[fixture.key] = fixture;
             }
+
+            return lib;
         }
     }
 }

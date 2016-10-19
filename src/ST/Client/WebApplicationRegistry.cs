@@ -19,6 +19,7 @@ namespace ST.Client
             For<WebSocketsHandler>().Use(webSockets);
 
             For<ISpecFileWatcher>().Use<SpecFileWatcher>();
+            For<IFixtureFileWatcher>().Use<FixtureFileWatcher>();
 
             ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
 

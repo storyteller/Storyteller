@@ -1,61 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using Baseline;
 using Oakton;
-using StoryTeller.Files;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
 
 namespace ST.Client
 {
-    public interface IFixtureFileObserver : IDisposable
-    {
-        void Changed(string file);
-        void Added(string file);
-        void Deleted(string file);
-    }
-
-    public interface IFixtureFileWatcher : IDisposable
-    {
-        void WriteFiles(Action action);
-        void StartWatching(string path, IFixtureFileObserver observer);
-    }
-
-    public class FixtureFileWatcher : IFixtureFileWatcher, IChangeSetHandler
-    {
-        private FileChangeWatcher _watcher;
-        private IFixtureFileObserver _observer;
-
-        public void Handle(ChangeSet changes)
-        {
-            changes.Changed.Each(x => _observer.Changed(x.Path));
-            changes.Deleted.Each(x => _observer.Deleted(x));
-            changes.Added.Each(x => _observer.Added(x.Path));
-        }
-
-        public void Dispose()
-        {
-            _watcher?.Dispose();
-        }
-
-        public void WriteFiles(Action action)
-        {
-            _watcher.Latch(action);
-        }
-
-        public void StartWatching(string path, IFixtureFileObserver observer)
-        {
-            var fullPath = path.ToFullPath();
-            _watcher = new FileChangeWatcher(fullPath, FileSet.Deep("*.fixture"), this);
-            _watcher.Start();
-
-            _observer = observer;
-        }
-    }
-
     public interface IFixtureController
     {
         void StartWatching(string path);
@@ -67,7 +19,7 @@ namespace ST.Client
         private readonly IFixtureFileWatcher _watcher;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
-        private List<FixtureModel> _fixtures;
+        private FixtureLibrary _fixtures;
         private string _fixturePath;
 
         public FixtureController(IClientConnector client, IFixtureFileWatcher watcher)
@@ -84,7 +36,7 @@ namespace ST.Client
 
                 _lock.Write(() =>
                 {
-                    _fixtures = FixtureLoader.LoadFromPath(_fixturePath).ToList();
+                    _fixtures = FixtureLoader.LoadFromPath(_fixturePath);
                 });
 
                 _watcher.StartWatching(path, this);
@@ -158,7 +110,7 @@ namespace ST.Client
             }
             catch (Exception e)
             {
-                Logger.Error("Failed to handle an added file: " + file, e);
+                Logger.Error("Failed to handle a deleted file: " + file, e);
             }
         }
 

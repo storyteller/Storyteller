@@ -6,6 +6,7 @@ using StoryTeller;
 using ST.Client;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
 
 namespace ST.CommandLine
@@ -73,7 +74,7 @@ namespace ST.CommandLine
                 if (FixturesFlag.IsNotEmpty())
                     return FixturesFlag.ToFullPath();
 
-                return null;
+                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
             }
         }
 
