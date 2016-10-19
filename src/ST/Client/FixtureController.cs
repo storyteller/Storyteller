@@ -57,6 +57,10 @@ namespace ST.Client
 
                     ConsoleWriter.Write($"{file} changed");
 
+                    _fixtures.Models[fixture.key] = fixture;
+
+                    // send to client
+
                     return true;
                 });
             }
@@ -72,45 +76,28 @@ namespace ST.Client
 
         public void Added(string file)
         {
-            try
-            {
-                _lock.Read(() =>
-                {
-                    var fixture = FixtureReader.ReadFromFile(file);
-
-                    ConsoleWriter.Write($"{file} added");
-
-                    return true;
-                });
-            }
-            catch (IOException)
-            {
-                ConsoleWriter.Write(ConsoleColor.Yellow, $"Unable to load {file}, file may be locked by your editor");
-            }
-            catch (Exception e)
-            {
-                Logger.Error("Failed to handle an added file: " + file, e);
-            }
+            ReloadFixtures();
+            // send to client
         }
 
         public void Deleted(string file)
         {
+            ReloadFixtures();
+            // send to client
+        }
+
+        public virtual void ReloadFixtures()
+        {
             try
             {
-                _lock.Read(() =>
+                _lock.Write(() =>
                 {
-                    ConsoleWriter.Write($"{file} deleted");
-
-                    return true;
+                    _fixtures = FixtureLoader.LoadFromPath(_fixturePath);
                 });
-            }
-            catch (IOException)
-            {
-                ConsoleWriter.Write(ConsoleColor.Yellow, $"Unable to delete {file}, file may be locked by your editor");
             }
             catch (Exception e)
             {
-                Logger.Error("Failed to handle a deleted file: " + file, e);
+                Logger.Error("Failed to reload the fixtures", e);
             }
         }
 

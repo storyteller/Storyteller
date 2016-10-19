@@ -13,26 +13,29 @@ namespace StoryTeller.Model
         {
         }
 
-        public override GrammarModel Copy()
+        public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
             var table = new Table();
-            table.title = title;
-            table.collection = collection;
-            table.cells = cells?.Select(x => x.Copy()).ToArray();
-            return table;
-        }
+            table.key = key;
 
-        public override void ApplyOverrides(GrammarModel grammar)
-        {
-            var table = grammar as Table;
-            if (table == null) return;
-
-            title = table.title;
-            cells.Each(c =>
+            var over = grammar as Table;
+            if (over == null)
             {
-                var match = table.cells.FirstOrDefault(x => x.Key == c.Key);
-                match?.ApplyOverrides(c);
-            });
+                table.title = title;
+                table.collection = collection;
+                table.cells = cells?.Select(c => c.ApplyOverrides(null)).ToArray();
+                return table;
+            }
+
+            table.title = over.title.IsNotEmpty() ? over.title : title;
+            table.collection = over.collection.IsNotEmpty() ? over.collection : collection;
+            table.cells = cells?.Select(c =>
+            {
+                var match = over.cells.FirstOrDefault(x => x.Key == c.Key);
+                return c.ApplyOverrides(match);
+            }).ToArray();
+
+            return table;
         }
     }
 }

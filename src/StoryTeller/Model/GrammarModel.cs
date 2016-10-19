@@ -43,13 +43,9 @@ namespace StoryTeller.Model
             _errors.AddRange(grammarErrors);
         }
 
-        public virtual GrammarModel Copy()
+        public virtual GrammarModel ApplyOverrides(GrammarModel grammar)
         {
             throw new NotImplementedException();
-        }
-
-        public virtual void ApplyOverrides(GrammarModel grammar)
-        {
         }
     }
 }

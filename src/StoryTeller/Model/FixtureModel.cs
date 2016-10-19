@@ -45,26 +45,27 @@ namespace StoryTeller.Model
             _grammars.Remove(grammar);
         }
 
-        public override GrammarModel Copy()
+        public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
             var model = new FixtureModel(key);
-            model.title = title;
             model.implementation = implementation;
-            model.grammars = grammars.Select(x => x.Copy()).ToArray();
-            return model;
-        }
 
-        public override void ApplyOverrides(GrammarModel grammar)
-        {
-            var fixture = grammar as FixtureModel;
-            if (fixture == null) return;
-
-            title = fixture.title;
-            grammars.Each(g =>
+            var over = grammar as FixtureModel;
+            if (over == null)
             {
-                var match = fixture.grammars.FirstOrDefault(x => x.key == g.key);
-                match?.ApplyOverrides(g);
-            });
+                model.title = title;
+                model.grammars = grammars.Select(x => x.ApplyOverrides(null)).ToArray();
+                return model;
+            }
+
+            model.title = over.title.IsNotEmpty() ? over.title : title;
+            model.grammars = grammars.Select(g =>
+            {
+                var match = over.grammars.FirstOrDefault(x => x.key == g.key);
+                return g.ApplyOverrides(match);
+            }).ToArray();
+
+            return model;
         }
     }
 }

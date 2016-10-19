@@ -334,25 +334,31 @@ namespace StoryTeller.Model
             return this;
         }
 
-        public Cell Copy()
+        public Cell ApplyOverrides(Cell over)
         {
             var cell = new Cell(CellHandling.Basic(), Key, Type);
-            cell.DefaultValue = DefaultValue;
-            cell.result = result;
-            cell.editor = editor;
-            cell.header = header;
-            cell.options = options?.Select(x => x.Copy()).ToArray();
             cell.OptionListName = OptionListName;
             cell.Position = Position;
-            return cell;
-        }
 
-        public void ApplyOverrides(Cell cell)
-        {
-            DefaultValue = cell.DefaultValue;
-            result = cell.result;
-            editor = cell.editor;
-            header = cell.header;
+            if (over == null)
+            {
+                cell.DefaultValue = DefaultValue;
+                cell.result = result;
+                cell.editor = editor;
+                cell.header = header;
+                cell.options = options?.Select(x => x.Copy()).ToArray();
+                return cell;
+            }
+
+            cell.DefaultValue = over.DefaultValue.IsNotEmpty() ? over.DefaultValue : DefaultValue;
+            cell.result = over.result.IsNotEmpty() ? over.result : result;
+            cell.editor = over.editor.IsNotEmpty() ? over.editor : editor;
+            cell.header = over.header.IsNotEmpty() ? over.header : header;
+            cell.options = over.options != null
+                ? over.options?.Select(x => x.Copy()).ToArray()
+                : options?.Select(x => x.Copy()).ToArray();
+
+            return cell;
         }
     }
 

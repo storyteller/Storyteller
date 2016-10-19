@@ -26,20 +26,18 @@ namespace StoryTeller.Model
 
             Models.Each(model =>
             {
-                newLibrary.Models[model.key] = (FixtureModel) model.Copy();
+                FixtureModel over;
+                overrides.Models.TryRetrieve(model.key, out over);
+                newLibrary.Models[model.key] = (FixtureModel) model.ApplyOverrides(over);
             });
 
-            overrides.Models.Each(over =>
+            var keys = Models.Select(x => x.key).ToList();
+
+            var missing = overrides.Models.Where(x => !keys.Contains(x.key));
+
+            missing.Each(model =>
             {
-                FixtureModel fixture;
-                if (!newLibrary.Models.TryRetrieve(over.key, out fixture))
-                {
-                    newLibrary.Models[over.key] = (FixtureModel) over.Copy();
-                }
-                else
-                {
-                    fixture.ApplyOverrides(over);
-                }
+                newLibrary.Models[model.key] = (FixtureModel) model.ApplyOverrides(null);
             });
 
             return newLibrary;
