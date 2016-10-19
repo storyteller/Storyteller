@@ -19,11 +19,12 @@ namespace ST.Client
             For<WebSocketsHandler>().Use(webSockets);
 
             For<ISpecFileWatcher>().Use<SpecFileWatcher>();
+            For<IFixtureFileWatcher>().Use<FixtureFileWatcher>();
 
             ForSingletonOf<AssetFileWatcher>().Use<AssetFileWatcher>();
 
-
             ForSingletonOf<IPersistenceController>().Use<PersistenceController>();
+            ForSingletonOf<IFixtureController>().Use<FixtureController>();
 
             For<IApplicationFiles>().Use(new ApplicationFiles(Directory.GetCurrentDirectory()));
 

@@ -22,5 +22,10 @@ namespace StoryTeller.Model
         {
             return values.Select(x => new Option {display = x, value = x}).ToArray();
         }
+
+        public Option Copy()
+        {
+            return new Option(display, value);
+        }
     }
 }

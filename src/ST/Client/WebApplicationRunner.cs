@@ -63,7 +63,6 @@ namespace ST.Client
             var registry = new WebApplicationRegistry(webSocketsAddress, webSockets, Controller, context);
             _container = new Container(registry);
 
-            
 
             var baseDirectory = AppContext.BaseDirectory;
             var host = new WebHostBuilder()
@@ -111,6 +110,9 @@ namespace ST.Client
             persistence.StartWatching(context.SpecPath);
             context.AddRemoteListener(persistence);
 
+            var dsl = _container.GetInstance<IFixtureController>();
+            dsl.StartWatching(context.FixturePath);
+            context.AddRemoteListener(dsl);
 
 #if DEBUG
             _watcher = new AssetFileWatcher(_container.GetInstance<IClientConnector>());
@@ -131,6 +133,4 @@ namespace ST.Client
         }
 
     }
-
-
 }

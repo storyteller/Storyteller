@@ -12,6 +12,18 @@ namespace StoryTeller.Model.Persistence.Markdown
             return trimmed.StartsWith("#") && !trimmed.StartsWith("##");
         }
 
+        public static bool IsHeaderTwo(this string line)
+        {
+            var trimmed = line.Trim();
+            return trimmed.StartsWith("##") && !trimmed.StartsWith("###");
+        }
+
+        public static bool IsHeaderThree(this string line)
+        {
+            var trimmed = line.Trim();
+            return trimmed.StartsWith("###");
+        }
+
         public static bool IsMetadata(this string line)
         {
             var trimmed = line.Trim();

@@ -131,8 +131,6 @@ namespace StoryTeller
                 grammars.Add(model);
             });
 
-
-
             return new FixtureModel(Key)
             {
                 title = Title ?? Key.SplitCamelCase(),

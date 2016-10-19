@@ -6,6 +6,7 @@ using StoryTeller;
 using ST.Client;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
 
 namespace ST.CommandLine
@@ -50,6 +51,11 @@ namespace ST.CommandLine
         [Description("Sets a minimum number of retry attempts for this execution")]
         public int RetriesFlag { get; set; }
 
+        [Description("Optional. Override the fixtures directory")]
+        [FlagAlias("fixtures", 'f')]
+        public string FixturesFlag { get; set; }
+
+
         public string SpecPath
         {
             get
@@ -58,6 +64,17 @@ namespace ST.CommandLine
                     return SpecsFlag.ToFullPath();
 
                 return HierarchyLoader.SelectSpecPath(Path.ToFullPath());
+            }
+        }
+
+        public string FixturePath
+        {
+            get
+            {
+                if (FixturesFlag.IsNotEmpty())
+                    return FixturesFlag.ToFullPath();
+
+                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
             }
         }
 
