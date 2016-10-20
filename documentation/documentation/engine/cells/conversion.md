@@ -4,7 +4,7 @@
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The type conversion is all new in Storyteller 3.0 and has no dependencies on external libraries other than the .Net CLR itself. The change was made as a minor performance improvement over the older mechanism from FubuCore and with the desire to eliminate direct coupling to external libraries for easier adoption.</div>
 
-Specifications are largely created by entering text into the editor and stored on disk as Xml (I know, but backward compatibility mattered). Storyteller 3 features a new conversion function to help convert the raw string data into the correct Type's your fixture and grammar code needs to execute. 
+Specifications are largely created by entering text into the editor and stored on disk as Xml (I know, but backward compatibility mattered). Storyteller 3 features a new conversion function to help convert the raw string data into the correct Types your fixture and grammar code needs to execute. 
 
 Even though the subsystem and this topic both use the "Conversion" nomenclature, the resolution from a raw string to the real value in actual usage has been:
 
@@ -13,7 +13,7 @@ Even though the subsystem and this topic both use the "Conversion" nomenclature,
 1. Using the raw text to lookup data in the system under test using the system's persistence infrastructure
 1. Creating missing system data on the fly if it did not already exist
 
-The conversion subsystem supports the most common Cell types out of the box, but also provides a couple extension points that _should_ accomodate any need.
+The conversion subsystem supports the most common Cell types out of the box, but also provides a couple of extension points that _should_ accomodate any need.
 
 ## What's in the Box?
 
@@ -27,7 +27,7 @@ Out of the box, the conversions can handle converting raw string input to .Net t
 * Nullable&lt;T&gt; -- assuming that Storyteller knows how to convert a string to whatever "T" is. "NULL" is converted to a null value.
 * Array of T -- again, assuming that Storyteller understands how to convert a string to the type "T", this conversion works by treating the raw text as a comma delimited string of values.
 * ctor(string) -- Any concrete type that has a public constructor function with a single parameter that takes in a string can be converted by calling that constructor function with the raw value. Or "NULL" to denote a null value.
-* DateTime's -- more on this below.
+* DateTimes -- more on this below.
 
 
 ## By ctor(string)
@@ -48,7 +48,7 @@ The inspiration for this feature was taken from a software system that tracked s
 
 Using this conversion may allow you to express hierarchical data in a concise, more readable format than you would be able to achieve by strictly supplying raw values for every raw property of a type.
 
-You can think of this pattern as a built in [interpreter patter](http://en.wikipedia.org/wiki/Interpreter_pattern) -- crude as it may be.
+You can think of this pattern as a built in [interpreter pattern](http://en.wikipedia.org/wiki/Interpreter_pattern) -- crude as it may be.
 
 
 
@@ -59,7 +59,7 @@ Custom conversions come in two different flavors, with the simpler version being
 
 <[sample:IConversionProvider]>
 
-Internally, Storyteller treats all the conversion providers as a [chain of responsibility](http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) such that the first provider that "knows" how to handle a type provides the actual conversion strategy as a simple `Func&lt;string, object&gt;` func. User supplied providers are evaluated before the built in providers.
+Internally, Storyteller treats all the conversion providers as a [chain of responsibility](http://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) such that the first provider that "knows" how to handle a type provides the actual conversion strategy as a simple `Func<string, object>` func. User supplied providers are evaluated before the built in providers.
 
 A sample provider is the `EnumerationConversion` taken from the Storyteller code itself that handles any .Net Enumeration type:
 
@@ -93,7 +93,7 @@ The `Conversions` property of `CellHandling` allows you to add custom `IConversi
 
 <[sample:registering-custom-runtime-converter]>
 
-## DateTime's
+## DateTimes
 
 <div class="alert alert-info" role="alert">
 
