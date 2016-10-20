@@ -1,6 +1,6 @@
 <!--Title: Cells-->
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong> Cell's in Stortyteller are <b>not</b> limited to being scalar or simple value types like strings or numbers or date's. If Storyteller "knows" how to convert or locate an object type from a string, that type can be used as a a Cell. See <[linkto:documentation/engine/cells/conversion]> for more information.</div>
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Cells in Stortyteller are <b>not</b> limited to being scalar or simple value types like strings or numbers or dates. If Storyteller "knows" how to convert or locate an object type from a string, that type can be used as a a Cell. See <[linkto:documentation/engine/cells/conversion]> for more information.</div>
 
 
 If you had a sentence grammar (explained below) with the template "Enter the user name {username}", the value _username_ is a _Cell_ used to collect information from a user. The template above would result in this bit of html in the specification editor:
@@ -9,11 +9,11 @@ If you had a sentence grammar (explained below) with the template "Enter the use
 
 <br />
 
-Cells can be either inputs (the "Arrange" or "Act" portion of a specification) or assertion values that will be verified as an expectation against an actual value (the "Assert" part of a specification). As discussed in the following sections, Cell's can be customized to provide better usability in the user inferface tooling or html rendering.
+Cells can be either inputs (the "Arrange" or "Act" portion of a specification) or assertion values that will be verified as an expectation against an actual value (the "Assert" part of a specification). As discussed in the following sections, Cells can be customized to provide better usability in the user inferface tooling or html rendering.
 
 ## Asserting Values
 
-[Smoke tests](http://en.wikipedia.org/wiki/Smoke_testing_(software)) that simply prove that an operation does not blow up with exceptions can be useful, but sooner or later you will probably want to assert that some value or state in the system under test matches your expectation. In Storyteller, some Cell's can act as assertions to compare the expected value input by the specification author against the actual value. Revisiting the Calculator problem domain from the tutorial, the html results for successful, failed, and invalid cell assertions are shown in the sample specification below:
+[Smoke tests](http://en.wikipedia.org/wiki/Smoke_testing_(software)) that simply prove that an operation does not blow up with exceptions can be useful, but sooner or later you will probably want to assert that some value or state in the system under test matches your expectation. In Storyteller, some Cells can act as assertions to compare the expected value input by the specification author against the actual value. Revisiting the Calculator problem domain from the tutorial, the html results for successful, failed, and invalid cell assertions are shown in the sample specification below:
 
 <[spec-result:Calculator/Assertions]>
 
