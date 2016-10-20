@@ -19,7 +19,7 @@ st run src/Specifications --profile PhantomJS
 st open src/Specifications --profile Firefox
 </pre>
 
-In your own application code, either in a custom <[linkto:documentation/engine/system_under_test;title=ISystem]> or in `<[linkto:documentation/engine/fixtures;title=Fixture]>`classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):
+In your own application code, either in a custom <[linkto:documentation/engine/system_under_test;title=ISystem]> or in  <[linkto:documentation/engine/fixtures;title=Fixture]> classes, you can find the current profile used to lauch the application -- if one exists -- with this syntax (taken from some Storyteller testing code where we were testing timeouts):
 
 <[sample:using-project-current-profile]>
 
