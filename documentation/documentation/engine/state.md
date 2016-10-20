@@ -4,7 +4,7 @@
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The API for storing and retrieving state across <code>Fixture</code> objects is a breaking change in 3.0 from earlier versions. This was done to conceptually untangle state management from any running application container. </div>
 
-While many if not most specifications will be authored with the grammars in a single `Fixture`, it is very possible and frequently desirable to use multiple `Fixture` sections within a specification body. Fortunately, Storyteller has a mechanism in `Fixture's` to store and retrieve object state within the execution of a specification.
+While many if not most specifications will be authored with the grammars in a single `Fixture`, it is very possible and frequently desirable to use multiple `Fixture` sections within a specification body. Fortunately, Storyteller has a mechanism in `Fixtures` to store and retrieve object state within the execution of a specification.
 
 
 ## Using Fixture.Context.State
@@ -25,11 +25,11 @@ Here is a typical usage of the state bag. Let's say that you are working on an i
 
 <[sample:invoice-invoice-detail]>
 
-Pretend that the class below is much more complicated than it really is;-).
+Pretend that the class below is much more complicated than it really is ;-).
 
 <[sample:sets-invoice-detail]>
 
-With Storyteller's mantra of self-contained specifications in mind, you need some `Fixture's` to construct new `Invoice` and `InvoiceDetail` objects. If an `InvoiceDetail` was sufficiently complicated, I would probably choose to:
+With Storyteller's mantra of self-contained specifications in mind, you need some `Fixtures` to construct new `Invoice` and `InvoiceDetail` objects. If an `InvoiceDetail` was sufficiently complicated, I would probably choose to:
 1. Create a `Fixture` completely dedicated to creating a single detail 
 1. Create a `Fixture` to set up the state of a single `Invoice`
 1. Use the invoice detail `Fixture` as an <[linkto:documentation/engine/grammars/embedded_section;title=embedded section]> within a `Fixture` for the `Invoice` setup.
