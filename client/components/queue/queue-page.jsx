@@ -1,28 +1,28 @@
-var React = require("react");
-var {Button} = require('react-bootstrap');
-var { connect } = require('react-redux');
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-var Postal = require('postal');
+import Postal from 'postal';
 
-var CommandLink = require('./../explorer/command-link');
-var icons = require('./../icons');
-var SuitePath = require('./../explorer/suite-path');
+import CommandLink from './../explorer/command-link';
+import icons from './../icons';
+import SuitePath from './../explorer/suite-path';
 
 
 function getQueue(state){
-    var specs = state.get('specs');
-    var queued = state.get('queued');
-    
+    const specs = state.get('specs');
+    const queued = state.get('queued');
+
     return {
-        queued: queued,
-        specs: specs
+      queued,
+      specs
     };
 }
 
-var cancelAll = e => {
+const cancelAll = e => {
 	Postal.publish({
 		channel: 'engine-request',
-		topic: 'cancel-all-specs', 
+		topic: 'cancel-all-specs',
 		data: {type: 'cancel-all-specs'}
 	});
 
@@ -30,46 +30,44 @@ var cancelAll = e => {
 }
 
 function QueueItem({spec}){
-    var id = spec.id;
+    const id = spec.id;
 
-    var createMessage = function(){
+    const createMessage = function(){
         return {type: 'cancel-spec', id: id};
     }
 
-    var Icon = icons[spec.icon(null, [], {})];
-    var icon = (<Icon />);
-    
-    var divId = 'queued-spec-' + id;
+    const Icon = icons[spec.icon(null, [], {})];
+    const icon = (<Icon />);
+
+    const divId = 'queued-spec-' + id;
 
     return (
-        <div id={divId}>
-            {icon}
-            <SuitePath path={spec.path} linkToLeaf={true} />
-            <span> / </span>
-            <span className="queued-spec-name">{spec.title}</span>
-            <CommandLink createMessage={createMessage} text="cancel" />
-        </div>
+      <div id={divId}>
+        {icon}
+        <SuitePath path={spec.path} linkToLeaf={true} />
+        <span> / </span>
+        <span className="queued-spec-name">{spec.title}</span>
+        <CommandLink createMessage={createMessage} text="cancel" />
+      </div>
     );
 }
 
 
 function QueuePage({queued, specs}){
-    var queue = queued.map(id => specs.get(id));
-    
-    var i = 0;
-    var items = queue.map(spec => {
-        return (
-            <QueueItem spec={spec} key={++i} />
-        );
-    });
+  const queue = queued.map(id => specs.get(id));
 
+  const items = queue.map((spec, i) => {
     return (
-        <div>
-            <h3>Execution Queue <Button id="cancel-all-specs" onClick={cancelAll}>Cancel All</Button></h3>
-            {items}
-        </div>
-
+      <QueueItem spec={spec} key={i} />
     );
+  });
+
+  return (
+    <div>
+      <h3>Execution Queue <Button id="cancel-all-specs" onClick={cancelAll}>Cancel All</Button></h3>
+      {items}
+    </div>
+  );
 }
 
 

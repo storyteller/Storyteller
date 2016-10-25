@@ -1,16 +1,16 @@
-var React = require("react");
-var {Modal, Button, NavItem} = require('react-bootstrap');
-var Icons = require('./../icons');
-var SpecAndSuiteLookup = require('./spec-and-suite-lookup');
-var Postal = require('postal');
+import React from 'react';
+import {Modal, Button, NavItem} from 'react-bootstrap';
+import Icons from './../icons';
+import SpecAndSuiteLookup from './spec-and-suite-lookup';
+import Postal from 'postal';
 
 class Search extends React.Component{
     constructor(){
         super();
-        
+
         this.state = { showModal: false };
     }
-    
+
 	componentDidMount(){
 		Postal.subscribe({
 			channel: 'explorer',
@@ -22,7 +22,7 @@ class Search extends React.Component{
 			}
 		});
 	}
-    
+
 	close() {
 		this.setState({ showModal: false });
 	}
@@ -65,4 +65,4 @@ class Search extends React.Component{
 
 
 
-module.exports = Search;
+export default Search;

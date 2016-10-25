@@ -1,8 +1,8 @@
-var React = require("react");
-var Postal = require('postal');
+import React from 'react';
+import Postal from 'postal';
 
-var {Button, Badge} = require('react-bootstrap');
-var { connect } = require('react-redux');
+import {Button, Badge} from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 function getCount(state){
     return {count: state.get('fixtures').errorCount()};
@@ -14,13 +14,12 @@ function GrammarCount({count}){
         return (<span />);
     }
 
-    var onclick = function(){
+    const onclick = function(){
         window.location = '#/grammar-errors'
     }
 
     return (
         <Button id="grammar-error-count" bsStyle="link" onClick={onclick}><Badge>{count}</Badge> grammar errors</Button>
-
     );
 }
 

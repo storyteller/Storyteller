@@ -1,11 +1,11 @@
-var React = require("react");
-var {Alert} = require('react-bootstrap');
-var { connect } = require('react-redux');
+import React from 'react';
+import { Alert } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 
 function toErrorMessage(data){
 	if (data.error != null && data.message != null){
-		return data.message + " -> " + data.error;
+		return `${data.message} -> ${data.error}`;
 	}
 
 	return data.message || data.error;
@@ -13,7 +13,7 @@ function toErrorMessage(data){
 
 
 function FixtureError({error}){
-    var text = toErrorMessage(error);
+    const text = toErrorMessage(error);
 
     return (
         <pre>{text}</pre>
@@ -21,9 +21,9 @@ function FixtureError({error}){
 }
 
 function GrammarError({error, grammar}){
-    var text = toErrorMessage(error);
+    const text = toErrorMessage(error);
 
-    var title = null;
+    let title = null;
     if (grammar != null && grammar != 'null'){
         title = (<h4>Grammar: {grammar}</h4>);
     }
@@ -39,7 +39,7 @@ function GrammarError({error, grammar}){
 }
 
 function FixtureHeader({fixture}){
-    var title = fixture.key + ' implemented by ' + fixture.implementation + ' (' + fixture.title + ')';
+    const title = fixture.key + ' implemented by ' + fixture.implementation + ' (' + fixture.title + ')';
 
     return (
         <h3>{title}</h3>
@@ -53,9 +53,9 @@ var getReport = function(state){
 }
 
 function GrammarReport({report}){
-    var body = [];
+    const body = [];
 
-    var i = 0;
+    let i = 0;
 
     report.forEach(fixture => {
         var header = (<FixtureHeader fixture={fixture} key={++i} />);
@@ -74,7 +74,7 @@ function GrammarReport({report}){
         });
 
         body.push(<hr key={++i} />);
- 
+
     });
 
 

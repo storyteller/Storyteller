@@ -1,9 +1,9 @@
-var React = require("react");
-var ReactDOM = require('react-dom');
-var $ = require('jquery');
-var Search = require('./../../lib/presentation/search');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
+import Search from './../../lib/presentation/search';
 
-var {connect} = require('react-redux');
+import { connect } from 'react-redux';
 
 function getState(state){
     return {
@@ -28,20 +28,19 @@ class SuiteAndSpecLookup extends React.Component {
 		{
 		  name: 'options',
 		  displayKey: 'title',
-		  
+
 		  source: finder,
 		  templates: {
 			empty: '<div class="empty-message">No matches found</div>',
 			suggestion: _.template('<div><%= title%></div>')
 		  }
 		});
-		
+
 		$(element).on('typeahead:selected', (jquery, option) => {
 			this.props.close();
 			window.location = option.url;
-
 		});
-		
+
 		input.focus();
 	}
 

@@ -1,34 +1,33 @@
-var React = require("react");
-var {Button, Modal} = require('react-bootstrap');
-var uuid = require('node-uuid');
-var Icons = require('./../icons');
+import React from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import uuid from 'node-uuid';
+import Icons from './../icons';
 
-var SystemProperties = function({system}){
-    var propDefs = [];
-    var properties = system.get('properties');
-    
-    var i = 0;
+const SystemProperties = function({system}){
+    const propDefs = [];
+    const properties = system.get('properties');
 
-    var entries = properties.toJS();
-    for (var key in entries){
-        var dt = ( <dt key={++i}>{key}</dt> );
-        var dd = ( <dd key={++i}>{entries[key]}</dd> );
+    let i = 0;
 
-        propDefs.push(dt);
-        propDefs.push(dd);
+    const entries = properties.toJS();
+    for (let key in entries){
+      const dt = ( <dt key={++i}>{key}</dt> );
+      const dd = ( <dd key={++i}>{entries[key]}</dd> );
+
+      propDefs.push(dt);
+      propDefs.push(dd);
     }
 
-
     return (
-            <dl className="dl-horizontal">
-                <dt>System Name</dt>
-                <dd>{system.get('system_name')}</dd>
-                {propDefs}
-            </dl>
+      <dl className="dl-horizontal">
+          <dt>System Name</dt>
+          <dd>{system.get('system_name')}</dd>
+          {propDefs}
+      </dl>
     );
 }
 
-var SystemError = function({system}){
+const SystemError = function({system}){
     if (system.get('success')){
         return (
             <div></div>
@@ -47,55 +46,48 @@ class RecycleState extends React.Component{
     }
 
     render(){
-        var handleToggle = () => {
-            this.setState({
-                showModal: !this.state.showModal
-            });
-        }
-        
-        var close = () => this.setState({showModal: false});
-        
-		if (this.props.system.get('recycling')){
-			var Running = Icons['running'];
-		
-			return (
-				<Button bsStyle="link"><Running />Recycling...</Button>
-			);
-		}
-	
-		var bsStyle = 'link';
-		var date = this.props.system.get('time');
-		var text = 'Recycled at ' + date;
+      const handleToggle = () => {
+          this.setState({
+              showModal: !this.state.showModal
+          });
+      }
 
-		if (!this.props.system.get('success')){
-			bsStyle = "danger";
-			text = "Recycle Failure!";
-		}
+      const close = () => this.setState({showModal: false});
 
+      if (this.props.system.get('recycling')){
+        const Running = Icons['running'];
 
-		return (
-			<Button onClick={handleToggle} bsStyle={bsStyle}>{text}
-			<Modal show={this.state.showModal} onHide={close}>
-	          <Modal.Header closeButton>
-	            <Modal.Title>System State</Modal.Title>
-	          </Modal.Header>
-	          <Modal.Body>
-			      <SystemProperties system={this.props.system} />
-			      <SystemError system={this.props.system} />
-	          </Modal.Body>
-	          <Modal.Footer>
-	          	<Button onClick={close}>Close</Button>
-	          </Modal.Footer>
-			</Modal>
-			</Button>
+        return (
+          <Button bsStyle="link"><Running />Recycling...</Button>
+        );
+      }
 
+      let bsStyle = 'link';
+      const date = this.props.system.get('time');
+      let text = 'Recycled at ' + date;
 
-		);
+      if (!this.props.system.get('success')){
+        bsStyle = 'danger';
+        text = 'Recycle Failure!';
+      }
+
+      return (
+        <Button onClick={handleToggle} bsStyle={bsStyle}>{text}
+          <Modal show={this.state.showModal} onHide={close}>
+            <Modal.Header closeButton>
+              <Modal.Title>System State</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <SystemProperties system={this.props.system} />
+            <SystemError system={this.props.system} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={close}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+        </Button>
+      );
     }
 }
-
-
-
-
 
 module.exports = RecycleState;

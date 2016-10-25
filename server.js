@@ -60,7 +60,13 @@ app.post('/comments.json', function(req, res) {
   res.send(JSON.stringify(comments));
 });
 
-app.listen(3000);
+app.listen(3000, function (err) {
+  if (err) {
+    console.log(err);
+  }
+
+  console.log('Server Listening at localhost:3000');
+});
 
 new WebpackDevServer(webpack(config), {
   contentBase: 'http://localhost:3000',
@@ -68,11 +74,12 @@ new WebpackDevServer(webpack(config), {
   stats: {
     colors: true
   },
+  quiet: true,
   hot: true
 }).listen(3001, function (err) {
   if (err) {
     console.log(err);
   }
 
-  console.log('Listening at localhost:3000');
+  console.log('Webpack Dev Server Listening at localhost:3001');
 });

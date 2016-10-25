@@ -1,38 +1,37 @@
-var React = require("react");
-var Postal = require('postal');
-var Icons = require('./../icons');
-var {Button} = require('react-bootstrap');
-var { connect } = require('react-redux');
-var _ = require('lodash');
+import React from 'react';
+import Postal from 'postal';
+import Icons from './../icons';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 function getState(state){
-    return {specs: state.get('specs')}
+    return { specs: state.get('specs') }
 }
 
 function UnsavedChanges({specs}){
-    var dirties = specs.toList().toArray().filter(x => x.spec.isDirty());
+    const dirties = specs.toList().toArray().filter(x => x.spec.isDirty());
 
     if (dirties.length == 0) return (<span />);
 
-    var SaveIcon = Icons['save'];
+    const SaveIcon = Icons['save'];
 
-    var onClick = e => {
-        dirties.forEach(spec => {
-            var message = {
-                type: 'save-spec-body',
-                id: spec.id,
-                spec: spec.write(),
-                revision: spec.revision
-            };
+    const onClick = e => {
+      dirties.forEach(spec => {
+        const message = {
+          type: 'save-spec-body',
+          id: spec.id,
+          spec: spec.write(),
+          revision: spec.revision
+        };
 
-            Postal.publish({
-                channel: 'engine-request',
-                topic: 'save-spec-body',
-                data: message
-            });
+        Postal.publish({
+          channel: 'engine-request',
+          topic: 'save-spec-body',
+          data: message
         });
+      });
 
-        e.preventDefault();
+      e.preventDefault();
     };
 
     return (

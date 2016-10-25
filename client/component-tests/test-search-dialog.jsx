@@ -1,7 +1,7 @@
-var expect = require('chai').expect;
-var Search = require('./../components/header/search');
-var ComponentHarness = require('./component-harness');
-var React = require('react');
+import { expect } from 'chai';
+import React from 'react';
+import Search from './../components/header/search';
+import ComponentHarness from './component-harness';
 
 describe('The Search Dialog', () => {
 	var component, harness;
@@ -11,7 +11,7 @@ describe('The Search Dialog', () => {
         harness = new ComponentHarness();
         harness.render(component);
 	});
-    
+
     it('can display the search modal without error', () => {
         harness.click('#search-button');
     });

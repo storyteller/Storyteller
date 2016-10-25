@@ -1,74 +1,71 @@
-var React = require("react");
-var Postal = require('postal');
-var icons = require('./../icons');
+import React from 'react';
+import Postal from 'postal';
+import icons from './../icons';
 
-var CommandLink = require('./command-link');
-var CommandWithNameEntryLink = require('./command-with-name-entry-link');
-var DeleteLink = require('./delete-link');
-var _ = require('lodash');
+import CommandLink from './command-link';
+import CommandWithNameEntryLink from './command-with-name-entry-link';
+import DeleteLink from './delete-link';
+import _ from 'lodash';
 
-var toCloneText = (text) => {
-	if (_.endsWith(text, ' Copy')) {
-		return text + ' 1';
-	}
-	else if (_.contains(text, ' Copy ')) {
-		return text.replace(/Copy \d+/, function (attr) { return attr.replace(/\d+/, function(n) { return ++n; }); });
-	}
-	else {
-		return text + ' Copy';
-	}
+const toCloneText = (text) => {
+  if (_.endsWith(text, ' Copy')) {
+    return text + ' 1';
+  }
+  else if (_.contains(text, ' Copy ')) {
+    return text.replace(/Copy \d+/, function (attr) { return attr.replace(/\d+/, function(n) { return ++n; }); });
+  }
+  else {
+    return text + ' Copy';
+  }
 }
 
 function CloneLink(props){
-    var toMessage = name => {return {type: 'clone-spec', id: props.spec.id, name: name}};
-    var defaultValue = toCloneText(props.spec.title);
+  const toMessage = name => {return {type: 'clone-spec', id: props.spec.id, name: name}};
+  const defaultValue = toCloneText(props.spec.title);
 
-    return (
-        <CommandWithNameEntryLink 
-            title="Clone a Specification" 
-            text="clone" 
-            commandText="Clone" 
-            toMessage={toMessage}
-            value={defaultValue} />
-    );
+  return (
+    <CommandWithNameEntryLink
+      title="Clone a Specification"
+      text="clone"
+      commandText="Clone"
+      toMessage={toMessage}
+      value={defaultValue} />
+  );
 }
 
 function SpecLeaf(props){
-    var onclick = e => {
+  const onclick = e => {
+    e.preventDefault();
+  }
 
-        e.preventDefault();
-    }
+  const iconName = props.spec.icon(props.running, props.queued, props.progress);
+  const Icon = icons[iconName];
+  const icon = (<Icon />);
 
-    var iconName = props.spec.icon(props.running, props.queued, props.progress);
-    var Icon = icons[iconName];
-    var icon = (<Icon />);
+  let clazz = 'spec-name spec-state-' + props.spec.state;
 
-    var clazz = 'spec-name spec-state-' + props.spec.state;
+  let spec = props.spec;
 
-    var spec = props.spec;
+  let link = null;
+  if (iconName !== 'queued' && !iconName.includes('running')){
+      const buildMessage = () => {return {type: 'run-spec', id: spec.id}};
 
-    var link = null;
-    if (iconName != 'queued' && !iconName.includes('running')){
-        var buildMessage = () => {return {type: 'run-spec', id: spec.id}};
+      link = (<CommandLink identifier="run" createMessage={buildMessage} text="run" />);
+  }
 
-        link = (<CommandLink identifier="run" createMessage={buildMessage} text="run" />);
-    }
+  let href = '#/spec/editing/' + spec.id;
+  if (spec.hasResults()){
+      href = '#/spec/results/' + spec.id;
+  }
 
-    var href = '#/spec/editing/' + spec.id;
-    if (spec.hasResults()){
-        href = '#/spec/results/' + spec.id;
-    }
-
-    
-
-    return (
-        <div className="spec-leaf" data-path={props.spec.spec.path}>
-            {icon}
-            <a href={href} className={clazz}>{props.spec.title}</a>
-            {link}<CloneLink {...props} />
-            <DeleteLink spec={props.spec}/>
-        </div>
-    );
+  return (
+    <div className="spec-leaf" data-path={props.spec.spec.path}>
+      {icon}
+      <a href={href} className={clazz}>{props.spec.title}</a>
+      {link}<CloneLink {...props} />
+      <DeleteLink spec={props.spec}/>
+    </div>
+  );
 }
 
 

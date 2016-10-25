@@ -1,25 +1,23 @@
-var React = require("react");
-var {Badge, Button} = require('react-bootstrap');
-var { connect } = require('react-redux');
+import React from 'react';
+import { Badge, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-
-
-var getCount = function(state){
-	return {count: state.get('queued').length};
+const getCount = function(state){
+  return {count: state.get('queued').length};
 }
 
 function QueueCount({count}){
-    if (count == 0){
-        return ( <span></span> );
-    }
+  if (count == 0){
+    return ( <span></span> );
+  }
 
-    var onclick = function(){
-        window.location = '#/queue';
-    }
+  const onclick = function(){
+    window.location = '#/queue';
+  }
 
-    return (
-        <Button bsStyle="link" onClick={onclick}><Badge>{count}</Badge> Specs queued</Button>
-    );
+  return (
+    <Button bsStyle="link" onClick={onclick}><Badge>{count}</Badge> Specs queued</Button>
+  );
 }
 
 
