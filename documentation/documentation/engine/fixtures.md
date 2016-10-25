@@ -58,7 +58,7 @@ The `GetService<T>` method delegates to the `IExecutionContext` method of the sa
 
 ## The Current Specification
 
-Storyteller has been used on a couple systems that involved reading and working with textual files. While the Storyteller team usually prefers to do define all specification setup data in the specification itself, sometimes we have opted to use the raw textual files. What we wanted to do was simply put the specification input files side by side to whereever the actual Storyteller specification file is persisted and then read files in from relative paths later. That was not really possible in early Storyteller, but is now.
+Storyteller has been used on a couple systems that involved reading and working with textual files. While the Storyteller team usually prefers to do define all specification setup data in the specification itself, sometimes we have opted to use the raw textual files. What we wanted to do was simply put the specification input files side by side to wherever the actual Storyteller specification file is persisted and then read files in from relative paths later. That was not really possible in early Storyteller, but is now.
 
 The currently executing specification is reachable inside any `Fixture` class from this code:
 
@@ -75,7 +75,7 @@ The Storyteller team theorizes that exposing the current `Specification` may be 
 As the names imply, the `SetUp()` and `TearDown` methods are executed before and after any steps when a section using a Fixture executes. Use these methods to do any kind of quiet mechanical actions. Examples from past usage include:
 
 * Using SetUp() to navigate a browser to a certain Url when testing browser applications
-* Using TearDown() to commit a transaction in Fixture's that primarily setup system state
+* Using TearDown() to commit a transaction in Fixtures that primarily setup system state
 * Storing information in the Context for another Fixture
 
 
