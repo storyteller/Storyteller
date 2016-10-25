@@ -1,28 +1,24 @@
-var React = require("react");
-var Postal = require('postal');
+import React from 'react';
+import Postal from 'postal';
+import cn from 'classnames';
 
 function CommandLink({createMessage, identifier, text}){
-	var onclick = e => {
-		var data = createMessage();
+  const onclick = e => {
+    var data = createMessage();
 
-		Postal.publish({
-			channel: 'engine-request',
-			topic: data.type,
-			data: data
-		});
-		
-		e.stopPropagation();
-		e.preventDefault();
-	}
+    Postal.publish({
+      channel: 'engine-request',
+      topic: data.type,
+      data: data
+    });
 
-	var className = "explorer-command";
-	if (identifier){
-		className += ' ' + identifier;
-	}
+    e.stopPropagation();
+    e.preventDefault();
+  }
 
-	return (
-		<a href="#" onClick={onclick} className={className}>{text}</a>
-	);
+  return (
+    <a href="#" onClick={onclick} className={cn('explorer-command', identifier)}>{text}</a>
+  );
 }
 
 

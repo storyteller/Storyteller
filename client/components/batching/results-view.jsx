@@ -1,8 +1,8 @@
-var React = require("react");
-var Postal = require("postal");
+import React from 'react';
+import Postal from 'postal';
 
-var {Grid, Row} = require('react-bootstrap');
-var SpecResultHeader = require('./../editing/header/spec-result-header');
+import { Grid, Row } from 'react-bootstrap';
+import SpecResultHeader from './../editing/header/spec-result-header';
 
 function ResultsView(props){
     var loader = require('./../editing/component-loader').results;

@@ -1,39 +1,37 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Postal = require('postal');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Postal from 'postal';
 
 
-var {Router, Route, IndexRoute, Link, RouteHandler, browserHistory} = require('react-router');
-var { Provider } = require('react-redux');
+import {Router, Route, IndexRoute, Link, RouteHandler, browserHistory} from 'react-router';
+import { Provider } from 'react-redux'
 
 
-var SpecExplorer = require('./explorer/spec-explorer');
-var Language = require('./language/language');
-var Documentation = require('./documentation');
-var QueuePage = require('./queue/queue-page');
-var Header = require('./header/header');
-var GrammarErrors = require('./grammars/grammar-errors');
-var SpecEditor = require('./editing/spec-editor');
-var SpecPreview = require('./editing/spec-preview');
-var SpecResults = require('./editing/spec-results');
-var SuiteExplorer = require('./explorer/suite-explorer');
-var ResultsPane = require('./results/results-pane');
+import SpecExplorer from './explorer/spec-explorer';
+import Language from './language/language';
+import Documentation from './documentation';
+import QueuePage from './queue/queue-page';
+import Header from './header/header';
+import GrammarErrors from './grammars/grammar-errors';
+import SpecEditor from './editing/spec-editor';
+import SpecPreview from './editing/spec-preview';
+import SpecResults from './editing/spec-results';
+import SuiteExplorer from './explorer/suite-explorer';
+import ResultsPane from './results/results-pane';
 
 
-var FixtureTable = require('./language/fixture-table');
-var uuid = require('node-uuid');
+import FixtureTable from './language/fixture-table';
+import uuid from 'node-uuid';
 
-var $ = require('jquery');
+import $ from 'jquery';
 
-var Reducer  = require('./../lib/state/reducer');
+import Reducer  from './../lib/state/reducer';
 
-var { createStore } = require('redux');
+import { createStore } from 'redux';
 
+import disconnect from './../components/disconnected';
 
-
-var disconnect = require('./../components/disconnected');
-
-module.exports = function(initialization, register){
+export default function(initialization, register) {
   // activate keyboard shortcuts
   require('./../lib/presentation/keyboard-shortcuts').register();
 
@@ -43,23 +41,22 @@ module.exports = function(initialization, register){
   }
 
   require('./../lib/presentation/typeahead.jquery.js');
-  
+
   var store = createStore(Reducer);
   store.dispatch(initialization);
-  
+
   if (register){
       register(store);
   }
-
 
   return () => {
     ReactDOM.render(
         <Provider store={store}>
         <div>
-            
+
             <Header />
             <div className="container">
-            
+
             <Router>
                 <Route name="app" path="/" >
                     <Route name="language" path="/language" component={Language}/>
@@ -75,22 +72,16 @@ module.exports = function(initialization, register){
                     <IndexRoute component={SpecExplorer}/>
                 </Route>
             </Router>
-            
+
             </div>
-            
+
         </div>
         </Provider>
 
 
-    , document.getElementById("main"));;
-    
+    , document.getElementById('main'));
+
     register(store);
   };
 
-
-
-
 }
-
-
-

@@ -1,44 +1,41 @@
-var React = require("react");
-var { connect } = require('react-redux');
+import React from 'react';
+import { connect } from 'react-redux';
 
-var {Nav, Navbar, NavDropdown, MenuItem, NavItem, Button} = require('react-bootstrap');
+import {Nav, Navbar, NavDropdown, MenuItem, NavItem, Button} from 'react-bootstrap';
 
-var Icons = require('./../icons');
+import Icons from './../icons';
 
-var Postal = require('postal');
+import Postal from 'postal';
 
-var StatusBar = require('./status-bar');
-var SpecProgressBar = require('./spec-progress-bar');
+import StatusBar from './status-bar';
+import SpecProgressBar from './spec-progress-bar';
 
 function findSystemData(state){
     return {system: state.get('system-state')};
-    
 }
 
-var Header = (props) => {
-    var system = props.system;
-    
-    var toCommand = topic => {
+const Header = (props) => {
+    const system = props.system;
+
+    const toCommand = topic => {
         return e => {
             Postal.publish({
                 channel: 'engine-request',
                 topic: topic,
                 data: {}
             });
-            
+
             return e.preventDefault();
         }
     }
 
-    var name = system.get('name');
-    var properties = system.get('properties');
+    let name = system.get('name');
+    const properties = system.get('properties');
     if (properties.has('Profile')){
-        var profile = properties.get('Profile');
+        const profile = properties.get('Profile');
         if (profile){
             name += ' (' + properties.get('Profile') + ')';
         }
-        
-        
     }
 
     return (
@@ -69,4 +66,3 @@ var Header = (props) => {
 
 
 module.exports = connect(findSystemData)(Header)
-

@@ -1,14 +1,16 @@
-var Postal = require('postal');
-var app = require('./components/app');
-var AllSpecData = require('./all-spec-data');
+import Postal from 'postal';
+import app from './components/app';
+import AllSpecData from './all-spec-data';
 
-var initialization = require('./initialization');
+import initialization from './initialization';
 
 
 if (location.search.includes('batch=true')){
-    var BatchReport = require('./components/batching/batch-report');
-    var batch_report_data = require('./batch-run-response-data');
-    
+    const BatchReport = require('./components/batching/batch-report');
+    const batch_report_data = require('./batch-run-response-data');
+
+    console.log('batching');
+
     BatchReport(batch_report_data);
 }
 else {
@@ -52,35 +54,20 @@ else {
 
             }
         });
-        
-        var communicator = {
+
+        const communicator = {
             send(message){
-                var json = JSON.stringify(message);
+                const json = JSON.stringify(message);
                 console.log('Sent to backend: ' + json);
             }
         }
-        
+
         require('./lib/presentation/spec-editor-presenter')(store, communicator);
     }
 
 
 
 
-    var startRouting = app(initialization, register);
+    const startRouting = app(initialization, register);
     startRouting();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

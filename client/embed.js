@@ -1,16 +1,16 @@
-var $ = require('jquery');
-var React = require('react');
-var FixtureLibrary = require('./lib/fixtures/fixture-library');
-var Specification = require('./lib/model/specification');
-var ComponentLoader = require('./components/editing/component-loader');
-var EmbeddedSpec = require('./components/embedded-spec');
+import $ from 'jquery';
+import React from 'react';
+import FixtureLibrary from './lib/fixtures/fixture-library';
+import Specification from './lib/model/specification';
+import ComponentLoader from './components/editing/component-loader';
+import EmbeddedSpec from './components/embedded-spec';
 
 
 $(document).ready(() => {
 	$('.spec-preview').each((i, div) => {
 		var path = $(div).attr('data-path');
 		console.log('Writing spec results for ' + path);
-		
+
 		var fixtures = JSON.parse(_.unescape($(div).attr('data-fixtures')));
 		var specData = JSON.parse(_.unescape($(div).attr('data-spec')));
 		var library = new FixtureLibrary(fixtures);
@@ -46,4 +46,3 @@ $(document).ready(() => {
 		React.render(component, div);
 	});
 });
-

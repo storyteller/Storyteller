@@ -1,31 +1,27 @@
-var React = require("react");
-var Postal = require("postal");
-var _ = require('lodash');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Postal from 'postal';
+import _ from 'lodash';
 
-var {Grid, Row, Alert} = require('react-bootstrap');
-var ResultsView = require('./results-view');
-var SummaryTable = require('./../results/summary-table');
+import { Grid, Row, Alert } from 'react-bootstrap';
+import ResultsView from './results-view';
+import SummaryTable from './../results/summary-table';
 
-var ReactDOM = require('react-dom');
-
-var {Router, Route, IndexRoute, Link, RouteHandler, browserHistory} = require('react-router');
-var { Provider } = require('react-redux');
-var { connect } = require('react-redux');
+import { Router, Route, IndexRoute, Link, RouteHandler, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
 function getSpec(state, ownProps){
     return {spec: state.get('specs').get(ownProps.params.id)};
 }
 
-var SpecResults = connect(getSpec)(ResultsView);
-
-
-
+const SpecResults = connect(getSpec)(ResultsView);
 
 function BatchReport(props){
     if (props.specs.length == 1){
         return (<ResultsView spec={props.specs[0]} />);
     }
-    
+
     var headerText = props.system;
     if (props.suite && props.suite != 'All'){
         headerText += ': ' + props.suite;
@@ -54,12 +50,12 @@ function BatchReport(props){
 function getSpecs(state){
     var specs = state.get('specs').toList().toArray();
     return {
-        specs: specs, 
-        success: state.get('success'), 
-        suite: state.get('suite'), 
-        system: state.get('system'), 
-        time: state.get('time'), 
-        status: state.get('status-filter'), 
+        specs: specs,
+        success: state.get('success'),
+        suite: state.get('suite'),
+        system: state.get('system'),
+        time: state.get('time'),
+        status: state.get('status-filter'),
         lifecycle: state.get('lifecycle-filter')
     };
 }
@@ -68,44 +64,44 @@ function getDispatch(dispatch){
     return {dispatch: dispatch};
 }
 
-var Summary = connect(getSpecs, getDispatch)(BatchReport);
+const Summary = connect(getSpecs, getDispatch)(BatchReport);
 
 
 module.exports = function startRouting(data){
-    var Reducer  = require('./../../lib/state/reducer');
+    const Reducer  = require('./../../lib/state/reducer');
 
-    var { createStore } = require('redux');
-    var store = createStore(Reducer);
-    
+    const { createStore } = require('redux');
+    const store = createStore(Reducer);
+
     store.dispatch(data);
-    
-    
+
+
     if (store.getState().get('specs').size == 1){
-        var spec = store.getState().get('specs').toList().toArray()[0];
-        
-        ReactDOM.render(<Provider store={store}><ResultsView spec={spec} /></Provider>, document.getElementById("main"));
-    }   
+        const spec = store.getState().get('specs').toList().toArray()[0];
+
+        ReactDOM.render(
+          <Provider store={store}><ResultsView spec={spec} /></Provider>,
+          document.getElementById('main'));
+    }
     else {
         var screen = (
             <Provider store={store}>
             <div>
                 <div className="container">
-                
+
                 <Router>
                     <Route name="app" path="/" >
                         <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
                         <IndexRoute component={Summary}/>
                     </Route>
                 </Router>
-                
+
                 </div>
-                
+
             </div>
             </Provider>
         );
-        
-        ReactDOM.render(screen, document.getElementById("main"));
-        
-        
+
+        ReactDOM.render(screen, document.getElementById('main'));
     }
 };

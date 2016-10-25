@@ -1,19 +1,19 @@
-var React = require("react");
+import React from 'react';
 
-var RecycleState = require('./recycle-state');
-var {Navbar, Button} = require('react-bootstrap');
-var Postal = require('postal');
-var QueueCount = require('./../queue/queue-count');
-var GrammarCount = require('./../grammars/grammar-count');
-
-
-var HelpIcon = require('./help');
-var Search = require('./search');
-var RuntimeError = require('./runtime-error');
-var UnsavedChanges = require('./unsaved-changes');
+import RecycleState from './recycle-state';
+import {Navbar, Button} from 'react-bootstrap';
+import Postal from 'postal';
+import QueueCount from './../queue/queue-count';
+import GrammarCount from './../grammars/grammar-count';
 
 
-var StatusBar = function(props){
+import HelpIcon from './help';
+import Search from './search';
+import RuntimeError from './runtime-error';
+import UnsavedChanges from './unsaved-changes';
+
+
+const StatusBar = function(props){
     return (
         <Navbar className="bg-info status-bar">
             <span className="pull-right">

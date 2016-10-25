@@ -1,29 +1,17 @@
-'use strict';
+import React from 'react';
+import cn from 'classnames';
 
-var React = require('react');
-var _ = require('lodash');
+const icons = {};
 
-var icons = {};
+const icon = function(name, classes){
+	const core = ['fa', 'fa-fw'];
 
-var icon = function(name, classes){
-	var all = ['fa', 'fa-fw'].concat(classes);
-	var clazz = _(all).join(' ');
-
-
-	var component = React.createClass({
-		displayName: name,
-		render: function(){
-			var className = clazz;
-			if (this.props.className){
-				className = clazz + ' ' + this.props.className;
-			}
-
-			return (
-				<i className={className}></i>
-			);
-
-		}
-	});
+	function component(props) {
+		return (
+			<i className={cn(core, classes, props.className)}></i>
+		);
+	}
+	component.displayName = name;
 
 	icons[name] = component;
 
@@ -31,13 +19,13 @@ var icon = function(name, classes){
 };
 
 
-var Success = icon('success', ['fa-check', 'text-success']);
-var Failed = icon('failed', ['fa-exclamation-circle', 'text-danger']);
-var None = icon('none', ['fa-circle-o']);
-var Running = icon('running', ['fa-spinner', 'fa-spin']);
-var RunningSuccess = icon('running-success', ['fa-spinner', 'fa-spin', 'text-success']);
-var RunningFailed = icon('running-failed', ['fa-spinner', 'fa-spin', 'text-danger']);
-var Close = icon('close', ['fa-close']);
+const Success = icon('success', ['fa-check', 'text-success']);
+const Failed = icon('failed', ['fa-exclamation-circle', 'text-danger']);
+const None = icon('none', ['fa-circle-o']);
+const Running = icon('running', ['fa-spinner', 'fa-spin']);
+const RunningSuccess = icon('running-success', ['fa-spinner', 'fa-spin', 'text-success']);
+const RunningFailed = icon('running-failed', ['fa-spinner', 'fa-spin', 'text-danger']);
+const Close = icon('close', ['fa-close']);
 icon('queued', ['fa-hourglass-o']);
 
 icon('remove', ['fa-remove']);

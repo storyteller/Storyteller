@@ -1,50 +1,48 @@
-var React = require("react");
-var Postal = require('postal');
-var Counts = require('./../../lib/model/counts');
-var { connect } = require('react-redux');
+import React from 'react';
+import Postal from 'postal';
+import Counts from './../../lib/model/counts';
+import { connect } from 'react-redux';
 
-var {ProgressBar, Button, Navbar} = require('react-bootstrap');
+import { ProgressBar, Button, Navbar } from 'react-bootstrap';
 
 
 function findState(state){
-    var running = state.get('running');
-    
+    const running = state.get('running');
+
     if (!running){
-        return {running: false};
+        return { running: false };
     }
-    
-    var spec = state.get('specs').get(running.id);
-    var progress = state.get('progress');
-    var counts = new Counts(0, 0, 0, 0);
+
+    const spec = state.get('specs').get(running.id);
+    const progress = state.get('progress');
+    let counts = new Counts(0, 0, 0, 0);
     if (progress){
         counts = new Counts(progress.counts);
     }
 
-
-    return {running: true, spec: spec, progress: progress, counts: counts};
+    return { running: true, spec: spec, progress: progress, counts: counts };
 }
 
 function SpecProgressBar({running, progress, counts, spec}){
     if (!running){
         return (<span />);
     }
-    
+
     if (!progress){
         return (<span />);
     }
-    
-    
-    var bsStyle = "info";
+
+    let bsStyle = 'info';
     if (counts.anyResults()){
         if (counts.success()){
-            bsStyle = "success";
+            bsStyle = 'success';
         }
-        else{
-            bsStyle = "danger";
+        else {
+            bsStyle = 'danger';
         }
     }
 
-    var cancel = e => {
+    const cancel = e => {
         Postal.publish({
             channel: 'engine-request',
             topic: 'cancel-spec',
@@ -55,20 +53,23 @@ function SpecProgressBar({running, progress, counts, spec}){
     }
 
     return (
-        <div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
-        <Button onClick={cancel} className="pull-right" bsStyle="link" style={{marginLeft: '10px', marginRight: '10px', height: '25px'}}>Cancel Execution</Button>
-        <ProgressBar  
-            label={'Running ' + spec.title} 
-            bsStyle={bsStyle} 
-            min={0} 
-            max={progress.total} 
+      <div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
+        <Button
+          onClick={cancel}
+          className="pull-right"
+          bsStyle="link"
+          style={{marginLeft: '10px', marginRight: '10px', height: '25px'}}>
+            Cancel Execution
+        </Button>
+        <ProgressBar
+            label={'Running ' + spec.title}
+            bsStyle={bsStyle}
+            min={0}
+            max={progress.total}
             now={progress.step} />
-            
-        </div>
+      </div>
     );
 }
-
-
 
 
 module.exports = connect(findState)(SpecProgressBar);

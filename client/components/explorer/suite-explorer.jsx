@@ -1,9 +1,9 @@
-var TreeView = require('./tree-view');
-var {connect} = require('react-redux');
-var React = require('react');
+import React from 'react';
+import { connect } from 'react-redux';
+import TreeView from './tree-view';
 
 function findSuite(names, top){
-  var suite = top;
+  let suite = top;
 
   if (names && !(names instanceof Array)){
     names = names.split('/');
@@ -20,34 +20,32 @@ function findSuite(names, top){
 }
 
 function getExplorerState(state){
-    var status = state.get('status-filter');
-    var lifecycle = state.get('lifecycle-filter');
-    
-    return {
-        suite: state.get('hierarchy'), 
-        status: status, 
-        lifecycle: lifecycle, 
-        specs: state.get('specs'), 
-        treeState: state.get('tree-state'),
-        running: state.get('running'),
-        queued: state.get('queued'),
-        progress: state.get('progress')
-    };
+  const status = state.get('status-filter');
+  const lifecycle = state.get('lifecycle-filter');
+
+  return {
+    suite: state.get('hierarchy'),
+    status,
+    lifecycle,
+    specs: state.get('specs'),
+    treeState: state.get('tree-state'),
+    running: state.get('running'),
+    queued: state.get('queued'),
+    progress: state.get('progress')
+  };
 }
 
 function addDispatch(dispatch){
-    return {dispatch: dispatch};
+    return { dispatch };
 }
 
 function SuiteExplorer(props){
-    var params = props.params;
+  const params = props.params;
+  const path = params.splat;
+  const top = props.suite;
+  const suite = findSuite(path, top);
 
-    var path = params.splat;
-    
-    var top = props.suite;
-    var suite = findSuite(path, top);
-
-    return (<TreeView {...props} suite={suite} />);
+  return (<TreeView {...props} suite={suite} />);
 }
 
 module.exports = connect(getExplorerState, addDispatch)(SuiteExplorer);
