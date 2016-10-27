@@ -31,7 +31,7 @@
 }(this));
 
 var Postal = require('postal');
-var app = require('./components/app');
+var app = require('./components/app').default;
 var disconnect = require('./components/disconnected');
 
 // TODO -- HOKEY!!!!!

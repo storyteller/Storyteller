@@ -29,8 +29,6 @@ function CommandProcessor(communicator, store){
             communicator.send(message);
 
         });
-
-        communicator.send({type: 'run-specs', list: heads.map(x => x.id)});
     };
     
     this["mark-as-acceptance"] = data => {
