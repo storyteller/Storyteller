@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 function CommandLink({createMessage, identifier, text}){
   const onclick = e => {
-    var data = createMessage();
+    const data = createMessage();
 
     Postal.publish({
       channel: 'engine-request',

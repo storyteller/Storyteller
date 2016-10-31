@@ -1,6 +1,5 @@
-var React = require("react");
+import React from 'react';
 
 module.exports = function(props){
-	return (<h1 style={{textAlign: 'center'}}>No results yet.</h1>);
+  return (<h1 style={{textAlign: 'center'}}>No results yet.</h1>);
 }
-

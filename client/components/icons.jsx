@@ -4,18 +4,18 @@ import cn from 'classnames';
 const icons = {};
 
 const icon = function(name, classes){
-	const core = ['fa', 'fa-fw'];
+  const core = ['fa', 'fa-fw'];
 
-	function component(props) {
-		return (
-			<i className={cn(core, classes, props.className)}></i>
-		);
-	}
-	component.displayName = name;
+  function component(props) {
+    return (
+      <i className={cn(core, classes, props.className)}></i>
+    );
+  }
+  component.displayName = name;
 
-	icons[name] = component;
+  icons[name] = component;
 
-	return component;
+  return component;
 };
 
 
