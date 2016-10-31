@@ -8,7 +8,7 @@ import $ from 'jquery';
 const CommandWithNameEntryLink = React.createClass({
   componentDidUpdate: function(){
     if (this.state.showModal){
-      var element = ReactDOM.findDOMNode(this);
+      const element = ReactDOM.findDOMNode(this);
       $('#modal-name').focus();
     }
   },

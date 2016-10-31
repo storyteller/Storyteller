@@ -1,9 +1,9 @@
-var React = require("react");
+import React from 'react';
 
 function MissingCell(props){
-	return (
-		<span className="label label-warning">[Missing]</span>
-	);
+  return (
+    <span className="label label-warning">[Missing]</span>
+  );
 }
 
 

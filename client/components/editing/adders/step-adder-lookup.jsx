@@ -1,58 +1,58 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var _ = require('lodash');
-var GrammarLookup = require('./../../../lib/presentation/grammar-adder-lookup');
-var $ = require('jquery');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import _ from 'lodash';
+import GrammarLookup from './../../../lib/presentation/grammar-adder-lookup';
+import $ from 'jquery';
 
 module.exports = React.createClass({
-	componentDidMount(){
-		var element = ReactDOM.findDOMNode(this);
-		element.scrollIntoView();
+  componentDidMount(){
+    const element = ReactDOM.findDOMNode(this);
+    element.scrollIntoView();
 
-		var input = element.firstChild;
-		$(input).addClass('mousetrap');
+    const input = element.firstChild;
+    $(input).addClass('mousetrap');
 
-		var lookup = new GrammarLookup(this.props.holder);
+    const lookup = new GrammarLookup(this.props.holder);
 
-		var finder = function(query, callback){
-			var matches = lookup.findMatches(query);
-			callback(matches);
-		}
+    var finder = function(query, callback){
+      var matches = lookup.findMatches(query);
+      callback(matches);
+    }
 
-		$(input).typeahead({
-		  minLength: 3,
-		  highlight: true
-		},
-		{
-		  name: 'steps',
-		  displayKey: 'title',
-		  
-		  source: finder,
-		  templates: {
-			empty: '<div class="empty-message">No matches found</div>',
-			suggestion: _.template('<div><%= title%></div>')
-		  }
-		});
-		
-		$(element).on('typeahead:selected', function(jquery, option){
-			option.select();
-			$(input).val('');
-			input.scrollIntoView();
-		});
-		
-		input.focus();
-	},
+    $(input).typeahead({
+      minLength: 3,
+      highlight: true
+    },
+    {
+      name: 'steps',
+      displayKey: 'title',
 
-	render(){
-		var clazz = '';
-		if (this.props.active){
-			clazz = 'bg-primary';
-		}
+      source: finder,
+      templates: {
+      empty: '<div class="empty-message">No matches found</div>',
+      suggestion: _.template('<div><%= title%></div>')
+      }
+    });
 
-		return (
-			<div className="input-group">
-			  <input style={{width: '100%'}} ref="text" type="text" className="form-control" placeholder="Add steps or comments" aria-describedby="basic-addon2" />
-			</div>
-		)
-	}
+    $(element).on('typeahead:selected', function(jquery, option){
+      option.select();
+      $(input).val('');
+      input.scrollIntoView();
+    });
+
+    input.focus();
+  },
+
+  render(){
+    let clazz = '';
+    if (this.props.active){
+      clazz = 'bg-primary';
+    }
+
+    return (
+      <div className="input-group">
+        <input style={{width: '100%'}} ref="text" type="text" className="form-control" placeholder="Add steps or comments" aria-describedby="basic-addon2" />
+      </div>
+    )
+  }
 });

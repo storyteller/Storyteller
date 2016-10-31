@@ -32,20 +32,20 @@
 
 var Postal = require('postal');
 var app = require('./components/app').default;
-var disconnect = require('./components/disconnected');
+var disconnect = require('./components/disconnected').default;
 
 // TODO -- HOKEY!!!!!
 var theStore = null;
 var startRouting = app(Storyteller.initialization, store => {
     theStore = store;
-    
+
     Postal.subscribe({
         channel: 'engine',
         topic: '*',
         callback: (data, env) => {
             data.type = env.topic;
             store.dispatch(data);
-        } 
+        }
     });
 });
 
@@ -62,17 +62,17 @@ var rebroadcast = m => {
 
 var dispatch = msg => {
     theStore.dispatch(msg);
-    
 
-    
+
+
     switch (msg.type){
         case 'spec-added':
             var href = '#/spec/editing/' + msg.data.id;
             window.location = href;
-            
+
         case 'spec-saved':
             rebroadcast(msg);
-            
+
         case 'runtime-error':
             rebroadcast(msg);
     }
@@ -84,5 +84,3 @@ require('./lib/command-processor')(communicator, theStore);
 require('./lib/presentation/spec-editor-presenter')(theStore, communicator);
 
 startRouting();
-
-

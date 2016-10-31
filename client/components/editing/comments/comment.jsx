@@ -1,13 +1,13 @@
-var React = require("react");
+import React from 'react';
 
 function Comment({arg, step}){
-	return (
-		<div 
-			id={step.id} 
-			className="comment">
-				<span className="comment-text">{arg.value}</span>
-		</div>
-	);
+  return (
+    <div
+      id={step.id}
+      className="comment">
+        <span className="comment-text">{arg.value}</span>
+    </div>
+  );
 }
 
 module.exports = Comment;
