@@ -40,11 +40,6 @@ namespace StoryTeller.Model
             _grammars.Add(grammar);
         }
 
-        public void RemoveGrammar(GrammarModel grammar)
-        {
-            _grammars.Remove(grammar);
-        }
-
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
             var model = new FixtureModel(key);

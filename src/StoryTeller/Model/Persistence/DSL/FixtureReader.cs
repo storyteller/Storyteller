@@ -26,7 +26,7 @@ namespace StoryTeller.Model.Persistence.DSL
             : base(reader)
         {
             Target = new FixtureModel("");
-            Push(new HeaderMode(Target));
+            push(new HeaderMode(Target));
         }
     }
 }

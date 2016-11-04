@@ -31,7 +31,7 @@ namespace StoryTeller.Model.Persistence
 
         protected IReaderMode current => _modes.Peek();
 
-        protected void Push(IReaderMode mode)
+        protected void push(IReaderMode mode)
         {
             _modes.Push(mode);
         }
@@ -43,7 +43,10 @@ namespace StoryTeller.Model.Persistence
             {
                 _modes.Pop();
 
-                if (line.IsEmpty()) return;
+                if (line.IsEmpty())
+                {
+                    return;
+                }
 
                 startNewMode(indention, line);
             }
@@ -67,7 +70,11 @@ namespace StoryTeller.Model.Persistence
             else
             {
                 next.Indention = indention;
-                _modes.Push(next);
+
+                if (!ReferenceEquals(next, current))
+                {
+                    _modes.Push(next);
+                }
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using StoryTeller.Model.Persistence.Markdown;
+﻿using Baseline;
+using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
@@ -8,30 +9,29 @@ namespace StoryTeller.Model.Persistence.DSL
 
         private string _key;
         private string _title;
-        private readonly Sentence _sentence;
+
+        private bool _hasAdded;
 
         public GrammarMode(FixtureModel fixture)
         {
             _fixture = fixture;
-            _sentence = new Sentence();
-            _fixture.AddGrammar(_sentence);
         }
 
         public int Indention { get; set; }
 
         public IReaderMode Read(int indention, string line)
         {
+            if (_hasAdded) return null;
+
             if (line.IsHeaderTwo())
             {
                 _key = line.Trim().TrimStart('#', ' ');
-                _sentence.key = _key;
                 return this;
             }
 
             if (line.IsHeaderThree())
             {
                 _title = line.Trim().TrimStart('#', ' ');
-                _sentence.format = _title;
                 return this;
             }
 
@@ -40,14 +40,34 @@ namespace StoryTeller.Model.Persistence.DSL
                 var values = line.ToTableValues();
                 if (values.Length > 0 && values[0] == "table")
                 {
-                    _fixture.RemoveGrammar(_sentence);
                     return new TableMode(_title, _key, _fixture);
                 }
 
-                return new SentenceMode(_sentence);
+                var sentence = addSentence();
+
+                return new SentenceMode(sentence);
+            }
+
+            if (line.IsEmpty() && !_hasAdded)
+            {
+                addSentence();
             }
 
             return null;
+        }
+
+        private Sentence addSentence()
+        {
+            _hasAdded = true;
+
+            var sentence = new Sentence
+            {
+                key = _key,
+                format = _title
+            };
+
+            _fixture.AddGrammar(sentence);
+            return sentence;
         }
     }
 }

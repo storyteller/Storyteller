@@ -16,12 +16,13 @@ namespace StoryTeller.Model.Persistence.Markdown
         {
             using (var stream = new FileStream(file, FileMode.Open))
             {
-                var reader = new StreamReader(stream);
+                using (var reader = new StreamReader(stream))
+                {
+                    var spec = new MarkdownReader(reader).Read();
+                    spec.Filename = file;
 
-                var spec =  new MarkdownReader(reader).Read();
-                spec.Filename = file;
-
-                return spec;
+                    return spec;
+                }
             }
         }
 

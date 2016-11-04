@@ -5,7 +5,7 @@
   },
   "dependencies": {
     "System.Runtime.Serialization.Primitives": "4.1.1",
-    "xunit": "2.2.0-beta2-build3300",
+    "xunit": "2.2.0-beta3-build3402",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "StoryTeller": { "target": "project" },
     "ST": { "target": "project" },
@@ -17,7 +17,8 @@
     "StoryTeller.Samples": { "target": "project" },
     "StoryTeller.Gallery": { "target": "project" },
     "Shouldly": "2.8.2",
-    "NSubstitute": "2.0.0-rc"
+    "NSubstitute": "2.0.0-rc",
+    "xunit.runner.visualstudio": "2.2.0-beta3-build1187"
   },
   "testRunner": "xunit",
   "frameworks": {
