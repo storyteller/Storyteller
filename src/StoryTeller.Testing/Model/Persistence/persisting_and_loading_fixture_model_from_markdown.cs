@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Dynamic;
 using System.Linq;
 using Shouldly;
+using StoryTeller.Grammars.Tables;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
 using Xunit;
@@ -54,6 +56,26 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             roundTrip<SentencesFixture>();
         }
+
+        [Fact]
+        public void can_deal_with_tables()
+        {
+            roundTrip<TablesFixture>();
+        }
+
+        [Fact]
+        public void can_deal_with_embedded_section()
+        {
+            roundTrip<EmbedsFixture>();
+        }
+    }
+
+    public class EmbedsFixture : Fixture
+    {
+        public IGrammar OnlyTitle()
+        {
+            return Embed<OnlyTitleFixture>("Only the facts maam");
+        }
     }
 
 
@@ -100,5 +122,14 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         
+    }
+
+    public class TablesFixture : Fixture
+    {
+        [ExposeAsTable("Add some numbers")]
+        public void AddNumbers(int x, int y)
+        {
+            
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -14,93 +13,25 @@ namespace StoryTeller.Model
 {
     public class Cell : ICellExpression
     {
-        /// <summary>
-        /// Just for testing data setup
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public static Cell For<T>(string key)
-        {
-            return new Cell(CellHandling.Basic(), key, typeof(T));
-        }
+        private readonly Func<object, object, bool> _equivalence;
 
-        public static Cell For<T>(Expression<Func<T, object>> expression)
-        {
-            return For(CellHandling.Basic(), expression.ToAccessor(), new Fixture());
-        }
+        private Action<Step, StepValues> _conversion;
 
-        public static Cell For(CellHandling cells, ParameterInfo parameter, Fixture fixture)
-        {
-            bool isOutput = false;
-            var type = parameter.ParameterType;
-            if (parameter.IsOut)
-            {
-                type = type.GetElementType();
-                isOutput = true;
-                
-            }
+        [JsonProperty("default")] public string DefaultValue;
 
-            var cell = new Cell(cells, parameter.Name, type) {output = isOutput, Position = parameter.Position};
+        public string editor;
 
-            parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+        public string header;
 
-            if (parameter.HasDefaultValue)
-            {
-                if (parameter.DefaultValue != null)
-                {
-                    cell.DefaultValue = parameter.DefaultValue.ToString();
-                }
-                else
-                {
-                    cell.DefaultValue = "NULL";
-                }
-                
-            }
+        [JsonProperty("key")] public string Key;
 
+        public Option[] options;
 
+        public bool output;
 
-            cell.readLists(cells, fixture);
+        public bool result;
 
-            return cell;
-        }
-
-        [JsonIgnore]
-        public int Position { get; private set; }
-
-        public static Cell For(CellHandling cells, PropertyInfo property, Fixture fixture)
-        {
-            var cell = new Cell(cells, property.Name, property.PropertyType);
-            property.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
-
-            cell.readLists(cells, fixture);
-
-            return cell;
-        }
-
-        private void readLists(CellHandling cellHandling, Fixture fixture)
-        {
-            if (OptionListName.IsEmpty()) return;
-
-            if (fixture.Lists.Has(OptionListName))
-            {
-                options = fixture.Lists[OptionListName].Options;
-            }
-            else
-            {
-                options = cellHandling.Lists[OptionListName].Options;
-            }
-        }
-
-        public static Cell For(CellHandling cells, Accessor accessor, Fixture fixture)
-        {
-            var cell = new Cell(cells, accessor.Name, accessor.PropertyType);
-            accessor.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
-
-            cell.readLists(cells, fixture);
-
-            return cell;
-        }
+        [JsonIgnore] public Type Type;
 
         // For serialization purposes
         public Cell()
@@ -117,15 +48,126 @@ namespace StoryTeller.Model
             selectConverter(cells, type);
 
             if (editor.IsEmpty())
-            {
                 selectEditor(type);
+        }
+
+        [JsonIgnore]
+        public int Position { get; private set; }
+
+        [JsonIgnore]
+        public string OptionListName { get; set; }
+
+        ICellExpression ICellExpression.Header(string header)
+        {
+            this.header = header;
+            return this;
+        }
+
+        ICellExpression ICellExpression.Editor(string editor)
+        {
+            this.editor = editor;
+            return this;
+        }
+
+        ICellExpression ICellExpression.DefaultValue(string @default)
+        {
+            DefaultValue = @default;
+            return this;
+        }
+
+        ICellExpression ICellExpression.SelectionValues(params string[] values)
+        {
+            options = values.Select(x => new Option {display = x, value = x}).ToArray();
+            return this;
+        }
+
+        ICellExpression ICellExpression.SelectionOptions(params Option[] options)
+        {
+            this.options = options;
+            return this;
+        }
+
+        ICellExpression ICellExpression.SelectionList(string listName)
+        {
+            OptionListName = listName;
+            return this;
+        }
+
+        /// <summary>
+        ///     Just for testing data setup
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static Cell For<T>(string key)
+        {
+            return new Cell(CellHandling.Basic(), key, typeof(T));
+        }
+
+        public static Cell For<T>(Expression<Func<T, object>> expression)
+        {
+            return For(CellHandling.Basic(), expression.ToAccessor(), new Fixture());
+        }
+
+        public static Cell For(CellHandling cells, ParameterInfo parameter, Fixture fixture)
+        {
+            var isOutput = false;
+            var type = parameter.ParameterType;
+            if (parameter.IsOut)
+            {
+                type = type.GetElementType();
+                isOutput = true;
             }
-            
+
+            var cell = new Cell(cells, parameter.Name, type) {output = isOutput, Position = parameter.Position};
+
+            parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+
+            if (parameter.HasDefaultValue)
+                if (parameter.DefaultValue != null)
+                    cell.DefaultValue = parameter.DefaultValue.ToString();
+                else
+                    cell.DefaultValue = "NULL";
+
+
+            cell.readLists(cells, fixture);
+
+            return cell;
+        }
+
+        public static Cell For(CellHandling cells, PropertyInfo property, Fixture fixture)
+        {
+            var cell = new Cell(cells, property.Name, property.PropertyType);
+            property.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+
+            cell.readLists(cells, fixture);
+
+            return cell;
+        }
+
+        private void readLists(CellHandling cellHandling, Fixture fixture)
+        {
+            if (OptionListName.IsEmpty()) return;
+
+            if (fixture.Lists.Has(OptionListName))
+                options = fixture.Lists[OptionListName].Options;
+            else
+                options = cellHandling.Lists[OptionListName].Options;
+        }
+
+        public static Cell For(CellHandling cells, Accessor accessor, Fixture fixture)
+        {
+            var cell = new Cell(cells, accessor.Name, accessor.PropertyType);
+            accessor.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+
+            cell.readLists(cells, fixture);
+
+            return cell;
         }
 
         private void selectEditor(Type type)
         {
-            if (type == typeof (bool))
+            if (type == typeof(bool))
             {
                 editor = "boolean";
                 DefaultValue = false.ToString();
@@ -163,7 +205,6 @@ namespace StoryTeller.Model
             _conversion = (step, values) =>
             {
                 if (!step.Values.ContainsKey(Key))
-                {
                     if (HasDefault())
                     {
                         step.Values.Add(Key, DefaultValue);
@@ -174,7 +215,6 @@ namespace StoryTeller.Model
                         values.Errors.Add(result);
                         return;
                     }
-                }
 
                 var rawValue = step.Values[Key];
 
@@ -187,13 +227,9 @@ namespace StoryTeller.Model
             toConversion((rawValue, step, values) =>
             {
                 if (rawValue == "NULL")
-                {
                     values.Store(Key, null);
-                }
                 else
-                {
                     values.RegisterDelayedConversion(Key, rawValue, runtime);
-                }
             });
         }
 
@@ -228,9 +264,9 @@ namespace StoryTeller.Model
             // TODO: Could be Predicate<T> -- figure out how to use this
 
             var expected = values.Get(Key);
-            return _equivalence(expected, actual) ? 
-                CellResult.Success(Key) : 
-                CellResult.Failure(Key, ToStringDisplay(actual));
+            return _equivalence(expected, actual)
+                ? CellResult.Success(Key)
+                : CellResult.Failure(Key, ToStringDisplay(actual));
         }
 
         public string ToStringDisplay(object actual)
@@ -262,27 +298,6 @@ namespace StoryTeller.Model
             return _equivalence(v1, v2);
         }
 
-        private Action<Step, StepValues> _conversion;
-
-        [JsonIgnore]
-        public Type Type;
-
-        [JsonProperty("key")] public string Key;
-
-        [JsonProperty("default")] public string DefaultValue;
-
-        public string header;
-
-        public bool output;
-
-        public string editor;
-
-        public Option[] options;
-
-        public bool result;
-
-        private readonly Func<object, object, bool> _equivalence;
-
         public void ConvertValues(Step step, StepValues values)
         {
             _conversion(step, values);
@@ -292,45 +307,6 @@ namespace StoryTeller.Model
         public bool HasDefault()
         {
             return DefaultValue.IsNotEmpty();
-        }
-
-        [JsonIgnore]
-        public string OptionListName { get; set; }
-
-        ICellExpression ICellExpression.Header(string header)
-        {
-            this.header = header;
-            return this;
-        }
-
-        ICellExpression ICellExpression.Editor(string editor)
-        {
-            this.editor = editor;
-            return this;
-        }
-
-        ICellExpression ICellExpression.DefaultValue(string @default)
-        {
-            this.DefaultValue = @default;
-            return this;
-        }
-
-        ICellExpression ICellExpression.SelectionValues(params string[] values)
-        {
-            options = values.Select(x => new Option {display = x, value = x}).ToArray();
-            return this;
-        }
-
-        ICellExpression ICellExpression.SelectionOptions(params Option[] options)
-        {
-            this.options = options;
-            return this;
-        }
-
-        ICellExpression ICellExpression.SelectionList(string listName)
-        {
-            OptionListName = listName;
-            return this;
         }
 
         public Cell ApplyOverrides(Cell over)

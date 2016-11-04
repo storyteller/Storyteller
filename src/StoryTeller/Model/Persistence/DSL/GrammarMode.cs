@@ -1,4 +1,6 @@
-﻿using Baseline;
+﻿using System;
+using System.Linq;
+using Baseline;
 using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence.DSL
@@ -38,14 +40,33 @@ namespace StoryTeller.Model.Persistence.DSL
             if (line.IsTableLine())
             {
                 var values = line.ToTableValues();
-                if (values.Length > 0 && values[0] == "table")
+                if (values.Any())
                 {
-                    return new TableMode(_title, _key, _fixture);
+                    switch (values[0].ToLower())
+                    {
+                        case "table":
+                            _hasAdded = true;
+                            return new TableMode(_key, _title, _fixture);
+
+                        case "embed":
+                            _hasAdded = true;
+                            var embed = new EmbeddedSection
+                            {
+                                key = _key,
+                                title = _title,
+                                fixture = new FixtureModel(values[1])
+                            };
+
+                            _fixture.AddGrammar(embed);
+
+                            return null;
+
+                        default:
+                            throw new ArgumentOutOfRangeException($"'{values[0]}' is not a valid option here");
+                    }
                 }
 
-                var sentence = addSentence();
-
-                return new SentenceMode(sentence);
+                addSentence();
             }
 
             if (line.IsEmpty() && !_hasAdded)

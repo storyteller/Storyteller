@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Baseline;
@@ -32,9 +33,39 @@ namespace StoryTeller.Model.Persistence.DSL
                     writeSentence((Sentence)grammar, writer);
                 }
 
+                if (grammar is Table)
+                {
+                    writeTable((Table)grammar, writer);
+                }
+
+                if (grammar is EmbeddedSection)
+                {
+                    writeEmbed((EmbeddedSection)grammar, writer);
+                }
+
                 writer.WriteLine();
                 writer.WriteLine();
             }
+        }
+
+        private static void writeEmbed(EmbeddedSection grammar, TextWriter writer)
+        {
+            writer.WriteLine($"### {grammar.title}");
+            writer.WriteLine($"|embed|{grammar.fixture.key}|");
+        }
+
+        private static void writeTable(Table grammar, TextWriter writer)
+        {
+            writer.WriteLine($"### {grammar.title}");
+            var headers = new[] {"table"}.Concat(grammar.cells.Select(x => x.Key)).ToArray();
+
+            var defaults = new string[] {"default"}.Concat(grammar.cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
+            var options = new string[] {"options"}.Concat(grammar.cells.Select(x => Option.Write(x.options))).ToArray();
+            var editors = new string[] {"editor"}.Concat(grammar.cells.Select(x => x.editor ?? string.Empty)).ToArray();
+            var results = new string[] {"result"}.Concat(grammar.cells.Select(x => x.result.ToString())).ToArray();
+
+            writeTable(new string[][] {headers, defaults, options, editors, results}, writer);
+
         }
 
         public static void Write(FixtureModel model, string file)

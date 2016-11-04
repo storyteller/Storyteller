@@ -4,15 +4,18 @@ using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
+
     public class TableMode : GrammarModeBase
     {
         private readonly Table _table;
 
         public TableMode(string key, string title,  FixtureModel fixture)
         {
-            _table = new Table();
-            _table.key = key;
-            _table.title = title;
+            _table = new Table
+            {
+                key = key,
+                title = title
+            };
             fixture.AddGrammar(_table);
         }
 
