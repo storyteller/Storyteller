@@ -119,13 +119,13 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Fact]
-        public void reads_sentence_cells_with_result()
+        public void reads_sentence_cells_with_result_true()
         {
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
 |cell|result|
-|first|result|");
+|first|true|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -136,7 +136,49 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.result.ShouldBe("result");
+            cell.result.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void reads_sentence_cells_with_result_false()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## a key
+### a title
+|cell|result|
+|first|false|");
+            result.grammars.ShouldNotBeNull();
+            result.grammars.Length.ShouldBe(1);
+            result.grammars[0].ShouldBeOfType<Sentence>();
+
+            var sentence = result.grammars[0].As<Sentence>();
+            sentence.cells.ShouldNotBeNull();
+            sentence.cells.Length.ShouldBe(1);
+
+            var cell = sentence.cells[0];
+            cell.Key.ShouldBe("first");
+            cell.result.ShouldBeFalse();
+        }
+
+        [Fact]
+        public void reads_sentence_cells_with_result_empty()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## a key
+### a title
+|cell|result|
+|first||");
+            result.grammars.ShouldNotBeNull();
+            result.grammars.Length.ShouldBe(1);
+            result.grammars[0].ShouldBeOfType<Sentence>();
+
+            var sentence = result.grammars[0].As<Sentence>();
+            sentence.cells.ShouldNotBeNull();
+            sentence.cells.Length.ShouldBe(1);
+
+            var cell = sentence.cells[0];
+            cell.Key.ShouldBe("first");
+            cell.result.ShouldBeFalse();
         }
 
         [Fact]

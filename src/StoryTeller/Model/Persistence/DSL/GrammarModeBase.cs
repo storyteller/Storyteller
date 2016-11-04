@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Baseline;
 using Microsoft.Extensions.Options;
 
 namespace StoryTeller.Model.Persistence.DSL
@@ -26,7 +27,19 @@ namespace StoryTeller.Model.Persistence.DSL
                     cell.editor = value;
                     break;
                 case "result":
-                    cell.result = value;
+                    if (value.IsEmpty())
+                    {
+                        cell.result = false;
+                    }
+                    else
+                    {
+                        bool result;
+                        if (bool.TryParse(value, out result))
+                        {
+                            cell.result = result;
+                        }
+                    }
+
                     break;
             }
         }

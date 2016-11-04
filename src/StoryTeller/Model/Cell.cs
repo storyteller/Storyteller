@@ -9,7 +9,6 @@ using Baseline.Reflection;
 using Newtonsoft.Json;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
-using static System.String;
 
 namespace StoryTeller.Model
 {
@@ -280,7 +279,7 @@ namespace StoryTeller.Model
 
         public Option[] options;
 
-        public string result;
+        public bool result;
 
         private readonly Func<object, object, bool> _equivalence;
 
@@ -336,9 +335,11 @@ namespace StoryTeller.Model
 
         public Cell ApplyOverrides(Cell over)
         {
-            var cell = new Cell(CellHandling.Basic(), Key, Type);
-            cell.OptionListName = OptionListName;
-            cell.Position = Position;
+            var cell = new Cell(CellHandling.Basic(), Key, Type)
+            {
+                OptionListName = OptionListName,
+                Position = Position
+            };
 
             if (over == null)
             {
@@ -351,7 +352,7 @@ namespace StoryTeller.Model
             }
 
             cell.DefaultValue = over.DefaultValue.IsNotEmpty() ? over.DefaultValue : DefaultValue;
-            cell.result = over.result.IsNotEmpty() ? over.result : result;
+            cell.result = over.result || result; // either here
             cell.editor = over.editor.IsNotEmpty() ? over.editor : editor;
             cell.header = over.header.IsNotEmpty() ? over.header : header;
             cell.options = over.options != null
