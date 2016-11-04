@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using Baseline;
-using Xunit;
+using IntegrationTests.CommandLine;
 using Shouldly;
+using StoryTeller;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Results;
+using Xunit;
 
-namespace StoryTeller.Testing
+namespace IntegrationTests
 {
     
     public class integration_tests_with_the_grammar_project : SpecRunningContext

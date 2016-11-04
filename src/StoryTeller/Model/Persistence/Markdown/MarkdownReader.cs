@@ -14,7 +14,7 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         public static Specification ReadFromFile(string file)
         {
-            using (var stream = new FileStream(file, FileMode.Open))
+            using (var stream = new FileStream(file, FileMode.Open, FileAccess.Read))
             {
                 using (var reader = new StreamReader(stream))
                 {

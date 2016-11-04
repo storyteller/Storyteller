@@ -26,6 +26,9 @@ namespace StoryTeller.Model.Persistence
                 parseLine(indention, line.Trim());
             }
 
+            // Just to kick off any hanging work
+            parseLine(0, string.Empty);
+
             return Target;
         }
 

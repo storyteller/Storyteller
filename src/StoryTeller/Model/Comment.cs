@@ -17,7 +17,7 @@ namespace StoryTeller.Model
         [JsonProperty("text")]
         public string Text
         {
-            get { return _text.Trim(); }
+            get { return _text?.Trim(); }
             set
             {
                 _text = value?.Trim() ?? string.Empty;
