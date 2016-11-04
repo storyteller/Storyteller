@@ -61,7 +61,7 @@ namespace StoryTeller.Model
 
 
 
-            cell.ReadLists(cells, fixture);
+            cell.readLists(cells, fixture);
 
             return cell;
         }
@@ -74,12 +74,12 @@ namespace StoryTeller.Model
             var cell = new Cell(cells, property.Name, property.PropertyType);
             property.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
-            cell.ReadLists(cells, fixture);
+            cell.readLists(cells, fixture);
 
             return cell;
         }
 
-        private void ReadLists(CellHandling cellHandling, Fixture fixture)
+        private void readLists(CellHandling cellHandling, Fixture fixture)
         {
             if (OptionListName.IsEmpty()) return;
 
@@ -98,7 +98,7 @@ namespace StoryTeller.Model
             var cell = new Cell(cells, accessor.Name, accessor.PropertyType);
             accessor.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
-            cell.ReadLists(cells, fixture);
+            cell.readLists(cells, fixture);
 
             return cell;
         }

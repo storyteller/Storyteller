@@ -67,6 +67,11 @@ namespace StoryTeller.Testing.Model.Persistence
 
     public class SentencesFixture : Fixture
     {
+        public SentencesFixture()
+        {
+            
+        }
+
         [FormatAs("Go do something")]
         public void Go()
         {
@@ -83,5 +88,17 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             
         }
+
+        public void PickACard([SelectionValues("Queen of Diamonds", "King of Hearts", "Ace of Spades")]string card)
+        {
+            
+        }
+
+        public void PickState([SelectionList("states")]string state)
+        {
+            
+        }
+
+        
     }
 }

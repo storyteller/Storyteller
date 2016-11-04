@@ -30,10 +30,8 @@ namespace StoryTeller.Model.Lists
             _options.AddRange(options);
         }
 
-        public Option[] Options
-        {
-            get { return _options.ToArray(); }
-        }
+        public Option[] Options => _options.ToArray();
+
     }
 
     

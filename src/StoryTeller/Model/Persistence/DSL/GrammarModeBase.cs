@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.Extensions.Options;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
@@ -19,7 +20,7 @@ namespace StoryTeller.Model.Persistence.DSL
                     cell.DefaultValue = value;
                     break;
                 case "options":
-                    cell.options = parseOptions(value);
+                    cell.options = Option.ParseText(value);
                     break;
                 case "editor":
                     cell.editor = value;
@@ -30,12 +31,5 @@ namespace StoryTeller.Model.Persistence.DSL
             }
         }
 
-        protected Option[] parseOptions(string line)
-        {
-            if (string.IsNullOrWhiteSpace(line)) return null;
-
-            var values = line.Split(',');
-            return values.Select(x => new Option(x.Trim(), x.Trim())).ToArray();
-        }
     }
 }
