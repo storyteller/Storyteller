@@ -16,14 +16,14 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var markdown1 = FixtureWriter.Write(model);
 
-            /*
+            
             Console.WriteLine("Fixture " + typeof(T).Name);
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine(markdown1);
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine();
-            */
+            
 
             var model2 = FixtureReader.ReadFrom(markdown1);
 

@@ -56,10 +56,10 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (sentence.cells.Any())
             {
-                var header = new string[] { "cell", "default", "editor" };
+                var header = new string[] { "cell", "default", "editor", "options" };
                 var rows = sentence.cells.Select(cell =>
                 {
-                    return new string[] {cell.Key, cell.DefaultValue, cell.editor};
+                    return new string[] {cell.Key, cell.DefaultValue, cell.editor, Option.Write(cell.options)};
                 });
 
                 var allRows = new string[][] {header}.Concat(rows).ToArray();

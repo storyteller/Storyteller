@@ -63,6 +63,8 @@ namespace StoryTeller.Model
 
         public static string Write(Option[] options)
         {
+            if (options == null || options.Length == 0) return string.Empty;
+
             if (options.All(x => x.display == x.value))
             {
                 return options.Select(x => x.value).Join(", ");
