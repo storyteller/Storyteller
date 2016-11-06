@@ -14,6 +14,11 @@ namespace StoryTeller.Model
         {
         }
 
+        protected Table(string key) : base(key)
+        {
+            
+        }
+
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
             var table = new Table();

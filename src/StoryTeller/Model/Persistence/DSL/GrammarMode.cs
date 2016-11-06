@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Baseline;
+using StoryTeller.Grammars.Sets;
 using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence.DSL
@@ -37,6 +38,23 @@ namespace StoryTeller.Model.Persistence.DSL
                 return this;
             }
 
+            if (line.StartsWith("*"))
+            {
+                _hasAdded = true;
+
+                var paragraph = new Paragraph
+                {
+                    key = _key,
+                    title = _title
+                };
+
+                _fixture.AddGrammar(paragraph);
+
+                var paragraphMode = new ParagraphMode(paragraph);
+
+                return paragraphMode;
+            }
+
             if (line.IsTableLine())
             {
                 var values = line.ToTableValues();
@@ -44,22 +62,21 @@ namespace StoryTeller.Model.Persistence.DSL
                 {
                     switch (values[0].ToLower())
                     {
+                        case "cell":
+                            var sentence = addSentence();
+                            return new SentenceMode(sentence);
+
                         case "table":
-                            _hasAdded = true;
-                            return new TableMode(_key, _title, _fixture);
+                            return buildTable();
+
+                        case "set":
+                            return buildSet(false);
+
+                        case "ordered-set":
+                            return buildSet(true);
 
                         case "embed":
-                            _hasAdded = true;
-                            var embed = new EmbeddedSection
-                            {
-                                key = _key,
-                                title = _title,
-                                fixture = new FixtureModel(values[1])
-                            };
-
-                            _fixture.AddGrammar(embed);
-
-                            return null;
+                            return buildEmbed(values);
 
                         default:
                             throw new ArgumentOutOfRangeException($"'{values[0]}' is not a valid option here");
@@ -75,6 +92,50 @@ namespace StoryTeller.Model.Persistence.DSL
             }
 
             return null;
+        }
+
+        private IReaderMode buildEmbed(string[] values)
+        {
+            _hasAdded = true;
+            var embed = new EmbeddedSection
+            {
+                key = _key,
+                title = _title,
+                fixture = new FixtureModel(values[1])
+            };
+
+            _fixture.AddGrammar(embed);
+
+            return null;
+        }
+
+        private IReaderMode buildSet(bool ordered)
+        {
+            _hasAdded = true;
+            var @set = new SetVerification
+            {
+                key = _key,
+                title = _title,
+                ordered = ordered
+            };
+
+            _fixture.AddGrammar(@set);
+
+            return new TableMode(@set);
+        }
+
+        private IReaderMode buildTable()
+        {
+            _hasAdded = true;
+            var table = new Table
+            {
+                key = _key,
+                title = _title,
+            };
+
+            _fixture.AddGrammar(table);
+
+            return new TableMode(table);
         }
 
         private Sentence addSentence()

@@ -68,6 +68,34 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             roundTrip<EmbedsFixture>();
         }
+
+        [Fact]
+        public void can_deal_with_set_verifications()
+        {
+            roundTrip<SetsFixture>();
+        }
+
+        [Fact]
+        public void can_round_trip_a_paragraph()
+        {
+            roundTrip<ParagraphFixture>();
+        }
+    }
+
+
+    public class SetsFixture : Fixture
+    {
+        public IGrammar NotOrdered()
+        {
+            return VerifyStringList(() => new string[] {"a", "b", "c"})
+                .Titled("Unordered Values");
+        }
+
+        public IGrammar Ordered()
+        {
+            return VerifyStringList(() => new string[] { "a", "b", "c" })
+                .Titled("Unordered Values").Ordered();
+        }
     }
 
     public class EmbedsFixture : Fixture
@@ -84,6 +112,23 @@ namespace StoryTeller.Testing.Model.Persistence
         public OnlyTitleFixture()
         {
             Title = "My title is this";
+        }
+    }
+
+    public class ParagraphFixture : Fixture
+    {
+        public void A() { }
+        public void B() { }
+        public void C() { }
+
+        public IGrammar ABC()
+        {
+            return Paragraph("Do you know your abc's?", _ =>
+            {
+                _ += this["A"];
+                _ += this["B"];
+                _ += this["C"];
+            });
         }
     }
 

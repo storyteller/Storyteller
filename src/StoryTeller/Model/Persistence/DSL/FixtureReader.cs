@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Linq;
+using Baseline;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
@@ -27,6 +29,11 @@ namespace StoryTeller.Model.Persistence.DSL
         {
             Target = new FixtureModel("");
             push(new HeaderMode(Target));
+        }
+
+        protected override void finish()
+        {
+            Target.grammars.OfType<Paragraph>().Each(x => x.ReadFixture(Target));
         }
     }
 }

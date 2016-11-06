@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {
@@ -9,6 +10,9 @@ namespace StoryTeller.Model
         public GrammarModel[] children;
         public string title;
 
+        [JsonIgnore]
+        public readonly IList<string> ChildKeys = new List<string>();
+
         public Paragraph() : base("paragraph")
         {
         }
@@ -17,6 +21,11 @@ namespace StoryTeller.Model
         {
             this.children = children.ToArray();
             AddErrorRange(this.children.SelectMany(x => x.errors));
+        }
+
+        public void ReadFixture(FixtureModel fixture)
+        {
+            children = ChildKeys.Select(fixture.FindGrammar).ToArray();
         }
 
         public Cell[] cells

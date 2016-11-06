@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Baseline;
+using StoryTeller.Grammars.Sets;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
@@ -25,26 +25,67 @@ namespace StoryTeller.Model.Persistence.DSL
             var grammars = model.grammars.Where(x => x.key != "TODO").OrderBy(x => x.key);
             foreach (var grammar in grammars)
             {
-                writer.WriteLine($"## {grammar.key}");
+                writeGrammar(model, writer, grammar);
+            }
+        }
+
+        private static void writeGrammar(FixtureModel model, TextWriter writer, GrammarModel grammar)
+        {
+            writer.WriteLine($"## {grammar.key}");
 
 
-                if (grammar is Sentence)
+            if (grammar is Sentence)
+            {
+                writeSentence((Sentence) grammar, writer);
+            }
+
+            if (grammar is Table)
+            {
+                writeTable((Table) grammar, writer);
+            }
+
+            if (grammar is EmbeddedSection)
+            {
+                writeEmbed((EmbeddedSection) grammar, writer);
+            }
+
+            if (grammar is Paragraph)
+            {
+                writeParagraph(grammar.As<Paragraph>(), model, writer);
+            }
+
+            writer.WriteLine();
+            writer.WriteLine();
+        }
+
+        private static void writeParagraph(Paragraph paragraph, FixtureModel model, TextWriter writer)
+        {
+            writer.WriteLine($"### {paragraph.title}");
+
+            var list = new List<GrammarModel>();
+
+            for (int i = 0; i < paragraph.children.Length; i++)
+            {
+                var child = paragraph.children[i];
+                if (model.FindGrammar(child.key) == null)
                 {
-                    writeSentence((Sentence)grammar, writer);
+                    if (child.key.IsEmpty())
+                    {
+                        child.key = $"{paragraph.key}#{i + 1}";
+                    }
+
+                    list.Add(child);
                 }
 
-                if (grammar is Table)
-                {
-                    writeTable((Table)grammar, writer);
-                }
+                writer.WriteLine("* " + child.key);
+            }
 
-                if (grammar is EmbeddedSection)
-                {
-                    writeEmbed((EmbeddedSection)grammar, writer);
-                }
+            writer.WriteLine();
+            writer.WriteLine();
 
-                writer.WriteLine();
-                writer.WriteLine();
+            foreach (var grammar in list)
+            {
+                writeGrammar(model, writer, grammar);
             }
         }
 
@@ -57,15 +98,23 @@ namespace StoryTeller.Model.Persistence.DSL
         private static void writeTable(Table grammar, TextWriter writer)
         {
             writer.WriteLine($"### {grammar.title}");
-            var headers = new[] {"table"}.Concat(grammar.cells.Select(x => x.Key)).ToArray();
+            var tableType = "table";
+            if (grammar is SetVerification)
+            {
+                var set = grammar.As<SetVerification>();
 
-            var defaults = new string[] {"default"}.Concat(grammar.cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
-            var options = new string[] {"options"}.Concat(grammar.cells.Select(x => Option.Write(x.options))).ToArray();
-            var editors = new string[] {"editor"}.Concat(grammar.cells.Select(x => x.editor ?? string.Empty)).ToArray();
-            var results = new string[] {"result"}.Concat(grammar.cells.Select(x => x.result.ToString())).ToArray();
+                tableType = set.ordered ? "ordered-set" : "set";
+            }
 
-            writeTable(new string[][] {headers, defaults, options, editors, results}, writer);
 
+            var headers = new[] {tableType}.Concat(grammar.cells.Select(x => x.Key)).ToArray();
+
+            var defaults = new[] {"default"}.Concat(grammar.cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
+            var options = new[] {"options"}.Concat(grammar.cells.Select(x => Option.Write(x.options))).ToArray();
+            var editors = new[] {"editor"}.Concat(grammar.cells.Select(x => x.editor ?? string.Empty)).ToArray();
+            var results = new[] {"result"}.Concat(grammar.cells.Select(x => x.result.ToString())).ToArray();
+
+            writeTable(new[] {headers, defaults, options, editors, results}, writer);
         }
 
         public static void Write(FixtureModel model, string file)
@@ -87,32 +136,28 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (sentence.cells.Any())
             {
-                var header = new string[] { "cell", "default", "editor", "options" };
-                var rows = sentence.cells.Select(cell =>
-                {
-                    return new string[] {cell.Key, cell.DefaultValue, cell.editor, Option.Write(cell.options)};
-                });
+                var header = new[] {"cell", "default", "editor", "options"};
+                var rows =
+                    sentence.cells.Select(
+                        cell => { return new[] {cell.Key, cell.DefaultValue, cell.editor, Option.Write(cell.options)}; });
 
-                var allRows = new string[][] {header}.Concat(rows).ToArray();
+                var allRows = new[] {header}.Concat(rows).ToArray();
                 writeTable(allRows, writer);
             }
         }
-
 
 
         private static void writeTable(string[][] rows, TextWriter writer)
         {
             var columnCount = rows[0].Length;
             var widths = new int[columnCount];
-            for (int i = 0; i < widths.Length; i++)
-            {
+            for (var i = 0; i < widths.Length; i++)
                 widths[i] = rows.Select(x => x[i]?.Length ?? 0).Max();
-            }
 
             foreach (var row in rows)
             {
                 writer.Write("|");
-                for (int i = 0; i < widths.Length; i++)
+                for (var i = 0; i < widths.Length; i++)
                 {
                     writer.Write((row[i] ?? string.Empty).PadRight(widths[i]));
                     writer.Write("|");

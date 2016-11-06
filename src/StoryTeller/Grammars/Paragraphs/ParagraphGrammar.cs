@@ -9,7 +9,6 @@ namespace StoryTeller.Grammars.Paragraphs
 {
     public class ParagraphGrammar : IGrammar
     {
-        private readonly IList<IGrammar> _children = new List<IGrammar>();
         private readonly string _title;
         private string _key;
 
@@ -20,7 +19,7 @@ namespace StoryTeller.Grammars.Paragraphs
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {
-            var children = _children.Select(x => x.CreatePlan(step, library)).ToArray();
+            var children = Children.Select(x => x.CreatePlan(step, library)).ToArray();
             for (int i = 0; i < children.Length; i++)
             {
                 if (children[i] is ILineExecution)
@@ -32,10 +31,7 @@ namespace StoryTeller.Grammars.Paragraphs
             return new CompositeExecution(children);
         }
 
-        public IList<IGrammar> Children
-        {
-            get { return _children; }
-        }
+        public IList<IGrammar> Children { get; } = new List<IGrammar>();
 
         /// <summary>
         /// Adds a new child grammar to this ParagraphGrammar
@@ -43,19 +39,26 @@ namespace StoryTeller.Grammars.Paragraphs
         /// <param name="grammar"></param>
         public void AddGrammar(IGrammar grammar)
         {
-            _children.Add(grammar);
+            Children.Add(grammar);
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
-            var childrenModels = _children.Select(_ => _.Compile(fixture, cells)).ToArray();
+            var childrenModels = Children.Select(_ =>
+            {
+                var child = _.Compile(fixture, cells);
+                child.key = _.Key;
+
+                return child;
+            }).ToArray();
+
             return new Paragraph (childrenModels){ title = _title};
         }
 
         public void Do(Action<ISpecContext> action)
         {
-            var silent = new SilentGrammar(_children.Count, action);
-            _children.Add(silent);
+            var silent = new SilentGrammar(Children.Count, action);
+            Children.Add(silent);
         }
 
 
@@ -67,7 +70,11 @@ namespace StoryTeller.Grammars.Paragraphs
                 _key = value;
                 for (var i = 0; i < Children.Count; i++)
                 {
-                    Children[i].Key = value + ":" + i;
+                    var child = Children[i];
+                    if (child.Key.IsEmpty())
+                    {
+                        child.Key = value + ":" + i;
+                    }
                 }
             }
         }

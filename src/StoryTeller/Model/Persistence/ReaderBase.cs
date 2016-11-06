@@ -29,7 +29,14 @@ namespace StoryTeller.Model.Persistence
             // Just to kick off any hanging work
             parseLine(0, string.Empty);
 
+            finish();
+
             return Target;
+        }
+
+        protected virtual void finish()
+        {
+            // nothing
         }
 
         protected IReaderMode current => _modes.Peek();

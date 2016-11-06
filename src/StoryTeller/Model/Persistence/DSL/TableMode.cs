@@ -4,19 +4,13 @@ using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
-
     public class TableMode : GrammarModeBase
     {
         private readonly Table _table;
 
-        public TableMode(string key, string title,  FixtureModel fixture)
+        public TableMode(Table table)
         {
-            _table = new Table
-            {
-                key = key,
-                title = title
-            };
-            fixture.AddGrammar(_table);
+            _table = table;
         }
 
         public override IReaderMode Read(int indention, string text)
