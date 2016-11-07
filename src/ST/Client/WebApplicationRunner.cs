@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
 using StoryTeller;
 using StoryTeller.Commands;
+using StoryTeller.Remotes;
 using StructureMap;
 
 namespace ST.Client
@@ -35,15 +37,32 @@ namespace ST.Client
             _watcher?.Dispose();
         }
 
+        public Task<SystemRecycled> Startup { get; private set; }
+
+        public SystemRecycled LatestSystemRecycled
+        {
+            get
+            {
+                var recycled = Controller.LatestSystemRecycled ?? Startup.Result;
+                recycled.properties["Spec Directory"] = _input.SpecPath;
+
+                return recycled;
+            }
+        }
+
         public void Start()
         {
             Controller = _input.BuildRemoteController();
-            var context = new StorytellerContext(Controller, _input);
 
             Controller.AssertValid();
 
 
-            context.Start();
+            Startup = Controller.Start().ContinueWith(t =>
+            {
+                t.Result.WriteSystemUsage();
+
+                return t.Result;
+            });
 
             var port = PortFinder.FindPort(5000);
             if (_input.WebSocketAddressFlag.IsNotEmpty())
@@ -60,10 +79,32 @@ namespace ST.Client
             var webSocketsAddress = $"ws://127.0.0.1:{port}";
 
             // TODO -- fugly as hell. Either do it all the SM way, or rip out SM
-            var registry = new WebApplicationRegistry(webSocketsAddress, webSockets, Controller, context);
+            var registry = new WebApplicationRegistry(webSocketsAddress, webSockets, Controller);
             _container = new Container(registry);
 
 
+            startWebServer(port, webSockets);
+
+
+            Controller.AddListener(_container.GetInstance<IClientConnector>());
+
+            _container.GetInstance<AssetFileWatcher>().Start();
+
+            var persistence = _container.GetInstance<IPersistenceController>();
+            persistence.StartWatching(_input.SpecPath);
+            Controller.Messaging.AddListener(persistence);
+
+            var dsl = _container.GetInstance<IFixtureController>();
+            dsl.StartWatching(_input.FixturePath);
+            Controller.Messaging.AddListener(dsl);
+
+#if DEBUG
+            _watcher = new AssetFileWatcher(_container.GetInstance<IClientConnector>());
+#endif   
+        }
+
+        private void startWebServer(int port, WebSocketsHandler webSockets)
+        {
             var baseDirectory = AppContext.BaseDirectory;
             var host = new WebHostBuilder()
                 .UseKestrel()
@@ -92,7 +133,7 @@ namespace ST.Client
                     app.Run(async (http) =>
                     {
                         var endpoint = _container.GetInstance<HomeEndpoint>();
-                        var html = endpoint.Index().ToString();
+                        var html = endpoint.Index(LatestSystemRecycled).ToString();
 
                         http.Response.ContentType = "text/html";
                         await http.Response.WriteAsync(html).ConfigureAwait(false);
@@ -100,23 +141,6 @@ namespace ST.Client
                 });
 
             _server = host.Start();
-
-
-            Controller.AddListener(_container.GetInstance<IClientConnector>());
-
-            _container.GetInstance<AssetFileWatcher>().Start();
-
-            var persistence = _container.GetInstance<IPersistenceController>();
-            persistence.StartWatching(context.SpecPath);
-            context.AddRemoteListener(persistence);
-
-            var dsl = _container.GetInstance<IFixtureController>();
-            dsl.StartWatching(context.FixturePath);
-            context.AddRemoteListener(dsl);
-
-#if DEBUG
-            _watcher = new AssetFileWatcher(_container.GetInstance<IClientConnector>());
-#endif   
         }
 
         private void configureStaticFiles(IApplicationBuilder app)

@@ -78,8 +78,7 @@ namespace ST.Client
                 }
                 else
                 {
-                    // TODO -- do an FT kind of thing and have cascading messages
-                    // If it's string, just kick it out as json
+                    // HERE -- delegate to application controller
                     command.HandleJson(json);
                 }
             }

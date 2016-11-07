@@ -3,6 +3,7 @@ using System.Linq;
 using Baseline;
 using HtmlTags;
 using StoryTeller.Messages;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 using StructureMap.TypeRules;
@@ -12,22 +13,20 @@ namespace ST.Client
     public class HomeEndpoint
     {
         private readonly IClientConnector _connector;
-        private readonly StorytellerContext _context;
         private readonly HtmlDocument _document = new HtmlDocument();
         private readonly IPersistenceController _persistence;
 
-        public HomeEndpoint(IClientConnector connector, StorytellerContext context, IPersistenceController persistence)
+        public HomeEndpoint(IClientConnector connector, IPersistenceController persistence)
         {
             _connector = connector;
-            _context = context;
             _persistence = persistence;
         }
 
-        public HtmlDocument Index()
+        public HtmlDocument Index(SystemRecycled recycled)
         {
             _document.Title = "Storyteller 3";
 
-            writeInitialDataIntoPage(_document);
+            writeInitialDataIntoPage(_document, recycled);
 
             _document.Add("div").Id("header-container");
             _document.Add("div").Id("body-pane").AddClass("container");
@@ -74,7 +73,7 @@ namespace ST.Client
             _document.Body.Append(scriptTag);
         }
 
-        private void writeInitialDataIntoPage(HtmlDocument document)
+        private void writeInitialDataIntoPage(HtmlDocument document, SystemRecycled recycled)
         {
             var cleanJson = JsonSerialization.ToCleanJson(_persistence.Hierarchy.Top);
             document.Body.Add("div").Hide().Id("hierarchy-data").Text(cleanJson);
@@ -82,7 +81,7 @@ namespace ST.Client
             var resultJson = JsonSerialization.ToCleanJson(_persistence.AllCachedResults());
             document.Body.Add("div").Hide().Id("result-data").Text(resultJson);
 
-            var model = new InitialModel(_context.LatestSystemRecycled,
+            var model = new InitialModel(recycled,
                 new HierarchyLoaded(_persistence.Hierarchy.Top, _persistence.Results));
             model.wsAddress = _connector.WebSocketsAddress;
 

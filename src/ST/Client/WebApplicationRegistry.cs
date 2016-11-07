@@ -7,9 +7,8 @@ namespace ST.Client
 {
     public class WebApplicationRegistry : Registry
     {
-        public WebApplicationRegistry(string webSocketAddress, WebSocketsHandler webSockets, IRemoteController controller, StorytellerContext context)
+        public WebApplicationRegistry(string webSocketAddress, WebSocketsHandler webSockets, IRemoteController controller)
         {
-            For<StorytellerContext>().Use(context);
             For<IRemoteController>().Use(controller);
 
             ForSingletonOf<IClientConnector>()
