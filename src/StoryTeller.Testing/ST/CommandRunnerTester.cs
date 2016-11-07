@@ -1,39 +1,38 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Xunit;
+using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 using NSubstitute;
 using Shouldly;
-using ST.Client;
 using StoryTeller.Commands;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using ST;
+using ST.Client;
+using Xunit;
 
 namespace StoryTeller.Testing.ST
 {
-    
-    public class ClientConnectorTester
+    public class CommandRunnerTester
     {
-        private readonly RecordingCommand<RunSpec> theCommand;
-        private readonly IRemoteController theRemoteController;
-        private readonly ClientConnector theConnector;
+        private RecordingCommand<RunSpec> theCommand;
+        private IRemoteController theRemoteController;
+        private CommandRunner theRunner;
 
-        public ClientConnectorTester()
+        public CommandRunnerTester()
         {
             theCommand = new RecordingCommand<RunSpec>();
             theRemoteController = Substitute.For<IRemoteController>();
 
-            theConnector = new ClientConnector(new WebSocketsHandler(), theRemoteController, new ICommand[] { theCommand });
+            theRunner = new CommandRunner(theRemoteController, new ICommand[] {theCommand});
         }
-
 
         [Fact]
         public void calls_to_the_handler_if_one_matches_the_json()
         {
-            var message = new RunSpec {id = "foo"};
+            var message = new RunSpec { id = "foo" };
             var json = JsonSerialization.ToCleanJson(message);
 
-            theConnector.HandleJson(json);
+            theRunner.HandleJson(json);
 
             theCommand.Received.Single()
                 .id.ShouldBe("foo");
@@ -46,11 +45,12 @@ namespace StoryTeller.Testing.ST
         {
             var json = "{foo: 1}";
 
-            theConnector.HandleJson(json);
+            theRunner.HandleJson(json);
 
             theRemoteController.Received().SendJsonMessage(json);
         }
     }
+
 
     public class RecordingCommand<T> : Command<T> where T : ClientMessage
     {

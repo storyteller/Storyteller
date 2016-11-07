@@ -1,41 +1,33 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Extensions.Primitives;
 using StoryTeller;
-using StoryTeller.Commands;
 using StoryTeller.Remotes;
-using StructureMap;
 
 namespace ST.Client
 {
     public class WebApplicationRunner : IDisposable
     {
         private readonly OpenInput _input;
-        private IContainer _container;
+        private ClientConnector _client;
+        private FixtureController _fixtures;
+        private PersistenceController _persistence;
         private IWebHost _server;
         private AssetFileWatcher _watcher;
+        private CommandRunner _commands;
 
         public WebApplicationRunner(OpenInput input)
         {
             _input = input;
         }
 
-        public RemoteController Controller { get; private set; }
+        public RemoteController Remote { get; private set; }
 
         public string BaseAddress { get; private set; }
-        public void Dispose()
-        {
-            Controller.Teardown();
-            _server.SafeDispose();
-            _container.Dispose();
-            _watcher?.Dispose();
-        }
 
         public Task<SystemRecycled> Startup { get; private set; }
 
@@ -43,21 +35,34 @@ namespace ST.Client
         {
             get
             {
-                var recycled = Controller.LatestSystemRecycled ?? Startup.Result;
+                var recycled = Remote.LatestSystemRecycled ?? Startup.Result;
                 recycled.properties["Spec Directory"] = _input.SpecPath;
 
                 return recycled;
             }
         }
 
+        public void Dispose()
+        {
+            Remote.Teardown();
+            _server.SafeDispose();
+            _watcher?.Dispose();
+
+            _persistence.Dispose();
+        }
+
+
+
         public void Start()
         {
-            Controller = _input.BuildRemoteController();
+            Remote = _input.BuildRemoteController();
 
-            Controller.AssertValid();
+            Remote.AssertValid();
+
+            
 
 
-            Startup = Controller.Start().ContinueWith(t =>
+            Startup = Remote.Start().ContinueWith(t =>
             {
                 t.Result.WriteSystemUsage();
 
@@ -66,41 +71,37 @@ namespace ST.Client
 
             var port = PortFinder.FindPort(5000);
             if (_input.WebSocketAddressFlag.IsNotEmpty())
-            {
                 port = new Uri(_input.WebSocketAddressFlag).Port;
-            }
 
 
             BaseAddress = "http://localhost:" + port;
 
             var webSockets = new WebSocketsHandler();
 
+            _commands = new CommandRunner(Remote);
 
-            var webSocketsAddress = $"ws://127.0.0.1:{port}";
 
-            // TODO -- fugly as hell. Either do it all the SM way, or rip out SM
-            var registry = new WebApplicationRegistry(webSocketsAddress, webSockets, Controller);
-            _container = new Container(registry);
-
+            _client = new ClientConnector(webSockets, _commands.HandleJson)
+            {
+                WebSocketsAddress = $"ws://127.0.0.1:{port}"
+            };
 
             startWebServer(port, webSockets);
 
 
-            Controller.AddListener(_container.GetInstance<IClientConnector>());
+            Remote.AddListener(_client);
 
-            _container.GetInstance<AssetFileWatcher>().Start();
+            _watcher = new AssetFileWatcher(_client);
 
-            var persistence = _container.GetInstance<IPersistenceController>();
-            persistence.StartWatching(_input.SpecPath);
-            Controller.Messaging.AddListener(persistence);
+            _persistence = new PersistenceController(_client, new SpecFileWatcher());
+            _persistence.StartWatching(_input.SpecPath);
+            Remote.Messaging.AddListener(_persistence);
 
-            var dsl = _container.GetInstance<IFixtureController>();
-            dsl.StartWatching(_input.FixturePath);
-            Controller.Messaging.AddListener(dsl);
+            _fixtures = new FixtureController(_client, new FixtureFileWatcher());
+            _fixtures.StartWatching(_input.FixturePath);
+            Remote.Messaging.AddListener(_fixtures);
 
-#if DEBUG
-            _watcher = new AssetFileWatcher(_container.GetInstance<IClientConnector>());
-#endif   
+
         }
 
         private void startWebServer(int port, WebSocketsHandler webSockets)
@@ -117,23 +118,18 @@ namespace ST.Client
                     app.Use(async (http, next) =>
                     {
                         if (http.WebSockets.IsWebSocketRequest)
-                        {
                             await webSockets.HandleSocket(http).ConfigureAwait(false);
-                        }
                         else
-                        {
                             await next().ConfigureAwait(false);
-                        }
                     });
 
 #if DEBUG
                     configureStaticFiles(app);
 #endif
 
-                    app.Run(async (http) =>
+                    app.Run(async http =>
                     {
-                        var endpoint = _container.GetInstance<HomeEndpoint>();
-                        var html = endpoint.Index(LatestSystemRecycled).ToString();
+                        var html = HomeEndpoint.BuildPage(LatestSystemRecycled, _client, _persistence).ToString();
 
                         http.Response.ContentType = "text/html";
                         await http.Response.WriteAsync(html).ConfigureAwait(false);
@@ -152,9 +148,10 @@ namespace ST.Client
             app.UseStaticFiles(new StaticFileOptions
             {
                 ServeUnknownFileTypes = true,
-                FileProvider = new CompositeFileProvider(new PhysicalFileProvider(baseDirectory), new PhysicalFileProvider(clientRoot))
+                FileProvider =
+                    new CompositeFileProvider(new PhysicalFileProvider(baseDirectory),
+                        new PhysicalFileProvider(clientRoot))
             });
         }
-
     }
 }
