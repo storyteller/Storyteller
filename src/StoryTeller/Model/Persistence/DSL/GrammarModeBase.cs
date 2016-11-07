@@ -14,6 +14,9 @@ namespace StoryTeller.Model.Persistence.DSL
         {
             switch (target.ToLower())
             {
+                case "header":
+                    cell.header = value;
+                    break;
                 case "cell":
                     cell.Key = value;
                     break;

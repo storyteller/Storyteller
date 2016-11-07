@@ -172,7 +172,7 @@ namespace StoryTeller.Testing.Model.Persistence
     public class TablesFixture : Fixture
     {
         [ExposeAsTable("Add some numbers")]
-        public void AddNumbers(int x, int y)
+        public void AddNumbers([Header("X")]int x, [Header("Y")]int y)
         {
             
         }

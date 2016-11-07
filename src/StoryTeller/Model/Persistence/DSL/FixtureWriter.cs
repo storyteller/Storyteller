@@ -107,14 +107,16 @@ namespace StoryTeller.Model.Persistence.DSL
             }
 
 
-            var headers = new[] {tableType}.Concat(grammar.cells.Select(x => x.Key)).ToArray();
+            var firstRow = new[] {tableType}.Concat(grammar.cells.Select(x => x.Key)).ToArray();
+
+            var headers = new[] { "header" }.Concat(grammar.cells.Select(x => x.header)).ToArray();
 
             var defaults = new[] {"default"}.Concat(grammar.cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
             var options = new[] {"options"}.Concat(grammar.cells.Select(x => Option.Write(x.options))).ToArray();
             var editors = new[] {"editor"}.Concat(grammar.cells.Select(x => x.editor ?? string.Empty)).ToArray();
             var results = new[] {"result"}.Concat(grammar.cells.Select(x => x.result.ToString())).ToArray();
 
-            writeTable(new[] {headers, defaults, options, editors, results}, writer);
+            writeTable(new[] {firstRow, headers, defaults, options, editors, results}, writer);
         }
 
         public static void Write(FixtureModel model, string file)
