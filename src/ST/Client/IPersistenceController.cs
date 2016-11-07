@@ -1,10 +1,11 @@
-﻿using StoryTeller.Messages;
+﻿using System;
+using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 
 namespace ST.Client
 {
-    public interface IPersistenceController
+    public interface IPersistenceController : IDisposable
     {
         Hierarchy Hierarchy { get; }
         ResultsCache Results { get; }

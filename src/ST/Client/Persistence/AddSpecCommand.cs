@@ -1,26 +1,16 @@
 ﻿using System;
-using StoryTeller.Commands;
 using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {
     public class AddSpecCommand : Command<AddSpec>
     {
-        private readonly Lazy<IPersistenceController> _controller;
-        private readonly Lazy<IClientConnector> _connector;
-
-        public AddSpecCommand(Lazy<IPersistenceController> controller, Lazy<IClientConnector> connector)
+        public override void HandleMessage(AddSpec message, IApplication app)
         {
-            _controller = controller;
-            _connector = connector;
-        }
-
-        public override void HandleMessage(AddSpec message)
-        {
-            var added = _controller.Value.AddSpec(message.parent, message.name);
+            var added = app.Persistence.AddSpec(message.parent, message.name);
             try
             {
-                _connector.Value.SendMessageToClient(added);
+                app.Client.SendMessageToClient(added);
             }
             catch (Exception e)
             {

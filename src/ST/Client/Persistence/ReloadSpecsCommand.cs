@@ -1,21 +1,12 @@
-﻿using System;
-using StoryTeller.Commands;
-using StoryTeller.Messages;
+﻿using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {
     public class ReloadSpecsCommand : Command<ReloadSpecs>
     {
-        private readonly Lazy<IPersistenceController> _controller;
-
-        public ReloadSpecsCommand(Lazy<IPersistenceController> controller)
+        public override void HandleMessage(ReloadSpecs message, IApplication app)
         {
-            _controller = controller;
-        }
-
-        public override void HandleMessage(ReloadSpecs message)
-        {
-            _controller.Value.ReloadHierarchy();
+            app.Persistence.ReloadHierarchy();
         }
     }
 }

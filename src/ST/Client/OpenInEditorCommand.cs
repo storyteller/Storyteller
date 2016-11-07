@@ -1,24 +1,15 @@
-﻿using System;
-using System.Diagnostics;
-using StoryTeller.Commands;
+﻿using System.Diagnostics;
 using StoryTeller.Messages;
 
 namespace ST.Client
 {
     public class OpenInEditorCommand : Command<OpenInEditor>
     {
-        private readonly Lazy<IPersistenceController> _persistence;
-
-        public OpenInEditorCommand(Lazy<IPersistenceController> persistence)
+        public override void HandleMessage(OpenInEditor message, IApplication app)
         {
-            _persistence = persistence;
-        }
+            if (!app.Persistence.Hierarchy.Specifications.Has(message.id)) return;
 
-        public override void HandleMessage(OpenInEditor message)
-        {
-            if (!_persistence.Value.Hierarchy.Specifications.Has(message.id)) return;
-
-            var spec = _persistence.Value.Hierarchy.Specifications[message.id];
+            var spec = app.Persistence.Hierarchy.Specifications[message.id];
             var file = spec.Filename;
 
             Process.Start(file);

@@ -1,21 +1,13 @@
 ﻿using System;
-using StoryTeller.Commands;
 using StoryTeller.Messages;
 
 namespace ST.Client
 {
     public class ForceRecycleCommand : Command<ForceRecycle>
     {
-        private readonly IRemoteController _controller;
-
-        public ForceRecycleCommand(IRemoteController controller)
+        public override void HandleMessage(ForceRecycle message, IApplication app)
         {
-            _controller = controller;
-        }
-
-        public override void HandleMessage(ForceRecycle message)
-        {
-            _controller.Recycle();
+            app.Remote.Recycle();
         }
     }
 }

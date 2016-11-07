@@ -1,25 +1,14 @@
-﻿using System;
-using StoryTeller.Commands;
-using StoryTeller.Messages;
+﻿using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {
     public class RequestSpecDataCommand : Command<SpecDataRequested>
     {
-        private readonly Lazy<IPersistenceController> _persistence;
-        private readonly Lazy<IClientConnector> _client;
-
-        public RequestSpecDataCommand(Lazy<IPersistenceController> persistence, Lazy<IClientConnector> client)
+        public override void HandleMessage(SpecDataRequested message, IApplication app)
         {
-            _persistence = persistence;
-            _client = client;
-        }
+            var data = app.Persistence.LoadSpecification(message.id);
 
-        public override void HandleMessage(SpecDataRequested message)
-        {
-            var data = _persistence.Value.LoadSpecification(message.id);
-
-            _client.Value.SendMessageToClient(data);
+            app.Client.SendMessageToClient(data);
         }
     }
 }

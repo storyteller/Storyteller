@@ -1,46 +1,28 @@
-﻿using System;
-using Baseline;
-using StoryTeller.Commands;
+﻿using Baseline;
 using StoryTeller.Messages;
-using StoryTeller.Remotes;
 
 namespace ST.Client.Persistence
 {
     public class RunSpecCommand : Command<RunSpec>
     {
-        private readonly Lazy<IPersistenceController> _persistence;
-        private readonly SaveSpecBodyCommand _saveSpec;
-        private readonly IRemoteController _remote;
-
-        public RunSpecCommand(Lazy<IPersistenceController> persistence, SaveSpecBodyCommand saveSpec, IRemoteController remote)
+        public override void HandleMessage(RunSpec message, IApplication app)
         {
-            if (saveSpec == null) throw new ArgumentNullException(nameof(saveSpec));
-            _persistence = persistence;
-            _saveSpec = saveSpec;
-            _remote = remote;
-        }
-
-        public override void HandleMessage(RunSpec message)
-        {
-            
             if (message.spec != null)
             {
                 if (message.revision.IsNotEmpty())
-                {
-                    _saveSpec.HandleMessage(new SaveSpecBody
+                    new SaveSpecBodyCommand().HandleMessage(new SaveSpecBody
                     {
                         id = message.id,
                         revision = message.revision,
                         spec = message.spec
-                    });
-                }
+                    }, app);
             }
             else
             {
-                message.spec = _persistence.Value.LoadSpecification(message.id).data;
+                message.spec = app.Persistence.LoadSpecification(message.id).data;
             }
 
-            _remote.SendMessage(message);
+            app.Remote.SendMessage(message);
         }
     }
 }

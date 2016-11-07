@@ -10,23 +10,25 @@ using StoryTeller.Remotes;
 namespace StoryTeller.Testing.ST.Persistence
 {
     
-    public class RunSpecCommandTester : InteractionContext<RunSpecCommand>
+    public class RunSpecCommandTester
     {
+        private readonly MockedApplication app = new MockedApplication();
+
         [Fact]
         public void run_spec_by_id_only()
         {
             var theSpecRetrievedFromPersistence = new Specification();
 
-            MockFor<IPersistenceController>().LoadSpecification("foo")
+            app.Persistence.LoadSpecification("foo")
                 .Returns(new SpecData
                 {
                     data = theSpecRetrievedFromPersistence
                 });
 
             var theMessage = new RunSpec{id = "foo"};
-            ClassUnderTest.HandleMessage(theMessage);
+            new RunSpecCommand().HandleMessage(theMessage, app);
 
-            MockFor<IRemoteController>().Received().SendMessage(theMessage);
+            app.Remote.Received().SendMessage(theMessage);
 
             theMessage.spec.ShouldBeTheSameAs(theSpecRetrievedFromPersistence);
         }
@@ -43,12 +45,12 @@ namespace StoryTeller.Testing.ST.Persistence
                 id = "foo"
             };
 
-            ClassUnderTest.HandleMessage(theMessage);
+            new RunSpecCommand().HandleMessage(theMessage, app);
 
-            MockFor<IRemoteController>().Received().SendMessage(theMessage);
+            app.Remote.Received().SendMessage(theMessage);
 
             // do not auto-save
-            MockFor<IPersistenceController>().DidNotReceive().SaveSpecification("foo", theSpecSentFromTheClient);
+            app.Persistence.DidNotReceive().SaveSpecification("foo", theSpecSentFromTheClient);
 
         }
 
@@ -64,12 +66,12 @@ namespace StoryTeller.Testing.ST.Persistence
                 id = "foo"
             };
 
-            ClassUnderTest.HandleMessage(theMessage);
+            new RunSpecCommand().HandleMessage(theMessage, app);
 
-            MockFor<IRemoteController>().Received().SendMessage(theMessage);
+            app.Remote.Received().SendMessage(theMessage);
 
             // *do* auto-save
-            MockFor<IPersistenceController>().Received().SaveSpecification("foo", theSpecSentFromTheClient);
+            app.Persistence.Received().SaveSpecification("foo", theSpecSentFromTheClient);
 
         }
     }

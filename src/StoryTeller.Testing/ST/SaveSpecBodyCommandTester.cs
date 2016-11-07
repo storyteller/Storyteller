@@ -1,19 +1,14 @@
 ﻿using System;
-using Xunit;
 using NSubstitute;
-using ST.Client;
-using ST.Client.Persistence;
 using StoryTeller.Messages;
 using StoryTeller.Model;
+using ST.Client.Persistence;
+using Xunit;
 
 namespace StoryTeller.Testing.ST
 {
-    
-    public class SaveSpecBodyCommandTester : InteractionContext<SaveSpecBodyCommand>
+    public class SaveSpecBodyCommandTester
     {
-        private readonly SaveSpecBody theInputMessage;
-
-
         public SaveSpecBodyCommandTester()
         {
             theInputMessage = new SaveSpecBody
@@ -22,16 +17,18 @@ namespace StoryTeller.Testing.ST
                 revision = Guid.NewGuid().ToString(),
                 spec = new Specification()
             };
-
-            ClassUnderTest.HandleMessage(theInputMessage);
         }
+
+        private readonly SaveSpecBody theInputMessage;
 
 
         [Fact]
         public void should_have_persisted_the_spec_body()
         {
-            MockFor<IPersistenceController>().Received().SaveSpecification(theInputMessage.id, theInputMessage.spec);
-        }
+            var app = new MockedApplication();
+            new SaveSpecBodyCommand().HandleMessage(theInputMessage, app);
 
+            app.Persistence.Received().SaveSpecification(theInputMessage.id, theInputMessage.spec);
+        }
     }
 }

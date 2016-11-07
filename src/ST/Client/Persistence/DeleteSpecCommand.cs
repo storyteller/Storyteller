@@ -1,21 +1,12 @@
-﻿using System;
-using StoryTeller.Commands;
-using StoryTeller.Messages;
+﻿using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {
     public class DeleteSpecCommand : Command<DeleteSpec>
     {
-        private readonly Lazy<IPersistenceController> _controller;
-
-        public DeleteSpecCommand(Lazy<IPersistenceController> controller)
+        public override void HandleMessage(DeleteSpec message, IApplication app)
         {
-            _controller = controller;
-        }
-
-        public override void HandleMessage(DeleteSpec message)
-        {
-            _controller.Value.DeleteSpec(message.id);
+            app.Persistence.DeleteSpec(message.id);
         }
     }
 }

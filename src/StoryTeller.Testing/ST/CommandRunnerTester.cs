@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 using NSubstitute;
 using Shouldly;
-using StoryTeller.Commands;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using ST;
@@ -21,9 +20,13 @@ namespace StoryTeller.Testing.ST
         public CommandRunnerTester()
         {
             theCommand = new RecordingCommand<RunSpec>();
+
+            var app = Substitute.For<IApplication>();
             theRemoteController = Substitute.For<IRemoteController>();
 
-            theRunner = new CommandRunner(theRemoteController, new ICommand[] {theCommand});
+            app.Remote.Returns(theRemoteController);
+
+            theRunner = new CommandRunner(app, new ICommand[] {theCommand});
         }
 
         [Fact]
@@ -56,7 +59,7 @@ namespace StoryTeller.Testing.ST
     {
         public readonly IList<T> Received = new List<T>();
 
-        public override void HandleMessage(T message)
+        public override void HandleMessage(T message, IApplication app)
         {
             Received.Add(message);
         }

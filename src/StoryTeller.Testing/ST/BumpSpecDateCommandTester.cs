@@ -8,8 +8,9 @@ using Xunit;
 
 namespace StoryTeller.Testing.ST
 {
-    public class BumpSpecDateCommandTester : InteractionContext<BumpSpecDateCommand>
+    public class BumpSpecDateCommandTester
     {
+        private readonly MockedApplication app = new MockedApplication();
         public BumpSpecDateCommandTester()
         {
             theMessage = new BumpSpecDate
@@ -23,10 +24,10 @@ namespace StoryTeller.Testing.ST
                 ExpirationPeriod = 0
             };
 
-            theController = MockFor<IPersistenceController>();
+            theController = app.Persistence;
             theController.LoadSpecificationById(theMessage.id).Returns(theSpecification);
 
-            ClassUnderTest.HandleMessage(theMessage);
+            new BumpSpecDateCommand().HandleMessage(theMessage, app);
         }
 
         public BumpSpecDate theMessage;
@@ -36,7 +37,7 @@ namespace StoryTeller.Testing.ST
         [Fact]
         public void it_publishes_the_spec_body_saved_event()
         {
-            MockFor<IClientConnector>()
+            app.Client
                 .Received()
                 .SendMessageToClient(Arg.Is<SpecSaved>(y => y.spec.Equals(theSpecification)));
         }

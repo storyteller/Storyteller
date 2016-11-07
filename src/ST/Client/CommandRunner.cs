@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Baseline;
-using StoryTeller.Commands;
 
 namespace ST.Client
 {
     public class CommandRunner
     {
-        private readonly IRemoteController _remote;
+        private readonly IApplication _app;
         private readonly IList<ICommand> _commands = new List<ICommand>();
 
-        public CommandRunner(IRemoteController remote)
+        public CommandRunner(IApplication app)
         {
-            _remote = remote;
+            _app = app;
             GetType().GetTypeInfo().Assembly.GetExportedTypes().Where(x => x.IsConcreteTypeOf<ICommand>())
                 .Each(type =>
                 {
@@ -24,9 +23,10 @@ namespace ST.Client
                 });
         }
 
-        public CommandRunner(IRemoteController remote, ICommand[] commands)
+        public CommandRunner(IApplication app, ICommand[] commands)
         {
-            throw new NotImplementedException();
+            _app = app;
+            _commands.AddRange(commands);
         }
 
 
@@ -36,9 +36,13 @@ namespace ST.Client
             {
                 var command = _commands.FirstOrDefault(x => x.Matches(json));
                 if (command == null)
-                    _remote.SendJsonMessage(json);
+                {
+                    _app.Remote.SendJsonMessage(json);
+                }
                 else
-                    command.HandleJson(json);
+                {
+                    command.HandleJson(json, _app);
+                }
             }
             catch (Exception ex)
             {

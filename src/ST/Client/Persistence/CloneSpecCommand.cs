@@ -1,27 +1,17 @@
 ﻿using System;
-using StoryTeller.Commands;
 using StoryTeller.Messages;
 
 namespace ST.Client.Persistence
 {
     public class CloneSpecCommand : Command<CloneSpec>
     {
-        private readonly Lazy<IPersistenceController> _controller;
-        private readonly Lazy<IClientConnector> _client;
-
-        public CloneSpecCommand(Lazy<IPersistenceController> controller, Lazy<IClientConnector> client)
-        {
-            _controller = controller;
-            _client = client;
-        }
-
-        public override void HandleMessage(CloneSpec message)
+        public override void HandleMessage(CloneSpec message, IApplication app)
         {
             try
             {
-                var added =  _controller.Value.CloneSpecification(message.id, message.name);
+                var added =  app.Persistence.CloneSpecification(message.id, message.name);
 
-                _client.Value.SendMessageToClient(added);
+                app.Client.SendMessageToClient(added);
             }
             catch (Exception e)
             {

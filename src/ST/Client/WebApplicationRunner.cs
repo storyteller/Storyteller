@@ -10,12 +10,17 @@ using StoryTeller.Remotes;
 
 namespace ST.Client
 {
-    public class WebApplicationRunner : IDisposable
+    public interface IApplication
+    {
+        IRemoteController Remote { get; }
+        IClientConnector Client { get; }
+        IPersistenceController Persistence { get; }
+    }
+
+    public class WebApplicationRunner : IDisposable, IApplication
     {
         private readonly OpenInput _input;
-        private ClientConnector _client;
         private FixtureController _fixtures;
-        private PersistenceController _persistence;
         private IWebHost _server;
         private AssetFileWatcher _watcher;
         private CommandRunner _commands;
@@ -25,11 +30,15 @@ namespace ST.Client
             _input = input;
         }
 
-        public RemoteController Remote { get; private set; }
+        public IRemoteController Remote { get; private set; }
 
         public string BaseAddress { get; private set; }
 
         public Task<SystemRecycled> Startup { get; private set; }
+
+        public IClientConnector Client { get; private set; }
+
+        public IPersistenceController Persistence { get; private set; }
 
         public SystemRecycled LatestSystemRecycled
         {
@@ -48,7 +57,7 @@ namespace ST.Client
             _server.SafeDispose();
             _watcher?.Dispose();
 
-            _persistence.Dispose();
+            Persistence.Dispose();
         }
 
 
@@ -78,10 +87,10 @@ namespace ST.Client
 
             var webSockets = new WebSocketsHandler();
 
-            _commands = new CommandRunner(Remote);
+            _commands = new CommandRunner(this);
 
 
-            _client = new ClientConnector(webSockets, _commands.HandleJson)
+            Client = new ClientConnector(webSockets, _commands.HandleJson)
             {
                 WebSocketsAddress = $"ws://127.0.0.1:{port}"
             };
@@ -89,15 +98,15 @@ namespace ST.Client
             startWebServer(port, webSockets);
 
 
-            Remote.AddListener(_client);
+            Remote.AddListener(Client);
 
-            _watcher = new AssetFileWatcher(_client);
+            _watcher = new AssetFileWatcher(Client);
 
-            _persistence = new PersistenceController(_client, new SpecFileWatcher());
-            _persistence.StartWatching(_input.SpecPath);
-            Remote.Messaging.AddListener(_persistence);
+            Persistence = new PersistenceController(Client, new SpecFileWatcher());
+            Persistence.StartWatching(_input.SpecPath);
+            Remote.Messaging.AddListener(Persistence);
 
-            _fixtures = new FixtureController(_client, new FixtureFileWatcher());
+            _fixtures = new FixtureController(Client, new FixtureFileWatcher());
             _fixtures.StartWatching(_input.FixturePath);
             Remote.Messaging.AddListener(_fixtures);
 
@@ -129,7 +138,7 @@ namespace ST.Client
 
                     app.Run(async http =>
                     {
-                        var html = HomeEndpoint.BuildPage(LatestSystemRecycled, _client, _persistence).ToString();
+                        var html = HomeEndpoint.BuildPage(LatestSystemRecycled, Client, Persistence).ToString();
 
                         http.Response.ContentType = "text/html";
                         await http.Response.WriteAsync(html).ConfigureAwait(false);
