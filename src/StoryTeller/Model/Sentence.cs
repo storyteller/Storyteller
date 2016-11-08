@@ -39,8 +39,7 @@ namespace StoryTeller.Model
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
-            var sentence = new Sentence();
-            sentence.key = key;
+            var sentence = new Sentence {key = key};
 
             var over = grammar as Sentence;
             if (over == null)

@@ -33,6 +33,29 @@ namespace StoryTeller.Model
             }
         }
 
+        public Step ToSampleStep()
+        {
+            var step = new Step(key);
+
+            if (this is IModelWithCells)
+            {
+                var cells = this.As<IModelWithCells>().cells ?? new Cell[0];
+                foreach (var cell in cells)
+                {
+                    step.Values.Add(cell.Key, cell.HasDefault() ? cell.DefaultValue : cell.Key);
+                }
+            }
+
+            configureSampleStep(step);
+
+            return step;
+        }
+
+        protected virtual void configureSampleStep(Step step)
+        {
+            // nothing
+        }
+
         public void AddError(GrammarError error)
         {
             _errors.Add(error);
