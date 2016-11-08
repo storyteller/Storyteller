@@ -17,6 +17,14 @@ namespace StoryTeller.Model
         {
         }
 
+        protected internal override void configureSampleStep(Step step)
+        {
+            foreach (var child in children)
+            {
+                child.configureSampleStep(step);
+            }
+        }
+
         public Paragraph(IEnumerable<GrammarModel> children) : this()
         {
             this.children = children.ToArray();

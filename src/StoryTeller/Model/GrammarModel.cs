@@ -51,7 +51,7 @@ namespace StoryTeller.Model
             return step;
         }
 
-        protected virtual void configureSampleStep(Step step)
+        protected internal virtual void configureSampleStep(Step step)
         {
             // nothing
         }

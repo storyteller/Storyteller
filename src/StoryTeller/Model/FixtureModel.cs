@@ -25,6 +25,31 @@ namespace StoryTeller.Model
             }
         }
 
+        public Specification ToSampleSpecification()
+        {
+            var spec = new Specification
+            {
+                name = $"Sample Specification for {key}"
+            };
+
+            var section = spec.AddSection(key);
+
+            CreateSampleSteps(section);
+
+            return spec;
+        }
+
+        public void CreateSampleSteps(Section section)
+        {
+            section.AddComment($"Implemented by {implementation}");
+
+            foreach (var grammar in grammars.OrderBy(x => x.key))
+            {
+                section.AddComment("## " + grammar.key);
+                section.Children.Add(grammar.ToSampleStep());
+            }
+        }
+
         public FixtureModel(string key) : base("fixture")
         {
             this.key = key;
@@ -42,8 +67,7 @@ namespace StoryTeller.Model
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
-            var model = new FixtureModel(key);
-            model.implementation = implementation;
+            var model = new FixtureModel(key) {implementation = implementation};
 
             var over = grammar as FixtureModel;
             if (over == null)

@@ -9,5 +9,12 @@ namespace StoryTeller.Model
         public EmbeddedSection() : base("embedded-section")
         {
         }
+
+        protected internal override void configureSampleStep(Step step)
+        {
+            var section = step.Collections[collection];
+
+            fixture.CreateSampleSteps(section);
+        }
     }
 }

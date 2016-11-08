@@ -19,7 +19,7 @@ namespace StoryTeller.Model
             
         }
 
-        protected override void configureSampleStep(Step step)
+        protected internal override void configureSampleStep(Step step)
         {
             var section = step.Collections[collection];
             for (int i = 0; i < 3; i++)
