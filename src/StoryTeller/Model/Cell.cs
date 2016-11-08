@@ -337,6 +337,11 @@ namespace StoryTeller.Model
 
             return cell;
         }
+
+        public void AddSampleValue(Step step)
+        {
+            step.Values.Add(Key, HasDefault() ? DefaultValue : Key);
+        }
     }
 
     // Tested through integration tests in the SetVerificationGrammar

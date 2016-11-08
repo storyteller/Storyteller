@@ -19,6 +19,16 @@ namespace StoryTeller.Model
             
         }
 
+        protected override void configureSampleStep(Step step)
+        {
+            var section = step.Collections[collection];
+            for (int i = 0; i < 3; i++)
+            {
+                var row = section.AddStep("row");
+                cells.Each(x => x.AddSampleValue(row));
+            }
+        }
+
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
             var table = new Table();

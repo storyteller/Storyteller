@@ -42,7 +42,7 @@ namespace StoryTeller.Model
                 var cells = this.As<IModelWithCells>().cells ?? new Cell[0];
                 foreach (var cell in cells)
                 {
-                    step.Values.Add(cell.Key, cell.HasDefault() ? cell.DefaultValue : cell.Key);
+                    cell.AddSampleValue(step);
                 }
             }
 
