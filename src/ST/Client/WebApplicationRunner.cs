@@ -138,7 +138,7 @@ namespace ST.Client
 
                     app.Run(async http =>
                     {
-                        var html = HomeEndpoint.BuildPage(LatestSystemRecycled, Client, Persistence).ToString();
+                        var html = HomeEndpoint.BuildPage(LatestSystemRecycled, Client, Persistence, _input).ToString();
 
                         http.Response.ContentType = "text/html";
                         await http.Response.WriteAsync(html).ConfigureAwait(false);

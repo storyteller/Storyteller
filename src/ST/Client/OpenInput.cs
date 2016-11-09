@@ -22,5 +22,8 @@ namespace ST.Client
         {
             set { _disableAppDomainFileWatching = value; }
         }
+
+        [FlagAlias("dev"), Description("Only for Storyteller development itself")]
+        public bool DevFlag { get; set; }
     }
 }

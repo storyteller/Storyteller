@@ -2,7 +2,7 @@
   "profiles": {
     "Open Samples": {
       "commandName": "Project",
-      "commandLineArgs": "open src/Storyteller.Samples",
+      "commandLineArgs": "open src/Storyteller.Samples --dev",
       "workingDirectory": "C:\\code\\storyteller"
     },
     "Scratchpad": {
@@ -10,25 +10,28 @@
       "commandLineArgs": "open src/Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Open Gallery": {
+    "Open Gallery": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Gallery",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Open Specifications": {
+    "Open Specifications": {
       "commandName": "Project",
       "commandLineArgs": "open src/Specifications",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Convert Specifications": {
+    "Convert Specifications": {
       "commandName": "Project",
       "commandLineArgs": "convert src/Specifications",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Convert Samples": {
+    "Convert Samples": {
       "commandName": "Project",
       "commandLineArgs": "convert src/Storyteller.Gallery",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "ST": {
+      "commandName": "Project"
+    }
   }
 }
