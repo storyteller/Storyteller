@@ -10,6 +10,7 @@ class Fixture{
 		this.title = data.title || data.key;
 		this.errors = data.errors || [];
 		this.implementation = data.implementation;
+		this.sample = data.sample;
 
 		var grammars = {};
 		
