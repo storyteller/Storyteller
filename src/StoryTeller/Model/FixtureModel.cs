@@ -25,6 +25,8 @@ namespace StoryTeller.Model
             }
         }
 
+        public Specification sample => ToSampleSpecification();
+
         public Specification ToSampleSpecification()
         {
             var spec = new Specification
