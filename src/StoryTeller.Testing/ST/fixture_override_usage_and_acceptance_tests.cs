@@ -146,11 +146,6 @@ namespace StoryTeller.Testing.ST
                 .format.ShouldBe("I don't want to say the thing");
         }
 
-        /*
-         * Table/Set
-         * Embedded
-         * Paragraph
-         */
     }
 
     public class SystemFixture : Fixture
