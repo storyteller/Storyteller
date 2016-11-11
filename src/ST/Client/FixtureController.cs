@@ -1,16 +1,20 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using Baseline;
 using Oakton;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
+using StoryTeller.Remotes;
 
 namespace ST.Client
 {
     public interface IFixtureController
     {
         void StartWatching(string path);
+        void RecordSystemFixtures(SystemRecycled recycled);
+        FixtureModel[] CombinedFixtures();
     }
 
     public class FixtureController : IFixtureFileObserver, IFixtureController
@@ -29,15 +33,25 @@ namespace ST.Client
             _watcher = watcher;
         }
 
-        public void SaveSystemFixtures(FixtureLibrary fixtures)
+        public void RecordSystemFixtures(SystemRecycled recycled)
         {
-            _systemFixtures = fixtures;
+            _systemFixtures = FixtureLibrary.From(recycled.fixtures);
+
+            if (_overrides != null)
+            {
+                var combined = _systemFixtures.ApplyOverrides(_overrides);
+                recycled.fixtures = combined.Models.ToArray();
+            }
         }
 
-        public FixtureLibrary CombinedFixtures()
+        public FixtureModel[] CombinedFixtures()
         {
-            return _systemFixtures == null ? _overrides : _systemFixtures.ApplyOverrides(_overrides);
+            if (_overrides == null) return _systemFixtures.Models.ToArray();
+
+            return _systemFixtures.ApplyOverrides(_overrides).Models.ToArray();
         }
+
+
 
         public void StartWatching(string path)
         {

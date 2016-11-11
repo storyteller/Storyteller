@@ -12,7 +12,10 @@ namespace StoryTeller.Model.Persistence.DSL
             using (var streamReader = new StreamReader(stream))
             using (var reader = new FixtureReader(streamReader))
             {
-                return reader.Read();
+                var fixture = reader.Read();
+                fixture.key = Path.GetFileNameWithoutExtension(file);
+
+                return fixture;
             }
         }
 

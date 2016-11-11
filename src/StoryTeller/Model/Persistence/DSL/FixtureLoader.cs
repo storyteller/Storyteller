@@ -27,7 +27,7 @@ namespace StoryTeller.Model.Persistence.DSL
 
             foreach (var fp in fixturePaths)
             {
-                var fixture = FixtureReader.ReadFrom(File.ReadAllText(fp));
+                var fixture = FixtureReader.ReadFromFile(fp);
                 lib.Models[fixture.key] = fixture;
             }
 

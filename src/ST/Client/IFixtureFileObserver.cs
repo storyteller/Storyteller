@@ -8,7 +8,5 @@ namespace ST.Client
         void Changed(string file);
         void Added(string file);
         void Deleted(string file);
-        void SaveSystemFixtures(FixtureLibrary fixtures);
-        FixtureLibrary CombinedFixtures();
     }
 }

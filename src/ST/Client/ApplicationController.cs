@@ -31,12 +31,7 @@ namespace ST.Client
             Engine.AssertValid();
             Client = Website.Start(this);
 
-            Startup = Engine.Start().ContinueWith(t =>
-            {
-                t.Result.WriteSystemUsage();
-
-                return t.Result;
-            });
+            var starting = Engine.Start();
 
             Engine.AddListener(Client);
 
@@ -49,6 +44,15 @@ namespace ST.Client
             Engine.Messaging.AddListener(Fixtures);
 
             Engine.Messaging.AddListener(this);
+
+            Startup = starting.ContinueWith(t =>
+            {
+                t.Result.WriteSystemUsage();
+
+                Fixtures.RecordSystemFixtures(t.Result);
+
+                return t.Result;
+            });
         }
 
         public SystemRecycled LatestSystemRecycled
@@ -57,6 +61,8 @@ namespace ST.Client
             {
                 var recycled = Engine.LatestSystemRecycled ?? Startup.Result;
                 recycled.properties["Spec Directory"] = _input.SpecPath;
+
+                recycled.fixtures = Fixtures.CombinedFixtures();
 
                 return recycled;
             }
@@ -85,7 +91,8 @@ namespace ST.Client
         {
             message.WriteSystemUsage();
 
-            // TODO -- intercept with Fixture overrides here.
+            Fixtures.RecordSystemFixtures(message);
+            message.fixtures = Fixtures.CombinedFixtures();
 
             Client.SendMessageToClient(message);
         }

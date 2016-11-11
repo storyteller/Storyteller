@@ -41,6 +41,20 @@ namespace StoryTeller.Model
             return newLibrary;
         }
 
+        /// <summary>
+        /// For testing setup only
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public FixtureLibrary With<T>() where T : Fixture, new()
+        {
+            var fixture = new T();
+            Fixtures[fixture.Key] = fixture;
+
+
+            return this;
+        }
+
         public static bool IsFixtureType(Type type)
         {
             if (!type.CanBeCastTo<Fixture>()) return false;
@@ -61,6 +75,18 @@ namespace StoryTeller.Model
             {
                 return new Type[0];
             }
+        }
+
+        public static FixtureLibrary From(FixtureModel[] fixtures)
+        {
+            var library = new FixtureLibrary();
+
+            foreach (var fixture in fixtures)
+            {
+                library.Models[fixture.key] = fixture;
+            }
+
+            return library;
         }
 
 

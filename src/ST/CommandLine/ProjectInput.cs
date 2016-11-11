@@ -61,7 +61,9 @@ namespace ST.CommandLine
             get
             {
                 if (SpecsFlag.IsNotEmpty())
+                {
                     return SpecsFlag.ToFullPath();
+                }
 
                 return HierarchyLoader.SelectSpecPath(Path.ToFullPath());
             }
@@ -72,7 +74,9 @@ namespace ST.CommandLine
             get
             {
                 if (FixturesFlag.IsNotEmpty())
+                {
                     return FixturesFlag.ToFullPath();
+                }
 
                 return FixtureLoader.SelectFixturePath(Path.ToFullPath());
             }

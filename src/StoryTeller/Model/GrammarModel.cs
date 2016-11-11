@@ -68,7 +68,7 @@ namespace StoryTeller.Model
 
         public virtual GrammarModel ApplyOverrides(GrammarModel grammar)
         {
-            throw new NotImplementedException();
+            return this;
         }
     }
 }
