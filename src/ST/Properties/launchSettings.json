@@ -2,7 +2,7 @@
   "profiles": {
     "Open Samples": {
       "commandName": "Project",
-      "commandLineArgs": "open src/Storyteller.Samples --dev",
+      "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
     "Scratchpad": {

@@ -1,9 +1,13 @@
 ﻿using System.Threading.Tasks;
+using StoryTeller.Messages;
 using StoryTeller.Remotes;
+using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
 {
-    public class ApplicationController : IApplication
+    public class ApplicationController : IApplication, IListener<SystemRecycled>,
+        IListener<SystemRecycleStarted>,
+        IListener<QueueState>
     {
         private readonly OpenInput _input;
         public IPersistenceController Persistence { get; private set; }
@@ -43,6 +47,8 @@ namespace ST.Client
             Fixtures = new FixtureController(Client, new FixtureFileWatcher());
             Fixtures.StartWatching(_input.FixturePath);
             Engine.Messaging.AddListener(Fixtures);
+
+            Engine.Messaging.AddListener(this);
         }
 
         public SystemRecycled LatestSystemRecycled
@@ -68,6 +74,25 @@ namespace ST.Client
         public void Dispose()
         {
             Dispose(true);
+        }
+
+        public void Receive(QueueState message)
+        {
+            Client.SendMessageToClient(message);
+        }
+
+        public void Receive(SystemRecycled message)
+        {
+            message.WriteSystemUsage();
+
+            // TODO -- intercept with Fixture overrides here.
+
+            Client.SendMessageToClient(message);
+        }
+
+        public void Receive(SystemRecycleStarted message)
+        {
+            Client.SendMessageToClient(message);
         }
     }
 }
