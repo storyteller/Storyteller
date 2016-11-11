@@ -40,6 +40,7 @@ namespace StoryTeller.Model
                 table.title = title;
                 table.collection = collection;
                 table.cells = cells?.Select(c => c.ApplyOverrides(null)).ToArray();
+
                 return table;
             }
 
@@ -52,7 +53,8 @@ namespace StoryTeller.Model
                 return c.ApplyOverrides(match);
             }).ToList() ?? new List<Cell>();
 
-            var keys = table.cells.Select(x => x.Key).ToList();
+            var keys = cells.Select(x => x.Key).ToList();
+
             var missingCells = over.cells.Where(x => !keys.Contains(x.Key)).Select(x => x.ApplyOverrides(null));
             table.cells = matchedCells.Concat(missingCells).ToArray();
 

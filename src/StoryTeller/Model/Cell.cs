@@ -43,12 +43,19 @@ namespace StoryTeller.Model
             Type = type;
             Key = key;
 
-            _equivalence = cells.Equivalence.CheckerFor(type);
+            if (type != null)
+            {
+                _equivalence = cells.Equivalence.CheckerFor(type);
 
-            selectConverter(cells, type);
+                selectConverter(cells, type);
 
-            if (editor.IsEmpty())
-                selectEditor(type);
+                if (editor.IsEmpty())
+                {
+                    selectEditor(type);
+                }
+            }
+
+
         }
 
         [JsonIgnore]
@@ -311,31 +318,20 @@ namespace StoryTeller.Model
 
         public Cell ApplyOverrides(Cell over)
         {
-            var cell = new Cell(CellHandling.Basic(), Key, Type)
+            if (over == null) return this;
+
+            return new Cell(CellHandling.Basic(), Key, Type)
             {
                 OptionListName = OptionListName,
-                Position = Position
+                Position = Position,
+                DefaultValue = over.DefaultValue.IsNotEmpty() ? over.DefaultValue : DefaultValue,
+                result = over.result || result,
+                editor = over.editor.IsNotEmpty() ? over.editor : editor,
+                header = over.header.IsNotEmpty() ? over.header : header,
+                options = over.options != null
+                    ? over.options?.Select(x => x.Copy()).ToArray()
+                    : options?.Select(x => x.Copy()).ToArray()
             };
-
-            if (over == null)
-            {
-                cell.DefaultValue = DefaultValue;
-                cell.result = result;
-                cell.editor = editor;
-                cell.header = header;
-                cell.options = options?.Select(x => x.Copy()).ToArray();
-                return cell;
-            }
-
-            cell.DefaultValue = over.DefaultValue.IsNotEmpty() ? over.DefaultValue : DefaultValue;
-            cell.result = over.result || result; // either here
-            cell.editor = over.editor.IsNotEmpty() ? over.editor : editor;
-            cell.header = over.header.IsNotEmpty() ? over.header : header;
-            cell.options = over.options != null
-                ? over.options?.Select(x => x.Copy()).ToArray()
-                : options?.Select(x => x.Copy()).ToArray();
-
-            return cell;
         }
 
         public void AddSampleValue(Step step)

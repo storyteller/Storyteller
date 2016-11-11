@@ -69,15 +69,10 @@ namespace StoryTeller.Model
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
-            var model = new FixtureModel(key) {implementation = implementation};
+            if (!(grammar is FixtureModel)) return this;
 
-            var over = grammar as FixtureModel;
-            if (over == null)
-            {
-                model.title = title;
-                model.grammars = grammars.Select(x => x.ApplyOverrides(null)).ToArray();
-                return model;
-            }
+            var model = new FixtureModel(key) {implementation = implementation};
+            var over = grammar.As<FixtureModel>();
 
             model.title = over.title.IsNotEmpty() ? over.title : title;
             model.grammars = grammars.Select(g =>
@@ -94,6 +89,11 @@ namespace StoryTeller.Model
             });
 
             return model;
+        }
+
+        public override string ToString()
+        {
+            return $"Fixture: {key}";
         }
     }
 }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading;
 using Baseline;
 using Oakton;
+using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
+using ST.Client.Fixtures;
 
 namespace ST.Client
 {
@@ -15,6 +17,8 @@ namespace ST.Client
         void StartWatching(string path);
         void RecordSystemFixtures(SystemRecycled recycled);
         FixtureModel[] CombinedFixtures();
+        void ReloadFixtures();
+        void ExportAllFixtures();
     }
 
     public class FixtureController : IFixtureFileObserver, IFixtureController
@@ -51,6 +55,15 @@ namespace ST.Client
             return _systemFixtures.ApplyOverrides(_overrides).Models.ToArray();
         }
 
+        private void sendUpdatesToClient()
+        {
+            var message = new FixturesReloaded
+            {
+                fixtures = CombinedFixtures()
+            };
+
+            _client.SendMessageToClient(message);
+        }
 
 
         public void StartWatching(string path)
@@ -78,13 +91,16 @@ namespace ST.Client
             {
                 _lock.Read(() =>
                 {
-                    var fixture = FixtureReader.ReadFromFile(file);
+                    if (File.Exists(file))
+                    {
+                        var fixture = FixtureReader.ReadFromFile(file);
 
-                    ConsoleWriter.Write($"{file} changed");
+                        ConsoleWriter.Write($"{file} changed");
 
-                    _overrides.Models[fixture.key] = fixture;
+                        _overrides.Models[fixture.key] = fixture;
 
-                    // send to client
+                        sendUpdatesToClient();
+                    }
 
                     return true;
                 });
@@ -102,13 +118,11 @@ namespace ST.Client
         public void Added(string file)
         {
             ReloadFixtures();
-            // send to client
         }
 
         public void Deleted(string file)
         {
             ReloadFixtures();
-            // send to client
         }
 
         public virtual void ReloadFixtures()
@@ -119,6 +133,8 @@ namespace ST.Client
                 {
                     _overrides = FixtureLoader.LoadFromPath(_fixturePath);
                 });
+
+                sendUpdatesToClient();
             }
             catch (Exception e)
             {
@@ -129,6 +145,32 @@ namespace ST.Client
         public void Dispose()
         {
             _watcher?.Dispose();
+        }
+
+        public void ExportAllFixtures()
+        {
+            _watcher.Latch(() =>
+            {
+                if (!Directory.Exists(_fixturePath))
+                {
+                    Directory.CreateDirectory(_fixturePath);
+                }
+
+                var fixtures = CombinedFixtures();
+                foreach (var fixture in fixtures)
+                {
+                    var file = _fixturePath.AppendPath(fixture.key + ".md");
+                    try
+                    {
+                        FixtureWriter.Write(fixture, file);
+                    }
+                    catch (Exception e)
+                    {
+                        ConsoleWriter.Write(ConsoleColor.Red, $"Could not export fixture {fixture.key}");
+                        ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
+                    }
+                }
+            });
         }
     }
 }

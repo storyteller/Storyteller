@@ -6,7 +6,7 @@ namespace ST.Client
 {
     public interface IFixtureFileWatcher : IDisposable
     {
-        void WriteFiles(Action action);
+        void Latch(Action action);
         void StartWatching(string path, IFixtureFileObserver observer);
     }
 
@@ -14,12 +14,25 @@ namespace ST.Client
     {
         private FileChangeWatcher _watcher;
         private IFixtureFileObserver _observer;
+        private bool _latched;
 
         public void Handle(ChangeSet changes)
         {
-            changes.Changed.Each(x => _observer.Changed(x.Path));
-            changes.Deleted.Each(x => _observer.Deleted(x));
-            changes.Added.Each(x => _observer.Added(x.Path));
+            changes.Changed.Each(x =>
+            {
+                if (!_latched) _observer.Changed(x.Path);
+            });
+
+            changes.Deleted.Each(x =>
+            {
+                if (!_latched) _observer.Deleted(x);
+            });
+
+
+            changes.Added.Each(x =>
+            {
+                if (!_latched) _observer.Added(x.Path);
+            });
         }
 
         public void Dispose()
@@ -27,9 +40,18 @@ namespace ST.Client
             _watcher?.Dispose();
         }
 
-        public void WriteFiles(Action action)
+        public void Latch(Action action)
         {
-            _watcher.Latch(action);
+            _latched = true;
+
+            try
+            {
+                _watcher.Latch(action);
+            }
+            finally
+            {
+                _latched = false;
+            }
         }
 
         public void StartWatching(string path, IFixtureFileObserver observer)

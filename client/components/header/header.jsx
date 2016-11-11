@@ -54,6 +54,8 @@ const Header = (props) => {
                         <NavItem eventKey="1" id="force-recycle" onClick={toCommand('force-recycle')}>Recycle System</NavItem>
                         <NavItem eventKey="2" onClick={toCommand('reload-specs')}>Reload All Specs from Disk</NavItem>
                         <NavItem eventKey="2" onClick={toCommand('clear-all-results')}>Clear All Results</NavItem>
+                        <NavItem eventKey="2" onClick={toCommand('reload-fixtures')}>Reload Fixtures</NavItem>
+                        <NavItem eventKey="2" onClick={toCommand('export-all-fixtures')}>Export Fixture Language</NavItem>
                     </NavDropdown>
                 </Nav>
             </Navbar>

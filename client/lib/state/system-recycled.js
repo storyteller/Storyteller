@@ -4,7 +4,12 @@ var _ = require('lodash');
 var FixtureLibrary = require('./../fixtures/fixture-library');
 var Immutable = require('immutable');
 
-export default function SystemRecycled(state, action) {
+export function FixturesUpdated(state, action){
+    var library = new FixtureLibrary(action.fixtures);
+    return state.set('fixtures', library);
+}
+
+export function SystemRecycled(state, action) {
     var system = _.extend({}, action);
     
     delete system.fixtures;
@@ -13,8 +18,7 @@ export default function SystemRecycled(state, action) {
     
     var systemState = fromJS(system);
     
-    var library = new FixtureLibrary(action.fixtures);
-    state = state.set('fixtures', library);
+    state = FixturesUpdated(state, action);
     
     if (state.has('specs')){
         var specArray = state.get('specs').toList().toArray();
@@ -30,3 +34,4 @@ export default function SystemRecycled(state, action) {
 
     return state.set('system-state', systemState);
 }
+

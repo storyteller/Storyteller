@@ -16,5 +16,6 @@ namespace StoryTeller.Testing.ST
         }
 
         public SystemRecycled LatestSystemRecycled { get; set; }
+        public IFixtureController Fixtures { get; } = Substitute.For<IFixtureController>();
     }
 }

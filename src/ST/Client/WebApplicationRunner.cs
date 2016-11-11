@@ -15,6 +15,7 @@ namespace ST.Client
         IClientConnector Client { get; }
         IPersistenceController Persistence { get; }
         SystemRecycled LatestSystemRecycled { get; }
+        IFixtureController Fixtures { get; }
     }
 
     public interface IWebApplicationRunner : IDisposable

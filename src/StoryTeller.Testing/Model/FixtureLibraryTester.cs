@@ -21,7 +21,6 @@ namespace StoryTeller.Testing.Model
             result.Models.Count.ShouldBe(1);
 
             var fixture = result.Models[key];
-            ReferenceEquals(fixture, overrides.Models[key]).ShouldBeFalse();
             fixture.key.ShouldBe(key);
         }
 

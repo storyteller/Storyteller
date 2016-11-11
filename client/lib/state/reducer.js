@@ -1,4 +1,4 @@
-import SystemRecycled from './system-recycled';
+import {SystemRecycled, FixturesUpdated} from './system-recycled';
 var HierarchyLoaded = require('./hierarchy-loaded');
 var BatchRunResponse = require('./batch-run-response');
 var Immutable = require('immutable');
@@ -105,6 +105,9 @@ function Reducer(state = initialState, action){
       
     case 'system-recycle-start':
       return state.updateIn(['system-state', 'recycling'], _ => true);
+
+    case 'fixtures-reloaded':
+      return FixturesUpdated(state, action);
       
     case 'batch-run-response':
       return BatchRunResponse(state, action);
