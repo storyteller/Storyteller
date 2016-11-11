@@ -10,7 +10,7 @@ using StoryTeller.Remotes;
 
 namespace ST.Client
 {
-    public interface IFixtureController
+    public interface IFixtureController : IDisposable
     {
         void StartWatching(string path);
         void RecordSystemFixtures(SystemRecycled recycled);

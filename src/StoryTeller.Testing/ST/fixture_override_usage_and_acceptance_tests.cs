@@ -63,6 +63,8 @@ namespace StoryTeller.Testing.ST
 
         public void Dispose()
         {
+            theApplication.Fixtures.Dispose();
+
             try
             {
                 _fileSystem.CleanDirectory(fixtureFolder);
@@ -83,6 +85,77 @@ namespace StoryTeller.Testing.ST
 
             find<OverriddenFixture>().title.ShouldBe("Overridden Title");
         }
+
+        [Fact]
+        public void all_new_fixture_in_overrides()
+        {
+            withFixtureFile("AllNew", @"
+# All New Fixture
+
+## Go
+### Go do things
+");
+
+            var fixture = find("AllNew");
+            fixture.ShouldNotBeNull();
+            fixture.title.ShouldBe("All New Fixture");
+            fixture.FindGrammar("Go").ShouldBeOfType<Sentence>();
+        }
+
+        [Fact]
+        public void existing_grammar_in_system_that_does_not_exist_in_override()
+        {
+            withFixtureFile("Overridden", @"
+# Overridden Title
+");
+
+            var fixture = find<OverriddenFixture>();
+            fixture.FindGrammar("SayTheThing").ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void existing_fixture_that_does_not_exist_in_overrides()
+        {
+            find<SystemFixture>().ShouldNotBeNull();
+        }
+
+        [Fact]
+        public void add_new_grammar_to_override()
+        {
+            withFixtureFile("Overridden", @"
+## GoFaster
+### Go even faster
+");
+
+            find<OverriddenFixture>().FindGrammar("GoFaster")
+                .ShouldBeOfType<Sentence>()
+                .format.ShouldBe("Go even faster");
+                
+        }
+
+        [Fact]
+        public void override_the_format_of_a_sentence()
+        {
+            withFixtureFile("Overridden", @"
+## SayTheThing
+### I don't want to say the thing
+");
+
+            find<OverriddenFixture>().FindGrammar("SayTheThing")
+                .ShouldBeOfType<Sentence>()
+                .format.ShouldBe("I don't want to say the thing");
+        }
+
+        /*
+         * Table/Set
+         * Embedded
+         * Paragraph
+         */
+    }
+
+    public class SystemFixture : Fixture
+    {
+        
     }
 
     public class OverriddenFixture : Fixture
@@ -90,6 +163,12 @@ namespace StoryTeller.Testing.ST
         public OverriddenFixture()
         {
             Title = "Original Title";
+        }
+
+        public void SayTheThing()
+        {
+            // it's from a children's book I'm having to read my toddler
+            // every night:/
         }
     }
 
@@ -144,7 +223,8 @@ namespace StoryTeller.Testing.ST
         public Task<SystemRecycled> Start()
         {
             var library = new FixtureLibrary()
-                .With<OverriddenFixture>();
+                .With<OverriddenFixture>()
+                .With<SystemFixture>();
             
 
             var recycled = new SystemRecycled
