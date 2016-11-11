@@ -10,7 +10,7 @@ namespace ST.Client.Persistence
             if (message.list == null) return;
 
             message.specs = message.list.Select(x => app.Persistence.LoadSpecification(x).data).ToArray();
-            app.Remote.SendMessage(message);
+            app.Engine.SendMessage(message);
         }
     }
 }

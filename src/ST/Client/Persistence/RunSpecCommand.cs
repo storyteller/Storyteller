@@ -22,7 +22,7 @@ namespace ST.Client.Persistence
                 message.spec = app.Persistence.LoadSpecification(message.id).data;
             }
 
-            app.Remote.SendMessage(message);
+            app.Engine.SendMessage(message);
         }
     }
 }

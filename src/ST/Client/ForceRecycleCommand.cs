@@ -7,7 +7,7 @@ namespace ST.Client
     {
         public override void HandleMessage(ForceRecycle message, IApplication app)
         {
-            app.Remote.Recycle();
+            app.Engine.Recycle();
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Reflection;
 using Baseline;
 using HtmlTags;
 using StoryTeller.Messages;
-using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
@@ -12,12 +11,12 @@ namespace ST.Client
 {
     public static class HomeEndpoint
     {
-        public static HtmlDocument BuildPage(SystemRecycled recycled, IClientConnector client, IPersistenceController persistence, OpenInput input)
+        public static HtmlDocument BuildPage(IApplication application, OpenInput input)
         {
             var document = new HtmlDocument {Title = "Storyteller 3"};
 
 
-            writeInitialDataIntoPage(document, recycled, client, persistence);
+            writeInitialDataIntoPage(document, application);
 
             document.Add("div").Id("header-container");
             document.Add("div").Id("body-pane").AddClass("container");
@@ -65,18 +64,18 @@ namespace ST.Client
             document.Body.Append(scriptTag);
         }
 
-        private static void writeInitialDataIntoPage(HtmlDocument document, SystemRecycled recycled, IClientConnector client, IPersistenceController persistence)
+        private static void writeInitialDataIntoPage(HtmlDocument document, IApplication application)
         {
-            var cleanJson = JsonSerialization.ToCleanJson(persistence.Hierarchy.Top);
+            var cleanJson = JsonSerialization.ToCleanJson(application.Persistence.Hierarchy.Top);
             document.Body.Add("div").Hide().Id("hierarchy-data").Text(cleanJson);
 
-            var resultJson = JsonSerialization.ToCleanJson(persistence.AllCachedResults());
+            var resultJson = JsonSerialization.ToCleanJson(application.Persistence.AllCachedResults());
             document.Body.Add("div").Hide().Id("result-data").Text(resultJson);
 
-            var model = new InitialModel(recycled,
-                new HierarchyLoaded(persistence.Hierarchy.Top, persistence.Results))
+            var model = new InitialModel(application.LatestSystemRecycled,
+                new HierarchyLoaded(application.Persistence.Hierarchy.Top, application.Persistence.Results))
             {
-                wsAddress = client.WebSocketsAddress
+                wsAddress = application.Client.WebSocketsAddress
             };
 
             // TODO -- put the queue state on here too!!!!!

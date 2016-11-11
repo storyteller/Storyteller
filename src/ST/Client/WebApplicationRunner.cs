@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,84 +9,62 @@ using StoryTeller.Remotes;
 
 namespace ST.Client
 {
-    public interface IApplication
+    public interface IApplication : IDisposable
     {
-        IEngineController Remote { get; }
+        IEngineController Engine { get; }
         IClientConnector Client { get; }
         IPersistenceController Persistence { get; }
+        SystemRecycled LatestSystemRecycled { get; }
     }
 
-    public class WebApplicationRunner : IDisposable, IApplication
+    public interface IWebApplicationRunner : IDisposable
+    {
+        IClientConnector Start(IApplication application);
+        string BaseAddress { get; }
+    }
+
+    public class WebApplicationRunner : IWebApplicationRunner
     {
         private readonly OpenInput _input;
         private FixtureController _fixtures;
         private IWebHost _server;
         private AssetFileWatcher _watcher;
         private CommandRunner _commands;
+        private IApplication _application;
 
         public WebApplicationRunner(OpenInput input)
         {
             _input = input;
         }
 
-        public IEngineController Remote { get; private set; }
 
         public string BaseAddress { get; private set; }
 
-        public Task<SystemRecycled> Startup { get; private set; }
 
         public IClientConnector Client { get; private set; }
 
-        public IPersistenceController Persistence { get; private set; }
-
-        public SystemRecycled LatestSystemRecycled
-        {
-            get
-            {
-                var recycled = Remote.LatestSystemRecycled ?? Startup.Result;
-                recycled.properties["Spec Directory"] = _input.SpecPath;
-
-                return recycled;
-            }
-        }
 
         public void Dispose()
         {
-            Remote.Teardown();
             _server.SafeDispose();
             _watcher?.Dispose();
-
-            Persistence.Dispose();
         }
 
 
 
-        public void Start()
+        public IClientConnector Start(IApplication application)
         {
-            Remote = _input.BuildEngine();
-
-            Remote.AssertValid();
-
-            
-
-
-            Startup = Remote.Start().ContinueWith(t =>
-            {
-                t.Result.WriteSystemUsage();
-
-                return t.Result;
-            });
-
             var port = PortFinder.FindPort(5000);
             if (_input.WebSocketAddressFlag.IsNotEmpty())
                 port = new Uri(_input.WebSocketAddressFlag).Port;
 
+            _application = application;
 
             BaseAddress = "http://localhost:" + port;
 
             var webSockets = new WebSocketsHandler();
 
-            _commands = new CommandRunner(this);
+            _commands = new CommandRunner(application);
 
 
             Client = new ClientConnector(webSockets, _commands.HandleJson)
@@ -97,20 +74,9 @@ namespace ST.Client
 
             startWebServer(port, webSockets);
 
-
-            Remote.AddListener(Client);
-
             _watcher = new AssetFileWatcher(Client);
 
-            Persistence = new PersistenceController(Client, new SpecFileWatcher());
-            Persistence.StartWatching(_input.SpecPath);
-            Remote.Messaging.AddListener(Persistence);
-
-            _fixtures = new FixtureController(Client, new FixtureFileWatcher());
-            _fixtures.StartWatching(_input.FixturePath);
-            Remote.Messaging.AddListener(_fixtures);
-
-
+            return Client;
         }
 
         private void startWebServer(int port, WebSocketsHandler webSockets)
@@ -138,7 +104,7 @@ namespace ST.Client
 
                     app.Run(async http =>
                     {
-                        var html = HomeEndpoint.BuildPage(LatestSystemRecycled, Client, Persistence, _input).ToString();
+                        var html = HomeEndpoint.BuildPage(_application, _input).ToString();
 
                         http.Response.ContentType = "text/html";
                         await http.Response.WriteAsync(html).ConfigureAwait(false);

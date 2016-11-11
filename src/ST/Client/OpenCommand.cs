@@ -16,33 +16,36 @@ namespace ST.Client
 
             var reset = new ManualResetEvent(false);
 
-            using (var runner = new WebApplicationRunner(input))
-            {
-                runner.Start();
-                Console.WriteLine("Launching the browser to " + runner.BaseAddress);
 
-                ProcessLauncher.GotoUrl(runner.BaseAddress);
+            using (var app = new ApplicationController(input, input.BuildEngine(), new WebApplicationRunner(input)))
+            {
+                app.Start();
+
+                Console.WriteLine("Launching the browser to " + app.Website.BaseAddress);
+
+                ProcessLauncher.GotoUrl(app.Website.BaseAddress);
 
 #if NET46
                 AppDomain.CurrentDomain.DomainUnload += (sender, args) =>
                 {
-                    runner.SafeDispose();
+                    app.SafeDispose();
                 };
 
 #else
-                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => runner.Dispose();
+                System.Runtime.Loader.AssemblyLoadContext.Default.Unloading += context => app.Dispose();
 #endif
 
                 Console.CancelKeyPress += (s, e) =>
                 {
                     Console.WriteLine("Shutdown detected, tearing down the testing harness...");
-                    runner.SafeDispose();
+                    app.SafeDispose();
                     reset.Set();
                 };
 
-                tellUsersWhatToDo(runner.BaseAddress);
+                tellUsersWhatToDo(app.Website.BaseAddress);
                 reset.WaitOne();
             }
+
 
             return true;
         }

@@ -37,7 +37,7 @@ namespace ST.Client
                 var command = _commands.FirstOrDefault(x => x.Matches(json));
                 if (command == null)
                 {
-                    _app.Remote.SendJsonMessage(json);
+                    _app.Engine.SendJsonMessage(json);
                 }
                 else
                 {

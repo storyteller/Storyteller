@@ -28,7 +28,7 @@ namespace StoryTeller.Testing.ST.Persistence
             var theMessage = new RunSpec{id = "foo"};
             new RunSpecCommand().HandleMessage(theMessage, app);
 
-            app.Remote.Received().SendMessage(theMessage);
+            app.Engine.Received().SendMessage(theMessage);
 
             theMessage.spec.ShouldBeTheSameAs(theSpecRetrievedFromPersistence);
         }
@@ -47,7 +47,7 @@ namespace StoryTeller.Testing.ST.Persistence
 
             new RunSpecCommand().HandleMessage(theMessage, app);
 
-            app.Remote.Received().SendMessage(theMessage);
+            app.Engine.Received().SendMessage(theMessage);
 
             // do not auto-save
             app.Persistence.DidNotReceive().SaveSpecification("foo", theSpecSentFromTheClient);
@@ -68,7 +68,7 @@ namespace StoryTeller.Testing.ST.Persistence
 
             new RunSpecCommand().HandleMessage(theMessage, app);
 
-            app.Remote.Received().SendMessage(theMessage);
+            app.Engine.Received().SendMessage(theMessage);
 
             // *do* auto-save
             app.Persistence.Received().SaveSpecification("foo", theSpecSentFromTheClient);

@@ -24,7 +24,7 @@ namespace StoryTeller.Testing.ST
             var app = Substitute.For<IApplication>();
             theRemoteController = Substitute.For<IEngineController>();
 
-            app.Remote.Returns(theRemoteController);
+            app.Engine.Returns(theRemoteController);
 
             theRunner = new CommandRunner(app, new ICommand[] {theCommand});
         }

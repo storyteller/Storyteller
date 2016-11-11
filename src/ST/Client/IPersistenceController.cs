@@ -10,7 +10,6 @@ namespace ST.Client
         Hierarchy Hierarchy { get; }
         ResultsCache Results { get; }
         Specification LoadSpecificationById(string id);
-        void StartWatching(string path);
         SpecAdded AddSpec(string path, string name);
         void SaveSpecification(string id, Specification specification);
         SpecAdded CloneSpecification(string id, string name);
@@ -21,5 +20,6 @@ namespace ST.Client
         void DeleteSpec(string id);
         SpecExecutionCompleted[] AllCachedResults();
         void SetLifecycle(string id, Lifecycle lifecycle);
+        void StartWatching(string path);
     }
 }
