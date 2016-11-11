@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Engine
 
             configure(input);
 
-            var controller = input.BuildRemoteController();
+            var controller = input.BuildEngine();
             var task = controller.Start().ContinueWith(t =>
             {
                 var systemRecycled = t.Result;

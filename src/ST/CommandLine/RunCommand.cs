@@ -40,7 +40,7 @@ namespace ST.CommandLine
                 return false;
             }
 
-            var controller = input.BuildRemoteController();
+            var controller = input.BuildEngine();
             var task = controller.Start().ContinueWith(t =>
             {
                 var systemRecycled = t.Result;

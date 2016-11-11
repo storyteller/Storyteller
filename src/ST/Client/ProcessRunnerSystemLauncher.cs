@@ -16,7 +16,7 @@ namespace ST.Client
     {
         private readonly Project _project;
         private Process _process;
-        private IRemoteController _controller;
+        private IEngineController _controller;
         private string _command;
         private bool _agentReady;
         private readonly object _readyLock = new object();
@@ -64,7 +64,7 @@ namespace ST.Client
             killLingeringProcesses();
         }
 
-        public void Start(IRemoteController remoteController)
+        public void Start(IEngineController remoteController)
         {
             killLingeringProcesses();
 

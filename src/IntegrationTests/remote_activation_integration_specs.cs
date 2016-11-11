@@ -8,21 +8,22 @@ using StoryTeller.Engine;
 using StoryTeller.Samples;
 using ST.Client;
 using Xunit;
+using EngineController = ST.Client.EngineController;
 
 namespace IntegrationTests
 {
     
     public class remote_activation_integration_specs
     {
-        private RemoteController controllerForProject(string projectFolder)
+        private EngineController controllerForProject(string projectFolder)
         {
             var path = TestingContext.FindParallelDirectory(projectFolder);
 
             var project = Project.LoadForFolder(path);
 #if NET46       
-            return new RemoteController(project, new AppDomainSystemLauncher(project));
+            return new EngineController(project, new AppDomainSystemLauncher(project));
 #else
-            return new RemoteController(project, new ProcessRunnerSystemLauncher(project));
+            return new EngineController(project, new ProcessRunnerSystemLauncher(project));
 #endif
         }
 

@@ -45,7 +45,7 @@ namespace StoryTeller.Testing
                 ProfileFlag = "Safari"
             };
 
-            using (var controller = input.BuildRemoteController())
+            using (var controller = input.BuildEngine())
             {
                 controller.Start().Wait(30.Seconds());
 

@@ -13,9 +13,9 @@ namespace IntegrationTests.CommandLine
 {
     public class run_command_integration_specs : IDisposable
     {
-        private RunInput theInput;
-        private RemoteController theController;
-        private FixtureModel[] theFixtures;
+        private readonly RunInput theInput;
+        private readonly EngineController theController;
+        private readonly FixtureModel[] theFixtures;
 
         public run_command_integration_specs()
         {
@@ -24,13 +24,13 @@ namespace IntegrationTests.CommandLine
 
             var project = Project.LoadForFolder(directory);
 #if NET46       
-            theController = new RemoteController(project, new AppDomainSystemLauncher(project));
+            theController = new EngineController(project, new AppDomainSystemLauncher(project));
 #else
             throw new NotImplementedException("Not done yet for CoreCLR");
 #endif
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
-            theController = theInput.BuildRemoteController();
+            theController = theInput.BuildEngine();
             var task = theController.Start();
             task.Wait(3.Seconds());
 

@@ -14,7 +14,7 @@ namespace ST.Client
         void Teardown();
 
         // TODO -- make this return a Task<SystemRecycled>
-        void Start(IRemoteController remoteController);
+        void Start(IEngineController remoteController);
     }
 
     public class LocalLauncher : ISystemLauncher
@@ -39,7 +39,7 @@ namespace ST.Client
             _agent.Receive(new Shutdown());
         }
 
-        public void Start(IRemoteController remoteController)
+        public void Start(IEngineController remoteController)
         {
             _agent = new StorytellerAgent(_project.Port, _system);
             _agent.Receive(new StartProject {Project = _project});
@@ -100,7 +100,7 @@ namespace ST.Client
             }
         }
 
-        public void Start(IRemoteController controller)
+        public void Start(IEngineController controller)
         {
             _domain = AppDomain.CreateDomain("Storyteller-SpecRunning-Domain", null, _remoteSetup.Setup);
 

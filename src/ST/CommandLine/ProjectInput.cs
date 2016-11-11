@@ -89,7 +89,7 @@ namespace ST.CommandLine
 
         protected bool _disableAppDomainFileWatching = false;
 
-        public RemoteController BuildRemoteController()
+        public EngineController BuildEngine()
         {
             var project = configureProject();
 
@@ -101,9 +101,9 @@ namespace ST.CommandLine
 
 
             var launcher = File.Exists(file) ? (ISystemLauncher) new ProcessRunnerSystemLauncher(project) : new AppDomainSystemLauncher(project);
-            var controller = new RemoteController(project, launcher);
+            var controller = new EngineController(project, launcher);
 #else
-            var controller = new RemoteController(project, new ProcessRunnerSystemLauncher(project));
+            var controller = new EngineController(project, new ProcessRunnerSystemLauncher(project));
 
 #endif
             controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;

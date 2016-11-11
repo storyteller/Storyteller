@@ -19,13 +19,24 @@ namespace ST.Client
         private readonly IFixtureFileWatcher _watcher;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
-        private FixtureLibrary _fixtures;
+        private FixtureLibrary _overrides;
         private string _fixturePath;
+        private FixtureLibrary _systemFixtures;
 
         public FixtureController(IClientConnector client, IFixtureFileWatcher watcher)
         {
             _client = client;
             _watcher = watcher;
+        }
+
+        public void SaveSystemFixtures(FixtureLibrary fixtures)
+        {
+            _systemFixtures = fixtures;
+        }
+
+        public FixtureLibrary CombinedFixtures()
+        {
+            return _systemFixtures == null ? _overrides : _systemFixtures.ApplyOverrides(_overrides);
         }
 
         public void StartWatching(string path)
@@ -36,7 +47,7 @@ namespace ST.Client
 
                 _lock.Write(() =>
                 {
-                    _fixtures = FixtureLoader.LoadFromPath(_fixturePath);
+                    _overrides = FixtureLoader.LoadFromPath(_fixturePath);
                 });
 
                 _watcher.StartWatching(path, this);
@@ -57,7 +68,7 @@ namespace ST.Client
 
                     ConsoleWriter.Write($"{file} changed");
 
-                    _fixtures.Models[fixture.key] = fixture;
+                    _overrides.Models[fixture.key] = fixture;
 
                     // send to client
 
@@ -92,7 +103,7 @@ namespace ST.Client
             {
                 _lock.Write(() =>
                 {
-                    _fixtures = FixtureLoader.LoadFromPath(_fixturePath);
+                    _overrides = FixtureLoader.LoadFromPath(_fixturePath);
                 });
             }
             catch (Exception e)

@@ -14,7 +14,7 @@ namespace StoryTeller.Testing.ST
     public class CommandRunnerTester
     {
         private RecordingCommand<RunSpec> theCommand;
-        private IRemoteController theRemoteController;
+        private IEngineController theRemoteController;
         private CommandRunner theRunner;
 
         public CommandRunnerTester()
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.ST
             theCommand = new RecordingCommand<RunSpec>();
 
             var app = Substitute.For<IApplication>();
-            theRemoteController = Substitute.For<IRemoteController>();
+            theRemoteController = Substitute.For<IEngineController>();
 
             app.Remote.Returns(theRemoteController);
 

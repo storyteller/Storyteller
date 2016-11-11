@@ -2,6 +2,7 @@
 using StoryTeller.Engine;
 using ST.Client;
 using Xunit;
+using EngineController = ST.Client.EngineController;
 
 namespace StoryTeller.Testing
 {
@@ -22,7 +23,7 @@ namespace StoryTeller.Testing
 
             var system = new NulloSystem();
 
-            var controller = new RemoteController(project, new LocalLauncher(project, system));
+            var controller = new EngineController(project, new LocalLauncher(project, system));
             var recycled = await controller.Start();
 
             recycled.ShouldNotBeNull();

@@ -12,7 +12,7 @@ namespace IntegrationTests
     public class ProcessRunnerSystemLauncher_integration_tests : IDisposable
     {
         private Project _project;
-        private RemoteController _controller;
+        private EngineController _controller;
 
         private Task<SystemRecycled> start(string projectName)
         {
@@ -21,7 +21,7 @@ namespace IntegrationTests
                 ProjectPath = TestingContext.FindParallelDirectory(projectName)
             };
 
-            _controller = new RemoteController(_project, new ProcessRunnerSystemLauncher(_project));
+            _controller = new EngineController(_project, new ProcessRunnerSystemLauncher(_project));
 
             return _controller.Start();
         }

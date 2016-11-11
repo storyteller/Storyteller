@@ -8,7 +8,7 @@ using StoryTeller.Remotes.Messaging;
 
 namespace ST.Client
 {
-    public class RemoteController : IDisposable, IRemoteController
+    public class EngineController : IDisposable, IEngineController
     {
         public static int Port = 2500;
         private readonly ISystemLauncher _launcher;
@@ -16,7 +16,7 @@ namespace ST.Client
 
         private AppDomainFileChangeWatcher _watcher;
 
-        public RemoteController(Project project, ISystemLauncher launcher)
+        public EngineController(Project project, ISystemLauncher launcher)
         {
             _launcher = launcher;
             Project = project;
@@ -126,29 +126,6 @@ namespace ST.Client
         public void AssertValid()
         {
             _launcher.AssertValid();
-        }
-
-
-        public class ResponseExpression
-        {
-            private readonly IMessagingHub _messaging;
-            private readonly Action _sendAction;
-
-            public ResponseExpression(Action sendAction, IMessagingHub messaging)
-            {
-                _sendAction = sendAction;
-                _messaging = messaging;
-            }
-
-            public Task<T> AndWaitFor<T>()
-            {
-                var watcher = new ResponseWatcher<T>(_messaging);
-                _messaging.AddListener(watcher);
-
-                _sendAction();
-
-                return watcher.Task;
-            }
         }
     }
 }

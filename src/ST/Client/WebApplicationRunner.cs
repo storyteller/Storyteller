@@ -12,7 +12,7 @@ namespace ST.Client
 {
     public interface IApplication
     {
-        IRemoteController Remote { get; }
+        IEngineController Remote { get; }
         IClientConnector Client { get; }
         IPersistenceController Persistence { get; }
     }
@@ -30,7 +30,7 @@ namespace ST.Client
             _input = input;
         }
 
-        public IRemoteController Remote { get; private set; }
+        public IEngineController Remote { get; private set; }
 
         public string BaseAddress { get; private set; }
 
@@ -64,7 +64,7 @@ namespace ST.Client
 
         public void Start()
         {
-            Remote = _input.BuildRemoteController();
+            Remote = _input.BuildEngine();
 
             Remote.AssertValid();
 

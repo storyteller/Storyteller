@@ -52,7 +52,7 @@ namespace ST.CommandLine
             });
         }
 
-        public Task<BatchRunResponse> StartBatch(IRemoteController controller)
+        public Task<BatchRunResponse> StartBatch(IEngineController controller)
         {
             var request = GetBatchRunRequest();
             return controller.Send(request).AndWaitFor<BatchRunResponse>();
