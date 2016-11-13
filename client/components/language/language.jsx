@@ -26,11 +26,15 @@ function FixtureTable({library}){
       );
     }
 
+    function gotoErrors(){
+      window.location = "/#/grammar-errors";
+    }
+
     function ErrorCell(props){
       var count = fixtures[props.rowIndex].errorCount();
 
       if (count > 0){
-        return (<Cell {...props} style={{align: 'center', verticalAlign: 'middle'}}><Badge>{count}</Badge></Cell>)
+        return (<Cell {...props} style={{align: 'center', verticalAlign: 'middle'}}><Badge title="Click to see the grammar errors" onClick={gotoErrors}>{count}</Badge></Cell>)
       }
 
       return (<Cell />);
@@ -45,6 +49,7 @@ function FixtureTable({library}){
     }
 
     return (
+
       <Table
         rowHeight={50}
         rowsCount={fixtures.length}
@@ -69,44 +74,8 @@ function FixtureTable({library}){
           width={500}
         />
       </Table>
-
     );
-/*
-    const rows = fixtures.map((x, i) => {
-        const href = '#/fixture/' + x.key;
-        let clazz = '';
-        if (x.errorCount() > 0){
-            clazz = 'warning';
-        }
 
-        return (
-          <tr key={i+1} className={clazz}>
-            <td><a href={href}>{x.title}</a></td>
-            <td>{x.implementation}</td>
-            <td style={{textAlign: 'right'}}>{x.errorCount()}</td>
-          </tr>
-        );
-    });
-
-    return (
-      <div>
-        <h2>The Specification Language</h2>
-        <hr />
-        <table className="table">
-          <thead>
-            <tr>
-                <th>Fixture Title</th>
-                <th>Implementation</th>
-                <th>Errors</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
-      </div>
-    );
-    */
 }
 
 
