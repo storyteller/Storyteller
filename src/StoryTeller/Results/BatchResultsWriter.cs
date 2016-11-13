@@ -25,6 +25,7 @@ namespace StoryTeller.Results
         public static void WriteCSS(HtmlDocument document)
         {
             var css = readFile("StoryTeller.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.storyteller.css");
+            css += "\n\n" + readFile("StoryTeller.fixed-data-table.min.css");
 
             document.Head.Add("style").Text(css).Encoded(false);
         }

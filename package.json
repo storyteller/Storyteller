@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "fixed-data-table": "^0.6.3",
     "history": "^1.13.1",
     "immutable": "^3.7.6",
     "jquery": "^2.1.4",

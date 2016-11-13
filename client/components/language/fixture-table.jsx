@@ -6,11 +6,63 @@ import { preview, editing } from './../editing/component-loader';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
 
 
+function toErrorMessage(data){
+	if (data.error != null && data.message != null){
+		return `${data.message} -> ${data.error}`;
+	}
+
+	return data.message || data.error;
+}
+
+
+function FixtureError({error}){
+    const text = toErrorMessage(error);
+
+    return (
+        <pre>{text}</pre>
+    );
+}
+
+function GrammarError({error, grammar}){
+    const text = toErrorMessage(error);
+
+    let title = null;
+    if (grammar != null && grammar != 'null'){
+        title = (<h4>Grammar: {grammar}</h4>);
+    }
+
+    return (
+        <div>
+            {title}
+            <pre>
+                {text}
+            </pre>
+        </div>
+    );
+}
+
+
 function FixtureTable({fixture, spec}){
   const previews = spec.previews(preview);
   const editors = spec.editors(editing);
 
+  var errorTab = null;
 
+  if (fixture.errorCount() > 0){
+    var errors = fixture.errors.map(err => FixtureError({error: err}));
+
+		for (var key in fixture.grammars){
+			var g = fixture.grammars[key];
+      if (g.errors){
+        for (var i = 0; i < g.errors.length; i++){
+          var errorElement = (<GrammarError error={g.errors[i]} grammar={g}/>);
+          errors.push(errorElement);
+        }
+      }
+		}
+
+    errorTab = (<Tab eventKey={3} title="Errors">{errors}</Tab>)
+  }
 
   return (
     <div>
@@ -22,6 +74,7 @@ function FixtureTable({fixture, spec}){
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="Preview">{previews}</Tab>
             <Tab eventKey={2} title="Editing">{editors}</Tab>
+            {errorTab}
           </Tabs>
         </Row>
       </Grid>

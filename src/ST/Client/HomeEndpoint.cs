@@ -50,7 +50,7 @@ namespace ST.Client
 
         private static void writeClientAssetsDebugMode(HtmlDocument document, OpenInput input)
         {
-            var stylesheets = new[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css"};
+            var stylesheets = new[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css", "fixed-data-table.min.css"};
             var tags = stylesheets.Select(file =>
             {
                 var path = $"/public/stylesheets/{file}";
