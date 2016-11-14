@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using Baseline;
 using Oakton;
+using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
@@ -19,6 +21,8 @@ namespace ST.Client
         FixtureModel[] CombinedFixtures();
         void ReloadFixtures();
         void ExportAllFixtures();
+        void Export(string key);
+        string FileFor(string key);
     }
 
     public class FixtureController : IFixtureFileObserver, IFixtureController
@@ -171,6 +175,28 @@ namespace ST.Client
                     }
                 }
             });
+        }
+
+        public void Export(string key)
+        {
+            var file = FileFor(key);
+
+            var fixture = CombinedFixtures().FirstOrDefault(x => x.key == key) ?? new FixtureModel(key);
+
+            try
+            {
+                FixtureWriter.Write(fixture, file);
+            }
+            catch (Exception e)
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, "Failed to write file " + file);
+                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
+            }
+        }
+
+        public string FileFor(string key)
+        {
+            return _fixturePath.AppendPath(key + ".md");
         }
     }
 }

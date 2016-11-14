@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import {Table, Column, Cell} from 'fixed-data-table';
 import {Badge} from 'react-bootstrap';
+var Postal = require('postal');
 
 function getLibrary(state){
     return {library: state.get('fixtures')};
@@ -40,6 +41,22 @@ function FixtureTable({library}){
       return (<Cell />);
     }
 
+    function CommandCell(props){
+      var key = fixtures[props.rowIndex].key;
+
+      var editMsg = {type: 'open-fixture-file', key: key, export: false};
+      var exportMsg = {type: 'open-fixture-file', key: key, export: true};
+
+      var edit = () => Postal.publish({channel: 'engine-request', topic: 'open-fixture-file', data: editMsg});
+      var exportAndEdit = () => Postal.publish({channel: 'engine-request', topic: 'open-fixture-file', data: exportMsg});
+    
+  
+      return (
+        <Cell {...props}><a onClick={edit} title="Open the existing markdown file for this fixture">Edit</a>  |  <a onClick={exportAndEdit} title="Export the current state of the Fixture and open the resulting file for editing">Export</a></Cell>
+      )
+
+    }
+
     function getRowClazz(index){
       if (fixtures[index].errorCount() > 0){
         return 'bg-warning';
@@ -73,6 +90,10 @@ function FixtureTable({library}){
           cell={<ImplementationCell />}
           width={500}
         />
+        <Column
+          header={<Cell>Commands</Cell>}
+          cell = {<CommandCell />}
+          width={200} />
       </Table>
     );
 

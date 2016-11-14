@@ -22,6 +22,8 @@ namespace StoryTeller.Results
             return document;
         }
 
+
+
         public static void WriteCSS(HtmlDocument document)
         {
             var css = readFile("StoryTeller.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.storyteller.css");

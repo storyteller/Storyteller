@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.DotNet.InternalAbstractions;
 
 namespace StoryTeller
 {
@@ -9,11 +10,11 @@ namespace StoryTeller
         {
             try
             {
-                Process.Start(url);
-            }
-            catch (Exception)
-            {
-                try
+                if (RuntimeEnvironment.OperatingSystemPlatform == Platform.Windows)
+                {
+                    Process.Start(url);
+                }
+                else
                 {
                     Process.Start(new ProcessStartInfo
                     {
@@ -21,34 +22,12 @@ namespace StoryTeller
                         FileName = "open",
                         Arguments = url
                     });
-
-                }
-                catch (Exception)
-                {
-                    try
-                    {
-                        Process.Start(new ProcessStartInfo
-                        {
-                            UseShellExecute = false,
-                            CreateNoWindow = false,
-                            FileName = "cmd.exe",
-                            Arguments = url
-                        });
-                    }
-                    catch (System.Exception e2)
-                    {
-                        Console.WriteLine(e2);
-
-                        ConsoleWriter.Write(ConsoleColor.Yellow, "Unable to launch the browser to " + url);
-                        // Nothing
-                    }
-
                 }
             }
-
-
-
-
+            catch (Exception)
+            {
+                ConsoleWriter.Write(ConsoleColor.Yellow, "Unable to launch the browser to " + url);
+            }
 
         }
     }
