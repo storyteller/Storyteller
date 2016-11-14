@@ -25,6 +25,21 @@ namespace StoryTeller.Testing.Model
         }
 
         [Fact]
+        public void tracks_when_a_fixture_is_missing_from_code()
+        {
+            const string key = "a key";
+
+            var lib = new FixtureLibrary();
+
+            var overrides = new FixtureLibrary();
+            overrides.Models[key] = new FixtureModel(key);
+
+            var result = lib.ApplyOverrides(overrides);
+
+            result.Models[key].IsMissing.ShouldBeTrue();
+        }
+
+        [Fact]
         public void overrides_original_title()
         {
             const string key = "a key";

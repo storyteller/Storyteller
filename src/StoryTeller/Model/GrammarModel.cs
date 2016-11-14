@@ -33,6 +33,12 @@ namespace StoryTeller.Model
             }
         }
 
+        /// <summary>
+        /// Just notes that this grammar is
+        /// </summary>
+        [JsonProperty("missing")]
+        public bool IsMissing { get; set; }
+
         public Step ToSampleStep()
         {
             var step = new Step(key);
