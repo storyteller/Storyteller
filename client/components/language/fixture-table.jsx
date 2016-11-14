@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 const Specification = require('../../lib/model/specification');
 import { preview, editing } from './../editing/component-loader';
 import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
+var Postal = require('postal');
 
 
 function toErrorMessage(data){
@@ -64,9 +65,12 @@ function FixtureTable({fixture, spec}){
     errorTab = (<Tab eventKey={3} title="Errors">{errors}</Tab>)
   }
 
+  var exportMsg = {type: 'open-fixture-file', key: fixture.key, export: true};
+  var exportAndEdit = () => Postal.publish({channel: 'engine-request', topic: 'open-fixture-file', data: exportMsg});
+
   return (
     <div>
-      <h2>Fixture '{fixture.title}' ({fixture.implementation})</h2>
+      <h3><a onClick={exportAndEdit} title="Click to export and edit the markdown specification for this fixture">{fixture.title}</a> ({fixture.implementation})</h3>
       <hr />
       <Grid>
         <Row>
