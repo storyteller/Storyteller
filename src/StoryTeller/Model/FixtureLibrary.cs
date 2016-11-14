@@ -35,7 +35,8 @@ namespace StoryTeller.Model
             var missing = overrides.Models.Where(x => !keys.Contains(x.key));
             missing.Each(model =>
             {
-                newLibrary.Models[model.key] = (FixtureModel) model.ApplyOverrides(null);
+                model.IsMissing = true;
+                newLibrary.Models[model.key] = model;
             });
 
             return newLibrary;

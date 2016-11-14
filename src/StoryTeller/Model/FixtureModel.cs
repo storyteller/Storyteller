@@ -85,7 +85,8 @@ namespace StoryTeller.Model
             var missing = over.grammars.Where(x => !keys.Contains(x.key));
             missing.Each(x =>
             {
-                model.AddGrammar(x.ApplyOverrides(null));
+                x.IsMissing = true;
+                model.AddGrammar(x);
             });
 
             return model;
