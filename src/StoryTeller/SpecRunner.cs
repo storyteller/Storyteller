@@ -9,6 +9,7 @@ using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Results;
 
 namespace StoryTeller
@@ -44,6 +45,15 @@ namespace StoryTeller
 
             _system = new T();
             _library = FixtureLibrary.CreateForAppDomain(_system.Start());
+
+            var fixtureDir = SpecDirectory.ParentDirectory().AppendPath("Fixtures");
+            if (Directory.Exists(fixtureDir))
+            {
+                var overrides = FixtureLoader.LoadFromPath(fixtureDir);
+                _library = _library.ApplyOverrides(overrides);
+            }
+
+
             _hierarchy = HierarchyLoader.ReadHierarchy(SpecDirectory).ToHierarchy();
 
             _warmup = _system.Warmup();
@@ -111,8 +121,8 @@ namespace StoryTeller
             }
             finally
             {
-                if (execution != null) execution.Dispose();
-                if (context != null) context.Dispose();
+                execution?.Dispose();
+                context?.Dispose();
             }
 
 

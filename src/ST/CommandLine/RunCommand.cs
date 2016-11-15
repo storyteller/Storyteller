@@ -7,6 +7,7 @@ using Oakton;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
@@ -76,7 +77,8 @@ namespace ST.CommandLine
                 results.suite = input.WorkspaceFlag;
                 results.system = systemRecycled.system_name;
                 results.time = DateTime.Now.ToString();
-                results.fixtures = systemRecycled.fixtures;
+
+                results.fixtures = buildFixturesWithOverrides(input, systemRecycled);
 
                 var document = BatchResultsWriter.BuildResults(results);
                 Console.WriteLine("Writing results to " + input.ResultsPathFlag);
@@ -120,6 +122,19 @@ namespace ST.CommandLine
             controller.SafeDispose();
 
             return task.Result;
+        }
+
+        private static FixtureModel[] buildFixturesWithOverrides(RunInput input, SystemRecycled systemRecycled)
+        {
+            var overrides = FixtureLoader.LoadFromPath(input.FixturePath);
+            var system = new FixtureLibrary();
+            foreach (var fixture in systemRecycled.fixtures)
+            {
+                system.Models[fixture.key] = fixture;
+            }
+
+            var fixtures = system.ApplyOverrides(overrides).Models.ToArray();
+            return fixtures;
         }
 
         private static void writePerformanceData(RunInput input, BatchRunResponse results)
