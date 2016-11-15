@@ -1,39 +1,25 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using Baseline;
 using Oakton;
-using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
-using ST.Client.Fixtures;
 
 namespace ST.Client
 {
-    public interface IFixtureController : IDisposable
-    {
-        void StartWatching(string path);
-        void RecordSystemFixtures(SystemRecycled recycled);
-        FixtureModel[] CombinedFixtures();
-        void ReloadFixtures();
-        void ExportAllFixtures();
-        void Export(string key);
-        string FileFor(string key);
-    }
-
     public class FixtureController : IFixtureFileObserver, IFixtureController
     {
         private readonly IClientConnector _client;
-        private readonly IFixtureFileWatcher _watcher;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
-
-        private FixtureLibrary _overrides;
+        private readonly IFixtureFileWatcher _watcher;
         private string _fixturePath;
-        private FixtureLibrary _systemFixtures;
+
+        private FixtureLibrary _overrides = new FixtureLibrary();
+        private FixtureLibrary _systemFixtures = new FixtureLibrary();
 
         public FixtureController(IClientConnector client, IFixtureFileWatcher watcher)
         {
@@ -59,16 +45,6 @@ namespace ST.Client
             return _systemFixtures.ApplyOverrides(_overrides).Models.ToArray();
         }
 
-        private void sendUpdatesToClient()
-        {
-            var message = new FixturesReloaded
-            {
-                fixtures = CombinedFixtures()
-            };
-
-            _client.SendMessageToClient(message);
-        }
-
 
         public void StartWatching(string path)
         {
@@ -76,10 +52,7 @@ namespace ST.Client
             {
                 _fixturePath = path.ToFullPath();
 
-                _lock.Write(() =>
-                {
-                    _overrides = FixtureLoader.LoadFromPath(_fixturePath);
-                });
+                _lock.Write(() => { _overrides = FixtureLoader.LoadFromPath(_fixturePath); });
 
                 _watcher.StartWatching(path, this);
             }
@@ -87,6 +60,94 @@ namespace ST.Client
             {
                 Logger.Error("Failed to start watching fixture files", e);
             }
+        }
+
+        public virtual void ReloadFixtures()
+        {
+            try
+            {
+                _lock.Write(() => { _overrides = FixtureLoader.LoadFromPath(_fixturePath); });
+
+                sendUpdatesToClient();
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Failed to reload the fixtures", e);
+            }
+        }
+
+        public void ExportAllFixtures()
+        {
+            _watcher.Latch(() =>
+            {
+                if (!Directory.Exists(_fixturePath))
+                    Directory.CreateDirectory(_fixturePath);
+
+                var fixtures = CombinedFixtures();
+                foreach (var fixture in fixtures)
+                {
+                    var file = _fixturePath.AppendPath(fixture.key + ".md");
+                    try
+                    {
+                        FixtureWriter.Write(fixture, file);
+                    }
+                    catch (Exception e)
+                    {
+                        ConsoleWriter.Write(ConsoleColor.Red, $"Could not export fixture {fixture.key}");
+                        ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
+                    }
+                }
+            });
+        }
+
+        public void Export(string key)
+        {
+            var file = FileFor(key);
+
+            var fixture = CombinedFixtures().FirstOrDefault(x => x.key == key) ?? new FixtureModel(key);
+
+            try
+            {
+                _watcher.Latch(() => FixtureWriter.Write(fixture, file));
+            }
+            catch (Exception e)
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, "Failed to write file " + file);
+                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
+            }
+        }
+
+        public string FileFor(string key)
+        {
+            return _fixturePath.AppendPath(key + ".md");
+        }
+
+        public string CreateFixture(string keyOrTitle)
+        {
+            var fixture = FixtureModel.BuildFromKeyOrTitle(keyOrTitle);
+            var file = FileFor(fixture.key);
+
+            if (File.Exists(file))
+            {
+                ConsoleWriter.Write(ConsoleColor.White, $"Fixture file '{file}' already exists");
+            }
+            else
+            {
+                _watcher.Latch(() =>
+                {
+                    FixtureWriter.Write(fixture, file);
+                });
+
+                _overrides.Models[fixture.key] = fixture;
+
+                sendUpdatesToClient();
+
+                ConsoleWriter.Write(ConsoleColor.Green, $"Successfully created a new Fixture {fixture.key}: {fixture.title}");
+
+
+            }
+
+            return file;
         }
 
         public void Changed(string file)
@@ -129,74 +190,19 @@ namespace ST.Client
             ReloadFixtures();
         }
 
-        public virtual void ReloadFixtures()
-        {
-            try
-            {
-                _lock.Write(() =>
-                {
-                    _overrides = FixtureLoader.LoadFromPath(_fixturePath);
-                });
-
-                sendUpdatesToClient();
-            }
-            catch (Exception e)
-            {
-                Logger.Error("Failed to reload the fixtures", e);
-            }
-        }
-
         public void Dispose()
         {
             _watcher?.Dispose();
         }
 
-        public void ExportAllFixtures()
+        private void sendUpdatesToClient()
         {
-            _watcher.Latch(() =>
+            var message = new FixturesReloaded
             {
-                if (!Directory.Exists(_fixturePath))
-                {
-                    Directory.CreateDirectory(_fixturePath);
-                }
+                fixtures = CombinedFixtures()
+            };
 
-                var fixtures = CombinedFixtures();
-                foreach (var fixture in fixtures)
-                {
-                    var file = _fixturePath.AppendPath(fixture.key + ".md");
-                    try
-                    {
-                        FixtureWriter.Write(fixture, file);
-                    }
-                    catch (Exception e)
-                    {
-                        ConsoleWriter.Write(ConsoleColor.Red, $"Could not export fixture {fixture.key}");
-                        ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
-                    }
-                }
-            });
-        }
-
-        public void Export(string key)
-        {
-            var file = FileFor(key);
-
-            var fixture = CombinedFixtures().FirstOrDefault(x => x.key == key) ?? new FixtureModel(key);
-
-            try
-            {
-                FixtureWriter.Write(fixture, file);
-            }
-            catch (Exception e)
-            {
-                ConsoleWriter.Write(ConsoleColor.Red, "Failed to write file " + file);
-                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
-            }
-        }
-
-        public string FileFor(string key)
-        {
-            return _fixturePath.AppendPath(key + ".md");
+            _client.SendMessageToClient(message);
         }
     }
 }

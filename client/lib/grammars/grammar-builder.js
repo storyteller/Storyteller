@@ -16,7 +16,10 @@ builders['silent'] = require('./silent-grammar');
 module.exports = function(metadata){
 	var ctor = builders[metadata.type];
 	if (ctor instanceof Function){
-		return new ctor(metadata);
+		var grammar = new ctor(metadata);
+		grammar.missing = metadata.missing;
+
+		return grammar;
 	}
 	else {
 		throw new Error('Fixture does not support a grammar type ' + metadata.type);

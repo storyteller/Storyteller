@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
 
 namespace StoryTeller.Model
 {
@@ -25,6 +28,12 @@ namespace StoryTeller.Model
             }
         }
 
+        [JsonProperty("missingCount")]
+        public int MissingCount
+        {
+            get { return _grammars.Count(x => x.IsMissing); }
+        }
+
         public Specification sample => ToSampleSpecification();
 
         public Specification ToSampleSpecification()
@@ -47,7 +56,14 @@ namespace StoryTeller.Model
 
             foreach (var grammar in grammars.OrderBy(x => x.key))
             {
-                section.AddComment("## " + grammar.key);
+                if (IsMissing)
+                {
+                    section.AddComment($"## {grammar.key} (*Missing in code*)");
+                }
+                else
+                {
+                    section.AddComment("## " + grammar.key);
+                }
                 section.Children.Add(grammar.ToSampleStep());
             }
         }
@@ -75,19 +91,18 @@ namespace StoryTeller.Model
             var over = grammar.As<FixtureModel>();
 
             model.title = over.title.IsNotEmpty() ? over.title : title;
-            model.grammars = grammars.Select(g =>
-            {
-                var match = over.grammars.FirstOrDefault(x => x.key == g.key);
-                return g.ApplyOverrides(match);
-            }).ToArray();
 
-            var keys = model.grammars.Select(x => x.key).ToList();
-            var missing = over.grammars.Where(x => !keys.Contains(x.key));
-            missing.Each(x =>
+            foreach (var existing in _grammars)
             {
-                x.IsMissing = true;
-                model.AddGrammar(x);
-            });
+                var overridden = over.FindGrammar(existing.key);
+                model.AddGrammar(overridden == null ? existing : existing.ApplyOverrides(overridden));
+            }
+
+            foreach (var specified in over.grammars.Where(x => !grammars.Any(_ => _.key == x.key)))
+            {
+                specified.IsMissing = true;
+                model.AddGrammar(specified);
+            }
 
             return model;
         }
@@ -95,6 +110,26 @@ namespace StoryTeller.Model
         public override string ToString()
         {
             return $"Fixture: {key}";
+        }
+
+        public static FixtureModel BuildFromKeyOrTitle(string keyOrTitle)
+        {
+            if (keyOrTitle.Contains(" "))
+            {
+                var key = keyOrTitle.Replace("-", " ").Replace(":", "").Replace("  ", " ")
+                    .Split(' ').Select(x => x.Capitalize()).Join("");
+
+                return new FixtureModel(key) {title = keyOrTitle};
+
+                
+            }
+            else
+            {
+                return new FixtureModel(keyOrTitle)
+                {
+                    title = keyOrTitle.SplitPascalCase()
+                };
+            }
         }
     }
 }

@@ -5,12 +5,19 @@ import {Table, Column, Cell} from 'fixed-data-table';
 import {Badge} from 'react-bootstrap';
 var Postal = require('postal');
 
+
 function getLibrary(state){
     return {library: state.get('fixtures')};
 }
 
 function FixtureTable({library}){
     const fixtures = _.sortBy(_.values(library.fixtures), x => x.title);
+
+    if (fixtures.length == 0){
+      return (
+        <div>Use the "New Fixture" link in the status bar create your first Fixture, or add a Fixture class to your Storyteller testing project.</div>
+      );
+    }
 
     function TitleCell(props){
       const fixture = fixtures[props.rowIndex];
@@ -41,6 +48,20 @@ function FixtureTable({library}){
       return (<Cell />);
     }
 
+    function MissingCell(props){
+      var fixture = fixtures[props.rowIndex];
+
+      if (fixture.missing){
+        return (<Cell {...props} style={{align: 'center', verticalAlign: 'middle'}}><Badge>All</Badge></Cell>)
+      }
+
+      if (parseInt(fixture.missingCount) > 0){
+        return (<Cell {...props} style={{align: 'center', verticalAlign: 'middle'}}><Badge>{fixture.missingCount}</Badge></Cell>)
+      }
+
+      return (<Cell />);
+    }
+
     function CommandCell(props){
       var key = fixtures[props.rowIndex].key;
 
@@ -66,7 +87,6 @@ function FixtureTable({library}){
     }
 
     return (
-
       <Table
         rowHeight={50}
         rowsCount={fixtures.length}
@@ -77,6 +97,12 @@ function FixtureTable({library}){
         <Column
           header={<Cell>Errors</Cell>}
           cell={ErrorCell}
+          width={75}
+          align='center'
+        />
+        <Column
+          header={<Cell title="'Missing' just means that the grammars are not yet implemented in code">Missing</Cell>}
+          cell={MissingCell}
           width={75}
           align='center'
         />

@@ -65,5 +65,10 @@ namespace StoryTeller.Model
 
             return sentence;
         }
+
+        public override string ToString()
+        {
+            return $"Sentence: {format} ({key})";
+        }
     }
 }

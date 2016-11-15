@@ -5,6 +5,11 @@
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "Open Testbed": {
+      "commandName": "Project",
+      "commandLineArgs": "open src/Testbed",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
     "Scratchpad": {
       "commandName": "Project",
       "commandLineArgs": "open src/Samples",

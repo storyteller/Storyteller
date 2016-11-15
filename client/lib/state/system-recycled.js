@@ -6,7 +6,20 @@ var Immutable = require('immutable');
 
 export function FixturesUpdated(state, action){
     var library = new FixtureLibrary(action.fixtures);
-    return state.set('fixtures', library);
+    state = state.set('fixtures', library);
+
+    if (state.has('specs')){
+        var specArray = state.get('specs').toList().toArray();
+        var specs = {};
+        
+        specArray.forEach(x => {
+            specs[x.id] = x.replaceLibrary(library);
+        });
+        
+        state = state.set('specs', new Immutable.Map(specs));
+    }
+
+    return state;
 }
 
 export function SystemRecycled(state, action) {
@@ -19,18 +32,6 @@ export function SystemRecycled(state, action) {
     var systemState = fromJS(system);
     
     state = FixturesUpdated(state, action);
-    
-    if (state.has('specs')){
-        var specArray = state.get('specs').toList().toArray();
-        var specs = {};
-        
-        specArray.forEach(x => {
-            specs[x.id] = x.replaceLibrary(library);
-        });
-        
-        state = state.set('specs', new Immutable.Map(specs));
-    }
-
 
     return state.set('system-state', systemState);
 }

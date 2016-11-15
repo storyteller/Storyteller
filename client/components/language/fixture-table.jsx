@@ -27,9 +27,9 @@ function FixtureError({error}){
 function GrammarError({error, grammar}){
     const text = toErrorMessage(error);
 
-    let title = null;
+    let title = '';
     if (grammar != null && grammar != 'null'){
-        title = (<h4>Grammar: {grammar}</h4>);
+        title = (<h4>Grammar: {grammar.key}</h4>);
     }
 
     return (
@@ -56,14 +56,17 @@ function FixtureTable({fixture, spec}){
 			var g = fixture.grammars[key];
       if (g.errors){
         for (var i = 0; i < g.errors.length; i++){
-          var errorElement = (<GrammarError error={g.errors[i]} grammar={g}/>);
+          var errorElement = (<GrammarError key={g.key + ":error"} error={g.errors[i]} grammar={g}/>);
           errors.push(errorElement);
         }
       }
 		}
+    
 
     errorTab = (<Tab eventKey={3} title="Errors">{errors}</Tab>)
+    
   }
+  
 
   var exportMsg = {type: 'open-fixture-file', key: fixture.key, export: true};
   var exportAndEdit = () => Postal.publish({channel: 'engine-request', topic: 'open-fixture-file', data: exportMsg});

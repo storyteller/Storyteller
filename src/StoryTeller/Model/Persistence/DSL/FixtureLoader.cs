@@ -17,6 +17,12 @@ namespace StoryTeller.Model.Persistence.DSL
 
         public static FixtureLibrary LoadFromPath(string path)
         {
+            if (!Directory.Exists(path))
+            {
+                ConsoleWriter.Write(ConsoleColor.White, "Created directory " + path);
+                Directory.CreateDirectory(path);
+            }
+
             var fixturePaths = Directory.GetFiles(path)
                 .Where(file =>
                     Path.GetExtension(file).Equals(

@@ -17,4 +17,13 @@ namespace StoryTeller.Messages
         {
         }
     }
+
+    public class CreateFixture : ClientMessage
+    {
+        public CreateFixture() : base("create-fixture")
+        {
+        }
+
+        public string key { get; set; }
+    }
 }

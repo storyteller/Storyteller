@@ -11,6 +11,8 @@ class Fixture{
 		this.errors = data.errors || [];
 		this.implementation = data.implementation;
 		this.sample = data.sample;
+		this.missingCount = data.missingCount;
+		this.missing = data.missing;
 
 		var grammars = {};
 		
