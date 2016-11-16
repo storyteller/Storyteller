@@ -28,10 +28,10 @@ namespace StoryTeller.Testing.Grammars.Reflection
         [Fact]
         public void the_return_cell_is_marked_as_output()
         {
-            ShouldBeTestExtensions.ShouldBe(ValueCheckMethod
-                    .For(new Target(), x => x.Fullname2(null, null))
-                    .ReturnCell
-                    .output, true);
+            ValueCheckMethod
+                .For(new Target(), x => x.Fullname2(null, null))
+                .ReturnCell
+                .result.ShouldBe(true);
         }
 
         [Fact]

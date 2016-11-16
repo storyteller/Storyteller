@@ -377,7 +377,7 @@ namespace StoryTeller.Testing.Model
 
             var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
 
-            cell.output.ShouldBeFalse();
+            cell.result.ShouldBeFalse();
         }
 
         [Fact]
@@ -389,7 +389,7 @@ namespace StoryTeller.Testing.Model
 
             var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
 
-            cell.output.ShouldBeTrue();
+            cell.result.ShouldBeTrue();
             cell.Type.ShouldBe(typeof(int));
         }
 

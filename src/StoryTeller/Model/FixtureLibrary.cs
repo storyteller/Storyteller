@@ -36,6 +36,9 @@ namespace StoryTeller.Model
             missing.Each(model =>
             {
                 model.IsMissing = true;
+
+                model.grammars.Each(x => x.IsMissing = true);
+
                 newLibrary.Models[model.key] = model;
             });
 

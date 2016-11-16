@@ -32,12 +32,12 @@ namespace StoryTeller.Grammars.Reflection
         public void Compile(Fixture fixture, CellHandling cellHandling)
         {
             _cells = _method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture)).ToArray();
-            _outputs = _cells.Where(x => x.output).ToArray();
+            _outputs = _cells.Where(x => x.result).ToArray();
 
             if (_method.HasReturn())
             {
                 ReturnCell = Cell.For(cellHandling, _method.ReturnParameter, fixture);
-                ReturnCell.output = true;
+                ReturnCell.result = true;
                 if (ReturnCell.Key.IsEmpty())
                 {
                     ReturnCell.Key = Format.ParseTemplateKeys().LastOrDefault() ?? "returnValue";

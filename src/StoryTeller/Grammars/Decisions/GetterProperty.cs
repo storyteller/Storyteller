@@ -24,7 +24,7 @@ namespace StoryTeller.Grammars.Decisions
         public Cell CompileCell(CellHandling cellHandling, Fixture fixture)
         {
             _cell = Cell.For(cellHandling, _property, fixture);
-            _cell.output = true;
+            _cell.result = true;
 
             return _cell;
         }

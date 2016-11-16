@@ -1,4 +1,5 @@
-﻿using Baseline;
+﻿using System;
+using Baseline;
 using Shouldly;
 using StoryTeller.Model;
 using Xunit;
@@ -65,5 +66,8 @@ namespace StoryTeller.Testing.Model
             fixture.title.ShouldBe("Going to the store - Walmart");
             fixture.key.ShouldBe("GoingToTheStoreWalmart");
         }
+
     }
+
+    
 }

@@ -27,8 +27,6 @@ namespace StoryTeller.Model
 
         public Option[] options;
 
-        public bool output;
-
         public bool result;
 
         [JsonIgnore] public Type Type;
@@ -126,7 +124,7 @@ namespace StoryTeller.Model
                 isOutput = true;
             }
 
-            var cell = new Cell(cells, parameter.Name, type) {output = isOutput, Position = parameter.Position};
+            var cell = new Cell(cells, parameter.Name, type) {result = isOutput, Position = parameter.Position};
 
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
@@ -337,6 +335,11 @@ namespace StoryTeller.Model
         public void AddSampleValue(Step step)
         {
             step.Values.Add(Key, HasDefault() ? DefaultValue : Key);
+        }
+
+        public string ToDeclaration()
+        {
+            return result ? $"out string {Key}" : $"string {Key}";
         }
     }
 

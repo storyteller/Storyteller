@@ -66,6 +66,30 @@ namespace StoryTeller.Model
             return sentence;
         }
 
+        public override string ToMissingCode()
+        {
+            string args = _cells.OrderBy(x => x.result).Select(x => x.ToDeclaration()).Join(", ");
+            var returns = _cells.Where(x => x.result).ToArray();
+
+            var returnType = "void";
+            var decoration = "";
+
+            if (returns.Length == 1)
+            {
+                args = _cells.Where(x => !x.result).Select(x => x.ToDeclaration()).Join(", ");
+                returnType = "string";
+                decoration = $"[return: AliasAs(\"{returns.Single().Key}\")]";
+            }
+
+            return $@"
+        {decoration}
+        public {returnType} {key}({args})
+        {{
+            throw new NotImplementedException();
+        }}
+";
+        }
+
         public override string ToString()
         {
             return $"Sentence: {format} ({key})";

@@ -19,6 +19,17 @@ namespace StoryTeller.Model
             
         }
 
+        public override string ToMissingCode()
+        {
+            return $@"
+        [ExposeAsTable(`{title}`)]
+        public void {key}({cells.Select(x => x.ToDeclaration()).Join(", ")})
+        {{
+            throw new NotImplementedException();
+        }}
+".TrimEnd().Replace('`', '\"');
+        }
+
         protected internal override void configureSampleStep(Step step)
         {
             var section = step.Collections[collection];

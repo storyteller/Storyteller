@@ -63,7 +63,7 @@ function FixtureTable({fixture, spec}){
 		}
     
 
-    errorTab = (<Tab eventKey={3} title="Errors">{errors}</Tab>)
+    errorTab = (<Tab eventKey={4} title="Errors">{errors}</Tab>)
     
   }
   
@@ -81,6 +81,9 @@ function FixtureTable({fixture, spec}){
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
             <Tab eventKey={1} title="Preview">{previews}</Tab>
             <Tab eventKey={2} title="Editing">{editors}</Tab>
+            <Tab eventKey={3} title="Missing Code">
+              <textarea style={{width: '100%', height: '300px'}}>{fixture.missingCode}</textarea>
+            </Tab>
             {errorTab}
           </Tabs>
         </Row>

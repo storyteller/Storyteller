@@ -33,6 +33,11 @@ namespace StoryTeller.Model
             }
         }
 
+        public virtual string ToMissingCode()
+        {
+            return string.Empty;
+        }
+
         /// <summary>
         /// Just notes that this grammar is
         /// </summary>

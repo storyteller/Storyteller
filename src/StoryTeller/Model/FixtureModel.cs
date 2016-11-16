@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Baseline;
-using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model
@@ -32,6 +32,23 @@ namespace StoryTeller.Model
         public int MissingCount
         {
             get { return _grammars.Count(x => x.IsMissing); }
+        }
+
+        public string missingCode => ToMissingCode();
+
+        public override string ToMissingCode()
+        {
+            if (!IsMissing || MissingCount == 0) return "";
+
+            var missing = IsMissing ? _grammars.Where(x => x.IsMissing && x.key != "TODO") : _grammars.Where(x => x.key != "TODO");
+
+            return $@"
+    public class {key}Fixture
+    {{
+        {missing.Select(x => x.ToMissingCode()).Join("\n\n")}              
+    }}
+";
+
         }
 
         public Specification sample => ToSampleSpecification();
