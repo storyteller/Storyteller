@@ -51,7 +51,7 @@ namespace ST.Client
 
                 Fixtures.RecordSystemFixtures(t.Result);
 
-                return t.Result;
+                return t.Result.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
             });
         }
 
@@ -62,9 +62,7 @@ namespace ST.Client
                 var recycled = Engine.LatestSystemRecycled ?? Startup.Result;
                 recycled.properties["Spec Directory"] = _input.SpecPath;
 
-                recycled.fixtures = Fixtures.CombinedFixtures();
-
-                return recycled;
+                return recycled.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
             }
         }
 
@@ -92,9 +90,9 @@ namespace ST.Client
             message.WriteSystemUsage();
 
             Fixtures.RecordSystemFixtures(message);
-            message.fixtures = Fixtures.CombinedFixtures();
+            var cloned = message.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
 
-            Client.SendMessageToClient(message);
+            Client.SendMessageToClient(cloned);
         }
 
         public void Receive(SystemRecycleStarted message)

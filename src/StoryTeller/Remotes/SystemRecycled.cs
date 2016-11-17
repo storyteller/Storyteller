@@ -28,6 +28,25 @@ namespace StoryTeller.Remotes
             properties.Add("Profile", Project.CurrentProfile);
         }
 
+        public SystemRecycled CloneWithOverriddenFixtures(FixtureModel[] fixtureArray)
+        {
+            var clone = new SystemRecycled
+            {
+                error = error,
+                success = success,
+                system_full_name = system_full_name,
+                time = time,
+                name = name,
+                system_name = system_name,
+                properties = properties
+            };
+
+
+            clone.fixtures = fixtureArray;
+
+            return clone;
+        }
+
         public FixtureModel[] fixtures
         {
             get { return _fixtures.ToArray(); }

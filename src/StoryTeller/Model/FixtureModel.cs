@@ -42,13 +42,14 @@ namespace StoryTeller.Model
 
             var missing = IsMissing ? _grammars.Where(x => x.IsMissing && x.key != "TODO") : _grammars.Where(x => x.key != "TODO");
 
-            return $@"
-    public class {key}Fixture
+            var code = $@"
+    public class {key}Fixture : {typeof(Fixture).FullName}
     {{
-        {missing.Select(x => x.ToMissingCode()).Join("\n\n")}              
+        {missing.Select(x => x.ToMissingCode()).Join("\n")}              
     }}
 ";
 
+            return code;
         }
 
         public Specification sample => ToSampleSpecification();

@@ -23,7 +23,7 @@ namespace StoryTeller.Testing.Model
         [Fact]
         public void generate_code_for_no_outputs()
         {
-            theCode.ShouldContain("");
+            theCode.ShouldContain("public void AddData(string foo, string bar, string baz)");
         }
 
         [Fact]

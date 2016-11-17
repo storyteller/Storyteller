@@ -55,6 +55,11 @@ namespace StoryTeller.Model.Persistence.DSL
                 return paragraphMode;
             }
 
+            if (line.StartsWith("embeds"))
+            {
+                return buildEmbed(line);
+            }
+
             if (line.IsTableLine())
             {
                 var values = line.ToTableValues();
@@ -75,9 +80,6 @@ namespace StoryTeller.Model.Persistence.DSL
                         case "ordered-set":
                             return buildSet(true);
 
-                        case "embed":
-                            return buildEmbed(values);
-
                         default:
                             throw new ArgumentOutOfRangeException($"'{values[0]}' is not a valid option here");
                     }
@@ -94,14 +96,18 @@ namespace StoryTeller.Model.Persistence.DSL
             return null;
         }
 
-        private IReaderMode buildEmbed(string[] values)
+        private IReaderMode buildEmbed(string line)
         {
             _hasAdded = true;
+
+            var first = line.IndexOf(" ");
+            var otherKey = line.Substring(first + 1);
+
             var embed = new EmbeddedSection
             {
                 key = _key,
                 title = _title,
-                fixture = new FixtureModel(values[1])
+                fixture = new FixtureModel(otherKey)
             };
 
             _fixture.AddGrammar(embed);

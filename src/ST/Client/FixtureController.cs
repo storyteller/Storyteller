@@ -30,12 +30,6 @@ namespace ST.Client
         public void RecordSystemFixtures(SystemRecycled recycled)
         {
             _systemFixtures = FixtureLibrary.From(recycled.fixtures);
-
-            if (_overrides != null)
-            {
-                var combined = _systemFixtures.ApplyOverrides(_overrides);
-                recycled.fixtures = combined.Models.ToArray();
-            }
         }
 
         public FixtureModel[] CombinedFixtures()

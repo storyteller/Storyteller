@@ -3,8 +3,10 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 const Specification = require('../../lib/model/specification');
 import { preview, editing } from './../editing/component-loader';
-import { Grid, Row, Col, Tabs, Tab } from 'react-bootstrap';
-var Postal = require('postal');
+import { Grid, Row, Col, Tabs, Tab, Button } from 'react-bootstrap';
+import Postal from 'postal';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import icons from './../icons';
 
 
 function toErrorMessage(data){
@@ -63,13 +65,20 @@ function FixtureTable({fixture, spec}){
 		}
     
 
-    errorTab = (<Tab eventKey={4} title="Errors">{errors}</Tab>)
+    errorTab = (
+      <Tab eventKey={4} title="Errors">
+        <div style={{paddingTop: '10px'}}>
+        <p>Below is a list of the detected problems from this Fixture's implementation</p>
+        {errors}
+        </div>
+      </Tab>)
     
   }
   
 
   var exportMsg = {type: 'open-fixture-file', key: fixture.key, export: true};
   var exportAndEdit = () => Postal.publish({channel: 'engine-request', topic: 'open-fixture-file', data: exportMsg});
+  var Clipboard = icons['clipboard'];
 
   return (
     <div>
@@ -77,12 +86,28 @@ function FixtureTable({fixture, spec}){
       <hr />
       <Grid>
         <Row>
-          <p>Below is a sample specification for this fixture just to preview its usage</p>
           <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title="Preview">{previews}</Tab>
-            <Tab eventKey={2} title="Editing">{editors}</Tab>
+            <Tab eventKey={1} title="Preview">
+              <div style={{paddingTop: '10px'}}>
+                <p>Below is a sample specification for this fixture just to preview its usage</p>
+                {previews}
+              </div>
+            </Tab>
+            <Tab eventKey={2} title="Editing">
+              <div style={{paddingTop: '10px'}}>
+                <p>Below is a sample specification for this fixture in editing mode</p>
+                {editors}
+              </div>
+            </Tab>
             <Tab eventKey={3} title="Missing Code">
-              <textarea style={{width: '100%', height: '300px'}}>{fixture.missingCode}</textarea>
+              <div style={{paddingTop: '10px'}}>
+                <p>
+                  The code shown below is a stubbed implementation to match the defined grammars that are not yet implemented.
+                </p>
+                <pre>
+{fixture.missingCode}
+                </pre>
+              </div>
             </Tab>
             {errorTab}
           </Tabs>

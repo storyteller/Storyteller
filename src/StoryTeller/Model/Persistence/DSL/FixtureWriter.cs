@@ -92,7 +92,7 @@ namespace StoryTeller.Model.Persistence.DSL
         private static void writeEmbed(EmbeddedSection grammar, TextWriter writer)
         {
             writer.WriteLine($"### {grammar.title}");
-            writer.WriteLine($"|embed|{grammar.fixture.key}|");
+            writer.WriteLine($"embeds {grammar.fixture.key}");
         }
 
         private static void writeTable(Table grammar, TextWriter writer)
