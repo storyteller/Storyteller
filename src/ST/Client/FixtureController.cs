@@ -32,6 +32,11 @@ namespace ST.Client
             _systemFixtures = FixtureLibrary.From(recycled.fixtures);
         }
 
+        public void RecordSystemFixtures(FixtureLibrary system)
+        {
+            _systemFixtures = system;
+        }
+
         public FixtureModel[] CombinedFixtures()
         {
             if (_overrides == null) return _systemFixtures.Models.ToArray();
@@ -75,7 +80,9 @@ namespace ST.Client
             _watcher.Latch(() =>
             {
                 if (!Directory.Exists(_fixturePath))
+                {
                     Directory.CreateDirectory(_fixturePath);
+                }
 
                 var fixtures = CombinedFixtures();
                 foreach (var fixture in fixtures)

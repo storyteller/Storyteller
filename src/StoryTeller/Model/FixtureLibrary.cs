@@ -42,6 +42,12 @@ namespace StoryTeller.Model
                 newLibrary.Models[model.key] = model;
             });
 
+            newLibrary.Models
+                .SelectMany(x => x.grammars)
+                .OfType<EmbeddedSection>()
+                .Where(x => x.IsMissing)
+                .Each(x => x.ApplyFixtureOverrides(this, overrides));
+
             return newLibrary;
         }
 
@@ -88,6 +94,11 @@ namespace StoryTeller.Model
             foreach (var fixture in fixtures)
             {
                 library.Models[fixture.key] = fixture;
+            }
+
+            foreach (var fixture in fixtures)
+            {
+                fixture.ResolveDependencies(library);
             }
 
             return library;

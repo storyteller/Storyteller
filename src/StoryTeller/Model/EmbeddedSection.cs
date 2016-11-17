@@ -1,3 +1,4 @@
+using System.Linq;
 using Baseline;
 
 namespace StoryTeller.Model
@@ -29,7 +30,7 @@ namespace StoryTeller.Model
                 key = key,
                 title = title,
                 collection = collection,
-                fixture = fixture
+                fixture = (FixtureModel) fixture.ApplyOverrides(@override.fixture)
                 
             };
 
@@ -39,6 +40,34 @@ namespace StoryTeller.Model
             }
 
             return section;
+        }
+
+        public override void ResolveDependencies(FixtureLibrary library)
+        {
+            var embeddedKey = fixture.key;
+            if (library.Models.Has(embeddedKey))
+            {
+                fixture = library.Models[embeddedKey];
+            }
+
+            
+        }
+
+        public void ApplyFixtureOverrides(FixtureLibrary systemLibrary, FixtureLibrary overrides)
+        {
+            var embeddedKey = fixture.key;
+            if (systemLibrary.Models.Has(embeddedKey))
+            {
+                var systemFixture = systemLibrary.Models[embeddedKey];
+
+                fixture = overrides.Models.Has(embeddedKey)
+                    ? systemFixture.ApplyOverrides(overrides.Models[embeddedKey]).As<FixtureModel>()
+                    : systemFixture;
+            }
+            else
+            {
+                fixture = overrides.Models[embeddedKey];
+            }
         }
     }
 }

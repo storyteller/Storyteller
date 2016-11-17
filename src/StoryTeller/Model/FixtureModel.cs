@@ -125,6 +125,14 @@ namespace StoryTeller.Model
             return model;
         }
 
+        public override void ResolveDependencies(FixtureLibrary library)
+        {
+            foreach (var grammar in _grammars)
+            {
+                grammar.ResolveDependencies(library);
+            }
+        }
+
         public override string ToString()
         {
             return $"Fixture: {key}";

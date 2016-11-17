@@ -81,5 +81,10 @@ namespace StoryTeller.Model
         {
             return this;
         }
+
+        public virtual void ResolveDependencies(FixtureLibrary library)
+        {
+            // Most won't care
+        }
     }
 }

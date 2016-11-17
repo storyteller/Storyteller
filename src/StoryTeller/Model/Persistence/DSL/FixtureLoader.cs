@@ -29,15 +29,9 @@ namespace StoryTeller.Model.Persistence.DSL
                         ".md",
                         StringComparison.OrdinalIgnoreCase));
 
-            var lib = new FixtureLibrary();
+            var fixtures = fixturePaths.Select(FixtureReader.ReadFromFile).ToArray();
 
-            foreach (var fp in fixturePaths)
-            {
-                var fixture = FixtureReader.ReadFromFile(fp);
-                lib.Models[fixture.key] = fixture;
-            }
-
-            return lib;
+            return FixtureLibrary.From(fixtures);
         }
     }
 }
