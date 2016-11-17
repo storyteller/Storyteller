@@ -1,4 +1,5 @@
-﻿using Baseline;
+﻿using System.Linq;
+using Baseline;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
@@ -13,6 +14,16 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var result = FixtureReader.ReadFrom(@"# a title");
             result.title.ShouldBe("a title");
+        }
+
+        [Fact]
+        public void can_derive_a_title_from_the_key()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## SomeKindOfKey
+");
+            result.grammars.Single().ShouldBeOfType<Sentence>()
+                .format.ShouldBe("Some Kind Of Key");
         }
 
         [Fact]
