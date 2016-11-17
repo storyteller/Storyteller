@@ -14,6 +14,7 @@ class Fixture{
 		this.missingCount = data.missingCount;
 		this.missing = data.missing;
 		this.missingCode = data.missingCode;
+		this.sampleMarkdown = data.sampleMarkdown;
 
 		var grammars = {};
 		

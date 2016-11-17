@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using StoryTeller.Util;
 
 namespace StoryTeller.Model
 {
@@ -23,8 +24,22 @@ namespace StoryTeller.Model
 
         public string format;
 
+
         public Sentence() : base("sentence")
         {
+        }
+
+        public Sentence(string key, string format) : base("sentence")
+        {
+            this.key = key;
+            this.format = format;
+
+            var cellKeys = TemplateParser.GetSubstitutions(format);
+            foreach (var cellKey in cellKeys)
+            {
+                var cell = Cell.For<string>(cellKey);
+                _cells.Add(cell);
+            }
         }
 
         public Cell FindCell(string cell)

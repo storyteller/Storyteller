@@ -66,7 +66,7 @@ function FixtureTable({fixture, spec}){
     
 
     errorTab = (
-      <Tab eventKey={4} title="Errors">
+      <Tab eventKey={5} title="Errors">
         <div style={{paddingTop: '10px'}}>
         <p>Below is a list of the detected problems from this Fixture's implementation</p>
         {errors}
@@ -109,6 +109,20 @@ function FixtureTable({fixture, spec}){
                 </pre>
               </div>
             </Tab>
+            <Tab eventKey={4} title="Markdown Sample">
+              <div style={{paddingTop: '10px'}}>
+                <p>
+                  The markdown text shown below demonstrates the usage of this Fixture in the specification files.
+                </p>
+                <pre>
+{fixture.sampleMarkdown}
+                </pre>
+              </div>
+            </Tab>
+
+
+
+
             {errorTab}
           </Tabs>
         </Row>

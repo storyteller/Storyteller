@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Baseline;
 using Newtonsoft.Json;
+using StoryTeller.Model.Persistence.DSL;
+using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model
 {
@@ -54,6 +56,21 @@ namespace StoryTeller.Model
 
         public Specification sample => ToSampleSpecification();
 
+        public string sampleMarkdown
+        {
+            get
+            {
+                var specification = ToSampleSpecification();
+                specification.Children.RemoveAll(x => x is Comment);
+                specification.Children.OfType<Section>().Each(section =>
+                {
+                    section.Children.RemoveAll(x => x is Comment);
+                });
+
+                return MarkdownWriter.WriteToText(specification);
+            }
+        }
+
         public Specification ToSampleSpecification()
         {
             var spec = new Specification
@@ -82,6 +99,7 @@ namespace StoryTeller.Model
                 {
                     section.AddComment("## " + grammar.key);
                 }
+
                 section.Children.Add(grammar.ToSampleStep());
             }
         }

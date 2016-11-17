@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using Baseline;
+using Microsoft.AspNetCore.Routing.Template;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model.Persistence.Markdown;
+using TemplateParser = StoryTeller.Util.TemplateParser;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
@@ -148,13 +150,14 @@ namespace StoryTeller.Model.Persistence.DSL
         {
             _hasAdded = true;
 
-            var sentence = new Sentence
-            {
-                key = _key,
-                format = _title
-            };
+            var sentence = new Sentence(_key, _title);
+
+            
+
+            
 
             _fixture.AddGrammar(sentence);
+
             return sentence;
         }
     }
