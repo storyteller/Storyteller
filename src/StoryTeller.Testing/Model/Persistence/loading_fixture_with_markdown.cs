@@ -27,6 +27,19 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Fact]
+        public void can_fix_up_a_key_with_spaces()
+        {
+            var result = FixtureReader.ReadFrom(@"
+## Some Kind Of Key
+");
+            var sentence = result.grammars.Single().ShouldBeOfType<Sentence>();
+            sentence
+                .format.ShouldBe("Some Kind Of Key");
+
+            sentence.key.ShouldBe("SomeKindOfKey");
+        }
+
+        [Fact]
         public void reads_sentence()
         {
             var result = FixtureReader.ReadFrom(@"
