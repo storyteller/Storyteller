@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using Baseline;
+using Xunit;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -59,6 +61,11 @@ Name: whatever
         [Fact]
         public void build_the_cell_model()
         {
+            TestingContext.Library.Models["Fact"].grammars.Each(x =>
+            {
+                Console.WriteLine(x);
+            });
+
             var sentence = ModelFor<Sentence>("Fact", "CheckIsSo");
             sentence.format.ShouldBe("Check is so");
 

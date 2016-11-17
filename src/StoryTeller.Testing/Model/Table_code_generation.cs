@@ -16,8 +16,6 @@ namespace StoryTeller.Testing.Model
             model.IsMissing = true;
             model.grammars.Each(x => x.IsMissing = true);
             theCode = model.missingCode;
-
-            Console.WriteLine(theCode);
         }
 
         [Fact]

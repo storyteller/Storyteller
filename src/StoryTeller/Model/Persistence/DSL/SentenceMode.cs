@@ -1,4 +1,5 @@
-﻿using Baseline;
+﻿using System.Linq;
+using Baseline;
 using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence.DSL
@@ -6,7 +7,6 @@ namespace StoryTeller.Model.Persistence.DSL
     public class SentenceMode : GrammarModeBase
     {
         private readonly Sentence _sentence;
-        private string[] _template;
 
         public SentenceMode(Sentence sentence)
         {
@@ -19,20 +19,26 @@ namespace StoryTeller.Model.Persistence.DSL
 
             var values = text.ToTableValues();
 
-            if (_template == null)
+            if (values[0] == "sentence" && (_sentence.cells == null || _sentence.cells.Length == 0))
             {
-                _template = values;
+                _sentence.cells = values
+                    .Skip(1)
+                    .Select(x => new Cell(CellHandling.Basic(), x, typeof(string)))
+                    .ToArray();
+
                 return this;
             }
 
-            var cell = new Cell(CellHandling.Basic(), null, typeof(string));
+            var target = values.First();
+            var rest = values.Skip(1).Take(_sentence.cells.Length).ToList();
 
-            values.Each((value, i) =>
+            if (!rest.Any()) return null;
+
+            rest.Each((value, i) =>
             {
-                applyValue(_template[i], cell, value);
+                var cell = _sentence.cells[i];
+                applyValue(target, cell, value);
             });
-
-            _sentence.AddCell(cell);
 
             return this;
         }

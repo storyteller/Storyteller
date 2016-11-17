@@ -107,14 +107,19 @@ namespace StoryTeller.Model.Persistence.DSL
             }
 
 
-            var firstRow = new[] {tableType}.Concat(grammar.cells.Select(x => x.Key)).ToArray();
+            writeCellTable(tableType, writer, grammar.cells);
+        }
 
-            var headers = new[] { "header" }.Concat(grammar.cells.Select(x => x.header)).ToArray();
+        private static void writeCellTable(string tableType, TextWriter writer, Cell[] cells)
+        {
+            var firstRow = new[] {tableType}.Concat(cells.Select(x => x.Key)).ToArray();
 
-            var defaults = new[] {"default"}.Concat(grammar.cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
-            var options = new[] {"options"}.Concat(grammar.cells.Select(x => Option.Write(x.options))).ToArray();
-            var editors = new[] {"editor"}.Concat(grammar.cells.Select(x => x.editor ?? string.Empty)).ToArray();
-            var results = new[] {"result"}.Concat(grammar.cells.Select(x => x.result.ToString())).ToArray();
+            var headers = new[] {"header"}.Concat(cells.Select(x => x.header)).ToArray();
+
+            var defaults = new[] {"default"}.Concat(cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
+            var options = new[] {"options"}.Concat(cells.Select(x => Option.Write(x.options))).ToArray();
+            var editors = new[] {"editor"}.Concat(cells.Select(x => x.editor ?? string.Empty)).ToArray();
+            var results = new[] {"result"}.Concat(cells.Select(x => x.result.ToString())).ToArray();
 
             writeTable(new[] {firstRow, headers, defaults, options, editors, results}, writer);
         }
@@ -138,13 +143,7 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (sentence.cells.Any())
             {
-                var header = new[] {"cell", "default", "editor", "options"};
-                var rows =
-                    sentence.cells.Select(
-                        cell => { return new[] {cell.Key, cell.DefaultValue, cell.editor, Option.Write(cell.options)}; });
-
-                var allRows = new[] {header}.Concat(rows).ToArray();
-                writeTable(allRows, writer);
+                writeCellTable("sentence", writer, sentence.cells);
             }
         }
 

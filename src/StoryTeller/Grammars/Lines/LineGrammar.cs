@@ -8,7 +8,7 @@ namespace StoryTeller.Grammars.Lines
 {
     public abstract class LineGrammar : ILineGrammar
     {
-        private Cell[] _cells;
+        protected Cell[] _cells;
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
         {

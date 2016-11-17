@@ -161,7 +161,18 @@ namespace StoryTeller.Model
             if (keyOrTitle.Contains(" "))
             {
                 var key = keyOrTitle.Replace("-", " ").Replace(":", "").Replace("  ", " ")
-                    .Split(' ').Select(x => x.Capitalize()).Join("");
+                    .Split(' ').Select(x =>
+                    {
+                        // CoreCLR and Capitalize() don't play well together
+                        try
+                        {
+                            return x.Capitalize();
+                        }
+                        catch (Exception)
+                        {
+                            return x;
+                        }
+                    }).Join("");
 
                 return new FixtureModel(key) {title = keyOrTitle};
 

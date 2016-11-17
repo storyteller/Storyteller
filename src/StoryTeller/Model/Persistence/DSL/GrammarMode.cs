@@ -30,7 +30,23 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (line.IsHeaderTwo())
             {
-                _key = line.Trim().TrimStart('#', ' ');
+                var value = line.Trim().TrimStart('#', ' ');
+
+                if (value.Contains(' '))
+                {
+                    _title = value;
+                    _key = _title.Replace("  ", " ").Split(' ').Select(x => x.Capitalize()).Join("");
+                }
+                else
+                {
+                    _key = value;
+
+                    // Default title
+                    _title = _key.SplitPascalCase();
+                }
+
+
+
                 return this;
             }
 
@@ -69,7 +85,7 @@ namespace StoryTeller.Model.Persistence.DSL
                 {
                     switch (values[0].ToLower())
                     {
-                        case "cell":
+                        case "sentence":
                             var sentence = addSentence();
                             return new SentenceMode(sentence);
 
@@ -151,11 +167,6 @@ namespace StoryTeller.Model.Persistence.DSL
             _hasAdded = true;
 
             var sentence = new Sentence(_key, _title);
-
-            
-
-            
-
             _fixture.AddGrammar(sentence);
 
             return sentence;

@@ -6,6 +6,7 @@ using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Samples;
 using StoryTeller.Samples.Fixtures;
+using StoryTeller.Testing.EndToEndExecution;
 
 namespace StoryTeller.Testing
 {
@@ -18,7 +19,14 @@ namespace StoryTeller.Testing
                 try
                 {
                     var fixture = new SentenceFixture();
-                    return FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+                    var library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+
+                    // Need to force it to use this one instead of the FactFixture in the samples project
+                    var factFixture = new StoryTeller.Testing.EndToEndExecution.FactFixture();
+                    library.Models["Fact"] = factFixture.Compile(CellHandling.Basic());
+                    library.Fixtures["Fact"] = factFixture;
+
+                    return library;
                 }
                 catch (Exception e)
                 {

@@ -19,13 +19,13 @@ namespace StoryTeller.Testing.Model.Persistence
         public void reads_sentence()
         {
             var result = FixtureReader.ReadFrom(@"
-## a key
+## AKey
 ### a title");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
             result.grammars[0].As<Sentence>().format.ShouldBe("a title");
-            result.grammars[0].As<Sentence>().key.ShouldBe("a key");
+            result.grammars[0].As<Sentence>().key.ShouldBe("AKey");
         }
 
         [Fact]
@@ -33,8 +33,8 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var result = FixtureReader.ReadFrom(@"
 ## a key
-|cell|default|
-|first|default|");
+|sentence|first|
+|default|something|");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.DefaultValue.ShouldBe("default");
+            cell.DefaultValue.ShouldBe("something");
         }
 
         [Fact]
@@ -53,8 +53,10 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             var result = FixtureReader.ReadFrom(@"
 ## a key
-|cell|default|options|
-|first|default|hello, goodbye, ciao|");
+|sentence|first               |
+|default |somthing            |
+|options |hello, goodbye, ciao|");
+
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -78,8 +80,10 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|cell|default|options|
-|first|default|hello, ""goodbye, friend"", ciao|");
+|sentence|first                           |
+|default |something                       |
+|options |hello, ""goodbye, friend"", ciao|
+");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -103,8 +107,9 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|cell|editor|
-|first|text|");
+|sentence|first   |
+|editor  |bigtext |
+");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -115,7 +120,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.editor.ShouldBe("text");
+            cell.editor.ShouldBe("bigtext");
         }
 
         [Fact]
@@ -124,8 +129,9 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|cell|result|
-|first|true|");
+|sentence|first|
+|result  |true |
+");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -145,8 +151,9 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|cell|result|
-|first|false|");
+|sentence|first|
+|result  |false|
+");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();
@@ -166,8 +173,9 @@ namespace StoryTeller.Testing.Model.Persistence
             var result = FixtureReader.ReadFrom(@"
 ## a key
 ### a title
-|cell|result|
-|first||");
+|sentence|first|
+|result  |     |
+");
             result.grammars.ShouldNotBeNull();
             result.grammars.Length.ShouldBe(1);
             result.grammars[0].ShouldBeOfType<Sentence>();

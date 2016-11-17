@@ -64,8 +64,6 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var markdown = MarkdownWriter.WriteToText(spec);
 
-            Console.WriteLine(markdown);
-
             var readCopy = MarkdownReader.ReadFromText(markdown);
 
             compare(spec, readCopy);
