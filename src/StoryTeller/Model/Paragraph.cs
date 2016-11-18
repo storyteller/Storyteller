@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using Baseline;
 using Newtonsoft.Json;
 
 namespace StoryTeller.Model
@@ -52,6 +54,56 @@ namespace StoryTeller.Model
         public override string TitleOrFormat()
         {
             return title;
+        }
+
+        public override GrammarModel ApplyOverrides(GrammarModel grammar)
+        {
+            var @override = grammar as Paragraph;
+            if (@override == null) return this;
+
+
+            var newParagraph = new Paragraph
+            {
+                key = key
+            };
+
+            if (@override.title.IsNotEmpty() && @override.title != key)
+            {
+                newParagraph.title = @override.title;
+            }
+
+            
+
+            if (@override.children == null || @override.children.Length == 0)
+            {
+                newParagraph.children = children;
+            }
+            else
+            {
+                var nonSilentIndex = 0;
+
+                foreach (var child in children)
+                {
+                    if (child is Silent)
+                    {
+                        newParagraph.AddChild(child);
+                    }
+                    else
+                    {
+                        if (@override.children.Length > nonSilentIndex)
+                        {
+                            var overridenChild = @override.children[nonSilentIndex++];
+                            newParagraph.AddChild(child.ApplyOverrides(overridenChild));
+                        }
+                        else
+                        {
+                            newParagraph.AddChild(child);
+                        }
+                    }
+                }
+            }
+
+            return newParagraph;
         }
     }
 }
