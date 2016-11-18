@@ -19,6 +19,11 @@ namespace StoryTeller.Model
             
         }
 
+        public override string TitleOrFormat()
+        {
+            return title;
+        }
+
         public override string ToMissingCode()
         {
             return $@"

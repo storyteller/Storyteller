@@ -28,5 +28,9 @@ namespace StoryTeller.Model
 
         public string Key { get; set; }
         public bool IsHidden { get; set; }
+        public override string TitleOrFormat()
+        {
+            return "ERROR";
+        }
     }
 }

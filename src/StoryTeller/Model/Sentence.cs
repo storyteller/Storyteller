@@ -109,5 +109,10 @@ namespace StoryTeller.Model
         {
             return $"Sentence: {format} ({key})";
         }
+
+        public override string TitleOrFormat()
+        {
+            return format;
+        }
     }
 }

@@ -8,12 +8,11 @@ namespace StoryTeller.Model
 
         public static readonly Silent Flyweight = new Silent();
 
-        public Cell[] cells
+        public Cell[] cells => new Cell[0];
+
+        public override string TitleOrFormat()
         {
-            get
-            {
-                return new Cell[0];
-            }
+            return "SILENT";
         }
     }
 }

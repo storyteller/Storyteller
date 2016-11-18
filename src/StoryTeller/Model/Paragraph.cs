@@ -43,5 +43,10 @@ namespace StoryTeller.Model
                 return children.OfType<IModelWithCells>().Where(x => x.cells != null).SelectMany(x => x.cells).ToArray();
             }
         }
+
+        public override string TitleOrFormat()
+        {
+            return title;
+        }
     }
 }

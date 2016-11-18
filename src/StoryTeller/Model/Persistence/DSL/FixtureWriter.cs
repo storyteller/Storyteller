@@ -33,6 +33,8 @@ namespace StoryTeller.Model.Persistence.DSL
         {
             writer.WriteLine($"## {grammar.key}");
 
+            writer.WriteLine($"### {grammar.TitleOrFormat()}");
+
 
             if (grammar is Sentence)
             {
@@ -60,8 +62,6 @@ namespace StoryTeller.Model.Persistence.DSL
 
         private static void writeParagraph(Paragraph paragraph, FixtureModel model, TextWriter writer)
         {
-            writer.WriteLine($"### {paragraph.title}");
-
             var list = new List<GrammarModel>();
 
             for (int i = 0; i < paragraph.children.Length; i++)
@@ -91,13 +91,11 @@ namespace StoryTeller.Model.Persistence.DSL
 
         private static void writeEmbed(EmbeddedSection grammar, TextWriter writer)
         {
-            writer.WriteLine($"### {grammar.title}");
             writer.WriteLine($"embeds {grammar.fixture.key}");
         }
 
         private static void writeTable(Table grammar, TextWriter writer)
         {
-            writer.WriteLine($"### {grammar.title}");
             var tableType = "table";
             if (grammar is SetVerification)
             {
@@ -139,7 +137,6 @@ namespace StoryTeller.Model.Persistence.DSL
 
         private static void writeSentence(Sentence sentence, TextWriter writer)
         {
-            writer.WriteLine($"### {sentence.format}");
 
             if (sentence.cells.Any())
             {

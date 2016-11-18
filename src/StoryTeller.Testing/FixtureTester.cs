@@ -266,5 +266,10 @@ namespace StoryTeller.Testing
         {
             return "StubGrammar named " + key;
         }
+
+        public override string TitleOrFormat()
+        {
+            return "Stub";
+        }
     }
 }

@@ -186,5 +186,10 @@ namespace StoryTeller.Model
                 };
             }
         }
+
+        public override string TitleOrFormat()
+        {
+            return title;
+        }
     }
 }

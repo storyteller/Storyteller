@@ -69,5 +69,10 @@ namespace StoryTeller.Model
                 fixture = overrides.Models[embeddedKey];
             }
         }
+
+        public override string TitleOrFormat()
+        {
+            return title;
+        }
     }
 }

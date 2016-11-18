@@ -86,5 +86,7 @@ namespace StoryTeller.Model
         {
             // Most won't care
         }
+
+        public abstract string TitleOrFormat();
     }
 }
