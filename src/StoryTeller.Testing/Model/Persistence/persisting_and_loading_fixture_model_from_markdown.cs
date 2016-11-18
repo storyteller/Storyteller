@@ -18,14 +18,14 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var markdown1 = FixtureWriter.Write(model);
 
-            /*
+            
             Console.WriteLine("Fixture " + typeof(T).Name);
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine(markdown1);
             Console.WriteLine("----------------------------------------------------------------");
             Console.WriteLine();
             Console.WriteLine();
-            */
+            
             
 
             var model2 = FixtureReader.ReadFrom(markdown1);
@@ -118,8 +118,13 @@ namespace StoryTeller.Testing.Model.Persistence
 
     public class ParagraphFixture : Fixture
     {
+        [Hidden]
         public void A() { }
+
+        [Hidden]
         public void B() { }
+
+        [Hidden]
         public void C() { }
 
         public IGrammar ABC()

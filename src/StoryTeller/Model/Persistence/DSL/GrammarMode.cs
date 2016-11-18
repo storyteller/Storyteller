@@ -1,32 +1,39 @@
 ﻿using System;
 using System.Linq;
 using Baseline;
-using Microsoft.AspNetCore.Routing.Template;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model.Persistence.Markdown;
-using TemplateParser = StoryTeller.Util.TemplateParser;
 
 namespace StoryTeller.Model.Persistence.DSL
 {
     public class GrammarMode : IReaderMode
     {
+        private readonly Action<GrammarModel> _adder;
         private readonly FixtureModel _fixture;
-
-        private string _key;
-        private string _title;
 
         private bool _hasAdded;
 
-        public GrammarMode(FixtureModel fixture)
+        private string _key;
+        private Paragraph _paragraph;
+        private string _title;
+
+        public GrammarMode(FixtureModel fixture, Action<GrammarModel> adder)
         {
             _fixture = fixture;
+            _adder = adder;
+        }
+
+        private GrammarMode(FixtureModel fixture, string title, Action<GrammarModel> adder)
+            : this(fixture, adder)
+        {
+            _title = title;
         }
 
         public int Indention { get; set; }
 
         public IReaderMode Read(int indention, string line)
         {
-            if (_hasAdded) return null;
+            if (_hasAdded && _paragraph == null) return null;
 
             if (line.IsHeaderTwo())
             {
@@ -46,7 +53,6 @@ namespace StoryTeller.Model.Persistence.DSL
                 }
 
 
-
                 return this;
             }
 
@@ -58,31 +64,61 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (line.StartsWith("*"))
             {
-                _hasAdded = true;
-
-                var paragraph = new Paragraph
+                if (WithinParagraph)
                 {
-                    key = _key,
-                    title = _title
+                    var title = line.TrimStart('*').Trim();
+                    if (_title.IsEmpty())
+                    {
+                        _title = title;
+                        return this;
+                    }
+
+                    // There's some internal clumsiness about reading children
+                    // within a Paragraph
+                    if (_title == title) return this;
+
+                    if (!_hasAdded)
+                    {
+                        addSentence();
+                    }
+
+                    return null;
+                }
+
+                var childGrammar = new GrammarMode(_fixture, g => _paragraph.AddChild(g))
+                {
+                    WithinParagraph = true
                 };
 
-                _fixture.AddGrammar(paragraph);
+                if (_paragraph == null)
+                {
 
-                var paragraphMode = new ParagraphMode(paragraph);
+                    _hasAdded = true;
 
-                return paragraphMode;
+                    _paragraph = new Paragraph
+                    {
+                        key = _key,
+                        title = _title
+                    };
+
+                    _adder(_paragraph);
+                }
+                else
+                {
+                    childGrammar.Read(indention, line);
+                }
+
+
+                return childGrammar;
             }
 
             if (line.StartsWith("embeds"))
-            {
                 return buildEmbed(line);
-            }
 
             if (line.IsTableLine())
             {
                 var values = line.ToTableValues();
                 if (values.Any())
-                {
                     switch (values[0].ToLower())
                     {
                         case "sentence":
@@ -101,18 +137,19 @@ namespace StoryTeller.Model.Persistence.DSL
                         default:
                             throw new ArgumentOutOfRangeException($"'{values[0]}' is not a valid option here");
                     }
-                }
 
                 addSentence();
             }
 
-            if (line.IsEmpty() && !_hasAdded)
+            if (line.IsEmpty() && !_hasAdded && _title.IsNotEmpty())
             {
                 addSentence();
             }
 
             return null;
         }
+
+        public bool WithinParagraph { get; set; }
 
         private IReaderMode buildEmbed(string line)
         {
@@ -128,7 +165,8 @@ namespace StoryTeller.Model.Persistence.DSL
                 fixture = new FixtureModel(otherKey)
             };
 
-            _fixture.AddGrammar(embed);
+
+            _adder(embed);
 
             return null;
         }
@@ -136,16 +174,16 @@ namespace StoryTeller.Model.Persistence.DSL
         private IReaderMode buildSet(bool ordered)
         {
             _hasAdded = true;
-            var @set = new SetVerification
+            var set = new SetVerification
             {
                 key = _key,
                 title = _title,
                 ordered = ordered
             };
 
-            _fixture.AddGrammar(@set);
+            _adder(set);
 
-            return new TableMode(@set);
+            return new TableMode(set);
         }
 
         private IReaderMode buildTable()
@@ -154,10 +192,10 @@ namespace StoryTeller.Model.Persistence.DSL
             var table = new Table
             {
                 key = _key,
-                title = _title,
+                title = _title
             };
 
-            _fixture.AddGrammar(table);
+            _adder(table);
 
             return new TableMode(table);
         }
@@ -167,7 +205,7 @@ namespace StoryTeller.Model.Persistence.DSL
             _hasAdded = true;
 
             var sentence = new Sentence(_key, _title);
-            _fixture.AddGrammar(sentence);
+            _adder(sentence);
 
             return sentence;
         }

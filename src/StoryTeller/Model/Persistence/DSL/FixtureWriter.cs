@@ -25,15 +25,21 @@ namespace StoryTeller.Model.Persistence.DSL
             var grammars = model.grammars.Where(x => x.key != "TODO").OrderBy(x => x.key);
             foreach (var grammar in grammars)
             {
-                writeGrammar(model, writer, grammar);
+                writeGrammar(model, writer, grammar, false);
             }
         }
 
-        private static void writeGrammar(FixtureModel model, TextWriter writer, GrammarModel grammar)
+        private static void writeGrammar(FixtureModel model, TextWriter writer, GrammarModel grammar, bool inParagraph)
         {
-            writer.WriteLine($"## {grammar.key}");
-
-            writer.WriteLine($"### {grammar.TitleOrFormat()}");
+            if (inParagraph)
+            {
+                writer.WriteLine($"* {grammar.TitleOrFormat()}");                
+            }
+            else
+            {
+                writer.WriteLine($"## {grammar.key}");
+                writer.WriteLine($"### {grammar.TitleOrFormat()}");
+            }
 
 
             if (grammar is Sentence)
@@ -56,37 +62,27 @@ namespace StoryTeller.Model.Persistence.DSL
                 writeParagraph(grammar.As<Paragraph>(), model, writer);
             }
 
-            writer.WriteLine();
-            writer.WriteLine();
+            
+
+            if (!inParagraph)
+            {
+                writer.WriteLine();
+                writer.WriteLine();
+            }
         }
 
         private static void writeParagraph(Paragraph paragraph, FixtureModel model, TextWriter writer)
         {
-            var list = new List<GrammarModel>();
-
             for (int i = 0; i < paragraph.children.Length; i++)
             {
                 var child = paragraph.children[i];
-                if (model.FindGrammar(child.key) == null)
-                {
-                    if (child.key.IsEmpty())
-                    {
-                        child.key = $"{paragraph.key}#{i + 1}";
-                    }
+                if (child is Silent) continue;
 
-                    list.Add(child);
-                }
-
-                writer.WriteLine("* " + child.key);
+                writeGrammar(model, writer, child, true);
             }
 
             writer.WriteLine();
             writer.WriteLine();
-
-            foreach (var grammar in list)
-            {
-                writeGrammar(model, writer, grammar);
-            }
         }
 
         private static void writeEmbed(EmbeddedSection grammar, TextWriter writer)

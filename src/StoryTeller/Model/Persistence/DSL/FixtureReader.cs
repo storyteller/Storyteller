@@ -34,9 +34,5 @@ namespace StoryTeller.Model.Persistence.DSL
             push(new HeaderMode(Target));
         }
 
-        protected override void finish()
-        {
-            Target.grammars.OfType<Paragraph>().Each(x => x.ReadFixture(Target));
-        }
     }
 }

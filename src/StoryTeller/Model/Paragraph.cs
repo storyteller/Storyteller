@@ -10,9 +10,6 @@ namespace StoryTeller.Model
         public GrammarModel[] children;
         public string title;
 
-        [JsonIgnore]
-        public readonly IList<string> ChildKeys = new List<string>();
-
         public Paragraph() : base("paragraph")
         {
         }
@@ -31,9 +28,17 @@ namespace StoryTeller.Model
             AddErrorRange(this.children.SelectMany(x => x.errors));
         }
 
-        public void ReadFixture(FixtureModel fixture)
+        public void AddChild(GrammarModel grammar)
         {
-            children = ChildKeys.Select(fixture.FindGrammar).ToArray();
+            var newGrammars = new[] { grammar };
+            if (children == null || children.Length == 0)
+            {
+                children = newGrammars;
+            }
+            else
+            {
+                children = children.Concat(newGrammars).ToArray();
+            }
         }
 
         public Cell[] cells
