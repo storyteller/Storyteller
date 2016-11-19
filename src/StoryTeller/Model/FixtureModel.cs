@@ -11,6 +11,7 @@ namespace StoryTeller.Model
 {
     public class FixtureModel : GrammarModel
     {
+        public const string FullyImplementedMessage = "This fixture is fully implemented";
         private readonly IList<GrammarModel> _grammars = new List<GrammarModel>();
 
         public string title;
@@ -40,7 +41,7 @@ namespace StoryTeller.Model
 
         public override string ToMissingCode()
         {
-            if (!IsMissing || MissingCount == 0) return "";
+            if (!IsMissing && MissingCount == 0) return FullyImplementedMessage;
 
             var missing = IsMissing ? _grammars.Where(x => x.IsMissing && x.key != "TODO") : _grammars.Where(x => x.key != "TODO");
 

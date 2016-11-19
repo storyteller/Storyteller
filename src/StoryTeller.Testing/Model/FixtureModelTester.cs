@@ -24,6 +24,24 @@ namespace StoryTeller.Testing.Model
         }
 
         [Fact]
+        public void to_missing_code_if_nothing_is_missing()
+        {
+            var fixture = new FixtureModel("Something") {IsMissing = false};
+
+            fixture.missingCode.ShouldBe(FixtureModel.FullyImplementedMessage);
+        }
+
+        [Fact]
+        public void to_missing_code_with_the_fixture_itself_being_missing()
+        {
+            var fixture = new FixtureModel("Something") { IsMissing = true };
+
+            fixture.missingCode.ShouldNotBe(FixtureModel.FullyImplementedMessage);
+
+            fixture.missingCode.ShouldContain("public class SomethingFixture");
+        }
+
+        [Fact]
         public void create_a_fixture_from_a_key()
         {
             var fixture = FixtureModel.BuildFromKeyOrTitle("Something");

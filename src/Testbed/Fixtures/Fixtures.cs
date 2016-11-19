@@ -1,7 +1,6 @@
-﻿namespace Testbed.Fixtures
+﻿using StoryTeller;
+
+namespace Testbed.Fixtures
 {
-    public class Fixtures
-    {
-        
-    }
+
 }
