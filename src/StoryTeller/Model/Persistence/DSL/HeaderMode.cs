@@ -26,7 +26,10 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (line.IsHeaderTwo())
             {
-                return new GrammarMode(_fixture, g => _fixture.AddGrammar(g));
+                var grammar = new GrammarMode(_fixture, g => _fixture.AddGrammar(g));
+                grammar.Read(indention, line);
+
+                return grammar;
             }
 
             var mode = new CommentMode(_fixture);

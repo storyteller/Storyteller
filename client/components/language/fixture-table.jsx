@@ -5,7 +5,6 @@ const Specification = require('../../lib/model/specification');
 import { preview, editing } from './../editing/component-loader';
 import { Grid, Row, Col, Tabs, Tab, Button } from 'react-bootstrap';
 import Postal from 'postal';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import icons from './../icons';
 
 

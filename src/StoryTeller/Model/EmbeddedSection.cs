@@ -15,6 +15,11 @@ namespace StoryTeller.Model
 
         protected internal override void configureSampleStep(Step step)
         {
+            if (collection.IsEmpty())
+            {
+                collection = fixture.key;
+            }
+
             var section = step.Collections[collection];
 
             fixture.CreateSampleSteps(section);
@@ -68,6 +73,17 @@ namespace StoryTeller.Model
             {
                 fixture = overrides.Models[embeddedKey];
             }
+        }
+
+        public override string ToMissingCode()
+        {
+            return $@"
+        // Storyteller cannot derive the namespace here
+        public {typeof(IGrammar).FullName} {key}()
+        {{
+            return Embed<{fixture.key}Fixture>(""{title}"");
+        }} 
+";
         }
 
         public override string TitleOrFormat()

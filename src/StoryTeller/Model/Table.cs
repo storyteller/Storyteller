@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using StoryTeller.Grammars.Tables;
 
 namespace StoryTeller.Model
 {
-    public class Table : GrammarModel
+    public class 
+        Table : GrammarModel
     {
         public Cell[] cells;
         public string collection = "rows";
@@ -27,10 +29,10 @@ namespace StoryTeller.Model
         public override string ToMissingCode()
         {
             return $@"
-        [ExposeAsTable(`{title}`)]
+        [{typeof(ExposeAsTableAttribute).Namespace}.ExposeAsTable(`{title}`)]
         public void {key}({cells.Select(x => x.ToDeclaration()).Join(", ")})
         {{
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }}
 ".TrimEnd().Replace('`', '\"');
         }

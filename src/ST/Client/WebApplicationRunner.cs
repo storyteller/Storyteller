@@ -76,6 +76,7 @@ namespace ST.Client
             startWebServer(port, webSockets);
 
             _watcher = new AssetFileWatcher(Client);
+            _watcher.Start();
 
             return Client;
         }

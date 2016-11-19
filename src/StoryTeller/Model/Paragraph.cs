@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using Baseline;
@@ -104,6 +105,36 @@ namespace StoryTeller.Model
             }
 
             return newParagraph;
+        }
+
+
+        public override string ToMissingCode()
+        {
+            // just assume that it's all inline
+            for (int i = 0; i < children.Length; i++)
+            {
+                children[i].key = $"{key}_{i + 1}";
+            }
+
+            var childrenCode = children.Select(child =>
+            {
+                return $"[{typeof(HiddenAttribute).Namespace}.Hidden]{Environment.NewLine}{child.ToMissingCode()}";
+            }).Join(Environment.NewLine);
+
+            var childrenAdds = children.Select(child => $"            _ += this[\"{child.key}\"];")
+                .Join(Environment.NewLine);
+
+            return $@"
+{childrenCode}
+
+        public {typeof(IGrammar).FullName} {key}()
+        {{
+            return Paragraph(""{title}"", _ => {{
+{childrenAdds}
+            }});
+
+        }}
+";
         }
     }
 }

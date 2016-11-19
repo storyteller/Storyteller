@@ -85,8 +85,8 @@ namespace StoryTeller.Testing.ST
                 .ShouldBeOfType<Paragraph>();
 
             paragraph.children[0].TitleOrFormat().ShouldBe("A");
-            paragraph.children[0].TitleOrFormat().ShouldBe("B");
-            paragraph.children[0].TitleOrFormat().ShouldBe("C");
+            paragraph.children[1].TitleOrFormat().ShouldBe("B");
+            paragraph.children[2].TitleOrFormat().ShouldBe("C");
         }
 
         [Fact]
@@ -158,6 +158,42 @@ namespace StoryTeller.Testing.ST
 
             paragraph.children.Select(x => x.TitleOrFormat())
                 .ShouldHaveTheSameElementsAs("SILENT", "Better A Title", "SILENT", "Better B Title", "SILENT", "C", "SILENT");
+        }
+
+        [Fact]
+        public void multiple_paragraphs()
+        {
+            writeFile("Moving", "# Moving Around Some");
+
+            writeFile("Paragraphs", $@"
+# Paragraphs
+
+## AllSentences
+* Go south
+* Go north
+* Go west
+
+## WithAnEmbed
+* Go left
+* Move around
+embeds Moving
+
+## WithTable
+* Go forward
+* Movements
+|table|Direction|Distance|
+
+## WithSet
+* Go back
+* Movements should be
+|set|Direction|Distance|
+");
+
+            theCombinedFixtures.Models["Paragraphs"].grammars.Select(x => x.key)
+                .Where(x => x != "TODO")
+                .ShouldHaveTheSameElementsAs("AllSentences", "WithAnEmbed", "WithTable", "WithSet");
+
+            // TODO -- test that WithAnEmbed has an embed
         }
     }
 

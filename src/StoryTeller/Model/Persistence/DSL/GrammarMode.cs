@@ -23,12 +23,6 @@ namespace StoryTeller.Model.Persistence.DSL
             _adder = adder;
         }
 
-        private GrammarMode(FixtureModel fixture, string title, Action<GrammarModel> adder)
-            : this(fixture, adder)
-        {
-            _title = title;
-        }
-
         public int Indention { get; set; }
 
         public IReaderMode Read(int indention, string line)
@@ -37,6 +31,12 @@ namespace StoryTeller.Model.Persistence.DSL
 
             if (line.IsHeaderTwo())
             {
+                // Get out of here, this is a new grammar!
+                if (_hasAdded)
+                {
+                    return null;
+                }
+
                 var value = line.Trim().TrimStart('#', ' ');
 
                 if (value.Contains(' '))
@@ -113,7 +113,9 @@ namespace StoryTeller.Model.Persistence.DSL
             }
 
             if (line.StartsWith("embeds"))
-                return buildEmbed(line);
+            {
+                return _paragraph == null ? buildEmbed(line) : this;
+            }
 
             if (line.IsTableLine())
             {

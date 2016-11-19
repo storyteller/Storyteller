@@ -26,7 +26,7 @@ namespace StoryTeller.Testing.Model
         [Fact]
         public void generate_a_sentence_with_a_return_value()
         {
-            theCode.ShouldContain("[return: AliasAs(\"value\")]");
+            theCode.ShouldContain("[return: StoryTeller.AliasAs(\"value\")]");
             theCode.ShouldContain("public string TheValueShouldBe()");
         }
 
@@ -39,7 +39,7 @@ namespace StoryTeller.Testing.Model
         [Fact]
         public void generate_with_an_assertion_that_has_inputs()
         {
-            theCode.ShouldContain("[return: AliasAs(\"returnValue\")]");
+            theCode.ShouldContain("[return: StoryTeller.AliasAs(\"returnValue\")]");
             theCode.ShouldContain("public string SumShouldBe(string X, string Y)");
         }
 

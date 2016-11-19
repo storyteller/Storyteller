@@ -93,14 +93,14 @@ namespace StoryTeller.Model
             {
                 args = _cells.Where(x => !x.result).Select(x => x.ToDeclaration()).Join(", ");
                 returnType = "string";
-                decoration = $"[return: AliasAs(\"{returns.Single().Key}\")]";
+                decoration = $"[return: {typeof(AliasAsAttribute).Namespace}.AliasAs(\"{returns.Single().Key}\")]";
             }
 
             return $@"
         {decoration}
         public {returnType} {key}({args})
         {{
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }}
 ";
         }
