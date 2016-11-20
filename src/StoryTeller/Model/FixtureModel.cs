@@ -39,7 +39,7 @@ namespace StoryTeller.Model
 
         public string missingCode => ToMissingCode();
 
-        public override string ToMissingCode()
+        public override string ToMissingCode(bool withinParagraph = false)
         {
             if (!IsMissing && MissingCount == 0) return FullyImplementedMessage;
 

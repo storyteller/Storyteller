@@ -14,7 +14,7 @@ namespace StoryTeller.Grammars.Sets
         {
         }
 
-        public override string ToMissingCode()
+        public override string ToMissingCode(bool withinParagraph = false)
         {
             var properties = cells.Select(x => $"            public string {x.Key}{{get; set;}}").Join(Environment.NewLine).TrimStart();
 
@@ -23,6 +23,8 @@ namespace StoryTeller.Grammars.Sets
             var orderedCode = ordered ? ".Ordered()" : string.Empty;
 
             var getDataMethod = $"get{key}Rows";
+
+            var hidden = withinParagraph ? HiddenAttributeDeclaration : string.Empty;
 
             return $@"
         // Implementation of a SetVerification grammar for '{key}'
@@ -36,6 +38,7 @@ namespace StoryTeller.Grammars.Sets
             throw new {typeof(NotImplementedException).FullName}();
         }}
 
+        {hidden}
         public {typeof(IGrammar).FullName} {key}()
         {{
             return {nameof(Fixture.VerifySetOf)}({getDataMethod})

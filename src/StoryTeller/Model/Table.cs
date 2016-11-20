@@ -26,9 +26,12 @@ namespace StoryTeller.Model
             return title;
         }
 
-        public override string ToMissingCode()
+        public override string ToMissingCode(bool withinParagraph = false)
         {
+            var hidden = withinParagraph ? HiddenAttributeDeclaration : string.Empty;
+
             return $@"
+        {hidden}
         [{typeof(ExposeAsTableAttribute).Namespace}.ExposeAsTable(`{title}`)]
         public void {key}({cells.Select(x => x.ToDeclaration()).Join(", ")})
         {{

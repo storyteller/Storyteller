@@ -75,10 +75,12 @@ namespace StoryTeller.Model
             }
         }
 
-        public override string ToMissingCode()
+        public override string ToMissingCode(bool withinParagraph = false)
         {
+            var hidden = withinParagraph ? HiddenAttributeDeclaration : string.Empty;
+
             return $@"
-        // Storyteller cannot derive the namespace here
+        {hidden}
         public {typeof(IGrammar).FullName} {key}()
         {{
             return Embed<{fixture.key}Fixture>(""{title}"");

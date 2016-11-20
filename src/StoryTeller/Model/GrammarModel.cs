@@ -12,6 +12,9 @@ namespace StoryTeller.Model
 
         public readonly string type;
 
+        public static readonly string HiddenAttributeDeclaration = $"[{typeof(HiddenAttribute).Namespace}.Hidden]";
+
+
         protected GrammarModel(string type)
         {
             this.type = type;
@@ -33,9 +36,9 @@ namespace StoryTeller.Model
             }
         }
 
-        public virtual string ToMissingCode()
+        public virtual string ToMissingCode(bool withinParagraph = false)
         {
-            return string.Empty;
+            return String.Empty;
         }
 
         /// <summary>

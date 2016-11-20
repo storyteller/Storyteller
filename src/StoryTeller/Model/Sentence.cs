@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
@@ -81,7 +82,7 @@ namespace StoryTeller.Model
             return sentence;
         }
 
-        public override string ToMissingCode()
+        public override string ToMissingCode(bool withinParagraph = false)
         {
             string args = _cells.OrderBy(x => x.result).Select(x => x.ToDeclaration()).Join(", ");
             var returns = _cells.Where(x => x.result).ToArray();
@@ -96,7 +97,10 @@ namespace StoryTeller.Model
                 decoration = $"[return: {typeof(AliasAsAttribute).Namespace}.AliasAs(\"{returns.Single().Key}\")]";
             }
 
+            var hidden = withinParagraph ? HiddenAttributeDeclaration : string.Empty;
+
             return $@"
+        {hidden}
         {decoration}
         public {returnType} {key}({args})
         {{
