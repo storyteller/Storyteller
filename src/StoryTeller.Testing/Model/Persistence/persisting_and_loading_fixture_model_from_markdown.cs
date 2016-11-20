@@ -81,6 +81,12 @@ namespace StoryTeller.Testing.Model.Persistence
         {
             roundTrip<ParagraphFixture>();
         }
+
+        [Fact]
+        public void can_round_trip_a_fact()
+        {
+            roundTrip<FactFixture>();
+        }
     }
 
 
@@ -181,6 +187,15 @@ namespace StoryTeller.Testing.Model.Persistence
         public void AddNumbers([Header("X")]int x, [Header("Y")]int y)
         {
             
+        }
+    }
+
+    public class FactFixture : Fixture
+    {
+        [FormatAs("This is so")]
+        public bool ThisIsSo()
+        {
+            return true;
         }
     }
 }

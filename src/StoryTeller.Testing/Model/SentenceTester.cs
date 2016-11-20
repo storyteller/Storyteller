@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using System;
+using Shouldly;
 using StoryTeller.Model;
 using Xunit;
 
@@ -31,11 +32,33 @@ namespace StoryTeller.Testing.Model
             step.Values["text"].ShouldBe("text");
         }
 
+        [Fact]
+        public void fact_grammar_is_a_fact()
+        {
+            fixture.FindGrammar("ThisIsSo")
+                .ShouldBeOfType<Sentence>()
+                .fact
+                .ShouldBeTrue();
+        }
+
+        [Fact]
+        public void generate_missing_code_for_fact_grammar()
+        {
+            var code = fixture.FindGrammar("ThisIsSo").ToMissingCode();
+
+            code.ShouldContain("public bool ThisIsSo()");
+        }
+
         public class MySentencesFixture : Fixture
         {
             public MySentencesFixture()
             {
 
+            }
+
+            public bool ThisIsSo()
+            {
+                return true;
             }
 
             [FormatAs("Go do something")]

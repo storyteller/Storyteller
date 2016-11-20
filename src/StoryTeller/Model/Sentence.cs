@@ -25,6 +25,8 @@ namespace StoryTeller.Model
 
         public string format;
 
+        public bool fact;
+
 
         public Sentence() : base("sentence")
         {
@@ -90,7 +92,12 @@ namespace StoryTeller.Model
             var returnType = "void";
             var decoration = "";
 
-            if (returns.Length == 1)
+            if (fact)
+            {
+                args = "";
+                returnType = "bool";
+            }
+            else if (returns.Length == 1)
             {
                 args = _cells.Where(x => !x.result).Select(x => x.ToDeclaration()).Join(", ");
                 returnType = "string";

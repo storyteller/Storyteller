@@ -22,7 +22,8 @@ namespace StoryTeller.Grammars.Reflection
         {
             return new Sentence
             {
-                format = _method.DeriveFormat()
+                format = _method.DeriveFormat(),
+                fact = true
             };
         }
 

@@ -27,6 +27,7 @@ namespace StoryTeller.Grammars
         {
             return new Sentence
             {
+                fact = true,
                 format = _label,
                 cells = new Cell[0]
             };

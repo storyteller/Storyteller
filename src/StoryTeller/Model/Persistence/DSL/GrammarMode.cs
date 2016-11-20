@@ -112,7 +112,18 @@ namespace StoryTeller.Model.Persistence.DSL
                 return childGrammar;
             }
 
-            if (line.StartsWith("embeds"))
+            if (line.StartsWith("fact", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!_hasAdded)
+                {
+                    var sentence = addSentence();
+                    sentence.fact = true;
+
+                    return this;
+                }
+            }
+
+            if (line.StartsWith("embeds", StringComparison.OrdinalIgnoreCase))
             {
                 return _paragraph == null ? buildEmbed(line) : this;
             }

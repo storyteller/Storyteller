@@ -133,6 +133,10 @@ namespace StoryTeller.Model.Persistence.DSL
 
         private static void writeSentence(Sentence sentence, TextWriter writer)
         {
+            if (sentence.fact)
+            {
+                writer.WriteLine("fact");
+            }
 
             if (sentence.cells.Any())
             {
