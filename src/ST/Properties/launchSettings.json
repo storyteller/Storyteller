@@ -35,6 +35,16 @@
       "commandLineArgs": "convert src/Storyteller.Gallery",
       "workingDirectory": "C:\\code\\storyteller"
     },
+	"Validate Samples":{
+      "commandName": "Project",
+      "commandLineArgs": "run src/Storyteller.Samples --validate",
+      "workingDirectory": "C:\\code\\storyteller"
+	},
+	"Validate Specifications":{
+      "commandName": "Project",
+      "commandLineArgs": "run src/Specifications --validate",
+      "workingDirectory": "C:\\code\\storyteller"
+	},	
     "ST": {
       "commandName": "Project"
     }

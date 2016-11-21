@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Baseline;
@@ -11,6 +10,7 @@ using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
+using EngineController = ST.Client.EngineController;
 
 namespace ST.CommandLine
 {
@@ -31,9 +31,7 @@ namespace ST.CommandLine
                 var specs = input.GetBatchRunRequest().Filter(top);
 
                 if (!specs.Any())
-                {
                     ConsoleWriter.Write(ConsoleColor.Yellow, "Warning: No specs found!");
-                }
             }
             catch (SuiteNotFoundException ex)
             {
@@ -45,76 +43,7 @@ namespace ST.CommandLine
             var task = controller.Start().ContinueWith(t =>
             {
                 var systemRecycled = t.Result;
-                if (!systemRecycled.success)
-                {
-                    systemRecycled.WriteSystemUsage();
-                    return false;
-                }
-
-                writeSystemUsage(systemRecycled);
-                var execution = input.StartBatch(controller);
-
-                // TODO -- put a command level timeout on this thing
-                execution.Wait();
-
-                var results = execution.Result;
-
-                var regression = results.Summarize(Lifecycle.Regression);
-                var acceptance = results.Summarize(Lifecycle.Acceptance);
-
-                if (input.LifecycleFlag != Lifecycle.Regression)
-                {
-                    Console.WriteLine(acceptance);
-                }
-
-                if (input.LifecycleFlag != Lifecycle.Acceptance)
-                {
-                    Console.WriteLine(regression);
-                }
-
-                var success = regression.Failed == 0;
-
-                results.suite = input.WorkspaceFlag;
-                results.system = systemRecycled.system_name;
-                results.time = DateTime.Now.ToString();
-
-                results.fixtures = buildFixturesWithOverrides(input, systemRecycled);
-
-                var document = BatchResultsWriter.BuildResults(results);
-                Console.WriteLine("Writing results to " + input.ResultsPathFlag);
-                document.WriteToFile(input.ResultsPathFlag);
-
-                if (input.DumpFlag.IsNotEmpty())
-                {
-                    dumpJson(input, results);
-                }
-
-                if (input.CsvFlag.IsNotEmpty())
-                {
-                    writePerformanceData(input, results);
-                }
-
-                if (input.JsonFlag.IsNotEmpty())
-                {
-                    Console.WriteLine("Writing the raw result information to " + input.JsonFlag);
-                    PerformanceDataWriter.WriteJSON(results, input.JsonFlag);
-                }
-
-                if (input.OpenFlag)
-                {
-                    Process.Start(input.ResultsPathFlag);
-                }
-
-                if (success)
-                {
-                    ConsoleWriter.Write(ConsoleColor.Green, "Success!");
-                }
-                else
-                {
-                    ConsoleWriter.Write(ConsoleColor.Red, "Failed with Regression Failures!");
-                }
-
-                return success;
+                return executeAgainstTheSystem(input, systemRecycled, controller);
             });
 
             task.Wait();
@@ -122,6 +51,141 @@ namespace ST.CommandLine
             controller.SafeDispose();
 
             return task.Result;
+        }
+
+        private bool executeAgainstTheSystem(RunInput input, SystemRecycled systemRecycled, EngineController controller)
+        {
+            if (!systemRecycled.success)
+            {
+                systemRecycled.WriteSystemUsage();
+                return false;
+            }
+
+            writeSystemUsage(systemRecycled);
+
+            if (input.ValidateFlag)
+            {
+                return validateOnly(input, systemRecycled);
+            }
+
+
+            var execution = input.StartBatch(controller);
+
+            // TODO -- put a command level timeout on this thing
+            execution.Wait();
+
+            var results = execution.Result;
+
+            var success = determineSuccess(input, results);
+
+            writeResults(input, systemRecycled, results);
+
+            writeData(input, results);
+
+            openResults(input);
+
+            writeSuccessOrFailure(success);
+
+            return success;
+        }
+
+        private bool validateOnly(RunInput input, SystemRecycled systemRecycled)
+        {
+            var fixtures = buildFixturesWithOverrides(input, systemRecycled);
+            var library = FixtureLibrary.From(fixtures);
+
+            var specs = HierarchyLoader.ReadHierarchy(input.SpecPath).GetAllSpecs().ToArray();
+
+            foreach (var spec in specs)
+            {
+                var processor = new SpecificationPostProcessor(library, spec);
+                processor.Validate();
+            }
+
+            var errored = specs.Where(x => x.errors.Any()).ToArray();
+
+            if (errored.Any())
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, "Errors Detected!");
+
+                foreach (var errorSpec in errored)
+                {
+                    ConsoleWriter.Write(ConsoleColor.Yellow, errorSpec.Filename);
+                    foreach (var error in errorSpec.errors)
+                    {
+                        Console.WriteLine( $"{error.location.Join(" / ")} -> {error.message}");
+                    }
+                }
+
+                return false;
+            }
+            else
+            {
+                ConsoleWriter.Write(ConsoleColor.Green, "No validation errors or missing data detected in this project");
+                return true;
+            }
+        }
+
+        private static void openResults(RunInput input)
+        {
+            if (input.OpenFlag)
+            {
+                Process.Start(input.ResultsPathFlag);
+            }
+        }
+
+        private static void writeSuccessOrFailure(bool success)
+        {
+            if (success)
+            {
+                ConsoleWriter.Write(ConsoleColor.Green, "Success!");
+            }
+            else
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, "Failed with Regression Failures!");
+            }
+        }
+
+        private static bool determineSuccess(RunInput input, BatchRunResponse results)
+        {
+            var regression = results.Summarize(Lifecycle.Regression);
+            var acceptance = results.Summarize(Lifecycle.Acceptance);
+
+            if (input.LifecycleFlag != Lifecycle.Regression)
+                Console.WriteLine(acceptance);
+
+            if (input.LifecycleFlag != Lifecycle.Acceptance)
+                Console.WriteLine(regression);
+
+            return regression.Failed == 0;
+        }
+
+        private static void writeResults(RunInput input, SystemRecycled systemRecycled, BatchRunResponse results)
+        {
+            results.suite = input.WorkspaceFlag;
+            results.system = systemRecycled.system_name;
+            results.time = DateTime.Now.ToString();
+
+            results.fixtures = buildFixturesWithOverrides(input, systemRecycled);
+
+            var document = BatchResultsWriter.BuildResults(results);
+            Console.WriteLine("Writing results to " + input.ResultsPathFlag);
+            document.WriteToFile(input.ResultsPathFlag);
+        }
+
+        private static void writeData(RunInput input, BatchRunResponse results)
+        {
+            if (input.DumpFlag.IsNotEmpty())
+                dumpJson(input, results);
+
+            if (input.CsvFlag.IsNotEmpty())
+                writePerformanceData(input, results);
+
+            if (input.JsonFlag.IsNotEmpty())
+            {
+                Console.WriteLine("Writing the raw result information to " + input.JsonFlag);
+                PerformanceDataWriter.WriteJSON(results, input.JsonFlag);
+            }
         }
 
         private static FixtureModel[] buildFixturesWithOverrides(RunInput input, SystemRecycled systemRecycled)
@@ -133,8 +197,7 @@ namespace ST.CommandLine
                 system.Models[fixture.key] = fixture;
             }
 
-            var fixtures = system.ApplyOverrides(overrides).Models.ToArray();
-            return fixtures;
+            return system.ApplyOverrides(overrides).Models.ToArray();
         }
 
         private static void writePerformanceData(RunInput input, BatchRunResponse results)
@@ -155,13 +218,8 @@ namespace ST.CommandLine
         private void writeSystemUsage(SystemRecycled systemRecycled)
         {
             Console.WriteLine("Using System: " + systemRecycled.system_name);
-            systemRecycled.properties.Each(pair =>
-            {
-                Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
-            });
+            systemRecycled.properties.Each(pair => { Console.WriteLine("{0}: {1}", pair.Key, pair.Value); });
             Console.WriteLine();
         }
-
-
     }
 }

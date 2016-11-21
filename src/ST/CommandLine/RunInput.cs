@@ -38,6 +38,9 @@ namespace ST.CommandLine
         [Description("Dump the raw JSON history of the batch run to the specified path")]
         public string DumpFlag { get; set; }
 
+        [Description("Only validates the specifications and writes out a list of the encountered errors. Will fail if there are any errors.")]
+        public bool ValidateFlag { get; set; }
+
         private BatchRunRequest _batchRunRequest;
 
         public BatchRunRequest GetBatchRunRequest()

@@ -50,8 +50,6 @@ namespace StoryTeller.Remotes
 
         public void startReceiving(bool owner)
         {
-
-
             if (owner)
             {
                 _receiveLoop = Task.Run(() =>
