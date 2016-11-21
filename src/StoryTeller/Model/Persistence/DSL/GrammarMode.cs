@@ -148,7 +148,7 @@ namespace StoryTeller.Model.Persistence.DSL
                             return buildSet(true);
 
                         default:
-                            throw new ArgumentOutOfRangeException($"'{values[0]}' is not a valid option here");
+                            throw new ArgumentOutOfRangeException($"'{values[0]}' is not a valid option here. Valid options are: 'sentence', 'table', 'set', or 'ordered-set'");
                     }
 
                 addSentence();

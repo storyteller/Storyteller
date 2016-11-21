@@ -19,11 +19,22 @@ namespace StoryTeller.Model.Persistence
 
         public T Read()
         {
+            var lineNumber = 0;
             string line = null;
             while ((line = _reader.ReadLine()) != null)
             {
-                var indention = line.LeadingSpaces();
-                parseLine(indention, line.Trim());
+                lineNumber++;
+
+                try
+                {
+                    var indention = line.LeadingSpaces();
+                    parseLine(indention, line.Trim());
+                }
+                catch (Exception e)
+                {
+                    stoppedWithError(lineNumber, e);
+                    break;
+                }
             }
 
             // Just to kick off any hanging work
@@ -31,6 +42,8 @@ namespace StoryTeller.Model.Persistence
 
             return Target;
         }
+
+        protected abstract void stoppedWithError(int lineNumber, Exception exception);
 
         protected virtual void finish()
         {

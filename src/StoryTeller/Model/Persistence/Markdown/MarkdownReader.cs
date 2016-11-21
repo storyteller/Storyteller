@@ -44,11 +44,30 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         public Specification Read()
         {
+            int number = 0;
             string line = null;
             while ((line = _reader.ReadLine()) != null)
             {
-                var indention = line.LeadingSpaces();
-                parseLine(indention, line.Trim());
+                number++;
+
+                try
+                {
+                    var indention = line.LeadingSpaces();
+                    parseLine(indention, line.Trim());
+                }
+                catch (Exception e)
+                {
+                    var message = $"Reading the markdown file '{_spec.Filename}' errored out on line {number}{Environment.NewLine}{e.ToString()}";
+                    _spec.AddError(new SpecError
+                    {
+                        location = new string[] {"Specification"},
+                        message = message
+                    });
+
+                    _spec.Children.Insert(0, new Comment {Text = message});
+
+                    break;
+                }
             }
 
             return _spec;
@@ -96,4 +115,6 @@ namespace StoryTeller.Model.Persistence.Markdown
             _reader?.SafeDispose();
         }
     }
+
+
 }

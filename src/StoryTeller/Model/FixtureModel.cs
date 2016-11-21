@@ -132,7 +132,12 @@ namespace StoryTeller.Model
             foreach (var existing in _grammars)
             {
                 var overridden = over.FindGrammar(existing.key);
-                model.AddGrammar(overridden == null ? existing : existing.ApplyOverrides(overridden));
+                var combined = overridden == null ? existing : existing.ApplyOverrides(overridden);
+                combined.errors =
+                    (existing.errors ?? new GrammarError[0]).Concat((overridden?.errors ?? new GrammarError[0]))
+                        .ToArray();
+
+                model.AddGrammar(combined);
             }
 
             foreach (var specified in over.grammars.Where(x => !grammars.Any(_ => _.key == x.key)))

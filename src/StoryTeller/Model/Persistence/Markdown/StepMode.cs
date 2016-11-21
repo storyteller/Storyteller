@@ -19,7 +19,7 @@ namespace StoryTeller.Model.Persistence.Markdown
         public IReaderMode Read(int indention, string text)
         {
             // New step, go on
-            if (text.StartsWith("|>")) return null;
+            if (text.StartsWith("|>") || text.StartsWith(">")) return null;
 
             if (text.IsSectionHeader())
             {
