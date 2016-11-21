@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -149,6 +150,19 @@ namespace ST.Client
             }
 
             return file;
+        }
+
+        public void PostProcessAll(IEnumerable<Specification> specifications)
+        {
+            var combined = FixtureLibrary.From(CombinedFixtures());
+
+            SpecificationPostProcessor.PostProcessAll(specifications, combined);
+        }
+
+        public void PostProcess(Specification spec)
+        {
+            var combined = FixtureLibrary.From(CombinedFixtures());
+            new SpecificationPostProcessor(combined, spec).Validate();
         }
 
         public void Changed(string file)

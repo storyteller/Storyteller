@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Baseline;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
 
@@ -14,5 +16,8 @@ namespace ST.Client
         void Export(string key);
         string FileFor(string key);
         string CreateFixture(string keyOrTitle);
+        void PostProcessAll(IEnumerable<Specification> specifications);
+
+        void PostProcess(Specification spec);
     }
 }

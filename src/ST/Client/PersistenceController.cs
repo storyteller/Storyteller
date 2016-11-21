@@ -14,20 +14,22 @@ using StoryTeller.Remotes.Messaging;
 namespace ST.Client
 {
     // TODO -- need to flush results when the file changes maybe?
-    public class PersistenceController : IPersistenceController, ISpecFileObserver, IDisposable,
+    public class PersistenceController : IPersistenceController, ISpecFileObserver,
         IListener<SpecExecutionCompleted>
     {
         private readonly IClientConnector _client;
         private readonly ISpecFileWatcher _watcher;
+        private readonly IFixtureController _fixtures;
         private string _specPath;
         private Hierarchy _hierarchy;
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
 
-        public PersistenceController(IClientConnector client, ISpecFileWatcher watcher)
+        public PersistenceController(IClientConnector client, ISpecFileWatcher watcher, IFixtureController fixtures)
         {
             _client = client;
             _watcher = watcher;
+            _fixtures = fixtures;
         }
 
         public SpecExecutionCompleted[] AllCachedResults()
@@ -169,6 +171,8 @@ namespace ST.Client
 
                 suite.AddSpec(template);
 
+                _fixtures.PostProcess(template);
+
                 return new SpecAdded(_hierarchy.Top, template);
             });
         }
@@ -219,20 +223,15 @@ namespace ST.Client
             {
                 if (!_hierarchy.Specifications.Has(id)) return null;
 
-                return getSpecDataFor(id);
+                var data = new SpecData
+                {
+                    data = _hierarchy.Specifications[id],
+                    id = id,
+                    results = Results.ResultsFor(id).ToArray()
+                };
+
+                return data;
             });
-        }
-
-        private SpecData getSpecDataFor(string id)
-        {
-            var data = new SpecData
-            {
-                data = _hierarchy.Specifications[id],
-                id = id,
-                results = Results.ResultsFor(id).ToArray()
-            };
-
-            return data;
         }
 
         public void Changed(string file)
@@ -242,6 +241,8 @@ namespace ST.Client
                 _lock.Read(() =>
                 {
                     var node = MarkdownReader.ReadFromFile(file);
+
+                    _fixtures.PostProcess(node);
 
                     if (_hierarchy.Specifications.Has(node.id))
                     {
@@ -283,6 +284,7 @@ namespace ST.Client
                 _lock.Write(() =>
                 {
                     _hierarchy = HierarchyLoader.ReadHierarchy(_specPath).ToHierarchy();
+                    _fixtures.PostProcessAll(_hierarchy.Specifications);
                     SendHierarchyToClient();
                 });
             }

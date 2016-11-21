@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using StoryTeller.Messages;
+using StoryTeller.Model;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
@@ -35,24 +36,35 @@ namespace ST.Client
 
             Engine.AddListener(Client);
 
-            Persistence = new PersistenceController(Client, new SpecFileWatcher());
-            Persistence.StartWatching(_input.SpecPath);
-            Engine.Messaging.AddListener(Persistence);
-
             Fixtures = new FixtureController(Client, new FixtureFileWatcher());
             Fixtures.StartWatching(_input.FixturePath);
             Engine.Messaging.AddListener(Fixtures);
+
+            Persistence = new PersistenceController(Client, new SpecFileWatcher(), Fixtures);
+            Persistence.StartWatching(_input.SpecPath);
+            Engine.Messaging.AddListener(Persistence);
+
+
 
             Engine.Messaging.AddListener(this);
 
             Startup = starting.ContinueWith(t =>
             {
-                t.Result.WriteSystemUsage();
+                var systemRecycled = t.Result;
 
-                Fixtures.RecordSystemFixtures(t.Result);
-
-                return t.Result.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
+                return handleInitialSystemRecycled(systemRecycled);
             });
+        }
+
+        private SystemRecycled handleInitialSystemRecycled(SystemRecycled systemRecycled)
+        {
+            systemRecycled.WriteSystemUsage();
+
+            Fixtures.RecordSystemFixtures(systemRecycled);
+
+            Fixtures.PostProcessAll(Persistence.Hierarchy.Specifications);
+
+            return systemRecycled.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
         }
 
         public SystemRecycled LatestSystemRecycled
@@ -91,6 +103,8 @@ namespace ST.Client
 
             Fixtures.RecordSystemFixtures(message);
             var cloned = message.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
+
+            Fixtures.PostProcessAll(Persistence.Hierarchy.Specifications);
 
             Client.SendMessageToClient(cloned);
         }
