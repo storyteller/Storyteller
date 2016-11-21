@@ -96,11 +96,7 @@ namespace ST.CommandLine
 
             var specs = HierarchyLoader.ReadHierarchy(input.SpecPath).GetAllSpecs().ToArray();
 
-            foreach (var spec in specs)
-            {
-                var processor = new SpecificationPostProcessor(library, spec);
-                processor.Validate();
-            }
+            SpecificationPostProcessor.PostProcessAll(specs, library);
 
             var errored = specs.Where(x => x.errors.Any()).ToArray();
 
@@ -125,6 +121,8 @@ namespace ST.CommandLine
                 return true;
             }
         }
+
+
 
         private static void openResults(RunInput input)
         {

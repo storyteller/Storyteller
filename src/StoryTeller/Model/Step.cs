@@ -156,8 +156,6 @@ namespace StoryTeller.Model
 
                     Values[cells[i].Key] = StagedValues[i];
                 }
-
-                StagedValues = null;
             }
 
             foreach (var cell in cells)

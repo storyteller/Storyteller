@@ -4,25 +4,18 @@ using System.Linq;
 
 namespace StoryTeller.Model
 {
-    public class SpecError
-    {
-        public string[] location = new string[0];
-        public string message;
-    }
-
-    public interface IStepValidator
-    {
-        void Start(int number, Step step);
-        void End(Step step);
-
-        void Start(Section section, FixtureModel fixture);
-        void End(Section section);
-        void AddError(string message);
-        void ValidateStepsWithinSection(Section section, FixtureModel fixture);
-    }
-
     public class SpecificationPostProcessor : IStepValidator
     {
+        public static void PostProcessAll(IEnumerable<Specification> specs, FixtureLibrary library)
+        {
+            foreach (var spec in specs)
+            {
+                spec.ClearErrors();
+                var processor = new SpecificationPostProcessor(library, spec);
+                processor.Validate();
+            }
+        }
+
         private readonly FixtureLibrary _library;
         private readonly Specification _spec;
 

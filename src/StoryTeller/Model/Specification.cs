@@ -196,6 +196,11 @@ namespace StoryTeller.Model
 
             return clone;
         }
+
+        public void ClearErrors()
+        {
+            _errors.Clear();
+        }
     }
 
     public class LastUpdatedConverter : JsonConverter
