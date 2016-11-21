@@ -7,9 +7,12 @@ namespace StoryTeller.Model
 {
     public class Table : GrammarModel
     {
+        public static readonly string DefaultCollectionName = "rows";
+
         public Cell[] cells;
-        public string collection = "rows";
+        public string collection = DefaultCollectionName;
         public string title;
+        
 
         public Table() : base("table")
         {
@@ -51,8 +54,7 @@ namespace StoryTeller.Model
 
         private Section findSection(Step step)
         {
-            var section = step.Collections[collection];
-            return section;
+            return step.Collections[collection];
         }
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
@@ -89,7 +91,15 @@ namespace StoryTeller.Model
 
         public override void PostProcessAndValidate(IStepValidator stepValidator, Step step)
         {
-            // TODO -- make this one smarter to find a staged section or one in "rows"
+            if (!step.Collections.Has(collection))
+            {
+                if (step.Collections.Count == 1)
+                {
+                    var clone = step.Collections.Single().CloneAs(collection);
+                    step.Collections[collection] = clone;
+                }
+            }
+
             var section = findSection(step);
             if (section == null)
             {

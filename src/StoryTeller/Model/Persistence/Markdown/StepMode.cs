@@ -34,7 +34,9 @@ namespace StoryTeller.Model.Persistence.Markdown
 
             if (text.IsTableLine())
             {
-                var section = new Section("rows");
+                var section = new Section(Table.DefaultCollectionName);
+                Step.Collections[Table.DefaultCollectionName] = section;
+
                 var table = new TableParser(section) {Indention = indention};
 
                 table.Read(indention, text);

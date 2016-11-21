@@ -10,4 +10,8 @@
 [Calculator]
 |> StartWith 10
 |> AddNumbers 5, 6, 11
+|> NumberTable
+|x|y|sum|product|
+|5|5|10 |25     |
+|2|2|4  |4      |
 ~~~

@@ -119,5 +119,13 @@ namespace StoryTeller.Model
 
             return ActiveCells.Where(x => x.Value).Select(x => x.Key).ToArray();
         }
+
+        public Section CloneAs(string key)
+        {
+            var other = new Section(key);
+            other.Children.AddRange(Children);
+
+            return other;
+        }
     }
 }
