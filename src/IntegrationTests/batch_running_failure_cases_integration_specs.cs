@@ -14,6 +14,11 @@ namespace StoryTeller.Testing.Engine
     
     public class batch_running_failure_cases_integration_specs
     {
+        public batch_running_failure_cases_integration_specs()
+        {
+            TestUtility.CleanUpHangingProcesses();
+        }
+
         private BatchRunResponse execute(Action<RunInput> configure)
         {
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples");

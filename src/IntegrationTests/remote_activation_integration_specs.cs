@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using Baseline;
 using IntegrationTests.CommandLine;
 using MultipleSystems;
@@ -17,6 +19,8 @@ namespace IntegrationTests
     {
         private EngineController controllerForProject(string projectFolder)
         {
+            TestUtility.CleanUpHangingProcesses();
+
             var path = TestingContext.FindParallelDirectory(projectFolder);
 
             var project = Project.LoadForFolder(path);

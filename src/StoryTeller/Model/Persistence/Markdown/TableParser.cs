@@ -33,6 +33,12 @@ namespace StoryTeller.Model.Persistence.Markdown
                 {
                     var key = _cells[i];
                     step.Values.Add(key, values[i]);
+
+                    // This makes the integration tests happier
+                    if (key == "id")
+                    {
+                        step.id = values[i];
+                    }
                 }
 
                 _section.Children.Add(step);

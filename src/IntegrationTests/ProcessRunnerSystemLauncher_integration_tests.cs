@@ -14,6 +14,11 @@ namespace IntegrationTests
         private Project _project;
         private EngineController _controller;
 
+        public ProcessRunnerSystemLauncher_integration_tests()
+        {
+            TestUtility.CleanUpHangingProcesses();
+        }
+
         private Task<SystemRecycled> start(string projectName)
         {
             _project = new Project

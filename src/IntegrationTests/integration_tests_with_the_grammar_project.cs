@@ -95,6 +95,7 @@ namespace IntegrationTests
             Step("3").StatusWas(ResultStatus.error);
         }
 
+        
         [Fact]
         public void Ordered_set()
         {

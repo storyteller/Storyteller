@@ -19,6 +19,8 @@ namespace IntegrationTests.CommandLine
 
         public run_command_integration_specs()
         {
+            TestUtility.CleanUpHangingProcesses();
+
             var directory = TestingContext.FindParallelDirectory("Storyteller.Samples");
 
 
