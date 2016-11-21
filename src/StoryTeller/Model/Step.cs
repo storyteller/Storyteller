@@ -4,7 +4,6 @@ using System.Linq;
 using Baseline;
 
 using Newtonsoft.Json;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model
@@ -143,6 +142,37 @@ namespace StoryTeller.Model
             }
 
             return step;
+        }
+
+        public void ProcessCells(Cell[] cells, IStepValidator stepValidator)
+        {
+            if (cells == null || cells.Length == 0) return;
+
+            if (StagedValues != null)
+            {
+                for (int i = 0; i < StagedValues.Length; i++)
+                {
+                    if (cells.Length <= i) break;
+
+                    Values[cells[i].Key] = StagedValues[i];
+                }
+
+                StagedValues = null;
+            }
+
+            foreach (var cell in cells)
+            {
+                if (Values.ContainsKey(cell.Key)) continue;
+
+                if (cell.DefaultValue.IsNotEmpty())
+                {
+                    Values[cell.Key] = cell.DefaultValue;
+                }
+                else
+                {
+                    stepValidator.AddError($"Missing value for '{cell.Key}'");
+                }
+            }
         }
     }
 }

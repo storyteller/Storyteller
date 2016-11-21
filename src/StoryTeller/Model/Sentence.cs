@@ -116,6 +116,16 @@ namespace StoryTeller.Model
 ";
         }
 
+        public override void PostProcessAndValidate(IStepValidator stepValidator, Step step)
+        {
+            if (errors.Any())
+            {
+                stepValidator.AddError("Grammar has errors");
+            }
+
+            step.ProcessCells(cells, stepValidator);
+        }
+
         public override string ToString()
         {
             return $"Sentence: {format} ({key})";

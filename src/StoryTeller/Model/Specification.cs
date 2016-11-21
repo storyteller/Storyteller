@@ -12,6 +12,23 @@ namespace StoryTeller.Model
 {
     public class Specification : Node, INodeHolder
     {
+        private readonly IList<SpecError> _errors = new List<SpecError>();
+
+        public void AddError(SpecError error)
+        {
+            _errors.Add(error);
+        }
+
+        public SpecError[] errors
+        {
+            get { return _errors.ToArray(); }
+            set
+            {
+                _errors.Clear();
+                if (value != null) _errors.AddRange(value);
+            }
+        }
+
         [JsonProperty("title")] public string name;
 
         public string path;

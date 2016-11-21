@@ -91,5 +91,10 @@ namespace StoryTeller.Model
         }
 
         public abstract string TitleOrFormat();
+
+        public virtual void PostProcessAndValidate(IStepValidator stepValidator, Step step)
+        {
+            // Nothing
+        }
     }
 }
