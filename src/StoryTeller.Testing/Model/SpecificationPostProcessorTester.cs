@@ -15,9 +15,7 @@ namespace StoryTeller.Testing.Model
 
         public SpecificationPostProcessorTester()
         {
-            
-
-            theLibrary.Models["PostSpec"] = new PostSpecFixture().Compile(CellHandling.Basic());
+            theLibrary.AddWithDefaultCellHandling<PostSpecFixture>();
         }
 
         private void afterPostProcessing()
@@ -152,6 +150,41 @@ namespace StoryTeller.Testing.Model
             error.message.ShouldBe("Missing value for 'Y'");
 
         }
+
+        [Fact]
+        public void validate_embedded_section_happy_path()
+        {
+            var section = theSpecification.AddSection("PostSpec");
+            var root = section.AddStep("Embed");
+            var children = root.AddCollection("PostSpecEmbed");
+
+            children.AddStep("SayName").With("first", "Han").With("last", "Solo");
+            children.AddStep("SayName").With("first", "Darth").With("last", "Vader");
+            children.AddStep("SayName").With("first", "Luke").With("last", "Skywalker");
+
+            //afterPostProcessing();
+
+            theSpecification.errors.Any().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void validate_with_missing_value_within_an_embedded_section()
+        {
+            var section = theSpecification.AddSection("PostSpec");
+            var root = section.AddStep("Embed");
+            var children = root.AddCollection("PostSpecEmbed");
+
+            children.AddStep("SayName").With("first", "Han").With("last", "Solo");
+            children.AddStep("SayName").With("first", "Darth").With("last", "Vader");
+            children.AddStep("SayName").With("first", "Luke");
+
+            afterPostProcessing();
+
+            var error = theSpecification.errors.Single();
+
+            error.location.ShouldHaveTheSameElementsAs("Section #1: 'PostSpec'", "Step #1: Embed", "Collection 'PostSpecEmbed' using Fixture 'PostSpecEmbed'", "Step #3: SayName");
+            error.message.ShouldBe("Missing value for 'last'");
+        }
     }
 
     public class PostSpecFixture : Fixture
@@ -193,6 +226,19 @@ namespace StoryTeller.Testing.Model
         public int AddNumbers(int X, int Y)
         {
             return X + Y;
+        }
+
+        public IGrammar Embed()
+        {
+            return Embed<PostSpecEmbedFixture>("Do other things");
+        }
+    }
+
+    public class PostSpecEmbedFixture : Fixture
+    {
+        public void SayName(string first, string last)
+        {
+            
         }
     }
 }

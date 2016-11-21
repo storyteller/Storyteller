@@ -92,5 +92,16 @@ namespace StoryTeller.Model
         {
             return title;
         }
+
+        public override void PostProcessAndValidate(IStepValidator stepValidator, Step step)
+        {
+            var section = step.Collections[collection];
+
+            stepValidator.Start(section, fixture);
+
+            stepValidator.ValidateStepsWithinSection(section, fixture);
+
+            stepValidator.End(section);
+        }
     }
 }

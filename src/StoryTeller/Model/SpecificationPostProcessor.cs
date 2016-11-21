@@ -12,12 +12,13 @@ namespace StoryTeller.Model
 
     public interface IStepValidator
     {
-        void Start(int section, Step step);
+        void Start(int number, Step step);
         void End(Step step);
 
         void Start(Section section, FixtureModel fixture);
         void End(Section section);
         void AddError(string message);
+        void ValidateStepsWithinSection(Section section, FixtureModel fixture);
     }
 
     public class SpecificationPostProcessor : IStepValidator
@@ -57,6 +58,13 @@ namespace StoryTeller.Model
             }
 
             var fixture = _library.Models[section.Key];
+
+
+            ValidateStepsWithinSection(section, fixture);
+        }
+
+        public void ValidateStepsWithinSection(Section section, FixtureModel fixture)
+        {
             if (fixture.IsMissing)
             {
                 AddError($"Fixture '{fixture.key}' is not implemented");
@@ -97,7 +105,7 @@ namespace StoryTeller.Model
             });
         }
 
-        void IStepValidator.Start(int section, Step step)
+        void IStepValidator.Start(int number, Step step)
         {
             _locations.Push($"Step #{step}: {step.Key}");
         }

@@ -118,5 +118,13 @@ namespace StoryTeller.Model
         }}
 ";
         }
+
+        public override void PostProcessAndValidate(IStepValidator stepValidator, Step step)
+        {
+            foreach (var childGrammar in children)
+            {
+                childGrammar.PostProcessAndValidate(stepValidator, step);
+            }
+        }
     }
 }

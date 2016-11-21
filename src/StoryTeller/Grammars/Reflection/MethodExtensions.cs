@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Baseline;
@@ -24,7 +25,7 @@ namespace StoryTeller.Grammars.Reflection
 
             if (method.HasReturn())
             {
-                format += string.Format(" should be {{{0}}}", method.GetReturnValueAlias());
+                format += $" should be {{{method.GetReturnValueAlias()}}}";
             }
 
             return format.TrimEnd();

@@ -228,5 +228,14 @@ namespace StoryTeller.Model
             public Fixture Fixture;
             public FixtureModel Model;
         }
+
+        public void AddWithDefaultCellHandling<T>() where T : Fixture, new()
+        {
+            var fixture = new T();
+            var model = fixture.Compile(CellHandling.Basic());
+
+            Fixtures[fixture.Key] = fixture;
+            Models[fixture.Key] = model;
+        }
     }
 }
