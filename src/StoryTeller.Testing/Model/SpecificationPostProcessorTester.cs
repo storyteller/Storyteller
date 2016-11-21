@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Baseline;
 using Shouldly;
+using StoryTeller.Grammars.Tables;
 using StoryTeller.Model;
 using Xunit;
 
@@ -113,6 +114,44 @@ namespace StoryTeller.Testing.Model
             error.location.ShouldHaveTheSameElementsAs("Section #1: 'PostSpec'", "Step #1: StartWithTheNumber");
             error.message.ShouldBe("Grammar 'StartWithTheNumber' is not implemented");
         }
+
+        [Fact]
+        public void validate_happy_path_with_table()
+        {
+            // AddNumbers
+            var section = theSpecification.AddSection("PostSpec");
+            var root = section.AddStep("AddNumbers");
+            var rows = root.AddCollection("table");
+
+            rows.AddStep("row").With("X", "1").With("Y", "2").With("returnValue", "3");
+            rows.AddStep("row").With("X", "1").With("Y", "4").With("returnValue", "5");
+            rows.AddStep("row").With("X", "5").With("Y", "2").With("returnValue", "7");
+
+            afterPostProcessing();
+
+            theSpecification.errors.Any().ShouldBeFalse();
+        }
+
+        [Fact]
+        public void missing_value_with_table_section()
+        {
+            // AddNumbers
+            var section = theSpecification.AddSection("PostSpec");
+            var root = section.AddStep("AddNumbers");
+            var rows = root.AddCollection("table");
+
+            rows.AddStep("row").With("X", "1").With("Y", "2").With("returnValue", "3");
+            rows.AddStep("row").With("X", "1").With("returnValue", "5");
+            rows.AddStep("row").With("X", "5").With("Y", "2").With("returnValue", "7");
+
+            afterPostProcessing();
+
+            var error = theSpecification.errors.Single();
+
+            error.location.ShouldHaveTheSameElementsAs("Section #1: 'PostSpec'", "Step #1: AddNumbers", "Collection 'table'", "Step #Step 'row' with values X=1, returnValue=5: row");
+            error.message.ShouldBe("Missing value for 'Y'");
+
+        }
     }
 
     public class PostSpecFixture : Fixture
@@ -148,6 +187,12 @@ namespace StoryTeller.Testing.Model
         public int TheValueShouldBe()
         {
             return _number;
+        }
+
+        [ExposeAsTable("Add some numbers")]
+        public int AddNumbers(int X, int Y)
+        {
+            return X + Y;
         }
     }
 }

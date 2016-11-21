@@ -5,8 +5,7 @@ using StoryTeller.Grammars.Tables;
 
 namespace StoryTeller.Model
 {
-    public class 
-        Table : GrammarModel
+    public class Table : GrammarModel
     {
         public Cell[] cells;
         public string collection = "rows";
@@ -42,12 +41,18 @@ namespace StoryTeller.Model
 
         protected internal override void configureSampleStep(Step step)
         {
-            var section = step.Collections[collection];
+            var section = findSection(step);
             for (int i = 0; i < 3; i++)
             {
                 var row = section.AddStep("row");
                 cells.Each(x => x.AddSampleValue(row));
             }
+        }
+
+        private Section findSection(Step step)
+        {
+            var section = step.Collections[collection];
+            return section;
         }
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
@@ -80,6 +85,32 @@ namespace StoryTeller.Model
             table.cells = matchedCells.Concat(missingCells).ToArray();
 
             return table;
+        }
+
+        public override void PostProcessAndValidate(IStepValidator stepValidator, Step step)
+        {
+            // TODO -- make this one smarter to find a staged section or one in "rows"
+            var section = findSection(step);
+            if (section == null)
+            {
+                stepValidator.AddError("Missing step collection");
+                return;
+            }
+
+            stepValidator.Start(section, null);
+
+            var i = 0;
+            foreach (var child in section.Children.OfType<Step>())
+            {
+                i++;
+                stepValidator.Start(i, child);
+
+                child.ProcessCells(cells, stepValidator);
+
+                stepValidator.End(child);
+            }
+
+            stepValidator.End(section);
         }
     }
 }

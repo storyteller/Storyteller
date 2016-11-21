@@ -12,7 +12,7 @@ namespace StoryTeller.Model
 
     public interface IStepValidator
     {
-        void Start(Step step);
+        void Start(int section, Step step);
         void End(Step step);
 
         void Start(Section section, FixtureModel fixture);
@@ -97,24 +97,31 @@ namespace StoryTeller.Model
             });
         }
 
-        void IStepValidator.Start(Step step)
+        void IStepValidator.Start(int section, Step step)
         {
-            throw new System.NotImplementedException();
+            _locations.Push($"Step #{step}: {step.Key}");
         }
 
         void IStepValidator.End(Step step)
         {
-            throw new System.NotImplementedException();
+            _locations.Pop();
         }
 
         void IStepValidator.Start(Section section, FixtureModel fixture)
         {
-            throw new System.NotImplementedException();
+            if (fixture == null)
+            {
+                _locations.Push($"Collection '{section.Key}'");
+            }
+            else
+            {
+                _locations.Push($"Collection '{section.Key}' using Fixture '{fixture.key}'");
+            }
         }
 
         void IStepValidator.End(Section section)
         {
-            throw new System.NotImplementedException();
+            _locations.Pop();
         }
     }
 }
