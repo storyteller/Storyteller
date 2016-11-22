@@ -18,10 +18,10 @@ namespace StoryTeller.Grammars.Importing
             return _inner.Count();
         }
 
-        public void AcceptVisitor(IStepExecutor executor)
+        public void AcceptVisitor(ILineStepGatherer gatherer)
         {
-            _innerFixture.Context = executor.CurrentContext;
-            _inner.AcceptVisitor(executor);
+            _innerFixture.Context = gatherer.CurrentContext;
+            _inner.AcceptVisitor(gatherer);
         }
     }
 }

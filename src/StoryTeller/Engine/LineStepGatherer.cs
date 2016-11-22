@@ -1,29 +1,27 @@
-using System.Collections.Generic;
-using StoryTeller;
-using StoryTeller.Engine;
+﻿using System.Collections.Generic;
 
-namespace ST.Client.Stepthrough
+namespace StoryTeller.Engine
 {
-    public class ExecutionStepGatherer : IStepExecutor
+    public class LineStepGatherer : ILineStepGatherer
     {
         private readonly IList<ILineExecution> _lines = new List<ILineExecution>();
         private readonly SpecContext _context;
 
-        public ExecutionStepGatherer(SpecContext context)
+        public LineStepGatherer(SpecContext context)
         {
             _context = context;
         }
 
         public IList<ILineExecution> Lines => _lines;
 
-        ISpecContext IStepExecutor.CurrentContext => _context;
+        ISpecContext ILineStepGatherer.CurrentContext => _context;
 
-        void IStepExecutor.Line(ILineExecution execution)
+        void ILineStepGatherer.Line(ILineExecution execution)
         {
             _lines.Add(execution);
         }
 
-        void IStepExecutor.Composite(ICompositeExecution execution)
+        void ILineStepGatherer.Composite(ICompositeExecution execution)
         {
             foreach (var executionStep in execution.Steps)
             {

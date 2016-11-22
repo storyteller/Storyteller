@@ -64,7 +64,7 @@ namespace StoryTeller.Testing.Grammars
         [Fact]
         public void accept_visitor()
         {
-            var executor = Substitute.For<IStepExecutor>();
+            var executor = Substitute.For<ILineStepGatherer>();
 
             var action = new SilentAction("Fixture", Stage.setup, x => { }, new Section("Math"));
 

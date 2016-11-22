@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Linq;
-using IntegrationTests;
 using IntegrationTests.CommandLine;
-using Xunit;
 using Shouldly;
-using ST.CommandLine;
 using StoryTeller.Engine;
-using StoryTeller.Remotes;
 using StoryTeller.Results;
+using ST.CommandLine;
+using Xunit;
 
-namespace StoryTeller.Testing.Engine
+namespace IntegrationTests
 {
     
-    public class batch_running_failure_cases_integration_specs
+    public class batch_running_failure_cases_integration_specs : IDisposable
     {
         public batch_running_failure_cases_integration_specs()
         {
@@ -50,6 +48,8 @@ namespace StoryTeller.Testing.Engine
             task.Wait();
 
             task.Result.Wait();
+
+            controller.Dispose();
 
             return task.Result.Result;
         }
@@ -102,6 +102,19 @@ namespace StoryTeller.Testing.Engine
             contextCreationError.position.ShouldBe("context");
             contextCreationError.error.ShouldContain("I blew up trying to create an execution context");
 
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                TestUtility.CleanUpHangingProcesses();
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
         }
     }
 }

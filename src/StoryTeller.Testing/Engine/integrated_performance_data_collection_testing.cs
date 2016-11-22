@@ -111,9 +111,13 @@ namespace StoryTeller.Testing.Engine
 
             context.Reporting.As<Reporting>().StartDebugListening();
 
-            var executor = new SynchronousExecutor(context);
-            plan.AcceptVisitor(executor);
+            var gatherer = new LineStepGatherer(context);
+            plan.AcceptVisitor(gatherer);
 
+            foreach (var line in gatherer.Lines)
+            {
+                line.Execute(context);
+            }
 
             execution.Dispose();
             context.Dispose();

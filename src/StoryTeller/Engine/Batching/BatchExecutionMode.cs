@@ -29,9 +29,9 @@ namespace StoryTeller.Engine.Batching
             }
         }
 
-        public IStepExecutor BuildExecutor(SpecificationPlan plan, SpecContext context)
+        public IExecutionLogger BuildLogger()
         {
-            return new SynchronousExecutor(context);
+            return new NulloExecutionLogger();
         }
 
         public bool ShouldRetry(SpecResults results, Specification specification, SpecRunnerStatus status)

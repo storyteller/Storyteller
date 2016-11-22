@@ -41,8 +41,7 @@ namespace StoryTeller.Testing
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
-            var executor = new SynchronousExecutor(_context);
-            plan.AcceptVisitor(executor);
+            SpecExecution.RunAll(_context, plan);
         }
 
         public class TestExecutionContext : IExecutionContext

@@ -24,10 +24,9 @@ namespace StoryTeller.Engine.UserInterface
             
         }
 
-        public IStepExecutor BuildExecutor(SpecificationPlan plan, SpecContext context)
+        public IExecutionLogger BuildLogger()
         {
-            return new InstrumentedExecutor(context, plan, _observer);
+            return new InstrumentedLogger(_observer);
         }
-
     }
 }

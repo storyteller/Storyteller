@@ -16,9 +16,9 @@ namespace StoryTeller.Grammars
             return Steps.Sum(x => x.Count());
         }
 
-        public void AcceptVisitor(IStepExecutor executor)
+        public void AcceptVisitor(ILineStepGatherer gatherer)
         {
-            executor.Composite(this);
+            gatherer.Composite(this);
         }
 
         public IExecutionStep[] Steps { get; private set; }

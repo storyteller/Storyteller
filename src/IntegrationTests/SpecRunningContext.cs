@@ -42,8 +42,13 @@ namespace IntegrationTests
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
-            var executor = new SynchronousExecutor(_context);
-            plan.AcceptVisitor(executor);
+            var gatherer = new LineStepGatherer(_context);
+            plan.AcceptVisitor(gatherer);
+
+            foreach (var line in gatherer.Lines)
+            {
+                line.Execute(_context);
+            }
         }
 
         public class TestExecutionContext : IExecutionContext

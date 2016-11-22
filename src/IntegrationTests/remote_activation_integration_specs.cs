@@ -15,7 +15,7 @@ using EngineController = ST.Client.EngineController;
 namespace IntegrationTests
 {
     
-    public class remote_activation_integration_specs
+    public class remote_activation_integration_specs : IDisposable
     {
         private EngineController controllerForProject(string projectFolder)
         {
@@ -146,6 +146,11 @@ namespace IntegrationTests
                 message.system_name.ShouldBe(typeof(System2).FullName);
 
             }
+        }
+
+        public void Dispose()
+        {
+            TestUtility.CleanUpHangingProcesses();
         }
     }
 }

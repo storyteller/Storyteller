@@ -1,6 +1,8 @@
+using System;
+
 namespace StoryTeller.Engine
 {
-    public interface IStepExecutor
+    public interface ILineStepGatherer 
     {
         void Line(ILineExecution execution);
         void Composite(ICompositeExecution execution);

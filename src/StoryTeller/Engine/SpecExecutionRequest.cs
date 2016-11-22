@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Threading;
 using Baseline;
 using StoryTeller.Grammars;
@@ -12,27 +11,44 @@ namespace StoryTeller.Engine
 {
     public class SpecExecutionRequest
     {
+        public SpecExecutionRequest(Specification specification, IResultObserver observer)
+        {
+            Observer = observer;
+            Specification = specification;
+        }
+
+        public Specification Specification { get; }
+        public SpecificationPlan Plan { get; private set; }
+
+        private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
+
+        public string Id
+        {
+            get
+            {
+                if (Specification != null) return Specification.id;
+                if (Specification != null) return Specification.id;
+                return Plan.Specification.id;
+            }
+        }
+
+        public CancellationToken Cancellation => _cancellation.Token;
+
+        public bool IsCancelled => _cancellation.IsCancellationRequested;
+
+        public IResultObserver Observer { get; }
+
         public static SpecExecutionRequest For(Specification spec)
         {
             return new SpecExecutionRequest(spec, new NulloResultObserver());
         }
 
-        private readonly IResultObserver _observer;
-        public Specification Specification { get; private set; }
-        public SpecificationPlan Plan { get; private set; }
-
-        public SpecExecutionRequest(Specification specification, IResultObserver observer)
-        {
-            _observer = observer;
-            Specification = specification;
-        }
-
         public void SpecExecutionFinished(SpecResults results)
         {
-            _observer.SpecExecutionFinished(Specification, results);
+            Observer.SpecExecutionFinished(Specification, results);
         }
 
-        private void performAction(Action action )
+        private void performAction(Action action)
         {
             try
             {
@@ -40,7 +56,7 @@ namespace StoryTeller.Engine
             }
             catch (Exception e)
             {
-                IsCancelled = true;
+                Cancel();
                 EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(e)));
             }
         }
@@ -63,25 +79,11 @@ namespace StoryTeller.Engine
             });
         }
 
-        public string Id
-        {
-            get
-            {
-                if (Specification != null) return Specification.id;
-                if (Specification != null) return Specification.id;
-                return Plan.Specification.id;
-            }
-        }
-
 
         public void Cancel()
         {
-            IsCancelled = true;
+            _cancellation.Cancel();
         }
-
-        public bool IsCancelled { get; private set; }
-
-        public IResultObserver Observer => _observer;
 
         protected bool Equals(SpecExecutionRequest other)
         {
@@ -92,13 +94,13 @@ namespace StoryTeller.Engine
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((SpecExecutionRequest) obj);
         }
 
         public override int GetHashCode()
         {
-            return (Specification != null ? Specification.GetHashCode() : 0);
+            return Specification != null ? Specification.GetHashCode() : 0;
         }
 
         public override string ToString()
@@ -113,8 +115,5 @@ namespace StoryTeller.Engine
 
             return timings;
         }
-
     }
-
-    
 }

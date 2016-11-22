@@ -15,7 +15,7 @@ namespace StoryTeller.Testing.Grammars
         [Fact]
         public void accept_visitor()
         {
-            var executor = Substitute.For<IStepExecutor>();
+            var executor = Substitute.For<ILineStepGatherer>();
 
             var step = new InvalidGrammarStep(new StepValues("foo"), "grammar is wonky");
 

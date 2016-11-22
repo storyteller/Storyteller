@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Xunit;
 using Shouldly;
+using StoryTeller.Engine;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -28,7 +29,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
         [Fact]
         public void can_gather_up_the_lines()
         {
-            var gatherer = new ExecutionStepGatherer(Executor.Context);
+            var gatherer = new LineStepGatherer(Executor.Context);
             var plan = Specification.CreatePlan(TestingContext.Library);
             plan.AcceptVisitor(gatherer);
 

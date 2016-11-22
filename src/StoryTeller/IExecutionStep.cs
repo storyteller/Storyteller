@@ -5,6 +5,6 @@ namespace StoryTeller
     public interface IExecutionStep
     {
         int Count();
-        void AcceptVisitor(IStepExecutor executor);
+        void AcceptVisitor(ILineStepGatherer gatherer);
     }
 }

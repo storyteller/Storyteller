@@ -68,9 +68,9 @@ namespace StoryTeller.Grammars
             return 1;
         }
 
-        public void AcceptVisitor(IStepExecutor executor)
+        public void AcceptVisitor(ILineStepGatherer gatherer)
         {
-            executor.Line(this);
+            gatherer.Line(this);
         }
     }
 }

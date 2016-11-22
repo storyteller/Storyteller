@@ -151,7 +151,7 @@ namespace StoryTeller.Testing.Grammars
         [Fact]
         public void accept_visitor_calls_through_to_line()
         {
-            var executor = Substitute.For<IStepExecutor>();
+            var executor = Substitute.For<ILineStepGatherer>();
 
             var step = new LineStep(values, theLineGrammar);
 

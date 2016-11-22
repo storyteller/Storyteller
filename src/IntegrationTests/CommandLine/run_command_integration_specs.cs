@@ -43,6 +43,8 @@ namespace IntegrationTests.CommandLine
         public void Dispose()
         {
             theController.Dispose();
+
+            TestUtility.CleanUpHangingProcesses();
         }
 
         [Fact]

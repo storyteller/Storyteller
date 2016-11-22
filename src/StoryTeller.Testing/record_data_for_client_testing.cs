@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Baseline;
+using StoryTeller.Engine;
 using Xunit;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Messages;
@@ -65,9 +66,14 @@ namespace StoryTeller.Testing
                     {
                         context.Reporting.As<Reporting>().StartDebugListening();
                         var plan = spec.CreatePlan(library);
-                        var executor = new SynchronousExecutor(context);
 
-                        plan.AcceptVisitor(executor);
+                        var gatherer = new LineStepGatherer(context);
+                        plan.AcceptVisitor(gatherer);
+
+                        foreach (var line in gatherer.Lines)
+                        {
+                            line.Execute(context);
+                        }
 
                         observer.SpecExecutionFinished(spec, context.FinalizeResults(1));
                     }

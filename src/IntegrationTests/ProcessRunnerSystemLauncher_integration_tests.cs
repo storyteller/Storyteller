@@ -34,6 +34,8 @@ namespace IntegrationTests
         public void Dispose()
         {
             _controller.Teardown();
+
+            TestUtility.CleanUpHangingProcesses();
         }
 
         [Fact]

@@ -49,8 +49,6 @@ namespace StoryTeller
                 Attempts = attempts,
                 HadCriticalException = HadCriticalException
             };
-
-            
         }
 
         public void Dispose()

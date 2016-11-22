@@ -19,7 +19,7 @@ namespace StoryTeller.Engine
         private readonly ISystem _system;
         private readonly ISpecExpiration _specExpiration;
         private StopConditions _stopConditions = new StopConditions();
-        private ExecutionRun _current;
+        private SpecExecution _current;
 
         public SpecRunner(IExecutionMode mode, ISystem system, ISpecExpiration specExpiration)
         {
@@ -35,16 +35,20 @@ namespace StoryTeller.Engine
         public SpecResults Execute(SpecExecutionRequest request, IConsumingQueue queue)
         {
             _mode.BeforeRunning(request);
+
             if (Status == SpecRunnerStatus.Invalid)
             {
                 var abortedResults = SpecResults.ForAbortedRun(request.Id);
                 _mode.AfterRunning(request, abortedResults, queue, Status);
+
                 return abortedResults;
             }
+
             if (_specExpiration.IsExpired(request.Specification))
             {
                 var expiredResults = SpecResults.ForExpiredRun(request.Id);
                 _mode.AfterRunning(request, expiredResults, queue, Status);
+
                 return expiredResults;
             }
 
@@ -56,8 +60,10 @@ namespace StoryTeller.Engine
 
             try
             {
-                _current = new ExecutionRun(_system, timings, request, _stopConditions, _mode);
-                results = _current.Execute();
+                // TODO -- this will fork based on stepthrough or not
+                _current = new SpecExecution(request, _stopConditions, _mode.BuildLogger());
+
+                results = _current.Execute(_system, timings);
             }
             catch (Exception ex) // Any exception that bubbles up is telling us that the runner is invalid
             {
@@ -70,7 +76,6 @@ namespace StoryTeller.Engine
                 _mode.AfterRunning(request, results, queue, Status);
 
                 timings.Dispose();
-                _current?.SafeDispose();
             }
 
             return results;

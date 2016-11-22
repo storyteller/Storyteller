@@ -40,7 +40,7 @@ namespace ST.Client.Stepthrough
             _execution = execution;
             _request = request;
             _observer = observer;
-            var gatherer = new ExecutionStepGatherer(_context);
+            var gatherer = new LineStepGatherer(_context);
             _request.Plan.AcceptVisitor(gatherer);
 
             _steps = gatherer.Lines;
