@@ -1,5 +1,7 @@
-﻿using Xunit;
+﻿using Baseline;
+using Xunit;
 using Shouldly;
+using StoryTeller.Engine;
 using StoryTeller.Model;
 
 namespace StoryTeller.Testing.ST.Stepthrough
@@ -30,7 +32,9 @@ namespace StoryTeller.Testing.ST.Stepthrough
             Specification.SetBreakpoint(new Breakpoint("3", null));
             Specification.SetBreakpoint(new Breakpoint("7", null));
 
-            Executor.RunToBreakpoint();
+            Start(ExecutionMode.breakpoint);
+
+            Finished.Wait(3.Seconds());
 
             // It's not the Id, just the total number of steps starting w/ 1
             LastProgress.step.ShouldBe(3); 
@@ -45,8 +49,12 @@ namespace StoryTeller.Testing.ST.Stepthrough
             Specification.SetBreakpoint(new Breakpoint("3", null));
             Specification.SetBreakpoint(new Breakpoint("7", null));
 
-            Executor.RunToBreakpoint();
-            Executor.RunToBreakpoint();
+            // this would start it running to the next breakpoint
+            Start(ExecutionMode.breakpoint);
+
+            Execution.RunToBreakpoint();
+
+            Finished.Wait(3.Seconds());
 
             LastProgress.step.ShouldBe(7);
 
@@ -59,8 +67,12 @@ namespace StoryTeller.Testing.ST.Stepthrough
             Specification.SetBreakpoint(new Breakpoint("6", null));
             Specification.SetBreakpoint(new Breakpoint("7", null));
 
-            Executor.RunToBreakpoint();
-            Executor.RunToBreakpoint();
+            // this would start it running to the next breakpoint
+            Start(ExecutionMode.breakpoint);
+
+            Execution.RunToBreakpoint();
+
+            Finished.Wait(3.Seconds());
 
             LastNextStepMessageReceivedByClient.id.ShouldBe("7");
             LastProgress.step.ShouldBe(7);

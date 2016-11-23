@@ -20,6 +20,8 @@ namespace StoryTeller.Engine
         public Specification Specification { get; }
         public SpecificationPlan Plan { get; private set; }
 
+        public ExecutionMode Mode { get; set; } = ExecutionMode.normal;
+
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
 
         public string Id

@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using Baseline;
 using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
@@ -29,7 +31,7 @@ namespace StoryTeller.Testing.ST.Stepthrough
         [Fact]
         public void can_gather_up_the_lines()
         {
-            var gatherer = new LineStepGatherer(Executor.Context);
+            var gatherer = new LineStepGatherer(Execution.Context);
             var plan = Specification.CreatePlan(TestingContext.Library);
             plan.AcceptVisitor(gatherer);
 
@@ -49,6 +51,8 @@ namespace StoryTeller.Testing.ST.Stepthrough
         [Fact]
         public void the_initial_progress()
         {
+            Start(ExecutionMode.stepthrough);
+            
             // Initial progress
             LastProgress.counts.ShouldEqual(0, 0, 0, 0);
             LastProgress.step.ShouldBe(0);
@@ -59,6 +63,8 @@ namespace StoryTeller.Testing.ST.Stepthrough
         [Fact]
         public void sends_the_next_step_message_to_the_beginning()
         {
+            Start(ExecutionMode.stepthrough);
+
             var next = LastNextStepMessageReceivedByClient;
             next.ShouldNotBeNull();
 
@@ -69,7 +75,8 @@ namespace StoryTeller.Testing.ST.Stepthrough
         [Fact]
         public void run_next_from_the_beginning()
         {
-            Executor.RunNext();
+            Start(ExecutionMode.stepthrough);
+            Execution.RunNext();
 
             LastNextStepMessageReceivedByClient.id.ShouldBe("1");
 
@@ -84,14 +91,18 @@ namespace StoryTeller.Testing.ST.Stepthrough
         {
             Specification.SetBreakpoint(new Breakpoint("2", null));
 
-            Executor.RunToEnd();
+            Start(ExecutionMode.stepthrough);
+
+            Execution.RunToEnd();
+
+            Finished.Wait(3.Seconds());
 
             LastProgress.total.ShouldBe(7);
 
             TheFinalResults.ShouldNotBeNull();
             TheFinalResults.Results.Length.ShouldBe(7);
 
-            Executor.Next.ShouldBeNull();
+            Execution.Next.ShouldBeNull();
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
+using System.Threading.Tasks;
+using Baseline;
+using StoryTeller.Engine;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -14,31 +16,25 @@ namespace StoryTeller.Testing.ST.Stepthrough
 {
     public class StepthroughContext : IResultObserver, IUserInterfaceObserver, IDisposable
     {
-        public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         public readonly IList<ClientMessage> ClientMessages = new List<ClientMessage>();
+        public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         public Specification Specification { get; private set; }
 
-        public StepthroughExecutor Executor { get; private set; }
+        public StepthroughExecution Execution { get; set; }
+
+        public NextStep LastNextStepMessageReceivedByClient => ClientMessages.OfType<NextStep>().LastOrDefault();
+
+        public SpecResults TheFinalResults { get; set; }
+
+        public SpecProgress LastProgress { get; set; }
+
 
         public void Dispose()
         {
-            Executor.Cancel();
+            Execution.Cancel();
             Results.Clear();
             ClientMessages.Clear();
         }
-
-
-        public void TheSpecIs(string text)
-        {
-            Specification = TextParser.Parse(text);
-
-
-
-            Executor = StepthroughExecutor.Start(new GrammarSystem(), Specification, this, this, TestingContext.Library);
-            
-        }
-
-        public NextStep LastNextStepMessageReceivedByClient => ClientMessages.OfType<NextStep>().LastOrDefault();
 
         void IResultObserver.Handle<T>(T message)
         {
@@ -50,18 +46,39 @@ namespace StoryTeller.Testing.ST.Stepthrough
             TheFinalResults = results;
         }
 
-        public SpecResults TheFinalResults { get; set; }
-
         void IUserInterfaceObserver.SendProgress(SpecProgress progress)
         {
             LastProgress = progress;
         }
 
-        public SpecProgress LastProgress { get; set; }
-
         void IUserInterfaceObserver.SendToClient(ClientMessage message)
         {
             ClientMessages.Add(message);
         }
+
+        public void TheSpecIs(string text)
+        {
+            Specification = TextParser.Parse(text);
+
+            var request = new SpecExecutionRequest(Specification, this);
+
+            request.CreatePlan(TestingContext.Library);
+
+            Execution = new StepthroughExecution(request, new StopConditions(), this);
+        }
+
+        public void Start(ExecutionMode mode)
+        {
+            Execution.Request.Mode = mode;
+
+            Finished = Task.Factory.StartNew(() =>
+            {
+                TheFinalResults = Execution.Execute(new GrammarSystem(), new Timings());
+            });
+
+            Execution.HasStarted.Wait();
+        }
+
+        public Task Finished { get; set; } 
     }
 }

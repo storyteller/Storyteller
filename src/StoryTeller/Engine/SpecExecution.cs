@@ -9,6 +9,13 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Engine
 {
+    public enum ExecutionMode
+    {
+        normal,
+        stepthrough,
+        breakpoint
+    }
+
     public interface IExecutionLogger
     {
         void Starting(IList<ILineExecution> all);
@@ -44,26 +51,26 @@ namespace StoryTeller.Engine
             }
         }
 
-        private readonly StopConditions _stopConditions;
-        private readonly IExecutionLogger _logger;
         private Task _timeout;
 
         public SpecExecution(SpecExecutionRequest request, StopConditions stopConditions, IExecutionLogger logger)
         {
             Request = request;
-            _stopConditions = stopConditions;
-            _logger = logger;
+            StopConditions = stopConditions;
+            Logger = logger;
 
         }
 
-        public SpecExecutionRequest Request { get; }
+        public StopConditions StopConditions { get; }
 
-        public Exception CatastrophicException { get; private set; }
+        public IExecutionLogger Logger { get; }
+
+        public SpecExecutionRequest Request { get; }
 
         // If this fails, it's a catastrophic exception
         public SpecResults Execute(ISystem system, Timings timings)
         {
-            _timeout = Task.Delay(_stopConditions.TimeoutInSeconds.Seconds());
+            _timeout = setupTimeout();
 
             using (var execution = createExecutionContext(system, timings))
             {
@@ -76,7 +83,7 @@ namespace StoryTeller.Engine
                     Request.Specification,
                     timings,
                     Request.Observer,
-                    _stopConditions,
+                    StopConditions,
                     execution))
                 {
                     beforeExecution(execution, context);
@@ -85,7 +92,7 @@ namespace StoryTeller.Engine
 
                     startDebugListening(context);
 
-                    _logger.Starting(lines);
+                    Logger.Starting(lines);
 
                     var stepRunning = executeSteps(context, lines, Request.Cancellation);
 
@@ -98,11 +105,16 @@ namespace StoryTeller.Engine
             }
         }
 
+        protected virtual Task setupTimeout()
+        {
+            return Task.Delay(StopConditions.TimeoutInSeconds.Seconds());
+        }
+
         private SpecResults buildResults(SpecContext context, Timings timings )
         {
             if (Request.IsCancelled) return null;
 
-            var catastrophic = CatastrophicException ?? context?.CatastrophicException;
+            var catastrophic = context?.CatastrophicException;
             if (catastrophic != null)
             {
                 throw new StorytellerExecutionException(catastrophic);
@@ -165,22 +177,27 @@ namespace StoryTeller.Engine
             }
         }
 
-        private Task executeSteps(SpecContext context, IList<ILineExecution> lines, CancellationToken token)
+        protected virtual Task executeSteps(SpecContext context, IList<ILineExecution> lines, CancellationToken token)
         {
             return Task.Factory.StartNew(() =>
             {
                 foreach (var line in lines)
                 {
-                    if (Request.IsCancelled || !context.CanContinue() || _timeout.IsCompleted)
+                    if (shouldStop(context))
                     {
                         return;
                     }
 
-                    execute(context, line).Wait(_stopConditions.TimeoutInSeconds.Seconds());
+                    execute(context, line).Wait(StopConditions.TimeoutInSeconds.Seconds());
 
-                    _logger.LineComplete(context, line);
+                    Logger.LineComplete(context, line);
                 }
             }, token);
+        }
+
+        protected bool shouldStop(SpecContext context)
+        {
+            return Request.IsCancelled || !context.CanContinue() || _timeout.IsCompleted;
         }
 
 
@@ -220,7 +237,7 @@ namespace StoryTeller.Engine
         }
 
 
-        public void Cancel()
+        public virtual void Cancel()
         {
             Request.Cancel();
         }
