@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Baseline;
 using StoryTeller.Engine;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Results;
 using StoryTeller.Samples;
-using ST.Client.Stepthrough;
 
-namespace StoryTeller.Testing.ST.Stepthrough
+namespace StoryTeller.Testing.Engine.Stepthrough
 {
     public class StepthroughContext : IResultObserver, IUserInterfaceObserver, IDisposable
     {

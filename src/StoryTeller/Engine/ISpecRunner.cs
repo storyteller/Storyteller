@@ -10,5 +10,6 @@ namespace StoryTeller.Engine
         bool IsRunning();
         string RunningSpecId();
         void MarkAsInvalid(Exception ex);
+        SpecExecution Current { get; }
     }
 }

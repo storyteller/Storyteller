@@ -19,7 +19,6 @@ namespace StoryTeller.Engine
         private readonly ISystem _system;
         private readonly ISpecExpiration _specExpiration;
         private StopConditions _stopConditions = new StopConditions();
-        private SpecExecution _current;
 
         public SpecRunner(IExecutionMode mode, ISystem system, ISpecExpiration specExpiration)
         {
@@ -31,6 +30,8 @@ namespace StoryTeller.Engine
         }
 
         public SpecRunnerStatus Status { get; set; }
+
+        public SpecExecution Current { get; private set; }
 
         public SpecResults Execute(SpecExecutionRequest request, IConsumingQueue queue)
         {
@@ -61,9 +62,9 @@ namespace StoryTeller.Engine
             try
             {
                 // TODO -- this will fork based on stepthrough or not
-                _current = new SpecExecution(request, _stopConditions, _mode.BuildLogger());
+                Current = new SpecExecution(request, _stopConditions, _mode.BuildLogger());
 
-                results = _current.Execute(_system, timings);
+                results = Current.Execute(_system, timings);
             }
             catch (Exception ex) // Any exception that bubbles up is telling us that the runner is invalid
             {
@@ -116,9 +117,9 @@ namespace StoryTeller.Engine
             try
             {
                 if (!IsRunning()) return;
-                if (id.IsEmpty() || id == _current.Request.Id)
+                if (id.IsEmpty() || id == Current.Request.Id)
                 {
-                    _current.Cancel();
+                    Current.Cancel();
                 }
             }
             catch (Exception e)
@@ -129,13 +130,13 @@ namespace StoryTeller.Engine
 
         public bool IsRunning()
         {
-            if (_current == null) return false;
-            return (!_current.Finished && !_current.WasCancelled);
+            if (Current == null) return false;
+            return (!Current.Finished && !Current.WasCancelled);
         }
 
         public string RunningSpecId()
         {
-            return IsRunning() ? _current.Request.Id : null;
+            return IsRunning() ? Current.Request.Id : null;
         }
 
         public void UseStopConditions(StopConditions conditions)

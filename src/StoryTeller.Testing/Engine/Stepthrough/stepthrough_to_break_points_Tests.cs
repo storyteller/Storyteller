@@ -1,10 +1,10 @@
 ﻿using Baseline;
-using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Model;
+using Xunit;
 
-namespace StoryTeller.Testing.ST.Stepthrough
+namespace StoryTeller.Testing.Engine.Stepthrough
 {
     
     public class stepthrough_to_break_points_Tests : StepthroughContext

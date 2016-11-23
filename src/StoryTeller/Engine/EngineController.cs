@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -12,7 +13,8 @@ namespace StoryTeller.Engine
         IListener<RunSpec>,
         IListener<RunSpecs>,
         IListener<CancelSpec>,
-        IListener<CancelAllSpecs>
+        IListener<CancelAllSpecs>,
+        IListener<StepthroughRequest>
     {
         private readonly ISpecificationEngine _engine;
         private readonly IUserInterfaceObserver _observer;
@@ -111,6 +113,16 @@ namespace StoryTeller.Engine
         public void SendQueueState()
         {
             _observer.SendToClient(QueueState());
+        }
+
+        public void Receive(StepthroughRequest message)
+        {
+            var execution = _engine.CurrentStepthrough();
+
+            if (execution == null) return;
+
+
+            message.Apply(execution);
         }
     }
 }

@@ -5,18 +5,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine
 {
-    public interface ISpecificationEngine
-    {
-        void Enqueue(SpecExecutionRequest request);
-        void CancelRunningSpec(string id);
-    }
-
     public class SpecificationEngine : IDisposable, ISpecificationEngine
     {
         private readonly ConsumingQueue _executionQueue;
@@ -72,6 +67,11 @@ namespace StoryTeller.Engine
         public void CancelRunningSpec(string id)
         {
             _runner.Cancel(id);
+        }
+
+        public IStepthroughExecution CurrentStepthrough()
+        {
+            return _runner.Current as IStepthroughExecution;
         }
 
         private SystemRecycled tryToStart()

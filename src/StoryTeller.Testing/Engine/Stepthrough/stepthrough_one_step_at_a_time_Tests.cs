@@ -1,15 +1,13 @@
 ﻿using System.Linq;
-using System.Threading;
 using Baseline;
-using Xunit;
 using Shouldly;
 using StoryTeller.Engine;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
 using StoryTeller.Results;
-using ST.Client.Stepthrough;
+using Xunit;
 
-namespace StoryTeller.Testing.ST.Stepthrough
+namespace StoryTeller.Testing.Engine.Stepthrough
 {
     
     public class stepthrough_one_step_at_a_time_Tests : StepthroughContext

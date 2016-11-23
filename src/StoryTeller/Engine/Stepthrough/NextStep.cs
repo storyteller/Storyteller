@@ -1,8 +1,7 @@
-﻿using StoryTeller;
-using StoryTeller.Messages;
+﻿using StoryTeller.Messages;
 using StoryTeller.Model;
 
-namespace ST.Client.Stepthrough
+namespace StoryTeller.Engine.Stepthrough
 {
     public class NextStep : ClientMessage
     {

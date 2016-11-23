@@ -1,14 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using StoryTeller;
-using StoryTeller.Engine;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
+using StoryTeller.Model;
 
-namespace ST.Client.Stepthrough
+namespace StoryTeller.Engine.Stepthrough
 {
-    public class StepthroughExecution : SpecExecution
+    public class StepthroughExecution : SpecExecution, IStepthroughExecution
     {
         private readonly IUserInterfaceObserver _observer;
         private int _position = -1;
@@ -141,6 +141,11 @@ namespace ST.Client.Stepthrough
             sendNextOrFinishedMessage();
         }
 
+        public void SetBreakpoints(Breakpoint[] breakpoints)
+        {
+            Request.Specification.Breakpoints = breakpoints;
+        }
+
         private void sendNextOrFinishedMessage()
         {
             if (Next == null)
@@ -163,5 +168,6 @@ namespace ST.Client.Stepthrough
         {
             _observer.SendToClient(new NextStep(Request.Id, Next));
         }
+
     }
 }
