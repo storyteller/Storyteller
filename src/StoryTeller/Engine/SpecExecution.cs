@@ -87,10 +87,7 @@ namespace StoryTeller.Engine
 
                     _logger.Starting(lines);
 
-                    var stepRunning = Task.Factory.StartNew(() =>
-                    {
-                        executeSteps(context, lines);
-                    }, Request.Cancellation);
+                    var stepRunning = executeSteps(context, lines, Request.Cancellation);
 
                     Task.WaitAny(stepRunning, _timeout);
 
@@ -168,19 +165,22 @@ namespace StoryTeller.Engine
             }
         }
 
-        private void executeSteps(SpecContext context, IList<ILineExecution> lines)
+        private Task executeSteps(SpecContext context, IList<ILineExecution> lines, CancellationToken token)
         {
-            foreach (var line in lines)
+            return Task.Factory.StartNew(() =>
             {
-                if (Request.IsCancelled || !context.CanContinue() || _timeout.IsCompleted)
+                foreach (var line in lines)
                 {
-                    return;
+                    if (Request.IsCancelled || !context.CanContinue() || _timeout.IsCompleted)
+                    {
+                        return;
+                    }
+
+                    execute(context, line).Wait(_stopConditions.TimeoutInSeconds.Seconds());
+
+                    _logger.LineComplete(context, line);
                 }
-
-                execute(context, line).Wait();
-
-                _logger.LineComplete(context, line);
-            }
+            }, token);
         }
 
 
