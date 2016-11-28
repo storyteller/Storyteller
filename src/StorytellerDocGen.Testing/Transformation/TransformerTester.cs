@@ -73,7 +73,6 @@ orange|3.09
 
 ");
 
-            Console.WriteLine(html);
 
             html.ShouldContain("<table>");
         }

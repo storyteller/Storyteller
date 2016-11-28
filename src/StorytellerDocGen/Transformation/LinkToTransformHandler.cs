@@ -79,13 +79,40 @@ namespace StorytellerDocGen.Transformation
                 return current.FindPrevious();
             }
 
-            var topic = _top.FindByKey(key);
+            var corrected = ToAbsoluteKey(current.Key, key);
+
+            var topic = _top.FindByKey(corrected);
             if (topic == null)
             {
-                throw new ArgumentOutOfRangeException(nameof(key), $"Cannot find a topic with key '{key}'");
+                throw new ArgumentOutOfRangeException(nameof(key), $"Cannot find a topic with key '{corrected}'");
             }
 
             return topic;
+        }
+
+        public static string ToAbsoluteKey(string currentKey, string key)
+        {
+            if (key.StartsWith("./"))
+            {
+                var path = currentKey.Split('/').Reverse().Skip(1).Reverse().ToList();
+
+                var parts = key.Split('/').Skip(1);
+                foreach (var part in parts)
+                {
+                    if (part == "..")
+                    {
+                        path.RemoveAt(path.Count - 1);
+                    }
+                    else
+                    {
+                        path.Add(part);
+                    }
+                }
+
+                return path.Join("/");
+            }
+
+            return key;
         }
     }
 }
