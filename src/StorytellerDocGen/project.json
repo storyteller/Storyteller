@@ -25,7 +25,7 @@
       "../CommonAssemblyInfo.cs"
     ],
     "embed": [ "../ST/topics.js", "Runner/WebsocketsRefresh.txt" ],
-    "outputName": "dotnet-stdocs"
+    "outputName": "StorytellerDocGen"
   },
 
   "dependencies": {

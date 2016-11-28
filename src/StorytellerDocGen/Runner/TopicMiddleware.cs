@@ -32,10 +32,10 @@ namespace StorytellerDocGen.Runner
 
             var topicAssembly = typeof(TopicMiddleware).GetAssembly();
 
-            var stream = topicAssembly.GetManifestResourceStream("StorytellerDocGen.Runner.WebsocketsRefresh.txt");
+            var stream = topicAssembly.GetManifestResourceStream("dotnet-stdocs.Runner.WebsocketsRefresh.txt");
 
             _webSocketScript = stream.ReadAllText();
-            _topicJS = topicAssembly.GetManifestResourceStream("StorytellerDocGen.topics.js").ReadAllText();
+            _topicJS = topicAssembly.GetManifestResourceStream("dotnet-stdocs.topics.js").ReadAllText();
         }
 
         public Task Invoke(HttpContext context)

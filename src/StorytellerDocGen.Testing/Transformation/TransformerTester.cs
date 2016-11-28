@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using System;
+using Shouldly;
 using StorytellerDocGen.Topics;
 using StorytellerDocGen.Transformation;
 using Xunit;
@@ -58,6 +59,24 @@ namespace StorytellerDocGen.Testing.Transformation
             token.Data.ShouldBe("bar");
         }
 
+
+        [Fact]
+        public void can_use_markdig_advanced_extensions()
+        {
+            var html = Transformer.ToHtml(@"
+
+fruit| price
+-----|-----:
+apple|2.05
+pear|1.37
+orange|3.09
+
+");
+
+            Console.WriteLine(html);
+
+            html.ShouldContain("<table>");
+        }
 
 
         [Fact]

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Baseline;
+using Markdig;
 using StorytellerDocGen.Topics;
 
 namespace StorytellerDocGen.Transformation
@@ -15,6 +16,11 @@ namespace StorytellerDocGen.Transformation
 
     public class Transformer : ITransformer
     {
+        private static readonly MarkdownPipeline pipeline =
+            new MarkdownPipelineBuilder()
+                .UseAdvancedExtensions()
+                .Build();
+
         private readonly LightweightCache<string, ITransformHandler> _handlers =
             new LightweightCache<string, ITransformHandler>();
 
@@ -56,6 +62,12 @@ namespace StorytellerDocGen.Transformation
             return builder.ToString();
         }
 
+        public static string ToHtml(string text)
+        {
+            return Markdig.Markdown.ToHtml(text, pipeline);
+        }
+
+
         private class InnerTransformHandler : ITransformHandler
         {
             private readonly ITransformer _transformer;
@@ -75,7 +87,7 @@ namespace StorytellerDocGen.Transformation
 
                 if (Path.GetExtension(current.File) == ".md")
                 {
-                    text = Markdig.Markdown.ToHtml(text);
+                    text = ToHtml(text);
                 }
 
 
