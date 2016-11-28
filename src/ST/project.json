@@ -1,5 +1,24 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.0-alpha-*",
+  "name": "dotnet-st",
+  "title": "Storyteller Project Runner",
+  "description": "Storyteller Project Runner and Editor",
+  "language": "en-US",
+  "authors": [
+    "Jeremy D. Miller"
+  ],
+  "packOptions": {
+    "projectUrl": "http://storyteller.github.io",
+    "tags": [
+      "testing"
+    ],
+    "licenseUrl": "https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/storyteller/storyteller"
+    }
+  },
+
   "buildOptions": {
     "debugType": "portable",
     "emitEntryPoint": true,
@@ -12,7 +31,8 @@
     },
     "copyToOutput": {
       "include": [ "*.js" ]
-    }
+    },
+    "outputName": "dotnet-st"
 
   },
 

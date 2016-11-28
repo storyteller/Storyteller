@@ -19,8 +19,8 @@ namespace ST.CommandLine
     {
         public RunCommand()
         {
+            Usage("Execute from the current project path").Arguments();
             Usage("Execute").Arguments(x => x.Path);
-            Usage("Execute and save results").Arguments(x => x.Path, x => x.ResultsPathFlag);
         }
 
         public override bool Execute(RunInput input)

@@ -1,12 +1,31 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "1.0.0-alpha-*",
+  "title": "StorytellerDocGen",
+  "description": "Living technical documentation authoring for .Net and Javascript projects",
+  "language": "en-US",
+  "authors": [
+    "Jeremy D. Miller"
+  ],
+  "packOptions": {
+    "projectUrl": "http://storyteller.github.io/documentation/docs/",
+    "tags": [
+      "documentation static website generator"
+    ],
+    "licenseUrl": "https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/storyteller/storyteller"
+    }
+  },
+  "name": "dotnet-stdocs",
   "buildOptions": {
     "emitEntryPoint": true,
     "compile": [
       "**/*.cs",
       "../CommonAssemblyInfo.cs"
     ],
-    "embed": [ "../ST/topics.js", "Runner/WebsocketsRefresh.txt" ]
+    "embed": [ "../ST/topics.js", "Runner/WebsocketsRefresh.txt" ],
+    "outputName": "dotnet-stdocs"
   },
 
   "dependencies": {

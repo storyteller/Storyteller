@@ -10,6 +10,12 @@ namespace ST.Client
     [Description("Opens the specification editor web tool")]
     public class OpenCommand : OaktonCommand<OpenInput>
     {
+        public OpenCommand()
+        {
+            Usage("Open the Storyteller client to the current project").Arguments();
+            Usage("Open the Storyteller client to the named project").Arguments(x => x.Path);
+        }
+
         public override bool Execute(OpenInput input)
         {
             input.CreateMissingSpecFolder();

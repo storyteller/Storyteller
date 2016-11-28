@@ -19,6 +19,12 @@ namespace ST.CommandLine
         {
             _mode = mode;
             LifecycleFlag = Lifecycle.Any;
+
+#if NET46
+            Path = Environment.CurrentDirectory;
+#else
+            Path = Directory.GetCurrentDirectory();
+#endif
         }
 
 

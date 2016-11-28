@@ -9,7 +9,7 @@
     ],
     "embed": [ "../../client/public/**/*.css", "../ST/batch-bundle.js" ]
   },
-  "version": "3.0.0-alpha-*",
+  "version": "4.0.0-alpha-*",
   "title": "Storyteller",
   "description": "Automated Acceptance Testing and Technical Documentation Authoring",
   "language": "en-US",
