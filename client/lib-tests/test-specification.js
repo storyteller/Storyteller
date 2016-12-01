@@ -602,4 +602,65 @@ describe('Specification', function(){
       expectEquals('title', 'mode', 'lifecycle', 'max-retries', 'expiration-period', 'last-updated');
     });
   });
+
+
+  describe('Breakpoints', () => {
+    it('can match breakpoint with id only', () => {
+      spec.breakpoints = [{id: 1, position: null}, {id: 2, position: 'setup'}];
+
+      expect(spec.isAtBreakpoint(1, null)).to.be.true;
+      expect(spec.isAtBreakpoint(2, null)).to.be.false;
+      expect(spec.isAtBreakpoint(3, null)).to.be.false;
+
+    });
+
+    it('can match breakpoints with a position', () => {
+      spec.breakpoints = [{id: 1, position: null}, {id: 2, position: 'setup'}];
+
+      expect(spec.isAtBreakpoint(1, 'setup')).to.be.false;
+      expect(spec.isAtBreakpoint(2, 'setup')).to.be.true;
+      expect(spec.isAtBreakpoint(2, 'teardown')).to.be.false;
+      expect(spec.isAtBreakpoint(3, 'setup')).to.be.false;
+    });
+    
+
+    it('sets a single breakpoint where there are none 1', () => {
+      spec.setBreakpoint(4, null);
+
+      expect(spec.breakpoints).to.deep.equal([
+        {id: 4, position: null}
+      ]);
+    });
+
+    it('sets a single breakpoint where there are none 2', () => {
+      spec.setBreakpoint(4, 'setup');
+
+      expect(spec.breakpoints).to.deep.equal([
+        {id: 4, position: 'setup'}
+      ]);
+    });
+
+    it('does not overwrite an existing breakpoint', () => {
+      var initial = [{id: 1, position: null}, {id: 2, position: 'setup'}];
+
+      spec.breakpoints = initial;
+
+      spec.setBreakpoint(1, null);
+
+      expect(spec.breakpoints).to.deep.equal(initial);
+    });
+
+    it('can remove a breakpoint', () => {
+      var initial = [{id: 1, position: null}, {id: 2, position: 'setup'}];
+
+      spec.breakpoints = initial;
+
+      spec.clearBreakpoint(1, null);
+
+      expect(spec.breakpoints).to.deep.equal([{id: 2, position: 'setup'}]);
+    });
+
+
+
+  });
 });

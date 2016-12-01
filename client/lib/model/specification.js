@@ -6,6 +6,23 @@ var uuid = require('node-uuid');
 var SpecificationNavigator = require('./specification-navigator');
 var Counts = require('./counts');
 
+function matchesBreakpoint(breakpoint, id, position){
+console.log("checking breakpoint " + JSON.stringify(breakpoint) + " to " + id + ", " + position)
+console.log('id check: ' + (breakpoint.id == id).toString());
+  if (breakpoint.id != id) return false;
+
+  if (breakpoint.position){
+    console.log('has position');
+    return breakpoint.position == position;
+  }
+
+  var returnValue =  position == null || position == undefined;
+
+  console.log(returnValue);
+
+  return returnValue;
+}
+
 function Specification(data, library){
   if (data == undefined || data == null){
     throw new Error('Null data being passed into Specification');
@@ -29,6 +46,24 @@ function Specification(data, library){
   this.active = false;
   this.updateHeader(data);
   this.path = data.path;
+
+  this.breakpoints = (data.breakpoints || []);
+
+  this.setBreakpoint = function(id, position){
+    if (this.isAtBreakpoint(id, position)) return;
+
+    this.breakpoints.push({id: id, position: position});
+  }
+
+  this.isAtBreakpoint = function(id, position){
+    return this.breakpoints.findIndex(b => matchesBreakpoint(b, id, position)) >= 0;
+  }
+
+  var self = this;
+
+  this.clearBreakpoint = (id, position) => {
+    self.breakpoints = self.breakpoints.filter(b => !matchesBreakpoint(b, id, position));
+  }
 
 
   this.navigator = new SpecificationNavigator(this);
