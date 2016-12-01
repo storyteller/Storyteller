@@ -60,6 +60,20 @@ describe('Handling changes to breakpoints in the Reducer', () => {
         store.dispatch(initial);
     });
 
+    it('can set the next step message', () => {
+        store.dispatch({
+            type: 'next-step',
+            spec: 'embeds',
+            id: 5,
+            position: null
+        });
+
+        var state = store.getState();
+        var spec = state.get('specs').get('embeds');
+
+        expect(spec.spec.nextStep).to.deep.equal({id: 5, position: null});
+    });
+
     it('captures a new breakpoint', () => {
         var action = {
             type: 'alter-breakpoints',

@@ -8,7 +8,7 @@ var RunningState = require('./../model/running-state');
 var Suite = require('./../model/suite');
 var Counts = require('./../model/counts');
 var _ = require('lodash');
-import {AlterBreakpoints, SendBreakpoints} from './breakpoints';
+import {AlterBreakpoints, SendBreakpoints, NextStep} from './breakpoints';
 
 var initialState = Immutable.Map({
     'lifecycle-filter': 'any', 
@@ -193,6 +193,9 @@ function Reducer(state = initialState, action){
 
     case 'alter-breakpoints':
         return AlterBreakpoints(state, action);
+
+    case 'next-step':
+        return NextStep(state, action);
     
     case 'go-home':
         return updateSpec(state, action.id, spec => spec.navigator.moveFirst());

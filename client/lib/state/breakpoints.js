@@ -33,19 +33,31 @@ export function AlterBreakpoints(state, action){
 }
 
 export function SendBreakpoints(state, action){
-console.log('trying to send a message!');
-
     if (!state.get('specs').has(action.spec)){
         console.log('Unknown specification ' + action.spec);
         return;
     }
-console.log('looking');
+
     var spec = state.get('specs').get(action.spec);
-console.log('got spec');
+
     Postal.publish({
         channel: 'engine-request',
         topic: 'set-breakpoints',
         data: {type: 'set-breakpoints', id: action.spec, breakpoints: spec.breakpoints()}
     });
     
+}
+
+export function NextStep(state, action){
+    if (!state.get('specs').has(action.spec)){
+        console.log('Unknown specification ' + action.spec);
+        return;
+    }
+
+    var spec = state.get('specs').get(action.spec);
+
+    var breakpoint = {id: action.id, position: action.position};
+    var change = r => r.acceptChange(s => s.nextStep = breakpoint);
+
+    return state.updateIn(['specs', action.spec], change);
 }
