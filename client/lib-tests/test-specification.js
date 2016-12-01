@@ -175,6 +175,18 @@ describe('Specification', function(){
       expect(spec.steps[0].results).to.deep.equal({});
     });
 
+    it('wipes out nextStep in clearResults', () => {
+      var result = {position: 'before'};
+
+      spec.logResult(result);
+      spec.steps[0].logResult({type: 'step-result', status: 'success'});
+      spec.nextStep = {id: 1, position: null}
+
+      spec.clearResults();
+
+      expect(spec.nextStep).to.be.null;
+    });
+
     it('stores itself in the byId collection', function(){
       expect(spec.find('the-spec')).to.equal(spec);
     });
@@ -661,6 +673,15 @@ describe('Specification', function(){
     });
 
 
+    if('determination of isNext', () => {
+      expect(spec.isNext(1, null)).to.be.false;
 
+      spec.nextStep = {id: 3, position: 'setup'}
+
+      expect(spec.isNext(1, null)).to.be.false;
+      expect(spec.isNext(3, null)).to.be.false;
+      expect(spec.isNext(4, 'setup')).to.be.false;
+      expect(spec.isNext(3, 'setup')).to.be.true;
+    });
   });
 });

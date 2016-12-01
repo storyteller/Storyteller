@@ -276,6 +276,10 @@ function Specification(data, library){
   self.clearResults = function(){
     self.results = {};
     self.steps.forEach(s => s.clearResults());
+
+    self.nextStep = null;
+
+    self.nextStep = null;
   }
   
   self.readResult =function(result){
