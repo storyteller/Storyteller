@@ -44,6 +44,8 @@ namespace StoryTeller.Engine.Stepthrough
         {
         }
 
+        public string id;
+
         public Breakpoint[] breakpoints;
     }
 }

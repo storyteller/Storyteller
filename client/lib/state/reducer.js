@@ -8,6 +8,7 @@ var RunningState = require('./../model/running-state');
 var Suite = require('./../model/suite');
 var Counts = require('./../model/counts');
 var _ = require('lodash');
+import {AlterBreakpoints, SendBreakpoints} from './breakpoints';
 
 var initialState = Immutable.Map({
     'lifecycle-filter': 'any', 
@@ -189,6 +190,9 @@ function Reducer(state = initialState, action){
         
     case 'set-verification-result':
         return recordResult(state, action);
+
+    case 'alter-breakpoints':
+        return AlterBreakpoints(state, action);
     
     case 'go-home':
         return updateSpec(state, action.id, spec => spec.navigator.moveFirst());
@@ -250,8 +254,14 @@ function Batched(state, action){
         
         return state;
     }
-    
-    return Reducer(state, action);
+
+    state = Reducer(state, action);
+
+    // TODO -- move this to more formal middleware
+    if (action.type == 'alter-breakpoints'){
+        SendBreakpoints(state, action);
+    }
+    return state;
 }
 
 

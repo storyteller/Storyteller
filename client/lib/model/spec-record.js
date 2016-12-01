@@ -102,7 +102,9 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
         return loader.noResults();
     }
     
-    
+    breakpoints(){
+        return this.spec.breakpoints;
+    }
     
     previews(loader){
         return this.spec.previews(loader);
