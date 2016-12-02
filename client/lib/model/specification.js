@@ -7,20 +7,13 @@ var SpecificationNavigator = require('./specification-navigator');
 var Counts = require('./counts');
 
 function matchesBreakpoint(breakpoint, id, position){
-console.log("checking breakpoint " + JSON.stringify(breakpoint) + " to " + id + ", " + position)
-console.log('id check: ' + (breakpoint.id == id).toString());
   if (breakpoint.id != id) return false;
 
   if (breakpoint.position){
-    console.log('has position');
     return breakpoint.position == position;
   }
 
-  var returnValue =  position == null || position == undefined;
-
-  console.log(returnValue);
-
-  return returnValue;
+  return position == null || position == undefined;
 }
 
 function Specification(data, library){
@@ -63,6 +56,15 @@ function Specification(data, library){
 
   this.clearBreakpoint = (id, position) => {
     self.breakpoints = self.breakpoints.filter(b => !matchesBreakpoint(b, id, position));
+  }
+
+  this.isActiveStep = (id, position) => {
+    if (self.nextStep){
+      return matchesBreakpoint(self.nextStep, id, position);
+    }
+    else{
+      return false;
+    }
   }
 
 

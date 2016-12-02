@@ -50,4 +50,11 @@ icon('reorder-active', ['fa-bars', 'text-success']);
 
 icon('open', ['fa-external-link']);
 
+icon('run-stepthrough', ['fa-play-circle']);
+icon('run-next', ['fa-step-forward']);
+icon('run-to-end', ['fa-fast-forward']);
+icon('breakpoint', ['fa-circle', 'text-danger']);
+icon('active-breakpoint', ['fa-circle', 'text-info']);
+icon('blank-breakpoint', ['fa-circle-o']);
+
 module.exports = icons;
