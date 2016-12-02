@@ -673,15 +673,15 @@ describe('Specification', function(){
     });
 
 
-    if('determination of isNext', () => {
-      expect(spec.isNext(1, null)).to.be.false;
+    it('determination of isActiveStep', () => {
+      expect(spec.isActiveStep(1, null)).to.be.false;
 
       spec.nextStep = {id: 3, position: 'setup'}
 
-      expect(spec.isNext(1, null)).to.be.false;
-      expect(spec.isNext(3, null)).to.be.false;
-      expect(spec.isNext(4, 'setup')).to.be.false;
-      expect(spec.isNext(3, 'setup')).to.be.true;
+      expect(spec.isActiveStep(1, null)).to.be.false;
+      expect(spec.isActiveStep(3, null)).to.be.false;
+      expect(spec.isActiveStep(4, 'setup')).to.be.false;
+      expect(spec.isActiveStep(3, 'setup')).to.be.true;
     });
   });
 });
