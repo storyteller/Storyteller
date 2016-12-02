@@ -5,7 +5,7 @@ var React = require('react');
 var SpecStepthrough = require('./../components/editing/spec-stepthrough');
 
 
-describe.only('Big Bang Smoke Test on the Stepthrough Controls', function(){    
+describe('Big Bang Smoke Test on the Stepthrough Controls', function(){    
     var initialization = require('./../initialization');
 
     var specs = initialization.hierarchy.specs.map(x => x.data);

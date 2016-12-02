@@ -2,7 +2,7 @@ var React = require("react");
 var Postal = require('postal');
 var {Button} = require('react-bootstrap');
 var {ButtonGroup} = require('react-bootstrap');
-var Icons = require('./../../icons');
+var Icons = require('./../icons');
 
 
 

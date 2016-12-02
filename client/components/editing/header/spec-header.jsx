@@ -6,7 +6,6 @@ var SpecLinks = require('./spec-links');
 var SpecCommands = require('./spec-commands');
 var LifecycleButton = require('./lifecycle-button');
 var SuitePath = require('./../../explorer/suite-path');
-var StepthroughControls = require('./stepthrough-controls');
 
 
 function SpecHeader(props){

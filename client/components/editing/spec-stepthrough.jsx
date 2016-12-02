@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Button, ButtonGroup, Grid, Row, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import EditorLoading from './alerts/editor-loading';
 import SpecHeader from './header/spec-header';
-import StepthroughControls from './header/stepthrough-controls';
 import SpecResultHeader from './header/spec-result-header';
 import { results as loader} from './component-loader';
 import Persisting from './alerts/persisting';
@@ -42,13 +41,8 @@ class SpecStepthrough extends React.Component {
         </Row>
 
         <Row>
-          <Col xs={1} md={1}>
-              <StepthroughControls {...this.props} />
-          </Col>
-          <Col xs={11} md={11}>
-            <SpecResultHeader {...this.props} />
-            {components}
-          </Col>
+          <SpecResultHeader {...this.props} />
+          {components}
         </Row>
       </Grid>
     );

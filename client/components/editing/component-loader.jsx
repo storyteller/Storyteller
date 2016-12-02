@@ -95,6 +95,9 @@ results.add('logComponent', 'logging/log-component');
 results.add('setResultsTable', 'tables/set-results-table');
 results.add('noResults', 'alerts/no-results');
 
+results.add('stepthroughControls', 'stepthrough-controls');
+results.add('breakpoint', 'breakpoint');
+
 results.checked = () => {
   return ( <CheckboxIcon key={++results.count} /> );
 };
