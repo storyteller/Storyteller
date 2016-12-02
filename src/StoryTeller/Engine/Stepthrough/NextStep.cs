@@ -1,5 +1,4 @@
 ﻿using StoryTeller.Messages;
-using StoryTeller.Model;
 
 namespace StoryTeller.Engine.Stepthrough
 {
@@ -17,35 +16,4 @@ namespace StoryTeller.Engine.Stepthrough
         }
     }
 
-    public class CancelStepthrough : ClientMessage
-    {
-        public CancelStepthrough() : base("cancel-stepthrough")
-        {
-        }
-    }
-
-    public class RunToEnd : ClientMessage
-    {
-        public RunToEnd() : base("run-to-end")
-        {
-        }
-    }
-
-    public class RunNext : ClientMessage
-    {
-        public RunNext() : base("run-next")
-        {
-        }
-    }
-
-    public class SetBreakpoints : ClientMessage
-    {
-        public SetBreakpoints() : base("set-breakpoints")
-        {
-        }
-
-        public string id;
-
-        public Breakpoint[] breakpoints;
-    }
 }

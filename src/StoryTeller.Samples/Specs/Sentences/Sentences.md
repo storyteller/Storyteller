@@ -33,3 +33,11 @@ Line assertions
 |> ThisLineIsAlwaysFalse#4 id=4
 |> ThisLineAlwaysThrowsExceptions#5 id=5
 ~~~
+
+Comment 
+
+Another Comment
+
+[Sentence]
+
+Show a syntax failure

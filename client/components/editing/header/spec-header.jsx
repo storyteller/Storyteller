@@ -6,6 +6,7 @@ var SpecLinks = require('./spec-links');
 var SpecCommands = require('./spec-commands');
 var LifecycleButton = require('./lifecycle-button');
 var SuitePath = require('./../../explorer/suite-path');
+var StepthroughControls = require('./stepthrough-controls');
 
 
 function SpecHeader(props){
@@ -14,9 +15,12 @@ function SpecHeader(props){
     if (props.mode == 'editor' && props.spec.active){
         headerClass = "text-primary";
     }
-if (!props.spec.path){
-    throw new Error('No path on the specification!');
-}
+
+    var stepthrough = null;
+    if (props.mode == 'stepthrough'){
+
+    }
+
     return (
         <Row>
             <Col xs={12} md={12}>
@@ -29,6 +33,7 @@ if (!props.spec.path){
 
                 <div>
                     <SpecCommands spec={props.spec}/>
+                    {stepthrough}
                     <span className="pull-right">
                         <SpecLinks id={props.spec.id} mode={props.mode} />
 

@@ -105,10 +105,14 @@ function Specification(data, library){
     return editors;
   }
 
-  this.buildResults = function(loader){
+  this.buildStepthrough = function(loader, dispatch){
+    return this.buildResults(loader, true, dispatch);
+  }
+
+  this.buildResults = function(loader, isStepthrough, dispatch){
     var elements = [];
 
-    if (this.results.timedout){
+    if (!isStepthrough && this.results.timedout){
       elements.push(loader.errorBox({title: 'Timed out!', error: this.results.timedout.error}));
     }
 
@@ -122,7 +126,7 @@ function Specification(data, library){
     }
 
     this.steps.forEach(step => {
-      var element = step.buildResults(loader);
+      var element = step.buildResults(loader, isStepthrough, dispatch);
       if (element instanceof Array){
         elements = elements.concat(element);
       }

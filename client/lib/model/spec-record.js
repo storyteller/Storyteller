@@ -96,7 +96,7 @@ class SpecRecord extends Immutable.Record({id: null, spec: null, version: 0, las
             var spec = new Specification(this.last_result.data, library);
             spec.readResults(this.last_result.results);
             
-            return spec.buildResults(loader);
+            return spec.buildResults(loader, false);
         }
         
         return loader.noResults();

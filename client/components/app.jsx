@@ -16,6 +16,7 @@ import GrammarErrors from './grammars/grammar-errors';
 import SpecEditor from './editing/spec-editor';
 import SpecPreview from './editing/spec-preview';
 import SpecResults from './editing/spec-results';
+import SpecStepthrough from './editing/spec-stepthrough';
 import SuiteExplorer from './explorer/suite-explorer';
 import ResultsPane from './results/results-pane';
 
@@ -66,6 +67,7 @@ export default function(initialization, register) {
                     <Route name="spec-preview" path="/spec/preview/:id" component={SpecPreview} />
                     <Route name="spec-editor" path="/spec/editing/:id" component={SpecEditor} />
                     <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
+                    <Route name="spec-stepthrough" path="/spec/stepthrough/:id" component={SpecStepthrough} />
                     <Route name="fixture" path="/fixture/:key" component={FixtureTable} />
                     <Route name="suite-explorer" path="/suite/*" component={SuiteExplorer} />
                     <Route name="results" path="/results" component={ResultsPane} />

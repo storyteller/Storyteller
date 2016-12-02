@@ -1,87 +1,59 @@
 var React = require("react");
-var Postal = require('postal');
-var {Button, ButtonGroup} = require('react-bootstrap');
-var Icons = require('./../../icons');
+var CommandButton = require('./command-button');
+var {ButtonGroup} = require('react-bootstrap');
 
-var CommandButton = React.createClass({
-	render: function(){
-		var onclick = e => {
-			var data = {id: this.props.spec.id};
+function SpecCommands({spec}){
+	return (
+		<ButtonGroup style={{marginRight: '30px'}}>
+			<CommandButton
+				title="Run the specification"
+				spec={spec}
+				icon="run"
+				message="run-spec"
+				disabled={false} />
 
-			var channel = 'editor';
-			if (this.props.channel){
-				channel = this.props.channel;
-			}
+			<CommandButton
+				title="Stepthrough the specification"
+				spec={spec}
+				icon="run-stepthrough"
+				message="stepthrough-spec"
+				disabled={false} />
 
-			Postal.publish({
-				channel: channel,
-				topic: this.props.message,
-				data: data
-			});
+			<CommandButton
+				title="Save outstanding changes to the spec"
+				spec={spec}
+				icon="save"
+				message="save-spec"
+				disabled={!spec.isDirty()}/>
 
-			e.preventDefault();
-		};
+			<CommandButton
+				title="Undo the last change"
+				spec={spec}
+				id='undo'
+				icon="undo"
+				message="undo"
+				disabled={!spec.isDirty()} />
 
-		var Icon = Icons[this.props.icon];
+			<CommandButton
+				title="Redo the previous change"
+				spec={spec}
+				id='redo'
+				icon="redo"
+				message="redo"
+				disabled={!spec.canRedo()}/>
 
-		return (
-			<Button
-				id={this.props.id}
-				title={this.props.title}
-				disabled={this.props.disabled}
-				onClick={onclick}><Icon /></Button>
-
-		);
-	}
-});
-
-var SpecCommands = React.createClass({
-	render: function(){
+			<CommandButton
+				title="Open this specification in a file editor"
+				spec={spec}
+				id="open"
+				icon="open"
+				message="open-in-editor"
+				channel="engine-request"
+				disabled={false} />
+		</ButtonGroup>
+	);
+}
 
 
-		return (
-			<ButtonGroup style={{marginRight: '30px'}}>
-				<CommandButton
-					title="Run the specification"
-					spec={this.props.spec}
-					icon="run"
-					message="run-spec"
-					disabled={false} />
-
-				<CommandButton
-					title="Save outstanding changes to the spec"
-					spec={this.props.spec}
-					icon="save"
-					message="save-spec"
-					disabled={!this.props.spec.isDirty()}/>
-
-				<CommandButton
-					title="Undo the last change"
-					spec={this.props.spec}
-					id='undo'
-					icon="undo"
-					message="undo"
-					disabled={!this.props.spec.isDirty()} />
-
-				<CommandButton
-					title="Redo the previous change"
-					spec={this.props.spec}
-					id='redo'
-					icon="redo"
-					message="redo"
-					disabled={!this.props.spec.canRedo()}/>
-
-				<CommandButton
-					title="Open this specification in a file editor"
-					spec={this.props.spec}
-					id="open"
-					icon="open"
-					message="open-in-editor"
-					channel="engine-request"
-					disabled={false} />
-			</ButtonGroup>
-		);
-	}
-});
 
 module.exports = SpecCommands;
