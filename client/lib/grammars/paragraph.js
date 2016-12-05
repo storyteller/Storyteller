@@ -78,9 +78,9 @@ class Paragraph{
 		return loader.container({title: this.title, components: components});
 	}
 
-	buildResults(step, loader){
+	buildResults(step, loader, isStepthrough, dispatch, spec){
 		var components = this.children.map(grammar => {
-			return grammar.buildResults(step, loader);
+			return grammar.buildResults(step, loader, isStepthrough, dispatch, spec);
 		});
 
 		components = _.flatten(components);

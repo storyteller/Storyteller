@@ -22,14 +22,20 @@ class Silent{
 		return null;
 	}
 
-	buildResults(step, loader){
+	buildResults(step, loader, isStepthrough, dispatch, spec){
+		var components = [];
+
 		var result = step.getResult(this.position);
+
+		if (isStepthrough){
+			components.push(loader.breakpointLine({spec: spec, id: step.id, position: this.position, title: '(Silent Action)'}))
+		}
+
 		if (result && result.status != 'ok'){
-			return loader.errorBox({title: 'Silent Action', error: result.error});
+			components.push(loader.errorBox({title: 'Silent Action', error: result.error}));
 		}
-		else {
-			return [];
-		}
+
+		return components;
 	}
 
 
