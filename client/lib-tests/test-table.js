@@ -235,14 +235,21 @@ describe('Table Grammar', function(){
 
 		section.steps = [child1, child2, child3];
 
-		var results = table.buildResults(step, loader);
+		var spec = {};
+		var dispatch = o => {};
+		var isStepthrough = false;
+
+		var results = table.buildResults(step, loader, isStepthrough, dispatch, spec);
 
 		expect(results.props.rows.length).to.equal(3);
 		expect(results.props.rows[0]).to.deep.equal({
 			type: 'row',
 			props: {
 				cells: table.cells,
-				step: child1
+				step: child1,
+				spec: spec,
+				dispatch: dispatch,
+				isStepthrough: isStepthrough
 			}
 
 		});
@@ -251,7 +258,10 @@ describe('Table Grammar', function(){
 			type: 'row',
 			props: {
 				cells: table.cells,
-				step: child2
+				step: child2,
+				spec: spec,
+				dispatch: dispatch,
+				isStepthrough: isStepthrough
 			}
 		});
 
@@ -259,7 +269,10 @@ describe('Table Grammar', function(){
 			type: 'row',
 			props: {
 				cells: table.cells,
-				step: child3
+				step: child3,
+				spec: spec,
+				dispatch: dispatch,
+				isStepthrough: isStepthrough
 			}
 		});
 	});

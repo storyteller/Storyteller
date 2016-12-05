@@ -5,6 +5,8 @@ var _ = require('lodash');
 var loader = require('./../component-loader').results;
 var builders = require('./../editors/builders');
 var ErrorCell = require('./../cells/error-cell');
+var StepthroughControls = require('./../stepthrough-controls');
+var Breakpoint = require('./../breakpoint');
 
 function ResultCell(props){
     var classes = {
@@ -96,8 +98,19 @@ var ResultRow = React.createClass({
 			clazz = 'warning';
 		}
 
+		var stepthrough = null;
+		if (this.props.isStepthrough){
+			var breakpoint = (<Breakpoint {...this.props} />);
+			if (this.props.spec.isActiveStep(this.props.step.id, null)){
+				stepthrough = (<td>{breakpoint}<StepthroughControls {...this.props}/></td>);
+			}
+			else {
+				stepthrough = (<td>{breakpoint}</td>);
+			}
+		}
+
 		return (
-			<tr className={clazz}>{cells}</tr>
+			<tr className={clazz}>{stepthrough}{cells}</tr>
 		);
 	}
 });

@@ -46,8 +46,6 @@ class EmbeddedSection extends CompositeGrammar{
 	}
 
 	buildResults(step, loader, isStepthrough, dispatch, spec){
-		// if stepthrough, need 'before' & 'after'
-
 		var section = this.readSection(step);
 		var sectionResults = section.buildResults(loader.chromed(), isStepthrough, dispatch, spec);
 	

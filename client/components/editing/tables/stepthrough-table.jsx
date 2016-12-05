@@ -1,16 +1,13 @@
 var React = require("react");
-var HeaderRow = require('./header-row');
-var uuid = require('node-uuid');
 
-
-function TablePreview({cells, title, section, rows, isStepthrough}){
+function StepthroughTable({cells, title, section, rows, dispatch, spec}){
 	var tableWidth = cells.length + 1;
 
 	return (
 		<table className="table table-bordered table-hover" id={section.id}>
 			<thead>
 				<tr><th colSpan={tableWidth}>{title}</th></tr>
-				<HeaderRow cells={cells} hideActions={true}/>
+				<HeaderRow cells={cells} hideActions={false} actionTitle="Breakpoint"/>
 			</thead>
 			<tbody>
 				{rows}
@@ -21,4 +18,4 @@ function TablePreview({cells, title, section, rows, isStepthrough}){
 }
 
 
-module.exports = TablePreview;
+module.exports = StepthroughTable;

@@ -186,7 +186,7 @@ class Table extends CompositeGrammar{
 		return loader.table({addStep: addStep, cells: cells, title: this.title, rows: rows, section: section, step: step, adder: section.adder});
 	}
 
-	buildResults(step, loader){
+	buildResults(step, loader, isStepthrough, dispatch, spec){
 		var section = this.readSection(step);
 		var cells = this.findActiveCells(section);
 
@@ -197,14 +197,36 @@ class Table extends CompositeGrammar{
 		section.steps.forEach(step => {
 			var result = step.getResult();
 
-			rows.push(loader.row({step: step, cells: cells})); 
+			rows.push(loader.row({step: step, cells: cells, spec: spec, dispatch: dispatch, isStepthrough: isStepthrough})); 
 
 			if (result.status == 'error'){
 				rows.push(loader.errorRow({width: cells.length, error: result.error}));
 			}
 		});
 
-		return loader.table({cells: cells, title: this.title, rows: rows, section: section});
+		var table = loader.table({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough});
+	
+		if (isStepthrough){
+			var beforeLine = loader.breakpointLine({
+				spec: spec,
+				dispatch: dispatch,
+				id : this.id,
+				position: 'before',
+				title: 'Action before the table'
+			});
+
+			var afterLine = loader.breakpointLine({
+				spec: spec,
+				dispatch: dispatch,
+				id : this.id,
+				position: 'after',
+				title: 'Action after the table'
+			});
+
+			return loader.div([beforeLine, table, afterLine]);
+		}
+
+		return table;
 	}
 
 	preview(step, loader){

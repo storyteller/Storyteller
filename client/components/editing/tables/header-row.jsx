@@ -1,38 +1,38 @@
 var React = require("react");
 
 
-var HeaderCell = React.createClass({
-	render: function(){
-		var title = this.props.cell.header || this.props.cell.key;
 
-		return (
-			<th key={this.props.key}>{title}</th>
+function HeaderCell({cell, key}){
+	var title = cell.header || cell.key;
+
+	return (
+		<th key={key}>{title}</th>
+	);
+}
+
+function HeaderRow({cells, hideActions, actionTitle}){
+	var i = 0;
+	var cells = cells.map(x => {
+		return ( <HeaderCell key={i++} cell={x} /> );
+	});
+
+	actionTitle = actionTitle || "Actions";
+
+	var actionCell = null;
+	if (!hideActions){
+		actionCell = (
+			<th><i>{actionTitle}</i></th>
 		);
 	}
-});
 
-var HeaderRow = React.createClass({
-	render: function(){
-        var i = 0;
-		var cells = this.props.cells.map(function(x){
-			return ( <HeaderCell key={i++} cell={x} /> );
-		});
+	return (
+		<tr>
+			{actionCell}
+			{cells}
+		</tr>
+	);
+}
 
-		var actionCell = null;
-		if (!this.props.hideActions){
-			actionCell = (
-				<th>Actions</th>
-			);
-		}
-
-		return (
-			<tr>
-				{actionCell}
-				{cells}
-			</tr>
-		);
-	}
-});
 
 
 module.exports = HeaderRow;
