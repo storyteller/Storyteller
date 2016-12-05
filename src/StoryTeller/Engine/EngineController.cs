@@ -37,15 +37,19 @@ namespace StoryTeller.Engine
 
         public void Receive(RunSpec message)
         {
-            RunSpec(message.id, message.spec);
+            RunSpec(message.id, message.spec, message.mode);
             SendQueueState();
         }
 
-        public virtual void RunSpec(string id, Specification specification)
+        public virtual void RunSpec(string id, Specification specification, ExecutionMode mode)
         {
             if (OutstandingRequests().Any(x => x.Specification.id == id)) return;
 
-            var request = new SpecExecutionRequest(specification, this);
+            var request = new SpecExecutionRequest(specification, this)
+            {
+                Mode = mode
+            };
+
             _outstanding.Add(request);
 
             _engine.Enqueue(request);
@@ -95,7 +99,7 @@ namespace StoryTeller.Engine
 
         public void Receive(RunSpecs message)
         {
-            message.specs.Each(x => RunSpec(x.id, x));
+            message.specs.Each(x => RunSpec(x.id, x, ExecutionMode.normal));
 
             SendQueueState();
         }

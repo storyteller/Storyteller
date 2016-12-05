@@ -67,6 +67,9 @@ navigate('add-item');
 var gotoResults = () => window.location = '#spec/results/' + spec;
 
 var gotoPreview = () => window.location = '#spec/preview/' + spec;
+
+var gotoStepthrough = () => window.location = '#spec/stepthrough/' + spec;
+
 subscribe('go-preview', gotoPreview);
 
 
@@ -88,6 +91,23 @@ subscribe('run-spec', x => {
     communicator.send(message);
 
     gotoResults();  
+});
+
+subscribe('stepthrough-spec', x => {
+    applyOutstandingChanges();
+    var record = store.getState().get('specs').get(spec);
+    
+    var message = {
+        type: 'run-spec',
+        id: spec,
+        spec: record.write(),
+        revision: record.revision,
+        mode: 'stepthrough'
+    }
+    
+    communicator.send(message);
+
+    gotoStepthrough();
 });
 
 subscribe('save-spec', x => {

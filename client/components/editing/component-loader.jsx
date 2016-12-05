@@ -97,6 +97,7 @@ results.add('noResults', 'alerts/no-results');
 
 results.add('stepthroughControls', 'stepthrough-controls');
 results.add('breakpoint', 'breakpoint');
+results.add('breakpointLine', 'breakpoint-line');
 
 results.checked = () => {
   return ( <CheckboxIcon key={++results.count} /> );

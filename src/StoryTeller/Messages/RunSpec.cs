@@ -1,7 +1,9 @@
-﻿using StoryTeller.Model;
+﻿using StoryTeller.Engine;
+using StoryTeller.Model;
 
 namespace StoryTeller.Messages
 {
+
     public class RunSpec : ClientMessage
     {
         public RunSpec() : base("run-spec")
@@ -11,5 +13,7 @@ namespace StoryTeller.Messages
         public string id;
         public Specification spec;
         public string revision;
+
+        public ExecutionMode mode = ExecutionMode.normal;
     }
 }

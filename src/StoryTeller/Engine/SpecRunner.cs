@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Baseline;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
@@ -61,8 +62,9 @@ namespace StoryTeller.Engine
 
             try
             {
-                // TODO -- this will fork based on stepthrough or not
-                Current = new SpecExecution(request, _stopConditions, _mode.BuildLogger());
+                Current = request.Mode == ExecutionMode.normal
+                    ? new SpecExecution(request, _stopConditions, _mode.BuildLogger())
+                    : new StepthroughExecution(request, _stopConditions, _mode.Observer());
 
                 results = Current.Execute(_system, timings);
             }

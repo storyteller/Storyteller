@@ -8,8 +8,7 @@ namespace StoryTeller.Engine.Stepthrough
         next,
         runToEnd,
         run,
-        stop,
-        cancel
+        stop
     }
 
     public class StepthroughRequest : ClientMessage

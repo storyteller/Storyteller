@@ -1,3 +1,5 @@
+using StoryTeller.Engine.UserInterface;
+
 namespace StoryTeller.Engine
 {
     public interface IExecutionMode
@@ -8,5 +10,6 @@ namespace StoryTeller.Engine
             SpecRunnerStatus status);
 
         IExecutionLogger BuildLogger();
+        IUserInterfaceObserver Observer();
     }
 }

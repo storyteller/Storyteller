@@ -34,6 +34,8 @@ namespace StoryTeller.Engine.Stepthrough
 
         protected override Task executeSteps(SpecContext context, IList<ILineExecution> lines, CancellationToken token)
         {
+            ConsoleWriter.Write(ConsoleColor.Magenta, "STARTING TO RUN A SPECIFICATION IN STEPTHROUGH MODE");
+
             _steps = lines;
             Context = context;
 

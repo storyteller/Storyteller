@@ -1,4 +1,5 @@
-using StoryTeller.Grammars;
+using System;
+using StoryTeller.Engine.UserInterface;
 using StoryTeller.Model;
 
 namespace StoryTeller.Engine.Batching
@@ -32,6 +33,11 @@ namespace StoryTeller.Engine.Batching
         public IExecutionLogger BuildLogger()
         {
             return new NulloExecutionLogger();
+        }
+
+        public IUserInterfaceObserver Observer()
+        {
+            throw new NotSupportedException();
         }
 
         public bool ShouldRetry(SpecResults results, Specification specification, SpecRunnerStatus status)

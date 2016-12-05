@@ -327,7 +327,5 @@ describe('Section storing and clearing results', function(){
 				}
 			});
 		});
-
-
 	});
 });

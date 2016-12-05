@@ -92,8 +92,18 @@ class Section{
 		}
 	}
 
-	buildResults(loader){
+	buildResults(loader, isStepthrough, dispatch, spec){
 		var elements = [];
+
+		if (isStepthrough){
+			elements.push(loader.breakpointLine({
+				spec: spec,
+				dispatch: dispatch,
+				id : this.id,
+				position: 'setup',
+				title: 'Fixture Setup'
+			}));
+		}
 
 		if (this.results.before && this.results.before.status != 'ok'){
 			elements.push(loader.errorBox({title: 'Error before the Section', error: this.results.before.error}));
@@ -102,6 +112,10 @@ class Section{
 
 		if (this.results.setup && this.results.setup.status != 'ok'){
 			elements.push(loader.errorBox({title: 'SetUp Error', error: this.results.setup.error}));
+		}
+
+		if (isStepthrough){
+			elements.push(loader.errorBox({title: 'Hello from stepthrough!', error: "Stepthrough!"}));
 		}
 
 		// TODO -- if you ever have time, do this with _.flatten instead
@@ -117,6 +131,16 @@ class Section{
 
 		if (this.results.teardown && this.results.teardown.status != 'ok'){
 			elements.push(loader.errorBox({title: 'TearDown Error', error: this.results.teardown.error}));
+		}
+
+		if (isStepthrough){
+			elements.push(loader.breakpointLine({
+				spec: spec,
+				dispatch: dispatch,
+				id : this.id,
+				position: 'teardown',
+				title: 'Fixture Teardown'
+			}));
 		}
 
 		return loader.container({title: this.fixture.title, components: elements});

@@ -90,7 +90,8 @@ function Specification(data, library){
       path: this.path,
       'max-retries': this['max-retries'],
       'expiration-period': this['expiration-period'],
-      'last-updated': this['last-updated']
+      'last-updated': this['last-updated'],
+      breakpoints: this.breakpoints
     }
   }
 
@@ -126,7 +127,7 @@ function Specification(data, library){
     }
 
     this.steps.forEach(step => {
-      var element = step.buildResults(loader, isStepthrough, dispatch);
+      var element = step.buildResults(loader, isStepthrough, dispatch, this);
       if (element instanceof Array){
         elements = elements.concat(element);
       }
