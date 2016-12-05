@@ -45,9 +45,33 @@ class EmbeddedSection extends CompositeGrammar{
 		return section.editor(loader.chromed(), step);
 	}
 
-	buildResults(step, loader){
+	buildResults(step, loader, isStepthrough, dispatch, spec){
+		// if stepthrough, need 'before' & 'after'
+
 		var section = this.readSection(step);
-		return section.buildResults(loader.chromed(), step);
+		var sectionResults = section.buildResults(loader.chromed(), isStepthrough, dispatch, spec);
+	
+		if (isStepthrough){
+			var beforeLine = loader.breakpointLine({
+				spec: spec,
+				dispatch: dispatch,
+				id : this.id,
+				position: 'before',
+				title: 'Action before the embedded section'
+			});
+
+			var afterLine = loader.breakpointLine({
+				spec: spec,
+				dispatch: dispatch,
+				id : this.id,
+				position: 'after',
+				title: 'Action after the embedded section'
+			});
+
+			return loader.div([beforeLine, sectionResults, afterLine]);
+		}
+
+		return sectionResults;
 	}
 
 	selectNext(location){

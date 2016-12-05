@@ -25,6 +25,10 @@ class Loader {
     return ( <span key={++this.count}>{text}</span> );
   }
 
+  div(components){
+    return (<div>{components}</div>);
+  }
+
   chromed(){
     return this.parent || this;
   }
