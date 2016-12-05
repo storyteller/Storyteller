@@ -204,7 +204,15 @@ class Table extends CompositeGrammar{
 			}
 		});
 
-		var table = loader.table({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough});
+		var table = null;
+
+		if (isStepthrough){
+			table = loader.stepthroughTable({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough});
+		}
+		else {
+			table = loader.table({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough});
+		}
+
 	
 		if (isStepthrough){
 			var beforeLine = loader.breakpointLine({

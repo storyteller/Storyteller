@@ -1,4 +1,5 @@
 var React = require("react");
+var HeaderRow = require("./header-row");
 
 function StepthroughTable({cells, title, section, rows, dispatch, spec}){
 	var tableWidth = cells.length + 1;
