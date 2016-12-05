@@ -158,8 +158,8 @@ class Step{
 		return this.grammar.editor(this, loader);
 	}
 
-	buildResults(loader){
-		return this.grammar.buildResults(this, loader);
+	buildResults(loader, isStepthrough, dispatch, spec){
+		return this.grammar.buildResults(this, loader, isStepthrough, dispatch, spec);
 	}
 
 	findByPath(path){

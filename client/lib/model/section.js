@@ -120,7 +120,7 @@ class Section{
 
 		// TODO -- if you ever have time, do this with _.flatten instead
 		this.steps.forEach(step => {
-			var element = step.buildResults(loader);
+			var element = step.buildResults(loader, isStepthrough, dispatch, spec);
 			if (element instanceof Array){
 				elements = elements.concat(element);
 			}

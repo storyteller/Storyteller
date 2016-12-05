@@ -112,10 +112,21 @@ class Sentence{
 		return loader.line({components: components});
 	}
 
-	buildResults(step, loader){
+	buildResults(step, loader, isStepthrough, dispatch, spec){
 		var result = step.getResult(this.position) || {status: 'none'};
 
 		var components = this.parts.map(part => part.buildResults(step, loader));
+
+		if (isStepthrough){
+			var breakpoint = loader.breakpoint({
+				spec: spec, 
+				id: step.id,
+				position: this.position,
+				dispatch: dispatch
+			});
+
+			components = [breakpoint].concat(components);
+		}
 		
         switch (result.status){
             case 'ok':
@@ -139,7 +150,14 @@ class Sentence{
 
 		if (result.status == 'error'){
             components.push(loader.errorBox({error: result.error}));
-            
+		}
+
+		if (isStepthrough){
+			var isActive = spec.isActiveStep(step.id, this.position);
+			if (isActive){
+				var stepthrough = loader.stepthroughControls({spec: spec});
+				components = [stepthrough].concat(components);
+			}
 		}
         
 		var line = loader.line({
