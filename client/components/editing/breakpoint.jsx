@@ -1,6 +1,7 @@
 import React from 'react';
 import Icons from './../icons';
 import { connect } from 'react-redux';
+import Specification from './../../lib/model/specification';
 
 module.exports = function({spec, id, position, dispatch}){
     var isBreakpoint = spec.isAtBreakpoint(id, position);
@@ -9,6 +10,10 @@ module.exports = function({spec, id, position, dispatch}){
     var Icon = null;
     var title = null;
     var message = null;
+
+    if (spec instanceof Specification){
+        spec = spec.id;
+    }
 
     if (isActive){
         Icon = Icons['active-breakpoint'];

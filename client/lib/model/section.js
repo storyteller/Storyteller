@@ -114,10 +114,6 @@ class Section{
 			elements.push(loader.errorBox({title: 'SetUp Error', error: this.results.setup.error}));
 		}
 
-		if (isStepthrough){
-			elements.push(loader.errorBox({title: 'Hello from stepthrough!', error: "Stepthrough!"}));
-		}
-
 		// TODO -- if you ever have time, do this with _.flatten instead
 		this.steps.forEach(step => {
 			var element = step.buildResults(loader, isStepthrough, dispatch, spec);

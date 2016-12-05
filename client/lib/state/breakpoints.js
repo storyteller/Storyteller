@@ -35,7 +35,7 @@ export function AlterBreakpoints(state, action){
 export function SendBreakpoints(state, action){
     if (!state.get('specs').has(action.spec)){
         console.log('Unknown specification ' + action.spec);
-        return;
+        return state;
     }
 
     var spec = state.get('specs').get(action.spec);
