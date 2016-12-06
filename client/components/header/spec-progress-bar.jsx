@@ -15,15 +15,17 @@ function findState(state){
 
     const spec = state.get('specs').get(running.id);
     const progress = state.get('progress');
+    const mode = state.get('running-mode');
+
     let counts = new Counts(0, 0, 0, 0);
     if (progress){
         counts = new Counts(progress.counts);
     }
 
-    return { running: true, spec: spec, progress: progress, counts: counts };
+    return { running: true, spec: spec, progress: progress, counts: counts, mode: mode };
 }
 
-function SpecProgressBar({running, progress, counts, spec}){
+function SpecProgressBar({running, progress, counts, spec, mode}){
     if (!running){
         return (<span />);
     }
@@ -52,8 +54,14 @@ function SpecProgressBar({running, progress, counts, spec}){
         e.preventDefault();
     }
 
+    var modeTitle = null;
+    if (mode != 'normal'){
+        modeTitle = (<b>Stepping through: </b>);
+    }
+
     return (
       <div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
+        {modeTitle}
         <Button
           onClick={cancel}
           className="pull-right"

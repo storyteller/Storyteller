@@ -58,7 +58,7 @@ namespace StoryTeller.Engine
             Request = request;
             StopConditions = stopConditions;
             Logger = logger;
-
+            Mode = request.Mode;
         }
 
         public StopConditions StopConditions { get; }
@@ -66,6 +66,8 @@ namespace StoryTeller.Engine
         public IExecutionLogger Logger { get; }
 
         public SpecExecutionRequest Request { get; }
+
+        public ExecutionMode Mode { get; protected set; } = ExecutionMode.normal;
 
         // If this fails, it's a catastrophic exception
         public SpecResults Execute(ISystem system, Timings timings)

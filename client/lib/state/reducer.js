@@ -51,8 +51,6 @@ function collapseAll(state){
 }
 
 function replaceRunning(state, running){
-    
-    
     var currentRunning = state.get('running');
     
     if (running == null && currentRunning != null){
@@ -65,9 +63,7 @@ function replaceRunning(state, running){
         var record = state.get('specs').get(running);
         return state.set('running-spec', record.forRunning());
     }
-    
-    
-    
+
     return state;
 }
 
@@ -163,6 +159,8 @@ function Reducer(state = initialState, action){
 
     case 'queue-state':
         state = replaceRunning(state, action.running);
+
+        state = state.set('running-mode', action.mode);
     
         if (!_.isEqual(state.get('queued'), action.queued)){
             return state.set('queued', action.queued);

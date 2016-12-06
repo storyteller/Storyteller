@@ -26,7 +26,7 @@ namespace StoryTeller.Engine
     {
         public void SpecStarted(SpecExecutionRequest request)
         {
-            Controller?.SendQueueState();
+            Controller?.SendQueueState(request);
         }
 
         public EngineController Controller;

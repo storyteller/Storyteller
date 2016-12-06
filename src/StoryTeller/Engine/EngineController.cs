@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using Microsoft.AspNetCore.Http.Internal;
 using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
@@ -104,7 +106,7 @@ namespace StoryTeller.Engine
             SendQueueState();
         }
 
-        public QueueState QueueState()
+        public QueueState QueueState(SpecExecutionRequest request = null)
         {
             var running = _runner.RunningState();
 
@@ -112,12 +114,19 @@ namespace StoryTeller.Engine
                 .Where(x => x.Specification.id != running.running)
                 .Select(x => x.Specification.id).ToArray();
 
+            if (request != null)
+            {
+                running.running = request.Id;
+                running.Mode = request.Mode;
+            }
+
             return running;
         }
 
-        public void SendQueueState()
+        public void SendQueueState(SpecExecutionRequest request = null)
         {
-            _observer.SendToClient(QueueState());
+            ConsoleWriter.Write(ConsoleColor.DarkCyan,"Sending the QueueState to the client");
+            _observer.SendToClient(QueueState(request));
         }
 
         public void Receive(StepthroughRequest message)

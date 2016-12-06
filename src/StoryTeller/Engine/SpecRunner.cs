@@ -19,13 +19,15 @@ namespace StoryTeller.Engine
         private readonly IExecutionMode _mode;
         private readonly ISystem _system;
         private readonly ISpecExpiration _specExpiration;
+        private readonly IExecutionObserver _observer;
         private StopConditions _stopConditions = new StopConditions();
 
-        public SpecRunner(IExecutionMode mode, ISystem system, ISpecExpiration specExpiration)
+        public SpecRunner(IExecutionMode mode, ISystem system, ISpecExpiration specExpiration, IExecutionObserver observer)
         {
             _mode = mode;
             _system = system;
             _specExpiration = specExpiration;
+            _observer = observer;
 
             Status = SpecRunnerStatus.Valid;
         }
@@ -65,6 +67,8 @@ namespace StoryTeller.Engine
                 Current = request.Mode == ExecutionMode.normal
                     ? new SpecExecution(request, _stopConditions, _mode.BuildLogger())
                     : new StepthroughExecution(request, _stopConditions, _mode.Observer());
+
+                _observer.SpecStarted(request);
 
                 results = Current.Execute(_system, timings);
             }
@@ -143,12 +147,13 @@ namespace StoryTeller.Engine
 
             var state = new QueueState
             {
-                running = Current.Request.Id
+                running = Current.Request.Id,
+                Mode = Current.Mode
             };
 
             if (Current is StepthroughExecution)
             {
-                state.stepthrough = Current
+                state.Stepthrough = Current
                     .As<StepthroughExecution>()
                     .State();
             }

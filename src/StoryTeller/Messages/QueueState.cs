@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Baseline;
+using Newtonsoft.Json;
+using StoryTeller.Engine;
 using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Results;
 
@@ -17,8 +20,11 @@ namespace StoryTeller.Messages
 
         public string[] queued = new string[0];
         public string running = null;
-        public StepthroughState stepthrough = null;
 
+        public StepthroughState Stepthrough = null;
+
+        [JsonProperty("mode")]
+        public ExecutionMode Mode = ExecutionMode.normal;
 
         public IEnumerable<string> AllSpecIds()
         {
@@ -31,6 +37,18 @@ namespace StoryTeller.Messages
                     yield return id;
                 }
             }
+        }
+
+        public void AddInitialMessages(Batch batch)
+        {
+            if (Stepthrough == null)
+            {
+                return;
+            }
+
+            batch.Add(Stepthrough.progress);
+            batch.Add(Stepthrough.next);
+            batch.AddRange(Stepthrough.results.OfType<ClientMessage>());
         }
     }
 

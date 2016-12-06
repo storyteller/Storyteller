@@ -24,7 +24,18 @@ describe('Handling queue-state', () => {
         expect(state.get('running') instanceof RunningState).to.be.true;
         expect(state.get('running').id).to.equal('embeds');
     });
+
+    it('captures running mode as normal', () => {
+        store.dispatch({type: 'queue-state', running: 'embeds', queued: ['a', 'b'], mode: 'normal'});
     
+        var state = store.getState();
+        expect(state.get('running-mode')).to.equal('normal');
+
+        store.dispatch({type: 'queue-state', running: 'embeds', queued: ['a', 'b'], mode: 'stepthrough'});
+        state = store.getState();
+        expect(state.get('running-mode')).to.equal('stepthrough');
+    });
+
     it('can replace the running state', () => {
         store.dispatch({type: 'queue-state', running: 'general1', queued: ['a', 'b']});
         store.dispatch({type: 'queue-state', running: 'embeds', queued: ['a', 'b']});

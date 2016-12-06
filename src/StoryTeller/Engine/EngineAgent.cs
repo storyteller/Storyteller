@@ -117,10 +117,11 @@ namespace StoryTeller.Engine
         private SpecificationEngine buildUserInterfaceEngine()
         {
             var observer = new UserInterfaceObserver();
-
-            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system, _specExpiration);
-
             var executionObserver = new UserInterfaceExecutionObserver();
+
+            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system, _specExpiration, executionObserver);
+
+
             var engine = new SpecificationEngine(_system, runner, executionObserver);
             _controller = new EngineController(engine, observer, runner);
 
@@ -150,7 +151,7 @@ namespace StoryTeller.Engine
             }
 
             var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode, _system, _specExpiration);
+            var runner = new SpecRunner(executionMode, _system, _specExpiration, executionObserver);
 
             var engine = new SpecificationEngine(
                 _system, runner, executionObserver);

@@ -6,6 +6,7 @@ using System.Reflection;
 using Baseline;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using StoryTeller.Messages;
 
@@ -13,6 +14,8 @@ namespace StoryTeller.Remotes.Messaging
 {
     public static class JsonSerialization
     {
+        // var converter = new StringEnumConverter();
+
         private static readonly LightweightCache<string, Type> _messageTypes = new LightweightCache<string, Type>(); 
 
         static JsonSerialization()
@@ -39,7 +42,13 @@ namespace StoryTeller.Remotes.Messaging
 
         public static string ToJson(object o, bool indentedFormatting = false)
         {
-            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            var serializer = new JsonSerializer
+            {
+                TypeNameHandling = TypeNameHandling.All,
+
+            };
+
+            serializer.Converters.Add(new StringEnumConverter());
 
             if (indentedFormatting)
             {
@@ -55,6 +64,7 @@ namespace StoryTeller.Remotes.Messaging
         public static string ToCleanJson(object o)
         {
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.None };
+            serializer.Converters.Add(new StringEnumConverter());
 
             var writer = new StringWriter();
             serializer.Serialize(writer, o);
@@ -65,6 +75,7 @@ namespace StoryTeller.Remotes.Messaging
         public static string ToIndentedJson(object o)
         {
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.None, Formatting = Formatting.Indented};
+            serializer.Converters.Add(new StringEnumConverter());
 
             var writer = new StringWriter();
             serializer.Serialize(writer, o);
@@ -81,12 +92,16 @@ namespace StoryTeller.Remotes.Messaging
         public static T Deserialize<T>(string json)
         {
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            serializer.Converters.Add(new StringEnumConverter());
+
             return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
 
         public static object DeserializeMessage(string json)
         {
             var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            serializer.Converters.Add(new StringEnumConverter());
+
             var jsonTextReader = new JsonTextReader(new StringReader(json));
 
             var messageType = TypeForJson(json);

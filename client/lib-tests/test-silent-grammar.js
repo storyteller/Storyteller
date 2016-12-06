@@ -20,14 +20,14 @@ describe('SilentGrammar', function(){
 		var grammar = new SilentGrammar({});
 		grammar.position = '3';
 
-		expect(grammar.buildResults(step, loader)).to.deep.equal([]);
+		expect(grammar.buildResults(step, loader, false)).to.deep.equal([]);
 	});
 
 	it('builds an error box if there is an error result', function(){
 		var grammar = new SilentGrammar({});
 		grammar.position = '2';
 
-		expect(grammar.buildResults(step, loader)).to.deep.equal({
+		expect(grammar.buildResults(step, loader, false)[0]).to.deep.equal({
 			type: 'errorBox',
 			props: {
 				title: 'Silent Action',

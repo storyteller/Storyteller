@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace StoryTeller.Engine.Stepthrough
 {
@@ -35,8 +36,6 @@ namespace StoryTeller.Engine.Stepthrough
 
         protected override Task executeSteps(SpecContext context, IList<ILineExecution> lines, CancellationToken token)
         {
-            ConsoleWriter.Write(ConsoleColor.Magenta, "STARTING TO RUN A SPECIFICATION IN STEPTHROUGH MODE");
-
             _steps = lines;
             Context = context;
 
@@ -149,6 +148,8 @@ namespace StoryTeller.Engine.Stepthrough
             Request.Specification.Breakpoints = breakpoints;
         }
 
+
+
         private void sendNextOrFinishedMessage()
         {
             if (Next == null)
@@ -178,7 +179,7 @@ namespace StoryTeller.Engine.Stepthrough
             {
                 next = _observer.NextStep,
                 progress = _observer.LastProgress,
-                results = Context.Results.ToArray()
+                results = Context?.Results.ToArray() ?? new IResultMessage[0]
             };
         }
     }

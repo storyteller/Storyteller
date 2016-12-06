@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Baseline;
 using StoryTeller.Files;
 using StoryTeller.Messages;
@@ -26,6 +27,12 @@ namespace ST.Client
 
         void IChangeSetHandler.Handle(ChangeSet changes)
         {
+            // File system changes are too fast in OSX world.
+            if (!Platform.IsWindows)
+            {
+                Thread.Sleep(500);
+            }
+
             _connector.SendMessageToClient(new RefreshPage());
         }
 

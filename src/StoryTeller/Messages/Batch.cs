@@ -37,5 +37,10 @@ namespace StoryTeller.Messages
         {
             _messages.Clear();
         }
+
+        public void AddRange(IEnumerable<ClientMessage> messages)
+        {
+            _messages.AddRange(messages);
+        }
     }
 }
