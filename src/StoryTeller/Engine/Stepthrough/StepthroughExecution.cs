@@ -168,7 +168,7 @@ namespace StoryTeller.Engine.Stepthrough
 
         private void sendNextStepMessage()
         {
-            _observer.SendToClient(new NextStep(Request.Id, Next));
+            _observer.SendNextStep(new NextStep(Request.Id, Next));
         }
 
     }

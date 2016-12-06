@@ -106,12 +106,13 @@ namespace StoryTeller.Engine
 
         public QueueState QueueState()
         {
-            var running = _runner.RunningSpecId();
-            return new QueueState
-            {
-                queued = _outstanding.Where(x => x.Specification.id != running).Select(x => x.Specification.id).ToArray(),
-                running = running
-            };
+            var running = _runner.RunningState();
+
+            running.queued = _outstanding
+                .Where(x => x.Specification.id != running.running)
+                .Select(x => x.Specification.id).ToArray();
+
+            return running;
         }
 
         public void SendQueueState()

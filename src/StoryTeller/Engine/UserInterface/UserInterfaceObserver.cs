@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Messages;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
@@ -37,6 +38,14 @@ namespace StoryTeller.Engine.UserInterface
             _messages.Add(message);
         }
 
+        public void SendNextStep(NextStep next)
+        {
+            NextStep = next;
+            _messages.Add(next);
+        }
+
+        public NextStep NextStep { get; private set; }
+
         public void SendToClient(object message)
         {
             _messages.Add(message);
@@ -49,8 +58,11 @@ namespace StoryTeller.Engine.UserInterface
 
         public void SendProgress(SpecProgress progress)
         {
+            LastProgress = progress;
             SendToClient(progress);
         }
+
+        public SpecProgress LastProgress { get; private set; }
 
         public void Dispose()
         {

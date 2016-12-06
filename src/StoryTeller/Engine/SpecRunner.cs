@@ -136,9 +136,16 @@ namespace StoryTeller.Engine
             return (!Current.Finished && !Current.WasCancelled);
         }
 
-        public string RunningSpecId()
+        public QueueState RunningState()
         {
-            return IsRunning() ? Current.Request.Id : null;
+            // Empty running state
+            if (Current == null) return new QueueState();
+
+            return new QueueState
+            {
+                running = Current.Request.Id,
+                stepthrough = Current.Request.Mode != ExecutionMode.normal
+            };
         }
 
         public void UseStopConditions(StopConditions conditions)

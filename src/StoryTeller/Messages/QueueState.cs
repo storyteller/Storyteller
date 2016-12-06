@@ -16,6 +16,7 @@ namespace StoryTeller.Messages
 
         public string[] queued = new string[0];
         public string running = null;
+        public bool stepthrough = false;
 
         public IEnumerable<string> AllSpecIds()
         {

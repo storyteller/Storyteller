@@ -1,4 +1,5 @@
 using System;
+using StoryTeller.Messages;
 
 namespace StoryTeller.Engine
 {
@@ -8,7 +9,9 @@ namespace StoryTeller.Engine
         void UseStopConditions(StopConditions conditions);
         void Cancel(string id = null);
         bool IsRunning();
-        string RunningSpecId();
+
+        QueueState RunningState();
+
         void MarkAsInvalid(Exception ex);
         SpecExecution Current { get; }
     }
