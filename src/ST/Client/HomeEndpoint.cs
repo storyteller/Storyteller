@@ -72,17 +72,11 @@ namespace ST.Client
             var resultJson = JsonSerialization.ToCleanJson(application.Persistence.AllCachedResults());
             document.Body.Add("div").Hide().Id("result-data").Text(resultJson);
 
-            var model = new InitialModel(application.LatestSystemRecycled,
-                new HierarchyLoaded(application.Persistence.Hierarchy.Top, application.Persistence.Results))
-            {
-                wsAddress = application.Client.WebSocketsAddress
-            };
-
-            // TODO -- put the queue state on here too!!!!!
+            var model = application.BuildInitialModel();
 
             var script = new StringWriter();
             script.WriteLine();
-            script.WriteLine("var Storyteller = {};");
+            script.WriteLine($"var Storyteller = {{wsAddress: '{application.Client.WebSocketsAddress}'}};");
             script.WriteLine();
             script.WriteLine("Storyteller.initialization = {0};",
                 JsonSerialization.ToCleanJson(model));

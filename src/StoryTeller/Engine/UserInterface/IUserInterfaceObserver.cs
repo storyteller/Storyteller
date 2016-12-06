@@ -9,6 +9,7 @@ namespace StoryTeller.Engine.UserInterface
         void SendToClient(ClientMessage message);
 
         void SendNextStep(NextStep next);
+
         SpecProgress LastProgress { get; }
         NextStep NextStep { get; }
     }

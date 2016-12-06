@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using StoryTeller.Messages;
-using StoryTeller.Model;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
@@ -94,7 +93,17 @@ namespace ST.Client
 
         public void Receive(QueueState message)
         {
+            QueueState = message;
             Client.SendMessageToClient(message);
+        }
+
+        public QueueState QueueState { get; private set; }
+
+        public Batch BuildInitialModel()
+        {
+            var hierarchyLoaded = new HierarchyLoaded(Persistence.Hierarchy.Top, Persistence.Results);
+
+            return new Batch(LatestSystemRecycled, hierarchyLoaded, QueueState ?? new QueueState());
         }
 
         public void Receive(SystemRecycled message)

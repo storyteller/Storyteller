@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Baseline;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Results;
 
 namespace StoryTeller.Messages
@@ -16,7 +17,8 @@ namespace StoryTeller.Messages
 
         public string[] queued = new string[0];
         public string running = null;
-        public bool stepthrough = false;
+        public StepthroughState stepthrough = null;
+
 
         public IEnumerable<string> AllSpecIds()
         {
@@ -30,5 +32,12 @@ namespace StoryTeller.Messages
                 }
             }
         }
+    }
+
+    public class StepthroughState
+    {
+        public NextStep next = null;
+        public SpecProgress progress = null;
+        public IResultMessage[] results = new IResultMessage[0];
     }
 }

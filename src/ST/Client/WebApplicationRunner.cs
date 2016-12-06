@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using StoryTeller;
+using StoryTeller.Messages;
 using StoryTeller.Remotes;
 
 namespace ST.Client
@@ -16,6 +17,8 @@ namespace ST.Client
         IPersistenceController Persistence { get; }
         SystemRecycled LatestSystemRecycled { get; }
         IFixtureController Fixtures { get; }
+        QueueState QueueState { get; }
+        Batch BuildInitialModel();
     }
 
     public interface IWebApplicationRunner : IDisposable

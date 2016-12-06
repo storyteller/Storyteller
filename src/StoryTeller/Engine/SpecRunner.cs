@@ -139,13 +139,21 @@ namespace StoryTeller.Engine
         public QueueState RunningState()
         {
             // Empty running state
-            if (Current == null) return new QueueState();
+            if (!IsRunning()) return new QueueState();
 
-            return new QueueState
+            var state = new QueueState
             {
-                running = Current.Request.Id,
-                stepthrough = Current.Request.Mode != ExecutionMode.normal
+                running = Current.Request.Id
             };
+
+            if (Current is StepthroughExecution)
+            {
+                state.stepthrough = Current
+                    .As<StepthroughExecution>()
+                    .State();
+            }
+
+            return state;
         }
 
         public void UseStopConditions(StopConditions conditions)

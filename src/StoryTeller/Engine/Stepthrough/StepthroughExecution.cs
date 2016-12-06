@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using StoryTeller.Engine.UserInterface;
@@ -171,5 +172,14 @@ namespace StoryTeller.Engine.Stepthrough
             _observer.SendNextStep(new NextStep(Request.Id, Next));
         }
 
+        public StepthroughState State()
+        {
+            return new StepthroughState
+            {
+                next = _observer.NextStep,
+                progress = _observer.LastProgress,
+                results = Context.Results.ToArray()
+            };
+        }
     }
 }

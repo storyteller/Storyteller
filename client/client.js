@@ -50,7 +50,7 @@ var startRouting = app(Storyteller.initialization, store => {
 });
 
 var Communicator = require('./communicator');
-var wsAddress = Storyteller.initialization.wsAddress;
+var wsAddress = Storyteller.wsAddress;
 
 var rebroadcast = m => {
     Postal.publish({

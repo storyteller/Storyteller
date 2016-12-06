@@ -10,12 +10,18 @@ namespace StoryTeller.Messages
 
         [JsonProperty("hierarchy")]
         public HierarchyLoaded Hierarchy { get; }
+
+        [JsonProperty("queue-state")]
+        public QueueState QueueState { get; }
+
+
         public string wsAddress { get; set; }
 
-        public InitialModel(SystemRecycled recycled, HierarchyLoaded hierarchy) : base("initial-model")
+        public InitialModel(SystemRecycled recycled, HierarchyLoaded hierarchy, QueueState queue) : base("initial-model")
         {
             Recycled = recycled;
             Hierarchy = hierarchy;
+            QueueState = queue;
         }
     }
 }
