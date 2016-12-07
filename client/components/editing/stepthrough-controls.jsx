@@ -47,9 +47,9 @@ module.exports = function({spec}){
 
 	return (
 		<ButtonGroup ref={focus} style={{marginRight: '30px'}}>
-            <StepthroughCommand spec={spec} action="next" title="Step into the next operation" icon="run-next"/>
-            <StepthroughCommand spec={spec} action="run" title="Run to the next breakpoint" icon="run"/>
-            <StepthroughCommand spec={spec} action="runToEnd" title="Run to the end of the specification" icon="run-to-end"/>
+            <StepthroughCommand spec={spec} action="next" title="Step into the next operation (F10)" icon="run-next"/>
+            <StepthroughCommand spec={spec} action="run" title="Run to the next breakpoint (F8)" icon="run"/>
+            <StepthroughCommand spec={spec} action="runToEnd" title="Run to the end of the specification (Shift+F10)" icon="run-to-end"/>
             <StepthroughCommand spec={spec} action="stop" title="Stop the execution" icon="stop"/>
 
 		</ButtonGroup>

@@ -60,7 +60,7 @@ function SpecProgressBar({running, progress, counts, spec, mode}){
     }
 
     return (
-      <div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
+      <div title={label} className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
         <Button
           onClick={cancel}
           className="pull-right"

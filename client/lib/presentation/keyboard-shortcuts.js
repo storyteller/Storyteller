@@ -9,10 +9,12 @@ function add(data){
 	var func = function(e, combo){
 		console.log(combo + ': ' + data.description);
 
+		var msg = data.message || {type: data.topic};
+
 		Postal.publish({
 			channel: data.channel,
 			topic: data.topic,
-			data: {}
+			data: msg
 		});
 
 		return false;
@@ -55,6 +57,36 @@ module.exports = {
 			keys: ['ctrl+shift+b'],
 			topic: "force-recycle",
 			description: "Recycle the System Under Test"
+		});
+
+		engine({
+			keys: ['f10'],
+			topic: 'stepthrough',
+			description: "Run the next step in 'stepthrough' mode",
+			message: {
+				type: 'stepthrough',
+				action: 'next'
+			}
+		});
+
+		engine({
+			keys: ['shift+f10'],
+			topic: 'stepthrough',
+			description: "Run to the end in 'stepthrough' mode",
+			message: {
+				type: 'stepthrough',
+				action: 'runToEnd'
+			}
+		});
+
+		engine({
+			keys: ['f8'],
+			topic: 'stepthrough',
+			description: "Run to the next breakpoint in 'stepthrough' mode",
+			message: {
+				type: 'stepthrough',
+				action: 'run'
+			}
 		});
 
 		explorer({
@@ -134,13 +166,6 @@ module.exports = {
 			topic: 'run-spec',
 			description: 'Execute the current specification from the specification editor'
 		});
-/*
-		editor({
-			keys: 'ctrl+shift+r',
-			topic: 'run-spec-auto',
-			description: 'Toggle the auto-run state of the current specification editor screen'
-		});
-*/
 
 		editor({
 			keys: 'ctrl+s',
