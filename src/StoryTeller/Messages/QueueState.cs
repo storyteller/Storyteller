@@ -50,8 +50,8 @@ namespace StoryTeller.Messages
 
 
             if (Stepthrough.progress != null) batch.Add(Stepthrough.progress);
-            if (Stepthrough.next != null) batch.Add(Stepthrough.next);
             batch.AddRange(Stepthrough.results.OfType<ClientMessage>());
+            if (Stepthrough.next != null) batch.Add(Stepthrough.next);
         }
     }
 

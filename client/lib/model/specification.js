@@ -39,6 +39,7 @@ function Specification(data, library){
   this.active = false;
   this.updateHeader(data);
   this.path = data.path;
+  this.nextStep = null;
 
   this.breakpoints = (data.breakpoints || []);
 
