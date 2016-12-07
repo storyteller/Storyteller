@@ -54,7 +54,6 @@ function ResultCell(props){
 
 var ResultRow = React.createClass({
 	render: function(){
-		// TODO -- this is horrible.
 		var result = this.props.step.getResult();
 		if (this.props.step.position){
 			result = this.props.step.getResult(this.props.step.position);
@@ -100,12 +99,12 @@ var ResultRow = React.createClass({
 
 		var stepthrough = null;
 		if (this.props.isStepthrough){
-			var breakpoint = (<Breakpoint {...this.props} />);
 			if (this.props.spec.isActiveStep(this.props.step.id, null)){
-				stepthrough = (<td>{breakpoint}<StepthroughControls {...this.props}/></td>);
+				stepthrough = (<td><StepthroughControls {...this.props}/></td>);
+				clazz = 'bg-primary';
 			}
 			else {
-				stepthrough = (<td>{breakpoint}</td>);
+				stepthrough = (<td><Breakpoint {...this.props} /></td>);
 			}
 		}
 

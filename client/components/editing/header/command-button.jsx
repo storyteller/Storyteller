@@ -10,10 +10,10 @@ module.exports = function({spec, channel, message, icon, id, disabled, title}){
             data = message;
         }
 
-        var channel = channel || 'editor';
+        var c = channel || 'editor';
 
         Postal.publish({
-            channel: channel,
+            channel: c,
             topic: message,
             data: data
         });

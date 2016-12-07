@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Oakton;
 using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Messages;
@@ -16,7 +14,8 @@ namespace ST.Client
         IListener<QueueState>,
         IListener<NextStep>,
         IListener<StepResult>,
-        IListener<SetVerificationResult>
+        IListener<SetVerificationResult>,
+        IListener<SpecProgress>
     {
         private readonly OpenInput _input;
         public IPersistenceController Persistence { get; private set; }
@@ -147,9 +146,9 @@ namespace ST.Client
 
         private void recordResultMessageForStepthrough(IResultMessage result)
         {
-            if (QueueState.running == result.spec && QueueState.Stepthrough != null)
+            if (QueueState.running == result.spec)
             {
-                QueueState.Stepthrough.Add(result);
+                QueueState.Stepthrough?.Add(result);
             }
         }
 
@@ -161,6 +160,14 @@ namespace ST.Client
         void IListener<SetVerificationResult>.Receive(SetVerificationResult message)
         {
             recordResultMessageForStepthrough(message);
+        }
+
+        public void Receive(SpecProgress message)
+        {
+            if (QueueState.running == message.id && QueueState.Stepthrough != null)
+            {
+                QueueState.Stepthrough.progress = message;
+            }
         }
     }
 }

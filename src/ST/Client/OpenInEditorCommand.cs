@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using StoryTeller;
 using StoryTeller.Messages;
 
 namespace ST.Client
@@ -12,7 +13,7 @@ namespace ST.Client
             var spec = app.Persistence.Hierarchy.Specifications[message.id];
             var file = spec.Filename;
 
-            Process.Start(file);
+            ProcessLauncher.OpenFile(file);
         }
     }
 }

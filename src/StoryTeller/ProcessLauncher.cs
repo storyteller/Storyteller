@@ -16,6 +16,8 @@ namespace StoryTeller
                 }
                 else
                 {
+                    Console.WriteLine("Trying to open file " + url);
+
                     Process.Start(new ProcessStartInfo
                     {
                         UseShellExecute = false,
@@ -29,6 +31,11 @@ namespace StoryTeller
                 ConsoleWriter.Write(ConsoleColor.Yellow, "Unable to launch the browser to " + url);
             }
 
+        }
+
+        public static void OpenFile(string file)
+        {
+            GotoUrl(file);
         }
     }
 }

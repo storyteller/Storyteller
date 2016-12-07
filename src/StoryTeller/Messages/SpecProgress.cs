@@ -2,7 +2,7 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Messages
 {
-    public class SpecProgress : ClientMessage, IBatchedMessage
+    public class SpecProgress : ClientMessage, IBatchedMessage, UsedByUserInterface
     {
         public string id;
         public Counts counts;
