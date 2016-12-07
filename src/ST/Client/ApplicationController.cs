@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Oakton;
 using StoryTeller.Engine.Stepthrough;
+using StoryTeller.Grammars.Sets;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
+using StoryTeller.Results;
 
 namespace ST.Client
 {
     public class ApplicationController : IApplication, IListener<SystemRecycled>,
         IListener<SystemRecycleStarted>,
         IListener<QueueState>,
-        IListener<NextStep>
+        IListener<NextStep>,
+        IListener<StepResult>,
+        IListener<SetVerificationResult>
     {
         private readonly OpenInput _input;
         public IPersistenceController Persistence { get; private set; }
@@ -138,6 +143,24 @@ namespace ST.Client
             {
                 QueueState.Stepthrough.next = message;
             }
+        }
+
+        private void recordResultMessageForStepthrough(IResultMessage result)
+        {
+            if (QueueState.running == result.spec && QueueState.Stepthrough != null)
+            {
+                QueueState.Stepthrough.Add(result);
+            }
+        }
+
+        void IListener<StepResult>.Receive(StepResult message)
+        {
+            recordResultMessageForStepthrough(message);
+        }
+
+        void IListener<SetVerificationResult>.Receive(SetVerificationResult message)
+        {
+            recordResultMessageForStepthrough(message);
         }
     }
 }

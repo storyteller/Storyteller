@@ -57,8 +57,27 @@ namespace StoryTeller.Messages
 
     public class StepthroughState
     {
+        private readonly IList<IResultMessage> _results = new List<IResultMessage>();
+
         public NextStep next = null;
         public SpecProgress progress = null;
-        public IResultMessage[] results = new IResultMessage[0];
+
+        public IResultMessage[] results
+        {
+            get { return _results.ToArray(); }
+            set
+            {
+                _results.Clear();
+                if (value != null)
+                {
+                    _results.AddRange(value);
+                }
+            }
+        }
+
+        public void Add(IResultMessage result)
+        {
+            _results.Add(result);
+        }
     }
 }

@@ -24,8 +24,7 @@ namespace StoryTeller.Engine.UserInterface
                     var passthrough = new PassthroughMessage(message);
                     EventAggregator.SendMessage(passthrough);
 
-                    // TODO -- really, really don't like this
-                    if (message is SpecExecutionCompleted)
+                    if (message is UsedByUserInterface)
                     {
                         EventAggregator.SendMessage(message);
                     }

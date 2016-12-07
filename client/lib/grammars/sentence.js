@@ -117,16 +117,22 @@ class Sentence{
 
 		var components = this.parts.map(part => part.buildResults(step, loader));
 
+		var isActive = false;
 		if (isStepthrough){
-			var breakpoint = loader.breakpoint({
-				spec: spec, 
-				id: step.id,
-				position: this.position,
-				dispatch: dispatch
-			});
+			isActive = spec.isActiveStep(step.id, this.position);
 
-			components = [breakpoint].concat(components);
+			if (!isActive){
+				var breakpoint = loader.breakpoint({
+					spec: spec, 
+					id: step.id,
+					position: this.position,
+					dispatch: dispatch
+				});
+
+				components = [breakpoint].concat(components);
+			}
 		}
+
 		
         switch (result.status){
             case 'ok':
@@ -146,23 +152,22 @@ class Sentence{
                 break;
         }
         
-
+		var status = result.status;
 
 		if (result.status == 'error'){
             components.push(loader.errorBox({error: result.error}));
 		}
 
-		if (isStepthrough){
-			var isActive = spec.isActiveStep(step.id, this.position);
-			if (isActive){
-				var stepthrough = loader.stepthroughControls({spec: spec});
-				components = [stepthrough].concat(components);
-			}
+		if (isActive){
+			var stepthrough = loader.stepthroughControls({spec: spec});
+			components = [stepthrough].concat(components);
+
+			status = 'primary';
 		}
         
 		var line = loader.line({
 			components: components, 
-			status: result.status
+			status: status
 		});
 
 		return line;

@@ -9,10 +9,10 @@ module.exports = function({spec, title, id, position, dispatch}){
 
     if (isActive){
         return (
-            <div className="stepthrough-line text-info">
-                <Breakpoint spec={spec} id={id} position={position} dispatch={dispatch}/>
-                <span>{title}</span>
+            <div style={{padding: '3px'}} className="stepthrough-line text-info bg-primary">
                 <StepthroughControls spec={spec} /> 
+                <span>{title}</span>
+                
             </div>
 
         );

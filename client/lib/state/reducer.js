@@ -69,7 +69,7 @@ function replaceRunning(state, running){
 
 function recordResult(state, action){
     var runningState = state.get('running-spec');
-    if (!runningState || runningState.id != action.id) return state;
+    if (!runningState || runningState.id != action.spec) return state;
     
     return state.update('running-spec', x => x.readResult(action));
 }

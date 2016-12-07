@@ -15,6 +15,12 @@ function getSpec(state, ownProps){
   const spec = state.get('specs').get(id);
 
   const running = state.get('running');
+  if (running && running.id == id){
+    return {spec: state.get('running-spec'), running: true};
+  }
+  else if (spec.last_result){
+    return {spec: spec.forResults(), running: false}
+  }
 
   return {spec: spec, running: running};
 }

@@ -8,7 +8,7 @@ class RunningSpec extends Immutable.Record({spec: null, list: [], version: 0})
     constructor(data, library){
         var spec = new Specification(data, library);
         
-        super({spec: spec});
+        super({spec: spec, version: 0});
         
         
     }
@@ -89,6 +89,13 @@ class RunningSpec extends Immutable.Record({spec: null, list: [], version: 0})
     
     hasResults(){
         return this.list.length > 0;
+    }
+
+    acceptChange(func){
+        var version = this.get('version') + 1;
+        func(this.spec);
+        
+        return this.set('version', version)
     }
     
 }

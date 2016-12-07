@@ -29,7 +29,12 @@ export function AlterBreakpoints(state, action){
             return state;
     }
 
-    return state.updateIn(['specs', action.spec], r => r.acceptChange(func));
+    state = state.updateIn(['specs', action.spec], r => r.acceptChange(func));
+
+    var runningState = state.get('running-spec');
+    if (!runningState || runningState.id != action.spec) return state;
+
+    return state = state.updateIn(['running-spec'], r => r.acceptChange(func));
 }
 
 export function SendBreakpoints(state, action){
@@ -49,15 +54,17 @@ export function SendBreakpoints(state, action){
 }
 
 export function NextStep(state, action){
+    var runningState = state.get('running-spec');
+    if (!runningState || runningState.id != action.spec) return state;
+
+
     if (!state.get('specs').has(action.spec)){
         console.log('Unknown specification ' + action.spec);
         return;
     }
 
-    var spec = state.get('specs').get(action.spec);
-
     var breakpoint = {id: action.id, position: action.position};
     var change = r => r.acceptChange(s => s.nextStep = breakpoint);
 
-    return state.updateIn(['specs', action.spec], change);
+    return state.updateIn(['running-spec'], change);
 }

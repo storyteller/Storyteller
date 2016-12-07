@@ -28,6 +28,7 @@ function StepthroughCommand({spec, title, action, icon}){
     return (
         <Button
             title={title}
+            bsSize="small"
             onClick={onclick}><Icon /></Button>
 
     );

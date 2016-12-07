@@ -54,14 +54,13 @@ function SpecProgressBar({running, progress, counts, spec, mode}){
         e.preventDefault();
     }
 
-    var modeTitle = null;
+    var label = 'Running ' + spec.title;
     if (mode != 'normal'){
-        modeTitle = (<b>Stepping through: </b>);
+        label = "Stepping through: " + spec.title;
     }
 
     return (
       <div className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
-        {modeTitle}
         <Button
           onClick={cancel}
           className="pull-right"
@@ -70,7 +69,7 @@ function SpecProgressBar({running, progress, counts, spec, mode}){
             Cancel Execution
         </Button>
         <ProgressBar
-            label={'Running ' + spec.title}
+            label={label}
             bsStyle={bsStyle}
             min={0}
             max={progress.total}
