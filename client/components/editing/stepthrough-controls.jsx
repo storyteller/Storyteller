@@ -1,4 +1,5 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var Postal = require('postal');
 var {Button} = require('react-bootstrap');
 var {ButtonGroup} = require('react-bootstrap');
@@ -34,9 +35,18 @@ function StepthroughCommand({spec, title, action, icon}){
     );
 }
 
+
 module.exports = function({spec}){
+    var focus = elem => {
+        if (!elem){
+            return;
+        }
+
+        ReactDOM.findDOMNode(elem).scrollIntoView({block: 'end', behavior: 'smooth'});
+    };
+
 	return (
-		<ButtonGroup style={{marginRight: '30px'}}>
+		<ButtonGroup ref={focus} style={{marginRight: '30px'}}>
             <StepthroughCommand spec={spec} action="next" title="Step into the next operation" icon="run-next"/>
             <StepthroughCommand spec={spec} action="run" title="Run to the next breakpoint" icon="run"/>
             <StepthroughCommand spec={spec} action="runToEnd" title="Run to the end of the specification" icon="run-to-end"/>
