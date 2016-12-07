@@ -41,6 +41,7 @@ namespace StoryTeller.Engine.UserInterface
         public void SendNextStep(NextStep next)
         {
             NextStep = next;
+            EventAggregator.SendMessage(next);
             _messages.Add(next);
         }
 

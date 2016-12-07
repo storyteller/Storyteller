@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Oakton;
+using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
@@ -9,7 +10,8 @@ namespace ST.Client
 {
     public class ApplicationController : IApplication, IListener<SystemRecycled>,
         IListener<SystemRecycleStarted>,
-        IListener<QueueState>
+        IListener<QueueState>,
+        IListener<NextStep>
     {
         private readonly OpenInput _input;
         public IPersistenceController Persistence { get; private set; }
@@ -128,6 +130,14 @@ namespace ST.Client
         public void Receive(SystemRecycleStarted message)
         {
             Client.SendMessageToClient(message);
+        }
+
+        public void Receive(NextStep message)
+        {
+            if (QueueState.Stepthrough != null)
+            {
+                QueueState.Stepthrough.next = message;
+            }
         }
     }
 }

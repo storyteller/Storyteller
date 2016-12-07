@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NSubstitute;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Engine.UserInterface;
@@ -63,7 +64,7 @@ namespace StoryTeller.Testing.Engine.Stepthrough
 
             request.CreatePlan(TestingContext.Library);
 
-            Execution = new StepthroughExecution(request, new StopConditions(), this);
+            Execution = new StepthroughExecution(request, new StopConditions(), this, Substitute.For<IExecutionObserver>());
         }
 
         public void Start(ExecutionMode mode)

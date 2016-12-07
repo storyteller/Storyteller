@@ -13,15 +13,17 @@ namespace StoryTeller.Engine.Stepthrough
     public class StepthroughExecution : SpecExecution, IStepthroughExecution
     {
         private readonly IUserInterfaceObserver _observer;
+        private readonly IExecutionObserver _executionObserver;
         private int _position = -1;
         private IList<ILineExecution> _steps;
 
         private readonly TaskCompletionSource<bool> _completion = new TaskCompletionSource<bool>();
         private readonly TaskCompletionSource<bool> _hasStarted = new TaskCompletionSource<bool>();
 
-        public StepthroughExecution(SpecExecutionRequest request, StopConditions stopConditions, IUserInterfaceObserver observer) : base(request, stopConditions, new InstrumentedLogger(observer))
+        public StepthroughExecution(SpecExecutionRequest request, StopConditions stopConditions, IUserInterfaceObserver observer, IExecutionObserver executionObserver) : base(request, stopConditions, new InstrumentedLogger(observer))
         {
             _observer = observer;
+            _executionObserver = executionObserver;
         }
 
         protected override Task setupTimeout()
@@ -40,6 +42,8 @@ namespace StoryTeller.Engine.Stepthrough
             Context = context;
 
             _observer.SendProgress(new SpecProgress(Context.Specification.id, Context.Counts, 0, _steps.Count));
+
+            _executionObserver.SpecStarted(Request);
 
             if (Request.Mode == ExecutionMode.stepthrough)
             {

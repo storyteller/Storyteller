@@ -66,7 +66,7 @@ namespace StoryTeller.Engine
             {
                 Current = request.Mode == ExecutionMode.normal
                     ? new SpecExecution(request, _stopConditions, _mode.BuildLogger())
-                    : new StepthroughExecution(request, _stopConditions, _mode.Observer());
+                    : new StepthroughExecution(request, _stopConditions, _mode.Observer(), _observer);
 
                 _observer.SpecStarted(request);
 

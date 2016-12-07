@@ -41,10 +41,13 @@ namespace StoryTeller.Messages
 
         public void AddInitialMessages(Batch batch)
         {
+            batch.Add(this);
+
             if (Stepthrough == null)
             {
                 return;
             }
+
 
             if (Stepthrough.progress != null) batch.Add(Stepthrough.progress);
             if (Stepthrough.next != null) batch.Add(Stepthrough.next);
