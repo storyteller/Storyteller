@@ -1,7 +1,7 @@
 {
   "profiles": {
     "Open Samples": {
-      "commandName": "Project",
+      "executablePath": "C:\\code\\storyteller\\src\\ST\\bin\\Debug\\net46\\win7-x64\\dotnet-st.exe",
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
@@ -35,16 +35,16 @@
       "commandLineArgs": "convert src/Storyteller.Gallery",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Validate Samples":{
+    "Validate Samples": {
       "commandName": "Project",
       "commandLineArgs": "run src/Storyteller.Samples --validate",
       "workingDirectory": "C:\\code\\storyteller"
-	},
-	"Validate Specifications":{
+    },
+    "Validate Specifications": {
       "commandName": "Project",
       "commandLineArgs": "run src/Specifications --validate",
       "workingDirectory": "C:\\code\\storyteller"
-	},	
+    },
     "ST": {
       "commandName": "Project"
     }

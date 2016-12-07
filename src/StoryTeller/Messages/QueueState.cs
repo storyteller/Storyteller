@@ -46,8 +46,8 @@ namespace StoryTeller.Messages
                 return;
             }
 
-            batch.Add(Stepthrough.progress);
-            batch.Add(Stepthrough.next);
+            if (Stepthrough.progress != null) batch.Add(Stepthrough.progress);
+            if (Stepthrough.next != null) batch.Add(Stepthrough.next);
             batch.AddRange(Stepthrough.results.OfType<ClientMessage>());
         }
     }

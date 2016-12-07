@@ -1,4 +1,5 @@
 using NSubstitute;
+using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using ST.Client;
 
@@ -17,5 +18,10 @@ namespace StoryTeller.Testing.ST
 
         public SystemRecycled LatestSystemRecycled { get; set; }
         public IFixtureController Fixtures { get; } = Substitute.For<IFixtureController>();
+        public QueueState QueueState { get; }
+        public Batch BuildInitialModel()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

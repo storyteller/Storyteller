@@ -162,9 +162,9 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void enqueues_each_spec()
         {
-            ClassUnderTest.Received().RunSpec("a", specA);
-            ClassUnderTest.Received().RunSpec("b", specB);
-            ClassUnderTest.Received().RunSpec("c", specC);
+            ClassUnderTest.Received().RunSpec("a", specA, ExecutionMode.normal);
+            ClassUnderTest.Received().RunSpec("b", specB, ExecutionMode.normal);
+            ClassUnderTest.Received().RunSpec("c", specC, ExecutionMode.normal);
         }
 
         [Fact]
@@ -259,11 +259,13 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void couple_specs_queued_nothing_running()
         {
-            ClassUnderTest.RunSpec("sentence1", new Specification {id = "sentence1"});
-            ClassUnderTest.RunSpec("sentence2", new Specification {id = "sentence2"});
-            ClassUnderTest.RunSpec("sentence3", new Specification {id = "sentence3"});
+            ClassUnderTest.RunSpec("sentence1", new Specification {id = "sentence1"}, ExecutionMode.normal);
+            ClassUnderTest.RunSpec("sentence2", new Specification {id = "sentence2"}, ExecutionMode.normal);
+            ClassUnderTest.RunSpec("sentence3", new Specification {id = "sentence3"}, ExecutionMode.normal);
 
-            MockFor<ISpecRunner>().RunningSpecId().ReturnsNull();
+
+
+            MockFor<ISpecRunner>().RunningState().Returns(new QueueState());
 
             var state = ClassUnderTest.QueueState();
             state.queued.ShouldHaveTheSameElementsAs("sentence1", "sentence2", "sentence3");
@@ -282,11 +284,15 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void specs_queued_and_one_running()
         {
-            ClassUnderTest.RunSpec("sentence1", new Specification {id = "sentence1"});
-            ClassUnderTest.RunSpec("sentence2", new Specification {id = "sentence2"});
-            ClassUnderTest.RunSpec("sentence3", new Specification {id = "sentence3"});
+            ClassUnderTest.RunSpec("sentence1", new Specification {id = "sentence1"}, ExecutionMode.normal);
+            ClassUnderTest.RunSpec("sentence2", new Specification {id = "sentence2"}, ExecutionMode.normal);
+            ClassUnderTest.RunSpec("sentence3", new Specification {id = "sentence3"}, ExecutionMode.normal);
 
-            MockFor<ISpecRunner>().RunningSpecId().Returns("sentence1");
+            MockFor<ISpecRunner>().RunningState().Returns(new QueueState
+            {
+                running = "sentence1"
+            });
+
 
             var state = ClassUnderTest.QueueState();
             state.queued.ShouldHaveTheSameElementsAs("sentence2", "sentence3");

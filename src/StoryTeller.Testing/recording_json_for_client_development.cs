@@ -71,11 +71,6 @@ namespace StoryTeller.Testing
 
                 var hierarchyLoaded = new HierarchyLoaded(hierarchy, cache);
 
-                var initialization = new InitialModel(controller.LatestSystemRecycled, hierarchyLoaded)
-                {
-                    wsAddress = "ws://localhost:" + 8200
-                };
-
                 writeResponse(response.Result);
                 //writeInitialization(initialization);
             }
@@ -90,14 +85,6 @@ namespace StoryTeller.Testing
             new FileSystem().WriteStringToFile(path, "module.exports = " + json);
         }
 
-        private static void writeInitialization(InitialModel initialization)
-        {
-            var json = JsonSerialization.ToIndentedJson(initialization);
-
-            var path = TestingContext.FindClientFolder().AppendPath("initialization.js");
-
-            new FileSystem().WriteStringToFile(path, "module.exports = " + json);
-        }
 
         //[Fact]
         public void write_the_table5_spec()

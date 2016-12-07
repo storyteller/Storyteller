@@ -33,8 +33,6 @@ namespace StoryTeller.Engine
 
                 _warmup.Wait(30.Seconds());
 
-                // TODO -- right here, need to send the SpecStarted inside of the execution!
-                observer.SpecStarted(request);
                 var results = _runner.Execute(request, _executionQueue);
 
                 if (!request.IsCancelled && (results != null))

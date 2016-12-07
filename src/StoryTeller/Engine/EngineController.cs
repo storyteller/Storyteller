@@ -123,10 +123,19 @@ namespace StoryTeller.Engine
             return running;
         }
 
+        private readonly object _locker = new object();
+
         public void SendQueueState(SpecExecutionRequest request = null)
         {
-            ConsoleWriter.Write(ConsoleColor.DarkCyan,"Sending the QueueState to the client");
-            _observer.SendToClient(QueueState(request));
+            lock (_locker)
+            {
+                ConsoleWriter.Write(ConsoleColor.DarkCyan,"Sending the QueueState to the client");
+
+                var state = QueueState(request);
+
+                EventAggregator.SendMessage(state);
+                //_observer.SendToClient(state);
+            }
         }
 
         public void Receive(StepthroughRequest message)

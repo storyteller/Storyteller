@@ -78,6 +78,12 @@ namespace StoryTeller.Testing.Engine.Stepthrough
             Execution.HasStarted.Wait();
         }
 
-        public Task Finished { get; set; } 
+        public Task Finished { get; set; }
+        public void SendNextStep(NextStep next)
+        {
+            NextStep = next;
+        }
+
+        public NextStep NextStep { get; private set; }
     }
 }
