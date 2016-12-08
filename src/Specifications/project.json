@@ -5,8 +5,7 @@
     "emitEntryPoint": true
   },
   "dependencies": {
-    "StoryTeller": { "target": "project" },
-    "StorytellerDocGen": {"target": "project"}
+    "StoryTeller": { "target": "project" }
   },
   "frameworks": {
     "net46": {
