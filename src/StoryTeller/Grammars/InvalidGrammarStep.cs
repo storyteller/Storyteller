@@ -7,23 +7,17 @@ namespace StoryTeller.Grammars
     {
         private readonly StepValues _values;
 
-        public InvalidGrammarStep(StepValues values, string message) : base(values)
+        public InvalidGrammarStep(StepValues values, string message) : base(values, StepthroughStyle.Over)
         {
             _values = values;
             Message = message;
+            Position = null;
         }
 
-        public string Message { get; private set; }
+        public string Message { get; }
 
-        public object Position
-        {
-            get { return null; }
-        }
 
-        public override string Subject
-        {
-            get { return "Missing"; }
-        }
+        public override string Subject => "Missing";
 
         protected override StepResult execute(ISpecContext context)
         {
@@ -59,7 +53,7 @@ namespace StoryTeller.Grammars
 
         public override string ToString()
         {
-            return string.Format("Invalid Grammar on Step: {0}, Message: {1}", _values.id, Message);
+            return $"Invalid Grammar on Step: {_values.id}, Message: {Message}";
         }
     }
 }

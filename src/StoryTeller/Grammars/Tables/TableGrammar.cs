@@ -32,7 +32,7 @@ namespace StoryTeller.Grammars.Tables
             }
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new CompositeExecution(toExecutionSteps(library, step));
         }
@@ -106,7 +106,7 @@ namespace StoryTeller.Grammars.Tables
 
             foreach (Step row in section.Children.OfType<Step>())
             {
-                yield return _inner.CreatePlan(row, library);
+                yield return _inner.CreatePlan(row, library, true);
             }
 
             if (_after != null) yield return new SilentAction("Grammar", Stage.after, _after, section)

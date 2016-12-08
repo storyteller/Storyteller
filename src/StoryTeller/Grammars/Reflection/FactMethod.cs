@@ -27,7 +27,7 @@ namespace StoryTeller.Grammars.Reflection
             };
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new FactPlan(new StepValues(step.id), this);
         }

@@ -13,7 +13,7 @@ namespace StoryTeller.Grammars.Importing
             _inner = inner;
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             var innerPlan = _inner.CreatePlan(step, library);
             return new ImportedExecutionStep(_innerFixture, innerPlan);

@@ -4,7 +4,7 @@ namespace StoryTeller
 {
     public interface IGrammar
     {
-        IExecutionStep CreatePlan(Step step, FixtureLibrary library);
+        IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false);
 
         GrammarModel Compile(Fixture fixture, CellHandling cells);
 

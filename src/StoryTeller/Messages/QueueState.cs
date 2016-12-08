@@ -12,7 +12,7 @@ namespace StoryTeller.Messages
 #if NET46
     [Serializable]
 #endif
-    public class QueueState : ClientMessage, IBatchedMessage
+    public class QueueState : ClientMessage, IBatchedMessage, UsedByUserInterface
     {
         public QueueState() : base("queue-state")
         {

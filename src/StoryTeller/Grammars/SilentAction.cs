@@ -8,10 +8,6 @@ namespace StoryTeller.Grammars
 {
     public class SilentAction : ILineExecution
     {
-        private readonly string _type;
-        private readonly Action<ISpecContext> _action;
-        private readonly Node _node;
-
         public static SilentAction AsCritical(string type, object position, Action<ISpecContext> action, Node node)
         {
             Action<ISpecContext> wrapped = c =>
@@ -45,23 +41,23 @@ namespace StoryTeller.Grammars
             }
 
             Position = position;
-            _type = type;
-            _action = action;
-            _node = node;
+            this.type = type;
+            Action = action;
+            Node = node;
             Subject = position.ToString();
         }
 
         public string Subject { get; set; }
 
-        public string type => _type;
+        public string type { get; }
 
-        public Action<ISpecContext> Action => _action;
+        public Action<ISpecContext> Action { get; }
 
-        public Node Node => _node;
+        public Node Node { get; }
 
         public object Position { get; set; }
 
-        public string Id => _node.id;
+        public string Id => Node.id;
 
         public int Count()
         {
@@ -76,19 +72,21 @@ namespace StoryTeller.Grammars
 
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject(_type, Subject))
+            using (context.Timings.Subject(type, Subject))
 
             try
             {
-                _action(context);
+                Action(context);
                 context.LogResult(new StepResult(Id, ResultStatus.ok) {position = Position});
             }
             catch (Exception ex)
             {
-                context.LogException(_node.id,
+                context.LogException(Node.id,
                     ex,
                     Position);
             }
         }
+
+        public StepthroughStyle Stepthrough { get; set; } = StepthroughStyle.Into;
     }
 }

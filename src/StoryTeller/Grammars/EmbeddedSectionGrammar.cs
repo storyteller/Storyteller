@@ -39,7 +39,7 @@ namespace StoryTeller.Grammars
             return this;
         } 
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new CompositeExecution(determineSteps(step, library).ToArray());
         }

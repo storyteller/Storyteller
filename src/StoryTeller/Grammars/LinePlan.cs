@@ -8,7 +8,7 @@ namespace StoryTeller.Grammars
     {
         private readonly ILineGrammar _grammar;
 
-        public LineStep(StepValues values, ILineGrammar grammar) : base(values)
+        public LineStep(StepValues values, ILineGrammar grammar) : base(values, StepthroughStyle.Into)
         {
             _grammar = grammar;
         }
@@ -25,9 +25,6 @@ namespace StoryTeller.Grammars
             return result;
         }
 
-        public override string Subject
-        {
-            get { return _grammar.Key; }
-        }
+        public override string Subject => _grammar.Key;
     }
 }

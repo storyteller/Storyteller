@@ -110,15 +110,15 @@ namespace StoryTeller.Engine
         {
             var running = _runner.RunningState();
 
-            running.queued = _outstanding
-                .Where(x => x.Specification.id != running.running)
-                .Select(x => x.Specification.id).ToArray();
-
             if (request != null)
             {
                 running.running = request.Id;
                 running.Mode = request.Mode;
             }
+
+            running.queued = _outstanding
+                .Where(x => x.Specification.id != running.running)
+                .Select(x => x.Specification.id).ToArray();
 
             return running;
         }
@@ -133,8 +133,7 @@ namespace StoryTeller.Engine
 
                 var state = QueueState(request);
 
-                EventAggregator.SendMessage(state);
-                //_observer.SendToClient(state);
+                _observer.SendToClient(state);
             }
         }
 

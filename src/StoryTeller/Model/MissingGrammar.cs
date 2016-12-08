@@ -6,7 +6,6 @@ namespace StoryTeller.Model
 {
     public class MissingGrammar : GrammarModel, IGrammar, IModelWithCells
     {
-        private readonly string _key;
         private readonly string _message;
 
         public MissingGrammar(string key) : base("missing")
@@ -15,7 +14,7 @@ namespace StoryTeller.Model
             AddError(new GrammarError {error = _message});
         }
 
-        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)
+        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new InvalidGrammarStep(new StepValues(step.id), _message);
         }
@@ -25,13 +24,9 @@ namespace StoryTeller.Model
             return this;
         }
 
-        public Cell[] cells
-        {
-            get { return new Cell[0]; }
-        }
+        public Cell[] cells => new Cell[0];
 
         public string Key { get; set; }
-        public bool IsHidden { get; set; }
         public override string TitleOrFormat()
         {
             return "MISSING";

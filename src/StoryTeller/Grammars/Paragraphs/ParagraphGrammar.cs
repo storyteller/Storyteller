@@ -17,14 +17,18 @@ namespace StoryTeller.Grammars.Paragraphs
             _title = title;
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
+
+
             var children = Children.Select(x => x.CreatePlan(step, library)).ToArray();
             for (int i = 0; i < children.Length; i++)
             {
                 if (children[i] is ILineExecution)
                 {
-                    children[i].As<ILineExecution>().Position = i;
+                    var line = children[i].As<ILineExecution>();
+                    line.Position = i;
+                    line.Stepthrough = (inTable && i != 0) ? StepthroughStyle.Over : StepthroughStyle.Into;
                 }
             }
 
@@ -80,6 +84,7 @@ namespace StoryTeller.Grammars.Paragraphs
         }
 
         public bool IsHidden { get; set; }
+
     }
 
 

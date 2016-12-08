@@ -25,7 +25,7 @@ namespace StoryTeller.Grammars.Importing
             _defaults = Step.ParseValues(defaults);
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             _defaults.Each(pair => step.Values[pair.Key] = pair.Value);
             return _inner.CreatePlan(step, library);

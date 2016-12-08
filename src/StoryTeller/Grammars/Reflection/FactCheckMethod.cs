@@ -28,7 +28,7 @@ namespace StoryTeller.Grammars.Reflection
             _invocation = new MethodInvocation(method, target);
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             var stepValues = _invocation.InputCells().ToStepValues(step);
             return new FactCheckPlan(stepValues, this);
@@ -48,10 +48,7 @@ namespace StoryTeller.Grammars.Reflection
         public bool IsHidden { get; set; }
 
 
-        public MethodInvocation Invocation
-        {
-            get { return _invocation; }
-        }
+        public MethodInvocation Invocation => _invocation;
 
 
         public class FactCheckPlan : LineStepBase
@@ -59,7 +56,7 @@ namespace StoryTeller.Grammars.Reflection
             private readonly FactCheckMethod _grammar;
 
             public FactCheckPlan(StepValues values, FactCheckMethod grammar)
-                : base(values)
+                : base(values, StepthroughStyle.Into)
             {
                 _grammar = grammar;
             }
@@ -70,10 +67,7 @@ namespace StoryTeller.Grammars.Reflection
                 return new StepResult(Values.id, test ? ResultStatus.success : ResultStatus.failed);
             }
 
-            public override string Subject
-            {
-                get { return _grammar.Key; }
-            }
+            public override string Subject => _grammar.Key;
         }
     }
 }

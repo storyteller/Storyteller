@@ -1,3 +1,5 @@
+using StoryTeller.Grammars.Paragraphs;
+
 namespace StoryTeller.Grammars.Tables
 {
     public static class GrammarExtensions

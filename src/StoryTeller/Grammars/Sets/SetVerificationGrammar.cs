@@ -21,7 +21,7 @@ namespace StoryTeller.Grammars.Sets
             _ordered = false;
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             var section = step
                 .Collections[_leafName];

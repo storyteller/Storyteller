@@ -68,8 +68,10 @@ namespace StoryTeller.Testing.Engine
         public void records_the_fixture_setup_and_teardown()
         {
             var records = theResults.Performance.Where(x => x.Type == "Fixture");
-            records.Select(x => x.Subject)
-                .ShouldHaveTheSameElementsAs("Sentence:SetUp", "Sentence:TearDown");
+            var subjects = records.Select(x => x.Subject).ToList();
+
+            subjects[0].ShouldBe("Sentence:SetUp");
+            subjects[1].ShouldBe("Sentence:TearDown");
         }
     }
 

@@ -33,7 +33,7 @@ namespace StoryTeller.Grammars.Decisions
         {
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return _inner.CreatePlan(step, library);
         }

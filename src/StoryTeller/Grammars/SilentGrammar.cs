@@ -6,17 +6,16 @@ namespace StoryTeller.Grammars
     public class SilentGrammar : IGrammar
     {
         private readonly Action<ISpecContext> _action;
-        private readonly object _position;
 
         public SilentGrammar(object position, Action<ISpecContext> action)
         {
-            _position = position;
+            Position = position;
             _action = action;
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
-            return new SilentAction("Grammar", _position, _action, step)
+            return new SilentAction("Grammar", Position, _action, step)
             {
                 Subject = Key
             };
@@ -27,10 +26,7 @@ namespace StoryTeller.Grammars
             return Silent.Flyweight;
         }
 
-        public object Position
-        {
-            get { return _position; }
-        }
+        public object Position { get; }
 
         public string Key { get; set; }
         public bool IsHidden { get; set; }

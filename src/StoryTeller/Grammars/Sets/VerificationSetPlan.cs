@@ -84,5 +84,7 @@ namespace StoryTeller.Grammars.Sets
 
             return result;
         }
+
+        public StepthroughStyle Stepthrough { get; set; } = StepthroughStyle.Into;
     }
 }

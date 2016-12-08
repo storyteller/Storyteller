@@ -224,7 +224,7 @@ namespace StoryTeller.Testing
 
     public class StubGrammar : IGrammar
     {
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             throw new NotImplementedException();
         }

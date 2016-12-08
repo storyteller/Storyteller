@@ -18,6 +18,8 @@ namespace StoryTeller.Testing.Engine.Stepthrough
     {
         public readonly IList<ClientMessage> ClientMessages = new List<ClientMessage>();
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
+
+
         public Specification Specification { get; private set; }
 
         public StepthroughExecution Execution { get; set; }
@@ -83,6 +85,7 @@ namespace StoryTeller.Testing.Engine.Stepthrough
         public void SendNextStep(NextStep next)
         {
             NextStep = next;
+            ClientMessages.Add(next);
         }
 
         public NextStep NextStep { get; private set; }

@@ -23,7 +23,7 @@ namespace StoryTeller.Model
         private readonly IList<GrammarError> _errors = new List<GrammarError>();
 
         [JsonIgnore]
-        public bool IsHidden;
+        public bool IsHidden { get; set; }
 
         public GrammarError[] errors
         {

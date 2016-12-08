@@ -22,8 +22,17 @@ namespace StoryTeller.Testing.Grammars
             var context = SpecContext.ForTesting();
             action.Execute(context);
 
-            ShouldBeTestExtensions.ShouldBe(wasCalled, true);
+            wasCalled.ShouldBe(true);
 
+        }
+
+        [Fact]
+        public void default_stepthrough_is_into()
+        {
+            var section = new Section("Math") { id = "4" };
+            var action = new SilentAction("Fixture", Stage.setup, x => {}, section);
+
+            action.Stepthrough.ShouldBe(StepthroughStyle.Into);
         }
 
         [Fact]

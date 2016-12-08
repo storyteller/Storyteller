@@ -18,7 +18,7 @@ namespace StoryTeller.Grammars
 
         public string Key { get; set; }
 
-        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library)
+        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new FactPlan(new StepValues(step.id), this);
         }
@@ -50,15 +50,12 @@ namespace StoryTeller.Grammars
     {
         private readonly IFactGrammar _grammar;
 
-        public FactPlan(StepValues values, IFactGrammar grammar) : base(values)
+        public FactPlan(StepValues values, IFactGrammar grammar) : base(values, StepthroughStyle.Into)
         {
             _grammar = grammar;
         }
 
-        public override string Subject
-        {
-            get { return _grammar.Key; }
-        }
+        public override string Subject => _grammar.Key;
 
         protected override StepResult execute(ISpecContext context)
         {

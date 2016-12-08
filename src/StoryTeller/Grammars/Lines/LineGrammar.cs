@@ -10,7 +10,7 @@ namespace StoryTeller.Grammars.Lines
     {
         protected Cell[] _cells;
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             var stepValues = _cells.ToStepValues(step);
 

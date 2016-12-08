@@ -1,4 +1,6 @@
-﻿using Shouldly;
+﻿using NSubstitute;
+using Shouldly;
+using StoryTeller.Conversion;
 using StoryTeller.Grammars;
 using StoryTeller.Model;
 using Xunit;
@@ -18,6 +20,14 @@ namespace StoryTeller.Testing.Grammars
 
             sentence.fact.ShouldBeTrue();
 
+        }
+
+        [Fact]
+        public void FactPlan_is_step_into()
+        {
+            var plan = new FactPlan(new StepValues("something"), Substitute.For<IFactGrammar>());
+
+            plan.Stepthrough.ShouldBe(StepthroughStyle.Into);
         }
     }
 }

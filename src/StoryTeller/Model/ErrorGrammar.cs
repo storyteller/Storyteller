@@ -16,7 +16,7 @@ namespace StoryTeller.Model
             AddError(new GrammarError{error = error});
         }
 
-        public IExecutionStep CreatePlan(Step step, FixtureLibrary library)
+        public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new InvalidGrammarStep(new StepValues(step.id), _message);
         }
@@ -27,7 +27,6 @@ namespace StoryTeller.Model
         }
 
         public string Key { get; set; }
-        public bool IsHidden { get; set; }
         public override string TitleOrFormat()
         {
             return "ERROR";

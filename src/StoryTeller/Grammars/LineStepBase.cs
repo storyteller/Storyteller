@@ -9,12 +9,14 @@ namespace StoryTeller.Grammars
     public abstract class LineStepBase : ILineExecution
     {
         public StepValues Values { get; }
+        public StepthroughStyle Stepthrough { get; set; }
 
         public string Id => Values.id;
 
-        protected LineStepBase(StepValues values)
+        protected LineStepBase(StepValues values, StepthroughStyle stepthrough)
         {
             Values = values;
+            Stepthrough = stepthrough;
         }
 
         protected abstract StepResult execute(ISpecContext context);
@@ -52,10 +54,7 @@ namespace StoryTeller.Grammars
 
 
 
-        public virtual string Type
-        {
-            get { return "Grammar"; }
-        }
+        public virtual string Type => "Grammar";
 
         public abstract string Subject { get; }
 

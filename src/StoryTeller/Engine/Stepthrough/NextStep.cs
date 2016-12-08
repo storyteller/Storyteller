@@ -2,7 +2,7 @@
 
 namespace StoryTeller.Engine.Stepthrough
 {
-    public class NextStep : ClientMessage
+    public class NextStep : ClientMessage, UsedByUserInterface
     {
         public string id;
         public object position;
