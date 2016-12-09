@@ -51,7 +51,7 @@ namespace ST.Client
         public static string FindRootFolder()
         {
             var path = AppContext.BaseDirectory;
-            while (!path.EndsWith("ST"))
+            while (!path.EndsWith("dotnet-storyteller"))
             {
                 path = path.ParentDirectory();
             }

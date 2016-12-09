@@ -7,7 +7,7 @@ module.exports = {
     "topics": ['./client/topics']
   },
   output: {
-    path: __dirname + '/src/ST',
+    path: __dirname + '/src/dotnet-storyteller',
     filename: "[name].js",
     publicPath: '/client/public/javascript/',
     pathinfo: true

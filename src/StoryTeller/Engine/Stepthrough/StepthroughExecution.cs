@@ -93,6 +93,11 @@ namespace StoryTeller.Engine.Stepthrough
                 executeCurrentStep();
                 sendNextStepMessage();
             }
+
+            if (Current != null && Current.Stepthrough == StepthroughStyle.Over)
+            {
+                RunNext();
+            }
         }
 
         private void finish()
@@ -132,8 +137,6 @@ namespace StoryTeller.Engine.Stepthrough
                 {
                     sendNextOrFinishedMessage();
                 }
-
-
 
                 return;
             }

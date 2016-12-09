@@ -19,7 +19,6 @@ namespace StoryTeller.Remotes
         private readonly Socket _listener;
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
         private Task _receiveLoop;
-        private bool _owner;
 
         private Socket _sender;
 
@@ -44,8 +43,6 @@ namespace StoryTeller.Remotes
             }
 
             startReceiving(owner);
-
-            _owner = owner;
         }
 
         public void startReceiving(bool owner)

@@ -1,7 +1,7 @@
 {
   "profiles": {
     "Open Samples": {
-      "executablePath": "C:\\code\\storyteller\\src\\ST\\bin\\Debug\\net46\\win7-x64\\dotnet-st.exe",
+      "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
@@ -46,6 +46,9 @@
       "workingDirectory": "C:\\code\\storyteller"
     },
     "ST": {
+      "commandName": "Project"
+    },
+    "dotnet-storyteller": {
       "commandName": "Project"
     }
   }
