@@ -26,6 +26,7 @@ namespace StoryTeller.Testing.Engine.Stepthrough
 
 
 
+
         [Fact]
         public void can_gather_up_the_lines()
         {
@@ -92,6 +93,35 @@ namespace StoryTeller.Testing.Engine.Stepthrough
             Start(ExecutionMode.stepthrough);
 
             Execution.RunToEnd();
+
+            Finished.Wait(3.Seconds());
+
+            LastProgress.total.ShouldBe(7);
+
+            TheFinalResults.ShouldNotBeNull();
+            TheFinalResults.Results.Length.ShouldBe(7);
+
+            Execution.Next.ShouldBeNull();
+        }
+
+        [Fact]
+        public void run_the_last_step_and_it_finishes()
+        {
+            Start(ExecutionMode.stepthrough);
+
+            // There are a grand total of 7 "steps" to this spec
+
+
+            Execution.RunNext(); // #1
+            Execution.RunNext(); // #2
+            Execution.RunNext(); // #3
+            Execution.RunNext(); // #4
+            Execution.RunNext(); // #5
+            Execution.RunNext(); // #6
+
+            // Next execution should trigger this to finish
+
+            Execution.RunNext();
 
             Finished.Wait(3.Seconds());
 

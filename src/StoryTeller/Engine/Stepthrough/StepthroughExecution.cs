@@ -87,11 +87,18 @@ namespace StoryTeller.Engine.Stepthrough
             if (Current == null)
             {
                 finish();
+                return;
             }
             else
             {
                 executeCurrentStep();
                 sendNextStepMessage();
+            }
+
+            if (_position == _steps.Count - 1)
+            {
+                finish();
+                return;
             }
 
             if (Current != null && Current.Stepthrough == StepthroughStyle.Over)
@@ -171,13 +178,19 @@ namespace StoryTeller.Engine.Stepthrough
 
         private bool isAtBreakpoint()
         {
-            var matchesBreakpoint = Request.Specification.MatchesBreakpoint(Next.Id, Next.Position);
-            return matchesBreakpoint;
+            if (Next == null) return false;
+
+            return Request.Specification.MatchesBreakpoint(Next.Id, Next.Position);
         }
 
         private void sendNextStepMessage()
         {
-            _observer.SendNextStep(new NextStep(Request.Id, Next));
+            var next = Next;
+
+            if (next != null)
+            {
+                _observer.SendNextStep(new NextStep(Request.Id, next));
+            }
         }
 
         public StepthroughState State()

@@ -49,7 +49,7 @@ npm-debug.log
 test/bundle.js
 
 client/smoke-tests/bundle.js
-src/ST/*.js
+src/dotnet-storyteller/*.js
 results
 .vimrc
 

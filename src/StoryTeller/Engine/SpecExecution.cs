@@ -96,9 +96,12 @@ namespace StoryTeller.Engine
 
                     Logger.Starting(lines);
 
-                    var stepRunning = executeSteps(context, lines, Request.Cancellation);
+                    if (lines.Any())
+                    {
+                        var stepRunning = executeSteps(context, lines, Request.Cancellation);
 
-                    Task.WaitAny(stepRunning, _timeout);
+                        Task.WaitAny(stepRunning, _timeout);
+                    }
 
                     execution.AfterExecution(context);
 
