@@ -25,7 +25,7 @@
       "../CommonAssemblyInfo.cs"
     ],
     "embed": [ "../ST/topics.js", "Runner/WebsocketsRefresh.txt" ],
-    "outputName": "StorytellerDocGen"
+    "outputName": "dotnet-stdocs"
   },
 
   "dependencies": {
@@ -37,7 +37,7 @@
     "Microsoft.AspNetCore.WebSockets.Server": "0.1.0",
     "HtmlTags.AspNetCore": "4.1.0",
     "Baseline": "1.1.0",
-    "StructureMap": "4.4.0",
+    "StructureMap": "4.4.2",
     "StoryTeller": { "target": "project" },
     "System.AppContext": "4.1.0"
   },

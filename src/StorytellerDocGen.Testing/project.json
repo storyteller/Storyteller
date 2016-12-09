@@ -10,7 +10,8 @@
     "System.Runtime.Serialization.Primitives": "4.1.1",
     "xunit": "2.2.0-beta3-build3402",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
-    "Shouldly": "2.8.2"
+    "Shouldly": "2.8.2",
+    "dotnet-stdocs": {"target": "project" }
   },
   "testRunner": "xunit",
   "frameworks": {

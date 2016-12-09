@@ -5,7 +5,8 @@
     "emitEntryPoint": true
   },
   "dependencies": {
-    "StoryTeller": { "target": "project" }
+    "StoryTeller": { "target": "project" },
+    "dotnet-stdocs": { "target": "project" }
   },
   "frameworks": {
     "net46": {
