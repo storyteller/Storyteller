@@ -16,7 +16,11 @@ namespace StoryTeller.Testing.Engine
     {
         public when_receiving_a_run_spec_message_with_only_the_id()
         {
+            MockFor<ISpecRunner>().RunningState().Returns(new QueueState());
+
             receiveRunSpec("embeds");
+
+            
         }
 
         [Fact]
@@ -229,6 +233,7 @@ namespace StoryTeller.Testing.Engine
             theOutstandingRequests = ClassUnderTest.OutstandingRequests();
             theOutstandingRequests.Count().ShouldBe(4);
 
+
             ClassUnderTest.Receive(new CancelAllSpecs());
         }
 
@@ -278,7 +283,7 @@ namespace StoryTeller.Testing.Engine
         {
             var state = ClassUnderTest.QueueState();
             state.queued.Length.ShouldBe(0);
-            state.running.ShouldBeEmpty();
+            state.running.ShouldBeNull();
         }
 
         [Fact]
@@ -303,6 +308,11 @@ namespace StoryTeller.Testing.Engine
 
     public abstract class EngineControllerContext : InteractionContext<EngineController>
     {
+        protected EngineControllerContext()
+        {
+            MockFor<ISpecRunner>().RunningState().Returns(new QueueState());
+        }
+
         protected void receiveRunSpec(string id)
         {
             var spec = TestingContext.FindSpecification(id);
