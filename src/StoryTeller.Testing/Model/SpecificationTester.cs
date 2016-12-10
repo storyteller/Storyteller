@@ -4,6 +4,7 @@ using System.Linq;
 using Shouldly;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
+using StoryTeller.Results;
 using Xunit;
 
 namespace StoryTeller.Testing.Model
@@ -107,6 +108,23 @@ namespace StoryTeller.Testing.Model
             specification.MatchesBreakpoint("2", 1).ShouldBeFalse();
             specification.MatchesBreakpoint("2", 0).ShouldBeTrue();
             specification.MatchesBreakpoint("1", null).ShouldBeTrue();
+        }
+
+        [Fact]
+        public void matches_breakpoint_with_stages()
+        {
+            var breakpoint1 = new Breakpoint("1", Stage.after);
+            var breakpoint2 = new Breakpoint("2", Stage.before);
+
+            var specification = new Specification();
+
+            specification.SetBreakpoint(breakpoint1);
+            specification.SetBreakpoint(breakpoint2);
+
+            specification.MatchesBreakpoint("1", "after").ShouldBeTrue();
+            specification.MatchesBreakpoint("1", "before").ShouldBeFalse();
+            specification.MatchesBreakpoint("2", "before").ShouldBeTrue();
+            specification.MatchesBreakpoint("2", "after").ShouldBeFalse();
         }
 
 

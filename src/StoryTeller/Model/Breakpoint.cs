@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace StoryTeller.Model
 {
     public class Breakpoint
@@ -51,6 +53,11 @@ namespace StoryTeller.Model
             if (this.id != id) return false;
 
             if (this.position == null) return position == null;
+
+            if (position is string)
+            {
+                return this.position?.ToString() == (string)position;
+            }
 
             return this.position.Equals(position);
         }

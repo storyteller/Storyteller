@@ -248,6 +248,7 @@ describe('Table Grammar', function(){
 				cells: table.cells,
 				step: child1,
 				spec: spec,
+				position: null,
 				dispatch: dispatch,
 				isStepthrough: isStepthrough
 			}
@@ -260,6 +261,7 @@ describe('Table Grammar', function(){
 				cells: table.cells,
 				step: child2,
 				spec: spec,
+				position: null,
 				dispatch: dispatch,
 				isStepthrough: isStepthrough
 			}
@@ -271,6 +273,7 @@ describe('Table Grammar', function(){
 				cells: table.cells,
 				step: child3,
 				spec: spec,
+				position: null,
 				dispatch: dispatch,
 				isStepthrough: isStepthrough
 			}
