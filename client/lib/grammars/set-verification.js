@@ -30,7 +30,7 @@ function SetVerification(metadata){
 
 	}
 
-	table.buildResults = function(step, loader){
+	table.buildResults = function(step, loader, isStepthrough, dispatch, spec){
 		var cells = this.cells;
 		var self = this;
 		var section = this.readSection(step);
@@ -56,7 +56,17 @@ function SetVerification(metadata){
 			return loader.extraRow({ordered: table.ordered, data: extra, cells: cells});
 		}));
 
-		return loader.setResultsTable({ordered: this.ordered, section: section, cells: cells, title: this.title, rows: rows});
+		return loader.setResultsTable({
+			ordered: this.ordered, 
+			section: section, 
+			cells: cells, 
+			title: this.title, 
+			rows: rows,
+			isStepthrough: isStepthrough,
+			dispatch: dispatch,
+			spec: spec,
+			step: step
+		});
 	}
 
 	return table;

@@ -129,8 +129,6 @@ namespace StoryTeller.Engine
         {
             lock (_locker)
             {
-                ConsoleWriter.Write(ConsoleColor.DarkCyan,"Sending the QueueState to the client");
-
                 var state = QueueState(request);
 
                 _observer.SendToClient(state);

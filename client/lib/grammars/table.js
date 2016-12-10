@@ -15,6 +15,8 @@ class Table extends CompositeGrammar{
 		var self = this;
 
 		this.type = 'table';
+		this.hasBeforeStep = metadata.hasBeforeStep;
+		this.hasAfterStep = metadata.hasAfterStep;
 
 		self.findActiveCells = function(step){
 			var section = null;
@@ -197,7 +199,7 @@ class Table extends CompositeGrammar{
 		section.steps.forEach(step => {
 			var result = step.getResult();
 
-			rows.push(loader.row({step: step, cells: cells, spec: spec, dispatch: dispatch, isStepthrough: isStepthrough})); 
+			rows.push(loader.row({step: step, cells: cells, spec: spec, dispatch: dispatch, isStepthrough: isStepthrough, position: null})); 
 
 			if (result.status == 'error'){
 				rows.push(loader.errorRow({width: cells.length, error: result.error}));
@@ -207,31 +209,10 @@ class Table extends CompositeGrammar{
 		var table = null;
 
 		if (isStepthrough){
-			table = loader.stepthroughTable({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough});
+			table = loader.stepthroughTable({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough, hasBeforeStep: this.hasBeforeStep, hasAfterStep: this.hasAfterStep, spec: spec, dispatch: dispatch});
 		}
 		else {
 			table = loader.table({cells: cells, title: this.title, rows: rows, section: section, isStepthrough: isStepthrough});
-		}
-
-	
-		if (isStepthrough){
-			var beforeLine = loader.breakpointLine({
-				spec: spec,
-				dispatch: dispatch,
-				id : this.id,
-				position: 'before',
-				title: 'Action before the table'
-			});
-
-			var afterLine = loader.breakpointLine({
-				spec: spec,
-				dispatch: dispatch,
-				id : this.id,
-				position: 'after',
-				title: 'Action after the table'
-			});
-
-			return loader.div([beforeLine, table, afterLine]);
 		}
 
 		return table;

@@ -104,7 +104,15 @@ var ResultRow = React.createClass({
 				clazz = 'bg-primary';
 			}
 			else {
-				stepthrough = (<td><Breakpoint {...this.props} /></td>);
+				stepthrough = (
+					<td>
+						<Breakpoint 
+							spec={this.props.spec} 
+							id={this.props.step.id}
+							position={null}
+							dispatch={this.props.dispatch}
+							/>
+					</td>);
 			}
 		}
 

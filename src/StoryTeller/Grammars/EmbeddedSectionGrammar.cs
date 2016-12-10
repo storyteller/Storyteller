@@ -75,6 +75,8 @@ namespace StoryTeller.Grammars
                 fixture = _fixture.Compile(cells),
                 collection = _leafName,
                 title = Title,
+                hasAfterStep = _after != null,
+                hasBeforeStep = _before != null
             };
         }
 

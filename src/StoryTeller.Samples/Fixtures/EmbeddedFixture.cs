@@ -10,7 +10,9 @@ namespace StoryTeller.Samples.Fixtures
         public EmbeddedFixture()
         {
             this["EmbeddedMath"] =
-                Embed<MathFixture>("Do some Math").Before(c => { if (_throw) throw new NotImplementedException(); });
+                Embed<MathFixture>("Do some Math")
+                    .Before(c => { if (_throw) throw new NotImplementedException(); })
+                    .After(c => {}); // just to test the UI
         }
 
         public override void SetUp()

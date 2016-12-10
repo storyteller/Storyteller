@@ -19,7 +19,7 @@ module.exports = function({spec, title, id, position, dispatch}){
     }
     else {
         return (
-            <div className="stepthrough-line">
+            <div className="stepthrough-line alert alert-info" style={{margin: '0px'}}>
                 <Breakpoint spec={spec} id={id} position={position} dispatch={dispatch}/>
                 <span>{title}</span>
             </div>

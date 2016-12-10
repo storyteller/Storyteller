@@ -14,11 +14,25 @@ namespace StoryTeller.Samples.Fixtures
             this["decisions"] = new Decisions();
         }
 
-        [ExposeAsTable("Adding numbers together", "sum")]
+        //[ExposeAsTable("Adding numbers together", "sum")]
         [return: AliasAs("sum")]
-        public int Sum(int x, int y)
+        public int SumInternal(int x, int y)
         {
             return x + y;
+        }
+
+        public IGrammar Sum()
+        {
+            return this["SumInternal"].AsTable("Adding numbers together")
+                .Before(c =>
+                {
+                    Console.WriteLine("I ran SumInternal before");
+                })
+                .After(c =>
+                {
+                    Console.WriteLine("I ran SumInternal after");
+                })
+                .LeafName("sum");
         }
 
         public IGrammar Divide()

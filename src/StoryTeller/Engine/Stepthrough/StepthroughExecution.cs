@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Baseline;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -159,6 +160,7 @@ namespace StoryTeller.Engine.Stepthrough
 
         public void SetBreakpoints(Breakpoint[] breakpoints)
         {
+            ConsoleWriter.Write(ConsoleColor.Magenta, $"Server breakpoints: {breakpoints.Select(x => x.ToString()).Join(", ")}");
             Request.Specification.Breakpoints = breakpoints;
         }
 
@@ -189,6 +191,7 @@ namespace StoryTeller.Engine.Stepthrough
 
             if (next != null)
             {
+                ConsoleWriter.Write(ConsoleColor.Cyan, $"Sending next step to {next.Id}, position {next.Position}");
                 _observer.SendNextStep(new NextStep(Request.Id, next));
             }
         }

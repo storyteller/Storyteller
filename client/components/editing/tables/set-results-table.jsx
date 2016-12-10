@@ -1,6 +1,6 @@
 var React = require("react");
 var HeaderRow = require('./header-row');
-
+var BreakpointLine = require('./../breakpoint-line');
 
 var SetResultsTable = React.createClass({
 	render: function(){
@@ -12,6 +12,20 @@ var SetResultsTable = React.createClass({
 			e.preventDefault();
 		}
 
+		var id = this.props.section.id;
+		var breakpointLine = null;
+		if (this.props.isStepthrough){
+			breakpointLine = (
+				<tr><td colSpan={tableWidth} style={{padding: '0px', margin: '0px'}}>
+					<BreakpointLine 
+						{...this.props}
+						id={id}
+						position={null}
+						title="Execute and Verify this Set"
+					/>
+				</td></tr>
+			);
+		}
 
 		var headerCells = [{header: ''}].concat(this.props.cells);
 
@@ -22,6 +36,7 @@ var SetResultsTable = React.createClass({
 					<HeaderRow cells={headerCells} hideActions={true}/>
 				</thead>
 				<tbody>
+					{breakpointLine}
 					{this.props.rows}
 				</tbody>
 			</table>

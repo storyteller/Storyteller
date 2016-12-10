@@ -50,7 +50,9 @@ namespace StoryTeller.Grammars.Tables
             {
                 cells = innerModel.cells.ToArray(),
                 collection = _leafName,
-                title = Title
+                title = Title,
+                hasBeforeStep = _before != null,
+                hasAfterStep = _after != null
             };
         }
 

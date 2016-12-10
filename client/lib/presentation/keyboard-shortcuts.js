@@ -59,36 +59,6 @@ module.exports = {
 			description: "Recycle the System Under Test"
 		});
 
-		engine({
-			keys: ['f10'],
-			topic: 'stepthrough',
-			description: "Run the next step in 'stepthrough' mode",
-			message: {
-				type: 'stepthrough',
-				action: 'next'
-			}
-		});
-
-		engine({
-			keys: ['shift+f10'],
-			topic: 'stepthrough',
-			description: "Run to the end in 'stepthrough' mode",
-			message: {
-				type: 'stepthrough',
-				action: 'runToEnd'
-			}
-		});
-
-		engine({
-			keys: ['f8'],
-			topic: 'stepthrough',
-			description: "Run to the next breakpoint in 'stepthrough' mode",
-			message: {
-				type: 'stepthrough',
-				action: 'run'
-			}
-		});
-
 		explorer({
 			keys: ['ctrl+n', 'ctrl+shift+f'],
 			topic: 'find',

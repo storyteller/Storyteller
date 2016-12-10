@@ -1,4 +1,3 @@
-using System.Linq;
 using Baseline;
 
 namespace StoryTeller.Model
@@ -8,6 +7,8 @@ namespace StoryTeller.Model
         public FixtureModel fixture;
         public string title;
         public string collection;
+        public bool hasBeforeStep;
+        public bool hasAfterStep;
 
         public EmbeddedSection() : base("embedded-section")
         {
@@ -35,7 +36,9 @@ namespace StoryTeller.Model
                 key = key,
                 title = title,
                 collection = collection,
-                fixture = (FixtureModel) fixture.ApplyOverrides(@override.fixture)
+                fixture = (FixtureModel) fixture.ApplyOverrides(@override.fixture),
+                hasBeforeStep = hasBeforeStep,
+                hasAfterStep = hasAfterStep
                 
             };
 

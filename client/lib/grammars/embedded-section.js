@@ -8,6 +8,8 @@ class EmbeddedSection extends CompositeGrammar{
 		super(metadata);
 
 		this.type = 'embedded-section';
+		this.hasBeforeStep = metadata.hasBeforeStep;
+		this.hasAfterStep = metadata.hasAfterStep;
 
 		this.fixture = new Fixture(metadata.fixture);
 		if (!this.title)
@@ -50,23 +52,30 @@ class EmbeddedSection extends CompositeGrammar{
 		var sectionResults = section.buildResults(loader.chromed(), isStepthrough, dispatch, spec);
 	
 		if (isStepthrough){
-			var beforeLine = loader.breakpointLine({
-				spec: spec,
-				dispatch: dispatch,
-				id : this.id,
-				position: 'before',
-				title: 'Action before the embedded section'
-			});
+			var children = [];
+			if (this.hasBeforeStep){
+				children.push(loader.breakpointLine({
+					spec: spec,
+					dispatch: dispatch,
+					id : section.id,
+					position: 'before',
+					title: 'Action before the following embedded section'
+				}));
+			}
 
-			var afterLine = loader.breakpointLine({
-				spec: spec,
-				dispatch: dispatch,
-				id : this.id,
-				position: 'after',
-				title: 'Action after the embedded section'
-			});
+			children.push(sectionResults);
 
-			return loader.div([beforeLine, sectionResults, afterLine]);
+			if (this.hasAfterStep){
+				children.push(loader.breakpointLine({
+					spec: spec,
+					dispatch: dispatch,
+					id : section.id,
+					position: 'after',
+					title: 'Action after the embedded section directly above'
+				}))
+			}
+
+			return loader.div(children);
 		}
 
 		return sectionResults;

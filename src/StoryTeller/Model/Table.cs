@@ -12,7 +12,10 @@ namespace StoryTeller.Model
         public Cell[] cells;
         public string collection = DefaultCollectionName;
         public string title;
-        
+
+        public bool hasBeforeStep;
+        public bool hasAfterStep;
+
 
         public Table() : base("table")
         {
@@ -59,8 +62,7 @@ namespace StoryTeller.Model
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
-            var table = new Table();
-            table.key = key;
+            var table = new Table {key = key, hasAfterStep = hasAfterStep, hasBeforeStep = hasBeforeStep};
 
             var over = grammar as Table;
             if (over == null)
