@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
+
 namespace StoryTeller
 {
+    [Obsolete("Didn't end up working anyway")]
     public enum StepthroughStyle
     {
         Into,

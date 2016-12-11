@@ -54,12 +54,7 @@ namespace StoryTeller.Model
 
             if (this.position == null) return position == null;
 
-            if (position is string)
-            {
-                return this.position?.ToString() == (string)position;
-            }
-
-            return this.position.Equals(position);
+            return this.position.ToString().Equals(position?.ToString());
         }
     }
 }

@@ -68,7 +68,7 @@ namespace StoryTeller.Testing.Engine.Stepthrough
             next.ShouldNotBeNull();
 
             next.id.ShouldBe("0");
-            next.position.ShouldBe(Stage.setup);
+            next.position.ShouldBe(Stage.setup.ToString());
         }
 
         [Fact]

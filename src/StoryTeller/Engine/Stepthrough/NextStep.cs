@@ -5,13 +5,13 @@ namespace StoryTeller.Engine.Stepthrough
     public class NextStep : ClientMessage, UsedByUserInterface
     {
         public string id;
-        public object position;
+        public string position;
         public string spec;
 
         public NextStep(string spec, ILineExecution next) : this()
         {
             id = next.Id;
-            position = next.Position;
+            position = next.Position?.ToString();
             this.spec = spec;
         }
 

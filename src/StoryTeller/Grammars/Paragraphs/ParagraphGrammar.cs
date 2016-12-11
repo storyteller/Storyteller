@@ -19,17 +19,11 @@ namespace StoryTeller.Grammars.Paragraphs
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
-
-
             var children = Children.Select(x => x.CreatePlan(step, library)).ToArray();
-            for (int i = 0; i < children.Length; i++)
+
+            if (inTable && children.All(x => x is ILineExecution))
             {
-                if (children[i] is ILineExecution)
-                {
-                    var line = children[i].As<ILineExecution>();
-                    line.Position = i;
-                    line.Stepthrough = (inTable && i != 0) ? StepthroughStyle.Over : StepthroughStyle.Into;
-                }
+                return new AggregateLineExecution(children.OfType<ILineExecution>());
             }
 
             return new CompositeExecution(children);
