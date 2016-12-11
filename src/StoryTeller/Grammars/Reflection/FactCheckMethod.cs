@@ -56,7 +56,7 @@ namespace StoryTeller.Grammars.Reflection
             private readonly FactCheckMethod _grammar;
 
             public FactCheckPlan(StepValues values, FactCheckMethod grammar)
-                : base(values, StepthroughStyle.Into)
+                : base(values)
             {
                 _grammar = grammar;
             }

@@ -41,6 +41,5 @@ namespace StoryTeller
 
         public object Position { get; set; } = null;
         public string Id { get; }
-        public StepthroughStyle Stepthrough { get; set; } = StepthroughStyle.Into;
     }
 }

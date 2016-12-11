@@ -7,7 +7,7 @@ namespace StoryTeller.Grammars
     {
         private readonly StepValues _values;
 
-        public InvalidGrammarStep(StepValues values, string message) : base(values, StepthroughStyle.Over)
+        public InvalidGrammarStep(StepValues values, string message) : base(values)
         {
             _values = values;
             Message = message;

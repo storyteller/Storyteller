@@ -22,12 +22,5 @@ namespace StoryTeller.Testing.Grammars
 
         }
 
-        [Fact]
-        public void FactPlan_is_step_into()
-        {
-            var plan = new FactPlan(new StepValues("something"), Substitute.For<IFactGrammar>());
-
-            plan.Stepthrough.ShouldBe(StepthroughStyle.Into);
-        }
     }
 }

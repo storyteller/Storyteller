@@ -9,14 +9,12 @@ namespace StoryTeller.Grammars
     public abstract class LineStepBase : ILineExecution
     {
         public StepValues Values { get; }
-        public StepthroughStyle Stepthrough { get; set; }
 
         public string Id => Values.id;
 
-        protected LineStepBase(StepValues values, StepthroughStyle stepthrough)
+        protected LineStepBase(StepValues values)
         {
             Values = values;
-            Stepthrough = stepthrough;
         }
 
         protected abstract StepResult execute(ISpecContext context);

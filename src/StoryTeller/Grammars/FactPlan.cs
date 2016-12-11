@@ -50,7 +50,7 @@ namespace StoryTeller.Grammars
     {
         private readonly IFactGrammar _grammar;
 
-        public FactPlan(StepValues values, IFactGrammar grammar) : base(values, StepthroughStyle.Into)
+        public FactPlan(StepValues values, IFactGrammar grammar) : base(values)
         {
             _grammar = grammar;
         }

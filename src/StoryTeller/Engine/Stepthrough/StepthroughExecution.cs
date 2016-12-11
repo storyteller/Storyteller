@@ -101,11 +101,6 @@ namespace StoryTeller.Engine.Stepthrough
                 finish();
                 return;
             }
-
-            if (Current != null && Current.Stepthrough == StepthroughStyle.Over)
-            {
-                RunNext();
-            }
         }
 
         private void finish()

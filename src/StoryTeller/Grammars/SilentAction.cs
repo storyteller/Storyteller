@@ -86,7 +86,5 @@ namespace StoryTeller.Grammars
                     Position);
             }
         }
-
-        public StepthroughStyle Stepthrough { get; set; } = StepthroughStyle.Into;
     }
 }

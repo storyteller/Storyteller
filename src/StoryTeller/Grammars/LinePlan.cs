@@ -8,7 +8,7 @@ namespace StoryTeller.Grammars
     {
         private readonly ILineGrammar _grammar;
 
-        public LineStep(StepValues values, ILineGrammar grammar) : base(values, StepthroughStyle.Into)
+        public LineStep(StepValues values, ILineGrammar grammar) : base(values)
         {
             _grammar = grammar;
         }
