@@ -3,7 +3,7 @@
     public class CancelAllSpecs : ClientMessage
     {
         public CancelAllSpecs()
-            : base("cancel-all-Specifications")
+            : base("cancel-all-specs")
         {
         }
 
