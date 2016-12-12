@@ -37,7 +37,15 @@ function StepthroughCommand({action, spec, icon, title, message}){
     );
 }
 
-
+function scrollIntoViewIfNeeded(target) {
+    var rect = target.getBoundingClientRect();
+    if (rect.bottom > window.innerHeight) {
+        target.scrollIntoView(true);
+    }
+    if (rect.top < 0) {
+        target.scrollIntoView(true);
+    } 
+}
 
 module.exports = function({spec}){
     var focus = elem => {
@@ -45,7 +53,9 @@ module.exports = function({spec}){
             return;
         }
 
-        ReactDOM.findDOMNode(elem).scrollIntoView({block: 'end', behavior: 'smooth'});
+        var div = ReactDOM.findDOMNode(elem);
+
+        scrollIntoViewIfNeeded(div);
     };
 
 	return (
