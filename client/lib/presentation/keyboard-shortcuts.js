@@ -138,6 +138,12 @@ module.exports = {
 		});
 
 		editor({
+			keys: ['ctrl+shift+s'],
+			topic: 'stepthrough-spec',
+			description: 'Stepthrough the current specification from the specification editor'
+		});
+
+		editor({
 			keys: 'ctrl+s',
 			topic: 'save-spec',
 			description: 'Save the current specification'

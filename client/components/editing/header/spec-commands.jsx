@@ -6,28 +6,28 @@ function SpecCommands({spec}){
 	return (
 		<ButtonGroup style={{marginRight: '30px'}}>
 			<CommandButton
-				title="Run the specification"
+				title="Run the specification (ctrl+shift+p)"
 				spec={spec}
 				icon="run"
 				message="run-spec"
 				disabled={false} />
 
 			<CommandButton
-				title="Stepthrough the specification"
+				title="Stepthrough the specification (ctrl+shift+s)"
 				spec={spec}
 				icon="run-stepthrough"
 				message="stepthrough-spec"
 				disabled={false} />
 
 			<CommandButton
-				title="Save outstanding changes to the spec"
+				title="Save outstanding changes to the spec (ctrl+s)"
 				spec={spec}
 				icon="save"
 				message="save-spec"
 				disabled={!spec.isDirty()}/>
 
 			<CommandButton
-				title="Undo the last change"
+				title="Undo the last change (ctrl-z)"
 				spec={spec}
 				id='undo'
 				icon="undo"
@@ -35,7 +35,7 @@ function SpecCommands({spec}){
 				disabled={!spec.isDirty()} />
 
 			<CommandButton
-				title="Redo the previous change"
+				title="Redo the previous change (ctrl-y)"
 				spec={spec}
 				id='redo'
 				icon="redo"

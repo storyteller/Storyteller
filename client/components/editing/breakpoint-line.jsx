@@ -7,23 +7,25 @@ module.exports = function({spec, title, id, position, dispatch}){
 
     var isActive = spec.isActiveStep(id, position);
 
+    var clazz = null;
+    var control = null;
+
     if (isActive){
-        return (
-            <div style={{padding: '3px'}} className="stepthrough-line text-info bg-primary">
-                <StepthroughControls spec={spec} /> 
-                <span>{title}</span>
-                
-            </div>
+        clazz = 'alert stepthrough-line bg-primary';
 
-        );
+        control = (<StepthroughControls spec={spec} /> );
     }
-    else {
-        return (
-            <div className="stepthrough-line alert alert-info" style={{margin: '0px'}}>
-                <Breakpoint spec={spec} id={id} position={position} dispatch={dispatch}/>
-                <span>{title}</span>
-            </div>
+    else{
+        clazz = 'alert stepthrough-line bg-info';
 
-        )
+        control = (<Breakpoint spec={spec} id={id} position={position} dispatch={dispatch}/>);
     }
+
+    return (
+        <div className={clazz} style={{margin: '0px'}}>
+            {control}
+            <span>{title}</span>
+        </div>
+
+    );
 }

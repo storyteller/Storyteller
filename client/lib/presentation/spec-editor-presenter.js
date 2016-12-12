@@ -80,7 +80,7 @@ subscribe('go-results', gotoResults);
 subscribe('run-spec', x => {
     applyOutstandingChanges();
     var record = store.getState().get('specs').get(spec);
-    
+
     var message = {
         type: 'run-spec',
         id: spec,
@@ -94,6 +94,7 @@ subscribe('run-spec', x => {
 });
 
 subscribe('stepthrough-spec', x => {
+    console.log("I AM DOING STEPTHROUGH SPEC")
     applyOutstandingChanges();
     var record = store.getState().get('specs').get(spec);
     

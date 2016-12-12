@@ -9,7 +9,7 @@ var LinkButton = React.createClass({
       e.stopPropagation();
     }
 
-    return (<Button onClick={onclick} active={this.props.active}>{this.props.text}</Button>);
+    return (<Button title={this.props.title} onClick={onclick} active={this.props.active}>{this.props.text}</Button>);
   }
 });
 
@@ -24,9 +24,9 @@ var SpecLinks = React.createClass({
 
     return (
       <ButtonGroup>
-        <LinkButton href={'#/spec/preview/' + this.props.id} text="Preview" active={this.props.mode === 'preview'} />
-        <LinkButton href={'#/spec/editing/' + this.props.id} text="Editor" active={this.props.mode === 'editing'} />
-        <LinkButton href={'#/spec/results/' + this.props.id} text="Results" active={this.props.mode === 'results'} />
+        <LinkButton title="Read only view of the current spec (ctrl+1)" href={'#/spec/preview/' + this.props.id} text="Preview" active={this.props.mode === 'preview'} />
+        <LinkButton title="Edit the current spec (ctrl+2)" href={'#/spec/editing/' + this.props.id} text="Editor" active={this.props.mode === 'editing'} />
+        <LinkButton title="Review the latest results (ctrl+3)" href={'#/spec/results/' + this.props.id} text="Results" active={this.props.mode === 'results'} />
       </ButtonGroup>
     );
   }
