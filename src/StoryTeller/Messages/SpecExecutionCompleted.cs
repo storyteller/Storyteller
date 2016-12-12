@@ -5,7 +5,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Messages
 {
-    public class SpecExecutionCompleted : ClientMessage
+    public class SpecExecutionCompleted : ClientMessage, UsedByUserInterface
     {
 
         [JsonProperty("id")]
@@ -37,7 +37,7 @@ namespace StoryTeller.Messages
         [JsonProperty("time")]
         public string Time { get; set; }
 
-        [JsonProperty]
+        [JsonProperty("mode")]
         public ExecutionMode Mode { get; set; }
 
         protected bool Equals(SpecExecutionCompleted other)
