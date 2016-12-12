@@ -34,7 +34,7 @@ function SpecHeader(props){
                     <SpecCommands spec={props.spec}/>
                     {stepthrough}
                     <span className="pull-right">
-                        <SpecLinks id={props.spec.id} mode={props.mode} />
+                        <SpecLinks id={props.spec.id} mode={props.mode} spec={props.spec} />
 
                         <LifecycleButton spec={props.spec} />
                     </span>

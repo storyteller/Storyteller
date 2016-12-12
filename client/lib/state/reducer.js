@@ -262,6 +262,12 @@ function Batched(state, action){
     if (action.type == 'alter-breakpoints'){
         SendBreakpoints(state, action);
     }
+
+    if (action.type == 'spec-execution-completed' && action.mode != 'normal'){
+        window.location = '#/spec/results/' + action.id;
+    }
+
+
     return state;
 }
 

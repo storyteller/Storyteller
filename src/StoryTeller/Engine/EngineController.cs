@@ -69,7 +69,10 @@ namespace StoryTeller.Engine
 
             _outstanding.Remove(outstanding);
 
-            _observer.SendToClient(new SpecExecutionCompleted(specification.id, results, specification));
+            _observer.SendToClient(new SpecExecutionCompleted(specification.id, results, specification)
+            {
+                Mode = outstanding.Mode
+            });
 
             SendQueueState();
         }

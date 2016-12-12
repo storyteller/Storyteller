@@ -55,9 +55,22 @@ function SpecProgressBar({running, progress, counts, spec, mode}){
     }
 
     var label = 'Running ' + spec.title;
+    var cancelMessage = 'Cancel Execution';
+    var navigate = () => {
+        window.location = '#/spec/results/' + spec.id;
+    }
+
     if (mode != 'normal'){
         label = "Stepping through: " + spec.title;
+        cancelMessage = 'Cancel Stepthrough';
+        navigate = () => {
+            window.location = '#/spec/stepthrough/' + spec.id;
+        }
     }
+
+
+
+
 
     return (
       <div title={label} className="well status-bar" style={{margin: '10px', padding: '5px'}} id="spec-progress-bar">
@@ -65,9 +78,18 @@ function SpecProgressBar({running, progress, counts, spec, mode}){
           onClick={cancel}
           className="pull-right"
           bsStyle="link"
-          style={{marginLeft: '10px', marginRight: '10px', height: '25px'}}>
-            Cancel Execution
+          style={{marginRight: '10px', height: '25px'}}>
+            {cancelMessage}
         </Button>
+        <Button
+          onClick={navigate}
+          className="pull-right"
+          bsStyle="link"
+          style={{marginLeft: '10px', height: '25px'}}>
+            Open Spec
+        </Button>
+
+
         <ProgressBar
             label={label}
             bsStyle={bsStyle}

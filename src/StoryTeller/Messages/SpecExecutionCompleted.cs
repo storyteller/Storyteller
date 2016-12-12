@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using StoryTeller.Engine;
 using StoryTeller.Model;
 
 namespace StoryTeller.Messages
@@ -35,6 +36,9 @@ namespace StoryTeller.Messages
 
         [JsonProperty("time")]
         public string Time { get; set; }
+
+        [JsonProperty]
+        public ExecutionMode Mode { get; set; }
 
         protected bool Equals(SpecExecutionCompleted other)
         {
