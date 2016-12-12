@@ -5,6 +5,8 @@ var initial = require('./../initialization');
 var Postal = require('postal');
 var _ = require('lodash');
 
+global.window = {location: 'nothing'};
+
 class Listener {
     constructor(channel){
         this.events = [];    

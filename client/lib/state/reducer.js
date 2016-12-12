@@ -264,7 +264,9 @@ function Batched(state, action){
     }
 
     if (action.type == 'spec-execution-completed' && action.mode != 'normal'){
-        window.location = '#/spec/results/' + action.id;
+        if (window != undefined){
+            window.location = '#/spec/results/' + action.id;
+        }
     }
 
 

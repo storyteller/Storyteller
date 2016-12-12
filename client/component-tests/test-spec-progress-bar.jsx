@@ -34,7 +34,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 0, wrongs: 0, errors: 0, invalids: 0}
 		});
 
-		var progressBar = harness.element().children[1];
+		var progressBar = harness.element().children[2];
 
 		var span = $('span', progressBar).get(0);
 
@@ -55,7 +55,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 3, wrongs: 0, errors: 0, invalids: 0}
 		});
 
-		var progressBar = harness.element().children[1];
+		var progressBar = harness.element().children[2];
 
 		expect(progressBar.tagName).to.equal('DIV');
 		expect(progressBar.firstChild.className).to.equal('progress-bar progress-bar-success');
@@ -71,7 +71,7 @@ describe('The SpecProgressBar', function(){
 			counts: {rights: 3, wrongs: 2, errors: 0, invalids: 0}
 		});
 
-		var progressBar = harness.element().children[1];
+		var progressBar = harness.element().children[2];
 
 		expect(progressBar.tagName).to.equal('DIV');
 		expect(progressBar.firstChild.className).to.equal('progress-bar progress-bar-danger');
