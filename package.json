@@ -54,6 +54,7 @@
     "immutable": "^3.7.6",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
+    "marked": "^0.3.6",
     "mousetrap": "^1.5.3",
     "node-uuid": "^1.4.7",
     "postal": "^1.0.7",

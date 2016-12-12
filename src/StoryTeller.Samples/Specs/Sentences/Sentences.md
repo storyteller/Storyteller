@@ -3,15 +3,21 @@
 -> id = sentence4
 -> lifecycle = Acceptance
 -> max-retries = 0
--> last-updated = 2016-10-14T10:42:12.6899822-05:00
+-> last-updated = 2016-12-12T16:12:11.9754630Z
 -> expiration-period = 0
 -> tags = 
 
 [Sentence]
 
-Show a syntax failure
+Show a _syntax_ failure and link to [CNN](http://cnn.com)
+* First
+* Second
+* Third
+* Fourth
+* Fifth
+* Sixth
 
-|> StartWithTheNumber#1 id=1, number=a
+|> StartWithTheNumber#1 number=a
 
 Work correctly
 
@@ -21,7 +27,7 @@ Work correctly
 
 Correct assertion
 
-|> TheValueShouldBe#2 number=17, id=2
+|> TheValueShouldBe#2 number=17
 
 Incorrect assertion
 
@@ -29,15 +35,19 @@ Incorrect assertion
 
 Line assertions
 
-|> ThisLineIsAlwaysTrue#3 id=3
-|> ThisLineIsAlwaysFalse#4 id=4
-|> ThisLineAlwaysThrowsExceptions#5 id=5
+|> ThisLineIsAlwaysTrue#3
+|> ThisLineIsAlwaysFalse#4
+|> ThisLineAlwaysThrowsExceptions#5
 ~~~
 
-Comment 
+
+Comment
 
 Another Comment
+
 
 [Sentence]
 
 Show a syntax failure
+
+~~~

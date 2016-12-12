@@ -3,7 +3,12 @@ import BigText from './../editors/big-text';
 import DeleteGlyph from './../delete-glyph';
 import ReorderGlyph from './../reorder-glyph';
 import Postal from 'postal';
+import Comment from './comment';
 
+var marked = require('marked');
+marked.setOptions({
+  gfm: true
+});
 
 module.exports = function({arg, step}){
   if (arg.active){
@@ -26,13 +31,13 @@ module.exports = function({arg, step}){
     }
 
     return (
-      <div
+      <div tabIndex="0" role="button" onClick={editCell} onFocus={editCell}
         id={step.id}
-        className="comment">
-        <DeleteGlyph step={step} />
-        <span className="comment-text" tabIndex="0" role="button" onClick={editCell} onFocus={editCell}>{arg.value}</span>
+        className="comment-editor">
+        <DeleteGlyph step={step} /><span>Delete this comment</span>
+        <ReorderGlyph step={step} /><span>Reorder this comment</span>
 
-        <ReorderGlyph step={step} />
+        <Comment arg={arg} step={step} />
       </div>
     );
   }
