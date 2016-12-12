@@ -54,7 +54,7 @@ function SpecLeaf(props){
   }
 
   let href = '#/spec/editing/' + spec.id;
-  if (spec.hasResults()){
+  if (spec.hasResults() || spec.id == props.running){
       href = '#/spec/results/' + spec.id;
   }
 

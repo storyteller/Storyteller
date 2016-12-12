@@ -66,7 +66,6 @@ namespace StoryTeller.Samples.Fixtures
 
         private void say()
         {
-
             Debug.WriteLine("the number is " + _number);
             Trace.WriteLine("the number is " + _number);
 
