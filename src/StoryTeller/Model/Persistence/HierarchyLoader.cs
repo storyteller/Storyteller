@@ -32,14 +32,20 @@ namespace StoryTeller.Model.Persistence
 
         public static Suite ReadSuite(string folder)
         {
-            return new Suite
+            var suite = new Suite
             {
                 name = Path.GetFileName(folder),
                 Specifications =
                     FileSystem.FindFiles(folder, FileSet.Shallow("*.md")).Select(MarkdownReader.ReadFromFile).ToArray(),
-                suites = FileSystem.ChildDirectoriesFor(folder).Select(ReadSuite).ToArray(),
                 Folder = folder
             };
+
+            foreach (var directory in FileSystem.ChildDirectoriesFor(folder))
+            {
+                suite.AddChildSuite(ReadSuite(directory));
+            }
+
+            return suite;
         }
     }
 }

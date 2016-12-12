@@ -99,15 +99,14 @@ namespace ST.Client
                         Folder = directory,
                         name = name,
                         Specifications = new Specification[0],
-                        path = newPath,
-                        suites = new Suite[0]
+                        path = newPath
                     };
 
                     parentSuite.AddChildSuite(newSuite);
 
                     _hierarchy.Suites[newPath] = newSuite;
 
-                    _client.SendMessageToClient(new SuiteAdded(_hierarchy.Top));
+                    _client.SendMessageToClient(new SuiteAdded(_hierarchy.Top, newSuite));
                 }
             }
             catch (Exception e)

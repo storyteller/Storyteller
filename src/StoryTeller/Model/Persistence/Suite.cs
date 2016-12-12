@@ -13,7 +13,9 @@ namespace StoryTeller.Model.Persistence
             return (parent + '/' + name).Trim('/');
         }
 
-        public Suite[] suites;
+        private readonly IList<Suite> _suites = new List<Suite>();
+
+        public Suite[] suites => _suites.OrderBy(x => x.name).ToArray();
 
         [JsonIgnore]
         public Specification[] Specifications;
@@ -91,7 +93,7 @@ namespace StoryTeller.Model.Persistence
 
         public void AddChildSuite(Suite newSuite)
         {
-            suites = suites.Union(new[] {newSuite}).ToArray();
+            _suites.Add(newSuite);
         }
     }
 }

@@ -269,6 +269,10 @@ function Batched(state, action){
         }
     }
 
+    if (action.type == 'suite-added' && window != undefined){
+        window.location = '#/suite/' + action.path;
+    }
+
 
     return state;
 }

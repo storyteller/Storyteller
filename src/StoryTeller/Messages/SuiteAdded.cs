@@ -5,10 +5,12 @@ namespace StoryTeller.Messages
     public class SuiteAdded : ClientMessage
     {
         public readonly Suite hierarchy;
+        public readonly string path;
 
-        public SuiteAdded(Suite hierarchy) : base("suite-added")
+        public SuiteAdded(Suite hierarchy, Suite newSuite) : base("suite-added")
         {
             this.hierarchy = hierarchy;
+            path = newSuite.path;
         }
 
         protected bool Equals(SuiteAdded other)
