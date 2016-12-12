@@ -47,7 +47,7 @@ function scrollIntoViewIfNeeded(target) {
     } 
 }
 
-module.exports = function({spec}){
+module.exports = function({spec, showClearAll}){
     var focus = elem => {
         if (!elem){
             return;
@@ -58,13 +58,33 @@ module.exports = function({spec}){
         scrollIntoViewIfNeeded(div);
     };
 
+
+    var onclick = e => {
+        Postal.publish({
+            channel: 'engine',
+            topic: 'alter-breakpoints',
+            data: {
+                type: 'alter-breakpoints',
+                action: 'clear-all',
+                spec: spec.id
+            }
+        });
+    };
+
+    const clearAll = (
+        <Button 
+            bsSize="small"
+            onClick={onclick} 
+            title="clear all breakpoints in the current specification"><i className="fa fa-fw fa-ban"></i></Button>
+    );
+
 	return (
 		<ButtonGroup ref={focus} style={{marginRight: '30px'}}>
             <StepthroughCommand spec={spec} action="next" title="Step into the next operation (F10)" icon="run-next"/>
             <StepthroughCommand spec={spec} action="run" title="Run to the next breakpoint (F8)" icon="run"/>
             <StepthroughCommand spec={spec} action="runToEnd" title="Run to the end of the specification (Shift+F10)" icon="run-to-end"/>
             <StepthroughCommand spec={spec} message={{type: 'cancel-spec', id: spec.id}} title="Stop the execution (shift+esc)" icon="stop"/>
-
+            {clearAll}
 		</ButtonGroup>
 	);
 }

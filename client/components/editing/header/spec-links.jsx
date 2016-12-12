@@ -1,6 +1,7 @@
 var React = require("react");
 var {Button, ButtonGroup} = require('react-bootstrap');
 var StepthroughControls = require('./../stepthrough-controls');
+var Postal = require('postal');
 
 var LinkButton = React.createClass({
   render: function(){
@@ -16,10 +17,7 @@ var LinkButton = React.createClass({
 var SpecLinks = React.createClass({
   render(){
     if (this.props.mode == 'stepthrough'){
-      return (
-        <StepthroughControls spec={this.props.spec}/>
-
-      );
+      return (<StepthroughControls spec={this.props.spec}/>);
     }
 
     return (
