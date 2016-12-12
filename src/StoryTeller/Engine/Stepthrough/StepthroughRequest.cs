@@ -1,4 +1,5 @@
-﻿using StoryTeller.Messages;
+﻿using System;
+using StoryTeller.Messages;
 using StoryTeller.Model;
 
 namespace StoryTeller.Engine.Stepthrough
@@ -7,9 +8,7 @@ namespace StoryTeller.Engine.Stepthrough
     {
         next,
         runToEnd,
-        run,
-        stop,
-        set
+        run
     }
 
     public class StepthroughRequest : ClientMessage
@@ -38,10 +37,6 @@ namespace StoryTeller.Engine.Stepthrough
 
                 case StepthroughAction.runToEnd:
                     execution.RunToEnd();
-                    break;
-
-                case StepthroughAction.stop:
-                    execution.Cancel();
                     break;
             }
         }

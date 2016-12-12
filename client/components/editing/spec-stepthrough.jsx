@@ -30,7 +30,52 @@ function addDispatch(dispatch){
 }
 
 class SpecStepthrough extends React.Component {
-  render() {
+  sendMessage(action){
+        Postal.publish({
+            channel: 'engine-request',
+            topic: 'stepthrough',
+            data: {
+                type: 'stepthrough',
+                action: action,
+                spec: this.props.spec.id,
+                breakpoints: this.props.spec.spec.breakpoints
+            }
+        });
+  }
+
+  componentDidMount(){
+    Mousetrap.bind('f10', (e, combo) => {
+      this.sendMessage('next');
+    });
+
+    Mousetrap.bind('f8', (e, combo) => {
+      this.sendMessage('run');
+    });
+
+    Mousetrap.bind('shift+f10', (e, combo) => {
+      this.sendMessage('runToEnd');
+    });
+
+    Mousetrap.bind('shift+esc', (e, combo) => {
+      Postal.publish({
+        channel: 'engine-request',
+        topic: 'cancel-spec',
+        data: {
+          type: 'cancel-spec',
+          id: this.props.spec.id
+        }
+      })
+    });
+  }
+
+  componentWillUnmount(){
+      Mousetrap.unbind('f10');
+      Mousetrap.unbind('f8');
+      Mousetrap.unbind('shift+f10');
+      Mousetrap.unbind('shift+esc');
+  }
+
+  render() {  
     loader.reset();
     const components = this.props.spec.spec.buildStepthrough(loader, this.props.dispatch);
 

@@ -28,7 +28,7 @@ class Silent{
 		var result = step.getResult(this.position);
 
 		if (isStepthrough){
-			components.push(loader.breakpointLine({spec: spec, id: step.id, position: this.position, title: '(Silent Action)'}))
+			components.push(loader.breakpointLine({spec: spec, id: step.id, position: this.position, title: '(Silent Action)', dispatch: dispatch}))
 		}
 
 		if (result && result.status != 'ok'){
