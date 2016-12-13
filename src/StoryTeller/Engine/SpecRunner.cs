@@ -18,15 +18,13 @@ namespace StoryTeller.Engine
     {
         private readonly IExecutionMode _mode;
         private readonly ISystem _system;
-        private readonly ISpecExpiration _specExpiration;
         private readonly IExecutionObserver _observer;
         private StopConditions _stopConditions = new StopConditions();
 
-        public SpecRunner(IExecutionMode mode, ISystem system, ISpecExpiration specExpiration, IExecutionObserver observer)
+        public SpecRunner(IExecutionMode mode, ISystem system, IExecutionObserver observer)
         {
             _mode = mode;
             _system = system;
-            _specExpiration = specExpiration;
             _observer = observer;
 
             Status = SpecRunnerStatus.Valid;
@@ -46,14 +44,6 @@ namespace StoryTeller.Engine
                 _mode.AfterRunning(request, abortedResults, queue, Status);
 
                 return abortedResults;
-            }
-
-            if (_specExpiration.IsExpired(request.Specification))
-            {
-                var expiredResults = SpecResults.ForExpiredRun(request.Id);
-                _mode.AfterRunning(request, expiredResults, queue, Status);
-
-                return expiredResults;
             }
 
             request.Plan.Attempts++;

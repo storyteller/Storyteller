@@ -228,7 +228,6 @@ namespace StoryTeller.Model.Persistence.Markdown
             _writer.WriteLine($"-> {SpecConstants.Lifecycle} = {spec.Lifecycle}");
             _writer.WriteLine($"-> {SpecConstants.MaxRetries} = {spec.MaxRetries}");
             _writer.WriteLine($"-> {SpecConstants.LastUpdated} = {spec.LastUpdated:O}");
-            _writer.WriteLine($"-> {SpecConstants.ExpirationPeriod} = {spec.ExpirationPeriod}");
             _writer.WriteLine($"-> {SpecConstants.Tags} = {spec.Tags.Join(", ")}");
         }
 

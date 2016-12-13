@@ -72,7 +72,6 @@ namespace StoryTeller.Testing.Model.Persistence
         private void compare(Specification expected, Specification actual)
         {
             actual.LastUpdated.ShouldBe(expected.LastUpdated);
-            actual.ExpirationPeriod.ShouldBe(expected.ExpirationPeriod);
             actual.Breakpoints.ShouldBe(expected.Breakpoints);
             actual.Lifecycle.ShouldBe(expected.Lifecycle);
             actual.MaxRetries.ShouldBe(expected.MaxRetries);

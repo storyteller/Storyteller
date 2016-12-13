@@ -35,8 +35,6 @@ namespace StoryTeller.Model
 
         [JsonProperty(SpecConstants.MaxRetries)] public int MaxRetries;
 
-        [JsonProperty(SpecConstants.ExpirationPeriod)] public int ExpirationPeriod;
-
         [JsonConverter(typeof (LastUpdatedConverter))]
         [JsonProperty(SpecConstants.LastUpdated)]
         public DateTime LastUpdated

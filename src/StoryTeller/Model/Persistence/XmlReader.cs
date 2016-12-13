@@ -78,10 +78,6 @@ namespace StoryTeller.Model.Persistence
                 Console.WriteLine($"Error trying to read the last updated date\n {e}");
             }
 
-            var expirationPeriodString = top.GetAttribute(ExpirationPeriod);
-            var expirationPeriod = expirationPeriodString.IsEmpty() ? 0 : int.Parse(expirationPeriodString);
-            spec.ExpirationPeriod = expirationPeriod;
-
 
             spec.name = top.GetAttribute(Name);
 

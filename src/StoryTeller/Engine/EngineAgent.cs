@@ -18,7 +18,6 @@ namespace StoryTeller.Engine
         private readonly SocketConnection _socket;
         private Project _project;
         private ISystem _system;
-        private SpecExpiration _specExpiration;
 
         public EngineAgent(int port)
         {
@@ -88,8 +87,6 @@ namespace StoryTeller.Engine
                 }
 
 
-                _specExpiration = new SpecExpiration();
-
                 _engine = project.Mode == EngineMode.Interactive
                     ? buildUserInterfaceEngine()
                     : buildBatchedEngine(project.TracingStyle);
@@ -126,7 +123,7 @@ namespace StoryTeller.Engine
             var observer = new UserInterfaceObserver();
             var executionObserver = new UserInterfaceExecutionObserver();
 
-            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system, _specExpiration, executionObserver);
+            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system, executionObserver);
 
 
             var engine = new SpecificationEngine(_system, runner, executionObserver);
@@ -158,7 +155,7 @@ namespace StoryTeller.Engine
             }
 
             var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode, _system, _specExpiration, executionObserver);
+            var runner = new SpecRunner(executionMode, _system, executionObserver);
 
             var engine = new SpecificationEngine(
                 _system, runner, executionObserver);

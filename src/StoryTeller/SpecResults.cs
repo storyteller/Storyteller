@@ -48,9 +48,5 @@ namespace StoryTeller
             return GetAbortedResults(id, "Invalid Engine State, aborted Specification execution");
         }
 
-        public static SpecResults ForExpiredRun(string id)
-        {
-            return GetAbortedResults(id, "This test has expired and needs to be updated.");
-        }
     }
 }

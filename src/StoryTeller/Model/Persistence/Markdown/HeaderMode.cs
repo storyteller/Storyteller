@@ -68,10 +68,6 @@ namespace StoryTeller.Model.Persistence.Markdown
                     _spec.MaxRetries = int.Parse(value);
                     break;
 
-                case SpecConstants.ExpirationPeriod:
-                    _spec.ExpirationPeriod = int.Parse(value);
-                    break;
-
                 case SpecConstants.LastUpdated:
                     _spec.LastUpdated = DateTime.ParseExact(value, "O", null);
                     break;

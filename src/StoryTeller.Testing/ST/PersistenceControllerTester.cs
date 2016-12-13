@@ -282,18 +282,6 @@ namespace StoryTeller.Testing.ST
                 .Text.ShouldBe("a new comment");
         }
 
-        [Fact]
-        public void save_specification_updates_expiration_period()
-        {
-            var node = ClassUnderTest.Hierarchy.Specifications["embeds"];
-            var specification = MarkdownReader.ReadFromFile(node.Filename);
-            specification.ExpirationPeriod = 5;
-
-            ClassUnderTest.SaveSpecification(node.id, specification);
-            var written = MarkdownReader.ReadFromFile(node.Filename);
-            written.ExpirationPeriod.ShouldBe(5);
-        }
-
 
         [Fact]
         public void setting_the_lifecycle_when_the_lifecycle_matches_already()
