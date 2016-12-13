@@ -23,7 +23,7 @@ namespace ST.Client
             document.Add("div").Id("main");
 
 #if DEBUG
-            writeClientAssetsDebugMode(document, input);
+            WriteClientAssetsDebugMode(document, input.DevFlag);
 #else
 
             writeClientSideAssetsFromEmbeds(document);
@@ -48,7 +48,7 @@ namespace ST.Client
             document.Body.Append(scriptTag);
         }
 
-        private static void writeClientAssetsDebugMode(HtmlDocument document, OpenInput input)
+        public static void WriteClientAssetsDebugMode(HtmlDocument document, bool devMode, string bundleName = "/bundle.js")
         {
             var stylesheets = new[] {"bootstrap.min.css", "storyteller.css", "font-awesome.min.css", "fixed-data-table.min.css"};
             var tags = stylesheets.Select(file =>
@@ -59,7 +59,7 @@ namespace ST.Client
 
             document.Head.Append(tags);
 
-            var bundleUrl = input.DevFlag ? "http://localhost:3001/client/public/javascript/bundle.js" : "/bundle.js";
+            var bundleUrl = devMode ? "http://localhost:3001/client/public/javascript/bundle.js" : bundleName;
             var scriptTag = new HtmlTag("script").Attr("type", "text/javascript").Attr("src", bundleUrl);
             document.Body.Append(scriptTag);
         }

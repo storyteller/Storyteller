@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
 using StoryTeller;
 using StoryTeller.Messages;
+using StoryTeller.Model;
 using StoryTeller.Remotes;
+using ST.Preview;
 
 namespace ST.Client
 {
@@ -109,7 +111,16 @@ namespace ST.Client
 
                     app.Run(async http =>
                     {
-                        var html = HomeEndpoint.BuildPage(_application, _input).ToString();
+                        string html;
+                        if (http.Request.Path.HasValue && http.Request.Path.Value == "/preview")
+                        {
+                            html = ExportWriter.BuildPage(_application);
+                        }
+                        else
+                        {
+                            html = HomeEndpoint.BuildPage(_application, _input).ToString();
+                        }
+
 
                         http.Response.ContentType = "text/html";
                         await http.Response.WriteAsync(html).ConfigureAwait(false);
