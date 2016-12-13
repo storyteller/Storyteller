@@ -82,18 +82,23 @@ namespace StoryTeller.Model
 
         ICellExpression ICellExpression.SelectionValues(params string[] values)
         {
+            editor = "select";
+
             options = values.Select(x => new Option {display = x, value = x}).ToArray();
             return this;
         }
 
         ICellExpression ICellExpression.SelectionOptions(params Option[] options)
         {
+            editor = "select";
+
             this.options = options;
             return this;
         }
 
         ICellExpression ICellExpression.SelectionList(string listName)
         {
+            editor = "select";
             OptionListName = listName;
             return this;
         }
