@@ -9,7 +9,6 @@ import SpecHeader from './header/spec-header';
 import SpecResultHeader from './header/spec-result-header';
 import { editing as loader} from './component-loader';
 import RetryCount from './header/retry-count';
-import ExpirationPeriod from './header/expiration-period';
 import SpecOutline from './spec-outline';
 import Persisting from './alerts/persisting';
 
@@ -57,7 +56,6 @@ function ContextualPane(props){
 
                   <Tab eventKey={2} title="Properties">
                     <RetryCount count={props.spec.spec['max-retries']}/>
-                    <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
                   </Tab>
                 </Tabs>
                 </AutoAffix>
