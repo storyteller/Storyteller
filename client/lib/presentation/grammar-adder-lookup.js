@@ -1,6 +1,7 @@
 var Postal = require('postal');
 var CommentGrammar = require('./../grammars/comment-grammar');
 var changes = require('./../model/change-commands');
+var Fuse = require('fuse.js');
 
 class Option {
 	constructor(holder, grammar){
@@ -16,6 +17,8 @@ class Option {
 	}
 }
 
+
+
 class GrammarLookup {
 	constructor(holder){
 		var grammars = holder.grammars().map(x => new Option(holder, x));
@@ -23,11 +26,18 @@ class GrammarLookup {
 	}
 
 	findMatches(query){
+		const fuse = new Fuse(this.options, {
+			keys: ['title', 'grammar.key']
+		});
+
 		var fragment = query.toLowerCase();
 
+		return fuse.search(query);
+/*
 		return this.options.filter(x => {
 			return x.lower.search(fragment) > -1;
 		});
+		*/
 	}
 }
 
