@@ -10,6 +10,15 @@ module.exports = React.createClass({
 			value = false;
 		}
 
+		if (value == "True" || value == "true"){
+			value = true;
+		}
+
+		if (value == "False" || value == "false"){
+			value = false;
+		}
+
+
 		return {value: value};
 	},
 
@@ -28,7 +37,7 @@ module.exports = React.createClass({
 	toggle: function(){
 		var value = ReactDOM.findDOMNode(this).checked;
 		this.setState({value: value});
-		this.publishChange();
+		this.publishChange(value);
 	},
 
 	publishChange: function(value){
@@ -36,11 +45,6 @@ module.exports = React.createClass({
 
 		var cellChanged = changes.cellValue(arg.id, arg.cell.key, value);
 
-		Postal.publish({
-			channel: 'editor',
-			topic: 'changes',
-			data: cellChanged
-		});
 	},
 
 	componentWillUnmount: function(){

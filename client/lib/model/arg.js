@@ -52,7 +52,14 @@ class Arg{
 	store(data){
 		if (!data.cells) data.cells = {};
 
-		data.cells[this.key] = this.value || this.cell.default;
+		if (this.value == false){
+			data.cells[this.key] = false;
+		}
+		else{
+			data.cells[this.key] = this.value || this.cell.default;
+		}
+
+		
 	}
 
 	hasDefault(){
