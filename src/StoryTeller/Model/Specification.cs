@@ -213,7 +213,11 @@ namespace StoryTeller.Model
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            return DateTime.Parse(reader.Value.ToString());
+            DateTime time = DateTime.MinValue;
+
+            DateTime.TryParse(reader.Value.ToString(), out time);
+
+            return time;
         }
 
         public override bool CanConvert(Type objectType)
