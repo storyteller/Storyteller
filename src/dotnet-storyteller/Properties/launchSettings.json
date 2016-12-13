@@ -5,6 +5,11 @@
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "Export Sample Fixtures": {
+      "commandName": "Project",
+      "commandLineArgs": "dump-fixtures src/Storyteller.Samples",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
     "Open Testbed": {
       "commandName": "Project",
       "commandLineArgs": "open src/Testbed",
