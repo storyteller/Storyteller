@@ -38,11 +38,11 @@ namespace StoryTeller.Remotes
                 time = time,
                 name = name,
                 system_name = system_name,
-                properties = properties
+                properties = properties,
+                fixtures = fixtureArray
             };
 
 
-            clone.fixtures = fixtureArray;
 
             return clone;
         }

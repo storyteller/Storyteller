@@ -73,43 +73,6 @@ namespace StoryTeller.Engine
             return _runner.Current as IStepthroughExecution;
         }
 
-        private SystemRecycled tryToStart()
-        {
-            CellHandling cellHandling = null;
-            try
-            {
-                cellHandling = _system.Start();
-            }
-            catch (Exception ex)
-            {
-                ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
-
-                var message = new SystemRecycled
-                {
-                    success = false,
-                    fixtures = new FixtureModel[0],
-                    system_name = _system.ToString(),
-                    system_full_name = _system.GetType().FullName,
-                    name = Path.GetFileName(AppContext.BaseDirectory),
-                    error = ex.ToString()
-                };
-
-                return message;
-            }
-
-
-            var library = FixtureLibrary.CreateForAppDomain(cellHandling);
-
-            startTheConsumingQueues(library);
-
-            return new SystemRecycled
-            {
-                success = true,
-                fixtures = library.Models.GetAll().ToArray(),
-                system_name = _system.ToString(),
-                name = Path.GetFileName(AppContext.BaseDirectory)
-            };
-        }
 
         private void startTheConsumingQueues(FixtureLibrary library)
         {
@@ -137,7 +100,7 @@ namespace StoryTeller.Engine
             _runner.UseStopConditions(stopConditions);
             _executionQueue.Start();
 
-            var recycled = tryToStart();
+            var recycled = _system.Initialize(startTheConsumingQueues);
             EventAggregator.SendMessage(recycled);
         }
 

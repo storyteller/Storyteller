@@ -1,5 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using StoryTeller.Model;
+using StoryTeller.Remotes;
 
 namespace StoryTeller.Engine
 {
@@ -29,4 +33,46 @@ namespace StoryTeller.Engine
         Task Warmup();
     }
     // ENDSAMPLE
+
+    public static class SystemExtensions
+    {
+        public static SystemRecycled Initialize(this ISystem system, Action<FixtureLibrary> onStarted)
+        {
+            CellHandling cellHandling = null;
+
+            try
+            {
+                cellHandling = system.Start();
+            }
+            catch (Exception ex)
+            {
+                ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
+
+                var message = new SystemRecycled
+                {
+                    success = false,
+                    fixtures = new FixtureModel[0],
+                    system_name = system.ToString(),
+                    system_full_name = system.GetType().FullName,
+                    name = Path.GetFileName(AppContext.BaseDirectory),
+                    error = ex.ToString()
+                };
+
+                return message;
+            }
+
+
+            var library = FixtureLibrary.CreateForAppDomain(cellHandling);
+
+            onStarted(library);
+
+            return new SystemRecycled
+            {
+                success = true,
+                fixtures = library.Models.GetAll().ToArray(),
+                system_name = system.ToString(),
+                name = Path.GetFileName(AppContext.BaseDirectory)
+            };
+        }
+    } 
 }

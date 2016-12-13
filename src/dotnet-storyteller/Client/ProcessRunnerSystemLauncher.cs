@@ -107,7 +107,7 @@ namespace ST.Client
                 {
                     if (!_agentReady)
                     {
-                        // TODO -- send a timeout message here.
+                        throw new TimeoutException("The system under test is not responding.");
                     }
                 }
 
