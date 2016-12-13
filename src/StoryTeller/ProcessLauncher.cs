@@ -12,7 +12,11 @@ namespace StoryTeller
             {
                 if (RuntimeEnvironment.OperatingSystemPlatform == Platform.Windows)
                 {
+#if NET46
                     Process.Start(url);
+#else
+                    Process.Start("cmd", $"/C start {url}");
+#endif
                 }
                 else
                 {
