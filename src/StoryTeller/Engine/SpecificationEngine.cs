@@ -101,6 +101,7 @@ namespace StoryTeller.Engine
             _executionQueue.Start();
 
             var recycled = _system.Initialize(startTheConsumingQueues);
+
             EventAggregator.SendMessage(recycled);
         }
 

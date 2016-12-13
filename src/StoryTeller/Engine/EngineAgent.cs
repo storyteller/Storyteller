@@ -80,6 +80,13 @@ namespace StoryTeller.Engine
                     _disposables.Add(_system);
                 }
 
+                if (project.Mode == EngineMode.ExportOnly)
+                {
+                    var recycled = _system.Initialize(lib => { });
+                    EventAggregator.SendMessage(recycled);
+                    return;
+                }
+
 
                 _specExpiration = new SpecExpiration();
 

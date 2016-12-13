@@ -42,29 +42,5 @@ namespace StoryTeller.Testing.Engine.Stepthrough
             theExecution.Received().RunToBreakpoint();
         }
 
-        [Fact]
-        public void stop()
-        {
-            new StepthroughRequest
-            {
-                action = StepthroughAction.stop
-            }.Apply(theExecution);
-
-            theExecution.Received().Cancel();
-        }
-
-        [Fact]
-        public void applies_breakpoints()
-        {
-            var request = new StepthroughRequest
-            {
-                action = StepthroughAction.stop,
-                breakpoints = new Breakpoint[] {new Breakpoint(), new Breakpoint()}
-            };
-
-            request.Apply(theExecution);
-
-            theExecution.Received().SetBreakpoints(request.breakpoints);
-        }
     }
 }

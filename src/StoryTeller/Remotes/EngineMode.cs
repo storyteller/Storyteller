@@ -3,6 +3,7 @@
     public enum EngineMode
     {
         Batch,
-        Interactive
+        Interactive,
+        ExportOnly
     }
 }

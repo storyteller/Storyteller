@@ -15,7 +15,6 @@ namespace StoryTeller.Testing.Engine
             childSuite1 = new Suite
             {
                 name = "Child Suite 1",
-                suites = new Suite[0],
                 Specifications = new[]
                 {
                     new Specification {name = "Spec 1a", Lifecycle = Lifecycle.Acceptance, Tags = {"tag1", "tag2"}},
@@ -26,7 +25,6 @@ namespace StoryTeller.Testing.Engine
             childSuite2 = new Suite
             {
                 name = "Child Suite 2",
-                suites = new Suite[0],
                 Specifications = new[]
                 {
                     new Specification
@@ -41,12 +39,11 @@ namespace StoryTeller.Testing.Engine
 
             theTopSuite = new Suite
             {
-                Specifications = new Specification[0],
-                suites = new[]
-                {
-                    childSuite1, childSuite2
-                }
+                Specifications = new Specification[0]
             };
+
+            theTopSuite.AddChildSuite(childSuite1);
+            theTopSuite.AddChildSuite(childSuite2);
 
             theRequest = new BatchRunRequest {Lifecycle = Lifecycle.Any};
         }
