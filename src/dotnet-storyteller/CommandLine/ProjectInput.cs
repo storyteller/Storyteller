@@ -91,9 +91,6 @@ namespace ST.CommandLine
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
 
-        [Description("Optional. Explicitly specify web socket address to use when starting server. Defaults to 127.0.0.1")]
-        public string WebSocketAddressFlag { get; set; }
-
         [Description("Optional. Tell Storyteller which which ISystem to use")]
         public string SystemNameFlag { get; set; }
 

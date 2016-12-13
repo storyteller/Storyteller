@@ -61,8 +61,6 @@ namespace ST.Client
         public IClientConnector Start(IApplication application)
         {
             var port = PortFinder.FindPort(5000);
-            if (_input.WebSocketAddressFlag.IsNotEmpty())
-                port = new Uri(_input.WebSocketAddressFlag).Port;
 
             _application = application;
 
