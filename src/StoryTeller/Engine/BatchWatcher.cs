@@ -19,10 +19,7 @@ namespace StoryTeller.Engine
             CompleteCheck();
         }
 
-        public Task<IEnumerable<BatchRecord>> Task
-        {
-            get { return _task.Task; }
-        }
+        public Task<IEnumerable<BatchRecord>> Task => _task.Task;
 
         public void SpecHandled(SpecificationPlan plan, SpecResults specResults)
         {

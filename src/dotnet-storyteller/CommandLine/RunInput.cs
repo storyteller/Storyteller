@@ -39,7 +39,11 @@ namespace ST.CommandLine
         public string DumpFlag { get; set; }
 
         [Description("Only validates the specifications and writes out a list of the encountered errors. Will fail if there are any errors.")]
+        [FlagAlias("validate")]
         public bool ValidateFlag { get; set; }
+
+        [Description("Writes extra console logging for individual specs")]
+        public bool VerboseFlag { get; set; }
 
         private BatchRunRequest _batchRunRequest;
 

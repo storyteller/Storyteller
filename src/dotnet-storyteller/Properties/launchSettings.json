@@ -15,6 +15,11 @@
       "commandLineArgs": "export src/Storyteller.Samples --file Samples.htm -o",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "Run Sample Specs": {
+      "commandName": "Project",
+      "commandLineArgs": "run src/Storyteller.Samples --verbose",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
     "Open Testbed": {
       "commandName": "Project",
       "commandLineArgs": "open src/Testbed",

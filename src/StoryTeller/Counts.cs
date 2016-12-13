@@ -71,8 +71,7 @@ namespace StoryTeller
 
         public override string ToString()
         {
-            return string.Format("Rights: {0}, Wrongs: {1}, Exceptions: {2}, SyntaxErrors: {3}", Rights, Wrongs,
-                                 Exceptions, SyntaxErrors);
+            return $"Rights: {Rights}, Wrongs: {Wrongs}, Exceptions: {Exceptions}, SyntaxErrors: {SyntaxErrors}";
         }
 
         public bool Equals(Counts obj)

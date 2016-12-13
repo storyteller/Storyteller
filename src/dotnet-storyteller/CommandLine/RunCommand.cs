@@ -76,6 +76,11 @@ namespace ST.CommandLine
 
             var results = execution.Result;
 
+            if (input.VerboseFlag)
+            {
+                writeVerbose(results);
+            }
+
             var success = determineSuccess(input, results);
 
             writeResults(input, systemRecycled, results);
@@ -87,6 +92,22 @@ namespace ST.CommandLine
             writeSuccessOrFailure(success);
 
             return success;
+        }
+
+        private void writeVerbose(BatchRunResponse results)
+        {
+            foreach (var record in results.records)
+            {
+                if (record.WasSuccessful())
+                {
+                    ConsoleWriter.Write(ConsoleColor.Green,
+                        $"{record.specification.path} succeeded with {record.results.Counts} ");
+                }
+                else
+                {
+                    ConsoleWriter.Write(ConsoleColor.Red, $"{record.specification.path} failed with {record.results.Counts}");
+                }
+            }
         }
 
         private bool validateOnly(RunInput input, SystemRecycled systemRecycled)
