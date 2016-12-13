@@ -4,7 +4,9 @@ module.exports = {
     "bundle": ['./client/client.js'],
     "batch-bundle": ['./client/batch.js'],
     "embed": ['./client/embed.js'],
-    "topics": ['./client/topics']
+    "topics": ['./client/topics.js'],
+	"preview": ['./client/preview.js']
+	
   },
   output: {
     path: __dirname + '/src/dotnet-storyteller',

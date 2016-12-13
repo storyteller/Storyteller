@@ -10,6 +10,11 @@
       "commandLineArgs": "dump-fixtures src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "Preview Sample Specs": {
+      "commandName": "Project",
+      "commandLineArgs": "export src/Storyteller.Samples --file Samples.htm -o",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
     "Open Testbed": {
       "commandName": "Project",
       "commandLineArgs": "open src/Testbed",

@@ -31,14 +31,7 @@ namespace ST.CommandLine
 
             using (var controller = input.BuildEngine())
             {
-                var loading = controller.Start();
-
-                var reading = Task.Factory.StartNew(() => FixtureLoader.LoadFromPath(input.FixturePath));
-
-                Task.WaitAll(loading, reading);
-
-                var combined = FixtureLibrary.From(loading.Result.fixtures)
-                    .ApplyOverrides(reading.Result);
+                var combined = BuildCombinedFixtureLibrary(input, controller);
 
                 foreach (var fixture in combined.Models)
                 {
@@ -53,10 +46,22 @@ namespace ST.CommandLine
                         ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
                     }
                 }
-
             }
 
             return true;
+        }
+
+        public static FixtureLibrary BuildCombinedFixtureLibrary(ProjectInput input, EngineController controller)
+        {
+            var loading = controller.Start();
+
+            var reading = Task.Factory.StartNew(() => FixtureLoader.LoadFromPath(input.FixturePath));
+
+            Task.WaitAll(loading, reading);
+
+            var combined = FixtureLibrary.From(loading.Result.fixtures)
+                .ApplyOverrides(reading.Result);
+            return combined;
         }
     }
 }
