@@ -12,7 +12,7 @@ namespace ST.Client
     {
         public static HtmlDocument BuildPage(IApplication application, OpenInput input)
         {
-            var document = new HtmlDocument {Title = "Storyteller 3"};
+            var document = new HtmlDocument {Title = "Storyteller 4"};
 
 
             writeInitialDataIntoPage(document, application);
@@ -41,7 +41,7 @@ namespace ST.Client
 
 
             var bundleJS = typeof(HomeEndpoint).GetTypeInfo().Assembly
-                .GetManifestResourceStream("ST.bundle.js").ReadAllText();
+                .GetManifestResourceStream("dotnet-storyteller.bundle.js").ReadAllText();
 
             var scriptTag = new HtmlTag("script").Attr("type", "text/javascript").Text(bundleJS).Encoded(false);
             document.Body.Append(scriptTag);

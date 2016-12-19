@@ -50,11 +50,7 @@ namespace StoryTeller.Results
             var js = readFile("StoryTeller.batch-bundle.js");
 
             document.Body.Add("script").Attr("language", "javascript").Text("\n\n" + js + "\n\n").Encoded(false);
-            /*
-            foot.Add("script")
-                .Attr("language", "Javascript")
-                .Attr("src", "file://Z:/code/storyteller/src/ST/batch-bundle.js");
-                */
+
 
         }
     }

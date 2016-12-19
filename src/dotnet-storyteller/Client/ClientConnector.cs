@@ -22,14 +22,22 @@ namespace ST.Client
 
         public void SendMessageToClient(object message)
         {
-            var json = JsonSerialization.ToCleanJson(message);
+            try
+            {
+                var json = JsonSerialization.ToCleanJson(message);
+#pragma warning disable 4014
+                _handler.Send(json);
+#pragma warning restore 4014
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Failed while trying to serialize " + message + " to JSON");
+            }
 
             // TODO -- only do this in verbose mode
             //Console.WriteLine("Sending: " + message);
 
-#pragma warning disable 4014
-            _handler.Send(json);
-#pragma warning restore 4014
+
         }
 
         public void Dispose()

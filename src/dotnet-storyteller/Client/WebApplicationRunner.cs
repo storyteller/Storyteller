@@ -123,19 +123,30 @@ namespace ST.Client
                             return;
                         }
 
-                        string html;
-                        if (http.Request.Path.HasValue && http.Request.Path.Value == "/preview")
+                        try
                         {
-                            html = ExportWriter.BuildPage(_application);
+                            string html;
+                            if (http.Request.Path.HasValue && http.Request.Path.Value == "/preview")
+                            {
+                                html = ExportWriter.BuildPage(_application);
+                            }
+                            else
+                            {
+                                html = HomeEndpoint.BuildPage(_application, _input).ToString();
+                            }
+
+
+                            http.Response.ContentType = "text/html";
+                            await http.Response.WriteAsync(html).ConfigureAwait(false);
                         }
-                        else
+                        catch (Exception e)
                         {
-                            html = HomeEndpoint.BuildPage(_application, _input).ToString();
+                            Console.WriteLine(e.ToString());
+                            throw;
                         }
 
 
-                        http.Response.ContentType = "text/html";
-                        await http.Response.WriteAsync(html).ConfigureAwait(false);
+
                     });
                 });
 

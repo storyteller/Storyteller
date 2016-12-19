@@ -45,7 +45,7 @@ namespace StorytellerDocGen.Transformation
             Style("padding", "10px");
             AddClass("bg-warning");
             Add("b").Text($"Missing code sample '{sampleName}'");
-            Add("small").Text(" -- Wait for ST to catch up reading samples or CTRL+SHIFT+R to force refresh");
+            Add("small").Text(" -- Wait for dotnet stdocs to catch up reading samples or CTRL+SHIFT+R to force refresh");
         }
     }
 }
