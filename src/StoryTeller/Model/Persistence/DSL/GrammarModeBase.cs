@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Baseline;
-using Microsoft.Extensions.Options;
+﻿using Baseline;
 
 namespace StoryTeller.Model.Persistence.DSL
 {

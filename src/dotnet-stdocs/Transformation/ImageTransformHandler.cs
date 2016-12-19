@@ -1,7 +1,8 @@
 ﻿using System.Linq;
-using HtmlTags;
+
 using StorytellerDocGen.Html;
 using StorytellerDocGen.Topics;
+using StoryTeller.Util;
 
 namespace StorytellerDocGen.Transformation
 {

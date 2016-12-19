@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using HtmlTags;
+using Baseline;
 using Oakton.Reporting;
 using StorytellerDocGen.Topics;
 using StorytellerDocGen.Transformation;
+using StoryTeller.Util;
 
 namespace StorytellerDocGen.Commands
 {
@@ -26,7 +27,7 @@ namespace StorytellerDocGen.Commands
 
             var report = _cache.ReportFor(app, command);
 
-            return CommandBodyTags(app, report).ToTagList().ToString();
+            return CommandBodyTags(app, report).Select(x => x.ToString()).Join("");
         }
 
         public static IEnumerable<HtmlTag> CommandBodyTags(string applicationName, CommandReport report)

@@ -1,7 +1,8 @@
 using System.Linq;
 using Baseline;
-using HtmlTags;
+
 using StorytellerDocGen.Topics;
+using StoryTeller.Util;
 
 namespace StorytellerDocGen.Html.Navigation
 {

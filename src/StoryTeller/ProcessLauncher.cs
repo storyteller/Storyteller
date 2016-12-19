@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using Microsoft.DotNet.InternalAbstractions;
+using Platform = Microsoft.DotNet.InternalAbstractions.Platform;
+using RuntimeEnvironment = Microsoft.DotNet.InternalAbstractions.RuntimeEnvironment;
 
 namespace StoryTeller
 {

@@ -1,7 +1,8 @@
 using System.Linq;
 using Baseline;
-using HtmlTags;
+
 using Oakton.Reporting;
+using StoryTeller.Util;
 
 namespace StorytellerDocGen.Commands
 {

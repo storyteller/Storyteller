@@ -1,27 +1,21 @@
-﻿using System.Linq;
-using System.Reflection;
-using System.Reflection.PortableExecutable;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using Baseline;
-using HtmlTags;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Oakton;
 using StorytellerDocGen.Topics;
 using StorytellerDocGen.Transformation;
+using StoryTeller.Util;
 using StructureMap.TypeRules;
 
 namespace StorytellerDocGen.Runner
 {
-    public class TopicMiddleware 
+    public class TopicMiddleware
     {
-        private readonly DocProject _project;
         private readonly IHtmlGenerator _generator;
+        private readonly DocProject _project;
         private readonly DocSettings _settings;
-        private readonly string _webSocketScript;
         private readonly string _topicJS;
+        private readonly string _webSocketScript;
 
 
         public TopicMiddleware(DocProject project, IHtmlGenerator generator, DocSettings settings)
@@ -67,7 +61,6 @@ namespace StorytellerDocGen.Runner
             response.Headers["content-type"] = "text/html";
 
             return response.WriteAsync(html);
-
         }
 
         public string GenerateHtml(Topic topic)

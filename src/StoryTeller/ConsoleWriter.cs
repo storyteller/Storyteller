@@ -4,6 +4,7 @@ using Baseline;
 
 namespace StoryTeller
 {
+    
     internal static class ConsoleWriter
     {
         public const int DefaultConsoleWidth = 120;
@@ -121,4 +122,5 @@ namespace StoryTeller
             Console.ResetColor();
         }
     }
+    
 }

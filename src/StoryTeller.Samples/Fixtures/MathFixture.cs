@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using HtmlTags;
 using StoryTeller.Grammars.Importing;
 using StoryTeller.Grammars.Tables;
 using StoryTeller.Results;
+using StoryTeller.Util;
 
 namespace StoryTeller.Samples.Fixtures
 {
@@ -62,7 +62,6 @@ namespace StoryTeller.Samples.Fixtures
         }
 
         [FormatAs("*= {multiplier}")]
-        [Description("This grammar multiplies two numbers together")]
         public void MultiplyBy(double multiplier)
         {
             _number *= multiplier;

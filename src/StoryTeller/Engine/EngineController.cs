@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
-using Microsoft.AspNetCore.Http.Internal;
 using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;

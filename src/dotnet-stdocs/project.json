@@ -35,7 +35,6 @@
     "Microsoft.AspNetCore.Hosting": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
     "Microsoft.AspNetCore.WebSockets.Server": "0.1.0",
-    "HtmlTags.AspNetCore": "4.1.0",
     "Baseline": "1.1.0",
     "StructureMap": "4.4.2",
     "StoryTeller": { "target": "project" },

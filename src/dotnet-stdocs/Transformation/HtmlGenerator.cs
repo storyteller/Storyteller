@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
 using Baseline;
-using HtmlTags;
 using Oakton;
 using StorytellerDocGen.Topics;
+using StoryTeller.Util;
+using HtmlTextWriter = StoryTeller.Util.HtmlTextWriter;
 
 namespace StorytellerDocGen.Transformation
 {

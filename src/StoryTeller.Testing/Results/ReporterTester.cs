@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Linq;
-using HtmlTags;
 using Xunit;
 using Shouldly;
 using StoryTeller.Results;
+using StoryTeller.Util;
 
 namespace StoryTeller.Testing.Results
 {

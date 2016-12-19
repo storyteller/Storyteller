@@ -48,8 +48,8 @@ namespace StoryTeller.Equivalence
 
         public bool Matches(object one, object two)
         {
-            var expected = new ArrayList(one.As<ICollection>());
-            var actual = new ArrayList(two.As<ICollection>());
+            var expected = new List<object>(one.As<IEnumerable>().OfType<object>());
+            var actual = new List<object>(two.As<IEnumerable>().OfType<object>());
 
             foreach (object o in actual.ToArray())
             {

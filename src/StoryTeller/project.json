@@ -11,7 +11,7 @@
   },
   "version": "4.0.0-alpha-*",
   "title": "Storyteller",
-  "description": "Automated Acceptance Testing and Technical Documentation Authoring",
+  "description": "Acceptance Test Driven Development and Executable Specifications for .Net",
   "language": "en-US",
   "authors": [
     "Jeremy D. Miller"
@@ -28,15 +28,17 @@
     }
   },
   "dependencies": {
-    "HtmlTags.AspNetCore": "4.1.0",
     "Baseline": "1.1.0",
-    "System.Reflection.TypeExtensions": "4.1.0"
+    "Newtonsoft.Json": "9.0.1",
+    "System.Reflection.TypeExtensions": "4.1.0",
+    "Microsoft.DotNet.InternalAbstractions": "1.0.0" 
   },
   "frameworks": {
     "net46": {
       "frameworkAssemblies": {
         "System.Data": "",
-        "System.Reflection": ""
+        "System.Reflection": "",
+        "System.Web":  "" 
       },
       "dependencies": {
         "System.Data.Common": "4.1.0"
@@ -50,10 +52,13 @@
         "System.Net.NameResolution": "4.0.0",
         "System.Net.Sockets": "4.1.0",
         "System.Diagnostics.TextWriterTraceListener": "4.0.0",
-        "System.Diagnostics.Debug": "4.0.11",
+        "System.Diagnostics.Debug": "4.3.0",
         "System.Threading.Thread": "4.0.0",
         "System.Threading.Timer": "4.0.1",
-        "System.Threading": "4.0.11"
+        "System.Threading": "4.3.0",
+        "System.Text.Encodings.Web": "4.3.0",
+        "System.Console": "4.3.0",
+        "Microsoft.Extensions.DependencyModel": "1.1.0" 
       }
     }
   }

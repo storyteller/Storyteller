@@ -1,9 +1,9 @@
 ﻿
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HtmlTags;
+using Baseline;
+using HtmlTag = StoryTeller.Util.HtmlTag;
 
 namespace StoryTeller.Results
 {
@@ -48,22 +48,13 @@ namespace StoryTeller.Results
             return _exceptions.Select(x =>
             {
                 return new HtmlTag("pre").Text(x.ToString()).AddClass("bg-warning");
-            }).ToTagList().ToHtmlString();
+            }).Select(x => x.ToHtmlString()).Join("");
         }
 
-        public string Title
-        {
-            get { return "Logged Exceptions in Storyteller"; }
-        }
+        public string Title => "Logged Exceptions in Storyteller";
 
-        public string ShortTitle
-        {
-            get { return "Exceptions"; }
-        }
+        public string ShortTitle => "Exceptions";
 
-        public int Count
-        {
-            get { return _exceptions.Count; }
-        }
+        public int Count => _exceptions.Count;
     }
 }

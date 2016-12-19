@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Baseline;
+#if !NET46
 using Microsoft.Extensions.DependencyModel;
+
+#endif
 
 namespace StoryTeller.Model
 {
@@ -174,7 +177,7 @@ namespace StoryTeller.Model
                     catch
                     {
                     }
-                }
+                }   
 
 
                 if (assembly != null && assemblyFilter(assembly))
