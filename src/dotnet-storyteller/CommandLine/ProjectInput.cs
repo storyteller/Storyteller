@@ -4,7 +4,6 @@ using Baseline;
 using Oakton;
 using StoryTeller;
 using ST.Client;
-using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
@@ -18,7 +17,6 @@ namespace ST.CommandLine
         public ProjectInput(EngineMode mode)
         {
             _mode = mode;
-            LifecycleFlag = Lifecycle.Any;
 
 #if NET46
             Path = Environment.CurrentDirectory;
@@ -27,9 +25,13 @@ namespace ST.CommandLine
 #endif
         }
 
-
         [Description("Path to the StoryTeller project file or the project directory")]
         public string Path { get; set; }
+
+#if NET46
+        [Description("Directs Storyteller to run the system under test in a separate AppDomain if you are not using the Dotnet CLI")]
+        public bool AppDomainFlag { get; set; } = false;
+#endif
 
         [Description("Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'")]
         public string BuildFlag { get; set; }
@@ -40,12 +42,8 @@ namespace ST.CommandLine
         [Description("Optional. Default project timeout in seconds.")]
         public int? TimeoutFlag { get; set; }
 
-        [Description("Optional. Only runs tests with desired lifecyle")]
-        public Lifecycle LifecycleFlag { get; set; }
 
-        [Description("Optional. Applies extra logging to see progress within TeamCity during CI runs")]
-        [FlagAlias("teamcity", 'z')]
-        public bool TeamCityTracingFlag { get; set; }
+
 
         [Description("Optional. Override the config file selection of the Storyteller test running AppDomain")]
         public string ConfigFlag { get; set; }
@@ -54,8 +52,7 @@ namespace ST.CommandLine
         [FlagAlias("specs", 's')]
         public string SpecsFlag { get; set; }
 
-        [Description("Sets a minimum number of retry attempts for this execution")]
-        public int RetriesFlag { get; set; }
+
 
         [Description("Optional. Override the fixtures directory")]
         [FlagAlias("fixtures", 'f')]
@@ -100,14 +97,11 @@ namespace ST.CommandLine
         {
             var project = configureProject();
 
-            // This will change later w/ the new separate process lifecycle
 #if NET46
+            var launcher = project.UseSeparateAppDomain 
+                ? new AppDomainSystemLauncher(project)
+                : (ISystemLauncher) new ProcessRunnerSystemLauncher(project);
 
-            // TODO -- this will have to change later
-            var file = project.ProjectPath.AppendPath("project.json");
-
-
-            var launcher = File.Exists(file) ? (ISystemLauncher) new ProcessRunnerSystemLauncher(project) : new AppDomainSystemLauncher(project);
             var controller = new EngineController(project, launcher);
 #else
             var controller = new EngineController(project, new ProcessRunnerSystemLauncher(project));
@@ -118,10 +112,14 @@ namespace ST.CommandLine
             return controller;
         }
 
-        private Project configureProject()
+        protected virtual Project configureProject()
         {
             var path = Path.ToFullPath();
             var project = Project.LoadForFolder(path);
+
+#if NET46
+            project.UseSeparateAppDomain = AppDomainFlag;
+#endif
 
             if (BuildFlag.IsNotEmpty())
             {
@@ -141,17 +139,11 @@ namespace ST.CommandLine
                 project.StopConditions.TimeoutInSeconds = TimeoutFlag.Value;
             }
 
-            if (TeamCityTracingFlag)
-            {
-                project.TracingStyle = "TeamCity";
-            }
-
             if (SystemNameFlag.IsNotEmpty())
             {
                 project.SystemTypeName = SystemNameFlag;
             }
 
-            project.MaxRetries = RetriesFlag;
             project.Profile = ProfileFlag;
 
             project.Mode = _mode;

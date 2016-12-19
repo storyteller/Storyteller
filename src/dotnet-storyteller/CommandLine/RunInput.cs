@@ -2,8 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Oakton;
+using StoryTeller;
 using ST.Client;
 using StoryTeller.Engine;
+using StoryTeller.Model;
 using StoryTeller.Remotes;
 
 namespace ST.CommandLine
@@ -44,6 +46,30 @@ namespace ST.CommandLine
 
         [Description("Writes extra console logging for individual specs")]
         public bool VerboseFlag { get; set; }
+
+        [Description("Sets a minimum number of retry attempts for this execution")]
+        public int RetriesFlag { get; set; }
+
+        [Description("Optional. Applies extra logging to see progress within TeamCity during CI runs")]
+        [FlagAlias("teamcity", 'z')]
+        public bool TeamCityTracingFlag { get; set; }
+
+        [Description("Optional. Only runs tests with desired lifecyle")]
+        public Lifecycle LifecycleFlag { get; set; } = Lifecycle.Any;
+
+
+        protected override Project configureProject()
+        {
+            var project = base.configureProject();
+            project.MaxRetries = RetriesFlag;
+
+            if (TeamCityTracingFlag)
+            {
+                project.TracingStyle = "TeamCity";
+            }
+
+            return project;
+        }
 
         private BatchRunRequest _batchRunRequest;
 
