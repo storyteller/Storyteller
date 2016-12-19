@@ -27,7 +27,7 @@
       "../CommonAssemblyInfo.cs"
     ],
     "embed": {
-      "include": [ "**/*.txt", "*.js" ]
+      "include": [ "**/*.txt", "*.js", "*.ico" ]
     },
     "copyToOutput": {
       "include": [ "*.js" ]

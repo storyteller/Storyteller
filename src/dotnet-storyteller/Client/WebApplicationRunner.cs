@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Baseline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -109,6 +110,19 @@ namespace ST.Client
 
                     app.Run(async http =>
                     {
+                        if (http.Request.Path == "/favicon.ico")
+                        {
+                            var stream =
+                                GetType()
+                                    .GetTypeInfo()
+                                    .Assembly.GetManifestResourceStream("dotnet-storyteller.favicon.ico");
+
+                            http.Response.ContentType = "image/x-icon";
+                            await stream.CopyToAsync(http.Response.Body).ConfigureAwait(false);
+
+                            return;
+                        }
+
                         string html;
                         if (http.Request.Path.HasValue && http.Request.Path.Value == "/preview")
                         {
