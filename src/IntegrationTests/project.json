@@ -8,7 +8,7 @@
     "xunit": "2.2.0-beta3-build3402",
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "StoryTeller": { "target": "project" },
-    "dotnet-storyteller": { "target": "project" },
+    "StorytellerRunner": { "target": "project" },
     "Specifications": { "target": "project" },
     "Samples": { "target": "project" },
     "MultipleSystems": { "target": "project" },

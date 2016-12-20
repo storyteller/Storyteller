@@ -9,7 +9,7 @@ module.exports = {
 	
   },
   output: {
-    path: __dirname + '/src/dotnet-storyteller',
+    path: __dirname + '/src/StorytellerRunner',
     filename: "[name].js",
     publicPath: '/client/public/javascript/',
     pathinfo: true

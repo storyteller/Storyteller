@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0-alpha-*",
+  "name": "StorytellerRunner",
+  "title": "Storyteller Project Runner",
+  "description": "Storyteller Project Runner and Editor",
+  "language": "en-US",
+  "authors": [
+    "Jeremy D. Miller"
+  ],
+  "packOptions": {
+    "projectUrl": "http://storyteller.github.io",
+    "tags": [
+      "testing"
+    ],
+    "licenseUrl": "https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/storyteller/storyteller"
+    }
+  },
+
+  "buildOptions": {
+    "debugType": "portable",
+    "emitEntryPoint": true,
+    "compile": [
+      "**/*.cs",
+      "../CommonAssemblyInfo.cs"
+    ],
+    "embed": {
+      "include": [ "**/*.txt", "*.js", "*.ico" ]
+    },
+    "copyToOutput": {
+      "include": [ "*.js" ]
+    },
+    "outputName": "StorytellerRunner"
+
+  },
+
+
+  "dependencies": {
+    "StoryTeller": { "target": "project" },
+    "Newtonsoft.Json": "9.0.1",
+    "Oakton": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.AspNetCore.Hosting": "1.0.0",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.AspNetCore.WebSockets.Server": "0.1.0",
+    "Microsoft.Extensions.FileProviders.Composite":  "1.0.1"
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "System.Runtime.Loader": "4.3.0",
+        "System.Runtime.Extensions": "4.3.0",
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.0"
+        }
+      },
+      "imports": "dnxcore50"
+    },
+    "net46": {
+    }
+  }
+}
