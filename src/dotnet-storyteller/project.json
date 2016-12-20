@@ -1,7 +1,7 @@
-{
+﻿{
   "version": "1.0.0-alpha-*",
-  "name": "StorytellerRunner",
-  "title": "Storyteller Project Runner",
+  "name": "dotnet-storyteller",
+  "title": "dotnet CLI integration for Storyteller",
   "description": "Storyteller Project Runner and Editor",
   "language": "en-US",
   "authors": [
@@ -18,48 +18,34 @@
       "url": "git://github.com/storyteller/storyteller"
     }
   },
-
   "buildOptions": {
-    "debugType": "portable",
     "emitEntryPoint": true,
     "compile": [
       "**/*.cs",
       "../CommonAssemblyInfo.cs"
-    ],
-    "embed": {
-      "include": [ "**/*.txt", "*.js", "*.ico" ]
-    },
-    "copyToOutput": {
-      "include": [ "*.js" ]
-    },
-    "outputName": "StorytellerRunner"
-
+    ]
   },
-
 
   "dependencies": {
-    "StoryTeller": { "target": "project" },
-    "Newtonsoft.Json": "9.0.1",
-    "Oakton": "1.0.0",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-    "Microsoft.AspNetCore.Hosting": "1.0.0",
-    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
-    "Microsoft.AspNetCore.WebSockets.Server": "0.1.0",
-    "Microsoft.Extensions.FileProviders.Composite":  "1.0.1"
+    "Microsoft.DotNet.ProjectModel": "1.0.0-rc3-1-003177",
+    "Microsoft.DotNet.Cli.Utils": "1.0.0-preview4-004233",
+    "Microsoft.Extensions.CommandLineUtils": "1.1.0",
+    "Microsoft.DotNet.InternalAbstractions": "1.0.500-preview2-1-003177",
+    "StorytellerRunner": {
+      "target": "project"
+    }
   },
+
   "frameworks": {
+    "net46": {},
     "netcoreapp1.0": {
       "dependencies": {
-        "System.Runtime.Loader": "4.3.0",
-        "System.Runtime.Extensions": "4.3.0",
         "Microsoft.NETCore.App": {
           "type": "platform",
-          "version": "1.0.0"
+          "version": "1.0.1"
         }
       },
       "imports": "dnxcore50"
-    },
-    "net46": {
     }
   }
 }

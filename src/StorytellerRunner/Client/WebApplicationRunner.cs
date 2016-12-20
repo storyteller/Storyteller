@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.FileProviders;
+using StorytellerRunner;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Model;
@@ -35,7 +36,9 @@ namespace ST.Client
         private readonly OpenInput _input;
         private FixtureController _fixtures;
         private IWebHost _server;
+#if DEBUG
         private AssetFileWatcher _watcher;
+#endif
         private CommandRunner _commands;
         private IApplication _application;
 
@@ -54,7 +57,9 @@ namespace ST.Client
         public void Dispose()
         {
             _server.SafeDispose();
+#if DEBUG
             _watcher?.Dispose();
+#endif
         }
 
 
@@ -79,8 +84,10 @@ namespace ST.Client
 
             startWebServer(port, webSockets);
 
+#if DEBUG
             _watcher = new AssetFileWatcher(Client);
             _watcher.Start();
+#endif
 
             return Client;
         }

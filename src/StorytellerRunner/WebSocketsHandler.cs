@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Http;
 
-namespace ST
+namespace StorytellerRunner
 {
     public class WebSocketsHandler : IDisposable
     {

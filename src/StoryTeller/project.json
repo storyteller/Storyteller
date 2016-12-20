@@ -19,7 +19,7 @@
   "packOptions": {
     "projectUrl": "http://storyteller.github.io",
     "tags": [
-      "testing"
+      "testing", "storyteller", "specifications", "bdd", "atdd"
     ],
     "licenseUrl": "https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT",
     "repository": {

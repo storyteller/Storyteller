@@ -1,11 +1,10 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using Oakton;
 using RunCommand = ST.CommandLine.RunCommand;
 
-namespace ST
+namespace StorytellerRunner
 {
-    internal class Program
+    public class Program
     {
         public static int Main(string[] args)
         {

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Reflection;
 using Baseline;
 using StoryTeller.Engine;
@@ -26,7 +27,7 @@ namespace StoryTeller.Results
 
         public static void WriteCSS(HtmlDocument document)
         {
-            var css = readFile("StoryTeller.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.storyteller.css");
+            var css = readFile("Storyteller.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.storyteller.css");
             css += "\n\n" + readFile("StoryTeller.fixed-data-table.min.css");
 
             document.Head.Add("style").Text(css).Encoded(false);
@@ -35,7 +36,13 @@ namespace StoryTeller.Results
 
         private static string readFile(string name)
         {
-            var stream = typeof(BatchResultsWriter).GetTypeInfo().Assembly.GetManifestResourceStream(name);
+            var assembly = typeof(BatchResultsWriter).GetTypeInfo().Assembly;
+            var names = assembly.GetManifestResourceNames();
+
+            var actualName = names.FirstOrDefault(x => x.EqualsIgnoreCase(name));
+
+
+            var stream = assembly.GetManifestResourceStream(actualName);
             var reader = new StreamReader(stream);
             return reader.ReadToEnd();
         }

@@ -35,6 +35,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-stdocs", "dotnet-std
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StorytellerRunner", "StorytellerRunner\StorytellerRunner.xproj", "{C4704FBC-C67E-4FCE-A03A-35E2C482C6BE}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-storyteller", "dotnet-storyteller\dotnet-storyteller.xproj", "{DC10EB19-53FD-47DD-9F38-046D93AB83B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -287,6 +289,22 @@ Global
 		{C4704FBC-C67E-4FCE-A03A-35E2C482C6BE}.Release|x64.Build.0 = Release|Any CPU
 		{C4704FBC-C67E-4FCE-A03A-35E2C482C6BE}.Release|x86.ActiveCfg = Release|Any CPU
 		{C4704FBC-C67E-4FCE-A03A-35E2C482C6BE}.Release|x86.Build.0 = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|x64.Build.0 = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Debug|x86.Build.0 = Debug|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|x64.ActiveCfg = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|x64.Build.0 = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|x86.ActiveCfg = Release|Any CPU
+		{DC10EB19-53FD-47DD-9F38-046D93AB83B8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

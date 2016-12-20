@@ -46,6 +46,7 @@ namespace StoryTeller
         public string ProjectPath { get; set; }
         public string BuildProfile { get; set; }
         public bool UseSeparateAppDomain { get; set; }
+        public string Framework { get; set; }
 
         public static Project LoadForFolder(string folder)
         {

@@ -28,6 +28,9 @@ namespace ST.CommandLine
         [Description("Path to the StoryTeller project file or the project directory")]
         public string Path { get; set; }
 
+        [Description("Override the dotnet framework if multi-targeting")]
+        public string FrameworkFlag { get; set; }
+
 #if NET46
         [Description("Directs Storyteller to run the system under test in a separate AppDomain if you are not using the Dotnet CLI")]
         public bool AppDomainFlag { get; set; } = false;
@@ -116,6 +119,8 @@ namespace ST.CommandLine
         {
             var path = Path.ToFullPath();
             var project = Project.LoadForFolder(path);
+
+            project.Framework = FrameworkFlag;
 
 #if NET46
             project.UseSeparateAppDomain = AppDomainFlag;

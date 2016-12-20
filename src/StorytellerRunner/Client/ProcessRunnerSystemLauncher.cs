@@ -79,12 +79,12 @@ namespace ST.Client
             };
 
 
-
+            var framework = _project.Framework;
 
 #if NET46
-            var framework = "NET46";
+            framework = framework ?? "net46";
 #else
-            var framework = AppContext.TargetFrameworkName;
+            framework = framework ?? "netcoreapp1.0";
 #endif
 
 
