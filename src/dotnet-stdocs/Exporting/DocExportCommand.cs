@@ -5,7 +5,7 @@ using Oakton;
 
 namespace StorytellerDocGen.Exporting
 {
-    [Description("Export a documentation project to static html", Name = "doc-export")]
+    [Description("Export a documentation project to static html", Name = "export")]
     public class DocExportCommand : OaktonCommand<DocExportInput>
     {
         public override bool Execute(DocExportInput input)

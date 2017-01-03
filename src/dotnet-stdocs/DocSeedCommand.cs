@@ -6,7 +6,7 @@ using StorytellerDocGen.Outline;
 
 namespace StorytellerDocGen
 {
-    [Description("Seeds a topic file structure from an outline.txt file", Name = "doc-seed")]
+    [Description("Seeds a topic file structure from an outline.txt file", Name = "seed")]
     public class DocSeedCommand : OaktonCommand<DocInput>
     {
         public override bool Execute(DocInput input)

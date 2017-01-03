@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using Oakton;
 using StoryTeller;
 
 namespace StorytellerDocGen
 {
-    [Description("Run the documentation in a live mode", Name = "doc-run")]
+    [Description("Run the documentation in a live mode", Name = "run")]
     public class DocRunCommand : OaktonCommand<DocInput>
     {
         public override bool Execute(DocInput input)

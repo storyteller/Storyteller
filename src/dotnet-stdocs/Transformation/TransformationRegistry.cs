@@ -11,7 +11,7 @@ namespace StorytellerDocGen.Transformation
 
             Scan(_ =>
             {
-                _.TheCallingAssembly();
+                _.AssemblyContainingType<TransformationRegistry>();
                 _.AddAllTypesOf<ITransformHandler>();
             });
         }
