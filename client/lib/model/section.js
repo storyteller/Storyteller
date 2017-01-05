@@ -106,12 +106,12 @@ class Section{
 		}
 
 		if (this.results.before && this.results.before.status != 'ok'){
-			elements.push(loader.errorBox({title: 'Error before the Section', error: this.results.before.error}));
+			elements.push(loader.errorBox({title: 'Error before the Section', error: this.results.before.error, errorDisplay: this.results.before.errorDisplay}));
 		}
 
 
 		if (this.results.setup && this.results.setup.status != 'ok'){
-			elements.push(loader.errorBox({title: 'SetUp Error', error: this.results.setup.error}));
+			elements.push(loader.errorBox({title: 'SetUp Error', error: this.results.setup.error, errorDisplay: this.results.setup.errorDisplay}));
 		}
 
 		// TODO -- if you ever have time, do this with _.flatten instead
@@ -126,7 +126,7 @@ class Section{
 		});
 
 		if (this.results.teardown && this.results.teardown.status != 'ok'){
-			elements.push(loader.errorBox({title: 'TearDown Error', error: this.results.teardown.error}));
+			elements.push(loader.errorBox({title: 'TearDown Error', error: this.results.teardown.error, errorDisplay: this.results.teardown.errorDisplay}));
 		}
 
 		if (isStepthrough){

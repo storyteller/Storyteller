@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using StoryTeller.Results;
 
 namespace StoryTeller
 {
@@ -10,17 +11,17 @@ namespace StoryTeller
 #if NET46
     [Serializable]
 #endif
-    public class StorytellerCatastrophicException : Exception
+    public class StorytellerCatastrophicException : StorytellerFailureException
     {
         public StorytellerCatastrophicException()
         {
         }
 
-        public StorytellerCatastrophicException(string message) : base(message)
+        public StorytellerCatastrophicException(string message) : base(message, ErrorDisplay.text)
         {
         }
 
-        public StorytellerCatastrophicException(string message, Exception innerException) : base(message, innerException)
+        public StorytellerCatastrophicException(string message, Exception innerException) : base(message, innerException, ErrorDisplay.text)
         {
         }
 

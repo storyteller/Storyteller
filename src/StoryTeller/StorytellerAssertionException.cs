@@ -1,12 +1,13 @@
 using System;
 using System.Runtime.Serialization;
+using StoryTeller.Results;
 
 namespace StoryTeller
 {
 #if NET46
     [Serializable]
 #endif
-    public class StorytellerAssertionException : Exception
+    public class StorytellerAssertionException : StorytellerFailureException
     {
         public StorytellerAssertionException()
         {
@@ -28,5 +29,6 @@ namespace StoryTeller
         {
             return Message;
         }
+
     }
 }

@@ -6,7 +6,7 @@ describe('SilentGrammar', function(){
 	var step = {
 		getResult: function(position){
 			if (position == '2'){
-				return {status: 'error', error: 'bad!'}
+				return {status: 'error', error: 'bad!', errorDisplay: 'text'}
 			}
 
 			return null;
@@ -31,7 +31,8 @@ describe('SilentGrammar', function(){
 			type: 'errorBox',
 			props: {
 				title: 'Silent Action',
-				error: 'bad!'
+				error: 'bad!',
+				errorDisplay: 'text'
 			}
 		});
 	});

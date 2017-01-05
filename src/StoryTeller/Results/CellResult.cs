@@ -21,6 +21,7 @@ namespace StoryTeller.Results
         public string actual;
         public string error;
         public string cell;
+        public ErrorDisplay errorDisplay = ErrorDisplay.text;
 
         public CellResult(string cell, ResultStatus status)
         {
@@ -48,14 +49,21 @@ namespace StoryTeller.Results
             return new CellResult(cell, ResultStatus.missing);
         }
 
-        public static CellResult Error(string cell, string message)
+        public static CellResult Error(string cell, string message, ErrorDisplay display = ErrorDisplay.text)
         {
-            return new CellResult(cell, ResultStatus.error){error = message};
+            return new CellResult(cell, ResultStatus.error)
+            {
+                error = message,
+                errorDisplay = display
+            };
         }
 
         public static CellResult Error(string cell, Exception ex)
         {
-            return Error(cell, ex.ToDisplayMessage());
+            ErrorDisplay display = ErrorDisplay.text;
+            var text = ExceptionFormatting.ToDisplayMessage(ex, out display);
+
+            return Error(cell, text, display);
         }
 
 

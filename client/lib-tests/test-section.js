@@ -277,7 +277,7 @@ describe('Section storing and clearing results', function(){
 			// no setup result
 			expect(section.buildResults(loader).props.components.length).to.equal(3);
 
-			section.logResult({type: 'step-result', position:'setup', error: 'bad!'});
+			section.logResult({type: 'step-result', position:'setup', error: 'bad!', errorDisplay: 'markdown'});
 
 			var results = section.buildResults(loader).props.components;
 
@@ -286,7 +286,8 @@ describe('Section storing and clearing results', function(){
 				type: 'errorBox',
 				props: {
 					title: 'SetUp Error',
-					error: 'bad!'
+					error: 'bad!',
+					errorDisplay: 'markdown'
 				}
 			});
 		});
@@ -296,7 +297,7 @@ describe('Section storing and clearing results', function(){
 			// no setup result
 			expect(section.buildResults(loader).props.components.length).to.equal(3);
 
-			section.logResult({type: 'step-result', position:'before', error: 'bad!'});
+			section.logResult({type: 'step-result', position:'before', error: 'bad!', errorDisplay: 'text'});
 
 			var results = section.buildResults(loader).props.components;
 
@@ -305,7 +306,8 @@ describe('Section storing and clearing results', function(){
 				type: 'errorBox',
 				props: {
 					title: 'Error before the Section',
-					error: 'bad!'
+					error: 'bad!',
+					errorDisplay: 'text'
 				}
 			});
 		});
@@ -314,7 +316,7 @@ describe('Section storing and clearing results', function(){
 			// no teardown result
 			expect(section.buildResults(loader).props.components.length).to.equal(3);
 
-			section.logResult({type: 'step-result', position:'teardown', error: 'bad!'});
+			section.logResult({type: 'step-result', position:'teardown', error: 'bad!', errorDisplay: 'markdown'});
 
 			var results = section.buildResults(loader).props.components;
 
@@ -323,7 +325,8 @@ describe('Section storing and clearing results', function(){
 				type: 'errorBox',
 				props: {
 					title: 'TearDown Error',
-					error: 'bad!'
+					error: 'bad!',
+					errorDisplay: 'markdown'
 				}
 			});
 		});

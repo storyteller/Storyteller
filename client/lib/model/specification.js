@@ -119,12 +119,12 @@ function Specification(data, library){
     }
 
     if (this.results.engine){
-      elements.push(loader.errorBox({title: 'Engine Failure', error: this.results.engine.error}));
+      elements.push(loader.errorBox({title: 'Engine Failure', error: this.results.engine.error, errorDisplay: this.results.engine.errorDisplay}));
     }
 
 
     if (this.results.context){
-      elements.push(loader.errorBox({title: 'Context Creation Failure in the engine', error: this.results.context.error}));
+      elements.push(loader.errorBox({title: 'Context Creation Failure in the engine', error: this.results.context.error, errorDisplay: this.results.context.errorDisplay}));
     }
 
     this.steps.forEach(step => {

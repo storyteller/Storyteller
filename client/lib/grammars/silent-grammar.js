@@ -32,7 +32,7 @@ class Silent{
 		}
 
 		if (result && result.status != 'ok'){
-			components.push(loader.errorBox({title: 'Silent Action', error: result.error}));
+			components.push(loader.errorBox({title: 'Silent Action', error: result.error, errorDisplay: result.errorDisplay}));
 		}
 
 		return components;

@@ -1,36 +1,49 @@
 var React = require("react");
 var uuid = require('node-uuid');
 
-var ErrorBox = React.createClass({
-	render: function(){
-		var title = null;
-		if (this.props.title){
-			title = (
-				<span>{this.props.title}</span>
-			);
-		}
+var marked = require('marked');
+marked.setOptions({
+  gfm: true
+});
 
-		var style = {
-			overflow: 'auto'
-		}
+function ErrorBox({title, error, errorDisplay}){
+	var title = null;
+	if (title){
+		title = (
+			<span>{title}</span>
+		);
+	}
 
-		if (title){
-			return (
-				<pre style={style} className="error bg-warning">
-					{title}
-					<hr />
-					{this.props.error}
-				</pre>
-			);
-		}
+	var style = {
+		overflow: 'auto'
+	}
 
+	if (title){
 		return (
 			<pre style={style} className="error bg-warning">
-				<i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>{this.props.error}
+				{title}
+				<hr />
+				{error}
 			</pre>
 		);
-
 	}
-});
+
+	if (errorDisplay == 'markdown'){
+		var html = marked(error);
+		return (
+			<div style={style} className="error bg-warning">
+				{title}
+				<div>dangerouslySetInnerHTML={{__html: html}}</div>
+			</div>
+		)
+	}
+
+	return (
+		<pre style={style} className="error bg-warning">
+			<i className="fa fa-exclamation-circle" style={{paddingRight: '5px'}}></i>{error}
+		</pre>
+	);
+}
+
 
 module.exports = ErrorBox;

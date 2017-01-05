@@ -33,8 +33,10 @@ namespace StoryTeller.Results
 
         public StepResult(string id, Exception ex) : this(id, ResultStatus.error)
         {
-            error = ex.ToDisplayMessage();
+            error = ExceptionFormatting.ToDisplayMessage(ex, out errorDisplay);
         }
+
+        public ErrorDisplay errorDisplay = ErrorDisplay.text;
 
         public string id { get; set; }
         public string spec { get; set; }
@@ -44,7 +46,7 @@ namespace StoryTeller.Results
             get { return _position; }
             set
             {
-                _position = value == null ? null : value.ToString();
+                _position = value?.ToString();
             }
         }
 
@@ -112,9 +114,6 @@ namespace StoryTeller.Results
             return description;
         }
 
-        public string type
-        {
-            get { return "step-result"; }
-        }
+        public string type => "step-result";
     }
 }

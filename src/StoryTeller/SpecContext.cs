@@ -124,19 +124,13 @@ namespace StoryTeller
             Results.Add(result);
         }
 
+        
+
         public void LogException(string id, Exception ex, object position = null)
         {
             Reporting.ReporterFor<ExceptionReport>().Log(ex);
 
-            if (ex.InnerException is StorytellerCriticalException)
-            {
-                ex = ex.InnerException;
-            }
-
-            if (ex.InnerException is StorytellerCatastrophicException)
-            {
-                ex = ex.InnerException;
-            }
+            ex = unwrapException(ex);
 
             if (ex is StorytellerCriticalException)
             {
@@ -171,6 +165,16 @@ namespace StoryTeller
             }
 
             LogResult(new StepResult(id, ResultStatus.error) {error = errorMessage, position = position});
+        }
+
+        private static Exception unwrapException(Exception ex)
+        {
+            if (ex.InnerException is StorytellerFailureException)
+            {
+                return ex.InnerException;
+            }
+
+            return ex;
         }
 
 

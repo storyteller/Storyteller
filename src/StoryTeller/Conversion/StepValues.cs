@@ -85,7 +85,7 @@ namespace StoryTeller.Conversion
 
         public void LogError(string key, Exception ex)
         {
-            Errors.Add(CellResult.Error(key, ex.ToDisplayMessage()));
+            Errors.Add(CellResult.Error(key, ex));
         }
 
         public void LogError(string key, string message)

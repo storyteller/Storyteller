@@ -577,7 +577,7 @@ describe('Specification', function(){
       // pre-condition
       //expect(spec.buildResults(loader).length).to.equal(0);
 
-      spec.results.engine = {error: 'Blew up!'};
+      spec.results.engine = {error: 'Blew up!', errorDisplay: 'markdown'};
 
       var results = spec.buildResults(loader);
 
@@ -585,7 +585,8 @@ describe('Specification', function(){
         type: 'errorBox',
         props: {
           title: 'Engine Failure',
-          error: 'Blew up!'
+          error: 'Blew up!',
+          errorDisplay: 'markdown'
         }
 
       });

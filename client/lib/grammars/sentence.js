@@ -155,7 +155,7 @@ class Sentence{
 		var status = result.status;
 
 		if (result.status == 'error'){
-            components.push(loader.errorBox({error: result.error}));
+            components.push(loader.errorBox({error: result.error, errorDisplay: result.errorDisplay}));
 		}
 
 		if (isActive){

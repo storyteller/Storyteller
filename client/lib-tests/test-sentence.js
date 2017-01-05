@@ -289,7 +289,7 @@ describe('Sentence', function(){
 			var sentence = new Sentence({key: 'Adding', format: 'Add {x} to {y} should be {sum}'});
 			var step = sentence.buildStep({cells: {x: 1, y: 2, sum: 3}});
 
-			step.logResult({status: 'error', error: 'bad!'});
+			step.logResult({status: 'error', error: 'bad!', errorDisplay: 'text'});
 
 			var preview = sentence.buildResults(step, loader);
 
@@ -305,7 +305,7 @@ describe('Sentence', function(){
 						loader.cell({cell: {key: 'y', editor: 'text'}, value: 2}),
 						loader.span(' should be '),
 						loader.cell({cell: {key: 'sum', editor: 'text'}, value: 3}),
-                        {"type":"errorBox","props":{"error":"bad!"}}
+                        {"type":"errorBox","props":{"error":"bad!", "errorDisplay": "text"}}
 					]
 				}
 
