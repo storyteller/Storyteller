@@ -33,7 +33,7 @@ function ErrorBox({title, error, errorDisplay}){
 		return (
 			<div style={style} className="error bg-warning">
 				{title}
-				<div>dangerouslySetInnerHTML={{__html: html}}</div>
+				<div dangerouslySetInnerHTML={{__html: html}}></div>
 			</div>
 		)
 	}

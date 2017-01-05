@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using Baseline;
 using StoryTeller.Engine;
@@ -150,25 +151,19 @@ namespace StoryTeller
 
             CatastrophicException = ex as StorytellerCatastrophicException;
 
-            string errorMessage = null;
-            if (ex is StorytellerAssertionException)
-            {
-                errorMessage = ex.Message;
-            }
-            else if (ex.InnerException is StorytellerAssertionException)
-            {
-                errorMessage = ex.InnerException.Message;
-            }
-            else
-            {
-                errorMessage = ex.ToString();
-            }
+            var result = new StepResult(id, ResultStatus.error) {position = position};
+            result.error = ExceptionFormatting.ToDisplayMessage(ex, out result.errorDisplay);
 
-            LogResult(new StepResult(id, ResultStatus.error) {error = errorMessage, position = position});
+            LogResult(result);
         }
 
         private static Exception unwrapException(Exception ex)
         {
+            if (ex is TargetInvocationException)
+            {
+                ex = ex.InnerException;
+            }
+
             if (ex.InnerException is StorytellerFailureException)
             {
                 return ex.InnerException;

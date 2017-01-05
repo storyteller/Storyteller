@@ -74,7 +74,6 @@ function ContextualPane(props){
 
         <Tab eventKey={2} title="Properties">
           <RetryCount count={props.spec.spec['max-retries']}/>
-          <ExpirationPeriod spec={props.spec.spec} disabled={props.updatingDate} />
         </Tab>
       </Tabs>
       </AutoAffix>
