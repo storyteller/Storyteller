@@ -27,8 +27,9 @@ function Communicator(dispatch, address, disconnect){
 	
 	
 	
-	this.socket.onopen = function(){
+	this.socket.onopen = () => {
 		console.log('Opened a socket at ' + address);
+		this.send({type: 'request-initial-data'});
 	}
 
 	this.send = function(message){

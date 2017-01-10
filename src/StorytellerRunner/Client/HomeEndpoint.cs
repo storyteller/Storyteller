@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +10,15 @@ using StoryTeller.Util;
 
 namespace ST.Client
 {
+    public static class StreamExtensions
+    {
+        public static Task WriteAsync(this Stream stream, string text)
+        {
+            var bytes = Encoding.UTF8.GetBytes(text);
+            return stream.WriteAsync(bytes, 0, bytes.Length);
+        }
+    }
+
     public static class HomeEndpoint
     {
         public static readonly string[] Stylesheets = new[]{"bootstrap.min.css", "storyteller.css", "font-awesome.min.css", "fixed-data-table.min.css"};
@@ -17,8 +27,7 @@ namespace ST.Client
         {
             var styleTags = HomeEndpoint.styleTags().Select(x => x.ToString()).Join("\n  ");
 
-
-            await response.WriteAsync($@"
+            await response.Body.WriteAsync($@"
 <html>
 <head>
   <title>Storyteller 4</title>
@@ -29,7 +38,7 @@ namespace ST.Client
 
             await writeInitialDataIntoPage(response, application).ConfigureAwait(false);
 
-            await response.WriteAsync($@"
+            await response.Body.WriteAsync($@"
 
 </head>
 <body>
@@ -39,9 +48,9 @@ namespace ST.Client
 
 ").ConfigureAwait(false);
 
-            await response.WriteAsync(ScriptTag(input.DevFlag).ToString()).ConfigureAwait(false);
+            await response.Body.WriteAsync(ScriptTag(input.DevFlag).ToString()).ConfigureAwait(false);
 
-            await response.WriteAsync(@"
+            await response.Body.WriteAsync(@"
 </body>
 </html>
 
@@ -87,14 +96,16 @@ namespace ST.Client
         {
             var model = application.BuildInitialModel();
 
-            await response.WriteAsync($@"
+            await response.Body.WriteAsync($@"
 <script type=""text/javascript"">
 var Storyteller = {{wsAddress: '{application.Client.WebSocketsAddress}'}};
 
 Storyteller.initialization = ").ConfigureAwait(false);
 
-            await response.WriteAsync(JsonSerialization.ToCleanJson(model)).ConfigureAwait(false);
-            await response.WriteAsync(";\n\n</script>").ConfigureAwait(false);
+            await JsonSerialization.WriteCleanJson(response.Body, model).ConfigureAwait(false);
+
+            //await response.Body.WriteAsync(JsonSerialization.ToCleanJson(model), Encoding.UTF8).ConfigureAwait(false);
+            await response.Body.WriteAsync(";\n\n</script>").ConfigureAwait(false);
         }
     }
 }

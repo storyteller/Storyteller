@@ -47,6 +47,8 @@ var startRouting = app(Storyteller.initialization, store => {
             store.dispatch(data);
         }
     });
+
+    
 });
 
 var Communicator = require('./communicator');

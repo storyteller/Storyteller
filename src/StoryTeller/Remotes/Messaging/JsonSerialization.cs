@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using Baseline;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -62,13 +64,46 @@ namespace StoryTeller.Remotes.Messaging
 
         public static string ToCleanJson(object o)
         {
-            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.None };
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.None,  };
             serializer.Converters.Add(new StringEnumConverter());
 
-            var writer = new StringWriter();
-            serializer.Serialize(writer, o);
 
-            return writer.ToString();
+            using (var stream = new MemoryStream())
+            {
+                using (var writer = new StreamWriter(stream, Encoding.UTF8))
+                {
+                    serializer.Serialize(writer, o);
+
+                    writer.Flush();
+
+                    stream.Position = 0;
+
+                    return stream.ReadAllText();
+                }
+
+
+            }
+        }
+
+        public static Task WriteCleanJson(Stream response, object o)
+        {
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.None, };
+            serializer.Converters.Add(new StringEnumConverter());
+
+            var raw = new MemoryStream();
+
+            using (var writer = new StreamWriter(raw, Encoding.UTF8))
+            {
+                serializer.Serialize(writer, o);
+
+                writer.Flush();
+
+                raw.Position = 3;
+
+                return raw.CopyToAsync(response);
+
+
+            }
         }
 
         public static string ToIndentedJson(object o)
