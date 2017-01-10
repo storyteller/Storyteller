@@ -126,7 +126,7 @@ namespace StoryTeller.Model
             var valueText = line.Substring(valueIndex);
 
             var values = valueText.ToDelimitedArray();
-            if (!values.Any()) return step;
+            if (!values.Any() || valueText.IsEmpty()) return step;
 
             if (values.All(x => x.Contains("=")))
             {

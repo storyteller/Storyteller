@@ -37,6 +37,10 @@ Hank, Tom, Todd
 ");
 
             var section = spec.Children[0].As<Section>();
+
+            section.Children[0].As<Step>().StagedValues.ShouldBeNull();
+
+
             section.Children[0].As<Step>().Values["names"].ShouldBe("Hank, Tom, Todd");
             section.Children[1].As<Step>().Values["numbers"].ShouldBe("1,1,2,3");
 
