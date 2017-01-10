@@ -127,19 +127,21 @@ namespace ST.Client
 
                         try
                         {
-                            string html;
+                            http.Response.ContentType = "text/html";
+
                             if (http.Request.Path.HasValue && http.Request.Path.Value == "/preview")
                             {
-                                html = ExportWriter.BuildPage(_application);
+                                var html = ExportWriter.BuildPage(_application);
+                                await http.Response.WriteAsync(html).ConfigureAwait(false);
                             }
                             else
                             {
-                                html = HomeEndpoint.BuildPage(_application, _input).ToString();
+                                await HomeEndpoint.BuildPage(http.Response, _application, _input).ConfigureAwait(false);
                             }
 
 
-                            http.Response.ContentType = "text/html";
-                            await http.Response.WriteAsync(html).ConfigureAwait(false);
+                            
+                            
                         }
                         catch (Exception e)
                         {

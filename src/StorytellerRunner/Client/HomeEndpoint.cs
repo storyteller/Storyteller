@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Baseline;
+using Microsoft.AspNetCore.Http;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Util;
 
@@ -10,22 +13,39 @@ namespace ST.Client
     {
         public static readonly string[] Stylesheets = new[]{"bootstrap.min.css", "storyteller.css", "font-awesome.min.css", "fixed-data-table.min.css"};
 
-        public static HtmlDocument BuildPage(IApplication application, OpenInput input)
+        public static async Task BuildPage(HttpResponse response, IApplication application, OpenInput input)
         {
-            var document = new HtmlDocument {Title = "Storyteller 4"};
-
-            styleTags().Each(x => document.Head.Append(x));
-
-            writeInitialDataIntoPage(document, application);
-
-            document.Add("div").Id("header-container");
-            document.Add("div").Id("body-pane").AddClass("container");
-            document.Add("div").Id("main");
-
-            document.Body.Append(ScriptTag(input.DevFlag));
+            var styleTags = HomeEndpoint.styleTags().Select(x => x.ToString()).Join("\n  ");
 
 
-            return document;
+            await response.WriteAsync($@"
+<html>
+<head>
+  <title>Storyteller 4</title>
+  {styleTags}
+
+
+").ConfigureAwait(false);
+
+            await writeInitialDataIntoPage(response, application).ConfigureAwait(false);
+
+            await response.WriteAsync($@"
+
+</head>
+<body>
+  <div id=""header-container""></div>
+  <div id=""body-pane"" class=""container""></div>
+  <div id=""main""></div>
+
+").ConfigureAwait(false);
+
+            await response.WriteAsync(ScriptTag(input.DevFlag).ToString()).ConfigureAwait(false);
+
+            await response.WriteAsync(@"
+</body>
+</html>
+
+").ConfigureAwait(false);
         }
 
 
@@ -63,20 +83,18 @@ namespace ST.Client
         }
 
 
-        private static void writeInitialDataIntoPage(HtmlDocument document, IApplication application)
+        private static async Task writeInitialDataIntoPage(HttpResponse response, IApplication application)
         {
             var model = application.BuildInitialModel();
 
-            var script = new StringWriter();
-            script.WriteLine();
-            script.WriteLine($"var Storyteller = {{wsAddress: '{application.Client.WebSocketsAddress}'}};");
-            script.WriteLine();
-            script.WriteLine("Storyteller.initialization = {0};",
-                JsonSerialization.ToCleanJson(model));
-            script.WriteLine();
+            await response.WriteAsync($@"
+<script type=""text/javascript"">
+var Storyteller = {{wsAddress: '{application.Client.WebSocketsAddress}'}};
 
+Storyteller.initialization = ").ConfigureAwait(false);
 
-            document.Head.Add("script").Encoded(false).Text(script.ToString()).Attr("type", "text/javascript");
+            await response.WriteAsync(JsonSerialization.ToCleanJson(model)).ConfigureAwait(false);
+            await response.WriteAsync(";\n\n</script>").ConfigureAwait(false);
         }
     }
 }
