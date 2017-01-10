@@ -240,6 +240,20 @@ namespace StoryTeller.Testing.Model.Persistence
         }
 
         [Fact]
+        public void read_and_write_with_cell_values_that_have_delimited_arrays()
+        {
+            var section = new Section("Math");
+            section.AddStep("Foo").With("Values", "A, B, C");
+
+            original.Children.Add(section);
+
+
+            section = persisted.Children[0].As<Section>();
+            section.Children[0].As<Step>().Values["Values"]
+                .ShouldBe("A, B, C");
+        }
+
+        [Fact]
         public void read_and_write_a_step_with_plain_values_under_a_section()
         {
             var step = new Step("Add").With("x", "1").With("y", "2").With("sum", "3");

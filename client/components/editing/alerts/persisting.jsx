@@ -63,6 +63,8 @@ class Persisting extends React.Component {
   }
 
   componentWillUnmount(){
+    this.listenForPersisting.unsubscribe();
+    this.listenForSaved.unsubscribe();
   }
 
   render(){
