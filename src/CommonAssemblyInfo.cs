@@ -1,8 +1,9 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
-[assembly: AssemblyProduct("Storyteller")]
-[assembly: AssemblyCopyright("Copyright 2008-2015 Jeremy D. Miller, Steve Matney, Ron Lloyd, et al. All rights reserved.")]
-[assembly: AssemblyTrademark("d113459b3638f01fde0f26f3311acc1974c77846")]
-[assembly: AssemblyVersion("3.0.0.50726")]
-[assembly: AssemblyFileVersion("3.0.0.50726")]
-[assembly: AssemblyInformationalVersion("3.0.0.50726")]
+[assembly: AssemblyDescription("IoC Container for .Net")]
+[assembly: AssemblyProduct("Executable Specifications for .Net")]
+[assembly: AssemblyCopyright("Copyright 2008-2017 Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al. All rights reserved.")]
+[assembly: AssemblyTrademark("8406606fb81affcc49876fcce8cc48d17c779894")]
+[assembly: AssemblyVersion("4.0.0.51226")]
+[assembly: AssemblyFileVersion("4.0.0.51226")]
+[assembly: AssemblyInformationalVersion("4.0.0.51226")]
