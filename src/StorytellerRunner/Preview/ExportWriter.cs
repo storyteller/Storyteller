@@ -11,6 +11,7 @@ using ST.Client;
 
 namespace ST.Preview
 {
+    // TODO -- ugh, will need to rewrite this to all write to a stream.
     public static class ExportWriter
     {
         public static string BuildPage(IApplication application)
@@ -29,12 +30,14 @@ namespace ST.Preview
                 Title = title
             };
 
-            BatchResultsWriter.WriteCSS(document);
+            document.Head.Append(BatchResultsWriter.StyleTag());
 
             writeInitialData(document, top, fixtures, title);
 
 #if DEBUG
-            HomeEndpoint.WriteClientAssetsDebugMode(document, false, "/preview.js");
+            var scriptTag = HomeEndpoint.ScriptTag(false, "/preview.js");
+            document.Body.Append(scriptTag);
+
 #else
             writeEnbeddedJavascript(document);
 #endif

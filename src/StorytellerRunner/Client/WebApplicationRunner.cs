@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -119,13 +120,7 @@ namespace ST.Client
                     {
                         if (http.Request.Path == "/favicon.ico")
                         {
-                            var stream =
-                                GetType()
-                                    .GetTypeInfo()
-                                    .Assembly.GetManifestResourceStream("StorytellerRunner.favicon.ico");
-
-                            http.Response.ContentType = "image/x-icon";
-                            await stream.CopyToAsync(http.Response.Body).ConfigureAwait(false);
+                            await writeFavicon(http).ConfigureAwait(false);
 
                             return;
                         }
@@ -158,6 +153,17 @@ namespace ST.Client
                 });
 
             _server = host.Start();
+        }
+
+        private async Task writeFavicon(HttpContext http)
+        {
+            var stream =
+                GetType()
+                    .GetTypeInfo()
+                    .Assembly.GetManifestResourceStream("StorytellerRunner.favicon.ico");
+
+            http.Response.ContentType = "image/x-icon";
+            await stream.CopyToAsync(http.Response.Body).ConfigureAwait(false);
         }
 
         private void configureStaticFiles(IApplicationBuilder app)

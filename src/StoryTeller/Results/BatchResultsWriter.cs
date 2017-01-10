@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Baseline;
@@ -24,13 +25,20 @@ namespace StoryTeller.Results
         }
 
 
-
+        [Obsolete("Trying to make this go away")]
         public static void WriteCSS(HtmlDocument document)
+        {
+            var styleTag = StyleTag();
+
+            document.Head.Append(styleTag);
+        }
+
+        public static HtmlTag StyleTag()
         {
             var css = readFile("Storyteller.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.storyteller.css");
             css += "\n\n" + readFile("StoryTeller.fixed-data-table.min.css");
 
-            document.Head.Add("style").Text(css).Encoded(false);
+            return new HtmlTag("style").Text(css).Encoded(false);
         }
 
 
