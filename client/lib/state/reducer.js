@@ -4,11 +4,14 @@ var BatchRunResponse = require('./batch-run-response');
 var Immutable = require('immutable');
 var Specification = require('./../model/specification');
 var SpecRecord = require('./../model/spec-record');
-var RunningState = require('./../model/running-state');
 var Suite = require('./../model/suite');
 var Counts = require('./../model/counts');
 var _ = require('lodash');
 import {AlterBreakpoints, SendBreakpoints, NextStep} from './breakpoints';
+import {expandAll, collapseAll, specAdded, specDeleted, toggleTreeState, specStatusFilterChanged, lifecycleFilterChanged} from './tree-state'
+import {updateSpec, replaceRunning, recordResult, specData} from './specs'
+import {queueState, specProgress, specExecutionCompleted} from './progress'
+import {goHome, goEnd, goNext, goPrevious, undo, redo, addItem, selectCell, selectHolder} from './navigation'
 
 var initialState = Immutable.Map({
     'lifecycle-filter': 'any', 
@@ -21,58 +24,7 @@ var initialState = Immutable.Map({
     'running-spec': null
 });
 
-function updateSpec(state, id, func){
-    try {
-        return state.updateIn(['specs', id], r => r.acceptChange(func));
-    }
-    catch (e){
-        console.error('Error trying to update spec: ' + id);
-        throw e;
-    }
-    
-}
 
-function expandAll(state){
-    var treeState = state.get('tree-state').toJS();
-    var suite = state.get('hierarchy');
-    
-    suite.allSuites().forEach(s => treeState[s.path] = true);
-    
-    return state.set('tree-state', Immutable.Map(treeState));
-}
-
-function collapseAll(state){
-    var treeState = {};
-    var suite = state.get('hierarchy');
-    
-    suite.allSuites().forEach(s => treeState[s.path] = false);
-    
-    return state.set('tree-state', Immutable.Map(treeState));
-}
-
-function replaceRunning(state, running){
-    var currentRunning = state.get('running');
-    
-    if (running == null && currentRunning != null){
-        return state.set('running', null).set('running-spec', null);
-    }
-    
-    if (running != null && (currentRunning == null || currentRunning.id != running)){
-        state = state.set('running', new RunningState(running));
-
-        var record = state.get('specs').get(running);
-        return state.set('running-spec', record.forRunning());
-    }
-
-    return state;
-}
-
-function recordResult(state, action){
-    var runningState = state.get('running-spec');
-    if (!runningState || runningState.id != action.spec) return state;
-    
-    return state.update('running-spec', x => x.readResult(action));
-}
 
 function Reducer(state = initialState, action){
   switch (action.type) {
@@ -113,16 +65,10 @@ function Reducer(state = initialState, action){
         return HierarchyLoaded(state, action);
         
     case 'spec-added':
-        var library = state.get('fixtures');
-        var spec = new SpecRecord(action.data, library, null);
-        return state
-            .set('hierarchy', new Suite(action.hierarchy, null))
-            .setIn(['specs', action.data.id], spec);
+        return specAdded(state, action);
             
     case 'spec-deleted':
-        return state
-            .set('hierarchy', new Suite(action.hierarchy, null))
-            .deleteIn(['specs', action.id]);
+        return specDeleted(state, action);
       
     case 'suite-added':
         return state
@@ -135,53 +81,25 @@ function Reducer(state = initialState, action){
         return collapseAll(state);
      
     case 'toggle-tree-state':
-        if (state.get('tree-state').has(action.path)){
-            return state.updateIn(['tree-state', action.path], x => !x);
-        }
-    
-        return state.setIn(['tree-state', action.path], false);
+        return toggleTreeState(state, action);
      
     case 'spec-status-filter-changed':
-        return state.set('status-filter', action.status);
+        return specStatusFilterChanged(state, action);
         
     case 'lifecycle-filter-changed':
-        return state.set('lifecycle-filter', action.lifecycle);
+        return lifecycleFilterChanged(state, action);
         
     case 'spec-data':
-        var library = state.get('fixtures');
-        var spec = new Specification(action.data, library);
-        state = state.updateIn(['specs', action.id], x => x.replace(spec));
-        if (state.get('running-spec') != null){
-            state = state.update('running-spec', x => x.replaceData(action.data))
-        }
-        return state;
-
+        return specData(state, action);
 
     case 'queue-state':
-        state = replaceRunning(state, action.running);
-
-        state = state.set('running-mode', action.mode);
-    
-        if (!_.isEqual(state.get('queued'), action.queued)){
-            return state.set('queued', action.queued);
-        }
-        else {
-            return state;
-        }
+        return queueState(state, action);
         
     case 'spec-progress':
-        state = replaceRunning(state, action.id);
-        state = state.update('running', x => x.updateCounts(action));
-    
-        return state.set('progress', action);
+        return specProgress(state, action);
 
     case 'spec-execution-completed':
-        var running = state.get('running');
-        if (running && running.id == action.id){
-            state = state.set('running', null);
-        }
-    
-        return state.updateIn(['specs', action.id], record => record.recordLastResult(action));
+        return specExecutionCompleted(state, action);
 
     case 'step-result':
         return recordResult(state, action);
@@ -196,42 +114,31 @@ function Reducer(state = initialState, action){
         return NextStep(state, action);
     
     case 'go-home':
-        return updateSpec(state, action.id, spec => spec.navigator.moveFirst());
+        return goHome(state, action);
     
     case 'go-end':
-        return updateSpec(state, action.id, spec => spec.navigator.moveLast());
+        return goEnd(state, action);
     
     case 'go-next':
-        return updateSpec(state, action.id, spec => spec.navigator.moveNext());
+        return goNext(state, action);
     
     case 'go-previous':
-        return updateSpec(state, action.id, spec => spec.navigator.movePrevious());
+        return goPrevious(state, action);
     
     case 'undo':
-        return updateSpec(state, action.id, spec => spec.undo());
+        return undo(state, action);
         
     case 'redo':
-        return updateSpec(state, action.id, spec => spec.redo());
+        return redo(state, action);
 
     case 'add-item':
-        return updateSpec(state, action.id, spec => {
-            var navigator = spec.navigator;
-            var location = navigator.location;
-            if (location.holder){
-                var next = location.holder.fixture.addAndSelect(location);
-                navigator.replace(next);
-            }
-        });
+        return addItem(state, action);
     
     case 'select-cell':
-        return updateSpec(state, action.id, spec => {
-            spec.selectCell(action.step, action.cell);
-        });
+        return selectCell(state, action);
     
     case 'select-holder':
-        return updateSpec(state, action.id, spec => {
-            spec.selectHolder(action.holder);
-        });
+        return selectHolder(state, action);
         
     case 'changes':
         return updateSpec(state, action.id, spec => spec.apply(action.change));
