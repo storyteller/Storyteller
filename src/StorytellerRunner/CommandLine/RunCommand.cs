@@ -31,7 +31,9 @@ namespace ST.CommandLine
                 var specs = input.GetBatchRunRequest().Filter(top);
 
                 if (!specs.Any())
+                {
                     ConsoleWriter.Write(ConsoleColor.Yellow, "Warning: No specs found!");
+                }
             }
             catch (SuiteNotFoundException ex)
             {
@@ -47,7 +49,6 @@ namespace ST.CommandLine
             });
 
             task.Wait();
-
             controller.SafeDispose();
 
             return task.Result;

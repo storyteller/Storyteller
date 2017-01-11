@@ -132,8 +132,10 @@ namespace StoryTeller.Remotes
             _cancellation.Cancel();
 
 #if NET46
+
             _receiveLoop.SafeDispose();
 #endif
+            _listener.Shutdown(SocketShutdown.Both);
             _listener.Dispose();
         }
     }

@@ -11,7 +11,7 @@ build_revision = tc_build_number || Time.new.strftime('5%H%M')
 build_number = "#{BUILD_VERSION}.#{build_revision}"
 BUILD_NUMBER = build_number 
 
-task :ci => [:default, :pack]
+task :ci => [:default, :specifications, :pack]
 
 task :default => [:test]
 
@@ -143,6 +143,11 @@ end
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples --hotreload"
+end
+
+"Run the specs against the documentation generation"
+task :specifications do
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 run src/Specifications"
 end
 
 def load_project_file(project)
