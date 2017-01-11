@@ -48,7 +48,7 @@
   \********************/
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = __webpack_require__(/*! ./client/topics.js */805);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi topics\n// module id = 0\n// module chunks = 4\n//# sourceURL=webpack:///multi_topics?");
+	eval("module.exports = __webpack_require__(/*! ./client/topics.js */1145);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi topics\n// module id = 0\n// module chunks = 4\n//# sourceURL=webpack:///multi_topics?");
 
 /***/ },
 
@@ -72,13 +72,13 @@
 
 /***/ },
 
-/***/ 805:
+/***/ 1145:
 /*!**************************!*\
   !*** ./client/topics.js ***!
   \**************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nvar Mousetrap = __webpack_require__(/*! mousetrap */ 568);\nvar $ = __webpack_require__(/*! jquery */ 553);\n\nMousetrap.bind('ctrl+shift+r', function (e, combo) {\n\t$.post('/refresh', {});\n});\n\nMousetrap.bind('ctrl+shift+e', function () {\n\tvar topic = window.location.href;\n\t$.post('/open', { topic: topic }, function () {}, 'json');\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./client/topics.js\n// module id = 805\n// module chunks = 4\n//# sourceURL=webpack:///./client/topics.js?");
+	eval("'use strict';\n\nvar Mousetrap = __webpack_require__(/*! mousetrap */ 568);\nvar $ = __webpack_require__(/*! jquery */ 553);\n\nMousetrap.bind('ctrl+shift+r', function (e, combo) {\n\t$.post('/refresh', {});\n});\n\nMousetrap.bind('ctrl+shift+e', function () {\n\tvar topic = window.location.href;\n\t$.post('/open', { topic: topic }, function () {}, 'json');\n});\n\n//////////////////\n// WEBPACK FOOTER\n// ./client/topics.js\n// module id = 1145\n// module chunks = 4\n//# sourceURL=webpack:///./client/topics.js?");
 
 /***/ }
 

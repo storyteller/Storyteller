@@ -1,6 +1,34 @@
 var Postal = require('postal');
+var Rx = require('rxjs');
+var _ = require('lodash');
+
+var bufferedTopics = ['spec-execution-completed', 'queue-state', 'step-result', 'set-verification-result', 'spec-progress'];
+
+function shouldBuffer(message){
+	return bufferedTopics.includes(message.type);
+}
 
 function Communicator(dispatch, address, disconnect){
+	var subject = new Rx.Subject();
+
+	var unbuffered = subject
+		.filter(m => !shouldBuffer(m))
+		.subscribe(
+			dispatch,
+			e => console.log('Websocket error: ' + e.message),
+			() => {});
+
+	var buffered = subject
+		.filter(shouldBuffer)
+		.bufferTime(250)
+		.subscribe(
+			arr => dispatch({type: 'batch', messages: arr}),
+			e => console.log('Websocket error: ' + e.message),
+			() => {});
+
+
+	// TODO -- do the buffered items.
+
 	this.socket = new WebSocket(address);
 
 	this.socket.onclose = function(){
@@ -16,6 +44,8 @@ function Communicator(dispatch, address, disconnect){
 		var message = JSON.parse(evt.data);
 		console.log('Got: ' + JSON.stringify(message) + ' with topic ' + message.type);
 	
+		subject.next(message);
+
 	    // TODO -- these things should NOT be here
 		if (message.type == 'system-recycled'){
 			Postal.publish({
@@ -30,8 +60,6 @@ function Communicator(dispatch, address, disconnect){
 			
 			return;
 		}
-	
-		dispatch(message);
 	};
 	
 	
