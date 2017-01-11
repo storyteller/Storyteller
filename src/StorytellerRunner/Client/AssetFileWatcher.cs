@@ -42,9 +42,14 @@ namespace ST.Client
             _watcherAssets.Dispose();
         }
 
-        public void Start()
+        public void Start(OpenInput input)
         {
-            _watcher.Start();
+            // You'd think it'd be the other way around
+            if (!input.HotReloadFlag)
+            {
+                _watcher.Start();
+            }
+
             _watcherAssets.Start();
         }
 

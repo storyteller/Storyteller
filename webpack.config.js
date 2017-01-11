@@ -5,7 +5,7 @@ module.exports = {
     "batch-bundle": ['./client/batch.js'],
     "embed": ['./client/embed.js'],
     "topics": ['./client/topics.js'],
-	"preview": ['./client/preview.js']
+	  "preview": ['./client/preview.js']
 	
   },
   output: {

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Baseline;
 using Microsoft.AspNetCore.Http;
 using StoryTeller.Remotes.Messaging;
+using StoryTeller.Results;
 using StoryTeller.Util;
 
 namespace ST.Client
@@ -48,7 +50,7 @@ namespace ST.Client
 
 ").ConfigureAwait(false);
 
-            await response.Body.WriteAsync(ScriptTag(input.DevFlag).ToString()).ConfigureAwait(false);
+            await response.Body.WriteAsync(ScriptTag(input.HotReloadFlag).ToString()).ConfigureAwait(false);
 
             await response.Body.WriteAsync(@"
 </body>

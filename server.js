@@ -15,7 +15,7 @@ config.entry = {
   "bundle": [
     'webpack-dev-server/client?' + webDevServerAdddress,
     'webpack/hot/dev-server',
-    "./client/harness.js"
+    "./client/client.js"
   ]
 };
 //prefix public path with webpack dev server address

@@ -135,6 +135,16 @@ task :publish do
 
 end
 
+"Run the spec editor w/ samples"
+task :samples do
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 --configuration Release open src/Storyteller.Samples"
+end
+
+"Run the spec editor for Storyteller.Samples with hot reloading"
+task :harness do
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples --hotreload"
+end
+
 def load_project_file(project)
   File.open(project) do |file|
     file_contents = File.read(file, :encoding => 'bom|utf-8')

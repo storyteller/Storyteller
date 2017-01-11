@@ -87,7 +87,7 @@ namespace ST.Client
 
 #if DEBUG
             _watcher = new AssetFileWatcher(Client);
-            _watcher.Start();
+            _watcher.Start(_input);
 #endif
 
             return Client;
