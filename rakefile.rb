@@ -83,6 +83,7 @@ task :test => [:compile] do
 	sh "dotnet test src/StorytellerDocGen.Testing"
     sh "dotnet test src/IntegrationTests"
 
+    sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Specifications --validate"
 end
 
 
