@@ -137,7 +137,7 @@ end
 
 "Run the spec editor w/ samples"
 task :samples do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 --configuration Release open src/Storyteller.Samples"
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples"
 end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
