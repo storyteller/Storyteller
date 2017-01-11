@@ -77,7 +77,7 @@ const HelpButton = React.createClass({
     const HelpIcon = Icons['help'];
 
     return (
-      <Button id="help-icon" bsStyle="link" onClick={this.handleToggle} title="Keyboard Shortcuts and Help"><HelpIcon />Help
+      <Button id="help-icon" bsStyle="link" onClick={this.handleToggle} title="Keyboard Shortcuts and Help (ctrl+/)"><HelpIcon />Help
 	      <Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header closeButton>
               <Modal.Title>Keyboard Shortcuts and Help</Modal.Title>

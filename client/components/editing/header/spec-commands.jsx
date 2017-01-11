@@ -6,14 +6,14 @@ function SpecCommands({spec}){
 	return (
 		<ButtonGroup style={{marginRight: '30px'}}>
 			<CommandButton
-				title="Run the specification (ctrl+shift+p)"
+				title="Run the specification (ctrl+shift+p or ctrl+1. ctrl+2 to recycle, then run)"
 				spec={spec}
 				icon="run"
 				message="run-spec"
 				disabled={false} />
 
 			<CommandButton
-				title="Stepthrough the specification (ctrl+shift+s)"
+				title="Stepthrough the specification (ctrl+shift+s or ctrl+3. ctrl+4 to recycle, then stepthrough)"
 				spec={spec}
 				icon="run-stepthrough"
 				message="stepthrough-spec"

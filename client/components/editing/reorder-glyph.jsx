@@ -36,13 +36,13 @@ module.exports = React.createClass({
       <span style={{marginLeft: '10px'}}>
         <a
           style={{color: 'inherit'}}
-          title="Move this step or section up in order"
+          title="Move this step or section up in order (ctrl+alt+up or ctrl+pageup)"
           onClick={onreorderup}>
             <Up />
         </a>
         <a
           style={{color: 'inherit'}}
-          title="Move this step or section down in order"
+          title="Move this step or section down in order (ctrl+alt+down or ctrl+pagedown)"
           onClick={onreorderdown}>
             <Down />
         </a>

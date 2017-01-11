@@ -51,7 +51,7 @@ const Header = (props) => {
                         <NavItem eventKey="2" href="#/docs">Documentation</NavItem>
                         <NavItem eventKey="3" href="#/results">Results</NavItem>
                     <NavDropdown pullRight={true} id="dropdown-commands" eventKey={1} title="Commands">
-                        <NavItem eventKey="1" id="force-recycle" onClick={toCommand('force-recycle')}>Recycle System</NavItem>
+                        <NavItem eventKey="1" id="force-recycle" onClick={toCommand('force-recycle')}>Recycle System (ctrl+shift+b)</NavItem>
                         <NavItem eventKey="2" onClick={toCommand('reload-specs')}>Reload All Specs from Disk</NavItem>
                         <NavItem eventKey="2" onClick={toCommand('clear-all-results')}>Clear All Results</NavItem>
                         <NavItem eventKey="2" onClick={toCommand('reload-all')}>Reload/Recycle Everything!</NavItem>
