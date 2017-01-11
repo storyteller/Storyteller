@@ -16,6 +16,15 @@ function Communicator(dispatch, address, disconnect){
 		var message = JSON.parse(evt.data);
 		console.log('Got: ' + JSON.stringify(message) + ' with topic ' + message.type);
 	
+	    // TODO -- these things should NOT be here
+		if (message.type == 'system-recycled'){
+			Postal.publish({
+				channel: 'engine',
+				topic: 'system-recycled',
+				data: message
+			});
+		}
+
 		if (message.type == 'refresh-page'){
 			location.reload();
 			

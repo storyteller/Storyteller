@@ -132,15 +132,29 @@ module.exports = {
 		});
 
 		editor({
-			keys: ['ctrl+shift+p'],
+			keys: ['ctrl+shift+p', 'ctrl+1'],
 			topic: 'run-spec',
 			description: 'Execute the current specification from the specification editor'
 		});
 
 		editor({
-			keys: ['ctrl+shift+s'],
+			keys: ['ctrl+2'],
+			message:{type: 'run-spec', recycle: true},
+			topic: 'run-spec',
+			description: 'Recycle the system under test, then execute the current specification from the specification editor'
+		});
+
+		editor({
+			keys: ['ctrl+shift+s', 'ctrl+3'],
 			topic: 'stepthrough-spec',
 			description: 'Stepthrough the current specification from the specification editor'
+		});
+
+		editor({
+			keys: ['ctrl+4'],
+			topic: 'stepthrough-spec',
+			message:{type: 'stepthrough-spec', recycle: true},
+			description: 'Recycle the system under test, then execute the current specification from the specification editor'
 		});
 
 		editor({
@@ -167,23 +181,6 @@ module.exports = {
 			description: 'Add an item to the active section or table'
 		});
 
-		editor({
-			keys: 'ctrl+1',
-			topic: 'go-preview',
-			description: 'Activate the preview mode of the current specification'
-		});
-
-		editor({
-			keys: 'ctrl+2',
-			topic: 'go-editing',
-			description: 'Activate the editor mode of the current specification'
-		});
-
-		editor({
-			keys: 'ctrl+3',
-			topic: 'go-results',
-			description: 'Activate the results mode of the current specification'
-		});
 
 	}
 

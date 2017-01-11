@@ -7,6 +7,7 @@ var SpecRecord = require('./../model/spec-record');
 var Suite = require('./../model/suite');
 var Counts = require('./../model/counts');
 var _ = require('lodash');
+var Postal = require('postal');
 import {AlterBreakpoints, SendBreakpoints, NextStep} from './breakpoints';
 import {expandAll, collapseAll, specAdded, specDeleted, toggleTreeState, specStatusFilterChanged, lifecycleFilterChanged} from './tree-state'
 import {updateSpec, replaceRunning, recordResult, specData} from './specs'
@@ -164,6 +165,8 @@ function Batched(state, action){
     }
 
     state = Reducer(state, action);
+
+
 
     // TODO -- move this to more formal middleware
     if (action.type == 'alter-breakpoints'){

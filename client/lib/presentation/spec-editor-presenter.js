@@ -3,6 +3,24 @@ var Broadcaster = require('./../broadcaster');
 var Postal = require('postal');
 var changes = require('./../model/change-commands');
 
+var pendingOperation = null;
+
+Postal.subscribe({
+    channel: 'engine',
+    topic: 'system-recycled',
+    callback: () => {
+        if (pendingOperation){
+            Postal.publish({
+                channel: 'engine-request',
+                topic: pendingOperation.type,
+                data: pendingOperation
+            });
+
+            pendingOperation = null;
+        }
+    }
+});
+
 function applyOutstandingChanges(){
   // If any thing is open, pack it in now
   Broadcaster.toEditor('apply-changes');
@@ -77,6 +95,14 @@ subscribe('go-editing', x => window.location = '#spec/editing/' + spec);
 
 subscribe('go-results', gotoResults);
 
+const forceRecycle = () => {
+    Postal.publish({
+        channel: 'engine-request',
+        topic: 'force-recycle',
+        data: {type: 'force-recycle'}
+    })
+}
+
 subscribe('run-spec', x => {
     applyOutstandingChanges();
     var record = store.getState().get('specs').get(spec);
@@ -87,14 +113,21 @@ subscribe('run-spec', x => {
         spec: record.write(),
         revision: record.revision
     }
-    
-    communicator.send(message);
 
-    gotoResults();  
+    if (x.recycle){
+        pendingOperation = message;
+        forceRecycle();
+    }
+    else {
+        communicator.send(message);
+
+        gotoResults();  
+    }
+    
+
 });
 
 subscribe('stepthrough-spec', x => {
-    console.log("I AM DOING STEPTHROUGH SPEC")
     applyOutstandingChanges();
     var record = store.getState().get('specs').get(spec);
     
@@ -106,9 +139,17 @@ subscribe('stepthrough-spec', x => {
         mode: 'stepthrough'
     }
     
-    communicator.send(message);
+    if (x.recycle){
+        pendingOperation = message;
+        forceRecycle();
+        gotoStepthrough();
+    }
+    else {
+        communicator.send(message);
 
-    gotoStepthrough();
+        gotoStepthrough();
+    }
+
 });
 
 subscribe('save-spec', x => {
