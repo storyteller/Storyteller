@@ -135,8 +135,15 @@ namespace StoryTeller.Remotes
 
             _receiveLoop.SafeDispose();
 #endif
-            _listener.Shutdown(SocketShutdown.Both);
-            _listener.Dispose();
+            try
+            {
+                _listener.Shutdown(SocketShutdown.Both);
+                _listener.Dispose();
+            }
+            catch (Exception e)
+            {
+                ConsoleWriter.Write(ConsoleColor.Gray, e.ToString());
+            }
         }
     }
 }
