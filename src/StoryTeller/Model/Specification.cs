@@ -199,6 +199,12 @@ namespace StoryTeller.Model
         {
             _errors.Clear();
         }
+
+        public bool HasNoSteps()
+        {
+            return !Children.OfType<Section>()
+                .SelectMany(x => x.Children.OfType<Step>()).Any();
+        }
     }
 
     public class LastUpdatedConverter : JsonConverter

@@ -12,6 +12,21 @@ namespace StoryTeller.Testing.Model
     public class SpecificationTester
     {
         [Fact]
+        public void has_not_steps()
+        {
+            var spec = new Specification();
+            spec.HasNoSteps().ShouldBeTrue();
+
+            var section = new Section("something");
+            spec.Children.Add(section);
+            spec.HasNoSteps().ShouldBeTrue();
+
+            section.AddStep("somethingelse");
+
+            spec.HasNoSteps().ShouldBeFalse();
+        }
+
+        [Fact]
         public void apply_renumbering()
         {
             var spec = new Specification();

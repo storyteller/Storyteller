@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Grammars;
+using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Engine
@@ -72,6 +73,8 @@ namespace StoryTeller.Engine
         // If this fails, it's a catastrophic exception
         public SpecResults Execute(ISystem system, Timings timings)
         {
+
+
             _timeout = setupTimeout();
 
             using (var execution = createExecutionContext(system, timings))
@@ -88,6 +91,11 @@ namespace StoryTeller.Engine
                     StopConditions,
                     execution))
                 {
+                    if (Request.Specification.HasNoSteps())
+                    {
+                        context.LogException(Request.Specification.id, new NotImplementedException("Empty specification with no implementation"), Stage.context);
+                    }
+
                     beforeExecution(execution, context);
 
                     var lines = determineLineSteps(context);
