@@ -28,7 +28,7 @@ namespace IntegrationTests.CommandLine
 #if NET46       
             theController = new EngineController(project, new AppDomainSystemLauncher(project));
 #else
-            throw new NotImplementedException("Not done yet for CoreCLR");
+            theController = new EngineController(project, new ProcessRunnerSystemLauncher(project));
 #endif
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
