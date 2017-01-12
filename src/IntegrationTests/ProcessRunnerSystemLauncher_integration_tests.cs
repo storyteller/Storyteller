@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Baseline;
 using IntegrationTests.CommandLine;
 using Shouldly;
 using StoryTeller;
@@ -43,7 +44,7 @@ namespace IntegrationTests
         {
             var recycled = await start("Storyteller.Gallery");
 
-            ShouldBeBooleanExtensions.ShouldBeTrue(recycled.success);
+            recycled.success.ShouldBeTrue();
         }
 
         [Fact]
@@ -51,11 +52,11 @@ namespace IntegrationTests
         {
             var recycled = await start("Storyteller.Gallery");
 
-            ShouldBeBooleanExtensions.ShouldBeTrue(recycled.success);
+            recycled.success.ShouldBeTrue();
 
             var recycled2 = await _controller.Recycle();
 
-            ShouldBeBooleanExtensions.ShouldBeTrue(recycled2.success);
+            recycled2.success.ShouldBeTrue();
 
 
         }
@@ -65,19 +66,23 @@ namespace IntegrationTests
         {
             var recycled = await start("BadSystem");
 
-            ShouldBeBooleanExtensions.ShouldBeFalse(recycled.success);
+            recycled.success.ShouldBeFalse();
             recycled.error.ShouldContain(nameof(DivideByZeroException));
 
         }
 
-        [Fact]
-        public async Task start_a_remote_system_that_blows_up_fast()
+#if NET46
+        [Fact] 
+        public void start_a_remote_system_that_blows_up_fast()
         {
-            var recycled = await start("BlowsUp");
+            var recycled = start("BlowsUp");
 
-            ShouldBeBooleanExtensions.ShouldBeFalse(recycled.success);
-            recycled.error.ShouldContain("Unable to start process");
+            recycled.Wait(3.Seconds());
+
+            recycled.Result.success.ShouldBeFalse();
+            recycled.Result.error.ShouldContain("Unable to start process");
 
         }
+#endif
     }
 }
