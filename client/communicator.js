@@ -27,8 +27,6 @@ function Communicator(dispatch, address, disconnect){
 			() => {});
 
 
-	// TODO -- do the buffered items.
-
 	this.socket = new WebSocket(address);
 
 	this.socket.onclose = function(){
