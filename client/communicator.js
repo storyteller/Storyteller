@@ -2,7 +2,7 @@ var Postal = require('postal');
 var Rx = require('rxjs');
 var _ = require('lodash');
 
-var bufferedTopics = ['spec-execution-completed', 'queue-state', 'step-result', 'set-verification-result', 'spec-progress'];
+var bufferedTopics = ['spec-execution-completed', 'queue-state', 'step-result', 'set-verification-result', 'spec-progress', 'next-step'];
 
 function shouldBuffer(message){
 	return bufferedTopics.includes(message.type);
