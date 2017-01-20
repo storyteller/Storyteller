@@ -1,5 +1,7 @@
 require 'json'
 
+APIKEY = ENV['api_key'].nil? ? '' : ENV['api_key']
+
 COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
 BUILD_VERSION = '4.0.0'
@@ -11,9 +13,9 @@ build_revision = tc_build_number || Time.new.strftime('5%H%M')
 build_number = "#{BUILD_VERSION}.#{build_revision}"
 BUILD_NUMBER = build_number 
 
-task :ci => [:default, :specifications, :pack]
+task :ci => [:default, :specifications, :pack, :push]
 
-task :default => [:test]
+task :default => [:jstests, :test]
 
 
 desc "Prepares the working directory for a new build"
@@ -24,11 +26,15 @@ task :clean do
 
 end
 
-desc "Runs the Javascript Tests"
+desc "Installs npm packages and builds the bundles"
 task :npm do
 	sh "npm install"
-	sh "npm run test"
 	sh "npm run build-client"
+end
+
+desc "Runs Javascript Tests"
+task :jstests => [:npm] do
+	sh "npm run test"
 end
 
 desc "Update the version information for the build"
@@ -91,14 +97,27 @@ end
 
 
 desc 'Build Nuspec packages'
-task :pack => [:compile] do
+task :pack do
 	sh "dotnet pack src/Storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/StorytellerRunner -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o artifacts --configuration Release --version-suffix #{build_revision}"
 	
 	sh "dotnet publish src/StorytellerRunner --framework NET46 -o artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
-	sh "nuget pack -o artifacts -v #{build_number}"
+	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o artifacts -version #{build_number}"
+	
+
+
+end
+
+desc "Pushes the Nuget's to MyGet"
+task :push do
+	sh "nuget push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/Storyteller.4.0.0-alpha-#{build_revision}.nupkg"
+	sh "nuget push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/StorytellerRunner.1.0.0-alpha-#{build_revision}.nupkg"
+	sh "nuget push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/dotnet-storyteller.1.0.0-alpha-#{build_revision}.nupkg"
+	sh "nuget push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/dotnet-stdocs.1.0.0-alpha-#{build_revision}.nupkg"
+	sh "nuget push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/dotnet-stdocs.1.0.0-alpha-#{build_revision}.nupkg"
+	sh "nuget push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/StorytellerRunnerCsproj.4.0.0.#{build_revision}.nupkg"
 end
 
 desc "Launches VS to the StructureMap solution file"
