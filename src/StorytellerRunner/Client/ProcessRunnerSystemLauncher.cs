@@ -20,6 +20,7 @@ namespace ST.Client
         private string _command;
         private bool _agentReady;
         private readonly object _readyLock = new object();
+        private string _testCommand;
 
         public ProcessRunnerSystemLauncher(Project project)
         {
@@ -90,6 +91,7 @@ namespace ST.Client
 
             // TODO -- need to lock this down somehow
             start.Arguments = $"run --framework {framework} -- {_project.Port}";
+            _testCommand = $"dotnet run --framework {framework} -- test";
 
             _command = $"dotnet {start.Arguments}";
 
@@ -100,6 +102,8 @@ namespace ST.Client
             {
                 _agentReady = false;
             }
+
+            
 
             Task.Delay(5.Seconds()).ContinueWith(t =>
             {
@@ -125,6 +129,15 @@ namespace ST.Client
 
         private void sendFailedToStartMessage()
         {
+            var writer = new StringWriter();
+            writer.WriteLine($"Unable to start process '{_command}'");
+            writer.WriteLine();
+            writer.WriteLine("Check the console output for details, or try this command in the root of the specification project:");
+            writer.WriteLine();
+            writer.WriteLine(_testCommand);
+            writer.WriteLine();
+            writer.WriteLine($"The error is logged to {AppContext.BaseDirectory.AppendPath("storyteller.log")}");
+
             var message = new SystemRecycled
             {
                 success = false,
@@ -132,7 +145,7 @@ namespace ST.Client
                 system_name = "Unknown",
                 system_full_name = "Unknown",
                 name = Path.GetFileName(AppContext.BaseDirectory),
-                error = $"Unable to start process '{_command}'"
+                error = writer.ToString()
             };
 
             EventAggregator.SendMessage(message);

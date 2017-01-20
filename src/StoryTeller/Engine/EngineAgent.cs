@@ -99,6 +99,8 @@ namespace StoryTeller.Engine
             }
             catch (Exception e)
             {
+                StorytellerAgent.LogFailure(e);
+
                 ConsoleWriter.Write(ConsoleColor.Red, e.ToString());
 
                 var message = new SystemRecycled
