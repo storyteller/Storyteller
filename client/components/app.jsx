@@ -56,7 +56,7 @@ export default function(initialization, register) {
         <div>
 
             <Header />
-            <div className="container">
+            <div className="container-fluid">
 
             <Router>
                 <Route name="app" path="/" >
