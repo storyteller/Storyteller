@@ -3,8 +3,7 @@
 -> id = sentence4
 -> lifecycle = Acceptance
 -> max-retries = 0
--> last-updated = 2016-12-12T16:12:11.9754630Z
--> expiration-period = 0
+-> last-updated = 2017-01-20T14:00:23.0065363Z
 -> tags = 
 
 [Sentence]

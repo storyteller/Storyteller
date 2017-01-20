@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>StorytellerRunnerCsproj</id>
+    <version>4.0.0</version>
+    <authors>Jeremy D. Miller, et al</authors>
+    <owners>Jeremy D. Miller</owners>
+    <licenseUrl>https://github.com/Storyteller/storyteller/blob/master/LICENSE.txt</licenseUrl>
+    <projectUrl>http://storyteller.github.io</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Command line runner for Storyteller 4 for .Net 4.6 using the pre-dotnet CLI project system</description>
+    <tags>
+    </tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\StorytellerRunner\*.exe" target="tools" />
+    <file src="artifacts\StorytellerRunner\*.dll" target="tools" />
+    <file src="artifacts\StorytellerRunner\*.config" target="tools" />
+  </files>
+</package>

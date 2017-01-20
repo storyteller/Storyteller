@@ -85,6 +85,7 @@ task :test => [:compile] do
 	#sh "dotnet test src/IntegrationTests --framework netcoreapp1.0"
 
     sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Specifications --validate"
+	
 end
 
 
@@ -95,6 +96,9 @@ task :pack => [:compile] do
 	sh "dotnet pack src/StorytellerRunner -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o artifacts --configuration Release --version-suffix #{build_revision}"
+	
+	sh "dotnet publish src/StorytellerRunner --framework NET46 -o artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
+	sh "nuget pack -o artifacts -v #{build_number}"
 end
 
 desc "Launches VS to the StructureMap solution file"
@@ -141,6 +145,7 @@ end
 task :samples do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples"
 end
+
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
