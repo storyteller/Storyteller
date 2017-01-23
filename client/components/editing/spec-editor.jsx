@@ -91,7 +91,7 @@ class SpecEditor extends React.Component {
     const components = spec.editors(loader);
 
     return (
-        <Grid>
+        <Grid fluid>
           <SpecHeader spec={spec} mode="editing" />
           <Row>
             <ContextualPane
