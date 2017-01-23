@@ -19,7 +19,7 @@ function StepthroughCommand({action, spec, icon, title, message}){
     var onclick = e => {
         Postal.publish({
             channel: 'engine-request',
-            topic: 'stepthrough',
+            topic: message.type,
             data: message
         });
 
