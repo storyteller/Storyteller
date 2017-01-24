@@ -1,61 +1,152 @@
 <!--Title:Getting Started-->
 <!--Url:getting_started-->
 
-<div class="alert alert-warning" role="alert"><strong>Warning!</strong> As of now, Storyteller 3.0 is only running on Windows. Before Storyteller 3.0 is officially released, we will ensure that Storyteller 3.0 is completely usable on OSX and Linux via Mono and/or the CoreCLR.
+<div class="alert alert-success" role="alert"><strong>Storyteller runs everywhere now!</strong> Storyteller 4.0 supports the CoreCLR and now runs on Mac OSX or any other operating system that has
+CoreCLR support.
 </div>
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong> Making the "getting started" story much simpler and easier than earlier versions has been a major goal of the Storyteller 3.0 release. The old "project.xml" file from Storyteller 1-2 is now gone. 3.0 has replaced the upfront configuration with a combination of out of the box defaults and command line flags for explicit overrides.
-</div>
+<div class="alert alert-info" role="alert"><strong>Note!</strong>Storyteller 4.0 fully embraces the new dotnet CLI with an additional package for
+using Storyteller 4.0 with "classic" csproj files. There is a separate section for information about using Storyteller 3.0 as the setup steps
+have changed</div>
 
 This document describes how to install and intialize your Storyteller specfication project. For more specific documentation, see:
+
 * <[linkto:documentation/ci]>
 * <[linkto:documentation/ui]>
 
-## Installing Storyteller
+In all cases, Storyteller consists of two logical parts:
 
-At this time (3.0 alpha), [Storyteller is **only** distributed via Nuget](http://nuget.org/packages/storyteller) with the mandatory command line tool described below included into the `/tools` directory. 
-
-For the final release and a subsequent move to the new DNX platform, the team is considering using Chocolately on Windows and Brew on OSX to distribute the `ST.exe` command line tool. Depending on the timeline, the new command line support in the DNX platform may end up being the best solution in the future.
-
-## Storyteller's Architecture
-
-Storyteller consists of just two deployed elements:
-1. The `Storyteller.dll` library that you must reference to implement <[linkto:documentation/engine/fixtures;title=Fixture's]>, <[linkto:documentation/engine/grammars;title=Grammars]>, and any custom <[linkto:documentation/engine/system_under_test;title=ISystem]>.
-1. The `ST.exe` command line tool in the `/tools` folder of the distributed Nuget that implements a batch specification runner, an embedded web application ("The Specification Editor") for interactive work against the specifications, and tooling to author and publish static documentation (not coincidentally what was used to create this website).
+1. The actual Storyteller library you need to reference in order to write specifications
+1. A command line tool that runs Storyteller specifications and provides the interactive specification website tool 
+   (ST.exe in 3.0, `dotnet storyteller` in 4.0, or `StorytellerRunnerCsProj` for 4.0 + classic csproj files).
 
 
+## Storyteller 4.0
 
-## Using the Command Line Tool
+<div class="alert alert-info" role="alert"><strong>Note!</strong> This section applies to .Net projects that use either project.json 
+project files or the new MSBuild file formats with Visual Studio 2017. This section will not apply to projects that use the original
+*.csproj build system. 
+</div>
 
-The `ST.exe` tool generally follows Unix idioms for command line usage that tools like `git` or `npm` use for their command line syntax, so:
-* `ST.exe` exposes multiple commands identified by the second word of the signature, so `st run` or `st open` are valid commands. 
-* Optional flags are used like: `--word [value]` or `-w [value]` as a shorthand
-* Boolean flags can be used like: `--open` or `-o`. 
-* If there are multiple boolean optional flags, the `-abc` usage is the equivalent to `-a -b -c`
+If your codebase has supports the new dotnet cli, the setup steps are to:
 
-You can query the command line usage with the command `st ?` or `st help` to see all the commands that are available.
+1. Create a new **console application** project for the Storyteller specifications in your solution
+1. Install the `Storyteller` Nuget as a dependency
+1. Add the `dotnet_storyteller` Nuget as a CLI tool extension 
+1. In the `Program.Main()` entry point of your Storyteller specification project, use the `StorytellerAgent` class to connect
+   your system under test to the Storyteller engine with code like this:
 
-<pre>
-    doc-export -> Export a documentation project to static html
-       doc-run -> Run the documentation in a live mode
-      doc-seed -> Seeds a topic file structure from an outline.txt file
-          open -> Opens the specification editor web tool
-           run -> Run a suite of StoryTeller tests
-</pre>
+<[sample:Program.Main.Default]>
 
-You can also query the exact usage of a single command with the syntax like `st ? run` to display the usage of the `st run` command.
+For more complex [system under test's](https://en.wikipedia.org/wiki/System_under_test), you will probably want to use a custom `ISystem` like this:
+
+<[sample:Program.Main.CustomSystem]>
+
+See <[linkto:documentation/engine/system_under_test]> for more information.
+
+There is a [sample quickstart project on GitHub](https://github.com/storyteller/quickstarts/tree/master/dotnet-cli) that shows a 
+minimal Storyteller setup for the new dotnet CLI mechanism. The [project.json](https://github.com/storyteller/quickstarts/blob/master/dotnet-cli/project.json) file
+for that project is this:
+
+```
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Storyteller": "4.0.0-alpha-463"
+  },
+
+  "tools": {
+    "dotnet-storyteller": {
+      "version": "1.0.0-alpha-463",
+      "imports": [ "dnxcore50" ]
+    }
+  },
+
+  "frameworks": {
+    "net46": {},
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "type": "platform",
+          "version": "1.0.1"
+        }
+      },
+      "imports": "dnxcore50"
+    }
+  }
+}
+```
+
+Once the steps above are complete, you're ready to start writing <[linkto:documentation/engine/fixtures]> and specifications. To launch the Storyteller
+specification runner, open up the command prompt tool of your choice, change the directory to the root of your Storyteller specification project,
+and type `dotnet storyteller open` and go to town.
+
+See <[linkto:documentation/ci]> for more information on using `dotnet storyteller`.
+
+
+## Storyteller 4.0 with "classic" MSBuild Projects
+
+You can still use Storyteller 4.0 without the dotnet CLI. In this case, the setup steps are to:
+
+1. Create a new class library for your Storyteller specifications
+1. Install the `Storyteller` 4.* Nuget to your new project
+1. Install the `StorytellerRunnerCsproj` Nuget *somewhere* in your solution
+1. Optionally, you may want to add a script of some sort to delegate to the executable
+   distributed in `StorytellerRunnerCsproj` Nuget package like this one:
+
+```
+packages\StorytellerRunnerCsproj.4.0.0.463\tools\StorytellerRunner.exe %* --app-domain
+```
+
+So that you can issue commands like:
+
+```
+# Open the Storyteller editor website tool
+storyteller open
+
+# Run the specifications from the command line
+storyteller run
+```
+
+**Do note that the --app-domain flag is mandatory in order to use Storyteller 4.0 without the dotnet CLI.** 
 
 
 
-## Enabling Storyteller Execution
 
-The only mandatory thing you have to do to setup a Storyteller project today is to add a reference to the `Storyteller.dll` to the .Net project that is going to hold your `Fixture` and the optional `ISystem` class. Technically, Storyteller does not depend on any actual Visual Studio.Net project file or VS.Net itself but you will typically want to use a VS.Net project just for convenience. 
 
-Like most .Net testing tools, the Storyteller batch running and interative specification editor tools have to open a second `AppDomain` with "shadow copying" enabled where the actual specification execution takes place. Storyteller assumes that the project directory is layed out in the idiomatic VS.Net manner:
 
-* An application configuration file at the root.
-* A subdirectory for the binary assemblies -- this subdirectory **must** contain the `Storyteller.dll` assembly. 
-* A `/Specs` folder where Storyteller will persist the actual specifications (more on this below). 
+## Storyteller 3.0
+
+[Storyteller 3 is **only** distributed via Nuget](http://nuget.org/packages/storyteller). Storyteller 3.* only supports classic *.csproj projects
+targetting .Net 4.6. To set up a Storyteller 3.* specification project:
+
+1. Create a new **class library** project -- if you opt for a separate project. I frequently reuse the unit testing library for Storyteller specifications
+   just to avoid creating additional projects
+1. Add a reference to the Storyteller 3.0 Nuget to that project
+1. **Optionally**, you can add a custom <[linkto:documentation/engine/system_under_test;title=ISystem]> to your Storyteller specification project
+1. Assuming that you are using Nuget for package management, you might want to add a small script to delegate to the Storyteller command line
+   tooling like this little Windows batch file:
+
+```
+packages\Storyteller.3.0.1\tools\ST.exe %*
+```
+
+So that you can issue commands like:
+
+```
+# Open the Storyteller editor website tool
+storyteller open
+
+# Run the specifications from the command line
+storyteller run
+```
+
+Your script will vary from what's above based on your version of Storyteller and the path to your exploded Nuget packages. Protip: the Storyteller team
+thinks that [Paket](https://fsprojects.github.io/Paket/) makes this set up simpler.
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> Storyteller 3.0 is a little more intelligent in how it creates the <code>AppDomain</code> for execution. It is no longer necessary to copy the <code>*.config</code> file to the output directory for the configuration file to be picked up by Storyteller. You're welcome Andrew.
 </div>
@@ -72,16 +163,46 @@ My typical workflow with .Net projects is to work locally using the _Debug_ targ
 
 
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong> The <code>AppDomain</code> mechanics discussed above will not apply when Storyteller is moved to the DNX platform. The Storyteller team is not quite sure about the details of how Storyteller will work on DNX, but we are committed to making that happen in the 2015 calendar year.
-</div>
+
+
+## Using the Command Line Tools
+
+The command line tools (`ST.exe` in Storyteller 3.0, or `dotnet storyteller` in 4.0, or `StorytellerRunner.exe` without the dotnet CLI)
+generally follows Unix idioms for command line usage that tools like `git` or `npm` use for their command line syntax, so:
+
+* `dotnet storyteller` exposes multiple commands identified by the second word of the signature, so `dotnet storyteller run` or `dotnet storyteller open` are valid commands. 
+* Optional flags are used like: `--word [value]` or `-w [value]` as a shorthand
+* Boolean flags can be used like: `--open` or `-o`. 
+* If there are multiple boolean optional flags, the `-abc` usage is the equivalent to `-a -b -c`
+
+You can query the command line usage with the command `dotnet storyteller ?` or `dotnet storyteller help` to see all the commands that are available.
+
+<pre>
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+  Available commands:
+----------------------------------------------------------------------------------------------------------------------------------
+
+        convert -> Converts the persisted specifications from the 1.0-3.0 Xml format to the 4.0 markdown format
+  dump-fixtures -> Exports all of the Fixture definitions to markdown for review or using within the headless mode
+         export -> Exports a visualization of all of the specifications to disk
+           open -> Opens the specification editor web tool
+            run -> Run a suite of StoryTeller tests
+----------------------------------------------------------------------------------------------------------------------------------
+</pre>
+
+You can also query the exact usage of a single command with the syntax like `st ? run` to display the usage of the `st run` command.
+
 
 
 ## How Storyteller Persists Specifications
 
-Storyteller persists specifications as Xml files in the `/Specs` folder directly under the root of your Storyteller project, with subfolders to represent the suite structure. Storyteller will create this directory on demand if it does not already exist the first time it needs to persist a new specification or top level suite.
+Storyteller 4.0 introduces a new (hopefully human readable and editable) markdown based persistence mechanism in place of the old Xml format from Storyteller <= 3.0. 
+See <[linkto:documentation/converting]> or <[linkto:documentation/engine/markdown]> for more information.
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong> Why, you might ask, use Xml files and not JSON, YAML, or even an inferred Javascript syntax that we've kicked around over the years? The main answer is simply backward compatibility with Storyteller 1-2. The primary developer on Storyteller also has the uncool opinion that Xml formats are easier to edit by hand for deeply nested document structures than JSON. The hope of the Storyteller team is that the new 3.0 user interface for editing specifications is good enough that users do not often feel the need to get into the raw Xml.
-</div>
+Storyteller 4.0 persists specifications as markdown files in the `/Specs` folder directly under the root of your Storyteller project, with subfolders to represent the suite structure. Storyteller will create this directory on demand if it does not already exist the first time it needs to persist a new specification or top level suite. Storyteller will happily create this folder for you if it does not already exist.
+
 
 
 
