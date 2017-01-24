@@ -142,7 +142,9 @@ namespace StoryTeller.Remotes
             }
             catch (Exception e)
             {
+#if DEBUG
                 ConsoleWriter.Write(ConsoleColor.Gray, e.ToString());
+#endif
             }
         }
     }
