@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using StoryTeller;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Grammars.Tables;
@@ -96,6 +97,10 @@ namespace Samples.Fixtures
                 .Before(c =>
                 {
                     // Do something to open the preferences dialog
+                })
+                .After(c =>
+                {
+                    // Do something to close the preferences dialog
                 });
         }
         // ENDSAMPLE

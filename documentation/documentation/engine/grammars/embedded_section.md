@@ -15,6 +15,9 @@ In usage, the embedded section looks like a nested box within the section that c
 
 <[spec:Glossary/Embedded Section]>
 
+The `Before()` and `After()` methods are optional. In both cases, the signature takes in an `Action<ISpecContext>` that
+will be executed every time the embedded section grammar is executed.
+
 
 ## Possible Usages
 
