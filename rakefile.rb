@@ -123,14 +123,21 @@ task :sln do
 	sh "start src/Storyteller.sln"
 end
 
+"Gets the documentation assets ready"
+task :prepare_docs => [:compile] do
+	cp 'src/StorytellerRunner/embed.js', 'documentation/content'
+	cp 'client/public/stylesheets/storyteller.css', 'documentation/content/stylesheets'
+
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json"
+end
+
 "Launches the documentation project in editable mode"
-task :docs do
-	sh "dotnet restore src/dotnet-stdocs"
+task :docs => [:prepare_docs] do
 	sh "dotnet run --project src/dotnet-stdocs -- run -v #{BUILD_VERSION}"
 end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"
-task :publish do
+task :publish => [:prepare_docs] do
 	
 
 	if !Dir.exists? 'doc-target' 

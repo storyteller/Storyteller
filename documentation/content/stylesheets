@@ -1,0 +1,296 @@
+#top-nav{
+  margin-bottom: 0px !important;
+}
+
+
+div.suite-body {
+  margin-left: 40px;
+}
+
+nav.status-bar {
+  min-height: 40px !important;
+  padding-bottom: 0px !important;
+  margin-bottom: 25px !important;
+}
+
+div.recycle-error {
+  padding: 10px;
+}
+
+a.explorer-command {
+  margin-left: 10px;
+
+}
+
+a.explorer-command:link{
+  color: gray;
+}
+
+a.explorer-command:hover, a.suite-name:hover{
+  color: blue;
+}
+
+.spec-state-queued {
+  font-style: italic;
+}
+
+.spec-state-running {
+  font-weight: bold;
+}
+
+.spec-state-none, a.suite-name{
+  font-style: normal;
+  color: black;
+}
+
+.explorer-controls .btn-group-vertical{
+  width: 100%;
+}
+
+.add-steps-container{
+  margin-top: 15px;
+}
+
+span.cell-normal{
+  font-style: italic;
+}
+
+div.comment{
+  min-height: 20px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+div.comment > p{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+div.comment-editor{
+  border: 1px solid darkblue;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+td.number-cell{
+  text-align: right;
+}
+
+table.table{
+  width: auto !important;
+  z-index: 99999;
+  background-color: white !important;
+}
+
+#spec-progress-bar div.progress{
+  width: '800px' !important;
+  margin-top: 8px
+}
+
+div.progress{
+  margin-bottom: 5px !important;
+}
+
+div.sentence + div.panel,
+div.comment + div.panel,
+div.sentence + table,
+div.comment + table{
+  margin-top: 20px;
+}
+
+
+
+div.sentence {
+   padding: 5px;
+}
+
+div.contextual-control{
+    max-height: 75%;
+    overflow-y: auto
+}
+
+.table-column-context button{
+    width: 100%;
+    text-align: left
+
+}
+
+
+tr.active {
+  border: thin solid #337ab7 !important;
+}
+
+span.twitter-typeahead{
+  width: 100%;
+}
+
+a.add-table-step.active {
+  border: thin solid #337ab7;
+  padding: 3px;
+}
+
+.typeahead,
+.tt-query,
+.tt-hint {
+  width: 396px;
+  height: 30px;
+  padding: 8px 12px;
+  font-size: 24px;
+  line-height: 30px;
+  border: 2px solid #ccc;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+}
+
+.typeahead:focus {
+  border: 2px solid #0097cf;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-dropdown-menu {
+  width: 422px;
+  margin-top: 12px;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+pre.text-display{
+  overflow-x:scroll;
+  font-size: small;
+  position: absolute;
+}
+
+#expiration-period {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(169, 169, 169);
+}
+
+#expiration-period p {
+  margin-bottom: -2px;
+}
+
+#expiration-period .last-updated {
+  margin-bottom: 10px;
+}
+
+#expiration-period small {
+  font-size: 70%;
+}
+
+.debug-output{
+  overflow-x:scroll;
+}
+
+div.sentence.fact{
+  margin: 3px;
+}
+
+div.sentence.fact.bg-success{
+  border: thin solid green;
+}
+
+div.sentence.fact.bg-danger{
+  border: thin solid red;
+}
+
+div.sentence.fact.bg-warning{
+  border: thin solid black;
+}
+
+div.sentence.fact.bg-warning > pre{
+  margin-top: 5px;
+}
+
+div.sentence.fact.bg-warning > pre > i.fa{
+  display: none;
+}
+
+.outline-container {
+  padding-left: 30px;
+}
+
+.outline-container-collapse {
+  color: #333;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.spec-outline {
+  margin-top: 20px;
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.preview-cell {
+  white-space: pre-wrap;
+}
+
+.label-default {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.label-danger {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.label-success {
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.fake{
+	
+}
