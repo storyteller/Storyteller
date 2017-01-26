@@ -97,6 +97,7 @@ end
 desc 'Build Nuspec packages'
 task :pack do
 	sh "dotnet pack src/Storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
+	sh "dotnet pack src/Storyteller.AspNetCore -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/StorytellerRunner -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o artifacts --configuration Release --version-suffix #{build_revision}"
@@ -111,6 +112,7 @@ end
 desc "Pushes the Nuget's to MyGet"
 task :push do
 	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/Storyteller.4.0.0-alpha-#{build_revision}.nupkg"
+	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/Storyteller.AspNetCore.1.0.0-alpha-#{build_revision}.nupkg"
 	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/StorytellerRunner.1.0.0-alpha-#{build_revision}.nupkg"
 	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/dotnet-storyteller.1.0.0-alpha-#{build_revision}.nupkg"
 	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/dotnet-stdocs.1.0.0-alpha-#{build_revision}.nupkg"
