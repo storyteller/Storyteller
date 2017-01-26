@@ -21,7 +21,6 @@ namespace Storyteller.AspNetCore
 
         public readonly CellHandling CellHandling = new CellHandling(new EquivalenceChecker(), new Conversions());
 
-        private ISystemUnderTest _systemUnderTest;
         private readonly Task<ISystemUnderTest> _warmup;
 
         private AspNetCoreSystem(Func<ISystemUnderTest> builder)
@@ -38,9 +37,11 @@ namespace Storyteller.AspNetCore
 
         // TODO -- add one that uses Action<IApplicationBuilder> for more adhoc things
 
+        public ISystemUnderTest System => _warmup.Result;
+
         public void Dispose()
         {
-            _systemUnderTest?.Dispose();
+            System.Dispose();
         }
 
         public CellHandling Start()
@@ -50,12 +51,9 @@ namespace Storyteller.AspNetCore
 
         public IExecutionContext CreateContext()
         {
-            if (_warmup != null)
-                _warmup.Wait();
-            else if (_systemUnderTest == null)
-                _systemUnderTest = _warmup?.Result;
+            _warmup?.Wait();
 
-            beforeAll(_systemUnderTest);
+            beforeAll(System);
 
             return new AspNetCoreContext(this);
         }
@@ -100,21 +98,23 @@ namespace Storyteller.AspNetCore
 
             public void BeforeExecution(ISpecContext context)
             {
-                context.State.Store(this);
+                context.State.Store(_parent.System);
 
-                _parent.beforeEach(_parent._systemUnderTest, context);
+                _parent.beforeEach(_parent.System, context);
             }
 
             public void AfterExecution(ISpecContext context)
             {
                 // TODO -- do logging of the requests here
-                _parent.afterEach(_parent._systemUnderTest, context);
+                _parent.afterEach(_parent.System, context);
             }
 
             public T GetService<T>()
             {
-                return _parent._systemUnderTest.Services.GetService(typeof(T)).As<T>();
+                return _parent.System.Services.GetService(typeof(T)).As<T>();
             }
         }
+
+        
     }
 }

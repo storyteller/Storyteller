@@ -192,7 +192,7 @@ namespace StoryTeller.Model
         {
             var assemblyName = typeof(FixtureLibrary).GetTypeInfo().Assembly.GetName();
 
-            return DependencyContext.Default.RuntimeLibraries.Where(x => x.Dependencies.Any(_ => _.Name.EqualsIgnoreCase(assemblyName.Name)))
+            return DependencyContext.Default.RuntimeLibraries.Where(x => x.Dependencies.Any(_ => _.Name.StartsWith(assemblyName.Name)))
                 .Select(x => Assembly.Load(new AssemblyName(x.Name)));
         }
 
