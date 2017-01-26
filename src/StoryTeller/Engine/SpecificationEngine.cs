@@ -23,6 +23,11 @@ namespace StoryTeller.Engine
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
         {
+            if (system == null) throw new ArgumentNullException(nameof(system));
+            if (runner == null) throw new ArgumentNullException(nameof(runner));
+            if (observer == null) throw new ArgumentNullException(nameof(observer));
+
+
             _system = system;
             _runner = runner;
 

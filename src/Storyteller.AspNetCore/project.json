@@ -1,0 +1,30 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": false
+  },
+
+  "dependencies": {
+    "Alba": "1.0.0-alpha-28",
+    "StructureMap.Microsoft.DependencyInjection": "1.3.0",
+    "StructureMap": "4.4.2",
+    "WebApp": { "target": "project" },
+    "StoryTeller": { "target": "project" },
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    }
+  },
+
+  "tools": {
+    "dotnet-storyteller": {
+      "version": "1.0.0-alpha-467"
+    }
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  }
+}

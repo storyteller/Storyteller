@@ -1,0 +1,4 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at StoryTeller.Engine.SpecificationEngine..ctor(ISystem system, ISpecRunner runner, IExecutionObserver observer)
+   at StoryTeller.Engine.EngineAgent.buildUserInterfaceEngine()
+   at StoryTeller.Engine.EngineAgent.Start(Project project)

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Storyteller.AspNetCore.Samples": {
+      "commandName": "Project",
+      "commandLineArgs": "test"
+    }
+  }
+}
