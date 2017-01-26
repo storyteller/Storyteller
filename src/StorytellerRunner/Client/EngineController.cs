@@ -24,7 +24,10 @@ namespace ST.Client
 
             Messaging = EventAggregator.Messaging;
 
-            _socket = new SocketConnection(Project.Port, true, (s, json) => { Messaging.SendJson(json); });
+            _socket = new SocketConnection(Project.Port, true, (s, json) =>
+            {
+                Messaging.SendJson(json);
+            });
 
             Messaging.AddListener(this);
             Messaging.AddListener(launcher);

@@ -1,11 +1,11 @@
 using StoryTeller;
 
-namespace Storyteller.AspNetCore
+namespace Storyteller.AspNetCore.Samples
 {
     public class FakeFixture : AspNetCoreFixture
     {
         [FormatAs("The response text from {url} should be '{contents}'")]
-        public string TheContentsShouldBe(string url, string contents)
+        public string TheContentsShouldBe(string url)
         {
             var result = Scenario(_ =>
             {

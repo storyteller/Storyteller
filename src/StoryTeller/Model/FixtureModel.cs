@@ -101,7 +101,15 @@ namespace StoryTeller.Model
                     section.AddComment("## " + grammar.key);
                 }
 
-                section.Children.Add(grammar.ToSampleStep());
+                try
+                {
+                    section.Children.Add(grammar.ToSampleStep());
+                }
+                catch (Exception)
+                {
+                    ConsoleWriter.Write(ConsoleColor.Yellow, $"Unable to build a sample step for grammar {grammar.key} in fixture {key}. Check the grammar errors.");
+                   
+                }
             }
         }
 

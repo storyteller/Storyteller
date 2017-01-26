@@ -89,16 +89,12 @@ namespace StoryTeller
         {
             try
             {
-                system.Start();
-                var warmup = system.Warmup();
 
-                warmup.GetAwaiter().GetResult();
+                var recycled = system.Initialize(lib => Console.WriteLine("Able to create the FixtureLibrary"));
 
-                if (warmup.IsFaulted)
-                {
-                    throw warmup.Exception.Flatten().InnerException;
-                }
+                var json = JsonSerialization.ToCleanJson(recycled);
 
+                Console.WriteLine("System ready as: " + json);
                 ConsoleWriter.Write(ConsoleColor.Green, "StorytellerAgent started without any exceptions");
             }
             catch (Exception e)
