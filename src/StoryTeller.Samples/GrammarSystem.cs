@@ -34,7 +34,7 @@ namespace StoryTeller.Samples
             handling.AddSystemLevelList("positions", new[] {"LB", "OL", "DL", "WR", "RB"});
 
             // This is where you can register a custom runtime conversion
-            handling.Conversions.RegisterRuntimeConversion<PlayerConverter>();
+            handling.RegisterRuntimeConversion<PlayerConverter>();
 
             return handling;
         }

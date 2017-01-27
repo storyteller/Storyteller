@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using Baseline.Conversion;
 using StoryTeller.Conversion;
 using StoryTeller.Equivalence;
 using StoryTeller.Model;
@@ -11,10 +12,24 @@ namespace StoryTeller
     // SAMPLE: CellHandling
     public class CellHandling
     {
+        private readonly IList<IRuntimeConverter> _runtimeConvertors = new List<IRuntimeConverter>();
+
         public CellHandling(EquivalenceChecker equivalence, Conversions conversions)
         {
             Equivalence = equivalence;
             Conversions = conversions;
+        }
+
+        public IEnumerable<IRuntimeConverter> RuntimeConvertors => _runtimeConvertors;
+
+        /// <summary>
+        /// Add a new conversion or lookup strategy that finds the data at runtime
+        /// during a specification run from the raw string data
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void RegisterRuntimeConversion<T>() where T : IRuntimeConverter, new()
+        {
+            _runtimeConvertors.Add(new T());
         }
 
         /// <summary>

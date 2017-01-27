@@ -198,7 +198,7 @@ namespace StoryTeller.Model
                 return;
             }
 
-            var runtime = cells.Conversions.RuntimeConvertors.FirstOrDefault(x => x.Matches(type));
+            var runtime = cells.RuntimeConvertors.FirstOrDefault(x => x.Matches(type));
             if (runtime != null)
             {
                 useRuntimeConversion(runtime);

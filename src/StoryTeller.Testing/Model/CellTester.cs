@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Baseline;
+using Baseline.Conversion;
 using Baseline.Reflection;
 using Newtonsoft.Json;
 using Xunit;
@@ -60,10 +61,8 @@ namespace StoryTeller.Testing.Model
         [Fact]
         public void use_a_runtime_converter_with_a_value()
         {
-            var conversions = new Conversions();
-            conversions.RegisterRuntimeConversion<ColorConverter>();
-
-            var cellHandling = new CellHandling(new EquivalenceChecker(), conversions);
+            var cellHandling = CellHandling.Basic();
+            cellHandling.RegisterRuntimeConversion<ColorConverter>();
 
             var cell = new Cell(cellHandling, "color", typeof (Color));
 
@@ -81,9 +80,8 @@ namespace StoryTeller.Testing.Model
         [Fact]
         public void use_a_runtime_converter_against_NULL()
         {
-            var conversions = new Conversions();
-            conversions.RegisterRuntimeConversion<ColorConverter>();
-            var cellHandling = new CellHandling(new EquivalenceChecker(), conversions);
+            var cellHandling = CellHandling.Basic();
+            cellHandling.RegisterRuntimeConversion<ColorConverter>();
 
             var cell = new Cell(cellHandling, "color", typeof (Color));
 
