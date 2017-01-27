@@ -539,6 +539,7 @@ namespace StoryTeller
             return Enumerable.Empty<string>();
         }
 
+// SAMPLE: Fixture.Trace
         /// <summary>
         ///     Writes the message to the Storyteller "Debug" results tab
         /// </summary>
@@ -551,6 +552,7 @@ namespace StoryTeller
             Trace.WriteLine(message);
 #endif
         }
+// ENDSAMPLE
 
         public class FactExpression
         {

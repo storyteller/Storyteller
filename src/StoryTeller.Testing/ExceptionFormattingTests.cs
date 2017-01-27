@@ -35,7 +35,7 @@ namespace StoryTeller.Testing
         }
 
 
-
+        // SAMPLE: MarkdownFailureException
         public class MarkdownFailureException : StorytellerFailureException
         {
             public MarkdownFailureException(string message) : base(message, ErrorDisplay.markdown)
@@ -48,6 +48,7 @@ namespace StoryTeller.Testing
                 return $"**Error:** {Message}";
             }
         }
+        // ENDSAMPLE
 
         [Fact]
         public void render_the_message_of_a_failure_exception_as_markdown()
@@ -82,10 +83,14 @@ namespace StoryTeller.Testing
             display.ShouldBe(ErrorDisplay.text);
         }
 
+// SAMPLE: custom_exception_formatting
         [Fact]
         public void render_with_custom_markdown_formatting()
         {
             var message = "**Dude, you're trying to divide by zero!**";
+
+            // This is registering a conversion to markdown text from any
+            // exception of type DivideByZeroException
             ExceptionFormatting.AsMarkdown<DivideByZeroException>(ex => message);
 
             var exception = new DivideByZeroException();
@@ -99,6 +104,9 @@ namespace StoryTeller.Testing
         public void render_with_custom_text_formatting()
         {
             var message = "**Dude, you're trying to divide by zero!**";
+
+            // Register a purely textual representation of the exception
+            // that maintains whitespace
             ExceptionFormatting.AsText<DivideByZeroException>(ex => message);
 
             var exception = new DivideByZeroException();
@@ -108,4 +116,5 @@ namespace StoryTeller.Testing
             display.ShouldBe(ErrorDisplay.text);
         }
     }
+// ENDSAMPLE
 }

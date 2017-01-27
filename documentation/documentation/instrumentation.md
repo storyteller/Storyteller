@@ -8,6 +8,9 @@ Since it is an imperfect world, Storyteller specifications will sometimes fail -
 
 ## StoryTellerAssert
 
+<div class="alert alert-success"><b>Note:</b> Storyteller 4.0 will treat the text message to any 
+overload of <code>StorytellerAssert.Fail()</code> as markdown.</div>
+
 The original means of adding more contextual information about specification failures is the old `StoryTellerAssert` static class, with its usage shown below:
 
 <[sample:using-storyteller-assert]>
@@ -19,9 +22,34 @@ A classic example of using `StoryTellerAssert` is if you have a grammar that is 
 Try not to use <code>StoryTellerAssert</code> in place of <[linkto:documentation/engine/grammars/assertions;title=assertions]> or <[linkto:documentation/engine/grammars/facts;title=facts]> -- especially when that results in much more work on your part. 
 
 
+## Exception Formatters
+
+New to Storyteller 4.0 is the ability to tell Storyteller how to format the display of an exception that is caught during the 
+execution of the specification. The default is still to just dump the full stacktrace, but if you want to get better results, you
+can override the formatting for individual `Exception` types like these unit tests:
+
+<[sample:custom_exception_formatting]>
+
+Note that you can register the exception formatting anywhere because `ExceptionFormatting` is just a static class,
+but idiomatically you probably want those calls in your `ISystem` or maybe in the static initializer of your
+`Fixture` classes.
+
+If it's easier or useful, you can throw a custom failure exception that inherits from the `StorytellerFailureException`
+like this sample below that returns a markdown string representing the error:
+
+<[sample:MarkdownFailureException]>
+
+
 ## Debug Output
 
-If you are compiling to the `Debug` profile in your local work, any calls to .Net's built in `Debug.WriteLine()` during the execution of a specification will show up in a section at the very bottom of the specification results html.
+
+If you are compiling to the `Debug` profile in your local work, any calls to .Net's built in `Debug.WriteLine()` 
+during the execution of a specification will show up in a section at the very bottom of the specification results html.
+
+If you are targetting any Netstandard target with the CoreCLR, you have to use `Trace.WriteLine()` instead. But don't worry,
+because there's now a `Fixture.Trace(string)` function in Storyteller itself that wallpapers over the different like so:
+
+<[sample:Fixture.Trace]>
 
 The sample below is from the internal specifications on the documentation generation that I introduced to trouble shoot a failing specification one day:
 
@@ -36,6 +64,8 @@ Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-
 Loading topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
 Parsing topic file C:\Users\jeremill\AppData\Local\Temp\fc517eaa-8c3b-4d2f-8dc3-e4d0e923bed4\red.md
 </pre></div><hr data-reactid=".0.1.$spec-editorb2bf7c97-5c10-454e-a068-8f9256376467=2results.1.2:2.2"></div>
+
+
 
 ## Exceptions
 
