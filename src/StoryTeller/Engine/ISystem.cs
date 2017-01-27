@@ -42,7 +42,7 @@ namespace StoryTeller.Engine
 
             try
             {
-                cellHandling = system.Start();
+                cellHandling = system.Start() ?? CellHandling.Basic();
             }
             catch (Exception ex)
             {

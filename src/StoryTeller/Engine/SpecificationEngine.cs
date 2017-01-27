@@ -48,7 +48,19 @@ namespace StoryTeller.Engine
                 }
             });
 
-            _warmup = _system.Warmup().ContinueWith(t =>
+            var warmup = _system.Warmup();
+
+            if (warmup == null)
+            {
+                throw new InvalidOperationException($"{system} cannot return a null value from {nameof(ISystem.Warmup)}()");
+            }
+
+            if (warmup.Status == TaskStatus.WaitingForActivation)
+            {
+                throw new InvalidOperationException($"{system}.{nameof(ISystem.Warmup)}().Status is {nameof(TaskStatus.WaitingForActivation)}");
+            }
+
+            _warmup = warmup.ContinueWith(t =>
             {
                 if (t.IsFaulted)
                     _runner.MarkAsInvalid(t.Exception);
