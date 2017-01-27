@@ -10,8 +10,10 @@
 [Tables]
 |> TableWithLotsOfOptions
     [table]
-    |> TableWithLotsOfOptions-row player=Nolan Ryan, position=Pitcher
-    |> TableWithLotsOfOptions-row player=Willy Mays, position=Outfield
-    |> TableWithLotsOfOptions-row player=Johnny Bench, position=Catcher
+    |player      |position|
+    |Nolan Ryan  |Pitcher |
+    |Willy Mays  |Outfield|
+    |Johnny Bench|Catcher |
+
 
 ~~~
