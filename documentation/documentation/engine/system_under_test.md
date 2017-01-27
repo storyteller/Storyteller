@@ -1,20 +1,31 @@
-<!--Title:Connecting Storyteller to the System under Test-->
+<!--Title:Connecting Storyteller to your System-->
 <!--Url:system_under_test-->
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong> Unlike Storyteller 1-2, exposing a custom <code>ISystem</code> is no longer mandatory if you decide you do not need one -- especially if you just want to try Storyteller out. For any kind of significant system, the Storyteller team recommends that you build a custom <code>ISystem</code> in order to cleanly control your system's start up and teardown.
-</div>
+Storyteller needs to be able to interract with your actual [system under test](https://en.wikipedia.org/wiki/System_under_test). 
+While Storyteller **can** be used to test against a running application that is initialized separately, most of the time
+you'll opt to have Storyteller be able to spin up your system on demand as part of running or editing specifications. 
+Storyteller also needs to be able to shut your system down cleanly so that you can swiftly make code changes and rerun specifications.
 
-Like most testing tools in .Net, the Storyteller application has to open a second .Net `AppDomain` in order to load the application assemblies where they are deployed. This second `AppDomain` uses shadow copying so that Storyteller can remain open as you recompile new changes in the system under test. Storyteller uses a file system watcher to watch for all changes to files with the `.dll`, `.exe`, or `.config` file extensions. When Storyteller detects changes to these files, Storyteller attempts to:
+Storyteller can bootstrap a system with one of two mechanisms:
 
-1. Gracefully shutdown the system under test
-1. Unload the running `AppDomain` for the system under test
-1. Spin up a new `AppDomain` to load the new system binaries
-1. Start the system under test again
+1. In a separate [AppDomain](https://msdn.microsoft.com/en-us/library/2bh4z9hs(v=vs.110).aspx). 
+1. In a completely separate process launched by using the [dotnet run](https://docs.microsoft.com/en-us/dotnet/articles/core/preview3/tools/dotnet-run) command against the specification project
 
+Storyteller 3.0 can only support the separate `AppDomain` mechanism. Storyteller 4.0 by default uses the separate
+process approach, but you can opt into using the `AppDomain` approach against a .Net 4.6 application with the 
+`--app-domain` switch from the command line if you are running `dotnet storyteller run` or `dotnet storyteller open`.
+
+In both cases, Storyteller uses the `ISystem` interface described in the next section to control the system under test's
+lifecycle.
+
+## Understanding the ISystem Interface
 
 The hook in your code that Storyteller uses to govern this lifecycle is the `ISystem` interface shown below." 
 
 <[sample:ISystem]>
+
+<div class="alert alert-info"><b>Note!</b> It's not mandatory to supply an <code>ISystem</code> implementation 
+to use Storyteller against codebases that don't require any kind of bootstrapping.</div>
 
 The `ISystem` interface only has four methods:
 1. `Start() : CellHandling` -- this is a hook to do any kind of system bootstrapping or activation and an opportunity to put together any custom cell conversions and system wide selection lists. This method is only called **once** each time the testing `AppDomain` is loaded.
@@ -31,8 +42,48 @@ Use the `Dispose()` method to do any kind of global state cleanup between specif
 <div class="alert alert-info" role="warning"><strong>Note!</strong> Make sure that the <code>Dispose()</code> method for your <code>ISystem</code> is thorough in how it shuts down the system to release resources like file locks, database connections, or network ports. Failing to do this when Storyteller tries to reload the system under test for new changes will cause you no end of grief. And yes, that's the voice of experience talking.
 </div>
 
+## Using the Separate Process Approach
 
-## How does Storyteller determine the ISystem?
+`AppDomain`'s were dropped from the CoreCLR and won't make a reappearance until Netstandard 2.0. Rather than wait for that
+release, Storyteller 4.0 adopted a new default strategy to run the system under test in a separate process triggered from
+the `dotnet run` command. To use this approach, you need to make your Storyteller project a console application, and in
+your `Program.Main()` entry point, delegate to the new `StorytellerAgent` class like this:
+
+<[sample:Program.Main.Default]>
+
+If you had a custom `ISystem` for your application (named `GrammarSystem` in this case), 
+bootstrapping your application would look like this:
+
+<[sample:Program.Main.CustomSystem]>
+
+Storyteller is no longer able to "auto restart" the running system under test when binaries change. 
+If you are relying on the separate process approach, your workflow is to just recycle or restart the 
+system under test through the Storyteller explorer. There are keyboard shortcuts available to restart the 
+application before rerunning a specification. Do remember that dotnet run will trigger a compilation
+if necessary, so you can make your changes to code files and immediately recycle Storyteller's system
+under test.
+
+See <[linkto:documentation/ui/shell]> for more information on how to trigger the system recycling.
+
+
+
+## Using the AppDomain Approach
+
+<div class="alert alert-info" role="warning"><strong>Note!</strong> You can disable the file watching of binaries
+with the <i>--disable-auto-recycle</i> command line switch in any call to <code>dotnet open</code>. 
+</div>
+
+
+Like most testing tools in .Net, the Storyteller application has to open a second .Net `AppDomain` in order to load the application assemblies 
+where they are deployed. This second `AppDomain` uses _[shadow copying](https://msdn.microsoft.com/en-us/library/ms404279(v=vs.110).aspx)_ 
+so that Storyteller can remain open as you recompile new changes in the system under test. Storyteller uses a file system 
+watcher to watch for all changes to files with the `.dll`, `.exe`, or `.config` file extensions. When Storyteller detects changes to these files, Storyteller attempts to:
+
+1. Gracefully shutdown the system under test
+1. Unload the running `AppDomain` for the system under test
+1. Spin up a new `AppDomain` to load the new system binaries
+1. Start the system under test again
+
 
 You can always explicitly tell Storyteller which `ISystem` class to use as a flag to the <[linkto:documentation/ci;title=st run]> or <[linkto:documentation/ui;title=st open]> commands. Otherwise, Storyteller uses these rules to determine the `ISytem` -- or punt.
 
