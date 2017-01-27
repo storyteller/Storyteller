@@ -185,15 +185,42 @@ namespace StoryTeller.Model
                     yield return assembly;
                 }
             }
-        }
+        }   
 #else
+
+        public class StorytellerDependencyFinder
+        {
+            private static readonly string assemblyName = typeof(FixtureLibrary).GetTypeInfo().Assembly.GetName().Name;
+
+            private readonly LightweightCache<string, bool> _isDependent;
+
+            public StorytellerDependencyFinder()
+            {
+                _isDependent = new LightweightCache<string, bool>(name =>
+                {
+                    var library =
+                        DependencyContext.Default.RuntimeLibraries.FirstOrDefault(x => x.Name.EqualsIgnoreCase(name));
+
+                    if (library == null) return false;
+
+                    if (library.Dependencies.Any(x => x.Name.EqualsIgnoreCase(assemblyName))) return true;
+
+                    return library.Dependencies.Any(x => _isDependent[x.Name]);
+                });
+            }
+
+            public IEnumerable<Assembly> FindDependentAssemblies()
+            {
+                return
+                    DependencyContext.Default.RuntimeLibraries.Where(x => _isDependent[x.Name])
+                        .Select(x => Assembly.Load(new AssemblyName(x.Name)));
+            }
+        }
 
         public static IEnumerable<Assembly> GetReferencingAssemblies()
         {
-            var assemblyName = typeof(FixtureLibrary).GetTypeInfo().Assembly.GetName();
-
-            return DependencyContext.Default.RuntimeLibraries.Where(x => x.Dependencies.Any(_ => _.Name.StartsWith(assemblyName.Name)))
-                .Select(x => Assembly.Load(new AssemblyName(x.Name)));
+            var finder = new StorytellerDependencyFinder();
+            return finder.FindDependentAssemblies().ToArray();
         }
 
 #endif
