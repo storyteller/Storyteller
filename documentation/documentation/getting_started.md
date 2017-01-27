@@ -5,7 +5,7 @@
 CoreCLR support.
 </div>
 
-<div class="alert alert-info" role="alert"><strong>Note!</strong>Storyteller 4.0 fully embraces the new dotnet CLI with an additional package for
+<div class="alert alert-info" role="alert"><strong>Note!</strong> Storyteller 4.0 fully embraces the new dotnet CLI with an additional package for
 using Storyteller 4.0 with "classic" csproj files. There is a separate section for information about using Storyteller 3.0 as the setup steps
 have changed</div>
 
@@ -13,6 +13,14 @@ This document describes how to install and intialize your Storyteller specficati
 
 * <[linkto:documentation/ci]>
 * <[linkto:documentation/ui]>
+
+If you prefer to just see working code, take a look at the [Storyteller Quickstart repository](https://github.com/storyteller/quickstarts) to see minimal
+Storyteller setups for projects using the [dotnet CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/) or .Net 4.6 projects using the classic *.csproj file format.
+
+You can also find Storyteller 4 used in these open source projects:
+
+* [Marten](https://github.com/JasperFx/marten)
+* [Alba](https://github.com/JasperFx/alba)
 
 In all cases, Storyteller consists of two logical parts:
 
@@ -127,7 +135,9 @@ targetting .Net 4.6. To set up a Storyteller 3.* specification project:
 1. Create a new **class library** project -- if you opt for a separate project. I frequently reuse the unit testing library for Storyteller specifications
    just to avoid creating additional projects
 1. Add a reference to the Storyteller 3.0 Nuget to that project
-1. **Optionally**, you can add a custom <[linkto:documentation/engine/system_under_test;title=ISystem]> to your Storyteller specification project
+1. **Optionally**, you can add a custom <[linkto:documentation/engine/system_under_test;title=ISystem]> to your Storyteller specification project. You don't 
+   need to do anything explicitly to get Storyteller to pick it up if there is only one `ISystem` class in the codebase. You can override the choice of ISystem used
+   through a command line switch.
 1. Assuming that you are using Nuget for package management, you might want to add a small script to delegate to the Storyteller command line
    tooling like this little Windows batch file:
 
