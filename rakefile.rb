@@ -174,6 +174,11 @@ task :samples do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples"
 end
 
+"Run the spec editor w/ samples"
+task :testbed do
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Testbed"
+end
+
 "Run the spec editor w/ the documentation samples"
 task :docsamples do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Samples"
