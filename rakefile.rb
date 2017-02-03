@@ -142,20 +142,16 @@ end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"
 task :publish => [:prepare_docs] do
-	
-
-	if !Dir.exists? 'doc-target' 
-		Dir.mkdir 'doc-target'
-		sh "git clone https://github.com/storyteller/storyteller.github.com.git doc-target"
-	else
-		Dir.chdir "doc-target" do
-			sh "git checkout --force"
-			sh "git clean -xfd"
-			sh "git pull origin master"
-		end
+	if Dir.exists? 'doc-target' 
+		FileUtils.rm_rf 'doc-target'
 	end
-	
+
 	sh "dotnet restore"
+
+	Dir.mkdir 'doc-target'
+	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
+	
+	
 	sh "dotnet stdocs export doc-target Website --version #{BUILD_VERSION}"
 	
 	Dir.chdir "doc-target" do
