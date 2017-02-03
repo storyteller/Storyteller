@@ -152,7 +152,7 @@ task :publish => [:prepare_docs] do
 	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
 	
 	
-	sh "dotnet stdocs export doc-target Website --version #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs -- export doc-target Website --version #{BUILD_VERSION}"
 	
 	Dir.chdir "doc-target" do
 		sh "git add --all"
