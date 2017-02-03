@@ -34,10 +34,11 @@ namespace StorytellerDocGen
 
         public DocProject(DocSettings settings)
         {
-            var port = PortFinder.FindPort(5000);
-            BaseAddress = "http://localhost:" + port;
+            Port = PortFinder.FindPort(5050);
+            BaseAddress = "http://localhost:" + Port;
 
             _settings = settings;
+
             ReadTopics();
 
 
@@ -56,6 +57,8 @@ namespace StorytellerDocGen
                 _.For<Topic>().Use(Topic);
             });
         }
+
+        public int Port { get; }
 
         public string BaseAddress { get; set; }
 
@@ -126,16 +129,14 @@ namespace StorytellerDocGen
             var webSockets = new WebSocketsHandler();
             _refresher = new BrowserRefresher(webSockets);
 
-            var port = PortFinder.FindPort(5000);
 
-
-            _settings.WebsocketAddress = $"ws://localhost:{port}";
+            _settings.WebsocketAddress = $"ws://localhost:{Port}";
 
 
             _container.Inject<IBrowserRefresher>(_refresher);
             StartScanning();
 
-            var host = startHost(port, webSockets, middleware);
+            var host = startHost(Port, webSockets, middleware);
 
             _topicWatcher = new TopicFileWatcher(_settings, this);
 
