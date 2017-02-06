@@ -12,10 +12,15 @@ namespace StoryTeller.Grammars.Reflection
 {
     public class MethodInvocation
     {
+        public static MethodInvocation For(MethodInfo method, object target)
+        {
+            return new MethodInvocation(method, target);
+        }
+
         private Cell[] _outputs = new Cell[0];
         private Cell[] _cells;
 
-        public MethodInvocation(MethodInfo method, object target)
+        protected MethodInvocation(MethodInfo method, object target)
         {
             var parameters = method.GetParameters();
             Arguments = parameters.Select(x => x.Name).ToArray();

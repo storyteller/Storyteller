@@ -26,7 +26,7 @@ namespace StoryTeller.Grammars.Reflection
 
         public FactCheckMethod(MethodInfo method, object target)
         {
-            _invocation = new MethodInvocation(method, target);
+            _invocation = MethodInvocation.For(method, target);
         }
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)

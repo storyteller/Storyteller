@@ -16,7 +16,7 @@ namespace StoryTeller.Grammars.Reflection
         public FactMethod(MethodInfo method, object target)
         {
             _method = method;
-            _invocation = new MethodInvocation(method, target);
+            _invocation = MethodInvocation.For(method, target);
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

@@ -20,7 +20,7 @@ namespace StoryTeller.Grammars.Reflection
         {
             _method = method;
 
-            _invocation = new MethodInvocation(method, fixture);
+            _invocation = MethodInvocation.For(method, fixture);
         }
 
         public static ActionMethodGrammar Create<T>(Expression<Action<T>> expression, T target)

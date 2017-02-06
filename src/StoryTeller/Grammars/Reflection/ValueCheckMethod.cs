@@ -29,7 +29,7 @@ namespace StoryTeller.Grammars.Reflection
 
         public ValueCheckMethod(MethodInfo method, object target)
         {
-            _invocation = new MethodInvocation(method, target);
+            _invocation = MethodInvocation.For(method, target);
         }
 
 

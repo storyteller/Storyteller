@@ -61,7 +61,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
         {
             var target = new Target();
             var method = ReflectionHelper.GetMethod<Target>(x => x.Go(null, 0, 0));
-            var invocation = new MethodInvocation(method, target);
+            var invocation = MethodInvocation.For(method, target);
 
             var values = new StepValues(method.Name);
 
@@ -90,7 +90,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("age", 5);
             values.Store("percentAwake", .5);
 
-            var invocation = new MethodInvocation(method, target);
+            var invocation = MethodInvocation.For(method, target);
             invocation.Compile(target, CellHandling.Basic());
 
             var results = invocation.Invoke(values).ToArray();
@@ -113,7 +113,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             values.Store("last", "Miller");
             values.Store("returnValue", "foo");
 
-            var invocation = new MethodInvocation(method, target);
+            var invocation = MethodInvocation.For(method, target);
             invocation.Compile(target, CellHandling.Basic());
 
             invocation.Invoke(values).Single().actual.ShouldBe("Jeremy Daniel Miller");
@@ -128,7 +128,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             var values = new StepValues(method.Name);
             values.Store("name", "Bill");
 
-            var invocation = new MethodInvocation(method, target);
+            var invocation = MethodInvocation.For(method, target);
             invocation.Compile(target, CellHandling.Basic());
 
             invocation.IsAsync().ShouldBeTrue();
