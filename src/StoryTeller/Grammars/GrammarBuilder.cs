@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline.Reflection;
 using StoryTeller.Grammars.Reflection;
 using StoryTeller.Grammars.Tables;
@@ -88,7 +89,7 @@ namespace StoryTeller.Grammars
     {
         public bool Matches(MethodInfo method)
         {
-            return method.HasReturn() && method.ReturnType == typeof(bool) && !method.GetParameters().Any();
+            return method.HasReturn() && (method.ReturnType == typeof(bool) || method.ReturnType == typeof(Task<bool>)) && !method.GetParameters().Any();
         }
 
         public IGrammar Build(MethodInfo method, Fixture fixture)
