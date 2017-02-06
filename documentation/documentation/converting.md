@@ -5,7 +5,7 @@
 
 Storyteller 4.0 introduces a new standard, text based format for persisting specifications that
 can roughly be described as "Markdown with some Storyteller-specific stuff mixed in." See 
-<[linkto:documentation/markdown]> for specifics on the new file format.
+<[linkto:documentation/language/markdown]> for specifics on the new file format.
 
 To convert your 3.0 specs to the new 4.0 format, run this command from the root of your
 Storyteller project:

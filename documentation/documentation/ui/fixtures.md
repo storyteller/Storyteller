@@ -12,7 +12,7 @@ in the top bar of the UI:
 ## Fixtures
 
 The fixture & grammar explorer shows a table of all the known Fixture's in the system. This is in effect,
-a union of the <[linkto:documentation/fixturemarkdown;title=Fixture's described by markdown]> and the coded Fixture classes.
+a union of the <[linkto:documentation/language/fixturemarkdown;title=Fixture's described by markdown]> and the coded Fixture classes.
 
 <[img:content/images/fixtures/fixture-explorer.png;The fixture explorer]>
 
@@ -27,6 +27,28 @@ From left to right, the columns in the grid shown above:
    represents a merged union of the coded Fixture and any markdown overrides. 
 
  <[img:content/images/fixtures/missing-code-number.png;A fixture with missing grammars]>
+
+## Create a New Fixture
+
+New in Storyteller 4.0 is a small utility to start designing a brand new `Fixture` in markdown. To trigger this,
+use the _New Fixture_ button in the top of the UI:
+
+<[img:content/images/fixtures/new-fixture.png;New Fixture]>
+
+That link will bring up this dialog:
+
+<[img:content/images/fixtures/new-fixture-dialog.png;New Fixture Dialog]>
+
+Enter either the key you want to use for your new Fixture like "CreateInvoice," or the desired title
+of the Fixture like "Create an Invoice" and let Storyteller derive the fixture key it uses
+internally from the title. After clicking "Ok," Storyteller will create a new markdown file and attempt to 
+open that with your default editor for markdown files. If you used "Create an Invoice" as the title,
+you'd get a new file called `/Fixtures/CreateAnInvoice.md` under the root of your Storyteller specification
+project with the title specified like so:
+
+  ```
+# Create an Invoice
+  ```
   
 
 ## Exporting and Reloading Fixtures
@@ -66,7 +88,7 @@ Or if there are no missing grammars, you'll see this:
 
 <[img:content/images/fixtures/missing-code.png;No missing grammars]>
 
-Finally, you can see what the grammar usage would be within the <[linkto:documentation/markdown;title=specification markdown files]>
+Finally, you can see what the grammar usage would be within the <[linkto:documentation/language/markdown;title=specification markdown files]>
 with a sample specification:
 
 <[img:content/images/fixtures/markdown-sample.png;Sample usage of this Fixture in markdown]>

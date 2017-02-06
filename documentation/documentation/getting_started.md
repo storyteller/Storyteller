@@ -11,7 +11,7 @@ have changed</div>
 
 This document describes how to install and intialize your Storyteller specfication project. For more specific documentation, see:
 
-* <[linkto:documentation/ci]>
+* <[linkto:documentation/using/ci]>
 * <[linkto:documentation/ui]>
 
 If you prefer to just see working code, take a look at the [Storyteller Quickstart repository](https://github.com/storyteller/quickstarts) to see minimal
@@ -93,7 +93,7 @@ Once the steps above are complete, you're ready to start writing <[linkto:docume
 specification runner, open up the command prompt tool of your choice, change the directory to the root of your Storyteller specification project,
 and type `dotnet storyteller open` and go to town.
 
-See <[linkto:documentation/ci]> for more information on using `dotnet storyteller`.
+See <[linkto:documentation/using/ci]> for more information on using `dotnet storyteller`.
 
 
 ## Storyteller 4.0 with "classic" MSBuild Projects
@@ -209,7 +209,7 @@ You can also query the exact usage of a single command with the syntax like `st 
 ## How Storyteller Persists Specifications
 
 Storyteller 4.0 introduces a new (hopefully human readable and editable) markdown based persistence mechanism in place of the old Xml format from Storyteller <= 3.0. 
-See <[linkto:documentation/converting]> or <[linkto:documentation/engine/markdown]> for more information.
+See <[linkto:documentation/converting]> or <[linkto:documentation/language/markdown]> for more information.
 
 Storyteller 4.0 persists specifications as markdown files in the `/Specs` folder directly under the root of your Storyteller project, with subfolders to represent the suite structure. Storyteller will create this directory on demand if it does not already exist the first time it needs to persist a new specification or top level suite. Storyteller will happily create this folder for you if it does not already exist.
 

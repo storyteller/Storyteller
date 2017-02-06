@@ -3,7 +3,7 @@
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The techniques shown in this topic may be more effective in your problem domain by using intermediate classes or types built just for easy Storyteller usage that are then used as an input to whatever complex data your application actually uses.</div>
 
 
-Over its lifetime (Storyteller has been in continous usage since 2009), Storyteller has been most valuable over classic xUnit testing tools when the specification domain is data intensive. As stated in the <[linkto:documentation/best_practices]>, the Storyteller team strongly recommends that all the necessary system state should be set up in the specification itself. To that end, Storyteller exposes a pair of helper methods on the `Fixture` class to quickly create <[linkto:documentation/engine/grammars/paragraphs;title=paragraph]> grammars to set up complex objects:
+Over its lifetime (Storyteller has been in continous usage since 2009), Storyteller has been most valuable over classic xUnit testing tools when the specification domain is data intensive. As stated in the <[linkto:documentation/using/best_practices]>, the Storyteller team strongly recommends that all the necessary system state should be set up in the specification itself. To that end, Storyteller exposes a pair of helper methods on the `Fixture` class to quickly create <[linkto:documentation/engine/grammars/paragraphs;title=paragraph]> grammars to set up complex objects:
 
 1. `Fixture.CreateObject<T>()` -- the user is in charge of telling Storyteller how to initialize the object
 1. `Fixture.CreateNewObject<T>()` -- which is just syntactical sugar to call a default constructor on the type "T"

@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandLineApplicationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationName>dotnet storyteller</ApplicationName>
+  <Commands>
+    <CommandReport>
+      <Name>export</Name>
+      <Description>Exports a visualization of all of the specifications to disk</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>path</Name>
+          <Description>Path to the StoryTeller project file or the project directory</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-f, --file &lt;file&gt;]</UsageDescription>
+          <Description>The file where the html will be written</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-t, --title &lt;title&gt;]</UsageDescription>
+          <Description>Use to overwrite the title of the exported HTML specs</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-o, --open]</UsageDescription>
+          <Description>If chosen, try to open the browser to the exported file</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --framework &lt;framework&gt;]</UsageDescription>
+          <Description>Override the dotnet framework if multi-targeting</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-b, --build &lt;build&gt;]</UsageDescription>
+          <Description>Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
+          <Description>Storyteller test mode profile for systems like Serenity that use this</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-t, --timeout &lt;timeout&gt;]</UsageDescription>
+          <Description>Optional. Default project timeout in seconds.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --config &lt;confi&gt;]</UsageDescription>
+          <Description>Optional. Override the config file selection of the Storyteller test running AppDomain</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
+          <Description>Optional. Override the fixtures directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
+          <Description>Force Storyteller to use this culture in all value conversions</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --system-name &lt;systemname&gt;]</UsageDescription>
+          <Description>Optional. Tell Storyteller which which ISystem to use</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Export the project in the current directory</Description>
+          <Usage>dotnet storyteller export [-f, --file &lt;file&gt;] [-t, --title &lt;title&gt;] [-o, --open] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+        <UsageReport>
+          <Description>Export the project in a named directory</Description>
+          <Usage>dotnet storyteller export &lt;path&gt; [-f, --file &lt;file&gt;] [-t, --title &lt;title&gt;] [-o, --open] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>convert</Name>
+      <Description>Converts the persisted specifications from the 1.0-3.0 Xml format to the 4.0 markdown format</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>path</Name>
+          <Description>Directory of the Storyteller specification project</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Convert this Directory</Description>
+          <Usage>dotnet storyteller convert [-s, --specs &lt;specs&gt;]</Usage>
+        </UsageReport>
+        <UsageReport>
+          <Description>Convert a specific Directory</Description>
+          <Usage>dotnet storyteller convert &lt;path&gt; [-s, --specs &lt;specs&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>dump-fixtures</Name>
+      <Description>Exports all of the Fixture definitions to markdown for review or using within the headless mode</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>path</Name>
+          <Description>Path to the StoryTeller project file or the project directory</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-f, --framework &lt;framework&gt;]</UsageDescription>
+          <Description>Override the dotnet framework if multi-targeting</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-b, --build &lt;build&gt;]</UsageDescription>
+          <Description>Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
+          <Description>Storyteller test mode profile for systems like Serenity that use this</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-t, --timeout &lt;timeout&gt;]</UsageDescription>
+          <Description>Optional. Default project timeout in seconds.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --config &lt;confi&gt;]</UsageDescription>
+          <Description>Optional. Override the config file selection of the Storyteller test running AppDomain</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
+          <Description>Optional. Override the fixtures directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
+          <Description>Force Storyteller to use this culture in all value conversions</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --system-name &lt;systemname&gt;]</UsageDescription>
+          <Description>Optional. Tell Storyteller which which ISystem to use</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Exports all of the Fixture definitions to markdown for review or using within the headless mode</Description>
+          <Usage>dotnet storyteller dump-fixtures &lt;path&gt; [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>run</Name>
+      <Description>Run a suite of StoryTeller tests</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>path</Name>
+          <Description>Path to the StoryTeller project file or the project directory</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-r, --results-path &lt;resultspath&gt;]</UsageDescription>
+          <Description>Path to write out the results. Default is stresults.htm</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-w, --workspace &lt;workspace&gt;]</UsageDescription>
+          <Description>Optional.  Runs only one workspace</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-e, --exclude-tags &lt;excludetags&gt;]</UsageDescription>
+          <Description>Optional. Excludes specs with any of the specified tags (comma-delimited)</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-o, --open]</UsageDescription>
+          <Description>Open the results in a browser after the run. DO NOT DO THIS IN CI!</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --csv &lt;csv&gt;]</UsageDescription>
+          <Description>WriteToText the performance data in CSV format to the specified path</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-j, --json &lt;json&gt;]</UsageDescription>
+          <Description>WriteToText the raw result information to JSON format at the specified path</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-d, --dump &lt;dump&gt;]</UsageDescription>
+          <Description>Dump the raw JSON history of the batch run to the specified path</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-v, --validate]</UsageDescription>
+          <Description>Only validates the specifications and writes out a list of the encountered errors. Will fail if there are any errors.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-v, --verbose]</UsageDescription>
+          <Description>Writes extra console logging for individual specs</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-r, --retries &lt;retries&gt;]</UsageDescription>
+          <Description>Sets a minimum number of retry attempts for this execution</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-z, --teamcity]</UsageDescription>
+          <Description>Optional. Applies extra logging to see progress within TeamCity during CI runs</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-l, --lifecycle Acceptance|Regression|Any]</UsageDescription>
+          <Description>Optional. Only runs tests with desired lifecyle</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --framework &lt;framework&gt;]</UsageDescription>
+          <Description>Override the dotnet framework if multi-targeting</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-b, --build &lt;build&gt;]</UsageDescription>
+          <Description>Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
+          <Description>Storyteller test mode profile for systems like Serenity that use this</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-t, --timeout &lt;timeout&gt;]</UsageDescription>
+          <Description>Optional. Default project timeout in seconds.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --config &lt;confi&gt;]</UsageDescription>
+          <Description>Optional. Override the config file selection of the Storyteller test running AppDomain</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
+          <Description>Optional. Override the fixtures directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
+          <Description>Force Storyteller to use this culture in all value conversions</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --system-name &lt;systemname&gt;]</UsageDescription>
+          <Description>Optional. Tell Storyteller which which ISystem to use</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Execute from the current project path</Description>
+          <Usage>dotnet storyteller run [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-v, --validate] [-v, --verbose] [-r, --retries &lt;retries&gt;] [-z, --teamcity] [-l, --lifecycle Acceptance|Regression|Any] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+        <UsageReport>
+          <Description>Execute</Description>
+          <Usage>dotnet storyteller run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-v, --validate] [-v, --verbose] [-r, --retries &lt;retries&gt;] [-z, --teamcity] [-l, --lifecycle Acceptance|Regression|Any] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>open</Name>
+      <Description>Opens the specification editor web tool</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>path</Name>
+          <Description>Path to the StoryTeller project file or the project directory</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-d, --disable-auto-recycle]</UsageDescription>
+          <Description>DisableAutoRecycleFlag</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-h, --hotreload]</UsageDescription>
+          <Description>Only for Storyteller development itself</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --framework &lt;framework&gt;]</UsageDescription>
+          <Description>Override the dotnet framework if multi-targeting</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-b, --build &lt;build&gt;]</UsageDescription>
+          <Description>Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
+          <Description>Storyteller test mode profile for systems like Serenity that use this</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-t, --timeout &lt;timeout&gt;]</UsageDescription>
+          <Description>Optional. Default project timeout in seconds.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --config &lt;confi&gt;]</UsageDescription>
+          <Description>Optional. Override the config file selection of the Storyteller test running AppDomain</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
+          <Description>Optional. Override the fixtures directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
+          <Description>Force Storyteller to use this culture in all value conversions</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --system-name &lt;systemname&gt;]</UsageDescription>
+          <Description>Optional. Tell Storyteller which which ISystem to use</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Open the Storyteller client to the current project</Description>
+          <Usage>dotnet storyteller open [-d, --disable-auto-recycle] [-h, --hotreload] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+        <UsageReport>
+          <Description>Open the Storyteller client to the named project</Description>
+          <Usage>dotnet storyteller open &lt;path&gt; [-d, --disable-auto-recycle] [-h, --hotreload] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+  </Commands>
+</CommandLineApplicationReport>

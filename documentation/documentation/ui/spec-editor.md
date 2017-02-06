@@ -3,11 +3,11 @@
 
 Individual specifications can be reviewed, edited, and executed from the Specification Editor page. The page is layed out as a title and command bar at top, and a representation of the specification below in one of three modes:
 
-1. Preview -- a read only view rendering of a specification perfect for reviewing and documenting a specification. Accessed by either clicking the "Preview" button at the top right or by the `ctrl + 1` keyboard shortcut
+1. Preview -- a read only view rendering of a specification perfect for reviewing and documenting a specification. Accessed by either clicking the "Preview" button at the top right.
 
-1. Editor -- an editable rendering of the specification. Accessed by clicking the "Editor" button at the top right or by the `ctrl + 2` keyboard shortcut
+1. Editor -- an editable rendering of the specification. Accessed by clicking the "Editor" button at the top right.
 
-1. Results -- A rendering of the specification with any results. Accessed by clicking the "Results" button at the top right or by the `ctrl + 3` keyboard shortcut.
+1. Results -- A rendering of the specification with any results. Accessed by clicking the "Results" button at the top right.
 
 When you access a specification from the <[linkto:documentation/ui/spec-explorer]> screen, you will be taken to the results view for the specification if it exists, or otherwise to the editor view.
 
@@ -22,6 +22,11 @@ If the specification is currently queued, executing, or has a recorded resort, a
 
 The status bar tells you the resulting counts if any, and when the specification was last executed in local machine time.
 
+## Useful Keyboard shortcuts
+
+There are several keyboard shortcuts available in the specification editor screen to run specifications,
+stepthrough specifications, save, undo & redo, and navigate within the specification. See the _Help_ link in
+the top of the UI to see a list of the available shortcuts.
 
 
 ## Running, Saving, Undo/Redo Changes, and Opening the File
@@ -33,6 +38,8 @@ At the top left of the screen, just below the specification title, is a series o
 From left to right, the buttons are:
 
 1. The "Play" button queues the specification for execution. This button is disabled if the specification is executing or queued.
+
+1. The second play button queues the specification up for the new <[linkto:documentation/ui/stepthrough]> 
 
 1. The save button is enabled if there are any outstanding changes to the specification. When the specification is saved, an alert will momentarily appear below the specification title.
 
@@ -67,7 +74,8 @@ The results view will display the specification with all the results rendered as
 1. Unsuccessful facts, assertions, and set matches in red
 1. Errors in yellow
 
-At the bottom of the specification results is a table for the performance timings of the specification execution, the `Debug.WriteLine()` tracing from .Net, and any custom logging output. See <[linkto:documentation/instrumentation]> for more information on using this feature.
+At the bottom of the specification results is a table for the performance timings of the specification execution, the `Debug.WriteLine()` tracing from .Net, and any custom logging output. 
+See <[linkto:documentation/using/instrumentation]> for more information on using this feature.
 
 <[img:content/images/editing/results.png;The Results View]>
 
@@ -96,13 +104,6 @@ The maximum retry count for the specification can be edited by changing the text
 Individual cells in the specification are edited by either textbox's, checkbox's, or select box's depending on the type of cell. Only the active cell is shown in an editable form. All other cells are in a "preview" mode to enhance the legibility of the specification while editing (this was a major shortcoming in Storyteller 1-2).
 
 <[img:content/images/editing/editing-cells.png;Editing Cells]>
-
-
-## Specification Expiration
-
-At the top left of the specification editor is a small control to review and edit the specification expiration date for this specification.
-
-See <[linkto:documentation/expiration]> for more information. 
 
 
 ## The Specification Outline and Step "Containers"

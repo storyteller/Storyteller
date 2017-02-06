@@ -11,7 +11,7 @@ The top bar (in black) has these options from left to right:
 
 1. The _Storyteller 3_ name is a link back to the entry page
 1. The name of the active <[linkto:documentation/engine/system_under_test]>. If the editor tool was launched with a "profile" from the command line options, that profile will be shown after the system name in parantheses. Clicking the system name will reload the main <[linkto:documentation/ui/spec-explorer;title=specification editor]>.
-1. A link to <[linkto:documentation/ui/language;title=Fixtures and Grammars]> to explore and review the specification language of the current project
+1. A link to <[linkto:documentation/ui/fixtures;title=Fixtures and Grammars]> to explore and review the specification language of the current project
 1. The "Documentation" link will open this website in another tab
 1. The _Commands_ menu with options discussed in sections below
 
@@ -33,12 +33,18 @@ Again, Storyteller attempts to recycle the system under test AppDomain anytime i
 To clear any existing results in the specification editor and explorer views, use the `Clear All Results` menu option under the _Commands_ menu at the top right of the user interface.
 
 
+## Fixture File Operations
+
+See <[linkto:documentation/language/fixturemarkdown]> for more information
+
+
 ## The Status Bar
 
 The second navigation bar in light gray immediately below the navigation bar has links for the system status and help:
 
 1. A link for "Save All Changes" appears if any specifications have local, unsaved changes.
 1. The number of specifications in the execution queue. This link is not shown if the queue is empty.
+1. _New Fixture_ will bring up a dialog to begin the creation of a new <[linkto:documentation/language/fixturemarkdown;title=Fixture in markdown]>.
 1. A count of grammar errors with the specification language if there are any problems detected. See the section below on Grammar Errors.
 1. A link for the status of the system under test. If the system is still being loaded or recycled, the text will read "Recycling" with a spinning icon. If the system is in a ready state, the link text will read something like "Recycled at [time]" telling you when the system was last loaded. Clicking this link will bring up the system properties modal window explained below.
 1. _Search_ for a specfication or suite. More information below.
@@ -56,6 +62,9 @@ Click the _Help_ link at top or type `ctrl+/` to open the help dialog that lists
 
 
 ## System Properties
+
+<div class="alert alert-info"><b>Note!</b> This dialog is mostly useful for troubleshooting issues when
+ using the separate AppDomain execution mode in .Net 4.6.</div>
 
 Clicking the "Recyled at [time]" menu will bring up a modal dialog explaining how Storyteller has built the testing AppDomain to connect to the system under test that will look like this sample:
 

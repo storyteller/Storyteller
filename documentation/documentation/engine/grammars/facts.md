@@ -25,7 +25,7 @@ Below is a sample:
 
 <[sample:fact-more-information]>
 
-See <[linkto:documentation/instrumentation]>
+See <[linkto:documentation/using/instrumentation]>
 
 ## Facts in Action
 

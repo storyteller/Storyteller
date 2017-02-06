@@ -77,17 +77,3 @@ results of a database table, view, or query. This feature was built specifically
 
 To set up a set verification against a `DataTable`, use the `Fixture.VerifyDataTable()` method as shown below:
 
-<[sample:using-verify-data-table]> 
-
-When you use this method, the key things you have to supply are:
-
-1. Some mechanism for fetching the `DataTable` to be verified. The `VerifyDataTable()` method has overloads for `Func<ISpecContext, DataTable>` and 
-   `Func<DataTable>`. The easiest approach is probably to make a private method that returns a `DataTable` and refer to that method.
-1. A title for the set verification grammar
-1. The columns in the DataTable you wish to verify. At a minimum, you'll need to supply the column name and a .Net Type. You can also optionally 
-   configure `Cell` properties like headers and editors just like any other cell in Storyteller.
-
-
-You can see the set verification grammar we built above in action inside a specification below:
-
-<[spec-result:Sets/Data Tables]>
