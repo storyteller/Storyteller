@@ -134,10 +134,9 @@ namespace StoryTeller.Model
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             if (parameter.HasDefaultValue)
-                if (parameter.DefaultValue != null)
-                    cell.DefaultValue = parameter.DefaultValue.ToString();
-                else
-                    cell.DefaultValue = "NULL";
+            {
+                cell.DefaultValue = parameter.DefaultValue?.ToString() ?? "NULL";
+            }
 
 
             cell.readLists(cells, fixture);
@@ -160,9 +159,13 @@ namespace StoryTeller.Model
             if (OptionListName.IsEmpty()) return;
 
             if (fixture.Lists.Has(OptionListName))
+            {
                 options = fixture.Lists[OptionListName].Options;
+            }
             else
+            {
                 options = cellHandling.Lists[OptionListName].Options;
+            }
         }
 
         public static Cell For(CellHandling cells, Accessor accessor, Fixture fixture)

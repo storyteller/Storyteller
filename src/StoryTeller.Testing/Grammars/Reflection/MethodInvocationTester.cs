@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
 using Shouldly;
@@ -33,9 +34,25 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 percentAwake = .5;
             }
 
+            
+
+            public Task GoOutputAsync(string name)
+            {
+                Name = name;
+                return Task.CompletedTask;
+            }
+
             public string Fullname(string first, string middle, string last)
             {
                 return "{0} {1} {2}".ToFormat(first, middle, last);
+            }
+
+            public Task<string> FullnameAsync(string first, string middle, string last)
+            {
+                return Task.Factory.StartNew(() =>
+                {
+                    return Fullname(first, middle, last);
+                });
             }
         }
 
@@ -100,6 +117,45 @@ namespace StoryTeller.Testing.Grammars.Reflection
             invocation.Compile(target, CellHandling.Basic());
 
             invocation.Invoke(values).Single().actual.ShouldBe("Jeremy Daniel Miller");
+        }
+
+        [Fact]
+        public void can_invoke_a_method_returning_task()
+        {
+            var target = new Target();
+            var method = ReflectionHelper.GetMethod<Target>(x => x.GoOutputAsync(null));
+
+            var values = new StepValues(method.Name);
+            values.Store("name", "Bill");
+
+            var invocation = new MethodInvocation(method, target);
+            invocation.Compile(target, CellHandling.Basic());
+
+            invocation.IsAsync().ShouldBeTrue();
+
+            invocation.InvokeAsync(values).Wait();
+
+            target.Name.ShouldBe("Bill");
+        }
+
+        [Fact]
+        public async Task invoke_with_return_value_with_async_invocation()
+        {
+            var target = new Target();
+            var method = ReflectionHelper.GetMethod<Target>(x => x.FullnameAsync(null, null, null));
+
+            var values = new StepValues(method.Name);
+            values.Store("first", "Jeremy");
+            values.Store("middle", "Daniel");
+            values.Store("last", "Miller");
+            values.Store("returnValue", "foo");
+
+            var invocation = new AsyncMethodInvocationWithReturn<string>(method, target);
+            invocation.Compile(target, CellHandling.Basic());
+
+            var results = await invocation.InvokeAsync(values);
+                
+            results.Single().actual.ShouldBe("Jeremy Daniel Miller");
         }
     }
 }

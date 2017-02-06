@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
@@ -11,38 +12,46 @@ namespace StoryTeller.Grammars.Reflection
 {
     public class MethodInvocation
     {
-        private readonly string[] _arguments;
-        private readonly MethodInfo _method;
-        private readonly object _target;
         private Cell[] _outputs = new Cell[0];
         private Cell[] _cells;
 
         public MethodInvocation(MethodInfo method, object target)
         {
             var parameters = method.GetParameters();
-            _arguments = parameters.Select(x => x.Name).ToArray();
+            Arguments = parameters.Select(x => x.Name).ToArray();
 
 
-            _method = method;
-            _target = target;
+            Method = method;
+            Target = target;
 
-            Format = _method.DeriveFormat();
+            Format = Method.DeriveFormat();
         }
+
+        public string[] Arguments { get; }
+
+        public object Target { get; }
+
+        public MethodInfo Method { get; }
 
         public void Compile(Fixture fixture, CellHandling cellHandling)
         {
-            _cells = _method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture)).ToArray();
+            _cells = Method.GetParameters().Select(x => Cell.For(cellHandling, x, fixture)).ToArray();
             _outputs = _cells.Where(x => x.result).ToArray();
 
-            if (_method.HasReturn())
+            if (Method.HasReturn() && Method.ReturnType != typeof(Task))
             {
-                ReturnCell = Cell.For(cellHandling, _method.ReturnParameter, fixture);
+                ReturnCell = Cell.For(cellHandling, Method.ReturnParameter, fixture);
                 ReturnCell.result = true;
                 if (ReturnCell.Key.IsEmpty())
                 {
                     ReturnCell.Key = Format.ParseTemplateKeys().LastOrDefault() ?? "returnValue";
                 }
             }
+        }
+
+        public bool IsAsync()
+        {
+            return Method.HasReturn() && Method.ReturnType.CanBeCastTo<Task>();
         }
 
         public string Format { get; private set; }
@@ -71,15 +80,20 @@ namespace StoryTeller.Grammars.Reflection
 
         public bool InvokeTest(StepValues values)
         {
-            var parameters = _arguments.Select(values.Get).ToArray();
-            return (bool) _method.Invoke(_target, parameters);
+            var parameters = Arguments.Select(values.Get).ToArray();
+            return (bool) Method.Invoke(Target, parameters);
         }
 
         public IEnumerable<CellResult> Invoke(StepValues values)
         {
-            var parameters = _arguments.Select(values.Get).ToArray();
-            var returnValue = _method.Invoke(_target, parameters);
+            var parameters = Arguments.Select(values.Get).ToArray();
+            var returnValue = Method.Invoke(Target, parameters);
 
+            foreach (var cellResult in buildCellResults(values, parameters, returnValue)) yield return cellResult;
+        }
+
+        protected IEnumerable<CellResult> buildCellResults(StepValues values, object[] parameters, object returnValue)
+        {
             foreach (var output in _outputs)
             {
                 var actual = parameters[output.Position];
@@ -92,6 +106,35 @@ namespace StoryTeller.Grammars.Reflection
             }
         }
 
+        public virtual Task<IEnumerable<CellResult>> InvokeAsync(StepValues values)
+        {
+            var parameters = Arguments.Select(values.Get).ToArray();
+            var task = Method.Invoke(Target, parameters).As<Task>();
+
+            return task.ContinueWith(t => buildCellResults(values, parameters, task));
+
+
+        }
+
+    }
+
+    public class AsyncMethodInvocationWithReturn<T> : MethodInvocation
+    {
+        public AsyncMethodInvocationWithReturn(MethodInfo method, object target) : base(method, target)
+        {
+            if (!method.HasReturn() || method.ReturnType != typeof(Task<T>))
+            {
+                throw new ArgumentOutOfRangeException(nameof(method));
+            }
+        }
+
+        public override Task<IEnumerable<CellResult>> InvokeAsync(StepValues values)
+        {
+            var parameters = Arguments.Select(values.Get).ToArray();
+            var task = Method.Invoke(Target, parameters).As<Task<T>>();
+
+            return task.ContinueWith(t => buildCellResults(values, parameters, task.Result));
+        }
     }
 
 }
