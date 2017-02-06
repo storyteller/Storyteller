@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
@@ -73,6 +75,11 @@ namespace StoryTeller.Grammars.Sets
             }
 
 
+        }
+
+        public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
+        {
+            return Task.Factory.StartNew(() => Execute(context), cancellation);
         }
 
         public object Position { get; set; }

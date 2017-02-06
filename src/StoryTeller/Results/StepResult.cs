@@ -61,10 +61,7 @@ namespace StoryTeller.Results
         public void Tabulate(Counts counts)
         {
             counts.Increment(status);
-            if (cells != null)
-            {
-                cells.Each(x => counts.Increment(x.Status));
-            }
+            cells?.Each(x => counts.Increment(x.Status));
         }
 
         protected bool Equals(StepResult other)

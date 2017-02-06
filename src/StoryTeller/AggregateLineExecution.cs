@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using StoryTeller.Engine;
 
 namespace StoryTeller
@@ -19,6 +21,14 @@ namespace StoryTeller
             _lines = lines.ToArray();
             Id = lines.First().Id;
 
+        }
+
+        public async Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
+        {
+            foreach (var line in _lines)
+            {
+                await line.ExecuteAsync(context, cancellation).ConfigureAwait(false);
+            }
         }
 
         public int Count()

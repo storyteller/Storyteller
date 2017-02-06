@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Grammars;
-using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Engine
@@ -241,11 +240,7 @@ namespace StoryTeller.Engine
 
         private Task execute(SpecContext context, ILineExecution line)
         {
-            var running = Task.Factory.StartNew(() =>
-            {
-                line.Execute(context);
-            }, Request.Cancellation);
-
+            var running = line.ExecuteAsync(context, Request.Cancellation);
             return Task.WhenAny(running, _timeout);
         }
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Results;
@@ -50,6 +52,10 @@ namespace StoryTeller.Grammars
             }
         }
 
+        public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
+        {
+            return Task.Factory.StartNew(() => Execute(context), cancellation);
+        }
 
 
         public virtual string Type => "Grammar";

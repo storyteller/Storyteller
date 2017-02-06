@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model;
@@ -85,6 +87,11 @@ namespace StoryTeller.Grammars
                     ex,
                     Position);
             }
+        }
+
+        public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
+        {
+            return Task.Factory.StartNew(() => Execute(context), cancellation);
         }
     }
 }
