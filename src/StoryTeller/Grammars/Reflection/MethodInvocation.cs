@@ -14,6 +14,13 @@ namespace StoryTeller.Grammars.Reflection
     {
         public static MethodInvocation For(MethodInfo method, object target)
         {
+            if (method.HasReturn() && method.ReturnType.Closes(typeof(Task<>)))
+            {
+                var returnType = method.ReturnType.GetGenericArguments().Single();
+                return typeof(AsyncMethodInvocationWithReturn<>)
+                    .CloseAndBuildAs<MethodInvocation>(method, target, returnType);
+            }
+
             return new MethodInvocation(method, target);
         }
 

@@ -49,11 +49,18 @@ namespace StoryTeller.Testing.Grammars.Reflection
 
             public Task<string> FullnameAsync(string first, string middle, string last)
             {
-                return Task.Factory.StartNew(() =>
-                {
-                    return Fullname(first, middle, last);
-                });
+                return Task.Factory.StartNew(() => Fullname(first, middle, last));
             }
+        }
+
+        [Fact]
+        public void factory_method_knows_when_to_use_the_async_task_return_version()
+        {
+            var method = ReflectionHelper.GetMethod<Target>(x => x.FullnameAsync(null, null, null));
+            var invocation = MethodInvocation.For(method, new Target());
+
+            invocation.IsAsync().ShouldBeTrue();
+            invocation.ShouldBeOfType<AsyncMethodInvocationWithReturn<string>>();
         }
 
         [Fact]
