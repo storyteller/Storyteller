@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using StoryTeller.Conversion;
 using StoryTeller.Results;
 
@@ -26,5 +27,19 @@ namespace StoryTeller.Grammars
         }
 
         public override string Subject => _grammar.Key;
+
+        protected override async Task<StepResult> executeAsync(ISpecContext context)
+        {
+            var cellResults = await _grammar.ExecuteAsync(Values, context).ConfigureAwait(false);
+
+            var result = new StepResult(Values.id, ResultStatus.ok)
+            {
+                cells = cellResults.ToArray()
+            };
+
+            return result;
+        }
+
+        protected override bool IsAsync() => _grammar.IsAsync();
     }
 }

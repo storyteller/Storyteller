@@ -84,6 +84,12 @@ namespace StoryTeller.Grammars.Reflection
             return (bool) Method.Invoke(Target, parameters);
         }
 
+        public Task<bool> InvokeTestAsync(StepValues values)
+        {
+            var parameters = Arguments.Select(values.Get).ToArray();
+            return (Task<bool>)Method.Invoke(Target, parameters);
+        }
+
         public IEnumerable<CellResult> Invoke(StepValues values)
         {
             var parameters = Arguments.Select(values.Get).ToArray();

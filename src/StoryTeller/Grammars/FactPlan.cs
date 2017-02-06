@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -39,11 +40,25 @@ namespace StoryTeller.Grammars
         }
 
         public bool IsHidden { get; set; }
+        public bool IsAsync()
+        {
+            return false;
+        }
+
+        public Task<bool> PerformTestAsync(StepValues values, ISpecContext context)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public interface IFactGrammar : IGrammar
     {
         bool PerformTest(StepValues values, ISpecContext context);
+
+        bool IsAsync();
+
+        Task<bool> PerformTestAsync(StepValues values, ISpecContext context);
+
     }
 
     public class FactPlan : LineStepBase, IWithValues
@@ -61,6 +76,21 @@ namespace StoryTeller.Grammars
         {
             var test = _grammar.PerformTest(Values, context);
             return new StepResult(Values.id, test ? ResultStatus.success : ResultStatus.failed);
+        }
+
+        protected override Task<StepResult> executeAsync(ISpecContext context)
+        {
+            return _grammar.PerformTestAsync(Values, context).ContinueWith(t =>
+            {
+                return t.IsFaulted 
+                    ? new StepResult(Values.id, t.Exception) 
+                    : new StepResult(Values.id, t.Result ? ResultStatus.success : ResultStatus.failed);
+            });
+        }
+
+        protected override bool IsAsync()
+        {
+            return _grammar.IsAsync();
         }
     }
 }

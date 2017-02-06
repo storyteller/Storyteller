@@ -20,6 +20,10 @@ namespace StoryTeller.Grammars
         }
 
         protected abstract StepResult execute(ISpecContext context);
+        protected abstract Task<StepResult> executeAsync(ISpecContext context);
+
+
+        protected abstract bool IsAsync();
 
         public void Execute(SpecContext context)
         {
@@ -27,9 +31,11 @@ namespace StoryTeller.Grammars
             {
                 Values.DoDelayedConversions(context);
 
+                StepResult result = null;
+
                 if (Values.Errors.Any())
                 {
-                    var result = Values.ToConversionErrorResult();
+                    result = Values.ToConversionErrorResult();
                     result.position = Position;
 
                     context.LogResult(result);
@@ -37,9 +43,10 @@ namespace StoryTeller.Grammars
                     return;
                 }
 
+                
                 try
                 {
-                    var result = execute(context);
+                    result = IsAsync() ? executeAsync(context).GetAwaiter().GetResult() : execute(context);
 
                     result.position = Position;
 
@@ -54,7 +61,24 @@ namespace StoryTeller.Grammars
 
         public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
         {
-            return Task.Factory.StartNew(() => Execute(context), cancellation);
+            if (!IsAsync()) return Task.Factory.StartNew(() => Execute(context), cancellation);
+
+            return executeAsync(context).ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                {
+                    context.LogException(Values.id, t.Exception, Position);
+                }
+                else
+                {
+                    var result = t.Result;
+                    result.position = Position;
+
+                    context.LogResult(result);
+                }
+
+                
+            }, cancellation);
         }
 
 

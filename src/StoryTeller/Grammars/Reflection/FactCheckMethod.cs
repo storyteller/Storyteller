@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
@@ -68,6 +69,17 @@ namespace StoryTeller.Grammars.Reflection
             }
 
             public override string Subject => _grammar.Key;
+
+            protected override async Task<StepResult> executeAsync(ISpecContext context)
+            {
+                var test = await _grammar.Invocation.InvokeTestAsync(Values).ConfigureAwait(false);
+                return new StepResult(Values.id, test ? ResultStatus.success : ResultStatus.failed);
+            }
+
+            protected override bool IsAsync()
+            {
+                return _grammar.Invocation.IsAsync();
+            }
         }
     }
 }

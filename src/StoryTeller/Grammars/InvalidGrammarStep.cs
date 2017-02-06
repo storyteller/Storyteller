@@ -1,4 +1,5 @@
-﻿using StoryTeller.Conversion;
+﻿using System.Threading.Tasks;
+using StoryTeller.Conversion;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars
@@ -18,6 +19,16 @@ namespace StoryTeller.Grammars
 
 
         public override string Subject => "Missing";
+
+        protected override Task<StepResult> executeAsync(ISpecContext context)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        protected override bool IsAsync()
+        {
+            return false;
+        }
 
         protected override StepResult execute(ISpecContext context)
         {

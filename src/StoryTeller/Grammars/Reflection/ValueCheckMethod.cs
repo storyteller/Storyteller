@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
 using StoryTeller.Conversion;
@@ -31,9 +32,18 @@ namespace StoryTeller.Grammars.Reflection
             _invocation = new MethodInvocation(method, target);
         }
 
-        public Cell ReturnCell
+
+
+        public Cell ReturnCell => _invocation.ReturnCell;
+
+        public override Task<IEnumerable<CellResult>> ExecuteAsync(StepValues values, ISpecContext context)
         {
-            get { return _invocation.ReturnCell; }
+            return _invocation.InvokeAsync(values);
+        }
+
+        public override bool IsAsync()
+        {
+            return _invocation.IsAsync();
         }
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)

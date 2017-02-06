@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
@@ -49,5 +50,14 @@ namespace StoryTeller.Grammars.Reflection
 
         public string Key { get; set; }
         public bool IsHidden { get; set; }
+        public bool IsAsync()
+        {
+            return _invocation.IsAsync();
+        }
+
+        public Task<bool> PerformTestAsync(StepValues values, ISpecContext context)
+        {
+            return _invocation.InvokeTestAsync(values);
+        }
     }
 }

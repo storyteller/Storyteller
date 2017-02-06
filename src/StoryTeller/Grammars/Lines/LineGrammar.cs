@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -40,5 +42,15 @@ namespace StoryTeller.Grammars.Lines
         public string Key { get; set; }
 
         public bool IsHidden { get; set; }
+
+        public virtual Task<IEnumerable<CellResult>> ExecuteAsync(StepValues values, ISpecContext context)
+        {
+            throw new NotSupportedException();
+        }
+
+        public virtual bool IsAsync()
+        {
+            return false;
+        }
     }
 }
