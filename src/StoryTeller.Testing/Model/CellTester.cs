@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Baseline;
 using Baseline.Conversion;
 using Baseline.Reflection;
@@ -466,6 +467,16 @@ namespace StoryTeller.Testing.Model
             var cell = Cell.For<CellTarget>(x => x.Names);
             cell.ToStringDisplay(new string[] {"Bob", "Bill", "John"}).ShouldBe("Bob, Bill, John");
         }
+
+        [Fact]
+        public void can_correct_the_return_type_if_Task_of_T_to_T()
+        {
+            var parameter = ReflectionHelper.GetMethod<CellTarget>(x => x.GoPlacesAsync()).ReturnParameter;
+
+            var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
+
+            cell.Type.ShouldBe(typeof(bool));
+        }
     }
 
     public enum Directions
@@ -511,6 +522,11 @@ namespace StoryTeller.Testing.Model
         }
 
         public string Names { get; set; }
+
+        public Task<bool> GoPlacesAsync()
+        {
+            return Task.FromResult(true);
+        }
 
     }
 }
