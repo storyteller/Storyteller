@@ -92,6 +92,12 @@ task :test => [:compile] do
 	
 end
 
+desc 'Only runs .Net related tests'
+task :dotnet do
+	sh "dotnet test src/Storyteller.Testing --framework netcoreapp1.0"
+	sh "dotnet test src/StorytellerDocGen.Testing"
+end
+
 
 
 desc 'Build Nuspec packages'

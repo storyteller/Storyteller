@@ -74,7 +74,7 @@ namespace StoryTeller.Grammars
 
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject(type, Subject))
+            using (context.Timings.Subject(type, Subject, 0))
 
             try
             {

@@ -103,7 +103,7 @@ namespace StoryTeller.Testing.Engine
 
             IExecutionContext execution = null;
 
-            using (timings.Subject("Context", "Creation"))
+            using (timings.Subject("Context", "Creation", 0))
             {
                 execution = _system.CreateContext();
             }

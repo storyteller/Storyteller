@@ -27,7 +27,7 @@ namespace StoryTeller.Grammars
 
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject(Type, Subject))
+            using (context.Timings.Subject(Type, Subject, 0))
             {
                 Values.DoDelayedConversions(context);
 

@@ -225,7 +225,7 @@ namespace StoryTeller.Engine
         {
             try
             {
-                using (timings.Subject("Context", "Creation"))
+                using (timings.Subject("Context", "Creation", 0))
                 {
                     return system.CreateContext();
                 }

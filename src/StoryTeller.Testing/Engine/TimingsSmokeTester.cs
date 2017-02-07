@@ -22,11 +22,11 @@ namespace StoryTeller.Testing.Engine
 
             var timings = new Timings();
             timings.Start(spec);
-            using (timings.Subject("Fixture.Setup", "Math"))
+            using (timings.Subject("Fixture.Setup", "Math", 0))
             {
-                using (timings.Subject("Grammar", "Adding"))
+                using (timings.Subject("Grammar", "Adding", 0))
                 {
-                    using (timings.Subject("Fixture.Teardown", "Math"))
+                    using (timings.Subject("Fixture.Teardown", "Math", 0))
                     {
                         Thread.Sleep(100);
                     }

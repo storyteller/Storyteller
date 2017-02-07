@@ -42,7 +42,7 @@ namespace StoryTeller.Grammars.Sets
 
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject("Grammar", _section.Key))
+            using (context.Timings.Subject("Grammar", _section.Key, 0))
             {
                 var fetch = _comparison.Fetch(context);
 
