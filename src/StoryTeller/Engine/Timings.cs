@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace StoryTeller.Engine
 {
@@ -22,12 +23,19 @@ namespace StoryTeller.Engine
 
         public long Duration => _stopwatch.ElapsedMilliseconds;
 
-        public IDisposable Subject(string type, string subject, long allowableRuntimeInMilliseconds)
+        public PerfRecord Subject(string type, string subject, long allowableRuntimeInMilliseconds)
         {
             var record = new PerfRecord(type, subject, _stopwatch.ElapsedMilliseconds, allowableRuntimeInMilliseconds);
             _records.Add(record);
 
-            return new Marker(record, _stopwatch);
+            return record;
+        }
+
+        public void End(PerfRecord record, IResultMessage result = null)
+        {
+            if (record == null) throw new ArgumentNullException(nameof(record));
+
+            record.MarkEnd(_stopwatch.ElapsedMilliseconds);
         }
 
         public IEnumerable<PerfRecord> AllRecords
@@ -46,22 +54,7 @@ namespace StoryTeller.Engine
             return _records.OrderBy(x => x.Start).ToArray();
         }
 
-        public class Marker : IDisposable
-        {
-            private readonly PerfRecord _record;
-            private readonly Stopwatch _stopwatch;
 
-            public Marker(PerfRecord record, Stopwatch stopwatch)
-            {
-                _record = record;
-                _stopwatch = stopwatch;
-            }
-
-            public void Dispose()
-            {
-                _record.MarkEnd(_stopwatch.ElapsedMilliseconds);
-            }
-        }
 
         public void Dispose()
         {

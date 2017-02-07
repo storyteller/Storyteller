@@ -38,14 +38,13 @@ namespace StoryTeller.Testing.Engine
             {
                 timings.Start(new Specification());
 
-                using (timings.Subject("something", "else", 0))
-                {
-                    Thread.Sleep(100);
-                }
+                var record = timings.Subject("something", "else", 0);
 
-                var records = timings.Finish();
+                Thread.Sleep(100);
 
-                var record = records.FirstOrDefault(x => x.Subject == "else");
+                timings.End(record);
+
+                timings.Finish();
 
                 record.PerfViolation.ShouldBeFalse();
                 
@@ -59,13 +58,10 @@ namespace StoryTeller.Testing.Engine
             {
                 timings.Start(new Specification());
 
-                using (timings.Subject("something", "else", 100))
-                {
-                }
+                var record = timings.Subject("something", "else", 100);
+                timings.End(record);
 
-                var records = timings.Finish();
-
-                var record = records.FirstOrDefault(x => x.Subject == "else");
+                timings.Finish();
 
                 record.PerfViolation.ShouldBeFalse();
 
@@ -80,14 +76,11 @@ namespace StoryTeller.Testing.Engine
             {
                 timings.Start(new Specification());
 
-                using (timings.Subject("something", "else", 25))
-                {
-                    Thread.Sleep(100);
-                }
+                var record = timings.Subject("something", "else", 25);
+                Thread.Sleep(100);
+                timings.End(record);
 
-                var records = timings.Finish();
-
-                var record = records.FirstOrDefault(x => x.Subject == "else");
+                timings.Finish();
 
                 record.PerfViolation.ShouldBeTrue();
                 record.Threshold.ShouldBe(25);

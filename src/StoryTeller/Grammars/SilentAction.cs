@@ -74,18 +74,25 @@ namespace StoryTeller.Grammars
 
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject(type, Subject, 0))
+            // TODO -- add threshold here?
+            var record = context.Timings.Subject(type, Subject, 0);
+
 
             try
             {
                 Action(context);
-                context.LogResult(new StepResult(Id, ResultStatus.ok) {position = Position});
+                var result = new StepResult(Id, ResultStatus.ok) {position = Position};
+                context.LogResult(result);
+
+                context.Timings.End(record, result);
             }
             catch (Exception ex)
             {
                 context.LogException(Node.id,
                     ex,
                     Position);
+
+                context.Timings.End(record);
             }
         }
 

@@ -223,18 +223,21 @@ namespace StoryTeller.Engine
 
         private IExecutionContext createExecutionContext(ISystem system, Timings timings)
         {
+            var record = timings.Subject("Context", "Creation", 0);
+
             try
             {
-                using (timings.Subject("Context", "Creation", 0))
-                {
-                    return system.CreateContext();
-                }
+                return system.CreateContext();
             }
             catch (Exception e)
             {
                 Request.Cancel();
 
                 throw new StorytellerExecutionException(e);
+            }
+            finally
+            {
+                timings.End(record);
             }
         }
 

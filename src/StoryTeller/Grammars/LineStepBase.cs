@@ -29,36 +29,42 @@ namespace StoryTeller.Grammars
 
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject(Type, Subject, maximumRuntimeInMilliseconds))
+            var record = context.Timings.Subject(Type, Subject, maximumRuntimeInMilliseconds);
+
+
+            Values.DoDelayedConversions(context);
+
+            StepResult result = null;
+
+            if (Values.Errors.Any())
             {
-                Values.DoDelayedConversions(context);
+                result = Values.ToConversionErrorResult();
+                result.position = Position;
 
-                StepResult result = null;
+                context.LogResult(result);
 
-                if (Values.Errors.Any())
-                {
-                    result = Values.ToConversionErrorResult();
-                    result.position = Position;
-
-                    context.LogResult(result);
-
-                    return;
-                }
-
-                
-                try
-                {
-                    result = IsAsync() ? executeAsync(context).GetAwaiter().GetResult() : execute(context);
-
-                    result.position = Position;
-
-                    context.LogResult(result);
-                }
-                catch (Exception ex)
-                {
-                    context.LogException(Values.id, ex, Position);
-                }
+                context.Timings.End(record);
+                return;
             }
+
+
+            try
+            {
+                result = IsAsync() ? executeAsync(context).GetAwaiter().GetResult() : execute(context);
+
+                result.position = Position;
+
+                context.LogResult(result);
+            }
+            catch (Exception ex)
+            {
+                context.LogException(Values.id, ex, Position);
+            }
+            finally
+            {
+                context.Timings.End(record, result);
+            }
+            
         }
 
         public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)

@@ -103,9 +103,14 @@ namespace StoryTeller.Testing.Engine
 
             IExecutionContext execution = null;
 
-            using (timings.Subject("Context", "Creation", 0))
+            var record = timings.Subject("Context", "Creation", 0);
+            try
             {
                 execution = _system.CreateContext();
+            }
+            finally
+            {
+                timings.End(record);
             }
 
             var context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,

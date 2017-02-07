@@ -40,46 +40,59 @@ namespace StoryTeller.Grammars.Sets
             gatherer.Line(this);
         }
 
+        private bool convertData(SpecContext context)
+        {
+            _expected.Each(x =>
+            {
+                x.DoDelayedConversions(context);
+                if (!x.Errors.Any()) return;
+
+                context.LogResult(x.ToConversionErrorResult());
+            });
+
+            return _expected.All(x => !x.HasErrors());
+
+        }
+
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject("Grammar", _section.Key, 0))
-            {
-                var fetch = _comparison.Fetch(context);
-
-                _expected.Each(x =>
-                {
-                    x.DoDelayedConversions(context);
-                    if (!x.Errors.Any()) return;
-
-                    context.LogResult(x.ToConversionErrorResult());
-                });
-
-                if (_expected.Any(x => x.HasErrors())) return;
-
-                fetch.ContinueWith(t =>
-                {
-                    if (t.IsFaulted)
-                    {
-                        // TODO -- do the Flatten() trick here on the aggregated exception
-                        context.LogException(_section.id, t.Exception, Stage.before);
-                        return;
-                    }
-
-                    if (t.IsCompleted)
-                    {
-                        var result = CreateResults(_expected, t.Result);
-                        result.id = _section.id;
-                        context.LogResult(result);
-                    }
-                }).Wait();
-            }
-
-
+            ExecuteAsync(context, default(CancellationToken)).Wait();
         }
 
         public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
         {
-            return Task.Factory.StartNew(() => Execute(context), cancellation);
+            // TODO -- need to pass through the SetVerification's maximum allowable time
+            var record = context.Timings.Subject("Grammar", _section.Key, 0);
+
+
+            var fetch = _comparison.Fetch(context);
+
+            if (!convertData(context))
+            {
+                return Task.CompletedTask;
+            }
+
+
+            return fetch.ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                {
+                    // TODO -- do the Flatten() trick here on the aggregated exception
+                    context.LogException(_section.id, t.Exception, Stage.before);
+                    context.Timings.End(record);
+
+                    return;
+                }
+
+                if (t.IsCompleted)
+                {
+                    var result = CreateResults(_expected, t.Result);
+                    result.id = _section.id;
+                    context.LogResult(result);
+
+                    context.Timings.End(record, result);
+                }
+            }, cancellation);
         }
 
         public object Position { get; set; }
