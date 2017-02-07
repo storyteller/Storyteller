@@ -41,6 +41,8 @@ namespace StoryTeller.Grammars
                 });
 
                 method.ForAttribute<HiddenAttribute>(_ => grammar.IsHidden = true);
+                method.ForAttribute<PerfLimitAttribute>(
+                    _ => grammar.MaximumRuntimeInMilliseconds = _.MaximumRuntimeInMilliseconds);
 
                 return grammar;
             }

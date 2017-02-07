@@ -220,6 +220,30 @@ namespace StoryTeller.Testing
             var allGrammars = fixture.AllGrammars().ToArray();
             allGrammars.Each(x => x.Key.ShouldNotBeNull());
         }
+
+        [Fact]
+        public void applies_the_perf_limit_grammar()
+        {
+            var fixture = new PerformanceMonitoredFixture();
+            
+            fixture["Go1"].MaximumRuntimeInMilliseconds.ShouldBe(100);
+            fixture["Go2"].MaximumRuntimeInMilliseconds.ShouldBe(0);
+        }
+    }
+
+    public class PerformanceMonitoredFixture : Fixture
+    {
+        [PerfLimit(100)]
+        public void Go1()
+        {
+            
+        }
+
+        // No perf limit
+        public void Go2()
+        {
+            
+        }
     }
 
     public class StubGrammar : IGrammar
