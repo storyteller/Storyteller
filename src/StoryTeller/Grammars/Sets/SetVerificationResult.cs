@@ -77,7 +77,8 @@ namespace StoryTeller.Grammars.Sets
             counts.Wrongs += _missing.Count;
             counts.Wrongs += _extras.Count;
             counts.Wrongs += _wrongOrders.Count;
-            
+
+            if (exceeded) counts.Exceptions++;
         }
 
         public string id { get; set; }

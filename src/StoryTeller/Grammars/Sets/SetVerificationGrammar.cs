@@ -38,7 +38,7 @@ namespace StoryTeller.Grammars.Sets
                 section.id = Guid.NewGuid().ToString();
             }
 
-            return new VerificationSetPlan(section, matcher, _comparison, expected, _cells);
+            return new VerificationSetPlan(section, matcher, _comparison, expected, _cells, MaximumRuntimeInMilliseconds);
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

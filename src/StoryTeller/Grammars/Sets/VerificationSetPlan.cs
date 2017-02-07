@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,19 +14,20 @@ namespace StoryTeller.Grammars.Sets
     public class VerificationSetPlan : ILineExecution
     {
         private readonly Cell[] _cells;
+        private readonly long _maximumRuntimeInMilliseconds;
         private readonly ISetComparison _comparison;
         private readonly IEnumerable<StepValues> _expected;
         private readonly ISetMatcher _matcher;
         private readonly Section _section;
 
-        public VerificationSetPlan(Section section, ISetMatcher matcher, ISetComparison comparison,
-            IEnumerable<StepValues> expected, Cell[] cells)
+        public VerificationSetPlan(Section section, ISetMatcher matcher, ISetComparison comparison, IEnumerable<StepValues> expected, Cell[] cells, long maximumRuntimeInMilliseconds)
         {
             _section = section;
             _matcher = matcher;
             _comparison = comparison;
             _expected = expected;
             _cells = cells;
+            _maximumRuntimeInMilliseconds = maximumRuntimeInMilliseconds;
         }
 
         public string Id => _section.id;
@@ -61,8 +63,7 @@ namespace StoryTeller.Grammars.Sets
 
         public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
         {
-            // TODO -- need to pass through the SetVerification's maximum allowable time
-            var record = context.Timings.Subject("Grammar", _section.Key, 0);
+            var record = context.Timings.Subject("Grammar", _section.Key, _maximumRuntimeInMilliseconds);
 
 
             var fetch = _comparison.Fetch(context);
@@ -79,7 +80,6 @@ namespace StoryTeller.Grammars.Sets
                 {
                     // TODO -- do the Flatten() trick here on the aggregated exception
                     context.LogException(_section.id, t.Exception, record, Stage.before);
-                    context.Timings.End(record);
 
                     return;
                 }
