@@ -364,6 +364,16 @@ namespace StoryTeller.Testing
                     };
                 }
             }
+
+            public void HasNoPerformanceLimitViolation()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void ViolatesPerformanceLimit()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
