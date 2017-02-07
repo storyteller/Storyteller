@@ -22,7 +22,7 @@ namespace StoryTeller.Engine
 
         public long Duration => _stopwatch.ElapsedMilliseconds;
 
-        public IDisposable Subject(string type, string subject, int allowableRuntimeInMilliseconds)
+        public IDisposable Subject(string type, string subject, long allowableRuntimeInMilliseconds)
         {
             var record = new PerfRecord(type, subject, _stopwatch.ElapsedMilliseconds, allowableRuntimeInMilliseconds);
             _records.Add(record);

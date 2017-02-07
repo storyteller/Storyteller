@@ -44,5 +44,6 @@ namespace StoryTeller.Grammars.Decisions
         }
 
         public bool IsHidden { get; set; }
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

@@ -41,5 +41,6 @@ namespace StoryTeller.Grammars
         }
 
         protected override bool IsAsync() => _grammar.IsAsync();
+        protected override long maximumRuntimeInMilliseconds => _grammar.MaximumRuntimeInMilliseconds;
     }
 }

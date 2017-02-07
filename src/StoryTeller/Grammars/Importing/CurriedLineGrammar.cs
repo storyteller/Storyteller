@@ -62,8 +62,6 @@ namespace StoryTeller.Grammars.Importing
         }
 
         public bool IsHidden { get; set; }
-
-
-
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

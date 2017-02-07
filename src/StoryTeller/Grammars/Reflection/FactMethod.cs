@@ -59,5 +59,7 @@ namespace StoryTeller.Grammars.Reflection
         {
             return _invocation.InvokeTestAsync(values);
         }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

@@ -31,5 +31,7 @@ namespace StoryTeller.Model
         {
             return "ERROR";
         }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

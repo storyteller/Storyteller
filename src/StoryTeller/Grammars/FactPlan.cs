@@ -49,6 +49,8 @@ namespace StoryTeller.Grammars
         {
             throw new NotImplementedException();
         }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 
     public interface IFactGrammar : IGrammar
@@ -92,5 +94,7 @@ namespace StoryTeller.Grammars
         {
             return _grammar.IsAsync();
         }
+
+        protected override long maximumRuntimeInMilliseconds => _grammar.MaximumRuntimeInMilliseconds;
     }
 }

@@ -50,6 +50,7 @@ namespace StoryTeller.Grammars.Reflection
 
 
         public MethodInvocation Invocation => _invocation;
+        public long MaximumRuntimeInMilliseconds { get; set; }
 
 
         public class FactCheckPlan : LineStepBase
@@ -80,6 +81,8 @@ namespace StoryTeller.Grammars.Reflection
             {
                 return _grammar.Invocation.IsAsync();
             }
+
+            protected override long maximumRuntimeInMilliseconds => _grammar.MaximumRuntimeInMilliseconds;
         }
     }
 }

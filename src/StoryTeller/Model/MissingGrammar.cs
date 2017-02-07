@@ -31,5 +31,7 @@ namespace StoryTeller.Model
         {
             return "MISSING";
         }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

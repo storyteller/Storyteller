@@ -52,5 +52,7 @@ namespace StoryTeller.Grammars.Lines
         {
             return false;
         }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

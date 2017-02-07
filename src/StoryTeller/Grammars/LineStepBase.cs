@@ -25,9 +25,11 @@ namespace StoryTeller.Grammars
 
         protected abstract bool IsAsync();
 
+        protected abstract long maximumRuntimeInMilliseconds { get; }
+
         public void Execute(SpecContext context)
         {
-            using (context.Timings.Subject(Type, Subject, 0))
+            using (context.Timings.Subject(Type, Subject, maximumRuntimeInMilliseconds))
             {
                 Values.DoDelayedConversions(context);
 

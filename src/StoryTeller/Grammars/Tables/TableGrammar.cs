@@ -118,5 +118,7 @@ namespace StoryTeller.Grammars.Tables
         }
 
         public bool IsHidden { get; set; }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

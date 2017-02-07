@@ -236,6 +236,7 @@ namespace StoryTeller.Testing
 
         public string Key { get; set; }
         public bool IsHidden { get; set; }
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 
     public class StubGrammarModel : GrammarModel

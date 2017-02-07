@@ -30,5 +30,7 @@ namespace StoryTeller.Grammars
 
         public string Key { get; set; }
         public bool IsHidden { get; set; }
+
+        public long MaximumRuntimeInMilliseconds { get; set; }
     }
 }

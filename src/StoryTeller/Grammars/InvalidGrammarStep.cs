@@ -66,5 +66,7 @@ namespace StoryTeller.Grammars
         {
             return $"Invalid Grammar on Step: {_values.id}, Message: {Message}";
         }
+
+        protected override long maximumRuntimeInMilliseconds => 0;
     }
 }

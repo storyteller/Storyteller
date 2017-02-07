@@ -11,5 +11,7 @@ namespace StoryTeller
         string Key { get; set; }
 
         bool IsHidden { get; set; }
+
+        long MaximumRuntimeInMilliseconds { get; set; }
     }
 }
