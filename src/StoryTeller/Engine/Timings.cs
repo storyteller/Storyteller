@@ -36,6 +36,8 @@ namespace StoryTeller.Engine
             if (record == null) throw new ArgumentNullException(nameof(record));
 
             record.MarkEnd(_stopwatch.ElapsedMilliseconds);
+
+            result?.MarkPerformance(record);
         }
 
         public IEnumerable<PerfRecord> AllRecords

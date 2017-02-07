@@ -1,3 +1,4 @@
+using StoryTeller.Engine;
 using StoryTeller.Messages;
 
 namespace StoryTeller.Results
@@ -12,5 +13,9 @@ namespace StoryTeller.Results
         string type { get; }
 
         string spec { get; set; }
+
+        void MarkPerformance(PerfRecord record);
+
+        long duration { get; set; }
     }
 }

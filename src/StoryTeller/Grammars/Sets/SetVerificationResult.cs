@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Baseline;
 using StoryTeller.Conversion;
+using StoryTeller.Engine;
 using StoryTeller.Messages;
 using StoryTeller.Results;
 
@@ -19,6 +20,16 @@ namespace StoryTeller.Grammars.Sets
         }
 
         public string spec { get; set; }
+        public void MarkPerformance(PerfRecord record)
+        {
+            duration = record.Duration;
+            threshold = record.Threshold;
+            exceeded = record.PerfViolation;
+        }
+
+        public bool exceeded { get; set; }
+
+        public long threshold { get; set; }
 
         public string[] matches
         {
@@ -135,9 +146,7 @@ namespace StoryTeller.Grammars.Sets
             return text;
         }
 
-        public string type
-        {
-            get { return "set-verification-result"; }
-        }
+        public string type => "set-verification-result";
+        public long duration { get; set; }
     }
 }

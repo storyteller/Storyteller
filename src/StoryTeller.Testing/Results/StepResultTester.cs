@@ -1,6 +1,7 @@
 ﻿using System;
 using Xunit;
 using Shouldly;
+using StoryTeller.Engine;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 
@@ -75,5 +76,38 @@ namespace StoryTeller.Testing.Results
             var json = JsonSerialization.ToCleanJson(result);
             json.ShouldContain("\"status\":\"ok\"");
         }
+
+
+        [Fact]
+        public void mark_performance_happy_path()
+        {
+            var record = new PerfRecord("something", "something", 0, 100);
+            record.MarkEnd(50);
+
+            var result = new StepResult("foo", ResultStatus.ok);
+
+            result.MarkPerformance(record);
+
+            result.duration.ShouldBe(record.Duration);
+            result.status.ShouldBe(ResultStatus.ok);
+        }
+
+        [Fact]
+        public void mark_performance_threshold_record()
+        {
+            var record = new PerfRecord("something", "something", 0, 100);
+            record.MarkEnd(200);
+
+            var result = new StepResult("foo", ResultStatus.ok);
+
+            result.MarkPerformance(record);
+
+            result.status.ShouldBe(ResultStatus.error);
+            result.error.ShouldBe("**Performance threshold violation**: actual 200 > max 100");
+            result.errorDisplay = ErrorDisplay.markdown;
+            
+        }
+
+
     }
 }

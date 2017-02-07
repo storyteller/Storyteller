@@ -3,6 +3,7 @@ using System.Linq;
 using Xunit;
 using Shouldly;
 using StoryTeller.Conversion;
+using StoryTeller.Engine;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Remotes.Messaging;
 
@@ -81,6 +82,31 @@ namespace StoryTeller.Testing.Grammars.Sets
             theResult.MarkWrongOrder(Guid.NewGuid().ToString(), 1);
 
             theCountsShouldBe(0, 7, 0, 0);
+        }
+
+        [Fact]
+        public void mark_performance_happy_path()
+        {
+            var record = new PerfRecord("foo", "bar", 0, 100);
+            record.MarkEnd(50);
+
+            theResult.MarkPerformance(record);
+
+            theResult.duration.ShouldBe(50);
+            theResult.exceeded.ShouldBeFalse();
+        }
+
+        [Fact]
+        public void mark_performance_sad_path()
+        {
+            var record = new PerfRecord("foo", "bar", 0, 100);
+            record.MarkEnd(150);
+
+            theResult.MarkPerformance(record);
+
+            theResult.duration.ShouldBe(150);
+            theResult.threshold.ShouldBe(100);
+            theResult.exceeded.ShouldBeTrue();
         }
     }
 }

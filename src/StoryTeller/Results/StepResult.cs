@@ -4,6 +4,7 @@ using System.Linq;
 using Baseline;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using StoryTeller.Engine;
 using StoryTeller.Messages;
 
 namespace StoryTeller.Results
@@ -40,6 +41,16 @@ namespace StoryTeller.Results
 
         public string id { get; set; }
         public string spec { get; set; }
+        public void MarkPerformance(PerfRecord record)
+        {
+            duration = record.Duration;
+            if (record.PerfViolation && (status == ResultStatus.ok || status == ResultStatus.success))
+            {
+                status = ResultStatus.error;
+                errorDisplay = ErrorDisplay.markdown;
+                error = $"**Performance threshold violation**: actual {duration} > max {record.Threshold}";
+            }
+        }
 
         public object position
         {
@@ -112,5 +123,6 @@ namespace StoryTeller.Results
         }
 
         public string type => "step-result";
+        public long duration { get; set; }
     }
 }
