@@ -82,14 +82,14 @@ namespace StoryTeller.Grammars
             {
                 Action(context);
                 var result = new StepResult(Id, ResultStatus.ok) {position = Position};
-                context.LogResult(result);
+                context.LogResult(result, record);
 
                 context.Timings.End(record, result);
             }
             catch (Exception ex)
             {
                 context.LogException(Node.id,
-                    ex,
+                    ex, record,
                     Position);
 
                 context.Timings.End(record);

@@ -19,6 +19,7 @@ namespace StoryTeller.Testing.EndToEndExecution
 ");
 
             Step("1").HasNoPerformanceLimitViolation();
+            CountsShouldBe(0, 0, 0, 0);
         }
 
         [Fact]
@@ -33,6 +34,7 @@ namespace StoryTeller.Testing.EndToEndExecution
 ");
 
             Step("1").ViolatesPerformanceLimit();
+            CountsShouldBe(0, 0, 1, 0);
         }
 
         [Fact]
@@ -47,6 +49,7 @@ namespace StoryTeller.Testing.EndToEndExecution
 ");
 
             Step("1").HasNoPerformanceLimitViolation();
+            CountsShouldBe(1, 0, 0, 0);
         }
 
         [Fact]
@@ -61,6 +64,7 @@ namespace StoryTeller.Testing.EndToEndExecution
 ");
 
             Step("1").ViolatesPerformanceLimit();
+            CountsShouldBe(0, 0, 1, 0);
         }
     }
 

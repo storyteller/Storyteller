@@ -59,8 +59,8 @@ namespace StoryTeller
         /// <returns></returns>
         bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500);
 
-        void LogResult<T>(T result) where T : IResultMessage;
-        void LogException(string id, Exception ex, object position = null);
+        void LogResult<T>(T result, PerfRecord record) where T : IResultMessage;
+        void LogException(string id, Exception ex, PerfRecord record, object position = null);
     }
     // ENDSAMPLE
 

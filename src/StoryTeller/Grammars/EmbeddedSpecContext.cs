@@ -44,14 +44,14 @@ namespace StoryTeller.Grammars
             return _specContext.Wait(condition, timeout, millisecondPolling);
         }
 
-        public void LogResult<TMessage>(TMessage result) where TMessage : IResultMessage
+        public void LogResult<TMessage>(TMessage result, PerfRecord record) where TMessage : IResultMessage
         {
-            _specContext.LogResult(result);
+            _specContext.LogResult(result, record);
         }
 
-        public void LogException(string id, Exception ex, object position = null)
+        public void LogException(string id, Exception ex, PerfRecord record, object position = null)
         {
-            _specContext.LogException(id, ex, position);
+            _specContext.LogException(id, ex, record, position);
         }
     }
 }

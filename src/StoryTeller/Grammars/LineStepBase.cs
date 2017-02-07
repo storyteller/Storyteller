@@ -41,9 +41,9 @@ namespace StoryTeller.Grammars
                 result = Values.ToConversionErrorResult();
                 result.position = Position;
 
-                context.LogResult(result);
+                context.LogResult(result, record);
 
-                context.Timings.End(record);
+                
                 return;
             }
 
@@ -54,15 +54,11 @@ namespace StoryTeller.Grammars
 
                 result.position = Position;
 
-                context.LogResult(result);
+                context.LogResult(result, record);
             }
             catch (Exception ex)
             {
-                context.LogException(Values.id, ex, Position);
-            }
-            finally
-            {
-                context.Timings.End(record, result);
+                context.LogException(Values.id, ex, record, Position);
             }
             
         }
@@ -71,18 +67,20 @@ namespace StoryTeller.Grammars
         {
             if (!IsAsync()) return Task.Factory.StartNew(() => Execute(context), cancellation);
 
+            var record = context.Timings.Subject(Type, Subject, maximumRuntimeInMilliseconds);
+
             return executeAsync(context).ContinueWith(t =>
             {
                 if (t.IsFaulted)
                 {
-                    context.LogException(Values.id, t.Exception, Position);
+                    context.LogException(Values.id, t.Exception, record, Position);
                 }
                 else
                 {
                     var result = t.Result;
                     result.position = Position;
 
-                    context.LogResult(result);
+                    context.LogResult(result, record);
                 }
 
                 

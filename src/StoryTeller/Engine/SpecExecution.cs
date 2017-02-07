@@ -96,7 +96,7 @@ namespace StoryTeller.Engine
                 {
                     if (Request.Specification.HasNoSteps())
                     {
-                        context.LogException(Request.Specification.id, new NotImplementedException("Empty specification with no implementation"), Stage.context);
+                        context.LogException(Request.Specification.id, new NotImplementedException("Empty specification with no implementation"), null, Stage.context);
                     }
 
                     beforeExecution(execution, context);
@@ -158,7 +158,7 @@ namespace StoryTeller.Engine
                 }
 
 
-                context.LogResult(result);
+                context.LogResult(result, null);
                 context.Cancel();
             }
 
@@ -189,7 +189,7 @@ namespace StoryTeller.Engine
             }
             catch (Exception e)
             {
-                context.LogException(Request.Id, e, "BeforeExecution");
+                context.LogException(Request.Id, e, null, "BeforeExecution");
             }
         }
 

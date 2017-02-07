@@ -109,9 +109,11 @@ namespace StoryTeller
         public State State => _state;
 
 
-        public void LogResult<T>(T result) where T : IResultMessage
+        public void LogResult<T>(T result, PerfRecord record) where T : IResultMessage
         {
             if (_latched) return;
+
+            if (record != null) Timings.End(record, result);
 
             if (result.id.IsEmpty())
             {
@@ -127,7 +129,7 @@ namespace StoryTeller
 
         
 
-        public void LogException(string id, Exception ex, object position = null)
+        public void LogException(string id, Exception ex, PerfRecord record, object position = null)
         {
             Reporting.ReporterFor<ExceptionReport>().Log(ex);
 
@@ -144,7 +146,7 @@ namespace StoryTeller
                     {
                         error = ex.InnerException.Message,
                         position = position
-                    });
+                    }, record);
                     return;
                 }
             }
@@ -154,7 +156,7 @@ namespace StoryTeller
             var result = new StepResult(id, ResultStatus.error) {position = position};
             result.error = ExceptionFormatting.ToDisplayMessage(ex, out result.errorDisplay);
 
-            LogResult(result);
+            LogResult(result, record);
         }
 
         private static Exception unwrapException(Exception ex)

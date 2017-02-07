@@ -40,14 +40,14 @@ namespace StoryTeller.Grammars.Sets
             gatherer.Line(this);
         }
 
-        private bool convertData(SpecContext context)
+        private bool convertData(SpecContext context, PerfRecord record)
         {
             _expected.Each(x =>
             {
                 x.DoDelayedConversions(context);
                 if (!x.Errors.Any()) return;
 
-                context.LogResult(x.ToConversionErrorResult());
+                context.LogResult(x.ToConversionErrorResult(), record);
             });
 
             return _expected.All(x => !x.HasErrors());
@@ -67,7 +67,7 @@ namespace StoryTeller.Grammars.Sets
 
             var fetch = _comparison.Fetch(context);
 
-            if (!convertData(context))
+            if (!convertData(context, record))
             {
                 return Task.CompletedTask;
             }
@@ -78,7 +78,7 @@ namespace StoryTeller.Grammars.Sets
                 if (t.IsFaulted)
                 {
                     // TODO -- do the Flatten() trick here on the aggregated exception
-                    context.LogException(_section.id, t.Exception, Stage.before);
+                    context.LogException(_section.id, t.Exception, record, Stage.before);
                     context.Timings.End(record);
 
                     return;
@@ -88,7 +88,7 @@ namespace StoryTeller.Grammars.Sets
                 {
                     var result = CreateResults(_expected, t.Result);
                     result.id = _section.id;
-                    context.LogResult(result);
+                    context.LogResult(result, record);
 
                     context.Timings.End(record, result);
                 }

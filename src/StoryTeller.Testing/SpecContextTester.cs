@@ -23,7 +23,7 @@ namespace StoryTeller.Testing
             var ex = new NotImplementedException("No go");
 
             theContext.Reporting.ReporterFor<ExceptionReport>().Count.ShouldBe(0);
-            theContext.LogException("1", ex);
+            theContext.LogException("1", ex, null);
 
             theContext.Reporting.ReporterFor<ExceptionReport>().Count.ShouldBe(1);
 
@@ -33,7 +33,7 @@ namespace StoryTeller.Testing
         [Fact]
         public void log_exception_does_the_counts()
         {
-            theContext.LogException("1", new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException(), null);
 
             theContext.Counts.ShouldEqual(0, 0, 1, 0);
         }
@@ -41,7 +41,7 @@ namespace StoryTeller.Testing
         [Fact]
         public void log_exception_will_unwrap_the_exception_message()
         {
-            theContext.LogException("1", new StorytellerAssertionException("It is wrong"));
+            theContext.LogException("1", new StorytellerAssertionException("It is wrong"), null);
             theContext.Results.OfType<StepResult>().Single().error
                 .ShouldBe("It is wrong");
         }
@@ -50,7 +50,7 @@ namespace StoryTeller.Testing
         public void log_exception_logs_a_result()
         {
             var exception = new NotImplementedException();
-            theContext.LogException("1", exception, Stage.setup);
+            theContext.LogException("1", exception, null, Stage.setup);
 
             var result = theContext.Results.Single().ShouldBeOfType<StepResult>();
             result.status.ShouldBe(ResultStatus.error);
@@ -73,7 +73,7 @@ namespace StoryTeller.Testing
         [Fact]
         public void puts_the_spec_id_on_result_messages()
         {
-            theContext.LogException("1", new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException(), null);
 
             theContext.Results.Last().spec.ShouldBe(theContext.Specification.id);
         }
@@ -103,7 +103,7 @@ namespace StoryTeller.Testing
             theContext.FinalizeResults(3)
                 .HadCriticalException.ShouldBe(false);
 
-            theContext.LogException("1", new StorytellerCriticalException("Boo!"));
+            theContext.LogException("1", new StorytellerCriticalException("Boo!"), null);
             theContext.HadCriticalException.ShouldBe(true);
 
             theContext.FinalizeResults(3)
@@ -131,7 +131,7 @@ namespace StoryTeller.Testing
         {
             theContext.StopConditions.BreakOnExceptions = false;
 
-            theContext.LogException("1", new StorytellerCriticalException());
+            theContext.LogException("1", new StorytellerCriticalException(), null);
 
             theContext.CanContinue().ShouldBe(false);
         }
@@ -141,7 +141,7 @@ namespace StoryTeller.Testing
         {
             theContext.StopConditions.BreakOnExceptions = false;
 
-            theContext.LogException("1", new StorytellerCatastrophicException());
+            theContext.LogException("1", new StorytellerCatastrophicException(), null);
 
             theContext.CanContinue().ShouldBe(false);
         }
@@ -149,7 +149,7 @@ namespace StoryTeller.Testing
         [Fact]
         public void do_not_stop_on_normal_exceptions_if_the_type_is_not_critical()
         {
-            theContext.LogException("1", new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException(), null);
 
             theContext.CanContinue().ShouldBe(true);
         }
@@ -159,7 +159,7 @@ namespace StoryTeller.Testing
         {
             theContext.StopConditions.BreakOnExceptions = true;
 
-            theContext.LogException("1", new NotImplementedException());
+            theContext.LogException("1", new NotImplementedException(), null);
 
             theContext.CanContinue().ShouldBe(false);
         }
@@ -169,17 +169,17 @@ namespace StoryTeller.Testing
         {
             theContext.StopConditions.BreakOnWrongs = true;
 
-            theContext.LogResult(new StepResult("1", ResultStatus.success));
+            theContext.LogResult(new StepResult("1", ResultStatus.success), null);
             theContext.CanContinue().ShouldBe(true);
 
-            theContext.LogResult(new StepResult("1", ResultStatus.failed));
+            theContext.LogResult(new StepResult("1", ResultStatus.failed), null);
             theContext.CanContinue().ShouldBe(false);
         }
 
         [Fact]
         public void will_not_stop_on_wrong_if_stop_conditions_are_the_defaults()
         {
-            theContext.LogResult(new StepResult("1", ResultStatus.failed));
+            theContext.LogResult(new StepResult("1", ResultStatus.failed), null);
             theContext.CanContinue().ShouldBe(true);
         }
     }
