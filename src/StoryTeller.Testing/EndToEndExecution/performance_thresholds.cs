@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading;
+using Baseline;
 using Xunit;
 
 namespace StoryTeller.Testing.EndToEndExecution
 {
     public class performance_thresholds : SpecRunningContext
     {
-        //[Fact]
+        [Fact]
         public void sentence_happy_path()
         {
             MonitoredFixture.WaitTime = TimeSpan.Zero;
@@ -20,10 +21,10 @@ namespace StoryTeller.Testing.EndToEndExecution
             Step("1").HasNoPerformanceLimitViolation();
         }
 
-        //[Fact]
+        [Fact]
         public void sentence_sad_path()
         {
-            MonitoredFixture.WaitTime = TimeSpan.Zero;
+            MonitoredFixture.WaitTime = 200.Milliseconds();
 
             execute(@"
 => Monitored
@@ -34,7 +35,7 @@ namespace StoryTeller.Testing.EndToEndExecution
             Step("1").ViolatesPerformanceLimit();
         }
 
-        //[Fact]
+        [Fact]
         public void fact_happy_path()
         {
             MonitoredFixture.WaitTime = TimeSpan.Zero;
@@ -48,10 +49,10 @@ namespace StoryTeller.Testing.EndToEndExecution
             Step("1").HasNoPerformanceLimitViolation();
         }
 
-        //[Fact]
+        [Fact]
         public void fact_sad_path()
         {
-            MonitoredFixture.WaitTime = TimeSpan.Zero;
+            MonitoredFixture.WaitTime = 200.Milliseconds();
 
             execute(@"
 => Monitored

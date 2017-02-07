@@ -41,8 +41,10 @@ namespace StoryTeller.Testing
 
             var plan = spec.CreatePlan(TestingContext.Library);
 
-            SpecExecution.RunAll(_context, plan);
+            PerfRecords = SpecExecution.RunAll(_context, plan).ToArray();
         }
+
+        public PerfRecord[] PerfRecords { get; set; } = new PerfRecord[0];
 
         public class TestExecutionContext : IExecutionContext
         {
@@ -367,12 +369,45 @@ namespace StoryTeller.Testing
 
             public void HasNoPerformanceLimitViolation()
             {
-                throw new NotImplementedException();
+                ShouldHaveExecuted();
+
+                _parent.expect = c =>
+                {
+                    var result = findStepResult(c);
+                    if (result != null)
+                    {
+                        if (result.status == ResultStatus.error && result.error.Contains("Performance threshold violation"))
+                        {
+                            return $"Step {result.id} had a performance threshold violation";
+                        }
+                    }
+
+
+
+                    return null;
+                };
             }
 
             public void ViolatesPerformanceLimit()
             {
-                throw new NotImplementedException();
+                ShouldHaveExecuted();
+
+
+                _parent.expect = c =>
+                {
+                    var result = findStepResult(c);
+                    if (result != null)
+                    {
+                        if (result.status != ResultStatus.error || (result.error.IsEmpty() && !result.error.Contains("Performance threshold violation")))
+                        {
+                            return $"Step {result.id} should have had a performance threshold violation, but did not";
+                        }
+                    }
+
+
+
+                    return null;
+                };
             }
         }
     }

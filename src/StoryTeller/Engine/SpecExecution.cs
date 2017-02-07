@@ -38,10 +38,12 @@ namespace StoryTeller.Engine
 
     public class SpecExecution
     {
-        public static void RunAll(SpecContext context, SpecificationPlan plan)
+        public static IEnumerable<PerfRecord> RunAll(SpecContext context, SpecificationPlan plan)
         {
             var gatherer = new LineStepGatherer(context);
             plan.AcceptVisitor(gatherer);
+
+            context.Timings.Start(plan.Specification);
 
             foreach (var line in gatherer.Lines)
             {
@@ -49,6 +51,8 @@ namespace StoryTeller.Engine
 
                 line.Execute(context);
             }
+
+            return context.Timings.Finish();
         }
 
         private Task _timeout;
