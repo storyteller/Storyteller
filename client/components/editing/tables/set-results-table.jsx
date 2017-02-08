@@ -27,6 +27,19 @@ var SetResultsTable = React.createClass({
 			);
 		}
 
+		var perfViolationLine = null;
+		var results = this.props.section.results;
+		if (results.exceeded){
+			perfViolationLine = (
+				<tr className="bg-warning">
+					<td colSpan={tableWidth}>
+						<b>Performance threshold violation</b>: actual {results.duration} > max {results.threshold}
+					</td>
+				</tr>
+
+			)
+		}
+
 		var headerCells = [{header: ''}].concat(this.props.cells);
 
 		return (
@@ -37,6 +50,7 @@ var SetResultsTable = React.createClass({
 				</thead>
 				<tbody>
 					{breakpointLine}
+					{perfViolationLine}
 					{this.props.rows}
 				</tbody>
 			</table>

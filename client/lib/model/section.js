@@ -74,6 +74,9 @@ class Section{
 	logSetVerificationResult(result){
 		this.results.extras = result.extras;
 		this.results.wrongOrders = result.wrongOrdered;
+		this.results.duration = result.duration;
+		this.results.exceeded = result.exceeded;
+		this.results.threshold = result.threshold;
 		
 		var steps = {};
 		this.steps.forEach(s => steps[s.id] = s);
