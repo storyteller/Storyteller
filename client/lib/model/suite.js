@@ -23,7 +23,7 @@ class Suite{
 	}
 
 	hasAnySpecs(){
-		return this.specs.length > 0 || _.any(this.suites, s => s.hasAnySpecs());
+		return this.specs.length > 0 || _.some(this.suites, s => s.hasAnySpecs());
 	}
 
 	filter(filter, specs){

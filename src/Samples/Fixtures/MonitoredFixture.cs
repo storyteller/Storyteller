@@ -11,10 +11,18 @@ namespace Samples.Fixtures
 
         public MonitoredFixture()
         {
+            
+
             this["DoSomething"] = Do("Inline grammar that should run within 100 ms", c =>
             {
                 Thread.Sleep(WaitTime);
             }).PerfLimit(100);
+        }
+
+        public override void SetUp()
+        {
+            PerformancePolicies.ClearAll();
+            PerformancePolicies.PerfLimit(50, r => r.Subject == "Fake");
         }
 
         [FormatAs("Pause for {waitTime} milliseconds")]
@@ -46,6 +54,15 @@ namespace Samples.Fixtures
         public IGrammar SetVerification()
         {
             return VerifyStringList(names).Titled("Check the names within 100ms");
+        }
+
+        [FormatAs("Register a fake perf record that runs for {runtime} ms")]
+        public void RegisterFakeRecord(int runtime)
+        {
+            var record = Context.Timings.Subject("Fake", "Fake", 0);
+            Thread.Sleep(runtime.Milliseconds());
+
+            Context.Timings.End(record);
         }
     }
 }

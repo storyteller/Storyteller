@@ -3,7 +3,7 @@
 -> id = f65893e7-c193-4b19-85ff-746cffdc9519
 -> lifecycle = Acceptance
 -> max-retries = 0
--> last-updated = 2017-02-08T16:30:26.8674295Z
+-> last-updated = 2017-02-08T18:59:30.7126676Z
 -> tags = 
 
 [Monitored]
@@ -31,4 +31,9 @@
 |> DoSomething
 |> Wait waitTime=150
 |> DoSomething
+
+There is a registered policy that any "Fake" performance record has a performance threshold of 50 ms
+
+|> RegisterFakeRecord runtime=10
+|> RegisterFakeRecord runtime=75
 ~~~

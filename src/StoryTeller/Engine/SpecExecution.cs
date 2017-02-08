@@ -52,7 +52,7 @@ namespace StoryTeller.Engine
                 line.Execute(context);
             }
 
-            return context.Timings.Finish();
+            return context.FinalizeResults(1).Performance;
         }
 
         private Task _timeout;
@@ -161,6 +161,8 @@ namespace StoryTeller.Engine
                 context.LogResult(result, null);
                 context.Cancel();
             }
+
+
 
             return context.FinalizeResults(Request.Plan.Attempts);
         }

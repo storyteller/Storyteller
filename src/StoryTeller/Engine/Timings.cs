@@ -74,6 +74,11 @@ namespace StoryTeller.Engine
             Threshold = threshold;
         }
 
+        public override string ToString()
+        {
+            return $"{Type}/{Subject} from {Start} to {End} exceeded its threshold ({Threshold} ms)";
+        }
+
         public void MarkEnd(long end)
         {
             End = end;

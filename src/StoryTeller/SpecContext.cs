@@ -40,6 +40,8 @@ namespace StoryTeller
         {
             var performance = _timings.Finish().ToArray();
 
+            PerformancePolicies.Apply(this, performance);
+
             return new SpecResults
             {
                 Counts = Counts,
@@ -131,6 +133,12 @@ namespace StoryTeller
 
         public void LogException(string id, Exception ex, PerfRecord record, object position = null)
         {
+            if (id.IsEmpty())
+            {
+                id = Specification.id;
+                position = Stage.context;
+            }
+
             Reporting.ReporterFor<ExceptionReport>().Log(ex);
 
             ex = unwrapException(ex);
