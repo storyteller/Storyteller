@@ -3,7 +3,7 @@
 -> id = f65893e7-c193-4b19-85ff-746cffdc9519
 -> lifecycle = Acceptance
 -> max-retries = 0
--> last-updated = 2017-02-07T20:49:23.3676489Z
+-> last-updated = 2017-02-08T16:30:26.8674295Z
 -> tags = 
 
 [Monitored]
@@ -27,4 +27,8 @@
     |> SetVerification-row expected=Jake
     |> SetVerification-row expected=Jill
 
+|> Wait waitTime=50
+|> DoSomething
+|> Wait waitTime=150
+|> DoSomething
 ~~~

@@ -9,6 +9,14 @@ namespace Samples.Fixtures
     {
         public static TimeSpan WaitTime = TimeSpan.Zero;
 
+        public MonitoredFixture()
+        {
+            this["DoSomething"] = Do("Inline grammar that should run within 100 ms", c =>
+            {
+                Thread.Sleep(WaitTime);
+            }).PerfLimit(100);
+        }
+
         [FormatAs("Pause for {waitTime} milliseconds")]
         public void Wait(int waitTime)
         {
