@@ -11,7 +11,7 @@ const toCloneText = (text) => {
   if (_.endsWith(text, ' Copy')) {
     return text + ' 1';
   }
-  else if (_.contains(text, ' Copy ')) {
+  else if (text.includes(' Copy ')) {
     return text.replace(/Copy \d+/, function (attr) { return attr.replace(/\d+/, function(n) { return ++n; }); });
   }
   else {

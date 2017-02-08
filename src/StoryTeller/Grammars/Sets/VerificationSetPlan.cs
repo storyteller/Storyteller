@@ -18,10 +18,12 @@ namespace StoryTeller.Grammars.Sets
         private readonly ISetComparison _comparison;
         private readonly IEnumerable<StepValues> _expected;
         private readonly ISetMatcher _matcher;
+        private readonly SetVerificationGrammar _grammar;
         private readonly Section _section;
 
-        public VerificationSetPlan(Section section, ISetMatcher matcher, ISetComparison comparison, IEnumerable<StepValues> expected, Cell[] cells, long maximumRuntimeInMilliseconds)
+        public VerificationSetPlan(SetVerificationGrammar grammar, Section section, ISetMatcher matcher, ISetComparison comparison, IEnumerable<StepValues> expected, Cell[] cells, long maximumRuntimeInMilliseconds)
         {
+            _grammar = grammar;
             _section = section;
             _matcher = matcher;
             _comparison = comparison;
@@ -63,7 +65,7 @@ namespace StoryTeller.Grammars.Sets
 
         public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
         {
-            var record = context.Timings.Subject("Grammar", _section.Key, _maximumRuntimeInMilliseconds);
+            var record = context.Timings.Subject("Grammar", _grammar.Key, _maximumRuntimeInMilliseconds);
 
 
             var fetch = _comparison.Fetch(context);
