@@ -15,7 +15,8 @@
     "repository": {
       "type": "git",
       "url": "git://github.com/storyteller/storyteller"
-    }
+    },
+    "iconUrl": "http://storyteller.github.io/storyteller/content/images/favicon.ico"
   },
   "name": "dotnet-stdocs",
   "buildOptions": {
