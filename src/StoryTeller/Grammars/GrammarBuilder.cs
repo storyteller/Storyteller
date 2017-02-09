@@ -11,7 +11,7 @@ using StoryTeller.Util;
 
 namespace StoryTeller.Grammars
 {
-    internal static class GrammarBuilder
+    public static class GrammarBuilder
     {
          private static readonly IList<IGrammarBuilder> _builders = new List<IGrammarBuilder>
          {
@@ -21,6 +21,11 @@ namespace StoryTeller.Grammars
              new VoidMethodActionBuilder(),
              new ValueCheckMethodBuilder()
          };
+
+        public static void AddPolicy(IGrammarBuilder builder)
+        {
+            _builders.Insert(0, builder);
+        }
 
         public static IGrammar BuildGrammar(MethodInfo method, Fixture fixture)
         {
@@ -53,7 +58,7 @@ namespace StoryTeller.Grammars
         }
     }
 
-    internal interface IGrammarBuilder
+    public interface IGrammarBuilder
     {
         bool Matches(MethodInfo method);
         IGrammar Build(MethodInfo method, Fixture fixture);
