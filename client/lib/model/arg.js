@@ -52,7 +52,7 @@ class Arg{
 	store(data){
 		if (!data.cells) data.cells = {};
 
-		if (this.value == false){
+		if (this.value === false){
 			data.cells[this.key] = false;
 		}
 		else{

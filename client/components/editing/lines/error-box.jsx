@@ -20,7 +20,7 @@ function ErrorBox({title, error, errorDisplay}){
 
 	if (title){
 		return (
-			<pre style={style} className="error bg-warning">
+			<pre style={style} className="alert alert-warning">
 				{title}
 				<hr />
 				{error}
@@ -31,7 +31,7 @@ function ErrorBox({title, error, errorDisplay}){
 	if (errorDisplay == 'markdown'){
 		var html = marked(error);
 		return (
-			<div style={style} className="error bg-warning">
+			<div style={style} className="alert alert-warning">
 				{title}
 				<div dangerouslySetInnerHTML={{__html: html}}></div>
 			</div>
