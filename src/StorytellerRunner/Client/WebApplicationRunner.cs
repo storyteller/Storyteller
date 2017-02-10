@@ -95,7 +95,11 @@ namespace ST.Client
 
         private void startWebServer(int port, WebSocketsHandler webSockets)
         {
+#if NET46
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+#else
             var baseDirectory = AppContext.BaseDirectory;
+#endif
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(baseDirectory)

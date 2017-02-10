@@ -55,7 +55,11 @@ namespace ST.Client
 
         public static string FindRootFolder()
         {
+#if NET46
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+#else
             var path = AppContext.BaseDirectory;
+#endif
             while (!path.EndsWith("StorytellerRunner"))
             {
                 path = path.ParentDirectory();

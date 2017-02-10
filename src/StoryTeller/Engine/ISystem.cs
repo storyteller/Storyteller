@@ -54,7 +54,12 @@ namespace StoryTeller.Engine
                     fixtures = new FixtureModel[0],
                     system_name = system.ToString(),
                     system_full_name = system.GetType().FullName,
+#if NET46
+                    name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory),
+#else
                     name = Path.GetFileName(AppContext.BaseDirectory),
+#endif
+
                     error = ex.ToString()
                 };
 
@@ -71,7 +76,11 @@ namespace StoryTeller.Engine
                 success = true,
                 fixtures = library.Models.GetAll().ToArray(),
                 system_name = system.ToString(),
+#if NET46
+                name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
+#else
                 name = Path.GetFileName(AppContext.BaseDirectory)
+#endif
             };
         }
     } 

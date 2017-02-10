@@ -29,7 +29,13 @@ namespace StoryTeller.Testing.ST
             var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
 
 
-            thePath = AppContext.BaseDirectory.ToFullPath().AppendPath(Guid.NewGuid().ToString());
+#if NET46
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+#else
+            var baseDirectory = AppContext.BaseDirectory;
+#endif
+
+            thePath = baseDirectory.ToFullPath().AppendPath(Guid.NewGuid().ToString());
             var fileSystem = new FileSystem();
 
             var files = fileSystem.FindFiles(path, FileSet.Deep("*.md"));

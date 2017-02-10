@@ -129,6 +129,12 @@ namespace ST.Client
 
         private void sendFailedToStartMessage()
         {
+#if NET46
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+#else
+            var baseDirectory = AppContext.BaseDirectory;
+#endif
+
             var writer = new StringWriter();
             writer.WriteLine($"Unable to start process '{_command}'");
             writer.WriteLine();
@@ -136,7 +142,7 @@ namespace ST.Client
             writer.WriteLine();
             writer.WriteLine(_testCommand);
             writer.WriteLine();
-            writer.WriteLine($"The error is logged to {AppContext.BaseDirectory.AppendPath("storyteller.log")}");
+            writer.WriteLine($"The error is logged to {baseDirectory.AppendPath("storyteller.log")}");
 
             var message = new SystemRecycled
             {
@@ -144,7 +150,7 @@ namespace ST.Client
                 fixtures = new FixtureModel[0],
                 system_name = "Unknown",
                 system_full_name = "Unknown",
-                name = Path.GetFileName(AppContext.BaseDirectory),
+                name = Path.GetFileName(baseDirectory),
                 error = writer.ToString()
             };
 

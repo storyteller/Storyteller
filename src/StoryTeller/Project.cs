@@ -87,7 +87,11 @@ namespace StoryTeller
 
         private static Type[] FindSystemTypesInCurrentAssembly()
         {
+#if NET46
+            var directory = AppDomain.CurrentDomain.BaseDirectory;
+#else
             var directory = AppContext.BaseDirectory;
+#endif
             var assemblyName = Path.GetFileName(directory);
 
             try

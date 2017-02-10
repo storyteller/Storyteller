@@ -55,7 +55,12 @@ namespace StoryTeller.Testing
 
         public static string FindParallelDirectory(string projectName)
         {
+#if NET46
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+#else
             var path = AppContext.BaseDirectory;
+#endif
+
             while (!path.EndsWith("src"))
             {
                 path = path.ParentDirectory();

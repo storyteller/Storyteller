@@ -25,7 +25,7 @@
       "**/*.cs",
       "../CommonAssemblyInfo.cs"
     ],
-    "embed": [ "../StorytellerRunner/topics.js", "Runner/WebsocketsRefresh.txt" ],
+    "embed": [ "../StorytellerRunner/topics.js", "Runner/WebsocketsRefresh.txt", "Template/**/*.*" ],
     "outputName": "dotnet-stdocs"
   },
 

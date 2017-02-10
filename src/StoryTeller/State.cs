@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Baseline;
 
 
@@ -27,6 +28,19 @@ namespace StoryTeller
         public void Store<T>(string key, T value)
         {
             _byName[typeof (T)][key] = value;
+        }
+
+        public T RetrieveOrAdd<T>(Func<T> missing)
+        {
+            if (_byType.Contains(typeof(T)))
+            {
+                return Retrieve<T>();
+            }
+
+            var value = missing();
+            _byType[typeof(T)] = value;
+
+            return value;
         }
 
         public T Retrieve<T>()
