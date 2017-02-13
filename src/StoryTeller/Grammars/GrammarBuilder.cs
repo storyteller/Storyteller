@@ -16,6 +16,7 @@ namespace StoryTeller.Grammars
          private static readonly IList<IGrammarBuilder> _builders = new List<IGrammarBuilder>
          {
              new ProgrammaticGrammarBuilder(),
+             new GrammarSourceBuilder(),
              new FactMethodBuilder(),
              new FactMethodWithInputsBuilder(),
              new VoidMethodActionBuilder(),
@@ -73,7 +74,10 @@ namespace StoryTeller.Grammars
 
         public IGrammar Build(MethodInfo method, Fixture fixture)
         {
-            return (IGrammar) method.Invoke(fixture, new object[0]);
+            var grammar = (IGrammar) method.Invoke(fixture, new object[0]);
+            (grammar as MethodAwareGrammar)?.Apply(method, fixture);
+
+            return grammar;
         }
     }
 

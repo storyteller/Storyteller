@@ -4,7 +4,8 @@
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "StoryTeller": { "target": "project" },
-    "System.Data.Common": "4.3.0"
+    "System.Data.Common": "4.3.0",
+    "Npgsql": "3.2.0"
   },
 
   "frameworks": {

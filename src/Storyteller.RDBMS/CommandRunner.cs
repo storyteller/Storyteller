@@ -1,22 +1,9 @@
 ﻿using System;
 using System.Data;
-using System.Threading.Tasks;
 using Baseline;
 
 namespace Storyteller.RDBMS
 {
-
-
-    // How to get this one into the testing engine?
-    public interface ISqlDialect
-    {
-        IDbConnection NewConnection();
-
-        DbType DbTypeFor(Type type);
-
-
-        string AliasParameter(string cellKey);
-    }
 
     // How to get this one in?
     public class CommandRunner : IDisposable
@@ -67,28 +54,7 @@ namespace Storyteller.RDBMS
 
     // Need something that can read a method signature and decide how to
 
-    public class Command
-    {
 
-        // If no set to check, just execute this
-        public Command(CommandType commandType, string sql)
-        {
-        }
-
-        // Mark whether or not you need to check a set
-        public Command VerifySetOf<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Command VerifyReturn<T>()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-    }
 
 
 }
