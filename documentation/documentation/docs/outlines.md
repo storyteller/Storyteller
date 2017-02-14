@@ -1,7 +1,7 @@
 <!--Title:Topic Outlines-->
 <!--Url:outlines-->
 
-If you want to quickly generate the skeleton of a documentation project, Storyteller comes with the `st doc-seed` command. 
+If you want to quickly generate the skeleton of a documentation project, Storyteller comes with the `dotnet stdocs seed` (`st doc-seed` in Storyteller 3.*) command. 
 
 The first step is to write a file called `outline.txt` in your `/documentation` folder. Configure the topics in the order and structure you want with the right titles with a format like this (originally used to generate the documentation you are reading):
 
@@ -51,8 +51,8 @@ Once you are happy with the order, run `st doc-seed` to create a shell of the to
 Right now this is a one way generation, but if there is demand (or better yet a pull request;-)), this could be extended to be bi-directional.
 
 
-<[command-usage:st/doc-seed]>
+<[command-usage:dotnet stdocs/seed]>
 
-<[/command-usage:st/doc-seed]>
+<[/command-usage:dotnet stdocs/seed]>
 
 

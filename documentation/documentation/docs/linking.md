@@ -13,6 +13,16 @@ Which will render this: <[linkto:documentation/docs/authoring]>. The default out
 The path after the colon is effectively the relative path from the documentation root to the topic file, minus the `.md` extension. `index.md` files are referenced by just its parent directory.
 
 
+## Relative Links
+
+You can also relative links in the `<[linkto:path]>` structure. If the path starts with a forward slash
+like this:
+
+<code>&lt;[linkto:/authoring]&gt;</code>.
+
+Assuming that there is another topic with the file name `authoring.md` in the same directory as the current topic file,
+you'll get the same link. StorytellerDocGen can respond to paths like `/../other` as well.
+
 
 ## Override the Link Title
 

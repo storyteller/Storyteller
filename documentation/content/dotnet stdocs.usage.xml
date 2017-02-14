@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandLineApplicationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationName>dotnet stdocs</ApplicationName>
+  <Commands>
+    <CommandReport>
+      <Name>run</Name>
+      <Description>Run the documentation in a live mode</Description>
+      <Arguments />
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-d, --directory &lt;directory&gt;]</UsageDescription>
+          <Description>The documentation directory. The default is 'documentation'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-v, --version &lt;version&gt;]</UsageDescription>
+          <Description>Override the application version. Default is 'Unknown'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --project &lt;project&gt;]</UsageDescription>
+          <Description>GitHub project name when exporting to project pages of a GitHub repo</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --code [&lt;code1 code2 code3 ...&gt;]]</UsageDescription>
+          <Description>Override the directories where sample scanning should be enabled. Default is [src]</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Run the documentation in a live mode</Description>
+          <Usage>dotnet stdocs run [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-p, --project &lt;project&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>seed</Name>
+      <Description>Seeds a topic file structure from an outline.txt file</Description>
+      <Arguments />
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-d, --directory &lt;directory&gt;]</UsageDescription>
+          <Description>The documentation directory. The default is 'documentation'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-v, --version &lt;version&gt;]</UsageDescription>
+          <Description>Override the application version. Default is 'Unknown'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --project &lt;project&gt;]</UsageDescription>
+          <Description>GitHub project name when exporting to project pages of a GitHub repo</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --code [&lt;code1 code2 code3 ...&gt;]]</UsageDescription>
+          <Description>Override the directories where sample scanning should be enabled. Default is [src]</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Seeds a topic file structure from an outline.txt file</Description>
+          <Usage>dotnet stdocs seed [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-p, --project &lt;project&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>new</Name>
+      <Description>NewCommand</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>title</Name>
+          <Description>The project name for display in the website</Description>
+        </ArgumentReport>
+        <ArgumentReport>
+          <Name>website</Name>
+          <Description>The root url of the website where this will be hosted</Description>
+        </ArgumentReport>
+        <ArgumentReport>
+          <Name>githuborganization</Name>
+          <Description>Github user name or organization for the project</Description>
+        </ArgumentReport>
+        <ArgumentReport>
+          <Name>githubrepository</Name>
+          <Description>Name of the GitHub repository</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-d, --directory &lt;directory&gt;]</UsageDescription>
+          <Description>Optional, override the base directory of the project</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Default</Description>
+          <Usage>dotnet stdocs new &lt;title&gt; &lt;website&gt; &lt;githuborganization&gt; &lt;githubrepository&gt; [-d, --directory &lt;directory&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>export</Name>
+      <Description>Export a documentation project to static html</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>destination</Name>
+          <Description>The destination folder where the docs should be exported to</Description>
+        </ArgumentReport>
+        <ArgumentReport>
+          <Name>exportmode</Name>
+          <Description>Controls how the urls within the documentation topic pages are generated</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-d, --directory &lt;directory&gt;]</UsageDescription>
+          <Description>The documentation directory. The default is 'documentation'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-v, --version &lt;version&gt;]</UsageDescription>
+          <Description>Override the application version. Default is 'Unknown'</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --project &lt;project&gt;]</UsageDescription>
+          <Description>GitHub project name when exporting to project pages of a GitHub repo</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --code [&lt;code1 code2 code3 ...&gt;]]</UsageDescription>
+          <Description>Override the directories where sample scanning should be enabled. Default is [src]</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Export a documentation project to static html</Description>
+          <Usage>dotnet stdocs export &lt;destination&gt; FileDump|Website|ProjectWebsite [-d, --directory &lt;directory&gt;] [-v, --version &lt;version&gt;] [-p, --project &lt;project&gt;] [-c, --code [&lt;code1 code2 code3 ...&gt;]]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+  </Commands>
+</CommandLineApplicationReport>

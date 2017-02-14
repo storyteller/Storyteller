@@ -1,6 +1,9 @@
 <!--Title:Embedding Code Samples-->
 <!--Url:samples-->
 
+<div class="alert alert-success"><b>Note!</b> StorytellerDocGen "levels" the indention of the code samples
+now, so there's no need to override how your IDE formats the code to look decent in the documentation.</div>
+
 The primary author of Storyteller once had a very bad experience when a huge technical documentation effort failed to keep pace with an evolving codebase. To eliminate that issue permanently, Storyteller supports a feature where you can pull code samples from the actual codebase at documentation generation time to *keep the documentation in sync with a changing API*.
 
 ## How it Works

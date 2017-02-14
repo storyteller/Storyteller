@@ -1,13 +1,17 @@
 <!--Title:Authoring Topics-->
 <!--Url:authoring-->
 
+<div class="alert alert-success"><b>Note!</b> <i>StorytellerDocGen</i> now uses the robust
+<a href="https://github.com/lunet-io/markdig">Markdig</a> library to transform markdown to HTML with "UseAdvancedExtensions()"
+option.</div>
+
 To author new topic files, just create textual files with the `.md` extension (see <[linkto:documentation/docs/navigation]> to see how these files are organized into a navigable structure). Storyteller provides a couple levels of transformation from raw textual files to the finished html:
 
 1. Comment directives to override a topic's title or url
 
 1. Storyteller supports several custom preprocessing directives that follow a syntax like <code>&lt;[linkto:topic_key;title=Link to a Different Topic]&gt;</code> 
 
-1. Markdown transformation of text to html using the [CommonMark.Net](https://github.com/Knagis/CommonMark.NET) library.
+1. Markdown transformation of text to html using the [Markdig](https://github.com/lunet-io/markdig) library.
 
 1. A limited master page template to theme the documentation and provide consistent navigation structures. See <[linkto:documentation/docs/theme]> for more information.
 

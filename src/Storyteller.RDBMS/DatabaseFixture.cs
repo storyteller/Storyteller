@@ -60,22 +60,24 @@ namespace Storyteller.RDBMS
 
     }
 
-    public interface ICommandExecution
+    public class CheckResultExecution<T> : ICommandExecution
     {
-        Cell[] ToCells(CellHandling cellHandling, Fixture fixture);
-        void Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context);
-    }
+        public string Key { get; }
 
-    public class NonQueryExecution : ICommandExecution
-    {
+        public CheckResultExecution(string key = "result")
+        {
+            Key = key;
+        }
+
         public Cell[] ToCells(CellHandling cellHandling, Fixture fixture)
         {
-            return new Cell[0];
+            return new Cell[]{new Cell(cellHandling, Key, typeof(T)), };
         }
 
         public void Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context)
         {
-            runner.Execute(command);
+            // Check the actual here.
+            throw new NotImplementedException();
         }
     }
 }

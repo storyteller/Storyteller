@@ -139,6 +139,7 @@ task :prepare_docs => [:compile] do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json"
 
 	sh 'dotnet run --project src/StorytellerRunner -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
+	sh 'dotnet run --project src/dotnet-stdocs -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
 "Launches the documentation project in editable mode"
