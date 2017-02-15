@@ -5,6 +5,23 @@ using StoryTeller;
 
 namespace Samples.Fixtures
 {
+    public class PolicySamples
+    {
+        public void create_policies()
+        {
+            // SAMPLE: PerformancePolicies
+            // All grammars of any kind should run within 5 seconds
+            PerformancePolicies.PerfLimit(5000, r => r.Type == "Grammar");
+
+            // No specification should exceed 15 seconds
+            PerformancePolicies.PerfLimitBySubject(15000, "Specification");
+
+            // All grammars with "Open" in their name should run in under a second
+            PerformancePolicies.PerfLimit(1000, r => r.Subject.Contains("Open"));
+            // ENDSAMPLE
+        }
+    }
+
     public class MonitoredFixture : Fixture
     {
         public static TimeSpan WaitTime = TimeSpan.Zero;
@@ -31,6 +48,7 @@ namespace Samples.Fixtures
             WaitTime = waitTime.Milliseconds();
         }
 
+        // SAMPLE: PerfLimitAttribute
         [PerfLimit(100), FormatAs("Sentence w/ 100 ms threshold")]
         public void Sentence()
         {
@@ -44,17 +62,20 @@ namespace Samples.Fixtures
             return true;
         }
 
+        [PerfLimit(100)]
+        public IGrammar SetVerification()
+        {
+            return VerifyStringList(names).Titled("Check the names within 100ms");
+        }
+        // ENDSAMPLE
+
         private string[] names()
         {
             Thread.Sleep(WaitTime);
             return new string[] { "Bill", "Jill", "Jake" };
         }
 
-        [PerfLimit(100)]
-        public IGrammar SetVerification()
-        {
-            return VerifyStringList(names).Titled("Check the names within 100ms");
-        }
+
 
         [FormatAs("Register a fake perf record that runs for {runtime} ms")]
         public void RegisterFakeRecord(int runtime)
