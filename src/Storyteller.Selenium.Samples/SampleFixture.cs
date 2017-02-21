@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using StoryTeller;
 
 namespace Storyteller.Selenium.Samples
@@ -15,10 +16,13 @@ namespace Storyteller.Selenium.Samples
 
         protected override void beforeRunning()
         {
-            var path = "file://" + Project.CurrentProject.ProjectPath.Replace("\\", "/");
-            Context.State.Store(RootUrl, path);
+            Driver = new ChromeDriver();
+            RootUrl = "file://" + Project.CurrentProject.ProjectPath.Replace("\\", "/");
         }
 
-
+        public override void TearDown()
+        {
+            Driver.Close();
+        }
     }
 }

@@ -10,12 +10,22 @@ namespace Storyteller.Selenium
     public class ScreenFixture : Fixture
     {
         public const string ElementsListName = "Elements";
-        public const string Rooturl = "RootUrl";
+        public const string ROOT_URL = "RootUrl";
         private readonly Stack<ISearchContext> _searchContexts = new Stack<ISearchContext>();
 
-        public ISearchContext SearchContext => _searchContexts.Count == 0 ? Driver : _searchContexts.Peek();
+        protected ISearchContext SearchContext => _searchContexts.Count == 0 ? Driver : _searchContexts.Peek();
 
-        public IWebDriver Driver => Context?.State.Retrieve<IWebDriver>();
+        protected IWebDriver Driver
+        {
+            get
+            {
+                return Context?.State.Retrieve<IWebDriver>();
+            }
+            set
+            {
+                Context?.State.Store(value);
+            }
+        }
 
         public sealed override void SetUp()
         {
@@ -46,7 +56,17 @@ namespace Storyteller.Selenium
             if (_searchContexts.Any()) _searchContexts.Pop();
         }
 
-        protected string RootUrl => Context?.State.Retrieve<string>(Rooturl);
+        protected string RootUrl
+        {
+            get
+            {
+                return Context?.State.Retrieve<string>(ROOT_URL);
+            }
+            set
+            {
+                Context?.State.Store(ROOT_URL, value);
+            }
+        }
 
         protected readonly LightweightCache<string, By> Elements = new LightweightCache<string, By>();
 
@@ -113,11 +133,13 @@ namespace Storyteller.Selenium
             return forElement(element).Text;
         }
 
+        [FormatAs("{element} should be visible")]
         public bool IsVisible(NamedElement element)
         {
             return forElement(element).Displayed;
         }
 
+        [FormatAs("{element} should be hidden")]
         public bool IsHidden(NamedElement element)
         {
             return !forElement(element).Displayed;
