@@ -1,4 +1,7 @@
-﻿using StoryTeller;
+﻿using System;
+using System.IO;
+using Baseline;
+using StoryTeller;
 
 namespace Storyteller.Selenium.Samples
 {

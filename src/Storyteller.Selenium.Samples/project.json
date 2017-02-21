@@ -1,12 +1,16 @@
 ﻿{
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "copyToOutput": {
+      "include": "chromedriver.exe"
+    }
   },
 
   "dependencies": {
     "Storyteller.Selenium": { "target": "project" },
-    "StoryTeller": { "target": "project" }
+    "StoryTeller": { "target": "project" },
+    "Selenium.Chrome.WebDriver":  "2.27.0" 
   },
 
   "frameworks": {

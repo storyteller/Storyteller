@@ -138,6 +138,7 @@ namespace StoryTeller.Model
             var cell = new Cell(cells, parameter.Name, type) {result = isOutput, Position = parameter.Position};
 
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
+            type.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
 
             if (parameter.HasDefaultValue)
             {

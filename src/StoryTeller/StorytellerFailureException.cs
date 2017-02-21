@@ -35,7 +35,7 @@ namespace StoryTeller
 
         public virtual string FormattedMessage()
         {
-            return ToString();
+            return Message;
         }
     }
 }
