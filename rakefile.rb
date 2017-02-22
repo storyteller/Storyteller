@@ -117,7 +117,7 @@ end
 
 desc "Pushes the Nuget's to MyGet"
 task :push do
-	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/Storyteller.4.0.0.nupkg"
+	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/Storyteller.4.1.0-alpha-#{build_revision}.nupkg"
 	#sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/Storyteller.AspNetCore.1.0.0.nupkg"
 	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/StorytellerRunner.1.0.0.nupkg"
 	sh "nuget.exe push -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ artifacts/dotnet-storyteller.1.0.0.nupkg"

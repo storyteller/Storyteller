@@ -29,7 +29,7 @@
     "iconUrl": "http://storyteller.github.io/storyteller/content/images/favicon.ico"
   },
   "dependencies": {
-    "Baseline": "1.1.0",
+    "Baseline": "1.2.0",
     "Newtonsoft.Json": "9.0.1",
     "System.Reflection.TypeExtensions": "4.1.0",
     "Microsoft.DotNet.InternalAbstractions": "1.0.0" 
