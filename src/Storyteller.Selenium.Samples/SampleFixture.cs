@@ -8,6 +8,10 @@ namespace Storyteller.Selenium.Samples
     {
         public SampleFixture()
         {
+            // This is just a little bit of trickery to
+            // use human readable aliases for elements on
+            // the page. The Selenium By class identifies
+            // how Selenium should "find" the element
             Element("the Show button", By.Id("button1"));
             Element("the Hide button", By.Id("button2"));
             Element("the div", By.Id("div1"));
@@ -16,12 +20,17 @@ namespace Storyteller.Selenium.Samples
 
         protected override void beforeRunning()
         {
+            // Launching Chrome and opening the browser to a sample
+            // HTML page. In real life, you'd need to be smarter about this
+            // and reuse the Driver across specifications for better
+            // performance
             Driver = new ChromeDriver();
             RootUrl = "file://" + Project.CurrentProject.ProjectPath.Replace("\\", "/");
         }
 
         public override void TearDown()
         {
+            // Clean up behind yourself
             Driver.Close();
         }
     }
