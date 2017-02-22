@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using Baseline;
+using Baseline.Dates;
 using IntegrationTests.CommandLine;
 using MultipleSystems;
 using Shouldly;

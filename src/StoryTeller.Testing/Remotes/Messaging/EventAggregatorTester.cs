@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
+using Baseline.Dates;
 using NSubstitute;
 using Xunit;
 using Shouldly;

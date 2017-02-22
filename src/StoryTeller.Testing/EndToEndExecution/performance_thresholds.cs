@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Baseline;
+using Baseline.Dates;
 using Xunit;
 
 namespace StoryTeller.Testing.EndToEndExecution
