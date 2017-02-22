@@ -31,7 +31,7 @@ namespace StoryTeller
 
         private readonly LightweightCache<string, IGrammar> _grammars;
 
-        internal readonly LightweightCache<string, OptionList> Lists =
+        protected readonly LightweightCache<string, OptionList> Lists =
             new LightweightCache<string, OptionList>(key => new OptionList(key));
 
         public string Title;
