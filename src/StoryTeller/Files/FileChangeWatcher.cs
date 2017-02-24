@@ -82,7 +82,7 @@ namespace StoryTeller.Files
             }
 
             if (_disposed) return;
-            _timer.Change(0, PollingIntervalInMilliseconds);
+            _timer.Change(PollingIntervalInMilliseconds, PollingIntervalInMilliseconds);
         }
 
 
