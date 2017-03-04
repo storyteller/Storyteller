@@ -36,7 +36,7 @@ project files or the new MSBuild file formats with Visual Studio 2017. This sect
 *.csproj build system. 
 </div>
 
-If your codebase has supports the new dotnet cli, the setup steps are to:
+If your codebase supports the new dotnet cli, the setup steps are to:
 
 1. Create a new **console application** project for the Storyteller specifications in your solution
 1. Install the `Storyteller` Nuget as a dependency
