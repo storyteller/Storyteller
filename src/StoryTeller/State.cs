@@ -12,6 +12,11 @@ namespace StoryTeller
         void Store<T>(string key, T value);
         T Retrieve<T>();
         T Retrieve<T>(string key);
+        T RetrieveOrAdd<T>(Func<T> missing);
+
+
+        T TryRetrieve<T>(string key);
+        T TryRetrieve<T>();
     }
     // ENDSAMPLE
 
@@ -54,6 +59,20 @@ namespace StoryTeller
         }
 
         public object CurrentObject;
+
+        public T TryRetrieve<T>(string key)
+        {
+            if (!_byName.Has(typeof(T))) return default(T);
+
+            var cache = _byName[typeof(T)];
+
+            return cache.Has(key) ? cache[key].As<T>() : default(T);
+        }
+
+        public T TryRetrieve<T>()
+        {
+            return _byType.Has(typeof(T)) ? _byType[typeof(T)].As<T>() : default(T);
+        }
 
         void IDisposable.Dispose()
         {

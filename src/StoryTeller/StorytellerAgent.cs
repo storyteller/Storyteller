@@ -95,7 +95,19 @@ namespace StoryTeller
                 var json = JsonSerialization.ToCleanJson(recycled);
 
                 Console.WriteLine("System ready as: " + json);
-                ConsoleWriter.Write(ConsoleColor.Green, "StorytellerAgent started without any exceptions");
+
+                Console.WriteLine("Trying the Warmup now...");
+
+                var warmup = system.Warmup();
+
+                warmup.Wait(1.Minutes());
+
+                if (warmup.IsCompleted)
+                {
+                    ConsoleWriter.Write(ConsoleColor.Green, "StorytellerAgent started without any exceptions");
+                }
+
+
             }
             catch (Exception e)
             {

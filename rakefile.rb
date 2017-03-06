@@ -197,6 +197,11 @@ task :specifications do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 run src/Specifications"
 end
 
+"Run the database sample specs"
+task :dbsamples do
+	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/DatabaseSamples"
+end
+
 def load_project_file(project)
   File.open(project) do |file|
     file_contents = File.read(file, :encoding => 'bom|utf-8')

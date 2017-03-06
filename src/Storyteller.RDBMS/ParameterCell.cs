@@ -8,7 +8,7 @@ namespace Storyteller.RDBMS
 {
     public abstract class ParameterCell
     {
-        public ParameterDirection Direction { get; set; };
+        public ParameterDirection Direction { get; set; }
 
         protected ParameterCell(Cell cell, string parameterName, ParameterDirection direction)
         {

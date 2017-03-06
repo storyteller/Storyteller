@@ -8,5 +8,6 @@ namespace Storyteller.RDBMS
         IDbConnection NewConnection();
 
         ParameterCell ToParameterCell(Cell cell, ParameterDirection direction);
+        long RowCount(IDbConnection conn, string dbObject);
     }
 }

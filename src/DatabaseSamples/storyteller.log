@@ -1,0 +1,5 @@
+System.InvalidOperationException: Start may not be called on a promise-style task.
+   at System.Threading.Tasks.Task.Start(TaskScheduler scheduler)
+   at StoryTeller.Engine.SpecificationEngine..ctor(ISystem system, ISpecRunner runner, IExecutionObserver observer) in /Users/jeremill/code/storyteller/src/StoryTeller/Engine/SpecificationEngine.cs:line 61
+   at StoryTeller.Engine.EngineAgent.buildUserInterfaceEngine() in /Users/jeremill/code/storyteller/src/StoryTeller/Engine/EngineAgent.cs:line 131
+   at StoryTeller.Engine.EngineAgent.Start(Project project) in /Users/jeremill/code/storyteller/src/StoryTeller/Engine/EngineAgent.cs:line 90

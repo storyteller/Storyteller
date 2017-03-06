@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
+using System.Data.Common;
 using Baseline;
 using Npgsql;
-using NpgsqlTypes;
 using StoryTeller.Model;
 
 namespace Storyteller.RDBMS.Postgresql
@@ -18,23 +18,18 @@ namespace Storyteller.RDBMS.Postgresql
         {
             return new NpgsqlParameterCell(cell, cell.Key, direction);
         }
-    }
 
-    public class NpgsqlParameterCell : ParameterCell
-    {
-        public NpgsqlParameterCell(Cell cell, string parameterName, ParameterDirection direction, NpgsqlDbType? dbType = null)
-            : base(cell, parameterName, direction)
+        public long RowCount(IDbConnection conn, string dbObject)
         {
-            NpgsqlDbType = dbType;
-        }
-
-        public NpgsqlDbType? NpgsqlDbType { get; }
-
-        protected override void configureParameter(IDbDataParameter param)
-        {
-            if (NpgsqlDbType != null)
+            using (var cmd = conn.CreateCommand().As<DbCommand>())
             {
-                param.As<NpgsqlParameter>().NpgsqlDbType = NpgsqlDbType.Value;
+                cmd.CommandText = "select count(*) from " + dbObject;
+                using (var reader = cmd.ExecuteReader())
+                {
+                    return !reader.Read()
+                        ? 0
+                        : reader.GetFieldValue<long>(0);
+                }
             }
         }
     }

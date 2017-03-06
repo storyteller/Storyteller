@@ -55,9 +55,10 @@ namespace StoryTeller.Engine
                 throw new InvalidOperationException($"{system} cannot return a null value from {nameof(ISystem.Warmup)}()");
             }
 
+
             if (warmup.Status == TaskStatus.WaitingForActivation)
             {
-                throw new InvalidOperationException($"{system}.{nameof(ISystem.Warmup)}().Status is {nameof(TaskStatus.WaitingForActivation)}");
+                warmup.Start();
             }
 
             _warmup = warmup.ContinueWith(t =>

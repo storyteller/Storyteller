@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Data;
 using StoryTeller;
-using StoryTeller.Conversion;
-using StoryTeller.Model;
+using StoryTeller.Grammars;
 
 namespace Storyteller.RDBMS
 {
+
+
     public class DatabaseFixture : Fixture
     {
         public ISqlDialect Dialect { get; }
@@ -14,15 +15,20 @@ namespace Storyteller.RDBMS
         {
             get
             {
-                return Context == null
-                    ? new CommandRunner(Dialect)
-                    : Context.State.RetrieveOrAdd(() => new CommandRunner(Dialect));
+                if (Context == null) throw new InvalidOperationException("Cannot use this method except during Spec execution");
+
+                return Context.RetrieveOrBuildCommandRunner(Dialect);
             }
         }
 
         public DatabaseFixture(ISqlDialect dialect)
         {
             Dialect = dialect;
+        }
+
+        protected IGrammar NoRowsIn(string title, string dbObject)
+        {
+            return new NoRowsGrammar(title, dbObject);
         }
 
         public CommandExpression Sproc(string function)
@@ -60,24 +66,25 @@ namespace Storyteller.RDBMS
 
     }
 
-    public class CheckResultExecution<T> : ICommandExecution
+    public class NoRowsGrammar : FactGrammar
     {
-        public string Key { get; }
-
-        public CheckResultExecution(string key = "result")
+        public static Func<ISpecContext, bool> Test(string dbObject)
         {
-            Key = key;
+            return c =>
+            {
+                var runner = c.State.Retrieve<CommandRunner>();
+
+
+                var rowCount = runner.RowCount(dbObject);
+                StoryTellerAssert.Fail(rowCount > 0, $"Found {rowCount} rows, but expected 0");
+
+                return rowCount == 0;
+            };
         }
 
-        public Cell[] ToCells(CellHandling cellHandling, Fixture fixture)
+        public NoRowsGrammar(string title, string dbObject) : base(title, Test(dbObject))
         {
-            return new Cell[]{new Cell(cellHandling, Key, typeof(T)), };
-        }
 
-        public void Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context)
-        {
-            // Check the actual here.
-            throw new NotImplementedException();
         }
     }
 }

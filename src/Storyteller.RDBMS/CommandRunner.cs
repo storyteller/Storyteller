@@ -5,22 +5,30 @@ using Baseline;
 
 namespace Storyteller.RDBMS
 {
-
     // How to get this one in?
     public class CommandRunner : IDisposable
     {
+
+
         public ISqlDialect Dialect { get; }
         private readonly IDbConnection _connection;
 
-        public CommandRunner(ISqlDialect dialect)
+        public CommandRunner(string connectionString, ISqlDialect dialect)
         {
             Dialect = dialect;
             _connection = dialect.NewConnection();
+            _connection.ConnectionString = connectionString;
+            _connection.Open();
         }
 
         public IDbCommand NewCommand()
         {
             return _connection.CreateCommand();
+        }
+
+        public long RowCount(string dbObject)
+        {
+            return Dialect.RowCount(_connection, dbObject);
         }
 
         public T Execute<T>(Func<IDbConnection, T> execution)
@@ -53,20 +61,22 @@ namespace Storyteller.RDBMS
 
         public void Dispose()
         {
+            _connection.Dispose();
         }
 
+        public void Execute(string sql)
+        {
+            using (var cmd = NewCommand())
+            {
+                cmd.CommandText = sql;
 
-    // resthrow new NotImplementedException();
+                cmd.ExecuteNonQuery();
+            }
+
         }
     }
-
-    // Going to be used strictly for running a sql command with no
-    // results or a return value
-
-
-    // Need something that can read a method signature and decide how to
-
-
-
-
 }
+
+
+
+

@@ -33,5 +33,27 @@ namespace StoryTeller.Testing
             ShouldBeTestExtensions.ShouldBe(state.Retrieve<bool>("red"), true);
             ShouldBeTestExtensions.ShouldBe(state.Retrieve<bool>("green"), false);
         }
+
+        [Fact]
+        public void try_retrieve_by_type()
+        {
+            var state = new State();
+
+            state.TryRetrieve<int>().ShouldBe(0);
+
+            state.Store(55);
+
+            state.TryRetrieve<int>().ShouldBe(55);
+        }
+
+        [Fact]
+        public void try_retrieve_by_type_and_key()
+        {
+            var state = new State();
+            state.Store("key1", "value1");
+
+            state.TryRetrieve<string>("key1").ShouldBe("value1");
+            state.TryRetrieve<string>("key2").ShouldBeNull();
+        }
     }
 }

@@ -5,6 +5,47 @@ using Baseline;
 
 namespace StoryTeller.Engine
 {
+    public abstract class SimpleSystem : ISystem
+    {
+        public virtual void Dispose()
+        {
+        }
+
+        public CellHandling Start()
+        {
+            var handling = CellHandling.Basic();
+            configureCellHandling(handling);
+
+            return handling;
+        }
+
+        protected virtual void configureCellHandling(CellHandling handling)
+        {
+            // Nothing
+        }
+
+        public IExecutionContext CreateContext()
+        {
+            return new SimpleExecutionContext(this);
+        }
+
+        public virtual void BeforeEach(SimpleExecutionContext execution, ISpecContext context)
+        {
+            // Nothing
+        }
+
+        public virtual void AfterEach(ISpecContext context)
+        {
+            // Nothing
+        }
+
+        public virtual Task Warmup()
+        {
+            return Task.CompletedTask;
+        }
+    }
+
+
     public class NulloSystem : ISystem
     {
 
@@ -42,6 +83,7 @@ namespace StoryTeller.Engine
 
     public class SimpleExecutionContext : IExecutionContext
     {
+        private readonly SimpleSystem _system;
         private readonly LightweightCache<Type, object> _services;
 
         public SimpleExecutionContext()
@@ -59,6 +101,11 @@ namespace StoryTeller.Engine
             _services = services;
         }
 
+        public SimpleExecutionContext(SimpleSystem system)
+        {
+            _system = system;
+        }
+
         void IDisposable.Dispose()
         {
         }
@@ -70,12 +117,12 @@ namespace StoryTeller.Engine
 
         public void AfterExecution(ISpecContext context)
         {
-            // Nothing
+            _system?.AfterEach(context);
         }
 
         public void BeforeExecution(ISpecContext context)
         {
-            // Nothing
+            _system?.BeforeEach(this, context);
         }
     }
 }
