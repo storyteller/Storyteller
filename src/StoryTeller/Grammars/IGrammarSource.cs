@@ -6,7 +6,7 @@ namespace StoryTeller.Grammars
 {
     public interface IGrammarSource
     {
-        IGrammar ToGrammar(Fixture fixture);
+        IGrammar ToGrammar(MethodInfo method, Fixture fixture);
     }
 
     public class GrammarSourceBuilder : IGrammarBuilder
@@ -24,7 +24,7 @@ namespace StoryTeller.Grammars
 
             var source = method.Invoke(fixture, parameters).As<IGrammarSource>();
 
-            return source.ToGrammar(fixture);
+            return source.ToGrammar(method, fixture);
         }
 
         public interface IDefault

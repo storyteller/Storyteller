@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -11,7 +12,7 @@ using StoryTeller.Results;
 
 namespace Storyteller.RDBMS
 {
-    public class DbCommandGrammar : LineGrammar, MethodAwareGrammar
+    public class DbCommandGrammar : LineGrammar
     {
         public static ParameterCell[] ParseCells(MethodInfo method, CellHandling cellHandling, Fixture fixture)
         {
@@ -25,18 +26,25 @@ namespace Storyteller.RDBMS
 
                     var parameter = cell.result ? ParameterDirection.Output : ParameterDirection.Input;
                     return dialect.ToParameterCell(cell, parameter);
-                }).ToArray();
+                })
+                .ToArray();
         }
 
         public ParameterCell[] Parameters { get; private set; }
         private readonly CommandType _commandType;
         private readonly string _sql;
-        private MethodInfo _method;
+        private readonly DatabaseFixture _fixture;
+        private readonly MethodInfo _method;
+        private string _format;
 
-        public DbCommandGrammar(CommandType commandType, string sql)
+
+        public DbCommandGrammar(DatabaseFixture fixture, MethodInfo method, CommandType commandType, string sql)
         {
+            _fixture = fixture;
+            _method = method;
             _commandType = commandType;
             _sql = sql;
+
         }
 
         public ICommandExecution Execution { get; set; } = new NonQueryExecution();
@@ -44,7 +52,8 @@ namespace Storyteller.RDBMS
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
-            var runner = context.Service<CommandRunner>();
+            var runner = _fixture.Runner;
+
             var cmd = runner.NewCommand();
 
             cmd.CommandText = _sql;
@@ -55,27 +64,51 @@ namespace Storyteller.RDBMS
                 parameter.AddParameter(cmd, values);
             }
 
-            Execution.Execute(cmd, runner, values, context);
+            var returnResult = Execution.Execute(cmd, runner, values, context);
+            if (returnResult != null) yield return returnResult;
 
-            return Parameters.Where(x => x.IsChecked()).Select(x => x.ToResult(values, cmd));
+            foreach (var cell in Parameters.Where(x => x.IsChecked()))
+            {
+                yield return cell.ToResult(values, cmd);
+            }
         }
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             Parameters = ParseCells(_method, cellHandling, fixture);
-            return Parameters.Select(x => x.Cell);
+
+            foreach (var parameter in Parameters)
+            {
+                yield return parameter.Cell;
+            }
+
+            foreach (var cell in Execution.ToCells(cellHandling, fixture))
+            {
+                yield return cell;
+            }
         }
 
         // TODO -- have some way to short circuit the format/title/heading
         protected override string format()
         {
-            // Maybe have this done as part of the
+            if (_format.IsNotEmpty()) return _format;
+
+            // Maybe have this done as part of the dialect
             return _sql;
         }
 
-        public void Apply(MethodInfo method, Fixture fixture)
+
+        public DbCommandGrammar Format(string format)
         {
-            _method = method;
+            _format = format;
+            return this;
         }
-    }
+
+        public DbCommandGrammar CheckResult<T>(string cell = "result")
+        {
+            Execution = new CheckResultExecution<T>();
+
+            return this;
+        }
+    };
 }

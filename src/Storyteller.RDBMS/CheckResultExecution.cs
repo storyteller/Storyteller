@@ -3,11 +3,13 @@ using System.Data;
 using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace Storyteller.RDBMS
 {
     public class CheckResultExecution<T> : ICommandExecution
     {
+        private Cell _result;
         public string Key { get; }
 
         public CheckResultExecution(string key = "result")
@@ -17,13 +19,16 @@ namespace Storyteller.RDBMS
 
         public Cell[] ToCells(CellHandling cellHandling, Fixture fixture)
         {
-            return new Cell[]{new Cell(cellHandling, Key, typeof(T)), };
+            _result = new Cell(cellHandling, Key, typeof(T));
+
+            return new Cell[]{_result};
         }
 
-        public void Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context)
+        public CellResult Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context)
         {
-            // Check the actual here.
-            throw new NotImplementedException();
+            var result = runner.Execute<T>(command);
+
+            return _result.Check(values, result);
         }
     }
 }

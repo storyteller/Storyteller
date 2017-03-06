@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Reflection;
+using Baseline;
+using Storyteller.RDBMS.Sets;
 using StoryTeller;
 using StoryTeller.Grammars;
 
@@ -7,7 +11,7 @@ namespace Storyteller.RDBMS
 {
 
 
-    public class DatabaseFixture : Fixture
+    public partial class DatabaseFixture : Fixture
     {
         public ISqlDialect Dialect { get; }
 
@@ -31,60 +35,62 @@ namespace Storyteller.RDBMS
             return new NoRowsGrammar(title, dbObject);
         }
 
-        public CommandExpression Sproc(string function)
+        protected DatabaseOperationExpression Sql(string sql)
         {
-            return new CommandExpression(CommandType.StoredProcedure, function);
+            return new DatabaseOperationExpression(this, sql, CommandType.Text);
         }
 
-        public CommandExpression Sql(string sql)
+        protected DatabaseOperationExpression Sproc(string command)
         {
-            return new CommandExpression(CommandType.Text, sql);
+            return new DatabaseOperationExpression(this, command, CommandType.StoredProcedure);
+        }
+        
+        protected RowVerification VerifyRows(string sql)
+        {
+            return new RowVerification(sql);
         }
 
-        public class CommandExpression
+        public class DatabaseOperationExpression : IGrammarSource
         {
-            private readonly CommandType _commandType;
+            private DatabaseFixture _parent;
             private readonly string _sql;
+            private readonly CommandType _commandType;
 
-            public CommandExpression(CommandType commandType, string sql)
+            private readonly IList<Action<DbCommandGrammar>> _configurations
+                = new List<Action<DbCommandGrammar>>();
+
+            public DatabaseOperationExpression(DatabaseFixture parent, string sql, CommandType commandType)
             {
-                _commandType = commandType;
+                _parent = parent;
                 _sql = sql;
+                _commandType = commandType;
             }
 
-            public IGrammar Execute()
+            public DatabaseOperationExpression CheckResult<T>(string cell = "result")
             {
-                return new DbCommandGrammar(_commandType, _sql);
+                _configurations.Add(g => g.CheckResult<T>(cell));
+                return this;
             }
 
-            public IGrammar CheckReturn<T>(string cell = "result")
+            public DatabaseOperationExpression Format(string format)
             {
-                throw new NotImplementedException();
+                _configurations.Add(g => g.Format(format));
+                return this;
             }
-        }
 
-
-    }
-
-    public class NoRowsGrammar : FactGrammar
-    {
-        public static Func<ISpecContext, bool> Test(string dbObject)
-        {
-            return c =>
+            IGrammar IGrammarSource.ToGrammar(MethodInfo method, Fixture fixture)
             {
-                var runner = c.State.Retrieve<CommandRunner>();
+                // TODO -- will get fancier later I'm sure.
+                var grammar = new DbCommandGrammar(fixture.As<DatabaseFixture>(), method, _commandType, _sql);
+                foreach (var configuration in _configurations)
+                {
+                    configuration(grammar);
+                }
 
-
-                var rowCount = runner.RowCount(dbObject);
-                StoryTellerAssert.Fail(rowCount > 0, $"Found {rowCount} rows, but expected 0");
-
-                return rowCount == 0;
-            };
-        }
-
-        public NoRowsGrammar(string title, string dbObject) : base(title, Test(dbObject))
-        {
-
+                return grammar;
+            }
         }
     }
+    
+    
 }

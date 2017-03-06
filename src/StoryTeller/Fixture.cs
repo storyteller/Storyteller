@@ -131,6 +131,7 @@ namespace StoryTeller
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                 .Where(methodFromThis)
                 .Where(x => !x.HasAttribute<HiddenAttribute>())
+                .Where(x => !x.IsSpecialName)
                 .Each(method =>
                 {
                     var grammarKey = method.GetKey();

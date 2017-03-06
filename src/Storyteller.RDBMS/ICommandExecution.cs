@@ -2,12 +2,13 @@
 using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace Storyteller.RDBMS
 {
     public interface ICommandExecution
     {
         Cell[] ToCells(CellHandling cellHandling, Fixture fixture);
-        void Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context);
+        CellResult Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context);
     }
 }

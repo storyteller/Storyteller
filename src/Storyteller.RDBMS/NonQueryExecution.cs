@@ -2,6 +2,7 @@
 using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.Results;
 
 namespace Storyteller.RDBMS
 {
@@ -12,9 +13,10 @@ namespace Storyteller.RDBMS
             return new Cell[0];
         }
 
-        public void Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context)
+        public CellResult Execute(IDbCommand command, CommandRunner runner, StepValues values, ISpecContext context)
         {
             runner.Execute(command);
+            return null;
         }
     }
 }

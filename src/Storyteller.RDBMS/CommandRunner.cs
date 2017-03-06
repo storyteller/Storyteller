@@ -21,9 +21,9 @@ namespace Storyteller.RDBMS
             _connection.Open();
         }
 
-        public IDbCommand NewCommand()
+        public DbCommand NewCommand()
         {
-            return _connection.CreateCommand();
+            return _connection.CreateCommand().As<DbCommand>();
         }
 
         public long RowCount(string dbObject)
