@@ -52,5 +52,10 @@ namespace Storyteller.RDBMS
 
             return Cell.Check(values, actual);
         }
+
+        public string FormattedName()
+        {
+            return "{" + Cell.Key + "}";
+        }
     }
 }

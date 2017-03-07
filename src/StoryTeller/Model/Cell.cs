@@ -355,6 +355,11 @@ namespace StoryTeller.Model
         {
             return result ? $"out string {Key}" : $"string {Key}";
         }
+
+        public string ShouldBeFormat()
+        {
+            return $", '{Key}' should be {{{Key}}}";
+        }
     }
 
     // Tested through integration tests in the SetVerificationGrammar

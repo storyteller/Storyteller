@@ -25,6 +25,7 @@ namespace Storyteller.RDBMS.Sets
         private string _title;
         private string _sql;
         private CommandType _commandType = CommandType.Text;
+        private bool _ordered;
 
         public RowVerification AddField<T>(string name, int ordinal = -1)
         {
@@ -44,6 +45,8 @@ namespace Storyteller.RDBMS.Sets
         {
             var databaseFixture = fixture.As<DatabaseFixture>();
 
+            SetVerificationGrammar grammar = null;
+
             if (method.GetParameters().Any())
             {
                 throw new NotImplementedException("Not dealing with input parameters yet");
@@ -51,8 +54,15 @@ namespace Storyteller.RDBMS.Sets
             else
             {
                 var comparison = new RowFieldComparison(databaseFixture, _fields.ToArray(), toCommandBuilder());
-                return new SetVerificationGrammar(_title, "rows", comparison);
+                grammar = new SetVerificationGrammar(_title, "rows", comparison);
             }
+
+            if (_ordered)
+            {
+                grammar.Ordered();
+            }
+
+            return grammar;
         }
 
         private IDbCommandBuilder toCommandBuilder()
@@ -64,6 +74,12 @@ namespace Storyteller.RDBMS.Sets
         public RowVerification Titled(string title)
         {
             _title = title;
+            return this;
+        }
+
+        public RowVerification Ordered()
+        {
+            _ordered = true;
             return this;
         }
     }

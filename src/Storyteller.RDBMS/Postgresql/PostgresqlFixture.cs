@@ -1,6 +1,6 @@
 ﻿namespace Storyteller.RDBMS.Postgresql
 {
-    public class PostgresqlFixture : DatabaseFixture
+    public abstract class PostgresqlFixture : DatabaseFixture
     {
         public PostgresqlFixture() : base(new PostgresDialect())
         {

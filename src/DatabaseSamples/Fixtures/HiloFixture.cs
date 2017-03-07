@@ -3,6 +3,7 @@ using Storyteller.RDBMS.Postgresql;
 using Storyteller.RDBMS.Sets;
 using StoryTeller;
 using StoryTeller.Grammars;
+using StoryTeller.Grammars.Tables;
 
 namespace DatabaseSamples.Fixtures
 {
@@ -24,7 +25,11 @@ namespace DatabaseSamples.Fixtures
             return NoRowsIn("There should be no rows in the mt_hilo table", "public.mt_hilo");
         }
 
-
+        [ExposeAsTable("Insert rows into mt_hilo")]
+        public IGrammarSource InsertRows(string entity, int hiValue)
+        {
+            return Sql("insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)");
+        }
 
         public RowVerification CheckTheRows()
         {
@@ -35,10 +40,25 @@ namespace DatabaseSamples.Fixtures
 
         }
 
+        public RowVerification CheckTheRowsOrdered()
+        {
+            return VerifyRows("select entity_name, hi_value from mt_hilo order by entity_name")
+                .Titled("The rows in mt_hilo in order should be")
+                .Ordered()
+                .AddField<string>("entity_name")
+                .AddField<long>("hi_value");
+        }
+
         public IGrammarSource GetNextHi(string entity)
         {
             return Sproc("mt_get_next_hi")
                 .Format("Get the next Hi value for entity {entity} should be {result}")
+                .CheckResult<int>();
+        }
+
+        public IGrammarSource UglyGetNextHi(string entity)
+        {
+            return Sproc("mt_get_next_hi")
                 .CheckResult<int>();
         }
 

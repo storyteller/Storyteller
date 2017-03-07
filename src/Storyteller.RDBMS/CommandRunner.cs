@@ -31,11 +31,6 @@ namespace Storyteller.RDBMS
             return Dialect.RowCount(_connection, dbObject);
         }
 
-        public T Execute<T>(Func<IDbConnection, T> execution)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Execute(IDbCommand command)
         {
             // TODO -- does this need a TX too?

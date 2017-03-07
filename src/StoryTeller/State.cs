@@ -76,6 +76,13 @@ namespace StoryTeller
 
         void IDisposable.Dispose()
         {
+            _byType.Each(x => (x as IDisposable)?.Dispose());
+
+            _byName.Each(cache =>
+            {
+                cache.Each(x => (x as IDisposable)?.Dispose());
+            });
+
             _byName.ClearAll();
             _byType.ClearAll();
         }

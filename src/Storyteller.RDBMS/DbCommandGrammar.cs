@@ -93,6 +93,17 @@ namespace Storyteller.RDBMS
         {
             if (_format.IsNotEmpty()) return _format;
 
+            if (_commandType == CommandType.StoredProcedure)
+            {
+                var format = $"{_sql}({Parameters.Select(x => x.FormattedName()).Join(", ")})";
+                var missing = Cells.Where(x => Parameters.All(p => p.Cell != x)).ToArray();
+
+                if (missing.Any())
+                {
+                    format += missing.Select(x => x.ShouldBeFormat()).Join(", ");
+                }
+            }
+
             // Maybe have this done as part of the dialect
             return _sql;
         }

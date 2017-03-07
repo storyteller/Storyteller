@@ -39,6 +39,8 @@ namespace StoryTeller.Grammars.Lines
             };
         }
 
+        public Cell[] Cells => _cells;
+
         public string Key { get; set; }
 
         public bool IsHidden { get; set; }
