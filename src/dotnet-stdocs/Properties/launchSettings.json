@@ -2,27 +2,32 @@
   "profiles": {
     "StorytellerDocGen": {
       "commandName": "Project",
-      "commandLineArgs": "doc-run",
+      "commandLineArgs": "run",
       "workingDirectory": "C:\\code\\storyteller"
     },
     "Run FubuMVC Docs": {
       "commandName": "Project",
-      "commandLineArgs": "doc-run --version 3.0 --code src/Examples",
+      "commandLineArgs": "run --version 3.0 --code src/Examples",
       "workingDirectory": "C:\\code\\fubumvc"
     },
     "Publish FubuMVC Docs": {
       "commandName": "Project",
-      "commandLineArgs": "doc-export c:\\code\\fubumvc.github.io Website --version 3.0 --code src/Examples",
+      "commandLineArgs": "export c:\\code\\fubumvc.github.io Website --version 3.0 --code src/Examples",
       "workingDirectory": "C:\\code\\fubumvc"
     },
 	"Run Marten Docs": {
       "commandName": "Project",
-      "commandLineArgs": "doc-run --version 1.2",
+      "commandLineArgs": "run --version 1.2",
       "workingDirectory": "C:\\code\\marten"
+    },
+	"Run StructureMap Docs": {
+      "commandName": "Project",
+      "commandLineArgs": "run --version 4.4.3",
+      "workingDirectory": "C:\\code\\structuremap"
     },
     "Publish Marten Docs": {
       "commandName": "Project",
-      "commandLineArgs": "doc-export c:\\code\\marten-docs ProjectWebsite --version 1.2 --project marten",
+      "commandLineArgs": "export c:\\code\\marten-docs ProjectWebsite --version 1.2 --project marten",
       "workingDirectory": "C:\\code\\marten"
     }
   }

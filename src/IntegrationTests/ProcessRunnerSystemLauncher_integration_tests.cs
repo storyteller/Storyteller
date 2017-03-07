@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Baseline;
+using Baseline.Dates;
 using IntegrationTests.CommandLine;
 using Shouldly;
 using StoryTeller;

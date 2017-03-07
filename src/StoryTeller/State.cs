@@ -1,10 +1,24 @@
 using System;
 using System.Linq;
 using Baseline;
+using StoryTeller.Results;
 
 
 namespace StoryTeller
 {
+    public class MissingStateException : StorytellerFailureException
+    {
+        public MissingStateException(Type type) : base($"No known State value for type *{type.FullName}*")
+        {
+        }
+
+        public MissingStateException(Type type, string key) : base($"No known State value for type *{type.FullName}* and key *{key}*")
+        {
+        }
+
+
+    }
+
     // SAMPLE: IState
     public interface IState
     {
@@ -22,8 +36,16 @@ namespace StoryTeller
 
     public class State : IDisposable, IState
     {
-        private readonly LightweightCache<Type, object> _byType = new LightweightCache<Type, object>();
-        private readonly LightweightCache<Type, LightweightCache<string, object>> _byName = new LightweightCache<Type, LightweightCache<string, object>>(t => new LightweightCache<string, object>()); 
+        private readonly LightweightCache<Type, object> _byType = new LightweightCache<Type, object>(type =>
+        {
+            throw new MissingStateException(type);
+        });
+        
+        private readonly LightweightCache<Type, LightweightCache<string, object>> _byName = new LightweightCache<Type, LightweightCache<string, object>>(t => new LightweightCache<string, object>(
+            key =>
+            {
+                throw new MissingStateException(t, key);
+            })); 
 
         public void Store<T>(T value)
         {

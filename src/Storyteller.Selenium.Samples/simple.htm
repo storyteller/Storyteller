@@ -1,0 +1,24 @@
+﻿<html>
+<head>
+    <title>Sample HTML File for Selenium Targeting</title>
+</head>
+<body>
+<button id="button1" onclick="showDiv1()">Show</button>
+<button id="button2" onclick="hideDiv1()">Hide</button>
+<input type="text" id="text1"/>
+
+<div id="div1" style="display: none">Some text</div>
+
+<script language="javascript">
+    function showDiv1() {
+        document.getElementById("div1").style = "display:block";
+    }
+
+    function hideDiv1() {
+        document.getElementById("div1").style = "display:none";
+    }
+
+</script>
+</body>
+
+</html>

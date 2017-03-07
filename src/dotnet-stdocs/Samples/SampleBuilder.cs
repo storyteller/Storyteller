@@ -62,10 +62,7 @@ namespace StorytellerDocGen.Samples
 
         public static IEnumerable<string> FindFiles(string directory, string ext)
         {
-            var children =
-                Directory.EnumerateDirectories(directory, "*", SearchOption.AllDirectories)
-                    .Where(x => !x.Contains("obj") && !x.Contains("bin") && !x.Contains("node_modules"));
-            return children.SelectMany(x => Directory.EnumerateFiles(x, ext));
+            return new FileSystem().FindFiles(directory, FileSet.Deep("*." + ext));
         }
 
         private Task readFiles(IEnumerable<string> files)
@@ -94,6 +91,7 @@ namespace StorytellerDocGen.Samples
         {
             var reader = new SampleReader(new FileReference(file), scanner, _cache);
             reader.Start();
+
             return reader.FoundSamples;
         }
 
