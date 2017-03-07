@@ -8,7 +8,7 @@ namespace Storyteller.RDBMS
     // How to get this one in?
     public class CommandRunner : IDisposable
     {
-
+        private DbTransaction _activeTransaction;
 
         public ISqlDialect Dialect { get; }
         private readonly IDbConnection _connection;
@@ -19,6 +19,11 @@ namespace Storyteller.RDBMS
             _connection = dialect.NewConnection();
             _connection.ConnectionString = connectionString;
             _connection.Open();
+        }
+
+        public void StartTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            _activeTransaction = _connection.BeginTransaction(isolationLevel).As<DbTransaction>();
         }
 
         public DbCommand NewCommand()
@@ -33,29 +38,49 @@ namespace Storyteller.RDBMS
 
         public void Execute(IDbCommand command)
         {
-            // TODO -- does this need a TX too?
+            if (_activeTransaction != null) command.Transaction = _activeTransaction;
             command.Connection = _connection;
             command.ExecuteNonQuery();
         }
 
         public T Execute<T>(IDbCommand command)
         {
-            // TODO -- does this need a TX too?
+            if (_activeTransaction != null) command.Transaction = _activeTransaction;
             command.Connection = _connection;
             return command.ExecuteScalar().As<T>();
         }
 
         public DbDataReader ExecuteReader(IDbCommand command)
         {
-            // TODO -- does this need a TX too?
+            if (_activeTransaction != null) command.Transaction = _activeTransaction;
             command.Connection = _connection;
             return command.ExecuteReader().As<DbDataReader>();
         }
 
+        public bool IsInTransaction()
+        {
+            return _activeTransaction != null;
+        }
 
+        public void Rollback()
+        {
+            _activeTransaction?.Rollback();
+            _activeTransaction = null;
+        }
+
+        public void Commit()
+        {
+            _activeTransaction?.Commit();
+            _activeTransaction = null;
+        }
 
         public void Dispose()
         {
+            if (_activeTransaction != null)
+            {
+                _activeTransaction.Rollback();
+                _activeTransaction.Dispose();
+            }
             _connection.Dispose();
         }
 

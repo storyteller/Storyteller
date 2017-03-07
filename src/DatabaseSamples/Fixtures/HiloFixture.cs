@@ -17,7 +17,15 @@ namespace DatabaseSamples.Fixtures
         public override void SetUp()
         {
             WriteTrace("Deleting from mt_hilo");
+
+            Runner.StartTransaction();
+
             Runner.Execute("delete from mt_hilo");
+        }
+
+        public override void TearDown()
+        {
+            Runner.Rollback();
         }
 
         public IGrammar NoRows()
@@ -31,7 +39,7 @@ namespace DatabaseSamples.Fixtures
             return Sql("insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)");
         }
 
-        public IGrammarSource UglyInsertRow()
+        public IGrammarSource UglyInsertRow(string entity, int hiValue)
         {
             return Sql("insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)");
         }
