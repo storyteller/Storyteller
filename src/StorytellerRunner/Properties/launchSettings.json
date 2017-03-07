@@ -5,6 +5,11 @@
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
+	"Open FubuMVC Specs": {
+      "commandName": "Project",
+      "commandLineArgs": "open src/Specifications",
+      "workingDirectory": "C:\\code\\fubumvc"
+    },
     "Open Documentation Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/Samples",

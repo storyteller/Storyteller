@@ -234,7 +234,13 @@ namespace StorytellerDocGen
                 var sampleBuilder = _container.GetInstance<ISampleBuilder>();
                 var tasks = _settings.SampleDirectories.Select(sampleBuilder.ScanFolder).ToList();
                 tasks.Add(sampleBuilder.ScanFolder(_settings.Root));
-            }).ContinueWith(t => Task.WhenAll(t)).Unwrap();
+            }).ContinueWith(t => Task.WhenAll(t)).Unwrap().ContinueWith(t =>
+            {
+                _samples.All().OrderBy(x => x.File).GroupBy(x => x.File).Each(group =>
+                {
+                    Console.WriteLine($"{group.Key}: {group.Select(x => x.Name).Join(", ")}");
+                });
+            });
         }
 
         public IEnumerable<Topic> AllTopics()
