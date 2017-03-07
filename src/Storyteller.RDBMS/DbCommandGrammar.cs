@@ -102,6 +102,19 @@ namespace Storyteller.RDBMS
                 {
                     format += missing.Select(x => x.ShouldBeFormat()).Join(", ");
                 }
+
+                return format;
+            }
+            else
+            {
+                var format = _sql;
+
+                foreach (var parameter in Parameters)
+                {
+                    format = parameter.ReplaceWithCellInput(format);
+                }
+
+                return format;
             }
 
             // Maybe have this done as part of the dialect

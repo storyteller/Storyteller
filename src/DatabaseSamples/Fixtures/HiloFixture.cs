@@ -31,6 +31,11 @@ namespace DatabaseSamples.Fixtures
             return Sql("insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)");
         }
 
+        public IGrammarSource UglyInsertRow()
+        {
+            return Sql("insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)");
+        }
+
         public RowVerification CheckTheRows()
         {
             return VerifyRows("select entity_name, hi_value from mt_hilo")

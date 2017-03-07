@@ -57,5 +57,10 @@ namespace Storyteller.RDBMS
         {
             return "{" + Cell.Key + "}";
         }
+
+        public string ReplaceWithCellInput(string format)
+        {
+            return format.Replace(":" + Cell.Key, FormattedName());
+        }
     }
 }

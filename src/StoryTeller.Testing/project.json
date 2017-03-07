@@ -7,7 +7,7 @@
     "dotnet-test-xunit": "2.2.0-preview2-build1029",
     "StoryTeller": { "target": "project" },
     "StorytellerRunner": { "target": "project" },
-    "StructureMap": "4.4.2", 
+    "StructureMap": "4.4.2",
     "Specifications": { "target": "project" },
     "Samples": { "target": "project" },
     "MultipleSystems": { "target": "project" },
