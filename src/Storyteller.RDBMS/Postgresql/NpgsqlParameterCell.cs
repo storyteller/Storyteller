@@ -23,5 +23,10 @@ namespace Storyteller.RDBMS.Postgresql
                 param.As<NpgsqlParameter>().NpgsqlDbType = NpgsqlDbType.Value;
             }
         }
+
+        public override string ReplaceWithCellInput(string format)
+        {
+            return format.Replace(":" + Cell.Key, FormattedName());
+        }
     }
 }
