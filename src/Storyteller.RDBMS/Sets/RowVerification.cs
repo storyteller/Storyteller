@@ -7,12 +7,11 @@ using Baseline;
 using Storyteller.RDBMS.CommandBuilders;
 using StoryTeller;
 using StoryTeller.Grammars;
+using StoryTeller.Grammars.Paragraphs;
 using StoryTeller.Grammars.Sets;
 
 namespace Storyteller.RDBMS.Sets
 {
-    // TODO -- as sproc
-    // TODO -- with parameters too
     public class RowVerification : IGrammarSource
     {
         public RowVerification(string sql)
@@ -26,6 +25,7 @@ namespace Storyteller.RDBMS.Sets
         private string _sql;
         private CommandType _commandType = CommandType.Text;
         private bool _ordered;
+        private string _fetchFormat;
 
         public RowVerification AddField<T>(string name, int ordinal = -1)
         {
@@ -47,28 +47,53 @@ namespace Storyteller.RDBMS.Sets
 
             SetVerificationGrammar grammar = null;
 
-            if (method.GetParameters().Any())
-            {
-                throw new NotImplementedException("Not dealing with input parameters yet");
-            }
-            else
-            {
-                var comparison = new RowFieldComparison(databaseFixture, _fields.ToArray(), toCommandBuilder());
-                grammar = new SetVerificationGrammar(_title, "rows", comparison);
-            }
+            var comparison = new RowFieldComparison(databaseFixture, _fields.ToArray(), toCommandBuilder(method));
+            grammar = new SetVerificationGrammar(_title, "rows", comparison);
 
             if (_ordered)
             {
                 grammar.Ordered();
             }
 
+            if (method.GetParameters().Any())
+            {
+                var line = new DbCommandGrammar(databaseFixture, method, _commandType, _sql);
+                if (_fetchFormat.IsNotEmpty())
+                {
+                    line.Format(_fetchFormat);
+                }
+
+                line.Execution = new DbSetExecution(new BufferedReader(_fields));
+
+                var paragraph = new ParagraphGrammar(_title);
+
+                paragraph.Children.Add(line);
+                paragraph.Children.Add(grammar);
+
+                return paragraph;
+            }
+
+
+
+
             return grammar;
         }
 
-        private IDbCommandBuilder toCommandBuilder()
+        private IDbCommandBuilder toCommandBuilder(MethodInfo method)
         {
-            // TODO -- will get more complicated later
+            if (method.GetParameters().Any())
+            {
+                return null;
+            }
+
             return new SqlCommandBuilder(_sql);
+        }
+
+        public RowVerification FetchFormat(string format)
+        {
+            _fetchFormat = format;
+
+            return this;
         }
 
         public RowVerification Titled(string title)

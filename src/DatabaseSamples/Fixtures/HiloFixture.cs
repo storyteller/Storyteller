@@ -62,6 +62,14 @@ namespace DatabaseSamples.Fixtures
                 .AddField<long>("hi_value");
         }
 
+        public RowVerification HigherThan(int page)
+        {
+            return VerifyRows("select entity_name from mt_hilo where hi_value > :page")
+                .Titled("Entities past a certain page threshold")
+                .FetchFormat("find entities where hi_value > {page}")
+                .AddField<string>("entity_name");
+        }
+
         public IGrammarSource GetNextHi(string entity)
         {
             return Sproc("mt_get_next_hi")
