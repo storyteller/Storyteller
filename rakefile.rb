@@ -83,12 +83,12 @@ desc 'Run the unit tests'
 task :test => [:compile] do
 	Dir.mkdir RESULTS_DIR
 
-	sh "dotnet test src/Storyteller.Testing"
-	sh "dotnet test src/StorytellerDocGen.Testing"
+	sh "dotnet test src/StoryTeller.Testing/StoryTeller.Testing.csproj"
+	sh "dotnet test src/StorytellerDocGen.Testing/StorytellerDocGen.Testing.csproj"
     #sh "dotnet test src/IntegrationTests --framework net46"
 	#sh "dotnet test src/IntegrationTests --framework netcoreapp1.0"
 
-    sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Specifications --validate"
+    sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/Specifications --validate"
 	
 end
 
