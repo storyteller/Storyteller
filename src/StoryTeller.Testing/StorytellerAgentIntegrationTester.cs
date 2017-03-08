@@ -19,7 +19,7 @@ namespace StoryTeller.Testing
         {
             var project = new Project
             {
-                ProjectPath = TestingContext.FindParallelDirectory("Storyteller.Gallery")
+                ProjectPath = TestingContext.FindParallelDirectory("StoryTeller.Gallery")
             };
 
             var system = new NulloSystem();
@@ -37,7 +37,7 @@ namespace StoryTeller.Testing
         {
             var project = new Project
             {
-                ProjectPath = TestingContext.FindParallelDirectory("Storyteller.Gallery"),
+                ProjectPath = TestingContext.FindParallelDirectory("StoryTeller.Gallery"),
                 Mode = EngineMode.ExportOnly
             };
 

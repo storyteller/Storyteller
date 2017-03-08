@@ -21,7 +21,7 @@ namespace IntegrationTests.CommandLine
         {
             TestUtility.CleanUpHangingProcesses();
 
-            var directory = TestingContext.FindParallelDirectory("Storyteller.Samples");
+            var directory = TestingContext.FindParallelDirectory("StoryTeller.Samples");
 
 
             var project = Project.LoadForFolder(directory);

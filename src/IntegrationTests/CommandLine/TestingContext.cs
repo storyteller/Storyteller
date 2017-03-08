@@ -31,7 +31,7 @@ namespace IntegrationTests.CommandLine
 
         private static readonly Lazy<Suite> _hierarchy = new Lazy<Suite>(() => HierarchyLoader.ReadHierarchy(SpecFolder));
 
-        public static string SpecFolder = FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+        public static string SpecFolder = FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs");
         private static readonly Lazy<FixtureLibrary> _library;
 
 

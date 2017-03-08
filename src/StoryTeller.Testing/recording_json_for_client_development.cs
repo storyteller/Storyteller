@@ -15,7 +15,7 @@ namespace StoryTeller.Testing
 {
     public class recording_json_for_client_development
     {
-        private readonly string samplesFolder = TestingContext.FindParallelDirectory("Storyteller.Samples");
+        private readonly string samplesFolder = TestingContext.FindParallelDirectory("StoryTeller.Samples");
 
         //[Fact]
         public void record_specification_json()

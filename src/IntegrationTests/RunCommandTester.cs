@@ -10,7 +10,7 @@ namespace IntegrationTests
     
     public class RunCommandTester
     {
-        public readonly string Path = TestingContext.FindParallelDirectory("Storyteller.Samples");
+        public readonly string Path = TestingContext.FindParallelDirectory("StoryTeller.Samples");
 
         [Fact]
         public void write_csv_results()

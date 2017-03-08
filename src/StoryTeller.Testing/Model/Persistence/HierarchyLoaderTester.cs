@@ -17,7 +17,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_a_spec_node()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.md");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs", "General", "Check properties.md");
 
             var spec = MarkdownReader.ReadFromFile(path);
 
@@ -33,7 +33,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void can_read_max_retries()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs", "General", "Check properties.md");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs", "General", "Check properties.md");
 
             var spec = MarkdownReader.ReadFromFile(path);
 
@@ -44,7 +44,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void read_an_entire_suite()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);
@@ -76,7 +76,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void convert_the_top_suite_to_a_hierarchy_gets_the_suites()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
@@ -92,7 +92,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void convert_the_top_suite_to_a_hierarchy_gets_the_specs()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path).ToHierarchy();
@@ -105,7 +105,7 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void pretty_print_for_sample_data()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs");
 
 
             var hierarchy = HierarchyLoader.ReadHierarchy(path);

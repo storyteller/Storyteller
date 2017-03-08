@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Engine
 
         public SpecExecutionRequestTester()
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples")
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples")
             .AppendPath("Specs", "General", "Check properties.md");
 
             theSpec = MarkdownReader.ReadFromFile(path);

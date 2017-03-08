@@ -15,7 +15,7 @@ namespace StoryTeller.Testing.ST
 {
     public class fixture_override_usage_and_acceptance_tests : IDisposable
     {
-        private readonly string folder = TestingContext.FindParallelDirectory("Storyteller.Samples");
+        private readonly string folder = TestingContext.FindParallelDirectory("StoryTeller.Samples");
         private readonly LocalEngine theEngine = new LocalEngine();
         private readonly StubWebApp theWebApp = new StubWebApp();
         private ApplicationController _controller;

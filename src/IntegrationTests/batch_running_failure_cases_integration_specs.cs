@@ -19,7 +19,7 @@ namespace IntegrationTests
 
         private BatchRunResponse execute(Action<RunInput> configure)
         {
-            var path = TestingContext.FindParallelDirectory("Storyteller.Samples");
+            var path = TestingContext.FindParallelDirectory("StoryTeller.Samples");
 
 
             var input = new RunInput

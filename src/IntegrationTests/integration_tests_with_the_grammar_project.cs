@@ -16,7 +16,7 @@ namespace IntegrationTests
     
     public class integration_tests_with_the_grammar_project : SpecRunningContext
     {
-        private readonly string _folder = TestingContext.FindParallelDirectory("Storyteller.Samples").AppendPath("Specs");
+        private readonly string _folder = TestingContext.FindParallelDirectory("StoryTeller.Samples").AppendPath("Specs");
 
         private Suite _hierarchy;
         private Specification[] _allSpecs;

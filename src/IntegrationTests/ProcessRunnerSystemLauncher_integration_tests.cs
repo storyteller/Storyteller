@@ -42,7 +42,7 @@ namespace IntegrationTests
         [Fact]
         public async Task start_happy_path()
         {
-            var recycled = await start("Storyteller.Gallery");
+            var recycled = await start("StoryTeller.Gallery");
 
             recycled.success.ShouldBeTrue();
         }
@@ -50,7 +50,7 @@ namespace IntegrationTests
         [Fact]
         public async Task start_and_recycle()
         {
-            var recycled = await start("Storyteller.Gallery");
+            var recycled = await start("StoryTeller.Gallery");
 
             recycled.success.ShouldBeTrue();
 
