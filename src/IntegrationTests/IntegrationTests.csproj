@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp1.0</TargetFrameworks>
+    <DebugType>portable</DebugType>
+    <AssemblyName>IntegrationTests</AssemblyName>
+    <PackageId>IntegrationTests</PackageId>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);dotnet5.4;portable-net451+win8</PackageTargetFallback>
+    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">1.0.4</RuntimeFrameworkVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../StoryTeller/StoryTeller.csproj" />
+    <ProjectReference Include="../StorytellerRunner/StorytellerRunner.csproj" />
+    <ProjectReference Include="../Specifications/Specifications.csproj" />
+    <ProjectReference Include="../Samples/Samples.csproj" />
+    <ProjectReference Include="../MultipleSystems/MultipleSystems.csproj" />
+    <ProjectReference Include="../BadSystem/BadSystem.csproj" />
+    <ProjectReference Include="../InvalidExamples/InvalidExamples.csproj" />
+    <ProjectReference Include="../StoryTeller.Samples/StoryTeller.Samples.csproj" />
+    <ProjectReference Include="../StoryTeller.Gallery/StoryTeller.Gallery.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20170106-08" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0-beta5-build1225" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.1.1" />
+    <PackageReference Include="xunit" Version="2.2.0-beta5-build3474" />
+    <PackageReference Include="Shouldly" Version="2.8.2" />
+    <PackageReference Include="NSubstitute" Version="2.0.0-rc" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

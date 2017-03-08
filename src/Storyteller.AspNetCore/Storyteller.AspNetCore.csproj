@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Acceptance Test Driven Development and Executable Specifications for ASP.Net Core applications</Description>
+    <AssemblyTitle>Storyteller.AspNetCore</AssemblyTitle>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <VersionPrefix>1.0.0-alpha</VersionPrefix>
+    <Authors>Jeremy D. Miller</Authors>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <AssemblyName>Storyteller.AspNetCore</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PackageId>Storyteller.AspNetCore</PackageId>
+    <PackageTags>testing;storyteller;specifications;bdd;atdd;aspnetcore</PackageTags>
+    <PackageIconUrl>http://storyteller.github.io/storyteller/content/images/favicon.ico</PackageIconUrl>
+    <PackageProjectUrl>http://storyteller.github.io</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/storyteller/storyteller</RepositoryUrl>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../StoryTeller/StoryTeller.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alba" Version="1.0.0-alpha-28" />
+  </ItemGroup>
+
+</Project>
