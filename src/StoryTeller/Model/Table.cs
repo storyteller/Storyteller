@@ -62,7 +62,8 @@ namespace StoryTeller.Model
 
         public override GrammarModel ApplyOverrides(GrammarModel grammar)
         {
-            var table = new Table {key = key, hasAfterStep = hasAfterStep, hasBeforeStep = hasBeforeStep};
+            // IT'S IMPORTANT IN THIS CASE THAT THE CODE WINS IN THE COLLECTION NAME
+            var table = new Table {key = key, hasAfterStep = hasAfterStep, hasBeforeStep = hasBeforeStep, collection = collection};
 
             var over = grammar as Table;
             if (over == null)
@@ -75,7 +76,6 @@ namespace StoryTeller.Model
             }
 
             table.title = over.title.IsNotEmpty() ? over.title : title;
-            table.collection = over.collection.IsNotEmpty() ? over.collection : collection;
 
             var matchedCells = cells?.Select(c =>
             {
@@ -97,8 +97,11 @@ namespace StoryTeller.Model
             {
                 if (step.Collections.Count == 1)
                 {
-                    var clone = step.Collections.Single().CloneAs(collection);
+                    var single = step.Collections.Single();
+                    var clone = single.CloneAs(collection);
                     step.Collections[collection] = clone;
+
+                    step.Collections.Remove(single.Key);
                 }
             }
 
