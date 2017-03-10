@@ -106,11 +106,19 @@ namespace ST.CommandLine
                 : (ISystemLauncher) new ProcessRunnerSystemLauncher(project);
 
             var controller = new EngineController(project, launcher);
+
+            if (AppDomainFlag)
+            {
+                controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
+            }
+            else
+            {
+                controller.DisableAppDomainFileWatching = true;
+            }
 #else
             var controller = new EngineController(project, new ProcessRunnerSystemLauncher(project));
-
+            controller.DisableAppDomainFileWatching = true;
 #endif
-            controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
 
             return controller;
         }
