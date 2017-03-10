@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Baseline;
 
@@ -235,7 +236,8 @@ namespace StoryTeller.Model.Persistence.Markdown
 
         public static void WriteToFile(Specification spec, string file)
         {
-            using (var stream = new FileStream(file, FileMode.Create))
+            var stream = new MemoryStream();
+            try
             {
                 var writer = new StreamWriter(stream);
 
@@ -243,6 +245,21 @@ namespace StoryTeller.Model.Persistence.Markdown
                 mdWriter.Write(spec);
 
                 writer.Flush();
+
+                stream.Position = 0;
+
+                if (stream.Length > 0)
+                {
+                    using (var fileStream = new FileStream(file, FileMode.Create))
+                    {
+                        stream.CopyTo(fileStream);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ConsoleWriter.Write($"There was some kind of problem persisting {file}");
+                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
             }
         }
     }

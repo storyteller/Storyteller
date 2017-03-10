@@ -65,6 +65,7 @@ namespace StoryTeller.Remotes
                         {
                             try
                             {
+
                                 var json = reader.ReadString();
                                 _onReceived(_listener, json);
                             }
