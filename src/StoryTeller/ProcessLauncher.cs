@@ -16,7 +16,7 @@ namespace StoryTeller
 #if NET46
                     Process.Start(url);
 #else
-                    Process.Start("cmd", $"/C start {url}");
+                    Process.Start("cmd", $"/C start /D {url}");
 #endif
                 }
                 else
@@ -40,6 +40,11 @@ namespace StoryTeller
 
         public static void OpenFile(string file)
         {
+            if (file.Contains(" "))
+            {
+                file = "\"" + file + "\"";
+            }
+
             GotoUrl(file);
         }
     }
