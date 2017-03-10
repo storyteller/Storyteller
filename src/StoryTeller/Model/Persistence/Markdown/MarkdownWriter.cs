@@ -9,6 +9,8 @@ namespace StoryTeller.Model.Persistence.Markdown
     {
         public static bool ShouldBeBigText(string text)
         {
+            if (text == null) return false;
+
             if (text.Contains('\n')) return true;
             if (text.Contains('\r')) return true;
             if (text.Contains(',')) return true;
@@ -113,7 +115,7 @@ namespace StoryTeller.Model.Persistence.Markdown
             if (inlineValues.Any())
             {
                 // TODO -- deal with *big* text here. 
-                var values = inlineValues.Select(x => $"{x.Key}={x.Value}").Join(", ");
+                var values = inlineValues.Select(x => $"{x.Key}={x.Value ?? string.Empty}").Join(", ");
                 write($"|> {key} {values}");
             }
             else
