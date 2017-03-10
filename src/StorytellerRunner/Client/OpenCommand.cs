@@ -20,7 +20,6 @@ namespace ST.Client
         {
             input.CreateMissingSpecFolder();
 
-            var reset = new ManualResetEvent(false);
 
 
             using (var app = new ApplicationController(input, input.BuildEngine(), new WebApplicationRunner(input)))
@@ -45,11 +44,25 @@ namespace ST.Client
                 {
                     Console.WriteLine("Shutdown detected, tearing down the testing harness...");
                     app.SafeDispose();
-                    reset.Set();
                 };
 
                 tellUsersWhatToDo(app.Website.BaseAddress);
-                reset.WaitOne();
+
+                while (true)
+                {
+                    var key = Console.ReadKey();
+                    if (key.Key == ConsoleKey.Q)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Shutting down the Storyteller documentation preview runner....");
+                        app.SafeDispose();
+                        Console.WriteLine("Done, exiting...");
+
+                        break;
+                    }
+
+
+                }
             }
 
 
@@ -60,7 +73,7 @@ namespace ST.Client
         private static void tellUsersWhatToDo(string runnerBaseAddress)
         {
             ConsoleWriter.Write(ConsoleColor.Cyan, "Website available at " + runnerBaseAddress);
-            Console.WriteLine("Type 'ctrl + c' to quit");
+            Console.WriteLine("Type 'q' to shut down cleanly, or 'ctrl + c' to kill the process");
         }
     }
 }

@@ -152,11 +152,16 @@ namespace ST.Client
             return file;
         }
 
+        private readonly object _processorLock = new object();
+
         public void PostProcessAll(IEnumerable<Specification> specifications)
         {
             var combined = FixtureLibrary.From(CombinedFixtures());
 
-            SpecificationPostProcessor.PostProcessAll(specifications, combined);
+            lock (_processorLock)
+            {
+                SpecificationPostProcessor.PostProcessAll(specifications, combined);
+            }
         }
 
         public void PostProcess(Specification spec)

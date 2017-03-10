@@ -75,7 +75,7 @@ namespace StoryTeller.Model
 
         public string ToValueString()
         {
-            string values = Values
+            string values = Values.ToArray()
                 .Select(pair => "{0}={1}".ToFormat(pair.Key, pair.Value))
                 .Join(", ");
 
