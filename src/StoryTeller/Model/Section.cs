@@ -104,7 +104,7 @@ namespace StoryTeller.Model
 
             var key = keys.Single();
 
-            return key.StartsWith("row", StringComparison.OrdinalIgnoreCase)
+            return key.ToLowerInvariant().Contains("row")
                    || key == Key;
 
         }
