@@ -21,6 +21,12 @@ namespace StoryTeller.Model.Persistence.Markdown
                     var spec = new MarkdownReader(reader).Read();
                     spec.Filename = file;
 
+                    if (spec.name.IsEmpty())
+                    {
+                        spec.name = Path.GetFileNameWithoutExtension(file);
+                        ConsoleWriter.Write(ConsoleColor.Yellow, $"The spec file at {file} appears to be empty");
+                    }
+
                     return spec;
                 }
             }
