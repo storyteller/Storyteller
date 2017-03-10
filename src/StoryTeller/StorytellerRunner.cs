@@ -68,7 +68,7 @@ namespace StoryTeller
            
 
             var fileName = Path.GetFileName(path);
-            while (fileName != projectName)
+            while (fileName != projectName && !Directory.Exists(path.AppendPath("Specs")))
             {
                 path = path.ParentDirectory();
                 fileName = Path.GetFileName(path);
