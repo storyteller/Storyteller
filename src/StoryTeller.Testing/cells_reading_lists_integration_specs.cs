@@ -53,8 +53,33 @@ namespace StoryTeller.Testing
                 .FindCell("name").options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("Jeremy", "Monte", "Max");
         }
+
+        [Fact]
+        public void get_list_values_when_marked_on_the_cell_type()
+        {
+            var handling = CellHandling.Basic();
+
+            var fixture = new SelectionValuesFixture();
+            var model = fixture.Compile(handling);
+
+            var grammar = model.FindGrammar(nameof(SelectionValuesFixture.ChooseByType))
+                .ShouldBeOfType<Sentence>();
+            var cell = grammar.FindCell("key");
+
+            cell.options.Select(x => x.value).ShouldHaveTheSameElementsAs("Jeremy", "Monte", "Max");
+        }
     }
 
+    [SelectionList("Names")]
+    public class TypeWithList
+    {
+        public string Key { get; }
+
+        public TypeWithList(string key)
+        {
+            Key = key;
+        }
+    }
     
     public class SelectionValuesFixture : Fixture
     {
@@ -64,6 +89,11 @@ namespace StoryTeller.Testing
             AddSelectionValues("Names", "Jeremy", "Monte", "Max");
         }
         // ENDSAMPLE
+
+        public void ChooseByType(TypeWithList type)
+        {
+
+        }
 
         [ExposeAsTable("Add some people")]
         public void AddPerson([SelectionValues("Chad", "Josh")] string name)
