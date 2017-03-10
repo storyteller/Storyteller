@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DatabaseSamples": {
+      "commandName": "Project",
+      "commandLineArgs": "test"
+    }
+  }
+}

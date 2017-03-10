@@ -64,7 +64,7 @@ namespace StoryTeller.Testing
 
             var grammar = model.FindGrammar(nameof(SelectionValuesFixture.ChooseByType))
                 .ShouldBeOfType<Sentence>();
-            var cell = grammar.FindCell("key");
+            var cell = grammar.FindCell("type");
 
             cell.options.Select(x => x.value).ShouldHaveTheSameElementsAs("Jeremy", "Monte", "Max");
         }
