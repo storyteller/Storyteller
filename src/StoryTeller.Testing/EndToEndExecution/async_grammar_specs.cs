@@ -63,6 +63,7 @@ Name: Test Run
             return Task.FromResult("right");
         }
 
+        [FormatAs("Set the text, asynchronously")]
         public Task SetText(string text)
         {
             Context.State.Store("text", text);

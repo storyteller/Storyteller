@@ -3,6 +3,7 @@ using StoryTeller;
 
 namespace Storyteller.AspNetCore.Samples
 {
+    // SAMPLE: async-grammar-sample
     public class FakeFixture : AspNetCoreFixture
     {
         [FormatAs("The response text from {url} should be '{contents}'")]
@@ -16,4 +17,5 @@ namespace Storyteller.AspNetCore.Samples
             return result.ResponseBody.ReadAsText().Trim();
         }
     }
+    // ENDSAMPLE
 }
