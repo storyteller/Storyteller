@@ -119,11 +119,13 @@ namespace Storyteller.Selenium
             return SearchContext.FindElement(search);
         }
 
+        // SAMPLE: using-NamedElement
         [FormatAs("Click {element}")]
         public void Click(NamedElement element)
         {
             forElement(element).Click();
         }
+        // ENDSAMPLE
 
         [FormatAs("Type {text} into {element}")]
         public void Type(NamedElement element, string text)

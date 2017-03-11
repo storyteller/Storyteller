@@ -2,6 +2,7 @@ using StoryTeller;
 
 namespace Storyteller.Selenium
 {
+    // SAMPLE: using-selection-list-on-arguments
     [SelectionList(ScreenFixture.ElementsListName)]
     public class NamedElement
     {
@@ -12,4 +13,5 @@ namespace Storyteller.Selenium
             Name = name;
         }
     }
+    // ENDSAMPLE
 }

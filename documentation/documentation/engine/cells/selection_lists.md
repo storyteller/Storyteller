@@ -20,6 +20,19 @@ You can also use the `SelectionList()` and `SelectionValues()` methods on `ICell
 
 <[sample:using-cell-expression]>
 
+As of Storyteller 4.1, you can also add any of the attributes on the Type of an argument being passed to a grammar.
+
+Here's an example from the Storyteler.Selenium addon (may still be forthcoming when you read this):
+
+<[sample:using-selection-list-on-arguments]>
+
+In the case above, `NamedElement` refers to a Selenium element in a list in each selenium-aware Fixture class. To make the selection list for the Fixture appear in the editor, I added the `[SelectionList]` attribute directly to the 
+`NamedElement` class.
+
+A grammar that uses this is shown below:
+
+<[sample:using-NamedElement]>
+
 
 ## Fixture Wide Lists
 
