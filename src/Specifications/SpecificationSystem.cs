@@ -35,6 +35,7 @@ namespace Specifications
 
     public class SpecificationContext : IExecutionContext
     {
+
         private readonly InMemoryServiceLocator _services;
         private readonly DocSettings _docSettings;
 
