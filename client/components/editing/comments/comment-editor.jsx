@@ -31,7 +31,7 @@ module.exports = function({arg, step}){
     }
 
     return (
-      <div tabIndex="0" role="button" onClick={editCell} onFocus={editCell}
+      <div tabIndex="0" role="button" onClick={editCell} 
         id={step.id}
         className="comment-editor">
         <DeleteGlyph step={step} /><span>Delete this comment</span>
