@@ -76,16 +76,20 @@ namespace Storyteller.Selenium
             Elements[name] = by;
         }
 
+        // SAMPLE: custom-performance-records
         [FormatAs("Open the browser to {url}")]
         public void OpenUrl(string url)
         {
             var corrected = correctUrl(url);
 
+            // This records the amount of time it takes to
+            // open a Url in a WebDriver controlled browser
             using (Context.Timings.Record("Navigation", url))
             {
                 Driver.Navigate().GoToUrl(corrected);
             }            
         }
+        // ENDSAMPLE
     
 
         private string correctUrl(string url)

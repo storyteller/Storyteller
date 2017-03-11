@@ -22,6 +22,21 @@ A classic example of using `StoryTellerAssert` is if you have a grammar that is 
 Try not to use <code>StoryTellerAssert</code> in place of <[linkto:documentation/engine/grammars/assertions;title=assertions]> or <[linkto:documentation/engine/grammars/facts;title=facts]> -- especially when that results in much more work on your part. 
 
 
+## Performance Tracing
+
+Out of the box, Storyteller tracks the runtime of each grammar and silent action within the Fixture classes. If you want
+to add your own timing records to the performance tracing, you can use the new `ISpecRecord.Timings.Record()` method
+introduced in Storyteller 4.1:
+
+<[sample:custom-performance-records]>
+
+In the past, this functionality has been used to record:
+
+* HTTP requests handled by the application during a specification
+* Messages handled by a service bus
+* Page navigations when using Selenium/WebDriver
+
+
 ## Exception Formatters
 
 New to Storyteller 4.0 is the ability to tell Storyteller how to format the display of an exception that is caught during the 
