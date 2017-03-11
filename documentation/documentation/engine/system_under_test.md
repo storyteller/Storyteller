@@ -42,6 +42,12 @@ Use the `Dispose()` method to do any kind of global state cleanup between specif
 <div class="alert alert-info" role="warning"><strong>Note!</strong> Make sure that the <code>Dispose()</code> method for your <code>ISystem</code> is thorough in how it shuts down the system to release resources like file locks, database connections, or network ports. Failing to do this when Storyteller tries to reload the system under test for new changes will cause you no end of grief. And yes, that's the voice of experience talking.
 </div>
 
+## Writing a Custom ISystem for your Application
+
+You *can* just implement the `ISystem` and `IExecutionContext` interfaces shown above, but as of Storyteller 4.1 you can also subclass the `SimpleSystem` class and override any of the methods shown below:
+
+<[sample:custom-system-using-SimpleSystem]>
+
 ## Using the Separate Process Approach
 
 `AppDomain`'s were dropped from the CoreCLR and won't make a reappearance until Netstandard 2.0. Rather than wait for that
@@ -99,5 +105,8 @@ You can always explicitly tell Storyteller which `ISystem` class to use as a fla
 Custom conversion providers and system wide selection lists can be added in the `ISystem.Start()` method. The `CellHandling` class below exposes methods to add and configure lists and conversions:
 
 <[sample:CellHandling]>
+
+
+
 
 

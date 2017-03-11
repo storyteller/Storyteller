@@ -19,6 +19,11 @@ namespace StoryTeller.Engine
             return handling;
         }
 
+        /// <summary>
+        /// Template method you can override to provide CellHandling
+        /// customizations
+        /// </summary>
+        /// <param name="handling"></param>
         protected virtual void configureCellHandling(CellHandling handling)
         {
             // Nothing
@@ -29,16 +34,30 @@ namespace StoryTeller.Engine
             return new SimpleExecutionContext(this);
         }
 
+        /// <summary>
+        /// Executes before every single specification run
+        /// </summary>
+        /// <param name="execution"></param>
+        /// <param name="context"></param>
         public virtual void BeforeEach(SimpleExecutionContext execution, ISpecContext context)
         {
             // Nothing
         }
 
+        /// <summary>
+        /// Executes immediately after each specification run.
+        /// </summary>
+        /// <param name="context"></param>
         public virtual void AfterEach(ISpecContext context)
         {
             // Nothing
         }
 
+        /// <summary>
+        /// Starts up the application in a background thread.
+        /// Returns a Task.CompletedTask by default.
+        /// </summary>
+        /// <returns></returns>
         public virtual Task Warmup()
         {
             return Task.CompletedTask;
