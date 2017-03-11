@@ -12,10 +12,14 @@ module.exports = React.createClass({
     this.setState({ showModal: false });
   },
 
-  handleToggle(){
+  handleToggle(e){
     this.setState({
       showModal: !this.state.showModal
     });
+
+    if (e){
+      e.preventDefault();
+    }
   },
 
   open() {
@@ -24,7 +28,7 @@ module.exports = React.createClass({
 
   render(){
     const deleteSpec = e => {
-      this.handleToggle();
+      this.handleToggle(e);
 
       Postal.publish({
         channel: 'engine-request',

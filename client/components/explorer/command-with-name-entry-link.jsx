@@ -26,10 +26,14 @@ const CommandWithNameEntryLink = React.createClass({
     this.setState({ showModal: false });
   },
 
-  handleToggle(){
+  handleToggle(e){
     this.setState({
       showModal: !this.state.showModal
     });
+
+    if (e){
+      e.preventDefault();
+    }
   },
 
   open() {
@@ -57,6 +61,7 @@ const CommandWithNameEntryLink = React.createClass({
       });
 
       this.handleToggle(e);
+      e.preventDefault();
     }
 
     const onKeyDown = e => {
