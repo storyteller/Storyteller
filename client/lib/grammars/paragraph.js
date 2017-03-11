@@ -127,6 +127,10 @@ class Paragraph{
 		return step.args.find(this.orderedCells[index - 1]);
 	}
 
+	selectNext(){
+		return null;
+	}
+
 	selectFirst(step){
 		for (var i = 0; i < this.children.length; i++){
 			var first = this.children[0].selectFirst(step);
