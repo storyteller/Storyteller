@@ -1,11 +1,11 @@
 ﻿{
-  "version": "1.0.0 -alpha-*",
+  "version": "1.0.0-alpha-*",
   "buildOptions": {
     "emitEntryPoint": false
   },
 
   "title": "Storyteller.AspNetCore",
-  "description": "Acceptance Test Driven Development and Executable Specifications for ASP.Net Core applications",
+  "description": "Recipe to Connect Storyteller to ASP.Net Core Systems",
   "language": "en-US",
   "authors": [
     "Jeremy D. Miller"
