@@ -118,7 +118,7 @@ end
 
 desc "Pushes the Nuget's to MyGet"
 task :push do
-	sh "nuget.exe push artifacts/*.nupkg -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ "
+	#sh "nuget.exe push artifacts/*.nupkg -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ "
 end
 
 desc "Launches VS to the StructureMap solution file"
