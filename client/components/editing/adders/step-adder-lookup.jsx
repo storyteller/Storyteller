@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import GrammarLookup from './../../../lib/presentation/grammar-adder-lookup';
 import $ from 'jquery';
+import scrollIntoView from 'scroll-into-view';
 
 module.exports = React.createClass({
   componentDidMount(){
     const element = ReactDOM.findDOMNode(this);
-    element.scrollIntoView();
+    scrollIntoView(element);
 
     const input = element.firstChild;
     $(input).addClass('mousetrap');
@@ -37,7 +38,7 @@ module.exports = React.createClass({
     $(element).on('typeahead:selected', function(jquery, option){
       option.select();
       $(input).val('');
-      input.scrollIntoView();
+      scrollIntoView(input);
     });
 
     input.focus();

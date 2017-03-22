@@ -5,6 +5,7 @@ var {Button} = require('react-bootstrap');
 var {ButtonGroup} = require('react-bootstrap');
 var Icons = require('./../icons');
 var Mousetrap = require('mousetrap');
+import scrollIntoView from 'scroll-into-view';
 
 function StepthroughCommand({action, spec, icon, title, message}){
     if (!message){
@@ -33,18 +34,7 @@ function StepthroughCommand({action, spec, icon, title, message}){
             title={title}
             bsSize="small"
             onClick={onclick}><Icon /></Button>
-
     );
-}
-
-function scrollIntoViewIfNeeded(target) {
-    var rect = target.getBoundingClientRect();
-    if (rect.bottom > window.innerHeight) {
-        target.scrollIntoView(true);
-    }
-    if (rect.top < 0) {
-        target.scrollIntoView(true);
-    } 
 }
 
 module.exports = function({spec, showClearAll}){
@@ -54,10 +44,8 @@ module.exports = function({spec, showClearAll}){
         }
 
         var div = ReactDOM.findDOMNode(elem);
-
-        scrollIntoViewIfNeeded(div);
+        scrollIntoView(div);
     };
-
 
     var onclick = e => {
         Postal.publish({
@@ -72,9 +60,9 @@ module.exports = function({spec, showClearAll}){
     };
 
     const clearAll = (
-        <Button 
+        <Button
             bsSize="small"
-            onClick={onclick} 
+            onClick={onclick}
             title="clear all breakpoints in the current specification"><i className="fa fa-fw fa-ban"></i></Button>
     );
 
