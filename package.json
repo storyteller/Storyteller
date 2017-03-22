@@ -67,6 +67,7 @@
     "react-router": "^1.0.2",
     "redux": "^3.0.5",
     "rxjs": "^5.0.3",
+    "scroll-into-view": "^1.7.5",
     "typeahead": "^0.2.1"
   }
 }
