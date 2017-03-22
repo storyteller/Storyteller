@@ -24,7 +24,7 @@ namespace Storyteller.AspNetCore
 
         private readonly Task<ISystemUnderTest> _warmup;
 
-        private AspNetCoreSystem(Func<ISystemUnderTest> builder)
+        protected AspNetCoreSystem(Func<ISystemUnderTest> builder)
         {
             _warmup = Task.Factory.StartNew(() =>
             {
