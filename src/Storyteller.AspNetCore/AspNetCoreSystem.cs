@@ -8,6 +8,21 @@ using StoryTeller.Equivalence;
 
 namespace StoryTeller.AspNetCore
 {
+    public class AspNetCoreSystem<T> : AspNetCoreSystem where T : class
+    {
+        public AspNetCoreSystem() : base(() => buildSystem())
+        {
+        }
+
+        // TODO -- figure out how to be able to modify the app
+        // defined by the Startup class like we could do w/ FubuMVC/Serenity
+        // think extra middleware, replace services w/ stubs, extra logging
+        protected static ISystemUnderTest buildSystem()
+        {
+            return SystemUnderTest.ForStartup<T>();
+        }
+    }
+
     public class AspNetCoreSystem : ISystem
     {
         public static void Run<T>(string[] args) where T : class
