@@ -3,12 +3,10 @@ using System.Threading.Tasks;
 using Alba;
 using Baseline;
 using Baseline.Conversion;
-using StoryTeller;
-using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Equivalence;
 
-namespace Storyteller.AspNetCore
+namespace StoryTeller.AspNetCore
 {
     public class AspNetCoreSystem : ISystem
     {

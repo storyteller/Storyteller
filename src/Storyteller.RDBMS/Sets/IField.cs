@@ -2,7 +2,7 @@
 using System.Data.Common;
 using StoryTeller.Grammars.Sets;
 
-namespace Storyteller.RDBMS.Sets
+namespace StoryTeller.RDBMS.Sets
 {
     public interface IField : IColumnMatch
     {

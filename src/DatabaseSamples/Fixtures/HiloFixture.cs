@@ -1,6 +1,5 @@
-﻿using Storyteller.RDBMS;
-using Storyteller.RDBMS.Postgresql;
-using Storyteller.RDBMS.Sets;
+﻿using StoryTeller.RDBMS.Postgresql;
+using StoryTeller.RDBMS.Sets;
 using StoryTeller;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Tables;

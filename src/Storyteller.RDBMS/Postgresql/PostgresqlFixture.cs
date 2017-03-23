@@ -1,4 +1,4 @@
-﻿namespace Storyteller.RDBMS.Postgresql
+﻿namespace StoryTeller.RDBMS.Postgresql
 {
     public abstract class PostgresqlFixture : DatabaseFixture
     {

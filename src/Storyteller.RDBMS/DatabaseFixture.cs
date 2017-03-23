@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using Baseline;
-using Storyteller.RDBMS.Sets;
-using StoryTeller;
+using StoryTeller.RDBMS.Sets;
 using StoryTeller.Grammars;
-using StoryTeller.Model;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
 
 

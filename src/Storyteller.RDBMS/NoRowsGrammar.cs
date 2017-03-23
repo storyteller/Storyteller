@@ -1,8 +1,7 @@
 ﻿using System;
-using StoryTeller;
 using StoryTeller.Grammars;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
     public class NoRowsGrammar : FactGrammar
     {

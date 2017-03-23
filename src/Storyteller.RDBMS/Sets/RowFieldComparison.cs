@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Baseline;
-using Storyteller.RDBMS.CommandBuilders;
-using StoryTeller;
+using StoryTeller.RDBMS.CommandBuilders;
 using StoryTeller.Grammars.Sets;
 
-namespace Storyteller.RDBMS.Sets
+namespace StoryTeller.RDBMS.Sets
 {
     public class RowFieldComparison : ObjectComparison<Dictionary<string, object>>
     {

@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using StoryTeller;
+﻿using System.Data;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
-namespace Storyteller.RDBMS.Sets
+namespace StoryTeller.RDBMS.Sets
 {
     public class DbSetExecution : ICommandExecution
     {

@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using Baseline;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
     // How to get this one in?
     public class CommandRunner : IDisposable

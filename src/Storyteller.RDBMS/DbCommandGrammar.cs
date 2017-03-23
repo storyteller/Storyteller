@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using Baseline;
-using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
     public class DbCommandGrammar : LineGrammar
     {

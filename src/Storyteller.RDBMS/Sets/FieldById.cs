@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
 using Baseline;
-using StoryTeller;
 using StoryTeller.Model;
 
-namespace Storyteller.RDBMS.Sets
+namespace StoryTeller.RDBMS.Sets
 {
     public class FieldById<T> : IField
     {

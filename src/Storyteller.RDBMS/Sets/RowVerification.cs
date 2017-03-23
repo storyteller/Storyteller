@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using Baseline;
-using Storyteller.RDBMS.CommandBuilders;
-using StoryTeller;
+using StoryTeller.RDBMS.CommandBuilders;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Paragraphs;
 using StoryTeller.Grammars.Sets;
 
-namespace Storyteller.RDBMS.Sets
+namespace StoryTeller.RDBMS.Sets
 {
     public class RowVerification : IGrammarSource
     {
@@ -72,9 +70,6 @@ namespace Storyteller.RDBMS.Sets
 
                 return paragraph;
             }
-
-
-
 
             return grammar;
         }

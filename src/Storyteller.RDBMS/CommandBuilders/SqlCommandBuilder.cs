@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Storyteller.RDBMS.CommandBuilders
+namespace StoryTeller.RDBMS.CommandBuilders
 {
     public class SqlCommandBuilder : IDbCommandBuilder
     {

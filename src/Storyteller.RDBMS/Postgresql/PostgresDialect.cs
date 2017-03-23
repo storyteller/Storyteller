@@ -1,11 +1,10 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.Common;
 using Baseline;
 using Npgsql;
 using StoryTeller.Model;
 
-namespace Storyteller.RDBMS.Postgresql
+namespace StoryTeller.RDBMS.Postgresql
 {
     public class PostgresDialect : ISqlDialect
     {

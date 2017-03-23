@@ -1,6 +1,4 @@
-using StoryTeller;
-
-namespace Storyteller.Selenium
+namespace StoryTeller.Selenium
 {
     public class ElementAttribute : SelectionListAttribute
     {

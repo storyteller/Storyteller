@@ -1,6 +1,4 @@
-﻿using StoryTeller;
-
-namespace Storyteller.Selenium.Samples
+﻿namespace StoryTeller.Selenium.Samples
 {
     public class Program
     {

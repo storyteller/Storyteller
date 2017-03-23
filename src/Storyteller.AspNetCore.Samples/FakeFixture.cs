@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
-using StoryTeller;
 
-namespace Storyteller.AspNetCore.Samples
+namespace StoryTeller.AspNetCore.Samples
 {
     // SAMPLE: async-grammar-sample
     public class FakeFixture : AspNetCoreFixture

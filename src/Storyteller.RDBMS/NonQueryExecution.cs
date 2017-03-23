@@ -1,10 +1,9 @@
 ﻿using System.Data;
-using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
     public class NonQueryExecution : ICommandExecution
     {

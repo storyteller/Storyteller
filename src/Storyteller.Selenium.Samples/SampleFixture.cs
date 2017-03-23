@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using StoryTeller;
 
-namespace Storyteller.Selenium.Samples
+namespace StoryTeller.Selenium.Samples
 {
     public class SampleFixture : ScreenFixture
     {
