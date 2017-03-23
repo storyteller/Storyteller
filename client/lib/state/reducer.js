@@ -155,11 +155,24 @@ function Reducer(state = initialState, action){
   }
 }
 
+function MoveOffOfStepthroughPage(action){
+    if (action.type == 'spec-execution-completed' && action.mode != 'normal'){
+        if (window != undefined){
+            window.location = '#/spec/results/' + action.id;
+        }
+    }
+}
+
 function Batched(state, action){
     if (action.type == 'batch'){
         for (var i = 0; i < action.messages.length; i++){
             state = Reducer(state, action.messages[i]);
+
+            // Hokey. Maybe this gets smoother when we integrate the routing with redux?
+            MoveOffOfStepthroughPage(action.messages[i]);
         }
+
+        
         
         return state;
     }
