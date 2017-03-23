@@ -15,9 +15,9 @@ function SpecHeader(props){
         headerClass = "text-primary";
     }
 
-    var stepthrough = null;
-    if (props.mode == 'stepthrough'){
-
+    var lifecycleSpec = props.spec;
+    if (props.original){
+        lifecycleSpec = props.original;
     }
 
     return (
@@ -32,11 +32,10 @@ function SpecHeader(props){
 
                 <div>
                     <SpecCommands spec={props.spec}/>
-                    {stepthrough}
                     <span className="pull-right">
                         <SpecLinks id={props.spec.id} mode={props.mode} spec={props.spec} />
 
-                        <LifecycleButton spec={props.spec} />
+                        <LifecycleButton spec={lifecycleSpec} />
                     </span>
                 </div>
 

@@ -3,8 +3,7 @@
 -> id = embeds
 -> lifecycle = Regression
 -> max-retries = 0
--> last-updated = 2015-07-17T00:00:00.0000000
--> expiration-period = 0
+-> last-updated = 2017-03-23T15:11:58.7309350Z
 -> tags = 
 
 [Embedded]

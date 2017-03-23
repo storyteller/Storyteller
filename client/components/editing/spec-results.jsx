@@ -15,13 +15,13 @@ function getSpec(state, ownProps){
 
   const running = state.get('running');
   if (running && running.id == id){
-    return {spec: state.get('running-spec'), running: true};
+    return {spec: state.get('running-spec'), running: true, original: spec};
   }
   else if (spec.last_result){
-    return {spec: spec.forResults(), running: false}
+    return {spec: spec.forResults(), running: false, original: spec}
   }
 
-  return {spec: spec, running: running};
+  return {spec: spec, running: running, original: spec};
 }
 
 function addDispatch(dispatch){
@@ -35,7 +35,7 @@ class SpecResults extends React.Component {
 
     return (
       <Grid>
-        <SpecHeader spec={this.props.spec} mode='results' />
+        <SpecHeader spec={this.props.spec} original={this.props.original} mode='results' />
         <Row>
           <SpecResultHeader spec={this.props.spec} />
           <Persisting id={this.props.spec.id}/>
