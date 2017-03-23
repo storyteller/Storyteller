@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.1.0",
+  "version": "1.1.1",
   "name": "dotnet-storyteller",
   "title": "dotnet CLI integration for Storyteller",
   "description": "Storyteller Project Runner and Editor",
