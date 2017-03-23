@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Baseline;
 using OpenQA.Selenium;
-using StoryTeller;
 
-namespace Storyteller.Selenium
+namespace StoryTeller.Selenium
 {
     public class ScreenFixture : Fixture
     {

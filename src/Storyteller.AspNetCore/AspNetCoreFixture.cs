@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Alba;
-using StoryTeller;
 
-namespace Storyteller.AspNetCore
+namespace StoryTeller.AspNetCore
 {
     public abstract class AspNetCoreFixture : Fixture
     {

@@ -1,6 +1,4 @@
-using StoryTeller;
-
-namespace Storyteller.Selenium
+namespace StoryTeller.Selenium
 {
     // SAMPLE: using-selection-list-on-arguments
     [SelectionList(ScreenFixture.ElementsListName)]

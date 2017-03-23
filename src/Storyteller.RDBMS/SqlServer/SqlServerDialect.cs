@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using Baseline;
 using StoryTeller.Model;
 
-namespace Storyteller.RDBMS.SqlServer
+namespace StoryTeller.RDBMS.SqlServer
 {
     public class SqlServerDialect : ISqlDialect
     {

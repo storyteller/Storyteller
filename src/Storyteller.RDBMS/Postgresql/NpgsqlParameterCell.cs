@@ -4,7 +4,7 @@ using Npgsql;
 using NpgsqlTypes;
 using StoryTeller.Model;
 
-namespace Storyteller.RDBMS.Postgresql
+namespace StoryTeller.RDBMS.Postgresql
 {
     public class NpgsqlParameterCell : ParameterCell
     {

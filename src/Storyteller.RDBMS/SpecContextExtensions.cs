@@ -1,8 +1,7 @@
 ﻿using System;
 using Baseline;
-using StoryTeller;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
     public static class SpecContextExtensions
     {

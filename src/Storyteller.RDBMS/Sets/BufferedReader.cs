@@ -1,13 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
 using System.Linq;
-using System.Threading.Tasks;
 using Baseline;
-using StoryTeller.Conversion;
-using StoryTeller.Model;
 
-namespace Storyteller.RDBMS.Sets
+namespace StoryTeller.RDBMS.Sets
 {
     public class BufferedReader
     {

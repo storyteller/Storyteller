@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using StoryTeller.Model;
 
-namespace Storyteller.RDBMS
+namespace StoryTeller.RDBMS
 {
     public interface ISqlDialect
     {

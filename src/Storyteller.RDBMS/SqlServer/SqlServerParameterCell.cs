@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using StoryTeller.Model;
 
-namespace Storyteller.RDBMS.SqlServer
+namespace StoryTeller.RDBMS.SqlServer
 {
     public class SqlServerParameterCell : ParameterCell
     {

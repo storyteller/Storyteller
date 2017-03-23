@@ -3,12 +3,10 @@ using System.Threading.Tasks;
 using Alba;
 using Baseline;
 using Baseline.Conversion;
-using StoryTeller;
-using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Equivalence;
 
-namespace Storyteller.AspNetCore
+namespace StoryTeller.AspNetCore
 {
     public class AspNetCoreSystem : ISystem
     {
@@ -24,7 +22,7 @@ namespace Storyteller.AspNetCore
 
         private readonly Task<ISystemUnderTest> _warmup;
 
-        private AspNetCoreSystem(Func<ISystemUnderTest> builder)
+        protected AspNetCoreSystem(Func<ISystemUnderTest> builder)
         {
             _warmup = Task.Factory.StartNew(() =>
             {
