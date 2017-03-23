@@ -21,12 +21,13 @@ namespace StoryTeller
                 }
                 else
                 {
-                    Console.WriteLine("Trying to open url " + url);
+                    var openProcess = RuntimeEnvironment.OperatingSystemPlatform == Platform.Linux ? "xdg-open" : "open";
+                    Console.WriteLine("Trying to open file " + url);
 
                     return Process.Start(new ProcessStartInfo
                     {
                         UseShellExecute = false,
-                        FileName = "open",
+                        FileName = openProcess,
                         Arguments = url
                     });
                 }
