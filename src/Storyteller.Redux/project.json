@@ -1,0 +1,23 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "buildOptions": {
+    "compile": {
+      "include": ["../StorytellerRunner/WebSocketsHandler.cs"] 
+    } 
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.1",
+    "StoryTeller": { "target": "project" },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.AspNetCore.Hosting": "1.0.0",
+    "Microsoft.AspNetCore.WebSockets.Server": "0.1.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

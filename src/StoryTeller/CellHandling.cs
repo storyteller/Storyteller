@@ -44,6 +44,11 @@ namespace StoryTeller
         public Conversions Conversions { get; private set; }
 
         /// <summary>
+        /// Registered extensions for the system
+        /// </summary>
+        public IList<IExtension> Extensions { get; } = new List<IExtension>();
+
+        /// <summary>
         /// All the system level selection lists
         /// </summary>
         internal readonly LightweightCache<string, OptionList> Lists = new LightweightCache<string, OptionList>(key => new OptionList(key));
