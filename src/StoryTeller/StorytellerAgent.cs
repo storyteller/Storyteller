@@ -5,6 +5,7 @@ using Baseline;
 using Baseline.Dates;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
+using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller
@@ -90,16 +91,19 @@ namespace StoryTeller
         {
             try
             {
+                var running = RunningSystem.Create(system);
+                if (running.RecycledMessage.success)
+                {
+                    Console.WriteLine("Able to create the FixtureLibrary");
+                }
 
-                var recycled = system.Initialize(lib => Console.WriteLine("Able to create the FixtureLibrary"));
-
-                var json = JsonSerialization.ToCleanJson(recycled);
+                var json = JsonSerialization.ToCleanJson(running.RecycledMessage);
 
                 Console.WriteLine("System ready as: " + json);
 
                 Console.WriteLine("Trying the Warmup now...");
 
-                var warmup = system.Warmup();
+                var warmup = running.System.Warmup();
 
                 warmup.Wait(1.Minutes());
 

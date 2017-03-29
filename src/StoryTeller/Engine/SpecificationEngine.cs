@@ -18,7 +18,7 @@ namespace StoryTeller.Engine
         private readonly ConsumingQueue _executionQueue;
         private ConsumingQueue _planning;
         private readonly ISpecRunner _runner;
-        private readonly ISystem _system;
+        private readonly RunningSystem _running;
         private readonly Task _warmup;
         private ConsumingQueue _reader;
 
@@ -29,7 +29,7 @@ namespace StoryTeller.Engine
             if (observer == null) throw new ArgumentNullException(nameof(observer));
 
 
-            _system = system;
+            _running = RunningSystem.Create(system);
             _runner = runner;
 
             _executionQueue = new ConsumingQueue(request =>
@@ -49,7 +49,7 @@ namespace StoryTeller.Engine
                 }
             });
 
-            var warmup = _system.Warmup();
+            var warmup = _running.System.Warmup();
 
             if (warmup == null)
             {
@@ -71,7 +71,7 @@ namespace StoryTeller.Engine
 
         public void Dispose()
         {
-            _system.Dispose();
+            _running.System.Dispose();
             _executionQueue.Dispose();
             _planning?.Dispose();
             _runner.Cancel();
@@ -119,9 +119,12 @@ namespace StoryTeller.Engine
             _runner.UseStopConditions(stopConditions);
             _executionQueue.Start();
 
-            var recycled = _system.Initialize(startTheConsumingQueues);
+            if (_running.RecycledMessage.success)
+            {
+                startTheConsumingQueues(_running.Fixtures);
+            }
 
-            EventAggregator.SendMessage(recycled);
+            EventAggregator.SendMessage(_running.RecycledMessage);
         }
 
 

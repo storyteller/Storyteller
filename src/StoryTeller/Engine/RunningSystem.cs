@@ -6,21 +6,28 @@ using StoryTeller.Remotes;
 
 namespace StoryTeller.Engine
 {
-    public static class SystemExtensions
+    public class RunningSystem
     {
-        public static SystemRecycled Initialize(this ISystem system, Action<FixtureLibrary> onStarted)
+        public static RunningSystem Create(ISystem inner)
+        {
+            return new RunningSystem(inner);
+        }
+
+        private RunningSystem(ISystem system)
         {
             CellHandling cellHandling = null;
 
             try
             {
                 cellHandling = system.Start() ?? CellHandling.Basic();
+
+                System = cellHandling.Extensions.Any() ? new CompositeSystem(system, cellHandling) : system;
             }
             catch (Exception ex)
             {
                 ConsoleWriter.Write(ConsoleColor.Red, ex.ToString());
 
-                var message = new SystemRecycled
+                RecycledMessage = new SystemRecycled
                 {
                     success = false,
                     fixtures = new FixtureModel[0],
@@ -34,19 +41,15 @@ namespace StoryTeller.Engine
 
                     error = ex.ToString()
                 };
-
-                return message;
             }
 
 
-            var library = FixtureLibrary.CreateForAppDomain(cellHandling);
+            Fixtures = FixtureLibrary.CreateForAppDomain(cellHandling);
 
-            onStarted(library);
-
-            return new SystemRecycled
+            RecycledMessage = new SystemRecycled
             {
                 success = true,
-                fixtures = library.Models.GetAll().ToArray(),
+                fixtures = Fixtures.Models.GetAll().ToArray(),
                 system_name = system.ToString(),
 #if NET46
                 name = Path.GetFileName(AppDomain.CurrentDomain.BaseDirectory)
@@ -55,5 +58,11 @@ namespace StoryTeller.Engine
 #endif
             };
         }
+
+        public FixtureLibrary Fixtures { get; }
+
+        public SystemRecycled RecycledMessage { get; }
+
+        public ISystem System { get; }
     }
 }

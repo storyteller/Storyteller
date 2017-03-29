@@ -17,7 +17,7 @@ namespace StoryTeller.Engine
         private object _controller;
         private readonly SocketConnection _socket;
         private Project _project;
-        private ISystem _system;
+        private RunningSystem _running;
 
         public EngineAgent(int port)
         {
@@ -36,7 +36,8 @@ namespace StoryTeller.Engine
 
         public EngineAgent(int port, ISystem system) : this(port)
         {
-            _system = system;
+            _running = RunningSystem.Create(system);
+            
 
             _disposables.Add(system);
         }
@@ -58,9 +59,9 @@ namespace StoryTeller.Engine
 
         public void Start(Project project)
         {
-            if (_system != null)
+            if (_running != null)
             {
-                Console.WriteLine($"AGENT: Trying to start specification runner for {_system.GetType().Name} at {project.ProjectPath} and port {project.Port}");
+                Console.WriteLine($"AGENT: Trying to start specification runner for {_running.GetType().Name} at {project.ProjectPath} and port {project.Port}");
             }
 
             Project.CurrentProject = project;
@@ -70,19 +71,18 @@ namespace StoryTeller.Engine
 
             Type systemType = null;
 
+            
+
             try
             {
-                if (_system == null)
+                if (_running == null)
                 {
-                    systemType = _project.DetermineSystemType();
-                    _system = Activator.CreateInstance(systemType).As<ISystem>();
-                    _disposables.Add(_system);
+                    buildRunningSystem();
                 }
 
                 if (project.Mode == EngineMode.ExportOnly)
                 {
-                    var recycled = _system.Initialize(lib => { });
-                    EventAggregator.SendMessage(recycled);
+                    EventAggregator.SendMessage(_running.RecycledMessage);
                     return;
                 }
 
@@ -109,15 +109,19 @@ namespace StoryTeller.Engine
                     success = false,
                 };
 
-                if (systemType != null)
-                {
-                    message.system_name = systemType.AssemblyQualifiedName;
-                }
-
                 EventAggregator.SendMessage(message);
             }
 
 
+        }
+
+        private void buildRunningSystem()
+        {
+            var systemType = _project.DetermineSystemType();
+            var inner = Activator.CreateInstance(systemType).As<ISystem>();
+            _running = RunningSystem.Create(inner);
+
+            _disposables.Add(_running.System);
         }
 
         private SpecificationEngine buildUserInterfaceEngine()
@@ -125,10 +129,10 @@ namespace StoryTeller.Engine
             var observer = new UserInterfaceObserver();
             var executionObserver = new UserInterfaceExecutionObserver();
 
-            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _system, executionObserver);
+            var runner = new SpecRunner(new UserInterfaceExecutionMode(observer), _running.System, executionObserver);
 
 
-            var engine = new SpecificationEngine(_system, runner, executionObserver);
+            var engine = new SpecificationEngine(_running.System, runner, executionObserver);
             _controller = new EngineController(engine, observer, runner);
 
             // Super hokey, but we need some way to feed the spec started
@@ -157,10 +161,10 @@ namespace StoryTeller.Engine
             }
 
             var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode, _system, executionObserver);
+            var runner = new SpecRunner(executionMode, _running.System, executionObserver);
 
             var engine = new SpecificationEngine(
-                _system, runner, executionObserver);
+                _running.System, runner, executionObserver);
 
             _controller = new BatchController(engine, batchObserver);
 
