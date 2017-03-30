@@ -8,7 +8,7 @@ namespace StoryTeller.AspNetCore.Samples
     {
         public static void Main(string[] args)
         {
-            AspNetCoreSystem.Run<Startup>(args);
+            AspNetCoreSystem<Startup>.Run(args);
         }
     }
 }

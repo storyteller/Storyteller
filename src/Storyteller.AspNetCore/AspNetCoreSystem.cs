@@ -8,42 +8,38 @@ using StoryTeller.Equivalence;
 
 namespace StoryTeller.AspNetCore
 {
-    public class AspNetCoreSystem<T> : AspNetCoreSystem where T : class
+    public interface IAspNetCoreSystem : ISystem
     {
-        public AspNetCoreSystem() : base(() => buildSystem())
-        {
-        }
+        ISystemUnderTest System { get; }
 
-        // TODO -- figure out how to be able to modify the app
-        // defined by the Startup class like we could do w/ FubuMVC/Serenity
-        // think extra middleware, replace services w/ stubs, extra logging
-        protected static ISystemUnderTest buildSystem()
-        {
-            return SystemUnderTest.ForStartup<T>();
-        }
+        void BeforeAll(ISystemUnderTest sut);
+
+        void AfterEach(ISystemUnderTest sut, ISpecContext context);
+
+        void BeforeEach(ISystemUnderTest sut, ISpecContext context);
+
+        void AfterAll();
     }
-
-    public class AspNetCoreSystem : ISystem
+    public class AspNetCoreSystem<T> :IAspNetCoreSystem where T : class
     {
-        public static void Run<T>(string[] args) where T : class
-        {
-            var system = new AspNetCoreSystem(() => SystemUnderTest.ForStartup<T>());
-            StorytellerAgent.Run(args, system);
-        }
-
-
-
         public readonly CellHandling CellHandling = new CellHandling(new EquivalenceChecker(), new Conversions());
 
         private readonly Task<ISystemUnderTest> _warmup;
 
-        protected AspNetCoreSystem(Func<ISystemUnderTest> builder)
+        public static void Run(string[] args)
         {
+            var system = new AspNetCoreSystem<T>();
+            StorytellerAgent.Run(args, system);
+        }
+
+        protected AspNetCoreSystem()
+        {
+            Func<ISystemUnderTest> builder = () => SystemUnderTest.ForStartup<T>();
             _warmup = Task.Factory.StartNew(() =>
             {
                 var sut = builder();
 
-                beforeAll(sut);
+                BeforeAll(sut);
 
                 return sut;
             });
@@ -67,7 +63,7 @@ namespace StoryTeller.AspNetCore
         {
             _warmup?.Wait();
 
-            beforeAll(System);
+            BeforeAll(System);
 
             return new AspNetCoreContext(this);
         }
@@ -77,31 +73,31 @@ namespace StoryTeller.AspNetCore
             return _warmup;
         }
 
-        protected virtual void beforeAll(ISystemUnderTest sut)
+        public virtual void BeforeAll(ISystemUnderTest sut)
         {
             // Nothing
         }
 
-        protected virtual void afterEach(ISystemUnderTest sut, ISpecContext context)
+        public virtual void AfterEach(ISystemUnderTest sut, ISpecContext context)
         {
             // nothing
         }
 
-        protected virtual void beforeEach(ISystemUnderTest sut, ISpecContext context)
+        public virtual void BeforeEach(ISystemUnderTest sut, ISpecContext context)
         {
             // nothing
         }
 
-        protected virtual void afterAll()
+        public virtual void AfterAll()
         {
             // nothing
         }
 
         public class AspNetCoreContext : IExecutionContext
         {
-            private readonly AspNetCoreSystem _parent;
+            private readonly IAspNetCoreSystem _parent;
 
-            public AspNetCoreContext(AspNetCoreSystem parent)
+            public AspNetCoreContext(IAspNetCoreSystem parent)
             {
                 _parent = parent;
             }
@@ -114,21 +110,20 @@ namespace StoryTeller.AspNetCore
             {
                 context.State.Store(_parent.System);
 
-                _parent.beforeEach(_parent.System, context);
+                _parent.BeforeEach(_parent.System, context);
             }
 
             public void AfterExecution(ISpecContext context)
             {
                 // TODO -- do logging of the requests here
-                _parent.afterEach(_parent.System, context);
+                _parent.AfterEach(_parent.System, context);
             }
 
-            public T GetService<T>()
+            public S GetService<S>()
             {
-                return _parent.System.Services.GetService(typeof(T)).As<T>();
+                return _parent.System.Services.GetService(typeof(S)).As<S>();
             }
         }
 
-        
     }
 }
