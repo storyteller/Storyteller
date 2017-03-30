@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using StorytellerRunner;
 using StoryTeller;
+using StoryTeller.Remotes.Messaging;
 
 namespace Storyteller.Redux
 {
@@ -95,6 +97,22 @@ namespace Storyteller.Redux
                 });
 
             _server = host.Start();
+        }
+
+        public void SendCloseMessage()
+        {
+            _webSockets.Send("CLOSE").Wait();
+        }
+
+        public void SendRefreshMessage()
+        {
+            _webSockets.Send("REFRESH").Wait();
+        }
+
+        public Task Send(object message)
+        {
+            var json = JsonSerialization.ToCleanJson(message);
+            return _webSockets.Send(json);
         }
     }
 }

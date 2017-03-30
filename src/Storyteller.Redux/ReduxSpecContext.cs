@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using StoryTeller;
+using StoryTeller.Remotes.Messaging;
 
 namespace Storyteller.Redux
 {
-
-    public class ReduxSagaExtension
-    {
-        
-    }
-
     public class ReduxSpecContext
     {
         private readonly ISpecContext _context;
         private readonly IList<Waiter> _waiters = new List<Waiter>();
         private int _revision;
 
-
-        public string CurrentState;
+        public string CurrentState { get; set; }
 
         public ReduxSpecContext(ISpecContext context)
         {
@@ -55,5 +49,6 @@ namespace Storyteller.Redux
 
             return waiter.Task;
         }
+
     }
 }

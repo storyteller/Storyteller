@@ -37,18 +37,15 @@ namespace StoryTeller.Engine
 
         public Task Warmup()
         {
-            return Task.WhenAll(warmUpTasks().ToArray());
-        }
-
-        private IEnumerable<Task> warmUpTasks()
-        {
-            yield return _inner.Warmup();
-
-            foreach (var extension in _handling.Extensions)
+            return _inner.Warmup().ContinueWith(async t =>
             {
-                yield return extension.Start();
-            }
+                foreach (var extension in _handling.Extensions)
+                {
+                    await extension.Start();
+                }
+            });
         }
+
     }
 
     public class CompositeExecutionContext : IExecutionContext

@@ -7,23 +7,23 @@ namespace StoryTeller
 {
     public static class ProcessLauncher
     {
-        public static void GotoUrl(string url)
+        public static Process GotoUrl(string url)
         {
             try
             {
                 if (RuntimeEnvironment.OperatingSystemPlatform == Platform.Windows)
                 {
 #if NET46
-                    Process.Start(url);
+                    return Process.Start(url);
 #else
-                    Process.Start("cmd", $"/C start {url}");
+                    return Process.Start("cmd", $"/C start {url}");
 #endif
                 }
                 else
                 {
                     Console.WriteLine("Trying to open url " + url);
 
-                    Process.Start(new ProcessStartInfo
+                    return Process.Start(new ProcessStartInfo
                     {
                         UseShellExecute = false,
                         FileName = "open",
@@ -35,6 +35,8 @@ namespace StoryTeller
             {
                 ConsoleWriter.Write(ConsoleColor.Yellow, "Unable to launch the browser to " + url);
             }
+
+            return null;
         }
 
         public static void OpenFile(string file)
