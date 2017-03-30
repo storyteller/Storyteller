@@ -20,6 +20,11 @@
       "commandLineArgs": "open src/Storyteller.AspNetCore.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
+    "Open Redux Samples": {
+      "commandName": "Project",
+      "commandLineArgs": "open src/ReduxSamples",
+      "workingDirectory": "C:\\code\\storyteller"
+    },
 	"Open Selenium Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Selenium.Samples",

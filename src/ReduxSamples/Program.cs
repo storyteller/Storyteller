@@ -10,6 +10,15 @@ namespace ReduxSamples
 {
     public class Program
     {
+        public static void Debug()
+        {
+            using (var runner = StoryTeller.StorytellerRunner.For<ReduxSampleSystem>())
+            {
+                runner.Run("Samples / Simple sending and value checking");
+                runner.OpenResultsInBrowser();
+            }
+        }
+
         public static void Main(string[] args)
         {
             StorytellerAgent.Run(args, new ReduxSampleSystem());

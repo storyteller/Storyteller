@@ -13,7 +13,7 @@ namespace Samples.Fixtures
         [FormatAs("The json is {json}")]
         public void JsonIs(string json)
         {
-            Json = json;
+            Context.State.StoreJson(json);
         }
 
         public IGrammar CheckOrder()

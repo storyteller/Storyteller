@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
 using Baseline.Dates;
 using StoryTeller.Engine.Stepthrough;
 using StoryTeller.Model;
-using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller.Engine
@@ -16,10 +13,10 @@ namespace StoryTeller.Engine
     public class SpecificationEngine : IDisposable, ISpecificationEngine
     {
         private readonly ConsumingQueue _executionQueue;
-        private ConsumingQueue _planning;
         private readonly ISpecRunner _runner;
         private readonly RunningSystem _running;
         private readonly Task _warmup;
+        private ConsumingQueue _planning;
         private ConsumingQueue _reader;
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
@@ -41,7 +38,7 @@ namespace StoryTeller.Engine
 
                 var results = _runner.Execute(request, _executionQueue);
 
-                if (!request.IsCancelled && (results != null))
+                if (!request.IsCancelled && results != null)
                 {
                     // TODO -- combine the two things here?
                     request.SpecExecutionFinished(results);
@@ -52,15 +49,11 @@ namespace StoryTeller.Engine
             var warmup = _running.System.Warmup();
 
             if (warmup == null)
-            {
-                throw new InvalidOperationException($"{system} cannot return a null value from {nameof(ISystem.Warmup)}()");
-            }
+                throw new InvalidOperationException(
+                    $"{system} cannot return a null value from {nameof(ISystem.Warmup)}()");
 
 
-            if (warmup.Status == TaskStatus.WaitingForActivation)
-            {
-                warmup.Start();
-            }
+
 
             _warmup = warmup.ContinueWith(t =>
             {
@@ -120,13 +113,9 @@ namespace StoryTeller.Engine
             _executionQueue.Start();
 
             if (_running.RecycledMessage.success)
-            {
                 startTheConsumingQueues(_running.Fixtures);
-            }
 
             EventAggregator.SendMessage(_running.RecycledMessage);
         }
-
-
     }
 }

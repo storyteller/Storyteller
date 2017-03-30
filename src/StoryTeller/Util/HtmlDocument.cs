@@ -69,7 +69,7 @@ namespace StoryTeller.Util
 
         private static void OpenFile(string fileName)
         {
-            Process.Start(fileName);
+            ProcessLauncher.GotoUrl($"file://{fileName}");
         }
 
         public HtmlTag Add(string tagName)

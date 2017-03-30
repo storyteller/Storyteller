@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using StoryTeller;
-using StoryTeller.Remotes.Messaging;
+using StoryTeller.Json;
 
 namespace Storyteller.Redux
 {
@@ -25,8 +27,10 @@ namespace Storyteller.Redux
             set
             {
                 _revision = value;
-                foreach (var waiter in _waiters)
+                foreach (var waiter in _waiters.ToArray())
+                {
                     waiter.Finish(_revision);
+                }
             }
         }
 
@@ -50,5 +54,14 @@ namespace Storyteller.Redux
             return waiter.Task;
         }
 
+        public void UpdateState(JToken token)
+        {
+            var json = token["state"].ToString();
+
+
+            CurrentState = json;
+            Revision = token["revision"].ToObject<int>();
+            _context.State.StoreJson(json);
+        }
     }
 }

@@ -126,9 +126,13 @@ namespace StoryTeller
                 context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
                     execution);
 
+                execution.BeforeExecution(context);
+
                 context.Reporting.As<Reporting>().StartDebugListening();
 
                 SpecExecution.RunAll(context, plan);
+
+                execution.AfterExecution(context);
             }
             finally
             {

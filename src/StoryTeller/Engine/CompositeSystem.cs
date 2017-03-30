@@ -37,7 +37,13 @@ namespace StoryTeller.Engine
 
         public Task Warmup()
         {
-            return _inner.Warmup().ContinueWith(async t =>
+            var warmup = _inner.Warmup();
+            if (warmup.Status == TaskStatus.WaitingForActivation)
+            {
+                warmup.Start();
+            }
+
+            return warmup.ContinueWith(async t =>
             {
                 foreach (var extension in _handling.Extensions)
                 {

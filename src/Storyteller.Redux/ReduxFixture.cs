@@ -4,7 +4,7 @@ using StoryTeller.Json;
 
 namespace Storyteller.Redux
 {
-    public class ReduxFixture : JsonComparisonFixture
+    public abstract class ReduxFixture : JsonComparisonFixture
     {
         private WebSocketServer _server;
 
@@ -16,15 +16,12 @@ namespace Storyteller.Redux
 
         protected ReduxSpecContext ReduxStore { get; private set; }
 
-        protected Task triggerAction(Action action)
+        protected internal Task triggerAction(Action action)
         {
-            return ReduxStore.WaitForAnUpdate(action).ContinueWith(t =>
-            {
-                Json = ReduxStore.CurrentState;
-            });
+            return ReduxStore.WaitForAnUpdate(action);
         }
 
-        protected Task sendAction(object message)
+        protected internal Task sendAction(object message)
         {
             return ReduxStore.WaitForAnUpdate(() => _server.Send(message));
         }

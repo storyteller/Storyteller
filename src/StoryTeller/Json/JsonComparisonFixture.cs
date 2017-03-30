@@ -14,22 +14,18 @@ using StoryTeller.Util;
 
 namespace StoryTeller.Json
 {
+    public static class JsonStateExtensions
+    {
+        public static void StoreJson(this State state, string json)
+        {
+            var jobject = JObject.Parse(json);
+            state.Store(jobject);
+        }
+    }
+
     public class JsonComparisonFixture : Fixture
     {
-        private string _json;
-
-        public string Json
-        {
-            get { return _json; }
-
-            set
-            {
-                _json = value;
-                JObject = JObject.Parse(value);
-            }
-        }
-
-        public JObject JObject { get; private set; }
+        public JObject JObject => Context.State.Retrieve<JObject>();
 
         [ExposeAsTable("Check Values within the JSON Document")]
         [return: Header("Value")]

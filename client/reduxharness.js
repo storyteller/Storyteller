@@ -9,15 +9,15 @@ var initialState = Immutable.Map({
 function Reducer(state = initialState, action){
   switch (action.type) {
     case 'add':
-        var operand = parseInt(action.number);
+        var operand = parseInt(action.operand);
         return state.update('number', operand, v => v + operand);
 
     case 'subtract':
-        var operand = parseInt(action.number);
+        var operand = parseInt(action.operand);
         return state.update('number', operand, v => v - operand);
 
     case 'multiply':
-        var operand = parseInt(action.number);
+        var operand = parseInt(action.operand);
         return state.update('number', operand, v => v * operand);
 
     case 'add-todo':
@@ -55,13 +55,12 @@ function ReduxHarness(store, transformState){
     var revision = 1;
 
     var port = getQueryVariable('StorytellerPort');
-    var wsAddress = "ws://127.0.0.1:" + port;
+    var wsAddress = "ws://127.0.0.1:5250";
 
     var socket = new WebSocket(wsAddress);
 
 	socket.onclose = function(){
 		console.log('The socket closed');
-		disconnect();
 	};
 
 	socket.onerror = function(evt){
@@ -95,9 +94,11 @@ function ReduxHarness(store, transformState){
             state: transformState(state)
         }
 
-        var json = JSON.stringify(message);
-
-        socket.send(json);
+		if (socket.readyState == 1){
+            var json = JSON.stringify(message);
+            console.log('Sending to engine: ' + json);
+			socket.send(json);
+		}
     });
 
     
@@ -120,7 +121,7 @@ function ReduxHarness(store, transformState){
 
         var message = {
             type: 'console.error',
-            error: msg
+            error: e
         }
 
         var json = JSON.stringify(message);
@@ -129,5 +130,3 @@ function ReduxHarness(store, transformState){
 }
 
 ReduxHarness(store, s => s.toJS())
-
-alert('hello!');

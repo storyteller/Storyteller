@@ -13,6 +13,9 @@ namespace StorytellerRunner
     {
         private readonly IList<WebSocket> _sockets = new List<WebSocket>();
 
+        public int ActiveCount => _sockets.Count;
+
+
         public async Task HandleSocket(HttpContext http)
         {
             var webSocket = await http.WebSockets.AcceptWebSocketAsync();
@@ -59,6 +62,7 @@ namespace StorytellerRunner
         }
 
         public Action<string> Received = x => { };
+
 
         public async Task Send(string text)
         {

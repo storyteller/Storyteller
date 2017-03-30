@@ -20,8 +20,11 @@ namespace Storyteller.Redux
 
         public void Finish(int version)
         {
-            if (version > StartingVersion)
+            if (version > StartingVersion && !_source.Task.IsCompleted)
+            {
                 _source.SetResult(version);
+                _collection.Remove(this);
+            }
         }
     }
 }

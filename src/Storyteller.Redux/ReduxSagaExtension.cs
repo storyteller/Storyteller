@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Baseline.Dates;
 using StoryTeller;
 
 namespace Storyteller.Redux
@@ -46,6 +47,8 @@ namespace Storyteller.Redux
 
             context.State.Store(reduxContext);
             context.State.Store(Server);
+
+            Server.WaitForConnection(15.Seconds()).Wait();
         }
 
         public void AfterEach(ISpecContext context)

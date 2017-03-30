@@ -1,2 +1,5 @@
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at StoryTeller.StorytellerAgent.tryToStart(ISystem system) in C:\code\storyteller\src\StoryTeller\StorytellerAgent.cs:line 106
+System.InvalidOperationException: Start may not be called on a continuation task.
+   at System.Threading.Tasks.Task.Start(TaskScheduler scheduler)
+   at StoryTeller.Engine.SpecificationEngine..ctor(ISystem system, ISpecRunner runner, IExecutionObserver observer) in C:\code\storyteller\src\StoryTeller\Engine\SpecificationEngine.cs:line 57
+   at StoryTeller.Engine.EngineAgent.buildUserInterfaceEngine() in C:\code\storyteller\src\StoryTeller\Engine\EngineAgent.cs:line 135
+   at StoryTeller.Engine.EngineAgent.Start(Project project) in C:\code\storyteller\src\StoryTeller\Engine\EngineAgent.cs:line 90

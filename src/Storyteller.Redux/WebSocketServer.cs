@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +15,11 @@ namespace Storyteller.Redux
 {
     public class WebSocketServer : IDisposable
     {
-        
+        private readonly IList<TaskCompletionSource<bool>> _connectionWaiters
+            = new List<TaskCompletionSource<bool>>();
+
         private readonly WebSocketsHandler _webSockets;
-        private IWebHost _server;
+        private IWebHost _host;
 
         public WebSocketServer()
         {
@@ -23,7 +28,21 @@ namespace Storyteller.Redux
                 Received = receiveJson
             };
 
-            Port = PortFinder.FindPort(5100);
+            Port = PortFinder.FindPort(5250);
+        }
+
+        public Task WaitForConnection(TimeSpan timeout)
+        {
+            if (_webSockets.ActiveCount > 0)
+            {
+                return Task.CompletedTask;
+            }
+
+            var timeoutTask = Task.Delay(timeout);
+            var connected = new TaskCompletionSource<bool>();
+            _connectionWaiters.Add(connected);
+
+            return Task.WhenAny(connected.Task, timeoutTask);
         }
 
         public ReduxSpecContext CurrentContext { get; set; } = new ReduxSpecContext(SpecContext.Basic());
@@ -32,7 +51,7 @@ namespace Storyteller.Redux
 
         public void Dispose()
         {
-            _server.Dispose();
+            _host.Dispose();
         }
 
         private void receiveJson(string json)
@@ -67,36 +86,48 @@ namespace Storyteller.Redux
 
         private void updateReduxState(JToken token)
         {
-            CurrentContext.CurrentState = token["state"].ToString();
-            CurrentContext.Revision = token["revision"].ToObject<int>();
+            CurrentContext.UpdateState(token);  
         }
 
         public void Start()
         {
-            var host = new WebHostBuilder()
+            _host = new WebHostBuilder()
                 .UseKestrel()
-                .UseUrls($"http://localhost:{Port}")
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://localhost:5250")
+                
                 .Configure(app =>
                 {
+
                     app.UseWebSockets();
 
                     app.Use(async (http, next) =>
                     {
                         if (http.WebSockets.IsWebSocketRequest)
+                        {
                             await _webSockets.HandleSocket(http).ConfigureAwait(false);
+                            var connected = _connectionWaiters.ToArray();
+                            foreach (var waiter in connected)
+                            {
+                                waiter.SetResult(true);
+                                _connectionWaiters.Remove(waiter);
+                            }
+                        }
                         else
+                        {
                             await next().ConfigureAwait(false);
+                        }
                     });
 
                     app.Run(async http =>
                     {
                         http.Response.StatusCode = 200;
                         http.Response.ContentType = "text/plain";
-                        await http.Response.WriteAsync("Nothing to see here.");
+                        await http.Response.WriteAsync($"Nothing to see here at {DateTime.Now}.");
                     });
-                });
+                }).Build();
 
-            _server = host.Start();
+            _host.Start();
         }
 
         public void SendCloseMessage()
@@ -114,5 +145,6 @@ namespace Storyteller.Redux
             var json = JsonSerialization.ToCleanJson(message);
             return _webSockets.Send(json);
         }
+
     }
 }
