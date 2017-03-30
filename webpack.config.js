@@ -5,8 +5,8 @@ module.exports = {
     "batch-bundle": ['./client/batch.js'],
     "embed": ['./client/embed.js'],
     "topics": ['./client/topics.js'],
-	  "preview": ['./client/preview.js']
-	
+	  "preview": ['./client/preview.js'],
+	  "reduxharness.js": ['./client/reduxharness.js']
   },
   output: {
     path: __dirname + '/src/StorytellerRunner',
