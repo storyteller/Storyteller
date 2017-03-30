@@ -12,6 +12,7 @@ namespace StoryTeller.Grammars
     {
          private static readonly IList<IGrammarBuilder> _builders = new List<IGrammarBuilder>
          {
+             new GrammarAttributeBuilder(),
              new ProgrammaticGrammarBuilder(),
              new GrammarSourceBuilder(),
              new FactMethodBuilder(),
