@@ -6,7 +6,7 @@ module.exports = {
     "embed": ['./client/embed.js'],
     "topics": ['./client/topics.js'],
 	  "preview": ['./client/preview.js'],
-	  "reduxharness.js": ['./client/reduxharness.js']
+	  "reduxharness": ['./client/reduxharness.js']
   },
   output: {
     path: __dirname + '/src/StorytellerRunner',

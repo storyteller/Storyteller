@@ -1,0 +1,2 @@
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at StoryTeller.StorytellerAgent.tryToStart(ISystem system) in C:\code\storyteller\src\StoryTeller\StorytellerAgent.cs:line 106

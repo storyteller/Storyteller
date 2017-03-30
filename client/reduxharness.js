@@ -28,16 +28,9 @@ function Reducer(state = initialState, action){
       console.log("Reducer does not know how to handle: " + action.type);
       return state;
   }
-
-  return state;
 }
 
 var store = createStore(Reducer);
-
-
-function toStateJson(state){
-    return state.toJS();
-}
 
 
 
@@ -99,7 +92,7 @@ function ReduxHarness(store, transformState){
         var message = {
             type: 'redux-state',
             revision: revision,
-            state = transformState(state)
+            state: transformState(state)
         }
 
         var json = JSON.stringify(message);
@@ -134,3 +127,7 @@ function ReduxHarness(store, transformState){
         socket.send(json);
     }
 }
+
+ReduxHarness(store, s => s.toJS())
+
+alert('hello!');
