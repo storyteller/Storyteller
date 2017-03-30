@@ -26,13 +26,12 @@ namespace StoryTeller
             return new StorytellerRunner(new T());
         }
 
-        private readonly FixtureLibrary _library;
 
         private readonly IList<BatchRecord> _records = new List<BatchRecord>();
-        private readonly ISystem _system;
         private readonly Task _warmup;
 
         public readonly StopConditions StopConditions = new StopConditions();
+        private readonly RunningSystem _running;
 
         public StorytellerRunner(ISystem system, string specDirectory = null)
         {
@@ -40,11 +39,11 @@ namespace StoryTeller
 
             SpecDirectory = specDirectory ?? GuessSpecDirectory(system);
 
-            _system = system;
-            _library = FixtureLibrary.CreateForAppDomain(_system.Start());
+            _running = RunningSystem.Create(system);
+
             Hierarchy = HierarchyLoader.ReadHierarchy(SpecDirectory).ToHierarchy();
 
-            _warmup = _system.Warmup();
+            _warmup = _running.System.Warmup();
         }
 
         public Hierarchy Hierarchy { get; }
@@ -53,7 +52,7 @@ namespace StoryTeller
 
         public void Dispose()
         {
-            _system.Dispose();
+            _running.System.Dispose();
         }
 
         public static string GuessSpecDirectory(ISystem system)
@@ -107,7 +106,7 @@ namespace StoryTeller
 
         public SpecResults Execute(Specification specification)
         {
-            var plan = specification.CreatePlan(_library);
+            var plan = specification.CreatePlan(_running.Fixtures);
             var timings = new Timings();
 
             _warmup.Wait(1.Minutes());
@@ -121,7 +120,7 @@ namespace StoryTeller
             {
                 using (timings.Record("Context", "Creation"))
                 {
-                    execution = _system.CreateContext();
+                    execution = _running.System.CreateContext();
                 }
 
                 context = new SpecContext(specification, timings, new NulloResultObserver(), StopConditions,
@@ -168,9 +167,9 @@ namespace StoryTeller
         {
             var response = new BatchRunResponse
             {
-                fixtures = _library.Models.ToArray(),
+                fixtures = _running.Fixtures.Models.ToArray(),
                 suite = "Interactive Execution",
-                system = _system.GetType().FullName,
+                system = _running.System.GetType().FullName,
                 records = _records.ToArray()
             };
             return response;
