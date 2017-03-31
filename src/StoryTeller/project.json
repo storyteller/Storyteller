@@ -9,7 +9,7 @@
     ],
     "embed": [ "../../client/public/**/*.css", "../StorytellerRunner/batch-bundle.js" ]
   },
-  "version": "4.1.1",
+  "version": "4.2.0-alpha-*",
   "title": "Storyteller",
   "description": "Acceptance Test Driven Development and Executable Specifications for .Net",
   "language": "en-US",
