@@ -29,7 +29,7 @@
   },
 
   "dependencies": {
-    "Alba": "1.0.0-alpha-28",
+    "Alba": "1.0.0-alpha-42",
     "StoryTeller": { "target": "project" }
   },
 

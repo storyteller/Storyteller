@@ -8,50 +8,22 @@ using StoryTeller.Equivalence;
 
 namespace StoryTeller.AspNetCore
 {
-    public class AspNetCoreSystem<T> : AspNetCoreSystem where T : class
-    {
-        public AspNetCoreSystem() : base(() => buildSystem())
-        {
-        }
-
-        // TODO -- figure out how to be able to modify the app
-        // defined by the Startup class like we could do w/ FubuMVC/Serenity
-        // think extra middleware, replace services w/ stubs, extra logging
-        protected static ISystemUnderTest buildSystem()
-        {
-            return SystemUnderTest.ForStartup<T>();
-        }
-    }
 
     public class AspNetCoreSystem : ISystem
     {
         public static void Run<T>(string[] args) where T : class
         {
-            var system = new AspNetCoreSystem(() => SystemUnderTest.ForStartup<T>());
+            var system = new AspNetCoreSystem();
+            system.System.UseStartup<T>();
+
             StorytellerAgent.Run(args, system);
         }
 
 
 
         public readonly CellHandling CellHandling = new CellHandling(new EquivalenceChecker(), new Conversions());
+        public readonly SystemUnderTest System = new SystemUnderTest();
 
-        private readonly Task<ISystemUnderTest> _warmup;
-
-        protected AspNetCoreSystem(Func<ISystemUnderTest> builder)
-        {
-            _warmup = Task.Factory.StartNew(() =>
-            {
-                var sut = builder();
-
-                beforeAll(sut);
-
-                return sut;
-            });
-        }
-
-        // TODO -- add one that uses Action<IApplicationBuilder> for more adhoc things
-
-        public ISystemUnderTest System => _warmup.Result;
 
         public void Dispose()
         {
@@ -65,8 +37,6 @@ namespace StoryTeller.AspNetCore
 
         public IExecutionContext CreateContext()
         {
-            _warmup?.Wait();
-
             beforeAll(System);
 
             return new AspNetCoreContext(this);
@@ -74,7 +44,10 @@ namespace StoryTeller.AspNetCore
 
         public Task Warmup()
         {
-            return _warmup;
+            return Task.Factory.StartNew(() =>
+            {
+                System.Bootstrap();
+            });
         }
 
         protected virtual void beforeAll(ISystemUnderTest sut)
