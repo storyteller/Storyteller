@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Alba;
 using Baseline;
 using Baseline.Conversion;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using StoryTeller.Engine;
 using StoryTeller.Equivalence;
 
 namespace StoryTeller.AspNetCore
 {
 
-    public class AspNetCoreSystem : ISystem
+    public class AspNetCoreSystem : SystemUnderTest, ISystem, IStartupFilter
     {
         public static void Run<T>(string[] args) where T : class
         {
             var system = new AspNetCoreSystem();
-            system.System.UseStartup<T>();
+            system.UseStartup<T>();
 
             StorytellerAgent.Run(args, system);
         }
@@ -22,12 +26,11 @@ namespace StoryTeller.AspNetCore
 
 
         public readonly CellHandling CellHandling = new CellHandling(new EquivalenceChecker(), new Conversions());
-        public readonly SystemUnderTest System = new SystemUnderTest();
+        private ISpecContext _currentContext;
 
-
-        public void Dispose()
+        public AspNetCoreSystem()
         {
-            System.Dispose();
+            ConfigureServices(_ => _.AddTransient<IStartupFilter>(x => this));
         }
 
         public CellHandling Start()
@@ -35,22 +38,22 @@ namespace StoryTeller.AspNetCore
             return CellHandling;
         }
 
-        public IExecutionContext CreateContext()
+        IExecutionContext ISystem.CreateContext()
         {
-            beforeAll(System);
 
             return new AspNetCoreContext(this);
         }
 
-        public Task Warmup()
+        Task ISystem.Warmup()
         {
             return Task.Factory.StartNew(() =>
             {
-                System.Bootstrap();
+                Bootstrap();
+                beforeAll();
             });
         }
 
-        protected virtual void beforeAll(ISystemUnderTest sut)
+        protected virtual void beforeAll()
         {
             // Nothing
         }
@@ -62,12 +65,41 @@ namespace StoryTeller.AspNetCore
 
         protected virtual void beforeEach(ISystemUnderTest sut, ISpecContext context)
         {
+            _currentContext = context;
             // nothing
         }
 
-        protected virtual void afterAll()
+        Action<IApplicationBuilder> IStartupFilter.Configure(Action<IApplicationBuilder> inner)
         {
-            // nothing
+            return builder =>
+            {
+                // Add some wrapping middleware here
+                builder.Use(next =>
+                {
+                    return async context =>
+                    {
+                        if (_currentContext == null)
+                        {
+                            await next(context).ConfigureAwait(false);
+                        }
+                        else
+                        {
+                            var perf = _currentContext.Timings.Subject("Http Request", context.Request.PathBase);
+
+                            await next(context).ConfigureAwait(false);
+
+                            _currentContext.Timings.End(perf);
+
+                            _currentContext.Reporting.ReporterFor<HttpRequestReport>()
+                                .Record(context, perf);
+                        }
+
+                        
+                    };
+                });
+
+                inner(builder);
+            };
         }
 
         public class AspNetCoreContext : IExecutionContext
@@ -85,22 +117,23 @@ namespace StoryTeller.AspNetCore
 
             public void BeforeExecution(ISpecContext context)
             {
-                context.State.Store(_parent.System);
+                context.State.Store(_parent);
 
-                _parent.beforeEach(_parent.System, context);
+                _parent.beforeEach(_parent, context);
             }
 
             public void AfterExecution(ISpecContext context)
             {
-                // TODO -- do logging of the requests here
-                _parent.afterEach(_parent.System, context);
+                _parent.afterEach(_parent, context);
             }
 
             public T GetService<T>()
             {
-                return _parent.System.Services.GetService(typeof(T)).As<T>();
+                return _parent.Services.GetService(typeof(T)).As<T>();
             }
         }
+
+
 
         
     }

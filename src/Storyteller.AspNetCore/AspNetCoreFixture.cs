@@ -6,7 +6,7 @@ namespace StoryTeller.AspNetCore
 {
     public abstract class AspNetCoreFixture : Fixture
     {
-        public SystemUnderTest SystemUnderTest
+        public AspNetCoreSystem SystemUnderTest
         {
             get
             {
@@ -15,7 +15,7 @@ namespace StoryTeller.AspNetCore
                     throw new InvalidOperationException("This property is only available during the execution of a specification");
                 }
 
-                return Context.State.Retrieve<SystemUnderTest>();
+                return Context.State.Retrieve<AspNetCoreSystem>();
             }
         }
 
