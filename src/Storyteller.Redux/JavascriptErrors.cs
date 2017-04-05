@@ -13,7 +13,7 @@ namespace Storyteller.Redux
 
             foreach (var log in Errors)
             {
-                div.Add("div").AddClass("alert").AddClass("alert-warning").Add("pre").Text(log);
+                div.Add("pre").AddClass("bg-warning").Text(log);
             }
 
             return div.ToString();

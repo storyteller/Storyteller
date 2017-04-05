@@ -21,7 +21,7 @@ namespace Storyteller.Redux
         private readonly string _type;
 
         /// <summary>
-        /// 
+        /// Marks the method as a signature to send a matching object to the Redux store system
         /// </summary>
         /// <param name="type">The 'type' property in the Redux action you're sending here</param>
         public SendJsonAttribute(string type)
@@ -29,9 +29,14 @@ namespace Storyteller.Redux
             _type = type;
         }
 
+        /// <summary>
+        /// Optionally override the format of the grammar display in HTML
+        /// </summary>
+        public string Format { get; set; }
+
         public override IGrammar Build(MethodInfo method, Fixture fixture)
         {
-            return new SendJsonGrammar(_type, method, fixture.As<ReduxFixture>());
+            return new SendJsonGrammar(_type, method, fixture.As<ReduxFixture>()) {Format = Format};
         }
     }
 
@@ -72,8 +77,15 @@ namespace Storyteller.Redux
             return true;
         }
 
+        public string Format { get; set; }
+
         protected override string format()
         {
+            if (Format.IsNotEmpty())
+            {
+                return Format;
+            }
+
             var keys = _method
                 .GetParameters()
                 .Select(param => $"\"{param.Name}\": {{{param.Name}}}").Join(", ");

@@ -11,7 +11,7 @@ namespace ReduxSamples
             
         }
 
-        [SendJson("subtract")]
+        [SendJson("subtract", Format = "Subtract {operand}")]
         public void Subtract(int operand)
         {
             

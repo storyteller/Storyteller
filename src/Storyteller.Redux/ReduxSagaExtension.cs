@@ -29,18 +29,24 @@ namespace Storyteller.Redux
             return Task.Factory.StartNew(() =>
             {
                 Server.Start();
-
-                var url = Url.Contains("?")
-                    ? Url + $"&StorytellerPort={Server.Port}"
-                    : $"{Url}?StorytellerPort={Server.Port}";
-
-                _process = ProcessLauncher.GotoUrl(url);
             });
+        }
+
+        private void launchPage()
+        {
+            var url = Url.Contains("?")
+                ? Url + $"&StorytellerPort={Server.Port}"
+                : $"{Url}?StorytellerPort={Server.Port}";
+
+            _process = ProcessLauncher.GotoUrl(url);
         }
 
         public void BeforeEach(ISpecContext context)
         {
-            Server.SendRefreshMessage();
+            Server.SendCloseMessage();
+            Server.ClearAll();
+
+            launchPage();
 
             var reduxContext = new ReduxSpecContext(context);
             Server.CurrentContext = reduxContext;
@@ -53,7 +59,7 @@ namespace Storyteller.Redux
 
         public void AfterEach(ISpecContext context)
         {
-            // nothing?
+
         }
     }
 }

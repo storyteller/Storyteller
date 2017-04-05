@@ -81,7 +81,7 @@ namespace Storyteller.Redux
 
         private void recordTrace(JToken token)
         {
-            CurrentContext.RecordJsError(token["text"]?.ToString());
+            CurrentContext.ConsoleLog(token["text"]?.ToString());
         }
 
         private void updateReduxState(JToken token)
@@ -105,13 +105,7 @@ namespace Storyteller.Redux
                     {
                         if (http.WebSockets.IsWebSocketRequest)
                         {
-                            await _webSockets.HandleSocket(http).ConfigureAwait(false);
-                            var connected = _connectionWaiters.ToArray();
-                            foreach (var waiter in connected)
-                            {
-                                waiter.SetResult(true);
-                                _connectionWaiters.Remove(waiter);
-                            }
+                            await _webSockets.HandleSocket(http, markActiveConnection).ConfigureAwait(false);
                         }
                         else
                         {
@@ -130,6 +124,16 @@ namespace Storyteller.Redux
             _host.Start();
         }
 
+        private void markActiveConnection()
+        {
+            var connected = _connectionWaiters.ToArray();
+            foreach (var waiter in connected)
+            {
+                waiter.SetResult(true);
+                _connectionWaiters.Remove(waiter);
+            }
+        }
+
         public void SendCloseMessage()
         {
             _webSockets.Send("CLOSE").Wait();
@@ -137,7 +141,8 @@ namespace Storyteller.Redux
 
         public void SendRefreshMessage()
         {
-            _webSockets.Send("REFRESH").Wait();
+            _webSockets.SendAndClear("REFRESH").Wait();
+            
         }
 
         public Task Send(object message)
@@ -146,5 +151,9 @@ namespace Storyteller.Redux
             return _webSockets.Send(json);
         }
 
+        public void ClearAll()
+        {
+            _webSockets.ClearAll();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -16,11 +17,13 @@ namespace StorytellerRunner
         public int ActiveCount => _sockets.Count;
 
 
-        public async Task HandleSocket(HttpContext http)
+        public async Task HandleSocket(HttpContext http, Action callback = null)
         {
             var webSocket = await http.WebSockets.AcceptWebSocketAsync();
 
             _sockets.Add(webSocket);
+
+            callback?.Invoke();
 
             while (webSocket.State == WebSocketState.Open)
             {
@@ -61,6 +64,18 @@ namespace StorytellerRunner
             webSocket.Dispose();
         }
 
+        public void ClearAll()
+        {
+            var sockets = _sockets.ToArray();
+
+            _sockets.Clear();
+            foreach (var socket in sockets)
+            {
+                socket.Dispose();
+            }
+        }
+
+
         public Action<string> Received = x => { };
 
 
@@ -77,6 +92,30 @@ namespace StorytellerRunner
                 {
                     await socket.SendAsync(buffer, type, true, token);
                 }
+            }
+        }
+
+        public async Task SendAndClear(string text)
+        {
+            var sockets = _sockets.ToArray();
+            _sockets.Clear();
+
+            var token = CancellationToken.None;
+            var type = WebSocketMessageType.Text;
+            var data = Encoding.UTF8.GetBytes(text);
+            var buffer = new ArraySegment<Byte>(data);
+
+            foreach (var socket in sockets)
+            {
+                if (socket != null && socket.State == WebSocketState.Open)
+                {
+                    await socket.SendAsync(buffer, type, true, token);
+                }
+            }
+
+            foreach (var socket in sockets)
+            {
+                socket.Dispose();
             }
         }
 

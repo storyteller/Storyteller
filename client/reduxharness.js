@@ -1,5 +1,6 @@
 var Immutable = require('immutable');
 import { createStore } from 'redux';
+var $ = require('jquery');
 
 var initialState = Immutable.Map({
     number: 0,
@@ -130,3 +131,5 @@ function ReduxHarness(store, transformState){
 }
 
 ReduxHarness(store, s => s.toJS())
+
+$('#main').html(new Date());
