@@ -48,17 +48,17 @@
   \*********************/
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("module.exports = __webpack_require__(/*! ./client/preview.js */1129);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi preview\n// module id = 0\n// module chunks = 3\n//# sourceURL=webpack:///multi_preview?");
+	eval("module.exports = __webpack_require__(/*! ./client/preview.js */1130);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi preview\n// module id = 0\n// module chunks = 3\n//# sourceURL=webpack:///multi_preview?");
 
 /***/ },
 
-/***/ 1129:
+/***/ 1130:
 /*!***************************!*\
   !*** ./client/preview.js ***!
   \***************************/
 /***/ function(module, exports) {
 
-	eval("\"use strict\";\n\nconsole.log(\"Hey, I loaded just fine\");\n\n//////////////////\n// WEBPACK FOOTER\n// ./client/preview.js\n// module id = 1129\n// module chunks = 3\n//# sourceURL=webpack:///./client/preview.js?");
+	eval("\"use strict\";\n\nconsole.log(\"Hey, I loaded just fine\");\n\n//////////////////\n// WEBPACK FOOTER\n// ./client/preview.js\n// module id = 1130\n// module chunks = 3\n//# sourceURL=webpack:///./client/preview.js?");
 
 /***/ }
 
