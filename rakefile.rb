@@ -6,10 +6,12 @@ COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
 BUILD_VERSION = '4.2.0'
 
-tc_build_number = ENV["BUILD_NUMBER"]
+tc_build_number = ENV["APPVEYOR_BUILD_NUMBER"]
 build_revision = tc_build_number || Time.new.strftime('5%H%M')
 build_number = "#{BUILD_VERSION}.#{build_revision}"
-BUILD_NUMBER = build_number 
+BUILD_NUMBER = build_number
+
+CI = ENV["CI"].nil? ? false : true
 
 task :ci => [:default, :specifications, :pack, :push]
 
@@ -38,15 +40,15 @@ end
 desc "Update the version information for the build"
 task :version do
   asm_version = build_number
-  
+
   begin
     commit = `git log -1 --pretty=format:%H`
   rescue
     commit = "git unavailable"
   end
-  puts "##teamcity[buildNumber '#{build_number}']" unless tc_build_number.nil?
-  puts "Version: #{build_number}" if tc_build_number.nil?
-  
+  #puts "##teamcity[buildNumber '#{build_number}']" unless tc_build_number.nil?
+  #puts "Version: #{build_number}" if tc_build_number.nil?
+
   options = {
 	:description => 'IoC Container for .Net',
 	:product_name => 'Executable Specifications for .Net',
@@ -55,9 +57,9 @@ task :version do
 	:version => asm_version,
 	:file_version => build_number,
 	:informational_version => asm_version
-	
+
   }
-  
+
   puts "Writing src/CommonAssemblyInfo.cs..."
 	File.open('src/CommonAssemblyInfo.cs', 'w') do |file|
 		file.write "using System.Reflection;\n"
@@ -70,7 +72,7 @@ task :version do
 		file.write "[assembly: AssemblyFileVersion(\"#{options[:file_version]}\")]\n"
 		file.write "[assembly: AssemblyInformationalVersion(\"#{options[:informational_version]}\")]\n"
 	end
-	
+
 
 end
 
@@ -89,7 +91,7 @@ task :test => [:compile] do
 	#sh "dotnet test src/IntegrationTests --framework netcoreapp1.0"
 
     sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Specifications --validate"
-	
+
 end
 
 desc 'Only runs .Net related tests'
@@ -109,10 +111,10 @@ task :pack do
 	sh "dotnet pack src/StorytellerRunner -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o artifacts --configuration Release --version-suffix #{build_revision}"
-	
+
 	sh "dotnet publish src/StorytellerRunner --framework NET46 -o artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
 	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o artifacts -version #{build_number}"
-	
+
 
 
 end
@@ -145,7 +147,7 @@ end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"
 task :publish => [:prepare_docs] do
-	if Dir.exists? 'doc-target' 
+	if Dir.exists? 'doc-target'
 		FileUtils.rm_rf 'doc-target'
 	end
 
@@ -153,18 +155,18 @@ task :publish => [:prepare_docs] do
 
 	Dir.mkdir 'doc-target'
 	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
-	
-	
+
+
 	sh "dotnet run --project src/dotnet-stdocs -- export doc-target Website --version #{BUILD_VERSION}"
-	
+
 	Dir.chdir "doc-target" do
 		sh "git add --all"
 		sh "git commit -a -m \"Documentation Update for #{BUILD_VERSION}\" --allow-empty"
 		sh "git push origin master"
 	end
-	
 
-	
+
+
 
 end
 
