@@ -75,8 +75,8 @@ namespace StoryTeller.Testing.Model.Persistence
             actual.Breakpoints.ShouldBe(expected.Breakpoints);
             actual.Lifecycle.ShouldBe(expected.Lifecycle);
             actual.MaxRetries.ShouldBe(expected.MaxRetries);
-            actual.id.Replace("\r\n", "\n").ShouldBe(expected.id);
-            actual.name.Replace("\r\n", "\n").ShouldBe(expected.name);
+            actual.id.ShouldBe(expected.id);
+            actual.name.ShouldBe(expected.name);
 
             compare(expected.Children, actual.Children);
         }
@@ -359,6 +359,8 @@ how are you today?
 ** Well, thank you"
             };
 
+            comment.Text = comment.Text.Replace("\n", Environment.NewLine);
+
             original.Children.Add(comment);
 
             compare(original, persisted);
@@ -376,6 +378,8 @@ how are you today?
 
 ** Well, thank you"
             };
+
+            comment.Text = comment.Text.Replace("\n", Environment.NewLine);
 
             var section = new Section("MyThing");
             section.AddStep("Go");
