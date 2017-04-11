@@ -160,6 +160,11 @@ namespace StoryTeller.Engine
                 executionObserver = new TeamCityExecutionObserver();
             }
 
+            if ("AppVeyor" == tracingStyle)
+            {
+                batchObserver = new AppVeyorBatchObserver(batchObserver);
+            }
+
             var executionMode = new BatchExecutionMode(batchObserver);
             var runner = new SpecRunner(executionMode, _running.System, executionObserver);
 

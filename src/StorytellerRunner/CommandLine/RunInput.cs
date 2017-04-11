@@ -57,7 +57,9 @@ namespace ST.CommandLine
         [Description("Optional. Only runs tests with desired lifecyle")]
         public Lifecycle LifecycleFlag { get; set; } = Lifecycle.Any;
 
-
+        [Description("Optional. Applies extra logging to see progress within AppVeyor during CI runs")]
+        [FlagAlias("appveyor")]
+        public bool AppVeyorTracingFlag { get; set; }
         protected override Project configureProject()
         {
             var project = base.configureProject();
@@ -66,6 +68,11 @@ namespace ST.CommandLine
             if (TeamCityTracingFlag)
             {
                 project.TracingStyle = "TeamCity";
+            }
+
+            if (AppVeyorTracingFlag)
+            {
+                project.TracingStyle = "AppVeyor";
             }
 
             return project;
