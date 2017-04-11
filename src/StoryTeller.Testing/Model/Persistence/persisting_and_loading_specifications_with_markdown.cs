@@ -75,13 +75,10 @@ namespace StoryTeller.Testing.Model.Persistence
             actual.Breakpoints.ShouldBe(expected.Breakpoints);
             actual.Lifecycle.ShouldBe(expected.Lifecycle);
             actual.MaxRetries.ShouldBe(expected.MaxRetries);
-            actual.id.ShouldBe(expected.id);
-            actual.name.ShouldBe(expected.name);
-
+            actual.id.Replace("\r\n", "\n").ShouldBe(expected.id);
+            actual.name.Replace("\r\n", "\n").ShouldBe(expected.name);
 
             compare(expected.Children, actual.Children);
-
-
         }
 
         private void compare(IList<Node> expected, IList<Node> actual)
