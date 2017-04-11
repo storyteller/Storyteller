@@ -439,6 +439,8 @@ very,
 very,
 very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, long text";
 
+            bigtext = bigtext.Replace("\n", Environment.NewLine);
+
 
             var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", "3\r\n3");
 
