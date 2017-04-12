@@ -12,6 +12,7 @@
     "tdd-karma": "karma start --auto-watch",
     "tdd-mocha": "mocha -w -G",
     "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
+    "test:prod": "better-npm-run test:prod",
     "test-karma": "karma start --single-run",
     "test-mocha": "mocha --compilers js:babel-core/register"
   },
@@ -24,6 +25,12 @@
     },
     "build-client:prod": {
       "command": "webpack",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:prod": {
+      "command": "npm run test-mocha && npm run test-karma && npm run smoke-test",
       "env": {
         "NODE_ENV": "production"
       }
