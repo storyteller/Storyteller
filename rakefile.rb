@@ -35,7 +35,8 @@ end
 
 desc "Runs Javascript Tests"
 task :jstests => [:npm] do
-	sh "npm run test"
+	sh "npm run test" unless CI
+	sh "npm run test:prod" if CI
 end
 
 desc "Update the version information for the build"
