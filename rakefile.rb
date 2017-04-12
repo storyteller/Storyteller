@@ -85,14 +85,16 @@ end
 
 desc 'Run the unit tests'
 task :test => [:compile] do
-	Dir.mkdir RESULTS_DIR
+  Dir.mkdir RESULTS_DIR
 
-	sh "dotnet test src/Storyteller.Testing"
-	sh "dotnet test src/StorytellerDocGen.Testing"
-    #sh "dotnet test src/IntegrationTests --framework net46"
-	#sh "dotnet test src/IntegrationTests --framework netcoreapp1.0"
+  platform = OS.mac? ? "-f netcoreapp1.0" : ""
 
-    sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Specifications --validate"
+  sh "dotnet test src/Storyteller.Testing #{platform}"
+  sh "dotnet test src/StorytellerDocGen.Testing #{platform}"
+  #sh "dotnet test src/IntegrationTests --framework net46"
+  #sh "dotnet test src/IntegrationTests --framework netcoreapp1.0"
+
+  sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Specifications --validate"
 
 end
 
@@ -207,5 +209,23 @@ def load_project_file(project)
   File.open(project) do |file|
     file_contents = File.read(file, :encoding => 'bom|utf-8')
     JSON.parse(file_contents)
+  end
+end
+
+module OS
+  def OS.windows?
+    (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def OS.mac?
+   (/darwin/ =~ RUBY_PLATFORM) != nil
+  end
+
+  def OS.unix?
+    !OS.windows?
+  end
+
+  def OS.linux?
+    OS.unix? and not OS.mac?
   end
 end
