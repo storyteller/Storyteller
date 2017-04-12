@@ -69,7 +69,7 @@ namespace StoryTeller.Testing.ST
             MockFor<IClientConnector>()
                 .Received().SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top, newSuite));
 
-            
+
             newSuite.name.ShouldBe("Foo Specs");
             newSuite.Specifications.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
@@ -105,11 +105,13 @@ namespace StoryTeller.Testing.ST
         [Fact]
         public void add_spec_with_illegal_chars()
         {
-            var added = ClassUnderTest.AddSpec("Sentences", "The Third Sentence??");
+            var c = Path.GetInvalidFileNameChars().First();
+
+            var added = ClassUnderTest.AddSpec("Sentences", $"The Third Sentence{c}{c}");
 
             var expectedPath = thePath.AppendPath("Sentences", "The_Third_Sentence.md");
 
-            added.data.name.ShouldBe("The Third Sentence??");
+            added.data.name.ShouldBe($"The Third Sentence{c}{c}");
             added.data.Filename.ShouldBe(expectedPath);
             added.data.Lifecycle.ShouldBe(Lifecycle.Acceptance);
 
@@ -118,7 +120,7 @@ namespace StoryTeller.Testing.ST
             ClassUnderTest.Hierarchy.Specifications[added.data.id].ShouldBeTheSameAs(added.data);
 
             var specification = MarkdownReader.ReadFromFile(expectedPath);
-            specification.name.ShouldBe("The Third Sentence??");
+            specification.name.ShouldBe($"The Third Sentence{c}{c}");
 
             // Adds the spec to the node
             var suite = ClassUnderTest.Hierarchy.Suites["Sentences"];
@@ -140,7 +142,7 @@ namespace StoryTeller.Testing.ST
             MockFor<IClientConnector>()
                 .Received().SendMessageToClient(new SuiteAdded(ClassUnderTest.Hierarchy.Top, newSuite));
 
-            
+
             newSuite.name.ShouldBe("Special Tables");
             newSuite.Specifications.Length.ShouldBe(0);
             newSuite.suites.Length.ShouldBe(0);
@@ -323,7 +325,7 @@ namespace StoryTeller.Testing.ST
 
 
 
-            
+
 
             var message = MockFor<IClientConnector>().ReceivedCalls().First().GetArguments().First().As<SpecData>();
 

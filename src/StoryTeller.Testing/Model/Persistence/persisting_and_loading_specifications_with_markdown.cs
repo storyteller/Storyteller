@@ -398,7 +398,7 @@ how are you today?
         {
             original.name = "Some spec";
 
-            var step = new Step("Add").With("x", "1,2,3").With("y", "3=2").With("sum", "3\r\n3");
+            var step = new Step("Add").With("x", "1,2,3").With("y", "3=2").With("sum", $"3{Environment.NewLine}3");
 
             var section = new Section("Math");
             section.Children.Add(step);
@@ -416,7 +416,7 @@ how are you today?
             var bigtext = "Very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, long text";
 
 
-            var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", "3\r\n3");
+            var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", $"3{Environment.NewLine}3");
 
             var section = new Section("Math");
             section.Children.Add(step);
@@ -442,7 +442,7 @@ very, very, very, very, very, very, very, very, very, very, very, very, very, ve
             bigtext = bigtext.Replace("\n", Environment.NewLine);
 
 
-            var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", "3\r\n3");
+            var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", $"3{Environment.NewLine}3");
 
             var section = new Section("Math");
             section.Children.Add(step);
