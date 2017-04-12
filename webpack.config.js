@@ -1,4 +1,15 @@
 var ProgressPlugin = require('./util/progress-plugin');
+
+var PROD = process.env.NODE_ENV === 'production'
+
+var plugins = [
+  ProgressPlugin()
+]
+
+if (PROD) {
+  plugins = []
+}
+
 module.exports = {
   entry: {
     "bundle": ['./client/client.js'],
@@ -18,16 +29,14 @@ module.exports = {
     // Allow to omit extensions when requiring these files
     extensions: ['', '.js', '.jsx']
   },
-  plugins: [
-    ProgressPlugin()
-  ],
+  plugins: plugins,
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { 
-        test: /\.(js|jsx)$/, 
-        loader: 'babel?{"presets": ["es2015", "react"]}', 
-        exclude: /node_modules/, 
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel?{"presets": ["es2015", "react"]}',
+        exclude: /node_modules/,
       },
     ]
   },

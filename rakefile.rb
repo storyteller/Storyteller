@@ -29,7 +29,8 @@ end
 desc "Installs npm packages and builds the bundles"
 task :npm do
 	sh "npm install"
-	sh "npm run build-client"
+	sh "npm run build-client" unless CI
+	sh "npm run build-client:prod" if CI
 end
 
 desc "Runs Javascript Tests"
