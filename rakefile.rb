@@ -13,7 +13,7 @@ BUILD_NUMBER = build_number
 
 CI = ENV["CI"].nil? ? false : true
 
-task :ci => [:default, :specifications, :pack, :push]
+task :ci => [:default, :specifications, :pack, :appVeyorPush]
 
 task :default => [:jstests, :test]
 
@@ -118,14 +118,26 @@ task :pack do
 
 	sh "dotnet publish src/StorytellerRunner --framework NET46 -o artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
 	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o artifacts -version #{build_number}"
-
-
-
 end
 
 desc "Pushes the Nuget's to MyGet"
 task :push do
 	#sh "nuget.exe push artifacts/*.nupkg -ApiKey #{APIKEY} -NonInteractive -Source https://www.myget.org/F/storyteller/ "
+end
+
+desc "Pushes the Nuget's to AppVeyor"
+task :appVeyorPush do
+  if !CI
+    puts "Not on CI, skipping artifact upload"
+    next
+  end
+  Dir.glob('./artifacts/*.*') do |file|
+    full_path = File.expand_path file
+    full_path = full_path.gsub('/', '\\') if OS.windows?
+    cmd = "appveyor PushArtifact #{full_path}"
+    puts cmd
+    sh cmd
+  end
 end
 
 desc "Launches VS to the StructureMap solution file"

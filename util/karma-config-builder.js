@@ -5,6 +5,8 @@ var webpackConfig = _.extend({}, defaultConfig, {
   entry: undefined
 });
 
+var PROD = process.env.NODE_ENV === 'production'
+
 module.exports = function(entryFile) {
   var preprocessors = {};
   preprocessors[entryFile] = ['webpack'];
@@ -49,7 +51,7 @@ module.exports = function(entryFile) {
           colors: true
         },
         //suppresses output of webpack log
-        quiet: false
+        quiet: PROD
       },
 
       // test results reporter to use
