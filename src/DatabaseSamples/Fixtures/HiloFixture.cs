@@ -63,7 +63,7 @@ namespace DatabaseSamples.Fixtures
 
         public RowVerification HigherThan(int page)
         {
-            return VerifyRows("select entity_name from mt_hilo where hi_value > :page")
+            return VerifyRows("select entity_name from mt_hilo where hi_value > @page")
                 .Titled("Entities past a certain page threshold")
                 .FetchFormat("find entities where hi_value > {page}")
                 .AddField<string>("entity_name");
