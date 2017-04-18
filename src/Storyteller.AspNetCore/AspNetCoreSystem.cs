@@ -15,6 +15,8 @@ namespace StoryTeller.AspNetCore
 
     public class AspNetCoreSystem : SystemUnderTest, ISystem, IStartupFilter
     {
+        public const string HttpRequestSubject = "Http Request";
+
         public static void Run<T>(string[] args) where T : class
         {
             var system = new AspNetCoreSystem();
@@ -31,6 +33,11 @@ namespace StoryTeller.AspNetCore
         public AspNetCoreSystem()
         {
             ConfigureServices(_ => _.AddTransient<IStartupFilter>(x => this));
+        }
+
+        public void RequestPerformanceThresholdIs(int milliseconds)
+        {
+            PerformancePolicies.PerfLimit(milliseconds, r => r.Type == HttpRequestSubject);
         }
 
         public CellHandling Start()
@@ -84,7 +91,7 @@ namespace StoryTeller.AspNetCore
                         }
                         else
                         {
-                            var perf = _currentContext.Timings.Subject("Http Request", context.Request.PathBase);
+                            var perf = _currentContext.Timings.Subject(HttpRequestSubject, context.Request.PathBase);
 
                             await next(context).ConfigureAwait(false);
 

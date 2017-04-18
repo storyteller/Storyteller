@@ -1,10 +1,23 @@
 using System.Threading.Tasks;
+using WebApp.Controllers;
 
 namespace StoryTeller.AspNetCore.Samples
 {
-    // SAMPLE: async-grammar-sample
+    
     public class FakeFixture : AspNetCoreFixture
     {
+        public override void SetUp()
+        {
+            TextController.WaitTime = 0;
+        }
+
+        [FormatAs("If the request takes at least {duration} milliseconds")]
+        public void RequestTakes(int duration)
+        {
+            TextController.WaitTime = duration;
+        }
+
+        // SAMPLE: async-grammar-sample
         [FormatAs("The response text from {url} should be '{contents}'")]
         public async Task<string> TheContentsShouldBe(string url)
         {
@@ -15,6 +28,7 @@ namespace StoryTeller.AspNetCore.Samples
 
             return result.ResponseBody.ReadAsText().Trim();
         }
+        // ENDSAMPLE
     }
-    // ENDSAMPLE
+
 }
