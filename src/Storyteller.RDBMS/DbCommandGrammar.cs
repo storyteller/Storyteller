@@ -36,12 +36,16 @@ namespace StoryTeller.RDBMS
         private string _format;
 
 
-        public DbCommandGrammar(DatabaseFixture fixture, MethodInfo method, CommandType commandType, string sql)
+        public readonly IList<ExternalParameter> External = new List<ExternalParameter>();
+
+
+        public DbCommandGrammar(DatabaseFixture fixture, MethodInfo method, CommandType commandType, ExternalParameter[] externals, string sql)
         {
             _fixture = fixture;
             _method = method;
             _commandType = commandType;
             _sql = sql;
+            External.AddRange(externals);
 
         }
 
@@ -60,6 +64,11 @@ namespace StoryTeller.RDBMS
             foreach (var parameter in Parameters)
             {
                 parameter.AddParameter(cmd, values);
+            }
+
+            foreach (var externalParameter in External)
+            {
+                externalParameter.AddParameter(cmd, context);
             }
 
             var returnResult = Execution.Execute(cmd, runner, values, context);
@@ -114,9 +123,6 @@ namespace StoryTeller.RDBMS
 
                 return format;
             }
-
-            // Maybe have this done as part of the dialect
-            return _sql;
         }
 
 

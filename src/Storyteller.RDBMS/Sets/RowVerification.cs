@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -25,6 +26,15 @@ namespace StoryTeller.RDBMS.Sets
         private bool _ordered;
         private string _fetchFormat;
 
+        private readonly IList<ExternalParameter> _externalValues = new List<ExternalParameter>();
+
+        public RowVerification Parameter(string parameterName, Func<ISpecContext, object> valueSource)
+        {
+            _externalValues.Add(new ExternalParameter(parameterName, valueSource));
+
+            return this;
+        }
+
         public RowVerification AddField<T>(string name, int ordinal = -1)
         {
             var field = new FieldById<T>(name, ordinal);
@@ -45,7 +55,7 @@ namespace StoryTeller.RDBMS.Sets
 
             SetVerificationGrammar grammar = null;
 
-            var comparison = new RowFieldComparison(databaseFixture, _fields.ToArray(), toCommandBuilder(method));
+            var comparison = new RowFieldComparison(databaseFixture, _fields.ToArray(), _externalValues.ToArray(), toCommandBuilder(method));
             grammar = new SetVerificationGrammar(_title, "rows", comparison);
 
             if (_ordered)
@@ -55,7 +65,8 @@ namespace StoryTeller.RDBMS.Sets
 
             if (method.GetParameters().Any())
             {
-                var line = new DbCommandGrammar(databaseFixture, method, _commandType, _sql);
+                var line = new DbCommandGrammar(databaseFixture, method, _commandType, _externalValues.ToArray(), _sql);
+
                 if (_fetchFormat.IsNotEmpty())
                 {
                     line.Format(_fetchFormat);

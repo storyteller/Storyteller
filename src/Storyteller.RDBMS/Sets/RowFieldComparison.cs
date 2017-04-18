@@ -8,7 +8,7 @@ namespace StoryTeller.RDBMS.Sets
 {
     public class RowFieldComparison : ObjectComparison<Dictionary<string, object>>
     {
-        public static Func<ISpecContext, IEnumerable<Dictionary<string, object>>> ToSource(IField[] fields, DatabaseFixture fixture, IDbCommandBuilder builder)
+        public static Func<ISpecContext, IEnumerable<Dictionary<string, object>>> ToSource(IField[] fields, DatabaseFixture fixture, IDbCommandBuilder builder, ExternalParameter[] externals)
         {
             if (builder == null)
             {
@@ -22,6 +22,11 @@ namespace StoryTeller.RDBMS.Sets
 
                 var cmd = builder.BuildCommand(runner);
 
+                foreach (var external in externals)
+                {
+                    external.AddParameter(cmd, c);
+                }
+
                 using (var reader = runner.ExecuteReader(cmd))
                 {
                     return buffer.Read(reader);
@@ -31,7 +36,7 @@ namespace StoryTeller.RDBMS.Sets
 
         private readonly IField[] _fields;
 
-        public RowFieldComparison(DatabaseFixture fixture, IField[] fields, IDbCommandBuilder builder = null) : base(ToSource(fields, fixture, builder))
+        public RowFieldComparison(DatabaseFixture fixture, IField[] fields, ExternalParameter[] externals, IDbCommandBuilder builder = null) : base(ToSource(fields, fixture, builder, externals))
         {
             _fields = fields;
             AddMatches(fields);

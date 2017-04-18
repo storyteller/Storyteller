@@ -69,6 +69,20 @@ namespace DatabaseSamples.Fixtures
                 .AddField<string>("entity_name");
         }
 
+        [FormatAs("For page size threshold {size}")]
+        public void PageSize(int size)
+        {
+            Context.State.Store(size);
+        }
+
+        public RowVerification HigherThanPage()
+        {
+            return VerifyRows("select entity_name from mt_hilo where hi_value > :page")
+                .Titled("These entities have more")
+                .Parameter("page", c => c.State.Retrieve<int>())
+                .AddField<string>("entity_name");
+        }
+
         public IGrammarSource GetNextHi(string entity)
         {
             return Sproc("mt_get_next_hi")

@@ -10,7 +10,7 @@ namespace StoryTeller.RDBMS
 {
 
 
-    public partial class DatabaseFixture : Fixture
+    public class DatabaseFixture : Fixture
     {
         public ISqlDialect Dialect { get; }
 
@@ -80,7 +80,7 @@ namespace StoryTeller.RDBMS
             IGrammar IGrammarSource.ToGrammar(MethodInfo method, Fixture fixture)
             {
                 // TODO -- will get fancier later I'm sure.
-                var grammar = new DbCommandGrammar(fixture.As<DatabaseFixture>(), method, _commandType, _sql);
+                var grammar = new DbCommandGrammar(fixture.As<DatabaseFixture>(), method, _commandType, new ExternalParameter[0], _sql);
                 foreach (var configuration in _configurations)
                 {
                     configuration(grammar);
