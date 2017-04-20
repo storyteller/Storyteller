@@ -55,5 +55,13 @@ namespace StoryTeller.Testing
             state.TryRetrieve<string>("key1").ShouldBe("value1");
             state.TryRetrieve<string>("key2").ShouldBeNull();
         }
+
+        [Fact]
+        public void retrieve_or_add_should_create_only_one_object()
+        {
+            var state = new State();
+            var call1 = state.RetrieveOrAdd(() => new object());
+            state.RetrieveOrAdd(() => new object()).ShouldBe(call1);
+        }
     }
 }
