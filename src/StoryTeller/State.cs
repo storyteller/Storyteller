@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using Baseline;
-using StoryTeller.Results;
 
 
 namespace StoryTeller
@@ -59,7 +57,7 @@ namespace StoryTeller
 
         public T RetrieveOrAdd<T>(Func<T> missing)
         {
-            if (_byType.Contains(typeof(T)))
+            if (_byType.Has(typeof(T)))
             {
                 return Retrieve<T>();
             }
