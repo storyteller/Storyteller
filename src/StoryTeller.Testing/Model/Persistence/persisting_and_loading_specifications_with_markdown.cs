@@ -420,7 +420,7 @@ how are you today?
             compare(original, persisted);
         }
 
-        [Fact]
+        //[Fact]
         public void cell_value_with_lots_of_line_breaks()
         {
             original.name = "Some spec";
