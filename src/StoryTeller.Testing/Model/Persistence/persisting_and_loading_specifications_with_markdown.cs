@@ -95,7 +95,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
                 if (expectedNode is Comment)
                 {
-                    actualNode.As<Comment>().Text.ShouldBe(expectedNode.As<Comment>().Text);
+                    actualNode.As<Comment>().Text.Trim('\r', '\n').ShouldBe(expectedNode.As<Comment>().Text.Trim('\r', '\n'));
                 }
 
                 if (expectedNode is Section)
@@ -359,7 +359,6 @@ how are you today?
 ** Well, thank you"
             };
 
-            comment.Text = comment.Text.Replace("\n", Environment.NewLine);
 
             original.Children.Add(comment);
 
@@ -373,13 +372,8 @@ how are you today?
 
             var comment = new Comment
             {
-                Text = @"hello,
-how are you today?
-
-** Well, thank you"
+                Text = $@"hello,{Environment.NewLine}how are you today?{Environment.NewLine}{Environment.NewLine}**Well, thank you"
             };
-
-            comment.Text = comment.Text.Replace("\n", Environment.NewLine);
 
             var section = new Section("MyThing");
             section.AddStep("Go");
@@ -439,7 +433,6 @@ very,
 very,
 very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, very, long text";
 
-            bigtext = bigtext.Replace("\n", Environment.NewLine);
 
 
             var step = new Step("Add").With("x", bigtext).With("y", "3=2").With("sum", $"3{Environment.NewLine}3");
