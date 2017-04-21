@@ -19,7 +19,7 @@ namespace StoryTeller.Engine
 
         public override string ToString()
         {
-            return string.Format("Spec {0}, results: {1}, was aborted: {2}", specification.path, results.Counts, results.WasAborted);
+            return $"Spec {specification.path}, results: {results.Counts}, was aborted: {results.WasAborted}";
         }
     }
 }

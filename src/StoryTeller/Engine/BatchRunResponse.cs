@@ -49,8 +49,8 @@ namespace StoryTeller.Engine
             return new LifecycleSummary
             {
                 Lifecycle = lifecycle,
-                Successful = records.Where(x => x.specification.Lifecycle == lifecycle && x.WasSuccessful()).Count(),
-                Failed = records.Where(x => x.specification.Lifecycle == lifecycle && !x.WasSuccessful()).Count()
+                Successful = records.Count(x => x.specification.Lifecycle == lifecycle && x.WasSuccessful()),
+                Failed = records.Count(x => x.specification.Lifecycle == lifecycle && !x.WasSuccessful())
             };
         }
     }
