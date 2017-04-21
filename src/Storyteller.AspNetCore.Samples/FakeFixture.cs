@@ -6,11 +6,17 @@ namespace StoryTeller.AspNetCore.Samples
     
     public class FakeFixture : AspNetCoreFixture
     {
+        public FakeFixture()
+        {
+            Title = "Hello World ASP.Net Core Application";
+        }
+
         public override void SetUp()
         {
             TextController.WaitTime = 0;
         }
 
+        // This is just to fake slow http requests for demonstration purposes
         [FormatAs("If the request takes at least {duration} milliseconds")]
         public void RequestTakes(int duration)
         {

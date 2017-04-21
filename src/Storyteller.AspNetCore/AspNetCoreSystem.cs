@@ -47,7 +47,6 @@ namespace StoryTeller.AspNetCore
 
         IExecutionContext ISystem.CreateContext()
         {
-
             return new AspNetCoreContext(this);
         }
 

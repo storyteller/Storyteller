@@ -1,4 +1,5 @@
-﻿using WebApp;
+﻿using Microsoft.AspNetCore.Hosting;
+using WebApp;
 
 namespace StoryTeller.AspNetCore.Samples
 {
@@ -11,7 +12,5 @@ namespace StoryTeller.AspNetCore.Samples
             // No request should take longer than 250 milliseconds
             RequestPerformanceThresholdIs(250);
         }
-
-
     }
 }

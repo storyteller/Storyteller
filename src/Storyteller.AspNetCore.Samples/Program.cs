@@ -1,4 +1,6 @@
-﻿namespace StoryTeller.AspNetCore.Samples
+﻿using WebApp;
+
+namespace StoryTeller.AspNetCore.Samples
 {
     public class Program
     {
@@ -7,4 +9,5 @@
             StorytellerAgent.Run(args, new HelloWorldSystem());
         }
     }
+
 }
