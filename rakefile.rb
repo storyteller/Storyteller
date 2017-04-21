@@ -89,7 +89,7 @@ task :test => [:compile] do
 
   platform = OS.mac? ? "-f netcoreapp1.0" : ""
 
-  sh "dotnet test src/Storyteller.Testing netcoreapp1.0"
+  sh "dotnet test src/Storyteller.Testing -f netcoreapp1.0"
   sh "dotnet test src/StorytellerDocGen.Testing #{platform}"
   #sh "dotnet test src/IntegrationTests --framework net46"
   #sh "dotnet test src/IntegrationTests --framework netcoreapp1.0"
