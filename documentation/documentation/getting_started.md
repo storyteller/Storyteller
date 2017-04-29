@@ -40,7 +40,7 @@ If your codebase has supports the new dotnet cli, the setup steps are to:
 
 1. Create a new **console application** project for the Storyteller specifications in your solution
 1. Install the `Storyteller` Nuget as a dependency
-1. Add the `dotnet_storyteller` Nuget as a CLI tool extension 
+1. Add the `dotnet-storyteller` Nuget as a CLI tool extension 
 1. In the `Program.Main()` entry point of your Storyteller specification project, use the `StorytellerAgent` class to connect
    your system under test to the Storyteller engine with code like this:
 
@@ -53,7 +53,24 @@ For more complex [system under test's](https://en.wikipedia.org/wiki/System_unde
 See <[linkto:documentation/engine/system_under_test]> for more information.
 
 There is a [sample quickstart project on GitHub](https://github.com/storyteller/quickstarts/tree/master/dotnet-cli) that shows a 
-minimal Storyteller setup for the new dotnet CLI mechanism. The [project.json](https://github.com/storyteller/quickstarts/blob/master/dotnet-cli/project.json) file
+minimal Storyteller setup for the new dotnet CLI mechanism. 
+
+Using the csproj format [*.csproj]
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Storyteller" Version="*"/>
+    <PackageReference Include="dotnet-storyteller" Version="*"/>
+    <DotNetCliToolReference Include="dotnet-storyteller" Version="*" />
+  </ItemGroup>
+</Project>
+
+
+The [project.json](https://github.com/storyteller/quickstarts/blob/master/dotnet-cli/project.json) file
 for that project is this:
 
 ```
