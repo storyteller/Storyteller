@@ -100,10 +100,9 @@ namespace ST.Client
 #else
             var baseDirectory = AppContext.BaseDirectory;
 #endif
-            var host = new WebHostBuilder()
+            var hostBuilder = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(baseDirectory)
-                .UseUrls($"http://localhost:{port}")
                 .Configure(app =>
                 {
                     app.UseWebSockets();
@@ -158,7 +157,7 @@ namespace ST.Client
                     });
                 });
 
-            _server = host.Start();
+            _server = hostBuilder.Start($"http://localhost:{port}");
         }
 
         private async Task writeFavicon(HttpContext http)
