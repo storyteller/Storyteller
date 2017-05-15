@@ -25,8 +25,14 @@ namespace StoryTeller.Grammars.API
         private Cell _cell;
         public MemberInfo[] Members { get; }
 
+        public SetMemberGrammar(MemberInfo member) : this(new MemberInfo[] {member})
+        {
+            
+        }
+
         public SetMemberGrammar(MemberInfo[] members)
         {
+            Key = members.Select(x => x.Name).Join(".");
             Members = members;
             CellModifications = new CellModifications();
         }

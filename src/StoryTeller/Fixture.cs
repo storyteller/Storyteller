@@ -123,9 +123,9 @@ namespace StoryTeller
         ///     Used internally to build the fixture model that the Storyteller client
         ///     uses to render the screens
         /// </summary>
-        /// <param name="conversions"></param>
+        /// <param name="cellHandling"></param>
         /// <returns></returns>
-        public virtual FixtureModel Compile(CellHandling conversions)
+        public virtual FixtureModel Compile(CellHandling cellHandling)
         {
             GetType()
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -145,7 +145,7 @@ namespace StoryTeller
             var grammars = new List<GrammarModel>();
             _grammars.Each((key, grammar) =>
             {
-                var model = grammar.Compile(this, conversions);
+                var model = grammar.Compile(this, cellHandling);
                 model.key = key;
                 model.IsHidden = grammar.IsHidden;
 

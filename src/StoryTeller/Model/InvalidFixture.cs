@@ -16,7 +16,7 @@ namespace StoryTeller.Model
             _error = new GrammarError {error = ex.ToString(), message = message};
         }
 
-        public override FixtureModel Compile(CellHandling conversions)
+        public override FixtureModel Compile(CellHandling cellHandling)
         {
             var model = new FixtureModel(Key);
             model.AddError(_error);

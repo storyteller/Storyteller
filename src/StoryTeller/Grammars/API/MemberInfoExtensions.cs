@@ -7,6 +7,15 @@ namespace StoryTeller.Grammars.API
 {
     internal static class MemberInfoExtensions
     {
+        public static MemberInfo[] Append(this MemberInfo[] path, MemberInfo member)
+        {
+            var array = new MemberInfo[path.Length + 1];
+            path.CopyTo(array, 0);
+            array[array.Length - 1] = member;
+
+            return array;
+        }
+
         public static Type GetMemberType(this MemberInfo member)
         {
             return (member as PropertyInfo)?.PropertyType ?? (member as FieldInfo)?.FieldType;
