@@ -62,5 +62,7 @@ namespace StoryTeller.Testing.Grammars.Sets
         public double DistanceFromOffice { get; set; }
 
         public string[] Names { get; set; }
+
+        public string County;
     }
 }
