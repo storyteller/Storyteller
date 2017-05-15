@@ -30,7 +30,6 @@ namespace StoryTeller.Testing.Grammars.API
             sentence.cells[0].editor.ShouldBe("select");
         }
 
-        // GIVE UP AND DO A SAMPLE SPEC HERE.
         [Fact]
         public void pass_the_model_through_state()
         {
