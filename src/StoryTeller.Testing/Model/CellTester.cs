@@ -458,14 +458,14 @@ namespace StoryTeller.Testing.Model
         public void display_empty_array_actual_as_empty()
         {
             var cell = Cell.For<CellTarget>(x => x.Names);
-            cell.ToStringDisplay(new string[0]).ShouldBe("EMPTY");
+            Cell.ToStringDisplay(new string[0]).ShouldBe("EMPTY");
         }
 
         [Fact]
         public void display_array_actual()
         {
             var cell = Cell.For<CellTarget>(x => x.Names);
-            cell.ToStringDisplay(new string[] {"Bob", "Bill", "John"}).ShouldBe("Bob, Bill, John");
+            Cell.ToStringDisplay(new string[] {"Bob", "Bill", "John"}).ShouldBe("Bob, Bill, John");
         }
 
         [Fact]

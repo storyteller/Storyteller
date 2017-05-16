@@ -289,7 +289,7 @@ namespace StoryTeller.Model
                 : CellResult.Failure(Key, ToStringDisplay(actual));
         }
 
-        public string ToStringDisplay(object actual)
+        public static string ToStringDisplay(object actual)
         {
             if (actual == null) return "NULL";
 

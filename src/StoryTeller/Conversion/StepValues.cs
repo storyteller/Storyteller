@@ -9,7 +9,6 @@ namespace StoryTeller.Conversion
 {
     public class StepValues : Node
     {
-        private readonly IDictionary<string, object> _values = new Dictionary<string, object>();
         private readonly IList<Delayed> _delayeds = new List<Delayed>();
 
         public StepValues(string id)
@@ -40,10 +39,7 @@ namespace StoryTeller.Conversion
             });
         }
 
-        public IDictionary<string, object> RawData
-        {
-            get { return _values; }
-        }
+        public IDictionary<string, object> RawData { get; } = new Dictionary<string, object>();
 
         /// <summary>
         /// For set verification purposes
@@ -65,12 +61,12 @@ namespace StoryTeller.Conversion
 
         public void Store(string key, object value)
         {
-            _values.Add(key, value);
+            RawData.Add(key, value);
         }
 
         public object Get(string key)
         {
-            return _values[key];
+            return RawData[key];
         }
 
         public IList<CellResult> Errors = new List<CellResult>();
@@ -102,7 +98,7 @@ namespace StoryTeller.Conversion
 
         public bool Has(string key)
         {
-            return _values.ContainsKey(key);
+            return RawData.ContainsKey(key);
         }
 
         public bool HasErrors()
@@ -110,10 +106,7 @@ namespace StoryTeller.Conversion
             return Errors.Any();
         }
 
-        public IEnumerable<Delayed> DelayedConversions
-        {
-            get { return _delayeds; }
-        }
+        public IEnumerable<Delayed> DelayedConversions => _delayeds;
     }
 
     public static class StepValuesExtensions

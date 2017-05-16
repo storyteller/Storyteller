@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.Tables;
-using StoryTeller.Model;
 
 namespace StoryTeller.Json
 {
@@ -23,6 +22,17 @@ namespace StoryTeller.Json
 
         public JsonSerializerSettings JsonSerializerSettings { get; set; } = new JsonSerializerSettings();
 
+        protected internal T deserialize<T>(string path)
+        {
+            var token = JObject.SelectToken(path);
+            return deserialize<T>(token);
+        }
+
+        protected internal T deserialize<T>(JToken token)
+        {
+            return token.ToObject<T>(JsonSerializer.Create(JsonSerializerSettings));
+        }
+
         [ExposeAsTable("Check Values within the JSON Document")]
         [return: Header("Value")]
         public string CheckValues([Header("Json Path")]string path)
@@ -39,13 +49,11 @@ namespace StoryTeller.Json
         /// <returns></returns>
         protected CheckJsonGrammar<T> CheckValue<T>(string path, string format)
         {
-
-
             return new CheckJsonGrammar<T>(this, path, path).Format(format);
         }
 
 
-        protected void assertDeepJsonEquals(string path, string json)
+        protected internal void assertDeepJsonEquals(string path, string json)
         {
             var actual = JObject.SelectToken(path);
             var expected = JToken.Parse(json);
@@ -65,45 +73,38 @@ but was:
             }
         }
 
-        /*
-         * TODO -- check arrays of simple types
-         * TODO -- check children within a JSON array
-         * TODO -- check a child json path
-         * 
-         * 
-         */
-    }
-
-    // This was to do set comparison
-    public class JsonValueChecks
-    {
-        // This should use the path as the 
-        public ICellExpression Check<T>(string path, string cell = null)
+        protected JsonValueCheckExpression VerifyChildElementSet(string path)
         {
-            // TODO -- not sure this is going to work w/ the reserved values in the path
-            cell = cell ?? path;
-
-            throw new NotImplementedException();
+            return new JsonValueCheckExpression(path, this);
         }
 
-        
+
+        public class JsonValueCheckExpression
+        {
+            private readonly string _path;
+            private readonly JsonComparisonFixture _parent;
+            private string _title;
+
+            public JsonValueCheckExpression(string path, JsonComparisonFixture parent)
+            {
+                _path = path;
+                _parent = parent;
+            }
+
+            public JsonValueCheckExpression Titled(string title)
+            {
+                _title = title;
+                return this;
+            }
+
+            public IGrammar Compare(Action<JsonValueChecks> configure)
+            {
+                var checks = new JsonValueChecks(_path, _title, _parent);
+                configure(checks);
+
+                return checks.ToGrammar();
+            }
+        }
     }
 
-
-    public class JsonComparison : IGrammarSource
-    {
-        public string Path { get; }
-
-        public IGrammar ToGrammar(MethodInfo method, Fixture fixture)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public string CellKey { get; set; } = "path";
-
-        public JsonComparison(string path)
-        {
-            Path = path;
-        }
-    }
 }

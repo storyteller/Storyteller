@@ -4,6 +4,7 @@ using Baseline;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
 using StoryTeller.Messages;
+using StoryTeller.Model;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars.Sets
@@ -103,7 +104,7 @@ namespace StoryTeller.Grammars.Sets
                 }
                 else
                 {
-                    extra.Add(pair.Key, pair.Value.ToString());
+                    extra.Add(pair.Key, Cell.ToStringDisplay(pair.Value));
                 }
             });
 
