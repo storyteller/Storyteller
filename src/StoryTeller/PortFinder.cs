@@ -20,7 +20,7 @@ namespace StoryTeller
         private static bool tryPort(int port)
         {
             var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-            var endpoint = new IPEndPoint(IPAddress.Any, port);
+            var endpoint = new IPEndPoint(IPAddress.Loopback, port);
 
             try
             {
