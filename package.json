@@ -11,7 +11,7 @@
     "tdd-smoke": "karma start smoke-test.conf.js --auto-watch",
     "tdd-karma": "karma start --auto-watch",
     "tdd-mocha": "mocha -w -G",
-    "test": "npm run test-mocha && npm run test-karma && npm run smoke-test",
+    "test": "yarn run test-mocha && yarn run test-karma && yarn run smoke-test",
     "test:prod": "better-npm-run test:prod",
     "test-karma": "karma start --single-run",
     "test-mocha": "mocha --compilers js:babel-core/register"

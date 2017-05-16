@@ -28,15 +28,15 @@ end
 
 desc "Installs npm packages and builds the bundles"
 task :npm do
-	sh "npm install"
-	sh "npm run build-client" unless CI
-	sh "npm run build-client:prod" if CI
+	sh "yarn install"
+	sh "yarn run build-client" unless CI
+	sh "yarn run build-client:prod" if CI
 end
 
 desc "Runs Javascript Tests"
 task :jstests => [:npm] do
-	sh "npm run test" unless CI
-	sh "npm run test:prod" if CI
+	sh "yarn run test" unless CI
+	sh "yarn run test:prod" if CI
 end
 
 desc "Update the version information for the build"
