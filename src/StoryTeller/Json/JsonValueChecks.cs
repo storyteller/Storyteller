@@ -26,13 +26,19 @@ namespace StoryTeller.Json
             _parent = parent;
         }
 
-        // This should use the path as the 
-        public ICellExpression Check<T>(string path, string cell = null)
+        /// <summary>
+        /// Check a value of type T at the specified jsonPath
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="jsonPath"></param>
+        /// <param name="cell">Defaults to the jsonPath, but can be used to specify the "key" for this information within the Grammar. May be valuable to override if you plan to edit the Storyteller Markdown files by hand</param>
+        /// <returns></returns>
+        public ICellExpression Check<T>(string jsonPath, string cell = null)
         {
             // TODO -- not sure this is going to work w/ the reserved values in the path
-            cell = cell ?? path;
+            cell = cell ?? jsonPath;
 
-            var check = new JsonFieldCheck<T>(path, cell);
+            var check = new JsonFieldCheck<T>(jsonPath, cell);
             _checks.Add(check);
 
             return check.Customize;
