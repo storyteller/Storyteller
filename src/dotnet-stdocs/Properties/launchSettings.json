@@ -1,5 +1,20 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:63342/",
+      "sslPort": 0
+    }
+  },
   "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "StorytellerDocGen": {
       "commandName": "Project",
       "commandLineArgs": "run",
@@ -15,12 +30,12 @@
       "commandLineArgs": "export c:\\code\\fubumvc.github.io Website --version 3.0 --code src/Examples",
       "workingDirectory": "C:\\code\\fubumvc"
     },
-	"Run Marten Docs": {
+    "Run Marten Docs": {
       "commandName": "Project",
       "commandLineArgs": "run --version 1.2",
       "workingDirectory": "C:\\code\\marten"
     },
-	"Run StructureMap Docs": {
+    "Run StructureMap Docs": {
       "commandName": "Project",
       "commandLineArgs": "run --version 4.4.3",
       "workingDirectory": "C:\\code\\structuremap"

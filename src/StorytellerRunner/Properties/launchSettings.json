@@ -1,11 +1,26 @@
 {
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:63341/",
+      "sslPort": 0
+    }
+  },
   "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "Open Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Open FubuMVC Specs": {
+    "Open FubuMVC Specs": {
       "commandName": "Project",
       "commandLineArgs": "open src/Specifications",
       "workingDirectory": "C:\\code\\fubumvc"
@@ -15,12 +30,12 @@
       "commandLineArgs": "open src/Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Open AspNetCore Samples": {
+    "Open AspNetCore Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.AspNetCore.Samples",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Open Database Samples": {
+    "Open Database Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/DatabaseSamples",
       "workingDirectory": "C:\\code\\storyteller"
@@ -30,7 +45,7 @@
       "commandLineArgs": "open src/ReduxSamples",
       "workingDirectory": "C:\\code\\storyteller"
     },
-	"Open Selenium Samples": {
+    "Open Selenium Samples": {
       "commandName": "Project",
       "commandLineArgs": "open src/Storyteller.Selenium.Samples",
       "workingDirectory": "C:\\code\\storyteller"
