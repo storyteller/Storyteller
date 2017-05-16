@@ -1,60 +1,60 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26114.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StoryTeller", "StoryTeller\StoryTeller.xproj", "{FD3E277C-3856-4C89-851F-3ABBD58EEA40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller", "StoryTeller\StoryTeller.csproj", "{FD3E277C-3856-4C89-851F-3ABBD58EEA40}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BadSystem", "BadSystem\BadSystem.xproj", "{C24C1C85-EE17-4487-898F-FE9F9C51B606}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadSystem", "BadSystem\BadSystem.csproj", "{C24C1C85-EE17-4487-898F-FE9F9C51B606}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "InvalidExamples", "InvalidExamples\InvalidExamples.xproj", "{6B9DFE48-B8D3-470E-868C-3AAD5C2E95F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvalidExamples", "InvalidExamples\InvalidExamples.csproj", "{6B9DFE48-B8D3-470E-868C-3AAD5C2E95F4}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "MultipleSystems", "MultipleSystems\MultipleSystems.xproj", "{9DDB7903-7B0A-45F6-9EB6-1A5236F77A25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleSystems", "MultipleSystems\MultipleSystems.csproj", "{9DDB7903-7B0A-45F6-9EB6-1A5236F77A25}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Samples", "Samples\Samples.xproj", "{52BC71E4-16A4-4226-8155-1273FA3BDDDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{52BC71E4-16A4-4226-8155-1273FA3BDDDC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StoryTeller.Gallery", "StoryTeller.Gallery\StoryTeller.Gallery.xproj", "{A7C1CACC-1321-4992-B4CA-7F062B4D85CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Gallery", "StoryTeller.Gallery\StoryTeller.Gallery.csproj", "{A7C1CACC-1321-4992-B4CA-7F062B4D85CD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StoryTeller.Samples", "StoryTeller.Samples\StoryTeller.Samples.xproj", "{B7A9BB52-EC33-46D5-9176-58850C53E998}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Samples", "StoryTeller.Samples\StoryTeller.Samples.csproj", "{B7A9BB52-EC33-46D5-9176-58850C53E998}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Specifications", "Specifications\Specifications.xproj", "{0D595331-549A-48FF-84F0-8D3A9EF9D359}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specifications", "Specifications\Specifications.csproj", "{0D595331-549A-48FF-84F0-8D3A9EF9D359}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StoryTeller.Testing", "StoryTeller.Testing\StoryTeller.Testing.xproj", "{58CA9462-FC9B-466C-A446-A1B5DEA52BEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.Testing", "StoryTeller.Testing\StoryTeller.Testing.csproj", "{58CA9462-FC9B-466C-A446-A1B5DEA52BEC}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StorytellerDocGen.Testing", "StorytellerDocGen.Testing\StorytellerDocGen.Testing.xproj", "{EDC482AE-9234-40F2-A2B9-4E0F7932C00C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorytellerDocGen.Testing", "StorytellerDocGen.Testing\StorytellerDocGen.Testing.csproj", "{EDC482AE-9234-40F2-A2B9-4E0F7932C00C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "BlowsUp", "BlowsUp\BlowsUp.xproj", "{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlowsUp", "BlowsUp\BlowsUp.csproj", "{C42CDF92-330D-4193-B2D5-2C0EB0DCF1FF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IntegrationTests", "IntegrationTests\IntegrationTests.xproj", "{0C54C43D-CC33-4854-A2E8-5A23E2170646}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{0C54C43D-CC33-4854-A2E8-5A23E2170646}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Testbed", "Testbed\Testbed.xproj", "{5755650C-7CD5-4C05-A492-0080CF68B16D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testbed", "Testbed\Testbed.csproj", "{5755650C-7CD5-4C05-A492-0080CF68B16D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-stdocs", "dotnet-stdocs\dotnet-stdocs.xproj", "{0ACEFCA2-A5ED-45EB-A3E3-EFEC90A1FF30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-stdocs", "dotnet-stdocs\dotnet-stdocs.csproj", "{0ACEFCA2-A5ED-45EB-A3E3-EFEC90A1FF30}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "StorytellerRunner", "StorytellerRunner\StorytellerRunner.xproj", "{C4704FBC-C67E-4FCE-A03A-35E2C482C6BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorytellerRunner", "StorytellerRunner\StorytellerRunner.csproj", "{C4704FBC-C67E-4FCE-A03A-35E2C482C6BE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "dotnet-storyteller", "dotnet-storyteller\dotnet-storyteller.xproj", "{DC10EB19-53FD-47DD-9F38-046D93AB83B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-storyteller", "dotnet-storyteller\dotnet-storyteller.csproj", "{DC10EB19-53FD-47DD-9F38-046D93AB83B8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Storyteller.AspNetCore", "Storyteller.AspNetCore\Storyteller.AspNetCore.xproj", "{FDB7A0CE-D307-4A90-83B9-B92482F042F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.AspNetCore", "Storyteller.AspNetCore\Storyteller.AspNetCore.csproj", "{FDB7A0CE-D307-4A90-83B9-B92482F042F8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Storyteller.AspNetCore.Samples", "Storyteller.AspNetCore.Samples\Storyteller.AspNetCore.Samples.xproj", "{455FBC99-2420-4E9A-BA1D-81DD45DAE680}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.AspNetCore.Samples", "Storyteller.AspNetCore.Samples\Storyteller.AspNetCore.Samples.csproj", "{455FBC99-2420-4E9A-BA1D-81DD45DAE680}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebApp", "WebApp\WebApp.xproj", "{52733A25-1E8D-4250-A9B5-D135EE6C1557}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{52733A25-1E8D-4250-A9B5-D135EE6C1557}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Storyteller.RDBMS", "Storyteller.RDBMS\Storyteller.RDBMS.xproj", "{3CE1E65C-3955-4CE9-9C9B-554AF80A5223}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.RDBMS", "Storyteller.RDBMS\Storyteller.RDBMS.csproj", "{3CE1E65C-3955-4CE9-9C9B-554AF80A5223}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DatabaseSamples", "DatabaseSamples\DatabaseSamples.xproj", "{E176A58D-7D3D-4D7B-8894-8DCF68369F1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSamples", "DatabaseSamples\DatabaseSamples.csproj", "{E176A58D-7D3D-4D7B-8894-8DCF68369F1A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Storyteller.Selenium", "Storyteller.Selenium\Storyteller.Selenium.xproj", "{25F1CD74-ED41-41B3-B599-36C3F6D5781B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.Selenium", "Storyteller.Selenium\Storyteller.Selenium.csproj", "{25F1CD74-ED41-41B3-B599-36C3F6D5781B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Storyteller.Selenium.Samples", "Storyteller.Selenium.Samples\Storyteller.Selenium.Samples.xproj", "{3E40BD31-C8FB-4C56-BCBF-7D445400D20C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.Selenium.Samples", "Storyteller.Selenium.Samples\Storyteller.Selenium.Samples.csproj", "{3E40BD31-C8FB-4C56-BCBF-7D445400D20C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Storyteller.Redux", "Storyteller.Redux\Storyteller.Redux.xproj", "{00D7B828-868F-4509-8D94-E1D608862772}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.Redux", "Storyteller.Redux\Storyteller.Redux.csproj", "{00D7B828-868F-4509-8D94-E1D608862772}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleProjects", "SampleProjects", "{BF1EF462-3525-4FBA-A88E-A21D5E1498A1}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ReduxSamples", "ReduxSamples\ReduxSamples.xproj", "{B25403A9-0A8A-4E4A-A399-679918FE7607}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReduxSamples", "ReduxSamples\ReduxSamples.csproj", "{B25403A9-0A8A-4E4A-A399-679918FE7607}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
