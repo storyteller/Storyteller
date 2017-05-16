@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using Newtonsoft.Json;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
@@ -58,15 +59,20 @@ namespace StoryTeller.Json
             var token = _fixture.JObject.SelectToken(_path);
             if (token != null)
             {
-                // TODO -- check first if there is a converter for the type. If not, deserialize it
-
-                // let's say this cannot be an array at the moment
-                actual = _cellHandling.Conversions.Convert(typeof(T), token.ToString()).As<T>();
+                if (typeof(T).IsSimple())
+                {
+                    actual = _cellHandling.Conversions.Convert(typeof(T), token.ToString()).As<T>();
+                }
+                else
+                {
+                    actual = token.ToObject<T>(JsonSerializer.Create(_fixture.JsonSerializerSettings));
+                }
 
             }
 
             yield return _cell.Check(values, actual);
         }
+
 
         protected override string format()
         {

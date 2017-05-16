@@ -21,6 +21,8 @@ namespace StoryTeller.Json
     {
         public JObject JObject => Context.State.Retrieve<JObject>();
 
+        public JsonSerializerSettings JsonSerializerSettings { get; set; } = new JsonSerializerSettings();
+
         [ExposeAsTable("Check Values within the JSON Document")]
         [return: Header("Value")]
         public string CheckValues([Header("Json Path")]string path)
@@ -37,6 +39,8 @@ namespace StoryTeller.Json
         /// <returns></returns>
         protected CheckJsonGrammar<T> CheckValue<T>(string path, string format)
         {
+
+
             return new CheckJsonGrammar<T>(this, path, path).Format(format);
         }
 

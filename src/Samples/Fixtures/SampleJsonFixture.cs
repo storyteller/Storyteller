@@ -23,6 +23,16 @@ namespace Samples.Fixtures
             return CheckValue<int>("$.order", "The order should be {order}");
         }
 
+        public IGrammar CheckNumberArray()
+        {
+            return CheckValue<int[]>("$.numbers", "The number array should be {numbers}");
+        }
+
+        public IGrammar CheckStringArray()
+        {
+            return CheckValue<string[]>("$.names", "The names array should be {names}");
+        }
+
         [FormatAs("Deep equals check of {name} and {age}")]
         public void CompareChild(string name, int age)
         {
