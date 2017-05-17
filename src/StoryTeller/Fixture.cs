@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
 using StoryTeller.Grammars;
+using StoryTeller.Grammars.API;
 using StoryTeller.Grammars.Importing;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Grammars.ObjectBuilding;
@@ -596,6 +598,86 @@ namespace StoryTeller
             public IGrammar VerifiedBy<TService>(Func<TService, bool> test)
             {
                 return new FactGrammar(_title, c => test(c.Service<TService>()));
+            }
+        }
+
+        /// <summary>
+        /// Shortcut to use an grammar to build a model object with a separate
+        /// embedded fixture and assign the model object
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <returns></returns>
+        protected BuildModelExpression<TModel> Build<TModel>(string title = null) where TModel : class
+        {
+            return new BuildModelExpression<TModel>(title);
+        }
+
+        public class BuildModelExpression<T> where T : class
+        {
+            private readonly string _title;
+
+            public BuildModelExpression(string title)
+            {
+                _title = title;
+            }
+
+            /// <summary>
+            /// Specify which ModelFixture class you want to use to build up
+            /// the model of T
+            /// </summary>
+            /// <typeparam name="TFixture"></typeparam>
+            /// <returns></returns>
+            public BuildModelWithFixture<T, TFixture> With<TFixture>() where TFixture : ModelFixture<T>, new()
+            {
+                return new BuildModelWithFixture<T, TFixture>(_title);
+            }
+
+            public class BuildModelWithFixture<TModel, TFixture> where TFixture : Fixture, new()
+            {
+                private readonly EmbeddedSectionGrammar<TFixture> _grammar;
+
+                public BuildModelWithFixture(string title = null)
+                {
+                    _grammar = new EmbeddedSectionGrammar<TFixture>();
+                    if (title.IsNotEmpty())
+                    {
+                        _grammar.Title = title;
+                    }
+                }
+
+                /// <summary>
+                /// Hook to receive the model object built by the embedded section
+                /// within the original Fixture
+                /// </summary>
+                /// <param name="action"></param>
+                /// <returns></returns>
+                public EmbeddedSectionGrammar<TFixture> Forward(Action<TModel> action)
+                {
+                    return _grammar.After(c =>
+                    {
+                        var model = c.State.Retrieve<TModel>();
+                        c.State.CurrentObject = model;
+
+                        action(model);
+                    });
+                }
+
+                /// <summary>
+                /// Hook to receive the model object built by the embedded section
+                /// within the original Fixture
+                /// </summary>
+                /// <param name="action"></param>
+                /// <returns></returns>
+                public EmbeddedSectionGrammar<TFixture> Forward(Func<TModel, Task> action)
+                {
+                    return _grammar.After(c =>
+                    {
+                        var model = c.State.Retrieve<TModel>();
+                        c.State.CurrentObject = model;
+
+                        action(model);
+                    });
+                }
             }
         }
     }

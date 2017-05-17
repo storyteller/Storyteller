@@ -44,6 +44,8 @@ namespace StoryTeller.Grammars.API
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
             _cell = new Cell(cellHandling, Members.Select(x => x.Name).Join("."), Inner.GetMemberType());
+            _cell.header = Key;
+
             CellModifications.Apply(_cell);
 
             return new[] { _cell };

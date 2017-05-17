@@ -11,7 +11,7 @@ namespace StoryTeller.Testing.Grammars.API
         [Fact]
         public void can_compile_a_fixture_with_a_mix_of_fields_and_properties()
         {
-            var fixture = new AddressModelFixture();
+            var fixture = new AddressBuilderFixture();
             fixture.Compile(CellHandling.Basic());
 
             fixture["City"].ShouldBeOfType<SetMemberGrammar>();
@@ -22,7 +22,7 @@ namespace StoryTeller.Testing.Grammars.API
         [Fact]
         public void can_customize_cell_display_and_usage()
         {
-            var fixture = new AddressModelFixture();
+            var fixture = new AddressBuilderFixture();
             var model = fixture.Compile(CellHandling.Basic());
             var sentence = model.FindGrammar("City").As<Sentence>();
 
@@ -34,7 +34,7 @@ namespace StoryTeller.Testing.Grammars.API
         public void pass_the_model_through_state()
         {
             execute(@"
-=> AddressModel
+=> AddressBuilder
 * City: City=Austin
 => CheckAddress
 * CityShouldBe#1: city=Austin
@@ -44,11 +44,14 @@ namespace StoryTeller.Testing.Grammars.API
 
             Step("1").Cell("city").Succeeded();
         }
+
+
     }
 
-    public class AddressModelFixture : ModelFixture<Address>
+
+    public class AddressBuilderFixture : ModelFixture<Address>
     {
-        public AddressModelFixture()
+        public AddressBuilderFixture()
         {
             For(x => x.City).SelectionValues("Austin", "Round Rock", "Cedar Park");
         }
