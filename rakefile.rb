@@ -201,6 +201,10 @@ task :docsamples do
 	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Samples"
 end
 
+"Run the spec editor w/ the documentation samples"
+task :rundocsamples do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 run src/Samples"
+end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
