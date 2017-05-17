@@ -4,26 +4,35 @@ using StoryTeller.Grammars.API;
 
 namespace Samples.Fixtures.Api
 {
-    public class ModelForwardingFixture : Fixture
+    // SAMPLE: ModelForwardingFixture
+    public class ModelForwardingFixture : CheckModelFixture<Address>
     {
         public ModelForwardingFixture()
         {
-            Title = "Model Forwarding";
-        }
+            Title = "Build and Verify Address";
 
-        public Address Address { get; set; }
+            // You can customize the Cell editing and appearance
+            // of any of the automatically generated grammars by
+            // property or field name. The expression can be deep as
+            // well
+            For(x => x.City).Header("The city");
+
+            // The Model property is an easy way to set the current Address model
+            // that should be verified by all the children grammars
+            Model = new Address();
+        }
 
         public IGrammar BuildAddress()
         {
-            return Build<Address>("If the address is").With<AddressModelFixture>().Forward(a => Address = a);
-        }
-
-        [FormatAs("The city should be {city}")]
-        public string CityShouldBe()
-        {
-            return Address.City;
+            // This is a new 4.2 helper to build a model object
+            // with an embedded section and use that object within
+            // the containing Fixture
+            return Build<Address>("If the address is")
+                .With<AddressModelFixture>()
+                .Forward(a => Model = a);
         }
     }
+    // ENDSAMPLE
 
     public class AddressModelFixture : ModelFixture<Address>
     {
