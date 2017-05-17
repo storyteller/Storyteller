@@ -13,6 +13,11 @@ namespace StoryTeller.Grammars.API
     {
         private T _model;
 
+        public ModelFixture()
+        {
+            Title = typeof(T).Name;
+        }
+
         protected T Model
         {
             get { return _model; }

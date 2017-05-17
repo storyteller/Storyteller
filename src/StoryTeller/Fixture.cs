@@ -636,13 +636,9 @@ namespace StoryTeller
             {
                 private readonly EmbeddedSectionGrammar<TFixture> _grammar;
 
-                public BuildModelWithFixture(string title = null)
+                public BuildModelWithFixture(string title = "If the input is")
                 {
-                    _grammar = new EmbeddedSectionGrammar<TFixture>();
-                    if (title.IsNotEmpty())
-                    {
-                        _grammar.Title = title;
-                    }
+                    _grammar = new EmbeddedSectionGrammar<TFixture> {Title = title};
                 }
 
                 /// <summary>

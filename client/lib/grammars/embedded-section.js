@@ -10,6 +10,7 @@ class EmbeddedSection extends CompositeGrammar{
 		this.type = 'embedded-section';
 		this.hasBeforeStep = metadata.hasBeforeStep;
 		this.hasAfterStep = metadata.hasAfterStep;
+		this.title = metadata.title;
 
 		this.fixture = new Fixture(metadata.fixture);
 		if (!this.title)

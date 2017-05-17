@@ -89,9 +89,12 @@ namespace StoryTeller.Grammars
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
         {
+            var fixtureModel = _fixture.Compile(cells);
+            fixtureModel.title = Title; // Shouldn't be necessary, but still.
+
             return new EmbeddedSection
             {
-                fixture = _fixture.Compile(cells),
+                fixture = fixtureModel,
                 collection = _leafName,
                 title = Title,
                 hasAfterStep = _after != null,

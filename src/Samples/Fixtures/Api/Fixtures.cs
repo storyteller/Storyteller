@@ -1,4 +1,5 @@
-﻿using StoryTeller;
+﻿using System.Threading.Tasks;
+using StoryTeller;
 using StoryTeller.Grammars.API;
 
 namespace Samples.Fixtures.Api
@@ -33,4 +34,38 @@ namespace Samples.Fixtures.Api
             For(x => x.City).SelectionValues("Austin", "Round Rock", "Cedar Park");
         }
     }
+
+    public class NumbersInput
+    {
+        public int X;
+        public int Y;
+    }
+
+    public class NumbersOutput
+    {
+        public int Multiplied;
+        public int Added;
+    }
+
+    public class SampleApiFixture : ApiFixture<NumbersInput, NumbersOutput>
+    {
+        public SampleApiFixture()
+        {
+            Title = "Sample Api Fixture";
+            InputTitle = "If the numbers are";
+        }
+
+        protected override Task<NumbersOutput> execute(NumbersInput input)
+        {
+            var output = new NumbersOutput
+            {
+                Added = input.X + input.Y,
+                Multiplied = input.X * input.Y
+            };
+
+            return Task.FromResult(output);
+        }
+    }
+
+
 }
