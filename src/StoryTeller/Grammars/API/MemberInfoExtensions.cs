@@ -48,6 +48,22 @@ namespace StoryTeller.Grammars.API
             target.SetValue(members.Last(), value);
         }
 
+        public static object GetValue(this object target, MemberInfo[] members)
+        {
+            var lastMember = members.Last();
+
+            for (int i = 0; i < members.Length - 1; i++)
+            {
+                var memberInfo = members[i];
+                var child = memberInfo.GetValue(target);
+                if (child == null) return null;
+
+                target = child;
+            }
+
+            return lastMember.GetValue(target);
+        }
+
         public static bool IsConcreteWithDefaultCtor(this Type type)
         {
             if (type.GetTypeInfo().IsAbstract || type.GetTypeInfo().IsInterface) return false;

@@ -37,8 +37,7 @@ namespace StoryTeller.Grammars.Paragraphs
                 .Where(x => x.PropertyType.IsSimple())
                 .Each(prop =>
                 {
-                    var accessor = new SingleProperty(prop);
-                    var child = new CheckPropertyGrammar(accessor);
+                    var child = new CheckPropertyGrammar(prop);
                     _grammar.AddGrammar(child);
                 });
 

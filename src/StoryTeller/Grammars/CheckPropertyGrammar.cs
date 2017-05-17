@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Baseline;
-using Baseline.Reflection;
+using Baseline.Expressions;
 using StoryTeller.Conversion;
+using StoryTeller.Grammars.API;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -12,20 +15,25 @@ namespace StoryTeller.Grammars
 {
     public class CheckPropertyGrammar : LineGrammar
     {
-        private readonly Accessor _accessor;
         private Cell _cell;
 
-        public CheckPropertyGrammar(Accessor accessor)
+        public CheckPropertyGrammar(MemberInfo[] members)
         {
-            _accessor = accessor;
+            Members = members;
             CellModifications = new CellModifications();
         }
+
+        public CheckPropertyGrammar(MemberInfo member) : this(new MemberInfo[] { member})
+        {
+        }
+
+        public MemberInfo[] Members { get; set; }
 
         public CellModifications CellModifications { get; private set; }
 
         public override IEnumerable<CellResult> Execute(StepValues values, ISpecContext context)
         {
-            var actual = _accessor.GetValue(context.State.CurrentObject);
+            var actual = context.State.CurrentObject.GetValue(Members);   
             var expected = values.Get(_cell.Key);
 
             if (expected.Equals(actual))
@@ -40,12 +48,15 @@ namespace StoryTeller.Grammars
 
         protected override string format()
         {
-            return "{0} should be {{{0}}}".ToFormat(_accessor.Name);
+            return $"{_cell.header} should be {{{_cell.Key}}}";
         }
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = Cell.For(cellHandling, _accessor, fixture);
+            var key = Members.Select(x => x.Name).Join(".");
+
+            _cell = new Cell(cellHandling, key, Members.Last().GetMemberType()) {header = key};
+
             CellModifications.Apply(_cell);
 
             return new[] {_cell};
@@ -56,8 +67,11 @@ namespace StoryTeller.Grammars
 
         public static CheckPropertyGrammar For<T>(Expression<Func<T, object>> expression)
         {
-            Accessor accessor = ReflectionHelper.GetAccessor(expression);
-            return new CheckPropertyGrammar(accessor);
+            var finder = new FindMembers();
+            finder.Visit(expression);
+            var members = finder.Members.ToArray();
+
+            return new CheckPropertyGrammar(members);
         }
 
 
