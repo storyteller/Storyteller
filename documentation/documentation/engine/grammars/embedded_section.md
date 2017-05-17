@@ -29,6 +29,9 @@ will be executed every time the embedded section grammar is executed.
 
 ## Before and After Actions
 
+<div class="alert alert-info"><b>Note!</b> As of 4.2, Storyteller also allows you to use asynchronous actions as the "Before" and
+"After" actions</div>
+
 When you create an _Embedded Section_ grammar, you can specify actions that will be executed before and after the steps in the embedded section. Note that the `Before()` action is executed before the nested Fixture's `SetUp()` method. Likewise, the `After()` method is executed after the nested Fixture's `TearDown()` method.
 
 <[sample:using-before-and-after-actions-in-embedded-fixtures]>
