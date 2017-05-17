@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
@@ -9,12 +10,13 @@ namespace StoryTeller.Grammars
     public class EmbeddedSectionGrammar<T> : IGrammar where T : Fixture, new()
     {
         private readonly T _fixture;
-        private Action<ISpecContext> _before;
+        private Func<Section, SilentAction> _before;
+        private Func<Section, SilentAction> _after;
 
         // TODO -- does this become something that's configurable later?
         // TODO -- only matters if we care in paragraph
         private readonly string _leafName;
-        private Action<ISpecContext> _after;
+        
 
         public EmbeddedSectionGrammar()
         {
@@ -29,15 +31,38 @@ namespace StoryTeller.Grammars
 
         public EmbeddedSectionGrammar<T> Before(Action<IEmbeddedSpecContext<T>> action)
         {
-            _before = x => action(new EmbeddedSpecContext<T>(x, _fixture));
+            _before = section => new SilentAction("Grammar", Stage.before, c => action(new EmbeddedSpecContext<T>(c, _fixture)), section){Subject = $"{Key}.Before"};
             return this;
         }
 
+
         public EmbeddedSectionGrammar<T> After(Action<IEmbeddedSpecContext<T>> action)
         {
-            _after = x => action(new EmbeddedSpecContext<T>(x, _fixture));
+            _after = section => new SilentAction("Grammar", Stage.after, c => action(new EmbeddedSpecContext<T>(c, _fixture)), section) { Subject = $"{Key}.After" };
             return this;
-        } 
+        }
+
+        /// <summary>
+        /// Execute an asynchronous action before the embedded section
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public EmbeddedSectionGrammar<T> Before(Func<IEmbeddedSpecContext<T>, Task> action)
+        {
+            _before = section => new SilentAction("Grammar", Stage.before, c => action(new EmbeddedSpecContext<T>(c, _fixture)), section) { Subject = $"{Key}.Before" };
+            return this;
+        }
+
+        /// <summary>
+        /// Execute an asynchronous action immediately after an embedded section
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public EmbeddedSectionGrammar<T> After(Func<IEmbeddedSpecContext<T>, Task> action)
+        {
+            _after = section => new SilentAction("Grammar", Stage.after, c => action(new EmbeddedSpecContext<T>(c, _fixture)), section) { Subject = $"{Key}.After" };
+            return this;
+        }
 
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
@@ -51,20 +76,14 @@ namespace StoryTeller.Grammars
 
             if (_before != null)
             {
-                yield return new SilentAction("Grammar", Stage.before, _before, section)
-                {
-                    Subject = Key + ":Before"
-                };
+                yield return _before(section);
             }
 
             yield return sectionPlan;
 
             if (_after != null)
             {
-                yield return new SilentAction("Grammar", Stage.after, _after, section)
-                {
-                    Subject = Key + ":After"
-                };
+                yield return _after(section);
             }
         }
 

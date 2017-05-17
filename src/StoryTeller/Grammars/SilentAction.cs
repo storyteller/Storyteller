@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Baseline;
+using Baseline.Dates;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -49,6 +50,22 @@ namespace StoryTeller.Grammars
             Subject = position.ToString();
         }
 
+        public SilentAction(string type, object position, Func<ISpecContext, Task> action, Node node)
+        {
+            if (node.id.IsEmpty())
+            {
+                throw new ArgumentOutOfRangeException(nameof(node), "The node must have an id");
+            }
+
+            Position = position;
+            this.type = type;
+            AsyncAction = action;
+            Node = node;
+            Subject = position.ToString();
+        }
+
+        public Func<ISpecContext, Task> AsyncAction { get; set; }
+
         public string Subject { get; set; }
 
         public string type { get; }
@@ -80,7 +97,16 @@ namespace StoryTeller.Grammars
 
             try
             {
-                Action(context);
+                if (AsyncAction != null)
+                {
+                    AsyncAction(context).Wait(context.StopConditions.TimeoutInSeconds.Seconds());
+                }
+                else
+                {
+                    Action(context);
+                }
+
+                
                 var result = new StepResult(Id, ResultStatus.ok) {position = Position};
                 context.LogResult(result, record);
 
@@ -96,9 +122,35 @@ namespace StoryTeller.Grammars
             }
         }
 
-        public Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
+        public async Task ExecuteAsync(SpecContext context, CancellationToken cancellation)
         {
-            return Task.Factory.StartNew(() => Execute(context), cancellation);
+            if (AsyncAction != null)
+            {
+                // TODO -- add threshold here?
+                var record = context.Timings.Subject(type, Subject, 0);
+
+                try
+                {
+                    await AsyncAction(context);
+                    var result = new StepResult(Id, ResultStatus.ok) {position = Position};
+                    context.LogResult(result, record);
+
+                    context.Timings.End(record, result);
+                }
+                catch (Exception ex)
+                {
+                    context.LogException(Node.id,
+                        ex, record,
+                        Position);
+
+                    context.Timings.End(record);
+                }
+            }
+            else
+            {
+                Execute(context);
+            }
+
         }
     }
 }

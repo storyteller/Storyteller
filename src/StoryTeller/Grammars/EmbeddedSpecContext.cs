@@ -9,15 +9,14 @@ namespace StoryTeller.Grammars
         where T : Fixture, new()
     {
         private readonly ISpecContext _specContext;
-        private readonly T _fixture;
 
         public EmbeddedSpecContext(ISpecContext specContext, T fixture)
         {
             _specContext = specContext;
-            _fixture = fixture;
+            Fixture = fixture;
         }
 
-        public T Fixture => _fixture;
+        public T Fixture { get; }
 
         public void Dispose()
         {
