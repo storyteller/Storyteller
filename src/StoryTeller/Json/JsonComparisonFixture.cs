@@ -74,7 +74,7 @@ namespace StoryTeller.Json
         /// <returns></returns>
         [ExposeAsTable("Check Values within the JSON Document")]
         [return: Header("Value")]
-        public string CheckValues([Header("Json Path")]string path)
+        public string CheckJsonValues([Header("Json Path")]string path)
         {
             return JObject.SelectToken(path)?.ToString();
         }
@@ -84,9 +84,9 @@ namespace StoryTeller.Json
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="jsonPath"></param>
-        /// <param name="format"></param>
+        /// <param name="format">How this grammar will be rendered in the Storyteller HTML</param>
         /// <returns></returns>
-        protected CheckJsonGrammar<T> CheckValue<T>(string jsonPath, string format)
+        protected CheckJsonGrammar<T> CheckJsonValue<T>(string jsonPath, string format)
         {
             return new CheckJsonGrammar<T>(this, jsonPath, jsonPath).Format(format);
         }
