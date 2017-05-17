@@ -34,15 +34,20 @@ namespace Samples.Fixtures.Api
     }
     // ENDSAMPLE
 
+    // SAMPLE: AddressModelFixture
     public class AddressModelFixture : ModelFixture<Address>
     {
         public AddressModelFixture()
         {
             Title = "Address Model Setup";
 
-            For(x => x.City).SelectionValues("Austin", "Round Rock", "Cedar Park");
+            // The For() statement is a helper to customize the editing
+            // or rendering of the Cell's for the public properties or fields
+            For(x => x.City)
+                .SelectionValues("Austin", "Round Rock", "Cedar Park");
         }
     }
+    // ENDSAMPLE
 
     public class NumbersInput
     {
@@ -75,6 +80,27 @@ namespace Samples.Fixtures.Api
             return Task.FromResult(output);
         }
     }
+
+    // SAMPLE: SpecialModelFixture
+    public class SpecialModel
+    {
+        public string Name { get; }
+
+        public SpecialModel(string name)
+        {
+            Name = name;
+        }
+    }
+
+    public class SpecialModelFixture : ModelFixture<SpecialModel>
+    {
+        [FormatAs("For the name {name}")]
+        public void ForName(string name)
+        {
+            Model = new SpecialModel(name);
+        }
+    }
+    // ENDSAMPLE
 
 
 }

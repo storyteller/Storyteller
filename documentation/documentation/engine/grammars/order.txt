@@ -8,5 +8,5 @@ sets
 embedded_section
 currying
 create_object
+modelfixture
 verify_object
-checkmodelfixture
