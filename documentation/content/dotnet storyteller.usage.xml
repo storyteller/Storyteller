@@ -211,6 +211,10 @@
           <Description>Optional. Only runs tests with desired lifecyle</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-a, --appveyor]</UsageDescription>
+          <Description>Optional. Applies extra logging to see progress within AppVeyor during CI runs</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-f, --framework &lt;framework&gt;]</UsageDescription>
           <Description>Override the dotnet framework if multi-targeting</Description>
         </FlagReport>
@@ -250,11 +254,11 @@
       <Usages>
         <UsageReport>
           <Description>Execute from the current project path</Description>
-          <Usage>dotnet storyteller run [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-v, --validate] [-v, --verbose] [-r, --retries &lt;retries&gt;] [-z, --teamcity] [-l, --lifecycle Acceptance|Regression|Any] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+          <Usage>dotnet storyteller run [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-v, --validate] [-v, --verbose] [-r, --retries &lt;retries&gt;] [-z, --teamcity] [-l, --lifecycle Acceptance|Regression|Any] [-a, --appveyor] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
         </UsageReport>
         <UsageReport>
           <Description>Execute</Description>
-          <Usage>dotnet storyteller run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-v, --validate] [-v, --verbose] [-r, --retries &lt;retries&gt;] [-z, --teamcity] [-l, --lifecycle Acceptance|Regression|Any] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
+          <Usage>dotnet storyteller run &lt;path&gt; [-r, --results-path &lt;resultspath&gt;] [-w, --workspace &lt;workspace&gt;] [-e, --exclude-tags &lt;excludetags&gt;] [-o, --open] [-c, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-v, --validate] [-v, --verbose] [-r, --retries &lt;retries&gt;] [-z, --teamcity] [-l, --lifecycle Acceptance|Regression|Any] [-a, --appveyor] [-f, --framework &lt;framework&gt;] [-b, --build &lt;build&gt;] [-p, --profile &lt;profile&gt;] [-t, --timeout &lt;timeout&gt;] [-c, --config &lt;confi&gt;] [-s, --specs &lt;specs&gt;] [-f, --fixtures &lt;fixtures&gt;] [-c, --culture &lt;culture&gt;] [-s, --system-name &lt;systemname&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
