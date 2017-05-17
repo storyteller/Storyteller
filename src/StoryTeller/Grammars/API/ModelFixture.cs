@@ -24,6 +24,7 @@ namespace StoryTeller.Grammars.API
 
 
         }
+
         protected IDictionary<MemberInfo, SetMemberGrammar> _setters
             = new Dictionary<MemberInfo, SetMemberGrammar>();
 

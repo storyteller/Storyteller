@@ -21,6 +21,7 @@ namespace StoryTeller.Grammars
         {
             Members = members;
             CellModifications = new CellModifications();
+            Key = members.Select(x => x.Name).Join(".");
         }
 
         public CheckPropertyGrammar(MemberInfo member) : this(new MemberInfo[] { member})
