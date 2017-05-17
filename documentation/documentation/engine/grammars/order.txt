@@ -10,3 +10,4 @@ currying
 create_object
 modelfixture
 verify_object
+apifixture

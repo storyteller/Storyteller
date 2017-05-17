@@ -49,6 +49,7 @@ namespace Samples.Fixtures.Api
     }
     // ENDSAMPLE
 
+    // SAMPLE: SampleApiFixture
     public class NumbersInput
     {
         public int X;
@@ -61,6 +62,8 @@ namespace Samples.Fixtures.Api
         public int Added;
     }
 
+    // This is the simplest possible usage that uses the default ModelFixture<NumbersInput>
+    // to build up the input model
     public class SampleApiFixture : ApiFixture<NumbersInput, NumbersOutput>
     {
         public SampleApiFixture()
@@ -69,6 +72,8 @@ namespace Samples.Fixtures.Api
             InputTitle = "If the numbers are";
         }
 
+        // This template method has to be implemented to exercise whatever the
+        // underlying API is
         protected override Task<NumbersOutput> execute(NumbersInput input)
         {
             var output = new NumbersOutput
@@ -80,6 +85,7 @@ namespace Samples.Fixtures.Api
             return Task.FromResult(output);
         }
     }
+    // ENDSAMPLE
 
     // SAMPLE: SpecialModelFixture
     public class SpecialModel
