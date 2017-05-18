@@ -150,15 +150,15 @@ task :prepare_docs => [:compile] do
 	cp 'src/StorytellerRunner/embed.js', 'documentation/content'
 	cp 'client/public/stylesheets/storyteller.css', 'documentation/content/stylesheets'
 
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json"
 
-	sh 'dotnet run --project src/StorytellerRunner -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
-	sh 'dotnet run --project src/dotnet-stdocs -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
+	sh 'dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
+	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
 "Launches the documentation project in editable mode"
 task :docs => [:prepare_docs] do
-	sh "dotnet run --project src/dotnet-stdocs -- run -v #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- run -v #{BUILD_VERSION}"
 end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"
@@ -167,13 +167,13 @@ task :publish => [:prepare_docs] do
 		FileUtils.rm_rf 'doc-target'
 	end
 
-	sh "dotnet restore"
+	sh "dotnet restore src/StoryTeller.sln"
 
 	Dir.mkdir 'doc-target'
 	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
 
 
-	sh "dotnet run --project src/dotnet-stdocs -- export doc-target Website --version #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- export doc-target Website --version #{BUILD_VERSION}"
 
 	Dir.chdir "doc-target" do
 		sh "git add --all"
@@ -188,17 +188,17 @@ end
 
 "Run the spec editor w/ samples"
 task :samples do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Samples"
 end
 
 "Run the spec editor w/ samples"
 task :testbed do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Testbed"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Testbed"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :docsamples do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Samples"
 end
 
 "Run the spec editor w/ the documentation samples"
@@ -208,7 +208,7 @@ end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/Storyteller.Samples --hotreload"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Samples --hotreload"
 end
 
 "Run the specs against the documentation generation"
@@ -218,7 +218,23 @@ end
 
 "Run the database sample specs"
 task :dbsamples do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 open src/DatabaseSamples"
+
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/DatabaseSamples"
+end
+
+"Run the selenium sample specs"
+task :seleniumsamples do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Selenium.Samples"
+end
+
+"Run the aspnetcore sample specs"
+task :aspnetcoresamples do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.AspNetCore.Samples"
+end
+
+"Generate the database sample results"
+task :dbsamplesresults do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/DatabaseSamples --dump documentation/content/rdbms.specs.json"
 end
 
 def load_project_file(project)

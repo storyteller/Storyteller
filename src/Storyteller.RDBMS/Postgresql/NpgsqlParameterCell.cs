@@ -6,6 +6,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.RDBMS.Postgresql
 {
+    // SAMPLE: NpgsqlParameterCell
     public class NpgsqlParameterCell : ParameterCell
     {
         public NpgsqlParameterCell(Cell cell, string parameterName, ParameterDirection direction, NpgsqlDbType? dbType = null)
@@ -29,4 +30,5 @@ namespace StoryTeller.RDBMS.Postgresql
             return format.Replace(":" + Cell.Key, FormattedName());
         }
     }
+    // ENDSAMPLE
 }

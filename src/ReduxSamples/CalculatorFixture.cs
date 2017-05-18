@@ -24,9 +24,11 @@ namespace ReduxSamples
 
         }
 
+        // SAMPLE: CheckJsonValue
         public IGrammar CheckValue()
         {
-            return CheckValue<int>("$.number", "The current number should be {number}");
+            return CheckJsonValue<int>("$.number", "The current number should be {number}");
         }
+        // ENDSAMPLE
     }
 }

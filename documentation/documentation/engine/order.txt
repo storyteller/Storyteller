@@ -4,3 +4,4 @@ fixtures
 cells
 grammars
 state
+extensions

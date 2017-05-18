@@ -59,21 +59,37 @@ namespace StoryTeller.AspNetCore
             });
         }
 
+        // SAMPLE: AspNetCoreSystem-template-methods
+        /// <summary>
+        /// Executes once before any specifications are run
+        /// </summary>
         protected virtual void beforeAll()
         {
             // Nothing
         }
 
-        protected virtual void afterEach(ISystemUnderTest sut, ISpecContext context)
+        /// <summary>
+        /// Executes immediately before a specification is executed
+        /// </summary>
+        /// <param name="sut"></param>
+        /// <param name="context"></param>
+        protected virtual void beforeEach(ISystemUnderTest sut, ISpecContext context)
         {
             // nothing
         }
 
-        protected virtual void beforeEach(ISystemUnderTest sut, ISpecContext context)
+        /// <summary>
+        /// Executes immediately after a specification is executed
+        /// </summary>
+        /// <param name="sut"></param>
+        /// <param name="context"></param>
+        protected virtual void afterEach(ISystemUnderTest sut, ISpecContext context)
         {
-            _currentContext = context;
             // nothing
         }
+        // ENDSAMPLE
+
+
 
         Action<IApplicationBuilder> IStartupFilter.Configure(Action<IApplicationBuilder> inner)
         {
@@ -124,6 +140,7 @@ namespace StoryTeller.AspNetCore
             public void BeforeExecution(ISpecContext context)
             {
                 context.State.Store(_parent);
+                _parent._currentContext = context;
 
                 _parent.beforeEach(_parent, context);
             }

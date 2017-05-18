@@ -4,37 +4,52 @@ using StoryTeller.Grammars.API;
 
 namespace Samples.Fixtures.Api
 {
-    public class ModelForwardingFixture : Fixture
+    // SAMPLE: ModelForwardingFixture
+    public class ModelForwardingFixture : CheckModelFixture<Address>
     {
         public ModelForwardingFixture()
         {
-            Title = "Model Forwarding";
-        }
+            Title = "Build and Verify Address";
 
-        public Address Address { get; set; }
+            // You can customize the Cell editing and appearance
+            // of any of the automatically generated grammars by
+            // property or field name. The expression can be deep as
+            // well
+            For(x => x.City).Header("The city");
+
+            // The Model property is an easy way to set the current Address model
+            // that should be verified by all the children grammars
+            Model = new Address();
+        }
 
         public IGrammar BuildAddress()
         {
-            return Build<Address>("If the address is").With<AddressModelFixture>().Forward(a => Address = a);
-        }
-
-        [FormatAs("The city should be {city}")]
-        public string CityShouldBe()
-        {
-            return Address.City;
+            // This is a new 4.2 helper to build a model object
+            // with an embedded section and use that object within
+            // the containing Fixture
+            return Build<Address>("If the address is")
+                .With<AddressModelFixture>()
+                .Forward(a => Model = a);
         }
     }
+    // ENDSAMPLE
 
+    // SAMPLE: AddressModelFixture
     public class AddressModelFixture : ModelFixture<Address>
     {
         public AddressModelFixture()
         {
             Title = "Address Model Setup";
 
-            For(x => x.City).SelectionValues("Austin", "Round Rock", "Cedar Park");
+            // The For() statement is a helper to customize the editing
+            // or rendering of the Cell's for the public properties or fields
+            For(x => x.City)
+                .SelectionValues("Austin", "Round Rock", "Cedar Park");
         }
     }
+    // ENDSAMPLE
 
+    // SAMPLE: SampleApiFixture
     public class NumbersInput
     {
         public int X;
@@ -47,6 +62,8 @@ namespace Samples.Fixtures.Api
         public int Added;
     }
 
+    // This is the simplest possible usage that uses the default ModelFixture<NumbersInput>
+    // to build up the input model
     public class SampleApiFixture : ApiFixture<NumbersInput, NumbersOutput>
     {
         public SampleApiFixture()
@@ -55,6 +72,8 @@ namespace Samples.Fixtures.Api
             InputTitle = "If the numbers are";
         }
 
+        // This template method has to be implemented to exercise whatever the
+        // underlying API is
         protected override Task<NumbersOutput> execute(NumbersInput input)
         {
             var output = new NumbersOutput
@@ -66,6 +85,28 @@ namespace Samples.Fixtures.Api
             return Task.FromResult(output);
         }
     }
+    // ENDSAMPLE
+
+    // SAMPLE: SpecialModelFixture
+    public class SpecialModel
+    {
+        public string Name { get; }
+
+        public SpecialModel(string name)
+        {
+            Name = name;
+        }
+    }
+
+    public class SpecialModelFixture : ModelFixture<SpecialModel>
+    {
+        [FormatAs("For the name {name}")]
+        public void ForName(string name)
+        {
+            Model = new SpecialModel(name);
+        }
+    }
+    // ENDSAMPLE
 
 
 }

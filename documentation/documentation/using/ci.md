@@ -54,6 +54,13 @@ The specification execution results are written to a single html file with **no 
 
 The results page is a single page application with a tabular summary view of all the specifications executed, how long each took to execute, the high level result counts, and the number of retries. From the summary, you can drill into individual specifications by clicking on the specification name.
 
+## AppVeyor Integration
+
+<div class="alert alert-info"><b>Note!</b> This was added in Storyteller 4.2</div>
+
+For better AppVeyor results, use the `dotnet storyteller run --appveyor` flag to direct Storyteller to output the Console logging
+that AppVeyor expects. 
+
 ## Command Usage
 
 <[command-usage:st/run]>

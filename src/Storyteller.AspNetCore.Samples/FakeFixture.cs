@@ -3,7 +3,7 @@ using WebApp.Controllers;
 
 namespace StoryTeller.AspNetCore.Samples
 {
-    
+
     public class FakeFixture : AspNetCoreFixture
     {
         public FakeFixture()
@@ -27,6 +27,7 @@ namespace StoryTeller.AspNetCore.Samples
         [FormatAs("The response text from {url} should be '{contents}'")]
         public async Task<string> TheContentsShouldBe(string url)
         {
+            // Execute an Alba "Scenario"
             var result = await Scenario(_ =>
             {
                 _.Get.Url(url);

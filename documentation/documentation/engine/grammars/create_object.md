@@ -2,6 +2,8 @@
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The techniques shown in this topic may be more effective in your problem domain by using intermediate classes or types built just for easy Storyteller usage that are then used as an input to whatever complex data your application actually uses.</div>
 
+Also see <[linkto:documentation/engine/grammars/modelfixture]>.
+
 
 Over its lifetime (Storyteller has been in continous usage since 2009), Storyteller has been most valuable over classic xUnit testing tools when the specification domain is data intensive. As stated in the <[linkto:documentation/using/best_practices]>, the Storyteller team strongly recommends that all the necessary system state should be set up in the specification itself. To that end, Storyteller exposes a pair of helper methods on the `Fixture` class to quickly create <[linkto:documentation/engine/grammars/paragraphs;title=paragraph]> grammars to set up complex objects:
 

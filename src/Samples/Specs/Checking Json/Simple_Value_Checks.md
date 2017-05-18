@@ -12,7 +12,7 @@
 {"color": "red", "order": "1"}
 ```
 
-|> CheckValues
+|> CheckJsonValues
     [table]
     |path   |returnValue|
     |$.color|red        |

@@ -6,6 +6,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.RDBMS.Postgresql
 {
+    // SAMPLE: PostgresDialect
     public class PostgresDialect : ISqlDialect
     {
         public IDbConnection NewConnection()
@@ -32,4 +33,5 @@ namespace StoryTeller.RDBMS.Postgresql
             }
         }
     }
+    // ENDSAMPLE
 }

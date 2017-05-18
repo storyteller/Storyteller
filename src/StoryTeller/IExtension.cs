@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 namespace StoryTeller
 {
+
+    // SAMPLE: IExtension
     public interface IExtension : IDisposable
     {
         /// <summary>
@@ -24,4 +26,5 @@ namespace StoryTeller
         /// <param name="context"></param>
         void AfterEach(ISpecContext context);
     }
+    // ENDSAMPLE
 }

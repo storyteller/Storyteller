@@ -116,6 +116,7 @@ namespace StoryTeller.Testing.Grammars.API
         }
     }
 
+    // SAMPLE: AddressAndArea
     public class Address
     {
         public string Address1 { get; set; }
@@ -139,4 +140,5 @@ namespace StoryTeller.Testing.Grammars.API
     {
         public string Name;
     }
+    // ENDSAMPLE
 }

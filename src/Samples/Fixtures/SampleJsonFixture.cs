@@ -7,6 +7,35 @@ using StoryTeller.Json;
 
 namespace Samples.Fixtures
 {
+    // SAMPLE: AddressJsonFixture
+    public class AddressJsonFixture : JsonComparisonFixture
+    {
+        public override void SetUp()
+        {
+            // Before you call any assertions, you'll need
+            // to attach the Json string to the current
+            // JsonComparisonFixture
+            var json = fetchJson();
+            StoreJson(json);
+        }
+
+        private string fetchJson()
+        {
+            return "{\"city\": \"Austin\", \"distance\": \"5\"}";
+        }
+
+        public IGrammar CityIs()
+        {
+            return CheckJsonValue<string>("$.city", "The city should be {city}");
+        }
+
+        public IGrammar DistanceIs()
+        {
+            return CheckJsonValue<int>("$.distance", "The distance should be {distance}");
+        }
+    }
+    // ENDSAMPLE
+
     public class SampleJsonFixture : JsonComparisonFixture
     {
         public SampleJsonFixture()
@@ -52,34 +81,47 @@ namespace Samples.Fixtures
                 });
         }
 
+        // SAMPLE: CheckPeople
         public IGrammar CheckPeople()
         {
+            // "$.children" designates the JSONPath to the json array
             return VerifyChildElementSet("$.children").Titled("The people should be")
                 .Compare(_ =>
                 {
+                    // Checking values within the elements of the Json array
+                    // The first argument is a JSONPath relative to each element of the array
+                    // The second argument is necessary to give Storyteller a name for
+                    // the expected data
                     _.Check<string>("$.first", "first");
                     _.Check<string>("$.last", "last");
                     _.Check<int>("$.age", "age");
+
+                    // Arrays are valid here, and you can customize the Cell with
+                    // the fluent interface shown below
                     _.Check<int[]>("$.numbers", "numbers").Header("the numbers");
                     _.Check<string>("$.address.city", "city");
                 });
         }
+        // ENDSAMPLE
 
         public IGrammar CheckOrder()
         {
-            return CheckValue<int>("$.order", "The order should be {order}");
+            return CheckJsonValue<int>("$.order", "The order should be {order}");
         }
 
+        // SAMPLE: CheckNumberArray
         public IGrammar CheckNumberArray()
         {
-            return CheckValue<int[]>("$.numbers", "The number array should be {numbers}");
+            return CheckJsonValue<int[]>("$.numbers", "The number array should be {numbers}");
         }
+        // ENDSAMPLE
 
         public IGrammar CheckStringArray()
         {
-            return CheckValue<string[]>("$.names", "The names array should be {names}");
+            return CheckJsonValue<string[]>("$.names", "The names array should be {names}");
         }
 
+        // SAMPLE: deep-json-comparison
         [FormatAs("Deep equals check of {name} and {age}")]
         public void CompareChild(string name, int age)
         {
@@ -89,5 +131,6 @@ namespace Samples.Fixtures
             assertDeepJsonEquals("child", json);
             
         }
+        // ENDSAMPLE
     }
 }

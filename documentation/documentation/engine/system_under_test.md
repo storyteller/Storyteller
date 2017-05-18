@@ -100,11 +100,19 @@ You can always explicitly tell Storyteller which `ISystem` class to use as a fla
 
 
 
-## Custom Conversion Providers and Selection Lists
+## Custom Conversion Providers, Selection Lists, and Extensions
 
 Custom conversion providers and system wide selection lists can be added in the `ISystem.Start()` method. The `CellHandling` class below exposes methods to add and configure lists and conversions:
 
 <[sample:CellHandling]>
+
+To add <[linkto:documentation/engine/extensions;title=extensions]> to your specification system, just add them to the `CellHandling.Extensions` list
+like so:
+
+<[sample:Adding-an-Extension]>
+
+
+
 
 
 
