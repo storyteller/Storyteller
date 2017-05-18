@@ -4,7 +4,7 @@
     <Description>Acceptance Test Driven Development and Executable Specifications for .Net</Description>
     <AssemblyTitle>Storyteller</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>4.2.0</VersionPrefix>
+    <Version>4.2.0</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
     <DebugType>portable</DebugType>

@@ -13,7 +13,7 @@ BUILD_NUMBER = build_number
 
 CI = ENV["CI"].nil? ? false : true
 
-task :ci => [:default, :specifications, :pack, :appVeyorPush]
+task :ci => [:default, :specifications, :pack]
 
 task :default => [:jstests, :test]
 
@@ -116,8 +116,8 @@ task :pack do
 	sh "dotnet pack src/dotnet-storyteller -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 
-	sh "dotnet publish src/StorytellerRunner/StorytellerRunner.csproj --framework NET46 -o ./../../artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
-	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o ./../../artifacts -version #{build_number}"
+	sh "dotnet publish src/StorytellerRunner/StorytellerRunner.csproj --framework NET46 -o ./../../artifacts/StorytellerRunner -c Release "
+	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o artifacts -version #{BUILD_VERSION}"
 end
 
 desc "Pushes the Nuget's to MyGet"

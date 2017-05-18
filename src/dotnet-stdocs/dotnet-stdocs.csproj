@@ -4,7 +4,7 @@
     <Description>Living technical documentation authoring for .Net and Javascript projects</Description>
     <AssemblyTitle>StorytellerDocGen</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>1.0.1</VersionPrefix>
+    <Version>1.0.1</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
     <AssemblyName>dotnet-stdocs</AssemblyName>

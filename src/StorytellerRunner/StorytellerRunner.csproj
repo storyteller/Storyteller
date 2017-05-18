@@ -4,7 +4,7 @@
     <Description>Storyteller Project Runner and Editor</Description>
     <AssemblyTitle>Storyteller Project Runner</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>1.1.2</VersionPrefix>
+    <Version>1.1.2</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFrameworks>netcoreapp1.0;net46</TargetFrameworks>
     <DebugType>portable</DebugType>
