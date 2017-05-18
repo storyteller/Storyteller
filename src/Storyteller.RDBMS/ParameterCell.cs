@@ -39,6 +39,10 @@ namespace StoryTeller.RDBMS
 
         }
 
+        /// <summary>
+        /// Hook to set any database specific configuration on the parameter
+        /// </summary>
+        /// <param name="param"></param>
         protected abstract void configureParameter(IDbDataParameter param);
 
         public bool IsChecked()
@@ -59,7 +63,11 @@ namespace StoryTeller.RDBMS
         }
 
 
-
+        /// <summary>
+        /// Given
+        /// </summary>
+        /// <param name="format"></param>
+        /// <returns></returns>
         public abstract string ReplaceWithCellInput(string format);
     }
 }

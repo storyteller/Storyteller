@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Recipes to Manipulate or Assert on Databases in Storyteller Specifications</Description>
     <AssemblyTitle>Storyteller.RDBMS</AssemblyTitle>
@@ -21,15 +20,12 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="Npgsql" Version="3.2.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.1.0" />
   </ItemGroup>
-
 </Project>

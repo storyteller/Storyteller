@@ -3,6 +3,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.RDBMS.SqlServer
 {
+    // SAMPLE: SqlServerParameterCell
     public class SqlServerParameterCell : ParameterCell
     {
         public SqlServerParameterCell(Cell cell, string parameterName, ParameterDirection direction) : base(cell, parameterName, direction)
@@ -11,12 +12,15 @@ namespace StoryTeller.RDBMS.SqlServer
 
         protected override void configureParameter(IDbDataParameter param)
         {
-            // Nothing yet
+            // Nothing to do here for Sql Server
         }
 
         public override string ReplaceWithCellInput(string format)
         {
+            // A parameter named "foo" would be referred to as
+            // @foo in sql commands
             return format.Replace("@" + Cell.Key, FormattedName());
         }
     }
+    // ENDSAMPLE
 }

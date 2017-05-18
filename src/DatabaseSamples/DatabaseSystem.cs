@@ -8,21 +8,21 @@ using StoryTeller.Engine;
 
 namespace DatabaseSamples
 {
+    // SAMPLE: DatabaseSystem
     public class DatabaseSystem : SimpleSystem
     {
         public static readonly string ConnectionString = "Host=localhost;Port=5432;Database=postgres;Username=postgres";
 
 
-        public override void BeforeEach(SimpleExecutionContext execution, ISpecContext context)
+        protected override void configureCellHandling(CellHandling handling)
         {
-            context.ConnectionString(ConnectionString);
+            // Add the DatabaseExtension just to let DatabaseFixture's connect
+            // to the underlying database
+            handling.Extensions.Add(new DatabaseExtension(ConnectionString));
         }
 
-        public override void AfterEach(ISpecContext context)
-        {
-            context.DisposeActiveCommandRunner();
-        }
-
+        // The Warmup() hook might be a good place to set up baseline data sets or database
+        // state
         public override Task Warmup()
         {
             return Task.Factory.StartNew(async () =>
@@ -43,4 +43,5 @@ namespace DatabaseSamples
 
         }
     }
+    // ENDSAMPLE
 }

@@ -7,11 +7,21 @@ namespace StoryTeller.RDBMS
     {
         public static readonly string ConnectionStringKey = "ConnectionString";
 
+        /// <summary>
+        /// Set the connection string to the database for this specification
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="connectionString"></param>
         public static void ConnectionString(this ISpecContext context, string connectionString)
         {
             context.State.Store(ConnectionStringKey, connectionString);
         }
 
+        /// <summary>
+        /// Retrieve the current connection string
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static string ConnectionString(this ISpecContext context)
         {
             return context.State.TryRetrieve<string>(ConnectionStringKey);
@@ -29,6 +39,10 @@ namespace StoryTeller.RDBMS
             return context.State.RetrieveOrAdd(() => new CommandRunner(connectionString, dialect));
         }
 
+        /// <summary>
+        /// Shuts down any open connection using in the testing
+        /// </summary>
+        /// <param name="context"></param>
         public static void DisposeActiveCommandRunner(this ISpecContext context)
         {
             context.State.TryRetrieve<CommandRunner>()?.Dispose();
