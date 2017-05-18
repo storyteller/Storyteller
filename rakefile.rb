@@ -116,7 +116,7 @@ task :pack do
 	sh "dotnet pack src/dotnet-storyteller -o artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o artifacts --configuration Release --version-suffix #{build_revision}"
 
-	sh "dotnet publish src/StorytellerRunner --framework NET46 -o artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
+	sh "dotnet publish src/StorytellerRunner/StorytellerRunner.csproj --framework NET46 -o artifacts/StorytellerRunner -c Release --version-suffix #{build_revision}"
 	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o artifacts -version #{build_number}"
 end
 
@@ -213,7 +213,7 @@ end
 
 "Run the specs against the documentation generation"
 task :specifications do
-	sh "dotnet run --project src/StorytellerRunner --framework netcoreapp1.0 run src/Specifications"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 run src/Specifications"
 end
 
 "Run the database sample specs"
