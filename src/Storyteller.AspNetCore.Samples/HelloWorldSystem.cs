@@ -12,5 +12,7 @@ namespace StoryTeller.AspNetCore.Samples
             // No request should take longer than 250 milliseconds
             RequestPerformanceThresholdIs(250);
         }
+
+
     }
 }

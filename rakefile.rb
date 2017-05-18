@@ -218,7 +218,23 @@ end
 
 "Run the database sample specs"
 task :dbsamples do
+
 	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/DatabaseSamples"
+end
+
+"Run the selenium sample specs"
+task :seleniumsamples do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Selenium.Samples"
+end
+
+"Run the aspnetcore sample specs"
+task :aspnetcoresamples do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.AspNetCore.Samples"
+end
+
+"Generate the database sample results"
+task :dbsamplesresults do
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/DatabaseSamples --dump documentation/content/rdbms.specs.json"
 end
 
 def load_project_file(project)

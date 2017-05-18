@@ -23,14 +23,7 @@ namespace StoryTeller.Selenium.Samples
             // HTML page. In real life, you'd need to be smarter about this
             // and reuse the Driver across specifications for better
             // performance
-            Driver = new ChromeDriver();
             RootUrl = "file://" + Project.CurrentProject.ProjectPath.Replace("\\", "/");
-        }
-
-        public override void TearDown()
-        {
-            // Clean up behind yourself
-            Driver.Close();
         }
     }
 }
