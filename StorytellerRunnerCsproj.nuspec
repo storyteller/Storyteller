@@ -15,8 +15,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="src\StorytellerRunner\bin\Release\net46\*.exe" target="tools" />
-    <file src="src\StorytellerRunner\bin\Release\net46\*.dll" target="tools" />
-    <file src="src\StorytellerRunner\bin\Release\net46\*.config" target="tools" />
+    <file src="artifacts\StorytellerRunner\*.exe" target="tools" />
+    <file src="artifacts\StorytellerRunner\*.dll" target="tools" />
+    <file src="artifacts\StorytellerRunner\*.config" target="tools" />
   </files>
 </package>
