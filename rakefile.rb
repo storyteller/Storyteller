@@ -167,13 +167,13 @@ task :publish => [:prepare_docs] do
 		FileUtils.rm_rf 'doc-target'
 	end
 
-	sh "dotnet restore"
+	sh "dotnet restore src/StoryTeller.sln"
 
 	Dir.mkdir 'doc-target'
 	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
 
 
-	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj -- export doc-target Website --version #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- export doc-target Website --version #{BUILD_VERSION}"
 
 	Dir.chdir "doc-target" do
 		sh "git add --all"
