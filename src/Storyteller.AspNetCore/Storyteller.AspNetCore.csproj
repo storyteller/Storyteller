@@ -6,7 +6,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Version>1.0.0</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
     <AssemblyName>Storyteller.AspNetCore</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>Storyteller.AspNetCore</PackageId>

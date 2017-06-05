@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>StoryTeller.Testing</AssemblyName>
     <PackageId>StoryTeller.Testing</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);dotnet5.4;portable-net451+win8</PackageTargetFallback>
-    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">1.0.4</RuntimeFrameworkVersion>
+    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">$(PackageTargetFallback);dotnet5.4;portable-net451+win8</PackageTargetFallback>
+    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">1.0.4</RuntimeFrameworkVersion>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
   </PropertyGroup>
 
@@ -37,7 +37,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DebugType>portable</DebugType>
   </PropertyGroup>
 

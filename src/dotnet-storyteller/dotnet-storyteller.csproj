@@ -4,9 +4,9 @@
     <Description>Storyteller Project Runner and Editor</Description>
     <AssemblyTitle>dotnet CLI integration for Storyteller</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>dotnet-storyteller</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>dotnet-storyteller</PackageId>
@@ -16,8 +16,8 @@
     <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/storyteller/storyteller</RepositoryUrl>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">1.0.4</RuntimeFrameworkVersion>
+    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">1.0.4</RuntimeFrameworkVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>

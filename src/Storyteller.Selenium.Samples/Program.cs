@@ -16,7 +16,7 @@ namespace StoryTeller.Selenium.Samples
     {
         protected override void configureCellHandling(CellHandling handling)
         {
-            handling.Extensions.Add(new SeleniumExtension(new ChromeDriver()));
+            handling.Extensions.Add(new SeleniumExtension(() => new ChromeDriver()));
         }
     }
     // ENDSAMPLE

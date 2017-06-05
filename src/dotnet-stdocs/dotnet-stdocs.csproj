@@ -6,7 +6,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Version>1.0.1</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>dotnet-stdocs</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>dotnet-stdocs</PackageId>
@@ -16,8 +16,8 @@
     <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/storyteller/storyteller</RepositoryUrl>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">1.0.4</RuntimeFrameworkVersion>
+    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">1.0.4</RuntimeFrameworkVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
@@ -53,7 +53,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
   </ItemGroup>
 
