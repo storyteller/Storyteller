@@ -9,6 +9,7 @@
     <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
     <AssemblyName>dotnet-storyteller</AssemblyName>
     <OutputType>Exe</OutputType>
+    <DebugType>pdbonly</DebugType>
     <PackageId>dotnet-storyteller</PackageId>
     <PackageTags>testing;storyteller</PackageTags>
     <PackageIconUrl>http://storyteller.github.io/storyteller/content/images/favicon.ico</PackageIconUrl>

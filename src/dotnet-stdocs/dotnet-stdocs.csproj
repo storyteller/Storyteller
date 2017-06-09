@@ -14,6 +14,7 @@
     <PackageIconUrl>http://storyteller.github.io/storyteller/content/images/favicon.ico</PackageIconUrl>
     <PackageProjectUrl>http://storyteller.github.io/documentation/docs/</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
+    <DebugType>pdbonly</DebugType>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/storyteller/storyteller</RepositoryUrl>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
-    <DebugType>portable</DebugType>
+    <DebugType>pdbonly</DebugType>
     <AssemblyName>Specifications</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Specifications</PackageId>

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
-    <DebugType>portable</DebugType>
+    <DebugType>pdbonly</DebugType>
     <AssemblyName>BadSystem</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>BadSystem</PackageId>
