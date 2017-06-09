@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
+using Microsoft.AspNetCore.Server.Kestrel.Internal.Networking;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Engine.UserInterface;
 using StoryTeller.Messages;
@@ -15,20 +16,20 @@ namespace StoryTeller.Engine
         private readonly IList<IDisposable> _disposables = new List<IDisposable>();
         private SpecificationEngine _engine;
         private object _controller;
-        private readonly SocketConnection _socket;
         private Project _project;
         private RunningSystem _running;
+        private HttpConnection _connection;
 
         public EngineAgent(int port)
         {
-            _socket = new SocketConnection(port, false, (s, json) =>
+            _connection = new HttpConnection(port, port + 1, json =>
             {
                 EventAggregator.Messaging.SendJson(json);
             });
 
-            _disposables.Add(_socket);
+            _disposables.Add(_connection);
 
-            EventAggregator.Start(_socket);
+            EventAggregator.Start(_connection);
 
             Console.WriteLine("AGENT: Sending AgentReady message");
             EventAggregator.SendMessage(new AgentReady());

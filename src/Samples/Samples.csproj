@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
-    <DebugType>portable</DebugType>
+    <DebugType>pdbonly</DebugType>
     <AssemblyName>Samples</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Samples</PackageId>
@@ -19,6 +19,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
   </ItemGroup>
 
@@ -28,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <PackageReference Include="System.Runtime.Extensions" Version="4.1.0" />
+    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@
     <AssemblyName>Storyteller.Selenium.Samples</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Storyteller.Selenium.Samples</PackageId>
+    <DebugType>pdbonly</DebugType>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
