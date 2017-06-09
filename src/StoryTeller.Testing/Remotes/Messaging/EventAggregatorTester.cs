@@ -15,11 +15,11 @@ namespace StoryTeller.Testing.Remotes.Messaging
     public class EventAggregatorTester : IDisposable
     {
 
-        private readonly ISocketConnection theSocket = Substitute.For<ISocketConnection>();
+        private readonly IHttpConnection theHttp = Substitute.For<IHttpConnection>();
 
         public EventAggregatorTester()
         {
-            EventAggregator.Start(theSocket);
+            EventAggregator.Start(theHttp);
         }
 
         public void Dispose()

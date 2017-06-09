@@ -10,7 +10,7 @@ namespace StoryTeller.Remotes.Messaging
         private static readonly BlockingCollection<object> _messages;
         private static CancellationTokenSource _cancellationSource;
         private static readonly IMessagingHub _messaging = new MessagingHub();
-        private static ISocketConnection _sockets;
+        private static IHttpConnection https;
 
         static EventAggregator()
         {
@@ -19,12 +19,12 @@ namespace StoryTeller.Remotes.Messaging
 
         public static IMessagingHub Messaging => _messaging;
 
-        public static void Start(ISocketConnection sockets)
+        public static void Start(IHttpConnection https)
         {
             // only start once
-            if (_sockets != null) return;
+            if (EventAggregator.https != null) return;
 
-            _sockets = sockets;
+            EventAggregator.https = https;
             _cancellationSource = new CancellationTokenSource();
             Task.Factory.StartNew(read, _cancellationSource.Token);
         }
@@ -34,7 +34,7 @@ namespace StoryTeller.Remotes.Messaging
             foreach (object o in _messages.GetConsumingEnumerable(_cancellationSource.Token))
             {
                 var json = JsonSerialization.ToJson(o);
-                _sockets.SendMessage(json);
+                https.SendMessage(json);
             }
         }
 
