@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StoryTeller.Samples": {
+      "commandName": "Project",
+      "commandLineArgs": "test"
+    }
+  }
+}

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Baseline;
@@ -14,6 +15,15 @@ namespace StoryTeller.Testing
     
     public class debugging
     {
+        [Fact]
+        public void parse_a_date()
+        {
+            DateTime time = DateTime.MinValue;
+            DateTime.TryParse("1/1/1974", out time);
+            Console.WriteLine(time);
+
+        }
+
         [Fact]
         public void serialize_fixtures()
         {

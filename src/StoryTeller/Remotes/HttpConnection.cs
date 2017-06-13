@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace StoryTeller.Remotes
 {
-    public class HttpConnection : ISocketConnection, IDisposable
+    public class HttpConnection : IHttpConnection, IDisposable
     {
         private readonly IWebHost _host;
         private readonly HttpClient _client;
@@ -25,7 +25,7 @@ namespace StoryTeller.Remotes
                 {
                     app.Run(async http =>
                     {
-                        var json = await StreamExtensions.ReadAllTextAsync(http.Request.Body);
+                        var json = await http.Request.Body.ReadAllTextAsync();
                         onReceived(json);
 
                         http.Response.StatusCode = 200;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Baseline;
 
@@ -29,10 +30,21 @@ namespace StoryTeller.Remotes.Messaging
 
         public void SendJson(string json)
         {
-            object o = JsonSerialization.DeserializeMessage(json);
+            try
+            {
+                object o = JsonSerialization.DeserializeMessage(json);
 
-            typeof (Sender<>).CloseAndBuildAs<ISender>(o.GetType())
-                .Send(o, this);
+                typeof(Sender<>).CloseAndBuildAs<ISender>(o.GetType())
+                                .Send(o, this);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unable to deserialize a json message:");
+                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
+                
+            }
+
+
         }
 
         public void ClearAll()

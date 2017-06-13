@@ -1,4 +1,6 @@
 ﻿using System;
+using Baseline;
+using Microsoft.Extensions.DependencyModel;
 using StoryTeller;
 
 namespace Samples
