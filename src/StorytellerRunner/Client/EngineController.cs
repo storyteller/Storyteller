@@ -12,7 +12,7 @@ namespace ST.Client
     {
         public static int Port = 2500;
         private readonly ISystemLauncher _launcher;
-        private readonly HttpConnection _socket;
+        private readonly SocketConnection _socket;
 
         private AppDomainFileChangeWatcher _watcher;
 
@@ -24,11 +24,10 @@ namespace ST.Client
 
             Messaging = EventAggregator.Messaging;
 
-            _socket = new HttpConnection(Project.Port + 1, Project.Port, json =>
+            _socket = new SocketConnection(Project.Port, true, (s, json) =>
             {
                 Messaging.SendJson(json);
             });
-            
 
             Messaging.AddListener(this);
             Messaging.AddListener(launcher);
