@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
+using StoryTeller.Remotes;
 
 namespace StoryTeller.Remotes.Messaging
 {
@@ -10,7 +11,7 @@ namespace StoryTeller.Remotes.Messaging
         private static readonly BlockingCollection<object> _messages;
         private static CancellationTokenSource _cancellationSource;
         private static readonly IMessagingHub _messaging = new MessagingHub();
-        private static IHttpConnection https;
+        private static ISocketConnection https;
 
         static EventAggregator()
         {
@@ -19,7 +20,7 @@ namespace StoryTeller.Remotes.Messaging
 
         public static IMessagingHub Messaging => _messaging;
 
-        public static void Start(IHttpConnection https)
+        public static void Start(ISocketConnection https)
         {
             // only start once
             if (EventAggregator.https != null) return;

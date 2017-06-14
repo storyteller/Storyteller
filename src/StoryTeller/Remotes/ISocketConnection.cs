@@ -1,6 +1,6 @@
 ﻿namespace StoryTeller.Remotes
 {
-    public interface IHttpConnection
+    public interface ISocketConnection
     {
         void SendMessage(string json);
     }
