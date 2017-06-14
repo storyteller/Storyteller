@@ -3,7 +3,7 @@
     <Description>Storyteller Project Runner and Editor</Description>
     <AssemblyTitle>Storyteller Project Runner</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.1.3</Version>
+    <Version>1.2.0</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFrameworks>netcoreapp1.1;net46</TargetFrameworks>
     <DebugType>pdbonly</DebugType>
