@@ -6,8 +6,6 @@
     <AssemblyName>BlowsUp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>BlowsUp</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
   </PropertyGroup>
 
 </Project>
