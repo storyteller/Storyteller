@@ -671,7 +671,7 @@ namespace StoryTeller
                         var model = c.State.Retrieve<TModel>();
                         c.State.CurrentObject = model;
 
-                        action(model);
+                        return action(model);
                     });
                 }
             }

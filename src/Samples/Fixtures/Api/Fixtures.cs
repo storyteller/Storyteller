@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using StoryTeller;
 using StoryTeller.Grammars.API;
 
@@ -74,15 +75,17 @@ namespace Samples.Fixtures.Api
 
         // This template method has to be implemented to exercise whatever the
         // underlying API is
-        protected override Task<NumbersOutput> execute(NumbersInput input)
+        protected async override Task<NumbersOutput> execute(NumbersInput input)
         {
-            var output = new NumbersOutput
+            await new HttpClient().GetStringAsync("http://google.com");
+
+            return new NumbersOutput
             {
                 Added = input.X + input.Y,
                 Multiplied = input.X * input.Y
             };
 
-            return Task.FromResult(output);
+
         }
     }
     // ENDSAMPLE
