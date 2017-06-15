@@ -4,7 +4,6 @@ APIKEY = ENV['api_key'].nil? ? '' : ENV['api_key']
 
 COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
-BUILD_VERSION = '4.2.0'
 
 tc_build_number = ENV["APPVEYOR_BUILD_NUMBER"]
 build_revision = tc_build_number || Time.new.strftime('5%H%M')
@@ -39,44 +38,6 @@ task :jstests => [:npm] do
 	sh "yarn run test:prod" if CI
 end
 
-desc "Update the version information for the build"
-task :version do
-  asm_version = build_number
-
-  begin
-    commit = `git log -1 --pretty=format:%H`
-  rescue
-    commit = "git unavailable"
-  end
-  #puts "##teamcity[buildNumber '#{build_number}']" unless tc_build_number.nil?
-  #puts "Version: #{build_number}" if tc_build_number.nil?
-
-  options = {
-	:description => 'IoC Container for .Net',
-	:product_name => 'Executable Specifications for .Net',
-	:copyright => 'Copyright 2008-2017 Jeremy D. Miller, Brandon Behrens, Andrew Kharlamov, et al. All rights reserved.',
-	:trademark => commit,
-	:version => asm_version,
-	:file_version => build_number,
-	:informational_version => asm_version
-
-  }
-
-  puts "Writing src/CommonAssemblyInfo.cs..."
-	File.open('src/CommonAssemblyInfo.cs', 'w') do |file|
-		file.write "using System.Reflection;\n"
-		file.write "using System.Runtime.InteropServices;\n"
-		file.write "[assembly: AssemblyDescription(\"#{options[:description]}\")]\n"
-		file.write "[assembly: AssemblyProduct(\"#{options[:product_name]}\")]\n"
-		file.write "[assembly: AssemblyCopyright(\"#{options[:copyright]}\")]\n"
-		file.write "[assembly: AssemblyTrademark(\"#{options[:trademark]}\")]\n"
-		file.write "[assembly: AssemblyVersion(\"#{options[:version]}\")]\n"
-		file.write "[assembly: AssemblyFileVersion(\"#{options[:file_version]}\")]\n"
-		file.write "[assembly: AssemblyInformationalVersion(\"#{options[:informational_version]}\")]\n"
-	end
-
-
-end
 
 desc 'Compile the code'
 task :compile => [:clean, :npm, :version] do
@@ -108,7 +69,7 @@ end
 
 desc 'Build Nuspec packages'
 task :pack do
-	sh "dotnet pack src/Storyteller -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
+	sh "dotnet pack src/Storyteller -o ./../../artifacts --configuration Release"
 	sh "dotnet pack src/Storyteller.AspNetCore -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.Redux -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.RDBMS -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"

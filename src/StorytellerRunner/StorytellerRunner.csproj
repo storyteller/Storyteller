@@ -3,7 +3,7 @@
     <Description>Storyteller Project Runner and Editor</Description>
     <AssemblyTitle>Storyteller Project Runner</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.2.2</Version>
+    <Version>1.2.3</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFrameworks>netcoreapp1.0;net46</TargetFrameworks>
     <DebugType>pdbonly</DebugType>
@@ -25,7 +25,6 @@
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\CommonAssemblyInfo.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
     <EmbeddedResource Include="**\*.txt;*.js;*.ico" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
     <Content Include="prefercliruntime">
       <PackagePath>\prefercliruntime</PackagePath>
