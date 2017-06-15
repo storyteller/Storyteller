@@ -25,6 +25,7 @@ task :clean do
 
 end
 
+
 desc "Installs npm packages and builds the bundles"
 task :npm do
 	sh "yarn install"
