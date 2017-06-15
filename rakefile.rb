@@ -4,7 +4,6 @@ APIKEY = ENV['api_key'].nil? ? '' : ENV['api_key']
 
 COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
-
 tc_build_number = ENV["APPVEYOR_BUILD_NUMBER"]
 build_revision = tc_build_number || Time.new.strftime('5%H%M')
 build_number = "#{BUILD_VERSION}.#{build_revision}"
@@ -40,7 +39,7 @@ end
 
 
 desc 'Compile the code'
-task :compile => [:clean, :npm, :version] do
+task :compile => [:clean, :npm] do
 	sh "dotnet restore src"
 end
 
