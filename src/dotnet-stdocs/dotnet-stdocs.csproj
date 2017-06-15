@@ -6,7 +6,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Version>1.0.1</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
     <AssemblyName>dotnet-stdocs</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>dotnet-stdocs</PackageId>
