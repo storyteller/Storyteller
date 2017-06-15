@@ -86,7 +86,7 @@ namespace ST.Client
 #if NET46
             framework = framework ?? "net46";
 #else
-            framework = framework ?? "netcoreapp1.1";
+            framework = framework ?? "netcoreapp1.0";
 #endif
 
 

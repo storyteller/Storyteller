@@ -39,6 +39,8 @@ namespace StoryTeller
         public Project()
         {
             Port = PortFinder.FindPort(++StartingPort);
+
+            Framework = "netcoreapp1.0";
         }
 
         public int Port { get; set; }

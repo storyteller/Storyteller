@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
     <DebugType>pdbonly</DebugType>
     <AssemblyName>StoryTeller.Samples</AssemblyName>
     <OutputType>Exe</OutputType>

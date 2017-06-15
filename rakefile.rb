@@ -94,7 +94,7 @@ task :test => [:compile] do
   #sh "dotnet test src/IntegrationTests --framework net46"
   #sh "dotnet test src/IntegrationTests --framework netcoreapp1.1"
 
-  sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 -- run src/Specifications --validate"
+  sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/Specifications --validate"
 
 end
 
@@ -150,9 +150,9 @@ task :prepare_docs => [:compile] do
 	cp 'src/StorytellerRunner/embed.js', 'documentation/content'
 	cp 'client/public/stylesheets/storyteller.css', 'documentation/content/stylesheets'
 
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 -- run src/Samples --dump documentation/content/samples.specs.json"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json"
 
-	sh 'dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
+	sh 'dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
 	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.1 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
@@ -188,53 +188,53 @@ end
 
 "Run the spec editor w/ samples"
 task :samples do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/Storyteller.Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Samples"
 end
 
 "Run the spec editor w/ samples"
 task :testbed do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/Testbed"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Testbed"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :docsamples do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Samples"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :rundocsamples do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 run src/Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 run src/Samples"
 end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/Storyteller.Samples --hotreload"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Samples --hotreload"
 end
 
 "Run the specs against the documentation generation"
 task :specifications do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 run src/Specifications"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 run src/Specifications"
 end
 
 "Run the database sample specs"
 task :dbsamples do
 
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/DatabaseSamples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/DatabaseSamples"
 end
 
 "Run the selenium sample specs"
 task :seleniumsamples do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/Storyteller.Selenium.Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.Selenium.Samples"
 end
 
 "Run the aspnetcore sample specs"
 task :aspnetcoresamples do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 open src/Storyteller.AspNetCore.Samples"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 open src/Storyteller.AspNetCore.Samples"
 end
 
 "Generate the database sample results"
 task :dbsamplesresults do
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.1 -- run src/DatabaseSamples --dump documentation/content/rdbms.specs.json"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/DatabaseSamples --dump documentation/content/rdbms.specs.json"
 end
 
 def load_project_file(project)
