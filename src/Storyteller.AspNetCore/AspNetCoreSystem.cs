@@ -54,7 +54,7 @@ namespace StoryTeller.AspNetCore
         {
             return Task.Factory.StartNew(() =>
             {
-                Bootstrap();
+                this.ensureBootstrapped();
                 beforeAll();
             });
         }
