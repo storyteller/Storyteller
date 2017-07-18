@@ -4,7 +4,6 @@ using Baseline;
 using StorytellerDocGen;
 using StoryTeller;
 using StoryTeller.Engine;
-using IRunExecutionContext = StoryTeller.Engine.IRunExecutionContext;
 
 namespace Specifications
 {
