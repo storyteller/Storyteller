@@ -22,6 +22,11 @@ namespace StoryTeller.Samples
             return new SimpleExecutionContext();
         }
 
+        public Engine.IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
+        }
+
         public void Dispose()
         {
         }

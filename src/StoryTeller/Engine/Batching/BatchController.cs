@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Baseline;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 
@@ -9,21 +11,26 @@ namespace StoryTeller.Engine.Batching
 {
     public class BatchController : IListener<BatchRunRequest>
     {
+        private readonly ISystem _system;
         private readonly ISpecificationEngine _engine;
         private readonly IBatchObserver _resultObserver;
 
-        public BatchController(ISpecificationEngine engine, IBatchObserver observer)
+        public BatchController(ISystem system, ISpecificationEngine engine, IBatchObserver observer)
         {
+            _system = system;
             _engine = engine;
             _resultObserver = observer;
         }
 
         public void Receive(BatchRunRequest message)
         {
-            var top = HierarchyLoader.ReadHierarchy(message.SpecPath);
-            var specs = message.Filter(top).ToArray();
+            Suite top = HierarchyLoader.ReadHierarchy(message.SpecPath);
+            Specification[] specs = message.Filter(top).ToArray();
 
-            var task = _resultObserver.MonitorBatch(specs);
+            IRunExecutionContext runExecutionContext = _system.CreateRunExecutionContext();
+
+            runExecutionContext?.BeforeRun(specs);
+            Task<IEnumerable<BatchRecord>> task = _resultObserver.MonitorBatch(specs);
 
             specs
                 .Select(SpecExecutionRequest.For)
@@ -31,9 +38,11 @@ namespace StoryTeller.Engine.Batching
 
             task.ContinueWith(t =>
             {
+                BatchRecord[] results = t.Result.ToArray();
+                runExecutionContext?.AfterRun(results);
                 EventAggregator.SendMessage(new BatchRunResponse
                 {
-                    records = t.Result.ToArray()
+                    records = results
                 });
             });
         }

@@ -17,6 +17,11 @@ namespace Specifications
             return new SpecificationContext();
         }
 
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
+        }
+
         public CellHandling Start()
         {
             return CellHandling.Basic();

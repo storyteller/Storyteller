@@ -34,6 +34,11 @@ namespace StoryTeller.Engine
             return new SimpleExecutionContext(this);
         }
 
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
+        }
+
         /// <summary>
         /// Executes before every single specification run
         /// </summary>
@@ -73,6 +78,11 @@ namespace StoryTeller.Engine
         public IExecutionContext CreateContext()
         {
             return new SimpleExecutionContext(_services);
+        }
+
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
         }
 
         public void Register<T>(T service)

@@ -35,6 +35,11 @@ namespace StoryTeller.Engine
             return new CompositeExecutionContext(inner, _handling.Extensions);
         }
 
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
+        }
+
         public Task Warmup()
         {
             var warmup = _inner.Warmup();
