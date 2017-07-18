@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Engine;
+using IRunExecutionContext = StoryTeller.Engine.IRunExecutionContext;
 
 namespace InvalidExamples
 {
@@ -15,6 +16,11 @@ namespace InvalidExamples
         }
 
         public IExecutionContext CreateContext()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IRunExecutionContext CreateRunExecutionContext()
         {
             throw new NotImplementedException();
         }

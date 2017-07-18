@@ -50,6 +50,11 @@ namespace StoryTeller.AspNetCore
             return new AspNetCoreContext(this);
         }
 
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
+        }
+
         Task ISystem.Warmup()
         {
             return Task.Factory.StartNew(() =>

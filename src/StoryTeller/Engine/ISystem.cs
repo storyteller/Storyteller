@@ -23,6 +23,12 @@ namespace StoryTeller.Engine
         IExecutionContext CreateContext();
 
         /// <summary>
+        /// Executed at the beginning of every run of one or more specificaitons
+        /// </summary>
+        /// <returns></returns>
+        IRunExecutionContext CreateRunExecutionContext();
+
+        /// <summary>
         /// Use to bootstrap the system when it first starts
         /// </summary>
         /// <returns></returns>

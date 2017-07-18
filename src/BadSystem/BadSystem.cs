@@ -21,6 +21,11 @@ namespace BadSystem
             throw new Exception();
         }
 
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
+        }
+
         public CellHandling Start()
         {
             throw new DivideByZeroException();

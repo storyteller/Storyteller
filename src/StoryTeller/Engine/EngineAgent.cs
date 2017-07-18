@@ -38,7 +38,6 @@ namespace StoryTeller.Engine
         {
             _running = RunningSystem.Create(system);
 
-
             _disposables.Add(system);
         }
 
@@ -171,7 +170,7 @@ namespace StoryTeller.Engine
             var engine = new SpecificationEngine(
                 _running.System, runner, executionObserver);
 
-            _controller = new BatchController(engine, batchObserver);
+            _controller = new BatchController(_running.System, engine, batchObserver);
 
             _disposables.Add(engine);
 

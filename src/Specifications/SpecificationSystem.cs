@@ -4,6 +4,7 @@ using Baseline;
 using StorytellerDocGen;
 using StoryTeller;
 using StoryTeller.Engine;
+using IRunExecutionContext = StoryTeller.Engine.IRunExecutionContext;
 
 namespace Specifications
 {
@@ -15,6 +16,11 @@ namespace Specifications
         public IExecutionContext CreateContext()
         {
             return new SpecificationContext();
+        }
+
+        public IRunExecutionContext CreateRunExecutionContext()
+        {
+            return null;
         }
 
         public CellHandling Start()
