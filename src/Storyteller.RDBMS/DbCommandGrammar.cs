@@ -7,6 +7,7 @@ using StoryTeller.Conversion;
 using StoryTeller.Grammars.Lines;
 using StoryTeller.Model;
 using StoryTeller.Results;
+using System;
 
 namespace StoryTeller.RDBMS
 {
@@ -135,6 +136,13 @@ namespace StoryTeller.RDBMS
         public DbCommandGrammar CheckResult<T>(string cell = "result")
         {
             Execution = new CheckResultExecution<T>();
+
+            return this;
+        }
+
+        public DbCommandGrammar ResultAction<T>(Action<T> action)
+        {
+            Execution = new ActionResultExecution<T>(action);
 
             return this;
         }
