@@ -9,39 +9,11 @@ namespace StoryTeller.Engine
 {
     public class BatchRunRequest
     {
-        public Lifecycle Lifecycle;
-        public string Suite;
-        public string SpecPath;
-        public string[] Tags;
+        public List<Specification> Specifications { get; }
 
-        public IEnumerable<Specification> Filter(Suite top)
+        public BatchRunRequest(List<Specification> specifications)
         {
-            IEnumerable<Specification> specs;
-            if (Suite.IsNotEmpty())
-            {
-                var suite = top.suites.FirstOrDefault(x => x.name == Suite);
-                if (suite == null)
-                    throw new SuiteNotFoundException(Suite, top);
-
-                specs = suite.GetAllSpecs();
-            }
-            else
-            {
-                specs = top.GetAllSpecs();
-            }
-
-            if (Lifecycle != Lifecycle.Any)
-            {
-                specs = specs.Where(x => x.Lifecycle == Lifecycle);
-            }
-
-            var tags = Tags ?? new string[0];
-            if (tags.Any())
-            {
-                specs = specs.Where(spec => tags.All(tag => !spec.Tags.Contains(tag)));
-            }
-
-            return specs.ToArray();
+            Specifications = specifications;
         }
     }
 
