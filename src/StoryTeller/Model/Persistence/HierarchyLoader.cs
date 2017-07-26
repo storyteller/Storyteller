@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Baseline;
+using StoryTeller.Engine;
 using StoryTeller.Model.Persistence.Markdown;
 
 namespace StoryTeller.Model.Persistence
@@ -46,6 +48,35 @@ namespace StoryTeller.Model.Persistence
             }
 
             return suite;
+        }
+        
+        public static List<Specification> Filter(Suite top, Lifecycle lifecycle = Lifecycle.Any, string suiteName = "", string[] tags = default(string[]))
+        {
+            IEnumerable<Specification> specs;
+            if (suiteName.IsNotEmpty())
+            {
+                var suite = top.suites.FirstOrDefault(x => x.name == suiteName);
+                if (suite == null)
+                    throw new SuiteNotFoundException(suiteName, top);
+
+                specs = suite.GetAllSpecs();
+            }
+            else
+            {
+                specs = top.GetAllSpecs();
+            }
+
+            if (lifecycle != Lifecycle.Any)
+            {
+                specs = specs.Where(x => x.Lifecycle == lifecycle);
+            }
+            
+            if (tags != null && tags.Any())
+            {
+                specs = specs.Where(spec => tags.All(tag => !spec.Tags.Contains(tag)));
+            }
+
+            return specs.ToList();
         }
     }
 }

@@ -6,6 +6,7 @@ using StoryTeller;
 using ST.Client;
 using StoryTeller.Engine;
 using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 
 namespace ST.CommandLine
@@ -82,14 +83,11 @@ namespace ST.CommandLine
 
         public BatchRunRequest GetBatchRunRequest()
         {
-            var tags = ExcludeTagsFlag ?? "";
-            return _batchRunRequest ?? (_batchRunRequest = new BatchRunRequest
-            {
-                Lifecycle = LifecycleFlag,
-                SpecPath = SpecPath,
-                Suite = WorkspaceFlag,
-                Tags = tags.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray()
-            });
+            var tagsString = ExcludeTagsFlag ?? "";
+            var top = HierarchyLoader.ReadHierarchy(SpecPath);
+            var tags = tagsString.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+            var specs = HierarchyLoader.Filter(top, LifecycleFlag, WorkspaceFlag, tags).ToList();
+            return new BatchRunRequest(specs);
         }
 
         public Task<BatchRunResponse> StartBatch(IEngineController controller)

@@ -25,12 +25,12 @@ namespace ST.CommandLine
 
         public override bool Execute(RunInput input)
         {
+            BatchRunRequest batchRunRequest = null;
             try
             {
-                var top = HierarchyLoader.ReadHierarchy(input.SpecPath);
-                var specs = input.GetBatchRunRequest().Filter(top);
+                batchRunRequest = input.GetBatchRunRequest();
 
-                if (!specs.Any())
+                if (!batchRunRequest.Specifications.Any())
                 {
                     ConsoleWriter.Write(ConsoleColor.Yellow, "Warning: No specs found!");
                 }
@@ -45,7 +45,7 @@ namespace ST.CommandLine
             var task = controller.Start().ContinueWith(t =>
             {
                 var systemRecycled = t.Result;
-                return executeAgainstTheSystem(input, systemRecycled, controller);
+                return executeAgainstTheSystem(input, batchRunRequest, systemRecycled, controller);
             });
 
             task.Wait();
@@ -54,7 +54,7 @@ namespace ST.CommandLine
             return task.Result;
         }
 
-        private bool executeAgainstTheSystem(RunInput input, SystemRecycled systemRecycled, EngineController controller)
+        private bool executeAgainstTheSystem(RunInput input, BatchRunRequest batchRunRequest, SystemRecycled systemRecycled, EngineController controller)
         {
             if (!systemRecycled.success)
             {
@@ -68,7 +68,6 @@ namespace ST.CommandLine
             {
                 return validateOnly(input, systemRecycled);
             }
-
 
             var execution = input.StartBatch(controller);
 
