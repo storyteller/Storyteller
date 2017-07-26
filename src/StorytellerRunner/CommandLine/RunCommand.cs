@@ -45,7 +45,7 @@ namespace ST.CommandLine
             var task = controller.Start().ContinueWith(t =>
             {
                 var systemRecycled = t.Result;
-                return executeAgainstTheSystem(input, batchRunRequest, systemRecycled, controller);
+                return executeAgainstTheSystem(input, systemRecycled, controller);
             });
 
             task.Wait();
@@ -54,7 +54,7 @@ namespace ST.CommandLine
             return task.Result;
         }
 
-        private bool executeAgainstTheSystem(RunInput input, BatchRunRequest batchRunRequest, SystemRecycled systemRecycled, EngineController controller)
+        private bool executeAgainstTheSystem(RunInput input, SystemRecycled systemRecycled, EngineController controller)
         {
             if (!systemRecycled.success)
             {
