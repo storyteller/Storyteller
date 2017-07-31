@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestProjects", "TestProjects", "{B4FA8947-30BA-4AD5-9701-0679E1CE2EF9}"
 EndProject
@@ -53,6 +53,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleProjects", "SampleProjects", "{BF1EF462-3525-4FBA-A88E-A21D5E1498A1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxSamples", "ReduxSamples\ReduxSamples.csproj", "{B25403A9-0A8A-4E4A-A399-679918FE7607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.TestRail", "Storyteller.TestRail\Storyteller.TestRail.csproj", "{36B6D441-97DF-4A96-98EA-FFE451D75B8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -450,6 +452,22 @@ Global
 		{B25403A9-0A8A-4E4A-A399-679918FE7607}.Release|x64.Build.0 = Release|Any CPU
 		{B25403A9-0A8A-4E4A-A399-679918FE7607}.Release|x86.ActiveCfg = Release|Any CPU
 		{B25403A9-0A8A-4E4A-A399-679918FE7607}.Release|x86.Build.0 = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|x64.Build.0 = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Debug|x86.Build.0 = Debug|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|x64.ActiveCfg = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|x64.Build.0 = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|x86.ActiveCfg = Release|Any CPU
+		{36B6D441-97DF-4A96-98EA-FFE451D75B8D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
