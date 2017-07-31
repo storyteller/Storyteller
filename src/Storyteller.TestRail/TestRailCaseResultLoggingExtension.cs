@@ -5,7 +5,7 @@ using StoryTeller;
 
 namespace StoryTeller.TestRail.Integrations.TestRail
 {
-    public class TestRailExtension : IExtension
+    public class TestRailCaseResultLoggingExtension : IExtension
 	{
 		private ITestRailClient _client;
 		
@@ -14,7 +14,7 @@ namespace StoryTeller.TestRail.Integrations.TestRail
 			_client = null;
 		}
 
-	    public TestRailExtension(ITestRailClient testRailClient)
+	    public TestRailCaseResultLoggingExtension(ITestRailClient testRailClient)
 	    {
 	        _client = testRailClient;
 	    }
