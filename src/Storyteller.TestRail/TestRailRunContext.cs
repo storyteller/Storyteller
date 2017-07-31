@@ -1,4 +1,4 @@
-﻿namespace Storyteller.TestRail
+﻿namespace StoryTeller.TestRail
 {
     public class TestRailRunContext
     {

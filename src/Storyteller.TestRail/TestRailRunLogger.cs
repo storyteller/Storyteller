@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using Storyteller.TestRail.Runs;
+using StoryTeller.TestRail.Runs;
 using Newtonsoft.Json.Linq;
-using Storyteller.TestRail.Integrations.TestRail;
-using Storyteller.TestRail.Models.Runs;
+using StoryTeller.TestRail.Integrations.TestRail;
+using StoryTeller.TestRail.Models.Runs;
 using StoryTeller.Engine;
 using StoryTeller.Remotes.Messaging;
 
-namespace Storyteller.TestRail
+namespace StoryTeller.TestRail
 {
     public interface ITestRailRunNameGenerator
     {
@@ -51,7 +51,7 @@ namespace Storyteller.TestRail
                 project_id = _projectId,
                 name = _testRailRunNameGenerator.Generate(),
                 case_ids = testCaseIds,
-                description = "Generated from Storyteller"
+                description = "Generated from StoryTeller"
             });
 
             var runId = testRunResult.id;

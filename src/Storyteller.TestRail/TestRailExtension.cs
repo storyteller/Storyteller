@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Storyteller.TestRail.Results;
+using StoryTeller.TestRail.Results;
 using StoryTeller;
 
-namespace Storyteller.TestRail.Integrations.TestRail
+namespace StoryTeller.TestRail.Integrations.TestRail
 {
     class TestRailExtension : IExtension
 	{

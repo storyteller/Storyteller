@@ -5,11 +5,11 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Storyteller.TestRail.Models.Runs;
-using Storyteller.TestRail.Results;
-using Storyteller.TestRail.Runs;
+using StoryTeller.TestRail.Models.Runs;
+using StoryTeller.TestRail.Results;
+using StoryTeller.TestRail.Runs;
 
-namespace Storyteller.TestRail
+namespace StoryTeller.TestRail
 {
     public class TestRailClient : ITestRailClient
     {
