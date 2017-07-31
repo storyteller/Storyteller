@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Storyteller.TestRail.Integrations.TestRail
 {
@@ -10,6 +11,9 @@ namespace Storyteller.TestRail.Integrations.TestRail
 
         public static IEnumerable<int> ParseTestCaseIds(string str)
         {
+            if (str == null)
+                str = "";
+
             MatchCollection matches = _testCaseRegex.Matches(str);
             
             foreach (Match match in matches)

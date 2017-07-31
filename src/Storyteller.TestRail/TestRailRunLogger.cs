@@ -42,7 +42,9 @@ namespace Storyteller.TestRail
         {
             Debugger.Launch();
 
-            int[] testCaseIds = message.Specifications.SelectMany(spec => TestCaseParser.ParseTestCaseIds(spec.name)).ToArray();
+            int[] testCaseIds = message.Specifications.SelectMany(spec => TestCaseParser.ParseTestCaseIds(spec.name))
+                                .Union(message.Specifications.SelectMany(spec => spec.Tags?.SelectMany(TestCaseParser.ParseTestCaseIds)))
+                                .ToArray();
 
             AddRunResponse testRunResult = _client.AddTestRun(new AddRunRequest
             {
