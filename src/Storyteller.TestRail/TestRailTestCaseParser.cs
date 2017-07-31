@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace Storyteller.TestRail.Integrations.TestRail
+namespace StoryTeller.TestRail.Integrations.TestRail
 {
     public class TestCaseParser
     {

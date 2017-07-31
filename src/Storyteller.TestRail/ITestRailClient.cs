@@ -1,8 +1,8 @@
-﻿using Storyteller.TestRail.Models.Runs;
-using Storyteller.TestRail.Results;
-using Storyteller.TestRail.Runs;
+﻿using StoryTeller.TestRail.Models.Runs;
+using StoryTeller.TestRail.Results;
+using StoryTeller.TestRail.Runs;
 
-namespace Storyteller.TestRail
+namespace StoryTeller.TestRail
 {
     public interface ITestRailClient
     {

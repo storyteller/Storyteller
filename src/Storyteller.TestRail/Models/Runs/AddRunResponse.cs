@@ -1,4 +1,4 @@
-﻿namespace Storyteller.TestRail.Models.Runs
+﻿namespace StoryTeller.TestRail.Models.Runs
 {
     public class AddRunResponse
     {

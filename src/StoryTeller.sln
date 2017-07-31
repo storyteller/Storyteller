@@ -54,7 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleProjects", "SamplePro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxSamples", "ReduxSamples\ReduxSamples.csproj", "{B25403A9-0A8A-4E4A-A399-679918FE7607}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storyteller.TestRail", "Storyteller.TestRail\Storyteller.TestRail.csproj", "{36B6D441-97DF-4A96-98EA-FFE451D75B8D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoryTeller.TestRail", "Storyteller.TestRail\StoryTeller.TestRail.csproj", "{36B6D441-97DF-4A96-98EA-FFE451D75B8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
