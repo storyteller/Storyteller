@@ -1,6 +1,5 @@
 ﻿using StoryTeller.TestRail.Models.Runs;
-using StoryTeller.TestRail.Results;
-using StoryTeller.TestRail.Runs;
+using StoryTeller.TestRail.Models.Results;
 
 namespace StoryTeller.TestRail
 {

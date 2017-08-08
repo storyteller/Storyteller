@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading;
 
-namespace StoryTeller.TestRail.Integrations.TestRail
+namespace StoryTeller.TestRail
 {
     public class TestCaseParser
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Newtonsoft.Json;
 
-namespace StoryTeller.TestRail.Runs
+namespace StoryTeller.TestRail.Models.Runs
 {
     public class AddRunRequest
     {
