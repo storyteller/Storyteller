@@ -1,4 +1,4 @@
-﻿namespace StoryTeller.TestRail
+﻿namespace StoryTeller.TestRail.Models
 {
 	public enum TestResultStatus
 	{

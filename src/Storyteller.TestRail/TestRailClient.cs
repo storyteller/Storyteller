@@ -4,10 +4,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using StoryTeller.TestRail.Models.Runs;
-using StoryTeller.TestRail.Results;
-using StoryTeller.TestRail.Runs;
+using StoryTeller.TestRail.Models.Results;
 
 namespace StoryTeller.TestRail
 {

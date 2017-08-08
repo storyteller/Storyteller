@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using StoryTeller.TestRail.Results;
-using StoryTeller;
+using StoryTeller.TestRail.Models;
+using StoryTeller.TestRail.Models.Results;
 
-namespace StoryTeller.TestRail.Integrations.TestRail
+namespace StoryTeller.TestRail
 {
-    public class TestRailCaseResultLoggingExtension : IExtension
+	public class TestRailCaseResultLoggingExtension : IExtension
 	{
 		private ITestRailClient _client;
 		
@@ -14,10 +14,12 @@ namespace StoryTeller.TestRail.Integrations.TestRail
 			_client = null;
 		}
 
-	    public TestRailCaseResultLoggingExtension(ITestRailClient testRailClient)
-	    {
-	        _client = testRailClient;
-	    }
+		public TestRailCaseResultLoggingExtension(ITestRailClient testRailClient)
+		{
+			_client = testRailClient;
+		}
+
+		#region IExtension
 
 		public Task Start()
 		{
@@ -32,30 +34,32 @@ namespace StoryTeller.TestRail.Integrations.TestRail
 		{
 			SpecContext ctx = (SpecContext)context;
 
-		    if (TestRailRunContext.Current != null)
-		    {
-		        foreach (int testCaseId in TestCaseParser.ParseTestCaseIds(ctx.Specification.name))
-		        {
-		            var addResultRequest = new AddResultRequest
-		            {
-		                status_id = (int) (ctx.Counts.Exceptions > 0 || ctx.Counts.Wrongs > 0
-		                    ? TestResultStatus.Failed
-		                    : TestResultStatus.Passed),
-		                case_id = testCaseId,
-		                run_id = TestRailRunContext.Current.RunId
-		            };
+			if (TestRailRunContext.Current != null)
+			{
+				foreach (int testCaseId in TestCaseParser.ParseTestCaseIds(ctx.Specification.name))
+				{
+					var addResultRequest = new AddResultRequest
+					{
+						status_id = (int) (ctx.Counts.Exceptions > 0 || ctx.Counts.Wrongs > 0
+							? TestResultStatus.Failed
+							: TestResultStatus.Passed),
+						case_id = testCaseId,
+						run_id = TestRailRunContext.Current.RunId
+					};
 
-		            try
-		            {
-		                var response = _client.AddTestCaseTestRunResult(addResultRequest);
-		                context.Reporting.Log("TestRail", $"<div>{response}</div>");
-		            }
-		            catch (Exception ex)
-		            {
-		                context.Reporting.Log("TestRail", $"<div>{ex}</div>");
-		            }
-		        }
-		    }
+					try
+					{
+						var response = _client.AddTestCaseTestRunResult(addResultRequest);
+						context.Reporting.Log("TestRail", $"<div>{response}</div>");
+					}
+					catch (Exception ex)
+					{
+						context.Reporting.Log("TestRail", $"<div>{ex}</div>");
+					}
+				}
+			}
 		}
+
+		#endregion
 	}
 }
