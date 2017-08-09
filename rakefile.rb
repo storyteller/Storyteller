@@ -74,6 +74,7 @@ task :pack do
 	sh "dotnet pack src/Storyteller.AspNetCore -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.Redux -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.RDBMS -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
+	sh "dotnet pack src/Storyteller.TestRail -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/StorytellerRunner -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
