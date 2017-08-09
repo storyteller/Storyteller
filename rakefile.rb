@@ -112,10 +112,10 @@ task :prepare_docs => [:compile] do
 	cp 'src/StorytellerRunner/embed.js', 'documentation/content'
 	cp 'client/public/stylesheets/storyteller.css', 'documentation/content/stylesheets'
 
-	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json"
+	sh "dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json --framework netcoreapp1.1"
 
 	sh 'dotnet run --project src/StorytellerRunner/StorytellerRunner.csproj --framework netcoreapp1.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
-	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.1 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
+	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
 "Launches the documentation project in editable mode"
@@ -135,7 +135,7 @@ task :publish => [:prepare_docs] do
 	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
 
 
-	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.1 -- export doc-target Website --version #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- export doc-target Website --version #{BUILD_VERSION}"
 
 	Dir.chdir "doc-target" do
 		sh "git add --all"
