@@ -64,6 +64,17 @@ namespace DatabaseSamples.Fixtures
             return Sql("insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)");
         }
 
+        // SAMPLE: ActionResult
+        public IGrammarSource InsertStoreIdentity(string entity, int hiValue)
+        {
+            return Sql(@"insert into mt_hilo (entity_name, hi_value) values (:entity, :hiValue)
+                select 1234")
+                //The action that resolves with the scalar result from the query
+                .ResultAction<decimal>(result => { Context.State.Store(result); })
+                .Format(@"Insert {entity_name} and {hiValue} into mt_hilo");
+        }
+        // ENDSAMPLE
+
         // SAMPLE: CheckTheRows
         public RowVerification CheckTheRows()
         {

@@ -8,8 +8,6 @@ using StoryTeller.Grammars;
 
 namespace StoryTeller.RDBMS
 {
-
-
     public class DatabaseFixture : Fixture
     {
         public ISqlDialect Dialect { get; }
@@ -71,6 +69,12 @@ namespace StoryTeller.RDBMS
                 return this;
             }
 
+            public DatabaseOperationExpression ResultAction<T>(Action<T> action)
+            {
+                _configurations.Add(g => g.ResultAction<T>(action));
+                return this;
+            }
+
             public DatabaseOperationExpression Format(string format)
             {
                 _configurations.Add(g => g.Format(format));
@@ -89,8 +93,5 @@ namespace StoryTeller.RDBMS
                 return grammar;
             }
         }
-
     }
-    
-    
 }
