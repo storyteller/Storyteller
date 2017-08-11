@@ -1,12 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
+	  <Description>TestRail integration for Storyteller</Description>
+	  <AssemblyTitle>Storyteller.TestRail</AssemblyTitle>
+	  <NeutralLanguage>en-US</NeutralLanguage>
+	  <Version>1.0.0</Version>
+	  <Authors>Jarrod Johnson, Jeremy D. Miller</Authors>
+	  <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
+	  <DebugType>pdbonly</DebugType>
+	  <AssemblyName>Storyteller.TestRail</AssemblyName>
+	  <OutputType>Library</OutputType>
+	  <PackageId>StoryTeller.TestRail</PackageId>
+	  <PackageTags>testing;storyteller;specifications;bdd;atdd;testrail</PackageTags>
+	  <PackageIconUrl>http://storyteller.github.io/storyteller/content/images/favicon.ico</PackageIconUrl>
+	  <PackageProjectUrl>http://storyteller.github.io</PackageProjectUrl>
+	  <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <RepositoryUrl>git://github.com/storyteller/storyteller</RepositoryUrl>
+	  <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+	  <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+	  <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+	  <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+	  <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+	  <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+	  <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+	  <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
