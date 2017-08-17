@@ -6,14 +6,14 @@ namespace StoryTeller.TestRail
 {
     public class TestCaseParser
     {
-        private static readonly Regex _testCaseRegex = new Regex(@"([\[][Cc][0-9]+[\]])", RegexOptions.Compiled);
+        public static readonly Regex TestCaseRegex = new Regex(@"([\[][Cc][0-9]+[\]])", RegexOptions.Compiled);
 
         public static IEnumerable<int> ParseTestCaseIds(string str)
         {
             if (str == null)
                 str = "";
 
-            MatchCollection matches = _testCaseRegex.Matches(str);
+            MatchCollection matches = TestCaseRegex.Matches(str);
             
             foreach (Match match in matches)
             {
