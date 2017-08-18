@@ -24,6 +24,9 @@ var handling = CellHandling.Basic();
 handling.Extensions.Add(new TestRailCaseResultLoggingExtension(testRailClient));
 ```
 
-At this point you can begin establishing links between the your specs and test cases in TestRail by adding the corresponding "C" number to the name of the specs. For example, "My First Spec C1" will link to the "C1" test case in TestRail. If no test cases are found in the batch run then no Run will be created in TestRail.
+At this point you can begin establishing links between the your specs and test cases in TestRail by adding the corresponding "C#" in the name of the spec in the following format: "[C#]". For example, "My Spec [C1]" would link to Case C1 in TestRail. If no test cases are found in the batch run then no Run will be created in TestRail.
 ### Customization
 Currently there is one customization hook for this extension. When you create the `TestRailRunLoggerSettings` you can pass in your own implementation of `ITestRailRunNameGenerator` which is used to generate the name of the Test Run that will be created in TestRail. The default implementation simply uses the current date. For example, "8/8/2017 12:57:13 PM".
+
+### Getting your specs into TestRail
+Getting your specs, especially if you have a lot of them, into TestRail can be a pain. To assist with this migration there is a small utility called [StoryTeller.TestRail.Sync]("https://github.com/JarrodJ83/StoryTeller.TestRail.Sync") to sync your specs to TestRail.
