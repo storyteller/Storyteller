@@ -22,7 +22,7 @@ namespace StoryTeller.RDBMS.SqlServer
         {
             using (var cmd = conn.CreateCommand().As<DbCommand>())
             {
-                cmd.CommandText = "select count(*) from " + dbObject;
+                cmd.CommandText = "select count_big(*) from " + dbObject;
                 using (var reader = cmd.ExecuteReader())
                 {
                     return !reader.Read()
