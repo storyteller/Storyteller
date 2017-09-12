@@ -12,6 +12,7 @@ namespace StoryTeller.RDBMS
 
         public ISqlDialect Dialect { get; }
         private readonly IDbConnection _connection;
+        public bool IsConnectionDisposed { get; protected set; } = false;
 
         public CommandRunner(string connectionString, ISqlDialect dialect)
         {
@@ -82,6 +83,7 @@ namespace StoryTeller.RDBMS
                 _activeTransaction.Dispose();
             }
             _connection.Dispose();
+            IsConnectionDisposed = true;
         }
 
         public void Execute(string sql)

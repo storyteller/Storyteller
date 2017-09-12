@@ -36,7 +36,13 @@ namespace StoryTeller.RDBMS
                 throw new InvalidOperationException($"No connection string is known. Use {nameof(ISpecContext)}.{nameof(SpecContextExtensions.ConnectionString)}(connection string) in your system bootstrapping");
             }
 
-            return context.State.RetrieveOrAdd(() => new CommandRunner(connectionString, dialect));
+            var commandRunner = context.State.TryRetrieve<CommandRunner>();
+            if (commandRunner == default(CommandRunner) || commandRunner.IsConnectionDisposed)
+            {
+                commandRunner = new CommandRunner(connectionString, dialect);
+                context.State.Store(commandRunner);
+            }
+            return commandRunner;
         }
 
         /// <summary>
