@@ -22,10 +22,9 @@ namespace StoryTeller.Remotes
         {
             _onReceived = onReceived;
                 
-            IPAddress ipAddress = Dns.GetHostAddressesAsync("localhost").GetAwaiter().GetResult()[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, port);
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Loopback, port);
 
-            _listener = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp);
+            _listener = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
             if (owner)
             {
