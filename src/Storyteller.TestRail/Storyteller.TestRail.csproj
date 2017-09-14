@@ -4,7 +4,7 @@
 	  <Description>TestRail integration for Storyteller</Description>
 	  <AssemblyTitle>Storyteller.TestRail</AssemblyTitle>
 	  <NeutralLanguage>en-US</NeutralLanguage>
-	  <Version>2.0.0</Version>
+	  <Version>2.1.0</Version>
 	  <Authors>Jarrod Johnson, Jeremy D. Miller</Authors>
 	  <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
 	  <DebugType>pdbonly</DebugType>
