@@ -44,8 +44,7 @@ namespace StoryTeller.Grammars.ObjectBuilding
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, _accessor.Name, _accessor.PropertyType);
-            CellModifications.Apply(_cell);
+            _cell = Cell.For(cellHandling, _accessor.Name, _accessor.PropertyType, CellModifications, fixture);
 
             return new[] {_cell};
         }

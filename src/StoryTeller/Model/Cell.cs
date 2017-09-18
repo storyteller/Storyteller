@@ -161,6 +161,16 @@ namespace StoryTeller.Model
             return cell;
         }
 
+        public static Cell For(CellHandling cells, string key, Type type, CellModifications modifications, Fixture fixture)
+        {
+            var cell = new Cell(cells, key, type);
+            modifications.Apply(cell);
+
+            cell.readLists(cells, fixture);
+
+            return cell;
+        }
+        
         private void readLists(CellHandling cellHandling, Fixture fixture)
         {
             if (OptionListName.IsEmpty()) return;
