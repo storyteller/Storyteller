@@ -22,6 +22,7 @@ namespace StoryTeller.Grammars
             Members = members;
             CellModifications = new CellModifications();
             Key = members.Select(x => x.Name).Join(".");
+            CellModifications.Header(Key);
         }
 
         public CheckPropertyGrammar(MemberInfo member) : this(new MemberInfo[] { member})
@@ -56,9 +57,12 @@ namespace StoryTeller.Grammars
         {
             var key = Members.Select(x => x.Name).Join(".");
 
-            _cell = new Cell(cellHandling, key, Members.Last().GetMemberType()) {header = key};
-
-            CellModifications.Apply(_cell);
+            _cell = Cell.For(
+                cellHandling,
+                key,
+                Members.Last().GetMemberType(),
+                CellModifications,
+                fixture);
 
             return new[] {_cell};
         }

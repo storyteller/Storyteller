@@ -35,6 +35,7 @@ namespace StoryTeller.Grammars.API
             Key = members.Select(x => x.Name).Join(".");
             Members = members;
             CellModifications = new CellModifications();
+            CellModifications.Header(Key);
         }
 
         public MemberInfo Inner => Members.Last();
@@ -43,10 +44,12 @@ namespace StoryTeller.Grammars.API
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)
         {
-            _cell = new Cell(cellHandling, Members.Select(x => x.Name).Join("."), Inner.GetMemberType());
-            _cell.header = Key;
-
-            CellModifications.Apply(_cell);
+            _cell = Cell.For(
+                cellHandling,
+                Members.Select(x => x.Name).Join("."),
+                Inner.GetMemberType(),
+                CellModifications,
+                fixture);
 
             return new[] { _cell };
         }

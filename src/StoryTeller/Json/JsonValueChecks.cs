@@ -95,8 +95,7 @@ namespace StoryTeller.Json
             public readonly CellModifications Customize = new CellModifications();
             public Cell BuildCell(CellHandling handling, Fixture fixture)
             {
-                Cell = new Cell(handling, _key, typeof(T));
-                Customize.Apply(Cell);
+                Cell = Cell.For(handling, _key, typeof(T), Customize, fixture);
 
                 return Cell;
             }

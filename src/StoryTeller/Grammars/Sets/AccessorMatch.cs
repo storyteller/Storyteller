@@ -32,8 +32,7 @@ namespace StoryTeller.Grammars.Sets
 
         public Cell BuildCell(CellHandling handling, Fixture fixture)
         {
-            var cell = new Cell(handling, _accessor.Name, _accessor.PropertyType);
-            CellModifications.Apply(cell);
+            var cell = Cell.For(handling, _accessor.Name, _accessor.PropertyType, CellModifications, fixture);
 
             return cell;
         }
