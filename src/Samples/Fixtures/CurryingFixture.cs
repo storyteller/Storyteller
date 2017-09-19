@@ -17,7 +17,7 @@ namespace Samples.Fixtures
         {
             return this["CreateInvoice"].Curry()
                 .Template("Invoice {Id} is open")
-                .Defaults("DueDate:TODAY+2;IsOpen:true");
+                .Defaults("DueDate:TODAY+2,IsOpen:true");
         }
     }
     // ENDSAMPLE
