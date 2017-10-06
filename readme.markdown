@@ -1,4 +1,6 @@
-Storyteller is a tool for crafting [executable specifications](http://www.agilemodeling.com/essays/executableSpecifications.htm). 
+# Storyteller - a tool for crafting [executable specifications](http://www.agilemodeling.com/essays/executableSpecifications.htm). 
+
+![storyteller logo](./storyteller_logo.png)
 
 Quickstart
 ==========
