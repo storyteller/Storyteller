@@ -1,4 +1,5 @@
-﻿using StructureMap;
+﻿using StorytellerDocGen.Alerts;
+using StructureMap;
 
 namespace StorytellerDocGen.Transformation
 {
@@ -13,6 +14,17 @@ namespace StorytellerDocGen.Transformation
             {
                 _.AssemblyContainingType<TransformationRegistry>();
                 _.AddAllTypesOf<ITransformHandler>();
+            });
+
+            For<ITransformHandler>().AddInstances(_ =>
+            {
+                _.Object(new BeginAlert("info"));
+                _.Object(new BeginAlert("warning"));
+                _.Object(new BeginAlert("danger"));
+                
+                _.Object(new EndAlert("info"));
+                _.Object(new EndAlert("warning"));
+                _.Object(new EndAlert("danger"));
             });
         }
     }
