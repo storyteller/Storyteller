@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Baseline.Conversion;
 using Shouldly;
 using Xunit;
@@ -46,7 +47,7 @@ namespace StoryTeller.Testing
     {
         public Func<string, object> ConverterFor(Type type)
         {
-            if (type.IsEnum)
+            if (type.GetTypeInfo().IsEnum)
             {
                 return x => Enum.Parse(type, x);
             }
