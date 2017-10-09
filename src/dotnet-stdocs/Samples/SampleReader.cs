@@ -54,7 +54,10 @@ namespace StorytellerDocGen.Samples
                     }
                     else
                     {
-                        sample.Append(txt, num);
+                        if (!txt.TrimStart().StartsWith("///"))
+                        {
+                            sample.Append(txt, num);
+                        }
                     }
                 };
             }

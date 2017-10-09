@@ -75,6 +75,38 @@ New York
 
             snippet.Language.ShouldBe("csharp");
         }
+        
+        
+        [Fact]
+        public void ignore_xml_api()
+        {
+            scan(@"
+foo
+bar
+
+Missouri
+Kansas
+// SAMPLE: States
+    /// <summary>
+    /// Something
+    /// </summary>
+Texas
+Arkansas
+Oklahoma
+Wisconsin
+// ENDSAMPLE
+Connecticut
+New York
+");
+
+            var snippet = theSamples.All().Single();
+            snippet.Name.ShouldBe("States");
+            
+            snippet.Text.ShouldNotContain("///");
+            snippet.Text.ShouldNotContain("Something");
+
+            snippet.Language.ShouldBe("csharp");
+        }
 
         [Fact]
         public void find_multiples()

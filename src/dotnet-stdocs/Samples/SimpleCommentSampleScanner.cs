@@ -1,18 +1,19 @@
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StorytellerDocGen.Samples
 {
     public class SimpleCommentSampleScanner : ISampleScanner
     {
-        private readonly string _extension;
-        private readonly string _language;
+        public readonly List<string> PrefixIgnores = new List<string>();
+
         private readonly string _start;
         private readonly string _end;
 
         public SimpleCommentSampleScanner(string extension, string commentMark, string language)
         {
-            _extension = extension;
-            _language = language;
+            Extension = extension;
+            Language = language;
             _start = commentMark + Samples.SAMPLE;
             _end = commentMark + Samples.END;
         }
@@ -27,20 +28,13 @@ namespace StorytellerDocGen.Samples
             return null;
         }
 
-        public string Extension
-        {
-            get { return _extension; }
-        }
+        public string Extension { get; }
 
         public bool IsAtEnd(string line)
         {
             return line.Trim().StartsWith(_end);
         }
 
-        public string Language
-        {
-            get { return _language; }
-        }
-
+        public string Language { get; }
     }
 }
