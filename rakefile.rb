@@ -2,7 +2,7 @@ require 'json'
 
 APIKEY = ENV['api_key'].nil? ? '' : ENV['api_key']
 
-BUILD_VERSION = "4.3.0"
+BUILD_VERSION = "4.4.0"
 COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
 tc_build_number = ENV["APPVEYOR_BUILD_NUMBER"]
@@ -121,7 +121,7 @@ end
 
 "Launches the documentation project in editable mode"
 task :docs => [:prepare_docs] do
-	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.1 -- run -v #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- run -v #{BUILD_VERSION}"
 end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"

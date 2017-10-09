@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Baseline;
 using Oakton;
 
@@ -10,6 +11,8 @@ namespace StorytellerDocGen.Exporting
     {
         public override bool Execute(DocExportInput input)
         {
+            Exporter.Warnings.Clear();
+            
             var settings = input.ToSettings();
 
             switch (input.ExportMode)
@@ -43,6 +46,17 @@ namespace StorytellerDocGen.Exporting
             }
 
             project.ExportTo(input.Destination);
+
+            if (Exporter.Warnings.Any())
+            {
+                foreach (var warning in Exporter.Warnings)
+                {
+                    
+                    ConsoleWriter.Write(ConsoleColor.White, " * " + warning);
+                }
+                
+                throw new Exception("Detected problems with the content");
+            }
 
             return true;
         }

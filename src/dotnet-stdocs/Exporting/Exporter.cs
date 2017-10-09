@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Baseline;
 using StorytellerDocGen.Topics;
@@ -8,6 +9,8 @@ namespace StorytellerDocGen.Exporting
 {
     public class Exporter
     {
+        public static IList<string> Warnings = new List<string>();
+        
         private readonly DocSettings _settings;
         private readonly IHtmlGenerator _generator;
 

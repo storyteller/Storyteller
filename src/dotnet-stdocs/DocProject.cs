@@ -115,12 +115,18 @@ namespace StorytellerDocGen
 
             scanning.Wait();
 
-            if (_settings.UrlStyle == UrlStyle.FileExport)
-                exporter.ExportTo(directory, Topic, x => x.FileExportPath());
-            else if (_settings.UrlStyle == UrlStyle.WebsiteExport)
-                exporter.ExportTo(directory, Topic, x => x.WebsiteExportPath());
-            else
-                exporter.ExportTo(directory, Topic, x => x.WebsiteExportPath());
+            switch (_settings.UrlStyle)
+            {
+                case UrlStyle.FileExport:
+                    exporter.ExportTo(directory, Topic, x => x.FileExportPath());
+                    break;
+                case UrlStyle.WebsiteExport:
+                    exporter.ExportTo(directory, Topic, x => x.WebsiteExportPath());
+                    break;
+                default:
+                    exporter.ExportTo(directory, Topic, x => x.WebsiteExportPath());
+                    break;
+            }
         }
 
         public IDisposable LaunchRunner()

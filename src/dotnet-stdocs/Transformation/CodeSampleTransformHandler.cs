@@ -1,5 +1,5 @@
 ﻿using System;
-
+using StorytellerDocGen.Exporting;
 using StorytellerDocGen.Samples;
 using StorytellerDocGen.Topics;
 using StoryTeller.Util;
@@ -15,14 +15,16 @@ namespace StorytellerDocGen.Transformation
             _cache = cache;
         }
 
-        public string Key
-        {
-            get { return "sample"; }
-        }
+        public string Key => "sample";
 
         public string Transform(Topic current, string data)
         {
             var tag = TagForSample(data);
+
+            if (tag is MissingSampleTag)
+            {
+                Exporter.Warnings.Add($"Could not find sample '{data}' referenced in file {current.File}");
+            }
 
             var subject = "<p>" + Guid.NewGuid().ToString() + "</p>";
 
@@ -34,6 +36,8 @@ namespace StorytellerDocGen.Transformation
         public HtmlTag TagForSample(string sampleName)
         {
             var sample = _cache.Find(sampleName.Trim());
+
+            
             return sample == null ? (HtmlTag) new MissingSampleTag(sampleName) : new SampleTag(sample);
         }
     }

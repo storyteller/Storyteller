@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Baseline;
-
+using StorytellerDocGen.Exporting;
 using StorytellerDocGen.Html;
 using StorytellerDocGen.Topics;
 using StoryTeller.Util;
@@ -33,7 +33,15 @@ namespace StorytellerDocGen.Transformation
             try
             {
                 var other = findOther(current, key);
-                if (other == null) return string.Empty;
+                if (other == null)
+                {
+                    if (key != "{next}" && key != "{previous}")
+                    {
+                        Exporter.Warnings.Add($"Unknown link key '{key}' referenced in topic file {current.File}");
+                    }
+                    
+                    return string.Empty;
+                }
 
                 return transformFromTopic(current, other, props);
             }

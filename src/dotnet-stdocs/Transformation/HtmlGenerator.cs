@@ -2,6 +2,7 @@
 using System.Threading;
 using Baseline;
 using Oakton;
+using StorytellerDocGen.Exporting;
 using StorytellerDocGen.Topics;
 using StoryTeller.Util;
 using HtmlTextWriter = StoryTeller.Util.HtmlTextWriter;
@@ -44,6 +45,8 @@ namespace StorytellerDocGen.Transformation
             }
             catch (Exception e)
             {
+                Exporter.Warnings.Add("Failed to transform topic at " + topic.File);
+                
                 ConsoleWriter.Write(ConsoleColor.Yellow, "Failed to transform topic at " + topic.File);
                 ConsoleWriter.Write(ConsoleColor.Red, e.ToString());
 
