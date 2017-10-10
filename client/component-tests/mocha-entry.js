@@ -1,7 +1,7 @@
 require('./phantomjs-polyfill');
 require('./regexp-polyfill');
 //provide TestUtils as a global
-global.TestUtils = require('react-addons-test-utils');
+global.TestUtils = require('react-dom/test-utils');
 
 
 

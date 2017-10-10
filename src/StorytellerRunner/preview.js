@@ -60,12 +60,12 @@
 /******/ 	__webpack_require__.p = "/client/public/javascript/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1094);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1111);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1094:
+/***/ 1111:
 /*!*********************************!*\
   !*** multi ./client/preview.js ***!
   \*********************************/
@@ -73,11 +73,11 @@
 /*! all exports used */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! ./client/preview.js */1095);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi ./client/preview.js\n// module id = 1094\n// module chunks = 5\n\n//# sourceURL=webpack:///multi_./client/preview.js?");
+eval("module.exports = __webpack_require__(/*! ./client/preview.js */1112);\n\n\n//////////////////\n// WEBPACK FOOTER\n// multi ./client/preview.js\n// module id = 1111\n// module chunks = 5\n\n//# sourceURL=webpack:///multi_./client/preview.js?");
 
 /***/ }),
 
-/***/ 1095:
+/***/ 1112:
 /*!***************************!*\
   !*** ./client/preview.js ***!
   \***************************/
@@ -86,7 +86,7 @@ eval("module.exports = __webpack_require__(/*! ./client/preview.js */1095);\n\n\
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nconsole.log(\"Hey, I loaded just fine\");\n\n//////////////////\n// WEBPACK FOOTER\n// ./client/preview.js\n// module id = 1095\n// module chunks = 5\n\n//# sourceURL=webpack:///./client/preview.js?");
+eval("\n\nconsole.log(\"Hey, I loaded just fine\");\n\n//////////////////\n// WEBPACK FOOTER\n// ./client/preview.js\n// module id = 1112\n// module chunks = 5\n\n//# sourceURL=webpack:///./client/preview.js?");
 
 /***/ })
 
