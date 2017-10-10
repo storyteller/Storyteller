@@ -9,7 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
-    <ProjectReference Include="..\StorytellerRunner\StorytellerRunner.csproj" />
+    <ProjectReference Include="..\dotnet-storyteller\dotnet-storyteller.csproj" />
     <ProjectReference Include="..\Specifications\Specifications.csproj" />
     <ProjectReference Include="..\Samples\Samples.csproj" />
     <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj" />

@@ -51,6 +51,7 @@
     <PackageReference Include="System.Runtime.InteropServices">
       <Version>4.3.0</Version>
     </PackageReference>
+    <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
