@@ -7,8 +7,7 @@ class Option {
 	constructor(holder, grammar){
 		this.title = grammar.title;
 		this.lower = this.title.toLowerCase();
-		this.grammar = grammar;
-		this.holder = holder;
+		this.key = grammar.key;
 	}
 
 	select(){
@@ -21,23 +20,38 @@ class Option {
 
 class GrammarLookup {
 	constructor(holder){
-		var grammars = holder.grammars().map(x => new Option(holder, x));
-		this.options = [new Option(holder, CommentGrammar)].concat(grammars);
+		var grammars = holder.grammars();
+		this.options = [new Option(holder, CommentGrammar)]
+			.concat(grammars.map(x => new Option(holder, x)));
+
+		
+		this.grammars = {}
+		for (var i = 0; i < grammars.length; i++){
+			var grammar = grammars[i];
+			console.log('grammar is ' + grammar);
+			this.grammars[grammar.key] = grammar;
+		}
+
+		this.grammars[CommentGrammar.key] = CommentGrammar;
+
+		this.holder = holder;
 	}
 
 	findMatches(query){
 		const fuse = new Fuse(this.options, {
-			keys: ['title', 'grammar.key']
+			keys: ['title', 'key']
 		});
 
 		var fragment = query.toLowerCase();
 
-		return fuse.search(query);
-/*
-		return this.options.filter(x => {
-			return x.lower.search(fragment) > -1;
-		});
-		*/
+		var options = fuse.search(query);
+
+		for (var i = 0; i < options.length; i++){
+			options[i].holder = this.holder;
+			options[i].grammar = this.grammars[options[i].key];
+		}
+
+		return options;
 	}
 }
 

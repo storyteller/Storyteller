@@ -347,7 +347,7 @@ describe('Sentence', function(){
 
 			var step = sentence.buildStep(data);
 
-			expect(step instanceof Step).to.equal.true;
+			expect(step instanceof Step).to.be.true;
 			expect(step.args.find('x').value).to.equal(1);
 			expect(step.args.find('y').value).to.equal(2);
 
@@ -365,7 +365,7 @@ describe('Sentence', function(){
 
 			var step = sentence.newStep();
 
-			expect(step instanceof Step).to.equal.true;
+			expect(step instanceof Step).to.be.true;
 			expect(step.args.find('x').value).to.equal(1);
 			expect(step.args.find('y').value).to.equal(2);
 		});

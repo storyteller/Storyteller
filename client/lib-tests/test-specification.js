@@ -208,7 +208,7 @@ describe('Specification', function(){
 
       spec.removeStep(step);
 
-      expect(spec.find(stepId)).to.be.falsey;
+      expect(spec.find(stepId)).to.equal(undefined);
     });
 
     it('can load the specification', function(){

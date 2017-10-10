@@ -39,7 +39,7 @@ describe('Comment Editing', function(){
 
 			driver.click('#' + id + ' .delete');
 
-			expect(spec.find(id)).to.be.falsey;
+			expect(spec.find(id)).to.equal(undefined);
 
 			driver.assertElementDoesNotExist('#' + id);
 		});

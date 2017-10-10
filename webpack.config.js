@@ -27,7 +27,7 @@ module.exports = {
   },
   resolve: {
     // Allow to omit extensions when requiring these files
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   plugins: plugins,
   module: {
@@ -35,7 +35,7 @@ module.exports = {
       { test: /\.css$/, loader: "style!css" },
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel?{"presets": ["es2015", "react"]}',
+        loader: 'babel-loader?{"presets": ["es2015", "react"]}',
         exclude: /node_modules/,
       },
     ]

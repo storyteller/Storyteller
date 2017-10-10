@@ -91,11 +91,11 @@ describe('Editing a Specification Integration tests', function(){
 	it('Can delete a step', function(){
 		var id = spec.findByPath('0.0').id;
 
-		expect(spec.find(id)).to.not.be.falsey;
+		expect(spec.find(id)).to.not.equal(undefined);
 
 		driver.click('#' + id + ' a.delete')
 
-		expect(spec.find(id)).to.be.falsey;
+		expect(spec.find(id)).to.equal(undefined);
 
 		driver.assertElementDoesNotExist('#' + id);
 	});
@@ -103,11 +103,11 @@ describe('Editing a Specification Integration tests', function(){
 	it('Can delete a section', function(){
 		var id = spec.findByPath('0').id;
 
-		expect(spec.find(id)).to.not.be.falsey;
+		expect(spec.find(id)).to.not.equal(undefined);
 
 		driver.click('#' + id + ' a.delete');
 
-		expect(spec.find(id)).to.be.falsey;
+		expect(spec.find(id)).to.equal(undefined);
 
 		driver.assertElementDoesNotExist('#' + id);
 

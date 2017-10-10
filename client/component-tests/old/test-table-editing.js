@@ -376,7 +376,7 @@ describe('Editing Tables', function(){
 	it('can delete a row from a table', function(){
 		driver.click('#1 .delete');
 
-		expect(spec.find("1")).to.be.falsey;
+		expect(spec.find("1")).to.equal(undefined);
 
 		driver.assertElementDoesNotExist('#1');
 	});
