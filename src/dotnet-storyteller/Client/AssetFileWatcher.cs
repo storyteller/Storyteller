@@ -60,7 +60,7 @@ namespace ST.Client
 #else
             var path = AppContext.BaseDirectory;
 #endif
-            while (!path.EndsWith("StorytellerRunner"))
+            while (!path.EndsWith("dotnet-storyteller"))
             {
                 path = path.ParentDirectory();
             }
