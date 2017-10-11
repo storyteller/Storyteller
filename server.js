@@ -27,7 +27,7 @@ var jsxLoader = _.find(config.module.loaders, function (entry) {
   return /jsx/.test(entry.test.toString());
 });
 
-jsxLoader.loaders = ['react-hot', jsxLoader.loader];
+jsxLoader.loaders = ['react-hot-loader', jsxLoader.loader];
 delete jsxLoader.loader;
 
 //jsxLoader.loader = 'react-hot!' + jsxLoader.loader;
