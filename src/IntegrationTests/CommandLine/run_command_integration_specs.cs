@@ -4,6 +4,7 @@ using Baseline;
 using Baseline.Dates;
 using Shouldly;
 using StoryTeller;
+using StoryTeller.Commands;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 using ST.Client;

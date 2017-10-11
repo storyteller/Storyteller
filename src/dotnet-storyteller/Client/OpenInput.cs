@@ -2,11 +2,11 @@
 using Oakton;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
-using ProjectInput = ST.CommandLine.ProjectInput;
+using ProjectInput = StoryTeller.Commands.ProjectInput;
 
 namespace ST.Client
 {
-    public class OpenInput : ProjectInput
+    public class OpenInput : StoryTeller.Commands.ProjectInput
     {
         public OpenInput() : base(EngineMode.Interactive)
         {

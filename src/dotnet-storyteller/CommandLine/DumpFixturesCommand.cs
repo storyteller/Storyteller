@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Baseline;
 using Oakton;
+using StoryTeller.Commands;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;

@@ -32,7 +32,6 @@
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Oakton" Version="1.1.0" />
     <PackageReference Include="Markdig" Version="0.12.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="1.1.2" />

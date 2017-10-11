@@ -3,33 +3,20 @@ using System.Linq;
 using System.Threading;
 using Baseline;
 using Baseline.Dates;
+using Oakton;
+using StoryTeller.Commands;
 using StoryTeller.Engine;
-using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 
 namespace StoryTeller
 {
     /// <summary>
-    /// Runs inside a remote process
+    /// Connects your system under test to the command line and the dotnet storyteller editor tool
     /// </summary>
-    public class StorytellerAgent : IListener<StartProject>, IListener<Shutdown>
+    public static class StorytellerAgent 
     {
-        private readonly EngineAgent _engine;
-        private readonly ManualResetEvent _completion = new ManualResetEvent(false);
-
-        public StorytellerAgent(int port, ISystem system)
-        {
-            Console.WriteLine($"AGENT: Running the StorytellerAgent at port {port} with system {system.GetType().Name}");
-
-            EventAggregator.Messaging.AddListener(this);
-
-            _engine = new EngineAgent(port, system);
-
-            
-        }
-
-        public static void LogFailure(Exception ex)
+        internal static void LogFailure(Exception ex)
         {
             try
             {
@@ -42,92 +29,50 @@ namespace StoryTeller
             }
         }
 
-        public void Receive(StartProject message)
+
+        /// <summary>
+        /// Use a basic system
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static int Run(string[] args)
         {
-            _engine.Start(message.Project);
+            return Run(args, new NulloSystem());
         }
 
-        public void Receive(Shutdown message)
+        /// <summary>
+        /// Use a custom built system
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="system"></param>
+        /// <returns></returns>
+        public static int Run(string[] args, ISystem system)
         {
-            Console.WriteLine("Shutdown requested...");
+            var executor = CommandExecutor.For(_ =>
+            {
+                _.DefaultCommand = typeof(AgentCommand);
+                
+                _.RegisterCommand<AgentCommand>();
+                _.RegisterCommand<TestCommand>();
+                _.ConfigureRun = run => run.Input.As<StorytellerInput>().System = system;
+               
+            });
 
-            try
-            {
-                _engine.Dispose();
+            executor.OptionsFile = "storyteller.opts";
 
-                Console.WriteLine("Shut down gracefully.");
-            }
-            catch (Exception e)
-            {
-                ConsoleWriter.Write(ConsoleColor.Red, e.ToString());
-                throw;
-            }
-            finally
-            {
-                _completion.Set();
-            }
+            return executor.Execute(args);
         }
 
-        public static void Run(string[] args)
+        /// <summary>
+        /// Use a custom built system
+        /// </summary>
+        /// <param name="args"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static int Run<T>(string[] args) where T : ISystem, new()
         {
-            Run(args, new NulloSystem());
+            return Run(args, new T());
         }
 
-        public static void Run(string[] args, ISystem system)
-        {
-            if (args.FirstOrDefault() == "test")
-            {
-                tryToStart(system);
-
-
-                return;
-            }
-
-            var agent = new StorytellerAgent(int.Parse(args[0]), system);
-            agent._completion.WaitOne();
-        }
-
-        private static void tryToStart(ISystem system)
-        {
-            try
-            {
-                var running = RunningSystem.Create(system);
-                if (running.RecycledMessage.success)
-                {
-                    Console.WriteLine("Able to create the FixtureLibrary");
-                }
-
-                var json = JsonSerialization.ToCleanJson(running.RecycledMessage);
-
-                Console.WriteLine("System ready as: " + json);
-
-                Console.WriteLine("Trying the Warmup now...");
-
-                var warmup = running.System.Warmup();
-
-                warmup.Wait(1.Minutes());
-
-                if (warmup.IsCompleted)
-                {
-                    ConsoleWriter.Write(ConsoleColor.Green, "StorytellerAgent started without any exceptions");
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                LogFailure(e);
-
-                ConsoleWriter.Write(ConsoleColor.Red, "StorytellerAgent startup failed!");
-                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
-            }
-        }
-    }
-
-    public class Shutdown : ClientMessage
-    {
-        public Shutdown() : base("shutdown")
-        {
-        }
     }
 }

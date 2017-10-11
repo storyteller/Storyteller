@@ -2,13 +2,13 @@ using System;
 using System.IO;
 using Baseline;
 using Oakton;
-using StoryTeller;
-using ST.Client;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
+using ST.Client;
+using EngineController = StoryTeller.Engine.EngineController;
 
-namespace ST.CommandLine
+namespace StoryTeller.Commands
 {
     public class ProjectInput
     {

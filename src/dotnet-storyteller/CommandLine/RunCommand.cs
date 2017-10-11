@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Baseline;
 using Oakton;
+using StoryTeller.Commands;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
