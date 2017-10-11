@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Baseline;
 using StoryTeller;
 using StoryTeller.Messages;
 using StoryTeller.Remotes;
@@ -14,7 +13,6 @@ namespace ST.Client
         private readonly ISystemLauncher _launcher;
         private readonly SocketConnection _socket;
 
-        private AppDomainFileChangeWatcher _watcher;
 
         public EngineController(Project project, ISystemLauncher launcher)
         {
@@ -41,8 +39,6 @@ namespace ST.Client
 
         public void Dispose()
         {
-            _watcher?.Dispose();
-
             _launcher.Teardown();
 
             _socket?.Dispose();
@@ -67,8 +63,6 @@ namespace ST.Client
                 return x.Result;
             });
         }
-
-        public bool DisableAppDomainFileWatching { get; set; }
 
         public void SendMessage<T>(T message)
         {
@@ -103,12 +97,6 @@ namespace ST.Client
 
             return listener.Task.ContinueWith(x =>
             {
-                if (!DisableAppDomainFileWatching)
-                {
-                    _watcher = new AppDomainFileChangeWatcher(() => Recycle());
-                    _watcher.WatchBinariesAt(Project.ProjectPath.AppendPath("bin"));
-                }
-
                 LatestSystemRecycled = x.Result;
 
                 return x.Result;

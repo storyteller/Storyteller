@@ -31,11 +31,6 @@ namespace ST.CommandLine
         [Description("Override the dotnet framework if multi-targeting")]
         public string FrameworkFlag { get; set; }
 
-#if NET46
-        [Description("Directs Storyteller to run the system under test in a separate AppDomain if you are not using the Dotnet CLI")]
-        public bool AppDomainFlag { get; set; } = false;
-#endif
-
         [Description("Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'")]
         public string BuildFlag { get; set; }
 
@@ -100,27 +95,7 @@ namespace ST.CommandLine
         {
             var project = configureProject();
 
-#if NET46
-            var launcher = project.UseSeparateAppDomain 
-                ? new AppDomainSystemLauncher(project)
-                : (ISystemLauncher) new ProcessRunnerSystemLauncher(project);
-
-            var controller = new EngineController(project, launcher);
-
-            if (AppDomainFlag)
-            {
-                controller.DisableAppDomainFileWatching = _disableAppDomainFileWatching;
-            }
-            else
-            {
-                controller.DisableAppDomainFileWatching = true;
-            }
-#else
-            var controller = new EngineController(project, new ProcessRunnerSystemLauncher(project));
-            controller.DisableAppDomainFileWatching = true;
-#endif
-
-            return controller;
+            return new EngineController(project, new ProcessRunnerSystemLauncher(project));
         }
 
         protected virtual Project configureProject()
@@ -130,9 +105,6 @@ namespace ST.CommandLine
 
             project.Framework = FrameworkFlag;
 
-#if NET46
-            project.UseSeparateAppDomain = AppDomainFlag;
-#endif
 
             if (BuildFlag.IsNotEmpty())
             {

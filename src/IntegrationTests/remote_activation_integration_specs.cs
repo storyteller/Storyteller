@@ -25,11 +25,8 @@ namespace IntegrationTests
             var path = TestingContext.FindParallelDirectory(projectFolder);
 
             var project = Project.LoadForFolder(path);
-#if NET46       
-            return new EngineController(project, new AppDomainSystemLauncher(project));
-#else
+
             return new EngineController(project, new ProcessRunnerSystemLauncher(project));
-#endif
         }
 
         [Fact]

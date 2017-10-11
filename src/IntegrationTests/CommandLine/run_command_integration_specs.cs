@@ -26,11 +26,9 @@ namespace IntegrationTests.CommandLine
 
 
             var project = Project.LoadForFolder(directory);
-#if NET46       
-            theController = new EngineController(project, new AppDomainSystemLauncher(project));
-#else
+
             theController = new EngineController(project, new ProcessRunnerSystemLauncher(project));
-#endif
+
 
             theInput = new RunInput { Path = directory, RetriesFlag = 1 };
             theController = theInput.BuildEngine();
