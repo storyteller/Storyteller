@@ -1,6 +1,7 @@
 using Oakton;
 using StoryTeller.Commands;
 using StoryTeller.Remotes;
+using ST.Client;
 using ST.CommandLine;
 
 namespace ST.Preview

@@ -2,13 +2,12 @@ using System;
 using System.IO;
 using Baseline;
 using Oakton;
+using StoryTeller;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
-using ST.Client;
-using EngineController = StoryTeller.Engine.EngineController;
 
-namespace StoryTeller.Commands
+namespace ST.Client
 {
     public class ProjectInput
     {
@@ -91,11 +90,11 @@ namespace StoryTeller.Commands
 
         protected bool _disableAppDomainFileWatching = false;
 
-        public EngineController BuildEngine()
+        public ST.Client.EngineController BuildEngine()
         {
             var project = configureProject();
 
-            return new EngineController(project, new ProcessRunnerSystemLauncher(project));
+            return new ST.Client.EngineController(project, new ProcessRunnerSystemLauncher(project));
         }
 
         protected virtual Project configureProject()
