@@ -77,11 +77,6 @@ task :pack do
 	sh "dotnet pack src/Storyteller.TestRail -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-stdocs -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
-
-	sh "dotnet publish src/dotnet-storyteller/dotnet-storyteller.csproj --framework NET46 -o ./../../artifacts/StorytellerRunner -c Release "
-	File.rename('artifacts/StorytellerRunner/dotnet-storyteller.exe', 'StorytellerRunner.exe')
-	
-	sh "nuget.exe pack StorytellerRunnerCsproj.nuspec -o artifacts -version #{BUILD_VERSION}"
 end
 
 desc "Pushes the Nuget's to MyGet"
