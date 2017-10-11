@@ -4,7 +4,6 @@ using Shouldly;
 
 namespace StoryTeller.Testing
 {
-    [Obsolete("Replace with the Shouldly equivalent")]
     public static class Exception<T> where T : Exception
     {
         public static T ShouldBeThrownBy(Action action)

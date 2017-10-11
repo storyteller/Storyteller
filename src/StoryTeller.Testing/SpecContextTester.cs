@@ -116,7 +116,6 @@ namespace StoryTeller.Testing
     {
         private SpecContext theContext = new SpecContext(new Specification(), null, new NulloResultObserver(), new StopConditions(),
                 new SimpleExecutionContext());
-        private CancellationTokenSource theCancellation;
 
 
 

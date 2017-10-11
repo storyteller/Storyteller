@@ -118,6 +118,7 @@ namespace StoryTeller.Testing.Results
         public ListReport Add(string text)
         {
             _ul.Add("li").Text(text);
+            _count++;
             return this;
         }
 
