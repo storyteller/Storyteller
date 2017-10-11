@@ -4,17 +4,17 @@ var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
 
-module.exports = React.createClass({
-	getInitialState: function() {
+module.exports = class TextboxEditor extends React.Component{
+	getInitialState() {
 		return {value: this.props.arg.value};
-	},
+	}
 
-	componentWillReceiveProps: function(props){
+	componentWillReceiveProps(props){
 		if (!this.isMounted()) return;
 		this.setState({value: props.arg.value});
-	},
+	}
 
-	handleChange: function(event) {
+	handleChange(event) {
 		if (!event){
 			var value = ReactDOM.findDOMNode(this).getAttribute('value');
 		}
@@ -25,19 +25,19 @@ module.exports = React.createClass({
 		this.setState({value: value});
 
 		this.publishChange(value);
-	},	
+	}
 
-	publishChange: function(value){
+	publishChange(value){
 		var arg = this.props.arg;
 
 		changes.cellValue(arg.id, arg.cell.key, value);
-	},
+	}
 
-	componentWillUnmount: function(){
+	componentWillUnmount(){
 		this.subscription.unsubscribe();
-	},
+	}
 
-	componentDidMount: function(){
+	componentDidMount(){
 		var element = ReactDOM.findDOMNode(this);
 		element.focus();
 
@@ -61,9 +61,9 @@ module.exports = React.createClass({
 				}
 			}
 		});
-	},
+	}
 
-	render: function(){
+	render(){
 		var className = 'cell active-cell mousetrap';
 		if (this.props.classes){
 			className = className + " " + this.props.classes;
@@ -87,4 +87,4 @@ module.exports = React.createClass({
 				data-cell={this.props.arg.cell.key}/>
 		);
 	}
-});
+}

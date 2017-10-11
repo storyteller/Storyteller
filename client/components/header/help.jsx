@@ -42,7 +42,7 @@ function Help(props){
 
 
 
-const HelpButton = React.createClass({
+class HelpButton extends React.Component {
   componentDidMount(){
     Postal.subscribe({
       channel: 'explorer',
@@ -53,25 +53,25 @@ const HelpButton = React.createClass({
         }
       }
     })
-  },
+  }
 
   getInitialState() {
     return { showModal: false };
-  },
+  }
 
   close() {
     this.setState({ showModal: false });
-  },
+  }
 
   handleToggle(){
     this.setState({
       showModal: !this.state.showModal
     });
-  },
+  }
 
   open() {
     this.setState({ showModal: true });
-  },
+  }
 
   render(){
     const HelpIcon = Icons['help'];
@@ -92,7 +92,7 @@ const HelpButton = React.createClass({
       </Button>
     );
   }
-});
+}
 
 
 

@@ -7,13 +7,13 @@ import Icons from './../icons';
 const FolderOpen = Icons['folder-open'];
 const FolderClosed = Icons['folder-closed'];
 
-const ActiveOutlineItem = React.createClass({
+class ActiveOutlineItem extends React.Component{
   getInitialState() {
     return {
       collapsed: false,
       collapsedIcon: <FolderOpen />
     };
-  },
+  }
 
   collapse(e) {
     this.setState({
@@ -22,7 +22,7 @@ const ActiveOutlineItem = React.createClass({
     });
 
     e.preventDefault();
-  },
+  }
 
   render() {
     const container = this.props.children.length > 0 && !this.state.collapsed ? <OutlineContainer children={this.props.children} /> : '';
@@ -35,15 +35,15 @@ const ActiveOutlineItem = React.createClass({
       </li>
     );
   }
-});
+}
 
-const OutlineItem = React.createClass({
+class OutlineItem extends React.Component{
   getInitialState() {
     return {
       collapsed: false,
       collapsedIcon: <FolderOpen />
     };
-  },
+  }
 
   collapse(e) {
     this.setState({
@@ -52,7 +52,7 @@ const OutlineItem = React.createClass({
     });
 
     e.preventDefault();
-  },
+  }
 
 
   render() {
@@ -78,9 +78,9 @@ const OutlineItem = React.createClass({
       </li>
     );
   }
-});
+}
 
-const OutlineContainer = React.createClass({
+class OutlineContainer extends React.Component{
   render() {
     return (
       <ul className="outline-container">
@@ -94,14 +94,13 @@ const OutlineContainer = React.createClass({
       </ul>
     )
   }
-});
+}
 
-module.exports = React.createClass({
-  render() {
-    return (
-      <div className="spec-outline">
-        <OutlineContainer children={this.props.outline.children} />
-      </div>
-    );
-  }
-});
+module.exports = function({outline}){
+  return (
+    <div className="spec-outline">
+      <OutlineContainer children={outline.children} />
+    </div>
+  );
+}
+

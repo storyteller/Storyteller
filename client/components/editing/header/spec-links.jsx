@@ -3,31 +3,28 @@ var {Button, ButtonGroup} = require('react-bootstrap');
 var StepthroughControls = require('./../stepthrough-controls');
 var Postal = require('postal');
 
-var LinkButton = React.createClass({
-  render: function(){
-    var onclick = e => {
-      window.location = this.props.href;
-      e.stopPropagation();
-    }
-
-    return (<Button title={this.props.title} onClick={onclick} active={this.props.active}>{this.props.text}</Button>);
+function LinkButton({href, title, active, text}){
+  var onclick = e => {
+    window.location = href;
+    e.stopPropagation();
   }
-});
 
-var SpecLinks = React.createClass({
-  render(){
-    if (this.props.mode == 'stepthrough'){
-      return (<StepthroughControls spec={this.props.spec}/>);
-    }
+  return (<Button title={title} onClick={onclick} active={active}>{text}</Button>);
+}
 
-    return (
-      <ButtonGroup>
-        <LinkButton title="Read only view of the current spec (ctrl+1)" href={'#/spec/preview/' + this.props.id} text="Preview" active={this.props.mode === 'preview'} />
-        <LinkButton title="Edit the current spec (ctrl+2)" href={'#/spec/editing/' + this.props.id} text="Editor" active={this.props.mode === 'editing'} />
-        <LinkButton title="Review the latest results (ctrl+3)" href={'#/spec/results/' + this.props.id} text="Results" active={this.props.mode === 'results'} />
-      </ButtonGroup>
-    );
+function SpecLinks({mode, spec, id}){
+  if (mode == 'stepthrough'){
+    return (<StepthroughControls spec={spec}/>);
   }
-});
+
+  return (
+    <ButtonGroup>
+      <LinkButton title="Read only view of the current spec (ctrl+1)" href={'#/spec/preview/' + id} text="Preview" active={mode === 'preview'} />
+      <LinkButton title="Edit the current spec (ctrl+2)" href={'#/spec/editing/' + id} text="Editor" active={mode === 'editing'} />
+      <LinkButton title="Review the latest results (ctrl+3)" href={'#/spec/results/' + id} text="Results" active={mode === 'results'} />
+    </ButtonGroup>
+  );
+}
+
 
 module.exports = SpecLinks;

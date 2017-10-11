@@ -2,24 +2,23 @@ var React = require("react");
 var Postal = require('postal');
 var changes = require('./../../../lib/model/change-commands');
 
-var RetryCount = React.createClass({
-	render(){
-		var onChange = e => {
-			var value = e.target.value;
-			var number = parseInt(value);
+function RetryCount({count}){
+	var onChange = e => {
+		var value = e.target.value;
+		var number = parseInt(value);
 
-			if (!isNaN(number)){
+		if (!isNaN(number)){
 
-				changes.changeRetryCount(number);
-			}
+			changes.changeRetryCount(number);
+		}
 
-			e.preventDefault();
-		};
+		e.preventDefault();
+	};
 
-		return (
-			<div style={{marginTop: '25px'}}>Retry Count: <input id="retry-count" onChange={onChange} type="text" value={this.props.count}/></div>
-		);
-	}
-});
+	return (
+		<div style={{marginTop: '25px'}}>Retry Count: <input id="retry-count" onChange={onChange} type="text" value={count}/></div>
+	);
+}
+
 
 module.exports = RetryCount;

@@ -1,24 +1,20 @@
 var React = require("react");
 var builders = require("./../editors/builders");
 
-var PreviewRow = React.createClass({
-	render: function(){
-		var tds = this.props.cells.map(cell => {
-			var arg = this.props.step.args.find(cell.key);
-			
-			var text = builders.toText(arg);
-			
-			var key = cell.key;
-
-			return (
-				<td nowrap key={key}>{text}</td>
-			);
-		});
+module.exports = function({cells, step}){
+	var tds = cells.map(cell => {
+		var arg = step.args.find(cell.key);
+		
+		var text = builders.toText(arg);
+		
+		var key = cell.key;
 
 		return (
-			<tr>{tds}</tr>
+			<td nowrap key={key}>{text}</td>
 		);
-	}
-});
+	});
 
-module.exports = PreviewRow;
+	return (
+		<tr>{tds}</tr>
+	);
+}

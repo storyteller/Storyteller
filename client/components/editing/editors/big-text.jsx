@@ -16,12 +16,12 @@ function AutoGrowTextArea(textField)
   }
 }
 
-module.exports = React.createClass({
-	getInitialState: function() {
+module.exports = class BigText extends React.Component{
+	getInitialState() {
 		return {value: this.props.arg.value};
-	},
+	}
 
-	handleChange: function(event) {
+	handleChange(event) {
 		if (!event){
 			var value = ReactDOM.findDOMNode(this).innerHTML;
 		}
@@ -32,30 +32,30 @@ module.exports = React.createClass({
 		this.setState({value: value});
 
 		this.publishChange(value);
-	},	
+	}
 
-	componentWillReceiveProps: function(props){
+	componentWillReceiveProps(props){
 		if (this.isMounted()){
 			this.setState({value: props.arg.value});
 		}
 		
-	},
+	}
 
-	resize: function(e){
+	resize(e){
 		AutoGrowTextArea(ReactDOM.findDOMNode(this));
-	},
+	}
 
-	publishChange: function(value){
+	publishChange(value){
 		var arg = this.props.arg;
 
 		changes.cellValue(arg.id, arg.cell.key, value);
-	},
+	}
 
-	componentWillUnmount: function(){
+	componentWillUnmount(){
 		this.subscription.unsubscribe();
-	},
+	}
 
-	componentDidMount: function(){
+	componentDidMount(){
 		var element = ReactDOM.findDOMNode(this);
 		element.focus();
 
@@ -76,11 +76,9 @@ module.exports = React.createClass({
 		});
 
 		this.resize();
+	}
 
-
-	},
-
-	render: function(){
+	render(){
 		var className = 'cell active-cell mousetrap';
 		if (this.props.classes){
 			className = className + " " + this.props.classes;
@@ -104,4 +102,4 @@ module.exports = React.createClass({
 				data-cell={this.props.arg.cell.key}></textarea>
 		);
 	}
-});
+}
