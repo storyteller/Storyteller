@@ -2,9 +2,9 @@
 using System.Linq;
 using IntegrationTests.CommandLine;
 using Shouldly;
-using StoryTeller.Commands;
 using StoryTeller.Engine;
 using StoryTeller.Results;
+using ST.Client.Commands;
 using ST.CommandLine;
 using Xunit;
 

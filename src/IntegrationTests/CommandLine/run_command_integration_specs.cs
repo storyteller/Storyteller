@@ -4,11 +4,10 @@ using Baseline;
 using Baseline.Dates;
 using Shouldly;
 using StoryTeller;
-using StoryTeller.Commands;
 using StoryTeller.Model;
 using StoryTeller.Remotes.Messaging;
 using ST.Client;
-using ST.CommandLine;
+using ST.Client.Commands;
 using Xunit;
 
 namespace IntegrationTests.CommandLine

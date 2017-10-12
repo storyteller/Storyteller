@@ -2,13 +2,14 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Oakton;
+using StoryTeller;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes;
 using ST.Client;
 
-namespace StoryTeller.Commands
+namespace ST.Client.Commands
 {
     public class RunInput : ProjectInput
     {

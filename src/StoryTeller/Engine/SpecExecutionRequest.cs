@@ -26,7 +26,7 @@ namespace StoryTeller.Engine
         public ExecutionMode Mode { get; set; } = ExecutionMode.normal;
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
-        private TaskCompletionSource<SpecResults> _completion;
+        private readonly TaskCompletionSource<SpecResults> _completion;
 
         public string Id
         {

@@ -2,7 +2,7 @@
 using System.IO;
 using IntegrationTests.CommandLine;
 using Shouldly;
-using StoryTeller.Commands;
+using ST.Client.Commands;
 using ST.CommandLine;
 using Xunit;
 

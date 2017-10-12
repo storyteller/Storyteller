@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Linq;
 using Baseline;
 using Oakton;
-using StoryTeller.Commands;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
@@ -11,10 +10,12 @@ using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
+using ST.Client.Commands;
 using EngineController = ST.Client.EngineController;
 
 namespace ST.CommandLine
 {
+    [Obsolete("Getting rid of this soon")]
     [Description("Run a suite of StoryTeller tests")]
     public class RunCommand : OaktonCommand<RunInput>
     {
