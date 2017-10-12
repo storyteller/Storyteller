@@ -11,6 +11,10 @@ namespace StoryTeller.Commands
 {
     public class RunInput : StorytellerInput
     {
+        [Description("Path to write out the results. Default is stresults.htm")]
+        public string ResultsPathFlag { get; set; } = "stresults.htm";
+        
+        
         [Description("If specified, only executes a single suite or specification")]
         public string SpecificationOrSuite { get; set; }
         
@@ -35,10 +39,12 @@ namespace StoryTeller.Commands
 
         [Description("Dump the raw JSON history of the batch run to the specified path")]
         public string DumpFlag { get; set; }
+
+        [Description("Sets a minimum number of retry attempts for this execution. Default is zero")]
+        public int MaxAttemptsFlag { get; set; } = 0;
         
         
-        [Description("Path to write out the results. Default is stresults.htm")]
-        public string ResultsPathFlag { get; set; } = "stresults.htm";
+
         
         [Description("Optional. Override the fixtures directory")]
         [FlagAlias("fixtures", 'f')]
@@ -57,10 +63,11 @@ namespace StoryTeller.Commands
             }
         }
         
+        
+        
         // TODO -- put stop conditions here too
         // TODO -- profile
         // TODO -- props!
-        // TODO -- flag to open the results in the browser afterward
 
         public Task<List<Specification>> ReadSpecs()
         {

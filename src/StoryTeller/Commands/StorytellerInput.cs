@@ -26,6 +26,7 @@ namespace StoryTeller.Commands
         public ISystem System { get; set; }
         
         public string Path { get; }
+
         
         public string SpecPath => SpecsFlag.IsNotEmpty() 
             ? SpecsFlag.ToFullPath() 

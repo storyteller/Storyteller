@@ -29,6 +29,11 @@ namespace StoryTeller.Commands
 
         public override bool Execute(RunInput input)
         {
+            Project.CurrentProject = new Project
+            {
+                MaxRetries = input.MaxAttemptsFlag
+            };
+            
             bool success = false;
             
             try
@@ -97,7 +102,6 @@ namespace StoryTeller.Commands
                 {
                     fixtures = running.Fixtures.Models.ToArray(),
 
-                    // TODO -- do something better here
                     suite = "Interactive Execution",
                     system = running.System.GetType().FullName,
                     records = records
