@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
     <DebugType>pdbonly</DebugType>
@@ -10,7 +9,6 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
     <ProjectReference Include="..\dotnet-storyteller\dotnet-storyteller.csproj" />
@@ -22,7 +20,6 @@
     <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj" />
     <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0-preview-20170106-08" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0-beta5-build1225" />
@@ -31,14 +28,11 @@
     <PackageReference Include="Shouldly" Version="2.8.2" />
     <PackageReference Include="NSubstitute" Version="2.0.0-rc" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
-
 </Project>

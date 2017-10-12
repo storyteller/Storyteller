@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Oakton;
-using RunCommand = ST.CommandLine.RunCommand;
 
 namespace StorytellerRunner
 {
@@ -10,7 +9,6 @@ namespace StorytellerRunner
         {
             var executor = CommandExecutor.For(_ =>
             {
-                _.RegisterCommands(typeof(RunCommand).GetTypeInfo().Assembly);
                 _.RegisterCommands(typeof(Program).GetTypeInfo().Assembly);
             });
 

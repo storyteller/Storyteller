@@ -59,7 +59,7 @@ namespace StoryTeller.Commands
                     return FixturesFlag.ToFullPath();
                 }
 
-                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
+                return FixtureLoader.SelectFixturePath(PathFlag.ToFullPath());
             }
         }
         

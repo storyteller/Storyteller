@@ -109,9 +109,10 @@ task :prepare_docs => [:compile] do
 	cp 'src/dotnet-storyteller/embed.js', 'documentation/content'
 	cp 'client/public/stylesheets/storyteller.css', 'documentation/content/stylesheets'
 
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 -- run src/Samples --dump documentation/content/samples.specs.json --framework netcoreapp1.1"
+	sh "dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- run --dump documentation/content/samples.specs.json --path src/Samples"
 
 	sh 'dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
+	sh 'dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- dump-usages "dotnet run --" "documentation/content/dotnet agent.usage.xml"'
 	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
@@ -172,7 +173,7 @@ end
 
 "Run the specs against the documentation generation"
 task :specifications do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 run src/Specifications"
+	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp1.0 -- run --path src/Specifications"
 end
 
 "Run the database sample specs"

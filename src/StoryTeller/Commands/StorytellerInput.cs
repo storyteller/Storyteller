@@ -12,9 +12,9 @@ namespace StoryTeller.Commands
         public StorytellerInput()
         {
 #if NET46
-            Path = Environment.CurrentDirectory;
+            PathFlag = Environment.CurrentDirectory;
 #else
-            Path = Directory.GetCurrentDirectory();
+            PathFlag = Directory.GetCurrentDirectory();
 #endif
         }
         
@@ -25,11 +25,12 @@ namespace StoryTeller.Commands
         [IgnoreOnCommandLine]
         public ISystem System { get; set; }
         
-        public string Path { get; }
+        [Description("Optional, override the root directory of the project")]
+        public string PathFlag { get; set; }
 
         
         public string SpecPath => SpecsFlag.IsNotEmpty() 
             ? SpecsFlag.ToFullPath() 
-            : HierarchyLoader.SelectSpecPath(Path.ToFullPath());
+            : HierarchyLoader.SelectSpecPath(PathFlag.ToFullPath());
     }
 }
