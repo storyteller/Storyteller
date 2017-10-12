@@ -85,9 +85,7 @@ namespace StoryTeller.Engine
                 }
 
 
-                _engine = project.Mode == EngineMode.Interactive
-                    ? buildUserInterfaceEngine()
-                    : buildBatchedEngine(project.TracingStyle);
+                _engine = buildUserInterfaceEngine();
 
 
                 _engine.Start(project.StopConditions);
@@ -146,38 +144,6 @@ namespace StoryTeller.Engine
 
             return engine;
         }
-
-        private SpecificationEngine buildBatchedEngine(string tracingStyle)
-        {
-            IBatchObserver batchObserver = new BatchObserver();
-            IExecutionObserver executionObserver = new NulloObserver();
-
-            if ("TeamCity" == tracingStyle)
-            {
-                batchObserver = new TeamCityBatchObserver(batchObserver);
-                executionObserver = new TeamCityExecutionObserver();
-            }
-
-            if ("AppVeyor" == tracingStyle)
-            {
-                batchObserver = new AppVeyorBatchObserver(batchObserver);
-            }
-
-            var executionMode = new BatchExecutionMode(batchObserver);
-            var runner = new SpecRunner(executionMode, _running.System, executionObserver);
-
-            var engine = new SpecificationEngine(
-                _running.System, runner, executionObserver);
-
-            _controller = new BatchController(engine, batchObserver);
-
-            _disposables.Add(engine);
-
-            EventAggregator.Messaging.AddListener(_controller);
-
-            return engine;
-        }
-
 
     }
 
