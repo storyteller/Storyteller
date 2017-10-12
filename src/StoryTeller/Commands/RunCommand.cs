@@ -8,69 +8,14 @@ using Oakton;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
-using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.DSL;
 using StoryTeller.Remotes;
+using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 using StoryTeller.Util;
 
 namespace StoryTeller.Commands
 {
-    public class RunInput : StorytellerInput
-    {
-        public string SpecificationOrSuite { get; set; }
-        
-        [Description("Optional. Only runs tests with desired lifecyle")]
-        public Lifecycle LifecycleFlag { get; set; } = Lifecycle.Any;
-
-        [Description("Choose")]
-        public TracingStyle TracingFlag { get; set; } = TracingStyle.None;
-
-
-        [Description("Global timeout for this command in minutes. Defaults to 10")]
-        public int TimeoutFlag { get; set; } = 10;
-        
-        [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
-        public bool OpenFlag { get; set; }
-        
-        
-        [Description("Path to write out the results. Default is stresults.htm")]
-        public string ResultsPathFlag { get; set; } = "stresults.htm";
-        
-        [Description("Optional. Override the fixtures directory")]
-        [FlagAlias("fixtures", 'f')]
-        public string FixturesFlag { get; set; }
-
-        public string FixturePath
-        {
-            get
-            {
-                if (FixturesFlag.IsNotEmpty())
-                {
-                    return FixturesFlag.ToFullPath();
-                }
-
-                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
-            }
-        }
-        
-        // TODO -- put stop conditions here too
-        // TODO -- profile
-        // TODO -- props!
-        // TODO -- flag to open the results in the browser afterward
-
-        public Task<List<Specification>> ReadSpecs()
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                var top = HierarchyLoader.ReadHierarchy(SpecPath);
-                // TODO -- filter on tags here
-                // TODO -- make HierarchyLoader smart enough to recognize spec or suite
-                return HierarchyLoader.Filter(top, LifecycleFlag, SpecificationOrSuite, new string[0]).ToList();
-            });
-        }
-    }
-    
     [Description("Executes Specifications and Writes Results")]
     public class RunCommand : OaktonCommand<RunInput>
     {
@@ -162,6 +107,8 @@ namespace StoryTeller.Commands
 
                 writeResults(input, running.RecycledMessage, results);
                 
+                writeData(input, results);
+                
 
                 if (input.OpenFlag)
                 {
@@ -173,6 +120,39 @@ namespace StoryTeller.Commands
                 return success;
             }
             
+        }
+        
+        private static void writeData(RunInput input, BatchRunResponse results)
+        {
+            if (input.DumpFlag.IsNotEmpty())
+            {
+                dumpJson(input, results);
+            }
+
+            if (input.CsvFlag.IsNotEmpty())
+            {
+                writePerformanceData(input, results);
+            }
+
+            if (input.JsonFlag.IsNotEmpty())
+            {
+                Console.WriteLine("Writing the raw result information to " + input.JsonFlag);
+                PerformanceDataWriter.WriteJSON(results, input.JsonFlag);
+            }
+        }
+        
+        private static void writePerformanceData(RunInput input, BatchRunResponse results)
+        {
+            Console.WriteLine("Writing performance data as CSV data to " + input.CsvFlag.ToFullPath());
+
+            PerformanceDataWriter.WriteCSV(results, input.CsvFlag);
+        }
+
+        private static void dumpJson(RunInput input, BatchRunResponse results)
+        {
+            Console.WriteLine("Dumping the raw JSON results to " + input.DumpFlag);
+            var json = JsonSerialization.ToJson(results);
+            new FileSystem().WriteStringToFile(input.DumpFlag, json);
         }
         
         private static void writeSuccessOrFailure(bool success)

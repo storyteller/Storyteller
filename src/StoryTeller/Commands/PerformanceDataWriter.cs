@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Remotes.Messaging;
 
-namespace ST.CommandLine
+namespace StoryTeller.Commands
 {
     public static class PerformanceDataWriter
     {
