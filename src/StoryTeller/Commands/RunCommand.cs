@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Baseline;
 using Baseline.Dates;
 using Oakton;
 using StoryTeller.Engine;
 using StoryTeller.Engine.Batching;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.DSL;
+using StoryTeller.Remotes;
 using StoryTeller.Results;
 using StoryTeller.Util;
 
@@ -33,6 +36,23 @@ namespace StoryTeller.Commands
         
         [Description("Path to write out the results. Default is stresults.htm")]
         public string ResultsPathFlag { get; set; } = "stresults.htm";
+        
+        [Description("Optional. Override the fixtures directory")]
+        [FlagAlias("fixtures", 'f')]
+        public string FixturesFlag { get; set; }
+
+        public string FixturePath
+        {
+            get
+            {
+                if (FixturesFlag.IsNotEmpty())
+                {
+                    return FixturesFlag.ToFullPath();
+                }
+
+                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
+            }
+        }
         
         // TODO -- put stop conditions here too
         // TODO -- profile
@@ -64,10 +84,14 @@ namespace StoryTeller.Commands
 
         public override bool Execute(RunInput input)
         {
+            bool success = false;
+            
             try
             {
                 var task = execute(input);
                 task.Wait(input.TimeoutFlag.Minutes());
+
+                success = task.IsCompleted && task.Result;
 
                 if (!task.IsCompleted)
                 {
@@ -81,12 +105,12 @@ namespace StoryTeller.Commands
             }
 
 
-            return true;
+            return success;
         }
         
         
 
-        private async Task execute(RunInput input)
+        private async Task<bool> execute(RunInput input)
         {
             var specFetching = input.ReadSpecs();
             var running = RunningSystem.Create(input.System);
@@ -118,38 +142,88 @@ namespace StoryTeller.Commands
                     showTimeoutMessage(input, requests);
                 }
 
+                var records = requests.Select(x => new BatchRecord
+                {
+                    results = x.Completion.Result,
+                    specification = x.Specification
+                }).ToArray();
 
-                var document = buildResultsDocument(requests, running);
-                Console.WriteLine("Writing results to " + input.ResultsPathFlag);
-                document.WriteToFile(input.ResultsPathFlag);
+                var results = new BatchRunResponse
+                {
+                    fixtures = running.Fixtures.Models.ToArray(),
+
+                    // TODO -- do something better here
+                    suite = "Interactive Execution",
+                    system = running.System.GetType().FullName,
+                    records = records
+                };
                 
+                var success = determineSuccess(input, results);
+
+                writeResults(input, running.RecycledMessage, results);
+                
+
                 if (input.OpenFlag)
                 {
                     ProcessLauncher.OpenFile(input.ResultsPathFlag);
                 }
+                
+                writeSuccessOrFailure(success);
+
+                return success;
             }
             
         }
-
-        private static HtmlDocument buildResultsDocument(SpecExecutionRequest[] requests, RunningSystem running)
+        
+        private static void writeSuccessOrFailure(bool success)
         {
-            var records = requests.Select(x => new BatchRecord
+            if (success)
             {
-                results = x.Completion.Result,
-                specification = x.Specification
-            }).ToArray();
-
-            var results = new BatchRunResponse
+                ConsoleWriter.Write(ConsoleColor.Green, "Success!");
+            }
+            else
             {
-                fixtures = running.Fixtures.Models.ToArray(),
+                ConsoleWriter.Write(ConsoleColor.Red, "Failed with Regression Failures!");
+            }
+        }
+        
+        private static bool determineSuccess(RunInput input, BatchRunResponse results)
+        {
+            var regression = results.Summarize(Lifecycle.Regression);
+            var acceptance = results.Summarize(Lifecycle.Acceptance);
 
-                // TODO -- do something better here
-                suite = "Interactive Execution",
-                system = running.System.GetType().FullName,
-                records = records
-            };
+            if (input.LifecycleFlag != Lifecycle.Regression)
+                Console.WriteLine(acceptance);
 
-            return BatchResultsWriter.BuildResults(results);
+            if (input.LifecycleFlag != Lifecycle.Acceptance)
+                Console.WriteLine(regression);
+
+            return regression.Failed == 0;
+        }
+
+        private static void writeResults(RunInput input, SystemRecycled systemRecycled, BatchRunResponse results)
+        {
+            results.suite = input.SpecificationOrSuite ?? "All";
+            results.system = systemRecycled.system_name;
+            results.time = DateTime.Now.ToString();
+
+            results.fixtures = buildFixturesWithOverrides(input, systemRecycled);
+
+            var document = BatchResultsWriter.BuildResults(results);
+            Console.WriteLine("Writing results to " + input.ResultsPathFlag);
+            document.WriteToFile(input.ResultsPathFlag);
+        }
+        
+        private static FixtureModel[] buildFixturesWithOverrides(RunInput input, SystemRecycled systemRecycled)
+        {
+            var overrides = FixtureLoader.LoadFromPath(input.FixturePath);
+            var system = new FixtureLibrary();
+            foreach (var fixture in systemRecycled.fixtures)
+            {
+                system.Models[fixture.key] = fixture;
+            }
+
+            return system.ApplyOverrides(overrides).Models.ToArray();
         }
 
         private static void showTimeoutMessage(RunInput input, SpecExecutionRequest[] requests)

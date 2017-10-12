@@ -55,6 +55,18 @@ namespace ST.Client
         [FlagAlias("fixtures", 'f')]
         public string FixturesFlag { get; set; }
 
+        public string FixturePath
+        {
+            get
+            {
+                if (FixturesFlag.IsNotEmpty())
+                {
+                    return FixturesFlag.ToFullPath();
+                }
+
+                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
+            }
+        }
 
         public string SpecPath
         {
@@ -69,18 +81,7 @@ namespace ST.Client
             }
         }
 
-        public string FixturePath
-        {
-            get
-            {
-                if (FixturesFlag.IsNotEmpty())
-                {
-                    return FixturesFlag.ToFullPath();
-                }
 
-                return FixtureLoader.SelectFixturePath(Path.ToFullPath());
-            }
-        }
 
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
