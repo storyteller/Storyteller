@@ -192,6 +192,9 @@ namespace StoryTeller.Commands
                     executionObserver.SpecFinished(request);
                 }
             });
+            
+            _queue.Start();
+            
         }
 
         private static SpecRunner buildRunner(RunInput input, List<Specification> specs, RunningSystem running, out IExecutionObserver executionObserver)
