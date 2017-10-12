@@ -14,7 +14,7 @@ namespace StoryTeller.Model
             AddError(new GrammarError {error = _message});
         }
 
-        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
+        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable)
         {
             return new InvalidGrammarStep(new StepValues(step.id), _message);
         }

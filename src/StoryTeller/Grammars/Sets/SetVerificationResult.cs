@@ -98,7 +98,7 @@ namespace StoryTeller.Grammars.Sets
                 {
                     extra.Add(pair.Key, "NULL");
                 }
-                else if (pair.Value == string.Empty)
+                else if (Equals(pair.Value, string.Empty))
                 {
                     extra.Add(pair.Key, "BLANK");
                 }

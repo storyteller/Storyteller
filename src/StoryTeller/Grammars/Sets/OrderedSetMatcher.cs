@@ -6,7 +6,7 @@ namespace StoryTeller.Grammars.Sets
 {
     public class OrderedSetMatcher : UnorderedSetMatcher
     {
-        public static readonly ISetMatcher Flyweight = new OrderedSetMatcher();
+        public new static readonly ISetMatcher Flyweight = new OrderedSetMatcher();
 
         public override SetVerificationResult Match(Cell[] cells, IEnumerable<StepValues> expectedValues,
             IEnumerable<StepValues> actualValues)

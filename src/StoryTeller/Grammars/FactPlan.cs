@@ -19,7 +19,7 @@ namespace StoryTeller.Grammars
 
         public string Key { get; set; }
 
-        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
+        IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable)
         {
             return new FactPlan(new StepValues(step.id), this);
         }

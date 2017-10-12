@@ -25,7 +25,6 @@ namespace StoryTeller.Results
         }
 
 
-        [Obsolete("Trying to make this go away")]
         public static void WriteCSS(HtmlDocument document)
         {
             var styleTag = StyleTag();

@@ -16,7 +16,6 @@ namespace StoryTeller.Model
         private readonly IList<GrammarModel> _grammars = new List<GrammarModel>();
 
         public string title;
-        public string key;
         public string implementation;
 
         public GrammarModel[] grammars

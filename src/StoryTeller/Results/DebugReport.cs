@@ -9,7 +9,6 @@ namespace StoryTeller.Results
     public class DebugReport : TraceListener, Report, IDisposable
     {
         private readonly StringWriter _writer = new StringWriter();
-        private int _count = 0;
 
         public void StartListening()
         {
@@ -29,9 +28,9 @@ namespace StoryTeller.Results
 
         public string ShortTitle => "Debug";
 
-        public int Count => _count;
+        public int Count { get; private set; } = 0;
 
-        public void Dispose()
+        public new void Dispose()
         {
 #if NET46
             Debug.Listeners.Remove(this);
@@ -47,7 +46,7 @@ namespace StoryTeller.Results
 
         public override void WriteLine(string message)
         {
-            _count++;
+            Count++;
             _writer.WriteLine(message);
         }
     }

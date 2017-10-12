@@ -70,9 +70,6 @@ namespace StoryTeller.Engine
 
             _project = project;
 
-            Type systemType = null;
-
-
 
             try
             {

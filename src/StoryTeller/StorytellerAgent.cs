@@ -23,7 +23,7 @@ namespace StoryTeller
                 new FileSystem().WriteStringToFile("storyteller.log", ex.ToString());
                 Console.WriteLine("Wrote startup failure to " + "storyteller.log".ToFullPath());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("Unable to write to the storyteller.log file");
             }
