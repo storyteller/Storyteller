@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
+using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Grammars;
 using StoryTeller.Messages;
@@ -15,6 +16,8 @@ namespace StoryTeller.Engine
         {
             Observer = observer;
             Specification = specification;
+
+            _completion = new TaskCompletionSource<SpecResults>();
         }
 
         public Specification Specification { get; }
@@ -23,6 +26,7 @@ namespace StoryTeller.Engine
         public ExecutionMode Mode { get; set; } = ExecutionMode.normal;
 
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
+        private TaskCompletionSource<SpecResults> _completion;
 
         public string Id
         {
@@ -48,7 +52,10 @@ namespace StoryTeller.Engine
         public void SpecExecutionFinished(SpecResults results)
         {
             Observer.SpecExecutionFinished(Specification, results);
+            _completion.SetResult(results);
         }
+
+        public Task<SpecResults> Completion => _completion.Task;
 
         private void performAction(Action action)
         {

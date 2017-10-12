@@ -17,17 +17,15 @@ namespace StoryTeller.Engine
         private readonly RunningSystem _running;
         private readonly Task _warmup;
         private ConsumingQueue _planning;
-        private ConsumingQueue _reader;
 
         public SpecificationEngine(ISystem system, ISpecRunner runner, IExecutionObserver observer)
         {
             if (system == null) throw new ArgumentNullException(nameof(system));
-            if (runner == null) throw new ArgumentNullException(nameof(runner));
             if (observer == null) throw new ArgumentNullException(nameof(observer));
 
 
             _running = RunningSystem.Create(system);
-            _runner = runner;
+            _runner = runner ?? throw new ArgumentNullException(nameof(runner));
 
             _executionQueue = new ConsumingQueue(request =>
             {
@@ -58,7 +56,9 @@ namespace StoryTeller.Engine
             _warmup = warmup.ContinueWith(t =>
             {
                 if (t.IsFaulted)
+                {
                     _runner.MarkAsInvalid(t.Exception);
+                }
             });
         }
 

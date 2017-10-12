@@ -50,6 +50,26 @@ namespace StoryTeller.Testing.Engine
 
             action.Received().SpecExecutionFinished(theSpec, results);
         }
+        
+        [Fact]
+        public void finishing_a_spec_finishes_the_completion()
+        {
+            var action = Substitute.For<IResultObserver>();
+
+            var request = new SpecExecutionRequest(theSpec, action);
+            request.CreatePlan(TestingContext.Library);
+            request.Plan.Attempts = 3;
+
+            var results = new SpecResults();
+            
+            request.Completion.IsCompleted.ShouldBeFalse();
+            
+            request.SpecExecutionFinished(results);
+
+            request.Completion.IsCompleted.ShouldBeTrue();
+            
+            request.Completion.Result.ShouldBe(results);
+        }
 
         [Fact]
         public void read_xml_happy_path()
