@@ -2,9 +2,9 @@
 {
     public enum TracingStyle
     {
-        AppVeyor,
-        TeamCity,
-        Verbose,
-        None
+        appveyor,
+        teamcity,
+        verbose,
+        none
     }
 }

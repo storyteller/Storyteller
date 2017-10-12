@@ -22,7 +22,7 @@ namespace StoryTeller.Commands
         public Lifecycle LifecycleFlag { get; set; } = Lifecycle.Any;
 
         [Description("Choose")]
-        public TracingStyle TracingFlag { get; set; } = TracingStyle.None;
+        public TracingStyle TracingFlag { get; set; } = TracingStyle.none;
 
 
         [Description("Global timeout for this command in minutes. Defaults to 10")]

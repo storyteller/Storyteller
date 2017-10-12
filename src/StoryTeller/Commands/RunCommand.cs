@@ -261,17 +261,17 @@ namespace StoryTeller.Commands
             executionObserver = new NulloObserver();
             switch (input.TracingFlag)
             {
-                case TracingStyle.Verbose:
+                case TracingStyle.verbose:
                     batchObserver = new ConsoleBatchObserver(specs.Count);
                     // TODO -- awesome if you could get smarter w/ the console output here
                     break;
 
-                case TracingStyle.TeamCity:
+                case TracingStyle.teamcity:
                     batchObserver = new TeamCityBatchObserver(batchObserver);
                     executionObserver = new TeamCityExecutionObserver();
                     break;
 
-                case TracingStyle.AppVeyor:
+                case TracingStyle.appveyor:
                     batchObserver = new AppVeyorBatchObserver(batchObserver);
                     break;
             }
