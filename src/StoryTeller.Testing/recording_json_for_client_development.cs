@@ -12,7 +12,6 @@ using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using ST.Client;
-using ST.CommandLine;
 
 namespace StoryTeller.Testing
 {

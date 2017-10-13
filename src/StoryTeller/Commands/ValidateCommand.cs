@@ -15,35 +15,38 @@ namespace StoryTeller.Commands
         public override bool Execute(StorytellerInput input)
         {
             var running = RunningSystem.Create(input.System);
-            var library = input.BuildFixturesWithOverrides(running.RecycledMessage);
+            using (running.System)
+            {
+                var library = input.BuildFixturesWithOverrides(running.RecycledMessage);
 
             
 
-            var specs = HierarchyLoader.ReadHierarchy(input.SpecPath).GetAllSpecs().ToArray();
+                var specs = HierarchyLoader.ReadHierarchy(input.SpecPath).GetAllSpecs().ToArray();
 
-            SpecificationPostProcessor.PostProcessAll(specs, running.Fixtures);
+                SpecificationPostProcessor.PostProcessAll(specs, running.Fixtures);
 
-            var errored = specs.Where(x => x.errors.Any()).ToArray();
+                var errored = specs.Where(x => x.errors.Any()).ToArray();
 
-            if (errored.Any())
-            {
-                ConsoleWriter.Write(ConsoleColor.Red, "Errors Detected!");
-
-                foreach (var errorSpec in errored)
+                if (errored.Any())
                 {
-                    ConsoleWriter.Write(ConsoleColor.Yellow, errorSpec.Filename);
-                    foreach (var error in errorSpec.errors)
-                    {
-                        Console.WriteLine( $"{error.location.Join(" / ")} -> {error.message}");
-                    }
-                }
+                    ConsoleWriter.Write(ConsoleColor.Red, "Errors Detected!");
 
-                return false;
-            }
-            else
-            {
-                ConsoleWriter.Write(ConsoleColor.Green, "No validation errors or missing data detected in this project");
-                return true;
+                    foreach (var errorSpec in errored)
+                    {
+                        ConsoleWriter.Write(ConsoleColor.Yellow, errorSpec.Filename);
+                        foreach (var error in errorSpec.errors)
+                        {
+                            Console.WriteLine( $"{error.location.Join(" / ")} -> {error.message}");
+                        }
+                    }
+
+                    return false;
+                }
+                else
+                {
+                    ConsoleWriter.Write(ConsoleColor.Green, "No validation errors or missing data detected in this project");
+                    return true;
+                }
             }
         }
     }
