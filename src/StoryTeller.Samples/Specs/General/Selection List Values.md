@@ -5,7 +5,7 @@
 -> max-retries = 0
 -> last-updated = 2016-10-14T10:42:12.6275878-05:00
 -> expiration-period = 0
--> tags = 
+-> tags = do
 
 [SelectionList]
 |> TheNameIs first=Jeremy, last=Smith, fullname=Jeremy Smith

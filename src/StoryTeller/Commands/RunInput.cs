@@ -65,7 +65,6 @@ namespace StoryTeller.Commands
         
         
         
-        // TODO -- put stop conditions here too
         // TODO -- profile
         // TODO -- props!
 

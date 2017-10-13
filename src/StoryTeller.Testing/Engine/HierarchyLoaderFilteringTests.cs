@@ -58,25 +58,25 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void filter_by_multiple_excluded_tags()
         {
-            HierarchyLoader.Filter(theTopSuite, tags: new[] { "tag1", "tag2" }).ShouldHaveTheSameElementsAs(childSuite2.Specifications[1]);
+            HierarchyLoader.Filter(theTopSuite, excludeTags: new[] { "tag1", "tag2" }).ShouldHaveTheSameElementsAs(childSuite2.Specifications[1]);
         }
 
         [Fact]
         public void filter_by_single_excluded_tag()
         {
-            HierarchyLoader.Filter(theTopSuite, tags: new[] { "tag1" }).ShouldHaveTheSameElementsAs(childSuite1.Specifications[1], childSuite2.Specifications[1]);
+            HierarchyLoader.Filter(theTopSuite, excludeTags: new[] { "tag1" }).ShouldHaveTheSameElementsAs(childSuite1.Specifications[1], childSuite2.Specifications[1]);
         }
 
         [Fact]
         public void filter_by_suite()
         {
-            HierarchyLoader.Filter(theTopSuite, suiteName: childSuite1.name).ShouldHaveTheSameElementsAs(childSuite1.Specifications);
+            HierarchyLoader.Filter(theTopSuite, suiteOrSpec: childSuite1.name).ShouldHaveTheSameElementsAs(childSuite1.Specifications);
         }
 
         [Fact]
         public void filter_by_suite_and_lifecycle()
         {
-            HierarchyLoader.Filter(theTopSuite, lifecycle: Lifecycle.Acceptance, suiteName: childSuite1.name).ShouldHaveTheSameElementsAs(childSuite1.Specifications[0]);
+            HierarchyLoader.Filter(theTopSuite, lifecycle: Lifecycle.Acceptance, suiteOrSpec: childSuite1.name).ShouldHaveTheSameElementsAs(childSuite1.Specifications[0]);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace StoryTeller.Testing.Engine
         [Fact]
         public void throw_when_filtering_by_suite_that_does_not_exist()
         {
-            Should.Throw<SuiteNotFoundException>(() => HierarchyLoader.Filter(theTopSuite, suiteName: "Doesn't Exist"));
+            Should.Throw<SuiteOrSpecNotFoundException>(() => HierarchyLoader.Filter(theTopSuite, suiteOrSpec: "Doesn't Exist"));
         }
     }
 }

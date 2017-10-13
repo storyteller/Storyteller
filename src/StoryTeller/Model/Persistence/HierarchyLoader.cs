@@ -50,16 +50,36 @@ namespace StoryTeller.Model.Persistence
             return suite;
         }
         
-        public static List<Specification> Filter(Suite top, Lifecycle lifecycle = Lifecycle.Any, string suiteName = "", string[] tags = default(string[]))
+        public static List<Specification> Filter(Suite top, Lifecycle lifecycle = Lifecycle.Any, string suiteOrSpec = "", string[] includeTags = default(string[]), string[] excludeTags = default(string[]))
         {
             IEnumerable<Specification> specs;
-            if (suiteName.IsNotEmpty())
+            if (suiteOrSpec.IsNotEmpty())
             {
-                var suite = top.suites.FirstOrDefault(x => x.name == suiteName);
-                if (suite == null)
-                    throw new SuiteNotFoundException(suiteName, top);
+                suiteOrSpec = suiteOrSpec.Replace(" / ", "/");
+                
+                var suite = top.suites.FirstOrDefault(x => x.name == suiteOrSpec) ?? top.suites.FirstOrDefault(x => x.path == suiteOrSpec);
+                if (suite != null)
+                {
+                    specs = suite.GetAllSpecs();
+                }
+                else
+                {
+                    var spec = top.GetAllSpecs().FirstOrDefault(x => x.path == suiteOrSpec);
+                    if (spec != null)
+                    {
+                        return new List<Specification> {spec};
+                    }
+                    else
+                    {
+                        throw new SuiteOrSpecNotFoundException(suiteOrSpec, top);
+                    }
 
-                specs = suite.GetAllSpecs();
+
+                    
+                }
+                
+
+                
             }
             else
             {
@@ -71,9 +91,14 @@ namespace StoryTeller.Model.Persistence
                 specs = specs.Where(x => x.Lifecycle == lifecycle);
             }
             
-            if (tags != null && tags.Any())
+            if (excludeTags != null && excludeTags.Any())
             {
-                specs = specs.Where(spec => tags.All(tag => !spec.Tags.Contains(tag)));
+                specs = specs.Where(spec => excludeTags.All(tag => !spec.Tags.Contains(tag)));
+            }
+            
+            if (includeTags != null && includeTags.Any())
+            {
+                specs = specs.Where(spec => spec.Tags.Intersect(includeTags).Any());
             }
 
             return specs.ToList();
