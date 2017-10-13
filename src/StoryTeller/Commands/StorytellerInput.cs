@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Baseline;
 using Oakton;
 using StoryTeller.Engine;
@@ -21,6 +22,7 @@ namespace StoryTeller.Commands
 #else
             PathFlag = Directory.GetCurrentDirectory();
 #endif
+            
         }
         
         [Description("Optional. Override the spec directory")]
@@ -66,9 +68,35 @@ namespace StoryTeller.Commands
         Dictionary<string, string> IStorytellerEnvironment.Properties => PropFlag ?? new Dictionary<string, string>();
         string IStorytellerEnvironment.RootPath => PathFlag;
 
-        public string SpecPath => SpecsFlag.IsNotEmpty() 
-            ? SpecsFlag.ToFullPath() 
-            : HierarchyLoader.SelectSpecPath(PathFlag.ToFullPath());
+        public string SpecPath
+        {
+            get
+            {
+                if (SpecsFlag.IsNotEmpty())
+                {
+                    return SpecsFlag.ToFullPath();
+                }
+                
+                var candidate = HierarchyLoader.SelectSpecPath(PathFlag.ToFullPath());
+                if (Directory.Exists(candidate))
+                {
+                    return candidate;
+                }
+
+                
+                var path = AppContext.BaseDirectory;
+                for (int i = 0; i < 4; i++)
+                {
+                    var possibility = HierarchyLoader.SelectSpecPath(path);
+                    if (Directory.Exists(possibility)) return possibility;
+
+                    path = path.ParentDirectory();
+                }
+
+                return candidate;
+
+            }
+        }
         
         internal FixtureModel[] BuildFixturesWithOverrides(SystemRecycled systemRecycled)
         {

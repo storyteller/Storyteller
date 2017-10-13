@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Baseline;
@@ -60,6 +61,8 @@ namespace StoryTeller.Commands
         {
             return Task.Factory.StartNew(() =>
             {
+                ConsoleWriter.Write(ConsoleColor.Cyan,"Reading specifications from " + SpecPath);
+                
                 var top = HierarchyLoader.ReadHierarchy(SpecPath);
                 // TODO -- filter on tags here
                 // TODO -- make HierarchyLoader smart enough to recognize spec or suite
