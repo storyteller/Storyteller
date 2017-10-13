@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Baseline;
 using Oakton;
+using Oakton.Parsing;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.DSL;
@@ -32,6 +33,7 @@ namespace StoryTeller.Commands
         [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
         public bool OpenFlag { get; set; }
         
+        [FlagAlias("csv", 'u')]
         [Description("Write the performance data in CSV format to the specified path")]
         public string CsvFlag { get; set; }
 

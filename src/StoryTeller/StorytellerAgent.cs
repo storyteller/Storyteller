@@ -55,7 +55,8 @@ namespace StoryTeller
                         Project.CurrentProject = new Project
                         {
                             Profile = input.ProfileFlag,
-                            Properties = input.PropFlag ?? new Dictionary<string, string>()
+                            Properties = input.PropFlag ?? new Dictionary<string, string>(),
+                            Culture = input.CultureFlag
                         };
 
                         input.System = builder(input);

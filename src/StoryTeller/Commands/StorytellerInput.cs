@@ -61,6 +61,9 @@ namespace StoryTeller.Commands
         
         [Description("Storyteller Profile for conditional system construction")]
         public string ProfileFlag { get; set; }
+        
+        [Description("Force Storyteller to use this culture in all value conversions")]
+        public string CultureFlag { get; set; }
 
 
         string IStorytellerEnvironment.Profile => ProfileFlag;
