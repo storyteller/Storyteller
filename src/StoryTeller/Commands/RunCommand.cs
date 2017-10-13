@@ -29,10 +29,7 @@ namespace StoryTeller.Commands
 
         public override bool Execute(RunInput input)
         {
-            Project.CurrentProject = new Project
-            {
-                MaxRetries = input.MaxAttemptsFlag
-            };
+            input.ConfigureProject();
             
             bool success = false;
             

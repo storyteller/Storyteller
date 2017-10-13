@@ -29,9 +29,11 @@ namespace StoryTeller
         public string TracingStyle { get; set; }
         public string ConfigFile { get; set; }
         public string Profile { get; set; }
-        public static Project CurrentProject { get; set; }
+        public static Project CurrentProject { get; set; } = new Project();
         public int MaxRetries { get; set; }
         public string Culture { get; set; }
+        
+        public Dictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
 
         public EngineMode Mode { get; set; } = EngineMode.Interactive;
 

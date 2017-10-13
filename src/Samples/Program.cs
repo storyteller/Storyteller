@@ -2,16 +2,17 @@
 using Baseline;
 using Microsoft.Extensions.DependencyModel;
 using StoryTeller;
+using StoryTeller.Engine;
 
 namespace Samples
 {
     // SAMPLE: Program.Main.Default
     public static class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
             // If you do not need a custom ISystem
-            StorytellerAgent.Run(args);
+            return StorytellerAgent.Run(args);
         }
     }
     // ENDSAMPLE

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Baseline;
@@ -29,6 +30,44 @@ namespace StoryTeller
             }
         }
 
+        /// <summary>
+        /// Run a storyteller system based on the command line parameters
+        /// </summary>
+        /// <param name="args"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static int Run(string[] args, Func<IStorytellerEnvironment, ISystem> builder)
+        {
+            var executor = CommandExecutor.For(_ =>
+            {
+                _.DefaultCommand = typeof(AgentCommand);
+                
+                _.RegisterCommand<AgentCommand>();
+                _.RegisterCommand<TestCommand>();
+                _.RegisterCommand<RunCommand>();
+                _.ConfigureRun = run =>
+                {
+                    var input = run.Input as StorytellerInput;
+
+                    if (input != null)
+                    {
+                        Project.CurrentProject = new Project
+                        {
+                            Profile = input.ProfileFlag,
+                            Properties = input.PropFlag ?? new Dictionary<string, string>()
+                        };
+
+                        input.System = builder(input);
+                    }
+                };
+            });
+
+            executor.OptionsFile = "storyteller.opts";
+
+            return executor.Execute(args);
+        }
+
 
         /// <summary>
         /// Use a basic system
@@ -37,7 +76,7 @@ namespace StoryTeller
         /// <returns></returns>
         public static int Run(string[] args)
         {
-            return Run(args, new NulloSystem());
+            return Run(args, _ => new NulloSystem());
         }
 
         /// <summary>
@@ -48,20 +87,7 @@ namespace StoryTeller
         /// <returns></returns>
         public static int Run(string[] args, ISystem system)
         {
-            var executor = CommandExecutor.For(_ =>
-            {
-                _.DefaultCommand = typeof(AgentCommand);
-                
-                _.RegisterCommand<AgentCommand>();
-                _.RegisterCommand<TestCommand>();
-                _.RegisterCommand<RunCommand>();
-                _.ConfigureRun = run => run.Input.As<StorytellerInput>().System = system;
-               
-            });
-
-            executor.OptionsFile = "storyteller.opts";
-
-            return executor.Execute(args);
+            return Run(args, _ => system);
         }
 
         /// <summary>

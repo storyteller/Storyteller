@@ -21,7 +21,8 @@ namespace StoryTeller.Commands
         [Description("Optional. Only runs tests with desired lifecyle")]
         public Lifecycle LifecycleFlag { get; set; } = Lifecycle.Any;
 
-        [Description("Choose")]
+        [Description("Choose the tracing style")]
+        [FlagAlias('z')]
         public TracingStyle TracingFlag { get; set; } = TracingStyle.none;
 
 
@@ -31,10 +32,10 @@ namespace StoryTeller.Commands
         [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
         public bool OpenFlag { get; set; }
         
-        [Description("WriteToText the performance data in CSV format to the specified path")]
+        [Description("Write the performance data in CSV format to the specified path")]
         public string CsvFlag { get; set; }
 
-        [Description("WriteToText the raw result information to JSON format at the specified path")]
+        [Description("Write the raw result information to JSON format at the specified path")]
         public string JsonFlag { get; set; }
 
         [Description("Dump the raw JSON history of the batch run to the specified path")]
@@ -77,6 +78,11 @@ namespace StoryTeller.Commands
                 // TODO -- make HierarchyLoader smart enough to recognize spec or suite
                 return HierarchyLoader.Filter(top, LifecycleFlag, SpecificationOrSuite, new string[0]).ToList();
             });
+        }
+
+        public void ConfigureProject()
+        {
+            Project.CurrentProject.MaxRetries = MaxAttemptsFlag;
         }
     }
 }
