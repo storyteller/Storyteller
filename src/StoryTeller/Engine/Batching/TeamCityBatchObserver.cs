@@ -8,13 +8,6 @@ namespace StoryTeller.Engine.Batching
 {
     public class TeamCityBatchObserver : IBatchObserver
     {
-        private readonly IBatchObserver _inner;
-
-        public TeamCityBatchObserver(IBatchObserver inner)
-        {
-            _inner = inner;
-        }
-
         public void SpecRequeued(SpecExecutionRequest request)
         {
             Console.WriteLine("Requeuing {0}, attempt # {1}", request.Specification.name, request.Plan.Attempts + 1);
@@ -22,8 +15,6 @@ namespace StoryTeller.Engine.Batching
 
         public void SpecHandled(SpecExecutionRequest request, SpecResults results)
         {
-            _inner.SpecHandled(request, results);
-
             var name = request.Specification.name.Escape();
             var resultText = results.Counts.ToString().Escape();
 
@@ -44,10 +35,5 @@ namespace StoryTeller.Engine.Batching
             }
         }
 
-
-        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> specs)
-        {
-            return _inner.MonitorBatch(specs);
-        }
     }
 }

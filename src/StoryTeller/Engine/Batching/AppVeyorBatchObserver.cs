@@ -9,12 +9,10 @@ namespace StoryTeller.Engine.Batching
     public class AppVeyorBatchObserver : IBatchObserver
     {
         const int MaxLength = 4096;
-        private readonly IBatchObserver _inner;
         private readonly AppVeyorClient _client;
 
-        public AppVeyorBatchObserver(IBatchObserver inner)
+        public AppVeyorBatchObserver()
         {
-            _inner = inner;
             var apiUrl = Environment.GetEnvironmentVariable("APPVEYOR_API_URL") ?? "";
             var uri = apiUrl.TrimEnd('/');
             _client = new AppVeyorClient(uri);
@@ -27,8 +25,6 @@ namespace StoryTeller.Engine.Batching
 
         public void SpecHandled(SpecExecutionRequest request, SpecResults results)
         {
-            _inner.SpecHandled(request, results);
-
             var name = request.Specification.name.Escape();
             var resultText = results.Counts.ToString();
 
@@ -44,11 +40,6 @@ namespace StoryTeller.Engine.Batching
             {
                 appVeyorAddTest(name, request.Specification.Filename, "Failed", results.Duration, stdOut: resultText);
             }
-        }
-
-        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> specs)
-        {
-            return _inner.MonitorBatch(specs);
         }
 
         private void appVeyorAddTest(

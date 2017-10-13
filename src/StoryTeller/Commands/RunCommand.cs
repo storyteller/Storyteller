@@ -242,7 +242,7 @@ namespace StoryTeller.Commands
 
         private static SpecRunner buildRunner(RunInput input, List<Specification> specs, RunningSystem running, out IExecutionObserver executionObserver)
         {
-            IBatchObserver batchObserver = new BatchObserver();
+            IBatchObserver batchObserver = new NulloBatchObservor();
             executionObserver = new NulloObserver();
             switch (input.TracingFlag)
             {
@@ -252,12 +252,12 @@ namespace StoryTeller.Commands
                     break;
 
                 case TracingStyle.teamcity:
-                    batchObserver = new TeamCityBatchObserver(batchObserver);
+                    batchObserver = new TeamCityBatchObserver();
                     executionObserver = new TeamCityExecutionObserver();
                     break;
 
                 case TracingStyle.appveyor:
-                    batchObserver = new AppVeyorBatchObserver(batchObserver);
+                    batchObserver = new AppVeyorBatchObserver();
                     break;
             }
 

@@ -16,9 +16,5 @@ namespace StoryTeller.Commands
         {
         }
 
-        public Task<IEnumerable<BatchRecord>> MonitorBatch(IEnumerable<Specification> specs)
-        {
-            return Task.FromResult(Enumerable.Empty<BatchRecord>());
-        }
     }
 }
