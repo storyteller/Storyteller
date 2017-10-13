@@ -56,7 +56,7 @@ task :test => [:compile] do
   #sh "dotnet test src/IntegrationTests --framework net46"
   #sh "dotnet test src/IntegrationTests --framework netcoreapp1.1"
 
-  sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 -- run src/Specifications --validate"
+  sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp1.0 -- run src/Specifications --validate"
 
 end
 
@@ -173,7 +173,7 @@ end
 
 "Run the specs against the documentation generation"
 task :specifications do
-	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp1.0 -- run --path src/Specifications"
+	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp1.0 -- run"
 end
 
 "Run the database sample specs"

@@ -131,15 +131,7 @@ namespace ST.Client
                         {
                             http.Response.ContentType = "text/html";
 
-                            if (http.Request.Path.HasValue && http.Request.Path.Value == "/preview")
-                            {
-                                var html = ExportWriter.BuildPage(_application);
-                                await http.Response.WriteAsync(html).ConfigureAwait(false);
-                            }
-                            else
-                            {
-                                await HomeEndpoint.BuildPage(http.Response, _application, _input).ConfigureAwait(false);
-                            }
+                            await HomeEndpoint.BuildPage(http.Response, _application, _input).ConfigureAwait(false);
 
 
                             
