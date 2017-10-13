@@ -188,25 +188,13 @@ namespace StoryTeller.Commands
             results.system = systemRecycled.system_name;
             results.time = DateTime.Now.ToString();
 
-            results.fixtures = buildFixturesWithOverrides(input, systemRecycled);
+            results.fixtures = input.BuildFixturesWithOverrides(systemRecycled);
 
             var document = BatchResultsWriter.BuildResults(results);
             Console.WriteLine("Writing results to " + input.ResultsPathFlag);
             document.WriteToFile(input.ResultsPathFlag);
         }
         
-        private static FixtureModel[] buildFixturesWithOverrides(RunInput input, SystemRecycled systemRecycled)
-        {
-            var overrides = FixtureLoader.LoadFromPath(input.FixturePath);
-            var system = new FixtureLibrary();
-            foreach (var fixture in systemRecycled.fixtures)
-            {
-                system.Models[fixture.key] = fixture;
-            }
-
-            return system.ApplyOverrides(overrides).Models.ToArray();
-        }
-
         private static void showTimeoutMessage(RunInput input, SpecExecutionRequest[] requests)
         {
             foreach (var request in requests)

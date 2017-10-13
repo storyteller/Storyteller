@@ -49,22 +49,7 @@ namespace StoryTeller.Commands
         
 
         
-        [Description("Optional. Override the fixtures directory")]
-        [FlagAlias("fixtures", 'f')]
-        public string FixturesFlag { get; set; }
 
-        public string FixturePath
-        {
-            get
-            {
-                if (FixturesFlag.IsNotEmpty())
-                {
-                    return FixturesFlag.ToFullPath();
-                }
-
-                return FixtureLoader.SelectFixturePath(PathFlag.ToFullPath());
-            }
-        }
         
         
         

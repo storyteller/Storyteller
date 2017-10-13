@@ -46,6 +46,8 @@ namespace StoryTeller
                 _.RegisterCommand<AgentCommand>();
                 _.RegisterCommand<TestCommand>();
                 _.RegisterCommand<RunCommand>();
+                _.RegisterCommand<ValidateCommand>();
+                
                 _.ConfigureRun = run =>
                 {
                     var input = run.Input as StorytellerInput;

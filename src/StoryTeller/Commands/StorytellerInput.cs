@@ -1,38 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Baseline;
 using Oakton;
 using StoryTeller.Engine;
+using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.Model.Persistence.DSL;
+using StoryTeller.Remotes;
 
 namespace StoryTeller.Commands
 {
-    public interface IStorytellerEnvironment
-    {
-        /// <summary>
-        /// Optional user-supplied profile. May be null.
-        /// Same as Project.CurrentProfile
-        /// </summary>
-        string Profile { get; }
-        
-        /// <summary>
-        /// Optional user-supplied key/value properties
-        /// </summary>
-        Dictionary<string, string> Properties { get; }
-        
-        /// <summary>
-        /// The directory to the root of the project
-        /// </summary>
-        string RootPath { get; }
-        
-        /// <summary>
-        /// Directory containing the specifications
-        /// </summary>
-        string SpecPath { get; }
-    }
-    
-    
     public class StorytellerInput : IStorytellerEnvironment
     {
         public StorytellerInput()
@@ -64,6 +43,23 @@ namespace StoryTeller.Commands
         
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
+        
+        [Description("Optional. Override the fixtures directory")]
+        [FlagAlias("fixtures", 'f')]
+        public string FixturesFlag { get; set; }
+
+        public string FixturePath
+        {
+            get
+            {
+                if (FixturesFlag.IsNotEmpty())
+                {
+                    return FixturesFlag.ToFullPath();
+                }
+
+                return FixtureLoader.SelectFixturePath(PathFlag.ToFullPath());
+            }
+        }
 
 
         string IStorytellerEnvironment.Profile => ProfileFlag;
@@ -73,6 +69,18 @@ namespace StoryTeller.Commands
         public string SpecPath => SpecsFlag.IsNotEmpty() 
             ? SpecsFlag.ToFullPath() 
             : HierarchyLoader.SelectSpecPath(PathFlag.ToFullPath());
+        
+        internal FixtureModel[] BuildFixturesWithOverrides(SystemRecycled systemRecycled)
+        {
+            var overrides = FixtureLoader.LoadFromPath(FixturePath);
+            var system = new FixtureLibrary();
+            foreach (var fixture in systemRecycled.fixtures)
+            {
+                system.Models[fixture.key] = fixture;
+            }
+
+            return system.ApplyOverrides(overrides).Models.ToArray();
+        }
     }
     
     
