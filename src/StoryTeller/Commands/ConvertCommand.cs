@@ -1,16 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using Baseline;
 using Oakton;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.Markdown;
 
-namespace ST.CommandLine
+namespace StoryTeller.Commands
 {
 
     public class ConvertInput
     {
+        public ConvertInput()
+        {
+#if NET46
+            Path = Environment.CurrentDirectory;
+#else
+            Path = Directory.GetCurrentDirectory();
+#endif
+        }
+
         [Description("Directory of the Storyteller specification project")]
         public string Path { get; set; } = Directory.GetCurrentDirectory();
 
