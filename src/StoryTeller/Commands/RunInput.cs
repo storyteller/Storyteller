@@ -28,8 +28,11 @@ namespace StoryTeller.Commands
         public TracingStyle TracingFlag { get; set; } = TracingStyle.none;
 
 
+        [Description("Timeout condition for individual specifications in seconds. Defaults to 60")]
+        public int TimeoutFlag { get; set; } = 60;
+        
         [Description("Global timeout for this command in minutes. Defaults to 10")]
-        public int TimeoutFlag { get; set; } = 10;
+        public int GlobalTimeoutFlag { get; set; } = 10;
         
         [Description("Open the results in a browser after the run. DO NOT DO THIS IN CI!")]
         public bool OpenFlag { get; set; }
@@ -73,6 +76,7 @@ namespace StoryTeller.Commands
         public void ConfigureProject()
         {
             Project.CurrentProject.MaxRetries = MaxAttemptsFlag;
+            Project.CurrentProject.StopConditions.TimeoutInSeconds = TimeoutFlag;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace StoryTeller.Commands
             try
             {
                 var task = execute(input);
-                task.Wait(input.TimeoutFlag.Minutes());
+                task.Wait(input.GlobalTimeoutFlag.Minutes());
 
                 success = task.IsCompleted && task.Result;
 
@@ -80,7 +80,7 @@ namespace StoryTeller.Commands
                 var requests = createExecutionPlans(specs, running);
 
                 var finished = Task.WhenAll(requests.Select(x => x.Completion));
-                var timeout = Task.Delay(input.TimeoutFlag.Minutes());
+                var timeout = Task.Delay(input.GlobalTimeoutFlag.Minutes());
 
                 await Task.WhenAny(timeout, finished);
 
@@ -202,7 +202,7 @@ namespace StoryTeller.Commands
                 request.Cancel();
             }
 
-            ConsoleWriter.Write(ConsoleColor.Red, $"The execution timed out in {input.TimeoutFlag} minutes");
+            ConsoleWriter.Write(ConsoleColor.Red, $"The execution timed out in {input.GlobalTimeoutFlag} minutes");
         }
 
         private SpecExecutionRequest[] createExecutionPlans(List<Specification> specs, RunningSystem running)
