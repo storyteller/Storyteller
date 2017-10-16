@@ -11,6 +11,8 @@ using StoryTeller.Model.Persistence.DSL;
 
 namespace StoryTeller.Commands
 {
+
+    
     public class RunInput : StorytellerInput
     {
         [Description("Path to write out the results. Default is stresults.htm")]
@@ -50,15 +52,13 @@ namespace StoryTeller.Commands
         [Description("Sets a minimum number of retry attempts for this execution. Default is zero")]
         public int MaxAttemptsFlag { get; set; } = 0;
         
+        [Description("Optionally have the specifications immediately stop execution on exceptions")]
+        public bool BreakOnExceptionsFlag { get; set; }
+        
+        [Description("Optionally have the specification execution stop on any wrong assertions")]
+        public bool BreakOnWrongsFlag { get; set; }
         
 
-        
-
-        
-        
-        
-        // TODO -- profile
-        // TODO -- props!
 
         public Task<List<Specification>> ReadSpecs()
         {
@@ -77,6 +77,8 @@ namespace StoryTeller.Commands
         {
             Project.CurrentProject.MaxRetries = MaxAttemptsFlag;
             Project.CurrentProject.StopConditions.TimeoutInSeconds = TimeoutFlag;
+            Project.CurrentProject.StopConditions.BreakOnExceptions = BreakOnExceptionsFlag;
+            Project.CurrentProject.StopConditions.BreakOnWrongs = BreakOnWrongsFlag;
         }
     }
 }

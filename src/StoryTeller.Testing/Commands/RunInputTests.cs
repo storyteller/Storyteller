@@ -29,5 +29,53 @@ namespace StoryTeller.Testing.Commands
             Project.CurrentProject.StopConditions.TimeoutInSeconds
                 .ShouldBe(33);
         }
+
+        [Fact]
+        public void configures_break_on_exceptions_true()
+        {
+            new RunInput
+            {
+                BreakOnExceptionsFlag = true
+            }.ConfigureProject();
+            
+            Project.CurrentProject.StopConditions.BreakOnExceptions.ShouldBeTrue();
+        }
+        
+        [Fact]
+        public void configures_break_on_exceptions_false()
+        {
+            var input = new RunInput();
+            
+            // default value
+            input.BreakOnExceptionsFlag.ShouldBeFalse();
+            
+            input.ConfigureProject();
+
+            Project.CurrentProject.StopConditions.BreakOnExceptions.ShouldBeFalse();
+        }
+        
+        [Fact]
+        public void configures_break_on_wrongs_true()
+        {
+            new RunInput
+            {
+                BreakOnWrongsFlag = true
+            }.ConfigureProject();
+            
+            Project.CurrentProject.StopConditions.BreakOnWrongs.ShouldBeTrue();
+        }
+        
+        [Fact]
+        public void configures_break_on_wrongs_false()
+        {
+            var input = new RunInput();
+            
+            // default value
+            input.BreakOnWrongsFlag.ShouldBeFalse();
+            
+            input.ConfigureProject();
+
+            Project.CurrentProject.StopConditions.BreakOnWrongs.ShouldBeFalse();
+        }
     }
 }
