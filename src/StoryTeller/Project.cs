@@ -41,7 +41,7 @@ namespace StoryTeller
         
         public string ToAgentCommandLine()
         {
-            var cmd = $"dotnet run --framework {Framework} -- {Port}";
+            var cmd = $"run --framework {Framework} -- {Port}";
 
             if (Profile.IsNotEmpty()) cmd += $" --profile \"{Profile}\"";
 

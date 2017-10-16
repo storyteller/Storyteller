@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "dotnet-storyteller": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\code\\storyteller\\src\\StoryTeller.Samples"
+    }
+  }
+}
