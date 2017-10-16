@@ -187,7 +187,6 @@ namespace StorytellerDocGen
                             switch (http.Request.Path)
                             {
                                 case "/refresh":
-                                Console.WriteLine("Hey, I got the order to do the hard refresh!");
                                     await HardRefresh().ConfigureAwait(false);
 
                                     _refresher.RefreshPage();

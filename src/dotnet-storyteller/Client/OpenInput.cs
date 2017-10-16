@@ -13,7 +13,7 @@ using StoryTeller.Remotes;
 namespace ST.Client
 {
     public class OpenInput : StorytellerInput
-    {
+    {        
         public string DetermineFramework()
         {
             if (FrameworkFlag.IsNotEmpty()) return FrameworkFlag;
@@ -55,9 +55,11 @@ namespace ST.Client
         {
             var project = new Project
             {
-                Framework = FrameworkFlag,
+                Framework = DetermineFramework(),
                 Culture = CultureFlag,
-                Profile = ProfileFlag
+                Profile = ProfileFlag,
+                Properties = PropFlag,
+                ProjectPath = PathFlag
             };
 
             return new EngineController(project, new ProcessRunnerSystemLauncher(project));
@@ -70,5 +72,7 @@ namespace ST.Client
             Console.WriteLine("Creating specifications directory at " + SpecPath);
             Directory.CreateDirectory(SpecPath);
         }
+
+
     }
 }

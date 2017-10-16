@@ -5,7 +5,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Version>1.2.5</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFrameworks>net46;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp1.0;net46</TargetFrameworks>
     <AssemblyName>dotnet-storyteller</AssemblyName>
     <OutputType>Exe</OutputType>
     <DebugType>pdbonly</DebugType>

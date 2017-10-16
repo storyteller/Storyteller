@@ -32,13 +32,44 @@ namespace StoryTeller
         public Project()
         {
             Port = PortFinder.FindPort(++StartingPort);
-
-            Framework = "netcoreapp1.0";
         }
 
         public int Port { get; set; }
 
         public string ProjectPath { get; set; }
         public string Framework { get; set; }
+        
+        public string ToAgentCommandLine()
+        {
+            var cmd = $"dotnet run --framework {Framework} -- {Port}";
+
+            if (Profile.IsNotEmpty()) cmd += $" --profile \"{Profile}\"";
+
+            if (Culture.IsNotEmpty()) cmd += $" --culture {Culture}";
+
+            foreach (var pair in Properties)
+            {
+                cmd += $" --prop:{pair.Key} \"{pair.Value}\"";
+            }
+
+            return cmd;
+        }
+        
+        
+        public string ToTestCommandLine()
+        {
+            var cmd = $"dotnet run --framework {Framework} -- test";
+
+            if (Profile.IsNotEmpty()) cmd += $" --profile \"{Profile}\"";
+
+            if (Culture.IsNotEmpty()) cmd += $" --culture {Culture}";
+
+            foreach (var pair in Properties)
+            {
+                cmd += $" --prop:{pair.Key} \"{pair.Value}\"";
+            }
+
+            return cmd;
+        }
     }
 }

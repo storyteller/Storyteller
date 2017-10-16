@@ -8,9 +8,9 @@ using StoryTeller.Remotes.Messaging;
 namespace StoryTeller.Commands
 {
     [Description("Try to start and warmup the system under test for diagnostics")]
-    public class TestCommand : OaktonCommand<TestInput>
+    public class TestCommand : OaktonCommand<StorytellerInput>
     {
-        public override bool Execute(TestInput input)
+        public override bool Execute(StorytellerInput input)
         {
             try
             {

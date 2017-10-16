@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using Oakton;
+﻿using Oakton;
+using ST.Client;
 
 namespace StorytellerRunner
 {
@@ -7,13 +7,7 @@ namespace StorytellerRunner
     {
         public static int Main(string[] args)
         {
-            var executor = CommandExecutor.For(_ =>
-            {
-                _.RegisterCommands(typeof(Program).GetTypeInfo().Assembly);
-            });
-
-
-            return executor.Execute(args);
+            return CommandExecutor.ExecuteCommand<OpenCommand>(args);
         }
     }
 }

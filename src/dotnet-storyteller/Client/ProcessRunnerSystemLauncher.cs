@@ -77,22 +77,11 @@ namespace ST.Client
             {
                 UseShellExecute = false,
                 WorkingDirectory = _project.ProjectPath.ToFullPath(),
-                FileName = "dotnet"
+                FileName = "dotnet",
+                Arguments = _project.ToAgentCommandLine()
             };
 
-
-            var framework = _project.Framework;
-
-#if NET46
-            framework = framework ?? "net46";
-#else
-            framework = framework ?? "netcoreapp1.0";
-#endif
-
-
-            // TODO -- need to lock this down somehow
-            start.Arguments = $"run --framework {framework} -- {_project.Port}";
-            _testCommand = $"dotnet run --framework {framework} -- test";
+            _testCommand = _project.ToTestCommandLine();
 
             _command = $"dotnet {start.Arguments}";
 

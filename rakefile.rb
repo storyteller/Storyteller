@@ -148,17 +148,17 @@ end
 
 "Run the spec editor w/ samples"
 task :samples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/Storyteller.Samples"
+	sh "dotnet run --framework netcoreapp1.0 --project src/dotnet-storyteller/dotnet-storyteller.csproj --path src/Storyteller.Samples"
 end
 
 "Run the spec editor w/ samples"
 task :testbed do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/Testbed"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 --path src/Testbed"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :docsamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 --path src/Samples"
 end
 
 "Run the spec editor w/ the documentation samples"
@@ -168,7 +168,7 @@ end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/Storyteller.Samples --hotreload"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 --path src/Storyteller.Samples --hotreload"
 end
 
 "Run the specs against the documentation generation"
