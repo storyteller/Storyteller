@@ -27,7 +27,6 @@ namespace StoryTeller
 
         public int TimeoutInSeconds { get; set; }
         public string TracingStyle { get; set; }
-        public string ConfigFile { get; set; }
         public string Profile { get; set; }
         public static Project CurrentProject { get; set; } = new Project();
         public int MaxRetries { get; set; }

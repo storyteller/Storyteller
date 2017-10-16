@@ -9,6 +9,7 @@ using StoryTeller.Remotes;
 
 namespace ST.Client
 {
+    [Obsolete("This will be removed in favor of StorytellerInput")]
     public class ProjectInput
     {
         private readonly EngineMode _mode;
@@ -38,12 +39,6 @@ namespace ST.Client
 
         [Description("Optional. Default project timeout in seconds.")]
         public int? TimeoutFlag { get; set; }
-
-
-
-
-        [Description("Optional. Override the config file selection of the Storyteller test running AppDomain")]
-        public string ConfigFlag { get; set; }
 
         [Description("Optional. Override the spec directory")]
         [FlagAlias("specs", 's')]
@@ -106,11 +101,6 @@ namespace ST.Client
             if (BuildFlag.IsNotEmpty())
             {
                 project.BuildProfile = BuildFlag;
-            }
-
-            if (ConfigFlag.IsNotEmpty())
-            {
-                project.ConfigFile = ConfigFlag;
             }
 
             project.Culture = CultureFlag;
