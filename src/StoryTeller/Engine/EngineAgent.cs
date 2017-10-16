@@ -18,10 +18,12 @@ namespace StoryTeller.Engine
         private object _controller;
         private readonly SocketConnection _socket;
         private Project _project;
-        private RunningSystem _running;
+        private readonly RunningSystem _running;
 
-        public EngineAgent(int port)
+        public EngineAgent(int port, ISystem system)
         {
+            if (system == null) throw new ArgumentNullException(nameof(system));
+            
             _socket = new SocketConnection(port, false, (s, json) =>
             {
                 EventAggregator.Messaging.SendJson(json);
@@ -33,10 +35,7 @@ namespace StoryTeller.Engine
 
             Console.WriteLine("AGENT: Sending AgentReady message");
             EventAggregator.SendMessage(new AgentReady());
-        }
-
-        public EngineAgent(int port, ISystem system) : this(port)
-        {
+            
             _running = RunningSystem.Create(system);
 
 
@@ -73,11 +72,6 @@ namespace StoryTeller.Engine
 
             try
             {
-                if (_running == null)
-                {
-                    buildRunningSystem();
-                }
-
                 if (project.Mode == EngineMode.ExportOnly)
                 {
                     EventAggregator.SendMessage(_running.RecycledMessage);
@@ -109,15 +103,6 @@ namespace StoryTeller.Engine
             }
 
 
-        }
-
-        private void buildRunningSystem()
-        {
-            var systemType = _project.DetermineSystemType();
-            var inner = Activator.CreateInstance(systemType).As<ISystem>();
-            _running = RunningSystem.Create(inner);
-
-            _disposables.Add(_running.System);
         }
 
         private SpecificationEngine buildUserInterfaceEngine()

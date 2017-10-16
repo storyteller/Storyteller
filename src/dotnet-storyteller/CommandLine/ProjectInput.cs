@@ -86,9 +86,6 @@ namespace ST.Client
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
 
-        [Description("Optional. Tell Storyteller which which ISystem to use")]
-        public string SystemNameFlag { get; set; }
-
         protected bool _disableAppDomainFileWatching = false;
 
         public ST.Client.EngineController BuildEngine()
@@ -101,7 +98,7 @@ namespace ST.Client
         protected virtual Project configureProject()
         {
             var path = Path.ToFullPath();
-            var project = Project.LoadForFolder(path);
+            var project = new Project();
 
             project.Framework = FrameworkFlag;
 
@@ -122,11 +119,6 @@ namespace ST.Client
             if (TimeoutFlag.HasValue)
             {
                 project.StopConditions.TimeoutInSeconds = TimeoutFlag.Value;
-            }
-
-            if (SystemNameFlag.IsNotEmpty())
-            {
-                project.SystemTypeName = SystemNameFlag;
             }
 
             project.Profile = ProfileFlag;

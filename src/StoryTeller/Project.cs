@@ -14,6 +14,7 @@ namespace StoryTeller
 #if NET46
     [Serializable]
 #endif
+    [Obsolete("Getting rid of this")]
     public class Project
     {
         public static int StartingPort = 2499;
@@ -22,9 +23,8 @@ namespace StoryTeller
 
         public static int CurrentMaxRetries => CurrentProject?.MaxRetries ?? 0;
 
-        public static readonly string FILE = "storyteller.config";
 
-        public string SystemTypeName { get; set; }
+
         public int TimeoutInSeconds { get; set; }
         public string TracingStyle { get; set; }
         public string ConfigFile { get; set; }
@@ -52,90 +52,6 @@ namespace StoryTeller
         public string BuildProfile { get; set; }
         public string Framework { get; set; }
 
-        public static Project LoadForFolder(string folder)
-        {
-            var system = new FileSystem();
-            var file = folder.AppendPath(FILE);
 
-            var project = system.FileExists(file) ? system.LoadFromFile<Project>(file) : new Project();
-
-            project.ProjectPath = folder;
-
-            return project;
-        }
-
-        public Type DetermineSystemType()
-        {
-            if (SystemTypeName.IsNotEmpty() && SystemTypeName.Contains(',')) return Type.GetType(SystemTypeName);
-
-            var types = FindSystemTypesInCurrentAssembly();
-
-            if (types.Count() == 1)
-            {
-                return types.Single();
-            }
-
-            if (SystemTypeName.IsNotEmpty())
-            {
-                return types.FirstOrDefault(x => x.Name == SystemTypeName);
-            }
-
-            if (!types.Any())
-            {
-                return typeof (NulloSystem);
-            }
-
-            
-            throw new InDeterminateSystemTypeException(types);
-        }
-
-        private static Type[] FindSystemTypesInCurrentAssembly()
-        {
-#if NET46
-            var directory = AppDomain.CurrentDomain.BaseDirectory;
-#else
-            var directory = AppContext.BaseDirectory;
-#endif
-            var assemblyName = Path.GetFileName(directory);
-
-            try
-            {
-
-#if NET46
-                var assembly = Assembly.Load(assemblyName);
-#else
-                var assembly = Assembly.Load(new AssemblyName(assemblyName));
-#endif
-                return FindSystemTypes(assembly).ToArray();
-            }
-            catch (Exception e)
-            {
-                ConsoleWriter.Write("Error trying to find types in an assembly named '{0}'", assemblyName);
-                ConsoleWriter.Write(ConsoleColor.Yellow, e.ToString());
-                return new Type[0];
-            }
-        }
-
-        public static bool IsSystemTypeCandidate(Type type)
-        {
-            return type.CanBeCastTo<ISystem>() && type.IsConcreteWithDefaultCtor() &&
-                   !type.IsOpenGeneric();
-        }
-
-
-        public static IEnumerable<Type> FindSystemTypes(Assembly assembly)
-        {
-            try
-            {
-                return assembly.GetExportedTypes().Where(IsSystemTypeCandidate);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Unable to scan types in assembly " + assembly.GetName().FullName);
-                Console.WriteLine(e);
-
-                return new Type[0];
-            }
-        }
     }
 }
