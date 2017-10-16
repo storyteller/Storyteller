@@ -51,6 +51,7 @@
     "chai": "^4.1.2",
     "eslint": "^4.8.0",
     "express": "^4.16.2",
+    "fixed-data-table-2": "^0.8.1",
     "fs-extra": "^4.0.2",
     "growl": "^1.10.3",
     "jsx-loader": "^0.13.2",
@@ -73,7 +74,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "fixed-data-table": "^0.6.4",
     "fuse.js": "^3.2.0",
     "history": "^4.7.2",
     "immutable": "^3.8.2",

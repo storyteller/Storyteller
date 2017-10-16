@@ -1,6 +1,6 @@
 var React = require("react");
 var uuid = require('node-uuid');
-import {Table, Column, Cell} from 'fixed-data-table';
+import {Table, Column, Cell} from 'fixed-data-table-2';
 var _ = require("lodash");
 
 var SortTypes = {
