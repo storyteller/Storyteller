@@ -7,7 +7,7 @@ namespace ST.Client
 {
     public class OpenInput : ProjectInput
     {
-        public OpenInput() : base(EngineMode.Interactive)
+        public OpenInput() : base()
         {
         }
 

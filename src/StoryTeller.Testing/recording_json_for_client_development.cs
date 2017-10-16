@@ -40,7 +40,7 @@ namespace StoryTeller.Testing
         public void write_initial_model()
         {
             // You need to compile everything before trying to use this
-            var input = new ProjectInput(EngineMode.Interactive)
+            var input = new ProjectInput()
             {
                 Path =
                     samplesFolder,

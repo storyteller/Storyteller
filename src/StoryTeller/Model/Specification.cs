@@ -21,7 +21,7 @@ namespace StoryTeller.Model
 
         public SpecError[] errors
         {
-            get { return _errors.ToArray(); }
+            get => _errors.ToArray();
             set
             {
                 _errors.Clear();
@@ -47,7 +47,7 @@ namespace StoryTeller.Model
                 }
                 return _lastUpdated.Value;
             }
-            set { _lastUpdated = value; }
+            set => _lastUpdated = value;
         }
 
 
@@ -60,8 +60,8 @@ namespace StoryTeller.Model
         [JsonIgnore]
         public string Filename
         {
-            get { return _fileName; }
-            set { _fileName = value.ToFullPath(); }
+            get => _fileName;
+            set => _fileName = value.ToFullPath();
         }
 
         private readonly IList<Breakpoint> _breakpoints = new List<Breakpoint>(); 
@@ -69,7 +69,7 @@ namespace StoryTeller.Model
         [JsonProperty("breakpoints")]
         public Breakpoint[] Breakpoints
         {
-            get { return _breakpoints.ToArray(); }
+            get => _breakpoints.ToArray();
             set
             {
                 _breakpoints.Clear();

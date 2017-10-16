@@ -12,11 +12,9 @@ namespace ST.Client
     [Obsolete("This will be removed in favor of StorytellerInput")]
     public class ProjectInput
     {
-        private readonly EngineMode _mode;
 
-        public ProjectInput(EngineMode mode)
+        public ProjectInput()
         {
-            _mode = mode;
 
 #if NET46
             Path = Environment.CurrentDirectory;
@@ -30,9 +28,6 @@ namespace ST.Client
 
         [Description("Override the dotnet framework if multi-targeting")]
         public string FrameworkFlag { get; set; }
-
-        [Description("Specify a build target to force Storyteller to choose that profile. By default, ST will use 'Debug'")]
-        public string BuildFlag { get; set; }
 
         [Description("Storyteller test mode profile for systems like Serenity that use this")]
         public string ProfileFlag { get; set; }
@@ -81,7 +76,6 @@ namespace ST.Client
         [Description("Force Storyteller to use this culture in all value conversions")]
         public string CultureFlag { get; set; }
 
-        protected bool _disableAppDomainFileWatching = false;
 
         public ST.Client.EngineController BuildEngine()
         {
@@ -97,12 +91,6 @@ namespace ST.Client
 
             project.Framework = FrameworkFlag;
 
-
-            if (BuildFlag.IsNotEmpty())
-            {
-                project.BuildProfile = BuildFlag;
-            }
-
             project.Culture = CultureFlag;
 
 
@@ -112,8 +100,6 @@ namespace ST.Client
             }
 
             project.Profile = ProfileFlag;
-
-            project.Mode = _mode;
 
             return project;
         }

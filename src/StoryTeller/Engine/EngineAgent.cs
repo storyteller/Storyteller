@@ -72,13 +72,6 @@ namespace StoryTeller.Engine
 
             try
             {
-                if (project.Mode == EngineMode.ExportOnly)
-                {
-                    EventAggregator.SendMessage(_running.RecycledMessage);
-                    return;
-                }
-
-
                 _engine = buildUserInterfaceEngine();
 
 

@@ -10,11 +10,6 @@ using StoryTeller.Remotes;
 
 namespace StoryTeller
 {
-
-#if NET46
-    [Serializable]
-#endif
-    [Obsolete("Getting rid of this")]
     public class Project
     {
         public static int StartingPort = 2499;
@@ -25,16 +20,12 @@ namespace StoryTeller
 
 
 
-        public int TimeoutInSeconds { get; set; }
-        public string TracingStyle { get; set; }
         public string Profile { get; set; }
         public static Project CurrentProject { get; set; } = new Project();
         public int MaxRetries { get; set; }
         public string Culture { get; set; }
         
         public Dictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
-
-        public EngineMode Mode { get; set; } = EngineMode.Interactive;
 
         public StopConditions StopConditions = new StopConditions();
 
@@ -48,9 +39,6 @@ namespace StoryTeller
         public int Port { get; set; }
 
         public string ProjectPath { get; set; }
-        public string BuildProfile { get; set; }
         public string Framework { get; set; }
-
-
     }
 }
