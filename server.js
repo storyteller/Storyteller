@@ -9,7 +9,9 @@ var webDevServerAdddress = "http://localhost:3001"
 
 var defaultConfig = require('./webpack.config');
 
-var config = _.extend({}, defaultConfig);
+var config = _.extend({
+  devServer: {hot: true}
+}, defaultConfig);
 //include hot reload scripts
 config.entry = {
   "bundle": [
@@ -22,13 +24,19 @@ config.entry = {
 config.output.publicPath = webDevServerAdddress + config.output.publicPath;
 //include hot module replacement plugin
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
-//add react-hot loader to loader chain for jsx files
-var jsxLoader = _.find(config.module.loaders, function (entry) {
-  return /jsx/.test(entry.test.toString());
-});
 
-jsxLoader.loaders = ['react-hot-loader', jsxLoader.loader];
-delete jsxLoader.loader;
+//add react-hot loader to loader chain for jsx files
+//var jsxLoader = _.find(config.module.loaders, function (entry) {
+//  return /jsx/.test(entry.test.toString());
+//});
+
+//jsxLoader.loaders = ['react-hot-loader', jsxLoader.loader];
+//delete jsxLoader.loader;
+
+config.entry["bundle"].splice(0, 0, 'react-hot-loader/patch');
+
+console.log(JSON.stringify(config, null, 4));
+
 
 //jsxLoader.loader = 'react-hot!' + jsxLoader.loader;
 
