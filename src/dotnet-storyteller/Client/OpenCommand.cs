@@ -11,7 +11,6 @@ namespace ST.Client
         public OpenCommand()
         {
             Usage("Open the Storyteller client to the current project").Arguments();
-            Usage("Open the Storyteller client to the named project").Arguments(x => x.Path);
         }
 
         public override bool Execute(OpenInput input)

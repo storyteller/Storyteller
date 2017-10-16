@@ -30,7 +30,7 @@ namespace StoryTeller.Testing.ST
                 {
                     var input = new OpenInput
                     {
-                        Path = folder,
+                        PathFlag = folder,
                         FixturesFlag = fixtureFolder
                     };
 
