@@ -4,8 +4,10 @@ import Postal from 'postal';
 import { Button, Modal } from 'react-bootstrap';
 
 class DeleteLink extends React.Component {
-  getInitialState() {
-    return { showModal: false };
+  constructor(){
+    super();
+
+    this.state = { showModal: false };
   }
 
   close() {

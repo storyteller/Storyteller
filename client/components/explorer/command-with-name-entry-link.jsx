@@ -6,20 +6,23 @@ import { Modal, ModalTrigger, Button } from 'react-bootstrap';
 import $ from 'jquery';
 
 class CommandWithNameEntryLink extends React.Component {
+  constructor(props){
+    super(props);
+
+    const value = this.props.value;
+
+    this.state = {
+      showModal: false,
+      buttonDisabled: !(value && value.length > 0),
+      name: value
+    };
+  }
+
   componentDidUpdate(){
     if (this.state.showModal){
       const element = ReactDOM.findDOMNode(this);
       $('#modal-name').focus();
     }
-  }
-
-  getInitialState() {
-    const value = this.props.value;
-    return {
-        showModal: false,
-        buttonDisabled: !(value && value.length > 0),
-        name: value
-      };
   }
 
   close() {

@@ -17,7 +17,8 @@ module.exports = {
     "embed": ['./client/embed.js'],
     "topics": ['./client/topics.js'],
 	  "preview": ['./client/preview.js'],
-	  "reduxharness": ['./client/reduxharness.js']
+    "reduxharness": ['./client/reduxharness.js'],
+    "hotreload": ['./client/hotreload.js']
   },
   output: {
     path: __dirname + '/src/dotnet-storyteller',

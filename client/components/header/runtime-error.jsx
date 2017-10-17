@@ -3,6 +3,13 @@ import { Button, Modal } from 'react-bootstrap';
 import Postal from 'postal';
 
 class RuntimeError extends React.Component{
+  constructor(){
+    super();
+
+    this.state = { showModal: false, error: null };
+  }
+
+
   componentDidMount(){
     Postal.subscribe({
       channel: 'engine',
@@ -25,10 +32,6 @@ class RuntimeError extends React.Component{
         });
       }
     })
-  }
-
-  getInitialState() {
-    return { showModal: false, error: null };
   }
 
   close() {

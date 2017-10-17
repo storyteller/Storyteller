@@ -83,7 +83,7 @@ namespace ST.Client
         public static HtmlTag ScriptTag(bool devMode, string bundleName = "/bundle.js")
         {
 #if DEBUG
-            var bundleUrl = devMode ? "http://localhost:3001/client/public/javascript/bundle.js" : bundleName;
+            var bundleUrl = devMode ? "http://localhost:3000/client/public/javascript/bundle.js" : bundleName;
             return new HtmlTag("script").Attr("type", "text/javascript").Attr("src", bundleUrl);
 #else
             var bundleJS = typeof(HomeEndpoint).GetTypeInfo().Assembly
