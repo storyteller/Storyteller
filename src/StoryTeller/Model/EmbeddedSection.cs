@@ -76,6 +76,11 @@ namespace StoryTeller.Model
             {
                 fixture = overrides.Models[embeddedKey];
             }
+            
+            if (collection.IsEmpty())
+            {
+                collection = fixture.key;
+            }
         }
 
         public override string ToMissingCode(bool withinParagraph = false)
