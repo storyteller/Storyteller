@@ -80,7 +80,7 @@ module.exports = function startRouting(data){
     const spec = store.getState().get('specs').toList().toArray()[0];
 
     ReactDOM.render(
-      <Provider store={store}><ResultsView spec={spec} /></Provider>,
+      <Provider store={store}><div className="container"><ResultsView spec={spec} /></div></Provider>,
       document.getElementById('main'));
   }
   else {
