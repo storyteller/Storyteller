@@ -44,7 +44,7 @@ describe('stepRemoved', function(){
 	it('should remove the step from the data spec on apply', function(){
 		event.apply(spec);
 
-		expect(spec.find(newStep.id)).to.equal(undefined);
+		expect(spec.find(newStep.id)).to.be.falsey;
 	});
 
 	it('adds the original step back to the holder in the right position', function(){

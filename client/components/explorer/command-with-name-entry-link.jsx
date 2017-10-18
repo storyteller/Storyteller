@@ -5,26 +5,26 @@ import Postal from 'postal';
 import { Modal, ModalTrigger, Button } from 'react-bootstrap';
 import $ from 'jquery';
 
-class CommandWithNameEntryLink extends React.Component {
-  componentDidUpdate(){
+const CommandWithNameEntryLink = React.createClass({
+  componentDidUpdate: function(){
     if (this.state.showModal){
       const element = ReactDOM.findDOMNode(this);
       $('#modal-name').focus();
     }
-  }
+  },
 
-  getInitialState() {
+  getInitialState: function () {
     const value = this.props.value;
     return {
         showModal: false,
         buttonDisabled: !(value && value.length > 0),
         name: value
       };
-  }
+  },
 
   close() {
     this.setState({ showModal: false });
-  }
+  },
 
   handleToggle(e){
     this.setState({
@@ -34,11 +34,11 @@ class CommandWithNameEntryLink extends React.Component {
     if (e){
       e.preventDefault();
     }
-  }
+  },
 
   open() {
     this.setState({ showModal: true });
-  }
+  },
 
   render(){
     const onTextEntry = e => {
@@ -102,7 +102,8 @@ class CommandWithNameEntryLink extends React.Component {
       </a>
     );
   }
-}
+});
+
 
 
 module.exports = CommandWithNameEntryLink;

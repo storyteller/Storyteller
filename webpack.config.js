@@ -20,14 +20,14 @@ module.exports = {
 	  "reduxharness": ['./client/reduxharness.js']
   },
   output: {
-    path: __dirname + '/src/dotnet-storyteller',
+    path: __dirname + '/src/StorytellerRunner',
     filename: "[name].js",
     publicPath: '/client/public/javascript/',
     pathinfo: true
   },
   resolve: {
     // Allow to omit extensions when requiring these files
-    extensions: ['.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   plugins: plugins,
   module: {
@@ -35,7 +35,7 @@ module.exports = {
       { test: /\.css$/, loader: "style!css" },
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader?{"presets": ["es2015", "react"]}',
+        loader: 'babel?{"presets": ["es2015", "react"]}',
         exclude: /node_modules/,
       },
     ]

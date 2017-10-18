@@ -4,8 +4,13 @@ var Arg = require('./../../../lib/model/arg');
 var Postal = require('postal');
 
 
-module.exports = class TableCell extends React.Component {
-	render(){
+module.exports = React.createClass({
+
+	propTypes: {
+		cell: React.PropTypes.any.isRequired
+	},
+
+	render: function(){
 		if (this.props.cell.editor == 'display-only'){
 			var text = this.props.value || 'NULL';
 			return (<td>{text}</td>);
@@ -59,4 +64,4 @@ module.exports = class TableCell extends React.Component {
 				title={this.props.cell.description || this.props.cell.key}>{text}</td>
 		)
 	}
-}
+});

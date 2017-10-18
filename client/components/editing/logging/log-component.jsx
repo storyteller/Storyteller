@@ -1,11 +1,18 @@
 var React = require("react");
 
-module.exports = function({title, html}){
-	return (
-		<div>
-			<h3>{title}</h3>
-			<div dangerouslySetInnerHTML={{__html: html}}></div>
-			<hr />
-		</div>
-	);
-}
+// dangerouslySetInnerHTML={{__html: rawMarkup}}
+
+
+var LogComponent = React.createClass({
+	render: function(){
+		return (
+			<div>
+				<h3>{this.props.title}</h3>
+				<div dangerouslySetInnerHTML={{__html: this.props.html}}></div>
+				<hr />
+			</div>
+		);
+	}
+});
+
+module.exports = LogComponent;

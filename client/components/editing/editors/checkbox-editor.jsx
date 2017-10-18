@@ -3,8 +3,8 @@ var ReactDOM = require('react-dom');
 var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
-module.exports = class CheckboxEditor extends React.Component{
-	getInitialState() {
+module.exports = React.createClass({
+	getInitialState: function() {
 		var value = this.props.arg.value;
 		if (value == null || value == undefined){
 			value = false;
@@ -20,9 +20,9 @@ module.exports = class CheckboxEditor extends React.Component{
 
 
 		return {value: value};
-	}
+	},
 
-	componentWillReceiveProps(props){
+	componentWillReceiveProps: function(props){
 		if (!this.isMounted()) return;
 
 		var value = props.arg.value;
@@ -31,27 +31,27 @@ module.exports = class CheckboxEditor extends React.Component{
 		}
 
 		this.setState({value: value});
-	}
+	},
 
 
-	toggle(){
+	toggle: function(){
 		var value = ReactDOM.findDOMNode(this).checked;
 		this.setState({value: value});
 		this.publishChange(value);
-	}
+	},
 
-	publishChange(value){
+	publishChange: function(value){
 		var arg = this.props.arg;
 
 		var cellChanged = changes.cellValue(arg.id, arg.cell.key, value);
 
-	}
+	},
 
-	componentWillUnmount(){
+	componentWillUnmount: function(){
 		this.subscription.unsubscribe();
-	}
+	},
 
-	componentDidMount(){
+	componentDidMount: function(){
 		var element = ReactDOM.findDOMNode(this);
 		element.focus();
 
@@ -69,9 +69,9 @@ module.exports = class CheckboxEditor extends React.Component{
 				}
 			}
 		});
-	}
+	},
 
-	render(){
+	render: function(){
 		var className = 'cell active-cell mousetrap';
 		if (this.props.classes){
 			className = className + " " + this.props.classes;
@@ -102,4 +102,4 @@ module.exports = class CheckboxEditor extends React.Component{
 				data-cell={this.props.arg.cell.key}/>
 		);
 	}
-}
+});

@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
-class SpecTitleEditor extends React.Component{
+var SpecTitleEditor = React.createClass({
 	componentDidMount(){
 		var element = ReactDOM.findDOMNode(this);
 		element.focus();
@@ -11,7 +11,7 @@ class SpecTitleEditor extends React.Component{
 		if (this.props.title){
 			element.setSelectionRange(0, this.props.title.length);
 		}
-	}
+	},
 
 	render(){
 		var size = this.props.title.length;
@@ -20,14 +20,14 @@ class SpecTitleEditor extends React.Component{
 			<input onBlur={this.props.exit} onChange={this.props.handleChange} type="text" size={size} value={this.props.title} />
 		);
 	}
-}
+});
 
-class SpecTitle extends React.Component{
+var SpecTitle = React.createClass({
 	getInitialState(){
 		return {
 			editing: false
 		}
-	}
+	},
 
 	handleChange(event) {
 		if (!event){
@@ -38,11 +38,11 @@ class SpecTitle extends React.Component{
 		}
 
 		this.publishChange(title);
-	}
+	},	
 
 	publishChange(value){
 		changes.rename(value);
-	}
+	},
 
 
 	render(){
@@ -67,6 +67,6 @@ class SpecTitle extends React.Component{
 
 		return (<span onClick={edit} title="Click to edit the Specification title">{this.props.spec.title}</span>);
 	}
-}
+});
 
 module.exports = SpecTitle;

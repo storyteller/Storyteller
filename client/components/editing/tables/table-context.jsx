@@ -5,27 +5,29 @@ var changes = require('./../../../lib/model/change-commands');
 var uuid = require('node-uuid');
 
 
-function OptionalColumn({active, section, cell, header}){
-	var style = '';
-	if (active){
-		style = 'info';
+var OptionalColumn = React.createClass({
+	render(){
+		var style = '';
+		if (this.props.active){
+			style = 'info';
+		}
+
+		var onClick = e => {
+			changes.toggleColumn(this.props.section, this.props.cell);
+
+			e.stopPropagation();
+		}
+
+		var onChange = e => {};
+
+		return (
+			<ListGroupItem key={this.props.cell.key} onClick={onClick} disabled={!this.props.active}>
+				<input onClick={onClick} onChange={onChange} type="checkbox" checked={this.props.active}  />
+				<span style={{marginLeft: '5px'}}>{this.props.header}</span>
+			</ListGroupItem>
+		);
 	}
-
-	var onClick = e => {
-		changes.toggleColumn(section, cell);
-
-		e.stopPropagation();
-	}
-
-	var onChange = e => {};
-
-	return (
-		<ListGroupItem key={cell.key} onClick={onClick} disabled={!active}>
-			<input onClick={onClick} onChange={onChange} type="checkbox" checked={active}  />
-			<span style={{marginLeft: '5px'}}>{header}</span>
-		</ListGroupItem>
-	);
-}
+});
 
 class TableContext extends React.Component{
     render(){

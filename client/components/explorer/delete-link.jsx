@@ -3,14 +3,14 @@ import Postal from 'postal';
 
 import { Button, Modal } from 'react-bootstrap';
 
-class DeleteLink extends React.Component {
+module.exports = React.createClass({
   getInitialState() {
     return { showModal: false };
-  }
+  },
 
   close() {
     this.setState({ showModal: false });
-  }
+  },
 
   handleToggle(e){
     this.setState({
@@ -20,11 +20,11 @@ class DeleteLink extends React.Component {
     if (e){
       e.preventDefault();
     }
-  }
+  },
 
   open() {
     this.setState({ showModal: true });
-  }
+  },
 
   render(){
     const deleteSpec = e => {
@@ -56,6 +56,4 @@ class DeleteLink extends React.Component {
       </a>
     );
   }
-}
-
-module.exports = DeleteLink;
+});

@@ -5,12 +5,12 @@ import { Alert } from 'react-bootstrap';
 
 const Running = Icons['running'];
 
-class PersistedAlert extends React.Component {
+const PersistedAlert = React.createClass({
   getInitialState() {
     return {
       alertVisible: true
     };
-  }
+  },
 
   render() {
     if (this.state.alertVisible) {
@@ -22,16 +22,16 @@ class PersistedAlert extends React.Component {
     }
 
     return null;
-  }
+  },
 
   handleAlertDismiss() {
     this.setState({alertVisible: false});
-  }
+  },
 
   handleAlertShow() {
     this.setState({alertVisible: true});
   }
-}
+});
 
 
 class Persisting extends React.Component {

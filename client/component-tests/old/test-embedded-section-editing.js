@@ -38,7 +38,7 @@ describe('Editing a Specification Integration tests', function(){
 
 			driver.assertElementDoesNotExist('#' + sectionId);
 
-			expect(spec.find(stepId)).to.equal(undefined);
+			expect(spec.find(stepId)).to.be.falsey;
 		});
 
 
@@ -46,12 +46,12 @@ describe('Editing a Specification Integration tests', function(){
 		it('can delete a step from within the embedded section', function(){
 			var stepId = idFor('0.5.steps.0');
 			driver.assertElementExists('#' + stepId);
-			expect(spec.find(stepId)).to.not.equal(undefined);
+			expect(spec.find(stepId)).to.not.be.falsey;
 
 			driver.click('#' + stepId + ' .delete');
 
 			driver.assertElementDoesNotExist('#' + stepId);
-			expect(spec.find(stepId)).to.equal(undefined);
+			expect(spec.find(stepId)).to.be.falsey;
 		});
 
 		it('can edit a cell from within an embedded section', function(){

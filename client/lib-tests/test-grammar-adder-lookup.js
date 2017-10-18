@@ -72,12 +72,6 @@ describe('Grammar Adder Lookup', function(){
 
 	it('can create a new step when an option is selected', function(){
 		var second = lookup.options[1];
-		
-		// little sleight of hand here, doesn't have the grammar or holder
-		// until later
-
-		second.holder = section;
-		second.grammar = section.grammars()[1];
 
 		second.select();
 

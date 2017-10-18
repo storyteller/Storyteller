@@ -4,24 +4,24 @@ import { Button, Modal, ModalTrigger } from 'react-bootstrap';
 
 import ErrorBox from './../lines/error-box';
 
-class ErrorCell extends React.Component {
+const ErrorCell = React.createClass({
   getInitialState() {
     return { showModal: false };
-  }
+  },
 
   close() {
     this.setState({ showModal: false });
-  }
+  },
 
   handleToggle(){
     this.setState({
       showModal: !this.state.showModal
     });
-  }
+  },
 
   open() {
     this.setState({ showModal: true });
-  }
+  },
 
   render(){
     const title = "Cell Error in '" + this.props.cell.key + "'";
@@ -42,7 +42,7 @@ class ErrorCell extends React.Component {
       </Button>
     );
   }
-}
+});
 
 
 module.exports = ErrorCell;

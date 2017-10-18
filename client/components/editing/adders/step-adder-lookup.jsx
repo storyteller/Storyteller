@@ -5,7 +5,7 @@ import GrammarLookup from './../../../lib/presentation/grammar-adder-lookup';
 import $ from 'jquery';
 import scrollIntoView from 'scroll-into-view';
 
-class StepAdderLookup extends Range.Component {
+module.exports = React.createClass({
   componentDidMount(){
     const element = ReactDOM.findDOMNode(this);
     scrollIntoView(element);
@@ -42,7 +42,7 @@ class StepAdderLookup extends Range.Component {
     });
 
     input.focus();
-  }
+  },
 
   render(){
     let clazz = '';
@@ -56,6 +56,4 @@ class StepAdderLookup extends Range.Component {
       </div>
     )
   }
-}
-
-module.exports = StepAdderLookup;
+});

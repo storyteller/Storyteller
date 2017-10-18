@@ -6,7 +6,7 @@ var HeaderRow = require('./header-row');
 var {Button} = require('react-bootstrap');
 var Postal = require('postal');
 
-class TableRowAdder extends React.Component{
+var TableRowAdder = React.createClass({
 	componentDidMount(){
 		this.subscription = Postal.subscribe({
 			channel: 'editor',
@@ -19,11 +19,11 @@ class TableRowAdder extends React.Component{
 				}
 			}
 		});
-	}
+	},
 
 	componentWillUnmount(){
 		this.subscription.unsubscribe();
-	}
+	},
 
 	render(){
 		var tableClass = "add-table-step";
@@ -42,64 +42,71 @@ class TableRowAdder extends React.Component{
 				onClick={this.props.addOnClick} >Add Row</Button>
 				);
 	}
-}
+});
 
-function TableEditor({cells, addStep, section, step, title, rows, adder}){
-	var tableWidth = cells.length + 1;
+var TableEditor = React.createClass({
+	propTypes: {
+		step: React.PropTypes.object.isRequired
+	},
 	
-	var addOnClick = e => {
-		addStep();
+	render: function(){
+		var tableWidth = this.props.cells.length + 1;
 
-		e.preventDefault();
-	}
+		var addOnClick = e => {
+			this.props.addStep();
 
-	var headerClass = "";
-	var onHeaderClick = () => {};
-	if (section.active == true){
-		headerClass += ' bg-primary';
-	}
-	else {
-		onHeaderClick = e => {
-			Postal.publish({
-				channel: 'editor',
-				topic: 'select-holder',
-				data: {holder: section.id}
-			});
-			
-			e.stopPropagation();
+			e.preventDefault();
 		}
+
+		var headerClass = "";
+		var onHeaderClick = () => {};
+        if (this.props.section.active == true){
+			headerClass += ' bg-primary';
+		}
+        else {
+            onHeaderClick = e => {
+                console.log('YOU CLICKED THE HEADER');
+                Postal.publish({
+                    channel: 'editor',
+                    topic: 'select-holder',
+                    data: {holder: this.props.section.id}
+                });
+                
+                e.stopPropagation();
+            }
+        }
+
+		return (
+			
+
+			<table className="table table-bordered table-hover" id={this.props.section.id}>
+				<thead>
+					<tr>
+						<th className={headerClass} colSpan={tableWidth}>
+							<div onClick={onHeaderClick}>
+                            <DeleteGlyph step={this.props.step}/>
+							{this.props.title}
+							<ReorderGlyph step={this.props.step}/>
+                            </div>
+						</th>
+					</tr>
+					<HeaderRow cells={this.props.cells}/>
+				</thead>
+				<tbody>
+					{this.props.rows}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colSpan={tableWidth}>
+							<TableRowAdder adder={this.props.adder} addOnClick={addOnClick} />
+						</td>
+					</tr>
+				</tfoot>
+
+			</table>
+
+		);
 	}
-
-	return (
-		
-
-		<table className="table table-bordered table-hover" id={section.id}>
-			<thead>
-				<tr>
-					<th className={headerClass} colSpan={tableWidth}>
-						<div onClick={onHeaderClick}>
-						<DeleteGlyph step={step}/>
-						{title}
-						<ReorderGlyph step={step}/>
-						</div>
-					</th>
-				</tr>
-				<HeaderRow cells={cells}/>
-			</thead>
-			<tbody>
-				{rows}
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colSpan={tableWidth}>
-						<TableRowAdder adder={adder} addOnClick={addOnClick} />
-					</td>
-				</tr>
-			</tfoot>
-
-		</table>
-
-	);
-}
+});
 
 module.exports = TableEditor;

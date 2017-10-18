@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Postal from 'postal';
 
-class RuntimeError extends React.Component{
-  componentDidMount(){
+const RuntimeError = React.createClass({
+  componentDidMount: function(){
     Postal.subscribe({
       channel: 'engine',
       topic: 'runtime-error',
@@ -25,25 +25,25 @@ class RuntimeError extends React.Component{
         });
       }
     })
-  }
+  },
 
   getInitialState() {
     return { showModal: false, error: null };
-  }
+  },
 
   close() {
     this.setState({ showModal: false });
-  }
+  },
 
   handleToggle(){
     this.setState({
       showModal: !this.state.showModal
     });
-  }
+  },
 
   open() {
     this.setState({ showModal: true });
-  }
+  },
 
   render(){
     if (this.state.error == null){
@@ -68,7 +68,7 @@ class RuntimeError extends React.Component{
       </Button>
     );
   }
-}
+});
 
 
 

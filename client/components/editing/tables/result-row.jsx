@@ -51,73 +51,75 @@ function ResultCell(props){
     )
 }
 
-function ResultRow({step, cells, dispatch}){
-	var result = step.getResult();
-	if (step.position){
-		result = step.getResult(step.position);
-	}
 
-	var i = 1;
-	var cells = cells.map(cell => {
-		var arg = step.args.find(cell.key);
-		if (!arg){
-			arg = new Arg(cell, {cells:{}}, step.id);
-			arg.result = result;
+var ResultRow = React.createClass({
+	render: function(){
+		var result = this.props.step.getResult();
+		if (this.props.step.position){
+			result = this.props.step.getResult(this.props.step.position);
 		}
 
+        var i = 1;
+		var cells = this.props.cells.map(cell => {
+			var arg = this.props.step.args.find(cell.key);
+			if (!arg){
+				arg = new Arg(cell, {cells:{}}, this.props.step.id);
+                arg.result = result;
+			}
+
+
+			return (
+				<ResultCell key={i++} nowrap arg={arg} actual={result.actual}/>
+			);
+		});
+
+		if (result.status == 'ok'){
+			var arg = this.props.step.args.find(this.props.cells[0].key);
+			if (!arg){
+				arg = new Arg(this.props.cells[0], {cells:{}}, this.props.step.id);
+			}
+            
+			cells[0] = (
+				<ResultCell key={0} arg={arg} checked={true} />
+			);
+		}
+
+		var clazz = '';
+		if (result.status == 'success'){
+			clazz = 'success';
+		}
+
+		if (result.status == 'failed'){
+			clazz = 'danger';
+		}
+
+		if (result.status == 'error'){
+			clazz = 'warning';
+		}
+
+		var stepthrough = null;
+		if (this.props.isStepthrough){
+			if (this.props.spec.isActiveStep(this.props.step.id, null)){
+				stepthrough = (<td><StepthroughControls {...this.props}/></td>);
+				clazz = 'bg-primary';
+			}
+			else {
+				stepthrough = (
+					<td>
+						<Breakpoint 
+							spec={this.props.spec} 
+							id={this.props.step.id}
+							position={null}
+							dispatch={this.props.dispatch}
+							/>
+					</td>);
+			}
+		}
 
 		return (
-			<ResultCell key={i++} nowrap arg={arg} actual={result.actual}/>
-		);
-	});
-
-	if (result.status == 'ok'){
-		var arg = step.args.find(cells[0].key);
-		if (!arg){
-			arg = new Arg(cells[0], {cells:{}}, step.id);
-		}
-		
-		cells[0] = (
-			<ResultCell key={0} arg={arg} checked={true} />
+			<tr className={clazz}>{stepthrough}{cells}</tr>
 		);
 	}
-
-	var clazz = '';
-	if (result.status == 'success'){
-		clazz = 'success';
-	}
-
-	if (result.status == 'failed'){
-		clazz = 'danger';
-	}
-
-	if (result.status == 'error'){
-		clazz = 'warning';
-	}
-
-	var stepthrough = null;
-	if (isStepthrough){
-		if (this.props.spec.isActiveStep(step.id, null)){
-			stepthrough = (<td><StepthroughControls step={step} cells={cells}/></td>);
-			clazz = 'bg-primary';
-		}
-		else {
-			stepthrough = (
-				<td>
-					<Breakpoint 
-						spec={spec} 
-						id={step.id}
-						position={null}
-						dispatch={dispatch}
-						/>
-				</td>);
-		}
-	}
-
-	return (
-		<tr className={clazz}>{stepthrough}{cells}</tr>
-	);
-}
-
+});
 
 module.exports = ResultRow;
