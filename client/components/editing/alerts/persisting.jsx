@@ -6,11 +6,13 @@ import { Alert } from 'react-bootstrap';
 const Running = Icons['running'];
 
 class PersistedAlert extends React.Component {
-  getInitialState() {
-    return {
+  constructor(){
+    super();
+    this.state = {
       alertVisible: true
     };
   }
+
 
   render() {
     if (this.state.alertVisible) {

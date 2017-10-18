@@ -43,7 +43,7 @@ function ContextualPane(props){
             return (
               <Col key="left" xs={4} md={4}>
                 <AutoAffix viewportOffsetTop={15} container={props.editor}>
-                <Tabs defaultActiveKey={0}>
+                <Tabs id="results-tab" defaultActiveKey={0}>
                   <Tab eventKey={0} title={title}>
                     <div className="contextual-control">
                         {contextualControl}

@@ -8,12 +8,14 @@ const FolderOpen = Icons['folder-open'];
 const FolderClosed = Icons['folder-closed'];
 
 class ActiveOutlineItem extends React.Component{
-  getInitialState() {
-    return {
+  constructor(){
+    super();
+    this.state = {
       collapsed: false,
       collapsedIcon: <FolderOpen />
     };
   }
+
 
   collapse(e) {
     this.setState({
@@ -38,12 +40,14 @@ class ActiveOutlineItem extends React.Component{
 }
 
 class OutlineItem extends React.Component{
-  getInitialState() {
-    return {
+  constructor(){
+    super();
+    this.state = {
       collapsed: false,
       collapsedIcon: <FolderOpen />
     };
   }
+
 
   collapse(e) {
     this.setState({

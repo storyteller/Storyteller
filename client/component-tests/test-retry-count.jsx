@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var expect = require('chai').expect;
 var Postal = require('postal');
 var $ = require('jquery');
@@ -23,7 +24,11 @@ function findPublishedMessage(topic){
 	});
 }
 
-
+class Wrapper extends React.Component {
+	render() { 
+	  return this.props.children
+	}
+  }
 
 
 describe('RetryCount', () => {
@@ -43,9 +48,9 @@ describe('RetryCount', () => {
 		    }
 		});
 
-		var instance = TestUtils.renderIntoDocument(<RetryCount count={1} />);
+		var instance = TestUtils.renderIntoDocument(<Wrapper><RetryCount count={1} /></Wrapper>);
+		div = ReactDOM.findDOMNode(instance);
 
-		div = instance.getDOMNode();
 		textbox = $('input', div).get(0);
 	});
 
