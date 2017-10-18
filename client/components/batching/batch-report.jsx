@@ -12,7 +12,7 @@ import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 
 function getSpec(state, ownProps){
-  return {spec: state.get('specs').get(ownProps.match.params.id)};
+  return {spec: state.get('specs').get(ownProps.match.params.id), single: false};
 }
 
 const SpecResults = connect(getSpec)(ResultsView);
@@ -80,7 +80,11 @@ module.exports = function startRouting(data){
     const spec = store.getState().get('specs').toList().toArray()[0];
 
     ReactDOM.render(
-      <Provider store={store}><ResultsView spec={spec} /></Provider>,
+      <Provider store={store}>
+        <div className="container" style={{paddingTop: '50px'}}>
+          <ResultsView spec={spec} single={true}/>
+        </div>
+      </Provider>,
       document.getElementById('main'));
   }
   else {
