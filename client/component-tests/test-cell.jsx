@@ -7,8 +7,6 @@ var Arg = require('../lib/model/arg');
 var $ = require('jquery');
 var Postal = require('postal');
 
-var TestUtils = require('react-dom/test-utils');
-
 var listener = {
 	events: [],
 
@@ -42,12 +40,6 @@ function singleEventReceivedShouldBe(expected){
 	expect(listener.events[0]).to.deep.equal(expected);
 }
 
-class Wrapper extends React.Component {
-	render() { 
-	  return this.props.children
-	}
-  }
-
 describe('Rendering a Cell', function(){
 	var props = null;
 	var instance = null;
@@ -59,13 +51,9 @@ describe('Rendering a Cell', function(){
 
 	function element(){
 		instance = TestUtils.renderIntoDocument(
-			<Wrapper>
-			<Cell {...props} />
-			</Wrapper>
+			<Cell {... props} />
 		);
-		var element = ReactDOM.findDOMNode(instance);
-
-		return element;
+		return ReactDOM.findDOMNode(instance);
 	}
 
 	function elementShouldHaveClass(clazz){
@@ -166,7 +154,6 @@ describe('Rendering a Cell', function(){
 			props.value = 'Foo!';
 
 			var elem = element();
-
 			$(elem).val('Bar!');
 			TestUtils.Simulate.change(elem);
 
@@ -225,11 +212,9 @@ describe('Rendering a Cell', function(){
 			props.active = true;
 		});
 
-		it.only('should render a checkbox when the cell editor is "boolean" and value is true', function(){
+		it('should render a checkbox when the cell editor is "boolean" and value is true', function(){
 			props.cell.editor = 'boolean';
 			props.value = true;
-
-			console.log($(element().parentNode).html());
 
 			elementTypeShouldBe('input');
 			elementShouldHaveAttribute('type', 'checkbox');

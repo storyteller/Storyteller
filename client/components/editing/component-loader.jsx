@@ -127,7 +127,7 @@ results.error = () => {
 
 results.tabbedArea = props => {
   return (
-    <Tabs id="result-tab" key="result-tabs" defaultActiveKey={0} {...props}>
+    <Tabs key="result-tabs" defaultActiveKey={0} {...props}>
       {props.children}
     </Tabs>
   );

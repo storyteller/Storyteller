@@ -51,14 +51,14 @@ function ResultCell(props){
     )
 }
 
-function ResultRow({step, cells, dispatch, isStepthrough}){
+function ResultRow({step, cells, dispatch}){
 	var result = step.getResult();
 	if (step.position){
 		result = step.getResult(step.position);
 	}
 
 	var i = 1;
-	var cellComponents = cells.map(cell => {
+	var cells = cells.map(cell => {
 		var arg = step.args.find(cell.key);
 		if (!arg){
 			arg = new Arg(cell, {cells:{}}, step.id);
@@ -77,7 +77,7 @@ function ResultRow({step, cells, dispatch, isStepthrough}){
 			arg = new Arg(cells[0], {cells:{}}, step.id);
 		}
 		
-		cellComponents[0] = (
+		cells[0] = (
 			<ResultCell key={0} arg={arg} checked={true} />
 		);
 	}
@@ -115,7 +115,7 @@ function ResultRow({step, cells, dispatch, isStepthrough}){
 	}
 
 	return (
-		<tr className={clazz}>{stepthrough}{cellComponents}</tr>
+		<tr className={clazz}>{stepthrough}{cells}</tr>
 	);
 }
 

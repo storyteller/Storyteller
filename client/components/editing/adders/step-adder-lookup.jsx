@@ -5,7 +5,7 @@ import GrammarLookup from './../../../lib/presentation/grammar-adder-lookup';
 import $ from 'jquery';
 import scrollIntoView from 'scroll-into-view';
 
-class StepAdderLookup extends React.Component {
+class StepAdderLookup extends Range.Component {
   componentDidMount(){
     const element = ReactDOM.findDOMNode(this);
     scrollIntoView(element);

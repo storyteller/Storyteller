@@ -17,9 +17,8 @@ function AutoGrowTextArea(textField)
 }
 
 module.exports = class BigText extends React.Component{
-	constructor(){
-		super();
-		this.state = {value: this.props.arg.value};
+	getInitialState() {
+		return {value: this.props.arg.value};
 	}
 
 	handleChange(event) {

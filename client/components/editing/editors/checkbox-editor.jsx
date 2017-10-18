@@ -4,11 +4,8 @@ var changes = require('./../../../lib/model/change-commands');
 var Postal = require('postal');
 
 module.exports = class CheckboxEditor extends React.Component{
-	constructor(props){
-		super(props);
-
-		var value = props.arg.value;
-		
+	getInitialState() {
+		var value = this.props.arg.value;
 		if (value == null || value == undefined){
 			value = false;
 		}
@@ -21,23 +18,15 @@ module.exports = class CheckboxEditor extends React.Component{
 			value = false;
 		}
 
-		this.state = {value: value};
+
+		return {value: value};
 	}
-	
+
 	componentWillReceiveProps(props){
 		if (!this.isMounted()) return;
 
 		var value = props.arg.value;
-		
 		if (value == null || value == undefined){
-			value = false;
-		}
-
-		if (value == "True" || value == "true"){
-			value = true;
-		}
-
-		if (value == "False" || value == "false"){
 			value = false;
 		}
 

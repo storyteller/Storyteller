@@ -43,12 +43,6 @@ function Help(props){
 
 
 class HelpButton extends React.Component {
-  constructor(){
-    super();
-
-    this.state = { showModal: false };
-  }
-
   componentDidMount(){
     Postal.subscribe({
       channel: 'explorer',
@@ -59,6 +53,10 @@ class HelpButton extends React.Component {
         }
       }
     })
+  }
+
+  getInitialState() {
+    return { showModal: false };
   }
 
   close() {

@@ -42,7 +42,7 @@ const Header = (props) => {
         <div>
             <Navbar inverse={true} id="top-nav">
                 <Nav>
-                    <NavItem href="#/">Storyteller 5</NavItem>
+                    <a className="navbar-brand" href="#/">Storyteller 4</a>
 
                     <NavItem id="project-title" eventKey="4" href="#/">{name}</NavItem>
                 </Nav>

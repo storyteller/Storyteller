@@ -23,9 +23,8 @@ class SpecTitleEditor extends React.Component{
 }
 
 class SpecTitle extends React.Component{
-	constructor(){
-		super();
-		this.state = {
+	getInitialState(){
+		return {
 			editing: false
 		}
 	}

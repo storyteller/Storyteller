@@ -7,17 +7,17 @@ import { Grid, Row, Alert } from 'react-bootstrap';
 import ResultsView from './results-view';
 import SummaryTable from './../results/summary-table';
 
-import {HashRouter as Router, Route, Link, RouteHandler} from 'react-router-dom';
+import { Router, Route, IndexRoute, Link, RouteHandler, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 
 function getSpec(state, ownProps){
-  return {spec: state.get('specs').get(ownProps.match.params.id), single: false};
+  return {spec: state.get('specs').get(ownProps.params.id)};
 }
 
 const SpecResults = connect(getSpec)(ResultsView);
 
-function FullReport(props){
+function BatchReport(props){
   if (props.specs.length == 1){
     return (<ResultsView spec={props.specs[0]} />);
   }
@@ -64,7 +64,7 @@ function getDispatch(dispatch){
   return {dispatch: dispatch};
 }
 
-const Summary = connect(getSpecs, getDispatch)(FullReport);
+const Summary = connect(getSpecs, getDispatch)(BatchReport);
 
 
 module.exports = function startRouting(data){
@@ -80,24 +80,24 @@ module.exports = function startRouting(data){
     const spec = store.getState().get('specs').toList().toArray()[0];
 
     ReactDOM.render(
-      <Provider store={store}>
-        <div className="container" style={{paddingTop: '50px'}}>
-          <ResultsView spec={spec} single={true}/>
-        </div>
-      </Provider>,
+      <Provider store={store}><ResultsView spec={spec} /></Provider>,
       document.getElementById('main'));
   }
   else {
-
     const screen = (
       <Provider store={store}>
-        <Router>
-          <div className="container-fluid">
-              <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
-              <Route name="home" exact path="/" component={Summary}/>
-          </div>
+      <div>
+        <div className="container">
 
+        <Router>
+          <Route name="app" path="/" >
+            <Route name="spec-results" path="/spec/results/:id" component={SpecResults} />
+            <IndexRoute component={Summary}/>
+          </Route>
         </Router>
+
+        </div>
+      </div>
       </Provider>
     );
 

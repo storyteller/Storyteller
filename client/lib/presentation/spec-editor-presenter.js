@@ -1,4 +1,4 @@
-import createHistory from 'history/createBrowserHistory';
+var { createHistory } = require('history');
 var Broadcaster = require('./../broadcaster');
 var Postal = require('postal');
 var changes = require('./../model/change-commands');
@@ -49,7 +49,10 @@ function setLocation(location){
     }
 }
 
-
+var history = createHistory();
+history.listen(location => {
+    setLocation(location);
+});
 
 function subscribe(topic, callback, channel = 'editor'){
     Postal.subscribe({

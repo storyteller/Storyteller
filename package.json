@@ -51,7 +51,6 @@
     "chai": "^4.1.2",
     "eslint": "^4.8.0",
     "express": "^4.16.2",
-    "fixed-data-table-2": "^0.8.1",
     "fs-extra": "^4.0.2",
     "growl": "^1.10.3",
     "jsx-loader": "^0.13.2",
@@ -68,13 +67,13 @@
     "phantomjs": "^2.1.7",
     "react-addons-test-utils": "^15.6.2",
     "react-hot-loader": "^3.0.0",
-    "react-router-dom": "^4.2.2",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1",
     "yargs": "^9.0.1"
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "fixed-data-table": "^0.6.4",
     "fuse.js": "^3.2.0",
     "history": "^4.7.2",
     "immutable": "^3.8.2",

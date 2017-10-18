@@ -5,11 +5,10 @@ var Postal = require('postal');
 
 
 module.exports = class SelectEditor extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = {value: props.arg.value};
+	getInitialState() {
+		return {value: this.props.arg.value};
 	}
-	
+
 	componentWillReceiveProps(props){
 		if (!this.isMounted()) return;
 		this.setState({value: props.arg.value});
