@@ -20,7 +20,7 @@ module.exports = {
 	  "reduxharness": ['./client/reduxharness.js']
   },
   output: {
-    path: __dirname + '/src/StorytellerRunner',
+    path: __dirname + '/src/dotnet-storyteller',
     filename: "[name].js",
     publicPath: '/client/public/javascript/',
     pathinfo: true
