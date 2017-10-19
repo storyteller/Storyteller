@@ -87,7 +87,7 @@ namespace ST.Client
             return new HtmlTag("script").Attr("type", "text/javascript").Attr("src", bundleUrl);
 #else
             var bundleJS = typeof(HomeEndpoint).GetTypeInfo().Assembly
-                .GetManifestResourceStream("StorytellerRunner.bundle.js").ReadAllText();
+                .GetManifestResourceStream("dotnet-storyteller.bundle.js").ReadAllText();
 
             return new HtmlTag("script").Attr("type", "text/javascript").Text(bundleJS).Encoded(false);
 #endif
