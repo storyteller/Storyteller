@@ -40,7 +40,7 @@ By default, the return value of an assertion sentence grammar is `returnValue`, 
 
 Any assertion sentence grammar can be turned into a tabular decision tree by decorating the method with an `[ExposeAsTable("the title")]` attribute like this example below: 
 
-<[sample:sentence-with-output-parameters]>
+<[sample:decision-tree-with-multiple-outputs]>
 
 See <[linkto:documentation/engine/grammars/tables]> for more information.
 
