@@ -75,7 +75,7 @@ task :pack do
 	sh "dotnet pack src/Storyteller.Redux -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.RDBMS -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.TestRail -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
-	sh "dotnet pack src/dotnet-storyteller -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
+	sh "dotnet pack src/dotnet-storyteller -o ./../../artifacts --configuration Release"
 	sh "dotnet pack src/dotnet-stdocs -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 end
 
@@ -112,7 +112,7 @@ task :prepare_docs => [:compile] do
 	sh "dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- run --dump documentation/content/samples.specs.json --path src/Samples"
 
 	sh 'dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
-	sh 'dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- dump-usages "dotnet run --" "documentation/content/dotnet agent.usage.xml"'
+	sh 'dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- dump-usages "dotnet run --" "documentation/content/agent.usage.xml"'
 	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
