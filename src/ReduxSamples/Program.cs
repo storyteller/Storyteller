@@ -29,6 +29,8 @@ namespace ReduxSamples
     {
         protected override void configureCellHandling(CellHandling handling)
         {
+            // The code below is just to generate the static file I'm 
+            // using to host the reducer + websockets code
             var directory = AppContext.BaseDirectory;
             while (Path.GetFileName(directory) != "ReduxSamples")
             {
