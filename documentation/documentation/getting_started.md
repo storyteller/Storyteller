@@ -15,14 +15,53 @@ This document describes how to install and intialize your Storyteller specficati
 * <[linkto:documentation/ui]>
 
 If you prefer to just see working code, take a look at the [Storyteller Quickstart repository](https://github.com/storyteller/quickstarts) to see minimal
-Storyteller setups for projects using the [dotnet CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/) or .Net 4.6 projects using the classic *.csproj file format.
+Storyteller setups for projects using Netstandard2 applications with the [dotnet CLI](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/) or .Net 4.6 projects using the classic *.csproj file format.
+
+You can find Storyteller 5 used in the [Jasper open source project](http://github.com/jasperfx/jasper).
 
 You can also find Storyteller 4 used in these open source projects:
 
 * [Marten](https://github.com/JasperFx/marten)
 * [Alba](https://github.com/JasperFx/alba)
 
-In all cases, Storyteller consists of two logical parts:
+
+## Storyteller 5.0
+
+For Netstandard 2 projects using Visual Studio.Net 2017 and the dotnet cli, we strongly recommend using Storyteller 5.0.
+
+To get started on a new Storyteller 5.0 specification project, this is the minimal csproj file with the correct references
+and the `dotnet storyteller` command line setup. Just save exactly this text as `MYPROJECT.csproj` where "MYPROJECT" is the name
+you want to use for your new Storyteller specification project.
+
+
+```
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>EXE</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-storyteller" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StoryTeller" Version="5.0.0" />
+  </ItemGroup>
+</Project>
+```
+
+See the [updated quickstart project for dotnet cli usage](https://github.com/storyteller/quickstarts/tree/master/dotnet-cli) as well.
+
+From the command line in your project directory, you now have two commands (after running `dotnet restore` at least once):
+
+1. `dotnet run` -- runs all the specifications in the console. This is what you'll
+   use in your continuous integration builds. See <[linkto:documentation/using/ci]> for more information on all the sub commands.
+1. `dotnet storyteller` -- opens the Storyteller specification editor application for your project. See <[linkto:documentation/ui]> for more information
+
+
+
+## Storyteller 3 & 4
+
+In Storyteller 3.0 and 4.0, it consists of two logical parts:
 
 1. The actual Storyteller library you need to reference in order to write specifications
 1. A command line tool that runs Storyteller specifications and provides the interactive specification website tool 

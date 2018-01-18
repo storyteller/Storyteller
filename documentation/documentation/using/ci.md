@@ -3,6 +3,26 @@
 
 <div class="alert alert-info" role="alert"><strong>Note!</strong> The batch running of specifications in continuous integration scenarios is significantly different in Storyteller 3 as a direct result of poor experiences with earlier versions. Besides some internal performance optimization, Storyteller 3 tries to be much more aggressive in failing fast in continuous integration to prevent runaway builds and provide faster feedback for teams that depend on Storyteller for regression testing. </div>
 
+## Storyteller 5
+
+In Storyteller 5, you can run all the specifications with the project console application itself, so from the 
+root directory of the project at the command line, it's just:
+
+```
+dotnet run
+```
+
+To only run one suite at a time, try:
+
+```
+dotnet run -- run "suite path"
+```
+
+## Storyteller 4
+
+Storyteller specifications can be executed from the command line tool with the `dotnet storyteller run` command. You may either run all the specifications (for smaller projects or faster systems), or run one suite of specifications at a time. 
+
+## Storyteller 3
 
 Storyteller specifications can be executed from the command line tool with the `st run` command. You may either run all the specifications (for smaller projects or faster systems), or run one suite of specifications at a time. 
 

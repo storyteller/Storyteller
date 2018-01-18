@@ -5,6 +5,21 @@
 Storyteller specifications will fail and there will be times when you're really going to want to be able to debug through your code while a Storyteller specification is running. While you can always attach a debugger to the running system under test when
 the Storyteller UI is running, it's a faster feedback cycle to be able to just start and run your specification from whatever IDE you are using.
 
+
+## Run Single Spec in Storyteller 5.0
+
+If you're developing with Visual Studio.Net or JetBrains Rider, you can pass the full path of the specification copied from
+the Specification editor and use that as an argument to the console app to run a single specification or suite:
+
+```
+dotnet run -- run "suite / specification"
+```
+
+Do note that the specification path can accept spaces around the "/" characters, so you can copy and paste the specification path
+directly from the specification editor.
+
+## StorytellerRunner
+
 <div class="alert alert-info">In all cases, the code shown in this topic must be contained within your Storyteller specification project.</div>
 
 To that end, Storyteller 4.1 (re)introduces the `StorytellerRunner` class that you can use to execute Storyteller specifications from the IDE. If your Storyteller specification project does not have any kind of custom `ISystem` (i.e., you kick it off with `StorytellerAgent.Run(args)`), you can use this syntax:

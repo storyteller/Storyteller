@@ -12,9 +12,17 @@ For specific instructions on using the interactive specification tool, see the f
 
 <[TableOfContents]>
 
+## Storyteller 5.0
+
+To launch the specification editor from a command line, type the command `dotnet storyteller` in the project directory.
+
+Type `dotnet storyteller ?` to see a list of optional flags.
+
+
+## Storyteller 4.0
+
 To launch the specification editor from a command line, type the command `st open [path]` where _[path]_ is the project directory of the specification project you want to load. Other options to control how the testing AppDomain is constructed and other explicit overrides are described below:
 
-## dotnet storyteller open
 
 <[command-usage:dotnet storyteller/open]>
 
