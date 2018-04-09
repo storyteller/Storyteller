@@ -24,7 +24,15 @@ namespace StoryTeller.Commands
 #endif
             
         }
-        
+
+        [Description("Optional. Bind to the specified port.")]        
+        [FlagAlias('r')]
+        public int? PortFlag { get; set; }
+
+        [Description("Optional. Bind to the specified hostname.")]
+        [FlagAlias('n')]
+        public string HostnameFlag { get; set; }
+
         [Description("Optional. Override the spec directory")]
         [FlagAlias("specs", 's')]
         public string SpecsFlag { get; set; }

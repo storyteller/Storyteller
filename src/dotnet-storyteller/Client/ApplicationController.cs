@@ -37,7 +37,7 @@ namespace ST.Client
         public void Start()
         {
             Engine.AssertValid();
-            Client = Website.Start(this);
+            Client = Website.Start(this, new WebApplicationConfiguration(_input.HostnameFlag, _input.PortFlag));
 
             var starting = Engine.Start();
 

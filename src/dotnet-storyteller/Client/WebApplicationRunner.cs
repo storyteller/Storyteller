@@ -25,9 +25,21 @@ namespace ST.Client
         Batch BuildInitialModel();
     }
 
+    public sealed class WebApplicationConfiguration
+    {
+        public readonly string Hostname;
+        public readonly int? Port;
+
+        public WebApplicationConfiguration(string hostname = "localhost", int? port = null)
+        {
+            Hostname = hostname;
+            Port = port;
+        }
+    }
+
     public interface IWebApplicationRunner : IDisposable
     {
-        IClientConnector Start(IApplication application);
+        IClientConnector Start(IApplication application, WebApplicationConfiguration additionalConfiguration = null);
         string BaseAddress { get; }
     }
 
@@ -64,13 +76,14 @@ namespace ST.Client
 
 
 
-        public IClientConnector Start(IApplication application)
+        public IClientConnector Start(IApplication application, WebApplicationConfiguration additionalConfiguration = null)
         {
-            var port = PortFinder.FindPort(5000);
+            var port = additionalConfiguration?.Port ?? PortFinder.FindPort(5000);
+            var hostname = additionalConfiguration?.Hostname ?? "localhost";
 
             _application = application;
 
-            BaseAddress = "http://localhost:" + port;
+            BaseAddress = $"http://{hostname}:{port}";
 
             var webSockets = new WebSocketsHandler();
 
@@ -79,10 +92,10 @@ namespace ST.Client
 
             Client = new ClientConnector(webSockets, _commands.HandleJson)
             {
-                WebSocketsAddress = $"ws://127.0.0.1:{port}"
+                WebSocketsAddress = $"ws://{hostname}:{port}"
             };
 
-            startWebServer(port, webSockets);
+            startWebServer(hostname, port, webSockets);
 
 #if DEBUG
             _watcher = new AssetFileWatcher(Client);
@@ -92,7 +105,7 @@ namespace ST.Client
             return Client;
         }
 
-        private void startWebServer(int port, WebSocketsHandler webSockets)
+        private void startWebServer(string hostname, int port, WebSocketsHandler webSockets)
         {
 #if NET46
             var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
@@ -148,7 +161,7 @@ namespace ST.Client
                     });
                 });
 
-            _server = hostBuilder.Start($"http://localhost:{port}");
+            _server = hostBuilder.Start($"http://{hostname}:{port}");
         }
 
         private async Task writeFavicon(HttpContext http)
