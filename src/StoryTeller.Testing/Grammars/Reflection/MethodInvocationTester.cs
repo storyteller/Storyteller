@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
@@ -34,7 +35,11 @@ namespace StoryTeller.Testing.Grammars.Reflection
                 percentAwake = .5;
             }
 
-            
+            public async Task ThrowsAsync()
+            {
+                await Task.Yield();
+                throw new InvalidOperationException("Boom!");
+            }
 
             public Task GoOutputAsync(string name)
             {
@@ -143,6 +148,25 @@ namespace StoryTeller.Testing.Grammars.Reflection
             invocation.InvokeAsync(values).Wait();
 
             target.Name.ShouldBe("Bill");
+        }
+
+        [Fact]
+        public void exception_is_raised_from_async_method()
+        {
+            var target = new Target();
+            var method = ReflectionHelper.GetMethod<Target>(x => x.ThrowsAsync());
+            var values = new StepValues(method.Name);
+            var invocation = MethodInvocation.For(method, target);
+
+            invocation.Compile(target, CellHandling.Basic());
+            invocation.IsAsync().ShouldBeTrue();
+
+            var exception = Should.Throw<InvalidOperationException>(async () =>
+            {
+                await invocation.InvokeAsync(values);
+            });
+
+            exception.Message.ShouldBe("Boom!");
         }
 
         [Fact]
