@@ -16,6 +16,14 @@
           <Description>Only for Storyteller development itself</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
           <Description>Optional. Override the spec directory</Description>
         </FlagReport>
@@ -43,7 +51,7 @@
       <Usages>
         <UsageReport>
           <Description>Open the Storyteller client to the current project</Description>
-          <Usage>dotnet storyteller open [-f, --framework &lt;framework&gt;] [-h, --hotreload] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet storyteller open [-f, --framework &lt;framework&gt;] [-h, --hotreload] [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>

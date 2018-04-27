@@ -13,6 +13,14 @@
       </Arguments>
       <Flags>
         <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
           <Description>Optional. Override the spec directory</Description>
         </FlagReport>
@@ -40,7 +48,7 @@
       <Usages>
         <UsageReport>
           <Description>Used by dotnet storyteller to remote control the Storyteller specification engine</Description>
-          <Usage>dotnet run -- agent &lt;port&gt; [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet run -- agent &lt;port&gt; [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -49,6 +57,14 @@
       <Description>Try to start and warmup the system under test for diagnostics</Description>
       <Arguments />
       <Flags>
+        <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
         <FlagReport>
           <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
           <Description>Optional. Override the spec directory</Description>
@@ -77,7 +93,7 @@
       <Usages>
         <UsageReport>
           <Description>Try to start and warmup the system under test for diagnostics</Description>
-          <Usage>dotnet run -- test [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet run -- test [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -140,6 +156,14 @@
           <Description>Optionally have the specification execution stop on any wrong assertions</Description>
         </FlagReport>
         <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
+        <FlagReport>
           <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
           <Description>Optional. Override the spec directory</Description>
         </FlagReport>
@@ -167,11 +191,11 @@
       <Usages>
         <UsageReport>
           <Description>Run all specifications</Description>
-          <Usage>dotnet run -- run [-r, --results-path &lt;resultspath&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --tracing appveyor|teamcity|verbose|none] [-t, --timeout &lt;timeout&gt;] [-g, --global-timeout &lt;globaltimeout&gt;] [-o, --open] [-u, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-m, --max-attempts &lt;maxattempts&gt;] [-b, --break-on-exceptions] [-b, --break-on-wrongs] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet run -- run [-r, --results-path &lt;resultspath&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --tracing appveyor|teamcity|verbose|none] [-t, --timeout &lt;timeout&gt;] [-g, --global-timeout &lt;globaltimeout&gt;] [-o, --open] [-u, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-m, --max-attempts &lt;maxattempts&gt;] [-b, --break-on-exceptions] [-b, --break-on-wrongs] [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
         <UsageReport>
           <Description>Run specified specifications</Description>
-          <Usage>dotnet run -- run &lt;specificationorsuite&gt; [-r, --results-path &lt;resultspath&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --tracing appveyor|teamcity|verbose|none] [-t, --timeout &lt;timeout&gt;] [-g, --global-timeout &lt;globaltimeout&gt;] [-o, --open] [-u, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-m, --max-attempts &lt;maxattempts&gt;] [-b, --break-on-exceptions] [-b, --break-on-wrongs] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet run -- run &lt;specificationorsuite&gt; [-r, --results-path &lt;resultspath&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --tracing appveyor|teamcity|verbose|none] [-t, --timeout &lt;timeout&gt;] [-g, --global-timeout &lt;globaltimeout&gt;] [-o, --open] [-u, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-m, --max-attempts &lt;maxattempts&gt;] [-b, --break-on-exceptions] [-b, --break-on-wrongs] [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>
@@ -180,6 +204,14 @@
       <Description>Use to validate specifications for syntax errors or missing grammars or fixtures</Description>
       <Arguments />
       <Flags>
+        <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
         <FlagReport>
           <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
           <Description>Optional. Override the spec directory</Description>
@@ -208,7 +240,7 @@
       <Usages>
         <UsageReport>
           <Description>Use to validate specifications for syntax errors or missing grammars or fixtures</Description>
-          <Usage>dotnet run -- validate [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet run -- validate [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>

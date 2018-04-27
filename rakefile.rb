@@ -2,7 +2,7 @@ require 'json'
 
 APIKEY = ENV['api_key'].nil? ? '' : ENV['api_key']
 
-BUILD_VERSION = "5.0.0"
+BUILD_VERSION = "5.1.0"
 COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
 tc_build_number = ENV["APPVEYOR_BUILD_NUMBER"]
