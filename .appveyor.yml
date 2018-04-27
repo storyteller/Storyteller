@@ -21,7 +21,6 @@ install:
   - node --version
   - npm install -g npm
   - npm --version
-  - ps: Install-Product node LTS
   - dotnet --version
 
 build_script:
