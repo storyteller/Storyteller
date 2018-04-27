@@ -175,7 +175,7 @@ namespace StoryTeller.Testing.ST
         {
         }
 
-        public IClientConnector Start(IApplication application)
+        public IClientConnector Start(IApplication application, WebApplicationConfiguration additionalConfiguration)
         {
             return Client;
         }

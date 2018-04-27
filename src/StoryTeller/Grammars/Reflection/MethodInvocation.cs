@@ -129,11 +129,15 @@ namespace StoryTeller.Grammars.Reflection
             var parameters = Arguments.Select(values.Get).ToArray();
             var task = Method.Invoke(Target, parameters).As<Task>();
 
-            return task.ContinueWith(t => buildCellResults(values, parameters, task));
-
-
+            return task.ContinueWith(t =>
+            {
+                if (t.IsFaulted)
+                {
+                    throw t.Exception;
+                }
+                return buildCellResults(values, parameters, task);
+            });
         }
-
     }
 
     public class AsyncMethodInvocationWithReturn<T> : MethodInvocation
