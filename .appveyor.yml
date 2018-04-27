@@ -5,6 +5,7 @@ skip_tags: true
 environment:
   CI: true
   RUBY_VERSION: 23
+  nodejs_version: "6"
 nuget:
   account_feed: false
   project_feed: true
@@ -16,10 +17,10 @@ install:
   - gem install bundler --conservative
   - bundle config --local path vendor/bundle
   - bundle install
+  - node --version
   - npm install -g npm
   - npm --version
   - ps: Install-Product node LTS
-  - node --version
   - dotnet --version
 
 build_script:
