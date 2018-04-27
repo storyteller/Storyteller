@@ -17,6 +17,7 @@ install:
   - gem install bundler --conservative
   - bundle config --local path vendor/bundle
   - bundle install
+  - ps: Install-Product node $env:nodejs_version  
   - node --version
   - npm install -g npm
   - npm --version
