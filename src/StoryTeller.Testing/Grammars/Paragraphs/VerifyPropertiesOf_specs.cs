@@ -10,7 +10,7 @@ namespace StoryTeller.Testing.Grammars.Paragraphs
     public class VerifyPropertiesOf_specs : SpecRunningContext
     {
         [Fact]
-        public void execute()
+        public void ExecuteTheGrammar()
         {
             AddressVerificationFixture.Address.City = "Austin";
             AddressVerificationFixture.Address.PostalCode = "78750";

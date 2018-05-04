@@ -11,7 +11,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
     public class CreateObjectGrammar_specs : SpecRunningContext
     {
         [Fact]
-        public void execute()
+        public void ExecuteTheGrammar()
         {
             execute(@"
 Name: whatever

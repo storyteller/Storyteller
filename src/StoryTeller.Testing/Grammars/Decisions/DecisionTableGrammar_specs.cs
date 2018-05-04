@@ -10,7 +10,7 @@ namespace StoryTeller.Testing.Grammars.Decisions
     public class DecisionTableGrammar_specs : SpecRunningContext
     {
         [Fact]
-        public void execute()
+        public void ExecuteTheGrammar()
         {
             execute(@"
 => MathDecisions

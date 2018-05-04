@@ -10,7 +10,7 @@ namespace StoryTeller.Testing.Grammars
     public class CheckPropertyGrammar_specs : SpecRunningContext
     {
         [Fact]
-        public void execute()
+        public void ExecuteTheGrammar()
         {
             execute(@"
 => CheckProperty

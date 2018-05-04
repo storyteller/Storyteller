@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+#if NET46
 using System.Data;
+#endif
 using StoryTeller.Grammars.Tables;
 
 namespace StoryTeller.Samples.Fixtures
