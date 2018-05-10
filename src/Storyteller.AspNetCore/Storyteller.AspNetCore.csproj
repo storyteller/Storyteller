@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Description>Recipe to Connect Storyteller to ASP.Net Core Systems</Description>
+    <Description>Recipe to Connect Storyteller to ASP.Net Core 2.* Systems</Description>
     <AssemblyTitle>Storyteller.AspNetCore</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>1.2.1</Version>
+    <Version>2.0.0</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>Storyteller.AspNetCore</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>Storyteller.AspNetCore</PackageId>
@@ -20,13 +19,10 @@
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Alba" Version="1.1.1" />
+    <PackageReference Include="Alba.AspNetCore2" Version="1.4.0" />
   </ItemGroup>
-
 </Project>
