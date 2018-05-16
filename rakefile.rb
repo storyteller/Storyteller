@@ -49,20 +49,20 @@ desc 'Run the unit tests'
 task :test => [:compile] do
   Dir.mkdir RESULTS_DIR
 
-  platform = OS.mac? ? "-f netcoreapp1.1" : ""
+  platform = OS.mac? ? "-f netcoreapp2.0" : ""
 
-  sh "dotnet test src/Storyteller.Testing/Storyteller.Testing.csproj -f netcoreapp1.1"
+  sh "dotnet test src/Storyteller.Testing/Storyteller.Testing.csproj -f netcoreapp2.0"
   sh "dotnet test src/StorytellerDocGen.Testing/StorytellerDocGen.Testing.csproj #{platform}"
   #sh "dotnet test src/IntegrationTests --framework net46"
-  #sh "dotnet test src/IntegrationTests --framework netcoreapp1.1"
+  #sh "dotnet test src/IntegrationTests --framework netcoreapp2.0"
 
-  sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp1.0 -- run src/Specifications --validate"
+  #sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp2.0 -- run src/Specifications --validate"
 
 end
 
 desc 'Only runs .Net related tests'
 task :dotnet do
-	sh "dotnet test src/Storyteller.Testing --framework netcoreapp1.1"
+	sh "dotnet test src/Storyteller.Testing --framework netcoreapp2.0"
 	sh "dotnet test src/StorytellerDocGen.Testing"
 end
 
@@ -109,16 +109,16 @@ task :prepare_docs => [:compile] do
 	cp 'src/dotnet-storyteller/embed.js', 'documentation/content'
 	cp 'client/public/stylesheets/storyteller.css', 'documentation/content/stylesheets'
 
-	sh "dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- run --dump documentation/content/samples.specs.json --path src/Samples"
+	sh "dotnet run --project src/Samples/Samples.csproj --framework netcoreapp2.0 -- run --dump documentation/content/samples.specs.json --path src/Samples"
 
-	sh 'dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
-	sh 'dotnet run --project src/Samples/Samples.csproj --framework netcoreapp1.1 -- dump-usages "dotnet run --" "documentation/content/agent.usage.xml"'
-	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
+	sh 'dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 -- dump-usages "dotnet storyteller" "documentation/content/dotnet storyteller.usage.xml"'
+	sh 'dotnet run --project src/Samples/Samples.csproj --framework netcoreapp2.0 -- dump-usages "dotnet run --" "documentation/content/agent.usage.xml"'
+	sh 'dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp2.0 -- dump-usages "dotnet stdocs" "documentation/content/dotnet stdocs.usage.xml"'
 end
 
 "Launches the documentation project in editable mode"
 task :docs => [:prepare_docs] do
-	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- run -v #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp2.0 -- run -v #{BUILD_VERSION}"
 end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"
@@ -133,7 +133,7 @@ task :publish => [:prepare_docs] do
 	sh "git clone https://github.com/storyteller/storyteller.github.io.git doc-target"
 
 
-	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp1.0 -- export doc-target Website --version #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp2.0 -- export doc-target Website --version #{BUILD_VERSION}"
 
 	Dir.chdir "doc-target" do
 		sh "git add --all"
@@ -148,53 +148,53 @@ end
 
 "Run the spec editor w/ samples"
 task :samples do
-	sh "dotnet run --framework netcoreapp1.0 --project src/dotnet-storyteller/dotnet-storyteller.csproj --path src/Storyteller.Samples"
+	sh "dotnet run --framework netcoreapp2.0 --project src/dotnet-storyteller/dotnet-storyteller.csproj --path src/Storyteller.Samples"
 end
 
 "Run the spec editor w/ samples"
 task :testbed do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 --path src/Testbed"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 --path src/Testbed"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :docsamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 --path src/Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 --path src/Samples"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :rundocsamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 run src/Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 run src/Samples"
 end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"
 task :harness do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 --path src/Storyteller.Samples --hotreload"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 --path src/Storyteller.Samples --hotreload"
 end
 
 "Run the specs against the documentation generation"
 task :specifications do
-	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp1.0 -- run"
+	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp2.0 -- run"
 end
 
 "Run the database sample specs"
 task :dbsamples do
 
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/DatabaseSamples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 open src/DatabaseSamples"
 end
 
 "Run the selenium sample specs"
 task :seleniumsamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/Storyteller.Selenium.Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 open src/Storyteller.Selenium.Samples"
 end
 
 "Run the aspnetcore sample specs"
 task :aspnetcoresamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 open src/Storyteller.AspNetCore.Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 open src/Storyteller.AspNetCore.Samples"
 end
 
 "Generate the database sample results"
 task :dbsamplesresults do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp1.0 -- run src/DatabaseSamples --dump documentation/content/rdbms.specs.json"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 -- run src/DatabaseSamples --dump documentation/content/rdbms.specs.json"
 end
 
 def load_project_file(project)
