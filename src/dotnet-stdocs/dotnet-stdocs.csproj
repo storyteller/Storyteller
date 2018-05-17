@@ -24,6 +24,7 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\dotnet-storyteller\topics.js;Runner\WebsocketsRefresh.txt;Template\**\*.*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
