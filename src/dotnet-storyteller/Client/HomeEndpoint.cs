@@ -32,7 +32,7 @@ namespace ST.Client
             await response.Body.WriteAsync($@"
 <html>
 <head>
-  <title>Storyteller 4</title>
+  <title>Storyteller 5</title>
   {styleTags}
 
 
@@ -50,7 +50,8 @@ namespace ST.Client
 
 ").ConfigureAwait(false);
 
-            await response.Body.WriteAsync(ScriptTag(input.HotReloadFlag).ToString()).ConfigureAwait(false);
+            var scriptTags = ScriptTag(input.HotReloadFlag).ToString();
+            await response.Body.WriteAsync(scriptTags).ConfigureAwait(false);
 
             await response.Body.WriteAsync(@"
 </body>

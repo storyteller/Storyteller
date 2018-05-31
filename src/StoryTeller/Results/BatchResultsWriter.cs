@@ -34,8 +34,8 @@ namespace StoryTeller.Results
 
         public static HtmlTag StyleTag()
         {
-            var css = readFile("Storyteller.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.storyteller.css");
-            css += "\n\n" + readFile("StoryTeller.fixed-data-table.min.css");
+            var css = readFile("Storyteller.stylesheets.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.stylesheets.storyteller.css");
+            css += "\n\n" + readFile("StoryTeller.stylesheets.fixed-data-table.min.css");
 
             return new HtmlTag("style").Text(css).Encoded(false);
         }
@@ -45,9 +45,7 @@ namespace StoryTeller.Results
         {
             var assembly = typeof(BatchResultsWriter).GetTypeInfo().Assembly;
             var names = assembly.GetManifestResourceNames();
-
             var actualName = names.FirstOrDefault(x => x.EqualsIgnoreCase(name));
-
 
             var stream = assembly.GetManifestResourceStream(actualName);
             var reader = new StreamReader(stream);
