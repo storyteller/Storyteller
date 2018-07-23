@@ -2,6 +2,8 @@ require 'json'
 
 APIKEY = ENV['api_key'].nil? ? '' : ENV['api_key']
 
+TEMPLATE_VERSION = "1.0.0"
+
 BUILD_VERSION = "5.1.0"
 COMPILE_TARGET = ENV['config'].nil? ? "debug" : ENV['config']
 RESULTS_DIR = "results"
@@ -14,7 +16,7 @@ CI = ENV["CI"].nil? ? false : true
 
 task :ci => [:default, :specifications, :pack, :appVeyorPush]
 
-task :default => [:jstests, :test]
+task :default => [:jstests, :test, :templates]
 
 
 desc "Prepares the working directory for a new build"
@@ -23,6 +25,7 @@ task :clean do
 	FileUtils.rm_rf RESULTS_DIR
 	FileUtils.rm_rf 'artifacts'
 
+	mkdir 'artifacts'
 end
 
 
@@ -67,6 +70,27 @@ task :dotnet do
 end
 
 
+desc 'Build and test templates'
+task :templates => [:clean] do
+    
+
+	Dir.chdir "templates/Storyteller.Specifications" do
+		sh "nuget pack storytellerspecs.nuspec -Version #{TEMPLATE_VERSION}"
+	end
+
+	if Dir.exists? 'template-target'
+		FileUtils.rm_rf 'template-target'
+	end
+	Dir.mkdir 'template-target'
+
+	Dir.chdir "template-target" do
+		sh "dotnet new -i ../templates/Storyteller.Specifications/Storyteller.Specifications.#{TEMPLATE_VERSION}.nupkg"
+		sh "dotnet new storyteller"
+		sh "dotnet restore"
+		sh "dotnet run -- run"
+	end
+end
+
 
 desc 'Build Nuspec packages'
 task :pack do
@@ -90,6 +114,9 @@ task :appVeyorPush do
     puts "Not on CI, skipping artifact upload"
     next
   end
+
+  sh "appveyor PushArtifact templates/Storyteller.Specifications/Storyteller.Specifications.#{TEMPLATE_VERSION}.nupkg"
+
   Dir.glob('./artifacts/*.*') do |file|
     full_path = File.expand_path file
     full_path = full_path.gsub('/', '\\') if OS.windows?

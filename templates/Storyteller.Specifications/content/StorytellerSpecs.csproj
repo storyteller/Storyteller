@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>StorytellerSpecs</AssemblyName>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-storyteller" Version="5.1.3" />
+    <PackageReference Include="StoryTeller" Version="5.1.1" />
+    <!-- Reference the project for the system under test -->
+    <!--
+        <ProjectReference Include="..\YOURPROJECT\YOURPROJECT.csproj" />
+    -->
+  </ItemGroup>
+</Project>
