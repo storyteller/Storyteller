@@ -102,3 +102,6 @@ doc-target
 
 *.nuget.props
 src/Storyteller.Selenium.Samples/Storyteller.Selenium.nuget.targets
+*.nupkg
+
+template-target
