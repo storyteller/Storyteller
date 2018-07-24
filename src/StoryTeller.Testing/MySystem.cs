@@ -9,7 +9,11 @@ namespace StoryTeller.Testing
         protected override void configureCellHandling(CellHandling handling)
         {
             // Allows you to apply customizations to CellHandling
+            
+            
         }
+        
+        
 
         public override void BeforeEach(SimpleExecutionContext execution, ISpecContext context)
         {

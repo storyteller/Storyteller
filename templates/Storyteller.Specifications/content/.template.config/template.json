@@ -2,10 +2,12 @@
     "$schema": "http://json.schemastore.org/template",
     "author": "Jeremy D. Miller",
     "classifications": [
-        "storyteller", "testing", "bdd"
+        "Storyteller", "Testing", "BDD"
     ],
     "identity": "Storyteller.Specifications",
     "name": "Storyteller Specification Project",
-    "shortName": "storyteller"
+    "shortName": "storyteller",
+    "sourceName": "StorytellerSpecs",
+    "preferNameDirectory" : true
 
 }
