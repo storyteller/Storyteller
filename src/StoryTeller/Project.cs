@@ -27,14 +27,22 @@ namespace StoryTeller
         
         public Dictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
 
-        public StopConditions StopConditions = new StopConditions();
+        public readonly StopConditions StopConditions = new StopConditions();
+        private int _port;
 
-        public Project()
+        public int Port
         {
-            Port = PortFinder.FindPort(++StartingPort);
-        }
+            get
+            {
+                if (_port == 0)
+                {
+                    _port = PortFinder.FindPort(++StartingPort);
+                }
 
-        public int Port { get; set; }
+                return _port;
+            }
+            set => _port = value;
+        }
 
         public string ProjectPath { get; set; }
         public string Framework { get; set; }
