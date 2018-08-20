@@ -41,7 +41,7 @@ namespace StoryTeller
         {
             var executor = CommandExecutor.For(_ =>
             {
-                _.DefaultCommand = typeof(AgentCommand);
+                _.DefaultCommand = typeof(RunCommand);
                 
                 _.RegisterCommand<AgentCommand>();
                 _.RegisterCommand<TestCommand>();

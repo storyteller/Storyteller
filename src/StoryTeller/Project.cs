@@ -49,7 +49,7 @@ namespace StoryTeller
         
         public string ToAgentCommandLine()
         {
-            var cmd = $"run --framework {Framework} -- {Port}";
+            var cmd = $"run --framework {Framework} -- agent {Port}";
 
             if (Profile.IsNotEmpty()) cmd += $" --profile \"{Profile}\"";
 
