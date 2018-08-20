@@ -11,7 +11,7 @@
     <DebugType>pdbonly</DebugType>
     <PackageId>dotnet-storyteller</PackageId>
     <PackageTags>testing;storyteller</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/220095?s=400&u=80d73de4677e9f6009bbc5b6164cd6c3a605aeb9&v=4</PackageIconUrl>
+    <PackageIconUrl>https://avatars1.githubusercontent.com/u/220095?s=400&#038;u=80d73de4677e9f6009bbc5b6164cd6c3a605aeb9&#038;v=4</PackageIconUrl>
     <PackageProjectUrl>http://storyteller.github.io</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
     <IncludeContentInPack>true</IncludeContentInPack>
