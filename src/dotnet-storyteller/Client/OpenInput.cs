@@ -51,6 +51,10 @@ namespace ST.Client
         [FlagAlias("hotreload"), Description("Only for Storyteller development itself")]
         public bool HotReloadFlag { get; set; }
 
+        [Description("Don't build project")]
+        [FlagAlias("no-build", true)]
+        public bool NoBuildFlag { get; set; }
+
         public EngineController BuildEngine()
         {
             var project = new Project
@@ -59,7 +63,8 @@ namespace ST.Client
                 Culture = CultureFlag,
                 Profile = ProfileFlag,
                 Properties = PropFlag,
-                ProjectPath = PathFlag
+                ProjectPath = PathFlag,
+                NoBuild = NoBuildFlag
             };
 
             return new EngineController(project, new ProcessRunnerSystemLauncher(project));

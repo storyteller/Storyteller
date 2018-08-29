@@ -46,14 +46,15 @@ namespace StoryTeller
 
         public string ProjectPath { get; set; }
         public string Framework { get; set; }
-        
+        public bool NoBuild { get; set; }
+
         public string ToAgentCommandLine()
         {
-            var cmd = $"run --framework {Framework} -- agent {Port}";
+            var cmd = $"run --framework {Framework}{(NoBuild ? " --no-build" : string.Empty)} -- agent {Port}";
 
             if (Profile.IsNotEmpty()) cmd += $" --profile \"{Profile}\"";
 
-            if (Culture.IsNotEmpty()) cmd += $" --culture {Culture}";
+            if (Culture.IsNotEmpty()) cmd += $" --culture {Culture}";            
 
             foreach (var pair in Properties)
             {
