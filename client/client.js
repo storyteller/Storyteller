@@ -52,7 +52,20 @@ var startRouting = app(Storyteller.initialization, store => {
 });
 
 var Communicator = require('./communicator');
-var wsAddress = Storyteller.wsAddress;
+
+function getWsAddress()
+{
+	var loc = window.location, wsUri;
+	if (loc.protocol === "https:") {
+		wsUri = "wss:";
+	} else {
+		wsUri = "ws:";
+	}
+	wsUri += "//" + loc.host;
+	return wsUri;
+}
+
+var wsAddress = getWsAddress();
 
 var rebroadcast = m => {
     Postal.publish({
