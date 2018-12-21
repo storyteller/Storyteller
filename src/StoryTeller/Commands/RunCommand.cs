@@ -261,7 +261,9 @@ namespace StoryTeller.Commands
                     break;
             }
 
-            return new SpecRunner(new BatchExecutionMode(batchObserver), running.System, executionObserver);
+            var runner = new SpecRunner(new BatchExecutionMode(batchObserver), running.System, executionObserver);
+            runner.UseStopConditions(Project.CurrentProject.StopConditions);
+            return runner;
         }
     }
 }
