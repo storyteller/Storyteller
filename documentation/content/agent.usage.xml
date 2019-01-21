@@ -1,102 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <CommandLineApplicationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ApplicationName>dotnet run --</ApplicationName>
   <Commands>
-    <CommandReport>
-      <Name>agent</Name>
-      <Description>Used by dotnet storyteller to remote control the Storyteller specification engine</Description>
-      <Arguments>
-        <ArgumentReport>
-          <Name>port</Name>
-          <Description>Port</Description>
-        </ArgumentReport>
-      </Arguments>
-      <Flags>
-        <FlagReport>
-          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
-          <Description>Optional. Bind to the specified port.</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
-          <Description>Optional. Bind to the specified hostname.</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
-          <Description>Optional. Override the spec directory</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-y, --path &lt;path&gt;]</UsageDescription>
-          <Description>Optional, override the root directory of the project. Should be very rarely used</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[----prop:&lt;prop&gt; &lt;value&gt;]</UsageDescription>
-          <Description>Key/Value data for customized system construction</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
-          <Description>Storyteller Profile for conditional system construction</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
-          <Description>Force Storyteller to use this culture in all value conversions</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
-          <Description>Optional. Override the fixtures directory</Description>
-        </FlagReport>
-      </Flags>
-      <Usages>
-        <UsageReport>
-          <Description>Used by dotnet storyteller to remote control the Storyteller specification engine</Description>
-          <Usage>dotnet run -- agent &lt;port&gt; [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
-        </UsageReport>
-      </Usages>
-    </CommandReport>
-    <CommandReport>
-      <Name>test</Name>
-      <Description>Try to start and warmup the system under test for diagnostics</Description>
-      <Arguments />
-      <Flags>
-        <FlagReport>
-          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
-          <Description>Optional. Bind to the specified port.</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
-          <Description>Optional. Bind to the specified hostname.</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
-          <Description>Optional. Override the spec directory</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-y, --path &lt;path&gt;]</UsageDescription>
-          <Description>Optional, override the root directory of the project. Should be very rarely used</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[----prop:&lt;prop&gt; &lt;value&gt;]</UsageDescription>
-          <Description>Key/Value data for customized system construction</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
-          <Description>Storyteller Profile for conditional system construction</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
-          <Description>Force Storyteller to use this culture in all value conversions</Description>
-        </FlagReport>
-        <FlagReport>
-          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
-          <Description>Optional. Override the fixtures directory</Description>
-        </FlagReport>
-      </Flags>
-      <Usages>
-        <UsageReport>
-          <Description>Try to start and warmup the system under test for diagnostics</Description>
-          <Usage>dotnet run -- test [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
-        </UsageReport>
-      </Usages>
-    </CommandReport>
     <CommandReport>
       <Name>run</Name>
       <Description>Executes Specifications and Writes Results</Description>
@@ -196,6 +101,101 @@
         <UsageReport>
           <Description>Run specified specifications</Description>
           <Usage>dotnet run -- run &lt;specificationorsuite&gt; [-r, --results-path &lt;resultspath&gt;] [-l, --lifecycle Acceptance|Regression|Any] [-z, --tracing appveyor|teamcity|verbose|none] [-t, --timeout &lt;timeout&gt;] [-g, --global-timeout &lt;globaltimeout&gt;] [-o, --open] [-u, --csv &lt;csv&gt;] [-j, --json &lt;json&gt;] [-d, --dump &lt;dump&gt;] [-m, --max-attempts &lt;maxattempts&gt;] [-b, --break-on-exceptions] [-b, --break-on-wrongs] [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>agent</Name>
+      <Description>Used by dotnet storyteller to remote control the Storyteller specification engine</Description>
+      <Arguments>
+        <ArgumentReport>
+          <Name>port</Name>
+          <Description>Port</Description>
+        </ArgumentReport>
+      </Arguments>
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-y, --path &lt;path&gt;]</UsageDescription>
+          <Description>Optional, override the root directory of the project. Should be very rarely used</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[----prop:&lt;prop&gt; &lt;value&gt;]</UsageDescription>
+          <Description>Key/Value data for customized system construction</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
+          <Description>Storyteller Profile for conditional system construction</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
+          <Description>Force Storyteller to use this culture in all value conversions</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
+          <Description>Optional. Override the fixtures directory</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Used by dotnet storyteller to remote control the Storyteller specification engine</Description>
+          <Usage>dotnet run -- agent &lt;port&gt; [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+        </UsageReport>
+      </Usages>
+    </CommandReport>
+    <CommandReport>
+      <Name>test</Name>
+      <Description>Try to start and warmup the system under test for diagnostics</Description>
+      <Arguments />
+      <Flags>
+        <FlagReport>
+          <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified port.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-n, --hostname &lt;hostname&gt;]</UsageDescription>
+          <Description>Optional. Bind to the specified hostname.</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-s, --specs &lt;specs&gt;]</UsageDescription>
+          <Description>Optional. Override the spec directory</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-y, --path &lt;path&gt;]</UsageDescription>
+          <Description>Optional, override the root directory of the project. Should be very rarely used</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[----prop:&lt;prop&gt; &lt;value&gt;]</UsageDescription>
+          <Description>Key/Value data for customized system construction</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-p, --profile &lt;profile&gt;]</UsageDescription>
+          <Description>Storyteller Profile for conditional system construction</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-c, --culture &lt;culture&gt;]</UsageDescription>
+          <Description>Force Storyteller to use this culture in all value conversions</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[-f, --fixtures &lt;fixtures&gt;]</UsageDescription>
+          <Description>Optional. Override the fixtures directory</Description>
+        </FlagReport>
+      </Flags>
+      <Usages>
+        <UsageReport>
+          <Description>Try to start and warmup the system under test for diagnostics</Description>
+          <Usage>dotnet run -- test [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>

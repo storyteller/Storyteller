@@ -145,7 +145,7 @@ end
 
 "Launches the documentation project in editable mode"
 task :docs => [:prepare_docs] do
-	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp2.0 -- run -v #{BUILD_VERSION}"
+	sh "dotnet run --project src/dotnet-stdocs/dotnet-stdocs.csproj --framework netcoreapp2.0 -- run -v #{BUILD_VERSION} --directory ././documentation"
 end
 
 "Exports the documentation to storyteller.github.io - requires Git access to that repo though!"
@@ -216,7 +216,7 @@ end
 
 "Run the aspnetcore sample specs"
 task :aspnetcoresamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 open src/Storyteller.AspNetCore.Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 --path src/Storyteller.AspNetCore.Samples -- open"
 end
 
 "Generate the database sample results"

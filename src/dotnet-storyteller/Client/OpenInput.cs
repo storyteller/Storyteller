@@ -43,11 +43,6 @@ namespace ST.Client
         [Description("Override the .Net target framework if you are multi-targeting")]
         public string FrameworkFlag { get; set; }    
         
-        public Task<Suite> ReadHierarchy()
-        {
-            return Task.Factory.StartNew(() => HierarchyLoader.ReadHierarchy(SpecPath));
-        }
-
         [FlagAlias("hotreload"), Description("Only for Storyteller development itself")]
         public bool HotReloadFlag { get; set; }
 

@@ -6,11 +6,8 @@ namespace StoryTeller.AspNetCore.Samples
     // SAMPLE: HelloWorldAspNetCoreSystem
     public class HelloWorldSystem : AspNetCoreSystem
     {
-        public HelloWorldSystem()
+        public HelloWorldSystem() : base(new WebHostBuilder().UseStartup<Startup>())
         {
-
-            UseStartup<Startup>();
-
             // No request should take longer than 250 milliseconds
             RequestPerformanceThresholdIs(250);
 

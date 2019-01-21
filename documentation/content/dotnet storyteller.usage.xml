@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <CommandLineApplicationReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ApplicationName>dotnet storyteller</ApplicationName>
   <Commands>
@@ -14,6 +14,10 @@
         <FlagReport>
           <UsageDescription>[-h, --hotreload]</UsageDescription>
           <Description>Only for Storyteller development itself</Description>
+        </FlagReport>
+        <FlagReport>
+          <UsageDescription>[--no-build]</UsageDescription>
+          <Description>Don't build project</Description>
         </FlagReport>
         <FlagReport>
           <UsageDescription>[-r, --port &lt;port&gt;]</UsageDescription>
@@ -51,7 +55,7 @@
       <Usages>
         <UsageReport>
           <Description>Open the Storyteller client to the current project</Description>
-          <Usage>dotnet storyteller open [-f, --framework &lt;framework&gt;] [-h, --hotreload] [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
+          <Usage>dotnet storyteller open [-f, --framework &lt;framework&gt;] [-h, --hotreload] [--no-build] [-r, --port &lt;port&gt;] [-n, --hostname &lt;hostname&gt;] [-s, --specs &lt;specs&gt;] [-y, --path &lt;path&gt;] [----prop:&lt;prop&gt; &lt;value&gt;] [-p, --profile &lt;profile&gt;] [-c, --culture &lt;culture&gt;] [-f, --fixtures &lt;fixtures&gt;]</Usage>
         </UsageReport>
       </Usages>
     </CommandReport>

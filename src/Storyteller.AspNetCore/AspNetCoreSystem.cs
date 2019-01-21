@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Alba;
 using Baseline;
@@ -13,27 +14,24 @@ using StoryTeller.Equivalence;
 namespace StoryTeller.AspNetCore
 {
 
-    public class AspNetCoreSystem : SystemUnderTest, ISystem, IStartupFilter
+    public class AspNetCoreSystem : ISystem, IStartupFilter
     {
         public const string HttpRequestSubject = "Http Request";
-
-        public static void Run<T>(string[] args) where T : class
-        {
-            var system = new AspNetCoreSystem();
-            system.UseStartup<T>();
-
-            StorytellerAgent.Run(args, system);
-        }
-
 
 
         public readonly CellHandling CellHandling = new CellHandling(new EquivalenceChecker(), new Conversions());
         private ISpecContext _currentContext;
 
-        public AspNetCoreSystem()
+        public AspNetCoreSystem(IWebHostBuilder builder)
         {
-            ConfigureServices(_ => _.AddTransient<IStartupFilter>(x => this));
+            builder.ConfigureServices(_ => _.AddTransient<IStartupFilter>(x => this));
+            AlbaSystem = new SystemUnderTest(builder);
         }
+
+        /// <summary>
+        /// The underlying Alba wrapper for your ASP.Net Core system
+        /// </summary>
+        public SystemUnderTest AlbaSystem { get; }
 
         public void RequestPerformanceThresholdIs(int milliseconds)
         {
@@ -52,11 +50,7 @@ namespace StoryTeller.AspNetCore
 
         Task ISystem.Warmup()
         {
-            return Task.Factory.StartNew(() =>
-            {
-                this.ensureBootstrapped();
-                beforeAll();
-            });
+            return Task.Factory.StartNew(beforeAll);
         }
 
         // SAMPLE: AspNetCoreSystem-template-methods
@@ -73,7 +67,7 @@ namespace StoryTeller.AspNetCore
         /// </summary>
         /// <param name="sut"></param>
         /// <param name="context"></param>
-        protected virtual void beforeEach(ISystemUnderTest sut, ISpecContext context)
+        protected virtual void beforeEach(ISpecContext context)
         {
             // nothing
         }
@@ -83,7 +77,7 @@ namespace StoryTeller.AspNetCore
         /// </summary>
         /// <param name="sut"></param>
         /// <param name="context"></param>
-        protected virtual void afterEach(ISystemUnderTest sut, ISpecContext context)
+        protected virtual void afterEach(ISpecContext context)
         {
             // nothing
         }
@@ -142,22 +136,24 @@ namespace StoryTeller.AspNetCore
                 context.State.Store(_parent);
                 _parent._currentContext = context;
 
-                _parent.beforeEach(_parent, context);
+                _parent.beforeEach(context);
             }
 
             public void AfterExecution(ISpecContext context)
             {
-                _parent.afterEach(_parent, context);
+                _parent.afterEach(context);
             }
 
             public T GetService<T>()
             {
-                return _parent.Services.GetService(typeof(T)).As<T>();
+                return _parent.AlbaSystem.Services.GetService(typeof(T)).As<T>();
             }
         }
 
 
-
-        
+        public void Dispose()
+        {
+            _currentContext?.Dispose();
+        }
     }
 }
