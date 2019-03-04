@@ -11,7 +11,14 @@ namespace StoryTeller.Equivalence
 
         public Func<object, object, bool> CreateComparison(Type type, EquivalenceChecker checker)
         {
-            return (expected, actual) => expected.Equals(actual);
+            return (expected, actual) =>
+            {
+                if (expected == null && actual == null)
+                {
+                    return true;
+                }
+                return expected.Equals(actual);
+            };
         }
     }
 }
