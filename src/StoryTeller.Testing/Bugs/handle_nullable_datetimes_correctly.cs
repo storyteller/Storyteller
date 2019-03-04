@@ -23,10 +23,15 @@ namespace StoryTeller.Testing.Bugs
 Name: Testing nullable DateTimes
 => NullableDateTime
 * TheApprovalDateIs#1: expected=NULL
+* TheApprovalDateIs#2: expected=TODAY
+* TheApprovalDateWithValueIs#3: expected=NULL
+* TheApprovalDateWithValueIs#4: expected=TODAY
 ");
-            TheStepsThatExecutedWere("1");
-            Step("1").StatusWas(ResultStatus.ok);
 
+            Step("1").Cell("expected").Succeeded();
+            Step("2").Cell("expected").FailedWithActual("NULL");
+            Step("3").Cell("expected").FailedWithActual(DateTime.Now.Date.ToString());
+            Step("4").Cell("expected").Succeeded();
         }
     }
 
@@ -36,6 +41,14 @@ Name: Testing nullable DateTimes
         public DateTime? TheApprovalDateIs()
         {
             DateTime? approvalDate = null;
+            return approvalDate;
+        }
+
+
+        [FormatAs("The TheApprovalDateWithValueIs is {expected}")]
+        public DateTime? TheApprovalDateWithValueIs()
+        {
+            DateTime? approvalDate = DateTime.Now.Date;
             return approvalDate;
         }
     }

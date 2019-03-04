@@ -13,11 +13,8 @@ namespace StoryTeller.Equivalence
         {
             return (expected, actual) =>
             {
-                if (expected == null && actual == null)
-                {
-                    return true;
-                }
-                return expected.Equals(actual);
+                if (actual != null) return expected != null && expected.Equals(actual);
+                return expected == null || expected.Equals(null);
             };
         }
     }
