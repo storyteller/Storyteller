@@ -19,6 +19,7 @@ namespace StoryTeller.Commands
             EventAggregator.Messaging.AddListener(this);
 
             _engine = new EngineAgent(input.Port, input.System);
+            _engine.PreStart(); // From this point messages may start being received.
 
             _completion.WaitOne();
 
