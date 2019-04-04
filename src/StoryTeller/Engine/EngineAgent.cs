@@ -32,12 +32,8 @@ namespace StoryTeller.Engine
             _disposables.Add(_socket);
 
             EventAggregator.Start(_socket);
-
-            Console.WriteLine("AGENT: Sending AgentReady message");
-            EventAggregator.SendMessage(new AgentReady());
             
             _running = RunningSystem.Create(system);
-
 
             _disposables.Add(system);
         }
@@ -56,6 +52,11 @@ namespace StoryTeller.Engine
             }
         }
 
+        public void PreStart()
+        {
+            Console.WriteLine("AGENT: Sending AgentReady message");
+            EventAggregator.SendMessage(new AgentReady());
+        }
 
         public void Start(Project project)
         {
