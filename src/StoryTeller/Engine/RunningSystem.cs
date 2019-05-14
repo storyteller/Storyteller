@@ -17,6 +17,7 @@ namespace StoryTeller.Engine
         private RunningSystem(ISystem system)
         {
             CellHandling cellHandling = null;
+            System = system;
 
             try
             {
@@ -42,6 +43,8 @@ namespace StoryTeller.Engine
 
                     error = ex.ToString()
                 };
+
+                return;
             }
 
 

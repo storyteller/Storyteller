@@ -12,7 +12,6 @@
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
     <ProjectReference Include="..\Samples\Samples.csproj" />
     <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj" />
-    <ProjectReference Include="..\BadSystem\BadSystem.csproj" />
     <ProjectReference Include="..\InvalidExamples\InvalidExamples.csproj" />
     <ProjectReference Include="..\StoryTeller.Samples\StoryTeller.Samples.csproj" />
     <ProjectReference Include="..\StoryTeller.Gallery\StoryTeller.Gallery.csproj" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Baseline;
 using Shouldly;
 using StoryTeller;
 using StoryTeller.Remotes;
@@ -18,12 +19,17 @@ namespace dotnet_storyteller.Testing
             TestUtility.CleanUpHangingProcesses();
         }
 
-        private Task<SystemRecycled> start(string projectName)
+        private Task<SystemRecycled> start(string projectName, string framework = null)
         {
             _project = new Project
             {
                 ProjectPath = TestingContext.FindParallelDirectory(projectName)
             };
+
+            if (framework.IsNotEmpty())
+            {
+                _project.Framework = framework;
+            }
 
             _controller = new EngineController(_project, new ProcessRunnerSystemLauncher(_project));
 
@@ -40,7 +46,7 @@ namespace dotnet_storyteller.Testing
         [Fact]
         public async Task start_happy_path()
         {
-            var recycled = await start("Storyteller.Gallery");
+            var recycled = await start("Storyteller.Gallery", "netcoreapp2.1");
 
             recycled.success.ShouldBeTrue();
         }
@@ -48,7 +54,7 @@ namespace dotnet_storyteller.Testing
         [Fact]
         public async Task start_and_recycle()
         {
-            var recycled = await start("Storyteller.Gallery");
+            var recycled = await start("Storyteller.Gallery", "netcoreapp2.1");
 
             recycled.success.ShouldBeTrue();
 
@@ -62,7 +68,7 @@ namespace dotnet_storyteller.Testing
         [Fact]
         public async Task start_a_remote_system_that_fails_in_project_start()
         {
-            var recycled = await start("BadSystem");
+            var recycled = await start("BadSystem", "netcoreapp2.1");
 
             recycled.success.ShouldBeFalse();
             recycled.error.ShouldContain(nameof(DivideByZeroException));
