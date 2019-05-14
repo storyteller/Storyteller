@@ -1,12 +1,13 @@
 ﻿using System;
 using Baseline;
+using StoryTeller;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Samples;
 using StoryTeller.Samples.Fixtures;
 
-namespace IntegrationTests.CommandLine
+namespace dotnet_storyteller.Testing
 {
     public class TestingContext
     {
@@ -17,7 +18,14 @@ namespace IntegrationTests.CommandLine
                 try
                 {
                     var fixture = new SentenceFixture();
-                    return FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+                    var library = FixtureLibrary.CreateForAppDomain(new GrammarSystem().Start());
+
+                    // Need to force it to use this one instead of the FactFixture in the samples project
+                    var factFixture = new FactFixture();
+                    library.Models["Fact"] = factFixture.Compile(CellHandling.Basic());
+                    library.Fixtures["Fact"] = factFixture;
+
+                    return library;
                 }
                 catch (Exception e)
                 {
@@ -46,11 +54,8 @@ namespace IntegrationTests.CommandLine
 
         public static string FindParallelDirectory(string projectName)
         {
-#if NET46
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-#else
             var path = AppContext.BaseDirectory;
-#endif
+
             while (!path.EndsWith("src"))
             {
                 path = path.ParentDirectory();
@@ -85,5 +90,39 @@ namespace IntegrationTests.CommandLine
             return path;
         }
 
+    }
+    
+    public class FactFixture : Fixture
+    {
+        public static bool IsSo = false;
+
+        public FactFixture()
+        {
+            this["CheckIsSo"] = Fact("Check is so")
+                .VerifiedBy(() => IsSo);
+
+            this["CheckIsNotSo"] = Fact("Check is not so")
+                .VerifiedBy(() => !IsSo);
+
+            this["SetState"] 
+                = Do<string>("Set state to {state}", (text, c) => c.State.Store("state", text));
+
+
+            this["StateIsTexas"] =
+                Fact("Check that the state is Texas")
+                    .VerifiedBy(c => c.State.Retrieve<string>("state") == "Texas");
+
+
+            this["ServiceIsOn"] = Fact("Check service is on")
+                .VerifiedBy<CheckService>(s => s.On);
+
+            this["ServiceIsOff"] = Fact("Check service is off")
+                .VerifiedBy<CheckService>(s => !s.On);
+        }
+    }
+    
+    public class CheckService
+    {
+        public bool On;
     }
 }

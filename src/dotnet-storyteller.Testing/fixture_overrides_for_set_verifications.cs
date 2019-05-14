@@ -4,12 +4,13 @@ using System.Linq;
 using Baseline;
 using NSubstitute;
 using Shouldly;
+using StoryTeller;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model;
 using ST.Client;
 using Xunit;
 
-namespace StoryTeller.Testing.ST
+namespace dotnet_storyteller.Testing
 {
     public class fixture_overrides_for_set_verifications
     {

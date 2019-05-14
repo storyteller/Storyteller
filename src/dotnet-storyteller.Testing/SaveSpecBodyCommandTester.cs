@@ -5,7 +5,7 @@ using StoryTeller.Model;
 using ST.Client.Persistence;
 using Xunit;
 
-namespace StoryTeller.Testing.ST
+namespace dotnet_storyteller.Testing
 {
     public class SaveSpecBodyCommandTester
     {

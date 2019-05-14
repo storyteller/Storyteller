@@ -1,7 +1,7 @@
 ﻿using Shouldly;
 using StoryTeller;
 
-namespace IntegrationTests
+namespace dotnet_storyteller.Testing
 {
     public static class CountExtensions
     {

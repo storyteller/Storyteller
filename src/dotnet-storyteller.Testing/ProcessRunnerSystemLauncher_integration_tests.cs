@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Baseline;
-using Baseline.Dates;
-using IntegrationTests.CommandLine;
 using Shouldly;
 using StoryTeller;
 using StoryTeller.Remotes;
 using ST.Client;
 using Xunit;
 
-namespace IntegrationTests
+namespace dotnet_storyteller.Testing
 {
     public class ProcessRunnerSystemLauncher_integration_tests : IDisposable
     {
@@ -72,18 +69,6 @@ namespace IntegrationTests
 
         }
 
-#if NET46
-        [Fact] 
-        public void start_a_remote_system_that_blows_up_fast()
-        {
-            var recycled = start("BlowsUp");
 
-            recycled.Wait(3.Seconds());
-
-            recycled.Result.success.ShouldBeFalse();
-            recycled.Result.error.ShouldContain("Unable to start process");
-
-        }
-#endif
     }
 }

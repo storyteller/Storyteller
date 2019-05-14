@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using Baseline;
-using IntegrationTests.CommandLine;
 using Shouldly;
 using StoryTeller;
 using StoryTeller.Grammars.Sets;
@@ -11,7 +10,7 @@ using StoryTeller.Model.Persistence.Markdown;
 using StoryTeller.Results;
 using Xunit;
 
-namespace IntegrationTests
+namespace dotnet_storyteller.Testing
 {
     
     public class integration_tests_with_the_grammar_project : SpecRunningContext

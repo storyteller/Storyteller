@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;net46</TargetFrameworks>
     <DebugType>pdbonly</DebugType>
     <AssemblyName>IntegrationTests</AssemblyName>
     <PackageId>IntegrationTests</PackageId>
@@ -11,8 +11,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
-    <ProjectReference Include="..\dotnet-storyteller\dotnet-storyteller.csproj" />
-    <ProjectReference Include="..\Specifications\Specifications.csproj" />
     <ProjectReference Include="..\Samples\Samples.csproj" />
     <ProjectReference Include="..\MultipleSystems\MultipleSystems.csproj" />
     <ProjectReference Include="..\BadSystem\BadSystem.csproj" />

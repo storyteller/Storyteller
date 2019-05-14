@@ -6,7 +6,7 @@
 	  <NeutralLanguage>en-US</NeutralLanguage>
 	  <Version>2.1.0</Version>
 	  <Authors>Jarrod Johnson, Jeremy D. Miller</Authors>
-	  <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
+	  <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
 	  <DebugType>pdbonly</DebugType>
 	  <AssemblyName>Storyteller.TestRail</AssemblyName>
 	  <OutputType>Library</OutputType>

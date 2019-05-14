@@ -2,7 +2,7 @@
 using ST.Client;
 using Xunit;
 
-namespace StoryTeller.Testing.ST
+namespace dotnet_storyteller.Testing
 {
     public class OpenInputTests
     {
@@ -15,7 +15,7 @@ namespace StoryTeller.Testing.ST
 
             };
             
-            input.DetermineFramework().ShouldBe("netcoreapp1.1");
+            input.DetermineFramework().ShouldBe("netcoreapp2.1");
         }
         
         [Fact]

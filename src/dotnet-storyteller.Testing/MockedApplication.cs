@@ -3,7 +3,7 @@ using StoryTeller.Messages;
 using StoryTeller.Remotes;
 using ST.Client;
 
-namespace StoryTeller.Testing.ST
+namespace dotnet_storyteller.Testing
 {
     public class MockedApplication : IApplication
     {

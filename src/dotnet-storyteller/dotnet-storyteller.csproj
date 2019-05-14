@@ -3,9 +3,9 @@
     <Description>Storyteller Project Runner and Editor</Description>
     <AssemblyTitle>dotnet CLI integration for Storyteller</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>5.2.3</Version>
+    <Version>6.0.0</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
     <AssemblyName>dotnet-storyteller</AssemblyName>
     <OutputType>Exe</OutputType>
     <DebugType>pdbonly</DebugType>
@@ -39,20 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.WebSockets.Server" Version="0.1.0" />
     <PackageReference Include="Oakton" Version="1.5.0" />
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Composite" Version="2.0.1" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Composite" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" />
   </ItemGroup>
 </Project>

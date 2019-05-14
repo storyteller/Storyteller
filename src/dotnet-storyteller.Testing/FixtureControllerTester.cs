@@ -10,7 +10,7 @@ using StoryTeller.Model.Persistence.DSL;
 using ST.Client;
 using Xunit;
 
-namespace StoryTeller.Testing.ST
+namespace dotnet_storyteller.Testing
 {
     public class FixtureControllerTester : IDisposable
     {

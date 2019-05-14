@@ -1,17 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp2.1</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>Testbed</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Testbed</PackageId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
   </ItemGroup>

@@ -13,7 +13,6 @@ using StoryTeller.Model.Persistence;
 using StoryTeller.Remotes.Messaging;
 using StoryTeller.Results;
 using StoryTeller.Samples;
-using ST.Client;
 
 namespace StoryTeller.Testing
 {
@@ -36,7 +35,6 @@ namespace StoryTeller.Testing
         public void what_are_the_client_message_names()
         {
             var types = typeof (ClientMessage).GetTypeInfo().Assembly.GetExportedTypes()
-                .Concat(typeof (ClientConnector).GetTypeInfo().Assembly.GetExportedTypes())
                 .Where(x => x.IsConcrete() && x.CanBeCastTo<ClientMessage>()).Select(x => x.Name).OrderBy(x => x).ToArray();
 
             types.Each(x => Debug.WriteLine(x));

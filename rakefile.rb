@@ -180,17 +180,17 @@ end
 
 "Run the spec editor w/ samples"
 task :testbed do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 --path src/Testbed"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework net46 --path src/Testbed"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :docsamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 --path src/Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.1 --path src/Samples"
 end
 
 "Run the spec editor w/ the documentation samples"
 task :rundocsamples do
-	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.0 run src/Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.1 run src/Samples"
 end
 
 "Run the spec editor for Storyteller.Samples with hot reloading"

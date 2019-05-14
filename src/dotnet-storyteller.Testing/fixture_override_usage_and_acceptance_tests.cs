@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Baseline;
 using NSubstitute;
 using Shouldly;
+using StoryTeller;
 using StoryTeller.Model;
 using StoryTeller.Remotes;
 using StoryTeller.Remotes.Messaging;
 using ST.Client;
 using Xunit;
 
-namespace StoryTeller.Testing.ST
+namespace dotnet_storyteller.Testing
 {
     public class fixture_override_usage_and_acceptance_tests : IDisposable
     {

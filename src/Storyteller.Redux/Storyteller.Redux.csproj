@@ -3,9 +3,9 @@
     <Description>Recipe to Connect Storyteller to Redux Applications</Description>
     <AssemblyTitle>Storyteller.Redux</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <VersionPrefix>0.2.0-alpha</VersionPrefix>
+    <VersionPrefix>0.3.0-alpha</VersionPrefix>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Storyteller.Redux</AssemblyName>
     <PackageId>Storyteller.Redux</PackageId>
     <PackageTags>testing;storyteller;specifications;bdd;atdd;aspnetcore;redux</PackageTags>
