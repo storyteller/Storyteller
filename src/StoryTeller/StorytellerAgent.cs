@@ -36,7 +36,6 @@ namespace StoryTeller
         /// <param name="args"></param>
         /// <param name="builder"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         public static int Run(string[] args, Func<IStorytellerEnvironment, ISystem> builder)
         {
             var executor = CommandExecutor.For(_ =>

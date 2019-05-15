@@ -3,9 +3,9 @@
     <Description>Recipe to Connect Storyteller to ASP.Net Core 2.* Systems</Description>
     <AssemblyTitle>Storyteller.AspNetCore</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>3.0.0</Version>
+    <Version>6.0.0</Version>
     <Authors>Jeremy D. Miller</Authors>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Storyteller.AspNetCore</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>Storyteller.AspNetCore</PackageId>

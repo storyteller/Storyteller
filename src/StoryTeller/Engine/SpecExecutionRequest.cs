@@ -33,7 +33,6 @@ namespace StoryTeller.Engine
             get
             {
                 if (Specification != null) return Specification.id;
-                if (Specification != null) return Specification.id;
                 return Plan.Specification.id;
             }
         }
@@ -57,19 +56,6 @@ namespace StoryTeller.Engine
 
         public Task<SpecResults> Completion => _completion.Task;
 
-        private void performAction(Action action)
-        {
-            try
-            {
-                action();
-            }
-            catch (Exception e)
-            {
-                Cancel();
-                EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(e)));
-            }
-        }
-
         public void CreatePlan(FixtureLibrary library)
         {
             var culture = Project.CurrentProject?.Culture;
@@ -82,10 +68,15 @@ namespace StoryTeller.Engine
 #endif
             }
 
-            performAction(() =>
+            try
             {
                 Plan = Specification.CreatePlan(library);
-            });
+            }
+            catch (Exception e)
+            {
+                Cancel();
+                EventAggregator.SendMessage(new PassthroughMessage(new RuntimeError(e)));
+            }
         }
 
 

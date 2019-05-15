@@ -93,19 +93,6 @@ namespace StoryTeller
 
         public SpecResults Run(Specification specification)
         {
-            var results = Execute(specification);
-
-            _records.Add(new BatchRecord
-            {
-                results = results,
-                specification = specification
-            });
-
-            return results;
-        }
-
-        public SpecResults Execute(Specification specification)
-        {
             var plan = specification.CreatePlan(_running.Fixtures);
             var timings = new Timings();
 
@@ -140,8 +127,15 @@ namespace StoryTeller
                 context?.Dispose();
             }
 
+            var results = context.FinalizeResults(1);
 
-            return context.FinalizeResults(1);
+            _records.Add(new BatchRecord
+            {
+                results = results,
+                specification = specification
+            });
+
+            return results;
         }
 
         public BatchRunResponse RunAll(TimeSpan timeout, string output = null, bool openResults = false)
