@@ -200,7 +200,7 @@ end
 
 "Run the specs against the documentation generation"
 task :specifications do
-	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp2.0 -- run"
+	sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp2.1 -- run"
 end
 
 "Run the database sample specs"
