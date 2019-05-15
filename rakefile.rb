@@ -56,8 +56,6 @@ task :test => [:compile] do
 
   sh "dotnet test src/Storyteller.Testing/Storyteller.Testing.csproj -f netcoreapp2.0"
   sh "dotnet test src/StorytellerDocGen.Testing/StorytellerDocGen.Testing.csproj #{platform}"
-  #sh "dotnet test src/IntegrationTests --framework net46"
-  #sh "dotnet test src/IntegrationTests --framework netcoreapp2.0"
 
   #sh "dotnet run --project src/Specifications/Specifications.csproj --framework netcoreapp2.0 -- run src/Specifications --validate"
 
@@ -96,9 +94,7 @@ desc 'Build Nuspec packages'
 task :pack do
 	sh "dotnet pack src/Storyteller -o ./../../artifacts --configuration Release"
 	sh "dotnet pack src/Storyteller.AspNetCore -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
-	sh "dotnet pack src/Storyteller.Redux -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/Storyteller.RDBMS -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
-	sh "dotnet pack src/Storyteller.TestRail -o ./../../artifacts --configuration Release --version-suffix #{build_revision}"
 	sh "dotnet pack src/dotnet-storyteller -o ./../../artifacts --configuration Release"
 	sh "dotnet pack src/dotnet-stdocs -o ./../../artifacts --configuration Release "
 end
