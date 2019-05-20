@@ -3,7 +3,7 @@
     <Description>Recipes to Manipulate or Assert on Databases in Storyteller Specifications</Description>
     <AssemblyTitle>Storyteller.RDBMS</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>5.3.1</Version>
+    <Version>5.3.2</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Storyteller.RDBMS</AssemblyName>
