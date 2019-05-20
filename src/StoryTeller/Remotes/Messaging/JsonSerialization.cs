@@ -125,7 +125,7 @@ namespace StoryTeller.Remotes.Messaging
 
         public static T Deserialize<T>(string json)
         {
-            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.Auto };
             serializer.Converters.Add(new StringEnumConverter());
 
             return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
@@ -133,7 +133,7 @@ namespace StoryTeller.Remotes.Messaging
 
         public static object DeserializeMessage(string json)
         {
-            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.All };
+            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.Auto };
             serializer.Converters.Add(new StringEnumConverter());
 
             var jsonTextReader = new JsonTextReader(new StringReader(json));
