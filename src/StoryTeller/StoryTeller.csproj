@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <PackageId>StoryTeller</PackageId>
     <PackageTags>testing;storyteller;specifications;bdd;atdd</PackageTags>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/220095?s=400&#038;u=80d73de4677e9f6009bbc5b6164cd6c3a605aeb9&#038;v=4</PackageIconUrl>
+    <PackageIconUrl>https://avatars1.githubusercontent.com/u/220095?s=400&amp;u=80d73de4677e9f6009bbc5b6164cd6c3a605aeb9&amp;v=4</PackageIconUrl>
     <PackageProjectUrl>http://storyteller.github.io</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/storyteller/storyteller/raw/master/LICENSE.TXT</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
@@ -50,6 +50,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.2" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />

@@ -21,6 +21,8 @@ namespace StoryTeller.Engine
         }
 
         public Specification Specification { get; }
+        
+        [Obsolete]
         public SpecificationPlan Plan { get; private set; }
 
         public ExecutionMode Mode { get; set; } = ExecutionMode.normal;
@@ -105,7 +107,7 @@ namespace StoryTeller.Engine
 
         public override string ToString()
         {
-            return string.Format("SpecExecutionRequest for {0} ({1})", Specification.id, Specification.name);
+            return $"SpecExecutionRequest for {Specification.id} ({Specification.name})";
         }
 
         public Timings StartNewTimings()

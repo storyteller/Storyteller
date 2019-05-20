@@ -21,6 +21,7 @@ namespace StoryTeller.AspNetCore
 
         public readonly CellHandling CellHandling = new CellHandling(new EquivalenceChecker(), new Conversions());
         private ISpecContext _currentContext;
+        private bool _hasDisposed;
 
         public AspNetCoreSystem(IWebHostBuilder builder)
         {
@@ -153,7 +154,7 @@ namespace StoryTeller.AspNetCore
 
         public void Dispose()
         {
-            _currentContext?.Dispose();
+            AlbaSystem.SafeDispose();
         }
     }
 }

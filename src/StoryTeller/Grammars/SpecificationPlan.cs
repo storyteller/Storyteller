@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 
 namespace StoryTeller.Grammars
 {
-    // Tested through integration tests only
+    [Obsolete("Moving to SpecExecutionRequest")]
     public class SpecificationPlan : ICompositeExecution
     {
         public SpecificationPlan(IEnumerable<CompositeExecution> steps)
