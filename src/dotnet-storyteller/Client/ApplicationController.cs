@@ -79,7 +79,6 @@ namespace ST.Client
             get
             {
                 var recycled = Engine.LatestSystemRecycled ?? Startup.Result;
-                recycled.properties["Spec Directory"] = _input.SpecPath;
 
                 return recycled.CloneWithOverriddenFixtures(Fixtures.CombinedFixtures());
             }
