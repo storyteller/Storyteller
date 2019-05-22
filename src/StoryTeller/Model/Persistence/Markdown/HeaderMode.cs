@@ -74,7 +74,7 @@ namespace StoryTeller.Model.Persistence.Markdown
 
                 case SpecConstants.Tags:
                     var tags = value.ToDelimitedArray();
-                    _spec.Tags.AddRange(tags);
+                    _spec.Tags = tags;
                     break;
 
             }

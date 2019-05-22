@@ -84,7 +84,7 @@ namespace StoryTeller.Model.Persistence
             var tags = top.GetAttribute(TagsAtt);
             if (tags.IsNotEmpty())
             {
-                spec.Tags.AddRange(tags.ToDelimitedArray());
+                spec.Tags = tags.ToDelimitedArray();
             }
             return spec;
         }

@@ -195,9 +195,8 @@ namespace StoryTeller.Testing.Model.Persistence
         [Fact]
         public void full_cycle_tags()
         {
-            original.Tags.Add("a");
-            original.Tags.Add("b");
-            original.Tags.Add("c");
+            original.Tags = new[] {"a", "b", "c"};
+
             persisted.Tags.ShouldBe(original.Tags);
         }
 

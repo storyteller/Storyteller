@@ -16,8 +16,8 @@ namespace StoryTeller.Testing.Engine
                 name = "Child Suite 1",
                 Specifications = new[]
                 {
-                    new Specification {name = "Spec 1a", Lifecycle = Lifecycle.Acceptance, Tags = {"tag1", "tag2"}},
-                    new Specification {name = "Spec 1b", Lifecycle = Lifecycle.Regression, Tags = {"tag2"}}
+                    new Specification {name = "Spec 1a", Lifecycle = Lifecycle.Acceptance, Tags = new string[]{"tag1", "tag2"}},
+                    new Specification {name = "Spec 1b", Lifecycle = Lifecycle.Regression, Tags = new string[]{"tag2"}}
                 }
             };
 
@@ -30,9 +30,9 @@ namespace StoryTeller.Testing.Engine
                     {
                         name = "Spec 2a",
                         Lifecycle = Lifecycle.Acceptance,
-                        Tags = {"tag1", "tag2", "tag3"}
+                        Tags = new string[]{"tag1", "tag2", "tag3"}
                     },
-                    new Specification {name = "Spec 2b", Lifecycle = Lifecycle.Regression, Tags = {"tag4"}}
+                    new Specification {name = "Spec 2b", Lifecycle = Lifecycle.Regression, Tags = new string[]{"tag4"}}
                 }
             };
 

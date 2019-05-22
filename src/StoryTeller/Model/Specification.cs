@@ -125,7 +125,7 @@ namespace StoryTeller.Model
             return id?.GetHashCode() ?? 0;
         }
 
-        [JsonProperty(SpecConstants.Tags)] public readonly IList<string> Tags = new List<string>();
+        [JsonProperty(SpecConstants.Tags)] public string[] Tags = new string[0];
         private DateTime? _lastUpdated;
 
         [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
