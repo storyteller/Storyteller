@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Baseline;
+using Newtonsoft.Json.Schema;
 using Samples.Fixtures;
 using Samples.Fixtures.Api;
 using Shouldly;
@@ -22,6 +23,17 @@ namespace StoryTeller.Testing
             DateTime.TryParse("1/1/1974", out time);
             Console.WriteLine(time);
 
+        }
+
+        [Fact]
+        public void serialize_a_specification()
+        {
+            var spec = new Specification
+            {
+                Tags = new string[]{"a", "b", "c"}
+            };
+
+            var json = JsonSerialization.ToJson(spec);
         }
 
         [Fact]

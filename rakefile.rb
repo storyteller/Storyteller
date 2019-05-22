@@ -171,7 +171,7 @@ end
 
 "Run the spec editor w/ samples"
 task :samples do
-	sh "dotnet run --framework netcoreapp2.0 --project src/dotnet-storyteller/dotnet-storyteller.csproj --path src/Storyteller.Samples"
+	sh "dotnet run --project src/dotnet-storyteller/dotnet-storyteller.csproj --framework netcoreapp2.1 --path src/Storyteller.Samples -- --framework net46"
 end
 
 "Run the spec editor w/ samples"

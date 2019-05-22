@@ -46,7 +46,7 @@ namespace StoryTeller.Remotes.Messaging
             var serializer = new JsonSerializer
             {
                 TypeNameHandling = TypeNameHandling.All,
-
+                
             };
 
             serializer.Converters.Add(new StringEnumConverter());

@@ -40,6 +40,9 @@ namespace StoryTeller.Remotes
             return clone;
         }
         
+        // For compliance with older versions of this object in the client
+        public Dictionary<string, object> properties { get; } = new Dictionary<string, object>();
+        
 
         public FixtureModel[] fixtures
         {
