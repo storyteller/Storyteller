@@ -128,7 +128,7 @@ namespace StoryTeller.Model
         [JsonProperty(SpecConstants.Tags, ItemTypeNameHandling = TypeNameHandling.None, TypeNameHandling = TypeNameHandling.None)] public string[] Tags = new string[0];
         private DateTime? _lastUpdated;
 
-        [JsonProperty("steps", ItemConverterType = typeof (NodeConverter))]
+        [JsonProperty("steps", ItemConverterType = typeof (NodeConverter), TypeNameHandling = TypeNameHandling.None, ItemTypeNameHandling = TypeNameHandling.None)]
         public IList<Node> Children { get; } = new List<Node>();
 
         public SpecificationPlan CreatePlan(FixtureLibrary library)

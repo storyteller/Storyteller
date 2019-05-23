@@ -22,7 +22,6 @@ namespace StoryTeller.Engine
 
         public Specification Specification { get; }
         
-        [Obsolete]
         public SpecificationPlan Plan { get; private set; }
 
         public ExecutionMode Mode { get; set; } = ExecutionMode.normal;

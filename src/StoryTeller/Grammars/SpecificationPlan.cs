@@ -6,7 +6,6 @@ using StoryTeller.Model;
 
 namespace StoryTeller.Grammars
 {
-    [Obsolete("Moving to SpecExecutionRequest")]
     public class SpecificationPlan : ICompositeExecution
     {
         public SpecificationPlan(IEnumerable<CompositeExecution> steps)

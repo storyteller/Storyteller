@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -45,8 +44,7 @@ namespace StoryTeller.Remotes.Messaging
         {
             var serializer = new JsonSerializer
             {
-                TypeNameHandling = TypeNameHandling.All,
-                
+                TypeNameHandling = TypeNameHandling.All
             };
 
             serializer.Converters.Add(new StringEnumConverter());
@@ -125,16 +123,22 @@ namespace StoryTeller.Remotes.Messaging
 
         public static T Deserialize<T>(string json)
         {
-            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.Auto };
-            serializer.Converters.Add(new StringEnumConverter());
+            var serializer = buildSerializer();
 
             return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
 
+        private static JsonSerializer buildSerializer()
+        {
+            var serializer = new JsonSerializer
+                {TypeNameHandling = TypeNameHandling.Auto, SerializationBinder = new ForwardingSerializationBinder()};
+            serializer.Converters.Add(new StringEnumConverter());
+            return serializer;
+        }
+
         public static object DeserializeMessage(string json)
         {
-            var serializer = new JsonSerializer { TypeNameHandling = TypeNameHandling.Auto };
-            serializer.Converters.Add(new StringEnumConverter());
+            var serializer = buildSerializer();
 
             var jsonTextReader = new JsonTextReader(new StringReader(json));
 
