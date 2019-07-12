@@ -11,7 +11,7 @@ namespace StoryTeller.Grammars.Tables
     {
         private readonly IGrammar _inner;
         private Action<ISpecContext> _after;
-        private Action<ISpecContext> _before;
+        private Action<ISpecContext, Section> _before;
         private string _leafName = "rows";
         private string _key;
 
@@ -58,6 +58,11 @@ namespace StoryTeller.Grammars.Tables
 
         public TableGrammar Before(Action<ISpecContext> before)
         {
+            return Before((c, s) => before(c));
+        }
+        
+        public TableGrammar Before(Action<ISpecContext, Section> before)
+        {
             _before = before;
             return this;
         }
@@ -100,7 +105,7 @@ namespace StoryTeller.Grammars.Tables
             var section = parentStep.Collections[_leafName];
             if (section.id.IsEmpty()) section.id = Guid.NewGuid().ToString();
 
-            if (_before != null) yield return new SilentAction("Grammar", Stage.before, _before, section)
+            if (_before != null) yield return new SilentAction("Grammar", Stage.before, c => _before(c, section), section)
             {
                 Subject = Key + "Before"
             };
