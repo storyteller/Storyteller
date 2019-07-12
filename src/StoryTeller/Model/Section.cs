@@ -126,5 +126,10 @@ namespace StoryTeller.Model
 
             return other;
         }
+
+        public bool IsCellActive(Cell cell)
+        {
+            return !ActiveCells.ContainsKey(cell.Key) || ActiveCells[cell.Key];
+        }
     }
 }

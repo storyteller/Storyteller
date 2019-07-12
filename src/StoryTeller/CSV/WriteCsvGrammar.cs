@@ -86,7 +86,9 @@ namespace StoryTeller.CSV
         {
             var file = context.State.Retrieve<CsvFile>();
 
-            var data = _cells.Select(x => values.Get(x.Key).As<string>()).ToArray();
+            var section = context.State.Retrieve<Section>();
+
+            var data = _cells.Select(x => x.CsvValue(section, values)).Where(x => x != null).ToArray();
             file.WriteValues(data);
 
             return values.Errors;

@@ -105,7 +105,11 @@ namespace StoryTeller.Grammars.Tables
             var section = parentStep.Collections[_leafName];
             if (section.id.IsEmpty()) section.id = Guid.NewGuid().ToString();
 
-            if (_before != null) yield return new SilentAction("Grammar", Stage.before, c => _before(c, section), section)
+            if (_before != null) yield return new SilentAction("Grammar", Stage.before, c =>
+            {
+                c.State.Store(section);
+                _before(c, section);
+            }, section)
             {
                 Subject = Key + "Before"
             };
