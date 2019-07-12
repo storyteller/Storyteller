@@ -3,7 +3,7 @@
     <Description>Storyteller Project Runner and Editor</Description>
     <AssemblyTitle>dotnet CLI integration for Storyteller</AssemblyTitle>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <Version>5.3.5</Version>
+    <Version>5.4.0</Version>
     <Authors>Jeremy D. Miller</Authors>
     <TargetFrameworks>netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
     <AssemblyName>dotnet-storyteller</AssemblyName>
