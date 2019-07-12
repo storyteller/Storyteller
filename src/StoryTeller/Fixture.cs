@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Baseline;
 using Baseline.Reflection;
+using StoryTeller.CSV;
 using StoryTeller.Grammars;
 using StoryTeller.Grammars.API;
 using StoryTeller.Grammars.Importing;
@@ -14,6 +15,7 @@ using StoryTeller.Grammars.Lines;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Grammars.Paragraphs;
 using StoryTeller.Grammars.Sets;
+using StoryTeller.Grammars.Tables;
 using StoryTeller.Model;
 using StoryTeller.Model.Lists;
 
@@ -51,10 +53,10 @@ namespace StoryTeller
         [IndexerName("Grammars")]
         public IGrammar this[string key]
         {
-            get { return _grammars[key]; }
+            get => _grammars[key];
             set
             {
-                _grammars[key] = value;
+                _grammars[key] = value ?? throw new ArgumentNullException(nameof(value));
                 value.Key = key;
             }
         }
@@ -72,7 +74,7 @@ namespace StoryTeller
         /// </summary>
         public object CurrentObject
         {
-            get { return Context?.State.CurrentObject; }
+            get => Context?.State.CurrentObject;
             set
             {
                 if (Context != null) Context.State.CurrentObject = value;
@@ -196,6 +198,37 @@ namespace StoryTeller
             }
 
             return true;
+        }
+
+        /// <summary>
+        /// Create a table grammar to create a Csv file in memory as part of the specification. This
+        /// usage assumes that any headers would be written in the first row
+        /// </summary>
+        /// <param name="title">The title of the table grammar in the display</param>
+        /// <param name="columnCount">The number of columns</param>
+        /// <param name="withFile">What to do with the written CSV file</param>
+        /// <returns></returns>
+        public static IGrammar CsvFile(string title, int columnCount, Action<CsvFile> withFile)
+        {
+            return new WriteCsvGrammar(columnCount, title)
+            {
+                FileAction = withFile
+            }.WrapInTable();
+        }
+
+        /// <summary>
+        /// Create a table grammar to create a Csv file in memory as part of the specification. This
+        /// usage will write the headers of the cell into the first line of the file
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="configure"></param>
+        /// <returns></returns>
+        public static IGrammar CsvFile(string title, Action<IWriteCsvGrammarBuilder> configure)
+        {
+            var grammar = new WriteCsvGrammar(title);
+            configure(grammar);
+
+            return grammar.WrapInTable();
         }
 
         /// <summary>

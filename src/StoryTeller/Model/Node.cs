@@ -18,7 +18,7 @@ namespace StoryTeller.Model
 
         public string id
         {
-            get { return _id; }
+            get => _id;
             set
             {
                 _id = value;

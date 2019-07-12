@@ -17,21 +17,20 @@ namespace StoryTeller.Model
     {
         [JsonProperty("key")]
         public readonly string Key;
-        private readonly IList<Node> _children = new List<Node>();
 
         [JsonProperty("type")]
         public string Type => "section";
 
         [JsonProperty("steps", ItemConverterType = typeof(NodeConverter))]
-        public IList<Node> Children => _children;
+        public IList<Node> Children { get; } = new List<Node>();
 
         private IDictionary<string, bool> _activeCells = new Dictionary<string, bool>();
 
         [JsonProperty("activeCells")]
         public IDictionary<string, bool> ActiveCells
         {
-            get { return _activeCells ?? new Dictionary<string, bool>(); }
-            set { _activeCells = value; }
+            get => _activeCells ?? new Dictionary<string, bool>();
+            set => _activeCells = value;
         }
 
         public Section(string key)
