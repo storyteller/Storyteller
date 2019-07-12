@@ -455,6 +455,18 @@ namespace StoryTeller.Testing.Model
         }
 
         [Fact]
+        public void set_metadata()
+        {
+            var cell = Cell.For<CellTarget>(x => x.Names);
+            cell.As<ICellExpression>().Metadata("color", "blue");
+            
+            cell.Metadata["color"].ShouldBe("blue");
+            
+            cell.As<ICellExpression>().Metadata("color", "red");
+            cell.Metadata["color"].ShouldBe("red");
+        }
+
+        [Fact]
         public void display_empty_array_actual_as_empty()
         {
             var cell = Cell.For<CellTarget>(x => x.Names);

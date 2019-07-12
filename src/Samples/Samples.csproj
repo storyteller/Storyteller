@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net46;netcoreapp2.1</TargetFrameworks>
     <DebugType>pdbonly</DebugType>
     <AssemblyName>Samples</AssemblyName>
     <OutputType>Exe</OutputType>

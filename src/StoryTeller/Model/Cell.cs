@@ -56,6 +56,12 @@ namespace StoryTeller.Model
 
 
         }
+        
+        /// <summary>
+        /// Custom user-defined properties of a single cell that may be useful in advanced usages
+        /// </summary>
+        [JsonIgnore]
+        public Dictionary<string, object> Metadata { get; } = new Dictionary<string, object>();
 
         [JsonIgnore]
         public int Position { get; private set; }
@@ -101,6 +107,20 @@ namespace StoryTeller.Model
         {
             editor = "select";
             OptionListName = listName;
+            return this;
+        }
+
+        ICellExpression ICellExpression.Metadata(string key, object value)
+        {
+            if (Metadata.ContainsKey(key))
+            {
+                Metadata[key] = value;
+            }
+            else
+            {
+                Metadata.Add(key, value);
+            }
+            
             return this;
         }
 

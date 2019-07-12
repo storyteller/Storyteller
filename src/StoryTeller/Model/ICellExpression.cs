@@ -49,6 +49,15 @@ namespace StoryTeller.Model
         /// <param name="listName"></param>
         /// <returns></returns>
         ICellExpression SelectionList(string listName);
+
+        /// <summary>
+        /// Apply additional information to a Cell for usage in custom
+        /// grammars
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        ICellExpression Metadata(string key, object value);
     }
     // ENDSAMPLE
 
@@ -112,6 +121,12 @@ namespace StoryTeller.Model
         public ICellExpression SelectionList(string listName)
         {
             _modifications.Add(c => c.SelectionList(listName));
+            return this;
+        }
+
+        public ICellExpression Metadata(string key, object value)
+        {
+            _modifications.Add(c => c.Metadata(key, value));
             return this;
         }
     }
