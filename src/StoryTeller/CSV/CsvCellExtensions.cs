@@ -10,6 +10,8 @@ namespace StoryTeller.CSV
         internal static readonly string CsvRequiredKey = "CsvRequired";
         internal static readonly string CsvValueBuilderKey = "CsvValueBuilder";
         
+        
+        
         /// <summary>
         /// For Csv file generation grammars, mark this cell as being completely omitted
         /// from the generated file if the column is not explicitly included in the specification
@@ -81,7 +83,7 @@ namespace StoryTeller.CSV
                     }
                     else if (cell.HasDefault())
                     {
-                        return cell.DefaultValue;
+                        return cell.DefaultValue.ToFormat(values.Order);
                     }
                     else
                     {

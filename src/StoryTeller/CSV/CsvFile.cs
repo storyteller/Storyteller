@@ -9,7 +9,7 @@ namespace StoryTeller.CSV
     {
         private readonly StringWriter _writer = new StringWriter();
 
-        public void WriteValues(string[] values)
+        public void WriteValues(params string[] values)
         {
             var line = values.Select(Escape).Join(",");
             _writer.WriteLine(line);
@@ -17,7 +17,18 @@ namespace StoryTeller.CSV
 
         public static string Escape(string raw)
         {
-            return raw.Contains(',') ? $"\"{raw}\"" : raw;
+            var shouldBeEscaped = raw.Contains(",") || raw.Contains("\"");
+
+            if (shouldBeEscaped)
+            {
+                var escaped = raw.Replace("\"", "\"\"");
+                return $"\"{escaped}\"";
+            }
+
+            return raw;
+            
+
+
         }
 
         public override string ToString()
@@ -25,11 +36,19 @@ namespace StoryTeller.CSV
             return _writer.ToString();
         }
 
+        /// <summary>
+        /// Generated string for the Csv content
+        /// </summary>
+        /// <returns></returns>
         public string Contents()
         {
             return _writer.ToString();
         }
 
+        /// <summary>
+        /// Write the generated contents of this CsvFile to the file system
+        /// </summary>
+        /// <param name="path"></param>
         public void WriteToFile(string path)
         {
             File.WriteAllText(path, _writer.ToString());

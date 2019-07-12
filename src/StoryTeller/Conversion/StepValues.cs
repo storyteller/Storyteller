@@ -50,7 +50,8 @@ namespace StoryTeller.Conversion
         /// For set verification purposes
         /// </summary>
         public int Order { get; set; }
-
+        
+        
         public void RegisterDelayedConversion(string key, string raw, IRuntimeConverter converter)
         {
             _delayeds.Add(new Delayed

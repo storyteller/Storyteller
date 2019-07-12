@@ -13,7 +13,6 @@ namespace StoryTeller.CSV
 {
     public class WriteCsvGrammar : LineGrammar, IWriteCsvGrammarBuilder
     {
-        private readonly List<string> _initialRow = new List<string>();
         private readonly string _title;
 
         public WriteCsvGrammar(string title)
@@ -36,7 +35,7 @@ namespace StoryTeller.CSV
 
         public WriteCsvGrammar(string title, params string[] headers) : this(headers.Length, title)
         {
-            _initialRow.AddRange(headers);
+            WriteCellHeadersInFirstLine = true;
 
             for (var i = 0; i < headers.Length; i++)
             {
@@ -50,6 +49,8 @@ namespace StoryTeller.CSV
             }
         }
 
+        public bool WriteCellHeadersInFirstLine { get; set; }
+
         public List<Cell> CsvCells { get; } = new List<Cell>();
 
         public ICellExpression AddColumn(string key = null, string header = null, string defaultValue = null)
@@ -60,7 +61,6 @@ namespace StoryTeller.CSV
             if (defaultValue.IsNotEmpty()) cell.DefaultValue = defaultValue;
 
             CsvCells.Add(cell);
-            _initialRow.Add(cell.header);
 
             return cell;
         }
@@ -99,6 +99,12 @@ namespace StoryTeller.CSV
             return _title;
         }
 
+        private bool shouldCellBeIncluded(Cell cell, Section section)
+        {
+            return section.IsCellActive(cell) ||
+                   cell.CsvRequirement() == CsvRequired.UseDefaultIfNotExplicitlyExpressed;
+        }
+
         public IGrammar WrapInTable()
         {
             return this.AsTable(_title)
@@ -106,7 +112,17 @@ namespace StoryTeller.CSV
                 {
                     var f = new CsvFile();
 
-                    if (_initialRow.Any()) f.WriteValues(_initialRow.ToArray());
+                    var section = c.State.Retrieve<Section>();
+
+                    if (WriteCellHeadersInFirstLine)
+                    {
+                        var data = _cells
+                            .Where(x => shouldCellBeIncluded(x, section))
+                            .Select(x => x.header)
+                            .ToArray();
+                        
+                        f.WriteValues(data);
+                    }
                     
                     c.State.Store(f);
                 })

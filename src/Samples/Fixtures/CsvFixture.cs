@@ -1,4 +1,5 @@
 using StoryTeller;
+using StoryTeller.CSV;
 
 namespace Samples.Fixtures
 {
@@ -16,7 +17,8 @@ namespace Samples.Fixtures
                 c.AddColumn("One", defaultValue: "1");
                 c.AddColumn("Two", defaultValue: "2");
                 c.AddColumn("Three", defaultValue: "3").SelectionValues("3", "4", "5");
-                
+                c.AddColumn("Omitted").Header("Can be omitted").OmitIfInactive();
+                c.AddColumn("Default by row number").UseDefaultIfNotExplicitlyExpressed("Row {0}");
             });
         }
     }

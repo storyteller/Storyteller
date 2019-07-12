@@ -225,7 +225,11 @@ namespace StoryTeller
         /// <returns></returns>
         public static IGrammar CsvFile(string title, Action<IWriteCsvGrammarBuilder> configure)
         {
-            var grammar = new WriteCsvGrammar(title);
+            var grammar = new WriteCsvGrammar(title)
+            {
+                WriteCellHeadersInFirstLine = true
+            };
+            
             configure(grammar);
 
             return grammar.WrapInTable();

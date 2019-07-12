@@ -104,7 +104,7 @@ namespace StoryTeller.Grammars.Tables
         {
             var section = parentStep.Collections[_leafName];
             if (section.id.IsEmpty()) section.id = Guid.NewGuid().ToString();
-
+            
             if (_before != null) yield return new SilentAction("Grammar", Stage.before, c =>
             {
                 c.State.Store(section);
@@ -115,9 +115,14 @@ namespace StoryTeller.Grammars.Tables
             };
 
 
+            var rowNumber = 0;
             foreach (Step row in section.Children.OfType<Step>())
             {
-                yield return _inner.CreatePlan(row, library, true);
+                var line = _inner.CreatePlan(row, library, true);
+
+                if (line is IWithValues l) l.Values.Order = ++rowNumber;
+                
+                yield return line;
             }
 
             if (_after != null) yield return new SilentAction("Grammar", Stage.after, _after, section)
