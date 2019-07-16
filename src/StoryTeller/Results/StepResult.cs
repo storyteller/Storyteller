@@ -5,6 +5,7 @@ using Baseline;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using StoryTeller.Engine;
+using StoryTeller.Grammars.Sets;
 using StoryTeller.Messages;
 
 namespace StoryTeller.Results
@@ -38,6 +39,11 @@ namespace StoryTeller.Results
         }
 
         public ErrorDisplay errorDisplay = ErrorDisplay.text;
+        
+        /// <summary>
+        /// Used by the "new" v6 engine only
+        /// </summary>
+        public SetVerification setVerification { get; set; }
 
         public string id { get; set; }
         public string spec { get; set; }
@@ -54,11 +60,8 @@ namespace StoryTeller.Results
 
         public object position
         {
-            get { return _position; }
-            set
-            {
-                _position = value?.ToString();
-            }
+            get => _position;
+            set => _position = value?.ToString();
         }
 
         [JsonConverter(typeof(StringEnumConverter))] 

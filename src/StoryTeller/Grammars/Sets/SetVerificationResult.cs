@@ -9,6 +9,7 @@ using StoryTeller.Results;
 
 namespace StoryTeller.Grammars.Sets
 {
+    // TODO -- this should not be a ClientMessage or IResultMessage later
     public class SetVerificationResult : ClientMessage, IResultMessage
     {
         private readonly IList<IDictionary<string, string>> _extras = new List<IDictionary<string, string>>();
@@ -34,7 +35,7 @@ namespace StoryTeller.Grammars.Sets
 
         public string[] matches
         {
-            get { return _matches.ToArray(); }
+            get => _matches.ToArray();
             set
             {
                 _matches.Clear();
@@ -44,7 +45,7 @@ namespace StoryTeller.Grammars.Sets
 
         public string[] missing
         {
-            get { return _missing.ToArray(); }
+            get => _missing.ToArray();
             set
             {
                 _missing.Clear();
@@ -54,7 +55,7 @@ namespace StoryTeller.Grammars.Sets
 
         public IDictionary<string, string>[] extras
         {
-            get { return _extras.ToArray(); }
+            get => _extras.ToArray();
             set
             {
                 _extras.Clear();
@@ -64,7 +65,7 @@ namespace StoryTeller.Grammars.Sets
 
         public WrongOrder[] wrongOrdered
         {
-            get { return _wrongOrders.ToArray(); }
+            get => _wrongOrders.ToArray();
             set
             {
                 _wrongOrders.Clear();

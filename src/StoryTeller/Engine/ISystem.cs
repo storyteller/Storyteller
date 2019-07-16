@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using StoryTeller.Model;
 
 namespace StoryTeller.Engine
 {
@@ -29,4 +30,5 @@ namespace StoryTeller.Engine
         Task Warmup();
     }
     // ENDSAMPLE
+
 }

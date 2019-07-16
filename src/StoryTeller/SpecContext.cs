@@ -16,7 +16,6 @@ namespace StoryTeller
         public readonly IList<IResultMessage> Results = new List<IResultMessage>();
         private readonly IResultObserver _resultObserver;
         private readonly IExecutionContext _execution;
-        private readonly State _state = new State();
         private readonly Timings _timings;
         private bool _latched;
 
@@ -58,7 +57,7 @@ namespace StoryTeller
         {
             _latched = true;
             Reporting.As<IDisposable>().Dispose();
-            _state.As<IDisposable>().Dispose();
+            State.As<IDisposable>().Dispose();
         }
 
         public Timings Timings => _timings;
@@ -79,6 +78,8 @@ namespace StoryTeller
 
         public bool HadCriticalException { get; private set; }
 
+        // TODO -- this needs to use the CancellationToken
+        // TODO -- make this async all the way
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
             if (condition()) return true;
@@ -108,7 +109,7 @@ namespace StoryTeller
             return _execution.GetService<T>();
         }
 
-        public State State => _state;
+        public State State { get; } = new State();
 
 
         public void LogResult<T>(T result, PerfRecord record) where T : IResultMessage
