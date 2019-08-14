@@ -1,12 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using StoryTeller;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
+    
     public class LineExecution 
     {
         public LineExecution(Fixture fixture, Section section, Stage stage)
@@ -56,5 +56,19 @@ namespace Storyteller
         public string Id { get; }
         
         public StepValues Values { get; }
+
+        public Task<StepResult> Execute(IExecutionContext context)
+        {
+            /*
+             * TODOS
+             * 1. Do the timings thing
+             * 2. Create a SpecResult
+             * 3. Trap exceptions
+             * 4. Log exceptions
+             * 5. Log any step results
+             */
+            
+            throw new NotImplementedException();
+        }
     }
 }

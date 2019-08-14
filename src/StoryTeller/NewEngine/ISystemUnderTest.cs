@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using StoryTeller.Model;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
     public interface ISystemUnderTest
     {

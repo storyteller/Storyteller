@@ -27,7 +27,7 @@ namespace StoryTeller.Model
 
         public GrammarError[] errors
         {
-            get { return _errors.ToArray(); }
+            get => _errors.ToArray();
             set
             {
                 _errors.Clear();

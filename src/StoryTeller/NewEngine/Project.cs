@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace StoryTeller.NewEngine
 {
-    public class NewProject : IProject
+    public class Project : IProject
     {
         public static int StartingPort = 2499;
         

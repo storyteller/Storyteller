@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using StoryTeller.Model;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
     public class ExecutionPlan
     {
@@ -10,9 +10,10 @@ namespace Storyteller
             // TODO -- go plan it all out, build out the Lines list
         }
         
+        
         // specific methods for adding a line grammar, paragraph as table line, section setup,
         // fixture teardown
-        
+
         public List<LineExecution> Lines { get; } = new List<LineExecution>();
         public int Attempts { get; set; }
         public Specification Specification { get; set; }

@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
-using StoryTeller;
 using StoryTeller.Results;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
-    public delegate Task LineExecutionDelegate(ISpecContext context, StepResult result);
+    public delegate Task LineExecutionDelegate(IExecutionContext context, StepResult result);
 }

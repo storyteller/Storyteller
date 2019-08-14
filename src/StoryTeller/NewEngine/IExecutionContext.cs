@@ -1,19 +1,11 @@
 using System;
 using System.Threading;
-using StoryTeller;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Results;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
-
-    public class SpecificationRunner
-    {
-      
-    }
-    
-    
     public interface IExecutionContext
     {
         
@@ -71,23 +63,22 @@ namespace Storyteller
         /// has been cancelled
         /// </summary>
         CancellationToken Cancellation { get; }
-    }
+        
+        
+        
+        /// <summary>
+        /// Yet another implementation of a polling wait until
+        /// this condition is true, but this one will stop
+        /// polling if this specification context has been
+        /// cancelled
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <param name="timeout"></param>
+        /// <param name="millisecondPolling"></param>
+        /// <returns></returns>
+        bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500);
 
-    public class ExecutionContext : IExecutionContext
-    {
-        public ExecutionContext(IServiceProvider services, Specification specification)
-        {
-            Services = services;
-            Specification = specification;
-        }
-
-        public IServiceProvider Services { get; }
-        public Specification Specification { get; }
-
-        public State State { get; } = new State();
-        public Counts Counts { get; } = new Counts();
-        public Timings Timings { get; } = new Timings();
-        public IReporting Reporting { get; } = new Reporting();
-        public CancellationToken Cancellation { get; } = new CancellationToken();
+        void LogResult<T>(T result, PerfRecord record) where T : IResultMessage;
+        void LogException(string id, Exception ex, PerfRecord record, object position = null);
     }
 }

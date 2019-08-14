@@ -1,7 +1,7 @@
 using System;
 using StoryTeller.Model.Persistence;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
     public interface ISpecificationRunner : IDisposable
     {

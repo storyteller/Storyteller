@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using StoryTeller;
 
-namespace Storyteller
+namespace StoryTeller.NewEngine
 {
     public interface IProject
     {
-        bool CanContinue(Counts counts);
         string Profile { get; set; }
         string Culture { get; set; }
 
