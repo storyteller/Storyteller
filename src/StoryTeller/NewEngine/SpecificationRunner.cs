@@ -59,24 +59,24 @@ namespace StoryTeller.NewEngine
             10. Finalize the results
              */
 
-            var context = await _system.CreateContext(plan.Specification);
 
-
+            var cancellation = plan.Context.Cancellation;
+            var context = plan.Context;
+            
             // Need to check if the context itself is invalid before going on
             foreach (var line in plan.Lines)
             {
                 // This is going to be it. All smarts in the new ExecutionContext
-                if (context.Cancellation.IsCancellationRequested) break;
+                if (cancellation.IsCancellationRequested) break;
 
                 // TODO -- trap exceptions inside of line itself
                 // TODO -- if line captures a critical or catastrophic exception,
                 // kill the spec
                 var result = await line.Execute(context);
+                
+                
                 _observer.Completed(plan, line, result);
             }
-
-
-            await _system.Complete(context);
 
 
             _observer.Finished(plan, new SpecResults());

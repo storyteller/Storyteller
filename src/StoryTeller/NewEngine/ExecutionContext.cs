@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model;
 using StoryTeller.Results;
@@ -8,11 +11,22 @@ namespace StoryTeller.NewEngine
 {
     public class ExecutionContext : IExecutionContext
     {
-        public ExecutionContext(IServiceProvider services, Specification specification, IProject project)
+        /*
+         * TODOs
+         * 
+         *
+         *
+         * 
+         */
+        
+        
+        private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
+        
+        public ExecutionContext(ISystemUnderTest system, Specification specification)
         {
-            Services = services;
+            Services = system.Services;
             Specification = specification;
-            Project = project;
+            Project = system.Project;
         }
 
         public IProject Project { get; }
@@ -23,9 +37,40 @@ namespace StoryTeller.NewEngine
         public Counts Counts { get; } = new Counts();
         public Timings Timings { get; } = new Timings();
         public IReporting Reporting { get; } = new Reporting();
-        public CancellationToken Cancellation { get; } = new CancellationToken();
+        public CancellationToken Cancellation => _cancellation.Token;
+
+        public void Start()
+        {
+            // Starts the timings
+            throw new NotImplementedException();
+        }
+        
+        public SpecResults FinalizeResults(int attempts)
+        {
+            var performance = Timings.Finish().ToArray();
+
+            //PerformancePolicies.Apply(this, performance);
+
+            return new SpecResults
+            {
+                Counts = Counts,
+                Results = Results.ToArray(),
+                Performance = performance,
+                Duration = Timings.Duration,
+                Reporting = Reporting.As<Reporting>().GenerateReports(),
+                Attempts = attempts,
+                HadCriticalException = HadCriticalException
+            };
+
+        }
+
+        public bool HadCriticalException { get; private set; }
+        
+        public IList<StepResult> Results { get; } = new List<StepResult>();
+
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
+            // TODO -- make this be aware of the cancellation token
             throw new NotImplementedException();
         }
 

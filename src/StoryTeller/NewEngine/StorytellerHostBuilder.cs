@@ -4,80 +4,121 @@ using System.Threading.Tasks;
 
 namespace StoryTeller.NewEngine
 {
-    public class StorytellerHostBuilder
+    
+    
+    public class StorytellerHostBuilder 
     {
-        //private Func<Task<IServiceProvider>> _bootstrapper = () => Task.FromResult((IServiceProvider)new NulloServiceProvider());
-
-        private readonly IList<Func<IExecutionContext, Task>> _beforeEach = new List<Func<IExecutionContext, Task>>();
-        private readonly IList<Func<IExecutionContext, Task>> _afterEach = new List<Func<IExecutionContext, Task>>();
-        
-        private readonly IList<Func<IServiceProvider, Task>> _beforeAll = new List<Func<IServiceProvider, Task>>();
-        private readonly IList<Func<IServiceProvider, Task>> _afterAll = new List<Func<IServiceProvider, Task>>();
+        private readonly SystemUnderTest _system = new SystemUnderTest();
 
         
-        public StorytellerHostBuilder Bootstrap(IServiceProvider services)
+        // For right now, let's say this is passed in
+        public StorytellerHostBuilder(IServiceProvider services)
         {
-            return Bootstrap(() => Task.FromResult(services));
         }
 
-        public StorytellerHostBuilder Bootstrap(Func<Task<IServiceProvider>> bootstrapping)
-        {
-            //_bootstrapper = bootstrapping;
-            return this;
-        }
-        
         public StorytellerHostBuilder BeforeEach(Action<IExecutionContext> action)
         {
-            throw new NotImplementedException();
+            return BeforeEach(c =>
+            {
+                action(c);
+                return Task.CompletedTask;
+            });
         }
         
         public StorytellerHostBuilder BeforeEach(Func<IExecutionContext, Task> action)
         {
-            throw new NotImplementedException();
+            _system.BeforeEach.Add(action);
+            return this;
+        }
+
+        public StorytellerHostBuilder BeforeEach<T>(Func<T, Task> func)
+        {
+            return BeforeEach(c => func((T) c.Services.GetService(typeof(T))));
         }
         
-        public StorytellerHostBuilder BeforeAll(Action<IServiceProvider> action)
+        public StorytellerHostBuilder BeforeEach<T>(Action<T> action)
         {
-            throw new NotImplementedException();
-        }
-        
-        public StorytellerHostBuilder BeforeAll(Func<IServiceProvider, Task> action)
-        {
-            throw new NotImplementedException();
+            return BeforeEach(c => action((T) c.Services.GetService(typeof(T))));
         }
         
         public StorytellerHostBuilder AfterEach(Action<IExecutionContext> action)
         {
-            throw new NotImplementedException();
+            return AfterEach(c =>
+            {
+                action(c);
+                return Task.CompletedTask;
+            });
         }
         
         public StorytellerHostBuilder AfterEach(Func<IExecutionContext, Task> action)
         {
-            throw new NotImplementedException();
+            _system.AfterEach.Add(action);
+            return this;
+        }
+
+        public StorytellerHostBuilder AfterEach<T>(Func<T, Task> func)
+        {
+            return AfterEach(c => func((T) c.Services.GetService(typeof(T))));
+        }
+        
+        public StorytellerHostBuilder AfterEach<T>(Action<T> action)
+        {
+            return AfterEach(c => action((T) c.Services.GetService(typeof(T))));
+        }
+
+
+        public StorytellerHostBuilder BeforeAll(Func<IServiceProvider, Task> func)
+        {
+            _system.BeforeAll.Add(func);
+            return this;
+        }
+        
+        public StorytellerHostBuilder BeforeAll(Action<IServiceProvider> action)
+        {
+            return BeforeAll(c =>
+            {
+                action(c);
+                return Task.CompletedTask;
+            });
+        }
+        
+        public StorytellerHostBuilder BeforeAll<T>(Func<T, Task> func)
+        {
+            return BeforeAll(s => func((T) s.GetService(typeof(T))));
+        }
+        
+        public StorytellerHostBuilder BeforeAll<T>(Action<T> action)
+        {
+            return BeforeAll(s => action((T) s.GetService(typeof(T))));
+        }
+        
+        public StorytellerHostBuilder AfterAll(Func<IServiceProvider, Task> func)
+        {
+            _system.AfterAll.Add(func);
+            return this;
         }
         
         public StorytellerHostBuilder AfterAll(Action<IServiceProvider> action)
         {
-            throw new NotImplementedException();
+            return AfterAll(c =>
+            {
+                action(c);
+                return Task.CompletedTask;
+            });
         }
         
-        public StorytellerHostBuilder AfterAll(Func<IServiceProvider, Task> action)
+        public StorytellerHostBuilder AfterAll<T>(Func<T, Task> func)
         {
-            throw new NotImplementedException();
+            return AfterAll(s => func((T) s.GetService(typeof(T))));
+        }
+        
+        public StorytellerHostBuilder AfterAll<T>(Action<T> action)
+        {
+            return AfterAll(s => action((T) s.GetService(typeof(T))));
         }
 
 
-        public Task<int> Run(string[] args)
-        {
-            // delegate to the command line
-            
-            throw new NotImplementedException();
-        }
 
-//        public Task<IStorytellerHost> Start()
-//        {
-//            throw new NotImplementedException();
-//        }
 
     }
 }

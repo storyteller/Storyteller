@@ -26,7 +26,7 @@ namespace StoryTeller.NewEngine
 
         public async Task Start()
         {
-            _context = await _system.CreateContext(_plan.Specification);
+            // Do start and finish too!
             _observer.Starting(_plan);
             
             // TODO -- if it fails, bail out with a failed result

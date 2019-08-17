@@ -67,15 +67,12 @@ namespace StoryTeller.Results
 
         public HtmlReport[] GenerateReports()
         {
-            return _reporters.Select(x =>
+            return _reporters.Select(x => new HtmlReport
             {
-                return new HtmlReport
-                {
-                    html = x.ToHtml(),
-                    title = x.Title,
-                    ShortTitle = x.ShortTitle,
-                    count = x.Count
-                };
+                html = x.ToHtml(),
+                title = x.Title,
+                ShortTitle = x.ShortTitle,
+                count = x.Count
             }).Union(_reports).ToArray();
         }
 

@@ -6,9 +6,43 @@ using StoryTeller.Results;
 
 namespace StoryTeller.NewEngine
 {
+
+    public enum LineFailureMode
+    {
+        /// <summary>
+        /// Report a failure, but carry on
+        /// </summary>
+        Continue,
+        
+        /// <summary>
+        /// Stop all specification executions until the system is rebooted
+        /// </summary>
+        Catastrophic,
+        
+        /// <summary>
+        /// Stop the current specification execution on failures
+        /// </summary>
+        Critical,
+    }
     
     public class LineExecution 
     {
+        public static LineExecution BeforeSpecification(ISystemUnderTest system, Specification specification)
+        {
+            return new LineExecution((context, result) => system.BeforeExecution(context), Stage.before, specification.id)
+            {
+                FailureMode = LineFailureMode.Catastrophic
+            };
+        }
+        
+        public static LineExecution AfterSpecification(ISystemUnderTest system, Specification specification)
+        {
+            return new LineExecution((context, result) => system.AfterExecution(context), Stage.after, specification.id)
+            {
+                FailureMode = LineFailureMode.Catastrophic
+            };
+        }
+        
         public LineExecution(Fixture fixture, Section section, Stage stage)
         {
             Id = section.id;
@@ -37,6 +71,8 @@ namespace StoryTeller.NewEngine
                 default:
                     throw new ArgumentOutOfRangeException(nameof(stage), $"{stage} is not supported, only {nameof(Stage.setup)} or {nameof(Stage.teardown)}");
             }
+
+            FailureMode = LineFailureMode.Critical;
         }
 
         public LineExecution(LineExecutionDelegate execution, StepValues values)
@@ -46,8 +82,14 @@ namespace StoryTeller.NewEngine
             Position = values.Order;
             Id = values.id;
         }
-        
-        
+
+        private LineExecution(LineExecutionDelegate execution, object position, string id)
+        {
+            Execution = execution;
+            Position = position;
+            Id = id;
+        }
+
 
         public LineExecutionDelegate Execution { get; }
 
@@ -56,6 +98,8 @@ namespace StoryTeller.NewEngine
         public string Id { get; }
         
         public StepValues Values { get; }
+
+        public LineFailureMode FailureMode { get; private set; } = LineFailureMode.Continue;
 
         public Task<StepResult> Execute(IExecutionContext context)
         {

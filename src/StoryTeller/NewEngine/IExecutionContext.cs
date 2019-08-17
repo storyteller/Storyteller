@@ -16,11 +16,8 @@ namespace StoryTeller.NewEngine
         IProject Project { get; }
         
         /// <summary>
-        /// Delegates to the service locator in the
-        /// IExecutionContext for this specification execution
+        /// Underlying IoC container for the system under test
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
         IServiceProvider Services { get; }
 
 
