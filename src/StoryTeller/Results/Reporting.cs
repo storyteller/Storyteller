@@ -32,6 +32,7 @@ namespace StoryTeller.Results
     }
     // ENDSAMPLE
 
+    [Obsolete("this will go away with v6, replaced by the new ExecutionResult")]
     public class Reporting : IDisposable, IReporting
     {
         private readonly LightweightCache<Type, Report> _reporters 

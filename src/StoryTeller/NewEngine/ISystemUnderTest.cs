@@ -11,9 +11,6 @@ namespace StoryTeller.NewEngine
         
         CellHandling Handling { get; }
 
-        Task Ready();
-        
-        
         Task BeforeExecution(IExecutionContext context);
 
         Task AfterExecution(IExecutionContext context);
@@ -25,13 +22,12 @@ namespace StoryTeller.NewEngine
 
     public class SystemUnderTest : ISystemUnderTest
     {
-        public FixtureLibrary Fixtures { get; }
-        public CellHandling Handling { get; }
-        public Task Ready()
+        internal SystemUnderTest()
         {
-            throw new NotImplementedException();
         }
 
+        public FixtureLibrary Fixtures { get; internal set;}
+        public CellHandling Handling { get; internal set;}
         public Task BeforeExecution(IExecutionContext context)
         {
             throw new NotImplementedException();
@@ -42,16 +38,9 @@ namespace StoryTeller.NewEngine
             throw new NotImplementedException();
         }
 
-        public IServiceProvider Services { get; }
-        public IProject Project { get; }
+        public IServiceProvider Services { get; internal set;}
+        public IProject Project { get; internal set; }
 
-        public SystemUnderTest(IServiceProvider services, FixtureLibrary fixtures, CellHandling handling, IProject project)
-        {
-            Services = services;
-            Fixtures = fixtures;
-            Handling = handling;
-            Project = project;
-        }
 
         internal readonly IList<Func<IExecutionContext, Task>> BeforeEach = new List<Func<IExecutionContext, Task>>();
         internal readonly IList<Func<IExecutionContext, Task>> AfterEach = new List<Func<IExecutionContext, Task>>();
@@ -59,6 +48,30 @@ namespace StoryTeller.NewEngine
         internal readonly IList<Func<IServiceProvider, Task>> BeforeAll = new List<Func<IServiceProvider, Task>>();
         internal readonly IList<Func<IServiceProvider, Task>> AfterAll = new List<Func<IServiceProvider, Task>>();
 
+        // TODO -- add a CancellationToken of some sort?
+        public async Task Warmup()
+        {
+            foreach (var func in BeforeAll)
+            {
+                await func(Services);
+            }
+        }
         
+        public IList<IDisposable> Disposables { get; } = new List<IDisposable>();
+
+        // TODO -- also track disposables too
+        public async Task Shutdown()
+        {
+            // do something to log errors
+            foreach (var func in AfterAll)
+            {
+                await func(Services);
+            }
+
+            foreach (var disposable in Disposables)
+            {
+                disposable.Dispose();
+            }
+        }
     }
 }

@@ -14,7 +14,8 @@ namespace StoryTeller.NewEngine
     }
 
 
-    // Keep this pretty stupid
+    // Keep this pretty stupid.
+    // Eliminating this one. Use ExecutionPlan for basically everything
     public class SpecificationRunner
     {
         private readonly ISpecificationObserver _observer;
@@ -60,26 +61,6 @@ namespace StoryTeller.NewEngine
              */
 
 
-            var cancellation = plan.Context.Cancellation;
-            var context = plan.Context;
-            
-            // Need to check if the context itself is invalid before going on
-            foreach (var line in plan.Lines)
-            {
-                // This is going to be it. All smarts in the new ExecutionContext
-                if (cancellation.IsCancellationRequested) break;
-
-                // TODO -- trap exceptions inside of line itself
-                // TODO -- if line captures a critical or catastrophic exception,
-                // kill the spec
-                var result = await line.Execute(context);
-                
-                
-                _observer.Completed(plan, line, result);
-            }
-
-
-            _observer.Finished(plan, new SpecResults());
             throw new NotImplementedException();
         }
     }

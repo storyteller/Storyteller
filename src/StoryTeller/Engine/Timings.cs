@@ -13,6 +13,7 @@ namespace StoryTeller.Engine
         private readonly IList<PerfRecord> _records = new List<PerfRecord>();
         private PerfRecord _main;
 
+        [Obsolete("Move this to ExecutionResult")]
         public void Start(Specification spec)
         {
             _main = new PerfRecord("Specification", spec.name, 0, 0);

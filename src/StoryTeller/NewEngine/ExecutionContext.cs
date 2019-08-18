@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model;
@@ -11,17 +12,8 @@ namespace StoryTeller.NewEngine
 {
     public class ExecutionContext : IExecutionContext
     {
-        /*
-         * TODOs
-         * 
-         *
-         *
-         * 
-         */
-        
-        
         private readonly CancellationTokenSource _cancellation = new CancellationTokenSource();
-        
+
         public ExecutionContext(ISystemUnderTest system, Specification specification)
         {
             Services = system.Services;
@@ -34,39 +26,27 @@ namespace StoryTeller.NewEngine
         public Specification Specification { get; }
 
         public State State { get; } = new State();
-        public Counts Counts { get; } = new Counts();
-        public Timings Timings { get; } = new Timings();
-        public IReporting Reporting { get; } = new Reporting();
+        public Timings Timings => Result.Timings;
+        public IReporting Reporting => Result;
         public CancellationToken Cancellation => _cancellation.Token;
 
         public void Start()
         {
-            // Starts the timings
-            throw new NotImplementedException();
+            Result = new ExecutionResult();
+            Result.Start(Specification);
         }
         
-        public SpecResults FinalizeResults(int attempts)
+        public ExecutionResult FinalizeResults(int attempts, EndedBy ended)
         {
-            var performance = Timings.Finish().ToArray();
+            Result.FinalizeResults(attempts, ended);
 
-            //PerformancePolicies.Apply(this, performance);
 
-            return new SpecResults
-            {
-                Counts = Counts,
-                Results = Results.ToArray(),
-                Performance = performance,
-                Duration = Timings.Duration,
-                Reporting = Reporting.As<Reporting>().GenerateReports(),
-                Attempts = attempts,
-                HadCriticalException = HadCriticalException
-            };
-
+            
+            return Result;
         }
 
         public bool HadCriticalException { get; private set; }
         
-        public IList<StepResult> Results { get; } = new List<StepResult>();
 
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
@@ -74,16 +54,12 @@ namespace StoryTeller.NewEngine
             throw new NotImplementedException();
         }
 
-        // Make this smart enough to cancel using the project if the result requires it
-        public void LogResult<T>(T result, PerfRecord record) where T : IResultMessage
+        public bool Wait(Func<Task<bool>> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
             throw new NotImplementedException();
         }
 
-        // Make this smart enough to cancel the spec if the exception is catastropic or critical
-        public void LogException(string id, Exception ex, PerfRecord record, object position = null)
-        {
-            throw new NotImplementedException();
-        }
+
+        public ExecutionResult Result { get; private set; }
     }
 }

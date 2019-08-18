@@ -99,20 +99,28 @@ namespace StoryTeller.NewEngine
         
         public StepValues Values { get; }
 
+        public string PerfType { get; set; } = "Grammar";
+        public string PerfSubject { get; set; } = "Key";
+
         public LineFailureMode FailureMode { get; private set; } = LineFailureMode.Continue;
 
-        public Task<StepResult> Execute(IExecutionContext context)
+        public async Task Execute(ExecutionContext context)
         {
-            /*
-             * TODOS
-             * 1. Do the timings thing
-             * 2. Create a SpecResult
-             * 3. Trap exceptions
-             * 4. Log exceptions
-             * 5. Log any step results
-             */
-            
-            throw new NotImplementedException();
+            using (context.Timings.Record(PerfType, PerfSubject))
+            {
+                var result = new StepResult(Id, Position);
+
+                try
+                {
+                    await Execution(context, result);
+                    context.Result.LogStep(result);
+                }
+                catch (Exception e)
+                {
+                    context.Result.LogStep(result, e);
+                }
+            }
+
         }
     }
 }

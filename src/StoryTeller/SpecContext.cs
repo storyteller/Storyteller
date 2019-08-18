@@ -39,7 +39,7 @@ namespace StoryTeller
         {
             var performance = _timings.Finish().ToArray();
 
-            PerformancePolicies.Apply(this, performance);
+            PerformancePolicies.Apply(e => LogException(null, e, null), performance);
 
             return new SpecResults
             {

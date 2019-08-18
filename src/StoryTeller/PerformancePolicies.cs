@@ -8,25 +8,27 @@ using StoryTeller.Results;
 
 namespace StoryTeller
 {
+    
+    [Obsolete("Just move this to the Project")]
     public static class PerformancePolicies
     {
         private static readonly IList<ThresholdRule> _rules = new List<ThresholdRule>();
 
         public static void ClearAll()
         {
-            _rules.Clear();
         }
 
-        public static void Apply(SpecContext context, PerfRecord[] records)
+        public static void Apply(Action<Exception> log, PerfRecord[] records)
         {
             foreach (var rule in _rules)
             {
                 rule.MarkViolations(records);
             }
 
-            if (records.Any(x => x.PerfViolation))
+            if (!records.Any(x => x.PerfViolation)) return;
             {
-                context.LogException(null, new PerformanceLimitViolationException(records.Where(x => x.PerfViolation).ToArray()), null);
+                var exception = new PerformanceLimitViolationException(records.Where(x => x.PerfViolation).ToArray());
+                log(exception);
             }
         }
 

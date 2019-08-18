@@ -33,7 +33,7 @@ namespace StoryTeller.Testing
             records[3].MarkEnd(50);
 
             var context = SpecContext.Basic();
-            PerformancePolicies.Apply(context, records);
+            PerformancePolicies.Apply(e => context.LogException(null, e, null), records);
 
             records.Where(x => x.PerfViolation).ShouldHaveTheSameElementsAs(records[3]);
 
@@ -61,7 +61,7 @@ namespace StoryTeller.Testing
             records[3].MarkEnd(10);
 
             var context = SpecContext.Basic();
-            PerformancePolicies.Apply(context, records);
+            PerformancePolicies.Apply(e => context.LogException(null, e, null), records);
 
             records.Any(x => x.PerfViolation).ShouldBeFalse();
 

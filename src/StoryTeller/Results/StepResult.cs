@@ -27,6 +27,12 @@ namespace StoryTeller.Results
         {
         }
 
+        public StepResult(string id, object position) : this()
+        {
+            _position = position;
+            this.id = id;
+        }
+
         public StepResult(string id, ResultStatus status) : this()
         {
             this.status = status;
@@ -38,12 +44,19 @@ namespace StoryTeller.Results
             error = ExceptionFormatting.ToDisplayMessage(ex, out errorDisplay);
         }
 
+        public void RecordException(Exception ex)
+        {
+            status = ResultStatus.error;
+            error = ExceptionFormatting.ToDisplayMessage(ex, out errorDisplay);
+        }
+
         public ErrorDisplay errorDisplay = ErrorDisplay.text;
         
         /// <summary>
         /// Used by the "new" v6 engine only
         /// </summary>
-        public SetVerification setVerification { get; set; }
+        [JsonProperty("setVerification")]
+        public SetVerification SetVerification { get; set; }
 
         public string id { get; set; }
         public string spec { get; set; }
@@ -76,6 +89,8 @@ namespace StoryTeller.Results
         {
             counts.Increment(status);
             cells?.Each(x => counts.Increment(x.Status));
+            
+            // TODO -- SetVerification numbers too
         }
 
         protected bool Equals(StepResult other)
