@@ -78,7 +78,8 @@ namespace StoryTeller.NewEngine
         
         public string ProjectPath { get; set; }
         public string SpecDirectory { get; set; }
-        
+        public StopConditions StopConditions { get; } = new StopConditions();
+
         public string Framework { get; set; }
         public bool NoBuild { get; set; }
     }

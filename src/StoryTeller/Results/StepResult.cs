@@ -27,11 +27,18 @@ namespace StoryTeller.Results
         {
         }
 
+        public StepResult(string id, Stage stage) : this()
+        {
+            _position = stage;
+            this.id = id;
+        }
+
         public StepResult(string id, object position) : this()
         {
             _position = position;
             this.id = id;
         }
+
 
         public StepResult(string id, ResultStatus status) : this()
         {

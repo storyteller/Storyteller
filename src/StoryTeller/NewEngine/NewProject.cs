@@ -8,30 +8,9 @@ namespace StoryTeller.NewEngine
     public class NewProject : IProject
     {
         public static int StartingPort = 2499;
-        
-        public bool BreakOnExceptions { get; set; }
-        public bool BreakOnWrongs { get; set; }
-        public int TimeoutInSeconds = 60;
-        private bool _cancelled;
 
-        // TODO need a UT on this thing. Put this logic into execution context instead
-        public bool CanContinue(Counts counts)
-        {
-            if (_cancelled) return false;
-            if (BreakOnExceptions && counts.Exceptions > 0) return false;
-            if (BreakOnWrongs && counts.Wrongs > 0) return false;
+        public StopConditions StopConditions { get; } = new StopConditions();
 
-            return true;
-        }
-
-        
-        // TODO -- probably replace this with a master CancellationToken
-        public void Cancel()
-        {
-            _cancelled = true;
-        }
-        
-        
         public string Profile { get; set; }
         
         public int MaxRetries { get; set; }

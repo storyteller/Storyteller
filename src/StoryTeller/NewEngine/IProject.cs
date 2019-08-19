@@ -11,5 +11,7 @@ namespace StoryTeller.NewEngine
 
         string ProjectPath { get; set; }
         string SpecDirectory { get; set; }
+        
+        StopConditions StopConditions { get; }
     }
 }

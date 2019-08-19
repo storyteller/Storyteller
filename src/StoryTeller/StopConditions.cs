@@ -5,6 +5,7 @@ namespace StoryTeller
 #if NET46
     [Serializable]
 #endif
+    [Obsolete("merge this into Project for V6")]
     public class StopConditions
     {
         public bool BreakOnExceptions;

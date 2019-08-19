@@ -30,8 +30,9 @@ namespace StoryTeller.NewEngine
         public IReporting Reporting => Result;
         public CancellationToken Cancellation => _cancellation.Token;
 
-        public void Start()
+        public void Start(TimeSpan timeout)
         {
+            _cancellation.CancelAfter(timeout);
             Result = new ExecutionResult();
             Result.Start(Specification);
         }
@@ -45,9 +46,13 @@ namespace StoryTeller.NewEngine
             return Result;
         }
 
-        public bool HadCriticalException { get; private set; }
-        
 
+
+        public void Cancel()
+        {
+            _cancellation.Cancel();
+        }
+        
         public bool Wait(Func<bool> condition, TimeSpan timeout, int millisecondPolling = 500)
         {
             // TODO -- make this be aware of the cancellation token
@@ -61,5 +66,16 @@ namespace StoryTeller.NewEngine
 
 
         public ExecutionResult Result { get; private set; }
+
+        public bool ShouldAbort()
+        {
+            if (Result.HadCriticalException) return true;
+            if (Result.CatastrophicException != null) return true;
+
+            if (Project.StopConditions.BreakOnExceptions && Result.Exceptions > 0) return true;
+            if (Project.StopConditions.BreakOnWrongs && Result.Wrongs > 0) return true;
+
+            return false;
+        }
     }
 }

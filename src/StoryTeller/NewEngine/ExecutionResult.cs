@@ -100,35 +100,58 @@ namespace StoryTeller.NewEngine
 
             // TODO -- will need to make things fail if this happens
             // Do this differently in V6
-            PerformancePolicies.Apply(e => LogException(e), Performance);
+            PerformancePolicies.Apply(e => LogException(e, LineFailureMode.Continue), Performance);
 
             Ended = ended;
             Attempts = attempts;
         }
 
-        public void LogStep(StepResult result, Exception ex = null)
+        public void LogStep(StepResult result, Exception ex = null, LineFailureMode failureMode = LineFailureMode.Continue)
         {
             if (ex != null)
             {
+                // TODO -- do something that can "decide" if an exception is critical or catastrophic
+
+                
                 result.RecordException(ex);
-                LogException(ex);
+                LogException(ex, failureMode);
+                
             }
             
             result.Tabulate(this);
             _results.Add(result);
         }
         
-        public void LogException(Exception ex)
+        public void LogException(Exception ex, LineFailureMode failureMode)
         {
             ReporterFor<ExceptionReport>().Log(ex);
-
+            
             ex = unwrapException(ex);
+            var corrected = FailureModeForException(ex, failureMode);
 
-            HadCriticalException = HadCriticalException || ex is StorytellerCriticalException;
-            CatastrophicException = CatastrophicException ?? ex as StorytellerCatastrophicException;
+            switch (corrected)
+            {
+                case LineFailureMode.Catastrophic:
+                    CatastrophicException = ex;
+                    break;
+                
+                case LineFailureMode.Critical:
+                    HadCriticalException = true;
+                    break;
+                    
+            }
         }
 
-        public StorytellerCatastrophicException CatastrophicException { get; private set; }
+        public static LineFailureMode FailureModeForException(Exception ex, LineFailureMode mode)
+        {
+            if (mode == LineFailureMode.Catastrophic) return LineFailureMode.Catastrophic;
+            if (ex is StorytellerCatastrophicException) return LineFailureMode.Catastrophic;
+            if (ex is StorytellerCriticalException) return LineFailureMode.Critical;
+
+            return mode;
+        }
+
+        public Exception CatastrophicException { get; private set; }
 
         public bool HadCriticalException { get; private set; }
 

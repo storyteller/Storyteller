@@ -11,7 +11,7 @@ using StoryTeller.Remotes;
 
 namespace StoryTeller
 {
-    public class Project
+    public class Project 
     {
         public static int StartingPort = 2499;
 
@@ -48,7 +48,7 @@ namespace StoryTeller
             }
         }
 
-        public readonly StopConditions StopConditions = new StopConditions();
+        public StopConditions StopConditions { get; } = new StopConditions();
         private int _port;
 
         public int Port

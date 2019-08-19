@@ -1,19 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using StoryTeller.Results;
 
 namespace StoryTeller.NewEngine
 {
-    // Make a separate one for stepthrough vs batch vs UI
-    public interface ISpecificationObserver
-    {
-        void Starting(ExecutionPlan plan);
-
-        void Completed(ExecutionPlan plan, LineExecution line, StepResult result);
-        void Finished(ExecutionPlan plan, SpecResults specResults);
-    }
-
-
     // Keep this pretty stupid.
     // Eliminating this one. Use ExecutionPlan for basically everything
     public class SpecificationRunner

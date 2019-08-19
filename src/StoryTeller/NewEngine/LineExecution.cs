@@ -6,25 +6,6 @@ using StoryTeller.Results;
 
 namespace StoryTeller.NewEngine
 {
-
-    public enum LineFailureMode
-    {
-        /// <summary>
-        /// Report a failure, but carry on
-        /// </summary>
-        Continue,
-        
-        /// <summary>
-        /// Stop all specification executions until the system is rebooted
-        /// </summary>
-        Catastrophic,
-        
-        /// <summary>
-        /// Stop the current specification execution on failures
-        /// </summary>
-        Critical,
-    }
-    
     public class LineExecution 
     {
         public static LineExecution BeforeSpecification(ISystemUnderTest system, Specification specification)
@@ -37,12 +18,12 @@ namespace StoryTeller.NewEngine
         
         public static LineExecution AfterSpecification(ISystemUnderTest system, Specification specification)
         {
-            return new LineExecution((context, result) => system.AfterExecution(context), Stage.after, specification.id)
+            return new LineExecution((context, result) => system.AfterExecution(context), Stage.before, specification.id)
             {
                 FailureMode = LineFailureMode.Catastrophic
             };
         }
-        
+
         public LineExecution(Fixture fixture, Section section, Stage stage)
         {
             Id = section.id;
@@ -117,7 +98,7 @@ namespace StoryTeller.NewEngine
                 }
                 catch (Exception e)
                 {
-                    context.Result.LogStep(result, e);
+                    context.Result.LogStep(result, e, FailureMode);
                 }
             }
 
