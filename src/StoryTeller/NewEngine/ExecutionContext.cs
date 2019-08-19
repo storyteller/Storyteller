@@ -33,8 +33,8 @@ namespace StoryTeller.NewEngine
         public void Start(TimeSpan timeout)
         {
             _cancellation.CancelAfter(timeout);
-            Result = new ExecutionResult();
-            Result.Start(Specification);
+            Result = new ExecutionResult(Specification);
+            Result.Start();
         }
         
         public ExecutionResult FinalizeResults(int attempts, EndedBy ended)
@@ -67,6 +67,7 @@ namespace StoryTeller.NewEngine
 
         public ExecutionResult Result { get; private set; }
 
+        // TODO -- this needs a unit test
         public bool ShouldAbort()
         {
             if (Result.HadCriticalException) return true;

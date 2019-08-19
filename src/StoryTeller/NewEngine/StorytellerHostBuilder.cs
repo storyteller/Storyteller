@@ -1,19 +1,35 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using StoryTeller.Model;
+using StoryTeller.Model.Persistence;
 
 namespace StoryTeller.NewEngine
 {
-    
-    
     public class StorytellerHostBuilder 
     {
         private readonly SystemUnderTest _system = new SystemUnderTest();
 
+        private readonly CellHandling _cellHandling = StoryTeller.CellHandling.Basic();
+
+
+        private Func<Task<IServiceProvider>> _bootstrapper =
+            () => Task.FromResult((IServiceProvider) new NulloServiceProvider());
+        
         
         // For right now, let's say this is passed in
         public StorytellerHostBuilder(IServiceProvider services)
         {
+            _bootstrapper = () => Task.FromResult(services);
+        }
+
+        public StorytellerHostBuilder()
+        {
+        }
+
+        public StorytellerHostBuilder Bootstrap(Func<Task<IServiceProvider>> bootstrapper)
+        {
+            _bootstrapper = bootstrapper;
+            return this;
         }
 
         public StorytellerHostBuilder BeforeEach(Action<IExecutionContext> action)
@@ -23,6 +39,13 @@ namespace StoryTeller.NewEngine
                 action(c);
                 return Task.CompletedTask;
             });
+        }
+
+        // TODO -- have an overload that takes in the Project?
+        public StorytellerHostBuilder CellHandling(Action<CellHandling> configure)
+        {
+            configure(_cellHandling);
+            return this;
         }
         
         public StorytellerHostBuilder BeforeEach(Func<IExecutionContext, Task> action)
@@ -118,7 +141,36 @@ namespace StoryTeller.NewEngine
         }
 
 
+        /// <summary>
+        /// Create an AdhocRunner to execute specifications in memory. Useful for
+        /// creating NUnit or XUnit test fixtures to run Storyteller specs
+        /// </summary>
+        /// <param name="directory"></param>
+        /// <returns></returns>
+        public async Task<AdhocRunner> ToAdhocRunner(string directory = null)
+        {
+            var fixtureBuilder = Task.Factory.StartNew(() => FixtureLibrary.CreateForAppDomain(_cellHandling));
 
+            var systemBuilder = _bootstrapper().ContinueWith(async t =>
+            {
+                var services = t.Result;
+                var s = new SystemUnderTest {Services = services};
+                await s.Warmup();
+
+                return s;
+            }).Unwrap();
+
+            var hierarchyBuilder = Task.Factory.StartNew(() =>
+            {
+                // TODO -- do a better job of guessing the specs path
+                return HierarchyLoader.ReadHierarchy(directory).ToHierarchy();
+            });
+
+            var system = await systemBuilder;
+            system.Fixtures = await fixtureBuilder;
+            
+            return new AdhocRunner(system, await hierarchyBuilder);
+        }
 
     }
 }

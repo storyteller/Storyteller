@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Baseline;
 using StoryTeller.Engine;
 using StoryTeller.Model.Persistence.Markdown;
@@ -26,8 +28,8 @@ namespace StoryTeller.Model.Persistence
         public static Suite ReadHierarchy(string folder)
         {
             var suite = ReadSuite(folder);
-            suite.name = string.Empty;
-            suite.WritePath(string.Empty);
+            suite.name = String.Empty;
+            suite.WritePath(String.Empty);
 
             return suite;
         }
@@ -102,6 +104,27 @@ namespace StoryTeller.Model.Persistence
             }
 
             return specs.ToList();
+        }
+
+        public static string GuessSpecDirectory(ISystem system)
+        {
+#if NET46
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+#else
+            var path = AppContext.BaseDirectory;
+#endif
+
+            var projectName = system.GetType().GetTypeInfo().Assembly.GetName().Name;
+           
+
+            var fileName = Path.GetFileName(path);
+            while (fileName != projectName && !Directory.Exists(path.AppendPath("Specs")))
+            {
+                path = path.ParentDirectory();
+                fileName = Path.GetFileName(path);
+            }
+
+            return HierarchyLoader.SelectSpecPath(path);
         }
     }
 }

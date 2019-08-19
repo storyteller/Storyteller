@@ -5,7 +5,7 @@ using StoryTeller.Model;
 
 namespace StoryTeller.NewEngine
 {
-    public interface ISystemUnderTest
+    public interface ISystemUnderTest : IDisposable
     {
         FixtureLibrary Fixtures { get; }
         
@@ -28,14 +28,20 @@ namespace StoryTeller.NewEngine
 
         public FixtureLibrary Fixtures { get; internal set;}
         public CellHandling Handling { get; internal set;}
-        public Task BeforeExecution(IExecutionContext context)
+        public async Task BeforeExecution(IExecutionContext context)
         {
-            throw new NotImplementedException();
+            foreach (var func in BeforeEach)
+            {
+                await func(context);
+            }
         }
 
-        public Task AfterExecution(IExecutionContext context)
+        public async Task AfterExecution(IExecutionContext context)
         {
-            throw new NotImplementedException();
+            foreach (var func in AfterEach)
+            {
+                await func(context);
+            }
         }
 
         public IServiceProvider Services { get; internal set;}
@@ -72,6 +78,13 @@ namespace StoryTeller.NewEngine
             {
                 disposable.Dispose();
             }
+        }
+
+
+        public void Dispose()
+        {
+            // TODO: I know, right? Wait for IAsyncDisposable too
+            Shutdown().GetAwaiter().GetResult();
         }
     }
 }

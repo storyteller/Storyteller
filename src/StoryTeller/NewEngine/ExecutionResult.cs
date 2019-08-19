@@ -21,8 +21,17 @@ namespace StoryTeller.NewEngine
     
     public class ExecutionResult : Counts, IReporting
     {
-        private readonly IList<StepResult> _results = new List<StepResult>();
+        [JsonProperty("specification")]
+        public Specification Specification { get; }
         
+        private readonly IList<StepResult> _results = new List<StepResult>();
+
+
+        public ExecutionResult(Specification specification)
+        {
+            Specification = specification;
+        }
+
         [JsonProperty("ended")]
         [JsonConverter(typeof(StringEnumConverter))] 
         public EndedBy Ended { get; set; }
@@ -75,10 +84,10 @@ namespace StoryTeller.NewEngine
         
         
 
-        public void Start(Specification specification)
+        public void Start()
         {
             _reporters[typeof(DebugReport)].As<DebugReport>().StartListening();
-            Timings.Start(specification);
+            Timings.Start(Specification);
         }
 
         public void FinalizeResults(int attempts, EndedBy ended)
