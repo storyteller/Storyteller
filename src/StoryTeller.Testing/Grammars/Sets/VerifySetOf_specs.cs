@@ -67,7 +67,7 @@ namespace StoryTeller.Testing.Grammars.Sets
 
             CountsShouldBe(2, 2, 0, 0);
 
-            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            var result = theResult.Results.OfType<SetVerificationResult>().Single();
 
             result.missing.ShouldContain("1");
             result.extras.Single()["City"].ShouldBe("Jasper");
@@ -105,7 +105,7 @@ namespace StoryTeller.Testing.Grammars.Sets
 
             CountsShouldBe(1, 2, 0, 0);
 
-            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            var result = theResult.Results.OfType<SetVerificationResult>().Single();
 
             result.wrongOrdered.ShouldHaveTheSameElementsAs(new WrongOrder("1", 3), new WrongOrder("2", 2));
         }

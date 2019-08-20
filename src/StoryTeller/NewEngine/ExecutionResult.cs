@@ -163,10 +163,12 @@ namespace StoryTeller.NewEngine
             return mode;
         }
 
+        [JsonIgnore]
         public Exception CatastrophicException { get; private set; }
 
+        [JsonIgnore]
         public bool HadCriticalException { get; private set; }
-
+        
         private static Exception unwrapException(Exception ex)
         {
             if (ex is TargetInvocationException)

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Xunit;
 using Shouldly;
 using StoryTeller.Model;
@@ -35,8 +36,10 @@ Name: Do
 ");
 
             Step("1").StatusWas(ResultStatus.ok);
-            SpecContextState.Retrieve<int>("number")
-                .ShouldBe(13);
+            
+            throw new NotImplementedException("Find another way to verify this");
+//            SpecContextState.Retrieve<int>("number")
+//                .ShouldBe(13);
         }
 
         [Fact]

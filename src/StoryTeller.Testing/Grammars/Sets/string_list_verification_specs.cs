@@ -69,7 +69,7 @@ Name: whatever
 
             CountsShouldBe(1, 2, 0, 0);
 
-            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            var result = theResult.Results.OfType<SetVerificationResult>().Single();
             result.wrongOrdered.OrderBy(x => x.id).ShouldHaveTheSameElementsAs(new WrongOrder("1", 2), new WrongOrder("2", 1));
         }
 
@@ -97,7 +97,7 @@ Name: whatever
 
             CountsShouldBe(3, 2, 0, 0);
 
-            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            var result = theResult.Results.OfType<SetVerificationResult>().Single();
             result.missing.Single().ShouldBe("missing");
             result.extras.Single()["expected"].ShouldBe("extra");
         }
@@ -121,7 +121,7 @@ Name: whatever
 
 ");
 
-            var result = theContext.Results.OfType<SetVerificationResult>().Single();
+            var result = theResult.Results.OfType<SetVerificationResult>().Single();
 
             result.matches.OrderBy(x => x).ShouldHaveTheSameElementsAs("1", "2", "3");
             result.missing.Single().ShouldBe("missing");

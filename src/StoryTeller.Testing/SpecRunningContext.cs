@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Baseline;
-using Xunit;
 using Shouldly;
 using Specifications;
 using StoryTeller.Engine;
-using StoryTeller.Engine.Batching;
 using StoryTeller.Grammars.Sets;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
+using IExecutionContext = StoryTeller.Engine.IExecutionContext;
 
 namespace StoryTeller.Testing
 {
     
     public abstract class SpecRunningContext : IDisposable
     {
-        private SpecContext _context;
-        private readonly IList<Func<SpecContext, string>> _expectations 
-            = new List<Func<SpecContext, string>>();
+        private readonly IList<Func<ExecutionResult, string>> _expectations 
+            = new List<Func<ExecutionResult, string>>();
 
-        protected Func<SpecContext, string> expect
+        protected Func<ExecutionResult, string> expect
         {
             set
             {
@@ -34,69 +33,44 @@ namespace StoryTeller.Testing
             var spec = TextParser.Parse(text);
             executeSpec(spec);
         }
+        
+        
 
         protected void executeSpec(Specification spec)
         {
-            _context = new SpecContext(spec, null, new NulloResultObserver(), new StopConditions(), new TestExecutionContext(Services));
-
-            var plan = spec.CreatePlan(TestingContext.Library);
-
-            PerfRecords = SpecExecution.RunAll(_context, plan).ToArray();
+            using (var runner = theHostBuilder.ToAdhocRunner().GetAwaiter().GetResult())
+            {
+                theResult = runner.Run(spec).GetAwaiter().GetResult();
+            }
         }
 
-        public PerfRecord[] PerfRecords { get; set; } = new PerfRecord[0];
+        public PerfRecord[] PerfRecords => theResult.Performance;
 
-        public class TestExecutionContext : IExecutionContext
+
+
+        public readonly InMemoryServiceProvider Services = new InMemoryServiceProvider();
+
+        protected SpecRunningContext()
         {
-            private readonly InMemoryServiceLocator _services;
-
-            public void Register<T>(T service)
-            {
-                _services.Add(service);
-            }
-
-            public TestExecutionContext(InMemoryServiceLocator services)
-            {
-                _services = services;
-            }
-
-            void IDisposable.Dispose()
-            {
-            }
-
-            public T GetService<T>()
-            {
-                return _services.GetInstance<T>();
-            }
-
-            public void BeforeExecution(ISpecContext context)
-            {
-                
-            }
-
-            public void AfterExecution(ISpecContext context)
-            {
-                // Nothing
-            }
+            theHostBuilder = new StorytellerHostBuilder(Services);
         }
 
-
-        public readonly InMemoryServiceLocator Services = new InMemoryServiceLocator();
+        public StorytellerHostBuilder theHostBuilder { get; set; }
 
         public void Dispose()
         {
             try
             {
-                if (_context != null)
+                if (theResult != null)
                 {
                     var messages = _expectations
-                        .Select(x => x(_context))
+                        .Select(x => x(theResult))
                         .Where(x => x.IsNotEmpty())
                         .ToArray();
 
                     if (messages.Any())
                     {
-                        throw new Exception("Expectations failed!\n" + messages.Join("\n") + "\n\nThe full results were: \n" + _context.Results.Select(x => x.ToString()).Join("\n"));
+                        throw new Exception("Expectations failed!\n" + messages.Join("\n") + "\n\nThe full results were: \n" + theResult.Results.Select(x => x.ToString()).Join("\n"));
                     }
                 }
             }
@@ -106,7 +80,7 @@ namespace StoryTeller.Testing
             }
         }
 
-        protected SpecContext theContext => _context;
+        protected ExecutionResult theResult { get; private set; }
 
         protected T ModelFor<T>(string fixtureName, string grammarName) where T : GrammarModel
         {
@@ -133,8 +107,6 @@ namespace StoryTeller.Testing
             {
                 var actual = context.Results.Where(x =>
                 {
-                    if (x is SetVerificationResult) return true;
-
                     var result = x.As<StepResult>();
                     if (result.position == null) return true;
 
@@ -155,8 +127,6 @@ namespace StoryTeller.Testing
             };
         }
 
-        protected State SpecContextState => _context.State;
-
         protected ResultExpression Step(string id)
         {
             return new ResultExpression(id, this);
@@ -164,7 +134,7 @@ namespace StoryTeller.Testing
 
         protected SetVerificationResult VerificationResultFor(string id)
         {
-            return _context.Results.OfType<SetVerificationResult>().FirstOrDefault(x => x.id == id);
+            return theResult.Results.FirstOrDefault(x => x.id == id).SetVerification;
         }
 
 
@@ -237,7 +207,7 @@ namespace StoryTeller.Testing
                 return this;
             }
 
-            private StepResult findStepResult(SpecContext context)
+            private StepResult findStepResult(ExecutionResult context)
             {
                 return context.Results.OfType<StepResult>().FirstOrDefault(x => x.id == _id);
             }
@@ -279,7 +249,7 @@ namespace StoryTeller.Testing
                     _cell = cell;
                 }
 
-                private CellResult findResult(SpecContext context)
+                private CellResult findResult(ExecutionResult context)
                 {
                     var stepResult =
                         context.Results.OfType<StepResult>()
