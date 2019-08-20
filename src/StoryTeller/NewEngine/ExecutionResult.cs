@@ -19,7 +19,7 @@ namespace StoryTeller.NewEngine
         TimedOut
     }
     
-    public class ExecutionResult : Counts, IReporting
+    public class ExecutionResult : IReporting
     {
         [JsonProperty("specification")]
         public Specification Specification { get; }
@@ -31,6 +31,9 @@ namespace StoryTeller.NewEngine
         {
             Specification = specification;
         }
+        
+        [JsonProperty("counts")]
+        public Counts Counts { get; } = new Counts();
 
         [JsonProperty("ended")]
         [JsonConverter(typeof(StringEnumConverter))] 
@@ -127,7 +130,7 @@ namespace StoryTeller.NewEngine
                 
             }
             
-            result.Tabulate(this);
+            result.Tabulate(Counts);
             _results.Add(result);
         }
         

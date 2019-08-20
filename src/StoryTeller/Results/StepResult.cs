@@ -63,7 +63,7 @@ namespace StoryTeller.Results
         /// Used by the "new" v6 engine only
         /// </summary>
         [JsonProperty("setVerification")]
-        public SetVerification SetVerification { get; set; }
+        public SetVerificationResult SetVerification { get; set; }
 
         public string id { get; set; }
         public string spec { get; set; }

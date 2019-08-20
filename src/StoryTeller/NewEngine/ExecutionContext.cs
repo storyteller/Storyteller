@@ -73,8 +73,8 @@ namespace StoryTeller.NewEngine
             if (Result.HadCriticalException) return true;
             if (Result.CatastrophicException != null) return true;
 
-            if (Project.StopConditions.BreakOnExceptions && Result.Exceptions > 0) return true;
-            if (Project.StopConditions.BreakOnWrongs && Result.Wrongs > 0) return true;
+            if (Project.StopConditions.BreakOnExceptions && Result.Counts.Exceptions > 0) return true;
+            if (Project.StopConditions.BreakOnWrongs && Result.Counts.Wrongs > 0) return true;
 
             return false;
         }
