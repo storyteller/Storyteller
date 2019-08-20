@@ -10,6 +10,7 @@ using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 using StoryTeller.NewEngine;
 using StoryTeller.Results;
+using StoryTeller.Samples.Fixtures;
 using IExecutionContext = StoryTeller.Engine.IExecutionContext;
 
 namespace StoryTeller.Testing
@@ -52,7 +53,7 @@ namespace StoryTeller.Testing
 
         protected SpecRunningContext()
         {
-            theHostBuilder = new StorytellerHostBuilder(Services);
+            theHostBuilder = new StorytellerHostBuilder(Services).LoadParallelProjectContainingType<FailureFixture>();
         }
 
         public StorytellerHostBuilder theHostBuilder { get; set; }

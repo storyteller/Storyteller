@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Baseline;
 using StoryTeller.Model;
 using StoryTeller.Model.Persistence;
 
@@ -14,8 +15,10 @@ namespace StoryTeller.NewEngine
 
         private Func<Task<IServiceProvider>> _bootstrapper =
             () => Task.FromResult((IServiceProvider) new NulloServiceProvider());
-        
-        
+
+        private string _projectDirectory;
+
+
         // For right now, let's say this is passed in
         public StorytellerHostBuilder(IServiceProvider services)
         {
@@ -24,6 +27,42 @@ namespace StoryTeller.NewEngine
 
         public StorytellerHostBuilder()
         {
+        }
+        
+        public static string FindParallelDirectory(string projectName, string sourceDirectory = "src")
+        {
+#if NET46
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+#else
+            var path = AppContext.BaseDirectory;
+#endif
+
+            while (!path.EndsWith(sourceDirectory))
+            {
+                path = path.ParentDirectory();
+            }
+
+            path = path.AppendPath(projectName);
+
+            return path;
+        }
+
+        public StorytellerHostBuilder ProjectDirectory(string projectDirectory)
+        {
+            _projectDirectory = projectDirectory;
+            return this;
+        }
+
+        public StorytellerHostBuilder LoadParallelProjectContainingType<T>(string sourceFolder = "src")
+        {
+            var assemblyName = typeof(T).Assembly.GetName().Name;
+            return LoadParallelProject(assemblyName, sourceFolder);
+        }
+        
+        public StorytellerHostBuilder LoadParallelProject(string projectName, string sourceFolder = "src")
+        {
+            _projectDirectory = FindParallelDirectory(projectName, sourceFolder);
+            return this;
         }
 
         public StorytellerHostBuilder Bootstrap(Func<Task<IServiceProvider>> bootstrapper)
@@ -162,8 +201,12 @@ namespace StoryTeller.NewEngine
 
             var hierarchyBuilder = Task.Factory.StartNew(() =>
             {
+                // TODO -- guess the default project. 
+
+                var specDirectory = HierarchyLoader.SelectSpecPath(_projectDirectory);
+                
                 // TODO -- do a better job of guessing the specs path
-                return HierarchyLoader.ReadHierarchy(directory).ToHierarchy();
+                return HierarchyLoader.ReadHierarchy(specDirectory).ToHierarchy();
             });
 
             var system = await systemBuilder;
