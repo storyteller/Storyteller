@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars.Lines
@@ -17,6 +18,11 @@ namespace StoryTeller.Grammars.Lines
             var stepValues = _cells.ToStepValues(step);
 
             return new LineStep(stepValues, this);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public abstract IEnumerable<CellResult> Execute(StepValues values, ISpecContext context);

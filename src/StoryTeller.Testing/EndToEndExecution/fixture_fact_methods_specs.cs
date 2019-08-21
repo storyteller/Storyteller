@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Baseline;
 using Xunit;
 using Shouldly;
@@ -11,11 +12,11 @@ namespace StoryTeller.Testing.EndToEndExecution
     public class fixture_fact_methods_specs : SpecRunningContext
     {
         [Fact]
-        public void execute_simple_fact_positive()
+        public async Task execute_simple_fact_positive()
         {
             FactFixture.IsSo = true;
             
-            execute(@"
+            await execute(@"
 Name: whatever
 => Fact
 * CheckIsSo#1
@@ -27,9 +28,9 @@ Name: whatever
         }
 
         [Fact]
-        public void execute_fact_by_context()
+        public async Task execute_fact_by_context()
         {
-            execute(@"
+            await execute(@"
 Name: whatever
 => Fact
 * SetState: state=Texas
@@ -43,11 +44,11 @@ Name: whatever
         }
 
         [Fact]
-        public void execute_fact_by_service()
+        public async Task execute_fact_by_service()
         {
             Services.Add(new CheckService{On = true});
 
-            execute(@"
+            await execute(@"
 Name: whatever
 => Fact
 * ServiceIsOn#1

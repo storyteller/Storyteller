@@ -1,5 +1,6 @@
 ﻿using System;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars
 {
@@ -19,6 +20,11 @@ namespace StoryTeller.Grammars
             {
                 Subject = Key
             };
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

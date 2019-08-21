@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Baseline;
 using Shouldly;
 using Specifications;
@@ -29,19 +30,28 @@ namespace StoryTeller.Testing
             }
         } 
 
-        protected void execute(string text)
+        protected Task execute(string text)
         {
             var spec = TextParser.Parse(text);
-            executeSpec(spec);
+            return executeSpec(spec);
         }
         
         
 
-        protected void executeSpec(Specification spec)
+        protected async Task executeSpec(Specification spec)
         {
-            using (var runner = theHostBuilder.ToAdhocRunner().GetAwaiter().GetResult())
+            var runner = await theHostBuilder.ToAdhocRunner();
+            var factFixture = new StoryTeller.Testing.EndToEndExecution.FactFixture();
+            runner.Library.Models["Fact"] = factFixture.Compile(CellHandling.Basic());
+            runner.Library.Fixtures["Fact"] = factFixture;
+
+            try
             {
-                theResult = runner.Run(spec).GetAwaiter().GetResult();
+                theResult = await runner.Run(spec);
+            }
+            finally
+            {
+                await runner.Shutdown();
             }
         }
 

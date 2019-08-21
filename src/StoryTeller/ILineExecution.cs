@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace StoryTeller
 {
+    [Obsolete("Goes away in v6")]
     public interface ILineExecution : IExecutionStep
     {
         void Execute(SpecContext context);

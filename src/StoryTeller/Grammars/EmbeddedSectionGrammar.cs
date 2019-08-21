@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars
@@ -67,6 +68,11 @@ namespace StoryTeller.Grammars
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new CompositeExecution(determineSteps(step, library).ToArray());
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         private IEnumerable<IExecutionStep> determineSteps(Step step, FixtureLibrary library)

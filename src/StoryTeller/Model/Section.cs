@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Baseline;
 using Newtonsoft.Json;
 using StoryTeller.Grammars;
 using StoryTeller.Model.Persistence;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
 
 namespace StoryTeller.Model
@@ -49,11 +51,48 @@ namespace StoryTeller.Model
 
             return CreatePlan(library, fixture);
         }
+        
+        public override void CreatePlan(ExecutionPlan plan, FixtureLibrary library)
+        {
+            var fixture = library.Fixtures[Key];
+
+            if (id.IsEmpty()) id = Guid.NewGuid().ToString();
+
+            // Fixture Setup
+            plan.Lines.Add(new LineExecution(this, Stage.setup, (c, r) =>
+            {
+                fixture.SetUp();
+                return Task.CompletedTask;
+            })            
+            {
+                FailureMode = LineFailureMode.Critical
+            });
+
+            // The children
+            foreach (var node in _children.OfType<Step>())
+            {
+                node.CreatePlan(plan, library, fixture);
+            }
+
+
+            // Fixture Teardown
+            plan.Lines.Add(new LineExecution(this, Stage.teardown, (c, r) =>
+            {
+                fixture.TearDown();
+                return Task.CompletedTask;
+            })
+            {
+                FailureMode = LineFailureMode.Critical
+            });
+            
+        }
 
         public CompositeExecution CreatePlan(FixtureLibrary library, Fixture fixture)
         {
             return new CompositeExecution(toExecutionSteps(library, fixture).ToArray());
         }
+
+
 
         private IEnumerable<IExecutionStep> toExecutionSteps(FixtureLibrary library, Fixture fixture)
         {

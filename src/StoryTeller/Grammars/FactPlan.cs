@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars
@@ -22,6 +23,14 @@ namespace StoryTeller.Grammars
         IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable)
         {
             return new FactPlan(new StepValues(step.id), this);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            var line = new LineExecution(step, (c, r) =>
+            {
+                
+            });
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
@@ -45,6 +54,7 @@ namespace StoryTeller.Grammars
             return false;
         }
 
+        [Obsolete]
         public Task<bool> PerformTestAsync(StepValues values, ISpecContext context)
         {
             throw new NotImplementedException();
@@ -63,6 +73,7 @@ namespace StoryTeller.Grammars
 
     }
 
+    [Obsolete]
     public class FactPlan : LineStepBase, IWithValues
     {
         private readonly IFactGrammar _grammar;

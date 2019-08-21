@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Baseline.Dates;
 using StoryTeller.Model;
@@ -16,16 +17,16 @@ namespace StoryTeller.NewEngine
         {
             _system = system;
             _observer = observer;
-            // TODO -- go plan it all out, build out the Lines list, do the conversion
             Context = new ExecutionContext(system, specification);
             
-            // Also does the conversion
+            Lines.Add(LineExecution.BeforeSpecification(_system, specification));
+
+            foreach (var node in specification.Children)
+            {
+                node.CreatePlan(this, system.Fixtures);
+            }
         }
         
-        
-        // specific methods for adding a line grammar, paragraph as table line, section setup,
-        // fixture teardown
-
 
         public ExecutionContext Context { get; }
 

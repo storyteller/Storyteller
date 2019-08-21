@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Baseline.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars.Reflection
@@ -33,6 +34,11 @@ namespace StoryTeller.Grammars.Reflection
         {
             var stepValues = _invocation.InputCells().ToStepValues(step);
             return new FactCheckPlan(stepValues, this);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

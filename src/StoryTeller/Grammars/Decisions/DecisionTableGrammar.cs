@@ -1,5 +1,6 @@
 using StoryTeller.Grammars.Tables;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars.Decisions
 {
@@ -36,6 +37,11 @@ namespace StoryTeller.Grammars.Decisions
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return _inner.CreatePlan(step, library);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new System.NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

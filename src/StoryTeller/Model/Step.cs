@@ -5,6 +5,7 @@ using Baseline;
 
 using Newtonsoft.Json;
 using StoryTeller.Model.Persistence.Markdown;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Model
 {
@@ -28,7 +29,7 @@ namespace StoryTeller.Model
 
         public Section[] collections
         {
-            get { return Collections.GetAll(); }
+            get => Collections.GetAll();
             set
             {
                 value.Each(pair => Collections[pair.Key] = pair);
@@ -75,7 +76,7 @@ namespace StoryTeller.Model
 
         public string ToValueString()
         {
-            string values = Values.ToArray()
+            var values = Values.ToArray()
                 .Select(pair => "{0}={1}".ToFormat(pair.Key, pair.Value))
                 .Join(", ");
 
@@ -171,6 +172,12 @@ namespace StoryTeller.Model
                     stepValidator.AddError($"Missing value for '{cell.Key}'");
                 }
             }
+        }
+
+        public void CreatePlan(ExecutionPlan plan, FixtureLibrary library, Fixture fixture, bool inTable = false)
+        {
+            var grammar = fixture.GrammarFor(Key);
+            grammar.CreatePlan(plan, this, library, inTable);
         }
     }
 }

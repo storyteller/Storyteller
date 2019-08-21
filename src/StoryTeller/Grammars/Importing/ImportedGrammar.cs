@@ -1,7 +1,9 @@
 ﻿using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars.Importing
 {
+    
     public class ImportedGrammar : IGrammar
     {
         private readonly Fixture _innerFixture;
@@ -17,6 +19,11 @@ namespace StoryTeller.Grammars.Importing
         {
             var innerPlan = _inner.CreatePlan(step, library);
             return new ImportedExecutionStep(_innerFixture, innerPlan);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new System.NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

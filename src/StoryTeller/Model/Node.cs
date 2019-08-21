@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Baseline;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Model
 {
@@ -18,7 +19,7 @@ namespace StoryTeller.Model
 
         public string id
         {
-            get { return _id; }
+            get => _id;
             set
             {
                 _id = value;
@@ -43,6 +44,11 @@ namespace StoryTeller.Model
                     yield return descendent;
                 }
             }
-        } 
+        }
+
+        public virtual void CreatePlan(ExecutionPlan plan, FixtureLibrary library)
+        {
+            // Nothing
+        }
     }
 }

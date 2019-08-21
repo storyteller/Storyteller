@@ -24,66 +24,47 @@ namespace StoryTeller.NewEngine
             };
         }
 
-        public LineExecution(Fixture fixture, Section section, Stage stage)
+        public LineExecution(Node node, Stage stage, LineExecutionDelegate action)
         {
-            Id = section.id;
+            Id = node.id;
             Position = stage;
-
-            switch (stage)
-            {
-                // TODO -- should be async all the way down
-                case Stage.setup:
-                    Execution = (c, r) =>
-                    {
-                        fixture.SetUp();
-                        return Task.CompletedTask;
-                    };
-                    break;
-                
-                case Stage.teardown:
-                    Execution = (c, r) =>
-                    {
-                        // TODO -- should be async all the way down
-                        fixture.TearDown();
-                        return Task.CompletedTask;
-                    };
-                    break;
-                
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(stage), $"{stage} is not supported, only {nameof(Stage.setup)} or {nameof(Stage.teardown)}");
-            }
-
-            FailureMode = LineFailureMode.Critical;
+            Action = action;
+            
+            // TODO -- do this better
+            PerfSubject = node.GetType().Name;
+            
+            // TODO -- Do this better
+            PerfType = node.GetType().Name;
         }
 
-        public LineExecution(LineExecutionDelegate execution, StepValues values)
+        private LineExecution(LineExecutionDelegate action, object position, string id)
         {
-            Execution = execution;
-            Values = values;
-            Position = values.Order;
-            Id = values.id;
-        }
-
-        private LineExecution(LineExecutionDelegate execution, object position, string id)
-        {
-            Execution = execution;
+            Action = action;
             Position = position;
             Id = id;
         }
+        
+        public LineExecution(Step step, LineExecutionDelegate action)
+        {
+            Action = action;
+            Id = step.id;
+
+            PerfSubject = step.Key;
+            PerfType = "Grammar";
+        }
 
 
-        public LineExecutionDelegate Execution { get; }
+        public LineExecutionDelegate Action { get; }
 
         public object Position { get; }
 
         public string Id { get; }
         
-        public StepValues Values { get; }
 
         public string PerfType { get; set; } = "Grammar";
         public string PerfSubject { get; set; } = "Key";
 
-        public LineFailureMode FailureMode { get; private set; } = LineFailureMode.Continue;
+        public LineFailureMode FailureMode { get; set; } = LineFailureMode.Continue;
 
         public async Task Execute(ExecutionContext context)
         {
@@ -93,7 +74,7 @@ namespace StoryTeller.NewEngine
 
                 try
                 {
-                    await Execution(context, result);
+                    await Action(context, result);
                     context.Result.LogStep(result);
                 }
                 catch (Exception e)

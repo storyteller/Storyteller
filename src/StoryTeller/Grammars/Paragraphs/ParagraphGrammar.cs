@@ -4,6 +4,7 @@ using System.Linq;
 using Baseline;
 using StoryTeller.Grammars.ObjectBuilding;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars.Paragraphs
 {
@@ -27,6 +28,11 @@ namespace StoryTeller.Grammars.Paragraphs
             }
 
             return new CompositeExecution(children);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public IList<IGrammar> Children { get; } = new List<IGrammar>();

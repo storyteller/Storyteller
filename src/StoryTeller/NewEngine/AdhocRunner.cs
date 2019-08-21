@@ -11,18 +11,22 @@ namespace StoryTeller.NewEngine
     public class AdhocRunner : ISpecificationObserver, IDisposable
     {
         public Hierarchy Hierarchy { get; }
-        public FixtureLibrary Fixtures { get; }
+        public FixtureLibrary Library { get; }
         private readonly SystemUnderTest _system;
 
         internal AdhocRunner(SystemUnderTest system, Hierarchy hierarchy)
         {
             Hierarchy = hierarchy;
             _system = system;
-            Fixtures = _system.Fixtures;
+            Library = _system.Fixtures;
         }
 
         public IServiceProvider Services => _system.Services;
-        
+
+        public Task Shutdown()
+        {
+            return _system.Shutdown();
+        }
 
         public void Dispose()
         {

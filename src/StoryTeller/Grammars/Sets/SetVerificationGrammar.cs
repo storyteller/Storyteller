@@ -2,6 +2,7 @@
 using System.Linq;
 using Baseline;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars.Sets
 {
@@ -39,6 +40,11 @@ namespace StoryTeller.Grammars.Sets
             }
 
             return new VerificationSetPlan(this, section, matcher, _comparison, expected, _cells, MaximumRuntimeInMilliseconds);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Baseline;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 using StoryTeller.Results;
 
 namespace StoryTeller.Grammars.Tables
@@ -35,6 +36,11 @@ namespace StoryTeller.Grammars.Tables
         public IExecutionStep CreatePlan(Step step, FixtureLibrary library, bool inTable = false)
         {
             return new CompositeExecution(toExecutionSteps(library, step));
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

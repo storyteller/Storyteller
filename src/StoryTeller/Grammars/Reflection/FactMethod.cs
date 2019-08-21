@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Baseline.Reflection;
 using StoryTeller.Conversion;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars.Reflection
 {
@@ -17,6 +18,11 @@ namespace StoryTeller.Grammars.Reflection
         {
             _method = method;
             _invocation = MethodInvocation.For(method, target);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)

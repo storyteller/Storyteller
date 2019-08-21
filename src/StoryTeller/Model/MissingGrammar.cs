@@ -1,6 +1,7 @@
 ﻿using Baseline;
 using StoryTeller.Conversion;
 using StoryTeller.Grammars;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Model
 {
@@ -17,6 +18,11 @@ namespace StoryTeller.Model
         IExecutionStep IGrammar.CreatePlan(Step step, FixtureLibrary library, bool inTable)
         {
             return new InvalidGrammarStep(new StepValues(step.id), _message);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new System.NotImplementedException();
         }
 
         GrammarModel IGrammar.Compile(Fixture fixture, CellHandling cells)

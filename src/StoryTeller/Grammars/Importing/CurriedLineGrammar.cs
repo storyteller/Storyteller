@@ -3,6 +3,7 @@ using System.Linq;
 using Baseline;
 using StoryTeller.Grammars.Reflection;
 using StoryTeller.Model;
+using StoryTeller.NewEngine;
 
 namespace StoryTeller.Grammars.Importing
 {
@@ -29,6 +30,11 @@ namespace StoryTeller.Grammars.Importing
         {
             _defaults.Each(pair => step.Values[pair.Key] = pair.Value);
             return _inner.CreatePlan(step, library);
+        }
+
+        public void CreatePlan(ExecutionPlan plan, Step step, FixtureLibrary library, bool inTable = false)
+        {
+            throw new System.NotImplementedException();
         }
 
         public GrammarModel Compile(Fixture fixture, CellHandling cells)
