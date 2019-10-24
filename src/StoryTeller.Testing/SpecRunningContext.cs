@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Baseline;
 using Xunit;
@@ -31,6 +32,8 @@ namespace StoryTeller.Testing
 
         protected void execute(string text)
         {
+            //Let all specs be defined in en-US culture.
+            CultureInfo.CurrentCulture = new CultureInfo("en-US");
             var spec = TextParser.Parse(text);
             executeSpec(spec);
         }
