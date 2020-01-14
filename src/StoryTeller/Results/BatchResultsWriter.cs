@@ -1,16 +1,15 @@
-﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Baseline;
 using StoryTeller.Engine;
-using StoryTeller.Remotes.Messaging;
 using StoryTeller.Util;
 
 namespace StoryTeller.Results
 {
     public static class BatchResultsWriter
     {
+        private static List<IDocumentBuilder> attachments = new List<IDocumentBuilder>();
+
         public static HtmlDocument BuildResults(BatchRunResponse results)
         {
             var document = new HtmlDocument
@@ -18,52 +17,31 @@ namespace StoryTeller.Results
                 Title = "Storyteller Batch Results for {0}: {1}".ToFormat(results.system, results.suite)
             };
 
-            WriteCSS(document);
-            writeJavascript(results, document);
+            var jsFile = new ResourceFileLoader("StoryTeller.batch-bundle.js");
+            var cssFiles = new CombinedResourceLoader()
+                .AddFile(new ResourceFileLoader("Storyteller.stylesheets.bootstrap.min.css"))
+                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.storyteller.css"))
+                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.fixed-data-table.min.css"));            
+            
+            var builders = new IDocumentBuilder[] {
+                new StyleTagBuilder(cssFiles),
+                new ReportPartBuilder(),
+                new ScriptTagBuilder(jsFile),                
+            };
+
+            foreach (var builder in builders.Concat(attachments))
+            {
+                builder.Apply(document, results);
+            }
 
             return document;
         }
 
-
-        public static void WriteCSS(HtmlDocument document)
+        public static void Attachment(IDocumentBuilder builder)
         {
-            var styleTag = StyleTag();
-
-            document.Head.Append(styleTag);
-        }
-
-        public static HtmlTag StyleTag()
-        {
-            var css = readFile("Storyteller.stylesheets.bootstrap.min.css") + "\n\n" + readFile("StoryTeller.stylesheets.storyteller.css");
-            css += "\n\n" + readFile("StoryTeller.stylesheets.fixed-data-table.min.css");
-
-            return new HtmlTag("style").Text(css).Encoded(false);
-        }
-
-
-        private static string readFile(string name)
-        {
-            var assembly = typeof(BatchResultsWriter).GetTypeInfo().Assembly;
-            var names = assembly.GetManifestResourceNames();
-            var actualName = names.FirstOrDefault(x => x.EqualsIgnoreCase(name));
-
-            var stream = assembly.GetManifestResourceStream(actualName);
-            var reader = new StreamReader(stream);
-            return reader.ReadToEnd();
-        }
-
-        private static void writeJavascript(BatchRunResponse results, HtmlDocument document)
-        {
-            var cleanJson = JsonSerialization.ToCleanJson(results);
-
-            document.Body.Add("div").Hide().Id("batch-data").Text(cleanJson);
-            document.Body.Add("div").Id("main");
-
-            var js = readFile("StoryTeller.batch-bundle.js");
-
-            document.Body.Add("script").Attr("language", "javascript").Text("\n\n" + js + "\n\n").Encoded(false);
-
-
+            // TODO: this is bad and needs to be changed.  
+            // Sorry for the HACK!!!!!.
+            attachments.Add(builder);            
         }
     }
 }
