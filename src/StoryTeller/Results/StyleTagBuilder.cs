@@ -8,22 +8,18 @@ namespace StoryTeller.Results
 {
     public class StyleTagBuilder : IDocumentBuilder
     {
-        private readonly IEnumerable<IDocumentPartLoader> loaders;
+        private readonly IDocumentPartLoader loader;
 
-        public StyleTagBuilder(IDocumentPartLoader loader)
-            : this(new[] { loader })
+        public StyleTagBuilder(IDocumentPartLoader loader)            
         {
-
-        }
-        public StyleTagBuilder(IEnumerable<IDocumentPartLoader> loaders)
-        {
-            this.loaders = loaders;
+            this.loader = loader;
         }
 
         public void Apply(HtmlDocument document, BatchRunResponse results)
         {
-            var css = string.Join("\n\n", loaders.Select(n => n.Read()));
-            document.Head.Append(new HtmlTag("style").Text(css).Encoded(false));
+            document.Head.Append(new HtmlTag("style")
+                .Text(loader.Read())
+                .Encoded(false));
         }
     }
 }
