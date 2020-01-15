@@ -14,11 +14,11 @@ namespace StoryTeller.Results
 
         static BatchResultsWriter()
         {
-            jsBundle = new ResourceFileLoader("StoryTeller.batch-bundle.js");
+            jsBundle = new StoryTellerResourceLoader("StoryTeller.batch-bundle.js");
             cssBundle = new CombinedResourceLoader()
-                .AddFile(new ResourceFileLoader("Storyteller.stylesheets.bootstrap.min.css"))
-                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.storyteller.css"))
-                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.fixed-data-table.min.css"));
+                .AddFile(new StoryTellerResourceLoader("Storyteller.stylesheets.bootstrap.min.css"))
+                .AddFile(new StoryTellerResourceLoader("StoryTeller.stylesheets.storyteller.css"))
+                .AddFile(new StoryTellerResourceLoader("StoryTeller.stylesheets.fixed-data-table.min.css"));
         }
 
         public static HtmlDocument BuildResults(BatchRunResponse results)
