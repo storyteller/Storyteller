@@ -20,12 +20,7 @@ namespace StoryTeller.Results
             this.sources.Add(loader);
             return this;
         }
-
-        public CombinedResourceLoader AddFile(string fileName)
-        {
-            return this.AddFile(new ResourceFileLoader(fileName));
-        }        
-
+  
         public string Read()
         {
             return string.Join(this.delimiter, sources.Select(n => n.Read()));
