@@ -10,7 +10,7 @@ namespace StoryTeller.Results
         {
             var cleanJson = JsonSerialization.ToCleanJson(results);
 
-            document.Body.Add("div").Hide().Id("batch-data").Text(cleanJson);
+            document.Body.Add("div").Id("batch-data").Text(cleanJson).Hide();
             document.Body.Add("div").Id("main");
         }
     }

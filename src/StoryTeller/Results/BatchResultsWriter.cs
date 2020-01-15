@@ -9,6 +9,17 @@ namespace StoryTeller.Results
     public static class BatchResultsWriter
     {
         private static List<IDocumentBuilder> attachments = new List<IDocumentBuilder>();
+        private static readonly IDocumentPartLoader jsBundle;
+        private static readonly IDocumentPartLoader cssBundle;
+
+        static BatchResultsWriter()
+        {
+            jsBundle = new ResourceFileLoader("StoryTeller.batch-bundle.js");
+            cssBundle = new CombinedResourceLoader()
+                .AddFile(new ResourceFileLoader("Storyteller.stylesheets.bootstrap.min.css"))
+                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.storyteller.css"))
+                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.fixed-data-table.min.css"));
+        }
 
         public static HtmlDocument BuildResults(BatchRunResponse results)
         {
@@ -16,17 +27,11 @@ namespace StoryTeller.Results
             {
                 Title = "Storyteller Batch Results for {0}: {1}".ToFormat(results.system, results.suite)
             };
-
-            var jsFile = new ResourceFileLoader("StoryTeller.batch-bundle.js");
-            var cssFiles = new CombinedResourceLoader()
-                .AddFile(new ResourceFileLoader("Storyteller.stylesheets.bootstrap.min.css"))
-                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.storyteller.css"))
-                .AddFile(new ResourceFileLoader("StoryTeller.stylesheets.fixed-data-table.min.css"));            
-            
+                        
             var builders = new IDocumentBuilder[] {
-                new StyleTagBuilder(cssFiles),
+                new StyleTagBuilder(cssBundle),
                 new ReportPartBuilder(),
-                new ScriptTagBuilder(jsFile),                
+                new ScriptTagBuilder(jsBundle),                
             };
 
             foreach (var builder in builders.Concat(attachments))
@@ -35,6 +40,11 @@ namespace StoryTeller.Results
             }
 
             return document;
+        }
+
+        public static HtmlTag StyleTag()
+        {
+            return new StyleTagBuilder(cssBundle);
         }
 
         public static void Attachment(IDocumentBuilder builder)

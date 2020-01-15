@@ -3,19 +3,19 @@ using StoryTeller.Util;
 
 namespace StoryTeller.Results
 {
-    public class ScriptTagBuilder : IDocumentBuilder
+    public class ScriptTagBuilder : HtmlTag, IDocumentBuilder
     {
-        private readonly IDocumentPartLoader loader;
-
         public ScriptTagBuilder(IDocumentPartLoader loader)
+            : base("script")
         {
-            this.loader = loader;
+            this.Attr("language", "javascript");
+            this.Text("\n\n" + loader.Read() + "\n\n");
+            this.Encoded(false);
         }
 
         public void Apply(HtmlDocument document, BatchRunResponse results)
         {
-            var js = loader.Read();
-            document.Body.Add("script").Attr("language", "javascript").Text("\n\n" + js + "\n\n").Encoded(false);
+            document.Body.Append(this);
         }
     }
 }

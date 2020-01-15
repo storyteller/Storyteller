@@ -6,20 +6,18 @@ using StoryTeller.Util;
 
 namespace StoryTeller.Results
 {
-    public class StyleTagBuilder : IDocumentBuilder
-    {
-        private readonly IDocumentPartLoader loader;
-
+    public class StyleTagBuilder : HtmlTag, IDocumentBuilder
+    {                
         public StyleTagBuilder(IDocumentPartLoader loader)            
+            : base("style")
         {
-            this.loader = loader;
+            this.Text(loader.Read());
+            this.Encoded(false);
         }
 
         public void Apply(HtmlDocument document, BatchRunResponse results)
         {
-            document.Head.Append(new HtmlTag("style")
-                .Text(loader.Read())
-                .Encoded(false));
+            document.Head.Append(this);                
         }
     }
 }
