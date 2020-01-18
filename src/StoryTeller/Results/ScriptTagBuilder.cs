@@ -1,21 +1,47 @@
-﻿using StoryTeller.Engine;
+﻿using System;
+using StoryTeller.Engine;
 using StoryTeller.Util;
 
 namespace StoryTeller.Results
 {
-    public class ScriptTagBuilder : HtmlTag, IDocumentBuilder
+    /// <summary>
+    /// A self attaching script tag used for building the <see cref="HtmlDocument"/>.  
+    /// </summary>
+    public class ScriptTagBuilder : HtmlTagBuilder
     {
-        public ScriptTagBuilder(IDocumentPartLoader loader)
+        /// <summary>
+        /// Creates an instance of a <see cref="ScriptTagBuilder"/>. 
+        /// </summary>
+        /// <param name="loader">A <see cref="IDocumentBuilder"/> with script content.</param>
+        /// <param name="language">The language being defined in the script tag.  Defaults to "javascript".</param>
+        public ScriptTagBuilder(IDocumentPartLoader loader, string language ="javascript")
             : base("script")
         {
-            this.Attr("language", "javascript");
+            this.Attr("language", language);
             this.Text("\n\n" + loader.Read() + "\n\n");
             this.Encoded(false);
         }
 
-        public void Apply(HtmlDocument document, BatchRunResponse results)
+        /// <summary>
+        /// Creates an instance of a <see cref="StyleTagBuilder"/>.   
+        /// </summary>
+        /// <param name="content">A script content string.</param>
+        /// <param name="language">The language being defined in the script tag.  Defaults to "javascript".</param>
+        public ScriptTagBuilder(string content, string language = "javascript")
+            : this(new VirtualFileLoader(content), language)
         {
-            document.Body.Append(this);
+        }
+
+        /// <summary>
+        /// Creates an instance of a <see cref="StyleTagBuilder"/>.
+        /// </summary>
+        /// <param name="path">The url to the script resource.</param>
+        /// <param name="language">The language being defined in the script tag.  Defaults to "javascript".</param>
+        public ScriptTagBuilder(Uri path, string language = "javascript")
+            : base("script")
+        {
+            this.Attr("language", language);
+            this.Attr("src", path);
         }
     }
 }

@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Baseline;
-using StoryTeller.Engine;
+using StoryTeller.Grammars.Paragraphs;
 using StoryTeller.Util;
 
 namespace StoryTeller.Results
 {
-    public class StyleTagBuilder : HtmlTag, IDocumentBuilder
+    /// <summary>
+    /// A self attaching style tag used for building the <see cref="HtmlDocument"/>.  
+    /// </summary>
+    public class StyleTagBuilder : HtmlTagBuilder, IDocumentBuilder
     {                
+        /// <summary>
+        /// Creates an instance of a <see cref="StyleTagBuilder"/>. 
+        /// </summary>
+        /// <param name="loader">A <see cref="IDocumentBuilder"/> with CSS content.</param>
         public StyleTagBuilder(IDocumentPartLoader loader)            
             : base("style")
         {
@@ -15,9 +21,23 @@ namespace StoryTeller.Results
             this.Encoded(false);
         }
 
-        public void Apply(HtmlDocument document, BatchRunResponse results)
+        /// <summary>
+        /// Creates an instance of a <see cref="StyleTagBuilder"/>.   
+        /// </summary>
+        /// <param name="content">A CSS string.</param>
+        public StyleTagBuilder(string content)
+            : this(new VirtualFileLoader(content))
         {
-            document.Head.Append(this);                
+        }
+
+        /// <summary>
+        /// Selects the Head html element as the target of this <see cref="IDocumentBuilder"/>
+        /// </summary>
+        /// <param name="document">The<see  cref="HtmlDocument"/> being modified.</param>
+        /// <returns>The <see cref="HtmlTag"/> to append the builder content.</returns>
+        protected override HtmlTag AttachTo(HtmlDocument document)
+        {
+            return document.Head;
         }
     }
 }
