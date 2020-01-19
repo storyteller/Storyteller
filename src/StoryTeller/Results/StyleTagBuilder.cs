@@ -35,9 +35,7 @@ namespace StoryTeller.Results
         /// </summary>
         /// <param name="document">The<see  cref="HtmlDocument"/> being modified.</param>
         /// <returns>The <see cref="HtmlTag"/> to append the builder content.</returns>
-        protected override HtmlTag AttachTo(HtmlDocument document)
-        {
-            return document.Head;
-        }
+        protected override HtmlTag AttachTo(HtmlDocument document) => document.Head;
+        
     }
 }

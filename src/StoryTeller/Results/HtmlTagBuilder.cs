@@ -33,9 +33,6 @@ namespace StoryTeller.Results
         /// </summary>
         /// <param name="document"></param>
         /// <returns></returns>
-        protected virtual HtmlTag AttachTo(HtmlDocument document)
-        {
-            return document.Body;
-        }
+        protected virtual HtmlTag AttachTo(HtmlDocument document) => document.Body;
     }
 }

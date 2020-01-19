@@ -19,5 +19,7 @@ namespace StoryTeller.Results
             this.Attr("rel", relationship);
             this.Attr("href", path);
         }
+
+        protected override HtmlTag AttachTo(HtmlDocument document) => document.Head;
     }
 }
