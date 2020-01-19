@@ -13,7 +13,7 @@
         public DefaultHtmlDocumentBuilder()
         {
             var jsBundle = new StoryTellerResourceLoader("StoryTeller.batch-bundle.js");
-            var cssBundle = new CombinedResourceLoader()
+            var cssBundle = new CompoundResourceLoader()
                 .AddLoader(new StoryTellerResourceLoader("Storyteller.stylesheets.bootstrap.min.css"))
                 .AddLoader(new StoryTellerResourceLoader("StoryTeller.stylesheets.storyteller.css"))
                 .AddLoader(new StoryTellerResourceLoader("StoryTeller.stylesheets.fixed-data-table.min.css"));

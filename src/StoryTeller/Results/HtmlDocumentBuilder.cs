@@ -45,7 +45,7 @@ namespace StoryTeller.Results
         /// Adds additional builder to the current builder execution chain.
         /// </summary>
         /// <param name="builder"></param>
-        protected void Add(IDocumentBuilder builder)
+        public void Add(IDocumentBuilder builder)
         {
             this.Parts.Add(builder);
         }
