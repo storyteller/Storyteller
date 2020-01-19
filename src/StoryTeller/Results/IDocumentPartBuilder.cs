@@ -6,7 +6,7 @@ namespace StoryTeller.Results
     /// <summary>
     /// A component for building <see cref="HtmlDocument"/> reports. 
     /// </summary>
-    public interface IDocumentBuilder
+    public interface IDocumentPartBuilder
     {
         /// <summary>
         /// Executes logic that modifies the <see cref="HtmlDocument"/> being generated.

@@ -4,10 +4,10 @@ using StoryTeller.Util;
 namespace StoryTeller.Results
 {
     /// <summary>
-    /// Simplifies the <see cref="IDocumentBuilder"/> implementation by allowing
+    /// Simplifies the <see cref="IDocumentPartBuilder"/> implementation by allowing
     /// to build tags that register themselves to the <see cref="HtmlDocument"/> report.
     /// </summary>
-    public abstract class HtmlTagBuilder : HtmlTag, IDocumentBuilder
+    public abstract class HtmlTagBuilder : HtmlTag, IDocumentPartBuilder
     {
         /// <summary>
         /// Creates an instance of <see cref="HtmlTagBuilder"/>.

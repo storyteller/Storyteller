@@ -7,7 +7,7 @@ namespace StoryTeller.Results
     /// <summary>
     /// Renders the report content to the <see cref="HtmlDocument"/>
     /// </summary>
-    public class ReportPartBuilder : IDocumentBuilder
+    public class ReportPartBuilder : IDocumentPartBuilder
     {
         /// <summary>
         /// Appends the cleaned json of the <see cref="BatchRunRequest"/> document and

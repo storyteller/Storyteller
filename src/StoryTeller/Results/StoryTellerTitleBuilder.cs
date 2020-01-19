@@ -7,7 +7,7 @@ namespace StoryTeller.Results
     /// <summary>
     /// Builds the storyteller title using values from the <see cref="BatchRunResponse"/>.
     /// </summary>
-    public class StoryTellerTitleBuilder : IDocumentBuilder
+    public class StoryTellerTitleBuilder : IDocumentPartBuilder
     {
         /// <summary>
         /// Sets the Title property on the <see cref="HtmlDocument"/> being generated.

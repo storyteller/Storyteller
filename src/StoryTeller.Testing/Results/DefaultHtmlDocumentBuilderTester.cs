@@ -14,14 +14,14 @@ namespace StoryTeller.Testing.Results
             var builder = new DefaultHtmlDocumentBuilder();
                 builder.Add(new ScriptTagBuilder(string.Empty));
                 
-            builder.Get<IDocumentBuilder>().Count().ShouldBe(5);
+            builder.Get<IDocumentPartBuilder>().Count().ShouldBe(5);
         }
         
         [Fact]
         public void defines_four_parts()
         {
             var builder = new DefaultHtmlDocumentBuilder();
-            builder.Get<IDocumentBuilder>().Count().ShouldBe(4);
+            builder.Get<IDocumentPartBuilder>().Count().ShouldBe(4);
         }
         
         [Fact]

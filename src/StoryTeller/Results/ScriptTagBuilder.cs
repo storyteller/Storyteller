@@ -12,7 +12,7 @@ namespace StoryTeller.Results
         /// <summary>
         /// Creates an instance of a <see cref="ScriptTagBuilder"/>. 
         /// </summary>
-        /// <param name="loader">A <see cref="IDocumentBuilder"/> with script content.</param>
+        /// <param name="loader">A <see cref="IDocumentPartBuilder"/> with script content.</param>
         /// <param name="language">The language being defined in the script tag.  Defaults to "javascript".</param>
         public ScriptTagBuilder(IDocumentPartLoader loader, string language ="javascript")
             : base("script")

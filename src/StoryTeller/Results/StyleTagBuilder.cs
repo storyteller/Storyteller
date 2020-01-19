@@ -8,12 +8,12 @@ namespace StoryTeller.Results
     /// <summary>
     /// A self attaching style tag used for building the <see cref="HtmlDocument"/>.  
     /// </summary>
-    public class StyleTagBuilder : HtmlTagBuilder, IDocumentBuilder
+    public class StyleTagBuilder : HtmlTagBuilder, IDocumentPartBuilder
     {                
         /// <summary>
         /// Creates an instance of a <see cref="StyleTagBuilder"/>. 
         /// </summary>
-        /// <param name="loader">A <see cref="IDocumentBuilder"/> with CSS content.</param>
+        /// <param name="loader">A <see cref="IDocumentPartBuilder"/> with CSS content.</param>
         public StyleTagBuilder(IDocumentPartLoader loader)            
             : base("style")
         {
@@ -31,7 +31,7 @@ namespace StoryTeller.Results
         }
 
         /// <summary>
-        /// Selects the Head html element as the target of this <see cref="IDocumentBuilder"/>
+        /// Selects the Head html element as the target of this <see cref="IDocumentPartBuilder"/>
         /// </summary>
         /// <param name="document">The<see  cref="HtmlDocument"/> being modified.</param>
         /// <returns>The <see cref="HtmlTag"/> to append the builder content.</returns>

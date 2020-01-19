@@ -3,7 +3,7 @@
 namespace StoryTeller.Results
 {
     /// <summary>
-    /// Loads file system files to be used as content in <see cref="IDocumentBuilder"/>
+    /// Loads file system files to be used as content in <see cref="IDocumentPartBuilder"/>
     /// classes.
     /// </summary>
     public class LocalFileLoader : IDocumentPartLoader

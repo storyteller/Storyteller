@@ -12,7 +12,7 @@ namespace StoryTeller.Results
     /// </summary>
     public abstract class HtmlDocumentBuilder
     {
-        private List<IDocumentBuilder> Parts { get; } = new List<IDocumentBuilder>();
+        private List<IDocumentPartBuilder> Parts { get; } = new List<IDocumentPartBuilder>();
 
         /// <summary>
         /// Creates the HtmlDocument with by applying each individual builder against
@@ -45,7 +45,7 @@ namespace StoryTeller.Results
         /// Adds additional builder to the current builder execution chain.
         /// </summary>
         /// <param name="builder"></param>
-        public void Add(IDocumentBuilder builder)
+        public void Add(IDocumentPartBuilder builder)
         {
             this.Parts.Add(builder);
         }

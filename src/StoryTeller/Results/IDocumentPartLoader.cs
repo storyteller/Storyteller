@@ -1,7 +1,7 @@
 ﻿namespace StoryTeller.Results
 {
     /// <summary>
-    /// Provides a way to load chunks of text as content for <see cref="IDocumentBuilder"/>
+    /// Provides a way to load chunks of text as content for <see cref="IDocumentPartBuilder"/>
     /// implementations.  Allows us to treat files being pulled from assembly resources
     /// the same way as local file system files and any other text content source we want
     /// to wrap in this interface.
