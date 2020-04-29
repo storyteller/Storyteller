@@ -76,7 +76,7 @@
     "fuse.js": "^2.6.1",
     "history": "^1.13.1",
     "immutable": "^3.7.6",
-    "jquery": "^2.1.4",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "mousetrap": "^1.5.3",
