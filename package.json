@@ -77,7 +77,7 @@
     "history": "^1.13.1",
     "immutable": "^3.7.6",
     "jquery": "^2.1.4",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "marked": "^0.3.6",
     "mousetrap": "^1.5.3",
     "node-uuid": "^1.4.7",
