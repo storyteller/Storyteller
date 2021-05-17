@@ -142,8 +142,8 @@ This table tracks the time in milliseconds spent in each step by grammar and all
 
 To make it easier to spot and diagnose performance and throughput problems with the Storyteller specifications and probably the application itself, Storyteller allows you to dump the performance data shown above to file formats suitable for analysis by other tools.
 
-The raw performance data can be exported from the `st run` in a CSV format suitable for easy import to a spreadsheet or database with the `--csv` flag like this: `st run [directory] --csv [file name].
+The raw performance data can be exported from the `st run` in a CSV format suitable for easy import to a spreadsheet or database with the `--csv` flag like this: `st run [directory] --csv [file name]`.
 
-The same performance data can be exported to a JSON format with `st run [directory] --json [file name].
+The same performance data can be exported to a JSON format with `st run [directory] --json [file name]`.
 
 
