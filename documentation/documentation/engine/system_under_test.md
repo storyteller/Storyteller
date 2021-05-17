@@ -91,7 +91,7 @@ watcher to watch for all changes to files with the `.dll`, `.exe`, or `.config` 
 1. Start the system under test again
 
 
-You can always explicitly tell Storyteller which `ISystem` class to use as a flag to the <[linkto:documentation/using/ci;title=st run]> or <[linkto:documentation/ui;title=st open]> commands. Otherwise, Storyteller uses these rules to determine the `ISytem` -- or punt.
+You can always explicitly tell Storyteller which `ISystem` class to use as a flag to the <[linkto:documentation/using/ci;title=st run]> or <[linkto:documentation/ui;title=st open]> commands. Otherwise, Storyteller uses these rules to determine the `ISystem` -- or punt.
 
 1. If there are no concrete `ISystem` classes in any assembly in the AppDomain, Storyteller uses a default, _nullo_ system and happily loads all of your `Fixture` classes.
 1. If there is exactly one concrete `ISystem` class in the AppDomain, Storyteller uses that one.
