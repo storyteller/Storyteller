@@ -37,7 +37,7 @@ If the expected value does not match the returned value from the grammar method,
 
 New in Storyteller 3.0 is the ability to use output parameters to specify multiple value assertions in a single Sentence method. Below is an example:
 
-<[sample:multiple-inputs-sentence]>
+<[sample:sentence-with-output-parameters]>
 
 Used in a specification, that grammar would look like this:
 
