@@ -67,7 +67,7 @@ The grammars above in action will render html results like so:
 
 1. Since the world doesn't always conform to simple object structures, consider using intermediate types in your _Set Verification_ grammars just to translate the actual system data to something that's easier to consume inside of Storyteller.
 1. Do take advantage of Storyteller's ability to customize string conversions so that you can specify more complex types in _Set Verification_ columns.
-1. The `Compare(x => [expression])` and `MatchOn(x => [expression], x => [expression]) syntax can support following multiple properties and methods. So `Compare(x => x.Detail.Name)` is valid syntax that can be used inside of Storyteller. 
+1. The `Compare(x => [expression])` and `MatchOn(x => [expression], x => [expression])` syntax can support following multiple properties and methods. So `Compare(x => x.Detail.Name)` is valid syntax that can be used inside of Storyteller. 
 
 
 ## Data Tables and Relational Databases
