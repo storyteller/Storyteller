@@ -75,5 +75,3 @@ The grammars above in action will render html results like so:
 Set verification can also be done against a .Net `DataTable` so that you can easily and declaratively verify the expected
 results of a database table, view, or query. This feature was built specifically to ease testing against relational databases.
 
-To set up a set verification against a `DataTable`, use the `Fixture.VerifyDataTable()` method as shown below:
-
