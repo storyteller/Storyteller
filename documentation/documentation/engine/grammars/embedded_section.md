@@ -7,7 +7,7 @@ To make this concrete, let's say that you have a Fixture to interact with the ma
 
 <[sample:preferences-fixture]>
 
-To embed that `PreferencesFixture` into the main application fixture, you use the `Fixture.Embed&lt;T&gt;(title)` method to create an embedded section like this:
+To embed that `PreferencesFixture` into the main application fixture, you use the `Fixture.Embed<T>(title)` method to create an embedded section like this:
 
 <[sample:exposing-embedded-section]>
 
