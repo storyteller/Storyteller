@@ -48,7 +48,7 @@ Name: Test Run
             var cell = model.cells.Single();
             cell.Key.ShouldBe("text");
             cell.Type.ShouldBe(typeof (string));
-            cell.result.ShouldBe(true);
+            cell.IsResult.ShouldBe(true);
         }
 
 

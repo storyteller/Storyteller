@@ -13,7 +13,7 @@ namespace StoryTeller.Model.Persistence.DSL
             switch (target.ToLower())
             {
                 case "header":
-                    cell.header = value;
+                    cell.Header = value;
                     break;
                 case "cell":
                     cell.Key = value;
@@ -25,19 +25,19 @@ namespace StoryTeller.Model.Persistence.DSL
                     cell.options = Option.ParseText(value);
                     break;
                 case "editor":
-                    cell.editor = value;
+                    cell.Editor = value;
                     break;
                 case "result":
                     if (value.IsEmpty())
                     {
-                        cell.result = false;
+                        cell.IsResult = false;
                     }
                     else
                     {
                         bool result;
                         if (bool.TryParse(value, out result))
                         {
-                            cell.result = result;
+                            cell.IsResult = result;
                         }
                     }
 

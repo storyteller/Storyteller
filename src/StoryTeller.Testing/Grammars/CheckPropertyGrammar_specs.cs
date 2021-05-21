@@ -32,7 +32,7 @@ namespace StoryTeller.Testing.Grammars
             var model = ModelFor<Sentence>("CheckProperty", "Check");
             var cell = model.cells.Single();
 
-            cell.header.ShouldBe("The Name");
+            cell.Header.ShouldBe("The Name");
             cell.DefaultValue.ShouldBe("Jeremy");
         }
     }

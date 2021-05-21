@@ -64,7 +64,7 @@ namespace StoryTeller.Grammars.API
 
         protected override string format()
         {
-            return $"{_cell.header} is {{{_cell.Key}}}";
+            return $"{_cell.Header} is {{{_cell.Key}}}";
         }
     }
 }

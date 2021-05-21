@@ -20,15 +20,18 @@ namespace StoryTeller.Model
 
         [JsonProperty("default")] public string DefaultValue;
 
-        public string editor;
+        [JsonProperty("editor")]
+        public string Editor;
 
-        public string header;
+        [JsonProperty("header")]
+        public string Header;
 
         [JsonProperty("key")] public string Key;
 
         public Option[] options;
 
-        public bool result;
+        [JsonProperty("result")]
+        public bool IsResult;
 
         [JsonIgnore] public Type Type;
 
@@ -48,7 +51,7 @@ namespace StoryTeller.Model
 
                 selectConverter(cells, type);
 
-                if (editor.IsEmpty())
+                if (Editor.IsEmpty())
                 {
                     selectEditor(type);
                 }
@@ -65,13 +68,13 @@ namespace StoryTeller.Model
 
         ICellExpression ICellExpression.Header(string header)
         {
-            this.header = header;
+            this.Header = header;
             return this;
         }
 
         ICellExpression ICellExpression.Editor(string editor)
         {
-            this.editor = editor;
+            this.Editor = editor;
             return this;
         }
 
@@ -83,7 +86,7 @@ namespace StoryTeller.Model
 
         ICellExpression ICellExpression.SelectionValues(params string[] values)
         {
-            editor = "select";
+            Editor = "select";
 
             options = values.Select(x => new Option {display = x, value = x}).ToArray();
             return this;
@@ -91,7 +94,7 @@ namespace StoryTeller.Model
 
         ICellExpression ICellExpression.SelectionOptions(params Option[] options)
         {
-            editor = "select";
+            Editor = "select";
 
             this.options = options;
             return this;
@@ -99,7 +102,7 @@ namespace StoryTeller.Model
 
         ICellExpression ICellExpression.SelectionList(string listName)
         {
-            editor = "select";
+            Editor = "select";
             OptionListName = listName;
             return this;
         }
@@ -135,7 +138,7 @@ namespace StoryTeller.Model
                 type = type.GetGenericArguments().Single();
             }
 
-            var cell = new Cell(cells, parameter.Name, type) {result = isOutput, Position = parameter.Position};
+            var cell = new Cell(cells, parameter.Name, type) {IsResult = isOutput, Position = parameter.Position};
 
             parameter.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
             type.ForAttribute<ModifyCellAttribute>(x => x.Modify(cell));
@@ -199,12 +202,12 @@ namespace StoryTeller.Model
         {
             if (type == typeof(bool))
             {
-                editor = "boolean";
+                Editor = "boolean";
                 DefaultValue = false.ToString();
             }
             else if (type.GetTypeInfo().IsEnum)
             {
-                editor = "select";
+                Editor = "select";
                 options = Option.For(Enum.GetNames(type));
             }
         }
@@ -348,9 +351,9 @@ namespace StoryTeller.Model
                 OptionListName = OptionListName,
                 Position = Position,
                 DefaultValue = over.DefaultValue.IsNotEmpty() ? over.DefaultValue : DefaultValue,
-                result = over.result || result,
-                editor = over.editor.IsNotEmpty() ? over.editor : editor,
-                header = over.header.IsNotEmpty() ? over.header : header,
+                IsResult = over.IsResult || IsResult,
+                Editor = over.Editor.IsNotEmpty() ? over.Editor : Editor,
+                Header = over.Header.IsNotEmpty() ? over.Header : Header,
                 options = over.options != null
                     ? over.options?.Select(x => x.Copy()).ToArray()
                     : options?.Select(x => x.Copy()).ToArray()
@@ -364,7 +367,7 @@ namespace StoryTeller.Model
 
         public string ToDeclaration()
         {
-            return result ? $"out string {Key}" : $"string {Key}";
+            return IsResult ? $"out string {Key}" : $"string {Key}";
         }
 
         public string ShouldBeFormat()

@@ -45,7 +45,7 @@ namespace StoryTeller.Testing.Grammars.ObjectBuilding
             var model = ModelFor<Sentence>("SetPropertyGrammar", "SetCity");
             var cell = model.cells.Single();
 
-            cell.header.ShouldBe("The City");
+            cell.Header.ShouldBe("The City");
             cell.DefaultValue.ShouldBe("Austin");
         }
     }

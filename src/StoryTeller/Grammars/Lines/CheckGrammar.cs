@@ -35,7 +35,7 @@ namespace StoryTeller.Grammars.Lines
         {
             _cell = new Cell(cellHandling, _key, typeof (T))
             {
-                result = true
+                IsResult = true
             };
 
             return new [] {_cell};

@@ -113,7 +113,7 @@ namespace StoryTeller.Testing.Grammars
             var cell = grammar.As<Table>().cells.FirstOrDefault(x => x.Key == "Position");
 
             cell.OptionListName.ShouldBe("positions");
-            cell.editor.ShouldBe("select");
+            cell.Editor.ShouldBe("select");
             cell.options.Length.ShouldBe(5);
         }
     }

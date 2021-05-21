@@ -43,7 +43,7 @@ namespace StoryTeller.Testing.Grammars.API
             var model = ModelFor<Sentence>("SetMemberGrammar", "SetCity");
             var cell = model.cells.Single();
 
-            cell.header.ShouldBe("The City");
+            cell.Header.ShouldBe("The City");
             cell.DefaultValue.ShouldBe("Austin");
         }
 

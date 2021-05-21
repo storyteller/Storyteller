@@ -31,7 +31,7 @@ namespace StoryTeller.Testing.Grammars.Reflection
             ValueCheckMethod
                 .For(new Target(), x => x.Fullname2(null, null))
                 .ReturnCell
-                .result.ShouldBe(true);
+                .IsResult.ShouldBe(true);
         }
 
         [Fact]

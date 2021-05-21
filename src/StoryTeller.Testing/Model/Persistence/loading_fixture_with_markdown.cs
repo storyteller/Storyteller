@@ -144,7 +144,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.editor.ShouldBe("bigtext");
+            cell.Editor.ShouldBe("bigtext");
         }
 
         [Fact]
@@ -166,7 +166,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.result.ShouldBeTrue();
+            cell.IsResult.ShouldBeTrue();
         }
 
         [Fact]
@@ -188,7 +188,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.result.ShouldBeFalse();
+            cell.IsResult.ShouldBeFalse();
         }
 
         [Fact]
@@ -210,7 +210,7 @@ namespace StoryTeller.Testing.Model.Persistence
 
             var cell = sentence.cells[0];
             cell.Key.ShouldBe("first");
-            cell.result.ShouldBeFalse();
+            cell.IsResult.ShouldBeFalse();
         }
 
         [Fact]
@@ -273,7 +273,7 @@ namespace StoryTeller.Testing.Model.Persistence
             var cell = table.cells[0];
             cell.Key.ShouldBe("column 1");
             cell.DefaultValue.ShouldBe("one");
-            cell.editor.ShouldBe("text");
+            cell.Editor.ShouldBe("text");
 
             cell = table.cells[1];
             cell.Key.ShouldBe("column 2");

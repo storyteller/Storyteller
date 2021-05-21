@@ -23,7 +23,7 @@ namespace StoryTeller.RDBMS
                     var cell = Cell.For(cellHandling, param, fixture);
 
 
-                    var parameter = cell.result ? ParameterDirection.Output : ParameterDirection.Input;
+                    var parameter = cell.IsResult ? ParameterDirection.Output : ParameterDirection.Input;
                     return dialect.ToParameterCell(cell, parameter);
                 })
                 .ToArray();

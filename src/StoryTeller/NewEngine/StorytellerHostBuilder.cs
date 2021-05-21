@@ -188,8 +188,10 @@ namespace StoryTeller.NewEngine
         /// <returns></returns>
         public async Task<AdhocRunner> ToAdhocRunner(string directory = null)
         {
+            // Task 1: find and create Fixture objects
             var fixtureBuilder = Task.Factory.StartNew(() => FixtureLibrary.CreateForAppDomain(_cellHandling));
 
+            // Task 2: start the actual system under test
             var systemBuilder = _bootstrapper().ContinueWith(async t =>
             {
                 var services = t.Result;
@@ -199,6 +201,7 @@ namespace StoryTeller.NewEngine
                 return s;
             }).Unwrap();
 
+            // Task 3: load specification files from disk
             var hierarchyBuilder = Task.Factory.StartNew(() =>
             {
                 // TODO -- guess the default project. 

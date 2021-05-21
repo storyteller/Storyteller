@@ -20,7 +20,7 @@ namespace StoryTeller.Testing.Bugs
             var cell = grammar.cells.FirstOrDefault(x => x.Key == "Name");
 
             cell.options.Select(x => x.value).ShouldHaveTheSameElementsAs("A", "B", "C");
-            cell.editor.ShouldBe("select");
+            cell.Editor.ShouldBe("select");
         }
     }
 

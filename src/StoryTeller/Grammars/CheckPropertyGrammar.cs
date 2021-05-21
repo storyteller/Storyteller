@@ -50,7 +50,7 @@ namespace StoryTeller.Grammars
 
         protected override string format()
         {
-            return $"{_cell.header} should be {{{_cell.Key}}}";
+            return $"{_cell.Header} should be {{{_cell.Key}}}";
         }
 
         protected override IEnumerable<Cell> buildCells(CellHandling cellHandling, Fixture fixture)

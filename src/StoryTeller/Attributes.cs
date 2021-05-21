@@ -52,7 +52,7 @@ namespace StoryTeller
 
         public override void Modify(Cell cell)
         {
-            cell.header = _header;
+            cell.Header = _header;
         }
     }
 
@@ -109,7 +109,7 @@ namespace StoryTeller
 
         public override void Modify(Cell cell)
         {
-            cell.editor = _editor;
+            cell.Editor = _editor;
         }
 
 
@@ -137,7 +137,7 @@ namespace StoryTeller
 
         public override void Modify(Cell cell)
         {
-            cell.editor = "select";
+            cell.Editor = "select";
             cell.options = Option.For(_values);
         }
     }
@@ -153,7 +153,7 @@ namespace StoryTeller
 
         public override void Modify(Cell cell)
         {
-            cell.editor = "select";
+            cell.Editor = "select";
             cell.OptionListName = _listName;
         }
     }

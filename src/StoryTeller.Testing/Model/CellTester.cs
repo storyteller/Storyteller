@@ -206,7 +206,7 @@ namespace StoryTeller.Testing.Model
         public void Cell_picks_up_the_header_attributes()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
-            cell.header.ShouldBe("The City");
+            cell.Header.ShouldBe("The City");
         }
 
         [Fact]
@@ -224,7 +224,7 @@ namespace StoryTeller.Testing.Model
         public void use_a_boolean_editor_for_boolean_type()
         {
             var cell = Cell.For<CellTarget>(x => x.IsActive);
-            cell.editor.ShouldBe("boolean");
+            cell.Editor.ShouldBe("boolean");
         }
 
         [Fact]
@@ -238,7 +238,7 @@ namespace StoryTeller.Testing.Model
         public void use_a_select_editor_for_an_enum()
         {
             var cell = Cell.For<CellTarget>(x => x.Direction);
-            cell.editor.ShouldBe("select");
+            cell.Editor.ShouldBe("select");
             cell.options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("North", "South", "East", "West");
         }
@@ -247,14 +247,14 @@ namespace StoryTeller.Testing.Model
         public void picks_up_the_editor_attribute()
         {
             var cell = Cell.For<CellTarget>(x => x.City);
-            cell.editor.ShouldBe("bigtext");
+            cell.Editor.ShouldBe("bigtext");
         }
 
         [Fact]
         public void cell_picks_up_selection_values()
         {
             var cell = Cell.For<CellTarget>(x => x.Country);
-            cell.editor.ShouldBe("select");
+            cell.Editor.ShouldBe("select");
             cell.options.Select(x => x.value)
                 .ShouldHaveTheSameElementsAs("United States", "Canada", "Mexico");
         }
@@ -263,7 +263,7 @@ namespace StoryTeller.Testing.Model
         public void cell_picks_up_selection_list_name()
         {
             var cell = Cell.For<CellTarget>(x => x.State);
-            cell.editor.ShouldBe("select");
+            cell.Editor.ShouldBe("select");
 
             cell.OptionListName.ShouldBe("States");
         }
@@ -376,7 +376,7 @@ namespace StoryTeller.Testing.Model
 
             var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
 
-            cell.result.ShouldBeFalse();
+            cell.IsResult.ShouldBeFalse();
         }
 
         [Fact]
@@ -388,7 +388,7 @@ namespace StoryTeller.Testing.Model
 
             var cell = Cell.For(CellHandling.Basic(), parameter, new Fixture());
 
-            cell.result.ShouldBeTrue();
+            cell.IsResult.ShouldBeTrue();
             cell.Type.ShouldBe(typeof(int));
         }
 
@@ -398,7 +398,7 @@ namespace StoryTeller.Testing.Model
             var cell = Cell.For<CellTarget>(x => x.Number);
 
             cell.As<ICellExpression>().Header("Foo").ShouldBeSameAs(cell);
-            cell.header.ShouldBe("Foo");
+            cell.Header.ShouldBe("Foo");
 
         }
 
@@ -408,7 +408,7 @@ namespace StoryTeller.Testing.Model
             var cell = Cell.For<CellTarget>(x => x.Number);
             cell.As<ICellExpression>().Editor("big").ShouldBeTheSameAs(cell);
 
-            cell.editor.ShouldBe("big");
+            cell.Editor.ShouldBe("big");
         }
 
         [Fact]

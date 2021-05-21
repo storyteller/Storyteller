@@ -44,7 +44,7 @@ namespace StoryTeller.Testing.Grammars.Decisions
             table.cells.Select(x => x.Key)
                 .ShouldHaveTheSameElementsAs("X", "Y", "Sum", "Product");
 
-            table.cells.Select(x => x.result)
+            table.cells.Select(x => x.IsResult)
                 .ShouldHaveTheSameElementsAs(false, false, true, true);
         }
     }

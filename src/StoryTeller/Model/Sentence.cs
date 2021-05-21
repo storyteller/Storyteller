@@ -86,8 +86,8 @@ namespace StoryTeller.Model
 
         public override string ToMissingCode(bool withinParagraph = false)
         {
-            string args = _cells.OrderBy(x => x.result).Select(x => x.ToDeclaration()).Join(", ");
-            var returns = _cells.Where(x => x.result).ToArray();
+            string args = _cells.OrderBy(x => x.IsResult).Select(x => x.ToDeclaration()).Join(", ");
+            var returns = _cells.Where(x => x.IsResult).ToArray();
 
             var returnType = "void";
             var decoration = "";
@@ -99,7 +99,7 @@ namespace StoryTeller.Model
             }
             else if (returns.Length == 1)
             {
-                args = _cells.Where(x => !x.result).Select(x => x.ToDeclaration()).Join(", ");
+                args = _cells.Where(x => !x.IsResult).Select(x => x.ToDeclaration()).Join(", ");
                 returnType = "string";
                 decoration = $"[return: {typeof(AliasAsAttribute).Namespace}.AliasAs(\"{returns.Single().Key}\")]";
             }

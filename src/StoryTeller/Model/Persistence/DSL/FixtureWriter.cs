@@ -108,12 +108,12 @@ namespace StoryTeller.Model.Persistence.DSL
         {
             var firstRow = new[] {tableType}.Concat(cells.Select(x => x.Key)).ToArray();
 
-            var headers = new[] {"header"}.Concat(cells.Select(x => x.header)).ToArray();
+            var headers = new[] {"header"}.Concat(cells.Select(x => x.Header)).ToArray();
 
             var defaults = new[] {"default"}.Concat(cells.Select(x => x.DefaultValue ?? string.Empty)).ToArray();
             var options = new[] {"options"}.Concat(cells.Select(x => Option.Write(x.options))).ToArray();
-            var editors = new[] {"editor"}.Concat(cells.Select(x => x.editor ?? string.Empty)).ToArray();
-            var results = new[] {"result"}.Concat(cells.Select(x => x.result.ToString())).ToArray();
+            var editors = new[] {"editor"}.Concat(cells.Select(x => x.Editor ?? string.Empty)).ToArray();
+            var results = new[] {"result"}.Concat(cells.Select(x => x.IsResult.ToString())).ToArray();
 
             writeTable(new[] {firstRow, headers, defaults, options, editors, results}, writer);
         }

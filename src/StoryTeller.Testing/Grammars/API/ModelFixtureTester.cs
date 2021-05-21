@@ -27,7 +27,7 @@ namespace StoryTeller.Testing.Grammars.API
             var sentence = model.FindGrammar("City").As<Sentence>();
 
             sentence.cells[0].options.Length.ShouldBe(3);
-            sentence.cells[0].editor.ShouldBe("select");
+            sentence.cells[0].Editor.ShouldBe("select");
         }
 
         [Fact]
