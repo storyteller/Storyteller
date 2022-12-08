@@ -38,7 +38,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Oakton" Version="1.5.0" />
     <ProjectReference Include="..\StoryTeller\StoryTeller.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
